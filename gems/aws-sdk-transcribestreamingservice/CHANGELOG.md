@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-11-24)
+------------------
+
+* Feature - Amazon Transcribe Medical streaming added medical specialties and HTTP/2 support. Amazon Transcribe streaming supports additional languages. Both support OGG/OPUS and FLAC codecs for streaming.
+
+1.23.0 (2020-11-04)
+------------------
+
+* Feature - With this release, Amazon Transcribe now supports real-time transcription from audio sources in Italian (it-IT) and German(de-DE).
+
+1.22.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2020-09-17)
+------------------
+
+* Feature - Amazon Transcribe now supports channel identification in real-time streaming, which enables you to transcribe multi-channel streaming audio.
+
+1.20.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.19.0 (2020-08-25)
 ------------------
 

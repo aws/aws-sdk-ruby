@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2020-09-30)
+------------------
+
+* Feature - This release extends Auto Scaling support for cluster storage of Managed Streaming for Kafka. Auto Scaling monitors and automatically expands storage capacity when a critical usage threshold is met.
+
+1.47.0 (2020-09-28)
+------------------
+
+* Feature - This release extends Application Auto Scaling support to AWS Comprehend Entity Recognizer endpoint, allowing automatic updates to provisioned Inference Units to maintain targeted utilization level.
+
+1.46.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.45.0 (2020-08-25)
 ------------------
 

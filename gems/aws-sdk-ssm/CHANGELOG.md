@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2020-11-10)
+------------------
+
+* Feature - Add SessionId as a filter for DescribeSessions API
+
+1.97.0 (2020-11-09)
+------------------
+
+* Feature - add a new filter to allow customer to filter automation executions by using resource-group which used for execute automation
+
+1.96.0 (2020-11-06)
+------------------
+
+* Feature - Documentation updates for Systems Manager
+
+1.95.0 (2020-10-19)
+------------------
+
+* Feature - This Patch Manager release now supports Common Vulnerabilities and Exposure (CVE) Ids for missing packages via the DescribeInstancePatches API.
+
+1.94.0 (2020-10-15)
+------------------
+
+* Feature - This Patch Manager release now supports searching for available packages from Amazon Linux and Amazon Linux 2 via the DescribeAvailablePatches API.
+
+1.93.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2020-09-29)
+------------------
+
+* Feature - Simple update to description of ComplianceItemStatus.
+
+1.91.0 (2020-09-16)
+------------------
+
+* Feature - The ComplianceItemEntry Status description was updated to address Windows patches that aren't applicable.
+
+1.90.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.89.0 (2020-09-04)
 ------------------
 

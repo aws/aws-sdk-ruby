@@ -1,6 +1,101 @@
 Unreleased Changes
 ------------------
 
+1.213.0 (2020-12-01)
+------------------
+
+* Feature - This release adds support for: EBS gp3 volumes; and D3/D3en/R5b/M5zn instances powered by Intel Cascade Lake CPUs
+
+1.212.0 (2020-12-01)
+------------------
+
+* Feature - This release introduces Amazon EC2 Mac1 instances, a new Amazon EC2 instance family built on Apple Mac mini computers, powered by AWS Nitro System, and support running macOS workloads on Amazon EC2
+
+1.211.0 (2020-11-23)
+------------------
+
+* Feature - This release adds support for Multiple Private DNS names to DescribeVpcEndpointServices response.
+
+1.210.0 (2020-11-18)
+------------------
+
+* Feature - EC2 Fleet adds support of DeleteFleets API for instant type fleets. Now you can delete an instant type fleet and terminate all associated instances with a single API call.
+
+1.209.0 (2020-11-10)
+------------------
+
+* Feature - This release adds support for Gateway Load Balancer VPC endpoints and VPC endpoint services
+
+1.208.0 (2020-11-06)
+------------------
+
+* Feature - Network card support with four new attributes: NetworkCardIndex, NetworkPerformance, DefaultNetworkCardIndex, and MaximumNetworkInterfaces, added to the DescribeInstanceTypes API.
+
+1.207.0 (2020-11-05)
+------------------
+
+* Feature - Documentation updates for EC2.
+
+1.206.0 (2020-11-04)
+------------------
+
+* Feature - Added support for Client Connect Handler for AWS Client VPN. Fleet supports launching replacement instances in response to Capacity Rebalance recommendation.
+
+1.205.0 (2020-11-02)
+------------------
+
+* Feature - This release adds support for the following features: 1. P4d instances based on NVIDIA A100 GPUs.  2. NetworkCardIndex attribute to support multiple network cards.
+
+1.204.0 (2020-10-29)
+------------------
+
+* Feature - Support for Appliance mode on Transit Gateway that simplifies deployment of stateful network appliances. Added support for AWS Client VPN Self-Service Portal.
+
+1.203.0 (2020-10-28)
+------------------
+
+* Feature - AWS Nitro Enclaves general availability. Added support to RunInstances for creating enclave-enabled EC2 instances. New APIs to associate an ACM certificate with an IAM role, for enclave consumption.
+
+1.202.0 (2020-10-21)
+------------------
+
+* Feature - instance-storage-info nvmeSupport added to DescribeInstanceTypes API
+
+1.201.0 (2020-10-21)
+------------------
+
+* Feature - instance-storage-info nvmeSupport added to DescribeInstanceTypes API
+
+1.200.0 (2020-10-08)
+------------------
+
+* Feature - AWS EC2 RevokeSecurityGroupIngress and RevokeSecurityGroupEgress APIs will return IpPermissions which do not match with any existing IpPermissions for security groups in default VPC and EC2-Classic.
+
+1.199.0 (2020-10-06)
+------------------
+
+* Feature - This release supports returning additional information about local gateway virtual interfaces, and virtual interface groups.
+
+1.198.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.197.0 (2020-09-29)
+------------------
+
+* Feature - This release adds support for Client to Client routing for AWS Client VPN.
+
+1.196.0 (2020-09-25)
+------------------
+
+* Feature - This release supports returning additional information about local gateway resources, such as the local gateway route table.
+
+1.195.0 (2020-09-15)
+------------------
+
+* Feature - T4g instances are powered by AWS Graviton2 processors
+
 1.194.0 (2020-09-14)
 ------------------
 

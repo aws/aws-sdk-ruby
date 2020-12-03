@@ -64,7 +64,7 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId",
+    #         account_id: "AccountId", # required
     #         email: "NonEmptyString",
     #       }
     #
@@ -109,6 +109,29 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Represents a Security Hub administrator account designated by an
+    # organization management account.
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account identifier of the Security Hub administrator
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Security Hub administrator account.
+    #   Indicates whether the account is currently enabled as a Security Hub
+    #   administrator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AdminAccount AWS API Documentation
+    #
+    class AdminAccount < Struct.new(
+      :account_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an Availability Zone.
     #
     # @note When making an API call, you may pass AvailabilityZone
@@ -133,6 +156,772 @@ module Aws::SecurityHub
     class AvailabilityZone < Struct.new(
       :zone_name,
       :subnet_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about settings for logging access for the stage.
+    #
+    # @note When making an API call, you may pass AwsApiGatewayAccessLogSettings
+    #   data as a hash:
+    #
+    #       {
+    #         format: "NonEmptyString",
+    #         destination_arn: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] format
+    #   A single-line format of the access logs of data, as specified by
+    #   selected `$context` variables. The format must include at least
+    #   `$context.requestId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_arn
+    #   The ARN of the CloudWatch Logs log group that receives the access
+    #   logs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiGatewayAccessLogSettings AWS API Documentation
+    #
+    class AwsApiGatewayAccessLogSettings < Struct.new(
+      :format,
+      :destination_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about settings for canary deployment in the
+    # stage.
+    #
+    # @note When making an API call, you may pass AwsApiGatewayCanarySettings
+    #   data as a hash:
+    #
+    #       {
+    #         percent_traffic: 1.0,
+    #         deployment_id: "NonEmptyString",
+    #         stage_variable_overrides: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         use_stage_cache: false,
+    #       }
+    #
+    # @!attribute [rw] percent_traffic
+    #   The percentage of traffic that is diverted to a canary deployment.
+    #   @return [Float]
+    #
+    # @!attribute [rw] deployment_id
+    #   The deployment identifier for the canary deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_variable_overrides
+    #   Stage variables that are overridden in the canary release
+    #   deployment. The variables include new stage variables that are
+    #   introduced in the canary.
+    #
+    #   Each variable is represented as a string-to-string map between the
+    #   stage variable name and the variable value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] use_stage_cache
+    #   Indicates whether the canary deployment uses the stage cache.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiGatewayCanarySettings AWS API Documentation
+    #
+    class AwsApiGatewayCanarySettings < Struct.new(
+      :percent_traffic,
+      :deployment_id,
+      :stage_variable_overrides,
+      :use_stage_cache)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the endpoints for the API.
+    #
+    # @note When making an API call, you may pass AwsApiGatewayEndpointConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         types: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] types
+    #   A list of endpoint types for the REST API.
+    #
+    #   For an edge-optimized API, the endpoint type is `EDGE`. For a
+    #   Regional API, the endpoint type is `REGIONAL`. For a private API,
+    #   the endpoint type is `PRIVATE`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiGatewayEndpointConfiguration AWS API Documentation
+    #
+    class AwsApiGatewayEndpointConfiguration < Struct.new(
+      :types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines settings for a method for the stage.
+    #
+    # @note When making an API call, you may pass AwsApiGatewayMethodSettings
+    #   data as a hash:
+    #
+    #       {
+    #         metrics_enabled: false,
+    #         logging_level: "NonEmptyString",
+    #         data_trace_enabled: false,
+    #         throttling_burst_limit: 1,
+    #         throttling_rate_limit: 1.0,
+    #         caching_enabled: false,
+    #         cache_ttl_in_seconds: 1,
+    #         cache_data_encrypted: false,
+    #         require_authorization_for_cache_control: false,
+    #         unauthorized_cache_control_header_strategy: "NonEmptyString",
+    #         http_method: "NonEmptyString",
+    #         resource_path: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] metrics_enabled
+    #   Indicates whether CloudWatch metrics are enabled for the method.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] logging_level
+    #   The logging level for this method. The logging level affects the log
+    #   entries that are pushed to CloudWatch Logs.
+    #
+    #   If the logging level is `ERROR`, then the logs only include
+    #   error-level entries.
+    #
+    #   If the logging level is `INFO`, then the logs include both `ERROR`
+    #   events and extra informational events.
+    #
+    #   Valid values: `OFF` \| `ERROR` \| `INFO`
+    #   @return [String]
+    #
+    # @!attribute [rw] data_trace_enabled
+    #   Indicates whether data trace logging is enabled for the method. Data
+    #   trace logging affects the log entries that are pushed to CloudWatch
+    #   Logs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] throttling_burst_limit
+    #   The throttling burst limit for the method.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] throttling_rate_limit
+    #   The throttling rate limit for the method.
+    #   @return [Float]
+    #
+    # @!attribute [rw] caching_enabled
+    #   Indicates whether responses are cached and returned for requests.
+    #   For responses to be cached, a cache cluster must be enabled on the
+    #   stage.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cache_ttl_in_seconds
+    #   Specifies the time to live (TTL), in seconds, for cached responses.
+    #   The higher the TTL, the longer the response is cached.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cache_data_encrypted
+    #   Indicates whether the cached responses are encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] require_authorization_for_cache_control
+    #   Indicates whether authorization is required for a cache invalidation
+    #   request.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] unauthorized_cache_control_header_strategy
+    #   Indicates how to handle unauthorized requests for cache
+    #   invalidation.
+    #
+    #   Valid values: `FAIL_WITH_403` \| `SUCCEED_WITH_RESPONSE_HEADER` \|
+    #   `SUCCEED_WITHOUT_RESPONSE_HEADER`
+    #   @return [String]
+    #
+    # @!attribute [rw] http_method
+    #   The HTTP method. You can use an asterisk (*) as a wildcard to apply
+    #   method settings to multiple methods.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_path
+    #   The resource path for this method. Forward slashes (/) are encoded
+    #   as ~1 . The initial slash must include a forward slash.
+    #
+    #   For example, the path value `/resource/subresource` must be encoded
+    #   as `/~1resource~1subresource`.
+    #
+    #   To specify the root path, use only a slash (/). You can use an
+    #   asterisk (*) as a wildcard to apply method settings to multiple
+    #   methods.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiGatewayMethodSettings AWS API Documentation
+    #
+    class AwsApiGatewayMethodSettings < Struct.new(
+      :metrics_enabled,
+      :logging_level,
+      :data_trace_enabled,
+      :throttling_burst_limit,
+      :throttling_rate_limit,
+      :caching_enabled,
+      :cache_ttl_in_seconds,
+      :cache_data_encrypted,
+      :require_authorization_for_cache_control,
+      :unauthorized_cache_control_header_strategy,
+      :http_method,
+      :resource_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # contains information about a REST API in version 1 of Amazon API
+    # Gateway.
+    #
+    # @note When making an API call, you may pass AwsApiGatewayRestApiDetails
+    #   data as a hash:
+    #
+    #       {
+    #         id: "NonEmptyString",
+    #         name: "NonEmptyString",
+    #         description: "NonEmptyString",
+    #         created_date: "NonEmptyString",
+    #         version: "NonEmptyString",
+    #         binary_media_types: ["NonEmptyString"],
+    #         minimum_compression_size: 1,
+    #         api_key_source: "NonEmptyString",
+    #         endpoint_configuration: {
+    #           types: ["NonEmptyString"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the REST API.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the REST API.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the REST API.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   Indicates when the API was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version identifier for the REST API.
+    #   @return [String]
+    #
+    # @!attribute [rw] binary_media_types
+    #   The list of binary media types supported by the REST API.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] minimum_compression_size
+    #   The minimum size in bytes of a payload before compression is
+    #   enabled.
+    #
+    #   If `null`, then compression is disabled.
+    #
+    #   If 0, then all payloads are compressed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] api_key_source
+    #   The source of the API key for metering requests according to a usage
+    #   plan.
+    #
+    #   `HEADER` indicates whether to read the API key from the X-API-Key
+    #   header of a request.
+    #
+    #   `AUTHORIZER` indicates whether to read the API key from the
+    #   `UsageIdentifierKey` from a custom authorizer.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   The endpoint configuration of the REST API.
+    #   @return [Types::AwsApiGatewayEndpointConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiGatewayRestApiDetails AWS API Documentation
+    #
+    class AwsApiGatewayRestApiDetails < Struct.new(
+      :id,
+      :name,
+      :description,
+      :created_date,
+      :version,
+      :binary_media_types,
+      :minimum_compression_size,
+      :api_key_source,
+      :endpoint_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about a version 1 Amazon API Gateway stage.
+    #
+    # @note When making an API call, you may pass AwsApiGatewayStageDetails
+    #   data as a hash:
+    #
+    #       {
+    #         deployment_id: "NonEmptyString",
+    #         client_certificate_id: "NonEmptyString",
+    #         stage_name: "NonEmptyString",
+    #         description: "NonEmptyString",
+    #         cache_cluster_enabled: false,
+    #         cache_cluster_size: "NonEmptyString",
+    #         cache_cluster_status: "NonEmptyString",
+    #         method_settings: [
+    #           {
+    #             metrics_enabled: false,
+    #             logging_level: "NonEmptyString",
+    #             data_trace_enabled: false,
+    #             throttling_burst_limit: 1,
+    #             throttling_rate_limit: 1.0,
+    #             caching_enabled: false,
+    #             cache_ttl_in_seconds: 1,
+    #             cache_data_encrypted: false,
+    #             require_authorization_for_cache_control: false,
+    #             unauthorized_cache_control_header_strategy: "NonEmptyString",
+    #             http_method: "NonEmptyString",
+    #             resource_path: "NonEmptyString",
+    #           },
+    #         ],
+    #         variables: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         documentation_version: "NonEmptyString",
+    #         access_log_settings: {
+    #           format: "NonEmptyString",
+    #           destination_arn: "NonEmptyString",
+    #         },
+    #         canary_settings: {
+    #           percent_traffic: 1.0,
+    #           deployment_id: "NonEmptyString",
+    #           stage_variable_overrides: {
+    #             "NonEmptyString" => "NonEmptyString",
+    #           },
+    #           use_stage_cache: false,
+    #         },
+    #         tracing_enabled: false,
+    #         created_date: "NonEmptyString",
+    #         last_updated_date: "NonEmptyString",
+    #         web_acl_arn: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] deployment_id
+    #   The identifier of the deployment that the stage points to.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_certificate_id
+    #   The identifier of the client certificate for the stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_cluster_enabled
+    #   Indicates whether a cache cluster is enabled for the stage.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cache_cluster_size
+    #   If a cache cluster is enabled, the size of the cache cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_cluster_status
+    #   If a cache cluster is enabled, the status of the cache cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] method_settings
+    #   Defines the method settings for the stage.
+    #   @return [Array<Types::AwsApiGatewayMethodSettings>]
+    #
+    # @!attribute [rw] variables
+    #   A map that defines the stage variables for the stage.
+    #
+    #   Variable names can have alphanumeric and underscore characters.
+    #
+    #   Variable values can contain the following characters:
+    #
+    #   * Uppercase and lowercase letters
+    #
+    #   * Numbers
+    #
+    #   * Special characters -.\_~:/?#&amp;=,
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] documentation_version
+    #   The version of the API documentation that is associated with the
+    #   stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_log_settings
+    #   Settings for logging access for the stage.
+    #   @return [Types::AwsApiGatewayAccessLogSettings]
+    #
+    # @!attribute [rw] canary_settings
+    #   Information about settings for canary deployment in the stage.
+    #   @return [Types::AwsApiGatewayCanarySettings]
+    #
+    # @!attribute [rw] tracing_enabled
+    #   Indicates whether active tracing with AWS X-Ray is enabled for the
+    #   stage.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_date
+    #   Indicates when the stage was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_date
+    #   Indicates when the stage was most recently updated.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] web_acl_arn
+    #   The ARN of the web ACL associated with the stage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiGatewayStageDetails AWS API Documentation
+    #
+    class AwsApiGatewayStageDetails < Struct.new(
+      :deployment_id,
+      :client_certificate_id,
+      :stage_name,
+      :description,
+      :cache_cluster_enabled,
+      :cache_cluster_size,
+      :cache_cluster_status,
+      :method_settings,
+      :variables,
+      :documentation_version,
+      :access_log_settings,
+      :canary_settings,
+      :tracing_enabled,
+      :created_date,
+      :last_updated_date,
+      :web_acl_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a version 2 API in Amazon API Gateway.
+    #
+    # @note When making an API call, you may pass AwsApiGatewayV2ApiDetails
+    #   data as a hash:
+    #
+    #       {
+    #         api_endpoint: "NonEmptyString",
+    #         api_id: "NonEmptyString",
+    #         api_key_selection_expression: "NonEmptyString",
+    #         created_date: "NonEmptyString",
+    #         description: "NonEmptyString",
+    #         version: "NonEmptyString",
+    #         name: "NonEmptyString",
+    #         protocol_type: "NonEmptyString",
+    #         route_selection_expression: "NonEmptyString",
+    #         cors_configuration: {
+    #           allow_origins: ["NonEmptyString"],
+    #           allow_credentials: false,
+    #           expose_headers: ["NonEmptyString"],
+    #           max_age: 1,
+    #           allow_methods: ["NonEmptyString"],
+    #           allow_headers: ["NonEmptyString"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] api_endpoint
+    #   The URI of the API.
+    #
+    #   Uses the format ` <api-id>.execute-api.<region>.amazonaws.com`
+    #
+    #   The stage name is typically appended to the URI to form a complete
+    #   path to a deployed API stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_id
+    #   The identifier of the API.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_key_selection_expression
+    #   An API key selection expression. Supported only for WebSocket APIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   Indicates when the API was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the API.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version identifier for the API.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the API.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol_type
+    #   The API protocol for the API.
+    #
+    #   Valid values: `WEBSOCKET` \| `HTTP`
+    #   @return [String]
+    #
+    # @!attribute [rw] route_selection_expression
+    #   The route selection expression for the API.
+    #
+    #   For HTTP APIs, must be `$\{request.method\} $\{request.path\}`. This
+    #   is the default value for HTTP APIs.
+    #
+    #   For WebSocket APIs, there is no default value.
+    #   @return [String]
+    #
+    # @!attribute [rw] cors_configuration
+    #   A cross-origin resource sharing (CORS) configuration. Supported only
+    #   for HTTP APIs.
+    #   @return [Types::AwsCorsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiGatewayV2ApiDetails AWS API Documentation
+    #
+    class AwsApiGatewayV2ApiDetails < Struct.new(
+      :api_endpoint,
+      :api_id,
+      :api_key_selection_expression,
+      :created_date,
+      :description,
+      :version,
+      :name,
+      :protocol_type,
+      :route_selection_expression,
+      :cors_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains route settings for a stage.
+    #
+    # @note When making an API call, you may pass AwsApiGatewayV2RouteSettings
+    #   data as a hash:
+    #
+    #       {
+    #         detailed_metrics_enabled: false,
+    #         logging_level: "NonEmptyString",
+    #         data_trace_enabled: false,
+    #         throttling_burst_limit: 1,
+    #         throttling_rate_limit: 1.0,
+    #       }
+    #
+    # @!attribute [rw] detailed_metrics_enabled
+    #   Indicates whether detailed metrics are enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] logging_level
+    #   The logging level. The logging level affects the log entries that
+    #   are pushed to CloudWatch Logs. Supported only for WebSocket APIs.
+    #
+    #   If the logging level is `ERROR`, then the logs only include
+    #   error-level entries.
+    #
+    #   If the logging level is `INFO`, then the logs include both `ERROR`
+    #   events and extra informational events.
+    #
+    #   Valid values: `OFF` \| `ERROR` \| `INFO`
+    #   @return [String]
+    #
+    # @!attribute [rw] data_trace_enabled
+    #   Indicates whether data trace logging is enabled. Data trace logging
+    #   affects the log entries that are pushed to CloudWatch Logs.
+    #   Supported only for WebSocket APIs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] throttling_burst_limit
+    #   The throttling burst limit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] throttling_rate_limit
+    #   The throttling rate limit.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiGatewayV2RouteSettings AWS API Documentation
+    #
+    class AwsApiGatewayV2RouteSettings < Struct.new(
+      :detailed_metrics_enabled,
+      :logging_level,
+      :data_trace_enabled,
+      :throttling_burst_limit,
+      :throttling_rate_limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a version 2 stage for Amazon API Gateway.
+    #
+    # @note When making an API call, you may pass AwsApiGatewayV2StageDetails
+    #   data as a hash:
+    #
+    #       {
+    #         created_date: "NonEmptyString",
+    #         description: "NonEmptyString",
+    #         default_route_settings: {
+    #           detailed_metrics_enabled: false,
+    #           logging_level: "NonEmptyString",
+    #           data_trace_enabled: false,
+    #           throttling_burst_limit: 1,
+    #           throttling_rate_limit: 1.0,
+    #         },
+    #         deployment_id: "NonEmptyString",
+    #         last_updated_date: "NonEmptyString",
+    #         route_settings: {
+    #           detailed_metrics_enabled: false,
+    #           logging_level: "NonEmptyString",
+    #           data_trace_enabled: false,
+    #           throttling_burst_limit: 1,
+    #           throttling_rate_limit: 1.0,
+    #         },
+    #         stage_name: "NonEmptyString",
+    #         stage_variables: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         access_log_settings: {
+    #           format: "NonEmptyString",
+    #           destination_arn: "NonEmptyString",
+    #         },
+    #         auto_deploy: false,
+    #         last_deployment_status_message: "NonEmptyString",
+    #         api_gateway_managed: false,
+    #       }
+    #
+    # @!attribute [rw] created_date
+    #   Indicates when the stage was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_route_settings
+    #   Default route settings for the stage.
+    #   @return [Types::AwsApiGatewayV2RouteSettings]
+    #
+    # @!attribute [rw] deployment_id
+    #   The identifier of the deployment that the stage is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_date
+    #   Indicates when the stage was most recently updated.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] route_settings
+    #   The route settings for the stage.
+    #   @return [Types::AwsApiGatewayV2RouteSettings]
+    #
+    # @!attribute [rw] stage_name
+    #   The name of the stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_variables
+    #   A map that defines the stage variables for the stage.
+    #
+    #   Variable names can have alphanumeric and underscore characters.
+    #
+    #   Variable values can contain the following characters:
+    #
+    #   * Uppercase and lowercase letters
+    #
+    #   * Numbers
+    #
+    #   * Special characters -.\_~:/?#&amp;=,
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] access_log_settings
+    #   Information about settings for logging access for the stage.
+    #   @return [Types::AwsApiGatewayAccessLogSettings]
+    #
+    # @!attribute [rw] auto_deploy
+    #   Indicates whether updates to an API automatically trigger a new
+    #   deployment.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_deployment_status_message
+    #   The status of the last deployment of a stage. Supported only if the
+    #   stage has automatic deployment enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_gateway_managed
+    #   Indicates whether the stage is managed by API Gateway.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiGatewayV2StageDetails AWS API Documentation
+    #
+    class AwsApiGatewayV2StageDetails < Struct.new(
+      :created_date,
+      :description,
+      :default_route_settings,
+      :deployment_id,
+      :last_updated_date,
+      :route_settings,
+      :stage_name,
+      :stage_variables,
+      :access_log_settings,
+      :auto_deploy,
+      :last_deployment_status_message,
+      :api_gateway_managed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -192,12 +981,636 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about an AWS Certificate Manager certificate.
+    #
+    # @note When making an API call, you may pass AwsCertificateManagerCertificateDetails
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_authority_arn: "NonEmptyString",
+    #         created_at: "NonEmptyString",
+    #         domain_name: "NonEmptyString",
+    #         domain_validation_options: [
+    #           {
+    #             domain_name: "NonEmptyString",
+    #             resource_record: {
+    #               name: "NonEmptyString",
+    #               type: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #             },
+    #             validation_domain: "NonEmptyString",
+    #             validation_emails: ["NonEmptyString"],
+    #             validation_method: "NonEmptyString",
+    #             validation_status: "NonEmptyString",
+    #           },
+    #         ],
+    #         extended_key_usages: [
+    #           {
+    #             name: "NonEmptyString",
+    #             o_id: "NonEmptyString",
+    #           },
+    #         ],
+    #         failure_reason: "NonEmptyString",
+    #         imported_at: "NonEmptyString",
+    #         in_use_by: ["NonEmptyString"],
+    #         issued_at: "NonEmptyString",
+    #         issuer: "NonEmptyString",
+    #         key_algorithm: "NonEmptyString",
+    #         key_usages: [
+    #           {
+    #             name: "NonEmptyString",
+    #           },
+    #         ],
+    #         not_after: "NonEmptyString",
+    #         not_before: "NonEmptyString",
+    #         options: {
+    #           certificate_transparency_logging_preference: "NonEmptyString",
+    #         },
+    #         renewal_eligibility: "NonEmptyString",
+    #         renewal_summary: {
+    #           domain_validation_options: [
+    #             {
+    #               domain_name: "NonEmptyString",
+    #               resource_record: {
+    #                 name: "NonEmptyString",
+    #                 type: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #               validation_domain: "NonEmptyString",
+    #               validation_emails: ["NonEmptyString"],
+    #               validation_method: "NonEmptyString",
+    #               validation_status: "NonEmptyString",
+    #             },
+    #           ],
+    #           renewal_status: "NonEmptyString",
+    #           renewal_status_reason: "NonEmptyString",
+    #           updated_at: "NonEmptyString",
+    #         },
+    #         serial: "NonEmptyString",
+    #         signature_algorithm: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #         subject: "NonEmptyString",
+    #         subject_alternative_names: ["NonEmptyString"],
+    #         type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] certificate_authority_arn
+    #   The ARN of the private certificate authority (CA) that will be used
+    #   to issue the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Indicates when the certificate was requested.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The fully qualified domain name (FQDN), such as www.example.com,
+    #   that is secured by the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_validation_options
+    #   Contains information about the initial validation of each domain
+    #   name that occurs as a result of the `RequestCertificate` request.
+    #
+    #   Only provided if the certificate type is `AMAZON_ISSUED`.
+    #   @return [Array<Types::AwsCertificateManagerCertificateDomainValidationOption>]
+    #
+    # @!attribute [rw] extended_key_usages
+    #   Contains a list of Extended Key Usage X.509 v3 extension objects.
+    #   Each object specifies a purpose for which the certificate public key
+    #   can be used and consists of a name and an object identifier (OID).
+    #   @return [Array<Types::AwsCertificateManagerCertificateExtendedKeyUsage>]
+    #
+    # @!attribute [rw] failure_reason
+    #   For a failed certificate request, the reason for the failure.
+    #
+    #   Valid values: `NO_AVAILABLE_CONTACTS` \|
+    #   `ADDITIONAL_VERIFICATION_REQUIRED` \| `DOMAIN_NOT_ALLOWED` \|
+    #   `INVALID_PUBLIC_DOMAIN` \| `DOMAIN_VALIDATION_DENIED` \| `CAA_ERROR`
+    #   \| `PCA_LIMIT_EXCEEDED` \| `PCA_INVALID_ARN` \| `PCA_INVALID_STATE`
+    #   \| `PCA_REQUEST_FAILED` \| `PCA_NAME_CONSTRAINTS_VALIDATION` \|
+    #   `PCA_RESOURCE_NOT_FOUND` \| `PCA_INVALID_ARGS` \|
+    #   `PCA_INVALID_DURATION` \| `PCA_ACCESS_DENIED` \| `SLR_NOT_FOUND` \|
+    #   `OTHER`
+    #   @return [String]
+    #
+    # @!attribute [rw] imported_at
+    #   Indicates when the certificate was imported. Provided if the
+    #   certificate type is `IMPORTED`.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] in_use_by
+    #   The list of ARNs for the AWS resources that use the certificate.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] issued_at
+    #   Indicates when the certificate was issued. Provided if the
+    #   certificate type is `AMAZON_ISSUED`.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer
+    #   The name of the certificate authority that issued and signed the
+    #   certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_algorithm
+    #   The algorithm that was used to generate the public-private key pair.
+    #
+    #   Valid values: `RSA_2048` \| `RSA_1024` \|` RSA_4096` \|
+    #   `EC_prime256v1` \| `EC_secp384r1` \| `EC_secp521r1`
+    #   @return [String]
+    #
+    # @!attribute [rw] key_usages
+    #   A list of key usage X.509 v3 extension objects.
+    #   @return [Array<Types::AwsCertificateManagerCertificateKeyUsage>]
+    #
+    # @!attribute [rw] not_after
+    #   The time after which the certificate becomes invalid.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] not_before
+    #   The time before which the certificate is not valid.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   Provides a value that specifies whether to add the certificate to a
+    #   transparency log.
+    #   @return [Types::AwsCertificateManagerCertificateOptions]
+    #
+    # @!attribute [rw] renewal_eligibility
+    #   Whether the certificate is eligible for renewal.
+    #
+    #   Valid values: `ELIGIBLE` \| `INELIGIBLE`
+    #   @return [String]
+    #
+    # @!attribute [rw] renewal_summary
+    #   Information about the status of the AWS Certificate Manager managed
+    #   renewal for the certificate. Provided only when the certificate type
+    #   is `AMAZON_ISSUED`.
+    #   @return [Types::AwsCertificateManagerCertificateRenewalSummary]
+    #
+    # @!attribute [rw] serial
+    #   The serial number of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] signature_algorithm
+    #   The algorithm that was used to sign the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the certificate.
+    #
+    #   Valid values: `PENDING_VALIDATION` \| `ISSUED` \| `INACTIVE` \|
+    #   `EXPIRED` \| `VALIDATION_TIMED_OUT` \| `REVOKED` \| `FAILED`
+    #   @return [String]
+    #
+    # @!attribute [rw] subject
+    #   The name of the entity that is associated with the public key
+    #   contained in the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_alternative_names
+    #   One or more domain names (subject alternative names) included in the
+    #   certificate. This list contains the domain names that are bound to
+    #   the public key that is contained in the certificate.
+    #
+    #   The subject alternative names include the canonical domain name (CN)
+    #   of the certificate and additional domain names that can be used to
+    #   connect to the website.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   The source of the certificate. For certificates that AWS Certificate
+    #   Manager provides, `Type` is `AMAZON_ISSUED`. For certificates that
+    #   are imported with `ImportCertificate`, `Type` is `IMPORTED`.
+    #
+    #   Valid values: `IMPORTED` \| `AMAZON_ISSUED` \| `PRIVATE`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCertificateManagerCertificateDetails AWS API Documentation
+    #
+    class AwsCertificateManagerCertificateDetails < Struct.new(
+      :certificate_authority_arn,
+      :created_at,
+      :domain_name,
+      :domain_validation_options,
+      :extended_key_usages,
+      :failure_reason,
+      :imported_at,
+      :in_use_by,
+      :issued_at,
+      :issuer,
+      :key_algorithm,
+      :key_usages,
+      :not_after,
+      :not_before,
+      :options,
+      :renewal_eligibility,
+      :renewal_summary,
+      :serial,
+      :signature_algorithm,
+      :status,
+      :subject,
+      :subject_alternative_names,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about one of the following:
+    #
+    # * The initial validation of each domain name that occurs as a result
+    #   of the `RequestCertificate` request
+    #
+    # * The validation of each domain name in the certificate, as it
+    #   pertains to AWS Certificate Manager managed renewal
+    #
+    # @note When making an API call, you may pass AwsCertificateManagerCertificateDomainValidationOption
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "NonEmptyString",
+    #         resource_record: {
+    #           name: "NonEmptyString",
+    #           type: "NonEmptyString",
+    #           value: "NonEmptyString",
+    #         },
+    #         validation_domain: "NonEmptyString",
+    #         validation_emails: ["NonEmptyString"],
+    #         validation_method: "NonEmptyString",
+    #         validation_status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   A fully qualified domain name (FQDN) in the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_record
+    #   The CNAME record that is added to the DNS database for domain
+    #   validation.
+    #   @return [Types::AwsCertificateManagerCertificateResourceRecord]
+    #
+    # @!attribute [rw] validation_domain
+    #   The domain name that AWS Certificate Manager uses to send domain
+    #   validation emails.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_emails
+    #   A list of email addresses that AWS Certificate Manager uses to send
+    #   domain validation emails.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] validation_method
+    #   The method used to validate the domain name.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_status
+    #   The validation status of the domain name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCertificateManagerCertificateDomainValidationOption AWS API Documentation
+    #
+    class AwsCertificateManagerCertificateDomainValidationOption < Struct.new(
+      :domain_name,
+      :resource_record,
+      :validation_domain,
+      :validation_emails,
+      :validation_method,
+      :validation_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an extended key usage X.509 v3 extension
+    # object.
+    #
+    # @note When making an API call, you may pass AwsCertificateManagerCertificateExtendedKeyUsage
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         o_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of an extension value. Indicates the purpose for which the
+    #   certificate public key can be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_id
+    #   An object identifier (OID) for the extension value.
+    #
+    #   The format is numbers separated by periods.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCertificateManagerCertificateExtendedKeyUsage AWS API Documentation
+    #
+    class AwsCertificateManagerCertificateExtendedKeyUsage < Struct.new(
+      :name,
+      :o_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a key usage X.509 v3 extension object.
+    #
+    # @note When making an API call, you may pass AwsCertificateManagerCertificateKeyUsage
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The key usage extension name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCertificateManagerCertificateKeyUsage AWS API Documentation
+    #
+    class AwsCertificateManagerCertificateKeyUsage < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains other options for the certificate.
+    #
+    # @note When making an API call, you may pass AwsCertificateManagerCertificateOptions
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_transparency_logging_preference: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] certificate_transparency_logging_preference
+    #   Whether to add the certificate to a transparency log.
+    #
+    #   Valid values: `DISABLED` \| `ENABLED`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCertificateManagerCertificateOptions AWS API Documentation
+    #
+    class AwsCertificateManagerCertificateOptions < Struct.new(
+      :certificate_transparency_logging_preference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the AWS Certificate Manager managed renewal
+    # for an `AMAZON_ISSUED` certificate.
+    #
+    # @note When making an API call, you may pass AwsCertificateManagerCertificateRenewalSummary
+    #   data as a hash:
+    #
+    #       {
+    #         domain_validation_options: [
+    #           {
+    #             domain_name: "NonEmptyString",
+    #             resource_record: {
+    #               name: "NonEmptyString",
+    #               type: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #             },
+    #             validation_domain: "NonEmptyString",
+    #             validation_emails: ["NonEmptyString"],
+    #             validation_method: "NonEmptyString",
+    #             validation_status: "NonEmptyString",
+    #           },
+    #         ],
+    #         renewal_status: "NonEmptyString",
+    #         renewal_status_reason: "NonEmptyString",
+    #         updated_at: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] domain_validation_options
+    #   Information about the validation of each domain name in the
+    #   certificate, as it pertains to AWS Certificate Manager managed
+    #   renewal. Provided only when the certificate type is `AMAZON_ISSUED`.
+    #   @return [Array<Types::AwsCertificateManagerCertificateDomainValidationOption>]
+    #
+    # @!attribute [rw] renewal_status
+    #   The status of the AWS Certificate Manager managed renewal of the
+    #   certificate.
+    #
+    #   Valid values: `PENDING_AUTO_RENEWAL` \| `PENDING_VALIDATION` \|
+    #   `SUCCESS` \| `FAILED`
+    #   @return [String]
+    #
+    # @!attribute [rw] renewal_status_reason
+    #   The reason that a renewal request was unsuccessful.
+    #
+    #   Valid values: `NO_AVAILABLE_CONTACTS` \|
+    #   `ADDITIONAL_VERIFICATION_REQUIRED` \| `DOMAIN_NOT_ALLOWED` \|
+    #   `INVALID_PUBLIC_DOMAIN` \| `DOMAIN_VALIDATION_DENIED` \| `CAA_ERROR`
+    #   \| `PCA_LIMIT_EXCEEDED` \| `PCA_INVALID_ARN` \| `PCA_INVALID_STATE`
+    #   \| `PCA_REQUEST_FAILED` \| `PCA_NAME_CONSTRAINTS_VALIDATION` \|
+    #   `PCA_RESOURCE_NOT_FOUND` \| `PCA_INVALID_ARGS` \|
+    #   `PCA_INVALID_DURATION` \| `PCA_ACCESS_DENIED` \| `SLR_NOT_FOUND` \|
+    #   `OTHER`
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   Indicates when the renewal summary was last updated.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCertificateManagerCertificateRenewalSummary AWS API Documentation
+    #
+    class AwsCertificateManagerCertificateRenewalSummary < Struct.new(
+      :domain_validation_options,
+      :renewal_status,
+      :renewal_status_reason,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the CNAME record that is added to the DNS
+    # database for domain validation.
+    #
+    # @note When making an API call, you may pass AwsCertificateManagerCertificateResourceRecord
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         type: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCertificateManagerCertificateResourceRecord AWS API Documentation
+    #
+    class AwsCertificateManagerCertificateResourceRecord < Struct.new(
+      :name,
+      :type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a cache behavior for the distribution.
+    #
+    # @note When making an API call, you may pass AwsCloudFrontDistributionCacheBehavior
+    #   data as a hash:
+    #
+    #       {
+    #         viewer_protocol_policy: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] viewer_protocol_policy
+    #   The protocol that viewers can use to access the files in an origin.
+    #   You can specify the following options:
+    #
+    #   * `allow-all` - Viewers can use HTTP or HTTPS.
+    #
+    #   * `redirect-to-https` - CloudFront responds to HTTP requests with an
+    #     HTTP status code of 301 (Moved Permanently) and the HTTPS URL. The
+    #     viewer then uses the new URL to resubmit.
+    #
+    #   * `https-only` - CloudFront responds to HTTP request with an HTTP
+    #     status code of 403 (Forbidden).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCloudFrontDistributionCacheBehavior AWS API Documentation
+    #
+    class AwsCloudFrontDistributionCacheBehavior < Struct.new(
+      :viewer_protocol_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about caching for the distribution.
+    #
+    # @note When making an API call, you may pass AwsCloudFrontDistributionCacheBehaviors
+    #   data as a hash:
+    #
+    #       {
+    #         items: [
+    #           {
+    #             viewer_protocol_policy: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] items
+    #   The cache behaviors for the distribution.
+    #   @return [Array<Types::AwsCloudFrontDistributionCacheBehavior>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCloudFrontDistributionCacheBehaviors AWS API Documentation
+    #
+    class AwsCloudFrontDistributionCacheBehaviors < Struct.new(
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the default cache configuration for the
+    # distribution.
+    #
+    # @note When making an API call, you may pass AwsCloudFrontDistributionDefaultCacheBehavior
+    #   data as a hash:
+    #
+    #       {
+    #         viewer_protocol_policy: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] viewer_protocol_policy
+    #   The protocol that viewers can use to access the files in an origin.
+    #   You can specify the following options:
+    #
+    #   * `allow-all` - Viewers can use HTTP or HTTPS.
+    #
+    #   * `redirect-to-https` - CloudFront responds to HTTP requests with an
+    #     HTTP status code of 301 (Moved Permanently) and the HTTPS URL. The
+    #     viewer then uses the new URL to resubmit.
+    #
+    #   * `https-only` - CloudFront responds to HTTP request with an HTTP
+    #     status code of 403 (Forbidden).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCloudFrontDistributionDefaultCacheBehavior AWS API Documentation
+    #
+    class AwsCloudFrontDistributionDefaultCacheBehavior < Struct.new(
+      :viewer_protocol_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A distribution configuration.
     #
     # @note When making an API call, you may pass AwsCloudFrontDistributionDetails
     #   data as a hash:
     #
     #       {
+    #         cache_behaviors: {
+    #           items: [
+    #             {
+    #               viewer_protocol_policy: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
+    #         default_cache_behavior: {
+    #           viewer_protocol_policy: "NonEmptyString",
+    #         },
+    #         default_root_object: "NonEmptyString",
     #         domain_name: "NonEmptyString",
     #         etag: "NonEmptyString",
     #         last_modified_time: "NonEmptyString",
@@ -213,12 +1626,44 @@ module Aws::SecurityHub
     #               domain_name: "NonEmptyString",
     #               id: "NonEmptyString",
     #               origin_path: "NonEmptyString",
+    #               s3_origin_config: {
+    #                 origin_access_identity: "NonEmptyString",
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         origin_groups: {
+    #           items: [
+    #             {
+    #               failover_criteria: {
+    #                 status_codes: {
+    #                   items: [1],
+    #                   quantity: 1,
+    #                 },
+    #               },
     #             },
     #           ],
     #         },
     #         status: "NonEmptyString",
     #         web_acl_id: "NonEmptyString",
     #       }
+    #
+    # @!attribute [rw] cache_behaviors
+    #   Provides information about the cache configuration for the
+    #   distribution.
+    #   @return [Types::AwsCloudFrontDistributionCacheBehaviors]
+    #
+    # @!attribute [rw] default_cache_behavior
+    #   The default cache behavior for the configuration.
+    #   @return [Types::AwsCloudFrontDistributionDefaultCacheBehavior]
+    #
+    # @!attribute [rw] default_root_object
+    #   The object that CloudFront sends in response to requests from the
+    #   origin (for example, index.html) when a viewer requests the root URL
+    #   for the distribution (http://www.example.com) instead of an object
+    #   in your distribution
+    #   (http://www.example.com/product-description.html).
+    #   @return [String]
     #
     # @!attribute [rw] domain_name
     #   The domain name corresponding to the distribution.
@@ -250,6 +1695,10 @@ module Aws::SecurityHub
     #   distribution.
     #   @return [Types::AwsCloudFrontDistributionOrigins]
     #
+    # @!attribute [rw] origin_groups
+    #   Provides information about the origin groups in the distribution.
+    #   @return [Types::AwsCloudFrontDistributionOriginGroups]
+    #
     # @!attribute [rw] status
     #   Indicates the current status of the distribution.
     #   @return [String]
@@ -262,11 +1711,15 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCloudFrontDistributionDetails AWS API Documentation
     #
     class AwsCloudFrontDistributionDetails < Struct.new(
+      :cache_behaviors,
+      :default_cache_behavior,
+      :default_root_object,
       :domain_name,
       :etag,
       :last_modified_time,
       :logging,
       :origins,
+      :origin_groups,
       :status,
       :web_acl_id)
       SENSITIVE = []
@@ -316,6 +1769,116 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Information about an origin group for the distribution.
+    #
+    # @note When making an API call, you may pass AwsCloudFrontDistributionOriginGroup
+    #   data as a hash:
+    #
+    #       {
+    #         failover_criteria: {
+    #           status_codes: {
+    #             items: [1],
+    #             quantity: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] failover_criteria
+    #   Provides the criteria for an origin group to fail over.
+    #   @return [Types::AwsCloudFrontDistributionOriginGroupFailover]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCloudFrontDistributionOriginGroup AWS API Documentation
+    #
+    class AwsCloudFrontDistributionOriginGroup < Struct.new(
+      :failover_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about when an origin group fails over.
+    #
+    # @note When making an API call, you may pass AwsCloudFrontDistributionOriginGroupFailover
+    #   data as a hash:
+    #
+    #       {
+    #         status_codes: {
+    #           items: [1],
+    #           quantity: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] status_codes
+    #   Information about the status codes that cause an origin group to
+    #   fail over.
+    #   @return [Types::AwsCloudFrontDistributionOriginGroupFailoverStatusCodes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCloudFrontDistributionOriginGroupFailover AWS API Documentation
+    #
+    class AwsCloudFrontDistributionOriginGroupFailover < Struct.new(
+      :status_codes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status codes that cause an origin group to fail over.
+    #
+    # @note When making an API call, you may pass AwsCloudFrontDistributionOriginGroupFailoverStatusCodes
+    #   data as a hash:
+    #
+    #       {
+    #         items: [1],
+    #         quantity: 1,
+    #       }
+    #
+    # @!attribute [rw] items
+    #   The list of status code values that can cause a failover to the next
+    #   origin.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] quantity
+    #   The number of status codes that can cause a failover.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCloudFrontDistributionOriginGroupFailoverStatusCodes AWS API Documentation
+    #
+    class AwsCloudFrontDistributionOriginGroupFailoverStatusCodes < Struct.new(
+      :items,
+      :quantity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about origin groups that are associated with the
+    # distribution.
+    #
+    # @note When making an API call, you may pass AwsCloudFrontDistributionOriginGroups
+    #   data as a hash:
+    #
+    #       {
+    #         items: [
+    #           {
+    #             failover_criteria: {
+    #               status_codes: {
+    #                 items: [1],
+    #                 quantity: 1,
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] items
+    #   The list of origin groups.
+    #   @return [Array<Types::AwsCloudFrontDistributionOriginGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCloudFrontDistributionOriginGroups AWS API Documentation
+    #
+    class AwsCloudFrontDistributionOriginGroups < Struct.new(
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A complex type that describes the Amazon S3 bucket, HTTP server (for
     # example, a web server), Amazon Elemental MediaStore, or other server
     # from which CloudFront gets your files.
@@ -327,6 +1890,9 @@ module Aws::SecurityHub
     #         domain_name: "NonEmptyString",
     #         id: "NonEmptyString",
     #         origin_path: "NonEmptyString",
+    #         s3_origin_config: {
+    #           origin_access_identity: "NonEmptyString",
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
@@ -343,12 +1909,40 @@ module Aws::SecurityHub
     #   from a directory in your Amazon S3 bucket or your custom origin.
     #   @return [String]
     #
+    # @!attribute [rw] s3_origin_config
+    #   An origin that is an S3 bucket that is not configured with static
+    #   website hosting.
+    #   @return [Types::AwsCloudFrontDistributionOriginS3OriginConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCloudFrontDistributionOriginItem AWS API Documentation
     #
     class AwsCloudFrontDistributionOriginItem < Struct.new(
       :domain_name,
       :id,
-      :origin_path)
+      :origin_path,
+      :s3_origin_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an origin that is an S3 bucket that is not
+    # configured with static website hosting.
+    #
+    # @note When making an API call, you may pass AwsCloudFrontDistributionOriginS3OriginConfig
+    #   data as a hash:
+    #
+    #       {
+    #         origin_access_identity: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] origin_access_identity
+    #   The CloudFront origin access identity to associate with the origin.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCloudFrontDistributionOriginS3OriginConfig AWS API Documentation
+    #
+    class AwsCloudFrontDistributionOriginS3OriginConfig < Struct.new(
+      :origin_access_identity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -365,6 +1959,9 @@ module Aws::SecurityHub
     #             domain_name: "NonEmptyString",
     #             id: "NonEmptyString",
     #             origin_path: "NonEmptyString",
+    #             s3_origin_config: {
+    #               origin_access_identity: "NonEmptyString",
+    #             },
     #           },
     #         ],
     #       }
@@ -378,6 +1975,118 @@ module Aws::SecurityHub
     #
     class AwsCloudFrontDistributionOrigins < Struct.new(
       :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about a CloudTrail trail.
+    #
+    # @note When making an API call, you may pass AwsCloudTrailTrailDetails
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #         cloud_watch_logs_role_arn: "NonEmptyString",
+    #         has_custom_event_selectors: false,
+    #         home_region: "NonEmptyString",
+    #         include_global_service_events: false,
+    #         is_multi_region_trail: false,
+    #         is_organization_trail: false,
+    #         kms_key_id: "NonEmptyString",
+    #         log_file_validation_enabled: false,
+    #         name: "NonEmptyString",
+    #         s3_bucket_name: "NonEmptyString",
+    #         s3_key_prefix: "NonEmptyString",
+    #         sns_topic_arn: "NonEmptyString",
+    #         sns_topic_name: "NonEmptyString",
+    #         trail_arn: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_logs_log_group_arn
+    #   The ARN of the log group that CloudTrail logs are delivered to.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_logs_role_arn
+    #   The ARN of the role that the CloudWatch Logs endpoint assumes when
+    #   it writes to the log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] has_custom_event_selectors
+    #   Indicates whether the trail has custom event selectors.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] home_region
+    #   The Region where the trail was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_global_service_events
+    #   Indicates whether the trail publishes events from global services
+    #   such as IAM to the log files.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_multi_region_trail
+    #   Indicates whether the trail applies only to the current Region or to
+    #   all Regions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_organization_trail
+    #   Whether the trail is created for all accounts in an organization in
+    #   AWS Organizations, or only for the current AWS account.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS KMS key ID to use to encrypt the logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_file_validation_enabled
+    #   Indicates whether CloudTrail log file validation is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] name
+    #   The name of the trail.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the S3 bucket where the log files are published.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key_prefix
+    #   The S3 key prefix. The key prefix is added after the name of the S3
+    #   bucket where the log files are published.
+    #   @return [String]
+    #
+    # @!attribute [rw] sns_topic_arn
+    #   The ARN of the SNS topic that is used for notifications of log file
+    #   delivery.
+    #   @return [String]
+    #
+    # @!attribute [rw] sns_topic_name
+    #   The name of the SNS topic that is used for notifications of log file
+    #   delivery.
+    #   @return [String]
+    #
+    # @!attribute [rw] trail_arn
+    #   The ARN of the trail.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCloudTrailTrailDetails AWS API Documentation
+    #
+    class AwsCloudTrailTrailDetails < Struct.new(
+      :cloud_watch_logs_log_group_arn,
+      :cloud_watch_logs_role_arn,
+      :has_custom_event_selectors,
+      :home_region,
+      :include_global_service_events,
+      :is_multi_region_trail,
+      :is_organization_trail,
+      :kms_key_id,
+      :log_file_validation_enabled,
+      :name,
+      :s3_bucket_name,
+      :s3_key_prefix,
+      :sns_topic_arn,
+      :sns_topic_name,
+      :trail_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -685,6 +2394,59 @@ module Aws::SecurityHub
       :vpc_id,
       :subnets,
       :security_group_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the cross-origin resource sharing (CORS) configuration for
+    # the API. CORS is only supported for HTTP APIs.
+    #
+    # @note When making an API call, you may pass AwsCorsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         allow_origins: ["NonEmptyString"],
+    #         allow_credentials: false,
+    #         expose_headers: ["NonEmptyString"],
+    #         max_age: 1,
+    #         allow_methods: ["NonEmptyString"],
+    #         allow_headers: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] allow_origins
+    #   The allowed origins for CORS requests.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allow_credentials
+    #   Indicates whether the CORS request includes credentials.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] expose_headers
+    #   The exposed headers for CORS requests.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_age
+    #   The number of seconds for which the browser caches preflight request
+    #   results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] allow_methods
+    #   The allowed methods for CORS requests.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allow_headers
+    #   The allowed headers for CORS requests.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCorsConfiguration AWS API Documentation
+    #
+    class AwsCorsConfiguration < Struct.new(
+      :allow_origins,
+      :allow_credentials,
+      :expose_headers,
+      :max_age,
+      :allow_methods,
+      :allow_headers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2515,6 +4277,720 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Contains information about a stickiness policy that was created using
+    # `CreateAppCookieStickinessPolicy`.
+    #
+    # @note When making an API call, you may pass AwsElbAppCookieStickinessPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         cookie_name: "NonEmptyString",
+    #         policy_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] cookie_name
+    #   The name of the application cookie used for stickiness.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_name
+    #   The mnemonic name for the policy being created. The name must be
+    #   unique within the set of policies for the load balancer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbAppCookieStickinessPolicy AWS API Documentation
+    #
+    class AwsElbAppCookieStickinessPolicy < Struct.new(
+      :cookie_name,
+      :policy_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a stickiness policy that was created using
+    # `CreateLBCookieStickinessPolicy`.
+    #
+    # @note When making an API call, you may pass AwsElbLbCookieStickinessPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         cookie_expiration_period: 1,
+    #         policy_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] cookie_expiration_period
+    #   The amount of time, in seconds, after which the cookie is considered
+    #   stale. If an expiration period is not specified, the stickiness
+    #   session lasts for the duration of the browser session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the policy. The name must be unique within the set of
+    #   policies for the load balancer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbLbCookieStickinessPolicy AWS API Documentation
+    #
+    class AwsElbLbCookieStickinessPolicy < Struct.new(
+      :cookie_expiration_period,
+      :policy_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the access log configuration for the load
+    # balancer.
+    #
+    # @note When making an API call, you may pass AwsElbLoadBalancerAccessLog
+    #   data as a hash:
+    #
+    #       {
+    #         emit_interval: 1,
+    #         enabled: false,
+    #         s3_bucket_name: "NonEmptyString",
+    #         s3_bucket_prefix: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] emit_interval
+    #   The interval in minutes for publishing the access logs.
+    #
+    #   You can publish access logs either every 5 minutes or every 60
+    #   minutes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether access logs are enabled for the load balancer.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the S3 bucket where the access logs are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_prefix
+    #   The logical hierarchy that was created for the S3 bucket.
+    #
+    #   If a prefix is not provided, the log is placed at the root level of
+    #   the bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbLoadBalancerAccessLog AWS API Documentation
+    #
+    class AwsElbLoadBalancerAccessLog < Struct.new(
+      :emit_interval,
+      :enabled,
+      :s3_bucket_name,
+      :s3_bucket_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains attributes for the load balancer.
+    #
+    # @note When making an API call, you may pass AwsElbLoadBalancerAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         access_log: {
+    #           emit_interval: 1,
+    #           enabled: false,
+    #           s3_bucket_name: "NonEmptyString",
+    #           s3_bucket_prefix: "NonEmptyString",
+    #         },
+    #         connection_draining: {
+    #           enabled: false,
+    #           timeout: 1,
+    #         },
+    #         connection_settings: {
+    #           idle_timeout: 1,
+    #         },
+    #         cross_zone_load_balancing: {
+    #           enabled: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] access_log
+    #   Information about the access log configuration for the load
+    #   balancer.
+    #
+    #   If the access log is enabled, the load balancer captures detailed
+    #   information about all requests. It delivers the information to a
+    #   specified S3 bucket.
+    #   @return [Types::AwsElbLoadBalancerAccessLog]
+    #
+    # @!attribute [rw] connection_draining
+    #   Information about the connection draining configuration for the load
+    #   balancer.
+    #
+    #   If connection draining is enabled, the load balancer allows existing
+    #   requests to complete before it shifts traffic away from a
+    #   deregistered or unhealthy instance.
+    #   @return [Types::AwsElbLoadBalancerConnectionDraining]
+    #
+    # @!attribute [rw] connection_settings
+    #   Connection settings for the load balancer.
+    #
+    #   If an idle timeout is configured, the load balancer allows
+    #   connections to remain idle for the specified duration. When a
+    #   connection is idle, no data is sent over the connection.
+    #   @return [Types::AwsElbLoadBalancerConnectionSettings]
+    #
+    # @!attribute [rw] cross_zone_load_balancing
+    #   Cross-zone load balancing settings for the load balancer.
+    #
+    #   If cross-zone load balancing is enabled, the load balancer routes
+    #   the request traffic evenly across all instances regardless of the
+    #   Availability Zones.
+    #   @return [Types::AwsElbLoadBalancerCrossZoneLoadBalancing]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbLoadBalancerAttributes AWS API Documentation
+    #
+    class AwsElbLoadBalancerAttributes < Struct.new(
+      :access_log,
+      :connection_draining,
+      :connection_settings,
+      :cross_zone_load_balancing)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the configuration of an EC2 instance for
+    # the load balancer.
+    #
+    # @note When making an API call, you may pass AwsElbLoadBalancerBackendServerDescription
+    #   data as a hash:
+    #
+    #       {
+    #         instance_port: 1,
+    #         policy_names: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] instance_port
+    #   The port on which the EC2 instance is listening.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] policy_names
+    #   The names of the policies that are enabled for the EC2 instance.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbLoadBalancerBackendServerDescription AWS API Documentation
+    #
+    class AwsElbLoadBalancerBackendServerDescription < Struct.new(
+      :instance_port,
+      :policy_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the connection draining configuration for
+    # the load balancer.
+    #
+    # @note When making an API call, you may pass AwsElbLoadBalancerConnectionDraining
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         timeout: 1,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether connection draining is enabled for the load
+    #   balancer.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] timeout
+    #   The maximum time, in seconds, to keep the existing connections open
+    #   before deregistering the instances.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbLoadBalancerConnectionDraining AWS API Documentation
+    #
+    class AwsElbLoadBalancerConnectionDraining < Struct.new(
+      :enabled,
+      :timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains connection settings for the load balancer.
+    #
+    # @note When making an API call, you may pass AwsElbLoadBalancerConnectionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         idle_timeout: 1,
+    #       }
+    #
+    # @!attribute [rw] idle_timeout
+    #   The time, in seconds, that the connection can be idle (no data is
+    #   sent over the connection) before it is closed by the load balancer.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbLoadBalancerConnectionSettings AWS API Documentation
+    #
+    class AwsElbLoadBalancerConnectionSettings < Struct.new(
+      :idle_timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains cross-zone load balancing settings for the load balancer.
+    #
+    # @note When making an API call, you may pass AwsElbLoadBalancerCrossZoneLoadBalancing
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether cross-zone load balancing is enabled for the load
+    #   balancer.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbLoadBalancerCrossZoneLoadBalancing AWS API Documentation
+    #
+    class AwsElbLoadBalancerCrossZoneLoadBalancing < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a Classic Load Balancer.
+    #
+    # @note When making an API call, you may pass AwsElbLoadBalancerDetails
+    #   data as a hash:
+    #
+    #       {
+    #         availability_zones: ["NonEmptyString"],
+    #         backend_server_descriptions: [
+    #           {
+    #             instance_port: 1,
+    #             policy_names: ["NonEmptyString"],
+    #           },
+    #         ],
+    #         canonical_hosted_zone_name: "NonEmptyString",
+    #         canonical_hosted_zone_name_id: "NonEmptyString",
+    #         created_time: "NonEmptyString",
+    #         dns_name: "NonEmptyString",
+    #         health_check: {
+    #           healthy_threshold: 1,
+    #           interval: 1,
+    #           target: "NonEmptyString",
+    #           timeout: 1,
+    #           unhealthy_threshold: 1,
+    #         },
+    #         instances: [
+    #           {
+    #             instance_id: "NonEmptyString",
+    #           },
+    #         ],
+    #         listener_descriptions: [
+    #           {
+    #             listener: {
+    #               instance_port: 1,
+    #               instance_protocol: "NonEmptyString",
+    #               load_balancer_port: 1,
+    #               protocol: "NonEmptyString",
+    #               ssl_certificate_id: "NonEmptyString",
+    #             },
+    #             policy_names: ["NonEmptyString"],
+    #           },
+    #         ],
+    #         load_balancer_attributes: {
+    #           access_log: {
+    #             emit_interval: 1,
+    #             enabled: false,
+    #             s3_bucket_name: "NonEmptyString",
+    #             s3_bucket_prefix: "NonEmptyString",
+    #           },
+    #           connection_draining: {
+    #             enabled: false,
+    #             timeout: 1,
+    #           },
+    #           connection_settings: {
+    #             idle_timeout: 1,
+    #           },
+    #           cross_zone_load_balancing: {
+    #             enabled: false,
+    #           },
+    #         },
+    #         load_balancer_name: "NonEmptyString",
+    #         policies: {
+    #           app_cookie_stickiness_policies: [
+    #             {
+    #               cookie_name: "NonEmptyString",
+    #               policy_name: "NonEmptyString",
+    #             },
+    #           ],
+    #           lb_cookie_stickiness_policies: [
+    #             {
+    #               cookie_expiration_period: 1,
+    #               policy_name: "NonEmptyString",
+    #             },
+    #           ],
+    #           other_policies: ["NonEmptyString"],
+    #         },
+    #         scheme: "NonEmptyString",
+    #         security_groups: ["NonEmptyString"],
+    #         source_security_group: {
+    #           group_name: "NonEmptyString",
+    #           owner_alias: "NonEmptyString",
+    #         },
+    #         subnets: ["NonEmptyString"],
+    #         vpc_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] availability_zones
+    #   The list of Availability Zones for the load balancer.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] backend_server_descriptions
+    #   Information about the configuration of the EC2 instances.
+    #   @return [Array<Types::AwsElbLoadBalancerBackendServerDescription>]
+    #
+    # @!attribute [rw] canonical_hosted_zone_name
+    #   The name of the Amazon Route 53 hosted zone for the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] canonical_hosted_zone_name_id
+    #   The ID of the Amazon Route 53 hosted zone for the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   Indicates when the load balancer was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_name
+    #   The DNS name of the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check
+    #   Information about the health checks that are conducted on the load
+    #   balancer.
+    #   @return [Types::AwsElbLoadBalancerHealthCheck]
+    #
+    # @!attribute [rw] instances
+    #   List of EC2 instances for the load balancer.
+    #   @return [Array<Types::AwsElbLoadBalancerInstance>]
+    #
+    # @!attribute [rw] listener_descriptions
+    #   The policies that are enabled for the load balancer listeners.
+    #   @return [Array<Types::AwsElbLoadBalancerListenerDescription>]
+    #
+    # @!attribute [rw] load_balancer_attributes
+    #   The attributes for a load balancer.
+    #   @return [Types::AwsElbLoadBalancerAttributes]
+    #
+    # @!attribute [rw] load_balancer_name
+    #   The name of the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] policies
+    #   The policies for a load balancer.
+    #   @return [Types::AwsElbLoadBalancerPolicies]
+    #
+    # @!attribute [rw] scheme
+    #   The type of load balancer. Only provided if the load balancer is in
+    #   a VPC.
+    #
+    #   If `Scheme` is `internet-facing`, the load balancer has a public DNS
+    #   name that resolves to a public IP address.
+    #
+    #   If `Scheme` is `internal`, the load balancer has a public DNS name
+    #   that resolves to a private IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_groups
+    #   The security groups for the load balancer. Only provided if the load
+    #   balancer is in a VPC.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source_security_group
+    #   Information about the security group for the load balancer. This is
+    #   the security group that is used for inbound rules.
+    #   @return [Types::AwsElbLoadBalancerSourceSecurityGroup]
+    #
+    # @!attribute [rw] subnets
+    #   The list of subnet identifiers for the load balancer.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The identifier of the VPC for the load balancer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbLoadBalancerDetails AWS API Documentation
+    #
+    class AwsElbLoadBalancerDetails < Struct.new(
+      :availability_zones,
+      :backend_server_descriptions,
+      :canonical_hosted_zone_name,
+      :canonical_hosted_zone_name_id,
+      :created_time,
+      :dns_name,
+      :health_check,
+      :instances,
+      :listener_descriptions,
+      :load_balancer_attributes,
+      :load_balancer_name,
+      :policies,
+      :scheme,
+      :security_groups,
+      :source_security_group,
+      :subnets,
+      :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the health checks that are conducted on the
+    # load balancer.
+    #
+    # @note When making an API call, you may pass AwsElbLoadBalancerHealthCheck
+    #   data as a hash:
+    #
+    #       {
+    #         healthy_threshold: 1,
+    #         interval: 1,
+    #         target: "NonEmptyString",
+    #         timeout: 1,
+    #         unhealthy_threshold: 1,
+    #       }
+    #
+    # @!attribute [rw] healthy_threshold
+    #   The number of consecutive health check successes required before the
+    #   instance is moved to the Healthy state.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interval
+    #   The approximate interval, in seconds, between health checks of an
+    #   individual instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target
+    #   The instance that is being checked. The target specifies the
+    #   protocol and port. The available protocols are TCP, SSL, HTTP, and
+    #   HTTPS. The range of valid ports is 1 through 65535.
+    #
+    #   For the HTTP and HTTPS protocols, the target also specifies the ping
+    #   path.
+    #
+    #   For the TCP protocol, the target is specified as `TCP: <port> `.
+    #
+    #   For the SSL protocol, the target is specified as `SSL.<port> `.
+    #
+    #   For the HTTP and HTTPS protocols, the target is specified as `
+    #   <protocol>:<port>/<path to ping> `.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout
+    #   The amount of time, in seconds, during which no response means a
+    #   failed health check.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unhealthy_threshold
+    #   The number of consecutive health check failures that must occur
+    #   before the instance is moved to the Unhealthy state.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbLoadBalancerHealthCheck AWS API Documentation
+    #
+    class AwsElbLoadBalancerHealthCheck < Struct.new(
+      :healthy_threshold,
+      :interval,
+      :target,
+      :timeout,
+      :unhealthy_threshold)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about an EC2 instance for a load balancer.
+    #
+    # @note When making an API call, you may pass AwsElbLoadBalancerInstance
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The instance identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbLoadBalancerInstance AWS API Documentation
+    #
+    class AwsElbLoadBalancerInstance < Struct.new(
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a load balancer listener.
+    #
+    # @note When making an API call, you may pass AwsElbLoadBalancerListener
+    #   data as a hash:
+    #
+    #       {
+    #         instance_port: 1,
+    #         instance_protocol: "NonEmptyString",
+    #         load_balancer_port: 1,
+    #         protocol: "NonEmptyString",
+    #         ssl_certificate_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] instance_port
+    #   The port on which the instance is listening.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_protocol
+    #   The protocol to use to route traffic to instances.
+    #
+    #   Valid values: `HTTP` \| `HTTPS` \| `TCP` \| `SSL`
+    #   @return [String]
+    #
+    # @!attribute [rw] load_balancer_port
+    #   The port on which the load balancer is listening.
+    #
+    #   On EC2-VPC, you can specify any port from the range 1-65535.
+    #
+    #   On EC2-Classic, you can specify any port from the following list:
+    #   25, 80, 443, 465, 587, 1024-65535.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The load balancer transport protocol to use for routing.
+    #
+    #   Valid values: `HTTP` \| `HTTPS` \| `TCP` \| `SSL`
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_certificate_id
+    #   The ARN of the server certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbLoadBalancerListener AWS API Documentation
+    #
+    class AwsElbLoadBalancerListener < Struct.new(
+      :instance_port,
+      :instance_protocol,
+      :load_balancer_port,
+      :protocol,
+      :ssl_certificate_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Lists the policies that are enabled for a load balancer listener.
+    #
+    # @note When making an API call, you may pass AwsElbLoadBalancerListenerDescription
+    #   data as a hash:
+    #
+    #       {
+    #         listener: {
+    #           instance_port: 1,
+    #           instance_protocol: "NonEmptyString",
+    #           load_balancer_port: 1,
+    #           protocol: "NonEmptyString",
+    #           ssl_certificate_id: "NonEmptyString",
+    #         },
+    #         policy_names: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] listener
+    #   Information about the listener.
+    #   @return [Types::AwsElbLoadBalancerListener]
+    #
+    # @!attribute [rw] policy_names
+    #   The policies enabled for the listener.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbLoadBalancerListenerDescription AWS API Documentation
+    #
+    class AwsElbLoadBalancerListenerDescription < Struct.new(
+      :listener,
+      :policy_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the policies for a load balancer.
+    #
+    # @note When making an API call, you may pass AwsElbLoadBalancerPolicies
+    #   data as a hash:
+    #
+    #       {
+    #         app_cookie_stickiness_policies: [
+    #           {
+    #             cookie_name: "NonEmptyString",
+    #             policy_name: "NonEmptyString",
+    #           },
+    #         ],
+    #         lb_cookie_stickiness_policies: [
+    #           {
+    #             cookie_expiration_period: 1,
+    #             policy_name: "NonEmptyString",
+    #           },
+    #         ],
+    #         other_policies: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] app_cookie_stickiness_policies
+    #   The stickiness policies that are created using
+    #   `CreateAppCookieStickinessPolicy`.
+    #   @return [Array<Types::AwsElbAppCookieStickinessPolicy>]
+    #
+    # @!attribute [rw] lb_cookie_stickiness_policies
+    #   The stickiness policies that are created using
+    #   `CreateLBCookieStickinessPolicy`.
+    #   @return [Array<Types::AwsElbLbCookieStickinessPolicy>]
+    #
+    # @!attribute [rw] other_policies
+    #   The policies other than the stickiness policies.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbLoadBalancerPolicies AWS API Documentation
+    #
+    class AwsElbLoadBalancerPolicies < Struct.new(
+      :app_cookie_stickiness_policies,
+      :lb_cookie_stickiness_policies,
+      :other_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the security group for the load balancer.
+    #
+    # @note When making an API call, you may pass AwsElbLoadBalancerSourceSecurityGroup
+    #   data as a hash:
+    #
+    #       {
+    #         group_name: "NonEmptyString",
+    #         owner_alias: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] group_name
+    #   The name of the security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_alias
+    #   The owner of the security group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbLoadBalancerSourceSecurityGroup AWS API Documentation
+    #
+    class AwsElbLoadBalancerSourceSecurityGroup < Struct.new(
+      :group_name,
+      :owner_alias)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a load balancer.
     #
     # @note When making an API call, you may pass AwsElbv2LoadBalancerDetails
@@ -2622,6 +5098,21 @@ module Aws::SecurityHub
     #         principal_id: "NonEmptyString",
     #         principal_type: "NonEmptyString",
     #         principal_name: "NonEmptyString",
+    #         account_id: "NonEmptyString",
+    #         access_key_id: "NonEmptyString",
+    #         session_context: {
+    #           attributes: {
+    #             mfa_authenticated: false,
+    #             creation_date: "NonEmptyString",
+    #           },
+    #           session_issuer: {
+    #             type: "NonEmptyString",
+    #             principal_id: "NonEmptyString",
+    #             arn: "NonEmptyString",
+    #             account_id: "NonEmptyString",
+    #             user_name: "NonEmptyString",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] user_name
@@ -2660,6 +5151,18 @@ module Aws::SecurityHub
     #   The name of the principal.
     #   @return [String]
     #
+    # @!attribute [rw] account_id
+    #   The AWS account ID of the account for the key.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_key_id
+    #   The identifier of the access key.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_context
+    #   Information about the session that the key was used for.
+    #   @return [Types::AwsIamAccessKeySessionContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamAccessKeyDetails AWS API Documentation
     #
     class AwsIamAccessKeyDetails < Struct.new(
@@ -2668,12 +5171,134 @@ module Aws::SecurityHub
       :created_at,
       :principal_id,
       :principal_type,
-      :principal_name)
+      :principal_name,
+      :account_id,
+      :access_key_id,
+      :session_context)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # A managed policy that is attached to an IAM user.
+    # Provides information about the session that the key was used for.
+    #
+    # @note When making an API call, you may pass AwsIamAccessKeySessionContext
+    #   data as a hash:
+    #
+    #       {
+    #         attributes: {
+    #           mfa_authenticated: false,
+    #           creation_date: "NonEmptyString",
+    #         },
+    #         session_issuer: {
+    #           type: "NonEmptyString",
+    #           principal_id: "NonEmptyString",
+    #           arn: "NonEmptyString",
+    #           account_id: "NonEmptyString",
+    #           user_name: "NonEmptyString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] attributes
+    #   Attributes of the session that the key was used for.
+    #   @return [Types::AwsIamAccessKeySessionContextAttributes]
+    #
+    # @!attribute [rw] session_issuer
+    #   Information about the entity that created the session.
+    #   @return [Types::AwsIamAccessKeySessionContextSessionIssuer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamAccessKeySessionContext AWS API Documentation
+    #
+    class AwsIamAccessKeySessionContext < Struct.new(
+      :attributes,
+      :session_issuer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Attributes of the session that the key was used for.
+    #
+    # @note When making an API call, you may pass AwsIamAccessKeySessionContextAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         mfa_authenticated: false,
+    #         creation_date: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] mfa_authenticated
+    #   Indicates whether the session used multi-factor authentication
+    #   (MFA).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] creation_date
+    #   Indicates when the session was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamAccessKeySessionContextAttributes AWS API Documentation
+    #
+    class AwsIamAccessKeySessionContextAttributes < Struct.new(
+      :mfa_authenticated,
+      :creation_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the entity that created the session.
+    #
+    # @note When making an API call, you may pass AwsIamAccessKeySessionContextSessionIssuer
+    #   data as a hash:
+    #
+    #       {
+    #         type: "NonEmptyString",
+    #         principal_id: "NonEmptyString",
+    #         arn: "NonEmptyString",
+    #         account_id: "NonEmptyString",
+    #         user_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of principal (user, role, or group) that created the
+    #   session.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_id
+    #   The principal ID of the principal (user, role, or group) that
+    #   created the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The identifier of the AWS account that created the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The name of the principal that created the session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamAccessKeySessionContextSessionIssuer AWS API Documentation
+    #
+    class AwsIamAccessKeySessionContextSessionIssuer < Struct.new(
+      :type,
+      :principal_id,
+      :arn,
+      :account_id,
+      :user_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A managed policy that is attached to an IAM principal.
     #
     # @note When making an API call, you may pass AwsIamAttachedManagedPolicy
     #   data as a hash:
@@ -2700,8 +5325,224 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Contains details about an IAM group.
+    #
+    # @note When making an API call, you may pass AwsIamGroupDetails
+    #   data as a hash:
+    #
+    #       {
+    #         attached_managed_policies: [
+    #           {
+    #             policy_name: "NonEmptyString",
+    #             policy_arn: "NonEmptyString",
+    #           },
+    #         ],
+    #         create_date: "NonEmptyString",
+    #         group_id: "NonEmptyString",
+    #         group_name: "NonEmptyString",
+    #         group_policy_list: [
+    #           {
+    #             policy_name: "NonEmptyString",
+    #           },
+    #         ],
+    #         path: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] attached_managed_policies
+    #   A list of the managed policies that are attached to the IAM group.
+    #   @return [Array<Types::AwsIamAttachedManagedPolicy>]
+    #
+    # @!attribute [rw] create_date
+    #   Indicates when the IAM group was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The identifier of the IAM group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the IAM group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_policy_list
+    #   The list of inline policies that are embedded in the group.
+    #   @return [Array<Types::AwsIamGroupPolicy>]
+    #
+    # @!attribute [rw] path
+    #   The path to the group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamGroupDetails AWS API Documentation
+    #
+    class AwsIamGroupDetails < Struct.new(
+      :attached_managed_policies,
+      :create_date,
+      :group_id,
+      :group_name,
+      :group_policy_list,
+      :path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A managed policy that is attached to the IAM group.
+    #
+    # @note When making an API call, you may pass AwsIamGroupPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         policy_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamGroupPolicy AWS API Documentation
+    #
+    class AwsIamGroupPolicy < Struct.new(
+      :policy_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an instance profile.
+    #
+    # @note When making an API call, you may pass AwsIamInstanceProfile
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "NonEmptyString",
+    #         create_date: "NonEmptyString",
+    #         instance_profile_id: "NonEmptyString",
+    #         instance_profile_name: "NonEmptyString",
+    #         path: "NonEmptyString",
+    #         roles: [
+    #           {
+    #             arn: "NonEmptyString",
+    #             assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #             create_date: "NonEmptyString",
+    #             path: "NonEmptyString",
+    #             role_id: "NonEmptyString",
+    #             role_name: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the instance profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_date
+    #   Indicates when the instance profile was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_profile_id
+    #   The identifier of the instance profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_profile_name
+    #   The name of the instance profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The path to the instance profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] roles
+    #   The roles associated with the instance profile.
+    #   @return [Array<Types::AwsIamInstanceProfileRole>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamInstanceProfile AWS API Documentation
+    #
+    class AwsIamInstanceProfile < Struct.new(
+      :arn,
+      :create_date,
+      :instance_profile_id,
+      :instance_profile_name,
+      :path,
+      :roles)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a role associated with an instance profile.
+    #
+    # @note When making an API call, you may pass AwsIamInstanceProfileRole
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "NonEmptyString",
+    #         assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #         create_date: "NonEmptyString",
+    #         path: "NonEmptyString",
+    #         role_id: "NonEmptyString",
+    #         role_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the role.
+    #   @return [String]
+    #
+    # @!attribute [rw] assume_role_policy_document
+    #   The policy that grants an entity permission to assume the role.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_date
+    #   Indicates when the role was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The path to the role.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_id
+    #   The identifier of the role.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_name
+    #   The name of the role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamInstanceProfileRole AWS API Documentation
+    #
+    class AwsIamInstanceProfileRole < Struct.new(
+      :arn,
+      :assume_role_policy_document,
+      :create_date,
+      :path,
+      :role_id,
+      :role_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the policy used to set the permissions boundary for
-    # an IAM user.
+    # an IAM principal.
     #
     # @note When making an API call, you may pass AwsIamPermissionsBoundary
     #   data as a hash:
@@ -2712,8 +5553,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] permissions_boundary_arn
-    #   The ARN of the policy used to set the permissions boundary for the
-    #   user.
+    #   The ARN of the policy used to set the permissions boundary.
     #   @return [String]
     #
     # @!attribute [rw] permissions_boundary_type
@@ -2883,9 +5723,43 @@ module Aws::SecurityHub
     #
     #       {
     #         assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #         attached_managed_policies: [
+    #           {
+    #             policy_name: "NonEmptyString",
+    #             policy_arn: "NonEmptyString",
+    #           },
+    #         ],
     #         create_date: "NonEmptyString",
+    #         instance_profile_list: [
+    #           {
+    #             arn: "NonEmptyString",
+    #             create_date: "NonEmptyString",
+    #             instance_profile_id: "NonEmptyString",
+    #             instance_profile_name: "NonEmptyString",
+    #             path: "NonEmptyString",
+    #             roles: [
+    #               {
+    #                 arn: "NonEmptyString",
+    #                 assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #                 create_date: "NonEmptyString",
+    #                 path: "NonEmptyString",
+    #                 role_id: "NonEmptyString",
+    #                 role_name: "NonEmptyString",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         permissions_boundary: {
+    #           permissions_boundary_arn: "NonEmptyString",
+    #           permissions_boundary_type: "NonEmptyString",
+    #         },
     #         role_id: "NonEmptyString",
     #         role_name: "NonEmptyString",
+    #         role_policy_list: [
+    #           {
+    #             policy_name: "NonEmptyString",
+    #           },
+    #         ],
     #         max_session_duration: 1,
     #         path: "NonEmptyString",
     #       }
@@ -2893,6 +5767,10 @@ module Aws::SecurityHub
     # @!attribute [rw] assume_role_policy_document
     #   The trust policy that grants permission to assume the role.
     #   @return [String]
+    #
+    # @!attribute [rw] attached_managed_policies
+    #   The list of the managed policies that are attached to the role.
+    #   @return [Array<Types::AwsIamAttachedManagedPolicy>]
     #
     # @!attribute [rw] create_date
     #   Indicates when the role was created.
@@ -2906,6 +5784,15 @@ module Aws::SecurityHub
     #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
+    # @!attribute [rw] instance_profile_list
+    #   The list of instance profiles that contain this role.
+    #   @return [Array<Types::AwsIamInstanceProfile>]
+    #
+    # @!attribute [rw] permissions_boundary
+    #   Information about the policy used to set the permissions boundary
+    #   for an IAM principal.
+    #   @return [Types::AwsIamPermissionsBoundary]
+    #
     # @!attribute [rw] role_id
     #   The stable and unique string identifying the role.
     #   @return [String]
@@ -2913,6 +5800,10 @@ module Aws::SecurityHub
     # @!attribute [rw] role_name
     #   The friendly name that identifies the role.
     #   @return [String]
+    #
+    # @!attribute [rw] role_policy_list
+    #   The list of inline policies that are embedded in the role.
+    #   @return [Array<Types::AwsIamRolePolicy>]
     #
     # @!attribute [rw] max_session_duration
     #   The maximum session duration (in seconds) that you want to set for
@@ -2927,11 +5818,36 @@ module Aws::SecurityHub
     #
     class AwsIamRoleDetails < Struct.new(
       :assume_role_policy_document,
+      :attached_managed_policies,
       :create_date,
+      :instance_profile_list,
+      :permissions_boundary,
       :role_id,
       :role_name,
+      :role_policy_list,
       :max_session_duration,
       :path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An inline policy that is embedded in the role.
+    #
+    # @note When making an API call, you may pass AwsIamRolePolicy
+    #   data as a hash:
+    #
+    #       {
+    #         policy_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] policy_name
+    #   The name of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamRolePolicy AWS API Documentation
+    #
+    class AwsIamRolePolicy < Struct.new(
+      :policy_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5253,6 +8169,1027 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # A node in an Amazon Redshift cluster.
+    #
+    # @note When making an API call, you may pass AwsRedshiftClusterClusterNode
+    #   data as a hash:
+    #
+    #       {
+    #         node_role: "NonEmptyString",
+    #         private_ip_address: "NonEmptyString",
+    #         public_ip_address: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] node_role
+    #   The role of the node. A node might be a leader node or a compute
+    #   node.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The private IP address of the node.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ip_address
+    #   The public IP address of the node.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterClusterNode AWS API Documentation
+    #
+    class AwsRedshiftClusterClusterNode < Struct.new(
+      :node_role,
+      :private_ip_address,
+      :public_ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A cluster parameter group that is associated with an Amazon Redshift
+    # cluster.
+    #
+    # @note When making an API call, you may pass AwsRedshiftClusterClusterParameterGroup
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_parameter_status_list: [
+    #           {
+    #             parameter_name: "NonEmptyString",
+    #             parameter_apply_status: "NonEmptyString",
+    #             parameter_apply_error_description: "NonEmptyString",
+    #           },
+    #         ],
+    #         parameter_apply_status: "NonEmptyString",
+    #         parameter_group_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] cluster_parameter_status_list
+    #   The list of parameter statuses.
+    #   @return [Array<Types::AwsRedshiftClusterClusterParameterStatus>]
+    #
+    # @!attribute [rw] parameter_apply_status
+    #   The status of updates to the parameters.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_group_name
+    #   The name of the parameter group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterClusterParameterGroup AWS API Documentation
+    #
+    class AwsRedshiftClusterClusterParameterGroup < Struct.new(
+      :cluster_parameter_status_list,
+      :parameter_apply_status,
+      :parameter_group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of a parameter in a cluster parameter group for an Amazon
+    # Redshift cluster.
+    #
+    # @note When making an API call, you may pass AwsRedshiftClusterClusterParameterStatus
+    #   data as a hash:
+    #
+    #       {
+    #         parameter_name: "NonEmptyString",
+    #         parameter_apply_status: "NonEmptyString",
+    #         parameter_apply_error_description: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] parameter_name
+    #   The name of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_apply_status
+    #   The status of the parameter. Indicates whether the parameter is in
+    #   sync with the database, waiting for a cluster reboot, or encountered
+    #   an error when it was applied.
+    #
+    #   Valid values: `in-sync` \| `pending-reboot` \| `applying` \|
+    #   `invalid-parameter` \| `apply-deferred` \| `apply-error` \|
+    #   `unknown-error`
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_apply_error_description
+    #   The error that prevented the parameter from being applied to the
+    #   database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterClusterParameterStatus AWS API Documentation
+    #
+    class AwsRedshiftClusterClusterParameterStatus < Struct.new(
+      :parameter_name,
+      :parameter_apply_status,
+      :parameter_apply_error_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A security group that is associated with the cluster.
+    #
+    # @note When making an API call, you may pass AwsRedshiftClusterClusterSecurityGroup
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_security_group_name: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] cluster_security_group_name
+    #   The name of the cluster security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the cluster security group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterClusterSecurityGroup AWS API Documentation
+    #
+    class AwsRedshiftClusterClusterSecurityGroup < Struct.new(
+      :cluster_security_group_name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a cross-Region snapshot copy.
+    #
+    # @note When making an API call, you may pass AwsRedshiftClusterClusterSnapshotCopyStatus
+    #   data as a hash:
+    #
+    #       {
+    #         destination_region: "NonEmptyString",
+    #         manual_snapshot_retention_period: 1,
+    #         retention_period: 1,
+    #         snapshot_copy_grant_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] destination_region
+    #   The destination Region that snapshots are automatically copied to
+    #   when cross-Region snapshot copy is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] manual_snapshot_retention_period
+    #   The number of days that manual snapshots are retained in the
+    #   destination region after they are copied from a source region.
+    #
+    #   If the value is -1, then the manual snapshot is retained
+    #   indefinitely.
+    #
+    #   Valid values: Either -1 or an integer between 1 and 3,653
+    #   @return [Integer]
+    #
+    # @!attribute [rw] retention_period
+    #   The number of days to retain automated snapshots in the destination
+    #   Region after they are copied from a source Region.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] snapshot_copy_grant_name
+    #   The name of the snapshot copy grant.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterClusterSnapshotCopyStatus AWS API Documentation
+    #
+    class AwsRedshiftClusterClusterSnapshotCopyStatus < Struct.new(
+      :destination_region,
+      :manual_snapshot_retention_period,
+      :retention_period,
+      :snapshot_copy_grant_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A time windows during which maintenance was deferred for an Amazon
+    # Redshift cluster.
+    #
+    # @note When making an API call, you may pass AwsRedshiftClusterDeferredMaintenanceWindow
+    #   data as a hash:
+    #
+    #       {
+    #         defer_maintenance_end_time: "NonEmptyString",
+    #         defer_maintenance_identifier: "NonEmptyString",
+    #         defer_maintenance_start_time: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] defer_maintenance_end_time
+    #   The end of the time window for which maintenance was deferred.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] defer_maintenance_identifier
+    #   The identifier of the maintenance window.
+    #   @return [String]
+    #
+    # @!attribute [rw] defer_maintenance_start_time
+    #   The start of the time window for which maintenance was deferred.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterDeferredMaintenanceWindow AWS API Documentation
+    #
+    class AwsRedshiftClusterDeferredMaintenanceWindow < Struct.new(
+      :defer_maintenance_end_time,
+      :defer_maintenance_identifier,
+      :defer_maintenance_start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an Amazon Redshift cluster.
+    #
+    # @note When making an API call, you may pass AwsRedshiftClusterDetails
+    #   data as a hash:
+    #
+    #       {
+    #         allow_version_upgrade: false,
+    #         automated_snapshot_retention_period: 1,
+    #         availability_zone: "NonEmptyString",
+    #         cluster_availability_status: "NonEmptyString",
+    #         cluster_create_time: "NonEmptyString",
+    #         cluster_identifier: "NonEmptyString",
+    #         cluster_nodes: [
+    #           {
+    #             node_role: "NonEmptyString",
+    #             private_ip_address: "NonEmptyString",
+    #             public_ip_address: "NonEmptyString",
+    #           },
+    #         ],
+    #         cluster_parameter_groups: [
+    #           {
+    #             cluster_parameter_status_list: [
+    #               {
+    #                 parameter_name: "NonEmptyString",
+    #                 parameter_apply_status: "NonEmptyString",
+    #                 parameter_apply_error_description: "NonEmptyString",
+    #               },
+    #             ],
+    #             parameter_apply_status: "NonEmptyString",
+    #             parameter_group_name: "NonEmptyString",
+    #           },
+    #         ],
+    #         cluster_public_key: "NonEmptyString",
+    #         cluster_revision_number: "NonEmptyString",
+    #         cluster_security_groups: [
+    #           {
+    #             cluster_security_group_name: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #           },
+    #         ],
+    #         cluster_snapshot_copy_status: {
+    #           destination_region: "NonEmptyString",
+    #           manual_snapshot_retention_period: 1,
+    #           retention_period: 1,
+    #           snapshot_copy_grant_name: "NonEmptyString",
+    #         },
+    #         cluster_status: "NonEmptyString",
+    #         cluster_subnet_group_name: "NonEmptyString",
+    #         cluster_version: "NonEmptyString",
+    #         db_name: "NonEmptyString",
+    #         deferred_maintenance_windows: [
+    #           {
+    #             defer_maintenance_end_time: "NonEmptyString",
+    #             defer_maintenance_identifier: "NonEmptyString",
+    #             defer_maintenance_start_time: "NonEmptyString",
+    #           },
+    #         ],
+    #         elastic_ip_status: {
+    #           elastic_ip: "NonEmptyString",
+    #           status: "NonEmptyString",
+    #         },
+    #         elastic_resize_number_of_node_options: "NonEmptyString",
+    #         encrypted: false,
+    #         endpoint: {
+    #           address: "NonEmptyString",
+    #           port: 1,
+    #         },
+    #         enhanced_vpc_routing: false,
+    #         expected_next_snapshot_schedule_time: "NonEmptyString",
+    #         expected_next_snapshot_schedule_time_status: "NonEmptyString",
+    #         hsm_status: {
+    #           hsm_client_certificate_identifier: "NonEmptyString",
+    #           hsm_configuration_identifier: "NonEmptyString",
+    #           status: "NonEmptyString",
+    #         },
+    #         iam_roles: [
+    #           {
+    #             apply_status: "NonEmptyString",
+    #             iam_role_arn: "NonEmptyString",
+    #           },
+    #         ],
+    #         kms_key_id: "NonEmptyString",
+    #         maintenance_track_name: "NonEmptyString",
+    #         manual_snapshot_retention_period: 1,
+    #         master_username: "NonEmptyString",
+    #         next_maintenance_window_start_time: "NonEmptyString",
+    #         node_type: "NonEmptyString",
+    #         number_of_nodes: 1,
+    #         pending_actions: ["NonEmptyString"],
+    #         pending_modified_values: {
+    #           automated_snapshot_retention_period: 1,
+    #           cluster_identifier: "NonEmptyString",
+    #           cluster_type: "NonEmptyString",
+    #           cluster_version: "NonEmptyString",
+    #           encryption_type: "NonEmptyString",
+    #           enhanced_vpc_routing: false,
+    #           maintenance_track_name: "NonEmptyString",
+    #           master_user_password: "NonEmptyString",
+    #           node_type: "NonEmptyString",
+    #           number_of_nodes: 1,
+    #           publicly_accessible: false,
+    #         },
+    #         preferred_maintenance_window: "NonEmptyString",
+    #         publicly_accessible: false,
+    #         resize_info: {
+    #           allow_cancel_resize: false,
+    #           resize_type: "NonEmptyString",
+    #         },
+    #         restore_status: {
+    #           current_restore_rate_in_mega_bytes_per_second: 1.0,
+    #           elapsed_time_in_seconds: 1,
+    #           estimated_time_to_completion_in_seconds: 1,
+    #           progress_in_mega_bytes: 1,
+    #           snapshot_size_in_mega_bytes: 1,
+    #           status: "NonEmptyString",
+    #         },
+    #         snapshot_schedule_identifier: "NonEmptyString",
+    #         snapshot_schedule_state: "NonEmptyString",
+    #         vpc_id: "NonEmptyString",
+    #         vpc_security_groups: [
+    #           {
+    #             status: "NonEmptyString",
+    #             vpc_security_group_id: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] allow_version_upgrade
+    #   Indicates whether major version upgrades are applied automatically
+    #   to the cluster during the maintenance window.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] automated_snapshot_retention_period
+    #   The number of days that automatic cluster snapshots are retained.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] availability_zone
+    #   The name of the Availability Zone in which the cluster is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_availability_status
+    #   The availability status of the cluster for queries. Possible values
+    #   are the following:
+    #
+    #   * `Available` - The cluster is available for queries.
+    #
+    #   * `Unavailable` - The cluster is not available for queries.
+    #
+    #   * `Maintenance` - The cluster is intermittently available for
+    #     queries due to maintenance activities.
+    #
+    #   * `Modifying` -The cluster is intermittently available for queries
+    #     due to changes that modify the cluster.
+    #
+    #   * `Failed` - The cluster failed and is not available for queries.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_create_time
+    #   Indicates when the cluster was created.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_nodes
+    #   The nodes in the cluster.
+    #   @return [Array<Types::AwsRedshiftClusterClusterNode>]
+    #
+    # @!attribute [rw] cluster_parameter_groups
+    #   The list of cluster parameter groups that are associated with this
+    #   cluster.
+    #   @return [Array<Types::AwsRedshiftClusterClusterParameterGroup>]
+    #
+    # @!attribute [rw] cluster_public_key
+    #   The public key for the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_revision_number
+    #   The specific revision number of the database in the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_security_groups
+    #   A list of cluster security groups that are associated with the
+    #   cluster.
+    #   @return [Array<Types::AwsRedshiftClusterClusterSecurityGroup>]
+    #
+    # @!attribute [rw] cluster_snapshot_copy_status
+    #   Information about the destination Region and retention period for
+    #   the cross-Region snapshot copy.
+    #   @return [Types::AwsRedshiftClusterClusterSnapshotCopyStatus]
+    #
+    # @!attribute [rw] cluster_status
+    #   The current status of the cluster.
+    #
+    #   Valid values: `available` \| `available, prep-for-resize` \|
+    #   `available, resize-cleanup` \|` cancelling-resize` \| `creating` \|
+    #   `deleting` \| `final-snapshot` \| `hardware-failure` \|
+    #   `incompatible-hsm` \|` incompatible-network` \|
+    #   `incompatible-parameters` \| `incompatible-restore` \| `modifying`
+    #   \| `paused` \| `rebooting` \| `renaming` \| `resizing` \|
+    #   `rotating-keys` \| `storage-full` \| `updating-hsm`
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_subnet_group_name
+    #   The name of the subnet group that is associated with the cluster.
+    #   This parameter is valid only when the cluster is in a VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_version
+    #   The version ID of the Amazon Redshift engine that runs on the
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_name
+    #   The name of the initial database that was created when the cluster
+    #   was created.
+    #
+    #   The same name is returned for the life of the cluster.
+    #
+    #   If an initial database is not specified, a database named `devdev`
+    #   is created by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] deferred_maintenance_windows
+    #   List of time windows during which maintenance was deferred.
+    #   @return [Array<Types::AwsRedshiftClusterDeferredMaintenanceWindow>]
+    #
+    # @!attribute [rw] elastic_ip_status
+    #   Information about the status of the Elastic IP (EIP) address.
+    #   @return [Types::AwsRedshiftClusterElasticIpStatus]
+    #
+    # @!attribute [rw] elastic_resize_number_of_node_options
+    #   The number of nodes that you can use the elastic resize method to
+    #   resize the cluster to.
+    #   @return [String]
+    #
+    # @!attribute [rw] encrypted
+    #   Indicates whether the data in the cluster is encrypted at rest.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] endpoint
+    #   The connection endpoint.
+    #   @return [Types::AwsRedshiftClusterEndpoint]
+    #
+    # @!attribute [rw] enhanced_vpc_routing
+    #   Indicates whether to create the cluster with enhanced VPC routing
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] expected_next_snapshot_schedule_time
+    #   Indicates when the next snapshot is expected to be taken. The
+    #   cluster must have a valid snapshot schedule and have backups
+    #   enabled.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_next_snapshot_schedule_time_status
+    #   The status of the next expected snapshot.
+    #
+    #   Valid values: `OnTrack` \| `Pending`
+    #   @return [String]
+    #
+    # @!attribute [rw] hsm_status
+    #   Information about whether the Amazon Redshift cluster finished
+    #   applying any changes to hardware security module (HSM) settings that
+    #   were specified in a modify cluster command.
+    #   @return [Types::AwsRedshiftClusterHsmStatus]
+    #
+    # @!attribute [rw] iam_roles
+    #   A list of IAM roles that the cluster can use to access other AWS
+    #   services.
+    #   @return [Array<Types::AwsRedshiftClusterIamRole>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier of the AWS KMS encryption key that is used to encrypt
+    #   data in the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_track_name
+    #   The name of the maintenance track for the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] manual_snapshot_retention_period
+    #   The default number of days to retain a manual snapshot.
+    #
+    #   If the value is -1, the snapshot is retained indefinitely.
+    #
+    #   This setting doesn't change the retention period of existing
+    #   snapshots.
+    #
+    #   Valid values: Either -1 or an integer between 1 and 3,653
+    #   @return [Integer]
+    #
+    # @!attribute [rw] master_username
+    #   The master user name for the cluster. This name is used to connect
+    #   to the database that is specified in as the value of `DBName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_maintenance_window_start_time
+    #   Indicates the start of the next maintenance window.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] node_type
+    #   The node type for the nodes in the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_nodes
+    #   The number of compute nodes in the cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pending_actions
+    #   A list of cluster operations that are waiting to start.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] pending_modified_values
+    #   A list of changes to the cluster that are currently pending.
+    #   @return [Types::AwsRedshiftClusterPendingModifiedValues]
+    #
+    # @!attribute [rw] preferred_maintenance_window
+    #   The weekly time range, in Universal Coordinated Time (UTC), during
+    #   which system maintenance can occur.
+    #
+    #   Format: ` <day>:HH:MM-<day>:HH:MM`
+    #
+    #   For the day values, use `mon` \| `tue` \| `wed` \| `thu` \| `fri` \|
+    #   `sat` \| `sun`
+    #
+    #   For example, `sun:09:32-sun:10:02`
+    #   @return [String]
+    #
+    # @!attribute [rw] publicly_accessible
+    #   Whether the cluster can be accessed from a public network.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] resize_info
+    #   Information about the resize operation for the cluster.
+    #   @return [Types::AwsRedshiftClusterResizeInfo]
+    #
+    # @!attribute [rw] restore_status
+    #   Information about the status of a cluster restore action. Only
+    #   applies to a cluster that was created by restoring a snapshot.
+    #   @return [Types::AwsRedshiftClusterRestoreStatus]
+    #
+    # @!attribute [rw] snapshot_schedule_identifier
+    #   A unique identifier for the cluster snapshot schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_schedule_state
+    #   The current state of the cluster snapshot schedule.
+    #
+    #   Valid values: `MODIFYING` \| `ACTIVE` \| `FAILED`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The identifier of the VPC that the cluster is in, if the cluster is
+    #   in a VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_security_groups
+    #   The list of VPC security groups that the cluster belongs to, if the
+    #   cluster is in a VPC.
+    #   @return [Array<Types::AwsRedshiftClusterVpcSecurityGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterDetails AWS API Documentation
+    #
+    class AwsRedshiftClusterDetails < Struct.new(
+      :allow_version_upgrade,
+      :automated_snapshot_retention_period,
+      :availability_zone,
+      :cluster_availability_status,
+      :cluster_create_time,
+      :cluster_identifier,
+      :cluster_nodes,
+      :cluster_parameter_groups,
+      :cluster_public_key,
+      :cluster_revision_number,
+      :cluster_security_groups,
+      :cluster_snapshot_copy_status,
+      :cluster_status,
+      :cluster_subnet_group_name,
+      :cluster_version,
+      :db_name,
+      :deferred_maintenance_windows,
+      :elastic_ip_status,
+      :elastic_resize_number_of_node_options,
+      :encrypted,
+      :endpoint,
+      :enhanced_vpc_routing,
+      :expected_next_snapshot_schedule_time,
+      :expected_next_snapshot_schedule_time_status,
+      :hsm_status,
+      :iam_roles,
+      :kms_key_id,
+      :maintenance_track_name,
+      :manual_snapshot_retention_period,
+      :master_username,
+      :next_maintenance_window_start_time,
+      :node_type,
+      :number_of_nodes,
+      :pending_actions,
+      :pending_modified_values,
+      :preferred_maintenance_window,
+      :publicly_accessible,
+      :resize_info,
+      :restore_status,
+      :snapshot_schedule_identifier,
+      :snapshot_schedule_state,
+      :vpc_id,
+      :vpc_security_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of the elastic IP (EIP) address for an Amazon Redshift
+    # cluster.
+    #
+    # @note When making an API call, you may pass AwsRedshiftClusterElasticIpStatus
+    #   data as a hash:
+    #
+    #       {
+    #         elastic_ip: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] elastic_ip
+    #   The elastic IP address for the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the elastic IP address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterElasticIpStatus AWS API Documentation
+    #
+    class AwsRedshiftClusterElasticIpStatus < Struct.new(
+      :elastic_ip,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The connection endpoint for an Amazon Redshift cluster.
+    #
+    # @note When making an API call, you may pass AwsRedshiftClusterEndpoint
+    #   data as a hash:
+    #
+    #       {
+    #         address: "NonEmptyString",
+    #         port: 1,
+    #       }
+    #
+    # @!attribute [rw] address
+    #   The DNS address of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port that the database engine listens on.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterEndpoint AWS API Documentation
+    #
+    class AwsRedshiftClusterEndpoint < Struct.new(
+      :address,
+      :port)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about whether an Amazon Redshift cluster finished applying
+    # any hardware changes to security module (HSM) settings that were
+    # specified in a modify cluster command.
+    #
+    # @note When making an API call, you may pass AwsRedshiftClusterHsmStatus
+    #   data as a hash:
+    #
+    #       {
+    #         hsm_client_certificate_identifier: "NonEmptyString",
+    #         hsm_configuration_identifier: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] hsm_client_certificate_identifier
+    #   The name of the HSM client certificate that the Amazon Redshift
+    #   cluster uses to retrieve the data encryption keys that are stored in
+    #   an HSM.
+    #   @return [String]
+    #
+    # @!attribute [rw] hsm_configuration_identifier
+    #   The name of the HSM configuration that contains the information that
+    #   the Amazon Redshift cluster can use to retrieve and store keys in an
+    #   HSM.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates whether the Amazon Redshift cluster has finished applying
+    #   any HSM settings changes specified in a modify cluster command.
+    #
+    #   Type: String
+    #
+    #   Valid values: `active` \| `applying`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterHsmStatus AWS API Documentation
+    #
+    class AwsRedshiftClusterHsmStatus < Struct.new(
+      :hsm_client_certificate_identifier,
+      :hsm_configuration_identifier,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An IAM role that the cluster can use to access other AWS services.
+    #
+    # @note When making an API call, you may pass AwsRedshiftClusterIamRole
+    #   data as a hash:
+    #
+    #       {
+    #         apply_status: "NonEmptyString",
+    #         iam_role_arn: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] apply_status
+    #   The status of the IAM role's association with the cluster.
+    #
+    #   Valid values: `in-sync` \| `adding` \| `removing`
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The ARN of the IAM role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterIamRole AWS API Documentation
+    #
+    class AwsRedshiftClusterIamRole < Struct.new(
+      :apply_status,
+      :iam_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Changes to the Amazon Redshift cluster that are currently pending.
+    #
+    # @note When making an API call, you may pass AwsRedshiftClusterPendingModifiedValues
+    #   data as a hash:
+    #
+    #       {
+    #         automated_snapshot_retention_period: 1,
+    #         cluster_identifier: "NonEmptyString",
+    #         cluster_type: "NonEmptyString",
+    #         cluster_version: "NonEmptyString",
+    #         encryption_type: "NonEmptyString",
+    #         enhanced_vpc_routing: false,
+    #         maintenance_track_name: "NonEmptyString",
+    #         master_user_password: "NonEmptyString",
+    #         node_type: "NonEmptyString",
+    #         number_of_nodes: 1,
+    #         publicly_accessible: false,
+    #       }
+    #
+    # @!attribute [rw] automated_snapshot_retention_period
+    #   The pending or in-progress change to the automated snapshot
+    #   retention period.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The pending or in-progress change to the identifier for the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_type
+    #   The pending or in-progress change to the cluster type.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_version
+    #   The pending or in-progress change to the service version.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_type
+    #   The encryption type for a cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] enhanced_vpc_routing
+    #   Indicates whether to create the cluster with enhanced VPC routing
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] maintenance_track_name
+    #   The name of the maintenance track that the cluster changes to during
+    #   the next maintenance window.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_user_password
+    #   The pending or in-progress change to the master user password for
+    #   the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_type
+    #   The pending or in-progress change to the cluster's node type.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_nodes
+    #   The pending or in-progress change to the number of nodes in the
+    #   cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] publicly_accessible
+    #   The pending or in-progress change to whether the cluster can be
+    #   connected to from the public network.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterPendingModifiedValues AWS API Documentation
+    #
+    class AwsRedshiftClusterPendingModifiedValues < Struct.new(
+      :automated_snapshot_retention_period,
+      :cluster_identifier,
+      :cluster_type,
+      :cluster_version,
+      :encryption_type,
+      :enhanced_vpc_routing,
+      :maintenance_track_name,
+      :master_user_password,
+      :node_type,
+      :number_of_nodes,
+      :publicly_accessible)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the resize operation for the cluster.
+    #
+    # @note When making an API call, you may pass AwsRedshiftClusterResizeInfo
+    #   data as a hash:
+    #
+    #       {
+    #         allow_cancel_resize: false,
+    #         resize_type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] allow_cancel_resize
+    #   Indicates whether the resize operation can be canceled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] resize_type
+    #   The type of resize operation.
+    #
+    #   Valid values: `ClassicResize`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterResizeInfo AWS API Documentation
+    #
+    class AwsRedshiftClusterResizeInfo < Struct.new(
+      :allow_cancel_resize,
+      :resize_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the status of a cluster restore action. It only
+    # applies if the cluster was created by restoring a snapshot.
+    #
+    # @note When making an API call, you may pass AwsRedshiftClusterRestoreStatus
+    #   data as a hash:
+    #
+    #       {
+    #         current_restore_rate_in_mega_bytes_per_second: 1.0,
+    #         elapsed_time_in_seconds: 1,
+    #         estimated_time_to_completion_in_seconds: 1,
+    #         progress_in_mega_bytes: 1,
+    #         snapshot_size_in_mega_bytes: 1,
+    #         status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] current_restore_rate_in_mega_bytes_per_second
+    #   The number of megabytes per second being transferred from the backup
+    #   storage. Returns the average rate for a completed backup.
+    #
+    #   This field is only updated when you restore to DC2 and DS2 node
+    #   types.
+    #   @return [Float]
+    #
+    # @!attribute [rw] elapsed_time_in_seconds
+    #   The amount of time an in-progress restore has been running, or the
+    #   amount of time it took a completed restore to finish.
+    #
+    #   This field is only updated when you restore to DC2 and DS2 node
+    #   types.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] estimated_time_to_completion_in_seconds
+    #   The estimate of the time remaining before the restore is complete.
+    #   Returns 0 for a completed restore.
+    #
+    #   This field is only updated when you restore to DC2 and DS2 node
+    #   types.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] progress_in_mega_bytes
+    #   The number of megabytes that were transferred from snapshot storage.
+    #
+    #   This field is only updated when you restore to DC2 and DS2 node
+    #   types.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] snapshot_size_in_mega_bytes
+    #   The size of the set of snapshot data that was used to restore the
+    #   cluster.
+    #
+    #   This field is only updated when you restore to DC2 and DS2 node
+    #   types.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the restore action.
+    #
+    #   Valid values: `starting` \| `restoring` \| `completed` \| `failed`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterRestoreStatus AWS API Documentation
+    #
+    class AwsRedshiftClusterRestoreStatus < Struct.new(
+      :current_restore_rate_in_mega_bytes_per_second,
+      :elapsed_time_in_seconds,
+      :estimated_time_to_completion_in_seconds,
+      :progress_in_mega_bytes,
+      :snapshot_size_in_mega_bytes,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A VPC security group that the cluster belongs to, if the cluster is in
+    # a VPC.
+    #
+    # @note When making an API call, you may pass AwsRedshiftClusterVpcSecurityGroup
+    #   data as a hash:
+    #
+    #       {
+    #         status: "NonEmptyString",
+    #         vpc_security_group_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The status of the VPC security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_security_group_id
+    #   The identifier of the VPC security group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterVpcSecurityGroup AWS API Documentation
+    #
+    class AwsRedshiftClusterVpcSecurityGroup < Struct.new(
+      :status,
+      :vpc_security_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of an Amazon S3 bucket.
     #
     # @note When making an API call, you may pass AwsS3BucketDetails
@@ -5690,6 +9627,7 @@ module Aws::SecurityHub
     #             id: "NonEmptyString", # required
     #             partition: "aws", # accepts aws, aws-cn, aws-us-gov
     #             region: "NonEmptyString",
+    #             resource_role: "NonEmptyString",
     #             tags: {
     #               "NonEmptyString" => "NonEmptyString",
     #             },
@@ -5727,6 +9665,17 @@ module Aws::SecurityHub
     #                 },
     #               },
     #               aws_cloud_front_distribution: {
+    #                 cache_behaviors: {
+    #                   items: [
+    #                     {
+    #                       viewer_protocol_policy: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 default_cache_behavior: {
+    #                   viewer_protocol_policy: "NonEmptyString",
+    #                 },
+    #                 default_root_object: "NonEmptyString",
     #                 domain_name: "NonEmptyString",
     #                 etag: "NonEmptyString",
     #                 last_modified_time: "NonEmptyString",
@@ -5742,6 +9691,21 @@ module Aws::SecurityHub
     #                       domain_name: "NonEmptyString",
     #                       id: "NonEmptyString",
     #                       origin_path: "NonEmptyString",
+    #                       s3_origin_config: {
+    #                         origin_access_identity: "NonEmptyString",
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #                 origin_groups: {
+    #                   items: [
+    #                     {
+    #                       failover_criteria: {
+    #                         status_codes: {
+    #                           items: [1],
+    #                           quantity: 1,
+    #                         },
+    #                       },
     #                     },
     #                   ],
     #                 },
@@ -5983,6 +9947,21 @@ module Aws::SecurityHub
     #                 principal_id: "NonEmptyString",
     #                 principal_type: "NonEmptyString",
     #                 principal_name: "NonEmptyString",
+    #                 account_id: "NonEmptyString",
+    #                 access_key_id: "NonEmptyString",
+    #                 session_context: {
+    #                   attributes: {
+    #                     mfa_authenticated: false,
+    #                     creation_date: "NonEmptyString",
+    #                   },
+    #                   session_issuer: {
+    #                     type: "NonEmptyString",
+    #                     principal_id: "NonEmptyString",
+    #                     arn: "NonEmptyString",
+    #                     account_id: "NonEmptyString",
+    #                     user_name: "NonEmptyString",
+    #                   },
+    #                 },
     #               },
     #               aws_iam_user: {
     #                 attached_managed_policies: [
@@ -6024,6 +10003,56 @@ module Aws::SecurityHub
     #                   },
     #                 ],
     #                 update_date: "NonEmptyString",
+    #               },
+    #               aws_api_gateway_v2_stage: {
+    #                 created_date: "NonEmptyString",
+    #                 description: "NonEmptyString",
+    #                 default_route_settings: {
+    #                   detailed_metrics_enabled: false,
+    #                   logging_level: "NonEmptyString",
+    #                   data_trace_enabled: false,
+    #                   throttling_burst_limit: 1,
+    #                   throttling_rate_limit: 1.0,
+    #                 },
+    #                 deployment_id: "NonEmptyString",
+    #                 last_updated_date: "NonEmptyString",
+    #                 route_settings: {
+    #                   detailed_metrics_enabled: false,
+    #                   logging_level: "NonEmptyString",
+    #                   data_trace_enabled: false,
+    #                   throttling_burst_limit: 1,
+    #                   throttling_rate_limit: 1.0,
+    #                 },
+    #                 stage_name: "NonEmptyString",
+    #                 stage_variables: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 access_log_settings: {
+    #                   format: "NonEmptyString",
+    #                   destination_arn: "NonEmptyString",
+    #                 },
+    #                 auto_deploy: false,
+    #                 last_deployment_status_message: "NonEmptyString",
+    #                 api_gateway_managed: false,
+    #               },
+    #               aws_api_gateway_v2_api: {
+    #                 api_endpoint: "NonEmptyString",
+    #                 api_id: "NonEmptyString",
+    #                 api_key_selection_expression: "NonEmptyString",
+    #                 created_date: "NonEmptyString",
+    #                 description: "NonEmptyString",
+    #                 version: "NonEmptyString",
+    #                 name: "NonEmptyString",
+    #                 protocol_type: "NonEmptyString",
+    #                 route_selection_expression: "NonEmptyString",
+    #                 cors_configuration: {
+    #                   allow_origins: ["NonEmptyString"],
+    #                   allow_credentials: false,
+    #                   expose_headers: ["NonEmptyString"],
+    #                   max_age: 1,
+    #                   allow_methods: ["NonEmptyString"],
+    #                   allow_headers: ["NonEmptyString"],
+    #                 },
     #               },
     #               aws_dynamo_db_table: {
     #                 attribute_definitions: [
@@ -6137,11 +10166,404 @@ module Aws::SecurityHub
     #                 table_size_bytes: 1,
     #                 table_status: "NonEmptyString",
     #               },
+    #               aws_api_gateway_stage: {
+    #                 deployment_id: "NonEmptyString",
+    #                 client_certificate_id: "NonEmptyString",
+    #                 stage_name: "NonEmptyString",
+    #                 description: "NonEmptyString",
+    #                 cache_cluster_enabled: false,
+    #                 cache_cluster_size: "NonEmptyString",
+    #                 cache_cluster_status: "NonEmptyString",
+    #                 method_settings: [
+    #                   {
+    #                     metrics_enabled: false,
+    #                     logging_level: "NonEmptyString",
+    #                     data_trace_enabled: false,
+    #                     throttling_burst_limit: 1,
+    #                     throttling_rate_limit: 1.0,
+    #                     caching_enabled: false,
+    #                     cache_ttl_in_seconds: 1,
+    #                     cache_data_encrypted: false,
+    #                     require_authorization_for_cache_control: false,
+    #                     unauthorized_cache_control_header_strategy: "NonEmptyString",
+    #                     http_method: "NonEmptyString",
+    #                     resource_path: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 variables: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 documentation_version: "NonEmptyString",
+    #                 access_log_settings: {
+    #                   format: "NonEmptyString",
+    #                   destination_arn: "NonEmptyString",
+    #                 },
+    #                 canary_settings: {
+    #                   percent_traffic: 1.0,
+    #                   deployment_id: "NonEmptyString",
+    #                   stage_variable_overrides: {
+    #                     "NonEmptyString" => "NonEmptyString",
+    #                   },
+    #                   use_stage_cache: false,
+    #                 },
+    #                 tracing_enabled: false,
+    #                 created_date: "NonEmptyString",
+    #                 last_updated_date: "NonEmptyString",
+    #                 web_acl_arn: "NonEmptyString",
+    #               },
+    #               aws_api_gateway_rest_api: {
+    #                 id: "NonEmptyString",
+    #                 name: "NonEmptyString",
+    #                 description: "NonEmptyString",
+    #                 created_date: "NonEmptyString",
+    #                 version: "NonEmptyString",
+    #                 binary_media_types: ["NonEmptyString"],
+    #                 minimum_compression_size: 1,
+    #                 api_key_source: "NonEmptyString",
+    #                 endpoint_configuration: {
+    #                   types: ["NonEmptyString"],
+    #                 },
+    #               },
+    #               aws_cloud_trail_trail: {
+    #                 cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                 cloud_watch_logs_role_arn: "NonEmptyString",
+    #                 has_custom_event_selectors: false,
+    #                 home_region: "NonEmptyString",
+    #                 include_global_service_events: false,
+    #                 is_multi_region_trail: false,
+    #                 is_organization_trail: false,
+    #                 kms_key_id: "NonEmptyString",
+    #                 log_file_validation_enabled: false,
+    #                 name: "NonEmptyString",
+    #                 s3_bucket_name: "NonEmptyString",
+    #                 s3_key_prefix: "NonEmptyString",
+    #                 sns_topic_arn: "NonEmptyString",
+    #                 sns_topic_name: "NonEmptyString",
+    #                 trail_arn: "NonEmptyString",
+    #               },
+    #               aws_certificate_manager_certificate: {
+    #                 certificate_authority_arn: "NonEmptyString",
+    #                 created_at: "NonEmptyString",
+    #                 domain_name: "NonEmptyString",
+    #                 domain_validation_options: [
+    #                   {
+    #                     domain_name: "NonEmptyString",
+    #                     resource_record: {
+    #                       name: "NonEmptyString",
+    #                       type: "NonEmptyString",
+    #                       value: "NonEmptyString",
+    #                     },
+    #                     validation_domain: "NonEmptyString",
+    #                     validation_emails: ["NonEmptyString"],
+    #                     validation_method: "NonEmptyString",
+    #                     validation_status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 extended_key_usages: [
+    #                   {
+    #                     name: "NonEmptyString",
+    #                     o_id: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 failure_reason: "NonEmptyString",
+    #                 imported_at: "NonEmptyString",
+    #                 in_use_by: ["NonEmptyString"],
+    #                 issued_at: "NonEmptyString",
+    #                 issuer: "NonEmptyString",
+    #                 key_algorithm: "NonEmptyString",
+    #                 key_usages: [
+    #                   {
+    #                     name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 not_after: "NonEmptyString",
+    #                 not_before: "NonEmptyString",
+    #                 options: {
+    #                   certificate_transparency_logging_preference: "NonEmptyString",
+    #                 },
+    #                 renewal_eligibility: "NonEmptyString",
+    #                 renewal_summary: {
+    #                   domain_validation_options: [
+    #                     {
+    #                       domain_name: "NonEmptyString",
+    #                       resource_record: {
+    #                         name: "NonEmptyString",
+    #                         type: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                       validation_domain: "NonEmptyString",
+    #                       validation_emails: ["NonEmptyString"],
+    #                       validation_method: "NonEmptyString",
+    #                       validation_status: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   renewal_status: "NonEmptyString",
+    #                   renewal_status_reason: "NonEmptyString",
+    #                   updated_at: "NonEmptyString",
+    #                 },
+    #                 serial: "NonEmptyString",
+    #                 signature_algorithm: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 subject: "NonEmptyString",
+    #                 subject_alternative_names: ["NonEmptyString"],
+    #                 type: "NonEmptyString",
+    #               },
+    #               aws_redshift_cluster: {
+    #                 allow_version_upgrade: false,
+    #                 automated_snapshot_retention_period: 1,
+    #                 availability_zone: "NonEmptyString",
+    #                 cluster_availability_status: "NonEmptyString",
+    #                 cluster_create_time: "NonEmptyString",
+    #                 cluster_identifier: "NonEmptyString",
+    #                 cluster_nodes: [
+    #                   {
+    #                     node_role: "NonEmptyString",
+    #                     private_ip_address: "NonEmptyString",
+    #                     public_ip_address: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 cluster_parameter_groups: [
+    #                   {
+    #                     cluster_parameter_status_list: [
+    #                       {
+    #                         parameter_name: "NonEmptyString",
+    #                         parameter_apply_status: "NonEmptyString",
+    #                         parameter_apply_error_description: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     parameter_apply_status: "NonEmptyString",
+    #                     parameter_group_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 cluster_public_key: "NonEmptyString",
+    #                 cluster_revision_number: "NonEmptyString",
+    #                 cluster_security_groups: [
+    #                   {
+    #                     cluster_security_group_name: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 cluster_snapshot_copy_status: {
+    #                   destination_region: "NonEmptyString",
+    #                   manual_snapshot_retention_period: 1,
+    #                   retention_period: 1,
+    #                   snapshot_copy_grant_name: "NonEmptyString",
+    #                 },
+    #                 cluster_status: "NonEmptyString",
+    #                 cluster_subnet_group_name: "NonEmptyString",
+    #                 cluster_version: "NonEmptyString",
+    #                 db_name: "NonEmptyString",
+    #                 deferred_maintenance_windows: [
+    #                   {
+    #                     defer_maintenance_end_time: "NonEmptyString",
+    #                     defer_maintenance_identifier: "NonEmptyString",
+    #                     defer_maintenance_start_time: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 elastic_ip_status: {
+    #                   elastic_ip: "NonEmptyString",
+    #                   status: "NonEmptyString",
+    #                 },
+    #                 elastic_resize_number_of_node_options: "NonEmptyString",
+    #                 encrypted: false,
+    #                 endpoint: {
+    #                   address: "NonEmptyString",
+    #                   port: 1,
+    #                 },
+    #                 enhanced_vpc_routing: false,
+    #                 expected_next_snapshot_schedule_time: "NonEmptyString",
+    #                 expected_next_snapshot_schedule_time_status: "NonEmptyString",
+    #                 hsm_status: {
+    #                   hsm_client_certificate_identifier: "NonEmptyString",
+    #                   hsm_configuration_identifier: "NonEmptyString",
+    #                   status: "NonEmptyString",
+    #                 },
+    #                 iam_roles: [
+    #                   {
+    #                     apply_status: "NonEmptyString",
+    #                     iam_role_arn: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 kms_key_id: "NonEmptyString",
+    #                 maintenance_track_name: "NonEmptyString",
+    #                 manual_snapshot_retention_period: 1,
+    #                 master_username: "NonEmptyString",
+    #                 next_maintenance_window_start_time: "NonEmptyString",
+    #                 node_type: "NonEmptyString",
+    #                 number_of_nodes: 1,
+    #                 pending_actions: ["NonEmptyString"],
+    #                 pending_modified_values: {
+    #                   automated_snapshot_retention_period: 1,
+    #                   cluster_identifier: "NonEmptyString",
+    #                   cluster_type: "NonEmptyString",
+    #                   cluster_version: "NonEmptyString",
+    #                   encryption_type: "NonEmptyString",
+    #                   enhanced_vpc_routing: false,
+    #                   maintenance_track_name: "NonEmptyString",
+    #                   master_user_password: "NonEmptyString",
+    #                   node_type: "NonEmptyString",
+    #                   number_of_nodes: 1,
+    #                   publicly_accessible: false,
+    #                 },
+    #                 preferred_maintenance_window: "NonEmptyString",
+    #                 publicly_accessible: false,
+    #                 resize_info: {
+    #                   allow_cancel_resize: false,
+    #                   resize_type: "NonEmptyString",
+    #                 },
+    #                 restore_status: {
+    #                   current_restore_rate_in_mega_bytes_per_second: 1.0,
+    #                   elapsed_time_in_seconds: 1,
+    #                   estimated_time_to_completion_in_seconds: 1,
+    #                   progress_in_mega_bytes: 1,
+    #                   snapshot_size_in_mega_bytes: 1,
+    #                   status: "NonEmptyString",
+    #                 },
+    #                 snapshot_schedule_identifier: "NonEmptyString",
+    #                 snapshot_schedule_state: "NonEmptyString",
+    #                 vpc_id: "NonEmptyString",
+    #                 vpc_security_groups: [
+    #                   {
+    #                     status: "NonEmptyString",
+    #                     vpc_security_group_id: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #               aws_elb_load_balancer: {
+    #                 availability_zones: ["NonEmptyString"],
+    #                 backend_server_descriptions: [
+    #                   {
+    #                     instance_port: 1,
+    #                     policy_names: ["NonEmptyString"],
+    #                   },
+    #                 ],
+    #                 canonical_hosted_zone_name: "NonEmptyString",
+    #                 canonical_hosted_zone_name_id: "NonEmptyString",
+    #                 created_time: "NonEmptyString",
+    #                 dns_name: "NonEmptyString",
+    #                 health_check: {
+    #                   healthy_threshold: 1,
+    #                   interval: 1,
+    #                   target: "NonEmptyString",
+    #                   timeout: 1,
+    #                   unhealthy_threshold: 1,
+    #                 },
+    #                 instances: [
+    #                   {
+    #                     instance_id: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 listener_descriptions: [
+    #                   {
+    #                     listener: {
+    #                       instance_port: 1,
+    #                       instance_protocol: "NonEmptyString",
+    #                       load_balancer_port: 1,
+    #                       protocol: "NonEmptyString",
+    #                       ssl_certificate_id: "NonEmptyString",
+    #                     },
+    #                     policy_names: ["NonEmptyString"],
+    #                   },
+    #                 ],
+    #                 load_balancer_attributes: {
+    #                   access_log: {
+    #                     emit_interval: 1,
+    #                     enabled: false,
+    #                     s3_bucket_name: "NonEmptyString",
+    #                     s3_bucket_prefix: "NonEmptyString",
+    #                   },
+    #                   connection_draining: {
+    #                     enabled: false,
+    #                     timeout: 1,
+    #                   },
+    #                   connection_settings: {
+    #                     idle_timeout: 1,
+    #                   },
+    #                   cross_zone_load_balancing: {
+    #                     enabled: false,
+    #                   },
+    #                 },
+    #                 load_balancer_name: "NonEmptyString",
+    #                 policies: {
+    #                   app_cookie_stickiness_policies: [
+    #                     {
+    #                       cookie_name: "NonEmptyString",
+    #                       policy_name: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   lb_cookie_stickiness_policies: [
+    #                     {
+    #                       cookie_expiration_period: 1,
+    #                       policy_name: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   other_policies: ["NonEmptyString"],
+    #                 },
+    #                 scheme: "NonEmptyString",
+    #                 security_groups: ["NonEmptyString"],
+    #                 source_security_group: {
+    #                   group_name: "NonEmptyString",
+    #                   owner_alias: "NonEmptyString",
+    #                 },
+    #                 subnets: ["NonEmptyString"],
+    #                 vpc_id: "NonEmptyString",
+    #               },
+    #               aws_iam_group: {
+    #                 attached_managed_policies: [
+    #                   {
+    #                     policy_name: "NonEmptyString",
+    #                     policy_arn: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 create_date: "NonEmptyString",
+    #                 group_id: "NonEmptyString",
+    #                 group_name: "NonEmptyString",
+    #                 group_policy_list: [
+    #                   {
+    #                     policy_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 path: "NonEmptyString",
+    #               },
     #               aws_iam_role: {
     #                 assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #                 attached_managed_policies: [
+    #                   {
+    #                     policy_name: "NonEmptyString",
+    #                     policy_arn: "NonEmptyString",
+    #                   },
+    #                 ],
     #                 create_date: "NonEmptyString",
+    #                 instance_profile_list: [
+    #                   {
+    #                     arn: "NonEmptyString",
+    #                     create_date: "NonEmptyString",
+    #                     instance_profile_id: "NonEmptyString",
+    #                     instance_profile_name: "NonEmptyString",
+    #                     path: "NonEmptyString",
+    #                     roles: [
+    #                       {
+    #                         arn: "NonEmptyString",
+    #                         assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #                         create_date: "NonEmptyString",
+    #                         path: "NonEmptyString",
+    #                         role_id: "NonEmptyString",
+    #                         role_name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 permissions_boundary: {
+    #                   permissions_boundary_arn: "NonEmptyString",
+    #                   permissions_boundary_type: "NonEmptyString",
+    #                 },
     #                 role_id: "NonEmptyString",
     #                 role_name: "NonEmptyString",
+    #                 role_policy_list: [
+    #                   {
+    #                     policy_name: "NonEmptyString",
+    #                   },
+    #                 ],
     #                 max_session_duration: 1,
     #                 path: "NonEmptyString",
     #               },
@@ -6854,6 +11276,9 @@ module Aws::SecurityHub
     # A collection of attributes that are applied to all active Security
     # Hub-aggregated findings and that result in a subset of findings that
     # are included in this insight.
+    #
+    # You can filter by up to 10 finding attributes. For each attribute, you
+    # can provide up to 20 filter values.
     #
     # @note When making an API call, you may pass AwsSecurityFindingFilters
     #   data as a hash:
@@ -8398,6 +12823,7 @@ module Aws::SecurityHub
     #                 id: "NonEmptyString", # required
     #                 partition: "aws", # accepts aws, aws-cn, aws-us-gov
     #                 region: "NonEmptyString",
+    #                 resource_role: "NonEmptyString",
     #                 tags: {
     #                   "NonEmptyString" => "NonEmptyString",
     #                 },
@@ -8435,6 +12861,17 @@ module Aws::SecurityHub
     #                     },
     #                   },
     #                   aws_cloud_front_distribution: {
+    #                     cache_behaviors: {
+    #                       items: [
+    #                         {
+    #                           viewer_protocol_policy: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                     },
+    #                     default_cache_behavior: {
+    #                       viewer_protocol_policy: "NonEmptyString",
+    #                     },
+    #                     default_root_object: "NonEmptyString",
     #                     domain_name: "NonEmptyString",
     #                     etag: "NonEmptyString",
     #                     last_modified_time: "NonEmptyString",
@@ -8450,6 +12887,21 @@ module Aws::SecurityHub
     #                           domain_name: "NonEmptyString",
     #                           id: "NonEmptyString",
     #                           origin_path: "NonEmptyString",
+    #                           s3_origin_config: {
+    #                             origin_access_identity: "NonEmptyString",
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                     origin_groups: {
+    #                       items: [
+    #                         {
+    #                           failover_criteria: {
+    #                             status_codes: {
+    #                               items: [1],
+    #                               quantity: 1,
+    #                             },
+    #                           },
     #                         },
     #                       ],
     #                     },
@@ -8691,6 +13143,21 @@ module Aws::SecurityHub
     #                     principal_id: "NonEmptyString",
     #                     principal_type: "NonEmptyString",
     #                     principal_name: "NonEmptyString",
+    #                     account_id: "NonEmptyString",
+    #                     access_key_id: "NonEmptyString",
+    #                     session_context: {
+    #                       attributes: {
+    #                         mfa_authenticated: false,
+    #                         creation_date: "NonEmptyString",
+    #                       },
+    #                       session_issuer: {
+    #                         type: "NonEmptyString",
+    #                         principal_id: "NonEmptyString",
+    #                         arn: "NonEmptyString",
+    #                         account_id: "NonEmptyString",
+    #                         user_name: "NonEmptyString",
+    #                       },
+    #                     },
     #                   },
     #                   aws_iam_user: {
     #                     attached_managed_policies: [
@@ -8732,6 +13199,56 @@ module Aws::SecurityHub
     #                       },
     #                     ],
     #                     update_date: "NonEmptyString",
+    #                   },
+    #                   aws_api_gateway_v2_stage: {
+    #                     created_date: "NonEmptyString",
+    #                     description: "NonEmptyString",
+    #                     default_route_settings: {
+    #                       detailed_metrics_enabled: false,
+    #                       logging_level: "NonEmptyString",
+    #                       data_trace_enabled: false,
+    #                       throttling_burst_limit: 1,
+    #                       throttling_rate_limit: 1.0,
+    #                     },
+    #                     deployment_id: "NonEmptyString",
+    #                     last_updated_date: "NonEmptyString",
+    #                     route_settings: {
+    #                       detailed_metrics_enabled: false,
+    #                       logging_level: "NonEmptyString",
+    #                       data_trace_enabled: false,
+    #                       throttling_burst_limit: 1,
+    #                       throttling_rate_limit: 1.0,
+    #                     },
+    #                     stage_name: "NonEmptyString",
+    #                     stage_variables: {
+    #                       "NonEmptyString" => "NonEmptyString",
+    #                     },
+    #                     access_log_settings: {
+    #                       format: "NonEmptyString",
+    #                       destination_arn: "NonEmptyString",
+    #                     },
+    #                     auto_deploy: false,
+    #                     last_deployment_status_message: "NonEmptyString",
+    #                     api_gateway_managed: false,
+    #                   },
+    #                   aws_api_gateway_v2_api: {
+    #                     api_endpoint: "NonEmptyString",
+    #                     api_id: "NonEmptyString",
+    #                     api_key_selection_expression: "NonEmptyString",
+    #                     created_date: "NonEmptyString",
+    #                     description: "NonEmptyString",
+    #                     version: "NonEmptyString",
+    #                     name: "NonEmptyString",
+    #                     protocol_type: "NonEmptyString",
+    #                     route_selection_expression: "NonEmptyString",
+    #                     cors_configuration: {
+    #                       allow_origins: ["NonEmptyString"],
+    #                       allow_credentials: false,
+    #                       expose_headers: ["NonEmptyString"],
+    #                       max_age: 1,
+    #                       allow_methods: ["NonEmptyString"],
+    #                       allow_headers: ["NonEmptyString"],
+    #                     },
     #                   },
     #                   aws_dynamo_db_table: {
     #                     attribute_definitions: [
@@ -8845,11 +13362,404 @@ module Aws::SecurityHub
     #                     table_size_bytes: 1,
     #                     table_status: "NonEmptyString",
     #                   },
+    #                   aws_api_gateway_stage: {
+    #                     deployment_id: "NonEmptyString",
+    #                     client_certificate_id: "NonEmptyString",
+    #                     stage_name: "NonEmptyString",
+    #                     description: "NonEmptyString",
+    #                     cache_cluster_enabled: false,
+    #                     cache_cluster_size: "NonEmptyString",
+    #                     cache_cluster_status: "NonEmptyString",
+    #                     method_settings: [
+    #                       {
+    #                         metrics_enabled: false,
+    #                         logging_level: "NonEmptyString",
+    #                         data_trace_enabled: false,
+    #                         throttling_burst_limit: 1,
+    #                         throttling_rate_limit: 1.0,
+    #                         caching_enabled: false,
+    #                         cache_ttl_in_seconds: 1,
+    #                         cache_data_encrypted: false,
+    #                         require_authorization_for_cache_control: false,
+    #                         unauthorized_cache_control_header_strategy: "NonEmptyString",
+    #                         http_method: "NonEmptyString",
+    #                         resource_path: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     variables: {
+    #                       "NonEmptyString" => "NonEmptyString",
+    #                     },
+    #                     documentation_version: "NonEmptyString",
+    #                     access_log_settings: {
+    #                       format: "NonEmptyString",
+    #                       destination_arn: "NonEmptyString",
+    #                     },
+    #                     canary_settings: {
+    #                       percent_traffic: 1.0,
+    #                       deployment_id: "NonEmptyString",
+    #                       stage_variable_overrides: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       use_stage_cache: false,
+    #                     },
+    #                     tracing_enabled: false,
+    #                     created_date: "NonEmptyString",
+    #                     last_updated_date: "NonEmptyString",
+    #                     web_acl_arn: "NonEmptyString",
+    #                   },
+    #                   aws_api_gateway_rest_api: {
+    #                     id: "NonEmptyString",
+    #                     name: "NonEmptyString",
+    #                     description: "NonEmptyString",
+    #                     created_date: "NonEmptyString",
+    #                     version: "NonEmptyString",
+    #                     binary_media_types: ["NonEmptyString"],
+    #                     minimum_compression_size: 1,
+    #                     api_key_source: "NonEmptyString",
+    #                     endpoint_configuration: {
+    #                       types: ["NonEmptyString"],
+    #                     },
+    #                   },
+    #                   aws_cloud_trail_trail: {
+    #                     cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                     cloud_watch_logs_role_arn: "NonEmptyString",
+    #                     has_custom_event_selectors: false,
+    #                     home_region: "NonEmptyString",
+    #                     include_global_service_events: false,
+    #                     is_multi_region_trail: false,
+    #                     is_organization_trail: false,
+    #                     kms_key_id: "NonEmptyString",
+    #                     log_file_validation_enabled: false,
+    #                     name: "NonEmptyString",
+    #                     s3_bucket_name: "NonEmptyString",
+    #                     s3_key_prefix: "NonEmptyString",
+    #                     sns_topic_arn: "NonEmptyString",
+    #                     sns_topic_name: "NonEmptyString",
+    #                     trail_arn: "NonEmptyString",
+    #                   },
+    #                   aws_certificate_manager_certificate: {
+    #                     certificate_authority_arn: "NonEmptyString",
+    #                     created_at: "NonEmptyString",
+    #                     domain_name: "NonEmptyString",
+    #                     domain_validation_options: [
+    #                       {
+    #                         domain_name: "NonEmptyString",
+    #                         resource_record: {
+    #                           name: "NonEmptyString",
+    #                           type: "NonEmptyString",
+    #                           value: "NonEmptyString",
+    #                         },
+    #                         validation_domain: "NonEmptyString",
+    #                         validation_emails: ["NonEmptyString"],
+    #                         validation_method: "NonEmptyString",
+    #                         validation_status: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     extended_key_usages: [
+    #                       {
+    #                         name: "NonEmptyString",
+    #                         o_id: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     failure_reason: "NonEmptyString",
+    #                     imported_at: "NonEmptyString",
+    #                     in_use_by: ["NonEmptyString"],
+    #                     issued_at: "NonEmptyString",
+    #                     issuer: "NonEmptyString",
+    #                     key_algorithm: "NonEmptyString",
+    #                     key_usages: [
+    #                       {
+    #                         name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     not_after: "NonEmptyString",
+    #                     not_before: "NonEmptyString",
+    #                     options: {
+    #                       certificate_transparency_logging_preference: "NonEmptyString",
+    #                     },
+    #                     renewal_eligibility: "NonEmptyString",
+    #                     renewal_summary: {
+    #                       domain_validation_options: [
+    #                         {
+    #                           domain_name: "NonEmptyString",
+    #                           resource_record: {
+    #                             name: "NonEmptyString",
+    #                             type: "NonEmptyString",
+    #                             value: "NonEmptyString",
+    #                           },
+    #                           validation_domain: "NonEmptyString",
+    #                           validation_emails: ["NonEmptyString"],
+    #                           validation_method: "NonEmptyString",
+    #                           validation_status: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       renewal_status: "NonEmptyString",
+    #                       renewal_status_reason: "NonEmptyString",
+    #                       updated_at: "NonEmptyString",
+    #                     },
+    #                     serial: "NonEmptyString",
+    #                     signature_algorithm: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                     subject: "NonEmptyString",
+    #                     subject_alternative_names: ["NonEmptyString"],
+    #                     type: "NonEmptyString",
+    #                   },
+    #                   aws_redshift_cluster: {
+    #                     allow_version_upgrade: false,
+    #                     automated_snapshot_retention_period: 1,
+    #                     availability_zone: "NonEmptyString",
+    #                     cluster_availability_status: "NonEmptyString",
+    #                     cluster_create_time: "NonEmptyString",
+    #                     cluster_identifier: "NonEmptyString",
+    #                     cluster_nodes: [
+    #                       {
+    #                         node_role: "NonEmptyString",
+    #                         private_ip_address: "NonEmptyString",
+    #                         public_ip_address: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     cluster_parameter_groups: [
+    #                       {
+    #                         cluster_parameter_status_list: [
+    #                           {
+    #                             parameter_name: "NonEmptyString",
+    #                             parameter_apply_status: "NonEmptyString",
+    #                             parameter_apply_error_description: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         parameter_apply_status: "NonEmptyString",
+    #                         parameter_group_name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     cluster_public_key: "NonEmptyString",
+    #                     cluster_revision_number: "NonEmptyString",
+    #                     cluster_security_groups: [
+    #                       {
+    #                         cluster_security_group_name: "NonEmptyString",
+    #                         status: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     cluster_snapshot_copy_status: {
+    #                       destination_region: "NonEmptyString",
+    #                       manual_snapshot_retention_period: 1,
+    #                       retention_period: 1,
+    #                       snapshot_copy_grant_name: "NonEmptyString",
+    #                     },
+    #                     cluster_status: "NonEmptyString",
+    #                     cluster_subnet_group_name: "NonEmptyString",
+    #                     cluster_version: "NonEmptyString",
+    #                     db_name: "NonEmptyString",
+    #                     deferred_maintenance_windows: [
+    #                       {
+    #                         defer_maintenance_end_time: "NonEmptyString",
+    #                         defer_maintenance_identifier: "NonEmptyString",
+    #                         defer_maintenance_start_time: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     elastic_ip_status: {
+    #                       elastic_ip: "NonEmptyString",
+    #                       status: "NonEmptyString",
+    #                     },
+    #                     elastic_resize_number_of_node_options: "NonEmptyString",
+    #                     encrypted: false,
+    #                     endpoint: {
+    #                       address: "NonEmptyString",
+    #                       port: 1,
+    #                     },
+    #                     enhanced_vpc_routing: false,
+    #                     expected_next_snapshot_schedule_time: "NonEmptyString",
+    #                     expected_next_snapshot_schedule_time_status: "NonEmptyString",
+    #                     hsm_status: {
+    #                       hsm_client_certificate_identifier: "NonEmptyString",
+    #                       hsm_configuration_identifier: "NonEmptyString",
+    #                       status: "NonEmptyString",
+    #                     },
+    #                     iam_roles: [
+    #                       {
+    #                         apply_status: "NonEmptyString",
+    #                         iam_role_arn: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     kms_key_id: "NonEmptyString",
+    #                     maintenance_track_name: "NonEmptyString",
+    #                     manual_snapshot_retention_period: 1,
+    #                     master_username: "NonEmptyString",
+    #                     next_maintenance_window_start_time: "NonEmptyString",
+    #                     node_type: "NonEmptyString",
+    #                     number_of_nodes: 1,
+    #                     pending_actions: ["NonEmptyString"],
+    #                     pending_modified_values: {
+    #                       automated_snapshot_retention_period: 1,
+    #                       cluster_identifier: "NonEmptyString",
+    #                       cluster_type: "NonEmptyString",
+    #                       cluster_version: "NonEmptyString",
+    #                       encryption_type: "NonEmptyString",
+    #                       enhanced_vpc_routing: false,
+    #                       maintenance_track_name: "NonEmptyString",
+    #                       master_user_password: "NonEmptyString",
+    #                       node_type: "NonEmptyString",
+    #                       number_of_nodes: 1,
+    #                       publicly_accessible: false,
+    #                     },
+    #                     preferred_maintenance_window: "NonEmptyString",
+    #                     publicly_accessible: false,
+    #                     resize_info: {
+    #                       allow_cancel_resize: false,
+    #                       resize_type: "NonEmptyString",
+    #                     },
+    #                     restore_status: {
+    #                       current_restore_rate_in_mega_bytes_per_second: 1.0,
+    #                       elapsed_time_in_seconds: 1,
+    #                       estimated_time_to_completion_in_seconds: 1,
+    #                       progress_in_mega_bytes: 1,
+    #                       snapshot_size_in_mega_bytes: 1,
+    #                       status: "NonEmptyString",
+    #                     },
+    #                     snapshot_schedule_identifier: "NonEmptyString",
+    #                     snapshot_schedule_state: "NonEmptyString",
+    #                     vpc_id: "NonEmptyString",
+    #                     vpc_security_groups: [
+    #                       {
+    #                         status: "NonEmptyString",
+    #                         vpc_security_group_id: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
+    #                   aws_elb_load_balancer: {
+    #                     availability_zones: ["NonEmptyString"],
+    #                     backend_server_descriptions: [
+    #                       {
+    #                         instance_port: 1,
+    #                         policy_names: ["NonEmptyString"],
+    #                       },
+    #                     ],
+    #                     canonical_hosted_zone_name: "NonEmptyString",
+    #                     canonical_hosted_zone_name_id: "NonEmptyString",
+    #                     created_time: "NonEmptyString",
+    #                     dns_name: "NonEmptyString",
+    #                     health_check: {
+    #                       healthy_threshold: 1,
+    #                       interval: 1,
+    #                       target: "NonEmptyString",
+    #                       timeout: 1,
+    #                       unhealthy_threshold: 1,
+    #                     },
+    #                     instances: [
+    #                       {
+    #                         instance_id: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     listener_descriptions: [
+    #                       {
+    #                         listener: {
+    #                           instance_port: 1,
+    #                           instance_protocol: "NonEmptyString",
+    #                           load_balancer_port: 1,
+    #                           protocol: "NonEmptyString",
+    #                           ssl_certificate_id: "NonEmptyString",
+    #                         },
+    #                         policy_names: ["NonEmptyString"],
+    #                       },
+    #                     ],
+    #                     load_balancer_attributes: {
+    #                       access_log: {
+    #                         emit_interval: 1,
+    #                         enabled: false,
+    #                         s3_bucket_name: "NonEmptyString",
+    #                         s3_bucket_prefix: "NonEmptyString",
+    #                       },
+    #                       connection_draining: {
+    #                         enabled: false,
+    #                         timeout: 1,
+    #                       },
+    #                       connection_settings: {
+    #                         idle_timeout: 1,
+    #                       },
+    #                       cross_zone_load_balancing: {
+    #                         enabled: false,
+    #                       },
+    #                     },
+    #                     load_balancer_name: "NonEmptyString",
+    #                     policies: {
+    #                       app_cookie_stickiness_policies: [
+    #                         {
+    #                           cookie_name: "NonEmptyString",
+    #                           policy_name: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       lb_cookie_stickiness_policies: [
+    #                         {
+    #                           cookie_expiration_period: 1,
+    #                           policy_name: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       other_policies: ["NonEmptyString"],
+    #                     },
+    #                     scheme: "NonEmptyString",
+    #                     security_groups: ["NonEmptyString"],
+    #                     source_security_group: {
+    #                       group_name: "NonEmptyString",
+    #                       owner_alias: "NonEmptyString",
+    #                     },
+    #                     subnets: ["NonEmptyString"],
+    #                     vpc_id: "NonEmptyString",
+    #                   },
+    #                   aws_iam_group: {
+    #                     attached_managed_policies: [
+    #                       {
+    #                         policy_name: "NonEmptyString",
+    #                         policy_arn: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     create_date: "NonEmptyString",
+    #                     group_id: "NonEmptyString",
+    #                     group_name: "NonEmptyString",
+    #                     group_policy_list: [
+    #                       {
+    #                         policy_name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     path: "NonEmptyString",
+    #                   },
     #                   aws_iam_role: {
     #                     assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #                     attached_managed_policies: [
+    #                       {
+    #                         policy_name: "NonEmptyString",
+    #                         policy_arn: "NonEmptyString",
+    #                       },
+    #                     ],
     #                     create_date: "NonEmptyString",
+    #                     instance_profile_list: [
+    #                       {
+    #                         arn: "NonEmptyString",
+    #                         create_date: "NonEmptyString",
+    #                         instance_profile_id: "NonEmptyString",
+    #                         instance_profile_name: "NonEmptyString",
+    #                         path: "NonEmptyString",
+    #                         roles: [
+    #                           {
+    #                             arn: "NonEmptyString",
+    #                             assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #                             create_date: "NonEmptyString",
+    #                             path: "NonEmptyString",
+    #                             role_id: "NonEmptyString",
+    #                             role_name: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     permissions_boundary: {
+    #                       permissions_boundary_arn: "NonEmptyString",
+    #                       permissions_boundary_type: "NonEmptyString",
+    #                     },
     #                     role_id: "NonEmptyString",
     #                     role_name: "NonEmptyString",
+    #                     role_policy_list: [
+    #                       {
+    #                         policy_name: "NonEmptyString",
+    #                       },
+    #                     ],
     #                     max_session_duration: 1,
     #                     path: "NonEmptyString",
     #                   },
@@ -10320,9 +15230,9 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         account_details: [
+    #         account_details: [ # required
     #           {
-    #             account_id: "AccountId",
+    #             account_id: "AccountId", # required
     #             email: "NonEmptyString",
     #           },
     #         ],
@@ -10330,8 +15240,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] account_details
     #   The list of accounts to associate with the Security Hub master
-    #   account. For each account, the list includes the account ID and the
-    #   email address.
+    #   account. For each account, the list includes the account ID and
+    #   optionally the email address.
     #   @return [Array<Types::AccountDetails>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateMembersRequest AWS API Documentation
@@ -10583,7 +15493,7 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["NonEmptyString"],
+    #         account_ids: ["NonEmptyString"], # required
     #       }
     #
     # @!attribute [rw] account_ids
@@ -10714,6 +15624,34 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeOrganizationConfigurationRequest AWS API Documentation
+    #
+    class DescribeOrganizationConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] auto_enable
+    #   Whether to automatically enable Security Hub for new accounts in the
+    #   organization.
+    #
+    #   If set to `true`, then Security Hub is enabled for new accounts. If
+    #   set to false, then new accounts are not added automatically.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] member_account_limit_reached
+    #   Whether the maximum number of allowed member accounts are already
+    #   associated with the Security Hub administrator account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeOrganizationConfigurationResponse AWS API Documentation
+    #
+    class DescribeOrganizationConfigurationResponse < Struct.new(
+      :auto_enable,
+      :member_account_limit_reached)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeProductsRequest
     #   data as a hash:
     #
@@ -10773,7 +15711,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] standards_subscription_arn
     #   The ARN of a resource that represents your subscription to a
-    #   supported standard.
+    #   supported standard. To get the subscription ARNs of the standards
+    #   you have enabled, use the ` GetEnabledStandards ` operation.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -10888,6 +15827,30 @@ module Aws::SecurityHub
     #
     class DisableImportFindingsForProductResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DisableOrganizationAdminAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         admin_account_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] admin_account_id
+    #   The AWS account identifier of the Security Hub administrator
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableOrganizationAdminAccountRequest AWS API Documentation
+    #
+    class DisableOrganizationAdminAccountRequest < Struct.new(
+      :admin_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableOrganizationAdminAccountResponse AWS API Documentation
+    #
+    class DisableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableSecurityHubRequest AWS API Documentation
@@ -10912,7 +15875,7 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["NonEmptyString"],
+    #         account_ids: ["NonEmptyString"], # required
     #       }
     #
     # @!attribute [rw] account_ids
@@ -10963,6 +15926,30 @@ module Aws::SecurityHub
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass EnableOrganizationAdminAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         admin_account_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] admin_account_id
+    #   The AWS account identifier of the account to designate as the
+    #   Security Hub administrator account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableOrganizationAdminAccountRequest AWS API Documentation
+    #
+    class EnableOrganizationAdminAccountRequest < Struct.new(
+      :admin_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableOrganizationAdminAccountResponse AWS API Documentation
+    #
+    class EnableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass EnableSecurityHubRequest
     #   data as a hash:
@@ -11628,6 +16615,9 @@ module Aws::SecurityHub
     #   The finding attributes used to define a condition to filter the
     #   returned findings.
     #
+    #   You can filter by up to 10 finding attributes. For each attribute,
+    #   you can provide up to 20 filter values.
+    #
     #   Note that in the available filter fields, `WorkflowState` is
     #   deprecated. To search for a finding based on its workflow status,
     #   use `WorkflowStatus`.
@@ -11968,8 +16958,9 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # AWS Security Hub isn't enabled for the account used to make this
-    # request.
+    # There is an issue with the account used to make the request. Either
+    # Security Hub is not enabled for the account, or the account does not
+    # have permission to perform this action.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -12039,7 +17030,7 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
-    #         account_ids: ["NonEmptyString"],
+    #         account_ids: ["NonEmptyString"], # required
     #       }
     #
     # @!attribute [rw] account_ids
@@ -12144,8 +17135,8 @@ module Aws::SecurityHub
     end
 
     # The request was rejected because it attempted to create resources
-    # beyond the current AWS account limits. The error code describes the
-    # limit exceeded.
+    # beyond the current AWS account or throttling limits. The error code
+    # describes the limit exceeded.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -12275,7 +17266,7 @@ module Aws::SecurityHub
     #
     #   If `OnlyAssociated` is set to `TRUE`, the response includes member
     #   accounts whose relationship status with the master is set to
-    #   `ENABLED` or `DISABLED`.
+    #   `ENABLED`.
     #
     #   If `OnlyAssociated` is set to `FALSE`, the response includes all
     #   existing member accounts.
@@ -12316,6 +17307,52 @@ module Aws::SecurityHub
     #
     class ListMembersResponse < Struct.new(
       :members,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListOrganizationAdminAccountsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that is required for pagination. On your first call to the
+    #   `ListOrganizationAdminAccounts` operation, set the value of this
+    #   parameter to `NULL`. For subsequent calls to the operation, to
+    #   continue listing data, set the value of this parameter to the value
+    #   returned from the previous response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListOrganizationAdminAccountsRequest AWS API Documentation
+    #
+    class ListOrganizationAdminAccountsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] admin_accounts
+    #   The list of Security Hub administrator accounts.
+    #   @return [Array<Types::AdminAccount>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListOrganizationAdminAccountsResponse AWS API Documentation
+    #
+    class ListOrganizationAdminAccountsResponse < Struct.new(
+      :admin_accounts,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -12501,6 +17538,28 @@ module Aws::SecurityHub
     # @!attribute [rw] member_status
     #   The status of the relationship between the member account and its
     #   master account.
+    #
+    #   The status can have one of the following values:
+    #
+    #   * `CREATED` - Indicates that the master account added the member
+    #     account, but has not yet invited the member account.
+    #
+    #   * `INVITED` - Indicates that the master account invited the member
+    #     account. The member account has not yet responded to the
+    #     invitation.
+    #
+    #   * `ENABLED` - Indicates that the member account is currently active.
+    #     For manually invited member accounts, indicates that the member
+    #     account accepted the invitation.
+    #
+    #   * `REMOVED` - Indicates that the master account disassociated the
+    #     member account.
+    #
+    #   * `RESIGNED` - Indicates that the member account disassociated
+    #     themselves from the master account.
+    #
+    #   * `DELETED` - Indicates that the master account deleted the member
+    #     account.
     #   @return [String]
     #
     # @!attribute [rw] invited_at
@@ -12942,8 +18001,8 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] installed_pending_reboot
-    #   The number of patches that were installed since the last time the
-    #   instance was rebooted.
+    #   The number of patches that were applied, but that require the
+    #   instance to be rebooted in order to be marked as installed.
     #   @return [Integer]
     #
     # @!attribute [rw] operation_start_time
@@ -13245,6 +18304,7 @@ module Aws::SecurityHub
     #         id: "NonEmptyString", # required
     #         partition: "aws", # accepts aws, aws-cn, aws-us-gov
     #         region: "NonEmptyString",
+    #         resource_role: "NonEmptyString",
     #         tags: {
     #           "NonEmptyString" => "NonEmptyString",
     #         },
@@ -13282,6 +18342,17 @@ module Aws::SecurityHub
     #             },
     #           },
     #           aws_cloud_front_distribution: {
+    #             cache_behaviors: {
+    #               items: [
+    #                 {
+    #                   viewer_protocol_policy: "NonEmptyString",
+    #                 },
+    #               ],
+    #             },
+    #             default_cache_behavior: {
+    #               viewer_protocol_policy: "NonEmptyString",
+    #             },
+    #             default_root_object: "NonEmptyString",
     #             domain_name: "NonEmptyString",
     #             etag: "NonEmptyString",
     #             last_modified_time: "NonEmptyString",
@@ -13297,6 +18368,21 @@ module Aws::SecurityHub
     #                   domain_name: "NonEmptyString",
     #                   id: "NonEmptyString",
     #                   origin_path: "NonEmptyString",
+    #                   s3_origin_config: {
+    #                     origin_access_identity: "NonEmptyString",
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             origin_groups: {
+    #               items: [
+    #                 {
+    #                   failover_criteria: {
+    #                     status_codes: {
+    #                       items: [1],
+    #                       quantity: 1,
+    #                     },
+    #                   },
     #                 },
     #               ],
     #             },
@@ -13538,6 +18624,21 @@ module Aws::SecurityHub
     #             principal_id: "NonEmptyString",
     #             principal_type: "NonEmptyString",
     #             principal_name: "NonEmptyString",
+    #             account_id: "NonEmptyString",
+    #             access_key_id: "NonEmptyString",
+    #             session_context: {
+    #               attributes: {
+    #                 mfa_authenticated: false,
+    #                 creation_date: "NonEmptyString",
+    #               },
+    #               session_issuer: {
+    #                 type: "NonEmptyString",
+    #                 principal_id: "NonEmptyString",
+    #                 arn: "NonEmptyString",
+    #                 account_id: "NonEmptyString",
+    #                 user_name: "NonEmptyString",
+    #               },
+    #             },
     #           },
     #           aws_iam_user: {
     #             attached_managed_policies: [
@@ -13579,6 +18680,56 @@ module Aws::SecurityHub
     #               },
     #             ],
     #             update_date: "NonEmptyString",
+    #           },
+    #           aws_api_gateway_v2_stage: {
+    #             created_date: "NonEmptyString",
+    #             description: "NonEmptyString",
+    #             default_route_settings: {
+    #               detailed_metrics_enabled: false,
+    #               logging_level: "NonEmptyString",
+    #               data_trace_enabled: false,
+    #               throttling_burst_limit: 1,
+    #               throttling_rate_limit: 1.0,
+    #             },
+    #             deployment_id: "NonEmptyString",
+    #             last_updated_date: "NonEmptyString",
+    #             route_settings: {
+    #               detailed_metrics_enabled: false,
+    #               logging_level: "NonEmptyString",
+    #               data_trace_enabled: false,
+    #               throttling_burst_limit: 1,
+    #               throttling_rate_limit: 1.0,
+    #             },
+    #             stage_name: "NonEmptyString",
+    #             stage_variables: {
+    #               "NonEmptyString" => "NonEmptyString",
+    #             },
+    #             access_log_settings: {
+    #               format: "NonEmptyString",
+    #               destination_arn: "NonEmptyString",
+    #             },
+    #             auto_deploy: false,
+    #             last_deployment_status_message: "NonEmptyString",
+    #             api_gateway_managed: false,
+    #           },
+    #           aws_api_gateway_v2_api: {
+    #             api_endpoint: "NonEmptyString",
+    #             api_id: "NonEmptyString",
+    #             api_key_selection_expression: "NonEmptyString",
+    #             created_date: "NonEmptyString",
+    #             description: "NonEmptyString",
+    #             version: "NonEmptyString",
+    #             name: "NonEmptyString",
+    #             protocol_type: "NonEmptyString",
+    #             route_selection_expression: "NonEmptyString",
+    #             cors_configuration: {
+    #               allow_origins: ["NonEmptyString"],
+    #               allow_credentials: false,
+    #               expose_headers: ["NonEmptyString"],
+    #               max_age: 1,
+    #               allow_methods: ["NonEmptyString"],
+    #               allow_headers: ["NonEmptyString"],
+    #             },
     #           },
     #           aws_dynamo_db_table: {
     #             attribute_definitions: [
@@ -13692,11 +18843,404 @@ module Aws::SecurityHub
     #             table_size_bytes: 1,
     #             table_status: "NonEmptyString",
     #           },
+    #           aws_api_gateway_stage: {
+    #             deployment_id: "NonEmptyString",
+    #             client_certificate_id: "NonEmptyString",
+    #             stage_name: "NonEmptyString",
+    #             description: "NonEmptyString",
+    #             cache_cluster_enabled: false,
+    #             cache_cluster_size: "NonEmptyString",
+    #             cache_cluster_status: "NonEmptyString",
+    #             method_settings: [
+    #               {
+    #                 metrics_enabled: false,
+    #                 logging_level: "NonEmptyString",
+    #                 data_trace_enabled: false,
+    #                 throttling_burst_limit: 1,
+    #                 throttling_rate_limit: 1.0,
+    #                 caching_enabled: false,
+    #                 cache_ttl_in_seconds: 1,
+    #                 cache_data_encrypted: false,
+    #                 require_authorization_for_cache_control: false,
+    #                 unauthorized_cache_control_header_strategy: "NonEmptyString",
+    #                 http_method: "NonEmptyString",
+    #                 resource_path: "NonEmptyString",
+    #               },
+    #             ],
+    #             variables: {
+    #               "NonEmptyString" => "NonEmptyString",
+    #             },
+    #             documentation_version: "NonEmptyString",
+    #             access_log_settings: {
+    #               format: "NonEmptyString",
+    #               destination_arn: "NonEmptyString",
+    #             },
+    #             canary_settings: {
+    #               percent_traffic: 1.0,
+    #               deployment_id: "NonEmptyString",
+    #               stage_variable_overrides: {
+    #                 "NonEmptyString" => "NonEmptyString",
+    #               },
+    #               use_stage_cache: false,
+    #             },
+    #             tracing_enabled: false,
+    #             created_date: "NonEmptyString",
+    #             last_updated_date: "NonEmptyString",
+    #             web_acl_arn: "NonEmptyString",
+    #           },
+    #           aws_api_gateway_rest_api: {
+    #             id: "NonEmptyString",
+    #             name: "NonEmptyString",
+    #             description: "NonEmptyString",
+    #             created_date: "NonEmptyString",
+    #             version: "NonEmptyString",
+    #             binary_media_types: ["NonEmptyString"],
+    #             minimum_compression_size: 1,
+    #             api_key_source: "NonEmptyString",
+    #             endpoint_configuration: {
+    #               types: ["NonEmptyString"],
+    #             },
+    #           },
+    #           aws_cloud_trail_trail: {
+    #             cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #             cloud_watch_logs_role_arn: "NonEmptyString",
+    #             has_custom_event_selectors: false,
+    #             home_region: "NonEmptyString",
+    #             include_global_service_events: false,
+    #             is_multi_region_trail: false,
+    #             is_organization_trail: false,
+    #             kms_key_id: "NonEmptyString",
+    #             log_file_validation_enabled: false,
+    #             name: "NonEmptyString",
+    #             s3_bucket_name: "NonEmptyString",
+    #             s3_key_prefix: "NonEmptyString",
+    #             sns_topic_arn: "NonEmptyString",
+    #             sns_topic_name: "NonEmptyString",
+    #             trail_arn: "NonEmptyString",
+    #           },
+    #           aws_certificate_manager_certificate: {
+    #             certificate_authority_arn: "NonEmptyString",
+    #             created_at: "NonEmptyString",
+    #             domain_name: "NonEmptyString",
+    #             domain_validation_options: [
+    #               {
+    #                 domain_name: "NonEmptyString",
+    #                 resource_record: {
+    #                   name: "NonEmptyString",
+    #                   type: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #                 validation_domain: "NonEmptyString",
+    #                 validation_emails: ["NonEmptyString"],
+    #                 validation_method: "NonEmptyString",
+    #                 validation_status: "NonEmptyString",
+    #               },
+    #             ],
+    #             extended_key_usages: [
+    #               {
+    #                 name: "NonEmptyString",
+    #                 o_id: "NonEmptyString",
+    #               },
+    #             ],
+    #             failure_reason: "NonEmptyString",
+    #             imported_at: "NonEmptyString",
+    #             in_use_by: ["NonEmptyString"],
+    #             issued_at: "NonEmptyString",
+    #             issuer: "NonEmptyString",
+    #             key_algorithm: "NonEmptyString",
+    #             key_usages: [
+    #               {
+    #                 name: "NonEmptyString",
+    #               },
+    #             ],
+    #             not_after: "NonEmptyString",
+    #             not_before: "NonEmptyString",
+    #             options: {
+    #               certificate_transparency_logging_preference: "NonEmptyString",
+    #             },
+    #             renewal_eligibility: "NonEmptyString",
+    #             renewal_summary: {
+    #               domain_validation_options: [
+    #                 {
+    #                   domain_name: "NonEmptyString",
+    #                   resource_record: {
+    #                     name: "NonEmptyString",
+    #                     type: "NonEmptyString",
+    #                     value: "NonEmptyString",
+    #                   },
+    #                   validation_domain: "NonEmptyString",
+    #                   validation_emails: ["NonEmptyString"],
+    #                   validation_method: "NonEmptyString",
+    #                   validation_status: "NonEmptyString",
+    #                 },
+    #               ],
+    #               renewal_status: "NonEmptyString",
+    #               renewal_status_reason: "NonEmptyString",
+    #               updated_at: "NonEmptyString",
+    #             },
+    #             serial: "NonEmptyString",
+    #             signature_algorithm: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #             subject: "NonEmptyString",
+    #             subject_alternative_names: ["NonEmptyString"],
+    #             type: "NonEmptyString",
+    #           },
+    #           aws_redshift_cluster: {
+    #             allow_version_upgrade: false,
+    #             automated_snapshot_retention_period: 1,
+    #             availability_zone: "NonEmptyString",
+    #             cluster_availability_status: "NonEmptyString",
+    #             cluster_create_time: "NonEmptyString",
+    #             cluster_identifier: "NonEmptyString",
+    #             cluster_nodes: [
+    #               {
+    #                 node_role: "NonEmptyString",
+    #                 private_ip_address: "NonEmptyString",
+    #                 public_ip_address: "NonEmptyString",
+    #               },
+    #             ],
+    #             cluster_parameter_groups: [
+    #               {
+    #                 cluster_parameter_status_list: [
+    #                   {
+    #                     parameter_name: "NonEmptyString",
+    #                     parameter_apply_status: "NonEmptyString",
+    #                     parameter_apply_error_description: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 parameter_apply_status: "NonEmptyString",
+    #                 parameter_group_name: "NonEmptyString",
+    #               },
+    #             ],
+    #             cluster_public_key: "NonEmptyString",
+    #             cluster_revision_number: "NonEmptyString",
+    #             cluster_security_groups: [
+    #               {
+    #                 cluster_security_group_name: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #               },
+    #             ],
+    #             cluster_snapshot_copy_status: {
+    #               destination_region: "NonEmptyString",
+    #               manual_snapshot_retention_period: 1,
+    #               retention_period: 1,
+    #               snapshot_copy_grant_name: "NonEmptyString",
+    #             },
+    #             cluster_status: "NonEmptyString",
+    #             cluster_subnet_group_name: "NonEmptyString",
+    #             cluster_version: "NonEmptyString",
+    #             db_name: "NonEmptyString",
+    #             deferred_maintenance_windows: [
+    #               {
+    #                 defer_maintenance_end_time: "NonEmptyString",
+    #                 defer_maintenance_identifier: "NonEmptyString",
+    #                 defer_maintenance_start_time: "NonEmptyString",
+    #               },
+    #             ],
+    #             elastic_ip_status: {
+    #               elastic_ip: "NonEmptyString",
+    #               status: "NonEmptyString",
+    #             },
+    #             elastic_resize_number_of_node_options: "NonEmptyString",
+    #             encrypted: false,
+    #             endpoint: {
+    #               address: "NonEmptyString",
+    #               port: 1,
+    #             },
+    #             enhanced_vpc_routing: false,
+    #             expected_next_snapshot_schedule_time: "NonEmptyString",
+    #             expected_next_snapshot_schedule_time_status: "NonEmptyString",
+    #             hsm_status: {
+    #               hsm_client_certificate_identifier: "NonEmptyString",
+    #               hsm_configuration_identifier: "NonEmptyString",
+    #               status: "NonEmptyString",
+    #             },
+    #             iam_roles: [
+    #               {
+    #                 apply_status: "NonEmptyString",
+    #                 iam_role_arn: "NonEmptyString",
+    #               },
+    #             ],
+    #             kms_key_id: "NonEmptyString",
+    #             maintenance_track_name: "NonEmptyString",
+    #             manual_snapshot_retention_period: 1,
+    #             master_username: "NonEmptyString",
+    #             next_maintenance_window_start_time: "NonEmptyString",
+    #             node_type: "NonEmptyString",
+    #             number_of_nodes: 1,
+    #             pending_actions: ["NonEmptyString"],
+    #             pending_modified_values: {
+    #               automated_snapshot_retention_period: 1,
+    #               cluster_identifier: "NonEmptyString",
+    #               cluster_type: "NonEmptyString",
+    #               cluster_version: "NonEmptyString",
+    #               encryption_type: "NonEmptyString",
+    #               enhanced_vpc_routing: false,
+    #               maintenance_track_name: "NonEmptyString",
+    #               master_user_password: "NonEmptyString",
+    #               node_type: "NonEmptyString",
+    #               number_of_nodes: 1,
+    #               publicly_accessible: false,
+    #             },
+    #             preferred_maintenance_window: "NonEmptyString",
+    #             publicly_accessible: false,
+    #             resize_info: {
+    #               allow_cancel_resize: false,
+    #               resize_type: "NonEmptyString",
+    #             },
+    #             restore_status: {
+    #               current_restore_rate_in_mega_bytes_per_second: 1.0,
+    #               elapsed_time_in_seconds: 1,
+    #               estimated_time_to_completion_in_seconds: 1,
+    #               progress_in_mega_bytes: 1,
+    #               snapshot_size_in_mega_bytes: 1,
+    #               status: "NonEmptyString",
+    #             },
+    #             snapshot_schedule_identifier: "NonEmptyString",
+    #             snapshot_schedule_state: "NonEmptyString",
+    #             vpc_id: "NonEmptyString",
+    #             vpc_security_groups: [
+    #               {
+    #                 status: "NonEmptyString",
+    #                 vpc_security_group_id: "NonEmptyString",
+    #               },
+    #             ],
+    #           },
+    #           aws_elb_load_balancer: {
+    #             availability_zones: ["NonEmptyString"],
+    #             backend_server_descriptions: [
+    #               {
+    #                 instance_port: 1,
+    #                 policy_names: ["NonEmptyString"],
+    #               },
+    #             ],
+    #             canonical_hosted_zone_name: "NonEmptyString",
+    #             canonical_hosted_zone_name_id: "NonEmptyString",
+    #             created_time: "NonEmptyString",
+    #             dns_name: "NonEmptyString",
+    #             health_check: {
+    #               healthy_threshold: 1,
+    #               interval: 1,
+    #               target: "NonEmptyString",
+    #               timeout: 1,
+    #               unhealthy_threshold: 1,
+    #             },
+    #             instances: [
+    #               {
+    #                 instance_id: "NonEmptyString",
+    #               },
+    #             ],
+    #             listener_descriptions: [
+    #               {
+    #                 listener: {
+    #                   instance_port: 1,
+    #                   instance_protocol: "NonEmptyString",
+    #                   load_balancer_port: 1,
+    #                   protocol: "NonEmptyString",
+    #                   ssl_certificate_id: "NonEmptyString",
+    #                 },
+    #                 policy_names: ["NonEmptyString"],
+    #               },
+    #             ],
+    #             load_balancer_attributes: {
+    #               access_log: {
+    #                 emit_interval: 1,
+    #                 enabled: false,
+    #                 s3_bucket_name: "NonEmptyString",
+    #                 s3_bucket_prefix: "NonEmptyString",
+    #               },
+    #               connection_draining: {
+    #                 enabled: false,
+    #                 timeout: 1,
+    #               },
+    #               connection_settings: {
+    #                 idle_timeout: 1,
+    #               },
+    #               cross_zone_load_balancing: {
+    #                 enabled: false,
+    #               },
+    #             },
+    #             load_balancer_name: "NonEmptyString",
+    #             policies: {
+    #               app_cookie_stickiness_policies: [
+    #                 {
+    #                   cookie_name: "NonEmptyString",
+    #                   policy_name: "NonEmptyString",
+    #                 },
+    #               ],
+    #               lb_cookie_stickiness_policies: [
+    #                 {
+    #                   cookie_expiration_period: 1,
+    #                   policy_name: "NonEmptyString",
+    #                 },
+    #               ],
+    #               other_policies: ["NonEmptyString"],
+    #             },
+    #             scheme: "NonEmptyString",
+    #             security_groups: ["NonEmptyString"],
+    #             source_security_group: {
+    #               group_name: "NonEmptyString",
+    #               owner_alias: "NonEmptyString",
+    #             },
+    #             subnets: ["NonEmptyString"],
+    #             vpc_id: "NonEmptyString",
+    #           },
+    #           aws_iam_group: {
+    #             attached_managed_policies: [
+    #               {
+    #                 policy_name: "NonEmptyString",
+    #                 policy_arn: "NonEmptyString",
+    #               },
+    #             ],
+    #             create_date: "NonEmptyString",
+    #             group_id: "NonEmptyString",
+    #             group_name: "NonEmptyString",
+    #             group_policy_list: [
+    #               {
+    #                 policy_name: "NonEmptyString",
+    #               },
+    #             ],
+    #             path: "NonEmptyString",
+    #           },
     #           aws_iam_role: {
     #             assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #             attached_managed_policies: [
+    #               {
+    #                 policy_name: "NonEmptyString",
+    #                 policy_arn: "NonEmptyString",
+    #               },
+    #             ],
     #             create_date: "NonEmptyString",
+    #             instance_profile_list: [
+    #               {
+    #                 arn: "NonEmptyString",
+    #                 create_date: "NonEmptyString",
+    #                 instance_profile_id: "NonEmptyString",
+    #                 instance_profile_name: "NonEmptyString",
+    #                 path: "NonEmptyString",
+    #                 roles: [
+    #                   {
+    #                     arn: "NonEmptyString",
+    #                     assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #                     create_date: "NonEmptyString",
+    #                     path: "NonEmptyString",
+    #                     role_id: "NonEmptyString",
+    #                     role_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             permissions_boundary: {
+    #               permissions_boundary_arn: "NonEmptyString",
+    #               permissions_boundary_type: "NonEmptyString",
+    #             },
     #             role_id: "NonEmptyString",
     #             role_name: "NonEmptyString",
+    #             role_policy_list: [
+    #               {
+    #                 policy_name: "NonEmptyString",
+    #               },
+    #             ],
     #             max_session_duration: 1,
     #             path: "NonEmptyString",
     #           },
@@ -14103,6 +19647,9 @@ module Aws::SecurityHub
     #   located.
     #   @return [String]
     #
+    # @!attribute [rw] resource_role
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of AWS tags associated with a resource at the time the
     #   finding was processed.
@@ -14119,6 +19666,7 @@ module Aws::SecurityHub
       :id,
       :partition,
       :region,
+      :resource_role,
       :tags,
       :details)
       SENSITIVE = []
@@ -14193,6 +19741,17 @@ module Aws::SecurityHub
     #           },
     #         },
     #         aws_cloud_front_distribution: {
+    #           cache_behaviors: {
+    #             items: [
+    #               {
+    #                 viewer_protocol_policy: "NonEmptyString",
+    #               },
+    #             ],
+    #           },
+    #           default_cache_behavior: {
+    #             viewer_protocol_policy: "NonEmptyString",
+    #           },
+    #           default_root_object: "NonEmptyString",
     #           domain_name: "NonEmptyString",
     #           etag: "NonEmptyString",
     #           last_modified_time: "NonEmptyString",
@@ -14208,6 +19767,21 @@ module Aws::SecurityHub
     #                 domain_name: "NonEmptyString",
     #                 id: "NonEmptyString",
     #                 origin_path: "NonEmptyString",
+    #                 s3_origin_config: {
+    #                   origin_access_identity: "NonEmptyString",
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           origin_groups: {
+    #             items: [
+    #               {
+    #                 failover_criteria: {
+    #                   status_codes: {
+    #                     items: [1],
+    #                     quantity: 1,
+    #                   },
+    #                 },
     #               },
     #             ],
     #           },
@@ -14449,6 +20023,21 @@ module Aws::SecurityHub
     #           principal_id: "NonEmptyString",
     #           principal_type: "NonEmptyString",
     #           principal_name: "NonEmptyString",
+    #           account_id: "NonEmptyString",
+    #           access_key_id: "NonEmptyString",
+    #           session_context: {
+    #             attributes: {
+    #               mfa_authenticated: false,
+    #               creation_date: "NonEmptyString",
+    #             },
+    #             session_issuer: {
+    #               type: "NonEmptyString",
+    #               principal_id: "NonEmptyString",
+    #               arn: "NonEmptyString",
+    #               account_id: "NonEmptyString",
+    #               user_name: "NonEmptyString",
+    #             },
+    #           },
     #         },
     #         aws_iam_user: {
     #           attached_managed_policies: [
@@ -14490,6 +20079,56 @@ module Aws::SecurityHub
     #             },
     #           ],
     #           update_date: "NonEmptyString",
+    #         },
+    #         aws_api_gateway_v2_stage: {
+    #           created_date: "NonEmptyString",
+    #           description: "NonEmptyString",
+    #           default_route_settings: {
+    #             detailed_metrics_enabled: false,
+    #             logging_level: "NonEmptyString",
+    #             data_trace_enabled: false,
+    #             throttling_burst_limit: 1,
+    #             throttling_rate_limit: 1.0,
+    #           },
+    #           deployment_id: "NonEmptyString",
+    #           last_updated_date: "NonEmptyString",
+    #           route_settings: {
+    #             detailed_metrics_enabled: false,
+    #             logging_level: "NonEmptyString",
+    #             data_trace_enabled: false,
+    #             throttling_burst_limit: 1,
+    #             throttling_rate_limit: 1.0,
+    #           },
+    #           stage_name: "NonEmptyString",
+    #           stage_variables: {
+    #             "NonEmptyString" => "NonEmptyString",
+    #           },
+    #           access_log_settings: {
+    #             format: "NonEmptyString",
+    #             destination_arn: "NonEmptyString",
+    #           },
+    #           auto_deploy: false,
+    #           last_deployment_status_message: "NonEmptyString",
+    #           api_gateway_managed: false,
+    #         },
+    #         aws_api_gateway_v2_api: {
+    #           api_endpoint: "NonEmptyString",
+    #           api_id: "NonEmptyString",
+    #           api_key_selection_expression: "NonEmptyString",
+    #           created_date: "NonEmptyString",
+    #           description: "NonEmptyString",
+    #           version: "NonEmptyString",
+    #           name: "NonEmptyString",
+    #           protocol_type: "NonEmptyString",
+    #           route_selection_expression: "NonEmptyString",
+    #           cors_configuration: {
+    #             allow_origins: ["NonEmptyString"],
+    #             allow_credentials: false,
+    #             expose_headers: ["NonEmptyString"],
+    #             max_age: 1,
+    #             allow_methods: ["NonEmptyString"],
+    #             allow_headers: ["NonEmptyString"],
+    #           },
     #         },
     #         aws_dynamo_db_table: {
     #           attribute_definitions: [
@@ -14603,11 +20242,404 @@ module Aws::SecurityHub
     #           table_size_bytes: 1,
     #           table_status: "NonEmptyString",
     #         },
+    #         aws_api_gateway_stage: {
+    #           deployment_id: "NonEmptyString",
+    #           client_certificate_id: "NonEmptyString",
+    #           stage_name: "NonEmptyString",
+    #           description: "NonEmptyString",
+    #           cache_cluster_enabled: false,
+    #           cache_cluster_size: "NonEmptyString",
+    #           cache_cluster_status: "NonEmptyString",
+    #           method_settings: [
+    #             {
+    #               metrics_enabled: false,
+    #               logging_level: "NonEmptyString",
+    #               data_trace_enabled: false,
+    #               throttling_burst_limit: 1,
+    #               throttling_rate_limit: 1.0,
+    #               caching_enabled: false,
+    #               cache_ttl_in_seconds: 1,
+    #               cache_data_encrypted: false,
+    #               require_authorization_for_cache_control: false,
+    #               unauthorized_cache_control_header_strategy: "NonEmptyString",
+    #               http_method: "NonEmptyString",
+    #               resource_path: "NonEmptyString",
+    #             },
+    #           ],
+    #           variables: {
+    #             "NonEmptyString" => "NonEmptyString",
+    #           },
+    #           documentation_version: "NonEmptyString",
+    #           access_log_settings: {
+    #             format: "NonEmptyString",
+    #             destination_arn: "NonEmptyString",
+    #           },
+    #           canary_settings: {
+    #             percent_traffic: 1.0,
+    #             deployment_id: "NonEmptyString",
+    #             stage_variable_overrides: {
+    #               "NonEmptyString" => "NonEmptyString",
+    #             },
+    #             use_stage_cache: false,
+    #           },
+    #           tracing_enabled: false,
+    #           created_date: "NonEmptyString",
+    #           last_updated_date: "NonEmptyString",
+    #           web_acl_arn: "NonEmptyString",
+    #         },
+    #         aws_api_gateway_rest_api: {
+    #           id: "NonEmptyString",
+    #           name: "NonEmptyString",
+    #           description: "NonEmptyString",
+    #           created_date: "NonEmptyString",
+    #           version: "NonEmptyString",
+    #           binary_media_types: ["NonEmptyString"],
+    #           minimum_compression_size: 1,
+    #           api_key_source: "NonEmptyString",
+    #           endpoint_configuration: {
+    #             types: ["NonEmptyString"],
+    #           },
+    #         },
+    #         aws_cloud_trail_trail: {
+    #           cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #           cloud_watch_logs_role_arn: "NonEmptyString",
+    #           has_custom_event_selectors: false,
+    #           home_region: "NonEmptyString",
+    #           include_global_service_events: false,
+    #           is_multi_region_trail: false,
+    #           is_organization_trail: false,
+    #           kms_key_id: "NonEmptyString",
+    #           log_file_validation_enabled: false,
+    #           name: "NonEmptyString",
+    #           s3_bucket_name: "NonEmptyString",
+    #           s3_key_prefix: "NonEmptyString",
+    #           sns_topic_arn: "NonEmptyString",
+    #           sns_topic_name: "NonEmptyString",
+    #           trail_arn: "NonEmptyString",
+    #         },
+    #         aws_certificate_manager_certificate: {
+    #           certificate_authority_arn: "NonEmptyString",
+    #           created_at: "NonEmptyString",
+    #           domain_name: "NonEmptyString",
+    #           domain_validation_options: [
+    #             {
+    #               domain_name: "NonEmptyString",
+    #               resource_record: {
+    #                 name: "NonEmptyString",
+    #                 type: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #               validation_domain: "NonEmptyString",
+    #               validation_emails: ["NonEmptyString"],
+    #               validation_method: "NonEmptyString",
+    #               validation_status: "NonEmptyString",
+    #             },
+    #           ],
+    #           extended_key_usages: [
+    #             {
+    #               name: "NonEmptyString",
+    #               o_id: "NonEmptyString",
+    #             },
+    #           ],
+    #           failure_reason: "NonEmptyString",
+    #           imported_at: "NonEmptyString",
+    #           in_use_by: ["NonEmptyString"],
+    #           issued_at: "NonEmptyString",
+    #           issuer: "NonEmptyString",
+    #           key_algorithm: "NonEmptyString",
+    #           key_usages: [
+    #             {
+    #               name: "NonEmptyString",
+    #             },
+    #           ],
+    #           not_after: "NonEmptyString",
+    #           not_before: "NonEmptyString",
+    #           options: {
+    #             certificate_transparency_logging_preference: "NonEmptyString",
+    #           },
+    #           renewal_eligibility: "NonEmptyString",
+    #           renewal_summary: {
+    #             domain_validation_options: [
+    #               {
+    #                 domain_name: "NonEmptyString",
+    #                 resource_record: {
+    #                   name: "NonEmptyString",
+    #                   type: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #                 validation_domain: "NonEmptyString",
+    #                 validation_emails: ["NonEmptyString"],
+    #                 validation_method: "NonEmptyString",
+    #                 validation_status: "NonEmptyString",
+    #               },
+    #             ],
+    #             renewal_status: "NonEmptyString",
+    #             renewal_status_reason: "NonEmptyString",
+    #             updated_at: "NonEmptyString",
+    #           },
+    #           serial: "NonEmptyString",
+    #           signature_algorithm: "NonEmptyString",
+    #           status: "NonEmptyString",
+    #           subject: "NonEmptyString",
+    #           subject_alternative_names: ["NonEmptyString"],
+    #           type: "NonEmptyString",
+    #         },
+    #         aws_redshift_cluster: {
+    #           allow_version_upgrade: false,
+    #           automated_snapshot_retention_period: 1,
+    #           availability_zone: "NonEmptyString",
+    #           cluster_availability_status: "NonEmptyString",
+    #           cluster_create_time: "NonEmptyString",
+    #           cluster_identifier: "NonEmptyString",
+    #           cluster_nodes: [
+    #             {
+    #               node_role: "NonEmptyString",
+    #               private_ip_address: "NonEmptyString",
+    #               public_ip_address: "NonEmptyString",
+    #             },
+    #           ],
+    #           cluster_parameter_groups: [
+    #             {
+    #               cluster_parameter_status_list: [
+    #                 {
+    #                   parameter_name: "NonEmptyString",
+    #                   parameter_apply_status: "NonEmptyString",
+    #                   parameter_apply_error_description: "NonEmptyString",
+    #                 },
+    #               ],
+    #               parameter_apply_status: "NonEmptyString",
+    #               parameter_group_name: "NonEmptyString",
+    #             },
+    #           ],
+    #           cluster_public_key: "NonEmptyString",
+    #           cluster_revision_number: "NonEmptyString",
+    #           cluster_security_groups: [
+    #             {
+    #               cluster_security_group_name: "NonEmptyString",
+    #               status: "NonEmptyString",
+    #             },
+    #           ],
+    #           cluster_snapshot_copy_status: {
+    #             destination_region: "NonEmptyString",
+    #             manual_snapshot_retention_period: 1,
+    #             retention_period: 1,
+    #             snapshot_copy_grant_name: "NonEmptyString",
+    #           },
+    #           cluster_status: "NonEmptyString",
+    #           cluster_subnet_group_name: "NonEmptyString",
+    #           cluster_version: "NonEmptyString",
+    #           db_name: "NonEmptyString",
+    #           deferred_maintenance_windows: [
+    #             {
+    #               defer_maintenance_end_time: "NonEmptyString",
+    #               defer_maintenance_identifier: "NonEmptyString",
+    #               defer_maintenance_start_time: "NonEmptyString",
+    #             },
+    #           ],
+    #           elastic_ip_status: {
+    #             elastic_ip: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #           },
+    #           elastic_resize_number_of_node_options: "NonEmptyString",
+    #           encrypted: false,
+    #           endpoint: {
+    #             address: "NonEmptyString",
+    #             port: 1,
+    #           },
+    #           enhanced_vpc_routing: false,
+    #           expected_next_snapshot_schedule_time: "NonEmptyString",
+    #           expected_next_snapshot_schedule_time_status: "NonEmptyString",
+    #           hsm_status: {
+    #             hsm_client_certificate_identifier: "NonEmptyString",
+    #             hsm_configuration_identifier: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #           },
+    #           iam_roles: [
+    #             {
+    #               apply_status: "NonEmptyString",
+    #               iam_role_arn: "NonEmptyString",
+    #             },
+    #           ],
+    #           kms_key_id: "NonEmptyString",
+    #           maintenance_track_name: "NonEmptyString",
+    #           manual_snapshot_retention_period: 1,
+    #           master_username: "NonEmptyString",
+    #           next_maintenance_window_start_time: "NonEmptyString",
+    #           node_type: "NonEmptyString",
+    #           number_of_nodes: 1,
+    #           pending_actions: ["NonEmptyString"],
+    #           pending_modified_values: {
+    #             automated_snapshot_retention_period: 1,
+    #             cluster_identifier: "NonEmptyString",
+    #             cluster_type: "NonEmptyString",
+    #             cluster_version: "NonEmptyString",
+    #             encryption_type: "NonEmptyString",
+    #             enhanced_vpc_routing: false,
+    #             maintenance_track_name: "NonEmptyString",
+    #             master_user_password: "NonEmptyString",
+    #             node_type: "NonEmptyString",
+    #             number_of_nodes: 1,
+    #             publicly_accessible: false,
+    #           },
+    #           preferred_maintenance_window: "NonEmptyString",
+    #           publicly_accessible: false,
+    #           resize_info: {
+    #             allow_cancel_resize: false,
+    #             resize_type: "NonEmptyString",
+    #           },
+    #           restore_status: {
+    #             current_restore_rate_in_mega_bytes_per_second: 1.0,
+    #             elapsed_time_in_seconds: 1,
+    #             estimated_time_to_completion_in_seconds: 1,
+    #             progress_in_mega_bytes: 1,
+    #             snapshot_size_in_mega_bytes: 1,
+    #             status: "NonEmptyString",
+    #           },
+    #           snapshot_schedule_identifier: "NonEmptyString",
+    #           snapshot_schedule_state: "NonEmptyString",
+    #           vpc_id: "NonEmptyString",
+    #           vpc_security_groups: [
+    #             {
+    #               status: "NonEmptyString",
+    #               vpc_security_group_id: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
+    #         aws_elb_load_balancer: {
+    #           availability_zones: ["NonEmptyString"],
+    #           backend_server_descriptions: [
+    #             {
+    #               instance_port: 1,
+    #               policy_names: ["NonEmptyString"],
+    #             },
+    #           ],
+    #           canonical_hosted_zone_name: "NonEmptyString",
+    #           canonical_hosted_zone_name_id: "NonEmptyString",
+    #           created_time: "NonEmptyString",
+    #           dns_name: "NonEmptyString",
+    #           health_check: {
+    #             healthy_threshold: 1,
+    #             interval: 1,
+    #             target: "NonEmptyString",
+    #             timeout: 1,
+    #             unhealthy_threshold: 1,
+    #           },
+    #           instances: [
+    #             {
+    #               instance_id: "NonEmptyString",
+    #             },
+    #           ],
+    #           listener_descriptions: [
+    #             {
+    #               listener: {
+    #                 instance_port: 1,
+    #                 instance_protocol: "NonEmptyString",
+    #                 load_balancer_port: 1,
+    #                 protocol: "NonEmptyString",
+    #                 ssl_certificate_id: "NonEmptyString",
+    #               },
+    #               policy_names: ["NonEmptyString"],
+    #             },
+    #           ],
+    #           load_balancer_attributes: {
+    #             access_log: {
+    #               emit_interval: 1,
+    #               enabled: false,
+    #               s3_bucket_name: "NonEmptyString",
+    #               s3_bucket_prefix: "NonEmptyString",
+    #             },
+    #             connection_draining: {
+    #               enabled: false,
+    #               timeout: 1,
+    #             },
+    #             connection_settings: {
+    #               idle_timeout: 1,
+    #             },
+    #             cross_zone_load_balancing: {
+    #               enabled: false,
+    #             },
+    #           },
+    #           load_balancer_name: "NonEmptyString",
+    #           policies: {
+    #             app_cookie_stickiness_policies: [
+    #               {
+    #                 cookie_name: "NonEmptyString",
+    #                 policy_name: "NonEmptyString",
+    #               },
+    #             ],
+    #             lb_cookie_stickiness_policies: [
+    #               {
+    #                 cookie_expiration_period: 1,
+    #                 policy_name: "NonEmptyString",
+    #               },
+    #             ],
+    #             other_policies: ["NonEmptyString"],
+    #           },
+    #           scheme: "NonEmptyString",
+    #           security_groups: ["NonEmptyString"],
+    #           source_security_group: {
+    #             group_name: "NonEmptyString",
+    #             owner_alias: "NonEmptyString",
+    #           },
+    #           subnets: ["NonEmptyString"],
+    #           vpc_id: "NonEmptyString",
+    #         },
+    #         aws_iam_group: {
+    #           attached_managed_policies: [
+    #             {
+    #               policy_name: "NonEmptyString",
+    #               policy_arn: "NonEmptyString",
+    #             },
+    #           ],
+    #           create_date: "NonEmptyString",
+    #           group_id: "NonEmptyString",
+    #           group_name: "NonEmptyString",
+    #           group_policy_list: [
+    #             {
+    #               policy_name: "NonEmptyString",
+    #             },
+    #           ],
+    #           path: "NonEmptyString",
+    #         },
     #         aws_iam_role: {
     #           assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #           attached_managed_policies: [
+    #             {
+    #               policy_name: "NonEmptyString",
+    #               policy_arn: "NonEmptyString",
+    #             },
+    #           ],
     #           create_date: "NonEmptyString",
+    #           instance_profile_list: [
+    #             {
+    #               arn: "NonEmptyString",
+    #               create_date: "NonEmptyString",
+    #               instance_profile_id: "NonEmptyString",
+    #               instance_profile_name: "NonEmptyString",
+    #               path: "NonEmptyString",
+    #               roles: [
+    #                 {
+    #                   arn: "NonEmptyString",
+    #                   assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #                   create_date: "NonEmptyString",
+    #                   path: "NonEmptyString",
+    #                   role_id: "NonEmptyString",
+    #                   role_name: "NonEmptyString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           permissions_boundary: {
+    #             permissions_boundary_arn: "NonEmptyString",
+    #             permissions_boundary_type: "NonEmptyString",
+    #           },
     #           role_id: "NonEmptyString",
     #           role_name: "NonEmptyString",
+    #           role_policy_list: [
+    #             {
+    #               policy_name: "NonEmptyString",
+    #             },
+    #           ],
     #           max_session_duration: 1,
     #           path: "NonEmptyString",
     #         },
@@ -15058,9 +21090,36 @@ module Aws::SecurityHub
     #   Details about an IAM permissions policy.
     #   @return [Types::AwsIamPolicyDetails]
     #
+    # @!attribute [rw] aws_api_gateway_v2_stage
+    #   @return [Types::AwsApiGatewayV2StageDetails]
+    #
+    # @!attribute [rw] aws_api_gateway_v2_api
+    #   @return [Types::AwsApiGatewayV2ApiDetails]
+    #
     # @!attribute [rw] aws_dynamo_db_table
     #   Details about a DynamoDB table.
     #   @return [Types::AwsDynamoDbTableDetails]
+    #
+    # @!attribute [rw] aws_api_gateway_stage
+    #   @return [Types::AwsApiGatewayStageDetails]
+    #
+    # @!attribute [rw] aws_api_gateway_rest_api
+    #   @return [Types::AwsApiGatewayRestApiDetails]
+    #
+    # @!attribute [rw] aws_cloud_trail_trail
+    #   @return [Types::AwsCloudTrailTrailDetails]
+    #
+    # @!attribute [rw] aws_certificate_manager_certificate
+    #   @return [Types::AwsCertificateManagerCertificateDetails]
+    #
+    # @!attribute [rw] aws_redshift_cluster
+    #   @return [Types::AwsRedshiftClusterDetails]
+    #
+    # @!attribute [rw] aws_elb_load_balancer
+    #   @return [Types::AwsElbLoadBalancerDetails]
+    #
+    # @!attribute [rw] aws_iam_group
+    #   @return [Types::AwsIamGroupDetails]
     #
     # @!attribute [rw] aws_iam_role
     #   Details about an IAM role.
@@ -15144,7 +21203,16 @@ module Aws::SecurityHub
       :aws_iam_access_key,
       :aws_iam_user,
       :aws_iam_policy,
+      :aws_api_gateway_v2_stage,
+      :aws_api_gateway_v2_api,
       :aws_dynamo_db_table,
+      :aws_api_gateway_stage,
+      :aws_api_gateway_rest_api,
+      :aws_cloud_trail_trail,
+      :aws_certificate_manager_certificate,
+      :aws_redshift_cluster,
+      :aws_elb_load_balancer,
+      :aws_iam_group,
       :aws_iam_role,
       :aws_kms_key,
       :aws_lambda_function,
@@ -17063,6 +23131,36 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateInsightResponse AWS API Documentation
     #
     class UpdateInsightResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateOrganizationConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         auto_enable: false, # required
+    #       }
+    #
+    # @!attribute [rw] auto_enable
+    #   Whether to automatically enable Security Hub for new accounts in the
+    #   organization.
+    #
+    #   By default, this is `false`, and new accounts are not added
+    #   automatically.
+    #
+    #   To automatically enable Security Hub for new accounts, set this to
+    #   `true`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateOrganizationConfigurationRequest AWS API Documentation
+    #
+    class UpdateOrganizationConfigurationRequest < Struct.new(
+      :auto_enable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateOrganizationConfigurationResponse AWS API Documentation
+    #
+    class UpdateOrganizationConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateSecurityHubConfigurationRequest
     #   data as a hash:

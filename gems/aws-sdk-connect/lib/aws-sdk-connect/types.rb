@@ -10,6 +10,251 @@
 module Aws::Connect
   module Types
 
+    # @note When making an API call, you may pass AssociateApprovedOriginRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         origin: "Origin", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin
+    #   The domain to add to your allow list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateApprovedOriginRequest AWS API Documentation
+    #
+    class AssociateApprovedOriginRequest < Struct.new(
+      :instance_id,
+      :origin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AssociateInstanceStorageConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS
+    #         storage_config: { # required
+    #           association_id: "AssociationId",
+    #           storage_type: "S3", # required, accepts S3, KINESIS_VIDEO_STREAM, KINESIS_STREAM, KINESIS_FIREHOSE
+    #           s3_config: {
+    #             bucket_name: "BucketName", # required
+    #             bucket_prefix: "Prefix", # required
+    #             encryption_config: {
+    #               encryption_type: "KMS", # required, accepts KMS
+    #               key_id: "KeyId", # required
+    #             },
+    #           },
+    #           kinesis_video_stream_config: {
+    #             prefix: "Prefix", # required
+    #             retention_period_hours: 1, # required
+    #             encryption_config: { # required
+    #               encryption_type: "KMS", # required, accepts KMS
+    #               key_id: "KeyId", # required
+    #             },
+    #           },
+    #           kinesis_stream_config: {
+    #             stream_arn: "ARN", # required
+    #           },
+    #           kinesis_firehose_config: {
+    #             firehose_arn: "ARN", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   A valid resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_config
+    #   A valid storage type.
+    #   @return [Types::InstanceStorageConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateInstanceStorageConfigRequest AWS API Documentation
+    #
+    class AssociateInstanceStorageConfigRequest < Struct.new(
+      :instance_id,
+      :resource_type,
+      :storage_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] association_id
+    #   The existing association identifier that uniquely identifies the
+    #   resource type and storage config for the given instance ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateInstanceStorageConfigResponse AWS API Documentation
+    #
+    class AssociateInstanceStorageConfigResponse < Struct.new(
+      :association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AssociateLambdaFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         function_arn: "FunctionArn", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) for the Lambda function being
+    #   associated. Maximum number of characters allowed is 140.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateLambdaFunctionRequest AWS API Documentation
+    #
+    class AssociateLambdaFunctionRequest < Struct.new(
+      :instance_id,
+      :function_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AssociateLexBotRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         lex_bot: { # required
+    #           name: "BotName",
+    #           lex_region: "LexRegion",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] lex_bot
+    #   The Amazon Lex box to associate with the instance.
+    #   @return [Types::LexBot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateLexBotRequest AWS API Documentation
+    #
+    class AssociateLexBotRequest < Struct.new(
+      :instance_id,
+      :lex_bot)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AssociateRoutingProfileQueuesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         routing_profile_id: "RoutingProfileId", # required
+    #         queue_configs: [ # required
+    #           {
+    #             queue_reference: { # required
+    #               queue_id: "QueueId", # required
+    #               channel: "VOICE", # required, accepts VOICE, CHAT, TASK
+    #             },
+    #             priority: 1, # required
+    #             delay: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_configs
+    #   The queues to associate with this routing profile.
+    #   @return [Array<Types::RoutingProfileQueueConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateRoutingProfileQueuesRequest AWS API Documentation
+    #
+    class AssociateRoutingProfileQueuesRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :queue_configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AssociateSecurityKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         key: "PEM", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   A valid security key in PEM format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateSecurityKeyRequest AWS API Documentation
+    #
+    class AssociateSecurityKeyRequest < Struct.new(
+      :instance_id,
+      :key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] association_id
+    #   The existing association identifier that uniquely identifies the
+    #   resource type and storage config for the given instance ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateSecurityKeyResponse AWS API Documentation
+    #
+    class AssociateSecurityKeyResponse < Struct.new(
+      :association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A toggle for an individual feature at the instance level.
+    #
+    # @!attribute [rw] attribute_type
+    #   The type of attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Attribute AWS API Documentation
+    #
+    class Attribute < Struct.new(
+      :attribute_type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A chat message.
     #
     # @note When making an API call, you may pass ChatMessage
@@ -37,7 +282,77 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Contains information about a contact flow.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the contact flow. For descriptions of the available
+    #   types, see [Choose a Contact Flow Type][1] in the *Amazon Connect
+    #   Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlow AWS API Documentation
+    #
+    class ContactFlow < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :type,
+      :description,
+      :content,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The contact flow has not been published.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowNotPublishedException AWS API Documentation
+    #
+    class ContactFlowNotPublishedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains summary information about a contact flow.
+    #
+    # You can also create and update contact flows using the [Amazon Connect
+    # Flow language][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html
     #
     # @!attribute [rw] id
     #   The identifier of the contact flow.
@@ -76,6 +391,404 @@ module Aws::Connect
     #
     class ContactNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateContactFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         name: "ContactFlowName", # required
+    #         type: "CONTACT_FLOW", # required, accepts CONTACT_FLOW, CUSTOMER_QUEUE, CUSTOMER_HOLD, CUSTOMER_WHISPER, AGENT_HOLD, AGENT_WHISPER, OUTBOUND_WHISPER, AGENT_TRANSFER, QUEUE_TRANSFER
+    #         description: "ContactFlowDescription",
+    #         content: "ContactFlowContent", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the contact flow. For descriptions of the available
+    #   types, see [Choose a Contact Flow Type][1] in the *Amazon Connect
+    #   Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlowRequest AWS API Documentation
+    #
+    class CreateContactFlowRequest < Struct.new(
+      :instance_id,
+      :name,
+      :type,
+      :description,
+      :content,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_arn
+    #   The Amazon Resource Name (ARN) of the contact flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlowResponse AWS API Documentation
+    #
+    class CreateContactFlowResponse < Struct.new(
+      :contact_flow_id,
+      :contact_flow_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateInstanceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "ClientToken",
+    #         identity_management_type: "SAML", # required, accepts SAML, CONNECT_MANAGED, EXISTING_DIRECTORY
+    #         instance_alias: "DirectoryAlias",
+    #         directory_id: "DirectoryId",
+    #         inbound_calls_enabled: false, # required
+    #         outbound_calls_enabled: false, # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_management_type
+    #   The type of identity management for your Amazon Connect users.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_alias
+    #   The name for your instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier for the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_calls_enabled
+    #   Whether your contact center handles incoming contacts.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] outbound_calls_enabled
+    #   Whether your contact center allows outbound calls.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateInstanceRequest AWS API Documentation
+    #
+    class CreateInstanceRequest < Struct.new(
+      :client_token,
+      :identity_management_type,
+      :instance_alias,
+      :directory_id,
+      :inbound_calls_enabled,
+      :outbound_calls_enabled)
+      SENSITIVE = [:instance_alias]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier for the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateInstanceResponse AWS API Documentation
+    #
+    class CreateInstanceResponse < Struct.new(
+      :id,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateIntegrationAssociationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         integration_type: "EVENT", # required, accepts EVENT
+    #         integration_arn: "ARN", # required
+    #         source_application_url: "URI", # required
+    #         source_application_name: "SourceApplicationName", # required
+    #         source_type: "SALESFORCE", # required, accepts SALESFORCE, ZENDESK
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_type
+    #   The type of information to be ingested.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_application_url
+    #   The URL for the external application.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_application_name
+    #   The name of the external application.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_type
+    #   The type of the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateIntegrationAssociationRequest AWS API Documentation
+    #
+    class CreateIntegrationAssociationRequest < Struct.new(
+      :instance_id,
+      :integration_type,
+      :integration_arn,
+      :source_application_url,
+      :source_application_name,
+      :source_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_association_id
+    #   The identifier for the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_association_arn
+    #   The Amazon Resource Name (ARN) for the association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateIntegrationAssociationResponse AWS API Documentation
+    #
+    class CreateIntegrationAssociationResponse < Struct.new(
+      :integration_association_id,
+      :integration_association_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateRoutingProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         name: "RoutingProfileName", # required
+    #         description: "RoutingProfileDescription", # required
+    #         default_outbound_queue_id: "QueueId", # required
+    #         queue_configs: [
+    #           {
+    #             queue_reference: { # required
+    #               queue_id: "QueueId", # required
+    #               channel: "VOICE", # required, accepts VOICE, CHAT, TASK
+    #             },
+    #             priority: 1, # required
+    #             delay: 1, # required
+    #           },
+    #         ],
+    #         media_concurrencies: [ # required
+    #           {
+    #             channel: "VOICE", # required, accepts VOICE, CHAT, TASK
+    #             concurrency: 1, # required
+    #           },
+    #         ],
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the routing profile. Must not be more than 127
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the routing profile. Must not be more than 250
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_outbound_queue_id
+    #   The default outbound queue for the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_configs
+    #   The inbound queues associated with the routing profile. If no queue
+    #   is added, the agent can only make outbound calls.
+    #   @return [Array<Types::RoutingProfileQueueConfig>]
+    #
+    # @!attribute [rw] media_concurrencies
+    #   The channels agents can handle in the Contact Control Panel (CCP)
+    #   for this routing profile.
+    #   @return [Array<Types::MediaConcurrency>]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateRoutingProfileRequest AWS API Documentation
+    #
+    class CreateRoutingProfileRequest < Struct.new(
+      :instance_id,
+      :name,
+      :description,
+      :default_outbound_queue_id,
+      :queue_configs,
+      :media_concurrencies,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] routing_profile_arn
+    #   The Amazon Resource Name (ARN) of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateRoutingProfileResponse AWS API Documentation
+    #
+    class CreateRoutingProfileResponse < Struct.new(
+      :routing_profile_arn,
+      :routing_profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateUseCaseRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         integration_association_id: "IntegrationAssociationId", # required
+    #         use_case_type: "RULES_EVALUATION", # required, accepts RULES_EVALUATION
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_association_id
+    #   The identifier for the AppIntegration association.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_case_type
+    #   The type of use case to associate to the AppIntegration association.
+    #   Each AppIntegration association can have only one of each use case
+    #   type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUseCaseRequest AWS API Documentation
+    #
+    class CreateUseCaseRequest < Struct.new(
+      :instance_id,
+      :integration_association_id,
+      :use_case_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] use_case_id
+    #   The identifier of the use case.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_case_arn
+    #   The Amazon Resource Name (ARN) for the use case.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUseCaseResponse AWS API Documentation
+    #
+    class CreateUseCaseResponse < Struct.new(
+      :use_case_id,
+      :use_case_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateUserHierarchyGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "HierarchyGroupName", # required
+    #         parent_group_id: "HierarchyGroupId",
+    #         instance_id: "InstanceId", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the user hierarchy group. Must not be more than 100
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_group_id
+    #   The identifier for the parent hierarchy group. The user hierarchy is
+    #   created at level one if the parent group ID is null.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUserHierarchyGroupRequest AWS API Documentation
+    #
+    class CreateUserHierarchyGroupRequest < Struct.new(
+      :name,
+      :parent_group_id,
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hierarchy_group_id
+    #   The identifier of the hierarchy group.
+    #   @return [String]
+    #
+    # @!attribute [rw] hierarchy_group_arn
+    #   The Amazon Resource Name (ARN) of the hierarchy group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUserHierarchyGroupResponse AWS API Documentation
+    #
+    class CreateUserHierarchyGroupResponse < Struct.new(
+      :hierarchy_group_id,
+      :hierarchy_group_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -300,6 +1013,106 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteInstanceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteInstanceRequest AWS API Documentation
+    #
+    class DeleteInstanceRequest < Struct.new(
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteIntegrationAssociationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         integration_association_id: "IntegrationAssociationId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_association_id
+    #   The identifier for the AppIntegration association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteIntegrationAssociationRequest AWS API Documentation
+    #
+    class DeleteIntegrationAssociationRequest < Struct.new(
+      :instance_id,
+      :integration_association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteUseCaseRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         integration_association_id: "IntegrationAssociationId", # required
+    #         use_case_id: "UseCaseId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_association_id
+    #   The identifier for the AppIntegration association.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_case_id
+    #   The identifier for the use case.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteUseCaseRequest AWS API Documentation
+    #
+    class DeleteUseCaseRequest < Struct.new(
+      :instance_id,
+      :integration_association_id,
+      :use_case_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteUserHierarchyGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hierarchy_group_id: "HierarchyGroupId", # required
+    #         instance_id: "InstanceId", # required
+    #       }
+    #
+    # @!attribute [rw] hierarchy_group_id
+    #   The identifier of the hierarchy group.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteUserHierarchyGroupRequest AWS API Documentation
+    #
+    class DeleteUserHierarchyGroupRequest < Struct.new(
+      :hierarchy_group_id,
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteUserRequest
     #   data as a hash:
     #
@@ -321,6 +1134,192 @@ module Aws::Connect
     class DeleteUserRequest < Struct.new(
       :instance_id,
       :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeContactFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactFlowRequest AWS API Documentation
+    #
+    class DescribeContactFlowRequest < Struct.new(
+      :instance_id,
+      :contact_flow_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_flow
+    #   Information about the contact flow.
+    #   @return [Types::ContactFlow]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactFlowResponse AWS API Documentation
+    #
+    class DescribeContactFlowResponse < Struct.new(
+      :contact_flow)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeInstanceAttributeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_type
+    #   The type of attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstanceAttributeRequest AWS API Documentation
+    #
+    class DescribeInstanceAttributeRequest < Struct.new(
+      :instance_id,
+      :attribute_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attribute
+    #   The type of attribute.
+    #   @return [Types::Attribute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstanceAttributeResponse AWS API Documentation
+    #
+    class DescribeInstanceAttributeResponse < Struct.new(
+      :attribute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeInstanceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstanceRequest AWS API Documentation
+    #
+    class DescribeInstanceRequest < Struct.new(
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance
+    #   The name of the instance.
+    #   @return [Types::Instance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstanceResponse AWS API Documentation
+    #
+    class DescribeInstanceResponse < Struct.new(
+      :instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeInstanceStorageConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         association_id: "AssociationId", # required
+    #         resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_id
+    #   The existing association identifier that uniquely identifies the
+    #   resource type and storage config for the given instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   A valid resource type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstanceStorageConfigRequest AWS API Documentation
+    #
+    class DescribeInstanceStorageConfigRequest < Struct.new(
+      :instance_id,
+      :association_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_config
+    #   A valid storage type.
+    #   @return [Types::InstanceStorageConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstanceStorageConfigResponse AWS API Documentation
+    #
+    class DescribeInstanceStorageConfigResponse < Struct.new(
+      :storage_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeRoutingProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         routing_profile_id: "RoutingProfileId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeRoutingProfileRequest AWS API Documentation
+    #
+    class DescribeRoutingProfileRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] routing_profile
+    #   The routing profile.
+    #   @return [Types::RoutingProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeRoutingProfileResponse AWS API Documentation
+    #
+    class DescribeRoutingProfileResponse < Struct.new(
+      :routing_profile)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -463,6 +1462,182 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateApprovedOriginRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         origin: "Origin", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin
+    #   The domain URL of the integrated application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateApprovedOriginRequest AWS API Documentation
+    #
+    class DisassociateApprovedOriginRequest < Struct.new(
+      :instance_id,
+      :origin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociateInstanceStorageConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         association_id: "AssociationId", # required
+    #         resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_id
+    #   The existing association identifier that uniquely identifies the
+    #   resource type and storage config for the given instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   A valid resource type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateInstanceStorageConfigRequest AWS API Documentation
+    #
+    class DisassociateInstanceStorageConfigRequest < Struct.new(
+      :instance_id,
+      :association_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociateLambdaFunctionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         function_arn: "FunctionArn", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance..
+    #   @return [String]
+    #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) of the Lambda function being
+    #   disassociated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateLambdaFunctionRequest AWS API Documentation
+    #
+    class DisassociateLambdaFunctionRequest < Struct.new(
+      :instance_id,
+      :function_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociateLexBotRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         bot_name: "BotName", # required
+    #         lex_region: "LexRegion", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_name
+    #   The name of the Amazon Lex bot. Maximum character limit of 50.
+    #   @return [String]
+    #
+    # @!attribute [rw] lex_region
+    #   The Region in which the Amazon Lex bot has been created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateLexBotRequest AWS API Documentation
+    #
+    class DisassociateLexBotRequest < Struct.new(
+      :instance_id,
+      :bot_name,
+      :lex_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociateRoutingProfileQueuesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         routing_profile_id: "RoutingProfileId", # required
+    #         queue_references: [ # required
+    #           {
+    #             queue_id: "QueueId", # required
+    #             channel: "VOICE", # required, accepts VOICE, CHAT, TASK
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_references
+    #   The queues to disassociate from this routing profile.
+    #   @return [Array<Types::RoutingProfileQueueReference>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateRoutingProfileQueuesRequest AWS API Documentation
+    #
+    class DisassociateRoutingProfileQueuesRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :queue_references)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociateSecurityKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         association_id: "AssociationId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_id
+    #   The existing association identifier that uniquely identifies the
+    #   resource type and storage config for the given instance ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateSecurityKeyRequest AWS API Documentation
+    #
+    class DisassociateSecurityKeyRequest < Struct.new(
+      :instance_id,
+      :association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A resource with the specified name already exists.
     #
     # @!attribute [rw] message
@@ -476,6 +1651,33 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The encryption configuration.
+    #
+    # @note When making an API call, you may pass EncryptionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         encryption_type: "KMS", # required, accepts KMS
+    #         key_id: "KeyId", # required
+    #       }
+    #
+    # @!attribute [rw] encryption_type
+    #   The type of encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_id
+    #   The identifier of the encryption key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EncryptionConfig AWS API Documentation
+    #
+    class EncryptionConfig < Struct.new(
+      :encryption_type,
+      :key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the filter to apply when retrieving metrics.
     #
     # @note When making an API call, you may pass Filters
@@ -483,7 +1685,7 @@ module Aws::Connect
     #
     #       {
     #         queues: ["QueueId"],
-    #         channels: ["VOICE"], # accepts VOICE, CHAT
+    #         channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #       }
     #
     # @!attribute [rw] queues
@@ -548,7 +1750,7 @@ module Aws::Connect
     #         instance_id: "InstanceId", # required
     #         filters: { # required
     #           queues: ["QueueId"],
-    #           channels: ["VOICE"], # accepts VOICE, CHAT
+    #           channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #         },
     #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
     #         current_metrics: [ # required
@@ -569,16 +1771,16 @@ module Aws::Connect
     #   The queues, up to 100, or channels, to use to filter the metrics
     #   returned. Metric data is retrieved only for the resources associated
     #   with the queues or channels included in the filter. You can include
-    #   both queue IDs and queue ARNs in the same request. The only
-    #   supported channel is `VOICE`.
+    #   both queue IDs and queue ARNs in the same request. VOICE, CHAT, and
+    #   TASK channels are supported.
     #   @return [Types::Filters]
     #
     # @!attribute [rw] groupings
     #   The grouping applied to the metrics returned. For example, when
     #   grouped by `QUEUE`, the metrics returned apply to each queue rather
     #   than aggregated for all queues. If you group by `CHANNEL`, you
-    #   should include a Channels filter. The only supported channel is
-    #   `VOICE`.
+    #   should include a Channels filter. VOICE, CHAT, and TASK channels are
+    #   supported.
     #
     #   If no `Grouping` is included in the request, a summary of metrics is
     #   returned.
@@ -586,65 +1788,112 @@ module Aws::Connect
     #
     # @!attribute [rw] current_metrics
     #   The metrics to retrieve. Specify the name and unit for each metric.
-    #   The following metrics are available. For a description of each
-    #   metric, see [Real-time Metrics Definitions][1] in the *Amazon
+    #   The following metrics are available. For a description of all the
+    #   metrics, see [Real-time Metrics Definitions][1] in the *Amazon
     #   Connect Administrator Guide*.
     #
     #   AGENTS\_AFTER\_CONTACT\_WORK
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [ACW][2]
+    #
     #   AGENTS\_AVAILABLE
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Available][3]
     #
     #   AGENTS\_ERROR
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [Error][4]
+    #
     #   AGENTS\_NON\_PRODUCTIVE
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [NPT (Non-Productive Time)][5]
     #
     #   AGENTS\_ON\_CALL
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [On contact][6]
+    #
     #   AGENTS\_ON\_CONTACT
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [On contact][6]
     #
     #   AGENTS\_ONLINE
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [Online][7]
+    #
     #   AGENTS\_STAFFED
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Staffed][8]
     #
     #   CONTACTS\_IN\_QUEUE
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [In queue][9]
+    #
     #   CONTACTS\_SCHEDULED
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Scheduled][10]
     #
     #   OLDEST\_CONTACT\_AGE
     #
     #   : Unit: SECONDS
     #
+    #     When you use groupings, Unit says SECONDS but the Value is
+    #     returned in MILLISECONDS. For example, if you get a response like
+    #     this:
+    #
+    #     `\{ "Metric": \{ "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS"
+    #     \}, "Value": 24113.0 `\\}
+    #
+    #     The actual OLDEST\_CONTACT\_AGE is 24 seconds.
+    #
+    #     Name in real-time metrics report: [Oldest][11]
+    #
     #   SLOTS\_ACTIVE
     #
     #   : Unit: COUNT
+    #
+    #     Name in real-time metrics report: [Active][12]
     #
     #   SLOTS\_AVAILABLE
     #
     #   : Unit: COUNT
     #
+    #     Name in real-time metrics report: [Availability][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html
+    #   [2]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time
+    #   [3]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time
+    #   [4]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time
+    #   [5]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time
+    #   [6]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time
+    #   [7]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time
+    #   [8]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time
+    #   [9]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time
+    #   [10]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time
+    #   [11]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time
+    #   [12]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time
+    #   [13]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time
     #   @return [Array<Types::CurrentMetric>]
     #
     # @!attribute [rw] next_token
@@ -742,7 +1991,7 @@ module Aws::Connect
     #         end_time: Time.now, # required
     #         filters: { # required
     #           queues: ["QueueId"],
-    #           channels: ["VOICE"], # accepts VOICE, CHAT
+    #           channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #         },
     #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
     #         historical_metrics: [ # required
@@ -789,8 +2038,8 @@ module Aws::Connect
     #   The queues, up to 100, or channels, to use to filter the metrics
     #   returned. Metric data is retrieved only for the resources associated
     #   with the queues or channels included in the filter. You can include
-    #   both queue IDs and queue ARNs in the same request. The only
-    #   supported channel is `VOICE`.
+    #   both queue IDs and queue ARNs in the same request. VOICE, CHAT, and
+    #   TASK channels are supported.
     #   @return [Types::Filters]
     #
     # @!attribute [rw] groupings
@@ -1101,6 +2350,28 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Contains information about the hierarchy level to update.
+    #
+    # @note When making an API call, you may pass HierarchyLevelUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         name: "HierarchyLevelName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the user hierarchy level. Must not be more than 50
+    #   characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyLevelUpdate AWS API Documentation
+    #
+    class HierarchyLevelUpdate < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the levels of a hierarchy group.
     #
     # @!attribute [rw] level_one
@@ -1160,6 +2431,61 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyStructure AWS API Documentation
     #
     class HierarchyStructure < Struct.new(
+      :level_one,
+      :level_two,
+      :level_three,
+      :level_four,
+      :level_five)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the level hierarchy to update.
+    #
+    # @note When making an API call, you may pass HierarchyStructureUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         level_one: {
+    #           name: "HierarchyLevelName", # required
+    #         },
+    #         level_two: {
+    #           name: "HierarchyLevelName", # required
+    #         },
+    #         level_three: {
+    #           name: "HierarchyLevelName", # required
+    #         },
+    #         level_four: {
+    #           name: "HierarchyLevelName", # required
+    #         },
+    #         level_five: {
+    #           name: "HierarchyLevelName", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] level_one
+    #   The update for level one.
+    #   @return [Types::HierarchyLevelUpdate]
+    #
+    # @!attribute [rw] level_two
+    #   The update for level two.
+    #   @return [Types::HierarchyLevelUpdate]
+    #
+    # @!attribute [rw] level_three
+    #   The update for level three.
+    #   @return [Types::HierarchyLevelUpdate]
+    #
+    # @!attribute [rw] level_four
+    #   The update for level four.
+    #   @return [Types::HierarchyLevelUpdate]
+    #
+    # @!attribute [rw] level_five
+    #   The update for level five.
+    #   @return [Types::HierarchyLevelUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyStructureUpdate AWS API Documentation
+    #
+    class HierarchyStructureUpdate < Struct.new(
       :level_one,
       :level_two,
       :level_three,
@@ -1280,6 +2606,252 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The Amazon Connect instance.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_management_type
+    #   The identity management type.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_alias
+    #   The alias of instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   When the instance was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] service_role
+    #   The service role of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_status
+    #   The state of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Relevant details why the instance was not successfully created.
+    #   @return [Types::InstanceStatusReason]
+    #
+    # @!attribute [rw] inbound_calls_enabled
+    #   Whether inbound calls are enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] outbound_calls_enabled
+    #   Whether outbound calls are enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Instance AWS API Documentation
+    #
+    class Instance < Struct.new(
+      :id,
+      :arn,
+      :identity_management_type,
+      :instance_alias,
+      :created_time,
+      :service_role,
+      :instance_status,
+      :status_reason,
+      :inbound_calls_enabled,
+      :outbound_calls_enabled)
+      SENSITIVE = [:instance_alias]
+      include Aws::Structure
+    end
+
+    # Relevant details why the instance was not successfully created.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InstanceStatusReason AWS API Documentation
+    #
+    class InstanceStatusReason < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The storage configuration for the instance.
+    #
+    # @note When making an API call, you may pass InstanceStorageConfig
+    #   data as a hash:
+    #
+    #       {
+    #         association_id: "AssociationId",
+    #         storage_type: "S3", # required, accepts S3, KINESIS_VIDEO_STREAM, KINESIS_STREAM, KINESIS_FIREHOSE
+    #         s3_config: {
+    #           bucket_name: "BucketName", # required
+    #           bucket_prefix: "Prefix", # required
+    #           encryption_config: {
+    #             encryption_type: "KMS", # required, accepts KMS
+    #             key_id: "KeyId", # required
+    #           },
+    #         },
+    #         kinesis_video_stream_config: {
+    #           prefix: "Prefix", # required
+    #           retention_period_hours: 1, # required
+    #           encryption_config: { # required
+    #             encryption_type: "KMS", # required, accepts KMS
+    #             key_id: "KeyId", # required
+    #           },
+    #         },
+    #         kinesis_stream_config: {
+    #           stream_arn: "ARN", # required
+    #         },
+    #         kinesis_firehose_config: {
+    #           firehose_arn: "ARN", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] association_id
+    #   The existing association identifier that uniquely identifies the
+    #   resource type and storage config for the given instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_type
+    #   A valid storage type.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_config
+    #   The S3 configuration.
+    #   @return [Types::S3Config]
+    #
+    # @!attribute [rw] kinesis_video_stream_config
+    #   The configuration of the Kinesis video stream.
+    #   @return [Types::KinesisVideoStreamConfig]
+    #
+    # @!attribute [rw] kinesis_stream_config
+    #   The configuration of the Kinesis data stream.
+    #   @return [Types::KinesisStreamConfig]
+    #
+    # @!attribute [rw] kinesis_firehose_config
+    #   The configuration of the Kinesis Firehose delivery stream.
+    #   @return [Types::KinesisFirehoseConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InstanceStorageConfig AWS API Documentation
+    #
+    class InstanceStorageConfig < Struct.new(
+      :association_id,
+      :storage_type,
+      :s3_config,
+      :kinesis_video_stream_config,
+      :kinesis_stream_config,
+      :kinesis_firehose_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the instance.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_management_type
+    #   The identity management type of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_alias
+    #   The alias of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   When the instance was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] service_role
+    #   The service role of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_status
+    #   The state of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] inbound_calls_enabled
+    #   Whether inbound calls are enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] outbound_calls_enabled
+    #   Whether outbound calls are enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InstanceSummary AWS API Documentation
+    #
+    class InstanceSummary < Struct.new(
+      :id,
+      :arn,
+      :identity_management_type,
+      :instance_alias,
+      :created_time,
+      :service_role,
+      :instance_status,
+      :inbound_calls_enabled,
+      :outbound_calls_enabled)
+      SENSITIVE = [:instance_alias]
+      include Aws::Structure
+    end
+
+    # Contains summary information about the associated AppIntegrations.
+    #
+    # @!attribute [rw] integration_association_id
+    #   The identifier for the AppIntegration association.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_association_arn
+    #   The Amazon Resource Name (ARN) for the AppIntegration association.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_type
+    #   The integration type.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) for the AppIntegration.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_application_url
+    #   The URL for the external application.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_application_name
+    #   The user-provided, friendly name for the external application.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_type
+    #   The name of the source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/IntegrationAssociationSummary AWS API Documentation
+    #
+    class IntegrationAssociationSummary < Struct.new(
+      :integration_association_id,
+      :integration_association_arn,
+      :instance_id,
+      :integration_type,
+      :integration_arn,
+      :source_application_url,
+      :source_application_name,
+      :source_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Request processing failed due to an error or failure with the service.
     #
     # @!attribute [rw] message
@@ -1290,6 +2862,20 @@ module Aws::Connect
     #
     class InternalServiceException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The contact flow is not valid.
+    #
+    # @!attribute [rw] problems
+    #   The problems with the contact flow. Please fix before trying again.
+    #   @return [Array<Types::ProblemDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InvalidContactFlowException AWS API Documentation
+    #
+    class InvalidContactFlowException < Struct.new(
+      :problems)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1322,6 +2908,116 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Configuration information of a Kinesis Firehose delivery stream.
+    #
+    # @note When making an API call, you may pass KinesisFirehoseConfig
+    #   data as a hash:
+    #
+    #       {
+    #         firehose_arn: "ARN", # required
+    #       }
+    #
+    # @!attribute [rw] firehose_arn
+    #   The Amazon Resource Name (ARN) of the delivery stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/KinesisFirehoseConfig AWS API Documentation
+    #
+    class KinesisFirehoseConfig < Struct.new(
+      :firehose_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information of a Kinesis data stream.
+    #
+    # @note When making an API call, you may pass KinesisStreamConfig
+    #   data as a hash:
+    #
+    #       {
+    #         stream_arn: "ARN", # required
+    #       }
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the data stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/KinesisStreamConfig AWS API Documentation
+    #
+    class KinesisStreamConfig < Struct.new(
+      :stream_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information of a Kinesis video stream.
+    #
+    # @note When making an API call, you may pass KinesisVideoStreamConfig
+    #   data as a hash:
+    #
+    #       {
+    #         prefix: "Prefix", # required
+    #         retention_period_hours: 1, # required
+    #         encryption_config: { # required
+    #           encryption_type: "KMS", # required, accepts KMS
+    #           key_id: "KeyId", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] prefix
+    #   The prefix of the video stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_period_hours
+    #   The number of hours data is retained in the stream. Kinesis Video
+    #   Streams retains the data in a data store that is associated with the
+    #   stream.
+    #
+    #   The default value is 0, indicating that the stream does not persist
+    #   data.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] encryption_config
+    #   The encryption configuration.
+    #   @return [Types::EncryptionConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/KinesisVideoStreamConfig AWS API Documentation
+    #
+    class KinesisVideoStreamConfig < Struct.new(
+      :prefix,
+      :retention_period_hours,
+      :encryption_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information of an Amazon Lex bot.
+    #
+    # @note When making an API call, you may pass LexBot
+    #   data as a hash:
+    #
+    #       {
+    #         name: "BotName",
+    #         lex_region: "LexRegion",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the Amazon Lex bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] lex_region
+    #   The Region the Amazon Lex bot was created in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/LexBot AWS API Documentation
+    #
+    class LexBot < Struct.new(
+      :name,
+      :lex_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The allowed limit for the resource has been exceeded.
     #
     # @!attribute [rw] message
@@ -1332,6 +3028,57 @@ module Aws::Connect
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListApprovedOriginsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListApprovedOriginsRequest AWS API Documentation
+    #
+    class ListApprovedOriginsRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] origins
+    #   The approved origins.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListApprovedOriginsResponse AWS API Documentation
+    #
+    class ListApprovedOriginsResponse < Struct.new(
+      :origins,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1444,6 +3191,313 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListInstanceAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListInstanceAttributesRequest AWS API Documentation
+    #
+    class ListInstanceAttributesRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   The attribute types.
+    #   @return [Array<Types::Attribute>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListInstanceAttributesResponse AWS API Documentation
+    #
+    class ListInstanceAttributesResponse < Struct.new(
+      :attributes,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListInstanceStorageConfigsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   A valid resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListInstanceStorageConfigsRequest AWS API Documentation
+    #
+    class ListInstanceStorageConfigsRequest < Struct.new(
+      :instance_id,
+      :resource_type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_configs
+    #   A valid storage type.
+    #   @return [Array<Types::InstanceStorageConfig>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListInstanceStorageConfigsResponse AWS API Documentation
+    #
+    class ListInstanceStorageConfigsResponse < Struct.new(
+      :storage_configs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListInstancesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListInstancesRequest AWS API Documentation
+    #
+    class ListInstancesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_summary_list
+    #   Information about the instances.
+    #   @return [Array<Types::InstanceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListInstancesResponse AWS API Documentation
+    #
+    class ListInstancesResponse < Struct.new(
+      :instance_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListIntegrationAssociationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListIntegrationAssociationsRequest AWS API Documentation
+    #
+    class ListIntegrationAssociationsRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_association_summary_list
+    #   The AppIntegration associations.
+    #   @return [Array<Types::IntegrationAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListIntegrationAssociationsResponse AWS API Documentation
+    #
+    class ListIntegrationAssociationsResponse < Struct.new(
+      :integration_association_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListLambdaFunctionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListLambdaFunctionsRequest AWS API Documentation
+    #
+    class ListLambdaFunctionsRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lambda_functions
+    #   The Lambdafunction ARNs associated with the specified instance.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListLambdaFunctionsResponse AWS API Documentation
+    #
+    class ListLambdaFunctionsResponse < Struct.new(
+      :lambda_functions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListLexBotsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListLexBotsRequest AWS API Documentation
+    #
+    class ListLexBotsRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lex_bots
+    #   The the names and regions of the Amazon Lex bots associated with the
+    #   specified instance.
+    #   @return [Array<Types::LexBot>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListLexBotsResponse AWS API Documentation
+    #
+    class ListLexBotsResponse < Struct.new(
+      :lex_bots,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListPhoneNumbersRequest
     #   data as a hash:
     #
@@ -1507,6 +3561,57 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListPromptsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPromptsRequest AWS API Documentation
+    #
+    class ListPromptsRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prompt_summary_list
+    #   Information about the prompts.
+    #   @return [Array<Types::PromptSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPromptsResponse AWS API Documentation
+    #
+    class ListPromptsResponse < Struct.new(
+      :prompt_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListQueuesRequest
     #   data as a hash:
     #
@@ -1564,6 +3669,63 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListRoutingProfileQueuesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         routing_profile_id: "RoutingProfileId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfileQueuesRequest AWS API Documentation
+    #
+    class ListRoutingProfileQueuesRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_queue_config_summary_list
+    #   Information about the routing profiles.
+    #   @return [Array<Types::RoutingProfileQueueConfigSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfileQueuesResponse AWS API Documentation
+    #
+    class ListRoutingProfileQueuesResponse < Struct.new(
+      :next_token,
+      :routing_profile_queue_config_summary_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListRoutingProfilesRequest
     #   data as a hash:
     #
@@ -1610,6 +3772,57 @@ module Aws::Connect
     #
     class ListRoutingProfilesResponse < Struct.new(
       :routing_profile_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSecurityKeysRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityKeysRequest AWS API Documentation
+    #
+    class ListSecurityKeysRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_keys
+    #   The security keys.
+    #   @return [Array<Types::SecurityKey>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityKeysResponse AWS API Documentation
+    #
+    class ListSecurityKeysResponse < Struct.new(
+      :security_keys,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1693,6 +3906,66 @@ module Aws::Connect
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about the use cases for the specified
+    # Amazon Connect AppIntegration association.
+    #
+    # @note When making an API call, you may pass ListUseCasesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         integration_association_id: "IntegrationAssociationId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_association_id
+    #   The identifier for the integration association.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUseCasesRequest AWS API Documentation
+    #
+    class ListUseCasesRequest < Struct.new(
+      :instance_id,
+      :integration_association_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] use_case_summary_list
+    #   The use cases.
+    #   @return [Array<Types::UseCase>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUseCasesResponse AWS API Documentation
+    #
+    class ListUseCasesResponse < Struct.new(
+      :use_case_summary_list,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1799,6 +4072,36 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Contains information about which channels are supported, and how many
+    # contacts an agent can have on a channel simultaneously.
+    #
+    # @note When making an API call, you may pass MediaConcurrency
+    #   data as a hash:
+    #
+    #       {
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK
+    #         concurrency: 1, # required
+    #       }
+    #
+    # @!attribute [rw] channel
+    #   The channels that agents can handle in the Contact Control Panel
+    #   (CCP).
+    #   @return [String]
+    #
+    # @!attribute [rw] concurrency
+    #   The number of contacts an agent can have on a channel
+    #   simultaneously.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MediaConcurrency AWS API Documentation
+    #
+    class MediaConcurrency < Struct.new(
+      :channel,
+      :concurrency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The contact is not permitted.
     #
     # @!attribute [rw] message
@@ -1869,6 +4172,44 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about a problem detail.
+    #
+    # @!attribute [rw] message
+    #   The problem detail's message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ProblemDetail AWS API Documentation
+    #
+    class ProblemDetail < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the prompt.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the prompt.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the prompt.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the prompt.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PromptSummary AWS API Documentation
+    #
+    class PromptSummary < Struct.new(
+      :id,
+      :arn,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a queue resource for which metrics are
     # returned.
     #
@@ -1914,6 +4255,71 @@ module Aws::Connect
       :arn,
       :name,
       :queue_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A link that an agent selects to complete a given task. You can have up
+    # to 4,096 UTF-8 bytes across all references for a contact.
+    #
+    # @note When making an API call, you may pass Reference
+    #   data as a hash:
+    #
+    #       {
+    #         value: "ReferenceValue", # required
+    #         type: "URL", # required, accepts URL
+    #       }
+    #
+    # @!attribute [rw] value
+    #   A formatted URL that will be shown to an agent in the Contact
+    #   Control Panel (CCP)
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   A valid URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Reference AWS API Documentation
+    #
+    class Reference < Struct.new(
+      :value,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource already has that name.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResourceConflictException AWS API Documentation
+    #
+    class ResourceConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # That resource is already in use. Please try another.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier for the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message,
+      :resource_type,
+      :resource_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1968,6 +4374,184 @@ module Aws::Connect
     #
     class ResumeContactRecordingResponse < Aws::EmptyStructure; end
 
+    # Contains information about a routing profile.
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_arn
+    #   The Amazon Resource Name (ARN) of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_concurrencies
+    #   The channels agents can handle in the Contact Control Panel (CCP)
+    #   for this routing profile.
+    #   @return [Array<Types::MediaConcurrency>]
+    #
+    # @!attribute [rw] default_outbound_queue_id
+    #   The identifier of the default outbound queue for this routing
+    #   profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfile AWS API Documentation
+    #
+    class RoutingProfile < Struct.new(
+      :instance_id,
+      :name,
+      :routing_profile_arn,
+      :routing_profile_id,
+      :description,
+      :media_concurrencies,
+      :default_outbound_queue_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the queue and channel for which priority
+    # and delay can be set.
+    #
+    # @note When making an API call, you may pass RoutingProfileQueueConfig
+    #   data as a hash:
+    #
+    #       {
+    #         queue_reference: { # required
+    #           queue_id: "QueueId", # required
+    #           channel: "VOICE", # required, accepts VOICE, CHAT, TASK
+    #         },
+    #         priority: 1, # required
+    #         delay: 1, # required
+    #       }
+    #
+    # @!attribute [rw] queue_reference
+    #   Contains information about a queue resource.
+    #   @return [Types::RoutingProfileQueueReference]
+    #
+    # @!attribute [rw] priority
+    #   The order in which contacts are to be handled for the queue. For
+    #   more information, see [Queues: priority and delay][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] delay
+    #   The delay, in seconds, a contact should be in the queue before they
+    #   are routed to an available agent. For more information, see [Queues:
+    #   priority and delay][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileQueueConfig AWS API Documentation
+    #
+    class RoutingProfileQueueConfig < Struct.new(
+      :queue_reference,
+      :priority,
+      :delay)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a routing profile queue.
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_arn
+    #   The Amazon Resource Name (ARN) of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_name
+    #   The name of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The order in which contacts are to be handled for the queue. For
+    #   more information, see [Queues: priority and delay][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] delay
+    #   The delay, in seconds, that a contact should be in the queue before
+    #   they are routed to an available agent. For more information, see
+    #   [Queues: priority and delay][1] in the *Amazon Connect Administrator
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] channel
+    #   The channels this queue supports.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileQueueConfigSummary AWS API Documentation
+    #
+    class RoutingProfileQueueConfigSummary < Struct.new(
+      :queue_id,
+      :queue_arn,
+      :queue_name,
+      :priority,
+      :delay,
+      :channel)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the channel and queue identifier for a routing profile.
+    #
+    # @note When making an API call, you may pass RoutingProfileQueueReference
+    #   data as a hash:
+    #
+    #       {
+    #         queue_id: "QueueId", # required
+    #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK
+    #       }
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel
+    #   The channels agents can handle in the Contact Control Panel (CCP)
+    #   for this routing profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileQueueReference AWS API Documentation
+    #
+    class RoutingProfileQueueReference < Struct.new(
+      :queue_id,
+      :channel)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains summary information about a routing profile.
     #
     # @!attribute [rw] id
@@ -1988,6 +4572,67 @@ module Aws::Connect
       :id,
       :arn,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the S3 storage type.
+    #
+    # @note When making an API call, you may pass S3Config
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_name: "BucketName", # required
+    #         bucket_prefix: "Prefix", # required
+    #         encryption_config: {
+    #           encryption_type: "KMS", # required, accepts KMS
+    #           key_id: "KeyId", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bucket_name
+    #   The S3 bucket name.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_prefix
+    #   The S3 bucket prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_config
+    #   The S3 encryption configuration.
+    #   @return [Types::EncryptionConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/S3Config AWS API Documentation
+    #
+    class S3Config < Struct.new(
+      :bucket_name,
+      :bucket_prefix,
+      :encryption_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information of the security key.
+    #
+    # @!attribute [rw] association_id
+    #   The existing association identifier that uniquely identifies the
+    #   resource type and storage config for the given instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The key of the security key.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the security key was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityKey AWS API Documentation
+    #
+    class SecurityKey < Struct.new(
+      :association_id,
+      :key,
+      :creation_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2016,6 +4661,19 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The service quota has been exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartChatContactRequest
     #   data as a hash:
     #
@@ -2040,7 +4698,14 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow for the chat.
+    #   The identifier of the contact flow for initiating the chat. To see
+    #   the ContactFlowId in the Amazon Connect console user interface, on
+    #   the navigation menu go to **Routing**, **Contact Flows**. Choose the
+    #   contact flow. On the contact flow page, under the name of the
+    #   contact flow, choose **Show additional flow information**. The
+    #   ContactFlowId is the last part of the ARN, shown here in bold:
+    #
+    #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -2175,7 +4840,14 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
-    #   The identifier of the contact flow for the outbound call.
+    #   The identifier of the contact flow for the outbound call. To see the
+    #   ContactFlowId in the Amazon Connect console user interface, on the
+    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
+    #   contact flow. On the contact flow page, under the name of the
+    #   contact flow, choose **Show additional flow information**. The
+    #   ContactFlowId is the last part of the ARN, shown here in bold:
+    #
+    #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -2237,6 +4909,106 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundVoiceContactResponse AWS API Documentation
     #
     class StartOutboundVoiceContactResponse < Struct.new(
+      :contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartTaskContactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         previous_contact_id: "ContactId",
+    #         contact_flow_id: "ContactFlowId", # required
+    #         attributes: {
+    #           "AttributeName" => "AttributeValue",
+    #         },
+    #         name: "Name", # required
+    #         references: {
+    #           "ReferenceKey" => {
+    #             value: "ReferenceValue", # required
+    #             type: "URL", # required, accepts URL
+    #           },
+    #         },
+    #         description: "Description",
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_contact_id
+    #   The identifier of the previous chat, voice, or task contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow for initiating the tasks. To see
+    #   the ContactFlowId in the Amazon Connect console user interface, on
+    #   the navigation menu go to **Routing**, **Contact Flows**. Choose the
+    #   contact flow. On the contact flow page, under the name of the
+    #   contact flow, choose **Show additional flow information**. The
+    #   ContactFlowId is the last part of the ARN, shown here in bold:
+    #
+    #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   A custom key-value pair using an attribute map. The attributes are
+    #   standard Amazon Connect attributes, and can be accessed in contact
+    #   flows just like any other contact attributes.
+    #
+    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
+    #   contact. Attribute keys can include only alphanumeric, dash, and
+    #   underscore characters.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] name
+    #   The name of a task that is shown to an agent in the Contact Control
+    #   Panel (CCP).
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   A formatted URL that is shown to an agent in the Contact Control
+    #   Panel (CCP).
+    #   @return [Hash<String,Types::Reference>]
+    #
+    # @!attribute [rw] description
+    #   A description of the task that is shown to an agent in the Contact
+    #   Control Panel (CCP).
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartTaskContactRequest AWS API Documentation
+    #
+    class StartTaskContactRequest < Struct.new(
+      :instance_id,
+      :previous_contact_id,
+      :contact_flow_id,
+      :attributes,
+      :name,
+      :references,
+      :description,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_id
+    #   The identifier of this contact within the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartTaskContactResponse AWS API Documentation
+    #
+    class StartTaskContactResponse < Struct.new(
       :contact_id)
       SENSITIVE = []
       include Aws::Structure
@@ -2480,6 +5252,354 @@ module Aws::Connect
     #
     class UpdateContactAttributesResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateContactFlowContentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #         content: "ContactFlowContent", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The JSON string that represents contact flow’s content. For an
+    #   example, see [Example contact flow in Amazon Connect Flow
+    #   language][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/flow-language-example.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowContentRequest AWS API Documentation
+    #
+    class UpdateContactFlowContentRequest < Struct.new(
+      :instance_id,
+      :contact_flow_id,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateContactFlowNameRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #         name: "ContactFlowName",
+    #         description: "ContactFlowDescription",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the contact flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowNameRequest AWS API Documentation
+    #
+    class UpdateContactFlowNameRequest < Struct.new(
+      :instance_id,
+      :contact_flow_id,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateInstanceAttributeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA
+    #         value: "InstanceAttributeValue", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_type
+    #   The type of attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for the attribute. Maximum character limit is 100.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateInstanceAttributeRequest AWS API Documentation
+    #
+    class UpdateInstanceAttributeRequest < Struct.new(
+      :instance_id,
+      :attribute_type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateInstanceStorageConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         association_id: "AssociationId", # required
+    #         resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS
+    #         storage_config: { # required
+    #           association_id: "AssociationId",
+    #           storage_type: "S3", # required, accepts S3, KINESIS_VIDEO_STREAM, KINESIS_STREAM, KINESIS_FIREHOSE
+    #           s3_config: {
+    #             bucket_name: "BucketName", # required
+    #             bucket_prefix: "Prefix", # required
+    #             encryption_config: {
+    #               encryption_type: "KMS", # required, accepts KMS
+    #               key_id: "KeyId", # required
+    #             },
+    #           },
+    #           kinesis_video_stream_config: {
+    #             prefix: "Prefix", # required
+    #             retention_period_hours: 1, # required
+    #             encryption_config: { # required
+    #               encryption_type: "KMS", # required, accepts KMS
+    #               key_id: "KeyId", # required
+    #             },
+    #           },
+    #           kinesis_stream_config: {
+    #             stream_arn: "ARN", # required
+    #           },
+    #           kinesis_firehose_config: {
+    #             firehose_arn: "ARN", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_id
+    #   The existing association identifier that uniquely identifies the
+    #   resource type and storage config for the given instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   A valid resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_config
+    #   The storage configuration for the instance.
+    #   @return [Types::InstanceStorageConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateInstanceStorageConfigRequest AWS API Documentation
+    #
+    class UpdateInstanceStorageConfigRequest < Struct.new(
+      :instance_id,
+      :association_id,
+      :resource_type,
+      :storage_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateRoutingProfileConcurrencyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         routing_profile_id: "RoutingProfileId", # required
+    #         media_concurrencies: [ # required
+    #           {
+    #             channel: "VOICE", # required, accepts VOICE, CHAT, TASK
+    #             concurrency: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_concurrencies
+    #   The channels agents can handle in the Contact Control Panel (CCP).
+    #   @return [Array<Types::MediaConcurrency>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileConcurrencyRequest AWS API Documentation
+    #
+    class UpdateRoutingProfileConcurrencyRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :media_concurrencies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateRoutingProfileDefaultOutboundQueueRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         routing_profile_id: "RoutingProfileId", # required
+    #         default_outbound_queue_id: "QueueId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_outbound_queue_id
+    #   The identifier for the default outbound queue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileDefaultOutboundQueueRequest AWS API Documentation
+    #
+    class UpdateRoutingProfileDefaultOutboundQueueRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :default_outbound_queue_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateRoutingProfileNameRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         routing_profile_id: "RoutingProfileId", # required
+    #         name: "RoutingProfileName",
+    #         description: "RoutingProfileDescription",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the routing profile. Must not be more than 127
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the routing profile. Must not be more than 250
+    #   characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileNameRequest AWS API Documentation
+    #
+    class UpdateRoutingProfileNameRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateRoutingProfileQueuesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         routing_profile_id: "RoutingProfileId", # required
+    #         queue_configs: [ # required
+    #           {
+    #             queue_reference: { # required
+    #               queue_id: "QueueId", # required
+    #               channel: "VOICE", # required, accepts VOICE, CHAT, TASK
+    #             },
+    #             priority: 1, # required
+    #             delay: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_configs
+    #   The queues to be updated for this routing profile. Queues must first
+    #   be associated to the routing profile. You can do this using
+    #   AssociateRoutingProfileQueues.
+    #   @return [Array<Types::RoutingProfileQueueConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileQueuesRequest AWS API Documentation
+    #
+    class UpdateRoutingProfileQueuesRequest < Struct.new(
+      :instance_id,
+      :routing_profile_id,
+      :queue_configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateUserHierarchyGroupNameRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "HierarchyGroupName", # required
+    #         hierarchy_group_id: "HierarchyGroupId", # required
+    #         instance_id: "InstanceId", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the hierarchy group. Must not be more than 100
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] hierarchy_group_id
+    #   The identifier of the hierarchy group.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchyGroupNameRequest AWS API Documentation
+    #
+    class UpdateUserHierarchyGroupNameRequest < Struct.new(
+      :name,
+      :hierarchy_group_id,
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateUserHierarchyRequest
     #   data as a hash:
     #
@@ -2506,6 +5626,47 @@ module Aws::Connect
     class UpdateUserHierarchyRequest < Struct.new(
       :hierarchy_group_id,
       :user_id,
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateUserHierarchyStructureRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hierarchy_structure: { # required
+    #           level_one: {
+    #             name: "HierarchyLevelName", # required
+    #           },
+    #           level_two: {
+    #             name: "HierarchyLevelName", # required
+    #           },
+    #           level_three: {
+    #             name: "HierarchyLevelName", # required
+    #           },
+    #           level_four: {
+    #             name: "HierarchyLevelName", # required
+    #           },
+    #           level_five: {
+    #             name: "HierarchyLevelName", # required
+    #           },
+    #         },
+    #         instance_id: "InstanceId", # required
+    #       }
+    #
+    # @!attribute [rw] hierarchy_structure
+    #   The hierarchy levels to update.
+    #   @return [Types::HierarchyStructureUpdate]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchyStructureRequest AWS API Documentation
+    #
+    class UpdateUserHierarchyStructureRequest < Struct.new(
+      :hierarchy_structure,
       :instance_id)
       SENSITIVE = []
       include Aws::Structure
@@ -2640,6 +5801,32 @@ module Aws::Connect
       :security_profile_ids,
       :user_id,
       :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the use case.
+    #
+    # @!attribute [rw] use_case_id
+    #   The identifier for the use case.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_case_arn
+    #   The Amazon Resource Name (ARN) for the use case.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_case_type
+    #   The type of use case to associate to the AppIntegration association.
+    #   Each AppIntegration association can have only one of each use case
+    #   type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UseCase AWS API Documentation
+    #
+    class UseCase < Struct.new(
+      :use_case_id,
+      :use_case_arn,
+      :use_case_type)
       SENSITIVE = []
       include Aws::Structure
     end

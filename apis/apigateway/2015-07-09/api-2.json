@@ -792,6 +792,7 @@
       "output":{"shape":"Deployments"},
       "errors":[
         {"shape":"BadRequestException"},
+        {"shape":"NotFoundException"},
         {"shape":"UnauthorizedException"},
         {"shape":"TooManyRequestsException"},
         {"shape":"ServiceUnavailableException"}
@@ -2204,7 +2205,8 @@
         "regionalCertificateArn":{"shape":"String"},
         "endpointConfiguration":{"shape":"EndpointConfiguration"},
         "tags":{"shape":"MapOfStringToString"},
-        "securityPolicy":{"shape":"SecurityPolicy"}
+        "securityPolicy":{"shape":"SecurityPolicy"},
+        "mutualTlsAuthentication":{"shape":"MutualTlsAuthenticationInput"}
       }
     },
     "CreateModelRequest":{
@@ -2274,7 +2276,8 @@
         "apiKeySource":{"shape":"ApiKeySourceType"},
         "endpointConfiguration":{"shape":"EndpointConfiguration"},
         "policy":{"shape":"String"},
-        "tags":{"shape":"MapOfStringToString"}
+        "tags":{"shape":"MapOfStringToString"},
+        "disableExecuteApiEndpoint":{"shape":"Boolean"}
       }
     },
     "CreateStageRequest":{
@@ -2850,7 +2853,8 @@
         "domainNameStatus":{"shape":"DomainNameStatus"},
         "domainNameStatusMessage":{"shape":"String"},
         "securityPolicy":{"shape":"SecurityPolicy"},
-        "tags":{"shape":"MapOfStringToString"}
+        "tags":{"shape":"MapOfStringToString"},
+        "mutualTlsAuthentication":{"shape":"MutualTlsAuthentication"}
       }
     },
     "DomainNameStatus":{
@@ -4291,6 +4295,21 @@
         }
       }
     },
+    "MutualTlsAuthentication":{
+      "type":"structure",
+      "members":{
+        "truststoreUri":{"shape":"String"},
+        "truststoreVersion":{"shape":"String"},
+        "truststoreWarnings":{"shape":"ListOfString"}
+      }
+    },
+    "MutualTlsAuthenticationInput":{
+      "type":"structure",
+      "members":{
+        "truststoreUri":{"shape":"String"},
+        "truststoreVersion":{"shape":"String"}
+      }
+    },
     "NotFoundException":{
       "type":"structure",
       "members":{
@@ -4600,7 +4619,8 @@
         "apiKeySource":{"shape":"ApiKeySourceType"},
         "endpointConfiguration":{"shape":"EndpointConfiguration"},
         "policy":{"shape":"String"},
-        "tags":{"shape":"MapOfStringToString"}
+        "tags":{"shape":"MapOfStringToString"},
+        "disableExecuteApiEndpoint":{"shape":"Boolean"}
       }
     },
     "RestApis":{

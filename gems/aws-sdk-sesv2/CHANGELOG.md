@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2020-10-29)
+------------------
+
+* Feature - This release enables customers to manage their own contact lists and end-user subscription preferences.
+
+1.13.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.12.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.11.0 (2020-08-25)
 ------------------
 

@@ -471,7 +471,8 @@ module Aws::DynamoDB
     #   specify this property.
     #
     #   For current minimum and maximum provisioned throughput values, see
-    #   [Limits][1] in the *Amazon DynamoDB Developer Guide*.
+    #   [Service, Account, and Table Quotas][1] in the *Amazon DynamoDB
+    #   Developer Guide*.
     #
     #
     #

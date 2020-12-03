@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2020-11-24)
+------------------
+
+* Feature - Support Comprehend events detection APIs
+
+1.41.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2020-09-22)
+------------------
+
+* Feature - Amazon Comprehend integrates with Amazon SageMaker GroundTruth to allow its customers to annotate their datasets using GroundTruth and train their models using Comprehend Custom APIs.
+
+1.39.0 (2020-09-17)
+------------------
+
+* Feature - Amazon Comprehend now supports detecting Personally Identifiable Information (PII) entities in a document.
+
+1.38.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.37.0 (2020-08-25)
 ------------------
 

@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2020-11-19)
+------------------
+
+* Feature - The AWS Elemental MediaLive APIs and SDKs now support the ability to see the software update status on Link devices
+
+1.59.0 (2020-11-06)
+------------------
+
+* Feature - Support for SCTE35 ad markers in OnCuePoint style in RTMP outputs.
+
+1.58.0 (2020-10-30)
+------------------
+
+* Feature - Support for HLS discontinuity tags in the child manifests. Support for incomplete segment behavior in the media output. Support for automatic input failover condition settings.
+
+1.57.0 (2020-10-16)
+------------------
+
+* Feature - The AWS Elemental MediaLive APIs and SDKs now support the ability to transfer the ownership of MediaLive Link devices across AWS accounts.
+
+1.56.0 (2020-10-09)
+------------------
+
+* Feature - WAV audio output. Extracting ancillary captions in MP4 file inputs. Priority on channels feeding a multiplex (higher priority channels will tend to have higher video quality).
+
+1.55.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2020-09-18)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports batch operations, which allow users to start, stop, and delete multiple MediaLive resources with a single request.
+
+1.53.0 (2020-09-15)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports CDI (Cloud Digital Interface) inputs which enable uncompressed video from applications on Elastic Cloud Compute (EC2), AWS Media Services, and from AWS partners
+
 1.52.0 (2020-08-25)
 ------------------
 

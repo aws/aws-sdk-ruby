@@ -337,6 +337,119 @@ module Aws::CostExplorer
 
     # @!group API Operations
 
+    # Creates a new cost anomaly detection monitor with the requested type
+    # and monitor specification.
+    #
+    # @option params [required, Types::AnomalyMonitor] :anomaly_monitor
+    #   The cost anomaly detection monitor object that you want to create.
+    #
+    # @return [Types::CreateAnomalyMonitorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAnomalyMonitorResponse#monitor_arn #monitor_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_anomaly_monitor({
+    #     anomaly_monitor: { # required
+    #       monitor_arn: "GenericString",
+    #       monitor_name: "GenericString", # required
+    #       creation_date: "YearMonthDay",
+    #       last_updated_date: "YearMonthDay",
+    #       last_evaluated_date: "YearMonthDay",
+    #       monitor_type: "DIMENSIONAL", # required, accepts DIMENSIONAL, CUSTOM
+    #       monitor_dimension: "SERVICE", # accepts SERVICE
+    #       monitor_specification: {
+    #         or: [
+    #           {
+    #             # recursive Expression
+    #           },
+    #         ],
+    #         and: [
+    #           {
+    #             # recursive Expression
+    #           },
+    #         ],
+    #         not: {
+    #           # recursive Expression
+    #         },
+    #         dimensions: {
+    #           key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #           values: ["Value"],
+    #           match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
+    #         },
+    #         tags: {
+    #           key: "TagKey",
+    #           values: ["Value"],
+    #           match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
+    #         },
+    #         cost_categories: {
+    #           key: "CostCategoryName",
+    #           values: ["Value"],
+    #           match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
+    #         },
+    #       },
+    #       dimensional_value_count: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monitor_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CreateAnomalyMonitor AWS API Documentation
+    #
+    # @overload create_anomaly_monitor(params = {})
+    # @param [Hash] params ({})
+    def create_anomaly_monitor(params = {}, options = {})
+      req = build_request(:create_anomaly_monitor, params)
+      req.send_request(options)
+    end
+
+    # Adds a subscription to a cost anomaly detection monitor. You can use
+    # each subscription to define subscribers with email or SNS
+    # notifications. Email subscribers can set a dollar threshold and a time
+    # frequency for receiving notifications.
+    #
+    # @option params [required, Types::AnomalySubscription] :anomaly_subscription
+    #   The cost anomaly subscription object that you want to create.
+    #
+    # @return [Types::CreateAnomalySubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAnomalySubscriptionResponse#subscription_arn #subscription_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_anomaly_subscription({
+    #     anomaly_subscription: { # required
+    #       subscription_arn: "GenericString",
+    #       account_id: "GenericString",
+    #       monitor_arn_list: ["Value"], # required
+    #       subscribers: [ # required
+    #         {
+    #           address: "SubscriberAddress",
+    #           type: "EMAIL", # accepts EMAIL, SNS
+    #           status: "CONFIRMED", # accepts CONFIRMED, DECLINED
+    #         },
+    #       ],
+    #       threshold: 1.0, # required
+    #       frequency: "DAILY", # required, accepts DAILY, IMMEDIATE, WEEKLY
+    #       subscription_name: "GenericString", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.subscription_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CreateAnomalySubscription AWS API Documentation
+    #
+    # @overload create_anomaly_subscription(params = {})
+    # @param [Hash] params ({})
+    def create_anomaly_subscription(params = {}, options = {})
+      req = build_request(:create_anomaly_subscription, params)
+      req.send_request(options)
+    end
+
     # Creates a new Cost Category with the requested name and rules.
     #
     # @option params [required, String] :name
@@ -393,6 +506,7 @@ module Aws::CostExplorer
     #           cost_categories: {
     #             key: "CostCategoryName",
     #             values: ["Value"],
+    #             match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #           },
     #         },
     #       },
@@ -410,6 +524,52 @@ module Aws::CostExplorer
     # @param [Hash] params ({})
     def create_cost_category_definition(params = {}, options = {})
       req = build_request(:create_cost_category_definition, params)
+      req.send_request(options)
+    end
+
+    # Deletes a cost anomaly monitor.
+    #
+    # @option params [required, String] :monitor_arn
+    #   The unique identifier of the cost anomaly monitor that you want to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_anomaly_monitor({
+    #     monitor_arn: "GenericString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DeleteAnomalyMonitor AWS API Documentation
+    #
+    # @overload delete_anomaly_monitor(params = {})
+    # @param [Hash] params ({})
+    def delete_anomaly_monitor(params = {}, options = {})
+      req = build_request(:delete_anomaly_monitor, params)
+      req.send_request(options)
+    end
+
+    # Deletes a cost anomaly subscription.
+    #
+    # @option params [required, String] :subscription_arn
+    #   The unique identifier of the cost anomaly subscription that you want
+    #   to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_anomaly_subscription({
+    #     subscription_arn: "GenericString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DeleteAnomalySubscription AWS API Documentation
+    #
+    # @overload delete_anomaly_subscription(params = {})
+    # @param [Hash] params ({})
+    def delete_anomaly_subscription(params = {}, options = {})
+      req = build_request(:delete_anomaly_subscription, params)
       req.send_request(options)
     end
 
@@ -497,6 +657,11 @@ module Aws::CostExplorer
     #   resp.cost_category.rules[0].rule.cost_categories.key #=> String
     #   resp.cost_category.rules[0].rule.cost_categories.values #=> Array
     #   resp.cost_category.rules[0].rule.cost_categories.values[0] #=> String
+    #   resp.cost_category.rules[0].rule.cost_categories.match_options #=> Array
+    #   resp.cost_category.rules[0].rule.cost_categories.match_options[0] #=> String, one of "EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE"
+    #   resp.cost_category.processing_status #=> Array
+    #   resp.cost_category.processing_status[0].component #=> String, one of "COST_EXPLORER"
+    #   resp.cost_category.processing_status[0].status #=> String, one of "PROCESSING", "APPLIED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DescribeCostCategoryDefinition AWS API Documentation
     #
@@ -507,18 +672,229 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
+    # Retrieves all of the cost anomalies detected on your account, during
+    # the time period specified by the `DateInterval` object.
+    #
+    # @option params [String] :monitor_arn
+    #   Retrieves all of the cost anomalies detected for a specific cost
+    #   anomaly monitor Amazon Resource Name (ARN).
+    #
+    # @option params [required, Types::AnomalyDateInterval] :date_interval
+    #   Assigns the start and end dates for retrieving cost anomalies. The
+    #   returned anomaly object will have an `AnomalyEndDate` in the specified
+    #   time range.
+    #
+    # @option params [String] :feedback
+    #   Filters anomaly results by the feedback field on the anomaly object.
+    #
+    # @option params [Types::TotalImpactFilter] :total_impact
+    #   Filters anomaly results by the total impact field on the anomaly
+    #   object. For example, you can filter anomalies `GREATER_THAN 200.00` to
+    #   retrieve anomalies, with an estimated dollar impact greater than 200.
+    #
+    # @option params [String] :next_page_token
+    #   The token to retrieve the next set of results. AWS provides the token
+    #   when the response from a previous call has more results than the
+    #   maximum page size.
+    #
+    # @option params [Integer] :max_results
+    #   The number of entries a paginated response contains.
+    #
+    # @return [Types::GetAnomaliesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAnomaliesResponse#anomalies #anomalies} => Array&lt;Types::Anomaly&gt;
+    #   * {Types::GetAnomaliesResponse#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_anomalies({
+    #     monitor_arn: "GenericString",
+    #     date_interval: { # required
+    #       start_date: "YearMonthDay", # required
+    #       end_date: "YearMonthDay",
+    #     },
+    #     feedback: "YES", # accepts YES, NO, PLANNED_ACTIVITY
+    #     total_impact: {
+    #       numeric_operator: "EQUAL", # required, accepts EQUAL, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, BETWEEN
+    #       start_value: 1.0, # required
+    #       end_value: 1.0,
+    #     },
+    #     next_page_token: "NextPageToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.anomalies #=> Array
+    #   resp.anomalies[0].anomaly_id #=> String
+    #   resp.anomalies[0].anomaly_start_date #=> String
+    #   resp.anomalies[0].anomaly_end_date #=> String
+    #   resp.anomalies[0].dimension_value #=> String
+    #   resp.anomalies[0].root_causes #=> Array
+    #   resp.anomalies[0].root_causes[0].service #=> String
+    #   resp.anomalies[0].root_causes[0].region #=> String
+    #   resp.anomalies[0].root_causes[0].linked_account #=> String
+    #   resp.anomalies[0].root_causes[0].usage_type #=> String
+    #   resp.anomalies[0].anomaly_score.max_score #=> Float
+    #   resp.anomalies[0].anomaly_score.current_score #=> Float
+    #   resp.anomalies[0].impact.max_impact #=> Float
+    #   resp.anomalies[0].impact.total_impact #=> Float
+    #   resp.anomalies[0].monitor_arn #=> String
+    #   resp.anomalies[0].feedback #=> String, one of "YES", "NO", "PLANNED_ACTIVITY"
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetAnomalies AWS API Documentation
+    #
+    # @overload get_anomalies(params = {})
+    # @param [Hash] params ({})
+    def get_anomalies(params = {}, options = {})
+      req = build_request(:get_anomalies, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the cost anomaly monitor definitions for your account. You
+    # can filter using a list of cost anomaly monitor Amazon Resource Names
+    # (ARNs).
+    #
+    # @option params [Array<String>] :monitor_arn_list
+    #   A list of cost anomaly monitor ARNs.
+    #
+    # @option params [String] :next_page_token
+    #   The token to retrieve the next set of results. AWS provides the token
+    #   when the response from a previous call has more results than the
+    #   maximum page size.
+    #
+    # @option params [Integer] :max_results
+    #   The number of entries a paginated response contains.
+    #
+    # @return [Types::GetAnomalyMonitorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAnomalyMonitorsResponse#anomaly_monitors #anomaly_monitors} => Array&lt;Types::AnomalyMonitor&gt;
+    #   * {Types::GetAnomalyMonitorsResponse#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_anomaly_monitors({
+    #     monitor_arn_list: ["Value"],
+    #     next_page_token: "NextPageToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.anomaly_monitors #=> Array
+    #   resp.anomaly_monitors[0].monitor_arn #=> String
+    #   resp.anomaly_monitors[0].monitor_name #=> String
+    #   resp.anomaly_monitors[0].creation_date #=> String
+    #   resp.anomaly_monitors[0].last_updated_date #=> String
+    #   resp.anomaly_monitors[0].last_evaluated_date #=> String
+    #   resp.anomaly_monitors[0].monitor_type #=> String, one of "DIMENSIONAL", "CUSTOM"
+    #   resp.anomaly_monitors[0].monitor_dimension #=> String, one of "SERVICE"
+    #   resp.anomaly_monitors[0].monitor_specification.or #=> Array
+    #   resp.anomaly_monitors[0].monitor_specification.or[0] #=> Types::Expression
+    #   resp.anomaly_monitors[0].monitor_specification.and #=> Array
+    #   resp.anomaly_monitors[0].monitor_specification.and[0] #=> Types::Expression
+    #   resp.anomaly_monitors[0].monitor_specification.not #=> Types::Expression
+    #   resp.anomaly_monitors[0].monitor_specification.dimensions.key #=> String, one of "AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION"
+    #   resp.anomaly_monitors[0].monitor_specification.dimensions.values #=> Array
+    #   resp.anomaly_monitors[0].monitor_specification.dimensions.values[0] #=> String
+    #   resp.anomaly_monitors[0].monitor_specification.dimensions.match_options #=> Array
+    #   resp.anomaly_monitors[0].monitor_specification.dimensions.match_options[0] #=> String, one of "EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE"
+    #   resp.anomaly_monitors[0].monitor_specification.tags.key #=> String
+    #   resp.anomaly_monitors[0].monitor_specification.tags.values #=> Array
+    #   resp.anomaly_monitors[0].monitor_specification.tags.values[0] #=> String
+    #   resp.anomaly_monitors[0].monitor_specification.tags.match_options #=> Array
+    #   resp.anomaly_monitors[0].monitor_specification.tags.match_options[0] #=> String, one of "EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE"
+    #   resp.anomaly_monitors[0].monitor_specification.cost_categories.key #=> String
+    #   resp.anomaly_monitors[0].monitor_specification.cost_categories.values #=> Array
+    #   resp.anomaly_monitors[0].monitor_specification.cost_categories.values[0] #=> String
+    #   resp.anomaly_monitors[0].monitor_specification.cost_categories.match_options #=> Array
+    #   resp.anomaly_monitors[0].monitor_specification.cost_categories.match_options[0] #=> String, one of "EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE"
+    #   resp.anomaly_monitors[0].dimensional_value_count #=> Integer
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetAnomalyMonitors AWS API Documentation
+    #
+    # @overload get_anomaly_monitors(params = {})
+    # @param [Hash] params ({})
+    def get_anomaly_monitors(params = {}, options = {})
+      req = build_request(:get_anomaly_monitors, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the cost anomaly subscription objects for your account. You
+    # can filter using a list of cost anomaly monitor Amazon Resource Names
+    # (ARNs).
+    #
+    # @option params [Array<String>] :subscription_arn_list
+    #   A list of cost anomaly subscription ARNs.
+    #
+    # @option params [String] :monitor_arn
+    #   Cost anomaly monitor ARNs.
+    #
+    # @option params [String] :next_page_token
+    #   The token to retrieve the next set of results. AWS provides the token
+    #   when the response from a previous call has more results than the
+    #   maximum page size.
+    #
+    # @option params [Integer] :max_results
+    #   The number of entries a paginated response contains.
+    #
+    # @return [Types::GetAnomalySubscriptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAnomalySubscriptionsResponse#anomaly_subscriptions #anomaly_subscriptions} => Array&lt;Types::AnomalySubscription&gt;
+    #   * {Types::GetAnomalySubscriptionsResponse#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_anomaly_subscriptions({
+    #     subscription_arn_list: ["Value"],
+    #     monitor_arn: "GenericString",
+    #     next_page_token: "NextPageToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.anomaly_subscriptions #=> Array
+    #   resp.anomaly_subscriptions[0].subscription_arn #=> String
+    #   resp.anomaly_subscriptions[0].account_id #=> String
+    #   resp.anomaly_subscriptions[0].monitor_arn_list #=> Array
+    #   resp.anomaly_subscriptions[0].monitor_arn_list[0] #=> String
+    #   resp.anomaly_subscriptions[0].subscribers #=> Array
+    #   resp.anomaly_subscriptions[0].subscribers[0].address #=> String
+    #   resp.anomaly_subscriptions[0].subscribers[0].type #=> String, one of "EMAIL", "SNS"
+    #   resp.anomaly_subscriptions[0].subscribers[0].status #=> String, one of "CONFIRMED", "DECLINED"
+    #   resp.anomaly_subscriptions[0].threshold #=> Float
+    #   resp.anomaly_subscriptions[0].frequency #=> String, one of "DAILY", "IMMEDIATE", "WEEKLY"
+    #   resp.anomaly_subscriptions[0].subscription_name #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetAnomalySubscriptions AWS API Documentation
+    #
+    # @overload get_anomaly_subscriptions(params = {})
+    # @param [Hash] params ({})
+    def get_anomaly_subscriptions(params = {}, options = {})
+      req = build_request(:get_anomaly_subscriptions, params)
+      req.send_request(options)
+    end
+
     # Retrieves cost and usage metrics for your account. You can specify
     # which cost and usage-related metric, such as `BlendedCosts` or
     # `UsageQuantity`, that you want the request to return. You can also
     # filter and group your data by various dimensions, such as `SERVICE` or
     # `AZ`, in a specific time range. For a complete list of valid
-    # dimensions, see the [GetDimensionValues][1] operation. Master accounts
-    # in an organization in AWS Organizations have access to all member
-    # accounts.
+    # dimensions, see the [GetDimensionValues][1] operation. Management
+    # account in an organization in AWS Organizations have access to all
+    # member accounts.
+    #
+    # For information about filter limitations, see [Quotas and
+    # restrictions][2] in the *Billing and Cost Management User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html
+    # [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-limits.html
     #
     # @option params [required, Types::DateInterval] :time_period
     #   Sets the start and end dates for retrieving AWS costs. The start date
@@ -543,7 +919,7 @@ module Aws::CostExplorer
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #
-    # @option params [Array<String>] :metrics
+    # @option params [required, Array<String>] :metrics
     #   Which metrics are returned in the query. For more information about
     #   blended and unblended rates, see [Why does the "blended" annotation
     #   appear on some line items in my bill?][1].
@@ -570,7 +946,7 @@ module Aws::CostExplorer
     #
     # @option params [Array<Types::GroupDefinition>] :group_by
     #   You can group AWS costs using up to two different groups, either
-    #   dimensions, tag keys, or both.
+    #   dimensions, tag keys, cost categories, or any two group by types.
     #
     #   When you group by tag key, you get all tag values, including empty
     #   strings.
@@ -625,9 +1001,10 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
-    #     metrics: ["MetricName"],
+    #     metrics: ["MetricName"], # required
     #     group_by: [
     #       {
     #         type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
@@ -672,8 +1049,8 @@ module Aws::CostExplorer
     # return. You can also filter and group your data by various dimensions,
     # such as `SERVICE` or `AZ`, in a specific time range. For a complete
     # list of valid dimensions, see the [GetDimensionValues][1] operation.
-    # Master accounts in an organization in AWS Organizations have access to
-    # all member accounts. This API is currently available for the Amazon
+    # Management account in an organization in AWS Organizations have access
+    # to all member accounts. This API is currently available for the Amazon
     # Elastic Compute Cloud – Compute service only.
     #
     # <note markdown="1"> This is an opt-in only feature. You can enable this feature from the
@@ -702,7 +1079,7 @@ module Aws::CostExplorer
     #   `Granularity` isn't set, the response object doesn't include the
     #   `Granularity`, `MONTHLY`, `DAILY`, or `HOURLY`.
     #
-    # @option params [Types::Expression] :filter
+    # @option params [required, Types::Expression] :filter
     #   Filters Amazon Web Services costs by different dimensions. For
     #   example, you can specify `SERVICE` and `LINKED_ACCOUNT` and get the
     #   costs that are associated with that account's usage of that service.
@@ -710,7 +1087,8 @@ module Aws::CostExplorer
     #   dimension filters. For more information, see [Expression][1].
     #
     #   The `GetCostAndUsageWithResources` operation requires that you either
-    #   group by or filter by a `ResourceId`.
+    #   group by or filter by a `ResourceId`. It requires the [Expression][1]
+    #   `"SERVICE = Amazon Elastic Compute Cloud - Compute"` in the filter.
     #
     #
     #
@@ -743,7 +1121,7 @@ module Aws::CostExplorer
     #
     # @option params [Array<Types::GroupDefinition>] :group_by
     #   You can group Amazon Web Services costs using up to two different
-    #   groups: either dimensions, tag keys, or both.
+    #   groups: `DIMENSION`, `TAG`, `COST_CATEGORY`.
     #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. AWS provides the token
@@ -764,7 +1142,7 @@ module Aws::CostExplorer
     #       end: "YearMonthDay", # required
     #     },
     #     granularity: "DAILY", # accepts DAILY, MONTHLY, HOURLY
-    #     filter: {
+    #     filter: { # required
     #       or: [
     #         {
     #           # recursive Expression
@@ -791,6 +1169,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #     metrics: ["MetricName"],
@@ -837,7 +1216,9 @@ module Aws::CostExplorer
     # your past costs.
     #
     # @option params [required, Types::DateInterval] :time_period
-    #   The period of time that you want the forecast to cover.
+    #   The period of time that you want the forecast to cover. The start date
+    #   must be equal to or no later than the current date to avoid a
+    #   validation error.
     #
     # @option params [required, String] :metric
     #   Which metric Cost Explorer uses to create your forecast. For more
@@ -920,6 +1301,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #     prediction_interval_level: 1,
@@ -1012,6 +1394,8 @@ module Aws::CostExplorer
     #   * USAGE\_TYPE\_GROUP - The grouping of common usage types. An example
     #     is Amazon EC2: CloudWatch – Alarms. The response for this operation
     #     includes a unit attribute.
+    #
+    #   * REGION - The AWS Region.
     #
     #   * RECORD\_TYPE - The different types of charges such as RI fees, usage
     #     costs, tax refunds, and credits.
@@ -1118,11 +1502,11 @@ module Aws::CostExplorer
     # Retrieves the reservation coverage for your account. This enables you
     # to see how much of your Amazon Elastic Compute Cloud, Amazon
     # ElastiCache, Amazon Relational Database Service, or Amazon Redshift
-    # usage is covered by a reservation. An organization's master account
-    # can see the coverage of the associated member accounts. This supports
-    # dimensions, Cost Categories, and nested expressions. For any time
-    # period, you can filter data about reservation usage by the following
-    # dimensions:
+    # usage is covered by a reservation. An organization's management
+    # account can see the coverage of the associated member accounts. This
+    # supports dimensions, Cost Categories, and nested expressions. For any
+    # time period, you can filter data about reservation usage by the
+    # following dimensions:
     #
     # * AZ
     #
@@ -1294,6 +1678,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #     metrics: ["MetricName"],
@@ -1375,9 +1760,9 @@ module Aws::CostExplorer
     #
     # @option params [String] :account_scope
     #   The account scope that you want your recommendations for. Amazon Web
-    #   Services calculates recommendations including the payer account and
-    #   linked accounts if the value is set to `PAYER`. If the value is
-    #   `LINKED`, recommendations are calculated for individual linked
+    #   Services calculates recommendations including the management account
+    #   and member accounts if the value is set to `PAYER`. If the value is
+    #   `LINKED`, recommendations are calculated for individual member
     #   accounts only.
     #
     # @option params [String] :lookback_period_in_days
@@ -1503,8 +1888,8 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Retrieves the reservation utilization for your account. Master
-    # accounts in an organization have access to member accounts. You can
+    # Retrieves the reservation utilization for your account. Management
+    # account in an organization have access to member accounts. You can
     # filter data by dimensions in a time period. You can use
     # `GetDimensionValues` to determine the possible dimension values.
     # Currently, you can group only by `SUBSCRIPTION_ID`.
@@ -1615,6 +2000,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #     next_page_token: "NextPageToken",
@@ -1702,8 +2088,10 @@ module Aws::CostExplorer
     #
     #   * Simple dimension values - You can set the dimension name and values
     #     for the filters that you plan to use. For example, you can filter
-    #     for `REGION==us-east-1 OR REGION==us-west-1`. The `Expression` for
-    #     that looks like this:
+    #     for `REGION==us-east-1 OR REGION==us-west-1`. For
+    #     `GetRightsizingRecommendation`, the Region is a full name (for
+    #     example, `REGION==US East (N. Virginia)`. The `Expression` example
+    #     looks like:
     #
     #     `\{ "Dimensions": \{ "Key": "REGION", "Values": [ "us-east-1",
     #     “us-west-1” ] \} \}`
@@ -1800,6 +2188,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #     configuration: {
@@ -1842,6 +2231,10 @@ module Aws::CostExplorer
     #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.max_cpu_utilization_percentage #=> String
     #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.max_memory_utilization_percentage #=> String
     #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.max_storage_utilization_percentage #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_read_ops_per_second #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_write_ops_per_second #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_read_bytes_per_second #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_write_bytes_per_second #=> String
     #   resp.rightsizing_recommendations[0].current_instance.reservation_covered_hours_in_lookback_period #=> String
     #   resp.rightsizing_recommendations[0].current_instance.savings_plans_covered_hours_in_lookback_period #=> String
     #   resp.rightsizing_recommendations[0].current_instance.on_demand_hours_in_lookback_period #=> String
@@ -1866,6 +2259,10 @@ module Aws::CostExplorer
     #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.max_cpu_utilization_percentage #=> String
     #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.max_memory_utilization_percentage #=> String
     #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.max_storage_utilization_percentage #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_read_ops_per_second #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_write_ops_per_second #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_read_bytes_per_second #=> String
+    #   resp.rightsizing_recommendations[0].modify_recommendation_detail.target_instances[0].expected_resource_utilization.ec2_resource_utilization.ebs_resource_utilization.ebs_write_bytes_per_second #=> String
     #   resp.rightsizing_recommendations[0].terminate_recommendation_detail.estimated_monthly_savings #=> String
     #   resp.rightsizing_recommendations[0].terminate_recommendation_detail.currency_code #=> String
     #   resp.next_page_token #=> String
@@ -1883,10 +2280,10 @@ module Aws::CostExplorer
 
     # Retrieves the Savings Plans covered for your account. This enables you
     # to see how much of your cost is covered by a Savings Plan. An
-    # organization’s master account can see the coverage of the associated
-    # member accounts. This supports dimensions, Cost Categories, and nested
-    # expressions. For any time period, you can filter data for Savings
-    # Plans usage with the following dimensions:
+    # organization’s management account can see the coverage of the
+    # associated member accounts. This supports dimensions, Cost Categories,
+    # and nested expressions. For any time period, you can filter data for
+    # Savings Plans usage with the following dimensions:
     #
     # * `LINKED_ACCOUNT`
     #
@@ -1999,6 +2396,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #     metrics: ["MetricName"],
@@ -2043,9 +2441,9 @@ module Aws::CostExplorer
     #
     # @option params [String] :account_scope
     #   The account scope that you want your recommendations for. Amazon Web
-    #   Services calculates recommendations including the payer account and
-    #   linked accounts if the value is set to `PAYER`. If the value is
-    #   `LINKED`, recommendations are calculated for individual linked
+    #   Services calculates recommendations including the management account
+    #   and member accounts if the value is set to `PAYER`. If the value is
+    #   `LINKED`, recommendations are calculated for individual member
     #   accounts only.
     #
     # @option params [String] :next_page_token
@@ -2117,6 +2515,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #   })
@@ -2125,6 +2524,7 @@ module Aws::CostExplorer
     #
     #   resp.metadata.recommendation_id #=> String
     #   resp.metadata.generation_timestamp #=> String
+    #   resp.metadata.additional_metadata #=> String
     #   resp.savings_plans_purchase_recommendation.account_scope #=> String, one of "PAYER", "LINKED"
     #   resp.savings_plans_purchase_recommendation.savings_plans_type #=> String, one of "COMPUTE_SP", "EC2_INSTANCE_SP"
     #   resp.savings_plans_purchase_recommendation.term_in_years #=> String, one of "ONE_YEAR", "THREE_YEARS"
@@ -2172,7 +2572,7 @@ module Aws::CostExplorer
     end
 
     # Retrieves the Savings Plans utilization for your account across date
-    # ranges with daily or monthly granularity. Master accounts in an
+    # ranges with daily or monthly granularity. Management account in an
     # organization have access to member accounts. You can use
     # `GetDimensionValues` in `SAVINGS_PLANS` to determine the possible
     # dimension values.
@@ -2259,6 +2659,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #   })
@@ -2390,6 +2791,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #     next_token: "NextPageToken",
@@ -2500,7 +2902,8 @@ module Aws::CostExplorer
     #   exclusive. For example, if `start` is `2017-01-01` and `end` is
     #   `2017-05-01`, then the cost and usage data is retrieved from
     #   `2017-01-01` up to and including `2017-04-30` but not including
-    #   `2017-05-01`.
+    #   `2017-05-01`. The start date must be equal to or later than the
+    #   current date to avoid a validation error.
     #
     # @option params [required, String] :metric
     #   Which metric Cost Explorer uses to create your forecast.
@@ -2571,6 +2974,7 @@ module Aws::CostExplorer
     #       cost_categories: {
     #         key: "CostCategoryName",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #     },
     #     prediction_interval_level: 1,
@@ -2639,6 +3043,11 @@ module Aws::CostExplorer
     #   resp.cost_category_references[0].effective_start #=> String
     #   resp.cost_category_references[0].effective_end #=> String
     #   resp.cost_category_references[0].number_of_rules #=> Integer
+    #   resp.cost_category_references[0].processing_status #=> Array
+    #   resp.cost_category_references[0].processing_status[0].component #=> String, one of "COST_EXPLORER"
+    #   resp.cost_category_references[0].processing_status[0].status #=> String, one of "PROCESSING", "APPLIED"
+    #   resp.cost_category_references[0].values #=> Array
+    #   resp.cost_category_references[0].values[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostCategoryDefinitions AWS API Documentation
@@ -2647,6 +3056,127 @@ module Aws::CostExplorer
     # @param [Hash] params ({})
     def list_cost_category_definitions(params = {}, options = {})
       req = build_request(:list_cost_category_definitions, params)
+      req.send_request(options)
+    end
+
+    # Modifies the feedback property of a given cost anomaly.
+    #
+    # @option params [required, String] :anomaly_id
+    #   A cost anomaly ID.
+    #
+    # @option params [required, String] :feedback
+    #   Describes whether the cost anomaly was a planned activity or you
+    #   considered it an anomaly.
+    #
+    # @return [Types::ProvideAnomalyFeedbackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ProvideAnomalyFeedbackResponse#anomaly_id #anomaly_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.provide_anomaly_feedback({
+    #     anomaly_id: "GenericString", # required
+    #     feedback: "YES", # required, accepts YES, NO, PLANNED_ACTIVITY
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.anomaly_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ProvideAnomalyFeedback AWS API Documentation
+    #
+    # @overload provide_anomaly_feedback(params = {})
+    # @param [Hash] params ({})
+    def provide_anomaly_feedback(params = {}, options = {})
+      req = build_request(:provide_anomaly_feedback, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing cost anomaly monitor. The changes made are applied
+    # going forward, and does not change anomalies detected in the past.
+    #
+    # @option params [required, String] :monitor_arn
+    #   Cost anomaly monitor Amazon Resource Names (ARNs).
+    #
+    # @option params [String] :monitor_name
+    #   The new name for the cost anomaly monitor.
+    #
+    # @return [Types::UpdateAnomalyMonitorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAnomalyMonitorResponse#monitor_arn #monitor_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_anomaly_monitor({
+    #     monitor_arn: "GenericString", # required
+    #     monitor_name: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monitor_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateAnomalyMonitor AWS API Documentation
+    #
+    # @overload update_anomaly_monitor(params = {})
+    # @param [Hash] params ({})
+    def update_anomaly_monitor(params = {}, options = {})
+      req = build_request(:update_anomaly_monitor, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing cost anomaly monitor subscription.
+    #
+    # @option params [required, String] :subscription_arn
+    #   A cost anomaly subscription Amazon Resource Name (ARN).
+    #
+    # @option params [Float] :threshold
+    #   The update to the threshold value for receiving notifications.
+    #
+    # @option params [String] :frequency
+    #   The update to the frequency value at which subscribers will receive
+    #   notifications.
+    #
+    # @option params [Array<String>] :monitor_arn_list
+    #   A list of cost anomaly subscription ARNs.
+    #
+    # @option params [Array<Types::Subscriber>] :subscribers
+    #   The update to the subscriber list.
+    #
+    # @option params [String] :subscription_name
+    #   The subscription's new name.
+    #
+    # @return [Types::UpdateAnomalySubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAnomalySubscriptionResponse#subscription_arn #subscription_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_anomaly_subscription({
+    #     subscription_arn: "GenericString", # required
+    #     threshold: 1.0,
+    #     frequency: "DAILY", # accepts DAILY, IMMEDIATE, WEEKLY
+    #     monitor_arn_list: ["Value"],
+    #     subscribers: [
+    #       {
+    #         address: "SubscriberAddress",
+    #         type: "EMAIL", # accepts EMAIL, SNS
+    #         status: "CONFIRMED", # accepts CONFIRMED, DECLINED
+    #       },
+    #     ],
+    #     subscription_name: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.subscription_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateAnomalySubscription AWS API Documentation
+    #
+    # @overload update_anomaly_subscription(params = {})
+    # @param [Hash] params ({})
+    def update_anomaly_subscription(params = {}, options = {})
+      req = build_request(:update_anomaly_subscription, params)
       req.send_request(options)
     end
 
@@ -2709,6 +3239,7 @@ module Aws::CostExplorer
     #           cost_categories: {
     #             key: "CostCategoryName",
     #             values: ["Value"],
+    #             match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #           },
     #         },
     #       },
@@ -2742,7 +3273,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

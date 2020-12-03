@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2020-10-15)
+------------------
+
+* Feature - This SDK Release introduces new API (DetectProtectiveEquipment) for Amazon Rekognition. This release also adds ServiceQuotaExceeded exception to Amazon Rekognition IndexFaces API.
+
+1.46.0 (2020-10-08)
+------------------
+
+* Feature - This release provides location information for the manifest validation files.
+
+1.45.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.44.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.43.0 (2020-08-25)
 ------------------
 

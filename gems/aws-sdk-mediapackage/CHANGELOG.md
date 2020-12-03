@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-10-07)
+------------------
+
+* Feature - AWS Elemental MediaPackage provides access logs that capture detailed information about requests sent to a customer's MediaPackage channel.
+
+1.35.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.33.0 (2020-09-03)
 ------------------
 

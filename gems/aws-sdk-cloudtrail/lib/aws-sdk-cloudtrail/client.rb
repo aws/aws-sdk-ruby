@@ -689,6 +689,7 @@ module Aws::CloudTrail
     #
     #   * {Types::GetEventSelectorsResponse#trail_arn #trail_arn} => String
     #   * {Types::GetEventSelectorsResponse#event_selectors #event_selectors} => Array&lt;Types::EventSelector&gt;
+    #   * {Types::GetEventSelectorsResponse#advanced_event_selectors #advanced_event_selectors} => Array&lt;Types::AdvancedEventSelector&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -708,6 +709,22 @@ module Aws::CloudTrail
     #   resp.event_selectors[0].data_resources[0].values[0] #=> String
     #   resp.event_selectors[0].exclude_management_event_sources #=> Array
     #   resp.event_selectors[0].exclude_management_event_sources[0] #=> String
+    #   resp.advanced_event_selectors #=> Array
+    #   resp.advanced_event_selectors[0].name #=> String
+    #   resp.advanced_event_selectors[0].field_selectors #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].field #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].equals #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].equals[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].starts_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].starts_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].ends_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].ends_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_equals #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_equals[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_starts_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_starts_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_ends_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_ends_with[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventSelectors AWS API Documentation
     #
@@ -1065,8 +1082,8 @@ module Aws::CloudTrail
     # 50, with a maximum of 50 possible. The response includes a token that
     # you can use to get the next page of results.
     #
-    # The rate of lookup requests is limited to two per second per account.
-    # If this limit is exceeded, a throttling error occurs.
+    # The rate of lookup requests is limited to two per second, per account,
+    # per region. If this limit is exceeded, a throttling error occurs.
     #
     #
     #
@@ -1213,20 +1230,23 @@ module Aws::CloudTrail
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
-    # @option params [required, Array<Types::EventSelector>] :event_selectors
+    # @option params [Array<Types::EventSelector>] :event_selectors
     #   Specifies the settings for your event selectors. You can configure up
     #   to five event selectors for a trail.
+    #
+    # @option params [Array<Types::AdvancedEventSelector>] :advanced_event_selectors
     #
     # @return [Types::PutEventSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutEventSelectorsResponse#trail_arn #trail_arn} => String
     #   * {Types::PutEventSelectorsResponse#event_selectors #event_selectors} => Array&lt;Types::EventSelector&gt;
+    #   * {Types::PutEventSelectorsResponse#advanced_event_selectors #advanced_event_selectors} => Array&lt;Types::AdvancedEventSelector&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_event_selectors({
     #     trail_name: "String", # required
-    #     event_selectors: [ # required
+    #     event_selectors: [
     #       {
     #         read_write_type: "ReadOnly", # accepts ReadOnly, WriteOnly, All
     #         include_management_events: false,
@@ -1237,6 +1257,22 @@ module Aws::CloudTrail
     #           },
     #         ],
     #         exclude_management_event_sources: ["String"],
+    #       },
+    #     ],
+    #     advanced_event_selectors: [
+    #       {
+    #         name: "SelectorName", # required
+    #         field_selectors: [ # required
+    #           {
+    #             field: "SelectorField", # required
+    #             equals: ["OperatorValue"],
+    #             starts_with: ["OperatorValue"],
+    #             ends_with: ["OperatorValue"],
+    #             not_equals: ["OperatorValue"],
+    #             not_starts_with: ["OperatorValue"],
+    #             not_ends_with: ["OperatorValue"],
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -1253,6 +1289,22 @@ module Aws::CloudTrail
     #   resp.event_selectors[0].data_resources[0].values[0] #=> String
     #   resp.event_selectors[0].exclude_management_event_sources #=> Array
     #   resp.event_selectors[0].exclude_management_event_sources[0] #=> String
+    #   resp.advanced_event_selectors #=> Array
+    #   resp.advanced_event_selectors[0].name #=> String
+    #   resp.advanced_event_selectors[0].field_selectors #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].field #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].equals #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].equals[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].starts_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].starts_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].ends_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].ends_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_equals #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_equals[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_starts_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_starts_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_ends_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_ends_with[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventSelectors AWS API Documentation
     #
@@ -1593,7 +1645,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

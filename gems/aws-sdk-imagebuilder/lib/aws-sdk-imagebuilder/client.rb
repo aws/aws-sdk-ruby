@@ -495,16 +495,17 @@ module Aws::Imagebuilder
     #         ami_distribution_configuration: {
     #           name: "AmiNameString",
     #           description: "NonEmptyString",
+    #           target_account_ids: ["AccountId"],
     #           ami_tags: {
     #             "TagKey" => "TagValue",
     #           },
     #           kms_key_id: "NonEmptyString",
     #           launch_permission: {
-    #             user_ids: ["NonEmptyString"],
+    #             user_ids: ["AccountId"],
     #             user_groups: ["NonEmptyString"],
     #           },
     #         },
-    #         license_configuration_arns: ["Arn"],
+    #         license_configuration_arns: ["LicenseConfigurationArn"],
     #       },
     #     ],
     #     tags: {
@@ -711,13 +712,11 @@ module Aws::Imagebuilder
     #   The parent image of the image recipe. The value of the string can be
     #   the ARN of the parent image or an AMI ID. The format for the ARN
     #   follows this example:
-    #   `arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/2019.x.x`.
-    #   The ARN ends with `/20xx.x.x`, which communicates to EC2 Image Builder
-    #   that you want to use the latest AMI created in 20xx (year). You can
-    #   provide the specific version that you want to use, or you can use a
-    #   wildcard in all of the fields. If you enter an AMI ID for the string
-    #   value, you must have access to the AMI, and the AMI must be in the
-    #   same Region in which you are using Image Builder.
+    #   `arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/xxxx.x.x`.
+    #   You can provide the specific version that you want to use, or you can
+    #   use a wildcard in all of the fields. If you enter an AMI ID for the
+    #   string value, you must have access to the AMI, and the AMI must be in
+    #   the same Region in which you are using Image Builder.
     #
     # @option params [Array<Types::InstanceBlockDeviceMapping>] :block_device_mappings
     #   The block device mappings of the image recipe.
@@ -762,7 +761,7 @@ module Aws::Imagebuilder
     #           kms_key_id: "NonEmptyString",
     #           snapshot_id: "NonEmptyString",
     #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
     #         },
     #         virtual_name: "NonEmptyString",
     #         no_device: "EmptyString",
@@ -1180,6 +1179,8 @@ module Aws::Imagebuilder
     #   resp.distribution_configuration.distributions[0].region #=> String
     #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.name #=> String
     #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.description #=> String
+    #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.target_account_ids #=> Array
+    #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.target_account_ids[0] #=> String
     #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.ami_tags #=> Hash
     #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.ami_tags["TagKey"] #=> String
     #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.kms_key_id #=> String
@@ -1248,7 +1249,7 @@ module Aws::Imagebuilder
     #   resp.image.image_recipe.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.image.image_recipe.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.image.image_recipe.block_device_mappings[0].ebs.volume_size #=> Integer
-    #   resp.image.image_recipe.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.image.image_recipe.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
     #   resp.image.image_recipe.block_device_mappings[0].virtual_name #=> String
     #   resp.image.image_recipe.block_device_mappings[0].no_device #=> String
     #   resp.image.image_recipe.date_created #=> String
@@ -1284,6 +1285,8 @@ module Aws::Imagebuilder
     #   resp.image.distribution_configuration.distributions[0].region #=> String
     #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.name #=> String
     #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.description #=> String
+    #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.target_account_ids #=> Array
+    #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.target_account_ids[0] #=> String
     #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.ami_tags #=> Hash
     #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.ami_tags["TagKey"] #=> String
     #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.kms_key_id #=> String
@@ -1308,6 +1311,7 @@ module Aws::Imagebuilder
     #   resp.image.output_resources.amis[0].description #=> String
     #   resp.image.output_resources.amis[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED"
     #   resp.image.output_resources.amis[0].state.reason #=> String
+    #   resp.image.output_resources.amis[0].account_id #=> String
     #   resp.image.tags #=> Hash
     #   resp.image.tags["TagKey"] #=> String
     #
@@ -1437,7 +1441,7 @@ module Aws::Imagebuilder
     #   resp.image_recipe.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.image_recipe.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.image_recipe.block_device_mappings[0].ebs.volume_size #=> Integer
-    #   resp.image_recipe.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.image_recipe.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
     #   resp.image_recipe.block_device_mappings[0].virtual_name #=> String
     #   resp.image_recipe.block_device_mappings[0].no_device #=> String
     #   resp.image_recipe.date_created #=> String
@@ -1653,7 +1657,7 @@ module Aws::Imagebuilder
     #   resp = client.list_component_build_versions({
     #     component_version_arn: "ComponentVersionArn", # required
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -1723,7 +1727,7 @@ module Aws::Imagebuilder
     #       },
     #     ],
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -1785,7 +1789,7 @@ module Aws::Imagebuilder
     #       },
     #     ],
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -1845,7 +1849,7 @@ module Aws::Imagebuilder
     #       },
     #     ],
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -1868,6 +1872,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].output_resources.amis[0].description #=> String
     #   resp.image_summary_list[0].output_resources.amis[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED"
     #   resp.image_summary_list[0].output_resources.amis[0].state.reason #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].account_id #=> String
     #   resp.image_summary_list[0].tags #=> Hash
     #   resp.image_summary_list[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -1916,7 +1921,7 @@ module Aws::Imagebuilder
     #       },
     #     ],
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -1939,6 +1944,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].output_resources.amis[0].description #=> String
     #   resp.image_summary_list[0].output_resources.amis[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED"
     #   resp.image_summary_list[0].output_resources.amis[0].state.reason #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].account_id #=> String
     #   resp.image_summary_list[0].tags #=> Hash
     #   resp.image_summary_list[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -1982,7 +1988,7 @@ module Aws::Imagebuilder
     #       },
     #     ],
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -2057,7 +2063,7 @@ module Aws::Imagebuilder
     #       },
     #     ],
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -2121,7 +2127,7 @@ module Aws::Imagebuilder
     #       },
     #     ],
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -2176,7 +2182,7 @@ module Aws::Imagebuilder
     #       },
     #     ],
     #     max_results: 1,
-    #     next_token: "NonEmptyString",
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -2496,16 +2502,17 @@ module Aws::Imagebuilder
     #         ami_distribution_configuration: {
     #           name: "AmiNameString",
     #           description: "NonEmptyString",
+    #           target_account_ids: ["AccountId"],
     #           ami_tags: {
     #             "TagKey" => "TagValue",
     #           },
     #           kms_key_id: "NonEmptyString",
     #           launch_permission: {
-    #             user_ids: ["NonEmptyString"],
+    #             user_ids: ["AccountId"],
     #             user_groups: ["NonEmptyString"],
     #           },
     #         },
-    #         license_configuration_arns: ["Arn"],
+    #         license_configuration_arns: ["LicenseConfigurationArn"],
     #       },
     #     ],
     #     client_token: "ClientToken", # required
@@ -2722,7 +2729,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

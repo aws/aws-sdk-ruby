@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2020-11-23)
+------------------
+
+* Feature - Releasing the set of PredictorBacktestExportJob APIs which allow customers to export backtest values and item-level metrics data from Predictor training.
+
+1.12.0 (2020-11-11)
+------------------
+
+* Feature - Providing support of custom quantiles in CreatePredictor API.
+
+1.11.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.10.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.9.0 (2020-08-25)
 ------------------
 

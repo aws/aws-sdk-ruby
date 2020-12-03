@@ -628,6 +628,10 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
     #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -644,6 +648,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.address #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.port #=> Integer
     #   resp.replication_group.node_groups[0].node_group_members[0].preferred_availability_zone #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].preferred_outpost_arn #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
@@ -658,8 +663,12 @@ module Aws::ElastiCache
     #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_group.member_clusters_outpost_arns #=> Array
+    #   resp.replication_group.member_clusters_outpost_arns[0] #=> String
     #   resp.replication_group.kms_key_id #=> String
     #   resp.replication_group.arn #=> String
+    #   resp.replication_group.user_group_ids #=> Array
+    #   resp.replication_group.user_group_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigration AWS API Documentation
     #
@@ -770,7 +779,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access
     #   [2]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html
     #
     # @option params [String] :kms_key_id
@@ -845,6 +854,7 @@ module Aws::ElastiCache
     #   resp.snapshot.engine_version #=> String
     #   resp.snapshot.num_cache_nodes #=> Integer
     #   resp.snapshot.preferred_availability_zone #=> String
+    #   resp.snapshot.preferred_outpost_arn #=> String
     #   resp.snapshot.cache_cluster_create_time #=> Time
     #   resp.snapshot.preferred_maintenance_window #=> String
     #   resp.snapshot.topic_arn #=> String
@@ -867,6 +877,9 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].node_group_configuration.primary_availability_zone #=> String
     #   resp.snapshot.node_snapshots[0].node_group_configuration.replica_availability_zones #=> Array
     #   resp.snapshot.node_snapshots[0].node_group_configuration.replica_availability_zones[0] #=> String
+    #   resp.snapshot.node_snapshots[0].node_group_configuration.primary_outpost_arn #=> String
+    #   resp.snapshot.node_snapshots[0].node_group_configuration.replica_outpost_arns #=> Array
+    #   resp.snapshot.node_snapshots[0].node_group_configuration.replica_outpost_arns[0] #=> String
     #   resp.snapshot.node_snapshots[0].cache_size #=> String
     #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
     #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
@@ -982,6 +995,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, M6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #       and ap-northeast-1.
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -1014,6 +1040,19 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, R6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #       and ap-northeast-1.
+    #
+    #        </note>
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -1212,6 +1251,16 @@ module Aws::ElastiCache
     #
     #   [1]: http://redis.io/commands/AUTH
     #
+    # @option params [String] :outpost_mode
+    #   Specifies whether the nodes in the cluster are created in a single
+    #   outpost or across multiple outposts.
+    #
+    # @option params [String] :preferred_outpost_arn
+    #   The outpost ARN in which the cache cluster is created.
+    #
+    # @option params [Array<String>] :preferred_outpost_arns
+    #   The outpost ARNs in which the cache cluster is created.
+    #
     # @return [Types::CreateCacheClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCacheClusterResult#cache_cluster #cache_cluster} => Types::CacheCluster
@@ -1336,6 +1385,9 @@ module Aws::ElastiCache
     #     snapshot_retention_limit: 1,
     #     snapshot_window: "String",
     #     auth_token: "String",
+    #     outpost_mode: "single-outpost", # accepts single-outpost, cross-outpost
+    #     preferred_outpost_arn: "String",
+    #     preferred_outpost_arns: ["String"],
     #   })
     #
     # @example Response structure
@@ -1350,6 +1402,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.cache_cluster_status #=> String
     #   resp.cache_cluster.num_cache_nodes #=> Integer
     #   resp.cache_cluster.preferred_availability_zone #=> String
+    #   resp.cache_cluster.preferred_outpost_arn #=> String
     #   resp.cache_cluster.cache_cluster_create_time #=> Time
     #   resp.cache_cluster.preferred_maintenance_window #=> String
     #   resp.cache_cluster.pending_modified_values.num_cache_nodes #=> Integer
@@ -1377,6 +1430,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.cache_nodes[0].parameter_group_status #=> String
     #   resp.cache_cluster.cache_nodes[0].source_cache_node_id #=> String
     #   resp.cache_cluster.cache_nodes[0].customer_availability_zone #=> String
+    #   resp.cache_cluster.cache_nodes[0].customer_outpost_arn #=> String
     #   resp.cache_cluster.auto_minor_version_upgrade #=> Boolean
     #   resp.cache_cluster.security_groups #=> Array
     #   resp.cache_cluster.security_groups[0].security_group_id #=> String
@@ -1425,8 +1479,9 @@ module Aws::ElastiCache
     #   The name of the cache parameter group family that the cache parameter
     #   group can be used with.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0`
+    #   \| `redis6.x` \|
     #
     # @option params [required, String] :description
     #   A user-specified description for the cache parameter group.
@@ -1629,6 +1684,7 @@ module Aws::ElastiCache
     #   resp.cache_subnet_group.subnets #=> Array
     #   resp.cache_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.cache_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.cache_subnet_group.subnets[0].subnet_outpost.subnet_outpost_arn #=> String
     #   resp.cache_subnet_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSubnetGroup AWS API Documentation
@@ -1656,8 +1712,20 @@ module Aws::ElastiCache
     #   secondary cluster.
     #
     # @option params [required, String] :global_replication_group_id_suffix
-    #   The suffix name of a Global Datastore. The suffix guarantees
-    #   uniqueness of the Global Datastore name across multiple regions.
+    #   The suffix name of a Global Datastore. Amazon ElastiCache
+    #   automatically applies a prefix to the Global Datastore ID when it is
+    #   created. Each AWS Region has its own prefix. For instance, a Global
+    #   Datastore ID created in the US-West-1 region will begin with "dsdfu"
+    #   along with the suffix name you provide. The suffix, combined with the
+    #   auto-generated prefix, guarantees uniqueness of the Global Datastore
+    #   name across multiple regions.
+    #
+    #   For a full list of AWS Regions and their respective Global Datastore
+    #   iD prefixes, see [Using the AWS CLI with Global Datastores ][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters-CLI.html
     #
     # @option params [String] :global_replication_group_description
     #   Provides details of the Global Datastore
@@ -1860,6 +1928,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, M6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #       and ap-northeast-1.
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -1892,6 +1973,19 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, R6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #       and ap-northeast-1.
+    #
+    #        </note>
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -2138,6 +2232,9 @@ module Aws::ElastiCache
     # @option params [String] :kms_key_id
     #   The ID of the KMS key used to encrypt the disk in the cluster.
     #
+    # @option params [Array<String>] :user_group_ids
+    #   The list of user groups to associate with the replication group.
+    #
     # @return [Types::CreateReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateReplicationGroupResult#replication_group #replication_group} => Types::ReplicationGroup
@@ -2253,6 +2350,8 @@ module Aws::ElastiCache
     #         replica_count: 1,
     #         primary_availability_zone: "String",
     #         replica_availability_zones: ["String"],
+    #         primary_outpost_arn: "String",
+    #         replica_outpost_arns: ["String"],
     #       },
     #     ],
     #     cache_node_type: "String",
@@ -2280,6 +2379,7 @@ module Aws::ElastiCache
     #     transit_encryption_enabled: false,
     #     at_rest_encryption_enabled: false,
     #     kms_key_id: "String",
+    #     user_group_ids: ["UserGroupId"],
     #   })
     #
     # @example Response structure
@@ -2293,6 +2393,10 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
     #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -2309,6 +2413,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.address #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.port #=> Integer
     #   resp.replication_group.node_groups[0].node_group_members[0].preferred_availability_zone #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].preferred_outpost_arn #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
@@ -2323,8 +2428,12 @@ module Aws::ElastiCache
     #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_group.member_clusters_outpost_arns #=> Array
+    #   resp.replication_group.member_clusters_outpost_arns[0] #=> String
     #   resp.replication_group.kms_key_id #=> String
     #   resp.replication_group.arn #=> String
+    #   resp.replication_group.user_group_ids #=> Array
+    #   resp.replication_group.user_group_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroup AWS API Documentation
     #
@@ -2507,6 +2616,7 @@ module Aws::ElastiCache
     #   resp.snapshot.engine_version #=> String
     #   resp.snapshot.num_cache_nodes #=> Integer
     #   resp.snapshot.preferred_availability_zone #=> String
+    #   resp.snapshot.preferred_outpost_arn #=> String
     #   resp.snapshot.cache_cluster_create_time #=> Time
     #   resp.snapshot.preferred_maintenance_window #=> String
     #   resp.snapshot.topic_arn #=> String
@@ -2529,6 +2639,9 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].node_group_configuration.primary_availability_zone #=> String
     #   resp.snapshot.node_snapshots[0].node_group_configuration.replica_availability_zones #=> Array
     #   resp.snapshot.node_snapshots[0].node_group_configuration.replica_availability_zones[0] #=> String
+    #   resp.snapshot.node_snapshots[0].node_group_configuration.primary_outpost_arn #=> String
+    #   resp.snapshot.node_snapshots[0].node_group_configuration.replica_outpost_arns #=> Array
+    #   resp.snapshot.node_snapshots[0].node_group_configuration.replica_outpost_arns[0] #=> String
     #   resp.snapshot.node_snapshots[0].cache_size #=> String
     #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
     #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
@@ -2541,6 +2654,134 @@ module Aws::ElastiCache
     # @param [Hash] params ({})
     def create_snapshot(params = {}, options = {})
       req = build_request(:create_snapshot, params)
+      req.send_request(options)
+    end
+
+    # For Redis engine version 6.x onwards: Creates a Redis user. For more
+    # information, see [Using Role Based Access Control (RBAC)][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html
+    #
+    # @option params [required, String] :user_id
+    #   The ID of the user.
+    #
+    # @option params [required, String] :user_name
+    #   The username of the user.
+    #
+    # @option params [required, String] :engine
+    #   Must be Redis.
+    #
+    # @option params [Array<String>] :passwords
+    #   Passwords used for this user account. You can create up to two
+    #   passwords for each user.
+    #
+    # @option params [required, String] :access_string
+    #   Access permissions string used for this user account.
+    #
+    # @option params [Boolean] :no_password_required
+    #   Indicates a password is not required for this user account.
+    #
+    # @return [Types::User] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::User#user_id #user_id} => String
+    #   * {Types::User#user_name #user_name} => String
+    #   * {Types::User#status #status} => String
+    #   * {Types::User#engine #engine} => String
+    #   * {Types::User#access_string #access_string} => String
+    #   * {Types::User#user_group_ids #user_group_ids} => Array&lt;String&gt;
+    #   * {Types::User#authentication #authentication} => Types::Authentication
+    #   * {Types::User#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_user({
+    #     user_id: "UserId", # required
+    #     user_name: "UserName", # required
+    #     engine: "EngineType", # required
+    #     passwords: ["String"],
+    #     access_string: "AccessString", # required
+    #     no_password_required: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_id #=> String
+    #   resp.user_name #=> String
+    #   resp.status #=> String
+    #   resp.engine #=> String
+    #   resp.access_string #=> String
+    #   resp.user_group_ids #=> Array
+    #   resp.user_group_ids[0] #=> String
+    #   resp.authentication.type #=> String, one of "password", "no-password"
+    #   resp.authentication.password_count #=> Integer
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateUser AWS API Documentation
+    #
+    # @overload create_user(params = {})
+    # @param [Hash] params ({})
+    def create_user(params = {}, options = {})
+      req = build_request(:create_user, params)
+      req.send_request(options)
+    end
+
+    # For Redis engine version 6.x onwards: Creates a Redis user group. For
+    # more information, see [Using Role Based Access Control (RBAC)][1]
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html
+    #
+    # @option params [required, String] :user_group_id
+    #   The ID of the user group.
+    #
+    # @option params [required, String] :engine
+    #   Must be Redis.
+    #
+    # @option params [Array<String>] :user_ids
+    #   The list of user IDs that belong to the user group.
+    #
+    # @return [Types::UserGroup] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UserGroup#user_group_id #user_group_id} => String
+    #   * {Types::UserGroup#status #status} => String
+    #   * {Types::UserGroup#engine #engine} => String
+    #   * {Types::UserGroup#user_ids #user_ids} => Array&lt;String&gt;
+    #   * {Types::UserGroup#pending_changes #pending_changes} => Types::UserGroupPendingChanges
+    #   * {Types::UserGroup#replication_groups #replication_groups} => Array&lt;String&gt;
+    #   * {Types::UserGroup#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_user_group({
+    #     user_group_id: "String", # required
+    #     engine: "EngineType", # required
+    #     user_ids: ["UserId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_group_id #=> String
+    #   resp.status #=> String
+    #   resp.engine #=> String
+    #   resp.user_ids #=> Array
+    #   resp.user_ids[0] #=> String
+    #   resp.pending_changes.user_ids_to_remove #=> Array
+    #   resp.pending_changes.user_ids_to_remove[0] #=> String
+    #   resp.pending_changes.user_ids_to_add #=> Array
+    #   resp.pending_changes.user_ids_to_add[0] #=> String
+    #   resp.replication_groups #=> Array
+    #   resp.replication_groups[0] #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateUserGroup AWS API Documentation
+    #
+    # @overload create_user_group(params = {})
+    # @param [Hash] params ({})
+    def create_user_group(params = {}, options = {})
+      req = build_request(:create_user_group, params)
       req.send_request(options)
     end
 
@@ -2673,6 +2914,7 @@ module Aws::ElastiCache
     #         node_group_id: "AllowedNodeGroupId", # required
     #         new_replica_count: 1, # required
     #         preferred_availability_zones: ["String"],
+    #         preferred_outpost_arns: ["String"],
     #       },
     #     ],
     #     replicas_to_remove: ["String"],
@@ -2690,6 +2932,10 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
     #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -2706,6 +2952,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.address #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.port #=> Integer
     #   resp.replication_group.node_groups[0].node_group_members[0].preferred_availability_zone #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].preferred_outpost_arn #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
@@ -2720,8 +2967,12 @@ module Aws::ElastiCache
     #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_group.member_clusters_outpost_arns #=> Array
+    #   resp.replication_group.member_clusters_outpost_arns[0] #=> String
     #   resp.replication_group.kms_key_id #=> String
     #   resp.replication_group.arn #=> String
+    #   resp.replication_group.user_group_ids #=> Array
+    #   resp.replication_group.user_group_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseReplicaCount AWS API Documentation
     #
@@ -2823,6 +3074,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.cache_cluster_status #=> String
     #   resp.cache_cluster.num_cache_nodes #=> Integer
     #   resp.cache_cluster.preferred_availability_zone #=> String
+    #   resp.cache_cluster.preferred_outpost_arn #=> String
     #   resp.cache_cluster.cache_cluster_create_time #=> Time
     #   resp.cache_cluster.preferred_maintenance_window #=> String
     #   resp.cache_cluster.pending_modified_values.num_cache_nodes #=> Integer
@@ -2850,6 +3102,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.cache_nodes[0].parameter_group_status #=> String
     #   resp.cache_cluster.cache_nodes[0].source_cache_node_id #=> String
     #   resp.cache_cluster.cache_nodes[0].customer_availability_zone #=> String
+    #   resp.cache_cluster.cache_nodes[0].customer_outpost_arn #=> String
     #   resp.cache_cluster.auto_minor_version_upgrade #=> Boolean
     #   resp.cache_cluster.security_groups #=> Array
     #   resp.cache_cluster.security_groups[0].security_group_id #=> String
@@ -3129,6 +3382,10 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
     #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -3145,6 +3402,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.address #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.port #=> Integer
     #   resp.replication_group.node_groups[0].node_group_members[0].preferred_availability_zone #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].preferred_outpost_arn #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
@@ -3159,8 +3417,12 @@ module Aws::ElastiCache
     #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_group.member_clusters_outpost_arns #=> Array
+    #   resp.replication_group.member_clusters_outpost_arns[0] #=> String
     #   resp.replication_group.kms_key_id #=> String
     #   resp.replication_group.arn #=> String
+    #   resp.replication_group.user_group_ids #=> Array
+    #   resp.replication_group.user_group_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroup AWS API Documentation
     #
@@ -3246,6 +3508,7 @@ module Aws::ElastiCache
     #   resp.snapshot.engine_version #=> String
     #   resp.snapshot.num_cache_nodes #=> Integer
     #   resp.snapshot.preferred_availability_zone #=> String
+    #   resp.snapshot.preferred_outpost_arn #=> String
     #   resp.snapshot.cache_cluster_create_time #=> Time
     #   resp.snapshot.preferred_maintenance_window #=> String
     #   resp.snapshot.topic_arn #=> String
@@ -3268,6 +3531,9 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].node_group_configuration.primary_availability_zone #=> String
     #   resp.snapshot.node_snapshots[0].node_group_configuration.replica_availability_zones #=> Array
     #   resp.snapshot.node_snapshots[0].node_group_configuration.replica_availability_zones[0] #=> String
+    #   resp.snapshot.node_snapshots[0].node_group_configuration.primary_outpost_arn #=> String
+    #   resp.snapshot.node_snapshots[0].node_group_configuration.replica_outpost_arns #=> Array
+    #   resp.snapshot.node_snapshots[0].node_group_configuration.replica_outpost_arns[0] #=> String
     #   resp.snapshot.node_snapshots[0].cache_size #=> String
     #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
     #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
@@ -3280,6 +3546,109 @@ module Aws::ElastiCache
     # @param [Hash] params ({})
     def delete_snapshot(params = {}, options = {})
       req = build_request(:delete_snapshot, params)
+      req.send_request(options)
+    end
+
+    # For Redis engine version 6.x onwards: Deletes a user. The user will be
+    # removed from all user groups and in turn removed from all replication
+    # groups. For more information, see [Using Role Based Access Control
+    # (RBAC)][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html
+    #
+    # @option params [required, String] :user_id
+    #   The ID of the user.
+    #
+    # @return [Types::User] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::User#user_id #user_id} => String
+    #   * {Types::User#user_name #user_name} => String
+    #   * {Types::User#status #status} => String
+    #   * {Types::User#engine #engine} => String
+    #   * {Types::User#access_string #access_string} => String
+    #   * {Types::User#user_group_ids #user_group_ids} => Array&lt;String&gt;
+    #   * {Types::User#authentication #authentication} => Types::Authentication
+    #   * {Types::User#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_user({
+    #     user_id: "UserId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_id #=> String
+    #   resp.user_name #=> String
+    #   resp.status #=> String
+    #   resp.engine #=> String
+    #   resp.access_string #=> String
+    #   resp.user_group_ids #=> Array
+    #   resp.user_group_ids[0] #=> String
+    #   resp.authentication.type #=> String, one of "password", "no-password"
+    #   resp.authentication.password_count #=> Integer
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteUser AWS API Documentation
+    #
+    # @overload delete_user(params = {})
+    # @param [Hash] params ({})
+    def delete_user(params = {}, options = {})
+      req = build_request(:delete_user, params)
+      req.send_request(options)
+    end
+
+    # For Redis engine version 6.x onwards: Deletes a ser group. The user
+    # group must first be disassociated from the replcation group before it
+    # can be deleted. For more information, see [Using Role Based Access
+    # Control (RBAC)][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html
+    #
+    # @option params [required, String] :user_group_id
+    #   The ID of the user group.
+    #
+    # @return [Types::UserGroup] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UserGroup#user_group_id #user_group_id} => String
+    #   * {Types::UserGroup#status #status} => String
+    #   * {Types::UserGroup#engine #engine} => String
+    #   * {Types::UserGroup#user_ids #user_ids} => Array&lt;String&gt;
+    #   * {Types::UserGroup#pending_changes #pending_changes} => Types::UserGroupPendingChanges
+    #   * {Types::UserGroup#replication_groups #replication_groups} => Array&lt;String&gt;
+    #   * {Types::UserGroup#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_user_group({
+    #     user_group_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_group_id #=> String
+    #   resp.status #=> String
+    #   resp.engine #=> String
+    #   resp.user_ids #=> Array
+    #   resp.user_ids[0] #=> String
+    #   resp.pending_changes.user_ids_to_remove #=> Array
+    #   resp.pending_changes.user_ids_to_remove[0] #=> String
+    #   resp.pending_changes.user_ids_to_add #=> Array
+    #   resp.pending_changes.user_ids_to_add[0] #=> String
+    #   resp.replication_groups #=> Array
+    #   resp.replication_groups[0] #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteUserGroup AWS API Documentation
+    #
+    # @overload delete_user_group(params = {})
+    # @param [Hash] params ({})
+    def delete_user_group(params = {}, options = {})
+      req = build_request(:delete_user_group, params)
       req.send_request(options)
     end
 
@@ -3479,6 +3848,7 @@ module Aws::ElastiCache
     #   resp.cache_clusters[0].cache_cluster_status #=> String
     #   resp.cache_clusters[0].num_cache_nodes #=> Integer
     #   resp.cache_clusters[0].preferred_availability_zone #=> String
+    #   resp.cache_clusters[0].preferred_outpost_arn #=> String
     #   resp.cache_clusters[0].cache_cluster_create_time #=> Time
     #   resp.cache_clusters[0].preferred_maintenance_window #=> String
     #   resp.cache_clusters[0].pending_modified_values.num_cache_nodes #=> Integer
@@ -3506,6 +3876,7 @@ module Aws::ElastiCache
     #   resp.cache_clusters[0].cache_nodes[0].parameter_group_status #=> String
     #   resp.cache_clusters[0].cache_nodes[0].source_cache_node_id #=> String
     #   resp.cache_clusters[0].cache_nodes[0].customer_availability_zone #=> String
+    #   resp.cache_clusters[0].cache_nodes[0].customer_outpost_arn #=> String
     #   resp.cache_clusters[0].auto_minor_version_upgrade #=> Boolean
     #   resp.cache_clusters[0].security_groups #=> Array
     #   resp.cache_clusters[0].security_groups[0].security_group_id #=> String
@@ -3548,8 +3919,9 @@ module Aws::ElastiCache
     #   The name of a specific cache parameter group family to return details
     #   for.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0`
+    #   \| `redis6.x` \|
     #
     #   Constraints:
     #
@@ -4512,6 +4884,7 @@ module Aws::ElastiCache
     #   resp.cache_subnet_groups[0].subnets #=> Array
     #   resp.cache_subnet_groups[0].subnets[0].subnet_identifier #=> String
     #   resp.cache_subnet_groups[0].subnets[0].subnet_availability_zone.name #=> String
+    #   resp.cache_subnet_groups[0].subnets[0].subnet_outpost.subnet_outpost_arn #=> String
     #   resp.cache_subnet_groups[0].arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheSubnetGroups AWS API Documentation
@@ -4529,8 +4902,9 @@ module Aws::ElastiCache
     # @option params [required, String] :cache_parameter_group_family
     #   The name of the cache parameter group family.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0`
+    #   \| `redis6.x` \|
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -5367,7 +5741,7 @@ module Aws::ElastiCache
     #
     #   resp = client.describe_events({
     #     source_identifier: "String",
-    #     source_type: "cache-cluster", # accepts cache-cluster, cache-parameter-group, cache-security-group, cache-subnet-group, replication-group
+    #     source_type: "cache-cluster", # accepts cache-cluster, cache-parameter-group, cache-security-group, cache-subnet-group, replication-group, user, user-group
     #     start_time: Time.now,
     #     end_time: Time.now,
     #     duration: 1,
@@ -5380,7 +5754,7 @@ module Aws::ElastiCache
     #   resp.marker #=> String
     #   resp.events #=> Array
     #   resp.events[0].source_identifier #=> String
-    #   resp.events[0].source_type #=> String, one of "cache-cluster", "cache-parameter-group", "cache-security-group", "cache-subnet-group", "replication-group"
+    #   resp.events[0].source_type #=> String, one of "cache-cluster", "cache-parameter-group", "cache-security-group", "cache-subnet-group", "replication-group", "user", "user-group"
     #   resp.events[0].message #=> String
     #   resp.events[0].date #=> Time
     #
@@ -5587,6 +5961,10 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_groups[0].pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
     #   resp.replication_groups[0].pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
+    #   resp.replication_groups[0].pending_modified_values.user_groups.user_group_ids_to_add #=> Array
+    #   resp.replication_groups[0].pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
+    #   resp.replication_groups[0].pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
+    #   resp.replication_groups[0].pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_groups[0].member_clusters #=> Array
     #   resp.replication_groups[0].member_clusters[0] #=> String
     #   resp.replication_groups[0].node_groups #=> Array
@@ -5603,6 +5981,7 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].node_groups[0].node_group_members[0].read_endpoint.address #=> String
     #   resp.replication_groups[0].node_groups[0].node_group_members[0].read_endpoint.port #=> Integer
     #   resp.replication_groups[0].node_groups[0].node_group_members[0].preferred_availability_zone #=> String
+    #   resp.replication_groups[0].node_groups[0].node_group_members[0].preferred_outpost_arn #=> String
     #   resp.replication_groups[0].node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_groups[0].snapshotting_cluster_id #=> String
     #   resp.replication_groups[0].automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
@@ -5617,8 +5996,12 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].auth_token_last_modified_date #=> Time
     #   resp.replication_groups[0].transit_encryption_enabled #=> Boolean
     #   resp.replication_groups[0].at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_groups[0].member_clusters_outpost_arns #=> Array
+    #   resp.replication_groups[0].member_clusters_outpost_arns[0] #=> String
     #   resp.replication_groups[0].kms_key_id #=> String
     #   resp.replication_groups[0].arn #=> String
+    #   resp.replication_groups[0].user_group_ids #=> Array
+    #   resp.replication_groups[0].user_group_ids[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5659,6 +6042,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, M6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #       and ap-northeast-1.
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -5691,6 +6087,19 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, R6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #       and ap-northeast-1.
+    #
+    #        </note>
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -5737,7 +6146,7 @@ module Aws::ElastiCache
     #   available offerings matching the specified offering type.
     #
     #   Valid values: `"Light Utilization"|"Medium Utilization"|"Heavy
-    #   Utilization"`
+    #   Utilization"|"All Upfront"|"Partial Upfront"| "No Upfront"`
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -5836,6 +6245,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, M6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #       and ap-northeast-1.
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -5868,6 +6290,19 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6g node types** (available only for Redis engine version 5.0.6
+    #       onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, R6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #       and ap-northeast-1.
+    #
+    #        </note>
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -5914,7 +6349,7 @@ module Aws::ElastiCache
     #   available offerings matching the specified offering type.
     #
     #   Valid Values: `"Light Utilization"|"Medium Utilization"|"Heavy
-    #   Utilization"`
+    #   Utilization" |"All Upfront"|"Partial Upfront"| "No Upfront"`
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -6480,6 +6915,7 @@ module Aws::ElastiCache
     #   resp.snapshots[0].engine_version #=> String
     #   resp.snapshots[0].num_cache_nodes #=> Integer
     #   resp.snapshots[0].preferred_availability_zone #=> String
+    #   resp.snapshots[0].preferred_outpost_arn #=> String
     #   resp.snapshots[0].cache_cluster_create_time #=> Time
     #   resp.snapshots[0].preferred_maintenance_window #=> String
     #   resp.snapshots[0].topic_arn #=> String
@@ -6502,6 +6938,9 @@ module Aws::ElastiCache
     #   resp.snapshots[0].node_snapshots[0].node_group_configuration.primary_availability_zone #=> String
     #   resp.snapshots[0].node_snapshots[0].node_group_configuration.replica_availability_zones #=> Array
     #   resp.snapshots[0].node_snapshots[0].node_group_configuration.replica_availability_zones[0] #=> String
+    #   resp.snapshots[0].node_snapshots[0].node_group_configuration.primary_outpost_arn #=> String
+    #   resp.snapshots[0].node_snapshots[0].node_group_configuration.replica_outpost_arns #=> Array
+    #   resp.snapshots[0].node_snapshots[0].node_group_configuration.replica_outpost_arns[0] #=> String
     #   resp.snapshots[0].node_snapshots[0].cache_size #=> String
     #   resp.snapshots[0].node_snapshots[0].cache_node_create_time #=> Time
     #   resp.snapshots[0].node_snapshots[0].snapshot_create_time #=> Time
@@ -6626,6 +7065,133 @@ module Aws::ElastiCache
     # @param [Hash] params ({})
     def describe_update_actions(params = {}, options = {})
       req = build_request(:describe_update_actions, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of user groups.
+    #
+    # @option params [String] :user_group_id
+    #   The ID of the user group.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified MaxRecords value, a marker is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #
+    # @option params [String] :marker
+    #   An optional marker returned from a prior request. Use this marker for
+    #   pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up to
+    #   the value specified by MaxRecords. &gt;
+    #
+    # @return [Types::DescribeUserGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeUserGroupsResult#user_groups #user_groups} => Array&lt;Types::UserGroup&gt;
+    #   * {Types::DescribeUserGroupsResult#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_user_groups({
+    #     user_group_id: "String",
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_groups #=> Array
+    #   resp.user_groups[0].user_group_id #=> String
+    #   resp.user_groups[0].status #=> String
+    #   resp.user_groups[0].engine #=> String
+    #   resp.user_groups[0].user_ids #=> Array
+    #   resp.user_groups[0].user_ids[0] #=> String
+    #   resp.user_groups[0].pending_changes.user_ids_to_remove #=> Array
+    #   resp.user_groups[0].pending_changes.user_ids_to_remove[0] #=> String
+    #   resp.user_groups[0].pending_changes.user_ids_to_add #=> Array
+    #   resp.user_groups[0].pending_changes.user_ids_to_add[0] #=> String
+    #   resp.user_groups[0].replication_groups #=> Array
+    #   resp.user_groups[0].replication_groups[0] #=> String
+    #   resp.user_groups[0].arn #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeUserGroups AWS API Documentation
+    #
+    # @overload describe_user_groups(params = {})
+    # @param [Hash] params ({})
+    def describe_user_groups(params = {}, options = {})
+      req = build_request(:describe_user_groups, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of users.
+    #
+    # @option params [String] :engine
+    #   The Redis engine.
+    #
+    # @option params [String] :user_id
+    #   The ID of the user.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filter to determine the list of User IDs to return.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified MaxRecords value, a marker is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #
+    # @option params [String] :marker
+    #   An optional marker returned from a prior request. Use this marker for
+    #   pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up to
+    #   the value specified by MaxRecords. &gt;
+    #
+    # @return [Types::DescribeUsersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeUsersResult#users #users} => Array&lt;Types::User&gt;
+    #   * {Types::DescribeUsersResult#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_users({
+    #     engine: "EngineType",
+    #     user_id: "UserId",
+    #     filters: [
+    #       {
+    #         name: "FilterName", # required
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.users #=> Array
+    #   resp.users[0].user_id #=> String
+    #   resp.users[0].user_name #=> String
+    #   resp.users[0].status #=> String
+    #   resp.users[0].engine #=> String
+    #   resp.users[0].access_string #=> String
+    #   resp.users[0].user_group_ids #=> Array
+    #   resp.users[0].user_group_ids[0] #=> String
+    #   resp.users[0].authentication.type #=> String, one of "password", "no-password"
+    #   resp.users[0].authentication.password_count #=> Integer
+    #   resp.users[0].arn #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeUsers AWS API Documentation
+    #
+    # @overload describe_users(params = {})
+    # @param [Hash] params ({})
+    def describe_users(params = {}, options = {})
+      req = build_request(:describe_users, params)
       req.send_request(options)
     end
 
@@ -6860,6 +7426,7 @@ module Aws::ElastiCache
     #         node_group_id: "AllowedNodeGroupId", # required
     #         new_replica_count: 1, # required
     #         preferred_availability_zones: ["String"],
+    #         preferred_outpost_arns: ["String"],
     #       },
     #     ],
     #     apply_immediately: false, # required
@@ -6876,6 +7443,10 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
     #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -6892,6 +7463,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.address #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.port #=> Integer
     #   resp.replication_group.node_groups[0].node_group_members[0].preferred_availability_zone #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].preferred_outpost_arn #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
@@ -6906,8 +7478,12 @@ module Aws::ElastiCache
     #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_group.member_clusters_outpost_arns #=> Array
+    #   resp.replication_group.member_clusters_outpost_arns[0] #=> String
     #   resp.replication_group.kms_key_id #=> String
     #   resp.replication_group.arn #=> String
+    #   resp.replication_group.user_group_ids #=> Array
+    #   resp.replication_group.user_group_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseReplicaCount AWS API Documentation
     #
@@ -7455,7 +8031,7 @@ module Aws::ElastiCache
     #     snapshot_window: "String",
     #     cache_node_type: "String",
     #     auth_token: "String",
-    #     auth_token_update_strategy: "SET", # accepts SET, ROTATE
+    #     auth_token_update_strategy: "SET", # accepts SET, ROTATE, DELETE
     #   })
     #
     # @example Response structure
@@ -7470,6 +8046,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.cache_cluster_status #=> String
     #   resp.cache_cluster.num_cache_nodes #=> Integer
     #   resp.cache_cluster.preferred_availability_zone #=> String
+    #   resp.cache_cluster.preferred_outpost_arn #=> String
     #   resp.cache_cluster.cache_cluster_create_time #=> Time
     #   resp.cache_cluster.preferred_maintenance_window #=> String
     #   resp.cache_cluster.pending_modified_values.num_cache_nodes #=> Integer
@@ -7497,6 +8074,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.cache_nodes[0].parameter_group_status #=> String
     #   resp.cache_cluster.cache_nodes[0].source_cache_node_id #=> String
     #   resp.cache_cluster.cache_nodes[0].customer_availability_zone #=> String
+    #   resp.cache_cluster.cache_nodes[0].customer_outpost_arn #=> String
     #   resp.cache_cluster.auto_minor_version_upgrade #=> Boolean
     #   resp.cache_cluster.security_groups #=> Array
     #   resp.cache_cluster.security_groups[0].security_group_id #=> String
@@ -7675,6 +8253,7 @@ module Aws::ElastiCache
     #   resp.cache_subnet_group.subnets #=> Array
     #   resp.cache_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.cache_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.cache_subnet_group.subnets[0].subnet_outpost.subnet_outpost_arn #=> String
     #   resp.cache_subnet_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheSubnetGroup AWS API Documentation
@@ -7963,6 +8542,16 @@ module Aws::ElastiCache
     #
     #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
     #
+    # @option params [Array<String>] :user_group_ids_to_add
+    #   A list of user group IDs.
+    #
+    # @option params [Array<String>] :user_group_ids_to_remove
+    #   A list of users groups to remove, meaning the users in the group no
+    #   longer can access thereplication group.
+    #
+    # @option params [Boolean] :remove_user_groups
+    #   Removes the user groups that can access this replication group.
+    #
     # @return [Types::ModifyReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyReplicationGroupResult#replication_group #replication_group} => Types::ReplicationGroup
@@ -8061,7 +8650,10 @@ module Aws::ElastiCache
     #     snapshot_window: "String",
     #     cache_node_type: "String",
     #     auth_token: "String",
-    #     auth_token_update_strategy: "SET", # accepts SET, ROTATE
+    #     auth_token_update_strategy: "SET", # accepts SET, ROTATE, DELETE
+    #     user_group_ids_to_add: ["UserGroupId"],
+    #     user_group_ids_to_remove: ["UserGroupId"],
+    #     remove_user_groups: false,
     #   })
     #
     # @example Response structure
@@ -8075,6 +8667,10 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
     #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -8091,6 +8687,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.address #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.port #=> Integer
     #   resp.replication_group.node_groups[0].node_group_members[0].preferred_availability_zone #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].preferred_outpost_arn #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
@@ -8105,8 +8702,12 @@ module Aws::ElastiCache
     #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_group.member_clusters_outpost_arns #=> Array
+    #   resp.replication_group.member_clusters_outpost_arns[0] #=> String
     #   resp.replication_group.kms_key_id #=> String
     #   resp.replication_group.arn #=> String
+    #   resp.replication_group.user_group_ids #=> Array
+    #   resp.replication_group.user_group_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroup AWS API Documentation
     #
@@ -8194,6 +8795,10 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
     #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -8210,6 +8815,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.address #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.port #=> Integer
     #   resp.replication_group.node_groups[0].node_group_members[0].preferred_availability_zone #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].preferred_outpost_arn #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
@@ -8224,8 +8830,12 @@ module Aws::ElastiCache
     #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_group.member_clusters_outpost_arns #=> Array
+    #   resp.replication_group.member_clusters_outpost_arns[0] #=> String
     #   resp.replication_group.kms_key_id #=> String
     #   resp.replication_group.arn #=> String
+    #   resp.replication_group.user_group_ids #=> Array
+    #   resp.replication_group.user_group_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupShardConfiguration AWS API Documentation
     #
@@ -8233,6 +8843,120 @@ module Aws::ElastiCache
     # @param [Hash] params ({})
     def modify_replication_group_shard_configuration(params = {}, options = {})
       req = build_request(:modify_replication_group_shard_configuration, params)
+      req.send_request(options)
+    end
+
+    # Changes user password(s) and/or access string.
+    #
+    # @option params [required, String] :user_id
+    #   The ID of the user.
+    #
+    # @option params [String] :access_string
+    #   Access permissions string used for this user account.
+    #
+    # @option params [String] :append_access_string
+    #   Adds additional user permissions to the access string.
+    #
+    # @option params [Array<String>] :passwords
+    #   The passwords belonging to the user account. You are allowed up to
+    #   two.
+    #
+    # @option params [Boolean] :no_password_required
+    #   Indicates no password is required for the user account.
+    #
+    # @return [Types::User] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::User#user_id #user_id} => String
+    #   * {Types::User#user_name #user_name} => String
+    #   * {Types::User#status #status} => String
+    #   * {Types::User#engine #engine} => String
+    #   * {Types::User#access_string #access_string} => String
+    #   * {Types::User#user_group_ids #user_group_ids} => Array&lt;String&gt;
+    #   * {Types::User#authentication #authentication} => Types::Authentication
+    #   * {Types::User#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_user({
+    #     user_id: "UserId", # required
+    #     access_string: "AccessString",
+    #     append_access_string: "AccessString",
+    #     passwords: ["String"],
+    #     no_password_required: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_id #=> String
+    #   resp.user_name #=> String
+    #   resp.status #=> String
+    #   resp.engine #=> String
+    #   resp.access_string #=> String
+    #   resp.user_group_ids #=> Array
+    #   resp.user_group_ids[0] #=> String
+    #   resp.authentication.type #=> String, one of "password", "no-password"
+    #   resp.authentication.password_count #=> Integer
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyUser AWS API Documentation
+    #
+    # @overload modify_user(params = {})
+    # @param [Hash] params ({})
+    def modify_user(params = {}, options = {})
+      req = build_request(:modify_user, params)
+      req.send_request(options)
+    end
+
+    # Changes the list of users that belong to the user group.
+    #
+    # @option params [required, String] :user_group_id
+    #   The ID of the user group.
+    #
+    # @option params [Array<String>] :user_ids_to_add
+    #   The list of user IDs to add to the user group.
+    #
+    # @option params [Array<String>] :user_ids_to_remove
+    #   The list of user IDs to remove from the user group.
+    #
+    # @return [Types::UserGroup] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UserGroup#user_group_id #user_group_id} => String
+    #   * {Types::UserGroup#status #status} => String
+    #   * {Types::UserGroup#engine #engine} => String
+    #   * {Types::UserGroup#user_ids #user_ids} => Array&lt;String&gt;
+    #   * {Types::UserGroup#pending_changes #pending_changes} => Types::UserGroupPendingChanges
+    #   * {Types::UserGroup#replication_groups #replication_groups} => Array&lt;String&gt;
+    #   * {Types::UserGroup#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_user_group({
+    #     user_group_id: "String", # required
+    #     user_ids_to_add: ["UserId"],
+    #     user_ids_to_remove: ["UserId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_group_id #=> String
+    #   resp.status #=> String
+    #   resp.engine #=> String
+    #   resp.user_ids #=> Array
+    #   resp.user_ids[0] #=> String
+    #   resp.pending_changes.user_ids_to_remove #=> Array
+    #   resp.pending_changes.user_ids_to_remove[0] #=> String
+    #   resp.pending_changes.user_ids_to_add #=> Array
+    #   resp.pending_changes.user_ids_to_add[0] #=> String
+    #   resp.replication_groups #=> Array
+    #   resp.replication_groups[0] #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyUserGroup AWS API Documentation
+    #
+    # @overload modify_user_group(params = {})
+    # @param [Hash] params ({})
+    def modify_user_group(params = {}, options = {})
+      req = build_request(:modify_user_group, params)
       req.send_request(options)
     end
 
@@ -8459,6 +9183,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.cache_cluster_status #=> String
     #   resp.cache_cluster.num_cache_nodes #=> Integer
     #   resp.cache_cluster.preferred_availability_zone #=> String
+    #   resp.cache_cluster.preferred_outpost_arn #=> String
     #   resp.cache_cluster.cache_cluster_create_time #=> Time
     #   resp.cache_cluster.preferred_maintenance_window #=> String
     #   resp.cache_cluster.pending_modified_values.num_cache_nodes #=> Integer
@@ -8486,6 +9211,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.cache_nodes[0].parameter_group_status #=> String
     #   resp.cache_cluster.cache_nodes[0].source_cache_node_id #=> String
     #   resp.cache_cluster.cache_nodes[0].customer_availability_zone #=> String
+    #   resp.cache_cluster.cache_nodes[0].customer_outpost_arn #=> String
     #   resp.cache_cluster.auto_minor_version_upgrade #=> Boolean
     #   resp.cache_cluster.security_groups #=> Array
     #   resp.cache_cluster.security_groups[0].security_group_id #=> String
@@ -8756,6 +9482,10 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
     #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -8772,6 +9502,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.address #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.port #=> Integer
     #   resp.replication_group.node_groups[0].node_group_members[0].preferred_availability_zone #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].preferred_outpost_arn #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
@@ -8786,8 +9517,12 @@ module Aws::ElastiCache
     #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_group.member_clusters_outpost_arns #=> Array
+    #   resp.replication_group.member_clusters_outpost_arns[0] #=> String
     #   resp.replication_group.kms_key_id #=> String
     #   resp.replication_group.arn #=> String
+    #   resp.replication_group.user_group_ids #=> Array
+    #   resp.replication_group.user_group_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigration AWS API Documentation
     #
@@ -8826,10 +9561,10 @@ module Aws::ElastiCache
     #   1.  Replication group message: `Test Failover API called for node
     #       group <node-group-id>`
     #
-    #   2.  Cache cluster message: `Failover from master node
+    #   2.  Cache cluster message: `Failover from primary node
     #       <primary-node-id> to replica node <node-id> completed`
     #
-    #   3.  Replication group message: `Failover from master node
+    #   3.  Replication group message: `Failover from primary node
     #       <primary-node-id> to replica node <node-id> completed`
     #
     #   4.  Cache cluster message: `Recovering cache nodes <node-id>`
@@ -8883,6 +9618,10 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
     #   resp.replication_group.pending_modified_values.resharding.slot_migration.progress_percentage #=> Float
     #   resp.replication_group.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_add[0] #=> String
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
+    #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.member_clusters #=> Array
     #   resp.replication_group.member_clusters[0] #=> String
     #   resp.replication_group.node_groups #=> Array
@@ -8899,6 +9638,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.address #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.port #=> Integer
     #   resp.replication_group.node_groups[0].node_group_members[0].preferred_availability_zone #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].preferred_outpost_arn #=> String
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
@@ -8913,8 +9653,12 @@ module Aws::ElastiCache
     #   resp.replication_group.auth_token_last_modified_date #=> Time
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.replication_group.member_clusters_outpost_arns #=> Array
+    #   resp.replication_group.member_clusters_outpost_arns[0] #=> String
     #   resp.replication_group.kms_key_id #=> String
     #   resp.replication_group.arn #=> String
+    #   resp.replication_group.user_group_ids #=> Array
+    #   resp.replication_group.user_group_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailover AWS API Documentation
     #
@@ -8938,7 +9682,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

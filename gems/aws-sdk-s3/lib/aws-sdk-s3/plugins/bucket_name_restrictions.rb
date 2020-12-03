@@ -13,7 +13,7 @@ module Aws
           def call(context)
             bucket_member = _bucket_member(context.operation.input.shape)
             if bucket_member && (bucket = context.params[bucket_member])
-              _resolved_bucket, _resolved_region, arn = BucketARN.resolve_arn!(
+              _resolved_region, arn = ARN.resolve_arn!(
                 bucket,
                 context.config.region,
                 context.config.s3_use_arn_region

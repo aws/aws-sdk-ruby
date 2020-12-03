@@ -361,6 +361,94 @@ module Aws::CloudWatchEvents
       req.send_request(options)
     end
 
+    # Cancels the specified replay.
+    #
+    # @option params [required, String] :replay_name
+    #   The name of the replay to cancel.
+    #
+    # @return [Types::CancelReplayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelReplayResponse#replay_arn #replay_arn} => String
+    #   * {Types::CancelReplayResponse#state #state} => String
+    #   * {Types::CancelReplayResponse#state_reason #state_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_replay({
+    #     replay_name: "ReplayName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replay_arn #=> String
+    #   resp.state #=> String, one of "STARTING", "RUNNING", "CANCELLING", "COMPLETED", "CANCELLED", "FAILED"
+    #   resp.state_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/CancelReplay AWS API Documentation
+    #
+    # @overload cancel_replay(params = {})
+    # @param [Hash] params ({})
+    def cancel_replay(params = {}, options = {})
+      req = build_request(:cancel_replay, params)
+      req.send_request(options)
+    end
+
+    # Creates an archive of events with the specified settings. When you
+    # create an archive, incoming events might not immediately start being
+    # sent to the archive. Allow a short period of time for changes to take
+    # effect. If you do not specify a pattern to filter events sent to the
+    # archive, all events are sent to the archive except replayed events.
+    # Replayed events are not sent to an archive.
+    #
+    # @option params [required, String] :archive_name
+    #   The name for the archive to create.
+    #
+    # @option params [required, String] :event_source_arn
+    #   The ARN of the event source associated with the archive.
+    #
+    # @option params [String] :description
+    #   A description for the archive.
+    #
+    # @option params [String] :event_pattern
+    #   An event pattern to use to filter events sent to the archive.
+    #
+    # @option params [Integer] :retention_days
+    #   The number of days to retain events for. Default value is 0. If set to
+    #   0, events are retained indefinitely
+    #
+    # @return [Types::CreateArchiveResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateArchiveResponse#archive_arn #archive_arn} => String
+    #   * {Types::CreateArchiveResponse#state #state} => String
+    #   * {Types::CreateArchiveResponse#state_reason #state_reason} => String
+    #   * {Types::CreateArchiveResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_archive({
+    #     archive_name: "ArchiveName", # required
+    #     event_source_arn: "Arn", # required
+    #     description: "ArchiveDescription",
+    #     event_pattern: "EventPattern",
+    #     retention_days: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.archive_arn #=> String
+    #   resp.state #=> String, one of "ENABLED", "DISABLED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.state_reason #=> String
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/CreateArchive AWS API Documentation
+    #
+    # @overload create_archive(params = {})
+    # @param [Hash] params ({})
+    def create_archive(params = {}, options = {})
+      req = build_request(:create_archive, params)
+      req.send_request(options)
+    end
+
     # Creates a new event bus within your account. This can be a custom
     # event bus which you can use to receive events from your custom
     # applications and services, or it can be a partner event bus which can
@@ -507,6 +595,28 @@ module Aws::CloudWatchEvents
       req.send_request(options)
     end
 
+    # Deletes the specified archive.
+    #
+    # @option params [required, String] :archive_name
+    #   The name of the archive to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_archive({
+    #     archive_name: "ArchiveName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteArchive AWS API Documentation
+    #
+    # @overload delete_archive(params = {})
+    # @param [Hash] params ({})
+    def delete_archive(params = {}, options = {})
+      req = build_request(:delete_archive, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified custom event bus or partner event bus. All rules
     # associated with this event bus need to be deleted. You can't delete
     # your account's default event bus.
@@ -580,8 +690,8 @@ module Aws::CloudWatchEvents
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @option params [Boolean] :force
     #   If this is a managed rule, created by an AWS service on your behalf,
@@ -596,7 +706,7 @@ module Aws::CloudWatchEvents
     #
     #   resp = client.delete_rule({
     #     name: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     force: false,
     #   })
     #
@@ -606,6 +716,54 @@ module Aws::CloudWatchEvents
     # @param [Hash] params ({})
     def delete_rule(params = {}, options = {})
       req = build_request(:delete_rule, params)
+      req.send_request(options)
+    end
+
+    # Retrieves details about an archive.
+    #
+    # @option params [required, String] :archive_name
+    #   The name of the archive to retrieve.
+    #
+    # @return [Types::DescribeArchiveResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeArchiveResponse#archive_arn #archive_arn} => String
+    #   * {Types::DescribeArchiveResponse#archive_name #archive_name} => String
+    #   * {Types::DescribeArchiveResponse#event_source_arn #event_source_arn} => String
+    #   * {Types::DescribeArchiveResponse#description #description} => String
+    #   * {Types::DescribeArchiveResponse#event_pattern #event_pattern} => String
+    #   * {Types::DescribeArchiveResponse#state #state} => String
+    #   * {Types::DescribeArchiveResponse#state_reason #state_reason} => String
+    #   * {Types::DescribeArchiveResponse#retention_days #retention_days} => Integer
+    #   * {Types::DescribeArchiveResponse#size_bytes #size_bytes} => Integer
+    #   * {Types::DescribeArchiveResponse#event_count #event_count} => Integer
+    #   * {Types::DescribeArchiveResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_archive({
+    #     archive_name: "ArchiveName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.archive_arn #=> String
+    #   resp.archive_name #=> String
+    #   resp.event_source_arn #=> String
+    #   resp.description #=> String
+    #   resp.event_pattern #=> String
+    #   resp.state #=> String, one of "ENABLED", "DISABLED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.state_reason #=> String
+    #   resp.retention_days #=> Integer
+    #   resp.size_bytes #=> Integer
+    #   resp.event_count #=> Integer
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeArchive AWS API Documentation
+    #
+    # @overload describe_archive(params = {})
+    # @param [Hash] params ({})
+    def describe_archive(params = {}, options = {})
+      req = build_request(:describe_archive, params)
       req.send_request(options)
     end
 
@@ -621,8 +779,8 @@ module Aws::CloudWatchEvents
     # For more information about partner event buses, see CreateEventBus.
     #
     # @option params [String] :name
-    #   The name of the event bus to show details for. If you omit this, the
-    #   default event bus is displayed.
+    #   The name or ARN of the event bus to show details for. If you omit
+    #   this, the default event bus is displayed.
     #
     # @return [Types::DescribeEventBusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -633,7 +791,7 @@ module Aws::CloudWatchEvents
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_event_bus({
-    #     name: "EventBusName",
+    #     name: "EventBusNameOrArn",
     #   })
     #
     # @example Response structure
@@ -723,6 +881,67 @@ module Aws::CloudWatchEvents
       req.send_request(options)
     end
 
+    # Retrieves details about a replay. Use `DescribeReplay` to determine
+    # the progress of a running replay. A replay processes events to replay
+    # based on the time in the event, and replays them using 1 minute
+    # intervals. If you use `StartReplay` and specify an `EventStartTime`
+    # and an `EventEndTime` that covers a 20 minute time range, the events
+    # are replayed from the first minute of that 20 minute range first. Then
+    # the events from the second minute are replayed. You can use
+    # `DescribeReplay` to determine the progress of a replay. The value
+    # returned for `EventLastReplayedTime` indicates the time within the
+    # specified time range associated with the last event replayed.
+    #
+    # @option params [required, String] :replay_name
+    #   The name of the replay to retrieve.
+    #
+    # @return [Types::DescribeReplayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReplayResponse#replay_name #replay_name} => String
+    #   * {Types::DescribeReplayResponse#replay_arn #replay_arn} => String
+    #   * {Types::DescribeReplayResponse#description #description} => String
+    #   * {Types::DescribeReplayResponse#state #state} => String
+    #   * {Types::DescribeReplayResponse#state_reason #state_reason} => String
+    #   * {Types::DescribeReplayResponse#event_source_arn #event_source_arn} => String
+    #   * {Types::DescribeReplayResponse#destination #destination} => Types::ReplayDestination
+    #   * {Types::DescribeReplayResponse#event_start_time #event_start_time} => Time
+    #   * {Types::DescribeReplayResponse#event_end_time #event_end_time} => Time
+    #   * {Types::DescribeReplayResponse#event_last_replayed_time #event_last_replayed_time} => Time
+    #   * {Types::DescribeReplayResponse#replay_start_time #replay_start_time} => Time
+    #   * {Types::DescribeReplayResponse#replay_end_time #replay_end_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_replay({
+    #     replay_name: "ReplayName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replay_name #=> String
+    #   resp.replay_arn #=> String
+    #   resp.description #=> String
+    #   resp.state #=> String, one of "STARTING", "RUNNING", "CANCELLING", "COMPLETED", "CANCELLED", "FAILED"
+    #   resp.state_reason #=> String
+    #   resp.event_source_arn #=> String
+    #   resp.destination.arn #=> String
+    #   resp.destination.filter_arns #=> Array
+    #   resp.destination.filter_arns[0] #=> String
+    #   resp.event_start_time #=> Time
+    #   resp.event_end_time #=> Time
+    #   resp.event_last_replayed_time #=> Time
+    #   resp.replay_start_time #=> Time
+    #   resp.replay_end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeReplay AWS API Documentation
+    #
+    # @overload describe_replay(params = {})
+    # @param [Hash] params ({})
+    def describe_replay(params = {}, options = {})
+      req = build_request(:describe_replay, params)
+      req.send_request(options)
+    end
+
     # Describes the specified rule.
     #
     # DescribeRule does not list the targets of a rule. To see the targets
@@ -732,8 +951,8 @@ module Aws::CloudWatchEvents
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @return [Types::DescribeRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -746,12 +965,13 @@ module Aws::CloudWatchEvents
     #   * {Types::DescribeRuleResponse#role_arn #role_arn} => String
     #   * {Types::DescribeRuleResponse#managed_by #managed_by} => String
     #   * {Types::DescribeRuleResponse#event_bus_name #event_bus_name} => String
+    #   * {Types::DescribeRuleResponse#created_by #created_by} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_rule({
     #     name: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #   })
     #
     # @example Response structure
@@ -765,6 +985,7 @@ module Aws::CloudWatchEvents
     #   resp.role_arn #=> String
     #   resp.managed_by #=> String
     #   resp.event_bus_name #=> String
+    #   resp.created_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRule AWS API Documentation
     #
@@ -786,8 +1007,8 @@ module Aws::CloudWatchEvents
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -795,7 +1016,7 @@ module Aws::CloudWatchEvents
     #
     #   resp = client.disable_rule({
     #     name: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DisableRule AWS API Documentation
@@ -818,8 +1039,8 @@ module Aws::CloudWatchEvents
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -827,7 +1048,7 @@ module Aws::CloudWatchEvents
     #
     #   resp = client.enable_rule({
     #     name: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EnableRule AWS API Documentation
@@ -836,6 +1057,64 @@ module Aws::CloudWatchEvents
     # @param [Hash] params ({})
     def enable_rule(params = {}, options = {})
       req = build_request(:enable_rule, params)
+      req.send_request(options)
+    end
+
+    # Lists your archives. You can either list all the archives or you can
+    # provide a prefix to match to the archive names. Filter parameters are
+    # exclusive.
+    #
+    # @option params [String] :name_prefix
+    #   A name prefix to filter the archives returned. Only archives with name
+    #   that match the prefix are returned.
+    #
+    # @option params [String] :event_source_arn
+    #   The ARN of the event source associated with the archive.
+    #
+    # @option params [String] :state
+    #   The state of the archive.
+    #
+    # @option params [String] :next_token
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of results to return.
+    #
+    # @return [Types::ListArchivesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListArchivesResponse#archives #archives} => Array&lt;Types::Archive&gt;
+    #   * {Types::ListArchivesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_archives({
+    #     name_prefix: "ArchiveName",
+    #     event_source_arn: "Arn",
+    #     state: "ENABLED", # accepts ENABLED, DISABLED, CREATING, UPDATING, CREATE_FAILED, UPDATE_FAILED
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.archives #=> Array
+    #   resp.archives[0].archive_name #=> String
+    #   resp.archives[0].event_source_arn #=> String
+    #   resp.archives[0].state #=> String, one of "ENABLED", "DISABLED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.archives[0].state_reason #=> String
+    #   resp.archives[0].retention_days #=> Integer
+    #   resp.archives[0].size_bytes #=> Integer
+    #   resp.archives[0].event_count #=> Integer
+    #   resp.archives[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListArchives AWS API Documentation
+    #
+    # @overload list_archives(params = {})
+    # @param [Hash] params ({})
+    def list_archives(params = {}, options = {})
+      req = build_request(:list_archives, params)
       req.send_request(options)
     end
 
@@ -1029,6 +1308,65 @@ module Aws::CloudWatchEvents
       req.send_request(options)
     end
 
+    # Lists your replays. You can either list all the replays or you can
+    # provide a prefix to match to the replay names. Filter parameters are
+    # exclusive.
+    #
+    # @option params [String] :name_prefix
+    #   A name prefix to filter the replays returned. Only replays with name
+    #   that match the prefix are returned.
+    #
+    # @option params [String] :state
+    #   The state of the replay.
+    #
+    # @option params [String] :event_source_arn
+    #   The ARN of the event source associated with the replay.
+    #
+    # @option params [String] :next_token
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of replays to retrieve.
+    #
+    # @return [Types::ListReplaysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReplaysResponse#replays #replays} => Array&lt;Types::Replay&gt;
+    #   * {Types::ListReplaysResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_replays({
+    #     name_prefix: "ReplayName",
+    #     state: "STARTING", # accepts STARTING, RUNNING, CANCELLING, COMPLETED, CANCELLED, FAILED
+    #     event_source_arn: "Arn",
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replays #=> Array
+    #   resp.replays[0].replay_name #=> String
+    #   resp.replays[0].event_source_arn #=> String
+    #   resp.replays[0].state #=> String, one of "STARTING", "RUNNING", "CANCELLING", "COMPLETED", "CANCELLED", "FAILED"
+    #   resp.replays[0].state_reason #=> String
+    #   resp.replays[0].event_start_time #=> Time
+    #   resp.replays[0].event_end_time #=> Time
+    #   resp.replays[0].event_last_replayed_time #=> Time
+    #   resp.replays[0].replay_start_time #=> Time
+    #   resp.replays[0].replay_end_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListReplays AWS API Documentation
+    #
+    # @overload list_replays(params = {})
+    # @param [Hash] params ({})
+    def list_replays(params = {}, options = {})
+      req = build_request(:list_replays, params)
+      req.send_request(options)
+    end
+
     # Lists the rules for the specified target. You can see which of the
     # rules in Amazon EventBridge can invoke a specific target in your
     # account.
@@ -1037,8 +1375,8 @@ module Aws::CloudWatchEvents
     #   The Amazon Resource Name (ARN) of the target resource.
     #
     # @option params [String] :event_bus_name
-    #   Limits the results to show only the rules associated with the
-    #   specified event bus.
+    #   The name or ARN of the event bus to list rules for. If you omit this,
+    #   the default event bus is used.
     #
     # @option params [String] :next_token
     #   The token returned by a previous call to retrieve the next set of
@@ -1056,7 +1394,7 @@ module Aws::CloudWatchEvents
     #
     #   resp = client.list_rule_names_by_target({
     #     target_arn: "TargetArn", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     next_token: "NextToken",
     #     limit: 1,
     #   })
@@ -1086,8 +1424,8 @@ module Aws::CloudWatchEvents
     #   The prefix matching the rule name.
     #
     # @option params [String] :event_bus_name
-    #   Limits the results to show only the rules associated with the
-    #   specified event bus.
+    #   The name or ARN of the event bus to list the rules for. If you omit
+    #   this, the default event bus is used.
     #
     # @option params [String] :next_token
     #   The token returned by a previous call to retrieve the next set of
@@ -1105,7 +1443,7 @@ module Aws::CloudWatchEvents
     #
     #   resp = client.list_rules({
     #     name_prefix: "RuleName",
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     next_token: "NextToken",
     #     limit: 1,
     #   })
@@ -1170,8 +1508,8 @@ module Aws::CloudWatchEvents
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @option params [String] :next_token
     #   The token returned by a previous call to retrieve the next set of
@@ -1189,7 +1527,7 @@ module Aws::CloudWatchEvents
     #
     #   resp = client.list_targets_by_rule({
     #     rule: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     next_token: "NextToken",
     #     limit: 1,
     #   })
@@ -1231,6 +1569,15 @@ module Aws::CloudWatchEvents
     #   resp.targets[0].http_parameters.header_parameters["HeaderKey"] #=> String
     #   resp.targets[0].http_parameters.query_string_parameters #=> Hash
     #   resp.targets[0].http_parameters.query_string_parameters["QueryStringKey"] #=> String
+    #   resp.targets[0].redshift_data_parameters.secret_manager_arn #=> String
+    #   resp.targets[0].redshift_data_parameters.database #=> String
+    #   resp.targets[0].redshift_data_parameters.db_user #=> String
+    #   resp.targets[0].redshift_data_parameters.sql #=> String
+    #   resp.targets[0].redshift_data_parameters.statement_name #=> String
+    #   resp.targets[0].redshift_data_parameters.with_event #=> Boolean
+    #   resp.targets[0].dead_letter_config.arn #=> String
+    #   resp.targets[0].retry_policy.maximum_retry_attempts #=> Integer
+    #   resp.targets[0].retry_policy.maximum_event_age_in_seconds #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTargetsByRule AWS API Documentation
@@ -1265,7 +1612,7 @@ module Aws::CloudWatchEvents
     #         resources: ["EventResource"],
     #         detail_type: "String",
     #         detail: "String",
-    #         event_bus_name: "NonPartnerEventBusName",
+    #         event_bus_name: "NonPartnerEventBusNameOrArn",
     #       },
     #     ],
     #   })
@@ -1359,14 +1706,14 @@ module Aws::CloudWatchEvents
     # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html
     #
     # @option params [String] :event_bus_name
-    #   The event bus associated with the rule. If you omit this, the default
-    #   event bus is used.
+    #   The name of the event bus associated with the rule. If you omit this,
+    #   the default event bus is used.
     #
-    # @option params [required, String] :action
+    # @option params [String] :action
     #   The action that you are enabling the other account to perform.
     #   Currently, this must be `events:PutEvents`.
     #
-    # @option params [required, String] :principal
+    # @option params [String] :principal
     #   The 12-digit AWS account ID that you are permitting to put events to
     #   your default event bus. Specify "*" to permit any account to put
     #   events to your default event bus.
@@ -1378,7 +1725,7 @@ module Aws::CloudWatchEvents
     #   with an account field do not match any events sent from other
     #   accounts.
     #
-    # @option params [required, String] :statement_id
+    # @option params [String] :statement_id
     #   An identifier string for the external account that you are granting
     #   permissions to. If you later want to revoke the permission for this
     #   external account, specify this `StatementId` when you run
@@ -1401,20 +1748,26 @@ module Aws::CloudWatchEvents
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
     #
+    # @option params [String] :policy
+    #   A JSON string that describes the permission policy statement. You can
+    #   include a `Policy` parameter in the request instead of using the
+    #   `StatementId`, `Action`, `Principal`, or `Condition` parameters.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_permission({
     #     event_bus_name: "NonPartnerEventBusName",
-    #     action: "Action", # required
-    #     principal: "Principal", # required
-    #     statement_id: "StatementId", # required
+    #     action: "Action",
+    #     principal: "Principal",
+    #     statement_id: "StatementId",
     #     condition: {
     #       type: "String", # required
     #       key: "String", # required
     #       value: "String", # required
     #     },
+    #     policy: "String",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermission AWS API Documentation
@@ -1520,8 +1873,8 @@ module Aws::CloudWatchEvents
     #   The list of key-value pairs to associate with the rule.
     #
     # @option params [String] :event_bus_name
-    #   The event bus to associate with this rule. If you omit this, the
-    #   default event bus is used.
+    #   The name or ARN of the event bus to associate with this rule. If you
+    #   omit this, the default event bus is used.
     #
     # @return [Types::PutRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1542,7 +1895,7 @@ module Aws::CloudWatchEvents
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #   })
     #
     # @example Response structure
@@ -1596,6 +1949,8 @@ module Aws::CloudWatchEvents
     # * The default event bus of another AWS account
     #
     # * Amazon API Gateway REST APIs
+    #
+    # * Redshift Clusters to invoke Data API ExecuteStatement on
     #
     # Creating rules with built-in targets is supported only in the AWS
     # Management Console. The built-in targets are `EC2 CreateSnapshot API
@@ -1686,8 +2041,8 @@ module Aws::CloudWatchEvents
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The name of the event bus associated with the rule. If you omit this,
-    #   the default event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @option params [required, Array<Types::Target>] :targets
     #   The targets to update or add to the rule.
@@ -1701,7 +2056,7 @@ module Aws::CloudWatchEvents
     #
     #   resp = client.put_targets({
     #     rule: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     targets: [ # required
     #       {
     #         id: "TargetId", # required
@@ -1762,6 +2117,21 @@ module Aws::CloudWatchEvents
     #             "QueryStringKey" => "QueryStringValue",
     #           },
     #         },
+    #         redshift_data_parameters: {
+    #           secret_manager_arn: "RedshiftSecretManagerArn",
+    #           database: "Database", # required
+    #           db_user: "DbUser",
+    #           sql: "Sql", # required
+    #           statement_name: "StatementName",
+    #           with_event: false,
+    #         },
+    #         dead_letter_config: {
+    #           arn: "ResourceArn",
+    #         },
+    #         retry_policy: {
+    #           maximum_retry_attempts: 1,
+    #           maximum_event_age_in_seconds: 1,
+    #         },
     #       },
     #     ],
     #   })
@@ -1789,9 +2159,12 @@ module Aws::CloudWatchEvents
     # granted it permission with `PutPermission`. You can find the
     # `StatementId` by using DescribeEventBus.
     #
-    # @option params [required, String] :statement_id
+    # @option params [String] :statement_id
     #   The statement ID corresponding to the account that is no longer
     #   allowed to put events to the default event bus.
+    #
+    # @option params [Boolean] :remove_all_permissions
+    #   Specifies whether to remove all permissions.
     #
     # @option params [String] :event_bus_name
     #   The name of the event bus to revoke permissions for. If you omit this,
@@ -1802,7 +2175,8 @@ module Aws::CloudWatchEvents
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_permission({
-    #     statement_id: "StatementId", # required
+    #     statement_id: "StatementId",
+    #     remove_all_permissions: false,
     #     event_bus_name: "NonPartnerEventBusName",
     #   })
     #
@@ -1831,7 +2205,8 @@ module Aws::CloudWatchEvents
     #   The name of the rule.
     #
     # @option params [String] :event_bus_name
-    #   The name of the event bus associated with the rule.
+    #   The name or ARN of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #
     # @option params [required, Array<String>] :ids
     #   The IDs of the targets to remove from the rule.
@@ -1852,7 +2227,7 @@ module Aws::CloudWatchEvents
     #
     #   resp = client.remove_targets({
     #     rule: "RuleName", # required
-    #     event_bus_name: "EventBusName",
+    #     event_bus_name: "EventBusNameOrArn",
     #     ids: ["TargetId"], # required
     #     force: false,
     #   })
@@ -1871,6 +2246,75 @@ module Aws::CloudWatchEvents
     # @param [Hash] params ({})
     def remove_targets(params = {}, options = {})
       req = build_request(:remove_targets, params)
+      req.send_request(options)
+    end
+
+    # Starts the specified replay. Events are not necessarily replayed in
+    # the exact same order that they were added to the archive. A replay
+    # processes events to replay based on the time in the event, and replays
+    # them using 1 minute intervals. If you specify an `EventStartTime` and
+    # an `EventEndTime` that covers a 20 minute time range, the events are
+    # replayed from the first minute of that 20 minute range first. Then the
+    # events from the second minute are replayed. You can use
+    # `DescribeReplay` to determine the progress of a replay. The value
+    # returned for `EventLastReplayedTime` indicates the time within the
+    # specified time range associated with the last event replayed.
+    #
+    # @option params [required, String] :replay_name
+    #   The name of the replay to start.
+    #
+    # @option params [String] :description
+    #   A description for the replay to start.
+    #
+    # @option params [required, String] :event_source_arn
+    #   The ARN of the archive to replay events from.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :event_start_time
+    #   A time stamp for the time to start replaying events. Only events that
+    #   occurred between the `EventStartTime` and `EventEndTime` are replayed.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :event_end_time
+    #   A time stamp for the time to stop replaying events. Only events that
+    #   occurred between the `EventStartTime` and `EventEndTime` are replayed.
+    #
+    # @option params [required, Types::ReplayDestination] :destination
+    #   A `ReplayDestination` object that includes details about the
+    #   destination for the replay.
+    #
+    # @return [Types::StartReplayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartReplayResponse#replay_arn #replay_arn} => String
+    #   * {Types::StartReplayResponse#state #state} => String
+    #   * {Types::StartReplayResponse#state_reason #state_reason} => String
+    #   * {Types::StartReplayResponse#replay_start_time #replay_start_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_replay({
+    #     replay_name: "ReplayName", # required
+    #     description: "ReplayDescription",
+    #     event_source_arn: "Arn", # required
+    #     event_start_time: Time.now, # required
+    #     event_end_time: Time.now, # required
+    #     destination: { # required
+    #       arn: "Arn", # required
+    #       filter_arns: ["Arn"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replay_arn #=> String
+    #   resp.state #=> String, one of "STARTING", "RUNNING", "CANCELLING", "COMPLETED", "CANCELLED", "FAILED"
+    #   resp.state_reason #=> String
+    #   resp.replay_start_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/StartReplay AWS API Documentation
+    #
+    # @overload start_replay(params = {})
+    # @param [Hash] params ({})
+    def start_replay(params = {}, options = {})
+      req = build_request(:start_replay, params)
       req.send_request(options)
     end
 
@@ -1991,6 +2435,52 @@ module Aws::CloudWatchEvents
       req.send_request(options)
     end
 
+    # Updates the specified archive.
+    #
+    # @option params [required, String] :archive_name
+    #   The name of the archive to update.
+    #
+    # @option params [String] :description
+    #   The description for the archive.
+    #
+    # @option params [String] :event_pattern
+    #   The event pattern to use to filter events sent to the archive.
+    #
+    # @option params [Integer] :retention_days
+    #   The number of days to retain events in the archive.
+    #
+    # @return [Types::UpdateArchiveResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateArchiveResponse#archive_arn #archive_arn} => String
+    #   * {Types::UpdateArchiveResponse#state #state} => String
+    #   * {Types::UpdateArchiveResponse#state_reason #state_reason} => String
+    #   * {Types::UpdateArchiveResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_archive({
+    #     archive_name: "ArchiveName", # required
+    #     description: "ArchiveDescription",
+    #     event_pattern: "EventPattern",
+    #     retention_days: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.archive_arn #=> String
+    #   resp.state #=> String, one of "ENABLED", "DISABLED", "CREATING", "UPDATING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.state_reason #=> String
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/UpdateArchive AWS API Documentation
+    #
+    # @overload update_archive(params = {})
+    # @param [Hash] params ({})
+    def update_archive(params = {}, options = {})
+      req = build_request(:update_archive, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2004,7 +2494,7 @@ module Aws::CloudWatchEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-10-15)
+------------------
+
+* Feature - This release introduces AWS Budgets Actions, allowing you to define an explicit response(or set of responses)  to take when your budget exceeds it's action threshold.
+
+1.35.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2020-09-15)
+------------------
+
+* Feature - Documentation updates for Daily Cost and Usage budgets
+
 1.33.0 (2020-08-25)
 ------------------
 

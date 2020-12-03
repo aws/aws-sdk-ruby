@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2020-10-29)
+------------------
+
+* Feature - Support disabling the default execute-api endpoint for REST APIs.
+
+1.55.0 (2020-10-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.53.0 (2020-09-17)
+------------------
+
+* Feature - Adds support for mutual TLS authentication for public regional REST Apis
+
+1.52.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.51.0 (2020-08-25)
 ------------------
 

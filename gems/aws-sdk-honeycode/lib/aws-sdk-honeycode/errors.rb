@@ -33,6 +33,7 @@ module Aws::Honeycode
   # * {InternalServerException}
   # * {RequestTimeoutException}
   # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
   # * {ServiceUnavailableException}
   # * {ThrottlingException}
   # * {ValidationException}
@@ -123,6 +124,21 @@ module Aws::Honeycode
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Honeycode::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Honeycode::Types::ServiceQuotaExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

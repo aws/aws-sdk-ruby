@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -29,7 +30,7 @@ require_relative 'aws-sdk-dynamodb/customizations'
 # structure.
 #
 #     dynamo_db = Aws::DynamoDB::Client.new
-#     resp = dynamo_db.batch_get_item(params)
+#     resp = dynamo_db.batch_execute_statement(params)
 #
 # See {Client} for more information.
 #
@@ -49,6 +50,6 @@ require_relative 'aws-sdk-dynamodb/customizations'
 # @!group service
 module Aws::DynamoDB
 
-  GEM_VERSION = '1.52.0'
+  GEM_VERSION = '1.58.0'
 
 end

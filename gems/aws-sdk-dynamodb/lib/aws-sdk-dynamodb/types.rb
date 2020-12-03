@@ -756,6 +756,43 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchExecuteStatementInput
+    #   data as a hash:
+    #
+    #       {
+    #         statements: [ # required
+    #           {
+    #             statement: "PartiQLStatement", # required
+    #             parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #             consistent_read: false,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] statements
+    #   The list of PartiQL statements representing the batch to run.
+    #   @return [Array<Types::BatchStatementRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchExecuteStatementInput AWS API Documentation
+    #
+    class BatchExecuteStatementInput < Struct.new(
+      :statements)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] responses
+    #   The response to each PartiQL statement in the batch.
+    #   @return [Array<Types::BatchStatementResponse>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchExecuteStatementOutput AWS API Documentation
+    #
+    class BatchExecuteStatementOutput < Struct.new(
+      :responses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a `BatchGetItem` operation.
     #
     # @note When making an API call, you may pass BatchGetItemInput
@@ -949,6 +986,83 @@ module Aws::DynamoDB
       :responses,
       :unprocessed_keys,
       :consumed_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An error associated with a statement in a PartiQL batch that was run.
+    #
+    # @!attribute [rw] code
+    #   The error code associated with the failed PartiQL batch statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the PartiQL batch resposne.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchStatementError AWS API Documentation
+    #
+    class BatchStatementError < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A PartiQL batch statement request.
+    #
+    # @note When making an API call, you may pass BatchStatementRequest
+    #   data as a hash:
+    #
+    #       {
+    #         statement: "PartiQLStatement", # required
+    #         parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         consistent_read: false,
+    #       }
+    #
+    # @!attribute [rw] statement
+    #   A valid PartiQL statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters associated with a PartiQL statement in the batch
+    #   request.
+    #   @return [Array<Types::AttributeValue>]
+    #
+    # @!attribute [rw] consistent_read
+    #   The read consistency of the PartiQL batch request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchStatementRequest AWS API Documentation
+    #
+    class BatchStatementRequest < Struct.new(
+      :statement,
+      :parameters,
+      :consistent_read)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A PartiQL batch statement response..
+    #
+    # @!attribute [rw] error
+    #   The error associated with a failed PartiQL batch statement.
+    #   @return [Types::BatchStatementError]
+    #
+    # @!attribute [rw] table_name
+    #   The table name associated with a failed PartiQL batch statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] item
+    #   A DynamoDB item associated with a BatchStatementResponse
+    #   @return [Hash<String,Types::AttributeValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchStatementResponse AWS API Documentation
+    #
+    class BatchStatementResponse < Struct.new(
+      :error,
+      :table_name,
+      :item)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1616,7 +1730,7 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # Represents a Contributor Insights summary entry..
+    # Represents a Contributor Insights summary entry.
     #
     # @!attribute [rw] table_name
     #   Name of the table associated with the summary.
@@ -1721,7 +1835,8 @@ module Aws::DynamoDB
     #   global secondary index.
     #
     #   For current minimum and maximum provisioned throughput values, see
-    #   [Limits][1] in the *Amazon DynamoDB Developer Guide*.
+    #   [Service, Account, and Table Quotas][1] in the *Amazon DynamoDB
+    #   Developer Guide*.
     #
     #
     #
@@ -2097,7 +2212,8 @@ module Aws::DynamoDB
     #   specify this property.
     #
     #   For current minimum and maximum provisioned throughput values, see
-    #   [Limits][1] in the *Amazon DynamoDB Developer Guide*.
+    #   [Service, Account, and Table Quotas][1] in the *Amazon DynamoDB
+    #   Developer Guide*.
     #
     #
     #
@@ -2841,6 +2957,37 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeExportInput
+    #   data as a hash:
+    #
+    #       {
+    #         export_arn: "ExportArn", # required
+    #       }
+    #
+    # @!attribute [rw] export_arn
+    #   The Amazon Resource Name (ARN) associated with the export.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeExportInput AWS API Documentation
+    #
+    class DescribeExportInput < Struct.new(
+      :export_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_description
+    #   Represents the properties of the export.
+    #   @return [Types::ExportDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeExportOutput AWS API Documentation
+    #
+    class DescribeExportOutput < Struct.new(
+      :export_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeGlobalTableInput
     #   data as a hash:
     #
@@ -2904,6 +3051,42 @@ module Aws::DynamoDB
     class DescribeGlobalTableSettingsOutput < Struct.new(
       :global_table_name,
       :replica_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeKinesisStreamingDestinationInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_name: "TableName", # required
+    #       }
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table being described.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeKinesisStreamingDestinationInput AWS API Documentation
+    #
+    class DescribeKinesisStreamingDestinationInput < Struct.new(
+      :table_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_name
+    #   The name of the table being described.
+    #   @return [String]
+    #
+    # @!attribute [rw] kinesis_data_stream_destinations
+    #   The list of replica structures for the table being described.
+    #   @return [Array<Types::KinesisDataStreamDestination>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeKinesisStreamingDestinationOutput AWS API Documentation
+    #
+    class DescribeKinesisStreamingDestinationOutput < Struct.new(
+      :table_name,
+      :kinesis_data_stream_destinations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3049,6 +3232,20 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # There was an attempt to insert an item with the same primary key as an
+    # item that already exists in the DynamoDB table.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DuplicateItemException AWS API Documentation
+    #
+    class DuplicateItemException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An endpoint information details.
     #
     # @!attribute [rw] address
@@ -3064,6 +3261,114 @@ module Aws::DynamoDB
     class Endpoint < Struct.new(
       :address,
       :cache_period_in_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ExecuteStatementInput
+    #   data as a hash:
+    #
+    #       {
+    #         statement: "PartiQLStatement", # required
+    #         parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         consistent_read: false,
+    #         next_token: "PartiQLNextToken",
+    #       }
+    #
+    # @!attribute [rw] statement
+    #   The PartiQL statement representing the operation to run.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters for the PartiQL statement, if any.
+    #   @return [Array<Types::AttributeValue>]
+    #
+    # @!attribute [rw] consistent_read
+    #   The consistency of a read operation. If set to `true`, then a
+    #   strongly consistent read is used; otherwise, an eventually
+    #   consistent read is used.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] next_token
+    #   Set this value to get remaining results, if `NextToken` was returned
+    #   in the statement response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteStatementInput AWS API Documentation
+    #
+    class ExecuteStatementInput < Struct.new(
+      :statement,
+      :parameters,
+      :consistent_read,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   If a read operation was used, this property will contain the result
+    #   of the reade operation; a map of attribute names and their values.
+    #   For the write operations this value will be empty.
+    #   @return [Array<Hash<String,Types::AttributeValue>>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response of a read request exceeds the response payload limit
+    #   DynamoDB will set this value in the response. If set, you can use
+    #   that this value in the subsequent request to get the remaining
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteStatementOutput AWS API Documentation
+    #
+    class ExecuteStatementOutput < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ExecuteTransactionInput
+    #   data as a hash:
+    #
+    #       {
+    #         transact_statements: [ # required
+    #           {
+    #             statement: "PartiQLStatement", # required
+    #             parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #         ],
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] transact_statements
+    #   The list of PartiQL statements representing the transaction to run.
+    #   @return [Array<Types::ParameterizedStatement>]
+    #
+    # @!attribute [rw] client_request_token
+    #   Set this value to get remaining results, if `NextToken` was returned
+    #   in the statement response.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteTransactionInput AWS API Documentation
+    #
+    class ExecuteTransactionInput < Struct.new(
+      :transact_statements,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] responses
+    #   The response to a PartiQL transaction.
+    #   @return [Array<Types::ItemResponse>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteTransactionOutput AWS API Documentation
+    #
+    class ExecuteTransactionOutput < Struct.new(
+      :responses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3342,6 +3647,273 @@ module Aws::DynamoDB
       :exists,
       :comparison_operator,
       :attribute_value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # There was a conflict when writing to the specified S3 bucket.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportConflictException AWS API Documentation
+    #
+    class ExportConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the properties of the exported table.
+    #
+    # @!attribute [rw] export_arn
+    #   The Amazon Resource Name (ARN) of the table export.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_status
+    #   Export can be in one of the following states: IN\_PROGRESS,
+    #   COMPLETED, or FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time at which the export task began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time at which the export task completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] export_manifest
+    #   The name of the manifest file for the export task.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) of the table that was exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_id
+    #   Unique ID of the table that was exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_time
+    #   Point in time from which table data was exported.
+    #   @return [Time]
+    #
+    # @!attribute [rw] client_token
+    #   The client token that was provided for the export task. A client
+    #   token makes calls to `ExportTableToPointInTimeInput` idempotent,
+    #   meaning that multiple identical calls have the same effect as one
+    #   single call.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket
+    #   The name of the Amazon S3 bucket containing the export.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   The ID of the AWS account that owns the bucket containing the
+    #   export.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_prefix
+    #   The Amazon S3 bucket prefix used as the file name and path of the
+    #   exported snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_sse_algorithm
+    #   Type of encryption used on the bucket where export data is stored.
+    #   Valid values for `S3SseAlgorithm` are:
+    #
+    #   * `AES256` - server-side encryption with Amazon S3 managed keys
+    #
+    #   * `KMS` - server-side encryption with AWS KMS managed keys
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_sse_kms_key_id
+    #   The ID of the AWS KMS managed key used to encrypt the S3 bucket
+    #   where export data is stored (if applicable).
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_code
+    #   Status code for the result of the failed export.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   Export failure reason description.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_format
+    #   The format of the exported data. Valid values for `ExportFormat` are
+    #   `DYNAMODB_JSON` or `ION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] billed_size_bytes
+    #   The billable size of the table export.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] item_count
+    #   The number of items exported.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportDescription AWS API Documentation
+    #
+    class ExportDescription < Struct.new(
+      :export_arn,
+      :export_status,
+      :start_time,
+      :end_time,
+      :export_manifest,
+      :table_arn,
+      :table_id,
+      :export_time,
+      :client_token,
+      :s3_bucket,
+      :s3_bucket_owner,
+      :s3_prefix,
+      :s3_sse_algorithm,
+      :s3_sse_kms_key_id,
+      :failure_code,
+      :failure_message,
+      :export_format,
+      :billed_size_bytes,
+      :item_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified export was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportNotFoundException AWS API Documentation
+    #
+    class ExportNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about an export task.
+    #
+    # @!attribute [rw] export_arn
+    #   The Amazon Resource Name (ARN) of the export.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_status
+    #   Export can be in one of the following states: IN\_PROGRESS,
+    #   COMPLETED, or FAILED.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportSummary AWS API Documentation
+    #
+    class ExportSummary < Struct.new(
+      :export_arn,
+      :export_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ExportTableToPointInTimeInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_arn: "TableArn", # required
+    #         export_time: Time.now,
+    #         client_token: "ClientToken",
+    #         s3_bucket: "S3Bucket", # required
+    #         s3_bucket_owner: "S3BucketOwner",
+    #         s3_prefix: "S3Prefix",
+    #         s3_sse_algorithm: "AES256", # accepts AES256, KMS
+    #         s3_sse_kms_key_id: "S3SseKmsKeyId",
+    #         export_format: "DYNAMODB_JSON", # accepts DYNAMODB_JSON, ION
+    #       }
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) associated with the table to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_time
+    #   Time in the past from which to export table data. The table export
+    #   will be a snapshot of the table's state at this point in time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] client_token
+    #   Providing a `ClientToken` makes the call to
+    #   `ExportTableToPointInTimeInput` idempotent, meaning that multiple
+    #   identical calls have the same effect as one single call.
+    #
+    #   A client token is valid for 8 hours after the first request that
+    #   uses it is completed. After 8 hours, any request with the same
+    #   client token is treated as a new request. Do not resubmit the same
+    #   request with the same client token for more than 8 hours, or the
+    #   result might not be idempotent.
+    #
+    #   If you submit a request with the same client token but a change in
+    #   other parameters within the 8-hour idempotency window, DynamoDB
+    #   returns an `IdempotentParameterMismatch` exception.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket
+    #   The name of the Amazon S3 bucket to export the snapshot to.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   The ID of the AWS account that owns the bucket the export will be
+    #   stored in.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_prefix
+    #   The Amazon S3 bucket prefix to use as the file name and path of the
+    #   exported snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_sse_algorithm
+    #   Type of encryption used on the bucket where export data will be
+    #   stored. Valid values for `S3SseAlgorithm` are:
+    #
+    #   * `AES256` - server-side encryption with Amazon S3 managed keys
+    #
+    #   * `KMS` - server-side encryption with AWS KMS managed keys
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_sse_kms_key_id
+    #   The ID of the AWS KMS managed key used to encrypt the S3 bucket
+    #   where export data will be stored (if applicable).
+    #   @return [String]
+    #
+    # @!attribute [rw] export_format
+    #   The format for the exported data. Valid values for `ExportFormat`
+    #   are `DYNAMODB_JSON` or `ION`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportTableToPointInTimeInput AWS API Documentation
+    #
+    class ExportTableToPointInTimeInput < Struct.new(
+      :table_arn,
+      :export_time,
+      :client_token,
+      :s3_bucket,
+      :s3_bucket_owner,
+      :s3_prefix,
+      :s3_sse_algorithm,
+      :s3_sse_kms_key_id,
+      :export_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_description
+    #   Contains a description of the table export.
+    #   @return [Types::ExportDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportTableToPointInTimeOutput AWS API Documentation
+    #
+    class ExportTableToPointInTimeOutput < Struct.new(
+      :export_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3661,7 +4233,8 @@ module Aws::DynamoDB
     #   global secondary index.
     #
     #   For current minimum and maximum provisioned throughput values, see
-    #   [Limits][1] in the *Amazon DynamoDB Developer Guide*.
+    #   [Service, Account, and Table Quotas][1] in the *Amazon DynamoDB
+    #   Developer Guide*.
     #
     #
     #
@@ -3795,7 +4368,8 @@ module Aws::DynamoDB
     #   global secondary index.
     #
     #   For current minimum and maximum provisioned throughput values, see
-    #   [Limits][1] in the *Amazon DynamoDB Developer Guide*.
+    #   [Service, Account, and Table Quotas][1] in the *Amazon DynamoDB
+    #   Developer Guide*.
     #
     #
     #
@@ -4142,6 +4716,20 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # The specified `ExportTime` is outside of the point in time recovery
+    # window.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/InvalidExportTimeException AWS API Documentation
+    #
+    class InvalidExportTimeException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An invalid restore time was specified. RestoreDateTime must be between
     # EarliestRestorableDateTime and LatestRestorableDateTime.
     #
@@ -4402,6 +4990,77 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Describes a Kinesis data stream destination.
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN for a specific Kinesis data stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_status
+    #   The current status of replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_status_description
+    #   The human-readable string that corresponds to the replica status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/KinesisDataStreamDestination AWS API Documentation
+    #
+    class KinesisDataStreamDestination < Struct.new(
+      :stream_arn,
+      :destination_status,
+      :destination_status_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass KinesisStreamingDestinationInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_name: "TableName", # required
+    #         stream_arn: "StreamArn", # required
+    #       }
+    #
+    # @!attribute [rw] table_name
+    #   The name of the DynamoDB table.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN for a Kinesis data stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/KinesisStreamingDestinationInput AWS API Documentation
+    #
+    class KinesisStreamingDestinationInput < Struct.new(
+      :table_name,
+      :stream_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_name
+    #   The name of the table being modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN for the specific Kinesis data stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_status
+    #   The current status of the replication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/KinesisStreamingDestinationOutput AWS API Documentation
+    #
+    class KinesisStreamingDestinationOutput < Struct.new(
+      :table_name,
+      :stream_arn,
+      :destination_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # There is no limit to the number of daily on-demand backups that can be
     # taken.
     #
@@ -4415,7 +5074,7 @@ module Aws::DynamoDB
     # time; however, if the table or index specifications are complex,
     # DynamoDB might temporarily reduce the number of concurrent operations.
     #
-    # There is a soft account limit of 256 tables.
+    # There is a soft account quota of 256 tables.
     #
     # @!attribute [rw] message
     #   Too many operations for a given subscriber.
@@ -4563,6 +5222,58 @@ module Aws::DynamoDB
     #
     class ListContributorInsightsOutput < Struct.new(
       :contributor_insights_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListExportsInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_arn: "TableArn",
+    #         max_results: 1,
+    #         next_token: "ExportNextToken",
+    #       }
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) associated with the exported table.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An optional string that, if supplied, must be copied from the output
+    #   of a previous call to `ListExports`. When provided in this manner,
+    #   the API fetches the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListExportsInput AWS API Documentation
+    #
+    class ListExportsInput < Struct.new(
+      :table_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_summaries
+    #   A list of `ExportSummary` objects.
+    #   @return [Array<Types::ExportSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If this value is returned, there are additional results to be
+    #   displayed. To retrieve them, call `ListExports` again, with
+    #   `NextToken` set to this value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListExportsOutput AWS API Documentation
+    #
+    class ListExportsOutput < Struct.new(
+      :export_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4900,6 +5611,33 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Represents a PartiQL statment that uses parameters.
+    #
+    # @note When making an API call, you may pass ParameterizedStatement
+    #   data as a hash:
+    #
+    #       {
+    #         statement: "PartiQLStatement", # required
+    #         parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #       }
+    #
+    # @!attribute [rw] statement
+    #   A PartiQL statment that uses parameters.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameter values.
+    #   @return [Array<Types::AttributeValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ParameterizedStatement AWS API Documentation
+    #
+    class ParameterizedStatement < Struct.new(
+      :statement,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The description of the point in time settings applied to the table.
     #
     # @!attribute [rw] point_in_time_recovery_status
@@ -4986,9 +5724,9 @@ module Aws::DynamoDB
     #   * `KEYS_ONLY` - Only the index and primary keys are projected into
     #     the index.
     #
-    #   * `INCLUDE` - Only the specified table attributes are projected into
-    #     the index. The list of projected attributes is in
-    #     `NonKeyAttributes`.
+    #   * `INCLUDE` - In addition to the attributes described in
+    #     `KEYS_ONLY`, the secondary index will include other non-key
+    #     attributes that you specify.
     #
     #   * `ALL` - All of the table attributes are projected into the index.
     #   @return [String]
@@ -5017,7 +5755,8 @@ module Aws::DynamoDB
     # operation.
     #
     # For current minimum and maximum provisioned throughput values, see
-    # [Limits][1] in the *Amazon DynamoDB Developer Guide*.
+    # [Service, Account, and Table Quotas][1] in the *Amazon DynamoDB
+    # Developer Guide*.
     #
     #
     #
@@ -5085,8 +5824,8 @@ module Aws::DynamoDB
     # @!attribute [rw] number_of_decreases_today
     #   The number of provisioned throughput decreases for this table during
     #   this UTC calendar day. For current maximums on provisioned
-    #   throughput decreases, see [Limits][1] in the *Amazon DynamoDB
-    #   Developer Guide*.
+    #   throughput decreases, see [Service, Account, and Table Quotas][1] in
+    #   the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
@@ -6257,6 +6996,26 @@ module Aws::DynamoDB
     #   * `DELETING` - The replica is being deleted.
     #
     #   * `ACTIVE` - The replica is ready for use.
+    #
+    #   * `REGION_DISABLED` - The replica is inaccessible because the AWS
+    #     Region has been disabled.
+    #
+    #     <note markdown="1"> If the AWS Region remains inaccessible for more than 20 hours,
+    #     DynamoDB will remove this replica from the replication group. The
+    #     replica will not be deleted and replication will stop from and to
+    #     this region.
+    #
+    #      </note>
+    #
+    #   * `INACCESSIBLE_ENCRYPTION_CREDENTIALS ` - The AWS KMS key used to
+    #     encrypt the table is inaccessible.
+    #
+    #     <note markdown="1"> If the AWS KMS key remains inaccessible for more than 20 hours,
+    #     DynamoDB will remove this replica from the replication group. The
+    #     replica will not be deleted and replication will stop from and to
+    #     this region.
+    #
+    #      </note>
     #   @return [String]
     #
     # @!attribute [rw] replica_status_description
@@ -6282,6 +7041,12 @@ module Aws::DynamoDB
     #   Replica-specific global secondary index settings.
     #   @return [Array<Types::ReplicaGlobalSecondaryIndexDescription>]
     #
+    # @!attribute [rw] replica_inaccessible_date_time
+    #   The time at which the replica was first detected as inaccessible. To
+    #   determine cause of inaccessibility check the `ReplicaStatus`
+    #   property.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaDescription AWS API Documentation
     #
     class ReplicaDescription < Struct.new(
@@ -6291,7 +7056,8 @@ module Aws::DynamoDB
       :replica_status_percent_progress,
       :kms_master_key_id,
       :provisioned_throughput_override,
-      :global_secondary_indexes)
+      :global_secondary_indexes,
+      :replica_inaccessible_date_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6813,8 +7579,8 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # Throughput exceeds the current throughput limit for your account.
-    # Please contact AWS Support at [AWS Support][1] to request a limit
+    # Throughput exceeds the current throughput quota for your account.
+    # Please contact AWS Support at [AWS Support][1] to request a quota
     # increase.
     #
     #
@@ -8086,9 +8852,9 @@ module Aws::DynamoDB
     #       * `KEYS_ONLY` - Only the index and primary keys are projected
     #         into the index.
     #
-    #       * `INCLUDE` - Only the specified table attributes are projected
-    #         into the index. The list of projected attributes is in
-    #         `NonKeyAttributes`.
+    #       * `INCLUDE` - In addition to the attributes described in
+    #         `KEYS_ONLY`, the secondary index will include other non-key
+    #         attributes that you specify.
     #
     #       * `ALL` - All of the table attributes are projected into the
     #         index.
@@ -9112,7 +9878,8 @@ module Aws::DynamoDB
     #   global secondary index.
     #
     #   For current minimum and maximum provisioned throughput values, see
-    #   [Limits][1] in the *Amazon DynamoDB Developer Guide*.
+    #   [Service, Account, and Table Quotas][1] in the *Amazon DynamoDB
+    #   Developer Guide*.
     #
     #
     #

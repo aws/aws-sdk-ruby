@@ -20,6 +20,8 @@ module Aws::XRay
     AnnotationKey = Shapes::StringShape.new(name: 'AnnotationKey')
     AnnotationValue = Shapes::StructureShape.new(name: 'AnnotationValue')
     Annotations = Shapes::MapShape.new(name: 'Annotations')
+    AnomalousService = Shapes::StructureShape.new(name: 'AnomalousService')
+    AnomalousServiceList = Shapes::ListShape.new(name: 'AnomalousServiceList')
     AttributeKey = Shapes::StringShape.new(name: 'AttributeKey')
     AttributeMap = Shapes::MapShape.new(name: 'AttributeMap')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
@@ -56,6 +58,7 @@ module Aws::XRay
     ErrorRootCauseServices = Shapes::ListShape.new(name: 'ErrorRootCauseServices')
     ErrorRootCauses = Shapes::ListShape.new(name: 'ErrorRootCauses')
     ErrorStatistics = Shapes::StructureShape.new(name: 'ErrorStatistics')
+    EventSummaryText = Shapes::StringShape.new(name: 'EventSummaryText')
     FaultRootCause = Shapes::StructureShape.new(name: 'FaultRootCause')
     FaultRootCauseEntity = Shapes::StructureShape.new(name: 'FaultRootCauseEntity')
     FaultRootCauseEntityPath = Shapes::ListShape.new(name: 'FaultRootCauseEntityPath')
@@ -65,6 +68,7 @@ module Aws::XRay
     FaultStatistics = Shapes::StructureShape.new(name: 'FaultStatistics')
     FilterExpression = Shapes::StringShape.new(name: 'FilterExpression')
     FixedRate = Shapes::FloatShape.new(name: 'FixedRate')
+    ForecastStatistics = Shapes::StructureShape.new(name: 'ForecastStatistics')
     GetEncryptionConfigRequest = Shapes::StructureShape.new(name: 'GetEncryptionConfigRequest')
     GetEncryptionConfigResult = Shapes::StructureShape.new(name: 'GetEncryptionConfigResult')
     GetGroupRequest = Shapes::StructureShape.new(name: 'GetGroupRequest')
@@ -72,6 +76,16 @@ module Aws::XRay
     GetGroupsNextToken = Shapes::StringShape.new(name: 'GetGroupsNextToken')
     GetGroupsRequest = Shapes::StructureShape.new(name: 'GetGroupsRequest')
     GetGroupsResult = Shapes::StructureShape.new(name: 'GetGroupsResult')
+    GetInsightEventsMaxResults = Shapes::IntegerShape.new(name: 'GetInsightEventsMaxResults')
+    GetInsightEventsRequest = Shapes::StructureShape.new(name: 'GetInsightEventsRequest')
+    GetInsightEventsResult = Shapes::StructureShape.new(name: 'GetInsightEventsResult')
+    GetInsightImpactGraphRequest = Shapes::StructureShape.new(name: 'GetInsightImpactGraphRequest')
+    GetInsightImpactGraphResult = Shapes::StructureShape.new(name: 'GetInsightImpactGraphResult')
+    GetInsightRequest = Shapes::StructureShape.new(name: 'GetInsightRequest')
+    GetInsightResult = Shapes::StructureShape.new(name: 'GetInsightResult')
+    GetInsightSummariesMaxResults = Shapes::IntegerShape.new(name: 'GetInsightSummariesMaxResults')
+    GetInsightSummariesRequest = Shapes::StructureShape.new(name: 'GetInsightSummariesRequest')
+    GetInsightSummariesResult = Shapes::StructureShape.new(name: 'GetInsightSummariesResult')
     GetSamplingRulesRequest = Shapes::StructureShape.new(name: 'GetSamplingRulesRequest')
     GetSamplingRulesResult = Shapes::StructureShape.new(name: 'GetSamplingRulesResult')
     GetSamplingStatisticSummariesRequest = Shapes::StructureShape.new(name: 'GetSamplingStatisticSummariesRequest')
@@ -97,6 +111,21 @@ module Aws::XRay
     Host = Shapes::StringShape.new(name: 'Host')
     Hostname = Shapes::StringShape.new(name: 'Hostname')
     Http = Shapes::StructureShape.new(name: 'Http')
+    Insight = Shapes::StructureShape.new(name: 'Insight')
+    InsightCategory = Shapes::StringShape.new(name: 'InsightCategory')
+    InsightCategoryList = Shapes::ListShape.new(name: 'InsightCategoryList')
+    InsightEvent = Shapes::StructureShape.new(name: 'InsightEvent')
+    InsightEventList = Shapes::ListShape.new(name: 'InsightEventList')
+    InsightId = Shapes::StringShape.new(name: 'InsightId')
+    InsightImpactGraphEdge = Shapes::StructureShape.new(name: 'InsightImpactGraphEdge')
+    InsightImpactGraphEdgeList = Shapes::ListShape.new(name: 'InsightImpactGraphEdgeList')
+    InsightImpactGraphService = Shapes::StructureShape.new(name: 'InsightImpactGraphService')
+    InsightImpactGraphServiceList = Shapes::ListShape.new(name: 'InsightImpactGraphServiceList')
+    InsightState = Shapes::StringShape.new(name: 'InsightState')
+    InsightStateList = Shapes::ListShape.new(name: 'InsightStateList')
+    InsightSummary = Shapes::StructureShape.new(name: 'InsightSummary')
+    InsightSummaryList = Shapes::ListShape.new(name: 'InsightSummaryList')
+    InsightSummaryText = Shapes::StringShape.new(name: 'InsightSummaryText')
     InsightsConfiguration = Shapes::StructureShape.new(name: 'InsightsConfiguration')
     InstanceIdDetail = Shapes::StructureShape.new(name: 'InstanceIdDetail')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -115,6 +144,7 @@ module Aws::XRay
     PutTraceSegmentsRequest = Shapes::StructureShape.new(name: 'PutTraceSegmentsRequest')
     PutTraceSegmentsResult = Shapes::StructureShape.new(name: 'PutTraceSegmentsResult')
     RequestCount = Shapes::IntegerShape.new(name: 'RequestCount')
+    RequestImpactStatistics = Shapes::StructureShape.new(name: 'RequestImpactStatistics')
     ReservoirSize = Shapes::IntegerShape.new(name: 'ReservoirSize')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceARNDetail = Shapes::StructureShape.new(name: 'ResourceARNDetail')
@@ -169,6 +199,7 @@ module Aws::XRay
     TimeSeriesServiceStatistics = Shapes::StructureShape.new(name: 'TimeSeriesServiceStatistics')
     TimeSeriesServiceStatisticsList = Shapes::ListShape.new(name: 'TimeSeriesServiceStatisticsList')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    Token = Shapes::StringShape.new(name: 'Token')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     Trace = Shapes::StructureShape.new(name: 'Trace')
     TraceAvailabilityZones = Shapes::ListShape.new(name: 'TraceAvailabilityZones')
@@ -215,6 +246,11 @@ module Aws::XRay
 
     Annotations.key = Shapes::ShapeRef.new(shape: AnnotationKey)
     Annotations.value = Shapes::ShapeRef.new(shape: ValuesWithServiceIds)
+
+    AnomalousService.add_member(:service_id, Shapes::ShapeRef.new(shape: ServiceId, location_name: "ServiceId"))
+    AnomalousService.struct_class = Types::AnomalousService
+
+    AnomalousServiceList.member = Shapes::ShapeRef.new(shape: AnomalousService)
 
     AttributeMap.key = Shapes::ShapeRef.new(shape: AttributeKey)
     AttributeMap.value = Shapes::ShapeRef.new(shape: AttributeValue)
@@ -345,6 +381,10 @@ module Aws::XRay
     FaultStatistics.add_member(:total_count, Shapes::ShapeRef.new(shape: NullableLong, location_name: "TotalCount"))
     FaultStatistics.struct_class = Types::FaultStatistics
 
+    ForecastStatistics.add_member(:fault_count_high, Shapes::ShapeRef.new(shape: NullableLong, location_name: "FaultCountHigh"))
+    ForecastStatistics.add_member(:fault_count_low, Shapes::ShapeRef.new(shape: NullableLong, location_name: "FaultCountLow"))
+    ForecastStatistics.struct_class = Types::ForecastStatistics
+
     GetEncryptionConfigRequest.struct_class = Types::GetEncryptionConfigRequest
 
     GetEncryptionConfigResult.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, location_name: "EncryptionConfig"))
@@ -363,6 +403,49 @@ module Aws::XRay
     GetGroupsResult.add_member(:groups, Shapes::ShapeRef.new(shape: GroupSummaryList, location_name: "Groups"))
     GetGroupsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetGroupsResult.struct_class = Types::GetGroupsResult
+
+    GetInsightEventsRequest.add_member(:insight_id, Shapes::ShapeRef.new(shape: InsightId, required: true, location_name: "InsightId"))
+    GetInsightEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetInsightEventsMaxResults, location_name: "MaxResults"))
+    GetInsightEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetInsightEventsRequest.struct_class = Types::GetInsightEventsRequest
+
+    GetInsightEventsResult.add_member(:insight_events, Shapes::ShapeRef.new(shape: InsightEventList, location_name: "InsightEvents"))
+    GetInsightEventsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetInsightEventsResult.struct_class = Types::GetInsightEventsResult
+
+    GetInsightImpactGraphRequest.add_member(:insight_id, Shapes::ShapeRef.new(shape: InsightId, required: true, location_name: "InsightId"))
+    GetInsightImpactGraphRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    GetInsightImpactGraphRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    GetInsightImpactGraphRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetInsightImpactGraphRequest.struct_class = Types::GetInsightImpactGraphRequest
+
+    GetInsightImpactGraphResult.add_member(:insight_id, Shapes::ShapeRef.new(shape: InsightId, location_name: "InsightId"))
+    GetInsightImpactGraphResult.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    GetInsightImpactGraphResult.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    GetInsightImpactGraphResult.add_member(:service_graph_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ServiceGraphStartTime"))
+    GetInsightImpactGraphResult.add_member(:service_graph_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ServiceGraphEndTime"))
+    GetInsightImpactGraphResult.add_member(:services, Shapes::ShapeRef.new(shape: InsightImpactGraphServiceList, location_name: "Services"))
+    GetInsightImpactGraphResult.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetInsightImpactGraphResult.struct_class = Types::GetInsightImpactGraphResult
+
+    GetInsightRequest.add_member(:insight_id, Shapes::ShapeRef.new(shape: InsightId, required: true, location_name: "InsightId"))
+    GetInsightRequest.struct_class = Types::GetInsightRequest
+
+    GetInsightResult.add_member(:insight, Shapes::ShapeRef.new(shape: Insight, location_name: "Insight"))
+    GetInsightResult.struct_class = Types::GetInsightResult
+
+    GetInsightSummariesRequest.add_member(:states, Shapes::ShapeRef.new(shape: InsightStateList, location_name: "States"))
+    GetInsightSummariesRequest.add_member(:group_arn, Shapes::ShapeRef.new(shape: GroupARN, location_name: "GroupARN"))
+    GetInsightSummariesRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, location_name: "GroupName"))
+    GetInsightSummariesRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    GetInsightSummariesRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    GetInsightSummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetInsightSummariesMaxResults, location_name: "MaxResults"))
+    GetInsightSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetInsightSummariesRequest.struct_class = Types::GetInsightSummariesRequest
+
+    GetInsightSummariesResult.add_member(:insight_summaries, Shapes::ShapeRef.new(shape: InsightSummaryList, location_name: "InsightSummaries"))
+    GetInsightSummariesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetInsightSummariesResult.struct_class = Types::GetInsightSummariesResult
 
     GetSamplingRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetSamplingRulesRequest.struct_class = Types::GetSamplingRulesRequest
@@ -406,6 +489,7 @@ module Aws::XRay
     GetTimeSeriesServiceStatisticsRequest.add_member(:group_arn, Shapes::ShapeRef.new(shape: GroupARN, location_name: "GroupARN"))
     GetTimeSeriesServiceStatisticsRequest.add_member(:entity_selector_expression, Shapes::ShapeRef.new(shape: EntitySelectorExpression, location_name: "EntitySelectorExpression"))
     GetTimeSeriesServiceStatisticsRequest.add_member(:period, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "Period"))
+    GetTimeSeriesServiceStatisticsRequest.add_member(:forecast_statistics, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ForecastStatistics"))
     GetTimeSeriesServiceStatisticsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetTimeSeriesServiceStatisticsRequest.struct_class = Types::GetTimeSeriesServiceStatisticsRequest
 
@@ -464,7 +548,67 @@ module Aws::XRay
     Http.add_member(:client_ip, Shapes::ShapeRef.new(shape: String, location_name: "ClientIp"))
     Http.struct_class = Types::Http
 
+    Insight.add_member(:insight_id, Shapes::ShapeRef.new(shape: InsightId, location_name: "InsightId"))
+    Insight.add_member(:group_arn, Shapes::ShapeRef.new(shape: GroupARN, location_name: "GroupARN"))
+    Insight.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, location_name: "GroupName"))
+    Insight.add_member(:root_cause_service_id, Shapes::ShapeRef.new(shape: ServiceId, location_name: "RootCauseServiceId"))
+    Insight.add_member(:categories, Shapes::ShapeRef.new(shape: InsightCategoryList, location_name: "Categories"))
+    Insight.add_member(:state, Shapes::ShapeRef.new(shape: InsightState, location_name: "State"))
+    Insight.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    Insight.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    Insight.add_member(:summary, Shapes::ShapeRef.new(shape: InsightSummaryText, location_name: "Summary"))
+    Insight.add_member(:client_request_impact_statistics, Shapes::ShapeRef.new(shape: RequestImpactStatistics, location_name: "ClientRequestImpactStatistics"))
+    Insight.add_member(:root_cause_service_request_impact_statistics, Shapes::ShapeRef.new(shape: RequestImpactStatistics, location_name: "RootCauseServiceRequestImpactStatistics"))
+    Insight.add_member(:top_anomalous_services, Shapes::ShapeRef.new(shape: AnomalousServiceList, location_name: "TopAnomalousServices"))
+    Insight.struct_class = Types::Insight
+
+    InsightCategoryList.member = Shapes::ShapeRef.new(shape: InsightCategory)
+
+    InsightEvent.add_member(:summary, Shapes::ShapeRef.new(shape: EventSummaryText, location_name: "Summary"))
+    InsightEvent.add_member(:event_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EventTime"))
+    InsightEvent.add_member(:client_request_impact_statistics, Shapes::ShapeRef.new(shape: RequestImpactStatistics, location_name: "ClientRequestImpactStatistics"))
+    InsightEvent.add_member(:root_cause_service_request_impact_statistics, Shapes::ShapeRef.new(shape: RequestImpactStatistics, location_name: "RootCauseServiceRequestImpactStatistics"))
+    InsightEvent.add_member(:top_anomalous_services, Shapes::ShapeRef.new(shape: AnomalousServiceList, location_name: "TopAnomalousServices"))
+    InsightEvent.struct_class = Types::InsightEvent
+
+    InsightEventList.member = Shapes::ShapeRef.new(shape: InsightEvent)
+
+    InsightImpactGraphEdge.add_member(:reference_id, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "ReferenceId"))
+    InsightImpactGraphEdge.struct_class = Types::InsightImpactGraphEdge
+
+    InsightImpactGraphEdgeList.member = Shapes::ShapeRef.new(shape: InsightImpactGraphEdge)
+
+    InsightImpactGraphService.add_member(:reference_id, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "ReferenceId"))
+    InsightImpactGraphService.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    InsightImpactGraphService.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    InsightImpactGraphService.add_member(:names, Shapes::ShapeRef.new(shape: ServiceNames, location_name: "Names"))
+    InsightImpactGraphService.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "AccountId"))
+    InsightImpactGraphService.add_member(:edges, Shapes::ShapeRef.new(shape: InsightImpactGraphEdgeList, location_name: "Edges"))
+    InsightImpactGraphService.struct_class = Types::InsightImpactGraphService
+
+    InsightImpactGraphServiceList.member = Shapes::ShapeRef.new(shape: InsightImpactGraphService)
+
+    InsightStateList.member = Shapes::ShapeRef.new(shape: InsightState)
+
+    InsightSummary.add_member(:insight_id, Shapes::ShapeRef.new(shape: InsightId, location_name: "InsightId"))
+    InsightSummary.add_member(:group_arn, Shapes::ShapeRef.new(shape: GroupARN, location_name: "GroupARN"))
+    InsightSummary.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, location_name: "GroupName"))
+    InsightSummary.add_member(:root_cause_service_id, Shapes::ShapeRef.new(shape: ServiceId, location_name: "RootCauseServiceId"))
+    InsightSummary.add_member(:categories, Shapes::ShapeRef.new(shape: InsightCategoryList, location_name: "Categories"))
+    InsightSummary.add_member(:state, Shapes::ShapeRef.new(shape: InsightState, location_name: "State"))
+    InsightSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    InsightSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    InsightSummary.add_member(:summary, Shapes::ShapeRef.new(shape: InsightSummaryText, location_name: "Summary"))
+    InsightSummary.add_member(:client_request_impact_statistics, Shapes::ShapeRef.new(shape: RequestImpactStatistics, location_name: "ClientRequestImpactStatistics"))
+    InsightSummary.add_member(:root_cause_service_request_impact_statistics, Shapes::ShapeRef.new(shape: RequestImpactStatistics, location_name: "RootCauseServiceRequestImpactStatistics"))
+    InsightSummary.add_member(:top_anomalous_services, Shapes::ShapeRef.new(shape: AnomalousServiceList, location_name: "TopAnomalousServices"))
+    InsightSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdateTime"))
+    InsightSummary.struct_class = Types::InsightSummary
+
+    InsightSummaryList.member = Shapes::ShapeRef.new(shape: InsightSummary)
+
     InsightsConfiguration.add_member(:insights_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "InsightsEnabled"))
+    InsightsConfiguration.add_member(:notifications_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "NotificationsEnabled"))
     InsightsConfiguration.struct_class = Types::InsightsConfiguration
 
     InstanceIdDetail.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
@@ -501,6 +645,11 @@ module Aws::XRay
 
     PutTraceSegmentsResult.add_member(:unprocessed_trace_segments, Shapes::ShapeRef.new(shape: UnprocessedTraceSegmentList, location_name: "UnprocessedTraceSegments"))
     PutTraceSegmentsResult.struct_class = Types::PutTraceSegmentsResult
+
+    RequestImpactStatistics.add_member(:fault_count, Shapes::ShapeRef.new(shape: NullableLong, location_name: "FaultCount"))
+    RequestImpactStatistics.add_member(:ok_count, Shapes::ShapeRef.new(shape: NullableLong, location_name: "OkCount"))
+    RequestImpactStatistics.add_member(:total_count, Shapes::ShapeRef.new(shape: NullableLong, location_name: "TotalCount"))
+    RequestImpactStatistics.struct_class = Types::RequestImpactStatistics
 
     ResourceARNDetail.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
     ResourceARNDetail.struct_class = Types::ResourceARNDetail
@@ -679,6 +828,7 @@ module Aws::XRay
     TimeSeriesServiceStatistics.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     TimeSeriesServiceStatistics.add_member(:edge_summary_statistics, Shapes::ShapeRef.new(shape: EdgeStatistics, location_name: "EdgeSummaryStatistics"))
     TimeSeriesServiceStatistics.add_member(:service_summary_statistics, Shapes::ShapeRef.new(shape: ServiceStatistics, location_name: "ServiceSummaryStatistics"))
+    TimeSeriesServiceStatistics.add_member(:service_forecast_statistics, Shapes::ShapeRef.new(shape: ForecastStatistics, location_name: "ServiceForecastStatistics"))
     TimeSeriesServiceStatistics.add_member(:response_time_histogram, Shapes::ShapeRef.new(shape: Histogram, location_name: "ResponseTimeHistogram"))
     TimeSeriesServiceStatistics.struct_class = Types::TimeSeriesServiceStatistics
 
@@ -690,6 +840,7 @@ module Aws::XRay
 
     Trace.add_member(:id, Shapes::ShapeRef.new(shape: TraceId, location_name: "Id"))
     Trace.add_member(:duration, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "Duration"))
+    Trace.add_member(:limit_exceeded, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "LimitExceeded"))
     Trace.add_member(:segments, Shapes::ShapeRef.new(shape: SegmentList, location_name: "Segments"))
     Trace.struct_class = Types::Trace
 
@@ -879,6 +1030,58 @@ module Aws::XRay
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
         o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_insight, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInsight"
+        o.http_method = "POST"
+        o.http_request_uri = "/Insight"
+        o.input = Shapes::ShapeRef.new(shape: GetInsightRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInsightResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+      end)
+
+      api.add_operation(:get_insight_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInsightEvents"
+        o.http_method = "POST"
+        o.http_request_uri = "/InsightEvents"
+        o.input = Shapes::ShapeRef.new(shape: GetInsightEventsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInsightEventsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_insight_impact_graph, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInsightImpactGraph"
+        o.http_method = "POST"
+        o.http_request_uri = "/InsightImpactGraph"
+        o.input = Shapes::ShapeRef.new(shape: GetInsightImpactGraphRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInsightImpactGraphResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+      end)
+
+      api.add_operation(:get_insight_summaries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInsightSummaries"
+        o.http_method = "POST"
+        o.http_request_uri = "/InsightSummaries"
+        o.input = Shapes::ShapeRef.new(shape: GetInsightSummariesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInsightSummariesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
           tokens: {
             "next_token" => "next_token"
           }

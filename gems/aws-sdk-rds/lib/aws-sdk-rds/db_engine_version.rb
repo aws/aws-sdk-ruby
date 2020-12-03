@@ -71,10 +71,17 @@ module Aws::RDS
     end
 
     # A list of the character sets supported by this engine for the
-    # `CharacterSetName` parameter of the `CreateDBInstance` action.
+    # `CharacterSetName` parameter of the `CreateDBInstance` operation.
     # @return [Array<Types::CharacterSet>]
     def supported_character_sets
       data[:supported_character_sets]
+    end
+
+    # A list of the character sets supported by the Oracle DB engine for the
+    # `NcharCharacterSetName` parameter of the `CreateDBInstance` operation.
+    # @return [Array<Types::CharacterSet>]
+    def supported_nchar_character_sets
+      data[:supported_nchar_character_sets]
     end
 
     # A list of engine versions that this database engine version can be
@@ -112,12 +119,6 @@ module Aws::RDS
     end
 
     # A list of the supported DB engine modes.
-    #
-    # <note markdown="1"> `global` engine mode only applies for global database clusters created
-    # with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions,
-    # the clusters in a global database use `provisioned` engine mode.
-    #
-    #  </note>
     # @return [Array<String>]
     def supported_engine_modes
       data[:supported_engine_modes]

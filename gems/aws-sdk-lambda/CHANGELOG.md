@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2020-12-01)
+------------------
+
+* Feature - This release includes support for a new feature: Container images support in AWS Lambda. This adds APIs for deploying functions as container images. AWS Lambda now supports memory up to 10240MB.
+
+1.54.0 (2020-11-23)
+------------------
+
+* Feature - This release includes support for new feature: Code Signing for AWS Lambda. This adds new resources and APIs to configure Lambda functions to accept and verify signed code artifacts at deployment.
+
+1.53.0 (2020-11-19)
+------------------
+
+* Feature - Added the starting position and starting position timestamp to ESM Configuration. Now customers will be able to view these fields for their ESM.
+
+1.52.0 (2020-11-05)
+------------------
+
+* Feature - Support Amazon MQ as an Event Source.
+
+1.51.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.50.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.49.0 (2020-08-25)
 ------------------
 

@@ -44,7 +44,7 @@ module Aws::RDS
     end
     alias :db_snapshot_identifier :snapshot_id
 
-    # Specifies when the snapshot was taken in Coodinated Universal Time
+    # Specifies when the snapshot was taken in Coordinated Universal Time
     # (UTC).
     # @return [Time]
     def snapshot_create_time
@@ -213,6 +213,17 @@ module Aws::RDS
     # @return [String]
     def dbi_resource_id
       data[:dbi_resource_id]
+    end
+
+    # A list of tags. For more information, see [Tagging Amazon RDS
+    # Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    # @return [Array<Types::Tag>]
+    def tag_list
+      data[:tag_list]
     end
 
     # @!endgroup
@@ -396,6 +407,7 @@ module Aws::RDS
     #     copy_tags: false,
     #     pre_signed_url: "String",
     #     option_group_name: "String",
+    #     target_custom_availability_zone: "String",
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -514,6 +526,11 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options
+    # @option options [String] :target_custom_availability_zone
+    #   The external custom Availability Zone (CAZ) identifier for the target
+    #   CAZ.
+    #
+    #   Example: `rds-caz-aiqhTgQv`.
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -777,8 +794,7 @@ module Aws::RDS
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
     #   Access Management (IAM) accounts to database accounts. By default,
-    #   mapping is disabled. For information about the supported DB engines,
-    #   see CreateDBInstance.
+    #   mapping is disabled.
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
@@ -791,11 +807,11 @@ module Aws::RDS
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs. The values in the list depend on the DB engine being
     #   used. For more information, see [Publishing Database Logs to Amazon
-    #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
+    #   CloudWatch Logs][1] in the *Amazon RDS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [Array<Types::ProcessorFeature>] :processor_features
     #   The number of CPU cores and the number of threads per core for the DB
     #   instance class of the DB instance.

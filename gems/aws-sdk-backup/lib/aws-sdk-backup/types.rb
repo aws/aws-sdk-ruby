@@ -10,6 +10,57 @@
 module Aws::Backup
   module Types
 
+    # A list of backup options for each resource type.
+    #
+    # @note When making an API call, you may pass AdvancedBackupSetting
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "ResourceType",
+    #         backup_options: {
+    #           "BackupOptionKey" => "BackupOptionValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The type of AWS resource to be backed up. For VSS Windows backups,
+    #   the only supported resource type is Amazon EC2.
+    #
+    #   Valid values: `EC2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_options
+    #   Specifies the backup option for a selected resource. This option is
+    #   only available for Windows VSS backup jobs.
+    #
+    #   Valid values:
+    #
+    #   Set to `"WindowsVSS":"enabled"` to enable the WindowsVSS backup
+    #   option and create a VSS Windows backup.
+    #
+    #   Set to `"WindowsVSS":"disabled"` to create a regular backup. The
+    #   WindowsVSS option is not enabled by default.
+    #
+    #   If you specify an invalid option, you get an
+    #   `InvalidParameterValueException` exception.
+    #
+    #   For more information about Windows VSS backups, see [Creating a
+    #   VSS-Enabled Windows Backup][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/AdvancedBackupSetting AWS API Documentation
+    #
+    class AdvancedBackupSetting < Struct.new(
+      :resource_type,
+      :backup_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The required resource already exists.
     #
     # @!attribute [rw] code
@@ -141,13 +192,29 @@ module Aws::Backup
     # @!attribute [rw] resource_type
     #   The type of AWS resource to be backed up; for example, an Amazon
     #   Elastic Block Store (Amazon EBS) volume or an Amazon Relational
-    #   Database Service (Amazon RDS) database.
+    #   Database Service (Amazon RDS) database. For VSS Windows backups, the
+    #   only supported resource type is Amazon EC2.
     #   @return [String]
     #
     # @!attribute [rw] bytes_transferred
     #   The size in bytes transferred to a backup vault at the time that the
     #   job status was queried.
     #   @return [Integer]
+    #
+    # @!attribute [rw] backup_options
+    #   Specifies the backup option for a selected resource. This option is
+    #   only available for Windows VSS backup jobs.
+    #
+    #   Valid values: Set to `"WindowsVSS”:“enabled"` to enable WindowsVSS
+    #   backup option and create a VSS Windows backup. Set to
+    #   “WindowsVSS”:”disabled” to create a regular backup. If you specify
+    #   an invalid option, you get an `InvalidParameterValueException`
+    #   exception.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] backup_type
+    #   Represents the type of backup for a backup job.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupJob AWS API Documentation
     #
@@ -169,7 +236,9 @@ module Aws::Backup
       :expected_completion_date,
       :start_by,
       :resource_type,
-      :bytes_transferred)
+      :bytes_transferred,
+      :backup_options,
+      :backup_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -188,11 +257,16 @@ module Aws::Backup
     #   scheduled task that is used to back up a selection of resources.
     #   @return [Array<Types::BackupRule>]
     #
+    # @!attribute [rw] advanced_backup_settings
+    #   Contains a list of `BackupOptions` for each resource type.
+    #   @return [Array<Types::AdvancedBackupSetting>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupPlan AWS API Documentation
     #
     class BackupPlan < Struct.new(
       :backup_plan_name,
-      :rules)
+      :rules,
+      :advanced_backup_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -232,6 +306,14 @@ module Aws::Backup
     #             ],
     #           },
     #         ],
+    #         advanced_backup_settings: [
+    #           {
+    #             resource_type: "ResourceType",
+    #             backup_options: {
+    #               "BackupOptionKey" => "BackupOptionValue",
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] backup_plan_name
@@ -243,11 +325,17 @@ module Aws::Backup
     #   scheduled task that is used to back up a selection of resources.
     #   @return [Array<Types::BackupRuleInput>]
     #
+    # @!attribute [rw] advanced_backup_settings
+    #   Specifies a list of `BackupOptions` for each resource type. These
+    #   settings are only available for Windows VSS backup jobs.
+    #   @return [Array<Types::AdvancedBackupSetting>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupPlanInput AWS API Documentation
     #
     class BackupPlanInput < Struct.new(
       :backup_plan_name,
-      :rules)
+      :rules,
+      :advanced_backup_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -308,17 +396,21 @@ module Aws::Backup
     #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice.
     #   @return [String]
     #
     # @!attribute [rw] last_execution_date
-    #   The last time a job to back up resources was executed with this
-    #   rule. A date and time, in Unix format and Coordinated Universal Time
-    #   (UTC). The value of `LastExecutionDate` is accurate to milliseconds.
-    #   For example, the value 1516925490.087 represents Friday, January 26,
+    #   The last time a job to back up resources was run with this rule. A
+    #   date and time, in Unix format and Coordinated Universal Time (UTC).
+    #   The value of `LastExecutionDate` is accurate to milliseconds. For
+    #   example, the value 1516925490.087 represents Friday, January 26,
     #   2018 12:11:30.087 AM.
     #   @return [Time]
+    #
+    # @!attribute [rw] advanced_backup_settings
+    #   Contains a list of `BackupOptions` for a resource type.
+    #   @return [Array<Types::AdvancedBackupSetting>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupPlansListMember AWS API Documentation
     #
@@ -330,7 +422,8 @@ module Aws::Backup
       :version_id,
       :backup_plan_name,
       :creator_request_id,
-      :last_execution_date)
+      :last_execution_date,
+      :advanced_backup_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -350,6 +443,15 @@ module Aws::Backup
     #
     # @!attribute [rw] schedule_expression
     #   A CRON expression specifying when AWS Backup initiates a backup job.
+    #   For more information about cron expressions, see [Schedule
+    #   Expressions for Rules][1] in the *Amazon CloudWatch Events User
+    #   Guide.*. Prior to specifying a value for this parameter, we
+    #   recommend testing your cron expression using one of the many
+    #   available cron generator and testing tools.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
     #   @return [String]
     #
     # @!attribute [rw] start_window_minutes
@@ -573,7 +675,7 @@ module Aws::Backup
     #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice.
     #   @return [String]
     #
@@ -626,7 +728,7 @@ module Aws::Backup
     #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice.
     #   @return [String]
     #
@@ -895,6 +997,14 @@ module Aws::Backup
     #               ],
     #             },
     #           ],
+    #           advanced_backup_settings: [
+    #             {
+    #               resource_type: "ResourceType",
+    #               backup_options: {
+    #                 "BackupOptionKey" => "BackupOptionValue",
+    #               },
+    #             },
+    #           ],
     #         },
     #         backup_plan_tags: {
     #           "TagKey" => "TagValue",
@@ -915,7 +1025,7 @@ module Aws::Backup
     #
     # @!attribute [rw] creator_request_id
     #   Identifies the request and allows failed requests to be retried
-    #   without the risk of executing the operation twice. If the request
+    #   without the risk of running the operation twice. If the request
     #   includes a `CreatorRequestId` that matches an existing backup plan,
     #   that plan is returned. This parameter is optional.
     #   @return [String]
@@ -952,13 +1062,19 @@ module Aws::Backup
     #   at most 1,024 bytes long. They cannot be edited.
     #   @return [String]
     #
+    # @!attribute [rw] advanced_backup_settings
+    #   A list of `BackupOptions` settings for a resource type. This option
+    #   is only available for Windows VSS backup jobs.
+    #   @return [Array<Types::AdvancedBackupSetting>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupPlanOutput AWS API Documentation
     #
     class CreateBackupPlanOutput < Struct.new(
       :backup_plan_id,
       :backup_plan_arn,
       :creation_date,
-      :version_id)
+      :version_id,
+      :advanced_backup_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -995,7 +1111,7 @@ module Aws::Backup
     #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice.
     #   @return [String]
     #
@@ -1067,7 +1183,7 @@ module Aws::Backup
     #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice.
     #   @return [String]
     #
@@ -1150,7 +1266,7 @@ module Aws::Backup
     #
     # @!attribute [rw] version_id
     #   Unique, randomly generated, Unicode, UTF-8 encoded strings that are
-    #   at most 1,024 bytes long. Version Ids cannot be edited.
+    #   at most 1,024 bytes long. Version IDs cannot be edited.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteBackupPlanOutput AWS API Documentation
@@ -1435,6 +1551,18 @@ module Aws::Backup
     #   12:11:30.087 AM.
     #   @return [Time]
     #
+    # @!attribute [rw] backup_options
+    #   Represents the options specified as part of backup plan or on-demand
+    #   backup job.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] backup_type
+    #   Represents the actual backup type selected for a backup job. For
+    #   example, if a successful WindowsVSS backup was taken, `BackupType`
+    #   returns "WindowsVSS". If `BackupType` is empty, then the backup
+    #   type that was is a regular backup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupJobOutput AWS API Documentation
     #
     class DescribeBackupJobOutput < Struct.new(
@@ -1455,7 +1583,9 @@ module Aws::Backup
       :resource_type,
       :bytes_transferred,
       :expected_completion_date,
-      :start_by)
+      :start_by,
+      :backup_options,
+      :backup_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1510,7 +1640,7 @@ module Aws::Backup
     #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice.
     #   @return [String]
     #
@@ -1558,6 +1688,34 @@ module Aws::Backup
     #
     class DescribeCopyJobOutput < Struct.new(
       :copy_job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeGlobalSettingsInput AWS API Documentation
+    #
+    class DescribeGlobalSettingsInput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] global_settings
+    #   A list of resources along with the opt-in preferences for the
+    #   account.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] last_update_time
+    #   The date and time that the global settings was last updated. This
+    #   update is in Unix format and Coordinated Universal Time (UTC). The
+    #   value of `LastUpdateTime` is accurate to milliseconds. For example,
+    #   the value 1516925490.087 represents Friday, January 26, 2018
+    #   12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeGlobalSettingsOutput AWS API Documentation
+    #
+    class DescribeGlobalSettingsOutput < Struct.new(
+      :global_settings,
+      :last_update_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1654,6 +1812,14 @@ module Aws::Backup
     # @!attribute [rw] backup_vault_arn
     #   An ARN that uniquely identifies a backup vault; for example,
     #   `arn:aws:backup:us-east-1:123456789012:vault:aBackupVault`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_backup_vault_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies the source
+    #   vault where the resource was originally backed up in; for example,
+    #   `arn:aws:backup:us-east-1:123456789012:vault:BackupVault`. If the
+    #   recovery is restored to the same AWS account or Region, this value
+    #   will be `null`.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -1755,6 +1921,7 @@ module Aws::Backup
       :recovery_point_arn,
       :backup_vault_name,
       :backup_vault_arn,
+      :source_backup_vault_arn,
       :resource_arn,
       :resource_type,
       :created_by,
@@ -1781,7 +1948,7 @@ module Aws::Backup
 
     # @!attribute [rw] resource_type_opt_in_preference
     #   Returns a list of all services along with the opt-in preferences in
-    #   the region.
+    #   the Region.
     #   @return [Hash<String,Boolean>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRegionSettingsOutput AWS API Documentation
@@ -2046,7 +2213,7 @@ module Aws::Backup
     #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice.
     #   @return [String]
     #
@@ -2065,12 +2232,17 @@ module Aws::Backup
     #   @return [Time]
     #
     # @!attribute [rw] last_execution_date
-    #   The last time a job to back up resources was executed with this
-    #   backup plan. A date and time, in Unix format and Coordinated
-    #   Universal Time (UTC). The value of `LastExecutionDate` is accurate
-    #   to milliseconds. For example, the value 1516925490.087 represents
-    #   Friday, January 26, 2018 12:11:30.087 AM.
+    #   The last time a job to back up resources was run with this backup
+    #   plan. A date and time, in Unix format and Coordinated Universal Time
+    #   (UTC). The value of `LastExecutionDate` is accurate to milliseconds.
+    #   For example, the value 1516925490.087 represents Friday, January 26,
+    #   2018 12:11:30.087 AM.
     #   @return [Time]
+    #
+    # @!attribute [rw] advanced_backup_settings
+    #   Contains a list of `BackupOptions` for each resource type. The list
+    #   is populated only if the advanced option is set for the backup plan.
+    #   @return [Array<Types::AdvancedBackupSetting>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetBackupPlanOutput AWS API Documentation
     #
@@ -2082,7 +2254,8 @@ module Aws::Backup
       :creator_request_id,
       :creation_date,
       :deletion_date,
-      :last_execution_date)
+      :last_execution_date,
+      :advanced_backup_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2136,7 +2309,7 @@ module Aws::Backup
     #
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and allows failed
-    #   requests to be retried without the risk of executing the operation
+    #   requests to be retried without the risk of running the operation
     #   twice.
     #   @return [String]
     #
@@ -2299,7 +2472,7 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] restore_metadata
-    #   The set of metadata key-value pairs that describes the original
+    #   The set of metadata key-value pairs that describe the original
     #   configuration of the backed-up resource. These values vary depending
     #   on the service that is being restored.
     #   @return [Hash<String,String>]
@@ -3301,7 +3474,8 @@ module Aws::Backup
     # @!attribute [rw] resource_type
     #   The type of AWS resource; for example, an Amazon Elastic Block Store
     #   (Amazon EBS) volume or an Amazon Relational Database Service (Amazon
-    #   RDS) database.
+    #   RDS) database. For VSS Windows backups, the only supported resource
+    #   type is Amazon EC2.
     #   @return [String]
     #
     # @!attribute [rw] last_backup_time
@@ -3407,6 +3581,12 @@ module Aws::Backup
     #   `arn:aws:backup:us-east-1:123456789012:vault:aBackupVault`.
     #   @return [String]
     #
+    # @!attribute [rw] source_backup_vault_arn
+    #   The backup vault where the recovery point was originally copied
+    #   from. If the recovery point is restored to the same account this
+    #   value will be `null`.
+    #   @return [String]
+    #
     # @!attribute [rw] resource_arn
     #   An ARN that uniquely identifies a resource. The format of the ARN
     #   depends on the resource type.
@@ -3415,7 +3595,8 @@ module Aws::Backup
     # @!attribute [rw] resource_type
     #   The type of AWS resource saved as a recovery point; for example, an
     #   Amazon Elastic Block Store (Amazon EBS) volume or an Amazon
-    #   Relational Database Service (Amazon RDS) database.
+    #   Relational Database Service (Amazon RDS) database. For VSS Windows
+    #   backups, the only supported resource type is Amazon EC2.
     #   @return [String]
     #
     # @!attribute [rw] created_by
@@ -3494,6 +3675,7 @@ module Aws::Backup
       :recovery_point_arn,
       :backup_vault_name,
       :backup_vault_arn,
+      :source_backup_vault_arn,
       :resource_arn,
       :resource_type,
       :created_by,
@@ -3685,7 +3867,8 @@ module Aws::Backup
     # @!attribute [rw] resource_type
     #   The resource type of the listed restore jobs; for example, an Amazon
     #   Elastic Block Store (Amazon EBS) volume or an Amazon Relational
-    #   Database Service (Amazon RDS) database.
+    #   Database Service (Amazon RDS) database. For VSS Windows backups, the
+    #   only supported resource type is Amazon EC2.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RestoreJobsListMember AWS API Documentation
@@ -3750,6 +3933,9 @@ module Aws::Backup
     #         recovery_point_tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         backup_options: {
+    #           "BackupOptionKey" => "BackupOptionValue",
+    #         },
     #       }
     #
     # @!attribute [rw] backup_vault_name
@@ -3803,6 +3989,16 @@ module Aws::Backup
     #   the resources that you create. Each tag is a key-value pair.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] backup_options
+    #   Specifies the backup option for a selected resource. This option is
+    #   only available for Windows VSS backup jobs.
+    #
+    #   Valid values: Set to `"WindowsVSS”:“enabled"` to enable WindowsVSS
+    #   backup option and create a VSS Windows backup. Set to
+    #   “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS
+    #   option is not enabled by default.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartBackupJobInput AWS API Documentation
     #
     class StartBackupJobInput < Struct.new(
@@ -3813,7 +4009,8 @@ module Aws::Backup
       :start_window_minutes,
       :complete_window_minutes,
       :lifecycle,
-      :recovery_point_tags)
+      :recovery_point_tags,
+      :backup_options)
       SENSITIVE = [:recovery_point_tags]
       include Aws::Structure
     end
@@ -3966,15 +4163,18 @@ module Aws::Backup
     #   You need to specify specific metadata to restore an Amazon Elastic
     #   File System (Amazon EFS) instance:
     #
-    #   * `file-system-id`\: ID of the Amazon EFS file system that is backed
-    #     up by AWS Backup. Returned in `GetRecoveryPointRestoreMetadata`.
+    #   * `file-system-id`\: The ID of the Amazon EFS file system that is
+    #     backed up by AWS Backup. Returned in
+    #     `GetRecoveryPointRestoreMetadata`.
     #
     #   * `Encrypted`\: A Boolean value that, if true, specifies that the
     #     file system is encrypted. If `KmsKeyId` is specified, `Encrypted`
     #     must be set to `true`.
     #
     #   * `KmsKeyId`\: Specifies the AWS KMS key that is used to encrypt the
-    #     restored file system.
+    #     restored file system. You can specify a key from another AWS
+    #     account provided that key it is properly shared with your account
+    #     via AWS KMS.
     #
     #   * `PerformanceMode`\: Specifies the throughput mode of the file
     #     system.
@@ -3984,6 +4184,11 @@ module Aws::Backup
     #
     #   * `newFileSystem`\: A Boolean value that, if true, specifies that
     #     the recovery point is restored to a new Amazon EFS file system.
+    #
+    #   * `ItemsToRestore `\: A serialized list of up to five strings where
+    #     each string is a file path. Use `ItemsToRestore` to restore
+    #     specific files or directories rather than the entire file system.
+    #     This parameter is optional.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] iam_role_arn
@@ -4145,6 +4350,14 @@ module Aws::Backup
     #               ],
     #             },
     #           ],
+    #           advanced_backup_settings: [
+    #             {
+    #               resource_type: "ResourceType",
+    #               backup_options: {
+    #                 "BackupOptionKey" => "BackupOptionValue",
+    #               },
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -4188,13 +4401,40 @@ module Aws::Backup
     #   at most 1,024 bytes long. Version Ids cannot be edited.
     #   @return [String]
     #
+    # @!attribute [rw] advanced_backup_settings
+    #   Contains a list of `BackupOptions` for each resource type.
+    #   @return [Array<Types::AdvancedBackupSetting>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateBackupPlanOutput AWS API Documentation
     #
     class UpdateBackupPlanOutput < Struct.new(
       :backup_plan_id,
       :backup_plan_arn,
       :creation_date,
-      :version_id)
+      :version_id,
+      :advanced_backup_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateGlobalSettingsInput
+    #   data as a hash:
+    #
+    #       {
+    #         global_settings: {
+    #           "GlobalSettingsName" => "GlobalSettingsValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] global_settings
+    #   A list of resources along with the opt-in preferences for the
+    #   account.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateGlobalSettingsInput AWS API Documentation
+    #
+    class UpdateGlobalSettingsInput < Struct.new(
+      :global_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4296,7 +4536,7 @@ module Aws::Backup
     #
     # @!attribute [rw] resource_type_opt_in_preference
     #   Updates the list of services along with the opt-in preferences for
-    #   the region.
+    #   the Region.
     #   @return [Hash<String,Boolean>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateRegionSettingsInput AWS API Documentation

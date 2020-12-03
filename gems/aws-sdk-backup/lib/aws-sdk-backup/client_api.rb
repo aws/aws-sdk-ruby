@@ -15,10 +15,15 @@ module Aws::Backup
 
     ARN = Shapes::StringShape.new(name: 'ARN')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    AdvancedBackupSetting = Shapes::StructureShape.new(name: 'AdvancedBackupSetting')
+    AdvancedBackupSettings = Shapes::ListShape.new(name: 'AdvancedBackupSettings')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     BackupJob = Shapes::StructureShape.new(name: 'BackupJob')
     BackupJobState = Shapes::StringShape.new(name: 'BackupJobState')
     BackupJobsList = Shapes::ListShape.new(name: 'BackupJobsList')
+    BackupOptionKey = Shapes::StringShape.new(name: 'BackupOptionKey')
+    BackupOptionValue = Shapes::StringShape.new(name: 'BackupOptionValue')
+    BackupOptions = Shapes::MapShape.new(name: 'BackupOptions')
     BackupPlan = Shapes::StructureShape.new(name: 'BackupPlan')
     BackupPlanInput = Shapes::StructureShape.new(name: 'BackupPlanInput')
     BackupPlanName = Shapes::StringShape.new(name: 'BackupPlanName')
@@ -73,6 +78,8 @@ module Aws::Backup
     DescribeBackupVaultOutput = Shapes::StructureShape.new(name: 'DescribeBackupVaultOutput')
     DescribeCopyJobInput = Shapes::StructureShape.new(name: 'DescribeCopyJobInput')
     DescribeCopyJobOutput = Shapes::StructureShape.new(name: 'DescribeCopyJobOutput')
+    DescribeGlobalSettingsInput = Shapes::StructureShape.new(name: 'DescribeGlobalSettingsInput')
+    DescribeGlobalSettingsOutput = Shapes::StructureShape.new(name: 'DescribeGlobalSettingsOutput')
     DescribeProtectedResourceInput = Shapes::StructureShape.new(name: 'DescribeProtectedResourceInput')
     DescribeProtectedResourceOutput = Shapes::StructureShape.new(name: 'DescribeProtectedResourceOutput')
     DescribeRecoveryPointInput = Shapes::StructureShape.new(name: 'DescribeRecoveryPointInput')
@@ -98,6 +105,9 @@ module Aws::Backup
     GetRecoveryPointRestoreMetadataInput = Shapes::StructureShape.new(name: 'GetRecoveryPointRestoreMetadataInput')
     GetRecoveryPointRestoreMetadataOutput = Shapes::StructureShape.new(name: 'GetRecoveryPointRestoreMetadataOutput')
     GetSupportedResourceTypesOutput = Shapes::StructureShape.new(name: 'GetSupportedResourceTypesOutput')
+    GlobalSettings = Shapes::MapShape.new(name: 'GlobalSettings')
+    GlobalSettingsName = Shapes::StringShape.new(name: 'GlobalSettingsName')
+    GlobalSettingsValue = Shapes::StringShape.new(name: 'GlobalSettingsValue')
     IAMPolicy = Shapes::StringShape.new(name: 'IAMPolicy')
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
@@ -172,6 +182,7 @@ module Aws::Backup
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UpdateBackupPlanInput = Shapes::StructureShape.new(name: 'UpdateBackupPlanInput')
     UpdateBackupPlanOutput = Shapes::StructureShape.new(name: 'UpdateBackupPlanOutput')
+    UpdateGlobalSettingsInput = Shapes::StructureShape.new(name: 'UpdateGlobalSettingsInput')
     UpdateRecoveryPointLifecycleInput = Shapes::StructureShape.new(name: 'UpdateRecoveryPointLifecycleInput')
     UpdateRecoveryPointLifecycleOutput = Shapes::StructureShape.new(name: 'UpdateRecoveryPointLifecycleOutput')
     UpdateRegionSettingsInput = Shapes::StructureShape.new(name: 'UpdateRegionSettingsInput')
@@ -180,6 +191,12 @@ module Aws::Backup
     long = Shapes::IntegerShape.new(name: 'long')
     string = Shapes::StringShape.new(name: 'string')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
+
+    AdvancedBackupSetting.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    AdvancedBackupSetting.add_member(:backup_options, Shapes::ShapeRef.new(shape: BackupOptions, location_name: "BackupOptions"))
+    AdvancedBackupSetting.struct_class = Types::AdvancedBackupSetting
+
+    AdvancedBackupSettings.member = Shapes::ShapeRef.new(shape: AdvancedBackupSetting)
 
     AlreadyExistsException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
@@ -207,16 +224,23 @@ module Aws::Backup
     BackupJob.add_member(:start_by, Shapes::ShapeRef.new(shape: timestamp, location_name: "StartBy"))
     BackupJob.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     BackupJob.add_member(:bytes_transferred, Shapes::ShapeRef.new(shape: Long, location_name: "BytesTransferred"))
+    BackupJob.add_member(:backup_options, Shapes::ShapeRef.new(shape: BackupOptions, location_name: "BackupOptions"))
+    BackupJob.add_member(:backup_type, Shapes::ShapeRef.new(shape: string, location_name: "BackupType"))
     BackupJob.struct_class = Types::BackupJob
 
     BackupJobsList.member = Shapes::ShapeRef.new(shape: BackupJob)
 
+    BackupOptions.key = Shapes::ShapeRef.new(shape: BackupOptionKey)
+    BackupOptions.value = Shapes::ShapeRef.new(shape: BackupOptionValue)
+
     BackupPlan.add_member(:backup_plan_name, Shapes::ShapeRef.new(shape: BackupPlanName, required: true, location_name: "BackupPlanName"))
     BackupPlan.add_member(:rules, Shapes::ShapeRef.new(shape: BackupRules, required: true, location_name: "Rules"))
+    BackupPlan.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
     BackupPlan.struct_class = Types::BackupPlan
 
     BackupPlanInput.add_member(:backup_plan_name, Shapes::ShapeRef.new(shape: BackupPlanName, required: true, location_name: "BackupPlanName"))
     BackupPlanInput.add_member(:rules, Shapes::ShapeRef.new(shape: BackupRulesInput, required: true, location_name: "Rules"))
+    BackupPlanInput.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
     BackupPlanInput.struct_class = Types::BackupPlanInput
 
     BackupPlanTemplatesList.member = Shapes::ShapeRef.new(shape: BackupPlanTemplatesListMember)
@@ -237,6 +261,7 @@ module Aws::Backup
     BackupPlansListMember.add_member(:backup_plan_name, Shapes::ShapeRef.new(shape: BackupPlanName, location_name: "BackupPlanName"))
     BackupPlansListMember.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId"))
     BackupPlansListMember.add_member(:last_execution_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastExecutionDate"))
+    BackupPlansListMember.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
     BackupPlansListMember.struct_class = Types::BackupPlansListMember
 
     BackupRule.add_member(:rule_name, Shapes::ShapeRef.new(shape: BackupRuleName, required: true, location_name: "RuleName"))
@@ -335,6 +360,7 @@ module Aws::Backup
     CreateBackupPlanOutput.add_member(:backup_plan_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupPlanArn"))
     CreateBackupPlanOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     CreateBackupPlanOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: string, location_name: "VersionId"))
+    CreateBackupPlanOutput.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
     CreateBackupPlanOutput.struct_class = Types::CreateBackupPlanOutput
 
     CreateBackupSelectionInput.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupPlanId"))
@@ -411,6 +437,8 @@ module Aws::Backup
     DescribeBackupJobOutput.add_member(:bytes_transferred, Shapes::ShapeRef.new(shape: Long, location_name: "BytesTransferred"))
     DescribeBackupJobOutput.add_member(:expected_completion_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "ExpectedCompletionDate"))
     DescribeBackupJobOutput.add_member(:start_by, Shapes::ShapeRef.new(shape: timestamp, location_name: "StartBy"))
+    DescribeBackupJobOutput.add_member(:backup_options, Shapes::ShapeRef.new(shape: BackupOptions, location_name: "BackupOptions"))
+    DescribeBackupJobOutput.add_member(:backup_type, Shapes::ShapeRef.new(shape: string, location_name: "BackupType"))
     DescribeBackupJobOutput.struct_class = Types::DescribeBackupJobOutput
 
     DescribeBackupVaultInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupVaultName"))
@@ -430,6 +458,12 @@ module Aws::Backup
     DescribeCopyJobOutput.add_member(:copy_job, Shapes::ShapeRef.new(shape: CopyJob, location_name: "CopyJob"))
     DescribeCopyJobOutput.struct_class = Types::DescribeCopyJobOutput
 
+    DescribeGlobalSettingsInput.struct_class = Types::DescribeGlobalSettingsInput
+
+    DescribeGlobalSettingsOutput.add_member(:global_settings, Shapes::ShapeRef.new(shape: GlobalSettings, location_name: "GlobalSettings"))
+    DescribeGlobalSettingsOutput.add_member(:last_update_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdateTime"))
+    DescribeGlobalSettingsOutput.struct_class = Types::DescribeGlobalSettingsOutput
+
     DescribeProtectedResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
     DescribeProtectedResourceInput.struct_class = Types::DescribeProtectedResourceInput
 
@@ -445,6 +479,7 @@ module Aws::Backup
     DescribeRecoveryPointOutput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
     DescribeRecoveryPointOutput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
     DescribeRecoveryPointOutput.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupVaultArn"))
+    DescribeRecoveryPointOutput.add_member(:source_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SourceBackupVaultArn"))
     DescribeRecoveryPointOutput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceArn"))
     DescribeRecoveryPointOutput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     DescribeRecoveryPointOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: RecoveryPointCreator, location_name: "CreatedBy"))
@@ -514,6 +549,7 @@ module Aws::Backup
     GetBackupPlanOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     GetBackupPlanOutput.add_member(:deletion_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "DeletionDate"))
     GetBackupPlanOutput.add_member(:last_execution_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastExecutionDate"))
+    GetBackupPlanOutput.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
     GetBackupPlanOutput.struct_class = Types::GetBackupPlanOutput
 
     GetBackupSelectionInput.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupPlanId"))
@@ -555,6 +591,9 @@ module Aws::Backup
 
     GetSupportedResourceTypesOutput.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypes, location_name: "ResourceTypes"))
     GetSupportedResourceTypesOutput.struct_class = Types::GetSupportedResourceTypesOutput
+
+    GlobalSettings.key = Shapes::ShapeRef.new(shape: GlobalSettingsName)
+    GlobalSettings.value = Shapes::ShapeRef.new(shape: GlobalSettingsValue)
 
     InvalidParameterValueException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
     InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
@@ -733,6 +772,7 @@ module Aws::Backup
     RecoveryPointByBackupVault.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
     RecoveryPointByBackupVault.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
     RecoveryPointByBackupVault.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupVaultArn"))
+    RecoveryPointByBackupVault.add_member(:source_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SourceBackupVaultArn"))
     RecoveryPointByBackupVault.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceArn"))
     RecoveryPointByBackupVault.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     RecoveryPointByBackupVault.add_member(:created_by, Shapes::ShapeRef.new(shape: RecoveryPointCreator, location_name: "CreatedBy"))
@@ -810,6 +850,7 @@ module Aws::Backup
     StartBackupJobInput.add_member(:complete_window_minutes, Shapes::ShapeRef.new(shape: WindowMinutes, location_name: "CompleteWindowMinutes"))
     StartBackupJobInput.add_member(:lifecycle, Shapes::ShapeRef.new(shape: Lifecycle, location_name: "Lifecycle"))
     StartBackupJobInput.add_member(:recovery_point_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "RecoveryPointTags"))
+    StartBackupJobInput.add_member(:backup_options, Shapes::ShapeRef.new(shape: BackupOptions, location_name: "BackupOptions"))
     StartBackupJobInput.struct_class = Types::StartBackupJobInput
 
     StartBackupJobOutput.add_member(:backup_job_id, Shapes::ShapeRef.new(shape: string, location_name: "BackupJobId"))
@@ -863,7 +904,11 @@ module Aws::Backup
     UpdateBackupPlanOutput.add_member(:backup_plan_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupPlanArn"))
     UpdateBackupPlanOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     UpdateBackupPlanOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: string, location_name: "VersionId"))
+    UpdateBackupPlanOutput.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
     UpdateBackupPlanOutput.struct_class = Types::UpdateBackupPlanOutput
+
+    UpdateGlobalSettingsInput.add_member(:global_settings, Shapes::ShapeRef.new(shape: GlobalSettings, location_name: "GlobalSettings"))
+    UpdateGlobalSettingsInput.struct_class = Types::UpdateGlobalSettingsInput
 
     UpdateRecoveryPointLifecycleInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
     UpdateRecoveryPointLifecycleInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "recoveryPointArn"))
@@ -1044,6 +1089,15 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:describe_global_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeGlobalSettings"
+        o.http_method = "GET"
+        o.http_request_uri = "/global-settings"
+        o.input = Shapes::ShapeRef.new(shape: DescribeGlobalSettingsInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeGlobalSettingsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
@@ -1442,6 +1496,7 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
@@ -1519,6 +1574,18 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:update_global_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateGlobalSettings"
+        o.http_method = "PUT"
+        o.http_request_uri = "/global-settings"
+        o.input = Shapes::ShapeRef.new(shape: UpdateGlobalSettingsInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:update_recovery_point_lifecycle, Seahorse::Model::Operation.new.tap do |o|

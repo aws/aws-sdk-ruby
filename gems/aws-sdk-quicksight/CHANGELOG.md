@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-11-24)
+------------------
+
+* Feature - Support for embedding without user registration. New enum EmbeddingIdentityType. A potential breaking change. Affects code that refers IdentityType enum type directly instead of literal string value.
+
+1.36.0 (2020-11-16)
+------------------
+
+* Feature - Adding new parameters for dashboard persistence
+
+1.35.0 (2020-11-11)
+------------------
+
+* Feature - QuickSight now supports Column-level security and connecting to Oracle data source.
+
+1.34.0 (2020-10-23)
+------------------
+
+* Feature - Support description on columns.
+
+1.33.0 (2020-10-01)
+------------------
+
+* Feature - QuickSight now supports connecting to AWS Timestream data source
+
+1.32.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2020-09-23)
+------------------
+
+* Feature - Added Sheet information to DescribeDashboard, DescribeTemplate and DescribeAnalysis API response.
+
+1.30.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.29.0 (2020-09-08)
 ------------------
 

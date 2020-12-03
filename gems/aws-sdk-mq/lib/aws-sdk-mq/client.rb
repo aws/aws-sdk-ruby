@@ -337,7 +337,7 @@ module Aws::MQ
     # @option params [String] :broker_name
     #
     # @option params [Types::ConfigurationId] :configuration
-    #   A list of information about the configuration.
+    #   A list of information about the configuration. Does not apply to RabbitMQ brokers.
     #
     # @option params [String] :creator_request_id
     #   **A suitable default value is auto-generated.** You should normally
@@ -350,16 +350,15 @@ module Aws::MQ
     #   Encryption options for the broker.
     #
     # @option params [String] :engine_type
-    #   The type of broker engine. Note: Currently, Amazon MQ supports only
-    #   ActiveMQ.
+    #   The type of broker engine. Note: Currently, Amazon MQ supports
+    #   ActiveMQ and RabbitMQ.
     #
     # @option params [String] :engine_version
     #
     # @option params [String] :host_instance_type
     #
     # @option params [Types::LdapServerMetadataInput] :ldap_server_metadata
-    #   The metadata of the LDAP server used to authenticate and authorize
-    #   connections to the broker.
+    #   The metadata of the LDAP server used to authenticate and authorize connections to the broker. Currently not supported for RabbitMQ engine type.
     #
     # @option params [Types::Logs] :logs
     #   The list of information about logs to be enabled for the specified
@@ -374,7 +373,7 @@ module Aws::MQ
     # @option params [Array<String>] :security_groups
     #
     # @option params [String] :storage_type
-    #   The storage type of the broker.
+    #   The storage type of the broker. EFS is currently not Supported for RabbitMQ engine type.
     #
     # @option params [Array<String>] :subnet_ids
     #
@@ -398,12 +397,12 @@ module Aws::MQ
     #       revision: 1,
     #     },
     #     creator_request_id: "__string",
-    #     deployment_mode: "SINGLE_INSTANCE", # accepts SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ
+    #     deployment_mode: "SINGLE_INSTANCE", # accepts SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, CLUSTER_MULTI_AZ
     #     encryption_options: {
     #       kms_key_id: "__string",
     #       use_aws_owned_key: false, # required
     #     },
-    #     engine_type: "ACTIVEMQ", # accepts ACTIVEMQ
+    #     engine_type: "ACTIVEMQ", # accepts ACTIVEMQ, RABBITMQ
     #     engine_version: "__string",
     #     host_instance_type: "__string",
     #     ldap_server_metadata: {
@@ -467,8 +466,8 @@ module Aws::MQ
     #   The authentication strategy used to secure the broker.
     #
     # @option params [String] :engine_type
-    #   The type of broker engine. Note: Currently, Amazon MQ supports only
-    #   ActiveMQ.
+    #   The type of broker engine. Note: Currently, Amazon MQ supports
+    #   ActiveMQ and RabbitMQ.
     #
     # @option params [String] :engine_version
     #
@@ -489,7 +488,7 @@ module Aws::MQ
     #
     #   resp = client.create_configuration({
     #     authentication_strategy: "SIMPLE", # accepts SIMPLE, LDAP
-    #     engine_type: "ACTIVEMQ", # accepts ACTIVEMQ
+    #     engine_type: "ACTIVEMQ", # accepts ACTIVEMQ, RABBITMQ
     #     engine_version: "__string",
     #     name: "__string",
     #     tags: {
@@ -713,10 +712,10 @@ module Aws::MQ
     #   resp.configurations.pending.id #=> String
     #   resp.configurations.pending.revision #=> Integer
     #   resp.created #=> Time
-    #   resp.deployment_mode #=> String, one of "SINGLE_INSTANCE", "ACTIVE_STANDBY_MULTI_AZ"
+    #   resp.deployment_mode #=> String, one of "SINGLE_INSTANCE", "ACTIVE_STANDBY_MULTI_AZ", "CLUSTER_MULTI_AZ"
     #   resp.encryption_options.kms_key_id #=> String
     #   resp.encryption_options.use_aws_owned_key #=> Boolean
-    #   resp.engine_type #=> String, one of "ACTIVEMQ"
+    #   resp.engine_type #=> String, one of "ACTIVEMQ", "RABBITMQ"
     #   resp.engine_version #=> String
     #   resp.host_instance_type #=> String
     #   resp.ldap_server_metadata.hosts #=> Array
@@ -801,7 +800,7 @@ module Aws::MQ
     # @example Response structure
     #
     #   resp.broker_engine_types #=> Array
-    #   resp.broker_engine_types[0].engine_type #=> String, one of "ACTIVEMQ"
+    #   resp.broker_engine_types[0].engine_type #=> String, one of "ACTIVEMQ", "RABBITMQ"
     #   resp.broker_engine_types[0].engine_versions #=> Array
     #   resp.broker_engine_types[0].engine_versions[0].name #=> String
     #   resp.max_results #=> Integer
@@ -849,11 +848,11 @@ module Aws::MQ
     #   resp.broker_instance_options #=> Array
     #   resp.broker_instance_options[0].availability_zones #=> Array
     #   resp.broker_instance_options[0].availability_zones[0].name #=> String
-    #   resp.broker_instance_options[0].engine_type #=> String, one of "ACTIVEMQ"
+    #   resp.broker_instance_options[0].engine_type #=> String, one of "ACTIVEMQ", "RABBITMQ"
     #   resp.broker_instance_options[0].host_instance_type #=> String
     #   resp.broker_instance_options[0].storage_type #=> String, one of "EBS", "EFS"
     #   resp.broker_instance_options[0].supported_deployment_modes #=> Array
-    #   resp.broker_instance_options[0].supported_deployment_modes[0] #=> String, one of "SINGLE_INSTANCE", "ACTIVE_STANDBY_MULTI_AZ"
+    #   resp.broker_instance_options[0].supported_deployment_modes[0] #=> String, one of "SINGLE_INSTANCE", "ACTIVE_STANDBY_MULTI_AZ", "CLUSTER_MULTI_AZ"
     #   resp.broker_instance_options[0].supported_engine_versions #=> Array
     #   resp.broker_instance_options[0].supported_engine_versions[0] #=> String
     #   resp.max_results #=> Integer
@@ -897,7 +896,7 @@ module Aws::MQ
     #   resp.authentication_strategy #=> String, one of "SIMPLE", "LDAP"
     #   resp.created #=> Time
     #   resp.description #=> String
-    #   resp.engine_type #=> String, one of "ACTIVEMQ"
+    #   resp.engine_type #=> String, one of "ACTIVEMQ", "RABBITMQ"
     #   resp.engine_version #=> String
     #   resp.id #=> String
     #   resp.latest_revision.created #=> Time
@@ -1023,7 +1022,8 @@ module Aws::MQ
     #   resp.broker_summaries[0].broker_name #=> String
     #   resp.broker_summaries[0].broker_state #=> String, one of "CREATION_IN_PROGRESS", "CREATION_FAILED", "DELETION_IN_PROGRESS", "RUNNING", "REBOOT_IN_PROGRESS"
     #   resp.broker_summaries[0].created #=> Time
-    #   resp.broker_summaries[0].deployment_mode #=> String, one of "SINGLE_INSTANCE", "ACTIVE_STANDBY_MULTI_AZ"
+    #   resp.broker_summaries[0].deployment_mode #=> String, one of "SINGLE_INSTANCE", "ACTIVE_STANDBY_MULTI_AZ", "CLUSTER_MULTI_AZ"
+    #   resp.broker_summaries[0].engine_type #=> String, one of "ACTIVEMQ", "RABBITMQ"
     #   resp.broker_summaries[0].host_instance_type #=> String
     #   resp.next_token #=> String
     #
@@ -1104,7 +1104,7 @@ module Aws::MQ
     #   resp.configurations[0].authentication_strategy #=> String, one of "SIMPLE", "LDAP"
     #   resp.configurations[0].created #=> Time
     #   resp.configurations[0].description #=> String
-    #   resp.configurations[0].engine_type #=> String, one of "ACTIVEMQ"
+    #   resp.configurations[0].engine_type #=> String, one of "ACTIVEMQ", "RABBITMQ"
     #   resp.configurations[0].engine_version #=> String
     #   resp.configurations[0].id #=> String
     #   resp.configurations[0].latest_revision.created #=> Time
@@ -1225,15 +1225,14 @@ module Aws::MQ
     # @option params [required, String] :broker_id
     #
     # @option params [Types::ConfigurationId] :configuration
-    #   A list of information about the configuration.
+    #   A list of information about the configuration. Does not apply to RabbitMQ brokers.
     #
     # @option params [String] :engine_version
     #
     # @option params [String] :host_instance_type
     #
     # @option params [Types::LdapServerMetadataInput] :ldap_server_metadata
-    #   The metadata of the LDAP server used to authenticate and authorize
-    #   connections to the broker.
+    #   The metadata of the LDAP server used to authenticate and authorize connections to the broker. Currently not supported for RabbitMQ engine type.
     #
     # @option params [Types::Logs] :logs
     #   The list of information about logs to be enabled for the specified
@@ -1413,7 +1412,7 @@ module Aws::MQ
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

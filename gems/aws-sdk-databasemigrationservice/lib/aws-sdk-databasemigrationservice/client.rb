@@ -743,6 +743,21 @@ module Aws::DatabaseMigrationService
     #
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.html
     #
+    # @option params [String] :resource_identifier
+    #   A friendly name for the resource identifier at the end of the
+    #   `EndpointArn` response parameter that is returned in the created
+    #   `Endpoint` object. The value for this parameter can have up to 31
+    #   characters. It can contain only ASCII letters, digits, and hyphen
+    #   ('-'). Also, it can't end with a hyphen or contain two consecutive
+    #   hyphens, and can only begin with a letter, such as `Example-App-ARN1`.
+    #   For example, this value might result in the `EndpointArn` value
+    #   `arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1`. If you
+    #   don't specify a `ResourceIdentifier` value, AWS DMS generates a
+    #   default identifier value for the end of `EndpointArn`.
+    #
+    # @option params [Types::DocDbSettings] :doc_db_settings
+    #   Provides information that defines a DocumentDB endpoint.
+    #
     # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEndpointResponse#endpoint #endpoint} => Types::Endpoint
@@ -836,6 +851,9 @@ module Aws::DatabaseMigrationService
     #       timestamp_column_name: "String",
     #       parquet_timestamp_in_millisecond: false,
     #       cdc_inserts_and_updates: false,
+    #       date_partition_enabled: false,
+    #       date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
+    #       date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -898,11 +916,14 @@ module Aws::DatabaseMigrationService
     #       after_connect_script: "String",
     #       bucket_folder: "String",
     #       bucket_name: "String",
+    #       case_sensitive_names: false,
+    #       comp_update: false,
     #       connection_timeout: 1,
     #       database_name: "String",
     #       date_format: "String",
     #       empty_as_null: false,
     #       encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #       explicit_ids: false,
     #       file_transfer_upload_streams: 1,
     #       load_timeout: 1,
     #       max_file_size: 1,
@@ -921,26 +942,59 @@ module Aws::DatabaseMigrationService
     #       write_buffer_size: 1,
     #     },
     #     postgre_sql_settings: {
+    #       after_connect_script: "String",
+    #       capture_ddls: false,
+    #       max_file_size: 1,
     #       database_name: "String",
+    #       ddl_artifacts_schema: "String",
+    #       execute_timeout: 1,
+    #       fail_tasks_on_lob_truncation: false,
     #       password: "SecretString",
     #       port: 1,
     #       server_name: "String",
     #       username: "String",
+    #       slot_name: "String",
     #     },
     #     my_sql_settings: {
+    #       after_connect_script: "String",
     #       database_name: "String",
+    #       events_poll_interval: 1,
+    #       target_db_type: "specific-database", # accepts specific-database, multiple-databases
+    #       max_file_size: 1,
+    #       parallel_load_threads: 1,
     #       password: "SecretString",
     #       port: 1,
     #       server_name: "String",
+    #       server_timezone: "String",
     #       username: "String",
     #     },
     #     oracle_settings: {
+    #       add_supplemental_logging: false,
+    #       archived_log_dest_id: 1,
+    #       additional_archived_log_dest_id: 1,
+    #       allow_select_nested_tables: false,
+    #       parallel_asm_read_threads: 1,
+    #       read_ahead_blocks: 1,
+    #       access_alternate_directly: false,
+    #       use_alternate_folder_for_online: false,
+    #       oracle_path_prefix: "String",
+    #       use_path_prefix: "String",
+    #       replace_path_prefix: false,
+    #       enable_homogenous_tablespace: false,
+    #       direct_path_no_log: false,
+    #       archived_logs_only: false,
     #       asm_password: "SecretString",
     #       asm_server: "String",
     #       asm_user: "String",
+    #       char_length_semantics: "default", # accepts default, char, byte
     #       database_name: "String",
+    #       direct_path_parallel_load: false,
+    #       fail_tasks_on_lob_truncation: false,
+    #       number_datatype_scale: 1,
     #       password: "SecretString",
     #       port: 1,
+    #       read_table_space_name: false,
+    #       retry_interval: 1,
     #       security_db_encryption: "SecretString",
     #       security_db_encryption_name: "String",
     #       server_name: "String",
@@ -955,17 +1009,37 @@ module Aws::DatabaseMigrationService
     #     },
     #     microsoft_sql_server_settings: {
     #       port: 1,
+    #       bcp_packet_size: 1,
     #       database_name: "String",
+    #       control_tables_file_group: "String",
     #       password: "SecretString",
+    #       read_backup_only: false,
+    #       safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
     #       server_name: "String",
     #       username: "String",
+    #       use_bcp_full_load: false,
     #     },
     #     ibm_db_2_settings: {
     #       database_name: "String",
     #       password: "SecretString",
     #       port: 1,
     #       server_name: "String",
+    #       set_data_capture_changes: false,
+    #       current_lsn: "String",
+    #       max_k_bytes_per_read: 1,
     #       username: "String",
+    #     },
+    #     resource_identifier: "String",
+    #     doc_db_settings: {
+    #       username: "String",
+    #       password: "SecretString",
+    #       server_name: "String",
+    #       port: 1,
+    #       database_name: "String",
+    #       nesting_level: "none", # accepts none, one
+    #       extract_doc_id: false,
+    #       docs_to_investigate: 1,
+    #       kms_key_id: "String",
     #     },
     #   })
     #
@@ -1010,6 +1084,9 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.timestamp_column_name #=> String
     #   resp.endpoint.s3_settings.parquet_timestamp_in_millisecond #=> Boolean
     #   resp.endpoint.s3_settings.cdc_inserts_and_updates #=> Boolean
+    #   resp.endpoint.s3_settings.date_partition_enabled #=> Boolean
+    #   resp.endpoint.s3_settings.date_partition_sequence #=> String, one of "YYYYMMDD", "YYYYMMDDHH", "YYYYMM", "MMYYYYDD", "DDMMYYYY"
+    #   resp.endpoint.s3_settings.date_partition_delimiter #=> String, one of "SLASH", "UNDERSCORE", "DASH", "NONE"
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -1058,11 +1135,14 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.after_connect_script #=> String
     #   resp.endpoint.redshift_settings.bucket_folder #=> String
     #   resp.endpoint.redshift_settings.bucket_name #=> String
+    #   resp.endpoint.redshift_settings.case_sensitive_names #=> Boolean
+    #   resp.endpoint.redshift_settings.comp_update #=> Boolean
     #   resp.endpoint.redshift_settings.connection_timeout #=> Integer
     #   resp.endpoint.redshift_settings.database_name #=> String
     #   resp.endpoint.redshift_settings.date_format #=> String
     #   resp.endpoint.redshift_settings.empty_as_null #=> Boolean
     #   resp.endpoint.redshift_settings.encryption_mode #=> String, one of "sse-s3", "sse-kms"
+    #   resp.endpoint.redshift_settings.explicit_ids #=> Boolean
     #   resp.endpoint.redshift_settings.file_transfer_upload_streams #=> Integer
     #   resp.endpoint.redshift_settings.load_timeout #=> Integer
     #   resp.endpoint.redshift_settings.max_file_size #=> Integer
@@ -1079,22 +1159,55 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.truncate_columns #=> Boolean
     #   resp.endpoint.redshift_settings.username #=> String
     #   resp.endpoint.redshift_settings.write_buffer_size #=> Integer
+    #   resp.endpoint.postgre_sql_settings.after_connect_script #=> String
+    #   resp.endpoint.postgre_sql_settings.capture_ddls #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.max_file_size #=> Integer
     #   resp.endpoint.postgre_sql_settings.database_name #=> String
+    #   resp.endpoint.postgre_sql_settings.ddl_artifacts_schema #=> String
+    #   resp.endpoint.postgre_sql_settings.execute_timeout #=> Integer
+    #   resp.endpoint.postgre_sql_settings.fail_tasks_on_lob_truncation #=> Boolean
     #   resp.endpoint.postgre_sql_settings.password #=> String
     #   resp.endpoint.postgre_sql_settings.port #=> Integer
     #   resp.endpoint.postgre_sql_settings.server_name #=> String
     #   resp.endpoint.postgre_sql_settings.username #=> String
+    #   resp.endpoint.postgre_sql_settings.slot_name #=> String
+    #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.database_name #=> String
+    #   resp.endpoint.my_sql_settings.events_poll_interval #=> Integer
+    #   resp.endpoint.my_sql_settings.target_db_type #=> String, one of "specific-database", "multiple-databases"
+    #   resp.endpoint.my_sql_settings.max_file_size #=> Integer
+    #   resp.endpoint.my_sql_settings.parallel_load_threads #=> Integer
     #   resp.endpoint.my_sql_settings.password #=> String
     #   resp.endpoint.my_sql_settings.port #=> Integer
     #   resp.endpoint.my_sql_settings.server_name #=> String
+    #   resp.endpoint.my_sql_settings.server_timezone #=> String
     #   resp.endpoint.my_sql_settings.username #=> String
+    #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
+    #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
+    #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
+    #   resp.endpoint.oracle_settings.allow_select_nested_tables #=> Boolean
+    #   resp.endpoint.oracle_settings.parallel_asm_read_threads #=> Integer
+    #   resp.endpoint.oracle_settings.read_ahead_blocks #=> Integer
+    #   resp.endpoint.oracle_settings.access_alternate_directly #=> Boolean
+    #   resp.endpoint.oracle_settings.use_alternate_folder_for_online #=> Boolean
+    #   resp.endpoint.oracle_settings.oracle_path_prefix #=> String
+    #   resp.endpoint.oracle_settings.use_path_prefix #=> String
+    #   resp.endpoint.oracle_settings.replace_path_prefix #=> Boolean
+    #   resp.endpoint.oracle_settings.enable_homogenous_tablespace #=> Boolean
+    #   resp.endpoint.oracle_settings.direct_path_no_log #=> Boolean
+    #   resp.endpoint.oracle_settings.archived_logs_only #=> Boolean
     #   resp.endpoint.oracle_settings.asm_password #=> String
     #   resp.endpoint.oracle_settings.asm_server #=> String
     #   resp.endpoint.oracle_settings.asm_user #=> String
+    #   resp.endpoint.oracle_settings.char_length_semantics #=> String, one of "default", "char", "byte"
     #   resp.endpoint.oracle_settings.database_name #=> String
+    #   resp.endpoint.oracle_settings.direct_path_parallel_load #=> Boolean
+    #   resp.endpoint.oracle_settings.fail_tasks_on_lob_truncation #=> Boolean
+    #   resp.endpoint.oracle_settings.number_datatype_scale #=> Integer
     #   resp.endpoint.oracle_settings.password #=> String
     #   resp.endpoint.oracle_settings.port #=> Integer
+    #   resp.endpoint.oracle_settings.read_table_space_name #=> Boolean
+    #   resp.endpoint.oracle_settings.retry_interval #=> Integer
     #   resp.endpoint.oracle_settings.security_db_encryption #=> String
     #   resp.endpoint.oracle_settings.security_db_encryption_name #=> String
     #   resp.endpoint.oracle_settings.server_name #=> String
@@ -1105,15 +1218,32 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.sybase_settings.server_name #=> String
     #   resp.endpoint.sybase_settings.username #=> String
     #   resp.endpoint.microsoft_sql_server_settings.port #=> Integer
+    #   resp.endpoint.microsoft_sql_server_settings.bcp_packet_size #=> Integer
     #   resp.endpoint.microsoft_sql_server_settings.database_name #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.control_tables_file_group #=> String
     #   resp.endpoint.microsoft_sql_server_settings.password #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.read_backup_only #=> Boolean
+    #   resp.endpoint.microsoft_sql_server_settings.safeguard_policy #=> String, one of "rely-on-sql-server-replication-agent", "exclusive-automatic-truncation", "shared-automatic-truncation"
     #   resp.endpoint.microsoft_sql_server_settings.server_name #=> String
     #   resp.endpoint.microsoft_sql_server_settings.username #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.use_bcp_full_load #=> Boolean
     #   resp.endpoint.ibm_db_2_settings.database_name #=> String
     #   resp.endpoint.ibm_db_2_settings.password #=> String
     #   resp.endpoint.ibm_db_2_settings.port #=> Integer
     #   resp.endpoint.ibm_db_2_settings.server_name #=> String
+    #   resp.endpoint.ibm_db_2_settings.set_data_capture_changes #=> Boolean
+    #   resp.endpoint.ibm_db_2_settings.current_lsn #=> String
+    #   resp.endpoint.ibm_db_2_settings.max_k_bytes_per_read #=> Integer
     #   resp.endpoint.ibm_db_2_settings.username #=> String
+    #   resp.endpoint.doc_db_settings.username #=> String
+    #   resp.endpoint.doc_db_settings.password #=> String
+    #   resp.endpoint.doc_db_settings.server_name #=> String
+    #   resp.endpoint.doc_db_settings.port #=> Integer
+    #   resp.endpoint.doc_db_settings.database_name #=> String
+    #   resp.endpoint.doc_db_settings.nesting_level #=> String, one of "none", "one"
+    #   resp.endpoint.doc_db_settings.extract_doc_id #=> Boolean
+    #   resp.endpoint.doc_db_settings.docs_to_investigate #=> Integer
+    #   resp.endpoint.doc_db_settings.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpoint AWS API Documentation
     #
@@ -1352,6 +1482,18 @@ module Aws::DatabaseMigrationService
     #   for up to four on-premise DNS name servers. For example:
     #   `"1.1.1.1,2.2.2.2,3.3.3.3,4.4.4.4"`
     #
+    # @option params [String] :resource_identifier
+    #   A friendly name for the resource identifier at the end of the
+    #   `EndpointArn` response parameter that is returned in the created
+    #   `Endpoint` object. The value for this parameter can have up to 31
+    #   characters. It can contain only ASCII letters, digits, and hyphen
+    #   ('-'). Also, it can't end with a hyphen or contain two consecutive
+    #   hyphens, and can only begin with a letter, such as `Example-App-ARN1`.
+    #   For example, this value might result in the `EndpointArn` value
+    #   `arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1`. If you
+    #   don't specify a `ResourceIdentifier` value, AWS DMS generates a
+    #   default identifier value for the end of `EndpointArn`.
+    #
     # @return [Types::CreateReplicationInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateReplicationInstanceResponse#replication_instance #replication_instance} => Types::ReplicationInstance
@@ -1459,6 +1601,7 @@ module Aws::DatabaseMigrationService
     #     kms_key_id: "String",
     #     publicly_accessible: false,
     #     dns_name_servers: "String",
+    #     resource_identifier: "String",
     #   })
     #
     # @example Response structure
@@ -1699,6 +1842,18 @@ module Aws::DatabaseMigrationService
     #
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html
     #
+    # @option params [String] :resource_identifier
+    #   A friendly name for the resource identifier at the end of the
+    #   `EndpointArn` response parameter that is returned in the created
+    #   `Endpoint` object. The value for this parameter can have up to 31
+    #   characters. It can contain only ASCII letters, digits, and hyphen
+    #   ('-'). Also, it can't end with a hyphen or contain two consecutive
+    #   hyphens, and can only begin with a letter, such as `Example-App-ARN1`.
+    #   For example, this value might result in the `EndpointArn` value
+    #   `arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1`. If you
+    #   don't specify a `ResourceIdentifier` value, AWS DMS generates a
+    #   default identifier value for the end of `EndpointArn`.
+    #
     # @return [Types::CreateReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateReplicationTaskResponse#replication_task #replication_task} => Types::ReplicationTask
@@ -1761,6 +1916,7 @@ module Aws::DatabaseMigrationService
     #       },
     #     ],
     #     task_data: "String",
+    #     resource_identifier: "String",
     #   })
     #
     # @example Response structure
@@ -1793,6 +1949,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #   resp.replication_task.task_data #=> String
+    #   resp.replication_task.target_replication_instance_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationTask AWS API Documentation
     #
@@ -1996,6 +2153,9 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.timestamp_column_name #=> String
     #   resp.endpoint.s3_settings.parquet_timestamp_in_millisecond #=> Boolean
     #   resp.endpoint.s3_settings.cdc_inserts_and_updates #=> Boolean
+    #   resp.endpoint.s3_settings.date_partition_enabled #=> Boolean
+    #   resp.endpoint.s3_settings.date_partition_sequence #=> String, one of "YYYYMMDD", "YYYYMMDDHH", "YYYYMM", "MMYYYYDD", "DDMMYYYY"
+    #   resp.endpoint.s3_settings.date_partition_delimiter #=> String, one of "SLASH", "UNDERSCORE", "DASH", "NONE"
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -2044,11 +2204,14 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.after_connect_script #=> String
     #   resp.endpoint.redshift_settings.bucket_folder #=> String
     #   resp.endpoint.redshift_settings.bucket_name #=> String
+    #   resp.endpoint.redshift_settings.case_sensitive_names #=> Boolean
+    #   resp.endpoint.redshift_settings.comp_update #=> Boolean
     #   resp.endpoint.redshift_settings.connection_timeout #=> Integer
     #   resp.endpoint.redshift_settings.database_name #=> String
     #   resp.endpoint.redshift_settings.date_format #=> String
     #   resp.endpoint.redshift_settings.empty_as_null #=> Boolean
     #   resp.endpoint.redshift_settings.encryption_mode #=> String, one of "sse-s3", "sse-kms"
+    #   resp.endpoint.redshift_settings.explicit_ids #=> Boolean
     #   resp.endpoint.redshift_settings.file_transfer_upload_streams #=> Integer
     #   resp.endpoint.redshift_settings.load_timeout #=> Integer
     #   resp.endpoint.redshift_settings.max_file_size #=> Integer
@@ -2065,22 +2228,55 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.truncate_columns #=> Boolean
     #   resp.endpoint.redshift_settings.username #=> String
     #   resp.endpoint.redshift_settings.write_buffer_size #=> Integer
+    #   resp.endpoint.postgre_sql_settings.after_connect_script #=> String
+    #   resp.endpoint.postgre_sql_settings.capture_ddls #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.max_file_size #=> Integer
     #   resp.endpoint.postgre_sql_settings.database_name #=> String
+    #   resp.endpoint.postgre_sql_settings.ddl_artifacts_schema #=> String
+    #   resp.endpoint.postgre_sql_settings.execute_timeout #=> Integer
+    #   resp.endpoint.postgre_sql_settings.fail_tasks_on_lob_truncation #=> Boolean
     #   resp.endpoint.postgre_sql_settings.password #=> String
     #   resp.endpoint.postgre_sql_settings.port #=> Integer
     #   resp.endpoint.postgre_sql_settings.server_name #=> String
     #   resp.endpoint.postgre_sql_settings.username #=> String
+    #   resp.endpoint.postgre_sql_settings.slot_name #=> String
+    #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.database_name #=> String
+    #   resp.endpoint.my_sql_settings.events_poll_interval #=> Integer
+    #   resp.endpoint.my_sql_settings.target_db_type #=> String, one of "specific-database", "multiple-databases"
+    #   resp.endpoint.my_sql_settings.max_file_size #=> Integer
+    #   resp.endpoint.my_sql_settings.parallel_load_threads #=> Integer
     #   resp.endpoint.my_sql_settings.password #=> String
     #   resp.endpoint.my_sql_settings.port #=> Integer
     #   resp.endpoint.my_sql_settings.server_name #=> String
+    #   resp.endpoint.my_sql_settings.server_timezone #=> String
     #   resp.endpoint.my_sql_settings.username #=> String
+    #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
+    #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
+    #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
+    #   resp.endpoint.oracle_settings.allow_select_nested_tables #=> Boolean
+    #   resp.endpoint.oracle_settings.parallel_asm_read_threads #=> Integer
+    #   resp.endpoint.oracle_settings.read_ahead_blocks #=> Integer
+    #   resp.endpoint.oracle_settings.access_alternate_directly #=> Boolean
+    #   resp.endpoint.oracle_settings.use_alternate_folder_for_online #=> Boolean
+    #   resp.endpoint.oracle_settings.oracle_path_prefix #=> String
+    #   resp.endpoint.oracle_settings.use_path_prefix #=> String
+    #   resp.endpoint.oracle_settings.replace_path_prefix #=> Boolean
+    #   resp.endpoint.oracle_settings.enable_homogenous_tablespace #=> Boolean
+    #   resp.endpoint.oracle_settings.direct_path_no_log #=> Boolean
+    #   resp.endpoint.oracle_settings.archived_logs_only #=> Boolean
     #   resp.endpoint.oracle_settings.asm_password #=> String
     #   resp.endpoint.oracle_settings.asm_server #=> String
     #   resp.endpoint.oracle_settings.asm_user #=> String
+    #   resp.endpoint.oracle_settings.char_length_semantics #=> String, one of "default", "char", "byte"
     #   resp.endpoint.oracle_settings.database_name #=> String
+    #   resp.endpoint.oracle_settings.direct_path_parallel_load #=> Boolean
+    #   resp.endpoint.oracle_settings.fail_tasks_on_lob_truncation #=> Boolean
+    #   resp.endpoint.oracle_settings.number_datatype_scale #=> Integer
     #   resp.endpoint.oracle_settings.password #=> String
     #   resp.endpoint.oracle_settings.port #=> Integer
+    #   resp.endpoint.oracle_settings.read_table_space_name #=> Boolean
+    #   resp.endpoint.oracle_settings.retry_interval #=> Integer
     #   resp.endpoint.oracle_settings.security_db_encryption #=> String
     #   resp.endpoint.oracle_settings.security_db_encryption_name #=> String
     #   resp.endpoint.oracle_settings.server_name #=> String
@@ -2091,15 +2287,32 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.sybase_settings.server_name #=> String
     #   resp.endpoint.sybase_settings.username #=> String
     #   resp.endpoint.microsoft_sql_server_settings.port #=> Integer
+    #   resp.endpoint.microsoft_sql_server_settings.bcp_packet_size #=> Integer
     #   resp.endpoint.microsoft_sql_server_settings.database_name #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.control_tables_file_group #=> String
     #   resp.endpoint.microsoft_sql_server_settings.password #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.read_backup_only #=> Boolean
+    #   resp.endpoint.microsoft_sql_server_settings.safeguard_policy #=> String, one of "rely-on-sql-server-replication-agent", "exclusive-automatic-truncation", "shared-automatic-truncation"
     #   resp.endpoint.microsoft_sql_server_settings.server_name #=> String
     #   resp.endpoint.microsoft_sql_server_settings.username #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.use_bcp_full_load #=> Boolean
     #   resp.endpoint.ibm_db_2_settings.database_name #=> String
     #   resp.endpoint.ibm_db_2_settings.password #=> String
     #   resp.endpoint.ibm_db_2_settings.port #=> Integer
     #   resp.endpoint.ibm_db_2_settings.server_name #=> String
+    #   resp.endpoint.ibm_db_2_settings.set_data_capture_changes #=> Boolean
+    #   resp.endpoint.ibm_db_2_settings.current_lsn #=> String
+    #   resp.endpoint.ibm_db_2_settings.max_k_bytes_per_read #=> Integer
     #   resp.endpoint.ibm_db_2_settings.username #=> String
+    #   resp.endpoint.doc_db_settings.username #=> String
+    #   resp.endpoint.doc_db_settings.password #=> String
+    #   resp.endpoint.doc_db_settings.server_name #=> String
+    #   resp.endpoint.doc_db_settings.port #=> Integer
+    #   resp.endpoint.doc_db_settings.database_name #=> String
+    #   resp.endpoint.doc_db_settings.nesting_level #=> String, one of "none", "one"
+    #   resp.endpoint.doc_db_settings.extract_doc_id #=> Boolean
+    #   resp.endpoint.doc_db_settings.docs_to_investigate #=> Integer
+    #   resp.endpoint.doc_db_settings.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpoint AWS API Documentation
     #
@@ -2387,6 +2600,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #   resp.replication_task.task_data #=> String
+    #   resp.replication_task.target_replication_instance_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTask AWS API Documentation
     #
@@ -2987,6 +3201,9 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].s3_settings.timestamp_column_name #=> String
     #   resp.endpoints[0].s3_settings.parquet_timestamp_in_millisecond #=> Boolean
     #   resp.endpoints[0].s3_settings.cdc_inserts_and_updates #=> Boolean
+    #   resp.endpoints[0].s3_settings.date_partition_enabled #=> Boolean
+    #   resp.endpoints[0].s3_settings.date_partition_sequence #=> String, one of "YYYYMMDD", "YYYYMMDDHH", "YYYYMM", "MMYYYYDD", "DDMMYYYY"
+    #   resp.endpoints[0].s3_settings.date_partition_delimiter #=> String, one of "SLASH", "UNDERSCORE", "DASH", "NONE"
     #   resp.endpoints[0].dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].dms_transfer_settings.bucket_name #=> String
     #   resp.endpoints[0].mongo_db_settings.username #=> String
@@ -3035,11 +3252,14 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].redshift_settings.after_connect_script #=> String
     #   resp.endpoints[0].redshift_settings.bucket_folder #=> String
     #   resp.endpoints[0].redshift_settings.bucket_name #=> String
+    #   resp.endpoints[0].redshift_settings.case_sensitive_names #=> Boolean
+    #   resp.endpoints[0].redshift_settings.comp_update #=> Boolean
     #   resp.endpoints[0].redshift_settings.connection_timeout #=> Integer
     #   resp.endpoints[0].redshift_settings.database_name #=> String
     #   resp.endpoints[0].redshift_settings.date_format #=> String
     #   resp.endpoints[0].redshift_settings.empty_as_null #=> Boolean
     #   resp.endpoints[0].redshift_settings.encryption_mode #=> String, one of "sse-s3", "sse-kms"
+    #   resp.endpoints[0].redshift_settings.explicit_ids #=> Boolean
     #   resp.endpoints[0].redshift_settings.file_transfer_upload_streams #=> Integer
     #   resp.endpoints[0].redshift_settings.load_timeout #=> Integer
     #   resp.endpoints[0].redshift_settings.max_file_size #=> Integer
@@ -3056,22 +3276,55 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].redshift_settings.truncate_columns #=> Boolean
     #   resp.endpoints[0].redshift_settings.username #=> String
     #   resp.endpoints[0].redshift_settings.write_buffer_size #=> Integer
+    #   resp.endpoints[0].postgre_sql_settings.after_connect_script #=> String
+    #   resp.endpoints[0].postgre_sql_settings.capture_ddls #=> Boolean
+    #   resp.endpoints[0].postgre_sql_settings.max_file_size #=> Integer
     #   resp.endpoints[0].postgre_sql_settings.database_name #=> String
+    #   resp.endpoints[0].postgre_sql_settings.ddl_artifacts_schema #=> String
+    #   resp.endpoints[0].postgre_sql_settings.execute_timeout #=> Integer
+    #   resp.endpoints[0].postgre_sql_settings.fail_tasks_on_lob_truncation #=> Boolean
     #   resp.endpoints[0].postgre_sql_settings.password #=> String
     #   resp.endpoints[0].postgre_sql_settings.port #=> Integer
     #   resp.endpoints[0].postgre_sql_settings.server_name #=> String
     #   resp.endpoints[0].postgre_sql_settings.username #=> String
+    #   resp.endpoints[0].postgre_sql_settings.slot_name #=> String
+    #   resp.endpoints[0].my_sql_settings.after_connect_script #=> String
     #   resp.endpoints[0].my_sql_settings.database_name #=> String
+    #   resp.endpoints[0].my_sql_settings.events_poll_interval #=> Integer
+    #   resp.endpoints[0].my_sql_settings.target_db_type #=> String, one of "specific-database", "multiple-databases"
+    #   resp.endpoints[0].my_sql_settings.max_file_size #=> Integer
+    #   resp.endpoints[0].my_sql_settings.parallel_load_threads #=> Integer
     #   resp.endpoints[0].my_sql_settings.password #=> String
     #   resp.endpoints[0].my_sql_settings.port #=> Integer
     #   resp.endpoints[0].my_sql_settings.server_name #=> String
+    #   resp.endpoints[0].my_sql_settings.server_timezone #=> String
     #   resp.endpoints[0].my_sql_settings.username #=> String
+    #   resp.endpoints[0].oracle_settings.add_supplemental_logging #=> Boolean
+    #   resp.endpoints[0].oracle_settings.archived_log_dest_id #=> Integer
+    #   resp.endpoints[0].oracle_settings.additional_archived_log_dest_id #=> Integer
+    #   resp.endpoints[0].oracle_settings.allow_select_nested_tables #=> Boolean
+    #   resp.endpoints[0].oracle_settings.parallel_asm_read_threads #=> Integer
+    #   resp.endpoints[0].oracle_settings.read_ahead_blocks #=> Integer
+    #   resp.endpoints[0].oracle_settings.access_alternate_directly #=> Boolean
+    #   resp.endpoints[0].oracle_settings.use_alternate_folder_for_online #=> Boolean
+    #   resp.endpoints[0].oracle_settings.oracle_path_prefix #=> String
+    #   resp.endpoints[0].oracle_settings.use_path_prefix #=> String
+    #   resp.endpoints[0].oracle_settings.replace_path_prefix #=> Boolean
+    #   resp.endpoints[0].oracle_settings.enable_homogenous_tablespace #=> Boolean
+    #   resp.endpoints[0].oracle_settings.direct_path_no_log #=> Boolean
+    #   resp.endpoints[0].oracle_settings.archived_logs_only #=> Boolean
     #   resp.endpoints[0].oracle_settings.asm_password #=> String
     #   resp.endpoints[0].oracle_settings.asm_server #=> String
     #   resp.endpoints[0].oracle_settings.asm_user #=> String
+    #   resp.endpoints[0].oracle_settings.char_length_semantics #=> String, one of "default", "char", "byte"
     #   resp.endpoints[0].oracle_settings.database_name #=> String
+    #   resp.endpoints[0].oracle_settings.direct_path_parallel_load #=> Boolean
+    #   resp.endpoints[0].oracle_settings.fail_tasks_on_lob_truncation #=> Boolean
+    #   resp.endpoints[0].oracle_settings.number_datatype_scale #=> Integer
     #   resp.endpoints[0].oracle_settings.password #=> String
     #   resp.endpoints[0].oracle_settings.port #=> Integer
+    #   resp.endpoints[0].oracle_settings.read_table_space_name #=> Boolean
+    #   resp.endpoints[0].oracle_settings.retry_interval #=> Integer
     #   resp.endpoints[0].oracle_settings.security_db_encryption #=> String
     #   resp.endpoints[0].oracle_settings.security_db_encryption_name #=> String
     #   resp.endpoints[0].oracle_settings.server_name #=> String
@@ -3082,15 +3335,32 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].sybase_settings.server_name #=> String
     #   resp.endpoints[0].sybase_settings.username #=> String
     #   resp.endpoints[0].microsoft_sql_server_settings.port #=> Integer
+    #   resp.endpoints[0].microsoft_sql_server_settings.bcp_packet_size #=> Integer
     #   resp.endpoints[0].microsoft_sql_server_settings.database_name #=> String
+    #   resp.endpoints[0].microsoft_sql_server_settings.control_tables_file_group #=> String
     #   resp.endpoints[0].microsoft_sql_server_settings.password #=> String
+    #   resp.endpoints[0].microsoft_sql_server_settings.read_backup_only #=> Boolean
+    #   resp.endpoints[0].microsoft_sql_server_settings.safeguard_policy #=> String, one of "rely-on-sql-server-replication-agent", "exclusive-automatic-truncation", "shared-automatic-truncation"
     #   resp.endpoints[0].microsoft_sql_server_settings.server_name #=> String
     #   resp.endpoints[0].microsoft_sql_server_settings.username #=> String
+    #   resp.endpoints[0].microsoft_sql_server_settings.use_bcp_full_load #=> Boolean
     #   resp.endpoints[0].ibm_db_2_settings.database_name #=> String
     #   resp.endpoints[0].ibm_db_2_settings.password #=> String
     #   resp.endpoints[0].ibm_db_2_settings.port #=> Integer
     #   resp.endpoints[0].ibm_db_2_settings.server_name #=> String
+    #   resp.endpoints[0].ibm_db_2_settings.set_data_capture_changes #=> Boolean
+    #   resp.endpoints[0].ibm_db_2_settings.current_lsn #=> String
+    #   resp.endpoints[0].ibm_db_2_settings.max_k_bytes_per_read #=> Integer
     #   resp.endpoints[0].ibm_db_2_settings.username #=> String
+    #   resp.endpoints[0].doc_db_settings.username #=> String
+    #   resp.endpoints[0].doc_db_settings.password #=> String
+    #   resp.endpoints[0].doc_db_settings.server_name #=> String
+    #   resp.endpoints[0].doc_db_settings.port #=> Integer
+    #   resp.endpoints[0].doc_db_settings.database_name #=> String
+    #   resp.endpoints[0].doc_db_settings.nesting_level #=> String, one of "none", "one"
+    #   resp.endpoints[0].doc_db_settings.extract_doc_id #=> Boolean
+    #   resp.endpoints[0].doc_db_settings.docs_to_investigate #=> Integer
+    #   resp.endpoints[0].doc_db_settings.kms_key_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4092,6 +4362,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_tasks[0].replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_tasks[0].replication_task_stats.full_load_finish_date #=> Time
     #   resp.replication_tasks[0].task_data #=> String
+    #   resp.replication_tasks[0].target_replication_instance_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4640,6 +4911,17 @@ module Aws::DatabaseMigrationService
     #
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib
     #
+    # @option params [Types::DocDbSettings] :doc_db_settings
+    #   Settings in JSON format for the source DocumentDB endpoint. For more
+    #   information about the available settings, see the configuration
+    #   properties section in [ Using DocumentDB as a Target for AWS Database
+    #   Migration Service][1] in the *AWS Database Migration Service User
+    #   Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DocumentDB.html
+    #
     # @return [Types::ModifyEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyEndpointResponse#endpoint #endpoint} => Types::Endpoint
@@ -4712,6 +4994,9 @@ module Aws::DatabaseMigrationService
     #       timestamp_column_name: "String",
     #       parquet_timestamp_in_millisecond: false,
     #       cdc_inserts_and_updates: false,
+    #       date_partition_enabled: false,
+    #       date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
+    #       date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -4774,11 +5059,14 @@ module Aws::DatabaseMigrationService
     #       after_connect_script: "String",
     #       bucket_folder: "String",
     #       bucket_name: "String",
+    #       case_sensitive_names: false,
+    #       comp_update: false,
     #       connection_timeout: 1,
     #       database_name: "String",
     #       date_format: "String",
     #       empty_as_null: false,
     #       encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #       explicit_ids: false,
     #       file_transfer_upload_streams: 1,
     #       load_timeout: 1,
     #       max_file_size: 1,
@@ -4797,26 +5085,59 @@ module Aws::DatabaseMigrationService
     #       write_buffer_size: 1,
     #     },
     #     postgre_sql_settings: {
+    #       after_connect_script: "String",
+    #       capture_ddls: false,
+    #       max_file_size: 1,
     #       database_name: "String",
+    #       ddl_artifacts_schema: "String",
+    #       execute_timeout: 1,
+    #       fail_tasks_on_lob_truncation: false,
     #       password: "SecretString",
     #       port: 1,
     #       server_name: "String",
     #       username: "String",
+    #       slot_name: "String",
     #     },
     #     my_sql_settings: {
+    #       after_connect_script: "String",
     #       database_name: "String",
+    #       events_poll_interval: 1,
+    #       target_db_type: "specific-database", # accepts specific-database, multiple-databases
+    #       max_file_size: 1,
+    #       parallel_load_threads: 1,
     #       password: "SecretString",
     #       port: 1,
     #       server_name: "String",
+    #       server_timezone: "String",
     #       username: "String",
     #     },
     #     oracle_settings: {
+    #       add_supplemental_logging: false,
+    #       archived_log_dest_id: 1,
+    #       additional_archived_log_dest_id: 1,
+    #       allow_select_nested_tables: false,
+    #       parallel_asm_read_threads: 1,
+    #       read_ahead_blocks: 1,
+    #       access_alternate_directly: false,
+    #       use_alternate_folder_for_online: false,
+    #       oracle_path_prefix: "String",
+    #       use_path_prefix: "String",
+    #       replace_path_prefix: false,
+    #       enable_homogenous_tablespace: false,
+    #       direct_path_no_log: false,
+    #       archived_logs_only: false,
     #       asm_password: "SecretString",
     #       asm_server: "String",
     #       asm_user: "String",
+    #       char_length_semantics: "default", # accepts default, char, byte
     #       database_name: "String",
+    #       direct_path_parallel_load: false,
+    #       fail_tasks_on_lob_truncation: false,
+    #       number_datatype_scale: 1,
     #       password: "SecretString",
     #       port: 1,
+    #       read_table_space_name: false,
+    #       retry_interval: 1,
     #       security_db_encryption: "SecretString",
     #       security_db_encryption_name: "String",
     #       server_name: "String",
@@ -4831,17 +5152,36 @@ module Aws::DatabaseMigrationService
     #     },
     #     microsoft_sql_server_settings: {
     #       port: 1,
+    #       bcp_packet_size: 1,
     #       database_name: "String",
+    #       control_tables_file_group: "String",
     #       password: "SecretString",
+    #       read_backup_only: false,
+    #       safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
     #       server_name: "String",
     #       username: "String",
+    #       use_bcp_full_load: false,
     #     },
     #     ibm_db_2_settings: {
     #       database_name: "String",
     #       password: "SecretString",
     #       port: 1,
     #       server_name: "String",
+    #       set_data_capture_changes: false,
+    #       current_lsn: "String",
+    #       max_k_bytes_per_read: 1,
     #       username: "String",
+    #     },
+    #     doc_db_settings: {
+    #       username: "String",
+    #       password: "SecretString",
+    #       server_name: "String",
+    #       port: 1,
+    #       database_name: "String",
+    #       nesting_level: "none", # accepts none, one
+    #       extract_doc_id: false,
+    #       docs_to_investigate: 1,
+    #       kms_key_id: "String",
     #     },
     #   })
     #
@@ -4886,6 +5226,9 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.timestamp_column_name #=> String
     #   resp.endpoint.s3_settings.parquet_timestamp_in_millisecond #=> Boolean
     #   resp.endpoint.s3_settings.cdc_inserts_and_updates #=> Boolean
+    #   resp.endpoint.s3_settings.date_partition_enabled #=> Boolean
+    #   resp.endpoint.s3_settings.date_partition_sequence #=> String, one of "YYYYMMDD", "YYYYMMDDHH", "YYYYMM", "MMYYYYDD", "DDMMYYYY"
+    #   resp.endpoint.s3_settings.date_partition_delimiter #=> String, one of "SLASH", "UNDERSCORE", "DASH", "NONE"
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -4934,11 +5277,14 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.after_connect_script #=> String
     #   resp.endpoint.redshift_settings.bucket_folder #=> String
     #   resp.endpoint.redshift_settings.bucket_name #=> String
+    #   resp.endpoint.redshift_settings.case_sensitive_names #=> Boolean
+    #   resp.endpoint.redshift_settings.comp_update #=> Boolean
     #   resp.endpoint.redshift_settings.connection_timeout #=> Integer
     #   resp.endpoint.redshift_settings.database_name #=> String
     #   resp.endpoint.redshift_settings.date_format #=> String
     #   resp.endpoint.redshift_settings.empty_as_null #=> Boolean
     #   resp.endpoint.redshift_settings.encryption_mode #=> String, one of "sse-s3", "sse-kms"
+    #   resp.endpoint.redshift_settings.explicit_ids #=> Boolean
     #   resp.endpoint.redshift_settings.file_transfer_upload_streams #=> Integer
     #   resp.endpoint.redshift_settings.load_timeout #=> Integer
     #   resp.endpoint.redshift_settings.max_file_size #=> Integer
@@ -4955,22 +5301,55 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.truncate_columns #=> Boolean
     #   resp.endpoint.redshift_settings.username #=> String
     #   resp.endpoint.redshift_settings.write_buffer_size #=> Integer
+    #   resp.endpoint.postgre_sql_settings.after_connect_script #=> String
+    #   resp.endpoint.postgre_sql_settings.capture_ddls #=> Boolean
+    #   resp.endpoint.postgre_sql_settings.max_file_size #=> Integer
     #   resp.endpoint.postgre_sql_settings.database_name #=> String
+    #   resp.endpoint.postgre_sql_settings.ddl_artifacts_schema #=> String
+    #   resp.endpoint.postgre_sql_settings.execute_timeout #=> Integer
+    #   resp.endpoint.postgre_sql_settings.fail_tasks_on_lob_truncation #=> Boolean
     #   resp.endpoint.postgre_sql_settings.password #=> String
     #   resp.endpoint.postgre_sql_settings.port #=> Integer
     #   resp.endpoint.postgre_sql_settings.server_name #=> String
     #   resp.endpoint.postgre_sql_settings.username #=> String
+    #   resp.endpoint.postgre_sql_settings.slot_name #=> String
+    #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.database_name #=> String
+    #   resp.endpoint.my_sql_settings.events_poll_interval #=> Integer
+    #   resp.endpoint.my_sql_settings.target_db_type #=> String, one of "specific-database", "multiple-databases"
+    #   resp.endpoint.my_sql_settings.max_file_size #=> Integer
+    #   resp.endpoint.my_sql_settings.parallel_load_threads #=> Integer
     #   resp.endpoint.my_sql_settings.password #=> String
     #   resp.endpoint.my_sql_settings.port #=> Integer
     #   resp.endpoint.my_sql_settings.server_name #=> String
+    #   resp.endpoint.my_sql_settings.server_timezone #=> String
     #   resp.endpoint.my_sql_settings.username #=> String
+    #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
+    #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
+    #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
+    #   resp.endpoint.oracle_settings.allow_select_nested_tables #=> Boolean
+    #   resp.endpoint.oracle_settings.parallel_asm_read_threads #=> Integer
+    #   resp.endpoint.oracle_settings.read_ahead_blocks #=> Integer
+    #   resp.endpoint.oracle_settings.access_alternate_directly #=> Boolean
+    #   resp.endpoint.oracle_settings.use_alternate_folder_for_online #=> Boolean
+    #   resp.endpoint.oracle_settings.oracle_path_prefix #=> String
+    #   resp.endpoint.oracle_settings.use_path_prefix #=> String
+    #   resp.endpoint.oracle_settings.replace_path_prefix #=> Boolean
+    #   resp.endpoint.oracle_settings.enable_homogenous_tablespace #=> Boolean
+    #   resp.endpoint.oracle_settings.direct_path_no_log #=> Boolean
+    #   resp.endpoint.oracle_settings.archived_logs_only #=> Boolean
     #   resp.endpoint.oracle_settings.asm_password #=> String
     #   resp.endpoint.oracle_settings.asm_server #=> String
     #   resp.endpoint.oracle_settings.asm_user #=> String
+    #   resp.endpoint.oracle_settings.char_length_semantics #=> String, one of "default", "char", "byte"
     #   resp.endpoint.oracle_settings.database_name #=> String
+    #   resp.endpoint.oracle_settings.direct_path_parallel_load #=> Boolean
+    #   resp.endpoint.oracle_settings.fail_tasks_on_lob_truncation #=> Boolean
+    #   resp.endpoint.oracle_settings.number_datatype_scale #=> Integer
     #   resp.endpoint.oracle_settings.password #=> String
     #   resp.endpoint.oracle_settings.port #=> Integer
+    #   resp.endpoint.oracle_settings.read_table_space_name #=> Boolean
+    #   resp.endpoint.oracle_settings.retry_interval #=> Integer
     #   resp.endpoint.oracle_settings.security_db_encryption #=> String
     #   resp.endpoint.oracle_settings.security_db_encryption_name #=> String
     #   resp.endpoint.oracle_settings.server_name #=> String
@@ -4981,15 +5360,32 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.sybase_settings.server_name #=> String
     #   resp.endpoint.sybase_settings.username #=> String
     #   resp.endpoint.microsoft_sql_server_settings.port #=> Integer
+    #   resp.endpoint.microsoft_sql_server_settings.bcp_packet_size #=> Integer
     #   resp.endpoint.microsoft_sql_server_settings.database_name #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.control_tables_file_group #=> String
     #   resp.endpoint.microsoft_sql_server_settings.password #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.read_backup_only #=> Boolean
+    #   resp.endpoint.microsoft_sql_server_settings.safeguard_policy #=> String, one of "rely-on-sql-server-replication-agent", "exclusive-automatic-truncation", "shared-automatic-truncation"
     #   resp.endpoint.microsoft_sql_server_settings.server_name #=> String
     #   resp.endpoint.microsoft_sql_server_settings.username #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.use_bcp_full_load #=> Boolean
     #   resp.endpoint.ibm_db_2_settings.database_name #=> String
     #   resp.endpoint.ibm_db_2_settings.password #=> String
     #   resp.endpoint.ibm_db_2_settings.port #=> Integer
     #   resp.endpoint.ibm_db_2_settings.server_name #=> String
+    #   resp.endpoint.ibm_db_2_settings.set_data_capture_changes #=> Boolean
+    #   resp.endpoint.ibm_db_2_settings.current_lsn #=> String
+    #   resp.endpoint.ibm_db_2_settings.max_k_bytes_per_read #=> Integer
     #   resp.endpoint.ibm_db_2_settings.username #=> String
+    #   resp.endpoint.doc_db_settings.username #=> String
+    #   resp.endpoint.doc_db_settings.password #=> String
+    #   resp.endpoint.doc_db_settings.server_name #=> String
+    #   resp.endpoint.doc_db_settings.port #=> Integer
+    #   resp.endpoint.doc_db_settings.database_name #=> String
+    #   resp.endpoint.doc_db_settings.nesting_level #=> String, one of "none", "one"
+    #   resp.endpoint.doc_db_settings.extract_doc_id #=> Boolean
+    #   resp.endpoint.doc_db_settings.docs_to_investigate #=> Integer
+    #   resp.endpoint.doc_db_settings.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpoint AWS API Documentation
     #
@@ -5502,6 +5898,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #   resp.replication_task.task_data #=> String
+    #   resp.replication_task.target_replication_instance_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationTask AWS API Documentation
     #
@@ -5509,6 +5906,70 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def modify_replication_task(params = {}, options = {})
       req = build_request(:modify_replication_task, params)
+      req.send_request(options)
+    end
+
+    # Moves a replication task from its current replication instance to a
+    # different target replication instance using the specified parameters.
+    # The target replication instance must be created with the same or later
+    # AWS DMS version as the current replication instance.
+    #
+    # @option params [required, String] :replication_task_arn
+    #   The Amazon Resource Name (ARN) of the task that you want to move.
+    #
+    # @option params [required, String] :target_replication_instance_arn
+    #   The ARN of the replication instance where you want to move the task
+    #   to.
+    #
+    # @return [Types::MoveReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::MoveReplicationTaskResponse#replication_task #replication_task} => Types::ReplicationTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.move_replication_task({
+    #     replication_task_arn: "String", # required
+    #     target_replication_instance_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_task.replication_task_identifier #=> String
+    #   resp.replication_task.source_endpoint_arn #=> String
+    #   resp.replication_task.target_endpoint_arn #=> String
+    #   resp.replication_task.replication_instance_arn #=> String
+    #   resp.replication_task.migration_type #=> String, one of "full-load", "cdc", "full-load-and-cdc"
+    #   resp.replication_task.table_mappings #=> String
+    #   resp.replication_task.replication_task_settings #=> String
+    #   resp.replication_task.status #=> String
+    #   resp.replication_task.last_failure_message #=> String
+    #   resp.replication_task.stop_reason #=> String
+    #   resp.replication_task.replication_task_creation_date #=> Time
+    #   resp.replication_task.replication_task_start_date #=> Time
+    #   resp.replication_task.cdc_start_position #=> String
+    #   resp.replication_task.cdc_stop_position #=> String
+    #   resp.replication_task.recovery_checkpoint #=> String
+    #   resp.replication_task.replication_task_arn #=> String
+    #   resp.replication_task.replication_task_stats.full_load_progress_percent #=> Integer
+    #   resp.replication_task.replication_task_stats.elapsed_time_millis #=> Integer
+    #   resp.replication_task.replication_task_stats.tables_loaded #=> Integer
+    #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
+    #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
+    #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+    #   resp.replication_task.replication_task_stats.fresh_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.start_date #=> Time
+    #   resp.replication_task.replication_task_stats.stop_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
+    #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
+    #   resp.replication_task.task_data #=> String
+    #   resp.replication_task.target_replication_instance_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MoveReplicationTask AWS API Documentation
+    #
+    # @overload move_replication_task(params = {})
+    # @param [Hash] params ({})
+    def move_replication_task(params = {}, options = {})
+      req = build_request(:move_replication_task, params)
       req.send_request(options)
     end
 
@@ -5749,7 +6210,7 @@ module Aws::DatabaseMigrationService
     #   The Amazon Resource Name (ARN) of the replication task to be started.
     #
     # @option params [required, String] :start_replication_task_type
-    #   The type of replication task.
+    #   A type of replication task.
     #
     # @option params [Time,DateTime,Date,Integer,String] :cdc_start_time
     #   Indicates the start time for a change data capture (CDC) operation.
@@ -5867,6 +6328,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #   resp.replication_task.task_data #=> String
+    #   resp.replication_task.target_replication_instance_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTask AWS API Documentation
     #
@@ -5923,6 +6385,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #   resp.replication_task.task_data #=> String
+    #   resp.replication_task.target_replication_instance_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskAssessment AWS API Documentation
     #
@@ -6123,6 +6586,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
     #   resp.replication_task.task_data #=> String
+    #   resp.replication_task.target_replication_instance_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplicationTask AWS API Documentation
     #
@@ -6201,7 +6665,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

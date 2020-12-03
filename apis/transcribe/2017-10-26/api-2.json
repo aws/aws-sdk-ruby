@@ -677,6 +677,7 @@
         "DownloadUri":{"shape":"Uri"}
       }
     },
+    "IdentifiedLanguageScore":{"type":"float"},
     "InputDataConfig":{
       "type":"structure",
       "required":[
@@ -764,6 +765,11 @@
         "FailureReason":{"shape":"FailureReason"},
         "InputDataConfig":{"shape":"InputDataConfig"}
       }
+    },
+    "LanguageOptions":{
+      "type":"list",
+      "member":{"shape":"LanguageCode"},
+      "min":2
     },
     "LimitExceededException":{
       "type":"structure",
@@ -898,7 +904,10 @@
         "mp3",
         "mp4",
         "wav",
-        "flac"
+        "flac",
+        "ogg",
+        "amr",
+        "webm"
       ]
     },
     "MediaSampleRateHertz":{
@@ -1002,6 +1011,12 @@
       "max":64,
       "pattern":"[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"
     },
+    "OutputKey":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"[a-zA-Z0-9-_.!*'()/]{1,1024}$"
+    },
     "OutputLocationType":{
       "type":"string",
       "enum":[
@@ -1064,6 +1079,7 @@
         "MediaFormat":{"shape":"MediaFormat"},
         "Media":{"shape":"Media"},
         "OutputBucketName":{"shape":"OutputBucketName"},
+        "OutputKey":{"shape":"OutputKey"},
         "OutputEncryptionKMSKeyId":{"shape":"KMSKeyId"},
         "Settings":{"shape":"MedicalTranscriptionSetting"},
         "Specialty":{"shape":"Specialty"},
@@ -1080,7 +1096,6 @@
       "type":"structure",
       "required":[
         "TranscriptionJobName",
-        "LanguageCode",
         "Media"
       ],
       "members":{
@@ -1090,11 +1105,14 @@
         "MediaFormat":{"shape":"MediaFormat"},
         "Media":{"shape":"Media"},
         "OutputBucketName":{"shape":"OutputBucketName"},
+        "OutputKey":{"shape":"OutputKey"},
         "OutputEncryptionKMSKeyId":{"shape":"KMSKeyId"},
         "Settings":{"shape":"Settings"},
         "ModelSettings":{"shape":"ModelSettings"},
         "JobExecutionSettings":{"shape":"JobExecutionSettings"},
-        "ContentRedaction":{"shape":"ContentRedaction"}
+        "ContentRedaction":{"shape":"ContentRedaction"},
+        "IdentifyLanguage":{"shape":"Boolean"},
+        "LanguageOptions":{"shape":"LanguageOptions"}
       }
     },
     "StartTranscriptionJobResponse":{
@@ -1128,7 +1146,10 @@
         "Settings":{"shape":"Settings"},
         "ModelSettings":{"shape":"ModelSettings"},
         "JobExecutionSettings":{"shape":"JobExecutionSettings"},
-        "ContentRedaction":{"shape":"ContentRedaction"}
+        "ContentRedaction":{"shape":"ContentRedaction"},
+        "IdentifyLanguage":{"shape":"Boolean"},
+        "LanguageOptions":{"shape":"LanguageOptions"},
+        "IdentifiedLanguageScore":{"shape":"IdentifiedLanguageScore"}
       }
     },
     "TranscriptionJobName":{
@@ -1162,7 +1183,9 @@
         "FailureReason":{"shape":"FailureReason"},
         "OutputLocationType":{"shape":"OutputLocationType"},
         "ContentRedaction":{"shape":"ContentRedaction"},
-        "ModelSettings":{"shape":"ModelSettings"}
+        "ModelSettings":{"shape":"ModelSettings"},
+        "IdentifyLanguage":{"shape":"Boolean"},
+        "IdentifiedLanguageScore":{"shape":"IdentifiedLanguageScore"}
       }
     },
     "Type":{

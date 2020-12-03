@@ -50,6 +50,9 @@ module Aws::Outposts
     SiteDescription = Shapes::StringShape.new(name: 'SiteDescription')
     SiteId = Shapes::StringShape.new(name: 'SiteId')
     SiteName = Shapes::StringShape.new(name: 'SiteName')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     Token = Shapes::StringShape.new(name: 'Token')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     outpostListDefinition = Shapes::ListShape.new(name: 'outpostListDefinition')
@@ -58,11 +61,12 @@ module Aws::Outposts
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
-    CreateOutpostInput.add_member(:name, Shapes::ShapeRef.new(shape: OutpostName, location_name: "Name"))
+    CreateOutpostInput.add_member(:name, Shapes::ShapeRef.new(shape: OutpostName, required: true, location_name: "Name"))
     CreateOutpostInput.add_member(:description, Shapes::ShapeRef.new(shape: OutpostDescription, location_name: "Description"))
     CreateOutpostInput.add_member(:site_id, Shapes::ShapeRef.new(shape: SiteId, required: true, location_name: "SiteId"))
     CreateOutpostInput.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
     CreateOutpostInput.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
+    CreateOutpostInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateOutpostInput.struct_class = Types::CreateOutpostInput
 
     CreateOutpostOutput.add_member(:outpost, Shapes::ShapeRef.new(shape: Outpost, location_name: "Outpost"))
@@ -131,6 +135,7 @@ module Aws::Outposts
     Outpost.add_member(:life_cycle_status, Shapes::ShapeRef.new(shape: LifeCycleStatus, location_name: "LifeCycleStatus"))
     Outpost.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
     Outpost.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
+    Outpost.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     Outpost.struct_class = Types::Outpost
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -140,7 +145,11 @@ module Aws::Outposts
     Site.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     Site.add_member(:name, Shapes::ShapeRef.new(shape: SiteName, location_name: "Name"))
     Site.add_member(:description, Shapes::ShapeRef.new(shape: SiteDescription, location_name: "Description"))
+    Site.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     Site.struct_class = Types::Site
+
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException

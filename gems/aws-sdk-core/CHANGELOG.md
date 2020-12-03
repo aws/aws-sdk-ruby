@@ -1,6 +1,48 @@
 Unreleased Changes
 ------------------
 
+3.110.0 (2020-12-03)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Issue - Support `aws-sdk-sts` alias gem.
+
+* Issue - Retry when `Net:HTTPFatalError` is thrown by the `Net::HTTP` library. This can occur when proxy connections are configured. (#2439)
+
+3.109.3 (2020-11-17)
+------------------
+
+* Issue - Use full namespace for SSO Client when creating `SSOCredentials`
+
+3.109.2 (2020-11-04)
+------------------
+
+* Issue - Check for flattened on ref for lists when serializing.
+
+3.109.1 (2020-10-05)
+------------------
+
+* Issue - For errors without a message, default to the error class. (#2388)
+
+3.109.0 (2020-09-30)
+------------------
+
+* Feature - Add `Seahorse::Util.host_label?` to check strings for valid RFC-3986 host labels.
+* Feature - Add `Aws::ARN#to_h`.
+
+3.108.0 (2020-09-25)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.107.0 (2020-09-15)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Issue - Fix circular dependency of `aws-sdk-sso` and `aws-sdk-core` (#2405).
+
 3.106.0 (2020-09-14)
 ------------------
 

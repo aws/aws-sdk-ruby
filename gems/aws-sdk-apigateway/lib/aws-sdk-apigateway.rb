@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-apigateway/customizations'
 # @!group service
 module Aws::APIGateway
 
-  GEM_VERSION = '1.51.0'
+  GEM_VERSION = '1.56.0'
 
 end

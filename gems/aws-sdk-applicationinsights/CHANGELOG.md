@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2020-11-23)
+------------------
+
+* Feature - Add Detected Workload to ApplicationComponent which shows the workloads that installed in the component
+
+1.15.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.13.0 (2020-08-25)
 ------------------
 

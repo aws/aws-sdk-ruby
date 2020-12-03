@@ -16,6 +16,7 @@ module Aws::Neptune
     #       {
     #         db_cluster_identifier: "String", # required
     #         role_arn: "String", # required
+    #         feature_name: "String",
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -28,11 +29,18 @@ module Aws::Neptune
     #   `arn:aws:iam::123456789012:role/NeptuneAccessRole`.
     #   @return [String]
     #
+    # @!attribute [rw] feature_name
+    #   The name of the feature for the Neptune DB cluster that the IAM role
+    #   is to be associated with. For the list of supported feature names,
+    #   see DBEngineVersion.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/AddRoleToDBClusterMessage AWS API Documentation
     #
     class AddRoleToDBClusterMessage < Struct.new(
       :db_cluster_identifier,
-      :role_arn)
+      :role_arn,
+      :feature_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -559,6 +567,150 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateDBClusterEndpointMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String", # required
+    #         db_cluster_endpoint_identifier: "String", # required
+    #         endpoint_type: "String", # required
+    #         static_members: ["String"],
+    #         excluded_members: ["String"],
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster associated with the
+    #   endpoint. This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier to use for the new endpoint. This parameter is stored
+    #   as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of the endpoint. One of: `READER`, `WRITER`, `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] static_members
+    #   List of DB instance identifiers that are part of the custom endpoint
+    #   group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_members
+    #   List of DB instance identifiers that aren't part of the custom
+    #   endpoint group. All other eligible instances are reachable through
+    #   the custom endpoint. Only relevant if the list of static members is
+    #   empty.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags to be assigned to the Amazon Neptune resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBClusterEndpointMessage AWS API Documentation
+    #
+    class CreateDBClusterEndpointMessage < Struct.new(
+      :db_cluster_identifier,
+      :db_cluster_endpoint_identifier,
+      :endpoint_type,
+      :static_members,
+      :excluded_members,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This data type represents the information you need to connect to an
+    # Amazon Neptune DB cluster. This data type is used as a response
+    # element in the following actions:
+    #
+    # * `CreateDBClusterEndpoint`
+    #
+    # * `DescribeDBClusterEndpoints`
+    #
+    # * `ModifyDBClusterEndpoint`
+    #
+    # * `DeleteDBClusterEndpoint`
+    #
+    # For the data structure that represents Amazon Neptune DB instance
+    # endpoints, see `Endpoint`.
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier associated with the endpoint. This parameter is
+    #   stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster associated with the
+    #   endpoint. This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_endpoint_resource_identifier
+    #   A unique system-generated identifier for an endpoint. It remains the
+    #   same for the whole life of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The DNS address of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the endpoint. One of: `creating`, `available`,
+    #   `deleting`, `inactive`, `modifying`. The `inactive` state applies to
+    #   an endpoint that cannot be used for a certain kind of cluster, such
+    #   as a `writer` endpoint for a read-only secondary cluster in a global
+    #   database.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of the endpoint. One of: `READER`, `WRITER`, `CUSTOM`.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_endpoint_type
+    #   The type associated with a custom endpoint. One of: `READER`,
+    #   `WRITER`, `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] static_members
+    #   List of DB instance identifiers that are part of the custom endpoint
+    #   group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_members
+    #   List of DB instance identifiers that aren't part of the custom
+    #   endpoint group. All other eligible instances are reachable through
+    #   the custom endpoint. Only relevant if the list of static members is
+    #   empty.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] db_cluster_endpoint_arn
+    #   The Amazon Resource Name (ARN) for the endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBClusterEndpointOutput AWS API Documentation
+    #
+    class CreateDBClusterEndpointOutput < Struct.new(
+      :db_cluster_endpoint_identifier,
+      :db_cluster_identifier,
+      :db_cluster_endpoint_resource_identifier,
+      :endpoint,
+      :status,
+      :endpoint_type,
+      :custom_endpoint_type,
+      :static_members,
+      :excluded_members,
+      :db_cluster_endpoint_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDBClusterMessage
     #   data as a hash:
     #
@@ -670,10 +822,10 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The version number of the database engine to use. Currently, setting
-    #   this parameter has no effect.
+    #   The version number of the database engine to use for the new DB
+    #   cluster.
     #
-    #   Example: `1.0.1`
+    #   Example: `1.0.2.1`
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -799,10 +951,7 @@ module Aws::Neptune
     #   @return [String]
     #
     # @!attribute [rw] enable_iam_database_authentication
-    #   True to enable mapping of AWS Identity and Access Management (IAM)
-    #   accounts to database accounts, and otherwise false.
-    #
-    #   Default: `false`
+    #   Not supported by Neptune.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
@@ -1952,6 +2101,130 @@ module Aws::Neptune
     #
     class DBClusterAlreadyExistsFault < Aws::EmptyStructure; end
 
+    # This data type represents the information you need to connect to an
+    # Amazon Neptune DB cluster. This data type is used as a response
+    # element in the following actions:
+    #
+    # * `CreateDBClusterEndpoint`
+    #
+    # * `DescribeDBClusterEndpoints`
+    #
+    # * `ModifyDBClusterEndpoint`
+    #
+    # * `DeleteDBClusterEndpoint`
+    #
+    # For the data structure that represents Amazon Neptune DB instance
+    # endpoints, see `Endpoint`.
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier associated with the endpoint. This parameter is
+    #   stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster associated with the
+    #   endpoint. This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_endpoint_resource_identifier
+    #   A unique system-generated identifier for an endpoint. It remains the
+    #   same for the whole life of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The DNS address of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the endpoint. One of: `creating`, `available`,
+    #   `deleting`, `inactive`, `modifying`. The `inactive` state applies to
+    #   an endpoint that cannot be used for a certain kind of cluster, such
+    #   as a `writer` endpoint for a read-only secondary cluster in a global
+    #   database.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of the endpoint. One of: `READER`, `WRITER`, `CUSTOM`.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_endpoint_type
+    #   The type associated with a custom endpoint. One of: `READER`,
+    #   `WRITER`, `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] static_members
+    #   List of DB instance identifiers that are part of the custom endpoint
+    #   group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_members
+    #   List of DB instance identifiers that aren't part of the custom
+    #   endpoint group. All other eligible instances are reachable through
+    #   the custom endpoint. Only relevant if the list of static members is
+    #   empty.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] db_cluster_endpoint_arn
+    #   The Amazon Resource Name (ARN) for the endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterEndpoint AWS API Documentation
+    #
+    class DBClusterEndpoint < Struct.new(
+      :db_cluster_endpoint_identifier,
+      :db_cluster_identifier,
+      :db_cluster_endpoint_resource_identifier,
+      :endpoint,
+      :status,
+      :endpoint_type,
+      :custom_endpoint_type,
+      :static_members,
+      :excluded_members,
+      :db_cluster_endpoint_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified custom endpoint cannot be created because it already
+    # exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterEndpointAlreadyExistsFault AWS API Documentation
+    #
+    class DBClusterEndpointAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeDBClusterEndpoints` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_endpoints
+    #   Contains the details of the endpoints associated with the cluster
+    #   and matching any filter conditions.
+    #   @return [Array<Types::DBClusterEndpoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterEndpointMessage AWS API Documentation
+    #
+    class DBClusterEndpointMessage < Struct.new(
+      :marker,
+      :db_cluster_endpoints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified custom endpoint doesn't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterEndpointNotFoundFault AWS API Documentation
+    #
+    class DBClusterEndpointNotFoundFault < Aws::EmptyStructure; end
+
+    # The cluster already has the maximum number of custom endpoints.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterEndpointQuotaExceededFault AWS API Documentation
+    #
+    class DBClusterEndpointQuotaExceededFault < Aws::EmptyStructure; end
+
     # Contains information about an instance that is part of a DB cluster.
     #
     # @!attribute [rw] db_instance_identifier
@@ -2163,11 +2436,18 @@ module Aws::Neptune
     #     access other AWS services on your behalf.
     #   @return [String]
     #
+    # @!attribute [rw] feature_name
+    #   The name of the feature associated with the AWS Identity and Access
+    #   Management (IAM) role. For the list of supported feature names, see
+    #   DBEngineVersion.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterRole AWS API Documentation
     #
     class DBClusterRole < Struct.new(
       :role_arn,
-      :status)
+      :status,
+      :feature_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3174,6 +3454,110 @@ module Aws::Neptune
     #
     class DBUpgradeDependencyFailureFault < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteDBClusterEndpointMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_endpoint_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier associated with the custom endpoint. This parameter
+    #   is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteDBClusterEndpointMessage AWS API Documentation
+    #
+    class DeleteDBClusterEndpointMessage < Struct.new(
+      :db_cluster_endpoint_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This data type represents the information you need to connect to an
+    # Amazon Neptune DB cluster. This data type is used as a response
+    # element in the following actions:
+    #
+    # * `CreateDBClusterEndpoint`
+    #
+    # * `DescribeDBClusterEndpoints`
+    #
+    # * `ModifyDBClusterEndpoint`
+    #
+    # * `DeleteDBClusterEndpoint`
+    #
+    # For the data structure that represents Amazon RDS DB instance
+    # endpoints, see `Endpoint`.
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier associated with the endpoint. This parameter is
+    #   stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster associated with the
+    #   endpoint. This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_endpoint_resource_identifier
+    #   A unique system-generated identifier for an endpoint. It remains the
+    #   same for the whole life of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The DNS address of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the endpoint. One of: `creating`, `available`,
+    #   `deleting`, `inactive`, `modifying`. The `inactive` state applies to
+    #   an endpoint that cannot be used for a certain kind of cluster, such
+    #   as a `writer` endpoint for a read-only secondary cluster in a global
+    #   database.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of the endpoint. One of: `READER`, `WRITER`, `CUSTOM`.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_endpoint_type
+    #   The type associated with a custom endpoint. One of: `READER`,
+    #   `WRITER`, `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] static_members
+    #   List of DB instance identifiers that are part of the custom endpoint
+    #   group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_members
+    #   List of DB instance identifiers that aren't part of the custom
+    #   endpoint group. All other eligible instances are reachable through
+    #   the custom endpoint. Only relevant if the list of static members is
+    #   empty.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] db_cluster_endpoint_arn
+    #   The Amazon Resource Name (ARN) for the endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteDBClusterEndpointOutput AWS API Documentation
+    #
+    class DeleteDBClusterEndpointOutput < Struct.new(
+      :db_cluster_endpoint_identifier,
+      :db_cluster_identifier,
+      :db_cluster_endpoint_resource_identifier,
+      :endpoint,
+      :status,
+      :endpoint_type,
+      :custom_endpoint_type,
+      :static_members,
+      :excluded_members,
+      :db_cluster_endpoint_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteDBClusterMessage
     #   data as a hash:
     #
@@ -3486,6 +3870,78 @@ module Aws::Neptune
     #
     class DeleteEventSubscriptionResult < Struct.new(
       :event_subscription)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeDBClusterEndpointsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String",
+    #         db_cluster_endpoint_identifier: "String",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster associated with the
+    #   endpoint. This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier of the endpoint to describe. This parameter is stored
+    #   as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A set of name-value pairs that define which endpoints to include in
+    #   the output. The filters are specified as name-value pairs, in the
+    #   format
+    #   `Name=endpoint_type,Values=endpoint_type1,endpoint_type2,...`.
+    #   `Name` can be one of: `db-cluster-endpoint-type`,
+    #   `db-cluster-endpoint-custom-type`, `db-cluster-endpoint-id`,
+    #   `db-cluster-endpoint-status`. `Values` for the `
+    #   db-cluster-endpoint-type` filter can be one or more of: `reader`,
+    #   `writer`, `custom`. `Values` for the
+    #   `db-cluster-endpoint-custom-type` filter can be one or more of:
+    #   `reader`, `any`. `Values` for the `db-cluster-endpoint-status`
+    #   filter can be one or more of: `available`, `creating`, `deleting`,
+    #   `inactive`, `modifying`.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so you can
+    #   retrieve the remaining results.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeDBClusterEndpoints` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBClusterEndpointsMessage AWS API Documentation
+    #
+    class DescribeDBClusterEndpointsMessage < Struct.new(
+      :db_cluster_identifier,
+      :db_cluster_endpoint_identifier,
+      :filters,
+      :max_records,
+      :marker)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4785,6 +5241,9 @@ module Aws::Neptune
 
     # Specifies a connection endpoint.
     #
+    # For the data structure that represents Amazon Neptune DB cluster
+    # endpoints, see `DBClusterEndpoint`.
+    #
     # @!attribute [rw] address
     #   Specifies the DNS address of the DB instance.
     #   @return [String]
@@ -5132,6 +5591,13 @@ module Aws::Neptune
     #
     class InsufficientStorageClusterCapacityFault < Aws::EmptyStructure; end
 
+    # The requested operation cannot be performed on the endpoint while the
+    # endpoint is in this state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InvalidDBClusterEndpointStateFault AWS API Documentation
+    #
+    class InvalidDBClusterEndpointStateFault < Aws::EmptyStructure; end
+
     # The supplied value is not a valid DB cluster snapshot state.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InvalidDBClusterSnapshotStateFault AWS API Documentation
@@ -5246,6 +5712,132 @@ module Aws::Neptune
     class ListTagsForResourceMessage < Struct.new(
       :resource_name,
       :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyDBClusterEndpointMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_endpoint_identifier: "String", # required
+    #         endpoint_type: "String",
+    #         static_members: ["String"],
+    #         excluded_members: ["String"],
+    #       }
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier of the endpoint to modify. This parameter is stored
+    #   as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of the endpoint. One of: `READER`, `WRITER`, `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] static_members
+    #   List of DB instance identifiers that are part of the custom endpoint
+    #   group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_members
+    #   List of DB instance identifiers that aren't part of the custom
+    #   endpoint group. All other eligible instances are reachable through
+    #   the custom endpoint. Only relevant if the list of static members is
+    #   empty.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBClusterEndpointMessage AWS API Documentation
+    #
+    class ModifyDBClusterEndpointMessage < Struct.new(
+      :db_cluster_endpoint_identifier,
+      :endpoint_type,
+      :static_members,
+      :excluded_members)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This data type represents the information you need to connect to an
+    # Amazon Aurora DB cluster. This data type is used as a response element
+    # in the following actions:
+    #
+    # * `CreateDBClusterEndpoint`
+    #
+    # * `DescribeDBClusterEndpoints`
+    #
+    # * `ModifyDBClusterEndpoint`
+    #
+    # * `DeleteDBClusterEndpoint`
+    #
+    # For the data structure that represents Amazon RDS DB instance
+    # endpoints, see `Endpoint`.
+    #
+    # @!attribute [rw] db_cluster_endpoint_identifier
+    #   The identifier associated with the endpoint. This parameter is
+    #   stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster associated with the
+    #   endpoint. This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_endpoint_resource_identifier
+    #   A unique system-generated identifier for an endpoint. It remains the
+    #   same for the whole life of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The DNS address of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the endpoint. One of: `creating`, `available`,
+    #   `deleting`, `inactive`, `modifying`. The `inactive` state applies to
+    #   an endpoint that cannot be used for a certain kind of cluster, such
+    #   as a `writer` endpoint for a read-only secondary cluster in a global
+    #   database.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of the endpoint. One of: `READER`, `WRITER`, `CUSTOM`.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_endpoint_type
+    #   The type associated with a custom endpoint. One of: `READER`,
+    #   `WRITER`, `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] static_members
+    #   List of DB instance identifiers that are part of the custom endpoint
+    #   group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_members
+    #   List of DB instance identifiers that aren't part of the custom
+    #   endpoint group. All other eligible instances are reachable through
+    #   the custom endpoint. Only relevant if the list of static members is
+    #   empty.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] db_cluster_endpoint_arn
+    #   The Amazon Resource Name (ARN) for the endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBClusterEndpointOutput AWS API Documentation
+    #
+    class ModifyDBClusterEndpointOutput < Struct.new(
+      :db_cluster_endpoint_identifier,
+      :db_cluster_identifier,
+      :db_cluster_endpoint_resource_identifier,
+      :endpoint,
+      :status,
+      :endpoint_type,
+      :custom_endpoint_type,
+      :static_members,
+      :excluded_members,
+      :db_cluster_endpoint_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5407,12 +5999,18 @@ module Aws::Neptune
     #   @return [Types::CloudwatchLogsExportConfiguration]
     #
     # @!attribute [rw] engine_version
-    #   The version number of the database engine. Currently, setting this
-    #   parameter has no effect. To upgrade your database engine to the most
-    #   recent release, use the ApplyPendingMaintenanceAction API.
+    #   The version number of the database engine to which you want to
+    #   upgrade. Changing this parameter results in an outage. The change is
+    #   applied during the next maintenance window unless the
+    #   `ApplyImmediately` parameter is set to true.
     #
-    #   For a list of valid engine versions, see CreateDBInstance, or call
-    #   DescribeDBEngineVersions.
+    #   For a list of valid engine versions, see [Engine Releases for Amazon
+    #   Neptune][1], or call [DescribeDBEngineVersions][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/engine-releases.html
+    #   [2]: https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
@@ -6740,6 +7338,7 @@ module Aws::Neptune
     #       {
     #         db_cluster_identifier: "String", # required
     #         role_arn: "String", # required
+    #         feature_name: "String",
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -6752,11 +7351,18 @@ module Aws::Neptune
     #   `arn:aws:iam::123456789012:role/NeptuneAccessRole`.
     #   @return [String]
     #
+    # @!attribute [rw] feature_name
+    #   The name of the feature for the DB cluster that the IAM role is to
+    #   be disassociated from. For the list of supported feature names, see
+    #   DBEngineVersion.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RemoveRoleFromDBClusterMessage AWS API Documentation
     #
     class RemoveRoleFromDBClusterMessage < Struct.new(
       :db_cluster_identifier,
-      :role_arn)
+      :role_arn,
+      :feature_name)
       SENSITIVE = []
       include Aws::Structure
     end

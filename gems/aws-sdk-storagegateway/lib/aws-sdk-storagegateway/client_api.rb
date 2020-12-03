@@ -37,6 +37,8 @@ module Aws::StorageGateway
     AutomaticTapeCreationRules = Shapes::ListShape.new(name: 'AutomaticTapeCreationRules')
     AvailabilityMonitorTestStatus = Shapes::StringShape.new(name: 'AvailabilityMonitorTestStatus')
     BandwidthDownloadRateLimit = Shapes::IntegerShape.new(name: 'BandwidthDownloadRateLimit')
+    BandwidthRateLimitInterval = Shapes::StructureShape.new(name: 'BandwidthRateLimitInterval')
+    BandwidthRateLimitIntervals = Shapes::ListShape.new(name: 'BandwidthRateLimitIntervals')
     BandwidthType = Shapes::StringShape.new(name: 'BandwidthType')
     BandwidthUploadRateLimit = Shapes::IntegerShape.new(name: 'BandwidthUploadRateLimit')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -75,6 +77,7 @@ module Aws::StorageGateway
     CreatedDate = Shapes::TimestampShape.new(name: 'CreatedDate')
     DayOfMonth = Shapes::IntegerShape.new(name: 'DayOfMonth')
     DayOfWeek = Shapes::IntegerShape.new(name: 'DayOfWeek')
+    DaysOfWeek = Shapes::ListShape.new(name: 'DaysOfWeek')
     DeleteAutomaticTapeCreationPolicyInput = Shapes::StructureShape.new(name: 'DeleteAutomaticTapeCreationPolicyInput')
     DeleteAutomaticTapeCreationPolicyOutput = Shapes::StructureShape.new(name: 'DeleteAutomaticTapeCreationPolicyOutput')
     DeleteBandwidthRateLimitInput = Shapes::StructureShape.new(name: 'DeleteBandwidthRateLimitInput')
@@ -100,6 +103,8 @@ module Aws::StorageGateway
     DescribeAvailabilityMonitorTestOutput = Shapes::StructureShape.new(name: 'DescribeAvailabilityMonitorTestOutput')
     DescribeBandwidthRateLimitInput = Shapes::StructureShape.new(name: 'DescribeBandwidthRateLimitInput')
     DescribeBandwidthRateLimitOutput = Shapes::StructureShape.new(name: 'DescribeBandwidthRateLimitOutput')
+    DescribeBandwidthRateLimitScheduleInput = Shapes::StructureShape.new(name: 'DescribeBandwidthRateLimitScheduleInput')
+    DescribeBandwidthRateLimitScheduleOutput = Shapes::StructureShape.new(name: 'DescribeBandwidthRateLimitScheduleOutput')
     DescribeCacheInput = Shapes::StructureShape.new(name: 'DescribeCacheInput')
     DescribeCacheOutput = Shapes::StructureShape.new(name: 'DescribeCacheOutput')
     DescribeCachediSCSIVolumesInput = Shapes::StructureShape.new(name: 'DescribeCachediSCSIVolumesInput')
@@ -224,6 +229,7 @@ module Aws::StorageGateway
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
     NextUpdateAvailabilityDate = Shapes::StringShape.new(name: 'NextUpdateAvailabilityDate')
     NotificationId = Shapes::StringShape.new(name: 'NotificationId')
+    NotificationPolicy = Shapes::StringShape.new(name: 'NotificationPolicy')
     NotifyWhenUploadedInput = Shapes::StructureShape.new(name: 'NotifyWhenUploadedInput')
     NotifyWhenUploadedOutput = Shapes::StructureShape.new(name: 'NotifyWhenUploadedOutput')
     NumTapesToCreate = Shapes::IntegerShape.new(name: 'NumTapesToCreate')
@@ -311,6 +317,8 @@ module Aws::StorageGateway
     UpdateAutomaticTapeCreationPolicyOutput = Shapes::StructureShape.new(name: 'UpdateAutomaticTapeCreationPolicyOutput')
     UpdateBandwidthRateLimitInput = Shapes::StructureShape.new(name: 'UpdateBandwidthRateLimitInput')
     UpdateBandwidthRateLimitOutput = Shapes::StructureShape.new(name: 'UpdateBandwidthRateLimitOutput')
+    UpdateBandwidthRateLimitScheduleInput = Shapes::StructureShape.new(name: 'UpdateBandwidthRateLimitScheduleInput')
+    UpdateBandwidthRateLimitScheduleOutput = Shapes::StructureShape.new(name: 'UpdateBandwidthRateLimitScheduleOutput')
     UpdateChapCredentialsInput = Shapes::StructureShape.new(name: 'UpdateChapCredentialsInput')
     UpdateChapCredentialsOutput = Shapes::StructureShape.new(name: 'UpdateChapCredentialsOutput')
     UpdateGatewayInformationInput = Shapes::StructureShape.new(name: 'UpdateGatewayInformationInput')
@@ -323,6 +331,8 @@ module Aws::StorageGateway
     UpdateNFSFileShareOutput = Shapes::StructureShape.new(name: 'UpdateNFSFileShareOutput')
     UpdateSMBFileShareInput = Shapes::StructureShape.new(name: 'UpdateSMBFileShareInput')
     UpdateSMBFileShareOutput = Shapes::StructureShape.new(name: 'UpdateSMBFileShareOutput')
+    UpdateSMBFileShareVisibilityInput = Shapes::StructureShape.new(name: 'UpdateSMBFileShareVisibilityInput')
+    UpdateSMBFileShareVisibilityOutput = Shapes::StructureShape.new(name: 'UpdateSMBFileShareVisibilityOutput')
     UpdateSMBSecurityStrategyInput = Shapes::StructureShape.new(name: 'UpdateSMBSecurityStrategyInput')
     UpdateSMBSecurityStrategyOutput = Shapes::StructureShape.new(name: 'UpdateSMBSecurityStrategyOutput')
     UpdateSnapshotScheduleInput = Shapes::StructureShape.new(name: 'UpdateSnapshotScheduleInput')
@@ -430,6 +440,17 @@ module Aws::StorageGateway
 
     AutomaticTapeCreationRules.member = Shapes::ShapeRef.new(shape: AutomaticTapeCreationRule)
 
+    BandwidthRateLimitInterval.add_member(:start_hour_of_day, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "StartHourOfDay"))
+    BandwidthRateLimitInterval.add_member(:start_minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, required: true, location_name: "StartMinuteOfHour"))
+    BandwidthRateLimitInterval.add_member(:end_hour_of_day, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "EndHourOfDay"))
+    BandwidthRateLimitInterval.add_member(:end_minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, required: true, location_name: "EndMinuteOfHour"))
+    BandwidthRateLimitInterval.add_member(:days_of_week, Shapes::ShapeRef.new(shape: DaysOfWeek, required: true, location_name: "DaysOfWeek"))
+    BandwidthRateLimitInterval.add_member(:average_upload_rate_limit_in_bits_per_sec, Shapes::ShapeRef.new(shape: BandwidthUploadRateLimit, location_name: "AverageUploadRateLimitInBitsPerSec"))
+    BandwidthRateLimitInterval.add_member(:average_download_rate_limit_in_bits_per_sec, Shapes::ShapeRef.new(shape: BandwidthDownloadRateLimit, location_name: "AverageDownloadRateLimitInBitsPerSec"))
+    BandwidthRateLimitInterval.struct_class = Types::BandwidthRateLimitInterval
+
+    BandwidthRateLimitIntervals.member = Shapes::ShapeRef.new(shape: BandwidthRateLimitInterval)
+
     CacheAttributes.add_member(:cache_stale_timeout_in_seconds, Shapes::ShapeRef.new(shape: CacheStaleTimeoutInSeconds, location_name: "CacheStaleTimeoutInSeconds"))
     CacheAttributes.struct_class = Types::CacheAttributes
 
@@ -505,6 +526,7 @@ module Aws::StorageGateway
     CreateNFSFileShareInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateNFSFileShareInput.add_member(:file_share_name, Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
     CreateNFSFileShareInput.add_member(:cache_attributes, Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
+    CreateNFSFileShareInput.add_member(:notification_policy, Shapes::ShapeRef.new(shape: NotificationPolicy, location_name: "NotificationPolicy"))
     CreateNFSFileShareInput.struct_class = Types::CreateNFSFileShareInput
 
     CreateNFSFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
@@ -522,6 +544,7 @@ module Aws::StorageGateway
     CreateSMBFileShareInput.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
     CreateSMBFileShareInput.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
     CreateSMBFileShareInput.add_member(:smbacl_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SMBACLEnabled"))
+    CreateSMBFileShareInput.add_member(:access_based_enumeration, Shapes::ShapeRef.new(shape: Boolean, location_name: "AccessBasedEnumeration"))
     CreateSMBFileShareInput.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "AdminUserList"))
     CreateSMBFileShareInput.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
     CreateSMBFileShareInput.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
@@ -531,6 +554,7 @@ module Aws::StorageGateway
     CreateSMBFileShareInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateSMBFileShareInput.add_member(:file_share_name, Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
     CreateSMBFileShareInput.add_member(:cache_attributes, Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
+    CreateSMBFileShareInput.add_member(:notification_policy, Shapes::ShapeRef.new(shape: NotificationPolicy, location_name: "NotificationPolicy"))
     CreateSMBFileShareInput.struct_class = Types::CreateSMBFileShareInput
 
     CreateSMBFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
@@ -608,6 +632,8 @@ module Aws::StorageGateway
 
     CreateTapesOutput.add_member(:tape_arns, Shapes::ShapeRef.new(shape: TapeARNs, location_name: "TapeARNs"))
     CreateTapesOutput.struct_class = Types::CreateTapesOutput
+
+    DaysOfWeek.member = Shapes::ShapeRef.new(shape: DayOfWeek)
 
     DeleteAutomaticTapeCreationPolicyInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     DeleteAutomaticTapeCreationPolicyInput.struct_class = Types::DeleteAutomaticTapeCreationPolicyInput
@@ -692,6 +718,13 @@ module Aws::StorageGateway
     DescribeBandwidthRateLimitOutput.add_member(:average_download_rate_limit_in_bits_per_sec, Shapes::ShapeRef.new(shape: BandwidthDownloadRateLimit, location_name: "AverageDownloadRateLimitInBitsPerSec"))
     DescribeBandwidthRateLimitOutput.struct_class = Types::DescribeBandwidthRateLimitOutput
 
+    DescribeBandwidthRateLimitScheduleInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
+    DescribeBandwidthRateLimitScheduleInput.struct_class = Types::DescribeBandwidthRateLimitScheduleInput
+
+    DescribeBandwidthRateLimitScheduleOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    DescribeBandwidthRateLimitScheduleOutput.add_member(:bandwidth_rate_limit_intervals, Shapes::ShapeRef.new(shape: BandwidthRateLimitIntervals, location_name: "BandwidthRateLimitIntervals"))
+    DescribeBandwidthRateLimitScheduleOutput.struct_class = Types::DescribeBandwidthRateLimitScheduleOutput
+
     DescribeCacheInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     DescribeCacheInput.struct_class = Types::DescribeCacheInput
 
@@ -770,6 +803,7 @@ module Aws::StorageGateway
     DescribeSMBSettingsOutput.add_member(:active_directory_status, Shapes::ShapeRef.new(shape: ActiveDirectoryStatus, location_name: "ActiveDirectoryStatus"))
     DescribeSMBSettingsOutput.add_member(:smb_guest_password_set, Shapes::ShapeRef.new(shape: Boolean, location_name: "SMBGuestPasswordSet"))
     DescribeSMBSettingsOutput.add_member(:smb_security_strategy, Shapes::ShapeRef.new(shape: SMBSecurityStrategy, location_name: "SMBSecurityStrategy"))
+    DescribeSMBSettingsOutput.add_member(:file_shares_visible, Shapes::ShapeRef.new(shape: Boolean, location_name: "FileSharesVisible"))
     DescribeSMBSettingsOutput.struct_class = Types::DescribeSMBSettingsOutput
 
     DescribeSnapshotScheduleInput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, required: true, location_name: "VolumeARN"))
@@ -1045,6 +1079,7 @@ module Aws::StorageGateway
     NFSFileShareInfo.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     NFSFileShareInfo.add_member(:file_share_name, Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
     NFSFileShareInfo.add_member(:cache_attributes, Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
+    NFSFileShareInfo.add_member(:notification_policy, Shapes::ShapeRef.new(shape: NotificationPolicy, location_name: "NotificationPolicy"))
     NFSFileShareInfo.struct_class = Types::NFSFileShareInfo
 
     NFSFileShareInfoList.member = Shapes::ShapeRef.new(shape: NFSFileShareInfo)
@@ -1124,6 +1159,7 @@ module Aws::StorageGateway
     SMBFileShareInfo.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
     SMBFileShareInfo.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
     SMBFileShareInfo.add_member(:smbacl_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SMBACLEnabled"))
+    SMBFileShareInfo.add_member(:access_based_enumeration, Shapes::ShapeRef.new(shape: Boolean, location_name: "AccessBasedEnumeration"))
     SMBFileShareInfo.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "AdminUserList"))
     SMBFileShareInfo.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
     SMBFileShareInfo.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
@@ -1133,6 +1169,7 @@ module Aws::StorageGateway
     SMBFileShareInfo.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     SMBFileShareInfo.add_member(:file_share_name, Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
     SMBFileShareInfo.add_member(:cache_attributes, Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
+    SMBFileShareInfo.add_member(:notification_policy, Shapes::ShapeRef.new(shape: NotificationPolicy, location_name: "NotificationPolicy"))
     SMBFileShareInfo.struct_class = Types::SMBFileShareInfo
 
     SMBFileShareInfoList.member = Shapes::ShapeRef.new(shape: SMBFileShareInfo)
@@ -1275,6 +1312,13 @@ module Aws::StorageGateway
     UpdateBandwidthRateLimitOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
     UpdateBandwidthRateLimitOutput.struct_class = Types::UpdateBandwidthRateLimitOutput
 
+    UpdateBandwidthRateLimitScheduleInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
+    UpdateBandwidthRateLimitScheduleInput.add_member(:bandwidth_rate_limit_intervals, Shapes::ShapeRef.new(shape: BandwidthRateLimitIntervals, required: true, location_name: "BandwidthRateLimitIntervals"))
+    UpdateBandwidthRateLimitScheduleInput.struct_class = Types::UpdateBandwidthRateLimitScheduleInput
+
+    UpdateBandwidthRateLimitScheduleOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    UpdateBandwidthRateLimitScheduleOutput.struct_class = Types::UpdateBandwidthRateLimitScheduleOutput
+
     UpdateChapCredentialsInput.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetARN, required: true, location_name: "TargetARN"))
     UpdateChapCredentialsInput.add_member(:secret_to_authenticate_initiator, Shapes::ShapeRef.new(shape: ChapSecret, required: true, location_name: "SecretToAuthenticateInitiator"))
     UpdateChapCredentialsInput.add_member(:initiator_name, Shapes::ShapeRef.new(shape: IqnName, required: true, location_name: "InitiatorName"))
@@ -1324,6 +1368,7 @@ module Aws::StorageGateway
     UpdateNFSFileShareInput.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
     UpdateNFSFileShareInput.add_member(:file_share_name, Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
     UpdateNFSFileShareInput.add_member(:cache_attributes, Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
+    UpdateNFSFileShareInput.add_member(:notification_policy, Shapes::ShapeRef.new(shape: NotificationPolicy, location_name: "NotificationPolicy"))
     UpdateNFSFileShareInput.struct_class = Types::UpdateNFSFileShareInput
 
     UpdateNFSFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
@@ -1338,6 +1383,7 @@ module Aws::StorageGateway
     UpdateSMBFileShareInput.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
     UpdateSMBFileShareInput.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
     UpdateSMBFileShareInput.add_member(:smbacl_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SMBACLEnabled"))
+    UpdateSMBFileShareInput.add_member(:access_based_enumeration, Shapes::ShapeRef.new(shape: Boolean, location_name: "AccessBasedEnumeration"))
     UpdateSMBFileShareInput.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "AdminUserList"))
     UpdateSMBFileShareInput.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
     UpdateSMBFileShareInput.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
@@ -1345,10 +1391,18 @@ module Aws::StorageGateway
     UpdateSMBFileShareInput.add_member(:case_sensitivity, Shapes::ShapeRef.new(shape: CaseSensitivity, location_name: "CaseSensitivity"))
     UpdateSMBFileShareInput.add_member(:file_share_name, Shapes::ShapeRef.new(shape: FileShareName, location_name: "FileShareName"))
     UpdateSMBFileShareInput.add_member(:cache_attributes, Shapes::ShapeRef.new(shape: CacheAttributes, location_name: "CacheAttributes"))
+    UpdateSMBFileShareInput.add_member(:notification_policy, Shapes::ShapeRef.new(shape: NotificationPolicy, location_name: "NotificationPolicy"))
     UpdateSMBFileShareInput.struct_class = Types::UpdateSMBFileShareInput
 
     UpdateSMBFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
     UpdateSMBFileShareOutput.struct_class = Types::UpdateSMBFileShareOutput
+
+    UpdateSMBFileShareVisibilityInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
+    UpdateSMBFileShareVisibilityInput.add_member(:file_shares_visible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "FileSharesVisible"))
+    UpdateSMBFileShareVisibilityInput.struct_class = Types::UpdateSMBFileShareVisibilityInput
+
+    UpdateSMBFileShareVisibilityOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    UpdateSMBFileShareVisibilityOutput.struct_class = Types::UpdateSMBFileShareVisibilityOutput
 
     UpdateSMBSecurityStrategyInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     UpdateSMBSecurityStrategyInput.add_member(:smb_security_strategy, Shapes::ShapeRef.new(shape: SMBSecurityStrategy, required: true, location_name: "SMBSecurityStrategy"))
@@ -1736,6 +1790,16 @@ module Aws::StorageGateway
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:describe_bandwidth_rate_limit_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBandwidthRateLimitSchedule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeBandwidthRateLimitScheduleInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBandwidthRateLimitScheduleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:describe_cache, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeCache"
         o.http_method = "POST"
@@ -2026,6 +2090,12 @@ module Aws::StorageGateway
         o.output = Shapes::ShapeRef.new(shape: ListTapePoolsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:list_tapes, Seahorse::Model::Operation.new.tap do |o|
@@ -2210,6 +2280,16 @@ module Aws::StorageGateway
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:update_bandwidth_rate_limit_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateBandwidthRateLimitSchedule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateBandwidthRateLimitScheduleInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateBandwidthRateLimitScheduleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:update_chap_credentials, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateChapCredentials"
         o.http_method = "POST"
@@ -2266,6 +2346,16 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateSMBFileShareInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateSMBFileShareOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_smb_file_share_visibility, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSMBFileShareVisibility"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSMBFileShareVisibilityInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSMBFileShareVisibilityOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)

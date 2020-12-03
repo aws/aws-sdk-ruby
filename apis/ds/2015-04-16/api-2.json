@@ -47,6 +47,27 @@
         {"shape":"ServiceException"}
       ]
     },
+    "AddRegion":{
+      "name":"AddRegion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AddRegionRequest"},
+      "output":{"shape":"AddRegionResult"},
+      "errors":[
+        {"shape":"DirectoryUnavailableException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"EntityDoesNotExistException"},
+        {"shape":"DirectoryAlreadyInRegionException"},
+        {"shape":"UnsupportedOperationException"},
+        {"shape":"DirectoryDoesNotExistException"},
+        {"shape":"RegionLimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ]
+    },
     "AddTagsToResource":{
       "name":"AddTagsToResource",
       "http":{
@@ -436,6 +457,24 @@
         {"shape":"ServiceException"}
       ]
     },
+    "DescribeRegions":{
+      "name":"DescribeRegions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeRegionsRequest"},
+      "output":{"shape":"DescribeRegionsResult"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"DirectoryDoesNotExistException"},
+        {"shape":"UnsupportedOperationException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ]
+    },
     "DescribeSharedDirectories":{
       "name":"DescribeSharedDirectories",
       "http":{
@@ -486,6 +525,23 @@
         {"shape":"UnsupportedOperationException"}
       ]
     },
+    "DisableClientAuthentication":{
+      "name":"DisableClientAuthentication",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisableClientAuthenticationRequest"},
+      "output":{"shape":"DisableClientAuthenticationResult"},
+      "errors":[
+        {"shape":"DirectoryDoesNotExistException"},
+        {"shape":"UnsupportedOperationException"},
+        {"shape":"InvalidClientAuthStatusException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ]
+    },
     "DisableLDAPS":{
       "name":"DisableLDAPS",
       "http":{
@@ -530,6 +586,24 @@
         {"shape":"EntityDoesNotExistException"},
         {"shape":"InsufficientPermissionsException"},
         {"shape":"AuthenticationFailedException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ]
+    },
+    "EnableClientAuthentication":{
+      "name":"EnableClientAuthentication",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"EnableClientAuthenticationRequest"},
+      "output":{"shape":"EnableClientAuthenticationResult"},
+      "errors":[
+        {"shape":"DirectoryDoesNotExistException"},
+        {"shape":"UnsupportedOperationException"},
+        {"shape":"InvalidClientAuthStatusException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"NoAvailableCertificateException"},
         {"shape":"ClientException"},
         {"shape":"ServiceException"}
       ]
@@ -755,6 +829,23 @@
         {"shape":"EntityDoesNotExistException"},
         {"shape":"InvalidParameterException"},
         {"shape":"DirectoryUnavailableException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceException"}
+      ]
+    },
+    "RemoveRegion":{
+      "name":"RemoveRegion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RemoveRegionRequest"},
+      "output":{"shape":"RemoveRegionResult"},
+      "errors":[
+        {"shape":"DirectoryUnavailableException"},
+        {"shape":"DirectoryDoesNotExistException"},
+        {"shape":"UnsupportedOperationException"},
+        {"shape":"AccessDeniedException"},
         {"shape":"ClientException"},
         {"shape":"ServiceException"}
       ]
@@ -987,6 +1078,24 @@
       "members":{
       }
     },
+    "AddRegionRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryId",
+        "RegionName",
+        "VPCSettings"
+      ],
+      "members":{
+        "DirectoryId":{"shape":"DirectoryId"},
+        "RegionName":{"shape":"RegionName"},
+        "VPCSettings":{"shape":"DirectoryVpcSettings"}
+      }
+    },
+    "AddRegionResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "AddTagsToResourceRequest":{
       "type":"structure",
       "required":[
@@ -1004,6 +1113,10 @@
       }
     },
     "AddedDateTime":{"type":"timestamp"},
+    "AdditionalRegions":{
+      "type":"list",
+      "member":{"shape":"RegionName"}
+    },
     "AliasName":{
       "type":"string",
       "max":62,
@@ -1063,7 +1176,9 @@
         "StateReason":{"shape":"CertificateStateReason"},
         "CommonName":{"shape":"CertificateCN"},
         "RegisteredDateTime":{"shape":"CertificateRegisteredDateTime"},
-        "ExpiryDateTime":{"shape":"CertificateExpiryDateTime"}
+        "ExpiryDateTime":{"shape":"CertificateExpiryDateTime"},
+        "Type":{"shape":"CertificateType"},
+        "ClientCertAuthSettings":{"shape":"ClientCertAuthSettings"}
       }
     },
     "CertificateAlreadyExistsException":{
@@ -1107,7 +1222,8 @@
         "CertificateId":{"shape":"CertificateId"},
         "CommonName":{"shape":"CertificateCN"},
         "State":{"shape":"CertificateState"},
-        "ExpiryDateTime":{"shape":"CertificateExpiryDateTime"}
+        "ExpiryDateTime":{"shape":"CertificateExpiryDateTime"},
+        "Type":{"shape":"CertificateType"}
       }
     },
     "CertificateLimitExceededException":{
@@ -1131,6 +1247,13 @@
       ]
     },
     "CertificateStateReason":{"type":"string"},
+    "CertificateType":{
+      "type":"string",
+      "enum":[
+        "ClientCertAuth",
+        "ClientLDAPS"
+      ]
+    },
     "CertificatesInfo":{
       "type":"list",
       "member":{"shape":"CertificateInfo"}
@@ -1142,6 +1265,16 @@
     "CidrIps":{
       "type":"list",
       "member":{"shape":"CidrIp"}
+    },
+    "ClientAuthenticationType":{
+      "type":"string",
+      "enum":["SmartCard"]
+    },
+    "ClientCertAuthSettings":{
+      "type":"structure",
+      "members":{
+        "OCSPUrl":{"shape":"OCSPUrl"}
+      }
     },
     "ClientException":{
       "type":"structure",
@@ -1578,6 +1711,22 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "DescribeRegionsRequest":{
+      "type":"structure",
+      "required":["DirectoryId"],
+      "members":{
+        "DirectoryId":{"shape":"DirectoryId"},
+        "RegionName":{"shape":"RegionName"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "DescribeRegionsResult":{
+      "type":"structure",
+      "members":{
+        "RegionsDescription":{"shape":"RegionsDescription"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
     "DescribeSharedDirectoriesRequest":{
       "type":"structure",
       "required":["OwnerDirectoryId"],
@@ -1636,6 +1785,14 @@
     "DesiredNumberOfDomainControllers":{
       "type":"integer",
       "min":2
+    },
+    "DirectoryAlreadyInRegionException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ExceptionMessage"},
+        "RequestId":{"shape":"RequestId"}
+      },
+      "exception":true
     },
     "DirectoryAlreadySharedException":{
       "type":"structure",
@@ -1697,7 +1854,8 @@
         "StageReason":{"shape":"StageReason"},
         "SsoEnabled":{"shape":"SsoEnabled"},
         "DesiredNumberOfDomainControllers":{"shape":"DesiredNumberOfDomainControllers"},
-        "OwnerDirectoryDescription":{"shape":"OwnerDirectoryDescription"}
+        "OwnerDirectoryDescription":{"shape":"OwnerDirectoryDescription"},
+        "RegionsInfo":{"shape":"RegionsInfo"}
       }
     },
     "DirectoryDescriptions":{
@@ -1763,7 +1921,7 @@
     },
     "DirectoryShortName":{
       "type":"string",
-      "pattern":"^[^\\\\/:*?\\\"\\<\\>|.]+[^\\\\/:*?\\\"<>|]*$"
+      "pattern":"^[^\\\\/:*?\"<>|.]+[^\\\\/:*?\"<>|]*$"
     },
     "DirectorySize":{
       "type":"string",
@@ -1823,6 +1981,22 @@
         "SubnetIds":{"shape":"SubnetIds"},
         "SecurityGroupId":{"shape":"SecurityGroupId"},
         "AvailabilityZones":{"shape":"AvailabilityZones"}
+      }
+    },
+    "DisableClientAuthenticationRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryId",
+        "Type"
+      ],
+      "members":{
+        "DirectoryId":{"shape":"DirectoryId"},
+        "Type":{"shape":"ClientAuthenticationType"}
+      }
+    },
+    "DisableClientAuthenticationResult":{
+      "type":"structure",
+      "members":{
       }
     },
     "DisableLDAPSRequest":{
@@ -1918,6 +2092,22 @@
     "DomainControllers":{
       "type":"list",
       "member":{"shape":"DomainController"}
+    },
+    "EnableClientAuthenticationRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryId",
+        "Type"
+      ],
+      "members":{
+        "DirectoryId":{"shape":"DirectoryId"},
+        "Type":{"shape":"ClientAuthenticationType"}
+      }
+    },
+    "EnableClientAuthenticationResult":{
+      "type":"structure",
+      "members":{
+      }
     },
     "EnableLDAPSRequest":{
       "type":"structure",
@@ -2030,6 +2220,14 @@
       "exception":true
     },
     "InvalidCertificateException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ExceptionMessage"},
+        "RequestId":{"shape":"RequestId"}
+      },
+      "exception":true
+    },
+    "InvalidClientAuthStatusException":{
       "type":"structure",
       "members":{
         "Message":{"shape":"ExceptionMessage"},
@@ -2280,6 +2478,12 @@
       "max":1024,
       "sensitive":true
     },
+    "OCSPUrl":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"^(https?|ftp|file|ldaps?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;()]*[-a-zA-Z0-9+&@#/%=~_|()]"
+    },
     "OrganizationalUnitDN":{
       "type":"string",
       "max":2000,
@@ -2370,6 +2574,51 @@
       "max":20,
       "min":1
     },
+    "RegionDescription":{
+      "type":"structure",
+      "members":{
+        "DirectoryId":{"shape":"DirectoryId"},
+        "RegionName":{"shape":"RegionName"},
+        "RegionType":{"shape":"RegionType"},
+        "Status":{"shape":"DirectoryStage"},
+        "VpcSettings":{"shape":"DirectoryVpcSettings"},
+        "DesiredNumberOfDomainControllers":{"shape":"DesiredNumberOfDomainControllers"},
+        "LaunchTime":{"shape":"LaunchTime"},
+        "StatusLastUpdatedDateTime":{"shape":"StateLastUpdatedDateTime"},
+        "LastUpdatedDateTime":{"shape":"LastUpdatedDateTime"}
+      }
+    },
+    "RegionLimitExceededException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ExceptionMessage"},
+        "RequestId":{"shape":"RequestId"}
+      },
+      "exception":true
+    },
+    "RegionName":{
+      "type":"string",
+      "max":32,
+      "min":8
+    },
+    "RegionType":{
+      "type":"string",
+      "enum":[
+        "Primary",
+        "Additional"
+      ]
+    },
+    "RegionsDescription":{
+      "type":"list",
+      "member":{"shape":"RegionDescription"}
+    },
+    "RegionsInfo":{
+      "type":"structure",
+      "members":{
+        "PrimaryRegion":{"shape":"RegionName"},
+        "AdditionalRegions":{"shape":"AdditionalRegions"}
+      }
+    },
     "RegisterCertificateRequest":{
       "type":"structure",
       "required":[
@@ -2378,7 +2627,9 @@
       ],
       "members":{
         "DirectoryId":{"shape":"DirectoryId"},
-        "CertificateData":{"shape":"CertificateData"}
+        "CertificateData":{"shape":"CertificateData"},
+        "Type":{"shape":"CertificateType"},
+        "ClientCertAuthSettings":{"shape":"ClientCertAuthSettings"}
       }
     },
     "RegisterCertificateResult":{
@@ -2436,6 +2687,18 @@
       }
     },
     "RemoveIpRoutesResult":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "RemoveRegionRequest":{
+      "type":"structure",
+      "required":["DirectoryId"],
+      "members":{
+        "DirectoryId":{"shape":"DirectoryId"}
+      }
+    },
+    "RemoveRegionResult":{
       "type":"structure",
       "members":{
       }

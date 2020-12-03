@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-11-24)
+------------------
+
+* Feature - Updates the Integer constraint of DescribeEnvironmentManagedActionHistory's MaxItems parameter to [1, 100].
+
+1.39.0 (2020-10-20)
+------------------
+
+* Feature - EnvironmentStatus enum update to include Aborting, LinkingFrom and LinkingTo
+
+1.38.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.37.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.36.0 (2020-08-25)
 ------------------
 

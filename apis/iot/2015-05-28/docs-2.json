@@ -121,7 +121,7 @@
     "GetV2LoggingOptions": "<p>Gets the fine grained logging options.</p>",
     "ListActiveViolations": "<p>Lists the active violations for a given Device Defender security profile.</p>",
     "ListAttachedPolicies": "<p>Lists the policies attached to the specified thing group.</p>",
-    "ListAuditFindings": "<p>Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 180 days.)</p>",
+    "ListAuditFindings": "<p>Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 90 days.)</p>",
     "ListAuditMitigationActionsExecutions": "<p>Gets the status of audit mitigation action tasks that were executed.</p>",
     "ListAuditMitigationActionsTasks": "<p>Gets a list of audit mitigation action tasks that match the specified filters.</p>",
     "ListAuditSuppressions": "<p> Lists your Device Defender audit listings. </p>",
@@ -323,10 +323,10 @@
     "AdditionalMetricsToRetainList": {
       "base": null,
       "refs": {
-        "CreateSecurityProfileRequest$additionalMetricsToRetain": "<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's <code>behaviors</code>, but it is also retained for any metric specified here.</p> <p> <b>Note:</b> This API field is deprecated. Please use <a>CreateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</p>",
-        "DescribeSecurityProfileResponse$additionalMetricsToRetain": "<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's <code>behaviors</code>, but it is also retained for any metric specified here.</p> <p> <b>Note:</b> This API field is deprecated. Please use <a>DescribeSecurityProfileResponse$additionalMetricsToRetainV2</a> instead.</p>",
-        "UpdateSecurityProfileRequest$additionalMetricsToRetain": "<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's <code>behaviors</code>, but it is also retained for any metric specified here.</p> <p> <b>Note:</b> This API field is deprecated. Please use <a>UpdateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</p>",
-        "UpdateSecurityProfileResponse$additionalMetricsToRetain": "<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile's <code>behaviors</code>, but it is also retained for any metric specified here.</p> <p> <b>Note:</b> This API field is deprecated. Please use <a>UpdateSecurityProfileResponse$additionalMetricsToRetainV2</a> instead.</p>"
+        "CreateSecurityProfileRequest$additionalMetricsToRetain": "<p> <i>Please use <a>CreateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's <code>behaviors</code>, but it is also retained for any metric specified here.</p>",
+        "DescribeSecurityProfileResponse$additionalMetricsToRetain": "<p> <i>Please use <a>DescribeSecurityProfileResponse$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's <code>behaviors</code>, but it is also retained for any metric specified here.</p>",
+        "UpdateSecurityProfileRequest$additionalMetricsToRetain": "<p> <i>Please use <a>UpdateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's <code>behaviors</code>, but it is also retained for any metric specified here.</p>",
+        "UpdateSecurityProfileResponse$additionalMetricsToRetain": "<p> <i>Please use <a>UpdateSecurityProfileResponse$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile's <code>behaviors</code>, but it is also retained for any metric specified here.</p>"
       }
     },
     "AdditionalMetricsToRetainV2List": {
@@ -994,6 +994,7 @@
         "SnsAction$roleArn": "<p>The ARN of the IAM role that grants access.</p>",
         "SqsAction$roleArn": "<p>The ARN of the IAM role that grants access.</p>",
         "StepFunctionsAction$roleArn": "<p>The ARN of the role that grants IoT permission to start execution of a state machine (\"Action\":\"states:StartExecution\").</p>",
+        "TimestreamAction$roleArn": "<p>The ARN of the role that grants permission to write to the Amazon Timestream database table.</p>",
         "TopicRuleDestination$arn": "<p>The topic rule destination URL.</p>",
         "TopicRuleDestinationSummary$arn": "<p>The topic rule destination ARN.</p>",
         "UpdateTopicRuleDestinationRequest$arn": "<p>The ARN of the topic rule destination.</p>"
@@ -1117,6 +1118,14 @@
       "base": null,
       "refs": {
         "AwsJobTimeoutConfig$inProgressTimeoutInMinutes": "<p>Specifies the amount of time, in minutes, this device has to finish execution of this job. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The in progress timer can't be updated and will apply to all job executions for the job. Whenever a job execution remains in the IN_PROGRESS status for longer than this interval, the job execution will fail and switch to the terminal <code>TIMED_OUT</code> status.</p>"
+      }
+    },
+    "BatchMode": {
+      "base": null,
+      "refs": {
+        "FirehoseAction$batchMode": "<p>Whether to deliver the Kinesis Data Firehose stream as a batch by using <a href=\"https://docs.aws.amazon.com/firehose/latest/APIReference/API_PutRecordBatch.html\"> <code>PutRecordBatch</code> </a>. The default value is <code>false</code>.</p> <p>When <code>batchMode</code> is <code>true</code> and the rule's SQL statement evaluates to an Array, each Array element forms one record in the <a href=\"https://docs.aws.amazon.com/firehose/latest/APIReference/API_PutRecordBatch.html\"> <code>PutRecordBatch</code> </a> request. The resulting array can't have more than 500 records.</p>",
+        "IotAnalyticsAction$batchMode": "<p>Whether to process the action as a batch. The default value is <code>false</code>.</p> <p>When <code>batchMode</code> is <code>true</code> and the rule SQL statement evaluates to an Array, each Array element is delivered as a separate message when passed by <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_BatchPutMessage.html\"> <code>BatchPutMessage</code> </a> to the AWS IoT Analytics channel. The resulting array can't have more than 100 messages.</p>",
+        "IotEventsAction$batchMode": "<p>Whether to process the event actions as a batch. The default value is <code>false</code>.</p> <p>When <code>batchMode</code> is <code>true</code>, you can't specify a <code>messageId</code>. </p> <p>When <code>batchMode</code> is <code>true</code> and the rule SQL statement evaluates to an Array, each Array element is treated as a separate message when it's sent to AWS IoT Events by calling <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchPutMessage.html\"> <code>BatchPutMessage</code> </a>. The resulting array can't have more than 10 messages.</p>"
       }
     },
     "Behavior": {
@@ -1942,6 +1951,7 @@
         "CertificateValidity$notBefore": "<p>The certificate is not valid before this date.</p>",
         "CertificateValidity$notAfter": "<p>The certificate is not valid after this date.</p>",
         "CreateProvisioningClaimResponse$expiration": "<p>The provisioning claim expiration time.</p>",
+        "DescribeDomainConfigurationResponse$lastStatusChangeDate": "<p>The date and time the domain configuration's status was last changed.</p>",
         "DescribeProvisioningTemplateResponse$creationDate": "<p>The date when the fleet provisioning template was created.</p>",
         "DescribeProvisioningTemplateResponse$lastModifiedDate": "<p>The date when the fleet provisioning template was last modified.</p>",
         "DescribeProvisioningTemplateVersionResponse$creationDate": "<p>The date when the fleet provisioning template version was created.</p>",
@@ -3045,6 +3055,12 @@
         "OTAUpdateFile$fileName": "<p>The name of the file.</p>"
       }
     },
+    "FileType": {
+      "base": null,
+      "refs": {
+        "OTAUpdateFile$fileType": "<p>An integer value you can include in the job document to allow your devices to identify the type of file received from the cloud.</p>"
+      }
+    },
     "FindingId": {
       "base": null,
       "refs": {
@@ -3399,7 +3415,7 @@
     "IncrementFactor": {
       "base": null,
       "refs": {
-        "ExponentialRolloutRate$incrementFactor": "<p>The exponential factor to increase the rate of rollout for a job.</p>"
+        "ExponentialRolloutRate$incrementFactor": "<p>The exponential factor to increase the rate of rollout for a job.</p> <p>AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>"
       }
     },
     "IndexName": {
@@ -3711,7 +3727,7 @@
     "Key": {
       "base": null,
       "refs": {
-        "S3Action$key": "<p>The object key.</p>"
+        "S3Action$key": "<p>The object key. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html\">Actions, resources, and condition keys for Amazon S3</a>.</p>"
       }
     },
     "KeyName": {
@@ -4412,7 +4428,7 @@
     "MessageId": {
       "base": null,
       "refs": {
-        "IotEventsAction$messageId": "<p>[Optional] Use this to ensure that only one input (message) with a given messageId will be processed by an AWS IoT Events detector.</p>"
+        "IotEventsAction$messageId": "<p>The ID of the message. The default <code>messageId</code> is a new UUID value.</p> <p>When <code>batchMode</code> is <code>true</code>, you can't specify a <code>messageId</code>--a new UUID value will be assigned.</p> <p>Assign a value to this property to ensure that only one input (message) with a given <code>messageId</code> will be processed by an AWS IoT Events detector.</p>"
       }
     },
     "MetricDimension": {
@@ -4563,6 +4579,19 @@
         "MqttContext$username": "<p>The value of the <code>username</code> key in an MQTT authorization request.</p>"
       }
     },
+    "NamespaceId": {
+      "base": null,
+      "refs": {
+        "AssociateTargetsWithJobRequest$namespaceId": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>",
+        "CreateJobRequest$namespaceId": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>",
+        "DeleteJobExecutionRequest$namespaceId": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>",
+        "DeleteJobRequest$namespaceId": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>",
+        "Job$namespaceId": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>",
+        "ListJobExecutionsForThingRequest$namespaceId": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>",
+        "ListJobsRequest$namespaceId": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>",
+        "UpdateJobRequest$namespaceId": "<p>The namespace used to indicate that a job is a customer-managed job.</p> <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.</p> <p> <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code> </p> <note> <p>The <code>namespaceId</code> feature is in public preview.</p> </note>"
+      }
+    },
     "NextToken": {
       "base": null,
       "refs": {
@@ -4578,8 +4607,8 @@
         "ListAuditSuppressionsResponse$nextToken": "<p> A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results. </p>",
         "ListAuditTasksRequest$nextToken": "<p>The token for the next set of results.</p>",
         "ListAuditTasksResponse$nextToken": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.</p>",
-        "ListBillingGroupsRequest$nextToken": "<p>The token to retrieve the next set of results.</p>",
-        "ListBillingGroupsResponse$nextToken": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>",
+        "ListBillingGroupsRequest$nextToken": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+        "ListBillingGroupsResponse$nextToken": "<p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>",
         "ListDimensionsRequest$nextToken": "<p>The token for the next set of results.</p>",
         "ListDimensionsResponse$nextToken": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.</p>",
         "ListIndicesRequest$nextToken": "<p>The token used to get the next set of results, or <code>null</code> if there are no additional results.</p>",
@@ -4594,8 +4623,8 @@
         "ListMitigationActionsResponse$nextToken": "<p>The token for the next set of results.</p>",
         "ListOTAUpdatesRequest$nextToken": "<p>A token used to retrieve the next set of results.</p>",
         "ListOTAUpdatesResponse$nextToken": "<p>A token to use to get the next set of results.</p>",
-        "ListPrincipalThingsRequest$nextToken": "<p>The token to retrieve the next set of results.</p>",
-        "ListPrincipalThingsResponse$nextToken": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>",
+        "ListPrincipalThingsRequest$nextToken": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+        "ListPrincipalThingsResponse$nextToken": "<p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>",
         "ListProvisioningTemplateVersionsRequest$nextToken": "<p>A token to retrieve the next set of results.</p>",
         "ListProvisioningTemplateVersionsResponse$nextToken": "<p>A token to retrieve the next set of results.</p>",
         "ListProvisioningTemplatesRequest$nextToken": "<p>A token to retrieve the next set of results.</p>",
@@ -4608,32 +4637,34 @@
         "ListSecurityProfilesResponse$nextToken": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.</p>",
         "ListStreamsRequest$nextToken": "<p>A token used to get the next set of results.</p>",
         "ListStreamsResponse$nextToken": "<p>A token used to get the next set of results.</p>",
-        "ListTagsForResourceRequest$nextToken": "<p>The token to retrieve the next set of results.</p>",
-        "ListTagsForResourceResponse$nextToken": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>",
+        "ListTagsForResourceRequest$nextToken": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+        "ListTagsForResourceResponse$nextToken": "<p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>",
         "ListTargetsForSecurityProfileRequest$nextToken": "<p>The token for the next set of results.</p>",
         "ListTargetsForSecurityProfileResponse$nextToken": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.</p>",
-        "ListThingGroupsForThingRequest$nextToken": "<p>The token to retrieve the next set of results.</p>",
-        "ListThingGroupsForThingResponse$nextToken": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>",
-        "ListThingGroupsRequest$nextToken": "<p>The token to retrieve the next set of results.</p>",
-        "ListThingGroupsResponse$nextToken": "<p>The token used to get the next set of results. Will not be returned if operation has returned all results.</p>",
-        "ListThingRegistrationTaskReportsRequest$nextToken": "<p>The token to retrieve the next set of results.</p>",
-        "ListThingRegistrationTaskReportsResponse$nextToken": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>",
-        "ListThingRegistrationTasksRequest$nextToken": "<p>The token to retrieve the next set of results.</p>",
-        "ListThingRegistrationTasksResponse$nextToken": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>",
-        "ListThingTypesRequest$nextToken": "<p>The token to retrieve the next set of results.</p>",
+        "ListThingGroupsForThingRequest$nextToken": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+        "ListThingGroupsForThingResponse$nextToken": "<p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>",
+        "ListThingGroupsRequest$nextToken": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+        "ListThingGroupsResponse$nextToken": "<p>The token to use to get the next set of results. Will not be returned if operation has returned all results.</p>",
+        "ListThingPrincipalsRequest$nextToken": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+        "ListThingPrincipalsResponse$nextToken": "<p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>",
+        "ListThingRegistrationTaskReportsRequest$nextToken": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+        "ListThingRegistrationTaskReportsResponse$nextToken": "<p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>",
+        "ListThingRegistrationTasksRequest$nextToken": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+        "ListThingRegistrationTasksResponse$nextToken": "<p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>",
+        "ListThingTypesRequest$nextToken": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
         "ListThingTypesResponse$nextToken": "<p>The token for the next set of results. Will not be returned if operation has returned all results.</p>",
-        "ListThingsInBillingGroupRequest$nextToken": "<p>The token to retrieve the next set of results.</p>",
-        "ListThingsInBillingGroupResponse$nextToken": "<p>The token used to get the next set of results. Will not be returned if operation has returned all results.</p>",
-        "ListThingsInThingGroupRequest$nextToken": "<p>The token to retrieve the next set of results.</p>",
-        "ListThingsInThingGroupResponse$nextToken": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>",
-        "ListThingsRequest$nextToken": "<p>The token to retrieve the next set of results.</p>",
-        "ListThingsResponse$nextToken": "<p>The token used to get the next set of results. Will not be returned if operation has returned all results.</p>",
-        "ListTopicRuleDestinationsRequest$nextToken": "<p>The token to retrieve the next set of results.</p>",
-        "ListTopicRuleDestinationsResponse$nextToken": "<p>The token to retrieve the next set of results.</p>",
-        "ListTopicRulesRequest$nextToken": "<p>A token used to retrieve the next value.</p>",
-        "ListTopicRulesResponse$nextToken": "<p>A token used to retrieve the next value.</p>",
-        "ListV2LoggingLevelsRequest$nextToken": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>",
-        "ListV2LoggingLevelsResponse$nextToken": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>",
+        "ListThingsInBillingGroupRequest$nextToken": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+        "ListThingsInBillingGroupResponse$nextToken": "<p>The token to use to get the next set of results. Will not be returned if operation has returned all results.</p>",
+        "ListThingsInThingGroupRequest$nextToken": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+        "ListThingsInThingGroupResponse$nextToken": "<p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>",
+        "ListThingsRequest$nextToken": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+        "ListThingsResponse$nextToken": "<p>The token to use to get the next set of results. Will not be returned if operation has returned all results.</p>",
+        "ListTopicRuleDestinationsRequest$nextToken": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+        "ListTopicRuleDestinationsResponse$nextToken": "<p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>",
+        "ListTopicRulesRequest$nextToken": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+        "ListTopicRulesResponse$nextToken": "<p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>",
+        "ListV2LoggingLevelsRequest$nextToken": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+        "ListV2LoggingLevelsResponse$nextToken": "<p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>",
         "ListViolationEventsRequest$nextToken": "<p>The token for the next set of results.</p>",
         "ListViolationEventsResponse$nextToken": "<p>A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.</p>",
         "SearchIndexRequest$nextToken": "<p>The token used to get the next set of results, or <code>null</code> if there are no additional results.</p>",
@@ -5230,7 +5261,7 @@
     "RateIncreaseCriteria": {
       "base": "<p>Allows you to define a criteria to initiate the increase in rate of rollout for a job.</p>",
       "refs": {
-        "ExponentialRolloutRate$rateIncreaseCriteria": "<p>The criteria to initiate the increase in rate of rollout for a job.</p> <p>AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>"
+        "ExponentialRolloutRate$rateIncreaseCriteria": "<p>The criteria to initiate the increase in rate of rollout for a job.</p>"
       }
     },
     "ReasonCode": {
@@ -5339,6 +5370,7 @@
         "ListPrincipalThingsRequest$maxResults": "<p>The maximum number of results to return in this operation.</p>",
         "ListThingGroupsForThingRequest$maxResults": "<p>The maximum number of results to return at one time.</p>",
         "ListThingGroupsRequest$maxResults": "<p>The maximum number of results to return at one time.</p>",
+        "ListThingPrincipalsRequest$maxResults": "<p>The maximum number of results to return in this operation.</p>",
         "ListThingRegistrationTaskReportsRequest$maxResults": "<p>The maximum number of results to return per request.</p>",
         "ListThingRegistrationTasksRequest$maxResults": "<p>The maximum number of results to return at one time.</p>",
         "ListThingTypesRequest$maxResults": "<p>The maximum number of results to return in this operation.</p>",
@@ -5681,7 +5713,7 @@
       "base": null,
       "refs": {
         "TopicRule$sql": "<p>The SQL statement used to query the topic. When using a SQL query with multiple lines, be sure to escape the newline characters.</p>",
-        "TopicRulePayload$sql": "<p>The SQL statement used to query the topic. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference\">AWS IoT SQL Reference</a> in the <i>AWS IoT Developer Guide</i>.</p>"
+        "TopicRulePayload$sql": "<p>The SQL statement used to query the topic. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-sql-reference.html\">AWS IoT SQL Reference</a> in the <i>AWS IoT Developer Guide</i>.</p>"
       }
     },
     "SalesforceAction": {
@@ -5952,7 +5984,7 @@
       }
     },
     "SigV4Authorization": {
-      "base": "<p>Use Sig V4 authorization.</p>",
+      "base": "<p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 signing process</a>.</p>",
       "refs": {
         "HttpAuthorization$sigv4": "<p>Use Sig V4 authorization. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>.</p>"
       }
@@ -6839,7 +6871,7 @@
         "ListAuditFindingsRequest$endTime": "<p>A filter to limit results to those found before the specified time. You must specify either the startTime and endTime or the taskId, but not both.</p>",
         "ListAuditMitigationActionsTasksRequest$startTime": "<p>Specify this filter to limit results to tasks that began on or after a specific date and time.</p>",
         "ListAuditMitigationActionsTasksRequest$endTime": "<p>Specify this filter to limit results to tasks that were completed or canceled on or before a specific date and time.</p>",
-        "ListAuditTasksRequest$startTime": "<p>The beginning of the time period. Audit information is retained for a limited time (180 days). Requesting a start time prior to what is retained results in an \"InvalidRequestException\".</p>",
+        "ListAuditTasksRequest$startTime": "<p>The beginning of the time period. Audit information is retained for a limited time (90 days). Requesting a start time prior to what is retained results in an \"InvalidRequestException\".</p>",
         "ListAuditTasksRequest$endTime": "<p>The end of the time period.</p>",
         "ListViolationEventsRequest$startTime": "<p>The start time for the alerts to be listed.</p>",
         "ListViolationEventsRequest$endTime": "<p>The end time for the alerts to be listed.</p>",
@@ -6850,6 +6882,66 @@
         "UpdateSecurityProfileResponse$creationDate": "<p>The time the security profile was created.</p>",
         "UpdateSecurityProfileResponse$lastModifiedDate": "<p>The time the security profile was last modified.</p>",
         "ViolationEvent$violationEventTime": "<p>The time the violation event occurred.</p>"
+      }
+    },
+    "TimestreamAction": {
+      "base": "<p>The Timestream rule action writes attributes (measures) from an MQTT message into an Amazon Timestream table. For more information, see the <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/timestream-rule-action.html\">Timestream</a> topic rule action documentation.</p>",
+      "refs": {
+        "Action$timestream": "<p>The Timestream rule action writes attributes (measures) from an MQTT message into an Amazon Timestream table. For more information, see the <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/timestream-rule-action.html\">Timestream</a> topic rule action documentation.</p>"
+      }
+    },
+    "TimestreamDatabaseName": {
+      "base": null,
+      "refs": {
+        "TimestreamAction$databaseName": "<p>The name of an Amazon Timestream database.</p>"
+      }
+    },
+    "TimestreamDimension": {
+      "base": "<p>Metadata attributes of the time series that are written in each measure record.</p>",
+      "refs": {
+        "TimestreamDimensionList$member": null
+      }
+    },
+    "TimestreamDimensionList": {
+      "base": null,
+      "refs": {
+        "TimestreamAction$dimensions": "<p>Metadata attributes of the time series that are written in each measure record.</p>"
+      }
+    },
+    "TimestreamDimensionName": {
+      "base": null,
+      "refs": {
+        "TimestreamDimension$name": "<p>The metadata dimension name. This is the name of the column in the Amazon Timestream database table record.</p> <p>Dimensions cannot be named: <code>measure_name</code>, <code>measure_value</code>, or <code>time</code>. These names are reserved. Dimension names cannot start with <code>ts_</code> or <code>measure_value</code> and they cannot contain the colon (<code>:</code>) character.</p>"
+      }
+    },
+    "TimestreamDimensionValue": {
+      "base": null,
+      "refs": {
+        "TimestreamDimension$value": "<p>The value to write in this column of the database record.</p>"
+      }
+    },
+    "TimestreamTableName": {
+      "base": null,
+      "refs": {
+        "TimestreamAction$tableName": "<p>The name of the database table into which to write the measure records.</p>"
+      }
+    },
+    "TimestreamTimestamp": {
+      "base": "<p>Describes how to interpret an application-defined timestamp value from an MQTT message payload and the precision of that value.</p>",
+      "refs": {
+        "TimestreamAction$timestamp": "<p>Specifies an application-defined value to replace the default value assigned to the Timestream record's timestamp in the <code>time</code> column.</p> <p>You can use this property to specify the value and the precision of the Timestream record's timestamp. You can specify a value from the message payload or a value computed by a substitution template.</p> <p>If omitted, the topic rule action assigns the timestamp, in milliseconds, at the time it processed the rule. </p>"
+      }
+    },
+    "TimestreamTimestampUnit": {
+      "base": null,
+      "refs": {
+        "TimestreamTimestamp$unit": "<p>The precision of the timestamp value that results from the expression described in <code>value</code>.</p> <p>Valid values: <code>SECONDS</code> | <code>MILLISECONDS</code> | <code>MICROSECONDS</code> | <code>NANOSECONDS</code>. The default is <code>MILLISECONDS</code>.</p>"
+      }
+    },
+    "TimestreamTimestampValue": {
+      "base": null,
+      "refs": {
+        "TimestreamTimestamp$value": "<p>An expression that returns a long epoch time value.</p>"
       }
     },
     "TlsContext": {

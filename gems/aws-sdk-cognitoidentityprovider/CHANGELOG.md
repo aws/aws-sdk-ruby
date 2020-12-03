@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2020-11-24)
+------------------
+
+* Feature - This release adds ability to configure Cognito User Pools with third party sms and email providers for sending notifications to users.
+
+1.47.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.46.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.45.0 (2020-08-25)
 ------------------
 

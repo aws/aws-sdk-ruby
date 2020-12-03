@@ -37,7 +37,7 @@ module Aws::ServiceCatalog
     #   The type of shared portfolios to accept. The default is to accept
     #   imported portfolios.
     #
-    #   * `AWS_ORGANIZATIONS` - Accept portfolios shared by the master
+    #   * `AWS_ORGANIZATIONS` - Accept portfolios shared by the management
     #     account of your organization.
     #
     #   * `IMPORTED` - Accept imported portfolios.
@@ -881,10 +881,10 @@ module Aws::ServiceCatalog
     # @!attribute [rw] organization_node
     #   The organization node to whom you are going to share. If
     #   `OrganizationNode` is passed in, `PortfolioShare` will be created
-    #   for the node and its children (when applies), and a
-    #   `PortfolioShareToken` will be returned in the output in order for
-    #   the administrator to monitor the status of the `PortfolioShare`
-    #   creation process.
+    #   for the node an ListOrganizationPortfolioAccessd its children (when
+    #   applies), and a `PortfolioShareToken` will be returned in the output
+    #   in order for the administrator to monitor the status of the
+    #   `PortfolioShare` creation process.
     #   @return [Types::OrganizationNode]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShareInput AWS API Documentation
@@ -899,7 +899,7 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] portfolio_share_token
-    #   The portfolio share unique identifier. This will only be returned if
+    #   The portfolio shares a unique identifier that only returns if the
     #   portfolio is shared to an organization node.
     #   @return [String]
     #
@@ -989,7 +989,8 @@ module Aws::ServiceCatalog
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] provisioning_artifact_parameters
-    #   The configuration of the provisioning artifact.
+    #   The configuration of the provisioning artifact. The `info` field
+    #   accepts `ImportFromPhysicalID`.
     #   @return [Types::ProvisioningArtifactProperties]
     #
     # @!attribute [rw] idempotency_token
@@ -1219,7 +1220,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The configuration for the provisioning artifact.
+    #   The configuration for the provisioning artifact. The `info` field
+    #   accepts `ImportFromPhysicalID`.
     #   @return [Types::ProvisioningArtifactProperties]
     #
     # @!attribute [rw] idempotency_token
@@ -2113,12 +2115,19 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # DescribeProvisionedProductAPI input structure. AcceptLanguage -
+    # \[Optional\] The language code for localization. Id - \[Optional\] The
+    # provisioned product identifier. Name - \[Optional\] Another
+    # provisioned product identifier. Customers must provide either Id or
+    # Name.
+    #
     # @note When making an API call, you may pass DescribeProvisionedProductInput
     #   data as a hash:
     #
     #       {
     #         accept_language: "AcceptLanguage",
-    #         id: "Id", # required
+    #         id: "Id",
+    #         name: "ProvisionedProductName",
     #       }
     #
     # @!attribute [rw] accept_language
@@ -2132,14 +2141,27 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The provisioned product identifier.
+    #   The provisioned product identifier. You must provide the name or ID,
+    #   but not both.
+    #
+    #   If you do not provide a name or ID, or you provide both name and ID,
+    #   an `InvalidParametersException` will occur.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the provisioned product. You must provide the name or
+    #   ID, but not both.
+    #
+    #   If you do not provide a name or ID, or you provide both name and ID,
+    #   an `InvalidParametersException` will occur.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProductInput AWS API Documentation
     #
     class DescribeProvisionedProductInput < Struct.new(
       :accept_language,
-      :id)
+      :id,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3032,6 +3054,160 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetProvisionedProductOutputsInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         provisioned_product_id: "Id",
+    #         provisioned_product_name: "ProvisionedProductName",
+    #         output_keys: ["OutputKey"],
+    #         page_size: 1,
+    #         page_token: "PageToken",
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_id
+    #   The identifier of the provisioned product that you want the outputs
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_name
+    #   The name of the provisioned product that you want the outputs from.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_keys
+    #   The list of keys that the API should return with their values. If
+    #   none are provided, the API will return all outputs of the
+    #   provisioned product.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/GetProvisionedProductOutputsInput AWS API Documentation
+    #
+    class GetProvisionedProductOutputsInput < Struct.new(
+      :accept_language,
+      :provisioned_product_id,
+      :provisioned_product_name,
+      :output_keys,
+      :page_size,
+      :page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] outputs
+    #   Information about the product created as the result of a request.
+    #   For example, the output for a CloudFormation-backed product that
+    #   creates an S3 bucket would include the S3 bucket URL.
+    #   @return [Array<Types::RecordOutput>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/GetProvisionedProductOutputsOutput AWS API Documentation
+    #
+    class GetProvisionedProductOutputsOutput < Struct.new(
+      :outputs,
+      :next_page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ImportAsProvisionedProductInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         product_id: "Id", # required
+    #         provisioning_artifact_id: "Id", # required
+    #         provisioned_product_name: "ProvisionedProductName", # required
+    #         physical_id: "PhysicalId", # required
+    #         idempotency_token: "IdempotencyToken", # required
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] product_id
+    #   The product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_name
+    #   The user-friendly name of the provisioned product. The value must be
+    #   unique for the AWS account. The name cannot be updated after the
+    #   product is provisioned.
+    #   @return [String]
+    #
+    # @!attribute [rw] physical_id
+    #   The unique identifier of the resource to be imported. It only
+    #   currently supports CloudFormation stack IDs.
+    #   @return [String]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ImportAsProvisionedProductInput AWS API Documentation
+    #
+    class ImportAsProvisionedProductInput < Struct.new(
+      :accept_language,
+      :product_id,
+      :provisioning_artifact_id,
+      :provisioned_product_name,
+      :physical_id,
+      :idempotency_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] record_detail
+    #   Information about a request operation.
+    #   @return [Types::RecordDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ImportAsProvisionedProductOutput AWS API Documentation
+    #
+    class ImportAsProvisionedProductOutput < Struct.new(
+      :record_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # One or more parameters provided to the operation are not valid.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/InvalidParametersException AWS API Documentation
@@ -3135,8 +3311,8 @@ module Aws::ServiceCatalog
     #   The type of shared portfolios to list. The default is to list
     #   imported portfolios.
     #
-    #   * `AWS_ORGANIZATIONS` - List portfolios shared by the master account
-    #     of your organization
+    #   * `AWS_ORGANIZATIONS` - List portfolios shared by the management
+    #     account of your organization
     #
     #   * `AWS_SERVICECATALOG` - List default portfolios
     #
@@ -4944,6 +5120,10 @@ module Aws::ServiceCatalog
     #   `pa-4abcdjnxjj6ne`.
     #   @return [String]
     #
+    # @!attribute [rw] launch_role_arn
+    #   The ARN of the launch role associated with the provisioned product.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductDetail AWS API Documentation
     #
     class ProvisionedProductDetail < Struct.new(
@@ -4959,7 +5139,8 @@ module Aws::ServiceCatalog
       :last_provisioning_record_id,
       :last_successful_provisioning_record_id,
       :product_id,
-      :provisioning_artifact_id)
+      :provisioning_artifact_id,
+      :launch_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5624,6 +5805,10 @@ module Aws::ServiceCatalog
     #   One or more tags.
     #   @return [Array<Types::RecordTag>]
     #
+    # @!attribute [rw] launch_role_arn
+    #   The ARN of the launch role associated with the provisioned product.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordDetail AWS API Documentation
     #
     class RecordDetail < Struct.new(
@@ -5639,7 +5824,8 @@ module Aws::ServiceCatalog
       :provisioning_artifact_id,
       :path_id,
       :record_errors,
-      :record_tags)
+      :record_tags,
+      :launch_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5735,7 +5921,7 @@ module Aws::ServiceCatalog
     #   The type of shared portfolios to reject. The default is to reject
     #   imported portfolios.
     #
-    #   * `AWS_ORGANIZATIONS` - Reject portfolios shared by the master
+    #   * `AWS_ORGANIZATIONS` - Reject portfolios shared by the management
     #     account of your organization.
     #
     #   * `IMPORTED` - Reject imported portfolios.
@@ -6522,6 +6708,7 @@ module Aws::ServiceCatalog
     #         terminate_token: "IdempotencyToken", # required
     #         ignore_errors: false,
     #         accept_language: "AcceptLanguage",
+    #         retain_physical_resources: false,
     #       }
     #
     # @!attribute [rw] provisioned_product_name
@@ -6561,6 +6748,14 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #   @return [String]
     #
+    # @!attribute [rw] retain_physical_resources
+    #   When this boolean parameter is set to true, the
+    #   TerminateProvisionedProduct API deletes the Service Catalog
+    #   provisioned product. However, it does not remove the CloudFormation
+    #   stack, stack set, or the underlying resources of the deleted
+    #   provisioned product. The default value is false.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TerminateProvisionedProductInput AWS API Documentation
     #
     class TerminateProvisionedProductInput < Struct.new(
@@ -6568,7 +6763,8 @@ module Aws::ServiceCatalog
       :provisioned_product_id,
       :terminate_token,
       :ignore_errors,
-      :accept_language)
+      :accept_language,
+      :retain_physical_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7084,9 +7280,17 @@ module Aws::ServiceCatalog
     #   A map that contains the provisioned product properties to be
     #   updated.
     #
+    #   The `LAUNCH_ROLE` key accepts role ARNs. This key allows an
+    #   administrator to call `UpdateProvisionedProductProperties` to update
+    #   the launch role that is associated with a provisioned product. This
+    #   role is used when an end user calls a provisioning operation such as
+    #   `UpdateProvisionedProduct`, `TerminateProvisionedProduct`, or
+    #   `ExecuteProvisionedProductServiceAction`. Only a role ARN is valid.
+    #   A user ARN is invalid.
+    #
     #   The `OWNER` key accepts user ARNs and role ARNs. The owner is the
-    #   user that is allowed to see, update, terminate, and execute service
-    #   actions in the provisioned product.
+    #   user that has permission to see, update, terminate, and execute
+    #   service actions in the provisioned product.
     #
     #   The administrator can change the owner of a provisioned product to
     #   another IAM user within the same account. Both end user owners and

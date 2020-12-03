@@ -161,6 +161,7 @@ module Aws::IoT
     #           role_arn: "AwsArn", # required
     #           delivery_stream_name: "DeliveryStreamName", # required
     #           separator: "FirehoseSeparator",
+    #           batch_mode: false,
     #         },
     #         cloudwatch_metric: {
     #           role_arn: "AwsArn", # required
@@ -194,11 +195,13 @@ module Aws::IoT
     #         iot_analytics: {
     #           channel_arn: "AwsArn",
     #           channel_name: "ChannelName",
+    #           batch_mode: false,
     #           role_arn: "AwsArn",
     #         },
     #         iot_events: {
     #           input_name: "InputName", # required
     #           message_id: "MessageId",
+    #           batch_mode: false,
     #           role_arn: "AwsArn", # required
     #         },
     #         iot_site_wise: {
@@ -231,6 +234,21 @@ module Aws::IoT
     #           execution_name_prefix: "ExecutionNamePrefix",
     #           state_machine_name: "StateMachineName", # required
     #           role_arn: "AwsArn", # required
+    #         },
+    #         timestream: {
+    #           role_arn: "AwsArn", # required
+    #           database_name: "TimestreamDatabaseName", # required
+    #           table_name: "TimestreamTableName", # required
+    #           dimensions: [ # required
+    #             {
+    #               name: "TimestreamDimensionName", # required
+    #               value: "TimestreamDimensionValue", # required
+    #             },
+    #           ],
+    #           timestamp: {
+    #             value: "TimestreamTimestampValue", # required
+    #             unit: "TimestreamTimestampUnit", # required
+    #           },
     #         },
     #         http: {
     #           url: "Url", # required
@@ -326,6 +344,16 @@ module Aws::IoT
     #   Starts execution of a Step Functions state machine.
     #   @return [Types::StepFunctionsAction]
     #
+    # @!attribute [rw] timestream
+    #   The Timestream rule action writes attributes (measures) from an MQTT
+    #   message into an Amazon Timestream table. For more information, see
+    #   the [Timestream][1] topic rule action documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/timestream-rule-action.html
+    #   @return [Types::TimestreamAction]
+    #
     # @!attribute [rw] http
     #   Send data to an HTTPS endpoint.
     #   @return [Types::HttpAction]
@@ -349,6 +377,7 @@ module Aws::IoT
       :iot_events,
       :iot_site_wise,
       :step_functions,
+      :timestream,
       :http)
       SENSITIVE = []
       include Aws::Structure
@@ -666,6 +695,7 @@ module Aws::IoT
     #         targets: ["TargetArn"], # required
     #         job_id: "JobId", # required
     #         comment: "Comment",
+    #         namespace_id: "NamespaceId",
     #       }
     #
     # @!attribute [rw] targets
@@ -681,10 +711,25 @@ module Aws::IoT
     #   with the targets.
     #   @return [String]
     #
+    # @!attribute [rw] namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #   @return [String]
+    #
     class AssociateTargetsWithJobRequest < Struct.new(
       :targets,
       :job_id,
-      :comment)
+      :comment,
+      :namespace_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3049,6 +3094,7 @@ module Aws::IoT
     #             value: "TagValue",
     #           },
     #         ],
+    #         namespace_id: "NamespaceId",
     #       }
     #
     # @!attribute [rw] job_id
@@ -3118,6 +3164,20 @@ module Aws::IoT
     #   Metadata which can be used to manage the job.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #   @return [String]
+    #
     class CreateJobRequest < Struct.new(
       :job_id,
       :targets,
@@ -3129,7 +3189,8 @@ module Aws::IoT
       :job_executions_rollout_config,
       :abort_config,
       :timeout_config,
-      :tags)
+      :tags,
+      :namespace_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3318,6 +3379,7 @@ module Aws::IoT
     #         files: [ # required
     #           {
     #             file_name: "FileName",
+    #             file_type: 1,
     #             file_version: "OTAUpdateFileVersion",
     #             file_location: {
     #               stream: {
@@ -4035,12 +4097,12 @@ module Aws::IoT
     #   @return [Hash<String,Types::AlertTarget>]
     #
     # @!attribute [rw] additional_metrics_to_retain
+    #   *Please use CreateSecurityProfileRequest$additionalMetricsToRetainV2
+    #   instead.*
+    #
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the profile's `behaviors`, but
     #   it is also retained for any metric specified here.
-    #
-    #   **Note:** This API field is deprecated. Please use
-    #   CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
     #   @return [Array<String>]
     #
     # @!attribute [rw] additional_metrics_to_retain_v2
@@ -4457,6 +4519,7 @@ module Aws::IoT
     #                 role_arn: "AwsArn", # required
     #                 delivery_stream_name: "DeliveryStreamName", # required
     #                 separator: "FirehoseSeparator",
+    #                 batch_mode: false,
     #               },
     #               cloudwatch_metric: {
     #                 role_arn: "AwsArn", # required
@@ -4490,11 +4553,13 @@ module Aws::IoT
     #               iot_analytics: {
     #                 channel_arn: "AwsArn",
     #                 channel_name: "ChannelName",
+    #                 batch_mode: false,
     #                 role_arn: "AwsArn",
     #               },
     #               iot_events: {
     #                 input_name: "InputName", # required
     #                 message_id: "MessageId",
+    #                 batch_mode: false,
     #                 role_arn: "AwsArn", # required
     #               },
     #               iot_site_wise: {
@@ -4527,6 +4592,21 @@ module Aws::IoT
     #                 execution_name_prefix: "ExecutionNamePrefix",
     #                 state_machine_name: "StateMachineName", # required
     #                 role_arn: "AwsArn", # required
+    #               },
+    #               timestream: {
+    #                 role_arn: "AwsArn", # required
+    #                 database_name: "TimestreamDatabaseName", # required
+    #                 table_name: "TimestreamTableName", # required
+    #                 dimensions: [ # required
+    #                   {
+    #                     name: "TimestreamDimensionName", # required
+    #                     value: "TimestreamDimensionValue", # required
+    #                   },
+    #                 ],
+    #                 timestamp: {
+    #                   value: "TimestreamTimestampValue", # required
+    #                   unit: "TimestreamTimestampUnit", # required
+    #                 },
     #               },
     #               http: {
     #                 url: "Url", # required
@@ -4601,6 +4681,7 @@ module Aws::IoT
     #               role_arn: "AwsArn", # required
     #               delivery_stream_name: "DeliveryStreamName", # required
     #               separator: "FirehoseSeparator",
+    #               batch_mode: false,
     #             },
     #             cloudwatch_metric: {
     #               role_arn: "AwsArn", # required
@@ -4634,11 +4715,13 @@ module Aws::IoT
     #             iot_analytics: {
     #               channel_arn: "AwsArn",
     #               channel_name: "ChannelName",
+    #               batch_mode: false,
     #               role_arn: "AwsArn",
     #             },
     #             iot_events: {
     #               input_name: "InputName", # required
     #               message_id: "MessageId",
+    #               batch_mode: false,
     #               role_arn: "AwsArn", # required
     #             },
     #             iot_site_wise: {
@@ -4671,6 +4754,21 @@ module Aws::IoT
     #               execution_name_prefix: "ExecutionNamePrefix",
     #               state_machine_name: "StateMachineName", # required
     #               role_arn: "AwsArn", # required
+    #             },
+    #             timestream: {
+    #               role_arn: "AwsArn", # required
+    #               database_name: "TimestreamDatabaseName", # required
+    #               table_name: "TimestreamTableName", # required
+    #               dimensions: [ # required
+    #                 {
+    #                   name: "TimestreamDimensionName", # required
+    #                   value: "TimestreamDimensionValue", # required
+    #                 },
+    #               ],
+    #               timestamp: {
+    #                 value: "TimestreamTimestampValue", # required
+    #                 unit: "TimestreamTimestampUnit", # required
+    #               },
     #             },
     #             http: {
     #               url: "Url", # required
@@ -5009,6 +5107,7 @@ module Aws::IoT
     #         thing_name: "ThingName", # required
     #         execution_number: 1, # required
     #         force: false,
+    #         namespace_id: "NamespaceId",
     #       }
     #
     # @!attribute [rw] job_id
@@ -5043,11 +5142,26 @@ module Aws::IoT
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #   @return [String]
+    #
     class DeleteJobExecutionRequest < Struct.new(
       :job_id,
       :thing_name,
       :execution_number,
-      :force)
+      :force,
+      :namespace_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5058,6 +5172,7 @@ module Aws::IoT
     #       {
     #         job_id: "JobId", # required
     #         force: false,
+    #         namespace_id: "NamespaceId",
     #       }
     #
     # @!attribute [rw] job_id
@@ -5084,9 +5199,24 @@ module Aws::IoT
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #   @return [String]
+    #
     class DeleteJobRequest < Struct.new(
       :job_id,
-      :force)
+      :force,
+      :namespace_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6031,6 +6161,11 @@ module Aws::IoT
     #   The type of the domain.
     #   @return [String]
     #
+    # @!attribute [rw] last_status_change_date
+    #   The date and time the domain configuration's status was last
+    #   changed.
+    #   @return [Time]
+    #
     class DescribeDomainConfigurationResponse < Struct.new(
       :domain_configuration_name,
       :domain_configuration_arn,
@@ -6039,7 +6174,8 @@ module Aws::IoT
       :authorizer_config,
       :domain_configuration_status,
       :service_type,
-      :domain_type)
+      :domain_type,
+      :last_status_change_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6564,12 +6700,13 @@ module Aws::IoT
     #   @return [Hash<String,Types::AlertTarget>]
     #
     # @!attribute [rw] additional_metrics_to_retain
+    #   *Please use
+    #   DescribeSecurityProfileResponse$additionalMetricsToRetainV2
+    #   instead.*
+    #
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the profile's `behaviors`, but
     #   it is also retained for any metric specified here.
-    #
-    #   **Note:** This API field is deprecated. Please use
-    #   DescribeSecurityProfileResponse$additionalMetricsToRetainV2 instead.
     #   @return [Array<String>]
     #
     # @!attribute [rw] additional_metrics_to_retain_v2
@@ -7406,13 +7543,13 @@ module Aws::IoT
     #
     # @!attribute [rw] increment_factor
     #   The exponential factor to increase the rate of rollout for a job.
+    #
+    #   AWS IoT supports up to one digit after the decimal (for example,
+    #   1.5, but not 1.55).
     #   @return [Float]
     #
     # @!attribute [rw] rate_increase_criteria
     #   The criteria to initiate the increase in rate of rollout for a job.
-    #
-    #   AWS IoT supports up to one digit after the decimal (for example,
-    #   1.5, but not 1.55).
     #   @return [Types::RateIncreaseCriteria]
     #
     class ExponentialRolloutRate < Struct.new(
@@ -7490,6 +7627,7 @@ module Aws::IoT
     #         role_arn: "AwsArn", # required
     #         delivery_stream_name: "DeliveryStreamName", # required
     #         separator: "FirehoseSeparator",
+    #         batch_mode: false,
     #       }
     #
     # @!attribute [rw] role_arn
@@ -7507,10 +7645,25 @@ module Aws::IoT
     #   (tab), '\\r\\n' (Windows newline), ',' (comma).
     #   @return [String]
     #
+    # @!attribute [rw] batch_mode
+    #   Whether to deliver the Kinesis Data Firehose stream as a batch by
+    #   using [ `PutRecordBatch` ][1]. The default value is `false`.
+    #
+    #   When `batchMode` is `true` and the rule's SQL statement evaluates
+    #   to an Array, each Array element forms one record in the [
+    #   `PutRecordBatch` ][1] request. The resulting array can't have more
+    #   than 500 records.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/firehose/latest/APIReference/API_PutRecordBatch.html
+    #   @return [Boolean]
+    #
     class FirehoseAction < Struct.new(
       :role_arn,
       :delivery_stream_name,
-      :separator)
+      :separator,
+      :batch_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8355,6 +8508,7 @@ module Aws::IoT
     #       {
     #         channel_arn: "AwsArn",
     #         channel_name: "ChannelName",
+    #         batch_mode: false,
     #         role_arn: "AwsArn",
     #       }
     #
@@ -8368,6 +8522,20 @@ module Aws::IoT
     #   sent.
     #   @return [String]
     #
+    # @!attribute [rw] batch_mode
+    #   Whether to process the action as a batch. The default value is
+    #   `false`.
+    #
+    #   When `batchMode` is `true` and the rule SQL statement evaluates to
+    #   an Array, each Array element is delivered as a separate message when
+    #   passed by [ `BatchPutMessage` ][1] to the AWS IoT Analytics channel.
+    #   The resulting array can't have more than 100 messages.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_BatchPutMessage.html
+    #   @return [Boolean]
+    #
     # @!attribute [rw] role_arn
     #   The ARN of the role which has a policy that grants IoT Analytics
     #   permission to send message data via IoT Analytics
@@ -8377,6 +8545,7 @@ module Aws::IoT
     class IotAnalyticsAction < Struct.new(
       :channel_arn,
       :channel_name,
+      :batch_mode,
       :role_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -8390,6 +8559,7 @@ module Aws::IoT
     #       {
     #         input_name: "InputName", # required
     #         message_id: "MessageId",
+    #         batch_mode: false,
     #         role_arn: "AwsArn", # required
     #       }
     #
@@ -8398,9 +8568,31 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] message_id
-    #   \[Optional\] Use this to ensure that only one input (message) with a
-    #   given messageId will be processed by an AWS IoT Events detector.
+    #   The ID of the message. The default `messageId` is a new UUID value.
+    #
+    #   When `batchMode` is `true`, you can't specify a `messageId`--a new
+    #   UUID value will be assigned.
+    #
+    #   Assign a value to this property to ensure that only one input
+    #   (message) with a given `messageId` will be processed by an AWS IoT
+    #   Events detector.
     #   @return [String]
+    #
+    # @!attribute [rw] batch_mode
+    #   Whether to process the event actions as a batch. The default value
+    #   is `false`.
+    #
+    #   When `batchMode` is `true`, you can't specify a `messageId`.
+    #
+    #   When `batchMode` is `true` and the rule SQL statement evaluates to
+    #   an Array, each Array element is treated as a separate message when
+    #   it's sent to AWS IoT Events by calling [ `BatchPutMessage` ][1].
+    #   The resulting array can't have more than 10 messages.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchPutMessage.html
+    #   @return [Boolean]
     #
     # @!attribute [rw] role_arn
     #   The ARN of the role that grants AWS IoT permission to send an input
@@ -8411,6 +8603,7 @@ module Aws::IoT
     class IotEventsAction < Struct.new(
       :input_name,
       :message_id,
+      :batch_mode,
       :role_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -8551,6 +8744,20 @@ module Aws::IoT
     #   set to `TIMED_OUT`.
     #   @return [Types::TimeoutConfig]
     #
+    # @!attribute [rw] namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #   @return [String]
+    #
     class Job < Struct.new(
       :job_arn,
       :job_id,
@@ -8568,7 +8775,8 @@ module Aws::IoT
       :last_updated_at,
       :completed_at,
       :job_process_details,
-      :timeout_config)
+      :timeout_config,
+      :namespace_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9391,7 +9599,7 @@ module Aws::IoT
     #
     # @!attribute [rw] start_time
     #   The beginning of the time period. Audit information is retained for
-    #   a limited time (180 days). Requesting a start time prior to what is
+    #   a limited time (90 days). Requesting a start time prior to what is
     #   retained results in an "InvalidRequestException".
     #   @return [Time]
     #
@@ -9506,7 +9714,9 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -9531,8 +9741,8 @@ module Aws::IoT
     #   @return [Array<Types::GroupNameAndArn>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListBillingGroupsResponse < Struct.new(
@@ -9880,6 +10090,7 @@ module Aws::IoT
     #       {
     #         thing_name: "ThingName", # required
     #         status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, TIMED_OUT, REJECTED, REMOVED, CANCELED
+    #         namespace_id: "NamespaceId",
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -9893,6 +10104,20 @@ module Aws::IoT
     #   specified status.
     #   @return [String]
     #
+    # @!attribute [rw] namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per request.
     #   @return [Integer]
@@ -9904,6 +10129,7 @@ module Aws::IoT
     class ListJobExecutionsForThingRequest < Struct.new(
       :thing_name,
       :status,
+      :namespace_id,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -9936,6 +10162,7 @@ module Aws::IoT
     #         next_token: "NextToken",
     #         thing_group_name: "ThingGroupName",
     #         thing_group_id: "ThingGroupId",
+    #         namespace_id: "NamespaceId",
     #       }
     #
     # @!attribute [rw] status
@@ -9970,13 +10197,28 @@ module Aws::IoT
     #   group.
     #   @return [String]
     #
+    # @!attribute [rw] namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #   @return [String]
+    #
     class ListJobsRequest < Struct.new(
       :status,
       :target_selection,
       :max_results,
       :next_token,
       :thing_group_name,
-      :thing_group_id)
+      :thing_group_id,
+      :namespace_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10345,7 +10587,9 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -10371,8 +10615,8 @@ module Aws::IoT
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListPrincipalThingsResponse < Struct.new(
@@ -10703,7 +10947,9 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     class ListTagsForResourceRequest < Struct.new(
@@ -10718,8 +10964,8 @@ module Aws::IoT
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListTagsForResourceResponse < Struct.new(
@@ -10832,7 +11078,9 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -10852,8 +11100,8 @@ module Aws::IoT
     #   @return [Array<Types::GroupNameAndArn>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListThingGroupsForThingResponse < Struct.new(
@@ -10875,7 +11123,9 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -10911,8 +11161,8 @@ module Aws::IoT
     #   @return [Array<Types::GroupNameAndArn>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results. Will not be returned
-    #   if operation has returned all results.
+    #   The token to use to get the next set of results. Will not be
+    #   returned if operation has returned all results.
     #   @return [String]
     #
     class ListThingGroupsResponse < Struct.new(
@@ -10928,14 +11178,28 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
     #         thing_name: "ThingName", # required
     #       }
+    #
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this operation.
+    #   @return [Integer]
     #
     # @!attribute [rw] thing_name
     #   The name of the thing.
     #   @return [String]
     #
     class ListThingPrincipalsRequest < Struct.new(
+      :next_token,
+      :max_results,
       :thing_name)
       SENSITIVE = []
       include Aws::Structure
@@ -10947,8 +11211,14 @@ module Aws::IoT
     #   The principals associated with the thing.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
+    #   @return [String]
+    #
     class ListThingPrincipalsResponse < Struct.new(
-      :principals)
+      :principals,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10972,7 +11242,9 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -10997,8 +11269,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListThingRegistrationTaskReportsResponse < Struct.new(
@@ -11019,7 +11291,9 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -11043,8 +11317,8 @@ module Aws::IoT
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListThingRegistrationTasksResponse < Struct.new(
@@ -11066,7 +11340,9 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -11117,7 +11393,9 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -11137,8 +11415,8 @@ module Aws::IoT
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results. Will not be returned
-    #   if operation has returned all results.
+    #   The token to use to get the next set of results. Will not be
+    #   returned if operation has returned all results.
     #   @return [String]
     #
     class ListThingsInBillingGroupResponse < Struct.new(
@@ -11168,7 +11446,9 @@ module Aws::IoT
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -11189,8 +11469,8 @@ module Aws::IoT
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListThingsInThingGroupResponse < Struct.new(
@@ -11214,7 +11494,9 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -11250,8 +11532,8 @@ module Aws::IoT
     #   @return [Array<Types::ThingAttribute>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results. Will not be returned
-    #   if operation has returned all results.
+    #   The token to use to get the next set of results. Will not be
+    #   returned if operation has returned all results.
     #   @return [String]
     #
     class ListThingsResponse < Struct.new(
@@ -11274,7 +11556,9 @@ module Aws::IoT
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     class ListTopicRuleDestinationsRequest < Struct.new(
@@ -11289,7 +11573,8 @@ module Aws::IoT
     #   @return [Array<Types::TopicRuleDestinationSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token to retrieve the next set of results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListTopicRuleDestinationsResponse < Struct.new(
@@ -11320,7 +11605,9 @@ module Aws::IoT
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token used to retrieve the next value.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] rule_disabled
@@ -11343,7 +11630,8 @@ module Aws::IoT
     #   @return [Array<Types::TopicRuleListItem>]
     #
     # @!attribute [rw] next_token
-    #   A token used to retrieve the next value.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListTopicRulesResponse < Struct.new(
@@ -11368,8 +11656,9 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -11389,8 +11678,8 @@ module Aws::IoT
     #   @return [Array<Types::LogTargetConfiguration>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
     #   @return [String]
     #
     class ListV2LoggingLevelsResponse < Struct.new(
@@ -11837,6 +12126,7 @@ module Aws::IoT
     #
     #       {
     #         file_name: "FileName",
+    #         file_type: 1,
     #         file_version: "OTAUpdateFileVersion",
     #         file_location: {
     #           stream: {
@@ -11886,6 +12176,11 @@ module Aws::IoT
     #   The name of the file.
     #   @return [String]
     #
+    # @!attribute [rw] file_type
+    #   An integer value you can include in the job document to allow your
+    #   devices to identify the type of file received from the cloud.
+    #   @return [Integer]
+    #
     # @!attribute [rw] file_version
     #   The file version.
     #   @return [String]
@@ -11904,6 +12199,7 @@ module Aws::IoT
     #
     class OTAUpdateFile < Struct.new(
       :file_name,
+      :file_type,
       :file_version,
       :file_location,
       :code_signing,
@@ -12877,6 +13173,7 @@ module Aws::IoT
     #                 role_arn: "AwsArn", # required
     #                 delivery_stream_name: "DeliveryStreamName", # required
     #                 separator: "FirehoseSeparator",
+    #                 batch_mode: false,
     #               },
     #               cloudwatch_metric: {
     #                 role_arn: "AwsArn", # required
@@ -12910,11 +13207,13 @@ module Aws::IoT
     #               iot_analytics: {
     #                 channel_arn: "AwsArn",
     #                 channel_name: "ChannelName",
+    #                 batch_mode: false,
     #                 role_arn: "AwsArn",
     #               },
     #               iot_events: {
     #                 input_name: "InputName", # required
     #                 message_id: "MessageId",
+    #                 batch_mode: false,
     #                 role_arn: "AwsArn", # required
     #               },
     #               iot_site_wise: {
@@ -12947,6 +13246,21 @@ module Aws::IoT
     #                 execution_name_prefix: "ExecutionNamePrefix",
     #                 state_machine_name: "StateMachineName", # required
     #                 role_arn: "AwsArn", # required
+    #               },
+    #               timestream: {
+    #                 role_arn: "AwsArn", # required
+    #                 database_name: "TimestreamDatabaseName", # required
+    #                 table_name: "TimestreamTableName", # required
+    #                 dimensions: [ # required
+    #                   {
+    #                     name: "TimestreamDimensionName", # required
+    #                     value: "TimestreamDimensionValue", # required
+    #                   },
+    #                 ],
+    #                 timestamp: {
+    #                   value: "TimestreamTimestampValue", # required
+    #                   unit: "TimestreamTimestampUnit", # required
+    #                 },
     #               },
     #               http: {
     #                 url: "Url", # required
@@ -13021,6 +13335,7 @@ module Aws::IoT
     #               role_arn: "AwsArn", # required
     #               delivery_stream_name: "DeliveryStreamName", # required
     #               separator: "FirehoseSeparator",
+    #               batch_mode: false,
     #             },
     #             cloudwatch_metric: {
     #               role_arn: "AwsArn", # required
@@ -13054,11 +13369,13 @@ module Aws::IoT
     #             iot_analytics: {
     #               channel_arn: "AwsArn",
     #               channel_name: "ChannelName",
+    #               batch_mode: false,
     #               role_arn: "AwsArn",
     #             },
     #             iot_events: {
     #               input_name: "InputName", # required
     #               message_id: "MessageId",
+    #               batch_mode: false,
     #               role_arn: "AwsArn", # required
     #             },
     #             iot_site_wise: {
@@ -13091,6 +13408,21 @@ module Aws::IoT
     #               execution_name_prefix: "ExecutionNamePrefix",
     #               state_machine_name: "StateMachineName", # required
     #               role_arn: "AwsArn", # required
+    #             },
+    #             timestream: {
+    #               role_arn: "AwsArn", # required
+    #               database_name: "TimestreamDatabaseName", # required
+    #               table_name: "TimestreamTableName", # required
+    #               dimensions: [ # required
+    #                 {
+    #                   name: "TimestreamDimensionName", # required
+    #                   value: "TimestreamDimensionValue", # required
+    #                 },
+    #               ],
+    #               timestamp: {
+    #                 value: "TimestreamTimestampValue", # required
+    #                 unit: "TimestreamTimestampUnit", # required
+    #               },
     #             },
     #             http: {
     #               url: "Url", # required
@@ -13333,7 +13665,12 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   The object key.
+    #   The object key. For more information, see [Actions, resources, and
+    #   condition keys for Amazon S3][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html
     #   @return [String]
     #
     # @!attribute [rw] canned_acl
@@ -13757,7 +14094,11 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Use Sig V4 authorization.
+    # For more information, see [Signature Version 4 signing process][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @note When making an API call, you may pass SigV4Authorization
     #   data as a hash:
@@ -15071,6 +15412,136 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The Timestream rule action writes attributes (measures) from an MQTT
+    # message into an Amazon Timestream table. For more information, see the
+    # [Timestream][1] topic rule action documentation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/timestream-rule-action.html
+    #
+    # @note When making an API call, you may pass TimestreamAction
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "AwsArn", # required
+    #         database_name: "TimestreamDatabaseName", # required
+    #         table_name: "TimestreamTableName", # required
+    #         dimensions: [ # required
+    #           {
+    #             name: "TimestreamDimensionName", # required
+    #             value: "TimestreamDimensionValue", # required
+    #           },
+    #         ],
+    #         timestamp: {
+    #           value: "TimestreamTimestampValue", # required
+    #           unit: "TimestreamTimestampUnit", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role that grants permission to write to the Amazon
+    #   Timestream database table.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of an Amazon Timestream database.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the database table into which to write the measure
+    #   records.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimensions
+    #   Metadata attributes of the time series that are written in each
+    #   measure record.
+    #   @return [Array<Types::TimestreamDimension>]
+    #
+    # @!attribute [rw] timestamp
+    #   Specifies an application-defined value to replace the default value
+    #   assigned to the Timestream record's timestamp in the `time` column.
+    #
+    #   You can use this property to specify the value and the precision of
+    #   the Timestream record's timestamp. You can specify a value from the
+    #   message payload or a value computed by a substitution template.
+    #
+    #   If omitted, the topic rule action assigns the timestamp, in
+    #   milliseconds, at the time it processed the rule.
+    #   @return [Types::TimestreamTimestamp]
+    #
+    class TimestreamAction < Struct.new(
+      :role_arn,
+      :database_name,
+      :table_name,
+      :dimensions,
+      :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata attributes of the time series that are written in each
+    # measure record.
+    #
+    # @note When making an API call, you may pass TimestreamDimension
+    #   data as a hash:
+    #
+    #       {
+    #         name: "TimestreamDimensionName", # required
+    #         value: "TimestreamDimensionValue", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The metadata dimension name. This is the name of the column in the
+    #   Amazon Timestream database table record.
+    #
+    #   Dimensions cannot be named: `measure_name`, `measure_value`, or
+    #   `time`. These names are reserved. Dimension names cannot start with
+    #   `ts_` or `measure_value` and they cannot contain the colon (`:`)
+    #   character.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value to write in this column of the database record.
+    #   @return [String]
+    #
+    class TimestreamDimension < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes how to interpret an application-defined timestamp value from
+    # an MQTT message payload and the precision of that value.
+    #
+    # @note When making an API call, you may pass TimestreamTimestamp
+    #   data as a hash:
+    #
+    #       {
+    #         value: "TimestreamTimestampValue", # required
+    #         unit: "TimestreamTimestampUnit", # required
+    #       }
+    #
+    # @!attribute [rw] value
+    #   An expression that returns a long epoch time value.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The precision of the timestamp value that results from the
+    #   expression described in `value`.
+    #
+    #   Valid values: `SECONDS` \| `MILLISECONDS` \| `MICROSECONDS` \|
+    #   `NANOSECONDS`. The default is `MILLISECONDS`.
+    #   @return [String]
+    #
+    class TimestreamTimestamp < Struct.new(
+      :value,
+      :unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the TLS context to use for the test authorizer request.
     #
     # @note When making an API call, you may pass TlsContext
@@ -15365,6 +15836,7 @@ module Aws::IoT
     #               role_arn: "AwsArn", # required
     #               delivery_stream_name: "DeliveryStreamName", # required
     #               separator: "FirehoseSeparator",
+    #               batch_mode: false,
     #             },
     #             cloudwatch_metric: {
     #               role_arn: "AwsArn", # required
@@ -15398,11 +15870,13 @@ module Aws::IoT
     #             iot_analytics: {
     #               channel_arn: "AwsArn",
     #               channel_name: "ChannelName",
+    #               batch_mode: false,
     #               role_arn: "AwsArn",
     #             },
     #             iot_events: {
     #               input_name: "InputName", # required
     #               message_id: "MessageId",
+    #               batch_mode: false,
     #               role_arn: "AwsArn", # required
     #             },
     #             iot_site_wise: {
@@ -15435,6 +15909,21 @@ module Aws::IoT
     #               execution_name_prefix: "ExecutionNamePrefix",
     #               state_machine_name: "StateMachineName", # required
     #               role_arn: "AwsArn", # required
+    #             },
+    #             timestream: {
+    #               role_arn: "AwsArn", # required
+    #               database_name: "TimestreamDatabaseName", # required
+    #               table_name: "TimestreamTableName", # required
+    #               dimensions: [ # required
+    #                 {
+    #                   name: "TimestreamDimensionName", # required
+    #                   value: "TimestreamDimensionValue", # required
+    #                 },
+    #               ],
+    #               timestamp: {
+    #                 value: "TimestreamTimestampValue", # required
+    #                 unit: "TimestreamTimestampUnit", # required
+    #               },
     #             },
     #             http: {
     #               url: "Url", # required
@@ -15509,6 +15998,7 @@ module Aws::IoT
     #             role_arn: "AwsArn", # required
     #             delivery_stream_name: "DeliveryStreamName", # required
     #             separator: "FirehoseSeparator",
+    #             batch_mode: false,
     #           },
     #           cloudwatch_metric: {
     #             role_arn: "AwsArn", # required
@@ -15542,11 +16032,13 @@ module Aws::IoT
     #           iot_analytics: {
     #             channel_arn: "AwsArn",
     #             channel_name: "ChannelName",
+    #             batch_mode: false,
     #             role_arn: "AwsArn",
     #           },
     #           iot_events: {
     #             input_name: "InputName", # required
     #             message_id: "MessageId",
+    #             batch_mode: false,
     #             role_arn: "AwsArn", # required
     #           },
     #           iot_site_wise: {
@@ -15580,6 +16072,21 @@ module Aws::IoT
     #             state_machine_name: "StateMachineName", # required
     #             role_arn: "AwsArn", # required
     #           },
+    #           timestream: {
+    #             role_arn: "AwsArn", # required
+    #             database_name: "TimestreamDatabaseName", # required
+    #             table_name: "TimestreamTableName", # required
+    #             dimensions: [ # required
+    #               {
+    #                 name: "TimestreamDimensionName", # required
+    #                 value: "TimestreamDimensionValue", # required
+    #               },
+    #             ],
+    #             timestamp: {
+    #               value: "TimestreamTimestampValue", # required
+    #               unit: "TimestreamTimestampUnit", # required
+    #             },
+    #           },
     #           http: {
     #             url: "Url", # required
     #             confirmation_url: "Url",
@@ -15606,7 +16113,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-sql-reference.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -16427,6 +16934,7 @@ module Aws::IoT
     #         timeout_config: {
     #           in_progress_timeout_in_minutes: 1,
     #         },
+    #         namespace_id: "NamespaceId",
     #       }
     #
     # @!attribute [rw] job_id
@@ -16457,13 +16965,28 @@ module Aws::IoT
     #   automatically set to `TIMED_OUT`.
     #   @return [Types::TimeoutConfig]
     #
+    # @!attribute [rw] namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #   @return [String]
+    #
     class UpdateJobRequest < Struct.new(
       :job_id,
       :description,
       :presigned_url_config,
       :job_executions_rollout_config,
       :abort_config,
-      :timeout_config)
+      :timeout_config,
+      :namespace_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16773,12 +17296,12 @@ module Aws::IoT
     #   @return [Hash<String,Types::AlertTarget>]
     #
     # @!attribute [rw] additional_metrics_to_retain
+    #   *Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2
+    #   instead.*
+    #
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the profile's `behaviors`, but
     #   it is also retained for any metric specified here.
-    #
-    #   **Note:** This API field is deprecated. Please use
-    #   UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
     #   @return [Array<String>]
     #
     # @!attribute [rw] additional_metrics_to_retain_v2
@@ -16849,12 +17372,12 @@ module Aws::IoT
     #   @return [Hash<String,Types::AlertTarget>]
     #
     # @!attribute [rw] additional_metrics_to_retain
+    #   *Please use
+    #   UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead.*
+    #
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the security profile's
     #   `behaviors`, but it is also retained for any metric specified here.
-    #
-    #   **Note:** This API field is deprecated. Please use
-    #   UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead.
     #   @return [Array<String>]
     #
     # @!attribute [rw] additional_metrics_to_retain_v2

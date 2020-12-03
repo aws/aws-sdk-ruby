@@ -120,15 +120,15 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about an account that's designated as a
-    # delegated administrator of Amazon Macie for an AWS organization.
+    # Provides information about the delegated Amazon Macie administrator
+    # account for an AWS organization.
     #
     # @!attribute [rw] account_id
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of an account as a delegated administrator of
-    #   Amazon Macie for an AWS organization.
+    #   The current status of an account as the delegated Amazon Macie
+    #   administrator account for an AWS organization.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AdminAccount AWS API Documentation
@@ -350,12 +350,16 @@ module Aws::Macie2
     # @!attribute [rw] publicly_writable
     #   @return [Integer]
     #
+    # @!attribute [rw] unknown
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketCountByEffectivePermission AWS API Documentation
     #
     class BucketCountByEffectivePermission < Struct.new(
       :publicly_accessible,
       :publicly_readable,
-      :publicly_writable)
+      :publicly_writable,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -394,12 +398,16 @@ module Aws::Macie2
     # @!attribute [rw] not_shared
     #   @return [Integer]
     #
+    # @!attribute [rw] unknown
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketCountBySharedAccessType AWS API Documentation
     #
     class BucketCountBySharedAccessType < Struct.new(
       :external,
       :internal,
-      :not_shared)
+      :not_shared,
+      :unknown)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -511,6 +519,12 @@ module Aws::Macie2
     # @!attribute [rw] classifiable_size_in_bytes
     #   @return [Integer]
     #
+    # @!attribute [rw] job_details
+    #   Specifies whether any one-time or recurring classification jobs are
+    #   configured to analyze data in an S3 bucket, and, if so, the details
+    #   of the job that ran most recently.
+    #   @return [Types::JobDetails]
+    #
     # @!attribute [rw] last_updated
     #   @return [Time]
     #
@@ -577,6 +591,7 @@ module Aws::Macie2
       :bucket_name,
       :classifiable_object_count,
       :classifiable_size_in_bytes,
+      :job_details,
       :last_updated,
       :object_count,
       :object_count_by_encryption_type,
@@ -680,6 +695,32 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Specifies the location of an occurrence of sensitive data in a
+    # Microsoft Excel workbook, CSV file, or TSV file.
+    #
+    # @!attribute [rw] cell_reference
+    #   @return [String]
+    #
+    # @!attribute [rw] column
+    #   @return [Integer]
+    #
+    # @!attribute [rw] column_name
+    #   @return [String]
+    #
+    # @!attribute [rw] row
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Cell AWS API Documentation
+    #
+    class Cell < Struct.new(
+      :cell_reference,
+      :column,
+      :column_name,
+      :row)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about a sensitive data finding, including the
     # classification job that produced the finding.
     #
@@ -693,9 +734,9 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] result
-    #   Provides detailed information about a sensitive data finding,
-    #   including the types and number of occurrences of the sensitive data
-    #   that was found.
+    #   Provides the details of a sensitive data finding, including the
+    #   types, number of occurrences, and locations of the sensitive data
+    #   that was detected.
     #   @return [Types::ClassificationResult]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ClassificationDetails AWS API Documentation
@@ -737,14 +778,17 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides detailed information about a sensitive data finding,
-    # including the types and number of occurrences of the sensitive data
-    # that was found.
+    # Provides the details of a sensitive data finding, including the types,
+    # number of occurrences, and locations of the sensitive data that was
+    # detected.
+    #
+    # @!attribute [rw] additional_occurrences
+    #   @return [Boolean]
     #
     # @!attribute [rw] custom_data_identifiers
-    #   Provides information about the number of occurrences of the data
-    #   that produced a sensitive data finding, and the custom data
-    #   identifiers that detected the data for the finding.
+    #   Provides information about custom data identifiers that produced a
+    #   sensitive data finding, and the number of occurrences of the data
+    #   that they detected for the finding.
     #   @return [Types::CustomDataIdentifiers]
     #
     # @!attribute [rw] mime_type
@@ -765,6 +809,7 @@ module Aws::Macie2
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ClassificationResult AWS API Documentation
     #
     class ClassificationResult < Struct.new(
+      :additional_occurrences,
       :custom_data_identifiers,
       :mime_type,
       :sensitive_data,
@@ -806,10 +851,10 @@ module Aws::Macie2
     end
 
     # Specifies the scope, schedule, and other settings for a classification
-    # job. You can't delete or change the settings for a classification job
-    # after you create it. This helps ensure that you have an immutable
-    # history of sensitive data findings and discovery results for data
-    # privacy and protection audits or investigations.
+    # job. You can't change any settings for a classification job after you
+    # create it. This helps ensure that you have an immutable history of
+    # sensitive data findings and discovery results for data privacy and
+    # protection audits or investigations.
     #
     # @note When making an API call, you may pass CreateClassificationJobRequest
     #   data as a hash:
@@ -1058,6 +1103,7 @@ module Aws::Macie2
     #           criterion: {
     #             "__string" => {
     #               eq: ["__string"],
+    #               eq_exact_match: ["__string"],
     #               gt: 1,
     #               gte: 1,
     #               lt: 1,
@@ -1262,6 +1308,7 @@ module Aws::Macie2
     #
     #       {
     #         eq: ["__string"],
+    #         eq_exact_match: ["__string"],
     #         gt: 1,
     #         gte: 1,
     #         lt: 1,
@@ -1270,6 +1317,9 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] eq
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] eq_exact_match
     #   @return [Array<String>]
     #
     # @!attribute [rw] gt
@@ -1291,6 +1341,7 @@ module Aws::Macie2
     #
     class CriterionAdditionalProperties < Struct.new(
       :eq,
+      :eq_exact_match,
       :gt,
       :gte,
       :lt,
@@ -1329,9 +1380,9 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about the number of occurrences of the data that
-    # produced a sensitive data finding, and the custom data identifiers
-    # that detected the data for the finding.
+    # Provides information about custom data identifiers that produced a
+    # sensitive data finding, and the number of occurrences of the data that
+    # they detected for the finding.
     #
     # @!attribute [rw] detections
     #   Provides information about custom data identifiers that produced a
@@ -1352,8 +1403,8 @@ module Aws::Macie2
     end
 
     # Provides information about a custom data identifier that produced a
-    # sensitive data finding, and the number of occurrences of the data that
-    # it detected for the finding.
+    # sensitive data finding, and the sensitive data that it detected for
+    # the finding.
     #
     # @!attribute [rw] arn
     #   @return [String]
@@ -1364,12 +1415,19 @@ module Aws::Macie2
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] occurrences
+    #   Provides the location of 1-15 occurrences of sensitive data that was
+    #   detected by managed data identifiers or a custom data identifier and
+    #   produced a sensitive data finding.
+    #   @return [Types::Occurrences]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CustomDetection AWS API Documentation
     #
     class CustomDetection < Struct.new(
       :arn,
       :count,
-      :name)
+      :name,
+      :occurrences)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1419,11 +1477,17 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about sensitive data that was detected by managed
-    # data identifiers and produced a sensitive data finding.
+    # Provides information about a type of sensitive data that was detected
+    # by managed data identifiers and produced a sensitive data finding.
     #
     # @!attribute [rw] count
     #   @return [Integer]
+    #
+    # @!attribute [rw] occurrences
+    #   Provides the location of 1-15 occurrences of sensitive data that was
+    #   detected by managed data identifiers or a custom data identifier and
+    #   produced a sensitive data finding.
+    #   @return [Types::Occurrences]
     #
     # @!attribute [rw] type
     #   @return [String]
@@ -1432,6 +1496,7 @@ module Aws::Macie2
     #
     class DefaultDetection < Struct.new(
       :count,
+      :occurrences,
       :type)
       SENSITIVE = []
       include Aws::Structure
@@ -1655,12 +1720,20 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] job_status
-    #   The current status of a classification job. Possible values are:
+    #   The status of a classification job. Possible values are:
     #   @return [String]
     #
     # @!attribute [rw] job_type
     #   The schedule for running a classification job. Valid values are:
     #   @return [String]
+    #
+    # @!attribute [rw] last_run_error_status
+    #   Specifies whether any account- or bucket-level access errors
+    #   occurred when a classification job ran. For example, the job is
+    #   configured to analyze data for a member account that was suspended,
+    #   or the job is configured to analyze an S3 bucket that Amazon Macie
+    #   isn't allowed to access.
+    #   @return [Types::LastRunErrorStatus]
     #
     # @!attribute [rw] last_run_time
     #   @return [Time]
@@ -1690,6 +1763,14 @@ module Aws::Macie2
     #   findings filter, or member account.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] user_paused_details
+    #   Provides information about when a classification job was paused and
+    #   when it will expire and be cancelled if it isn't resumed. This
+    #   object is present only if a job's current status (jobStatus) is
+    #   USER\_PAUSED. The information in this object applies only to a job
+    #   that was paused while it had a status of RUNNING.
+    #   @return [Types::UserPausedDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DescribeClassificationJobResponse AWS API Documentation
     #
     class DescribeClassificationJobResponse < Struct.new(
@@ -1702,13 +1783,15 @@ module Aws::Macie2
       :job_id,
       :job_status,
       :job_type,
+      :last_run_error_status,
       :last_run_time,
       :name,
       :s3_job_definition,
       :sampling_percentage,
       :schedule_frequency,
       :statistics,
-      :tags)
+      :tags,
+      :user_paused_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1864,9 +1947,9 @@ module Aws::Macie2
     #
     class EnableMacieResponse < Aws::EmptyStructure; end
 
-    # Specifies an account to designate as a delegated administrator of
-    # Amazon Macie for an AWS organization. To submit this request, you must
-    # be a user of the master account for the AWS organization.
+    # Specifies an account to designate as a delegated Amazon Macie
+    # administrator account for an AWS organization. To submit this request,
+    # you must be a user of the management account for the AWS organization.
     #
     # @note When making an API call, you may pass EnableOrganizationAdminAccountRequest
     #   data as a hash:
@@ -1931,7 +2014,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about a finding.
+    # Provides the details of a finding.
     #
     # @!attribute [rw] account_id
     #   @return [String]
@@ -1981,15 +2064,21 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] severity
-    #   Provides the numeric score and textual representation of a severity
-    #   value.
+    #   Provides the numerical and qualitative representations of a
+    #   finding's severity.
     #   @return [Types::Severity]
     #
     # @!attribute [rw] title
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of finding. Valid values are:
+    #   The type of finding. For details about each type, see [Types of
+    #   Amazon Macie findings][1] in the *Amazon Macie User Guide*. Valid
+    #   values are:
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/findings-types.html
     #   @return [String]
     #
     # @!attribute [rw] updated_at
@@ -2080,6 +2169,7 @@ module Aws::Macie2
     #         criterion: {
     #           "__string" => {
     #             eq: ["__string"],
+    #             eq_exact_match: ["__string"],
     #             gt: 1,
     #             gte: 1,
     #             lt: 1,
@@ -2372,6 +2462,7 @@ module Aws::Macie2
     #           criterion: {
     #             "__string" => {
     #               eq: ["__string"],
+    #               eq_exact_match: ["__string"],
     #               gt: 1,
     #               gte: 1,
     #               lt: 1,
@@ -2497,7 +2588,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies one or more findings to retrieve information about.
+    # Specifies one or more findings to retrieve.
     #
     # @note When making an API call, you may pass GetFindingsRequest
     #   data as a hash:
@@ -2515,7 +2606,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] sort_criteria
     #   Specifies criteria for sorting the results of a request for
-    #   information about findings.
+    #   findings.
     #   @return [Types::SortCriteria]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetFindingsRequest AWS API Documentation
@@ -2527,8 +2618,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides the results of a request for information about one or more
-    # findings.
+    # Provides the results of a request for one or more findings.
     #
     # @!attribute [rw] findings
     #   @return [Array<Types::Finding>]
@@ -2978,6 +3068,33 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Specifies whether any one-time or recurring classification jobs are
+    # configured to analyze data in an S3 bucket, and, if so, the details of
+    # the job that ran most recently.
+    #
+    # @!attribute [rw] is_defined_in_job
+    #   @return [String]
+    #
+    # @!attribute [rw] is_monitored_by_job
+    #   @return [String]
+    #
+    # @!attribute [rw] last_job_id
+    #   @return [String]
+    #
+    # @!attribute [rw] last_job_run_time
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/JobDetails AWS API Documentation
+    #
+    class JobDetails < Struct.new(
+      :is_defined_in_job,
+      :is_monitored_by_job,
+      :last_job_id,
+      :last_job_run_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the recurrence pattern for running a classification job.
     #
     # @note When making an API call, you may pass JobScheduleFrequency
@@ -3065,6 +3182,8 @@ module Aws::Macie2
 
     # Specifies one or more property- and tag-based conditions that define
     # criteria for including or excluding objects from a classification job.
+    # If you specify more than one condition, Amazon Macie uses an AND
+    # operator to join the conditions.
     #
     # @note When making an API call, you may pass JobScopingBlock
     #   data as a hash:
@@ -3116,15 +3235,31 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] job_status
-    #   The current status of a classification job. Possible values are:
+    #   The status of a classification job. Possible values are:
     #   @return [String]
     #
     # @!attribute [rw] job_type
     #   The schedule for running a classification job. Valid values are:
     #   @return [String]
     #
+    # @!attribute [rw] last_run_error_status
+    #   Specifies whether any account- or bucket-level access errors
+    #   occurred when a classification job ran. For example, the job is
+    #   configured to analyze data for a member account that was suspended,
+    #   or the job is configured to analyze an S3 bucket that Amazon Macie
+    #   isn't allowed to access.
+    #   @return [Types::LastRunErrorStatus]
+    #
     # @!attribute [rw] name
     #   @return [String]
+    #
+    # @!attribute [rw] user_paused_details
+    #   Provides information about when a classification job was paused and
+    #   when it will expire and be cancelled if it isn't resumed. This
+    #   object is present only if a job's current status (jobStatus) is
+    #   USER\_PAUSED. The information in this object applies only to a job
+    #   that was paused while it had a status of RUNNING.
+    #   @return [Types::UserPausedDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/JobSummary AWS API Documentation
     #
@@ -3134,7 +3269,9 @@ module Aws::Macie2
       :job_id,
       :job_status,
       :job_type,
-      :name)
+      :last_run_error_status,
+      :name,
+      :user_paused_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3154,6 +3291,26 @@ module Aws::Macie2
     class KeyValuePair < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies whether any account- or bucket-level access errors occurred
+    # when a classification job ran. For example, the job is configured to
+    # analyze data for a member account that was suspended, or the job is
+    # configured to analyze an S3 bucket that Amazon Macie isn't allowed to
+    # access.
+    #
+    # @!attribute [rw] code
+    #   Specifies whether any account- or bucket-level access errors
+    #   occurred during the run of a one-time classification job or the most
+    #   recent run of a recurring classification job. Possible values are:
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/LastRunErrorStatus AWS API Documentation
+    #
+    class LastRunErrorStatus < Struct.new(
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3329,6 +3486,7 @@ module Aws::Macie2
     #           criterion: {
     #             "__string" => {
     #               eq: ["__string"],
+    #               eq_exact_match: ["__string"],
     #               gt: 1,
     #               gte: 1,
     #               lt: 1,
@@ -3358,7 +3516,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] sort_criteria
     #   Specifies criteria for sorting the results of a request for
-    #   information about findings.
+    #   findings.
     #   @return [Types::SortCriteria]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListFindingsRequest AWS API Documentation
@@ -3599,8 +3757,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about the accounts that are designated as
-    # delegated administrators of Amazon Macie for an AWS organization.
+    # Provides information about the delegated Amazon Macie administrator
+    # accounts for an AWS organization.
     #
     # @!attribute [rw] admin_accounts
     #   @return [Array<Types::AdminAccount>]
@@ -3774,6 +3932,77 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Provides the location of 1-15 occurrences of sensitive data that was
+    # detected by managed data identifiers or a custom data identifier and
+    # produced a sensitive data finding.
+    #
+    # @!attribute [rw] cells
+    #   Specifies the location of occurrences of sensitive data in a
+    #   Microsoft Excel workbook, CSV file, or TSV file.
+    #   @return [Array<Types::Cell>]
+    #
+    # @!attribute [rw] line_ranges
+    #   Provides details about the location of occurrences of sensitive data
+    #   in an Adobe Portable Document Format file, Microsoft Word document,
+    #   or non-binary text file.
+    #   @return [Array<Types::Range>]
+    #
+    # @!attribute [rw] offset_ranges
+    #   Provides details about the location of occurrences of sensitive data
+    #   in an Adobe Portable Document Format file, Microsoft Word document,
+    #   or non-binary text file.
+    #   @return [Array<Types::Range>]
+    #
+    # @!attribute [rw] pages
+    #   Specifies the location of occurrences of sensitive data in an Adobe
+    #   Portable Document Format file.
+    #   @return [Array<Types::Page>]
+    #
+    # @!attribute [rw] records
+    #   Specifies the location of occurrences of sensitive data in an Apache
+    #   Parquet file.
+    #   @return [Array<Types::Record>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Occurrences AWS API Documentation
+    #
+    class Occurrences < Struct.new(
+      :cells,
+      :line_ranges,
+      :offset_ranges,
+      :pages,
+      :records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the location of an occurrence of sensitive data in an Adobe
+    # Portable Document Format file.
+    #
+    # @!attribute [rw] line_range
+    #   Provides details about the location of an occurrence of sensitive
+    #   data in an Adobe Portable Document Format file, Microsoft Word
+    #   document, or non-binary text file.
+    #   @return [Types::Range]
+    #
+    # @!attribute [rw] offset_range
+    #   Provides details about the location of an occurrence of sensitive
+    #   data in an Adobe Portable Document Format file, Microsoft Word
+    #   document, or non-binary text file.
+    #   @return [Types::Range]
+    #
+    # @!attribute [rw] page_number
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Page AWS API Documentation
+    #
+    class Page < Struct.new(
+      :line_range,
+      :offset_range,
+      :page_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides the details of a policy finding.
     #
     # @!attribute [rw] action
@@ -3845,6 +4074,47 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Provides details about the location of an occurrence of sensitive data
+    # in an Adobe Portable Document Format file, Microsoft Word document, or
+    # non-binary text file.
+    #
+    # @!attribute [rw] end
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_column
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Range AWS API Documentation
+    #
+    class Range < Struct.new(
+      :end,
+      :start,
+      :start_column)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the location of an occurrence of sensitive data in an Apache
+    # Avro object container or Apache Parquet file.
+    #
+    # @!attribute [rw] json_path
+    #   @return [String]
+    #
+    # @!attribute [rw] record_index
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Record AWS API Documentation
+    #
+    class Record < Struct.new(
+      :json_path,
+      :record_index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about settings that define whether one or more
     # objects in an S3 bucket are replicated to S3 buckets for other AWS
     # accounts and, if so, which accounts.
@@ -3911,7 +4181,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] default_server_side_encryption
     #   Provides information about the server-side encryption settings for
-    #   an S3 bucket or object.
+    #   an S3 bucket or S3 object.
     #   @return [Types::ServerSideEncryption]
     #
     # @!attribute [rw] name
@@ -3946,8 +4216,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies which S3 buckets contain the objects that a classification
-    # job analyzes.
+    # Specifies which AWS account owns the S3 buckets that a classification
+    # job analyzes, and the buckets to analyze for the account.
     #
     # @note When making an API call, you may pass S3BucketDefinitionForJob
     #   data as a hash:
@@ -4087,7 +4357,8 @@ module Aws::Macie2
     # @!attribute [rw] scoping
     #   Specifies one or more property- and tag-based conditions that refine
     #   the scope of a classification job. These conditions define criteria
-    #   that determine which objects a job analyzes.
+    #   that determine which objects a job analyzes. Exclude conditions take
+    #   precedence over include conditions.
     #   @return [Types::Scoping]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/S3JobDefinition AWS API Documentation
@@ -4124,14 +4395,14 @@ module Aws::Macie2
     #
     # @!attribute [rw] server_side_encryption
     #   Provides information about the server-side encryption settings for
-    #   an S3 bucket or object.
+    #   an S3 bucket or S3 object.
     #   @return [Types::ServerSideEncryption]
     #
     # @!attribute [rw] size
     #   @return [Integer]
     #
     # @!attribute [rw] storage_class
-    #   The storage class of the S3 bucket or object. Possible values are:
+    #   The storage class of the S3 object. Possible values are:
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4164,7 +4435,8 @@ module Aws::Macie2
 
     # Specifies one or more property- and tag-based conditions that refine
     # the scope of a classification job. These conditions define criteria
-    # that determine which objects a job analyzes.
+    # that determine which objects a job analyzes. Exclude conditions take
+    # precedence over include conditions.
     #
     # @note When making an API call, you may pass Scoping
     #   data as a hash:
@@ -4219,13 +4491,15 @@ module Aws::Macie2
     # @!attribute [rw] excludes
     #   Specifies one or more property- and tag-based conditions that define
     #   criteria for including or excluding objects from a classification
-    #   job.
+    #   job. If you specify more than one condition, Amazon Macie uses an
+    #   AND operator to join the conditions.
     #   @return [Types::JobScopingBlock]
     #
     # @!attribute [rw] includes
     #   Specifies one or more property- and tag-based conditions that define
     #   criteria for including or excluding objects from a classification
-    #   job.
+    #   job. If you specify more than one condition, Amazon Macie uses an
+    #   AND operator to join the conditions.
     #   @return [Types::JobScopingBlock]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Scoping AWS API Documentation
@@ -4237,8 +4511,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about the category, type, and number of
-    # occurrences of sensitive data that produced a finding.
+    # Provides information about the category, types, and occurrences of
+    # sensitive data that produced a sensitive data finding.
     #
     # @!attribute [rw] category
     #   The category of sensitive data that was detected and produced the
@@ -4266,11 +4540,11 @@ module Aws::Macie2
     end
 
     # Provides information about the server-side encryption settings for an
-    # S3 bucket or object.
+    # S3 bucket or S3 object.
     #
     # @!attribute [rw] encryption_type
-    #   The type of server-side encryption that's used to encrypt objects
-    #   in the S3 bucket. Valid values are:
+    #   The type of server-side encryption that's used to encrypt an S3
+    #   object or objects in an S3 bucket. Valid values are:
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_id
@@ -4390,11 +4664,11 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides the numeric score and textual representation of a severity
-    # value.
+    # Provides the numerical and qualitative representations of a finding's
+    # severity.
     #
     # @!attribute [rw] description
-    #   The textual representation of the finding's severity. Possible
+    #   The qualitative representation of the finding's severity. Possible
     #   values are:
     #   @return [String]
     #
@@ -4444,8 +4718,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies criteria for sorting the results of a request for
-    # information about findings.
+    # Specifies criteria for sorting the results of a request for findings.
     #
     # @note When making an API call, you may pass SortCriteria
     #   data as a hash:
@@ -4569,7 +4842,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies a tag key and value, as a pair, to use in a tag-based
+    # Specifies a tag key or tag key and value pair to use in a tag-based
     # condition for a classification job.
     #
     # @note When making an API call, you may pass TagValuePair
@@ -4715,21 +4988,21 @@ module Aws::Macie2
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # Cancels a classification job.
+    # Changes the status of a classification job.
     #
     # @note When making an API call, you may pass UpdateClassificationJobRequest
     #   data as a hash:
     #
     #       {
     #         job_id: "__string", # required
-    #         job_status: "RUNNING", # required, accepts RUNNING, PAUSED, CANCELLED, COMPLETE, IDLE
+    #         job_status: "RUNNING", # required, accepts RUNNING, PAUSED, CANCELLED, COMPLETE, IDLE, USER_PAUSED
     #       }
     #
     # @!attribute [rw] job_id
     #   @return [String]
     #
     # @!attribute [rw] job_status
-    #   The current status of a classification job. Possible values are:
+    #   The status of a classification job. Possible values are:
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateClassificationJobRequest AWS API Documentation
@@ -4757,6 +5030,7 @@ module Aws::Macie2
     #           criterion: {
     #             "__string" => {
     #               eq: ["__string"],
+    #               eq_exact_match: ["__string"],
     #               gt: 1,
     #               gte: 1,
     #               lt: 1,
@@ -5131,6 +5405,31 @@ module Aws::Macie2
       :account_id,
       :arn,
       :principal_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about when a classification job was paused and
+    # when it will expire and be cancelled if it isn't resumed. This object
+    # is present only if a job's current status (jobStatus) is
+    # USER\_PAUSED. The information in this object applies only to a job
+    # that was paused while it had a status of RUNNING.
+    #
+    # @!attribute [rw] job_expires_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_imminent_expiration_health_event_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] job_paused_at
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UserPausedDetails AWS API Documentation
+    #
+    class UserPausedDetails < Struct.new(
+      :job_expires_at,
+      :job_imminent_expiration_health_event_arn,
+      :job_paused_at)
       SENSITIVE = []
       include Aws::Structure
     end

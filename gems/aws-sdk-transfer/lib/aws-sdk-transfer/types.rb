@@ -48,6 +48,7 @@ module Aws::Transfer
     #           subnet_ids: ["SubnetId"],
     #           vpc_endpoint_id: "VpcEndpointId",
     #           vpc_id: "VpcId",
+    #           security_group_ids: ["SecurityGroupId"],
     #         },
     #         endpoint_type: "PUBLIC", # accepts PUBLIC, VPC, VPC_ENDPOINT
     #         host_key: "HostKey",
@@ -109,18 +110,18 @@ module Aws::Transfer
     #
     # @!attribute [rw] endpoint_details
     #   The virtual private cloud (VPC) endpoint settings that are
-    #   configured for your file transfer protocol-enabled server. When you
-    #   host your endpoint within your VPC, you can make it accessible only
-    #   to resources within your VPC, or you can attach Elastic IPs and make
-    #   it accessible to clients over the internet. Your VPC's default
-    #   security groups are automatically assigned to your endpoint.
+    #   configured for your server. When you host your endpoint within your
+    #   VPC, you can make it accessible only to resources within your VPC,
+    #   or you can attach Elastic IPs and make it accessible to clients over
+    #   the internet. Your VPC's default security groups are automatically
+    #   assigned to your endpoint.
     #   @return [Types::EndpointDetails]
     #
     # @!attribute [rw] endpoint_type
-    #   The type of VPC endpoint that you want your file transfer
-    #   protocol-enabled server to connect to. You can choose to connect to
-    #   the public internet or a VPC endpoint. With a VPC endpoint, you can
-    #   restrict access to your server and resources only within your VPC.
+    #   The type of VPC endpoint that you want your server to connect to.
+    #   You can choose to connect to the public internet or a VPC endpoint.
+    #   With a VPC endpoint, you can restrict access to your server and
+    #   resources only within your VPC.
     #
     #   <note markdown="1"> It is recommended that you use `VPC` as the `EndpointType`. With
     #   this endpoint type, you have the option to directly associate up to
@@ -157,13 +158,13 @@ module Aws::Transfer
     #   @return [Types::IdentityProviderDetails]
     #
     # @!attribute [rw] identity_provider_type
-    #   Specifies the mode of authentication for a file transfer
-    #   protocol-enabled server. The default value is `SERVICE_MANAGED`,
-    #   which allows you to store and access user credentials within the AWS
-    #   Transfer Family service. Use the `API_GATEWAY` value to integrate
-    #   with an identity provider of your choosing. The `API_GATEWAY`
-    #   setting requires you to provide an API Gateway endpoint URL to call
-    #   for authentication using the `IdentityProviderDetails` parameter.
+    #   Specifies the mode of authentication for a server. The default value
+    #   is `SERVICE_MANAGED`, which allows you to store and access user
+    #   credentials within the AWS Transfer Family service. Use the
+    #   `API_GATEWAY` value to integrate with an identity provider of your
+    #   choosing. The `API_GATEWAY` setting requires you to provide an API
+    #   Gateway endpoint URL to call for authentication using the
+    #   `IdentityProviderDetails` parameter.
     #   @return [String]
     #
     # @!attribute [rw] logging_role
@@ -185,9 +186,8 @@ module Aws::Transfer
     #   * `FTP` (File Transfer Protocol): Unencrypted file transfer
     #
     #   <note markdown="1"> If you select `FTPS`, you must choose a certificate stored in AWS
-    #   Certificate Manager (ACM) which will be used to identify your file
-    #   transfer protocol-enabled server when clients connect to it over
-    #   FTPS.
+    #   Certificate Manager (ACM) which will be used to identify your server
+    #   when clients connect to it over FTPS.
     #
     #    If `Protocol` includes either `FTP` or `FTPS`, then the
     #   `EndpointType` must be `VPC` and the `IdentityProviderType` must be
@@ -209,8 +209,7 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Key-value pairs that can be used to group and search for file
-    #   transfer protocol-enabled servers.
+    #   Key-value pairs that can be used to group and search for servers.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateServerRequest AWS API Documentation
@@ -231,8 +230,7 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] server_id
-    #   The service-assigned ID of the file transfer protocol-enabled server
-    #   that is created.
+    #   The service-assigned ID of the server that is created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateServerResponse AWS API Documentation
@@ -270,7 +268,7 @@ module Aws::Transfer
     #
     # @!attribute [rw] home_directory
     #   The landing directory (folder) for a user when they log in to the
-    #   file transfer protocol-enabled server using the client.
+    #   server using the client.
     #
     #   An example is <i>
     #   <code>your-Amazon-S3-bucket-name&gt;/home/username</code> </i>.
@@ -278,12 +276,11 @@ module Aws::Transfer
     #
     # @!attribute [rw] home_directory_type
     #   The type of landing directory (folder) you want your users' home
-    #   directory to be when they log into the file transfer
-    #   protocol-enabled server. If you set it to `PATH`, the user will see
-    #   the absolute Amazon S3 bucket paths as is in their file transfer
-    #   protocol clients. If you set it `LOGICAL`, you will need to provide
-    #   mappings in the `HomeDirectoryMappings` for how you want to make
-    #   Amazon S3 paths visible to your users.
+    #   directory to be when they log into the server. If you set it to
+    #   `PATH`, the user will see the absolute Amazon S3 bucket paths as is
+    #   in their file transfer protocol clients. If you set it `LOGICAL`,
+    #   you will need to provide mappings in the `HomeDirectoryMappings` for
+    #   how you want to make Amazon S3 paths visible to your users.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
@@ -348,20 +345,18 @@ module Aws::Transfer
     #   bucket. The policies attached to this role will determine the level
     #   of access you want to provide your users when transferring files
     #   into and out of your Amazon S3 bucket or buckets. The IAM role
-    #   should also contain a trust relationship that allows the file
-    #   transfer protocol-enabled server to access your resources when
-    #   servicing your users' transfer requests.
+    #   should also contain a trust relationship that allows the server to
+    #   access your resources when servicing your users' transfer requests.
     #   @return [String]
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server instance. This is the specific server that
-    #   you added your user to.
+    #   A system-assigned unique identifier for a server instance. This is
+    #   the specific server that you added your user to.
     #   @return [String]
     #
     # @!attribute [rw] ssh_public_key_body
     #   The public portion of the Secure Shell (SSH) key used to
-    #   authenticate the user to the file transfer protocol-enabled server.
+    #   authenticate the user to the server.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -370,12 +365,12 @@ module Aws::Transfer
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] user_name
-    #   A unique string that identifies a user and is associated with a file
-    #   transfer protocol-enabled server as specified by the `ServerId`.
-    #   This user name must be a minimum of 3 and a maximum of 100
-    #   characters long. The following are valid characters: a-z, A-Z, 0-9,
-    #   underscore '\_', hyphen '-', period '.', and at sign '@'.
-    #   The user name can't start with a hyphen, period, and at sign.
+    #   A unique string that identifies a user and is associated with a as
+    #   specified by the `ServerId`. This user name must be a minimum of 3
+    #   and a maximum of 100 characters long. The following are valid
+    #   characters: a-z, A-Z, 0-9, underscore '\_', hyphen '-', period
+    #   '.', and at sign '@'. The user name can't start with a hyphen,
+    #   period, or at sign.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateUserRequest AWS API Documentation
@@ -395,13 +390,12 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] server_id
-    #   The ID of the file transfer protocol-enabled server that the user is
-    #   attached to.
+    #   The ID of the server that the user is attached to.
     #   @return [String]
     #
     # @!attribute [rw] user_name
     #   A unique string that identifies a user account associated with a
-    #   file transfer protocol-enabled server.
+    #   server.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateUserResponse AWS API Documentation
@@ -421,8 +415,7 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   A unique system-assigned identifier for a file transfer
-    #   protocol-enabled server instance.
+    #   A unique system-assigned identifier for a server instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteServerRequest AWS API Documentation
@@ -475,13 +468,13 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server instance that has the user assigned to it.
+    #   A system-assigned unique identifier for a server instance that has
+    #   the user assigned to it.
     #   @return [String]
     #
     # @!attribute [rw] user_name
     #   A unique string that identifies a user that is being deleted from a
-    #   file transfer protocol-enabled server.
+    #   server.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteUserRequest AWS API Documentation
@@ -533,8 +526,7 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server.
+    #   A system-assigned unique identifier for a server.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeServerRequest AWS API Documentation
@@ -546,8 +538,8 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] server
-    #   An array containing the properties of a file transfer
-    #   protocol-enabled server with the `ServerID` you specified.
+    #   An array containing the properties of a server with the `ServerID`
+    #   you specified.
     #   @return [Types::DescribedServer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeServerResponse AWS API Documentation
@@ -567,15 +559,14 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server that has this user assigned.
+    #   A system-assigned unique identifier for a server that has this user
+    #   assigned.
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   The name of the user assigned to one or more file transfer
-    #   protocol-enabled servers. User names are part of the sign-in
-    #   credentials to use the AWS Transfer Family service and perform file
-    #   transfer tasks.
+    #   The name of the user assigned to one or more servers. User names are
+    #   part of the sign-in credentials to use the AWS Transfer Family
+    #   service and perform file transfer tasks.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeUserRequest AWS API Documentation
@@ -588,8 +579,8 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server that has this user assigned.
+    #   A system-assigned unique identifier for a server that has this user
+    #   assigned.
     #   @return [String]
     #
     # @!attribute [rw] user
@@ -663,8 +654,7 @@ module Aws::Transfer
     # that was specified.
     #
     # @!attribute [rw] arn
-    #   Specifies the unique Amazon Resource Name (ARN) of the file transfer
-    #   protocol-enabled server.
+    #   Specifies the unique Amazon Resource Name (ARN) of the server.
     #   @return [String]
     #
     # @!attribute [rw] certificate
@@ -674,14 +664,13 @@ module Aws::Transfer
     #
     # @!attribute [rw] endpoint_details
     #   Specifies the virtual private cloud (VPC) endpoint settings that you
-    #   configured for your file transfer protocol-enabled server.
+    #   configured for your server.
     #   @return [Types::EndpointDetails]
     #
     # @!attribute [rw] endpoint_type
-    #   Defines the type of endpoint that your file transfer
-    #   protocol-enabled server is connected to. If your server is connected
-    #   to a VPC endpoint, your server isn't accessible over the public
-    #   internet.
+    #   Defines the type of endpoint that your server is connected to. If
+    #   your server is connected to a VPC endpoint, your server isn't
+    #   accessible over the public internet.
     #   @return [String]
     #
     # @!attribute [rw] host_key_fingerprint
@@ -693,23 +682,23 @@ module Aws::Transfer
     # @!attribute [rw] identity_provider_details
     #   Specifies information to call a customer-supplied authentication
     #   API. This field is not populated when the `IdentityProviderType` of
-    #   a file transfer protocol-enabled server is `SERVICE_MANAGED`.
+    #   a server is `SERVICE_MANAGED`.
     #   @return [Types::IdentityProviderDetails]
     #
     # @!attribute [rw] identity_provider_type
     #   Specifies the mode of authentication method enabled for this
     #   service. A value of `SERVICE_MANAGED` means that you are using this
-    #   file transfer protocol-enabled server to store and access user
-    #   credentials within the service. A value of `API_GATEWAY` indicates
-    #   that you have integrated an API Gateway endpoint that will be
-    #   invoked for authenticating your user into the service.
+    #   server to store and access user credentials within the service. A
+    #   value of `API_GATEWAY` indicates that you have integrated an API
+    #   Gateway endpoint that will be invoked for authenticating your user
+    #   into the service.
     #   @return [String]
     #
     # @!attribute [rw] logging_role
     #   Specifies the AWS Identity and Access Management (IAM) role that
-    #   allows a file transfer protocol-enabled server to turn on Amazon
-    #   CloudWatch logging for Amazon S3 events. When set, user activity can
-    #   be viewed in your CloudWatch logs.
+    #   allows a server to turn on Amazon CloudWatch logging for Amazon S3
+    #   events. When set, user activity can be viewed in your CloudWatch
+    #   logs.
     #   @return [String]
     #
     # @!attribute [rw] protocols
@@ -732,16 +721,15 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] server_id
-    #   Specifies the unique system-assigned identifier for a file transfer
-    #   protocol-enabled server that you instantiate.
+    #   Specifies the unique system-assigned identifier for a server that
+    #   you instantiate.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   Specifies the condition of a file transfer protocol-enabled server
-    #   for the server that was described. A value of `ONLINE` indicates
-    #   that the server can accept jobs and transfer files. A `State` value
-    #   of `OFFLINE` means that the server cannot perform file transfer
-    #   operations.
+    #   Specifies the condition of a server for the server that was
+    #   described. A value of `ONLINE` indicates that the server can accept
+    #   jobs and transfer files. A `State` value of `OFFLINE` means that the
+    #   server cannot perform file transfer operations.
     #
     #   The states of `STARTING` and `STOPPING` indicate that the server is
     #   in an intermediate state, either not fully able to respond, or not
@@ -751,13 +739,12 @@ module Aws::Transfer
     #
     # @!attribute [rw] tags
     #   Specifies the key-value pairs that you can use to search for and
-    #   group file transfer protocol-enabled servers that were assigned to
-    #   the server that was described.
+    #   group servers that were assigned to the server that was described.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] user_count
-    #   Specifies the number of users that are assigned to a file transfer
-    #   protocol-enabled server you specified with the `ServerId`.
+    #   Specifies the number of users that are assigned to a server you
+    #   specified with the `ServerId`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedServer AWS API Documentation
@@ -830,9 +817,8 @@ module Aws::Transfer
     #   Amazon S3 bucket. The policies attached to this role will determine
     #   the level of access you want to provide your users when transferring
     #   files into and out of your Amazon S3 bucket or buckets. The IAM role
-    #   should also contain a trust relationship that allows a file transfer
-    #   protocol-enabled server to access your resources when servicing your
-    #   users' transfer requests.
+    #   should also contain a trust relationship that allows a server to
+    #   access your resources when servicing your users' transfer requests.
     #   @return [String]
     #
     # @!attribute [rw] ssh_public_keys
@@ -848,8 +834,7 @@ module Aws::Transfer
     # @!attribute [rw] user_name
     #   Specifies the name of the user that was requested to be described.
     #   User names are used for authentication purposes. This is the string
-    #   that will be used by your user when they log in to your file
-    #   transfer protocol-enabled server.
+    #   that will be used by your user when they log in to your server.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedUser AWS API Documentation
@@ -882,23 +867,24 @@ module Aws::Transfer
     #         subnet_ids: ["SubnetId"],
     #         vpc_endpoint_id: "VpcEndpointId",
     #         vpc_id: "VpcId",
+    #         security_group_ids: ["SecurityGroupId"],
     #       }
     #
     # @!attribute [rw] address_allocation_ids
     #   A list of address allocation IDs that are required to attach an
-    #   Elastic IP address to your file transfer protocol-enabled server's
-    #   endpoint. This is only valid in the `UpdateServer` API.
+    #   Elastic IP address to your server's endpoint.
     #
-    #   <note markdown="1"> This property can only be use when `EndpointType` is set to `VPC`.
+    #   <note markdown="1"> This property can only be set when `EndpointType` is set to `VPC`
+    #   and it is only valid in the `UpdateServer` API.
     #
     #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_ids
-    #   A list of subnet IDs that are required to host your file transfer
-    #   protocol-enabled server endpoint in your VPC.
+    #   A list of subnet IDs that are required to host your server endpoint
+    #   in your VPC.
     #
-    #   <note markdown="1"> This property can only be used when `EndpointType` is set to `VPC`.
+    #   <note markdown="1"> This property can only be set when `EndpointType` is set to `VPC`.
     #
     #    </note>
     #   @return [Array<String>]
@@ -906,20 +892,32 @@ module Aws::Transfer
     # @!attribute [rw] vpc_endpoint_id
     #   The ID of the VPC endpoint.
     #
-    #   <note markdown="1"> This property can only be used when `EndpointType` is set to
+    #   <note markdown="1"> This property can only be set when `EndpointType` is set to
     #   `VPC_ENDPOINT`.
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
-    #   The VPC ID of the VPC in which a file transfer protocol-enabled
-    #   server's endpoint will be hosted.
+    #   The VPC ID of the VPC in which a server's endpoint will be hosted.
     #
-    #   <note markdown="1"> This property can only be used when `EndpointType` is set to `VPC`.
+    #   <note markdown="1"> This property can only be set when `EndpointType` is set to `VPC`.
     #
     #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of security groups IDs that are available to attach to your
+    #   server's endpoint.
+    #
+    #   <note markdown="1"> This property can only be set when `EndpointType` is set to `VPC`.
+    #
+    #    You can only edit the `SecurityGroupIds` property in the
+    #   `UpdateServer` API and only if you are changing the `EndpointType`
+    #   from `PUBLIC` or `VPC_ENDPOINT` to `VPC`.
+    #
+    #    </note>
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/EndpointDetails AWS API Documentation
     #
@@ -927,7 +925,8 @@ module Aws::Transfer
       :address_allocation_ids,
       :subnet_ids,
       :vpc_endpoint_id,
-      :vpc_id)
+      :vpc_id,
+      :security_group_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1001,8 +1000,7 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server.
+    #   A system-assigned unique identifier for a server.
     #   @return [String]
     #
     # @!attribute [rw] ssh_public_key_body
@@ -1010,8 +1008,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   The name of the user account that is assigned to one or more file
-    #   transfer protocol-enabled servers.
+    #   The name of the user account that is assigned to one or more
+    #   servers.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ImportSshPublicKeyRequest AWS API Documentation
@@ -1024,14 +1022,12 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # Identifies the user, the file transfer protocol-enabled server they
-    # belong to, and the identifier of the SSH public key associated with
-    # that user. A user can have more than one key on each server that they
-    # are associated with.
+    # Identifies the user, the server they belong to, and the identifier of
+    # the SSH public key associated with that user. A user can have more
+    # than one key on each server that they are associated with.
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server.
+    #   A system-assigned unique identifier for a server.
     #   @return [String]
     #
     # @!attribute [rw] ssh_public_key_id
@@ -1150,15 +1146,15 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] max_results
-    #   Specifies the number of file transfer protocol-enabled servers to
-    #   return as a response to the `ListServers` query.
+    #   Specifies the number of servers to return as a response to the
+    #   `ListServers` query.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   When additional results are obtained from the `ListServers` command,
     #   a `NextToken` parameter is returned in the output. You can then pass
     #   the `NextToken` parameter in a subsequent command to continue
-    #   listing additional file transfer protocol-enabled servers.
+    #   listing additional servers.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListServersRequest AWS API Documentation
@@ -1174,11 +1170,11 @@ module Aws::Transfer
     #   When you can get additional results from the `ListServers`
     #   operation, a `NextToken` parameter is returned in the output. In a
     #   following command, you can pass in the `NextToken` parameter to
-    #   continue listing additional file transfer protocol-enabled servers.
+    #   continue listing additional servers.
     #   @return [String]
     #
     # @!attribute [rw] servers
-    #   An array of file transfer protocol-enabled servers that were listed.
+    #   An array of servers that were listed.
     #   @return [Array<Types::ListedServer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListServersResponse AWS API Documentation
@@ -1276,8 +1272,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server that has users assigned to it.
+    #   A system-assigned unique identifier for a server that has users
+    #   assigned to it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListUsersRequest AWS API Documentation
@@ -1298,8 +1294,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server that the users are assigned to.
+    #   A system-assigned unique identifier for a server that the users are
+    #   assigned to.
     #   @return [String]
     #
     # @!attribute [rw] users
@@ -1321,42 +1317,38 @@ module Aws::Transfer
     # specified.
     #
     # @!attribute [rw] arn
-    #   Specifies the unique Amazon Resource Name (ARN) for a file transfer
-    #   protocol-enabled server to be listed.
+    #   Specifies the unique Amazon Resource Name (ARN) for a server to be
+    #   listed.
     #   @return [String]
     #
     # @!attribute [rw] identity_provider_type
     #   Specifies the authentication method used to validate a user for a
-    #   file transfer protocol-enabled server that was specified. This can
-    #   include Secure Shell (SSH), user name and password combinations, or
-    #   your own custom authentication method. Valid values include
-    #   `SERVICE_MANAGED` or `API_GATEWAY`.
+    #   server that was specified. This can include Secure Shell (SSH), user
+    #   name and password combinations, or your own custom authentication
+    #   method. Valid values include `SERVICE_MANAGED` or `API_GATEWAY`.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_type
-    #   Specifies the type of VPC endpoint that your file transfer
-    #   protocol-enabled server is connected to. If your server is connected
-    #   to a VPC endpoint, your server isn't accessible over the public
-    #   internet.
+    #   Specifies the type of VPC endpoint that your server is connected to.
+    #   If your server is connected to a VPC endpoint, your server isn't
+    #   accessible over the public internet.
     #   @return [String]
     #
     # @!attribute [rw] logging_role
     #   Specifies the AWS Identity and Access Management (IAM) role that
-    #   allows a file transfer protocol-enabled server to turn on Amazon
-    #   CloudWatch logging.
+    #   allows a server to turn on Amazon CloudWatch logging.
     #   @return [String]
     #
     # @!attribute [rw] server_id
-    #   Specifies the unique system assigned identifier for a file transfer
-    #   protocol-enabled servers that were listed.
+    #   Specifies the unique system assigned identifier for the servers that
+    #   were listed.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   Specifies the condition of a file transfer protocol-enabled server
-    #   for the server that was described. A value of `ONLINE` indicates
-    #   that the server can accept jobs and transfer files. A `State` value
-    #   of `OFFLINE` means that the server cannot perform file transfer
-    #   operations.
+    #   Specifies the condition of a server for the server that was
+    #   described. A value of `ONLINE` indicates that the server can accept
+    #   jobs and transfer files. A `State` value of `OFFLINE` means that the
+    #   server cannot perform file transfer operations.
     #
     #   The states of `STARTING` and `STOPPING` indicate that the server is
     #   in an intermediate state, either not fully able to respond, or not
@@ -1365,8 +1357,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] user_count
-    #   Specifies the number of users that are assigned to a file transfer
-    #   protocol-enabled server you specified with the `ServerId`.
+    #   Specifies the number of users that are assigned to a server you
+    #   specified with the `ServerId`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListedServer AWS API Documentation
@@ -1533,8 +1525,7 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server that you start.
+    #   A system-assigned unique identifier for a server that you start.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/StartServerRequest AWS API Documentation
@@ -1553,8 +1544,7 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server that you stopped.
+    #   A system-assigned unique identifier for a server that you stopped.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/StopServerRequest AWS API Documentation
@@ -1643,9 +1633,8 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   A system-assigned identifier for a specific file transfer
-    #   protocol-enabled server. That server's user authentication method
-    #   is tested with a user name and password.
+    #   A system-assigned identifier for a specific server. That server's
+    #   user authentication method is tested with a user name and password.
     #   @return [String]
     #
     # @!attribute [rw] server_protocol
@@ -1765,6 +1754,7 @@ module Aws::Transfer
     #           subnet_ids: ["SubnetId"],
     #           vpc_endpoint_id: "VpcEndpointId",
     #           vpc_id: "VpcId",
+    #           security_group_ids: ["SecurityGroupId"],
     #         },
     #         endpoint_type: "PUBLIC", # accepts PUBLIC, VPC, VPC_ENDPOINT
     #         host_key: "HostKey",
@@ -1820,18 +1810,17 @@ module Aws::Transfer
     #
     # @!attribute [rw] endpoint_details
     #   The virtual private cloud (VPC) endpoint settings that are
-    #   configured for your file transfer protocol-enabled server. With a
-    #   VPC endpoint, you can restrict access to your server to resources
-    #   only within your VPC. To control incoming internet traffic, you will
-    #   need to associate one or more Elastic IP addresses with your
-    #   server's endpoint.
+    #   configured for your server. With a VPC endpoint, you can restrict
+    #   access to your server to resources only within your VPC. To control
+    #   incoming internet traffic, you will need to associate one or more
+    #   Elastic IP addresses with your server's endpoint.
     #   @return [Types::EndpointDetails]
     #
     # @!attribute [rw] endpoint_type
-    #   The type of endpoint that you want your file transfer
-    #   protocol-enabled server to connect to. You can choose to connect to
-    #   the public internet or a VPC endpoint. With a VPC endpoint, you can
-    #   restrict access to your server and resources only within your VPC.
+    #   The type of endpoint that you want your server to connect to. You
+    #   can choose to connect to the public internet or a VPC endpoint. With
+    #   a VPC endpoint, you can restrict access to your server and resources
+    #   only within your VPC.
     #
     #   <note markdown="1"> It is recommended that you use `VPC` as the `EndpointType`. With
     #   this endpoint type, you have the option to directly associate up to
@@ -1848,9 +1837,8 @@ module Aws::Transfer
     #   my-new-server-key`.
     #
     #   If you aren't planning to migrate existing users from an existing
-    #   file transfer protocol-enabled server to a new server, don't update
-    #   the host key. Accidentally changing a server's host key can be
-    #   disruptive.
+    #   server to a new server, don't update the host key. Accidentally
+    #   changing a server's host key can be disruptive.
     #
     #   For more information, see [Change the host key for your SFTP-enabled
     #   server][1] in the *AWS Transfer Family User Guide*.
@@ -1908,9 +1896,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server instance that the user account is assigned
-    #   to.
+    #   A system-assigned unique identifier for a server instance that the
+    #   user account is assigned to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateServerRequest AWS API Documentation
@@ -1930,8 +1917,8 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server that the user account is assigned to.
+    #   A system-assigned unique identifier for a server that the user
+    #   account is assigned to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateServerResponse AWS API Documentation
@@ -1962,20 +1949,18 @@ module Aws::Transfer
     #
     # @!attribute [rw] home_directory
     #   Specifies the landing directory (folder) for a user when they log in
-    #   to the file transfer protocol-enabled server using their file
-    #   transfer protocol client.
+    #   to the server using their file transfer protocol client.
     #
     #   An example is `your-Amazon-S3-bucket-name>/home/username`.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_type
     #   The type of landing directory (folder) you want your users' home
-    #   directory to be when they log into the file transfer
-    #   protocol-enabled server. If you set it to `PATH`, the user will see
-    #   the absolute Amazon S3 bucket paths as is in their file transfer
-    #   protocol clients. If you set it `LOGICAL`, you will need to provide
-    #   mappings in the `HomeDirectoryMappings` for how you want to make
-    #   Amazon S3 paths visible to your users.
+    #   directory to be when they log into the server. If you set it to
+    #   `PATH`, the user will see the absolute Amazon S3 bucket paths as is
+    #   in their file transfer protocol clients. If you set it `LOGICAL`,
+    #   you will need to provide mappings in the `HomeDirectoryMappings` for
+    #   how you want to make Amazon S3 paths visible to your users.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
@@ -2040,24 +2025,22 @@ module Aws::Transfer
     #   bucket. The policies attached to this role will determine the level
     #   of access you want to provide your users when transferring files
     #   into and out of your Amazon S3 bucket or buckets. The IAM role
-    #   should also contain a trust relationship that allows the file
-    #   transfer protocol-enabled server to access your resources when
-    #   servicing your users' transfer requests.
+    #   should also contain a trust relationship that allows the server to
+    #   access your resources when servicing your users' transfer requests.
     #   @return [String]
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server instance that the user account is assigned
-    #   to.
+    #   A system-assigned unique identifier for a server instance that the
+    #   user account is assigned to.
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   A unique string that identifies a user and is associated with a file
-    #   transfer protocol-enabled server as specified by the `ServerId`.
-    #   This user name must be a minimum of 3 and a maximum of 100
-    #   characters long. The following are valid characters: a-z, A-Z, 0-9,
-    #   underscore '\_', hyphen '-', period '.', and at sign '@'.
-    #   The user name can't start with a hyphen, period, and at sign.
+    #   A unique string that identifies a user and is associated with a
+    #   server as specified by the `ServerId`. This user name must be a
+    #   minimum of 3 and a maximum of 100 characters long. The following are
+    #   valid characters: a-z, A-Z, 0-9, underscore '\_', hyphen '-',
+    #   period '.', and at sign '@'. The user name can't start with a
+    #   hyphen, period, or at sign.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateUserRequest AWS API Documentation
@@ -2074,19 +2057,17 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # `UpdateUserResponse` returns the user name and file transfer
-    # protocol-enabled server identifier for the request to update a user's
-    # properties.
+    # `UpdateUserResponse` returns the user name and identifier for the
+    # request to update a user's properties.
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server instance that the user account is assigned
-    #   to.
+    #   A system-assigned unique identifier for a server instance that the
+    #   user account is assigned to.
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   The unique identifier for a user that is assigned to a file transfer
-    #   protocol-enabled server instance that was specified in the request.
+    #   The unique identifier for a user that is assigned to a server
+    #   instance that was specified in the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateUserResponse AWS API Documentation

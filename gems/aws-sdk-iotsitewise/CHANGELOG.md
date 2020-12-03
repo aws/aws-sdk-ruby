@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2020-11-24)
+------------------
+
+* Feature - This release adds support for customer managed customer master key (CMK) based encryption in IoT SiteWise.
+
+1.14.0 (2020-11-16)
+------------------
+
+* Feature - This release supports Unicode characters for string operations in formulae computes in SiteWise. For more information, search for SiteWise in Amazon What's new or refer the SiteWise documentation.
+
+1.13.0 (2020-11-06)
+------------------
+
+* Feature - Remove the CreatePresignedPortalUrl API
+
+1.12.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.11.0 (2020-09-21)
+------------------
+
+* Feature - This release supports IAM mode for SiteWise Monitor portals
+
+1.10.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.9.0 (2020-08-25)
 ------------------
 

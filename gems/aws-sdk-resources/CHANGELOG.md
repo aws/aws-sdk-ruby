@@ -1,6 +1,67 @@
 Unreleased Changes
 ------------------
 
+3.90.0 (2020-12-02)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-customerprofiles` gem.
+
+3.89.1 (2020-12-01)
+------------------
+
+* Issue - Remove dependency on the `aws-sdk-profile` gem. This gem will be republished under a different name.
+
+3.89.0 (2020-12-01)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-sagemakerfeaturestoreruntime` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-profile` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-lookoutforvision` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-ecrpublic` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-devopsguru` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-connectcontactlens` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-appintegrationsservice` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-amplifybackend` gem.
+
+3.88.0 (2020-11-24)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mwaa` gem.
+
+3.87.0 (2020-11-17)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-networkfirewall` gem.
+
+3.86.0 (2020-11-12)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-appregistry` gem.
+
+3.85.0 (2020-11-11)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-gluedatabrew` gem.
+
+3.84.0 (2020-09-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-s3outposts` gem.
+
+3.83.0 (2020-09-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-timestreamwrite` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-timestreamquery` gem.
+
 3.82.0 (2020-09-10)
 ------------------
 

@@ -384,17 +384,17 @@ module Aws::Transfer
     #
     # @option params [Types::EndpointDetails] :endpoint_details
     #   The virtual private cloud (VPC) endpoint settings that are configured
-    #   for your file transfer protocol-enabled server. When you host your
-    #   endpoint within your VPC, you can make it accessible only to resources
-    #   within your VPC, or you can attach Elastic IPs and make it accessible
-    #   to clients over the internet. Your VPC's default security groups are
-    #   automatically assigned to your endpoint.
+    #   for your server. When you host your endpoint within your VPC, you can
+    #   make it accessible only to resources within your VPC, or you can
+    #   attach Elastic IPs and make it accessible to clients over the
+    #   internet. Your VPC's default security groups are automatically
+    #   assigned to your endpoint.
     #
     # @option params [String] :endpoint_type
-    #   The type of VPC endpoint that you want your file transfer
-    #   protocol-enabled server to connect to. You can choose to connect to
-    #   the public internet or a VPC endpoint. With a VPC endpoint, you can
-    #   restrict access to your server and resources only within your VPC.
+    #   The type of VPC endpoint that you want your server to connect to. You
+    #   can choose to connect to the public internet or a VPC endpoint. With a
+    #   VPC endpoint, you can restrict access to your server and resources
+    #   only within your VPC.
     #
     #   <note markdown="1"> It is recommended that you use `VPC` as the `EndpointType`. With this
     #   endpoint type, you have the option to directly associate up to three
@@ -427,13 +427,13 @@ module Aws::Transfer
     #   Not required when `IdentityProviderType` is set to `SERVICE_MANAGED`.
     #
     # @option params [String] :identity_provider_type
-    #   Specifies the mode of authentication for a file transfer
-    #   protocol-enabled server. The default value is `SERVICE_MANAGED`, which
-    #   allows you to store and access user credentials within the AWS
-    #   Transfer Family service. Use the `API_GATEWAY` value to integrate with
-    #   an identity provider of your choosing. The `API_GATEWAY` setting
-    #   requires you to provide an API Gateway endpoint URL to call for
-    #   authentication using the `IdentityProviderDetails` parameter.
+    #   Specifies the mode of authentication for a server. The default value
+    #   is `SERVICE_MANAGED`, which allows you to store and access user
+    #   credentials within the AWS Transfer Family service. Use the
+    #   `API_GATEWAY` value to integrate with an identity provider of your
+    #   choosing. The `API_GATEWAY` setting requires you to provide an API
+    #   Gateway endpoint URL to call for authentication using the
+    #   `IdentityProviderDetails` parameter.
     #
     # @option params [String] :logging_role
     #   Allows the service to write your users' activity to your Amazon
@@ -453,8 +453,8 @@ module Aws::Transfer
     #   * `FTP` (File Transfer Protocol): Unencrypted file transfer
     #
     #   <note markdown="1"> If you select `FTPS`, you must choose a certificate stored in AWS
-    #   Certificate Manager (ACM) which will be used to identify your file
-    #   transfer protocol-enabled server when clients connect to it over FTPS.
+    #   Certificate Manager (ACM) which will be used to identify your server
+    #   when clients connect to it over FTPS.
     #
     #    If `Protocol` includes either `FTP` or `FTPS`, then the `EndpointType`
     #   must be `VPC` and the `IdentityProviderType` must be `API_GATEWAY`.
@@ -473,8 +473,7 @@ module Aws::Transfer
     #   server.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Key-value pairs that can be used to group and search for file transfer
-    #   protocol-enabled servers.
+    #   Key-value pairs that can be used to group and search for servers.
     #
     # @return [Types::CreateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -489,6 +488,7 @@ module Aws::Transfer
     #       subnet_ids: ["SubnetId"],
     #       vpc_endpoint_id: "VpcEndpointId",
     #       vpc_id: "VpcId",
+    #       security_group_ids: ["SecurityGroupId"],
     #     },
     #     endpoint_type: "PUBLIC", # accepts PUBLIC, VPC, VPC_ENDPOINT
     #     host_key: "HostKey",
@@ -531,20 +531,19 @@ module Aws::Transfer
     # can be used to group and search for users.
     #
     # @option params [String] :home_directory
-    #   The landing directory (folder) for a user when they log in to the file
-    #   transfer protocol-enabled server using the client.
+    #   The landing directory (folder) for a user when they log in to the
+    #   server using the client.
     #
     #   An example is <i>
     #   <code>your-Amazon-S3-bucket-name&gt;/home/username</code> </i>.
     #
     # @option params [String] :home_directory_type
     #   The type of landing directory (folder) you want your users' home
-    #   directory to be when they log into the file transfer protocol-enabled
-    #   server. If you set it to `PATH`, the user will see the absolute Amazon
-    #   S3 bucket paths as is in their file transfer protocol clients. If you
-    #   set it `LOGICAL`, you will need to provide mappings in the
-    #   `HomeDirectoryMappings` for how you want to make Amazon S3 paths
-    #   visible to your users.
+    #   directory to be when they log into the server. If you set it to
+    #   `PATH`, the user will see the absolute Amazon S3 bucket paths as is in
+    #   their file transfer protocol clients. If you set it `LOGICAL`, you
+    #   will need to provide mappings in the `HomeDirectoryMappings` for how
+    #   you want to make Amazon S3 paths visible to your users.
     #
     # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
     #   Logical directory mappings that specify what Amazon S3 paths and keys
@@ -605,30 +604,28 @@ module Aws::Transfer
     #   bucket. The policies attached to this role will determine the level of
     #   access you want to provide your users when transferring files into and
     #   out of your Amazon S3 bucket or buckets. The IAM role should also
-    #   contain a trust relationship that allows the file transfer
-    #   protocol-enabled server to access your resources when servicing your
-    #   users' transfer requests.
+    #   contain a trust relationship that allows the server to access your
+    #   resources when servicing your users' transfer requests.
     #
     # @option params [required, String] :server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server instance. This is the specific server that you
-    #   added your user to.
+    #   A system-assigned unique identifier for a server instance. This is the
+    #   specific server that you added your user to.
     #
     # @option params [String] :ssh_public_key_body
     #   The public portion of the Secure Shell (SSH) key used to authenticate
-    #   the user to the file transfer protocol-enabled server.
+    #   the user to the server.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs that can be used to group and search for users. Tags
     #   are metadata attached to users for any purpose.
     #
     # @option params [required, String] :user_name
-    #   A unique string that identifies a user and is associated with a file
-    #   transfer protocol-enabled server as specified by the `ServerId`. This
-    #   user name must be a minimum of 3 and a maximum of 100 characters long.
-    #   The following are valid characters: a-z, A-Z, 0-9, underscore '\_',
-    #   hyphen '-', period '.', and at sign '@'. The user name can't
-    #   start with a hyphen, period, and at sign.
+    #   A unique string that identifies a user and is associated with a as
+    #   specified by the `ServerId`. This user name must be a minimum of 3 and
+    #   a maximum of 100 characters long. The following are valid characters:
+    #   a-z, A-Z, 0-9, underscore '\_', hyphen '-', period '.', and at
+    #   sign '@'. The user name can't start with a hyphen, period, or at
+    #   sign.
     #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -678,8 +675,7 @@ module Aws::Transfer
     # No response returns from this operation.
     #
     # @option params [required, String] :server_id
-    #   A unique system-assigned identifier for a file transfer
-    #   protocol-enabled server instance.
+    #   A unique system-assigned identifier for a server instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -742,12 +738,12 @@ module Aws::Transfer
     #  </note>
     #
     # @option params [required, String] :server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server instance that has the user assigned to it.
+    #   A system-assigned unique identifier for a server instance that has the
+    #   user assigned to it.
     #
     # @option params [required, String] :user_name
     #   A unique string that identifies a user that is being deleted from a
-    #   file transfer protocol-enabled server.
+    #   server.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -820,8 +816,7 @@ module Aws::Transfer
     # `EndpointDetails`.
     #
     # @option params [required, String] :server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server.
+    #   A system-assigned unique identifier for a server.
     #
     # @return [Types::DescribeServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -843,6 +838,8 @@ module Aws::Transfer
     #   resp.server.endpoint_details.subnet_ids[0] #=> String
     #   resp.server.endpoint_details.vpc_endpoint_id #=> String
     #   resp.server.endpoint_details.vpc_id #=> String
+    #   resp.server.endpoint_details.security_group_ids #=> Array
+    #   resp.server.endpoint_details.security_group_ids[0] #=> String
     #   resp.server.endpoint_type #=> String, one of "PUBLIC", "VPC", "VPC_ENDPOINT"
     #   resp.server.host_key_fingerprint #=> String
     #   resp.server.identity_provider_details.url #=> String
@@ -875,14 +872,13 @@ module Aws::Transfer
     # associated with the `ServerId` value that was specified.
     #
     # @option params [required, String] :server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server that has this user assigned.
+    #   A system-assigned unique identifier for a server that has this user
+    #   assigned.
     #
     # @option params [required, String] :user_name
-    #   The name of the user assigned to one or more file transfer
-    #   protocol-enabled servers. User names are part of the sign-in
-    #   credentials to use the AWS Transfer Family service and perform file
-    #   transfer tasks.
+    #   The name of the user assigned to one or more servers. User names are
+    #   part of the sign-in credentials to use the AWS Transfer Family service
+    #   and perform file transfer tasks.
     #
     # @return [Types::DescribeUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -933,15 +929,13 @@ module Aws::Transfer
     # the name of the `SshPublicKeyId`.
     #
     # @option params [required, String] :server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server.
+    #   A system-assigned unique identifier for a server.
     #
     # @option params [required, String] :ssh_public_key_body
     #   The public key portion of an SSH key pair.
     #
     # @option params [required, String] :user_name
-    #   The name of the user account that is assigned to one or more file
-    #   transfer protocol-enabled servers.
+    #   The name of the user account that is assigned to one or more servers.
     #
     # @return [Types::ImportSshPublicKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1018,14 +1012,14 @@ module Aws::Transfer
     # with your AWS account.
     #
     # @option params [Integer] :max_results
-    #   Specifies the number of file transfer protocol-enabled servers to
-    #   return as a response to the `ListServers` query.
+    #   Specifies the number of servers to return as a response to the
+    #   `ListServers` query.
     #
     # @option params [String] :next_token
     #   When additional results are obtained from the `ListServers` command, a
     #   `NextToken` parameter is returned in the output. You can then pass the
     #   `NextToken` parameter in a subsequent command to continue listing
-    #   additional file transfer protocol-enabled servers.
+    #   additional servers.
     #
     # @return [Types::ListServersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1127,8 +1121,8 @@ module Aws::Transfer
     #   additional users.
     #
     # @option params [required, String] :server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server that has users assigned to it.
+    #   A system-assigned unique identifier for a server that has users
+    #   assigned to it.
     #
     # @return [Types::ListUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1179,8 +1173,7 @@ module Aws::Transfer
     # No response is returned from this call.
     #
     # @option params [required, String] :server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server that you start.
+    #   A system-assigned unique identifier for a server that you start.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1203,8 +1196,12 @@ module Aws::Transfer
     # `ONLINE` to `OFFLINE`. An `OFFLINE` server cannot accept and process
     # file transfer jobs. Information tied to your server, such as server
     # and user properties, are not affected by stopping your server.
-    # Stopping the server will not reduce or impact your file transfer
-    # protocol endpoint billing.
+    #
+    # <note markdown="1"> Stopping the server will not reduce or impact your file transfer
+    # protocol endpoint billing; you must delete the server to stop being
+    # billed.
+    #
+    #  </note>
     #
     # The state of `STOPPING` indicates that the server is in an
     # intermediate state, either not fully able to respond, or not fully
@@ -1213,8 +1210,7 @@ module Aws::Transfer
     # No response is returned from this call.
     #
     # @option params [required, String] :server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server that you stopped.
+    #   A system-assigned unique identifier for a server that you stopped.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1279,9 +1275,8 @@ module Aws::Transfer
     # ensure that your users can successfully use the service.
     #
     # @option params [required, String] :server_id
-    #   A system-assigned identifier for a specific file transfer
-    #   protocol-enabled server. That server's user authentication method is
-    #   tested with a user name and password.
+    #   A system-assigned identifier for a specific server. That server's
+    #   user authentication method is tested with a user name and password.
     #
     # @option params [String] :server_protocol
     #   The type of file transfer protocol to be tested.
@@ -1417,16 +1412,16 @@ module Aws::Transfer
     #
     # @option params [Types::EndpointDetails] :endpoint_details
     #   The virtual private cloud (VPC) endpoint settings that are configured
-    #   for your file transfer protocol-enabled server. With a VPC endpoint,
-    #   you can restrict access to your server to resources only within your
-    #   VPC. To control incoming internet traffic, you will need to associate
-    #   one or more Elastic IP addresses with your server's endpoint.
+    #   for your server. With a VPC endpoint, you can restrict access to your
+    #   server to resources only within your VPC. To control incoming internet
+    #   traffic, you will need to associate one or more Elastic IP addresses
+    #   with your server's endpoint.
     #
     # @option params [String] :endpoint_type
-    #   The type of endpoint that you want your file transfer protocol-enabled
-    #   server to connect to. You can choose to connect to the public internet
-    #   or a VPC endpoint. With a VPC endpoint, you can restrict access to
-    #   your server and resources only within your VPC.
+    #   The type of endpoint that you want your server to connect to. You can
+    #   choose to connect to the public internet or a VPC endpoint. With a VPC
+    #   endpoint, you can restrict access to your server and resources only
+    #   within your VPC.
     #
     #   <note markdown="1"> It is recommended that you use `VPC` as the `EndpointType`. With this
     #   endpoint type, you have the option to directly associate up to three
@@ -1442,9 +1437,8 @@ module Aws::Transfer
     #   my-new-server-key`.
     #
     #   If you aren't planning to migrate existing users from an existing
-    #   file transfer protocol-enabled server to a new server, don't update
-    #   the host key. Accidentally changing a server's host key can be
-    #   disruptive.
+    #   server to a new server, don't update the host key. Accidentally
+    #   changing a server's host key can be disruptive.
     #
     #   For more information, see [Change the host key for your SFTP-enabled
     #   server][1] in the *AWS Transfer Family User Guide*.
@@ -1496,8 +1490,8 @@ module Aws::Transfer
     #   server.
     #
     # @option params [required, String] :server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server instance that the user account is assigned to.
+    #   A system-assigned unique identifier for a server instance that the
+    #   user account is assigned to.
     #
     # @return [Types::UpdateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1512,6 +1506,7 @@ module Aws::Transfer
     #       subnet_ids: ["SubnetId"],
     #       vpc_endpoint_id: "VpcEndpointId",
     #       vpc_id: "VpcId",
+    #       security_group_ids: ["SecurityGroupId"],
     #     },
     #     endpoint_type: "PUBLIC", # accepts PUBLIC, VPC, VPC_ENDPOINT
     #     host_key: "HostKey",
@@ -1547,19 +1542,17 @@ module Aws::Transfer
     #
     # @option params [String] :home_directory
     #   Specifies the landing directory (folder) for a user when they log in
-    #   to the file transfer protocol-enabled server using their file transfer
-    #   protocol client.
+    #   to the server using their file transfer protocol client.
     #
     #   An example is `your-Amazon-S3-bucket-name>/home/username`.
     #
     # @option params [String] :home_directory_type
     #   The type of landing directory (folder) you want your users' home
-    #   directory to be when they log into the file transfer protocol-enabled
-    #   server. If you set it to `PATH`, the user will see the absolute Amazon
-    #   S3 bucket paths as is in their file transfer protocol clients. If you
-    #   set it `LOGICAL`, you will need to provide mappings in the
-    #   `HomeDirectoryMappings` for how you want to make Amazon S3 paths
-    #   visible to your users.
+    #   directory to be when they log into the server. If you set it to
+    #   `PATH`, the user will see the absolute Amazon S3 bucket paths as is in
+    #   their file transfer protocol clients. If you set it `LOGICAL`, you
+    #   will need to provide mappings in the `HomeDirectoryMappings` for how
+    #   you want to make Amazon S3 paths visible to your users.
     #
     # @option params [Array<Types::HomeDirectoryMapEntry>] :home_directory_mappings
     #   Logical directory mappings that specify what Amazon S3 paths and keys
@@ -1620,21 +1613,20 @@ module Aws::Transfer
     #   bucket. The policies attached to this role will determine the level of
     #   access you want to provide your users when transferring files into and
     #   out of your Amazon S3 bucket or buckets. The IAM role should also
-    #   contain a trust relationship that allows the file transfer
-    #   protocol-enabled server to access your resources when servicing your
-    #   users' transfer requests.
+    #   contain a trust relationship that allows the server to access your
+    #   resources when servicing your users' transfer requests.
     #
     # @option params [required, String] :server_id
-    #   A system-assigned unique identifier for a file transfer
-    #   protocol-enabled server instance that the user account is assigned to.
+    #   A system-assigned unique identifier for a server instance that the
+    #   user account is assigned to.
     #
     # @option params [required, String] :user_name
-    #   A unique string that identifies a user and is associated with a file
-    #   transfer protocol-enabled server as specified by the `ServerId`. This
-    #   user name must be a minimum of 3 and a maximum of 100 characters long.
-    #   The following are valid characters: a-z, A-Z, 0-9, underscore '\_',
-    #   hyphen '-', period '.', and at sign '@'. The user name can't
-    #   start with a hyphen, period, and at sign.
+    #   A unique string that identifies a user and is associated with a server
+    #   as specified by the `ServerId`. This user name must be a minimum of 3
+    #   and a maximum of 100 characters long. The following are valid
+    #   characters: a-z, A-Z, 0-9, underscore '\_', hyphen '-', period
+    #   '.', and at sign '@'. The user name can't start with a hyphen,
+    #   period, or at sign.
     #
     # @return [Types::UpdateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1685,7 +1677,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

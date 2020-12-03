@@ -273,6 +273,19 @@ module Aws::CloudFormation
     #   Descriptive information about the change set.
     #   @return [String]
     #
+    # @!attribute [rw] include_nested_stacks
+    #   Specifies the current setting of `IncludeNestedStacks` for the
+    #   change set.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parent_change_set_id
+    #   The parent change set ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_change_set_id
+    #   The root change set ID.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ChangeSetSummary AWS API Documentation
     #
     class ChangeSetSummary < Struct.new(
@@ -284,7 +297,10 @@ module Aws::CloudFormation
       :status,
       :status_reason,
       :creation_time,
-      :description)
+      :description,
+      :include_nested_stacks,
+      :parent_change_set_id,
+      :root_change_set_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -451,6 +467,7 @@ module Aws::CloudFormation
     #             },
     #           },
     #         ],
+    #         include_nested_stacks: false,
     #       }
     #
     # @!attribute [rw] stack_name
@@ -551,11 +568,10 @@ module Aws::CloudFormation
     #     <note markdown="1"> This capacity does not apply to creating change sets, and
     #     specifying it when creating change sets has no effect.
     #
-    #      Also, change sets do not currently support nested stacks. If you
-    #     want to create a stack from a stack template that contains macros
-    #     *and* nested stacks, you must create or update the stack directly
-    #     from the template using the CreateStack or UpdateStack action, and
-    #     specifying this capability.
+    #      If you want to create a stack from a stack template that contains
+    #     macros *and* nested stacks, you must create or update the stack
+    #     directly from the template using the CreateStack or UpdateStack
+    #     action, and specifying this capability.
     #
     #      </note>
     #
@@ -675,6 +691,12 @@ module Aws::CloudFormation
     #   The resources to import into your stack.
     #   @return [Array<Types::ResourceToImport>]
     #
+    # @!attribute [rw] include_nested_stacks
+    #   Creates a change set for the all nested stacks specified in the
+    #   template. The default behavior of this action is set to `False`. To
+    #   include nested sets in a change set, specify `True`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSetInput AWS API Documentation
     #
     class CreateChangeSetInput < Struct.new(
@@ -693,7 +715,8 @@ module Aws::CloudFormation
       :client_token,
       :description,
       :change_set_type,
-      :resources_to_import)
+      :resources_to_import,
+      :include_nested_stacks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -895,10 +918,9 @@ module Aws::CloudFormation
     #     and [AWS::Serverless][10] transforms, which are macros hosted by
     #     AWS CloudFormation.
     #
-    #     Change sets do not currently support nested stacks. If you want to
-    #     create a stack from a stack template that contains macros *and*
-    #     nested stacks, you must create the stack directly from the
-    #     template using this capability.
+    #     If you want to create a stack from a stack template that contains
+    #     macros *and* nested stacks, you must create the stack directly
+    #     from the template using this capability.
     #
     #     You should only create stacks directly from a stack template that
     #     contains macros if you know what processing the macro performs.
@@ -1733,8 +1755,9 @@ module Aws::CloudFormation
 
     # \[`Service-managed` permissions\] The AWS Organizations accounts to
     # which StackSets deploys. StackSets does not deploy stack instances to
-    # the organization master account, even if the master account is in your
-    # organization or in an OU in your organization.
+    # the organization management account, even if the organization
+    # management account is in your organization or in an OU in your
+    # organization.
     #
     # For update operations, you can specify either `Accounts` or
     # `OrganizationalUnitIds`. For create and delete operations, specify
@@ -1772,7 +1795,7 @@ module Aws::CloudFormation
     #
     #       {
     #         arn: "PrivateTypeArn",
-    #         type: "RESOURCE", # accepts RESOURCE
+    #         type: "RESOURCE", # accepts RESOURCE, MODULE
     #         type_name: "TypeName",
     #         version_id: "TypeVersionId",
     #       }
@@ -1988,6 +2011,20 @@ module Aws::CloudFormation
     #   of changes. If there is no additional page, this value is null.
     #   @return [String]
     #
+    # @!attribute [rw] include_nested_stacks
+    #   Verifies if `IncludeNestedStacks` is set to `True`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parent_change_set_id
+    #   Specifies the change set ID of the parent change set in the current
+    #   nested change set hierarchy.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_change_set_id
+    #   Specifies the change set ID of the root change set in the current
+    #   nested change set hierarchy.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSetOutput AWS API Documentation
     #
     class DescribeChangeSetOutput < Struct.new(
@@ -2006,7 +2043,10 @@ module Aws::CloudFormation
       :capabilities,
       :tags,
       :changes,
-      :next_token)
+      :next_token,
+      :include_nested_stacks,
+      :parent_change_set_id,
+      :root_change_set_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2561,7 +2601,7 @@ module Aws::CloudFormation
     #   data as a hash:
     #
     #       {
-    #         type: "RESOURCE", # accepts RESOURCE
+    #         type: "RESOURCE", # accepts RESOURCE, MODULE
     #         type_name: "TypeName",
     #         arn: "TypeArn",
     #         version_id: "TypeVersionId",
@@ -3953,7 +3993,7 @@ module Aws::CloudFormation
     #   data as a hash:
     #
     #       {
-    #         type: "RESOURCE", # accepts RESOURCE
+    #         type: "RESOURCE", # accepts RESOURCE, MODULE
     #         type_name: "TypeName",
     #         type_arn: "TypeArn",
     #         registration_status_filter: "COMPLETE", # accepts COMPLETE, IN_PROGRESS, FAILED
@@ -4047,7 +4087,7 @@ module Aws::CloudFormation
     #   data as a hash:
     #
     #       {
-    #         type: "RESOURCE", # accepts RESOURCE
+    #         type: "RESOURCE", # accepts RESOURCE, MODULE
     #         type_name: "TypeName",
     #         arn: "PrivateTypeArn",
     #         max_results: 1,
@@ -4153,6 +4193,7 @@ module Aws::CloudFormation
     #         visibility: "PUBLIC", # accepts PUBLIC, PRIVATE
     #         provisioning_type: "NON_PROVISIONABLE", # accepts NON_PROVISIONABLE, IMMUTABLE, FULLY_MUTABLE
     #         deprecated_status: "LIVE", # accepts LIVE, DEPRECATED
+    #         type: "RESOURCE", # accepts RESOURCE, MODULE
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -4204,6 +4245,10 @@ module Aws::CloudFormation
     #     used in CloudFormation operations.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of extension.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned with a single call. If
     #   the number of available results exceeds this maximum, the response
@@ -4226,6 +4271,7 @@ module Aws::CloudFormation
       :visibility,
       :provisioning_type,
       :deprecated_status,
+      :type,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -4279,6 +4325,51 @@ module Aws::CloudFormation
     class LoggingConfig < Struct.new(
       :log_role_arn,
       :log_group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the module from which the resource was
+    # created, if the resource was created from a module included in the
+    # stack template.
+    #
+    # For more information on modules, see [Using modules to encapsulate and
+    # reuse resource
+    # configurations](AWSCloudFormation/latest/UserGuide/modules.html) in
+    # the *CloudFormation User Guide*.
+    #
+    # @!attribute [rw] type_hierarchy
+    #   A concantenated list of the the module type or types containing the
+    #   resource. Module types are listed starting with the inner-most
+    #   nested module, and separated by `/`.
+    #
+    #   In the following example, the resource was created from a module of
+    #   type `AWS::First::Example::MODULE`, that is nested inside a parent
+    #   module of type `AWS::Second::Example::MODULE`.
+    #
+    #   `AWS::First::Example::MODULE/AWS::Second::Example::MODULE`
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_id_hierarchy
+    #   A concantenated list of the logical IDs of the module or modules
+    #   containing the resource. Modules are listed starting with the
+    #   inner-most nested module, and separated by `/`.
+    #
+    #   In the following example, the resource was created from a module,
+    #   `moduleA`, that is nested inside a parent module, `moduleB`.
+    #
+    #   `moduleA/moduleB`
+    #
+    #   For more information, see [Referencing resources in a
+    #   module](AWSCloudFormation/latest/UserGuide/modules.html#module-ref-resources)
+    #   in the *CloudFormation User Guide*.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ModuleInfo AWS API Documentation
+    #
+    class ModuleInfo < Struct.new(
+      :type_hierarchy,
+      :logical_id_hierarchy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4618,7 +4709,7 @@ module Aws::CloudFormation
     #   data as a hash:
     #
     #       {
-    #         type: "RESOURCE", # accepts RESOURCE
+    #         type: "RESOURCE", # accepts RESOURCE, MODULE
     #         type_name: "TypeName", # required
     #         schema_handler_package: "S3Url", # required
     #         logging_config: {
@@ -4668,18 +4759,20 @@ module Aws::CloudFormation
     #   you want to register, see [submit][1] in the *CloudFormation CLI
     #   User Guide*.
     #
-    #   <note markdown="1"> As part of registering a resource provider type, CloudFormation must
-    #   be able to access the S3 bucket which contains the schema handler
-    #   package for that resource provider. For more information, see [IAM
-    #   Permissions for Registering a Resource Provider][2] in the *AWS
-    #   CloudFormation User Guide*.
+    #   <note markdown="1"> The user registering the resource provider type must be able to
+    #   access the the schema handler package in the S3 bucket. That is, the
+    #   user needs to have [GetObject][2] permissions for the schema handler
+    #   package. For more information, see [Actions, Resources, and
+    #   Condition Keys for Amazon S3][3] in the *AWS Identity and Access
+    #   Management User Guide*.
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-register-permissions
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html
     #   @return [String]
     #
     # @!attribute [rw] logging_config
@@ -4743,8 +4836,9 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] action
     #   The action that AWS CloudFormation takes on the resource, such as
-    #   `Add` (adds a new resource), `Modify` (changes a resource), or
-    #   `Remove` (deletes a resource).
+    #   `Add` (adds a new resource), `Modify` (changes a resource), `Remove`
+    #   (deletes a resource), `Import` (imports a resource), or `Dynamic`
+    #   (exact action for the resource cannot be determined).
     #   @return [String]
     #
     # @!attribute [rw] logical_resource_id
@@ -4789,6 +4883,16 @@ module Aws::CloudFormation
     #   resource.
     #   @return [Array<Types::ResourceChangeDetail>]
     #
+    # @!attribute [rw] change_set_id
+    #   The change set ID of the nested change set.
+    #   @return [String]
+    #
+    # @!attribute [rw] module_info
+    #   Contains information about the module from which the resource was
+    #   created, if the resource was created from a module included in the
+    #   stack template.
+    #   @return [Types::ModuleInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceChange AWS API Documentation
     #
     class ResourceChange < Struct.new(
@@ -4798,7 +4902,9 @@ module Aws::CloudFormation
       :resource_type,
       :replacement,
       :scope,
-      :details)
+      :details,
+      :change_set_id,
+      :module_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5170,7 +5276,7 @@ module Aws::CloudFormation
     #
     #       {
     #         arn: "PrivateTypeArn",
-    #         type: "RESOURCE", # accepts RESOURCE
+    #         type: "RESOURCE", # accepts RESOURCE, MODULE
     #         type_name: "TypeName",
     #         version_id: "TypeVersionId",
     #       }
@@ -5944,6 +6050,12 @@ module Aws::CloudFormation
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
     #   @return [Types::StackResourceDriftInformation]
     #
+    # @!attribute [rw] module_info
+    #   Contains information about the module from which the resource was
+    #   created, if the resource was created from a module included in the
+    #   stack template.
+    #   @return [Types::ModuleInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResource AWS API Documentation
     #
     class StackResource < Struct.new(
@@ -5956,7 +6068,8 @@ module Aws::CloudFormation
       :resource_status,
       :resource_status_reason,
       :description,
-      :drift_information)
+      :drift_information,
+      :module_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6027,6 +6140,12 @@ module Aws::CloudFormation
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
     #   @return [Types::StackResourceDriftInformation]
     #
+    # @!attribute [rw] module_info
+    #   Contains information about the module from which the resource was
+    #   created, if the resource was created from a module included in the
+    #   stack template.
+    #   @return [Types::ModuleInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceDetail AWS API Documentation
     #
     class StackResourceDetail < Struct.new(
@@ -6040,7 +6159,8 @@ module Aws::CloudFormation
       :resource_status_reason,
       :description,
       :metadata,
-      :drift_information)
+      :drift_information,
+      :module_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6136,6 +6256,12 @@ module Aws::CloudFormation
     #   stack resource.
     #   @return [Time]
     #
+    # @!attribute [rw] module_info
+    #   Contains information about the module from which the resource was
+    #   created, if the resource was created from a module included in the
+    #   stack template.
+    #   @return [Types::ModuleInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceDrift AWS API Documentation
     #
     class StackResourceDrift < Struct.new(
@@ -6148,7 +6274,8 @@ module Aws::CloudFormation
       :actual_properties,
       :property_differences,
       :stack_resource_drift_status,
-      :timestamp)
+      :timestamp,
+      :module_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6287,6 +6414,12 @@ module Aws::CloudFormation
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
     #   @return [Types::StackResourceDriftInformationSummary]
     #
+    # @!attribute [rw] module_info
+    #   Contains information about the module from which the resource was
+    #   created, if the resource was created from a module included in the
+    #   stack template.
+    #   @return [Types::ModuleInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceSummary AWS API Documentation
     #
     class StackResourceSummary < Struct.new(
@@ -6296,7 +6429,8 @@ module Aws::CloudFormation
       :last_updated_timestamp,
       :resource_status,
       :resource_status_reason,
-      :drift_information)
+      :drift_information,
+      :module_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7515,10 +7649,9 @@ module Aws::CloudFormation
     #     and [AWS::Serverless][10] transforms, which are macros hosted by
     #     AWS CloudFormation.
     #
-    #     Change sets do not currently support nested stacks. If you want to
-    #     update a stack from a stack template that contains macros *and*
-    #     nested stacks, you must update the stack directly from the
-    #     template using this capability.
+    #     If you want to update a stack from a stack template that contains
+    #     macros *and* nested stacks, you must update the stack directly
+    #     from the template using this capability.
     #
     #     You should only update stacks directly from a stack template that
     #     contains macros if you know what processing the macro performs.

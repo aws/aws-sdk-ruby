@@ -632,6 +632,7 @@
         "customRules":{"shape":"CustomRules"},
         "productionBranch":{"shape":"ProductionBranch"},
         "buildSpec":{"shape":"BuildSpec"},
+        "customHeaders":{"shape":"CustomHeaders"},
         "enableAutoBranchCreation":{"shape":"EnableAutoBranchCreation"},
         "autoBranchCreationPatterns":{"shape":"AutoBranchCreationPatterns"},
         "autoBranchCreationConfig":{"shape":"AutoBranchCreationConfig"}
@@ -643,8 +644,9 @@
     },
     "AppId":{
       "type":"string",
-      "max":255,
-      "min":1
+      "max":20,
+      "min":1,
+      "pattern":"d[a-z0-9]+"
     },
     "Apps":{
       "type":"list",
@@ -699,6 +701,7 @@
         "environmentVariables":{"shape":"EnvironmentVariables"},
         "basicAuthCredentials":{"shape":"BasicAuthCredentials"},
         "enableBasicAuth":{"shape":"EnableBasicAuth"},
+        "enablePerformanceMode":{"shape":"EnablePerformanceMode"},
         "buildSpec":{"shape":"BuildSpec"},
         "enablePullRequestPreview":{"shape":"EnablePullRequestPreview"},
         "pullRequestEnvironmentName":{"shape":"PullRequestEnvironmentName"}
@@ -804,6 +807,7 @@
         "activeJobId":{"shape":"ActiveJobId"},
         "totalNumberOfJobs":{"shape":"TotalNumberOfJobs"},
         "enableBasicAuth":{"shape":"EnableBasicAuth"},
+        "enablePerformanceMode":{"shape":"EnablePerformanceMode"},
         "thumbnailUrl":{"shape":"ThumbnailUrl"},
         "basicAuthCredentials":{"shape":"BasicAuthCredentials"},
         "buildSpec":{"shape":"BuildSpec"},
@@ -874,6 +878,7 @@
         "customRules":{"shape":"CustomRules"},
         "tags":{"shape":"TagMap"},
         "buildSpec":{"shape":"BuildSpec"},
+        "customHeaders":{"shape":"CustomHeaders"},
         "enableAutoBranchCreation":{"shape":"EnableAutoBranchCreation"},
         "autoBranchCreationPatterns":{"shape":"AutoBranchCreationPatterns"},
         "autoBranchCreationConfig":{"shape":"AutoBranchCreationConfig"}
@@ -931,6 +936,7 @@
         "environmentVariables":{"shape":"EnvironmentVariables"},
         "basicAuthCredentials":{"shape":"BasicAuthCredentials"},
         "enableBasicAuth":{"shape":"EnableBasicAuth"},
+        "enablePerformanceMode":{"shape":"EnablePerformanceMode"},
         "tags":{"shape":"TagMap"},
         "buildSpec":{"shape":"BuildSpec"},
         "ttl":{"shape":"TTL"},
@@ -1038,6 +1044,11 @@
       "type":"list",
       "member":{"shape":"CustomDomain"},
       "max":255
+    },
+    "CustomHeaders":{
+      "type":"string",
+      "max":25000,
+      "min":1
     },
     "CustomRule":{
       "type":"structure",
@@ -1291,6 +1302,7 @@
     "EnableBranchAutoBuild":{"type":"boolean"},
     "EnableBranchAutoDeletion":{"type":"boolean"},
     "EnableNotification":{"type":"boolean"},
+    "EnablePerformanceMode":{"type":"boolean"},
     "EnablePullRequestPreview":{"type":"boolean"},
     "EndTime":{"type":"timestamp"},
     "EnvKey":{
@@ -1867,7 +1879,7 @@
     "MaxResults":{
       "type":"integer",
       "max":100,
-      "min":1
+      "min":0
     },
     "Name":{
       "type":"string",
@@ -1888,7 +1900,7 @@
     },
     "OauthToken":{
       "type":"string",
-      "max":100,
+      "max":1000,
       "sensitive":true
     },
     "Platform":{
@@ -2252,6 +2264,7 @@
         "basicAuthCredentials":{"shape":"BasicAuthCredentials"},
         "customRules":{"shape":"CustomRules"},
         "buildSpec":{"shape":"BuildSpec"},
+        "customHeaders":{"shape":"CustomHeaders"},
         "enableAutoBranchCreation":{"shape":"EnableAutoBranchCreation"},
         "autoBranchCreationPatterns":{"shape":"AutoBranchCreationPatterns"},
         "autoBranchCreationConfig":{"shape":"AutoBranchCreationConfig"},
@@ -2292,6 +2305,7 @@
         "environmentVariables":{"shape":"EnvironmentVariables"},
         "basicAuthCredentials":{"shape":"BasicAuthCredentials"},
         "enableBasicAuth":{"shape":"EnableBasicAuth"},
+        "enablePerformanceMode":{"shape":"EnablePerformanceMode"},
         "buildSpec":{"shape":"BuildSpec"},
         "ttl":{"shape":"TTL"},
         "displayName":{"shape":"DisplayName"},

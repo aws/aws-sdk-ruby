@@ -998,6 +998,84 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Use automated ABR to have MediaConvert set up the renditions in your
+    # ABR package for you automatically, based on characteristics of your
+    # input video. This feature optimizes video quality while minimizing the
+    # overall size of your ABR package.
+    #
+    # @note When making an API call, you may pass AutomatedAbrSettings
+    #   data as a hash:
+    #
+    #       {
+    #         max_abr_bitrate: 1,
+    #         max_renditions: 1,
+    #         min_abr_bitrate: 1,
+    #       }
+    #
+    # @!attribute [rw] max_abr_bitrate
+    #   Optional. The maximum target bit rate used in your automated ABR
+    #   stack. Use this value to set an upper limit on the bandwidth
+    #   consumed by the highest-quality rendition. This is the rendition
+    #   that is delivered to viewers with the fastest internet connections.
+    #   If you don't specify a value, MediaConvert uses 8,000,000 (8 mb/s)
+    #   by default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_renditions
+    #   Optional. The maximum number of renditions that MediaConvert will
+    #   create in your automated ABR stack. The number of renditions is
+    #   determined automatically, based on analysis of each job, but will
+    #   never exceed this limit. When you set this to Auto in the console,
+    #   which is equivalent to excluding it from your JSON job
+    #   specification, MediaConvert defaults to a limit of 15.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_abr_bitrate
+    #   Optional. The minimum target bitrate used in your automated ABR
+    #   stack. Use this value to set a lower limit on the bitrate of video
+    #   delivered to viewers with slow internet connections. If you don't
+    #   specify a value, MediaConvert uses 600,000 (600 kb/s) by default.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AutomatedAbrSettings AWS API Documentation
+    #
+    class AutomatedAbrSettings < Struct.new(
+      :max_abr_bitrate,
+      :max_renditions,
+      :min_abr_bitrate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Use automated encoding to have MediaConvert choose your encoding
+    # settings for you, based on characteristics of your input video.
+    #
+    # @note When making an API call, you may pass AutomatedEncodingSettings
+    #   data as a hash:
+    #
+    #       {
+    #         abr_settings: {
+    #           max_abr_bitrate: 1,
+    #           max_renditions: 1,
+    #           min_abr_bitrate: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] abr_settings
+    #   Use automated ABR to have MediaConvert set up the renditions in your
+    #   ABR package for you automatically, based on characteristics of your
+    #   input video. This feature optimizes video quality while minimizing
+    #   the overall size of your ABR package.
+    #   @return [Types::AutomatedAbrSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AutomatedEncodingSettings AWS API Documentation
+    #
+    class AutomatedEncodingSettings < Struct.new(
+      :abr_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Settings for quality-defined variable bitrate encoding with the AV1
     # codec. Required when you set Rate control mode to QVBR. Not valid when
     # you set Rate control mode to a value other than QVBR, or when you
@@ -1052,7 +1130,7 @@ module Aws::MediaConvert
     #       {
     #         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
     #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #         framerate_denominator: 1,
     #         framerate_numerator: 1,
     #         gop_size: 1.0,
@@ -1068,8 +1146,9 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] adaptive_quantization
-    #   Adaptive quantization. Allows intra-frame quantizers to vary to
-    #   improve visual quality.
+    #   Specify the strength of any adaptive quantization filters that you
+    #   enable. The value that you choose here applies to Spatial adaptive
+    #   quantization (spatialAdaptiveQuantization).
     #   @return [String]
     #
     # @!attribute [rw] framerate_control
@@ -1089,8 +1168,18 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] framerate_conversion_algorithm
-    #   Optional. Specify how the transcoder performs framerate conversion.
-    #   The default behavior is to use duplicate drop conversion.
+    #   Choose the method that you want MediaConvert to use when increasing
+    #   or decreasing the frame rate. We recommend using drop duplicate
+    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
+    #   to 30 fps. For numerically complex conversions, you can use
+    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
+    #   picture, but might introduce undesirable video artifacts. For
+    #   complex frame rate conversions, especially if your source video has
+    #   already been converted from its original cadence, use FrameFormer
+    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
+    #   chooses the best conversion method frame by frame. Note that using
+    #   FrameFormer increases the transcoding time and incurs a significant
+    #   add-on cost.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -1152,8 +1241,23 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] spatial_adaptive_quantization
-    #   Adjust quantization within each frame based on spatial variation of
-    #   content complexity.
+    #   Keep the default value, Enabled (ENABLED), to adjust quantization
+    #   within each frame based on spatial variation of content complexity.
+    #   When you enable this feature, the encoder uses fewer bits on areas
+    #   that can sustain more distortion with no noticeable visual
+    #   degradation and uses more bits on areas where any small distortion
+    #   will be noticeable. For example, complex textured blocks are encoded
+    #   with fewer bits and smooth textured blocks are encoded with more
+    #   bits. Enabling this feature will almost always improve your video
+    #   quality. Note, though, that this feature doesn't take into account
+    #   where the viewer's attention is likely to be. If viewers are likely
+    #   to be focusing their attention on a part of the screen with a lot of
+    #   complex texture, you might choose to disable this feature. Related
+    #   setting: When you enable spatial adaptive quantization, set the
+    #   value for Adaptive quantization (adaptiveQuantization) depending on
+    #   your content. For homogeneous content, such as cartoons and video
+    #   games, set it to Low. For content with a wider variety of textures,
+    #   set it to High or Higher.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Av1Settings AWS API Documentation
@@ -1193,6 +1297,136 @@ module Aws::MediaConvert
     #
     class AvailBlanking < Struct.new(
       :avail_blanking_image)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Required when you set your output video codec to AVC-Intra. For more
+    # information about the AVC-I settings, see the relevant specification.
+    # For detailed information about SD and HD in AVC-I, see
+    # https://ieeexplore.ieee.org/document/7290936.
+    #
+    # @note When making an API call, you may pass AvcIntraSettings
+    #   data as a hash:
+    #
+    #       {
+    #         avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #         framerate_denominator: 1,
+    #         framerate_numerator: 1,
+    #         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #         telecine: "NONE", # accepts NONE, HARD
+    #       }
+    #
+    # @!attribute [rw] avc_intra_class
+    #   Specify the AVC-Intra class of your output. The AVC-Intra class
+    #   selection determines the output video bit rate depending on the
+    #   frame rate of the output. Outputs with higher class values have
+    #   higher bitrates and improved image quality.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_control
+    #   If you are using the console, use the Framerate setting to specify
+    #   the frame rate for this output. If you want to keep the same frame
+    #   rate as the input video, choose Follow source. If you want to do
+    #   frame rate conversion, choose a frame rate from the dropdown list or
+    #   choose Custom. The framerates shown in the dropdown list are decimal
+    #   approximations of fractions. If you choose Custom, specify your
+    #   frame rate as a fraction. If you are creating your transcoding job
+    #   specification as a JSON file without the console, use
+    #   FramerateControl to specify which value the service uses for the
+    #   frame rate for this output. Choose INITIALIZE\_FROM\_SOURCE if you
+    #   want the service to use the frame rate from the input. Choose
+    #   SPECIFIED if you want the service to use the frame rate you specify
+    #   in the settings FramerateNumerator and FramerateDenominator.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_conversion_algorithm
+    #   Choose the method that you want MediaConvert to use when increasing
+    #   or decreasing the frame rate. We recommend using drop duplicate
+    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
+    #   to 30 fps. For numerically complex conversions, you can use
+    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
+    #   picture, but might introduce undesirable video artifacts. For
+    #   complex frame rate conversions, especially if your source video has
+    #   already been converted from its original cadence, use FrameFormer
+    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
+    #   chooses the best conversion method frame by frame. Note that using
+    #   FrameFormer increases the transcoding time and incurs a significant
+    #   add-on cost.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_denominator
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateDenominator to specify the
+    #   denominator of this fraction. In this example, use 1001 for the
+    #   value of FramerateDenominator. When you use the console for
+    #   transcode jobs that use frame rate conversion, provide the value as
+    #   a decimal number for Framerate. In this example, specify 23.976.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] framerate_numerator
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator
+    #   of this fraction. In this example, use 24000 for the value of
+    #   FramerateNumerator. When you use the console for transcode jobs that
+    #   use frame rate conversion, provide the value as a decimal number for
+    #   Framerate. In this example, specify 23.976.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interlace_mode
+    #   Choose the scan line type for the output. Keep the default value,
+    #   Progressive (PROGRESSIVE) to create a progressive output, regardless
+    #   of the scan type of your input. Use Top field first (TOP\_FIELD) or
+    #   Bottom field first (BOTTOM\_FIELD) to create an output that's
+    #   interlaced with the same field polarity throughout. Use Follow,
+    #   default top (FOLLOW\_TOP\_FIELD) or Follow, default bottom
+    #   (FOLLOW\_BOTTOM\_FIELD) to produce outputs with the same field
+    #   polarity as the source. For jobs that have multiple inputs, the
+    #   output field polarity might change over the course of the output.
+    #   Follow behavior depends on the input scan type. If the source is
+    #   interlaced, the output will be interlaced with the same polarity as
+    #   the source. If the source is progressive, the output will be
+    #   interlaced with top field bottom field first, depending on which of
+    #   the Follow options you choose.
+    #   @return [String]
+    #
+    # @!attribute [rw] slow_pal
+    #   Ignore this setting unless your input frame rate is 23.976 or 24
+    #   frames per second (fps). Enable slow PAL to create a 25 fps output.
+    #   When you enable slow PAL, MediaConvert relabels the video frames to
+    #   25 fps and resamples your audio to keep it synchronized with the
+    #   video. Note that enabling this setting will slightly reduce the
+    #   duration of your video. Required settings: You must also set
+    #   Framerate to 25. In your JSON job specification, set
+    #   (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and
+    #   (framerateDenominator) to 1.
+    #   @return [String]
+    #
+    # @!attribute [rw] telecine
+    #   When you do frame rate conversion from 23.976 frames per second
+    #   (fps) to 29.97 fps, and your output scan type is interlaced, you can
+    #   optionally enable hard telecine (HARD) to create a smoother picture.
+    #   When you keep the default value, None (NONE), MediaConvert does a
+    #   standard frame rate conversion to 29.97 without doing anything with
+    #   the field polarity to create a smoother picture.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AvcIntraSettings AWS API Documentation
+    #
+    class AvcIntraSettings < Struct.new(
+      :avc_intra_class,
+      :framerate_control,
+      :framerate_conversion_algorithm,
+      :framerate_denominator,
+      :framerate_numerator,
+      :interlace_mode,
+      :slow_pal,
+      :telecine)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2206,8 +2440,10 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] client_cache
-    #   When set to ENABLED, sets #EXT-X-ALLOW-CACHE:no tag, which prevents
-    #   client from saving media segments for later replay.
+    #   Disable this setting only when your workflow requires the
+    #   #EXT-X-ALLOW-CACHE:no tag. Otherwise, keep the default value Enabled
+    #   (ENABLED) and control caching in your video distribution set up. For
+    #   example, use the Cache-Control http header.
     #   @return [String]
     #
     # @!attribute [rw] codec_specification
@@ -2359,9 +2595,29 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #         scte_35_esam: "INSERT", # accepts INSERT, NONE
     #         scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #       }
+    #
+    # @!attribute [rw] audio_duration
+    #   Specify this setting only when your output will be consumed by a
+    #   downstream repackaging workflow that is sensitive to very small
+    #   duration differences between video and audio. For this situation,
+    #   choose Match video duration (MATCH\_VIDEO\_DURATION). In all other
+    #   cases, keep the default value, Default codec duration
+    #   (DEFAULT\_CODEC\_DURATION). When you choose Match video duration,
+    #   MediaConvert pads the output audio streams with silence or trims
+    #   them to ensure that the total duration of each audio stream is at
+    #   least as long as the total duration of the video stream. After
+    #   padding or trimming, the audio stream duration is no more than one
+    #   frame longer than the video stream. MediaConvert applies audio
+    #   padding or trimming only to the end of the last segment of the
+    #   output. For unsegmented outputs, MediaConvert adds padding only to
+    #   the end of the file. When you keep the default value, any minor
+    #   discrepancies between audio and video duration will depend on your
+    #   output audio codec.
+    #   @return [String]
     #
     # @!attribute [rw] scte_35_esam
     #   Use this setting only when you specify SCTE-35 markers from ESAM.
@@ -2381,6 +2637,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CmfcSettings AWS API Documentation
     #
     class CmfcSettings < Struct.new(
+      :audio_duration,
       :scte_35_esam,
       :scte_35_source)
       SENSITIVE = []
@@ -2488,6 +2745,7 @@ module Aws::MediaConvert
     #
     #       {
     #         cmfc_settings: {
+    #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #         },
@@ -2497,6 +2755,7 @@ module Aws::MediaConvert
     #         },
     #         m2ts_settings: {
     #           audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
     #           bitrate: 1,
@@ -2547,6 +2806,7 @@ module Aws::MediaConvert
     #           video_pid: 1,
     #         },
     #         m3u_8_settings: {
+    #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
     #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -2572,6 +2832,7 @@ module Aws::MediaConvert
     #           reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #         },
     #         mp_4_settings: {
+    #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           ctts_version: 1,
     #           free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -2579,12 +2840,15 @@ module Aws::MediaConvert
     #           mp_4_major_brand: "__string",
     #         },
     #         mpd_settings: {
+    #           accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #         },
     #         mxf_settings: {
     #           afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #           profile: "D_10", # accepts D_10, XDCAM, OP1A
     #         },
     #       }
     #
@@ -2773,7 +3037,7 @@ module Aws::MediaConvert
     #                 kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
     #               },
     #               denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
-    #               file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL",
+    #               file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA",
     #               filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #               filter_strength: 1,
     #               image_inserter: {
@@ -2799,6 +3063,7 @@ module Aws::MediaConvert
     #                   start_timecode: "__stringPattern010920405090509092",
     #                 },
     #               ],
+    #               input_scan_type: "AUTO", # accepts AUTO, PSF
     #               position: {
     #                 height: 1,
     #                 width: 1,
@@ -2852,8 +3117,28 @@ module Aws::MediaConvert
     #             breakout_code: 1,
     #             distributor_id: "__string",
     #           },
+    #           nielsen_non_linear_watermark: {
+    #             active_watermark_process: "NAES2_AND_NW", # accepts NAES2_AND_NW, CBET, NAES2_AND_NW_AND_CBET
+    #             adi_filename: "__stringPatternS3",
+    #             asset_id: "__stringMin1Max20",
+    #             asset_name: "__stringMin1Max50",
+    #             cbet_source_id: "__stringPattern0xAFaF0908190908",
+    #             episode_id: "__stringMin1Max20",
+    #             metadata_destination: "__stringPatternS3",
+    #             source_id: 1,
+    #             source_watermark_status: "CLEAN", # accepts CLEAN, WATERMARKED
+    #             tic_server_url: "__stringPatternHttps",
+    #             unique_tic_per_audio_track: "RESERVE_UNIQUE_TICS_PER_TRACK", # accepts RESERVE_UNIQUE_TICS_PER_TRACK, SAME_TICS_PER_TRACK
+    #           },
     #           output_groups: [
     #             {
+    #               automated_encoding_settings: {
+    #                 abr_settings: {
+    #                   max_abr_bitrate: 1,
+    #                   max_renditions: 1,
+    #                   min_abr_bitrate: 1,
+    #                 },
+    #               },
     #               custom_name: "__string",
     #               name: "__string",
     #               output_group_settings: {
@@ -2943,6 +3228,7 @@ module Aws::MediaConvert
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                   min_buffer_time: 1,
+    #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
@@ -3264,6 +3550,7 @@ module Aws::MediaConvert
     #                   ],
     #                   container_settings: {
     #                     cmfc_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
@@ -3273,6 +3560,7 @@ module Aws::MediaConvert
     #                     },
     #                     m2ts_settings: {
     #                       audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
     #                       bitrate: 1,
@@ -3323,6 +3611,7 @@ module Aws::MediaConvert
     #                       video_pid: 1,
     #                     },
     #                     m3u_8_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -3348,6 +3637,7 @@ module Aws::MediaConvert
     #                       reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #                     },
     #                     mp_4_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       ctts_version: 1,
     #                       free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -3355,12 +3645,15 @@ module Aws::MediaConvert
     #                       mp_4_major_brand: "__string",
     #                     },
     #                     mpd_settings: {
+    #                       accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
     #                     mxf_settings: {
     #                       afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #                       profile: "D_10", # accepts D_10, XDCAM, OP1A
     #                     },
     #                   },
     #                   extension: "__string",
@@ -3383,7 +3676,7 @@ module Aws::MediaConvert
     #                       av_1_settings: {
     #                         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_size: 1.0,
@@ -3397,7 +3690,17 @@ module Aws::MediaConvert
     #                         slices: 1,
     #                         spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       },
-    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
+    #                       avc_intra_settings: {
+    #                         avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                         telecine: "NONE", # accepts NONE, HARD
+    #                       },
+    #                       codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
     #                       frame_capture_settings: {
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
@@ -3405,7 +3708,7 @@ module Aws::MediaConvert
     #                         quality: 1,
     #                       },
     #                       h264_settings: {
-    #                         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                         adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                         bitrate: 1,
     #                         codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                         codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -3414,7 +3717,7 @@ module Aws::MediaConvert
     #                         field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -3458,7 +3761,7 @@ module Aws::MediaConvert
     #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -3501,7 +3804,7 @@ module Aws::MediaConvert
     #                         codec_profile: "MAIN", # accepts MAIN, PROFILE_422
     #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_closed_cadence: 1,
@@ -3530,7 +3833,7 @@ module Aws::MediaConvert
     #                       prores_settings: {
     #                         codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -3540,10 +3843,20 @@ module Aws::MediaConvert
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                       },
+    #                       vc_3_settings: {
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                         telecine: "NONE", # accepts NONE, HARD
+    #                         vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
+    #                       },
     #                       vp_8_settings: {
     #                         bitrate: 1,
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_size: 1.0,
@@ -3558,7 +3871,7 @@ module Aws::MediaConvert
     #                       vp_9_settings: {
     #                         bitrate: 1,
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_size: 1.0,
@@ -3751,13 +4064,13 @@ module Aws::MediaConvert
     #   Optional. When you create a job, you can specify a queue to send it
     #   to. If you don't specify, the job will go to the default queue. For
     #   more about queues, see the User Guide topic at
-    #   http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html.
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html.
     #   @return [String]
     #
     # @!attribute [rw] role
     #   Required. The IAM role you use for creating this job. For details
     #   about permissions, see the User Guide topic at the User Guide at
-    #   http://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.
     #   @return [String]
     #
     # @!attribute [rw] settings
@@ -3782,12 +4095,16 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] tags
     #   Optional. The tags that you want to add to the resource. You can tag
-    #   resources with a key-value pair or with only a key.
+    #   resources with a key-value pair or with only a key. Use standard AWS
+    #   tags on your job for automatic integration with AWS services and for
+    #   custom integrations and workflows.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] user_metadata
     #   Optional. User-defined metadata that you want to associate with an
-    #   MediaConvert job. You specify metadata in key/value pairs.
+    #   MediaConvert job. You specify metadata in key/value pairs. Use only
+    #   for existing integrations or workflows that rely on job metadata
+    #   tags. Otherwise, we recommend that you use standard AWS tags.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJobRequest AWS API Documentation
@@ -3815,7 +4132,7 @@ module Aws::MediaConvert
     # @!attribute [rw] job
     #   Each job converts an input file into an output file or files. For
     #   more information, see the User Guide at
-    #   http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #   @return [Types::Job]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJobResponse AWS API Documentation
@@ -3966,6 +4283,7 @@ module Aws::MediaConvert
     #                   start_timecode: "__stringPattern010920405090509092",
     #                 },
     #               ],
+    #               input_scan_type: "AUTO", # accepts AUTO, PSF
     #               position: {
     #                 height: 1,
     #                 width: 1,
@@ -4018,8 +4336,28 @@ module Aws::MediaConvert
     #             breakout_code: 1,
     #             distributor_id: "__string",
     #           },
+    #           nielsen_non_linear_watermark: {
+    #             active_watermark_process: "NAES2_AND_NW", # accepts NAES2_AND_NW, CBET, NAES2_AND_NW_AND_CBET
+    #             adi_filename: "__stringPatternS3",
+    #             asset_id: "__stringMin1Max20",
+    #             asset_name: "__stringMin1Max50",
+    #             cbet_source_id: "__stringPattern0xAFaF0908190908",
+    #             episode_id: "__stringMin1Max20",
+    #             metadata_destination: "__stringPatternS3",
+    #             source_id: 1,
+    #             source_watermark_status: "CLEAN", # accepts CLEAN, WATERMARKED
+    #             tic_server_url: "__stringPatternHttps",
+    #             unique_tic_per_audio_track: "RESERVE_UNIQUE_TICS_PER_TRACK", # accepts RESERVE_UNIQUE_TICS_PER_TRACK, SAME_TICS_PER_TRACK
+    #           },
     #           output_groups: [
     #             {
+    #               automated_encoding_settings: {
+    #                 abr_settings: {
+    #                   max_abr_bitrate: 1,
+    #                   max_renditions: 1,
+    #                   min_abr_bitrate: 1,
+    #                 },
+    #               },
     #               custom_name: "__string",
     #               name: "__string",
     #               output_group_settings: {
@@ -4109,6 +4447,7 @@ module Aws::MediaConvert
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                   min_buffer_time: 1,
+    #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
@@ -4430,6 +4769,7 @@ module Aws::MediaConvert
     #                   ],
     #                   container_settings: {
     #                     cmfc_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
@@ -4439,6 +4779,7 @@ module Aws::MediaConvert
     #                     },
     #                     m2ts_settings: {
     #                       audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
     #                       bitrate: 1,
@@ -4489,6 +4830,7 @@ module Aws::MediaConvert
     #                       video_pid: 1,
     #                     },
     #                     m3u_8_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -4514,6 +4856,7 @@ module Aws::MediaConvert
     #                       reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #                     },
     #                     mp_4_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       ctts_version: 1,
     #                       free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -4521,12 +4864,15 @@ module Aws::MediaConvert
     #                       mp_4_major_brand: "__string",
     #                     },
     #                     mpd_settings: {
+    #                       accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
     #                     mxf_settings: {
     #                       afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #                       profile: "D_10", # accepts D_10, XDCAM, OP1A
     #                     },
     #                   },
     #                   extension: "__string",
@@ -4549,7 +4895,7 @@ module Aws::MediaConvert
     #                       av_1_settings: {
     #                         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_size: 1.0,
@@ -4563,7 +4909,17 @@ module Aws::MediaConvert
     #                         slices: 1,
     #                         spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       },
-    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
+    #                       avc_intra_settings: {
+    #                         avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                         telecine: "NONE", # accepts NONE, HARD
+    #                       },
+    #                       codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
     #                       frame_capture_settings: {
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
@@ -4571,7 +4927,7 @@ module Aws::MediaConvert
     #                         quality: 1,
     #                       },
     #                       h264_settings: {
-    #                         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                         adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                         bitrate: 1,
     #                         codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                         codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -4580,7 +4936,7 @@ module Aws::MediaConvert
     #                         field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -4624,7 +4980,7 @@ module Aws::MediaConvert
     #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -4667,7 +5023,7 @@ module Aws::MediaConvert
     #                         codec_profile: "MAIN", # accepts MAIN, PROFILE_422
     #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_closed_cadence: 1,
@@ -4696,7 +5052,7 @@ module Aws::MediaConvert
     #                       prores_settings: {
     #                         codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -4706,10 +5062,20 @@ module Aws::MediaConvert
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                       },
+    #                       vc_3_settings: {
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                         telecine: "NONE", # accepts NONE, HARD
+    #                         vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
+    #                       },
     #                       vp_8_settings: {
     #                         bitrate: 1,
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_size: 1.0,
@@ -4724,7 +5090,7 @@ module Aws::MediaConvert
     #                       vp_9_settings: {
     #                         bitrate: 1,
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_size: 1.0,
@@ -5167,6 +5533,7 @@ module Aws::MediaConvert
     #           ],
     #           container_settings: {
     #             cmfc_settings: {
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             },
@@ -5176,6 +5543,7 @@ module Aws::MediaConvert
     #             },
     #             m2ts_settings: {
     #               audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               audio_frames_per_pes: 1,
     #               audio_pids: [1],
     #               bitrate: 1,
@@ -5226,6 +5594,7 @@ module Aws::MediaConvert
     #               video_pid: 1,
     #             },
     #             m3u_8_settings: {
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               audio_frames_per_pes: 1,
     #               audio_pids: [1],
     #               nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -5251,6 +5620,7 @@ module Aws::MediaConvert
     #               reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #             },
     #             mp_4_settings: {
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               ctts_version: 1,
     #               free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -5258,12 +5628,15 @@ module Aws::MediaConvert
     #               mp_4_major_brand: "__string",
     #             },
     #             mpd_settings: {
+    #               accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             },
     #             mxf_settings: {
     #               afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #               profile: "D_10", # accepts D_10, XDCAM, OP1A
     #             },
     #           },
     #           video_description: {
@@ -5273,7 +5646,7 @@ module Aws::MediaConvert
     #               av_1_settings: {
     #                 adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 gop_size: 1.0,
@@ -5287,7 +5660,17 @@ module Aws::MediaConvert
     #                 slices: 1,
     #                 spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #               },
-    #               codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
+    #               avc_intra_settings: {
+    #                 avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                 framerate_denominator: 1,
+    #                 framerate_numerator: 1,
+    #                 interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                 telecine: "NONE", # accepts NONE, HARD
+    #               },
+    #               codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
     #               frame_capture_settings: {
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
@@ -5295,7 +5678,7 @@ module Aws::MediaConvert
     #                 quality: 1,
     #               },
     #               h264_settings: {
-    #                 adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                 adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                 bitrate: 1,
     #                 codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                 codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -5304,7 +5687,7 @@ module Aws::MediaConvert
     #                 field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                 flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -5348,7 +5731,7 @@ module Aws::MediaConvert
     #                 dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                 flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -5391,7 +5774,7 @@ module Aws::MediaConvert
     #                 codec_profile: "MAIN", # accepts MAIN, PROFILE_422
     #                 dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 gop_closed_cadence: 1,
@@ -5420,7 +5803,7 @@ module Aws::MediaConvert
     #               prores_settings: {
     #                 codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -5430,10 +5813,20 @@ module Aws::MediaConvert
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                 telecine: "NONE", # accepts NONE, HARD
     #               },
+    #               vc_3_settings: {
+    #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                 framerate_denominator: 1,
+    #                 framerate_numerator: 1,
+    #                 interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                 telecine: "NONE", # accepts NONE, HARD
+    #                 vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
+    #               },
     #               vp_8_settings: {
     #                 bitrate: 1,
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 gop_size: 1.0,
@@ -5448,7 +5841,7 @@ module Aws::MediaConvert
     #               vp_9_settings: {
     #                 bitrate: 1,
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 gop_size: 1.0,
@@ -5824,6 +6217,7 @@ module Aws::MediaConvert
     #         fragment_length: 1,
     #         hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #         min_buffer_time: 1,
+    #         min_final_segment_length: 1.0,
     #         mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #         segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #         segment_length: 1,
@@ -5879,6 +6273,22 @@ module Aws::MediaConvert
     #   smooth playout.
     #   @return [Integer]
     #
+    # @!attribute [rw] min_final_segment_length
+    #   Keep this setting at the default value of 0, unless you are
+    #   troubleshooting a problem with how devices play back the end of your
+    #   video asset. If you know that player devices are hanging on the
+    #   final segment of your video because the length of your final segment
+    #   is too short, use this setting to specify a minimum final segment
+    #   length, in seconds. Choose a value that is greater than or equal to
+    #   1 and less than your segment length. When you specify a value for
+    #   this setting, the encoder will combine any final segment that is
+    #   shorter than the length that you specify with the previous segment.
+    #   For example, your segment length is 3 seconds and your final segment
+    #   is .5 seconds without a minimum final segment length; when you set
+    #   the minimum final segment length to 1, your final segment is 3.5
+    #   seconds.
+    #   @return [Float]
+    #
     # @!attribute [rw] mpd_profile
     #   Specify whether your DASH profile is on-demand or main. When you
     #   choose Main profile (MAIN\_PROFILE), the service signals
@@ -5927,6 +6337,7 @@ module Aws::MediaConvert
       :fragment_length,
       :hbbtv_compliance,
       :min_buffer_time,
+      :min_final_segment_length,
       :mpd_profile,
       :segment_control,
       :segment_length,
@@ -7349,7 +7760,7 @@ module Aws::MediaConvert
     # @!attribute [rw] job
     #   Each job converts an input file into an output file or files. For
     #   more information, see the User Guide at
-    #   http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #   @return [Types::Job]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetJobResponse AWS API Documentation
@@ -7540,7 +7951,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #         adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #         bitrate: 1,
     #         codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #         codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -7549,7 +7960,7 @@ module Aws::MediaConvert
     #         field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #         framerate_denominator: 1,
     #         framerate_numerator: 1,
     #         gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -7586,8 +7997,18 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] adaptive_quantization
-    #   Adaptive quantization. Allows intra-frame quantizers to vary to
-    #   improve visual quality.
+    #   Keep the default value, Auto (AUTO), for this setting to have
+    #   MediaConvert automatically apply the best types of quantization for
+    #   your video content. When you want to apply your quantization
+    #   settings manually, you must set H264AdaptiveQuantization to a value
+    #   other than Auto (AUTO). Use this setting to specify the strength of
+    #   any adaptive quantization filters that you enable. If you don't
+    #   want MediaConvert to do any adaptive quantization in this transcode,
+    #   set Adaptive quantization (H264AdaptiveQuantization) to Off (OFF).
+    #   Related settings: The value that you choose here applies to the
+    #   following settings: H264FlickerAdaptiveQuantization,
+    #   H264SpatialAdaptiveQuantization, and
+    #   H264TemporalAdaptiveQuantization.
     #   @return [String]
     #
     # @!attribute [rw] bitrate
@@ -7623,12 +8044,27 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] field_encoding
-    #   Choosing FORCE\_FIELD disables PAFF encoding for interlaced outputs.
+    #   Keep the default value, PAFF, to have MediaConvert use PAFF encoding
+    #   for interlaced outputs. Choose Force field (FORCE\_FIELD) to disable
+    #   PAFF encoding and create separate interlaced fields.
     #   @return [String]
     #
     # @!attribute [rw] flicker_adaptive_quantization
-    #   Adjust quantization within each frame to reduce flicker or 'pop'
-    #   on I-frames.
+    #   Only use this setting when you change the default value, AUTO, for
+    #   the setting H264AdaptiveQuantization. When you keep all defaults,
+    #   excluding H264AdaptiveQuantization and all other adaptive
+    #   quantization from your JSON job specification, MediaConvert
+    #   automatically applies the best types of quantization for your video
+    #   content. When you set H264AdaptiveQuantization to a value other than
+    #   AUTO, the default value for H264FlickerAdaptiveQuantization is
+    #   Disabled (DISABLED). Change this value to Enabled (ENABLED) to
+    #   reduce I-frame pop. I-frame pop appears as a visual flicker that can
+    #   arise when the encoder saves bits by copying some macroblocks many
+    #   times from frame to frame, and then refreshes them at the I-frame.
+    #   When you enable this setting, the encoder updates these macroblocks
+    #   slightly more often to smooth out the flicker. To manually enable or
+    #   disable H264FlickerAdaptiveQuantization, you must set Adaptive
+    #   quantization (H264AdaptiveQuantization) to a value other than AUTO.
     #   @return [String]
     #
     # @!attribute [rw] framerate_control
@@ -7648,8 +8084,18 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] framerate_conversion_algorithm
-    #   Optional. Specify how the transcoder performs framerate conversion.
-    #   The default behavior is to use duplicate drop conversion.
+    #   Choose the method that you want MediaConvert to use when increasing
+    #   or decreasing the frame rate. We recommend using drop duplicate
+    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
+    #   to 30 fps. For numerically complex conversions, you can use
+    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
+    #   picture, but might introduce undesirable video artifacts. For
+    #   complex frame rate conversions, especially if your source video has
+    #   already been converted from its original cadence, use FrameFormer
+    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
+    #   chooses the best conversion method frame by frame. Note that using
+    #   FrameFormer increases the transcoding time and incurs a significant
+    #   add-on cost.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -7663,8 +8109,13 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] framerate_numerator
-    #   Frame rate numerator - frame rate is a fraction, e.g. 24000 / 1001 =
-    #   23.976 fps.
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator
+    #   of this fraction. In this example, use 24000 for the value of
+    #   FramerateNumerator. When you use the console for transcode jobs that
+    #   use frame rate conversion, provide the value as a decimal number for
+    #   Framerate. In this example, specify 23.976.
     #   @return [Integer]
     #
     # @!attribute [rw] gop_b_reference
@@ -7701,19 +8152,20 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] interlace_mode
-    #   Use Interlace mode (InterlaceMode) to choose the scan line type for
-    #   the output. * Top Field First (TOP\_FIELD) and Bottom Field First
-    #   (BOTTOM\_FIELD) produce interlaced output with the entire output
-    #   having the same field polarity (top or bottom first). * Follow,
-    #   Default Top (FOLLOW\_TOP\_FIELD) and Follow, Default Bottom
-    #   (FOLLOW\_BOTTOM\_FIELD) use the same field polarity as the source.
-    #   Therefore, behavior depends on the input scan type, as follows. - If
-    #   the source is interlaced, the output will be interlaced with the
-    #   same polarity as the source (it will follow the source). The output
-    #   could therefore be a mix of "top field first" and "bottom field
-    #   first". - If the source is progressive, the output will be
-    #   interlaced with "top field first" or "bottom field first"
-    #   polarity, depending on which of the Follow options you chose.
+    #   Choose the scan line type for the output. Keep the default value,
+    #   Progressive (PROGRESSIVE) to create a progressive output, regardless
+    #   of the scan type of your input. Use Top field first (TOP\_FIELD) or
+    #   Bottom field first (BOTTOM\_FIELD) to create an output that's
+    #   interlaced with the same field polarity throughout. Use Follow,
+    #   default top (FOLLOW\_TOP\_FIELD) or Follow, default bottom
+    #   (FOLLOW\_BOTTOM\_FIELD) to produce outputs with the same field
+    #   polarity as the source. For jobs that have multiple inputs, the
+    #   output field polarity might change over the course of the output.
+    #   Follow behavior depends on the input scan type. If the source is
+    #   interlaced, the output will be interlaced with the same polarity as
+    #   the source. If the source is progressive, the output will be
+    #   interlaced with top field bottom field first, depending on which of
+    #   the Follow options you choose.
     #   @return [String]
     #
     # @!attribute [rw] max_bitrate
@@ -7809,18 +8261,60 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] slow_pal
-    #   Enables Slow PAL rate conversion. 23.976fps and 24fps input is
-    #   relabeled as 25fps, and audio is sped up correspondingly.
+    #   Ignore this setting unless your input frame rate is 23.976 or 24
+    #   frames per second (fps). Enable slow PAL to create a 25 fps output.
+    #   When you enable slow PAL, MediaConvert relabels the video frames to
+    #   25 fps and resamples your audio to keep it synchronized with the
+    #   video. Note that enabling this setting will slightly reduce the
+    #   duration of your video. Required settings: You must also set
+    #   Framerate to 25. In your JSON job specification, set
+    #   (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and
+    #   (framerateDenominator) to 1.
     #   @return [String]
     #
     # @!attribute [rw] softness
-    #   Softness. Selects quantizer matrix, larger values reduce
-    #   high-frequency content in the encoded image.
+    #   Ignore this setting unless you need to comply with a specification
+    #   that requires a specific value. If you don't have a specification
+    #   requirement, we recommend that you adjust the softness of your
+    #   output by using a lower value for the setting Sharpness (sharpness)
+    #   or by enabling a noise reducer filter (noiseReducerFilter). The
+    #   Softness (softness) setting specifies the quantization matrices that
+    #   the encoder uses. Keep the default value, 0, for flat quantization.
+    #   Choose the value 1 or 16 to use the default JVT softening
+    #   quantization matricies from the H.264 specification. Choose a value
+    #   from 17 to 128 to use planar interpolation. Increasing values from
+    #   17 to 128 result in increasing reduction of high-frequency data. The
+    #   value 128 results in the softest video.
     #   @return [Integer]
     #
     # @!attribute [rw] spatial_adaptive_quantization
-    #   Adjust quantization within each frame based on spatial variation of
-    #   content complexity.
+    #   Only use this setting when you change the default value, Auto
+    #   (AUTO), for the setting H264AdaptiveQuantization. When you keep all
+    #   defaults, excluding H264AdaptiveQuantization and all other adaptive
+    #   quantization from your JSON job specification, MediaConvert
+    #   automatically applies the best types of quantization for your video
+    #   content. When you set H264AdaptiveQuantization to a value other than
+    #   AUTO, the default value for H264SpatialAdaptiveQuantization is
+    #   Enabled (ENABLED). Keep this default value to adjust quantization
+    #   within each frame based on spatial variation of content complexity.
+    #   When you enable this feature, the encoder uses fewer bits on areas
+    #   that can sustain more distortion with no noticeable visual
+    #   degradation and uses more bits on areas where any small distortion
+    #   will be noticeable. For example, complex textured blocks are encoded
+    #   with fewer bits and smooth textured blocks are encoded with more
+    #   bits. Enabling this feature will almost always improve your video
+    #   quality. Note, though, that this feature doesn't take into account
+    #   where the viewer's attention is likely to be. If viewers are likely
+    #   to be focusing their attention on a part of the screen with a lot of
+    #   complex texture, you might choose to set
+    #   H264SpatialAdaptiveQuantization to Disabled (DISABLED). Related
+    #   setting: When you enable spatial adaptive quantization, set the
+    #   value for Adaptive quantization (H264AdaptiveQuantization) depending
+    #   on your content. For homogeneous content, such as cartoons and video
+    #   games, set it to Low. For content with a wider variety of textures,
+    #   set it to High or Higher. To manually enable or disable
+    #   H264SpatialAdaptiveQuantization, you must set Adaptive quantization
+    #   (H264AdaptiveQuantization) to a value other than AUTO.
     #   @return [String]
     #
     # @!attribute [rw] syntax
@@ -7828,19 +8322,43 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] telecine
-    #   This field applies only if the Streams > Advanced > Framerate
-    #   (framerate) field is set to 29.970. This field works with the
-    #   Streams > Advanced > Preprocessors > Deinterlacer field
-    #   (deinterlace\_mode) and the Streams > Advanced > Interlaced Mode
-    #   field (interlace\_mode) to identify the scan type for the output:
-    #   Progressive, Interlaced, Hard Telecine or Soft Telecine. - Hard:
-    #   produces 29.97i output from 23.976 input. - Soft: produces 23.976;
-    #   the player converts this output to 29.97i.
+    #   When you do frame rate conversion from 23.976 frames per second
+    #   (fps) to 29.97 fps, and your output scan type is interlaced, you can
+    #   optionally enable hard or soft telecine to create a smoother
+    #   picture. Hard telecine (HARD) produces a 29.97i output. Soft
+    #   telecine (SOFT) produces an output with a 23.976 output that signals
+    #   to the video player device to do the conversion during play back.
+    #   When you keep the default value, None (NONE), MediaConvert does a
+    #   standard frame rate conversion to 29.97 without doing anything with
+    #   the field polarity to create a smoother picture.
     #   @return [String]
     #
     # @!attribute [rw] temporal_adaptive_quantization
-    #   Adjust quantization within each frame based on temporal variation of
-    #   content complexity.
+    #   Only use this setting when you change the default value, AUTO, for
+    #   the setting H264AdaptiveQuantization. When you keep all defaults,
+    #   excluding H264AdaptiveQuantization and all other adaptive
+    #   quantization from your JSON job specification, MediaConvert
+    #   automatically applies the best types of quantization for your video
+    #   content. When you set H264AdaptiveQuantization to a value other than
+    #   AUTO, the default value for H264TemporalAdaptiveQuantization is
+    #   Enabled (ENABLED). Keep this default value to adjust quantization
+    #   within each frame based on temporal variation of content complexity.
+    #   When you enable this feature, the encoder uses fewer bits on areas
+    #   of the frame that aren't moving and uses more bits on complex
+    #   objects with sharp edges that move a lot. For example, this feature
+    #   improves the readability of text tickers on newscasts and
+    #   scoreboards on sports matches. Enabling this feature will almost
+    #   always improve your video quality. Note, though, that this feature
+    #   doesn't take into account where the viewer's attention is likely
+    #   to be. If viewers are likely to be focusing their attention on a
+    #   part of the screen that doesn't have moving objects with sharp
+    #   edges, such as sports athletes' faces, you might choose to set
+    #   H264TemporalAdaptiveQuantization to Disabled (DISABLED). Related
+    #   setting: When you enable temporal quantization, adjust the strength
+    #   of the filter with the setting Adaptive quantization
+    #   (adaptiveQuantization). To manually enable or disable
+    #   H264TemporalAdaptiveQuantization, you must set Adaptive quantization
+    #   (H264AdaptiveQuantization) to a value other than AUTO.
     #   @return [String]
     #
     # @!attribute [rw] unregistered_sei_timecode
@@ -7965,7 +8483,7 @@ module Aws::MediaConvert
     #         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #         framerate_denominator: 1,
     #         framerate_numerator: 1,
     #         gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -8003,8 +8521,12 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] adaptive_quantization
-    #   Adaptive quantization. Allows intra-frame quantizers to vary to
-    #   improve visual quality.
+    #   Specify the strength of any adaptive quantization filters that you
+    #   enable. The value that you choose here applies to the following
+    #   settings: Flicker adaptive quantization
+    #   (flickerAdaptiveQuantization), Spatial adaptive quantization
+    #   (spatialAdaptiveQuantization), and Temporal adaptive quantization
+    #   (temporalAdaptiveQuantization).
     #   @return [String]
     #
     # @!attribute [rw] alternate_transfer_function_sei
@@ -8040,8 +8562,14 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] flicker_adaptive_quantization
-    #   Adjust quantization within each frame to reduce flicker or 'pop'
-    #   on I-frames.
+    #   Enable this setting to have the encoder reduce I-frame pop. I-frame
+    #   pop appears as a visual flicker that can arise when the encoder
+    #   saves bits by copying some macroblocks many times from frame to
+    #   frame, and then refreshes them at the I-frame. When you enable this
+    #   setting, the encoder updates these macroblocks slightly more often
+    #   to smooth out the flicker. This setting is disabled by default.
+    #   Related setting: In addition to enabling this setting, you must also
+    #   set adaptiveQuantization to a value other than Off (OFF).
     #   @return [String]
     #
     # @!attribute [rw] framerate_control
@@ -8061,17 +8589,38 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] framerate_conversion_algorithm
-    #   Optional. Specify how the transcoder performs framerate conversion.
-    #   The default behavior is to use duplicate drop conversion.
+    #   Choose the method that you want MediaConvert to use when increasing
+    #   or decreasing the frame rate. We recommend using drop duplicate
+    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
+    #   to 30 fps. For numerically complex conversions, you can use
+    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
+    #   picture, but might introduce undesirable video artifacts. For
+    #   complex frame rate conversions, especially if your source video has
+    #   already been converted from its original cadence, use FrameFormer
+    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
+    #   chooses the best conversion method frame by frame. Note that using
+    #   FrameFormer increases the transcoding time and incurs a significant
+    #   add-on cost.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
-    #   Frame rate denominator.
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateDenominator to specify the
+    #   denominator of this fraction. In this example, use 1001 for the
+    #   value of FramerateDenominator. When you use the console for
+    #   transcode jobs that use frame rate conversion, provide the value as
+    #   a decimal number for Framerate. In this example, specify 23.976.
     #   @return [Integer]
     #
     # @!attribute [rw] framerate_numerator
-    #   Frame rate numerator - frame rate is a fraction, e.g. 24000 / 1001 =
-    #   23.976 fps.
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator
+    #   of this fraction. In this example, use 24000 for the value of
+    #   FramerateNumerator. When you use the console for transcode jobs that
+    #   use frame rate conversion, provide the value as a decimal number for
+    #   Framerate. In this example, specify 23.976.
     #   @return [Integer]
     #
     # @!attribute [rw] gop_b_reference
@@ -8108,21 +8657,20 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] interlace_mode
-    #   Choose the scan line type for the output. Choose Progressive
-    #   (PROGRESSIVE) to create a progressive output, regardless of the scan
-    #   type of your input. Choose Top Field First (TOP\_FIELD) or Bottom
-    #   Field First (BOTTOM\_FIELD) to create an output that's interlaced
-    #   with the same field polarity throughout. Choose Follow, Default Top
-    #   (FOLLOW\_TOP\_FIELD) or Follow, Default Bottom
-    #   (FOLLOW\_BOTTOM\_FIELD) to create an interlaced output with the same
-    #   field polarity as the source. If the source is interlaced, the
-    #   output will be interlaced with the same polarity as the source (it
-    #   will follow the source). The output could therefore be a mix of
-    #   "top field first" and "bottom field first". If the source is
-    #   progressive, your output will be interlaced with "top field first"
-    #   or "bottom field first" polarity, depending on which of the Follow
-    #   options you chose. If you don't choose a value, the service will
-    #   default to Progressive (PROGRESSIVE).
+    #   Choose the scan line type for the output. Keep the default value,
+    #   Progressive (PROGRESSIVE) to create a progressive output, regardless
+    #   of the scan type of your input. Use Top field first (TOP\_FIELD) or
+    #   Bottom field first (BOTTOM\_FIELD) to create an output that's
+    #   interlaced with the same field polarity throughout. Use Follow,
+    #   default top (FOLLOW\_TOP\_FIELD) or Follow, default bottom
+    #   (FOLLOW\_BOTTOM\_FIELD) to produce outputs with the same field
+    #   polarity as the source. For jobs that have multiple inputs, the
+    #   output field polarity might change over the course of the output.
+    #   Follow behavior depends on the input scan type. If the source is
+    #   interlaced, the output will be interlaced with the same polarity as
+    #   the source. If the source is progressive, the output will be
+    #   interlaced with top field bottom field first, depending on which of
+    #   the Follow options you choose.
     #   @return [String]
     #
     # @!attribute [rw] max_bitrate
@@ -8219,13 +8767,35 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] slow_pal
-    #   Enables Slow PAL rate conversion. 23.976fps and 24fps input is
-    #   relabeled as 25fps, and audio is sped up correspondingly.
+    #   Ignore this setting unless your input frame rate is 23.976 or 24
+    #   frames per second (fps). Enable slow PAL to create a 25 fps output.
+    #   When you enable slow PAL, MediaConvert relabels the video frames to
+    #   25 fps and resamples your audio to keep it synchronized with the
+    #   video. Note that enabling this setting will slightly reduce the
+    #   duration of your video. Required settings: You must also set
+    #   Framerate to 25. In your JSON job specification, set
+    #   (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and
+    #   (framerateDenominator) to 1.
     #   @return [String]
     #
     # @!attribute [rw] spatial_adaptive_quantization
-    #   Adjust quantization within each frame based on spatial variation of
-    #   content complexity.
+    #   Keep the default value, Enabled (ENABLED), to adjust quantization
+    #   within each frame based on spatial variation of content complexity.
+    #   When you enable this feature, the encoder uses fewer bits on areas
+    #   that can sustain more distortion with no noticeable visual
+    #   degradation and uses more bits on areas where any small distortion
+    #   will be noticeable. For example, complex textured blocks are encoded
+    #   with fewer bits and smooth textured blocks are encoded with more
+    #   bits. Enabling this feature will almost always improve your video
+    #   quality. Note, though, that this feature doesn't take into account
+    #   where the viewer's attention is likely to be. If viewers are likely
+    #   to be focusing their attention on a part of the screen with a lot of
+    #   complex texture, you might choose to disable this feature. Related
+    #   setting: When you enable spatial adaptive quantization, set the
+    #   value for Adaptive quantization (adaptiveQuantization) depending on
+    #   your content. For homogeneous content, such as cartoons and video
+    #   games, set it to Low. For content with a wider variety of textures,
+    #   set it to High or Higher.
     #   @return [String]
     #
     # @!attribute [rw] telecine
@@ -8240,8 +8810,21 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] temporal_adaptive_quantization
-    #   Adjust quantization within each frame based on temporal variation of
-    #   content complexity.
+    #   Keep the default value, Enabled (ENABLED), to adjust quantization
+    #   within each frame based on temporal variation of content complexity.
+    #   When you enable this feature, the encoder uses fewer bits on areas
+    #   of the frame that aren't moving and uses more bits on complex
+    #   objects with sharp edges that move a lot. For example, this feature
+    #   improves the readability of text tickers on newscasts and
+    #   scoreboards on sports matches. Enabling this feature will almost
+    #   always improve your video quality. Note, though, that this feature
+    #   doesn't take into account where the viewer's attention is likely
+    #   to be. If viewers are likely to be focusing their attention on a
+    #   part of the screen that doesn't have moving objects with sharp
+    #   edges, such as sports athletes' faces, you might choose to disable
+    #   this feature. Related setting: When you enable temporal
+    #   quantization, adjust the strength of the filter with the setting
+    #   Adaptive quantization (adaptiveQuantization).
     #   @return [String]
     #
     # @!attribute [rw] temporal_ids
@@ -8733,8 +9316,10 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] client_cache
-    #   When set to ENABLED, sets #EXT-X-ALLOW-CACHE:no tag, which prevents
-    #   client from saving media segments for later replay.
+    #   Disable this setting only when your workflow requires the
+    #   #EXT-X-ALLOW-CACHE:no tag. Otherwise, keep the default value Enabled
+    #   (ENABLED) and control caching in your video distribution set up. For
+    #   example, use the Cache-Control http header.
     #   @return [String]
     #
     # @!attribute [rw] codec_specification
@@ -9179,7 +9764,7 @@ module Aws::MediaConvert
     #           kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
     #         },
     #         denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
-    #         file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL",
+    #         file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA",
     #         filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #         filter_strength: 1,
     #         image_inserter: {
@@ -9205,6 +9790,7 @@ module Aws::MediaConvert
     #             start_timecode: "__stringPattern010920405090509092",
     #           },
     #         ],
+    #         input_scan_type: "AUTO", # accepts AUTO, PSF
     #         position: {
     #           height: 1,
     #           width: 1,
@@ -9296,15 +9882,14 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] filter_enable
-    #   Use Filter enable (InputFilterEnable) to specify how the transcoding
-    #   service applies the denoise and deblock filters. You must also
-    #   enable the filters separately, with Denoise (InputDenoiseFilter) and
-    #   Deblock (InputDeblockFilter). * Auto - The transcoding service
-    #   determines whether to apply filtering, depending on input type and
-    #   quality. * Disable - The input is not filtered. This is true even
-    #   if you use the API to enable them in (InputDeblockFilter) and
-    #   (InputDeblockFilter). * Force - The in put is filtered regardless
-    #   of input type.
+    #   Specify how the transcoding service applies the denoise and deblock
+    #   filters. You must also enable the filters separately, with Denoise
+    #   (InputDenoiseFilter) and Deblock (InputDeblockFilter). * Auto - The
+    #   transcoding service determines whether to apply filtering, depending
+    #   on input type and quality. * Disable - The input is not filtered.
+    #   This is true even if you use the API to enable them in
+    #   (InputDeblockFilter) and (InputDeblockFilter). * Force - The input
+    #   is filtered regardless of input type.
     #   @return [String]
     #
     # @!attribute [rw] filter_strength
@@ -9328,6 +9913,18 @@ module Aws::MediaConvert
     #   input clip, the transcoding service creates the job outputs by
     #   stringing the clips together in the order you specify them.
     #   @return [Array<Types::InputClipping>]
+    #
+    # @!attribute [rw] input_scan_type
+    #   When you have a progressive segmented frame (PsF) input, use this
+    #   setting to flag the input as PsF. MediaConvert doesn't
+    #   automatically detect PsF. Therefore, flagging your input as PsF
+    #   results in better preservation of video quality when you do
+    #   deinterlacing and frame rate conversion. If you don't specify, the
+    #   default value is Auto (AUTO). Auto is the correct setting for all
+    #   inputs that are not PsF. Don't set this value to PsF when your
+    #   input is interlaced. Doing so creates horizontal interlacing
+    #   artifacts.
+    #   @return [String]
     #
     # @!attribute [rw] position
     #   Use Selection placement (position) to define the video area in your
@@ -9408,6 +10005,7 @@ module Aws::MediaConvert
       :filter_strength,
       :image_inserter,
       :input_clippings,
+      :input_scan_type,
       :position,
       :program_number,
       :psi_control,
@@ -9625,6 +10223,7 @@ module Aws::MediaConvert
     #             start_timecode: "__stringPattern010920405090509092",
     #           },
     #         ],
+    #         input_scan_type: "AUTO", # accepts AUTO, PSF
     #         position: {
     #           height: 1,
     #           width: 1,
@@ -9697,15 +10296,14 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] filter_enable
-    #   Use Filter enable (InputFilterEnable) to specify how the transcoding
-    #   service applies the denoise and deblock filters. You must also
-    #   enable the filters separately, with Denoise (InputDenoiseFilter) and
-    #   Deblock (InputDeblockFilter). * Auto - The transcoding service
-    #   determines whether to apply filtering, depending on input type and
-    #   quality. * Disable - The input is not filtered. This is true even
-    #   if you use the API to enable them in (InputDeblockFilter) and
-    #   (InputDeblockFilter). * Force - The in put is filtered regardless
-    #   of input type.
+    #   Specify how the transcoding service applies the denoise and deblock
+    #   filters. You must also enable the filters separately, with Denoise
+    #   (InputDenoiseFilter) and Deblock (InputDeblockFilter). * Auto - The
+    #   transcoding service determines whether to apply filtering, depending
+    #   on input type and quality. * Disable - The input is not filtered.
+    #   This is true even if you use the API to enable them in
+    #   (InputDeblockFilter) and (InputDeblockFilter). * Force - The input
+    #   is filtered regardless of input type.
     #   @return [String]
     #
     # @!attribute [rw] filter_strength
@@ -9729,6 +10327,18 @@ module Aws::MediaConvert
     #   input clip, the transcoding service creates the job outputs by
     #   stringing the clips together in the order you specify them.
     #   @return [Array<Types::InputClipping>]
+    #
+    # @!attribute [rw] input_scan_type
+    #   When you have a progressive segmented frame (PsF) input, use this
+    #   setting to flag the input as PsF. MediaConvert doesn't
+    #   automatically detect PsF. Therefore, flagging your input as PsF
+    #   results in better preservation of video quality when you do
+    #   deinterlacing and frame rate conversion. If you don't specify, the
+    #   default value is Auto (AUTO). Auto is the correct setting for all
+    #   inputs that are not PsF. Don't set this value to PsF when your
+    #   input is interlaced. Doing so creates horizontal interlacing
+    #   artifacts.
+    #   @return [String]
     #
     # @!attribute [rw] position
     #   Use Selection placement (position) to define the video area in your
@@ -9797,6 +10407,7 @@ module Aws::MediaConvert
       :filter_strength,
       :image_inserter,
       :input_clippings,
+      :input_scan_type,
       :position,
       :program_number,
       :psi_control,
@@ -9928,7 +10539,7 @@ module Aws::MediaConvert
 
     # Each job converts an input file into an output file or files. For more
     # information, see the User Guide at
-    # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    # https://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #
     # @!attribute [rw] acceleration_settings
     #   Accelerated transcoding can significantly speed up jobs with long,
@@ -10022,7 +10633,7 @@ module Aws::MediaConvert
     #   When you create a job, you can specify a queue to send it to. If you
     #   don't specify, the job will go to the default queue. For more about
     #   queues, see the User Guide topic at
-    #   http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #   @return [String]
     #
     # @!attribute [rw] queue_transitions
@@ -10037,7 +10648,7 @@ module Aws::MediaConvert
     # @!attribute [rw] role
     #   The IAM role you use for creating this job. For details about
     #   permissions, see the User Guide topic at the User Guide at
-    #   http://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html
     #   @return [String]
     #
     # @!attribute [rw] settings
@@ -10231,7 +10842,7 @@ module Aws::MediaConvert
     #               kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
     #             },
     #             denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
-    #             file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL",
+    #             file_input: "__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA",
     #             filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #             filter_strength: 1,
     #             image_inserter: {
@@ -10257,6 +10868,7 @@ module Aws::MediaConvert
     #                 start_timecode: "__stringPattern010920405090509092",
     #               },
     #             ],
+    #             input_scan_type: "AUTO", # accepts AUTO, PSF
     #             position: {
     #               height: 1,
     #               width: 1,
@@ -10310,8 +10922,28 @@ module Aws::MediaConvert
     #           breakout_code: 1,
     #           distributor_id: "__string",
     #         },
+    #         nielsen_non_linear_watermark: {
+    #           active_watermark_process: "NAES2_AND_NW", # accepts NAES2_AND_NW, CBET, NAES2_AND_NW_AND_CBET
+    #           adi_filename: "__stringPatternS3",
+    #           asset_id: "__stringMin1Max20",
+    #           asset_name: "__stringMin1Max50",
+    #           cbet_source_id: "__stringPattern0xAFaF0908190908",
+    #           episode_id: "__stringMin1Max20",
+    #           metadata_destination: "__stringPatternS3",
+    #           source_id: 1,
+    #           source_watermark_status: "CLEAN", # accepts CLEAN, WATERMARKED
+    #           tic_server_url: "__stringPatternHttps",
+    #           unique_tic_per_audio_track: "RESERVE_UNIQUE_TICS_PER_TRACK", # accepts RESERVE_UNIQUE_TICS_PER_TRACK, SAME_TICS_PER_TRACK
+    #         },
     #         output_groups: [
     #           {
+    #             automated_encoding_settings: {
+    #               abr_settings: {
+    #                 max_abr_bitrate: 1,
+    #                 max_renditions: 1,
+    #                 min_abr_bitrate: 1,
+    #               },
+    #             },
     #             custom_name: "__string",
     #             name: "__string",
     #             output_group_settings: {
@@ -10401,6 +11033,7 @@ module Aws::MediaConvert
     #                 fragment_length: 1,
     #                 hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                 min_buffer_time: 1,
+    #                 min_final_segment_length: 1.0,
     #                 mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
@@ -10722,6 +11355,7 @@ module Aws::MediaConvert
     #                 ],
     #                 container_settings: {
     #                   cmfc_settings: {
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   },
@@ -10731,6 +11365,7 @@ module Aws::MediaConvert
     #                   },
     #                   m2ts_settings: {
     #                     audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     audio_frames_per_pes: 1,
     #                     audio_pids: [1],
     #                     bitrate: 1,
@@ -10781,6 +11416,7 @@ module Aws::MediaConvert
     #                     video_pid: 1,
     #                   },
     #                   m3u_8_settings: {
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     audio_frames_per_pes: 1,
     #                     audio_pids: [1],
     #                     nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -10806,6 +11442,7 @@ module Aws::MediaConvert
     #                     reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #                   },
     #                   mp_4_settings: {
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     ctts_version: 1,
     #                     free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -10813,12 +11450,15 @@ module Aws::MediaConvert
     #                     mp_4_major_brand: "__string",
     #                   },
     #                   mpd_settings: {
+    #                     accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   },
     #                   mxf_settings: {
     #                     afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #                     profile: "D_10", # accepts D_10, XDCAM, OP1A
     #                   },
     #                 },
     #                 extension: "__string",
@@ -10841,7 +11481,7 @@ module Aws::MediaConvert
     #                     av_1_settings: {
     #                       adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       gop_size: 1.0,
@@ -10855,7 +11495,17 @@ module Aws::MediaConvert
     #                       slices: 1,
     #                       spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                     },
-    #                     codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
+    #                     avc_intra_settings: {
+    #                       avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                       framerate_denominator: 1,
+    #                       framerate_numerator: 1,
+    #                       interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                       telecine: "NONE", # accepts NONE, HARD
+    #                     },
+    #                     codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
     #                     frame_capture_settings: {
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
@@ -10863,7 +11513,7 @@ module Aws::MediaConvert
     #                       quality: 1,
     #                     },
     #                     h264_settings: {
-    #                       adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                       adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                       bitrate: 1,
     #                       codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                       codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -10872,7 +11522,7 @@ module Aws::MediaConvert
     #                       field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                       flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -10916,7 +11566,7 @@ module Aws::MediaConvert
     #                       dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                       flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -10959,7 +11609,7 @@ module Aws::MediaConvert
     #                       codec_profile: "MAIN", # accepts MAIN, PROFILE_422
     #                       dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       gop_closed_cadence: 1,
@@ -10988,7 +11638,7 @@ module Aws::MediaConvert
     #                     prores_settings: {
     #                       codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -10998,10 +11648,20 @@ module Aws::MediaConvert
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                       telecine: "NONE", # accepts NONE, HARD
     #                     },
+    #                     vc_3_settings: {
+    #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                       framerate_denominator: 1,
+    #                       framerate_numerator: 1,
+    #                       interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                       telecine: "NONE", # accepts NONE, HARD
+    #                       vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
+    #                     },
     #                     vp_8_settings: {
     #                       bitrate: 1,
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       gop_size: 1.0,
@@ -11016,7 +11676,7 @@ module Aws::MediaConvert
     #                     vp_9_settings: {
     #                       bitrate: 1,
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       gop_size: 1.0,
@@ -11190,6 +11850,18 @@ module Aws::MediaConvert
     #   enable the setting.
     #   @return [Types::NielsenConfiguration]
     #
+    # @!attribute [rw] nielsen_non_linear_watermark
+    #   Ignore these settings unless you are using Nielsen non-linear
+    #   watermarking. Specify the values that MediaConvert uses to generate
+    #   and place Nielsen watermarks in your output audio. In addition to
+    #   specifying these values, you also need to set up your cloud TIC
+    #   server. These settings apply to every output in your job. The
+    #   MediaConvert implementation is currently with the following Nielsen
+    #   versions: Nielsen Watermark SDK Version 5.2.1 Nielsen NLM Watermark
+    #   Engine Version 1.2.7 Nielsen Watermark Authenticator \[SID\_TIC\]
+    #   Version \[5.0.0\]
+    #   @return [Types::NielsenNonLinearWatermarkSettings]
+    #
     # @!attribute [rw] output_groups
     #   (OutputGroups) contains one group of settings for each set of
     #   outputs that share a common package type. All unpackaged files
@@ -11212,9 +11884,9 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] timed_metadata_insertion
     #   Enable Timed metadata insertion (TimedMetadataInsertion) to include
-    #   ID3 tags in your job. To include timed metadata, you must enable it
-    #   here, enable it in each output container, and specify tags and
-    #   timecodes in ID3 insertion (Id3Insertion) objects.
+    #   ID3 tags in any HLS outputs. To include timed metadata, you must
+    #   enable it here, enable it in each output container, and specify tags
+    #   and timecodes in ID3 insertion (Id3Insertion) objects.
     #   @return [Types::TimedMetadataInsertion]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/JobSettings AWS API Documentation
@@ -11226,6 +11898,7 @@ module Aws::MediaConvert
       :inputs,
       :motion_image_inserter,
       :nielsen_configuration,
+      :nielsen_non_linear_watermark,
       :output_groups,
       :timecode_config,
       :timed_metadata_insertion)
@@ -11441,6 +12114,7 @@ module Aws::MediaConvert
     #                 start_timecode: "__stringPattern010920405090509092",
     #               },
     #             ],
+    #             input_scan_type: "AUTO", # accepts AUTO, PSF
     #             position: {
     #               height: 1,
     #               width: 1,
@@ -11493,8 +12167,28 @@ module Aws::MediaConvert
     #           breakout_code: 1,
     #           distributor_id: "__string",
     #         },
+    #         nielsen_non_linear_watermark: {
+    #           active_watermark_process: "NAES2_AND_NW", # accepts NAES2_AND_NW, CBET, NAES2_AND_NW_AND_CBET
+    #           adi_filename: "__stringPatternS3",
+    #           asset_id: "__stringMin1Max20",
+    #           asset_name: "__stringMin1Max50",
+    #           cbet_source_id: "__stringPattern0xAFaF0908190908",
+    #           episode_id: "__stringMin1Max20",
+    #           metadata_destination: "__stringPatternS3",
+    #           source_id: 1,
+    #           source_watermark_status: "CLEAN", # accepts CLEAN, WATERMARKED
+    #           tic_server_url: "__stringPatternHttps",
+    #           unique_tic_per_audio_track: "RESERVE_UNIQUE_TICS_PER_TRACK", # accepts RESERVE_UNIQUE_TICS_PER_TRACK, SAME_TICS_PER_TRACK
+    #         },
     #         output_groups: [
     #           {
+    #             automated_encoding_settings: {
+    #               abr_settings: {
+    #                 max_abr_bitrate: 1,
+    #                 max_renditions: 1,
+    #                 min_abr_bitrate: 1,
+    #               },
+    #             },
     #             custom_name: "__string",
     #             name: "__string",
     #             output_group_settings: {
@@ -11584,6 +12278,7 @@ module Aws::MediaConvert
     #                 fragment_length: 1,
     #                 hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                 min_buffer_time: 1,
+    #                 min_final_segment_length: 1.0,
     #                 mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                 segment_length: 1,
@@ -11905,6 +12600,7 @@ module Aws::MediaConvert
     #                 ],
     #                 container_settings: {
     #                   cmfc_settings: {
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   },
@@ -11914,6 +12610,7 @@ module Aws::MediaConvert
     #                   },
     #                   m2ts_settings: {
     #                     audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     audio_frames_per_pes: 1,
     #                     audio_pids: [1],
     #                     bitrate: 1,
@@ -11964,6 +12661,7 @@ module Aws::MediaConvert
     #                     video_pid: 1,
     #                   },
     #                   m3u_8_settings: {
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     audio_frames_per_pes: 1,
     #                     audio_pids: [1],
     #                     nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -11989,6 +12687,7 @@ module Aws::MediaConvert
     #                     reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #                   },
     #                   mp_4_settings: {
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     ctts_version: 1,
     #                     free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -11996,12 +12695,15 @@ module Aws::MediaConvert
     #                     mp_4_major_brand: "__string",
     #                   },
     #                   mpd_settings: {
+    #                     accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   },
     #                   mxf_settings: {
     #                     afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #                     profile: "D_10", # accepts D_10, XDCAM, OP1A
     #                   },
     #                 },
     #                 extension: "__string",
@@ -12024,7 +12726,7 @@ module Aws::MediaConvert
     #                     av_1_settings: {
     #                       adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       gop_size: 1.0,
@@ -12038,7 +12740,17 @@ module Aws::MediaConvert
     #                       slices: 1,
     #                       spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                     },
-    #                     codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
+    #                     avc_intra_settings: {
+    #                       avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                       framerate_denominator: 1,
+    #                       framerate_numerator: 1,
+    #                       interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                       telecine: "NONE", # accepts NONE, HARD
+    #                     },
+    #                     codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
     #                     frame_capture_settings: {
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
@@ -12046,7 +12758,7 @@ module Aws::MediaConvert
     #                       quality: 1,
     #                     },
     #                     h264_settings: {
-    #                       adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                       adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                       bitrate: 1,
     #                       codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                       codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -12055,7 +12767,7 @@ module Aws::MediaConvert
     #                       field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                       flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -12099,7 +12811,7 @@ module Aws::MediaConvert
     #                       dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                       flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -12142,7 +12854,7 @@ module Aws::MediaConvert
     #                       codec_profile: "MAIN", # accepts MAIN, PROFILE_422
     #                       dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       gop_closed_cadence: 1,
@@ -12171,7 +12883,7 @@ module Aws::MediaConvert
     #                     prores_settings: {
     #                       codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -12181,10 +12893,20 @@ module Aws::MediaConvert
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                       telecine: "NONE", # accepts NONE, HARD
     #                     },
+    #                     vc_3_settings: {
+    #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                       framerate_denominator: 1,
+    #                       framerate_numerator: 1,
+    #                       interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                       telecine: "NONE", # accepts NONE, HARD
+    #                       vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
+    #                     },
     #                     vp_8_settings: {
     #                       bitrate: 1,
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       gop_size: 1.0,
@@ -12199,7 +12921,7 @@ module Aws::MediaConvert
     #                     vp_9_settings: {
     #                       bitrate: 1,
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       gop_size: 1.0,
@@ -12373,6 +13095,18 @@ module Aws::MediaConvert
     #   enable the setting.
     #   @return [Types::NielsenConfiguration]
     #
+    # @!attribute [rw] nielsen_non_linear_watermark
+    #   Ignore these settings unless you are using Nielsen non-linear
+    #   watermarking. Specify the values that MediaConvert uses to generate
+    #   and place Nielsen watermarks in your output audio. In addition to
+    #   specifying these values, you also need to set up your cloud TIC
+    #   server. These settings apply to every output in your job. The
+    #   MediaConvert implementation is currently with the following Nielsen
+    #   versions: Nielsen Watermark SDK Version 5.2.1 Nielsen NLM Watermark
+    #   Engine Version 1.2.7 Nielsen Watermark Authenticator \[SID\_TIC\]
+    #   Version \[5.0.0\]
+    #   @return [Types::NielsenNonLinearWatermarkSettings]
+    #
     # @!attribute [rw] output_groups
     #   (OutputGroups) contains one group of settings for each set of
     #   outputs that share a common package type. All unpackaged files
@@ -12395,9 +13129,9 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] timed_metadata_insertion
     #   Enable Timed metadata insertion (TimedMetadataInsertion) to include
-    #   ID3 tags in your job. To include timed metadata, you must enable it
-    #   here, enable it in each output container, and specify tags and
-    #   timecodes in ID3 insertion (Id3Insertion) objects.
+    #   ID3 tags in any HLS outputs. To include timed metadata, you must
+    #   enable it here, enable it in each output container, and specify tags
+    #   and timecodes in ID3 insertion (Id3Insertion) objects.
     #   @return [Types::TimedMetadataInsertion]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/JobTemplateSettings AWS API Documentation
@@ -12409,6 +13143,7 @@ module Aws::MediaConvert
       :inputs,
       :motion_image_inserter,
       :nielsen_configuration,
+      :nielsen_non_linear_watermark,
       :output_groups,
       :timecode_config,
       :timed_metadata_insertion)
@@ -12794,6 +13529,7 @@ module Aws::MediaConvert
     #
     #       {
     #         audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #         audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #         audio_frames_per_pes: 1,
     #         audio_pids: [1],
     #         bitrate: 1,
@@ -12847,6 +13583,25 @@ module Aws::MediaConvert
     # @!attribute [rw] audio_buffer_model
     #   Selects between the DVB and ATSC buffer models for Dolby Digital
     #   audio.
+    #   @return [String]
+    #
+    # @!attribute [rw] audio_duration
+    #   Specify this setting only when your output will be consumed by a
+    #   downstream repackaging workflow that is sensitive to very small
+    #   duration differences between video and audio. For this situation,
+    #   choose Match video duration (MATCH\_VIDEO\_DURATION). In all other
+    #   cases, keep the default value, Default codec duration
+    #   (DEFAULT\_CODEC\_DURATION). When you choose Match video duration,
+    #   MediaConvert pads the output audio streams with silence or trims
+    #   them to ensure that the total duration of each audio stream is at
+    #   least as long as the total duration of the video stream. After
+    #   padding or trimming, the audio stream duration is no more than one
+    #   frame longer than the video stream. MediaConvert applies audio
+    #   padding or trimming only to the end of the last segment of the
+    #   output. For unsegmented outputs, MediaConvert adds padding only to
+    #   the end of the file. When you keep the default value, any minor
+    #   discrepancies between audio and video duration will depend on your
+    #   output audio codec.
     #   @return [String]
     #
     # @!attribute [rw] audio_frames_per_pes
@@ -13080,6 +13835,7 @@ module Aws::MediaConvert
     #
     class M2tsSettings < Struct.new(
       :audio_buffer_model,
+      :audio_duration,
       :audio_frames_per_pes,
       :audio_pids,
       :bitrate,
@@ -13125,6 +13881,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #         audio_frames_per_pes: 1,
     #         audio_pids: [1],
     #         nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -13142,6 +13899,25 @@ module Aws::MediaConvert
     #         transport_stream_id: 1,
     #         video_pid: 1,
     #       }
+    #
+    # @!attribute [rw] audio_duration
+    #   Specify this setting only when your output will be consumed by a
+    #   downstream repackaging workflow that is sensitive to very small
+    #   duration differences between video and audio. For this situation,
+    #   choose Match video duration (MATCH\_VIDEO\_DURATION). In all other
+    #   cases, keep the default value, Default codec duration
+    #   (DEFAULT\_CODEC\_DURATION). When you choose Match video duration,
+    #   MediaConvert pads the output audio streams with silence or trims
+    #   them to ensure that the total duration of each audio stream is at
+    #   least as long as the total duration of the video stream. After
+    #   padding or trimming, the audio stream duration is no more than one
+    #   frame longer than the video stream. MediaConvert applies audio
+    #   padding or trimming only to the end of the last segment of the
+    #   output. For unsegmented outputs, MediaConvert adds padding only to
+    #   the end of the file. When you keep the default value, any minor
+    #   discrepancies between audio and video duration will depend on your
+    #   output audio codec.
+    #   @return [String]
     #
     # @!attribute [rw] audio_frames_per_pes
     #   The number of audio frames to insert for each PES packet.
@@ -13236,6 +14012,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/M3u8Settings AWS API Documentation
     #
     class M3u8Settings < Struct.new(
+      :audio_duration,
       :audio_frames_per_pes,
       :audio_pids,
       :nielsen_id_3,
@@ -13448,7 +14225,12 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] padding_control
-    #   If set to OMNEON, inserts Omneon-compatible padding
+    #   To make this output compatible with Omenon, keep the default value,
+    #   OMNEON. Unless you need Omneon compatibility, set this value to
+    #   NONE. When you keep the default value, OMNEON, MediaConvert
+    #   increases the length of the edit list atom. This might cause file
+    #   rejections when a recipient of the output file doesn't expct this
+    #   extra padding.
     #   @return [String]
     #
     # @!attribute [rw] reference
@@ -13562,12 +14344,32 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #         cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         ctts_version: 1,
     #         free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #         mp_4_major_brand: "__string",
     #       }
+    #
+    # @!attribute [rw] audio_duration
+    #   Specify this setting only when your output will be consumed by a
+    #   downstream repackaging workflow that is sensitive to very small
+    #   duration differences between video and audio. For this situation,
+    #   choose Match video duration (MATCH\_VIDEO\_DURATION). In all other
+    #   cases, keep the default value, Default codec duration
+    #   (DEFAULT\_CODEC\_DURATION). When you choose Match video duration,
+    #   MediaConvert pads the output audio streams with silence or trims
+    #   them to ensure that the total duration of each audio stream is at
+    #   least as long as the total duration of the video stream. After
+    #   padding or trimming, the audio stream duration is no more than one
+    #   frame longer than the video stream. MediaConvert applies audio
+    #   padding or trimming only to the end of the last segment of the
+    #   output. For unsegmented outputs, MediaConvert adds padding only to
+    #   the end of the file. When you keep the default value, any minor
+    #   discrepancies between audio and video duration will depend on your
+    #   output audio codec.
+    #   @return [String]
     #
     # @!attribute [rw] cslg_atom
     #   When enabled, file composition times will start at zero, composition
@@ -13605,6 +14407,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Mp4Settings AWS API Documentation
     #
     class Mp4Settings < Struct.new(
+      :audio_duration,
       :cslg_atom,
       :ctts_version,
       :free_space_box,
@@ -13620,10 +14423,35 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #         audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #         caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #         scte_35_esam: "INSERT", # accepts INSERT, NONE
     #         scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #       }
+    #
+    # @!attribute [rw] accessibility_caption_hints
+    #   Optional. Choose Include (INCLUDE) to have MediaConvert mark up your DASH manifest with <Accessibility> elements for embedded 608 captions. This markup isn't generally required, but some video players require it to discover and play embedded 608 captions. Keep the default value, Exclude (EXCLUDE), to leave these elements out. When you enable this setting, this is the markup that MediaConvert includes in your manifest: <Accessibility schemeIdUri="urn:scte:dash:cc:cea-608:2015" value="CC1=eng" /> </Accessibility>
+    #   @return [String]
+    #
+    # @!attribute [rw] audio_duration
+    #   Specify this setting only when your output will be consumed by a
+    #   downstream repackaging workflow that is sensitive to very small
+    #   duration differences between video and audio. For this situation,
+    #   choose Match video duration (MATCH\_VIDEO\_DURATION). In all other
+    #   cases, keep the default value, Default codec duration
+    #   (DEFAULT\_CODEC\_DURATION). When you choose Match video duration,
+    #   MediaConvert pads the output audio streams with silence or trims
+    #   them to ensure that the total duration of each audio stream is at
+    #   least as long as the total duration of the video stream. After
+    #   padding or trimming, the audio stream duration is no more than one
+    #   frame longer than the video stream. MediaConvert applies audio
+    #   padding or trimming only to the end of the last segment of the
+    #   output. For unsegmented outputs, MediaConvert adds padding only to
+    #   the end of the file. When you keep the default value, any minor
+    #   discrepancies between audio and video duration will depend on your
+    #   output audio codec.
+    #   @return [String]
     #
     # @!attribute [rw] caption_container_type
     #   Use this setting only in DASH output groups that include sidecar
@@ -13653,6 +14481,8 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MpdSettings AWS API Documentation
     #
     class MpdSettings < Struct.new(
+      :accessibility_caption_hints,
+      :audio_duration,
       :caption_container_type,
       :scte_35_esam,
       :scte_35_source)
@@ -13673,7 +14503,7 @@ module Aws::MediaConvert
     #         codec_profile: "MAIN", # accepts MAIN, PROFILE_422
     #         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #         framerate_denominator: 1,
     #         framerate_numerator: 1,
     #         gop_closed_cadence: 1,
@@ -13701,8 +14531,11 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] adaptive_quantization
-    #   Adaptive quantization. Allows intra-frame quantizers to vary to
-    #   improve visual quality.
+    #   Specify the strength of any adaptive quantization filters that you
+    #   enable. The value that you choose here applies to the following
+    #   settings: Spatial adaptive quantization
+    #   (spatialAdaptiveQuantization), and Temporal adaptive quantization
+    #   (temporalAdaptiveQuantization).
     #   @return [String]
     #
     # @!attribute [rw] bitrate
@@ -13748,17 +14581,38 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] framerate_conversion_algorithm
-    #   Optional. Specify how the transcoder performs framerate conversion.
-    #   The default behavior is to use duplicate drop conversion.
+    #   Choose the method that you want MediaConvert to use when increasing
+    #   or decreasing the frame rate. We recommend using drop duplicate
+    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
+    #   to 30 fps. For numerically complex conversions, you can use
+    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
+    #   picture, but might introduce undesirable video artifacts. For
+    #   complex frame rate conversions, especially if your source video has
+    #   already been converted from its original cadence, use FrameFormer
+    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
+    #   chooses the best conversion method frame by frame. Note that using
+    #   FrameFormer increases the transcoding time and incurs a significant
+    #   add-on cost.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
-    #   Frame rate denominator.
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateDenominator to specify the
+    #   denominator of this fraction. In this example, use 1001 for the
+    #   value of FramerateDenominator. When you use the console for
+    #   transcode jobs that use frame rate conversion, provide the value as
+    #   a decimal number for Framerate. In this example, specify 23.976.
     #   @return [Integer]
     #
     # @!attribute [rw] framerate_numerator
-    #   Frame rate numerator - frame rate is a fraction, e.g. 24000 / 1001 =
-    #   23.976 fps.
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator
+    #   of this fraction. In this example, use 24000 for the value of
+    #   FramerateNumerator. When you use the console for transcode jobs that
+    #   use frame rate conversion, provide the value as a decimal number for
+    #   Framerate. In this example, specify 23.976.
     #   @return [Integer]
     #
     # @!attribute [rw] gop_closed_cadence
@@ -13790,19 +14644,20 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] interlace_mode
-    #   Use Interlace mode (InterlaceMode) to choose the scan line type for
-    #   the output. * Top Field First (TOP\_FIELD) and Bottom Field First
-    #   (BOTTOM\_FIELD) produce interlaced output with the entire output
-    #   having the same field polarity (top or bottom first). * Follow,
-    #   Default Top (FOLLOW\_TOP\_FIELD) and Follow, Default Bottom
-    #   (FOLLOW\_BOTTOM\_FIELD) use the same field polarity as the source.
-    #   Therefore, behavior depends on the input scan type. - If the source
-    #   is interlaced, the output will be interlaced with the same polarity
-    #   as the source (it will follow the source). The output could
-    #   therefore be a mix of "top field first" and "bottom field
-    #   first". - If the source is progressive, the output will be
-    #   interlaced with "top field first" or "bottom field first"
-    #   polarity, depending on which of the Follow options you chose.
+    #   Choose the scan line type for the output. Keep the default value,
+    #   Progressive (PROGRESSIVE) to create a progressive output, regardless
+    #   of the scan type of your input. Use Top field first (TOP\_FIELD) or
+    #   Bottom field first (BOTTOM\_FIELD) to create an output that's
+    #   interlaced with the same field polarity throughout. Use Follow,
+    #   default top (FOLLOW\_TOP\_FIELD) or Follow, default bottom
+    #   (FOLLOW\_BOTTOM\_FIELD) to produce outputs with the same field
+    #   polarity as the source. For jobs that have multiple inputs, the
+    #   output field polarity might change over the course of the output.
+    #   Follow behavior depends on the input scan type. If the source is
+    #   interlaced, the output will be interlaced with the same polarity as
+    #   the source. If the source is progressive, the output will be
+    #   interlaced with top field bottom field first, depending on which of
+    #   the Follow options you choose.
     #   @return [String]
     #
     # @!attribute [rw] intra_dc_precision
@@ -13879,34 +14734,86 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] slow_pal
-    #   Enables Slow PAL rate conversion. 23.976fps and 24fps input is
-    #   relabeled as 25fps, and audio is sped up correspondingly.
+    #   Ignore this setting unless your input frame rate is 23.976 or 24
+    #   frames per second (fps). Enable slow PAL to create a 25 fps output.
+    #   When you enable slow PAL, MediaConvert relabels the video frames to
+    #   25 fps and resamples your audio to keep it synchronized with the
+    #   video. Note that enabling this setting will slightly reduce the
+    #   duration of your video. Required settings: You must also set
+    #   Framerate to 25. In your JSON job specification, set
+    #   (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and
+    #   (framerateDenominator) to 1.
     #   @return [String]
     #
     # @!attribute [rw] softness
-    #   Softness. Selects quantizer matrix, larger values reduce
-    #   high-frequency content in the encoded image.
+    #   Ignore this setting unless you need to comply with a specification
+    #   that requires a specific value. If you don't have a specification
+    #   requirement, we recommend that you adjust the softness of your
+    #   output by using a lower value for the setting Sharpness (sharpness)
+    #   or by enabling a noise reducer filter (noiseReducerFilter). The
+    #   Softness (softness) setting specifies the quantization matrices that
+    #   the encoder uses. Keep the default value, 0, to use the AWS
+    #   Elemental default matrices. Choose a value from 17 to 128 to use
+    #   planar interpolation. Increasing values from 17 to 128 result in
+    #   increasing reduction of high-frequency data. The value 128 results
+    #   in the softest video.
     #   @return [Integer]
     #
     # @!attribute [rw] spatial_adaptive_quantization
-    #   Adjust quantization within each frame based on spatial variation of
-    #   content complexity.
+    #   Keep the default value, Enabled (ENABLED), to adjust quantization
+    #   within each frame based on spatial variation of content complexity.
+    #   When you enable this feature, the encoder uses fewer bits on areas
+    #   that can sustain more distortion with no noticeable visual
+    #   degradation and uses more bits on areas where any small distortion
+    #   will be noticeable. For example, complex textured blocks are encoded
+    #   with fewer bits and smooth textured blocks are encoded with more
+    #   bits. Enabling this feature will almost always improve your video
+    #   quality. Note, though, that this feature doesn't take into account
+    #   where the viewer's attention is likely to be. If viewers are likely
+    #   to be focusing their attention on a part of the screen with a lot of
+    #   complex texture, you might choose to disable this feature. Related
+    #   setting: When you enable spatial adaptive quantization, set the
+    #   value for Adaptive quantization (adaptiveQuantization) depending on
+    #   your content. For homogeneous content, such as cartoons and video
+    #   games, set it to Low. For content with a wider variety of textures,
+    #   set it to High or Higher.
     #   @return [String]
     #
     # @!attribute [rw] syntax
-    #   Produces a Type D-10 compatible bitstream (SMPTE 356M-2001).
+    #   Specify whether this output's video uses the D10 syntax. Keep the
+    #   default value to not use the syntax. Related settings: When you
+    #   choose D10 (D\_10) for your MXF profile (profile), you must also set
+    #   this value to to D10 (D\_10).
     #   @return [String]
     #
     # @!attribute [rw] telecine
-    #   Only use Telecine (Mpeg2Telecine) when you set Framerate (Framerate)
-    #   to 29.970. Set Telecine (Mpeg2Telecine) to Hard (hard) to produce a
-    #   29.97i output from a 23.976 input. Set it to Soft (soft) to produce
-    #   23.976 output and leave converstion to the player.
+    #   When you do frame rate conversion from 23.976 frames per second
+    #   (fps) to 29.97 fps, and your output scan type is interlaced, you can
+    #   optionally enable hard or soft telecine to create a smoother
+    #   picture. Hard telecine (HARD) produces a 29.97i output. Soft
+    #   telecine (SOFT) produces an output with a 23.976 output that signals
+    #   to the video player device to do the conversion during play back.
+    #   When you keep the default value, None (NONE), MediaConvert does a
+    #   standard frame rate conversion to 29.97 without doing anything with
+    #   the field polarity to create a smoother picture.
     #   @return [String]
     #
     # @!attribute [rw] temporal_adaptive_quantization
-    #   Adjust quantization within each frame based on temporal variation of
-    #   content complexity.
+    #   Keep the default value, Enabled (ENABLED), to adjust quantization
+    #   within each frame based on temporal variation of content complexity.
+    #   When you enable this feature, the encoder uses fewer bits on areas
+    #   of the frame that aren't moving and uses more bits on complex
+    #   objects with sharp edges that move a lot. For example, this feature
+    #   improves the readability of text tickers on newscasts and
+    #   scoreboards on sports matches. Enabling this feature will almost
+    #   always improve your video quality. Note, though, that this feature
+    #   doesn't take into account where the viewer's attention is likely
+    #   to be. If viewers are likely to be focusing their attention on a
+    #   part of the screen that doesn't have moving objects with sharp
+    #   edges, such as sports athletes' faces, you might choose to disable
+    #   this feature. Related setting: When you enable temporal
+    #   quantization, adjust the strength of the filter with the setting
+    #   Adaptive quantization (adaptiveQuantization).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Mpeg2Settings AWS API Documentation
@@ -14117,6 +15024,7 @@ module Aws::MediaConvert
     #
     #       {
     #         afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #         profile: "D_10", # accepts D_10, XDCAM, OP1A
     #       }
     #
     # @!attribute [rw] afd_signaling
@@ -14132,10 +15040,21 @@ module Aws::MediaConvert
     #   signaling under the output's video encoding settings.
     #   @return [String]
     #
+    # @!attribute [rw] profile
+    #   Specify the MXF profile, also called shim, for this output. When you
+    #   choose Auto, MediaConvert chooses a profile based on the video codec
+    #   and resolution. For a list of codecs supported with each MXF
+    #   profile, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/codecs-supported-with-each-mxf-profile.html.
+    #   For more information about the automatic selection behavior, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MxfSettings AWS API Documentation
     #
     class MxfSettings < Struct.new(
-      :afd_signaling)
+      :afd_signaling,
+      :profile)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14232,6 +15151,137 @@ module Aws::MediaConvert
     class NielsenConfiguration < Struct.new(
       :breakout_code,
       :distributor_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Ignore these settings unless you are using Nielsen non-linear
+    # watermarking. Specify the values that MediaConvert uses to generate
+    # and place Nielsen watermarks in your output audio. In addition to
+    # specifying these values, you also need to set up your cloud TIC
+    # server. These settings apply to every output in your job. The
+    # MediaConvert implementation is currently with the following Nielsen
+    # versions: Nielsen Watermark SDK Version 5.2.1 Nielsen NLM Watermark
+    # Engine Version 1.2.7 Nielsen Watermark Authenticator \[SID\_TIC\]
+    # Version \[5.0.0\]
+    #
+    # @note When making an API call, you may pass NielsenNonLinearWatermarkSettings
+    #   data as a hash:
+    #
+    #       {
+    #         active_watermark_process: "NAES2_AND_NW", # accepts NAES2_AND_NW, CBET, NAES2_AND_NW_AND_CBET
+    #         adi_filename: "__stringPatternS3",
+    #         asset_id: "__stringMin1Max20",
+    #         asset_name: "__stringMin1Max50",
+    #         cbet_source_id: "__stringPattern0xAFaF0908190908",
+    #         episode_id: "__stringMin1Max20",
+    #         metadata_destination: "__stringPatternS3",
+    #         source_id: 1,
+    #         source_watermark_status: "CLEAN", # accepts CLEAN, WATERMARKED
+    #         tic_server_url: "__stringPatternHttps",
+    #         unique_tic_per_audio_track: "RESERVE_UNIQUE_TICS_PER_TRACK", # accepts RESERVE_UNIQUE_TICS_PER_TRACK, SAME_TICS_PER_TRACK
+    #       }
+    #
+    # @!attribute [rw] active_watermark_process
+    #   Choose the type of Nielsen watermarks that you want in your outputs.
+    #   When you choose NAES 2 and NW (NAES2\_AND\_NW), you must provide a
+    #   value for the setting SID (sourceId). When you choose CBET (CBET),
+    #   you must provide a value for the setting CSID (cbetSourceId). When
+    #   you choose NAES 2, NW, and CBET (NAES2\_AND\_NW\_AND\_CBET), you
+    #   must provide values for both of these settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] adi_filename
+    #   Optional. Use this setting when you want the service to include an
+    #   ADI file in the Nielsen metadata .zip file. To provide an ADI file,
+    #   store it in Amazon S3 and provide a URL to it here. The URL should
+    #   be in the following format: S3://bucket/path/ADI-file. For more
+    #   information about the metadata .zip file, see the setting Metadata
+    #   destination (metadataDestination).
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_id
+    #   Use the asset ID that you provide to Nielsen to uniquely identify
+    #   this asset. Required for all Nielsen non-linear watermarking.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_name
+    #   Use the asset name that you provide to Nielsen for this asset.
+    #   Required for all Nielsen non-linear watermarking.
+    #   @return [String]
+    #
+    # @!attribute [rw] cbet_source_id
+    #   Use the CSID that Nielsen provides to you. This CBET source ID
+    #   should be unique to your Nielsen account but common to all of your
+    #   output assets that have CBET watermarking. Required when you choose
+    #   a value for the setting Watermark types (ActiveWatermarkProcess)
+    #   that includes CBET.
+    #   @return [String]
+    #
+    # @!attribute [rw] episode_id
+    #   Optional. If this asset uses an episode ID with Nielsen, provide it
+    #   here.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_destination
+    #   Specify the Amazon S3 location where you want MediaConvert to save
+    #   your Nielsen non-linear metadata .zip file. This Amazon S3 bucket
+    #   must be in the same Region as the one where you do your MediaConvert
+    #   transcoding. If you want to include an ADI file in this .zip file,
+    #   use the setting ADI file (adiFilename) to specify it. MediaConvert
+    #   delivers the Nielsen metadata .zip files only to your metadata
+    #   destination Amazon S3 bucket. It doesn't deliver the .zip files to
+    #   Nielsen. You are responsible for delivering the metadata .zip files
+    #   to Nielsen.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_id
+    #   Use the SID that Nielsen provides to you. This source ID should be
+    #   unique to your Nielsen account but common to all of your output
+    #   assets. Required for all Nielsen non-linear watermarking. This ID
+    #   should be unique to your Nielsen account but common to all of your
+    #   output assets. Required for all Nielsen non-linear watermarking.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_watermark_status
+    #   Required. Specify whether your source content already contains
+    #   Nielsen non-linear watermarks. When you set this value to
+    #   Watermarked (WATERMARKED), the service fails the job. Nielsen
+    #   requires that you add non-linear watermarking to only clean content
+    #   that doesn't already have non-linear Nielsen watermarks.
+    #   @return [String]
+    #
+    # @!attribute [rw] tic_server_url
+    #   Specify the endpoint for the TIC server that you have deployed and
+    #   configured in the AWS Cloud. Required for all Nielsen non-linear
+    #   watermarking. MediaConvert can't connect directly to a TIC server.
+    #   Instead, you must use API Gateway to provide a RESTful interface
+    #   between MediaConvert and a TIC server that you deploy in your AWS
+    #   account. For more information on deploying a TIC server in your AWS
+    #   account and the required API Gateway, contact Nielsen support.
+    #   @return [String]
+    #
+    # @!attribute [rw] unique_tic_per_audio_track
+    #   To create assets that have the same TIC values in each audio track,
+    #   keep the default value Share TICs (SAME\_TICS\_PER\_TRACK). To
+    #   create assets that have unique TIC values for each audio track,
+    #   choose Use unique TICs (RESERVE\_UNIQUE\_TICS\_PER\_TRACK).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/NielsenNonLinearWatermarkSettings AWS API Documentation
+    #
+    class NielsenNonLinearWatermarkSettings < Struct.new(
+      :active_watermark_process,
+      :adi_filename,
+      :asset_id,
+      :asset_name,
+      :cbet_source_id,
+      :episode_id,
+      :metadata_destination,
+      :source_id,
+      :source_watermark_status,
+      :tic_server_url,
+      :unique_tic_per_audio_track)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14666,6 +15716,7 @@ module Aws::MediaConvert
     #         ],
     #         container_settings: {
     #           cmfc_settings: {
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           },
@@ -14675,6 +15726,7 @@ module Aws::MediaConvert
     #           },
     #           m2ts_settings: {
     #             audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             audio_frames_per_pes: 1,
     #             audio_pids: [1],
     #             bitrate: 1,
@@ -14725,6 +15777,7 @@ module Aws::MediaConvert
     #             video_pid: 1,
     #           },
     #           m3u_8_settings: {
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             audio_frames_per_pes: 1,
     #             audio_pids: [1],
     #             nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -14750,6 +15803,7 @@ module Aws::MediaConvert
     #             reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #           },
     #           mp_4_settings: {
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             ctts_version: 1,
     #             free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -14757,12 +15811,15 @@ module Aws::MediaConvert
     #             mp_4_major_brand: "__string",
     #           },
     #           mpd_settings: {
+    #             accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           },
     #           mxf_settings: {
     #             afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #             profile: "D_10", # accepts D_10, XDCAM, OP1A
     #           },
     #         },
     #         extension: "__string",
@@ -14785,7 +15842,7 @@ module Aws::MediaConvert
     #             av_1_settings: {
     #               adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               gop_size: 1.0,
@@ -14799,7 +15856,17 @@ module Aws::MediaConvert
     #               slices: 1,
     #               spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             },
-    #             codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
+    #             avc_intra_settings: {
+    #               avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1,
+    #               interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #               telecine: "NONE", # accepts NONE, HARD
+    #             },
+    #             codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
     #             frame_capture_settings: {
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
@@ -14807,7 +15874,7 @@ module Aws::MediaConvert
     #               quality: 1,
     #             },
     #             h264_settings: {
-    #               adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #               adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #               bitrate: 1,
     #               codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #               codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -14816,7 +15883,7 @@ module Aws::MediaConvert
     #               field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #               flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -14860,7 +15927,7 @@ module Aws::MediaConvert
     #               dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #               flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -14903,7 +15970,7 @@ module Aws::MediaConvert
     #               codec_profile: "MAIN", # accepts MAIN, PROFILE_422
     #               dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               gop_closed_cadence: 1,
@@ -14932,7 +15999,7 @@ module Aws::MediaConvert
     #             prores_settings: {
     #               codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -14942,10 +16009,20 @@ module Aws::MediaConvert
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #               telecine: "NONE", # accepts NONE, HARD
     #             },
+    #             vc_3_settings: {
+    #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1,
+    #               interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #               telecine: "NONE", # accepts NONE, HARD
+    #               vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
+    #             },
     #             vp_8_settings: {
     #               bitrate: 1,
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               gop_size: 1.0,
@@ -14960,7 +16037,7 @@ module Aws::MediaConvert
     #             vp_9_settings: {
     #               bitrate: 1,
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               gop_size: 1.0,
@@ -15197,6 +16274,13 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         automated_encoding_settings: {
+    #           abr_settings: {
+    #             max_abr_bitrate: 1,
+    #             max_renditions: 1,
+    #             min_abr_bitrate: 1,
+    #           },
+    #         },
     #         custom_name: "__string",
     #         name: "__string",
     #         output_group_settings: {
@@ -15286,6 +16370,7 @@ module Aws::MediaConvert
     #             fragment_length: 1,
     #             hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #             min_buffer_time: 1,
+    #             min_final_segment_length: 1.0,
     #             mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #             segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #             segment_length: 1,
@@ -15607,6 +16692,7 @@ module Aws::MediaConvert
     #             ],
     #             container_settings: {
     #               cmfc_settings: {
+    #                 audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                 scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                 scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #               },
@@ -15616,6 +16702,7 @@ module Aws::MediaConvert
     #               },
     #               m2ts_settings: {
     #                 audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #                 audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                 audio_frames_per_pes: 1,
     #                 audio_pids: [1],
     #                 bitrate: 1,
@@ -15666,6 +16753,7 @@ module Aws::MediaConvert
     #                 video_pid: 1,
     #               },
     #               m3u_8_settings: {
+    #                 audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                 audio_frames_per_pes: 1,
     #                 audio_pids: [1],
     #                 nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -15691,6 +16779,7 @@ module Aws::MediaConvert
     #                 reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #               },
     #               mp_4_settings: {
+    #                 audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                 cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 ctts_version: 1,
     #                 free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -15698,12 +16787,15 @@ module Aws::MediaConvert
     #                 mp_4_major_brand: "__string",
     #               },
     #               mpd_settings: {
+    #                 accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                 caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #                 scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                 scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #               },
     #               mxf_settings: {
     #                 afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #                 profile: "D_10", # accepts D_10, XDCAM, OP1A
     #               },
     #             },
     #             extension: "__string",
@@ -15726,7 +16818,7 @@ module Aws::MediaConvert
     #                 av_1_settings: {
     #                   adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
     #                   gop_size: 1.0,
@@ -15740,7 +16832,17 @@ module Aws::MediaConvert
     #                   slices: 1,
     #                   spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                 },
-    #                 codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
+    #                 avc_intra_settings: {
+    #                   avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                   framerate_denominator: 1,
+    #                   framerate_numerator: 1,
+    #                   interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                   slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                   telecine: "NONE", # accepts NONE, HARD
+    #                 },
+    #                 codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
     #                 frame_capture_settings: {
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
@@ -15748,7 +16850,7 @@ module Aws::MediaConvert
     #                   quality: 1,
     #                 },
     #                 h264_settings: {
-    #                   adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                   adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                   bitrate: 1,
     #                   codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                   codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -15757,7 +16859,7 @@ module Aws::MediaConvert
     #                   field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                   flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
     #                   gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -15801,7 +16903,7 @@ module Aws::MediaConvert
     #                   dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                   flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
     #                   gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -15844,7 +16946,7 @@ module Aws::MediaConvert
     #                   codec_profile: "MAIN", # accepts MAIN, PROFILE_422
     #                   dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
     #                   gop_closed_cadence: 1,
@@ -15873,7 +16975,7 @@ module Aws::MediaConvert
     #                 prores_settings: {
     #                   codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
     #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
     #                   interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -15883,10 +16985,20 @@ module Aws::MediaConvert
     #                   slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                   telecine: "NONE", # accepts NONE, HARD
     #                 },
+    #                 vc_3_settings: {
+    #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                   framerate_denominator: 1,
+    #                   framerate_numerator: 1,
+    #                   interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #                   slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                   telecine: "NONE", # accepts NONE, HARD
+    #                   vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
+    #                 },
     #                 vp_8_settings: {
     #                   bitrate: 1,
     #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
     #                   gop_size: 1.0,
@@ -15901,7 +17013,7 @@ module Aws::MediaConvert
     #                 vp_9_settings: {
     #                   bitrate: 1,
     #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
     #                   gop_size: 1.0,
@@ -16023,6 +17135,11 @@ module Aws::MediaConvert
     #         ],
     #       }
     #
+    # @!attribute [rw] automated_encoding_settings
+    #   Use automated encoding to have MediaConvert choose your encoding
+    #   settings for you, based on characteristics of your input video.
+    #   @return [Types::AutomatedEncodingSettings]
+    #
     # @!attribute [rw] custom_name
     #   Use Custom Group Name (CustomName) to specify a name for the output
     #   group. This value is displayed on the console and can make your job
@@ -16047,6 +17164,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/OutputGroup AWS API Documentation
     #
     class OutputGroup < Struct.new(
+      :automated_encoding_settings,
       :custom_name,
       :name,
       :output_group_settings,
@@ -16162,6 +17280,7 @@ module Aws::MediaConvert
     #           fragment_length: 1,
     #           hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #           min_buffer_time: 1,
+    #           min_final_segment_length: 1.0,
     #           mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #           segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #           segment_length: 1,
@@ -16643,6 +17762,7 @@ module Aws::MediaConvert
     #         ],
     #         container_settings: {
     #           cmfc_settings: {
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           },
@@ -16652,6 +17772,7 @@ module Aws::MediaConvert
     #           },
     #           m2ts_settings: {
     #             audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             audio_frames_per_pes: 1,
     #             audio_pids: [1],
     #             bitrate: 1,
@@ -16702,6 +17823,7 @@ module Aws::MediaConvert
     #             video_pid: 1,
     #           },
     #           m3u_8_settings: {
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             audio_frames_per_pes: 1,
     #             audio_pids: [1],
     #             nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -16727,6 +17849,7 @@ module Aws::MediaConvert
     #             reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #           },
     #           mp_4_settings: {
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             ctts_version: 1,
     #             free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -16734,12 +17857,15 @@ module Aws::MediaConvert
     #             mp_4_major_brand: "__string",
     #           },
     #           mpd_settings: {
+    #             accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           },
     #           mxf_settings: {
     #             afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #             profile: "D_10", # accepts D_10, XDCAM, OP1A
     #           },
     #         },
     #         video_description: {
@@ -16749,7 +17875,7 @@ module Aws::MediaConvert
     #             av_1_settings: {
     #               adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               gop_size: 1.0,
@@ -16763,7 +17889,17 @@ module Aws::MediaConvert
     #               slices: 1,
     #               spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             },
-    #             codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
+    #             avc_intra_settings: {
+    #               avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1,
+    #               interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #               telecine: "NONE", # accepts NONE, HARD
+    #             },
+    #             codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
     #             frame_capture_settings: {
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
@@ -16771,7 +17907,7 @@ module Aws::MediaConvert
     #               quality: 1,
     #             },
     #             h264_settings: {
-    #               adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #               adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #               bitrate: 1,
     #               codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #               codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -16780,7 +17916,7 @@ module Aws::MediaConvert
     #               field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #               flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -16824,7 +17960,7 @@ module Aws::MediaConvert
     #               dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #               flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -16867,7 +18003,7 @@ module Aws::MediaConvert
     #               codec_profile: "MAIN", # accepts MAIN, PROFILE_422
     #               dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               gop_closed_cadence: 1,
@@ -16896,7 +18032,7 @@ module Aws::MediaConvert
     #             prores_settings: {
     #               codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -16906,10 +18042,20 @@ module Aws::MediaConvert
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #               telecine: "NONE", # accepts NONE, HARD
     #             },
+    #             vc_3_settings: {
+    #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1,
+    #               interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #               telecine: "NONE", # accepts NONE, HARD
+    #               vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
+    #             },
     #             vp_8_settings: {
     #               bitrate: 1,
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               gop_size: 1.0,
@@ -16924,7 +18070,7 @@ module Aws::MediaConvert
     #             vp_9_settings: {
     #               bitrate: 1,
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               gop_size: 1.0,
@@ -17087,7 +18233,7 @@ module Aws::MediaConvert
     #       {
     #         codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
     #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #         framerate_denominator: 1,
     #         framerate_numerator: 1,
     #         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -17120,12 +18266,28 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] framerate_conversion_algorithm
-    #   Optional. Specify how the transcoder performs framerate conversion.
-    #   The default behavior is to use duplicate drop conversion.
+    #   Choose the method that you want MediaConvert to use when increasing
+    #   or decreasing the frame rate. We recommend using drop duplicate
+    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
+    #   to 30 fps. For numerically complex conversions, you can use
+    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
+    #   picture, but might introduce undesirable video artifacts. For
+    #   complex frame rate conversions, especially if your source video has
+    #   already been converted from its original cadence, use FrameFormer
+    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
+    #   chooses the best conversion method frame by frame. Note that using
+    #   FrameFormer increases the transcoding time and incurs a significant
+    #   add-on cost.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
-    #   Frame rate denominator.
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateDenominator to specify the
+    #   denominator of this fraction. In this example, use 1001 for the
+    #   value of FramerateDenominator. When you use the console for
+    #   transcode jobs that use frame rate conversion, provide the value as
+    #   a decimal number for Framerate. In this example, specify 23.976.
     #   @return [Integer]
     #
     # @!attribute [rw] framerate_numerator
@@ -17133,23 +18295,26 @@ module Aws::MediaConvert
     #   conversion, specify the frame rate as a fraction. For example, 24000
     #   / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator
     #   of this fraction. In this example, use 24000 for the value of
-    #   FramerateNumerator.
+    #   FramerateNumerator. When you use the console for transcode jobs that
+    #   use frame rate conversion, provide the value as a decimal number for
+    #   Framerate. In this example, specify 23.976.
     #   @return [Integer]
     #
     # @!attribute [rw] interlace_mode
-    #   Use Interlace mode (InterlaceMode) to choose the scan line type for
-    #   the output. * Top Field First (TOP\_FIELD) and Bottom Field First
-    #   (BOTTOM\_FIELD) produce interlaced output with the entire output
-    #   having the same field polarity (top or bottom first). * Follow,
-    #   Default Top (FOLLOW\_TOP\_FIELD) and Follow, Default Bottom
-    #   (FOLLOW\_BOTTOM\_FIELD) use the same field polarity as the source.
-    #   Therefore, behavior depends on the input scan type. - If the source
-    #   is interlaced, the output will be interlaced with the same polarity
-    #   as the source (it will follow the source). The output could
-    #   therefore be a mix of "top field first" and "bottom field
-    #   first". - If the source is progressive, the output will be
-    #   interlaced with "top field first" or "bottom field first"
-    #   polarity, depending on which of the Follow options you chose.
+    #   Choose the scan line type for the output. Keep the default value,
+    #   Progressive (PROGRESSIVE) to create a progressive output, regardless
+    #   of the scan type of your input. Use Top field first (TOP\_FIELD) or
+    #   Bottom field first (BOTTOM\_FIELD) to create an output that's
+    #   interlaced with the same field polarity throughout. Use Follow,
+    #   default top (FOLLOW\_TOP\_FIELD) or Follow, default bottom
+    #   (FOLLOW\_BOTTOM\_FIELD) to produce outputs with the same field
+    #   polarity as the source. For jobs that have multiple inputs, the
+    #   output field polarity might change over the course of the output.
+    #   Follow behavior depends on the input scan type. If the source is
+    #   interlaced, the output will be interlaced with the same polarity as
+    #   the source. If the source is progressive, the output will be
+    #   interlaced with top field bottom field first, depending on which of
+    #   the Follow options you choose.
     #   @return [String]
     #
     # @!attribute [rw] par_control
@@ -17182,15 +18347,24 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] slow_pal
-    #   Enables Slow PAL rate conversion. 23.976fps and 24fps input is
-    #   relabeled as 25fps, and audio is sped up correspondingly.
+    #   Ignore this setting unless your input frame rate is 23.976 or 24
+    #   frames per second (fps). Enable slow PAL to create a 25 fps output.
+    #   When you enable slow PAL, MediaConvert relabels the video frames to
+    #   25 fps and resamples your audio to keep it synchronized with the
+    #   video. Note that enabling this setting will slightly reduce the
+    #   duration of your video. Required settings: You must also set
+    #   Framerate to 25. In your JSON job specification, set
+    #   (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and
+    #   (framerateDenominator) to 1.
     #   @return [String]
     #
     # @!attribute [rw] telecine
-    #   Only use Telecine (ProresTelecine) when you set Framerate
-    #   (Framerate) to 29.970. Set Telecine (ProresTelecine) to Hard (hard)
-    #   to produce a 29.97i output from a 23.976 input. Set it to Soft
-    #   (soft) to produce 23.976 output and leave converstion to the player.
+    #   When you do frame rate conversion from 23.976 frames per second
+    #   (fps) to 29.97 fps, and your output scan type is interlaced, you can
+    #   optionally enable hard telecine (HARD) to create a smoother picture.
+    #   When you keep the default value, None (NONE), MediaConvert does a
+    #   standard frame rate conversion to 29.97 without doing anything with
+    #   the field polarity to create a smoother picture.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ProresSettings AWS API Documentation
@@ -18033,9 +19207,9 @@ module Aws::MediaConvert
     end
 
     # Enable Timed metadata insertion (TimedMetadataInsertion) to include
-    # ID3 tags in your job. To include timed metadata, you must enable it
-    # here, enable it in each output container, and specify tags and
-    # timecodes in ID3 insertion (Id3Insertion) objects.
+    # ID3 tags in any HLS outputs. To include timed metadata, you must
+    # enable it here, enable it in each output container, and specify tags
+    # and timecodes in ID3 insertion (Id3Insertion) objects.
     #
     # @note When making an API call, you may pass TimedMetadataInsertion
     #   data as a hash:
@@ -18327,6 +19501,7 @@ module Aws::MediaConvert
     #                   start_timecode: "__stringPattern010920405090509092",
     #                 },
     #               ],
+    #               input_scan_type: "AUTO", # accepts AUTO, PSF
     #               position: {
     #                 height: 1,
     #                 width: 1,
@@ -18379,8 +19554,28 @@ module Aws::MediaConvert
     #             breakout_code: 1,
     #             distributor_id: "__string",
     #           },
+    #           nielsen_non_linear_watermark: {
+    #             active_watermark_process: "NAES2_AND_NW", # accepts NAES2_AND_NW, CBET, NAES2_AND_NW_AND_CBET
+    #             adi_filename: "__stringPatternS3",
+    #             asset_id: "__stringMin1Max20",
+    #             asset_name: "__stringMin1Max50",
+    #             cbet_source_id: "__stringPattern0xAFaF0908190908",
+    #             episode_id: "__stringMin1Max20",
+    #             metadata_destination: "__stringPatternS3",
+    #             source_id: 1,
+    #             source_watermark_status: "CLEAN", # accepts CLEAN, WATERMARKED
+    #             tic_server_url: "__stringPatternHttps",
+    #             unique_tic_per_audio_track: "RESERVE_UNIQUE_TICS_PER_TRACK", # accepts RESERVE_UNIQUE_TICS_PER_TRACK, SAME_TICS_PER_TRACK
+    #           },
     #           output_groups: [
     #             {
+    #               automated_encoding_settings: {
+    #                 abr_settings: {
+    #                   max_abr_bitrate: 1,
+    #                   max_renditions: 1,
+    #                   min_abr_bitrate: 1,
+    #                 },
+    #               },
     #               custom_name: "__string",
     #               name: "__string",
     #               output_group_settings: {
@@ -18470,6 +19665,7 @@ module Aws::MediaConvert
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                   min_buffer_time: 1,
+    #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
     #                   segment_length: 1,
@@ -18791,6 +19987,7 @@ module Aws::MediaConvert
     #                   ],
     #                   container_settings: {
     #                     cmfc_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
@@ -18800,6 +19997,7 @@ module Aws::MediaConvert
     #                     },
     #                     m2ts_settings: {
     #                       audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
     #                       bitrate: 1,
@@ -18850,6 +20048,7 @@ module Aws::MediaConvert
     #                       video_pid: 1,
     #                     },
     #                     m3u_8_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -18875,6 +20074,7 @@ module Aws::MediaConvert
     #                       reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #                     },
     #                     mp_4_settings: {
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       ctts_version: 1,
     #                       free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -18882,12 +20082,15 @@ module Aws::MediaConvert
     #                       mp_4_major_brand: "__string",
     #                     },
     #                     mpd_settings: {
+    #                       accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
     #                     mxf_settings: {
     #                       afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #                       profile: "D_10", # accepts D_10, XDCAM, OP1A
     #                     },
     #                   },
     #                   extension: "__string",
@@ -18910,7 +20113,7 @@ module Aws::MediaConvert
     #                       av_1_settings: {
     #                         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_size: 1.0,
@@ -18924,7 +20127,17 @@ module Aws::MediaConvert
     #                         slices: 1,
     #                         spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       },
-    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
+    #                       avc_intra_settings: {
+    #                         avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                         telecine: "NONE", # accepts NONE, HARD
+    #                       },
+    #                       codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
     #                       frame_capture_settings: {
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
@@ -18932,7 +20145,7 @@ module Aws::MediaConvert
     #                         quality: 1,
     #                       },
     #                       h264_settings: {
-    #                         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                         adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                         bitrate: 1,
     #                         codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                         codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -18941,7 +20154,7 @@ module Aws::MediaConvert
     #                         field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -18985,7 +20198,7 @@ module Aws::MediaConvert
     #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -19028,7 +20241,7 @@ module Aws::MediaConvert
     #                         codec_profile: "MAIN", # accepts MAIN, PROFILE_422
     #                         dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_closed_cadence: 1,
@@ -19057,7 +20270,7 @@ module Aws::MediaConvert
     #                       prores_settings: {
     #                         codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -19067,10 +20280,20 @@ module Aws::MediaConvert
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                       },
+    #                       vc_3_settings: {
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                         telecine: "NONE", # accepts NONE, HARD
+    #                         vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
+    #                       },
     #                       vp_8_settings: {
     #                         bitrate: 1,
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_size: 1.0,
@@ -19085,7 +20308,7 @@ module Aws::MediaConvert
     #                       vp_9_settings: {
     #                         bitrate: 1,
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         gop_size: 1.0,
@@ -19515,6 +20738,7 @@ module Aws::MediaConvert
     #           ],
     #           container_settings: {
     #             cmfc_settings: {
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             },
@@ -19524,6 +20748,7 @@ module Aws::MediaConvert
     #             },
     #             m2ts_settings: {
     #               audio_buffer_model: "DVB", # accepts DVB, ATSC
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               audio_frames_per_pes: 1,
     #               audio_pids: [1],
     #               bitrate: 1,
@@ -19574,6 +20799,7 @@ module Aws::MediaConvert
     #               video_pid: 1,
     #             },
     #             m3u_8_settings: {
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               audio_frames_per_pes: 1,
     #               audio_pids: [1],
     #               nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -19599,6 +20825,7 @@ module Aws::MediaConvert
     #               reference: "SELF_CONTAINED", # accepts SELF_CONTAINED, EXTERNAL
     #             },
     #             mp_4_settings: {
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               ctts_version: 1,
     #               free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
@@ -19606,12 +20833,15 @@ module Aws::MediaConvert
     #               mp_4_major_brand: "__string",
     #             },
     #             mpd_settings: {
+    #               accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             },
     #             mxf_settings: {
     #               afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #               profile: "D_10", # accepts D_10, XDCAM, OP1A
     #             },
     #           },
     #           video_description: {
@@ -19621,7 +20851,7 @@ module Aws::MediaConvert
     #               av_1_settings: {
     #                 adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 gop_size: 1.0,
@@ -19635,7 +20865,17 @@ module Aws::MediaConvert
     #                 slices: 1,
     #                 spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #               },
-    #               codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
+    #               avc_intra_settings: {
+    #                 avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                 framerate_denominator: 1,
+    #                 framerate_numerator: 1,
+    #                 interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                 telecine: "NONE", # accepts NONE, HARD
+    #               },
+    #               codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
     #               frame_capture_settings: {
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
@@ -19643,7 +20883,7 @@ module Aws::MediaConvert
     #                 quality: 1,
     #               },
     #               h264_settings: {
-    #                 adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                 adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #                 bitrate: 1,
     #                 codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #                 codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -19652,7 +20892,7 @@ module Aws::MediaConvert
     #                 field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #                 flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -19696,7 +20936,7 @@ module Aws::MediaConvert
     #                 dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                 flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -19739,7 +20979,7 @@ module Aws::MediaConvert
     #                 codec_profile: "MAIN", # accepts MAIN, PROFILE_422
     #                 dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 gop_closed_cadence: 1,
@@ -19768,7 +21008,7 @@ module Aws::MediaConvert
     #               prores_settings: {
     #                 codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -19778,10 +21018,20 @@ module Aws::MediaConvert
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                 telecine: "NONE", # accepts NONE, HARD
     #               },
+    #               vc_3_settings: {
+    #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #                 framerate_denominator: 1,
+    #                 framerate_numerator: 1,
+    #                 interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #                 telecine: "NONE", # accepts NONE, HARD
+    #                 vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
+    #               },
     #               vp_8_settings: {
     #                 bitrate: 1,
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 gop_size: 1.0,
@@ -19796,7 +21046,7 @@ module Aws::MediaConvert
     #               vp_9_settings: {
     #                 bitrate: 1,
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 gop_size: 1.0,
@@ -20031,14 +21281,134 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Required when you set (Codec) under (VideoDescription)>(CodecSettings)
+    # to the value VC3
+    #
+    # @note When making an API call, you may pass Vc3Settings
+    #   data as a hash:
+    #
+    #       {
+    #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #         framerate_denominator: 1,
+    #         framerate_numerator: 1,
+    #         interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #         telecine: "NONE", # accepts NONE, HARD
+    #         vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
+    #       }
+    #
+    # @!attribute [rw] framerate_control
+    #   If you are using the console, use the Framerate setting to specify
+    #   the frame rate for this output. If you want to keep the same frame
+    #   rate as the input video, choose Follow source. If you want to do
+    #   frame rate conversion, choose a frame rate from the dropdown list or
+    #   choose Custom. The framerates shown in the dropdown list are decimal
+    #   approximations of fractions. If you choose Custom, specify your
+    #   frame rate as a fraction. If you are creating your transcoding job
+    #   specification as a JSON file without the console, use
+    #   FramerateControl to specify which value the service uses for the
+    #   frame rate for this output. Choose INITIALIZE\_FROM\_SOURCE if you
+    #   want the service to use the frame rate from the input. Choose
+    #   SPECIFIED if you want the service to use the frame rate you specify
+    #   in the settings FramerateNumerator and FramerateDenominator.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_conversion_algorithm
+    #   Choose the method that you want MediaConvert to use when increasing
+    #   or decreasing the frame rate. We recommend using drop duplicate
+    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
+    #   to 30 fps. For numerically complex conversions, you can use
+    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
+    #   picture, but might introduce undesirable video artifacts. For
+    #   complex frame rate conversions, especially if your source video has
+    #   already been converted from its original cadence, use FrameFormer
+    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
+    #   chooses the best conversion method frame by frame. Note that using
+    #   FrameFormer increases the transcoding time and incurs a significant
+    #   add-on cost.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_denominator
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateDenominator to specify the
+    #   denominator of this fraction. In this example, use 1001 for the
+    #   value of FramerateDenominator. When you use the console for
+    #   transcode jobs that use frame rate conversion, provide the value as
+    #   a decimal number for Framerate. In this example, specify 23.976.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] framerate_numerator
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator
+    #   of this fraction. In this example, use 24000 for the value of
+    #   FramerateNumerator. When you use the console for transcode jobs that
+    #   use frame rate conversion, provide the value as a decimal number for
+    #   Framerate. In this example, specify 23.976.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interlace_mode
+    #   Optional. Choose the scan line type for this output. If you don't
+    #   specify a value, MediaConvert will create a progressive output.
+    #   @return [String]
+    #
+    # @!attribute [rw] slow_pal
+    #   Ignore this setting unless your input frame rate is 23.976 or 24
+    #   frames per second (fps). Enable slow PAL to create a 25 fps output
+    #   by relabeling the video frames and resampling your audio. Note that
+    #   enabling this setting will slightly reduce the duration of your
+    #   video. Related settings: You must also set Framerate to 25. In your
+    #   JSON job specification, set (framerateControl) to (SPECIFIED),
+    #   (framerateNumerator) to 25 and (framerateDenominator) to 1.
+    #   @return [String]
+    #
+    # @!attribute [rw] telecine
+    #   When you do frame rate conversion from 23.976 frames per second
+    #   (fps) to 29.97 fps, and your output scan type is interlaced, you can
+    #   optionally enable hard telecine (HARD) to create a smoother picture.
+    #   When you keep the default value, None (NONE), MediaConvert does a
+    #   standard frame rate conversion to 29.97 without doing anything with
+    #   the field polarity to create a smoother picture.
+    #   @return [String]
+    #
+    # @!attribute [rw] vc_3_class
+    #   Specify the VC3 class to choose the quality characteristics for this
+    #   output. VC3 class, together with the settings Framerate
+    #   (framerateNumerator and framerateDenominator) and Resolution (height
+    #   and width), determine your output bitrate. For example, say that
+    #   your video resolution is 1920x1080 and your framerate is 29.97. Then
+    #   Class 145 (CLASS\_145) gives you an output with a bitrate of
+    #   approximately 145 Mbps and Class 220 (CLASS\_220) gives you and
+    #   output with a bitrate of approximately 220 Mbps. VC3 class also
+    #   specifies the color bit depth of your output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Vc3Settings AWS API Documentation
+    #
+    class Vc3Settings < Struct.new(
+      :framerate_control,
+      :framerate_conversion_algorithm,
+      :framerate_denominator,
+      :framerate_numerator,
+      :interlace_mode,
+      :slow_pal,
+      :telecine,
+      :vc_3_class)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Video codec settings, (CodecSettings) under (VideoDescription),
     # contains the group of settings related to video encoding. The settings
     # in this group vary depending on the value that you choose for Video
     # codec (Codec). For each codec enum that you choose, define the
     # corresponding settings object. The following lists the codec enum,
-    # settings object pairs. * FRAME\_CAPTURE, FrameCaptureSettings * AV1,
-    # Av1Settings * H\_264, H264Settings * H\_265, H265Settings * MPEG2,
-    # Mpeg2Settings * PRORES, ProresSettings * VP8, Vp8Settings * VP9,
+    # settings object pairs. * AV1, Av1Settings * AVC\_INTRA,
+    # AvcIntraSettings * FRAME\_CAPTURE, FrameCaptureSettings * H\_264,
+    # H264Settings * H\_265, H265Settings * MPEG2, Mpeg2Settings *
+    # PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9,
     # Vp9Settings
     #
     # @note When making an API call, you may pass VideoCodecSettings
@@ -20048,7 +21418,7 @@ module Aws::MediaConvert
     #         av_1_settings: {
     #           adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
     #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #           gop_size: 1.0,
@@ -20062,7 +21432,17 @@ module Aws::MediaConvert
     #           slices: 1,
     #           spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #         },
-    #         codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
+    #         avc_intra_settings: {
+    #           avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #           framerate_denominator: 1,
+    #           framerate_numerator: 1,
+    #           interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #           slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #           telecine: "NONE", # accepts NONE, HARD
+    #         },
+    #         codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
     #         frame_capture_settings: {
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
@@ -20070,7 +21450,7 @@ module Aws::MediaConvert
     #           quality: 1,
     #         },
     #         h264_settings: {
-    #           adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #           adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #           bitrate: 1,
     #           codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #           codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -20079,7 +21459,7 @@ module Aws::MediaConvert
     #           field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #           flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #           gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -20123,7 +21503,7 @@ module Aws::MediaConvert
     #           dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #           flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #           gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -20166,7 +21546,7 @@ module Aws::MediaConvert
     #           codec_profile: "MAIN", # accepts MAIN, PROFILE_422
     #           dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #           gop_closed_cadence: 1,
@@ -20195,7 +21575,7 @@ module Aws::MediaConvert
     #         prores_settings: {
     #           codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
     #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #           interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -20205,10 +21585,20 @@ module Aws::MediaConvert
     #           slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #           telecine: "NONE", # accepts NONE, HARD
     #         },
+    #         vc_3_settings: {
+    #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #           framerate_denominator: 1,
+    #           framerate_numerator: 1,
+    #           interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #           slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #           telecine: "NONE", # accepts NONE, HARD
+    #           vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
+    #         },
     #         vp_8_settings: {
     #           bitrate: 1,
     #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #           gop_size: 1.0,
@@ -20223,7 +21613,7 @@ module Aws::MediaConvert
     #         vp_9_settings: {
     #           bitrate: 1,
     #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #           gop_size: 1.0,
@@ -20241,6 +21631,13 @@ module Aws::MediaConvert
     #   Required when you set Codec, under VideoDescription>CodecSettings to
     #   the value AV1.
     #   @return [Types::Av1Settings]
+    #
+    # @!attribute [rw] avc_intra_settings
+    #   Required when you set your output video codec to AVC-Intra. For more
+    #   information about the AVC-I settings, see the relevant
+    #   specification. For detailed information about SD and HD in AVC-I,
+    #   see https://ieeexplore.ieee.org/document/7290936.
+    #   @return [Types::AvcIntraSettings]
     #
     # @!attribute [rw] codec
     #   Specifies the video codec. This must be equal to one of the enum
@@ -20271,6 +21668,11 @@ module Aws::MediaConvert
     #   (VideoDescription)>(CodecSettings) to the value PRORES.
     #   @return [Types::ProresSettings]
     #
+    # @!attribute [rw] vc_3_settings
+    #   Required when you set (Codec) under
+    #   (VideoDescription)>(CodecSettings) to the value VC3
+    #   @return [Types::Vc3Settings]
+    #
     # @!attribute [rw] vp_8_settings
     #   Required when you set (Codec) under
     #   (VideoDescription)>(CodecSettings) to the value VP8.
@@ -20285,12 +21687,14 @@ module Aws::MediaConvert
     #
     class VideoCodecSettings < Struct.new(
       :av_1_settings,
+      :avc_intra_settings,
       :codec,
       :frame_capture_settings,
       :h264_settings,
       :h265_settings,
       :mpeg_2_settings,
       :prores_settings,
+      :vc_3_settings,
       :vp_8_settings,
       :vp_9_settings)
       SENSITIVE = []
@@ -20309,7 +21713,7 @@ module Aws::MediaConvert
     #           av_1_settings: {
     #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #             gop_size: 1.0,
@@ -20323,7 +21727,17 @@ module Aws::MediaConvert
     #             slices: 1,
     #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #           },
-    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
+    #           avc_intra_settings: {
+    #             avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #             interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #             telecine: "NONE", # accepts NONE, HARD
+    #           },
+    #           codec: "AV1", # accepts AV1, AVC_INTRA, FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES, VC3, VP8, VP9
     #           frame_capture_settings: {
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
@@ -20331,7 +21745,7 @@ module Aws::MediaConvert
     #             quality: 1,
     #           },
     #           h264_settings: {
-    #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #             adaptive_quantization: "OFF", # accepts OFF, AUTO, LOW, MEDIUM, HIGH, HIGHER, MAX
     #             bitrate: 1,
     #             codec_level: "AUTO", # accepts AUTO, LEVEL_1, LEVEL_1_1, LEVEL_1_2, LEVEL_1_3, LEVEL_2, LEVEL_2_1, LEVEL_2_2, LEVEL_3, LEVEL_3_1, LEVEL_3_2, LEVEL_4, LEVEL_4_1, LEVEL_4_2, LEVEL_5, LEVEL_5_1, LEVEL_5_2
     #             codec_profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
@@ -20340,7 +21754,7 @@ module Aws::MediaConvert
     #             field_encoding: "PAFF", # accepts PAFF, FORCE_FIELD
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #             gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -20384,7 +21798,7 @@ module Aws::MediaConvert
     #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             flicker_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #             gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
@@ -20427,7 +21841,7 @@ module Aws::MediaConvert
     #             codec_profile: "MAIN", # accepts MAIN, PROFILE_422
     #             dynamic_sub_gop: "ADAPTIVE", # accepts ADAPTIVE, STATIC
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #             gop_closed_cadence: 1,
@@ -20456,7 +21870,7 @@ module Aws::MediaConvert
     #           prores_settings: {
     #             codec_profile: "APPLE_PRORES_422", # accepts APPLE_PRORES_422, APPLE_PRORES_422_HQ, APPLE_PRORES_422_LT, APPLE_PRORES_422_PROXY
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #             interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -20466,10 +21880,20 @@ module Aws::MediaConvert
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             telecine: "NONE", # accepts NONE, HARD
     #           },
+    #           vc_3_settings: {
+    #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #             interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
+    #             telecine: "NONE", # accepts NONE, HARD
+    #             vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
+    #           },
     #           vp_8_settings: {
     #             bitrate: 1,
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #             gop_size: 1.0,
@@ -20484,7 +21908,7 @@ module Aws::MediaConvert
     #           vp_9_settings: {
     #             bitrate: 1,
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #             gop_size: 1.0,
@@ -20625,10 +22049,11 @@ module Aws::MediaConvert
     #   settings in this group vary depending on the value that you choose
     #   for Video codec (Codec). For each codec enum that you choose, define
     #   the corresponding settings object. The following lists the codec
-    #   enum, settings object pairs. * FRAME\_CAPTURE, FrameCaptureSettings
-    #   * AV1, Av1Settings * H\_264, H264Settings * H\_265, H265Settings
-    #   * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VP8,
-    #   Vp8Settings * VP9, Vp9Settings
+    #   enum, settings object pairs. * AV1, Av1Settings * AVC\_INTRA,
+    #   AvcIntraSettings * FRAME\_CAPTURE, FrameCaptureSettings * H\_264,
+    #   H264Settings * H\_265, H265Settings * MPEG2, Mpeg2Settings *
+    #   PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings *
+    #   VP9, Vp9Settings
     #   @return [Types::VideoCodecSettings]
     #
     # @!attribute [rw] color_metadata
@@ -21088,7 +22513,7 @@ module Aws::MediaConvert
     #       {
     #         bitrate: 1,
     #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #         framerate_denominator: 1,
     #         framerate_numerator: 1,
     #         gop_size: 1.0,
@@ -21123,10 +22548,18 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] framerate_conversion_algorithm
-    #   Optional. Specify how the transcoder performs framerate conversion.
-    #   The default behavior is to use Drop duplicate (DUPLICATE\_DROP)
-    #   conversion. When you choose Interpolate (INTERPOLATE) instead, the
-    #   conversion produces smoother motion.
+    #   Choose the method that you want MediaConvert to use when increasing
+    #   or decreasing the frame rate. We recommend using drop duplicate
+    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
+    #   to 30 fps. For numerically complex conversions, you can use
+    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
+    #   picture, but might introduce undesirable video artifacts. For
+    #   complex frame rate conversions, especially if your source video has
+    #   already been converted from its original cadence, use FrameFormer
+    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
+    #   chooses the best conversion method frame by frame. Note that using
+    #   FrameFormer increases the transcoding time and incurs a significant
+    #   add-on cost.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -21234,7 +22667,7 @@ module Aws::MediaConvert
     #       {
     #         bitrate: 1,
     #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
-    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #         framerate_denominator: 1,
     #         framerate_numerator: 1,
     #         gop_size: 1.0,
@@ -21269,10 +22702,18 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] framerate_conversion_algorithm
-    #   Optional. Specify how the transcoder performs framerate conversion.
-    #   The default behavior is to use Drop duplicate (DUPLICATE\_DROP)
-    #   conversion. When you choose Interpolate (INTERPOLATE) instead, the
-    #   conversion produces smoother motion.
+    #   Choose the method that you want MediaConvert to use when increasing
+    #   or decreasing the frame rate. We recommend using drop duplicate
+    #   (DUPLICATE\_DROP) for numerically simple conversions, such as 60 fps
+    #   to 30 fps. For numerically complex conversions, you can use
+    #   interpolate (INTERPOLATE) to avoid stutter. This results in a smooth
+    #   picture, but might introduce undesirable video artifacts. For
+    #   complex frame rate conversions, especially if your source video has
+    #   already been converted from its original cadence, use FrameFormer
+    #   (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer
+    #   chooses the best conversion method frame by frame. Note that using
+    #   FrameFormer increases the transcoding time and incurs a significant
+    #   add-on cost.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator

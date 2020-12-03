@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-sagemakerruntime/customizations'
 # @!group service
 module Aws::SageMakerRuntime
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.27.0'
 
 end

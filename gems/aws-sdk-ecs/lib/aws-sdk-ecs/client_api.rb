@@ -25,6 +25,7 @@ module Aws::ECS
     AttributeLimitExceededException = Shapes::StructureShape.new(name: 'AttributeLimitExceededException')
     Attributes = Shapes::ListShape.new(name: 'Attributes')
     AutoScalingGroupProvider = Shapes::StructureShape.new(name: 'AutoScalingGroupProvider')
+    AutoScalingGroupProviderUpdate = Shapes::StructureShape.new(name: 'AutoScalingGroupProviderUpdate')
     AwsVpcConfiguration = Shapes::StructureShape.new(name: 'AwsVpcConfiguration')
     BlockedException = Shapes::StructureShape.new(name: 'BlockedException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -92,9 +93,11 @@ module Aws::ECS
     DeleteTaskSetRequest = Shapes::StructureShape.new(name: 'DeleteTaskSetRequest')
     DeleteTaskSetResponse = Shapes::StructureShape.new(name: 'DeleteTaskSetResponse')
     Deployment = Shapes::StructureShape.new(name: 'Deployment')
+    DeploymentCircuitBreaker = Shapes::StructureShape.new(name: 'DeploymentCircuitBreaker')
     DeploymentConfiguration = Shapes::StructureShape.new(name: 'DeploymentConfiguration')
     DeploymentController = Shapes::StructureShape.new(name: 'DeploymentController')
     DeploymentControllerType = Shapes::StringShape.new(name: 'DeploymentControllerType')
+    DeploymentRolloutState = Shapes::StringShape.new(name: 'DeploymentRolloutState')
     Deployments = Shapes::ListShape.new(name: 'Deployments')
     DeregisterContainerInstanceRequest = Shapes::StructureShape.new(name: 'DeregisterContainerInstanceRequest')
     DeregisterContainerInstanceResponse = Shapes::StructureShape.new(name: 'DeregisterContainerInstanceResponse')
@@ -132,6 +135,8 @@ module Aws::ECS
     EnvironmentFileType = Shapes::StringShape.new(name: 'EnvironmentFileType')
     EnvironmentFiles = Shapes::ListShape.new(name: 'EnvironmentFiles')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
+    FSxWindowsFileServerAuthorizationConfig = Shapes::StructureShape.new(name: 'FSxWindowsFileServerAuthorizationConfig')
+    FSxWindowsFileServerVolumeConfiguration = Shapes::StructureShape.new(name: 'FSxWindowsFileServerVolumeConfiguration')
     Failure = Shapes::StructureShape.new(name: 'Failure')
     Failures = Shapes::ListShape.new(name: 'Failures')
     FirelensConfiguration = Shapes::StructureShape.new(name: 'FirelensConfiguration')
@@ -180,6 +185,7 @@ module Aws::ECS
     LogDriver = Shapes::StringShape.new(name: 'LogDriver')
     Long = Shapes::IntegerShape.new(name: 'Long')
     ManagedScaling = Shapes::StructureShape.new(name: 'ManagedScaling')
+    ManagedScalingInstanceWarmupPeriod = Shapes::IntegerShape.new(name: 'ManagedScalingInstanceWarmupPeriod')
     ManagedScalingStatus = Shapes::StringShape.new(name: 'ManagedScalingStatus')
     ManagedScalingStepSize = Shapes::IntegerShape.new(name: 'ManagedScalingStepSize')
     ManagedScalingTargetCapacity = Shapes::IntegerShape.new(name: 'ManagedScalingTargetCapacity')
@@ -311,6 +317,8 @@ module Aws::ECS
     UnsupportedFeatureException = Shapes::StructureShape.new(name: 'UnsupportedFeatureException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateCapacityProviderRequest = Shapes::StructureShape.new(name: 'UpdateCapacityProviderRequest')
+    UpdateCapacityProviderResponse = Shapes::StructureShape.new(name: 'UpdateCapacityProviderResponse')
     UpdateClusterSettingsRequest = Shapes::StructureShape.new(name: 'UpdateClusterSettingsRequest')
     UpdateClusterSettingsResponse = Shapes::StructureShape.new(name: 'UpdateClusterSettingsResponse')
     UpdateContainerAgentRequest = Shapes::StructureShape.new(name: 'UpdateContainerAgentRequest')
@@ -362,6 +370,10 @@ module Aws::ECS
     AutoScalingGroupProvider.add_member(:managed_scaling, Shapes::ShapeRef.new(shape: ManagedScaling, location_name: "managedScaling"))
     AutoScalingGroupProvider.add_member(:managed_termination_protection, Shapes::ShapeRef.new(shape: ManagedTerminationProtection, location_name: "managedTerminationProtection"))
     AutoScalingGroupProvider.struct_class = Types::AutoScalingGroupProvider
+
+    AutoScalingGroupProviderUpdate.add_member(:managed_scaling, Shapes::ShapeRef.new(shape: ManagedScaling, location_name: "managedScaling"))
+    AutoScalingGroupProviderUpdate.add_member(:managed_termination_protection, Shapes::ShapeRef.new(shape: ManagedTerminationProtection, location_name: "managedTerminationProtection"))
+    AutoScalingGroupProviderUpdate.struct_class = Types::AutoScalingGroupProviderUpdate
 
     AwsVpcConfiguration.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "subnets"))
     AwsVpcConfiguration.add_member(:security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "securityGroups"))
@@ -655,14 +667,22 @@ module Aws::ECS
     Deployment.add_member(:desired_count, Shapes::ShapeRef.new(shape: Integer, location_name: "desiredCount"))
     Deployment.add_member(:pending_count, Shapes::ShapeRef.new(shape: Integer, location_name: "pendingCount"))
     Deployment.add_member(:running_count, Shapes::ShapeRef.new(shape: Integer, location_name: "runningCount"))
+    Deployment.add_member(:failed_tasks, Shapes::ShapeRef.new(shape: Integer, location_name: "failedTasks"))
     Deployment.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     Deployment.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     Deployment.add_member(:capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "capacityProviderStrategy"))
     Deployment.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "launchType"))
     Deployment.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
     Deployment.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
+    Deployment.add_member(:rollout_state, Shapes::ShapeRef.new(shape: DeploymentRolloutState, location_name: "rolloutState"))
+    Deployment.add_member(:rollout_state_reason, Shapes::ShapeRef.new(shape: String, location_name: "rolloutStateReason"))
     Deployment.struct_class = Types::Deployment
 
+    DeploymentCircuitBreaker.add_member(:enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enable"))
+    DeploymentCircuitBreaker.add_member(:rollback, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "rollback"))
+    DeploymentCircuitBreaker.struct_class = Types::DeploymentCircuitBreaker
+
+    DeploymentConfiguration.add_member(:deployment_circuit_breaker, Shapes::ShapeRef.new(shape: DeploymentCircuitBreaker, location_name: "deploymentCircuitBreaker"))
     DeploymentConfiguration.add_member(:maximum_percent, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maximumPercent"))
     DeploymentConfiguration.add_member(:minimum_healthy_percent, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "minimumHealthyPercent"))
     DeploymentConfiguration.struct_class = Types::DeploymentConfiguration
@@ -795,6 +815,15 @@ module Aws::ECS
     EnvironmentFiles.member = Shapes::ShapeRef.new(shape: EnvironmentFile)
 
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: KeyValuePair)
+
+    FSxWindowsFileServerAuthorizationConfig.add_member(:credentials_parameter, Shapes::ShapeRef.new(shape: String, required: true, location_name: "credentialsParameter"))
+    FSxWindowsFileServerAuthorizationConfig.add_member(:domain, Shapes::ShapeRef.new(shape: String, required: true, location_name: "domain"))
+    FSxWindowsFileServerAuthorizationConfig.struct_class = Types::FSxWindowsFileServerAuthorizationConfig
+
+    FSxWindowsFileServerVolumeConfiguration.add_member(:file_system_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fileSystemId"))
+    FSxWindowsFileServerVolumeConfiguration.add_member(:root_directory, Shapes::ShapeRef.new(shape: String, required: true, location_name: "rootDirectory"))
+    FSxWindowsFileServerVolumeConfiguration.add_member(:authorization_config, Shapes::ShapeRef.new(shape: FSxWindowsFileServerAuthorizationConfig, required: true, location_name: "authorizationConfig"))
+    FSxWindowsFileServerVolumeConfiguration.struct_class = Types::FSxWindowsFileServerVolumeConfiguration
 
     Failure.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     Failure.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
@@ -977,6 +1006,7 @@ module Aws::ECS
     ManagedScaling.add_member(:target_capacity, Shapes::ShapeRef.new(shape: ManagedScalingTargetCapacity, location_name: "targetCapacity"))
     ManagedScaling.add_member(:minimum_scaling_step_size, Shapes::ShapeRef.new(shape: ManagedScalingStepSize, location_name: "minimumScalingStepSize"))
     ManagedScaling.add_member(:maximum_scaling_step_size, Shapes::ShapeRef.new(shape: ManagedScalingStepSize, location_name: "maximumScalingStepSize"))
+    ManagedScaling.add_member(:instance_warmup_period, Shapes::ShapeRef.new(shape: ManagedScalingInstanceWarmupPeriod, location_name: "instanceWarmupPeriod"))
     ManagedScaling.struct_class = Types::ManagedScaling
 
     MissingVersionException.struct_class = Types::MissingVersionException
@@ -1447,6 +1477,13 @@ module Aws::ECS
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateCapacityProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    UpdateCapacityProviderRequest.add_member(:auto_scaling_group_provider, Shapes::ShapeRef.new(shape: AutoScalingGroupProviderUpdate, required: true, location_name: "autoScalingGroupProvider"))
+    UpdateCapacityProviderRequest.struct_class = Types::UpdateCapacityProviderRequest
+
+    UpdateCapacityProviderResponse.add_member(:capacity_provider, Shapes::ShapeRef.new(shape: CapacityProvider, location_name: "capacityProvider"))
+    UpdateCapacityProviderResponse.struct_class = Types::UpdateCapacityProviderResponse
+
     UpdateClusterSettingsRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
     UpdateClusterSettingsRequest.add_member(:settings, Shapes::ShapeRef.new(shape: ClusterSettings, required: true, location_name: "settings"))
     UpdateClusterSettingsRequest.struct_class = Types::UpdateClusterSettingsRequest
@@ -1515,6 +1552,7 @@ module Aws::ECS
     Volume.add_member(:host, Shapes::ShapeRef.new(shape: HostVolumeProperties, location_name: "host"))
     Volume.add_member(:docker_volume_configuration, Shapes::ShapeRef.new(shape: DockerVolumeConfiguration, location_name: "dockerVolumeConfiguration"))
     Volume.add_member(:efs_volume_configuration, Shapes::ShapeRef.new(shape: EFSVolumeConfiguration, location_name: "efsVolumeConfiguration"))
+    Volume.add_member(:fsx_windows_file_server_volume_configuration, Shapes::ShapeRef.new(shape: FSxWindowsFileServerVolumeConfiguration, location_name: "fsxWindowsFileServerVolumeConfiguration"))
     Volume.struct_class = Types::Volume
 
     VolumeFrom.add_member(:source_container, Shapes::ShapeRef.new(shape: String, location_name: "sourceContainer"))
@@ -2119,6 +2157,17 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:update_capacity_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCapacityProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCapacityProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCapacityProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 

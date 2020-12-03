@@ -320,6 +320,7 @@ module Aws::EC2
     #     device_index: 1, # required
     #     dry_run: false,
     #     instance_id: "InstanceId", # required
+    #     network_card_index: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [required, Integer] :device_index
@@ -331,6 +332,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, String] :instance_id
     #   The ID of the instance.
+    # @option options [Integer] :network_card_index
+    #   The index of the network card. Some instance types support multiple
+    #   network cards. The primary network interface must be assigned to
+    #   network card index 0. The default is network card index 0.
     # @return [Types::AttachNetworkInterfaceResult]
     def attach(options = {})
       options = options.merge(network_interface_id: @id)

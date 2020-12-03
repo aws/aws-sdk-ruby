@@ -164,6 +164,7 @@ module Aws::GameLift
     FleetType = Shapes::StringShape.new(name: 'FleetType')
     FleetUtilization = Shapes::StructureShape.new(name: 'FleetUtilization')
     FleetUtilizationList = Shapes::ListShape.new(name: 'FleetUtilizationList')
+    FlexMatchMode = Shapes::StringShape.new(name: 'FlexMatchMode')
     Float = Shapes::FloatShape.new(name: 'Float')
     FreeText = Shapes::StringShape.new(name: 'FreeText')
     GameProperty = Shapes::StructureShape.new(name: 'GameProperty')
@@ -560,7 +561,7 @@ module Aws::GameLift
 
     CreateMatchmakingConfigurationInput.add_member(:name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, required: true, location_name: "Name"))
     CreateMatchmakingConfigurationInput.add_member(:description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Description"))
-    CreateMatchmakingConfigurationInput.add_member(:game_session_queue_arns, Shapes::ShapeRef.new(shape: QueueArnsList, required: true, location_name: "GameSessionQueueArns"))
+    CreateMatchmakingConfigurationInput.add_member(:game_session_queue_arns, Shapes::ShapeRef.new(shape: QueueArnsList, location_name: "GameSessionQueueArns"))
     CreateMatchmakingConfigurationInput.add_member(:request_timeout_seconds, Shapes::ShapeRef.new(shape: MatchmakingRequestTimeoutInteger, required: true, location_name: "RequestTimeoutSeconds"))
     CreateMatchmakingConfigurationInput.add_member(:acceptance_timeout_seconds, Shapes::ShapeRef.new(shape: MatchmakingAcceptanceTimeoutInteger, location_name: "AcceptanceTimeoutSeconds"))
     CreateMatchmakingConfigurationInput.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: BooleanModel, required: true, location_name: "AcceptanceRequired"))
@@ -571,6 +572,7 @@ module Aws::GameLift
     CreateMatchmakingConfigurationInput.add_member(:game_properties, Shapes::ShapeRef.new(shape: GamePropertyList, location_name: "GameProperties"))
     CreateMatchmakingConfigurationInput.add_member(:game_session_data, Shapes::ShapeRef.new(shape: GameSessionData, location_name: "GameSessionData"))
     CreateMatchmakingConfigurationInput.add_member(:backfill_mode, Shapes::ShapeRef.new(shape: BackfillMode, location_name: "BackfillMode"))
+    CreateMatchmakingConfigurationInput.add_member(:flex_match_mode, Shapes::ShapeRef.new(shape: FlexMatchMode, location_name: "FlexMatchMode"))
     CreateMatchmakingConfigurationInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateMatchmakingConfigurationInput.struct_class = Types::CreateMatchmakingConfigurationInput
 
@@ -1253,6 +1255,7 @@ module Aws::GameLift
     MatchmakingConfiguration.add_member(:game_properties, Shapes::ShapeRef.new(shape: GamePropertyList, location_name: "GameProperties"))
     MatchmakingConfiguration.add_member(:game_session_data, Shapes::ShapeRef.new(shape: GameSessionData, location_name: "GameSessionData"))
     MatchmakingConfiguration.add_member(:backfill_mode, Shapes::ShapeRef.new(shape: BackfillMode, location_name: "BackfillMode"))
+    MatchmakingConfiguration.add_member(:flex_match_mode, Shapes::ShapeRef.new(shape: FlexMatchMode, location_name: "FlexMatchMode"))
     MatchmakingConfiguration.struct_class = Types::MatchmakingConfiguration
 
     MatchmakingConfigurationList.member = Shapes::ShapeRef.new(shape: MatchmakingConfiguration)
@@ -1479,7 +1482,7 @@ module Aws::GameLift
 
     StartMatchBackfillInput.add_member(:ticket_id, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, location_name: "TicketId"))
     StartMatchBackfillInput.add_member(:configuration_name, Shapes::ShapeRef.new(shape: MatchmakingConfigurationName, required: true, location_name: "ConfigurationName"))
-    StartMatchBackfillInput.add_member(:game_session_arn, Shapes::ShapeRef.new(shape: ArnStringModel, required: true, location_name: "GameSessionArn"))
+    StartMatchBackfillInput.add_member(:game_session_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "GameSessionArn"))
     StartMatchBackfillInput.add_member(:players, Shapes::ShapeRef.new(shape: PlayerList, required: true, location_name: "Players"))
     StartMatchBackfillInput.struct_class = Types::StartMatchBackfillInput
 
@@ -1658,6 +1661,7 @@ module Aws::GameLift
     UpdateMatchmakingConfigurationInput.add_member(:game_properties, Shapes::ShapeRef.new(shape: GamePropertyList, location_name: "GameProperties"))
     UpdateMatchmakingConfigurationInput.add_member(:game_session_data, Shapes::ShapeRef.new(shape: GameSessionData, location_name: "GameSessionData"))
     UpdateMatchmakingConfigurationInput.add_member(:backfill_mode, Shapes::ShapeRef.new(shape: BackfillMode, location_name: "BackfillMode"))
+    UpdateMatchmakingConfigurationInput.add_member(:flex_match_mode, Shapes::ShapeRef.new(shape: FlexMatchMode, location_name: "FlexMatchMode"))
     UpdateMatchmakingConfigurationInput.struct_class = Types::UpdateMatchmakingConfigurationInput
 
     UpdateMatchmakingConfigurationOutput.add_member(:configuration, Shapes::ShapeRef.new(shape: MatchmakingConfiguration, location_name: "Configuration"))

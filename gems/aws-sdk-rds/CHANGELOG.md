@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2020-11-17)
+------------------
+
+* Feature - Support copy-db-snapshot in the one region on cross clusters and local cluster for RDSonVmware. Add target-custom-availability-zone parameter to specify where a snapshot should be copied.
+
+1.105.0 (2020-11-05)
+------------------
+
+* Feature - Supports a new parameter to set the max allocated storage in gigabytes for the CreateDBInstanceReadReplica API.
+
+1.104.0 (2020-10-15)
+------------------
+
+* Feature - Return tags for all resources in the output of DescribeDBInstances, DescribeDBSnapshots, DescribeDBClusters, and DescribeDBClusterSnapshots API operations.
+
+1.103.0 (2020-10-08)
+------------------
+
+* Feature - Supports a new parameter to set the max allocated storage in gigabytes for restore database instance from S3 and restore database instance to a point in time APIs.
+
+1.102.0 (2020-10-02)
+------------------
+
+* Feature - Adds the NCHAR Character Set ID parameter to the CreateDbInstance API for RDS Oracle.
+
+1.101.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2020-09-28)
+------------------
+
+* Feature - This release adds the InsufficientAvailableIPsInSubnetFault error for RDS Proxy.
+
+1.99.0 (2020-09-21)
+------------------
+
+* Feature - Documentation updates for the RDS DescribeExportTasks API
+
+1.98.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.97.0 (2020-08-25)
 ------------------
 

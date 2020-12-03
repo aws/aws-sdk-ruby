@@ -620,6 +620,10 @@ module Aws::SSM
     #
     # @!attribute [rw] key
     #   The name of the filter.
+    #
+    #   <note markdown="1"> `InstanceId` has been deprecated.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -924,12 +928,12 @@ module Aws::SSM
     #   * For the key *SourceUrl*, the value is an S3 bucket location. For
     #     example:
     #
-    #     `"Values": [ "s3://my-bucket/my-folder" ]`
+    #     `"Values": [ "s3://doc-example-bucket/my-folder" ]`
     #
     #   * For the key *S3FileUrl*, the value is a file in an S3 bucket. For
     #     example:
     #
-    #     `"Values": [ "s3://my-bucket/my-folder/my-file.py" ]`
+    #     `"Values": [ "s3://doc-example-bucket/my-folder/my-file.py" ]`
     #
     #   * For the key *AttachmentReference*, the value is constructed from
     #     the name of another SSM document in your account, a version number
@@ -1142,14 +1146,15 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey
+    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey, TargetResourceGroup
     #         values: ["AutomationExecutionFilterValue"], # required
     #       }
     #
     # @!attribute [rw] key
     #   One or more keys to limit the results. Valid filter keys include the
     #   following: DocumentNamePrefix, ExecutionStatus, ExecutionId,
-    #   ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter.
+    #   ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter,
+    #   TargetResourceGroup.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -1974,14 +1979,14 @@ module Aws::SSM
     #   be stored. This was requested when issuing the command. For example,
     #   in the following response:
     #
-    #   test\_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript
+    #   doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript
     #
-    #   test\_folder is the name of the S3 bucket;
+    #   doc-example-bucket is the name of the S3 bucket;
     #
     #   ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3
     #   prefix;
     #
-    #   i-1234567876543 is the instance ID;
+    #   i-02573cafcfEXAMPLE is the instance ID;
     #
     #   awsrunShellScript is the name of the plugin.
     #   @return [String]
@@ -1991,14 +1996,14 @@ module Aws::SSM
     #   command executions should be stored. This was requested when issuing
     #   the command. For example, in the following response:
     #
-    #   test\_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript
+    #   doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript
     #
-    #   test\_folder is the name of the S3 bucket;
+    #   doc-example-bucket is the name of the S3 bucket;
     #
     #   ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3
     #   prefix;
     #
-    #   i-1234567876543 is the instance ID;
+    #   i-02573cafcfEXAMPLE is the instance ID;
     #
     #   awsrunShellScript is the name of the plugin.
     #   @return [String]
@@ -2096,8 +2101,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the compliance item. An item is either COMPLIANT or
-    #   NON\_COMPLIANT.
+    #   The status of the compliance item. An item is either COMPLIANT,
+    #   NON\_COMPLIANT, or an empty string (for Windows patches that aren't
+    #   applicable).
     #   @return [String]
     #
     # @!attribute [rw] severity
@@ -3315,7 +3321,7 @@ module Aws::SSM
     #         global_filters: {
     #           patch_filters: [ # required
     #             {
-    #               key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #               key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #               values: ["PatchFilterValue"], # required
     #             },
     #           ],
@@ -3326,7 +3332,7 @@ module Aws::SSM
     #               patch_filter_group: { # required
     #                 patch_filters: [ # required
     #                   {
-    #                     key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #                     key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #                     values: ["PatchFilterValue"], # required
     #                   },
     #                 ],
@@ -4378,7 +4384,7 @@ module Aws::SSM
     #       {
     #         filters: [
     #           {
-    #             key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey
+    #             key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey, TargetResourceGroup
     #             values: ["AutomationExecutionFilterValue"], # required
     #           },
     #         ],
@@ -6166,7 +6172,7 @@ module Aws::SSM
     #         next_token: "NextToken",
     #         filters: [
     #           {
-    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Target, Owner, Status
+    #             key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Target, Owner, Status, SessionId
     #             value: "SessionFilterValue", # required
     #           },
     #         ],
@@ -8302,7 +8308,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of a parameter you want to query.
+    #   The name of the parameter for which you want to review history.
     #   @return [String]
     #
     # @!attribute [rw] with_decryption
@@ -8968,6 +8974,10 @@ module Aws::SSM
     #
     # @!attribute [rw] ping_status
     #   Connection status of SSM Agent.
+    #
+    #   <note markdown="1"> The status `Inactive` has been deprecated and is no longer in use.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] last_ping_date_time
@@ -10601,6 +10611,13 @@ module Aws::SSM
     # @!attribute [rw] association_filter_list
     #   One or more filters. Use a filter to return a more specific list of
     #   results.
+    #
+    #   <note markdown="1"> Filtering associations using the `InstanceID` attribute only returns
+    #   legacy associations created using the `InstanceID` attribute.
+    #   Associations targeting the instance that are part of the Target
+    #   Attributes `ResourceGroup` or `Tags` are not returned.
+    #
+    #    </note>
     #   @return [Array<Types::AssociationFilter>]
     #
     # @!attribute [rw] max_results
@@ -11224,9 +11241,9 @@ module Aws::SSM
     # @!attribute [rw] sync_type
     #   View a list of resource data syncs according to the sync type.
     #   Specify `SyncToDestination` to view resource data syncs that
-    #   synchronize data to an Amazon S3 buckets. Specify `SyncFromSource`
-    #   to view resource data syncs from AWS Organizations or from multiple
-    #   AWS Regions.
+    #   synchronize data to an Amazon S3 bucket. Specify `SyncFromSource` to
+    #   view resource data syncs from AWS Organizations or from multiple AWS
+    #   Regions.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -13090,7 +13107,31 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # The parameter exceeded the maximum number of allowed versions.
+    # Parameter Store retains the 100 most recently created versions of a
+    # parameter. After this number of versions has been created, Parameter
+    # Store deletes the oldest version when a new one is created. However,
+    # if the oldest version has a *label* attached to it, Parameter Store
+    # will not delete the version and instead presents this error message:
+    #
+    # `An error occurred (ParameterMaxVersionLimitExceeded) when calling the
+    # PutParameter operation: You attempted to create a new version of
+    # parameter-name by calling the PutParameter API with the overwrite
+    # flag. Version version-number, the oldest version, can't be deleted
+    # because it has a label associated with it. Move the label to another
+    # version of the parameter, and try again.`
+    #
+    # This safeguard is to prevent parameter versions with mission critical
+    # labels assigned to them from being deleted. To continue creating new
+    # parameters, first move the label from the oldest version of the
+    # parameter to a newer one for use in your operations. For information
+    # about moving parameter labels, see [Move a parameter label
+    # (console)][1] or [Move a parameter label (CLI) ][2] in the *AWS
+    # Systems Manager User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-console-move
+    # [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-cli-move
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -13318,8 +13359,11 @@ module Aws::SSM
     # Represents metadata about a patch.
     #
     # @!attribute [rw] id
-    #   The ID of the patch (this is different than the Microsoft Knowledge
-    #   Base ID).
+    #   The ID of the patch. Applies to Windows patches only.
+    #
+    #   <note markdown="1"> This ID is not the same as the Microsoft Knowledge Base ID.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] release_date
@@ -13343,35 +13387,93 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] product_family
-    #   The product family the patch is applicable for (for example,
-    #   Windows).
+    #   The product family the patch is applicable for. For example,
+    #   `Windows` or `Amazon Linux 2`.
     #   @return [String]
     #
     # @!attribute [rw] product
-    #   The specific product the patch is applicable for (for example,
-    #   WindowsServer2016).
+    #   The specific product the patch is applicable for. For example,
+    #   `WindowsServer2016` or `AmazonLinux2018.03`.
     #   @return [String]
     #
     # @!attribute [rw] classification
-    #   The classification of the patch (for example, SecurityUpdates,
-    #   Updates, CriticalUpdates).
+    #   The classification of the patch. For example, `SecurityUpdates`,
+    #   `Updates`, or `CriticalUpdates`.
     #   @return [String]
     #
     # @!attribute [rw] msrc_severity
-    #   The severity of the patch (for example Critical, Important,
-    #   Moderate).
+    #   The severity of the patch, such as `Critical`, `Important`, or
+    #   `Moderate`. Applies to Windows patches only.
     #   @return [String]
     #
     # @!attribute [rw] kb_number
-    #   The Microsoft Knowledge Base ID of the patch.
+    #   The Microsoft Knowledge Base ID of the patch. Applies to Windows
+    #   patches only.
     #   @return [String]
     #
     # @!attribute [rw] msrc_number
-    #   The ID of the MSRC bulletin the patch is related to.
+    #   The ID of the Microsoft Security Response Center (MSRC) bulletin the
+    #   patch is related to. For example, `MS14-045`. Applies to Windows
+    #   patches only.
     #   @return [String]
     #
     # @!attribute [rw] language
     #   The language of the patch if it's language-specific.
+    #   @return [String]
+    #
+    # @!attribute [rw] advisory_ids
+    #   The Advisory ID of the patch. For example, `RHSA-2020:3779`. Applies
+    #   to Linux-based instances only.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] bugzilla_ids
+    #   The Bugzilla ID of the patch. For example, `1600646`. Applies to
+    #   Linux-based instances only.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cve_ids
+    #   The Common Vulnerabilities and Exposures (CVE) ID of the patch. For
+    #   example, `CVE-1999-0067`. Applies to Linux-based instances only.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   The name of the patch. Applies to Linux-based instances only.
+    #   @return [String]
+    #
+    # @!attribute [rw] epoch
+    #   The epoch of the patch. For example in
+    #   `pkg-example-EE-20180914-2.2.amzn1.noarch`, the epoch value is
+    #   `20180914-2`. Applies to Linux-based instances only.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] version
+    #   The version number of the patch. For example, in
+    #   `example-pkg-1.710.10-2.7.abcd.x86_64`, the version number is
+    #   indicated by `-1`. Applies to Linux-based instances only.
+    #   @return [String]
+    #
+    # @!attribute [rw] release
+    #   The particular release of a patch. For example, in
+    #   `pkg-example-EE-20180914-2.2.amzn1.noarch`, the release is
+    #   `2.amaz1`. Applies to Linux-based instances only.
+    #   @return [String]
+    #
+    # @!attribute [rw] arch
+    #   The architecture of the patch. For example, in
+    #   `example-pkg-0.710.10-2.7.abcd.x86_64`, the architecture is
+    #   indicated by `x86_64`. Applies to Linux-based instances only.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity level of the patch. For example, `CRITICAL` or
+    #   `MODERATE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository
+    #   The source patch repository for the operating system and version,
+    #   such as `trusty-security` for Ubuntu Server 14.04 LTE and
+    #   `focal-security` for Ubuntu Server 20.04 LTE. Applies to Linux-based
+    #   instances only.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Patch AWS API Documentation
@@ -13389,7 +13491,17 @@ module Aws::SSM
       :msrc_severity,
       :kb_number,
       :msrc_number,
-      :language)
+      :language,
+      :advisory_ids,
+      :bugzilla_ids,
+      :cve_ids,
+      :name,
+      :epoch,
+      :version,
+      :release,
+      :arch,
+      :severity,
+      :repository)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13468,6 +13580,11 @@ module Aws::SSM
     #   all operating systems provide this level of information.
     #   @return [Time]
     #
+    # @!attribute [rw] cve_ids
+    #   The IDs of one or more Common Vulnerabilities and Exposure (CVE)
+    #   issues that are resolved by the patch.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchComplianceData AWS API Documentation
     #
     class PatchComplianceData < Struct.new(
@@ -13476,7 +13593,8 @@ module Aws::SSM
       :classification,
       :severity,
       :state,
-      :installed_time)
+      :installed_time,
+      :cve_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13503,7 +13621,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #         key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #         values: ["PatchFilterValue"], # required
     #       }
     #
@@ -13538,7 +13656,7 @@ module Aws::SSM
     #       {
     #         patch_filters: [ # required
     #           {
-    #             key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #             key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #             values: ["PatchFilterValue"], # required
     #           },
     #         ],
@@ -13612,7 +13730,7 @@ module Aws::SSM
     #         patch_filter_group: { # required
     #           patch_filters: [ # required
     #             {
-    #               key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #               key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #               values: ["PatchFilterValue"], # required
     #             },
     #           ],
@@ -13677,7 +13795,7 @@ module Aws::SSM
     #             patch_filter_group: { # required
     #               patch_filters: [ # required
     #                 {
-    #                   key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #                   key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #                   values: ["PatchFilterValue"], # required
     #                 },
     #               ],
@@ -14066,7 +14184,7 @@ module Aws::SSM
     #   The type of parameter that you want to add to the system.
     #
     #   <note markdown="1"> `SecureString` is not currently supported for AWS CloudFormation
-    #   templates or in the China Regions.
+    #   templates.
     #
     #    </note>
     #
@@ -15903,7 +16021,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Target, Owner, Status
+    #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Target, Owner, Status, SessionId
     #         value: "SessionFilterValue", # required
     #       }
     #
@@ -15942,6 +16060,9 @@ module Aws::SSM
     #     * Terminating
     #
     #     * Failed
+    #
+    #   * SessionId: Specify a session ID to return details about the
+    #     session.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SessionFilter AWS API Documentation
@@ -16690,7 +16811,8 @@ module Aws::SSM
     # The specified target instance for the session is not fully configured
     # for use with Session Manager. For more information, see [Getting
     # started with Session Manager][1] in the *AWS Systems Manager User
-    # Guide*.
+    # Guide*. This error is also returned if you attempt to start a session
+    # on an instance that is located in a different account or Region
     #
     #
     #
@@ -18044,7 +18166,7 @@ module Aws::SSM
     #         global_filters: {
     #           patch_filters: [ # required
     #             {
-    #               key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #               key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #               values: ["PatchFilterValue"], # required
     #             },
     #           ],
@@ -18055,7 +18177,7 @@ module Aws::SSM
     #               patch_filter_group: { # required
     #                 patch_filters: [ # required
     #                   {
-    #                     key: "PATCH_SET", # required, accepts PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID, SECTION, PRIORITY, SEVERITY
+    #                     key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
     #                     values: ["PatchFilterValue"], # required
     #                   },
     #                 ],

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2020-11-16)
+------------------
+
+* Feature - AWS Synthetics now supports Environment Variables  to assign runtime parameters in the canary scripts.
+
+1.9.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.8.0 (2020-09-24)
+------------------
+
+* Feature - AWS Synthetics now supports AWS X-Ray Active Tracing feature. RunConfig is now an optional parameter with timeout updated from (60 - 900 seconds) to (3 - 840 seconds).
+
+1.7.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.6.0 (2020-08-25)
 ------------------
 

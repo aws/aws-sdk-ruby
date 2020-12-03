@@ -364,9 +364,12 @@ module Aws::SNS
     PublishInput.add_member(:subject, Shapes::ShapeRef.new(shape: subject, location_name: "Subject"))
     PublishInput.add_member(:message_structure, Shapes::ShapeRef.new(shape: messageStructure, location_name: "MessageStructure"))
     PublishInput.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageAttributeMap, location_name: "MessageAttributes"))
+    PublishInput.add_member(:message_deduplication_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageDeduplicationId"))
+    PublishInput.add_member(:message_group_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageGroupId"))
     PublishInput.struct_class = Types::PublishInput
 
     PublishResponse.add_member(:message_id, Shapes::ShapeRef.new(shape: messageId, location_name: "MessageId"))
+    PublishResponse.add_member(:sequence_number, Shapes::ShapeRef.new(shape: String, location_name: "SequenceNumber"))
     PublishResponse.struct_class = Types::PublishResponse
 
     RemovePermissionInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, required: true, location_name: "TopicArn"))

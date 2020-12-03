@@ -20,6 +20,7 @@ module Aws::QuickSight
     ActiveIAMPolicyAssignment = Shapes::StructureShape.new(name: 'ActiveIAMPolicyAssignment')
     ActiveIAMPolicyAssignmentList = Shapes::ListShape.new(name: 'ActiveIAMPolicyAssignmentList')
     AdHocFilteringOption = Shapes::StructureShape.new(name: 'AdHocFilteringOption')
+    AdditionalDashboardIdList = Shapes::ListShape.new(name: 'AdditionalDashboardIdList')
     AliasName = Shapes::StringShape.new(name: 'AliasName')
     AmazonElasticsearchParameters = Shapes::StructureShape.new(name: 'AmazonElasticsearchParameters')
     Analysis = Shapes::StructureShape.new(name: 'Analysis')
@@ -53,6 +54,8 @@ module Aws::QuickSight
     ClusterId = Shapes::StringShape.new(name: 'ClusterId')
     ColorList = Shapes::ListShape.new(name: 'ColorList')
     ColumnDataType = Shapes::StringShape.new(name: 'ColumnDataType')
+    ColumnDescription = Shapes::StructureShape.new(name: 'ColumnDescription')
+    ColumnDescriptiveText = Shapes::StringShape.new(name: 'ColumnDescriptiveText')
     ColumnGroup = Shapes::StructureShape.new(name: 'ColumnGroup')
     ColumnGroupColumnSchema = Shapes::StructureShape.new(name: 'ColumnGroupColumnSchema')
     ColumnGroupColumnSchemaList = Shapes::ListShape.new(name: 'ColumnGroupColumnSchemaList')
@@ -61,8 +64,11 @@ module Aws::QuickSight
     ColumnGroupSchema = Shapes::StructureShape.new(name: 'ColumnGroupSchema')
     ColumnGroupSchemaList = Shapes::ListShape.new(name: 'ColumnGroupSchemaList')
     ColumnId = Shapes::StringShape.new(name: 'ColumnId')
+    ColumnLevelPermissionRule = Shapes::StructureShape.new(name: 'ColumnLevelPermissionRule')
+    ColumnLevelPermissionRuleList = Shapes::ListShape.new(name: 'ColumnLevelPermissionRuleList')
     ColumnList = Shapes::ListShape.new(name: 'ColumnList')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
+    ColumnNameList = Shapes::ListShape.new(name: 'ColumnNameList')
     ColumnSchema = Shapes::StructureShape.new(name: 'ColumnSchema')
     ColumnSchemaList = Shapes::ListShape.new(name: 'ColumnSchemaList')
     ColumnTag = Shapes::StructureShape.new(name: 'ColumnTag')
@@ -223,6 +229,7 @@ module Aws::QuickSight
     Double = Shapes::FloatShape.new(name: 'Double')
     DoubleList = Shapes::ListShape.new(name: 'DoubleList')
     Edition = Shapes::StringShape.new(name: 'Edition')
+    EmbeddingIdentityType = Shapes::StringShape.new(name: 'EmbeddingIdentityType')
     EmbeddingUrl = Shapes::StringShape.new(name: 'EmbeddingUrl')
     EntryPoint = Shapes::StringShape.new(name: 'EntryPoint')
     ErrorInfo = Shapes::StructureShape.new(name: 'ErrorInfo')
@@ -341,6 +348,7 @@ module Aws::QuickSight
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     OnClause = Shapes::StringShape.new(name: 'OnClause')
     OptionalPort = Shapes::IntegerShape.new(name: 'OptionalPort')
+    OracleParameters = Shapes::StructureShape.new(name: 'OracleParameters')
     OutputColumn = Shapes::StructureShape.new(name: 'OutputColumn')
     OutputColumnList = Shapes::ListShape.new(name: 'OutputColumnList')
     Parameters = Shapes::StructureShape.new(name: 'Parameters')
@@ -354,6 +362,7 @@ module Aws::QuickSight
     PreconditionNotMetException = Shapes::StructureShape.new(name: 'PreconditionNotMetException')
     PrestoParameters = Shapes::StructureShape.new(name: 'PrestoParameters')
     Principal = Shapes::StringShape.new(name: 'Principal')
+    PrincipalList = Shapes::ListShape.new(name: 'PrincipalList')
     ProjectOperation = Shapes::StructureShape.new(name: 'ProjectOperation')
     ProjectedColumnList = Shapes::ListShape.new(name: 'ProjectedColumnList')
     Query = Shapes::StringShape.new(name: 'Query')
@@ -395,7 +404,9 @@ module Aws::QuickSight
     ServiceNowParameters = Shapes::StructureShape.new(name: 'ServiceNowParameters')
     SessionLifetimeInMinutes = Shapes::IntegerShape.new(name: 'SessionLifetimeInMinutes')
     SessionLifetimeInMinutesInvalidException = Shapes::StructureShape.new(name: 'SessionLifetimeInMinutesInvalidException')
+    Sheet = Shapes::StructureShape.new(name: 'Sheet')
     SheetControlsOption = Shapes::StructureShape.new(name: 'SheetControlsOption')
+    SheetList = Shapes::ListShape.new(name: 'SheetList')
     SheetStyle = Shapes::StructureShape.new(name: 'SheetStyle')
     SiteBaseUrl = Shapes::StringShape.new(name: 'SiteBaseUrl')
     SnowflakeParameters = Shapes::StructureShape.new(name: 'SnowflakeParameters')
@@ -457,6 +468,7 @@ module Aws::QuickSight
     TwitterParameters = Shapes::StructureShape.new(name: 'TwitterParameters')
     TypeCastFormat = Shapes::StringShape.new(name: 'TypeCastFormat')
     UIColorPalette = Shapes::StructureShape.new(name: 'UIColorPalette')
+    UnsupportedPricingPlanException = Shapes::StructureShape.new(name: 'UnsupportedPricingPlanException')
     UnsupportedUserEditionException = Shapes::StructureShape.new(name: 'UnsupportedUserEditionException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -541,6 +553,8 @@ module Aws::QuickSight
     AdHocFilteringOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
     AdHocFilteringOption.struct_class = Types::AdHocFilteringOption
 
+    AdditionalDashboardIdList.member = Shapes::ShapeRef.new(shape: RestrictiveResourceId)
+
     AmazonElasticsearchParameters.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, required: true, location_name: "Domain"))
     AmazonElasticsearchParameters.struct_class = Types::AmazonElasticsearchParameters
 
@@ -553,6 +567,7 @@ module Aws::QuickSight
     Analysis.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
     Analysis.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     Analysis.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    Analysis.add_member(:sheets, Shapes::ShapeRef.new(shape: SheetList, location_name: "Sheets"))
     Analysis.struct_class = Types::Analysis
 
     AnalysisError.add_member(:type, Shapes::ShapeRef.new(shape: AnalysisErrorType, location_name: "Type"))
@@ -629,6 +644,9 @@ module Aws::QuickSight
 
     ColorList.member = Shapes::ShapeRef.new(shape: HexColor)
 
+    ColumnDescription.add_member(:text, Shapes::ShapeRef.new(shape: ColumnDescriptiveText, location_name: "Text"))
+    ColumnDescription.struct_class = Types::ColumnDescription
+
     ColumnGroup.add_member(:geo_spatial_column_group, Shapes::ShapeRef.new(shape: GeoSpatialColumnGroup, location_name: "GeoSpatialColumnGroup"))
     ColumnGroup.struct_class = Types::ColumnGroup
 
@@ -645,7 +663,15 @@ module Aws::QuickSight
 
     ColumnGroupSchemaList.member = Shapes::ShapeRef.new(shape: ColumnGroupSchema)
 
+    ColumnLevelPermissionRule.add_member(:principals, Shapes::ShapeRef.new(shape: PrincipalList, location_name: "Principals"))
+    ColumnLevelPermissionRule.add_member(:column_names, Shapes::ShapeRef.new(shape: ColumnNameList, location_name: "ColumnNames"))
+    ColumnLevelPermissionRule.struct_class = Types::ColumnLevelPermissionRule
+
+    ColumnLevelPermissionRuleList.member = Shapes::ShapeRef.new(shape: ColumnLevelPermissionRule)
+
     ColumnList.member = Shapes::ShapeRef.new(shape: ColumnName)
+
+    ColumnNameList.member = Shapes::ShapeRef.new(shape: String)
 
     ColumnSchema.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     ColumnSchema.add_member(:data_type, Shapes::ShapeRef.new(shape: String, location_name: "DataType"))
@@ -655,6 +681,7 @@ module Aws::QuickSight
     ColumnSchemaList.member = Shapes::ShapeRef.new(shape: ColumnSchema)
 
     ColumnTag.add_member(:column_geographic_role, Shapes::ShapeRef.new(shape: GeoSpatialDataRole, location_name: "ColumnGeographicRole"))
+    ColumnTag.add_member(:column_description, Shapes::ShapeRef.new(shape: ColumnDescription, location_name: "ColumnDescription"))
     ColumnTag.struct_class = Types::ColumnTag
 
     ColumnTagList.member = Shapes::ShapeRef.new(shape: ColumnTag)
@@ -730,6 +757,7 @@ module Aws::QuickSight
     CreateDataSetRequest.add_member(:column_groups, Shapes::ShapeRef.new(shape: ColumnGroupList, location_name: "ColumnGroups"))
     CreateDataSetRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
     CreateDataSetRequest.add_member(:row_level_permission_data_set, Shapes::ShapeRef.new(shape: RowLevelPermissionDataSet, location_name: "RowLevelPermissionDataSet"))
+    CreateDataSetRequest.add_member(:column_level_permission_rules, Shapes::ShapeRef.new(shape: ColumnLevelPermissionRuleList, location_name: "ColumnLevelPermissionRules"))
     CreateDataSetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDataSetRequest.struct_class = Types::CreateDataSetRequest
 
@@ -948,6 +976,7 @@ module Aws::QuickSight
     DashboardVersion.add_member(:data_set_arns, Shapes::ShapeRef.new(shape: DataSetArnsList, location_name: "DataSetArns"))
     DashboardVersion.add_member(:description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "Description"))
     DashboardVersion.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
+    DashboardVersion.add_member(:sheets, Shapes::ShapeRef.new(shape: SheetList, location_name: "Sheets"))
     DashboardVersion.struct_class = Types::DashboardVersion
 
     DashboardVersionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -977,6 +1006,7 @@ module Aws::QuickSight
     DataSet.add_member(:consumed_spice_capacity_in_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "ConsumedSpiceCapacityInBytes"))
     DataSet.add_member(:column_groups, Shapes::ShapeRef.new(shape: ColumnGroupList, location_name: "ColumnGroups"))
     DataSet.add_member(:row_level_permission_data_set, Shapes::ShapeRef.new(shape: RowLevelPermissionDataSet, location_name: "RowLevelPermissionDataSet"))
+    DataSet.add_member(:column_level_permission_rules, Shapes::ShapeRef.new(shape: ColumnLevelPermissionRuleList, location_name: "ColumnLevelPermissionRules"))
     DataSet.struct_class = Types::DataSet
 
     DataSetArnsList.member = Shapes::ShapeRef.new(shape: Arn)
@@ -1004,6 +1034,7 @@ module Aws::QuickSight
     DataSetSummary.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
     DataSetSummary.add_member(:import_mode, Shapes::ShapeRef.new(shape: DataSetImportMode, location_name: "ImportMode"))
     DataSetSummary.add_member(:row_level_permission_data_set, Shapes::ShapeRef.new(shape: RowLevelPermissionDataSet, location_name: "RowLevelPermissionDataSet"))
+    DataSetSummary.add_member(:column_level_permission_rules_applied, Shapes::ShapeRef.new(shape: Boolean, location_name: "ColumnLevelPermissionRulesApplied"))
     DataSetSummary.struct_class = Types::DataSetSummary
 
     DataSetSummaryList.member = Shapes::ShapeRef.new(shape: DataSetSummary)
@@ -1040,6 +1071,7 @@ module Aws::QuickSight
     DataSourceParameters.add_member(:jira_parameters, Shapes::ShapeRef.new(shape: JiraParameters, location_name: "JiraParameters"))
     DataSourceParameters.add_member(:maria_db_parameters, Shapes::ShapeRef.new(shape: MariaDbParameters, location_name: "MariaDbParameters"))
     DataSourceParameters.add_member(:my_sql_parameters, Shapes::ShapeRef.new(shape: MySqlParameters, location_name: "MySqlParameters"))
+    DataSourceParameters.add_member(:oracle_parameters, Shapes::ShapeRef.new(shape: OracleParameters, location_name: "OracleParameters"))
     DataSourceParameters.add_member(:postgre_sql_parameters, Shapes::ShapeRef.new(shape: PostgreSqlParameters, location_name: "PostgreSqlParameters"))
     DataSourceParameters.add_member(:presto_parameters, Shapes::ShapeRef.new(shape: PrestoParameters, location_name: "PrestoParameters"))
     DataSourceParameters.add_member(:rds_parameters, Shapes::ShapeRef.new(shape: RdsParameters, location_name: "RdsParameters"))
@@ -1459,11 +1491,14 @@ module Aws::QuickSight
 
     GetDashboardEmbedUrlRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     GetDashboardEmbedUrlRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "DashboardId"))
-    GetDashboardEmbedUrlRequest.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, required: true, location: "querystring", location_name: "creds-type"))
+    GetDashboardEmbedUrlRequest.add_member(:identity_type, Shapes::ShapeRef.new(shape: EmbeddingIdentityType, required: true, location: "querystring", location_name: "creds-type"))
     GetDashboardEmbedUrlRequest.add_member(:session_lifetime_in_minutes, Shapes::ShapeRef.new(shape: SessionLifetimeInMinutes, location: "querystring", location_name: "session-lifetime"))
-    GetDashboardEmbedUrlRequest.add_member(:undo_redo_disabled, Shapes::ShapeRef.new(shape: boolean, location: "querystring", location_name: "undo-redo-disabled"))
-    GetDashboardEmbedUrlRequest.add_member(:reset_disabled, Shapes::ShapeRef.new(shape: boolean, location: "querystring", location_name: "reset-disabled"))
+    GetDashboardEmbedUrlRequest.add_member(:undo_redo_disabled, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "undo-redo-disabled"))
+    GetDashboardEmbedUrlRequest.add_member(:reset_disabled, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "reset-disabled"))
+    GetDashboardEmbedUrlRequest.add_member(:state_persistence_enabled, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "state-persistence-enabled"))
     GetDashboardEmbedUrlRequest.add_member(:user_arn, Shapes::ShapeRef.new(shape: Arn, location: "querystring", location_name: "user-arn"))
+    GetDashboardEmbedUrlRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
+    GetDashboardEmbedUrlRequest.add_member(:additional_dashboard_ids, Shapes::ShapeRef.new(shape: AdditionalDashboardIdList, location: "querystring", location_name: "additional-dashboard-ids"))
     GetDashboardEmbedUrlRequest.struct_class = Types::GetDashboardEmbedUrlRequest
 
     GetDashboardEmbedUrlResponse.add_member(:embed_url, Shapes::ShapeRef.new(shape: EmbeddingUrl, location_name: "EmbedUrl"))
@@ -1854,7 +1889,13 @@ module Aws::QuickSight
 
     Namespaces.member = Shapes::ShapeRef.new(shape: NamespaceInfoV2)
 
+    OracleParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
+    OracleParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
+    OracleParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
+    OracleParameters.struct_class = Types::OracleParameters
+
     OutputColumn.add_member(:name, Shapes::ShapeRef.new(shape: ColumnName, location_name: "Name"))
+    OutputColumn.add_member(:description, Shapes::ShapeRef.new(shape: ColumnDescriptiveText, location_name: "Description"))
     OutputColumn.add_member(:type, Shapes::ShapeRef.new(shape: ColumnDataType, location_name: "Type"))
     OutputColumn.struct_class = Types::OutputColumn
 
@@ -1887,6 +1928,8 @@ module Aws::QuickSight
     PrestoParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
     PrestoParameters.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, required: true, location_name: "Catalog"))
     PrestoParameters.struct_class = Types::PrestoParameters
+
+    PrincipalList.member = Shapes::ShapeRef.new(shape: String)
 
     ProjectOperation.add_member(:projected_columns, Shapes::ShapeRef.new(shape: ProjectedColumnList, required: true, location_name: "ProjectedColumns"))
     ProjectOperation.struct_class = Types::ProjectOperation
@@ -2017,8 +2060,14 @@ module Aws::QuickSight
     SessionLifetimeInMinutesInvalidException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     SessionLifetimeInMinutesInvalidException.struct_class = Types::SessionLifetimeInMinutesInvalidException
 
+    Sheet.add_member(:sheet_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, location_name: "SheetId"))
+    Sheet.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    Sheet.struct_class = Types::Sheet
+
     SheetControlsOption.add_member(:visibility_state, Shapes::ShapeRef.new(shape: DashboardUIState, location_name: "VisibilityState"))
     SheetControlsOption.struct_class = Types::SheetControlsOption
+
+    SheetList.member = Shapes::ShapeRef.new(shape: Sheet)
 
     SheetStyle.add_member(:tile, Shapes::ShapeRef.new(shape: TileStyle, location_name: "Tile"))
     SheetStyle.add_member(:tile_layout, Shapes::ShapeRef.new(shape: TileLayoutStyle, location_name: "TileLayout"))
@@ -2119,6 +2168,7 @@ module Aws::QuickSight
     TemplateVersion.add_member(:description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "Description"))
     TemplateVersion.add_member(:source_entity_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SourceEntityArn"))
     TemplateVersion.add_member(:theme_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ThemeArn"))
+    TemplateVersion.add_member(:sheets, Shapes::ShapeRef.new(shape: SheetList, location_name: "Sheets"))
     TemplateVersion.struct_class = Types::TemplateVersion
 
     TemplateVersionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -2235,6 +2285,10 @@ module Aws::QuickSight
     UIColorPalette.add_member(:measure, Shapes::ShapeRef.new(shape: HexColor, location_name: "Measure"))
     UIColorPalette.add_member(:measure_foreground, Shapes::ShapeRef.new(shape: HexColor, location_name: "MeasureForeground"))
     UIColorPalette.struct_class = Types::UIColorPalette
+
+    UnsupportedPricingPlanException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UnsupportedPricingPlanException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UnsupportedPricingPlanException.struct_class = Types::UnsupportedPricingPlanException
 
     UnsupportedUserEditionException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     UnsupportedUserEditionException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
@@ -2360,6 +2414,7 @@ module Aws::QuickSight
     UpdateDataSetRequest.add_member(:import_mode, Shapes::ShapeRef.new(shape: DataSetImportMode, required: true, location_name: "ImportMode"))
     UpdateDataSetRequest.add_member(:column_groups, Shapes::ShapeRef.new(shape: ColumnGroupList, location_name: "ColumnGroups"))
     UpdateDataSetRequest.add_member(:row_level_permission_data_set, Shapes::ShapeRef.new(shape: RowLevelPermissionDataSet, location_name: "RowLevelPermissionDataSet"))
+    UpdateDataSetRequest.add_member(:column_level_permission_rules, Shapes::ShapeRef.new(shape: ColumnLevelPermissionRuleList, location_name: "ColumnLevelPermissionRules"))
     UpdateDataSetRequest.struct_class = Types::UpdateDataSetRequest
 
     UpdateDataSetResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -3319,6 +3374,7 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: IdentityTypeNotSupportedException)
         o.errors << Shapes::ShapeRef.new(shape: SessionLifetimeInMinutesInvalidException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedPricingPlanException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 

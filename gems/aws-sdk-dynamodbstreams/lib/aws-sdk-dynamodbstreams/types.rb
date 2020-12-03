@@ -10,53 +10,86 @@
 module Aws::DynamoDBStreams
   module Types
 
-    # Represents the data for an attribute. You can set one, and only one,
-    # of the elements.
+    # Represents the data for an attribute.
     #
-    # Each attribute in an item is a name-value pair. An attribute can be
-    # single-valued or multi-valued set. For example, a book item can have
-    # title and authors attributes. Each book has one title but can have
-    # many authors. The multi-valued attribute is a set; duplicate values
-    # are not allowed.
+    # Each attribute value is described as a name-value pair. The name is
+    # the data type, and the value is the data itself.
+    #
+    # For more information, see [Data Types][1] in the *Amazon DynamoDB
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes
     #
     # @!attribute [rw] s
-    #   A String data type.
+    #   An attribute of type String. For example:
+    #
+    #   `"S": "Hello"`
     #   @return [String]
     #
     # @!attribute [rw] n
-    #   A Number data type.
+    #   An attribute of type Number. For example:
+    #
+    #   `"N": "123.45"`
+    #
+    #   Numbers are sent across the network to DynamoDB as strings, to
+    #   maximize compatibility across languages and libraries. However,
+    #   DynamoDB treats them as number type attributes for mathematical
+    #   operations.
     #   @return [String]
     #
     # @!attribute [rw] b
-    #   A Binary data type.
+    #   An attribute of type Binary. For example:
+    #
+    #   `"B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"`
     #   @return [String]
     #
     # @!attribute [rw] ss
-    #   A String Set data type.
+    #   An attribute of type String Set. For example:
+    #
+    #   `"SS": ["Giraffe", "Hippo" ,"Zebra"]`
     #   @return [Array<String>]
     #
     # @!attribute [rw] ns
-    #   A Number Set data type.
+    #   An attribute of type Number Set. For example:
+    #
+    #   `"NS": ["42.2", "-19", "7.5", "3.14"]`
+    #
+    #   Numbers are sent across the network to DynamoDB as strings, to
+    #   maximize compatibility across languages and libraries. However,
+    #   DynamoDB treats them as number type attributes for mathematical
+    #   operations.
     #   @return [Array<String>]
     #
     # @!attribute [rw] bs
-    #   A Binary Set data type.
+    #   An attribute of type Binary Set. For example:
+    #
+    #   `"BS": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="]`
     #   @return [Array<String>]
     #
     # @!attribute [rw] m
-    #   A Map data type.
+    #   An attribute of type Map. For example:
+    #
+    #   `"M": \{"Name": \{"S": "Joe"\}, "Age": \{"N": "35"\}\}`
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] l
-    #   A List data type.
+    #   An attribute of type List. For example:
+    #
+    #   `"L": [ \{"S": "Cookies"\} , \{"S": "Coffee"\}, \{"N", "3.14159"\}]`
     #   @return [Array<Types::AttributeValue>]
     #
     # @!attribute [rw] null
-    #   A Null data type.
+    #   An attribute of type Null. For example:
+    #
+    #   `"NULL": true`
     #   @return [Boolean]
     #
     # @!attribute [rw] bool
-    #   A Boolean data type.
+    #   An attribute of type Boolean. For example:
+    #
+    #   `"BOOL": true`
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/AttributeValue AWS API Documentation
@@ -311,30 +344,37 @@ module Aws::DynamoDBStreams
     # attributes of an index.
     #
     # A `KeySchemaElement` represents exactly one attribute of the primary
-    # key. For example, a simple primary key (partition key) would be
-    # represented by one `KeySchemaElement`. A composite primary key
-    # (partition key and sort key) would require one `KeySchemaElement` for
-    # the partition key, and another `KeySchemaElement` for the sort key.
+    # key. For example, a simple primary key would be represented by one
+    # `KeySchemaElement` (for the partition key). A composite primary key
+    # would require one `KeySchemaElement` for the partition key, and
+    # another `KeySchemaElement` for the sort key.
     #
-    # <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
-    # The term "hash attribute" derives from DynamoDB's usage of an
-    # internal hash function to evenly distribute data items across
-    # partitions, based on their partition key values.
-    #
-    #  The sort key of an item is also known as its *range attribute*. The
-    # term "range attribute" derives from the way DynamoDB stores items
-    # with the same partition key physically close together, in sorted order
-    # by the sort key value.
-    #
-    #  </note>
+    # A `KeySchemaElement` must be a scalar, top-level attribute (not a
+    # nested attribute). The data type must be one of String, Number, or
+    # Binary. The attribute cannot be nested within a List or a Map.
     #
     # @!attribute [rw] attribute_name
     #   The name of a key attribute.
     #   @return [String]
     #
     # @!attribute [rw] key_type
-    #   The attribute data, consisting of the data type and the attribute
-    #   value itself.
+    #   The role that this key attribute will assume:
+    #
+    #   * `HASH` - partition key
+    #
+    #   * `RANGE` - sort key
+    #
+    #   <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
+    #   The term "hash attribute" derives from DynamoDB's usage of an
+    #   internal hash function to evenly distribute data items across
+    #   partitions, based on their partition key values.
+    #
+    #    The sort key of an item is also known as its *range attribute*. The
+    #   term "range attribute" derives from the way DynamoDB stores items
+    #   with the same partition key physically close together, in sorted
+    #   order by the sort key value.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/KeySchemaElement AWS API Documentation
@@ -346,16 +386,20 @@ module Aws::DynamoDBStreams
       include Aws::Structure
     end
 
-    # Your request rate is too high. The AWS SDKs for DynamoDB automatically
-    # retry requests that receive this exception. Your request is eventually
-    # successful, unless your retry queue is too large to finish. Reduce the
-    # frequency of requests and use exponential backoff. For more
-    # information, go to [Error Retries and Exponential Backoff][1] in the
-    # *Amazon DynamoDB Developer Guide*.
+    # There is no limit to the number of daily on-demand backups that can be
+    # taken.
     #
+    # Up to 50 simultaneous table operations are allowed per account. These
+    # operations include `CreateTable`, `UpdateTable`,
+    # `DeleteTable`,`UpdateTimeToLive`, `RestoreTableFromBackup`, and
+    # `RestoreTableToPointInTime`.
     #
+    # The only exception is when you are creating a table with one or more
+    # secondary indexes. You can have up to 25 such requests running at a
+    # time; however, if the table or index specifications are complex,
+    # DynamoDB might temporarily reduce the number of concurrent operations.
     #
-    # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#APIRetries
+    # There is a soft account quota of 256 tables.
     #
     # @!attribute [rw] message
     #   Too many operations for a given subscriber.
@@ -506,7 +550,9 @@ module Aws::DynamoDBStreams
       include Aws::Structure
     end
 
-    # The operation tried to access a nonexistent stream.
+    # The operation tried to access a nonexistent table or index. The
+    # resource might not be specified correctly, or its status might not be
+    # `ACTIVE`.
     #
     # @!attribute [rw] message
     #   The resource which is being requested does not exist.
@@ -524,11 +570,13 @@ module Aws::DynamoDBStreams
     # contained within a shard.
     #
     # @!attribute [rw] starting_sequence_number
-    #   The first sequence number.
+    #   The first sequence number for the stream records contained within a
+    #   shard. String contains numeric characters only.
     #   @return [String]
     #
     # @!attribute [rw] ending_sequence_number
-    #   The last sequence number.
+    #   The last sequence number for the stream records contained within a
+    #   shard. String contains numeric characters only.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/SequenceNumberRange AWS API Documentation

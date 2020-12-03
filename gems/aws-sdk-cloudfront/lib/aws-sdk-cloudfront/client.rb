@@ -554,6 +554,10 @@ module Aws::CloudFront
     #             },
     #             connection_attempts: 1,
     #             connection_timeout: 1,
+    #             origin_shield: {
+    #               enabled: false, # required
+    #               origin_shield_region: "OriginShieldRegion",
+    #             },
     #           },
     #         ],
     #       },
@@ -581,7 +585,12 @@ module Aws::CloudFront
     #       },
     #       default_cache_behavior: { # required
     #         target_origin_id: "string", # required
-    #         trusted_signers: { # required
+    #         trusted_signers: {
+    #           enabled: false, # required
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         trusted_key_groups: {
     #           enabled: false, # required
     #           quantity: 1, # required
     #           items: ["string"],
@@ -639,7 +648,12 @@ module Aws::CloudFront
     #           {
     #             path_pattern: "string", # required
     #             target_origin_id: "string", # required
-    #             trusted_signers: { # required
+    #             trusted_signers: {
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             trusted_key_groups: {
     #               enabled: false, # required
     #               quantity: 1, # required
     #               items: ["string"],
@@ -750,6 +764,13 @@ module Aws::CloudFront
     #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.quantity #=> Integer
     #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.items #=> Array
     #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.items[0] #=> String
+    #   resp.distribution.active_trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.active_trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.active_trusted_key_groups.items #=> Array
+    #   resp.distribution.active_trusted_key_groups.items[0].key_group_id #=> String
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.quantity #=> Integer
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.items #=> Array
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.items[0] #=> String
     #   resp.distribution.distribution_config.caller_reference #=> String
     #   resp.distribution.distribution_config.aliases.quantity #=> Integer
     #   resp.distribution.distribution_config.aliases.items #=> Array
@@ -775,6 +796,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
     #   resp.distribution.distribution_config.origin_groups.items #=> Array
     #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
@@ -789,6 +812,10 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
     #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.items[0] #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
@@ -829,6 +856,10 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.items[0] #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
@@ -957,6 +988,10 @@ module Aws::CloudFront
     #               },
     #               connection_attempts: 1,
     #               connection_timeout: 1,
+    #               origin_shield: {
+    #                 enabled: false, # required
+    #                 origin_shield_region: "OriginShieldRegion",
+    #               },
     #             },
     #           ],
     #         },
@@ -984,7 +1019,12 @@ module Aws::CloudFront
     #         },
     #         default_cache_behavior: { # required
     #           target_origin_id: "string", # required
-    #           trusted_signers: { # required
+    #           trusted_signers: {
+    #             enabled: false, # required
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           trusted_key_groups: {
     #             enabled: false, # required
     #             quantity: 1, # required
     #             items: ["string"],
@@ -1042,7 +1082,12 @@ module Aws::CloudFront
     #             {
     #               path_pattern: "string", # required
     #               target_origin_id: "string", # required
-    #               trusted_signers: { # required
+    #               trusted_signers: {
+    #                 enabled: false, # required
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #               trusted_key_groups: {
     #                 enabled: false, # required
     #                 quantity: 1, # required
     #                 items: ["string"],
@@ -1162,6 +1207,13 @@ module Aws::CloudFront
     #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.quantity #=> Integer
     #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.items #=> Array
     #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.items[0] #=> String
+    #   resp.distribution.active_trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.active_trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.active_trusted_key_groups.items #=> Array
+    #   resp.distribution.active_trusted_key_groups.items[0].key_group_id #=> String
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.quantity #=> Integer
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.items #=> Array
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.items[0] #=> String
     #   resp.distribution.distribution_config.caller_reference #=> String
     #   resp.distribution.distribution_config.aliases.quantity #=> Integer
     #   resp.distribution.distribution_config.aliases.items #=> Array
@@ -1187,6 +1239,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
     #   resp.distribution.distribution_config.origin_groups.items #=> Array
     #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
@@ -1201,6 +1255,10 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
     #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.items[0] #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
@@ -1241,6 +1299,10 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.items[0] #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
@@ -1495,6 +1557,63 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Creates a key group that you can use with [CloudFront signed URLs and
+    # signed cookies][1].
+    #
+    # To create a key group, you must specify at least one public key for
+    # the key group. After you create a key group, you can reference it from
+    # one or more cache behaviors. When you reference a key group in a cache
+    # behavior, CloudFront requires signed URLs or signed cookies for all
+    # requests that match the cache behavior. The URLs or cookies must be
+    # signed with a private key whose corresponding public key is in the key
+    # group. The signed URL or cookie contains information about which
+    # public key CloudFront should use to verify the signature. For more
+    # information, see [Serving private content][1] in the *Amazon
+    # CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    #
+    # @option params [required, Types::KeyGroupConfig] :key_group_config
+    #   A key group configuration.
+    #
+    # @return [Types::CreateKeyGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateKeyGroupResult#key_group #key_group} => Types::KeyGroup
+    #   * {Types::CreateKeyGroupResult#location #location} => String
+    #   * {Types::CreateKeyGroupResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_key_group({
+    #     key_group_config: { # required
+    #       name: "string", # required
+    #       items: ["string"], # required
+    #       comment: "string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_group.id #=> String
+    #   resp.key_group.last_modified_time #=> Time
+    #   resp.key_group.key_group_config.name #=> String
+    #   resp.key_group.key_group_config.items #=> Array
+    #   resp.key_group.key_group_config.items[0] #=> String
+    #   resp.key_group.key_group_config.comment #=> String
+    #   resp.location #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateKeyGroup2020_05_31 AWS API Documentation
+    #
+    # @overload create_key_group(params = {})
+    # @param [Hash] params ({})
+    def create_key_group(params = {}, options = {})
+      req = build_request(:create_key_group, params)
+      req.send_request(options)
+    end
+
     # Enables additional CloudWatch metrics for the specified CloudFront
     # distribution. The additional metrics incur an additional cost.
     #
@@ -1640,12 +1759,16 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Add a new public key to CloudFront to use, for example, for
-    # field-level encryption. You can add a maximum of 10 public keys with
-    # one AWS account.
+    # Uploads a public key to CloudFront that you can use with [signed URLs
+    # and signed cookies][1], or with [field-level encryption][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html
     #
     # @option params [required, Types::PublicKeyConfig] :public_key_config
-    #   The request to add a public key to CloudFront.
+    #   A CloudFront public key configuration.
     #
     # @return [Types::CreatePublicKeyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2114,6 +2237,43 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Deletes a key group.
+    #
+    # You cannot delete a key group that is referenced in a cache behavior.
+    # First update your distributions to remove the key group from all cache
+    # behaviors, then delete the key group.
+    #
+    # To delete a key group, you must provide the key group’s identifier and
+    # version. To get these values, use `ListKeyGroups` followed by
+    # `GetKeyGroup` or `GetKeyGroupConfig`.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the key group that you are deleting. To get the
+    #   identifier, use `ListKeyGroups`.
+    #
+    # @option params [String] :if_match
+    #   The version of the key group that you are deleting. The version is the
+    #   key group’s `ETag` value. To get the `ETag`, use `GetKeyGroup` or
+    #   `GetKeyGroupConfig`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_key_group({
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteKeyGroup2020_05_31 AWS API Documentation
+    #
+    # @overload delete_key_group(params = {})
+    # @param [Hash] params ({})
+    def delete_key_group(params = {}, options = {})
+      req = build_request(:delete_key_group, params)
+      req.send_request(options)
+    end
+
     # Disables additional CloudWatch metrics for the specified CloudFront
     # distribution.
     #
@@ -2530,6 +2690,13 @@ module Aws::CloudFront
     #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.quantity #=> Integer
     #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.items #=> Array
     #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.items[0] #=> String
+    #   resp.distribution.active_trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.active_trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.active_trusted_key_groups.items #=> Array
+    #   resp.distribution.active_trusted_key_groups.items[0].key_group_id #=> String
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.quantity #=> Integer
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.items #=> Array
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.items[0] #=> String
     #   resp.distribution.distribution_config.caller_reference #=> String
     #   resp.distribution.distribution_config.aliases.quantity #=> Integer
     #   resp.distribution.distribution_config.aliases.items #=> Array
@@ -2555,6 +2722,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
     #   resp.distribution.distribution_config.origin_groups.items #=> Array
     #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
@@ -2569,6 +2738,10 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
     #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.items[0] #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
@@ -2609,6 +2782,10 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.items[0] #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
@@ -2731,6 +2908,8 @@ module Aws::CloudFront
     #   resp.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution_config.origin_groups.quantity #=> Integer
     #   resp.distribution_config.origin_groups.items #=> Array
     #   resp.distribution_config.origin_groups.items[0].id #=> String
@@ -2745,6 +2924,10 @@ module Aws::CloudFront
     #   resp.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
     #   resp.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
     #   resp.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution_config.default_cache_behavior.trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution_config.default_cache_behavior.trusted_key_groups.quantity #=> Integer
+    #   resp.distribution_config.default_cache_behavior.trusted_key_groups.items #=> Array
+    #   resp.distribution_config.default_cache_behavior.trusted_key_groups.items[0] #=> String
     #   resp.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
     #   resp.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
@@ -2785,6 +2968,10 @@ module Aws::CloudFront
     #   resp.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
     #   resp.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
     #   resp.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution_config.cache_behaviors.items[0].trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution_config.cache_behaviors.items[0].trusted_key_groups.quantity #=> Integer
+    #   resp.distribution_config.cache_behaviors.items[0].trusted_key_groups.items #=> Array
+    #   resp.distribution_config.cache_behaviors.items[0].trusted_key_groups.items[0] #=> String
     #   resp.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
     #   resp.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
@@ -3068,6 +3255,90 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Gets a key group, including the date and time when the key group was
+    # last modified.
+    #
+    # To get a key group, you must provide the key group’s identifier. If
+    # the key group is referenced in a distribution’s cache behavior, you
+    # can get the key group’s identifier using `ListDistributions` or
+    # `GetDistribution`. If the key group is not referenced in a cache
+    # behavior, you can get the identifier using `ListKeyGroups`.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the key group that you are getting. To get the
+    #   identifier, use `ListKeyGroups`.
+    #
+    # @return [Types::GetKeyGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetKeyGroupResult#key_group #key_group} => Types::KeyGroup
+    #   * {Types::GetKeyGroupResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_key_group({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_group.id #=> String
+    #   resp.key_group.last_modified_time #=> Time
+    #   resp.key_group.key_group_config.name #=> String
+    #   resp.key_group.key_group_config.items #=> Array
+    #   resp.key_group.key_group_config.items[0] #=> String
+    #   resp.key_group.key_group_config.comment #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetKeyGroup2020_05_31 AWS API Documentation
+    #
+    # @overload get_key_group(params = {})
+    # @param [Hash] params ({})
+    def get_key_group(params = {}, options = {})
+      req = build_request(:get_key_group, params)
+      req.send_request(options)
+    end
+
+    # Gets a key group configuration.
+    #
+    # To get a key group configuration, you must provide the key group’s
+    # identifier. If the key group is referenced in a distribution’s cache
+    # behavior, you can get the key group’s identifier using
+    # `ListDistributions` or `GetDistribution`. If the key group is not
+    # referenced in a cache behavior, you can get the identifier using
+    # `ListKeyGroups`.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the key group whose configuration you are getting.
+    #   To get the identifier, use `ListKeyGroups`.
+    #
+    # @return [Types::GetKeyGroupConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetKeyGroupConfigResult#key_group_config #key_group_config} => Types::KeyGroupConfig
+    #   * {Types::GetKeyGroupConfigResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_key_group_config({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_group_config.name #=> String
+    #   resp.key_group_config.items #=> Array
+    #   resp.key_group_config.items[0] #=> String
+    #   resp.key_group_config.comment #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetKeyGroupConfig2020_05_31 AWS API Documentation
+    #
+    # @overload get_key_group_config(params = {})
+    # @param [Hash] params ({})
+    def get_key_group_config(params = {}, options = {})
+      req = build_request(:get_key_group_config, params)
+      req.send_request(options)
+    end
+
     # Gets information about whether additional CloudWatch metrics are
     # enabled for the specified CloudFront distribution.
     #
@@ -3214,10 +3485,10 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Get the public key information.
+    # Gets a public key.
     #
     # @option params [required, String] :id
-    #   Request the ID for the public key.
+    #   The identifier of the public key you are getting.
     #
     # @return [Types::GetPublicKeyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3249,10 +3520,10 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Return public key configuration informaation
+    # Gets a public key configuration.
     #
     # @option params [required, String] :id
-    #   Request the ID for the public key configuration.
+    #   The identifier of the public key whose configuration you are getting.
     #
     # @return [Types::GetPublicKeyConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3627,6 +3898,8 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution_list.items[0].origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution_list.items[0].origin_groups.quantity #=> Integer
     #   resp.distribution_list.items[0].origin_groups.items #=> Array
     #   resp.distribution_list.items[0].origin_groups.items[0].id #=> String
@@ -3641,6 +3914,10 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.quantity #=> Integer
     #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items #=> Array
     #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_key_groups.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_key_groups.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_key_groups.items[0] #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.quantity #=> Integer
     #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.items #=> Array
@@ -3681,6 +3958,10 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.quantity #=> Integer
     #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items #=> Array
     #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_key_groups.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_key_groups.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_key_groups.items[0] #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.quantity #=> Integer
     #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.items #=> Array
@@ -3801,6 +4082,61 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def list_distributions_by_cache_policy_id(params = {}, options = {})
       req = build_request(:list_distributions_by_cache_policy_id, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of distribution IDs for distributions that have a cache
+    # behavior that references the specified key group.
+    #
+    # You can optionally specify the maximum number of items to receive in
+    # the response. If the total number of items in the list exceeds the
+    # maximum that you specify, or the default maximum, the response is
+    # paginated. To get the next page of items, send a subsequent request
+    # that specifies the `NextMarker` value from the current response as the
+    # `Marker` value in the subsequent request.
+    #
+    # @option params [String] :marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of distribution IDs. The response includes distribution IDs
+    #   in the list that occur after the marker. To get the next page of the
+    #   list, set this field’s value to the value of `NextMarker` from the
+    #   current page’s response.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of distribution IDs that you want in the response.
+    #
+    # @option params [required, String] :key_group_id
+    #   The ID of the key group whose associated distribution IDs you are
+    #   listing.
+    #
+    # @return [Types::ListDistributionsByKeyGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDistributionsByKeyGroupResult#distribution_id_list #distribution_id_list} => Types::DistributionIdList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_distributions_by_key_group({
+    #     marker: "string",
+    #     max_items: 1,
+    #     key_group_id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.distribution_id_list.marker #=> String
+    #   resp.distribution_id_list.next_marker #=> String
+    #   resp.distribution_id_list.max_items #=> Integer
+    #   resp.distribution_id_list.is_truncated #=> Boolean
+    #   resp.distribution_id_list.quantity #=> Integer
+    #   resp.distribution_id_list.items #=> Array
+    #   resp.distribution_id_list.items[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByKeyGroup2020_05_31 AWS API Documentation
+    #
+    # @overload list_distributions_by_key_group(params = {})
+    # @param [Hash] params ({})
+    def list_distributions_by_key_group(params = {}, options = {})
+      req = build_request(:list_distributions_by_key_group, params)
       req.send_request(options)
     end
 
@@ -3941,6 +4277,8 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution_list.items[0].origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution_list.items[0].origin_groups.quantity #=> Integer
     #   resp.distribution_list.items[0].origin_groups.items #=> Array
     #   resp.distribution_list.items[0].origin_groups.items[0].id #=> String
@@ -3955,6 +4293,10 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.quantity #=> Integer
     #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items #=> Array
     #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_key_groups.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_key_groups.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_key_groups.items[0] #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.quantity #=> Integer
     #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.items #=> Array
@@ -3995,6 +4337,10 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.quantity #=> Integer
     #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items #=> Array
     #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_key_groups.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_key_groups.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_key_groups.items[0] #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.quantity #=> Integer
     #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.items #=> Array
@@ -4131,6 +4477,8 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_attempts #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution_list.items[0].origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution_list.items[0].origin_groups.quantity #=> Integer
     #   resp.distribution_list.items[0].origin_groups.items #=> Array
     #   resp.distribution_list.items[0].origin_groups.items[0].id #=> String
@@ -4145,6 +4493,10 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.quantity #=> Integer
     #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items #=> Array
     #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_key_groups.quantity #=> Integer
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_key_groups.items #=> Array
+    #   resp.distribution_list.items[0].default_cache_behavior.trusted_key_groups.items[0] #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.quantity #=> Integer
     #   resp.distribution_list.items[0].default_cache_behavior.allowed_methods.items #=> Array
@@ -4185,6 +4537,10 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.quantity #=> Integer
     #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items #=> Array
     #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_key_groups.quantity #=> Integer
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_key_groups.items #=> Array
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_key_groups.items[0] #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.quantity #=> Integer
     #   resp.distribution_list.items[0].cache_behaviors.items[0].allowed_methods.items #=> Array
@@ -4412,6 +4768,58 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def list_invalidations(params = {}, options = {})
       req = build_request(:list_invalidations, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of key groups.
+    #
+    # You can optionally specify the maximum number of items to receive in
+    # the response. If the total number of items in the list exceeds the
+    # maximum that you specify, or the default maximum, the response is
+    # paginated. To get the next page of items, send a subsequent request
+    # that specifies the `NextMarker` value from the current response as the
+    # `Marker` value in the subsequent request.
+    #
+    # @option params [String] :marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of key groups. The response includes key groups in the list
+    #   that occur after the marker. To get the next page of the list, set
+    #   this field’s value to the value of `NextMarker` from the current
+    #   page’s response.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of key groups that you want in the response.
+    #
+    # @return [Types::ListKeyGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListKeyGroupsResult#key_group_list #key_group_list} => Types::KeyGroupList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_key_groups({
+    #     marker: "string",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_group_list.next_marker #=> String
+    #   resp.key_group_list.max_items #=> Integer
+    #   resp.key_group_list.quantity #=> Integer
+    #   resp.key_group_list.items #=> Array
+    #   resp.key_group_list.items[0].key_group.id #=> String
+    #   resp.key_group_list.items[0].key_group.last_modified_time #=> Time
+    #   resp.key_group_list.items[0].key_group.key_group_config.name #=> String
+    #   resp.key_group_list.items[0].key_group.key_group_config.items #=> Array
+    #   resp.key_group_list.items[0].key_group.key_group_config.items[0] #=> String
+    #   resp.key_group_list.items[0].key_group.key_group_config.comment #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListKeyGroups2020_05_31 AWS API Documentation
+    #
+    # @overload list_key_groups(params = {})
+    # @param [Hash] params ({})
+    def list_key_groups(params = {}, options = {})
+      req = build_request(:list_key_groups, params)
       req.send_request(options)
     end
 
@@ -5028,6 +5436,10 @@ module Aws::CloudFront
     #             },
     #             connection_attempts: 1,
     #             connection_timeout: 1,
+    #             origin_shield: {
+    #               enabled: false, # required
+    #               origin_shield_region: "OriginShieldRegion",
+    #             },
     #           },
     #         ],
     #       },
@@ -5055,7 +5467,12 @@ module Aws::CloudFront
     #       },
     #       default_cache_behavior: { # required
     #         target_origin_id: "string", # required
-    #         trusted_signers: { # required
+    #         trusted_signers: {
+    #           enabled: false, # required
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         trusted_key_groups: {
     #           enabled: false, # required
     #           quantity: 1, # required
     #           items: ["string"],
@@ -5113,7 +5530,12 @@ module Aws::CloudFront
     #           {
     #             path_pattern: "string", # required
     #             target_origin_id: "string", # required
-    #             trusted_signers: { # required
+    #             trusted_signers: {
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             trusted_key_groups: {
     #               enabled: false, # required
     #               quantity: 1, # required
     #               items: ["string"],
@@ -5226,6 +5648,13 @@ module Aws::CloudFront
     #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.quantity #=> Integer
     #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.items #=> Array
     #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.items[0] #=> String
+    #   resp.distribution.active_trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.active_trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.active_trusted_key_groups.items #=> Array
+    #   resp.distribution.active_trusted_key_groups.items[0].key_group_id #=> String
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.quantity #=> Integer
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.items #=> Array
+    #   resp.distribution.active_trusted_key_groups.items[0].key_pair_ids.items[0] #=> String
     #   resp.distribution.distribution_config.caller_reference #=> String
     #   resp.distribution.distribution_config.aliases.quantity #=> Integer
     #   resp.distribution.distribution_config.aliases.items #=> Array
@@ -5251,6 +5680,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_attempts #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].connection_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.enabled #=> Boolean
+    #   resp.distribution.distribution_config.origins.items[0].origin_shield.origin_shield_region #=> String
     #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
     #   resp.distribution.distribution_config.origin_groups.items #=> Array
     #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
@@ -5265,6 +5696,10 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
     #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.items #=> Array
+    #   resp.distribution.distribution_config.default_cache_behavior.trusted_key_groups.items[0] #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
@@ -5305,6 +5740,10 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.enabled #=> Boolean
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.items #=> Array
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_key_groups.items[0] #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
@@ -5526,6 +5965,67 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Updates a key group.
+    #
+    # When you update a key group, all the fields are updated with the
+    # values provided in the request. You cannot update some fields
+    # independent of others. To update a key group:
+    #
+    # 1.  Get the current key group with `GetKeyGroup` or
+    #     `GetKeyGroupConfig`.
+    #
+    # 2.  Locally modify the fields in the key group that you want to
+    #     update. For example, add or remove public key IDs.
+    #
+    # 3.  Call `UpdateKeyGroup` with the entire key group object, including
+    #     the fields that you modified and those that you didn’t.
+    #
+    # @option params [required, Types::KeyGroupConfig] :key_group_config
+    #   The key group configuration.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the key group that you are updating.
+    #
+    # @option params [String] :if_match
+    #   The version of the key group that you are updating. The version is the
+    #   key group’s `ETag` value.
+    #
+    # @return [Types::UpdateKeyGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateKeyGroupResult#key_group #key_group} => Types::KeyGroup
+    #   * {Types::UpdateKeyGroupResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_key_group({
+    #     key_group_config: { # required
+    #       name: "string", # required
+    #       items: ["string"], # required
+    #       comment: "string",
+    #     },
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_group.id #=> String
+    #   resp.key_group.last_modified_time #=> Time
+    #   resp.key_group.key_group_config.name #=> String
+    #   resp.key_group.key_group_config.items #=> Array
+    #   resp.key_group.key_group_config.items[0] #=> String
+    #   resp.key_group.key_group_config.comment #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateKeyGroup2020_05_31 AWS API Documentation
+    #
+    # @overload update_key_group(params = {})
+    # @param [Hash] params ({})
+    def update_key_group(params = {}, options = {})
+      req = build_request(:update_key_group, params)
+      req.send_request(options)
+    end
+
     # Updates an origin request policy configuration.
     #
     # When you update an origin request policy configuration, all the fields
@@ -5627,10 +6127,10 @@ module Aws::CloudFront
     # is the comment.
     #
     # @option params [required, Types::PublicKeyConfig] :public_key_config
-    #   Request to update public key information.
+    #   A public key configuration.
     #
     # @option params [required, String] :id
-    #   ID of the public key to be updated.
+    #   The identifier of the public key that you are updating.
     #
     # @option params [String] :if_match
     #   The value of the `ETag` header that you received when retrieving the
@@ -5864,7 +6364,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

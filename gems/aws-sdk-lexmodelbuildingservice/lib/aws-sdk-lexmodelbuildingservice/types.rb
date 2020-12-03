@@ -494,7 +494,7 @@ module Aws::LexModelBuildingService
     #
     # @!attribute [rw] enable_model_improvements
     #   Indicates whether the bot uses accuracy improvements. `true`
-    #   indicates that the bot is using the imoprovements, otherwise,
+    #   indicates that the bot is using the improvements, otherwise,
     #   `false`.
     #   @return [Boolean]
     #
@@ -627,9 +627,20 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] kendra_configuration
-    #   Configuration information, if any, for connectin an Amazon Kendra
+    #   Configuration information, if any, for connecting an Amazon Kendra
     #   index with the `AMAZON.KendraSearchIntent` intent.
     #   @return [Types::KendraConfiguration]
+    #
+    # @!attribute [rw] input_contexts
+    #   An array of `InputContext` objects that lists the contexts that must
+    #   be active for Amazon Lex to choose the intent in a conversation with
+    #   the user.
+    #   @return [Array<Types::InputContext>]
+    #
+    # @!attribute [rw] output_contexts
+    #   An array of `OutputContext` objects that lists the contexts that the
+    #   intent activates when the intent is fulfilled.
+    #   @return [Array<Types::OutputContext>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateIntentVersionResponse AWS API Documentation
     #
@@ -649,7 +660,9 @@ module Aws::LexModelBuildingService
       :created_date,
       :version,
       :checksum,
-      :kendra_configuration)
+      :kendra_configuration,
+      :input_contexts,
+      :output_contexts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1458,7 +1471,7 @@ module Aws::LexModelBuildingService
     #
     # @!attribute [rw] enable_model_improvements
     #   Indicates whether the bot uses accuracy improvements. `true`
-    #   indicates that the bot is using the imoprovements, otherwise,
+    #   indicates that the bot is using the improvements, otherwise,
     #   `false`.
     #   @return [Boolean]
     #
@@ -1768,7 +1781,7 @@ module Aws::LexModelBuildingService
     #   data as a hash:
     #
     #       {
-    #         locale: "en-US", # accepts en-US, en-GB, de-DE, en-AU
+    #         locale: "de-DE", # accepts de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-FR, fr-CA, it-IT
     #         signature_contains: "String",
     #         next_token: "NextToken",
     #         max_results: 1,
@@ -1838,7 +1851,7 @@ module Aws::LexModelBuildingService
     #   data as a hash:
     #
     #       {
-    #         locale: "en-US", # accepts en-US, en-GB, de-DE, en-AU
+    #         locale: "de-DE", # accepts de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-FR, fr-CA, it-IT
     #         signature_contains: "String",
     #         next_token: "NextToken",
     #         max_results: 1,
@@ -2150,6 +2163,17 @@ module Aws::LexModelBuildingService
     #   index with the `AMAZON.KendraSearchIntent` intent.
     #   @return [Types::KendraConfiguration]
     #
+    # @!attribute [rw] input_contexts
+    #   An array of `InputContext` objects that lists the contexts that must
+    #   be active for Amazon Lex to choose the intent in a conversation with
+    #   the user.
+    #   @return [Array<Types::InputContext>]
+    #
+    # @!attribute [rw] output_contexts
+    #   An array of `OutputContext` objects that lists the contexts that the
+    #   intent activates when the intent is fulfilled.
+    #   @return [Array<Types::OutputContext>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntentResponse AWS API Documentation
     #
     class GetIntentResponse < Struct.new(
@@ -2168,7 +2192,9 @@ module Aws::LexModelBuildingService
       :created_date,
       :version,
       :checksum,
-      :kendra_configuration)
+      :kendra_configuration,
+      :input_contexts,
+      :output_contexts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2541,6 +2567,28 @@ module Aws::LexModelBuildingService
       include Aws::Structure
     end
 
+    # The name of a context that must be active for an intent to be selected
+    # by Amazon Lex.
+    #
+    # @note When making an API call, you may pass InputContext
+    #   data as a hash:
+    #
+    #       {
+    #         name: "InputContextName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the context.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/InputContext AWS API Documentation
+    #
+    class InputContext < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Identifies the specific version of an intent.
     #
     # @note When making an API call, you may pass Intent
@@ -2855,6 +2903,44 @@ module Aws::LexModelBuildingService
       include Aws::Structure
     end
 
+    # The specification of an output context that is set when an intent is
+    # fulfilled.
+    #
+    # @note When making an API call, you may pass OutputContext
+    #   data as a hash:
+    #
+    #       {
+    #         name: "OutputContextName", # required
+    #         time_to_live_in_seconds: 1, # required
+    #         turns_to_live: 1, # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the context.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_to_live_in_seconds
+    #   The number of seconds that the context should be active after it is
+    #   first sent in a `PostContent` or `PostText` response. You can set
+    #   the value between 5 and 86,400 seconds (24 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] turns_to_live
+    #   The number of conversation turns that the context should be active.
+    #   A conversation turn is one `PostContent` or `PostText` request and
+    #   the corresponding response from Amazon Lex.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/OutputContext AWS API Documentation
+    #
+    class OutputContext < Struct.new(
+      :name,
+      :time_to_live_in_seconds,
+      :turns_to_live)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The checksum of the resource that you are trying to change does not
     # match the checksum in the request. Check the resource's checksum and
     # try again.
@@ -3093,7 +3179,7 @@ module Aws::LexModelBuildingService
     #         voice_id: "String",
     #         checksum: "String",
     #         process_behavior: "SAVE", # accepts SAVE, BUILD
-    #         locale: "en-US", # required, accepts en-US, en-GB, de-DE, en-AU
+    #         locale: "de-DE", # required, accepts de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-FR, fr-CA, it-IT
     #         child_directed: false, # required
     #         detect_sentiment: false,
     #         create_version: false,
@@ -3146,14 +3232,6 @@ module Aws::LexModelBuildingService
     #   `true` by default. In these Regions setting the parameter to `false`
     #   throws a `ValidationException` exception.
     #
-    #   * Asia Pacific (Singapore) (ap-southeast-1)
-    #
-    #   * Asia Pacific (Tokyo) (ap-northeast-1)
-    #
-    #   * EU (Frankfurt) (eu-central-1)
-    #
-    #   * EU (London) (eu-west-2)
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html
@@ -3167,7 +3245,7 @@ module Aws::LexModelBuildingService
     #   are only inserted if they are configured for the bot.
     #
     #   You must set the `enableModelImprovements` parameter to `true` to
-    #   use confidence scores.
+    #   use confidence scores in the following regions.
     #
     #   * US East (N. Virginia) (us-east-1)
     #
@@ -3418,7 +3496,7 @@ module Aws::LexModelBuildingService
     #
     # @!attribute [rw] enable_model_improvements
     #   Indicates whether the bot uses accuracy improvements. `true`
-    #   indicates that the bot is using the imoprovements, otherwise,
+    #   indicates that the bot is using the improvements, otherwise,
     #   `false`.
     #   @return [Boolean]
     #
@@ -3609,6 +3687,13 @@ module Aws::LexModelBuildingService
     #             sample_utterances: ["Utterance"],
     #             response_card: "ResponseCard",
     #             obfuscation_setting: "NONE", # accepts NONE, DEFAULT_OBFUSCATION
+    #             default_value_spec: {
+    #               default_value_list: [ # required
+    #                 {
+    #                   default_value: "SlotDefaultValueString", # required
+    #                 },
+    #               ],
+    #             },
     #           },
     #         ],
     #         sample_utterances: ["Utterance"],
@@ -3685,6 +3770,18 @@ module Aws::LexModelBuildingService
     #           query_filter_string: "QueryFilterString",
     #           role: "roleArn", # required
     #         },
+    #         input_contexts: [
+    #           {
+    #             name: "InputContextName", # required
+    #           },
+    #         ],
+    #         output_contexts: [
+    #           {
+    #             name: "OutputContextName", # required
+    #             time_to_live_in_seconds: 1, # required
+    #             turns_to_live: 1, # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -3850,6 +3947,17 @@ module Aws::LexModelBuildingService
     #   [1]: http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html
     #   @return [Types::KendraConfiguration]
     #
+    # @!attribute [rw] input_contexts
+    #   An array of `InputContext` objects that lists the contexts that must
+    #   be active for Amazon Lex to choose the intent in a conversation with
+    #   the user.
+    #   @return [Array<Types::InputContext>]
+    #
+    # @!attribute [rw] output_contexts
+    #   An array of `OutputContext` objects that lists the contexts that the
+    #   intent activates when the intent is fulfilled.
+    #   @return [Array<Types::OutputContext>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntentRequest AWS API Documentation
     #
     class PutIntentRequest < Struct.new(
@@ -3866,7 +3974,9 @@ module Aws::LexModelBuildingService
       :parent_intent_signature,
       :checksum,
       :create_version,
-      :kendra_configuration)
+      :kendra_configuration,
+      :input_contexts,
+      :output_contexts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3954,6 +4064,17 @@ module Aws::LexModelBuildingService
     #   Kendra index and use the `AMAZON.KendraSearchIntent` intent.
     #   @return [Types::KendraConfiguration]
     #
+    # @!attribute [rw] input_contexts
+    #   An array of `InputContext` objects that lists the contexts that must
+    #   be active for Amazon Lex to choose the intent in a conversation with
+    #   the user.
+    #   @return [Array<Types::InputContext>]
+    #
+    # @!attribute [rw] output_contexts
+    #   An array of `OutputContext` objects that lists the contexts that the
+    #   intent activates when the intent is fulfilled.
+    #   @return [Array<Types::OutputContext>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntentResponse AWS API Documentation
     #
     class PutIntentResponse < Struct.new(
@@ -3973,7 +4094,9 @@ module Aws::LexModelBuildingService
       :version,
       :checksum,
       :create_version,
-      :kendra_configuration)
+      :kendra_configuration,
+      :input_contexts,
+      :output_contexts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4255,6 +4378,13 @@ module Aws::LexModelBuildingService
     #         sample_utterances: ["Utterance"],
     #         response_card: "ResponseCard",
     #         obfuscation_setting: "NONE", # accepts NONE, DEFAULT_OBFUSCATION
+    #         default_value_spec: {
+    #           default_value_list: [ # required
+    #             {
+    #               default_value: "SlotDefaultValueString", # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -4319,6 +4449,13 @@ module Aws::LexModelBuildingService
     #   [1]: https://docs.aws.amazon.com/lex/latest/dg/how-obfuscate.html
     #   @return [String]
     #
+    # @!attribute [rw] default_value_spec
+    #   A list of default values for the slot. Default values are used when
+    #   Amazon Lex hasn't determined a value for a slot. You can specify
+    #   default values from context variables, session attributes, and
+    #   defined values.
+    #   @return [Types::SlotDefaultValueSpec]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/Slot AWS API Documentation
     #
     class Slot < Struct.new(
@@ -4331,7 +4468,71 @@ module Aws::LexModelBuildingService
       :priority,
       :sample_utterances,
       :response_card,
-      :obfuscation_setting)
+      :obfuscation_setting,
+      :default_value_spec)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A default value for a slot.
+    #
+    # @note When making an API call, you may pass SlotDefaultValue
+    #   data as a hash:
+    #
+    #       {
+    #         default_value: "SlotDefaultValueString", # required
+    #       }
+    #
+    # @!attribute [rw] default_value
+    #   The default value for the slot. You can specify one of the
+    #   following:
+    #
+    #   * `#context-name.slot-name` - The slot value "slot-name" in the
+    #     context "context-name."
+    #
+    #   * `\{attribute\}` - The slot value of the session attribute
+    #     "attribute."
+    #
+    #   * `'value'` - The discrete value "value."
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/SlotDefaultValue AWS API Documentation
+    #
+    class SlotDefaultValue < Struct.new(
+      :default_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the default values for a slot. Default values are used when
+    # Amazon Lex hasn't determined a value for a slot.
+    #
+    # @note When making an API call, you may pass SlotDefaultValueSpec
+    #   data as a hash:
+    #
+    #       {
+    #         default_value_list: [ # required
+    #           {
+    #             default_value: "SlotDefaultValueString", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] default_value_list
+    #   The default values for a slot. You can specify more than one
+    #   default. For example, you can specify a default value to use from a
+    #   matching context variable, a session attribute, or a fixed value.
+    #
+    #   The default value chosen is selected based on the order that you
+    #   specify them in the list. For example, if you specify a context
+    #   variable and a fixed value in that order, Amazon Lex uses the
+    #   context variable if it is available, else it uses the fixed value.
+    #   @return [Array<Types::SlotDefaultValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/SlotDefaultValueSpec AWS API Documentation
+    #
+    class SlotDefaultValueSpec < Struct.new(
+      :default_value_list)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -356,8 +356,32 @@ module Aws::PersonalizeRuntime
     #   current location or device type.
     #
     # @option params [String] :filter_arn
-    #   The Amazon Resource Name (ARN) of a filter you created to include or
-    #   exclude items from recommendations for a given user.
+    #   The Amazon Resource Name (ARN) of a filter you created to include
+    #   items or exclude items from recommendations for a given user. For more
+    #   information, see [Filtering Recommendations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
+    #
+    # @option params [Hash<String,String>] :filter_values
+    #   The values to use when filtering recommendations. For each placeholder
+    #   parameter in your filter expression, provide the parameter name (in
+    #   matching case) as a key and the filter value(s) as the corresponding
+    #   value. Separate multiple values for one parameter with a comma.
+    #
+    #   For filter expressions that use an `INCLUDE` element to include items,
+    #   you must provide values for all parameters that are defined in the
+    #   expression. For filters with expressions that use an `EXCLUDE` element
+    #   to exclude items, you can omit the `filter-values`.In this case,
+    #   Amazon Personalize doesn't use that portion of the expression to
+    #   filter recommendations.
+    #
+    #   For more information, see [Filtering Recommendations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
     #
     # @return [Types::GetPersonalizedRankingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -374,6 +398,9 @@ module Aws::PersonalizeRuntime
     #       "AttributeName" => "AttributeValue",
     #     },
     #     filter_arn: "Arn",
+    #     filter_values: {
+    #       "FilterAttributeName" => "FilterAttributeValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -431,13 +458,32 @@ module Aws::PersonalizeRuntime
     #
     # @option params [String] :filter_arn
     #   The ARN of the filter to apply to the returned recommendations. For
-    #   more information, see [Using Filters with Amazon Personalize][1].
+    #   more information, see [Filtering Recommendations][1].
     #
     #   When using this parameter, be sure the filter resource is `ACTIVE`.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filters.html
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
+    #
+    # @option params [Hash<String,String>] :filter_values
+    #   The values to use when filtering recommendations. For each placeholder
+    #   parameter in your filter expression, provide the parameter name (in
+    #   matching case) as a key and the filter value(s) as the corresponding
+    #   value. Separate multiple values for one parameter with a comma.
+    #
+    #   For filter expressions that use an `INCLUDE` element to include items,
+    #   you must provide values for all parameters that are defined in the
+    #   expression. For filters with expressions that use an `EXCLUDE` element
+    #   to exclude items, you can omit the `filter-values`.In this case,
+    #   Amazon Personalize doesn't use that portion of the expression to
+    #   filter recommendations.
+    #
+    #   For more information, see [Filtering Recommendations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
     #
     # @return [Types::GetRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -455,6 +501,9 @@ module Aws::PersonalizeRuntime
     #       "AttributeName" => "AttributeValue",
     #     },
     #     filter_arn: "Arn",
+    #     filter_values: {
+    #       "FilterAttributeName" => "FilterAttributeValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -486,7 +535,7 @@ module Aws::PersonalizeRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalizeruntime'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

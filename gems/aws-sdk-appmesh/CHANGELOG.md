@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-11-20)
+------------------
+
+* Feature - This release makes tag value a required attribute of the tag's key-value pair.
+
+1.32.0 (2020-11-05)
+------------------
+
+* Feature - This release adds circuit breaking capabilities to your mesh with connection pooling and outlier detection support.
+
+1.31.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.29.0 (2020-08-25)
 ------------------
 

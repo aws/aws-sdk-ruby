@@ -312,6 +312,7 @@ module Aws::Organizations
     CreateAccountRequest.add_member(:account_name, Shapes::ShapeRef.new(shape: AccountName, required: true, location_name: "AccountName"))
     CreateAccountRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: RoleName, location_name: "RoleName"))
     CreateAccountRequest.add_member(:iam_user_access_to_billing, Shapes::ShapeRef.new(shape: IAMUserAccessToBilling, location_name: "IamUserAccessToBilling"))
+    CreateAccountRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateAccountRequest.struct_class = Types::CreateAccountRequest
 
     CreateAccountResponse.add_member(:create_account_status, Shapes::ShapeRef.new(shape: CreateAccountStatus, location_name: "CreateAccountStatus"))
@@ -338,6 +339,7 @@ module Aws::Organizations
     CreateGovCloudAccountRequest.add_member(:account_name, Shapes::ShapeRef.new(shape: AccountName, required: true, location_name: "AccountName"))
     CreateGovCloudAccountRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: RoleName, location_name: "RoleName"))
     CreateGovCloudAccountRequest.add_member(:iam_user_access_to_billing, Shapes::ShapeRef.new(shape: IAMUserAccessToBilling, location_name: "IamUserAccessToBilling"))
+    CreateGovCloudAccountRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateGovCloudAccountRequest.struct_class = Types::CreateGovCloudAccountRequest
 
     CreateGovCloudAccountResponse.add_member(:create_account_status, Shapes::ShapeRef.new(shape: CreateAccountStatus, location_name: "CreateAccountStatus"))
@@ -351,6 +353,7 @@ module Aws::Organizations
 
     CreateOrganizationalUnitRequest.add_member(:parent_id, Shapes::ShapeRef.new(shape: ParentId, required: true, location_name: "ParentId"))
     CreateOrganizationalUnitRequest.add_member(:name, Shapes::ShapeRef.new(shape: OrganizationalUnitName, required: true, location_name: "Name"))
+    CreateOrganizationalUnitRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateOrganizationalUnitRequest.struct_class = Types::CreateOrganizationalUnitRequest
 
     CreateOrganizationalUnitResponse.add_member(:organizational_unit, Shapes::ShapeRef.new(shape: OrganizationalUnit, location_name: "OrganizationalUnit"))
@@ -360,6 +363,7 @@ module Aws::Organizations
     CreatePolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, required: true, location_name: "Description"))
     CreatePolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "Name"))
     CreatePolicyRequest.add_member(:type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "Type"))
+    CreatePolicyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreatePolicyRequest.struct_class = Types::CreatePolicyRequest
 
     CreatePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
@@ -552,6 +556,7 @@ module Aws::Organizations
 
     InviteAccountToOrganizationRequest.add_member(:target, Shapes::ShapeRef.new(shape: HandshakeParty, required: true, location_name: "Target"))
     InviteAccountToOrganizationRequest.add_member(:notes, Shapes::ShapeRef.new(shape: HandshakeNotes, location_name: "Notes"))
+    InviteAccountToOrganizationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     InviteAccountToOrganizationRequest.struct_class = Types::InviteAccountToOrganizationRequest
 
     InviteAccountToOrganizationResponse.add_member(:handshake, Shapes::ShapeRef.new(shape: Handshake, location_name: "Handshake"))
@@ -1322,6 +1327,7 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: HandshakeConstraintViolationException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateHandshakeException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: FinalizingOrganizationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2020-09-24)
+------------------
+
+* Feature - Amazon Transcribe now supports WebM, OGG, AMR and AMR-WB as input formats. You can also specify an output key as a location within your S3 buckets to store the output of your transcription jobs.
+
+1.48.0 (2020-09-15)
+------------------
+
+* Feature - Amazon Transcribe now supports automatic language identification, which enables you to transcribe audio files without needing to know the language in advance.
+
 1.47.0 (2020-08-25)
 ------------------
 

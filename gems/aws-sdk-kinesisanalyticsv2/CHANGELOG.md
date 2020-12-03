@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-11-19)
+------------------
+
+* Feature - Amazon Kinesis Data Analytics now supports building and running streaming applications using Apache Flink 1.11 and provides a way to access the Apache Flink dashboard for supported Flink versions.
+
+1.23.0 (2020-10-06)
+------------------
+
+* Feature - Amazon Kinesis Analytics now supports StopApplication with 'force' option
+
+1.22.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.20.0 (2020-09-09)
 ------------------
 

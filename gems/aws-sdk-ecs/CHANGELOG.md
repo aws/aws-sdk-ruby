@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2020-11-23)
+------------------
+
+* Feature - This release adds support for updating capacity providers, specifying custom instance warmup periods for capacity providers, and using deployment circuit breaker for your ECS Services.
+
+1.71.0 (2020-11-09)
+------------------
+
+* Feature - This release provides native support for specifying Amazon FSx for Windows File Server file systems as volumes in your Amazon ECS task definitions.
+
+1.70.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.68.0 (2020-08-25)
 ------------------
 

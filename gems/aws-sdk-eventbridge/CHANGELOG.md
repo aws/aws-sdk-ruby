@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2020-11-19)
+------------------
+
+* Feature - EventBridge now supports Resource-based policy authorization on event buses. This enables cross-account PutEvents API calls, creating cross-account rules, and simplifies permission management.
+
+1.17.0 (2020-11-05)
+------------------
+
+* Feature - With this release, customers can now reprocess past events by storing the events published on event bus in an encrypted archive.
+
+1.16.0 (2020-10-08)
+------------------
+
+* Feature - Amazon EventBridge adds support for target Dead Letter Queues (DLQs) and custom retry policies.
+
+1.15.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2020-09-21)
+------------------
+
+* Feature - Add support for Redshift Data API Targets
+
+1.13.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.12.0 (2020-08-25)
 ------------------
 

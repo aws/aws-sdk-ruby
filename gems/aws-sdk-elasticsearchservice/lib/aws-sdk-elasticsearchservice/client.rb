@@ -426,6 +426,7 @@ module Aws::ElasticsearchService
     #   resp.domain_package_details.last_updated #=> Time
     #   resp.domain_package_details.domain_name #=> String
     #   resp.domain_package_details.domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details.package_version #=> String
     #   resp.domain_package_details.reference_path #=> String
     #   resp.domain_package_details.error_details.error_type #=> String
     #   resp.domain_package_details.error_details.error_message #=> String
@@ -620,6 +621,9 @@ module Aws::ElasticsearchService
     #     domain_endpoint_options: {
     #       enforce_https: false,
     #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #       custom_endpoint_enabled: false,
+    #       custom_endpoint: "DomainNameFqdn",
+    #       custom_endpoint_certificate_arn: "ARN",
     #     },
     #     advanced_security_options: {
     #       enabled: false,
@@ -628,6 +632,18 @@ module Aws::ElasticsearchService
     #         master_user_arn: "ARN",
     #         master_user_name: "Username",
     #         master_user_password: "Password",
+    #       },
+    #       saml_options: {
+    #         enabled: false,
+    #         idp: {
+    #           metadata_content: "SAMLMetadata", # required
+    #           entity_id: "SAMLEntityId", # required
+    #         },
+    #         master_user_name: "Username",
+    #         master_backend_role: "BackendRole",
+    #         subject_key: "String",
+    #         roles_key: "String",
+    #         session_timeout_minutes: 1,
     #       },
     #     },
     #   })
@@ -690,8 +706,17 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
     #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint #=> String
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
     #   resp.domain_status.advanced_security_options.enabled #=> Boolean
     #   resp.domain_status.advanced_security_options.internal_user_database_enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.saml_options.enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.saml_options.idp.metadata_content #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.idp.entity_id #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.subject_key #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.roles_key #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.session_timeout_minutes #=> Integer
     #
     # @overload create_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -796,6 +821,8 @@ module Aws::ElasticsearchService
     #   resp.package_details.package_description #=> String
     #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details.created_at #=> Time
+    #   resp.package_details.last_updated_at #=> Time
+    #   resp.package_details.available_package_version #=> String
     #   resp.package_details.error_details.error_type #=> String
     #   resp.package_details.error_details.error_message #=> String
     #
@@ -881,8 +908,17 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
     #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint #=> String
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
     #   resp.domain_status.advanced_security_options.enabled #=> Boolean
     #   resp.domain_status.advanced_security_options.internal_user_database_enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.saml_options.enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.saml_options.idp.metadata_content #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.idp.entity_id #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.subject_key #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.roles_key #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.session_timeout_minutes #=> Integer
     #
     # @overload delete_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -1006,6 +1042,8 @@ module Aws::ElasticsearchService
     #   resp.package_details.package_description #=> String
     #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details.created_at #=> Time
+    #   resp.package_details.last_updated_at #=> Time
+    #   resp.package_details.available_package_version #=> String
     #   resp.package_details.error_details.error_type #=> String
     #   resp.package_details.error_details.error_message #=> String
     #
@@ -1091,8 +1129,17 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
     #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint #=> String
+    #   resp.domain_status.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
     #   resp.domain_status.advanced_security_options.enabled #=> Boolean
     #   resp.domain_status.advanced_security_options.internal_user_database_enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.saml_options.enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.saml_options.idp.metadata_content #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.idp.entity_id #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.subject_key #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.roles_key #=> String
+    #   resp.domain_status.advanced_security_options.saml_options.session_timeout_minutes #=> Integer
     #
     # @overload describe_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -1213,6 +1260,9 @@ module Aws::ElasticsearchService
     #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.enforce_https #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_enabled #=> Boolean
+    #   resp.domain_config.domain_endpoint_options.options.custom_endpoint #=> String
+    #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_certificate_arn #=> String
     #   resp.domain_config.domain_endpoint_options.status.creation_date #=> Time
     #   resp.domain_config.domain_endpoint_options.status.update_date #=> Time
     #   resp.domain_config.domain_endpoint_options.status.update_version #=> Integer
@@ -1220,6 +1270,12 @@ module Aws::ElasticsearchService
     #   resp.domain_config.domain_endpoint_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.advanced_security_options.options.enabled #=> Boolean
     #   resp.domain_config.advanced_security_options.options.internal_user_database_enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.saml_options.enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.saml_options.idp.metadata_content #=> String
+    #   resp.domain_config.advanced_security_options.options.saml_options.idp.entity_id #=> String
+    #   resp.domain_config.advanced_security_options.options.saml_options.subject_key #=> String
+    #   resp.domain_config.advanced_security_options.options.saml_options.roles_key #=> String
+    #   resp.domain_config.advanced_security_options.options.saml_options.session_timeout_minutes #=> Integer
     #   resp.domain_config.advanced_security_options.status.creation_date #=> Time
     #   resp.domain_config.advanced_security_options.status.update_date #=> Time
     #   resp.domain_config.advanced_security_options.status.update_version #=> Integer
@@ -1309,8 +1365,17 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status_list[0].domain_endpoint_options.enforce_https #=> Boolean
     #   resp.domain_status_list[0].domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status_list[0].domain_endpoint_options.custom_endpoint_enabled #=> Boolean
+    #   resp.domain_status_list[0].domain_endpoint_options.custom_endpoint #=> String
+    #   resp.domain_status_list[0].domain_endpoint_options.custom_endpoint_certificate_arn #=> String
     #   resp.domain_status_list[0].advanced_security_options.enabled #=> Boolean
     #   resp.domain_status_list[0].advanced_security_options.internal_user_database_enabled #=> Boolean
+    #   resp.domain_status_list[0].advanced_security_options.saml_options.enabled #=> Boolean
+    #   resp.domain_status_list[0].advanced_security_options.saml_options.idp.metadata_content #=> String
+    #   resp.domain_status_list[0].advanced_security_options.saml_options.idp.entity_id #=> String
+    #   resp.domain_status_list[0].advanced_security_options.saml_options.subject_key #=> String
+    #   resp.domain_status_list[0].advanced_security_options.saml_options.roles_key #=> String
+    #   resp.domain_status_list[0].advanced_security_options.saml_options.session_timeout_minutes #=> Integer
     #
     # @overload describe_elasticsearch_domains(params = {})
     # @param [Hash] params ({})
@@ -1538,6 +1603,8 @@ module Aws::ElasticsearchService
     #   resp.package_details_list[0].package_description #=> String
     #   resp.package_details_list[0].package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
     #   resp.package_details_list[0].created_at #=> Time
+    #   resp.package_details_list[0].last_updated_at #=> Time
+    #   resp.package_details_list[0].available_package_version #=> String
     #   resp.package_details_list[0].error_details.error_type #=> String
     #   resp.package_details_list[0].error_details.error_message #=> String
     #   resp.next_token #=> String
@@ -1687,6 +1754,7 @@ module Aws::ElasticsearchService
     #   resp.domain_package_details.last_updated #=> Time
     #   resp.domain_package_details.domain_name #=> String
     #   resp.domain_package_details.domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details.package_version #=> String
     #   resp.domain_package_details.reference_path #=> String
     #   resp.domain_package_details.error_details.error_type #=> String
     #   resp.domain_package_details.error_details.error_message #=> String
@@ -1729,6 +1797,52 @@ module Aws::ElasticsearchService
     # @param [Hash] params ({})
     def get_compatible_elasticsearch_versions(params = {}, options = {})
       req = build_request(:get_compatible_elasticsearch_versions, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of versions of the package, along with their creation
+    # time and commit message.
+    #
+    # @option params [required, String] :package_id
+    #   Returns an audit history of versions of the package.
+    #
+    # @option params [Integer] :max_results
+    #   Limits results to a maximum number of versions.
+    #
+    # @option params [String] :next_token
+    #   Used for pagination. Only necessary if a previous API call includes a
+    #   non-null NextToken value. If provided, returns results for the next
+    #   page.
+    #
+    # @return [Types::GetPackageVersionHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPackageVersionHistoryResponse#package_id #package_id} => String
+    #   * {Types::GetPackageVersionHistoryResponse#package_version_history_list #package_version_history_list} => Array&lt;Types::PackageVersionHistory&gt;
+    #   * {Types::GetPackageVersionHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_package_version_history({
+    #     package_id: "PackageID", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_id #=> String
+    #   resp.package_version_history_list #=> Array
+    #   resp.package_version_history_list[0].package_version #=> String
+    #   resp.package_version_history_list[0].commit_message #=> String
+    #   resp.package_version_history_list[0].created_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload get_package_version_history(params = {})
+    # @param [Hash] params ({})
+    def get_package_version_history(params = {}, options = {})
+      req = build_request(:get_package_version_history, params)
       req.send_request(options)
     end
 
@@ -1875,6 +1989,7 @@ module Aws::ElasticsearchService
     #   resp.domain_package_details_list[0].last_updated #=> Time
     #   resp.domain_package_details_list[0].domain_name #=> String
     #   resp.domain_package_details_list[0].domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details_list[0].package_version #=> String
     #   resp.domain_package_details_list[0].reference_path #=> String
     #   resp.domain_package_details_list[0].error_details.error_type #=> String
     #   resp.domain_package_details_list[0].error_details.error_message #=> String
@@ -2011,6 +2126,7 @@ module Aws::ElasticsearchService
     #   resp.domain_package_details_list[0].last_updated #=> Time
     #   resp.domain_package_details_list[0].domain_name #=> String
     #   resp.domain_package_details_list[0].domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details_list[0].package_version #=> String
     #   resp.domain_package_details_list[0].reference_path #=> String
     #   resp.domain_package_details_list[0].error_details.error_type #=> String
     #   resp.domain_package_details_list[0].error_details.error_message #=> String
@@ -2298,6 +2414,9 @@ module Aws::ElasticsearchService
     #     domain_endpoint_options: {
     #       enforce_https: false,
     #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #       custom_endpoint_enabled: false,
+    #       custom_endpoint: "DomainNameFqdn",
+    #       custom_endpoint_certificate_arn: "ARN",
     #     },
     #     advanced_security_options: {
     #       enabled: false,
@@ -2306,6 +2425,18 @@ module Aws::ElasticsearchService
     #         master_user_arn: "ARN",
     #         master_user_name: "Username",
     #         master_user_password: "Password",
+    #       },
+    #       saml_options: {
+    #         enabled: false,
+    #         idp: {
+    #           metadata_content: "SAMLMetadata", # required
+    #           entity_id: "SAMLEntityId", # required
+    #         },
+    #         master_user_name: "Username",
+    #         master_backend_role: "BackendRole",
+    #         subject_key: "String",
+    #         roles_key: "String",
+    #         session_timeout_minutes: 1,
     #       },
     #     },
     #   })
@@ -2405,6 +2536,9 @@ module Aws::ElasticsearchService
     #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.enforce_https #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_enabled #=> Boolean
+    #   resp.domain_config.domain_endpoint_options.options.custom_endpoint #=> String
+    #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_certificate_arn #=> String
     #   resp.domain_config.domain_endpoint_options.status.creation_date #=> Time
     #   resp.domain_config.domain_endpoint_options.status.update_date #=> Time
     #   resp.domain_config.domain_endpoint_options.status.update_version #=> Integer
@@ -2412,6 +2546,12 @@ module Aws::ElasticsearchService
     #   resp.domain_config.domain_endpoint_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.advanced_security_options.options.enabled #=> Boolean
     #   resp.domain_config.advanced_security_options.options.internal_user_database_enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.saml_options.enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.saml_options.idp.metadata_content #=> String
+    #   resp.domain_config.advanced_security_options.options.saml_options.idp.entity_id #=> String
+    #   resp.domain_config.advanced_security_options.options.saml_options.subject_key #=> String
+    #   resp.domain_config.advanced_security_options.options.saml_options.roles_key #=> String
+    #   resp.domain_config.advanced_security_options.options.saml_options.session_timeout_minutes #=> Integer
     #   resp.domain_config.advanced_security_options.status.creation_date #=> Time
     #   resp.domain_config.advanced_security_options.status.update_date #=> Time
     #   resp.domain_config.advanced_security_options.status.update_version #=> Integer
@@ -2422,6 +2562,58 @@ module Aws::ElasticsearchService
     # @param [Hash] params ({})
     def update_elasticsearch_domain_config(params = {}, options = {})
       req = build_request(:update_elasticsearch_domain_config, params)
+      req.send_request(options)
+    end
+
+    # Updates a package for use with Amazon ES domains.
+    #
+    # @option params [required, String] :package_id
+    #   Unique identifier for the package.
+    #
+    # @option params [required, Types::PackageSource] :package_source
+    #   The S3 location for importing the package specified as `S3BucketName`
+    #   and `S3Key`
+    #
+    # @option params [String] :package_description
+    #   New description of the package.
+    #
+    # @option params [String] :commit_message
+    #   An info message for the new version which will be shown as part of
+    #   `GetPackageVersionHistoryResponse`.
+    #
+    # @return [Types::UpdatePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePackageResponse#package_details #package_details} => Types::PackageDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_package({
+    #     package_id: "PackageID", # required
+    #     package_source: { # required
+    #       s3_bucket_name: "S3BucketName",
+    #       s3_key: "S3Key",
+    #     },
+    #     package_description: "PackageDescription",
+    #     commit_message: "CommitMessage",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_details.package_id #=> String
+    #   resp.package_details.package_name #=> String
+    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.package_details.package_description #=> String
+    #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.package_details.created_at #=> Time
+    #   resp.package_details.last_updated_at #=> Time
+    #   resp.package_details.available_package_version #=> String
+    #   resp.package_details.error_details.error_type #=> String
+    #   resp.package_details.error_details.error_message #=> String
+    #
+    # @overload update_package(params = {})
+    # @param [Hash] params ({})
+    def update_package(params = {}, options = {})
+      req = build_request(:update_package, params)
       req.send_request(options)
     end
 
@@ -2482,7 +2674,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

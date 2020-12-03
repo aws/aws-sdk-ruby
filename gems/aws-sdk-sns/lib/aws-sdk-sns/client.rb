@@ -591,10 +591,11 @@ module Aws::SNS
     end
 
     # Creates a topic to which notifications can be published. Users can
-    # create at most 100,000 topics. For more information, see
-    # [https://aws.amazon.com/sns][1]. This action is idempotent, so if the
-    # requester already owns a topic with the specified name, that topic's
-    # ARN is returned without creating a new topic.
+    # create at most 100,000 standard topics (at most 1,000 FIFO topics).
+    # For more information, see [https://aws.amazon.com/sns][1]. This action
+    # is idempotent, so if the requester already owns a topic with the
+    # specified name, that topic's ARN is returned without creating a new
+    # topic.
     #
     #
     #
@@ -606,6 +607,9 @@ module Aws::SNS
     #   Constraints: Topic names must be made up of only uppercase and
     #   lowercase ASCII letters, numbers, underscores, and hyphens, and must
     #   be between 1 and 256 characters long.
+    #
+    #   For a FIFO (first-in-first-out) topic, the name must end with the
+    #   `.fifo` suffix.
     #
     # @option params [Hash<String,String>] :attributes
     #   A map of attributes with their corresponding values.
@@ -619,23 +623,47 @@ module Aws::SNS
     #   * `DisplayName` – The display name to use for a topic with SMS
     #     subscriptions.
     #
+    #   * `FifoTopic` – Set to true to create a FIFO topic.
+    #
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the topic.
     #
     #   The following attribute applies only to [server-side-encryption][1]\:
     #
-    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
     #     (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
     #     Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
     #     Management Service API Reference*.
     #
     #   ^
     #
+    #   The following attributes apply only to [FIFO topics][4]\:
+    #
+    #   * `FifoTopic` – When this is set to `true`, a FIFO topic is created.
+    #
+    #   * `ContentBasedDeduplication` – Enables content-based deduplication
+    #     for FIFO topics.
+    #
+    #     * By default, `ContentBasedDeduplication` is set to `false`. If you
+    #       create a FIFO topic and this attribute is `false`, you must
+    #       specify a value for the `MessageDeduplicationId` parameter for the
+    #       [Publish][5] action.
+    #
+    #     * When you set `ContentBasedDeduplication` to `true`, Amazon SNS
+    #       uses a SHA-256 hash to generate the `MessageDeduplicationId` using
+    #       the body of the message (but not the attributes of the message).
+    #
+    #       (Optional) To override the generated value, you can specify a
+    #       value for the the `MessageDeduplicationId` parameter for the
+    #       `Publish` action.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
     #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
     #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #   [4]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
+    #   [5]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   The list of tags to add to a new topic.
@@ -1403,9 +1431,37 @@ module Aws::SNS
     # @option params [Hash<String,Types::MessageAttributeValue>] :message_attributes
     #   Message attributes for Publish action.
     #
+    # @option params [String] :message_deduplication_id
+    #   This parameter applies only to FIFO (first-in-first-out) topics. The
+    #   `MessageDeduplicationId` can contain up to 128 alphanumeric characters
+    #   (a-z, A-Z, 0-9) and punctuation ``
+    #   (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
+    #
+    #   Every message must have a unique `MessageDeduplicationId`, which is a
+    #   token used for deduplication of sent messages. If a message with a
+    #   particular `MessageDeduplicationId` is sent successfully, any message
+    #   sent with the same `MessageDeduplicationId` during the 5-minute
+    #   deduplication interval is treated as a duplicate.
+    #
+    #   If the topic has `ContentBasedDeduplication` set, the system generates
+    #   a `MessageDeduplicationId` based on the contents of the message. Your
+    #   `MessageDeduplicationId` overrides the generated one.
+    #
+    # @option params [String] :message_group_id
+    #   This parameter applies only to FIFO (first-in-first-out) topics. The
+    #   `MessageGroupId` can contain up to 128 alphanumeric characters (a-z,
+    #   A-Z, 0-9) and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
+    #
+    #   The `MessageGroupId` is a tag that specifies that a message belongs to
+    #   a specific message group. Messages that belong to the same message
+    #   group are processed in a FIFO manner (however, messages in different
+    #   message groups might be processed out of order). Every message must
+    #   include a `MessageGroupId`.
+    #
     # @return [Types::PublishResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PublishResponse#message_id #message_id} => String
+    #   * {Types::PublishResponse#sequence_number #sequence_number} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1423,11 +1479,14 @@ module Aws::SNS
     #         binary_value: "data",
     #       },
     #     },
+    #     message_deduplication_id: "String",
+    #     message_group_id: "String",
     #   })
     #
     # @example Response structure
     #
     #   resp.message_id #=> String
+    #   resp.sequence_number #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Publish AWS API Documentation
     #
@@ -1591,8 +1650,8 @@ module Aws::SNS
     #
     # You can override some of these settings for a single message when you
     # use the `Publish` action with the `MessageAttributes.entry.N`
-    # parameter. For more information, see [Sending an SMS Message][1] in
-    # the *Amazon SNS Developer Guide*.
+    # parameter. For more information, see [Publishing to a mobile phone][1]
+    # in the *Amazon SNS Developer Guide*.
     #
     #
     #
@@ -1711,7 +1770,7 @@ module Aws::SNS
     #   A map of attributes with their corresponding values.
     #
     #   The following lists the names, descriptions, and values of the special
-    #   request parameters that the `SetTopicAttributes` action uses:
+    #   request parameters that this action uses:
     #
     #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
     #     failed deliveries to HTTP/S endpoints.
@@ -1776,18 +1835,38 @@ module Aws::SNS
     #
     #   The following attribute applies only to [server-side-encryption][1]\:
     #
-    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
     #     (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
     #     Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
     #     Management Service API Reference*.
     #
     #   ^
     #
+    #   The following attribute applies only to [FIFO topics][4]\:
+    #
+    #   * `ContentBasedDeduplication` – Enables content-based deduplication
+    #     for FIFO topics.
+    #
+    #     * By default, `ContentBasedDeduplication` is set to `false`. If you
+    #       create a FIFO topic and this attribute is `false`, you must
+    #       specify a value for the `MessageDeduplicationId` parameter for the
+    #       [Publish][5] action.
+    #
+    #     * When you set `ContentBasedDeduplication` to `true`, Amazon SNS
+    #       uses a SHA-256 hash to generate the `MessageDeduplicationId` using
+    #       the body of the message (but not the attributes of the message).
+    #
+    #       (Optional) To override the generated value, you can specify a
+    #       value for the the `MessageDeduplicationId` parameter for the
+    #       `Publish` action.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
     #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
     #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #   [4]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
+    #   [5]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
     #
     # @option params [String] :attribute_value
     #   The new value for the attribute.
@@ -1813,8 +1892,8 @@ module Aws::SNS
 
     # Subscribes an endpoint to an Amazon SNS topic. If the endpoint type is
     # HTTP/S or email, or if the endpoint and the topic are not in the same
-    # AWS account, the endpoint owner must the `ConfirmSubscription` action
-    # to confirm the subscription.
+    # AWS account, the endpoint owner must run the `ConfirmSubscription`
+    # action to confirm the subscription.
     #
     # You call the `ConfirmSubscription` action with the token from the
     # subscription response. Confirmation tokens are valid for three days.
@@ -1900,15 +1979,12 @@ module Aws::SNS
     #   Sets whether the response from the `Subscribe` request includes the
     #   subscription ARN, even if the subscription is not yet confirmed.
     #
-    #   * If you set this parameter to `true`, the response includes the ARN
-    #     in all cases, even if the subscription is not yet confirmed. In
-    #     addition to the ARN for confirmed subscriptions, the response also
-    #     includes the `pending subscription` ARN value for subscriptions that
-    #     aren't yet confirmed. A subscription becomes confirmed when the
-    #     subscriber calls the `ConfirmSubscription` action with a
-    #     confirmation token.
-    #
-    #   ^
+    #   If you set this parameter to `true`, the response includes the ARN in
+    #   all cases, even if the subscription is not yet confirmed. In addition
+    #   to the ARN for confirmed subscriptions, the response also includes the
+    #   `pending subscription` ARN value for subscriptions that aren't yet
+    #   confirmed. A subscription becomes confirmed when the subscriber calls
+    #   the `ConfirmSubscription` action with a confirmation token.
     #
     #
     #
@@ -2071,7 +2147,7 @@ module Aws::SNS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

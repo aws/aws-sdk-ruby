@@ -10,6 +10,47 @@
 module Aws::Comprehend
   module Types
 
+    # An augmented manifest file that provides training data for your custom
+    # model. An augmented manifest file is a labeled dataset that is
+    # produced by Amazon SageMaker Ground Truth.
+    #
+    # @note When making an API call, you may pass AugmentedManifestsListItem
+    #   data as a hash:
+    #
+    #       {
+    #         s3_uri: "S3Uri", # required
+    #         attribute_names: ["AttributeNamesListItem"], # required
+    #       }
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 location of the augmented manifest file.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_names
+    #   The JSON attribute that contains the annotations for your training
+    #   documents. The number of attribute names that you specify depends on
+    #   whether your augmented manifest file is the output of a single
+    #   labeling job or a chained labeling job.
+    #
+    #   If your file is the output of a single labeling job, specify the
+    #   LabelAttributeName key that was used when the job was created in
+    #   Ground Truth.
+    #
+    #   If your file is the output of a chained labeling job, specify the
+    #   LabelAttributeName key for one or more jobs in the chain. Each
+    #   LabelAttributeName key provides the annotations from an individual
+    #   job.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/AugmentedManifestsListItem AWS API Documentation
+    #
+    class AugmentedManifestsListItem < Struct.new(
+      :s3_uri,
+      :attribute_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The result of calling the operation. The operation returns one object
     # for each document that is successfully processed by the operation.
     #
@@ -562,7 +603,7 @@ module Aws::Comprehend
     # @!attribute [rw] labels
     #   The labels used the document being analyzed. These are used for
     #   multi-label trained models. Individual labels represent different
-    #   categories that are related in some manner and are not multually
+    #   categories that are related in some manner and are not mutually
     #   exclusive. For example, a movie can be just an action movie, or it
     #   can be an action movie, a science fiction movie, and a comedy, all
     #   at the same time.
@@ -604,8 +645,15 @@ module Aws::Comprehend
     #           },
     #         ],
     #         input_data_config: { # required
-    #           s3_uri: "S3Uri", # required
+    #           data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
+    #           s3_uri: "S3Uri",
     #           label_delimiter: "LabelDelimiter",
+    #           augmented_manifests: [
+    #             {
+    #               s3_uri: "S3Uri", # required
+    #               attribute_names: ["AttributeNamesListItem"], # required
+    #             },
+    #           ],
     #         },
     #         output_data_config: {
     #           s3_uri: "S3Uri",
@@ -810,12 +858,13 @@ module Aws::Comprehend
     #           },
     #         ],
     #         input_data_config: { # required
+    #           data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
     #           entity_types: [ # required
     #             {
     #               type: "EntityTypeName", # required
     #             },
     #           ],
-    #           documents: { # required
+    #           documents: {
     #             s3_uri: "S3Uri", # required
     #           },
     #           annotations: {
@@ -824,6 +873,12 @@ module Aws::Comprehend
     #           entity_list: {
     #             s3_uri: "S3Uri", # required
     #           },
+    #           augmented_manifests: [
+    #             {
+    #               s3_uri: "S3Uri", # required
+    #               attribute_names: ["AttributeNamesListItem"], # required
+    #             },
+    #           ],
     #         },
     #         client_request_token: "ClientRequestTokenString",
     #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
@@ -1192,6 +1247,38 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeEventsDetectionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier of the events detection job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEventsDetectionJobRequest AWS API Documentation
+    #
+    class DescribeEventsDetectionJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] events_detection_job_properties
+    #   An object that contains the properties associated with an event
+    #   detection job.
+    #   @return [Types::EventsDetectionJobProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEventsDetectionJobResponse AWS API Documentation
+    #
+    class DescribeEventsDetectionJobResponse < Struct.new(
+      :events_detection_job_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeKeyPhrasesDetectionJobRequest
     #   data as a hash:
     #
@@ -1221,6 +1308,38 @@ module Aws::Comprehend
     #
     class DescribeKeyPhrasesDetectionJobResponse < Struct.new(
       :key_phrases_detection_job_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribePiiEntitiesDetectionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier that Amazon Comprehend generated for the job. The
+    #   operation returns this identifier in its response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribePiiEntitiesDetectionJobRequest AWS API Documentation
+    #
+    class DescribePiiEntitiesDetectionJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pii_entities_detection_job_properties
+    #   Provides information about a PII entities detection job.
+    #   @return [Types::PiiEntitiesDetectionJobProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribePiiEntitiesDetectionJobResponse AWS API Documentation
+    #
+    class DescribePiiEntitiesDetectionJobResponse < Struct.new(
+      :pii_entities_detection_job_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1436,6 +1555,47 @@ module Aws::Comprehend
     #
     class DetectKeyPhrasesResponse < Struct.new(
       :key_phrases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DetectPiiEntitiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         text: "String", # required
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #       }
+    #
+    # @!attribute [rw] text
+    #   A UTF-8 text string. Each string must contain fewer that 5,000 bytes
+    #   of UTF-8 encoded characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input documents.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectPiiEntitiesRequest AWS API Documentation
+    #
+    class DetectPiiEntitiesRequest < Struct.new(
+      :text,
+      :language_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entities
+    #   A collection of PII entities identified in the input text. For each
+    #   entity, the response provides the entity type, where the entity text
+    #   begins and ends, and the level of confidence that Amazon Comprehend
+    #   has in the detection.
+    #   @return [Array<Types::PiiEntity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectPiiEntitiesResponse AWS API Documentation
+    #
+    class DetectPiiEntitiesResponse < Struct.new(
+      :entities)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1740,9 +1900,36 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
-    #         s3_uri: "S3Uri", # required
+    #         data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
+    #         s3_uri: "S3Uri",
     #         label_delimiter: "LabelDelimiter",
+    #         augmented_manifests: [
+    #           {
+    #             s3_uri: "S3Uri", # required
+    #             attribute_names: ["AttributeNamesListItem"], # required
+    #           },
+    #         ],
     #       }
+    #
+    # @!attribute [rw] data_format
+    #   The format of your training data:
+    #
+    #   * `COMPREHEND_CSV`\: A two-column CSV file, where labels are
+    #     provided in the first column, and documents are provided in the
+    #     second. If you use this value, you must provide the `S3Uri`
+    #     parameter in your request.
+    #
+    #   * `AUGMENTED_MANIFEST`\: A labeled dataset that is produced by
+    #     Amazon SageMaker Ground Truth. This file is in JSON lines format.
+    #     Each line is a complete JSON object that contains a training
+    #     document and its associated labels.
+    #
+    #     If you use this value, you must provide the `AugmentedManifests`
+    #     parameter in your request.
+    #
+    #   If you don't specify a value, Amazon Comprehend uses
+    #   `COMPREHEND_CSV` as the default.
+    #   @return [String]
     #
     # @!attribute [rw] s3_uri
     #   The Amazon S3 URI for the input data. The S3 bucket must be in the
@@ -1754,6 +1941,9 @@ module Aws::Comprehend
     #   prefix is a single file, Amazon Comprehend uses that file as input.
     #   If more than one file begins with the prefix, Amazon Comprehend uses
     #   all of them as input.
+    #
+    #   This parameter is required if you set `DataFormat` to
+    #   `COMPREHEND_CSV`.
     #   @return [String]
     #
     # @!attribute [rw] label_delimiter
@@ -1766,11 +1956,22 @@ module Aws::Comprehend
     #   be combined to make a single unique label, such as LABELLABELLABEL.
     #   @return [String]
     #
+    # @!attribute [rw] augmented_manifests
+    #   A list of augmented manifest files that provide training data for
+    #   your custom model. An augmented manifest file is a labeled dataset
+    #   that is produced by Amazon SageMaker Ground Truth.
+    #
+    #   This parameter is required if you set `DataFormat` to
+    #   `AUGMENTED_MANIFEST`.
+    #   @return [Array<Types::AugmentedManifestsListItem>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierInputDataConfig AWS API Documentation
     #
     class DocumentClassifierInputDataConfig < Struct.new(
+      :data_format,
       :s3_uri,
-      :label_delimiter)
+      :label_delimiter,
+      :augmented_manifests)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2121,7 +2322,7 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # The filter used to determine which endpoints are are returned. You can
+    # The filter used to determine which endpoints are returned. You can
     # filter jobs on their name, model, status, or the date and time that
     # they were created. You can only set one filter at a time.
     #
@@ -2553,12 +2754,13 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
+    #         data_format: "COMPREHEND_CSV", # accepts COMPREHEND_CSV, AUGMENTED_MANIFEST
     #         entity_types: [ # required
     #           {
     #             type: "EntityTypeName", # required
     #           },
     #         ],
-    #         documents: { # required
+    #         documents: {
     #           s3_uri: "S3Uri", # required
     #         },
     #         annotations: {
@@ -2567,33 +2769,89 @@ module Aws::Comprehend
     #         entity_list: {
     #           s3_uri: "S3Uri", # required
     #         },
+    #         augmented_manifests: [
+    #           {
+    #             s3_uri: "S3Uri", # required
+    #             attribute_names: ["AttributeNamesListItem"], # required
+    #           },
+    #         ],
     #       }
     #
+    # @!attribute [rw] data_format
+    #   The format of your training data:
+    #
+    #   * `COMPREHEND_CSV`\: A CSV file that supplements your training
+    #     documents. The CSV file contains information about the custom
+    #     entities that your trained model will detect. The required format
+    #     of the file depends on whether you are providing annotations or an
+    #     entity list.
+    #
+    #     If you use this value, you must provide your CSV file by using
+    #     either the `Annotations` or `EntityList` parameters. You must
+    #     provide your training documents by using the `Documents`
+    #     parameter.
+    #
+    #   * `AUGMENTED_MANIFEST`\: A labeled dataset that is produced by
+    #     Amazon SageMaker Ground Truth. This file is in JSON lines format.
+    #     Each line is a complete JSON object that contains a training
+    #     document and its labels. Each label annotates a named entity in
+    #     the training document.
+    #
+    #     If you use this value, you must provide the `AugmentedManifests`
+    #     parameter in your request.
+    #
+    #   If you don't specify a value, Amazon Comprehend uses
+    #   `COMPREHEND_CSV` as the default.
+    #   @return [String]
+    #
     # @!attribute [rw] entity_types
-    #   The entity types in the input data for an entity recognizer. A
-    #   maximum of 25 entity types can be used at one time to train an
-    #   entity recognizer.
+    #   The entity types in the labeled training data that Amazon Comprehend
+    #   uses to train the custom entity recognizer. Any entity types that
+    #   you don't specify are ignored.
+    #
+    #   A maximum of 25 entity types can be used at one time to train an
+    #   entity recognizer. Entity types must not contain the following
+    #   invalid characters: \\n (line break), \\\\n (escaped line break),
+    #   \\r (carriage return), \\\\r (escaped carriage return), \\t (tab),
+    #   \\\\t (escaped tab), space, and , (comma).
     #   @return [Array<Types::EntityTypesListItem>]
     #
     # @!attribute [rw] documents
-    #   S3 location of the documents folder for an entity recognizer
+    #   The S3 location of the folder that contains the training documents
+    #   for your custom entity recognizer.
+    #
+    #   This parameter is required if you set `DataFormat` to
+    #   `COMPREHEND_CSV`.
     #   @return [Types::EntityRecognizerDocuments]
     #
     # @!attribute [rw] annotations
-    #   S3 location of the annotations file for an entity recognizer.
+    #   The S3 location of the CSV file that annotates your training
+    #   documents.
     #   @return [Types::EntityRecognizerAnnotations]
     #
     # @!attribute [rw] entity_list
-    #   S3 location of the entity list for an entity recognizer.
+    #   The S3 location of the CSV file that has the entity list for your
+    #   custom entity recognizer.
     #   @return [Types::EntityRecognizerEntityList]
+    #
+    # @!attribute [rw] augmented_manifests
+    #   A list of augmented manifest files that provide training data for
+    #   your custom model. An augmented manifest file is a labeled dataset
+    #   that is produced by Amazon SageMaker Ground Truth.
+    #
+    #   This parameter is required if you set `DataFormat` to
+    #   `AUGMENTED_MANIFEST`.
+    #   @return [Array<Types::AugmentedManifestsListItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerInputDataConfig AWS API Documentation
     #
     class EntityRecognizerInputDataConfig < Struct.new(
+      :data_format,
       :entity_types,
       :documents,
       :annotations,
-      :entity_list)
+      :entity_list,
+      :augmented_manifests)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2768,11 +3026,10 @@ module Aws::Comprehend
     #   @return [Float]
     #
     # @!attribute [rw] f1_score
-    #   A measure of how accurate the recognizer results are for for a
-    #   specific entity type in the test data. It is derived from the
-    #   `Precision` and `Recall` values. The `F1Score` is the harmonic
-    #   average of the two scores. The highest score is 1, and the worst
-    #   score is 0.
+    #   A measure of how accurate the recognizer results are for a specific
+    #   entity type in the test data. It is derived from the `Precision` and
+    #   `Recall` values. The `F1Score` is the harmonic average of the two
+    #   scores. The highest score is 1, and the worst score is 0.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityTypesEvaluationMetrics AWS API Documentation
@@ -2785,7 +3042,8 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # Information about an individual item on a list of entity types.
+    # An entity type within a labeled training dataset that Amazon
+    # Comprehend uses to train a custom entity recognizer.
     #
     # @note When making an API call, you may pass EntityTypesListItem
     #   data as a hash:
@@ -2795,13 +3053,133 @@ module Aws::Comprehend
     #       }
     #
     # @!attribute [rw] type
-    #   Entity type of an item on an entity type list.
+    #   An entity type within a labeled training dataset that Amazon
+    #   Comprehend uses to train a custom entity recognizer.
+    #
+    #   Entity types must not contain the following invalid characters: \\n
+    #   (line break), \\\\n (escaped line break, \\r (carriage return),
+    #   \\\\r (escaped carriage return), \\t (tab), \\\\t (escaped tab),
+    #   space, and , (comma).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityTypesListItem AWS API Documentation
     #
     class EntityTypesListItem < Struct.new(
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information for filtering a list of event detection jobs.
+    #
+    # @note When making an API call, you may pass EventsDetectionJobFilter
+    #   data as a hash:
+    #
+    #       {
+    #         job_name: "JobName",
+    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #         submit_time_before: Time.now,
+    #         submit_time_after: Time.now,
+    #       }
+    #
+    # @!attribute [rw] job_name
+    #   Filters on the name of the events detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   Filters the list of jobs based on job status. Returns only jobs with
+    #   the specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time_before
+    #   Filters the list of jobs based on the time that the job was
+    #   submitted for processing. Returns only jobs submitted before the
+    #   specified time. Jobs are returned in ascending order, oldest to
+    #   newest.
+    #   @return [Time]
+    #
+    # @!attribute [rw] submit_time_after
+    #   Filters the list of jobs based on the time that the job was
+    #   submitted for processing. Returns only jobs submitted after the
+    #   specified time. Jobs are returned in descending order, newest to
+    #   oldest.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EventsDetectionJobFilter AWS API Documentation
+    #
+    class EventsDetectionJobFilter < Struct.new(
+      :job_name,
+      :job_status,
+      :submit_time_before,
+      :submit_time_after)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about an events detection job.
+    #
+    # @!attribute [rw] job_id
+    #   The identifier assigned to the events detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name you assigned the events detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The current status of the events detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the status of the events detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time
+    #   The time that the events detection job was submitted for processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time that the events detection job completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] input_data_config
+    #   The input data configuration that you supplied when you created the
+    #   events detection job.
+    #   @return [Types::InputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   The output data configuration that you supplied when you created the
+    #   events detection job.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the input documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identify and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_event_types
+    #   The types of events that are detected by the job.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EventsDetectionJobProperties AWS API Documentation
+    #
+    class EventsDetectionJobProperties < Struct.new(
+      :job_id,
+      :job_name,
+      :job_status,
+      :message,
+      :submit_time,
+      :end_time,
+      :input_data_config,
+      :output_data_config,
+      :language_code,
+      :data_access_role_arn,
+      :target_event_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3425,6 +3803,61 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListEventsDetectionJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           job_name: "JobName",
+    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #           submit_time_before: Time.now,
+    #           submit_time_after: Time.now,
+    #         },
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   Filters the jobs that are returned. You can filter jobs on their
+    #   name, status, or the date and time that they were submitted. You can
+    #   only set one filter at a time.
+    #   @return [Types::EventsDetectionJobFilter]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in each page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEventsDetectionJobsRequest AWS API Documentation
+    #
+    class ListEventsDetectionJobsRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] events_detection_job_properties_list
+    #   A list containing the properties of each job that is returned.
+    #   @return [Array<Types::EventsDetectionJobProperties>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEventsDetectionJobsResponse AWS API Documentation
+    #
+    class ListEventsDetectionJobsResponse < Struct.new(
+      :events_detection_job_properties_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListKeyPhrasesDetectionJobsRequest
     #   data as a hash:
     #
@@ -3476,6 +3909,61 @@ module Aws::Comprehend
     #
     class ListKeyPhrasesDetectionJobsResponse < Struct.new(
       :key_phrases_detection_job_properties_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListPiiEntitiesDetectionJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           job_name: "JobName",
+    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #           submit_time_before: Time.now,
+    #           submit_time_after: Time.now,
+    #         },
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   Filters the jobs that are returned. You can filter jobs on their
+    #   name, status, or the date and time that they were submitted. You can
+    #   only set one filter at a time.
+    #   @return [Types::PiiEntitiesDetectionJobFilter]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in each page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListPiiEntitiesDetectionJobsRequest AWS API Documentation
+    #
+    class ListPiiEntitiesDetectionJobsRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pii_entities_detection_job_properties_list
+    #   A list containing the properties of each job that is returned.
+    #   @return [Array<Types::PiiEntitiesDetectionJobProperties>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListPiiEntitiesDetectionJobsResponse AWS API Documentation
+    #
+    class ListPiiEntitiesDetectionJobsResponse < Struct.new(
+      :pii_entities_detection_job_properties_list,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3703,6 +4191,228 @@ module Aws::Comprehend
     class PartOfSpeechTag < Struct.new(
       :tag,
       :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information for filtering a list of PII entity detection
+    # jobs.
+    #
+    # @note When making an API call, you may pass PiiEntitiesDetectionJobFilter
+    #   data as a hash:
+    #
+    #       {
+    #         job_name: "JobName",
+    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #         submit_time_before: Time.now,
+    #         submit_time_after: Time.now,
+    #       }
+    #
+    # @!attribute [rw] job_name
+    #   Filters on the name of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   Filters the list of jobs based on job status. Returns only jobs with
+    #   the specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time_before
+    #   Filters the list of jobs based on the time that the job was
+    #   submitted for processing. Returns only jobs submitted before the
+    #   specified time. Jobs are returned in ascending order, oldest to
+    #   newest.
+    #   @return [Time]
+    #
+    # @!attribute [rw] submit_time_after
+    #   Filters the list of jobs based on the time that the job was
+    #   submitted for processing. Returns only jobs submitted after the
+    #   specified time. Jobs are returned in descending order, newest to
+    #   oldest.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/PiiEntitiesDetectionJobFilter AWS API Documentation
+    #
+    class PiiEntitiesDetectionJobFilter < Struct.new(
+      :job_name,
+      :job_status,
+      :submit_time_before,
+      :submit_time_after)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about a PII entities detection job.
+    #
+    # @!attribute [rw] job_id
+    #   The identifier assigned to the PII entities detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name that you assigned the PII entities detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The current status of the PII entities detection job. If the status
+    #   is `FAILED`, the `Message` field shows the reason for the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the status of a job.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time
+    #   The time that the PII entities detection job was submitted for
+    #   processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time that the PII entities detection job completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] input_data_config
+    #   The input properties for a PII entities detection job.
+    #   @return [Types::InputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   The output data configuration that you supplied when you created the
+    #   PII entities detection job.
+    #   @return [Types::PiiOutputDataConfig]
+    #
+    # @!attribute [rw] redaction_config
+    #   Provides configuration parameters for PII entity redaction.
+    #
+    #   This parameter is required if you set the `Mode` parameter to
+    #   `ONLY_REDACTION`. In that case, you must provide a `RedactionConfig`
+    #   definition that includes the `PiiEntityTypes` parameter.
+    #   @return [Types::RedactionConfig]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the input documents
+    #   @return [String]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) that gives Amazon Comprehend read
+    #   access to your input data.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   Specifies whether the output provides the locations (offsets) of PII
+    #   entities or a file in which PII entities are redacted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/PiiEntitiesDetectionJobProperties AWS API Documentation
+    #
+    class PiiEntitiesDetectionJobProperties < Struct.new(
+      :job_id,
+      :job_name,
+      :job_status,
+      :message,
+      :submit_time,
+      :end_time,
+      :input_data_config,
+      :output_data_config,
+      :redaction_config,
+      :language_code,
+      :data_access_role_arn,
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about a PII entity.
+    #
+    # @!attribute [rw] score
+    #   The level of confidence that Amazon Comprehend has in the accuracy
+    #   of the detection.
+    #   @return [Float]
+    #
+    # @!attribute [rw] type
+    #   The entity's type.
+    #   @return [String]
+    #
+    # @!attribute [rw] begin_offset
+    #   A character offset in the input text that shows where the PII entity
+    #   begins (the first character is at position 0). The offset returns
+    #   the position of each UTF-8 code point in the string. A *code point*
+    #   is the abstract character from a particular graphical
+    #   representation. For example, a multi-byte UTF-8 character maps to a
+    #   single code point.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset
+    #   A character offset in the input text that shows where the PII entity
+    #   ends. The offset returns the position of each UTF-8 code point in
+    #   the string. A *code point* is the abstract character from a
+    #   particular graphical representation. For example, a multi-byte UTF-8
+    #   character maps to a single code point.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/PiiEntity AWS API Documentation
+    #
+    class PiiEntity < Struct.new(
+      :score,
+      :type,
+      :begin_offset,
+      :end_offset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides configuration parameters for the output of PII entity
+    # detection jobs.
+    #
+    # @!attribute [rw] s3_uri
+    #   When you use the `PiiOutputDataConfig` object with asynchronous
+    #   operations, you specify the Amazon S3 location where you want to
+    #   write the output data.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt the output results from an analysis job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/PiiOutputDataConfig AWS API Documentation
+    #
+    class PiiOutputDataConfig < Struct.new(
+      :s3_uri,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides configuration parameters for PII entity redaction.
+    #
+    # @note When making an API call, you may pass RedactionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, DATE_TIME, PASSPORT_NUMBER, DRIVER_ID, URL, AGE, USERNAME, PASSWORD, AWS_ACCESS_KEY, AWS_SECRET_KEY, IP_ADDRESS, MAC_ADDRESS, ALL
+    #         mask_mode: "MASK", # accepts MASK, REPLACE_WITH_PII_ENTITY_TYPE
+    #         mask_character: "MaskCharacter",
+    #       }
+    #
+    # @!attribute [rw] pii_entity_types
+    #   An array of the types of PII entities that Amazon Comprehend detects
+    #   in the input text for your request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] mask_mode
+    #   Specifies whether the PII entity is redacted with the mask character
+    #   or the entity type.
+    #   @return [String]
+    #
+    # @!attribute [rw] mask_character
+    #   A character that replaces each character in the redacted PII entity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/RedactionConfig AWS API Documentation
+    #
+    class RedactionConfig < Struct.new(
+      :pii_entity_types,
+      :mask_mode,
+      :mask_character)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4314,6 +5024,91 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartEventsDetectionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_data_config: { # required
+    #           s3_uri: "S3Uri", # required
+    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #         },
+    #         output_data_config: { # required
+    #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
+    #         },
+    #         data_access_role_arn: "IamRoleArn", # required
+    #         job_name: "JobName",
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #         client_request_token: "ClientRequestTokenString",
+    #         target_event_types: ["EventTypeString"], # required
+    #       }
+    #
+    # @!attribute [rw] input_data_config
+    #   Specifies the format and location of the input data for the job.
+    #   @return [Types::InputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   Specifies where to send the output files.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The identifier of the events detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the input documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   An unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_event_types
+    #   The types of events to detect in the input documents.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartEventsDetectionJobRequest AWS API Documentation
+    #
+    class StartEventsDetectionJobRequest < Struct.new(
+      :input_data_config,
+      :output_data_config,
+      :data_access_role_arn,
+      :job_name,
+      :language_code,
+      :client_request_token,
+      :target_event_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   An unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the events detection job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartEventsDetectionJobResponse AWS API Documentation
+    #
+    class StartEventsDetectionJobResponse < Struct.new(
+      :job_id,
+      :job_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartKeyPhrasesDetectionJobRequest
     #   data as a hash:
     #
@@ -4434,6 +5229,106 @@ module Aws::Comprehend
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartKeyPhrasesDetectionJobResponse AWS API Documentation
     #
     class StartKeyPhrasesDetectionJobResponse < Struct.new(
+      :job_id,
+      :job_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartPiiEntitiesDetectionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_data_config: { # required
+    #           s3_uri: "S3Uri", # required
+    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #         },
+    #         output_data_config: { # required
+    #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
+    #         },
+    #         mode: "ONLY_REDACTION", # required, accepts ONLY_REDACTION, ONLY_OFFSETS
+    #         redaction_config: {
+    #           pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, DATE_TIME, PASSPORT_NUMBER, DRIVER_ID, URL, AGE, USERNAME, PASSWORD, AWS_ACCESS_KEY, AWS_SECRET_KEY, IP_ADDRESS, MAC_ADDRESS, ALL
+    #           mask_mode: "MASK", # accepts MASK, REPLACE_WITH_PII_ENTITY_TYPE
+    #           mask_character: "MaskCharacter",
+    #         },
+    #         data_access_role_arn: "IamRoleArn", # required
+    #         job_name: "JobName",
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #         client_request_token: "ClientRequestTokenString",
+    #       }
+    #
+    # @!attribute [rw] input_data_config
+    #   The input properties for a PII entities detection job.
+    #   @return [Types::InputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   Provides conﬁguration parameters for the output of PII entity
+    #   detection jobs.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] mode
+    #   Specifies whether the output provides the locations (offsets) of PII
+    #   entities or a file in which PII entities are redacted.
+    #   @return [String]
+    #
+    # @!attribute [rw] redaction_config
+    #   Provides configuration parameters for PII entity redaction.
+    #
+    #   This parameter is required if you set the `Mode` parameter to
+    #   `ONLY_REDACTION`. In that case, you must provide a `RedactionConfig`
+    #   definition that includes the `PiiEntityTypes` parameter.
+    #   @return [Types::RedactionConfig]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The identifier of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartPiiEntitiesDetectionJobRequest AWS API Documentation
+    #
+    class StartPiiEntitiesDetectionJobRequest < Struct.new(
+      :input_data_config,
+      :output_data_config,
+      :mode,
+      :redaction_config,
+      :data_access_role_arn,
+      :job_name,
+      :language_code,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier generated for the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartPiiEntitiesDetectionJobResponse AWS API Documentation
+    #
+    class StartPiiEntitiesDetectionJobResponse < Struct.new(
       :job_id,
       :job_status)
       SENSITIVE = []
@@ -4769,6 +5664,42 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StopEventsDetectionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier of the events detection job to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopEventsDetectionJobRequest AWS API Documentation
+    #
+    class StopEventsDetectionJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier of the events detection job to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the events detection job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopEventsDetectionJobResponse AWS API Documentation
+    #
+    class StopEventsDetectionJobResponse < Struct.new(
+      :job_id,
+      :job_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopKeyPhrasesDetectionJobRequest
     #   data as a hash:
     #
@@ -4801,6 +5732,42 @@ module Aws::Comprehend
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopKeyPhrasesDetectionJobResponse AWS API Documentation
     #
     class StopKeyPhrasesDetectionJobResponse < Struct.new(
+      :job_id,
+      :job_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopPiiEntitiesDetectionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier of the PII entities detection job to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopPiiEntitiesDetectionJobRequest AWS API Documentation
+    #
+    class StopPiiEntitiesDetectionJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier of the PII entities detection job to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the PII entities detection job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopPiiEntitiesDetectionJobResponse AWS API Documentation
+    #
+    class StopPiiEntitiesDetectionJobResponse < Struct.new(
       :job_id,
       :job_status)
       SENSITIVE = []
@@ -5283,7 +6250,7 @@ module Aws::Comprehend
     class UpdateEndpointResponse < Aws::EmptyStructure; end
 
     # Configuration parameters for an optional private Virtual Private Cloud
-    # (VPC) containing the resources you are using for the job. For For more
+    # (VPC) containing the resources you are using for the job. For more
     # information, see [Amazon VPC][1].
     #
     #

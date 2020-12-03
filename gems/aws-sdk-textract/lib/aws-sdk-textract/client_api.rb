@@ -56,15 +56,18 @@ module Aws::Textract
     ImageBlob = Shapes::BlobShape.new(name: 'ImageBlob')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidJobIdException = Shapes::StructureShape.new(name: 'InvalidJobIdException')
+    InvalidKMSKeyException = Shapes::StructureShape.new(name: 'InvalidKMSKeyException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidS3ObjectException = Shapes::StructureShape.new(name: 'InvalidS3ObjectException')
     JobId = Shapes::StringShape.new(name: 'JobId')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     JobTag = Shapes::StringShape.new(name: 'JobTag')
+    KMSKeyId = Shapes::StringShape.new(name: 'KMSKeyId')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NotificationChannel = Shapes::StructureShape.new(name: 'NotificationChannel')
+    OutputConfig = Shapes::StructureShape.new(name: 'OutputConfig')
     Pages = Shapes::ListShape.new(name: 'Pages')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Percent = Shapes::FloatShape.new(name: 'Percent')
@@ -87,6 +90,7 @@ module Aws::Textract
     StartDocumentTextDetectionResponse = Shapes::StructureShape.new(name: 'StartDocumentTextDetectionResponse')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     String = Shapes::StringShape.new(name: 'String')
+    TextType = Shapes::StringShape.new(name: 'TextType')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UInteger = Shapes::IntegerShape.new(name: 'UInteger')
     UnsupportedDocumentException = Shapes::StructureShape.new(name: 'UnsupportedDocumentException')
@@ -111,6 +115,7 @@ module Aws::Textract
     Block.add_member(:block_type, Shapes::ShapeRef.new(shape: BlockType, location_name: "BlockType"))
     Block.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     Block.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
+    Block.add_member(:text_type, Shapes::ShapeRef.new(shape: TextType, location_name: "TextType"))
     Block.add_member(:row_index, Shapes::ShapeRef.new(shape: UInteger, location_name: "RowIndex"))
     Block.add_member(:column_index, Shapes::ShapeRef.new(shape: UInteger, location_name: "ColumnIndex"))
     Block.add_member(:row_span, Shapes::ShapeRef.new(shape: UInteger, location_name: "RowSpan"))
@@ -217,6 +222,8 @@ module Aws::Textract
 
     InvalidJobIdException.struct_class = Types::InvalidJobIdException
 
+    InvalidKMSKeyException.struct_class = Types::InvalidKMSKeyException
+
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
     InvalidS3ObjectException.struct_class = Types::InvalidS3ObjectException
@@ -226,6 +233,10 @@ module Aws::Textract
     NotificationChannel.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SNSTopicArn, required: true, location_name: "SNSTopicArn"))
     NotificationChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     NotificationChannel.struct_class = Types::NotificationChannel
+
+    OutputConfig.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "S3Bucket"))
+    OutputConfig.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: S3ObjectName, location_name: "S3Prefix"))
+    OutputConfig.struct_class = Types::OutputConfig
 
     Pages.member = Shapes::ShapeRef.new(shape: UInteger)
 
@@ -253,6 +264,8 @@ module Aws::Textract
     StartDocumentAnalysisRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     StartDocumentAnalysisRequest.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
     StartDocumentAnalysisRequest.add_member(:notification_channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "NotificationChannel"))
+    StartDocumentAnalysisRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "OutputConfig"))
+    StartDocumentAnalysisRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "KMSKeyId"))
     StartDocumentAnalysisRequest.struct_class = Types::StartDocumentAnalysisRequest
 
     StartDocumentAnalysisResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
@@ -262,6 +275,8 @@ module Aws::Textract
     StartDocumentTextDetectionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     StartDocumentTextDetectionRequest.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
     StartDocumentTextDetectionRequest.add_member(:notification_channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "NotificationChannel"))
+    StartDocumentTextDetectionRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "OutputConfig"))
+    StartDocumentTextDetectionRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "KMSKeyId"))
     StartDocumentTextDetectionRequest.struct_class = Types::StartDocumentTextDetectionRequest
 
     StartDocumentTextDetectionResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
@@ -342,6 +357,7 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: InvalidJobIdException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
       end)
 
       api.add_operation(:get_document_text_detection, Seahorse::Model::Operation.new.tap do |o|
@@ -356,6 +372,7 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: InvalidJobIdException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
       end)
 
       api.add_operation(:start_document_analysis, Seahorse::Model::Operation.new.tap do |o|
@@ -366,6 +383,7 @@ module Aws::Textract
         o.output = Shapes::ShapeRef.new(shape: StartDocumentAnalysisResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedDocumentException)
         o.errors << Shapes::ShapeRef.new(shape: DocumentTooLargeException)
         o.errors << Shapes::ShapeRef.new(shape: BadDocumentException)
@@ -385,6 +403,7 @@ module Aws::Textract
         o.output = Shapes::ShapeRef.new(shape: StartDocumentTextDetectionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedDocumentException)
         o.errors << Shapes::ShapeRef.new(shape: DocumentTooLargeException)
         o.errors << Shapes::ShapeRef.new(shape: BadDocumentException)

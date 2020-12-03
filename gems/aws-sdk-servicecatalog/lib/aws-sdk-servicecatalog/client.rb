@@ -355,8 +355,8 @@ module Aws::ServiceCatalog
     #   The type of shared portfolios to accept. The default is to accept
     #   imported portfolios.
     #
-    #   * `AWS_ORGANIZATIONS` - Accept portfolios shared by the master account
-    #     of your organization.
+    #   * `AWS_ORGANIZATIONS` - Accept portfolios shared by the management
+    #     account of your organization.
     #
     #   * `IMPORTED` - Accept imported portfolios.
     #
@@ -974,7 +974,7 @@ module Aws::ServiceCatalog
 
     # Shares the specified portfolio with the specified account or
     # organization node. Shares to an organization node can only be created
-    # by the master account of an organization or by a delegated
+    # by the management account of an organization or by a delegated
     # administrator. You can share portfolios to an organization, an
     # organizational unit, or a specific account.
     #
@@ -1005,9 +1005,10 @@ module Aws::ServiceCatalog
     # @option params [Types::OrganizationNode] :organization_node
     #   The organization node to whom you are going to share. If
     #   `OrganizationNode` is passed in, `PortfolioShare` will be created for
-    #   the node and its children (when applies), and a `PortfolioShareToken`
-    #   will be returned in the output in order for the administrator to
-    #   monitor the status of the `PortfolioShare` creation process.
+    #   the node an ListOrganizationPortfolioAccessd its children (when
+    #   applies), and a `PortfolioShareToken` will be returned in the output
+    #   in order for the administrator to monitor the status of the
+    #   `PortfolioShare` creation process.
     #
     # @return [Types::CreatePortfolioShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1079,7 +1080,8 @@ module Aws::ServiceCatalog
     #   One or more tags.
     #
     # @option params [required, Types::ProvisioningArtifactProperties] :provisioning_artifact_parameters
-    #   The configuration of the provisioning artifact.
+    #   The configuration of the provisioning artifact. The `info` field
+    #   accepts `ImportFromPhysicalID`.
     #
     # @option params [required, String] :idempotency_token
     #   A unique identifier that you provide to ensure idempotency. If
@@ -1299,7 +1301,8 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #
     # @option params [required, Types::ProvisioningArtifactProperties] :parameters
-    #   The configuration for the provisioning artifact.
+    #   The configuration for the provisioning artifact. The `info` field
+    #   accepts `ImportFromPhysicalID`.
     #
     # @option params [required, String] :idempotency_token
     #   A unique identifier that you provide to ensure idempotency. If
@@ -1557,7 +1560,7 @@ module Aws::ServiceCatalog
 
     # Stops sharing the specified portfolio with the specified account or
     # organization node. Shares to an organization node can only be deleted
-    # by the master account of an organization or by a delegated
+    # by the management account of an organization or by a delegated
     # administrator.
     #
     # Note that if a delegated admin is de-registered, portfolio shares
@@ -1932,8 +1935,8 @@ module Aws::ServiceCatalog
     end
 
     # Gets the status of the specified portfolio share operation. This API
-    # can only be called by the master account in the organization or by a
-    # delegated admin.
+    # can only be called by the management account in the organization or by
+    # a delegated admin.
     #
     # @option params [required, String] :portfolio_share_token
     #   The token for the portfolio share operation. This token is returned
@@ -2185,8 +2188,19 @@ module Aws::ServiceCatalog
     #
     #   * `zh` - Chinese
     #
-    # @option params [required, String] :id
-    #   The provisioned product identifier.
+    # @option params [String] :id
+    #   The provisioned product identifier. You must provide the name or ID,
+    #   but not both.
+    #
+    #   If you do not provide a name or ID, or you provide both name and ID,
+    #   an `InvalidParametersException` will occur.
+    #
+    # @option params [String] :name
+    #   The name of the provisioned product. You must provide the name or ID,
+    #   but not both.
+    #
+    #   If you do not provide a name or ID, or you provide both name and ID,
+    #   an `InvalidParametersException` will occur.
     #
     # @return [Types::DescribeProvisionedProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2197,7 +2211,8 @@ module Aws::ServiceCatalog
     #
     #   resp = client.describe_provisioned_product({
     #     accept_language: "AcceptLanguage",
-    #     id: "Id", # required
+    #     id: "Id",
+    #     name: "ProvisionedProductName",
     #   })
     #
     # @example Response structure
@@ -2215,6 +2230,7 @@ module Aws::ServiceCatalog
     #   resp.provisioned_product_detail.last_successful_provisioning_record_id #=> String
     #   resp.provisioned_product_detail.product_id #=> String
     #   resp.provisioned_product_detail.provisioning_artifact_id #=> String
+    #   resp.provisioned_product_detail.launch_role_arn #=> String
     #   resp.cloud_watch_dashboards #=> Array
     #   resp.cloud_watch_dashboards[0].name #=> String
     #
@@ -2549,6 +2565,7 @@ module Aws::ServiceCatalog
     #   resp.record_detail.record_tags #=> Array
     #   resp.record_detail.record_tags[0].key #=> String
     #   resp.record_detail.record_tags[0].value #=> String
+    #   resp.record_detail.launch_role_arn #=> String
     #   resp.record_outputs #=> Array
     #   resp.record_outputs[0].output_key #=> String
     #   resp.record_outputs[0].output_value #=> String
@@ -2690,7 +2707,7 @@ module Aws::ServiceCatalog
     # feature will not delete your current shares but it will prevent you
     # from creating new shares throughout your organization. Current shares
     # will not be in sync with your organization structure if it changes
-    # after calling this API. This API can only be called by the master
+    # after calling this API. This API can only be called by the management
     # account in the organization.
     #
     # This API can't be invoked if there are active delegated
@@ -2883,7 +2900,7 @@ module Aws::ServiceCatalog
     # Enable portfolio sharing feature through AWS Organizations. This API
     # will allow Service Catalog to receive updates on your organization in
     # order to sync your shares with the current structure. This API can
-    # only be called by the master account in the organization.
+    # only be called by the management account in the organization.
     #
     # By calling this API Service Catalog will make a call to
     # organizations:EnableAWSServiceAccess on your behalf so that your
@@ -2958,6 +2975,7 @@ module Aws::ServiceCatalog
     #   resp.record_detail.record_tags #=> Array
     #   resp.record_detail.record_tags[0].key #=> String
     #   resp.record_detail.record_tags[0].value #=> String
+    #   resp.record_detail.launch_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductPlan AWS API Documentation
     #
@@ -3034,6 +3052,7 @@ module Aws::ServiceCatalog
     #   resp.record_detail.record_tags #=> Array
     #   resp.record_detail.record_tags[0].key #=> String
     #   resp.record_detail.record_tags[0].value #=> String
+    #   resp.record_detail.launch_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductServiceAction AWS API Documentation
     #
@@ -3045,8 +3064,8 @@ module Aws::ServiceCatalog
     end
 
     # Get the Access Status for AWS Organization portfolio share feature.
-    # This API can only be called by the master account in the organization
-    # or by a delegated admin.
+    # This API can only be called by the management account in the
+    # organization or by a delegated admin.
     #
     # @return [Types::GetAWSOrganizationsAccessStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3062,6 +3081,166 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def get_aws_organizations_access_status(params = {}, options = {})
       req = build_request(:get_aws_organizations_access_status, params)
+      req.send_request(options)
+    end
+
+    # This API takes either a `ProvisonedProductId` or a
+    # `ProvisionedProductName`, along with a list of one or more output
+    # keys, and responds with the key/value pairs of those outputs.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [String] :provisioned_product_id
+    #   The identifier of the provisioned product that you want the outputs
+    #   from.
+    #
+    # @option params [String] :provisioned_product_name
+    #   The name of the provisioned product that you want the outputs from.
+    #
+    # @option params [Array<String>] :output_keys
+    #   The list of keys that the API should return with their values. If none
+    #   are provided, the API will return all outputs of the provisioned
+    #   product.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of items to return with this call.
+    #
+    # @option params [String] :page_token
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
+    #
+    # @return [Types::GetProvisionedProductOutputsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProvisionedProductOutputsOutput#outputs #outputs} => Array&lt;Types::RecordOutput&gt;
+    #   * {Types::GetProvisionedProductOutputsOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_provisioned_product_outputs({
+    #     accept_language: "AcceptLanguage",
+    #     provisioned_product_id: "Id",
+    #     provisioned_product_name: "ProvisionedProductName",
+    #     output_keys: ["OutputKey"],
+    #     page_size: 1,
+    #     page_token: "PageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.outputs #=> Array
+    #   resp.outputs[0].output_key #=> String
+    #   resp.outputs[0].output_value #=> String
+    #   resp.outputs[0].description #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/GetProvisionedProductOutputs AWS API Documentation
+    #
+    # @overload get_provisioned_product_outputs(params = {})
+    # @param [Hash] params ({})
+    def get_provisioned_product_outputs(params = {}, options = {})
+      req = build_request(:get_provisioned_product_outputs, params)
+      req.send_request(options)
+    end
+
+    # Requests the import of a resource as a Service Catalog provisioned
+    # product that is associated to a Service Catalog product and
+    # provisioning artifact. Once imported all supported Service Catalog
+    # governance actions are supported on the provisioned product.
+    #
+    # Resource import only supports CloudFormation stack ARNs.
+    # CloudFormation StackSets and non-root nested stacks are not supported.
+    #
+    # The CloudFormation stack must have one of the following statuses to be
+    # imported: CREATE\_COMPLETE, UPDATE\_COMPLETE,
+    # UPDATE\_ROLLBACK\_COMPLETE, IMPORT\_COMPLETE,
+    # IMPORT\_ROLLBACK\_COMPLETE.
+    #
+    # Import of the resource requires that the CloudFormation stack template
+    # matches the associated Service Catalog product provisioning artifact.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [required, String] :product_id
+    #   The product identifier.
+    #
+    # @option params [required, String] :provisioning_artifact_id
+    #   The identifier of the provisioning artifact.
+    #
+    # @option params [required, String] :provisioned_product_name
+    #   The user-friendly name of the provisioned product. The value must be
+    #   unique for the AWS account. The name cannot be updated after the
+    #   product is provisioned.
+    #
+    # @option params [required, String] :physical_id
+    #   The unique identifier of the resource to be imported. It only
+    #   currently supports CloudFormation stack IDs.
+    #
+    # @option params [required, String] :idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::ImportAsProvisionedProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportAsProvisionedProductOutput#record_detail #record_detail} => Types::RecordDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_as_provisioned_product({
+    #     accept_language: "AcceptLanguage",
+    #     product_id: "Id", # required
+    #     provisioning_artifact_id: "Id", # required
+    #     provisioned_product_name: "ProvisionedProductName", # required
+    #     physical_id: "PhysicalId", # required
+    #     idempotency_token: "IdempotencyToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.record_detail.record_id #=> String
+    #   resp.record_detail.provisioned_product_name #=> String
+    #   resp.record_detail.status #=> String, one of "CREATED", "IN_PROGRESS", "IN_PROGRESS_IN_ERROR", "SUCCEEDED", "FAILED"
+    #   resp.record_detail.created_time #=> Time
+    #   resp.record_detail.updated_time #=> Time
+    #   resp.record_detail.provisioned_product_type #=> String
+    #   resp.record_detail.record_type #=> String
+    #   resp.record_detail.provisioned_product_id #=> String
+    #   resp.record_detail.product_id #=> String
+    #   resp.record_detail.provisioning_artifact_id #=> String
+    #   resp.record_detail.path_id #=> String
+    #   resp.record_detail.record_errors #=> Array
+    #   resp.record_detail.record_errors[0].code #=> String
+    #   resp.record_detail.record_errors[0].description #=> String
+    #   resp.record_detail.record_tags #=> Array
+    #   resp.record_detail.record_tags[0].key #=> String
+    #   resp.record_detail.record_tags[0].value #=> String
+    #   resp.record_detail.launch_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ImportAsProvisionedProduct AWS API Documentation
+    #
+    # @overload import_as_provisioned_product(params = {})
+    # @param [Hash] params ({})
+    def import_as_provisioned_product(params = {}, options = {})
+      req = build_request(:import_as_provisioned_product, params)
       req.send_request(options)
     end
 
@@ -3087,8 +3266,8 @@ module Aws::ServiceCatalog
     #   The type of shared portfolios to list. The default is to list imported
     #   portfolios.
     #
-    #   * `AWS_ORGANIZATIONS` - List portfolios shared by the master account
-    #     of your organization
+    #   * `AWS_ORGANIZATIONS` - List portfolios shared by the management
+    #     account of your organization
     #
     #   * `AWS_SERVICECATALOG` - List default portfolios
     #
@@ -3305,8 +3484,8 @@ module Aws::ServiceCatalog
     end
 
     # Lists the organization nodes that have access to the specified
-    # portfolio. This API can only be called by the master account in the
-    # organization or by a delegated admin.
+    # portfolio. This API can only be called by the management account in
+    # the organization or by a delegated admin.
     #
     # If a delegated admin is de-registered, they can no longer perform this
     # operation.
@@ -3843,6 +4022,7 @@ module Aws::ServiceCatalog
     #   resp.record_details[0].record_tags #=> Array
     #   resp.record_details[0].record_tags[0].key #=> String
     #   resp.record_details[0].record_tags[0].value #=> String
+    #   resp.record_details[0].launch_role_arn #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistory AWS API Documentation
@@ -4255,6 +4435,7 @@ module Aws::ServiceCatalog
     #   resp.record_detail.record_tags #=> Array
     #   resp.record_detail.record_tags[0].key #=> String
     #   resp.record_detail.record_tags[0].value #=> String
+    #   resp.record_detail.launch_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionProduct AWS API Documentation
     #
@@ -4283,8 +4464,8 @@ module Aws::ServiceCatalog
     #   The type of shared portfolios to reject. The default is to reject
     #   imported portfolios.
     #
-    #   * `AWS_ORGANIZATIONS` - Reject portfolios shared by the master account
-    #     of your organization.
+    #   * `AWS_ORGANIZATIONS` - Reject portfolios shared by the management
+    #     account of your organization.
     #
     #   * `IMPORTED` - Reject imported portfolios.
     #
@@ -4369,6 +4550,7 @@ module Aws::ServiceCatalog
     #   resp.provisioned_products[0].last_successful_provisioning_record_id #=> String
     #   resp.provisioned_products[0].product_id #=> String
     #   resp.provisioned_products[0].provisioning_artifact_id #=> String
+    #   resp.provisioned_products[0].launch_role_arn #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ScanProvisionedProducts AWS API Documentation
@@ -4682,6 +4864,13 @@ module Aws::ServiceCatalog
     #
     #   * `zh` - Chinese
     #
+    # @option params [Boolean] :retain_physical_resources
+    #   When this boolean parameter is set to true, the
+    #   TerminateProvisionedProduct API deletes the Service Catalog
+    #   provisioned product. However, it does not remove the CloudFormation
+    #   stack, stack set, or the underlying resources of the deleted
+    #   provisioned product. The default value is false.
+    #
     # @return [Types::TerminateProvisionedProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::TerminateProvisionedProductOutput#record_detail #record_detail} => Types::RecordDetail
@@ -4694,6 +4883,7 @@ module Aws::ServiceCatalog
     #     terminate_token: "IdempotencyToken", # required
     #     ignore_errors: false,
     #     accept_language: "AcceptLanguage",
+    #     retain_physical_resources: false,
     #   })
     #
     # @example Response structure
@@ -4715,6 +4905,7 @@ module Aws::ServiceCatalog
     #   resp.record_detail.record_tags #=> Array
     #   resp.record_detail.record_tags[0].key #=> String
     #   resp.record_detail.record_tags[0].value #=> String
+    #   resp.record_detail.launch_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TerminateProvisionedProduct AWS API Documentation
     #
@@ -5151,6 +5342,7 @@ module Aws::ServiceCatalog
     #   resp.record_detail.record_tags #=> Array
     #   resp.record_detail.record_tags[0].key #=> String
     #   resp.record_detail.record_tags[0].value #=> String
+    #   resp.record_detail.launch_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProduct AWS API Documentation
     #
@@ -5179,9 +5371,17 @@ module Aws::ServiceCatalog
     # @option params [required, Hash<String,String>] :provisioned_product_properties
     #   A map that contains the provisioned product properties to be updated.
     #
+    #   The `LAUNCH_ROLE` key accepts role ARNs. This key allows an
+    #   administrator to call `UpdateProvisionedProductProperties` to update
+    #   the launch role that is associated with a provisioned product. This
+    #   role is used when an end user calls a provisioning operation such as
+    #   `UpdateProvisionedProduct`, `TerminateProvisionedProduct`, or
+    #   `ExecuteProvisionedProductServiceAction`. Only a role ARN is valid. A
+    #   user ARN is invalid.
+    #
     #   The `OWNER` key accepts user ARNs and role ARNs. The owner is the user
-    #   that is allowed to see, update, terminate, and execute service actions
-    #   in the provisioned product.
+    #   that has permission to see, update, terminate, and execute service
+    #   actions in the provisioned product.
     #
     #   The administrator can change the owner of a provisioned product to
     #   another IAM user within the same account. Both end user owners and
@@ -5436,7 +5636,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

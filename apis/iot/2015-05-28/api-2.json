@@ -934,6 +934,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"DeleteConflictException"},
         {"shape":"ThrottlingException"},
+        {"shape":"ConflictingResourceUpdateException"},
         {"shape":"UnauthorizedException"}
       ]
     },
@@ -951,6 +952,7 @@
         {"shape":"ThrottlingException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"UnauthorizedException"},
+        {"shape":"ConflictingResourceUpdateException"},
         {"shape":"DeleteConflictException"}
       ]
     },
@@ -2486,7 +2488,8 @@
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"InternalFailureException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "ListThingGroupsForThing":{
@@ -2500,7 +2503,8 @@
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"InternalFailureException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "ListThingPrincipals":{
@@ -2608,7 +2612,8 @@
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"InternalFailureException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "ListTopicRuleDestinations":{
@@ -2886,7 +2891,8 @@
         {"shape":"InternalException"},
         {"shape":"NotConfiguredException"},
         {"shape":"InvalidRequestException"},
-        {"shape":"ServiceUnavailableException"}
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"LimitExceededException"}
       ]
     },
     "SetV2LoggingOptions":{
@@ -3472,7 +3478,7 @@
       "type":"string",
       "max":2048,
       "min":1,
-      "pattern":"arn:aws:acm:[a-z]{2}-(gov-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/?[a-zA-Z0-9/-]+"
+      "pattern":"arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+"
     },
     "Action":{
       "type":"structure",
@@ -3495,6 +3501,7 @@
         "iotEvents":{"shape":"IotEventsAction"},
         "iotSiteWise":{"shape":"IotSiteWiseAction"},
         "stepFunctions":{"shape":"StepFunctionsAction"},
+        "timestream":{"shape":"TimestreamAction"},
         "http":{"shape":"HttpAction"}
       }
     },
@@ -3618,7 +3625,6 @@
     "AssetId":{"type":"string"},
     "AssetPropertyAlias":{
       "type":"string",
-      "max":2048,
       "min":1
     },
     "AssetPropertyBooleanValue":{"type":"string"},
@@ -3681,7 +3687,12 @@
           "location":"uri",
           "locationName":"jobId"
         },
-        "comment":{"shape":"Comment"}
+        "comment":{"shape":"Comment"},
+        "namespaceId":{
+          "shape":"NamespaceId",
+          "location":"querystring",
+          "locationName":"namespaceId"
+        }
       }
     },
     "AssociateTargetsWithJobResponse":{
@@ -4069,7 +4080,10 @@
       "type":"list",
       "member":{"shape":"AuthResult"}
     },
-    "AuthorizerArn":{"type":"string"},
+    "AuthorizerArn":{
+      "type":"string",
+      "max":2048
+    },
     "AuthorizerConfig":{
       "type":"structure",
       "members":{
@@ -4094,7 +4108,10 @@
         "signingDisabled":{"shape":"BooleanKey"}
       }
     },
-    "AuthorizerFunctionArn":{"type":"string"},
+    "AuthorizerFunctionArn":{
+      "type":"string",
+      "max":2048
+    },
     "AuthorizerName":{
       "type":"string",
       "max":128,
@@ -4235,6 +4252,7 @@
       }
     },
     "AwsJobTimeoutInProgressTimeoutInMinutes":{"type":"long"},
+    "BatchMode":{"type":"boolean"},
     "Behavior":{
       "type":"structure",
       "required":["name"],
@@ -4915,7 +4933,8 @@
         "jobExecutionsRolloutConfig":{"shape":"JobExecutionsRolloutConfig"},
         "abortConfig":{"shape":"AbortConfig"},
         "timeoutConfig":{"shape":"TimeoutConfig"},
-        "tags":{"shape":"TagList"}
+        "tags":{"shape":"TagList"},
+        "namespaceId":{"shape":"NamespaceId"}
       }
     },
     "CreateJobResponse":{
@@ -5569,6 +5588,11 @@
           "shape":"ForceFlag",
           "location":"querystring",
           "locationName":"force"
+        },
+        "namespaceId":{
+          "shape":"NamespaceId",
+          "location":"querystring",
+          "locationName":"namespaceId"
         }
       }
     },
@@ -5585,6 +5609,11 @@
           "shape":"ForceFlag",
           "location":"querystring",
           "locationName":"force"
+        },
+        "namespaceId":{
+          "shape":"NamespaceId",
+          "location":"querystring",
+          "locationName":"namespaceId"
         }
       }
     },
@@ -6135,7 +6164,8 @@
         "authorizerConfig":{"shape":"AuthorizerConfig"},
         "domainConfigurationStatus":{"shape":"DomainConfigurationStatus"},
         "serviceType":{"shape":"ServiceType"},
-        "domainType":{"shape":"DomainType"}
+        "domainType":{"shape":"DomainType"},
+        "lastStatusChangeDate":{"shape":"DateType"}
       }
     },
     "DescribeEndpointRequest":{
@@ -6599,9 +6629,8 @@
     },
     "DetailsValue":{
       "type":"string",
-      "max":1024,
       "min":1,
-      "pattern":"[^\\p{C}]*+"
+      "pattern":"[^\\p{C}]+"
     },
     "DeviceCertificateUpdateAction":{
       "type":"string",
@@ -6910,6 +6939,11 @@
       }
     },
     "FileName":{"type":"string"},
+    "FileType":{
+      "type":"integer",
+      "max":255,
+      "min":0
+    },
     "FindingId":{
       "type":"string",
       "max":128,
@@ -6931,7 +6965,8 @@
       "members":{
         "roleArn":{"shape":"AwsArn"},
         "deliveryStreamName":{"shape":"DeliveryStreamName"},
-        "separator":{"shape":"FirehoseSeparator"}
+        "separator":{"shape":"FirehoseSeparator"},
+        "batchMode":{"shape":"BatchMode"}
       }
     },
     "FirehoseSeparator":{
@@ -7389,6 +7424,7 @@
       "members":{
         "channelArn":{"shape":"AwsArn"},
         "channelName":{"shape":"ChannelName"},
+        "batchMode":{"shape":"BatchMode"},
         "roleArn":{"shape":"AwsArn"}
       }
     },
@@ -7401,6 +7437,7 @@
       "members":{
         "inputName":{"shape":"InputName"},
         "messageId":{"shape":"MessageId"},
+        "batchMode":{"shape":"BatchMode"},
         "roleArn":{"shape":"AwsArn"}
       }
     },
@@ -7438,7 +7475,8 @@
         "lastUpdatedAt":{"shape":"DateType"},
         "completedAt":{"shape":"DateType"},
         "jobProcessDetails":{"shape":"JobProcessDetails"},
-        "timeoutConfig":{"shape":"TimeoutConfig"}
+        "timeoutConfig":{"shape":"TimeoutConfig"},
+        "namespaceId":{"shape":"NamespaceId"}
       }
     },
     "JobArn":{"type":"string"},
@@ -8146,6 +8184,11 @@
           "location":"querystring",
           "locationName":"status"
         },
+        "namespaceId":{
+          "shape":"NamespaceId",
+          "location":"querystring",
+          "locationName":"namespaceId"
+        },
         "maxResults":{
           "shape":"LaserMaxResults",
           "location":"querystring",
@@ -8197,6 +8240,11 @@
           "shape":"ThingGroupId",
           "location":"querystring",
           "locationName":"thingGroupId"
+        },
+        "namespaceId":{
+          "shape":"NamespaceId",
+          "location":"querystring",
+          "locationName":"namespaceId"
         }
       }
     },
@@ -8761,6 +8809,16 @@
       "type":"structure",
       "required":["thingName"],
       "members":{
+        "nextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"RegistryMaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
         "thingName":{
           "shape":"ThingName",
           "location":"uri",
@@ -8771,7 +8829,8 @@
     "ListThingPrincipalsResponse":{
       "type":"structure",
       "members":{
-        "principals":{"shape":"Principals"}
+        "principals":{"shape":"Principals"},
+        "nextToken":{"shape":"NextToken"}
       }
     },
     "ListThingRegistrationTaskReportsRequest":{
@@ -9146,6 +9205,7 @@
     },
     "Marker":{
       "type":"string",
+      "max":1024,
       "pattern":"[A-Za-z0-9+/]+={0,2}"
     },
     "MaxJobExecutionsPerMin":{
@@ -9296,6 +9356,12 @@
       "max":65535,
       "min":1
     },
+    "NamespaceId":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_-]+"
+    },
     "NextToken":{"type":"string"},
     "NonCompliantChecksCount":{"type":"integer"},
     "NonCompliantResource":{
@@ -9330,6 +9396,7 @@
       "type":"structure",
       "members":{
         "fileName":{"shape":"FileName"},
+        "fileType":{"shape":"FileType"},
         "fileVersion":{"shape":"OTAUpdateFileVersion"},
         "fileLocation":{"shape":"FileLocation"},
         "codeSigning":{"shape":"CodeSigning"},
@@ -9906,7 +9973,10 @@
       "min":1,
       "pattern":"[\\w.:-]+"
     },
-    "Resource":{"type":"string"},
+    "Resource":{
+      "type":"string",
+      "max":2048
+    },
     "ResourceAlreadyExistsException":{
       "type":"structure",
       "members":{
@@ -10962,6 +11032,56 @@
       }
     },
     "Timestamp":{"type":"timestamp"},
+    "TimestreamAction":{
+      "type":"structure",
+      "required":[
+        "roleArn",
+        "databaseName",
+        "tableName",
+        "dimensions"
+      ],
+      "members":{
+        "roleArn":{"shape":"AwsArn"},
+        "databaseName":{"shape":"TimestreamDatabaseName"},
+        "tableName":{"shape":"TimestreamTableName"},
+        "dimensions":{"shape":"TimestreamDimensionList"},
+        "timestamp":{"shape":"TimestreamTimestamp"}
+      }
+    },
+    "TimestreamDatabaseName":{"type":"string"},
+    "TimestreamDimension":{
+      "type":"structure",
+      "required":[
+        "name",
+        "value"
+      ],
+      "members":{
+        "name":{"shape":"TimestreamDimensionName"},
+        "value":{"shape":"TimestreamDimensionValue"}
+      }
+    },
+    "TimestreamDimensionList":{
+      "type":"list",
+      "member":{"shape":"TimestreamDimension"},
+      "max":128,
+      "min":1
+    },
+    "TimestreamDimensionName":{"type":"string"},
+    "TimestreamDimensionValue":{"type":"string"},
+    "TimestreamTableName":{"type":"string"},
+    "TimestreamTimestamp":{
+      "type":"structure",
+      "required":[
+        "value",
+        "unit"
+      ],
+      "members":{
+        "value":{"shape":"TimestreamTimestampValue"},
+        "unit":{"shape":"TimestreamTimestampUnit"}
+      }
+    },
+    "TimestreamTimestampUnit":{"type":"string"},
+    "TimestreamTimestampValue":{"type":"string"},
     "TlsContext":{
       "type":"structure",
       "members":{
@@ -11400,7 +11520,12 @@
         "presignedUrlConfig":{"shape":"PresignedUrlConfig"},
         "jobExecutionsRolloutConfig":{"shape":"JobExecutionsRolloutConfig"},
         "abortConfig":{"shape":"AbortConfig"},
-        "timeoutConfig":{"shape":"TimeoutConfig"}
+        "timeoutConfig":{"shape":"TimeoutConfig"},
+        "namespaceId":{
+          "shape":"NamespaceId",
+          "location":"querystring",
+          "locationName":"namespaceId"
+        }
       }
     },
     "UpdateMitigationActionRequest":{

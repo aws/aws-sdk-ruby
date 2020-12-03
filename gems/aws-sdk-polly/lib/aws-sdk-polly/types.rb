@@ -26,7 +26,7 @@ module Aws::Polly
     #
     class DeleteLexiconInput < Struct.new(
       :name)
-      SENSITIVE = [:name]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -131,7 +131,7 @@ module Aws::Polly
     #
     class GetLexiconInput < Struct.new(
       :name)
-      SENSITIVE = [:name]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -335,7 +335,7 @@ module Aws::Polly
     class Lexicon < Struct.new(
       :content,
       :name)
-      SENSITIVE = [:name]
+      SENSITIVE = [:content]
       include Aws::Structure
     end
 
@@ -402,7 +402,7 @@ module Aws::Polly
     class LexiconDescription < Struct.new(
       :name,
       :attributes)
-      SENSITIVE = [:name]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -595,7 +595,7 @@ module Aws::Polly
     class PutLexiconInput < Struct.new(
       :name,
       :content)
-      SENSITIVE = [:name]
+      SENSITIVE = [:content]
       include Aws::Structure
     end
 
@@ -644,7 +644,7 @@ module Aws::Polly
     #         speech_mark_types: ["sentence"], # accepts sentence, ssml, viseme, word
     #         text: "Text", # required
     #         text_type: "ssml", # accepts ssml, text
-    #         voice_id: "Aditi", # required, accepts Aditi, Amy, Astrid, Bianca, Brian, Camila, Carla, Carmen, Celine, Chantal, Conchita, Cristiano, Dora, Emma, Enrique, Ewa, Filiz, Geraint, Giorgio, Gwyneth, Hans, Ines, Ivy, Jacek, Jan, Joanna, Joey, Justin, Karl, Kendra, Kevin, Kimberly, Lea, Liv, Lotte, Lucia, Lupe, Mads, Maja, Marlene, Mathieu, Matthew, Maxim, Mia, Miguel, Mizuki, Naja, Nicole, Penelope, Raveena, Ricardo, Ruben, Russell, Salli, Seoyeon, Takumi, Tatyana, Vicki, Vitoria, Zeina, Zhiyu
+    #         voice_id: "Aditi", # required, accepts Aditi, Amy, Astrid, Bianca, Brian, Camila, Carla, Carmen, Celine, Chantal, Conchita, Cristiano, Dora, Emma, Enrique, Ewa, Filiz, Geraint, Giorgio, Gwyneth, Hans, Ines, Ivy, Jacek, Jan, Joanna, Joey, Justin, Karl, Kendra, Kevin, Kimberly, Lea, Liv, Lotte, Lucia, Lupe, Mads, Maja, Marlene, Mathieu, Matthew, Maxim, Mia, Miguel, Mizuki, Naja, Nicole, Olivia, Penelope, Raveena, Ricardo, Ruben, Russell, Salli, Seoyeon, Takumi, Tatyana, Vicki, Vitoria, Zeina, Zhiyu
     #       }
     #
     # @!attribute [rw] engine
@@ -897,14 +897,38 @@ module Aws::Polly
     #         speech_mark_types: ["sentence"], # accepts sentence, ssml, viseme, word
     #         text: "Text", # required
     #         text_type: "ssml", # accepts ssml, text
-    #         voice_id: "Aditi", # required, accepts Aditi, Amy, Astrid, Bianca, Brian, Camila, Carla, Carmen, Celine, Chantal, Conchita, Cristiano, Dora, Emma, Enrique, Ewa, Filiz, Geraint, Giorgio, Gwyneth, Hans, Ines, Ivy, Jacek, Jan, Joanna, Joey, Justin, Karl, Kendra, Kevin, Kimberly, Lea, Liv, Lotte, Lucia, Lupe, Mads, Maja, Marlene, Mathieu, Matthew, Maxim, Mia, Miguel, Mizuki, Naja, Nicole, Penelope, Raveena, Ricardo, Ruben, Russell, Salli, Seoyeon, Takumi, Tatyana, Vicki, Vitoria, Zeina, Zhiyu
+    #         voice_id: "Aditi", # required, accepts Aditi, Amy, Astrid, Bianca, Brian, Camila, Carla, Carmen, Celine, Chantal, Conchita, Cristiano, Dora, Emma, Enrique, Ewa, Filiz, Geraint, Giorgio, Gwyneth, Hans, Ines, Ivy, Jacek, Jan, Joanna, Joey, Justin, Karl, Kendra, Kevin, Kimberly, Lea, Liv, Lotte, Lucia, Lupe, Mads, Maja, Marlene, Mathieu, Matthew, Maxim, Mia, Miguel, Mizuki, Naja, Nicole, Olivia, Penelope, Raveena, Ricardo, Ruben, Russell, Salli, Seoyeon, Takumi, Tatyana, Vicki, Vitoria, Zeina, Zhiyu
     #       }
     #
     # @!attribute [rw] engine
     #   Specifies the engine (`standard` or `neural`) for Amazon Polly to
-    #   use when processing input text for speech synthesis. Using a voice
-    #   that is not supported for the engine selected will result in an
-    #   error.
+    #   use when processing input text for speech synthesis. For information
+    #   on Amazon Polly voices and which voices are available in
+    #   standard-only, NTTS-only, and both standard and NTTS formats, see
+    #   [Available Voices][1].
+    #
+    #   **NTTS-only voices**
+    #
+    #   When using NTTS-only voices such as Kevin (en-US), this parameter is
+    #   required and must be set to `neural`. If the engine is not
+    #   specified, or is set to `standard`, this will result in an error.
+    #
+    #   Type: String
+    #
+    #   Valid Values: `standard` \| `neural`
+    #
+    #   Required: Yes
+    #
+    #   **Standard voices**
+    #
+    #   For standard voices, this is not required; the engine parameter
+    #   defaults to `standard`. If the engine is not specified, or is set to
+    #   `standard` and an NTTS-only voice is selected, this will result in
+    #   an error.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/voicelist.html
     #   @return [String]
     #
     # @!attribute [rw] language_code

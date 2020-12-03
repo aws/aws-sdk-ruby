@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2020-10-30)
+------------------
+
+* Feature - This release supports tagging for Amazon Braket quantum-task resources. It also supports tag-based access control for quantum-task APIs.
+
+1.4.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.3.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.2.0 (2020-08-25)
 ------------------
 

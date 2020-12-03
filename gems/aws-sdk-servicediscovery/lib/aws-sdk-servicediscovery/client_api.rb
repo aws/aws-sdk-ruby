@@ -217,6 +217,7 @@ module Aws::ServiceDiscovery
     DiscoverInstancesRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "ServiceName"))
     DiscoverInstancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DiscoverMaxResults, location_name: "MaxResults"))
     DiscoverInstancesRequest.add_member(:query_parameters, Shapes::ShapeRef.new(shape: Attributes, location_name: "QueryParameters"))
+    DiscoverInstancesRequest.add_member(:optional_parameters, Shapes::ShapeRef.new(shape: Attributes, location_name: "OptionalParameters"))
     DiscoverInstancesRequest.add_member(:health_status, Shapes::ShapeRef.new(shape: HealthStatusFilter, location_name: "HealthStatus"))
     DiscoverInstancesRequest.struct_class = Types::DiscoverInstancesRequest
 

@@ -664,6 +664,60 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Creates a code signing configuration. A [code signing
+    # configuration][1] defines a list of allowed signing profiles and
+    # defines the code-signing validation policy (action to be taken if
+    # deployment validation checks fail).
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html
+    #
+    # @option params [String] :description
+    #   Descriptive name for this code signing configuration.
+    #
+    # @option params [required, Types::AllowedPublishers] :allowed_publishers
+    #   Signing profiles for this code signing configuration.
+    #
+    # @option params [Types::CodeSigningPolicies] :code_signing_policies
+    #   The code signing policies define the actions to take if the validation
+    #   checks fail.
+    #
+    # @return [Types::CreateCodeSigningConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCodeSigningConfigResponse#code_signing_config #code_signing_config} => Types::CodeSigningConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_code_signing_config({
+    #     description: "Description",
+    #     allowed_publishers: { # required
+    #       signing_profile_version_arns: ["Arn"], # required
+    #     },
+    #     code_signing_policies: {
+    #       untrusted_artifact_on_deployment: "Warn", # accepts Warn, Enforce
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_signing_config.code_signing_config_id #=> String
+    #   resp.code_signing_config.code_signing_config_arn #=> String
+    #   resp.code_signing_config.description #=> String
+    #   resp.code_signing_config.allowed_publishers.signing_profile_version_arns #=> Array
+    #   resp.code_signing_config.allowed_publishers.signing_profile_version_arns[0] #=> String
+    #   resp.code_signing_config.code_signing_policies.untrusted_artifact_on_deployment #=> String, one of "Warn", "Enforce"
+    #   resp.code_signing_config.last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateCodeSigningConfig AWS API Documentation
+    #
+    # @overload create_code_signing_config(params = {})
+    # @param [Hash] params ({})
+    def create_code_signing_config(params = {}, options = {})
+      req = build_request(:create_code_signing_config, params)
+      req.send_request(options)
+    end
+
     # Creates a mapping between an event source and an AWS Lambda function.
     # Lambda reads items from the event source and triggers the function.
     #
@@ -675,7 +729,9 @@ module Aws::Lambda
     #
     # * [Using AWS Lambda with Amazon SQS][3]
     #
-    # * [Using AWS Lambda with Amazon MSK][4]
+    # * [Using AWS Lambda with Amazon MQ][4]
+    #
+    # * [Using AWS Lambda with Amazon MSK][5]
     #
     # The following error handling options are only available for stream
     # sources (DynamoDB and Kinesis):
@@ -687,11 +743,12 @@ module Aws::Lambda
     #   or Amazon SNS topic.
     #
     # * `MaximumRecordAgeInSeconds` - Discard records older than the
-    #   specified age. Default -1 (infinite). Minimum 60. Maximum 604800.
+    #   specified age. The default value is infinite (-1). When set to
+    #   infinite (-1), failed records are retried until the record expires
     #
     # * `MaximumRetryAttempts` - Discard records after the specified number
-    #   of retries. Default -1 (infinite). Minimum 0. Maximum 10000. When
-    #   infinite, failed records will be retried until the record expires.
+    #   of retries. The default value is infinite (-1). When set to infinite
+    #   (-1), failed records are retried until the record expires.
     #
     # * `ParallelizationFactor` - Process multiple batches from each shard
     #   concurrently.
@@ -701,7 +758,8 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html
     # [2]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html
     # [3]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html
-    # [4]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html
+    # [4]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html
+    # [5]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html
     #
     # @option params [required, String] :event_source_arn
     #   The Amazon Resource Name (ARN) of the event source.
@@ -787,9 +845,27 @@ module Aws::Lambda
     # @option params [Array<String>] :topics
     #   (MSK) The name of the Kafka topic.
     #
+    # @option params [Array<String>] :queues
+    #   (MQ) The name of the Amazon MQ broker destination queue to consume.
+    #
+    # @option params [Array<Types::SourceAccessConfiguration>] :source_access_configurations
+    #   (MQ) The Secrets Manager secret that stores your broker credentials.
+    #   To store your secret, use the following format: ` \{ "username": "your
+    #   username", "password": "your password" \}`
+    #
+    #   To reference the secret, use the following format: `[ \{ "Type":
+    #   "BASIC_AUTH", "URI": "secretARN" \} ]`
+    #
+    #   The value of `Type` is always `BASIC_AUTH`. To encrypt the secret, you
+    #   can use customer or service managed keys. When using a customer
+    #   managed KMS key, the Lambda execution role requires `kms:Decrypt`
+    #   permissions.
+    #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
+    #   * {Types::EventSourceMappingConfiguration#starting_position #starting_position} => String
+    #   * {Types::EventSourceMappingConfiguration#starting_position_timestamp #starting_position_timestamp} => Time
     #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
     #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#parallelization_factor #parallelization_factor} => Integer
@@ -801,6 +877,8 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
     #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
     #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#queues #queues} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#source_access_configurations #source_access_configurations} => Array&lt;Types::SourceAccessConfiguration&gt;
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
@@ -850,11 +928,20 @@ module Aws::Lambda
     #     bisect_batch_on_function_error: false,
     #     maximum_retry_attempts: 1,
     #     topics: ["Topic"],
+    #     queues: ["Queue"],
+    #     source_access_configurations: [
+    #       {
+    #         type: "BASIC_AUTH", # accepts BASIC_AUTH
+    #         uri: "Arn",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.uuid #=> String
+    #   resp.starting_position #=> String, one of "TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"
+    #   resp.starting_position_timestamp #=> Time
     #   resp.batch_size #=> Integer
     #   resp.maximum_batching_window_in_seconds #=> Integer
     #   resp.parallelization_factor #=> Integer
@@ -868,6 +955,11 @@ module Aws::Lambda
     #   resp.destination_config.on_failure.destination #=> String
     #   resp.topics #=> Array
     #   resp.topics[0] #=> String
+    #   resp.queues #=> Array
+    #   resp.queues[0] #=> String
+    #   resp.source_access_configurations #=> Array
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH"
+    #   resp.source_access_configurations[0].uri #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
@@ -883,9 +975,10 @@ module Aws::Lambda
 
     # Creates a Lambda function. To create a function, you need a
     # [deployment package][1] and an [execution role][2]. The deployment
-    # package contains your function code. The execution role grants the
-    # function permission to use AWS services, such as Amazon CloudWatch
-    # Logs for log streaming and AWS X-Ray for request tracing.
+    # package is a ZIP archive or image container that contains your
+    # function code. The execution role grants the function permission to
+    # use AWS services, such as Amazon CloudWatch Logs for log streaming and
+    # AWS X-Ray for request tracing.
     #
     # When you create a function, Lambda provisions an instance of the
     # function and its supporting resources. If your function connects to a
@@ -910,6 +1003,14 @@ module Aws::Lambda
     # include tags (TagResource) and per-function concurrency limits
     # (PutFunctionConcurrency).
     #
+    # You can use code signing if your deployment package is a ZIP archive.
+    # To enable code signing for this function, specify the ARN of a
+    # code-signing configuration. When a user attempts to deploy a code
+    # package with UpdateFunctionCode, Lambda checks that the code package
+    # has a valid signature from a trusted publisher. The code-signing
+    # configuration includes set set of signing profiles, which define the
+    # trusted publishers for this function.
+    #
     # If another account or an AWS service invokes your function, use
     # AddPermission to grant permission by creating a resource-based IAM
     # policy. You can grant permissions at the function level, on a version,
@@ -922,7 +1023,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html
     # [2]: https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role
     # [3]: https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html
     # [4]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html
@@ -942,7 +1043,7 @@ module Aws::Lambda
     #   The length constraint applies only to the full ARN. If you specify
     #   only the function name, it is limited to 64 characters in length.
     #
-    # @option params [required, String] :runtime
+    # @option params [String] :runtime
     #   The identifier of the function's [runtime][1].
     #
     #
@@ -952,7 +1053,7 @@ module Aws::Lambda
     # @option params [required, String] :role
     #   The Amazon Resource Name (ARN) of the function's execution role.
     #
-    # @option params [required, String] :handler
+    # @option params [String] :handler
     #   The name of the method within your code that Lambda calls to execute
     #   your function. The format includes the file name. It can also include
     #   namespaces and other qualifiers, depending on the runtime. For more
@@ -991,6 +1092,10 @@ module Aws::Lambda
     #
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html
+    #
+    # @option params [String] :package_type
+    #   The type of deployment package. Set to `Image` for container image and
+    #   set `Zip` for ZIP archive.
     #
     # @option params [Types::DeadLetterConfig] :dead_letter_config
     #   A dead letter queue configuration that specifies the queue or topic
@@ -1032,6 +1137,15 @@ module Aws::Lambda
     # @option params [Array<Types::FileSystemConfig>] :file_system_configs
     #   Connection settings for an Amazon EFS file system.
     #
+    # @option params [Types::ImageConfig] :image_config
+    #   Configuration values that override the container image Dockerfile.
+    #
+    # @option params [String] :code_signing_config_arn
+    #   To enable code signing for this function, specify the ARN of a
+    #   code-signing configuration. A code-signing configuration includes a
+    #   set of signing profiles, which define the trusted publishers for this
+    #   function.
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -1061,6 +1175,10 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
+    #   * {Types::FunctionConfiguration#package_type #package_type} => String
+    #   * {Types::FunctionConfiguration#image_config_response #image_config_response} => Types::ImageConfigResponse
+    #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
+    #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #
     #
     # @example Example: To create a function
@@ -1129,14 +1247,15 @@ module Aws::Lambda
     #
     #   resp = client.create_function({
     #     function_name: "FunctionName", # required
-    #     runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     role: "RoleArn", # required
-    #     handler: "Handler", # required
+    #     handler: "Handler",
     #     code: { # required
     #       zip_file: "data",
     #       s3_bucket: "S3Bucket",
     #       s3_key: "S3Key",
     #       s3_object_version: "S3ObjectVersion",
+    #       image_uri: "String",
     #     },
     #     description: "Description",
     #     timeout: 1,
@@ -1146,6 +1265,7 @@ module Aws::Lambda
     #       subnet_ids: ["SubnetId"],
     #       security_group_ids: ["SecurityGroupId"],
     #     },
+    #     package_type: "Zip", # accepts Zip, Image
     #     dead_letter_config: {
     #       target_arn: "ResourceArn",
     #     },
@@ -1168,6 +1288,12 @@ module Aws::Lambda
     #         local_mount_path: "LocalMountPath", # required
     #       },
     #     ],
+    #     image_config: {
+    #       entry_point: ["String"],
+    #       command: ["String"],
+    #       working_directory: "WorkingDirectory",
+    #     },
+    #     code_signing_config_arn: "CodeSigningConfigArn",
     #   })
     #
     # @example Response structure
@@ -1201,15 +1327,27 @@ module Aws::Lambda
     #   resp.layers #=> Array
     #   resp.layers[0].arn #=> String
     #   resp.layers[0].code_size #=> Integer
+    #   resp.layers[0].signing_profile_version_arn #=> String
+    #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.package_type #=> String, one of "Zip", "Image"
+    #   resp.image_config_response.image_config.entry_point #=> Array
+    #   resp.image_config_response.image_config.entry_point[0] #=> String
+    #   resp.image_config_response.image_config.command #=> Array
+    #   resp.image_config_response.image_config.command[0] #=> String
+    #   resp.image_config_response.image_config.working_directory #=> String
+    #   resp.image_config_response.error.error_code #=> String
+    #   resp.image_config_response.error.message #=> String
+    #   resp.signing_profile_version_arn #=> String
+    #   resp.signing_job_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction AWS API Documentation
     #
@@ -1272,6 +1410,29 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Deletes the code signing configuration. You can delete the code
+    # signing configuration only if no function is using it.
+    #
+    # @option params [required, String] :code_signing_config_arn
+    #   The The Amazon Resource Name (ARN) of the code signing configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_code_signing_config({
+    #     code_signing_config_arn: "CodeSigningConfigArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteCodeSigningConfig AWS API Documentation
+    #
+    # @overload delete_code_signing_config(params = {})
+    # @param [Hash] params ({})
+    def delete_code_signing_config(params = {}, options = {})
+      req = build_request(:delete_code_signing_config, params)
+      req.send_request(options)
+    end
+
     # Deletes an [event source mapping][1]. You can get the identifier of a
     # mapping from the output of ListEventSourceMappings.
     #
@@ -1288,6 +1449,8 @@ module Aws::Lambda
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
+    #   * {Types::EventSourceMappingConfiguration#starting_position #starting_position} => String
+    #   * {Types::EventSourceMappingConfiguration#starting_position_timestamp #starting_position_timestamp} => Time
     #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
     #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#parallelization_factor #parallelization_factor} => Integer
@@ -1299,6 +1462,8 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
     #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
     #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#queues #queues} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#source_access_configurations #source_access_configurations} => Array&lt;Types::SourceAccessConfiguration&gt;
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
@@ -1332,6 +1497,8 @@ module Aws::Lambda
     # @example Response structure
     #
     #   resp.uuid #=> String
+    #   resp.starting_position #=> String, one of "TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"
+    #   resp.starting_position_timestamp #=> Time
     #   resp.batch_size #=> Integer
     #   resp.maximum_batching_window_in_seconds #=> Integer
     #   resp.parallelization_factor #=> Integer
@@ -1345,6 +1512,11 @@ module Aws::Lambda
     #   resp.destination_config.on_failure.destination #=> String
     #   resp.topics #=> Array
     #   resp.topics[0] #=> String
+    #   resp.queues #=> Array
+    #   resp.queues[0] #=> String
+    #   resp.source_access_configurations #=> Array
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH"
+    #   resp.source_access_configurations[0].uri #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
@@ -1413,6 +1585,40 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def delete_function(params = {}, options = {})
       req = build_request(:delete_function, params)
+      req.send_request(options)
+    end
+
+    # Removes the code signing configuration from the function.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_function_code_signing_config({
+    #     function_name: "FunctionName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionCodeSigningConfig AWS API Documentation
+    #
+    # @overload delete_function_code_signing_config(params = {})
+    # @param [Hash] params ({})
+    def delete_function_code_signing_config(params = {}, options = {})
+      req = build_request(:delete_function_code_signing_config, params)
       req.send_request(options)
     end
 
@@ -1737,6 +1943,40 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Returns information about the specified code signing configuration.
+    #
+    # @option params [required, String] :code_signing_config_arn
+    #   The The Amazon Resource Name (ARN) of the code signing configuration.
+    #
+    # @return [Types::GetCodeSigningConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCodeSigningConfigResponse#code_signing_config #code_signing_config} => Types::CodeSigningConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_code_signing_config({
+    #     code_signing_config_arn: "CodeSigningConfigArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_signing_config.code_signing_config_id #=> String
+    #   resp.code_signing_config.code_signing_config_arn #=> String
+    #   resp.code_signing_config.description #=> String
+    #   resp.code_signing_config.allowed_publishers.signing_profile_version_arns #=> Array
+    #   resp.code_signing_config.allowed_publishers.signing_profile_version_arns[0] #=> String
+    #   resp.code_signing_config.code_signing_policies.untrusted_artifact_on_deployment #=> String, one of "Warn", "Enforce"
+    #   resp.code_signing_config.last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetCodeSigningConfig AWS API Documentation
+    #
+    # @overload get_code_signing_config(params = {})
+    # @param [Hash] params ({})
+    def get_code_signing_config(params = {}, options = {})
+      req = build_request(:get_code_signing_config, params)
+      req.send_request(options)
+    end
+
     # Returns details about an event source mapping. You can get the
     # identifier of a mapping from the output of ListEventSourceMappings.
     #
@@ -1746,6 +1986,8 @@ module Aws::Lambda
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
+    #   * {Types::EventSourceMappingConfiguration#starting_position #starting_position} => String
+    #   * {Types::EventSourceMappingConfiguration#starting_position_timestamp #starting_position_timestamp} => Time
     #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
     #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#parallelization_factor #parallelization_factor} => Integer
@@ -1757,6 +1999,8 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
     #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
     #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#queues #queues} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#source_access_configurations #source_access_configurations} => Array&lt;Types::SourceAccessConfiguration&gt;
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
@@ -1797,6 +2041,8 @@ module Aws::Lambda
     # @example Response structure
     #
     #   resp.uuid #=> String
+    #   resp.starting_position #=> String, one of "TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"
+    #   resp.starting_position_timestamp #=> Time
     #   resp.batch_size #=> Integer
     #   resp.maximum_batching_window_in_seconds #=> Integer
     #   resp.parallelization_factor #=> Integer
@@ -1810,6 +2056,11 @@ module Aws::Lambda
     #   resp.destination_config.on_failure.destination #=> String
     #   resp.topics #=> Array
     #   resp.topics[0] #=> String
+    #   resp.queues #=> Array
+    #   resp.queues[0] #=> String
+    #   resp.source_access_configurations #=> Array
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH"
+    #   resp.source_access_configurations[0].uri #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
@@ -1942,17 +2193,31 @@ module Aws::Lambda
     #   resp.configuration.layers #=> Array
     #   resp.configuration.layers[0].arn #=> String
     #   resp.configuration.layers[0].code_size #=> Integer
+    #   resp.configuration.layers[0].signing_profile_version_arn #=> String
+    #   resp.configuration.layers[0].signing_job_arn #=> String
     #   resp.configuration.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.configuration.state_reason #=> String
-    #   resp.configuration.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.configuration.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.configuration.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.configuration.last_update_status_reason #=> String
-    #   resp.configuration.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.configuration.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.configuration.file_system_configs #=> Array
     #   resp.configuration.file_system_configs[0].arn #=> String
     #   resp.configuration.file_system_configs[0].local_mount_path #=> String
+    #   resp.configuration.package_type #=> String, one of "Zip", "Image"
+    #   resp.configuration.image_config_response.image_config.entry_point #=> Array
+    #   resp.configuration.image_config_response.image_config.entry_point[0] #=> String
+    #   resp.configuration.image_config_response.image_config.command #=> Array
+    #   resp.configuration.image_config_response.image_config.command[0] #=> String
+    #   resp.configuration.image_config_response.image_config.working_directory #=> String
+    #   resp.configuration.image_config_response.error.error_code #=> String
+    #   resp.configuration.image_config_response.error.message #=> String
+    #   resp.configuration.signing_profile_version_arn #=> String
+    #   resp.configuration.signing_job_arn #=> String
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
+    #   resp.code.image_uri #=> String
+    #   resp.code.resolved_image_uri #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.concurrency.reserved_concurrent_executions #=> Integer
@@ -1968,6 +2233,48 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def get_function(params = {}, options = {})
       req = build_request(:get_function, params)
+      req.send_request(options)
+    end
+
+    # Returns the code signing configuration for the specified function.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @return [Types::GetFunctionCodeSigningConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFunctionCodeSigningConfigResponse#code_signing_config_arn #code_signing_config_arn} => String
+    #   * {Types::GetFunctionCodeSigningConfigResponse#function_name #function_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_function_code_signing_config({
+    #     function_name: "FunctionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_signing_config_arn #=> String
+    #   resp.function_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionCodeSigningConfig AWS API Documentation
+    #
+    # @overload get_function_code_signing_config(params = {})
+    # @param [Hash] params ({})
+    def get_function_code_signing_config(params = {}, options = {})
+      req = build_request(:get_function_code_signing_config, params)
       req.send_request(options)
     end
 
@@ -2084,6 +2391,10 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
+    #   * {Types::FunctionConfiguration#package_type #package_type} => String
+    #   * {Types::FunctionConfiguration#image_config_response #image_config_response} => Types::ImageConfigResponse
+    #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
+    #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #
     #
     # @example Example: To get a Lambda function's event source mapping
@@ -2162,15 +2473,27 @@ module Aws::Lambda
     #   resp.layers #=> Array
     #   resp.layers[0].arn #=> String
     #   resp.layers[0].code_size #=> Integer
+    #   resp.layers[0].signing_profile_version_arn #=> String
+    #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.package_type #=> String, one of "Zip", "Image"
+    #   resp.image_config_response.image_config.entry_point #=> Array
+    #   resp.image_config_response.image_config.entry_point[0] #=> String
+    #   resp.image_config_response.image_config.command #=> Array
+    #   resp.image_config_response.image_config.command[0] #=> String
+    #   resp.image_config_response.image_config.working_directory #=> String
+    #   resp.image_config_response.error.error_code #=> String
+    #   resp.image_config_response.error.message #=> String
+    #   resp.signing_profile_version_arn #=> String
+    #   resp.signing_job_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2337,6 +2660,8 @@ module Aws::Lambda
     #   resp.content.location #=> String
     #   resp.content.code_sha_256 #=> String
     #   resp.content.code_size #=> Integer
+    #   resp.content.signing_profile_version_arn #=> String
+    #   resp.content.signing_job_arn #=> String
     #   resp.layer_arn #=> String
     #   resp.layer_version_arn #=> String
     #   resp.description #=> String
@@ -2413,6 +2738,8 @@ module Aws::Lambda
     #   resp.content.location #=> String
     #   resp.content.code_sha_256 #=> String
     #   resp.content.code_size #=> Integer
+    #   resp.content.signing_profile_version_arn #=> String
+    #   resp.content.signing_job_arn #=> String
     #   resp.layer_arn #=> String
     #   resp.layer_version_arn #=> String
     #   resp.description #=> String
@@ -2963,6 +3290,56 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Returns a list of [code signing configurations][1]. A request returns
+    # up to 10,000 configurations per call. You can use the `MaxItems`
+    # parameter to return fewer configurations per call.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuring-codesigning.html
+    #
+    # @option params [String] :marker
+    #   Specify the pagination token that's returned by a previous request to
+    #   retrieve the next page of results.
+    #
+    # @option params [Integer] :max_items
+    #   Maximum number of items to return.
+    #
+    # @return [Types::ListCodeSigningConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCodeSigningConfigsResponse#next_marker #next_marker} => String
+    #   * {Types::ListCodeSigningConfigsResponse#code_signing_configs #code_signing_configs} => Array&lt;Types::CodeSigningConfig&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_code_signing_configs({
+    #     marker: "String",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.code_signing_configs #=> Array
+    #   resp.code_signing_configs[0].code_signing_config_id #=> String
+    #   resp.code_signing_configs[0].code_signing_config_arn #=> String
+    #   resp.code_signing_configs[0].description #=> String
+    #   resp.code_signing_configs[0].allowed_publishers.signing_profile_version_arns #=> Array
+    #   resp.code_signing_configs[0].allowed_publishers.signing_profile_version_arns[0] #=> String
+    #   resp.code_signing_configs[0].code_signing_policies.untrusted_artifact_on_deployment #=> String, one of "Warn", "Enforce"
+    #   resp.code_signing_configs[0].last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListCodeSigningConfigs AWS API Documentation
+    #
+    # @overload list_code_signing_configs(params = {})
+    # @param [Hash] params ({})
+    def list_code_signing_configs(params = {}, options = {})
+      req = build_request(:list_code_signing_configs, params)
+      req.send_request(options)
+    end
+
     # Lists event source mappings. Specify an `EventSourceArn` to only show
     # event source mappings for a single event source.
     #
@@ -3048,6 +3425,8 @@ module Aws::Lambda
     #   resp.next_marker #=> String
     #   resp.event_source_mappings #=> Array
     #   resp.event_source_mappings[0].uuid #=> String
+    #   resp.event_source_mappings[0].starting_position #=> String, one of "TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"
+    #   resp.event_source_mappings[0].starting_position_timestamp #=> Time
     #   resp.event_source_mappings[0].batch_size #=> Integer
     #   resp.event_source_mappings[0].maximum_batching_window_in_seconds #=> Integer
     #   resp.event_source_mappings[0].parallelization_factor #=> Integer
@@ -3061,6 +3440,11 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].destination_config.on_failure.destination #=> String
     #   resp.event_source_mappings[0].topics #=> Array
     #   resp.event_source_mappings[0].topics[0] #=> String
+    #   resp.event_source_mappings[0].queues #=> Array
+    #   resp.event_source_mappings[0].queues[0] #=> String
+    #   resp.event_source_mappings[0].source_access_configurations #=> Array
+    #   resp.event_source_mappings[0].source_access_configurations[0].type #=> String, one of "BASIC_AUTH"
+    #   resp.event_source_mappings[0].source_access_configurations[0].uri #=> String
     #   resp.event_source_mappings[0].maximum_record_age_in_seconds #=> Integer
     #   resp.event_source_mappings[0].bisect_batch_on_function_error #=> Boolean
     #   resp.event_source_mappings[0].maximum_retry_attempts #=> Integer
@@ -3295,15 +3679,27 @@ module Aws::Lambda
     #   resp.functions[0].layers #=> Array
     #   resp.functions[0].layers[0].arn #=> String
     #   resp.functions[0].layers[0].code_size #=> Integer
+    #   resp.functions[0].layers[0].signing_profile_version_arn #=> String
+    #   resp.functions[0].layers[0].signing_job_arn #=> String
     #   resp.functions[0].state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.functions[0].state_reason #=> String
-    #   resp.functions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.functions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.functions[0].last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.functions[0].last_update_status_reason #=> String
-    #   resp.functions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.functions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.functions[0].file_system_configs #=> Array
     #   resp.functions[0].file_system_configs[0].arn #=> String
     #   resp.functions[0].file_system_configs[0].local_mount_path #=> String
+    #   resp.functions[0].package_type #=> String, one of "Zip", "Image"
+    #   resp.functions[0].image_config_response.image_config.entry_point #=> Array
+    #   resp.functions[0].image_config_response.image_config.entry_point[0] #=> String
+    #   resp.functions[0].image_config_response.image_config.command #=> Array
+    #   resp.functions[0].image_config_response.image_config.command[0] #=> String
+    #   resp.functions[0].image_config_response.image_config.working_directory #=> String
+    #   resp.functions[0].image_config_response.error.error_code #=> String
+    #   resp.functions[0].image_config_response.error.message #=> String
+    #   resp.functions[0].signing_profile_version_arn #=> String
+    #   resp.functions[0].signing_job_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions AWS API Documentation
     #
@@ -3311,6 +3707,50 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def list_functions(params = {}, options = {})
       req = build_request(:list_functions, params)
+      req.send_request(options)
+    end
+
+    # List the functions that use the specified code signing configuration.
+    # You can use this method prior to deleting a code signing
+    # configuration, to verify that no functions are using it.
+    #
+    # @option params [required, String] :code_signing_config_arn
+    #   The The Amazon Resource Name (ARN) of the code signing configuration.
+    #
+    # @option params [String] :marker
+    #   Specify the pagination token that's returned by a previous request to
+    #   retrieve the next page of results.
+    #
+    # @option params [Integer] :max_items
+    #   Maximum number of items to return.
+    #
+    # @return [Types::ListFunctionsByCodeSigningConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFunctionsByCodeSigningConfigResponse#next_marker #next_marker} => String
+    #   * {Types::ListFunctionsByCodeSigningConfigResponse#function_arns #function_arns} => Array&lt;String&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_functions_by_code_signing_config({
+    #     code_signing_config_arn: "CodeSigningConfigArn", # required
+    #     marker: "String",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.function_arns #=> Array
+    #   resp.function_arns[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionsByCodeSigningConfig AWS API Documentation
+    #
+    # @overload list_functions_by_code_signing_config(params = {})
+    # @param [Hash] params ({})
+    def list_functions_by_code_signing_config(params = {}, options = {})
+      req = build_request(:list_functions_by_code_signing_config, params)
       req.send_request(options)
     end
 
@@ -3776,15 +4216,27 @@ module Aws::Lambda
     #   resp.versions[0].layers #=> Array
     #   resp.versions[0].layers[0].arn #=> String
     #   resp.versions[0].layers[0].code_size #=> Integer
+    #   resp.versions[0].layers[0].signing_profile_version_arn #=> String
+    #   resp.versions[0].layers[0].signing_job_arn #=> String
     #   resp.versions[0].state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.versions[0].state_reason #=> String
-    #   resp.versions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.versions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.versions[0].last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.versions[0].last_update_status_reason #=> String
-    #   resp.versions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.versions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.versions[0].file_system_configs #=> Array
     #   resp.versions[0].file_system_configs[0].arn #=> String
     #   resp.versions[0].file_system_configs[0].local_mount_path #=> String
+    #   resp.versions[0].package_type #=> String, one of "Zip", "Image"
+    #   resp.versions[0].image_config_response.image_config.entry_point #=> Array
+    #   resp.versions[0].image_config_response.image_config.entry_point[0] #=> String
+    #   resp.versions[0].image_config_response.image_config.command #=> Array
+    #   resp.versions[0].image_config_response.image_config.command[0] #=> String
+    #   resp.versions[0].image_config_response.image_config.working_directory #=> String
+    #   resp.versions[0].image_config_response.error.error_code #=> String
+    #   resp.versions[0].image_config_response.error.message #=> String
+    #   resp.versions[0].signing_profile_version_arn #=> String
+    #   resp.versions[0].signing_job_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction AWS API Documentation
     #
@@ -3907,6 +4359,8 @@ module Aws::Lambda
     #   resp.content.location #=> String
     #   resp.content.code_sha_256 #=> String
     #   resp.content.code_size #=> Integer
+    #   resp.content.signing_profile_version_arn #=> String
+    #   resp.content.signing_job_arn #=> String
     #   resp.layer_arn #=> String
     #   resp.layer_version_arn #=> String
     #   resp.description #=> String
@@ -4001,6 +4455,10 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
+    #   * {Types::FunctionConfiguration#package_type #package_type} => String
+    #   * {Types::FunctionConfiguration#image_config_response #image_config_response} => Types::ImageConfigResponse
+    #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
+    #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #
     #
     # @example Example: To publish a version of a Lambda function
@@ -4082,15 +4540,27 @@ module Aws::Lambda
     #   resp.layers #=> Array
     #   resp.layers[0].arn #=> String
     #   resp.layers[0].code_size #=> Integer
+    #   resp.layers[0].signing_profile_version_arn #=> String
+    #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.package_type #=> String, one of "Zip", "Image"
+    #   resp.image_config_response.image_config.entry_point #=> Array
+    #   resp.image_config_response.image_config.entry_point[0] #=> String
+    #   resp.image_config_response.image_config.command #=> Array
+    #   resp.image_config_response.image_config.command[0] #=> String
+    #   resp.image_config_response.image_config.working_directory #=> String
+    #   resp.image_config_response.error.error_code #=> String
+    #   resp.image_config_response.error.message #=> String
+    #   resp.signing_profile_version_arn #=> String
+    #   resp.signing_job_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion AWS API Documentation
     #
@@ -4098,6 +4568,54 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def publish_version(params = {}, options = {})
       req = build_request(:publish_version, params)
+      req.send_request(options)
+    end
+
+    # Update the code signing configuration for the function. Changes to the
+    # code signing configuration take effect the next time a user tries to
+    # deploy a code package to the function.
+    #
+    # @option params [required, String] :code_signing_config_arn
+    #   The The Amazon Resource Name (ARN) of the code signing configuration.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `MyFunction`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`.
+    #
+    #   * **Partial ARN** - `123456789012:function:MyFunction`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @return [Types::PutFunctionCodeSigningConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutFunctionCodeSigningConfigResponse#code_signing_config_arn #code_signing_config_arn} => String
+    #   * {Types::PutFunctionCodeSigningConfigResponse#function_name #function_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_function_code_signing_config({
+    #     code_signing_config_arn: "CodeSigningConfigArn", # required
+    #     function_name: "FunctionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_signing_config_arn #=> String
+    #   resp.function_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionCodeSigningConfig AWS API Documentation
+    #
+    # @overload put_function_code_signing_config(params = {})
+    # @param [Hash] params ({})
+    def put_function_code_signing_config(params = {}, options = {})
+      req = build_request(:put_function_code_signing_config, params)
       req.send_request(options)
     end
 
@@ -4711,6 +5229,58 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Update the code signing configuration. Changes to the code signing
+    # configuration take effect the next time a user tries to deploy a code
+    # package to the function.
+    #
+    # @option params [required, String] :code_signing_config_arn
+    #   The The Amazon Resource Name (ARN) of the code signing configuration.
+    #
+    # @option params [String] :description
+    #   Descriptive name for this code signing configuration.
+    #
+    # @option params [Types::AllowedPublishers] :allowed_publishers
+    #   Signing profiles for this code signing configuration.
+    #
+    # @option params [Types::CodeSigningPolicies] :code_signing_policies
+    #   The code signing policy.
+    #
+    # @return [Types::UpdateCodeSigningConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCodeSigningConfigResponse#code_signing_config #code_signing_config} => Types::CodeSigningConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_code_signing_config({
+    #     code_signing_config_arn: "CodeSigningConfigArn", # required
+    #     description: "Description",
+    #     allowed_publishers: {
+    #       signing_profile_version_arns: ["Arn"], # required
+    #     },
+    #     code_signing_policies: {
+    #       untrusted_artifact_on_deployment: "Warn", # accepts Warn, Enforce
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_signing_config.code_signing_config_id #=> String
+    #   resp.code_signing_config.code_signing_config_arn #=> String
+    #   resp.code_signing_config.description #=> String
+    #   resp.code_signing_config.allowed_publishers.signing_profile_version_arns #=> Array
+    #   resp.code_signing_config.allowed_publishers.signing_profile_version_arns[0] #=> String
+    #   resp.code_signing_config.code_signing_policies.untrusted_artifact_on_deployment #=> String, one of "Warn", "Enforce"
+    #   resp.code_signing_config.last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateCodeSigningConfig AWS API Documentation
+    #
+    # @overload update_code_signing_config(params = {})
+    # @param [Hash] params ({})
+    def update_code_signing_config(params = {}, options = {})
+      req = build_request(:update_code_signing_config, params)
+      req.send_request(options)
+    end
+
     # Updates an event source mapping. You can change the function that AWS
     # Lambda invokes, or pause invocation and resume later from the same
     # location.
@@ -4725,11 +5295,12 @@ module Aws::Lambda
     #   or Amazon SNS topic.
     #
     # * `MaximumRecordAgeInSeconds` - Discard records older than the
-    #   specified age. Default -1 (infinite). Minimum 60. Maximum 604800.
+    #   specified age. The default value is infinite (-1). When set to
+    #   infinite (-1), failed records are retried until the record expires
     #
     # * `MaximumRetryAttempts` - Discard records after the specified number
-    #   of retries. Default -1 (infinite). Minimum 0. Maximum 10000. When
-    #   infinite, failed records will be retried until the record expires.
+    #   of retries. The default value is infinite (-1). When set to infinite
+    #   (-1), failed records are retried until the record expires.
     #
     # * `ParallelizationFactor` - Process multiple batches from each shard
     #   concurrently.
@@ -4796,9 +5367,24 @@ module Aws::Lambda
     #   (Streams) The number of batches to process from each shard
     #   concurrently.
     #
+    # @option params [Array<Types::SourceAccessConfiguration>] :source_access_configurations
+    #   (MQ) The Secrets Manager secret that stores your broker credentials.
+    #   To store your secret, use the following format: ` \{ "username": "your
+    #   username", "password": "your password" \}`
+    #
+    #   To reference the secret, use the following format: `[ \{ "Type":
+    #   "BASIC_AUTH", "URI": "secretARN" \} ]`
+    #
+    #   The value of `Type` is always `BASIC_AUTH`. To encrypt the secret, you
+    #   can use customer or service managed keys. When using a customer
+    #   managed KMS key, the Lambda execution role requires `kms:Decrypt`
+    #   permissions.
+    #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
+    #   * {Types::EventSourceMappingConfiguration#starting_position #starting_position} => String
+    #   * {Types::EventSourceMappingConfiguration#starting_position_timestamp #starting_position_timestamp} => Time
     #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
     #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#parallelization_factor #parallelization_factor} => Integer
@@ -4810,6 +5396,8 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
     #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
     #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#queues #queues} => Array&lt;String&gt;
+    #   * {Types::EventSourceMappingConfiguration#source_access_configurations #source_access_configurations} => Array&lt;Types::SourceAccessConfiguration&gt;
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
@@ -4858,11 +5446,19 @@ module Aws::Lambda
     #     bisect_batch_on_function_error: false,
     #     maximum_retry_attempts: 1,
     #     parallelization_factor: 1,
+    #     source_access_configurations: [
+    #       {
+    #         type: "BASIC_AUTH", # accepts BASIC_AUTH
+    #         uri: "Arn",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.uuid #=> String
+    #   resp.starting_position #=> String, one of "TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"
+    #   resp.starting_position_timestamp #=> Time
     #   resp.batch_size #=> Integer
     #   resp.maximum_batching_window_in_seconds #=> Integer
     #   resp.parallelization_factor #=> Integer
@@ -4876,6 +5472,11 @@ module Aws::Lambda
     #   resp.destination_config.on_failure.destination #=> String
     #   resp.topics #=> Array
     #   resp.topics[0] #=> String
+    #   resp.queues #=> Array
+    #   resp.queues[0] #=> String
+    #   resp.source_access_configurations #=> Array
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH"
+    #   resp.source_access_configurations[0].uri #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
@@ -4889,10 +5490,16 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Updates a Lambda function's code.
+    # Updates a Lambda function's code. If code signing is enabled for the
+    # function, the code package must be signed by a trusted publisher. For
+    # more information, see [Configuring code signing][1].
     #
     # The function's code is locked when you publish a version. You can't
     # modify the code of a published version, only the unpublished version.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -4923,6 +5530,9 @@ module Aws::Lambda
     # @option params [String] :s3_object_version
     #   For versioned objects, the version of the deployment package object to
     #   use.
+    #
+    # @option params [String] :image_uri
+    #   URI of a container image in the Amazon ECR registry.
     #
     # @option params [Boolean] :publish
     #   Set to true to publish a new version of the function after updating
@@ -4967,6 +5577,10 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
+    #   * {Types::FunctionConfiguration#package_type #package_type} => String
+    #   * {Types::FunctionConfiguration#image_config_response #image_config_response} => Types::ImageConfigResponse
+    #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
+    #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #
     #
     # @example Example: To update a Lambda function's code
@@ -5008,6 +5622,7 @@ module Aws::Lambda
     #     s3_bucket: "S3Bucket",
     #     s3_key: "S3Key",
     #     s3_object_version: "S3ObjectVersion",
+    #     image_uri: "String",
     #     publish: false,
     #     dry_run: false,
     #     revision_id: "String",
@@ -5044,15 +5659,27 @@ module Aws::Lambda
     #   resp.layers #=> Array
     #   resp.layers[0].arn #=> String
     #   resp.layers[0].code_size #=> Integer
+    #   resp.layers[0].signing_profile_version_arn #=> String
+    #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.package_type #=> String, one of "Zip", "Image"
+    #   resp.image_config_response.image_config.entry_point #=> Array
+    #   resp.image_config_response.image_config.entry_point[0] #=> String
+    #   resp.image_config_response.image_config.command #=> Array
+    #   resp.image_config_response.image_config.command[0] #=> String
+    #   resp.image_config_response.image_config.working_directory #=> String
+    #   resp.image_config_response.error.error_code #=> String
+    #   resp.image_config_response.error.message #=> String
+    #   resp.signing_profile_version_arn #=> String
+    #   resp.signing_job_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode AWS API Documentation
     #
@@ -5183,6 +5810,9 @@ module Aws::Lambda
     # @option params [Array<Types::FileSystemConfig>] :file_system_configs
     #   Connection settings for an Amazon EFS file system.
     #
+    # @option params [Types::ImageConfig] :image_config
+    #   Configuration values that override the container image Dockerfile.
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -5212,6 +5842,10 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #   * {Types::FunctionConfiguration#file_system_configs #file_system_configs} => Array&lt;Types::FileSystemConfig&gt;
+    #   * {Types::FunctionConfiguration#package_type #package_type} => String
+    #   * {Types::FunctionConfiguration#image_config_response #image_config_response} => Types::ImageConfigResponse
+    #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
+    #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #
     #
     # @example Example: To update a Lambda function's configuration
@@ -5278,6 +5912,11 @@ module Aws::Lambda
     #         local_mount_path: "LocalMountPath", # required
     #       },
     #     ],
+    #     image_config: {
+    #       entry_point: ["String"],
+    #       command: ["String"],
+    #       working_directory: "WorkingDirectory",
+    #     },
     #   })
     #
     # @example Response structure
@@ -5311,15 +5950,27 @@ module Aws::Lambda
     #   resp.layers #=> Array
     #   resp.layers[0].arn #=> String
     #   resp.layers[0].code_size #=> Integer
+    #   resp.layers[0].signing_profile_version_arn #=> String
+    #   resp.layers[0].signing_job_arn #=> String
     #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
     #   resp.state_reason #=> String
-    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
-    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup", "ImageDeleted", "ImageAccessDenied"
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.package_type #=> String, one of "Zip", "Image"
+    #   resp.image_config_response.image_config.entry_point #=> Array
+    #   resp.image_config_response.image_config.entry_point[0] #=> String
+    #   resp.image_config_response.image_config.command #=> Array
+    #   resp.image_config_response.image_config.command[0] #=> String
+    #   resp.image_config_response.image_config.working_directory #=> String
+    #   resp.image_config_response.error.error_code #=> String
+    #   resp.image_config_response.error.message #=> String
+    #   resp.signing_profile_version_arn #=> String
+    #   resp.signing_job_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration AWS API Documentation
     #
@@ -5464,7 +6115,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

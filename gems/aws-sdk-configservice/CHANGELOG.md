@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.52.0 (2020-09-25)
+------------------
+
+* Feature - Make the delivery-s3-bucket as an optional parameter for conformance packs and organizational conformance packs
+
+1.51.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.50.0 (2020-08-25)
 ------------------
 

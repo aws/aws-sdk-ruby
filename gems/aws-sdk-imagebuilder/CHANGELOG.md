@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2020-10-30)
+------------------
+
+* Feature - This feature increases the number of accounts that can be added to the Launch permissions within an Image Builder Distribution configuration.
+
+1.15.0 (2020-09-30)
+------------------
+
+* Feature - EC2 Image Builder adds support for copying AMIs created by Image Builder to accounts specific to each Region.
+
+1.14.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.13.0 (2020-08-25)
 ------------------
 

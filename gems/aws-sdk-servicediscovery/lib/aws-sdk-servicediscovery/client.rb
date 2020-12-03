@@ -949,10 +949,16 @@ module Aws::ServiceDiscovery
     #   instances.
     #
     # @option params [Hash<String,String>] :query_parameters
-    #   A string map that contains attributes with values that you can use to
-    #   filter instances by any custom attribute that you specified when you
-    #   registered the instance. Only instances that match all the specified
-    #   key/value pairs will be returned.
+    #   Filters to scope the results based on custom attributes for the
+    #   instance. For example, `\{version=v1, az=1a\}`. Only instances that
+    #   match all the specified key-value pairs will be returned.
+    #
+    # @option params [Hash<String,String>] :optional_parameters
+    #   Opportunistic filters to scope the results based on custom attributes.
+    #   If there are instances that match both the filters specified in both
+    #   the `QueryParameters` parameter and this parameter, they are returned.
+    #   Otherwise, these filters are ignored and only instances that match the
+    #   filters specified in the `QueryParameters` parameter are returned.
     #
     # @option params [String] :health_status
     #   The health status of the instances that you want to discover.
@@ -996,6 +1002,9 @@ module Aws::ServiceDiscovery
     #     service_name: "ServiceName", # required
     #     max_results: 1,
     #     query_parameters: {
+    #       "AttrKey" => "AttrValue",
+    #     },
+    #     optional_parameters: {
     #       "AttrKey" => "AttrValue",
     #     },
     #     health_status: "HEALTHY", # accepts HEALTHY, UNHEALTHY, ALL
@@ -2356,7 +2365,7 @@ module Aws::ServiceDiscovery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicediscovery'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

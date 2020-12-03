@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2020-11-09)
+------------------
+
+* Feature - Added bandwidth rate limit schedule for Tape and Volume Gateways
+
+1.51.0 (2020-10-29)
+------------------
+
+* Feature - Adding support for access based enumeration on SMB file shares, file share visibility on SMB file shares, and file upload notifications for all file shares
+
+1.50.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.48.0 (2020-08-25)
 ------------------
 

@@ -580,7 +580,7 @@ module Aws::EC2
     # @option options [String] :source_security_group_owner_id
     #   Not supported. Use a set of IP permissions to specify a destination
     #   security group.
-    # @return [EmptyStructure]
+    # @return [Types::RevokeSecurityGroupEgressResult]
     def revoke_egress(options = {})
       options = options.merge(group_id: @id)
       resp = @client.revoke_security_group_egress(options)
@@ -680,7 +680,7 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @return [EmptyStructure]
+    # @return [Types::RevokeSecurityGroupIngressResult]
     def revoke_ingress(options = {})
       options = options.merge(group_id: @id)
       resp = @client.revoke_security_group_ingress(options)

@@ -143,8 +143,7 @@ module Aws::RDS
       data[:multi_az]
     end
 
-    # Provides the name of the database engine to be used for this DB
-    # cluster.
+    # The name of the database engine to be used for this DB cluster.
     # @return [String]
     def engine
       data[:engine]
@@ -337,14 +336,11 @@ module Aws::RDS
     # The DB engine mode of the DB cluster, either `provisioned`,
     # `serverless`, `parallelquery`, `global`, or `multimaster`.
     #
-    # <note markdown="1"> `global` engine mode only applies for global database clusters created
-    # with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions,
-    # the clusters in a global database use `provisioned` engine mode. To
-    # check if a DB cluster is part of a global database, use
-    # `DescribeGlobalClusters` instead of checking the `EngineMode` return
-    # value from `DescribeDBClusters`.
+    # For more information, see [ CreateDBCluster][1].
     #
-    #  </note>
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html
     # @return [String]
     def engine_mode
       data[:engine_mode]
@@ -438,6 +434,17 @@ module Aws::RDS
     # @return [Array<Types::DomainMembership>]
     def domain_memberships
       data[:domain_memberships]
+    end
+
+    # A list of tags. For more information, see [Tagging Amazon RDS
+    # Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    # @return [Array<Types::Tag>]
+    def tag_list
+      data[:tag_list]
     end
 
     # Specifies whether a secondary cluster in an Aurora global database has
@@ -905,18 +912,35 @@ module Aws::RDS
     #   used. For more information, see [Publishing Database Logs to Amazon
     #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
     #
+    #   **Aurora MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :engine_mode
-    #   The DB engine mode of the DB cluster, either `provisioned`,
+    #   The DB engine mode of the DB cluster, either `provisioned`
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     #
-    #   <note markdown="1"> `global` engine mode only applies for global database clusters created
-    #   with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions,
-    #   the clusters in a global database use `provisioned` engine mode.
+    #   The `parallelquery` engine mode isn't required for Aurora MySQL
+    #   version 1.23 and higher 1.x versions, and version 2.09 and higher 2.x
+    #   versions.
     #
-    #    </note>
+    #   The `global` engine mode isn't required for Aurora MySQL version 1.22
+    #   and higher 1.x versions, and `global` engine mode isn't required for
+    #   any 2.x versions.
+    #
+    #   The `multimaster` engine mode only applies for DB clusters created
+    #   with Aurora MySQL version 5.6.10a.
+    #
+    #   For Aurora PostgreSQL, the `global` engine mode isn't required, and
+    #   both the `parallelquery` and the `multimaster` engine modes currently
+    #   aren't supported.
     #
     #   Limitations and requirements apply to some DB engine modes. For more
     #   information, see the following sections in the *Amazon Aurora User
@@ -926,7 +950,7 @@ module Aws::RDS
     #
     #   * [ Limitations of Parallel Query][2]
     #
-    #   * [ Requirements for Aurora Global Databases][3]
+    #   * [ Limitations of Aurora Global Databases][3]
     #
     #   * [ Limitations of Multi-Master Clusters][4]
     #

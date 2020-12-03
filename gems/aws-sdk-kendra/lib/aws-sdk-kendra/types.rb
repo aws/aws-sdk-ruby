@@ -818,6 +818,491 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Specifies the attachment settings for the Confluence data source.
+    # Attachment settings are optional, if you don't specify settings
+    # attachments, Amazon Kendra won't index them.
+    #
+    # @note When making an API call, you may pass ConfluenceAttachmentConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         crawl_attachments: false,
+    #         attachment_field_mappings: [
+    #           {
+    #             data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] crawl_attachments
+    #   Indicates whether Amazon Kendra indexes attachments to the pages and
+    #   blogs in the Confluence data source.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] attachment_field_mappings
+    #   Defines how attachment metadata fields should be mapped to index
+    #   fields. Before you can map a field, you must first create an index
+    #   field with a matching type using the console or the `UpdateIndex`
+    #   operation.
+    #
+    #   If you specify the `AttachentFieldMappings` parameter, you must
+    #   specify at least one field mapping.
+    #   @return [Array<Types::ConfluenceAttachmentToIndexFieldMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceAttachmentConfiguration AWS API Documentation
+    #
+    class ConfluenceAttachmentConfiguration < Struct.new(
+      :crawl_attachments,
+      :attachment_field_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the mapping between a field in the Confluence data source to a
+    # Amazon Kendra index field.
+    #
+    # You must first create the index field using the operation.
+    #
+    # @note When making an API call, you may pass ConfluenceAttachmentToIndexFieldMapping
+    #   data as a hash:
+    #
+    #       {
+    #         data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #         date_field_format: "DataSourceDateFieldFormat",
+    #         index_field_name: "IndexFieldName",
+    #       }
+    #
+    # @!attribute [rw] data_source_field_name
+    #   The name of the field in the data source.
+    #
+    #   You must first create the index field using the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_field_format
+    #   The format for date fields in the data source. If the field
+    #   specified in `DataSourceFieldName` is a date field you must specify
+    #   the date format. If the field is not a date field, an exception is
+    #   thrown.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_field_name
+    #   The name of the index field to map to the Confluence data source
+    #   field. The index field type must match the Confluence field type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceAttachmentToIndexFieldMapping AWS API Documentation
+    #
+    class ConfluenceAttachmentToIndexFieldMapping < Struct.new(
+      :data_source_field_name,
+      :date_field_format,
+      :index_field_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the blog settings for the Confluence data source. Blogs are
+    # always indexed unless filtered from the index by the
+    # `ExclusionPatterns` or `InclusionPatterns` fields in the data type.
+    #
+    # @note When making an API call, you may pass ConfluenceBlogConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         blog_field_mappings: [
+    #           {
+    #             data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] blog_field_mappings
+    #   Defines how blog metadata fields should be mapped to index fields.
+    #   Before you can map a field, you must first create an index field
+    #   with a matching type using the console or the `UpdateIndex`
+    #   operation.
+    #
+    #   If you specify the `BlogFieldMappings` parameter, you must specify
+    #   at least one field mapping.
+    #   @return [Array<Types::ConfluenceBlogToIndexFieldMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceBlogConfiguration AWS API Documentation
+    #
+    class ConfluenceBlogConfiguration < Struct.new(
+      :blog_field_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the mapping between a blog field in the Confluence data source
+    # to a Amazon Kendra index field.
+    #
+    # You must first create the index field using the operation.
+    #
+    # @note When making an API call, you may pass ConfluenceBlogToIndexFieldMapping
+    #   data as a hash:
+    #
+    #       {
+    #         data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #         date_field_format: "DataSourceDateFieldFormat",
+    #         index_field_name: "IndexFieldName",
+    #       }
+    #
+    # @!attribute [rw] data_source_field_name
+    #   The name of the field in the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_field_format
+    #   The format for date fields in the data source. If the field
+    #   specified in `DataSourceFieldName` is a date field you must specify
+    #   the date format. If the field is not a date field, an exception is
+    #   thrown.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_field_name
+    #   The name of the index field to map to the Confluence data source
+    #   field. The index field type must match the Confluence field type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceBlogToIndexFieldMapping AWS API Documentation
+    #
+    class ConfluenceBlogToIndexFieldMapping < Struct.new(
+      :data_source_field_name,
+      :date_field_format,
+      :index_field_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides configuration information for data sources that connect to
+    # Confluence.
+    #
+    # @note When making an API call, you may pass ConfluenceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         server_url: "Url", # required
+    #         secret_arn: "SecretArn", # required
+    #         version: "CLOUD", # required, accepts CLOUD, SERVER
+    #         space_configuration: {
+    #           crawl_personal_spaces: false,
+    #           crawl_archived_spaces: false,
+    #           include_spaces: ["ConfluenceSpaceIdentifier"],
+    #           exclude_spaces: ["ConfluenceSpaceIdentifier"],
+    #           space_field_mappings: [
+    #             {
+    #               data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         page_configuration: {
+    #           page_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         blog_configuration: {
+    #           blog_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         attachment_configuration: {
+    #           crawl_attachments: false,
+    #           attachment_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #       }
+    #
+    # @!attribute [rw] server_url
+    #   The URL of your Confluence instance. Use the full URL of the server.
+    #   For example, `https://server.example.com:port/`. You can also use an
+    #   IP address, for example, `https://192.168.1.113/`.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that
+    #   contains the key/value pairs required to connect to your Confluence
+    #   server. The secret must contain a JSON structure with the following
+    #   keys:
+    #
+    #   * username - The user name or email address of a user with
+    #     administrative privileges for the Confluence server.
+    #
+    #   * password - The password associated with the user logging in to the
+    #     Confluence server.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   Specifies the version of the Confluence installation that you are
+    #   connecting to.
+    #   @return [String]
+    #
+    # @!attribute [rw] space_configuration
+    #   Specifies configuration information for indexing Confluence spaces.
+    #   @return [Types::ConfluenceSpaceConfiguration]
+    #
+    # @!attribute [rw] page_configuration
+    #   Specifies configuration information for indexing Confluence pages.
+    #   @return [Types::ConfluencePageConfiguration]
+    #
+    # @!attribute [rw] blog_configuration
+    #   Specifies configuration information for indexing Confluence blogs.
+    #   @return [Types::ConfluenceBlogConfiguration]
+    #
+    # @!attribute [rw] attachment_configuration
+    #   Specifies configuration information for indexing attachments to
+    #   Confluence blogs and pages.
+    #   @return [Types::ConfluenceAttachmentConfiguration]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Specifies the information for connecting to an Amazon VPC.
+    #   @return [Types::DataSourceVpcConfiguration]
+    #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of regular expression patterns that apply to a URL on the
+    #   Confluence server. An inclusion pattern can apply to a blog post, a
+    #   page, a space, or an attachment. Items that match the patterns are
+    #   included in the index. Items that don't match the pattern are
+    #   excluded from the index. If an item matches both an inclusion
+    #   pattern and an exclusion pattern, the item isn't included in the
+    #   index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_patterns
+    #   A list of regular expression patterns that apply to a URL on the
+    #   Confluence server. An exclusion pattern can apply to a blog post, a
+    #   page, a space, or an attachment. Items that match the pattern are
+    #   excluded from the index. Items that don't match the pattern are
+    #   included in the index. If a item matches both an exclusion pattern
+    #   and an inclusion pattern, the item isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceConfiguration AWS API Documentation
+    #
+    class ConfluenceConfiguration < Struct.new(
+      :server_url,
+      :secret_arn,
+      :version,
+      :space_configuration,
+      :page_configuration,
+      :blog_configuration,
+      :attachment_configuration,
+      :vpc_configuration,
+      :inclusion_patterns,
+      :exclusion_patterns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the page settings for the Confluence data source.
+    #
+    # @note When making an API call, you may pass ConfluencePageConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         page_field_mappings: [
+    #           {
+    #             data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] page_field_mappings
+    #   Defines how page metadata fields should be mapped to index fields.
+    #   Before you can map a field, you must first create an index field
+    #   with a matching type using the console or the `UpdateIndex`
+    #   operation.
+    #
+    #   If you specify the `PageFieldMappings` parameter, you must specify
+    #   at least one field mapping.
+    #   @return [Array<Types::ConfluencePageToIndexFieldMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluencePageConfiguration AWS API Documentation
+    #
+    class ConfluencePageConfiguration < Struct.new(
+      :page_field_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the mapping between a field in the Confluence data source to a
+    # Amazon Kendra index field.
+    #
+    # You must first create the index field using the operation.
+    #
+    # @note When making an API call, you may pass ConfluencePageToIndexFieldMapping
+    #   data as a hash:
+    #
+    #       {
+    #         data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #         date_field_format: "DataSourceDateFieldFormat",
+    #         index_field_name: "IndexFieldName",
+    #       }
+    #
+    # @!attribute [rw] data_source_field_name
+    #   The name of the field in the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_field_format
+    #   The format for date fields in the data source. If the field
+    #   specified in `DataSourceFieldName` is a date field you must specify
+    #   the date format. If the field is not a date field, an exception is
+    #   thrown.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_field_name
+    #   The name of the index field to map to the Confluence data source
+    #   field. The index field type must match the Confluence field type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluencePageToIndexFieldMapping AWS API Documentation
+    #
+    class ConfluencePageToIndexFieldMapping < Struct.new(
+      :data_source_field_name,
+      :date_field_format,
+      :index_field_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration for indexing Confluence spaces.
+    #
+    # @note When making an API call, you may pass ConfluenceSpaceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         crawl_personal_spaces: false,
+    #         crawl_archived_spaces: false,
+    #         include_spaces: ["ConfluenceSpaceIdentifier"],
+    #         exclude_spaces: ["ConfluenceSpaceIdentifier"],
+    #         space_field_mappings: [
+    #           {
+    #             data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] crawl_personal_spaces
+    #   Specifies whether Amazon Kendra should index personal spaces. Users
+    #   can add restrictions to items in personal spaces. If personal spaces
+    #   are indexed, queries without user context information may return
+    #   restricted items from a personal space in their results. For more
+    #   information, see [Filtering on user context][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_archived_spaces
+    #   Specifies whether Amazon Kendra should index archived spaces.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_spaces
+    #   A list of space keys for Confluence spaces. If you include a key,
+    #   the blogs, documents, and attachments in the space are indexed.
+    #   Spaces that aren't in the list aren't indexed. A space in the list
+    #   must exist. Otherwise, Amazon Kendra logs an error when the data
+    #   source is synchronized. If a space is in both the `IncludeSpaces`
+    #   and the `ExcludeSpaces` list, the space is excluded.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude_spaces
+    #   A list of space keys of Confluence spaces. If you include a key, the
+    #   blogs, documents, and attachments in the space are not indexed. If a
+    #   space is in both the `ExcludeSpaces` and the `IncludeSpaces` list,
+    #   the space is excluded.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] space_field_mappings
+    #   Defines how space metadata fields should be mapped to index fields.
+    #   Before you can map a field, you must first create an index field
+    #   with a matching type using the console or the `UpdateIndex`
+    #   operation.
+    #
+    #   If you specify the `SpaceFieldMappings` parameter, you must specify
+    #   at least one field mapping.
+    #   @return [Array<Types::ConfluenceSpaceToIndexFieldMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceSpaceConfiguration AWS API Documentation
+    #
+    class ConfluenceSpaceConfiguration < Struct.new(
+      :crawl_personal_spaces,
+      :crawl_archived_spaces,
+      :include_spaces,
+      :exclude_spaces,
+      :space_field_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the mapping between a field in the Confluence data source to a
+    # Amazon Kendra index field.
+    #
+    # You must first create the index field using the operation.
+    #
+    # @note When making an API call, you may pass ConfluenceSpaceToIndexFieldMapping
+    #   data as a hash:
+    #
+    #       {
+    #         data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
+    #         date_field_format: "DataSourceDateFieldFormat",
+    #         index_field_name: "IndexFieldName",
+    #       }
+    #
+    # @!attribute [rw] data_source_field_name
+    #   The name of the field in the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_field_format
+    #   The format for date fields in the data source. If the field
+    #   specified in `DataSourceFieldName` is a date field you must specify
+    #   the date format. If the field is not a date field, an exception is
+    #   thrown.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_field_name
+    #   The name of the index field to map to the Confluence data source
+    #   field. The index field type must match the Confluence field type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceSpaceToIndexFieldMapping AWS API Documentation
+    #
+    class ConfluenceSpaceToIndexFieldMapping < Struct.new(
+      :data_source_field_name,
+      :date_field_format,
+      :index_field_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides the information necessary to connect to a database.
     #
     # @note When making an API call, you may pass ConnectionConfiguration
@@ -879,11 +1364,12 @@ module Aws::Kendra
     #       {
     #         name: "DataSourceName", # required
     #         index_id: "IndexId", # required
-    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW
-    #         configuration: { # required
+    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE
+    #         configuration: {
     #           s3_configuration: {
     #             bucket_name: "S3BucketName", # required
     #             inclusion_prefixes: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #             documents_metadata_configuration: {
     #               s3_prefix: "S3ObjectKey",
@@ -912,6 +1398,7 @@ module Aws::Kendra
     #               },
     #             ],
     #             document_title_field_name: "DataSourceFieldName",
+    #             disable_local_groups: false,
     #           },
     #           database_configuration: {
     #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -1036,6 +1523,7 @@ module Aws::Kendra
     #                 index_field_name: "IndexFieldName", # required
     #               },
     #             ],
+    #             disable_local_groups: false,
     #           },
     #           service_now_configuration: {
     #             host_url: "ServiceNowHostUrl", # required
@@ -1070,16 +1558,69 @@ module Aws::Kendra
     #               ],
     #             },
     #           },
+    #           confluence_configuration: {
+    #             server_url: "Url", # required
+    #             secret_arn: "SecretArn", # required
+    #             version: "CLOUD", # required, accepts CLOUD, SERVER
+    #             space_configuration: {
+    #               crawl_personal_spaces: false,
+    #               crawl_archived_spaces: false,
+    #               include_spaces: ["ConfluenceSpaceIdentifier"],
+    #               exclude_spaces: ["ConfluenceSpaceIdentifier"],
+    #               space_field_mappings: [
+    #                 {
+    #                   data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName",
+    #                 },
+    #               ],
+    #             },
+    #             page_configuration: {
+    #               page_field_mappings: [
+    #                 {
+    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName",
+    #                 },
+    #               ],
+    #             },
+    #             blog_configuration: {
+    #               blog_field_mappings: [
+    #                 {
+    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName",
+    #                 },
+    #               ],
+    #             },
+    #             attachment_configuration: {
+    #               crawl_attachments: false,
+    #               attachment_field_mappings: [
+    #                 {
+    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName",
+    #                 },
+    #               ],
+    #             },
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           },
     #         },
     #         description: "Description",
     #         schedule: "ScanSchedule",
-    #         role_arn: "RoleArn", # required
+    #         role_arn: "RoleArn",
     #         tags: [
     #           {
     #             key: "TagKey", # required
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         client_token: "ClientTokenName",
     #       }
     #
     # @!attribute [rw] name
@@ -1099,6 +1640,13 @@ module Aws::Kendra
     # @!attribute [rw] configuration
     #   The connector configuration information that is required to access
     #   the repository.
+    #
+    #   You can't specify the `Configuration` parameter when the `Type`
+    #   parameter is set to `CUSTOM`. If you do, you receive a
+    #   `ValidationException` exception.
+    #
+    #   The `Configuration` parameter is required for all other data
+    #   sources.
     #   @return [Types::DataSourceConfiguration]
     #
     # @!attribute [rw] description
@@ -1110,12 +1658,22 @@ module Aws::Kendra
     #   your repository and update the index. If you don't set a schedule
     #   Amazon Kendra will not periodically update the index. You can call
     #   the `StartDataSourceSyncJob` operation to update the index.
+    #
+    #   You can't specify the `Schedule` parameter when the `Type`
+    #   parameter is set to `CUSTOM`. If you do, you receive a
+    #   `ValidationException` exception.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
     #   the data source. For more information, see [IAM Roles for Amazon
     #   Kendra][1].
+    #
+    #   You can't specify the `RoleArn` parameter when the `Type` parameter
+    #   is set to `CUSTOM`. If you do, you receive a `ValidationException`
+    #   exception.
+    #
+    #   The `RoleArn` parameter is required for all other data sources.
     #
     #
     #
@@ -1128,6 +1686,15 @@ module Aws::Kendra
     #   access to resources.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] client_token
+    #   A token that you provide to identify the request to create a data
+    #   source. Multiple calls to the `CreateDataSource` operation with the
+    #   same client token will create only one data source.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateDataSourceRequest AWS API Documentation
     #
     class CreateDataSourceRequest < Struct.new(
@@ -1138,7 +1705,8 @@ module Aws::Kendra
       :description,
       :schedule,
       :role_arn,
-      :tags)
+      :tags,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1173,6 +1741,8 @@ module Aws::Kendra
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         file_format: "CSV", # accepts CSV, CSV_WITH_HEADER, JSON
+    #         client_token: "ClientTokenName",
     #       }
     #
     # @!attribute [rw] index_id
@@ -1207,6 +1777,30 @@ module Aws::Kendra
     #   to resources.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] file_format
+    #   The format of the input file. You can choose between a basic CSV
+    #   format, a CSV format that includes customs attributes in a header,
+    #   and a JSON format that includes custom attributes.
+    #
+    #   The format must match the format of the file stored in the S3 bucket
+    #   identified in the `S3Path` parameter.
+    #
+    #   For more information, see [Adding questions and answers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A token that you provide to identify the request to create a FAQ.
+    #   Multiple calls to the `CreateFaqRequest` operation with the same
+    #   client token will create only one FAQ.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateFaqRequest AWS API Documentation
     #
     class CreateFaqRequest < Struct.new(
@@ -1215,7 +1809,9 @@ module Aws::Kendra
       :description,
       :s3_path,
       :role_arn,
-      :tags)
+      :tags,
+      :file_format,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1250,6 +1846,24 @@ module Aws::Kendra
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         user_token_configurations: [
+    #           {
+    #             jwt_token_type_configuration: {
+    #               key_location: "URL", # required, accepts URL, SECRET_MANAGER
+    #               url: "Url",
+    #               secret_manager_arn: "RoleArn",
+    #               user_name_attribute_field: "UserNameAttributeField",
+    #               group_attribute_field: "GroupAttributeField",
+    #               issuer: "Issuer",
+    #               claim_regex: "ClaimRegex",
+    #             },
+    #             json_token_type_configuration: {
+    #               user_name_attribute_field: "String", # required
+    #               group_attribute_field: "String", # required
+    #             },
+    #           },
+    #         ],
+    #         user_context_policy: "ATTRIBUTE_FILTER", # accepts ATTRIBUTE_FILTER, USER_TOKEN
     #       }
     #
     # @!attribute [rw] name
@@ -1262,13 +1876,17 @@ module Aws::Kendra
     #   or proof of concept. Use `ENTERPRISE_EDITION` for your production
     #   databases. Once you set the edition for an index, it can't be
     #   changed.
+    #
+    #   The `Edition` parameter is optional. If you don't supply a value,
+    #   the default is `ENTERPRISE_EDITION`.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   An IAM role that gives Amazon Kendra permissions to access your
-    #   Amazon CloudWatch logs and metrics. This is also the role used when
-    #   you use the `BatchPutDocument` operation to index documents from an
-    #   Amazon S3 bucket.
+    #   An AWS Identity and Access Management (IAM) role that gives Amazon
+    #   Kendra permissions to access your Amazon CloudWatch logs and
+    #   metrics. This is also the role used when you use the
+    #   `BatchPutDocument` operation to index documents from an Amazon S3
+    #   bucket.
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
@@ -1284,7 +1902,7 @@ module Aws::Kendra
     # @!attribute [rw] client_token
     #   A token that you provide to identify the request to create an index.
     #   Multiple calls to the `CreateIndex` operation with the same client
-    #   token will create only one index.”
+    #   token will create only one index.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1296,6 +1914,26 @@ module Aws::Kendra
     #   to resources.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] user_token_configurations
+    #   The user token configuration.
+    #   @return [Array<Types::UserTokenConfiguration>]
+    #
+    # @!attribute [rw] user_context_policy
+    #   The user context policy.
+    #
+    #   ATTRIBUTE\_FILTER
+    #
+    #   : All indexed content is searchable and displayable for all users.
+    #     If there is an access control list, it is ignored. You can filter
+    #     on user and group attributes.
+    #
+    #   USER\_TOKEN
+    #
+    #   : Enables SSO and token-based user access control. All documents
+    #     with no access control and all documents accessible to the user
+    #     will be searchable and displayable.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateIndexRequest AWS API Documentation
     #
     class CreateIndexRequest < Struct.new(
@@ -1305,7 +1943,9 @@ module Aws::Kendra
       :server_side_encryption_configuration,
       :description,
       :client_token,
-      :tags)
+      :tags,
+      :user_token_configurations,
+      :user_context_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1332,6 +1972,7 @@ module Aws::Kendra
     #         s3_configuration: {
     #           bucket_name: "S3BucketName", # required
     #           inclusion_prefixes: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #           documents_metadata_configuration: {
     #             s3_prefix: "S3ObjectKey",
@@ -1360,6 +2001,7 @@ module Aws::Kendra
     #             },
     #           ],
     #           document_title_field_name: "DataSourceFieldName",
+    #           disable_local_groups: false,
     #         },
     #         database_configuration: {
     #           database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -1484,6 +2126,7 @@ module Aws::Kendra
     #               index_field_name: "IndexFieldName", # required
     #             },
     #           ],
+    #           disable_local_groups: false,
     #         },
     #         service_now_configuration: {
     #           host_url: "ServiceNowHostUrl", # required
@@ -1518,20 +2161,73 @@ module Aws::Kendra
     #             ],
     #           },
     #         },
+    #         confluence_configuration: {
+    #           server_url: "Url", # required
+    #           secret_arn: "SecretArn", # required
+    #           version: "CLOUD", # required, accepts CLOUD, SERVER
+    #           space_configuration: {
+    #             crawl_personal_spaces: false,
+    #             crawl_archived_spaces: false,
+    #             include_spaces: ["ConfluenceSpaceIdentifier"],
+    #             exclude_spaces: ["ConfluenceSpaceIdentifier"],
+    #             space_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName",
+    #               },
+    #             ],
+    #           },
+    #           page_configuration: {
+    #             page_field_mappings: [
+    #               {
+    #                 data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName",
+    #               },
+    #             ],
+    #           },
+    #           blog_configuration: {
+    #             blog_field_mappings: [
+    #               {
+    #                 data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName",
+    #               },
+    #             ],
+    #           },
+    #           attachment_configuration: {
+    #             crawl_attachments: false,
+    #             attachment_field_mappings: [
+    #               {
+    #                 data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName",
+    #               },
+    #             ],
+    #           },
+    #           vpc_configuration: {
+    #             subnet_ids: ["SubnetId"], # required
+    #             security_group_ids: ["VpcSecurityGroupId"], # required
+    #           },
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         },
     #       }
     #
     # @!attribute [rw] s3_configuration
-    #   Provides information to create a connector for a document repository
-    #   in an Amazon S3 bucket.
+    #   Provides information to create a data source connector for a
+    #   document repository in an Amazon S3 bucket.
     #   @return [Types::S3DataSourceConfiguration]
     #
     # @!attribute [rw] share_point_configuration
-    #   Provides information necessary to create a connector for a Microsoft
-    #   SharePoint site.
+    #   Provides information necessary to create a data source connector for
+    #   a Microsoft SharePoint site.
     #   @return [Types::SharePointConfiguration]
     #
     # @!attribute [rw] database_configuration
-    #   Provides information necessary to create a connector for a database.
+    #   Provides information necessary to create a data source connector for
+    #   a database.
     #   @return [Types::DatabaseConfiguration]
     #
     # @!attribute [rw] salesforce_configuration
@@ -1549,6 +2245,11 @@ module Aws::Kendra
     #   instances.
     #   @return [Types::ServiceNowConfiguration]
     #
+    # @!attribute [rw] confluence_configuration
+    #   Provides configuration information for connecting to a Confluence
+    #   data source.
+    #   @return [Types::ConfluenceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceConfiguration AWS API Documentation
     #
     class DataSourceConfiguration < Struct.new(
@@ -1557,7 +2258,8 @@ module Aws::Kendra
       :database_configuration,
       :salesforce_configuration,
       :one_drive_configuration,
-      :service_now_configuration)
+      :service_now_configuration,
+      :confluence_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1644,7 +2346,7 @@ module Aws::Kendra
     # @!attribute [rw] metrics
     #   Maps a batch delete document request to a specific data source sync
     #   job. This is optional and should only be supplied when documents are
-    #   deleted by a connector.
+    #   deleted by a data source connector.
     #   @return [Types::DataSourceSyncJobMetrics]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceSyncJob AWS API Documentation
@@ -1691,7 +2393,7 @@ module Aws::Kendra
 
     # Maps a batch delete document request to a specific data source sync
     # job. This is optional and should only be supplied when documents are
-    # deleted by a connector.
+    # deleted by a data source connector.
     #
     # @!attribute [rw] documents_added
     #   The number of documents added from the data source up to now in the
@@ -2112,6 +2814,10 @@ module Aws::Kendra
     #   the reason why the FAQ failed.
     #   @return [String]
     #
+    # @!attribute [rw] file_format
+    #   The file format used by the input files for the FAQ.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeFaqResponse AWS API Documentation
     #
     class DescribeFaqResponse < Struct.new(
@@ -2124,7 +2830,8 @@ module Aws::Kendra
       :s3_path,
       :status,
       :role_arn,
-      :error_message)
+      :error_message,
+      :file_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2212,6 +2919,14 @@ module Aws::Kendra
     #   capacity for the index.
     #   @return [Types::CapacityUnitsConfiguration]
     #
+    # @!attribute [rw] user_token_configurations
+    #   The user token configuration for the Amazon Kendra index.
+    #   @return [Array<Types::UserTokenConfiguration>]
+    #
+    # @!attribute [rw] user_context_policy
+    #   The user context policy for the Amazon Kendra index.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeIndexResponse AWS API Documentation
     #
     class DescribeIndexResponse < Struct.new(
@@ -2227,7 +2942,9 @@ module Aws::Kendra
       :document_metadata_configurations,
       :index_statistics,
       :error_message,
-      :capacity_units)
+      :capacity_units,
+      :user_token_configurations,
+      :user_context_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2517,6 +3234,11 @@ module Aws::Kendra
     #   `DocumentAttributeKey` provided in the query.
     #   @return [String]
     #
+    # @!attribute [rw] document_attribute_value_type
+    #   The data type of the facet value. This is the same as the type
+    #   defined for the index field when it was created.
+    #   @return [String]
+    #
     # @!attribute [rw] document_attribute_value_count_pairs
     #   An array of key/value pairs, where the key is the value of the
     #   attribute and the count is the number of documents that share the
@@ -2527,6 +3249,7 @@ module Aws::Kendra
     #
     class FacetResult < Struct.new(
       :document_attribute_key,
+      :document_attribute_value_type,
       :document_attribute_value_count_pairs)
       SENSITIVE = []
       include Aws::Structure
@@ -2573,6 +3296,10 @@ module Aws::Kendra
     #   The UNIX datetime that the FAQ was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] file_format
+    #   The file type used to create the FAQ.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/FaqSummary AWS API Documentation
     #
     class FaqSummary < Struct.new(
@@ -2580,7 +3307,8 @@ module Aws::Kendra
       :name,
       :status,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :file_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2684,6 +3412,90 @@ module Aws::Kendra
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information for the JSON token type.
+    #
+    # @note When making an API call, you may pass JsonTokenTypeConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         user_name_attribute_field: "String", # required
+    #         group_attribute_field: "String", # required
+    #       }
+    #
+    # @!attribute [rw] user_name_attribute_field
+    #   The user name attribute field.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_attribute_field
+    #   The group attribute field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/JsonTokenTypeConfiguration AWS API Documentation
+    #
+    class JsonTokenTypeConfiguration < Struct.new(
+      :user_name_attribute_field,
+      :group_attribute_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information for the JWT token type.
+    #
+    # @note When making an API call, you may pass JwtTokenTypeConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         key_location: "URL", # required, accepts URL, SECRET_MANAGER
+    #         url: "Url",
+    #         secret_manager_arn: "RoleArn",
+    #         user_name_attribute_field: "UserNameAttributeField",
+    #         group_attribute_field: "GroupAttributeField",
+    #         issuer: "Issuer",
+    #         claim_regex: "ClaimRegex",
+    #       }
+    #
+    # @!attribute [rw] key_location
+    #   The location of the key.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The signing key URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_manager_arn
+    #   The Amazon Resource Name (arn) of the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name_attribute_field
+    #   The user name attribute field.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_attribute_field
+    #   The group attribute field.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer
+    #   The issuer of the token.
+    #   @return [String]
+    #
+    # @!attribute [rw] claim_regex
+    #   The regular expression that identifies the claim.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/JwtTokenTypeConfiguration AWS API Documentation
+    #
+    class JwtTokenTypeConfiguration < Struct.new(
+      :key_location,
+      :url,
+      :secret_manager_arn,
+      :user_name_attribute_field,
+      :group_attribute_field,
+      :issuer,
+      :claim_regex)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2980,6 +3792,7 @@ module Aws::Kendra
     #             index_field_name: "IndexFieldName", # required
     #           },
     #         ],
+    #         disable_local_groups: false,
     #       }
     #
     # @!attribute [rw] tenant_domain
@@ -3022,6 +3835,11 @@ module Aws::Kendra
     #   must first create the index fields before you map OneDrive fields.
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
+    # @!attribute [rw] disable_local_groups
+    #   A Boolean value that specifies whether local groups are disabled
+    #   (`True`) or enabled (`False`).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/OneDriveConfiguration AWS API Documentation
     #
     class OneDriveConfiguration < Struct.new(
@@ -3030,7 +3848,8 @@ module Aws::Kendra
       :one_drive_users,
       :inclusion_patterns,
       :exclusion_patterns,
-      :field_mappings)
+      :field_mappings,
+      :disable_local_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3200,6 +4019,9 @@ module Aws::Kendra
     #           document_attribute_key: "DocumentAttributeKey", # required
     #           sort_order: "DESC", # required, accepts DESC, ASC
     #         },
+    #         user_context: {
+    #           token: "Token",
+    #         },
     #       }
     #
     # @!attribute [rw] index_id
@@ -3263,6 +4085,10 @@ module Aws::Kendra
     #   by the relevance that Amazon Kendra determines for the result.
     #   @return [Types::SortingConfiguration]
     #
+    # @!attribute [rw] user_context
+    #   The user context token.
+    #   @return [Types::UserContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryRequest AWS API Documentation
     #
     class QueryRequest < Struct.new(
@@ -3274,7 +4100,8 @@ module Aws::Kendra
       :query_result_type_filter,
       :page_number,
       :page_size,
-      :sorting_configuration)
+      :sorting_configuration,
+      :user_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3295,8 +4122,9 @@ module Aws::Kendra
     #   @return [Array<Types::FacetResult>]
     #
     # @!attribute [rw] total_number_of_results
-    #   The number of items returned by the search. Use this to determine
-    #   when you have requested the last set of results.
+    #   The total number of items found by the search; however, you can only
+    #   retrieve up to 100 items. For example, if the search found 192
+    #   items, you can only retrieve the first 100 of the items.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryResult AWS API Documentation
@@ -3356,13 +4184,13 @@ module Aws::Kendra
     # @!attribute [rw] score_attributes
     #   Indicates the confidence that Amazon Kendra has that a result
     #   matches the query that you provided. Each result is placed into a
-    #   bin that indicates the confidence, `VERY_HIGH`, `HIGH`, and
-    #   `MEDIUM`. You can use the score to determine if a response meets the
+    #   bin that indicates the confidence, `VERY_HIGH`, `HIGH`, `MEDIUM` and
+    #   `LOW`. You can use the score to determine if a response meets the
     #   confidence needed for your application.
     #
-    #   Confidence scores are only returned for results with the `Type`
-    #   field set to `QUESTION_ANSWER` or `ANSWER`. This field is not
-    #   returned if the `Type` field is set to `DOCUMENT`.
+    #   The field is only set to `LOW` when the `Type` field is set to
+    #   `DOCUMENT` and Amazon Kendra is not confident that the result
+    #   matches the query.
     #   @return [Types::ScoreAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryResultItem AWS API Documentation
@@ -3547,6 +4375,7 @@ module Aws::Kendra
     #       {
     #         bucket_name: "S3BucketName", # required
     #         inclusion_prefixes: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         documents_metadata_configuration: {
     #           s3_prefix: "S3ObjectKey",
@@ -3565,10 +4394,23 @@ module Aws::Kendra
     #   the index.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of glob patterns for documents that should be indexed. If a
+    #   document that matches an inclusion pattern also matches an exclusion
+    #   pattern, the document is not indexed.
+    #
+    #   For more information about glob patterns, see [glob
+    #   (programming)][1] in *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Glob_(programming)
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] exclusion_patterns
     #   A list of glob patterns for documents that should not be indexed. If
-    #   a document that matches an inclusion prefix also matches an
-    #   exclusion pattern, the document is not indexed.
+    #   a document that matches an inclusion prefix or inclusion pattern
+    #   also matches an exclusion pattern, the document is not indexed.
     #
     #   For more information about glob patterns, see [glob
     #   (programming)][1] in *Wikipedia*.
@@ -3595,6 +4437,7 @@ module Aws::Kendra
     class S3DataSourceConfiguration < Struct.new(
       :bucket_name,
       :inclusion_prefixes,
+      :inclusion_patterns,
       :exclusion_patterns,
       :documents_metadata_configuration,
       :access_control_list_configuration)
@@ -4426,6 +5269,7 @@ module Aws::Kendra
     #           },
     #         ],
     #         document_title_field_name: "DataSourceFieldName",
+    #         disable_local_groups: false,
     #       }
     #
     # @!attribute [rw] share_point_version
@@ -4506,6 +5350,11 @@ module Aws::Kendra
     #   the document.
     #   @return [String]
     #
+    # @!attribute [rw] disable_local_groups
+    #   A Boolean value that specifies whether local groups are disabled
+    #   (`True`) or enabled (`False`).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SharePointConfiguration AWS API Documentation
     #
     class SharePointConfiguration < Struct.new(
@@ -4518,7 +5367,8 @@ module Aws::Kendra
       :exclusion_patterns,
       :vpc_configuration,
       :field_mappings,
-      :document_title_field_name)
+      :document_title_field_name,
+      :disable_local_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4916,6 +5766,7 @@ module Aws::Kendra
     #           s3_configuration: {
     #             bucket_name: "S3BucketName", # required
     #             inclusion_prefixes: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #             documents_metadata_configuration: {
     #               s3_prefix: "S3ObjectKey",
@@ -4944,6 +5795,7 @@ module Aws::Kendra
     #               },
     #             ],
     #             document_title_field_name: "DataSourceFieldName",
+    #             disable_local_groups: false,
     #           },
     #           database_configuration: {
     #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -5068,6 +5920,7 @@ module Aws::Kendra
     #                 index_field_name: "IndexFieldName", # required
     #               },
     #             ],
+    #             disable_local_groups: false,
     #           },
     #           service_now_configuration: {
     #             host_url: "ServiceNowHostUrl", # required
@@ -5101,6 +5954,58 @@ module Aws::Kendra
     #                 },
     #               ],
     #             },
+    #           },
+    #           confluence_configuration: {
+    #             server_url: "Url", # required
+    #             secret_arn: "SecretArn", # required
+    #             version: "CLOUD", # required, accepts CLOUD, SERVER
+    #             space_configuration: {
+    #               crawl_personal_spaces: false,
+    #               crawl_archived_spaces: false,
+    #               include_spaces: ["ConfluenceSpaceIdentifier"],
+    #               exclude_spaces: ["ConfluenceSpaceIdentifier"],
+    #               space_field_mappings: [
+    #                 {
+    #                   data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName",
+    #                 },
+    #               ],
+    #             },
+    #             page_configuration: {
+    #               page_field_mappings: [
+    #                 {
+    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName",
+    #                 },
+    #               ],
+    #             },
+    #             blog_configuration: {
+    #               blog_field_mappings: [
+    #                 {
+    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName",
+    #                 },
+    #               ],
+    #             },
+    #             attachment_configuration: {
+    #               crawl_attachments: false,
+    #               attachment_field_mappings: [
+    #                 {
+    #                   data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName",
+    #                 },
+    #               ],
+    #             },
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #           },
     #         },
     #         description: "Description",
@@ -5186,6 +6091,24 @@ module Aws::Kendra
     #           storage_capacity_units: 1, # required
     #           query_capacity_units: 1, # required
     #         },
+    #         user_token_configurations: [
+    #           {
+    #             jwt_token_type_configuration: {
+    #               key_location: "URL", # required, accepts URL, SECRET_MANAGER
+    #               url: "Url",
+    #               secret_manager_arn: "RoleArn",
+    #               user_name_attribute_field: "UserNameAttributeField",
+    #               group_attribute_field: "GroupAttributeField",
+    #               issuer: "Issuer",
+    #               claim_regex: "ClaimRegex",
+    #             },
+    #             json_token_type_configuration: {
+    #               user_name_attribute_field: "String", # required
+    #               group_attribute_field: "String", # required
+    #             },
+    #           },
+    #         ],
+    #         user_context_policy: "ATTRIBUTE_FILTER", # accepts ATTRIBUTE_FILTER, USER_TOKEN
     #       }
     #
     # @!attribute [rw] id
@@ -5219,6 +6142,14 @@ module Aws::Kendra
     #   index.
     #   @return [Types::CapacityUnitsConfiguration]
     #
+    # @!attribute [rw] user_token_configurations
+    #   The user token configuration.
+    #   @return [Array<Types::UserTokenConfiguration>]
+    #
+    # @!attribute [rw] user_context_policy
+    #   The user user token context policy.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateIndexRequest AWS API Documentation
     #
     class UpdateIndexRequest < Struct.new(
@@ -5227,7 +6158,68 @@ module Aws::Kendra
       :role_arn,
       :description,
       :document_metadata_configuration_updates,
-      :capacity_units)
+      :capacity_units,
+      :user_token_configurations,
+      :user_context_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the user context for a Amazon Kendra index.
+    #
+    # @note When making an API call, you may pass UserContext
+    #   data as a hash:
+    #
+    #       {
+    #         token: "Token",
+    #       }
+    #
+    # @!attribute [rw] token
+    #   The user context token. It must be a JWT or a JSON token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UserContext AWS API Documentation
+    #
+    class UserContext < Struct.new(
+      :token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides configuration information for a token configuration.
+    #
+    # @note When making an API call, you may pass UserTokenConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         jwt_token_type_configuration: {
+    #           key_location: "URL", # required, accepts URL, SECRET_MANAGER
+    #           url: "Url",
+    #           secret_manager_arn: "RoleArn",
+    #           user_name_attribute_field: "UserNameAttributeField",
+    #           group_attribute_field: "GroupAttributeField",
+    #           issuer: "Issuer",
+    #           claim_regex: "ClaimRegex",
+    #         },
+    #         json_token_type_configuration: {
+    #           user_name_attribute_field: "String", # required
+    #           group_attribute_field: "String", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] jwt_token_type_configuration
+    #   Information about the JWT token type configuration.
+    #   @return [Types::JwtTokenTypeConfiguration]
+    #
+    # @!attribute [rw] json_token_type_configuration
+    #   Information about the JSON token type configuration.
+    #   @return [Types::JsonTokenTypeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UserTokenConfiguration AWS API Documentation
+    #
+    class UserTokenConfiguration < Struct.new(
+      :jwt_token_type_configuration,
+      :json_token_type_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

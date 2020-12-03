@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -27,7 +28,7 @@ require_relative 'aws-sdk-honeycode/customizations'
 # structure.
 #
 #     honeycode = Aws::Honeycode::Client.new
-#     resp = honeycode.get_screen_data(params)
+#     resp = honeycode.batch_create_table_rows(params)
 #
 # See {Client} for more information.
 #
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-honeycode/customizations'
 # @!group service
 module Aws::Honeycode
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.4.0'
 
 end

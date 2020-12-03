@@ -1714,12 +1714,16 @@ module Aws::Schemas
     #   The version number of the schema.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/SchemaVersionSummary AWS API Documentation
     #
     class SchemaVersionSummary < Struct.new(
       :schema_arn,
       :schema_name,
-      :schema_version)
+      :schema_version,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1759,11 +1763,15 @@ module Aws::Schemas
     #   The version number of the schema
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/SearchSchemaVersionSummary AWS API Documentation
     #
     class SearchSchemaVersionSummary < Struct.new(
       :created_date,
-      :schema_version)
+      :schema_version,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2270,6 +2278,98 @@ module Aws::Schemas
       :tags,
       :type,
       :version_created_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] content
+    #   The content of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_arn
+    #   The ARN of the schema to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_name
+    #   The name of the schema to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_version
+    #   The version of the schema to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of schema to export.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/ExportSchemaOutput AWS API Documentation
+    #
+    class ExportSchemaOutput < Struct.new(
+      :content,
+      :schema_arn,
+      :schema_name,
+      :schema_version,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ExportSchemaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         registry_name: "__string", # required
+    #         schema_name: "__string", # required
+    #         schema_version: "__string",
+    #         type: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] registry_name
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_name
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_version
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/ExportSchemaRequest AWS API Documentation
+    #
+    class ExportSchemaRequest < Struct.new(
+      :registry_name,
+      :schema_name,
+      :schema_version,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] content
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_name
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_version
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/ExportSchemaResponse AWS API Documentation
+    #
+    class ExportSchemaResponse < Struct.new(
+      :content,
+      :schema_arn,
+      :schema_name,
+      :schema_version,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end

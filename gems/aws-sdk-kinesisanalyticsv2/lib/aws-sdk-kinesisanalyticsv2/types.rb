@@ -128,7 +128,7 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] input_id
     #   The input ID that is associated with the application input. This is
-    #   the ID that Amazon Kinesis Data Analytics assigns to each input
+    #   the ID that Kinesis Data Analytics assigns to each input
     #   configuration that you add to your application.
     #   @return [String]
     #
@@ -395,7 +395,7 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] application_version_id
-    #   The updated application version ID. Amazon Kinesis Data Analytics
+    #   The updated application version ID. Kinesis Data Analytics
     #   increments this ID when the application is updated.
     #   @return [Integer]
     #
@@ -430,11 +430,10 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] current_application_version_id
-    #   The version of the application to which you want to add the input
-    #   processing configuration. You can use the DescribeApplication
-    #   operation to get the current application version. If the version
-    #   specified is not the current version, the
-    #   `ConcurrentModificationException` is returned.
+    #   The version of the application to which you want to add the VPC
+    #   configuration. You can use the DescribeApplication operation to get
+    #   the current application version. If the version specified is not the
+    #   current version, the `ConcurrentModificationException` is returned.
     #   @return [Integer]
     #
     # @!attribute [rw] vpc_configuration
@@ -475,7 +474,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes code configuration for a Java-based Kinesis Data Analytics
+    # Describes code configuration for a Flink-based Kinesis Data Analytics
     # application.
     #
     # @note When making an API call, you may pass ApplicationCodeConfiguration
@@ -511,7 +510,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes code configuration for a Java-based Kinesis Data Analytics
+    # Describes code configuration for a Flink-based Kinesis Data Analytics
     # application.
     #
     # @!attribute [rw] code_content_type
@@ -532,8 +531,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes updates to a Java-based Amazon Kinesis Data Analytics
-    # application.
+    # Describes code configuration updates to a Flink-based Kinesis Data
+    # Analytics application.
     #
     # @note When making an API call, you may pass ApplicationCodeConfigurationUpdate
     #   data as a hash:
@@ -568,7 +567,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Specifies the creation parameters for an Amazon Kinesis Data Analytics
+    # Specifies the creation parameters for a Kinesis Data Analytics
     # application.
     #
     # @note When making an API call, you may pass ApplicationConfiguration
@@ -719,27 +718,27 @@ module Aws::KinesisAnalyticsV2
     #       }
     #
     # @!attribute [rw] sql_application_configuration
-    #   The creation and update parameters for an SQL-based Kinesis Data
+    #   The creation and update parameters for a SQL-based Kinesis Data
     #   Analytics application.
     #   @return [Types::SqlApplicationConfiguration]
     #
     # @!attribute [rw] flink_application_configuration
-    #   The creation and update parameters for a Java-based Kinesis Data
+    #   The creation and update parameters for a Flink-based Kinesis Data
     #   Analytics application.
     #   @return [Types::FlinkApplicationConfiguration]
     #
     # @!attribute [rw] environment_properties
-    #   Describes execution properties for a Java-based Kinesis Data
+    #   Describes execution properties for a Flink-based Kinesis Data
     #   Analytics application.
     #   @return [Types::EnvironmentProperties]
     #
     # @!attribute [rw] application_code_configuration
-    #   The code location and type parameters for a Java-based Kinesis Data
+    #   The code location and type parameters for a Flink-based Kinesis Data
     #   Analytics application.
     #   @return [Types::ApplicationCodeConfiguration]
     #
     # @!attribute [rw] application_snapshot_configuration
-    #   Describes whether snapshots are enabled for a Java-based Kinesis
+    #   Describes whether snapshots are enabled for a Flink-based Kinesis
     #   Data Analytics application.
     #   @return [Types::ApplicationSnapshotConfiguration]
     #
@@ -762,16 +761,16 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Describes details about the application code and starting parameters
-    # for an Amazon Kinesis Data Analytics application.
+    # for a Kinesis Data Analytics application.
     #
     # @!attribute [rw] sql_application_configuration_description
-    #   The details about inputs, outputs, and reference data sources for an
+    #   The details about inputs, outputs, and reference data sources for a
     #   SQL-based Kinesis Data Analytics application.
     #   @return [Types::SqlApplicationConfigurationDescription]
     #
     # @!attribute [rw] application_code_configuration_description
-    #   The details about the application code for a Java-based Kinesis Data
-    #   Analytics application.
+    #   The details about the application code for a Flink-based Kinesis
+    #   Data Analytics application.
     #   @return [Types::ApplicationCodeConfigurationDescription]
     #
     # @!attribute [rw] run_configuration_description
@@ -780,16 +779,16 @@ module Aws::KinesisAnalyticsV2
     #   @return [Types::RunConfigurationDescription]
     #
     # @!attribute [rw] flink_application_configuration_description
-    #   The details about a Java-based Kinesis Data Analytics application.
+    #   The details about a Flink-based Kinesis Data Analytics application.
     #   @return [Types::FlinkApplicationConfigurationDescription]
     #
     # @!attribute [rw] environment_property_descriptions
-    #   Describes execution properties for a Java-based Kinesis Data
+    #   Describes execution properties for a Flink-based Kinesis Data
     #   Analytics application.
     #   @return [Types::EnvironmentPropertyDescriptions]
     #
     # @!attribute [rw] application_snapshot_configuration_description
-    #   Describes whether snapshots are enabled for a Java-based Kinesis
+    #   Describes whether snapshots are enabled for a Flink-based Kinesis
     #   Data Analytics application.
     #   @return [Types::ApplicationSnapshotConfigurationDescription]
     #
@@ -966,27 +965,27 @@ module Aws::KinesisAnalyticsV2
     #       }
     #
     # @!attribute [rw] sql_application_configuration_update
-    #   Describes updates to an SQL-based Kinesis Data Analytics
+    #   Describes updates to a SQL-based Kinesis Data Analytics
     #   application's configuration.
     #   @return [Types::SqlApplicationConfigurationUpdate]
     #
     # @!attribute [rw] application_code_configuration_update
-    #   Describes updates to a Java-based Kinesis Data Analytics
+    #   Describes updates to a Flink-based Kinesis Data Analytics
     #   application's code configuration.
     #   @return [Types::ApplicationCodeConfigurationUpdate]
     #
     # @!attribute [rw] flink_application_configuration_update
-    #   Describes updates to a Java-based Kinesis Data Analytics
+    #   Describes updates to a Flink-based Kinesis Data Analytics
     #   application's configuration.
     #   @return [Types::FlinkApplicationConfigurationUpdate]
     #
     # @!attribute [rw] environment_property_updates
-    #   Describes updates to the environment properties for a Java-based
+    #   Describes updates to the environment properties for a Flink-based
     #   Kinesis Data Analytics application.
     #   @return [Types::EnvironmentPropertyUpdates]
     #
     # @!attribute [rw] application_snapshot_configuration_update
-    #   Describes whether snapshots are enabled for a Java-based Kinesis
+    #   Describes whether snapshots are enabled for a Flink-based Kinesis
     #   Data Analytics application.
     #   @return [Types::ApplicationSnapshotConfigurationUpdate]
     #
@@ -1025,8 +1024,8 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] runtime_environment
-    #   The runtime environment for the application (`SQL-1.0` or
-    #   `FLINK-1_6`).
+    #   The runtime environment for the application (`SQL-1.0`, `FLINK-1_6`,
+    #   or `FLINK-1_8`).
     #   @return [String]
     #
     # @!attribute [rw] service_execution_role
@@ -1053,8 +1052,8 @@ module Aws::KinesisAnalyticsV2
     #   @return [Time]
     #
     # @!attribute [rw] application_configuration_description
-    #   Provides details about the application's SQL or Java code and
-    #   starting parameters.
+    #   Provides details about the application's Java, SQL, or Scala code
+    #   and starting parameters.
     #   @return [Types::ApplicationConfigurationDescription]
     #
     # @!attribute [rw] cloud_watch_logging_option_descriptions
@@ -1110,7 +1109,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes whether snapshots are enabled for a Java-based Kinesis Data
+    # Describes whether snapshots are enabled for a Flink-based Kinesis Data
     # Analytics application.
     #
     # @note When making an API call, you may pass ApplicationSnapshotConfiguration
@@ -1121,7 +1120,7 @@ module Aws::KinesisAnalyticsV2
     #       }
     #
     # @!attribute [rw] snapshots_enabled
-    #   Describes whether snapshots are enabled for a Java-based Kinesis
+    #   Describes whether snapshots are enabled for a Flink-based Kinesis
     #   Data Analytics application.
     #   @return [Boolean]
     #
@@ -1133,11 +1132,11 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes whether snapshots are enabled for a Java-based Kinesis Data
+    # Describes whether snapshots are enabled for a Flink-based Kinesis Data
     # Analytics application.
     #
     # @!attribute [rw] snapshots_enabled
-    #   Describes whether snapshots are enabled for a Java-based Kinesis
+    #   Describes whether snapshots are enabled for a Flink-based Kinesis
     #   Data Analytics application.
     #   @return [Boolean]
     #
@@ -1149,7 +1148,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes updates to whether snapshots are enabled for a Java-based
+    # Describes updates to whether snapshots are enabled for a Flink-based
     # Kinesis Data Analytics application.
     #
     # @note When making an API call, you may pass ApplicationSnapshotConfigurationUpdate
@@ -1160,7 +1159,7 @@ module Aws::KinesisAnalyticsV2
     #       }
     #
     # @!attribute [rw] snapshots_enabled_update
-    #   Describes updates to whether snapshots are enabled for a Java-based
+    #   Describes updates to whether snapshots are enabled for a Flink-based
     #   Kinesis Data Analytics application.
     #   @return [Boolean]
     #
@@ -1192,8 +1191,8 @@ module Aws::KinesisAnalyticsV2
     #   @return [Integer]
     #
     # @!attribute [rw] runtime_environment
-    #   The runtime environment for the application (`SQL-1.0` or
-    #   `FLINK-1_6`).
+    #   The runtime environment for the application (`SQL-1.0`, `FLINK-1_6`,
+    #   or `FLINK-1_8`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ApplicationSummary AWS API Documentation
@@ -1208,11 +1207,11 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based application, provides additional mapping information
-    # when the record format uses delimiters, such as CSV. For example, the
-    # following sample records use CSV format, where the records use the
-    # *'\\n'* as the row delimiter and a comma (",") as the column
-    # delimiter:
+    # For a SQL-based Kinesis Data Analytics application, provides
+    # additional mapping information when the record format uses delimiters,
+    # such as CSV. For example, the following sample records use CSV format,
+    # where the records use the *'\\n'* as the row delimiter and a comma
+    # (",") as the column delimiter:
     #
     # `"name1", "address1"`
     #
@@ -1252,8 +1251,8 @@ module Aws::KinesisAnalyticsV2
     #
     #
     #
-    # [1]: https://ci.apache.org/projects/flink/flink-docs-release-1.6/concepts/programming-model.html#checkpoints-for-fault-tolerance
-    # [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.6/
+    # [1]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/concepts/programming-model.html#checkpoints-for-fault-tolerance
+    # [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/
     #
     # @note When making an API call, you may pass CheckpointConfiguration
     #   data as a hash:
@@ -1266,9 +1265,9 @@ module Aws::KinesisAnalyticsV2
     #       }
     #
     # @!attribute [rw] configuration_type
-    #   Describes whether the application uses Amazon Kinesis Data
-    #   Analytics' default checkpointing behavior. You must set this
-    #   property to `CUSTOM` in order to set the `CheckpointingEnabled`,
+    #   Describes whether the application uses Kinesis Data Analytics'
+    #   default checkpointing behavior. You must set this property to
+    #   `CUSTOM` in order to set the `CheckpointingEnabled`,
     #   `CheckpointInterval`, or `MinPauseBetweenCheckpoints` parameters.
     #
     #   <note markdown="1"> If this value is set to `DEFAULT`, the application will use the
@@ -1285,7 +1284,7 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] checkpointing_enabled
-    #   Describes whether checkpointing is enabled for a Java-based Kinesis
+    #   Describes whether checkpointing is enabled for a Flink-based Kinesis
     #   Data Analytics application.
     #
     #   <note markdown="1"> If `CheckpointConfiguration.ConfigurationType` is `DEFAULT`, the
@@ -1324,8 +1323,8 @@ module Aws::KinesisAnalyticsV2
     #
     #
     #
-    #   [1]: https://ci.apache.org/projects/flink/flink-docs-stable/ops/state/large_state_tuning.html#tuning-checkpointing
-    #   [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.6/
+    #   [1]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/state/large_state_tuning.html#tuning-checkpointing
+    #   [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CheckpointConfiguration AWS API Documentation
@@ -1339,8 +1338,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes checkpointing parameters for a Java-based Amazon Kinesis
-    # Data Analytics application.
+    # Describes checkpointing parameters for a Flink-based Kinesis Data
+    # Analytics application.
     #
     # @!attribute [rw] configuration_type
     #   Describes whether the application uses the default checkpointing
@@ -1360,7 +1359,7 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] checkpointing_enabled
-    #   Describes whether checkpointing is enabled for a Java-based Kinesis
+    #   Describes whether checkpointing is enabled for a Flink-based Kinesis
     #   Data Analytics application.
     #
     #   <note markdown="1"> If `CheckpointConfiguration.ConfigurationType` is `DEFAULT`, the
@@ -1405,8 +1404,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes updates to the checkpointing parameters for a Java-based
-    # Amazon Kinesis Data Analytics application.
+    # Describes updates to the checkpointing parameters for a Flink-based
+    # Kinesis Data Analytics application.
     #
     # @note When making an API call, you may pass CheckpointConfigurationUpdate
     #   data as a hash:
@@ -1566,7 +1565,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Specifies either the application code, or the location of the
-    # application code, for a Java-based Amazon Kinesis Data Analytics
+    # application code, for a Flink-based Kinesis Data Analytics
     # application.
     #
     # @note When making an API call, you may pass CodeContent
@@ -1583,12 +1582,12 @@ module Aws::KinesisAnalyticsV2
     #       }
     #
     # @!attribute [rw] text_content
-    #   The text-format code for a Java-based Kinesis Data Analytics
+    #   The text-format code for a Flink-based Kinesis Data Analytics
     #   application.
     #   @return [String]
     #
     # @!attribute [rw] zip_file_content
-    #   The zip-format code for a Java-based Kinesis Data Analytics
+    #   The zip-format code for a Flink-based Kinesis Data Analytics
     #   application.
     #   @return [String]
     #
@@ -1607,7 +1606,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes details about the application code for a Java-based Kinesis
+    # Describes details about the application code for a Flink-based Kinesis
     # Data Analytics application.
     #
     # @!attribute [rw] text_content
@@ -1639,8 +1638,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes an update to the code of a Java-based Kinesis Data Analytics
-    # application.
+    # Describes an update to the code of a Flink-based Kinesis Data
+    # Analytics application.
     #
     # @note When making an API call, you may pass CodeContentUpdate
     #   data as a hash:
@@ -1706,13 +1705,58 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateApplicationPresignedUrlRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_name: "ApplicationName", # required
+    #         url_type: "FLINK_DASHBOARD_URL", # required, accepts FLINK_DASHBOARD_URL
+    #         session_expiration_duration_in_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] application_name
+    #   The name of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] url_type
+    #   The type of the extension for which to create and return a URL.
+    #   Currently, the only valid extension URL type is
+    #   `FLINK_DASHBOARD_URL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_expiration_duration_in_seconds
+    #   The duration in seconds for which the returned URL will be valid.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplicationPresignedUrlRequest AWS API Documentation
+    #
+    class CreateApplicationPresignedUrlRequest < Struct.new(
+      :application_name,
+      :url_type,
+      :session_expiration_duration_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorized_url
+    #   The URL of the extension.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CreateApplicationPresignedUrlResponse AWS API Documentation
+    #
+    class CreateApplicationPresignedUrlResponse < Struct.new(
+      :authorized_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateApplicationRequest
     #   data as a hash:
     #
     #       {
     #         application_name: "ApplicationName", # required
     #         application_description: "ApplicationDescription",
-    #         runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8
+    #         runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11
     #         service_execution_role: "RoleARN", # required
     #         application_configuration: {
     #           sql_application_configuration: {
@@ -1879,8 +1923,8 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] runtime_environment
-    #   The runtime environment for the application (`SQL-1.0` or
-    #   `FLINK-1_6`).
+    #   The runtime environment for the application (`SQL-1.0`, `FLINK-1_6`,
+    #   or `FLINK-1_8`).
     #   @return [String]
     #
     # @!attribute [rw] service_execution_role
@@ -2384,7 +2428,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Describes the data format when records are written to the destination
-    # in an SQL-based Amazon Kinesis Data Analytics application.
+    # in a SQL-based Kinesis Data Analytics application.
     #
     # @note When making an API call, you may pass DestinationSchema
     #   data as a hash:
@@ -2492,8 +2536,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes execution properties for a Java-based Kinesis Data Analytics
-    # application.
+    # Describes execution properties for a Flink-based Kinesis Data
+    # Analytics application.
     #
     # @note When making an API call, you may pass EnvironmentProperties
     #   data as a hash:
@@ -2521,8 +2565,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes the execution properties for a Java-based Amazon Kinesis
-    # Data Analytics application.
+    # Describes the execution properties for a Flink-based Kinesis Data
+    # Analytics application.
     #
     # @!attribute [rw] property_group_descriptions
     #   Describes the execution property groups.
@@ -2536,8 +2580,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes updates to the execution property groups for a Java-based
-    # Amazon Kinesis Data Analytics application.
+    # Describes updates to the execution property groups for a Flink-based
+    # Kinesis Data Analytics application.
     #
     # @note When making an API call, you may pass EnvironmentPropertyUpdates
     #   data as a hash:
@@ -2565,8 +2609,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes configuration parameters for a Java-based Amazon Kinesis
-    # Data Analytics application.
+    # Describes configuration parameters for a Flink-based Kinesis Data
+    # Analytics application.
     #
     # @note When making an API call, you may pass FlinkApplicationConfiguration
     #   data as a hash:
@@ -2599,8 +2643,8 @@ module Aws::KinesisAnalyticsV2
     #
     #
     #
-    #   [1]: https://ci.apache.org/projects/flink/flink-docs-release-1.6/concepts/programming-model.html#checkpoints-for-fault-tolerance
-    #   [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.6/
+    #   [1]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/concepts/programming-model.html#checkpoints-for-fault-tolerance
+    #   [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/
     #   @return [Types::CheckpointConfiguration]
     #
     # @!attribute [rw] monitoring_configuration
@@ -2623,8 +2667,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes configuration parameters for a Java-based Amazon Kinesis
-    # Data Analytics application.
+    # Describes configuration parameters for a Flink-based Kinesis Data
+    # Analytics application.
     #
     # @!attribute [rw] checkpoint_configuration_description
     #   Describes an application's checkpointing configuration.
@@ -2651,8 +2695,8 @@ module Aws::KinesisAnalyticsV2
     #
     #
     #
-    #   [1]: https://ci.apache.org/projects/flink/flink-docs-stable/internals/job_scheduling.html
-    #   [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.6/
+    #   [1]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/internals/job_scheduling.html
+    #   [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/FlinkApplicationConfigurationDescription AWS API Documentation
@@ -2666,8 +2710,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes updates to the configuration parameters for a Java-based
-    # Amazon Kinesis Data Analytics application.
+    # Describes updates to the configuration parameters for a Flink-based
+    # Kinesis Data Analytics application.
     #
     # @note When making an API call, you may pass FlinkApplicationConfigurationUpdate
     #   data as a hash:
@@ -2718,8 +2762,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes the starting parameters for an Apache Flink-based Kinesis
-    # Data Analytics application.
+    # Describes the starting parameters for a Flink-based Kinesis Data
+    # Analytics application.
     #
     # @note When making an API call, you may pass FlinkRunConfiguration
     #   data as a hash:
@@ -2729,13 +2773,19 @@ module Aws::KinesisAnalyticsV2
     #       }
     #
     # @!attribute [rw] allow_non_restored_state
-    #   When restoring from a savepoint, specifies whether the runtime is
+    #   When restoring from a snapshot, specifies whether the runtime is
     #   allowed to skip a state that cannot be mapped to the new program.
-    #   This will happen if the program is updated between savepoints to
-    #   remove stateful parameters, and state data in the savepoint no
-    #   longer corresponds to valid application data. For more information,
-    #   see [ Allowing Non-Restored State][1] in the [Apache Flink
+    #   This will happen if the program is updated between snapshots to
+    #   remove stateful parameters, and state data in the snapshot no longer
+    #   corresponds to valid application data. For more information, see [
+    #   Allowing Non-Restored State][1] in the [Apache Flink
     #   documentation][2].
+    #
+    #   <note markdown="1"> This value defaults to `false`. If you update your application
+    #   without specifying this parameter, `AllowNonRestoredState` will be
+    #   set to `false`, even if it was previously set to `true`.
+    #
+    #    </note>
     #
     #
     #
@@ -2751,10 +2801,10 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # When you configure the application input for an SQL-based Amazon
-    # Kinesis Data Analytics application, you specify the streaming source,
-    # the in-application stream name that is created, and the mapping
-    # between the two.
+    # When you configure the application input for a SQL-based Kinesis Data
+    # Analytics application, you specify the streaming source, the
+    # in-application stream name that is created, and the mapping between
+    # the two.
     #
     # @note When making an API call, you may pass Input
     #   data as a hash:
@@ -2850,8 +2900,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes the application input configuration for an SQL-based Amazon
-    # Kinesis Data Analytics application.
+    # Describes the application input configuration for a SQL-based Kinesis
+    # Data Analytics application.
     #
     # @!attribute [rw] input_id
     #   The input ID that is associated with the application input. This is
@@ -2916,8 +2966,8 @@ module Aws::KinesisAnalyticsV2
     end
 
     # An object that contains the Amazon Resource Name (ARN) of the AWS
-    # Lambda function that is used to preprocess records in the stream in an
-    # SQL-based Amazon Kinesis Data Analytics application.
+    # Lambda function that is used to preprocess records in the stream in a
+    # SQL-based Kinesis Data Analytics application.
     #
     # @note When making an API call, you may pass InputLambdaProcessor
     #   data as a hash:
@@ -2933,9 +2983,13 @@ module Aws::KinesisAnalyticsV2
     #   <note markdown="1"> To specify an earlier version of the Lambda function than the
     #   latest, include the Lambda function version in the Lambda function
     #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
-    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #   Lambda][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/InputLambdaProcessor AWS API Documentation
@@ -2946,9 +3000,9 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, an object
-    # that contains the Amazon Resource Name (ARN) of the AWS Lambda
-    # function that is used to preprocess records in the stream.
+    # For a SQL-based Kinesis Data Analytics application, an object that
+    # contains the Amazon Resource Name (ARN) of the AWS Lambda function
+    # that is used to preprocess records in the stream.
     #
     # @!attribute [rw] resource_arn
     #   The ARN of the AWS Lambda function that is used to preprocess the
@@ -2957,9 +3011,13 @@ module Aws::KinesisAnalyticsV2
     #   <note markdown="1"> To specify an earlier version of the Lambda function than the
     #   latest, include the Lambda function version in the Lambda function
     #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
-    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #   Lambda][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -2982,8 +3040,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, represents
-    # an update to the InputLambdaProcessor that is used to preprocess the
+    # For a SQL-based Kinesis Data Analytics application, represents an
+    # update to the InputLambdaProcessor that is used to preprocess the
     # records in the stream.
     #
     # @note When making an API call, you may pass InputLambdaProcessorUpdate
@@ -3000,9 +3058,13 @@ module Aws::KinesisAnalyticsV2
     #   <note markdown="1"> To specify an earlier version of the Lambda function than the
     #   latest, include the Lambda function version in the Lambda function
     #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
-    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #   Lambda][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/InputLambdaProcessorUpdate AWS API Documentation
@@ -3013,8 +3075,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, describes
-    # the number of in-application streams to create for a given streaming
+    # For a SQL-based Kinesis Data Analytics application, describes the
+    # number of in-application streams to create for a given streaming
     # source.
     #
     # @note When making an API call, you may pass InputParallelism
@@ -3036,8 +3098,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, provides
-    # updates to the parallelism count.
+    # For a SQL-based Kinesis Data Analytics application, provides updates
+    # to the parallelism count.
     #
     # @note When making an API call, you may pass InputParallelismUpdate
     #   data as a hash:
@@ -3059,14 +3121,14 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, describes
-    # a processor that is used to preprocess the records in the stream
-    # before being processed by your application code. Currently, the only
-    # input processor available is [AWS Lambda][1].
+    # For a SQL-based Kinesis Data Analytics application, describes a
+    # processor that is used to preprocess the records in the stream before
+    # being processed by your application code. Currently, the only input
+    # processor available is [AWS Lambda][1].
     #
     #
     #
-    # [1]: https://aws.amazon.com/documentation/lambda/
+    # [1]: https://docs.aws.amazon.com/lambda/
     #
     # @note When making an API call, you may pass InputProcessingConfiguration
     #   data as a hash:
@@ -3090,13 +3152,13 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, provides
-    # the configuration information about an input processor. Currently, the
+    # For a SQL-based Kinesis Data Analytics application, provides the
+    # configuration information about an input processor. Currently, the
     # only input processor available is [AWS Lambda][1].
     #
     #
     #
-    # [1]: https://aws.amazon.com/documentation/lambda/
+    # [1]: https://docs.aws.amazon.com/lambda/
     #
     # @!attribute [rw] input_lambda_processor_description
     #   Provides configuration information about the associated
@@ -3111,8 +3173,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, describes
-    # updates to an InputProcessingConfiguration.
+    # For a SQL-based Kinesis Data Analytics application, describes updates
+    # to an InputProcessingConfiguration.
     #
     # @note When making an API call, you may pass InputProcessingConfigurationUpdate
     #   data as a hash:
@@ -3135,7 +3197,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes updates for an SQL-based Amazon Kinesis Data Analytics
+    # Describes updates for an SQL-based Kinesis Data Analytics
     # application's input schema.
     #
     # @note When making an API call, you may pass InputSchemaUpdate
@@ -3223,9 +3285,9 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, describes
-    # updates to a specific input configuration (identified by the `InputId`
-    # of an application).
+    # For a SQL-based Kinesis Data Analytics application, describes updates
+    # to a specific input configuration (identified by the `InputId` of an
+    # application).
     #
     # @note When making an API call, you may pass InputUpdate
     #   data as a hash:
@@ -3359,7 +3421,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, provides
+    # For a SQL-based Kinesis Data Analytics application, provides
     # additional mapping information when JSON is the record format on the
     # streaming source.
     #
@@ -3382,8 +3444,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, identifies
-    # a Kinesis Data Firehose delivery stream as the streaming source. You
+    # For a SQL-based Kinesis Data Analytics application, identifies a
+    # Kinesis Data Firehose delivery stream as the streaming source. You
     # provide the delivery stream's Amazon Resource Name (ARN).
     #
     # @note When making an API call, you may pass KinesisFirehoseInput
@@ -3433,9 +3495,9 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, when
-    # updating application input configuration, provides information about a
-    # Kinesis Data Firehose delivery stream as the streaming source.
+    # For a SQL-based Kinesis Data Analytics application, when updating
+    # application input configuration, provides information about a Kinesis
+    # Data Firehose delivery stream as the streaming source.
     #
     # @note When making an API call, you may pass KinesisFirehoseInputUpdate
     #   data as a hash:
@@ -3456,10 +3518,10 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, when
-    # configuring application output, identifies a Kinesis Data Firehose
-    # delivery stream as the destination. You provide the stream Amazon
-    # Resource Name (ARN) of the delivery stream.
+    # For a SQL-based Kinesis Data Analytics application, when configuring
+    # application output, identifies a Kinesis Data Firehose delivery stream
+    # as the destination. You provide the stream Amazon Resource Name (ARN)
+    # of the delivery stream.
     #
     # @note When making an API call, you may pass KinesisFirehoseOutput
     #   data as a hash:
@@ -3480,7 +3542,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application's output,
+    # For a SQL-based Kinesis Data Analytics application's output,
     # describes the Kinesis Data Firehose delivery stream that is configured
     # as its destination.
     #
@@ -3508,10 +3570,10 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, when
-    # updating an output configuration using the UpdateApplication
-    # operation, provides information about a Kinesis Data Firehose delivery
-    # stream that is configured as the destination.
+    # For a SQL-based Kinesis Data Analytics application, when updating an
+    # output configuration using the UpdateApplication operation, provides
+    # information about a Kinesis Data Firehose delivery stream that is
+    # configured as the destination.
     #
     # @note When making an API call, you may pass KinesisFirehoseOutputUpdate
     #   data as a hash:
@@ -3532,8 +3594,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Identifies an Amazon Kinesis data stream as the streaming source. You
-    # provide the stream's Amazon Resource Name (ARN).
+    # Identifies a Kinesis data stream as the streaming source. You provide
+    # the stream's Amazon Resource Name (ARN).
     #
     # @note When making an API call, you may pass KinesisStreamsInput
     #   data as a hash:
@@ -3554,9 +3616,9 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, describes
-    # the Kinesis data stream that is configured as the streaming source in
-    # the application input configuration.
+    # For a SQL-based Kinesis Data Analytics application, describes the
+    # Kinesis data stream that is configured as the streaming source in the
+    # application input configuration.
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Kinesis data stream.
@@ -3582,9 +3644,9 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # When you update the input configuration for an SQL-based Amazon
-    # Kinesis Data Analytics application, provides information about an
-    # Amazon Kinesis stream as the streaming source.
+    # When you update the input configuration for a SQL-based Kinesis Data
+    # Analytics application, provides information about a Kinesis stream as
+    # the streaming source.
     #
     # @note When making an API call, you may pass KinesisStreamsInputUpdate
     #   data as a hash:
@@ -3606,9 +3668,9 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # When you configure an SQL-based Amazon Kinesis Data Analytics
-    # application's output, identifies a Kinesis data stream as the
-    # destination. You provide the stream Amazon Resource Name (ARN).
+    # When you configure a SQL-based Kinesis Data Analytics application's
+    # output, identifies a Kinesis data stream as the destination. You
+    # provide the stream Amazon Resource Name (ARN).
     #
     # @note When making an API call, you may pass KinesisStreamsOutput
     #   data as a hash:
@@ -3629,7 +3691,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application's output,
+    # For an SQL-based Kinesis Data Analytics application's output,
     # describes the Kinesis data stream that is configured as its
     # destination.
     #
@@ -3657,10 +3719,10 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # When you update an SQL-based Amazon Kinesis Data Analytics
-    # application's output configuration using the UpdateApplication
-    # operation, provides information about a Kinesis data stream that is
-    # configured as the destination.
+    # When you update a SQL-based Kinesis Data Analytics application's
+    # output configuration using the UpdateApplication operation, provides
+    # information about a Kinesis data stream that is configured as the
+    # destination.
     #
     # @note When making an API call, you may pass KinesisStreamsOutputUpdate
     #   data as a hash:
@@ -3682,10 +3744,10 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # When you configure an SQL-based Amazon Kinesis Data Analytics
-    # application's output, identifies an AWS Lambda function as the
-    # destination. You provide the function Amazon Resource Name (ARN) of
-    # the Lambda function.
+    # When you configure a SQL-based Kinesis Data Analytics application's
+    # output, identifies an AWS Lambda function as the destination. You
+    # provide the function Amazon Resource Name (ARN) of the Lambda
+    # function.
     #
     # @note When making an API call, you may pass LambdaOutput
     #   data as a hash:
@@ -3701,9 +3763,13 @@ module Aws::KinesisAnalyticsV2
     #   <note markdown="1"> To specify an earlier version of the Lambda function than the
     #   latest, include the Lambda function version in the Lambda function
     #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
-    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #   Lambda][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/LambdaOutput AWS API Documentation
@@ -3714,7 +3780,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application output,
+    # For a SQL-based Kinesis Data Analytics application's output,
     # describes the AWS Lambda function that is configured as its
     # destination.
     #
@@ -3742,10 +3808,10 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # When you update an SQL-based Amazon Kinesis Data Analytics
-    # application's output configuration using the UpdateApplication
-    # operation, provides information about an AWS Lambda function that is
-    # configured as the destination.
+    # When you update an SQL-based Kinesis Data Analytics application's
+    # output configuration using the UpdateApplication operation, provides
+    # information about an AWS Lambda function that is configured as the
+    # destination.
     #
     # @note When making an API call, you may pass LambdaOutputUpdate
     #   data as a hash:
@@ -3761,9 +3827,13 @@ module Aws::KinesisAnalyticsV2
     #   <note markdown="1"> To specify an earlier version of the Lambda function than the
     #   latest, include the Lambda function version in the Lambda function
     #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
-    #   Lambda](/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+    #   Lambda][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/LambdaOutputUpdate AWS API Documentation
@@ -3928,11 +3998,11 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # When you configure an SQL-based Amazon Kinesis Data Analytics
-    # application's input at the time of creating or updating an
-    # application, provides additional mapping information specific to the
-    # record format (such as JSON, CSV, or record fields delimited by some
-    # delimiter) on the streaming source.
+    # When you configure a SQL-based Kinesis Data Analytics application's
+    # input at the time of creating or updating an application, provides
+    # additional mapping information specific to the record format (such as
+    # JSON, CSV, or record fields delimited by some delimiter) on the
+    # streaming source.
     #
     # @note When making an API call, you may pass MappingParameters
     #   data as a hash:
@@ -3967,7 +4037,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Describes configuration parameters for Amazon CloudWatch logging for a
-    # Java-based Kinesis Data Analytics application. For more information
+    # Flink-based Kinesis Data Analytics application. For more information
     # about CloudWatch logging, see [Monitoring][1].
     #
     #
@@ -3992,6 +4062,8 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] metrics_level
     #   Describes the granularity of the CloudWatch Logs for an application.
+    #   The `Parallelism` level is not recommended for applications with a
+    #   Parallelism over 64 due to excessive costs.
     #   @return [String]
     #
     # @!attribute [rw] log_level
@@ -4009,7 +4081,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Describes configuration parameters for CloudWatch logging for a
-    # Java-based Kinesis Data Analytics application.
+    # Flink-based Kinesis Data Analytics application.
     #
     # @!attribute [rw] configuration_type
     #   Describes whether to use the default CloudWatch logging
@@ -4035,7 +4107,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Describes updates to configuration parameters for Amazon CloudWatch
-    # logging for a Java-based Kinesis Data Analytics application.
+    # logging for a Flink-based Kinesis Data Analytics application.
     #
     # @note When making an API call, you may pass MonitoringConfigurationUpdate
     #   data as a hash:
@@ -4055,7 +4127,8 @@ module Aws::KinesisAnalyticsV2
     #
     # @!attribute [rw] metrics_level_update
     #   Describes updates to the granularity of the CloudWatch Logs for an
-    #   application.
+    #   application. The `Parallelism` level is not recommended for
+    #   applications with a Parallelism over 64 due to excessive costs.
     #   @return [String]
     #
     # @!attribute [rw] log_level_update
@@ -4073,9 +4146,9 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes an SQL-based Amazon Kinesis Data Analytics application's
-    # output configuration, in which you identify an in-application stream
-    # and a destination where you want the in-application stream data to be
+    # Describes a SQL-based Kinesis Data Analytics application's output
+    # configuration, in which you identify an in-application stream and a
+    # destination where you want the in-application stream data to be
     # written. The destination can be a Kinesis data stream or a Kinesis
     # Data Firehose delivery stream.
     #
@@ -4103,11 +4176,11 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] kinesis_streams_output
-    #   Identifies an Amazon Kinesis data stream as the destination.
+    #   Identifies a Kinesis data stream as the destination.
     #   @return [Types::KinesisStreamsOutput]
     #
     # @!attribute [rw] kinesis_firehose_output
-    #   Identifies an Amazon Kinesis Data Firehose delivery stream as the
+    #   Identifies a Kinesis Data Firehose delivery stream as the
     #   destination.
     #   @return [Types::KinesisFirehoseOutput]
     #
@@ -4132,11 +4205,11 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, describes
-    # the application output configuration, which includes the
-    # in-application stream name and the destination where the stream data
-    # is written. The destination can be a Kinesis data stream or a Kinesis
-    # Data Firehose delivery stream.
+    # For a SQL-based Kinesis Data Analytics application, describes the
+    # application output configuration, which includes the in-application
+    # stream name and the destination where the stream data is written. The
+    # destination can be a Kinesis data stream or a Kinesis Data Firehose
+    # delivery stream.
     #
     # @!attribute [rw] output_id
     #   A unique identifier for the output configuration.
@@ -4178,8 +4251,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, describes
-    # updates to the output configuration identified by the `OutputId`.
+    # For a SQL-based Kinesis Data Analytics application, describes updates
+    # to the output configuration identified by the `OutputId`.
     #
     # @note When making an API call, you may pass OutputUpdate
     #   data as a hash:
@@ -4243,15 +4316,15 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes parameters for how a Java-based Amazon Kinesis Data
-    # Analytics application executes multiple tasks simultaneously. For more
-    # information about parallelism, see [Parallel Execution][1] in the
+    # Describes parameters for how a Flink-based Kinesis Data Analytics
+    # application application executes multiple tasks simultaneously. For
+    # more information about parallelism, see [Parallel Execution][1] in the
     # [Apache Flink Documentation][2].
     #
     #
     #
-    # [1]: https://ci.apache.org/projects/flink/flink-docs-stable/dev/parallel.html
-    # [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.6/
+    # [1]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/parallel.html
+    # [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/
     #
     # @note When making an API call, you may pass ParallelismConfiguration
     #   data as a hash:
@@ -4272,7 +4345,7 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] parallelism
-    #   Describes the initial number of parallel tasks that a Java-based
+    #   Describes the initial number of parallel tasks that a Flink-based
     #   Kinesis Data Analytics application can perform. If
     #   `AutoScalingEnabled` is set to True, Kinesis Data Analytics
     #   increases the `CurrentParallelism` value in response to application
@@ -4286,7 +4359,7 @@ module Aws::KinesisAnalyticsV2
     #   @return [Integer]
     #
     # @!attribute [rw] parallelism_per_kpu
-    #   Describes the number of parallel tasks that a Java-based Kinesis
+    #   Describes the number of parallel tasks that a Flink-based Kinesis
     #   Data Analytics application can perform per Kinesis Processing Unit
     #   (KPU) used by the application. For more information about KPUs, see
     #   [Amazon Kinesis Data Analytics Pricing][1].
@@ -4313,7 +4386,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes parameters for how a Java-based Kinesis Data Analytics
+    # Describes parameters for how a Flink-based Kinesis Data Analytics
     # application executes multiple tasks simultaneously.
     #
     # @!attribute [rw] configuration_type
@@ -4322,7 +4395,7 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] parallelism
-    #   Describes the initial number of parallel tasks that a Java-based
+    #   Describes the initial number of parallel tasks that a Flink-based
     #   Kinesis Data Analytics application can perform. If
     #   `AutoScalingEnabled` is set to True, then Kinesis Data Analytics can
     #   increase the `CurrentParallelism` value in response to application
@@ -4335,13 +4408,13 @@ module Aws::KinesisAnalyticsV2
     #   @return [Integer]
     #
     # @!attribute [rw] parallelism_per_kpu
-    #   Describes the number of parallel tasks that a Java-based Kinesis
+    #   Describes the number of parallel tasks that a Flink-based Kinesis
     #   Data Analytics application can perform per Kinesis Processing Unit
     #   (KPU) used by the application.
     #   @return [Integer]
     #
     # @!attribute [rw] current_parallelism
-    #   Describes the current number of parallel tasks that a Java-based
+    #   Describes the current number of parallel tasks that a Flink-based
     #   Kinesis Data Analytics application can perform. If
     #   `AutoScalingEnabled` is set to True, Kinesis Data Analytics can
     #   increase this value in response to application load. The service can
@@ -4371,7 +4444,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes updates to parameters for how a Java-based Kinesis Data
+    # Describes updates to parameters for how a Flink-based Kinesis Data
     # Analytics application executes multiple tasks simultaneously.
     #
     # @note When making an API call, you may pass ParallelismConfigurationUpdate
@@ -4427,7 +4500,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Property key-value pairs passed into a Java-based Kinesis Data
+    # Property key-value pairs passed into a Flink-based Kinesis Data
     # Analytics application.
     #
     # @note When making an API call, you may pass PropertyGroup
@@ -4459,8 +4532,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, describes
-    # the mapping of each data element in the streaming source to the
+    # For a SQL-based Kinesis Data Analytics application, describes the
+    # mapping of each data element in the streaming source to the
     # corresponding column in the in-application stream.
     #
     # Also used to describe the format of the reference data source.
@@ -4499,9 +4572,9 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, describes
-    # the record format and relevant mapping information that should be
-    # applied to schematize the records on the stream.
+    # For a SQL-based Kinesis Data Analytics application, describes the
+    # record format and relevant mapping information that should be applied
+    # to schematize the records on the stream.
     #
     # @note When making an API call, you may pass RecordFormat
     #   data as a hash:
@@ -4539,10 +4612,10 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, describes
-    # the reference data source by providing the source information (Amazon
-    # S3 bucket name and object key name), the resulting in-application
-    # table name that is created, and the necessary schema to map the data
+    # For a SQL-based Kinesis Data Analytics application, describes the
+    # reference data source by providing the source information (Amazon S3
+    # bucket name and object key name), the resulting in-application table
+    # name that is created, and the necessary schema to map the data
     # elements in the Amazon S3 object to the in-application table.
     #
     # @note When making an API call, you may pass ReferenceDataSource
@@ -4605,8 +4678,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, describes
-    # the reference data source configured for an application.
+    # For a SQL-based Kinesis Data Analytics application, describes the
+    # reference data source configured for an application.
     #
     # @!attribute [rw] reference_id
     #   The ID of the reference data source. This is the ID that Kinesis
@@ -4643,10 +4716,10 @@ module Aws::KinesisAnalyticsV2
     end
 
     # When you update a reference data source configuration for a SQL-based
-    # Amazon Kinesis Data Analytics application, this object provides all
-    # the updated values (such as the source bucket name and object key
-    # name), the in-application table name that is created, and updated
-    # mapping information that maps the data in the Amazon S3 object to the
+    # Kinesis Data Analytics application, this object provides all the
+    # updated values (such as the source bucket name and object key name),
+    # the in-application table name that is created, and updated mapping
+    # information that maps the data in the Amazon S3 object to the
     # in-application reference table that is created.
     #
     # @note When making an API call, you may pass ReferenceDataSourceUpdate
@@ -4742,9 +4815,9 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Discovery failed to get a record from the streaming source because of
-    # the Amazon Kinesis Streams `ProvisionedThroughputExceededException`.
-    # For more information, see [GetRecords][1] in the Amazon Kinesis
-    # Streams API Reference.
+    # the Kinesis Streams `ProvisionedThroughputExceededException`. For more
+    # information, see [GetRecords][1] in the Amazon Kinesis Streams API
+    # Reference.
     #
     #
     #
@@ -4761,7 +4834,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes the starting parameters for an Amazon Kinesis Data Analytics
+    # Describes the starting parameters for an Kinesis Data Analytics
     # application.
     #
     # @note When making an API call, you may pass RunConfiguration
@@ -4786,13 +4859,13 @@ module Aws::KinesisAnalyticsV2
     #       }
     #
     # @!attribute [rw] flink_run_configuration
-    #   Describes the starting parameters for an Apache Flink-based Kinesis
-    #   Data Analytics application.
+    #   Describes the starting parameters for a Flink-based Kinesis Data
+    #   Analytics application.
     #   @return [Types::FlinkRunConfiguration]
     #
     # @!attribute [rw] sql_run_configurations
-    #   Describes the starting parameters for an SQL-based Kinesis Data
-    #   Analytics application.
+    #   Describes the starting parameters for a SQL-based Kinesis Data
+    #   Analytics application application.
     #   @return [Array<Types::SqlRunConfiguration>]
     #
     # @!attribute [rw] application_restore_configuration
@@ -4817,8 +4890,8 @@ module Aws::KinesisAnalyticsV2
     #   @return [Types::ApplicationRestoreConfiguration]
     #
     # @!attribute [rw] flink_run_configuration_description
-    #   Describes the starting parameters for an Apache Flink-based Kinesis
-    #   Data Analytics application.
+    #   Describes the starting parameters for a Flink-based Kinesis Data
+    #   Analytics application.
     #   @return [Types::FlinkRunConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/RunConfigurationDescription AWS API Documentation
@@ -4847,8 +4920,8 @@ module Aws::KinesisAnalyticsV2
     #       }
     #
     # @!attribute [rw] flink_run_configuration
-    #   Describes the starting parameters for an Apache Flink-based Kinesis
-    #   Data Analytics application.
+    #   Describes the starting parameters for a Flink-based Kinesis Data
+    #   Analytics application.
     #   @return [Types::FlinkRunConfiguration]
     #
     # @!attribute [rw] application_restore_configuration
@@ -4865,7 +4938,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes the location of a Java-based Amazon Kinesis Data Analytics
+    # Describes the location of a Flink-based Kinesis Data Analytics
     # application's code stored in an S3 bucket.
     #
     # @!attribute [rw] bucket_arn
@@ -4891,7 +4964,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, provides a
+    # For a SQL-based Kinesis Data Analytics application, provides a
     # description of an Amazon S3 data source, including the Amazon Resource
     # Name (ARN) of the S3 bucket and the name of the Amazon S3 object that
     # contains the data.
@@ -4921,7 +4994,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For a Java-based Amazon Kinesis Data Analytics application, provides a
+    # For a Flink-based Kinesis Data Analytics application, provides a
     # description of an Amazon S3 object, including the Amazon Resource Name
     # (ARN) of the S3 bucket, the name of the Amazon S3 object that contains
     # the data, and the version number of the Amazon S3 object that contains
@@ -4960,7 +5033,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Describes an update for the Amazon S3 code content location for a
-    # Java-based Amazon Kinesis Data Analytics application.
+    # Flink-based Kinesis Data Analytics application.
     #
     # @note When making an API call, you may pass S3ContentLocationUpdate
     #   data as a hash:
@@ -4994,8 +5067,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, identifies
-    # the Amazon S3 bucket and object that contains the reference data.
+    # For a SQL-based Kinesis Data Analytics application, identifies the
+    # Amazon S3 bucket and object that contains the reference data.
     #
     # A Kinesis Data Analytics application loads reference data only once.
     # If the data changes, you call the UpdateApplication operation to
@@ -5026,8 +5099,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, provides
-    # the bucket name and object key name that stores the reference data.
+    # For a SQL-based Kinesis Data Analytics application, provides the
+    # bucket name and object key name that stores the reference data.
     #
     # @!attribute [rw] bucket_arn
     #   The Amazon Resource Name (ARN) of the S3 bucket.
@@ -5059,8 +5132,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, describes
-    # the Amazon S3 bucket name and object key name for an in-application
+    # For a SQL-based Kinesis Data Analytics application, describes the
+    # Amazon S3 bucket name and object key name for an in-application
     # reference table.
     #
     # @note When making an API call, you may pass S3ReferenceDataSourceUpdate
@@ -5130,10 +5203,9 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # For an SQL-based Amazon Kinesis Data Analytics application, describes
-    # the format of the data in the streaming source, and how each data
-    # element maps to corresponding columns created in the in-application
-    # stream.
+    # For a SQL-based Kinesis Data Analytics application, describes the
+    # format of the data in the streaming source, and how each data element
+    # maps to corresponding columns created in the in-application stream.
     #
     # @note When making an API call, you may pass SourceSchema
     #   data as a hash:
@@ -5184,7 +5256,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes the inputs, outputs, and reference data sources for an
+    # Describes the inputs, outputs, and reference data sources for a
     # SQL-based Kinesis Data Analytics application.
     #
     # @note When making an API call, you may pass SqlApplicationConfiguration
@@ -5307,7 +5379,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes the inputs, outputs, and reference data sources for an
+    # Describes the inputs, outputs, and reference data sources for a
     # SQL-based Kinesis Data Analytics application.
     #
     # @!attribute [rw] input_descriptions
@@ -5336,7 +5408,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Describes updates to the input streams, destination streams, and
-    # reference data sources for an SQL-based Kinesis Data Analytics
+    # reference data sources for a SQL-based Kinesis Data Analytics
     # application.
     #
     # @note When making an API call, you may pass SqlApplicationConfigurationUpdate
@@ -5462,7 +5534,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Describes the starting parameters for an SQL-based Kinesis Data
+    # Describes the starting parameters for a SQL-based Kinesis Data
     # Analytics application.
     #
     # @note When making an API call, you may pass SqlRunConfiguration
@@ -5545,16 +5617,38 @@ module Aws::KinesisAnalyticsV2
     #
     #       {
     #         application_name: "ApplicationName", # required
+    #         force: false,
     #       }
     #
     # @!attribute [rw] application_name
     #   The name of the running application to stop.
     #   @return [String]
     #
+    # @!attribute [rw] force
+    #   Set to `true` to force the application to stop. If you set `Force`
+    #   to `true`, Kinesis Data Analytics stops the application without
+    #   taking a snapshot.
+    #
+    #   <note markdown="1"> Force-stopping your application may lead to data loss or
+    #   duplication. To prevent data loss or duplicate processing of data
+    #   during application restarts, we recommend you to take frequent
+    #   snapshots of your application.
+    #
+    #    </note>
+    #
+    #   You can only force stop a Flink-based Kinesis Data Analytics
+    #   application. You can't force stop a SQL-based Kinesis Data
+    #   Analytics application.
+    #
+    #   The application must be in the `STARTING`, `UPDATING`, `STOPPING`,
+    #   `AUTOSCALING`, or `RUNNING` status.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/StopApplicationRequest AWS API Documentation
     #
     class StopApplicationRequest < Struct.new(
-      :application_name)
+      :application_name,
+      :force)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5649,8 +5743,8 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # The data format is not valid. Amazon Kinesis Data Analytics cannot
-    # detect the schema for the given streaming source.
+    # The data format is not valid. Kinesis Data Analytics cannot detect the
+    # schema for the given streaming source.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -5697,8 +5791,8 @@ module Aws::KinesisAnalyticsV2
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the Kinesis Analytics application from which to remove
-    #   the tags.
+    #   The ARN of the Kinesis Data Analytics application from which to
+    #   remove the tags.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys

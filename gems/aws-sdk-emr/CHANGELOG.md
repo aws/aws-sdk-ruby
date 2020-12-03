@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-11-23)
+------------------
+
+* Feature - Add API support for EMR Studio, a new notebook-first IDE for data scientists and data engineers with single sign-on, Jupyter notebooks, automated infrastructure provisioning, and job diagnosis.
+
+1.39.0 (2020-10-01)
+------------------
+
+* Feature - Documentation updates for elasticmapreduce
+
+1.38.0 (2020-09-30)
+------------------
+
+* Feature - Amazon EMR customers can now use EC2 placement group to influence the placement of master nodes in a high-availability (HA) cluster across distinct underlying hardware to improve cluster availability.
+
+1.37.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.36.0 (2020-08-28)
 ------------------
 

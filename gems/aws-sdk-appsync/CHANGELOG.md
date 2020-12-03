@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-10-20)
+------------------
+
+* Feature - Documentation updates to AppSync to correct several typos.
+
+1.36.0 (2020-10-01)
+------------------
+
+* Feature - Exposes the wafWebAclArn field on GraphQL api records. The wafWebAclArn field contains the amazon resource name of a WAF Web ACL if the AWS AppSync API is associated with one.
+
+1.35.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.33.0 (2020-08-25)
 ------------------
 

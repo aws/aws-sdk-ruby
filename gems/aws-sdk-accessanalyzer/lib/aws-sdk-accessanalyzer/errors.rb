@@ -99,6 +99,10 @@ module Aws::AccessAnalyzer
       def retry_after_seconds
         @data[:retry_after_seconds]
       end
+
+      def retryable?
+        true
+      end
     end
 
     class ResourceNotFoundException < ServiceError
@@ -168,6 +172,14 @@ module Aws::AccessAnalyzer
       # @return [String]
       def retry_after_seconds
         @data[:retry_after_seconds]
+      end
+
+      def retryable?
+        true
+      end
+
+      def throttling?
+        true
       end
     end
 

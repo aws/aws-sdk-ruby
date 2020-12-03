@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -27,7 +28,7 @@ require_relative 'aws-sdk-licensemanager/customizations'
 # structure.
 #
 #     license_manager = Aws::LicenseManager::Client.new
-#     resp = license_manager.create_license_configuration(params)
+#     resp = license_manager.accept_grant(params)
 #
 # See {Client} for more information.
 #
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-licensemanager/customizations'
 # @!group service
 module Aws::LicenseManager
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.22.0'
 
 end

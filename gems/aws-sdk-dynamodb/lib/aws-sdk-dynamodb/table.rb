@@ -265,9 +265,9 @@ module Aws::DynamoDB
     #     * `KEYS_ONLY` - Only the index and primary keys are projected into
     #       the index.
     #
-    #     * `INCLUDE` - Only the specified table attributes are projected
-    #       into the index. The list of projected attributes is in
-    #       `NonKeyAttributes`.
+    #     * `INCLUDE` - In addition to the attributes described in
+    #       `KEYS_ONLY`, the secondary index will include other non-key
+    #       attributes that you specify.
     #
     #     * `ALL` - All of the table attributes are projected into the
     #       index.

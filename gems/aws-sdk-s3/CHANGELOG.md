@@ -1,6 +1,58 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2020-12-01)
+------------------
+
+* Feature - S3 adds support for multiple-destination replication, option to sync replica modifications;  S3 Bucket Keys to reduce cost of S3 SSE with AWS KMS
+
+1.85.0 (2020-11-20)
+------------------
+
+* Feature - Add new documentation regarding automatically generated Content-MD5 headers when using the SDK or CLI.
+
+1.84.1 (2020-11-10)
+------------------
+
+* Issue - Fix presigned urls for Outpost ARNs.
+
+1.84.0 (2020-11-09)
+------------------
+
+* Feature - S3 Intelligent-Tiering adds support for Archive and Deep Archive Access tiers; S3 Replication adds replication metrics and failure notifications, brings feature parity for delete marker replication
+
+1.83.2 (2020-11-06)
+------------------
+
+* Issue - Fix bug with clients not resolving the correct endpoint in `us-east-1` using access point ARNs.
+
+1.83.1 (2020-10-19)
+------------------
+
+* Issue - Fix `multipart_threshold` documentation.
+
+1.83.0 (2020-10-02)
+------------------
+
+* Feature - Amazon S3 Object Ownership is a new S3 feature that enables bucket owners to automatically assume ownership of objects that are uploaded to their buckets by other AWS Accounts.
+
+1.82.0 (2020-09-30)
+------------------
+
+* Feature - Amazon S3 on Outposts expands object storage to on-premises AWS Outposts environments, enabling you to store and retrieve objects using S3 APIs and features.
+
+* Feature - Support Outpost Access Point ARNs.
+
+1.81.1 (2020-09-25)
+------------------
+
+* Issue - Ignore `amz-sdk-request` header (used for standard and adaptive retries) in the pre-signer. (#2411)
+
+1.81.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.80.0 (2020-09-10)
 ------------------
 

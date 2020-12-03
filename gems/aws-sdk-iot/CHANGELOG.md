@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2020-11-23)
+------------------
+
+* Feature - This release enables users to identify different file types in the over-the-air update (OTA) functionality using fileType parameter for CreateOTAUpdate API
+
+1.62.0 (2020-11-12)
+------------------
+
+* Feature - This release adds a batchMode parameter to the IotEvents, IotAnalytics, and Firehose actions which allows customers to send an array of messages to the corresponding services
+
+1.61.0 (2020-11-04)
+------------------
+
+* Feature - Updated API documentation and added paginator for AWS Iot Registry ListThingPrincipals API.
+
+1.60.0 (2020-10-28)
+------------------
+
+* Feature - This release adds support for GG-Managed Job Namespace
+
+1.59.0 (2020-10-15)
+------------------
+
+* Feature - Add new variable, lastStatusChangeDate, to DescribeDomainConfiguration  API
+
+1.58.0 (2020-09-30)
+------------------
+
+* Feature - AWS IoT Rules Engine adds Timestream action. The Timestream rule action lets you stream time-series data from IoT sensors and applications to Amazon Timestream databases for time series analysis.
+
+1.57.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.56.0 (2020-08-25)
 ------------------
 

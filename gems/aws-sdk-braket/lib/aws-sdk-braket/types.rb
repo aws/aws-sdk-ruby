@@ -88,10 +88,13 @@ module Aws::Braket
     #         action: "JsonValue", # required
     #         client_token: "String64", # required
     #         device_arn: "DeviceArn", # required
-    #         device_parameters: "CreateQuantumTaskRequestdeviceParametersJsonValue",
-    #         output_s3_bucket: "CreateQuantumTaskRequestoutputS3BucketString", # required
-    #         output_s3_key_prefix: "CreateQuantumTaskRequestoutputS3KeyPrefixString", # required
+    #         device_parameters: "CreateQuantumTaskRequestDeviceParametersString",
+    #         output_s3_bucket: "CreateQuantumTaskRequestOutputS3BucketString", # required
+    #         output_s3_key_prefix: "CreateQuantumTaskRequestOutputS3KeyPrefixString", # required
     #         shots: 1, # required
+    #         tags: {
+    #           "String" => "String",
+    #         },
     #       }
     #
     # @!attribute [rw] action
@@ -126,6 +129,10 @@ module Aws::Braket
     #   The number of shots to use for the task.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   Tags to be added to the quantum task you're creating.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/CreateQuantumTaskRequest AWS API Documentation
     #
     class CreateQuantumTaskRequest < Struct.new(
@@ -135,7 +142,8 @@ module Aws::Braket
       :device_parameters,
       :output_s3_bucket,
       :output_s3_key_prefix,
-      :shots)
+      :shots,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -314,6 +322,10 @@ module Aws::Braket
     #   The status of the task.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags that belong to this task.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/GetQuantumTaskResponse AWS API Documentation
     #
     class GetQuantumTaskResponse < Struct.new(
@@ -326,13 +338,14 @@ module Aws::Braket
       :output_s3_directory,
       :quantum_task_arn,
       :shots,
-      :status)
+      :status,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The request processing has failed because of an unknown error,
-    # exception or failure.
+    # exception, or failure.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -341,6 +354,37 @@ module Aws::Braket
     #
     class InternalServiceException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Specify the `resourceArn` for the resource whose tags to display.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   Displays the key, value pairs of tags associated with this resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -379,6 +423,11 @@ module Aws::Braket
     #   The status of the task.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Displays the key, value pairs of tags associated with this quantum
+    #   task.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/QuantumTaskSummary AWS API Documentation
     #
     class QuantumTaskSummary < Struct.new(
@@ -389,7 +438,8 @@ module Aws::Braket
       :output_s3_directory,
       :quantum_task_arn,
       :shots,
-      :status)
+      :status,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -413,7 +463,7 @@ module Aws::Braket
     #   data as a hash:
     #
     #       {
-    #         name: "SearchDevicesFilternameString", # required
+    #         name: "SearchDevicesFilterNameString", # required
     #         values: ["String256"], # required
     #       }
     #
@@ -440,7 +490,7 @@ module Aws::Braket
     #       {
     #         filters: [ # required
     #           {
-    #             name: "SearchDevicesFilternameString", # required
+    #             name: "SearchDevicesFilterNameString", # required
     #             values: ["String256"], # required
     #           },
     #         ],
@@ -499,7 +549,7 @@ module Aws::Braket
     #
     #       {
     #         name: "String64", # required
-    #         operator: "BETWEEN", # required, accepts BETWEEN, EQUAL, GT, GTE, LT, LTE
+    #         operator: "LT", # required, accepts LT, LTE, EQUAL, GT, GTE, BETWEEN
     #         values: ["String256"], # required
     #       }
     #
@@ -532,7 +582,7 @@ module Aws::Braket
     #         filters: [ # required
     #           {
     #             name: "String64", # required
-    #             operator: "BETWEEN", # required, accepts BETWEEN, EQUAL, GT, GTE, LT, LTE
+    #             operator: "LT", # required, accepts LT, LTE, EQUAL, GT, GTE, BETWEEN
     #             values: ["String256"], # required
     #           },
     #         ],
@@ -584,7 +634,7 @@ module Aws::Braket
       include Aws::Structure
     end
 
-    # The request failed because a service quota is met.
+    # The request failed because a service quota is exceeded.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -596,6 +646,38 @@ module Aws::Braket
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         tags: { # required
+    #           "String" => "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Specify the `resourceArn` of the resource to which a tag will be
+    #   added.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Specify the tags to add to the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
 
     # The throttling rate limit is met.
     #
@@ -609,6 +691,36 @@ module Aws::Braket
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         tag_keys: ["String"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Specify the `resourceArn` for the resource from which to remove the
+    #   tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   pecify the keys for the tags to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # The input fails to satisfy the constraints specified by an AWS
     # service.

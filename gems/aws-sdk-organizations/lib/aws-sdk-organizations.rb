@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-organizations/customizations'
 # @!group service
 module Aws::Organizations
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.55.0'
 
 end

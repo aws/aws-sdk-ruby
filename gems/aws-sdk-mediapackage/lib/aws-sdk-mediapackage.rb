@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -27,7 +28,7 @@ require_relative 'aws-sdk-mediapackage/customizations'
 # structure.
 #
 #     media_package = Aws::MediaPackage::Client.new
-#     resp = media_package.create_channel(params)
+#     resp = media_package.configure_logs(params)
 #
 # See {Client} for more information.
 #
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-mediapackage/customizations'
 # @!group service
 module Aws::MediaPackage
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.36.0'
 
 end

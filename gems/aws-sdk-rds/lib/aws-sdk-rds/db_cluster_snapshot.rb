@@ -162,6 +162,17 @@ module Aws::RDS
       data[:iam_database_authentication_enabled]
     end
 
+    # A list of tags. For more information, see [Tagging Amazon RDS
+    # Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    # @return [Array<Types::Tag>]
+    def tag_list
+      data[:tag_list]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -638,6 +649,12 @@ module Aws::RDS
     # @option options [String] :engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
+    #
+    #   For more information, see [ CreateDBCluster][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html
     # @option options [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
     #   of the DB cluster.

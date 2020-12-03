@@ -362,18 +362,35 @@ module Aws::RDS
     #   used. For more information, see [Publishing Database Logs to Amazon
     #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
     #
+    #   **Aurora MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :engine_mode
-    #   The DB engine mode of the DB cluster, either `provisioned`,
+    #   The DB engine mode of the DB cluster, either `provisioned`
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     #
-    #   <note markdown="1"> `global` engine mode only applies for global database clusters created
-    #   with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions,
-    #   the clusters in a global database use `provisioned` engine mode.
+    #   The `parallelquery` engine mode isn't required for Aurora MySQL
+    #   version 1.23 and higher 1.x versions, and version 2.09 and higher 2.x
+    #   versions.
     #
-    #    </note>
+    #   The `global` engine mode isn't required for Aurora MySQL version 1.22
+    #   and higher 1.x versions, and `global` engine mode isn't required for
+    #   any 2.x versions.
+    #
+    #   The `multimaster` engine mode only applies for DB clusters created
+    #   with Aurora MySQL version 5.6.10a.
+    #
+    #   For Aurora PostgreSQL, the `global` engine mode isn't required, and
+    #   both the `parallelquery` and the `multimaster` engine modes currently
+    #   aren't supported.
     #
     #   Limitations and requirements apply to some DB engine modes. For more
     #   information, see the following sections in the *Amazon Aurora User
@@ -383,7 +400,7 @@ module Aws::RDS
     #
     #   * [ Limitations of Parallel Query][2]
     #
-    #   * [ Requirements for Aurora Global Databases][3]
+    #   * [ Limitations of Aurora Global Databases][3]
     #
     #   * [ Limitations of Multi-Master Clusters][4]
     #
@@ -536,6 +553,7 @@ module Aws::RDS
     #     iops: 1,
     #     option_group_name: "String",
     #     character_set_name: "String",
+    #     nchar_character_set_name: "String",
     #     publicly_accessible: false,
     #     tags: [
     #       {
@@ -1083,8 +1101,8 @@ module Aws::RDS
     #
     #   **Microsoft SQL Server**
     #
-    #   See [Version and Feature Support on Amazon RDS][2] in the *Amazon RDS
-    #   User Guide.*
+    #   See [Microsoft SQL Server Versions on Amazon RDS][2] in the *Amazon
+    #   RDS User Guide.*
     #
     #   **MySQL**
     #
@@ -1103,7 +1121,7 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
     #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
     #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions
@@ -1146,6 +1164,8 @@ module Aws::RDS
     #
     #   Not applicable. The character set is managed by the DB cluster. For
     #   more information, see `CreateDBCluster`.
+    # @option options [String] :nchar_character_set_name
+    #   The name of the NCHAR character set for the Oracle DB instance.
     # @option options [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
     #
@@ -1295,29 +1315,8 @@ module Aws::RDS
     #   Access Management (IAM) accounts to database accounts. By default,
     #   mapping is disabled.
     #
-    #   You can enable IAM database authentication for the following database
-    #   engines:
-    #
-    #   **Amazon Aurora**
-    #
-    #   Not applicable. Mapping AWS IAM accounts to database accounts is
-    #   managed by the DB cluster.
-    #
-    #   **MySQL**
-    #
-    #   * For MySQL 5.6, minor version 5.6.34 or higher
-    #
-    #   * For MySQL 5.7, minor version 5.7.16 or higher
-    #
-    #   * For MySQL 8.0, minor version 8.0.16 or higher
-    #
-    #   **PostgreSQL**
-    #
-    #   * For PostgreSQL 9.5, minor version 9.5.15 or higher
-    #
-    #   * For PostgreSQL 9.6, minor version 9.6.11 or higher
-    #
-    #   * PostgreSQL 10.6, 10.7, and 10.9
+    #   This setting doesn't apply to Amazon Aurora. Mapping AWS IAM accounts
+    #   to database accounts is managed by the DB cluster.
     #
     #   For more information, see [ IAM Database Authentication for MySQL and
     #   PostgreSQL][1] in the *Amazon RDS User Guide.*
@@ -1353,6 +1352,30 @@ module Aws::RDS
     #   used. For more information, see [Publishing Database Logs to Amazon
     #   CloudWatch Logs ][1] in the *Amazon Relational Database Service User
     #   Guide*.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. CloudWatch Logs exports are managed by the DB cluster.
+    #
+    #   **MariaDB**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Microsoft SQL Server**
+    #
+    #   Possible values are `agent` and `error`.
+    #
+    #   **MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Oracle**
+    #
+    #   Possible values are `alert`, `audit`, `listener`, and `trace`.
+    #
+    #   **PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
     #
     #
     #

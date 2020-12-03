@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2020-11-19)
+------------------
+
+* Feature - Amazon Redshift support for returning ClusterNamespaceArn in describeClusters
+
+1.50.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.48.0 (2020-08-27)
 ------------------
 

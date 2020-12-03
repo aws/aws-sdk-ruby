@@ -10,6 +10,19 @@
 module Aws::CodeStarconnections
   module Types
 
+    # Two conflicting operations have been made on the same resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A resource that is used to connect third-party source providers with
     # services like AWS CodePipeline.
     #
@@ -34,7 +47,7 @@ module Aws::CodeStarconnections
     #
     # @!attribute [rw] provider_type
     #   The name of the external provider where your third-party code
-    #   repository is configured. The valid provider type is Bitbucket.
+    #   repository is configured.
     #   @return [String]
     #
     # @!attribute [rw] owner_account_id
@@ -69,7 +82,7 @@ module Aws::CodeStarconnections
     #   data as a hash:
     #
     #       {
-    #         provider_type: "Bitbucket", # accepts Bitbucket, GitHubEnterpriseServer
+    #         provider_type: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer
     #         connection_name: "ConnectionName", # required
     #         tags: [
     #           {
@@ -82,7 +95,7 @@ module Aws::CodeStarconnections
     #
     # @!attribute [rw] provider_type
     #   The name of the external provider where your third-party code
-    #   repository is configured. The valid provider type is Bitbucket.
+    #   repository is configured.
     #   @return [String]
     #
     # @!attribute [rw] connection_name
@@ -138,7 +151,7 @@ module Aws::CodeStarconnections
     #
     #       {
     #         name: "HostName", # required
-    #         provider_type: "Bitbucket", # required, accepts Bitbucket, GitHubEnterpriseServer
+    #         provider_type: "Bitbucket", # required, accepts Bitbucket, GitHub, GitHubEnterpriseServer
     #         provider_endpoint: "Url", # required
     #         vpc_configuration: {
     #           vpc_id: "VpcId", # required
@@ -404,7 +417,7 @@ module Aws::CodeStarconnections
     #   data as a hash:
     #
     #       {
-    #         provider_type_filter: "Bitbucket", # accepts Bitbucket, GitHubEnterpriseServer
+    #         provider_type_filter: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer
     #         host_arn_filter: "HostArn",
     #         max_results: 1,
     #         next_token: "NextToken",
@@ -635,6 +648,20 @@ module Aws::CodeStarconnections
     #
     class TagResourceOutput < Aws::EmptyStructure; end
 
+    # The operation is not supported. Check the connection status and try
+    # again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/UnsupportedOperationException AWS API Documentation
+    #
+    class UnsupportedOperationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceInput
     #   data as a hash:
     #
@@ -663,6 +690,48 @@ module Aws::CodeStarconnections
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/UntagResourceOutput AWS API Documentation
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateHostInput
+    #   data as a hash:
+    #
+    #       {
+    #         host_arn: "HostArn", # required
+    #         provider_endpoint: "Url",
+    #         vpc_configuration: {
+    #           vpc_id: "VpcId", # required
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           tls_certificate: "TlsCertificate",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] host_arn
+    #   The Amazon Resource Name (ARN) of the host to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_endpoint
+    #   The URL or endpoint of the host to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   The VPC configuration of the host to be updated. A VPC must be
+    #   configured and the infrastructure to be represented by the host must
+    #   already be connected to the VPC.
+    #   @return [Types::VpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/UpdateHostInput AWS API Documentation
+    #
+    class UpdateHostInput < Struct.new(
+      :host_arn,
+      :provider_endpoint,
+      :vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/UpdateHostOutput AWS API Documentation
+    #
+    class UpdateHostOutput < Aws::EmptyStructure; end
 
     # The VPC configuration provisioned for the host.
     #

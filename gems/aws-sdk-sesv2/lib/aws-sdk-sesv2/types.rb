@@ -407,6 +407,96 @@ module Aws::SESV2
     #
     class ConflictException < Aws::EmptyStructure; end
 
+    # A contact is the end-user who is receiving the email.
+    #
+    # @!attribute [rw] email_address
+    #   The contact's email address.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_preferences
+    #   The contact's preference for being opted-in to or opted-out of a
+    #   topic.
+    #   @return [Array<Types::TopicPreference>]
+    #
+    # @!attribute [rw] topic_default_preferences
+    #   The default topic preferences applied to the contact.
+    #   @return [Array<Types::TopicPreference>]
+    #
+    # @!attribute [rw] unsubscribe_all
+    #   A boolean value status noting if the contact is unsubscribed from
+    #   all contact list topics.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   A timestamp noting the last time the contact's information was
+    #   updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/Contact AWS API Documentation
+    #
+    class Contact < Struct.new(
+      :email_address,
+      :topic_preferences,
+      :topic_default_preferences,
+      :unsubscribe_all,
+      :last_updated_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list that contains contacts that have subscribed to a particular
+    # topic or topics.
+    #
+    # @!attribute [rw] contact_list_name
+    #   The name of the contact list.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   A timestamp noting the last time the contact list was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ContactList AWS API Documentation
+    #
+    class ContactList < Struct.new(
+      :contact_list_name,
+      :last_updated_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains details about the action of a contact list.
+    #
+    # @note When making an API call, you may pass ContactListDestination
+    #   data as a hash:
+    #
+    #       {
+    #         contact_list_name: "ContactListName", # required
+    #         contact_list_import_action: "DELETE", # required, accepts DELETE, PUT
+    #       }
+    #
+    # @!attribute [rw] contact_list_name
+    #   The name of the contact list.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_list_import_action
+    #   &gt;The type of action that you want to perform on the addresses.
+    #   Acceptable values:
+    #
+    #   * PUT: add the addresses to the contact list. If the record already
+    #     exists, it will override it with the new value.
+    #
+    #   * DELETE: remove the addresses from the contact list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ContactListDestination AWS API Documentation
+    #
+    class ContactListDestination < Struct.new(
+      :contact_list_name,
+      :contact_list_import_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents the content of the email, and optionally a
     # character set specification.
     #
@@ -449,7 +539,7 @@ module Aws::SESV2
     #         event_destination_name: "EventDestinationName", # required
     #         event_destination: { # required
     #           enabled: false,
-    #           matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY
+    #           matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY, SUBSCRIPTION
     #           kinesis_firehose_destination: {
     #             iam_role_arn: "AmazonResourceName", # required
     #             delivery_stream_arn: "AmazonResourceName", # required
@@ -589,6 +679,114 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateConfigurationSetResponse AWS API Documentation
     #
     class CreateConfigurationSetResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass CreateContactListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         contact_list_name: "ContactListName", # required
+    #         topics: [
+    #           {
+    #             topic_name: "TopicName", # required
+    #             display_name: "DisplayName", # required
+    #             description: "Description",
+    #             default_subscription_status: "OPT_IN", # required, accepts OPT_IN, OPT_OUT
+    #           },
+    #         ],
+    #         description: "Description",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] contact_list_name
+    #   The name of the contact list.
+    #   @return [String]
+    #
+    # @!attribute [rw] topics
+    #   An interest group, theme, or label within a list. A contact list can
+    #   have multiple topics.
+    #   @return [Array<Types::Topic>]
+    #
+    # @!attribute [rw] description
+    #   A description of what the contact list is about.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with a contact list.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateContactListRequest AWS API Documentation
+    #
+    class CreateContactListRequest < Struct.new(
+      :contact_list_name,
+      :topics,
+      :description,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateContactListResponse AWS API Documentation
+    #
+    class CreateContactListResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass CreateContactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         contact_list_name: "ContactListName", # required
+    #         email_address: "EmailAddress", # required
+    #         topic_preferences: [
+    #           {
+    #             topic_name: "TopicName", # required
+    #             subscription_status: "OPT_IN", # required, accepts OPT_IN, OPT_OUT
+    #           },
+    #         ],
+    #         unsubscribe_all: false,
+    #         attributes_data: "AttributesData",
+    #       }
+    #
+    # @!attribute [rw] contact_list_name
+    #   The name of the contact list to which the contact should be added.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   The contact's email address.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_preferences
+    #   The contact's preferences for being opted-in to or opted-out of
+    #   topics.
+    #   @return [Array<Types::TopicPreference>]
+    #
+    # @!attribute [rw] unsubscribe_all
+    #   A boolean value status noting if the contact is unsubscribed from
+    #   all contact list topics.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] attributes_data
+    #   The attribute data attached to a contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateContactRequest AWS API Documentation
+    #
+    class CreateContactRequest < Struct.new(
+      :contact_list_name,
+      :email_address,
+      :topic_preferences,
+      :unsubscribe_all,
+      :attributes_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateContactResponse AWS API Documentation
+    #
+    class CreateContactResponse < Aws::EmptyStructure; end
 
     # Represents a request to create a custom verification email template.
     #
@@ -1002,8 +1200,12 @@ module Aws::SESV2
     #
     #       {
     #         import_destination: { # required
-    #           suppression_list_destination: { # required
+    #           suppression_list_destination: {
     #             suppression_list_import_action: "DELETE", # required, accepts DELETE, PUT
+    #           },
+    #           contact_list_destination: {
+    #             contact_list_name: "ContactListName", # required
+    #             contact_list_import_action: "DELETE", # required, accepts DELETE, PUT
     #           },
     #         },
     #         import_data_source: { # required
@@ -1218,6 +1420,59 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteConfigurationSetResponse AWS API Documentation
     #
     class DeleteConfigurationSetResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteContactListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         contact_list_name: "ContactListName", # required
+    #       }
+    #
+    # @!attribute [rw] contact_list_name
+    #   The name of the contact list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteContactListRequest AWS API Documentation
+    #
+    class DeleteContactListRequest < Struct.new(
+      :contact_list_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteContactListResponse AWS API Documentation
+    #
+    class DeleteContactListResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteContactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         contact_list_name: "ContactListName", # required
+    #         email_address: "EmailAddress", # required
+    #       }
+    #
+    # @!attribute [rw] contact_list_name
+    #   The name of the contact list from which the contact should be
+    #   removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   The contact's email address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteContactRequest AWS API Documentation
+    #
+    class DeleteContactRequest < Struct.new(
+      :contact_list_name,
+      :email_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteContactResponse AWS API Documentation
+    #
+    class DeleteContactResponse < Aws::EmptyStructure; end
 
     # Represents a request to delete an existing custom verification email
     # template.
@@ -2067,7 +2322,7 @@ module Aws::SESV2
     #
     #       {
     #         enabled: false,
-    #         matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY
+    #         matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY, SUBSCRIPTION
     #         kinesis_firehose_destination: {
     #           iam_role_arn: "AmazonResourceName", # required
     #           delivery_stream_arn: "AmazonResourceName", # required
@@ -2398,6 +2653,138 @@ module Aws::SESV2
       :sending_options,
       :tags,
       :suppression_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetContactListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         contact_list_name: "ContactListName", # required
+    #       }
+    #
+    # @!attribute [rw] contact_list_name
+    #   The name of the contact list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetContactListRequest AWS API Documentation
+    #
+    class GetContactListRequest < Struct.new(
+      :contact_list_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_list_name
+    #   The name of the contact list.
+    #   @return [String]
+    #
+    # @!attribute [rw] topics
+    #   An interest group, theme, or label within a list. A contact list can
+    #   have multiple topics.
+    #   @return [Array<Types::Topic>]
+    #
+    # @!attribute [rw] description
+    #   A description of what the contact list is about.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   A timestamp noting when the contact list was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   A timestamp noting the last time the contact list was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with a contact list.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetContactListResponse AWS API Documentation
+    #
+    class GetContactListResponse < Struct.new(
+      :contact_list_name,
+      :topics,
+      :description,
+      :created_timestamp,
+      :last_updated_timestamp,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetContactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         contact_list_name: "ContactListName", # required
+    #         email_address: "EmailAddress", # required
+    #       }
+    #
+    # @!attribute [rw] contact_list_name
+    #   The name of the contact list to which the contact belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   The contact's email addres.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetContactRequest AWS API Documentation
+    #
+    class GetContactRequest < Struct.new(
+      :contact_list_name,
+      :email_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_list_name
+    #   The name of the contact list to which the contact belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   The contact's email addres.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_preferences
+    #   The contact's preference for being opted-in to or opted-out of a
+    #   topic.&gt;
+    #   @return [Array<Types::TopicPreference>]
+    #
+    # @!attribute [rw] topic_default_preferences
+    #   The default topic preferences applied to the contact.
+    #   @return [Array<Types::TopicPreference>]
+    #
+    # @!attribute [rw] unsubscribe_all
+    #   A boolean value status noting if the contact is unsubscribed from
+    #   all contact list topics.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] attributes_data
+    #   The attribute data attached to a contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   A timestamp noting when the contact was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   A timestamp noting the last time the contact's information was
+    #   updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetContactResponse AWS API Documentation
+    #
+    class GetContactResponse < Struct.new(
+      :contact_list_name,
+      :email_address,
+      :topic_preferences,
+      :topic_default_preferences,
+      :unsubscribe_all,
+      :attributes_data,
+      :created_timestamp,
+      :last_updated_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3151,8 +3538,12 @@ module Aws::SESV2
     #   data as a hash:
     #
     #       {
-    #         suppression_list_destination: { # required
+    #         suppression_list_destination: {
     #           suppression_list_import_action: "DELETE", # required, accepts DELETE, PUT
+    #         },
+    #         contact_list_destination: {
+    #           contact_list_name: "ContactListName", # required
+    #           contact_list_import_action: "DELETE", # required, accepts DELETE, PUT
     #         },
     #       }
     #
@@ -3161,10 +3552,16 @@ module Aws::SESV2
     #   suppression list.
     #   @return [Types::SuppressionListDestination]
     #
+    # @!attribute [rw] contact_list_destination
+    #   An object that contains the action of the import job towards a
+    #   contact list.
+    #   @return [Types::ContactListDestination]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ImportDestination AWS API Documentation
     #
     class ImportDestination < Struct.new(
-      :suppression_list_destination)
+      :suppression_list_destination,
+      :contact_list_destination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3185,6 +3582,7 @@ module Aws::SESV2
     #   @return [String]
     #
     # @!attribute [rw] created_timestamp
+    #   The date and time when the import job was created.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ImportJobSummary AWS API Documentation
@@ -3347,6 +3745,159 @@ module Aws::SESV2
     #
     class ListConfigurationSetsResponse < Struct.new(
       :configuration_sets,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListContactListsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         page_size: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] page_size
+    #   Maximum number of contact lists to return at once. Use this
+    #   parameter to paginate results. If additional contact lists exist
+    #   beyond the specified limit, the `NextToken` element is sent in the
+    #   response. Use the `NextToken` value in subsequent requests to
+    #   retrieve additional lists.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A string token indicating that there might be additional contact
+    #   lists available to be listed. Use the token provided in the Response
+    #   to use in the subsequent call to ListContactLists with the same
+    #   parameters to retrieve the next page of contact lists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListContactListsRequest AWS API Documentation
+    #
+    class ListContactListsRequest < Struct.new(
+      :page_size,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_lists
+    #   The available contact lists.
+    #   @return [Array<Types::ContactList>]
+    #
+    # @!attribute [rw] next_token
+    #   A string token indicating that there might be additional contact
+    #   lists available to be listed. Copy this token to a subsequent call
+    #   to `ListContactLists` with the same parameters to retrieve the next
+    #   page of contact lists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListContactListsResponse AWS API Documentation
+    #
+    class ListContactListsResponse < Struct.new(
+      :contact_lists,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter that can be applied to a list of contacts.
+    #
+    # @note When making an API call, you may pass ListContactsFilter
+    #   data as a hash:
+    #
+    #       {
+    #         filtered_status: "OPT_IN", # accepts OPT_IN, OPT_OUT
+    #         topic_filter: {
+    #           topic_name: "TopicName",
+    #           use_default_if_preference_unavailable: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] filtered_status
+    #   The status by which you are filtering: `OPT_IN` or `OPT_OUT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_filter
+    #   Used for filtering by a specific topic preference.
+    #   @return [Types::TopicFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListContactsFilter AWS API Documentation
+    #
+    class ListContactsFilter < Struct.new(
+      :filtered_status,
+      :topic_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListContactsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         contact_list_name: "ContactListName", # required
+    #         filter: {
+    #           filtered_status: "OPT_IN", # accepts OPT_IN, OPT_OUT
+    #           topic_filter: {
+    #             topic_name: "TopicName",
+    #             use_default_if_preference_unavailable: false,
+    #           },
+    #         },
+    #         page_size: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] contact_list_name
+    #   The name of the contact list.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A filter that can be applied to a list of contacts.
+    #   @return [Types::ListContactsFilter]
+    #
+    # @!attribute [rw] page_size
+    #   The number of contacts that may be returned at once, which is
+    #   dependent on if there are more or less contacts than the value of
+    #   the PageSize. Use this parameter to paginate results. If additional
+    #   contacts exist beyond the specified limit, the `NextToken` element
+    #   is sent in the response. Use the `NextToken` value in subsequent
+    #   requests to retrieve additional contacts.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A string token indicating that there might be additional contacts
+    #   available to be listed. Use the token provided in the Response to
+    #   use in the subsequent call to ListContacts with the same parameters
+    #   to retrieve the next page of contacts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListContactsRequest AWS API Documentation
+    #
+    class ListContactsRequest < Struct.new(
+      :contact_list_name,
+      :filter,
+      :page_size,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contacts
+    #   The contacts present in a specific contact list.
+    #   @return [Array<Types::Contact>]
+    #
+    # @!attribute [rw] next_token
+    #   A string token indicating that there might be additional contacts
+    #   available to be listed. Copy this token to a subsequent call to
+    #   `ListContacts` with the same parameters to retrieve the next page of
+    #   contacts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListContactsResponse AWS API Documentation
+    #
+    class ListContactsResponse < Struct.new(
+      :contacts,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3742,7 +4293,7 @@ module Aws::SESV2
     #   data as a hash:
     #
     #       {
-    #         import_destination_type: "SUPPRESSION_LIST", # accepts SUPPRESSION_LIST
+    #         import_destination_type: "SUPPRESSION_LIST", # accepts SUPPRESSION_LIST, CONTACT_LIST
     #         next_token: "NextToken",
     #         page_size: 1,
     #       }
@@ -3796,6 +4347,34 @@ module Aws::SESV2
     class ListImportJobsResponse < Struct.new(
       :import_jobs,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object used to specify a list or topic to which an email belongs,
+    # which will be used when a contact chooses to unsubscribe.
+    #
+    # @note When making an API call, you may pass ListManagementOptions
+    #   data as a hash:
+    #
+    #       {
+    #         contact_list_name: "ContactListName", # required
+    #         topic_name: "TopicName",
+    #       }
+    #
+    # @!attribute [rw] contact_list_name
+    #   The name of the contact list.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   The name of the topic.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListManagementOptions AWS API Documentation
+    #
+    class ListManagementOptions < Struct.new(
+      :contact_list_name,
+      :topic_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5409,6 +5988,10 @@ module Aws::SESV2
     #           },
     #         ],
     #         configuration_set_name: "ConfigurationSetName",
+    #         list_management_options: {
+    #           contact_list_name: "ContactListName", # required
+    #           topic_name: "TopicName",
+    #         },
     #       }
     #
     # @!attribute [rw] from_email_address
@@ -5493,6 +6076,11 @@ module Aws::SESV2
     #   the email.
     #   @return [String]
     #
+    # @!attribute [rw] list_management_options
+    #   An object used to specify a list or topic to which an email belongs,
+    #   which will be used when a contact chooses to unsubscribe.
+    #   @return [Types::ListManagementOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SendEmailRequest AWS API Documentation
     #
     class SendEmailRequest < Struct.new(
@@ -5504,7 +6092,8 @@ module Aws::SESV2
       :feedback_forwarding_email_address_identity_arn,
       :content,
       :email_tags,
-      :configuration_set_name)
+      :configuration_set_name,
+      :list_management_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5981,6 +6570,106 @@ module Aws::SESV2
     #
     class TooManyRequestsException < Aws::EmptyStructure; end
 
+    # An interest group, theme, or label within a list. Lists can have
+    # multiple topics.
+    #
+    # @note When making an API call, you may pass Topic
+    #   data as a hash:
+    #
+    #       {
+    #         topic_name: "TopicName", # required
+    #         display_name: "DisplayName", # required
+    #         description: "Description",
+    #         default_subscription_status: "OPT_IN", # required, accepts OPT_IN, OPT_OUT
+    #       }
+    #
+    # @!attribute [rw] topic_name
+    #   The name of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The name of the topic the contact will see.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of what the topic is about, which the contact will
+    #   see.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_subscription_status
+    #   The default subscription status to be applied to a contact if the
+    #   contact has not noted their preference for subscribing to a topic.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/Topic AWS API Documentation
+    #
+    class Topic < Struct.new(
+      :topic_name,
+      :display_name,
+      :description,
+      :default_subscription_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used for filtering by a specific topic preference.
+    #
+    # @note When making an API call, you may pass TopicFilter
+    #   data as a hash:
+    #
+    #       {
+    #         topic_name: "TopicName",
+    #         use_default_if_preference_unavailable: false,
+    #       }
+    #
+    # @!attribute [rw] topic_name
+    #   The name of a topic on which you wish to apply the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_default_if_preference_unavailable
+    #   Notes that the default subscription status should be applied to a
+    #   contact because the contact has not noted their preference for
+    #   subscribing to a topic.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/TopicFilter AWS API Documentation
+    #
+    class TopicFilter < Struct.new(
+      :topic_name,
+      :use_default_if_preference_unavailable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The contact's preference for being opted-in to or opted-out of a
+    # topic.
+    #
+    # @note When making an API call, you may pass TopicPreference
+    #   data as a hash:
+    #
+    #       {
+    #         topic_name: "TopicName", # required
+    #         subscription_status: "OPT_IN", # required, accepts OPT_IN, OPT_OUT
+    #       }
+    #
+    # @!attribute [rw] topic_name
+    #   The name of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_status
+    #   The contact's subscription status to a topic which is either
+    #   `OPT_IN` or `OPT_OUT`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/TopicPreference AWS API Documentation
+    #
+    class TopicPreference < Struct.new(
+      :topic_name,
+      :subscription_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that defines the tracking options for a configuration set.
     # When you use the Amazon SES API v2 to send an email, it contains an
     # invisible image that's used to track when recipients open your email.
@@ -6058,7 +6747,7 @@ module Aws::SESV2
     #         event_destination_name: "EventDestinationName", # required
     #         event_destination: { # required
     #           enabled: false,
-    #           matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY
+    #           matching_event_types: ["SEND"], # accepts SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY, SUBSCRIPTION
     #           kinesis_firehose_destination: {
     #             iam_role_arn: "AmazonResourceName", # required
     #             delivery_stream_arn: "AmazonResourceName", # required
@@ -6110,6 +6799,103 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateConfigurationSetEventDestinationResponse AWS API Documentation
     #
     class UpdateConfigurationSetEventDestinationResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateContactListRequest
+    #   data as a hash:
+    #
+    #       {
+    #         contact_list_name: "ContactListName", # required
+    #         topics: [
+    #           {
+    #             topic_name: "TopicName", # required
+    #             display_name: "DisplayName", # required
+    #             description: "Description",
+    #             default_subscription_status: "OPT_IN", # required, accepts OPT_IN, OPT_OUT
+    #           },
+    #         ],
+    #         description: "Description",
+    #       }
+    #
+    # @!attribute [rw] contact_list_name
+    #   The name of the contact list.
+    #   @return [String]
+    #
+    # @!attribute [rw] topics
+    #   An interest group, theme, or label within a list. A contact list can
+    #   have multiple topics.
+    #   @return [Array<Types::Topic>]
+    #
+    # @!attribute [rw] description
+    #   A description of what the contact list is about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateContactListRequest AWS API Documentation
+    #
+    class UpdateContactListRequest < Struct.new(
+      :contact_list_name,
+      :topics,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateContactListResponse AWS API Documentation
+    #
+    class UpdateContactListResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateContactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         contact_list_name: "ContactListName", # required
+    #         email_address: "EmailAddress", # required
+    #         topic_preferences: [
+    #           {
+    #             topic_name: "TopicName", # required
+    #             subscription_status: "OPT_IN", # required, accepts OPT_IN, OPT_OUT
+    #           },
+    #         ],
+    #         unsubscribe_all: false,
+    #         attributes_data: "AttributesData",
+    #       }
+    #
+    # @!attribute [rw] contact_list_name
+    #   The name of the contact list.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   The contact's email addres.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_preferences
+    #   The contact's preference for being opted-in to or opted-out of a
+    #   topic.
+    #   @return [Array<Types::TopicPreference>]
+    #
+    # @!attribute [rw] unsubscribe_all
+    #   A boolean value status noting if the contact is unsubscribed from
+    #   all contact list topics.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] attributes_data
+    #   The attribute data attached to a contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateContactRequest AWS API Documentation
+    #
+    class UpdateContactRequest < Struct.new(
+      :contact_list_name,
+      :email_address,
+      :topic_preferences,
+      :unsubscribe_all,
+      :attributes_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateContactResponse AWS API Documentation
+    #
+    class UpdateContactResponse < Aws::EmptyStructure; end
 
     # Represents a request to update an existing custom verification email
     # template.

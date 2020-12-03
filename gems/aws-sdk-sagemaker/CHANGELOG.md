@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2020-12-01)
+------------------
+
+* Feature - Amazon SageMaker Pipelines for ML workflows. Amazon SageMaker Feature Store, a fully managed repository for ML features.
+
+1.72.0 (2020-11-16)
+------------------
+
+* Feature - This feature enables customers to encrypt their Amazon SageMaker Studio storage volumes with customer master keys (CMKs) managed by them in AWS Key Management Service (KMS).
+
+1.71.0 (2020-10-26)
+------------------
+
+* Feature - This release enables customers to bring custom images for use with SageMaker Studio notebooks.
+
+1.70.0 (2020-10-08)
+------------------
+
+* Feature - This release enables Sagemaker customers to convert Tensorflow and PyTorch models to CoreML (ML Model) format.
+
+1.69.0 (2020-10-05)
+------------------
+
+* Feature - This release adds support for launching Amazon SageMaker Studio in your VPC. Use AppNetworkAccessType in CreateDomain API to disable access to public internet and restrict the network traffic to VPC.
+
+1.68.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2020-09-15)
+------------------
+
+* Feature - Sagemaker Ground Truth: Added support for a new Streaming feature which helps to continuously feed data and receive labels in real time. This release adds a new input and output SNS data channel.
+
 1.66.0 (2020-08-25)
 ------------------
 

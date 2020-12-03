@@ -1,6 +1,187 @@
 Unreleased Changes
 ------------------
 
+1.402.0 (2020-12-02)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::CustomerProfiles`.
+
+1.401.0 (2020-12-01)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SageMakerFeatureStoreRuntime`.
+
+* Feature - Added support for enumerating regions for `Aws::Profile`.
+
+* Feature - Added support for enumerating regions for `Aws::LookoutforVision`.
+
+* Feature - Added support for enumerating regions for `Aws::ECRPublic`.
+
+* Feature - Added support for enumerating regions for `Aws::DevOpsGuru`.
+
+* Feature - Added support for enumerating regions for `Aws::ConnectContactLens`.
+
+* Feature - Added support for enumerating regions for `Aws::AppIntegrationsService`.
+
+* Feature - Added support for enumerating regions for `Aws::AmplifyBackend`.
+
+1.400.0 (2020-12-01)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.399.0 (2020-11-24)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MWAA`.
+
+1.398.0 (2020-11-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.397.0 (2020-11-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.396.0 (2020-11-19)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.395.0 (2020-11-18)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.394.0 (2020-11-17)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::NetworkFirewall`.
+
+1.393.0 (2020-11-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.392.0 (2020-11-12)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::AppRegistry`.
+
+1.391.0 (2020-11-11)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::GlueDataBrew`.
+
+1.390.0 (2020-11-05)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.389.0 (2020-11-04)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.388.0 (2020-10-28)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.387.0 (2020-10-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.386.0 (2020-10-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.385.0 (2020-10-22)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.384.0 (2020-10-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.383.0 (2020-10-16)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.382.0 (2020-10-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.381.0 (2020-10-09)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.380.0 (2020-10-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.379.0 (2020-10-01)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.378.0 (2020-09-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::S3Outposts`.
+
+1.377.0 (2020-09-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::TimestreamWrite`.
+
+* Feature - Added support for enumerating regions for `Aws::TimestreamQuery`.
+
+1.376.0 (2020-09-25)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.375.0 (2020-09-24)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.374.0 (2020-09-21)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.373.0 (2020-09-18)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.372.0 (2020-09-17)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.371.0 (2020-09-16)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.370.0 (2020-09-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.369.0 (2020-09-14)
 ------------------
 

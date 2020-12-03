@@ -384,6 +384,7 @@ module Aws::MarketplaceCatalog
     #   * {Types::DescribeChangeSetResponse#start_time #start_time} => String
     #   * {Types::DescribeChangeSetResponse#end_time #end_time} => String
     #   * {Types::DescribeChangeSetResponse#status #status} => String
+    #   * {Types::DescribeChangeSetResponse#failure_code #failure_code} => String
     #   * {Types::DescribeChangeSetResponse#failure_description #failure_description} => String
     #   * {Types::DescribeChangeSetResponse#change_set #change_set} => Array&lt;Types::ChangeSummary&gt;
     #
@@ -402,6 +403,7 @@ module Aws::MarketplaceCatalog
     #   resp.start_time #=> String
     #   resp.end_time #=> String
     #   resp.status #=> String, one of "PREPARING", "APPLYING", "SUCCEEDED", "CANCELLED", "FAILED"
+    #   resp.failure_code #=> String, one of "CLIENT_ERROR", "SERVER_FAULT"
     #   resp.failure_description #=> String
     #   resp.change_set #=> Array
     #   resp.change_set[0].change_type #=> String
@@ -525,6 +527,7 @@ module Aws::MarketplaceCatalog
     #   resp.change_set_summary_list[0].status #=> String, one of "PREPARING", "APPLYING", "SUCCEEDED", "CANCELLED", "FAILED"
     #   resp.change_set_summary_list[0].entity_id_list #=> Array
     #   resp.change_set_summary_list[0].entity_id_list[0] #=> String
+    #   resp.change_set_summary_list[0].failure_code #=> String, one of "CLIENT_ERROR", "SERVER_FAULT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListChangeSets AWS API Documentation
@@ -684,7 +687,7 @@ module Aws::MarketplaceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

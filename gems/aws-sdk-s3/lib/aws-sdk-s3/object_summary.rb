@@ -295,13 +295,14 @@ module Aws::S3
     #     metadata_directive: "COPY", # accepts COPY, REPLACE
     #     tagging_directive: "COPY", # accepts COPY, REPLACE
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     copy_source_sse_customer_algorithm: "CopySourceSSECustomerAlgorithm",
     #     copy_source_sse_customer_key: "CopySourceSSECustomerKey",
     #     copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
@@ -316,6 +317,8 @@ module Aws::S3
     # @param [Hash] options ({})
     # @option options [String] :acl
     #   The canned ACL to apply to the object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :cache_control
     #   Specifies caching behavior along the request/reply chain.
     # @option options [String] :content_disposition
@@ -355,6 +358,15 @@ module Aws::S3
     #
     #      </note>
     #
+    #     Alternatively, for objects accessed through Amazon S3 on Outposts,
+    #     specify the ARN of the object as accessed in the format
+    #     `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/object/<key>`.
+    #     For example, to copy the object `reports/january.pdf` through
+    #     outpost `my-outpost` owned by account `123456789012` in Region
+    #     `us-west-2`, use the URL encoding of
+    #     `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf`.
+    #     The value must be URL encoded.
+    #
     #   To copy a specific version of an object, append
     #   `?versionId=<version-id>` to the value (for example,
     #   `awsexamplebucket/reports/january.pdf?versionId=QUpfdndhfd8438MNFDN93jdnJFkdmqnh893`).
@@ -379,12 +391,20 @@ module Aws::S3
     # @option options [String] :grant_full_control
     #   Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the
     #   object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_read
     #   Allows grantee to read the object data and its metadata.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_read_acp
     #   Allows grantee to read the object ACL.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [Hash<String,String>] :metadata
     #   A map of metadata to store with the object in S3.
     # @option options [String] :metadata_directive
@@ -397,7 +417,16 @@ module Aws::S3
     #   The server-side encryption algorithm used when storing this object in
     #   Amazon S3 (for example, AES256, aws:kms).
     # @option options [String] :storage_class
-    #   The type of storage to use for the object. Defaults to 'STANDARD'.
+    #   By default, Amazon S3 uses the STANDARD Storage Class to store newly
+    #   created objects. The STANDARD storage class provides high durability
+    #   and high availability. Depending on performance needs, you can specify
+    #   a different Storage Class. Amazon S3 on Outposts only uses the
+    #   OUTPOSTS Storage Class. For more information, see [Storage Classes][1]
+    #   in the *Amazon S3 Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
     # @option options [String] :website_redirect_location
     #   If the bucket is configured as a website, redirects requests for this
     #   object to another object in the same bucket or to an external URL.
@@ -430,6 +459,14 @@ module Aws::S3
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
+    # @option options [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with a COPY operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
     # @option options [String] :copy_source_sse_customer_algorithm
     #   Specifies the algorithm to use when decrypting the source object (for
     #   example, AES256).
@@ -646,13 +683,14 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -663,6 +701,8 @@ module Aws::S3
     # @param [Hash] options ({})
     # @option options [String] :acl
     #   The canned ACL to apply to the object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :cache_control
     #   Specifies caching behavior along the request/reply chain.
     # @option options [String] :content_disposition
@@ -680,19 +720,36 @@ module Aws::S3
     # @option options [String] :grant_full_control
     #   Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the
     #   object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_read
     #   Allows grantee to read the object data and its metadata.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_read_acp
     #   Allows grantee to read the object ACL.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [Hash<String,String>] :metadata
     #   A map of metadata to store with the object in S3.
     # @option options [String] :server_side_encryption
     #   The server-side encryption algorithm used when storing this object in
     #   Amazon S3 (for example, AES256, aws:kms).
     # @option options [String] :storage_class
-    #   The type of storage to use for the object. Defaults to 'STANDARD'.
+    #   By default, Amazon S3 uses the STANDARD Storage Class to store newly
+    #   created objects. The STANDARD storage class provides high durability
+    #   and high availability. Depending on performance needs, you can specify
+    #   a different Storage Class. Amazon S3 on Outposts only uses the
+    #   OUTPOSTS Storage Class. For more information, see [Storage Classes][1]
+    #   in the *Amazon S3 Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
     # @option options [String] :website_redirect_location
     #   If the bucket is configured as a website, redirects requests for this
     #   object to another object in the same bucket or to an external URL.
@@ -725,6 +782,14 @@ module Aws::S3
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
+    # @option options [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with an object operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
@@ -786,13 +851,14 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -804,6 +870,8 @@ module Aws::S3
     # @option options [String] :acl
     #   The canned ACL to apply to the object. For more information, see
     #   [Canned ACL][1].
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     #
     #
     #
@@ -876,20 +944,36 @@ module Aws::S3
     # @option options [String] :grant_full_control
     #   Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the
     #   object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_read
     #   Allows grantee to read the object data and its metadata.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_read_acp
     #   Allows grantee to read the object ACL.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     # @option options [Hash<String,String>] :metadata
     #   A map of metadata to store with the object in S3.
     # @option options [String] :server_side_encryption
     #   The server-side encryption algorithm used when storing this object in
     #   Amazon S3 (for example, AES256, aws:kms).
     # @option options [String] :storage_class
-    #   If you don't specify, S3 Standard is the default storage class.
-    #   Amazon S3 supports other storage classes.
+    #   By default, Amazon S3 uses the STANDARD Storage Class to store newly
+    #   created objects. The STANDARD storage class provides high durability
+    #   and high availability. Depending on performance needs, you can specify
+    #   a different Storage Class. Amazon S3 on Outposts only uses the
+    #   OUTPOSTS Storage Class. For more information, see [Storage Classes][1]
+    #   in the *Amazon S3 Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
     # @option options [String] :website_redirect_location
     #   If the bucket is configured as a website, redirects requests for this
     #   object to another object in the same bucket or to an external URL.
@@ -944,6 +1028,14 @@ module Aws::S3
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
+    # @option options [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with a PUT operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
@@ -1063,7 +1155,7 @@ module Aws::S3
     #               value: "MetadataValue",
     #             },
     #           ],
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
     #         },
     #       },
     #     },

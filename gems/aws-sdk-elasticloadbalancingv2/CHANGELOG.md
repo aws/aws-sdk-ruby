@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2020-11-13)
+------------------
+
+* Feature - Adds dualstack support for Network Load Balancers (TCP/TLS only), an attribute for WAF fail open for Application Load Balancers, and an attribute for connection draining for Network Load Balancers.
+
+1.55.0 (2020-11-10)
+------------------
+
+* Feature - Added support for Gateway Load Balancers, which make it easy to deploy, scale, and run third-party virtual networking appliances.
+
+1.54.0 (2020-10-29)
+------------------
+
+* Feature - Application Load Balancer (ALB) now supports the gRPC protocol-version. With this release, customers can use ALB to route and load balance gRPC traffic between gRPC enabled clients and microservices.
+
+1.53.0 (2020-10-02)
+------------------
+
+* Feature - This release adds support for tagging listeners, rules, and target groups on creation. This release also supported tagging operations through tagging api's for listeners and rules.
+
+1.52.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.50.0 (2020-09-08)
 ------------------
 

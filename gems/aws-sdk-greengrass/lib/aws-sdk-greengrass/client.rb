@@ -2762,6 +2762,34 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
+    # Get the runtime configuration of a thing.
+    #
+    # @option params [required, String] :thing_name
+    #
+    # @return [Types::GetThingRuntimeConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetThingRuntimeConfigurationResponse#runtime_configuration #runtime_configuration} => Types::RuntimeConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_thing_runtime_configuration({
+    #     thing_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.runtime_configuration.telemetry_configuration.configuration_sync_status #=> String, one of "InSync", "OutOfSync"
+    #   resp.runtime_configuration.telemetry_configuration.telemetry #=> String, one of "On", "Off"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetThingRuntimeConfiguration AWS API Documentation
+    #
+    # @overload get_thing_runtime_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_thing_runtime_configuration(params = {}, options = {})
+      req = build_request(:get_thing_runtime_configuration, params)
+      req.send_request(options)
+    end
+
     # Gets a paginated list of the deployments that have been started in a
     # bulk deployment operation, and their current deployment status.
     #
@@ -4026,6 +4054,33 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
+    # Updates the runtime configuration of a thing.
+    #
+    # @option params [Types::TelemetryConfigurationUpdate] :telemetry_configuration
+    #   Configuration settings for running telemetry.
+    #
+    # @option params [required, String] :thing_name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_thing_runtime_configuration({
+    #     telemetry_configuration: {
+    #       telemetry: "On", # required, accepts On, Off
+    #     },
+    #     thing_name: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateThingRuntimeConfiguration AWS API Documentation
+    #
+    # @overload update_thing_runtime_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_thing_runtime_configuration(params = {}, options = {})
+      req = build_request(:update_thing_runtime_configuration, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -4039,7 +4094,7 @@ module Aws::Greengrass
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrass'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

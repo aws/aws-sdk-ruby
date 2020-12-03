@@ -10,7 +10,7 @@
 module Aws::Snowball
   module Types
 
-    # The address that you want the Snowball or Snowballs associated with a
+    # The address that you want the Snow device(s) associated with a
     # specific job to be shipped to. Addresses are validated at the time of
     # creation. The address you provide must be located within the
     # serviceable area of your region. Although no individual elements of
@@ -42,34 +42,34 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of a person to receive a Snowball at an address.
+    #   The name of a person to receive a Snow device at an address.
     #   @return [String]
     #
     # @!attribute [rw] company
-    #   The name of the company to receive a Snowball at an address.
+    #   The name of the company to receive a Snow device at an address.
     #   @return [String]
     #
     # @!attribute [rw] street_1
-    #   The first line in a street address that a Snowball is to be
+    #   The first line in a street address that a Snow device is to be
     #   delivered to.
     #   @return [String]
     #
     # @!attribute [rw] street_2
-    #   The second line in a street address that a Snowball is to be
+    #   The second line in a street address that a Snow device is to be
     #   delivered to.
     #   @return [String]
     #
     # @!attribute [rw] street_3
-    #   The third line in a street address that a Snowball is to be
+    #   The third line in a street address that a Snow device is to be
     #   delivered to.
     #   @return [String]
     #
     # @!attribute [rw] city
-    #   The city in an address that a Snowball is to be delivered to.
+    #   The city in an address that a Snow device is to be delivered to.
     #   @return [String]
     #
     # @!attribute [rw] state_or_province
-    #   The state or province in an address that a Snowball is to be
+    #   The state or province in an address that a Snow device is to be
     #   delivered to.
     #   @return [String]
     #
@@ -82,16 +82,17 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] country
-    #   The country in an address that a Snowball is to be delivered to.
+    #   The country in an address that a Snow device is to be delivered to.
     #   @return [String]
     #
     # @!attribute [rw] postal_code
-    #   The postal code in an address that a Snowball is to be delivered to.
+    #   The postal code in an address that a Snow device is to be delivered
+    #   to.
     #   @return [String]
     #
     # @!attribute [rw] phone_number
-    #   The phone number associated with an address that a Snowball is to be
-    #   delivered to.
+    #   The phone number associated with an address that a Snow device is to
+    #   be delivered to.
     #   @return [String]
     #
     # @!attribute [rw] is_restricted
@@ -257,9 +258,9 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snowball device to use for this cluster.
+    #   The type of AWS Snow device to use for this cluster.
     #
-    #   <note markdown="1"> For cluster jobs, AWS Snowball currently supports only the `EDGE`
+    #   <note markdown="1"> For cluster jobs, AWS Snow Family currently supports only the `EDGE`
     #   device type.
     #
     #    </note>
@@ -280,20 +281,19 @@ module Aws::Snowball
     #
     # @!attribute [rw] shipping_option
     #   The shipping speed for each node in this cluster. This speed
-    #   doesn't dictate how soon you'll get each Snowball Edge device,
-    #   rather it represents how quickly each device moves to its
-    #   destination while in transit. Regional shipping speeds are as
-    #   follows:
+    #   doesn't dictate how soon you'll get each device, rather it
+    #   represents how quickly each device moves to its destination while in
+    #   transit. Regional shipping speeds are as follows:
     #
     #   * In Australia, you have access to express shipping. Typically,
     #     devices shipped express are delivered in about a day.
     #
     #   * In the European Union (EU), you have access to express shipping.
-    #     Typically, Snowball Edges shipped express are delivered in about a
+    #     Typically, Snow devices shipped express are delivered in about a
     #     day. In addition, most countries in the EU have access to standard
     #     shipping, which typically takes less than a week, one way.
     #
-    #   * In India, Snowball Edges are delivered in one to seven days.
+    #   * In India, Snow devices are delivered in one to seven days.
     #
     #   * In the US, you have access to one-day shipping and two-day
     #     shipping.
@@ -336,12 +336,12 @@ module Aws::Snowball
     end
 
     # A JSON-formatted object that describes a compatible Amazon Machine
-    # Image (AMI), including the ID and name for a Snowball Edge AMI. This
-    # AMI is compatible with the device's physical hardware requirements,
-    # and it should be able to be run in an SBE1 instance on the device.
+    # Image (AMI), including the ID and name for a Snow device AMI. This AMI
+    # is compatible with the device's physical hardware requirements, and
+    # it should be able to be run in an SBE1 instance on the device.
     #
     # @!attribute [rw] ami_id
-    #   The unique identifier for an individual Snowball Edge AMI.
+    #   The unique identifier for an individual Snow device AMI.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -353,6 +353,24 @@ module Aws::Snowball
     class CompatibleImage < Struct.new(
       :ami_id,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You get this exception when you call `CreateReturnShippingLabel` more
+    # than once when other requests are not completed.
+    #
+    # @!attribute [rw] conflict_resource
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :conflict_resource,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -380,7 +398,7 @@ module Aws::Snowball
     #       }
     #
     # @!attribute [rw] address
-    #   The address that you want the Snowball shipped to.
+    #   The address that you want the Snow device shipped to.
     #   @return [Types::Address]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateAddressRequest AWS API Documentation
@@ -394,7 +412,7 @@ module Aws::Snowball
     # @!attribute [rw] address_id
     #   The automatically generated ID for a specific address. You'll use
     #   this ID when you create a job to specify which address you want the
-    #   Snowball for that job shipped to.
+    #   Snow device for that job shipped to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateAddressResult AWS API Documentation
@@ -497,9 +515,9 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snowball device to use for this cluster.
+    #   The type of AWS Snow Family device to use for this cluster.
     #
-    #   <note markdown="1"> For cluster jobs, AWS Snowball currently supports only the `EDGE`
+    #   <note markdown="1"> For cluster jobs, AWS Snow Family currently supports only the `EDGE`
     #   device type.
     #
     #    </note>
@@ -512,15 +530,15 @@ module Aws::Snowball
     #   destination while in transit. Regional shipping speeds are as
     #   follows:
     #
-    #   * In Australia, you have access to express shipping. Typically,
-    #     Snowballs shipped express are delivered in about a day.
+    #   * In Australia, you have access to express shipping. Typically, Snow
+    #     devices shipped express are delivered in about a day.
     #
     #   * In the European Union (EU), you have access to express shipping.
-    #     Typically, Snowballs shipped express are delivered in about a day.
-    #     In addition, most countries in the EU have access to standard
+    #     Typically, Snow devices shipped express are delivered in about a
+    #     day. In addition, most countries in the EU have access to standard
     #     shipping, which typically takes less than a week, one way.
     #
-    #   * In India, Snowballs are delivered in one to seven days.
+    #   * In India, Snow device are delivered in one to seven days.
     #
     #   * In the United States of America (US), you have access to one-day
     #     shipping and two-day shipping.
@@ -530,11 +548,11 @@ module Aws::Snowball
     #     devices shipped express are delivered in about a day.
     #
     #   * In the European Union (EU), you have access to express shipping.
-    #     Typically, Snowball Edges shipped express are delivered in about a
+    #     Typically, Snow devices shipped express are delivered in about a
     #     day. In addition, most countries in the EU have access to standard
     #     shipping, which typically takes less than a week, one way.
     #
-    #   * In India, Snowball Edges are delivered in one to seven days.
+    #   * In India, Snow device are delivered in one to seven days.
     #
     #   * In the US, you have access to one-day shipping and two-day
     #     shipping.
@@ -668,7 +686,7 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] address_id
-    #   The ID for the address that you want the Snowball shipped to.
+    #   The ID for the address that you want the Snow device shipped to.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
@@ -693,25 +711,25 @@ module Aws::Snowball
     #
     # @!attribute [rw] snowball_capacity_preference
     #   If your job is being created in one of the US regions, you have the
-    #   option of specifying what size Snowball you'd like for this job. In
-    #   all other regions, Snowballs come with 80 TB in storage capacity.
+    #   option of specifying what size Snow device you'd like for this job.
+    #   In all other regions, Snowballs come with 80 TB in storage capacity.
     #   @return [String]
     #
     # @!attribute [rw] shipping_option
     #   The shipping speed for this job. This speed doesn't dictate how
-    #   soon you'll get the Snowball, rather it represents how quickly the
-    #   Snowball moves to its destination while in transit. Regional
+    #   soon you'll get the Snow device, rather it represents how quickly
+    #   the Snow device moves to its destination while in transit. Regional
     #   shipping speeds are as follows:
     #
-    #   * In Australia, you have access to express shipping. Typically,
-    #     Snowballs shipped express are delivered in about a day.
+    #   * In Australia, you have access to express shipping. Typically, Snow
+    #     devices shipped express are delivered in about a day.
     #
     #   * In the European Union (EU), you have access to express shipping.
-    #     Typically, Snowballs shipped express are delivered in about a day.
-    #     In addition, most countries in the EU have access to standard
+    #     Typically, Snow devices shipped express are delivered in about a
+    #     day. In addition, most countries in the EU have access to standard
     #     shipping, which typically takes less than a week, one way.
     #
-    #   * In India, Snowballs are delivered in one to seven days.
+    #   * In India, Snow devices are delivered in one to seven days.
     #
     #   * In the US, you have access to one-day shipping and two-day
     #     shipping.
@@ -729,15 +747,15 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snowball device to use for this job.
+    #   The type of AWS Snow Family device to use for this job.
     #
-    #   <note markdown="1"> For cluster jobs, AWS Snowball currently supports only the `EDGE`
+    #   <note markdown="1"> For cluster jobs, AWS Snow Family currently supports only the `EDGE`
     #   device type.
     #
     #    </note>
     #
-    #   The type of AWS Snowball device to use for this job. Currently, the
-    #   only supported device type for cluster jobs is `EDGE`.
+    #   The type of AWS Snow device to use for this job. Currently, the only
+    #   supported device type for cluster jobs is `EDGE`.
     #
     #   For more information, see [Snowball Edge Device Options][1] in the
     #   Snowball Edge Developer Guide.
@@ -794,26 +812,69 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # Defines the real-time status of a Snowball's data transfer while the
-    # device is at AWS. This data is only available while a job has a
+    # @note When making an API call, you may pass CreateReturnShippingLabelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID for a job that you want to create the return shipping label
+    #   for. For example `JID123e4567-e89b-12d3-a456-426655440000`.
+    #   @return [String]
+    #
+    # @!attribute [rw] shipping_option
+    #   The shipping speed for a particular job. This speed doesn't dictate
+    #   how soon the device is returned to AWS. This speed represents how
+    #   quickly it moves to its destination while in transit. Regional
+    #   shipping speeds are as follows:
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateReturnShippingLabelRequest AWS API Documentation
+    #
+    class CreateReturnShippingLabelRequest < Struct.new(
+      :job_id,
+      :shipping_option)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status information of the task on a Snow device that is being
+    #   returned to AWS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateReturnShippingLabelResult AWS API Documentation
+    #
+    class CreateReturnShippingLabelResult < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the real-time status of a Snow device's data transfer while
+    # the device is at AWS. This data is only available while a job has a
     # `JobState` value of `InProgress`, for both import and export jobs.
     #
     # @!attribute [rw] bytes_transferred
-    #   The number of bytes transferred between a Snowball and Amazon S3.
+    #   The number of bytes transferred between a Snow device and Amazon S3.
     #   @return [Integer]
     #
     # @!attribute [rw] objects_transferred
-    #   The number of objects transferred between a Snowball and Amazon S3.
+    #   The number of objects transferred between a Snow device and Amazon
+    #   S3.
     #   @return [Integer]
     #
     # @!attribute [rw] total_bytes
-    #   The total bytes of data for a transfer between a Snowball and Amazon
-    #   S3. This value is set to 0 (zero) until all the keys that will be
-    #   transferred have been listed.
+    #   The total bytes of data for a transfer between a Snow device and
+    #   Amazon S3. This value is set to 0 (zero) until all the keys that
+    #   will be transferred have been listed.
     #   @return [Integer]
     #
     # @!attribute [rw] total_objects
-    #   The total number of objects for a transfer between a Snowball and
+    #   The total number of objects for a transfer between a Snow device and
     #   Amazon S3. This value is set to 0 (zero) until all the keys that
     #   will be transferred have been listed.
     #   @return [Integer]
@@ -849,8 +910,8 @@ module Aws::Snowball
     end
 
     # @!attribute [rw] address
-    #   The address that you want the Snowball or Snowballs associated with
-    #   a specific job to be shipped to.
+    #   The address that you want the Snow device(s) associated with a
+    #   specific job to be shipped to.
     #   @return [Types::Address]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddressResult AWS API Documentation
@@ -890,7 +951,8 @@ module Aws::Snowball
     end
 
     # @!attribute [rw] addresses
-    #   The Snowball shipping addresses that were created for this account.
+    #   The Snow device shipping addresses that were created for this
+    #   account.
     #   @return [Array<Types::Address>]
     #
     # @!attribute [rw] next_token
@@ -980,6 +1042,44 @@ module Aws::Snowball
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeReturnShippingLabelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId",
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The automatically generated ID for a job, for example
+    #   `JID123e4567-e89b-12d3-a456-426655440000`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeReturnShippingLabelRequest AWS API Documentation
+    #
+    class DescribeReturnShippingLabelRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status information of the task on a Snow device that is being
+    #   returned to AWS.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_date
+    #   The expiration date of the current return shipping label.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeReturnShippingLabelResult AWS API Documentation
+    #
+    class DescribeReturnShippingLabelResult < Struct.new(
+      :status,
+      :expiration_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The container for `SnowconeDeviceConfiguration`.
     #
     # @note When making an API call, you may pass DeviceConfiguration
@@ -1007,7 +1107,7 @@ module Aws::Snowball
     end
 
     # A JSON-formatted object that contains the IDs for an Amazon Machine
-    # Image (AMI), including the Amazon EC2 AMI ID and the Snowball Edge AMI
+    # Image (AMI), including the Amazon EC2 AMI ID and the Snow device AMI
     # ID. Each AMI has these two IDs to simplify identifying the AMI in both
     # the AWS Cloud and on the device.
     #
@@ -1024,7 +1124,7 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_ami_id
-    #   The ID of the AMI on the Snowball Edge device.
+    #   The ID of the AMI on the Snow device.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Ec2AmiResource AWS API Documentation
@@ -1145,12 +1245,12 @@ module Aws::Snowball
     class GetSnowballUsageRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] snowball_limit
-    #   The service limit for number of Snowballs this account can have at
-    #   once. The default service limit is 1 (one).
+    #   The service limit for number of Snow devices this account can have
+    #   at once. The default service limit is 1 (one).
     #   @return [Integer]
     #
     # @!attribute [rw] snowballs_in_use
-    #   The number of Snowballs that this account is currently using.
+    #   The number of Snow devices that this account is currently using.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetSnowballUsageResult AWS API Documentation
@@ -1311,13 +1411,13 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] is_master
-    #   A value that indicates that this job is a master job. A master job
-    #   represents a successful request to create an export job. Master jobs
-    #   aren't associated with any Snowballs. Instead, each master job will
+    #   A value that indicates that this job is a main job. A main job
+    #   represents a successful request to create an export job. Main jobs
+    #   aren't associated with any Snowballs. Instead, each main job will
     #   have at least one job part, and each job part is associated with a
     #   Snowball. It might take some time before the job parts associated
-    #   with a particular master job are listed, because they are created
-    #   after the master job is created.
+    #   with a particular main job are listed, because they are created
+    #   after the main job is created.
     #   @return [Boolean]
     #
     # @!attribute [rw] job_type
@@ -1351,18 +1451,19 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # Contains job logs. Whenever Snowball is used to import data into or
-    # export data out of Amazon S3, you'll have the option of downloading a
-    # PDF job report. Job logs are returned as a part of the response syntax
-    # of the `DescribeJob` action in the `JobMetadata` data type. The job
-    # logs can be accessed for up to 60 minutes after this request has been
-    # made. To access any of the job logs after 60 minutes have passed,
-    # you'll have to make another call to the `DescribeJob` action.
+    # Contains job logs. Whenever a Snow device is used to import data into
+    # or export data out of Amazon S3, you'll have the option of
+    # downloading a PDF job report. Job logs are returned as a part of the
+    # response syntax of the `DescribeJob` action in the `JobMetadata` data
+    # type. The job logs can be accessed for up to 60 minutes after this
+    # request has been made. To access any of the job logs after 60 minutes
+    # have passed, you'll have to make another call to the `DescribeJob`
+    # action.
     #
     # For import jobs, the PDF job report becomes available at the end of
     # the import process. For export jobs, your job report typically becomes
-    # available while the Snowball for your job part is being delivered to
-    # you.
+    # available while the Snow device for your job part is being delivered
+    # to you.
     #
     # The job report provides you insight into the state of your Amazon S3
     # data transfer. The report includes details about your job or job part
@@ -1456,7 +1557,7 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] address_id
-    #   The ID for the address that you want the Snowball shipped to.
+    #   The ID for the address that you want the Snow device shipped to.
     #   @return [String]
     #
     # @!attribute [rw] shipping_details
@@ -1465,7 +1566,7 @@ module Aws::Snowball
     #   @return [Types::ShippingDetails]
     #
     # @!attribute [rw] snowball_capacity_preference
-    #   The Snowball capacity preference for this job, specified at job
+    #   The Snow device capacity preference for this job, specified at job
     #   creation. In US regions, you can choose between 50 TB and 80 TB
     #   Snowballs. All other regions use 80 TB capacity Snowballs.
     #   @return [String]
@@ -1478,7 +1579,7 @@ module Aws::Snowball
     #   @return [Types::Notification]
     #
     # @!attribute [rw] data_transfer_progress
-    #   A value that defines the real-time status of a Snowball's data
+    #   A value that defines the real-time status of a Snow device's data
     #   transfer while the device is at AWS. This data is only available
     #   while a job has a `JobState` value of `InProgress`, for both import
     #   and export jobs.
@@ -1488,8 +1589,8 @@ module Aws::Snowball
     #   Links to Amazon S3 presigned URLs for the job report and logs. For
     #   import jobs, the PDF job report becomes available at the end of the
     #   import process. For export jobs, your job report typically becomes
-    #   available while the Snowball for your job part is being delivered to
-    #   you.
+    #   available while the Snow device for your job part is being delivered
+    #   to you.
     #   @return [Types::JobLogs]
     #
     # @!attribute [rw] cluster_id
@@ -1807,7 +1908,7 @@ module Aws::Snowball
 
     # @!attribute [rw] compatible_images
     #   A JSON-formatted object that describes a compatible AMI, including
-    #   the ID and name for a Snowball Edge AMI.
+    #   the ID and name for a Snow device AMI.
     #   @return [Array<Types::CompatibleImage>]
     #
     # @!attribute [rw] next_token
@@ -1926,6 +2027,21 @@ module Aws::Snowball
       include Aws::Structure
     end
 
+    # You get this exception if you call `CreateReturnShippingLabel` and a
+    # valid return shipping label already exists. In this case, use
+    # `DescribeReturnShippingLabel` to get the url.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ReturnShippingLabelAlreadyExistsException AWS API Documentation
+    #
+    class ReturnShippingLabelAlreadyExistsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Each `S3Resource` object represents an Amazon S3 bucket that your
     # transferred data will be exported from or imported into. For export
     # jobs, this object can have an optional `KeyRange` value. The length of
@@ -1973,8 +2089,8 @@ module Aws::Snowball
     #
     # @!attribute [rw] tracking_number
     #   The tracking number for this job. Using this tracking number with
-    #   your region's carrier's website, you can track a Snowball as the
-    #   carrier transports it.
+    #   your region's carrier's website, you can track a Snow device as
+    #   the carrier transports it.
     #
     #   For India, the carrier is Amazon Logistics. For all other regions,
     #   UPS is the carrier.
@@ -1994,31 +2110,31 @@ module Aws::Snowball
     #
     # @!attribute [rw] shipping_option
     #   The shipping speed for a particular job. This speed doesn't dictate
-    #   how soon you'll get the Snowball from the job's creation date.
+    #   how soon you'll get the Snow device from the job's creation date.
     #   This speed represents how quickly it moves to its destination while
     #   in transit. Regional shipping speeds are as follows:
     #
-    #   * In Australia, you have access to express shipping. Typically,
-    #     Snowballs shipped express are delivered in about a day.
+    #   * In Australia, you have access to express shipping. Typically, Snow
+    #     devices shipped express are delivered in about a day.
     #
     #   * In the European Union (EU), you have access to express shipping.
-    #     Typically, Snowballs shipped express are delivered in about a day.
-    #     In addition, most countries in the EU have access to standard
+    #     Typically, Snow devices shipped express are delivered in about a
+    #     day. In addition, most countries in the EU have access to standard
     #     shipping, which typically takes less than a week, one way.
     #
-    #   * In India, Snowballs are delivered in one to seven days.
+    #   * In India, Snow device are delivered in one to seven days.
     #
     #   * In the United States of America (US), you have access to one-day
     #     shipping and two-day shipping.
     #   @return [String]
     #
     # @!attribute [rw] inbound_shipment
-    #   The `Status` and `TrackingNumber` values for a Snowball being
+    #   The `Status` and `TrackingNumber` values for a Snow device being
     #   returned to AWS for a particular job.
     #   @return [Types::Shipment]
     #
     # @!attribute [rw] outbound_shipment
-    #   The `Status` and `TrackingNumber` values for a Snowball being
+    #   The `Status` and `TrackingNumber` values for a Snow device being
     #   delivered to the address that you specified for a particular job.
     #   @return [Types::Shipment]
     #
@@ -2308,6 +2424,40 @@ module Aws::Snowball
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJobResult AWS API Documentation
     #
     class UpdateJobResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateJobShipmentStateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         shipment_state: "RECEIVED", # required, accepts RECEIVED, RETURNED
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The job ID of the job whose shipment date you want to update, for
+    #   example `JID123e4567-e89b-12d3-a456-426655440000`.
+    #   @return [String]
+    #
+    # @!attribute [rw] shipment_state
+    #   The state of a device when it is being shipped.
+    #
+    #   Set to `RECEIVED` when the device arrives at your location.
+    #
+    #   Set to `RETURNED` when you have returned the device to AWS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJobShipmentStateRequest AWS API Documentation
+    #
+    class UpdateJobShipmentStateRequest < Struct.new(
+      :job_id,
+      :shipment_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJobShipmentStateResult AWS API Documentation
+    #
+    class UpdateJobShipmentStateResult < Aws::EmptyStructure; end
 
     # Configures the wireless connection on an AWS Snowcone device.
     #

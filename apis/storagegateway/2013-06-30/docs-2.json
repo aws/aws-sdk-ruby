@@ -32,6 +32,7 @@
     "DeleteVolume": "<p>Deletes the specified storage volume that you previously created using the <a>CreateCachediSCSIVolume</a> or <a>CreateStorediSCSIVolume</a> API. This operation is only supported in the cached volume and stored volume types. For stored volume gateways, the local disk that was configured as the storage volume is not deleted. You can reuse the local disk to create another storage volume.</p> <p>Before you delete a volume, make sure there are no iSCSI connections to the volume you are deleting. You should also make sure there is no snapshot in progress. You can use the Amazon Elastic Compute Cloud (Amazon EC2) API to query snapshots on the volume you are deleting and check the snapshot status. For more information, go to <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> <p>In the request, you must provide the Amazon Resource Name (ARN) of the storage volume you want to delete.</p>",
     "DescribeAvailabilityMonitorTest": "<p>Returns information about the most recent High Availability monitoring test that was performed on the host in a cluster. If a test isn't performed, the status and start time in the response would be null.</p>",
     "DescribeBandwidthRateLimit": "<p>Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation is supported for the stored volume, cached volume, and tape gateway types.</p> <p>This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.</p>",
+    "DescribeBandwidthRateLimitSchedule": "<p> Returns information about the bandwidth rate limit schedule of a gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. This operation is supported only in the volume and tape gateway types. </p> <p>This operation returns information about a gateway's bandwidth rate limit schedule. A bandwidth rate limit schedule consists of one or more bandwidth rate limit intervals. A bandwidth rate limit interval defines a period of time on one or more days of the week, during which bandwidth rate limits are specified for uploading, downloading, or both. </p> <p> A bandwidth rate limit interval consists of one or more days of the week, a start hour and minute, an ending hour and minute, and bandwidth rate limits for uploading and downloading </p> <p> If no bandwidth rate limit schedule intervals are set for the gateway, this operation returns an empty response. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.</p>",
     "DescribeCache": "<p>Returns information about the cache of a gateway. This operation is only supported in the cached volume, tape, and file gateway types.</p> <p>The response includes disk IDs that are configured as cache, and it includes the amount of cache allocated and used.</p>",
     "DescribeCachediSCSIVolumes": "<p>Returns a description of the gateway volumes specified in the request. This operation is only supported in the cached volume gateway types.</p> <p>The list of gateway volumes in the request must be from one gateway. In the response, AWS Storage Gateway returns volume information sorted by volume Amazon Resource Name (ARN).</p>",
     "DescribeChapCredentials": "<p>Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials information for a specified iSCSI target, one for each target-initiator pair. This operation is supported in the volume and tape gateway types.</p>",
@@ -74,12 +75,14 @@
     "StartGateway": "<p>Starts a gateway that you previously shut down (see <a>ShutdownGateway</a>). After the gateway starts, you can then make other API calls, your applications can read from or write to the gateway's storage volumes and you will be able to take snapshot backups.</p> <note> <p>When you make a request, you will get a 200 OK success response immediately. However, it might take some time for the gateway to be ready. You should call <a>DescribeGatewayInformation</a> and check the status before making any additional API calls. For more information, see <a>ActivateGateway</a>.</p> </note> <p>To specify which gateway to start, use the Amazon Resource Name (ARN) of the gateway in your request.</p>",
     "UpdateAutomaticTapeCreationPolicy": "<p>Updates the automatic tape creation policy of a gateway. Use this to update the policy with a new set of automatic tape creation rules. This is only supported for tape gateways.</p> <p>By default, there is no automatic tape creation policy.</p> <note> <p>A gateway can have only one automatic tape creation policy.</p> </note>",
     "UpdateBandwidthRateLimit": "<p>Updates the bandwidth rate limits of a gateway. You can update both the upload and download bandwidth rate limit or specify only one of the two. If you don't set a bandwidth rate limit, the existing rate limit remains. This operation is supported for the stored volume, cached volume, and tape gateway types.</p> <p>By default, a gateway's bandwidth rate limits are not set. If you don't set any limit, the gateway does not have any limitations on its bandwidth usage and could potentially use the maximum available bandwidth.</p> <p>To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.</p>",
+    "UpdateBandwidthRateLimitSchedule": "<p> Updates the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. Use this to initiate or update a gateway's bandwidth rate limit schedule. This operation is supported in the volume and tape gateway types. </p>",
     "UpdateChapCredentials": "<p>Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target. By default, a gateway does not have CHAP enabled; however, for added security, you might use it. This operation is supported in the volume and tape gateway types.</p> <important> <p>When you update CHAP credentials, all existing connections on the target are closed and initiators must reconnect with the new credentials.</p> </important>",
     "UpdateGatewayInformation": "<p>Updates a gateway's metadata, which includes the gateway's name and time zone. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.</p> <note> <p>For gateways activated after September 2, 2015, the gateway's ARN contains the gateway ID rather than the gateway name. However, changing the name of the gateway has no effect on the gateway's ARN.</p> </note>",
     "UpdateGatewaySoftwareNow": "<p>Updates the gateway virtual machine (VM) software. The request immediately triggers the software update.</p> <note> <p>When you make this request, you get a <code>200 OK</code> success response immediately. However, it might take some time for the update to complete. You can call <a>DescribeGatewayInformation</a> to verify the gateway is in the <code>STATE_RUNNING</code> state.</p> </note> <important> <p>A software update forces a system restart of your gateway. You can minimize the chance of any disruption to your applications by increasing your iSCSI Initiators' timeouts. For more information about increasing iSCSI Initiator timeouts for Windows and Linux, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorWindowsClient.html#CustomizeWindowsiSCSISettings\">Customizing your Windows iSCSI settings</a> and <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorRedHatClient.html#CustomizeLinuxiSCSISettings\">Customizing your Linux iSCSI settings</a>, respectively.</p> </important>",
     "UpdateMaintenanceStartTime": "<p>Updates a gateway's weekly maintenance start time information, including day and time of the week. The maintenance time is the time in your gateway's time zone.</p>",
-    "UpdateNFSFileShare": "<p>Updates a Network File System (NFS) file share. This operation is only supported in the file gateway type.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null.</p> </note> <p>Updates the following file share setting:</p> <ul> <li> <p>Default storage class for your S3 bucket</p> </li> <li> <p>Metadata defaults for your S3 bucket</p> </li> <li> <p>Allowed NFS clients for your file share</p> </li> <li> <p>Squash settings</p> </li> <li> <p>Write status of your file share</p> </li> </ul> <note> <p>To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported in file gateways.</p> </note>",
-    "UpdateSMBFileShare": "<p>Updates a Server Message Block (SMB) file share.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported for file gateways.</p> </note> <important> <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p> <p>File gateways don't support creating hard or symbolic links on a file share.</p> </important>",
+    "UpdateNFSFileShare": "<p>Updates a Network File System (NFS) file share. This operation is only supported in the file gateway type.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null.</p> </note> <p>Updates the following file share settings:</p> <ul> <li> <p>Default storage class for your S3 bucket</p> </li> <li> <p>Metadata defaults for your S3 bucket</p> </li> <li> <p>Allowed NFS clients for your file share</p> </li> <li> <p>Squash settings</p> </li> <li> <p>Write status of your file share</p> </li> </ul>",
+    "UpdateSMBFileShare": "<p>Updates a Server Message Block (SMB) file share. This operation is only supported for file gateways.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null.</p> </note> <important> <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p> <p>File gateways don't support creating hard or symbolic links on a file share.</p> </important>",
+    "UpdateSMBFileShareVisibility": "<p>Controls whether the shares on a gateway are visible in a net view or browse list.</p>",
     "UpdateSMBSecurityStrategy": "<p>Updates the SMB security strategy on a file gateway. This action is only supported in file gateways.</p> <note> <p>This API is called Security level in the User Guide.</p> <p>A higher security level can affect performance of the gateway.</p> </note>",
     "UpdateSnapshotSchedule": "<p>Updates a snapshot schedule configured for a gateway volume. This operation is only supported in the cached volume and stored volume gateway types.</p> <p>The default snapshot schedule for volume is once every 24 hours, starting at the creation time of the volume. You can use this API to change the snapshot schedule configured for the volume.</p> <p>In the request you must identify the gateway volume whose snapshot schedule you want to update, and the schedule information, including when you want the snapshot to begin on a day and the frequency (in hours) of snapshots.</p>",
     "UpdateVTLDeviceType": "<p>Updates the type of medium changer in a tape gateway. When you activate a tape gateway, you select a medium changer type for the tape gateway. This operation enables you to select a different type of medium changer after a tape gateway is activated. This operation is only supported in the tape gateway type.</p>"
@@ -217,8 +220,22 @@
     "BandwidthDownloadRateLimit": {
       "base": null,
       "refs": {
+        "BandwidthRateLimitInterval$AverageDownloadRateLimitInBitsPerSec": "<p> The average download rate limit component of the bandwidth rate limit interval, in bits per second. This field does not appear in the response if the download rate limit is not set. </p>",
         "DescribeBandwidthRateLimitOutput$AverageDownloadRateLimitInBitsPerSec": "<p>The average download bandwidth rate limit in bits per second. This field does not appear in the response if the download rate limit is not set.</p>",
         "UpdateBandwidthRateLimitInput$AverageDownloadRateLimitInBitsPerSec": "<p>The average download bandwidth rate limit in bits per second.</p>"
+      }
+    },
+    "BandwidthRateLimitInterval": {
+      "base": "<p> Describes a bandwidth rate limit interval for a gateway. A bandwidth rate limit schedule consists of one or more bandwidth rate limit intervals. A bandwidth rate limit interval defines a period of time on one or more days of the week, during which bandwidth rate limits are specified for uploading, downloading, or both. </p>",
+      "refs": {
+        "BandwidthRateLimitIntervals$member": null
+      }
+    },
+    "BandwidthRateLimitIntervals": {
+      "base": null,
+      "refs": {
+        "DescribeBandwidthRateLimitScheduleOutput$BandwidthRateLimitIntervals": "<p> An array that contains the bandwidth rate limit intervals for a tape or volume gateway. </p>",
+        "UpdateBandwidthRateLimitScheduleInput$BandwidthRateLimitIntervals": "<p> An array containing bandwidth rate limit schedule intervals for a gateway. When no bandwidth rate limit intervals have been scheduled, the array is empty. </p>"
       }
     },
     "BandwidthType": {
@@ -230,6 +247,7 @@
     "BandwidthUploadRateLimit": {
       "base": null,
       "refs": {
+        "BandwidthRateLimitInterval$AverageUploadRateLimitInBitsPerSec": "<p> The average upload rate limit component of the bandwidth rate limit interval, in bits per second. This field does not appear in the response if the upload rate limit is not set. </p>",
         "DescribeBandwidthRateLimitOutput$AverageUploadRateLimitInBitsPerSec": "<p>The average upload bandwidth rate limit in bits per second. This field does not appear in the response if the upload rate limit is not set.</p>",
         "UpdateBandwidthRateLimitInput$AverageUploadRateLimitInBitsPerSec": "<p>The average upload bandwidth rate limit in bits per second.</p>"
       }
@@ -247,10 +265,12 @@
         "CreateSMBFileShareInput$GuessMIMETypeEnabled": "<p>A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to <code>true</code> to enable MIME type guessing, otherwise set to <code>false</code>. The default value is <code>true</code>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
         "CreateSMBFileShareInput$RequesterPays": "<p>A value that sets who pays the cost of the request and the cost associated with data download from the S3 bucket. If this value is set to <code>true</code>, the requester pays the costs; otherwise, the S3 bucket owner pays. However, the S3 bucket owner always pays the cost of storing data.</p> <note> <p> <code>RequesterPays</code> is a configuration for the S3 bucket that backs the file share, so make sure that the configuration on the file share is the same as the S3 bucket configuration.</p> </note> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
         "CreateSMBFileShareInput$SMBACLEnabled": "<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file share. Set it to <code>false</code> to map file and directory permissions to the POSIX permissions.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html\">Using Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
+        "CreateSMBFileShareInput$AccessBasedEnumeration": "<p>The files and folders on this share will only be visible to users with read access.</p>",
         "CreateStorediSCSIVolumeInput$KMSEncrypted": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
         "CreateTapeWithBarcodeInput$KMSEncrypted": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
         "CreateTapesInput$KMSEncrypted": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
         "DescribeSMBSettingsOutput$SMBGuestPasswordSet": "<p>This value is <code>true</code> if a password for the guest user <code>smbguest</code> is set, otherwise <code>false</code>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
+        "DescribeSMBSettingsOutput$FileSharesVisible": "<p>The shares on this gateway appear when listing shares.</p>",
         "DetachVolumeInput$ForceDetach": "<p>Set to <code>true</code> to forcibly remove the iSCSI connection of the target volume and detach the volume. The default is <code>false</code>. If this value is set to <code>false</code>, you must manually disconnect the iSCSI connection from the target volume.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
         "NFSFileShareInfo$ReadOnly": "<p>A value that sets the write status of a file share. Set this value to <code>true</code> to set the write status to read-only, otherwise set to <code>false</code>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
         "NFSFileShareInfo$GuessMIMETypeEnabled": "<p>A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to <code>true</code> to enable MIME type guessing, otherwise set to <code>false</code>. The default value is <code>true</code>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
@@ -260,6 +280,7 @@
         "SMBFileShareInfo$GuessMIMETypeEnabled": "<p>A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to <code>true</code> to enable MIME type guessing, otherwise set to <code>false</code>. The default value is <code>true</code>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
         "SMBFileShareInfo$RequesterPays": "<p>A value that sets who pays the cost of the request and the cost associated with data download from the S3 bucket. If this value is set to <code>true</code>, the requester pays the costs; otherwise, the S3 bucket owner pays. However, the S3 bucket owner always pays the cost of storing data.</p> <note> <p> <code>RequesterPays</code> is a configuration for the S3 bucket that backs the file share, so make sure that the configuration on the file share is the same as the S3 bucket configuration.</p> </note> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
         "SMBFileShareInfo$SMBACLEnabled": "<p>If this value is set to <code>true</code>, it indicates that access control list (ACL) is enabled on the SMB file share. If it is set to <code>false</code>, it indicates that file and directory permissions are mapped to the POSIX permission.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html\">Using Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>AWS Storage Gateway User Guide</i>.</p>",
+        "SMBFileShareInfo$AccessBasedEnumeration": "<p>Indicates whether <code>AccessBasedEnumeration</code> is enabled.</p>",
         "UpdateNFSFileShareInput$KMSEncrypted": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
         "UpdateNFSFileShareInput$ReadOnly": "<p>A value that sets the write status of a file share. Set this value to <code>true</code> to set the write status to read-only, otherwise set to <code>false</code>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
         "UpdateNFSFileShareInput$GuessMIMETypeEnabled": "<p>A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to <code>true</code> to enable MIME type guessing, otherwise set to <code>false</code>. The default value is <code>true</code>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
@@ -268,7 +289,9 @@
         "UpdateSMBFileShareInput$ReadOnly": "<p>A value that sets the write status of a file share. Set this value to <code>true</code> to set write status to read-only, otherwise set to <code>false</code>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
         "UpdateSMBFileShareInput$GuessMIMETypeEnabled": "<p>A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to <code>true</code> to enable MIME type guessing, otherwise set to <code>false</code>. The default value is <code>true</code>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
         "UpdateSMBFileShareInput$RequesterPays": "<p>A value that sets who pays the cost of the request and the cost associated with data download from the S3 bucket. If this value is set to <code>true</code>, the requester pays the costs; otherwise, the S3 bucket owner pays. However, the S3 bucket owner always pays the cost of storing data.</p> <note> <p> <code>RequesterPays</code> is a configuration for the S3 bucket that backs the file share, so make sure that the configuration on the file share is the same as the S3 bucket configuration.</p> </note> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
-        "UpdateSMBFileShareInput$SMBACLEnabled": "<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file share. Set it to <code>false</code> to map file and directory permissions to the POSIX permissions.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html\">Using Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>"
+        "UpdateSMBFileShareInput$SMBACLEnabled": "<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file share. Set it to <code>false</code> to map file and directory permissions to the POSIX permissions.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html\">Using Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>",
+        "UpdateSMBFileShareInput$AccessBasedEnumeration": "<p>The files and folders on this share will only be visible to users with read access.</p>",
+        "UpdateSMBFileShareVisibilityInput$FileSharesVisible": "<p>The shares on this gateway appear when listing shares.</p>"
       }
     },
     "CacheAttributes": {
@@ -472,8 +495,15 @@
     "DayOfWeek": {
       "base": null,
       "refs": {
+        "DaysOfWeek$member": null,
         "DescribeMaintenanceStartTimeOutput$DayOfWeek": "<p>An ordinal number between 0 and 6 that represents the day of the week, where 0 represents Sunday and 6 represents Saturday. The day of week is in the time zone of the gateway.</p>",
         "UpdateMaintenanceStartTimeInput$DayOfWeek": "<p>The day of the week component of the maintenance start time week represented as an ordinal number from 0 to 6, where 0 represents Sunday and 6 Saturday.</p>"
+      }
+    },
+    "DaysOfWeek": {
+      "base": null,
+      "refs": {
+        "BandwidthRateLimitInterval$DaysOfWeek": "<p> The days of the week component of the bandwidth rate limit interval, represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 Saturday. </p>"
       }
     },
     "DeleteAutomaticTapeCreationPolicyInput": {
@@ -599,6 +629,16 @@
     },
     "DescribeBandwidthRateLimitOutput": {
       "base": "<p>A JSON object containing the following fields:</p>",
+      "refs": {
+      }
+    },
+    "DescribeBandwidthRateLimitScheduleInput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DescribeBandwidthRateLimitScheduleOutput": {
+      "base": null,
       "refs": {
       }
     },
@@ -1049,6 +1089,8 @@
         "DescribeAvailabilityMonitorTestOutput$GatewayARN": null,
         "DescribeBandwidthRateLimitInput$GatewayARN": null,
         "DescribeBandwidthRateLimitOutput$GatewayARN": null,
+        "DescribeBandwidthRateLimitScheduleInput$GatewayARN": null,
+        "DescribeBandwidthRateLimitScheduleOutput$GatewayARN": null,
         "DescribeCacheInput$GatewayARN": null,
         "DescribeCacheOutput$GatewayARN": null,
         "DescribeGatewayInformationInput$GatewayARN": null,
@@ -1102,12 +1144,16 @@
         "UpdateAutomaticTapeCreationPolicyOutput$GatewayARN": null,
         "UpdateBandwidthRateLimitInput$GatewayARN": null,
         "UpdateBandwidthRateLimitOutput$GatewayARN": null,
+        "UpdateBandwidthRateLimitScheduleInput$GatewayARN": null,
+        "UpdateBandwidthRateLimitScheduleOutput$GatewayARN": null,
         "UpdateGatewayInformationInput$GatewayARN": null,
         "UpdateGatewayInformationOutput$GatewayARN": null,
         "UpdateGatewaySoftwareNowInput$GatewayARN": null,
         "UpdateGatewaySoftwareNowOutput$GatewayARN": null,
         "UpdateMaintenanceStartTimeInput$GatewayARN": null,
         "UpdateMaintenanceStartTimeOutput$GatewayARN": null,
+        "UpdateSMBFileShareVisibilityInput$GatewayARN": null,
+        "UpdateSMBFileShareVisibilityOutput$GatewayARN": null,
         "UpdateSMBSecurityStrategyInput$GatewayARN": null,
         "UpdateSMBSecurityStrategyOutput$GatewayARN": null,
         "VolumeInfo$GatewayARN": null
@@ -1197,6 +1243,8 @@
     "HourOfDay": {
       "base": null,
       "refs": {
+        "BandwidthRateLimitInterval$StartHourOfDay": "<p> The hour of the day to start the bandwidth rate limit interval. </p>",
+        "BandwidthRateLimitInterval$EndHourOfDay": "<p> The hour of the day to end the bandwidth rate limit interval. </p>",
         "DescribeMaintenanceStartTimeOutput$HourOfDay": "<p>The hour component of the maintenance start time represented as <i>hh</i>, where <i>hh</i> is the hour (0 to 23). The hour of the day is in the time zone of the gateway.</p>",
         "DescribeSnapshotScheduleOutput$StartAt": "<p>The hour of the day at which the snapshot schedule begins represented as <i>hh</i>, where <i>hh</i> is the hour (0 to 23). The hour of the day is in the time zone of the gateway.</p>",
         "UpdateMaintenanceStartTimeInput$HourOfDay": "<p>The hour component of the maintenance start time represented as <i>hh</i>, where <i>hh</i> is the hour (00 to 23). The hour of the day is in the time zone of the gateway.</p>",
@@ -1432,6 +1480,8 @@
     "MinuteOfHour": {
       "base": null,
       "refs": {
+        "BandwidthRateLimitInterval$StartMinuteOfHour": "<p> The minute of the hour to start the bandwidth rate limit interval. The interval begins at the start of that minute. To begin an interval exactly at the start of the hour, use the value <code>0</code>. </p>",
+        "BandwidthRateLimitInterval$EndMinuteOfHour": "<p> The minute of the hour to end the bandwidth rate limit interval. </p> <important> <p> The bandwidth rate limit interval ends at the end of the minute. To end an interval at the end of an hour, use the value <code>59</code>. </p> </important>",
         "DescribeMaintenanceStartTimeOutput$MinuteOfHour": "<p>The minute component of the maintenance start time represented as <i>mm</i>, where <i>mm</i> is the minute (0 to 59). The minute of the hour is in the time zone of the gateway.</p>",
         "UpdateMaintenanceStartTimeInput$MinuteOfHour": "<p>The minute component of the maintenance start time represented as <i>mm</i>, where <i>mm</i> is the minute (00 to 59). The minute of the hour is in the time zone of the gateway.</p>"
       }
@@ -1483,6 +1533,17 @@
       "refs": {
         "NotifyWhenUploadedOutput$NotificationId": null,
         "RefreshCacheOutput$NotificationId": null
+      }
+    },
+    "NotificationPolicy": {
+      "base": null,
+      "refs": {
+        "CreateNFSFileShareInput$NotificationPolicy": "<p>The notification policy of the file share.</p>",
+        "CreateSMBFileShareInput$NotificationPolicy": "<p>The notification policy of the file share.</p>",
+        "NFSFileShareInfo$NotificationPolicy": "<p>The notification policy of the file share.</p>",
+        "SMBFileShareInfo$NotificationPolicy": "<p>The notification policy of the file share.</p>",
+        "UpdateNFSFileShareInput$NotificationPolicy": "<p>The notification policy of the file share.</p>",
+        "UpdateSMBFileShareInput$NotificationPolicy": "<p>The notification policy of the file share.</p>"
       }
     },
     "NotifyWhenUploadedInput": {
@@ -2112,6 +2173,16 @@
       "refs": {
       }
     },
+    "UpdateBandwidthRateLimitScheduleInput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateBandwidthRateLimitScheduleOutput": {
+      "base": null,
+      "refs": {
+      }
+    },
     "UpdateChapCredentialsInput": {
       "base": "<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>UpdateChapCredentialsInput$InitiatorName</a> </p> </li> <li> <p> <a>UpdateChapCredentialsInput$SecretToAuthenticateInitiator</a> </p> </li> <li> <p> <a>UpdateChapCredentialsInput$SecretToAuthenticateTarget</a> </p> </li> <li> <p> <a>UpdateChapCredentialsInput$TargetARN</a> </p> </li> </ul>",
       "refs": {
@@ -2169,6 +2240,16 @@
     },
     "UpdateSMBFileShareOutput": {
       "base": "<p>UpdateSMBFileShareOutput</p>",
+      "refs": {
+      }
+    },
+    "UpdateSMBFileShareVisibilityInput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateSMBFileShareVisibilityOutput": {
+      "base": null,
       "refs": {
       }
     },

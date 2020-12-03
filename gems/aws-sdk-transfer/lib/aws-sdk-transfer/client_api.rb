@@ -80,6 +80,8 @@ module Aws::Transfer
     Response = Shapes::StringShape.new(name: 'Response')
     RetryAfterSeconds = Shapes::StringShape.new(name: 'RetryAfterSeconds')
     Role = Shapes::StringShape.new(name: 'Role')
+    SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
+    SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SecurityPolicyName = Shapes::StringShape.new(name: 'SecurityPolicyName')
     SecurityPolicyNames = Shapes::ListShape.new(name: 'SecurityPolicyNames')
     SecurityPolicyOption = Shapes::StringShape.new(name: 'SecurityPolicyOption')
@@ -229,6 +231,7 @@ module Aws::Transfer
     EndpointDetails.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
     EndpointDetails.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
     EndpointDetails.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    EndpointDetails.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
     EndpointDetails.struct_class = Types::EndpointDetails
 
     HomeDirectoryMapEntry.add_member(:entry, Shapes::ShapeRef.new(shape: MapEntry, required: true, location_name: "Entry"))
@@ -328,6 +331,8 @@ module Aws::Transfer
     ResourceNotFoundException.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "Resource"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
     SecurityPolicyNames.member = Shapes::ShapeRef.new(shape: SecurityPolicyName)
 

@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-require 'ostruct'
-require 'stringio'
-require 'uri'
-require 'openssl'
+require_relative '../../../spec_helper'
 
 module Seahorse
   module Client
@@ -277,6 +273,13 @@ module Seahorse
 
             it 'wraps errors with a NetworkingError' do
               stub_request(:any, endpoint).to_raise(EOFError)
+              resp = make_request
+              expect(resp.error).to be_a(Seahorse::Client::NetworkingError)
+            end
+
+            it 'wraps errors for proxys with a NetworkingError' do
+              error = Net::HTTPFatalError.new("Gateway Time-out", nil)
+              stub_request(:any, endpoint).to_raise(error)
               resp = make_request
               expect(resp.error).to be_a(Seahorse::Client::NetworkingError)
             end

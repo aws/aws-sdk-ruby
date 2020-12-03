@@ -255,6 +255,7 @@ module Aws::STS
         o.errors << Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
         o.errors << Shapes::ShapeRef.new(shape: PackedPolicyTooLargeException)
         o.errors << Shapes::ShapeRef.new(shape: RegionDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: ExpiredTokenException)
       end)
 
       api.add_operation(:assume_role_with_saml, Seahorse::Model::Operation.new.tap do |o|

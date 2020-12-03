@@ -49,8 +49,8 @@ module Aws
   module PageableResponse
 
     def self.extended(base)
-      base.send(:extend, Enumerable)
-      base.send(:extend, UnsafeEnumerableMethods)
+      base.extend Enumerable
+      base.extend UnsafeEnumerableMethods
       base.instance_variable_set("@last_page", nil)
       base.instance_variable_set("@more_results", nil)
     end

@@ -1110,6 +1110,7 @@ module Aws::CodeBuild
     #   resp.report_groups[0].tags #=> Array
     #   resp.report_groups[0].tags[0].key #=> String
     #   resp.report_groups[0].tags[0].value #=> String
+    #   resp.report_groups[0].status #=> String, one of "ACTIVE", "DELETING"
     #   resp.report_groups_not_found #=> Array
     #   resp.report_groups_not_found[0] #=> String
     #
@@ -1638,6 +1639,7 @@ module Aws::CodeBuild
     #   resp.report_group.tags #=> Array
     #   resp.report_group.tags[0].key #=> String
     #   resp.report_group.tags[0].value #=> String
+    #   resp.report_group.status #=> String, one of "ACTIVE", "DELETING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateReportGroup AWS API Documentation
     #
@@ -2067,6 +2069,43 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def describe_test_cases(params = {}, options = {})
       req = build_request(:describe_test_cases, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :report_group_arn
+    #
+    # @option params [Integer] :num_of_reports
+    #
+    # @option params [required, String] :trend_field
+    #
+    # @return [Types::GetReportGroupTrendOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetReportGroupTrendOutput#stats #stats} => Types::ReportGroupTrendStats
+    #   * {Types::GetReportGroupTrendOutput#raw_data #raw_data} => Array&lt;Types::ReportWithRawData&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_report_group_trend({
+    #     report_group_arn: "NonEmptyString", # required
+    #     num_of_reports: 1,
+    #     trend_field: "PASS_RATE", # required, accepts PASS_RATE, DURATION, TOTAL, LINE_COVERAGE, LINES_COVERED, LINES_MISSED, BRANCH_COVERAGE, BRANCHES_COVERED, BRANCHES_MISSED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stats.average #=> String
+    #   resp.stats.max #=> String
+    #   resp.stats.min #=> String
+    #   resp.raw_data #=> Array
+    #   resp.raw_data[0].report_arn #=> String
+    #   resp.raw_data[0].data #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/GetReportGroupTrend AWS API Documentation
+    #
+    # @overload get_report_group_trend(params = {})
+    # @param [Hash] params ({})
+    def get_report_group_trend(params = {}, options = {})
+      req = build_request(:get_report_group_trend, params)
       req.send_request(options)
     end
 
@@ -3009,7 +3048,8 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
-    # Restarts a batch build.
+    # Restarts a failed batch build. Only batch builds that have failed can
+    # be retried.
     #
     # @option params [String] :id
     #   Specifies the identifier of the batch build to restart.
@@ -4884,6 +4924,7 @@ module Aws::CodeBuild
     #   resp.report_group.tags #=> Array
     #   resp.report_group.tags[0].key #=> String
     #   resp.report_group.tags[0].value #=> String
+    #   resp.report_group.status #=> String, one of "ACTIVE", "DELETING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateReportGroup AWS API Documentation
     #
@@ -4985,7 +5026,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

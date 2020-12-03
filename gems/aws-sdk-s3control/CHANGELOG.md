@@ -1,6 +1,23 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-11-18)
+------------------
+
+* Feature - AWS S3 Storage Lens provides visibility into your storage usage and activity trends at the organization or account level, with aggregations by Region, storage class, bucket, and prefix.
+
+1.24.0 (2020-09-30)
+------------------
+
+* Feature - Amazon S3 on Outposts expands object storage to on-premises AWS Outposts environments, enabling you to store and retrieve objects using S3 APIs and features.
+
+* Feature - Support Outpost Access Point and Outpost Bucket ARNs.
+
+1.23.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.22.0 (2020-08-25)
 ------------------
 

@@ -26,22 +26,36 @@ module Aws::Lambda
     AliasConfiguration = Shapes::StructureShape.new(name: 'AliasConfiguration')
     AliasList = Shapes::ListShape.new(name: 'AliasList')
     AliasRoutingConfiguration = Shapes::StructureShape.new(name: 'AliasRoutingConfiguration')
+    AllowedPublishers = Shapes::StructureShape.new(name: 'AllowedPublishers')
     Arn = Shapes::StringShape.new(name: 'Arn')
     BatchSize = Shapes::IntegerShape.new(name: 'BatchSize')
     BisectBatchOnFunctionError = Shapes::BooleanShape.new(name: 'BisectBatchOnFunctionError')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     BlobStream = Shapes::BlobShape.new(name: 'BlobStream', streaming: true)
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CodeSigningConfig = Shapes::StructureShape.new(name: 'CodeSigningConfig')
+    CodeSigningConfigArn = Shapes::StringShape.new(name: 'CodeSigningConfigArn')
+    CodeSigningConfigId = Shapes::StringShape.new(name: 'CodeSigningConfigId')
+    CodeSigningConfigList = Shapes::ListShape.new(name: 'CodeSigningConfigList')
+    CodeSigningConfigNotFoundException = Shapes::StructureShape.new(name: 'CodeSigningConfigNotFoundException')
+    CodeSigningPolicies = Shapes::StructureShape.new(name: 'CodeSigningPolicies')
+    CodeSigningPolicy = Shapes::StringShape.new(name: 'CodeSigningPolicy')
     CodeStorageExceededException = Shapes::StructureShape.new(name: 'CodeStorageExceededException')
+    CodeVerificationFailedException = Shapes::StructureShape.new(name: 'CodeVerificationFailedException')
     CompatibleRuntimes = Shapes::ListShape.new(name: 'CompatibleRuntimes')
     Concurrency = Shapes::StructureShape.new(name: 'Concurrency')
     CreateAliasRequest = Shapes::StructureShape.new(name: 'CreateAliasRequest')
+    CreateCodeSigningConfigRequest = Shapes::StructureShape.new(name: 'CreateCodeSigningConfigRequest')
+    CreateCodeSigningConfigResponse = Shapes::StructureShape.new(name: 'CreateCodeSigningConfigResponse')
     CreateEventSourceMappingRequest = Shapes::StructureShape.new(name: 'CreateEventSourceMappingRequest')
     CreateFunctionRequest = Shapes::StructureShape.new(name: 'CreateFunctionRequest')
     Date = Shapes::TimestampShape.new(name: 'Date')
     DeadLetterConfig = Shapes::StructureShape.new(name: 'DeadLetterConfig')
     DeleteAliasRequest = Shapes::StructureShape.new(name: 'DeleteAliasRequest')
+    DeleteCodeSigningConfigRequest = Shapes::StructureShape.new(name: 'DeleteCodeSigningConfigRequest')
+    DeleteCodeSigningConfigResponse = Shapes::StructureShape.new(name: 'DeleteCodeSigningConfigResponse')
     DeleteEventSourceMappingRequest = Shapes::StructureShape.new(name: 'DeleteEventSourceMappingRequest')
+    DeleteFunctionCodeSigningConfigRequest = Shapes::StructureShape.new(name: 'DeleteFunctionCodeSigningConfigRequest')
     DeleteFunctionConcurrencyRequest = Shapes::StructureShape.new(name: 'DeleteFunctionConcurrencyRequest')
     DeleteFunctionEventInvokeConfigRequest = Shapes::StructureShape.new(name: 'DeleteFunctionEventInvokeConfigRequest')
     DeleteFunctionRequest = Shapes::StructureShape.new(name: 'DeleteFunctionRequest')
@@ -73,6 +87,7 @@ module Aws::Lambda
     FileSystemConfig = Shapes::StructureShape.new(name: 'FileSystemConfig')
     FileSystemConfigList = Shapes::ListShape.new(name: 'FileSystemConfigList')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
+    FunctionArnList = Shapes::ListShape.new(name: 'FunctionArnList')
     FunctionCode = Shapes::StructureShape.new(name: 'FunctionCode')
     FunctionCodeLocation = Shapes::StructureShape.new(name: 'FunctionCodeLocation')
     FunctionConfiguration = Shapes::StructureShape.new(name: 'FunctionConfiguration')
@@ -84,7 +99,11 @@ module Aws::Lambda
     GetAccountSettingsRequest = Shapes::StructureShape.new(name: 'GetAccountSettingsRequest')
     GetAccountSettingsResponse = Shapes::StructureShape.new(name: 'GetAccountSettingsResponse')
     GetAliasRequest = Shapes::StructureShape.new(name: 'GetAliasRequest')
+    GetCodeSigningConfigRequest = Shapes::StructureShape.new(name: 'GetCodeSigningConfigRequest')
+    GetCodeSigningConfigResponse = Shapes::StructureShape.new(name: 'GetCodeSigningConfigResponse')
     GetEventSourceMappingRequest = Shapes::StructureShape.new(name: 'GetEventSourceMappingRequest')
+    GetFunctionCodeSigningConfigRequest = Shapes::StructureShape.new(name: 'GetFunctionCodeSigningConfigRequest')
+    GetFunctionCodeSigningConfigResponse = Shapes::StructureShape.new(name: 'GetFunctionCodeSigningConfigResponse')
     GetFunctionConcurrencyRequest = Shapes::StructureShape.new(name: 'GetFunctionConcurrencyRequest')
     GetFunctionConcurrencyResponse = Shapes::StructureShape.new(name: 'GetFunctionConcurrencyResponse')
     GetFunctionConfigurationRequest = Shapes::StructureShape.new(name: 'GetFunctionConfigurationRequest')
@@ -102,7 +121,11 @@ module Aws::Lambda
     GetProvisionedConcurrencyConfigResponse = Shapes::StructureShape.new(name: 'GetProvisionedConcurrencyConfigResponse')
     Handler = Shapes::StringShape.new(name: 'Handler')
     HttpStatus = Shapes::IntegerShape.new(name: 'HttpStatus')
+    ImageConfig = Shapes::StructureShape.new(name: 'ImageConfig')
+    ImageConfigError = Shapes::StructureShape.new(name: 'ImageConfigError')
+    ImageConfigResponse = Shapes::StructureShape.new(name: 'ImageConfigResponse')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    InvalidCodeSignatureException = Shapes::StructureShape.new(name: 'InvalidCodeSignatureException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
     InvalidRequestContentException = Shapes::StructureShape.new(name: 'InvalidRequestContentException')
     InvalidRuntimeException = Shapes::StructureShape.new(name: 'InvalidRuntimeException')
@@ -140,10 +163,14 @@ module Aws::Lambda
     LicenseInfo = Shapes::StringShape.new(name: 'LicenseInfo')
     ListAliasesRequest = Shapes::StructureShape.new(name: 'ListAliasesRequest')
     ListAliasesResponse = Shapes::StructureShape.new(name: 'ListAliasesResponse')
+    ListCodeSigningConfigsRequest = Shapes::StructureShape.new(name: 'ListCodeSigningConfigsRequest')
+    ListCodeSigningConfigsResponse = Shapes::StructureShape.new(name: 'ListCodeSigningConfigsResponse')
     ListEventSourceMappingsRequest = Shapes::StructureShape.new(name: 'ListEventSourceMappingsRequest')
     ListEventSourceMappingsResponse = Shapes::StructureShape.new(name: 'ListEventSourceMappingsResponse')
     ListFunctionEventInvokeConfigsRequest = Shapes::StructureShape.new(name: 'ListFunctionEventInvokeConfigsRequest')
     ListFunctionEventInvokeConfigsResponse = Shapes::StructureShape.new(name: 'ListFunctionEventInvokeConfigsResponse')
+    ListFunctionsByCodeSigningConfigRequest = Shapes::StructureShape.new(name: 'ListFunctionsByCodeSigningConfigRequest')
+    ListFunctionsByCodeSigningConfigResponse = Shapes::StructureShape.new(name: 'ListFunctionsByCodeSigningConfigResponse')
     ListFunctionsRequest = Shapes::StructureShape.new(name: 'ListFunctionsRequest')
     ListFunctionsResponse = Shapes::StructureShape.new(name: 'ListFunctionsResponse')
     ListLayerVersionsRequest = Shapes::StructureShape.new(name: 'ListLayerVersionsRequest')
@@ -177,6 +204,7 @@ module Aws::Lambda
     OnFailure = Shapes::StructureShape.new(name: 'OnFailure')
     OnSuccess = Shapes::StructureShape.new(name: 'OnSuccess')
     OrganizationId = Shapes::StringShape.new(name: 'OrganizationId')
+    PackageType = Shapes::StringShape.new(name: 'PackageType')
     ParallelizationFactor = Shapes::IntegerShape.new(name: 'ParallelizationFactor')
     PolicyLengthExceededException = Shapes::StructureShape.new(name: 'PolicyLengthExceededException')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
@@ -189,11 +217,15 @@ module Aws::Lambda
     PublishLayerVersionRequest = Shapes::StructureShape.new(name: 'PublishLayerVersionRequest')
     PublishLayerVersionResponse = Shapes::StructureShape.new(name: 'PublishLayerVersionResponse')
     PublishVersionRequest = Shapes::StructureShape.new(name: 'PublishVersionRequest')
+    PutFunctionCodeSigningConfigRequest = Shapes::StructureShape.new(name: 'PutFunctionCodeSigningConfigRequest')
+    PutFunctionCodeSigningConfigResponse = Shapes::StructureShape.new(name: 'PutFunctionCodeSigningConfigResponse')
     PutFunctionConcurrencyRequest = Shapes::StructureShape.new(name: 'PutFunctionConcurrencyRequest')
     PutFunctionEventInvokeConfigRequest = Shapes::StructureShape.new(name: 'PutFunctionEventInvokeConfigRequest')
     PutProvisionedConcurrencyConfigRequest = Shapes::StructureShape.new(name: 'PutProvisionedConcurrencyConfigRequest')
     PutProvisionedConcurrencyConfigResponse = Shapes::StructureShape.new(name: 'PutProvisionedConcurrencyConfigResponse')
     Qualifier = Shapes::StringShape.new(name: 'Qualifier')
+    Queue = Shapes::StringShape.new(name: 'Queue')
+    Queues = Shapes::ListShape.new(name: 'Queues')
     RemoveLayerVersionPermissionRequest = Shapes::StructureShape.new(name: 'RemoveLayerVersionPermissionRequest')
     RemovePermissionRequest = Shapes::StructureShape.new(name: 'RemovePermissionRequest')
     RequestTooLargeException = Shapes::StructureShape.new(name: 'RequestTooLargeException')
@@ -212,12 +244,17 @@ module Aws::Lambda
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
+    SigningProfileVersionArns = Shapes::ListShape.new(name: 'SigningProfileVersionArns')
+    SourceAccessConfiguration = Shapes::StructureShape.new(name: 'SourceAccessConfiguration')
+    SourceAccessConfigurations = Shapes::ListShape.new(name: 'SourceAccessConfigurations')
+    SourceAccessType = Shapes::StringShape.new(name: 'SourceAccessType')
     SourceOwner = Shapes::StringShape.new(name: 'SourceOwner')
     State = Shapes::StringShape.new(name: 'State')
     StateReason = Shapes::StringShape.new(name: 'StateReason')
     StateReasonCode = Shapes::StringShape.new(name: 'StateReasonCode')
     StatementId = Shapes::StringShape.new(name: 'StatementId')
     String = Shapes::StringShape.new(name: 'String')
+    StringList = Shapes::ListShape.new(name: 'StringList')
     SubnetIPAddressLimitReachedException = Shapes::StructureShape.new(name: 'SubnetIPAddressLimitReachedException')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
@@ -239,6 +276,8 @@ module Aws::Lambda
     UnsupportedMediaTypeException = Shapes::StructureShape.new(name: 'UnsupportedMediaTypeException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateAliasRequest = Shapes::StructureShape.new(name: 'UpdateAliasRequest')
+    UpdateCodeSigningConfigRequest = Shapes::StructureShape.new(name: 'UpdateCodeSigningConfigRequest')
+    UpdateCodeSigningConfigResponse = Shapes::StructureShape.new(name: 'UpdateCodeSigningConfigResponse')
     UpdateEventSourceMappingRequest = Shapes::StructureShape.new(name: 'UpdateEventSourceMappingRequest')
     UpdateFunctionCodeRequest = Shapes::StructureShape.new(name: 'UpdateFunctionCodeRequest')
     UpdateFunctionConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateFunctionConfigurationRequest')
@@ -248,6 +287,7 @@ module Aws::Lambda
     VpcConfigResponse = Shapes::StructureShape.new(name: 'VpcConfigResponse')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
     Weight = Shapes::FloatShape.new(name: 'Weight')
+    WorkingDirectory = Shapes::StringShape.new(name: 'WorkingDirectory')
 
     AccountLimit.add_member(:total_code_size, Shapes::ShapeRef.new(shape: Long, location_name: "TotalCodeSize"))
     AccountLimit.add_member(:code_size_unzipped, Shapes::ShapeRef.new(shape: Long, location_name: "CodeSizeUnzipped"))
@@ -303,9 +343,33 @@ module Aws::Lambda
     AliasRoutingConfiguration.add_member(:additional_version_weights, Shapes::ShapeRef.new(shape: AdditionalVersionWeights, location_name: "AdditionalVersionWeights"))
     AliasRoutingConfiguration.struct_class = Types::AliasRoutingConfiguration
 
+    AllowedPublishers.add_member(:signing_profile_version_arns, Shapes::ShapeRef.new(shape: SigningProfileVersionArns, required: true, location_name: "SigningProfileVersionArns"))
+    AllowedPublishers.struct_class = Types::AllowedPublishers
+
+    CodeSigningConfig.add_member(:code_signing_config_id, Shapes::ShapeRef.new(shape: CodeSigningConfigId, required: true, location_name: "CodeSigningConfigId"))
+    CodeSigningConfig.add_member(:code_signing_config_arn, Shapes::ShapeRef.new(shape: CodeSigningConfigArn, required: true, location_name: "CodeSigningConfigArn"))
+    CodeSigningConfig.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CodeSigningConfig.add_member(:allowed_publishers, Shapes::ShapeRef.new(shape: AllowedPublishers, required: true, location_name: "AllowedPublishers"))
+    CodeSigningConfig.add_member(:code_signing_policies, Shapes::ShapeRef.new(shape: CodeSigningPolicies, required: true, location_name: "CodeSigningPolicies"))
+    CodeSigningConfig.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModified"))
+    CodeSigningConfig.struct_class = Types::CodeSigningConfig
+
+    CodeSigningConfigList.member = Shapes::ShapeRef.new(shape: CodeSigningConfig)
+
+    CodeSigningConfigNotFoundException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    CodeSigningConfigNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    CodeSigningConfigNotFoundException.struct_class = Types::CodeSigningConfigNotFoundException
+
+    CodeSigningPolicies.add_member(:untrusted_artifact_on_deployment, Shapes::ShapeRef.new(shape: CodeSigningPolicy, location_name: "UntrustedArtifactOnDeployment"))
+    CodeSigningPolicies.struct_class = Types::CodeSigningPolicies
+
     CodeStorageExceededException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     CodeStorageExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     CodeStorageExceededException.struct_class = Types::CodeStorageExceededException
+
+    CodeVerificationFailedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    CodeVerificationFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    CodeVerificationFailedException.struct_class = Types::CodeVerificationFailedException
 
     CompatibleRuntimes.member = Shapes::ShapeRef.new(shape: Runtime)
 
@@ -318,6 +382,14 @@ module Aws::Lambda
     CreateAliasRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateAliasRequest.add_member(:routing_config, Shapes::ShapeRef.new(shape: AliasRoutingConfiguration, location_name: "RoutingConfig"))
     CreateAliasRequest.struct_class = Types::CreateAliasRequest
+
+    CreateCodeSigningConfigRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateCodeSigningConfigRequest.add_member(:allowed_publishers, Shapes::ShapeRef.new(shape: AllowedPublishers, required: true, location_name: "AllowedPublishers"))
+    CreateCodeSigningConfigRequest.add_member(:code_signing_policies, Shapes::ShapeRef.new(shape: CodeSigningPolicies, location_name: "CodeSigningPolicies"))
+    CreateCodeSigningConfigRequest.struct_class = Types::CreateCodeSigningConfigRequest
+
+    CreateCodeSigningConfigResponse.add_member(:code_signing_config, Shapes::ShapeRef.new(shape: CodeSigningConfig, required: true, location_name: "CodeSigningConfig"))
+    CreateCodeSigningConfigResponse.struct_class = Types::CreateCodeSigningConfigResponse
 
     CreateEventSourceMappingRequest.add_member(:event_source_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "EventSourceArn"))
     CreateEventSourceMappingRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "FunctionName"))
@@ -332,18 +404,21 @@ module Aws::Lambda
     CreateEventSourceMappingRequest.add_member(:bisect_batch_on_function_error, Shapes::ShapeRef.new(shape: BisectBatchOnFunctionError, location_name: "BisectBatchOnFunctionError"))
     CreateEventSourceMappingRequest.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttemptsEventSourceMapping, location_name: "MaximumRetryAttempts"))
     CreateEventSourceMappingRequest.add_member(:topics, Shapes::ShapeRef.new(shape: Topics, location_name: "Topics"))
+    CreateEventSourceMappingRequest.add_member(:queues, Shapes::ShapeRef.new(shape: Queues, location_name: "Queues"))
+    CreateEventSourceMappingRequest.add_member(:source_access_configurations, Shapes::ShapeRef.new(shape: SourceAccessConfigurations, location_name: "SourceAccessConfigurations"))
     CreateEventSourceMappingRequest.struct_class = Types::CreateEventSourceMappingRequest
 
     CreateFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "FunctionName"))
-    CreateFunctionRequest.add_member(:runtime, Shapes::ShapeRef.new(shape: Runtime, required: true, location_name: "Runtime"))
+    CreateFunctionRequest.add_member(:runtime, Shapes::ShapeRef.new(shape: Runtime, location_name: "Runtime"))
     CreateFunctionRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "Role"))
-    CreateFunctionRequest.add_member(:handler, Shapes::ShapeRef.new(shape: Handler, required: true, location_name: "Handler"))
+    CreateFunctionRequest.add_member(:handler, Shapes::ShapeRef.new(shape: Handler, location_name: "Handler"))
     CreateFunctionRequest.add_member(:code, Shapes::ShapeRef.new(shape: FunctionCode, required: true, location_name: "Code"))
     CreateFunctionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateFunctionRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     CreateFunctionRequest.add_member(:memory_size, Shapes::ShapeRef.new(shape: MemorySize, location_name: "MemorySize"))
     CreateFunctionRequest.add_member(:publish, Shapes::ShapeRef.new(shape: Boolean, location_name: "Publish"))
     CreateFunctionRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    CreateFunctionRequest.add_member(:package_type, Shapes::ShapeRef.new(shape: PackageType, location_name: "PackageType"))
     CreateFunctionRequest.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
     CreateFunctionRequest.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "Environment"))
     CreateFunctionRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
@@ -351,6 +426,8 @@ module Aws::Lambda
     CreateFunctionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateFunctionRequest.add_member(:layers, Shapes::ShapeRef.new(shape: LayerList, location_name: "Layers"))
     CreateFunctionRequest.add_member(:file_system_configs, Shapes::ShapeRef.new(shape: FileSystemConfigList, location_name: "FileSystemConfigs"))
+    CreateFunctionRequest.add_member(:image_config, Shapes::ShapeRef.new(shape: ImageConfig, location_name: "ImageConfig"))
+    CreateFunctionRequest.add_member(:code_signing_config_arn, Shapes::ShapeRef.new(shape: CodeSigningConfigArn, location_name: "CodeSigningConfigArn"))
     CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
 
     DeadLetterConfig.add_member(:target_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "TargetArn"))
@@ -360,8 +437,16 @@ module Aws::Lambda
     DeleteAliasRequest.add_member(:name, Shapes::ShapeRef.new(shape: Alias, required: true, location: "uri", location_name: "Name"))
     DeleteAliasRequest.struct_class = Types::DeleteAliasRequest
 
+    DeleteCodeSigningConfigRequest.add_member(:code_signing_config_arn, Shapes::ShapeRef.new(shape: CodeSigningConfigArn, required: true, location: "uri", location_name: "CodeSigningConfigArn"))
+    DeleteCodeSigningConfigRequest.struct_class = Types::DeleteCodeSigningConfigRequest
+
+    DeleteCodeSigningConfigResponse.struct_class = Types::DeleteCodeSigningConfigResponse
+
     DeleteEventSourceMappingRequest.add_member(:uuid, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "UUID"))
     DeleteEventSourceMappingRequest.struct_class = Types::DeleteEventSourceMappingRequest
+
+    DeleteFunctionCodeSigningConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    DeleteFunctionCodeSigningConfigRequest.struct_class = Types::DeleteFunctionCodeSigningConfigRequest
 
     DeleteFunctionConcurrencyRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
     DeleteFunctionConcurrencyRequest.struct_class = Types::DeleteFunctionConcurrencyRequest
@@ -434,6 +519,8 @@ module Aws::Lambda
     EnvironmentVariables.value = Shapes::ShapeRef.new(shape: EnvironmentVariableValue)
 
     EventSourceMappingConfiguration.add_member(:uuid, Shapes::ShapeRef.new(shape: String, location_name: "UUID"))
+    EventSourceMappingConfiguration.add_member(:starting_position, Shapes::ShapeRef.new(shape: EventSourcePosition, location_name: "StartingPosition"))
+    EventSourceMappingConfiguration.add_member(:starting_position_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "StartingPositionTimestamp"))
     EventSourceMappingConfiguration.add_member(:batch_size, Shapes::ShapeRef.new(shape: BatchSize, location_name: "BatchSize"))
     EventSourceMappingConfiguration.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     EventSourceMappingConfiguration.add_member(:parallelization_factor, Shapes::ShapeRef.new(shape: ParallelizationFactor, location_name: "ParallelizationFactor"))
@@ -445,6 +532,8 @@ module Aws::Lambda
     EventSourceMappingConfiguration.add_member(:state_transition_reason, Shapes::ShapeRef.new(shape: String, location_name: "StateTransitionReason"))
     EventSourceMappingConfiguration.add_member(:destination_config, Shapes::ShapeRef.new(shape: DestinationConfig, location_name: "DestinationConfig"))
     EventSourceMappingConfiguration.add_member(:topics, Shapes::ShapeRef.new(shape: Topics, location_name: "Topics"))
+    EventSourceMappingConfiguration.add_member(:queues, Shapes::ShapeRef.new(shape: Queues, location_name: "Queues"))
+    EventSourceMappingConfiguration.add_member(:source_access_configurations, Shapes::ShapeRef.new(shape: SourceAccessConfigurations, location_name: "SourceAccessConfigurations"))
     EventSourceMappingConfiguration.add_member(:maximum_record_age_in_seconds, Shapes::ShapeRef.new(shape: MaximumRecordAgeInSeconds, location_name: "MaximumRecordAgeInSeconds"))
     EventSourceMappingConfiguration.add_member(:bisect_batch_on_function_error, Shapes::ShapeRef.new(shape: BisectBatchOnFunctionError, location_name: "BisectBatchOnFunctionError"))
     EventSourceMappingConfiguration.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttemptsEventSourceMapping, location_name: "MaximumRetryAttempts"))
@@ -458,14 +547,19 @@ module Aws::Lambda
 
     FileSystemConfigList.member = Shapes::ShapeRef.new(shape: FileSystemConfig)
 
+    FunctionArnList.member = Shapes::ShapeRef.new(shape: FunctionArn)
+
     FunctionCode.add_member(:zip_file, Shapes::ShapeRef.new(shape: Blob, location_name: "ZipFile"))
     FunctionCode.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "S3Bucket"))
     FunctionCode.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
     FunctionCode.add_member(:s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "S3ObjectVersion"))
+    FunctionCode.add_member(:image_uri, Shapes::ShapeRef.new(shape: String, location_name: "ImageUri"))
     FunctionCode.struct_class = Types::FunctionCode
 
     FunctionCodeLocation.add_member(:repository_type, Shapes::ShapeRef.new(shape: String, location_name: "RepositoryType"))
     FunctionCodeLocation.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "Location"))
+    FunctionCodeLocation.add_member(:image_uri, Shapes::ShapeRef.new(shape: String, location_name: "ImageUri"))
+    FunctionCodeLocation.add_member(:resolved_image_uri, Shapes::ShapeRef.new(shape: String, location_name: "ResolvedImageUri"))
     FunctionCodeLocation.struct_class = Types::FunctionCodeLocation
 
     FunctionConfiguration.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, location_name: "FunctionName"))
@@ -495,6 +589,10 @@ module Aws::Lambda
     FunctionConfiguration.add_member(:last_update_status_reason, Shapes::ShapeRef.new(shape: LastUpdateStatusReason, location_name: "LastUpdateStatusReason"))
     FunctionConfiguration.add_member(:last_update_status_reason_code, Shapes::ShapeRef.new(shape: LastUpdateStatusReasonCode, location_name: "LastUpdateStatusReasonCode"))
     FunctionConfiguration.add_member(:file_system_configs, Shapes::ShapeRef.new(shape: FileSystemConfigList, location_name: "FileSystemConfigs"))
+    FunctionConfiguration.add_member(:package_type, Shapes::ShapeRef.new(shape: PackageType, location_name: "PackageType"))
+    FunctionConfiguration.add_member(:image_config_response, Shapes::ShapeRef.new(shape: ImageConfigResponse, location_name: "ImageConfigResponse"))
+    FunctionConfiguration.add_member(:signing_profile_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SigningProfileVersionArn"))
+    FunctionConfiguration.add_member(:signing_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SigningJobArn"))
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
     FunctionEventInvokeConfig.add_member(:last_modified, Shapes::ShapeRef.new(shape: Date, location_name: "LastModified"))
@@ -518,8 +616,21 @@ module Aws::Lambda
     GetAliasRequest.add_member(:name, Shapes::ShapeRef.new(shape: Alias, required: true, location: "uri", location_name: "Name"))
     GetAliasRequest.struct_class = Types::GetAliasRequest
 
+    GetCodeSigningConfigRequest.add_member(:code_signing_config_arn, Shapes::ShapeRef.new(shape: CodeSigningConfigArn, required: true, location: "uri", location_name: "CodeSigningConfigArn"))
+    GetCodeSigningConfigRequest.struct_class = Types::GetCodeSigningConfigRequest
+
+    GetCodeSigningConfigResponse.add_member(:code_signing_config, Shapes::ShapeRef.new(shape: CodeSigningConfig, required: true, location_name: "CodeSigningConfig"))
+    GetCodeSigningConfigResponse.struct_class = Types::GetCodeSigningConfigResponse
+
     GetEventSourceMappingRequest.add_member(:uuid, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "UUID"))
     GetEventSourceMappingRequest.struct_class = Types::GetEventSourceMappingRequest
+
+    GetFunctionCodeSigningConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    GetFunctionCodeSigningConfigRequest.struct_class = Types::GetFunctionCodeSigningConfigRequest
+
+    GetFunctionCodeSigningConfigResponse.add_member(:code_signing_config_arn, Shapes::ShapeRef.new(shape: CodeSigningConfigArn, required: true, location_name: "CodeSigningConfigArn"))
+    GetFunctionCodeSigningConfigResponse.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "FunctionName"))
+    GetFunctionCodeSigningConfigResponse.struct_class = Types::GetFunctionCodeSigningConfigResponse
 
     GetFunctionConcurrencyRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
     GetFunctionConcurrencyRequest.struct_class = Types::GetFunctionConcurrencyRequest
@@ -589,6 +700,23 @@ module Aws::Lambda
     GetProvisionedConcurrencyConfigResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "StatusReason"))
     GetProvisionedConcurrencyConfigResponse.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
     GetProvisionedConcurrencyConfigResponse.struct_class = Types::GetProvisionedConcurrencyConfigResponse
+
+    ImageConfig.add_member(:entry_point, Shapes::ShapeRef.new(shape: StringList, location_name: "EntryPoint"))
+    ImageConfig.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "Command"))
+    ImageConfig.add_member(:working_directory, Shapes::ShapeRef.new(shape: WorkingDirectory, location_name: "WorkingDirectory"))
+    ImageConfig.struct_class = Types::ImageConfig
+
+    ImageConfigError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
+    ImageConfigError.add_member(:message, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Message"))
+    ImageConfigError.struct_class = Types::ImageConfigError
+
+    ImageConfigResponse.add_member(:image_config, Shapes::ShapeRef.new(shape: ImageConfig, location_name: "ImageConfig"))
+    ImageConfigResponse.add_member(:error, Shapes::ShapeRef.new(shape: ImageConfigError, location_name: "Error"))
+    ImageConfigResponse.struct_class = Types::ImageConfigResponse
+
+    InvalidCodeSignatureException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    InvalidCodeSignatureException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidCodeSignatureException.struct_class = Types::InvalidCodeSignatureException
 
     InvalidParameterValueException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -660,6 +788,8 @@ module Aws::Lambda
 
     Layer.add_member(:arn, Shapes::ShapeRef.new(shape: LayerVersionArn, location_name: "Arn"))
     Layer.add_member(:code_size, Shapes::ShapeRef.new(shape: Long, location_name: "CodeSize"))
+    Layer.add_member(:signing_profile_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SigningProfileVersionArn"))
+    Layer.add_member(:signing_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SigningJobArn"))
     Layer.struct_class = Types::Layer
 
     LayerList.member = Shapes::ShapeRef.new(shape: LayerVersionArn)
@@ -673,6 +803,8 @@ module Aws::Lambda
     LayerVersionContentOutput.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "Location"))
     LayerVersionContentOutput.add_member(:code_sha_256, Shapes::ShapeRef.new(shape: String, location_name: "CodeSha256"))
     LayerVersionContentOutput.add_member(:code_size, Shapes::ShapeRef.new(shape: Long, location_name: "CodeSize"))
+    LayerVersionContentOutput.add_member(:signing_profile_version_arn, Shapes::ShapeRef.new(shape: String, location_name: "SigningProfileVersionArn"))
+    LayerVersionContentOutput.add_member(:signing_job_arn, Shapes::ShapeRef.new(shape: String, location_name: "SigningJobArn"))
     LayerVersionContentOutput.struct_class = Types::LayerVersionContentOutput
 
     LayerVersionsList.member = Shapes::ShapeRef.new(shape: LayerVersionsListItem)
@@ -704,6 +836,14 @@ module Aws::Lambda
     ListAliasesResponse.add_member(:aliases, Shapes::ShapeRef.new(shape: AliasList, location_name: "Aliases"))
     ListAliasesResponse.struct_class = Types::ListAliasesResponse
 
+    ListCodeSigningConfigsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "Marker"))
+    ListCodeSigningConfigsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxListItems, location: "querystring", location_name: "MaxItems"))
+    ListCodeSigningConfigsRequest.struct_class = Types::ListCodeSigningConfigsRequest
+
+    ListCodeSigningConfigsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: String, location_name: "NextMarker"))
+    ListCodeSigningConfigsResponse.add_member(:code_signing_configs, Shapes::ShapeRef.new(shape: CodeSigningConfigList, location_name: "CodeSigningConfigs"))
+    ListCodeSigningConfigsResponse.struct_class = Types::ListCodeSigningConfigsResponse
+
     ListEventSourceMappingsRequest.add_member(:event_source_arn, Shapes::ShapeRef.new(shape: Arn, location: "querystring", location_name: "EventSourceArn"))
     ListEventSourceMappingsRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, location: "querystring", location_name: "FunctionName"))
     ListEventSourceMappingsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "Marker"))
@@ -722,6 +862,15 @@ module Aws::Lambda
     ListFunctionEventInvokeConfigsResponse.add_member(:function_event_invoke_configs, Shapes::ShapeRef.new(shape: FunctionEventInvokeConfigList, location_name: "FunctionEventInvokeConfigs"))
     ListFunctionEventInvokeConfigsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: String, location_name: "NextMarker"))
     ListFunctionEventInvokeConfigsResponse.struct_class = Types::ListFunctionEventInvokeConfigsResponse
+
+    ListFunctionsByCodeSigningConfigRequest.add_member(:code_signing_config_arn, Shapes::ShapeRef.new(shape: CodeSigningConfigArn, required: true, location: "uri", location_name: "CodeSigningConfigArn"))
+    ListFunctionsByCodeSigningConfigRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "Marker"))
+    ListFunctionsByCodeSigningConfigRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxListItems, location: "querystring", location_name: "MaxItems"))
+    ListFunctionsByCodeSigningConfigRequest.struct_class = Types::ListFunctionsByCodeSigningConfigRequest
+
+    ListFunctionsByCodeSigningConfigResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: String, location_name: "NextMarker"))
+    ListFunctionsByCodeSigningConfigResponse.add_member(:function_arns, Shapes::ShapeRef.new(shape: FunctionArnList, location_name: "FunctionArns"))
+    ListFunctionsByCodeSigningConfigResponse.struct_class = Types::ListFunctionsByCodeSigningConfigResponse
 
     ListFunctionsRequest.add_member(:master_region, Shapes::ShapeRef.new(shape: MasterRegion, location: "querystring", location_name: "MasterRegion"))
     ListFunctionsRequest.add_member(:function_version, Shapes::ShapeRef.new(shape: FunctionVersion, location: "querystring", location_name: "FunctionVersion"))
@@ -828,6 +977,14 @@ module Aws::Lambda
     PublishVersionRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
     PublishVersionRequest.struct_class = Types::PublishVersionRequest
 
+    PutFunctionCodeSigningConfigRequest.add_member(:code_signing_config_arn, Shapes::ShapeRef.new(shape: CodeSigningConfigArn, required: true, location_name: "CodeSigningConfigArn"))
+    PutFunctionCodeSigningConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    PutFunctionCodeSigningConfigRequest.struct_class = Types::PutFunctionCodeSigningConfigRequest
+
+    PutFunctionCodeSigningConfigResponse.add_member(:code_signing_config_arn, Shapes::ShapeRef.new(shape: CodeSigningConfigArn, required: true, location_name: "CodeSigningConfigArn"))
+    PutFunctionCodeSigningConfigResponse.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "FunctionName"))
+    PutFunctionCodeSigningConfigResponse.struct_class = Types::PutFunctionCodeSigningConfigResponse
+
     PutFunctionConcurrencyRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
     PutFunctionConcurrencyRequest.add_member(:reserved_concurrent_executions, Shapes::ShapeRef.new(shape: ReservedConcurrentExecutions, required: true, location_name: "ReservedConcurrentExecutions"))
     PutFunctionConcurrencyRequest.struct_class = Types::PutFunctionConcurrencyRequest
@@ -851,6 +1008,8 @@ module Aws::Lambda
     PutProvisionedConcurrencyConfigResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "StatusReason"))
     PutProvisionedConcurrencyConfigResponse.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
     PutProvisionedConcurrencyConfigResponse.struct_class = Types::PutProvisionedConcurrencyConfigResponse
+
+    Queues.member = Shapes::ShapeRef.new(shape: Queue)
 
     RemoveLayerVersionPermissionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
     RemoveLayerVersionPermissionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: LayerVersionNumber, required: true, location: "uri", location_name: "VersionNumber"))
@@ -889,6 +1048,16 @@ module Aws::Lambda
     ServiceException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     ServiceException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ServiceException.struct_class = Types::ServiceException
+
+    SigningProfileVersionArns.member = Shapes::ShapeRef.new(shape: Arn)
+
+    SourceAccessConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: SourceAccessType, location_name: "Type"))
+    SourceAccessConfiguration.add_member(:uri, Shapes::ShapeRef.new(shape: Arn, location_name: "URI"))
+    SourceAccessConfiguration.struct_class = Types::SourceAccessConfiguration
+
+    SourceAccessConfigurations.member = Shapes::ShapeRef.new(shape: SourceAccessConfiguration)
+
+    StringList.member = Shapes::ShapeRef.new(shape: String)
 
     SubnetIPAddressLimitReachedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     SubnetIPAddressLimitReachedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -935,6 +1104,15 @@ module Aws::Lambda
     UpdateAliasRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
     UpdateAliasRequest.struct_class = Types::UpdateAliasRequest
 
+    UpdateCodeSigningConfigRequest.add_member(:code_signing_config_arn, Shapes::ShapeRef.new(shape: CodeSigningConfigArn, required: true, location: "uri", location_name: "CodeSigningConfigArn"))
+    UpdateCodeSigningConfigRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateCodeSigningConfigRequest.add_member(:allowed_publishers, Shapes::ShapeRef.new(shape: AllowedPublishers, location_name: "AllowedPublishers"))
+    UpdateCodeSigningConfigRequest.add_member(:code_signing_policies, Shapes::ShapeRef.new(shape: CodeSigningPolicies, location_name: "CodeSigningPolicies"))
+    UpdateCodeSigningConfigRequest.struct_class = Types::UpdateCodeSigningConfigRequest
+
+    UpdateCodeSigningConfigResponse.add_member(:code_signing_config, Shapes::ShapeRef.new(shape: CodeSigningConfig, required: true, location_name: "CodeSigningConfig"))
+    UpdateCodeSigningConfigResponse.struct_class = Types::UpdateCodeSigningConfigResponse
+
     UpdateEventSourceMappingRequest.add_member(:uuid, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "UUID"))
     UpdateEventSourceMappingRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, location_name: "FunctionName"))
     UpdateEventSourceMappingRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled"))
@@ -945,6 +1123,7 @@ module Aws::Lambda
     UpdateEventSourceMappingRequest.add_member(:bisect_batch_on_function_error, Shapes::ShapeRef.new(shape: BisectBatchOnFunctionError, location_name: "BisectBatchOnFunctionError"))
     UpdateEventSourceMappingRequest.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttemptsEventSourceMapping, location_name: "MaximumRetryAttempts"))
     UpdateEventSourceMappingRequest.add_member(:parallelization_factor, Shapes::ShapeRef.new(shape: ParallelizationFactor, location_name: "ParallelizationFactor"))
+    UpdateEventSourceMappingRequest.add_member(:source_access_configurations, Shapes::ShapeRef.new(shape: SourceAccessConfigurations, location_name: "SourceAccessConfigurations"))
     UpdateEventSourceMappingRequest.struct_class = Types::UpdateEventSourceMappingRequest
 
     UpdateFunctionCodeRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -952,6 +1131,7 @@ module Aws::Lambda
     UpdateFunctionCodeRequest.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "S3Bucket"))
     UpdateFunctionCodeRequest.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
     UpdateFunctionCodeRequest.add_member(:s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "S3ObjectVersion"))
+    UpdateFunctionCodeRequest.add_member(:image_uri, Shapes::ShapeRef.new(shape: String, location_name: "ImageUri"))
     UpdateFunctionCodeRequest.add_member(:publish, Shapes::ShapeRef.new(shape: Boolean, location_name: "Publish"))
     UpdateFunctionCodeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     UpdateFunctionCodeRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
@@ -972,6 +1152,7 @@ module Aws::Lambda
     UpdateFunctionConfigurationRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
     UpdateFunctionConfigurationRequest.add_member(:layers, Shapes::ShapeRef.new(shape: LayerList, location_name: "Layers"))
     UpdateFunctionConfigurationRequest.add_member(:file_system_configs, Shapes::ShapeRef.new(shape: FileSystemConfigList, location_name: "FileSystemConfigs"))
+    UpdateFunctionConfigurationRequest.add_member(:image_config, Shapes::ShapeRef.new(shape: ImageConfig, location_name: "ImageConfig"))
     UpdateFunctionConfigurationRequest.struct_class = Types::UpdateFunctionConfigurationRequest
 
     UpdateFunctionEventInvokeConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -1049,6 +1230,16 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:create_code_signing_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCodeSigningConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/2020-04-22/code-signing-configs/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCodeSigningConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCodeSigningConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
       api.add_operation(:create_event_source_mapping, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateEventSourceMapping"
         o.http_method = "POST"
@@ -1074,6 +1265,9 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: CodeStorageExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: CodeVerificationFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCodeSignatureException)
+        o.errors << Shapes::ShapeRef.new(shape: CodeSigningConfigNotFoundException)
       end)
 
       api.add_operation(:delete_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -1086,6 +1280,18 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:delete_code_signing_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCodeSigningConfig"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCodeSigningConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCodeSigningConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
       end)
 
       api.add_operation(:delete_event_source_mapping, Seahorse::Model::Operation.new.tap do |o|
@@ -1111,6 +1317,20 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+      end)
+
+      api.add_operation(:delete_function_code_signing_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFunctionCodeSigningConfig"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2020-06-30/functions/{FunctionName}/code-signing-config"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFunctionCodeSigningConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: CodeSigningConfigNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
       end)
 
@@ -1184,6 +1404,17 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:get_code_signing_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCodeSigningConfig"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}"
+        o.input = Shapes::ShapeRef.new(shape: GetCodeSigningConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCodeSigningConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_event_source_mapping, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetEventSourceMapping"
         o.http_method = "GET"
@@ -1206,6 +1437,18 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
+      api.add_operation(:get_function_code_signing_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFunctionCodeSigningConfig"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-06-30/functions/{FunctionName}/code-signing-config"
+        o.input = Shapes::ShapeRef.new(shape: GetFunctionCodeSigningConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFunctionCodeSigningConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:get_function_concurrency, Seahorse::Model::Operation.new.tap do |o|
@@ -1371,6 +1614,22 @@ module Aws::Lambda
         )
       end)
 
+      api.add_operation(:list_code_signing_configs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCodeSigningConfigs"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-04-22/code-signing-configs/"
+        o.input = Shapes::ShapeRef.new(shape: ListCodeSigningConfigsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCodeSigningConfigsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_items",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:list_event_source_mappings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListEventSourceMappings"
         o.http_method = "GET"
@@ -1416,6 +1675,23 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_items",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:list_functions_by_code_signing_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFunctionsByCodeSigningConfig"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}/functions"
+        o.input = Shapes::ShapeRef.new(shape: ListFunctionsByCodeSigningConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFunctionsByCodeSigningConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -1535,6 +1811,20 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
       end)
 
+      api.add_operation(:put_function_code_signing_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutFunctionCodeSigningConfig"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2020-06-30/functions/{FunctionName}/code-signing-config"
+        o.input = Shapes::ShapeRef.new(shape: PutFunctionCodeSigningConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutFunctionCodeSigningConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: CodeSigningConfigNotFoundException)
+      end)
+
       api.add_operation(:put_function_concurrency, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutFunctionConcurrency"
         o.http_method = "PUT"
@@ -1639,6 +1929,17 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
       end)
 
+      api.add_operation(:update_code_signing_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCodeSigningConfig"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCodeSigningConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCodeSigningConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:update_event_source_mapping, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateEventSourceMapping"
         o.http_method = "PUT"
@@ -1666,6 +1967,9 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: CodeStorageExceededException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: CodeVerificationFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCodeSignatureException)
+        o.errors << Shapes::ShapeRef.new(shape: CodeSigningConfigNotFoundException)
       end)
 
       api.add_operation(:update_function_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1680,6 +1984,9 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: CodeVerificationFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCodeSignatureException)
+        o.errors << Shapes::ShapeRef.new(shape: CodeSigningConfigNotFoundException)
       end)
 
       api.add_operation(:update_function_event_invoke_config, Seahorse::Model::Operation.new.tap do |o|

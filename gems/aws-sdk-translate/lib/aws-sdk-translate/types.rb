@@ -37,6 +37,143 @@ module Aws::Translate
       include Aws::Structure
     end
 
+    # Another modification is being made. That modification must complete
+    # before you can make your change.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # There was a conflict processing the request. Try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateParallelDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ResourceName", # required
+    #         description: "Description",
+    #         parallel_data_config: { # required
+    #           s3_uri: "S3Uri", # required
+    #           format: "TSV", # required, accepts TSV, CSV, TMX
+    #         },
+    #         encryption_key: {
+    #           type: "KMS", # required, accepts KMS
+    #           id: "EncryptionKeyID", # required
+    #         },
+    #         client_token: "ClientTokenString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A custom name for the parallel data resource in Amazon Translate.
+    #   You must assign a name that is unique in the account and region.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A custom description for the parallel data resource in Amazon
+    #   Translate.
+    #   @return [String]
+    #
+    # @!attribute [rw] parallel_data_config
+    #   Specifies the format and S3 location of the parallel data input
+    #   file.
+    #   @return [Types::ParallelDataConfig]
+    #
+    # @!attribute [rw] encryption_key
+    #   The encryption key used to encrypt this object.
+    #   @return [Types::EncryptionKey]
+    #
+    # @!attribute [rw] client_token
+    #   A unique identifier for the request. This token is automatically
+    #   generated when you use Amazon Translate through an AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/CreateParallelDataRequest AWS API Documentation
+    #
+    class CreateParallelDataRequest < Struct.new(
+      :name,
+      :description,
+      :parallel_data_config,
+      :encryption_key,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The custom name that you assigned to the parallel data resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the parallel data resource. When the resource is ready
+    #   for you to use, the status is `ACTIVE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/CreateParallelDataResponse AWS API Documentation
+    #
+    class CreateParallelDataResponse < Struct.new(
+      :name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteParallelDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the parallel data resource that is being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DeleteParallelDataRequest AWS API Documentation
+    #
+    class DeleteParallelDataRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the parallel data resource that is being deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the parallel data deletion.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DeleteParallelDataResponse AWS API Documentation
+    #
+    class DeleteParallelDataResponse < Struct.new(
+      :name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteTerminologyRequest
     #   data as a hash:
     #
@@ -118,8 +255,7 @@ module Aws::Translate
       include Aws::Structure
     end
 
-    # The encryption key used to encrypt the custom terminologies used by
-    # Amazon Translate.
+    # The encryption key used to encrypt this object.
     #
     # @note When making an API call, you may pass EncryptionKey
     #   data as a hash:
@@ -144,6 +280,63 @@ module Aws::Translate
     class EncryptionKey < Struct.new(
       :type,
       :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetParallelDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the parallel data resource that is being retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/GetParallelDataRequest AWS API Documentation
+    #
+    class GetParallelDataRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] parallel_data_properties
+    #   The properties of the parallel data resource that is being
+    #   retrieved.
+    #   @return [Types::ParallelDataProperties]
+    #
+    # @!attribute [rw] data_location
+    #   The location of the most recent parallel data input file that was
+    #   successfully imported into Amazon Translate. The location is
+    #   returned as a presigned URL that has a 30 minute expiration.
+    #   @return [Types::ParallelDataDataLocation]
+    #
+    # @!attribute [rw] auxiliary_data_location
+    #   The Amazon S3 location of a file that provides any errors or
+    #   warnings that were produced by your input file. This file was
+    #   created when Amazon Translate attempted to create a parallel data
+    #   resource. The location is returned as a presigned URL to that has a
+    #   30 minute expiration.
+    #   @return [Types::ParallelDataDataLocation]
+    #
+    # @!attribute [rw] latest_update_attempt_auxiliary_data_location
+    #   The Amazon S3 location of a file that provides any errors or
+    #   warnings that were produced by your input file. This file was
+    #   created when Amazon Translate attempted to update a parallel data
+    #   resource. The location is returned as a presigned URL to that has a
+    #   30 minute expiration.
+    #   @return [Types::ParallelDataDataLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/GetParallelDataResponse AWS API Documentation
+    #
+    class GetParallelDataResponse < Struct.new(
+      :parallel_data_properties,
+      :data_location,
+      :auxiliary_data_location,
+      :latest_update_attempt_auxiliary_data_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -275,9 +468,34 @@ module Aws::Translate
     #   @return [String]
     #
     # @!attribute [rw] content_type
-    #   The multipurpose internet mail extension (MIME) type of the input
-    #   files. Valid values are `text/plain` for plaintext files and
-    #   `text/html` for HTML files.
+    #   Describes the format of the data that you submit to Amazon Translate
+    #   as input. You can specify one of the following multipurpose internet
+    #   mail extension (MIME) types:
+    #
+    #   * `text/html`\: The input data consists of one or more HTML files.
+    #     Amazon Translate translates only the text that resides in the
+    #     `html` element in each file.
+    #
+    #   * `text/plain`\: The input data consists of one or more unformatted
+    #     text files. Amazon Translate translates every character in this
+    #     type of input.
+    #
+    #   * `application/vnd.openxmlformats-officedocument.wordprocessingml.document`\:
+    #     The input data consists of one or more Word documents (.docx).
+    #
+    #   * `application/vnd.openxmlformats-officedocument.presentationml.presentation`\:
+    #     The input data consists of one or more PowerPoint Presentation
+    #     files (.pptx).
+    #
+    #   * `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`\:
+    #     The input data consists of one or more Excel Workbook files
+    #     (.xlsx).
+    #
+    #   If you structure your input data as HTML, ensure that you set this
+    #   parameter to `text/html`. By doing so, you cut costs by limiting the
+    #   translation to the contents of the `html` element in each file.
+    #   Otherwise, if you set this parameter to `text/plain`, your costs
+    #   will cover the translation of every character.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/InputDataConfig AWS API Documentation
@@ -381,6 +599,53 @@ module Aws::Translate
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListParallelDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A string that specifies the next page of results to return in a
+    #   paginated response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of parallel data resources returned for each
+    #   request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListParallelDataRequest AWS API Documentation
+    #
+    class ListParallelDataRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] parallel_data_properties_list
+    #   The properties of the parallel data resources returned by this
+    #   request.
+    #   @return [Array<Types::ParallelDataProperties>]
+    #
+    # @!attribute [rw] next_token
+    #   The string to use in a subsequent request to get the next page of
+    #   results in a paginated response. This value is null if there are no
+    #   additional pages.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListParallelDataResponse AWS API Documentation
+    #
+    class ListParallelDataResponse < Struct.new(
+      :parallel_data_properties_list,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -512,6 +777,166 @@ module Aws::Translate
       include Aws::Structure
     end
 
+    # Specifies the format and S3 location of the parallel data input file.
+    #
+    # @note When making an API call, you may pass ParallelDataConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_uri: "S3Uri", # required
+    #         format: "TSV", # required, accepts TSV, CSV, TMX
+    #       }
+    #
+    # @!attribute [rw] s3_uri
+    #   The URI of the Amazon S3 folder that contains the parallel data
+    #   input file. The folder must be in the same Region as the API
+    #   endpoint you are calling.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   The format of the parallel data input file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ParallelDataConfig AWS API Documentation
+    #
+    class ParallelDataConfig < Struct.new(
+      :s3_uri,
+      :format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The location of the most recent parallel data input file that was
+    # successfully imported into Amazon Translate.
+    #
+    # @!attribute [rw] repository_type
+    #   Describes the repository that contains the parallel data input file.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   The Amazon S3 location of the parallel data input file. The location
+    #   is returned as a presigned URL to that has a 30 minute expiration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ParallelDataDataLocation AWS API Documentation
+    #
+    class ParallelDataDataLocation < Struct.new(
+      :repository_type,
+      :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties of a parallel data resource.
+    #
+    # @!attribute [rw] name
+    #   The custom name assigned to the parallel data resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the parallel data resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description assigned to the parallel data resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the parallel data resource. When the parallel data is
+    #   ready for you to use, the status is `ACTIVE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_language_code
+    #   The source language of the translations in the parallel data file.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_language_codes
+    #   The language codes for the target languages available in the
+    #   parallel data file. All possible target languages are returned as an
+    #   array.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] parallel_data_config
+    #   Specifies the format and S3 location of the parallel data input
+    #   file.
+    #   @return [Types::ParallelDataConfig]
+    #
+    # @!attribute [rw] message
+    #   Additional information from Amazon Translate about the parallel data
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] imported_data_size
+    #   The number of UTF-8 characters that Amazon Translate imported from
+    #   the parallel data input file. This number includes only the
+    #   characters in your translation examples. It does not include
+    #   characters that are used to format your file. For example, if you
+    #   provided a Translation Memory Exchange (.tmx) file, this number does
+    #   not include the tags.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] imported_record_count
+    #   The number of records successfully imported from the parallel data
+    #   input file.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_record_count
+    #   The number of records unsuccessfully imported from the parallel data
+    #   input file.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] skipped_record_count
+    #   The number of items in the input file that Amazon Translate skipped
+    #   when you created or updated the parallel data resource. For example,
+    #   Amazon Translate skips empty records, empty target texts, and empty
+    #   lines.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] encryption_key
+    #   The encryption key used to encrypt this object.
+    #   @return [Types::EncryptionKey]
+    #
+    # @!attribute [rw] created_at
+    #   The time at which the parallel data resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The time at which the parallel data resource was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] latest_update_attempt_status
+    #   The status of the most recent update attempt for the parallel data
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_update_attempt_at
+    #   The time that the most recent update was attempted.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ParallelDataProperties AWS API Documentation
+    #
+    class ParallelDataProperties < Struct.new(
+      :name,
+      :arn,
+      :description,
+      :status,
+      :source_language_code,
+      :target_language_codes,
+      :parallel_data_config,
+      :message,
+      :imported_data_size,
+      :imported_record_count,
+      :failed_record_count,
+      :skipped_record_count,
+      :encryption_key,
+      :created_at,
+      :last_updated_at,
+      :latest_update_attempt_status,
+      :latest_update_attempt_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource you are looking for has not been found. Review the
     # resource you're looking for and see if a different resource will
     # accomplish your needs before retrying the revised request.
@@ -557,6 +982,7 @@ module Aws::Translate
     #         source_language_code: "LanguageCodeString", # required
     #         target_language_codes: ["LanguageCodeString"], # required
     #         terminology_names: ["ResourceName"],
+    #         parallel_data_names: ["ResourceName"],
     #         client_token: "ClientTokenString", # required
     #       }
     #
@@ -598,15 +1024,15 @@ module Aws::Translate
     #   operation.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] parallel_data_names
+    #   The names of the parallel data resources to use in the batch
+    #   translation job. For a list of available parallel data resources,
+    #   use the ListParallelData operation.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] client_token
-    #   The client token of the EC2 instance calling the request. This token
-    #   is auto-generated when using the Amazon Translate SDK. Otherwise,
-    #   use the
-    #   [DescribeInstances](docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html)
-    #   EC2 operation to retreive an instance's client token. For more
-    #   information, see [Client
-    #   Tokens](docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html#client-tokens)
-    #   in the EC2 User Guide.
+    #   A unique identifier for the request. This token is auto-generated
+    #   when using the Amazon Translate SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -622,6 +1048,7 @@ module Aws::Translate
       :source_language_code,
       :target_language_codes,
       :terminology_names,
+      :parallel_data_names,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -643,7 +1070,7 @@ module Aws::Translate
     #   * `COMPLETED` - The job was successfully completed and the output is
     #     available.
     #
-    #   * `COMPLETED_WITH_ERRORS` - The job was completed with errors. The
+    #   * `COMPLETED_WITH_ERROR` - The job was completed with errors. The
     #     errors can be analyzed in the job's output.
     #
     #   * `FAILED` - The job did not complete. To get details, use the
@@ -931,6 +1358,11 @@ module Aws::Translate
     #   StartTextTranslationJob request at this time.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] parallel_data_names
+    #   A list containing the names of the parallel data resources applied
+    #   to the translation job.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] message
     #   An explanation of any errors that may have occured during the
     #   translation job.
@@ -970,6 +1402,7 @@ module Aws::Translate
       :source_language_code,
       :target_language_codes,
       :terminology_names,
+      :parallel_data_names,
       :message,
       :submitted_time,
       :end_time,
@@ -1097,6 +1530,83 @@ module Aws::Translate
       :message,
       :source_language_code,
       :target_language_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateParallelDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ResourceName", # required
+    #         description: "Description",
+    #         parallel_data_config: { # required
+    #           s3_uri: "S3Uri", # required
+    #           format: "TSV", # required, accepts TSV, CSV, TMX
+    #         },
+    #         client_token: "ClientTokenString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the parallel data resource being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A custom description for the parallel data resource in Amazon
+    #   Translate.
+    #   @return [String]
+    #
+    # @!attribute [rw] parallel_data_config
+    #   Specifies the format and S3 location of the parallel data input
+    #   file.
+    #   @return [Types::ParallelDataConfig]
+    #
+    # @!attribute [rw] client_token
+    #   A unique identifier for the request. This token is automatically
+    #   generated when you use Amazon Translate through an AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/UpdateParallelDataRequest AWS API Documentation
+    #
+    class UpdateParallelDataRequest < Struct.new(
+      :name,
+      :description,
+      :parallel_data_config,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the parallel data resource being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the parallel data resource that you are attempting to
+    #   update. Your update request is accepted only if this status is
+    #   either `ACTIVE` or `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_update_attempt_status
+    #   The status of the parallel data update attempt. When the updated
+    #   parallel data resource is ready for you to use, the status is
+    #   `ACTIVE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_update_attempt_at
+    #   The time that the most recent update was attempted.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/UpdateParallelDataResponse AWS API Documentation
+    #
+    class UpdateParallelDataResponse < Struct.new(
+      :name,
+      :status,
+      :latest_update_attempt_status,
+      :latest_update_attempt_at)
       SENSITIVE = []
       include Aws::Structure
     end

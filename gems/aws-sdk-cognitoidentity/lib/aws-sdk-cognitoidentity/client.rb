@@ -976,6 +976,8 @@ module Aws::CognitoIdentity
     #   * {Types::ListIdentityPoolsResponse#identity_pools #identity_pools} => Array&lt;Types::IdentityPoolShortDescription&gt;
     #   * {Types::ListIdentityPoolsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_identity_pools({
@@ -1508,7 +1510,7 @@ module Aws::CognitoIdentity
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentity'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

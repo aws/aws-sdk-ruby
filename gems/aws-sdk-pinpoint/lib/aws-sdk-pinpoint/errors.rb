@@ -28,6 +28,7 @@ module Aws::Pinpoint
   #
   # ## Error Classes
   # * {BadRequestException}
+  # * {ConflictException}
   # * {ForbiddenException}
   # * {InternalServerErrorException}
   # * {MethodNotAllowedException}
@@ -46,6 +47,26 @@ module Aws::Pinpoint
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Pinpoint::Types::BadRequestException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Pinpoint::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

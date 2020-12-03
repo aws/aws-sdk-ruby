@@ -327,6 +327,40 @@ module Aws::AccessAnalyzer
 
     # @!group API Operations
 
+    # Retroactively applies the archive rule to existing findings that meet
+    # the archive rule criteria.
+    #
+    # @option params [required, String] :analyzer_arn
+    #   The Amazon resource name (ARN) of the analyzer.
+    #
+    # @option params [String] :client_token
+    #   A client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :rule_name
+    #   The name of the rule to apply.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.apply_archive_rule({
+    #     analyzer_arn: "AnalyzerArn", # required
+    #     client_token: "String",
+    #     rule_name: "Name", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ApplyArchiveRule AWS API Documentation
+    #
+    # @overload apply_archive_rule(params = {})
+    # @param [Hash] params ({})
+    def apply_archive_rule(params = {}, options = {})
+      req = build_request(:apply_archive_rule, params)
+      req.send_request(options)
+    end
+
     # Creates an analyzer for your account.
     #
     # @option params [required, String] :analyzer_name
@@ -392,8 +426,8 @@ module Aws::AccessAnalyzer
     end
 
     # Creates an archive rule for the specified analyzer. Archive rules
-    # automatically archive findings that meet the criteria you define when
-    # you create the rule.
+    # automatically archive new findings that meet the criteria you define
+    # when you create the rule.
     #
     # @option params [required, String] :analyzer_name
     #   The name of the created analyzer.
@@ -532,7 +566,7 @@ module Aws::AccessAnalyzer
     #   resp.resource.is_public #=> Boolean
     #   resp.resource.resource_arn #=> String
     #   resp.resource.resource_owner_account #=> String
-    #   resp.resource.resource_type #=> String, one of "AWS::IAM::Role", "AWS::KMS::Key", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::S3::Bucket", "AWS::SQS::Queue"
+    #   resp.resource.resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key"
     #   resp.resource.shared_via #=> Array
     #   resp.resource.shared_via[0] #=> String
     #   resp.resource.status #=> String, one of "ACTIVE", "ARCHIVED", "RESOLVED"
@@ -585,6 +619,13 @@ module Aws::AccessAnalyzer
     end
 
     # Retrieves information about an archive rule.
+    #
+    # To learn about filter keys that you can use to create an archive rule,
+    # see [Access Analyzer filter keys][1] in the **IAM User Guide**.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html
     #
     # @option params [required, String] :analyzer_name
     #   The name of the analyzer to retrieve rules from.
@@ -660,10 +701,10 @@ module Aws::AccessAnalyzer
     #   resp.finding.principal["String"] #=> String
     #   resp.finding.resource #=> String
     #   resp.finding.resource_owner_account #=> String
-    #   resp.finding.resource_type #=> String, one of "AWS::IAM::Role", "AWS::KMS::Key", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::S3::Bucket", "AWS::SQS::Queue"
+    #   resp.finding.resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key"
     #   resp.finding.sources #=> Array
     #   resp.finding.sources[0].detail.access_point_arn #=> String
-    #   resp.finding.sources[0].type #=> String, one of "BUCKET_ACL", "POLICY", "S3_ACCESS_POINT"
+    #   resp.finding.sources[0].type #=> String, one of "POLICY", "BUCKET_ACL", "S3_ACCESS_POINT"
     #   resp.finding.status #=> String, one of "ACTIVE", "ARCHIVED", "RESOLVED"
     #   resp.finding.updated_at #=> Time
     #
@@ -704,7 +745,7 @@ module Aws::AccessAnalyzer
     #     analyzer_arn: "AnalyzerArn", # required
     #     max_results: 1,
     #     next_token: "Token",
-    #     resource_type: "AWS::IAM::Role", # accepts AWS::IAM::Role, AWS::KMS::Key, AWS::Lambda::Function, AWS::Lambda::LayerVersion, AWS::S3::Bucket, AWS::SQS::Queue
+    #     resource_type: "AWS::S3::Bucket", # accepts AWS::S3::Bucket, AWS::IAM::Role, AWS::SQS::Queue, AWS::Lambda::Function, AWS::Lambda::LayerVersion, AWS::KMS::Key
     #   })
     #
     # @example Response structure
@@ -712,7 +753,7 @@ module Aws::AccessAnalyzer
     #   resp.analyzed_resources #=> Array
     #   resp.analyzed_resources[0].resource_arn #=> String
     #   resp.analyzed_resources[0].resource_owner_account #=> String
-    #   resp.analyzed_resources[0].resource_type #=> String, one of "AWS::IAM::Role", "AWS::KMS::Key", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::S3::Bucket", "AWS::SQS::Queue"
+    #   resp.analyzed_resources[0].resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ListAnalyzedResources AWS API Documentation
@@ -827,6 +868,13 @@ module Aws::AccessAnalyzer
 
     # Retrieves a list of findings generated by the specified analyzer.
     #
+    # To learn about filter keys that you can use to create an archive rule,
+    # see [Access Analyzer filter keys][1] in the **IAM User Guide**.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html
+    #
     # @option params [required, String] :analyzer_arn
     #   The ARN of the analyzer to retrieve findings from.
     #
@@ -885,10 +933,10 @@ module Aws::AccessAnalyzer
     #   resp.findings[0].principal["String"] #=> String
     #   resp.findings[0].resource #=> String
     #   resp.findings[0].resource_owner_account #=> String
-    #   resp.findings[0].resource_type #=> String, one of "AWS::IAM::Role", "AWS::KMS::Key", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::S3::Bucket", "AWS::SQS::Queue"
+    #   resp.findings[0].resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key"
     #   resp.findings[0].sources #=> Array
     #   resp.findings[0].sources[0].detail.access_point_arn #=> String
-    #   resp.findings[0].sources[0].type #=> String, one of "BUCKET_ACL", "POLICY", "S3_ACCESS_POINT"
+    #   resp.findings[0].sources[0].type #=> String, one of "POLICY", "BUCKET_ACL", "S3_ACCESS_POINT"
     #   resp.findings[0].status #=> String, one of "ACTIVE", "ARCHIVED", "RESOLVED"
     #   resp.findings[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -1114,7 +1162,7 @@ module Aws::AccessAnalyzer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-accessanalyzer'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -406,13 +406,14 @@ module Aws::Snowball
       req.send_request(options)
     end
 
-    # Creates an address for a Snowball to be shipped to. In most regions,
-    # addresses are validated at the time of creation. The address you
-    # provide must be located within the serviceable area of your region. If
-    # the address is invalid or unsupported, then an exception is thrown.
+    # Creates an address for a Snow device to be shipped to. In most
+    # regions, addresses are validated at the time of creation. The address
+    # you provide must be located within the serviceable area of your
+    # region. If the address is invalid or unsupported, then an exception is
+    # thrown.
     #
     # @option params [required, Types::Address] :address
-    #   The address that you want the Snowball shipped to.
+    #   The address that you want the Snow device shipped to.
     #
     # @return [Types::CreateAddressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -517,9 +518,9 @@ module Aws::Snowball
     #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #
     # @option params [String] :snowball_type
-    #   The type of AWS Snowball device to use for this cluster.
+    #   The type of AWS Snow Family device to use for this cluster.
     #
-    #   <note markdown="1"> For cluster jobs, AWS Snowball currently supports only the `EDGE`
+    #   <note markdown="1"> For cluster jobs, AWS Snow Family currently supports only the `EDGE`
     #   device type.
     #
     #    </note>
@@ -530,15 +531,15 @@ module Aws::Snowball
     #   represents how quickly each device moves to its destination while in
     #   transit. Regional shipping speeds are as follows:
     #
-    #   * In Australia, you have access to express shipping. Typically,
-    #     Snowballs shipped express are delivered in about a day.
+    #   * In Australia, you have access to express shipping. Typically, Snow
+    #     devices shipped express are delivered in about a day.
     #
     #   * In the European Union (EU), you have access to express shipping.
-    #     Typically, Snowballs shipped express are delivered in about a day.
-    #     In addition, most countries in the EU have access to standard
+    #     Typically, Snow devices shipped express are delivered in about a
+    #     day. In addition, most countries in the EU have access to standard
     #     shipping, which typically takes less than a week, one way.
     #
-    #   * In India, Snowballs are delivered in one to seven days.
+    #   * In India, Snow device are delivered in one to seven days.
     #
     #   * In the United States of America (US), you have access to one-day
     #     shipping and two-day shipping.
@@ -548,11 +549,11 @@ module Aws::Snowball
     #     devices shipped express are delivered in about a day.
     #
     #   * In the European Union (EU), you have access to express shipping.
-    #     Typically, Snowball Edges shipped express are delivered in about a
+    #     Typically, Snow devices shipped express are delivered in about a
     #     day. In addition, most countries in the EU have access to standard
     #     shipping, which typically takes less than a week, one way.
     #
-    #   * In India, Snowball Edges are delivered in one to seven days.
+    #   * In India, Snow device are delivered in one to seven days.
     #
     #   * In the US, you have access to one-day shipping and two-day shipping.
     #
@@ -671,8 +672,8 @@ module Aws::Snowball
 
     # Creates a job to import or export data between Amazon S3 and your
     # on-premises data center. Your AWS account must have the right trust
-    # policies and permissions in place to create a job for Snowball. If
-    # you're creating a job for a node in a cluster, you only need to
+    # policies and permissions in place to create a job for a Snow device.
+    # If you're creating a job for a node in a cluster, you only need to
     # provide the `clusterId` value; the other job attributes are inherited
     # from the cluster.
     #
@@ -697,7 +698,7 @@ module Aws::Snowball
     #   `Important Photos 2016-08-11`.
     #
     # @option params [String] :address_id
-    #   The ID for the address that you want the Snowball shipped to.
+    #   The ID for the address that you want the Snow device shipped to.
     #
     # @option params [String] :kms_key_arn
     #   The `KmsKeyARN` that you want to associate with this job. `KmsKeyARN`s
@@ -719,24 +720,24 @@ module Aws::Snowball
     #
     # @option params [String] :snowball_capacity_preference
     #   If your job is being created in one of the US regions, you have the
-    #   option of specifying what size Snowball you'd like for this job. In
-    #   all other regions, Snowballs come with 80 TB in storage capacity.
+    #   option of specifying what size Snow device you'd like for this job.
+    #   In all other regions, Snowballs come with 80 TB in storage capacity.
     #
     # @option params [String] :shipping_option
     #   The shipping speed for this job. This speed doesn't dictate how soon
-    #   you'll get the Snowball, rather it represents how quickly the
-    #   Snowball moves to its destination while in transit. Regional shipping
+    #   you'll get the Snow device, rather it represents how quickly the Snow
+    #   device moves to its destination while in transit. Regional shipping
     #   speeds are as follows:
     #
-    #   * In Australia, you have access to express shipping. Typically,
-    #     Snowballs shipped express are delivered in about a day.
+    #   * In Australia, you have access to express shipping. Typically, Snow
+    #     devices shipped express are delivered in about a day.
     #
     #   * In the European Union (EU), you have access to express shipping.
-    #     Typically, Snowballs shipped express are delivered in about a day.
-    #     In addition, most countries in the EU have access to standard
+    #     Typically, Snow devices shipped express are delivered in about a
+    #     day. In addition, most countries in the EU have access to standard
     #     shipping, which typically takes less than a week, one way.
     #
-    #   * In India, Snowballs are delivered in one to seven days.
+    #   * In India, Snow devices are delivered in one to seven days.
     #
     #   * In the US, you have access to one-day shipping and two-day shipping.
     #
@@ -750,15 +751,15 @@ module Aws::Snowball
     #   job attributes are inherited from the cluster.
     #
     # @option params [String] :snowball_type
-    #   The type of AWS Snowball device to use for this job.
+    #   The type of AWS Snow Family device to use for this job.
     #
-    #   <note markdown="1"> For cluster jobs, AWS Snowball currently supports only the `EDGE`
+    #   <note markdown="1"> For cluster jobs, AWS Snow Family currently supports only the `EDGE`
     #   device type.
     #
     #    </note>
     #
-    #   The type of AWS Snowball device to use for this job. Currently, the
-    #   only supported device type for cluster jobs is `EDGE`.
+    #   The type of AWS Snow device to use for this job. Currently, the only
+    #   supported device type for cluster jobs is `EDGE`.
     #
     #   For more information, see [Snowball Edge Device Options][1] in the
     #   Snowball Edge Developer Guide.
@@ -887,6 +888,43 @@ module Aws::Snowball
     # @param [Hash] params ({})
     def create_job(params = {}, options = {})
       req = build_request(:create_job, params)
+      req.send_request(options)
+    end
+
+    # Creates a shipping label that will be used to return the Snow device
+    # to AWS.
+    #
+    # @option params [required, String] :job_id
+    #   The ID for a job that you want to create the return shipping label
+    #   for. For example `JID123e4567-e89b-12d3-a456-426655440000`.
+    #
+    # @option params [String] :shipping_option
+    #   The shipping speed for a particular job. This speed doesn't dictate
+    #   how soon the device is returned to AWS. This speed represents how
+    #   quickly it moves to its destination while in transit. Regional
+    #   shipping speeds are as follows:
+    #
+    # @return [Types::CreateReturnShippingLabelResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateReturnShippingLabelResult#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_return_shipping_label({
+    #     job_id: "JobId", # required
+    #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "InProgress", "TimedOut", "Succeeded", "Failed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateReturnShippingLabel AWS API Documentation
+    #
+    # @overload create_return_shipping_label(params = {})
+    # @param [Hash] params ({})
+    def create_return_shipping_label(params = {}, options = {})
+      req = build_request(:create_return_shipping_label, params)
       req.send_request(options)
     end
 
@@ -1286,6 +1324,38 @@ module Aws::Snowball
       req.send_request(options)
     end
 
+    # Information on the shipping label of a Snow device that is being
+    # returned to AWS.
+    #
+    # @option params [String] :job_id
+    #   The automatically generated ID for a job, for example
+    #   `JID123e4567-e89b-12d3-a456-426655440000`.
+    #
+    # @return [Types::DescribeReturnShippingLabelResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReturnShippingLabelResult#status #status} => String
+    #   * {Types::DescribeReturnShippingLabelResult#expiration_date #expiration_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_return_shipping_label({
+    #     job_id: "JobId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "InProgress", "TimedOut", "Succeeded", "Failed"
+    #   resp.expiration_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeReturnShippingLabel AWS API Documentation
+    #
+    # @overload describe_return_shipping_label(params = {})
+    # @param [Hash] params ({})
+    def describe_return_shipping_label(params = {}, options = {})
+      req = build_request(:describe_return_shipping_label, params)
+      req.send_request(options)
+    end
+
     # Returns a link to an Amazon S3 presigned URL for the manifest file
     # associated with the specified `JobId` value. You can access the
     # manifest file for up to 60 minutes after this request has been made.
@@ -1294,14 +1364,14 @@ module Aws::Snowball
     #
     # The manifest is an encrypted file that you can download after your job
     # enters the `WithCustomer` status. The manifest is decrypted by using
-    # the `UnlockCode` code value, when you pass both values to the Snowball
-    # through the Snowball client when the client is started for the first
-    # time.
+    # the `UnlockCode` code value, when you pass both values to the Snow
+    # device through the Snowball client when the client is started for the
+    # first time.
     #
     # As a best practice, we recommend that you don't save a copy of an
     # `UnlockCode` value in the same location as the manifest file for that
     # job. Saving these separately helps prevent unauthorized parties from
-    # gaining access to the Snowball associated with that job.
+    # gaining access to the Snow device associated with that job.
     #
     # The credentials of a given job, including its manifest file and unlock
     # code, expire 90 days after the job is created.
@@ -1362,13 +1432,14 @@ module Aws::Snowball
     #
     # The `UnlockCode` value is a 29-character code with 25 alphanumeric
     # characters and 4 hyphens. This code is used to decrypt the manifest
-    # file when it is passed along with the manifest to the Snowball through
-    # the Snowball client when the client is started for the first time.
+    # file when it is passed along with the manifest to the Snow device
+    # through the Snowball client when the client is started for the first
+    # time.
     #
     # As a best practice, we recommend that you don't save a copy of the
     # `UnlockCode` in the same location as the manifest file for that job.
     # Saving these separately helps prevent unauthorized parties from
-    # gaining access to the Snowball associated with that job.
+    # gaining access to the Snow device associated with that job.
     #
     # @option params [required, String] :job_id
     #   The ID for the job that you want to get the `UnlockCode` value for,
@@ -1418,10 +1489,10 @@ module Aws::Snowball
       req.send_request(options)
     end
 
-    # Returns information about the Snowball service limit for your account,
-    # and also the number of Snowballs your account has in use.
+    # Returns information about the Snow Family service limit for your
+    # account, and also the number of Snow devices your account has in use.
     #
-    # The default service limit for the number of Snowballs that you can
+    # The default service limit for the number of Snow devices that you can
     # have at one time is 1. If you want to increase your service limit,
     # contact AWS Support.
     #
@@ -1667,8 +1738,8 @@ module Aws::Snowball
 
     # This action returns a list of the different Amazon EC2 Amazon Machine
     # Images (AMIs) that are owned by your AWS account that would be
-    # supported for use on a Snowball Edge device. Currently, supported AMIs
-    # are based on the CentOS 7 (x86\_64) - with Updates HVM, Ubuntu Server
+    # supported for use on a Snow device. Currently, supported AMIs are
+    # based on the CentOS 7 (x86\_64) - with Updates HVM, Ubuntu Server
     # 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available
     # on the AWS Marketplace.
     #
@@ -2001,6 +2072,38 @@ module Aws::Snowball
       req.send_request(options)
     end
 
+    # Updates the state when a the shipment states changes to a different
+    # state.
+    #
+    # @option params [required, String] :job_id
+    #   The job ID of the job whose shipment date you want to update, for
+    #   example `JID123e4567-e89b-12d3-a456-426655440000`.
+    #
+    # @option params [required, String] :shipment_state
+    #   The state of a device when it is being shipped.
+    #
+    #   Set to `RECEIVED` when the device arrives at your location.
+    #
+    #   Set to `RETURNED` when you have returned the device to AWS.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_job_shipment_state({
+    #     job_id: "JobId", # required
+    #     shipment_state: "RECEIVED", # required, accepts RECEIVED, RETURNED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJobShipmentState AWS API Documentation
+    #
+    # @overload update_job_shipment_state(params = {})
+    # @param [Hash] params ({})
+    def update_job_shipment_state(params = {}, options = {})
+      req = build_request(:update_job_shipment_state, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2014,7 +2117,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

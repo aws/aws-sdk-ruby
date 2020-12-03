@@ -10,6 +10,66 @@
 module Aws::SSOAdmin
   module Types
 
+    # These are AWS SSO identity store attributes that you can configure for
+    # use in attributes-based access control (ABAC). You can create
+    # permission policies that determine who can access your AWS resources
+    # based upon the configured attribute value(s). When you enable ABAC and
+    # specify AccessControlAttributes, AWS SSO passes the attribute(s) value
+    # of the authenticated user into IAM for use in policy evaluation.
+    #
+    # @note When making an API call, you may pass AccessControlAttribute
+    #   data as a hash:
+    #
+    #       {
+    #         key: "AccessControlAttributeKey", # required
+    #         value: { # required
+    #           source: ["AccessControlAttributeValueSource"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of the attribute associated with your identities in your
+    #   identity source. This is used to map a specified attribute in your
+    #   identity source with an attribute in AWS SSO.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value used for mapping a specified attribute to an identity
+    #   source.
+    #   @return [Types::AccessControlAttributeValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AccessControlAttribute AWS API Documentation
+    #
+    class AccessControlAttribute < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The value used for mapping a specified attribute to an identity
+    # source.
+    #
+    # @note When making an API call, you may pass AccessControlAttributeValue
+    #   data as a hash:
+    #
+    #       {
+    #         source: ["AccessControlAttributeValueSource"], # required
+    #       }
+    #
+    # @!attribute [rw] source
+    #   The identity source to use when mapping a specified attribute to AWS
+    #   SSO.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AccessControlAttributeValue AWS API Documentation
+    #
+    class AccessControlAttributeValue < Struct.new(
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You do not have sufficient access to perform this action.
     #
     # @!attribute [rw] message
@@ -47,7 +107,11 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   The identifier of the principal.
+    #   An identifier for an object in AWS SSO, such as a user or group.
+    #   PrincipalIds are GUIDs (For example,
+    #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
+    #   PrincipalIds in AWS SSO, see the [AWS SSO Identity Store API
+    #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AccountAssignment AWS API Documentation
@@ -79,7 +143,8 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   The identifier for the chosen target.
+    #   TargetID is an AWS account identifier, typically a 10-12 digit
+    #   string (For example, 123456789012).
     #   @return [String]
     #
     # @!attribute [rw] target_type
@@ -98,7 +163,11 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   The identifier of the principal.
+    #   An identifier for an object in AWS SSO, such as a user or group.
+    #   PrincipalIds are GUIDs (For example,
+    #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
+    #   PrincipalIds in AWS SSO, see the [AWS SSO Identity Store API
+    #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #   @return [String]
     #
     # @!attribute [rw] created_date
@@ -246,7 +315,8 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   The identifier for the chosen target.
+    #   TargetID is an AWS account identifier, typically a 10-12 digit
+    #   string (For example, 123456789012).
     #   @return [String]
     #
     # @!attribute [rw] target_type
@@ -263,7 +333,11 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   The identifier of the principal.
+    #   An identifier for an object in AWS SSO, such as a user or group.
+    #   PrincipalIds are GUIDs (For example,
+    #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
+    #   PrincipalIds in AWS SSO, see the [AWS SSO Identity Store API
+    #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreateAccountAssignmentRequest AWS API Documentation
@@ -290,6 +364,51 @@ module Aws::SSOAdmin
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass CreateInstanceAccessControlAttributeConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_arn: "InstanceArn", # required
+    #         instance_access_control_attribute_configuration: { # required
+    #           access_control_attributes: [ # required
+    #             {
+    #               key: "AccessControlAttributeKey", # required
+    #               value: { # required
+    #                 source: ["AccessControlAttributeValueSource"], # required
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_access_control_attribute_configuration
+    #   Specifies the AWS SSO identity store attributes to add to your ABAC
+    #   configuration. When using an external identity provider as an
+    #   identity source, you can pass attributes through the SAML assertion
+    #   as an alternative to configuring attributes from the AWS SSO
+    #   identity store. If a SAML assertion passes any of these attributes,
+    #   AWS SSO will replace the attribute value with the value from the AWS
+    #   SSO identity store.
+    #   @return [Types::InstanceAccessControlAttributeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreateInstanceAccessControlAttributeConfigurationRequest AWS API Documentation
+    #
+    class CreateInstanceAccessControlAttributeConfigurationRequest < Struct.new(
+      :instance_arn,
+      :instance_access_control_attribute_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreateInstanceAccessControlAttributeConfigurationResponse AWS API Documentation
+    #
+    class CreateInstanceAccessControlAttributeConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CreatePermissionSetRequest
     #   data as a hash:
@@ -384,7 +503,8 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   The identifier for the chosen target.
+    #   TargetID is an AWS account identifier, typically a 10-12 digit
+    #   string (For example, 123456789012).
     #   @return [String]
     #
     # @!attribute [rw] target_type
@@ -400,7 +520,11 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   The identifier of the principal.
+    #   An identifier for an object in AWS SSO, such as a user or group.
+    #   PrincipalIds are GUIDs (For example,
+    #   f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about
+    #   PrincipalIds in AWS SSO, see the [AWS SSO Identity Store API
+    #   Reference](/singlesignon/latest/IdentityStoreAPIReference/welcome.html).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeleteAccountAssignmentRequest AWS API Documentation
@@ -460,6 +584,30 @@ module Aws::SSOAdmin
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeleteInlinePolicyFromPermissionSetResponse AWS API Documentation
     #
     class DeleteInlinePolicyFromPermissionSetResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteInstanceAccessControlAttributeConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_arn: "InstanceArn", # required
+    #       }
+    #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeleteInstanceAccessControlAttributeConfigurationRequest AWS API Documentation
+    #
+    class DeleteInstanceAccessControlAttributeConfigurationRequest < Struct.new(
+      :instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeleteInstanceAccessControlAttributeConfigurationResponse AWS API Documentation
+    #
+    class DeleteInstanceAccessControlAttributeConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeletePermissionSetRequest
     #   data as a hash:
@@ -572,6 +720,50 @@ module Aws::SSOAdmin
     #
     class DescribeAccountAssignmentDeletionStatusResponse < Struct.new(
       :account_assignment_deletion_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeInstanceAccessControlAttributeConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_arn: "InstanceArn", # required
+    #       }
+    #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeInstanceAccessControlAttributeConfigurationRequest AWS API Documentation
+    #
+    class DescribeInstanceAccessControlAttributeConfigurationRequest < Struct.new(
+      :instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the attribute configuration process.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Provides more details about the current status of the specified
+    #   attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_access_control_attribute_configuration
+    #   Gets the list of AWS SSO identity store attributes added to your
+    #   ABAC configuration.
+    #   @return [Types::InstanceAccessControlAttributeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeInstanceAccessControlAttributeConfigurationResponse AWS API Documentation
+    #
+    class DescribeInstanceAccessControlAttributeConfigurationResponse < Struct.new(
+      :status,
+      :status_reason,
+      :instance_access_control_attribute_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -737,6 +929,36 @@ module Aws::SSOAdmin
     class GetInlinePolicyForPermissionSetResponse < Struct.new(
       :inline_policy)
       SENSITIVE = [:inline_policy]
+      include Aws::Structure
+    end
+
+    # Specifies the attributes to add to your attribute-based access control
+    # (ABAC) configuration.
+    #
+    # @note When making an API call, you may pass InstanceAccessControlAttributeConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         access_control_attributes: [ # required
+    #           {
+    #             key: "AccessControlAttributeKey", # required
+    #             value: { # required
+    #               source: ["AccessControlAttributeValueSource"], # required
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] access_control_attributes
+    #   Lists the attributes that are configured for ABAC in the specified
+    #   AWS SSO instance.
+    #   @return [Array<Types::AccessControlAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/InstanceAccessControlAttributeConfiguration AWS API Documentation
+    #
+    class InstanceAccessControlAttributeConfiguration < Struct.new(
+      :access_control_attributes)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1537,7 +1759,8 @@ module Aws::SSOAdmin
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   The identifier for the chosen target.
+    #   TargetID is an AWS account identifier, typically a 10-12 digit
+    #   string (For example, 123456789012).
     #   @return [String]
     #
     # @!attribute [rw] target_type
@@ -1758,6 +1981,45 @@ module Aws::SSOAdmin
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateInstanceAccessControlAttributeConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_arn: "InstanceArn", # required
+    #         instance_access_control_attribute_configuration: { # required
+    #           access_control_attributes: [ # required
+    #             {
+    #               key: "AccessControlAttributeKey", # required
+    #               value: { # required
+    #                 source: ["AccessControlAttributeValueSource"], # required
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the SSO instance under which the operation will be
+    #   executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_access_control_attribute_configuration
+    #   Updates the attributes for your ABAC configuration.
+    #   @return [Types::InstanceAccessControlAttributeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdateInstanceAccessControlAttributeConfigurationRequest AWS API Documentation
+    #
+    class UpdateInstanceAccessControlAttributeConfigurationRequest < Struct.new(
+      :instance_arn,
+      :instance_access_control_attribute_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdateInstanceAccessControlAttributeConfigurationResponse AWS API Documentation
+    #
+    class UpdateInstanceAccessControlAttributeConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdatePermissionSetRequest
     #   data as a hash:

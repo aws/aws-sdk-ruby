@@ -337,6 +337,98 @@ module Aws::Translate
 
     # @!group API Operations
 
+    # Creates a parallel data resource in Amazon Translate by importing an
+    # input file from Amazon S3. Parallel data files contain examples of
+    # source phrases and their translations from your translation memory. By
+    # adding parallel data, you can influence the style, tone, and word
+    # choice in your translation output.
+    #
+    # @option params [required, String] :name
+    #   A custom name for the parallel data resource in Amazon Translate. You
+    #   must assign a name that is unique in the account and region.
+    #
+    # @option params [String] :description
+    #   A custom description for the parallel data resource in Amazon
+    #   Translate.
+    #
+    # @option params [required, Types::ParallelDataConfig] :parallel_data_config
+    #   Specifies the format and S3 location of the parallel data input file.
+    #
+    # @option params [Types::EncryptionKey] :encryption_key
+    #   The encryption key used to encrypt this object.
+    #
+    # @option params [required, String] :client_token
+    #   A unique identifier for the request. This token is automatically
+    #   generated when you use Amazon Translate through an AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateParallelDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateParallelDataResponse#name #name} => String
+    #   * {Types::CreateParallelDataResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_parallel_data({
+    #     name: "ResourceName", # required
+    #     description: "Description",
+    #     parallel_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #       format: "TSV", # required, accepts TSV, CSV, TMX
+    #     },
+    #     encryption_key: {
+    #       type: "KMS", # required, accepts KMS
+    #       id: "EncryptionKeyID", # required
+    #     },
+    #     client_token: "ClientTokenString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "ACTIVE", "DELETING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/CreateParallelData AWS API Documentation
+    #
+    # @overload create_parallel_data(params = {})
+    # @param [Hash] params ({})
+    def create_parallel_data(params = {}, options = {})
+      req = build_request(:create_parallel_data, params)
+      req.send_request(options)
+    end
+
+    # Deletes a parallel data resource in Amazon Translate.
+    #
+    # @option params [required, String] :name
+    #   The name of the parallel data resource that is being deleted.
+    #
+    # @return [Types::DeleteParallelDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteParallelDataResponse#name #name} => String
+    #   * {Types::DeleteParallelDataResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_parallel_data({
+    #     name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "ACTIVE", "DELETING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DeleteParallelData AWS API Documentation
+    #
+    # @overload delete_parallel_data(params = {})
+    # @param [Hash] params ({})
+    def delete_parallel_data(params = {}, options = {})
+      req = build_request(:delete_parallel_data, params)
+      req.send_request(options)
+    end
+
     # A synchronous action that deletes a custom terminology.
     #
     # @option params [required, String] :name
@@ -391,6 +483,8 @@ module Aws::Translate
     #   resp.text_translation_job_properties.target_language_codes[0] #=> String
     #   resp.text_translation_job_properties.terminology_names #=> Array
     #   resp.text_translation_job_properties.terminology_names[0] #=> String
+    #   resp.text_translation_job_properties.parallel_data_names #=> Array
+    #   resp.text_translation_job_properties.parallel_data_names[0] #=> String
     #   resp.text_translation_job_properties.message #=> String
     #   resp.text_translation_job_properties.submitted_time #=> Time
     #   resp.text_translation_job_properties.end_time #=> Time
@@ -405,6 +499,62 @@ module Aws::Translate
     # @param [Hash] params ({})
     def describe_text_translation_job(params = {}, options = {})
       req = build_request(:describe_text_translation_job, params)
+      req.send_request(options)
+    end
+
+    # Provides information about a parallel data resource.
+    #
+    # @option params [required, String] :name
+    #   The name of the parallel data resource that is being retrieved.
+    #
+    # @return [Types::GetParallelDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetParallelDataResponse#parallel_data_properties #parallel_data_properties} => Types::ParallelDataProperties
+    #   * {Types::GetParallelDataResponse#data_location #data_location} => Types::ParallelDataDataLocation
+    #   * {Types::GetParallelDataResponse#auxiliary_data_location #auxiliary_data_location} => Types::ParallelDataDataLocation
+    #   * {Types::GetParallelDataResponse#latest_update_attempt_auxiliary_data_location #latest_update_attempt_auxiliary_data_location} => Types::ParallelDataDataLocation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_parallel_data({
+    #     name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.parallel_data_properties.name #=> String
+    #   resp.parallel_data_properties.arn #=> String
+    #   resp.parallel_data_properties.description #=> String
+    #   resp.parallel_data_properties.status #=> String, one of "CREATING", "UPDATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.parallel_data_properties.source_language_code #=> String
+    #   resp.parallel_data_properties.target_language_codes #=> Array
+    #   resp.parallel_data_properties.target_language_codes[0] #=> String
+    #   resp.parallel_data_properties.parallel_data_config.s3_uri #=> String
+    #   resp.parallel_data_properties.parallel_data_config.format #=> String, one of "TSV", "CSV", "TMX"
+    #   resp.parallel_data_properties.message #=> String
+    #   resp.parallel_data_properties.imported_data_size #=> Integer
+    #   resp.parallel_data_properties.imported_record_count #=> Integer
+    #   resp.parallel_data_properties.failed_record_count #=> Integer
+    #   resp.parallel_data_properties.skipped_record_count #=> Integer
+    #   resp.parallel_data_properties.encryption_key.type #=> String, one of "KMS"
+    #   resp.parallel_data_properties.encryption_key.id #=> String
+    #   resp.parallel_data_properties.created_at #=> Time
+    #   resp.parallel_data_properties.last_updated_at #=> Time
+    #   resp.parallel_data_properties.latest_update_attempt_status #=> String, one of "CREATING", "UPDATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.parallel_data_properties.latest_update_attempt_at #=> Time
+    #   resp.data_location.repository_type #=> String
+    #   resp.data_location.location #=> String
+    #   resp.auxiliary_data_location.repository_type #=> String
+    #   resp.auxiliary_data_location.location #=> String
+    #   resp.latest_update_attempt_auxiliary_data_location.repository_type #=> String
+    #   resp.latest_update_attempt_auxiliary_data_location.location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/GetParallelData AWS API Documentation
+    #
+    # @overload get_parallel_data(params = {})
+    # @param [Hash] params ({})
+    def get_parallel_data(params = {}, options = {})
+      req = build_request(:get_parallel_data, params)
       req.send_request(options)
     end
 
@@ -529,6 +679,64 @@ module Aws::Translate
       req.send_request(options)
     end
 
+    # Provides a list of your parallel data resources in Amazon Translate.
+    #
+    # @option params [String] :next_token
+    #   A string that specifies the next page of results to return in a
+    #   paginated response.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of parallel data resources returned for each
+    #   request.
+    #
+    # @return [Types::ListParallelDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListParallelDataResponse#parallel_data_properties_list #parallel_data_properties_list} => Array&lt;Types::ParallelDataProperties&gt;
+    #   * {Types::ListParallelDataResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_parallel_data({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.parallel_data_properties_list #=> Array
+    #   resp.parallel_data_properties_list[0].name #=> String
+    #   resp.parallel_data_properties_list[0].arn #=> String
+    #   resp.parallel_data_properties_list[0].description #=> String
+    #   resp.parallel_data_properties_list[0].status #=> String, one of "CREATING", "UPDATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.parallel_data_properties_list[0].source_language_code #=> String
+    #   resp.parallel_data_properties_list[0].target_language_codes #=> Array
+    #   resp.parallel_data_properties_list[0].target_language_codes[0] #=> String
+    #   resp.parallel_data_properties_list[0].parallel_data_config.s3_uri #=> String
+    #   resp.parallel_data_properties_list[0].parallel_data_config.format #=> String, one of "TSV", "CSV", "TMX"
+    #   resp.parallel_data_properties_list[0].message #=> String
+    #   resp.parallel_data_properties_list[0].imported_data_size #=> Integer
+    #   resp.parallel_data_properties_list[0].imported_record_count #=> Integer
+    #   resp.parallel_data_properties_list[0].failed_record_count #=> Integer
+    #   resp.parallel_data_properties_list[0].skipped_record_count #=> Integer
+    #   resp.parallel_data_properties_list[0].encryption_key.type #=> String, one of "KMS"
+    #   resp.parallel_data_properties_list[0].encryption_key.id #=> String
+    #   resp.parallel_data_properties_list[0].created_at #=> Time
+    #   resp.parallel_data_properties_list[0].last_updated_at #=> Time
+    #   resp.parallel_data_properties_list[0].latest_update_attempt_status #=> String, one of "CREATING", "UPDATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.parallel_data_properties_list[0].latest_update_attempt_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListParallelData AWS API Documentation
+    #
+    # @overload list_parallel_data(params = {})
+    # @param [Hash] params ({})
+    def list_parallel_data(params = {}, options = {})
+      req = build_request(:list_parallel_data, params)
+      req.send_request(options)
+    end
+
     # Provides a list of custom terminologies associated with your account.
     #
     # @option params [String] :next_token
@@ -626,6 +834,8 @@ module Aws::Translate
     #   resp.text_translation_job_properties_list[0].target_language_codes[0] #=> String
     #   resp.text_translation_job_properties_list[0].terminology_names #=> Array
     #   resp.text_translation_job_properties_list[0].terminology_names[0] #=> String
+    #   resp.text_translation_job_properties_list[0].parallel_data_names #=> Array
+    #   resp.text_translation_job_properties_list[0].parallel_data_names[0] #=> String
     #   resp.text_translation_job_properties_list[0].message #=> String
     #   resp.text_translation_job_properties_list[0].submitted_time #=> Time
     #   resp.text_translation_job_properties_list[0].end_time #=> Time
@@ -687,15 +897,14 @@ module Aws::Translate
     #   The name of the terminology to use in the batch translation job. For a
     #   list of available terminologies, use the ListTerminologies operation.
     #
+    # @option params [Array<String>] :parallel_data_names
+    #   The names of the parallel data resources to use in the batch
+    #   translation job. For a list of available parallel data resources, use
+    #   the ListParallelData operation.
+    #
     # @option params [required, String] :client_token
-    #   The client token of the EC2 instance calling the request. This token
-    #   is auto-generated when using the Amazon Translate SDK. Otherwise, use
-    #   the
-    #   [DescribeInstances](docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html)
-    #   EC2 operation to retreive an instance's client token. For more
-    #   information, see [Client
-    #   Tokens](docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html#client-tokens)
-    #   in the EC2 User Guide.
+    #   A unique identifier for the request. This token is auto-generated when
+    #   using the Amazon Translate SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -720,6 +929,7 @@ module Aws::Translate
     #     source_language_code: "LanguageCodeString", # required
     #     target_language_codes: ["LanguageCodeString"], # required
     #     terminology_names: ["ResourceName"],
+    #     parallel_data_names: ["ResourceName"],
     #     client_token: "ClientTokenString", # required
     #   })
     #
@@ -845,6 +1055,61 @@ module Aws::Translate
       req.send_request(options)
     end
 
+    # Updates a previously created parallel data resource by importing a new
+    # input file from Amazon S3.
+    #
+    # @option params [required, String] :name
+    #   The name of the parallel data resource being updated.
+    #
+    # @option params [String] :description
+    #   A custom description for the parallel data resource in Amazon
+    #   Translate.
+    #
+    # @option params [required, Types::ParallelDataConfig] :parallel_data_config
+    #   Specifies the format and S3 location of the parallel data input file.
+    #
+    # @option params [required, String] :client_token
+    #   A unique identifier for the request. This token is automatically
+    #   generated when you use Amazon Translate through an AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateParallelDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateParallelDataResponse#name #name} => String
+    #   * {Types::UpdateParallelDataResponse#status #status} => String
+    #   * {Types::UpdateParallelDataResponse#latest_update_attempt_status #latest_update_attempt_status} => String
+    #   * {Types::UpdateParallelDataResponse#latest_update_attempt_at #latest_update_attempt_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_parallel_data({
+    #     name: "ResourceName", # required
+    #     description: "Description",
+    #     parallel_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #       format: "TSV", # required, accepts TSV, CSV, TMX
+    #     },
+    #     client_token: "ClientTokenString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.latest_update_attempt_status #=> String, one of "CREATING", "UPDATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.latest_update_attempt_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/UpdateParallelData AWS API Documentation
+    #
+    # @overload update_parallel_data(params = {})
+    # @param [Hash] params ({})
+    def update_parallel_data(params = {}, options = {})
+      req = build_request(:update_parallel_data, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -858,7 +1123,7 @@ module Aws::Translate
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-translate'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3,9 +3,19 @@
 {{#generated_src_warning}}
 {{generated_src_warning}}
 {{/generated_src_warning}}
+
+{{#require_core_guard?}}
+unless Module.const_defined?(:Aws)
+  {{#requires}}
+  require '{{.}}'
+  {{/requires}}
+end
+{{/require_core_guard?}}
+{{^require_core_guard?}}
 {{#requires}}
 require '{{.}}'
 {{/requires}}
+{{/require_core_guard?}}
 
 {{#relative_requires}}
 require_relative '{{.}}'

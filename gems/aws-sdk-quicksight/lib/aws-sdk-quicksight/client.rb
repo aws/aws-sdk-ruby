@@ -374,7 +374,7 @@ module Aws::QuickSight
     # `CreateAccountCustomization` or `UpdateAccountCustomization` API
     # operation. To further customize QuickSight by removing QuickSight
     # sample assets and videos for all new users, see [Customizing
-    # QuickSight][1] in the Amazon QuickSight User Guide.
+    # QuickSight][1] in the *Amazon QuickSight User Guide.*
     #
     # You can create customizations for your AWS account or, if you specify
     # a namespace, for a QuickSight namespace instead. Customizations that
@@ -382,10 +382,14 @@ module Aws::QuickSight
     # AWS account. To find out which customizations apply, use the
     # `DescribeAccountCustomization` API operation.
     #
-    # Before you add a theme as the namespace default, make sure that you
-    # first share the theme with the namespace. If you don't share it with
-    # the namespace, the theme won't be visible to your users even if you
-    # use this API operation to make it the default theme.
+    # Before you use the `CreateAccountCustomization` API operation to add a
+    # theme as the namespace default, make sure that you first share the
+    # theme with the namespace. If you don't share it with the namespace,
+    # the theme isn't visible to your users even if you make it the default
+    # theme. To check if the theme is shared, view the current permissions
+    # by using the ` DescribeThemePermissions ` API operation. To share the
+    # theme, grant permissions by using the ` UpdateThemePermissions ` API
+    # operation.
     #
     #
     #
@@ -402,10 +406,10 @@ module Aws::QuickSight
     #   Region. You can add these to an AWS account and a QuickSight
     #   namespace.
     #
-    #   For example, you could add a default theme by setting
+    #   For example, you can add a default theme by setting
     #   `AccountCustomization` to the midnight theme: `"AccountCustomization":
-    #   \{ "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" \}. `. Or,
-    #   you could add a custom theme by specifying `"AccountCustomization": \{
+    #   \{ "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" \}`. Or,
+    #   you can add a custom theme by specifying `"AccountCustomization": \{
     #   "DefaultTheme":
     #   "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"
     #   \}`.
@@ -787,6 +791,9 @@ module Aws::QuickSight
     #   The row-level security configuration for the data that you want to
     #   create.
     #
+    # @option params [Array<Types::ColumnLevelPermissionRule>] :column_level_permission_rules
+    #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   Contains a map of the key-value pairs for the resource tag or tags
     #   assigned to the dataset.
@@ -882,6 +889,9 @@ module Aws::QuickSight
     #               tags: [ # required
     #                 {
     #                   column_geographic_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #                   column_description: {
+    #                     text: "ColumnDescriptiveText",
+    #                   },
     #                 },
     #               ],
     #             },
@@ -919,6 +929,12 @@ module Aws::QuickSight
     #       arn: "Arn", # required
     #       permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
     #     },
+    #     column_level_permission_rules: [
+    #       {
+    #         principals: ["String"],
+    #         column_names: ["String"],
+    #       },
+    #     ],
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1001,7 +1017,7 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     data_source_id: "ResourceId", # required
     #     name: "ResourceName", # required
-    #     type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER
+    #     type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM
     #     data_source_parameters: {
     #       amazon_elasticsearch_parameters: {
     #         domain: "Domain", # required
@@ -1031,6 +1047,11 @@ module Aws::QuickSight
     #         database: "Database", # required
     #       },
     #       my_sql_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         database: "Database", # required
+    #       },
+    #       oracle_parameters: {
     #         host: "Host", # required
     #         port: 1, # required
     #         database: "Database", # required
@@ -1122,6 +1143,11 @@ module Aws::QuickSight
     #               database: "Database", # required
     #             },
     #             my_sql_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             oracle_parameters: {
     #               host: "Host", # required
     #               port: 1, # required
     #               database: "Database", # required
@@ -1323,16 +1349,18 @@ module Aws::QuickSight
     end
 
     # Creates an assignment with one specified IAM policy, identified by its
-    # Amazon Resource Name (ARN). This policy will be assigned to specified
-    # groups or users of Amazon QuickSight. The users and groups need to be
-    # in the same namespace.
+    # Amazon Resource Name (ARN). This policy assignment is attached to the
+    # specified groups or users of Amazon QuickSight. Assignment names are
+    # unique per AWS account. To avoid overwriting rules in other
+    # namespaces, use assignment names that are unique.
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the AWS account where you want to assign an IAM policy to
     #   QuickSight users or groups.
     #
     # @option params [required, String] :assignment_name
-    #   The name of the assignment. It must be unique within an AWS account.
+    #   The name of the assignment, also called a rule. It must be unique
+    #   within an AWS account.
     #
     # @option params [required, String] :assignment_status
     #   The status of the assignment. Possible values are as follows:
@@ -1869,7 +1897,7 @@ module Aws::QuickSight
     end
 
     # Deletes all Amazon QuickSight customizations in this AWS Region for
-    # the specified AWS Account and QuickSight namespace.
+    # the specified AWS account and QuickSight namespace.
     #
     # @option params [required, String] :aws_account_id
     #   The ID for the AWS account that you want to delete QuickSight
@@ -2539,7 +2567,7 @@ module Aws::QuickSight
     # * `AWS Account` - The AWS account exists at the top of the hierarchy.
     #   It has the potential to use all of the AWS Regions and AWS Services.
     #   When you subscribe to QuickSight, you choose one AWS Region to use
-    #   as your home region. That's where your free SPICE capacity is
+    #   as your home Region. That's where your free SPICE capacity is
     #   located. You can use QuickSight in any supported AWS Region.
     #
     # * `AWS Region` - In each AWS Region where you sign in to QuickSight at
@@ -2549,7 +2577,7 @@ module Aws::QuickSight
     #   have access to QuickSight in any AWS Region, unless they are
     #   constrained to a namespace.
     #
-    #   To run the command in a different AWS Region, you change your region
+    #   To run the command in a different AWS Region, you change your Region
     #   settings. If you're using the AWS CLI, you can use one of the
     #   following options:
     #
@@ -2571,7 +2599,7 @@ module Aws::QuickSight
     # * `Applied customizations` - Within an AWS Region, a set of QuickSight
     #   customizations can apply to an AWS account or to a namespace.
     #   Settings that you apply to a namespace override settings that you
-    #   apply to an AWS Account. All settings are isolated to a single AWS
+    #   apply to an AWS account. All settings are isolated to a single AWS
     #   Region. To apply them in other AWS Regions, run the
     #   `CreateAccountCustomization` command in each AWS Region where you
     #   want to apply the same customizations.
@@ -2634,7 +2662,7 @@ module Aws::QuickSight
     end
 
     # Describes the settings that were used when your QuickSight
-    # subscription was first created in this AWS Account.
+    # subscription was first created in this AWS account.
     #
     # @option params [required, String] :aws_account_id
     #   The ID for the AWS account that contains the settings that you want to
@@ -2707,6 +2735,9 @@ module Aws::QuickSight
     #   resp.analysis.theme_arn #=> String
     #   resp.analysis.created_time #=> Time
     #   resp.analysis.last_updated_time #=> Time
+    #   resp.analysis.sheets #=> Array
+    #   resp.analysis.sheets[0].sheet_id #=> String
+    #   resp.analysis.sheets[0].name #=> String
     #   resp.status #=> Integer
     #   resp.request_id #=> String
     #
@@ -2813,6 +2844,9 @@ module Aws::QuickSight
     #   resp.dashboard.version.data_set_arns[0] #=> String
     #   resp.dashboard.version.description #=> String
     #   resp.dashboard.version.theme_arn #=> String
+    #   resp.dashboard.version.sheets #=> Array
+    #   resp.dashboard.version.sheets[0].sheet_id #=> String
+    #   resp.dashboard.version.sheets[0].name #=> String
     #   resp.dashboard.created_time #=> Time
     #   resp.dashboard.last_published_time #=> Time
     #   resp.dashboard.last_updated_time #=> Time
@@ -2941,6 +2975,7 @@ module Aws::QuickSight
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.column_name #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.tags #=> Array
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.tags[0].column_geographic_role #=> String, one of "COUNTRY", "STATE", "COUNTY", "CITY", "POSTCODE", "LONGITUDE", "LATITUDE"
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.tags[0].column_description.text #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.left_operand #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.right_operand #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.type #=> String, one of "INNER", "OUTER", "LEFT", "RIGHT"
@@ -2948,6 +2983,7 @@ module Aws::QuickSight
     #   resp.data_set.logical_table_map["LogicalTableId"].source.physical_table_id #=> String
     #   resp.data_set.output_columns #=> Array
     #   resp.data_set.output_columns[0].name #=> String
+    #   resp.data_set.output_columns[0].description #=> String
     #   resp.data_set.output_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME"
     #   resp.data_set.import_mode #=> String, one of "SPICE", "DIRECT_QUERY"
     #   resp.data_set.consumed_spice_capacity_in_bytes #=> Integer
@@ -2959,6 +2995,11 @@ module Aws::QuickSight
     #   resp.data_set.row_level_permission_data_set.namespace #=> String
     #   resp.data_set.row_level_permission_data_set.arn #=> String
     #   resp.data_set.row_level_permission_data_set.permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
+    #   resp.data_set.column_level_permission_rules #=> Array
+    #   resp.data_set.column_level_permission_rules[0].principals #=> Array
+    #   resp.data_set.column_level_permission_rules[0].principals[0] #=> String
+    #   resp.data_set.column_level_permission_rules[0].column_names #=> Array
+    #   resp.data_set.column_level_permission_rules[0].column_names[0] #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -3045,7 +3086,7 @@ module Aws::QuickSight
     #   resp.data_source.arn #=> String
     #   resp.data_source.data_source_id #=> String
     #   resp.data_source.name #=> String
-    #   resp.data_source.type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER"
+    #   resp.data_source.type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM"
     #   resp.data_source.status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "DELETED"
     #   resp.data_source.created_time #=> Time
     #   resp.data_source.last_updated_time #=> Time
@@ -3065,6 +3106,9 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.my_sql_parameters.host #=> String
     #   resp.data_source.data_source_parameters.my_sql_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.my_sql_parameters.database #=> String
+    #   resp.data_source.data_source_parameters.oracle_parameters.host #=> String
+    #   resp.data_source.data_source_parameters.oracle_parameters.port #=> Integer
+    #   resp.data_source.data_source_parameters.oracle_parameters.database #=> String
     #   resp.data_source.data_source_parameters.postgre_sql_parameters.host #=> String
     #   resp.data_source.data_source_parameters.postgre_sql_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.postgre_sql_parameters.database #=> String
@@ -3110,6 +3154,9 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].my_sql_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].my_sql_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].my_sql_parameters.database #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].oracle_parameters.host #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].oracle_parameters.port #=> Integer
+    #   resp.data_source.alternate_data_source_parameters[0].oracle_parameters.database #=> String
     #   resp.data_source.alternate_data_source_parameters[0].postgre_sql_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].postgre_sql_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].postgre_sql_parameters.database #=> String
@@ -3252,7 +3299,7 @@ module Aws::QuickSight
     #   to describe.
     #
     # @option params [required, String] :assignment_name
-    #   The name of the assignment.
+    #   The name of the assignment, also called a rule.
     #
     # @option params [required, String] :namespace
     #   The namespace that contains the assignment.
@@ -3448,6 +3495,9 @@ module Aws::QuickSight
     #   resp.template.version.description #=> String
     #   resp.template.version.source_entity_arn #=> String
     #   resp.template.version.theme_arn #=> String
+    #   resp.template.version.sheets #=> Array
+    #   resp.template.version.sheets[0].sheet_id #=> String
+    #   resp.template.version.sheets[0].name #=> String
     #   resp.template.template_id #=> String
     #   resp.template.last_updated_time #=> Time
     #   resp.template.created_time #=> Time
@@ -3824,6 +3874,16 @@ module Aws::QuickSight
     #   Remove the reset button on the embedded dashboard. The default is
     #   FALSE, which enables the reset button.
     #
+    # @option params [Boolean] :state_persistence_enabled
+    #   Adds persistence of state for the user session in an embedded
+    #   dashboard. Persistence applies to the sheet and the parameter
+    #   settings. These are control settings that the dashboard subscriber
+    #   (QuickSight reader) chooses while viewing the dashboard. If this is
+    #   set to `TRUE`, the settings are the same when the the subscriber
+    #   reopens the same dashboard URL. The state is stored in QuickSight, not
+    #   in a browser cookie. If this is set to FALSE, the state of the user
+    #   session is not persisted. The default is `FALSE`.
+    #
     # @option params [String] :user_arn
     #   The Amazon QuickSight user's Amazon Resource Name (ARN), for use with
     #   `QUICKSIGHT` identity type. You can use this for any Amazon QuickSight
@@ -3841,6 +3901,20 @@ module Aws::QuickSight
     #   Omit this parameter for users in the third group – IAM users and IAM
     #   role-based sessions.
     #
+    # @option params [String] :namespace
+    #   The QuickSight namespace that contains the dashboard IDs in this
+    #   request. If you're not using a custom namespace, set this to
+    #   "`default`".
+    #
+    # @option params [Array<String>] :additional_dashboard_ids
+    #   A list of one or more dashboard ids that you want to add to a session
+    #   that includes anonymous authorizations. `IdentityType` must be set to
+    #   ANONYMOUS for this to work, because other other identity types
+    #   authenticate as QuickSight users. For example, if you set
+    #   "`--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
+    #   identity-type ANONYMOUS`", the session can access all three
+    #   dashboards.
+    #
     # @return [Types::GetDashboardEmbedUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDashboardEmbedUrlResponse#embed_url #embed_url} => String
@@ -3852,11 +3926,14 @@ module Aws::QuickSight
     #   resp = client.get_dashboard_embed_url({
     #     aws_account_id: "AwsAccountId", # required
     #     dashboard_id: "RestrictiveResourceId", # required
-    #     identity_type: "IAM", # required, accepts IAM, QUICKSIGHT
+    #     identity_type: "IAM", # required, accepts IAM, QUICKSIGHT, ANONYMOUS
     #     session_lifetime_in_minutes: 1,
     #     undo_redo_disabled: false,
     #     reset_disabled: false,
+    #     state_persistence_enabled: false,
     #     user_arn: "Arn",
+    #     namespace: "Namespace",
+    #     additional_dashboard_ids: ["RestrictiveResourceId"],
     #   })
     #
     # @example Response structure
@@ -4174,6 +4251,7 @@ module Aws::QuickSight
     #   resp.data_set_summaries[0].row_level_permission_data_set.namespace #=> String
     #   resp.data_set_summaries[0].row_level_permission_data_set.arn #=> String
     #   resp.data_set_summaries[0].row_level_permission_data_set.permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
+    #   resp.data_set_summaries[0].column_level_permission_rules_applied #=> Boolean
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
@@ -4223,7 +4301,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].arn #=> String
     #   resp.data_sources[0].data_source_id #=> String
     #   resp.data_sources[0].name #=> String
-    #   resp.data_sources[0].type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER"
+    #   resp.data_sources[0].type #=> String, one of "ADOBE_ANALYTICS", "AMAZON_ELASTICSEARCH", "ATHENA", "AURORA", "AURORA_POSTGRESQL", "AWS_IOT_ANALYTICS", "GITHUB", "JIRA", "MARIADB", "MYSQL", "ORACLE", "POSTGRESQL", "PRESTO", "REDSHIFT", "S3", "SALESFORCE", "SERVICENOW", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "TWITTER", "TIMESTREAM"
     #   resp.data_sources[0].status #=> String, one of "CREATION_IN_PROGRESS", "CREATION_SUCCESSFUL", "CREATION_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_SUCCESSFUL", "UPDATE_FAILED", "DELETED"
     #   resp.data_sources[0].created_time #=> Time
     #   resp.data_sources[0].last_updated_time #=> Time
@@ -4243,6 +4321,9 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.my_sql_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.my_sql_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.my_sql_parameters.database #=> String
+    #   resp.data_sources[0].data_source_parameters.oracle_parameters.host #=> String
+    #   resp.data_sources[0].data_source_parameters.oracle_parameters.port #=> Integer
+    #   resp.data_sources[0].data_source_parameters.oracle_parameters.database #=> String
     #   resp.data_sources[0].data_source_parameters.postgre_sql_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.postgre_sql_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.postgre_sql_parameters.database #=> String
@@ -4288,6 +4369,9 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].my_sql_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].my_sql_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].my_sql_parameters.database #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].oracle_parameters.host #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].oracle_parameters.port #=> Integer
+    #   resp.data_sources[0].alternate_data_source_parameters[0].oracle_parameters.database #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].postgre_sql_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].postgre_sql_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].postgre_sql_parameters.database #=> String
@@ -5595,16 +5679,17 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Updates the Amazon QuickSight settings in your AWS Account.
+    # Updates the Amazon QuickSight settings in your AWS account.
     #
     # @option params [required, String] :aws_account_id
     #   The ID for the AWS account that contains the QuickSight settings that
     #   you want to list.
     #
     # @option params [required, String] :default_namespace
-    #   The default namespace for this AWS Account. Currently, the default is
-    #   `default`. IAM users who register for the first time with QuickSight
-    #   provide an email that becomes associated with the default namespace.
+    #   The default namespace for this AWS account. Currently, the default is
+    #   `default`. AWS Identity and Access Management (IAM) users that
+    #   register for the first time with QuickSight provide an email that
+    #   becomes associated with the default namespace.
     #
     # @option params [String] :notification_email
     #   The email address that you want QuickSight to send notifications to
@@ -6082,6 +6167,9 @@ module Aws::QuickSight
     # @option params [Types::RowLevelPermissionDataSet] :row_level_permission_data_set
     #   The row-level security configuration for the data you want to create.
     #
+    # @option params [Array<Types::ColumnLevelPermissionRule>] :column_level_permission_rules
+    #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
+    #
     # @return [Types::UpdateDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDataSetResponse#arn #arn} => String
@@ -6173,6 +6261,9 @@ module Aws::QuickSight
     #               tags: [ # required
     #                 {
     #                   column_geographic_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #                   column_description: {
+    #                     text: "ColumnDescriptiveText",
+    #                   },
     #                 },
     #               ],
     #             },
@@ -6204,6 +6295,12 @@ module Aws::QuickSight
     #       arn: "Arn", # required
     #       permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
     #     },
+    #     column_level_permission_rules: [
+    #       {
+    #         principals: ["String"],
+    #         column_names: ["String"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -6360,6 +6457,11 @@ module Aws::QuickSight
     #         port: 1, # required
     #         database: "Database", # required
     #       },
+    #       oracle_parameters: {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         database: "Database", # required
+    #       },
     #       postgre_sql_parameters: {
     #         host: "Host", # required
     #         port: 1, # required
@@ -6447,6 +6549,11 @@ module Aws::QuickSight
     #               database: "Database", # required
     #             },
     #             my_sql_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
+    #             oracle_parameters: {
     #               host: "Host", # required
     #               port: 1, # required
     #               database: "Database", # required
@@ -6643,14 +6750,14 @@ module Aws::QuickSight
 
     # Updates an existing IAM policy assignment. This operation updates only
     # the optional parameter or parameters that are specified in the
-    # request.
+    # request. This overwrites all of the users included in `Identities`.
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the AWS account that contains the IAM policy assignment.
     #
     # @option params [required, String] :assignment_name
-    #   The name of the assignment. This name must be unique within an AWS
-    #   account.
+    #   The name of the assignment, also called a rule. This name must be
+    #   unique within an AWS account.
     #
     # @option params [required, String] :namespace
     #   The namespace of the assignment.
@@ -7287,7 +7394,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

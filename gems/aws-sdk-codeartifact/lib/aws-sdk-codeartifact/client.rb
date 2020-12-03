@@ -361,6 +361,8 @@ module Aws::CodeArtifact
     #
     #   * `public:maven-commonsware` - for the CommonsWare Android repository.
     #
+    #   * `public:nuget-org` - for the NuGet Gallery.
+    #
     # @return [Types::AssociateExternalConnectionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssociateExternalConnectionResult#repository #repository} => Types::RepositoryDescription
@@ -386,7 +388,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/AssociateExternalConnection AWS API Documentation
@@ -430,6 +432,8 @@ module Aws::CodeArtifact
     #   * `maven`\: A Maven package that contains compiled code in a
     #     distributable format, such as a JAR file.
     #
+    #   * `nuget`\: A NuGet package.
+    #
     # @option params [String] :namespace
     #   The namespace of the package. The package component that specifies its
     #   namespace depends on its type. For example:
@@ -440,6 +444,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so NuGet
+    #     packages do not have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package that is copied.
@@ -492,7 +499,7 @@ module Aws::CodeArtifact
     #     domain_owner: "AccountId",
     #     source_repository: "RepositoryName", # required
     #     destination_repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     versions: ["PackageVersion"],
@@ -560,6 +567,9 @@ module Aws::CodeArtifact
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tag key-value pairs for the domain.
+    #
     # @return [Types::CreateDomainResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainResult#domain #domain} => Types::DomainDescription
@@ -569,6 +579,12 @@ module Aws::CodeArtifact
     #   resp = client.create_domain({
     #     domain: "DomainName", # required
     #     encryption_key: "Arn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -581,6 +597,7 @@ module Aws::CodeArtifact
     #   resp.domain.encryption_key #=> String
     #   resp.domain.repository_count #=> Integer
     #   resp.domain.asset_size_bytes #=> Integer
+    #   resp.domain.s3_bucket_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/CreateDomain AWS API Documentation
     #
@@ -617,6 +634,9 @@ module Aws::CodeArtifact
     #
     #   [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tag key-value pairs for the repository.
+    #
     # @return [Types::CreateRepositoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRepositoryResult#repository #repository} => Types::RepositoryDescription
@@ -633,6 +653,12 @@ module Aws::CodeArtifact
     #         repository_name: "RepositoryName", # required
     #       },
     #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -647,7 +673,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/CreateRepository AWS API Documentation
@@ -691,6 +717,7 @@ module Aws::CodeArtifact
     #   resp.domain.encryption_key #=> String
     #   resp.domain.repository_count #=> Integer
     #   resp.domain.asset_size_bytes #=> Integer
+    #   resp.domain.s3_bucket_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DeleteDomain AWS API Documentation
     #
@@ -771,6 +798,8 @@ module Aws::CodeArtifact
     #
     #   * `maven`
     #
+    #   * `nuget`
+    #
     # @option params [String] :namespace
     #   The namespace of the package. The package component that specifies its
     #   namespace depends on its type. For example:
@@ -781,6 +810,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so NuGet
+    #     packages do not have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package with the versions to delete.
@@ -814,7 +846,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     versions: ["PackageVersion"], # required
@@ -875,7 +907,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DeleteRepository AWS API Documentation
@@ -977,6 +1009,7 @@ module Aws::CodeArtifact
     #   resp.domain.encryption_key #=> String
     #   resp.domain.repository_count #=> Integer
     #   resp.domain.asset_size_bytes #=> Integer
+    #   resp.domain.s3_bucket_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DescribeDomain AWS API Documentation
     #
@@ -1015,6 +1048,8 @@ module Aws::CodeArtifact
     #
     #   * `maven`
     #
+    #   * `nuget`
+    #
     # @option params [String] :namespace
     #   The namespace of the package. The package component that specifies its
     #   namespace depends on its type. For example:
@@ -1025,6 +1060,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so NuGet
+    #     packages do not have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the requested package version.
@@ -1042,7 +1080,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     package_version: "PackageVersion", # required
@@ -1050,7 +1088,7 @@ module Aws::CodeArtifact
     #
     # @example Response structure
     #
-    #   resp.package_version.format #=> String, one of "npm", "pypi", "maven"
+    #   resp.package_version.format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.package_version.namespace #=> String
     #   resp.package_version.package_name #=> String
     #   resp.package_version.display_name #=> String
@@ -1111,7 +1149,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DescribeRepository AWS API Documentation
@@ -1165,7 +1203,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DisassociateExternalConnection AWS API Documentation
@@ -1181,11 +1219,18 @@ module Aws::CodeArtifact
     # status to `Disposed`. A disposed package version cannot be restored in
     # your repository because its assets are deleted.
     #
-    # To view all disposed package versions in a repository, use `
-    # ListackageVersions ` and set the ` status ` parameter to `Disposed`.
+    # To view all disposed package versions in a repository, use [
+    # `ListPackageVersions` ][1] and set the [ `status` ][2] parameter to
+    # `Disposed`.
     #
-    # To view information about a disposed package version, use `
-    # ListPackageVersions ` and set the ` status ` parameter to `Disposed`.
+    # To view information about a disposed package version, use [
+    # `DescribePackageVersion` ][3]..
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html
+    # [2]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html#API_ListPackageVersions_RequestSyntax
+    # [3]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribePackageVersion.html
     #
     # @option params [required, String] :domain
     #   The name of the domain that contains the repository you want to
@@ -1209,6 +1254,8 @@ module Aws::CodeArtifact
     #
     #   * `maven`
     #
+    #   * `nuget`
+    #
     # @option params [String] :namespace
     #   The namespace of the package. The package component that specifies its
     #   namespace depends on its type. For example:
@@ -1219,6 +1266,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so NuGet
+    #     packages do not have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package with the versions you want to dispose.
@@ -1254,7 +1304,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     versions: ["PackageVersion"], # required
@@ -1282,10 +1332,11 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
-    # Generates a temporary authentication token for accessing repositories
+    # Generates a temporary authorization token for accessing repositories
     # in the domain. This API requires the
     # `codeartifact:GetAuthorizationToken` and `sts:GetServiceBearerToken`
-    # permissions.
+    # permissions. For more information about authorization tokens, see [AWS
+    # CodeArtifact authentication and tokens][1].
     #
     # <note markdown="1"> CodeArtifact authorization tokens are valid for a period of 12 hours
     # when created with the `login` command. You can call `login`
@@ -1303,14 +1354,15 @@ module Aws::CodeArtifact
     # token, the token will be valid for the full authorization period even
     # though this is longer than the 15-minute session duration.
     #
-    #  See [Using IAM Roles][1] for more information on controlling session
+    #  See [Using IAM Roles][2] for more information on controlling session
     # duration.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    # [1]: https://docs.aws.amazon.com/codeartifact/latest/ug/tokens-authentication.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
     #
     # @option params [required, String] :domain
     #   The name of the domain that is in scope for the generated
@@ -1322,6 +1374,10 @@ module Aws::CodeArtifact
     #
     # @option params [Integer] :duration_seconds
     #   The time, in seconds, that the generated authorization token is valid.
+    #   Valid values are `0` and any number between `900` (15 minutes) and
+    #   `43200` (12 hours). A value of `0` will set the expiration of the
+    #   authorization token to the same expiration of the user's role's
+    #   temporary credentials.
     #
     # @return [Types::GetAuthorizationTokenResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1421,6 +1477,8 @@ module Aws::CodeArtifact
     #
     #   * `maven`
     #
+    #   * `nuget`
+    #
     # @option params [String] :namespace
     #   The namespace of the package. The package component that specifies its
     #   namespace depends on its type. For example:
@@ -1431,6 +1489,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so NuGet
+    #     packages do not have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package that contains the requested asset.
@@ -1458,7 +1519,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     package_version: "PackageVersion", # required
@@ -1512,6 +1573,8 @@ module Aws::CodeArtifact
     #
     #   * `maven`
     #
+    #   * `nuget`
+    #
     # @option params [String] :namespace
     #   The namespace of the package. The package component that specifies its
     #   namespace depends on its type. For example:
@@ -1522,6 +1585,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so NuGet
+    #     packages do not have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package version that contains the requested readme
@@ -1545,7 +1611,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     package_version: "PackageVersion", # required
@@ -1553,7 +1619,7 @@ module Aws::CodeArtifact
     #
     # @example Response structure
     #
-    #   resp.format #=> String, one of "npm", "pypi", "maven"
+    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.namespace #=> String
     #   resp.package #=> String
     #   resp.version #=> String
@@ -1578,6 +1644,8 @@ module Aws::CodeArtifact
     #
     # * `maven`
     #
+    # * `nuget`
+    #
     # @option params [required, String] :domain
     #   The name of the domain that contains the repository.
     #
@@ -1598,6 +1666,8 @@ module Aws::CodeArtifact
     #
     #   * `maven`
     #
+    #   * `nuget`
+    #
     # @return [Types::GetRepositoryEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRepositoryEndpointResult#repository_endpoint #repository_endpoint} => String
@@ -1608,7 +1678,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #   })
     #
     # @example Response structure
@@ -1741,6 +1811,8 @@ module Aws::CodeArtifact
     #   * `maven`\: A Maven package that contains compiled code in a
     #     distributable format, such as a JAR file.
     #
+    #   * `nuget`\: A NuGet package.
+    #
     # @option params [String] :namespace
     #   The namespace of the package. The package component that specifies its
     #   namespace depends on its type. For example:
@@ -1751,6 +1823,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so NuGet
+    #     packages do not have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package that contains the returned package version
@@ -1785,7 +1860,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     package_version: "PackageVersion", # required
@@ -1795,7 +1870,7 @@ module Aws::CodeArtifact
     #
     # @example Response structure
     #
-    #   resp.format #=> String, one of "npm", "pypi", "maven"
+    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.namespace #=> String
     #   resp.package #=> String
     #   resp.version #=> String
@@ -1851,6 +1926,8 @@ module Aws::CodeArtifact
     #   * `maven`\: A Maven package that contains compiled code in a
     #     distributable format, such as a JAR file.
     #
+    #   * `nuget`\: A NuGet package.
+    #
     # @option params [String] :namespace
     #   The namespace of the package. The package component that specifies its
     #   namespace depends on its type. For example:
@@ -1861,6 +1938,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so NuGet
+    #     packages do not have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package versions' package.
@@ -1889,7 +1969,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     package_version: "PackageVersion", # required
@@ -1898,7 +1978,7 @@ module Aws::CodeArtifact
     #
     # @example Response structure
     #
-    #   resp.format #=> String, one of "npm", "pypi", "maven"
+    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.namespace #=> String
     #   resp.package #=> String
     #   resp.version #=> String
@@ -1947,6 +2027,8 @@ module Aws::CodeArtifact
     #   * `maven`\: A Maven package that contains compiled code in a
     #     distributable format, such as a JAR file.
     #
+    #   * `nuget`\: A NuGet package.
+    #
     # @option params [String] :namespace
     #   The namespace of the package. The package component that specifies its
     #   namespace depends on its type. For example:
@@ -1957,6 +2039,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so NuGet
+    #     packages do not have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package for which you want to return a list of package
@@ -2004,7 +2089,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     status: "Published", # accepts Published, Unfinished, Unlisted, Archived, Disposed, Deleted
@@ -2016,7 +2101,7 @@ module Aws::CodeArtifact
     # @example Response structure
     #
     #   resp.default_display_version #=> String
-    #   resp.format #=> String, one of "npm", "pypi", "maven"
+    #   resp.format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.namespace #=> String
     #   resp.package #=> String
     #   resp.versions #=> Array
@@ -2062,6 +2147,8 @@ module Aws::CodeArtifact
     #   * `maven`\: A Maven package that contains compiled code in a
     #     distributable format, such as a JAR file.
     #
+    #   * `nuget`\: A NuGet package.
+    #
     # @option params [String] :namespace
     #   The namespace of the package. The package component that specifies its
     #   namespace depends on its type. For example:
@@ -2073,9 +2160,12 @@ module Aws::CodeArtifact
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
     #
+    #   * A NuGet package does not contain a corresponding component, so NuGet
+    #     packages do not have a namespace.
+    #
     # @option params [String] :package_prefix
-    #   A prefix used to filter returned repositories. Only repositories with
-    #   names that start with `repositoryPrefix` are returned.
+    #   A prefix used to filter returned packages. Only packages with names
+    #   that start with `packagePrefix` are returned.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -2098,7 +2188,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # accepts npm, pypi, maven
+    #     format: "npm", # accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package_prefix: "PackageName",
     #     max_results: 1,
@@ -2108,7 +2198,7 @@ module Aws::CodeArtifact
     # @example Response structure
     #
     #   resp.packages #=> Array
-    #   resp.packages[0].format #=> String, one of "npm", "pypi", "maven"
+    #   resp.packages[0].format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.packages[0].namespace #=> String
     #   resp.packages[0].package #=> String
     #   resp.next_token #=> String
@@ -2247,8 +2337,44 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
+    # Gets information about AWS tags for a specified Amazon Resource Name
+    # (ARN) in AWS CodeArtifact.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to get tags for.
+    #
+    # @return [Types::ListTagsForResourceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResult#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Sets a resource policy on a domain that specifies permissions to
     # access it.
+    #
+    # When you call `PutDomainPermissionsPolicy`, the resource policy on the
+    # domain is ignored when evaluting permissions. This ensures that the
+    # owner of a domain cannot lock themselves out of the domain, which
+    # would prevent them from being able to update the resource policy.
     #
     # @option params [required, String] :domain
     #   The name of the domain on which to set the resource policy.
@@ -2296,6 +2422,12 @@ module Aws::CodeArtifact
 
     # Sets the resource policy on a repository that specifies permissions to
     # access it.
+    #
+    # When you call `PutRepositoryPermissionsPolicy`, the resource policy on
+    # the repository is ignored when evaluting permissions. This ensures
+    # that the owner of a repository cannot lock themselves out of the
+    # repository, which would prevent them from being able to update the
+    # resource policy.
     #
     # @option params [required, String] :domain
     #   The name of the domain containing the repository to set the resource
@@ -2347,6 +2479,65 @@ module Aws::CodeArtifact
       req.send_request(options)
     end
 
+    # Adds or updates tags for a resource in AWS CodeArtifact.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to add or
+    #   update tags for.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags you want to modify or add to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from a resource in AWS CodeArtifact.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to remove
+    #   tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag key for each tag that you want to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates the status of one or more versions of a package.
     #
     # @option params [required, String] :domain
@@ -2371,6 +2562,8 @@ module Aws::CodeArtifact
     #
     #   * `maven`
     #
+    #   * `nuget`
+    #
     # @option params [String] :namespace
     #   The namespace of the package. The package component that specifies its
     #   namespace depends on its type. For example:
@@ -2381,6 +2574,9 @@ module Aws::CodeArtifact
     #
     #   * A Python package does not contain a corresponding component, so
     #     Python packages do not have a namespace.
+    #
+    #   * A NuGet package does not contain a corresponding component, so NuGet
+    #     packages do not have a namespace.
     #
     # @option params [required, String] :package
     #   The name of the package with the version statuses to update.
@@ -2414,7 +2610,7 @@ module Aws::CodeArtifact
     #     domain: "DomainName", # required
     #     domain_owner: "AccountId",
     #     repository: "RepositoryName", # required
-    #     format: "npm", # required, accepts npm, pypi, maven
+    #     format: "npm", # required, accepts npm, pypi, maven, nuget
     #     namespace: "PackageNamespace",
     #     package: "PackageName", # required
     #     versions: ["PackageVersion"], # required
@@ -2499,7 +2695,7 @@ module Aws::CodeArtifact
     #   resp.repository.upstreams[0].repository_name #=> String
     #   resp.repository.external_connections #=> Array
     #   resp.repository.external_connections[0].external_connection_name #=> String
-    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven"
+    #   resp.repository.external_connections[0].package_format #=> String, one of "npm", "pypi", "maven", "nuget"
     #   resp.repository.external_connections[0].status #=> String, one of "Available"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/UpdateRepository AWS API Documentation
@@ -2524,7 +2720,7 @@ module Aws::CodeArtifact
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codeartifact'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

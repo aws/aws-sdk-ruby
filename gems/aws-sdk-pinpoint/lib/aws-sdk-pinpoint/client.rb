@@ -788,7 +788,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.start_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
-    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
@@ -805,7 +805,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
-    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
     #   resp.campaign_response.hook.lambda_function_name #=> String
@@ -907,7 +907,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.schedule.timezone #=> String
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
-    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.tags #=> Hash
     #   resp.campaign_response.tags["__string"] #=> String
     #   resp.campaign_response.template_configuration.email_template.name #=> String
@@ -1123,7 +1123,7 @@ module Aws::Pinpoint
     #               conditions: [
     #                 {
     #                   event_condition: {
-    #                     dimensions: { # required
+    #                     dimensions: {
     #                       attributes: {
     #                         "__string" => {
     #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -1240,7 +1240,7 @@ module Aws::Pinpoint
     #               {
     #                 condition: {
     #                   event_condition: {
-    #                     dimensions: { # required
+    #                     dimensions: {
     #                       attributes: {
     #                         "__string" => {
     #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -1394,6 +1394,30 @@ module Aws::Pinpoint
     #       start_activity: "__string",
     #       start_condition: {
     #         description: "__string",
+    #         event_start_condition: {
+    #           event_filter: {
+    #             dimensions: { # required
+    #               attributes: {
+    #                 "__string" => {
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"], # required
+    #                 },
+    #               },
+    #               event_type: {
+    #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"], # required
+    #               },
+    #               metrics: {
+    #                 "__string" => {
+    #                   comparison_operator: "__string", # required
+    #                   value: 1.0, # required
+    #                 },
+    #               },
+    #             },
+    #             filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
+    #           },
+    #           segment_id: "__string",
+    #         },
     #         segment_start_condition: {
     #           segment_id: "__string", # required
     #         },
@@ -1560,6 +1584,18 @@ module Aws::Pinpoint
     #   resp.journey_response.schedule.timezone #=> String
     #   resp.journey_response.start_activity #=> String
     #   resp.journey_response.start_condition.description #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes #=> Hash
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.values #=> Array
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.metrics #=> Hash
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.journey_response.start_condition.event_start_condition.segment_id #=> String
     #   resp.journey_response.start_condition.segment_start_condition.segment_id #=> String
     #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
     #   resp.journey_response.tags #=> Hash
@@ -2463,7 +2499,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.start_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
-    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
@@ -2480,7 +2516,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
-    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
     #   resp.campaign_response.hook.lambda_function_name #=> String
@@ -2582,7 +2618,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.schedule.timezone #=> String
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
-    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.tags #=> Hash
     #   resp.campaign_response.tags["__string"] #=> String
     #   resp.campaign_response.template_configuration.email_template.name #=> String
@@ -2987,6 +3023,18 @@ module Aws::Pinpoint
     #   resp.journey_response.schedule.timezone #=> String
     #   resp.journey_response.start_activity #=> String
     #   resp.journey_response.start_condition.description #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes #=> Hash
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.values #=> Array
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.metrics #=> Hash
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.journey_response.start_condition.event_start_condition.segment_id #=> String
     #   resp.journey_response.start_condition.segment_start_condition.segment_id #=> String
     #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
     #   resp.journey_response.tags #=> Hash
@@ -3909,7 +3957,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.start_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
-    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
@@ -3926,7 +3974,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
-    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
     #   resp.campaign_response.hook.lambda_function_name #=> String
@@ -4028,7 +4076,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.schedule.timezone #=> String
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
-    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.tags #=> Hash
     #   resp.campaign_response.tags["__string"] #=> String
     #   resp.campaign_response.template_configuration.email_template.name #=> String
@@ -4277,7 +4325,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.start_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
-    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
@@ -4294,7 +4342,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
-    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
     #   resp.campaign_response.hook.lambda_function_name #=> String
@@ -4396,7 +4444,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.schedule.timezone #=> String
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
-    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.tags #=> Hash
     #   resp.campaign_response.tags["__string"] #=> String
     #   resp.campaign_response.template_configuration.email_template.name #=> String
@@ -4539,7 +4587,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.start_time #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.timezone #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].size_percent #=> Integer
-    #   resp.campaigns_response.item[0].additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaigns_response.item[0].additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.email_template.name #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.email_template.version #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.push_template.name #=> String
@@ -4556,7 +4604,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types #=> Array
     #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
-    #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaigns_response.item[0].description #=> String
     #   resp.campaigns_response.item[0].holdout_percent #=> Integer
     #   resp.campaigns_response.item[0].hook.lambda_function_name #=> String
@@ -4658,7 +4706,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].schedule.timezone #=> String
     #   resp.campaigns_response.item[0].segment_id #=> String
     #   resp.campaigns_response.item[0].segment_version #=> Integer
-    #   resp.campaigns_response.item[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaigns_response.item[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaigns_response.item[0].tags #=> Hash
     #   resp.campaigns_response.item[0].tags["__string"] #=> String
     #   resp.campaigns_response.item[0].template_configuration.email_template.name #=> String
@@ -4800,7 +4848,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.start_time #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.timezone #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].size_percent #=> Integer
-    #   resp.campaigns_response.item[0].additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaigns_response.item[0].additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.email_template.name #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.email_template.version #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.push_template.name #=> String
@@ -4817,7 +4865,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types #=> Array
     #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
-    #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaigns_response.item[0].description #=> String
     #   resp.campaigns_response.item[0].holdout_percent #=> Integer
     #   resp.campaigns_response.item[0].hook.lambda_function_name #=> String
@@ -4919,7 +4967,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].schedule.timezone #=> String
     #   resp.campaigns_response.item[0].segment_id #=> String
     #   resp.campaigns_response.item[0].segment_version #=> Integer
-    #   resp.campaigns_response.item[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaigns_response.item[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaigns_response.item[0].tags #=> Hash
     #   resp.campaigns_response.item[0].tags["__string"] #=> String
     #   resp.campaigns_response.item[0].template_configuration.email_template.name #=> String
@@ -5583,6 +5631,18 @@ module Aws::Pinpoint
     #   resp.journey_response.schedule.timezone #=> String
     #   resp.journey_response.start_activity #=> String
     #   resp.journey_response.start_condition.description #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes #=> Hash
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.values #=> Array
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.metrics #=> Hash
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.journey_response.start_condition.event_start_condition.segment_id #=> String
     #   resp.journey_response.start_condition.segment_start_condition.segment_id #=> String
     #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
     #   resp.journey_response.tags #=> Hash
@@ -6965,6 +7025,18 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].schedule.timezone #=> String
     #   resp.journeys_response.item[0].start_activity #=> String
     #   resp.journeys_response.item[0].start_condition.description #=> String
+    #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.dimensions.attributes #=> Hash
+    #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.dimensions.event_type.values #=> Array
+    #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.dimensions.metrics #=> Hash
+    #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.journeys_response.item[0].start_condition.event_start_condition.segment_id #=> String
     #   resp.journeys_response.item[0].start_condition.segment_start_condition.segment_id #=> String
     #   resp.journeys_response.item[0].state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
     #   resp.journeys_response.item[0].tags #=> Hash
@@ -8663,7 +8735,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].schedule.start_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.timezone #=> String
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
-    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
@@ -8680,7 +8752,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
-    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
     #   resp.campaign_response.hook.lambda_function_name #=> String
@@ -8782,7 +8854,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.schedule.timezone #=> String
     #   resp.campaign_response.segment_id #=> String
     #   resp.campaign_response.segment_version #=> Integer
-    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
+    #   resp.campaign_response.state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED", "INVALID"
     #   resp.campaign_response.tags #=> Hash
     #   resp.campaign_response.tags["__string"] #=> String
     #   resp.campaign_response.template_configuration.email_template.name #=> String
@@ -9150,7 +9222,7 @@ module Aws::Pinpoint
     #               conditions: [
     #                 {
     #                   event_condition: {
-    #                     dimensions: { # required
+    #                     dimensions: {
     #                       attributes: {
     #                         "__string" => {
     #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -9267,7 +9339,7 @@ module Aws::Pinpoint
     #               {
     #                 condition: {
     #                   event_condition: {
-    #                     dimensions: { # required
+    #                     dimensions: {
     #                       attributes: {
     #                         "__string" => {
     #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -9421,6 +9493,30 @@ module Aws::Pinpoint
     #       start_activity: "__string",
     #       start_condition: {
     #         description: "__string",
+    #         event_start_condition: {
+    #           event_filter: {
+    #             dimensions: { # required
+    #               attributes: {
+    #                 "__string" => {
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"], # required
+    #                 },
+    #               },
+    #               event_type: {
+    #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"], # required
+    #               },
+    #               metrics: {
+    #                 "__string" => {
+    #                   comparison_operator: "__string", # required
+    #                   value: 1.0, # required
+    #                 },
+    #               },
+    #             },
+    #             filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
+    #           },
+    #           segment_id: "__string",
+    #         },
     #         segment_start_condition: {
     #           segment_id: "__string", # required
     #         },
@@ -9587,6 +9683,18 @@ module Aws::Pinpoint
     #   resp.journey_response.schedule.timezone #=> String
     #   resp.journey_response.start_activity #=> String
     #   resp.journey_response.start_condition.description #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes #=> Hash
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.values #=> Array
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.metrics #=> Hash
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.journey_response.start_condition.event_start_condition.segment_id #=> String
     #   resp.journey_response.start_condition.segment_start_condition.segment_id #=> String
     #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
     #   resp.journey_response.tags #=> Hash
@@ -9782,6 +9890,18 @@ module Aws::Pinpoint
     #   resp.journey_response.schedule.timezone #=> String
     #   resp.journey_response.start_activity #=> String
     #   resp.journey_response.start_condition.description #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes #=> Hash
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values #=> Array
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values[0] #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.values #=> Array
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.values[0] #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.metrics #=> Hash
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.metrics["__string"].comparison_operator #=> String
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.metrics["__string"].value #=> Float
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.filter_type #=> String, one of "SYSTEM", "ENDPOINT"
+    #   resp.journey_response.start_condition.event_start_condition.segment_id #=> String
     #   resp.journey_response.start_condition.segment_start_condition.segment_id #=> String
     #   resp.journey_response.state #=> String, one of "DRAFT", "ACTIVE", "COMPLETED", "CANCELLED", "CLOSED"
     #   resp.journey_response.tags #=> Hash
@@ -10479,7 +10599,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

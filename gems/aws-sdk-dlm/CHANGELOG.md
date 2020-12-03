@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-11-06)
+------------------
+
+* Feature - Amazon Data Lifecycle Manager now supports the creation and retention of EBS-backed Amazon Machine Images
+
+1.35.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2020-09-16)
+------------------
+
+* Feature - Customers can now provide multiple schedules within a single Data Lifecycle Manager (DLM) policy. Each schedule supports tagging, Fast Snapshot Restore (FSR) and cross region copy individually.
+
+1.33.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.32.0 (2020-08-25)
 ------------------
 

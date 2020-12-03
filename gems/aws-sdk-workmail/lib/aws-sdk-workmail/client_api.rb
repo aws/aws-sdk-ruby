@@ -29,10 +29,14 @@ module Aws::WorkMail
     AssociateMemberToGroupResponse = Shapes::StructureShape.new(name: 'AssociateMemberToGroupResponse')
     BookingOptions = Shapes::StructureShape.new(name: 'BookingOptions')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CancelMailboxExportJobRequest = Shapes::StructureShape.new(name: 'CancelMailboxExportJobRequest')
+    CancelMailboxExportJobResponse = Shapes::StructureShape.new(name: 'CancelMailboxExportJobResponse')
     CreateAliasRequest = Shapes::StructureShape.new(name: 'CreateAliasRequest')
     CreateAliasResponse = Shapes::StructureShape.new(name: 'CreateAliasResponse')
     CreateGroupRequest = Shapes::StructureShape.new(name: 'CreateGroupRequest')
     CreateGroupResponse = Shapes::StructureShape.new(name: 'CreateGroupResponse')
+    CreateOrganizationRequest = Shapes::StructureShape.new(name: 'CreateOrganizationRequest')
+    CreateOrganizationResponse = Shapes::StructureShape.new(name: 'CreateOrganizationResponse')
     CreateResourceRequest = Shapes::StructureShape.new(name: 'CreateResourceRequest')
     CreateResourceResponse = Shapes::StructureShape.new(name: 'CreateResourceResponse')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
@@ -46,6 +50,8 @@ module Aws::WorkMail
     DeleteGroupResponse = Shapes::StructureShape.new(name: 'DeleteGroupResponse')
     DeleteMailboxPermissionsRequest = Shapes::StructureShape.new(name: 'DeleteMailboxPermissionsRequest')
     DeleteMailboxPermissionsResponse = Shapes::StructureShape.new(name: 'DeleteMailboxPermissionsResponse')
+    DeleteOrganizationRequest = Shapes::StructureShape.new(name: 'DeleteOrganizationRequest')
+    DeleteOrganizationResponse = Shapes::StructureShape.new(name: 'DeleteOrganizationResponse')
     DeleteResourceRequest = Shapes::StructureShape.new(name: 'DeleteResourceRequest')
     DeleteResourceResponse = Shapes::StructureShape.new(name: 'DeleteResourceResponse')
     DeleteRetentionPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRetentionPolicyRequest')
@@ -56,18 +62,26 @@ module Aws::WorkMail
     DeregisterFromWorkMailResponse = Shapes::StructureShape.new(name: 'DeregisterFromWorkMailResponse')
     DescribeGroupRequest = Shapes::StructureShape.new(name: 'DescribeGroupRequest')
     DescribeGroupResponse = Shapes::StructureShape.new(name: 'DescribeGroupResponse')
+    DescribeMailboxExportJobRequest = Shapes::StructureShape.new(name: 'DescribeMailboxExportJobRequest')
+    DescribeMailboxExportJobResponse = Shapes::StructureShape.new(name: 'DescribeMailboxExportJobResponse')
     DescribeOrganizationRequest = Shapes::StructureShape.new(name: 'DescribeOrganizationRequest')
     DescribeOrganizationResponse = Shapes::StructureShape.new(name: 'DescribeOrganizationResponse')
     DescribeResourceRequest = Shapes::StructureShape.new(name: 'DescribeResourceRequest')
     DescribeResourceResponse = Shapes::StructureShape.new(name: 'DescribeResourceResponse')
     DescribeUserRequest = Shapes::StructureShape.new(name: 'DescribeUserRequest')
     DescribeUserResponse = Shapes::StructureShape.new(name: 'DescribeUserResponse')
+    Description = Shapes::StringShape.new(name: 'Description')
+    DirectoryId = Shapes::StringShape.new(name: 'DirectoryId')
+    DirectoryInUseException = Shapes::StructureShape.new(name: 'DirectoryInUseException')
     DirectoryServiceAuthenticationFailedException = Shapes::StructureShape.new(name: 'DirectoryServiceAuthenticationFailedException')
     DirectoryUnavailableException = Shapes::StructureShape.new(name: 'DirectoryUnavailableException')
     DisassociateDelegateFromResourceRequest = Shapes::StructureShape.new(name: 'DisassociateDelegateFromResourceRequest')
     DisassociateDelegateFromResourceResponse = Shapes::StructureShape.new(name: 'DisassociateDelegateFromResourceResponse')
     DisassociateMemberFromGroupRequest = Shapes::StructureShape.new(name: 'DisassociateMemberFromGroupRequest')
     DisassociateMemberFromGroupResponse = Shapes::StructureShape.new(name: 'DisassociateMemberFromGroupResponse')
+    Domain = Shapes::StructureShape.new(name: 'Domain')
+    DomainName = Shapes::StringShape.new(name: 'DomainName')
+    Domains = Shapes::ListShape.new(name: 'Domains')
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
     EmailAddressInUseException = Shapes::StructureShape.new(name: 'EmailAddressInUseException')
     EntityAlreadyRegisteredException = Shapes::StructureShape.new(name: 'EntityAlreadyRegisteredException')
@@ -86,12 +100,16 @@ module Aws::WorkMail
     Group = Shapes::StructureShape.new(name: 'Group')
     GroupName = Shapes::StringShape.new(name: 'GroupName')
     Groups = Shapes::ListShape.new(name: 'Groups')
+    HostedZoneId = Shapes::StringShape.new(name: 'HostedZoneId')
+    IdempotencyClientToken = Shapes::StringShape.new(name: 'IdempotencyClientToken')
     InvalidConfigurationException = Shapes::StructureShape.new(name: 'InvalidConfigurationException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidPasswordException = Shapes::StructureShape.new(name: 'InvalidPasswordException')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
     IpRange = Shapes::StringShape.new(name: 'IpRange')
     IpRangeList = Shapes::ListShape.new(name: 'IpRangeList')
+    Jobs = Shapes::ListShape.new(name: 'Jobs')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAccessControlRulesRequest = Shapes::StructureShape.new(name: 'ListAccessControlRulesRequest')
     ListAccessControlRulesResponse = Shapes::StructureShape.new(name: 'ListAccessControlRulesResponse')
@@ -101,6 +119,8 @@ module Aws::WorkMail
     ListGroupMembersResponse = Shapes::StructureShape.new(name: 'ListGroupMembersResponse')
     ListGroupsRequest = Shapes::StructureShape.new(name: 'ListGroupsRequest')
     ListGroupsResponse = Shapes::StructureShape.new(name: 'ListGroupsResponse')
+    ListMailboxExportJobsRequest = Shapes::StructureShape.new(name: 'ListMailboxExportJobsRequest')
+    ListMailboxExportJobsResponse = Shapes::StructureShape.new(name: 'ListMailboxExportJobsResponse')
     ListMailboxPermissionsRequest = Shapes::StructureShape.new(name: 'ListMailboxPermissionsRequest')
     ListMailboxPermissionsResponse = Shapes::StructureShape.new(name: 'ListMailboxPermissionsResponse')
     ListOrganizationsRequest = Shapes::StructureShape.new(name: 'ListOrganizationsRequest')
@@ -115,6 +135,10 @@ module Aws::WorkMail
     ListUsersResponse = Shapes::StructureShape.new(name: 'ListUsersResponse')
     MailDomainNotFoundException = Shapes::StructureShape.new(name: 'MailDomainNotFoundException')
     MailDomainStateException = Shapes::StructureShape.new(name: 'MailDomainStateException')
+    MailboxExportErrorInfo = Shapes::StringShape.new(name: 'MailboxExportErrorInfo')
+    MailboxExportJob = Shapes::StructureShape.new(name: 'MailboxExportJob')
+    MailboxExportJobId = Shapes::StringShape.new(name: 'MailboxExportJobId')
+    MailboxExportJobState = Shapes::StringShape.new(name: 'MailboxExportJobState')
     MailboxQuota = Shapes::IntegerShape.new(name: 'MailboxQuota')
     MailboxSize = Shapes::FloatShape.new(name: 'MailboxSize')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -130,6 +154,7 @@ module Aws::WorkMail
     OrganizationSummaries = Shapes::ListShape.new(name: 'OrganizationSummaries')
     OrganizationSummary = Shapes::StructureShape.new(name: 'OrganizationSummary')
     Password = Shapes::StringShape.new(name: 'Password')
+    Percentage = Shapes::IntegerShape.new(name: 'Percentage')
     Permission = Shapes::StructureShape.new(name: 'Permission')
     PermissionType = Shapes::StringShape.new(name: 'PermissionType')
     PermissionValues = Shapes::ListShape.new(name: 'PermissionValues')
@@ -155,7 +180,12 @@ module Aws::WorkMail
     Resources = Shapes::ListShape.new(name: 'Resources')
     RetentionAction = Shapes::StringShape.new(name: 'RetentionAction')
     RetentionPeriod = Shapes::IntegerShape.new(name: 'RetentionPeriod')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
+    S3ObjectKey = Shapes::StringShape.new(name: 'S3ObjectKey')
     ShortString = Shapes::StringShape.new(name: 'ShortString')
+    StartMailboxExportJobRequest = Shapes::StructureShape.new(name: 'StartMailboxExportJobRequest')
+    StartMailboxExportJobResponse = Shapes::StructureShape.new(name: 'StartMailboxExportJobResponse')
     String = Shapes::StringShape.new(name: 'String')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -222,6 +252,13 @@ module Aws::WorkMail
     BookingOptions.add_member(:auto_decline_conflicting_requests, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoDeclineConflictingRequests"))
     BookingOptions.struct_class = Types::BookingOptions
 
+    CancelMailboxExportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CancelMailboxExportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: MailboxExportJobId, required: true, location_name: "JobId"))
+    CancelMailboxExportJobRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    CancelMailboxExportJobRequest.struct_class = Types::CancelMailboxExportJobRequest
+
+    CancelMailboxExportJobResponse.struct_class = Types::CancelMailboxExportJobResponse
+
     CreateAliasRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     CreateAliasRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "EntityId"))
     CreateAliasRequest.add_member(:alias, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "Alias"))
@@ -235,6 +272,17 @@ module Aws::WorkMail
 
     CreateGroupResponse.add_member(:group_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "GroupId"))
     CreateGroupResponse.struct_class = Types::CreateGroupResponse
+
+    CreateOrganizationRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    CreateOrganizationRequest.add_member(:alias, Shapes::ShapeRef.new(shape: OrganizationName, required: true, location_name: "Alias"))
+    CreateOrganizationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateOrganizationRequest.add_member(:domains, Shapes::ShapeRef.new(shape: Domains, location_name: "Domains"))
+    CreateOrganizationRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    CreateOrganizationRequest.add_member(:enable_interoperability, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableInteroperability"))
+    CreateOrganizationRequest.struct_class = Types::CreateOrganizationRequest
+
+    CreateOrganizationResponse.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId"))
+    CreateOrganizationResponse.struct_class = Types::CreateOrganizationResponse
 
     CreateResourceRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     CreateResourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
@@ -283,6 +331,15 @@ module Aws::WorkMail
 
     DeleteMailboxPermissionsResponse.struct_class = Types::DeleteMailboxPermissionsResponse
 
+    DeleteOrganizationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteOrganizationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    DeleteOrganizationRequest.add_member(:delete_directory, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "DeleteDirectory"))
+    DeleteOrganizationRequest.struct_class = Types::DeleteOrganizationRequest
+
+    DeleteOrganizationResponse.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId"))
+    DeleteOrganizationResponse.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "State"))
+    DeleteOrganizationResponse.struct_class = Types::DeleteOrganizationResponse
+
     DeleteResourceRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DeleteResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
     DeleteResourceRequest.struct_class = Types::DeleteResourceRequest
@@ -318,6 +375,24 @@ module Aws::WorkMail
     DescribeGroupResponse.add_member(:enabled_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EnabledDate"))
     DescribeGroupResponse.add_member(:disabled_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DisabledDate"))
     DescribeGroupResponse.struct_class = Types::DescribeGroupResponse
+
+    DescribeMailboxExportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: MailboxExportJobId, required: true, location_name: "JobId"))
+    DescribeMailboxExportJobRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    DescribeMailboxExportJobRequest.struct_class = Types::DescribeMailboxExportJobRequest
+
+    DescribeMailboxExportJobResponse.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "EntityId"))
+    DescribeMailboxExportJobResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    DescribeMailboxExportJobResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    DescribeMailboxExportJobResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    DescribeMailboxExportJobResponse.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "S3BucketName"))
+    DescribeMailboxExportJobResponse.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "S3Prefix"))
+    DescribeMailboxExportJobResponse.add_member(:s3_path, Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "S3Path"))
+    DescribeMailboxExportJobResponse.add_member(:estimated_progress, Shapes::ShapeRef.new(shape: Percentage, location_name: "EstimatedProgress"))
+    DescribeMailboxExportJobResponse.add_member(:state, Shapes::ShapeRef.new(shape: MailboxExportJobState, location_name: "State"))
+    DescribeMailboxExportJobResponse.add_member(:error_info, Shapes::ShapeRef.new(shape: MailboxExportErrorInfo, location_name: "ErrorInfo"))
+    DescribeMailboxExportJobResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    DescribeMailboxExportJobResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    DescribeMailboxExportJobResponse.struct_class = Types::DescribeMailboxExportJobResponse
 
     DescribeOrganizationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DescribeOrganizationRequest.struct_class = Types::DescribeOrganizationRequest
@@ -361,6 +436,9 @@ module Aws::WorkMail
     DescribeUserResponse.add_member(:disabled_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DisabledDate"))
     DescribeUserResponse.struct_class = Types::DescribeUserResponse
 
+    DirectoryInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    DirectoryInUseException.struct_class = Types::DirectoryInUseException
+
     DirectoryServiceAuthenticationFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     DirectoryServiceAuthenticationFailedException.struct_class = Types::DirectoryServiceAuthenticationFailedException
 
@@ -380,6 +458,12 @@ module Aws::WorkMail
     DisassociateMemberFromGroupRequest.struct_class = Types::DisassociateMemberFromGroupRequest
 
     DisassociateMemberFromGroupResponse.struct_class = Types::DisassociateMemberFromGroupResponse
+
+    Domain.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
+    Domain.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: HostedZoneId, location_name: "HostedZoneId"))
+    Domain.struct_class = Types::Domain
+
+    Domains.member = Shapes::ShapeRef.new(shape: Domain)
 
     EmailAddressInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     EmailAddressInUseException.struct_class = Types::EmailAddressInUseException
@@ -448,6 +532,8 @@ module Aws::WorkMail
 
     IpRangeList.member = Shapes::ShapeRef.new(shape: IpRange)
 
+    Jobs.member = Shapes::ShapeRef.new(shape: MailboxExportJob)
+
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
@@ -485,6 +571,15 @@ module Aws::WorkMail
     ListGroupsResponse.add_member(:groups, Shapes::ShapeRef.new(shape: Groups, location_name: "Groups"))
     ListGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListGroupsResponse.struct_class = Types::ListGroupsResponse
+
+    ListMailboxExportJobsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    ListMailboxExportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMailboxExportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListMailboxExportJobsRequest.struct_class = Types::ListMailboxExportJobsRequest
+
+    ListMailboxExportJobsResponse.add_member(:jobs, Shapes::ShapeRef.new(shape: Jobs, location_name: "Jobs"))
+    ListMailboxExportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMailboxExportJobsResponse.struct_class = Types::ListMailboxExportJobsResponse
 
     ListMailboxPermissionsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     ListMailboxPermissionsRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "EntityId"))
@@ -544,6 +639,17 @@ module Aws::WorkMail
     MailDomainStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     MailDomainStateException.struct_class = Types::MailDomainStateException
 
+    MailboxExportJob.add_member(:job_id, Shapes::ShapeRef.new(shape: MailboxExportJobId, location_name: "JobId"))
+    MailboxExportJob.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "EntityId"))
+    MailboxExportJob.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    MailboxExportJob.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "S3BucketName"))
+    MailboxExportJob.add_member(:s3_path, Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "S3Path"))
+    MailboxExportJob.add_member(:estimated_progress, Shapes::ShapeRef.new(shape: Percentage, location_name: "EstimatedProgress"))
+    MailboxExportJob.add_member(:state, Shapes::ShapeRef.new(shape: MailboxExportJobState, location_name: "State"))
+    MailboxExportJob.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    MailboxExportJob.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    MailboxExportJob.struct_class = Types::MailboxExportJob
+
     Member.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
     Member.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Member.add_member(:type, Shapes::ShapeRef.new(shape: MemberType, location_name: "Type"))
@@ -567,6 +673,7 @@ module Aws::WorkMail
 
     OrganizationSummary.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId"))
     OrganizationSummary.add_member(:alias, Shapes::ShapeRef.new(shape: OrganizationName, location_name: "Alias"))
+    OrganizationSummary.add_member(:default_mail_domain, Shapes::ShapeRef.new(shape: DomainName, location_name: "DefaultMailDomain"))
     OrganizationSummary.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
     OrganizationSummary.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "State"))
     OrganizationSummary.struct_class = Types::OrganizationSummary
@@ -643,6 +750,19 @@ module Aws::WorkMail
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     Resources.member = Shapes::ShapeRef.new(shape: Resource)
+
+    StartMailboxExportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartMailboxExportJobRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    StartMailboxExportJobRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "EntityId"))
+    StartMailboxExportJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    StartMailboxExportJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    StartMailboxExportJobRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, required: true, location_name: "KmsKeyArn"))
+    StartMailboxExportJobRequest.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "S3BucketName"))
+    StartMailboxExportJobRequest.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: S3ObjectKey, required: true, location_name: "S3Prefix"))
+    StartMailboxExportJobRequest.struct_class = Types::StartMailboxExportJobRequest
+
+    StartMailboxExportJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: MailboxExportJobId, location_name: "JobId"))
+    StartMailboxExportJobResponse.struct_class = Types::StartMailboxExportJobResponse
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
@@ -753,6 +873,18 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
+      api.add_operation(:cancel_mailbox_export_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelMailboxExportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelMailboxExportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelMailboxExportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+      end)
+
       api.add_operation(:create_alias, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAlias"
         o.http_method = "POST"
@@ -784,6 +916,19 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
         o.errors << Shapes::ShapeRef.new(shape: ReservedNameException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
+      api.add_operation(:create_organization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateOrganization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateOrganizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateOrganizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NameAvailabilityException)
       end)
 
       api.add_operation(:create_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -869,6 +1014,17 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
       end)
 
+      api.add_operation(:delete_organization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteOrganization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteOrganizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteOrganizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
       api.add_operation(:delete_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteResource"
         o.http_method = "POST"
@@ -930,6 +1086,18 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
+      api.add_operation(:describe_mailbox_export_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMailboxExportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMailboxExportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMailboxExportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
       end)
 
       api.add_operation(:describe_organization, Seahorse::Model::Operation.new.tap do |o|
@@ -1085,6 +1253,23 @@ module Aws::WorkMail
         o.input = Shapes::ShapeRef.new(shape: ListGroupsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_mailbox_export_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMailboxExportJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMailboxExportJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMailboxExportJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
@@ -1263,6 +1448,19 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
+      api.add_operation(:start_mailbox_export_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMailboxExportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartMailboxExportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartMailboxExportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

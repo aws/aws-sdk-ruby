@@ -135,6 +135,16 @@ module Aws::Shield
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def reason
+        @data[:reason]
+      end
+
+      # @return [String]
+      def fields
+        @data[:fields]
+      end
     end
 
     class InvalidResourceException < ServiceError
@@ -235,6 +245,11 @@ module Aws::Shield
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def resource_type
+        @data[:resource_type]
+      end
     end
 
     class ResourceNotFoundException < ServiceError
@@ -249,6 +264,11 @@ module Aws::Shield
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_type
+        @data[:resource_type]
       end
     end
 

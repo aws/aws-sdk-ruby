@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-codepipeline/customizations'
 # @!group service
 module Aws::CodePipeline
 
-  GEM_VERSION = '1.35.0'
+  GEM_VERSION = '1.38.0'
 
 end

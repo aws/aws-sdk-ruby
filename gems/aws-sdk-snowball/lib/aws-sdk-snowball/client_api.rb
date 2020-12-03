@@ -30,12 +30,15 @@ module Aws::Snowball
     ClusterState = Shapes::StringShape.new(name: 'ClusterState')
     CompatibleImage = Shapes::StructureShape.new(name: 'CompatibleImage')
     CompatibleImageList = Shapes::ListShape.new(name: 'CompatibleImageList')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateAddressRequest = Shapes::StructureShape.new(name: 'CreateAddressRequest')
     CreateAddressResult = Shapes::StructureShape.new(name: 'CreateAddressResult')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
     CreateClusterResult = Shapes::StructureShape.new(name: 'CreateClusterResult')
     CreateJobRequest = Shapes::StructureShape.new(name: 'CreateJobRequest')
     CreateJobResult = Shapes::StructureShape.new(name: 'CreateJobResult')
+    CreateReturnShippingLabelRequest = Shapes::StructureShape.new(name: 'CreateReturnShippingLabelRequest')
+    CreateReturnShippingLabelResult = Shapes::StructureShape.new(name: 'CreateReturnShippingLabelResult')
     DataTransfer = Shapes::StructureShape.new(name: 'DataTransfer')
     DescribeAddressRequest = Shapes::StructureShape.new(name: 'DescribeAddressRequest')
     DescribeAddressResult = Shapes::StructureShape.new(name: 'DescribeAddressResult')
@@ -45,6 +48,8 @@ module Aws::Snowball
     DescribeClusterResult = Shapes::StructureShape.new(name: 'DescribeClusterResult')
     DescribeJobRequest = Shapes::StructureShape.new(name: 'DescribeJobRequest')
     DescribeJobResult = Shapes::StructureShape.new(name: 'DescribeJobResult')
+    DescribeReturnShippingLabelRequest = Shapes::StructureShape.new(name: 'DescribeReturnShippingLabelRequest')
+    DescribeReturnShippingLabelResult = Shapes::StructureShape.new(name: 'DescribeReturnShippingLabelResult')
     DeviceConfiguration = Shapes::StructureShape.new(name: 'DeviceConfiguration')
     Ec2AmiResource = Shapes::StructureShape.new(name: 'Ec2AmiResource')
     Ec2AmiResourceList = Shapes::ListShape.new(name: 'Ec2AmiResourceList')
@@ -94,11 +99,14 @@ module Aws::Snowball
     Long = Shapes::IntegerShape.new(name: 'Long')
     Notification = Shapes::StructureShape.new(name: 'Notification')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
+    ReturnShippingLabelAlreadyExistsException = Shapes::StructureShape.new(name: 'ReturnShippingLabelAlreadyExistsException')
     RoleARN = Shapes::StringShape.new(name: 'RoleARN')
     S3Resource = Shapes::StructureShape.new(name: 'S3Resource')
     S3ResourceList = Shapes::ListShape.new(name: 'S3ResourceList')
     Shipment = Shapes::StructureShape.new(name: 'Shipment')
+    ShipmentState = Shapes::StringShape.new(name: 'ShipmentState')
     ShippingDetails = Shapes::StructureShape.new(name: 'ShippingDetails')
+    ShippingLabelStatus = Shapes::StringShape.new(name: 'ShippingLabelStatus')
     ShippingOption = Shapes::StringShape.new(name: 'ShippingOption')
     SnowballCapacity = Shapes::StringShape.new(name: 'SnowballCapacity')
     SnowballType = Shapes::StringShape.new(name: 'SnowballType')
@@ -112,6 +120,8 @@ module Aws::Snowball
     UpdateClusterResult = Shapes::StructureShape.new(name: 'UpdateClusterResult')
     UpdateJobRequest = Shapes::StructureShape.new(name: 'UpdateJobRequest')
     UpdateJobResult = Shapes::StructureShape.new(name: 'UpdateJobResult')
+    UpdateJobShipmentStateRequest = Shapes::StructureShape.new(name: 'UpdateJobShipmentStateRequest')
+    UpdateJobShipmentStateResult = Shapes::StructureShape.new(name: 'UpdateJobShipmentStateResult')
     WirelessConnection = Shapes::StructureShape.new(name: 'WirelessConnection')
 
     Address.add_member(:address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "AddressId"))
@@ -175,6 +185,10 @@ module Aws::Snowball
 
     CompatibleImageList.member = Shapes::ShapeRef.new(shape: CompatibleImage)
 
+    ConflictException.add_member(:conflict_resource, Shapes::ShapeRef.new(shape: String, location_name: "ConflictResource"))
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ConflictException.struct_class = Types::ConflictException
+
     CreateAddressRequest.add_member(:address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "Address"))
     CreateAddressRequest.struct_class = Types::CreateAddressRequest
 
@@ -216,6 +230,13 @@ module Aws::Snowball
     CreateJobResult.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     CreateJobResult.struct_class = Types::CreateJobResult
 
+    CreateReturnShippingLabelRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    CreateReturnShippingLabelRequest.add_member(:shipping_option, Shapes::ShapeRef.new(shape: ShippingOption, location_name: "ShippingOption"))
+    CreateReturnShippingLabelRequest.struct_class = Types::CreateReturnShippingLabelRequest
+
+    CreateReturnShippingLabelResult.add_member(:status, Shapes::ShapeRef.new(shape: ShippingLabelStatus, location_name: "Status"))
+    CreateReturnShippingLabelResult.struct_class = Types::CreateReturnShippingLabelResult
+
     DataTransfer.add_member(:bytes_transferred, Shapes::ShapeRef.new(shape: Long, location_name: "BytesTransferred"))
     DataTransfer.add_member(:objects_transferred, Shapes::ShapeRef.new(shape: Long, location_name: "ObjectsTransferred"))
     DataTransfer.add_member(:total_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "TotalBytes"))
@@ -248,6 +269,13 @@ module Aws::Snowball
     DescribeJobResult.add_member(:job_metadata, Shapes::ShapeRef.new(shape: JobMetadata, location_name: "JobMetadata"))
     DescribeJobResult.add_member(:sub_job_metadata, Shapes::ShapeRef.new(shape: JobMetadataList, location_name: "SubJobMetadata"))
     DescribeJobResult.struct_class = Types::DescribeJobResult
+
+    DescribeReturnShippingLabelRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    DescribeReturnShippingLabelRequest.struct_class = Types::DescribeReturnShippingLabelRequest
+
+    DescribeReturnShippingLabelResult.add_member(:status, Shapes::ShapeRef.new(shape: ShippingLabelStatus, location_name: "Status"))
+    DescribeReturnShippingLabelResult.add_member(:expiration_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpirationDate"))
+    DescribeReturnShippingLabelResult.struct_class = Types::DescribeReturnShippingLabelResult
 
     DeviceConfiguration.add_member(:snowcone_device_configuration, Shapes::ShapeRef.new(shape: SnowconeDeviceConfiguration, location_name: "SnowconeDeviceConfiguration"))
     DeviceConfiguration.struct_class = Types::DeviceConfiguration
@@ -406,6 +434,9 @@ module Aws::Snowball
     Notification.add_member(:notify_all, Shapes::ShapeRef.new(shape: Boolean, location_name: "NotifyAll"))
     Notification.struct_class = Types::Notification
 
+    ReturnShippingLabelAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ReturnShippingLabelAlreadyExistsException.struct_class = Types::ReturnShippingLabelAlreadyExistsException
+
     S3Resource.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "BucketArn"))
     S3Resource.add_member(:key_range, Shapes::ShapeRef.new(shape: KeyRange, location_name: "KeyRange"))
     S3Resource.struct_class = Types::S3Resource
@@ -454,6 +485,12 @@ module Aws::Snowball
     UpdateJobRequest.struct_class = Types::UpdateJobRequest
 
     UpdateJobResult.struct_class = Types::UpdateJobResult
+
+    UpdateJobShipmentStateRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    UpdateJobShipmentStateRequest.add_member(:shipment_state, Shapes::ShapeRef.new(shape: ShipmentState, required: true, location_name: "ShipmentState"))
+    UpdateJobShipmentStateRequest.struct_class = Types::UpdateJobShipmentStateRequest
+
+    UpdateJobShipmentStateResult.struct_class = Types::UpdateJobShipmentStateResult
 
     WirelessConnection.add_member(:is_wifi_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsWifiEnabled"))
     WirelessConnection.struct_class = Types::WirelessConnection
@@ -534,6 +571,19 @@ module Aws::Snowball
         o.errors << Shapes::ShapeRef.new(shape: Ec2RequestFailedException)
       end)
 
+      api.add_operation(:create_return_shipping_label, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateReturnShippingLabel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateReturnShippingLabelRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateReturnShippingLabelResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidJobStateException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ReturnShippingLabelAlreadyExistsException)
+      end)
+
       api.add_operation(:describe_address, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeAddress"
         o.http_method = "POST"
@@ -575,6 +625,17 @@ module Aws::Snowball
         o.input = Shapes::ShapeRef.new(shape: DescribeJobRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeJobResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
+      end)
+
+      api.add_operation(:describe_return_shipping_label, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReturnShippingLabel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReturnShippingLabelRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReturnShippingLabelResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidJobStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:get_job_manifest, Seahorse::Model::Operation.new.tap do |o|
@@ -684,6 +745,16 @@ module Aws::Snowball
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: Ec2RequestFailedException)
+      end)
+
+      api.add_operation(:update_job_shipment_state, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateJobShipmentState"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateJobShipmentStateRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateJobShipmentStateResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidJobStateException)
       end)
     end
 

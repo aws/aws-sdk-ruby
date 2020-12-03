@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -27,7 +28,7 @@ require_relative 'aws-sdk-connect/customizations'
 # structure.
 #
 #     connect = Aws::Connect::Client.new
-#     resp = connect.create_user(params)
+#     resp = connect.associate_approved_origin(params)
 #
 # See {Client} for more information.
 #
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-connect/customizations'
 # @!group service
 module Aws::Connect
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.37.0'
 
 end

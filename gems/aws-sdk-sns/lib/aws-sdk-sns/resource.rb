@@ -89,6 +89,9 @@ module Aws::SNS
     #   Constraints: Topic names must be made up of only uppercase and
     #   lowercase ASCII letters, numbers, underscores, and hyphens, and must
     #   be between 1 and 256 characters long.
+    #
+    #   For a FIFO (first-in-first-out) topic, the name must end with the
+    #   `.fifo` suffix.
     # @option options [Hash<String,String>] :attributes
     #   A map of attributes with their corresponding values.
     #
@@ -101,23 +104,47 @@ module Aws::SNS
     #   * `DisplayName` – The display name to use for a topic with SMS
     #     subscriptions.
     #
+    #   * `FifoTopic` – Set to true to create a FIFO topic.
+    #
     #   * `Policy` – The policy that defines who can access your topic. By
     #     default, only the topic owner can publish or subscribe to the topic.
     #
     #   The following attribute applies only to [server-side-encryption][1]\:
     #
-    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #   * `KmsMasterKeyId` – The ID of an AWS-managed customer master key
     #     (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
     #     Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
     #     Management Service API Reference*.
     #
     #   ^
     #
+    #   The following attributes apply only to [FIFO topics][4]\:
+    #
+    #   * `FifoTopic` – When this is set to `true`, a FIFO topic is created.
+    #
+    #   * `ContentBasedDeduplication` – Enables content-based deduplication
+    #     for FIFO topics.
+    #
+    #     * By default, `ContentBasedDeduplication` is set to `false`. If you
+    #       create a FIFO topic and this attribute is `false`, you must
+    #       specify a value for the `MessageDeduplicationId` parameter for the
+    #       [Publish][5] action.
+    #
+    #     * When you set `ContentBasedDeduplication` to `true`, Amazon SNS
+    #       uses a SHA-256 hash to generate the `MessageDeduplicationId` using
+    #       the body of the message (but not the attributes of the message).
+    #
+    #       (Optional) To override the generated value, you can specify a
+    #       value for the the `MessageDeduplicationId` parameter for the
+    #       `Publish` action.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
     #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
     #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #   [4]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
+    #   [5]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
     # @option options [Array<Types::Tag>] :tags
     #   The list of tags to add to a new topic.
     #

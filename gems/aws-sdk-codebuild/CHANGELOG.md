@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2020-11-24)
+------------------
+
+* Feature - Adding GetReportGroupTrend API for Test Reports.
+
+1.64.0 (2020-11-18)
+------------------
+
+* Feature - AWS CodeBuild - Adding Status field for Report Group
+
+1.63.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.62.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.61.0 (2020-09-08)
 ------------------
 

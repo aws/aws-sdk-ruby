@@ -368,6 +368,9 @@ module Aws::DatabaseMigrationService
     #           timestamp_column_name: "String",
     #           parquet_timestamp_in_millisecond: false,
     #           cdc_inserts_and_updates: false,
+    #           date_partition_enabled: false,
+    #           date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
+    #           date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -430,11 +433,14 @@ module Aws::DatabaseMigrationService
     #           after_connect_script: "String",
     #           bucket_folder: "String",
     #           bucket_name: "String",
+    #           case_sensitive_names: false,
+    #           comp_update: false,
     #           connection_timeout: 1,
     #           database_name: "String",
     #           date_format: "String",
     #           empty_as_null: false,
     #           encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #           explicit_ids: false,
     #           file_transfer_upload_streams: 1,
     #           load_timeout: 1,
     #           max_file_size: 1,
@@ -453,26 +459,59 @@ module Aws::DatabaseMigrationService
     #           write_buffer_size: 1,
     #         },
     #         postgre_sql_settings: {
+    #           after_connect_script: "String",
+    #           capture_ddls: false,
+    #           max_file_size: 1,
     #           database_name: "String",
+    #           ddl_artifacts_schema: "String",
+    #           execute_timeout: 1,
+    #           fail_tasks_on_lob_truncation: false,
     #           password: "SecretString",
     #           port: 1,
     #           server_name: "String",
     #           username: "String",
+    #           slot_name: "String",
     #         },
     #         my_sql_settings: {
+    #           after_connect_script: "String",
     #           database_name: "String",
+    #           events_poll_interval: 1,
+    #           target_db_type: "specific-database", # accepts specific-database, multiple-databases
+    #           max_file_size: 1,
+    #           parallel_load_threads: 1,
     #           password: "SecretString",
     #           port: 1,
     #           server_name: "String",
+    #           server_timezone: "String",
     #           username: "String",
     #         },
     #         oracle_settings: {
+    #           add_supplemental_logging: false,
+    #           archived_log_dest_id: 1,
+    #           additional_archived_log_dest_id: 1,
+    #           allow_select_nested_tables: false,
+    #           parallel_asm_read_threads: 1,
+    #           read_ahead_blocks: 1,
+    #           access_alternate_directly: false,
+    #           use_alternate_folder_for_online: false,
+    #           oracle_path_prefix: "String",
+    #           use_path_prefix: "String",
+    #           replace_path_prefix: false,
+    #           enable_homogenous_tablespace: false,
+    #           direct_path_no_log: false,
+    #           archived_logs_only: false,
     #           asm_password: "SecretString",
     #           asm_server: "String",
     #           asm_user: "String",
+    #           char_length_semantics: "default", # accepts default, char, byte
     #           database_name: "String",
+    #           direct_path_parallel_load: false,
+    #           fail_tasks_on_lob_truncation: false,
+    #           number_datatype_scale: 1,
     #           password: "SecretString",
     #           port: 1,
+    #           read_table_space_name: false,
+    #           retry_interval: 1,
     #           security_db_encryption: "SecretString",
     #           security_db_encryption_name: "String",
     #           server_name: "String",
@@ -487,17 +526,37 @@ module Aws::DatabaseMigrationService
     #         },
     #         microsoft_sql_server_settings: {
     #           port: 1,
+    #           bcp_packet_size: 1,
     #           database_name: "String",
+    #           control_tables_file_group: "String",
     #           password: "SecretString",
+    #           read_backup_only: false,
+    #           safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
     #           server_name: "String",
     #           username: "String",
+    #           use_bcp_full_load: false,
     #         },
     #         ibm_db_2_settings: {
     #           database_name: "String",
     #           password: "SecretString",
     #           port: 1,
     #           server_name: "String",
+    #           set_data_capture_changes: false,
+    #           current_lsn: "String",
+    #           max_k_bytes_per_read: 1,
     #           username: "String",
+    #         },
+    #         resource_identifier: "String",
+    #         doc_db_settings: {
+    #           username: "String",
+    #           password: "SecretString",
+    #           server_name: "String",
+    #           port: 1,
+    #           database_name: "String",
+    #           nesting_level: "none", # accepts none, one
+    #           extract_doc_id: false,
+    #           docs_to_investigate: 1,
+    #           kms_key_id: "String",
     #         },
     #       }
     #
@@ -772,6 +831,24 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.html
     #   @return [Types::IBMDb2Settings]
     #
+    # @!attribute [rw] resource_identifier
+    #   A friendly name for the resource identifier at the end of the
+    #   `EndpointArn` response parameter that is returned in the created
+    #   `Endpoint` object. The value for this parameter can have up to 31
+    #   characters. It can contain only ASCII letters, digits, and hyphen
+    #   ('-'). Also, it can't end with a hyphen or contain two
+    #   consecutive hyphens, and can only begin with a letter, such as
+    #   `Example-App-ARN1`. For example, this value might result in the
+    #   `EndpointArn` value
+    #   `arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1`. If you
+    #   don't specify a `ResourceIdentifier` value, AWS DMS generates a
+    #   default identifier value for the end of `EndpointArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] doc_db_settings
+    #   Provides information that defines a DocumentDB endpoint.
+    #   @return [Types::DocDbSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpointMessage AWS API Documentation
     #
     class CreateEndpointMessage < Struct.new(
@@ -804,7 +881,9 @@ module Aws::DatabaseMigrationService
       :oracle_settings,
       :sybase_settings,
       :microsoft_sql_server_settings,
-      :ibm_db_2_settings)
+      :ibm_db_2_settings,
+      :resource_identifier,
+      :doc_db_settings)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -940,6 +1019,7 @@ module Aws::DatabaseMigrationService
     #         kms_key_id: "String",
     #         publicly_accessible: false,
     #         dns_name_servers: "String",
+    #         resource_identifier: "String",
     #       }
     #
     # @!attribute [rw] replication_instance_identifier
@@ -1061,6 +1141,20 @@ module Aws::DatabaseMigrationService
     #   `"1.1.1.1,2.2.2.2,3.3.3.3,4.4.4.4"`
     #   @return [String]
     #
+    # @!attribute [rw] resource_identifier
+    #   A friendly name for the resource identifier at the end of the
+    #   `EndpointArn` response parameter that is returned in the created
+    #   `Endpoint` object. The value for this parameter can have up to 31
+    #   characters. It can contain only ASCII letters, digits, and hyphen
+    #   ('-'). Also, it can't end with a hyphen or contain two
+    #   consecutive hyphens, and can only begin with a letter, such as
+    #   `Example-App-ARN1`. For example, this value might result in the
+    #   `EndpointArn` value
+    #   `arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1`. If you
+    #   don't specify a `ResourceIdentifier` value, AWS DMS generates a
+    #   default identifier value for the end of `EndpointArn`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationInstanceMessage AWS API Documentation
     #
     class CreateReplicationInstanceMessage < Struct.new(
@@ -1077,7 +1171,8 @@ module Aws::DatabaseMigrationService
       :tags,
       :kms_key_id,
       :publicly_accessible,
-      :dns_name_servers)
+      :dns_name_servers,
+      :resource_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1175,6 +1270,7 @@ module Aws::DatabaseMigrationService
     #           },
     #         ],
     #         task_data: "String",
+    #         resource_identifier: "String",
     #       }
     #
     # @!attribute [rw] replication_task_identifier
@@ -1292,6 +1388,20 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html
     #   @return [String]
     #
+    # @!attribute [rw] resource_identifier
+    #   A friendly name for the resource identifier at the end of the
+    #   `EndpointArn` response parameter that is returned in the created
+    #   `Endpoint` object. The value for this parameter can have up to 31
+    #   characters. It can contain only ASCII letters, digits, and hyphen
+    #   ('-'). Also, it can't end with a hyphen or contain two
+    #   consecutive hyphens, and can only begin with a letter, such as
+    #   `Example-App-ARN1`. For example, this value might result in the
+    #   `EndpointArn` value
+    #   `arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1`. If you
+    #   don't specify a `ResourceIdentifier` value, AWS DMS generates a
+    #   default identifier value for the end of `EndpointArn`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationTaskMessage AWS API Documentation
     #
     class CreateReplicationTaskMessage < Struct.new(
@@ -1306,7 +1416,8 @@ module Aws::DatabaseMigrationService
       :cdc_start_position,
       :cdc_stop_position,
       :tags,
-      :task_data)
+      :task_data,
+      :resource_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2975,6 +3086,91 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that defines a DocumentDB endpoint.
+    #
+    # @note When making an API call, you may pass DocDbSettings
+    #   data as a hash:
+    #
+    #       {
+    #         username: "String",
+    #         password: "SecretString",
+    #         server_name: "String",
+    #         port: 1,
+    #         database_name: "String",
+    #         nesting_level: "none", # accepts none, one
+    #         extract_doc_id: false,
+    #         docs_to_investigate: 1,
+    #         kms_key_id: "String",
+    #       }
+    #
+    # @!attribute [rw] username
+    #   The user name you use to access the DocumentDB source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The password for the user account you use to access the DocumentDB
+    #   source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_name
+    #   The name of the server on the DocumentDB source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port value for the DocumentDB source endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] database_name
+    #   The database name on the DocumentDB source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] nesting_level
+    #   Specifies either document or table mode.
+    #
+    #   Default value is `"none"`. Specify `"none"` to use document mode.
+    #   Specify `"one"` to use table mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] extract_doc_id
+    #   Specifies the document ID. Use this setting when `NestingLevel` is
+    #   set to `"none"`.
+    #
+    #   Default value is `"false"`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] docs_to_investigate
+    #   Indicates the number of documents to preview to determine the
+    #   document organization. Use this setting when `NestingLevel` is set
+    #   to `"one"`.
+    #
+    #   Must be a positive value greater than `0`. Default value is `1000`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS KMS key identifier that is used to encrypt the content on
+    #   the replication instance. If you don't specify a value for the
+    #   `KmsKeyId` parameter, then AWS DMS uses your default encryption key.
+    #   AWS KMS creates the default encryption key for your AWS account.
+    #   Your AWS account has a different default encryption key for each AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DocDbSettings AWS API Documentation
+    #
+    class DocDbSettings < Struct.new(
+      :username,
+      :password,
+      :server_name,
+      :port,
+      :database_name,
+      :nesting_level,
+      :extract_doc_id,
+      :docs_to_investigate,
+      :kms_key_id)
+      SENSITIVE = [:password]
+      include Aws::Structure
+    end
+
     # Provides the Amazon Resource Name (ARN) of the AWS Identity and Access
     # Management (IAM) role used to define an Amazon DynamoDB target
     # endpoint.
@@ -3016,12 +3212,19 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] endpoint_uri
-    #   The endpoint for the Elasticsearch cluster.
+    #   The endpoint for the Elasticsearch cluster. AWS DMS uses HTTPS if a
+    #   transport protocol (http/https) is not specified.
     #   @return [String]
     #
     # @!attribute [rw] full_load_error_percentage
     #   The maximum percentage of records that can fail to be written before
     #   a full load operation stops.
+    #
+    #   To avoid early failure, this counter is only effective after 1000
+    #   records are transferred. Elasticsearch also has the concept of error
+    #   monitoring during the last 10 minutes of an Observation Window. If
+    #   transfer of all records fail in the last 10 minutes, the full load
+    #   operation stops.
     #   @return [Integer]
     #
     # @!attribute [rw] error_retry_duration
@@ -3234,6 +3437,10 @@ module Aws::DatabaseMigrationService
     #   information, see the `IBMDb2Settings` structure.
     #   @return [Types::IBMDb2Settings]
     #
+    # @!attribute [rw] doc_db_settings
+    #   Provides information that defines a DocumentDB endpoint.
+    #   @return [Types::DocDbSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
@@ -3268,7 +3475,8 @@ module Aws::DatabaseMigrationService
       :oracle_settings,
       :sybase_settings,
       :microsoft_sql_server_settings,
-      :ibm_db_2_settings)
+      :ibm_db_2_settings,
+      :doc_db_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3411,7 +3619,8 @@ module Aws::DatabaseMigrationService
 
     # Identifies the name and value of a filter object. This filter is used
     # to limit the number and type of AWS DMS objects that are returned for
-    # a particular `Describe*` or similar operation.
+    # a particular `Describe*` call or similar operation. Filters are used
+    # as an optional parameter to the following APIs.
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -3450,6 +3659,9 @@ module Aws::DatabaseMigrationService
     #         password: "SecretString",
     #         port: 1,
     #         server_name: "String",
+    #         set_data_capture_changes: false,
+    #         current_lsn: "String",
+    #         max_k_bytes_per_read: 1,
     #         username: "String",
     #       }
     #
@@ -3469,6 +3681,21 @@ module Aws::DatabaseMigrationService
     #   Fully qualified domain name of the endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] set_data_capture_changes
+    #   Enables ongoing replication (CDC) as a BOOLEAN value. The default is
+    #   true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] current_lsn
+    #   For ongoing replication (CDC), use CurrentLSN to specify a log
+    #   sequence number (LSN) where you want the replication to start.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_k_bytes_per_read
+    #   Maximum number of bytes per read, as a NUMBER value. The default is
+    #   64 KB.
+    #   @return [Integer]
+    #
     # @!attribute [rw] username
     #   Endpoint connection user name.
     #   @return [String]
@@ -3480,6 +3707,9 @@ module Aws::DatabaseMigrationService
       :password,
       :port,
       :server_name,
+      :set_data_capture_changes,
+      :current_lsn,
+      :max_k_bytes_per_read,
       :username)
       SENSITIVE = [:password]
       include Aws::Structure
@@ -3926,22 +4156,70 @@ module Aws::DatabaseMigrationService
     #
     #       {
     #         port: 1,
+    #         bcp_packet_size: 1,
     #         database_name: "String",
+    #         control_tables_file_group: "String",
     #         password: "SecretString",
+    #         read_backup_only: false,
+    #         safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
     #         server_name: "String",
     #         username: "String",
+    #         use_bcp_full_load: false,
     #       }
     #
     # @!attribute [rw] port
     #   Endpoint TCP port.
     #   @return [Integer]
     #
+    # @!attribute [rw] bcp_packet_size
+    #   The maximum size of the packets (in bytes) used to transfer data
+    #   using BCP.
+    #   @return [Integer]
+    #
     # @!attribute [rw] database_name
     #   Database name for the endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] control_tables_file_group
+    #   Specify a filegroup for the AWS DMS internal tables. When the
+    #   replication task starts, all the internal AWS DMS control tables
+    #   (awsdms\_ apply\_exception, awsdms\_apply, awsdms\_changes) are
+    #   created on the specified filegroup.
+    #   @return [String]
+    #
     # @!attribute [rw] password
     #   Endpoint connection password.
+    #   @return [String]
+    #
+    # @!attribute [rw] read_backup_only
+    #   When this attribute is set to `Y`, AWS DMS only reads changes from
+    #   transaction log backups and doesn't read from the active
+    #   transaction log file during ongoing replication. Setting this
+    #   parameter to `Y` enables you to control active transaction log file
+    #   growth during full load and ongoing replication tasks. However, it
+    #   can add some source latency to ongoing replication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] safeguard_policy
+    #   Use this attribute to minimize the need to access the backup log and
+    #   enable AWS DMS to prevent truncation using one of the following two
+    #   methods.
+    #
+    #   *Start transactions in the database:* This is the default method.
+    #   When this method is used, AWS DMS prevents TLOG truncation by
+    #   mimicking a transaction in the database. As long as such a
+    #   transaction is open, changes that appear after the transaction
+    #   started aren't truncated. If you need Microsoft Replication to be
+    #   enabled in your database, then you must choose this method.
+    #
+    #   *Exclusively use sp\_repldone within a single task*\: When this
+    #   method is used, AWS DMS reads the changes and then uses sp\_repldone
+    #   to mark the TLOG transactions as ready for truncation. Although this
+    #   method doesn't involve any transactional activities, it can only be
+    #   used when Microsoft Replication isn't running. Also, when using
+    #   this method, only one AWS DMS task can access the database at any
+    #   given time. Therefore, if you need to run parallel AWS DMS tasks
+    #   against the same database, use the default method.
     #   @return [String]
     #
     # @!attribute [rw] server_name
@@ -3952,14 +4230,26 @@ module Aws::DatabaseMigrationService
     #   Endpoint connection user name.
     #   @return [String]
     #
+    # @!attribute [rw] use_bcp_full_load
+    #   Use this to attribute to transfer data for full-load operations
+    #   using BCP. When the target table contains an identity column that
+    #   does not exist in the source table, you must disable the use BCP for
+    #   loading table option.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MicrosoftSQLServerSettings AWS API Documentation
     #
     class MicrosoftSQLServerSettings < Struct.new(
       :port,
+      :bcp_packet_size,
       :database_name,
+      :control_tables_file_group,
       :password,
+      :read_backup_only,
+      :safeguard_policy,
       :server_name,
-      :username)
+      :username,
+      :use_bcp_full_load)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -4007,6 +4297,9 @@ module Aws::DatabaseMigrationService
     #           timestamp_column_name: "String",
     #           parquet_timestamp_in_millisecond: false,
     #           cdc_inserts_and_updates: false,
+    #           date_partition_enabled: false,
+    #           date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
+    #           date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -4069,11 +4362,14 @@ module Aws::DatabaseMigrationService
     #           after_connect_script: "String",
     #           bucket_folder: "String",
     #           bucket_name: "String",
+    #           case_sensitive_names: false,
+    #           comp_update: false,
     #           connection_timeout: 1,
     #           database_name: "String",
     #           date_format: "String",
     #           empty_as_null: false,
     #           encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #           explicit_ids: false,
     #           file_transfer_upload_streams: 1,
     #           load_timeout: 1,
     #           max_file_size: 1,
@@ -4092,26 +4388,59 @@ module Aws::DatabaseMigrationService
     #           write_buffer_size: 1,
     #         },
     #         postgre_sql_settings: {
+    #           after_connect_script: "String",
+    #           capture_ddls: false,
+    #           max_file_size: 1,
     #           database_name: "String",
+    #           ddl_artifacts_schema: "String",
+    #           execute_timeout: 1,
+    #           fail_tasks_on_lob_truncation: false,
     #           password: "SecretString",
     #           port: 1,
     #           server_name: "String",
     #           username: "String",
+    #           slot_name: "String",
     #         },
     #         my_sql_settings: {
+    #           after_connect_script: "String",
     #           database_name: "String",
+    #           events_poll_interval: 1,
+    #           target_db_type: "specific-database", # accepts specific-database, multiple-databases
+    #           max_file_size: 1,
+    #           parallel_load_threads: 1,
     #           password: "SecretString",
     #           port: 1,
     #           server_name: "String",
+    #           server_timezone: "String",
     #           username: "String",
     #         },
     #         oracle_settings: {
+    #           add_supplemental_logging: false,
+    #           archived_log_dest_id: 1,
+    #           additional_archived_log_dest_id: 1,
+    #           allow_select_nested_tables: false,
+    #           parallel_asm_read_threads: 1,
+    #           read_ahead_blocks: 1,
+    #           access_alternate_directly: false,
+    #           use_alternate_folder_for_online: false,
+    #           oracle_path_prefix: "String",
+    #           use_path_prefix: "String",
+    #           replace_path_prefix: false,
+    #           enable_homogenous_tablespace: false,
+    #           direct_path_no_log: false,
+    #           archived_logs_only: false,
     #           asm_password: "SecretString",
     #           asm_server: "String",
     #           asm_user: "String",
+    #           char_length_semantics: "default", # accepts default, char, byte
     #           database_name: "String",
+    #           direct_path_parallel_load: false,
+    #           fail_tasks_on_lob_truncation: false,
+    #           number_datatype_scale: 1,
     #           password: "SecretString",
     #           port: 1,
+    #           read_table_space_name: false,
+    #           retry_interval: 1,
     #           security_db_encryption: "SecretString",
     #           security_db_encryption_name: "String",
     #           server_name: "String",
@@ -4126,17 +4455,36 @@ module Aws::DatabaseMigrationService
     #         },
     #         microsoft_sql_server_settings: {
     #           port: 1,
+    #           bcp_packet_size: 1,
     #           database_name: "String",
+    #           control_tables_file_group: "String",
     #           password: "SecretString",
+    #           read_backup_only: false,
+    #           safeguard_policy: "rely-on-sql-server-replication-agent", # accepts rely-on-sql-server-replication-agent, exclusive-automatic-truncation, shared-automatic-truncation
     #           server_name: "String",
     #           username: "String",
+    #           use_bcp_full_load: false,
     #         },
     #         ibm_db_2_settings: {
     #           database_name: "String",
     #           password: "SecretString",
     #           port: 1,
     #           server_name: "String",
+    #           set_data_capture_changes: false,
+    #           current_lsn: "String",
+    #           max_k_bytes_per_read: 1,
     #           username: "String",
+    #         },
+    #         doc_db_settings: {
+    #           username: "String",
+    #           password: "SecretString",
+    #           server_name: "String",
+    #           port: 1,
+    #           database_name: "String",
+    #           nesting_level: "none", # accepts none, one
+    #           extract_doc_id: false,
+    #           docs_to_investigate: 1,
+    #           kms_key_id: "String",
     #         },
     #       }
     #
@@ -4394,6 +4742,18 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib
     #   @return [Types::IBMDb2Settings]
     #
+    # @!attribute [rw] doc_db_settings
+    #   Settings in JSON format for the source DocumentDB endpoint. For more
+    #   information about the available settings, see the configuration
+    #   properties section in [ Using DocumentDB as a Target for AWS
+    #   Database Migration Service][1] in the *AWS Database Migration
+    #   Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DocumentDB.html
+    #   @return [Types::DocDbSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpointMessage AWS API Documentation
     #
     class ModifyEndpointMessage < Struct.new(
@@ -4425,7 +4785,8 @@ module Aws::DatabaseMigrationService
       :oracle_settings,
       :sybase_settings,
       :microsoft_sql_server_settings,
-      :ibm_db_2_settings)
+      :ibm_db_2_settings,
+      :doc_db_settings)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -4945,22 +5306,106 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass MoveReplicationTaskMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_task_arn: "String", # required
+    #         target_replication_instance_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] replication_task_arn
+    #   The Amazon Resource Name (ARN) of the task that you want to move.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_replication_instance_arn
+    #   The ARN of the replication instance where you want to move the task
+    #   to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MoveReplicationTaskMessage AWS API Documentation
+    #
+    class MoveReplicationTaskMessage < Struct.new(
+      :replication_task_arn,
+      :target_replication_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_task
+    #   The replication task that was moved.
+    #   @return [Types::ReplicationTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MoveReplicationTaskResponse AWS API Documentation
+    #
+    class MoveReplicationTaskResponse < Struct.new(
+      :replication_task)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information that defines a MySQL endpoint.
     #
     # @note When making an API call, you may pass MySQLSettings
     #   data as a hash:
     #
     #       {
+    #         after_connect_script: "String",
     #         database_name: "String",
+    #         events_poll_interval: 1,
+    #         target_db_type: "specific-database", # accepts specific-database, multiple-databases
+    #         max_file_size: 1,
+    #         parallel_load_threads: 1,
     #         password: "SecretString",
     #         port: 1,
     #         server_name: "String",
+    #         server_timezone: "String",
     #         username: "String",
     #       }
+    #
+    # @!attribute [rw] after_connect_script
+    #   Specifies a script to run immediately after AWS DMS connects to the
+    #   endpoint. The migration task continues running regardless if the SQL
+    #   statement succeeds or fails.
+    #   @return [String]
     #
     # @!attribute [rw] database_name
     #   Database name for the endpoint.
     #   @return [String]
+    #
+    # @!attribute [rw] events_poll_interval
+    #   Specifies how often to check the binary log for new changes/events
+    #   when the database is idle.
+    #
+    #   Example: `eventsPollInterval=5;`
+    #
+    #   In the example, AWS DMS checks for changes in the binary logs every
+    #   five seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_db_type
+    #   Specifies where to migrate source tables on the target, either to a
+    #   single database or multiple databases.
+    #
+    #   Example: `targetDbType=MULTIPLE_DATABASES`
+    #   @return [String]
+    #
+    # @!attribute [rw] max_file_size
+    #   Specifies the maximum size (in KB) of any .csv file used to transfer
+    #   data to a MySQL-compatible database.
+    #
+    #   Example: `maxFileSize=512`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] parallel_load_threads
+    #   Improves performance when loading data into the MySQLcompatible
+    #   target database. Specifies how many threads to use to load the data
+    #   into the MySQL-compatible target database. Setting a large number of
+    #   threads can have an adverse effect on database performance, because
+    #   a separate connection is required for each thread.
+    #
+    #   Example: `parallelLoadThreads=1`
+    #   @return [Integer]
     #
     # @!attribute [rw] password
     #   Endpoint connection password.
@@ -4974,6 +5419,14 @@ module Aws::DatabaseMigrationService
     #   Fully qualified domain name of the endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] server_timezone
+    #   Specifies the time zone for the source MySQL database.
+    #
+    #   Example: `serverTimezone=US/Pacific;`
+    #
+    #   Note: Do not enclose time zones in single quotes.
+    #   @return [String]
+    #
     # @!attribute [rw] username
     #   Endpoint connection user name.
     #   @return [String]
@@ -4981,10 +5434,16 @@ module Aws::DatabaseMigrationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MySQLSettings AWS API Documentation
     #
     class MySQLSettings < Struct.new(
+      :after_connect_script,
       :database_name,
+      :events_poll_interval,
+      :target_db_type,
+      :max_file_size,
+      :parallel_load_threads,
       :password,
       :port,
       :server_name,
+      :server_timezone,
       :username)
       SENSITIVE = [:password]
       include Aws::Structure
@@ -5075,17 +5534,136 @@ module Aws::DatabaseMigrationService
     #   data as a hash:
     #
     #       {
+    #         add_supplemental_logging: false,
+    #         archived_log_dest_id: 1,
+    #         additional_archived_log_dest_id: 1,
+    #         allow_select_nested_tables: false,
+    #         parallel_asm_read_threads: 1,
+    #         read_ahead_blocks: 1,
+    #         access_alternate_directly: false,
+    #         use_alternate_folder_for_online: false,
+    #         oracle_path_prefix: "String",
+    #         use_path_prefix: "String",
+    #         replace_path_prefix: false,
+    #         enable_homogenous_tablespace: false,
+    #         direct_path_no_log: false,
+    #         archived_logs_only: false,
     #         asm_password: "SecretString",
     #         asm_server: "String",
     #         asm_user: "String",
+    #         char_length_semantics: "default", # accepts default, char, byte
     #         database_name: "String",
+    #         direct_path_parallel_load: false,
+    #         fail_tasks_on_lob_truncation: false,
+    #         number_datatype_scale: 1,
     #         password: "SecretString",
     #         port: 1,
+    #         read_table_space_name: false,
+    #         retry_interval: 1,
     #         security_db_encryption: "SecretString",
     #         security_db_encryption_name: "String",
     #         server_name: "String",
     #         username: "String",
     #       }
+    #
+    # @!attribute [rw] add_supplemental_logging
+    #   Set this attribute to set up table-level supplemental logging for
+    #   the Oracle database. This attribute enables PRIMARY KEY supplemental
+    #   logging on all tables selected for a migration task.
+    #
+    #   If you use this option, you still need to enable database-level
+    #   supplemental logging.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] archived_log_dest_id
+    #   Specifies the destination of the archived redo logs. The value
+    #   should be the same as the DEST\_ID number in the v$archived\_log
+    #   table. When working with multiple log destinations (DEST\_ID), we
+    #   recommend that you to specify an archived redo logs location
+    #   identifier. Doing this improves performance by ensuring that the
+    #   correct logs are accessed from the outset.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_archived_log_dest_id
+    #   Set this attribute with `archivedLogDestId` in a primary/ standby
+    #   setup. This attribute is useful in the case of a switchover. In this
+    #   case, AWS DMS needs to know which destination to get archive redo
+    #   logs from to read changes. This need arises because the previous
+    #   primary instance is now a standby instance after switchover.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] allow_select_nested_tables
+    #   Set this attribute to `true` to enable replication of Oracle tables
+    #   containing columns that are nested tables or defined types.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parallel_asm_read_threads
+    #   Set this attribute to change the number of threads that DMS
+    #   configures to perform a Change Data Capture (CDC) load using Oracle
+    #   Automatic Storage Management (ASM). You can specify an integer value
+    #   between 2 (the default) and 8 (the maximum). Use this attribute
+    #   together with the `readAheadBlocks` attribute.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] read_ahead_blocks
+    #   Set this attribute to change the number of read-ahead blocks that
+    #   DMS configures to perform a Change Data Capture (CDC) load using
+    #   Oracle Automatic Storage Management (ASM). You can specify an
+    #   integer value between 1000 (the default) and 200,000 (the maximum).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] access_alternate_directly
+    #   Set this attribute to `false` in order to use the Binary Reader to
+    #   capture change data for an Amazon RDS for Oracle as the source. This
+    #   tells the DMS instance to not access redo logs through any specified
+    #   path prefix replacement using direct file access.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] use_alternate_folder_for_online
+    #   Set this attribute to `true` in order to use the Binary Reader to
+    #   capture change data for an Amazon RDS for Oracle as the source. This
+    #   tells the DMS instance to use any specified prefix replacement to
+    #   access all online redo logs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] oracle_path_prefix
+    #   Set this string attribute to the required value in order to use the
+    #   Binary Reader to capture change data for an Amazon RDS for Oracle as
+    #   the source. This value specifies the default Oracle root used to
+    #   access the redo logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_path_prefix
+    #   Set this string attribute to the required value in order to use the
+    #   Binary Reader to capture change data for an Amazon RDS for Oracle as
+    #   the source. This value specifies the path prefix used to replace the
+    #   default Oracle root to access the redo logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] replace_path_prefix
+    #   Set this attribute to true in order to use the Binary Reader to
+    #   capture change data for an Amazon RDS for Oracle as the source. This
+    #   setting tells DMS instance to replace the default Oracle root with
+    #   the specified `usePathPrefix` setting to access the redo logs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_homogenous_tablespace
+    #   Set this attribute to enable homogenous tablespace replication and
+    #   create existing tables or indexes under the same tablespace on the
+    #   target.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] direct_path_no_log
+    #   When set to `true`, this attribute helps to increase the commit rate
+    #   on the Oracle target database by writing directly to tables and not
+    #   writing a trail to database logs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] archived_logs_only
+    #   When this field is set to `Y`, AWS DMS only accesses the archived
+    #   redo logs. If the archived redo logs are stored on Oracle ASM only,
+    #   the AWS DMS user account needs to be granted ASM privileges.
+    #   @return [Boolean]
     #
     # @!attribute [rw] asm_password
     #   For an Oracle source endpoint, your Oracle Automatic Storage
@@ -5127,9 +5705,42 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration
     #   @return [String]
     #
+    # @!attribute [rw] char_length_semantics
+    #   Specifies whether the length of a character column is in bytes or in
+    #   characters. To indicate that the character column length is in
+    #   characters, set this attribute to `CHAR`. Otherwise, the character
+    #   column length is in bytes.
+    #
+    #   Example: `charLengthSemantics=CHAR;`
+    #   @return [String]
+    #
     # @!attribute [rw] database_name
     #   Database name for the endpoint.
     #   @return [String]
+    #
+    # @!attribute [rw] direct_path_parallel_load
+    #   When set to `true`, this attribute specifies a parallel load when
+    #   `useDirectPathFullLoad` is set to `Y`. This attribute also only
+    #   applies when you use the AWS DMS parallel load feature. Note that
+    #   the target table cannot have any constraints or indexes.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] fail_tasks_on_lob_truncation
+    #   When set to `true`, this attribute causes a task to fail if the
+    #   actual size of an LOB column is greater than the specified
+    #   `LobMaxSize`.
+    #
+    #   If a task is set to limited LOB mode and this option is set to
+    #   `true`, the task fails instead of truncating the LOB data.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] number_datatype_scale
+    #   Specifies the number scale. You can select a scale up to 38, or you
+    #   can select FLOAT. By default, the NUMBER data type is converted to
+    #   precision 38, scale 10.
+    #
+    #   Example: `numberDataTypeScale=12`
+    #   @return [Integer]
     #
     # @!attribute [rw] password
     #   Endpoint connection password.
@@ -5137,6 +5748,17 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] port
     #   Endpoint TCP port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] read_table_space_name
+    #   When set to `true`, this attribute supports tablespace replication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] retry_interval
+    #   Specifies the number of seconds that the system waits before
+    #   resending a query.
+    #
+    #   Example: `retryInterval=6;`
     #   @return [Integer]
     #
     # @!attribute [rw] security_db_encryption
@@ -5182,12 +5804,32 @@ module Aws::DatabaseMigrationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/OracleSettings AWS API Documentation
     #
     class OracleSettings < Struct.new(
+      :add_supplemental_logging,
+      :archived_log_dest_id,
+      :additional_archived_log_dest_id,
+      :allow_select_nested_tables,
+      :parallel_asm_read_threads,
+      :read_ahead_blocks,
+      :access_alternate_directly,
+      :use_alternate_folder_for_online,
+      :oracle_path_prefix,
+      :use_path_prefix,
+      :replace_path_prefix,
+      :enable_homogenous_tablespace,
+      :direct_path_no_log,
+      :archived_logs_only,
       :asm_password,
       :asm_server,
       :asm_user,
+      :char_length_semantics,
       :database_name,
+      :direct_path_parallel_load,
+      :fail_tasks_on_lob_truncation,
+      :number_datatype_scale,
       :password,
       :port,
+      :read_table_space_name,
+      :retry_interval,
       :security_db_encryption,
       :security_db_encryption_name,
       :server_name,
@@ -5335,16 +5977,69 @@ module Aws::DatabaseMigrationService
     #   data as a hash:
     #
     #       {
+    #         after_connect_script: "String",
+    #         capture_ddls: false,
+    #         max_file_size: 1,
     #         database_name: "String",
+    #         ddl_artifacts_schema: "String",
+    #         execute_timeout: 1,
+    #         fail_tasks_on_lob_truncation: false,
     #         password: "SecretString",
     #         port: 1,
     #         server_name: "String",
     #         username: "String",
+    #         slot_name: "String",
     #       }
+    #
+    # @!attribute [rw] after_connect_script
+    #   For use with change data capture (CDC) only, this attribute has AWS
+    #   DMS bypass foreign keys and user triggers to reduce the time it
+    #   takes to bulk load data.
+    #
+    #   Example: `afterConnectScript=SET session_replication_role='replica'`
+    #   @return [String]
+    #
+    # @!attribute [rw] capture_ddls
+    #   To capture DDL events, AWS DMS creates various artifacts in the
+    #   PostgreSQL database when the task starts. You can later remove these
+    #   artifacts.
+    #
+    #   If this value is set to `N`, you don't have to create tables or
+    #   triggers on the source database.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_file_size
+    #   Specifies the maximum size (in KB) of any .csv file used to transfer
+    #   data to PostgreSQL.
+    #
+    #   Example: `maxFileSize=512`
+    #   @return [Integer]
     #
     # @!attribute [rw] database_name
     #   Database name for the endpoint.
     #   @return [String]
+    #
+    # @!attribute [rw] ddl_artifacts_schema
+    #   The schema in which the operational DDL database artifacts are
+    #   created.
+    #
+    #   Example: `ddlArtifactsSchema=xyzddlschema;`
+    #   @return [String]
+    #
+    # @!attribute [rw] execute_timeout
+    #   Sets the client statement timeout for the PostgreSQL instance, in
+    #   seconds. The default value is 60 seconds.
+    #
+    #   Example: `executeTimeout=100;`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fail_tasks_on_lob_truncation
+    #   When set to `true`, this value causes a task to fail if the actual
+    #   size of a LOB column is greater than the specified `LobMaxSize`.
+    #
+    #   If task is set to Limited LOB mode and this option is set to true,
+    #   the task fails instead of truncating the LOB data.
+    #   @return [Boolean]
     #
     # @!attribute [rw] password
     #   Endpoint connection password.
@@ -5362,14 +6057,29 @@ module Aws::DatabaseMigrationService
     #   Endpoint connection user name.
     #   @return [String]
     #
+    # @!attribute [rw] slot_name
+    #   Sets the name of a previously created logical replication slot for a
+    #   CDC load of the PostgreSQL source instance.
+    #
+    #   When used with the AWS DMS API `CdcStartPosition` request parameter,
+    #   this attribute also enables using native CDC start points.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/PostgreSQLSettings AWS API Documentation
     #
     class PostgreSQLSettings < Struct.new(
+      :after_connect_script,
+      :capture_ddls,
+      :max_file_size,
       :database_name,
+      :ddl_artifacts_schema,
+      :execute_timeout,
+      :fail_tasks_on_lob_truncation,
       :password,
       :port,
       :server_name,
-      :username)
+      :username,
+      :slot_name)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -5423,11 +6133,14 @@ module Aws::DatabaseMigrationService
     #         after_connect_script: "String",
     #         bucket_folder: "String",
     #         bucket_name: "String",
+    #         case_sensitive_names: false,
+    #         comp_update: false,
     #         connection_timeout: 1,
     #         database_name: "String",
     #         date_format: "String",
     #         empty_as_null: false,
     #         encryption_mode: "sse-s3", # accepts sse-s3, sse-kms
+    #         explicit_ids: false,
     #         file_transfer_upload_streams: 1,
     #         load_timeout: 1,
     #         max_file_size: 1,
@@ -5463,13 +6176,42 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] bucket_folder
-    #   The location where the comma-separated value (.csv) files are stored
-    #   before being uploaded to the S3 bucket.
+    #   An S3 folder where the comma-separated-value (.csv) files are stored
+    #   before being uploaded to the target Redshift cluster.
+    #
+    #   For full load mode, AWS DMS converts source records into .csv files
+    #   and loads them to the *BucketFolder/TableID* path. AWS DMS uses the
+    #   Redshift `COPY` command to upload the .csv files to the target
+    #   table. The files are deleted once the `COPY` operation has finished.
+    #   For more information, see [Amazon Redshift Database Developer
+    #   Guide][1]
+    #
+    #   For change-data-capture (CDC) mode, AWS DMS creates a *NetChanges*
+    #   table, and loads the .csv files to this
+    #   *BucketFolder/NetChangesTableID* path.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html
     #   @return [String]
     #
     # @!attribute [rw] bucket_name
-    #   The name of the S3 bucket you want to use
+    #   The name of the intermediate S3 bucket used to store .csv files
+    #   before uploading data to Redshift.
     #   @return [String]
+    #
+    # @!attribute [rw] case_sensitive_names
+    #   If Amazon Redshift is configured to support case sensitive schema
+    #   names, set `CaseSensitiveNames` to `true`. The default is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] comp_update
+    #   If you set `CompUpdate` to `true` Amazon Redshift applies automatic
+    #   compression if the table is empty. This applies even if the table
+    #   columns already have encodings other than `RAW`. If you set
+    #   `CompUpdate` to `false`, automatic compression is disabled and
+    #   existing column encodings aren't changed. The default is `true`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] connection_timeout
     #   A value that sets the amount of time to wait (in milliseconds)
@@ -5516,20 +6258,40 @@ module Aws::DatabaseMigrationService
     #   following actions: `"s3:PutObject", "s3:ListBucket"`
     #   @return [String]
     #
+    # @!attribute [rw] explicit_ids
+    #   This setting is only valid for a full-load migration task. Set
+    #   `ExplicitIds` to `true` to have tables with `IDENTITY` columns
+    #   override their auto-generated values with explicit values loaded
+    #   from the source data files used to populate the tables. The default
+    #   is `false`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] file_transfer_upload_streams
     #   The number of threads used to upload a single file. This parameter
     #   accepts a value from 1 through 64. It defaults to 10.
+    #
+    #   The number of parallel streams used to upload a single .csv file to
+    #   an S3 bucket using S3 Multipart Upload. For more information, see
+    #   [Multipart upload overview][1].
+    #
+    #   `FileTransferUploadStreams` accepts a value from 1 through 64. It
+    #   defaults to 10.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html
     #   @return [Integer]
     #
     # @!attribute [rw] load_timeout
-    #   The amount of time to wait (in milliseconds) before timing out,
-    #   beginning from when you begin loading.
+    #   The amount of time to wait (in milliseconds) before timing out of
+    #   operations performed by AWS DMS on a Redshift cluster, such as
+    #   Redshift COPY, INSERT, DELETE, and UPDATE.
     #   @return [Integer]
     #
     # @!attribute [rw] max_file_size
-    #   The maximum size (in KB) of any .csv file used to transfer data to
-    #   Amazon Redshift. This accepts a value from 1 through 1,048,576. It
-    #   defaults to 32,768 KB (32 MB).
+    #   The maximum size (in KB) of any .csv file used to load data on an S3
+    #   bucket and transfer data to Amazon Redshift. It defaults to
+    #   1048576KB (1 GB).
     #   @return [Integer]
     #
     # @!attribute [rw] password
@@ -5605,9 +6367,9 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] write_buffer_size
-    #   The size of the write buffer to use in rows. Valid values range from
-    #   1 through 2,048. The default is 1,024. Use this setting to tune
-    #   performance.
+    #   The size (in KB) of the in-memory file write buffer used when
+    #   generating .csv files on the local disk at the DMS replication
+    #   instance. The default value is 1000 (buffer size is 1000KB).
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RedshiftSettings AWS API Documentation
@@ -5617,11 +6379,14 @@ module Aws::DatabaseMigrationService
       :after_connect_script,
       :bucket_folder,
       :bucket_name,
+      :case_sensitive_names,
+      :comp_update,
       :connection_timeout,
       :database_name,
       :date_format,
       :empty_as_null,
       :encryption_mode,
+      :explicit_ids,
       :file_transfer_upload_streams,
       :load_timeout,
       :max_file_size,
@@ -6075,7 +6840,7 @@ module Aws::DatabaseMigrationService
     end
 
     # Describes a subnet group in response to a request by the
-    # `DescribeReplicationSubnetGroup` operation.
+    # `DescribeReplicationSubnetGroups` operation.
     #
     # @!attribute [rw] replication_subnet_group_identifier
     #   The identifier of the replication instance subnet group.
@@ -6139,17 +6904,16 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] source_endpoint_arn
-    #   The Amazon Resource Name (ARN) string that uniquely identifies the
+    #   The Amazon Resource Name (ARN) that uniquely identifies the
     #   endpoint.
     #   @return [String]
     #
     # @!attribute [rw] target_endpoint_arn
-    #   The Amazon Resource Name (ARN) string that uniquely identifies the
-    #   endpoint.
+    #   The ARN that uniquely identifies the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] replication_instance_arn
-    #   The Amazon Resource Name (ARN) of the replication instance.
+    #   The ARN of the replication instance.
     #   @return [String]
     #
     # @!attribute [rw] migration_type
@@ -6165,7 +6929,73 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the replication task.
+    #   The status of the replication task. This response parameter can
+    #   return one of the following values:
+    #
+    #   * `"moving"` – The task is being moved in response to running the [
+    #     `MoveReplicationTask` ][1] operation.
+    #
+    #   * `"creating"` – The task is being created in response to running
+    #     the [ `CreateReplicationTask` ][2] operation.
+    #
+    #   * `"deleting"` – The task is being deleted in response to running
+    #     the [ `DeleteReplicationTask` ][3] operation.
+    #
+    #   * `"failed"` – The task failed to successfully complete the database
+    #     migration in response to running the [ `StartReplicationTask` ][4]
+    #     operation.
+    #
+    #   * `"failed-move"` – The task failed to move in response to running
+    #     the [ `MoveReplicationTask` ][1] operation.
+    #
+    #   * `"modifying"` – The task definition is being modified in response
+    #     to running the [ `ModifyReplicationTask` ][5] operation.
+    #
+    #   * `"ready"` – The task is in a `ready` state where it can respond to
+    #     other task operations, such as [ `StartReplicationTask` ][4] or [
+    #     `DeleteReplicationTask` ][3].
+    #
+    #   * `"running"` – The task is performing a database migration in
+    #     response to running the [ `StartReplicationTask` ][4] operation.
+    #
+    #   * `"starting"` – The task is preparing to perform a database
+    #     migration in response to running the [ `StartReplicationTask` ][4]
+    #     operation.
+    #
+    #   * `"stopped"` – The task has stopped in response to running the [
+    #     `StopReplicationTask` ][6] operation.
+    #
+    #   * `"stopping"` – The task is preparing to stop in response to
+    #     running the [ `StopReplicationTask` ][6] operation.
+    #
+    #   * `"testing"` – The database migration specified for this task is
+    #     being tested in response to running either the [
+    #     `StartReplicationTaskAssessmentRun` ][7] or the [
+    #     `StartReplicationTaskAssessment` ][8] operation.
+    #
+    #     <note markdown="1"> [ `StartReplicationTaskAssessmentRun` ][7] is an improved
+    #     premigration task assessment operation. The [
+    #     `StartReplicationTaskAssessment` ][8] operation assesses data type
+    #     compatibility only between the source and target database of a
+    #     given migration task. In contrast, [
+    #     `StartReplicationTaskAssessmentRun` ][7] enables you to specify a
+    #     variety of premigration task assessments in addition to data type
+    #     compatibility. These assessments include ones for the validity of
+    #     primary key definitions and likely issues with database migration
+    #     performance, among others.
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html
+    #   [2]: https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html
+    #   [3]: https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationTask.html
+    #   [4]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html
+    #   [5]: https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html
+    #   [6]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StopReplicationTask.html
+    #   [7]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html
+    #   [8]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessment.html
     #   @return [String]
     #
     # @!attribute [rw] last_failure_message
@@ -6183,7 +7013,7 @@ module Aws::DatabaseMigrationService
     #     load completed.
     #
     #   * `"STOP_REASON_CACHED_CHANGES_NOT_APPLIED"` – In a full-load and
-    #     CDC migration, the full-load stopped as specified before starting
+    #     CDC migration, the full load stopped as specified before starting
     #     the CDC migration.
     #
     #   * `"STOP_REASON_SERVER_TIME"` – The migration stopped at the
@@ -6252,6 +7082,17 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html
     #   @return [String]
     #
+    # @!attribute [rw] target_replication_instance_arn
+    #   The ARN of the replication instance to which this task is moved in
+    #   response to running the [ `MoveReplicationTask` ][1] operation.
+    #   Otherwise, this response parameter isn't a member of the
+    #   `ReplicationTask` object.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTask AWS API Documentation
     #
     class ReplicationTask < Struct.new(
@@ -6272,7 +7113,8 @@ module Aws::DatabaseMigrationService
       :recovery_checkpoint,
       :replication_task_arn,
       :replication_task_stats,
-      :task_data)
+      :task_data,
+      :target_replication_instance_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6701,6 +7543,9 @@ module Aws::DatabaseMigrationService
     #         timestamp_column_name: "String",
     #         parquet_timestamp_in_millisecond: false,
     #         cdc_inserts_and_updates: false,
+    #         date_partition_enabled: false,
+    #         date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
+    #         date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
     #       }
     #
     # @!attribute [rw] service_access_role_arn
@@ -7021,6 +7866,29 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps
     #   @return [Boolean]
     #
+    # @!attribute [rw] date_partition_enabled
+    #   When set to `true`, this parameter partitions S3 bucket folders
+    #   based on transaction commit dates. The default value is `false`. For
+    #   more information about date-based folder partitoning, see [Using
+    #   date-based folder partitioning][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.DatePartitioning
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] date_partition_sequence
+    #   Identifies the sequence of the date format to use during folder
+    #   partitioning. The default value is `YYYYMMDD`. Use this parameter
+    #   when `DatePartitionedEnabled` is set to `true`.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_partition_delimiter
+    #   Specifies a date separating delimiter to use during folder
+    #   partitioning. The default value is `SLASH`. Use this parameter when
+    #   `DatePartitionedEnabled` is set to `true`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/S3Settings AWS API Documentation
     #
     class S3Settings < Struct.new(
@@ -7044,7 +7912,10 @@ module Aws::DatabaseMigrationService
       :cdc_inserts_only,
       :timestamp_column_name,
       :parquet_timestamp_in_millisecond,
-      :cdc_inserts_and_updates)
+      :cdc_inserts_and_updates,
+      :date_partition_enabled,
+      :date_partition_sequence,
+      :date_partition_delimiter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7242,7 +8113,7 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] start_replication_task_type
-    #   The type of replication task.
+    #   A type of replication task.
     #   @return [String]
     #
     # @!attribute [rw] cdc_start_time
@@ -7362,7 +8233,7 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    # In response to a request by the `DescribeReplicationSubnetGroup`
+    # In response to a request by the `DescribeReplicationSubnetGroups`
     # operation, this object identifies a subnet by its given Availability
     # Zone, subnet identifier, and status.
     #

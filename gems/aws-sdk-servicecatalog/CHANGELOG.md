@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2020-11-16)
+------------------
+
+* Feature - Support import of CloudFormation stacks into Service Catalog provisioned products.
+
+1.54.0 (2020-11-11)
+------------------
+
+* Feature - Adding support to remove a Provisioned Product launch role via UpdateProvisionedProductProperties
+
+1.53.0 (2020-11-04)
+------------------
+
+* Feature - Service Catalog API ListPortfolioAccess can now support a maximum PageSize of 100.
+
+1.52.0 (2020-10-22)
+------------------
+
+* Feature - Documentation updates for servicecatalog
+
+1.51.0 (2020-10-19)
+------------------
+
+* Feature - An Admin can now update the launch role associated with a Provisioned Product. Admins and End Users can now view the launch role associated with a Provisioned Product.
+
+1.50.0 (2020-10-09)
+------------------
+
+* Feature - This new API takes either a ProvisonedProductId or a ProvisionedProductName, along with a list of 1 or more output keys and responds with the (key,value) pairs of those outputs.
+
+1.49.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2020-09-16)
+------------------
+
+* Feature - Enhance DescribeProvisionedProduct API to allow useProvisionedProduct Name as Input, so customer can provide ProvisionedProduct Name instead of ProvisionedProduct Id to describe a ProvisionedProduct.
+
+1.47.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.46.0 (2020-08-25)
 ------------------
 

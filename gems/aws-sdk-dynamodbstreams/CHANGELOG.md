@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2020-10-05)
+------------------
+
+* Feature - Documentation updates for streams.dynamodb
+
+1.25.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2020-09-22)
+------------------
+
+* Feature - Documentation updates for streams.dynamodb
+
+1.23.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.22.0 (2020-08-25)
 ------------------
 

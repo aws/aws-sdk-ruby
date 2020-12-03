@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2020-11-23)
+------------------
+
+* Feature - Feature1 - Glue crawler adds data lineage configuration option. Feature2 - AWS Glue Data Catalog adds APIs for PartitionIndex creation and deletion as part of Enhancement Partition Management feature.
+
+1.79.0 (2020-11-19)
+------------------
+
+* Feature - Adding support for Glue Schema Registry. The AWS Glue Schema Registry is a new feature that allows you to centrally discover, control, and evolve data stream schemas.
+
+1.78.0 (2020-10-27)
+------------------
+
+* Feature - AWS Glue machine learning transforms now support encryption-at-rest for labels and trained models.
+
+1.77.0 (2020-10-21)
+------------------
+
+* Feature - AWS Glue crawlers now support incremental crawls for the Amazon Simple Storage Service (Amazon S3) data source.
+
+1.76.0 (2020-10-21)
+------------------
+
+* Feature - AWS Glue crawlers now support incremental crawls for the Amazon Simple Storage Service (Amazon S3) data source.
+
+1.75.0 (2020-10-15)
+------------------
+
+* Feature - API Documentation updates for Glue Get-Plan API
+
+1.74.0 (2020-10-05)
+------------------
+
+* Feature - AWS Glue crawlers now support Amazon DocumentDB (with MongoDB compatibility) and MongoDB collections. You can choose to crawl the entire data set or only a small sample to reduce crawl time.
+
+1.73.0 (2020-10-01)
+------------------
+
+* Feature - Adding additional optional map parameter to get-plan api
+
+1.72.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.71.0 (2020-09-21)
+------------------
+
+* Feature - Adding support to update multiple partitions of a table in a single request
+
+1.70.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.69.0 (2020-09-09)
 ------------------
 

@@ -836,7 +836,7 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
-    # Returns a list of AWS resource identifiers that matches tne specified
+    # Returns a list of AWS resource identifiers that matches the specified
     # query. The query uses the same format as a resource query in a
     # CreateGroup or UpdateGroupQuery operation.
     #
@@ -1118,7 +1118,7 @@ module Aws::ResourceGroups
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourcegroups'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

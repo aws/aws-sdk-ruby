@@ -327,6 +327,42 @@ module Aws::Kafka
 
     # @!group API Operations
 
+    # Associates one or more Scram Secrets with an Amazon MSK cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [required, Array<String>] :secret_arn_list
+    #   List of AWS Secrets Manager secret ARNs.
+    #
+    # @return [Types::BatchAssociateScramSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchAssociateScramSecretResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::BatchAssociateScramSecretResponse#unprocessed_scram_secrets #unprocessed_scram_secrets} => Array&lt;Types::UnprocessedScramSecret&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_associate_scram_secret({
+    #     cluster_arn: "__string", # required
+    #     secret_arn_list: ["__string"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.unprocessed_scram_secrets #=> Array
+    #   resp.unprocessed_scram_secrets[0].error_code #=> String
+    #   resp.unprocessed_scram_secrets[0].error_message #=> String
+    #   resp.unprocessed_scram_secrets[0].secret_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BatchAssociateScramSecret AWS API Documentation
+    #
+    # @overload batch_associate_scram_secret(params = {})
+    # @param [Hash] params ({})
+    def batch_associate_scram_secret(params = {}, options = {})
+      req = build_request(:batch_associate_scram_secret, params)
+      req.send_request(options)
+    end
+
     # Creates a new MSK cluster.
     #
     # @option params [required, Types::BrokerNodeGroupInfo] :broker_node_group_info
@@ -346,7 +382,8 @@ module Aws::Kafka
     #
     # @option params [String] :enhanced_monitoring
     #   Specifies the level of monitoring for the MSK cluster. The possible
-    #   values are DEFAULT, PER\_BROKER, and PER\_TOPIC\_PER\_BROKER.
+    #   values are DEFAULT, PER\_BROKER, PER\_TOPIC\_PER\_BROKER, and
+    #   PER\_TOPIC\_PER\_PARTITION.
     #
     # @option params [required, String] :kafka_version
     #   The version of Apache Kafka.
@@ -384,6 +421,11 @@ module Aws::Kafka
     #       },
     #     },
     #     client_authentication: {
+    #       sasl: {
+    #         scram: {
+    #           enabled: false,
+    #         },
+    #       },
     #       tls: {
     #         certificate_authority_arn_list: ["__string"],
     #       },
@@ -402,7 +444,7 @@ module Aws::Kafka
     #         in_cluster: false,
     #       },
     #     },
-    #     enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER
+    #     enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
     #     kafka_version: "__stringMin1Max128", # required
     #     logging_info: {
     #       broker_logs: { # required
@@ -441,7 +483,7 @@ module Aws::Kafka
     #
     #   resp.cluster_arn #=> String
     #   resp.cluster_name #=> String
-    #   resp.state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #   resp.state #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "MAINTENANCE", "REBOOTING_BROKER", "UPDATING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateCluster AWS API Documentation
     #
@@ -525,7 +567,7 @@ module Aws::Kafka
     # @example Response structure
     #
     #   resp.cluster_arn #=> String
-    #   resp.state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #   resp.state #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "MAINTENANCE", "REBOOTING_BROKER", "UPDATING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteCluster AWS API Documentation
     #
@@ -592,6 +634,7 @@ module Aws::Kafka
     #   resp.cluster_info.broker_node_group_info.security_groups #=> Array
     #   resp.cluster_info.broker_node_group_info.security_groups[0] #=> String
     #   resp.cluster_info.broker_node_group_info.storage_info.ebs_storage_info.volume_size #=> Integer
+    #   resp.cluster_info.client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_info.client_authentication.tls.certificate_authority_arn_list #=> Array
     #   resp.cluster_info.client_authentication.tls.certificate_authority_arn_list[0] #=> String
     #   resp.cluster_info.cluster_arn #=> String
@@ -611,14 +654,15 @@ module Aws::Kafka
     #   resp.cluster_info.encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
     #   resp.cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
     #   resp.cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
-    #   resp.cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
     #   resp.cluster_info.number_of_broker_nodes #=> Integer
     #   resp.cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
-    #   resp.cluster_info.state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #   resp.cluster_info.state #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "MAINTENANCE", "REBOOTING_BROKER", "UPDATING"
     #   resp.cluster_info.tags #=> Hash
     #   resp.cluster_info.tags["__string"] #=> String
     #   resp.cluster_info.zookeeper_connect_string #=> String
+    #   resp.cluster_info.zookeeper_connect_string_tls #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeCluster AWS API Documentation
     #
@@ -665,7 +709,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info.source_cluster_info.number_of_broker_nodes #=> Integer
     #   resp.cluster_operation_info.source_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
-    #   resp.cluster_operation_info.source_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_operation_info.source_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
     #   resp.cluster_operation_info.source_cluster_info.kafka_version #=> String
     #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
@@ -682,7 +726,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info.target_cluster_info.number_of_broker_nodes #=> Integer
     #   resp.cluster_operation_info.target_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
-    #   resp.cluster_operation_info.target_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_operation_info.target_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
     #   resp.cluster_operation_info.target_cluster_info.kafka_version #=> String
     #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
@@ -781,6 +825,42 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Disassociates one or more Scram Secrets from an Amazon MSK cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [required, Array<String>] :secret_arn_list
+    #   List of AWS Secrets Manager secret ARNs.
+    #
+    # @return [Types::BatchDisassociateScramSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDisassociateScramSecretResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::BatchDisassociateScramSecretResponse#unprocessed_scram_secrets #unprocessed_scram_secrets} => Array&lt;Types::UnprocessedScramSecret&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_disassociate_scram_secret({
+    #     cluster_arn: "__string", # required
+    #     secret_arn_list: ["__string"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.unprocessed_scram_secrets #=> Array
+    #   resp.unprocessed_scram_secrets[0].error_code #=> String
+    #   resp.unprocessed_scram_secrets[0].error_message #=> String
+    #   resp.unprocessed_scram_secrets[0].secret_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BatchDisassociateScramSecret AWS API Documentation
+    #
+    # @overload batch_disassociate_scram_secret(params = {})
+    # @param [Hash] params ({})
+    def batch_disassociate_scram_secret(params = {}, options = {})
+      req = build_request(:batch_disassociate_scram_secret, params)
+      req.send_request(options)
+    end
+
     # A list of brokers that a client application can use to bootstrap.
     #
     # @option params [required, String] :cluster_arn
@@ -789,6 +869,7 @@ module Aws::Kafka
     #
     #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string #bootstrap_broker_string} => String
     #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_tls #bootstrap_broker_string_tls} => String
+    #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_sasl_scram #bootstrap_broker_string_sasl_scram} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -800,6 +881,7 @@ module Aws::Kafka
     #
     #   resp.bootstrap_broker_string #=> String
     #   resp.bootstrap_broker_string_tls #=> String
+    #   resp.bootstrap_broker_string_sasl_scram #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetBootstrapBrokers AWS API Documentation
     #
@@ -888,7 +970,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].source_cluster_info.number_of_broker_nodes #=> Integer
     #   resp.cluster_operation_info_list[0].source_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
-    #   resp.cluster_operation_info_list[0].source_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_operation_info_list[0].source_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
     #   resp.cluster_operation_info_list[0].source_cluster_info.kafka_version #=> String
     #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
@@ -905,7 +987,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].target_cluster_info.number_of_broker_nodes #=> Integer
     #   resp.cluster_operation_info_list[0].target_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
-    #   resp.cluster_operation_info_list[0].target_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_operation_info_list[0].target_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
     #   resp.cluster_operation_info_list[0].target_cluster_info.kafka_version #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
@@ -959,6 +1041,7 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].broker_node_group_info.security_groups #=> Array
     #   resp.cluster_info_list[0].broker_node_group_info.security_groups[0] #=> String
     #   resp.cluster_info_list[0].broker_node_group_info.storage_info.ebs_storage_info.volume_size #=> Integer
+    #   resp.cluster_info_list[0].client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_info_list[0].client_authentication.tls.certificate_authority_arn_list #=> Array
     #   resp.cluster_info_list[0].client_authentication.tls.certificate_authority_arn_list[0] #=> String
     #   resp.cluster_info_list[0].cluster_arn #=> String
@@ -978,14 +1061,15 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
     #   resp.cluster_info_list[0].encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
     #   resp.cluster_info_list[0].encryption_info.encryption_in_transit.in_cluster #=> Boolean
-    #   resp.cluster_info_list[0].enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_info_list[0].enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
     #   resp.cluster_info_list[0].number_of_broker_nodes #=> Integer
     #   resp.cluster_info_list[0].open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_info_list[0].open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
-    #   resp.cluster_info_list[0].state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "FAILED"
+    #   resp.cluster_info_list[0].state #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "MAINTENANCE", "REBOOTING_BROKER", "UPDATING"
     #   resp.cluster_info_list[0].tags #=> Hash
     #   resp.cluster_info_list[0].tags["__string"] #=> String
     #   resp.cluster_info_list[0].zookeeper_connect_string #=> String
+    #   resp.cluster_info_list[0].zookeeper_connect_string_tls #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClusters AWS API Documentation
@@ -1170,6 +1254,45 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def list_nodes(params = {}, options = {})
       req = build_request(:list_nodes, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the Scram Secrets associated with an Amazon MSK
+    # cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListScramSecretsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListScramSecretsResponse#next_token #next_token} => String
+    #   * {Types::ListScramSecretsResponse#secret_arn_list #secret_arn_list} => Array&lt;String&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_scram_secrets({
+    #     cluster_arn: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.secret_arn_list #=> Array
+    #   resp.secret_arn_list[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListScramSecrets AWS API Documentation
+    #
+    # @overload list_scram_secrets(params = {})
+    # @param [Hash] params ({})
+    def list_scram_secrets(params = {}, options = {})
+      req = build_request(:list_scram_secrets, params)
       req.send_request(options)
     end
 
@@ -1532,7 +1655,7 @@ module Aws::Kafka
     #   resp = client.update_monitoring({
     #     cluster_arn: "__string", # required
     #     current_version: "__string", # required
-    #     enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER
+    #     enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
     #     open_monitoring: {
     #       prometheus: { # required
     #         jmx_exporter: {
@@ -1589,7 +1712,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

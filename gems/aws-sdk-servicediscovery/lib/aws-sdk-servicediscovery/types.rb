@@ -502,6 +502,9 @@ module Aws::ServiceDiscovery
     #         query_parameters: {
     #           "AttrKey" => "AttrValue",
     #         },
+    #         optional_parameters: {
+    #           "AttrKey" => "AttrValue",
+    #         },
     #         health_status: "HEALTHY", # accepts HEALTHY, UNHEALTHY, ALL
     #       }
     #
@@ -523,10 +526,18 @@ module Aws::ServiceDiscovery
     #   @return [Integer]
     #
     # @!attribute [rw] query_parameters
-    #   A string map that contains attributes with values that you can use
-    #   to filter instances by any custom attribute that you specified when
-    #   you registered the instance. Only instances that match all the
-    #   specified key/value pairs will be returned.
+    #   Filters to scope the results based on custom attributes for the
+    #   instance. For example, `\{version=v1, az=1a\}`. Only instances that
+    #   match all the specified key-value pairs will be returned.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] optional_parameters
+    #   Opportunistic filters to scope the results based on custom
+    #   attributes. If there are instances that match both the filters
+    #   specified in both the `QueryParameters` parameter and this
+    #   parameter, they are returned. Otherwise, these filters are ignored
+    #   and only instances that match the filters specified in the
+    #   `QueryParameters` parameter are returned.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] health_status
@@ -540,6 +551,7 @@ module Aws::ServiceDiscovery
       :service_name,
       :max_results,
       :query_parameters,
+      :optional_parameters,
       :health_status)
       SENSITIVE = []
       include Aws::Structure
@@ -1261,20 +1273,19 @@ module Aws::ServiceDiscovery
     #       }
     #
     # @!attribute [rw] failure_threshold
+    #   This parameter has been deprecated and is always set to 1. AWS Cloud
+    #   Map waits for approximately 30 seconds after receiving an
+    #   `UpdateInstanceCustomHealthStatus` request before changing the
+    #   status of the service instance.
+    #
     #   The number of 30-second intervals that you want AWS Cloud Map to
     #   wait after receiving an `UpdateInstanceCustomHealthStatus` request
-    #   before it changes the health status of a service instance. For
-    #   example, suppose you specify a value of `2` for `FailureTheshold`,
-    #   and then your application sends an
-    #   `UpdateInstanceCustomHealthStatus` request. AWS Cloud Map waits for
-    #   approximately 60 seconds (2 x 30) before changing the status of the
-    #   service instance based on that request.
+    #   before it changes the health status of a service instance.
     #
     #   Sending a second or subsequent `UpdateInstanceCustomHealthStatus`
-    #   request with the same value before `FailureThreshold x 30` seconds
-    #   has passed doesn't accelerate the change. AWS Cloud Map still waits
-    #   `FailureThreshold x 30` seconds after the first request to make the
-    #   change.
+    #   request with the same value before 30 seconds has passed doesn't
+    #   accelerate the change. AWS Cloud Map still waits `30` seconds after
+    #   the first request to make the change.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/HealthCheckCustomConfig AWS API Documentation

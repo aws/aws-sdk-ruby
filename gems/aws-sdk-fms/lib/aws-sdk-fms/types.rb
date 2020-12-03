@@ -267,8 +267,9 @@ module Aws::FMS
     # @!attribute [rw] resource_type
     #   The resource type. This is in the format shown in the [AWS Resource
     #   Types Reference][1]. For example:
-    #   `AWS::ElasticLoadBalancingV2::LoadBalancer` or
-    #   `AWS::CloudFront::Distribution`.
+    #   `AWS::ElasticLoadBalancingV2::LoadBalancer`,
+    #   `AWS::CloudFront::Distribution`, or
+    #   `AWS::NetworkFirewall::FirewallPolicy`.
     #
     #
     #
@@ -785,8 +786,9 @@ module Aws::FMS
     # @!attribute [rw] resource_type
     #   The resource type. This is in the format shown in the [AWS Resource
     #   Types Reference][1]. Supported resource types are:
-    #   `AWS::EC2::Instance`, `AWS::EC2::NetworkInterface`, or
-    #   `AWS::EC2::SecurityGroup`.
+    #   `AWS::EC2::Instance`, `AWS::EC2::NetworkInterface`,
+    #   `AWS::EC2::SecurityGroup`, `AWS::NetworkFirewall::FirewallPolicy`,
+    #   and `AWS::EC2::Subnet`.
     #
     #
     #
@@ -1231,6 +1233,173 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # Violation details for AWS Network Firewall for a subnet that's not
+    # associated to the expected Firewall Manager managed route table.
+    #
+    # @!attribute [rw] violation_target
+    #   The ID of the AWS Network Firewall or VPC resource that's in
+    #   violation.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc
+    #   The resource ID of the VPC associated with a violating subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone of a violating subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_route_table
+    #   The resource ID of the current route table that's associated with
+    #   the subnet, if one is available.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_route_table
+    #   The resource ID of the route table that should be associated with
+    #   the subnet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/NetworkFirewallMissingExpectedRTViolation AWS API Documentation
+    #
+    class NetworkFirewallMissingExpectedRTViolation < Struct.new(
+      :violation_target,
+      :vpc,
+      :availability_zone,
+      :current_route_table,
+      :expected_route_table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Violation details for AWS Network Firewall for a subnet that doesn't
+    # have a Firewall Manager managed firewall in its VPC.
+    #
+    # @!attribute [rw] violation_target
+    #   The ID of the AWS Network Firewall or VPC resource that's in
+    #   violation.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc
+    #   The resource ID of the VPC associated with a violating subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone of a violating subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_violation_reason
+    #   The reason the resource has this violation, if one is available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/NetworkFirewallMissingFirewallViolation AWS API Documentation
+    #
+    class NetworkFirewallMissingFirewallViolation < Struct.new(
+      :violation_target,
+      :vpc,
+      :availability_zone,
+      :target_violation_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Violation details for AWS Network Firewall for an Availability Zone
+    # that's missing the expected Firewall Manager managed subnet.
+    #
+    # @!attribute [rw] violation_target
+    #   The ID of the AWS Network Firewall or VPC resource that's in
+    #   violation.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc
+    #   The resource ID of the VPC associated with a violating subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone of a violating subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_violation_reason
+    #   The reason the resource has this violation, if one is available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/NetworkFirewallMissingSubnetViolation AWS API Documentation
+    #
+    class NetworkFirewallMissingSubnetViolation < Struct.new(
+      :violation_target,
+      :vpc,
+      :availability_zone,
+      :target_violation_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition of the AWS Network Firewall firewall policy.
+    #
+    # @!attribute [rw] stateless_rule_groups
+    #   The stateless rule groups that are used in the Network Firewall
+    #   firewall policy.
+    #   @return [Array<Types::StatelessRuleGroup>]
+    #
+    # @!attribute [rw] stateless_default_actions
+    #   The actions to take on packets that don't match any of the
+    #   stateless rule groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stateless_fragment_default_actions
+    #   The actions to take on packet fragments that don't match any of the
+    #   stateless rule groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stateless_custom_actions
+    #   Names of custom actions that are available for use in the stateless
+    #   default actions settings.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stateful_rule_groups
+    #   The stateful rule groups that are used in the Network Firewall
+    #   firewall policy.
+    #   @return [Array<Types::StatefulRuleGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/NetworkFirewallPolicyDescription AWS API Documentation
+    #
+    class NetworkFirewallPolicyDescription < Struct.new(
+      :stateless_rule_groups,
+      :stateless_default_actions,
+      :stateless_fragment_default_actions,
+      :stateless_custom_actions,
+      :stateful_rule_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Violation details for AWS Network Firewall for a firewall policy that
+    # has a different NetworkFirewallPolicyDescription than is required by
+    # the Firewall Manager policy.
+    #
+    # @!attribute [rw] violation_target
+    #   The ID of the AWS Network Firewall or VPC resource that's in
+    #   violation.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_policy_description
+    #   The policy that's currently in use in the individual account.
+    #   @return [Types::NetworkFirewallPolicyDescription]
+    #
+    # @!attribute [rw] expected_policy_description
+    #   The policy that should be in use in the individual account in order
+    #   to be compliant.
+    #   @return [Types::NetworkFirewallPolicyDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/NetworkFirewallPolicyModifiedViolation AWS API Documentation
+    #
+    class NetworkFirewallPolicyModifiedViolation < Struct.new(
+      :violation_target,
+      :current_policy_description,
+      :expected_policy_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The reference rule that partially matches the `ViolationTarget` rule
     # and violation reason.
     #
@@ -1262,7 +1431,7 @@ module Aws::FMS
     #         policy_name: "ResourceName", # required
     #         policy_update_token: "PolicyUpdateToken",
     #         security_service_policy_data: { # required
-    #           type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT
+    #           type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL
     #           managed_service_data: "ManagedServiceData",
     #         },
     #         resource_type: "ResourceType", # required
@@ -1315,7 +1484,8 @@ module Aws::FMS
     #   valid values are `AWS::EC2::SecurityGroup`,
     #   `AWS::EC2::NetworkInterface`, and `AWS::EC2::Instance`. For a
     #   security group usage audit policy, the value is
-    #   `AWS::EC2::SecurityGroup`.
+    #   `AWS::EC2::SecurityGroup`. For an AWS Network Firewall policy, the
+    #   value is `AWS::EC2::VPC`.
     #
     #
     #
@@ -1550,7 +1720,8 @@ module Aws::FMS
     #   valid values are `AWS::EC2::SecurityGroup`,
     #   `AWS::EC2::NetworkInterface`, and `AWS::EC2::Instance`. For a
     #   security group usage audit policy, the value is
-    #   `AWS::EC2::SecurityGroup`.
+    #   `AWS::EC2::SecurityGroup`. For an AWS Network Firewall policy, the
+    #   value is `AWS::EC2::VPC`.
     #
     #
     #
@@ -1780,7 +1951,7 @@ module Aws::FMS
     #           policy_name: "ResourceName", # required
     #           policy_update_token: "PolicyUpdateToken",
     #           security_service_policy_data: { # required
-    #             type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT
+    #             type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL
     #             managed_service_data: "ManagedServiceData",
     #           },
     #           resource_type: "ResourceType", # required
@@ -1966,12 +2137,41 @@ module Aws::FMS
     #   Violation details for an EC2 instance.
     #   @return [Types::AwsEc2InstanceViolation]
     #
+    # @!attribute [rw] network_firewall_missing_firewall_violation
+    #   Violation detail for an Network Firewall policy that indicates that
+    #   a subnet has no Firewall Manager managed firewall in its VPC.
+    #   @return [Types::NetworkFirewallMissingFirewallViolation]
+    #
+    # @!attribute [rw] network_firewall_missing_subnet_violation
+    #   Violation detail for an Network Firewall policy that indicates that
+    #   an Availability Zone is missing the expected Firewall Manager
+    #   managed subnet.
+    #   @return [Types::NetworkFirewallMissingSubnetViolation]
+    #
+    # @!attribute [rw] network_firewall_missing_expected_rt_violation
+    #   Violation detail for an Network Firewall policy that indicates that
+    #   a subnet is not associated with the expected Firewall Manager
+    #   managed route table.
+    #   @return [Types::NetworkFirewallMissingExpectedRTViolation]
+    #
+    # @!attribute [rw] network_firewall_policy_modified_violation
+    #   Violation detail for an Network Firewall policy that indicates that
+    #   a firewall policy in an individual account has been modified in a
+    #   way that makes it noncompliant. For example, the individual account
+    #   owner might have deleted a rule group, changed the priority of a
+    #   stateless rule group, or changed a policy default action.
+    #   @return [Types::NetworkFirewallPolicyModifiedViolation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ResourceViolation AWS API Documentation
     #
     class ResourceViolation < Struct.new(
       :aws_vpc_security_group_violation,
       :aws_ec2_network_interface_violation,
-      :aws_ec2_instance_violation)
+      :aws_ec2_instance_violation,
+      :network_firewall_missing_firewall_violation,
+      :network_firewall_missing_subnet_violation,
+      :network_firewall_missing_expected_rt_violation,
+      :network_firewall_policy_modified_violation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2055,7 +2255,7 @@ module Aws::FMS
     #   data as a hash:
     #
     #       {
-    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT
+    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL
     #         managed_service_data: "ManagedServiceData",
     #       }
     #
@@ -2074,29 +2274,36 @@ module Aws::FMS
     #   JSON format. For service type `SHIELD_ADVANCED`, this is an empty
     #   string.
     #
+    #   * Example: `NETWORK_FIREWALL`
+    #
+    #     `"\{"type":"NETWORK_FIREWALL","networkFirewallStatelessRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-west-1:1234567891011:stateless-rulegroup/rulegroup2","priority":10\}],"networkFirewallStatelessDefaultActions":["aws:pass","custom1"],"networkFirewallStatelessFragmentDefaultActions":["custom2","aws:pass"],"networkFirewallStatelessCustomActions":[\{"actionName":"custom1","actionDefinition":\{"publishMetricAction":\{"dimensions":[\{"value":"dimension1"\}]\}\}\},\{"actionName":"custom2","actionDefinition":\{"publishMetricAction":\{"dimensions":[\{"value":"dimension2"\}]\}\}\}],"networkFirewallStatefulRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-west-1:1234567891011:stateful-rulegroup/rulegroup1"\}],"networkFirewallOrchestrationConfig":\{"singleFirewallEndpointPerVPC":true,"allowedIPV4CidrList":["10.24.34.0/28"]\}
+    #     \}"`
+    #
     #   * Example: `WAFV2`
     #
-    #     `"ManagedServiceData":
-    #     "\{"type":"WAFV2","defaultAction":\{"type":"ALLOW"\},"preProcessRuleGroups":[\{"managedRuleGroupIdentifier":null,"ruleGroupArn":"rulegrouparn","overrideAction":\{"type":"COUNT"\},"excludeRules":[\{"name":"EntityName"\}],"ruleGroupType":"RuleGroup"\}],"postProcessRuleGroups":[\{"managedRuleGroupIdentifier":\{"managedRuleGroupName":"AWSManagedRulesAdminProtectionRuleSet","vendorName":"AWS"\},"ruleGroupArn":"rulegrouparn","overrideAction":\{"type":"NONE"\},"excludeRules":[],"ruleGroupType":"ManagedRuleGroup"\}],"overrideCustomerWebACLAssociation":false\}"`
+    #     `"\{"type":"WAFV2","preProcessRuleGroups":[\{"ruleGroupArn":null,"overrideAction":\{"type":"NONE"\},"managedRuleGroupIdentifier":\{"version":null,"vendorName":"AWS","managedRuleGroupName":"AWSManagedRulesAmazonIpReputationList"\},"ruleGroupType":"ManagedRuleGroup","excludeRules":[]\}],"postProcessRuleGroups":[],"defaultAction":\{"type":"ALLOW"\},"overrideCustomerWebACLAssociation":false,"loggingConfiguration":\{"logDestinationConfigs":["arn:aws:firehose:us-west-2:12345678912:deliverystream/aws-waf-logs-fms-admin-destination"],"redactedFields":[\{"redactedFieldType":"SingleHeader","redactedFieldValue":"Cookies"\},\{"redactedFieldType":"Method"\}]\}\}"`
+    #
+    #     In the `loggingConfiguration`, you can specify one
+    #     `logDestinationConfigs`, you can optionally provide up to 20
+    #     `redactedFields`, and the `RedactedFieldType` must be one of
+    #     `URI`, `QUERY_STRING`, `HEADER`, or `METHOD`.
     #
     #   * Example: `WAF Classic`
     #
-    #     `"ManagedServiceData": "\{"type": "WAF", "ruleGroups":
-    #     [\{"id": "12345678-1bcd-9012-efga-0987654321ab",
+    #     `"\{"type": "WAF", "ruleGroups":
+    #     [\{"id":"12345678-1bcd-9012-efga-0987654321ab",
     #     "overrideAction" : \{"type": "COUNT"\}\}],
-    #     "defaultAction": \{"type": "BLOCK"\}\}`
+    #     "defaultAction": \{"type": "BLOCK"\}\}"`
     #
     #   * Example: `SECURITY_GROUPS_COMMON`
     #
-    #     `"SecurityServicePolicyData":\{"Type":"SECURITY_GROUPS_COMMON","ManagedServiceData":"\{"type":"SECURITY_GROUPS_COMMON","revertManualSecurityGroupChanges":false,"exclusiveResourceSecurityGroupManagement":false,
+    #     `"\{"type":"SECURITY_GROUPS_COMMON","revertManualSecurityGroupChanges":false,"exclusiveResourceSecurityGroupManagement":false,
     #     "applyToAllEC2InstanceENIs":false,"securityGroups":[\{"id":"
-    #     sg-000e55995d61a06bd"\}]\}"\},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"\}`
+    #     sg-000e55995d61a06bd"\}]\}"`
     #
     #   * Example: `SECURITY_GROUPS_CONTENT_AUDIT`
     #
-    #     `"SecurityServicePolicyData":\{"Type":"SECURITY_GROUPS_CONTENT_AUDIT","ManagedServiceData":"\{"type":"SECURITY_GROUPS_CONTENT_AUDIT","securityGroups":[\{"id":"
-    #     sg-000e55995d61a06bd
-    #     "\}],"securityGroupAction":\{"type":"ALLOW"\}\}"\},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"\}`
+    #     `"\{"type":"SECURITY_GROUPS_CONTENT_AUDIT","securityGroups":[\{"id":"sg-000e55995d61a06bd"\}],"securityGroupAction":\{"type":"ALLOW"\}\}"`
     #
     #     The security group action for content audit can be `ALLOW` or
     #     `DENY`. For `ALLOW`, all in-scope security group rules must be
@@ -2107,8 +2314,7 @@ module Aws::FMS
     #
     #   * Example: `SECURITY_GROUPS_USAGE_AUDIT`
     #
-    #     `"SecurityServicePolicyData":\{"Type":"SECURITY_GROUPS_USAGE_AUDIT","ManagedServiceData":"\{"type":"SECURITY_GROUPS_USAGE_AUDIT","deleteUnusedSecurityGroups":true,"coalesceRedundantSecurityGroups":true\}"\},"RemediationEnabled":false,"Resou
-    #     rceType":"AWS::EC2::SecurityGroup"\}`
+    #     `"\{"type":"SECURITY_GROUPS_USAGE_AUDIT","deleteUnusedSecurityGroups":true,"coalesceRedundantSecurityGroups":true\}"`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/SecurityServicePolicyData AWS API Documentation
@@ -2116,6 +2322,53 @@ module Aws::FMS
     class SecurityServicePolicyData < Struct.new(
       :type,
       :managed_service_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # AWS Network Firewall stateful rule group, used in a
+    # NetworkFirewallPolicyDescription.
+    #
+    # @!attribute [rw] rule_group_name
+    #   The name of the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The resource ID of the rule group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/StatefulRuleGroup AWS API Documentation
+    #
+    class StatefulRuleGroup < Struct.new(
+      :rule_group_name,
+      :resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # AWS Network Firewall stateless rule group, used in a
+    # NetworkFirewallPolicyDescription.
+    #
+    # @!attribute [rw] rule_group_name
+    #   The name of the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The resource ID of the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The priority of the rule group. AWS Network Firewall evaluates the
+    #   stateless rule groups in a firewall policy starting from the lowest
+    #   priority setting.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/StatelessRuleGroup AWS API Documentation
+    #
+    class StatelessRuleGroup < Struct.new(
+      :rule_group_name,
+      :resource_id,
+      :priority)
       SENSITIVE = []
       include Aws::Structure
     end

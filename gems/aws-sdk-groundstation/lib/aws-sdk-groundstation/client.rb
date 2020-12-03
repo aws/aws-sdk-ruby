@@ -703,7 +703,7 @@ module Aws::GroundStation
     # @example Response structure
     #
     #   resp.contact_id #=> String
-    #   resp.contact_status #=> String, one of "AVAILABLE", "AWS_CANCELLED", "CANCELLED", "CANCELLING", "COMPLETED", "FAILED", "FAILED_TO_SCHEDULE", "PASS", "POSTPASS", "PREPASS", "SCHEDULED", "SCHEDULING"
+    #   resp.contact_status #=> String, one of "AVAILABLE", "AWS_CANCELLED", "AWS_FAILED", "CANCELLED", "CANCELLING", "COMPLETED", "FAILED", "FAILED_TO_SCHEDULE", "PASS", "POSTPASS", "PREPASS", "SCHEDULED", "SCHEDULING"
     #   resp.dataflow_list #=> Array
     #   resp.dataflow_list[0].destination.config_details.antenna_demod_decode_details.output_node #=> String
     #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.address.name #=> String
@@ -719,6 +719,7 @@ module Aws::GroundStation
     #   resp.dataflow_list[0].destination.config_id #=> String
     #   resp.dataflow_list[0].destination.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "antenna-uplink", "dataflow-endpoint", "tracking", "uplink-echo"
     #   resp.dataflow_list[0].destination.dataflow_destination_region #=> String
+    #   resp.dataflow_list[0].error_message #=> String
     #   resp.dataflow_list[0].source.config_details.antenna_demod_decode_details.output_node #=> String
     #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.address.name #=> String
     #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.address.port #=> Integer
@@ -1080,14 +1081,14 @@ module Aws::GroundStation
     #     next_token: "String",
     #     satellite_arn: "satelliteArn",
     #     start_time: Time.now, # required
-    #     status_list: ["AVAILABLE"], # required, accepts AVAILABLE, AWS_CANCELLED, CANCELLED, CANCELLING, COMPLETED, FAILED, FAILED_TO_SCHEDULE, PASS, POSTPASS, PREPASS, SCHEDULED, SCHEDULING
+    #     status_list: ["AVAILABLE"], # required, accepts AVAILABLE, AWS_CANCELLED, AWS_FAILED, CANCELLED, CANCELLING, COMPLETED, FAILED, FAILED_TO_SCHEDULE, PASS, POSTPASS, PREPASS, SCHEDULED, SCHEDULING
     #   })
     #
     # @example Response structure
     #
     #   resp.contact_list #=> Array
     #   resp.contact_list[0].contact_id #=> String
-    #   resp.contact_list[0].contact_status #=> String, one of "AVAILABLE", "AWS_CANCELLED", "CANCELLED", "CANCELLING", "COMPLETED", "FAILED", "FAILED_TO_SCHEDULE", "PASS", "POSTPASS", "PREPASS", "SCHEDULED", "SCHEDULING"
+    #   resp.contact_list[0].contact_status #=> String, one of "AVAILABLE", "AWS_CANCELLED", "AWS_FAILED", "CANCELLED", "CANCELLING", "COMPLETED", "FAILED", "FAILED_TO_SCHEDULE", "PASS", "POSTPASS", "PREPASS", "SCHEDULED", "SCHEDULING"
     #   resp.contact_list[0].end_time #=> Time
     #   resp.contact_list[0].error_message #=> String
     #   resp.contact_list[0].ground_station #=> String
@@ -1592,7 +1593,7 @@ module Aws::GroundStation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-groundstation'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

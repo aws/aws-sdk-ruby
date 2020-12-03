@@ -1383,6 +1383,10 @@ module Aws::RoboMaker
     #   A map that contains tag keys and tag values that are attached to the
     #   world generator job.
     #
+    # @option params [Hash<String,String>] :world_tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   generated worlds.
+    #
     # @return [Types::CreateWorldGenerationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorldGenerationJobResponse#arn #arn} => String
@@ -1393,6 +1397,7 @@ module Aws::RoboMaker
     #   * {Types::CreateWorldGenerationJobResponse#template #template} => String
     #   * {Types::CreateWorldGenerationJobResponse#world_count #world_count} => Types::WorldCount
     #   * {Types::CreateWorldGenerationJobResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateWorldGenerationJobResponse#world_tags #world_tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1404,6 +1409,9 @@ module Aws::RoboMaker
     #       interior_count_per_floorplan: 1,
     #     },
     #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     world_tags: {
     #       "TagKey" => "TagValue",
     #     },
     #   })
@@ -1420,6 +1428,8 @@ module Aws::RoboMaker
     #   resp.world_count.interior_count_per_floorplan #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.world_tags #=> Hash
+    #   resp.world_tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateWorldGenerationJob AWS API Documentation
     #
@@ -2289,6 +2299,7 @@ module Aws::RoboMaker
     #   * {Types::DescribeWorldGenerationJobResponse#world_count #world_count} => Types::WorldCount
     #   * {Types::DescribeWorldGenerationJobResponse#finished_worlds_summary #finished_worlds_summary} => Types::FinishedWorldsSummary
     #   * {Types::DescribeWorldGenerationJobResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeWorldGenerationJobResponse#world_tags #world_tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2317,6 +2328,8 @@ module Aws::RoboMaker
     #   resp.finished_worlds_summary.failure_summary.failures[0].failure_count #=> Integer
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.world_tags #=> Hash
+    #   resp.world_tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorldGenerationJob AWS API Documentation
     #
@@ -3845,7 +3858,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -20,6 +20,9 @@
   "Amplify": {
     "models": "amplify/2017-07-25"
   },
+  "AmplifyBackend": {
+    "models": "amplifybackend/2020-08-11"
+  },
   "ApiGatewayManagementApi": {
     "models": "apigatewaymanagementapi/2018-11-29"
   },
@@ -29,8 +32,14 @@
   "AppConfig": {
     "models": "appconfig/2019-10-09"
   },
+  "AppIntegrationsService": {
+    "models": "appintegrations/2020-07-29"
+  },
   "AppMesh": {
     "models": "appmesh/2019-01-25"
+  },
+  "AppRegistry": {
+    "models": "servicecatalog-appregistry/2020-06-24"
   },
   "AppStream": {
     "models": "appstream/2016-12-01"
@@ -178,6 +187,9 @@
   "Connect": {
     "models": "connect/2017-08-08"
   },
+  "ConnectContactLens": {
+    "models": "connect-contact-lens/2020-08-21"
+  },
   "ConnectParticipant": {
     "models": "connectparticipant/2018-09-07"
   },
@@ -186,6 +198,9 @@
   },
   "CostandUsageReportService": {
     "models": "cur/2017-01-06"
+  },
+  "CustomerProfiles": {
+    "models": "customer-profiles/2020-08-15"
   },
   "DAX": {
     "models": "dax/2017-04-19"
@@ -207,6 +222,9 @@
   },
   "Detective": {
     "models": "detective/2018-10-26"
+  },
+  "DevOpsGuru": {
+    "models": "devops-guru/2020-12-01"
   },
   "DeviceFarm": {
     "models": "devicefarm/2015-06-23"
@@ -252,6 +270,9 @@
   },
   "ECR": {
     "models": "ecr/2015-09-21"
+  },
+  "ECRPublic": {
+    "models": "ecr-public/2020-10-30"
   },
   "ECS": {
     "models": "ecs/2014-11-13"
@@ -323,6 +344,9 @@
   },
   "Glue": {
     "models": "glue/2017-03-31"
+  },
+  "GlueDataBrew": {
+    "models": "databrew/2017-07-25"
   },
   "Greengrass": {
     "models": "greengrass/2017-06-07"
@@ -442,11 +466,17 @@
   "Lightsail": {
     "models": "lightsail/2016-11-28"
   },
+  "LookoutforVision": {
+    "models": "lookoutvision/2020-11-20"
+  },
   "MQ": {
     "models": "mq/2017-11-27"
   },
   "MTurk": {
     "models": "mturk-requester/2017-01-17"
+  },
+  "MWAA": {
+    "models": "mwaa/2020-07-01"
   },
   "MachineLearning": {
     "models": "machinelearning/2014-12-12",
@@ -513,6 +543,9 @@
     "addPlugins": [
       "Aws::Neptune::Plugins::CrossRegionCopying"
     ]
+  },
+  "NetworkFirewall": {
+    "models": "network-firewall/2020-11-12"
   },
   "NetworkManager": {
     "models": "networkmanager/2019-07-05"
@@ -620,23 +653,23 @@
       "Aws::Plugins::SignatureV4"
     ],
     "addPlugins": [
-      "Aws::S3::Plugins::IADRegionalEndpoint",
       "Aws::S3::Plugins::Accelerate",
-      "Aws::S3::Plugins::Dualstack",
-      "Aws::S3::Plugins::BucketARN",
+      "Aws::S3::Plugins::ARN",
       "Aws::S3::Plugins::BucketDns",
+      "Aws::S3::Plugins::BucketNameRestrictions",
+      "Aws::S3::Plugins::Dualstack",
       "Aws::S3::Plugins::Expect100Continue",
-      "Aws::S3::Plugins::Http200Errors",
-      "Aws::S3::Plugins::S3HostId",
       "Aws::S3::Plugins::GetBucketLocationFix",
+      "Aws::S3::Plugins::Http200Errors",
+      "Aws::S3::Plugins::IADRegionalEndpoint",
       "Aws::S3::Plugins::LocationConstraint",
       "Aws::S3::Plugins::Md5s",
       "Aws::S3::Plugins::Redirects",
-      "Aws::S3::Plugins::SseCpk",
-      "Aws::S3::Plugins::UrlEncodedKeys",
+      "Aws::S3::Plugins::S3HostId",
       "Aws::S3::Plugins::S3Signer",
-      "Aws::S3::Plugins::BucketNameRestrictions",
-      "Aws::S3::Plugins::StreamingRetry"
+      "Aws::S3::Plugins::SseCpk",
+      "Aws::S3::Plugins::StreamingRetry",
+      "Aws::S3::Plugins::UrlEncodedKeys"
     ]
   },
   "S3Control": {
@@ -648,11 +681,14 @@
       "Aws::Plugins::SignatureV4"
     ],
     "addPlugins": [
-      "Aws::S3Control::Plugins::S3ControlDns",
-      "Aws::S3Control::Plugins::S3Signer",
+      "Aws::S3Control::Plugins::ARN",
       "Aws::S3Control::Plugins::Dualstack",
+      "Aws::S3Control::Plugins::S3ControlSigner",
       "Aws::S3Control::Plugins::S3HostId"
     ]
+  },
+  "S3Outposts": {
+    "models": "s3outposts/2017-07-25"
   },
   "SES": {
     "models": "email/2010-12-01"
@@ -704,6 +740,9 @@
   },
   "SageMaker": {
     "models": "sagemaker/2017-07-24"
+  },
+  "SageMakerFeatureStoreRuntime": {
+    "models": "sagemaker-featurestore-runtime/2020-07-01"
   },
   "SageMakerRuntime": {
     "models": "runtime.sagemaker/2017-05-13"
@@ -758,6 +797,12 @@
   },
   "Textract": {
     "models": "textract/2018-06-27"
+  },
+  "TimestreamQuery": {
+    "models": "timestream-query/2018-11-01"
+  },
+  "TimestreamWrite": {
+    "models": "timestream-write/2018-11-01"
   },
   "TranscribeService": {
     "models": "transcribe/2017-10-26"

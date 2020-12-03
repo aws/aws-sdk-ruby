@@ -1304,6 +1304,7 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.cluster_namespace_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -2495,6 +2496,7 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.cluster_namespace_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -2931,6 +2933,8 @@ module Aws::Redshift
     #
     #   * {Types::ClusterDbRevisionsMessage#marker #marker} => String
     #   * {Types::ClusterDbRevisionsMessage#cluster_db_revisions #cluster_db_revisions} => Array&lt;Types::ClusterDbRevision&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3605,6 +3609,8 @@ module Aws::Redshift
     #   * {Types::TrackListMessage#maintenance_tracks #maintenance_tracks} => Array&lt;Types::MaintenanceTrack&gt;
     #   * {Types::TrackListMessage#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_cluster_tracks({
@@ -3895,6 +3901,7 @@ module Aws::Redshift
     #   resp.clusters[0].next_maintenance_window_start_time #=> Time
     #   resp.clusters[0].resize_info.resize_type #=> String
     #   resp.clusters[0].resize_info.allow_cancel_resize #=> Boolean
+    #   resp.clusters[0].cluster_namespace_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5049,6 +5056,8 @@ module Aws::Redshift
     #   * {Types::SnapshotCopyGrantMessage#marker #marker} => String
     #   * {Types::SnapshotCopyGrantMessage#snapshot_copy_grants #snapshot_copy_grants} => Array&lt;Types::SnapshotCopyGrant&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_snapshot_copy_grants({
@@ -5112,6 +5121,8 @@ module Aws::Redshift
     #
     #   * {Types::DescribeSnapshotSchedulesOutputMessage#snapshot_schedules #snapshot_schedules} => Array&lt;Types::SnapshotSchedule&gt;
     #   * {Types::DescribeSnapshotSchedulesOutputMessage#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5205,6 +5216,8 @@ module Aws::Redshift
     #
     #   * {Types::TableRestoreStatusMessage#table_restore_status_details #table_restore_status_details} => Array&lt;Types::TableRestoreStatus&gt;
     #   * {Types::TableRestoreStatusMessage#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5341,6 +5354,8 @@ module Aws::Redshift
     #
     #   * {Types::TaggedResourceListMessage#tagged_resources #tagged_resources} => Array&lt;Types::TaggedResource&gt;
     #   * {Types::TaggedResourceListMessage#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5642,6 +5657,7 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.cluster_namespace_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -5876,6 +5892,7 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.cluster_namespace_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -6065,6 +6082,8 @@ module Aws::Redshift
     #
     #   * {Types::GetReservedNodeExchangeOfferingsOutputMessage#marker #marker} => String
     #   * {Types::GetReservedNodeExchangeOfferingsOutputMessage#reserved_node_offerings #reserved_node_offerings} => Array&lt;Types::ReservedNodeOffering&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6494,6 +6513,7 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.cluster_namespace_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -6625,6 +6645,7 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.cluster_namespace_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
     #
@@ -6763,6 +6784,7 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.cluster_namespace_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -6910,6 +6932,7 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.cluster_namespace_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenance AWS API Documentation
     #
@@ -7492,6 +7515,7 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.cluster_namespace_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -7722,6 +7746,7 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.cluster_namespace_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PauseCluster AWS API Documentation
     #
@@ -7915,6 +7940,7 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.cluster_namespace_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -8145,6 +8171,7 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.cluster_namespace_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster AWS API Documentation
     #
@@ -8522,6 +8549,7 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.cluster_namespace_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -8731,6 +8759,7 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.cluster_namespace_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResumeCluster AWS API Documentation
     #
@@ -9021,6 +9050,7 @@ module Aws::Redshift
     #   resp.cluster.next_maintenance_window_start_time #=> Time
     #   resp.cluster.resize_info.resize_type #=> String
     #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.cluster.cluster_namespace_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -9044,7 +9074,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

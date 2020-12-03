@@ -55,34 +55,52 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # Describes a specific Amazon FSx Administrative Action for the current
-    # Windows file system.
+    # Describes a specific Amazon FSx administrative action for the current
+    # Windows or Lustre file system.
     #
     # @!attribute [rw] administrative_action_type
     #   Describes the type of administrative action, as follows:
     #
     #   * `FILE_SYSTEM_UPDATE` - A file system update administrative action
     #     initiated by the user from the Amazon FSx console, API
-    #     (UpdateFileSystem), or CLI (update-file-system). A
+    #     (UpdateFileSystem), or CLI (update-file-system).
     #
     #   * `STORAGE_OPTIMIZATION` - Once the `FILE_SYSTEM_UPDATE` task to
     #     increase a file system's storage capacity completes successfully,
-    #     a `STORAGE_OPTIMIZATION` task starts. Storage optimization is the
-    #     process of migrating the file system data to the new, larger
-    #     disks. You can track the storage migration progress using the
+    #     a `STORAGE_OPTIMIZATION` task starts.
+    #
+    #     * For Windows, storage optimization is the process of migrating
+    #       the file system data to the new, larger disks.
+    #
+    #     * For Lustre, storage optimization consists of rebalancing the
+    #       data across the existing and newly added file servers.
+    #
+    #     You can track the storage optimization progress using the
     #     `ProgressPercent` property. When `STORAGE_OPTIMIZATION` completes
     #     successfully, the parent `FILE_SYSTEM_UPDATE` action status
     #     changes to `COMPLETED`. For more information, see [Managing
-    #     Storage Capacity][1].
+    #     storage capacity][1] in the *Amazon FSx for Windows File Server
+    #     User Guide* and [Managing storage and throughput capacity][2] in
+    #     the *Amazon FSx for Lustre User Guide*.
+    #
+    #   * `FILE_SYSTEM_ALIAS_ASSOCIATION` - A file system update to
+    #     associate a new DNS alias with the file system. For more
+    #     information, see .
+    #
+    #   * `FILE_SYSTEM_ALIAS_DISASSOCIATION` - A file system update to
+    #     disassociate a DNS alias from the file system. For more
+    #     information, see .
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
     #   @return [String]
     #
     # @!attribute [rw] progress_percent
     #   Provides the percent complete of a `STORAGE_OPTIMIZATION`
-    #   administrative action.
+    #   administrative action. Does not apply to any other administrative
+    #   action type.
     #   @return [Integer]
     #
     # @!attribute [rw] request_time
@@ -107,16 +125,20 @@ module Aws::FSx
     #   * `UPDATED_OPTIMIZING` - For a storage capacity increase update,
     #     Amazon FSx has updated the file system with the new storage
     #     capacity, and is now performing the storage optimization process.
-    #     For more information, see [Managing Storage Capacity][1].
+    #     For more information, see [Managing storage capacity][1] in the
+    #     *Amazon FSx for Windows File Server User Guide* and [Managing
+    #     storage and throughput capacity][2] in the *Amazon FSx for Lustre
+    #     User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
     #   @return [String]
     #
     # @!attribute [rw] target_file_system_values
-    #   Describes the target `StorageCapacity` or `ThroughputCapacity` value
-    #   provided in the `UpdateFileSystem` operation. Returned for
+    #   Describes the target value for the administration action, provided
+    #   in the `UpdateFileSystem` operation. Returned for
     #   `FILE_SYSTEM_UPDATE` administrative actions.
     #   @return [Types::FileSystem]
     #
@@ -140,7 +162,8 @@ module Aws::FSx
     # Provides information about a failed administrative action.
     #
     # @!attribute [rw] message
-    #   Error message providing details about the failure.
+    #   Error message providing details about the failed administrative
+    #   action.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AdministrativeActionFailureDetails AWS API Documentation
@@ -151,7 +174,150 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # A backup of an Amazon FSx for file system.
+    # A DNS alias that is associated with the file system. You can use a DNS
+    # alias to access a file system using user-defined DNS names, in
+    # addition to the default DNS name that Amazon FSx assigns to the file
+    # system. For more information, see [DNS aliases][1] in the *FSx for
+    # Windows File Server User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
+    #
+    # @!attribute [rw] name
+    #   The name of the DNS alias. The alias name has to meet the following
+    #   requirements:
+    #
+    #   * Formatted as a fully-qualified domain name (FQDN),
+    #     `hostname.domain`, for example, `accounting.example.com`.
+    #
+    #   * Can contain alphanumeric characters and the hyphen (-).
+    #
+    #   * Cannot start or end with a hyphen.
+    #
+    #   * Can start with a numeric.
+    #
+    #   For DNS names, Amazon FSx stores alphabetic characters as lowercase
+    #   letters (a-z), regardless of how you specify them: as uppercase
+    #   letters, lowercase letters, or the corresponding letters in escape
+    #   codes.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   Describes the state of the DNS alias.
+    #
+    #   * AVAILABLE - The DNS alias is associated with an Amazon FSx file
+    #     system.
+    #
+    #   * CREATING - Amazon FSx is creating the DNS alias and associating it
+    #     with the file system.
+    #
+    #   * CREATE\_FAILED - Amazon FSx was unable to associate the DNS alias
+    #     with the file system.
+    #
+    #   * DELETING - Amazon FSx is disassociating the DNS alias from the
+    #     file system and deleting it.
+    #
+    #   * DELETE\_FAILED - Amazon FSx was unable to disassocate the DNS
+    #     alias from the file system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/Alias AWS API Documentation
+    #
+    class Alias < Struct.new(
+      :name,
+      :lifecycle)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request object specifying one or more DNS alias names to associate
+    # with an Amazon FSx for Windows File Server file system.
+    #
+    # @note When making an API call, you may pass AssociateFileSystemAliasesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         file_system_id: "FileSystemId", # required
+    #         aliases: ["AlternateDNSName"], # required
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
+    #   an AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   Specifies the file system with which you want to associate one or
+    #   more DNS aliases.
+    #   @return [String]
+    #
+    # @!attribute [rw] aliases
+    #   An array of one or more DNS alias names to associate with the file
+    #   system. The alias name has to comply with the following formatting
+    #   requirements:
+    #
+    #   * Formatted as a fully-qualified domain name (FQDN), <i>
+    #     <code>hostname.domain</code> </i>, for example,
+    #     `accounting.corp.example.com`.
+    #
+    #   * Can contain alphanumeric characters and the hyphen (-).
+    #
+    #   * Cannot start or end with a hyphen.
+    #
+    #   * Can start with a numeric.
+    #
+    #   For DNS alias names, Amazon FSx stores alphabetic characters as
+    #   lowercase letters (a-z), regardless of how you specify them: as
+    #   uppercase letters, lowercase letters, or the corresponding letters
+    #   in escape codes.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AssociateFileSystemAliasesRequest AWS API Documentation
+    #
+    class AssociateFileSystemAliasesRequest < Struct.new(
+      :client_request_token,
+      :file_system_id,
+      :aliases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The system generated response showing the DNS aliases that Amazon FSx
+    # is attempting to associate with the file system. Use the API operation
+    # to monitor the status of the aliases Amazon FSx is associating with
+    # the file system. It can take up to 2.5 minutes for the alias status to
+    # change from `CREATING` to `AVAILABLE`.
+    #
+    # @!attribute [rw] aliases
+    #   An array of the DNS aliases that Amazon FSx is associating with the
+    #   file system.
+    #   @return [Array<Types::Alias>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AssociateFileSystemAliasesResponse AWS API Documentation
+    #
+    class AssociateFileSystemAliasesResponse < Struct.new(
+      :aliases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A backup of an Amazon FSx file system. For more information see:
+    #
+    # * [Working with backups for Windows file systems][1]
+    #
+    # * [Working with backups for Lustre file systems][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html
+    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html
     #
     # @!attribute [rw] backup_id
     #   The ID of the backup.
@@ -162,12 +328,16 @@ module Aws::FSx
     #
     #   * `AVAILABLE` - The backup is fully available.
     #
-    #   * `CREATING` - FSx is creating the backup.
+    #   * `PENDING` - For user-initiated backups on Lustre file systems
+    #     only; Amazon FSx has not started creating the backup.
     #
-    #   * `TRANSFERRING` - For Lustre file systems only; FSx is transferring
-    #     the backup to S3.
+    #   * `CREATING` - Amazon FSx is creating the backup.
     #
-    #   * `DELETED` - The backup was deleted is no longer available.
+    #   * `TRANSFERRING` - For user-initiated backups on Lustre file systems
+    #     only; Amazon FSx is transferring the backup to S3.
+    #
+    #   * `DELETED` - Amazon FSx deleted the backup and it is no longer
+    #     available.
     #
     #   * `FAILED` - Amazon FSx could not complete the backup.
     #   @return [String]
@@ -609,6 +779,7 @@ module Aws::FSx
     #           daily_automatic_backup_start_time: "DailyTime",
     #           automatic_backup_retention_days: 1,
     #           copy_tags_to_backups: false,
+    #           aliases: ["AlternateDNSName"],
     #         },
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
@@ -961,6 +1132,7 @@ module Aws::FSx
     #           daily_automatic_backup_start_time: "DailyTime",
     #           automatic_backup_retention_days: 1,
     #           copy_tags_to_backups: false,
+    #           aliases: ["AlternateDNSName"],
     #         },
     #         lustre_configuration: {
     #           weekly_maintenance_start_time: "WeeklyTime",
@@ -1139,6 +1311,7 @@ module Aws::FSx
     #         daily_automatic_backup_start_time: "DailyTime",
     #         automatic_backup_retention_days: 1,
     #         copy_tags_to_backups: false,
+    #         aliases: ["AlternateDNSName"],
     #       }
     #
     # @!attribute [rw] active_directory_id
@@ -1221,6 +1394,44 @@ module Aws::FSx
     #   system, regardless of this value.
     #   @return [Boolean]
     #
+    # @!attribute [rw] aliases
+    #   An array of one or more DNS alias names that you want to associate
+    #   with the Amazon FSx file system. Aliases allow you to use existing
+    #   DNS names to access the data in your Amazon FSx file system. You can
+    #   associate up to 50 aliases with a file system at any time. You can
+    #   associate additional DNS aliases after you create the file system
+    #   using the AssociateFileSystemAliases operation. You can remove DNS
+    #   aliases from the file system after it is created using the
+    #   DisassociateFileSystemAliases operation. You only need to specify
+    #   the alias name in the request payload.
+    #
+    #   For more information, see [Working with DNS Aliases][1] and
+    #   [Walkthrough 5: Using DNS aliases to access your file system][2],
+    #   including additional steps you must take to be able to access your
+    #   file system using a DNS alias.
+    #
+    #   An alias name has to meet the following requirements:
+    #
+    #   * Formatted as a fully-qualified domain name (FQDN),
+    #     `hostname.domain`, for example, `accounting.example.com`.
+    #
+    #   * Can contain alphanumeric characters and the hyphen (-).
+    #
+    #   * Cannot start or end with a hyphen.
+    #
+    #   * Can start with a numeric.
+    #
+    #   For DNS alias names, Amazon FSx stores alphabetic characters as
+    #   lowercase letters (a-z), regardless of how you specify them: as
+    #   uppercase letters, lowercase letters, or the corresponding letters
+    #   in escape codes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemWindowsConfiguration AWS API Documentation
     #
     class CreateFileSystemWindowsConfiguration < Struct.new(
@@ -1232,7 +1443,8 @@ module Aws::FSx
       :weekly_maintenance_start_time,
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
-      :copy_tags_to_backups)
+      :copy_tags_to_backups,
+      :aliases)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2017,6 +2229,81 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # The request object for `DescribeFileSystemAliases` operation.
+    #
+    # @note When making an API call, you may pass DescribeFileSystemAliasesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         file_system_id: "FileSystemId", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
+    #   an AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   The ID of the file system to return the associated DNS aliases for
+    #   (String).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of DNS aliases to return in the response (integer).
+    #   This parameter value must be greater than 0. The number of items
+    #   that Amazon FSx returns is the minimum of the `MaxResults` parameter
+    #   specified in the request and the service's internal maximum number
+    #   of items per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Opaque pagination token returned from a previous
+    #   `DescribeFileSystemAliases` operation (String). If a token is
+    #   included in the request, the action continues the list from where
+    #   the previous returning call left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileSystemAliasesRequest AWS API Documentation
+    #
+    class DescribeFileSystemAliasesRequest < Struct.new(
+      :client_request_token,
+      :file_system_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response object for `DescribeFileSystemAliases` operation.
+    #
+    # @!attribute [rw] aliases
+    #   An array of one or more DNS aliases currently associated with the
+    #   specified file system.
+    #   @return [Array<Types::Alias>]
+    #
+    # @!attribute [rw] next_token
+    #   Present if there are more DNS aliases than returned in the response
+    #   (String). You can use the `NextToken` value in a later request to
+    #   fetch additional descriptions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileSystemAliasesResponse AWS API Documentation
+    #
+    class DescribeFileSystemAliasesResponse < Struct.new(
+      :aliases,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request object for `DescribeFileSystems` operation.
     #
     # @note When making an API call, you may pass DescribeFileSystemsRequest
@@ -2078,6 +2365,66 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # The request object of DNS aliases to disassociate from an Amazon FSx
+    # for Windows File Server file system.
+    #
+    # @note When making an API call, you may pass DisassociateFileSystemAliasesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         file_system_id: "FileSystemId", # required
+    #         aliases: ["AlternateDNSName"], # required
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
+    #   an AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_id
+    #   Specifies the file system from which to disassociate the DNS
+    #   aliases.
+    #   @return [String]
+    #
+    # @!attribute [rw] aliases
+    #   An array of one or more DNS alias names to disassociate, or remove,
+    #   from the file system.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DisassociateFileSystemAliasesRequest AWS API Documentation
+    #
+    class DisassociateFileSystemAliasesRequest < Struct.new(
+      :client_request_token,
+      :file_system_id,
+      :aliases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The system generated response showing the DNS aliases that Amazon FSx
+    # is attempting to disassociate from the file system. Use the API
+    # operation to monitor the status of the aliases Amazon FSx is removing
+    # from the file system.
+    #
+    # @!attribute [rw] aliases
+    #   An array of one or more DNS aliases that Amazon FSx is attempting to
+    #   disassociate from the file system.
+    #   @return [Array<Types::Alias>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DisassociateFileSystemAliasesResponse AWS API Documentation
+    #
+    class DisassociateFileSystemAliasesResponse < Struct.new(
+      :aliases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A description of a specific Amazon FSx file system.
     #
     # @!attribute [rw] owner_id
@@ -2127,7 +2474,7 @@ module Aws::FSx
     #   @return [Types::FileSystemFailureDetails]
     #
     # @!attribute [rw] storage_capacity
-    #   The storage capacity of the file system in gigabytes (GB).
+    #   The storage capacity of the file system in gibibytes (GiB).
     #   @return [Integer]
     #
     # @!attribute [rw] storage_type
@@ -3089,18 +3436,40 @@ module Aws::FSx
     #
     # @!attribute [rw] storage_capacity
     #   Use this parameter to increase the storage capacity of an Amazon FSx
-    #   for Windows File Server file system. Specifies the storage capacity
-    #   target value, GiB, for the file system you're updating. The storage
-    #   capacity target value must be at least 10 percent (%) greater than
-    #   the current storage capacity value. In order to increase storage
-    #   capacity, the file system needs to have at least 16 MB/s of
-    #   throughput capacity. You cannot make a storage capacity increase
-    #   request if there is an existing storage capacity increase request in
-    #   progress. For more information, see [Managing Storage Capacity][1].
+    #   file system. Specifies the storage capacity target value, GiB, to
+    #   increase the storage capacity for the file system that you're
+    #   updating. You cannot make a storage capacity increase request if
+    #   there is an existing storage capacity increase request in progress.
+    #
+    #   For Windows file systems, the storage capacity target value must be
+    #   at least 10 percent (%) greater than the current storage capacity
+    #   value. In order to increase storage capacity, the file system must
+    #   have at least 16 MB/s of throughput capacity.
+    #
+    #   For Lustre file systems, the storage capacity target value can be
+    #   the following:
+    #
+    #   * For `SCRATCH_2` and `PERSISTENT_1 SSD` deployment types, valid
+    #     values are in multiples of 2400 GiB. The value must be greater
+    #     than the current storage capacity.
+    #
+    #   * For `PERSISTENT HDD` file systems, valid values are multiples of
+    #     6000 GiB for 12 MB/s/TiB file systems and multiples of 1800 GiB
+    #     for 40 MB/s/TiB file systems. The values must be greater than the
+    #     current storage capacity.
+    #
+    #   * For `SCRATCH_1` file systems, you cannot increase the storage
+    #     capacity.
+    #
+    #   For more information, see [Managing storage capacity][1] in the
+    #   *Amazon FSx for Windows File Server User Guide* and [Managing
+    #   storage and throughput capacity][2] in the *Amazon FSx for Lustre
+    #   User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
     #   @return [Integer]
     #
     # @!attribute [rw] windows_configuration
@@ -3331,6 +3700,23 @@ module Aws::FSx
     #   copied from the file system, regardless of this value.
     #   @return [Boolean]
     #
+    # @!attribute [rw] aliases
+    #   An array of one or more DNS aliases that are currently associated
+    #   with the Amazon FSx file system. Aliases allow you to use existing
+    #   DNS names to access the data in your Amazon FSx file system. You can
+    #   associate up to 50 aliases with a file system at any time. You can
+    #   associate additional DNS aliases after you create the file system
+    #   using the AssociateFileSystemAliases operation. You can remove DNS
+    #   aliases from the file system after it is created using the
+    #   DisassociateFileSystemAliases operation. You only need to specify
+    #   the alias name in the request payload. For more information, see
+    #   [DNS aliases][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
+    #   @return [Array<Types::Alias>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/WindowsFileSystemConfiguration AWS API Documentation
     #
     class WindowsFileSystemConfiguration < Struct.new(
@@ -3345,7 +3731,8 @@ module Aws::FSx
       :weekly_maintenance_start_time,
       :daily_automatic_backup_start_time,
       :automatic_backup_retention_days,
-      :copy_tags_to_backups)
+      :copy_tags_to_backups,
+      :aliases)
       SENSITIVE = []
       include Aws::Structure
     end

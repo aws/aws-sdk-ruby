@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2020-10-21)
+------------------
+
+* Feature - CloudFront adds support for managing the public keys for signed URLs and signed cookies directly in CloudFront (it no longer requires the AWS root account).
+
+1.45.0 (2020-10-21)
+------------------
+
+* Feature - CloudFront adds support for managing the public keys for signed URLs and signed cookies directly in CloudFront (it no longer requires the AWS root account).
+
+1.44.0 (2020-10-19)
+------------------
+
+* Feature - Amazon CloudFront adds support for Origin Shield.
+
+1.43.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2020-09-17)
+------------------
+
+* Feature - Documentation updates for CloudFront
+
+1.41.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.40.0 (2020-09-10)
 ------------------
 

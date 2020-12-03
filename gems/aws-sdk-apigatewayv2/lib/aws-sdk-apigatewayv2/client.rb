@@ -353,6 +353,8 @@ module Aws::ApiGatewayV2
     #
     # @option params [Boolean] :disable_schema_validation
     #
+    # @option params [Boolean] :disable_execute_api_endpoint
+    #
     # @option params [required, String] :name
     #   A string with a length between \[1-128\].
     #
@@ -396,6 +398,7 @@ module Aws::ApiGatewayV2
     #   * {Types::CreateApiResponse#created_date #created_date} => Time
     #   * {Types::CreateApiResponse#description #description} => String
     #   * {Types::CreateApiResponse#disable_schema_validation #disable_schema_validation} => Boolean
+    #   * {Types::CreateApiResponse#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
     #   * {Types::CreateApiResponse#import_info #import_info} => Array&lt;String&gt;
     #   * {Types::CreateApiResponse#name #name} => String
     #   * {Types::CreateApiResponse#protocol_type #protocol_type} => String
@@ -419,6 +422,7 @@ module Aws::ApiGatewayV2
     #     credentials_arn: "Arn",
     #     description: "StringWithLengthBetween0And1024",
     #     disable_schema_validation: false,
+    #     disable_execute_api_endpoint: false,
     #     name: "StringWithLengthBetween1And128", # required
     #     protocol_type: "WEBSOCKET", # required, accepts WEBSOCKET, HTTP
     #     route_key: "SelectionKey",
@@ -449,6 +453,7 @@ module Aws::ApiGatewayV2
     #   resp.created_date #=> Time
     #   resp.description #=> String
     #   resp.disable_schema_validation #=> Boolean
+    #   resp.disable_execute_api_endpoint #=> Boolean
     #   resp.import_info #=> Array
     #   resp.import_info[0] #=> String
     #   resp.name #=> String
@@ -675,6 +680,11 @@ module Aws::ApiGatewayV2
     # @option params [Array<Types::DomainNameConfiguration>] :domain_name_configurations
     #   The domain name configurations.
     #
+    # @option params [Types::MutualTlsAuthenticationInput] :mutual_tls_authentication
+    #   If specified, API Gateway performs two-way authentication between the
+    #   client and the server. Clients must present a trusted certificate to
+    #   access your API.
+    #
     # @option params [Hash<String,String>] :tags
     #   Represents a collection of tags associated with the resource.
     #
@@ -683,6 +693,7 @@ module Aws::ApiGatewayV2
     #   * {Types::CreateDomainNameResponse#api_mapping_selection_expression #api_mapping_selection_expression} => String
     #   * {Types::CreateDomainNameResponse#domain_name #domain_name} => String
     #   * {Types::CreateDomainNameResponse#domain_name_configurations #domain_name_configurations} => Array&lt;Types::DomainNameConfiguration&gt;
+    #   * {Types::CreateDomainNameResponse#mutual_tls_authentication #mutual_tls_authentication} => Types::MutualTlsAuthentication
     #   * {Types::CreateDomainNameResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -702,6 +713,10 @@ module Aws::ApiGatewayV2
     #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
     #       },
     #     ],
+    #     mutual_tls_authentication: {
+    #       truststore_uri: "UriWithLengthBetween1And2048",
+    #       truststore_version: "StringWithLengthBetween1And64",
+    #     },
     #     tags: {
     #       "__string" => "StringWithLengthBetween1And1600",
     #     },
@@ -721,6 +736,10 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.domain_name_configurations[0].hosted_zone_id #=> String
     #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
+    #   resp.mutual_tls_authentication.truststore_uri #=> String
+    #   resp.mutual_tls_authentication.truststore_version #=> String
+    #   resp.mutual_tls_authentication.truststore_warnings #=> Array
+    #   resp.mutual_tls_authentication.truststore_warnings[0] #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
@@ -1837,6 +1856,7 @@ module Aws::ApiGatewayV2
     #   * {Types::GetApiResponse#created_date #created_date} => Time
     #   * {Types::GetApiResponse#description #description} => String
     #   * {Types::GetApiResponse#disable_schema_validation #disable_schema_validation} => Boolean
+    #   * {Types::GetApiResponse#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
     #   * {Types::GetApiResponse#import_info #import_info} => Array&lt;String&gt;
     #   * {Types::GetApiResponse#name #name} => String
     #   * {Types::GetApiResponse#protocol_type #protocol_type} => String
@@ -1870,6 +1890,7 @@ module Aws::ApiGatewayV2
     #   resp.created_date #=> Time
     #   resp.description #=> String
     #   resp.disable_schema_validation #=> Boolean
+    #   resp.disable_execute_api_endpoint #=> Boolean
     #   resp.import_info #=> Array
     #   resp.import_info[0] #=> String
     #   resp.name #=> String
@@ -1997,6 +2018,7 @@ module Aws::ApiGatewayV2
     #   resp.items[0].created_date #=> Time
     #   resp.items[0].description #=> String
     #   resp.items[0].disable_schema_validation #=> Boolean
+    #   resp.items[0].disable_execute_api_endpoint #=> Boolean
     #   resp.items[0].import_info #=> Array
     #   resp.items[0].import_info[0] #=> String
     #   resp.items[0].name #=> String
@@ -2200,6 +2222,7 @@ module Aws::ApiGatewayV2
     #   * {Types::GetDomainNameResponse#api_mapping_selection_expression #api_mapping_selection_expression} => String
     #   * {Types::GetDomainNameResponse#domain_name #domain_name} => String
     #   * {Types::GetDomainNameResponse#domain_name_configurations #domain_name_configurations} => Array&lt;Types::DomainNameConfiguration&gt;
+    #   * {Types::GetDomainNameResponse#mutual_tls_authentication #mutual_tls_authentication} => Types::MutualTlsAuthentication
     #   * {Types::GetDomainNameResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -2222,6 +2245,10 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.domain_name_configurations[0].hosted_zone_id #=> String
     #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
+    #   resp.mutual_tls_authentication.truststore_uri #=> String
+    #   resp.mutual_tls_authentication.truststore_version #=> String
+    #   resp.mutual_tls_authentication.truststore_warnings #=> Array
+    #   resp.mutual_tls_authentication.truststore_warnings[0] #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
@@ -2265,6 +2292,10 @@ module Aws::ApiGatewayV2
     #   resp.items[0].domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.items[0].domain_name_configurations[0].hosted_zone_id #=> String
     #   resp.items[0].domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
+    #   resp.items[0].mutual_tls_authentication.truststore_uri #=> String
+    #   resp.items[0].mutual_tls_authentication.truststore_version #=> String
+    #   resp.items[0].mutual_tls_authentication.truststore_warnings #=> Array
+    #   resp.items[0].mutual_tls_authentication.truststore_warnings[0] #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["__string"] #=> String
     #   resp.next_token #=> String
@@ -3028,6 +3059,7 @@ module Aws::ApiGatewayV2
     #   * {Types::ImportApiResponse#created_date #created_date} => Time
     #   * {Types::ImportApiResponse#description #description} => String
     #   * {Types::ImportApiResponse#disable_schema_validation #disable_schema_validation} => Boolean
+    #   * {Types::ImportApiResponse#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
     #   * {Types::ImportApiResponse#import_info #import_info} => Array&lt;String&gt;
     #   * {Types::ImportApiResponse#name #name} => String
     #   * {Types::ImportApiResponse#protocol_type #protocol_type} => String
@@ -3063,6 +3095,7 @@ module Aws::ApiGatewayV2
     #   resp.created_date #=> Time
     #   resp.description #=> String
     #   resp.disable_schema_validation #=> Boolean
+    #   resp.disable_execute_api_endpoint #=> Boolean
     #   resp.import_info #=> Array
     #   resp.import_info[0] #=> String
     #   resp.name #=> String
@@ -3101,6 +3134,7 @@ module Aws::ApiGatewayV2
     #   * {Types::ReimportApiResponse#created_date #created_date} => Time
     #   * {Types::ReimportApiResponse#description #description} => String
     #   * {Types::ReimportApiResponse#disable_schema_validation #disable_schema_validation} => Boolean
+    #   * {Types::ReimportApiResponse#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
     #   * {Types::ReimportApiResponse#import_info #import_info} => Array&lt;String&gt;
     #   * {Types::ReimportApiResponse#name #name} => String
     #   * {Types::ReimportApiResponse#protocol_type #protocol_type} => String
@@ -3137,6 +3171,7 @@ module Aws::ApiGatewayV2
     #   resp.created_date #=> Time
     #   resp.description #=> String
     #   resp.disable_schema_validation #=> Boolean
+    #   resp.disable_execute_api_endpoint #=> Boolean
     #   resp.import_info #=> Array
     #   resp.import_info[0] #=> String
     #   resp.name #=> String
@@ -3230,6 +3265,8 @@ module Aws::ApiGatewayV2
     #
     # @option params [Boolean] :disable_schema_validation
     #
+    # @option params [Boolean] :disable_execute_api_endpoint
+    #
     # @option params [String] :name
     #   A string with a length between \[1-128\].
     #
@@ -3267,6 +3304,7 @@ module Aws::ApiGatewayV2
     #   * {Types::UpdateApiResponse#created_date #created_date} => Time
     #   * {Types::UpdateApiResponse#description #description} => String
     #   * {Types::UpdateApiResponse#disable_schema_validation #disable_schema_validation} => Boolean
+    #   * {Types::UpdateApiResponse#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
     #   * {Types::UpdateApiResponse#import_info #import_info} => Array&lt;String&gt;
     #   * {Types::UpdateApiResponse#name #name} => String
     #   * {Types::UpdateApiResponse#protocol_type #protocol_type} => String
@@ -3291,6 +3329,7 @@ module Aws::ApiGatewayV2
     #     credentials_arn: "Arn",
     #     description: "StringWithLengthBetween0And1024",
     #     disable_schema_validation: false,
+    #     disable_execute_api_endpoint: false,
     #     name: "StringWithLengthBetween1And128",
     #     route_key: "SelectionKey",
     #     route_selection_expression: "SelectionExpression",
@@ -3317,6 +3356,7 @@ module Aws::ApiGatewayV2
     #   resp.created_date #=> Time
     #   resp.description #=> String
     #   resp.disable_schema_validation #=> Boolean
+    #   resp.disable_execute_api_endpoint #=> Boolean
     #   resp.import_info #=> Array
     #   resp.import_info[0] #=> String
     #   resp.name #=> String
@@ -3547,11 +3587,17 @@ module Aws::ApiGatewayV2
     # @option params [Array<Types::DomainNameConfiguration>] :domain_name_configurations
     #   The domain name configurations.
     #
+    # @option params [Types::MutualTlsAuthenticationInput] :mutual_tls_authentication
+    #   If specified, API Gateway performs two-way authentication between the
+    #   client and the server. Clients must present a trusted certificate to
+    #   access your API.
+    #
     # @return [Types::UpdateDomainNameResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainNameResponse#api_mapping_selection_expression #api_mapping_selection_expression} => String
     #   * {Types::UpdateDomainNameResponse#domain_name #domain_name} => String
     #   * {Types::UpdateDomainNameResponse#domain_name_configurations #domain_name_configurations} => Array&lt;Types::DomainNameConfiguration&gt;
+    #   * {Types::UpdateDomainNameResponse#mutual_tls_authentication #mutual_tls_authentication} => Types::MutualTlsAuthentication
     #   * {Types::UpdateDomainNameResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -3571,6 +3617,10 @@ module Aws::ApiGatewayV2
     #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
     #       },
     #     ],
+    #     mutual_tls_authentication: {
+    #       truststore_uri: "UriWithLengthBetween1And2048",
+    #       truststore_version: "StringWithLengthBetween1And64",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3587,6 +3637,10 @@ module Aws::ApiGatewayV2
     #   resp.domain_name_configurations[0].endpoint_type #=> String, one of "REGIONAL", "EDGE"
     #   resp.domain_name_configurations[0].hosted_zone_id #=> String
     #   resp.domain_name_configurations[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
+    #   resp.mutual_tls_authentication.truststore_uri #=> String
+    #   resp.mutual_tls_authentication.truststore_version #=> String
+    #   resp.mutual_tls_authentication.truststore_warnings #=> Array
+    #   resp.mutual_tls_authentication.truststore_warnings[0] #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
@@ -4282,7 +4336,7 @@ module Aws::ApiGatewayV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigatewayv2'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

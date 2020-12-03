@@ -24,6 +24,9 @@ module Aws::MediaPackage
     CmafEncryption = Shapes::StructureShape.new(name: 'CmafEncryption')
     CmafPackage = Shapes::StructureShape.new(name: 'CmafPackage')
     CmafPackageCreateOrUpdateParameters = Shapes::StructureShape.new(name: 'CmafPackageCreateOrUpdateParameters')
+    ConfigureLogsParameters = Shapes::StructureShape.new(name: 'ConfigureLogsParameters')
+    ConfigureLogsRequest = Shapes::StructureShape.new(name: 'ConfigureLogsRequest')
+    ConfigureLogsResponse = Shapes::StructureShape.new(name: 'ConfigureLogsResponse')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
     CreateChannelResponse = Shapes::StructureShape.new(name: 'CreateChannelResponse')
     CreateHarvestJobRequest = Shapes::StructureShape.new(name: 'CreateHarvestJobRequest')
@@ -42,6 +45,7 @@ module Aws::MediaPackage
     DescribeHarvestJobResponse = Shapes::StructureShape.new(name: 'DescribeHarvestJobResponse')
     DescribeOriginEndpointRequest = Shapes::StructureShape.new(name: 'DescribeOriginEndpointRequest')
     DescribeOriginEndpointResponse = Shapes::StructureShape.new(name: 'DescribeOriginEndpointResponse')
+    EgressAccessLogs = Shapes::StructureShape.new(name: 'EgressAccessLogs')
     EncryptionMethod = Shapes::StringShape.new(name: 'EncryptionMethod')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     HarvestJob = Shapes::StructureShape.new(name: 'HarvestJob')
@@ -53,6 +57,7 @@ module Aws::MediaPackage
     HlsManifestCreateOrUpdateParameters = Shapes::StructureShape.new(name: 'HlsManifestCreateOrUpdateParameters')
     HlsPackage = Shapes::StructureShape.new(name: 'HlsPackage')
     IngestEndpoint = Shapes::StructureShape.new(name: 'IngestEndpoint')
+    IngressAccessLogs = Shapes::StructureShape.new(name: 'IngressAccessLogs')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
@@ -121,8 +126,10 @@ module Aws::MediaPackage
 
     Channel.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Channel.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    Channel.add_member(:egress_access_logs, Shapes::ShapeRef.new(shape: EgressAccessLogs, location_name: "egressAccessLogs"))
     Channel.add_member(:hls_ingest, Shapes::ShapeRef.new(shape: HlsIngest, location_name: "hlsIngest"))
     Channel.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    Channel.add_member(:ingress_access_logs, Shapes::ShapeRef.new(shape: IngressAccessLogs, location_name: "ingressAccessLogs"))
     Channel.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Channel.struct_class = Types::Channel
 
@@ -156,6 +163,24 @@ module Aws::MediaPackage
     CmafPackageCreateOrUpdateParameters.add_member(:stream_selection, Shapes::ShapeRef.new(shape: StreamSelection, location_name: "streamSelection"))
     CmafPackageCreateOrUpdateParameters.struct_class = Types::CmafPackageCreateOrUpdateParameters
 
+    ConfigureLogsParameters.add_member(:egress_access_logs, Shapes::ShapeRef.new(shape: EgressAccessLogs, location_name: "egressAccessLogs"))
+    ConfigureLogsParameters.add_member(:ingress_access_logs, Shapes::ShapeRef.new(shape: IngressAccessLogs, location_name: "ingressAccessLogs"))
+    ConfigureLogsParameters.struct_class = Types::ConfigureLogsParameters
+
+    ConfigureLogsRequest.add_member(:egress_access_logs, Shapes::ShapeRef.new(shape: EgressAccessLogs, location_name: "egressAccessLogs"))
+    ConfigureLogsRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))
+    ConfigureLogsRequest.add_member(:ingress_access_logs, Shapes::ShapeRef.new(shape: IngressAccessLogs, location_name: "ingressAccessLogs"))
+    ConfigureLogsRequest.struct_class = Types::ConfigureLogsRequest
+
+    ConfigureLogsResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    ConfigureLogsResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    ConfigureLogsResponse.add_member(:egress_access_logs, Shapes::ShapeRef.new(shape: EgressAccessLogs, location_name: "egressAccessLogs"))
+    ConfigureLogsResponse.add_member(:hls_ingest, Shapes::ShapeRef.new(shape: HlsIngest, location_name: "hlsIngest"))
+    ConfigureLogsResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    ConfigureLogsResponse.add_member(:ingress_access_logs, Shapes::ShapeRef.new(shape: IngressAccessLogs, location_name: "ingressAccessLogs"))
+    ConfigureLogsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ConfigureLogsResponse.struct_class = Types::ConfigureLogsResponse
+
     CreateChannelRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     CreateChannelRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
     CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -163,8 +188,10 @@ module Aws::MediaPackage
 
     CreateChannelResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     CreateChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    CreateChannelResponse.add_member(:egress_access_logs, Shapes::ShapeRef.new(shape: EgressAccessLogs, location_name: "egressAccessLogs"))
     CreateChannelResponse.add_member(:hls_ingest, Shapes::ShapeRef.new(shape: HlsIngest, location_name: "hlsIngest"))
     CreateChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    CreateChannelResponse.add_member(:ingress_access_logs, Shapes::ShapeRef.new(shape: IngressAccessLogs, location_name: "ingressAccessLogs"))
     CreateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateChannelResponse.struct_class = Types::CreateChannelResponse
 
@@ -256,8 +283,10 @@ module Aws::MediaPackage
 
     DescribeChannelResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     DescribeChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    DescribeChannelResponse.add_member(:egress_access_logs, Shapes::ShapeRef.new(shape: EgressAccessLogs, location_name: "egressAccessLogs"))
     DescribeChannelResponse.add_member(:hls_ingest, Shapes::ShapeRef.new(shape: HlsIngest, location_name: "hlsIngest"))
     DescribeChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeChannelResponse.add_member(:ingress_access_logs, Shapes::ShapeRef.new(shape: IngressAccessLogs, location_name: "ingressAccessLogs"))
     DescribeChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeChannelResponse.struct_class = Types::DescribeChannelResponse
 
@@ -295,6 +324,9 @@ module Aws::MediaPackage
     DescribeOriginEndpointResponse.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     DescribeOriginEndpointResponse.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
     DescribeOriginEndpointResponse.struct_class = Types::DescribeOriginEndpointResponse
+
+    EgressAccessLogs.add_member(:log_group_name, Shapes::ShapeRef.new(shape: __string, location_name: "logGroupName"))
+    EgressAccessLogs.struct_class = Types::EgressAccessLogs
 
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
@@ -370,6 +402,9 @@ module Aws::MediaPackage
     IngestEndpoint.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     IngestEndpoint.add_member(:username, Shapes::ShapeRef.new(shape: __string, location_name: "username"))
     IngestEndpoint.struct_class = Types::IngestEndpoint
+
+    IngressAccessLogs.add_member(:log_group_name, Shapes::ShapeRef.new(shape: __string, location_name: "logGroupName"))
+    IngressAccessLogs.struct_class = Types::IngressAccessLogs
 
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     InternalServerErrorException.struct_class = Types::InternalServerErrorException
@@ -475,8 +510,10 @@ module Aws::MediaPackage
 
     RotateChannelCredentialsResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     RotateChannelCredentialsResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    RotateChannelCredentialsResponse.add_member(:egress_access_logs, Shapes::ShapeRef.new(shape: EgressAccessLogs, location_name: "egressAccessLogs"))
     RotateChannelCredentialsResponse.add_member(:hls_ingest, Shapes::ShapeRef.new(shape: HlsIngest, location_name: "hlsIngest"))
     RotateChannelCredentialsResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    RotateChannelCredentialsResponse.add_member(:ingress_access_logs, Shapes::ShapeRef.new(shape: IngressAccessLogs, location_name: "ingressAccessLogs"))
     RotateChannelCredentialsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RotateChannelCredentialsResponse.struct_class = Types::RotateChannelCredentialsResponse
 
@@ -486,8 +523,10 @@ module Aws::MediaPackage
 
     RotateIngestEndpointCredentialsResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     RotateIngestEndpointCredentialsResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    RotateIngestEndpointCredentialsResponse.add_member(:egress_access_logs, Shapes::ShapeRef.new(shape: EgressAccessLogs, location_name: "egressAccessLogs"))
     RotateIngestEndpointCredentialsResponse.add_member(:hls_ingest, Shapes::ShapeRef.new(shape: HlsIngest, location_name: "hlsIngest"))
     RotateIngestEndpointCredentialsResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    RotateIngestEndpointCredentialsResponse.add_member(:ingress_access_logs, Shapes::ShapeRef.new(shape: IngressAccessLogs, location_name: "ingressAccessLogs"))
     RotateIngestEndpointCredentialsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RotateIngestEndpointCredentialsResponse.struct_class = Types::RotateIngestEndpointCredentialsResponse
 
@@ -537,8 +576,10 @@ module Aws::MediaPackage
 
     UpdateChannelResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     UpdateChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    UpdateChannelResponse.add_member(:egress_access_logs, Shapes::ShapeRef.new(shape: EgressAccessLogs, location_name: "egressAccessLogs"))
     UpdateChannelResponse.add_member(:hls_ingest, Shapes::ShapeRef.new(shape: HlsIngest, location_name: "hlsIngest"))
     UpdateChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    UpdateChannelResponse.add_member(:ingress_access_logs, Shapes::ShapeRef.new(shape: IngressAccessLogs, location_name: "ingressAccessLogs"))
     UpdateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateChannelResponse.struct_class = Types::UpdateChannelResponse
 
@@ -611,6 +652,20 @@ module Aws::MediaPackage
         "signingName" => "mediapackage",
         "uid" => "mediapackage-2017-10-12",
       }
+
+      api.add_operation(:configure_logs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ConfigureLogs"
+        o.http_method = "PUT"
+        o.http_request_uri = "/channels/{id}/configure_logs"
+        o.input = Shapes::ShapeRef.new(shape: ConfigureLogsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ConfigureLogsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
 
       api.add_operation(:create_channel, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateChannel"

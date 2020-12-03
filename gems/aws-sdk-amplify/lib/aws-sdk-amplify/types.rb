@@ -94,6 +94,10 @@ module Aws::Amplify
     #   the Amplify app.
     #   @return [String]
     #
+    # @!attribute [rw] custom_headers
+    #   Describes the custom HTTP headers for the Amplify app.
+    #   @return [String]
+    #
     # @!attribute [rw] enable_auto_branch_creation
     #   Enables automated branch creation for the Amplify app.
     #   @return [Boolean]
@@ -130,6 +134,7 @@ module Aws::Amplify
       :custom_rules,
       :production_branch,
       :build_spec,
+      :custom_headers,
       :enable_auto_branch_creation,
       :auto_branch_creation_patterns,
       :auto_branch_creation_config)
@@ -170,6 +175,7 @@ module Aws::Amplify
     #         },
     #         basic_auth_credentials: "BasicAuthCredentials",
     #         enable_basic_auth: false,
+    #         enable_performance_mode: false,
     #         build_spec: "BuildSpec",
     #         enable_pull_request_preview: false,
     #         pull_request_environment_name: "PullRequestEnvironmentName",
@@ -199,12 +205,21 @@ module Aws::Amplify
     #   Enables basic authorization for the autocreated branch.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_performance_mode
+    #   Enables performance mode for the branch.
+    #
+    #   Performance mode optimizes for faster hosting performance by keeping
+    #   content cached at the edge for a longer interval. When performance
+    #   mode is enabled, hosting configuration or code changes can take up
+    #   to 10 minutes to roll out.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] build_spec
     #   The build specification (build spec) for the autocreated branch.
     #   @return [String]
     #
     # @!attribute [rw] enable_pull_request_preview
-    #   Enables pull request preview for the autocreated branch.
+    #   Enables pull request previews for the autocreated branch.
     #   @return [Boolean]
     #
     # @!attribute [rw] pull_request_environment_name
@@ -220,6 +235,7 @@ module Aws::Amplify
       :environment_variables,
       :basic_auth_credentials,
       :enable_basic_auth,
+      :enable_performance_mode,
       :build_spec,
       :enable_pull_request_preview,
       :pull_request_environment_name)
@@ -353,6 +369,15 @@ module Aws::Amplify
     #   Enables basic authorization for a branch of an Amplify app.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_performance_mode
+    #   Enables performance mode for the branch.
+    #
+    #   Performance mode optimizes for faster hosting performance by keeping
+    #   content cached at the edge for a longer interval. When performance
+    #   mode is enabled, hosting configuration or code changes can take up
+    #   to 10 minutes to roll out.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] thumbnail_url
     #   The thumbnail URL for the branch of an Amplify app.
     #   @return [String]
@@ -375,7 +400,7 @@ module Aws::Amplify
     #   @return [Array<String>]
     #
     # @!attribute [rw] enable_pull_request_preview
-    #   Enables pull request preview for the branch.
+    #   Enables pull request previews for the branch.
     #   @return [Boolean]
     #
     # @!attribute [rw] pull_request_environment_name
@@ -414,6 +439,7 @@ module Aws::Amplify
       :active_job_id,
       :total_number_of_jobs,
       :enable_basic_auth,
+      :enable_performance_mode,
       :thumbnail_url,
       :basic_auth_credentials,
       :build_spec,
@@ -460,6 +486,7 @@ module Aws::Amplify
     #           "TagKey" => "TagValue",
     #         },
     #         build_spec: "BuildSpec",
+    #         custom_headers: "CustomHeaders",
     #         enable_auto_branch_creation: false,
     #         auto_branch_creation_patterns: ["AutoBranchCreationPattern"],
     #         auto_branch_creation_config: {
@@ -471,6 +498,7 @@ module Aws::Amplify
     #           },
     #           basic_auth_credentials: "BasicAuthCredentials",
     #           enable_basic_auth: false,
+    #           enable_performance_mode: false,
     #           build_spec: "BuildSpec",
     #           enable_pull_request_preview: false,
     #           pull_request_environment_name: "PullRequestEnvironmentName",
@@ -478,7 +506,7 @@ module Aws::Amplify
     #       }
     #
     # @!attribute [rw] name
-    #   The name for the Amplify app.
+    #   The name for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -544,16 +572,20 @@ module Aws::Amplify
     #   The build specification (build spec) for an Amplify app.
     #   @return [String]
     #
+    # @!attribute [rw] custom_headers
+    #   The custom HTTP headers for an Amplify app.
+    #   @return [String]
+    #
     # @!attribute [rw] enable_auto_branch_creation
-    #   Enables automated branch creation for the Amplify app.
+    #   Enables automated branch creation for an Amplify app.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_branch_creation_patterns
-    #   The automated branch creation glob patterns for the Amplify app.
+    #   The automated branch creation glob patterns for an Amplify app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] auto_branch_creation_config
-    #   The automated branch creation configuration for the Amplify app.
+    #   The automated branch creation configuration for an Amplify app.
     #   @return [Types::AutoBranchCreationConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateAppRequest AWS API Documentation
@@ -574,6 +606,7 @@ module Aws::Amplify
       :custom_rules,
       :tags,
       :build_spec,
+      :custom_headers,
       :enable_auto_branch_creation,
       :auto_branch_creation_patterns,
       :auto_branch_creation_config)
@@ -665,6 +698,7 @@ module Aws::Amplify
     #         },
     #         basic_auth_credentials: "BasicAuthCredentials",
     #         enable_basic_auth: false,
+    #         enable_performance_mode: false,
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -716,6 +750,15 @@ module Aws::Amplify
     #   Enables basic authorization for the branch.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_performance_mode
+    #   Enables performance mode for the branch.
+    #
+    #   Performance mode optimizes for faster hosting performance by keeping
+    #   content cached at the edge for a longer interval. When performance
+    #   mode is enabled, hosting configuration or code changes can take up
+    #   to 10 minutes to roll out.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   The tag for the branch.
     #   @return [Hash<String,String>]
@@ -734,7 +777,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] enable_pull_request_preview
-    #   Enables pull request preview for this branch.
+    #   Enables pull request previews for this branch.
     #   @return [Boolean]
     #
     # @!attribute [rw] pull_request_environment_name
@@ -759,6 +802,7 @@ module Aws::Amplify
       :environment_variables,
       :basic_auth_credentials,
       :enable_basic_auth,
+      :enable_performance_mode,
       :tags,
       :build_spec,
       :ttl,
@@ -993,6 +1037,27 @@ module Aws::Amplify
     #
     # @!attribute [rw] status
     #   The status code for a URL rewrite or redirect rule.
+    #
+    #   200
+    #
+    #   : Represents a 200 rewrite rule.
+    #
+    #   301
+    #
+    #   : Represents a 301 (moved pemanently) redirect rule. This and all
+    #     future requests should be directed to the target URL.
+    #
+    #   302
+    #
+    #   : Represents a 302 temporary redirect rule.
+    #
+    #   404
+    #
+    #   : Represents a 404 redirect rule.
+    #
+    #   404-200
+    #
+    #   : Represents a 404 rewrite rule.
     #   @return [String]
     #
     # @!attribute [rw] condition
@@ -2672,6 +2737,7 @@ module Aws::Amplify
     #           },
     #         ],
     #         build_spec: "BuildSpec",
+    #         custom_headers: "CustomHeaders",
     #         enable_auto_branch_creation: false,
     #         auto_branch_creation_patterns: ["AutoBranchCreationPattern"],
     #         auto_branch_creation_config: {
@@ -2683,6 +2749,7 @@ module Aws::Amplify
     #           },
     #           basic_auth_credentials: "BasicAuthCredentials",
     #           enable_basic_auth: false,
+    #           enable_performance_mode: false,
     #           build_spec: "BuildSpec",
     #           enable_pull_request_preview: false,
     #           pull_request_environment_name: "PullRequestEnvironmentName",
@@ -2742,17 +2809,21 @@ module Aws::Amplify
     #   The build specification (build spec) for an Amplify app.
     #   @return [String]
     #
+    # @!attribute [rw] custom_headers
+    #   The custom HTTP headers for an Amplify app.
+    #   @return [String]
+    #
     # @!attribute [rw] enable_auto_branch_creation
-    #   Enables automated branch creation for the Amplify app.
+    #   Enables automated branch creation for an Amplify app.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_branch_creation_patterns
-    #   Describes the automated branch creation glob patterns for the
-    #   Amplify app.
+    #   Describes the automated branch creation glob patterns for an Amplify
+    #   app.
     #   @return [Array<String>]
     #
     # @!attribute [rw] auto_branch_creation_config
-    #   The automated branch creation configuration for the Amplify app.
+    #   The automated branch creation configuration for an Amplify app.
     #   @return [Types::AutoBranchCreationConfig]
     #
     # @!attribute [rw] repository
@@ -2786,6 +2857,7 @@ module Aws::Amplify
       :basic_auth_credentials,
       :custom_rules,
       :build_spec,
+      :custom_headers,
       :enable_auto_branch_creation,
       :auto_branch_creation_patterns,
       :auto_branch_creation_config,
@@ -2828,6 +2900,7 @@ module Aws::Amplify
     #         },
     #         basic_auth_credentials: "BasicAuthCredentials",
     #         enable_basic_auth: false,
+    #         enable_performance_mode: false,
     #         build_spec: "BuildSpec",
     #         ttl: "TTL",
     #         display_name: "DisplayName",
@@ -2876,6 +2949,15 @@ module Aws::Amplify
     #   Enables basic authorization for the branch.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_performance_mode
+    #   Enables performance mode for the branch.
+    #
+    #   Performance mode optimizes for faster hosting performance by keeping
+    #   content cached at the edge for a longer interval. When performance
+    #   mode is enabled, hosting configuration or code changes can take up
+    #   to 10 minutes to roll out.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] build_spec
     #   The build specification (build spec) for the branch.
     #   @return [String]
@@ -2890,7 +2972,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] enable_pull_request_preview
-    #   Enables pull request preview for this branch.
+    #   Enables pull request previews for this branch.
     #   @return [Boolean]
     #
     # @!attribute [rw] pull_request_environment_name
@@ -2915,6 +2997,7 @@ module Aws::Amplify
       :environment_variables,
       :basic_auth_credentials,
       :enable_basic_auth,
+      :enable_performance_mode,
       :build_spec,
       :ttl,
       :display_name,

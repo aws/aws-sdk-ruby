@@ -56,7 +56,8 @@
     "AggregationConfig": {
       "base": "<p> The aggregation settings that you can use to customize the output format of your flow data. </p>",
       "refs": {
-        "S3OutputFormatConfig$aggregationConfig": null
+        "S3OutputFormatConfig$aggregationConfig": null,
+        "UpsolverS3OutputFormatConfig$aggregationConfig": null
       }
     },
     "AggregationType": {
@@ -140,6 +141,7 @@
         "DestinationFieldProperties$isCreatable": "<p> Specifies if the destination field can be created by the current user. </p>",
         "DestinationFieldProperties$isNullable": "<p> Specifies if the destination field can have a null value. </p>",
         "DestinationFieldProperties$isUpsertable": "<p> Specifies if the flow run can either insert new rows in the destination field if they do not already exist, or update them if they do. </p>",
+        "DestinationFieldProperties$isUpdatable": "<p> Specifies whether the field can be updated during an <code>UPDATE</code> or <code>UPSERT</code> write operation. </p>",
         "ErrorHandlingConfig$failOnFirstDestinationError": "<p> Specifies if the flow should fail after the first instance of a failure when attempting to place data in the destination. </p>",
         "SalesforceConnectorProfileProperties$isSandboxEnvironment": "<p> Indicates whether the connector profile applies to a sandbox or production environment. </p>",
         "SalesforceSourceProperties$enableDynamicFieldUpdate": "<p> The flag that enables dynamic fetching of new (recently added) fields in the Salesforce objects while running a flow. </p>",
@@ -169,7 +171,14 @@
         "S3DestinationProperties$bucketPrefix": "<p> The object key for the destination bucket in which Amazon AppFlow places the files. </p>",
         "S3SourceProperties$bucketPrefix": "<p> The object key for the Amazon S3 bucket in which the source files are stored. </p>",
         "SnowflakeConnectorProfileProperties$bucketPrefix": "<p> The bucket path that refers to the Amazon S3 bucket associated with Snowflake. </p>",
-        "SnowflakeDestinationProperties$bucketPrefix": "<p> The object key for the destination bucket in which Amazon AppFlow places the files. </p>"
+        "SnowflakeDestinationProperties$bucketPrefix": "<p> The object key for the destination bucket in which Amazon AppFlow places the files. </p>",
+        "UpsolverDestinationProperties$bucketPrefix": "<p> The object key for the destination Upsolver Amazon S3 bucket in which Amazon AppFlow places the files. </p>"
+      }
+    },
+    "ClientCredentialsArn": {
+      "base": null,
+      "refs": {
+        "SalesforceConnectorProfileCredentials$clientCredentialsArn": "<p> The secret manager ARN, which contains the client ID and client secret of the connected app. </p>"
       }
     },
     "ClientId": {
@@ -184,10 +193,10 @@
     "ClientSecret": {
       "base": null,
       "refs": {
-        "GoogleAnalyticsConnectorProfileCredentials$clientSecret": "<p> The client secret used by the oauth client to authenticate to the authorization server. </p>",
-        "MarketoConnectorProfileCredentials$clientSecret": "<p> The client secret used by the oauth client to authenticate to the authorization server. </p>",
-        "SlackConnectorProfileCredentials$clientSecret": "<p> The client secret used by the oauth client to authenticate to the authorization server. </p>",
-        "ZendeskConnectorProfileCredentials$clientSecret": "<p> The client secret used by the oauth client to authenticate to the authorization server. </p>"
+        "GoogleAnalyticsConnectorProfileCredentials$clientSecret": "<p> The client secret used by the OAuth client to authenticate to the authorization server. </p>",
+        "MarketoConnectorProfileCredentials$clientSecret": "<p> The client secret used by the OAuth client to authenticate to the authorization server. </p>",
+        "SlackConnectorProfileCredentials$clientSecret": "<p> The client secret used by the OAuth client to authenticate to the authorization server. </p>",
+        "ZendeskConnectorProfileCredentials$clientSecret": "<p> The client secret used by the OAuth client to authenticate to the authorization server. </p>"
       }
     },
     "ConflictException": {
@@ -259,11 +268,11 @@
     "ConnectorOAuthRequest": {
       "base": "<p> Used by select connectors for which the OAuth workflow is supported, such as Salesforce, Google Analytics, Marketo, Zendesk, and Slack. </p>",
       "refs": {
-        "GoogleAnalyticsConnectorProfileCredentials$oAuthRequest": "<p> The oauth requirement needed to request security tokens from the connector endpoint. </p>",
-        "MarketoConnectorProfileCredentials$oAuthRequest": "<p> The oauth requirement needed to request security tokens from the connector endpoint. </p>",
-        "SalesforceConnectorProfileCredentials$oAuthRequest": "<p> The oauth requirement needed to request security tokens from the connector endpoint. </p>",
-        "SlackConnectorProfileCredentials$oAuthRequest": "<p> The oauth requirement needed to request security tokens from the connector endpoint. </p>",
-        "ZendeskConnectorProfileCredentials$oAuthRequest": "<p> The oauth requirement needed to request security tokens from the connector endpoint. </p>"
+        "GoogleAnalyticsConnectorProfileCredentials$oAuthRequest": "<p> The OAuth requirement needed to request security tokens from the connector endpoint. </p>",
+        "MarketoConnectorProfileCredentials$oAuthRequest": "<p> The OAuth requirement needed to request security tokens from the connector endpoint. </p>",
+        "SalesforceConnectorProfileCredentials$oAuthRequest": "<p> The OAuth requirement needed to request security tokens from the connector endpoint. </p>",
+        "SlackConnectorProfileCredentials$oAuthRequest": "<p> The OAuth requirement needed to request security tokens from the connector endpoint. </p>",
+        "ZendeskConnectorProfileCredentials$oAuthRequest": "<p> The OAuth requirement needed to request security tokens from the connector endpoint. </p>"
       }
     },
     "ConnectorOperator": {
@@ -443,6 +452,12 @@
         "FlowDefinition$lastUpdatedAt": "<p> Specifies when the flow was last updated. </p>",
         "ScheduledTriggerProperties$scheduleStartTime": "<p> Specifies the scheduled start time for a schedule-triggered flow. </p>",
         "ScheduledTriggerProperties$scheduleEndTime": "<p> Specifies the scheduled end time for a schedule-triggered flow. </p>"
+      }
+    },
+    "DatetimeTypeFieldName": {
+      "base": null,
+      "refs": {
+        "IncrementalPullConfig$datetimeTypeFieldName": "<p> A field that specifies the date time or timestamp field as the criteria to use when importing incremental records from the source. </p>"
       }
     },
     "DeleteConnectorProfileRequest": {
@@ -639,7 +654,8 @@
     "ExecutionId": {
       "base": null,
       "refs": {
-        "ExecutionRecord$executionId": "<p> Specifies the identifier of the given flow run. </p>"
+        "ExecutionRecord$executionId": "<p> Specifies the identifier of the given flow run. </p>",
+        "StartFlowResponse$executionId": "<p> Returns the internal execution ID of an on-demand flow when the flow is started. For scheduled or event-triggered flows, this value is null. </p>"
       }
     },
     "ExecutionMessage": {
@@ -682,7 +698,8 @@
     "FileType": {
       "base": null,
       "refs": {
-        "S3OutputFormatConfig$fileType": "<p> Indicates the file type that Amazon AppFlow places in the Amazon S3 bucket. </p>"
+        "S3OutputFormatConfig$fileType": "<p> Indicates the file type that Amazon AppFlow places in the Amazon S3 bucket. </p>",
+        "UpsolverS3OutputFormatConfig$fileType": "<p> Indicates the file type that Amazon AppFlow places in the Upsolver Amazon S3 bucket. </p>"
       }
     },
     "FilterOperatorList": {
@@ -795,10 +812,22 @@
         "ConnectorEntityMap$key": null
       }
     },
+    "IdFieldNameList": {
+      "base": "<p> A list of field names that can be used as an ID field when performing a write operation. </p>",
+      "refs": {
+        "SalesforceDestinationProperties$idFieldNames": "<p> The name of the field that Amazon AppFlow uses as an ID when performing a write operation such as update or delete. </p>"
+      }
+    },
     "Identifier": {
       "base": null,
       "refs": {
         "ConnectorEntityField$identifier": "<p> The unique identifier of the connector field. </p>"
+      }
+    },
+    "IncrementalPullConfig": {
+      "base": "<p> Specifies the configuration used when importing incremental records from the source. </p>",
+      "refs": {
+        "SourceFlowConfig$incrementalPullConfig": "<p> Defines the configuration for a scheduled incremental data pull. If a valid configuration is provided, the fields specified in the configuration are used when querying for the incremental data pull. </p>"
       }
     },
     "InforNexusConnectorOperator": {
@@ -959,7 +988,8 @@
       "base": null,
       "refs": {
         "ConnectorEntity$name": "<p> The name of the connector entity. </p>",
-        "DescribeConnectorEntityRequest$connectorEntityName": "<p> The entity name for that connector. </p>"
+        "DescribeConnectorEntityRequest$connectorEntityName": "<p> The entity name for that connector. </p>",
+        "IdFieldNameList$member": null
       }
     },
     "NextToken": {
@@ -1036,7 +1066,8 @@
     "PrefixConfig": {
       "base": "<p> Determines the prefix that Amazon AppFlow applies to the destination folder name. You can name your destination folders according to the flow frequency and date. </p>",
       "refs": {
-        "S3OutputFormatConfig$prefixConfig": "<p> Determines the prefix that Amazon AppFlow applies to the folder name in the Amazon S3 bucket. You can name folders according to the flow frequency and date. </p>"
+        "S3OutputFormatConfig$prefixConfig": "<p> Determines the prefix that Amazon AppFlow applies to the folder name in the Amazon S3 bucket. You can name folders according to the flow frequency and date. </p>",
+        "UpsolverS3OutputFormatConfig$prefixConfig": null
       }
     },
     "PrefixFormat": {
@@ -1193,7 +1224,7 @@
     "ScheduleExpression": {
       "base": null,
       "refs": {
-        "ScheduledTriggerProperties$scheduleExpression": "<p> The scheduling expression that determines when and how often the rule runs. </p>"
+        "ScheduledTriggerProperties$scheduleExpression": "<p> The scheduling expression that determines the rate at which the schedule will run, for example <code>rate(5minutes)</code>. </p>"
       }
     },
     "ScheduleFrequencyType": {
@@ -1409,6 +1440,12 @@
         "FieldTypeDetails$supportedValues": "<p> The list of values that a field can contain. For example, a Boolean <code>fieldType</code> can have two values: \"true\" and \"false\". </p>"
       }
     },
+    "SupportedWriteOperationList": {
+      "base": null,
+      "refs": {
+        "DestinationFieldProperties$supportedWriteOperations": "<p> A list of supported write operations. For each write operation listed, this field can be used in <code>idFieldNames</code> when that write operation is present as a destination option. </p>"
+      }
+    },
     "TagKey": {
       "base": null,
       "refs": {
@@ -1580,6 +1617,30 @@
         "FlowDefinition$lastUpdatedBy": "<p> Specifies the account user name that most recently updated the flow. </p>"
       }
     },
+    "UpsolverBucketName": {
+      "base": null,
+      "refs": {
+        "UpsolverDestinationProperties$bucketName": "<p> The Upsolver Amazon S3 bucket name in which Amazon AppFlow places the transferred data. </p>"
+      }
+    },
+    "UpsolverDestinationProperties": {
+      "base": "<p> The properties that are applied when Upsolver is used as a destination. </p>",
+      "refs": {
+        "DestinationConnectorProperties$Upsolver": "<p> The properties required to query Upsolver. </p>"
+      }
+    },
+    "UpsolverMetadata": {
+      "base": "<p> The connector metadata specific to Upsolver. </p>",
+      "refs": {
+        "ConnectorMetadata$Upsolver": "<p> The connector metadata specific to Upsolver. </p>"
+      }
+    },
+    "UpsolverS3OutputFormatConfig": {
+      "base": "<p> The configuration that determines how Amazon AppFlow formats the flow output data when Upsolver is used as the destination. </p>",
+      "refs": {
+        "UpsolverDestinationProperties$s3OutputFormatConfig": "<p> The configuration that determines how data is formatted when Upsolver is used as the flow destination. </p>"
+      }
+    },
     "Username": {
       "base": null,
       "refs": {
@@ -1635,6 +1696,13 @@
       "base": null,
       "refs": {
         "SnowflakeConnectorProfileProperties$warehouse": "<p> The name of the Snowflake warehouse. </p>"
+      }
+    },
+    "WriteOperationType": {
+      "base": "<p> The possible write operations in the destination connector. When this value is not provided, this defaults to the <code>INSERT</code> operation. </p>",
+      "refs": {
+        "SalesforceDestinationProperties$writeOperationType": "<p> This specifies the type of write operation to be performed in Salesforce. When the value is <code>UPSERT</code>, then <code>idFieldNames</code> is required. </p>",
+        "SupportedWriteOperationList$member": null
       }
     },
     "ZendeskConnectorOperator": {

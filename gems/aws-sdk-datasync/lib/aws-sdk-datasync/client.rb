@@ -378,7 +378,7 @@ module Aws::DataSync
     #
     # You can activate the agent in a VPC (virtual private cloud) or provide
     # the agent access to a VPC endpoint so you can run tasks without going
-    # over the public Internet.
+    # over the public internet.
     #
     # You can use an agent for more than one location. If a task uses
     # multiple agents, all of them need to have status AVAILABLE for the
@@ -634,7 +634,7 @@ module Aws::DataSync
     #   subdirectory of that path. The path should be such that it can be
     #   mounted by other NFS clients in your network.
     #
-    #   To see all the paths exported by your NFS server. run "`showmount -e
+    #   To see all the paths exported by your NFS server, run "`showmount -e
     #   nfs-server-name`" from an NFS client that has access to your server.
     #   You can specify any directory that appears in the results, and any
     #   subdirectory of that directory. Ensure that the NFS export is
@@ -731,7 +731,9 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Creates an endpoint for a self-managed object storage bucket.
+    # Creates an endpoint for a self-managed object storage bucket. For more
+    # information about self-managed object storage locations, see
+    # create-object-location.
     #
     # @option params [required, String] :server_hostname
     #   The name of the self-managed object storage server. This value is the
@@ -759,11 +761,15 @@ module Aws::DataSync
     #
     # @option params [String] :access_key
     #   Optional. The access key is used if credentials are required to access
-    #   the self-managed object storage server.
+    #   the self-managed object storage server. If your object storage
+    #   requires a user name and password to authenticate, use `AccessKey` and
+    #   `SecretKey` to provide the user name and password, respectively.
     #
     # @option params [String] :secret_key
     #   Optional. The secret key is used if credentials are required to access
-    #   the self-managed object storage server.
+    #   the self-managed object storage server. If your object storage
+    #   requires a user name and password to authenticate, use `AccessKey` and
+    #   `SecretKey` to provide the user name and password, respectively.
     #
     # @option params [required, Array<String>] :agent_arns
     #   The Amazon Resource Name (ARN) of the agents associated with the
@@ -812,16 +818,9 @@ module Aws::DataSync
 
     # Creates an endpoint for an Amazon S3 bucket.
     #
-    # For AWS DataSync to access a destination S3 bucket, it needs an AWS
-    # Identity and Access Management (IAM) role that has the required
-    # permissions. You can set up the required permissions by creating an
-    # IAM policy that grants the required permissions and attaching the
-    # policy to the role. An example of such a policy is shown in the
-    # examples section.
-    #
     # For more information, see
-    # https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location
-    # in the *AWS DataSync User Guide.*
+    # https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli
+    # in the *AWS DataSync User Guide*.
     #
     # @option params [String] :subdirectory
     #   A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3
@@ -829,19 +828,22 @@ module Aws::DataSync
     #   S3 destination.
     #
     # @option params [required, String] :s3_bucket_arn
-    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket.
+    #   The ARN of the Amazon S3 bucket. If the bucket is on an AWS Outpost,
+    #   this must be an access point ARN.
     #
     # @option params [String] :s3_storage_class
     #   The Amazon S3 storage class that you want to store your files in when
-    #   this location is used as a task destination. For more information
-    #   about S3 storage classes, see [Amazon S3 Storage Classes][1] in the
-    #   *Amazon Simple Storage Service Developer Guide*. Some storage classes
-    #   have behaviors that can affect your S3 storage cost. For detailed
-    #   information, see using-storage-classes.
+    #   this location is used as a task destination. For buckets in AWS
+    #   Regions, the storage class defaults to Standard. For buckets on AWS
+    #   Outposts, the storage class defaults to AWS S3 Outposts.
+    #
+    #   For more information about S3 storage classes, see [Amazon S3 Storage
+    #   Classes][1]. Some storage classes have behaviors that can affect your
+    #   S3 storage cost. For detailed information, see using-storage-classes.
     #
     #
     #
-    #   [1]: https://aws.amazon.com/s3/storage-classes/
+    #   [1]: http://aws.amazon.com/s3/storage-classes/
     #
     # @option params [required, Types::S3Config] :s3_config
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
@@ -849,6 +851,12 @@ module Aws::DataSync
     #
     #   For detailed information about using such a role, see Creating a
     #   Location for Amazon S3 in the *AWS DataSync User Guide*.
+    #
+    # @option params [Array<String>] :agent_arns
+    #   If you are using DataSync on an AWS Outpost, specify the Amazon
+    #   Resource Names (ARNs) of the DataSync agents deployed on your Outpost.
+    #   For more information about launching a DataSync agent on an AWS
+    #   Outpost, see outposts-agent.
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   The key-value pair that represents the tag that you want to add to the
@@ -864,10 +872,11 @@ module Aws::DataSync
     #   resp = client.create_location_s3({
     #     subdirectory: "S3Subdirectory",
     #     s3_bucket_arn: "S3BucketArn", # required
-    #     s3_storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
+    #     s3_storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
     #     s3_config: { # required
     #       bucket_access_role_arn: "IamRoleArn", # required
     #     },
+    #     agent_arns: ["AgentArn"],
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1001,7 +1010,7 @@ module Aws::DataSync
     # minutes, it means that your agent might be having trouble mounting the
     # source NFS file system. Check the task's ErrorCode and ErrorDetail.
     # Mount issues are often caused by either a misconfigured firewall or a
-    # mistyped NFS server host name.
+    # mistyped NFS server hostname.
     #
     # @option params [required, String] :source_location_arn
     #   The Amazon Resource Name (ARN) of the source location for the task.
@@ -1032,7 +1041,7 @@ module Aws::DataSync
     #   A list of filter rules that determines which files to exclude from a
     #   task. The list should contain a single filter string that consists of
     #   the patterns to exclude. The patterns are delimited by "\|" (that
-    #   is, a pipe), for example, `"/folder1|/folder2"`
+    #   is, a pipe), for example, `"/folder1|/folder2"`.
     #
     # @option params [Types::TaskSchedule] :schedule
     #   Specifies a schedule used to periodically transfer files from a source
@@ -1335,6 +1344,8 @@ module Aws::DataSync
     end
 
     # Returns metadata about a self-managed object storage server location.
+    # For more information about self-managed object storage locations, see
+    # create-object-location.
     #
     # @option params [required, String] :location_arn
     #   The Amazon Resource Name (ARN) of the self-managed object storage
@@ -1389,6 +1400,7 @@ module Aws::DataSync
     #   * {Types::DescribeLocationS3Response#location_uri #location_uri} => String
     #   * {Types::DescribeLocationS3Response#s3_storage_class #s3_storage_class} => String
     #   * {Types::DescribeLocationS3Response#s3_config #s3_config} => Types::S3Config
+    #   * {Types::DescribeLocationS3Response#agent_arns #agent_arns} => Array&lt;String&gt;
     #   * {Types::DescribeLocationS3Response#creation_time #creation_time} => Time
     #
     # @example Request syntax with placeholder values
@@ -1401,8 +1413,10 @@ module Aws::DataSync
     #
     #   resp.location_arn #=> String
     #   resp.location_uri #=> String
-    #   resp.s3_storage_class #=> String, one of "STANDARD", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"
+    #   resp.s3_storage_class #=> String, one of "STANDARD", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS"
     #   resp.s3_config.bucket_access_role_arn #=> String
+    #   resp.agent_arns #=> Array
+    #   resp.agent_arns[0] #=> String
     #   resp.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationS3 AWS API Documentation
@@ -1668,6 +1682,10 @@ module Aws::DataSync
     #   next list of locations.
     #
     # @option params [Array<Types::LocationFilter>] :filters
+    #   You can use API filters to narrow down the list of resources returned
+    #   by `ListLocations`. For example, to retrieve all tasks on a specific
+    #   source location, you can use `ListLocations` with filter name
+    #   `LocationType S3` and `Operator Equals`.
     #
     # @return [Types::ListLocationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1803,6 +1821,10 @@ module Aws::DataSync
     #   next list of tasks.
     #
     # @option params [Array<Types::TaskFilter>] :filters
+    #   You can use API filters to narrow down the list of resources returned
+    #   by `ListTasks`. For example, to retrieve all tasks on a specific
+    #   source location, you can use `ListTasks` with filter name `LocationId`
+    #   and `Operator Equals` with the ARN for the location.
     #
     # @return [Types::ListTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2081,6 +2103,69 @@ module Aws::DataSync
       req.send_request(options)
     end
 
+    # Updates execution of a task.
+    #
+    # You can modify bandwidth throttling for a task execution that is
+    # running or queued. For more information, see [Adjusting Bandwidth
+    # Throttling for a Task Execution][1].
+    #
+    # <note markdown="1"> The only `Option` that can be modified by `UpdateTaskExecution` is `
+    # BytesPerSecond `.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/working-with-task-executions.html#adjust-bandwidth-throttling
+    #
+    # @option params [required, String] :task_execution_arn
+    #   The Amazon Resource Name (ARN) of the specific task execution that is
+    #   being updated.
+    #
+    # @option params [required, Types::Options] :options
+    #   Represents the options that are available to control the behavior of a
+    #   StartTaskExecution operation. Behavior includes preserving metadata
+    #   such as user ID (UID), group ID (GID), and file permissions, and also
+    #   overwriting files in the destination, data integrity verification, and
+    #   so on.
+    #
+    #   A task has a set of default options associated with it. If you don't
+    #   specify an option in StartTaskExecution, the default value is used.
+    #   You can override the defaults options on each task execution by
+    #   specifying an overriding `Options` value to StartTaskExecution.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_task_execution({
+    #     task_execution_arn: "TaskExecutionArn", # required
+    #     options: { # required
+    #       verify_mode: "POINT_IN_TIME_CONSISTENT", # accepts POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED, NONE
+    #       overwrite_mode: "ALWAYS", # accepts ALWAYS, NEVER
+    #       atime: "NONE", # accepts NONE, BEST_EFFORT
+    #       mtime: "NONE", # accepts NONE, PRESERVE
+    #       uid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
+    #       gid: "NONE", # accepts NONE, INT_VALUE, NAME, BOTH
+    #       preserve_deleted_files: "PRESERVE", # accepts PRESERVE, REMOVE
+    #       preserve_devices: "NONE", # accepts NONE, PRESERVE
+    #       posix_permissions: "NONE", # accepts NONE, PRESERVE
+    #       bytes_per_second: 1,
+    #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
+    #       log_level: "OFF", # accepts OFF, BASIC, TRANSFER
+    #       transfer_mode: "CHANGED", # accepts CHANGED, ALL
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateTaskExecution AWS API Documentation
+    #
+    # @overload update_task_execution(params = {})
+    # @param [Hash] params ({})
+    def update_task_execution(params = {}, options = {})
+      req = build_request(:update_task_execution, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2094,7 +2179,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

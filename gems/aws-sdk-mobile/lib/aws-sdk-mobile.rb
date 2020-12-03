@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-mobile/customizations'
 # @!group service
 module Aws::Mobile
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.24.0'
 
 end

@@ -926,6 +926,7 @@
         {"shape":"IdentityTypeNotSupportedException"},
         {"shape":"SessionLifetimeInMinutesInvalidException"},
         {"shape":"UnsupportedUserEditionException"},
+        {"shape":"UnsupportedPricingPlanException"},
         {"shape":"InternalFailureException"}
       ]
     },
@@ -1800,6 +1801,12 @@
         "AvailabilityStatus":{"shape":"DashboardBehavior"}
       }
     },
+    "AdditionalDashboardIdList":{
+      "type":"list",
+      "member":{"shape":"RestrictiveResourceId"},
+      "max":20,
+      "min":1
+    },
     "AliasName":{
       "type":"string",
       "max":2048,
@@ -1824,7 +1831,8 @@
         "DataSetArns":{"shape":"DataSetArnsList"},
         "ThemeArn":{"shape":"Arn"},
         "CreatedTime":{"shape":"Timestamp"},
-        "LastUpdatedTime":{"shape":"Timestamp"}
+        "LastUpdatedTime":{"shape":"Timestamp"},
+        "Sheets":{"shape":"SheetList"}
       }
     },
     "AnalysisError":{
@@ -2069,6 +2077,17 @@
         "DATETIME"
       ]
     },
+    "ColumnDescription":{
+      "type":"structure",
+      "members":{
+        "Text":{"shape":"ColumnDescriptiveText"}
+      }
+    },
+    "ColumnDescriptiveText":{
+      "type":"string",
+      "max":500,
+      "min":0
+    },
     "ColumnGroup":{
       "type":"structure",
       "members":{
@@ -2114,6 +2133,18 @@
       "max":64,
       "min":1
     },
+    "ColumnLevelPermissionRule":{
+      "type":"structure",
+      "members":{
+        "Principals":{"shape":"PrincipalList"},
+        "ColumnNames":{"shape":"ColumnNameList"}
+      }
+    },
+    "ColumnLevelPermissionRuleList":{
+      "type":"list",
+      "member":{"shape":"ColumnLevelPermissionRule"},
+      "min":1
+    },
     "ColumnList":{
       "type":"list",
       "member":{"shape":"ColumnName"},
@@ -2123,6 +2154,11 @@
     "ColumnName":{
       "type":"string",
       "max":128,
+      "min":1
+    },
+    "ColumnNameList":{
+      "type":"list",
+      "member":{"shape":"String"},
       "min":1
     },
     "ColumnSchema":{
@@ -2141,7 +2177,8 @@
     "ColumnTag":{
       "type":"structure",
       "members":{
-        "ColumnGeographicRole":{"shape":"GeoSpatialDataRole"}
+        "ColumnGeographicRole":{"shape":"GeoSpatialDataRole"},
+        "ColumnDescription":{"shape":"ColumnDescription"}
       }
     },
     "ColumnTagList":{
@@ -2320,6 +2357,7 @@
         "ColumnGroups":{"shape":"ColumnGroupList"},
         "Permissions":{"shape":"ResourcePermissionList"},
         "RowLevelPermissionDataSet":{"shape":"RowLevelPermissionDataSet"},
+        "ColumnLevelPermissionRules":{"shape":"ColumnLevelPermissionRuleList"},
         "Tags":{"shape":"TagList"}
       }
     },
@@ -2879,7 +2917,8 @@
         "SourceEntityArn":{"shape":"Arn"},
         "DataSetArns":{"shape":"DataSetArnsList"},
         "Description":{"shape":"VersionDescription"},
-        "ThemeArn":{"shape":"Arn"}
+        "ThemeArn":{"shape":"Arn"},
+        "Sheets":{"shape":"SheetList"}
       }
     },
     "DashboardVersionSummary":{
@@ -2920,7 +2959,8 @@
         "ImportMode":{"shape":"DataSetImportMode"},
         "ConsumedSpiceCapacityInBytes":{"shape":"Long"},
         "ColumnGroups":{"shape":"ColumnGroupList"},
-        "RowLevelPermissionDataSet":{"shape":"RowLevelPermissionDataSet"}
+        "RowLevelPermissionDataSet":{"shape":"RowLevelPermissionDataSet"},
+        "ColumnLevelPermissionRules":{"shape":"ColumnLevelPermissionRuleList"}
       }
     },
     "DataSetArnsList":{
@@ -2984,7 +3024,8 @@
         "CreatedTime":{"shape":"Timestamp"},
         "LastUpdatedTime":{"shape":"Timestamp"},
         "ImportMode":{"shape":"DataSetImportMode"},
-        "RowLevelPermissionDataSet":{"shape":"RowLevelPermissionDataSet"}
+        "RowLevelPermissionDataSet":{"shape":"RowLevelPermissionDataSet"},
+        "ColumnLevelPermissionRulesApplied":{"shape":"Boolean"}
       }
     },
     "DataSetSummaryList":{
@@ -3051,6 +3092,7 @@
         "JiraParameters":{"shape":"JiraParameters"},
         "MariaDbParameters":{"shape":"MariaDbParameters"},
         "MySqlParameters":{"shape":"MySqlParameters"},
+        "OracleParameters":{"shape":"OracleParameters"},
         "PostgreSqlParameters":{"shape":"PostgreSqlParameters"},
         "PrestoParameters":{"shape":"PrestoParameters"},
         "RdsParameters":{"shape":"RdsParameters"},
@@ -3083,6 +3125,7 @@
         "JIRA",
         "MARIADB",
         "MYSQL",
+        "ORACLE",
         "POSTGRESQL",
         "PRESTO",
         "REDSHIFT",
@@ -3093,7 +3136,8 @@
         "SPARK",
         "SQLSERVER",
         "TERADATA",
-        "TWITTER"
+        "TWITTER",
+        "TIMESTREAM"
       ]
     },
     "Database":{
@@ -4394,6 +4438,14 @@
         "ENTERPRISE"
       ]
     },
+    "EmbeddingIdentityType":{
+      "type":"string",
+      "enum":[
+        "IAM",
+        "QUICKSIGHT",
+        "ANONYMOUS"
+      ]
+    },
     "EmbeddingUrl":{
       "type":"string",
       "sensitive":true
@@ -4505,7 +4557,7 @@
           "locationName":"DashboardId"
         },
         "IdentityType":{
-          "shape":"IdentityType",
+          "shape":"EmbeddingIdentityType",
           "location":"querystring",
           "locationName":"creds-type"
         },
@@ -4515,19 +4567,34 @@
           "locationName":"session-lifetime"
         },
         "UndoRedoDisabled":{
-          "shape":"boolean",
+          "shape":"Boolean",
           "location":"querystring",
           "locationName":"undo-redo-disabled"
         },
         "ResetDisabled":{
-          "shape":"boolean",
+          "shape":"Boolean",
           "location":"querystring",
           "locationName":"reset-disabled"
+        },
+        "StatePersistenceEnabled":{
+          "shape":"Boolean",
+          "location":"querystring",
+          "locationName":"state-persistence-enabled"
         },
         "UserArn":{
           "shape":"Arn",
           "location":"querystring",
           "locationName":"user-arn"
+        },
+        "Namespace":{
+          "shape":"Namespace",
+          "location":"querystring",
+          "locationName":"namespace"
+        },
+        "AdditionalDashboardIds":{
+          "shape":"AdditionalDashboardIdList",
+          "location":"querystring",
+          "locationName":"additional-dashboard-ids"
         }
       }
     },
@@ -5870,10 +5937,24 @@
       "max":65535,
       "min":0
     },
+    "OracleParameters":{
+      "type":"structure",
+      "required":[
+        "Host",
+        "Port",
+        "Database"
+      ],
+      "members":{
+        "Host":{"shape":"Host"},
+        "Port":{"shape":"Port"},
+        "Database":{"shape":"Database"}
+      }
+    },
     "OutputColumn":{
       "type":"structure",
       "members":{
         "Name":{"shape":"ColumnName"},
+        "Description":{"shape":"ColumnDescriptiveText"},
         "Type":{"shape":"ColumnDataType"}
       }
     },
@@ -5963,6 +6044,12 @@
     "Principal":{
       "type":"string",
       "max":256,
+      "min":1
+    },
+    "PrincipalList":{
+      "type":"list",
+      "member":{"shape":"String"},
+      "max":100,
       "min":1
     },
     "ProjectOperation":{
@@ -6364,11 +6451,23 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "Sheet":{
+      "type":"structure",
+      "members":{
+        "SheetId":{"shape":"RestrictiveResourceId"},
+        "Name":{"shape":"NonEmptyString"}
+      }
+    },
     "SheetControlsOption":{
       "type":"structure",
       "members":{
         "VisibilityState":{"shape":"DashboardUIState"}
       }
+    },
+    "SheetList":{
+      "type":"list",
+      "member":{"shape":"Sheet"},
+      "max":20
     },
     "SheetStyle":{
       "type":"structure",
@@ -6623,7 +6722,8 @@
         "DataSetConfigurations":{"shape":"DataSetConfigurationList"},
         "Description":{"shape":"VersionDescription"},
         "SourceEntityArn":{"shape":"Arn"},
-        "ThemeArn":{"shape":"Arn"}
+        "ThemeArn":{"shape":"Arn"},
+        "Sheets":{"shape":"SheetList"}
       }
     },
     "TemplateVersionSummary":{
@@ -6846,6 +6946,15 @@
         "Measure":{"shape":"HexColor"},
         "MeasureForeground":{"shape":"HexColor"}
       }
+    },
+    "UnsupportedPricingPlanException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"},
+        "RequestId":{"shape":"String"}
+      },
+      "error":{"httpStatusCode":403},
+      "exception":true
     },
     "UnsupportedUserEditionException":{
       "type":"structure",
@@ -7184,7 +7293,8 @@
         "LogicalTableMap":{"shape":"LogicalTableMap"},
         "ImportMode":{"shape":"DataSetImportMode"},
         "ColumnGroups":{"shape":"ColumnGroupList"},
-        "RowLevelPermissionDataSet":{"shape":"RowLevelPermissionDataSet"}
+        "RowLevelPermissionDataSet":{"shape":"RowLevelPermissionDataSet"},
+        "ColumnLevelPermissionRules":{"shape":"ColumnLevelPermissionRuleList"}
       }
     },
     "UpdateDataSetResponse":{

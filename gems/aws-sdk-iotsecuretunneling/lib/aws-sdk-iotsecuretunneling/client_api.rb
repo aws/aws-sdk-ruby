@@ -73,7 +73,7 @@ module Aws::IoTSecureTunneling
     DescribeTunnelResponse.add_member(:tunnel, Shapes::ShapeRef.new(shape: Tunnel, location_name: "tunnel"))
     DescribeTunnelResponse.struct_class = Types::DescribeTunnelResponse
 
-    DestinationConfig.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location_name: "thingName"))
+    DestinationConfig.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, location_name: "thingName"))
     DestinationConfig.add_member(:services, Shapes::ShapeRef.new(shape: ServiceList, required: true, location_name: "services"))
     DestinationConfig.struct_class = Types::DestinationConfig
 

@@ -29,6 +29,6 @@ require 'aws-sdk-s3/customizations/types/list_object_versions_output'
   Aws::S3::ObjectVersion::Collection,
 ].each do |klass|
   klass.send(:alias_method, :delete, :batch_delete!)
-  klass.send(:extend, Aws::Deprecations)
+  klass.extend Aws::Deprecations
   klass.send(:deprecated, :delete, use: :batch_delete!)
 end

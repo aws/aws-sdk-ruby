@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-11-16)
+------------------
+
+* Feature - Documentation updates for Amazon SNS.
+
+1.35.0 (2020-10-30)
+------------------
+
+* Feature - Documentation updates for Amazon SNS
+
+1.34.0 (2020-10-22)
+------------------
+
+* Feature - SNS now supports a new class of topics: FIFO (First-In-First-Out). FIFO topics provide strictly-ordered, deduplicated, filterable, encryptable, many-to-many messaging at scale.
+
+1.33.0 (2020-10-08)
+------------------
+
+* Feature - Documentation updates for SNS.
+
+1.32.1 (2020-10-05)
+------------------
+
+* Issue - Use `:http_proxy` configuration when fetching PEM files with `Aws::SNS::MessageVerifier`. (#1683)
+
+1.32.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.30.0 (2020-08-25)
 ------------------
 

@@ -37,8 +37,8 @@ module Aws::Rekognition
     end
 
     # Assets are the images that you use to train and evaluate a model
-    # version. Assets are referenced by Sagemaker GroundTruth manifest
-    # files.
+    # version. Assets can also contain validation information that you use
+    # to debug a failed model training.
     #
     # @note When making an API call, you may pass Asset
     #   data as a hash:
@@ -54,7 +54,8 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] ground_truth_manifest
-    #   The S3 bucket that contains the Ground Truth manifest file.
+    #   The S3 bucket that contains an Amazon Sagemaker Ground Truth format
+    #   manifest file.
     #   @return [Types::GroundTruthManifest]
     #
     class Asset < Struct.new(
@@ -80,7 +81,7 @@ module Aws::Rekognition
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_channels
-    #   The number of audio channels in the segement.
+    #   The number of audio channels in the segment.
     #   @return [Integer]
     #
     class AudioMetadata < Struct.new(
@@ -110,10 +111,11 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Identifies the bounding box around the label, face, or text. The
-    # `left` (x-coordinate) and `top` (y-coordinate) are coordinates
-    # representing the top and left sides of the bounding box. Note that the
-    # upper-left corner of the image is the origin (0,0).
+    # Identifies the bounding box around the label, face, text or personal
+    # protective equipment. The `left` (x-coordinate) and `top`
+    # (y-coordinate) are coordinates representing the top and left sides of
+    # the bounding box. Note that the upper-left corner of the image is the
+    # origin (0,0).
     #
     # The `top` and `left` values returned are ratios of the overall image
     # size. For example, if the input image is 700x200 pixels, and the
@@ -495,6 +497,25 @@ module Aws::Rekognition
     class ContentModerationDetection < Struct.new(
       :timestamp,
       :moderation_label)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an item of Personal Protective Equipment covering a
+    # corresponding body part. For more information, see
+    # DetectProtectiveEquipment.
+    #
+    # @!attribute [rw] confidence
+    #   The confidence that Amazon Rekognition has in the value of `Value`.
+    #   @return [Float]
+    #
+    # @!attribute [rw] value
+    #   True if the PPE covers the corresponding body part, otherwise false.
+    #   @return [Boolean]
+    #
+    class CoversBodyPart < Struct.new(
+      :confidence,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1445,6 +1466,64 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DetectProtectiveEquipmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image: { # required
+    #           bytes: "data",
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #         summarization_attributes: {
+    #           min_confidence: 1.0, # required
+    #           required_equipment_types: ["FACE_COVER"], # required, accepts FACE_COVER, HAND_COVER, HEAD_COVER
+    #         },
+    #       }
+    #
+    # @!attribute [rw] image
+    #   The image in which you want to detect PPE on detected persons. The
+    #   image can be passed as image bytes or you can reference an image
+    #   stored in an Amazon S3 bucket.
+    #   @return [Types::Image]
+    #
+    # @!attribute [rw] summarization_attributes
+    #   An array of PPE types that you want to summarize.
+    #   @return [Types::ProtectiveEquipmentSummarizationAttributes]
+    #
+    class DetectProtectiveEquipmentRequest < Struct.new(
+      :image,
+      :summarization_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protective_equipment_model_version
+    #   The version number of the PPE detection model used to detect PPE in
+    #   the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] persons
+    #   An array of persons detected in the image (including persons not
+    #   wearing PPE).
+    #   @return [Array<Types::ProtectiveEquipmentPerson>]
+    #
+    # @!attribute [rw] summary
+    #   Summary information for the types of PPE specified in the
+    #   `SummarizationAttributes` input parameter.
+    #   @return [Types::ProtectiveEquipmentSummary]
+    #
+    class DetectProtectiveEquipmentResponse < Struct.new(
+      :protective_equipment_model_version,
+      :persons,
+      :summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A set of optional parameters that you can use to set the criteria that
     # the text must meet to be included in your response. `WordFilter` looks
     # at a word’s height, width, and minimum confidence. `RegionOfInterest`
@@ -1614,6 +1693,36 @@ module Aws::Rekognition
     class Emotion < Struct.new(
       :type,
       :confidence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an item of Personal Protective Equipment (PPE)
+    # detected by DetectProtectiveEquipment. For more information, see
+    # DetectProtectiveEquipment.
+    #
+    # @!attribute [rw] bounding_box
+    #   A bounding box surrounding the item of detected PPE.
+    #   @return [Types::BoundingBox]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence that Amazon Rekognition has that the bounding box
+    #   (`BoundingBox`) contains an item of PPE.
+    #   @return [Float]
+    #
+    # @!attribute [rw] type
+    #   The type of detected PPE.
+    #   @return [String]
+    #
+    # @!attribute [rw] covers_body_part
+    #   Information about the body part covered by the detected PPE.
+    #   @return [Types::CoversBodyPart]
+    #
+    class EquipmentDetection < Struct.new(
+      :bounding_box,
+      :confidence,
+      :type,
+      :covers_body_part)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2578,7 +2687,10 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] segments
-    #   An array of segments detected in a video.
+    #   An array of segments detected in a video. The array is sorted by the
+    #   segment types (TECHNICAL\_CUE or SHOT) specified in the
+    #   `SegmentTypes` input parameter of `StartSegmentDetection`. Within
+    #   each segment type the array is sorted by timestamp values.
     #   @return [Array<Types::SegmentDetection>]
     #
     # @!attribute [rw] selected_segment_types
@@ -2676,7 +2788,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # The S3 bucket that contains the Ground Truth manifest file.
+    # The S3 bucket that contains an Amazon Sagemaker Ground Truth format
+    # manifest file.
     #
     # @note When making an API call, you may pass GroundTruthManifest
     #   data as a hash:
@@ -3205,17 +3318,17 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] x
-    #   The x-coordinate from the top left of the landmark expressed as the
-    #   ratio of the width of the image. For example, if the image is 700 x
-    #   200 and the x-coordinate of the landmark is at 350 pixels, this
-    #   value is 0.5.
+    #   The x-coordinate of the landmark expressed as a ratio of the width
+    #   of the image. The x-coordinate is measured from the left-side of the
+    #   image. For example, if the image is 700 pixels wide and the
+    #   x-coordinate of the landmark is at 350 pixels, this value is 0.5.
     #   @return [Float]
     #
     # @!attribute [rw] y
-    #   The y-coordinate from the top left of the landmark expressed as the
-    #   ratio of the height of the image. For example, if the image is 700 x
-    #   200 and the y-coordinate of the landmark is at 100 pixels, this
-    #   value is 0.5.
+    #   The y-coordinate of the landmark expressed as a ratio of the height
+    #   of the image. The y-coordinate is measured from the top of the
+    #   image. For example, if the image height is 200 pixels and the
+    #   y-coordinate of the landmark is at 50 pixels, this value is 0.25.
     #   @return [Float]
     #
     class Landmark < Struct.new(
@@ -3702,17 +3815,23 @@ module Aws::Rekognition
     #   @return [Types::OutputConfig]
     #
     # @!attribute [rw] training_data_result
-    #   The manifest file that represents the training results.
+    #   Contains information about the training results.
     #   @return [Types::TrainingDataResult]
     #
     # @!attribute [rw] testing_data_result
-    #   The manifest file that represents the testing results.
+    #   Contains information about the testing results.
     #   @return [Types::TestingDataResult]
     #
     # @!attribute [rw] evaluation_result
     #   The training results. `EvaluationResult` is only returned if
     #   training is successful.
     #   @return [Types::EvaluationResult]
+    #
+    # @!attribute [rw] manifest_summary
+    #   The location of the summary manifest. The summary manifest provides
+    #   aggregate data validation results for the training and test
+    #   datasets.
+    #   @return [Types::GroundTruthManifest]
     #
     class ProjectVersionDescription < Struct.new(
       :project_version_arn,
@@ -3725,7 +3844,158 @@ module Aws::Rekognition
       :output_config,
       :training_data_result,
       :testing_data_result,
-      :evaluation_result)
+      :evaluation_result,
+      :manifest_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a body part detected by DetectProtectiveEquipment
+    # that contains PPE. An array of `ProtectiveEquipmentBodyPart` objects
+    # is returned for each person detected by `DetectProtectiveEquipment`.
+    #
+    # @!attribute [rw] name
+    #   The detected body part.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence that Amazon Rekognition has in the detection accuracy
+    #   of the detected body part.
+    #   @return [Float]
+    #
+    # @!attribute [rw] equipment_detections
+    #   An array of Personal Protective Equipment items detected around a
+    #   body part.
+    #   @return [Array<Types::EquipmentDetection>]
+    #
+    class ProtectiveEquipmentBodyPart < Struct.new(
+      :name,
+      :confidence,
+      :equipment_detections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A person detected by a call to DetectProtectiveEquipment. The API
+    # returns all persons detected in the input image in an array of
+    # `ProtectiveEquipmentPerson` objects.
+    #
+    # @!attribute [rw] body_parts
+    #   An array of body parts detected on a person's body (including body
+    #   parts without PPE).
+    #   @return [Array<Types::ProtectiveEquipmentBodyPart>]
+    #
+    # @!attribute [rw] bounding_box
+    #   A bounding box around the detected person.
+    #   @return [Types::BoundingBox]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence that Amazon Rekognition has that the bounding box
+    #   contains a person.
+    #   @return [Float]
+    #
+    # @!attribute [rw] id
+    #   The identifier for the detected person. The identifier is only
+    #   unique for a single call to `DetectProtectiveEquipment`.
+    #   @return [Integer]
+    #
+    class ProtectiveEquipmentPerson < Struct.new(
+      :body_parts,
+      :bounding_box,
+      :confidence,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies summary attributes to return from a call to
+    # DetectProtectiveEquipment. You can specify which types of PPE to
+    # summarize. You can also specify a minimum confidence value for
+    # detections. Summary information is returned in the `Summary`
+    # (ProtectiveEquipmentSummary) field of the response from
+    # `DetectProtectiveEquipment`. The summary includes which persons in an
+    # image were detected wearing the requested types of person protective
+    # equipment (PPE), which persons were detected as not wearing PPE, and
+    # the persons in which a determination could not be made. For more
+    # information, see ProtectiveEquipmentSummary.
+    #
+    # @note When making an API call, you may pass ProtectiveEquipmentSummarizationAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         min_confidence: 1.0, # required
+    #         required_equipment_types: ["FACE_COVER"], # required, accepts FACE_COVER, HAND_COVER, HEAD_COVER
+    #       }
+    #
+    # @!attribute [rw] min_confidence
+    #   The minimum confidence level for which you want summary information.
+    #   The confidence level applies to person detection, body part
+    #   detection, equipment detection, and body part coverage. Amazon
+    #   Rekognition doesn't return summary information with a confidence
+    #   than this specified value. There isn't a default value.
+    #
+    #   Specify a `MinConfidence` value that is between 50-100% as
+    #   `DetectProtectiveEquipment` returns predictions only where the
+    #   detection confidence is between 50% - 100%. If you specify a value
+    #   that is less than 50%, the results are the same specifying a value
+    #   of 50%.
+    #   @return [Float]
+    #
+    # @!attribute [rw] required_equipment_types
+    #   An array of personal protective equipment types for which you want
+    #   summary information. If a person is detected wearing a required
+    #   requipment type, the person's ID is added to the
+    #   `PersonsWithRequiredEquipment` array field returned in
+    #   ProtectiveEquipmentSummary by `DetectProtectiveEquipment`.
+    #   @return [Array<String>]
+    #
+    class ProtectiveEquipmentSummarizationAttributes < Struct.new(
+      :min_confidence,
+      :required_equipment_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information for required items of personal protective
+    # equipment (PPE) detected on persons by a call to
+    # DetectProtectiveEquipment. You specify the required type of PPE in the
+    # `SummarizationAttributes` (ProtectiveEquipmentSummarizationAttributes)
+    # input parameter. The summary includes which persons were detected
+    # wearing the required personal protective equipment
+    # (`PersonsWithRequiredEquipment`), which persons were detected as not
+    # wearing the required PPE (`PersonsWithoutRequiredEquipment`), and the
+    # persons in which a determination could not be made
+    # (`PersonsIndeterminate`).
+    #
+    # To get a total for each category, use the size of the field array. For
+    # example, to find out how many people were detected as wearing the
+    # specified PPE, use the size of the `PersonsWithRequiredEquipment`
+    # array. If you want to find out more about a person, such as the
+    # location (BoundingBox) of the person on the image, use the person ID
+    # in each array element. Each person ID matches the ID field of a
+    # ProtectiveEquipmentPerson object returned in the `Persons` array by
+    # `DetectProtectiveEquipment`.
+    #
+    # @!attribute [rw] persons_with_required_equipment
+    #   An array of IDs for persons who are wearing detected personal
+    #   protective equipment.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] persons_without_required_equipment
+    #   An array of IDs for persons who are not wearing all of the types of
+    #   PPE specified in the RequiredEquipmentTypes field of the detected
+    #   personal protective equipment.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] persons_indeterminate
+    #   An array of IDs for persons where it was not possible to determine
+    #   if they are wearing personal protective equipment.
+    #   @return [Array<Integer>]
+    #
+    class ProtectiveEquipmentSummary < Struct.new(
+      :persons_with_required_equipment,
+      :persons_without_required_equipment,
+      :persons_indeterminate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3768,7 +4038,7 @@ module Aws::Rekognition
 
     # @!attribute [rw] celebrity_faces
     #   Details about each celebrity found in the image. Amazon Rekognition
-    #   can detect a maximum of 15 celebrities in an image.
+    #   can detect a maximum of 64 celebrities in an image.
     #   @return [Array<Types::Celebrity>]
     #
     # @!attribute [rw] unrecognized_faces
@@ -4059,12 +4329,14 @@ module Aws::Rekognition
     #
     # @!attribute [rw] start_timestamp_millis
     #   The start time of the detected segment in milliseconds from the
-    #   start of the video.
+    #   start of the video. This value is rounded down. For example, if the
+    #   actual timestamp is 100.6667 milliseconds, Amazon Rekognition Video
+    #   returns a value of 100 millis.
     #   @return [Integer]
     #
     # @!attribute [rw] end_timestamp_millis
     #   The end time of the detected segment, in milliseconds, from the
-    #   start of the video.
+    #   start of the video. This value is rounded down.
     #   @return [Integer]
     #
     # @!attribute [rw] duration_millis
@@ -4131,11 +4403,17 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # The size of the collection exceeds the allowed limit. For more
+    # information, see Limits in Amazon Rekognition in the Amazon
+    # Rekognition Developer Guide.
+    #
+    class ServiceQuotaExceededException < Aws::EmptyStructure; end
+
     # Information about a shot detection segment detected in a video. For
     # more information, see SegmentDetection.
     #
     # @!attribute [rw] index
-    #   An Identifier for a shot detection segment detected in a video
+    #   An Identifier for a shot detection segment detected in a video.
     #   @return [Integer]
     #
     # @!attribute [rw] confidence
@@ -5207,8 +5485,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # A Sagemaker Groundtruth format manifest file representing the dataset
-    # used for testing.
+    # Sagemaker Groundtruth format manifest files for the input, output and
+    # validation datasets that are used and created during testing.
     #
     # @!attribute [rw] input
     #   The testing dataset that was supplied for training.
@@ -5220,9 +5498,15 @@ module Aws::Rekognition
     #   issues.
     #   @return [Types::TestingData]
     #
+    # @!attribute [rw] validation
+    #   The location of the data validation manifest. The data validation
+    #   manifest is created for the test dataset during model training.
+    #   @return [Types::ValidationData]
+    #
     class TestingDataResult < Struct.new(
       :input,
-      :output)
+      :output,
+      :validation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5337,8 +5621,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # A Sagemaker Groundtruth format manifest file that represents the
-    # dataset used for training.
+    # Sagemaker Groundtruth format manifest files for the input, output and
+    # validation datasets that are used and created during testing.
     #
     # @!attribute [rw] input
     #   The training assets that you supplied for training.
@@ -5349,9 +5633,15 @@ module Aws::Rekognition
     #   Custom Labels.
     #   @return [Types::TrainingData]
     #
+    # @!attribute [rw] validation
+    #   The location of the data validation manifest. The data validation
+    #   manifest is created for the training dataset during model training.
+    #   @return [Types::ValidationData]
+    #
     class TrainingDataResult < Struct.new(
       :input,
-      :output)
+      :output,
+      :validation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5387,6 +5677,32 @@ module Aws::Rekognition
     class UnindexedFace < Struct.new(
       :reasons,
       :face_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the Amazon S3 bucket location of the validation data for a
+    # model training job.
+    #
+    # The validation data includes error information for individual JSON
+    # lines in the dataset. For more information, see Debugging a Failed
+    # Model Training in the Amazon Rekognition Custom Labels Developer
+    # Guide.
+    #
+    # You get the `ValidationData` object for the training dataset
+    # (TrainingDataResult) and the test dataset (TestingDataResult) by
+    # calling DescribeProjectVersions.
+    #
+    # The assets array contains a single Asset object. The
+    # GroundTruthManifest field of the Asset object contains the S3 bucket
+    # location of the validation data.
+    #
+    # @!attribute [rw] assets
+    #   The assets that comprise the validation data.
+    #   @return [Array<Types::Asset>]
+    #
+    class ValidationData < Struct.new(
+      :assets)
       SENSITIVE = []
       include Aws::Structure
     end

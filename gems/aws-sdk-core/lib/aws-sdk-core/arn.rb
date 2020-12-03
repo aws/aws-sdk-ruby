@@ -75,5 +75,18 @@ module Aws
     def to_s
       "arn:#{partition}:#{service}:#{region}:#{account_id}:#{resource}"
     end
+
+    # Return the ARN as a hash
+    #
+    # @return [Hash]
+    def to_h
+      {
+        partition: @partition,
+        service: @service,
+        region: @region,
+        account_id: @account_id,
+        resource: @resource
+      }
+    end
   end
 end

@@ -141,6 +141,7 @@ module Aws::IoT
     AwsJobRolloutRatePerMinute = Shapes::IntegerShape.new(name: 'AwsJobRolloutRatePerMinute')
     AwsJobTimeoutConfig = Shapes::StructureShape.new(name: 'AwsJobTimeoutConfig')
     AwsJobTimeoutInProgressTimeoutInMinutes = Shapes::IntegerShape.new(name: 'AwsJobTimeoutInProgressTimeoutInMinutes')
+    BatchMode = Shapes::BooleanShape.new(name: 'BatchMode')
     Behavior = Shapes::StructureShape.new(name: 'Behavior')
     BehaviorCriteria = Shapes::StructureShape.new(name: 'BehaviorCriteria')
     BehaviorMetric = Shapes::StringShape.new(name: 'BehaviorMetric')
@@ -459,6 +460,7 @@ module Aws::IoT
     FileId = Shapes::IntegerShape.new(name: 'FileId')
     FileLocation = Shapes::StructureShape.new(name: 'FileLocation')
     FileName = Shapes::StringShape.new(name: 'FileName')
+    FileType = Shapes::IntegerShape.new(name: 'FileType')
     FindingId = Shapes::StringShape.new(name: 'FindingId')
     FindingIds = Shapes::ListShape.new(name: 'FindingIds')
     FirehoseAction = Shapes::StructureShape.new(name: 'FirehoseAction')
@@ -710,6 +712,7 @@ module Aws::IoT
     MqttContext = Shapes::StructureShape.new(name: 'MqttContext')
     MqttPassword = Shapes::BlobShape.new(name: 'MqttPassword')
     MqttUsername = Shapes::StringShape.new(name: 'MqttUsername')
+    NamespaceId = Shapes::StringShape.new(name: 'NamespaceId')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonCompliantChecksCount = Shapes::IntegerShape.new(name: 'NonCompliantChecksCount')
     NonCompliantResource = Shapes::StructureShape.new(name: 'NonCompliantResource')
@@ -1009,6 +1012,16 @@ module Aws::IoT
     TimedOutThings = Shapes::IntegerShape.new(name: 'TimedOutThings')
     TimeoutConfig = Shapes::StructureShape.new(name: 'TimeoutConfig')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TimestreamAction = Shapes::StructureShape.new(name: 'TimestreamAction')
+    TimestreamDatabaseName = Shapes::StringShape.new(name: 'TimestreamDatabaseName')
+    TimestreamDimension = Shapes::StructureShape.new(name: 'TimestreamDimension')
+    TimestreamDimensionList = Shapes::ListShape.new(name: 'TimestreamDimensionList')
+    TimestreamDimensionName = Shapes::StringShape.new(name: 'TimestreamDimensionName')
+    TimestreamDimensionValue = Shapes::StringShape.new(name: 'TimestreamDimensionValue')
+    TimestreamTableName = Shapes::StringShape.new(name: 'TimestreamTableName')
+    TimestreamTimestamp = Shapes::StructureShape.new(name: 'TimestreamTimestamp')
+    TimestreamTimestampUnit = Shapes::StringShape.new(name: 'TimestreamTimestampUnit')
+    TimestreamTimestampValue = Shapes::StringShape.new(name: 'TimestreamTimestampValue')
     TlsContext = Shapes::StructureShape.new(name: 'TlsContext')
     Token = Shapes::StringShape.new(name: 'Token')
     TokenKeyName = Shapes::StringShape.new(name: 'TokenKeyName')
@@ -1137,6 +1150,7 @@ module Aws::IoT
     Action.add_member(:iot_events, Shapes::ShapeRef.new(shape: IotEventsAction, location_name: "iotEvents"))
     Action.add_member(:iot_site_wise, Shapes::ShapeRef.new(shape: IotSiteWiseAction, location_name: "iotSiteWise"))
     Action.add_member(:step_functions, Shapes::ShapeRef.new(shape: StepFunctionsAction, location_name: "stepFunctions"))
+    Action.add_member(:timestream, Shapes::ShapeRef.new(shape: TimestreamAction, location_name: "timestream"))
     Action.add_member(:http, Shapes::ShapeRef.new(shape: HttpAction, location_name: "http"))
     Action.struct_class = Types::Action
 
@@ -1211,6 +1225,7 @@ module Aws::IoT
     AssociateTargetsWithJobRequest.add_member(:targets, Shapes::ShapeRef.new(shape: JobTargets, required: true, location_name: "targets"))
     AssociateTargetsWithJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     AssociateTargetsWithJobRequest.add_member(:comment, Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
+    AssociateTargetsWithJobRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location: "querystring", location_name: "namespaceId"))
     AssociateTargetsWithJobRequest.struct_class = Types::AssociateTargetsWithJobRequest
 
     AssociateTargetsWithJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "jobArn"))
@@ -1659,6 +1674,7 @@ module Aws::IoT
     CreateJobRequest.add_member(:abort_config, Shapes::ShapeRef.new(shape: AbortConfig, location_name: "abortConfig"))
     CreateJobRequest.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
     CreateJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateJobRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location_name: "namespaceId"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "jobArn"))
@@ -1915,10 +1931,12 @@ module Aws::IoT
     DeleteJobExecutionRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
     DeleteJobExecutionRequest.add_member(:execution_number, Shapes::ShapeRef.new(shape: ExecutionNumber, required: true, location: "uri", location_name: "executionNumber"))
     DeleteJobExecutionRequest.add_member(:force, Shapes::ShapeRef.new(shape: ForceFlag, location: "querystring", location_name: "force"))
+    DeleteJobExecutionRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location: "querystring", location_name: "namespaceId"))
     DeleteJobExecutionRequest.struct_class = Types::DeleteJobExecutionRequest
 
     DeleteJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     DeleteJobRequest.add_member(:force, Shapes::ShapeRef.new(shape: ForceFlag, location: "querystring", location_name: "force"))
+    DeleteJobRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location: "querystring", location_name: "namespaceId"))
     DeleteJobRequest.struct_class = Types::DeleteJobRequest
 
     DeleteMitigationActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: MitigationActionName, required: true, location: "uri", location_name: "actionName"))
@@ -2119,6 +2137,7 @@ module Aws::IoT
     DescribeDomainConfigurationResponse.add_member(:domain_configuration_status, Shapes::ShapeRef.new(shape: DomainConfigurationStatus, location_name: "domainConfigurationStatus"))
     DescribeDomainConfigurationResponse.add_member(:service_type, Shapes::ShapeRef.new(shape: ServiceType, location_name: "serviceType"))
     DescribeDomainConfigurationResponse.add_member(:domain_type, Shapes::ShapeRef.new(shape: DomainType, location_name: "domainType"))
+    DescribeDomainConfigurationResponse.add_member(:last_status_change_date, Shapes::ShapeRef.new(shape: DateType, location_name: "lastStatusChangeDate"))
     DescribeDomainConfigurationResponse.struct_class = Types::DescribeDomainConfigurationResponse
 
     DescribeEndpointRequest.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location: "querystring", location_name: "endpointType"))
@@ -2395,6 +2414,7 @@ module Aws::IoT
     FirehoseAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
     FirehoseAction.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "deliveryStreamName"))
     FirehoseAction.add_member(:separator, Shapes::ShapeRef.new(shape: FirehoseSeparator, location_name: "separator"))
+    FirehoseAction.add_member(:batch_mode, Shapes::ShapeRef.new(shape: BatchMode, location_name: "batchMode"))
     FirehoseAction.struct_class = Types::FirehoseAction
 
     GetCardinalityRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
@@ -2574,11 +2594,13 @@ module Aws::IoT
 
     IotAnalyticsAction.add_member(:channel_arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "channelArn"))
     IotAnalyticsAction.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "channelName"))
+    IotAnalyticsAction.add_member(:batch_mode, Shapes::ShapeRef.new(shape: BatchMode, location_name: "batchMode"))
     IotAnalyticsAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "roleArn"))
     IotAnalyticsAction.struct_class = Types::IotAnalyticsAction
 
     IotEventsAction.add_member(:input_name, Shapes::ShapeRef.new(shape: InputName, required: true, location_name: "inputName"))
     IotEventsAction.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "messageId"))
+    IotEventsAction.add_member(:batch_mode, Shapes::ShapeRef.new(shape: BatchMode, location_name: "batchMode"))
     IotEventsAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
     IotEventsAction.struct_class = Types::IotEventsAction
 
@@ -2603,6 +2625,7 @@ module Aws::IoT
     Job.add_member(:completed_at, Shapes::ShapeRef.new(shape: DateType, location_name: "completedAt"))
     Job.add_member(:job_process_details, Shapes::ShapeRef.new(shape: JobProcessDetails, location_name: "jobProcessDetails"))
     Job.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
+    Job.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location_name: "namespaceId"))
     Job.struct_class = Types::Job
 
     JobExecution.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
@@ -2849,6 +2872,7 @@ module Aws::IoT
 
     ListJobExecutionsForThingRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
     ListJobExecutionsForThingRequest.add_member(:status, Shapes::ShapeRef.new(shape: JobExecutionStatus, location: "querystring", location_name: "status"))
+    ListJobExecutionsForThingRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location: "querystring", location_name: "namespaceId"))
     ListJobExecutionsForThingRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: LaserMaxResults, location: "querystring", location_name: "maxResults"))
     ListJobExecutionsForThingRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListJobExecutionsForThingRequest.struct_class = Types::ListJobExecutionsForThingRequest
@@ -2863,6 +2887,7 @@ module Aws::IoT
     ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListJobsRequest.add_member(:thing_group_name, Shapes::ShapeRef.new(shape: ThingGroupName, location: "querystring", location_name: "thingGroupName"))
     ListJobsRequest.add_member(:thing_group_id, Shapes::ShapeRef.new(shape: ThingGroupId, location: "querystring", location_name: "thingGroupId"))
+    ListJobsRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location: "querystring", location_name: "namespaceId"))
     ListJobsRequest.struct_class = Types::ListJobsRequest
 
     ListJobsResponse.add_member(:jobs, Shapes::ShapeRef.new(shape: JobSummaryList, location_name: "jobs"))
@@ -3048,10 +3073,13 @@ module Aws::IoT
     ListThingGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListThingGroupsResponse.struct_class = Types::ListThingGroupsResponse
 
+    ListThingPrincipalsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListThingPrincipalsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RegistryMaxResults, location: "querystring", location_name: "maxResults"))
     ListThingPrincipalsRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
     ListThingPrincipalsRequest.struct_class = Types::ListThingPrincipalsRequest
 
     ListThingPrincipalsResponse.add_member(:principals, Shapes::ShapeRef.new(shape: Principals, location_name: "principals"))
+    ListThingPrincipalsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListThingPrincipalsResponse.struct_class = Types::ListThingPrincipalsResponse
 
     ListThingRegistrationTaskReportsRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: TaskId, required: true, location: "uri", location_name: "taskId"))
@@ -3223,6 +3251,7 @@ module Aws::IoT
     NotConfiguredException.struct_class = Types::NotConfiguredException
 
     OTAUpdateFile.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, location_name: "fileName"))
+    OTAUpdateFile.add_member(:file_type, Shapes::ShapeRef.new(shape: FileType, location_name: "fileType"))
     OTAUpdateFile.add_member(:file_version, Shapes::ShapeRef.new(shape: OTAUpdateFileVersion, location_name: "fileVersion"))
     OTAUpdateFile.add_member(:file_location, Shapes::ShapeRef.new(shape: FileLocation, location_name: "fileLocation"))
     OTAUpdateFile.add_member(:code_signing, Shapes::ShapeRef.new(shape: CodeSigning, location_name: "codeSigning"))
@@ -3835,6 +3864,23 @@ module Aws::IoT
     TimeoutConfig.add_member(:in_progress_timeout_in_minutes, Shapes::ShapeRef.new(shape: InProgressTimeoutInMinutes, location_name: "inProgressTimeoutInMinutes"))
     TimeoutConfig.struct_class = Types::TimeoutConfig
 
+    TimestreamAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
+    TimestreamAction.add_member(:database_name, Shapes::ShapeRef.new(shape: TimestreamDatabaseName, required: true, location_name: "databaseName"))
+    TimestreamAction.add_member(:table_name, Shapes::ShapeRef.new(shape: TimestreamTableName, required: true, location_name: "tableName"))
+    TimestreamAction.add_member(:dimensions, Shapes::ShapeRef.new(shape: TimestreamDimensionList, required: true, location_name: "dimensions"))
+    TimestreamAction.add_member(:timestamp, Shapes::ShapeRef.new(shape: TimestreamTimestamp, location_name: "timestamp"))
+    TimestreamAction.struct_class = Types::TimestreamAction
+
+    TimestreamDimension.add_member(:name, Shapes::ShapeRef.new(shape: TimestreamDimensionName, required: true, location_name: "name"))
+    TimestreamDimension.add_member(:value, Shapes::ShapeRef.new(shape: TimestreamDimensionValue, required: true, location_name: "value"))
+    TimestreamDimension.struct_class = Types::TimestreamDimension
+
+    TimestreamDimensionList.member = Shapes::ShapeRef.new(shape: TimestreamDimension)
+
+    TimestreamTimestamp.add_member(:value, Shapes::ShapeRef.new(shape: TimestreamTimestampValue, required: true, location_name: "value"))
+    TimestreamTimestamp.add_member(:unit, Shapes::ShapeRef.new(shape: TimestreamTimestampUnit, required: true, location_name: "unit"))
+    TimestreamTimestamp.struct_class = Types::TimestreamTimestamp
+
     TlsContext.add_member(:server_name, Shapes::ShapeRef.new(shape: ServerName, location_name: "serverName"))
     TlsContext.struct_class = Types::TlsContext
 
@@ -4014,6 +4060,7 @@ module Aws::IoT
     UpdateJobRequest.add_member(:job_executions_rollout_config, Shapes::ShapeRef.new(shape: JobExecutionsRolloutConfig, location_name: "jobExecutionsRolloutConfig"))
     UpdateJobRequest.add_member(:abort_config, Shapes::ShapeRef.new(shape: AbortConfig, location_name: "abortConfig"))
     UpdateJobRequest.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
+    UpdateJobRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location: "querystring", location_name: "namespaceId"))
     UpdateJobRequest.struct_class = Types::UpdateJobRequest
 
     UpdateMitigationActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: MitigationActionName, required: true, location: "uri", location_name: "actionName"))
@@ -4934,6 +4981,7 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: DeleteConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingResourceUpdateException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
@@ -4948,6 +4996,7 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingResourceUpdateException)
         o.errors << Shapes::ShapeRef.new(shape: DeleteConflictException)
       end)
 
@@ -6408,6 +6457,7 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -6425,6 +6475,7 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -6445,6 +6496,12 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_thing_registration_task_reports, Seahorse::Model::Operation.new.tap do |o|
@@ -6548,6 +6605,7 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -6810,6 +6868,7 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: NotConfiguredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:set_v2_logging_options, Seahorse::Model::Operation.new.tap do |o|

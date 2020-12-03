@@ -161,6 +161,9 @@ module Aws::AppMesh
     Logging = Shapes::StructureShape.new(name: 'Logging')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MatchRange = Shapes::StructureShape.new(name: 'MatchRange')
+    MaxConnections = Shapes::IntegerShape.new(name: 'MaxConnections')
+    MaxPendingRequests = Shapes::IntegerShape.new(name: 'MaxPendingRequests')
+    MaxRequests = Shapes::IntegerShape.new(name: 'MaxRequests')
     MaxRetries = Shapes::IntegerShape.new(name: 'MaxRetries')
     MeshData = Shapes::StructureShape.new(name: 'MeshData')
     MeshList = Shapes::ListShape.new(name: 'MeshList')
@@ -170,6 +173,9 @@ module Aws::AppMesh
     MeshStatusCode = Shapes::StringShape.new(name: 'MeshStatusCode')
     MethodName = Shapes::StringShape.new(name: 'MethodName')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    OutlierDetection = Shapes::StructureShape.new(name: 'OutlierDetection')
+    OutlierDetectionMaxEjectionPercent = Shapes::IntegerShape.new(name: 'OutlierDetectionMaxEjectionPercent')
+    OutlierDetectionMaxServerErrors = Shapes::IntegerShape.new(name: 'OutlierDetectionMaxServerErrors')
     PercentInt = Shapes::IntegerShape.new(name: 'PercentInt')
     PortMapping = Shapes::StructureShape.new(name: 'PortMapping')
     PortNumber = Shapes::IntegerShape.new(name: 'PortNumber')
@@ -230,12 +236,16 @@ module Aws::AppMesh
     VirtualGatewayCertificateAuthorityArns = Shapes::ListShape.new(name: 'VirtualGatewayCertificateAuthorityArns')
     VirtualGatewayClientPolicy = Shapes::StructureShape.new(name: 'VirtualGatewayClientPolicy')
     VirtualGatewayClientPolicyTls = Shapes::StructureShape.new(name: 'VirtualGatewayClientPolicyTls')
+    VirtualGatewayConnectionPool = Shapes::StructureShape.new(name: 'VirtualGatewayConnectionPool')
     VirtualGatewayData = Shapes::StructureShape.new(name: 'VirtualGatewayData')
     VirtualGatewayFileAccessLog = Shapes::StructureShape.new(name: 'VirtualGatewayFileAccessLog')
+    VirtualGatewayGrpcConnectionPool = Shapes::StructureShape.new(name: 'VirtualGatewayGrpcConnectionPool')
     VirtualGatewayHealthCheckIntervalMillis = Shapes::IntegerShape.new(name: 'VirtualGatewayHealthCheckIntervalMillis')
     VirtualGatewayHealthCheckPolicy = Shapes::StructureShape.new(name: 'VirtualGatewayHealthCheckPolicy')
     VirtualGatewayHealthCheckThreshold = Shapes::IntegerShape.new(name: 'VirtualGatewayHealthCheckThreshold')
     VirtualGatewayHealthCheckTimeoutMillis = Shapes::IntegerShape.new(name: 'VirtualGatewayHealthCheckTimeoutMillis')
+    VirtualGatewayHttp2ConnectionPool = Shapes::StructureShape.new(name: 'VirtualGatewayHttp2ConnectionPool')
+    VirtualGatewayHttpConnectionPool = Shapes::StructureShape.new(name: 'VirtualGatewayHttpConnectionPool')
     VirtualGatewayList = Shapes::ListShape.new(name: 'VirtualGatewayList')
     VirtualGatewayListener = Shapes::StructureShape.new(name: 'VirtualGatewayListener')
     VirtualGatewayListenerTls = Shapes::StructureShape.new(name: 'VirtualGatewayListenerTls')
@@ -255,13 +265,18 @@ module Aws::AppMesh
     VirtualGatewayTlsValidationContextAcmTrust = Shapes::StructureShape.new(name: 'VirtualGatewayTlsValidationContextAcmTrust')
     VirtualGatewayTlsValidationContextFileTrust = Shapes::StructureShape.new(name: 'VirtualGatewayTlsValidationContextFileTrust')
     VirtualGatewayTlsValidationContextTrust = Shapes::StructureShape.new(name: 'VirtualGatewayTlsValidationContextTrust')
+    VirtualNodeConnectionPool = Shapes::StructureShape.new(name: 'VirtualNodeConnectionPool')
     VirtualNodeData = Shapes::StructureShape.new(name: 'VirtualNodeData')
+    VirtualNodeGrpcConnectionPool = Shapes::StructureShape.new(name: 'VirtualNodeGrpcConnectionPool')
+    VirtualNodeHttp2ConnectionPool = Shapes::StructureShape.new(name: 'VirtualNodeHttp2ConnectionPool')
+    VirtualNodeHttpConnectionPool = Shapes::StructureShape.new(name: 'VirtualNodeHttpConnectionPool')
     VirtualNodeList = Shapes::ListShape.new(name: 'VirtualNodeList')
     VirtualNodeRef = Shapes::StructureShape.new(name: 'VirtualNodeRef')
     VirtualNodeServiceProvider = Shapes::StructureShape.new(name: 'VirtualNodeServiceProvider')
     VirtualNodeSpec = Shapes::StructureShape.new(name: 'VirtualNodeSpec')
     VirtualNodeStatus = Shapes::StructureShape.new(name: 'VirtualNodeStatus')
     VirtualNodeStatusCode = Shapes::StringShape.new(name: 'VirtualNodeStatusCode')
+    VirtualNodeTcpConnectionPool = Shapes::StructureShape.new(name: 'VirtualNodeTcpConnectionPool')
     VirtualRouterData = Shapes::StructureShape.new(name: 'VirtualRouterData')
     VirtualRouterList = Shapes::ListShape.new(name: 'VirtualRouterList')
     VirtualRouterListener = Shapes::StructureShape.new(name: 'VirtualRouterListener')
@@ -337,7 +352,7 @@ module Aws::AppMesh
     CreateMeshInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateMeshInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
     CreateMeshInput.add_member(:spec, Shapes::ShapeRef.new(shape: MeshSpec, location_name: "spec"))
-    CreateMeshInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags", metadata: {"tags"=>["not-preview"]}))
+    CreateMeshInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateMeshInput.struct_class = Types::CreateMeshInput
 
     CreateMeshOutput.add_member(:mesh, Shapes::ShapeRef.new(shape: MeshData, required: true, location_name: "mesh"))
@@ -350,7 +365,7 @@ module Aws::AppMesh
     CreateRouteInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     CreateRouteInput.add_member(:route_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "routeName"))
     CreateRouteInput.add_member(:spec, Shapes::ShapeRef.new(shape: RouteSpec, required: true, location_name: "spec"))
-    CreateRouteInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags", metadata: {"tags"=>["not-preview"]}))
+    CreateRouteInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateRouteInput.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "virtualRouterName"))
     CreateRouteInput.struct_class = Types::CreateRouteInput
 
@@ -376,7 +391,7 @@ module Aws::AppMesh
     CreateVirtualNodeInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     CreateVirtualNodeInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     CreateVirtualNodeInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualNodeSpec, required: true, location_name: "spec"))
-    CreateVirtualNodeInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags", metadata: {"tags"=>["not-preview"]}))
+    CreateVirtualNodeInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateVirtualNodeInput.add_member(:virtual_node_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualNodeName"))
     CreateVirtualNodeInput.struct_class = Types::CreateVirtualNodeInput
 
@@ -389,7 +404,7 @@ module Aws::AppMesh
     CreateVirtualRouterInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     CreateVirtualRouterInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     CreateVirtualRouterInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualRouterSpec, required: true, location_name: "spec"))
-    CreateVirtualRouterInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags", metadata: {"tags"=>["not-preview"]}))
+    CreateVirtualRouterInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateVirtualRouterInput.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualRouterName"))
     CreateVirtualRouterInput.struct_class = Types::CreateVirtualRouterInput
 
@@ -402,7 +417,7 @@ module Aws::AppMesh
     CreateVirtualServiceInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     CreateVirtualServiceInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     CreateVirtualServiceInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualServiceSpec, required: true, location_name: "spec"))
-    CreateVirtualServiceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags", metadata: {"tags"=>["not-preview"]}))
+    CreateVirtualServiceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateVirtualServiceInput.add_member(:virtual_service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "virtualServiceName"))
     CreateVirtualServiceInput.struct_class = Types::CreateVirtualServiceInput
 
@@ -799,7 +814,9 @@ module Aws::AppMesh
     ListVirtualServicesOutput.add_member(:virtual_services, Shapes::ShapeRef.new(shape: VirtualServiceList, required: true, location_name: "virtualServices"))
     ListVirtualServicesOutput.struct_class = Types::ListVirtualServicesOutput
 
+    Listener.add_member(:connection_pool, Shapes::ShapeRef.new(shape: VirtualNodeConnectionPool, location_name: "connectionPool"))
     Listener.add_member(:health_check, Shapes::ShapeRef.new(shape: HealthCheckPolicy, location_name: "healthCheck"))
+    Listener.add_member(:outlier_detection, Shapes::ShapeRef.new(shape: OutlierDetection, location_name: "outlierDetection"))
     Listener.add_member(:port_mapping, Shapes::ShapeRef.new(shape: PortMapping, required: true, location_name: "portMapping"))
     Listener.add_member(:timeout, Shapes::ShapeRef.new(shape: ListenerTimeout, location_name: "timeout"))
     Listener.add_member(:tls, Shapes::ShapeRef.new(shape: ListenerTls, location_name: "tls"))
@@ -860,6 +877,12 @@ module Aws::AppMesh
 
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
+
+    OutlierDetection.add_member(:base_ejection_duration, Shapes::ShapeRef.new(shape: Duration, required: true, location_name: "baseEjectionDuration"))
+    OutlierDetection.add_member(:interval, Shapes::ShapeRef.new(shape: Duration, required: true, location_name: "interval"))
+    OutlierDetection.add_member(:max_ejection_percent, Shapes::ShapeRef.new(shape: OutlierDetectionMaxEjectionPercent, required: true, location_name: "maxEjectionPercent"))
+    OutlierDetection.add_member(:max_server_errors, Shapes::ShapeRef.new(shape: OutlierDetectionMaxServerErrors, required: true, location_name: "maxServerErrors"))
+    OutlierDetection.struct_class = Types::OutlierDetection
 
     PortMapping.add_member(:port, Shapes::ShapeRef.new(shape: PortNumber, required: true, location_name: "port"))
     PortMapping.add_member(:protocol, Shapes::ShapeRef.new(shape: PortProtocol, required: true, location_name: "protocol"))
@@ -922,7 +945,7 @@ module Aws::AppMesh
     TagList.member = Shapes::ShapeRef.new(shape: TagRef)
 
     TagRef.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
-    TagRef.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "value"))
+    TagRef.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "value"))
     TagRef.struct_class = Types::TagRef
 
     TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "resourceArn"))
@@ -1068,6 +1091,11 @@ module Aws::AppMesh
     VirtualGatewayClientPolicyTls.add_member(:validation, Shapes::ShapeRef.new(shape: VirtualGatewayTlsValidationContext, required: true, location_name: "validation"))
     VirtualGatewayClientPolicyTls.struct_class = Types::VirtualGatewayClientPolicyTls
 
+    VirtualGatewayConnectionPool.add_member(:grpc, Shapes::ShapeRef.new(shape: VirtualGatewayGrpcConnectionPool, location_name: "grpc"))
+    VirtualGatewayConnectionPool.add_member(:http, Shapes::ShapeRef.new(shape: VirtualGatewayHttpConnectionPool, location_name: "http"))
+    VirtualGatewayConnectionPool.add_member(:http2, Shapes::ShapeRef.new(shape: VirtualGatewayHttp2ConnectionPool, location_name: "http2"))
+    VirtualGatewayConnectionPool.struct_class = Types::VirtualGatewayConnectionPool
+
     VirtualGatewayData.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
     VirtualGatewayData.add_member(:metadata, Shapes::ShapeRef.new(shape: ResourceMetadata, required: true, location_name: "metadata"))
     VirtualGatewayData.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualGatewaySpec, required: true, location_name: "spec"))
@@ -1078,6 +1106,9 @@ module Aws::AppMesh
     VirtualGatewayFileAccessLog.add_member(:path, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "path"))
     VirtualGatewayFileAccessLog.struct_class = Types::VirtualGatewayFileAccessLog
 
+    VirtualGatewayGrpcConnectionPool.add_member(:max_requests, Shapes::ShapeRef.new(shape: MaxRequests, required: true, location_name: "maxRequests"))
+    VirtualGatewayGrpcConnectionPool.struct_class = Types::VirtualGatewayGrpcConnectionPool
+
     VirtualGatewayHealthCheckPolicy.add_member(:healthy_threshold, Shapes::ShapeRef.new(shape: VirtualGatewayHealthCheckThreshold, required: true, location_name: "healthyThreshold"))
     VirtualGatewayHealthCheckPolicy.add_member(:interval_millis, Shapes::ShapeRef.new(shape: VirtualGatewayHealthCheckIntervalMillis, required: true, location_name: "intervalMillis"))
     VirtualGatewayHealthCheckPolicy.add_member(:path, Shapes::ShapeRef.new(shape: String, location_name: "path"))
@@ -1087,8 +1118,16 @@ module Aws::AppMesh
     VirtualGatewayHealthCheckPolicy.add_member(:unhealthy_threshold, Shapes::ShapeRef.new(shape: VirtualGatewayHealthCheckThreshold, required: true, location_name: "unhealthyThreshold"))
     VirtualGatewayHealthCheckPolicy.struct_class = Types::VirtualGatewayHealthCheckPolicy
 
+    VirtualGatewayHttp2ConnectionPool.add_member(:max_requests, Shapes::ShapeRef.new(shape: MaxRequests, required: true, location_name: "maxRequests"))
+    VirtualGatewayHttp2ConnectionPool.struct_class = Types::VirtualGatewayHttp2ConnectionPool
+
+    VirtualGatewayHttpConnectionPool.add_member(:max_connections, Shapes::ShapeRef.new(shape: MaxConnections, required: true, location_name: "maxConnections"))
+    VirtualGatewayHttpConnectionPool.add_member(:max_pending_requests, Shapes::ShapeRef.new(shape: MaxPendingRequests, location_name: "maxPendingRequests", metadata: {"box"=>true}))
+    VirtualGatewayHttpConnectionPool.struct_class = Types::VirtualGatewayHttpConnectionPool
+
     VirtualGatewayList.member = Shapes::ShapeRef.new(shape: VirtualGatewayRef)
 
+    VirtualGatewayListener.add_member(:connection_pool, Shapes::ShapeRef.new(shape: VirtualGatewayConnectionPool, location_name: "connectionPool"))
     VirtualGatewayListener.add_member(:health_check, Shapes::ShapeRef.new(shape: VirtualGatewayHealthCheckPolicy, location_name: "healthCheck"))
     VirtualGatewayListener.add_member(:port_mapping, Shapes::ShapeRef.new(shape: VirtualGatewayPortMapping, required: true, location_name: "portMapping"))
     VirtualGatewayListener.add_member(:tls, Shapes::ShapeRef.new(shape: VirtualGatewayListenerTls, location_name: "tls"))
@@ -1149,12 +1188,28 @@ module Aws::AppMesh
     VirtualGatewayTlsValidationContextTrust.add_member(:file, Shapes::ShapeRef.new(shape: VirtualGatewayTlsValidationContextFileTrust, location_name: "file"))
     VirtualGatewayTlsValidationContextTrust.struct_class = Types::VirtualGatewayTlsValidationContextTrust
 
+    VirtualNodeConnectionPool.add_member(:grpc, Shapes::ShapeRef.new(shape: VirtualNodeGrpcConnectionPool, location_name: "grpc"))
+    VirtualNodeConnectionPool.add_member(:http, Shapes::ShapeRef.new(shape: VirtualNodeHttpConnectionPool, location_name: "http"))
+    VirtualNodeConnectionPool.add_member(:http2, Shapes::ShapeRef.new(shape: VirtualNodeHttp2ConnectionPool, location_name: "http2"))
+    VirtualNodeConnectionPool.add_member(:tcp, Shapes::ShapeRef.new(shape: VirtualNodeTcpConnectionPool, location_name: "tcp"))
+    VirtualNodeConnectionPool.struct_class = Types::VirtualNodeConnectionPool
+
     VirtualNodeData.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
     VirtualNodeData.add_member(:metadata, Shapes::ShapeRef.new(shape: ResourceMetadata, required: true, location_name: "metadata"))
     VirtualNodeData.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualNodeSpec, required: true, location_name: "spec"))
     VirtualNodeData.add_member(:status, Shapes::ShapeRef.new(shape: VirtualNodeStatus, required: true, location_name: "status"))
     VirtualNodeData.add_member(:virtual_node_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualNodeName"))
     VirtualNodeData.struct_class = Types::VirtualNodeData
+
+    VirtualNodeGrpcConnectionPool.add_member(:max_requests, Shapes::ShapeRef.new(shape: MaxRequests, required: true, location_name: "maxRequests"))
+    VirtualNodeGrpcConnectionPool.struct_class = Types::VirtualNodeGrpcConnectionPool
+
+    VirtualNodeHttp2ConnectionPool.add_member(:max_requests, Shapes::ShapeRef.new(shape: MaxRequests, required: true, location_name: "maxRequests"))
+    VirtualNodeHttp2ConnectionPool.struct_class = Types::VirtualNodeHttp2ConnectionPool
+
+    VirtualNodeHttpConnectionPool.add_member(:max_connections, Shapes::ShapeRef.new(shape: MaxConnections, required: true, location_name: "maxConnections"))
+    VirtualNodeHttpConnectionPool.add_member(:max_pending_requests, Shapes::ShapeRef.new(shape: MaxPendingRequests, location_name: "maxPendingRequests", metadata: {"box"=>true}))
+    VirtualNodeHttpConnectionPool.struct_class = Types::VirtualNodeHttpConnectionPool
 
     VirtualNodeList.member = Shapes::ShapeRef.new(shape: VirtualNodeRef)
 
@@ -1180,6 +1235,9 @@ module Aws::AppMesh
 
     VirtualNodeStatus.add_member(:status, Shapes::ShapeRef.new(shape: VirtualNodeStatusCode, required: true, location_name: "status"))
     VirtualNodeStatus.struct_class = Types::VirtualNodeStatus
+
+    VirtualNodeTcpConnectionPool.add_member(:max_connections, Shapes::ShapeRef.new(shape: MaxConnections, required: true, location_name: "maxConnections"))
+    VirtualNodeTcpConnectionPool.struct_class = Types::VirtualNodeTcpConnectionPool
 
     VirtualRouterData.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
     VirtualRouterData.add_member(:metadata, Shapes::ShapeRef.new(shape: ResourceMetadata, required: true, location_name: "metadata"))
@@ -1277,14 +1335,14 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes"
         o.input = Shapes::ShapeRef.new(shape: CreateGatewayRouteInput)
         o.output = Shapes::ShapeRef.new(shape: CreateGatewayRouteOutput)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:create_mesh, Seahorse::Model::Operation.new.tap do |o|
@@ -1293,14 +1351,14 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes"
         o.input = Shapes::ShapeRef.new(shape: CreateMeshInput)
         o.output = Shapes::ShapeRef.new(shape: CreateMeshOutput)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:create_route, Seahorse::Model::Operation.new.tap do |o|
@@ -1309,14 +1367,14 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes"
         o.input = Shapes::ShapeRef.new(shape: CreateRouteInput)
         o.output = Shapes::ShapeRef.new(shape: CreateRouteOutput)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:create_virtual_gateway, Seahorse::Model::Operation.new.tap do |o|
@@ -1325,14 +1383,14 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualGateways"
         o.input = Shapes::ShapeRef.new(shape: CreateVirtualGatewayInput)
         o.output = Shapes::ShapeRef.new(shape: CreateVirtualGatewayOutput)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:create_virtual_node, Seahorse::Model::Operation.new.tap do |o|
@@ -1341,14 +1399,14 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualNodes"
         o.input = Shapes::ShapeRef.new(shape: CreateVirtualNodeInput)
         o.output = Shapes::ShapeRef.new(shape: CreateVirtualNodeOutput)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:create_virtual_router, Seahorse::Model::Operation.new.tap do |o|
@@ -1357,14 +1415,14 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualRouters"
         o.input = Shapes::ShapeRef.new(shape: CreateVirtualRouterInput)
         o.output = Shapes::ShapeRef.new(shape: CreateVirtualRouterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:create_virtual_service, Seahorse::Model::Operation.new.tap do |o|
@@ -1373,14 +1431,14 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualServices"
         o.input = Shapes::ShapeRef.new(shape: CreateVirtualServiceInput)
         o.output = Shapes::ShapeRef.new(shape: CreateVirtualServiceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:delete_gateway_route, Seahorse::Model::Operation.new.tap do |o|
@@ -1389,13 +1447,13 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}"
         o.input = Shapes::ShapeRef.new(shape: DeleteGatewayRouteInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteGatewayRouteOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:delete_mesh, Seahorse::Model::Operation.new.tap do |o|
@@ -1404,13 +1462,13 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}"
         o.input = Shapes::ShapeRef.new(shape: DeleteMeshInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteMeshOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:delete_route, Seahorse::Model::Operation.new.tap do |o|
@@ -1419,13 +1477,13 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}"
         o.input = Shapes::ShapeRef.new(shape: DeleteRouteInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteRouteOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:delete_virtual_gateway, Seahorse::Model::Operation.new.tap do |o|
@@ -1434,13 +1492,13 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}"
         o.input = Shapes::ShapeRef.new(shape: DeleteVirtualGatewayInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteVirtualGatewayOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:delete_virtual_node, Seahorse::Model::Operation.new.tap do |o|
@@ -1449,13 +1507,13 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}"
         o.input = Shapes::ShapeRef.new(shape: DeleteVirtualNodeInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteVirtualNodeOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:delete_virtual_router, Seahorse::Model::Operation.new.tap do |o|
@@ -1464,13 +1522,13 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}"
         o.input = Shapes::ShapeRef.new(shape: DeleteVirtualRouterInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteVirtualRouterOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:delete_virtual_service, Seahorse::Model::Operation.new.tap do |o|
@@ -1479,13 +1537,13 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}"
         o.input = Shapes::ShapeRef.new(shape: DeleteVirtualServiceInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteVirtualServiceOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:describe_gateway_route, Seahorse::Model::Operation.new.tap do |o|
@@ -1494,12 +1552,12 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}"
         o.input = Shapes::ShapeRef.new(shape: DescribeGatewayRouteInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeGatewayRouteOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:describe_mesh, Seahorse::Model::Operation.new.tap do |o|
@@ -1508,12 +1566,12 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}"
         o.input = Shapes::ShapeRef.new(shape: DescribeMeshInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeMeshOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:describe_route, Seahorse::Model::Operation.new.tap do |o|
@@ -1522,12 +1580,12 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}"
         o.input = Shapes::ShapeRef.new(shape: DescribeRouteInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeRouteOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:describe_virtual_gateway, Seahorse::Model::Operation.new.tap do |o|
@@ -1536,12 +1594,12 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}"
         o.input = Shapes::ShapeRef.new(shape: DescribeVirtualGatewayInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeVirtualGatewayOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:describe_virtual_node, Seahorse::Model::Operation.new.tap do |o|
@@ -1550,12 +1608,12 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}"
         o.input = Shapes::ShapeRef.new(shape: DescribeVirtualNodeInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeVirtualNodeOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:describe_virtual_router, Seahorse::Model::Operation.new.tap do |o|
@@ -1564,12 +1622,12 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}"
         o.input = Shapes::ShapeRef.new(shape: DescribeVirtualRouterInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeVirtualRouterOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:describe_virtual_service, Seahorse::Model::Operation.new.tap do |o|
@@ -1578,12 +1636,12 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}"
         o.input = Shapes::ShapeRef.new(shape: DescribeVirtualServiceInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeVirtualServiceOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:list_gateway_routes, Seahorse::Model::Operation.new.tap do |o|
@@ -1592,12 +1650,12 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes"
         o.input = Shapes::ShapeRef.new(shape: ListGatewayRoutesInput)
         o.output = Shapes::ShapeRef.new(shape: ListGatewayRoutesOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -1612,12 +1670,12 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes"
         o.input = Shapes::ShapeRef.new(shape: ListMeshesInput)
         o.output = Shapes::ShapeRef.new(shape: ListMeshesOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -1632,12 +1690,12 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes"
         o.input = Shapes::ShapeRef.new(shape: ListRoutesInput)
         o.output = Shapes::ShapeRef.new(shape: ListRoutesOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -1652,12 +1710,12 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/tags"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -1672,12 +1730,12 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualGateways"
         o.input = Shapes::ShapeRef.new(shape: ListVirtualGatewaysInput)
         o.output = Shapes::ShapeRef.new(shape: ListVirtualGatewaysOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -1692,12 +1750,12 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualNodes"
         o.input = Shapes::ShapeRef.new(shape: ListVirtualNodesInput)
         o.output = Shapes::ShapeRef.new(shape: ListVirtualNodesOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -1712,12 +1770,12 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualRouters"
         o.input = Shapes::ShapeRef.new(shape: ListVirtualRoutersInput)
         o.output = Shapes::ShapeRef.new(shape: ListVirtualRoutersOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -1732,12 +1790,12 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualServices"
         o.input = Shapes::ShapeRef.new(shape: ListVirtualServicesInput)
         o.output = Shapes::ShapeRef.new(shape: ListVirtualServicesOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -1752,13 +1810,13 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/tag"
         o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
         o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1767,12 +1825,12 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/untag"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:update_gateway_route, Seahorse::Model::Operation.new.tap do |o|
@@ -1781,14 +1839,14 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}"
         o.input = Shapes::ShapeRef.new(shape: UpdateGatewayRouteInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateGatewayRouteOutput)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_mesh, Seahorse::Model::Operation.new.tap do |o|
@@ -1797,13 +1855,13 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}"
         o.input = Shapes::ShapeRef.new(shape: UpdateMeshInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateMeshOutput)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
       api.add_operation(:update_route, Seahorse::Model::Operation.new.tap do |o|
@@ -1812,14 +1870,14 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}"
         o.input = Shapes::ShapeRef.new(shape: UpdateRouteInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateRouteOutput)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_virtual_gateway, Seahorse::Model::Operation.new.tap do |o|
@@ -1828,14 +1886,14 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}"
         o.input = Shapes::ShapeRef.new(shape: UpdateVirtualGatewayInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateVirtualGatewayOutput)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_virtual_node, Seahorse::Model::Operation.new.tap do |o|
@@ -1844,14 +1902,14 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}"
         o.input = Shapes::ShapeRef.new(shape: UpdateVirtualNodeInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateVirtualNodeOutput)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_virtual_router, Seahorse::Model::Operation.new.tap do |o|
@@ -1860,14 +1918,14 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}"
         o.input = Shapes::ShapeRef.new(shape: UpdateVirtualRouterInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateVirtualRouterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_virtual_service, Seahorse::Model::Operation.new.tap do |o|
@@ -1876,14 +1934,14 @@ module Aws::AppMesh
         o.http_request_uri = "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}"
         o.input = Shapes::ShapeRef.new(shape: UpdateVirtualServiceInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateVirtualServiceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
-        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
     end
 

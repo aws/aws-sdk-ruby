@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-11-12)
+------------------
+
+* Feature - Amazon Polly adds new Australian English female voice - Olivia. Olivia is available as Neural voice only.
+
+1.37.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.35.0 (2020-08-25)
 ------------------
 

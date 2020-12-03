@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2020-10-22)
+------------------
+
+* Feature - API Documentation updates for IAM Access Analyzer.
+
+1.13.0 (2020-10-15)
+------------------
+
+* Feature - This release adds support for the ApplyArchiveRule api in IAM Access Analyzer.  The ApplyArchiveRule api allows users to apply an archive rule retroactively to existing findings in an analyzer.
+
+1.12.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.11.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.10.0 (2020-08-25)
 ------------------
 

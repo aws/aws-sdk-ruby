@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-11-18)
+------------------
+
+* Feature - AWS Backup now supports cross-account backup, enabling AWS customers to securely copy their backups across their AWS accounts within their AWS organizations.
+
+1.24.0 (2020-10-19)
+------------------
+
+* Feature - Documentation updates for Cryo
+
+1.23.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2020-09-23)
+------------------
+
+* Feature - This release allows customers to enable or disable advanced backup settings in backup plan. As part of this feature AWS Backup added support for  Windows VSS backup option for EC2 resources.
+
+1.21.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.20.0 (2020-08-31)
 ------------------
 

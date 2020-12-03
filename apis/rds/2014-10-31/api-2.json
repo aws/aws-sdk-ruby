@@ -208,7 +208,8 @@
         {"shape":"DBSnapshotNotFoundFault"},
         {"shape":"InvalidDBSnapshotStateFault"},
         {"shape":"SnapshotQuotaExceededFault"},
-        {"shape":"KMSKeyNotAccessibleFault"}
+        {"shape":"KMSKeyNotAccessibleFault"},
+        {"shape":"CustomAvailabilityZoneNotFoundFault"}
       ]
     },
     "CopyOptionGroup":{
@@ -1815,7 +1816,8 @@
         {"shape":"DBProxyTargetAlreadyRegisteredFault"},
         {"shape":"InvalidDBInstanceStateFault"},
         {"shape":"InvalidDBClusterStateFault"},
-        {"shape":"InvalidDBProxyStateFault"}
+        {"shape":"InvalidDBProxyStateFault"},
+        {"shape":"InsufficientAvailableIPsInSubnetFault"}
       ]
     },
     "RemoveFromGlobalCluster":{
@@ -2673,7 +2675,8 @@
         "Tags":{"shape":"TagList"},
         "CopyTags":{"shape":"BooleanOptional"},
         "PreSignedUrl":{"shape":"String"},
-        "OptionGroupName":{"shape":"String"}
+        "OptionGroupName":{"shape":"String"},
+        "TargetCustomAvailabilityZone":{"shape":"String"}
       }
     },
     "CopyDBSnapshotResult":{
@@ -2851,6 +2854,7 @@
         "Iops":{"shape":"IntegerOptional"},
         "OptionGroupName":{"shape":"String"},
         "CharacterSetName":{"shape":"String"},
+        "NcharCharacterSetName":{"shape":"String"},
         "PubliclyAccessible":{"shape":"BooleanOptional"},
         "Tags":{"shape":"TagList"},
         "DBClusterIdentifier":{"shape":"String"},
@@ -2913,7 +2917,8 @@
         "DeletionProtection":{"shape":"BooleanOptional"},
         "Domain":{"shape":"String"},
         "DomainIAMRoleName":{"shape":"String"},
-        "ReplicaMode":{"shape":"ReplicaMode"}
+        "ReplicaMode":{"shape":"ReplicaMode"},
+        "MaxAllocatedStorage":{"shape":"IntegerOptional"}
       }
     },
     "CreateDBInstanceReadReplicaResult":{
@@ -3206,6 +3211,7 @@
         "CopyTagsToSnapshot":{"shape":"BooleanOptional"},
         "CrossAccountClone":{"shape":"BooleanOptional"},
         "DomainMemberships":{"shape":"DomainMembershipList"},
+        "TagList":{"shape":"TagList"},
         "GlobalWriteForwardingStatus":{"shape":"WriteForwardingStatus"},
         "GlobalWriteForwardingRequested":{"shape":"BooleanOptional"}
       },
@@ -3515,7 +3521,8 @@
         "KmsKeyId":{"shape":"String"},
         "DBClusterSnapshotArn":{"shape":"String"},
         "SourceDBClusterSnapshotArn":{"shape":"String"},
-        "IAMDatabaseAuthenticationEnabled":{"shape":"Boolean"}
+        "IAMDatabaseAuthenticationEnabled":{"shape":"Boolean"},
+        "TagList":{"shape":"TagList"}
       },
       "wrapper":true
     },
@@ -3587,6 +3594,7 @@
         "DBEngineVersionDescription":{"shape":"String"},
         "DefaultCharacterSet":{"shape":"CharacterSet"},
         "SupportedCharacterSets":{"shape":"SupportedCharacterSetsList"},
+        "SupportedNcharCharacterSets":{"shape":"SupportedCharacterSetsList"},
         "ValidUpgradeTarget":{"shape":"ValidUpgradeTargetList"},
         "SupportedTimezones":{"shape":"SupportedTimezonesList"},
         "ExportableLogTypes":{"shape":"LogTypeList"},
@@ -3646,6 +3654,7 @@
         "Iops":{"shape":"IntegerOptional"},
         "OptionGroupMemberships":{"shape":"OptionGroupMembershipList"},
         "CharacterSetName":{"shape":"String"},
+        "NcharCharacterSetName":{"shape":"String"},
         "SecondaryAvailabilityZone":{"shape":"String"},
         "PubliclyAccessible":{"shape":"Boolean"},
         "StatusInfos":{"shape":"DBInstanceStatusInfoList"},
@@ -3674,7 +3683,8 @@
         "DeletionProtection":{"shape":"Boolean"},
         "AssociatedRoles":{"shape":"DBInstanceRoles"},
         "ListenerEndpoint":{"shape":"Endpoint"},
-        "MaxAllocatedStorage":{"shape":"IntegerOptional"}
+        "MaxAllocatedStorage":{"shape":"IntegerOptional"},
+        "TagList":{"shape":"TagList"}
       },
       "wrapper":true
     },
@@ -4188,7 +4198,8 @@
         "Timezone":{"shape":"String"},
         "IAMDatabaseAuthenticationEnabled":{"shape":"Boolean"},
         "ProcessorFeatures":{"shape":"ProcessorFeatureList"},
-        "DbiResourceId":{"shape":"String"}
+        "DbiResourceId":{"shape":"String"},
+        "TagList":{"shape":"TagList"}
       },
       "wrapper":true
     },
@@ -5516,6 +5527,17 @@
       },
       "error":{
         "code":"InstanceQuotaExceeded",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "InsufficientAvailableIPsInSubnetFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InsufficientAvailableIPsInSubnetFault",
         "httpStatusCode":400,
         "senderFault":true
       },
@@ -7131,7 +7153,8 @@
         "EnableCloudwatchLogsExports":{"shape":"LogTypeList"},
         "ProcessorFeatures":{"shape":"ProcessorFeatureList"},
         "UseDefaultProcessorFeatures":{"shape":"BooleanOptional"},
-        "DeletionProtection":{"shape":"BooleanOptional"}
+        "DeletionProtection":{"shape":"BooleanOptional"},
+        "MaxAllocatedStorage":{"shape":"IntegerOptional"}
       }
     },
     "RestoreDBInstanceFromS3Result":{
@@ -7174,7 +7197,8 @@
         "UseDefaultProcessorFeatures":{"shape":"BooleanOptional"},
         "DBParameterGroupName":{"shape":"String"},
         "DeletionProtection":{"shape":"BooleanOptional"},
-        "SourceDbiResourceId":{"shape":"String"}
+        "SourceDbiResourceId":{"shape":"String"},
+        "MaxAllocatedStorage":{"shape":"IntegerOptional"}
       }
     },
     "RestoreDBInstanceToPointInTimeResult":{

@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-swf/customizations'
 # @!group service
 module Aws::SWF
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.25.0'
 
 end

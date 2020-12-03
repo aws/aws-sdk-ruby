@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-11-24)
+------------------
+
+* Feature - This release of the AWS Step Functions SDK introduces support for Synchronous Express Workflows
+
+1.36.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.34.0 (2020-09-14)
 ------------------
 

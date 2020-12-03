@@ -1449,6 +1449,18 @@ module Aws::RoboMaker
     #   InvalidInput
     #
     #   : An input parameter in the request is not valid.
+    #
+    #   AllWorldGenerationFailed
+    #
+    #   : All of the worlds in the world generation job failed. This can
+    #     happen if your `worldCount` is greater than 50 or less than 1.
+    #
+    #   For more information about troubleshooting WorldForge, see
+    #   [Troubleshooting Simulation WorldForge][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting-worldforge.html
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -1498,6 +1510,9 @@ module Aws::RoboMaker
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         world_tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] client_request_token
@@ -1522,13 +1537,19 @@ module Aws::RoboMaker
     #   world generator job.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] world_tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   generated worlds.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateWorldGenerationJobRequest AWS API Documentation
     #
     class CreateWorldGenerationJobRequest < Struct.new(
       :client_request_token,
       :template,
       :world_count,
-      :tags)
+      :tags,
+      :world_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1619,6 +1640,11 @@ module Aws::RoboMaker
     #   world generator job.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] world_tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   generated worlds.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateWorldGenerationJobResponse AWS API Documentation
     #
     class CreateWorldGenerationJobResponse < Struct.new(
@@ -1629,7 +1655,8 @@ module Aws::RoboMaker
       :client_request_token,
       :template,
       :world_count,
-      :tags)
+      :tags,
+      :world_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3099,6 +3126,11 @@ module Aws::RoboMaker
     #   world generation job.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] world_tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   generated worlds.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeWorldGenerationJobResponse AWS API Documentation
     #
     class DescribeWorldGenerationJobResponse < Struct.new(
@@ -3111,7 +3143,8 @@ module Aws::RoboMaker
       :template,
       :world_count,
       :finished_worlds_summary,
-      :tags)
+      :tags,
+      :world_tags)
       SENSITIVE = []
       include Aws::Structure
     end

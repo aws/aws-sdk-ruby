@@ -431,6 +431,7 @@ module Aws::Textract
     #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
+    #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
     #   resp.blocks[0].row_index #=> Integer
     #   resp.blocks[0].column_index #=> Integer
     #   resp.blocks[0].row_span #=> Integer
@@ -444,7 +445,7 @@ module Aws::Textract
     #   resp.blocks[0].geometry.polygon[0].y #=> Float
     #   resp.blocks[0].id #=> String
     #   resp.blocks[0].relationships #=> Array
-    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD"
+    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES"
     #   resp.blocks[0].relationships[0].ids #=> Array
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
@@ -521,6 +522,7 @@ module Aws::Textract
     #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
+    #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
     #   resp.blocks[0].row_index #=> Integer
     #   resp.blocks[0].column_index #=> Integer
     #   resp.blocks[0].row_span #=> Integer
@@ -534,7 +536,7 @@ module Aws::Textract
     #   resp.blocks[0].geometry.polygon[0].y #=> Float
     #   resp.blocks[0].id #=> String
     #   resp.blocks[0].relationships #=> Array
-    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD"
+    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES"
     #   resp.blocks[0].relationships[0].ids #=> Array
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
@@ -647,6 +649,7 @@ module Aws::Textract
     #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
+    #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
     #   resp.blocks[0].row_index #=> Integer
     #   resp.blocks[0].column_index #=> Integer
     #   resp.blocks[0].row_span #=> Integer
@@ -660,7 +663,7 @@ module Aws::Textract
     #   resp.blocks[0].geometry.polygon[0].y #=> Float
     #   resp.blocks[0].id #=> String
     #   resp.blocks[0].relationships #=> Array
-    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD"
+    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES"
     #   resp.blocks[0].relationships[0].ids #=> Array
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
@@ -764,6 +767,7 @@ module Aws::Textract
     #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
+    #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
     #   resp.blocks[0].row_index #=> Integer
     #   resp.blocks[0].column_index #=> Integer
     #   resp.blocks[0].row_span #=> Integer
@@ -777,7 +781,7 @@ module Aws::Textract
     #   resp.blocks[0].geometry.polygon[0].y #=> Float
     #   resp.blocks[0].id #=> String
     #   resp.blocks[0].relationships #=> Array
-    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD"
+    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES"
     #   resp.blocks[0].relationships[0].ids #=> Array
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
@@ -857,6 +861,18 @@ module Aws::Textract
     #   The Amazon SNS topic ARN that you want Amazon Textract to publish the
     #   completion status of the operation to.
     #
+    # @option params [Types::OutputConfig] :output_config
+    #   Sets if the output will go to a customer defined bucket. By default,
+    #   Amazon Textract will save the results internally to be accessed by the
+    #   GetDocumentAnalysis operation.
+    #
+    # @option params [String] :kms_key_id
+    #   The KMS key used to encrypt the inference results. This can be in
+    #   either Key ID or Key Alias format. When a KMS key is provided, the KMS
+    #   key will be used for server-side encryption of the objects in the
+    #   customer bucket. When this parameter is not enabled, the result will
+    #   be encrypted server side,using SSE-S3.
+    #
     # @return [Types::StartDocumentAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDocumentAnalysisResponse#job_id #job_id} => String
@@ -878,6 +894,11 @@ module Aws::Textract
     #       sns_topic_arn: "SNSTopicArn", # required
     #       role_arn: "RoleArn", # required
     #     },
+    #     output_config: {
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_prefix: "S3ObjectName",
+    #     },
+    #     kms_key_id: "KMSKeyId",
     #   })
     #
     # @example Response structure
@@ -943,6 +964,18 @@ module Aws::Textract
     #   The Amazon SNS topic ARN that you want Amazon Textract to publish the
     #   completion status of the operation to.
     #
+    # @option params [Types::OutputConfig] :output_config
+    #   Sets if the output will go to a customer defined bucket. By default
+    #   Amazon Textract will save the results internally to be accessed with
+    #   the GetDocumentTextDetection operation.
+    #
+    # @option params [String] :kms_key_id
+    #   The KMS key used to encrypt the inference results. This can be in
+    #   either Key ID or Key Alias format. When a KMS key is provided, the KMS
+    #   key will be used for server-side encryption of the objects in the
+    #   customer bucket. When this parameter is not enabled, the result will
+    #   be encrypted server side,using SSE-S3.
+    #
     # @return [Types::StartDocumentTextDetectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDocumentTextDetectionResponse#job_id #job_id} => String
@@ -963,6 +996,11 @@ module Aws::Textract
     #       sns_topic_arn: "SNSTopicArn", # required
     #       role_arn: "RoleArn", # required
     #     },
+    #     output_config: {
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_prefix: "S3ObjectName",
+    #     },
+    #     kms_key_id: "KMSKeyId",
     #   })
     #
     # @example Response structure
@@ -991,7 +1029,7 @@ module Aws::Textract
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-textract'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

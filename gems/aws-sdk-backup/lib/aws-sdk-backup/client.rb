@@ -327,8 +327,9 @@ module Aws::Backup
 
     # @!group API Operations
 
-    # Backup plans are documents that contain information that AWS Backup
-    # uses to schedule tasks that create recovery points of resources.
+    # Creates a backup plan using a backup plan name and backup rules. A
+    # backup plan is a document that contains information that AWS Backup
+    # uses to schedule tasks that create recovery points for resources.
     #
     # If you call `CreateBackupPlan` with a plan that already exists, an
     # `AlreadyExistsException` is returned.
@@ -344,7 +345,7 @@ module Aws::Backup
     #
     # @option params [String] :creator_request_id
     #   Identifies the request and allows failed requests to be retried
-    #   without the risk of executing the operation twice. If the request
+    #   without the risk of running the operation twice. If the request
     #   includes a `CreatorRequestId` that matches an existing backup plan,
     #   that plan is returned. This parameter is optional.
     #
@@ -354,6 +355,7 @@ module Aws::Backup
     #   * {Types::CreateBackupPlanOutput#backup_plan_arn #backup_plan_arn} => String
     #   * {Types::CreateBackupPlanOutput#creation_date #creation_date} => Time
     #   * {Types::CreateBackupPlanOutput#version_id #version_id} => String
+    #   * {Types::CreateBackupPlanOutput#advanced_backup_settings #advanced_backup_settings} => Array&lt;Types::AdvancedBackupSetting&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -385,6 +387,14 @@ module Aws::Backup
     #           ],
     #         },
     #       ],
+    #       advanced_backup_settings: [
+    #         {
+    #           resource_type: "ResourceType",
+    #           backup_options: {
+    #             "BackupOptionKey" => "BackupOptionValue",
+    #           },
+    #         },
+    #       ],
     #     },
     #     backup_plan_tags: {
     #       "TagKey" => "TagValue",
@@ -398,6 +408,10 @@ module Aws::Backup
     #   resp.backup_plan_arn #=> String
     #   resp.creation_date #=> Time
     #   resp.version_id #=> String
+    #   resp.advanced_backup_settings #=> Array
+    #   resp.advanced_backup_settings[0].resource_type #=> String
+    #   resp.advanced_backup_settings[0].backup_options #=> Hash
+    #   resp.advanced_backup_settings[0].backup_options["BackupOptionKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupPlan AWS API Documentation
     #
@@ -431,12 +445,12 @@ module Aws::Backup
     # Using these patterns would back up all Amazon Elastic Block Store
     # (Amazon EBS) volumes that are tagged as `"department=finance"`,
     # `"importance=critical"`, in addition to an EBS volume with the
-    # specified volume Id.
+    # specified volume ID.
     #
     # Resources and conditions are additive in that all resources that match
     # the pattern are selected. This shouldn't be confused with a logical
     # AND, where all conditions must match. The matching patterns are
-    # logically 'put together using the OR operator. In other words, all
+    # logically put together using the OR operator. In other words, all
     # patterns that match are selected for backup.
     #
     # @option params [required, String] :backup_plan_id
@@ -449,7 +463,7 @@ module Aws::Backup
     #
     # @option params [String] :creator_request_id
     #   A unique string that identifies the request and allows failed requests
-    #   to be retried without the risk of executing the operation twice.
+    #   to be retried without the risk of running the operation twice.
     #
     # @return [Types::CreateBackupSelectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -517,7 +531,7 @@ module Aws::Backup
     #
     # @option params [String] :creator_request_id
     #   A unique string that identifies the request and allows failed requests
-    #   to be retried without the risk of executing the operation twice.
+    #   to be retried without the risk of running the operation twice.
     #
     # @return [Types::CreateBackupVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -724,7 +738,7 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns metadata associated with creating a backup of a resource.
+    # Returns backup job details for the specified `BackupJobId`.
     #
     # @option params [required, String] :backup_job_id
     #   Uniquely identifies a request to AWS Backup to back up a resource.
@@ -749,6 +763,8 @@ module Aws::Backup
     #   * {Types::DescribeBackupJobOutput#bytes_transferred #bytes_transferred} => Integer
     #   * {Types::DescribeBackupJobOutput#expected_completion_date #expected_completion_date} => Time
     #   * {Types::DescribeBackupJobOutput#start_by #start_by} => Time
+    #   * {Types::DescribeBackupJobOutput#backup_options #backup_options} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeBackupJobOutput#backup_type #backup_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -779,6 +795,9 @@ module Aws::Backup
     #   resp.bytes_transferred #=> Integer
     #   resp.expected_completion_date #=> Time
     #   resp.start_by #=> Time
+    #   resp.backup_options #=> Hash
+    #   resp.backup_options["BackupOptionKey"] #=> String
+    #   resp.backup_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupJob AWS API Documentation
     #
@@ -875,6 +894,28 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # The current feature settings for the AWS Account.
+    #
+    # @return [Types::DescribeGlobalSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeGlobalSettingsOutput#global_settings #global_settings} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeGlobalSettingsOutput#last_update_time #last_update_time} => Time
+    #
+    # @example Response structure
+    #
+    #   resp.global_settings #=> Hash
+    #   resp.global_settings["GlobalSettingsName"] #=> String
+    #   resp.last_update_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeGlobalSettings AWS API Documentation
+    #
+    # @overload describe_global_settings(params = {})
+    # @param [Hash] params ({})
+    def describe_global_settings(params = {}, options = {})
+      req = build_request(:describe_global_settings, params)
+      req.send_request(options)
+    end
+
     # Returns information about a saved resource, including the last time it
     # was backed up, its Amazon Resource Name (ARN), and the AWS service
     # type of the saved resource.
@@ -929,6 +970,7 @@ module Aws::Backup
     #   * {Types::DescribeRecoveryPointOutput#recovery_point_arn #recovery_point_arn} => String
     #   * {Types::DescribeRecoveryPointOutput#backup_vault_name #backup_vault_name} => String
     #   * {Types::DescribeRecoveryPointOutput#backup_vault_arn #backup_vault_arn} => String
+    #   * {Types::DescribeRecoveryPointOutput#source_backup_vault_arn #source_backup_vault_arn} => String
     #   * {Types::DescribeRecoveryPointOutput#resource_arn #resource_arn} => String
     #   * {Types::DescribeRecoveryPointOutput#resource_type #resource_type} => String
     #   * {Types::DescribeRecoveryPointOutput#created_by #created_by} => Types::RecoveryPointCreator
@@ -956,6 +998,7 @@ module Aws::Backup
     #   resp.recovery_point_arn #=> String
     #   resp.backup_vault_name #=> String
     #   resp.backup_vault_arn #=> String
+    #   resp.source_backup_vault_arn #=> String
     #   resp.resource_arn #=> String
     #   resp.resource_type #=> String
     #   resp.created_by.backup_plan_id #=> String
@@ -985,12 +1028,13 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns the current service opt-in settings for the Region. If the
-    # service has a value set to `true`, AWS Backup attempts to protect that
-    # service's resources in this Region, when included in an on-demand
-    # backup or scheduled backup plan. If the value is set to `false` for a
-    # service, AWS Backup does not attempt to protect that service's
-    # resources in this Region.
+    # Returns the current service opt-in settings for the Region. If
+    # service-opt-in is enabled for a service, AWS Backup tries to protect
+    # that service's resources in this Region, when the resource is
+    # included in an on-demand backup or scheduled backup plan. Otherwise,
+    # AWS Backup does not try to protect that service's resources in this
+    # Region, AWS Backup does not try to protect that service's resources
+    # in this Region.
     #
     # @return [Types::DescribeRegionSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1092,7 +1136,8 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns the body of a backup plan in JSON format, in addition to plan
+    # Returns `BackupPlan` details for the specified `BackupPlanId`. Returns
+    # the body of a backup plan in JSON format, in addition to plan
     # metadata.
     #
     # @option params [required, String] :backup_plan_id
@@ -1112,6 +1157,7 @@ module Aws::Backup
     #   * {Types::GetBackupPlanOutput#creation_date #creation_date} => Time
     #   * {Types::GetBackupPlanOutput#deletion_date #deletion_date} => Time
     #   * {Types::GetBackupPlanOutput#last_execution_date #last_execution_date} => Time
+    #   * {Types::GetBackupPlanOutput#advanced_backup_settings #advanced_backup_settings} => Array&lt;Types::AdvancedBackupSetting&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1138,6 +1184,10 @@ module Aws::Backup
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
     #   resp.backup_plan.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
+    #   resp.backup_plan.advanced_backup_settings #=> Array
+    #   resp.backup_plan.advanced_backup_settings[0].resource_type #=> String
+    #   resp.backup_plan.advanced_backup_settings[0].backup_options #=> Hash
+    #   resp.backup_plan.advanced_backup_settings[0].backup_options["BackupOptionKey"] #=> String
     #   resp.backup_plan_id #=> String
     #   resp.backup_plan_arn #=> String
     #   resp.version_id #=> String
@@ -1145,6 +1195,10 @@ module Aws::Backup
     #   resp.creation_date #=> Time
     #   resp.deletion_date #=> Time
     #   resp.last_execution_date #=> Time
+    #   resp.advanced_backup_settings #=> Array
+    #   resp.advanced_backup_settings[0].resource_type #=> String
+    #   resp.advanced_backup_settings[0].backup_options #=> Hash
+    #   resp.advanced_backup_settings[0].backup_options["BackupOptionKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetBackupPlan AWS API Documentation
     #
@@ -1188,6 +1242,10 @@ module Aws::Backup
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
     #   resp.backup_plan.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
+    #   resp.backup_plan.advanced_backup_settings #=> Array
+    #   resp.backup_plan.advanced_backup_settings[0].resource_type #=> String
+    #   resp.backup_plan.advanced_backup_settings[0].backup_options #=> Hash
+    #   resp.backup_plan.advanced_backup_settings[0].backup_options["BackupOptionKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetBackupPlanFromJSON AWS API Documentation
     #
@@ -1231,6 +1289,10 @@ module Aws::Backup
     #   resp.backup_plan_document.rules[0].copy_actions[0].lifecycle.move_to_cold_storage_after_days #=> Integer
     #   resp.backup_plan_document.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
     #   resp.backup_plan_document.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
+    #   resp.backup_plan_document.advanced_backup_settings #=> Array
+    #   resp.backup_plan_document.advanced_backup_settings[0].resource_type #=> String
+    #   resp.backup_plan_document.advanced_backup_settings[0].backup_options #=> Hash
+    #   resp.backup_plan_document.advanced_backup_settings[0].backup_options["BackupOptionKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetBackupPlanFromTemplate AWS API Documentation
     #
@@ -1427,7 +1489,7 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns metadata about your backup jobs.
+    # Returns a list of existing backup jobs for an authenticated account.
     #
     # @option params [String] :next_token
     #   The next item following a partial list of returned items. For example,
@@ -1521,6 +1583,9 @@ module Aws::Backup
     #   resp.backup_jobs[0].start_by #=> Time
     #   resp.backup_jobs[0].resource_type #=> String
     #   resp.backup_jobs[0].bytes_transferred #=> Integer
+    #   resp.backup_jobs[0].backup_options #=> Hash
+    #   resp.backup_jobs[0].backup_options["BackupOptionKey"] #=> String
+    #   resp.backup_jobs[0].backup_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupJobs AWS API Documentation
@@ -1617,6 +1682,10 @@ module Aws::Backup
     #   resp.backup_plan_versions_list[0].backup_plan_name #=> String
     #   resp.backup_plan_versions_list[0].creator_request_id #=> String
     #   resp.backup_plan_versions_list[0].last_execution_date #=> Time
+    #   resp.backup_plan_versions_list[0].advanced_backup_settings #=> Array
+    #   resp.backup_plan_versions_list[0].advanced_backup_settings[0].resource_type #=> String
+    #   resp.backup_plan_versions_list[0].advanced_backup_settings[0].backup_options #=> Hash
+    #   resp.backup_plan_versions_list[0].advanced_backup_settings[0].backup_options["BackupOptionKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupPlanVersions AWS API Documentation
     #
@@ -1627,7 +1696,9 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns metadata of your saved backup plans, including Amazon Resource
+    # Returns a list of existing backup plans for an authenticated account.
+    # The list is populated only if the advanced option is set for the
+    # backup plan. The list contains information such as Amazon Resource
     # Names (ARNs), plan IDs, creation and deletion dates, version IDs, plan
     # names, and creator request IDs.
     #
@@ -1671,6 +1742,10 @@ module Aws::Backup
     #   resp.backup_plans_list[0].backup_plan_name #=> String
     #   resp.backup_plans_list[0].creator_request_id #=> String
     #   resp.backup_plans_list[0].last_execution_date #=> Time
+    #   resp.backup_plans_list[0].advanced_backup_settings #=> Array
+    #   resp.backup_plans_list[0].advanced_backup_settings[0].resource_type #=> String
+    #   resp.backup_plans_list[0].advanced_backup_settings[0].backup_options #=> Hash
+    #   resp.backup_plans_list[0].advanced_backup_settings[0].backup_options["BackupOptionKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupPlans AWS API Documentation
     #
@@ -1985,6 +2060,7 @@ module Aws::Backup
     #   resp.recovery_points[0].recovery_point_arn #=> String
     #   resp.recovery_points[0].backup_vault_name #=> String
     #   resp.recovery_points[0].backup_vault_arn #=> String
+    #   resp.recovery_points[0].source_backup_vault_arn #=> String
     #   resp.recovery_points[0].resource_arn #=> String
     #   resp.recovery_points[0].resource_type #=> String
     #   resp.recovery_points[0].created_by.backup_plan_id #=> String
@@ -2253,7 +2329,7 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Starts a job to create a one-time backup of the specified resource.
+    # Starts an on-demand backup job for the specified resource.
     #
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
@@ -2298,6 +2374,15 @@ module Aws::Backup
     #   To help organize your resources, you can assign your own metadata to
     #   the resources that you create. Each tag is a key-value pair.
     #
+    # @option params [Hash<String,String>] :backup_options
+    #   Specifies the backup option for a selected resource. This option is
+    #   only available for Windows VSS backup jobs.
+    #
+    #   Valid values: Set to `"WindowsVSS”:“enabled"` to enable WindowsVSS
+    #   backup option and create a VSS Windows backup. Set to
+    #   “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS
+    #   option is not enabled by default.
+    #
     # @return [Types::StartBackupJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartBackupJobOutput#backup_job_id #backup_job_id} => String
@@ -2319,6 +2404,9 @@ module Aws::Backup
     #     },
     #     recovery_point_tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     backup_options: {
+    #       "BackupOptionKey" => "BackupOptionValue",
     #     },
     #   })
     #
@@ -2409,10 +2497,6 @@ module Aws::Backup
     # Recovers the saved resource identified by an Amazon Resource Name
     # (ARN).
     #
-    # If the resource ARN is included in the request, then the last complete
-    # backup of that resource is recovered. If the ARN of a recovery point
-    # is supplied, then that recovery point is restored.
-    #
     # @option params [required, String] :recovery_point_arn
     #   An ARN that uniquely identifies a recovery point; for example,
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
@@ -2431,15 +2515,18 @@ module Aws::Backup
     #   You need to specify specific metadata to restore an Amazon Elastic
     #   File System (Amazon EFS) instance:
     #
-    #   * `file-system-id`\: ID of the Amazon EFS file system that is backed
-    #     up by AWS Backup. Returned in `GetRecoveryPointRestoreMetadata`.
+    #   * `file-system-id`\: The ID of the Amazon EFS file system that is
+    #     backed up by AWS Backup. Returned in
+    #     `GetRecoveryPointRestoreMetadata`.
     #
     #   * `Encrypted`\: A Boolean value that, if true, specifies that the file
     #     system is encrypted. If `KmsKeyId` is specified, `Encrypted` must be
     #     set to `true`.
     #
     #   * `KmsKeyId`\: Specifies the AWS KMS key that is used to encrypt the
-    #     restored file system.
+    #     restored file system. You can specify a key from another AWS account
+    #     provided that key it is properly shared with your account via AWS
+    #     KMS.
     #
     #   * `PerformanceMode`\: Specifies the throughput mode of the file
     #     system.
@@ -2449,6 +2536,11 @@ module Aws::Backup
     #
     #   * `newFileSystem`\: A Boolean value that, if true, specifies that the
     #     recovery point is restored to a new Amazon EFS file system.
+    #
+    #   * `ItemsToRestore `\: A serialized list of up to five strings where
+    #     each string is a file path. Use `ItemsToRestore` to restore specific
+    #     files or directories rather than the entire file system. This
+    #     parameter is optional.
     #
     # @option params [required, String] :iam_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to
@@ -2586,9 +2678,9 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Replaces the body of a saved backup plan identified by its
-    # `backupPlanId` with the input document in JSON format. The new version
-    # is uniquely identified by a `VersionId`.
+    # Updates an existing backup plan identified by its `backupPlanId` with
+    # the input document in JSON format. The new version is uniquely
+    # identified by a `VersionId`.
     #
     # @option params [required, String] :backup_plan_id
     #   Uniquely identifies a backup plan.
@@ -2603,6 +2695,7 @@ module Aws::Backup
     #   * {Types::UpdateBackupPlanOutput#backup_plan_arn #backup_plan_arn} => String
     #   * {Types::UpdateBackupPlanOutput#creation_date #creation_date} => Time
     #   * {Types::UpdateBackupPlanOutput#version_id #version_id} => String
+    #   * {Types::UpdateBackupPlanOutput#advanced_backup_settings #advanced_backup_settings} => Array&lt;Types::AdvancedBackupSetting&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2635,6 +2728,14 @@ module Aws::Backup
     #           ],
     #         },
     #       ],
+    #       advanced_backup_settings: [
+    #         {
+    #           resource_type: "ResourceType",
+    #           backup_options: {
+    #             "BackupOptionKey" => "BackupOptionValue",
+    #           },
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -2644,6 +2745,10 @@ module Aws::Backup
     #   resp.backup_plan_arn #=> String
     #   resp.creation_date #=> Time
     #   resp.version_id #=> String
+    #   resp.advanced_backup_settings #=> Array
+    #   resp.advanced_backup_settings[0].resource_type #=> String
+    #   resp.advanced_backup_settings[0].backup_options #=> Hash
+    #   resp.advanced_backup_settings[0].backup_options["BackupOptionKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateBackupPlan AWS API Documentation
     #
@@ -2651,6 +2756,31 @@ module Aws::Backup
     # @param [Hash] params ({})
     def update_backup_plan(params = {}, options = {})
       req = build_request(:update_backup_plan, params)
+      req.send_request(options)
+    end
+
+    # Updates the current global settings for the AWS Account. Use the
+    # `DescribeGlobalSettings` API to determine the current settings.
+    #
+    # @option params [Hash<String,String>] :global_settings
+    #   A list of resources along with the opt-in preferences for the account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_global_settings({
+    #     global_settings: {
+    #       "GlobalSettingsName" => "GlobalSettingsValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateGlobalSettings AWS API Documentation
+    #
+    # @overload update_global_settings(params = {})
+    # @param [Hash] params ({})
+    def update_global_settings(params = {}, options = {})
+      req = build_request(:update_global_settings, params)
       req.send_request(options)
     end
 
@@ -2724,16 +2854,17 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Updates the current service opt-in settings for the Region. If the
-    # service has a value set to `true`, AWS Backup attempts to protect that
-    # service's resources in this Region, when included in an on-demand
-    # backup or scheduled backup plan. If the value is set to `false` for a
-    # service, AWS Backup does not attempt to protect that service's
-    # resources in this Region.
+    # Updates the current service opt-in settings for the Region. If
+    # service-opt-in is enabled for a service, AWS Backup tries to protect
+    # that service's resources in this Region, when the resource is
+    # included in an on-demand backup or scheduled backup plan. Otherwise,
+    # AWS Backup does not try to protect that service's resources in this
+    # Region. Use the `DescribeRegionSettings` API to determine the resource
+    # types that are supported.
     #
     # @option params [Hash<String,Boolean>] :resource_type_opt_in_preference
     #   Updates the list of services along with the opt-in preferences for the
-    #   region.
+    #   Region.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2767,7 +2898,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

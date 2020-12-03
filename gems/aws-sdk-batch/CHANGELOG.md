@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2020-12-03)
+------------------
+
+* Feature - This release adds support for customer to run Batch Jobs on ECS Fargate, the serverless compute engine built for containers on AWS. Customer can also propagate Job and Job Definition Tags to ECS Task.
+
+1.41.0 (2020-11-24)
+------------------
+
+* Feature - Add Ec2Configuration in ComputeEnvironment.ComputeResources. Use in CreateComputeEnvironment API to enable AmazonLinux2 support.
+
+1.40.0 (2020-10-20)
+------------------
+
+* Feature - Adding evaluateOnExit to job retry strategies.
+
+1.39.0 (2020-10-02)
+------------------
+
+* Feature - Support tagging for Batch resources (compute environment, job queue, job definition and job) and tag based access control on Batch APIs
+
+1.38.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.37.0 (2020-09-25)
+------------------
+
+* Feature - Support custom logging, executionRole, secrets, and linuxParameters (initProcessEnabled, maxSwap, swappiness, sharedMemorySize, and tmpfs). Also, add new context keys for awslogs.
+
+1.36.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.35.0 (2020-08-25)
 ------------------
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2020-11-23)
+------------------
+
+* Feature - Support specifying tags during the creation of the Outpost resource. Tags are now returned in the response body of Outpost APIs.
+
+1.11.0 (2020-11-18)
+------------------
+
+* Feature - Mark the Name parameter in CreateOutpost as required.
+
+1.10.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.9.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.8.0 (2020-08-25)
 ------------------
 

@@ -195,6 +195,22 @@
       ],
       "endpoint":{"hostPrefix":"monitor."}
     },
+    "CreatePresignedPortalUrl":{
+      "name":"CreatePresignedPortalUrl",
+      "http":{
+        "method":"GET",
+        "requestUri":"/portals/{portalId}/presigned-url",
+        "responseCode":200
+      },
+      "input":{"shape":"CreatePresignedPortalUrlRequest"},
+      "output":{"shape":"CreatePresignedPortalUrlResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "endpoint":{"hostPrefix":"monitor."}
+    },
     "CreateProject":{
       "name":"CreateProject",
       "http":{
@@ -414,6 +430,20 @@
         {"shape":"ThrottlingException"}
       ],
       "endpoint":{"hostPrefix":"monitor."}
+    },
+    "DescribeDefaultEncryptionConfiguration":{
+      "name":"DescribeDefaultEncryptionConfiguration",
+      "http":{
+        "method":"GET",
+        "requestUri":"/configuration/account/encryption"
+      },
+      "input":{"shape":"DescribeDefaultEncryptionConfigurationRequest"},
+      "output":{"shape":"DescribeDefaultEncryptionConfigurationResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ThrottlingException"}
+      ]
     },
     "DescribeGateway":{
       "name":"DescribeGateway",
@@ -719,6 +749,22 @@
         {"shape":"InternalFailureException"},
         {"shape":"ThrottlingException"},
         {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "PutDefaultEncryptionConfiguration":{
+      "name":"PutDefaultEncryptionConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/configuration/account/encryption"
+      },
+      "input":{"shape":"PutDefaultEncryptionConfigurationRequest"},
+      "output":{"shape":"PutDefaultEncryptionConfigurationResponse"},
+      "errors":[
+        {"shape":"InvalidRequestException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ConflictingOperationException"}
       ]
     },
     "PutLoggingOptions":{
@@ -1297,6 +1343,13 @@
         "defaultValue":{"shape":"DefaultValue"}
       }
     },
+    "AuthMode":{
+      "type":"string",
+      "enum":[
+        "IAM",
+        "SSO"
+      ]
+    },
     "BatchAssociateProjectAssetsErrors":{
       "type":"list",
       "member":{"shape":"AssetErrorDetails"}
@@ -1439,6 +1492,33 @@
       "max":64,
       "min":36,
       "pattern":"\\S{36,64}"
+    },
+    "ConfigurationErrorDetails":{
+      "type":"structure",
+      "required":[
+        "code",
+        "message"
+      ],
+      "members":{
+        "code":{"shape":"ErrorCode"},
+        "message":{"shape":"ErrorMessage"}
+      }
+    },
+    "ConfigurationState":{
+      "type":"string",
+      "enum":[
+        "ACTIVE",
+        "UPDATE_IN_PROGRESS",
+        "UPDATE_FAILED"
+      ]
+    },
+    "ConfigurationStatus":{
+      "type":"structure",
+      "required":["state"],
+      "members":{
+        "state":{"shape":"ConfigurationState"},
+        "error":{"shape":"ConfigurationErrorDetails"}
+      }
     },
     "ConflictingOperationException":{
       "type":"structure",
@@ -1611,7 +1691,8 @@
         },
         "portalLogoImageFile":{"shape":"ImageFile"},
         "roleArn":{"shape":"ARN"},
-        "tags":{"shape":"TagMap"}
+        "tags":{"shape":"TagMap"},
+        "portalAuthMode":{"shape":"AuthMode"}
       }
     },
     "CreatePortalResponse":{
@@ -1629,6 +1710,29 @@
         "portalStartUrl":{"shape":"Url"},
         "portalStatus":{"shape":"PortalStatus"},
         "ssoApplicationId":{"shape":"SSOApplicationId"}
+      }
+    },
+    "CreatePresignedPortalUrlRequest":{
+      "type":"structure",
+      "required":["portalId"],
+      "members":{
+        "portalId":{
+          "shape":"ID",
+          "location":"uri",
+          "locationName":"portalId"
+        },
+        "sessionDurationSeconds":{
+          "shape":"SessionDurationSeconds",
+          "location":"querystring",
+          "locationName":"sessionDurationSeconds"
+        }
+      }
+    },
+    "CreatePresignedPortalUrlResponse":{
+      "type":"structure",
+      "required":["presignedPortalUrl"],
+      "members":{
+        "presignedPortalUrl":{"shape":"Url"}
       }
     },
     "CreateProjectRequest":{
@@ -2009,6 +2113,23 @@
         "dashboardLastUpdateDate":{"shape":"Timestamp"}
       }
     },
+    "DescribeDefaultEncryptionConfigurationRequest":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DescribeDefaultEncryptionConfigurationResponse":{
+      "type":"structure",
+      "required":[
+        "encryptionType",
+        "configurationStatus"
+      ],
+      "members":{
+        "encryptionType":{"shape":"EncryptionType"},
+        "kmsKeyArn":{"shape":"ARN"},
+        "configurationStatus":{"shape":"ConfigurationStatus"}
+      }
+    },
     "DescribeGatewayCapabilityConfigurationRequest":{
       "type":"structure",
       "required":[
@@ -2122,7 +2243,8 @@
         "portalCreationDate":{"shape":"Timestamp"},
         "portalLastUpdateDate":{"shape":"Timestamp"},
         "portalLogoImageLocation":{"shape":"ImageLocation"},
-        "roleArn":{"shape":"ARN"}
+        "roleArn":{"shape":"ARN"},
+        "portalAuthMode":{"shape":"AuthMode"}
       }
     },
     "DescribeProjectRequest":{
@@ -2189,6 +2311,13 @@
       "min":1,
       "pattern":"[^@]+@[^@]+"
     },
+    "EncryptionType":{
+      "type":"string",
+      "enum":[
+        "SITEWISE_DEFAULT_ENCRYPTION",
+        "KMS_BASED_ENCRYPTION"
+      ]
+    },
     "EntryId":{
       "type":"string",
       "max":64,
@@ -2218,8 +2347,7 @@
     "Expression":{
       "type":"string",
       "max":1024,
-      "min":1,
-      "pattern":"^[a-z0-9._+\\-*%/^, ()]+$"
+      "min":1
     },
     "ExpressionVariable":{
       "type":"structure",
@@ -2450,6 +2578,13 @@
         "id":{"shape":"IdentityId"}
       }
     },
+    "IAMUserIdentity":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{"shape":"ARN"}
+      }
+    },
     "ID":{
       "type":"string",
       "max":36,
@@ -2466,7 +2601,8 @@
       "type":"structure",
       "members":{
         "user":{"shape":"UserIdentity"},
-        "group":{"shape":"GroupIdentity"}
+        "group":{"shape":"GroupIdentity"},
+        "iamUser":{"shape":"IAMUserIdentity"}
       }
     },
     "IdentityId":{
@@ -2479,7 +2615,8 @@
       "type":"string",
       "enum":[
         "USER",
-        "GROUP"
+        "GROUP",
+        "IAM"
       ]
     },
     "Image":{
@@ -2545,6 +2682,11 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "KmsKeyId":{
+      "type":"string",
+      "max":2048,
+      "min":1
+    },
     "LimitExceededException":{
       "type":"structure",
       "required":["message"],
@@ -2576,6 +2718,11 @@
           "shape":"ID",
           "location":"querystring",
           "locationName":"resourceId"
+        },
+        "iamArn":{
+          "shape":"ARN",
+          "location":"querystring",
+          "locationName":"iamArn"
         },
         "nextToken":{
           "shape":"NextToken",
@@ -3109,6 +3256,26 @@
         "propertyValues":{"shape":"AssetPropertyValues"}
       }
     },
+    "PutDefaultEncryptionConfigurationRequest":{
+      "type":"structure",
+      "required":["encryptionType"],
+      "members":{
+        "encryptionType":{"shape":"EncryptionType"},
+        "kmsKeyId":{"shape":"KmsKeyId"}
+      }
+    },
+    "PutDefaultEncryptionConfigurationResponse":{
+      "type":"structure",
+      "required":[
+        "encryptionType",
+        "configurationStatus"
+      ],
+      "members":{
+        "encryptionType":{"shape":"EncryptionType"},
+        "kmsKeyArn":{"shape":"ARN"},
+        "configurationStatus":{"shape":"ConfigurationStatus"}
+      }
+    },
     "PutLoggingOptionsRequest":{
       "type":"structure",
       "required":["loggingOptions"],
@@ -3196,6 +3363,11 @@
       "error":{"httpStatusCode":503},
       "exception":true,
       "fault":true
+    },
+    "SessionDurationSeconds":{
+      "type":"integer",
+      "max":43200,
+      "min":900
     },
     "TagKey":{
       "type":"string",

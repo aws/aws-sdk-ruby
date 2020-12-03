@@ -36,8 +36,9 @@ module Aws::PersonalizeEvents
     #   @return [String]
     #
     # @!attribute [rw] event_type
-    #   The type of event. This property corresponds to the `EVENT_TYPE`
-    #   field of the Interactions schema.
+    #   The type of event, such as click or download. This property
+    #   corresponds to the `EVENT_TYPE` field of your Interactions schema
+    #   and depends on the types of events you are tracking.
     #   @return [String]
     #
     # @!attribute [rw] event_value
@@ -108,6 +109,41 @@ module Aws::PersonalizeEvents
       include Aws::Structure
     end
 
+    # Represents item metadata added to an Items dataset using the
+    # `PutItems` API.
+    #
+    # @note When making an API call, you may pass Item
+    #   data as a hash:
+    #
+    #       {
+    #         item_id: "StringType", # required
+    #         properties: "ItemProperties",
+    #       }
+    #
+    # @!attribute [rw] item_id
+    #   The ID associated with the item.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   A string map of item-specific metadata. Each element in the map
+    #   consists of a key-value pair. For example,
+    #
+    #   `\{"numberOfRatings": "12"\}`
+    #
+    #   The keys use camel case names that match the fields in the Items
+    #   schema. In the above example, the `numberOfRatings` would match the
+    #   'NUMBER\_OF\_RATINGS' field defined in the Items schema.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-events-2018-03-22/Item AWS API Documentation
+    #
+    class Item < Struct.new(
+      :item_id,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutEventsRequest
     #   data as a hash:
     #
@@ -161,6 +197,117 @@ module Aws::PersonalizeEvents
       :user_id,
       :session_id,
       :event_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutItemsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_arn: "Arn", # required
+    #         items: [ # required
+    #           {
+    #             item_id: "StringType", # required
+    #             properties: "ItemProperties",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Number (ARN) of the Items dataset you are adding
+    #   the item or items to.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   A list of item data.
+    #   @return [Array<Types::Item>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-events-2018-03-22/PutItemsRequest AWS API Documentation
+    #
+    class PutItemsRequest < Struct.new(
+      :dataset_arn,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutUsersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_arn: "Arn", # required
+    #         users: [ # required
+    #           {
+    #             user_id: "StringType", # required
+    #             properties: "UserProperties",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Number (ARN) of the Users dataset you are adding
+    #   the user or users to.
+    #   @return [String]
+    #
+    # @!attribute [rw] users
+    #   A list of user data.
+    #   @return [Array<Types::User>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-events-2018-03-22/PutUsersRequest AWS API Documentation
+    #
+    class PutUsersRequest < Struct.new(
+      :dataset_arn,
+      :users)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Could not find the specified resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-events-2018-03-22/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents user metadata added to a Users dataset using the `PutUsers`
+    # API.
+    #
+    # @note When making an API call, you may pass User
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "StringType", # required
+    #         properties: "UserProperties",
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The ID associated with the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   A string map of user-specific metadata. Each element in the map
+    #   consists of a key-value pair. For example,
+    #
+    #   `\{"numberOfVideosWatched": "45"\}`
+    #
+    #   The keys use camel case names that match the fields in the Users
+    #   schema. In the above example, the `numberOfVideosWatched` would
+    #   match the 'NUMBER\_OF\_VIDEOS\_WATCHED' field defined in the Users
+    #   schema.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-events-2018-03-22/User AWS API Documentation
+    #
+    class User < Struct.new(
+      :user_id,
+      :properties)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -17,6 +17,7 @@ module Aws::SavingsPlans
     #         savings_plan_offering_id: "SavingsPlanOfferingId", # required
     #         commitment: "Amount", # required
     #         upfront_payment_amount: "Amount",
+    #         purchase_time: Time.now,
     #         client_token: "ClientToken",
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -39,6 +40,11 @@ module Aws::SavingsPlans
     #   supported only if the payment option is `Partial Upfront`.
     #   @return [String]
     #
+    # @!attribute [rw] purchase_time
+    #   The time at which to purchase the Savings Plan, in UTC format
+    #   (YYYY-MM-DDTHH:MM:SSZ).
+    #   @return [Time]
+    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -57,6 +63,7 @@ module Aws::SavingsPlans
       :savings_plan_offering_id,
       :commitment,
       :upfront_payment_amount,
+      :purchase_time,
       :client_token,
       :tags)
       SENSITIVE = []
@@ -74,6 +81,29 @@ module Aws::SavingsPlans
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteQueuedSavingsPlanRequest
+    #   data as a hash:
+    #
+    #       {
+    #         savings_plan_id: "SavingsPlanId", # required
+    #       }
+    #
+    # @!attribute [rw] savings_plan_id
+    #   The ID of the Savings Plan.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/savingsplans-2019-06-28/DeleteQueuedSavingsPlanRequest AWS API Documentation
+    #
+    class DeleteQueuedSavingsPlanRequest < Struct.new(
+      :savings_plan_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/savingsplans-2019-06-28/DeleteQueuedSavingsPlanResponse AWS API Documentation
+    #
+    class DeleteQueuedSavingsPlanResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeSavingsPlanRatesRequest
     #   data as a hash:
@@ -150,7 +180,7 @@ module Aws::SavingsPlans
     #         savings_plan_payment_options: ["All Upfront"], # accepts All Upfront, Partial Upfront, No Upfront
     #         savings_plan_types: ["Compute"], # accepts Compute, EC2Instance
     #         products: ["EC2"], # accepts EC2, Fargate, Lambda
-    #         service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS, AmazonEKS, AWSLambda
+    #         service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS, AWSLambda
     #         usage_types: ["SavingsPlanRateUsageType"],
     #         operations: ["SavingsPlanRateOperation"],
     #         filters: [
@@ -364,7 +394,7 @@ module Aws::SavingsPlans
     #         savings_plan_ids: ["SavingsPlanId"],
     #         next_token: "PaginationToken",
     #         max_results: 1,
-    #         states: ["payment-pending"], # accepts payment-pending, payment-failed, active, retired
+    #         states: ["payment-pending"], # accepts payment-pending, payment-failed, active, retired, queued, queued-deleted
     #         filters: [
     #           {
     #             name: "region", # accepts region, ec2-instance-family, commitment, upfront, term, savings-plan-type, payment-option, start, end

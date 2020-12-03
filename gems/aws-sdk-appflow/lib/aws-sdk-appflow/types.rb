@@ -322,6 +322,10 @@ module Aws::Appflow
     #   The connector metadata specific to Amazon EventBridge.
     #   @return [Types::EventBridgeMetadata]
     #
+    # @!attribute [rw] upsolver
+    #   The connector metadata specific to Upsolver.
+    #   @return [Types::UpsolverMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorMetadata AWS API Documentation
     #
     class ConnectorMetadata < Struct.new(
@@ -341,7 +345,8 @@ module Aws::Appflow
       :trendmicro,
       :veeva,
       :zendesk,
-      :event_bridge)
+      :event_bridge,
+      :upsolver)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -647,6 +652,7 @@ module Aws::Appflow
     #               auth_code: "AuthCode",
     #               redirect_uri: "RedirectUri",
     #             },
+    #             client_credentials_arn: "ClientCredentialsArn",
     #           },
     #           service_now: {
     #             username: "Username", # required
@@ -757,6 +763,7 @@ module Aws::Appflow
     #             auth_code: "AuthCode",
     #             redirect_uri: "RedirectUri",
     #           },
+    #           client_credentials_arn: "ClientCredentialsArn",
     #         },
     #         service_now: {
     #           username: "Username", # required
@@ -1040,7 +1047,7 @@ module Aws::Appflow
     #       {
     #         connector_profile_name: "ConnectorProfileName", # required
     #         kms_arn: "KMSArn",
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #         connection_mode: "Public", # required, accepts Public, Private
     #         connector_profile_config: { # required
     #           connector_profile_properties: { # required
@@ -1144,6 +1151,7 @@ module Aws::Appflow
     #                 auth_code: "AuthCode",
     #                 redirect_uri: "RedirectUri",
     #               },
+    #               client_credentials_arn: "ClientCredentialsArn",
     #             },
     #             service_now: {
     #               username: "Username", # required
@@ -1256,7 +1264,7 @@ module Aws::Appflow
     #           },
     #         },
     #         source_flow_config: { # required
-    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #           connector_profile_name: "ConnectorProfileName",
     #           source_connector_properties: { # required
     #             amplitude: {
@@ -1305,10 +1313,13 @@ module Aws::Appflow
     #               object: "Object", # required
     #             },
     #           },
+    #           incremental_pull_config: {
+    #             datetime_type_field_name: "DatetimeTypeFieldName",
+    #           },
     #         },
     #         destination_flow_config_list: [ # required
     #           {
-    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #             connector_profile_name: "ConnectorProfileName",
     #             destination_connector_properties: { # required
     #               redshift: {
@@ -1337,11 +1348,13 @@ module Aws::Appflow
     #               },
     #               salesforce: {
     #                 object: "Object", # required
+    #                 id_field_names: ["Name"],
     #                 error_handling_config: {
     #                   fail_on_first_destination_error: false,
     #                   bucket_prefix: "BucketPrefix",
     #                   bucket_name: "BucketName",
     #                 },
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
     #               },
     #               snowflake: {
     #                 object: "Object", # required
@@ -1359,6 +1372,20 @@ module Aws::Appflow
     #                   fail_on_first_destination_error: false,
     #                   bucket_prefix: "BucketPrefix",
     #                   bucket_name: "BucketName",
+    #                 },
+    #               },
+    #               upsolver: {
+    #                 bucket_name: "UpsolverBucketName", # required
+    #                 bucket_prefix: "BucketPrefix",
+    #                 s3_output_format_config: { # required
+    #                   file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #                   prefix_config: { # required
+    #                     prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #                     prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #                   },
+    #                   aggregation_config: {
+    #                     aggregation_type: "None", # accepts None, SingleFile
+    #                   },
     #                 },
     #               },
     #             },
@@ -1614,7 +1641,7 @@ module Aws::Appflow
     #
     #       {
     #         connector_entity_name: "Name", # required
-    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #         connector_profile_name: "ConnectorProfileName",
     #       }
     #
@@ -1661,7 +1688,7 @@ module Aws::Appflow
     #
     #       {
     #         connector_profile_names: ["ConnectorProfileName"],
-    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -1719,7 +1746,7 @@ module Aws::Appflow
     #   data as a hash:
     #
     #       {
-    #         connector_types: ["Salesforce"], # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_types: ["Salesforce"], # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #         next_token: "NextToken",
     #       }
     #
@@ -1960,11 +1987,13 @@ module Aws::Appflow
     #         },
     #         salesforce: {
     #           object: "Object", # required
+    #           id_field_names: ["Name"],
     #           error_handling_config: {
     #             fail_on_first_destination_error: false,
     #             bucket_prefix: "BucketPrefix",
     #             bucket_name: "BucketName",
     #           },
+    #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
     #         },
     #         snowflake: {
     #           object: "Object", # required
@@ -1982,6 +2011,20 @@ module Aws::Appflow
     #             fail_on_first_destination_error: false,
     #             bucket_prefix: "BucketPrefix",
     #             bucket_name: "BucketName",
+    #           },
+    #         },
+    #         upsolver: {
+    #           bucket_name: "UpsolverBucketName", # required
+    #           bucket_prefix: "BucketPrefix",
+    #           s3_output_format_config: { # required
+    #             file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #             prefix_config: { # required
+    #               prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #               prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #             },
+    #             aggregation_config: {
+    #               aggregation_type: "None", # accepts None, SingleFile
+    #             },
     #           },
     #         },
     #       }
@@ -2006,6 +2049,10 @@ module Aws::Appflow
     #   The properties required to query Amazon EventBridge.
     #   @return [Types::EventBridgeDestinationProperties]
     #
+    # @!attribute [rw] upsolver
+    #   The properties required to query Upsolver.
+    #   @return [Types::UpsolverDestinationProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DestinationConnectorProperties AWS API Documentation
     #
     class DestinationConnectorProperties < Struct.new(
@@ -2013,7 +2060,8 @@ module Aws::Appflow
       :s3,
       :salesforce,
       :snowflake,
-      :event_bridge)
+      :event_bridge,
+      :upsolver)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2036,12 +2084,25 @@ module Aws::Appflow
     #   they do.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_updatable
+    #   Specifies whether the field can be updated during an `UPDATE` or
+    #   `UPSERT` write operation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] supported_write_operations
+    #   A list of supported write operations. For each write operation
+    #   listed, this field can be used in `idFieldNames` when that write
+    #   operation is present as a destination option.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DestinationFieldProperties AWS API Documentation
     #
     class DestinationFieldProperties < Struct.new(
       :is_creatable,
       :is_nullable,
-      :is_upsertable)
+      :is_upsertable,
+      :is_updatable,
+      :supported_write_operations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2053,7 +2114,7 @@ module Aws::Appflow
     #   data as a hash:
     #
     #       {
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #         connector_profile_name: "ConnectorProfileName",
     #         destination_connector_properties: { # required
     #           redshift: {
@@ -2082,11 +2143,13 @@ module Aws::Appflow
     #           },
     #           salesforce: {
     #             object: "Object", # required
+    #             id_field_names: ["Name"],
     #             error_handling_config: {
     #               fail_on_first_destination_error: false,
     #               bucket_prefix: "BucketPrefix",
     #               bucket_name: "BucketName",
     #             },
+    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
     #           },
     #           snowflake: {
     #             object: "Object", # required
@@ -2104,6 +2167,20 @@ module Aws::Appflow
     #               fail_on_first_destination_error: false,
     #               bucket_prefix: "BucketPrefix",
     #               bucket_name: "BucketName",
+    #             },
+    #           },
+    #           upsolver: {
+    #             bucket_name: "UpsolverBucketName", # required
+    #             bucket_prefix: "BucketPrefix",
+    #             s3_output_format_config: { # required
+    #               file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #               prefix_config: { # required
+    #                 prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #                 prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #               },
+    #               aggregation_config: {
+    #                 aggregation_type: "None", # accepts None, SingleFile
+    #               },
     #             },
     #           },
     #         },
@@ -2523,7 +2600,7 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] client_secret
-    #   The client secret used by the oauth client to authenticate to the
+    #   The client secret used by the OAuth client to authenticate to the
     #   authorization server.
     #   @return [String]
     #
@@ -2538,7 +2615,7 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] o_auth_request
-    #   The oauth requirement needed to request security tokens from the
+    #   The OAuth requirement needed to request security tokens from the
     #   connector endpoint.
     #   @return [Types::ConnectorOAuthRequest]
     #
@@ -2595,6 +2672,29 @@ module Aws::Appflow
     #
     class GoogleAnalyticsSourceProperties < Struct.new(
       :object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration used when importing incremental records
+    # from the source.
+    #
+    # @note When making an API call, you may pass IncrementalPullConfig
+    #   data as a hash:
+    #
+    #       {
+    #         datetime_type_field_name: "DatetimeTypeFieldName",
+    #       }
+    #
+    # @!attribute [rw] datetime_type_field_name
+    #   A field that specifies the date time or timestamp field as the
+    #   criteria to use when importing incremental records from the source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/IncrementalPullConfig AWS API Documentation
+    #
+    class IncrementalPullConfig < Struct.new(
+      :datetime_type_field_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2706,7 +2806,7 @@ module Aws::Appflow
     #
     #       {
     #         connector_profile_name: "ConnectorProfileName",
-    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #         entities_path: "EntitiesPath",
     #       }
     #
@@ -2848,7 +2948,7 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] client_secret
-    #   The client secret used by the oauth client to authenticate to the
+    #   The client secret used by the OAuth client to authenticate to the
     #   authorization server.
     #   @return [String]
     #
@@ -2857,7 +2957,7 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] o_auth_request
-    #   The oauth requirement needed to request security tokens from the
+    #   The OAuth requirement needed to request security tokens from the
     #   connector endpoint.
     #   @return [Types::ConnectorOAuthRequest]
     #
@@ -3227,6 +3327,7 @@ module Aws::Appflow
     #           auth_code: "AuthCode",
     #           redirect_uri: "RedirectUri",
     #         },
+    #         client_credentials_arn: "ClientCredentialsArn",
     #       }
     #
     # @!attribute [rw] access_token
@@ -3238,17 +3339,23 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] o_auth_request
-    #   The oauth requirement needed to request security tokens from the
+    #   The OAuth requirement needed to request security tokens from the
     #   connector endpoint.
     #   @return [Types::ConnectorOAuthRequest]
+    #
+    # @!attribute [rw] client_credentials_arn
+    #   The secret manager ARN, which contains the client ID and client
+    #   secret of the connected app.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SalesforceConnectorProfileCredentials AWS API Documentation
     #
     class SalesforceConnectorProfileCredentials < Struct.new(
       :access_token,
       :refresh_token,
-      :o_auth_request)
-      SENSITIVE = [:access_token]
+      :o_auth_request,
+      :client_credentials_arn)
+      SENSITIVE = [:access_token, :client_credentials_arn]
       include Aws::Structure
     end
 
@@ -3289,16 +3396,23 @@ module Aws::Appflow
     #
     #       {
     #         object: "Object", # required
+    #         id_field_names: ["Name"],
     #         error_handling_config: {
     #           fail_on_first_destination_error: false,
     #           bucket_prefix: "BucketPrefix",
     #           bucket_name: "BucketName",
     #         },
+    #         write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
     #       }
     #
     # @!attribute [rw] object
     #   The object specified in the Salesforce flow destination.
     #   @return [String]
+    #
+    # @!attribute [rw] id_field_names
+    #   The name of the field that Amazon AppFlow uses as an ID when
+    #   performing a write operation such as update or delete.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] error_handling_config
     #   The settings that determine how Amazon AppFlow handles an error when
@@ -3309,11 +3423,19 @@ module Aws::Appflow
     #   destination connector details.
     #   @return [Types::ErrorHandlingConfig]
     #
+    # @!attribute [rw] write_operation_type
+    #   This specifies the type of write operation to be performed in
+    #   Salesforce. When the value is `UPSERT`, then `idFieldNames` is
+    #   required.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SalesforceDestinationProperties AWS API Documentation
     #
     class SalesforceDestinationProperties < Struct.new(
       :object,
-      :error_handling_config)
+      :id_field_names,
+      :error_handling_config,
+      :write_operation_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3384,8 +3506,8 @@ module Aws::Appflow
     #       }
     #
     # @!attribute [rw] schedule_expression
-    #   The scheduling expression that determines when and how often the
-    #   rule runs.
+    #   The scheduling expression that determines the rate at which the
+    #   schedule will run, for example `rate(5minutes)`.
     #   @return [String]
     #
     # @!attribute [rw] data_pull_mode
@@ -3590,7 +3712,7 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] client_secret
-    #   The client secret used by the oauth client to authenticate to the
+    #   The client secret used by the OAuth client to authenticate to the
     #   authorization server.
     #   @return [String]
     #
@@ -3599,7 +3721,7 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] o_auth_request
-    #   The oauth requirement needed to request security tokens from the
+    #   The OAuth requirement needed to request security tokens from the
     #   connector endpoint.
     #   @return [Types::ConnectorOAuthRequest]
     #
@@ -3985,7 +4107,7 @@ module Aws::Appflow
     #   data as a hash:
     #
     #       {
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #         connector_profile_name: "ConnectorProfileName",
     #         source_connector_properties: { # required
     #           amplitude: {
@@ -4034,6 +4156,9 @@ module Aws::Appflow
     #             object: "Object", # required
     #           },
     #         },
+    #         incremental_pull_config: {
+    #           datetime_type_field_name: "DatetimeTypeFieldName",
+    #         },
     #       }
     #
     # @!attribute [rw] connector_type
@@ -4050,12 +4175,19 @@ module Aws::Appflow
     #   source connector.
     #   @return [Types::SourceConnectorProperties]
     #
+    # @!attribute [rw] incremental_pull_config
+    #   Defines the configuration for a scheduled incremental data pull. If
+    #   a valid configuration is provided, the fields specified in the
+    #   configuration are used when querying for the incremental data pull.
+    #   @return [Types::IncrementalPullConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SourceFlowConfig AWS API Documentation
     #
     class SourceFlowConfig < Struct.new(
       :connector_type,
       :connector_profile_name,
-      :source_connector_properties)
+      :source_connector_properties,
+      :incremental_pull_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4088,11 +4220,18 @@ module Aws::Appflow
     #   Indicates the current status of the flow.
     #   @return [String]
     #
+    # @!attribute [rw] execution_id
+    #   Returns the internal execution ID of an on-demand flow when the flow
+    #   is started. For scheduled or event-triggered flows, this value is
+    #   null.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/StartFlowResponse AWS API Documentation
     #
     class StartFlowResponse < Struct.new(
       :flow_arn,
-      :flow_status)
+      :flow_status,
+      :execution_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4526,6 +4665,7 @@ module Aws::Appflow
     #                 auth_code: "AuthCode",
     #                 redirect_uri: "RedirectUri",
     #               },
+    #               client_credentials_arn: "ClientCredentialsArn",
     #             },
     #             service_now: {
     #               username: "Username", # required
@@ -4622,7 +4762,7 @@ module Aws::Appflow
     #           },
     #         },
     #         source_flow_config: {
-    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #           connector_profile_name: "ConnectorProfileName",
     #           source_connector_properties: { # required
     #             amplitude: {
@@ -4671,10 +4811,13 @@ module Aws::Appflow
     #               object: "Object", # required
     #             },
     #           },
+    #           incremental_pull_config: {
+    #             datetime_type_field_name: "DatetimeTypeFieldName",
+    #           },
     #         },
     #         destination_flow_config_list: [ # required
     #           {
-    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge
+    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, Upsolver
     #             connector_profile_name: "ConnectorProfileName",
     #             destination_connector_properties: { # required
     #               redshift: {
@@ -4703,11 +4846,13 @@ module Aws::Appflow
     #               },
     #               salesforce: {
     #                 object: "Object", # required
+    #                 id_field_names: ["Name"],
     #                 error_handling_config: {
     #                   fail_on_first_destination_error: false,
     #                   bucket_prefix: "BucketPrefix",
     #                   bucket_name: "BucketName",
     #                 },
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
     #               },
     #               snowflake: {
     #                 object: "Object", # required
@@ -4725,6 +4870,20 @@ module Aws::Appflow
     #                   fail_on_first_destination_error: false,
     #                   bucket_prefix: "BucketPrefix",
     #                   bucket_name: "BucketName",
+    #                 },
+    #               },
+    #               upsolver: {
+    #                 bucket_name: "UpsolverBucketName", # required
+    #                 bucket_prefix: "BucketPrefix",
+    #                 s3_output_format_config: { # required
+    #                   file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #                   prefix_config: { # required
+    #                     prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #                     prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #                   },
+    #                   aggregation_config: {
+    #                     aggregation_type: "None", # accepts None, SingleFile
+    #                   },
     #                 },
     #               },
     #             },
@@ -4807,6 +4966,101 @@ module Aws::Appflow
     #
     class UpdateFlowResponse < Struct.new(
       :flow_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties that are applied when Upsolver is used as a
+    # destination.
+    #
+    # @note When making an API call, you may pass UpsolverDestinationProperties
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_name: "UpsolverBucketName", # required
+    #         bucket_prefix: "BucketPrefix",
+    #         s3_output_format_config: { # required
+    #           file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #           prefix_config: { # required
+    #             prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #             prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #           },
+    #           aggregation_config: {
+    #             aggregation_type: "None", # accepts None, SingleFile
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bucket_name
+    #   The Upsolver Amazon S3 bucket name in which Amazon AppFlow places
+    #   the transferred data.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_prefix
+    #   The object key for the destination Upsolver Amazon S3 bucket in
+    #   which Amazon AppFlow places the files.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_output_format_config
+    #   The configuration that determines how data is formatted when
+    #   Upsolver is used as the flow destination.
+    #   @return [Types::UpsolverS3OutputFormatConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/UpsolverDestinationProperties AWS API Documentation
+    #
+    class UpsolverDestinationProperties < Struct.new(
+      :bucket_name,
+      :bucket_prefix,
+      :s3_output_format_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The connector metadata specific to Upsolver.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/UpsolverMetadata AWS API Documentation
+    #
+    class UpsolverMetadata < Aws::EmptyStructure; end
+
+    # The configuration that determines how Amazon AppFlow formats the flow
+    # output data when Upsolver is used as the destination.
+    #
+    # @note When making an API call, you may pass UpsolverS3OutputFormatConfig
+    #   data as a hash:
+    #
+    #       {
+    #         file_type: "CSV", # accepts CSV, JSON, PARQUET
+    #         prefix_config: { # required
+    #           prefix_type: "FILENAME", # accepts FILENAME, PATH, PATH_AND_FILENAME
+    #           prefix_format: "YEAR", # accepts YEAR, MONTH, DAY, HOUR, MINUTE
+    #         },
+    #         aggregation_config: {
+    #           aggregation_type: "None", # accepts None, SingleFile
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file_type
+    #   Indicates the file type that Amazon AppFlow places in the Upsolver
+    #   Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_config
+    #   Determines the prefix that Amazon AppFlow applies to the destination
+    #   folder name. You can name your destination folders according to the
+    #   flow frequency and date.
+    #   @return [Types::PrefixConfig]
+    #
+    # @!attribute [rw] aggregation_config
+    #   The aggregation settings that you can use to customize the output
+    #   format of your flow data.
+    #   @return [Types::AggregationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/UpsolverS3OutputFormatConfig AWS API Documentation
+    #
+    class UpsolverS3OutputFormatConfig < Struct.new(
+      :file_type,
+      :prefix_config,
+      :aggregation_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4920,7 +5174,7 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] client_secret
-    #   The client secret used by the oauth client to authenticate to the
+    #   The client secret used by the OAuth client to authenticate to the
     #   authorization server.
     #   @return [String]
     #
@@ -4929,7 +5183,7 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] o_auth_request
-    #   The oauth requirement needed to request security tokens from the
+    #   The OAuth requirement needed to request security tokens from the
     #   connector endpoint.
     #   @return [Types::ConnectorOAuthRequest]
     #

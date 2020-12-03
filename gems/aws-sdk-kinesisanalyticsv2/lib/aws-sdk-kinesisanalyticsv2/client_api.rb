@@ -43,6 +43,7 @@ module Aws::KinesisAnalyticsV2
     ApplicationSummaries = Shapes::ListShape.new(name: 'ApplicationSummaries')
     ApplicationSummary = Shapes::StructureShape.new(name: 'ApplicationSummary')
     ApplicationVersionId = Shapes::IntegerShape.new(name: 'ApplicationVersionId')
+    AuthorizedUrl = Shapes::StringShape.new(name: 'AuthorizedUrl')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     BucketARN = Shapes::StringShape.new(name: 'BucketARN')
     CSVMappingParameters = Shapes::StructureShape.new(name: 'CSVMappingParameters')
@@ -65,6 +66,8 @@ module Aws::KinesisAnalyticsV2
     CodeValidationException = Shapes::StructureShape.new(name: 'CodeValidationException')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     ConfigurationType = Shapes::StringShape.new(name: 'ConfigurationType')
+    CreateApplicationPresignedUrlRequest = Shapes::StructureShape.new(name: 'CreateApplicationPresignedUrlRequest')
+    CreateApplicationPresignedUrlResponse = Shapes::StructureShape.new(name: 'CreateApplicationPresignedUrlResponse')
     CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
     CreateApplicationResponse = Shapes::StructureShape.new(name: 'CreateApplicationResponse')
     CreateApplicationSnapshotRequest = Shapes::StructureShape.new(name: 'CreateApplicationSnapshotRequest')
@@ -220,6 +223,7 @@ module Aws::KinesisAnalyticsV2
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    SessionExpirationDurationInSeconds = Shapes::IntegerShape.new(name: 'SessionExpirationDurationInSeconds')
     SnapshotDetails = Shapes::StructureShape.new(name: 'SnapshotDetails')
     SnapshotName = Shapes::StringShape.new(name: 'SnapshotName')
     SnapshotStatus = Shapes::StringShape.new(name: 'SnapshotStatus')
@@ -252,6 +256,7 @@ module Aws::KinesisAnalyticsV2
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
     UpdateApplicationResponse = Shapes::StructureShape.new(name: 'UpdateApplicationResponse')
+    UrlType = Shapes::StringShape.new(name: 'UrlType')
     VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
     VpcConfigurationDescription = Shapes::StructureShape.new(name: 'VpcConfigurationDescription')
     VpcConfigurationDescriptions = Shapes::ListShape.new(name: 'VpcConfigurationDescriptions')
@@ -456,6 +461,14 @@ module Aws::KinesisAnalyticsV2
 
     ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
+    CreateApplicationPresignedUrlRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
+    CreateApplicationPresignedUrlRequest.add_member(:url_type, Shapes::ShapeRef.new(shape: UrlType, required: true, location_name: "UrlType"))
+    CreateApplicationPresignedUrlRequest.add_member(:session_expiration_duration_in_seconds, Shapes::ShapeRef.new(shape: SessionExpirationDurationInSeconds, location_name: "SessionExpirationDurationInSeconds"))
+    CreateApplicationPresignedUrlRequest.struct_class = Types::CreateApplicationPresignedUrlRequest
+
+    CreateApplicationPresignedUrlResponse.add_member(:authorized_url, Shapes::ShapeRef.new(shape: AuthorizedUrl, location_name: "AuthorizedUrl"))
+    CreateApplicationPresignedUrlResponse.struct_class = Types::CreateApplicationPresignedUrlResponse
 
     CreateApplicationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     CreateApplicationRequest.add_member(:application_description, Shapes::ShapeRef.new(shape: ApplicationDescription, location_name: "ApplicationDescription"))
@@ -967,6 +980,7 @@ module Aws::KinesisAnalyticsV2
     StartApplicationResponse.struct_class = Types::StartApplicationResponse
 
     StopApplicationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
+    StopApplicationRequest.add_member(:force, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Force"))
     StopApplicationRequest.struct_class = Types::StopApplicationRequest
 
     StopApplicationResponse.struct_class = Types::StopApplicationResponse
@@ -1149,6 +1163,17 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:create_application_presigned_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateApplicationPresignedUrl"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateApplicationPresignedUrlRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateApplicationPresignedUrlResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
       end)
 
       api.add_operation(:create_application_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -1348,6 +1373,7 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidApplicationConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

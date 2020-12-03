@@ -29,6 +29,58 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # An `Archive` object that contains details about an archive.
+    #
+    # @!attribute [rw] archive_name
+    #   The name of the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_source_arn
+    #   The ARN of the event bus associated with the archive. Only events
+    #   from this event bus are sent to the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   A description for the reason that the archive is in the current
+    #   state.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_days
+    #   The number of days to retain events in the archive before they are
+    #   deleted.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] size_bytes
+    #   The size of the archive, in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] event_count
+    #   The number of events in the archive.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time
+    #   The time stamp for the time that the archive was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Archive AWS API Documentation
+    #
+    class Archive < Struct.new(
+      :archive_name,
+      :event_source_arn,
+      :state,
+      :state_reason,
+      :retention_days,
+      :size_bytes,
+      :event_count,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This structure specifies the VPC subnets and security groups for the
     # task, and whether a public IP address is to be used. This structure is
     # relevant only for ECS tasks that use the `awsvpc` network mode.
@@ -171,7 +223,49 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # There is concurrent modification on a rule or target.
+    # @note When making an API call, you may pass CancelReplayRequest
+    #   data as a hash:
+    #
+    #       {
+    #         replay_name: "ReplayName", # required
+    #       }
+    #
+    # @!attribute [rw] replay_name
+    #   The name of the replay to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CancelReplayRequest AWS API Documentation
+    #
+    class CancelReplayRequest < Struct.new(
+      :replay_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replay_arn
+    #   The ARN of the replay to cancel.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the replay.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason that the replay is in the current state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CancelReplayResponse AWS API Documentation
+    #
+    class CancelReplayResponse < Struct.new(
+      :replay_arn,
+      :state,
+      :state_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # There is concurrent modification on a rule, target, archive, or
+    # replay.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ConcurrentModificationException AWS API Documentation
     #
@@ -217,6 +311,77 @@ module Aws::EventBridge
       :type,
       :key,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateArchiveRequest
+    #   data as a hash:
+    #
+    #       {
+    #         archive_name: "ArchiveName", # required
+    #         event_source_arn: "Arn", # required
+    #         description: "ArchiveDescription",
+    #         event_pattern: "EventPattern",
+    #         retention_days: 1,
+    #       }
+    #
+    # @!attribute [rw] archive_name
+    #   The name for the archive to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_source_arn
+    #   The ARN of the event source associated with the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_pattern
+    #   An event pattern to use to filter events sent to the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_days
+    #   The number of days to retain events for. Default value is 0. If set
+    #   to 0, events are retained indefinitely
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateArchiveRequest AWS API Documentation
+    #
+    class CreateArchiveRequest < Struct.new(
+      :archive_name,
+      :event_source_arn,
+      :description,
+      :event_pattern,
+      :retention_days)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] archive_arn
+    #   The ARN of the archive that was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the archive that was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason that the archive is in the state.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time at which the archive was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateArchiveResponse AWS API Documentation
+    #
+    class CreateArchiveResponse < Struct.new(
+      :archive_arn,
+      :state,
+      :state_reason,
+      :creation_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -338,6 +503,52 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # A `DeadLetterConfig` object that contains information about a
+    # dead-letter queue configuration.
+    #
+    # @note When making an API call, you may pass DeadLetterConfig
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "ResourceArn",
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the SQS queue specified as the target for the dead-letter
+    #   queue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeadLetterConfig AWS API Documentation
+    #
+    class DeadLetterConfig < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteArchiveRequest
+    #   data as a hash:
+    #
+    #       {
+    #         archive_name: "ArchiveName", # required
+    #       }
+    #
+    # @!attribute [rw] archive_name
+    #   The name of the archive to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeleteArchiveRequest AWS API Documentation
+    #
+    class DeleteArchiveRequest < Struct.new(
+      :archive_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeleteArchiveResponse AWS API Documentation
+    #
+    class DeleteArchiveResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteEventBusRequest
     #   data as a hash:
     #
@@ -388,7 +599,7 @@ module Aws::EventBridge
     #
     #       {
     #         name: "RuleName", # required
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #         force: false,
     #       }
     #
@@ -397,8 +608,8 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus associated with the rule. If you omit this, the
-    #   default event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @!attribute [rw] force
@@ -419,16 +630,97 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeArchiveRequest
+    #   data as a hash:
+    #
+    #       {
+    #         archive_name: "ArchiveName", # required
+    #       }
+    #
+    # @!attribute [rw] archive_name
+    #   The name of the archive to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeArchiveRequest AWS API Documentation
+    #
+    class DescribeArchiveRequest < Struct.new(
+      :archive_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] archive_arn
+    #   The ARN of the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] archive_name
+    #   The name of the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_source_arn
+    #   The ARN of the event source associated with the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_pattern
+    #   The event pattern used to filter events sent to the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason that the archive is in the state.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_days
+    #   The number of days to retain events for in the archive.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] size_bytes
+    #   The size of the archive in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] event_count
+    #   The number of events in the archive.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time
+    #   The time at which the archive was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeArchiveResponse AWS API Documentation
+    #
+    class DescribeArchiveResponse < Struct.new(
+      :archive_arn,
+      :archive_name,
+      :event_source_arn,
+      :description,
+      :event_pattern,
+      :state,
+      :state_reason,
+      :retention_days,
+      :size_bytes,
+      :event_count,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeEventBusRequest
     #   data as a hash:
     #
     #       {
-    #         name: "EventBusName",
+    #         name: "EventBusNameOrArn",
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the event bus to show details for. If you omit this, the
-    #   default event bus is displayed.
+    #   The name or ARN of the event bus to show details for. If you omit
+    #   this, the default event bus is displayed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEventBusRequest AWS API Documentation
@@ -561,12 +853,100 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeReplayRequest
+    #   data as a hash:
+    #
+    #       {
+    #         replay_name: "ReplayName", # required
+    #       }
+    #
+    # @!attribute [rw] replay_name
+    #   The name of the replay to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeReplayRequest AWS API Documentation
+    #
+    class DescribeReplayRequest < Struct.new(
+      :replay_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replay_name
+    #   The name of the replay.
+    #   @return [String]
+    #
+    # @!attribute [rw] replay_arn
+    #   The ARN of the replay.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the replay.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the replay.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason that the replay is in the current state.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_source_arn
+    #   The ARN of the archive events were replayed from.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   A `ReplayDestination` object that contains details about the replay.
+    #   @return [Types::ReplayDestination]
+    #
+    # @!attribute [rw] event_start_time
+    #   The time stamp of the first event that was last replayed from the
+    #   archive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] event_end_time
+    #   The time stamp for the last event that was replayed from the
+    #   archive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] event_last_replayed_time
+    #   The time that the event was last replayed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] replay_start_time
+    #   A time stamp for the time that the replay started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] replay_end_time
+    #   A time stamp for the time that the replay stopped.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeReplayResponse AWS API Documentation
+    #
+    class DescribeReplayResponse < Struct.new(
+      :replay_name,
+      :replay_arn,
+      :description,
+      :state,
+      :state_reason,
+      :event_source_arn,
+      :destination,
+      :event_start_time,
+      :event_end_time,
+      :event_last_replayed_time,
+      :replay_start_time,
+      :replay_end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeRuleRequest
     #   data as a hash:
     #
     #       {
     #         name: "RuleName", # required
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #       }
     #
     # @!attribute [rw] name
@@ -574,8 +954,8 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus associated with the rule. If you omit this, the
-    #   default event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeRuleRequest AWS API Documentation
@@ -629,7 +1009,16 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus associated with the rule.
+    #   The name of the event bus associated with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   The account ID of the user that created the rule. If you use
+    #   `PutRule` to put a rule on an event bus in another account, the
+    #   other account is the owner of the rule, and the rule ARN includes
+    #   the account ID for that account. However, the value for `CreatedBy`
+    #   is the account ID as the account that created the rule in the other
+    #   account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeRuleResponse AWS API Documentation
@@ -643,7 +1032,8 @@ module Aws::EventBridge
       :description,
       :role_arn,
       :managed_by,
-      :event_bus_name)
+      :event_bus_name,
+      :created_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -653,7 +1043,7 @@ module Aws::EventBridge
     #
     #       {
     #         name: "RuleName", # required
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #       }
     #
     # @!attribute [rw] name
@@ -661,8 +1051,8 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus associated with the rule. If you omit this, the
-    #   default event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DisableRuleRequest AWS API Documentation
@@ -766,7 +1156,7 @@ module Aws::EventBridge
     #
     #       {
     #         name: "RuleName", # required
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #       }
     #
     # @!attribute [rw] name
@@ -774,8 +1164,8 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus associated with the rule. If you omit this, the
-    #   default event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/EnableRuleRequest AWS API Documentation
@@ -907,6 +1297,13 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # An error occurred because a replay can be canceled only when the state
+    # is Running or Starting.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/IllegalStatusException AWS API Documentation
+    #
+    class IllegalStatusException < Aws::EmptyStructure; end
+
     # Contains the parameters needed for you to provide custom input to a
     # target based on one or more pieces of data extracted from the event.
     #
@@ -1033,12 +1430,75 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # You tried to create more rules or add more targets to a rule than is
-    # allowed.
+    # The request failed because it attempted to create resource beyond the
+    # allowed service quota.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/LimitExceededException AWS API Documentation
     #
     class LimitExceededException < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass ListArchivesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name_prefix: "ArchiveName",
+    #         event_source_arn: "Arn",
+    #         state: "ENABLED", # accepts ENABLED, DISABLED, CREATING, UPDATING, CREATE_FAILED, UPDATE_FAILED
+    #         next_token: "NextToken",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] name_prefix
+    #   A name prefix to filter the archives returned. Only archives with
+    #   name that match the prefix are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_source_arn
+    #   The ARN of the event source associated with the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListArchivesRequest AWS API Documentation
+    #
+    class ListArchivesRequest < Struct.new(
+      :name_prefix,
+      :event_source_arn,
+      :state,
+      :next_token,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] archives
+    #   An array of `Archive` objects that include details about an archive.
+    #   @return [Array<Types::Archive>]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListArchivesResponse AWS API Documentation
+    #
+    class ListArchivesResponse < Struct.new(
+      :archives,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass ListEventBusesRequest
     #   data as a hash:
@@ -1252,12 +1712,76 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListReplaysRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name_prefix: "ReplayName",
+    #         state: "STARTING", # accepts STARTING, RUNNING, CANCELLING, COMPLETED, CANCELLED, FAILED
+    #         event_source_arn: "Arn",
+    #         next_token: "NextToken",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] name_prefix
+    #   A name prefix to filter the replays returned. Only replays with name
+    #   that match the prefix are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the replay.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_source_arn
+    #   The ARN of the event source associated with the replay.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of replays to retrieve.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListReplaysRequest AWS API Documentation
+    #
+    class ListReplaysRequest < Struct.new(
+      :name_prefix,
+      :state,
+      :event_source_arn,
+      :next_token,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replays
+    #   An array of `Replay` objects that contain information about the
+    #   replay.
+    #   @return [Array<Types::Replay>]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListReplaysResponse AWS API Documentation
+    #
+    class ListReplaysResponse < Struct.new(
+      :replays,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListRuleNamesByTargetRequest
     #   data as a hash:
     #
     #       {
     #         target_arn: "TargetArn", # required
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #         next_token: "NextToken",
     #         limit: 1,
     #       }
@@ -1267,8 +1791,8 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   Limits the results to show only the rules associated with the
-    #   specified event bus.
+    #   The name or ARN of the event bus to list rules for. If you omit
+    #   this, the default event bus is used.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1314,7 +1838,7 @@ module Aws::EventBridge
     #
     #       {
     #         name_prefix: "RuleName",
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #         next_token: "NextToken",
     #         limit: 1,
     #       }
@@ -1324,8 +1848,8 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   Limits the results to show only the rules associated with the
-    #   specified event bus.
+    #   The name or ARN of the event bus to list the rules for. If you omit
+    #   this, the default event bus is used.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1403,7 +1927,7 @@ module Aws::EventBridge
     #
     #       {
     #         rule: "RuleName", # required
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #         next_token: "NextToken",
     #         limit: 1,
     #       }
@@ -1413,8 +1937,8 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus associated with the rule. If you omit this, the
-    #   default event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1576,7 +2100,7 @@ module Aws::EventBridge
     #             resources: ["EventResource"],
     #             detail_type: "String",
     #             detail: "String",
-    #             event_bus_name: "NonPartnerEventBusName",
+    #             event_bus_name: "NonPartnerEventBusNameOrArn",
     #           },
     #         ],
     #       }
@@ -1606,7 +2130,7 @@ module Aws::EventBridge
     #         resources: ["EventResource"],
     #         detail_type: "String",
     #         detail: "String",
-    #         event_bus_name: "NonPartnerEventBusName",
+    #         event_bus_name: "NonPartnerEventBusNameOrArn",
     #       }
     #
     # @!attribute [rw] time
@@ -1639,8 +2163,9 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus that will receive the event. Only the rules that are
-    #   associated with this event bus will be able to match the event.
+    #   The name or ARN of the event bus to receive the event. Only the
+    #   rules that are associated with this event bus are used to match the
+    #   event. If you omit this, the default event bus is used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutEventsRequestEntry AWS API Documentation
@@ -1824,19 +2349,20 @@ module Aws::EventBridge
     #
     #       {
     #         event_bus_name: "NonPartnerEventBusName",
-    #         action: "Action", # required
-    #         principal: "Principal", # required
-    #         statement_id: "StatementId", # required
+    #         action: "Action",
+    #         principal: "Principal",
+    #         statement_id: "StatementId",
     #         condition: {
     #           type: "String", # required
     #           key: "String", # required
     #           value: "String", # required
     #         },
+    #         policy: "String",
     #       }
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus associated with the rule. If you omit this, the
-    #   default event bus is used.
+    #   The name of the event bus associated with the rule. If you omit
+    #   this, the default event bus is used.
     #   @return [String]
     #
     # @!attribute [rw] action
@@ -1883,6 +2409,12 @@ module Aws::EventBridge
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
     #   @return [Types::Condition]
     #
+    # @!attribute [rw] policy
+    #   A JSON string that describes the permission policy statement. You
+    #   can include a `Policy` parameter in the request instead of using the
+    #   `StatementId`, `Action`, `Principal`, or `Condition` parameters.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutPermissionRequest AWS API Documentation
     #
     class PutPermissionRequest < Struct.new(
@@ -1890,7 +2422,8 @@ module Aws::EventBridge
       :action,
       :principal,
       :statement_id,
-      :condition)
+      :condition,
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1911,7 +2444,7 @@ module Aws::EventBridge
     #             value: "TagValue", # required
     #           },
     #         ],
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #       }
     #
     # @!attribute [rw] name
@@ -1950,8 +2483,8 @@ module Aws::EventBridge
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus to associate with this rule. If you omit this, the
-    #   default event bus is used.
+    #   The name or ARN of the event bus to associate with this rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutRuleRequest AWS API Documentation
@@ -1986,7 +2519,7 @@ module Aws::EventBridge
     #
     #       {
     #         rule: "RuleName", # required
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #         targets: [ # required
     #           {
     #             id: "TargetId", # required
@@ -2047,6 +2580,21 @@ module Aws::EventBridge
     #                 "QueryStringKey" => "QueryStringValue",
     #               },
     #             },
+    #             redshift_data_parameters: {
+    #               secret_manager_arn: "RedshiftSecretManagerArn",
+    #               database: "Database", # required
+    #               db_user: "DbUser",
+    #               sql: "Sql", # required
+    #               statement_name: "StatementName",
+    #               with_event: false,
+    #             },
+    #             dead_letter_config: {
+    #               arn: "ResourceArn",
+    #             },
+    #             retry_policy: {
+    #               maximum_retry_attempts: 1,
+    #               maximum_event_age_in_seconds: 1,
+    #             },
     #           },
     #         ],
     #       }
@@ -2056,8 +2604,8 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The name of the event bus associated with the rule. If you omit
-    #   this, the default event bus is used.
+    #   The name or ARN of the event bus associated with the rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -2117,11 +2665,70 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # These are custom parameters to be used when the target is a Redshift
+    # cluster to invoke the Redshift Data API ExecuteStatement based on
+    # EventBridge events.
+    #
+    # @note When making an API call, you may pass RedshiftDataParameters
+    #   data as a hash:
+    #
+    #       {
+    #         secret_manager_arn: "RedshiftSecretManagerArn",
+    #         database: "Database", # required
+    #         db_user: "DbUser",
+    #         sql: "Sql", # required
+    #         statement_name: "StatementName",
+    #         with_event: false,
+    #       }
+    #
+    # @!attribute [rw] secret_manager_arn
+    #   The name or ARN of the secret that enables access to the database.
+    #   Required when authenticating using AWS Secrets Manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database. Required when authenticating using
+    #   temporary credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_user
+    #   The database user name. Required when authenticating using temporary
+    #   credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] sql
+    #   The SQL statement text to run.
+    #   @return [String]
+    #
+    # @!attribute [rw] statement_name
+    #   The name of the SQL statement. You can name the SQL statement when
+    #   you create it to identify the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] with_event
+    #   Indicates whether to send an event back to EventBridge after the SQL
+    #   statement runs.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RedshiftDataParameters AWS API Documentation
+    #
+    class RedshiftDataParameters < Struct.new(
+      :secret_manager_arn,
+      :database,
+      :db_user,
+      :sql,
+      :statement_name,
+      :with_event)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RemovePermissionRequest
     #   data as a hash:
     #
     #       {
-    #         statement_id: "StatementId", # required
+    #         statement_id: "StatementId",
+    #         remove_all_permissions: false,
     #         event_bus_name: "NonPartnerEventBusName",
     #       }
     #
@@ -2129,6 +2736,10 @@ module Aws::EventBridge
     #   The statement ID corresponding to the account that is no longer
     #   allowed to put events to the default event bus.
     #   @return [String]
+    #
+    # @!attribute [rw] remove_all_permissions
+    #   Specifies whether to remove all permissions.
+    #   @return [Boolean]
     #
     # @!attribute [rw] event_bus_name
     #   The name of the event bus to revoke permissions for. If you omit
@@ -2139,6 +2750,7 @@ module Aws::EventBridge
     #
     class RemovePermissionRequest < Struct.new(
       :statement_id,
+      :remove_all_permissions,
       :event_bus_name)
       SENSITIVE = []
       include Aws::Structure
@@ -2149,7 +2761,7 @@ module Aws::EventBridge
     #
     #       {
     #         rule: "RuleName", # required
-    #         event_bus_name: "EventBusName",
+    #         event_bus_name: "EventBusNameOrArn",
     #         ids: ["TargetId"], # required
     #         force: false,
     #       }
@@ -2159,7 +2771,8 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The name of the event bus associated with the rule.
+    #   The name or ARN of the event bus associated with the rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @!attribute [rw] ids
@@ -2228,6 +2841,94 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # A `Replay` object that contains details about a replay.
+    #
+    # @!attribute [rw] replay_name
+    #   The name of the replay.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_source_arn
+    #   The ARN of the archive to replay event from.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the replay.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   A description of why the replay is in the current state.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_start_time
+    #   A time stamp for the time to start replaying events. This is
+    #   determined by the time in the event as described in [Time][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEventsRequestEntry.html#eventbridge-Type-PutEventsRequestEntry-Time
+    #   @return [Time]
+    #
+    # @!attribute [rw] event_end_time
+    #   A time stamp for the time to start replaying events. Any event with
+    #   a creation time prior to the `EventEndTime` specified is replayed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] event_last_replayed_time
+    #   A time stamp for the time that the last event was replayed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] replay_start_time
+    #   A time stamp for the time that the replay started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] replay_end_time
+    #   A time stamp for the time that the replay completed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Replay AWS API Documentation
+    #
+    class Replay < Struct.new(
+      :replay_name,
+      :event_source_arn,
+      :state,
+      :state_reason,
+      :event_start_time,
+      :event_end_time,
+      :event_last_replayed_time,
+      :replay_start_time,
+      :replay_end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A `ReplayDestination` object that contains details about a replay.
+    #
+    # @note When making an API call, you may pass ReplayDestination
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "Arn", # required
+    #         filter_arns: ["Arn"],
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the event bus to replay event to. You can replay events
+    #   only to the event bus specified to create the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_arns
+    #   A list of ARNs for rules to replay events to.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ReplayDestination AWS API Documentation
+    #
+    class ReplayDestination < Struct.new(
+      :arn,
+      :filter_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource you are trying to create already exists.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ResourceAlreadyExistsException AWS API Documentation
@@ -2239,6 +2940,38 @@ module Aws::EventBridge
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
+
+    # A `RetryPolicy` object that includes information about the retry
+    # policy settings.
+    #
+    # @note When making an API call, you may pass RetryPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         maximum_retry_attempts: 1,
+    #         maximum_event_age_in_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] maximum_retry_attempts
+    #   The maximum number of retry attempts to make before the request
+    #   fails. Retry attempts continue until either the maximum number of
+    #   attempts is made or until the duration of the
+    #   `MaximumEventAgeInSeconds` is met.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_event_age_in_seconds
+    #   The maximum amount of time, in seconds, to continue to make retry
+    #   attempts.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RetryPolicy AWS API Documentation
+    #
+    class RetryPolicy < Struct.new(
+      :maximum_retry_attempts,
+      :maximum_event_age_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains information about a rule in Amazon EventBridge.
     #
@@ -2284,7 +3017,8 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
-    #   The event bus associated with the rule.
+    #   The name or ARN of the event bus associated with the rule. If you
+    #   omit this, the default event bus is used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Rule AWS API Documentation
@@ -2380,6 +3114,90 @@ module Aws::EventBridge
     #
     class SqsParameters < Struct.new(
       :message_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartReplayRequest
+    #   data as a hash:
+    #
+    #       {
+    #         replay_name: "ReplayName", # required
+    #         description: "ReplayDescription",
+    #         event_source_arn: "Arn", # required
+    #         event_start_time: Time.now, # required
+    #         event_end_time: Time.now, # required
+    #         destination: { # required
+    #           arn: "Arn", # required
+    #           filter_arns: ["Arn"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] replay_name
+    #   The name of the replay to start.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the replay to start.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_source_arn
+    #   The ARN of the archive to replay events from.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_start_time
+    #   A time stamp for the time to start replaying events. Only events
+    #   that occurred between the `EventStartTime` and `EventEndTime` are
+    #   replayed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] event_end_time
+    #   A time stamp for the time to stop replaying events. Only events that
+    #   occurred between the `EventStartTime` and `EventEndTime` are
+    #   replayed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] destination
+    #   A `ReplayDestination` object that includes details about the
+    #   destination for the replay.
+    #   @return [Types::ReplayDestination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/StartReplayRequest AWS API Documentation
+    #
+    class StartReplayRequest < Struct.new(
+      :replay_name,
+      :description,
+      :event_source_arn,
+      :event_start_time,
+      :event_end_time,
+      :destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replay_arn
+    #   The ARN of the replay.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the replay.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason that the replay is in the state.
+    #   @return [String]
+    #
+    # @!attribute [rw] replay_start_time
+    #   The time at which the replay started.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/StartReplayResponse AWS API Documentation
+    #
+    class StartReplayResponse < Struct.new(
+      :replay_arn,
+      :state,
+      :state_reason,
+      :replay_start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2524,6 +3342,21 @@ module Aws::EventBridge
     #             "QueryStringKey" => "QueryStringValue",
     #           },
     #         },
+    #         redshift_data_parameters: {
+    #           secret_manager_arn: "RedshiftSecretManagerArn",
+    #           database: "Database", # required
+    #           db_user: "DbUser",
+    #           sql: "Sql", # required
+    #           statement_name: "StatementName",
+    #           with_event: false,
+    #         },
+    #         dead_letter_config: {
+    #           arn: "ResourceArn",
+    #         },
+    #         retry_policy: {
+    #           maximum_retry_attempts: 1,
+    #           maximum_event_age_in_seconds: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] id
@@ -2617,6 +3450,25 @@ module Aws::EventBridge
     #   keys/values as part of your target invoking request.
     #   @return [Types::HttpParameters]
     #
+    # @!attribute [rw] redshift_data_parameters
+    #   Contains the Redshift Data API parameters to use when the target is
+    #   a Redshift cluster.
+    #
+    #   If you specify a Redshift Cluster as a Target, you can use this to
+    #   specify parameters to invoke the Redshift Data API ExecuteStatement
+    #   based on EventBridge events.
+    #   @return [Types::RedshiftDataParameters]
+    #
+    # @!attribute [rw] dead_letter_config
+    #   The `DeadLetterConfig` that defines the target queue to send
+    #   dead-letter queue events to.
+    #   @return [Types::DeadLetterConfig]
+    #
+    # @!attribute [rw] retry_policy
+    #   The `RetryPolicy` object that contains the retry policy
+    #   configuration to use for the dead-letter queue.
+    #   @return [Types::RetryPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Target AWS API Documentation
     #
     class Target < Struct.new(
@@ -2631,7 +3483,10 @@ module Aws::EventBridge
       :ecs_parameters,
       :batch_parameters,
       :sqs_parameters,
-      :http_parameters)
+      :http_parameters,
+      :redshift_data_parameters,
+      :dead_letter_config,
+      :retry_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2707,6 +3562,70 @@ module Aws::EventBridge
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateArchiveRequest
+    #   data as a hash:
+    #
+    #       {
+    #         archive_name: "ArchiveName", # required
+    #         description: "ArchiveDescription",
+    #         event_pattern: "EventPattern",
+    #         retention_days: 1,
+    #       }
+    #
+    # @!attribute [rw] archive_name
+    #   The name of the archive to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_pattern
+    #   The event pattern to use to filter events sent to the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_days
+    #   The number of days to retain events in the archive.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateArchiveRequest AWS API Documentation
+    #
+    class UpdateArchiveRequest < Struct.new(
+      :archive_name,
+      :description,
+      :event_pattern,
+      :retention_days)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] archive_arn
+    #   The ARN of the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the archive.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason that the archive is in the current state.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time at which the archive was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateArchiveResponse AWS API Documentation
+    #
+    class UpdateArchiveResponse < Struct.new(
+      :archive_arn,
+      :state,
+      :state_reason,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
   end
 end

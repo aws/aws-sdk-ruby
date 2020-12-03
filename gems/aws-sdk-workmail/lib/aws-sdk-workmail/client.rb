@@ -397,6 +397,44 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Cancels a mailbox export job.
+    #
+    # <note markdown="1"> If the mailbox export job is near completion, it might not be possible
+    # to cancel it.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :client_token
+    #   The idempotency token for the client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :job_id
+    #   The job ID.
+    #
+    # @option params [required, String] :organization_id
+    #   The organization ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_mailbox_export_job({
+    #     client_token: "IdempotencyClientToken", # required
+    #     job_id: "MailboxExportJobId", # required
+    #     organization_id: "OrganizationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CancelMailboxExportJob AWS API Documentation
+    #
+    # @overload cancel_mailbox_export_job(params = {})
+    # @param [Hash] params ({})
+    def cancel_mailbox_export_job(params = {}, options = {})
+      req = build_request(:cancel_mailbox_export_job, params)
+      req.send_request(options)
+    end
+
     # Adds an alias to the set of a given member (user or group) of Amazon
     # WorkMail.
     #
@@ -461,6 +499,90 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Creates a new Amazon WorkMail organization. Optionally, you can choose
+    # to associate an existing AWS Directory Service directory with your
+    # organization. If an AWS Directory Service directory ID is specified,
+    # the organization alias must match the directory alias. If you choose
+    # not to associate an existing directory with your organization, then we
+    # create a new Amazon WorkMail directory for you. For more information,
+    # see [Adding an organization][1] in the *Amazon WorkMail Administrator
+    # Guide*.
+    #
+    # You can associate multiple email domains with an organization, then
+    # set your default email domain from the Amazon WorkMail console. You
+    # can also associate a domain that is managed in an Amazon Route 53
+    # public hosted zone. For more information, see [Adding a domain][2] and
+    # [Choosing the default domain][3] in the *Amazon WorkMail Administrator
+    # Guide*.
+    #
+    # Optionally, you can use a customer managed master key from AWS Key
+    # Management Service (AWS KMS) to encrypt email for your organization.
+    # If you don't associate an AWS KMS key, Amazon WorkMail creates a
+    # default AWS managed master key for you.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workmail/latest/adminguide/add_new_organization.html
+    # [2]: https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html
+    # [3]: https://docs.aws.amazon.com/workmail/latest/adminguide/default_domain.html
+    #
+    # @option params [String] :directory_id
+    #   The AWS Directory Service directory ID.
+    #
+    # @option params [required, String] :alias
+    #   The organization alias.
+    #
+    # @option params [String] :client_token
+    #   The idempotency token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Domain>] :domains
+    #   The email domains to associate with the organization.
+    #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of a customer managed master key from
+    #   AWS KMS.
+    #
+    # @option params [Boolean] :enable_interoperability
+    #   When `true`, allows organization interoperability between Amazon
+    #   WorkMail and Microsoft Exchange. Can only be set to `true` if an AD
+    #   Connector directory ID is included in the request.
+    #
+    # @return [Types::CreateOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateOrganizationResponse#organization_id #organization_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_organization({
+    #     directory_id: "DirectoryId",
+    #     alias: "OrganizationName", # required
+    #     client_token: "IdempotencyClientToken",
+    #     domains: [
+    #       {
+    #         domain_name: "DomainName",
+    #         hosted_zone_id: "HostedZoneId",
+    #       },
+    #     ],
+    #     kms_key_arn: "KmsKeyArn",
+    #     enable_interoperability: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organization_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateOrganization AWS API Documentation
+    #
+    # @overload create_organization(params = {})
+    # @param [Hash] params ({})
+    def create_organization(params = {}, options = {})
+      req = build_request(:create_organization, params)
+      req.send_request(options)
+    end
+
     # Creates a new Amazon WorkMail resource.
     #
     # @option params [required, String] :organization_id
@@ -506,8 +628,8 @@ module Aws::WorkMail
     #   The identifier of the organization for which the user is created.
     #
     # @option params [required, String] :name
-    #   The name for the new user. Simple AD or AD Connector user names have a
-    #   maximum length of 20. All others have a maximum length of 64.
+    #   The name for the new user. WorkMail directory user names have a
+    #   maximum length of 64. All others have a maximum length of 20.
     #
     # @option params [required, String] :display_name
     #   The display name for the new user.
@@ -635,7 +757,7 @@ module Aws::WorkMail
     #   group) exists.
     #
     # @option params [required, String] :entity_id
-    #   The identifier of the member (user or group)that owns the mailbox.
+    #   The identifier of the member (user or group) that owns the mailbox.
     #
     # @option params [required, String] :grantee_id
     #   The identifier of the member (user or group) for which to delete
@@ -657,6 +779,56 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def delete_mailbox_permissions(params = {}, options = {})
       req = build_request(:delete_mailbox_permissions, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon WorkMail organization and all underlying AWS
+    # resources managed by Amazon WorkMail as part of the organization. You
+    # can choose whether to delete the associated directory. For more
+    # information, see [Removing an organization][1] in the *Amazon WorkMail
+    # Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workmail/latest/adminguide/remove_organization.html
+    #
+    # @option params [String] :client_token
+    #   The idempotency token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :organization_id
+    #   The organization ID.
+    #
+    # @option params [required, Boolean] :delete_directory
+    #   If true, deletes the AWS Directory Service directory associated with
+    #   the organization.
+    #
+    # @return [Types::DeleteOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteOrganizationResponse#organization_id #organization_id} => String
+    #   * {Types::DeleteOrganizationResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_organization({
+    #     client_token: "IdempotencyClientToken",
+    #     organization_id: "OrganizationId", # required
+    #     delete_directory: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organization_id #=> String
+    #   resp.state #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteOrganization AWS API Documentation
+    #
+    # @overload delete_organization(params = {})
+    # @param [Hash] params ({})
+    def delete_organization(params = {}, options = {})
+      req = build_request(:delete_organization, params)
       req.send_request(options)
     end
 
@@ -814,6 +986,60 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def describe_group(params = {}, options = {})
       req = build_request(:describe_group, params)
+      req.send_request(options)
+    end
+
+    # Describes the current status of a mailbox export job.
+    #
+    # @option params [required, String] :job_id
+    #   The mailbox export job ID.
+    #
+    # @option params [required, String] :organization_id
+    #   The organization ID.
+    #
+    # @return [Types::DescribeMailboxExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMailboxExportJobResponse#entity_id #entity_id} => String
+    #   * {Types::DescribeMailboxExportJobResponse#description #description} => String
+    #   * {Types::DescribeMailboxExportJobResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeMailboxExportJobResponse#kms_key_arn #kms_key_arn} => String
+    #   * {Types::DescribeMailboxExportJobResponse#s3_bucket_name #s3_bucket_name} => String
+    #   * {Types::DescribeMailboxExportJobResponse#s3_prefix #s3_prefix} => String
+    #   * {Types::DescribeMailboxExportJobResponse#s3_path #s3_path} => String
+    #   * {Types::DescribeMailboxExportJobResponse#estimated_progress #estimated_progress} => Integer
+    #   * {Types::DescribeMailboxExportJobResponse#state #state} => String
+    #   * {Types::DescribeMailboxExportJobResponse#error_info #error_info} => String
+    #   * {Types::DescribeMailboxExportJobResponse#start_time #start_time} => Time
+    #   * {Types::DescribeMailboxExportJobResponse#end_time #end_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_mailbox_export_job({
+    #     job_id: "MailboxExportJobId", # required
+    #     organization_id: "OrganizationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entity_id #=> String
+    #   resp.description #=> String
+    #   resp.role_arn #=> String
+    #   resp.kms_key_arn #=> String
+    #   resp.s3_bucket_name #=> String
+    #   resp.s3_prefix #=> String
+    #   resp.s3_path #=> String
+    #   resp.estimated_progress #=> Integer
+    #   resp.state #=> String, one of "RUNNING", "COMPLETED", "FAILED", "CANCELLED"
+    #   resp.error_info #=> String
+    #   resp.start_time #=> Time
+    #   resp.end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeMailboxExportJob AWS API Documentation
+    #
+    # @overload describe_mailbox_export_job(params = {})
+    # @param [Hash] params ({})
+    def describe_mailbox_export_job(params = {}, options = {})
+      req = build_request(:describe_mailbox_export_job, params)
       req.send_request(options)
     end
 
@@ -1331,6 +1557,56 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Lists the mailbox export jobs started for the specified organization
+    # within the last seven days.
+    #
+    # @option params [required, String] :organization_id
+    #   The organization ID.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @return [Types::ListMailboxExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMailboxExportJobsResponse#jobs #jobs} => Array&lt;Types::MailboxExportJob&gt;
+    #   * {Types::ListMailboxExportJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_mailbox_export_jobs({
+    #     organization_id: "OrganizationId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.jobs #=> Array
+    #   resp.jobs[0].job_id #=> String
+    #   resp.jobs[0].entity_id #=> String
+    #   resp.jobs[0].description #=> String
+    #   resp.jobs[0].s3_bucket_name #=> String
+    #   resp.jobs[0].s3_path #=> String
+    #   resp.jobs[0].estimated_progress #=> Integer
+    #   resp.jobs[0].state #=> String, one of "RUNNING", "COMPLETED", "FAILED", "CANCELLED"
+    #   resp.jobs[0].start_time #=> Time
+    #   resp.jobs[0].end_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailboxExportJobs AWS API Documentation
+    #
+    # @overload list_mailbox_export_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_mailbox_export_jobs(params = {}, options = {})
+      req = build_request(:list_mailbox_export_jobs, params)
+      req.send_request(options)
+    end
+
     # Lists the mailbox permissions associated with a user, group, or
     # resource mailbox.
     #
@@ -1411,6 +1687,7 @@ module Aws::WorkMail
     #   resp.organization_summaries #=> Array
     #   resp.organization_summaries[0].organization_id #=> String
     #   resp.organization_summaries[0].alias #=> String
+    #   resp.organization_summaries[0].default_mail_domain #=> String
     #   resp.organization_summaries[0].error_message #=> String
     #   resp.organization_summaries[0].state #=> String
     #   resp.next_token #=> String
@@ -1829,6 +2106,75 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Starts a mailbox export job to export MIME-format email messages and
+    # calendar items from the specified mailbox to the specified Amazon
+    # Simple Storage Service (Amazon S3) bucket. For more information, see
+    # [Exporting mailbox content][1] in the *Amazon WorkMail Administrator
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html
+    #
+    # @option params [required, String] :client_token
+    #   The idempotency token for the client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :organization_id
+    #   The identifier associated with the organization.
+    #
+    # @option params [required, String] :entity_id
+    #   The identifier of the user or resource associated with the mailbox.
+    #
+    # @option params [String] :description
+    #   The mailbox export job description.
+    #
+    # @option params [required, String] :role_arn
+    #   The ARN of the AWS Identity and Access Management (IAM) role that
+    #   grants write permission to the S3 bucket.
+    #
+    # @option params [required, String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the symmetric AWS Key Management
+    #   Service (AWS KMS) key that encrypts the exported mailbox content.
+    #
+    # @option params [required, String] :s3_bucket_name
+    #   The name of the S3 bucket.
+    #
+    # @option params [required, String] :s3_prefix
+    #   The S3 bucket prefix.
+    #
+    # @return [Types::StartMailboxExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMailboxExportJobResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_mailbox_export_job({
+    #     client_token: "IdempotencyClientToken", # required
+    #     organization_id: "OrganizationId", # required
+    #     entity_id: "WorkMailIdentifier", # required
+    #     description: "Description",
+    #     role_arn: "RoleArn", # required
+    #     kms_key_arn: "KmsKeyArn", # required
+    #     s3_bucket_name: "S3BucketName", # required
+    #     s3_prefix: "S3ObjectKey", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/StartMailboxExportJob AWS API Documentation
+    #
+    # @overload start_mailbox_export_job(params = {})
+    # @param [Hash] params ({})
+    def start_mailbox_export_job(params = {}, options = {})
+      req = build_request(:start_mailbox_export_job, params)
+      req.send_request(options)
+    end
+
     # Applies the specified tags to the specified Amazon WorkMail
     # organization resource.
     #
@@ -2008,7 +2354,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

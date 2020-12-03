@@ -645,6 +645,96 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreatePredictorBacktestExportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         predictor_backtest_export_job_name: "Name", # required
+    #         predictor_arn: "Arn", # required
+    #         destination: { # required
+    #           s3_config: { # required
+    #             path: "S3Path", # required
+    #             role_arn: "Arn", # required
+    #             kms_key_arn: "KMSKeyArn",
+    #           },
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] predictor_backtest_export_job_name
+    #   The name for the backtest export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] predictor_arn
+    #   The Amazon Resource Name (ARN) of the predictor that you want to
+    #   export.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The destination for an export job, an AWS Identity and Access
+    #   Management (IAM) role that allows Amazon Forecast to access the
+    #   location and, optionally, an AWS Key Management Service (KMS) key.
+    #   @return [Types::DataDestination]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata to help you categorize and organize your
+    #   backtests. Each tag consists of a key and an optional value, both of
+    #   which you define. Tag keys and values are case sensitive.
+    #
+    #   The following restrictions apply to tags:
+    #
+    #   * For each resource, each tag key must be unique and each tag key
+    #     must have one value.
+    #
+    #   * Maximum number of tags per resource: 50.
+    #
+    #   * Maximum key length: 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length: 256 Unicode characters in UTF-8.
+    #
+    #   * Accepted characters: all letters and numbers, spaces representable
+    #     in UTF-8, and + - = . \_ : / @. If your tagging schema is used
+    #     across other services and resources, the character restrictions of
+    #     those services also apply.
+    #
+    #   * Key prefixes cannot include any upper or lowercase combination of
+    #     `aws:` or `AWS:`. Values can have this prefix. If a tag value has
+    #     `aws` as its prefix but the key does not, Forecast considers it to
+    #     be a user tag and will count against the limit of 50 tags. Tags
+    #     with only the key prefix of `aws` do not count against your tags
+    #     per resource limit. You cannot edit or delete tag keys with this
+    #     prefix.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreatePredictorBacktestExportJobRequest AWS API Documentation
+    #
+    class CreatePredictorBacktestExportJobRequest < Struct.new(
+      :predictor_backtest_export_job_name,
+      :predictor_arn,
+      :destination,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] predictor_backtest_export_job_arn
+    #   The Amazon Resource Name (ARN) of the predictor backtest export job
+    #   that you want to export.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreatePredictorBacktestExportJobResponse AWS API Documentation
+    #
+    class CreatePredictorBacktestExportJobResponse < Struct.new(
+      :predictor_backtest_export_job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreatePredictorRequest
     #   data as a hash:
     #
@@ -652,6 +742,7 @@ module Aws::ForecastService
     #         predictor_name: "Name", # required
     #         algorithm_arn: "Arn",
     #         forecast_horizon: 1, # required
+    #         forecast_types: ["ForecastType"],
     #         perform_auto_ml: false,
     #         perform_hpo: false,
     #         training_parameters: {
@@ -737,9 +828,9 @@ module Aws::ForecastService
     #
     #   * `arn:aws:forecast:::algorithm/ARIMA`
     #
-    #   * `arn:aws:forecast:::algorithm/Deep_AR_Plus`
+    #   * `arn:aws:forecast:::algorithm/CNN-QR`
     #
-    #     Supports hyperparameter optimization (HPO)
+    #   * `arn:aws:forecast:::algorithm/Deep_AR_Plus`
     #
     #   * `arn:aws:forecast:::algorithm/ETS`
     #
@@ -760,6 +851,15 @@ module Aws::ForecastService
     #   The maximum forecast horizon is the lesser of 500 time-steps or 1/3
     #   of the TARGET\_TIME\_SERIES dataset length.
     #   @return [Integer]
+    #
+    # @!attribute [rw] forecast_types
+    #   Specifies the forecast types used to train a predictor. You can
+    #   specify up to five forecast types. Forecast types can be quantiles
+    #   from 0.01 to 0.99, by increments of 0.01 or higher. You can also
+    #   specify the mean forecast with `mean`.
+    #
+    #   The default value is `["0.10", "0.50", "0.9"]`.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] perform_auto_ml
     #   Whether to perform AutoML. When Amazon Forecast performs AutoML, it
@@ -790,11 +890,11 @@ module Aws::ForecastService
     #   hyperparameter. In this case, you are required to specify an
     #   algorithm and `PerformAutoML` must be false.
     #
-    #   The following algorithm supports HPO:
+    #   The following algorithms support HPO:
     #
     #   * DeepAR+
     #
-    #   ^
+    #   * CNN-QR
     #   @return [Boolean]
     #
     # @!attribute [rw] training_parameters
@@ -877,6 +977,7 @@ module Aws::ForecastService
       :predictor_name,
       :algorithm_arn,
       :forecast_horizon,
+      :forecast_types,
       :perform_auto_ml,
       :perform_hpo,
       :training_parameters,
@@ -902,10 +1003,9 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # The destination for an exported forecast, an AWS Identity and Access
+    # The destination for an export job, an AWS Identity and Access
     # Management (IAM) role that allows Amazon Forecast to access the
     # location and, optionally, an AWS Key Management Service (KMS) key.
-    # This object is submitted in the CreateForecastExportJob request.
     #
     # @note When making an API call, you may pass DataDestination
     #   data as a hash:
@@ -1201,6 +1301,26 @@ module Aws::ForecastService
     #
     class DeleteForecastRequest < Struct.new(
       :forecast_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeletePredictorBacktestExportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         predictor_backtest_export_job_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] predictor_backtest_export_job_arn
+    #   The Amazon Resource Name (ARN) of the predictor backtest export job
+    #   to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeletePredictorBacktestExportJobRequest AWS API Documentation
+    #
+    class DeletePredictorBacktestExportJobRequest < Struct.new(
+      :predictor_backtest_export_job_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1693,6 +1813,89 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribePredictorBacktestExportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         predictor_backtest_export_job_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] predictor_backtest_export_job_arn
+    #   The Amazon Resource Name (ARN) of the predictor backtest export job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribePredictorBacktestExportJobRequest AWS API Documentation
+    #
+    class DescribePredictorBacktestExportJobRequest < Struct.new(
+      :predictor_backtest_export_job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] predictor_backtest_export_job_arn
+    #   The Amazon Resource Name (ARN) of the predictor backtest export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] predictor_backtest_export_job_name
+    #   The name of the predictor backtest export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] predictor_arn
+    #   The Amazon Resource Name (ARN) of the predictor.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The destination for an export job, an AWS Identity and Access
+    #   Management (IAM) role that allows Amazon Forecast to access the
+    #   location and, optionally, an AWS Key Management Service (KMS) key.
+    #   @return [Types::DataDestination]
+    #
+    # @!attribute [rw] message
+    #   Information about any errors that may have occurred during the
+    #   backtest export.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the predictor backtest export job. States include:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATE_PENDING`
+    #
+    #   * `CREATE_IN_PROGRESS`
+    #
+    #   * `CREATE_FAILED`
+    #
+    #   * `DELETE_PENDING`
+    #
+    #   * `DELETE_IN_PROGRESS`
+    #
+    #   * `DELETE_FAILED`
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the predictor backtest export job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_time
+    #   When the last successful export job finished.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribePredictorBacktestExportJobResponse AWS API Documentation
+    #
+    class DescribePredictorBacktestExportJobResponse < Struct.new(
+      :predictor_backtest_export_job_arn,
+      :predictor_backtest_export_job_name,
+      :predictor_arn,
+      :destination,
+      :message,
+      :status,
+      :creation_time,
+      :last_modification_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribePredictorRequest
     #   data as a hash:
     #
@@ -1731,6 +1934,11 @@ module Aws::ForecastService
     #   also called the prediction length.
     #   @return [Integer]
     #
+    # @!attribute [rw] forecast_types
+    #   The forecast types used during predictor training. Default value is
+    #   `["0.1","0.5","0.9"]`
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] perform_auto_ml
     #   Whether the predictor is set to perform AutoML.
     #   @return [Boolean]
@@ -1742,10 +1950,9 @@ module Aws::ForecastService
     #
     # @!attribute [rw] training_parameters
     #   The default training parameters or overrides selected during model
-    #   training. If using the AutoML algorithm or if HPO is turned on while
-    #   using the DeepAR+ algorithms, the optimized values for the chosen
-    #   hyperparameters are returned. For more information, see
-    #   aws-forecast-choosing-recipes.
+    #   training. When running AutoML or choosing HPO with CNN-QR or
+    #   DeepAR+, the optimized values for the chosen hyperparameters are
+    #   returned. For more information, see aws-forecast-choosing-recipes.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] evaluation_parameters
@@ -1830,6 +2037,7 @@ module Aws::ForecastService
       :predictor_name,
       :algorithm_arn,
       :forecast_horizon,
+      :forecast_types,
       :perform_auto_ml,
       :perform_hpo,
       :training_parameters,
@@ -1880,6 +2088,31 @@ module Aws::ForecastService
     class EncryptionConfig < Struct.new(
       :role_arn,
       :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides detailed error metrics to evaluate the performance of a
+    # predictor. This object is part of the Metrics object.
+    #
+    # @!attribute [rw] forecast_type
+    #   The Forecast type used to compute WAPE and RMSE.
+    #   @return [String]
+    #
+    # @!attribute [rw] wape
+    #   The weighted absolute percentage error (WAPE).
+    #   @return [Float]
+    #
+    # @!attribute [rw] rmse
+    #   The root-mean-square error (RMSE).
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ErrorMetric AWS API Documentation
+    #
+    class ErrorMetric < Struct.new(
+      :forecast_type,
+      :wape,
+      :rmse)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2146,6 +2379,11 @@ module Aws::ForecastService
     #   * `backfill`\: `zero`, `value`, `median`, `mean`, `min`, `max`
     #
     #   * `futurefill`\: `zero`, `value`, `median`, `mean`, `min`, `max`
+    #
+    #   To set a filling method to a specific value, set the fill parameter
+    #   to `value` and define the value in a corresponding `_value`
+    #   parameter. For example, to set backfilling to a value of 2, include
+    #   the following: `"backfill": "value"` and `"backfill_value":"2"`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/FeaturizationMethod AWS API Documentation
@@ -2886,6 +3124,80 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListPredictorBacktestExportJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         filters: [
+    #           {
+    #             key: "String", # required
+    #             value: "Arn", # required
+    #             condition: "IS", # required, accepts IS, IS_NOT
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous request was truncated, the response
+    #   includes a NextToken. To retrieve the next set of results, use the
+    #   token in the next request. Tokens expire after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of items to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   An array of filters. For each filter, provide a condition and a
+    #   match statement. The condition is either `IS` or `IS_NOT`, which
+    #   specifies whether to include or exclude the predictor backtest
+    #   export jobs that match the statement from the list. The match
+    #   statement consists of a key and a value.
+    #
+    #   **Filter properties**
+    #
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`. To include the predictor backtest export jobs that match
+    #     the statement, specify `IS`. To exclude matching predictor
+    #     backtest export jobs, specify `IS_NOT`.
+    #
+    #   * `Key` - The name of the parameter to filter on. Valid values are
+    #     `PredictorBacktestExportJobArn` and `Status`.
+    #
+    #   * `Value` - The value to match.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListPredictorBacktestExportJobsRequest AWS API Documentation
+    #
+    class ListPredictorBacktestExportJobsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] predictor_backtest_export_jobs
+    #   An array of objects that summarize the properties of each predictor
+    #   backtest export job.
+    #   @return [Array<Types::PredictorBacktestExportJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Returns this token if the response is truncated. To retrieve the
+    #   next set of results, use the token in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListPredictorBacktestExportJobsResponse AWS API Documentation
+    #
+    class ListPredictorBacktestExportJobsResponse < Struct.new(
+      :predictor_backtest_export_jobs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListPredictorsRequest
     #   data as a hash:
     #
@@ -3002,7 +3314,7 @@ module Aws::ForecastService
     # predictor. This object is part of the WindowSummary object.
     #
     # @!attribute [rw] rmse
-    #   The root mean square error (RMSE).
+    #   The root-mean-square error (RMSE).
     #   @return [Float]
     #
     # @!attribute [rw] weighted_quantile_losses
@@ -3011,11 +3323,17 @@ module Aws::ForecastService
     #   this case is the loss function.
     #   @return [Array<Types::WeightedQuantileLoss>]
     #
+    # @!attribute [rw] error_metrics
+    #   Provides detailed error metrics on forecast type, root-mean
+    #   square-error (RMSE), and weighted average percentage error (WAPE).
+    #   @return [Array<Types::ErrorMetric>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/Metrics AWS API Documentation
     #
     class Metrics < Struct.new(
       :rmse,
-      :weighted_quantile_losses)
+      :weighted_quantile_losses,
+      :error_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3072,6 +3390,71 @@ module Aws::ForecastService
       :categorical_parameter_ranges,
       :continuous_parameter_ranges,
       :integer_parameter_ranges)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of the predictor backtest export job properties
+    # used in the ListPredictorBacktestExportJobs operation. To get a
+    # complete set of properties, call the
+    # DescribePredictorBacktestExportJob operation, and provide the listed
+    # `PredictorBacktestExportJobArn`.
+    #
+    # @!attribute [rw] predictor_backtest_export_job_arn
+    #   The Amazon Resource Name (ARN) of the predictor backtest export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] predictor_backtest_export_job_name
+    #   The name of the predictor backtest export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The destination for an export job, an AWS Identity and Access
+    #   Management (IAM) role that allows Amazon Forecast to access the
+    #   location and, optionally, an AWS Key Management Service (KMS) key.
+    #   @return [Types::DataDestination]
+    #
+    # @!attribute [rw] status
+    #   The status of the predictor backtest export job. States include:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATE_PENDING`
+    #
+    #   * `CREATE_IN_PROGRESS`
+    #
+    #   * `CREATE_FAILED`
+    #
+    #   * `DELETE_PENDING`
+    #
+    #   * `DELETE_IN_PROGRESS`
+    #
+    #   * `DELETE_FAILED`
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Information about any errors that may have occurred during the
+    #   backtest export.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the predictor backtest export job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_time
+    #   When the last successful export job finished.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/PredictorBacktestExportJobSummary AWS API Documentation
+    #
+    class PredictorBacktestExportJobSummary < Struct.new(
+      :predictor_backtest_export_job_arn,
+      :predictor_backtest_export_job_name,
+      :destination,
+      :status,
+      :message,
+      :creation_time,
+      :last_modification_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3228,8 +3611,7 @@ module Aws::ForecastService
     # Amazon Forecast can assume to access the file(s). Optionally, includes
     # an AWS Key Management Service (KMS) key. This object is part of the
     # DataSource object that is submitted in the CreateDatasetImportJob
-    # request, and part of the DataDestination object that is submitted in
-    # the CreateForecastExportJob request.
+    # request, and part of the DataDestination object.
     #
     # @note When making an API call, you may pass S3Config
     #   data as a hash:
@@ -3381,39 +3763,10 @@ module Aws::ForecastService
     # Describes a supplementary feature of a dataset group. This object is
     # part of the InputDataConfig object.
     #
-    # The only supported feature is a holiday calendar. If you use the
-    # calendar, all data in the datasets should belong to the same country
-    # as the calendar. For the holiday calendar data, see the [Jollyday][1]
-    # web site.
-    #
-    # India and Korea's holidays are not included in the Jollyday library,
-    # but both are supported by Amazon Forecast. Their holidays are:
-    #
-    # **"IN" - INDIA**
-    #
-    # * `JANUARY 26 - REPUBLIC DAY`
-    #
-    # * `AUGUST 15 - INDEPENDENCE DAY`
-    #
-    # * `OCTOBER 2 GANDHI'S BIRTHDAY`
-    #
-    # **"KR" - KOREA**
-    #
-    # * `JANUARY 1 - NEW YEAR`
-    #
-    # * `MARCH 1 - INDEPENDENCE MOVEMENT DAY`
-    #
-    # * `MAY 5 - CHILDREN'S DAY`
-    #
-    # * `JUNE 6 - MEMORIAL DAY`
-    #
-    # * `AUGUST 15 - LIBERATION DAY`
-    #
-    # * `OCTOBER 3 - NATIONAL FOUNDATION DAY`
-    #
-    # * `OCTOBER 9 - HANGEUL DAY`
-    #
-    # * `DECEMBER 25 - CHRISTMAS DAY`
+    # The only supported feature is Holidays. If you use the calendar, all
+    # data in the datasets should belong to the same country as the
+    # calendar. For the holiday calendar data, see the [Jollyday][1]
+    # website.
     #
     #
     #
@@ -3434,19 +3787,35 @@ module Aws::ForecastService
     # @!attribute [rw] value
     #   One of the following 2 letter country codes:
     #
+    #   * "AL" - ALBANIA
+    #
     #   * "AR" - ARGENTINA
     #
     #   * "AT" - AUSTRIA
     #
     #   * "AU" - AUSTRALIA
     #
+    #   * "BA" - BOSNIA HERZEGOVINA
+    #
     #   * "BE" - BELGIUM
+    #
+    #   * "BG" - BULGARIA
+    #
+    #   * "BO" - BOLIVIA
     #
     #   * "BR" - BRAZIL
     #
+    #   * "BY" - BELARUS
+    #
     #   * "CA" - CANADA
     #
-    #   * "CN" - CHINA
+    #   * "CL" - CHILE
+    #
+    #   * "CO" - COLOMBIA
+    #
+    #   * "CR" - COSTA RICA
+    #
+    #   * "HR" - CROATIA
     #
     #   * "CZ" - CZECH REPUBLIC
     #
@@ -3454,37 +3823,81 @@ module Aws::ForecastService
     #
     #   * "EC" - ECUADOR
     #
+    #   * "EE" - ESTONIA
+    #
+    #   * "ET" - ETHIOPIA
+    #
     #   * "FI" - FINLAND
     #
     #   * "FR" - FRANCE
     #
     #   * "DE" - GERMANY
     #
+    #   * "GR" - GREECE
+    #
     #   * "HU" - HUNGARY
     #
-    #   * "IE" - IRELAND
+    #   * "IS" - ICELAND
     #
     #   * "IN" - INDIA
+    #
+    #   * "IE" - IRELAND
     #
     #   * "IT" - ITALY
     #
     #   * "JP" - JAPAN
     #
+    #   * "KZ" - KAZAKHSTAN
+    #
     #   * "KR" - KOREA
+    #
+    #   * "LV" - LATVIA
+    #
+    #   * "LI" - LIECHTENSTEIN
+    #
+    #   * "LT" - LITHUANIA
     #
     #   * "LU" - LUXEMBOURG
     #
+    #   * "MK" - MACEDONIA
+    #
+    #   * "MT" - MALTA
+    #
     #   * "MX" - MEXICO
+    #
+    #   * "MD" - MOLDOVA
+    #
+    #   * "ME" - MONTENEGRO
     #
     #   * "NL" - NETHERLANDS
     #
+    #   * "NZ" - NEW ZEALAND
+    #
+    #   * "NI" - NICARAGUA
+    #
+    #   * "NG" - NIGERIA
+    #
     #   * "NO" - NORWAY
+    #
+    #   * "PA" - PANAMA
+    #
+    #   * "PY" - PARAGUAY
+    #
+    #   * "PE" - PERU
     #
     #   * "PL" - POLAND
     #
     #   * "PT" - PORTUGAL
     #
+    #   * "RO" - ROMANIA
+    #
     #   * "RU" - RUSSIA
+    #
+    #   * "RS" - SERBIA
+    #
+    #   * "SK" - SLOVAKIA
+    #
+    #   * "SI" - SLOVENIA
     #
     #   * "ZA" - SOUTH AFRICA
     #
@@ -3494,9 +3907,17 @@ module Aws::ForecastService
     #
     #   * "CH" - SWITZERLAND
     #
+    #   * "UA" - UKRAINE
+    #
+    #   * "AE" - UNITED ARAB EMIRATES
+    #
     #   * "US" - UNITED STATES
     #
     #   * "UK" - UNITED KINGDOM
+    #
+    #   * "UY" - URUGUAY
+    #
+    #   * "VE" - VENEZUELA
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/SupplementaryFeature AWS API Documentation

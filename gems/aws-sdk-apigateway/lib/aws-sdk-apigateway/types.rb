@@ -1042,6 +1042,10 @@ module Aws::APIGateway
     #           "String" => "String",
     #         },
     #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
+    #         mutual_tls_authentication: {
+    #           truststore_uri: "String",
+    #           truststore_version: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
@@ -1108,6 +1112,12 @@ module Aws::APIGateway
     #   DomainName. The valid values are `TLS_1_0` and `TLS_1_2`.
     #   @return [String]
     #
+    # @!attribute [rw] mutual_tls_authentication
+    #   If specified, API Gateway performs two-way authentication between
+    #   the client and the server. Clients must present a trusted
+    #   certificate to access your custom domain name.
+    #   @return [Types::MutualTlsAuthenticationInput]
+    #
     class CreateDomainNameRequest < Struct.new(
       :domain_name,
       :certificate_name,
@@ -1119,7 +1129,8 @@ module Aws::APIGateway
       :regional_certificate_arn,
       :endpoint_configuration,
       :tags,
-      :security_policy)
+      :security_policy,
+      :mutual_tls_authentication)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1265,6 +1276,7 @@ module Aws::APIGateway
     #         tags: {
     #           "String" => "String",
     #         },
+    #         disable_execute_api_endpoint: false,
     #       }
     #
     # @!attribute [rw] name
@@ -1321,6 +1333,15 @@ module Aws::APIGateway
     #   not start with `aws:`. The tag value can be up to 256 characters.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] disable_execute_api_endpoint
+    #   Specifies whether clients can invoke your API by using the default
+    #   `execute-api` endpoint. By default, clients can invoke your API with
+    #   the default
+    #   https://\\\{api\_id\\}.execute-api.\\\{region\\}.amazonaws.com
+    #   endpoint. To require that clients use a custom domain name to invoke
+    #   your API, disable the default endpoint.
+    #   @return [Boolean]
+    #
     class CreateRestApiRequest < Struct.new(
       :name,
       :description,
@@ -1331,7 +1352,8 @@ module Aws::APIGateway
       :api_key_source,
       :endpoint_configuration,
       :policy,
-      :tags)
+      :tags,
+      :disable_execute_api_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2661,6 +2683,13 @@ module Aws::APIGateway
     #   resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] mutual_tls_authentication
+    #   The mutual TLS authentication configuration for a custom domain
+    #   name. If specified, API Gateway performs two-way authentication
+    #   between the client and the server. Clients must present a trusted
+    #   certificate to access your API.
+    #   @return [Types::MutualTlsAuthentication]
+    #
     class DomainName < Struct.new(
       :domain_name,
       :certificate_name,
@@ -2676,7 +2705,8 @@ module Aws::APIGateway
       :domain_name_status,
       :domain_name_status_message,
       :security_policy,
-      :tags)
+      :tags,
+      :mutual_tls_authentication)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5414,6 +5444,77 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # If specified, API Gateway performs two-way authentication between the
+    # client and the server. Clients must present a trusted certificate to
+    # access your custom domain name.
+    #
+    # @!attribute [rw] truststore_uri
+    #   An Amazon S3 URL that specifies the truststore for mutual TLS
+    #   authentication, for example `s3://bucket-name/key-name`. The
+    #   truststore can contain certificates from public or private
+    #   certificate authorities. To update the truststore, upload a new
+    #   version to S3, and then update your custom domain name to use the
+    #   new version. To update the truststore, you must have permissions to
+    #   access the S3 object.
+    #   @return [String]
+    #
+    # @!attribute [rw] truststore_version
+    #   The version of the S3 object that contains your truststore. To
+    #   specify a version, you must have versioning enabled for the S3
+    #   bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] truststore_warnings
+    #   A list of warnings that API Gateway returns while processing your
+    #   truststore. Invalid certificates produce warnings. Mutual TLS is
+    #   still enabled, but some clients might not be able to access your
+    #   API. To resolve warnings, upload a new truststore to S3, and then
+    #   update you domain name to use the new version.
+    #   @return [Array<String>]
+    #
+    class MutualTlsAuthentication < Struct.new(
+      :truststore_uri,
+      :truststore_version,
+      :truststore_warnings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If specified, API Gateway performs two-way authentication between the
+    # client and the server. Clients must present a trusted certificate to
+    # access your custom domain name.
+    #
+    # @note When making an API call, you may pass MutualTlsAuthenticationInput
+    #   data as a hash:
+    #
+    #       {
+    #         truststore_uri: "String",
+    #         truststore_version: "String",
+    #       }
+    #
+    # @!attribute [rw] truststore_uri
+    #   An Amazon S3 resource ARN that specifies the truststore for mutual
+    #   TLS authentication, for example, `s3://bucket-name/key-name`. The
+    #   truststore can contain certificates from public or private
+    #   certificate authorities. To update the truststore, upload a new
+    #   version to S3, and then update your custom domain name to use the
+    #   new version. To update the truststore, you must have permissions to
+    #   access the S3 object.
+    #   @return [String]
+    #
+    # @!attribute [rw] truststore_version
+    #   The version of the S3 object that contains your truststore. To
+    #   specify a version, you must have versioning enabled for the S3
+    #   bucket.
+    #   @return [String]
+    #
+    class MutualTlsAuthenticationInput < Struct.new(
+      :truststore_uri,
+      :truststore_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requested resource is not found. Make sure that the request URI is
     # correct.
     #
@@ -6368,13 +6469,23 @@ module Aws::APIGateway
     #   @return [Types::EndpointConfiguration]
     #
     # @!attribute [rw] policy
-    #   A stringified JSON policy document that applies to this RestApi regardless of the caller and Method configuration.
+    #   A stringified JSON policy document that applies to this RestApi
+    #   regardless of the caller and Method configuration.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   The collection of tags. Each tag element is associated with a given
     #   resource.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] disable_execute_api_endpoint
+    #   Specifies whether clients can invoke your API by using the default
+    #   `execute-api` endpoint. By default, clients can invoke your API with
+    #   the default
+    #   https://\\\{api\_id\\}.execute-api.\\\{region\\}.amazonaws.com
+    #   endpoint. To require that clients use a custom domain name to invoke
+    #   your API, disable the default endpoint.
+    #   @return [Boolean]
     #
     class RestApi < Struct.new(
       :id,
@@ -6388,7 +6499,8 @@ module Aws::APIGateway
       :api_key_source,
       :endpoint_configuration,
       :policy,
-      :tags)
+      :tags,
+      :disable_execute_api_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end

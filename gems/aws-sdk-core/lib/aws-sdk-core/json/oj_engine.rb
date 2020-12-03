@@ -2,14 +2,14 @@
 
 module Aws
   module Json
-    class JSONEngine
+    class OjEngine
 
       def self.load(json)
-        JSON.load(json)
+        Oj.load(json)
       end
 
       def self.dump(value)
-        JSON.dump(value)
+        Oj.dump(value)
       end
 
     end

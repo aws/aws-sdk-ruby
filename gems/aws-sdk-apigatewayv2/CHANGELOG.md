@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2020-09-17)
+------------------
+
+* Feature - Adds support for mutual TLS authentication and disableAPIExecuteEndpoint for public regional HTTP Apis
+
+1.27.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.26.0 (2020-09-08)
 ------------------
 

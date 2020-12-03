@@ -838,6 +838,11 @@ module Aws::APIGateway
     #   The Transport Layer Security (TLS) version + cipher suite for this
     #   DomainName. The valid values are `TLS_1_0` and `TLS_1_2`.
     #
+    # @option params [Types::MutualTlsAuthenticationInput] :mutual_tls_authentication
+    #   If specified, API Gateway performs two-way authentication between the
+    #   client and the server. Clients must present a trusted certificate to
+    #   access your custom domain name.
+    #
     # @return [Types::DomainName] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DomainName#domain_name #domain_name} => String
@@ -855,6 +860,7 @@ module Aws::APIGateway
     #   * {Types::DomainName#domain_name_status_message #domain_name_status_message} => String
     #   * {Types::DomainName#security_policy #security_policy} => String
     #   * {Types::DomainName#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DomainName#mutual_tls_authentication #mutual_tls_authentication} => Types::MutualTlsAuthentication
     #
     # @example Request syntax with placeholder values
     #
@@ -875,6 +881,10 @@ module Aws::APIGateway
     #       "String" => "String",
     #     },
     #     security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
+    #     mutual_tls_authentication: {
+    #       truststore_uri: "String",
+    #       truststore_version: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -898,6 +908,10 @@ module Aws::APIGateway
     #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
+    #   resp.mutual_tls_authentication.truststore_uri #=> String
+    #   resp.mutual_tls_authentication.truststore_version #=> String
+    #   resp.mutual_tls_authentication.truststore_warnings #=> Array
+    #   resp.mutual_tls_authentication.truststore_warnings[0] #=> String
     #
     # @overload create_domain_name(params = {})
     # @param [Hash] params ({})
@@ -1140,6 +1154,14 @@ module Aws::APIGateway
     #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
     #   not start with `aws:`. The tag value can be up to 256 characters.
     #
+    # @option params [Boolean] :disable_execute_api_endpoint
+    #   Specifies whether clients can invoke your API by using the default
+    #   `execute-api` endpoint. By default, clients can invoke your API with
+    #   the default
+    #   https://\\\{api\_id\\}.execute-api.\\\{region\\}.amazonaws.com
+    #   endpoint. To require that clients use a custom domain name to invoke
+    #   your API, disable the default endpoint.
+    #
     # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestApi#id #id} => String
@@ -1154,6 +1176,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #   * {Types::RestApi#policy #policy} => String
     #   * {Types::RestApi#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::RestApi#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -1173,6 +1196,7 @@ module Aws::APIGateway
     #     tags: {
     #       "String" => "String",
     #     },
+    #     disable_execute_api_endpoint: false,
     #   })
     #
     # @example Response structure
@@ -1195,6 +1219,7 @@ module Aws::APIGateway
     #   resp.policy #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
+    #   resp.disable_execute_api_endpoint #=> Boolean
     #
     # @overload create_rest_api(params = {})
     # @param [Hash] params ({})
@@ -2878,6 +2903,7 @@ module Aws::APIGateway
     #   * {Types::DomainName#domain_name_status_message #domain_name_status_message} => String
     #   * {Types::DomainName#security_policy #security_policy} => String
     #   * {Types::DomainName#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DomainName#mutual_tls_authentication #mutual_tls_authentication} => Types::MutualTlsAuthentication
     #
     # @example Request syntax with placeholder values
     #
@@ -2906,6 +2932,10 @@ module Aws::APIGateway
     #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
+    #   resp.mutual_tls_authentication.truststore_uri #=> String
+    #   resp.mutual_tls_authentication.truststore_version #=> String
+    #   resp.mutual_tls_authentication.truststore_warnings #=> Array
+    #   resp.mutual_tls_authentication.truststore_warnings[0] #=> String
     #
     # @overload get_domain_name(params = {})
     # @param [Hash] params ({})
@@ -2960,6 +2990,10 @@ module Aws::APIGateway
     #   resp.items[0].security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["String"] #=> String
+    #   resp.items[0].mutual_tls_authentication.truststore_uri #=> String
+    #   resp.items[0].mutual_tls_authentication.truststore_version #=> String
+    #   resp.items[0].mutual_tls_authentication.truststore_warnings #=> Array
+    #   resp.items[0].mutual_tls_authentication.truststore_warnings[0] #=> String
     #
     # @overload get_domain_names(params = {})
     # @param [Hash] params ({})
@@ -3796,6 +3830,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #   * {Types::RestApi#policy #policy} => String
     #   * {Types::RestApi#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::RestApi#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -3823,6 +3858,7 @@ module Aws::APIGateway
     #   resp.policy #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
+    #   resp.disable_execute_api_endpoint #=> Boolean
     #
     # @overload get_rest_api(params = {})
     # @param [Hash] params ({})
@@ -3876,6 +3912,7 @@ module Aws::APIGateway
     #   resp.items[0].policy #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["String"] #=> String
+    #   resp.items[0].disable_execute_api_endpoint #=> Boolean
     #
     # @overload get_rest_apis(params = {})
     # @param [Hash] params ({})
@@ -4677,6 +4714,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #   * {Types::RestApi#policy #policy} => String
     #   * {Types::RestApi#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::RestApi#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -4708,6 +4746,7 @@ module Aws::APIGateway
     #   resp.policy #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
+    #   resp.disable_execute_api_endpoint #=> Boolean
     #
     # @overload import_rest_api(params = {})
     # @param [Hash] params ({})
@@ -5369,6 +5408,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #   * {Types::RestApi#policy #policy} => String
     #   * {Types::RestApi#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::RestApi#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -5402,6 +5442,7 @@ module Aws::APIGateway
     #   resp.policy #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
+    #   resp.disable_execute_api_endpoint #=> Boolean
     #
     # @overload put_rest_api(params = {})
     # @param [Hash] params ({})
@@ -6082,6 +6123,7 @@ module Aws::APIGateway
     #   * {Types::DomainName#domain_name_status_message #domain_name_status_message} => String
     #   * {Types::DomainName#security_policy #security_policy} => String
     #   * {Types::DomainName#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DomainName#mutual_tls_authentication #mutual_tls_authentication} => Types::MutualTlsAuthentication
     #
     # @example Request syntax with placeholder values
     #
@@ -6118,6 +6160,10 @@ module Aws::APIGateway
     #   resp.security_policy #=> String, one of "TLS_1_0", "TLS_1_2"
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
+    #   resp.mutual_tls_authentication.truststore_uri #=> String
+    #   resp.mutual_tls_authentication.truststore_version #=> String
+    #   resp.mutual_tls_authentication.truststore_warnings #=> Array
+    #   resp.mutual_tls_authentication.truststore_warnings[0] #=> String
     #
     # @overload update_domain_name(params = {})
     # @param [Hash] params ({})
@@ -6716,6 +6762,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #   * {Types::RestApi#policy #policy} => String
     #   * {Types::RestApi#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::RestApi#disable_execute_api_endpoint #disable_execute_api_endpoint} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -6751,6 +6798,7 @@ module Aws::APIGateway
     #   resp.policy #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
+    #   resp.disable_execute_api_endpoint #=> Boolean
     #
     # @overload update_rest_api(params = {})
     # @param [Hash] params ({})
@@ -7033,7 +7081,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

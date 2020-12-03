@@ -31,11 +31,15 @@ module Aws::DynamoDB
   # * {BackupNotFoundException}
   # * {ConditionalCheckFailedException}
   # * {ContinuousBackupsUnavailableException}
+  # * {DuplicateItemException}
+  # * {ExportConflictException}
+  # * {ExportNotFoundException}
   # * {GlobalTableAlreadyExistsException}
   # * {GlobalTableNotFoundException}
   # * {IdempotentParameterMismatchException}
   # * {IndexNotFoundException}
   # * {InternalServerError}
+  # * {InvalidExportTimeException}
   # * {InvalidRestoreTimeException}
   # * {ItemCollectionSizeLimitExceededException}
   # * {LimitExceededException}
@@ -119,6 +123,51 @@ module Aws::DynamoDB
       end
     end
 
+    class DuplicateItemException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DynamoDB::Types::DuplicateItemException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ExportConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DynamoDB::Types::ExportConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ExportNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DynamoDB::Types::ExportNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class GlobalTableAlreadyExistsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -184,6 +233,21 @@ module Aws::DynamoDB
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DynamoDB::Types::InternalServerError] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidExportTimeException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DynamoDB::Types::InvalidExportTimeException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

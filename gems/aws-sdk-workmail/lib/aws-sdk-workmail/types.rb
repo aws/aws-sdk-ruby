@@ -185,6 +185,44 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CancelMailboxExportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "IdempotencyClientToken", # required
+    #         job_id: "MailboxExportJobId", # required
+    #         organization_id: "OrganizationId", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token for the client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The job ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_id
+    #   The organization ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CancelMailboxExportJobRequest AWS API Documentation
+    #
+    class CancelMailboxExportJobRequest < Struct.new(
+      :client_token,
+      :job_id,
+      :organization_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CancelMailboxExportJobResponse AWS API Documentation
+    #
+    class CancelMailboxExportJobResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass CreateAliasRequest
     #   data as a hash:
     #
@@ -257,6 +295,78 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateOrganizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId",
+    #         alias: "OrganizationName", # required
+    #         client_token: "IdempotencyClientToken",
+    #         domains: [
+    #           {
+    #             domain_name: "DomainName",
+    #             hosted_zone_id: "HostedZoneId",
+    #           },
+    #         ],
+    #         kms_key_arn: "KmsKeyArn",
+    #         enable_interoperability: false,
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The AWS Directory Service directory ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   The organization alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] domains
+    #   The email domains to associate with the organization.
+    #   @return [Array<Types::Domain>]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of a customer managed master key from
+    #   AWS KMS.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_interoperability
+    #   When `true`, allows organization interoperability between Amazon
+    #   WorkMail and Microsoft Exchange. Can only be set to `true` if an AD
+    #   Connector directory ID is included in the request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateOrganizationRequest AWS API Documentation
+    #
+    class CreateOrganizationRequest < Struct.new(
+      :directory_id,
+      :alias,
+      :client_token,
+      :domains,
+      :kms_key_arn,
+      :enable_interoperability)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_id
+    #   The organization ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateOrganizationResponse AWS API Documentation
+    #
+    class CreateOrganizationResponse < Struct.new(
+      :organization_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateResourceRequest
     #   data as a hash:
     #
@@ -317,8 +427,8 @@ module Aws::WorkMail
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name for the new user. Simple AD or AD Connector user names have
-    #   a maximum length of 20. All others have a maximum length of 64.
+    #   The name for the new user. WorkMail directory user names have a
+    #   maximum length of 64. All others have a maximum length of 20.
     #   @return [String]
     #
     # @!attribute [rw] display_name
@@ -484,7 +594,7 @@ module Aws::WorkMail
     #   @return [String]
     #
     # @!attribute [rw] entity_id
-    #   The identifier of the member (user or group)that owns the mailbox.
+    #   The identifier of the member (user or group) that owns the mailbox.
     #   @return [String]
     #
     # @!attribute [rw] grantee_id
@@ -505,6 +615,58 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMailboxPermissionsResponse AWS API Documentation
     #
     class DeleteMailboxPermissionsResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteOrganizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "IdempotencyClientToken",
+    #         organization_id: "OrganizationId", # required
+    #         delete_directory: false, # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_id
+    #   The organization ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] delete_directory
+    #   If true, deletes the AWS Directory Service directory associated with
+    #   the organization.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteOrganizationRequest AWS API Documentation
+    #
+    class DeleteOrganizationRequest < Struct.new(
+      :client_token,
+      :organization_id,
+      :delete_directory)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_id
+    #   The organization ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteOrganizationResponse AWS API Documentation
+    #
+    class DeleteOrganizationResponse < Struct.new(
+      :organization_id,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DeleteResourceRequest
     #   data as a hash:
@@ -685,6 +847,103 @@ module Aws::WorkMail
       :state,
       :enabled_date,
       :disabled_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeMailboxExportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "MailboxExportJobId", # required
+    #         organization_id: "OrganizationId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The mailbox export job ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_id
+    #   The organization ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeMailboxExportJobRequest AWS API Documentation
+    #
+    class DescribeMailboxExportJobRequest < Struct.new(
+      :job_id,
+      :organization_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entity_id
+    #   The identifier of the user or resource associated with the mailbox.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The mailbox export job description.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the AWS Identity and Access Management (IAM) role that
+    #   grants write permission to the Amazon Simple Storage Service (Amazon
+    #   S3) bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the symmetric AWS Key Management
+    #   Service (AWS KMS) key that encrypts the exported mailbox content.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_prefix
+    #   The S3 bucket prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_path
+    #   The path to the S3 bucket and file that the mailbox export job is
+    #   exporting to.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_progress
+    #   The estimated progress of the mailbox export job, in percentage
+    #   points.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The state of the mailbox export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_info
+    #   Error information for failed mailbox export jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The mailbox export job start timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The mailbox export job end timestamp.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeMailboxExportJobResponse AWS API Documentation
+    #
+    class DescribeMailboxExportJobResponse < Struct.new(
+      :entity_id,
+      :description,
+      :role_arn,
+      :kms_key_arn,
+      :s3_bucket_name,
+      :s3_prefix,
+      :s3_path,
+      :estimated_progress,
+      :state,
+      :error_info,
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -920,6 +1179,20 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # The directory is already in use by another WorkMail organization in
+    # the same account and Region.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DirectoryInUseException AWS API Documentation
+    #
+    class DirectoryInUseException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The directory service doesn't recognize the credentials supplied by
     # WorkMail.
     #
@@ -934,8 +1207,8 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # The directory on which you are trying to perform operations isn't
-    # available.
+    # The directory is unavailable. It might be located in another Region or
+    # deleted.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1019,6 +1292,43 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DisassociateMemberFromGroupResponse AWS API Documentation
     #
     class DisassociateMemberFromGroupResponse < Aws::EmptyStructure; end
+
+    # The domain to associate with an Amazon WorkMail organization.
+    #
+    # When you configure a domain hosted in Amazon Route 53 (Route 53), all
+    # recommended DNS records are added to the organization when you create
+    # it. For more information, see [Adding a domain][1] in the *Amazon
+    # WorkMail Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html
+    #
+    # @note When making an API call, you may pass Domain
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName",
+    #         hosted_zone_id: "HostedZoneId",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The fully qualified domain name.
+    #   @return [String]
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   The hosted zone ID for a domain hosted in Route 53. Required when
+    #   configuring a domain hosted in Route 53.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/Domain AWS API Documentation
+    #
+    class Domain < Struct.new(
+      :domain_name,
+      :hosted_zone_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The email address that you're trying to assign is already created for
     # a different user, group, or resource.
@@ -1549,6 +1859,54 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListMailboxExportJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The organization ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailboxExportJobsRequest AWS API Documentation
+    #
+    class ListMailboxExportJobsRequest < Struct.new(
+      :organization_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] jobs
+    #   The mailbox export job details.
+    #   @return [Array<Types::MailboxExportJob>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailboxExportJobsResponse AWS API Documentation
+    #
+    class ListMailboxExportJobsResponse < Struct.new(
+      :jobs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListMailboxPermissionsRequest
     #   data as a hash:
     #
@@ -1870,6 +2228,64 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # The details of a mailbox export job, including the user or resource ID
+    # associated with the mailbox and the S3 bucket that the mailbox
+    # contents are exported to.
+    #
+    # @!attribute [rw] job_id
+    #   The identifier of the mailbox export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The identifier of the user or resource associated with the mailbox.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The mailbox export job description.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_path
+    #   The path to the S3 bucket and file that the mailbox export job
+    #   exports to.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_progress
+    #   The estimated progress of the mailbox export job, in percentage
+    #   points.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The state of the mailbox export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The mailbox export job start timestamp.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The mailbox export job end timestamp.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/MailboxExportJob AWS API Documentation
+    #
+    class MailboxExportJob < Struct.new(
+      :job_id,
+      :entity_id,
+      :description,
+      :s3_bucket_name,
+      :s3_path,
+      :estimated_progress,
+      :state,
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The representation of a user or group.
     #
     # @!attribute [rw] id
@@ -1938,8 +2354,8 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # The organization must have a valid state (Active or Synchronizing) to
-    # perform certain operations on the organization or its members.
+    # The organization must have a valid state to perform certain operations
+    # on the organization or its members.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1962,6 +2378,10 @@ module Aws::WorkMail
     #   The alias associated with the organization.
     #   @return [String]
     #
+    # @!attribute [rw] default_mail_domain
+    #   The default email domain associated with the organization.
+    #   @return [String]
+    #
     # @!attribute [rw] error_message
     #   The error message associated with the organization. It is only
     #   present if unexpected behavior has occurred with regards to the
@@ -1978,6 +2398,7 @@ module Aws::WorkMail
     class OrganizationSummary < Struct.new(
       :organization_id,
       :alias,
+      :default_mail_domain,
       :error_message,
       :state)
       SENSITIVE = []
@@ -2192,7 +2613,7 @@ module Aws::WorkMail
       :name,
       :description,
       :folder_configurations)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -2341,6 +2762,84 @@ module Aws::WorkMail
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartMailboxExportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "IdempotencyClientToken", # required
+    #         organization_id: "OrganizationId", # required
+    #         entity_id: "WorkMailIdentifier", # required
+    #         description: "Description",
+    #         role_arn: "RoleArn", # required
+    #         kms_key_arn: "KmsKeyArn", # required
+    #         s3_bucket_name: "S3BucketName", # required
+    #         s3_prefix: "S3ObjectKey", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token for the client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_id
+    #   The identifier associated with the organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The identifier of the user or resource associated with the mailbox.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The mailbox export job description.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the AWS Identity and Access Management (IAM) role that
+    #   grants write permission to the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the symmetric AWS Key Management
+    #   Service (AWS KMS) key that encrypts the exported mailbox content.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_prefix
+    #   The S3 bucket prefix.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/StartMailboxExportJobRequest AWS API Documentation
+    #
+    class StartMailboxExportJobRequest < Struct.new(
+      :client_token,
+      :organization_id,
+      :entity_id,
+      :description,
+      :role_arn,
+      :kms_key_arn,
+      :s3_bucket_name,
+      :s3_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The job ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/StartMailboxExportJobResponse AWS API Documentation
+    #
+    class StartMailboxExportJobResponse < Struct.new(
+      :job_id)
       SENSITIVE = []
       include Aws::Structure
     end

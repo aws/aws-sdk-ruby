@@ -587,7 +587,12 @@ module Aws::FMS
     # been applied to them. Resources are considered noncompliant for
     # security group policies if they are in scope of the policy, they
     # violate one or more of the policy rules, and remediation is disabled
-    # or not possible.
+    # or not possible. Resources are considered noncompliant for Network
+    # Firewall policies if a firewall is missing in the VPC, if the firewall
+    # endpoint isn't set up in an expected Availability Zone and subnet, if
+    # a subnet created by the Firewall Manager doesn't have the expected
+    # route table, and for modifications to a firewall policy that violate
+    # the Firewall Manager policy's rules.
     #
     # @option params [required, String] :policy_id
     #   The ID of the policy that you want to get the details for. `PolicyId`
@@ -615,7 +620,7 @@ module Aws::FMS
     #   resp.policy_compliance_detail.member_account #=> String
     #   resp.policy_compliance_detail.violators #=> Array
     #   resp.policy_compliance_detail.violators[0].resource_id #=> String
-    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL", "RESOURCE_MISSING_SHIELD_PROTECTION", "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION", "RESOURCE_MISSING_SECURITY_GROUP", "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP", "SECURITY_GROUP_UNUSED", "SECURITY_GROUP_REDUNDANT"
+    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL", "RESOURCE_MISSING_SHIELD_PROTECTION", "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION", "RESOURCE_MISSING_SECURITY_GROUP", "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP", "SECURITY_GROUP_UNUSED", "SECURITY_GROUP_REDUNDANT", "MISSING_FIREWALL", "MISSING_FIREWALL_SUBNET_IN_AZ", "MISSING_EXPECTED_ROUTE_TABLE", "NETWORK_FIREWALL_POLICY_MODIFIED"
     #   resp.policy_compliance_detail.violators[0].resource_type #=> String
     #   resp.policy_compliance_detail.evaluation_limit_exceeded #=> Boolean
     #   resp.policy_compliance_detail.expired_at #=> Time
@@ -675,7 +680,7 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.resource_type #=> String
     #   resp.policy.resource_type_list #=> Array
@@ -761,7 +766,7 @@ module Aws::FMS
     # @example Response structure
     #
     #   resp.admin_account_id #=> String
-    #   resp.service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
+    #   resp.service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL"
     #   resp.data #=> String
     #   resp.next_token #=> String
     #
@@ -837,8 +842,9 @@ module Aws::FMS
     # @option params [required, String] :resource_type
     #   The resource type. This is in the format shown in the [AWS Resource
     #   Types Reference][1]. Supported resource types are:
-    #   `AWS::EC2::Instance`, `AWS::EC2::NetworkInterface`, or
-    #   `AWS::EC2::SecurityGroup`.
+    #   `AWS::EC2::Instance`, `AWS::EC2::NetworkInterface`,
+    #   `AWS::EC2::SecurityGroup`, `AWS::NetworkFirewall::FirewallPolicy`, and
+    #   `AWS::EC2::Subnet`.
     #
     #
     #
@@ -888,6 +894,46 @@ module Aws::FMS
     #   resp.violation_detail.resource_violations[0].aws_ec2_instance_violation.aws_ec2_network_interface_violations[0].violation_target #=> String
     #   resp.violation_detail.resource_violations[0].aws_ec2_instance_violation.aws_ec2_network_interface_violations[0].violating_security_groups #=> Array
     #   resp.violation_detail.resource_violations[0].aws_ec2_instance_violation.aws_ec2_network_interface_violations[0].violating_security_groups[0] #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_missing_firewall_violation.violation_target #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_missing_firewall_violation.vpc #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_missing_firewall_violation.availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_missing_firewall_violation.target_violation_reason #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_missing_subnet_violation.violation_target #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_missing_subnet_violation.vpc #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_missing_subnet_violation.availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_missing_subnet_violation.target_violation_reason #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_missing_expected_rt_violation.violation_target #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_missing_expected_rt_violation.vpc #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_missing_expected_rt_violation.availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_missing_expected_rt_violation.current_route_table #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_missing_expected_rt_violation.expected_route_table #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.violation_target #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateless_rule_groups #=> Array
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateless_rule_groups[0].rule_group_name #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateless_rule_groups[0].resource_id #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateless_rule_groups[0].priority #=> Integer
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateless_default_actions #=> Array
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateless_default_actions[0] #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateless_fragment_default_actions #=> Array
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateless_fragment_default_actions[0] #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateless_custom_actions #=> Array
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateless_custom_actions[0] #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateful_rule_groups #=> Array
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateful_rule_groups[0].rule_group_name #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.current_policy_description.stateful_rule_groups[0].resource_id #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateless_rule_groups #=> Array
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateless_rule_groups[0].rule_group_name #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateless_rule_groups[0].resource_id #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateless_rule_groups[0].priority #=> Integer
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateless_default_actions #=> Array
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateless_default_actions[0] #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateless_fragment_default_actions #=> Array
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateless_fragment_default_actions[0] #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateless_custom_actions #=> Array
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateless_custom_actions[0] #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_rule_groups #=> Array
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_rule_groups[0].rule_group_name #=> String
+    #   resp.violation_detail.resource_violations[0].network_firewall_policy_modified_violation.expected_policy_description.stateful_rule_groups[0].resource_id #=> String
     #   resp.violation_detail.resource_tags #=> Array
     #   resp.violation_detail.resource_tags[0].key #=> String
     #   resp.violation_detail.resource_tags[0].value #=> String
@@ -1113,7 +1159,7 @@ module Aws::FMS
     #   resp.policy_list[0].policy_id #=> String
     #   resp.policy_list[0].policy_name #=> String
     #   resp.policy_list[0].resource_type #=> String
-    #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
+    #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL"
     #   resp.policy_list[0].remediation_enabled #=> Boolean
     #   resp.next_token #=> String
     #
@@ -1290,6 +1336,16 @@ module Aws::FMS
     # Designates the IAM role and Amazon Simple Notification Service (SNS)
     # topic that AWS Firewall Manager uses to record SNS logs.
     #
+    # To perform this action outside of the console, you must configure the
+    # SNS topic to allow the Firewall Manager role `AWSServiceRoleForFMS` to
+    # publish SNS logs. For more information, see [Firewall Manager required
+    # permissions for API actions][1] in the *AWS Firewall Manager Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/fms-api-permissions-ref.html
+    #
     # @option params [required, String] :sns_topic_arn
     #   The Amazon Resource Name (ARN) of the SNS topic that collects
     #   notifications from AWS Firewall Manager.
@@ -1320,17 +1376,20 @@ module Aws::FMS
     #
     # Firewall Manager provides the following types of policies:
     #
-    # * A Shield Advanced policy, which applies Shield Advanced protection
-    #   to specified accounts and resources
-    #
     # * An AWS WAF policy (type WAFV2), which defines rule groups to run
     #   first in the corresponding AWS WAF web ACL and rule groups to run
     #   last in the web ACL.
     #
     # * An AWS WAF Classic policy (type WAF), which defines a rule group.
     #
+    # * A Shield Advanced policy, which applies Shield Advanced protection
+    #   to specified accounts and resources.
+    #
     # * A security group policy, which manages VPC security groups across
     #   your AWS organization.
+    #
+    # * An AWS Network Firewall policy, which provides firewall rules to
+    #   filter network traffic in specified Amazon VPCs.
     #
     # Each policy is specific to one of the types. If you want to enforce
     # more than one policy type across accounts, create multiple policies.
@@ -1363,7 +1422,7 @@ module Aws::FMS
     #       policy_name: "ResourceName", # required
     #       policy_update_token: "PolicyUpdateToken",
     #       security_service_policy_data: { # required
-    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT
+    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL
     #         managed_service_data: "ManagedServiceData",
     #       },
     #       resource_type: "ResourceType", # required
@@ -1396,7 +1455,7 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.resource_type #=> String
     #   resp.policy.resource_type_list #=> Array
@@ -1555,7 +1614,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

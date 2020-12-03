@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -27,7 +28,7 @@ require_relative 'aws-sdk-fsx/customizations'
 # structure.
 #
 #     f_sx = Aws::FSx::Client.new
-#     resp = f_sx.cancel_data_repository_task(params)
+#     resp = f_sx.associate_file_system_aliases(params)
 #
 # See {Client} for more information.
 #
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-fsx/customizations'
 # @!group service
 module Aws::FSx
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.33.0'
 
 end

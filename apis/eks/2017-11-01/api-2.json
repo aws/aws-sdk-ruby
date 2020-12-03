@@ -13,6 +13,23 @@
     "uid":"eks-2017-11-01"
   },
   "operations":{
+    "CreateAddon":{
+      "name":"CreateAddon",
+      "http":{
+        "method":"POST",
+        "requestUri":"/clusters/{name}/addons"
+      },
+      "input":{"shape":"CreateAddonRequest"},
+      "output":{"shape":"CreateAddonResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"ClientException"},
+        {"shape":"ServerException"}
+      ]
+    },
     "CreateCluster":{
       "name":"CreateCluster",
       "http":{
@@ -66,6 +83,22 @@
         {"shape":"ServiceUnavailableException"}
       ]
     },
+    "DeleteAddon":{
+      "name":"DeleteAddon",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/clusters/{name}/addons/{addonName}"
+      },
+      "input":{"shape":"DeleteAddonRequest"},
+      "output":{"shape":"DeleteAddonResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ClientException"},
+        {"shape":"ServerException"}
+      ]
+    },
     "DeleteCluster":{
       "name":"DeleteCluster",
       "http":{
@@ -112,6 +145,36 @@
         {"shape":"ClientException"},
         {"shape":"ServerException"},
         {"shape":"ServiceUnavailableException"}
+      ]
+    },
+    "DescribeAddon":{
+      "name":"DescribeAddon",
+      "http":{
+        "method":"GET",
+        "requestUri":"/clusters/{name}/addons/{addonName}"
+      },
+      "input":{"shape":"DescribeAddonRequest"},
+      "output":{"shape":"DescribeAddonResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ClientException"},
+        {"shape":"ServerException"}
+      ]
+    },
+    "DescribeAddonVersions":{
+      "name":"DescribeAddonVersions",
+      "http":{
+        "method":"GET",
+        "requestUri":"/addons/supported-versions"
+      },
+      "input":{"shape":"DescribeAddonVersionsRequest"},
+      "output":{"shape":"DescribeAddonVersionsResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"}
       ]
     },
     "DescribeCluster":{
@@ -173,6 +236,22 @@
         {"shape":"ClientException"},
         {"shape":"ServerException"},
         {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "ListAddons":{
+      "name":"ListAddons",
+      "http":{
+        "method":"GET",
+        "requestUri":"/clusters/{name}/addons"
+      },
+      "input":{"shape":"ListAddonsRequest"},
+      "output":{"shape":"ListAddonsResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ClientException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ServerException"}
       ]
     },
     "ListClusters":{
@@ -275,6 +354,23 @@
         {"shape":"NotFoundException"}
       ]
     },
+    "UpdateAddon":{
+      "name":"UpdateAddon",
+      "http":{
+        "method":"POST",
+        "requestUri":"/clusters/{name}/addons/{addonName}/update"
+      },
+      "input":{"shape":"UpdateAddonRequest"},
+      "output":{"shape":"UpdateAddonResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"ClientException"},
+        {"shape":"ServerException"}
+      ]
+    },
     "UpdateClusterConfig":{
       "name":"UpdateClusterConfig",
       "http":{
@@ -353,6 +449,85 @@
         "AL2_ARM_64"
       ]
     },
+    "Addon":{
+      "type":"structure",
+      "members":{
+        "addonName":{"shape":"String"},
+        "clusterName":{"shape":"ClusterName"},
+        "status":{"shape":"AddonStatus"},
+        "addonVersion":{"shape":"String"},
+        "health":{"shape":"AddonHealth"},
+        "addonArn":{"shape":"String"},
+        "createdAt":{"shape":"Timestamp"},
+        "modifiedAt":{"shape":"Timestamp"},
+        "serviceAccountRoleArn":{"shape":"String"},
+        "tags":{"shape":"TagMap"}
+      }
+    },
+    "AddonHealth":{
+      "type":"structure",
+      "members":{
+        "issues":{"shape":"AddonIssueList"}
+      }
+    },
+    "AddonInfo":{
+      "type":"structure",
+      "members":{
+        "addonName":{"shape":"String"},
+        "type":{"shape":"String"},
+        "addonVersions":{"shape":"AddonVersionInfoList"}
+      }
+    },
+    "AddonIssue":{
+      "type":"structure",
+      "members":{
+        "code":{"shape":"AddonIssueCode"},
+        "message":{"shape":"String"},
+        "resourceIds":{"shape":"StringList"}
+      }
+    },
+    "AddonIssueCode":{
+      "type":"string",
+      "enum":[
+        "AccessDenied",
+        "InternalFailure",
+        "ClusterUnreachable",
+        "InsufficientNumberOfReplicas",
+        "ConfigurationConflict"
+      ]
+    },
+    "AddonIssueList":{
+      "type":"list",
+      "member":{"shape":"AddonIssue"}
+    },
+    "AddonStatus":{
+      "type":"string",
+      "enum":[
+        "CREATING",
+        "ACTIVE",
+        "CREATE_FAILED",
+        "UPDATING",
+        "DELETING",
+        "DELETE_FAILED",
+        "DEGRADED"
+      ]
+    },
+    "AddonVersionInfo":{
+      "type":"structure",
+      "members":{
+        "addonVersion":{"shape":"String"},
+        "architecture":{"shape":"StringList"},
+        "compatibilities":{"shape":"Compatibilities"}
+      }
+    },
+    "AddonVersionInfoList":{
+      "type":"list",
+      "member":{"shape":"AddonVersionInfo"}
+    },
+    "Addons":{
+      "type":"list",
+      "member":{"shape":"AddonInfo"}
+    },
     "AutoScalingGroup":{
       "type":"structure",
       "members":{
@@ -385,6 +560,13 @@
       "box":true,
       "min":1
     },
+    "CapacityTypes":{
+      "type":"string",
+      "enum":[
+        "ON_DEMAND",
+        "SPOT"
+      ]
+    },
     "Certificate":{
       "type":"structure",
       "members":{
@@ -396,6 +578,7 @@
       "members":{
         "clusterName":{"shape":"String"},
         "nodegroupName":{"shape":"String"},
+        "addonName":{"shape":"String"},
         "message":{"shape":"String"}
       },
       "error":{"httpStatusCode":400},
@@ -411,6 +594,7 @@
         "endpoint":{"shape":"String"},
         "roleArn":{"shape":"String"},
         "resourcesVpcConfig":{"shape":"VpcConfigResponse"},
+        "kubernetesNetworkConfig":{"shape":"KubernetesNetworkConfigResponse"},
         "logging":{"shape":"Logging"},
         "identity":{"shape":"Identity"},
         "status":{"shape":"ClusterStatus"},
@@ -437,6 +621,47 @@
         "UPDATING"
       ]
     },
+    "Compatibilities":{
+      "type":"list",
+      "member":{"shape":"Compatibility"}
+    },
+    "Compatibility":{
+      "type":"structure",
+      "members":{
+        "clusterVersion":{"shape":"String"},
+        "platformVersions":{"shape":"StringList"},
+        "defaultVersion":{"shape":"Boolean"}
+      }
+    },
+    "CreateAddonRequest":{
+      "type":"structure",
+      "required":[
+        "clusterName",
+        "addonName"
+      ],
+      "members":{
+        "clusterName":{
+          "shape":"ClusterName",
+          "location":"uri",
+          "locationName":"name"
+        },
+        "addonName":{"shape":"String"},
+        "addonVersion":{"shape":"String"},
+        "serviceAccountRoleArn":{"shape":"RoleArn"},
+        "resolveConflicts":{"shape":"ResolveConflicts"},
+        "clientRequestToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        },
+        "tags":{"shape":"TagMap"}
+      }
+    },
+    "CreateAddonResponse":{
+      "type":"structure",
+      "members":{
+        "addon":{"shape":"Addon"}
+      }
+    },
     "CreateClusterRequest":{
       "type":"structure",
       "required":[
@@ -449,6 +674,7 @@
         "version":{"shape":"String"},
         "roleArn":{"shape":"String"},
         "resourcesVpcConfig":{"shape":"VpcConfigRequest"},
+        "kubernetesNetworkConfig":{"shape":"KubernetesNetworkConfigRequest"},
         "logging":{"shape":"Logging"},
         "clientRequestToken":{
           "shape":"String",
@@ -523,6 +749,7 @@
           "idempotencyToken":true
         },
         "launchTemplate":{"shape":"LaunchTemplateSpecification"},
+        "capacityType":{"shape":"CapacityTypes"},
         "version":{"shape":"String"},
         "releaseVersion":{"shape":"String"}
       }
@@ -531,6 +758,31 @@
       "type":"structure",
       "members":{
         "nodegroup":{"shape":"Nodegroup"}
+      }
+    },
+    "DeleteAddonRequest":{
+      "type":"structure",
+      "required":[
+        "clusterName",
+        "addonName"
+      ],
+      "members":{
+        "clusterName":{
+          "shape":"ClusterName",
+          "location":"uri",
+          "locationName":"name"
+        },
+        "addonName":{
+          "shape":"String",
+          "location":"uri",
+          "locationName":"addonName"
+        }
+      }
+    },
+    "DeleteAddonResponse":{
+      "type":"structure",
+      "members":{
+        "addon":{"shape":"Addon"}
       }
     },
     "DeleteClusterRequest":{
@@ -598,6 +850,69 @@
       "type":"structure",
       "members":{
         "nodegroup":{"shape":"Nodegroup"}
+      }
+    },
+    "DescribeAddonRequest":{
+      "type":"structure",
+      "required":[
+        "clusterName",
+        "addonName"
+      ],
+      "members":{
+        "clusterName":{
+          "shape":"ClusterName",
+          "location":"uri",
+          "locationName":"name"
+        },
+        "addonName":{
+          "shape":"String",
+          "location":"uri",
+          "locationName":"addonName"
+        }
+      }
+    },
+    "DescribeAddonResponse":{
+      "type":"structure",
+      "members":{
+        "addon":{"shape":"Addon"}
+      }
+    },
+    "DescribeAddonVersionsRequest":{
+      "type":"structure",
+      "members":{
+        "kubernetesVersion":{
+          "shape":"String",
+          "location":"querystring",
+          "locationName":"kubernetesVersion"
+        },
+        "maxResults":{
+          "shape":"DescribeAddonVersionsRequestMaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "nextToken":{
+          "shape":"String",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "addonName":{
+          "shape":"String",
+          "location":"querystring",
+          "locationName":"addonName"
+        }
+      }
+    },
+    "DescribeAddonVersionsRequestMaxResults":{
+      "type":"integer",
+      "box":true,
+      "max":100,
+      "min":1
+    },
+    "DescribeAddonVersionsResponse":{
+      "type":"structure",
+      "members":{
+        "addons":{"shape":"Addons"},
+        "nextToken":{"shape":"String"}
       }
     },
     "DescribeClusterRequest":{
@@ -688,6 +1003,11 @@
           "shape":"String",
           "location":"querystring",
           "locationName":"nodegroupName"
+        },
+        "addonName":{
+          "shape":"String",
+          "location":"querystring",
+          "locationName":"addonName"
         }
       }
     },
@@ -722,7 +1042,10 @@
         "Unknown",
         "NodeCreationFailure",
         "PodEvictionFailure",
-        "InsufficientFreeAddresses"
+        "InsufficientFreeAddresses",
+        "ClusterUnreachable",
+        "InsufficientNumberOfReplicas",
+        "ConfigurationConflict"
       ]
     },
     "ErrorDetail":{
@@ -795,6 +1118,7 @@
         "clusterName":{"shape":"String"},
         "nodegroupName":{"shape":"String"},
         "fargateProfileName":{"shape":"String"},
+        "addonName":{"shape":"String"},
         "message":{"shape":"String"}
       },
       "error":{"httpStatusCode":400},
@@ -805,6 +1129,7 @@
       "members":{
         "clusterName":{"shape":"String"},
         "nodegroupName":{"shape":"String"},
+        "addonName":{"shape":"String"},
         "message":{"shape":"String"}
       },
       "error":{"httpStatusCode":400},
@@ -822,12 +1147,58 @@
       "type":"list",
       "member":{"shape":"Issue"}
     },
+    "KubernetesNetworkConfigRequest":{
+      "type":"structure",
+      "members":{
+        "serviceIpv4Cidr":{"shape":"String"}
+      }
+    },
+    "KubernetesNetworkConfigResponse":{
+      "type":"structure",
+      "members":{
+        "serviceIpv4Cidr":{"shape":"String"}
+      }
+    },
     "LaunchTemplateSpecification":{
       "type":"structure",
       "members":{
         "name":{"shape":"String"},
         "version":{"shape":"String"},
         "id":{"shape":"String"}
+      }
+    },
+    "ListAddonsRequest":{
+      "type":"structure",
+      "required":["clusterName"],
+      "members":{
+        "clusterName":{
+          "shape":"ClusterName",
+          "location":"uri",
+          "locationName":"name"
+        },
+        "maxResults":{
+          "shape":"ListAddonsRequestMaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "nextToken":{
+          "shape":"String",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "ListAddonsRequestMaxResults":{
+      "type":"integer",
+      "box":true,
+      "max":100,
+      "min":1
+    },
+    "ListAddonsResponse":{
+      "type":"structure",
+      "members":{
+        "addons":{"shape":"StringList"},
+        "nextToken":{"shape":"String"}
       }
     },
     "ListClustersRequest":{
@@ -951,6 +1322,11 @@
           "location":"querystring",
           "locationName":"nodegroupName"
         },
+        "addonName":{
+          "shape":"String",
+          "location":"querystring",
+          "locationName":"addonName"
+        },
         "nextToken":{
           "shape":"String",
           "location":"querystring",
@@ -1018,6 +1394,7 @@
         "createdAt":{"shape":"Timestamp"},
         "modifiedAt":{"shape":"Timestamp"},
         "status":{"shape":"NodegroupStatus"},
+        "capacityType":{"shape":"CapacityTypes"},
         "scalingConfig":{"shape":"NodegroupScalingConfig"},
         "instanceTypes":{"shape":"StringList"},
         "subnets":{"shape":"StringList"},
@@ -1057,7 +1434,8 @@
         "InstanceLimitExceeded",
         "InsufficientFreeAddresses",
         "AccessDenied",
-        "InternalFailure"
+        "InternalFailure",
+        "ClusterUnreachable"
       ]
     },
     "NodegroupResources":{
@@ -1114,11 +1492,19 @@
         "sourceSecurityGroups":{"shape":"StringList"}
       }
     },
+    "ResolveConflicts":{
+      "type":"string",
+      "enum":[
+        "OVERWRITE",
+        "NONE"
+      ]
+    },
     "ResourceInUseException":{
       "type":"structure",
       "members":{
         "clusterName":{"shape":"String"},
         "nodegroupName":{"shape":"String"},
+        "addonName":{"shape":"String"},
         "message":{"shape":"String"}
       },
       "error":{"httpStatusCode":409},
@@ -1140,16 +1526,23 @@
         "clusterName":{"shape":"String"},
         "nodegroupName":{"shape":"String"},
         "fargateProfileName":{"shape":"String"},
+        "addonName":{"shape":"String"},
         "message":{"shape":"String"}
       },
       "error":{"httpStatusCode":404},
       "exception":true
+    },
+    "RoleArn":{
+      "type":"string",
+      "max":255,
+      "min":1
     },
     "ServerException":{
       "type":"structure",
       "members":{
         "clusterName":{"shape":"String"},
         "nodegroupName":{"shape":"String"},
+        "addonName":{"shape":"String"},
         "message":{"shape":"String"}
       },
       "error":{"httpStatusCode":500},
@@ -1257,6 +1650,38 @@
         "params":{"shape":"UpdateParams"},
         "createdAt":{"shape":"Timestamp"},
         "errors":{"shape":"ErrorDetails"}
+      }
+    },
+    "UpdateAddonRequest":{
+      "type":"structure",
+      "required":[
+        "clusterName",
+        "addonName"
+      ],
+      "members":{
+        "clusterName":{
+          "shape":"ClusterName",
+          "location":"uri",
+          "locationName":"name"
+        },
+        "addonName":{
+          "shape":"String",
+          "location":"uri",
+          "locationName":"addonName"
+        },
+        "addonVersion":{"shape":"String"},
+        "serviceAccountRoleArn":{"shape":"RoleArn"},
+        "resolveConflicts":{"shape":"ResolveConflicts"},
+        "clientRequestToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "UpdateAddonResponse":{
+      "type":"structure",
+      "members":{
+        "update":{"shape":"Update"}
       }
     },
     "UpdateClusterConfigRequest":{
@@ -1399,7 +1824,10 @@
         "MaxSize",
         "MinSize",
         "ReleaseVersion",
-        "PublicAccessCidrs"
+        "PublicAccessCidrs",
+        "AddonVersion",
+        "ServiceAccountRoleArn",
+        "ResolveConflicts"
       ]
     },
     "UpdateParams":{
@@ -1421,7 +1849,8 @@
         "VersionUpdate",
         "EndpointAccessUpdate",
         "LoggingUpdate",
-        "ConfigUpdate"
+        "ConfigUpdate",
+        "AddonUpdate"
       ]
     },
     "VpcConfigRequest":{

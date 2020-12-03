@@ -448,6 +448,19 @@ module Aws::IoT
     #   An optional comment string describing why the job was associated with
     #   the targets.
     #
+    # @option params [String] :namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #
     # @return [Types::AssociateTargetsWithJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssociateTargetsWithJobResponse#job_arn #job_arn} => String
@@ -460,6 +473,7 @@ module Aws::IoT
     #     targets: ["TargetArn"], # required
     #     job_id: "JobId", # required
     #     comment: "Comment",
+    #     namespace_id: "NamespaceId",
     #   })
     #
     # @example Response structure
@@ -1347,6 +1361,19 @@ module Aws::IoT
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the job.
     #
+    # @option params [String] :namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResponse#job_arn #job_arn} => String
@@ -1396,6 +1423,7 @@ module Aws::IoT
     #         value: "TagValue",
     #       },
     #     ],
+    #     namespace_id: "NamespaceId",
     #   })
     #
     # @example Response structure
@@ -1629,6 +1657,7 @@ module Aws::IoT
     #     files: [ # required
     #       {
     #         file_name: "FileName",
+    #         file_type: 1,
     #         file_version: "OTAUpdateFileVersion",
     #         file_location: {
     #           stream: {
@@ -2101,12 +2130,12 @@ module Aws::IoT
     #   (thing) violates a behavior.
     #
     # @option params [Array<String>] :additional_metrics_to_retain
+    #   *Please use CreateSecurityProfileRequest$additionalMetricsToRetainV2
+    #   instead.*
+    #
     #   A list of metrics whose data is retained (stored). By default, data is
     #   retained for any metric used in the profile's `behaviors`, but it is
     #   also retained for any metric specified here.
-    #
-    #   **Note:** This API field is deprecated. Please use
-    #   CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
     #
     # @option params [Array<Types::MetricToRetain>] :additional_metrics_to_retain_v2
     #   A list of metrics whose data is retained (stored). By default, data is
@@ -2516,6 +2545,7 @@ module Aws::IoT
     #             role_arn: "AwsArn", # required
     #             delivery_stream_name: "DeliveryStreamName", # required
     #             separator: "FirehoseSeparator",
+    #             batch_mode: false,
     #           },
     #           cloudwatch_metric: {
     #             role_arn: "AwsArn", # required
@@ -2549,11 +2579,13 @@ module Aws::IoT
     #           iot_analytics: {
     #             channel_arn: "AwsArn",
     #             channel_name: "ChannelName",
+    #             batch_mode: false,
     #             role_arn: "AwsArn",
     #           },
     #           iot_events: {
     #             input_name: "InputName", # required
     #             message_id: "MessageId",
+    #             batch_mode: false,
     #             role_arn: "AwsArn", # required
     #           },
     #           iot_site_wise: {
@@ -2586,6 +2618,21 @@ module Aws::IoT
     #             execution_name_prefix: "ExecutionNamePrefix",
     #             state_machine_name: "StateMachineName", # required
     #             role_arn: "AwsArn", # required
+    #           },
+    #           timestream: {
+    #             role_arn: "AwsArn", # required
+    #             database_name: "TimestreamDatabaseName", # required
+    #             table_name: "TimestreamTableName", # required
+    #             dimensions: [ # required
+    #               {
+    #                 name: "TimestreamDimensionName", # required
+    #                 value: "TimestreamDimensionValue", # required
+    #               },
+    #             ],
+    #             timestamp: {
+    #               value: "TimestreamTimestampValue", # required
+    #               unit: "TimestreamTimestampUnit", # required
+    #             },
     #           },
     #           http: {
     #             url: "Url", # required
@@ -2660,6 +2707,7 @@ module Aws::IoT
     #           role_arn: "AwsArn", # required
     #           delivery_stream_name: "DeliveryStreamName", # required
     #           separator: "FirehoseSeparator",
+    #           batch_mode: false,
     #         },
     #         cloudwatch_metric: {
     #           role_arn: "AwsArn", # required
@@ -2693,11 +2741,13 @@ module Aws::IoT
     #         iot_analytics: {
     #           channel_arn: "AwsArn",
     #           channel_name: "ChannelName",
+    #           batch_mode: false,
     #           role_arn: "AwsArn",
     #         },
     #         iot_events: {
     #           input_name: "InputName", # required
     #           message_id: "MessageId",
+    #           batch_mode: false,
     #           role_arn: "AwsArn", # required
     #         },
     #         iot_site_wise: {
@@ -2730,6 +2780,21 @@ module Aws::IoT
     #           execution_name_prefix: "ExecutionNamePrefix",
     #           state_machine_name: "StateMachineName", # required
     #           role_arn: "AwsArn", # required
+    #         },
+    #         timestream: {
+    #           role_arn: "AwsArn", # required
+    #           database_name: "TimestreamDatabaseName", # required
+    #           table_name: "TimestreamTableName", # required
+    #           dimensions: [ # required
+    #             {
+    #               name: "TimestreamDimensionName", # required
+    #               value: "TimestreamDimensionValue", # required
+    #             },
+    #           ],
+    #           timestamp: {
+    #             value: "TimestreamTimestampValue", # required
+    #             unit: "TimestreamTimestampUnit", # required
+    #           },
     #         },
     #         http: {
     #           url: "Url", # required
@@ -3056,6 +3121,19 @@ module Aws::IoT
     #
     #    </note>
     #
+    # @option params [String] :namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3063,6 +3141,7 @@ module Aws::IoT
     #   resp = client.delete_job({
     #     job_id: "JobId", # required
     #     force: false,
+    #     namespace_id: "NamespaceId",
     #   })
     #
     # @overload delete_job(params = {})
@@ -3102,6 +3181,19 @@ module Aws::IoT
     #
     #    </note>
     #
+    # @option params [String] :namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3111,6 +3203,7 @@ module Aws::IoT
     #     thing_name: "ThingName", # required
     #     execution_number: 1, # required
     #     force: false,
+    #     namespace_id: "NamespaceId",
     #   })
     #
     # @overload delete_job_execution(params = {})
@@ -4044,6 +4137,7 @@ module Aws::IoT
     #   * {Types::DescribeDomainConfigurationResponse#domain_configuration_status #domain_configuration_status} => String
     #   * {Types::DescribeDomainConfigurationResponse#service_type #service_type} => String
     #   * {Types::DescribeDomainConfigurationResponse#domain_type #domain_type} => String
+    #   * {Types::DescribeDomainConfigurationResponse#last_status_change_date #last_status_change_date} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -4065,6 +4159,7 @@ module Aws::IoT
     #   resp.domain_configuration_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.service_type #=> String, one of "DATA", "CREDENTIAL_PROVIDER", "JOBS"
     #   resp.domain_type #=> String, one of "ENDPOINT", "AWS_MANAGED", "CUSTOMER_MANAGED"
+    #   resp.last_status_change_date #=> Time
     #
     # @overload describe_domain_configuration(params = {})
     # @param [Hash] params ({})
@@ -4230,6 +4325,7 @@ module Aws::IoT
     #   resp.job.job_process_details.number_of_removed_things #=> Integer
     #   resp.job.job_process_details.number_of_timed_out_things #=> Integer
     #   resp.job.timeout_config.in_progress_timeout_in_minutes #=> Integer
+    #   resp.job.namespace_id #=> String
     #
     # @overload describe_job(params = {})
     # @param [Hash] params ({})
@@ -5112,6 +5208,7 @@ module Aws::IoT
     #   resp.ota_update_info.target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
     #   resp.ota_update_info.ota_update_files #=> Array
     #   resp.ota_update_info.ota_update_files[0].file_name #=> String
+    #   resp.ota_update_info.ota_update_files[0].file_type #=> Integer
     #   resp.ota_update_info.ota_update_files[0].file_version #=> String
     #   resp.ota_update_info.ota_update_files[0].file_location.stream.stream_id #=> String
     #   resp.ota_update_info.ota_update_files[0].file_location.stream.file_id #=> Integer
@@ -5407,6 +5504,7 @@ module Aws::IoT
     #   resp.rule.actions[0].firehose.role_arn #=> String
     #   resp.rule.actions[0].firehose.delivery_stream_name #=> String
     #   resp.rule.actions[0].firehose.separator #=> String
+    #   resp.rule.actions[0].firehose.batch_mode #=> Boolean
     #   resp.rule.actions[0].cloudwatch_metric.role_arn #=> String
     #   resp.rule.actions[0].cloudwatch_metric.metric_namespace #=> String
     #   resp.rule.actions[0].cloudwatch_metric.metric_name #=> String
@@ -5428,9 +5526,11 @@ module Aws::IoT
     #   resp.rule.actions[0].salesforce.url #=> String
     #   resp.rule.actions[0].iot_analytics.channel_arn #=> String
     #   resp.rule.actions[0].iot_analytics.channel_name #=> String
+    #   resp.rule.actions[0].iot_analytics.batch_mode #=> Boolean
     #   resp.rule.actions[0].iot_analytics.role_arn #=> String
     #   resp.rule.actions[0].iot_events.input_name #=> String
     #   resp.rule.actions[0].iot_events.message_id #=> String
+    #   resp.rule.actions[0].iot_events.batch_mode #=> Boolean
     #   resp.rule.actions[0].iot_events.role_arn #=> String
     #   resp.rule.actions[0].iot_site_wise.put_asset_property_value_entries #=> Array
     #   resp.rule.actions[0].iot_site_wise.put_asset_property_value_entries[0].entry_id #=> String
@@ -5449,6 +5549,14 @@ module Aws::IoT
     #   resp.rule.actions[0].step_functions.execution_name_prefix #=> String
     #   resp.rule.actions[0].step_functions.state_machine_name #=> String
     #   resp.rule.actions[0].step_functions.role_arn #=> String
+    #   resp.rule.actions[0].timestream.role_arn #=> String
+    #   resp.rule.actions[0].timestream.database_name #=> String
+    #   resp.rule.actions[0].timestream.table_name #=> String
+    #   resp.rule.actions[0].timestream.dimensions #=> Array
+    #   resp.rule.actions[0].timestream.dimensions[0].name #=> String
+    #   resp.rule.actions[0].timestream.dimensions[0].value #=> String
+    #   resp.rule.actions[0].timestream.timestamp.value #=> String
+    #   resp.rule.actions[0].timestream.timestamp.unit #=> String
     #   resp.rule.actions[0].http.url #=> String
     #   resp.rule.actions[0].http.confirmation_url #=> String
     #   resp.rule.actions[0].http.headers #=> Array
@@ -5491,6 +5599,7 @@ module Aws::IoT
     #   resp.rule.error_action.firehose.role_arn #=> String
     #   resp.rule.error_action.firehose.delivery_stream_name #=> String
     #   resp.rule.error_action.firehose.separator #=> String
+    #   resp.rule.error_action.firehose.batch_mode #=> Boolean
     #   resp.rule.error_action.cloudwatch_metric.role_arn #=> String
     #   resp.rule.error_action.cloudwatch_metric.metric_namespace #=> String
     #   resp.rule.error_action.cloudwatch_metric.metric_name #=> String
@@ -5512,9 +5621,11 @@ module Aws::IoT
     #   resp.rule.error_action.salesforce.url #=> String
     #   resp.rule.error_action.iot_analytics.channel_arn #=> String
     #   resp.rule.error_action.iot_analytics.channel_name #=> String
+    #   resp.rule.error_action.iot_analytics.batch_mode #=> Boolean
     #   resp.rule.error_action.iot_analytics.role_arn #=> String
     #   resp.rule.error_action.iot_events.input_name #=> String
     #   resp.rule.error_action.iot_events.message_id #=> String
+    #   resp.rule.error_action.iot_events.batch_mode #=> Boolean
     #   resp.rule.error_action.iot_events.role_arn #=> String
     #   resp.rule.error_action.iot_site_wise.put_asset_property_value_entries #=> Array
     #   resp.rule.error_action.iot_site_wise.put_asset_property_value_entries[0].entry_id #=> String
@@ -5533,6 +5644,14 @@ module Aws::IoT
     #   resp.rule.error_action.step_functions.execution_name_prefix #=> String
     #   resp.rule.error_action.step_functions.state_machine_name #=> String
     #   resp.rule.error_action.step_functions.role_arn #=> String
+    #   resp.rule.error_action.timestream.role_arn #=> String
+    #   resp.rule.error_action.timestream.database_name #=> String
+    #   resp.rule.error_action.timestream.table_name #=> String
+    #   resp.rule.error_action.timestream.dimensions #=> Array
+    #   resp.rule.error_action.timestream.dimensions[0].name #=> String
+    #   resp.rule.error_action.timestream.dimensions[0].value #=> String
+    #   resp.rule.error_action.timestream.timestamp.value #=> String
+    #   resp.rule.error_action.timestream.timestamp.unit #=> String
     #   resp.rule.error_action.http.url #=> String
     #   resp.rule.error_action.http.confirmation_url #=> String
     #   resp.rule.error_action.http.headers #=> Array
@@ -5718,7 +5837,7 @@ module Aws::IoT
 
     # Lists the findings (results) of a Device Defender audit or of the
     # audits performed during a specified time period. (Findings are
-    # retained for 180 days.)
+    # retained for 90 days.)
     #
     # @option params [String] :task_id
     #   A filter to limit results to the audit with the specified ID. You must
@@ -6036,7 +6155,7 @@ module Aws::IoT
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The beginning of the time period. Audit information is retained for a
-    #   limited time (180 days). Requesting a start time prior to what is
+    #   limited time (90 days). Requesting a start time prior to what is
     #   retained results in an "InvalidRequestException".
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
@@ -6138,7 +6257,9 @@ module Aws::IoT
     # Lists the billing groups you have created.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per request.
@@ -6491,6 +6612,19 @@ module Aws::IoT
     #   An optional filter that lets you search for jobs that have the
     #   specified status.
     #
+    # @option params [String] :namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per request.
     #
@@ -6509,6 +6643,7 @@ module Aws::IoT
     #   resp = client.list_job_executions_for_thing({
     #     thing_name: "ThingName", # required
     #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, TIMED_OUT, REJECTED, REMOVED, CANCELED
+    #     namespace_id: "NamespaceId",
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -6559,6 +6694,19 @@ module Aws::IoT
     #   A filter that limits the returned jobs to those for the specified
     #   group.
     #
+    # @option params [String] :namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #
     # @return [Types::ListJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListJobsResponse#jobs #jobs} => Array&lt;Types::JobSummary&gt;
@@ -6575,6 +6723,7 @@ module Aws::IoT
     #     next_token: "NextToken",
     #     thing_group_name: "ThingGroupName",
     #     thing_group_id: "ThingGroupId",
+    #     namespace_id: "NamespaceId",
     #   })
     #
     # @example Response structure
@@ -6908,7 +7057,9 @@ module Aws::IoT
     # Cognito identities or federated identities.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this operation.
@@ -7242,7 +7393,9 @@ module Aws::IoT
     #   The ARN of the resource.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7354,7 +7507,9 @@ module Aws::IoT
     # List the thing groups in your account.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -7407,7 +7562,9 @@ module Aws::IoT
     #   The thing name.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -7445,16 +7602,29 @@ module Aws::IoT
     # can be X.509 certificates, IAM users, groups, and roles, Amazon
     # Cognito identities or federated identities.
     #
+    # @option params [String] :next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this operation.
+    #
     # @option params [required, String] :thing_name
     #   The name of the thing.
     #
     # @return [Types::ListThingPrincipalsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListThingPrincipalsResponse#principals #principals} => Array&lt;String&gt;
+    #   * {Types::ListThingPrincipalsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_thing_principals({
+    #     next_token: "NextToken",
+    #     max_results: 1,
     #     thing_name: "ThingName", # required
     #   })
     #
@@ -7462,6 +7632,7 @@ module Aws::IoT
     #
     #   resp.principals #=> Array
     #   resp.principals[0] #=> String
+    #   resp.next_token #=> String
     #
     # @overload list_thing_principals(params = {})
     # @param [Hash] params ({})
@@ -7479,7 +7650,9 @@ module Aws::IoT
     #   The type of task report.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per request.
@@ -7518,7 +7691,9 @@ module Aws::IoT
     # List bulk thing provisioning tasks.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -7557,7 +7732,9 @@ module Aws::IoT
     # Lists the existing thing types.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this operation.
@@ -7614,7 +7791,9 @@ module Aws::IoT
     #  </note>
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this operation.
@@ -7669,7 +7848,9 @@ module Aws::IoT
     #   The name of the billing group.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per request.
@@ -7712,7 +7893,9 @@ module Aws::IoT
     #   well.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -7752,7 +7935,9 @@ module Aws::IoT
     #   The maximum number of results to return at one time.
     #
     # @option params [String] :next_token
-    #   The token to retrieve the next set of results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @return [Types::ListTopicRuleDestinationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7793,7 +7978,9 @@ module Aws::IoT
     #   The maximum number of results to return.
     #
     # @option params [String] :next_token
-    #   A token used to retrieve the next value.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Boolean] :rule_disabled
     #   Specifies whether the rule is disabled.
@@ -7838,8 +8025,9 @@ module Aws::IoT
     #   `THING_Group`.
     #
     # @option params [String] :next_token
-    #   The token used to get the next set of results, or **null** if there
-    #   are no additional results.
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -8334,6 +8522,7 @@ module Aws::IoT
     #             role_arn: "AwsArn", # required
     #             delivery_stream_name: "DeliveryStreamName", # required
     #             separator: "FirehoseSeparator",
+    #             batch_mode: false,
     #           },
     #           cloudwatch_metric: {
     #             role_arn: "AwsArn", # required
@@ -8367,11 +8556,13 @@ module Aws::IoT
     #           iot_analytics: {
     #             channel_arn: "AwsArn",
     #             channel_name: "ChannelName",
+    #             batch_mode: false,
     #             role_arn: "AwsArn",
     #           },
     #           iot_events: {
     #             input_name: "InputName", # required
     #             message_id: "MessageId",
+    #             batch_mode: false,
     #             role_arn: "AwsArn", # required
     #           },
     #           iot_site_wise: {
@@ -8404,6 +8595,21 @@ module Aws::IoT
     #             execution_name_prefix: "ExecutionNamePrefix",
     #             state_machine_name: "StateMachineName", # required
     #             role_arn: "AwsArn", # required
+    #           },
+    #           timestream: {
+    #             role_arn: "AwsArn", # required
+    #             database_name: "TimestreamDatabaseName", # required
+    #             table_name: "TimestreamTableName", # required
+    #             dimensions: [ # required
+    #               {
+    #                 name: "TimestreamDimensionName", # required
+    #                 value: "TimestreamDimensionValue", # required
+    #               },
+    #             ],
+    #             timestamp: {
+    #               value: "TimestreamTimestampValue", # required
+    #               unit: "TimestreamTimestampUnit", # required
+    #             },
     #           },
     #           http: {
     #             url: "Url", # required
@@ -8478,6 +8684,7 @@ module Aws::IoT
     #           role_arn: "AwsArn", # required
     #           delivery_stream_name: "DeliveryStreamName", # required
     #           separator: "FirehoseSeparator",
+    #           batch_mode: false,
     #         },
     #         cloudwatch_metric: {
     #           role_arn: "AwsArn", # required
@@ -8511,11 +8718,13 @@ module Aws::IoT
     #         iot_analytics: {
     #           channel_arn: "AwsArn",
     #           channel_name: "ChannelName",
+    #           batch_mode: false,
     #           role_arn: "AwsArn",
     #         },
     #         iot_events: {
     #           input_name: "InputName", # required
     #           message_id: "MessageId",
+    #           batch_mode: false,
     #           role_arn: "AwsArn", # required
     #         },
     #         iot_site_wise: {
@@ -8548,6 +8757,21 @@ module Aws::IoT
     #           execution_name_prefix: "ExecutionNamePrefix",
     #           state_machine_name: "StateMachineName", # required
     #           role_arn: "AwsArn", # required
+    #         },
+    #         timestream: {
+    #           role_arn: "AwsArn", # required
+    #           database_name: "TimestreamDatabaseName", # required
+    #           table_name: "TimestreamTableName", # required
+    #           dimensions: [ # required
+    #             {
+    #               name: "TimestreamDimensionName", # required
+    #               value: "TimestreamDimensionValue", # required
+    #             },
+    #           ],
+    #           timestamp: {
+    #             value: "TimestreamTimestampValue", # required
+    #             unit: "TimestreamTimestampUnit", # required
+    #           },
     #         },
     #         http: {
     #           url: "Url", # required
@@ -9705,6 +9929,19 @@ module Aws::IoT
     #   terminal state before the time expires, it will be automatically set
     #   to `TIMED_OUT`.
     #
+    # @option params [String] :namespace_id
+    #   The namespace used to indicate that a job is a customer-managed job.
+    #
+    #   When you specify a value for this parameter, AWS IoT Core sends jobs
+    #   notifications to MQTT topics that contain the value in the following
+    #   format.
+    #
+    #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
+    #
+    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -9740,6 +9977,7 @@ module Aws::IoT
     #     timeout_config: {
     #       in_progress_timeout_in_minutes: 1,
     #     },
+    #     namespace_id: "NamespaceId",
     #   })
     #
     # @overload update_job(params = {})
@@ -9963,12 +10201,12 @@ module Aws::IoT
     #   Where the alerts are sent. (Alerts are always sent to the console.)
     #
     # @option params [Array<String>] :additional_metrics_to_retain
+    #   *Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2
+    #   instead.*
+    #
     #   A list of metrics whose data is retained (stored). By default, data is
     #   retained for any metric used in the profile's `behaviors`, but it is
     #   also retained for any metric specified here.
-    #
-    #   **Note:** This API field is deprecated. Please use
-    #   UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
     #
     # @option params [Array<Types::MetricToRetain>] :additional_metrics_to_retain_v2
     #   A list of metrics whose data is retained (stored). By default, data is
@@ -10407,7 +10645,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

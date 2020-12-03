@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -28,7 +29,7 @@ require_relative 'aws-sdk-sagemaker/customizations'
 # structure.
 #
 #     sage_maker = Aws::SageMaker::Client.new
-#     resp = sage_maker.add_tags(params)
+#     resp = sage_maker.add_association(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +49,6 @@ require_relative 'aws-sdk-sagemaker/customizations'
 # @!group service
 module Aws::SageMaker
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.73.0'
 
 end

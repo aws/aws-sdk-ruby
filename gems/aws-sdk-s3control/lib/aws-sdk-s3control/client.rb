@@ -28,9 +28,9 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
-require 'aws-sdk-s3control/plugins/s3_control_dns.rb'
-require 'aws-sdk-s3control/plugins/s3_signer.rb'
+require 'aws-sdk-s3control/plugins/arn.rb'
 require 'aws-sdk-s3control/plugins/dualstack.rb'
+require 'aws-sdk-s3control/plugins/s3_control_signer.rb'
 require 'aws-sdk-s3control/plugins/s3_host_id.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:s3control)
@@ -77,9 +77,9 @@ module Aws::S3Control
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::Protocols::RestXml)
-    add_plugin(Aws::S3Control::Plugins::S3ControlDns)
-    add_plugin(Aws::S3Control::Plugins::S3Signer)
+    add_plugin(Aws::S3Control::Plugins::ARN)
     add_plugin(Aws::S3Control::Plugins::Dualstack)
+    add_plugin(Aws::S3Control::Plugins::S3ControlSigner)
     add_plugin(Aws::S3Control::Plugins::S3HostId)
 
     # @overload initialize(options)
@@ -268,6 +268,12 @@ module Aws::S3Control
     #       in the future.
     #
     #
+    #   @option options [Boolean] :s3_use_arn_region (true)
+    #     For S3 and S3 Outposts ARNs passed into the `:bucket` or `:name`
+    #     parameter, this option will use the region in the ARN, allowing
+    #     for cross-region requests to be made. Set to `false` to use the
+    #     client's region instead.
+    #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
@@ -338,6 +344,53 @@ module Aws::S3Control
     # @!group API Operations
 
     # Creates an access point and associates it with the specified bucket.
+    # For more information, see [Managing Data Access with Amazon S3 Access
+    # Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    # **Using this action with Amazon S3 on Outposts**
+    #
+    # This action:
+    #
+    # * Requires a virtual private cloud (VPC) configuration as S3 on
+    #   Outposts only supports VPC style access points.
+    #
+    # * Does not support ACL on S3 on Outposts buckets.
+    #
+    # * Does not support Public Access on S3 on Outposts buckets.
+    #
+    # * Does not support object lock for S3 on Outposts buckets.
+    #
+    # For more information, see [Using Amazon S3 on
+    # Outposts](AmazonS3/latest/dev/S3onOutposts.html) in the <i>Amazon
+    # Simple Storage Service Developer Guide </i>.
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][2] section.
+    #
+    #
+    #
+    # The following actions are related to `CreateAccessPoint`\:
+    #
+    # * [GetAccessPoint][3]
+    #
+    # * [DeleteAccessPoint][4]
+    #
+    # * [ListAccessPoints][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
     #
     # @option params [required, String] :account_id
     #   The AWS account ID for the owner of the bucket for which you want to
@@ -350,22 +403,43 @@ module Aws::S3Control
     #   The name of the bucket that you want to associate this access point
     #   with.
     #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
+    #
     # @option params [Types::VpcConfiguration] :vpc_configuration
     #   If you include this field, Amazon S3 restricts access to this access
     #   point to requests from the specified virtual private cloud (VPC).
     #
+    #   <note markdown="1"> This is required for creating an access point for Amazon S3 on
+    #   Outposts buckets.
+    #
+    #    </note>
+    #
     # @option params [Types::PublicAccessBlockConfiguration] :public_access_block_configuration
     #   The `PublicAccessBlock` configuration that you want to apply to this
-    #   Amazon S3 bucket. You can enable the configuration options in any
+    #   Amazon S3 account. You can enable the configuration options in any
     #   combination. For more information about when Amazon S3 considers a
     #   bucket or object public, see [The Meaning of "Public"][1] in the
-    #   Amazon Simple Storage Service Developer Guide.
+    #   *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   This is not supported for Amazon S3 on Outposts.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::CreateAccessPointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAccessPointResult#access_point_arn #access_point_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -384,6 +458,10 @@ module Aws::S3Control
     #     },
     #   })
     #
+    # @example Response structure
+    #
+    #   resp.access_point_arn #=> String
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPoint AWS API Documentation
     #
     # @overload create_access_point(params = {})
@@ -393,27 +471,195 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # You can use Amazon S3 Batch Operations to perform large-scale Batch
-    # Operations on Amazon S3 objects. Amazon S3 Batch Operations can
-    # execute a single operation or action on lists of Amazon S3 objects
-    # that you specify. For more information, see [Amazon S3 Batch
-    # Operations][1] in the Amazon Simple Storage Service Developer Guide.
+    # <note markdown="1"> This API operation creates an Amazon S3 on Outposts bucket. To create
+    # an S3 bucket, see [Create Bucket][1] in the *Amazon Simple Storage
+    # Service API*.
+    #
+    #  </note>
+    #
+    # Creates a new Outposts bucket. By creating the bucket, you become the
+    # bucket owner. To create an Outposts bucket, you must have S3 on
+    # Outposts. For more information, see [Using Amazon S3 on Outposts][2]
+    # in *Amazon Simple Storage Service Developer Guide*.
+    #
+    # Not every string is an acceptable bucket name. For information on
+    # bucket naming restrictions, see [Working with Amazon S3 Buckets][3].
+    #
+    # S3 on Outposts buckets do not support
+    #
+    # * ACLs. Instead, configure access point policies to manage access to
+    #   buckets.
+    #
+    # * Public access.
+    #
+    # * Object Lock
+    #
+    # * Bucket Location constraint
+    #
+    # For an example of the request syntax for Amazon S3 on Outposts that
+    # uses the S3 on Outposts endpoint hostname prefix and
+    # `x-amz-outpost-id` in your API request, see the [Examples][4] section.
+    #
+    # The following actions are related to `CreateBucket` for Amazon S3 on
+    # Outposts:
+    #
+    # * [PutObject][5]
+    #
+    # * [GetBucket][6]
+    #
+    # * [DeleteBucket][7]
+    #
+    # * [CreateAccessPoint][8]
+    #
+    # * [PutAccessPointPolicy][9]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html#API_control_CreateBucket_Examples
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html
+    #
+    # @option params [String] :acl
+    #   The canned ACL to apply to the bucket.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
+    #
+    # @option params [required, String] :bucket
+    #   The name of the bucket.
+    #
+    # @option params [Types::CreateBucketConfiguration] :create_bucket_configuration
+    #   The configuration information for the bucket.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
+    #
+    # @option params [String] :grant_full_control
+    #   Allows grantee the read, write, read ACP, and write ACP permissions on
+    #   the bucket.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
+    #
+    # @option params [String] :grant_read
+    #   Allows grantee to list the objects in the bucket.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
+    #
+    # @option params [String] :grant_read_acp
+    #   Allows grantee to read the bucket ACL.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
+    #
+    # @option params [String] :grant_write
+    #   Allows grantee to create, overwrite, and delete any object in the
+    #   bucket.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
+    #
+    # @option params [String] :grant_write_acp
+    #   Allows grantee to write the ACL for the applicable bucket.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
+    #
+    # @option params [Boolean] :object_lock_enabled_for_bucket
+    #   Specifies whether you want S3 Object Lock to be enabled for the new
+    #   bucket.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
+    #
+    # @option params [String] :outpost_id
+    #   The ID of the Outposts where the bucket is being created.
+    #
+    #   <note markdown="1"> This is required by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
+    #
+    # @return [Types::CreateBucketResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBucketResult#location #location} => String
+    #   * {Types::CreateBucketResult#bucket_arn #bucket_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_bucket({
+    #     acl: "private", # accepts private, public-read, public-read-write, authenticated-read
+    #     bucket: "BucketName", # required
+    #     create_bucket_configuration: {
+    #       location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
+    #     },
+    #     grant_full_control: "GrantFullControl",
+    #     grant_read: "GrantRead",
+    #     grant_read_acp: "GrantReadACP",
+    #     grant_write: "GrantWrite",
+    #     grant_write_acp: "GrantWriteACP",
+    #     object_lock_enabled_for_bucket: false,
+    #     outpost_id: "NonEmptyMaxLength64String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.location #=> String
+    #   resp.bucket_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateBucket AWS API Documentation
+    #
+    # @overload create_bucket(params = {})
+    # @param [Hash] params ({})
+    def create_bucket(params = {}, options = {})
+      req = build_request(:create_bucket, params)
+      req.send_request(options)
+    end
+
+    # S3 Batch Operations performs large-scale Batch Operations on Amazon S3
+    # objects. Batch Operations can run a single operation or action on
+    # lists of Amazon S3 objects that you specify. For more information, see
+    # [S3 Batch Operations][1] in the *Amazon Simple Storage Service
+    # Developer Guide*.
+    #
+    # This operation creates an S3 Batch Operations job.
+    #
+    #
     #
     # Related actions include:
     #
-    # * DescribeJob
+    # * [DescribeJob][2]
     #
-    # * ListJobs
+    # * [ListJobs][3]
     #
-    # * UpdateJobPriority
+    # * [UpdateJobPriority][4]
     #
-    # * UpdateJobStatus
+    # * [UpdateJobStatus][5]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
     # @option params [required, String] :account_id
+    #   The AWS account ID that creates the job.
     #
     # @option params [Boolean] :confirmation_required
     #   Indicates whether confirmation is required before Amazon S3 runs the
@@ -423,8 +669,8 @@ module Aws::S3Control
     # @option params [required, Types::JobOperation] :operation
     #   The operation that you want this job to perform on each object listed
     #   in the manifest. For more information about the available operations,
-    #   see [Available Operations][1] in the *Amazon Simple Storage Service
-    #   Developer Guide*.
+    #   see [Operations][1] in the *Amazon Simple Storage Service Developer
+    #   Guide*.
     #
     #
     #
@@ -454,12 +700,12 @@ module Aws::S3Control
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) for the AWS Identity and Access
-    #   Management (IAM) role that Batch Operations will use to execute this
+    #   Management (IAM) role that Batch Operations will use to run this
     #   job's operation on each object in the manifest.
     #
     # @option params [Array<Types::S3Tag>] :tags
-    #   A set of tags to associate with the Amazon S3 Batch Operations job.
-    #   This is an optional parameter.
+    #   A set of tags to associate with the S3 Batch Operations job. This is
+    #   an optional parameter.
     #
     # @return [Types::CreateJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -611,11 +857,46 @@ module Aws::S3Control
 
     # Deletes the specified access point.
     #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][1] section.
+    #
+    # The following actions are related to `DeleteAccessPoint`\:
+    #
+    # * [CreateAccessPoint][2]
+    #
+    # * [GetAccessPoint][3]
+    #
+    # * [ListAccessPoints][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html#API_control_DeleteAccessPoint_Examples
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
+    #
     # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified access point.
     #
     # @option params [required, String] :name
     #   The name of the access point you want to delete.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the access point accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
+    #   For example, to access the access point `reports-ap` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
+    #   The value must be URL encoded.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -637,11 +918,45 @@ module Aws::S3Control
 
     # Deletes the access point policy for the specified access point.
     #
+    #
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][1] section.
+    #
+    # The following actions are related to `DeleteAccessPointPolicy`\:
+    #
+    # * [PutAccessPointPolicy][2]
+    #
+    # * [GetAccessPointPolicy][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html#API_control_DeleteAccessPointPolicy_Examples
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicy.html
+    #
     # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified access point.
     #
     # @option params [required, String] :name
     #   The name of the access point whose policy you want to delete.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the access point accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
+    #   For example, to access the access point `reports-ap` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
+    #   The value must be URL encoded.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -661,32 +976,347 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Removes the entire tag set from the specified Amazon S3 Batch
-    # Operations job. To use this operation, you must have permission to
-    # perform the `s3:DeleteJobTagging` action. For more information, see
-    # [Using Job Tags][1] in the Amazon Simple Storage Service Developer
-    # Guide.
+    # <note markdown="1"> This API operation deletes an Amazon S3 on Outposts bucket. To delete
+    # an S3 bucket, see [DeleteBucket][1] in the *Amazon Simple Storage
+    # Service API*.
+    #
+    #  </note>
+    #
+    # Deletes the Amazon S3 on Outposts bucket. All objects (including all
+    # object versions and delete markers) in the bucket must be deleted
+    # before the bucket itself can be deleted. For more information, see
+    # [Using Amazon S3 on Outposts][2] in *Amazon Simple Storage Service
+    # Developer Guide*.
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][3] section.
+    #
+    # **Related Resources**
+    #
+    # * [CreateBucket][4]
+    #
+    # * [GetBucket][5]
+    #
+    # * [DeleteObject][6]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html#API_control_DeleteBucket_Examples
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html
+    #
+    # @option params [required, String] :account_id
+    #   The account ID that owns the Outposts bucket.
+    #
+    # @option params [required, String] :bucket
+    #   Specifies the bucket being deleted.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bucket({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucket AWS API Documentation
+    #
+    # @overload delete_bucket(params = {})
+    # @param [Hash] params ({})
+    def delete_bucket(params = {}, options = {})
+      req = build_request(:delete_bucket, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This API action deletes an Amazon S3 on Outposts bucket's lifecycle
+    # configuration. To delete an S3 bucket's lifecycle configuration, see
+    # [DeleteBucketLifecycle][1] in the *Amazon Simple Storage Service API*.
+    #
+    #  </note>
+    #
+    # Deletes the lifecycle configuration from the specified Outposts
+    # bucket. Amazon S3 on Outposts removes all the lifecycle configuration
+    # rules in the lifecycle subresource associated with the bucket. Your
+    # objects never expire, and Amazon S3 on Outposts no longer
+    # automatically deletes any objects on the basis of rules contained in
+    # the deleted lifecycle configuration. For more information, see [Using
+    # Amazon S3 on Outposts][2] in *Amazon Simple Storage Service Developer
+    # Guide*.
+    #
+    # To use this operation, you must have permission to perform the
+    # `s3-outposts:DeleteLifecycleConfiguration` action. By default, the
+    # bucket owner has this permission and the Outposts bucket owner can
+    # grant this permission to others.
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][3] section.
+    #
+    # For more information about object expiration, see [ Elements to
+    # Describe Lifecycle Actions][4].
+    #
+    # Related actions include:
+    #
+    # * [PutBucketLifecycleConfiguration][5]
+    #
+    # * [GetBucketLifecycleConfiguration][6]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html#API_control_DeleteBucketLifecycleConfiguration_Examples
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the lifecycle configuration to delete.
+    #
+    # @option params [required, String] :bucket
+    #   Specifies the bucket.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bucket_lifecycle_configuration({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucketLifecycleConfiguration AWS API Documentation
+    #
+    # @overload delete_bucket_lifecycle_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_bucket_lifecycle_configuration(params = {}, options = {})
+      req = build_request(:delete_bucket_lifecycle_configuration, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This API operation deletes an Amazon S3 on Outposts bucket policy. To
+    # delete an S3 bucket policy, see [DeleteBucketPolicy][1] in the *Amazon
+    # Simple Storage Service API*.
+    #
+    #  </note>
+    #
+    # This implementation of the DELETE operation uses the policy
+    # subresource to delete the policy of a specified Amazon S3 on Outposts
+    # bucket. If you are using an identity other than the root user of the
+    # AWS account that owns the bucket, the calling identity must have the
+    # `s3-outposts:DeleteBucketPolicy` permissions on the specified Outposts
+    # bucket and belong to the bucket owner's account to use this
+    # operation. For more information, see [Using Amazon S3 on Outposts][2]
+    # in *Amazon Simple Storage Service Developer Guide*.
+    #
+    # If you don't have `DeleteBucketPolicy` permissions, Amazon S3 returns
+    # a `403 Access Denied` error. If you have the correct permissions, but
+    # you're not using an identity that belongs to the bucket owner's
+    # account, Amazon S3 returns a `405 Method Not Allowed` error.
+    #
+    # As a security precaution, the root user of the AWS account that owns a
+    # bucket can always use this operation, even if the policy explicitly
+    # denies the root user the ability to perform this action.
+    #
+    # For more information about bucket policies, see [Using Bucket Policies
+    # and User Policies](
+    # https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html).
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][3] section.
+    #
+    # The following actions are related to `DeleteBucketPolicy`\:
+    #
+    # * [GetBucketPolicy][4]
+    #
+    # * [PutBucketPolicy][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the Outposts bucket.
+    #
+    # @option params [required, String] :bucket
+    #   Specifies the bucket.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bucket_policy({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucketPolicy AWS API Documentation
+    #
+    # @overload delete_bucket_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_bucket_policy(params = {}, options = {})
+      req = build_request(:delete_bucket_policy, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This operation deletes an Amazon S3 on Outposts bucket's tags. To
+    # delete an S3 bucket tags, see [DeleteBucketTagging][1] in the *Amazon
+    # Simple Storage Service API*.
+    #
+    #  </note>
+    #
+    # Deletes the tags from the Outposts bucket. For more information, see
+    # [Using Amazon S3 on Outposts][2] in *Amazon Simple Storage Service
+    # Developer Guide*.
+    #
+    # To use this operation, you must have permission to perform the
+    # `PutBucketTagging` action. By default, the bucket owner has this
+    # permission and can grant this permission to others.
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][3] section.
+    #
+    # The following actions are related to `DeleteBucketTagging`\:
+    #
+    # * [GetBucketTagging][4]
+    #
+    # * [PutBucketTagging][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID of the Outposts bucket tag set to be removed.
+    #
+    # @option params [required, String] :bucket
+    #   The bucket ARN that has the tag set to be removed.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bucket_tagging({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteBucketTagging AWS API Documentation
+    #
+    # @overload delete_bucket_tagging(params = {})
+    # @param [Hash] params ({})
+    def delete_bucket_tagging(params = {}, options = {})
+      req = build_request(:delete_bucket_tagging, params)
+      req.send_request(options)
+    end
+
+    # Removes the entire tag set from the specified S3 Batch Operations job.
+    # To use this operation, you must have permission to perform the
+    # `s3:DeleteJobTagging` action. For more information, see [Controlling
+    # access and labeling jobs using tags][1] in the *Amazon Simple Storage
+    # Service Developer Guide*.
     #
     #
     #
     # Related actions include:
     #
-    # * CreateJob
+    # * [CreateJob][2]
     #
-    # * GetJobTagging
+    # * [GetJobTagging][3]
     #
-    # * PutJobTagging
+    # * [PutJobTagging][4]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetJobTagging.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutJobTagging.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID associated with the Amazon S3 Batch Operations job.
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #
     # @option params [required, String] :job_id
-    #   The ID for the Amazon S3 Batch Operations job whose tags you want to
-    #   delete.
+    #   The ID for the S3 Batch Operations job whose tags you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -706,12 +1336,24 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Removes the `PublicAccessBlock` configuration for an Amazon Web
-    # Services account.
+    # Removes the `PublicAccessBlock` configuration for an AWS account. For
+    # more information, see [ Using Amazon S3 block public access][1].
+    #
+    # Related actions include:
+    #
+    # * [GetPublicAccessBlock][2]
+    #
+    # * [PutPublicAccessBlock][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html
     #
     # @option params [required, String] :account_id
-    #   The account ID for the Amazon Web Services account whose
-    #   `PublicAccessBlock` configuration you want to remove.
+    #   The account ID for the AWS account whose `PublicAccessBlock`
+    #   configuration you want to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -730,25 +1372,109 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Deletes the Amazon S3 Storage Lens configuration. For more information
+    # about S3 Storage Lens, see [Working with Amazon S3 Storage Lens][1] in
+    # the *Amazon Simple Storage Service Developer Guide*.
+    #
+    # <note markdown="1"> To use this action, you must have permission to perform the
+    # `s3:DeleteStorageLensConfiguration` action. For more information, see
+    # [Setting permissions to use Amazon S3 Storage Lens][2] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    #
+    # @option params [required, String] :config_id
+    #   The ID of the S3 Storage Lens configuration.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the requester.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_storage_lens_configuration({
+    #     config_id: "ConfigId", # required
+    #     account_id: "AccountId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteStorageLensConfiguration AWS API Documentation
+    #
+    # @overload delete_storage_lens_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_storage_lens_configuration(params = {}, options = {})
+      req = build_request(:delete_storage_lens_configuration, params)
+      req.send_request(options)
+    end
+
+    # Deletes the Amazon S3 Storage Lens configuration tags. For more
+    # information about S3 Storage Lens, see [Working with Amazon S3 Storage
+    # Lens][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    # <note markdown="1"> To use this action, you must have permission to perform the
+    # `s3:DeleteStorageLensConfigurationTagging` action. For more
+    # information, see [Setting permissions to use Amazon S3 Storage
+    # Lens][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    #
+    # @option params [required, String] :config_id
+    #   The ID of the S3 Storage Lens configuration.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the requester.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_storage_lens_configuration_tagging({
+    #     config_id: "ConfigId", # required
+    #     account_id: "AccountId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteStorageLensConfigurationTagging AWS API Documentation
+    #
+    # @overload delete_storage_lens_configuration_tagging(params = {})
+    # @param [Hash] params ({})
+    def delete_storage_lens_configuration_tagging(params = {}, options = {})
+      req = build_request(:delete_storage_lens_configuration_tagging, params)
+      req.send_request(options)
+    end
+
     # Retrieves the configuration parameters and status for a Batch
-    # Operations job. For more information, see [Amazon S3 Batch
-    # Operations][1] in the Amazon Simple Storage Service Developer Guide.
+    # Operations job. For more information, see [S3 Batch Operations][1] in
+    # the *Amazon Simple Storage Service Developer Guide*.
     #
     #
     #
     # Related actions include:
     #
-    # * CreateJob
+    # * [CreateJob][2]
     #
-    # * ListJobs
+    # * [ListJobs][3]
     #
-    # * UpdateJobPriority
+    # * [UpdateJobPriority][4]
     #
-    # * UpdateJobStatus
+    # * [UpdateJobStatus][5]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
     # @option params [required, String] :account_id
     #
@@ -860,12 +1586,49 @@ module Aws::S3Control
 
     # Returns configuration information about the specified access point.
     #
+    #
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][1] section.
+    #
+    # The following actions are related to `GetAccessPoint`\:
+    #
+    # * [CreateAccessPoint][2]
+    #
+    # * [DeleteAccessPoint][3]
+    #
+    # * [ListAccessPoints][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html#API_control_GetAccessPoint_Examples
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
+    #
     # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified access point.
     #
     # @option params [required, String] :name
     #   The name of the access point whose configuration information you want
     #   to retrieve.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the access point accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
+    #   For example, to access the access point `reports-ap` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
+    #   The value must be URL encoded.
     #
     # @return [Types::GetAccessPointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -907,11 +1670,34 @@ module Aws::S3Control
     # Returns the access point policy associated with the specified access
     # point.
     #
+    # The following actions are related to `GetAccessPointPolicy`\:
+    #
+    # * [PutAccessPointPolicy][1]
+    #
+    # * [DeleteAccessPointPolicy][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html
+    #
     # @option params [required, String] :account_id
     #   The account ID for the account that owns the specified access point.
     #
     # @option params [required, String] :name
     #   The name of the access point whose policy you want to retrieve.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the access point accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
+    #   For example, to access the access point `reports-ap` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
+    #   The value must be URL encoded.
     #
     # @return [Types::GetAccessPointPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -976,30 +1762,421 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Returns the tags on an Amazon S3 Batch Operations job. To use this
-    # operation, you must have permission to perform the `s3:GetJobTagging`
-    # action. For more information, see [Using Job Tags][1] in the *Amazon
+    # Gets an Amazon S3 on Outposts bucket. For more information, see [
+    # Using Amazon S3 on Outposts][1] in the *Amazon Simple Storage Service
+    # Developer Guide*.
+    #
+    # If you are using an identity other than the root user of the AWS
+    # account that owns the bucket, the calling identity must have the
+    # `s3-outposts:GetBucket` permissions on the specified bucket and belong
+    # to the bucket owner's account in order to use this operation. Only
+    # users from Outposts bucket owner account with the right permissions
+    # can perform actions on an Outposts bucket.
+    #
+    # If you don't have `s3-outposts:GetBucket` permissions or you're not
+    # using an identity that belongs to the bucket owner's account, Amazon
+    # S3 returns a `403 Access Denied` error.
+    #
+    # The following actions are related to `GetBucket` for Amazon S3 on
+    # Outposts:
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][2] section.
+    #
+    # * [PutObject][3]
+    #
+    # * [CreateBucket][4]
+    #
+    # * [DeleteBucket][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html#API_control_GetBucket_Examples
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID of the Outposts bucket.
+    #
+    # @option params [required, String] :bucket
+    #   Specifies the bucket.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
+    #
+    # @return [Types::GetBucketResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBucketResult#bucket #bucket} => String
+    #   * {Types::GetBucketResult#public_access_block_enabled #public_access_block_enabled} => Boolean
+    #   * {Types::GetBucketResult#creation_date #creation_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bucket({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bucket #=> String
+    #   resp.public_access_block_enabled #=> Boolean
+    #   resp.creation_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucket AWS API Documentation
+    #
+    # @overload get_bucket(params = {})
+    # @param [Hash] params ({})
+    def get_bucket(params = {}, options = {})
+      req = build_request(:get_bucket, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This operation gets an Amazon S3 on Outposts bucket's lifecycle
+    # configuration. To get an S3 bucket's lifecycle configuration, see
+    # [GetBucketLifecycleConfiguration][1] in the *Amazon Simple Storage
+    # Service API*.
+    #
+    #  </note>
+    #
+    # Returns the lifecycle configuration information set on the Outposts
+    # bucket. For more information, see [Using Amazon S3 on Outposts][2] and
+    # for information about lifecycle configuration, see [ Object Lifecycle
+    # Management][3] in *Amazon Simple Storage Service Developer Guide*.
+    #
+    # To use this operation, you must have permission to perform the
+    # `s3-outposts:GetLifecycleConfiguration` action. The Outposts bucket
+    # owner has this permission, by default. The bucket owner can grant this
+    # permission to others. For more information about permissions, see
+    # [Permissions Related to Bucket Subresource Operations][4] and
+    # [Managing Access Permissions to Your Amazon S3 Resources][5].
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][6] section.
+    #
+    # `GetBucketLifecycleConfiguration` has the following special error:
+    #
+    # * Error code: `NoSuchLifecycleConfiguration`
+    #
+    #   * Description: The lifecycle configuration does not exist.
+    #
+    #   * HTTP Status Code: 404 Not Found
+    #
+    #   * SOAP Fault Code Prefix: Client
+    #
+    # The following actions are related to
+    # `GetBucketLifecycleConfiguration`\:
+    #
+    # * [PutBucketLifecycleConfiguration][7]
+    #
+    # * [DeleteBucketLifecycleConfiguration][8]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html#API_control_GetBucketLifecycleConfiguration_Examples
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID of the Outposts bucket.
+    #
+    # @option params [required, String] :bucket
+    #   The Amazon Resource Name (ARN) of the bucket.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
+    #
+    # @return [Types::GetBucketLifecycleConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBucketLifecycleConfigurationResult#rules #rules} => Array&lt;Types::LifecycleRule&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bucket_lifecycle_configuration({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rules #=> Array
+    #   resp.rules[0].expiration.date #=> Time
+    #   resp.rules[0].expiration.days #=> Integer
+    #   resp.rules[0].expiration.expired_object_delete_marker #=> Boolean
+    #   resp.rules[0].id #=> String
+    #   resp.rules[0].filter.prefix #=> String
+    #   resp.rules[0].filter.tag.key #=> String
+    #   resp.rules[0].filter.tag.value #=> String
+    #   resp.rules[0].filter.and.prefix #=> String
+    #   resp.rules[0].filter.and.tags #=> Array
+    #   resp.rules[0].filter.and.tags[0].key #=> String
+    #   resp.rules[0].filter.and.tags[0].value #=> String
+    #   resp.rules[0].status #=> String, one of "Enabled", "Disabled"
+    #   resp.rules[0].transitions #=> Array
+    #   resp.rules[0].transitions[0].date #=> Time
+    #   resp.rules[0].transitions[0].days #=> Integer
+    #   resp.rules[0].transitions[0].storage_class #=> String, one of "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE"
+    #   resp.rules[0].noncurrent_version_transitions #=> Array
+    #   resp.rules[0].noncurrent_version_transitions[0].noncurrent_days #=> Integer
+    #   resp.rules[0].noncurrent_version_transitions[0].storage_class #=> String, one of "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE"
+    #   resp.rules[0].noncurrent_version_expiration.noncurrent_days #=> Integer
+    #   resp.rules[0].abort_incomplete_multipart_upload.days_after_initiation #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketLifecycleConfiguration AWS API Documentation
+    #
+    # @overload get_bucket_lifecycle_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_bucket_lifecycle_configuration(params = {}, options = {})
+      req = build_request(:get_bucket_lifecycle_configuration, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This action gets a bucket policy for an Amazon S3 on Outposts bucket.
+    # To get a policy for an S3 bucket, see [GetBucketPolicy][1] in the
+    # *Amazon Simple Storage Service API*.
+    #
+    #  </note>
+    #
+    # Returns the policy of a specified Outposts bucket. For more
+    # information, see [Using Amazon S3 on Outposts][2] in the *Amazon
     # Simple Storage Service Developer Guide*.
+    #
+    # If you are using an identity other than the root user of the AWS
+    # account that owns the bucket, the calling identity must have the
+    # `GetBucketPolicy` permissions on the specified bucket and belong to
+    # the bucket owner's account in order to use this operation.
+    #
+    # Only users from Outposts bucket owner account with the right
+    # permissions can perform actions on an Outposts bucket. If you don't
+    # have `s3-outposts:GetBucketPolicy` permissions or you're not using an
+    # identity that belongs to the bucket owner's account, Amazon S3
+    # returns a `403 Access Denied` error.
+    #
+    # As a security precaution, the root user of the AWS account that owns a
+    # bucket can always use this operation, even if the policy explicitly
+    # denies the root user the ability to perform this action.
+    #
+    # For more information about bucket policies, see [Using Bucket Policies
+    # and User Policies][3].
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][4] section.
+    #
+    # The following actions are related to `GetBucketPolicy`\:
+    #
+    # * [GetObject][5]
+    #
+    # * [PutBucketPolicy][6]
+    #
+    # * [DeleteBucketPolicy][7]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html#API_control_GetBucketPolicy_Examples
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID of the Outposts bucket.
+    #
+    # @option params [required, String] :bucket
+    #   Specifies the bucket.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
+    #
+    # @return [Types::GetBucketPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBucketPolicyResult#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bucket_policy({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketPolicy AWS API Documentation
+    #
+    # @overload get_bucket_policy(params = {})
+    # @param [Hash] params ({})
+    def get_bucket_policy(params = {}, options = {})
+      req = build_request(:get_bucket_policy, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This operation gets an Amazon S3 on Outposts bucket's tags. To get an
+    # S3 bucket tags, see [GetBucketTagging][1] in the *Amazon Simple
+    # Storage Service API*.
+    #
+    #  </note>
+    #
+    # Returns the tag set associated with the Outposts bucket. For more
+    # information, see [Using Amazon S3 on Outposts][2] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    # To use this operation, you must have permission to perform the
+    # `GetBucketTagging` action. By default, the bucket owner has this
+    # permission and can grant this permission to others.
+    #
+    # `GetBucketTagging` has the following special error:
+    #
+    # * Error code: `NoSuchTagSetError`
+    #
+    #   * Description: There is no tag set associated with the bucket.
+    #
+    #   ^
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][3] section.
+    #
+    # The following actions are related to `GetBucketTagging`\:
+    #
+    # * [PutBucketTagging][4]
+    #
+    # * [DeleteBucketTagging][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html#API_control_GetBucketTagging_Examples
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID of the Outposts bucket.
+    #
+    # @option params [required, String] :bucket
+    #   Specifies the bucket.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
+    #
+    # @return [Types::GetBucketTaggingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBucketTaggingResult#tag_set #tag_set} => Array&lt;Types::S3Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bucket_tagging({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tag_set #=> Array
+    #   resp.tag_set[0].key #=> String
+    #   resp.tag_set[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetBucketTagging AWS API Documentation
+    #
+    # @overload get_bucket_tagging(params = {})
+    # @param [Hash] params ({})
+    def get_bucket_tagging(params = {}, options = {})
+      req = build_request(:get_bucket_tagging, params)
+      req.send_request(options)
+    end
+
+    # Returns the tags on an S3 Batch Operations job. To use this operation,
+    # you must have permission to perform the `s3:GetJobTagging` action. For
+    # more information, see [Controlling access and labeling jobs using
+    # tags][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
     #
     #
     # Related actions include:
     #
-    # * CreateJob
+    # * [CreateJob][2]
     #
-    # * PutJobTagging
+    # * [PutJobTagging][3]
     #
-    # * DeleteJobTagging
+    # * [DeleteJobTagging][4]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutJobTagging.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteJobTagging.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID associated with the Amazon S3 Batch Operations job.
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #
     # @option params [required, String] :job_id
-    #   The ID for the Amazon S3 Batch Operations job whose tags you want to
+    #   The ID for the S3 Batch Operations job whose tags you want to
     #   retrieve.
     #
     # @return [Types::GetJobTaggingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1028,12 +2205,24 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Retrieves the `PublicAccessBlock` configuration for an Amazon Web
-    # Services account.
+    # Retrieves the `PublicAccessBlock` configuration for an AWS account.
+    # For more information, see [ Using Amazon S3 block public access][1].
+    #
+    # Related actions include:
+    #
+    # * [DeletePublicAccessBlock][2]
+    #
+    # * [PutPublicAccessBlock][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html
     #
     # @option params [required, String] :account_id
-    #   The account ID for the Amazon Web Services account whose
-    #   `PublicAccessBlock` configuration you want to retrieve.
+    #   The account ID for the AWS account whose `PublicAccessBlock`
+    #   configuration you want to retrieve.
     #
     # @return [Types::GetPublicAccessBlockOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1061,12 +2250,154 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Gets the Amazon S3 Storage Lens configuration. For more information,
+    # see [Working with Amazon S3 Storage Lens][1] in the *Amazon Simple
+    # Storage Service Developer Guide*.
+    #
+    # <note markdown="1"> To use this action, you must have permission to perform the
+    # `s3:GetStorageLensConfiguration` action. For more information, see
+    # [Setting permissions to use Amazon S3 Storage Lens][2] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    #
+    # @option params [required, String] :config_id
+    #   The ID of the Amazon S3 Storage Lens configuration.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the requester.
+    #
+    # @return [Types::GetStorageLensConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetStorageLensConfigurationResult#storage_lens_configuration #storage_lens_configuration} => Types::StorageLensConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_storage_lens_configuration({
+    #     config_id: "ConfigId", # required
+    #     account_id: "AccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_lens_configuration.id #=> String
+    #   resp.storage_lens_configuration.account_level.activity_metrics.is_enabled #=> Boolean
+    #   resp.storage_lens_configuration.account_level.bucket_level.activity_metrics.is_enabled #=> Boolean
+    #   resp.storage_lens_configuration.account_level.bucket_level.prefix_level.storage_metrics.is_enabled #=> Boolean
+    #   resp.storage_lens_configuration.account_level.bucket_level.prefix_level.storage_metrics.selection_criteria.delimiter #=> String
+    #   resp.storage_lens_configuration.account_level.bucket_level.prefix_level.storage_metrics.selection_criteria.max_depth #=> Integer
+    #   resp.storage_lens_configuration.account_level.bucket_level.prefix_level.storage_metrics.selection_criteria.min_storage_bytes_percentage #=> Float
+    #   resp.storage_lens_configuration.include.buckets #=> Array
+    #   resp.storage_lens_configuration.include.buckets[0] #=> String
+    #   resp.storage_lens_configuration.include.regions #=> Array
+    #   resp.storage_lens_configuration.include.regions[0] #=> String
+    #   resp.storage_lens_configuration.exclude.buckets #=> Array
+    #   resp.storage_lens_configuration.exclude.buckets[0] #=> String
+    #   resp.storage_lens_configuration.exclude.regions #=> Array
+    #   resp.storage_lens_configuration.exclude.regions[0] #=> String
+    #   resp.storage_lens_configuration.data_export.s3_bucket_destination.format #=> String, one of "CSV", "Parquet"
+    #   resp.storage_lens_configuration.data_export.s3_bucket_destination.output_schema_version #=> String, one of "V_1"
+    #   resp.storage_lens_configuration.data_export.s3_bucket_destination.account_id #=> String
+    #   resp.storage_lens_configuration.data_export.s3_bucket_destination.arn #=> String
+    #   resp.storage_lens_configuration.data_export.s3_bucket_destination.prefix #=> String
+    #   resp.storage_lens_configuration.data_export.s3_bucket_destination.encryption.ssekms.key_id #=> String
+    #   resp.storage_lens_configuration.is_enabled #=> Boolean
+    #   resp.storage_lens_configuration.aws_org.arn #=> String
+    #   resp.storage_lens_configuration.storage_lens_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetStorageLensConfiguration AWS API Documentation
+    #
+    # @overload get_storage_lens_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_storage_lens_configuration(params = {}, options = {})
+      req = build_request(:get_storage_lens_configuration, params)
+      req.send_request(options)
+    end
+
+    # Gets the tags of Amazon S3 Storage Lens configuration. For more
+    # information about S3 Storage Lens, see [Working with Amazon S3 Storage
+    # Lens][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    # <note markdown="1"> To use this action, you must have permission to perform the
+    # `s3:GetStorageLensConfigurationTagging` action. For more information,
+    # see [Setting permissions to use Amazon S3 Storage Lens][2] in the
+    # *Amazon Simple Storage Service Developer Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    #
+    # @option params [required, String] :config_id
+    #   The ID of the Amazon S3 Storage Lens configuration.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the requester.
+    #
+    # @return [Types::GetStorageLensConfigurationTaggingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetStorageLensConfigurationTaggingResult#tags #tags} => Array&lt;Types::StorageLensTag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_storage_lens_configuration_tagging({
+    #     config_id: "ConfigId", # required
+    #     account_id: "AccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetStorageLensConfigurationTagging AWS API Documentation
+    #
+    # @overload get_storage_lens_configuration_tagging(params = {})
+    # @param [Hash] params ({})
+    def get_storage_lens_configuration_tagging(params = {}, options = {})
+      req = build_request(:get_storage_lens_configuration_tagging, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the access points currently associated with the
     # specified bucket. You can retrieve up to 1000 access points per call.
     # If the specified bucket has more than 1,000 access points (or the
     # number specified in `maxResults`, whichever is less), the response
     # will include a continuation token that you can use to list the
     # additional access points.
+    #
+    #
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][1] section.
+    #
+    # The following actions are related to `ListAccessPoints`\:
+    #
+    # * [CreateAccessPoint][2]
+    #
+    # * [DeleteAccessPoint][3]
+    #
+    # * [GetAccessPoint][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html#API_control_GetAccessPoint_Examples
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html
     #
     # @option params [required, String] :account_id
     #   The AWS account ID for owner of the bucket whose access points you
@@ -1075,6 +2406,18 @@ module Aws::S3Control
     # @option params [String] :bucket
     #   The name of the bucket whose associated access points you want to
     #   list.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
     #
     # @option params [String] :next_token
     #   A continuation token. If a previous call to `ListAccessPoints`
@@ -1111,6 +2454,7 @@ module Aws::S3Control
     #   resp.access_point_list[0].network_origin #=> String, one of "Internet", "VPC"
     #   resp.access_point_list[0].vpc_configuration.vpc_id #=> String
     #   resp.access_point_list[0].bucket #=> String
+    #   resp.access_point_list[0].access_point_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPoints AWS API Documentation
@@ -1122,26 +2466,30 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Lists current Amazon S3 Batch Operations jobs and jobs that have ended
-    # within the last 30 days for the AWS account making the request. For
-    # more information, see [Amazon S3 Batch Operations][1] in the *Amazon
-    # Simple Storage Service Developer Guide*.
+    # Lists current S3 Batch Operations jobs and jobs that have ended within
+    # the last 30 days for the AWS account making the request. For more
+    # information, see [S3 Batch Operations][1] in the *Amazon Simple
+    # Storage Service Developer Guide*.
     #
     # Related actions include:
     #
     #
     #
-    # * CreateJob
+    # * [CreateJob][2]
     #
-    # * DescribeJob
+    # * [DescribeJob][3]
     #
-    # * UpdateJobPriority
+    # * [UpdateJobPriority][4]
     #
-    # * UpdateJobStatus
+    # * [UpdateJobStatus][5]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
     # @option params [required, String] :account_id
     #
@@ -1200,10 +2548,147 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Returns a list of all Outposts buckets in an Outpost that are owned by
+    # the authenticated sender of the request. For more information, see
+    # [Using Amazon S3 on Outposts][1] in the *Amazon Simple Storage Service
+    # Developer Guide*.
+    #
+    # For an example of the request syntax for Amazon S3 on Outposts that
+    # uses the S3 on Outposts endpoint hostname prefix and
+    # `x-amz-outpost-id` in your request, see the [Examples][2] section.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID of the Outposts bucket.
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :outpost_id
+    #   The ID of the AWS Outposts.
+    #
+    #   <note markdown="1"> This is required by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
+    #
+    # @return [Types::ListRegionalBucketsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRegionalBucketsResult#regional_bucket_list #regional_bucket_list} => Array&lt;Types::RegionalBucket&gt;
+    #   * {Types::ListRegionalBucketsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_regional_buckets({
+    #     account_id: "AccountId", # required
+    #     next_token: "NonEmptyMaxLength1024String",
+    #     max_results: 1,
+    #     outpost_id: "NonEmptyMaxLength64String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.regional_bucket_list #=> Array
+    #   resp.regional_bucket_list[0].bucket #=> String
+    #   resp.regional_bucket_list[0].bucket_arn #=> String
+    #   resp.regional_bucket_list[0].public_access_block_enabled #=> Boolean
+    #   resp.regional_bucket_list[0].creation_date #=> Time
+    #   resp.regional_bucket_list[0].outpost_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListRegionalBuckets AWS API Documentation
+    #
+    # @overload list_regional_buckets(params = {})
+    # @param [Hash] params ({})
+    def list_regional_buckets(params = {}, options = {})
+      req = build_request(:list_regional_buckets, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of Amazon S3 Storage Lens configurations. For more
+    # information about S3 Storage Lens, see [Working with Amazon S3 Storage
+    # Lens][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    # <note markdown="1"> To use this action, you must have permission to perform the
+    # `s3:ListStorageLensConfigurations` action. For more information, see
+    # [Setting permissions to use Amazon S3 Storage Lens][2] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the requester.
+    #
+    # @option params [String] :next_token
+    #   A pagination token to request the next page of results.
+    #
+    # @return [Types::ListStorageLensConfigurationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStorageLensConfigurationsResult#next_token #next_token} => String
+    #   * {Types::ListStorageLensConfigurationsResult#storage_lens_configuration_list #storage_lens_configuration_list} => Array&lt;Types::ListStorageLensConfigurationEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_storage_lens_configurations({
+    #     account_id: "AccountId", # required
+    #     next_token: "ContinuationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.storage_lens_configuration_list #=> Array
+    #   resp.storage_lens_configuration_list[0].id #=> String
+    #   resp.storage_lens_configuration_list[0].storage_lens_arn #=> String
+    #   resp.storage_lens_configuration_list[0].home_region #=> String
+    #   resp.storage_lens_configuration_list[0].is_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListStorageLensConfigurations AWS API Documentation
+    #
+    # @overload list_storage_lens_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_storage_lens_configurations(params = {}, options = {})
+      req = build_request(:list_storage_lens_configurations, params)
+      req.send_request(options)
+    end
+
     # Associates an access policy with the specified access point. Each
     # access point can have only one policy, so a request made to this API
     # replaces any existing policy associated with the specified access
     # point.
+    #
+    #
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][1] section.
+    #
+    # The following actions are related to `PutAccessPointPolicy`\:
+    #
+    # * [GetAccessPointPolicy][2]
+    #
+    # * [DeleteAccessPointPolicy][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html#API_control_PutAccessPointPolicy_Examples
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicy.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html
     #
     # @option params [required, String] :account_id
     #   The AWS account ID for owner of the bucket associated with the
@@ -1213,10 +2698,22 @@ module Aws::S3Control
     #   The name of the access point that you want to associate with the
     #   specified policy.
     #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the access point accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/accesspoint/<my-accesspoint-name>`.
+    #   For example, to access the access point `reports-ap` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap`.
+    #   The value must be URL encoded.
+    #
     # @option params [required, String] :policy
     #   The policy that you want to apply to the specified access point. For
-    #   more information about access point policies, see [Managing Data
-    #   Access with Amazon S3 Access Points][1] in the *Amazon Simple Storage
+    #   more information about access point policies, see [Managing data
+    #   access with Amazon S3 Access Points][1] in the *Amazon Simple Storage
     #   Service Developer Guide*.
     #
     #
@@ -1242,28 +2739,378 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Set the supplied tag-set on an Amazon S3 Batch Operations job.
+    # <note markdown="1"> This action puts a lifecycle configuration to an Amazon S3 on Outposts
+    # bucket. To put a lifecycle configuration to an S3 bucket, see
+    # [PutBucketLifecycleConfiguration][1] in the *Amazon Simple Storage
+    # Service API*.
     #
-    # A tag is a key-value pair. You can associate Amazon S3 Batch
-    # Operations tags with any job by sending a PUT request against the
-    # tagging subresource that is associated with the job. To modify the
-    # existing tag set, you can either replace the existing tag set
-    # entirely, or make changes within the existing tag set by retrieving
-    # the existing tag set using GetJobTagging, modify that tag set, and use
-    # this API action to replace the tag set with the one you have
-    # modified.. For more information, see [Using Job Tags][1] in the Amazon
-    # Simple Storage Service Developer Guide.
+    #  </note>
+    #
+    # Creates a new lifecycle configuration for the Outposts bucket or
+    # replaces an existing lifecycle configuration. Outposts buckets only
+    # support lifecycle configurations that delete/expire objects after a
+    # certain period of time and abort incomplete multipart uploads. For
+    # more information, see [Managing Lifecycle Permissions for Amazon S3 on
+    # Outposts][2].
+    #
+    #
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][3] section.
+    #
+    # The following actions are related to
+    # `PutBucketLifecycleConfiguration`\:
+    #
+    # * [GetBucketLifecycleConfiguration][4]
+    #
+    # * [DeleteBucketLifecycleConfiguration][5]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html#API_control_PutBucketLifecycleConfiguration_Examples
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID of the Outposts bucket.
+    #
+    # @option params [required, String] :bucket
+    #   The name of the bucket for which to set the configuration.
+    #
+    # @option params [Types::LifecycleConfiguration] :lifecycle_configuration
+    #   Container for lifecycle rules. You can add as many as 1,000 rules.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_bucket_lifecycle_configuration({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #     lifecycle_configuration: {
+    #       rules: [
+    #         {
+    #           expiration: {
+    #             date: Time.now,
+    #             days: 1,
+    #             expired_object_delete_marker: false,
+    #           },
+    #           id: "ID",
+    #           filter: {
+    #             prefix: "Prefix",
+    #             tag: {
+    #               key: "TagKeyString", # required
+    #               value: "TagValueString", # required
+    #             },
+    #             and: {
+    #               prefix: "Prefix",
+    #               tags: [
+    #                 {
+    #                   key: "TagKeyString", # required
+    #                   value: "TagValueString", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           status: "Enabled", # required, accepts Enabled, Disabled
+    #           transitions: [
+    #             {
+    #               date: Time.now,
+    #               days: 1,
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #             },
+    #           ],
+    #           noncurrent_version_transitions: [
+    #             {
+    #               noncurrent_days: 1,
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #             },
+    #           ],
+    #           noncurrent_version_expiration: {
+    #             noncurrent_days: 1,
+    #           },
+    #           abort_incomplete_multipart_upload: {
+    #             days_after_initiation: 1,
+    #           },
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutBucketLifecycleConfiguration AWS API Documentation
+    #
+    # @overload put_bucket_lifecycle_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_bucket_lifecycle_configuration(params = {}, options = {})
+      req = build_request(:put_bucket_lifecycle_configuration, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This action puts a bucket policy to an Amazon S3 on Outposts bucket.
+    # To put a policy on an S3 bucket, see [PutBucketPolicy][1] in the
+    # *Amazon Simple Storage Service API*.
+    #
+    #  </note>
+    #
+    # Applies an Amazon S3 bucket policy to an Outposts bucket. For more
+    # information, see [Using Amazon S3 on Outposts][2] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    # If you are using an identity other than the root user of the AWS
+    # account that owns the Outposts bucket, the calling identity must have
+    # the `PutBucketPolicy` permissions on the specified Outposts bucket and
+    # belong to the bucket owner's account in order to use this operation.
+    #
+    # If you don't have `PutBucketPolicy` permissions, Amazon S3 returns a
+    # `403 Access Denied` error. If you have the correct permissions, but
+    # you're not using an identity that belongs to the bucket owner's
+    # account, Amazon S3 returns a `405 Method Not Allowed` error.
+    #
+    # As a security precaution, the root user of the AWS account that owns a
+    # bucket can always use this operation, even if the policy explicitly
+    # denies the root user the ability to perform this action.
+    #
+    # For more information about bucket policies, see [Using Bucket Policies
+    # and User Policies][3].
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][4] section.
+    #
+    # The following actions are related to `PutBucketPolicy`\:
+    #
+    # * [GetBucketPolicy][5]
+    #
+    # * [DeleteBucketPolicy][6]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketPolicy.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html#API_control_PutBucketPolicy_Examples
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID of the Outposts bucket.
+    #
+    # @option params [required, String] :bucket
+    #   Specifies the bucket.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
+    #
+    # @option params [Boolean] :confirm_remove_self_bucket_access
+    #   Set this parameter to true to confirm that you want to remove your
+    #   permissions to change this bucket policy in the future.
+    #
+    #   <note markdown="1"> This is not supported by Amazon S3 on Outposts buckets.
+    #
+    #    </note>
+    #
+    # @option params [required, String] :policy
+    #   The bucket policy as a JSON document.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_bucket_policy({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #     confirm_remove_self_bucket_access: false,
+    #     policy: "Policy", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutBucketPolicy AWS API Documentation
+    #
+    # @overload put_bucket_policy(params = {})
+    # @param [Hash] params ({})
+    def put_bucket_policy(params = {}, options = {})
+      req = build_request(:put_bucket_policy, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This action puts tags on an Amazon S3 on Outposts bucket. To put tags
+    # on an S3 bucket, see [PutBucketTagging][1] in the *Amazon Simple
+    # Storage Service API*.
+    #
+    #  </note>
+    #
+    # Sets the tags for an Outposts bucket. For more information, see [Using
+    # Amazon S3 on Outposts][2] in the *Amazon Simple Storage Service
+    # Developer Guide*.
+    #
+    # Use tags to organize your AWS bill to reflect your own cost structure.
+    # To do this, sign up to get your AWS account bill with tag key values
+    # included. Then, to see the cost of combined resources, organize your
+    # billing information according to resources with the same tag key
+    # values. For example, you can tag several resources with a specific
+    # application name, and then organize your billing information to see
+    # the total cost of that application across several services. For more
+    # information, see [Cost Allocation and Tagging][3].
+    #
+    # <note markdown="1"> Within a bucket, if you add a tag that has the same key as an existing
+    # tag, the new value overwrites the old value. For more information, see
+    # [Using Cost Allocation in Amazon S3 Bucket Tags][4].
+    #
+    #  </note>
+    #
+    # To use this operation, you must have permissions to perform the
+    # `s3-outposts:PutBucketTagging` action. The Outposts bucket owner has
+    # this permission by default and can grant this permission to others.
+    # For more information about permissions, see [ Permissions Related to
+    # Bucket Subresource Operations][5] and [Managing Access Permissions to
+    # Your Amazon S3 Resources][6].
+    #
+    # `PutBucketTagging` has the following special errors:
+    #
+    # * Error code: `InvalidTagError`
+    #
+    #   * Description: The tag provided was not a valid tag. This error can
+    #     occur if the tag did not pass input validation. For information
+    #     about tag restrictions, see [ User-Defined Tag Restrictions][7]
+    #     and [ AWS-Generated Cost Allocation Tag Restrictions][8].
+    #
+    #   ^
+    #
+    # * Error code: `MalformedXMLError`
+    #
+    #   * Description: The XML provided does not match the schema.
+    #
+    #   ^
+    #
+    # * Error code: `OperationAbortedError `
+    #
+    #   * Description: A conflicting conditional operation is currently in
+    #     progress against this resource. Try again.
+    #
+    #   ^
+    #
+    # * Error code: `InternalError`
+    #
+    #   * Description: The service was unable to apply the provided tag to
+    #     the bucket.
+    #
+    #   ^
+    #
+    # All Amazon S3 on Outposts REST API requests for this action require an
+    # additional parameter of `x-amz-outpost-id` to be passed with the
+    # request and an S3 on Outposts endpoint hostname prefix instead of
+    # `s3-control`. For an example of the request syntax for Amazon S3 on
+    # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
+    # `x-amz-outpost-id` derived using the access point ARN, see the
+    # [Examples][9] section.
+    #
+    # The following actions are related to `PutBucketTagging`\:
+    #
+    # * [GetBucketTagging][10]
+    #
+    # * [DeleteBucketTagging][11]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    # [3]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/CostAllocTagging.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [7]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
+    # [8]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html#API_control_PutBucketTagging_Examples
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html
+    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID of the Outposts bucket.
+    #
+    # @option params [required, String] :bucket
+    #   The Amazon Resource Name (ARN) of the bucket.
+    #
+    #   For using this parameter with Amazon S3 on Outposts with the REST API,
+    #   you must specify the name and the x-amz-outpost-id as well.
+    #
+    #   For using this parameter with S3 on Outposts with the AWS SDK and CLI,
+    #   you must specify the ARN of the bucket accessed in the format
+    #   `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/bucket/<my-bucket-name>`.
+    #   For example, to access the bucket `reports` through outpost
+    #   `my-outpost` owned by account `123456789012` in Region `us-west-2`,
+    #   use the URL encoding of
+    #   `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports`.
+    #   The value must be URL encoded.
+    #
+    # @option params [required, Types::Tagging] :tagging
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_bucket_tagging({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName", # required
+    #     tagging: { # required
+    #       tag_set: [ # required
+    #         {
+    #           key: "TagKeyString", # required
+    #           value: "TagValueString", # required
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutBucketTagging AWS API Documentation
+    #
+    # @overload put_bucket_tagging(params = {})
+    # @param [Hash] params ({})
+    def put_bucket_tagging(params = {}, options = {})
+      req = build_request(:put_bucket_tagging, params)
+      req.send_request(options)
+    end
+
+    # Sets the supplied tag-set on an S3 Batch Operations job.
+    #
+    # A tag is a key-value pair. You can associate S3 Batch Operations tags
+    # with any job by sending a PUT request against the tagging subresource
+    # that is associated with the job. To modify the existing tag set, you
+    # can either replace the existing tag set entirely, or make changes
+    # within the existing tag set by retrieving the existing tag set using
+    # [GetJobTagging][1], modify that tag set, and use this action to
+    # replace the tag set with the one you modified. For more information,
+    # see [Controlling access and labeling jobs using tags][2] in the
+    # *Amazon Simple Storage Service Developer Guide*.
     #
     #
     #
     # <note markdown="1"> * If you send this request with an empty tag set, Amazon S3 deletes
     #   the existing tag set on the Batch Operations job. If you use this
-    #   method, you will be charged for a Tier 1 Request (PUT). For more
-    #   information, see [Amazon S3 pricing][2].
+    #   method, you are charged for a Tier 1 Request (PUT). For more
+    #   information, see [Amazon S3 pricing][3].
     #
-    # * For deleting existing tags for your batch operations job,
-    #   DeleteJobTagging request is preferred because it achieves the same
-    #   result without incurring charges.
+    # * For deleting existing tags for your Batch Operations job, a
+    #   [DeleteJobTagging][4] request is preferred because it achieves the
+    #   same result without incurring charges.
     #
     # * A few things to consider about using tags:
     #
@@ -1278,7 +3125,8 @@ module Aws::S3Control
     #   * The key and values are case sensitive.
     #
     #   * For tagging-related restrictions related to characters and
-    #     encodings, see [User-Defined Tag Restrictions][3].
+    #     encodings, see [User-Defined Tag Restrictions][5] in the *AWS
+    #     Billing and Cost Management User Guide*.
     #
     #  </note>
     #
@@ -1289,27 +3137,29 @@ module Aws::S3Control
     #
     # Related actions include:
     #
-    # * CreateJob
+    # * [CreatJob][6]
     #
-    # * GetJobTagging
+    # * [GetJobTagging][1]
     #
-    # * DeleteJobTagging
+    # * [DeleteJobTagging][4]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags
-    # [2]: http://aws.amazon.com/s3/pricing/
-    # [3]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetJobTagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags
+    # [3]: http://aws.amazon.com/s3/pricing/
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteJobTagging.html
+    # [5]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html
     #
     # @option params [required, String] :account_id
-    #   The AWS account ID associated with the Amazon S3 Batch Operations job.
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #
     # @option params [required, String] :job_id
-    #   The ID for the Amazon S3 Batch Operations job whose tags you want to
-    #   replace.
+    #   The ID for the S3 Batch Operations job whose tags you want to replace.
     #
     # @option params [required, Array<Types::S3Tag>] :tags
-    #   The set of tags to associate with the Amazon S3 Batch Operations job.
+    #   The set of tags to associate with the S3 Batch Operations job.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1335,16 +3185,29 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Creates or modifies the `PublicAccessBlock` configuration for an
-    # Amazon Web Services account.
+    # Creates or modifies the `PublicAccessBlock` configuration for an AWS
+    # account. For more information, see [ Using Amazon S3 block public
+    # access][1].
+    #
+    # Related actions include:
+    #
+    # * [GetPublicAccessBlock][2]
+    #
+    # * [DeletePublicAccessBlock][3]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html
     #
     # @option params [required, Types::PublicAccessBlockConfiguration] :public_access_block_configuration
     #   The `PublicAccessBlock` configuration that you want to apply to the
-    #   specified Amazon Web Services account.
+    #   specified AWS account.
     #
     # @option params [required, String] :account_id
-    #   The account ID for the Amazon Web Services account whose
-    #   `PublicAccessBlock` configuration you want to set.
+    #   The account ID for the AWS account whose `PublicAccessBlock`
+    #   configuration you want to set.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1369,25 +3232,191 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Updates an existing Amazon S3 Batch Operations job's priority. For
-    # more information, see [Amazon S3 Batch Operations][1] in the Amazon
-    # Simple Storage Service Developer Guide.
+    # Puts an Amazon S3 Storage Lens configuration. For more information
+    # about S3 Storage Lens, see [Working with Amazon S3 Storage Lens][1] in
+    # the *Amazon Simple Storage Service Developer Guide*.
+    #
+    # <note markdown="1"> To use this action, you must have permission to perform the
+    # `s3:PutStorageLensConfiguration` action. For more information, see
+    # [Setting permissions to use Amazon S3 Storage Lens][2] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    #
+    # @option params [required, String] :config_id
+    #   The ID of the S3 Storage Lens configuration.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the requester.
+    #
+    # @option params [required, Types::StorageLensConfiguration] :storage_lens_configuration
+    #   The S3 Storage Lens configuration.
+    #
+    # @option params [Array<Types::StorageLensTag>] :tags
+    #   The tag set of the S3 Storage Lens configuration.
+    #
+    #   <note markdown="1"> You can set up to a maximum of 50 tags.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_storage_lens_configuration({
+    #     config_id: "ConfigId", # required
+    #     account_id: "AccountId", # required
+    #     storage_lens_configuration: { # required
+    #       id: "ConfigId", # required
+    #       account_level: { # required
+    #         activity_metrics: {
+    #           is_enabled: false,
+    #         },
+    #         bucket_level: { # required
+    #           activity_metrics: {
+    #             is_enabled: false,
+    #           },
+    #           prefix_level: {
+    #             storage_metrics: { # required
+    #               is_enabled: false,
+    #               selection_criteria: {
+    #                 delimiter: "StorageLensPrefixLevelDelimiter",
+    #                 max_depth: 1,
+    #                 min_storage_bytes_percentage: 1.0,
+    #               },
+    #             },
+    #           },
+    #         },
+    #       },
+    #       include: {
+    #         buckets: ["S3BucketArnString"],
+    #         regions: ["S3AWSRegion"],
+    #       },
+    #       exclude: {
+    #         buckets: ["S3BucketArnString"],
+    #         regions: ["S3AWSRegion"],
+    #       },
+    #       data_export: {
+    #         s3_bucket_destination: { # required
+    #           format: "CSV", # required, accepts CSV, Parquet
+    #           output_schema_version: "V_1", # required, accepts V_1
+    #           account_id: "AccountId", # required
+    #           arn: "S3BucketArnString", # required
+    #           prefix: "Prefix",
+    #           encryption: {
+    #             sses3: {
+    #             },
+    #             ssekms: {
+    #               key_id: "SSEKMSKeyId", # required
+    #             },
+    #           },
+    #         },
+    #       },
+    #       is_enabled: false, # required
+    #       aws_org: {
+    #         arn: "AwsOrgArn", # required
+    #       },
+    #       storage_lens_arn: "StorageLensArn",
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutStorageLensConfiguration AWS API Documentation
+    #
+    # @overload put_storage_lens_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_storage_lens_configuration(params = {}, options = {})
+      req = build_request(:put_storage_lens_configuration, params)
+      req.send_request(options)
+    end
+
+    # Put or replace tags on an existing Amazon S3 Storage Lens
+    # configuration. For more information about S3 Storage Lens, see
+    # [Working with Amazon S3 Storage Lens][1] in the *Amazon Simple Storage
+    # Service Developer Guide*.
+    #
+    # <note markdown="1"> To use this action, you must have permission to perform the
+    # `s3:PutStorageLensConfigurationTagging` action. For more information,
+    # see [Setting permissions to use Amazon S3 Storage Lens][2] in the
+    # *Amazon Simple Storage Service Developer Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    #
+    # @option params [required, String] :config_id
+    #   The ID of the S3 Storage Lens configuration.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the requester.
+    #
+    # @option params [required, Array<Types::StorageLensTag>] :tags
+    #   The tag set of the S3 Storage Lens configuration.
+    #
+    #   <note markdown="1"> You can set up to a maximum of 50 tags.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_storage_lens_configuration_tagging({
+    #     config_id: "ConfigId", # required
+    #     account_id: "AccountId", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutStorageLensConfigurationTagging AWS API Documentation
+    #
+    # @overload put_storage_lens_configuration_tagging(params = {})
+    # @param [Hash] params ({})
+    def put_storage_lens_configuration_tagging(params = {}, options = {})
+      req = build_request(:put_storage_lens_configuration_tagging, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing S3 Batch Operations job's priority. For more
+    # information, see [S3 Batch Operations][1] in the *Amazon Simple
+    # Storage Service Developer Guide*.
     #
     #
     #
     # Related actions include:
     #
-    # * CreateJob
+    # * [CreateJob][2]
     #
-    # * ListJobs
+    # * [ListJobs][3]
     #
-    # * DescribeJob
+    # * [DescribeJob][4]
     #
-    # * UpdateJobStatus
+    # * [UpdateJobStatus][5]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
     # @option params [required, String] :account_id
     #
@@ -1426,24 +3455,28 @@ module Aws::S3Control
 
     # Updates the status for the specified job. Use this operation to
     # confirm that you want to run a job or to cancel an existing job. For
-    # more information, see [Amazon S3 Batch Operations][1] in the Amazon
-    # Simple Storage Service Developer Guide.
+    # more information, see [S3 Batch Operations][1] in the *Amazon Simple
+    # Storage Service Developer Guide*.
     #
     #
     #
     # Related actions include:
     #
-    # * CreateJob
+    # * [CreateJob][2]
     #
-    # * ListJobs
+    # * [ListJobs][3]
     #
-    # * DescribeJob
+    # * [DescribeJob][4]
     #
-    # * UpdateJobStatus
+    # * [UpdateJobStatus][5]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
     # @option params [required, String] :account_id
     #
@@ -1500,7 +3533,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

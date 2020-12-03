@@ -202,6 +202,9 @@ module Aws::S3
     # @param [Hash] options ({})
     # @option options [String] :content_md5
     #   The MD5 hash of the request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     # @option options [Boolean] :confirm_remove_self_bucket_access
     #   Set this parameter to true to confirm that you want to remove your
     #   permissions to change this bucket policy in the future.

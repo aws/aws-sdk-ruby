@@ -25,6 +25,9 @@ module Aws::States
     ActivityTimedOutEventDetails = Shapes::StructureShape.new(name: 'ActivityTimedOutEventDetails')
     ActivityWorkerLimitExceeded = Shapes::StructureShape.new(name: 'ActivityWorkerLimitExceeded')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    BilledDuration = Shapes::IntegerShape.new(name: 'BilledDuration')
+    BilledMemoryUsed = Shapes::IntegerShape.new(name: 'BilledMemoryUsed')
+    BillingDetails = Shapes::StructureShape.new(name: 'BillingDetails')
     CloudWatchEventsExecutionDataDetails = Shapes::StructureShape.new(name: 'CloudWatchEventsExecutionDataDetails')
     CloudWatchLogsLogGroup = Shapes::StructureShape.new(name: 'CloudWatchLogsLogGroup')
     ConnectorParameters = Shapes::StringShape.new(name: 'ConnectorParameters')
@@ -117,6 +120,8 @@ module Aws::States
     SensitiveError = Shapes::StringShape.new(name: 'SensitiveError')
     StartExecutionInput = Shapes::StructureShape.new(name: 'StartExecutionInput')
     StartExecutionOutput = Shapes::StructureShape.new(name: 'StartExecutionOutput')
+    StartSyncExecutionInput = Shapes::StructureShape.new(name: 'StartSyncExecutionInput')
+    StartSyncExecutionOutput = Shapes::StructureShape.new(name: 'StartSyncExecutionOutput')
     StateEnteredEventDetails = Shapes::StructureShape.new(name: 'StateEnteredEventDetails')
     StateExitedEventDetails = Shapes::StructureShape.new(name: 'StateExitedEventDetails')
     StateMachineAlreadyExists = Shapes::StructureShape.new(name: 'StateMachineAlreadyExists')
@@ -130,6 +135,7 @@ module Aws::States
     StateMachineTypeNotSupported = Shapes::StructureShape.new(name: 'StateMachineTypeNotSupported')
     StopExecutionInput = Shapes::StructureShape.new(name: 'StopExecutionInput')
     StopExecutionOutput = Shapes::StructureShape.new(name: 'StopExecutionOutput')
+    SyncExecutionStatus = Shapes::StringShape.new(name: 'SyncExecutionStatus')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -158,7 +164,7 @@ module Aws::States
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateStateMachineInput = Shapes::StructureShape.new(name: 'UpdateStateMachineInput')
     UpdateStateMachineOutput = Shapes::StructureShape.new(name: 'UpdateStateMachineOutput')
-    included = Shapes::BooleanShape.new(name: 'included')
+    includedDetails = Shapes::BooleanShape.new(name: 'includedDetails')
     truncated = Shapes::BooleanShape.new(name: 'truncated')
 
     ActivityDoesNotExist.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -203,7 +209,11 @@ module Aws::States
     ActivityWorkerLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ActivityWorkerLimitExceeded.struct_class = Types::ActivityWorkerLimitExceeded
 
-    CloudWatchEventsExecutionDataDetails.add_member(:included, Shapes::ShapeRef.new(shape: included, location_name: "included"))
+    BillingDetails.add_member(:billed_memory_used_in_mb, Shapes::ShapeRef.new(shape: BilledMemoryUsed, location_name: "billedMemoryUsedInMB"))
+    BillingDetails.add_member(:billed_duration_in_milliseconds, Shapes::ShapeRef.new(shape: BilledDuration, location_name: "billedDurationInMilliseconds"))
+    BillingDetails.struct_class = Types::BillingDetails
+
+    CloudWatchEventsExecutionDataDetails.add_member(:included, Shapes::ShapeRef.new(shape: includedDetails, location_name: "included"))
     CloudWatchEventsExecutionDataDetails.struct_class = Types::CloudWatchEventsExecutionDataDetails
 
     CloudWatchLogsLogGroup.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "logGroupArn"))
@@ -525,6 +535,28 @@ module Aws::States
     StartExecutionOutput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
     StartExecutionOutput.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDate"))
     StartExecutionOutput.struct_class = Types::StartExecutionOutput
+
+    StartSyncExecutionInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
+    StartSyncExecutionInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    StartSyncExecutionInput.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
+    StartSyncExecutionInput.add_member(:trace_header, Shapes::ShapeRef.new(shape: TraceHeader, location_name: "traceHeader"))
+    StartSyncExecutionInput.struct_class = Types::StartSyncExecutionInput
+
+    StartSyncExecutionOutput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
+    StartSyncExecutionOutput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "stateMachineArn"))
+    StartSyncExecutionOutput.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    StartSyncExecutionOutput.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDate"))
+    StartSyncExecutionOutput.add_member(:stop_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "stopDate"))
+    StartSyncExecutionOutput.add_member(:status, Shapes::ShapeRef.new(shape: SyncExecutionStatus, required: true, location_name: "status"))
+    StartSyncExecutionOutput.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    StartSyncExecutionOutput.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
+    StartSyncExecutionOutput.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
+    StartSyncExecutionOutput.add_member(:input_details, Shapes::ShapeRef.new(shape: CloudWatchEventsExecutionDataDetails, location_name: "inputDetails"))
+    StartSyncExecutionOutput.add_member(:output, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "output"))
+    StartSyncExecutionOutput.add_member(:output_details, Shapes::ShapeRef.new(shape: CloudWatchEventsExecutionDataDetails, location_name: "outputDetails"))
+    StartSyncExecutionOutput.add_member(:trace_header, Shapes::ShapeRef.new(shape: TraceHeader, location_name: "traceHeader"))
+    StartSyncExecutionOutput.add_member(:billing_details, Shapes::ShapeRef.new(shape: BillingDetails, location_name: "billingDetails"))
+    StartSyncExecutionOutput.struct_class = Types::StartSyncExecutionOutput
 
     StateEnteredEventDetails.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     StateEnteredEventDetails.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
@@ -897,6 +929,23 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: InvalidName)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
+      end)
+
+      api.add_operation(:start_sync_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartSyncExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.endpoint_pattern = {
+          "hostPrefix" => "sync-",
+        }
+        o.input = Shapes::ShapeRef.new(shape: StartSyncExecutionInput)
+        o.output = Shapes::ShapeRef.new(shape: StartSyncExecutionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidExecutionInput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidName)
+        o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
+        o.errors << Shapes::ShapeRef.new(shape: StateMachineTypeNotSupported)
       end)
 
       api.add_operation(:stop_execution, Seahorse::Model::Operation.new.tap do |o|

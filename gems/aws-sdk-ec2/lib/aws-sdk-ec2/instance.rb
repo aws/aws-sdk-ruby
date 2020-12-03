@@ -340,6 +340,12 @@ module Aws::EC2
       data[:metadata_options]
     end
 
+    # Indicates whether the instance is enabled for AWS Nitro Enclaves.
+    # @return [Types::EnclaveOptions]
+    def enclave_options
+      data[:enclave_options]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -645,8 +651,9 @@ module Aws::EC2
     #           iops: 1,
     #           snapshot_id: "String",
     #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #           kms_key_id: "String",
+    #           throughput: 1,
     #           encrypted: false,
     #         },
     #         no_device: "String",
@@ -774,7 +781,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instance.describe_attribute({
-    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
+    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -855,7 +862,7 @@ module Aws::EC2
     #     source_dest_check: {
     #       value: false,
     #     },
-    #     attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
+    #     attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
     #     block_device_mappings: [
     #       {
     #         device_name: "String",
@@ -1103,7 +1110,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   instance.reset_attribute({
-    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
+    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -1423,10 +1430,8 @@ module Aws::EC2
     #
     #   * `volume-id` - The volume ID.
     #
-    #   * `volume-type` - The Amazon EBS volume type. This can be `gp2` for
-    #     General Purpose SSD, `io1` or `io2` for Provisioned IOPS SSD, `st1`
-    #     for Throughput Optimized HDD, `sc1` for Cold HDD, or `standard` for
-    #     Magnetic volumes.
+    #   * `volume-type` - The Amazon EBS volume type (`gp2` \| `gp3` \| `io1`
+    #     \| `io2` \| `st1` \| `sc1`\| `standard`)
     # @option options [Array<String>] :volume_ids
     #   The volume IDs.
     # @option options [Boolean] :dry_run

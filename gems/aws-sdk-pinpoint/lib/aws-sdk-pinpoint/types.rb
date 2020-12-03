@@ -1265,7 +1265,7 @@ module Aws::Pinpoint
     #             conditions: [
     #               {
     #                 event_condition: {
-    #                   dimensions: { # required
+    #                   dimensions: {
     #                     attributes: {
     #                       "__string" => {
     #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -1382,7 +1382,7 @@ module Aws::Pinpoint
     #             {
     #               condition: {
     #                 event_condition: {
-    #                   dimensions: { # required
+    #                   dimensions: {
     #                     attributes: {
     #                       "__string" => {
     #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -1949,14 +1949,13 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] limits
-    #   The default sending limits for campaigns and journeys in the
-    #   application.
+    #   The default sending limits for campaigns in the application.
     #   @return [Types::CampaignLimits]
     #
     # @!attribute [rw] quiet_time
-    #   The default quiet time for campaigns and journeys in the
-    #   application. Quiet time is a specific time range when messages
-    #   aren't sent to endpoints, if all the following conditions are met:
+    #   The default quiet time for campaigns in the application. Quiet time
+    #   is a specific time range when messages aren't sent to endpoints, if
+    #   all the following conditions are met:
     #
     #   * The EndpointDemographic.Timezone property of the endpoint is set
     #     to a valid value.
@@ -2584,7 +2583,7 @@ module Aws::Pinpoint
 
     # For a campaign, specifies limits on the messages that the campaign can
     # send. For an application, specifies the default limits for messages
-    # that campaigns and journeys in the application can send.
+    # that campaigns in the application can send.
     #
     # @note When making an API call, you may pass CampaignLimits
     #   data as a hash:
@@ -2613,8 +2612,8 @@ module Aws::Pinpoint
     # @!attribute [rw] messages_per_second
     #   The maximum number of messages that a campaign can send each second.
     #   For an application, this value specifies the default limit for the
-    #   number of messages that campaigns and journeys can send each second.
-    #   The minimum value is 50. The maximum value is 20,000.
+    #   number of messages that campaigns can send each second. The minimum
+    #   value is 50. The maximum value is 20,000.
     #   @return [Integer]
     #
     # @!attribute [rw] total
@@ -2946,7 +2945,7 @@ module Aws::Pinpoint
     #         conditions: [
     #           {
     #             event_condition: {
-    #               dimensions: { # required
+    #               dimensions: {
     #                 attributes: {
     #                   "__string" => {
     #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -3063,6 +3062,19 @@ module Aws::Pinpoint
     # type of activity sends participants down one of two paths in a
     # journey, based on conditions that you specify.
     #
+    # <note markdown="1">To create yes/no split activities that send participants down
+    # different paths based on push notification events (such as Open or
+    # Received events), your mobile app has to specify the User ID and
+    # Endpoint ID values. For more information, see [Integrating Amazon
+    # Pinpoint with your application][1] in the *Amazon Pinpoint Developer
+    # Guide*.
+    #
+    # </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/integrate.html
+    #
     # @note When making an API call, you may pass ConditionalSplitActivity
     #   data as a hash:
     #
@@ -3071,7 +3083,7 @@ module Aws::Pinpoint
     #           conditions: [
     #             {
     #               event_condition: {
-    #                 dimensions: { # required
+    #                 dimensions: {
     #                   attributes: {
     #                     "__string" => {
     #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -3199,6 +3211,23 @@ module Aws::Pinpoint
       :evaluation_wait_time,
       :false_activity,
       :true_activity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about an API request or response.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3786,7 +3815,7 @@ module Aws::Pinpoint
     #                   conditions: [
     #                     {
     #                       event_condition: {
-    #                         dimensions: { # required
+    #                         dimensions: {
     #                           attributes: {
     #                             "__string" => {
     #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -3903,7 +3932,7 @@ module Aws::Pinpoint
     #                   {
     #                     condition: {
     #                       event_condition: {
-    #                         dimensions: { # required
+    #                         dimensions: {
     #                           attributes: {
     #                             "__string" => {
     #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -4057,6 +4086,30 @@ module Aws::Pinpoint
     #           start_activity: "__string",
     #           start_condition: {
     #             description: "__string",
+    #             event_start_condition: {
+    #               event_filter: {
+    #                 dimensions: { # required
+    #                   attributes: {
+    #                     "__string" => {
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                   },
+    #                   event_type: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                   metrics: {
+    #                     "__string" => {
+    #                       comparison_operator: "__string", # required
+    #                       value: 1.0, # required
+    #                     },
+    #                   },
+    #                 },
+    #                 filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
+    #               },
+    #               segment_id: "__string",
+    #             },
     #             segment_start_condition: {
     #               segment_id: "__string", # required
     #             },
@@ -4746,11 +4799,11 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] delivery_uri
-    #   The destination to send the custom message to. This value can be one
-    #   of the following:
+    #   The destination to send the campaign or treatment to. This value can
+    #   be one of the following:
     #
     #   * The name or Amazon Resource Name (ARN) of an AWS Lambda function
-    #     to invoke to handle delivery of the custom message.
+    #     to invoke to handle delivery of the campaign or treatment.
     #
     #   * The URL for a web application or service that supports HTTPS and
     #     can receive the message. The URL has to be a full URL, including
@@ -7323,7 +7376,7 @@ module Aws::Pinpoint
     #   data as a hash:
     #
     #       {
-    #         dimensions: { # required
+    #         dimensions: {
     #           attributes: {
     #             "__string" => {
     #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -7422,6 +7475,58 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Specifies the settings for an event that causes a campaign to be sent
+    # or a journey activity to be performed.
+    #
+    # @note When making an API call, you may pass EventFilter
+    #   data as a hash:
+    #
+    #       {
+    #         dimensions: { # required
+    #           attributes: {
+    #             "__string" => {
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"], # required
+    #             },
+    #           },
+    #           event_type: {
+    #             dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             values: ["__string"], # required
+    #           },
+    #           metrics: {
+    #             "__string" => {
+    #               comparison_operator: "__string", # required
+    #               value: 1.0, # required
+    #             },
+    #           },
+    #         },
+    #         filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
+    #       }
+    #
+    # @!attribute [rw] dimensions
+    #   The dimensions for the event filter to use for the campaign or the
+    #   journey activity.
+    #   @return [Types::EventDimensions]
+    #
+    # @!attribute [rw] filter_type
+    #   The type of event that causes the campaign to be sent or the journey
+    #   activity to be performed. Valid values are: SYSTEM, sends the
+    #   campaign or performs the activity when a system event occurs; and,
+    #   ENDPOINT, sends the campaign or performs the activity when an
+    #   endpoint event (<link linkend="apps-application-id-events" />
+    #
+    #   Events resource</link>) occurs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventFilter AWS API Documentation
+    #
+    class EventFilter < Struct.new(
+      :dimensions,
+      :filter_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides the status code and message that result from processing an
     # event.
     #
@@ -7441,6 +7546,54 @@ module Aws::Pinpoint
     class EventItemResponse < Struct.new(
       :message,
       :status_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the settings for an event that causes a journey activity to
+    # start.
+    #
+    # @note When making an API call, you may pass EventStartCondition
+    #   data as a hash:
+    #
+    #       {
+    #         event_filter: {
+    #           dimensions: { # required
+    #             attributes: {
+    #               "__string" => {
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"], # required
+    #               },
+    #             },
+    #             event_type: {
+    #               dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"], # required
+    #             },
+    #             metrics: {
+    #               "__string" => {
+    #                 comparison_operator: "__string", # required
+    #                 value: 1.0, # required
+    #               },
+    #             },
+    #           },
+    #           filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
+    #         },
+    #         segment_id: "__string",
+    #       }
+    #
+    # @!attribute [rw] event_filter
+    #   Specifies the settings for an event that causes a campaign to be
+    #   sent or a journey activity to be performed.
+    #   @return [Types::EventFilter]
+    #
+    # @!attribute [rw] segment_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventStartCondition AWS API Documentation
+    #
+    class EventStartCondition < Struct.new(
+      :event_filter,
+      :segment_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10534,7 +10687,7 @@ module Aws::Pinpoint
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html
+    #   [1]: https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyExecutionMetricsResponse AWS API Documentation
@@ -10778,7 +10931,7 @@ module Aws::Pinpoint
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com.amazon.com/pinpoint/latest/userguide/channels-sms-countries.html
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-countries.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneySMSMessage AWS API Documentation
@@ -11585,11 +11738,15 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] addresses
     #   A map of key-value pairs, where each key is an address and each
-    #   value is an AddressConfiguration object. An address can be a push
-    #   notification token, a phone number, or an email address. You can use
-    #   an AddressConfiguration object to tailor the message for an address
-    #   by specifying settings such as content overrides and message
-    #   variables.
+    #   value is an [AddressConfiguration][1] object. An address can be a
+    #   push notification token, a phone number, or an email address. You
+    #   can use an [AddressConfiguration][1] object to tailor the message
+    #   for an address by specifying settings such as content overrides and
+    #   message variables.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-addressconfiguration
     #   @return [Hash<String,Types::AddressConfiguration>]
     #
     # @!attribute [rw] context
@@ -11601,10 +11758,14 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] endpoints
     #   A map of key-value pairs, where each key is an endpoint ID and each
-    #   value is an EndpointSendConfiguration object. You can use an
-    #   EndpointSendConfiguration object to tailor the message for an
+    #   value is an [EndpointSendConfiguration][1] object. You can use an
+    #   [EndpointSendConfiguration][1] object to tailor the message for an
     #   endpoint by specifying settings such as content overrides and
     #   message variables.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration
     #   @return [Hash<String,Types::EndpointSendConfiguration>]
     #
     # @!attribute [rw] message_configuration
@@ -11789,7 +11950,7 @@ module Aws::Pinpoint
     #       {
     #         condition: {
     #           event_condition: {
-    #             dimensions: { # required
+    #             dimensions: {
     #               attributes: {
     #                 "__string" => {
     #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -11904,6 +12065,19 @@ module Aws::Pinpoint
     # paths (including a default *Else* path) in a journey, based on
     # conditions that you specify.
     #
+    # <note markdown="1">To create multivariate split activities that send participants down
+    # different paths based on push notification events (such as Open or
+    # Received events), your mobile app has to specify the User ID and
+    # Endpoint ID values. For more information, see [Integrating Amazon
+    # Pinpoint with your application][1] in the *Amazon Pinpoint Developer
+    # Guide*.
+    #
+    # </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/integrate.html
+    #
     # @note When making an API call, you may pass MultiConditionalSplitActivity
     #   data as a hash:
     #
@@ -11912,7 +12086,7 @@ module Aws::Pinpoint
     #           {
     #             condition: {
     #               event_condition: {
-    #                 dimensions: { # required
+    #                 dimensions: {
     #                   attributes: {
     #                     "__string" => {
     #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -13336,8 +13510,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] media_url
-    #   The URL of an image or video to display in the SMS message. This
-    #   field is reserved for future use.
+    #   This field is reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] message_type
@@ -14845,10 +15018,14 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] users
-    #   A map that associates user IDs with EndpointSendConfiguration
-    #   objects. You can use an EndpointSendConfiguration object to tailor
-    #   the message for a user by specifying settings such as content
+    #   A map that associates user IDs with [EndpointSendConfiguration][1]
+    #   objects. You can use an [EndpointSendConfiguration][1] object to
+    #   tailor the message for a user by specifying settings such as content
     #   overrides and message variables.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration
     #   @return [Hash<String,Types::EndpointSendConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendUsersMessageRequest AWS API Documentation
@@ -15200,7 +15377,7 @@ module Aws::Pinpoint
     #
     #       {
     #         event_condition: {
-    #           dimensions: { # required
+    #           dimensions: {
     #             attributes: {
     #               "__string" => {
     #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -15399,6 +15576,30 @@ module Aws::Pinpoint
     #
     #       {
     #         description: "__string",
+    #         event_start_condition: {
+    #           event_filter: {
+    #             dimensions: { # required
+    #               attributes: {
+    #                 "__string" => {
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"], # required
+    #                 },
+    #               },
+    #               event_type: {
+    #                 dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"], # required
+    #               },
+    #               metrics: {
+    #                 "__string" => {
+    #                   comparison_operator: "__string", # required
+    #                   value: 1.0, # required
+    #                 },
+    #               },
+    #             },
+    #             filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
+    #           },
+    #           segment_id: "__string",
+    #         },
     #         segment_start_condition: {
     #           segment_id: "__string", # required
     #         },
@@ -15407,6 +15608,11 @@ module Aws::Pinpoint
     # @!attribute [rw] description
     #   The custom description of the condition.
     #   @return [String]
+    #
+    # @!attribute [rw] event_start_condition
+    #   Specifies the settings for an event that causes a journey activity
+    #   to start.
+    #   @return [Types::EventStartCondition]
     #
     # @!attribute [rw] segment_start_condition
     #   The segment that's associated with the first activity in the
@@ -15418,6 +15624,7 @@ module Aws::Pinpoint
     #
     class StartCondition < Struct.new(
       :description,
+      :event_start_condition,
       :segment_start_condition)
       SENSITIVE = []
       include Aws::Structure
@@ -16926,7 +17133,7 @@ module Aws::Pinpoint
     #                   conditions: [
     #                     {
     #                       event_condition: {
-    #                         dimensions: { # required
+    #                         dimensions: {
     #                           attributes: {
     #                             "__string" => {
     #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -17043,7 +17250,7 @@ module Aws::Pinpoint
     #                   {
     #                     condition: {
     #                       event_condition: {
-    #                         dimensions: { # required
+    #                         dimensions: {
     #                           attributes: {
     #                             "__string" => {
     #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -17197,6 +17404,30 @@ module Aws::Pinpoint
     #           start_activity: "__string",
     #           start_condition: {
     #             description: "__string",
+    #             event_start_condition: {
+    #               event_filter: {
+    #                 dimensions: { # required
+    #                   attributes: {
+    #                     "__string" => {
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       values: ["__string"], # required
+    #                     },
+    #                   },
+    #                   event_type: {
+    #                     dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                   metrics: {
+    #                     "__string" => {
+    #                       comparison_operator: "__string", # required
+    #                       value: 1.0, # required
+    #                     },
+    #                   },
+    #                 },
+    #                 filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
+    #               },
+    #               segment_id: "__string",
+    #             },
     #             segment_start_condition: {
     #               segment_id: "__string", # required
     #             },
@@ -18446,9 +18677,9 @@ module Aws::Pinpoint
     #   @return [Boolean]
     #
     # @!attribute [rw] limits
-    #   The default sending limits for campaigns and journeys in the
-    #   application. To override these limits and define custom limits for a
-    #   specific campaign or journey, use the <link
+    #   The default sending limits for campaigns in the application. To
+    #   override these limits and define custom limits for a specific
+    #   campaign or journey, use the <link
     #   linkend="apps-application-id-campaigns-campaign-id" />
     #
     #   Campaign</link> resource or the <link
@@ -18458,9 +18689,9 @@ module Aws::Pinpoint
     #   @return [Types::CampaignLimits]
     #
     # @!attribute [rw] quiet_time
-    #   The default quiet time for campaigns and journeys in the
-    #   application. Quiet time is a specific time range when messages
-    #   aren't sent to endpoints, if all the following conditions are met:
+    #   The default quiet time for campaigns in the application. Quiet time
+    #   is a specific time range when messages aren't sent to endpoints, if
+    #   all the following conditions are met:
     #
     #   * The EndpointDemographic.Timezone property of the endpoint is set
     #     to a valid value.
@@ -18980,7 +19211,7 @@ module Aws::Pinpoint
     #                 conditions: [
     #                   {
     #                     event_condition: {
-    #                       dimensions: { # required
+    #                       dimensions: {
     #                         attributes: {
     #                           "__string" => {
     #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -19097,7 +19328,7 @@ module Aws::Pinpoint
     #                 {
     #                   condition: {
     #                     event_condition: {
-    #                       dimensions: { # required
+    #                       dimensions: {
     #                         attributes: {
     #                           "__string" => {
     #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
@@ -19251,6 +19482,30 @@ module Aws::Pinpoint
     #         start_activity: "__string",
     #         start_condition: {
     #           description: "__string",
+    #           event_start_condition: {
+    #             event_filter: {
+    #               dimensions: { # required
+    #                 attributes: {
+    #                   "__string" => {
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     values: ["__string"], # required
+    #                   },
+    #                 },
+    #                 event_type: {
+    #                   dimension_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   values: ["__string"], # required
+    #                 },
+    #                 metrics: {
+    #                   "__string" => {
+    #                     comparison_operator: "__string", # required
+    #                     value: 1.0, # required
+    #                   },
+    #                 },
+    #               },
+    #               filter_type: "SYSTEM", # required, accepts SYSTEM, ENDPOINT
+    #             },
+    #             segment_id: "__string",
+    #           },
     #           segment_start_condition: {
     #             segment_id: "__string", # required
     #           },

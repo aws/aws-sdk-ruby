@@ -504,6 +504,7 @@ module Aws::RoboMaker
     CreateWorldGenerationJobRequest.add_member(:template, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "template"))
     CreateWorldGenerationJobRequest.add_member(:world_count, Shapes::ShapeRef.new(shape: WorldCount, required: true, location_name: "worldCount"))
     CreateWorldGenerationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateWorldGenerationJobRequest.add_member(:world_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "worldTags"))
     CreateWorldGenerationJobRequest.struct_class = Types::CreateWorldGenerationJobRequest
 
     CreateWorldGenerationJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
@@ -514,6 +515,7 @@ module Aws::RoboMaker
     CreateWorldGenerationJobResponse.add_member(:template, Shapes::ShapeRef.new(shape: Arn, location_name: "template"))
     CreateWorldGenerationJobResponse.add_member(:world_count, Shapes::ShapeRef.new(shape: WorldCount, location_name: "worldCount"))
     CreateWorldGenerationJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateWorldGenerationJobResponse.add_member(:world_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "worldTags"))
     CreateWorldGenerationJobResponse.struct_class = Types::CreateWorldGenerationJobResponse
 
     CreateWorldTemplateRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
@@ -757,6 +759,7 @@ module Aws::RoboMaker
     DescribeWorldGenerationJobResponse.add_member(:world_count, Shapes::ShapeRef.new(shape: WorldCount, location_name: "worldCount"))
     DescribeWorldGenerationJobResponse.add_member(:finished_worlds_summary, Shapes::ShapeRef.new(shape: FinishedWorldsSummary, location_name: "finishedWorldsSummary"))
     DescribeWorldGenerationJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    DescribeWorldGenerationJobResponse.add_member(:world_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "worldTags"))
     DescribeWorldGenerationJobResponse.struct_class = Types::DescribeWorldGenerationJobResponse
 
     DescribeWorldRequest.add_member(:world, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "world"))

@@ -439,6 +439,96 @@ module Aws::Budgets
       req.send_request(options)
     end
 
+    # Creates a budget action.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the user. It should be a 12-digit number.
+    #
+    # @option params [required, String] :budget_name
+    #   A string that represents the budget name. The ":" and "\\"
+    #   characters aren't allowed.
+    #
+    # @option params [required, String] :notification_type
+    #   The type of a notification. It must be ACTUAL or FORECASTED.
+    #
+    # @option params [required, String] :action_type
+    #   The type of action. This defines the type of tasks that can be carried
+    #   out by this action. This field also determines the format for
+    #   definition.
+    #
+    # @option params [required, Types::ActionThreshold] :action_threshold
+    #   The trigger threshold of the action.
+    #
+    # @option params [required, Types::Definition] :definition
+    #   Specifies all of the type-specific parameters.
+    #
+    # @option params [required, String] :execution_role_arn
+    #   The role passed for action execution and reversion. Roles and actions
+    #   must be in the same account.
+    #
+    # @option params [required, String] :approval_model
+    #   This specifies if the action needs manual or automatic approval.
+    #
+    # @option params [required, Array<Types::Subscriber>] :subscribers
+    #   A list of subscribers.
+    #
+    # @return [Types::CreateBudgetActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBudgetActionResponse#account_id #account_id} => String
+    #   * {Types::CreateBudgetActionResponse#budget_name #budget_name} => String
+    #   * {Types::CreateBudgetActionResponse#action_id #action_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_budget_action({
+    #     account_id: "AccountId", # required
+    #     budget_name: "BudgetName", # required
+    #     notification_type: "ACTUAL", # required, accepts ACTUAL, FORECASTED
+    #     action_type: "APPLY_IAM_POLICY", # required, accepts APPLY_IAM_POLICY, APPLY_SCP_POLICY, RUN_SSM_DOCUMENTS
+    #     action_threshold: { # required
+    #       action_threshold_value: 1.0, # required
+    #       action_threshold_type: "PERCENTAGE", # required, accepts PERCENTAGE, ABSOLUTE_VALUE
+    #     },
+    #     definition: { # required
+    #       iam_action_definition: {
+    #         policy_arn: "PolicyArn", # required
+    #         roles: ["Role"],
+    #         groups: ["Group"],
+    #         users: ["User"],
+    #       },
+    #       scp_action_definition: {
+    #         policy_id: "PolicyId", # required
+    #         target_ids: ["TargetId"], # required
+    #       },
+    #       ssm_action_definition: {
+    #         action_sub_type: "STOP_EC2_INSTANCES", # required, accepts STOP_EC2_INSTANCES, STOP_RDS_INSTANCES
+    #         region: "Region", # required
+    #         instance_ids: ["InstanceId"], # required
+    #       },
+    #     },
+    #     execution_role_arn: "RoleArn", # required
+    #     approval_model: "AUTOMATIC", # required, accepts AUTOMATIC, MANUAL
+    #     subscribers: [ # required
+    #       {
+    #         subscription_type: "SNS", # required, accepts SNS, EMAIL
+    #         address: "SubscriberAddress", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_id #=> String
+    #   resp.budget_name #=> String
+    #   resp.action_id #=> String
+    #
+    # @overload create_budget_action(params = {})
+    # @param [Hash] params ({})
+    def create_budget_action(params = {}, options = {})
+      req = build_request(:create_budget_action, params)
+      req.send_request(options)
+    end
+
     # Creates a notification. You must create the budget before you create
     # the associated notification.
     #
@@ -556,6 +646,71 @@ module Aws::Budgets
     # @param [Hash] params ({})
     def delete_budget(params = {}, options = {})
       req = build_request(:delete_budget, params)
+      req.send_request(options)
+    end
+
+    # Deletes a budget action.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the user. It should be a 12-digit number.
+    #
+    # @option params [required, String] :budget_name
+    #   A string that represents the budget name. The ":" and "\\"
+    #   characters aren't allowed.
+    #
+    # @option params [required, String] :action_id
+    #   A system-generated universally unique identifier (UUID) for the
+    #   action.
+    #
+    # @return [Types::DeleteBudgetActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteBudgetActionResponse#account_id #account_id} => String
+    #   * {Types::DeleteBudgetActionResponse#budget_name #budget_name} => String
+    #   * {Types::DeleteBudgetActionResponse#action #action} => Types::Action
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_budget_action({
+    #     account_id: "AccountId", # required
+    #     budget_name: "BudgetName", # required
+    #     action_id: "ActionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_id #=> String
+    #   resp.budget_name #=> String
+    #   resp.action.action_id #=> String
+    #   resp.action.budget_name #=> String
+    #   resp.action.notification_type #=> String, one of "ACTUAL", "FORECASTED"
+    #   resp.action.action_type #=> String, one of "APPLY_IAM_POLICY", "APPLY_SCP_POLICY", "RUN_SSM_DOCUMENTS"
+    #   resp.action.action_threshold.action_threshold_value #=> Float
+    #   resp.action.action_threshold.action_threshold_type #=> String, one of "PERCENTAGE", "ABSOLUTE_VALUE"
+    #   resp.action.definition.iam_action_definition.policy_arn #=> String
+    #   resp.action.definition.iam_action_definition.roles #=> Array
+    #   resp.action.definition.iam_action_definition.roles[0] #=> String
+    #   resp.action.definition.iam_action_definition.groups #=> Array
+    #   resp.action.definition.iam_action_definition.groups[0] #=> String
+    #   resp.action.definition.iam_action_definition.users #=> Array
+    #   resp.action.definition.iam_action_definition.users[0] #=> String
+    #   resp.action.definition.scp_action_definition.policy_id #=> String
+    #   resp.action.definition.scp_action_definition.target_ids #=> Array
+    #   resp.action.definition.scp_action_definition.target_ids[0] #=> String
+    #   resp.action.definition.ssm_action_definition.action_sub_type #=> String, one of "STOP_EC2_INSTANCES", "STOP_RDS_INSTANCES"
+    #   resp.action.definition.ssm_action_definition.region #=> String
+    #   resp.action.definition.ssm_action_definition.instance_ids #=> Array
+    #   resp.action.definition.ssm_action_definition.instance_ids[0] #=> String
+    #   resp.action.execution_role_arn #=> String
+    #   resp.action.approval_model #=> String, one of "AUTOMATIC", "MANUAL"
+    #   resp.action.status #=> String, one of "STANDBY", "PENDING", "EXECUTION_IN_PROGRESS", "EXECUTION_SUCCESS", "EXECUTION_FAILURE", "REVERSE_IN_PROGRESS", "REVERSE_SUCCESS", "REVERSE_FAILURE", "RESET_IN_PROGRESS", "RESET_FAILURE"
+    #   resp.action.subscribers #=> Array
+    #   resp.action.subscribers[0].subscription_type #=> String, one of "SNS", "EMAIL"
+    #   resp.action.subscribers[0].address #=> String
+    #
+    # @overload delete_budget_action(params = {})
+    # @param [Hash] params ({})
+    def delete_budget_action(params = {}, options = {})
+      req = build_request(:delete_budget_action, params)
       req.send_request(options)
     end
 
@@ -708,6 +863,294 @@ module Aws::Budgets
       req.send_request(options)
     end
 
+    # Describes a budget action detail.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the user. It should be a 12-digit number.
+    #
+    # @option params [required, String] :budget_name
+    #   A string that represents the budget name. The ":" and "\\"
+    #   characters aren't allowed.
+    #
+    # @option params [required, String] :action_id
+    #   A system-generated universally unique identifier (UUID) for the
+    #   action.
+    #
+    # @return [Types::DescribeBudgetActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBudgetActionResponse#account_id #account_id} => String
+    #   * {Types::DescribeBudgetActionResponse#budget_name #budget_name} => String
+    #   * {Types::DescribeBudgetActionResponse#action #action} => Types::Action
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_budget_action({
+    #     account_id: "AccountId", # required
+    #     budget_name: "BudgetName", # required
+    #     action_id: "ActionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_id #=> String
+    #   resp.budget_name #=> String
+    #   resp.action.action_id #=> String
+    #   resp.action.budget_name #=> String
+    #   resp.action.notification_type #=> String, one of "ACTUAL", "FORECASTED"
+    #   resp.action.action_type #=> String, one of "APPLY_IAM_POLICY", "APPLY_SCP_POLICY", "RUN_SSM_DOCUMENTS"
+    #   resp.action.action_threshold.action_threshold_value #=> Float
+    #   resp.action.action_threshold.action_threshold_type #=> String, one of "PERCENTAGE", "ABSOLUTE_VALUE"
+    #   resp.action.definition.iam_action_definition.policy_arn #=> String
+    #   resp.action.definition.iam_action_definition.roles #=> Array
+    #   resp.action.definition.iam_action_definition.roles[0] #=> String
+    #   resp.action.definition.iam_action_definition.groups #=> Array
+    #   resp.action.definition.iam_action_definition.groups[0] #=> String
+    #   resp.action.definition.iam_action_definition.users #=> Array
+    #   resp.action.definition.iam_action_definition.users[0] #=> String
+    #   resp.action.definition.scp_action_definition.policy_id #=> String
+    #   resp.action.definition.scp_action_definition.target_ids #=> Array
+    #   resp.action.definition.scp_action_definition.target_ids[0] #=> String
+    #   resp.action.definition.ssm_action_definition.action_sub_type #=> String, one of "STOP_EC2_INSTANCES", "STOP_RDS_INSTANCES"
+    #   resp.action.definition.ssm_action_definition.region #=> String
+    #   resp.action.definition.ssm_action_definition.instance_ids #=> Array
+    #   resp.action.definition.ssm_action_definition.instance_ids[0] #=> String
+    #   resp.action.execution_role_arn #=> String
+    #   resp.action.approval_model #=> String, one of "AUTOMATIC", "MANUAL"
+    #   resp.action.status #=> String, one of "STANDBY", "PENDING", "EXECUTION_IN_PROGRESS", "EXECUTION_SUCCESS", "EXECUTION_FAILURE", "REVERSE_IN_PROGRESS", "REVERSE_SUCCESS", "REVERSE_FAILURE", "RESET_IN_PROGRESS", "RESET_FAILURE"
+    #   resp.action.subscribers #=> Array
+    #   resp.action.subscribers[0].subscription_type #=> String, one of "SNS", "EMAIL"
+    #   resp.action.subscribers[0].address #=> String
+    #
+    # @overload describe_budget_action(params = {})
+    # @param [Hash] params ({})
+    def describe_budget_action(params = {}, options = {})
+      req = build_request(:describe_budget_action, params)
+      req.send_request(options)
+    end
+
+    # Describes a budget action history detail.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the user. It should be a 12-digit number.
+    #
+    # @option params [required, String] :budget_name
+    #   A string that represents the budget name. The ":" and "\\"
+    #   characters aren't allowed.
+    #
+    # @option params [required, String] :action_id
+    #   A system-generated universally unique identifier (UUID) for the
+    #   action.
+    #
+    # @option params [Types::TimePeriod] :time_period
+    #   The period of time that is covered by a budget. The period has a start
+    #   date and an end date. The start date must come before the end date.
+    #   There are no restrictions on the end date.
+    #
+    # @option params [Integer] :max_results
+    #   An integer that represents how many entries a paginated response
+    #   contains. The maximum is 100.
+    #
+    # @option params [String] :next_token
+    #   A generic string.
+    #
+    # @return [Types::DescribeBudgetActionHistoriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBudgetActionHistoriesResponse#action_histories #action_histories} => Array&lt;Types::ActionHistory&gt;
+    #   * {Types::DescribeBudgetActionHistoriesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_budget_action_histories({
+    #     account_id: "AccountId", # required
+    #     budget_name: "BudgetName", # required
+    #     action_id: "ActionId", # required
+    #     time_period: {
+    #       start: Time.now,
+    #       end: Time.now,
+    #     },
+    #     max_results: 1,
+    #     next_token: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_histories #=> Array
+    #   resp.action_histories[0].timestamp #=> Time
+    #   resp.action_histories[0].status #=> String, one of "STANDBY", "PENDING", "EXECUTION_IN_PROGRESS", "EXECUTION_SUCCESS", "EXECUTION_FAILURE", "REVERSE_IN_PROGRESS", "REVERSE_SUCCESS", "REVERSE_FAILURE", "RESET_IN_PROGRESS", "RESET_FAILURE"
+    #   resp.action_histories[0].event_type #=> String, one of "SYSTEM", "CREATE_ACTION", "DELETE_ACTION", "UPDATE_ACTION", "EXECUTE_ACTION"
+    #   resp.action_histories[0].action_history_details.message #=> String
+    #   resp.action_histories[0].action_history_details.action.action_id #=> String
+    #   resp.action_histories[0].action_history_details.action.budget_name #=> String
+    #   resp.action_histories[0].action_history_details.action.notification_type #=> String, one of "ACTUAL", "FORECASTED"
+    #   resp.action_histories[0].action_history_details.action.action_type #=> String, one of "APPLY_IAM_POLICY", "APPLY_SCP_POLICY", "RUN_SSM_DOCUMENTS"
+    #   resp.action_histories[0].action_history_details.action.action_threshold.action_threshold_value #=> Float
+    #   resp.action_histories[0].action_history_details.action.action_threshold.action_threshold_type #=> String, one of "PERCENTAGE", "ABSOLUTE_VALUE"
+    #   resp.action_histories[0].action_history_details.action.definition.iam_action_definition.policy_arn #=> String
+    #   resp.action_histories[0].action_history_details.action.definition.iam_action_definition.roles #=> Array
+    #   resp.action_histories[0].action_history_details.action.definition.iam_action_definition.roles[0] #=> String
+    #   resp.action_histories[0].action_history_details.action.definition.iam_action_definition.groups #=> Array
+    #   resp.action_histories[0].action_history_details.action.definition.iam_action_definition.groups[0] #=> String
+    #   resp.action_histories[0].action_history_details.action.definition.iam_action_definition.users #=> Array
+    #   resp.action_histories[0].action_history_details.action.definition.iam_action_definition.users[0] #=> String
+    #   resp.action_histories[0].action_history_details.action.definition.scp_action_definition.policy_id #=> String
+    #   resp.action_histories[0].action_history_details.action.definition.scp_action_definition.target_ids #=> Array
+    #   resp.action_histories[0].action_history_details.action.definition.scp_action_definition.target_ids[0] #=> String
+    #   resp.action_histories[0].action_history_details.action.definition.ssm_action_definition.action_sub_type #=> String, one of "STOP_EC2_INSTANCES", "STOP_RDS_INSTANCES"
+    #   resp.action_histories[0].action_history_details.action.definition.ssm_action_definition.region #=> String
+    #   resp.action_histories[0].action_history_details.action.definition.ssm_action_definition.instance_ids #=> Array
+    #   resp.action_histories[0].action_history_details.action.definition.ssm_action_definition.instance_ids[0] #=> String
+    #   resp.action_histories[0].action_history_details.action.execution_role_arn #=> String
+    #   resp.action_histories[0].action_history_details.action.approval_model #=> String, one of "AUTOMATIC", "MANUAL"
+    #   resp.action_histories[0].action_history_details.action.status #=> String, one of "STANDBY", "PENDING", "EXECUTION_IN_PROGRESS", "EXECUTION_SUCCESS", "EXECUTION_FAILURE", "REVERSE_IN_PROGRESS", "REVERSE_SUCCESS", "REVERSE_FAILURE", "RESET_IN_PROGRESS", "RESET_FAILURE"
+    #   resp.action_histories[0].action_history_details.action.subscribers #=> Array
+    #   resp.action_histories[0].action_history_details.action.subscribers[0].subscription_type #=> String, one of "SNS", "EMAIL"
+    #   resp.action_histories[0].action_history_details.action.subscribers[0].address #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload describe_budget_action_histories(params = {})
+    # @param [Hash] params ({})
+    def describe_budget_action_histories(params = {}, options = {})
+      req = build_request(:describe_budget_action_histories, params)
+      req.send_request(options)
+    end
+
+    # Describes all of the budget actions for an account.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the user. It should be a 12-digit number.
+    #
+    # @option params [Integer] :max_results
+    #   An integer that represents how many entries a paginated response
+    #   contains. The maximum is 100.
+    #
+    # @option params [String] :next_token
+    #   A generic string.
+    #
+    # @return [Types::DescribeBudgetActionsForAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBudgetActionsForAccountResponse#actions #actions} => Array&lt;Types::Action&gt;
+    #   * {Types::DescribeBudgetActionsForAccountResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_budget_actions_for_account({
+    #     account_id: "AccountId", # required
+    #     max_results: 1,
+    #     next_token: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.actions #=> Array
+    #   resp.actions[0].action_id #=> String
+    #   resp.actions[0].budget_name #=> String
+    #   resp.actions[0].notification_type #=> String, one of "ACTUAL", "FORECASTED"
+    #   resp.actions[0].action_type #=> String, one of "APPLY_IAM_POLICY", "APPLY_SCP_POLICY", "RUN_SSM_DOCUMENTS"
+    #   resp.actions[0].action_threshold.action_threshold_value #=> Float
+    #   resp.actions[0].action_threshold.action_threshold_type #=> String, one of "PERCENTAGE", "ABSOLUTE_VALUE"
+    #   resp.actions[0].definition.iam_action_definition.policy_arn #=> String
+    #   resp.actions[0].definition.iam_action_definition.roles #=> Array
+    #   resp.actions[0].definition.iam_action_definition.roles[0] #=> String
+    #   resp.actions[0].definition.iam_action_definition.groups #=> Array
+    #   resp.actions[0].definition.iam_action_definition.groups[0] #=> String
+    #   resp.actions[0].definition.iam_action_definition.users #=> Array
+    #   resp.actions[0].definition.iam_action_definition.users[0] #=> String
+    #   resp.actions[0].definition.scp_action_definition.policy_id #=> String
+    #   resp.actions[0].definition.scp_action_definition.target_ids #=> Array
+    #   resp.actions[0].definition.scp_action_definition.target_ids[0] #=> String
+    #   resp.actions[0].definition.ssm_action_definition.action_sub_type #=> String, one of "STOP_EC2_INSTANCES", "STOP_RDS_INSTANCES"
+    #   resp.actions[0].definition.ssm_action_definition.region #=> String
+    #   resp.actions[0].definition.ssm_action_definition.instance_ids #=> Array
+    #   resp.actions[0].definition.ssm_action_definition.instance_ids[0] #=> String
+    #   resp.actions[0].execution_role_arn #=> String
+    #   resp.actions[0].approval_model #=> String, one of "AUTOMATIC", "MANUAL"
+    #   resp.actions[0].status #=> String, one of "STANDBY", "PENDING", "EXECUTION_IN_PROGRESS", "EXECUTION_SUCCESS", "EXECUTION_FAILURE", "REVERSE_IN_PROGRESS", "REVERSE_SUCCESS", "REVERSE_FAILURE", "RESET_IN_PROGRESS", "RESET_FAILURE"
+    #   resp.actions[0].subscribers #=> Array
+    #   resp.actions[0].subscribers[0].subscription_type #=> String, one of "SNS", "EMAIL"
+    #   resp.actions[0].subscribers[0].address #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload describe_budget_actions_for_account(params = {})
+    # @param [Hash] params ({})
+    def describe_budget_actions_for_account(params = {}, options = {})
+      req = build_request(:describe_budget_actions_for_account, params)
+      req.send_request(options)
+    end
+
+    # Describes all of the budget actions for a budget.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the user. It should be a 12-digit number.
+    #
+    # @option params [required, String] :budget_name
+    #   A string that represents the budget name. The ":" and "\\"
+    #   characters aren't allowed.
+    #
+    # @option params [Integer] :max_results
+    #   An integer that represents how many entries a paginated response
+    #   contains. The maximum is 100.
+    #
+    # @option params [String] :next_token
+    #   A generic string.
+    #
+    # @return [Types::DescribeBudgetActionsForBudgetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBudgetActionsForBudgetResponse#actions #actions} => Array&lt;Types::Action&gt;
+    #   * {Types::DescribeBudgetActionsForBudgetResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_budget_actions_for_budget({
+    #     account_id: "AccountId", # required
+    #     budget_name: "BudgetName", # required
+    #     max_results: 1,
+    #     next_token: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.actions #=> Array
+    #   resp.actions[0].action_id #=> String
+    #   resp.actions[0].budget_name #=> String
+    #   resp.actions[0].notification_type #=> String, one of "ACTUAL", "FORECASTED"
+    #   resp.actions[0].action_type #=> String, one of "APPLY_IAM_POLICY", "APPLY_SCP_POLICY", "RUN_SSM_DOCUMENTS"
+    #   resp.actions[0].action_threshold.action_threshold_value #=> Float
+    #   resp.actions[0].action_threshold.action_threshold_type #=> String, one of "PERCENTAGE", "ABSOLUTE_VALUE"
+    #   resp.actions[0].definition.iam_action_definition.policy_arn #=> String
+    #   resp.actions[0].definition.iam_action_definition.roles #=> Array
+    #   resp.actions[0].definition.iam_action_definition.roles[0] #=> String
+    #   resp.actions[0].definition.iam_action_definition.groups #=> Array
+    #   resp.actions[0].definition.iam_action_definition.groups[0] #=> String
+    #   resp.actions[0].definition.iam_action_definition.users #=> Array
+    #   resp.actions[0].definition.iam_action_definition.users[0] #=> String
+    #   resp.actions[0].definition.scp_action_definition.policy_id #=> String
+    #   resp.actions[0].definition.scp_action_definition.target_ids #=> Array
+    #   resp.actions[0].definition.scp_action_definition.target_ids[0] #=> String
+    #   resp.actions[0].definition.ssm_action_definition.action_sub_type #=> String, one of "STOP_EC2_INSTANCES", "STOP_RDS_INSTANCES"
+    #   resp.actions[0].definition.ssm_action_definition.region #=> String
+    #   resp.actions[0].definition.ssm_action_definition.instance_ids #=> Array
+    #   resp.actions[0].definition.ssm_action_definition.instance_ids[0] #=> String
+    #   resp.actions[0].execution_role_arn #=> String
+    #   resp.actions[0].approval_model #=> String, one of "AUTOMATIC", "MANUAL"
+    #   resp.actions[0].status #=> String, one of "STANDBY", "PENDING", "EXECUTION_IN_PROGRESS", "EXECUTION_SUCCESS", "EXECUTION_FAILURE", "REVERSE_IN_PROGRESS", "REVERSE_SUCCESS", "REVERSE_FAILURE", "RESET_IN_PROGRESS", "RESET_FAILURE"
+    #   resp.actions[0].subscribers #=> Array
+    #   resp.actions[0].subscribers[0].subscription_type #=> String, one of "SNS", "EMAIL"
+    #   resp.actions[0].subscribers[0].address #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload describe_budget_actions_for_budget(params = {})
+    # @param [Hash] params ({})
+    def describe_budget_actions_for_budget(params = {}, options = {})
+      req = build_request(:describe_budget_actions_for_budget, params)
+      req.send_request(options)
+    end
+
     # Describes the history for `DAILY`, `MONTHLY`, and `QUARTERLY` budgets.
     # Budget history isn't available for `ANNUAL` budgets.
     #
@@ -733,6 +1176,8 @@ module Aws::Budgets
     #
     #   * {Types::DescribeBudgetPerformanceHistoryResponse#budget_performance_history #budget_performance_history} => Types::BudgetPerformanceHistory
     #   * {Types::DescribeBudgetPerformanceHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -808,6 +1253,8 @@ module Aws::Budgets
     #   * {Types::DescribeBudgetsResponse#budgets #budgets} => Array&lt;Types::Budget&gt;
     #   * {Types::DescribeBudgetsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_budgets({
@@ -879,6 +1326,8 @@ module Aws::Budgets
     #   * {Types::DescribeNotificationsForBudgetResponse#notifications #notifications} => Array&lt;Types::Notification&gt;
     #   * {Types::DescribeNotificationsForBudgetResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_notifications_for_budget({
@@ -930,6 +1379,8 @@ module Aws::Budgets
     #   * {Types::DescribeSubscribersForNotificationResponse#subscribers #subscribers} => Array&lt;Types::Subscriber&gt;
     #   * {Types::DescribeSubscribersForNotificationResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_subscribers_for_notification({
@@ -957,6 +1408,52 @@ module Aws::Budgets
     # @param [Hash] params ({})
     def describe_subscribers_for_notification(params = {}, options = {})
       req = build_request(:describe_subscribers_for_notification, params)
+      req.send_request(options)
+    end
+
+    # Executes a budget action.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the user. It should be a 12-digit number.
+    #
+    # @option params [required, String] :budget_name
+    #   A string that represents the budget name. The ":" and "\\"
+    #   characters aren't allowed.
+    #
+    # @option params [required, String] :action_id
+    #   A system-generated universally unique identifier (UUID) for the
+    #   action.
+    #
+    # @option params [required, String] :execution_type
+    #   The type of execution.
+    #
+    # @return [Types::ExecuteBudgetActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExecuteBudgetActionResponse#account_id #account_id} => String
+    #   * {Types::ExecuteBudgetActionResponse#budget_name #budget_name} => String
+    #   * {Types::ExecuteBudgetActionResponse#action_id #action_id} => String
+    #   * {Types::ExecuteBudgetActionResponse#execution_type #execution_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.execute_budget_action({
+    #     account_id: "AccountId", # required
+    #     budget_name: "BudgetName", # required
+    #     action_id: "ActionId", # required
+    #     execution_type: "APPROVE_BUDGET_ACTION", # required, accepts APPROVE_BUDGET_ACTION, RETRY_BUDGET_ACTION, REVERSE_BUDGET_ACTION, RESET_BUDGET_ACTION
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_id #=> String
+    #   resp.budget_name #=> String
+    #   resp.action_id #=> String
+    #   resp.execution_type #=> String, one of "APPROVE_BUDGET_ACTION", "RETRY_BUDGET_ACTION", "REVERSE_BUDGET_ACTION", "RESET_BUDGET_ACTION"
+    #
+    # @overload execute_budget_action(params = {})
+    # @param [Hash] params ({})
+    def execute_budget_action(params = {}, options = {})
+      req = build_request(:execute_budget_action, params)
       req.send_request(options)
     end
 
@@ -1039,6 +1536,147 @@ module Aws::Budgets
     # @param [Hash] params ({})
     def update_budget(params = {}, options = {})
       req = build_request(:update_budget, params)
+      req.send_request(options)
+    end
+
+    # Updates a budget action.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the user. It should be a 12-digit number.
+    #
+    # @option params [required, String] :budget_name
+    #   A string that represents the budget name. The ":" and "\\"
+    #   characters aren't allowed.
+    #
+    # @option params [required, String] :action_id
+    #   A system-generated universally unique identifier (UUID) for the
+    #   action.
+    #
+    # @option params [String] :notification_type
+    #   The type of a notification. It must be ACTUAL or FORECASTED.
+    #
+    # @option params [Types::ActionThreshold] :action_threshold
+    #   The trigger threshold of the action.
+    #
+    # @option params [Types::Definition] :definition
+    #   Specifies all of the type-specific parameters.
+    #
+    # @option params [String] :execution_role_arn
+    #   The role passed for action execution and reversion. Roles and actions
+    #   must be in the same account.
+    #
+    # @option params [String] :approval_model
+    #   This specifies if the action needs manual or automatic approval.
+    #
+    # @option params [Array<Types::Subscriber>] :subscribers
+    #   A list of subscribers.
+    #
+    # @return [Types::UpdateBudgetActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateBudgetActionResponse#account_id #account_id} => String
+    #   * {Types::UpdateBudgetActionResponse#budget_name #budget_name} => String
+    #   * {Types::UpdateBudgetActionResponse#old_action #old_action} => Types::Action
+    #   * {Types::UpdateBudgetActionResponse#new_action #new_action} => Types::Action
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_budget_action({
+    #     account_id: "AccountId", # required
+    #     budget_name: "BudgetName", # required
+    #     action_id: "ActionId", # required
+    #     notification_type: "ACTUAL", # accepts ACTUAL, FORECASTED
+    #     action_threshold: {
+    #       action_threshold_value: 1.0, # required
+    #       action_threshold_type: "PERCENTAGE", # required, accepts PERCENTAGE, ABSOLUTE_VALUE
+    #     },
+    #     definition: {
+    #       iam_action_definition: {
+    #         policy_arn: "PolicyArn", # required
+    #         roles: ["Role"],
+    #         groups: ["Group"],
+    #         users: ["User"],
+    #       },
+    #       scp_action_definition: {
+    #         policy_id: "PolicyId", # required
+    #         target_ids: ["TargetId"], # required
+    #       },
+    #       ssm_action_definition: {
+    #         action_sub_type: "STOP_EC2_INSTANCES", # required, accepts STOP_EC2_INSTANCES, STOP_RDS_INSTANCES
+    #         region: "Region", # required
+    #         instance_ids: ["InstanceId"], # required
+    #       },
+    #     },
+    #     execution_role_arn: "RoleArn",
+    #     approval_model: "AUTOMATIC", # accepts AUTOMATIC, MANUAL
+    #     subscribers: [
+    #       {
+    #         subscription_type: "SNS", # required, accepts SNS, EMAIL
+    #         address: "SubscriberAddress", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_id #=> String
+    #   resp.budget_name #=> String
+    #   resp.old_action.action_id #=> String
+    #   resp.old_action.budget_name #=> String
+    #   resp.old_action.notification_type #=> String, one of "ACTUAL", "FORECASTED"
+    #   resp.old_action.action_type #=> String, one of "APPLY_IAM_POLICY", "APPLY_SCP_POLICY", "RUN_SSM_DOCUMENTS"
+    #   resp.old_action.action_threshold.action_threshold_value #=> Float
+    #   resp.old_action.action_threshold.action_threshold_type #=> String, one of "PERCENTAGE", "ABSOLUTE_VALUE"
+    #   resp.old_action.definition.iam_action_definition.policy_arn #=> String
+    #   resp.old_action.definition.iam_action_definition.roles #=> Array
+    #   resp.old_action.definition.iam_action_definition.roles[0] #=> String
+    #   resp.old_action.definition.iam_action_definition.groups #=> Array
+    #   resp.old_action.definition.iam_action_definition.groups[0] #=> String
+    #   resp.old_action.definition.iam_action_definition.users #=> Array
+    #   resp.old_action.definition.iam_action_definition.users[0] #=> String
+    #   resp.old_action.definition.scp_action_definition.policy_id #=> String
+    #   resp.old_action.definition.scp_action_definition.target_ids #=> Array
+    #   resp.old_action.definition.scp_action_definition.target_ids[0] #=> String
+    #   resp.old_action.definition.ssm_action_definition.action_sub_type #=> String, one of "STOP_EC2_INSTANCES", "STOP_RDS_INSTANCES"
+    #   resp.old_action.definition.ssm_action_definition.region #=> String
+    #   resp.old_action.definition.ssm_action_definition.instance_ids #=> Array
+    #   resp.old_action.definition.ssm_action_definition.instance_ids[0] #=> String
+    #   resp.old_action.execution_role_arn #=> String
+    #   resp.old_action.approval_model #=> String, one of "AUTOMATIC", "MANUAL"
+    #   resp.old_action.status #=> String, one of "STANDBY", "PENDING", "EXECUTION_IN_PROGRESS", "EXECUTION_SUCCESS", "EXECUTION_FAILURE", "REVERSE_IN_PROGRESS", "REVERSE_SUCCESS", "REVERSE_FAILURE", "RESET_IN_PROGRESS", "RESET_FAILURE"
+    #   resp.old_action.subscribers #=> Array
+    #   resp.old_action.subscribers[0].subscription_type #=> String, one of "SNS", "EMAIL"
+    #   resp.old_action.subscribers[0].address #=> String
+    #   resp.new_action.action_id #=> String
+    #   resp.new_action.budget_name #=> String
+    #   resp.new_action.notification_type #=> String, one of "ACTUAL", "FORECASTED"
+    #   resp.new_action.action_type #=> String, one of "APPLY_IAM_POLICY", "APPLY_SCP_POLICY", "RUN_SSM_DOCUMENTS"
+    #   resp.new_action.action_threshold.action_threshold_value #=> Float
+    #   resp.new_action.action_threshold.action_threshold_type #=> String, one of "PERCENTAGE", "ABSOLUTE_VALUE"
+    #   resp.new_action.definition.iam_action_definition.policy_arn #=> String
+    #   resp.new_action.definition.iam_action_definition.roles #=> Array
+    #   resp.new_action.definition.iam_action_definition.roles[0] #=> String
+    #   resp.new_action.definition.iam_action_definition.groups #=> Array
+    #   resp.new_action.definition.iam_action_definition.groups[0] #=> String
+    #   resp.new_action.definition.iam_action_definition.users #=> Array
+    #   resp.new_action.definition.iam_action_definition.users[0] #=> String
+    #   resp.new_action.definition.scp_action_definition.policy_id #=> String
+    #   resp.new_action.definition.scp_action_definition.target_ids #=> Array
+    #   resp.new_action.definition.scp_action_definition.target_ids[0] #=> String
+    #   resp.new_action.definition.ssm_action_definition.action_sub_type #=> String, one of "STOP_EC2_INSTANCES", "STOP_RDS_INSTANCES"
+    #   resp.new_action.definition.ssm_action_definition.region #=> String
+    #   resp.new_action.definition.ssm_action_definition.instance_ids #=> Array
+    #   resp.new_action.definition.ssm_action_definition.instance_ids[0] #=> String
+    #   resp.new_action.execution_role_arn #=> String
+    #   resp.new_action.approval_model #=> String, one of "AUTOMATIC", "MANUAL"
+    #   resp.new_action.status #=> String, one of "STANDBY", "PENDING", "EXECUTION_IN_PROGRESS", "EXECUTION_SUCCESS", "EXECUTION_FAILURE", "REVERSE_IN_PROGRESS", "REVERSE_SUCCESS", "REVERSE_FAILURE", "RESET_IN_PROGRESS", "RESET_FAILURE"
+    #   resp.new_action.subscribers #=> Array
+    #   resp.new_action.subscribers[0].subscription_type #=> String, one of "SNS", "EMAIL"
+    #   resp.new_action.subscribers[0].address #=> String
+    #
+    # @overload update_budget_action(params = {})
+    # @param [Hash] params ({})
+    def update_budget_action(params = {}, options = {})
+      req = build_request(:update_budget_action, params)
       req.send_request(options)
     end
 
@@ -1149,7 +1787,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

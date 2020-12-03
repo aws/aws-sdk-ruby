@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2020-12-01)
+------------------
+
+* Feature - Amazon EKS now allows you to define and manage the lifecycle for Kubernetes add-ons for your clusters. This release adds support for the AWS VPC CNI (vpc-cni).
+
+1.45.0 (2020-10-09)
+------------------
+
+* Feature - This release introduces a new Amazon EKS error code: "ClusterUnreachable"
+
+1.44.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2020-09-24)
+------------------
+
+* Feature - Amazon EKS now supports configuring your cluster's service CIDR during cluster creation.
+
+1.42.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.41.0 (2020-08-25)
 ------------------
 

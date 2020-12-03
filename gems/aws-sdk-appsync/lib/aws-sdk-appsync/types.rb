@@ -79,7 +79,7 @@ module Aws::AppSync
     #
     #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
     #
-    #   * **PER\_RESOLVER\_CACHING**\: Individual resovlers that you specify
+    #   * **PER\_RESOLVER\_CACHING**\: Individual resolvers that you specify
     #     are cached.
     #   @return [String]
     #
@@ -116,7 +116,7 @@ module Aws::AppSync
     #   As of July 2020, this is deprecated, and the generic identifiers
     #   above should be used.
     #
-    #   The following legacy instance types are avaible, but their use is
+    #   The following legacy instance types are available, but their use is
     #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
@@ -188,18 +188,25 @@ module Aws::AppSync
     # **da2**\: This version was introduced in February 2018 when AppSync
     # added support to extend key expiration.
     #
-    # * `ListApiKeys` returns the expiration time in seconds.
+    # * `ListApiKeys` returns the expiration time and deletion time in
+    #   seconds.
     #
-    # * `CreateApiKey` returns the expiration time in seconds and accepts a
-    #   user-provided expiration time in seconds.
+    # * `CreateApiKey` returns the expiration time and deletion time in
+    #   seconds and accepts a user-provided expiration time in seconds.
     #
-    # * `UpdateApiKey` returns the expiration time in seconds and accepts a
-    #   user-provided expiration time in seconds. Key expiration can only be
-    #   updated while the key has not expired.
+    # * `UpdateApiKey` returns the expiration time and and deletion time in
+    #   seconds and accepts a user-provided expiration time in seconds.
+    #   Expired API keys are kept for 60 days after the expiration time. Key
+    #   expiration time can be updated while the key is not deleted.
     #
     # * `DeleteApiKey` deletes the item from the table.
     #
-    # * Expiration is stored in Amazon DynamoDB as seconds.
+    # * Expiration is stored in Amazon DynamoDB as seconds. After the
+    #   expiration time, using the key to authenticate will fail. But the
+    #   key can be reinstated before deletion.
+    #
+    # * Deletion is stored in Amazon DynamoDB as seconds. The key will be
+    #   deleted after deletion time.
     #
     # @!attribute [rw] id
     #   The API key ID.
@@ -214,12 +221,18 @@ module Aws::AppSync
     #   seconds since the epoch, rounded down to the nearest hour.
     #   @return [Integer]
     #
+    # @!attribute [rw] deletes
+    #   The time after which the API key is deleted. The date is represented
+    #   as seconds since the epoch, rounded down to the nearest hour.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ApiKey AWS API Documentation
     #
     class ApiKey < Struct.new(
       :id,
       :description,
-      :expires)
+      :expires,
+      :deletes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -460,7 +473,7 @@ module Aws::AppSync
     #
     #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
     #
-    #   * **PER\_RESOLVER\_CACHING**\: Individual resovlers that you specify
+    #   * **PER\_RESOLVER\_CACHING**\: Individual resolvers that you specify
     #     are cached.
     #   @return [String]
     #
@@ -487,7 +500,7 @@ module Aws::AppSync
     #   As of July 2020, this is deprecated, and the generic identifiers
     #   above should be used.
     #
-    #   The following legacy instance types are avaible, but their use is
+    #   The following legacy instance types are available, but their use is
     #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.
@@ -1881,6 +1894,11 @@ module Aws::AppSync
     #   `GraphqlApi`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] waf_web_acl_arn
+    #   The ARN of the AWS Web Application Firewall (WAF) ACL associated
+    #   with this `GraphqlApi`, if one exists.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GraphqlApi AWS API Documentation
     #
     class GraphqlApi < Struct.new(
@@ -1894,7 +1912,8 @@ module Aws::AppSync
       :uris,
       :tags,
       :additional_authentication_providers,
-      :xray_enabled)
+      :xray_enabled,
+      :waf_web_acl_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2922,7 +2941,7 @@ module Aws::AppSync
     #
     #   * **FULL\_REQUEST\_CACHING**\: All requests are fully cached.
     #
-    #   * **PER\_RESOLVER\_CACHING**\: Individual resovlers that you specify
+    #   * **PER\_RESOLVER\_CACHING**\: Individual resolvers that you specify
     #     are cached.
     #   @return [String]
     #
@@ -2949,7 +2968,7 @@ module Aws::AppSync
     #   As of July 2020, this is deprecated, and the generic identifiers
     #   above should be used.
     #
-    #   The following legacy instance types are avaible, but their use is
+    #   The following legacy instance types are available, but their use is
     #   discouraged:
     #
     #   * **T2\_SMALL**\: A t2.small instance type.

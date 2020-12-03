@@ -1828,26 +1828,28 @@ module Aws::DirectConnect
     end
 
     # Creates a link aggregation group (LAG) with the specified number of
-    # bundled physical connections between the customer network and a
-    # specific AWS Direct Connect location. A LAG is a logical interface
-    # that uses the Link Aggregation Control Protocol (LACP) to aggregate
-    # multiple interfaces, enabling you to treat them as a single interface.
+    # bundled physical dedicated connections between the customer network
+    # and a specific AWS Direct Connect location. A LAG is a logical
+    # interface that uses the Link Aggregation Control Protocol (LACP) to
+    # aggregate multiple interfaces, enabling you to treat them as a single
+    # interface.
     #
-    # All connections in a LAG must use the same bandwidth and must
-    # terminate at the same AWS Direct Connect endpoint.
+    # All connections in a LAG must use the same bandwidth (either 1Gbps or
+    # 10Gbps) and must terminate at the same AWS Direct Connect endpoint.
     #
-    # You can have up to 10 connections per LAG. Regardless of this limit,
-    # if you request more connections for the LAG than AWS Direct Connect
-    # can allocate on a single endpoint, no LAG is created.
+    # You can have up to 10 dedicated connections per LAG. Regardless of
+    # this limit, if you request more connections for the LAG than AWS
+    # Direct Connect can allocate on a single endpoint, no LAG is created.
     #
-    # You can specify an existing physical connection or interconnect to
-    # include in the LAG (which counts towards the total number of
-    # connections). Doing so interrupts the current physical connection or
-    # hosted connections, and re-establishes them as a member of the LAG.
+    # You can specify an existing physical dedicated connection or
+    # interconnect to include in the LAG (which counts towards the total
+    # number of connections). Doing so interrupts the current physical
+    # dedicated connection, and re-establishes them as a member of the LAG.
     # The LAG will be created on the same AWS Direct Connect endpoint to
-    # which the connection terminates. Any virtual interfaces associated
-    # with the connection are automatically disassociated and re-associated
-    # with the LAG. The connection ID does not change.
+    # which the dedicated connection terminates. Any virtual interfaces
+    # associated with the dedicated connection are automatically
+    # disassociated and re-associated with the LAG. The connection ID does
+    # not change.
     #
     # If the AWS account used to create a LAG is a registered AWS Direct
     # Connect Partner, the LAG is automatically enabled to host
@@ -1855,22 +1857,21 @@ module Aws::DirectConnect
     # interfaces cannot be directly configured.
     #
     # @option params [required, Integer] :number_of_connections
-    #   The number of physical connections initially provisioned and bundled
-    #   by the LAG.
+    #   The number of physical dedicated connections initially provisioned and
+    #   bundled by the LAG.
     #
     # @option params [required, String] :location
     #   The location for the LAG.
     #
     # @option params [required, String] :connections_bandwidth
-    #   The bandwidth of the individual physical connections bundled by the
-    #   LAG. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps,
-    #   400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps.
+    #   The bandwidth of the individual physical dedicated connections bundled
+    #   by the LAG. The possible values are 1Gbps and 10Gbps.
     #
     # @option params [required, String] :lag_name
     #   The name of the LAG.
     #
     # @option params [String] :connection_id
-    #   The ID of an existing connection to migrate to the LAG.
+    #   The ID of an existing dedicated connection to migrate to the LAG.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to associate with the LAG.
@@ -4157,7 +4158,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

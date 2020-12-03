@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2020-11-11)
+------------------
+
+* Feature - Whereas previously custom headers were set via the app's buildspec, custom headers can now be set directly on the Amplify app for both ci/cd and manual deploy apps.
+
+1.26.0 (2020-10-09)
+------------------
+
+* Feature - Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval - enabling can make code changes can take up to 10 minutes to roll out.
+
+1.25.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2020-09-24)
+------------------
+
+* Feature - Allow Oauth Token in CreateApp call to be a maximum of 1000 characters instead of 100
+
+1.23.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.22.0 (2020-08-25)
 ------------------
 

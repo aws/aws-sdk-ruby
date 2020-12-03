@@ -330,6 +330,9 @@ module Aws::SecurityHub
     # Accepts the invitation to be a member account and be monitored by the
     # Security Hub master account that the invitation was sent from.
     #
+    # This operation is only used by member accounts that are not added
+    # through Organizations.
+    #
     # When the member account accepts the invitation, permission is granted
     # to the master account to view findings generated in the member
     # account.
@@ -628,6 +631,7 @@ module Aws::SecurityHub
     #             id: "NonEmptyString", # required
     #             partition: "aws", # accepts aws, aws-cn, aws-us-gov
     #             region: "NonEmptyString",
+    #             resource_role: "NonEmptyString",
     #             tags: {
     #               "NonEmptyString" => "NonEmptyString",
     #             },
@@ -665,6 +669,17 @@ module Aws::SecurityHub
     #                 },
     #               },
     #               aws_cloud_front_distribution: {
+    #                 cache_behaviors: {
+    #                   items: [
+    #                     {
+    #                       viewer_protocol_policy: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 default_cache_behavior: {
+    #                   viewer_protocol_policy: "NonEmptyString",
+    #                 },
+    #                 default_root_object: "NonEmptyString",
     #                 domain_name: "NonEmptyString",
     #                 etag: "NonEmptyString",
     #                 last_modified_time: "NonEmptyString",
@@ -680,6 +695,21 @@ module Aws::SecurityHub
     #                       domain_name: "NonEmptyString",
     #                       id: "NonEmptyString",
     #                       origin_path: "NonEmptyString",
+    #                       s3_origin_config: {
+    #                         origin_access_identity: "NonEmptyString",
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #                 origin_groups: {
+    #                   items: [
+    #                     {
+    #                       failover_criteria: {
+    #                         status_codes: {
+    #                           items: [1],
+    #                           quantity: 1,
+    #                         },
+    #                       },
     #                     },
     #                   ],
     #                 },
@@ -921,6 +951,21 @@ module Aws::SecurityHub
     #                 principal_id: "NonEmptyString",
     #                 principal_type: "NonEmptyString",
     #                 principal_name: "NonEmptyString",
+    #                 account_id: "NonEmptyString",
+    #                 access_key_id: "NonEmptyString",
+    #                 session_context: {
+    #                   attributes: {
+    #                     mfa_authenticated: false,
+    #                     creation_date: "NonEmptyString",
+    #                   },
+    #                   session_issuer: {
+    #                     type: "NonEmptyString",
+    #                     principal_id: "NonEmptyString",
+    #                     arn: "NonEmptyString",
+    #                     account_id: "NonEmptyString",
+    #                     user_name: "NonEmptyString",
+    #                   },
+    #                 },
     #               },
     #               aws_iam_user: {
     #                 attached_managed_policies: [
@@ -962,6 +1007,56 @@ module Aws::SecurityHub
     #                   },
     #                 ],
     #                 update_date: "NonEmptyString",
+    #               },
+    #               aws_api_gateway_v2_stage: {
+    #                 created_date: "NonEmptyString",
+    #                 description: "NonEmptyString",
+    #                 default_route_settings: {
+    #                   detailed_metrics_enabled: false,
+    #                   logging_level: "NonEmptyString",
+    #                   data_trace_enabled: false,
+    #                   throttling_burst_limit: 1,
+    #                   throttling_rate_limit: 1.0,
+    #                 },
+    #                 deployment_id: "NonEmptyString",
+    #                 last_updated_date: "NonEmptyString",
+    #                 route_settings: {
+    #                   detailed_metrics_enabled: false,
+    #                   logging_level: "NonEmptyString",
+    #                   data_trace_enabled: false,
+    #                   throttling_burst_limit: 1,
+    #                   throttling_rate_limit: 1.0,
+    #                 },
+    #                 stage_name: "NonEmptyString",
+    #                 stage_variables: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 access_log_settings: {
+    #                   format: "NonEmptyString",
+    #                   destination_arn: "NonEmptyString",
+    #                 },
+    #                 auto_deploy: false,
+    #                 last_deployment_status_message: "NonEmptyString",
+    #                 api_gateway_managed: false,
+    #               },
+    #               aws_api_gateway_v2_api: {
+    #                 api_endpoint: "NonEmptyString",
+    #                 api_id: "NonEmptyString",
+    #                 api_key_selection_expression: "NonEmptyString",
+    #                 created_date: "NonEmptyString",
+    #                 description: "NonEmptyString",
+    #                 version: "NonEmptyString",
+    #                 name: "NonEmptyString",
+    #                 protocol_type: "NonEmptyString",
+    #                 route_selection_expression: "NonEmptyString",
+    #                 cors_configuration: {
+    #                   allow_origins: ["NonEmptyString"],
+    #                   allow_credentials: false,
+    #                   expose_headers: ["NonEmptyString"],
+    #                   max_age: 1,
+    #                   allow_methods: ["NonEmptyString"],
+    #                   allow_headers: ["NonEmptyString"],
+    #                 },
     #               },
     #               aws_dynamo_db_table: {
     #                 attribute_definitions: [
@@ -1075,11 +1170,404 @@ module Aws::SecurityHub
     #                 table_size_bytes: 1,
     #                 table_status: "NonEmptyString",
     #               },
+    #               aws_api_gateway_stage: {
+    #                 deployment_id: "NonEmptyString",
+    #                 client_certificate_id: "NonEmptyString",
+    #                 stage_name: "NonEmptyString",
+    #                 description: "NonEmptyString",
+    #                 cache_cluster_enabled: false,
+    #                 cache_cluster_size: "NonEmptyString",
+    #                 cache_cluster_status: "NonEmptyString",
+    #                 method_settings: [
+    #                   {
+    #                     metrics_enabled: false,
+    #                     logging_level: "NonEmptyString",
+    #                     data_trace_enabled: false,
+    #                     throttling_burst_limit: 1,
+    #                     throttling_rate_limit: 1.0,
+    #                     caching_enabled: false,
+    #                     cache_ttl_in_seconds: 1,
+    #                     cache_data_encrypted: false,
+    #                     require_authorization_for_cache_control: false,
+    #                     unauthorized_cache_control_header_strategy: "NonEmptyString",
+    #                     http_method: "NonEmptyString",
+    #                     resource_path: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 variables: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 documentation_version: "NonEmptyString",
+    #                 access_log_settings: {
+    #                   format: "NonEmptyString",
+    #                   destination_arn: "NonEmptyString",
+    #                 },
+    #                 canary_settings: {
+    #                   percent_traffic: 1.0,
+    #                   deployment_id: "NonEmptyString",
+    #                   stage_variable_overrides: {
+    #                     "NonEmptyString" => "NonEmptyString",
+    #                   },
+    #                   use_stage_cache: false,
+    #                 },
+    #                 tracing_enabled: false,
+    #                 created_date: "NonEmptyString",
+    #                 last_updated_date: "NonEmptyString",
+    #                 web_acl_arn: "NonEmptyString",
+    #               },
+    #               aws_api_gateway_rest_api: {
+    #                 id: "NonEmptyString",
+    #                 name: "NonEmptyString",
+    #                 description: "NonEmptyString",
+    #                 created_date: "NonEmptyString",
+    #                 version: "NonEmptyString",
+    #                 binary_media_types: ["NonEmptyString"],
+    #                 minimum_compression_size: 1,
+    #                 api_key_source: "NonEmptyString",
+    #                 endpoint_configuration: {
+    #                   types: ["NonEmptyString"],
+    #                 },
+    #               },
+    #               aws_cloud_trail_trail: {
+    #                 cloud_watch_logs_log_group_arn: "NonEmptyString",
+    #                 cloud_watch_logs_role_arn: "NonEmptyString",
+    #                 has_custom_event_selectors: false,
+    #                 home_region: "NonEmptyString",
+    #                 include_global_service_events: false,
+    #                 is_multi_region_trail: false,
+    #                 is_organization_trail: false,
+    #                 kms_key_id: "NonEmptyString",
+    #                 log_file_validation_enabled: false,
+    #                 name: "NonEmptyString",
+    #                 s3_bucket_name: "NonEmptyString",
+    #                 s3_key_prefix: "NonEmptyString",
+    #                 sns_topic_arn: "NonEmptyString",
+    #                 sns_topic_name: "NonEmptyString",
+    #                 trail_arn: "NonEmptyString",
+    #               },
+    #               aws_certificate_manager_certificate: {
+    #                 certificate_authority_arn: "NonEmptyString",
+    #                 created_at: "NonEmptyString",
+    #                 domain_name: "NonEmptyString",
+    #                 domain_validation_options: [
+    #                   {
+    #                     domain_name: "NonEmptyString",
+    #                     resource_record: {
+    #                       name: "NonEmptyString",
+    #                       type: "NonEmptyString",
+    #                       value: "NonEmptyString",
+    #                     },
+    #                     validation_domain: "NonEmptyString",
+    #                     validation_emails: ["NonEmptyString"],
+    #                     validation_method: "NonEmptyString",
+    #                     validation_status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 extended_key_usages: [
+    #                   {
+    #                     name: "NonEmptyString",
+    #                     o_id: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 failure_reason: "NonEmptyString",
+    #                 imported_at: "NonEmptyString",
+    #                 in_use_by: ["NonEmptyString"],
+    #                 issued_at: "NonEmptyString",
+    #                 issuer: "NonEmptyString",
+    #                 key_algorithm: "NonEmptyString",
+    #                 key_usages: [
+    #                   {
+    #                     name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 not_after: "NonEmptyString",
+    #                 not_before: "NonEmptyString",
+    #                 options: {
+    #                   certificate_transparency_logging_preference: "NonEmptyString",
+    #                 },
+    #                 renewal_eligibility: "NonEmptyString",
+    #                 renewal_summary: {
+    #                   domain_validation_options: [
+    #                     {
+    #                       domain_name: "NonEmptyString",
+    #                       resource_record: {
+    #                         name: "NonEmptyString",
+    #                         type: "NonEmptyString",
+    #                         value: "NonEmptyString",
+    #                       },
+    #                       validation_domain: "NonEmptyString",
+    #                       validation_emails: ["NonEmptyString"],
+    #                       validation_method: "NonEmptyString",
+    #                       validation_status: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   renewal_status: "NonEmptyString",
+    #                   renewal_status_reason: "NonEmptyString",
+    #                   updated_at: "NonEmptyString",
+    #                 },
+    #                 serial: "NonEmptyString",
+    #                 signature_algorithm: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #                 subject: "NonEmptyString",
+    #                 subject_alternative_names: ["NonEmptyString"],
+    #                 type: "NonEmptyString",
+    #               },
+    #               aws_redshift_cluster: {
+    #                 allow_version_upgrade: false,
+    #                 automated_snapshot_retention_period: 1,
+    #                 availability_zone: "NonEmptyString",
+    #                 cluster_availability_status: "NonEmptyString",
+    #                 cluster_create_time: "NonEmptyString",
+    #                 cluster_identifier: "NonEmptyString",
+    #                 cluster_nodes: [
+    #                   {
+    #                     node_role: "NonEmptyString",
+    #                     private_ip_address: "NonEmptyString",
+    #                     public_ip_address: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 cluster_parameter_groups: [
+    #                   {
+    #                     cluster_parameter_status_list: [
+    #                       {
+    #                         parameter_name: "NonEmptyString",
+    #                         parameter_apply_status: "NonEmptyString",
+    #                         parameter_apply_error_description: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     parameter_apply_status: "NonEmptyString",
+    #                     parameter_group_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 cluster_public_key: "NonEmptyString",
+    #                 cluster_revision_number: "NonEmptyString",
+    #                 cluster_security_groups: [
+    #                   {
+    #                     cluster_security_group_name: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 cluster_snapshot_copy_status: {
+    #                   destination_region: "NonEmptyString",
+    #                   manual_snapshot_retention_period: 1,
+    #                   retention_period: 1,
+    #                   snapshot_copy_grant_name: "NonEmptyString",
+    #                 },
+    #                 cluster_status: "NonEmptyString",
+    #                 cluster_subnet_group_name: "NonEmptyString",
+    #                 cluster_version: "NonEmptyString",
+    #                 db_name: "NonEmptyString",
+    #                 deferred_maintenance_windows: [
+    #                   {
+    #                     defer_maintenance_end_time: "NonEmptyString",
+    #                     defer_maintenance_identifier: "NonEmptyString",
+    #                     defer_maintenance_start_time: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 elastic_ip_status: {
+    #                   elastic_ip: "NonEmptyString",
+    #                   status: "NonEmptyString",
+    #                 },
+    #                 elastic_resize_number_of_node_options: "NonEmptyString",
+    #                 encrypted: false,
+    #                 endpoint: {
+    #                   address: "NonEmptyString",
+    #                   port: 1,
+    #                 },
+    #                 enhanced_vpc_routing: false,
+    #                 expected_next_snapshot_schedule_time: "NonEmptyString",
+    #                 expected_next_snapshot_schedule_time_status: "NonEmptyString",
+    #                 hsm_status: {
+    #                   hsm_client_certificate_identifier: "NonEmptyString",
+    #                   hsm_configuration_identifier: "NonEmptyString",
+    #                   status: "NonEmptyString",
+    #                 },
+    #                 iam_roles: [
+    #                   {
+    #                     apply_status: "NonEmptyString",
+    #                     iam_role_arn: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 kms_key_id: "NonEmptyString",
+    #                 maintenance_track_name: "NonEmptyString",
+    #                 manual_snapshot_retention_period: 1,
+    #                 master_username: "NonEmptyString",
+    #                 next_maintenance_window_start_time: "NonEmptyString",
+    #                 node_type: "NonEmptyString",
+    #                 number_of_nodes: 1,
+    #                 pending_actions: ["NonEmptyString"],
+    #                 pending_modified_values: {
+    #                   automated_snapshot_retention_period: 1,
+    #                   cluster_identifier: "NonEmptyString",
+    #                   cluster_type: "NonEmptyString",
+    #                   cluster_version: "NonEmptyString",
+    #                   encryption_type: "NonEmptyString",
+    #                   enhanced_vpc_routing: false,
+    #                   maintenance_track_name: "NonEmptyString",
+    #                   master_user_password: "NonEmptyString",
+    #                   node_type: "NonEmptyString",
+    #                   number_of_nodes: 1,
+    #                   publicly_accessible: false,
+    #                 },
+    #                 preferred_maintenance_window: "NonEmptyString",
+    #                 publicly_accessible: false,
+    #                 resize_info: {
+    #                   allow_cancel_resize: false,
+    #                   resize_type: "NonEmptyString",
+    #                 },
+    #                 restore_status: {
+    #                   current_restore_rate_in_mega_bytes_per_second: 1.0,
+    #                   elapsed_time_in_seconds: 1,
+    #                   estimated_time_to_completion_in_seconds: 1,
+    #                   progress_in_mega_bytes: 1,
+    #                   snapshot_size_in_mega_bytes: 1,
+    #                   status: "NonEmptyString",
+    #                 },
+    #                 snapshot_schedule_identifier: "NonEmptyString",
+    #                 snapshot_schedule_state: "NonEmptyString",
+    #                 vpc_id: "NonEmptyString",
+    #                 vpc_security_groups: [
+    #                   {
+    #                     status: "NonEmptyString",
+    #                     vpc_security_group_id: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #               aws_elb_load_balancer: {
+    #                 availability_zones: ["NonEmptyString"],
+    #                 backend_server_descriptions: [
+    #                   {
+    #                     instance_port: 1,
+    #                     policy_names: ["NonEmptyString"],
+    #                   },
+    #                 ],
+    #                 canonical_hosted_zone_name: "NonEmptyString",
+    #                 canonical_hosted_zone_name_id: "NonEmptyString",
+    #                 created_time: "NonEmptyString",
+    #                 dns_name: "NonEmptyString",
+    #                 health_check: {
+    #                   healthy_threshold: 1,
+    #                   interval: 1,
+    #                   target: "NonEmptyString",
+    #                   timeout: 1,
+    #                   unhealthy_threshold: 1,
+    #                 },
+    #                 instances: [
+    #                   {
+    #                     instance_id: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 listener_descriptions: [
+    #                   {
+    #                     listener: {
+    #                       instance_port: 1,
+    #                       instance_protocol: "NonEmptyString",
+    #                       load_balancer_port: 1,
+    #                       protocol: "NonEmptyString",
+    #                       ssl_certificate_id: "NonEmptyString",
+    #                     },
+    #                     policy_names: ["NonEmptyString"],
+    #                   },
+    #                 ],
+    #                 load_balancer_attributes: {
+    #                   access_log: {
+    #                     emit_interval: 1,
+    #                     enabled: false,
+    #                     s3_bucket_name: "NonEmptyString",
+    #                     s3_bucket_prefix: "NonEmptyString",
+    #                   },
+    #                   connection_draining: {
+    #                     enabled: false,
+    #                     timeout: 1,
+    #                   },
+    #                   connection_settings: {
+    #                     idle_timeout: 1,
+    #                   },
+    #                   cross_zone_load_balancing: {
+    #                     enabled: false,
+    #                   },
+    #                 },
+    #                 load_balancer_name: "NonEmptyString",
+    #                 policies: {
+    #                   app_cookie_stickiness_policies: [
+    #                     {
+    #                       cookie_name: "NonEmptyString",
+    #                       policy_name: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   lb_cookie_stickiness_policies: [
+    #                     {
+    #                       cookie_expiration_period: 1,
+    #                       policy_name: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   other_policies: ["NonEmptyString"],
+    #                 },
+    #                 scheme: "NonEmptyString",
+    #                 security_groups: ["NonEmptyString"],
+    #                 source_security_group: {
+    #                   group_name: "NonEmptyString",
+    #                   owner_alias: "NonEmptyString",
+    #                 },
+    #                 subnets: ["NonEmptyString"],
+    #                 vpc_id: "NonEmptyString",
+    #               },
+    #               aws_iam_group: {
+    #                 attached_managed_policies: [
+    #                   {
+    #                     policy_name: "NonEmptyString",
+    #                     policy_arn: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 create_date: "NonEmptyString",
+    #                 group_id: "NonEmptyString",
+    #                 group_name: "NonEmptyString",
+    #                 group_policy_list: [
+    #                   {
+    #                     policy_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 path: "NonEmptyString",
+    #               },
     #               aws_iam_role: {
     #                 assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #                 attached_managed_policies: [
+    #                   {
+    #                     policy_name: "NonEmptyString",
+    #                     policy_arn: "NonEmptyString",
+    #                   },
+    #                 ],
     #                 create_date: "NonEmptyString",
+    #                 instance_profile_list: [
+    #                   {
+    #                     arn: "NonEmptyString",
+    #                     create_date: "NonEmptyString",
+    #                     instance_profile_id: "NonEmptyString",
+    #                     instance_profile_name: "NonEmptyString",
+    #                     path: "NonEmptyString",
+    #                     roles: [
+    #                       {
+    #                         arn: "NonEmptyString",
+    #                         assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #                         create_date: "NonEmptyString",
+    #                         path: "NonEmptyString",
+    #                         role_id: "NonEmptyString",
+    #                         role_name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 permissions_boundary: {
+    #                   permissions_boundary_arn: "NonEmptyString",
+    #                   permissions_boundary_type: "NonEmptyString",
+    #                 },
     #                 role_id: "NonEmptyString",
     #                 role_name: "NonEmptyString",
+    #                 role_policy_list: [
+    #                   {
+    #                     policy_name: "NonEmptyString",
+    #                   },
+    #                 ],
     #                 max_session_duration: 1,
     #                 path: "NonEmptyString",
     #               },
@@ -1564,8 +2052,8 @@ module Aws::SecurityHub
     # Updates from `BatchUpdateFindings` do not affect the value of
     # `UpdatedAt` for a finding.
     #
-    # Master accounts can use `BatchUpdateFindings` to update the following
-    # finding fields and objects.
+    # Master and member accounts can use `BatchUpdateFindings` to update the
+    # following finding fields and objects.
     #
     # * `Confidence`
     #
@@ -1585,8 +2073,15 @@ module Aws::SecurityHub
     #
     # * `Workflow`
     #
-    # Member accounts can only use `BatchUpdateFindings` to update the Note
-    # object.
+    # You can configure IAM policies to restrict access to fields and field
+    # values. For example, you might not want member accounts to be able to
+    # suppress findings or change the finding severity. See [Configuring
+    # access to BatchUpdateFindings][1] in the *AWS Security Hub User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchupdatefindings.html#batchupdatefindings-configure-access
     #
     # @option params [required, Array<Types::AwsSecurityFindingIdentifier>] :finding_identifiers
     #   The list of findings to update. `BatchUpdateFindings` can be used to
@@ -2362,29 +2857,48 @@ module Aws::SecurityHub
 
     # Creates a member association in Security Hub between the specified
     # accounts and the account used to make the request, which is the master
-    # account. To successfully create a member, you must use this action
-    # from an account that already has Security Hub enabled. To enable
-    # Security Hub, you can use the ` EnableSecurityHub ` operation.
+    # account. If you are integrated with Organizations, then the master
+    # account is the Security Hub administrator account that is designated
+    # by the organization management account.
     #
-    # After you use `CreateMembers` to create member account associations in
-    # Security Hub, you must use the ` InviteMembers ` operation to invite
-    # the accounts to enable Security Hub and become member accounts in
-    # Security Hub.
+    # `CreateMembers` is always used to add accounts that are not
+    # organization members.
     #
-    # If the account owner accepts the invitation, the account becomes a
-    # member account in Security Hub. A permissions policy is added that
-    # permits the master account to view the findings generated in the
-    # member account. When Security Hub is enabled in the invited account,
-    # findings start to be sent to both the member and master accounts.
+    # For accounts that are part of an organization, `CreateMembers` is only
+    # used in the following cases:
+    #
+    # * Security Hub is not configured to automatically add new accounts in
+    #   an organization.
+    #
+    # * The account was disassociated or deleted in Security Hub.
+    #
+    # This action can only be used by an account that has Security Hub
+    # enabled. To enable Security Hub, you can use the ` EnableSecurityHub `
+    # operation.
+    #
+    # For accounts that are not organization members, you create the account
+    # association and then send an invitation to the member account. To send
+    # the invitation, you use the ` InviteMembers ` operation. If the
+    # account owner accepts the invitation, the account becomes a member
+    # account in Security Hub.
+    #
+    # Accounts that are part of an organization do not receive an
+    # invitation. They automatically become a member account in Security
+    # Hub.
+    #
+    # A permissions policy is added that permits the master account to view
+    # the findings generated in the member account. When Security Hub is
+    # enabled in a member account, findings are sent to both the member and
+    # master accounts.
     #
     # To remove the association between the master and member accounts, use
     # the ` DisassociateFromMasterAccount ` or ` DisassociateMembers `
     # operation.
     #
-    # @option params [Array<Types::AccountDetails>] :account_details
+    # @option params [required, Array<Types::AccountDetails>] :account_details
     #   The list of accounts to associate with the Security Hub master
-    #   account. For each account, the list includes the account ID and the
-    #   email address.
+    #   account. For each account, the list includes the account ID and
+    #   optionally the email address.
     #
     # @return [Types::CreateMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2393,9 +2907,9 @@ module Aws::SecurityHub
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_members({
-    #     account_details: [
+    #     account_details: [ # required
     #       {
-    #         account_id: "AccountId",
+    #         account_id: "AccountId", # required
     #         email: "NonEmptyString",
     #       },
     #     ],
@@ -2417,6 +2931,9 @@ module Aws::SecurityHub
     end
 
     # Declines invitations to become a member account.
+    #
+    # This operation is only used by accounts that are not part of an
+    # organization. Organization accounts do not receive invitations.
     #
     # @option params [required, Array<String>] :account_ids
     #   The list of account IDs for the accounts from which to decline the
@@ -2510,6 +3027,9 @@ module Aws::SecurityHub
     # Deletes invitations received by the AWS account to become a member
     # account.
     #
+    # This operation is only used by accounts that are not part of an
+    # organization. Organization accounts do not receive invitations.
+    #
     # @option params [required, Array<String>] :account_ids
     #   The list of the account IDs that sent the invitations to delete.
     #
@@ -2540,7 +3060,10 @@ module Aws::SecurityHub
 
     # Deletes the specified member accounts from Security Hub.
     #
-    # @option params [Array<String>] :account_ids
+    # Can be used to delete member accounts that belong to an organization
+    # as well as member accounts that were invited manually.
+    #
+    # @option params [required, Array<String>] :account_ids
     #   The list of account IDs for the member accounts to delete.
     #
     # @return [Types::DeleteMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2550,7 +3073,7 @@ module Aws::SecurityHub
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_members({
-    #     account_ids: ["NonEmptyString"],
+    #     account_ids: ["NonEmptyString"], # required
     #   })
     #
     # @example Response structure
@@ -2649,6 +3172,28 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def describe_hub(params = {}, options = {})
       req = build_request(:describe_hub, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the Organizations configuration for Security
+    # Hub. Can only be called from a Security Hub administrator account.
+    #
+    # @return [Types::DescribeOrganizationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOrganizationConfigurationResponse#auto_enable #auto_enable} => Boolean
+    #   * {Types::DescribeOrganizationConfigurationResponse#member_account_limit_reached #member_account_limit_reached} => Boolean
+    #
+    # @example Response structure
+    #
+    #   resp.auto_enable #=> Boolean
+    #   resp.member_account_limit_reached #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeOrganizationConfiguration AWS API Documentation
+    #
+    # @overload describe_organization_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_organization_configuration(params = {}, options = {})
+      req = build_request(:describe_organization_configuration, params)
       req.send_request(options)
     end
 
@@ -2764,7 +3309,8 @@ module Aws::SecurityHub
     #
     # @option params [required, String] :standards_subscription_arn
     #   The ARN of a resource that represents your subscription to a supported
-    #   standard.
+    #   standard. To get the subscription ARNs of the standards you have
+    #   enabled, use the ` GetEnabledStandards ` operation.
     #
     # @option params [String] :next_token
     #   The token that is required for pagination. On your first call to the
@@ -2842,6 +3388,29 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Disables a Security Hub administrator account. Can only be called by
+    # the organization management account.
+    #
+    # @option params [required, String] :admin_account_id
+    #   The AWS account identifier of the Security Hub administrator account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_organization_admin_account({
+    #     admin_account_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisableOrganizationAdminAccount AWS API Documentation
+    #
+    # @overload disable_organization_admin_account(params = {})
+    # @param [Hash] params ({})
+    def disable_organization_admin_account(params = {}, options = {})
+      req = build_request(:disable_organization_admin_account, params)
+      req.send_request(options)
+    end
+
     # Disables Security Hub in your account only in the current Region. To
     # disable Security Hub in all Regions, you must submit one request per
     # Region where you have enabled Security Hub.
@@ -2871,6 +3440,11 @@ module Aws::SecurityHub
     # Disassociates the current Security Hub member account from the
     # associated master account.
     #
+    # This operation is only used by accounts that are not part of an
+    # organization. For organization accounts, only the master account (the
+    # designated Security Hub administrator) can disassociate a member
+    # account.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateFromMasterAccount AWS API Documentation
@@ -2885,7 +3459,10 @@ module Aws::SecurityHub
     # Disassociates the specified member accounts from the associated master
     # account.
     #
-    # @option params [Array<String>] :account_ids
+    # Can be used to disassociate both accounts that are in an organization
+    # and accounts that were invited manually.
+    #
+    # @option params [required, Array<String>] :account_ids
     #   The account IDs of the member accounts to disassociate from the master
     #   account.
     #
@@ -2894,7 +3471,7 @@ module Aws::SecurityHub
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_members({
-    #     account_ids: ["NonEmptyString"],
+    #     account_ids: ["NonEmptyString"], # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DisassociateMembers AWS API Documentation
@@ -2936,6 +3513,30 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def enable_import_findings_for_product(params = {}, options = {})
       req = build_request(:enable_import_findings_for_product, params)
+      req.send_request(options)
+    end
+
+    # Designates the Security Hub administrator account for an organization.
+    # Can only be called by the organization management account.
+    #
+    # @option params [required, String] :admin_account_id
+    #   The AWS account identifier of the account to designate as the Security
+    #   Hub administrator account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_organization_admin_account({
+    #     admin_account_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableOrganizationAdminAccount AWS API Documentation
+    #
+    # @overload enable_organization_admin_account(params = {})
+    # @param [Hash] params ({})
+    def enable_organization_admin_account(params = {}, options = {})
+      req = build_request(:enable_organization_admin_account, params)
       req.send_request(options)
     end
 
@@ -3057,6 +3658,9 @@ module Aws::SecurityHub
     # @option params [Types::AwsSecurityFindingFilters] :filters
     #   The finding attributes used to define a condition to filter the
     #   returned findings.
+    #
+    #   You can filter by up to 10 finding attributes. For each attribute, you
+    #   can provide up to 20 filter values.
     #
     #   Note that in the available filter fields, `WorkflowState` is
     #   deprecated. To search for a finding based on its workflow status, use
@@ -3741,6 +4345,7 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].id #=> String
     #   resp.findings[0].resources[0].partition #=> String, one of "aws", "aws-cn", "aws-us-gov"
     #   resp.findings[0].resources[0].region #=> String
+    #   resp.findings[0].resources[0].resource_role #=> String
     #   resp.findings[0].resources[0].tags #=> Hash
     #   resp.findings[0].resources[0].tags["NonEmptyString"] #=> String
     #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.launch_configuration_name #=> String
@@ -3766,6 +4371,10 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_code_build_project.vpc_config.subnets[0] #=> String
     #   resp.findings[0].resources[0].details.aws_code_build_project.vpc_config.security_group_ids #=> Array
     #   resp.findings[0].resources[0].details.aws_code_build_project.vpc_config.security_group_ids[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.cache_behaviors.items #=> Array
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.cache_behaviors.items[0].viewer_protocol_policy #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.default_cache_behavior.viewer_protocol_policy #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.default_root_object #=> String
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.domain_name #=> String
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.etag #=> String
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.last_modified_time #=> String
@@ -3777,6 +4386,11 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.origins.items[0].domain_name #=> String
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.origins.items[0].id #=> String
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.origins.items[0].origin_path #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.origins.items[0].s3_origin_config.origin_access_identity #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.origin_groups.items #=> Array
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.origin_groups.items[0].failover_criteria.status_codes.items #=> Array
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.origin_groups.items[0].failover_criteria.status_codes.items[0] #=> Integer
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.origin_groups.items[0].failover_criteria.status_codes.quantity #=> Integer
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.status #=> String
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.web_acl_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_instance.type #=> String
@@ -3930,6 +4544,15 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_iam_access_key.principal_id #=> String
     #   resp.findings[0].resources[0].details.aws_iam_access_key.principal_type #=> String
     #   resp.findings[0].resources[0].details.aws_iam_access_key.principal_name #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_access_key.account_id #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_access_key.access_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_access_key.session_context.attributes.mfa_authenticated #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_iam_access_key.session_context.attributes.creation_date #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_access_key.session_context.session_issuer.type #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_access_key.session_context.session_issuer.principal_id #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_access_key.session_context.session_issuer.arn #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_access_key.session_context.session_issuer.account_id #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_access_key.session_context.session_issuer.user_name #=> String
     #   resp.findings[0].resources[0].details.aws_iam_user.attached_managed_policies #=> Array
     #   resp.findings[0].resources[0].details.aws_iam_user.attached_managed_policies[0].policy_name #=> String
     #   resp.findings[0].resources[0].details.aws_iam_user.attached_managed_policies[0].policy_arn #=> String
@@ -3957,6 +4580,47 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_iam_policy.policy_version_list[0].is_default_version #=> Boolean
     #   resp.findings[0].resources[0].details.aws_iam_policy.policy_version_list[0].create_date #=> String
     #   resp.findings[0].resources[0].details.aws_iam_policy.update_date #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.created_date #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.description #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.default_route_settings.detailed_metrics_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.default_route_settings.logging_level #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.default_route_settings.data_trace_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.default_route_settings.throttling_burst_limit #=> Integer
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.default_route_settings.throttling_rate_limit #=> Float
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.deployment_id #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.last_updated_date #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.route_settings.detailed_metrics_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.route_settings.logging_level #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.route_settings.data_trace_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.route_settings.throttling_burst_limit #=> Integer
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.route_settings.throttling_rate_limit #=> Float
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.stage_name #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.stage_variables #=> Hash
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.stage_variables["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.access_log_settings.format #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.access_log_settings.destination_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.auto_deploy #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.last_deployment_status_message #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_stage.api_gateway_managed #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.api_endpoint #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.api_id #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.api_key_selection_expression #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.created_date #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.description #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.version #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.name #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.protocol_type #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.route_selection_expression #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.cors_configuration.allow_origins #=> Array
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.cors_configuration.allow_origins[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.cors_configuration.allow_credentials #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.cors_configuration.expose_headers #=> Array
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.cors_configuration.expose_headers[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.cors_configuration.max_age #=> Integer
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.cors_configuration.allow_methods #=> Array
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.cors_configuration.allow_methods[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.cors_configuration.allow_headers #=> Array
+    #   resp.findings[0].resources[0].details.aws_api_gateway_v2_api.cors_configuration.allow_headers[0] #=> String
     #   resp.findings[0].resources[0].details.aws_dynamo_db_table.attribute_definitions #=> Array
     #   resp.findings[0].resources[0].details.aws_dynamo_db_table.attribute_definitions[0].attribute_name #=> String
     #   resp.findings[0].resources[0].details.aws_dynamo_db_table.attribute_definitions[0].attribute_type #=> String
@@ -4025,10 +4689,283 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_dynamo_db_table.table_name #=> String
     #   resp.findings[0].resources[0].details.aws_dynamo_db_table.table_size_bytes #=> Integer
     #   resp.findings[0].resources[0].details.aws_dynamo_db_table.table_status #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.deployment_id #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.client_certificate_id #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.stage_name #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.description #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.cache_cluster_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.cache_cluster_size #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.cache_cluster_status #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.method_settings #=> Array
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.method_settings[0].metrics_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.method_settings[0].logging_level #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.method_settings[0].data_trace_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.method_settings[0].throttling_burst_limit #=> Integer
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.method_settings[0].throttling_rate_limit #=> Float
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.method_settings[0].caching_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.method_settings[0].cache_ttl_in_seconds #=> Integer
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.method_settings[0].cache_data_encrypted #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.method_settings[0].require_authorization_for_cache_control #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.method_settings[0].unauthorized_cache_control_header_strategy #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.method_settings[0].http_method #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.method_settings[0].resource_path #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.variables #=> Hash
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.variables["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.documentation_version #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.access_log_settings.format #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.access_log_settings.destination_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.canary_settings.percent_traffic #=> Float
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.canary_settings.deployment_id #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.canary_settings.stage_variable_overrides #=> Hash
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.canary_settings.stage_variable_overrides["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.canary_settings.use_stage_cache #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.tracing_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.created_date #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.last_updated_date #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_stage.web_acl_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_rest_api.id #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_rest_api.name #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_rest_api.description #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_rest_api.created_date #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_rest_api.version #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_rest_api.binary_media_types #=> Array
+    #   resp.findings[0].resources[0].details.aws_api_gateway_rest_api.binary_media_types[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_rest_api.minimum_compression_size #=> Integer
+    #   resp.findings[0].resources[0].details.aws_api_gateway_rest_api.api_key_source #=> String
+    #   resp.findings[0].resources[0].details.aws_api_gateway_rest_api.endpoint_configuration.types #=> Array
+    #   resp.findings[0].resources[0].details.aws_api_gateway_rest_api.endpoint_configuration.types[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.cloud_watch_logs_log_group_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.cloud_watch_logs_role_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.has_custom_event_selectors #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.home_region #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.include_global_service_events #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.is_multi_region_trail #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.is_organization_trail #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.kms_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.log_file_validation_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.name #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.s3_bucket_name #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.s3_key_prefix #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.sns_topic_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.sns_topic_name #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.trail_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.certificate_authority_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.created_at #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.domain_name #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.domain_validation_options #=> Array
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.domain_validation_options[0].domain_name #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.domain_validation_options[0].resource_record.name #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.domain_validation_options[0].resource_record.type #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.domain_validation_options[0].resource_record.value #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.domain_validation_options[0].validation_domain #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.domain_validation_options[0].validation_emails #=> Array
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.domain_validation_options[0].validation_emails[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.domain_validation_options[0].validation_method #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.domain_validation_options[0].validation_status #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.extended_key_usages #=> Array
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.extended_key_usages[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.extended_key_usages[0].o_id #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.failure_reason #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.imported_at #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.in_use_by #=> Array
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.in_use_by[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.issued_at #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.issuer #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.key_algorithm #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.key_usages #=> Array
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.key_usages[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.not_after #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.not_before #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.options.certificate_transparency_logging_preference #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.renewal_eligibility #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.renewal_summary.domain_validation_options #=> Array
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.renewal_summary.domain_validation_options[0].domain_name #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.renewal_summary.domain_validation_options[0].resource_record.name #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.renewal_summary.domain_validation_options[0].resource_record.type #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.renewal_summary.domain_validation_options[0].resource_record.value #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.renewal_summary.domain_validation_options[0].validation_domain #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.renewal_summary.domain_validation_options[0].validation_emails #=> Array
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.renewal_summary.domain_validation_options[0].validation_emails[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.renewal_summary.domain_validation_options[0].validation_method #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.renewal_summary.domain_validation_options[0].validation_status #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.renewal_summary.renewal_status #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.renewal_summary.renewal_status_reason #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.renewal_summary.updated_at #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.serial #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.signature_algorithm #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.status #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.subject #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.subject_alternative_names #=> Array
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.subject_alternative_names[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.type #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.allow_version_upgrade #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.availability_zone #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_availability_status #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_create_time #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_identifier #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_nodes #=> Array
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_nodes[0].node_role #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_nodes[0].private_ip_address #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_nodes[0].public_ip_address #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_parameter_groups #=> Array
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_parameter_groups[0].cluster_parameter_status_list #=> Array
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_name #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_status #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_error_description #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_parameter_groups[0].parameter_apply_status #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_parameter_groups[0].parameter_group_name #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_public_key #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_revision_number #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_security_groups #=> Array
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_security_groups[0].cluster_security_group_name #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_security_groups[0].status #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_snapshot_copy_status.destination_region #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_status #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_subnet_group_name #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.cluster_version #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.db_name #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.deferred_maintenance_windows #=> Array
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.elastic_ip_status.elastic_ip #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.elastic_ip_status.status #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.encrypted #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.endpoint.address #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.endpoint.port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.enhanced_vpc_routing #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.expected_next_snapshot_schedule_time #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.hsm_status.hsm_client_certificate_identifier #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.hsm_status.hsm_configuration_identifier #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.hsm_status.status #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.iam_roles #=> Array
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.iam_roles[0].apply_status #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.iam_roles[0].iam_role_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.kms_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.maintenance_track_name #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.manual_snapshot_retention_period #=> Integer
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.master_username #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.next_maintenance_window_start_time #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.node_type #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.number_of_nodes #=> Integer
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.pending_actions #=> Array
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.pending_actions[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.pending_modified_values.cluster_identifier #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.pending_modified_values.cluster_type #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.pending_modified_values.cluster_version #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.pending_modified_values.encryption_type #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.pending_modified_values.node_type #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.pending_modified_values.number_of_nodes #=> Integer
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.pending_modified_values.publicly_accessible #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.preferred_maintenance_window #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.publicly_accessible #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.resize_info.allow_cancel_resize #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.resize_info.resize_type #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.restore_status.current_restore_rate_in_mega_bytes_per_second #=> Float
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.restore_status.elapsed_time_in_seconds #=> Integer
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.restore_status.progress_in_mega_bytes #=> Integer
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.restore_status.snapshot_size_in_mega_bytes #=> Integer
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.restore_status.status #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.snapshot_schedule_identifier #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.snapshot_schedule_state #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.vpc_id #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.vpc_security_groups #=> Array
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.vpc_security_groups[0].status #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.availability_zones #=> Array
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.availability_zones[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.backend_server_descriptions #=> Array
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.backend_server_descriptions[0].instance_port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.backend_server_descriptions[0].policy_names #=> Array
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.backend_server_descriptions[0].policy_names[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.canonical_hosted_zone_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.canonical_hosted_zone_name_id #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.created_time #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.dns_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.health_check.healthy_threshold #=> Integer
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.health_check.interval #=> Integer
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.health_check.target #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.health_check.timeout #=> Integer
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.health_check.unhealthy_threshold #=> Integer
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.instances #=> Array
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.instances[0].instance_id #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.listener_descriptions #=> Array
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.listener_descriptions[0].listener.instance_port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.listener_descriptions[0].listener.instance_protocol #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.listener_descriptions[0].listener.load_balancer_port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.listener_descriptions[0].listener.protocol #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.listener_descriptions[0].listener.ssl_certificate_id #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.listener_descriptions[0].policy_names #=> Array
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.listener_descriptions[0].policy_names[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.load_balancer_attributes.access_log.emit_interval #=> Integer
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.load_balancer_attributes.access_log.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.load_balancer_attributes.access_log.s3_bucket_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.load_balancer_attributes.access_log.s3_bucket_prefix #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.load_balancer_attributes.connection_draining.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.load_balancer_attributes.connection_draining.timeout #=> Integer
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.load_balancer_attributes.connection_settings.idle_timeout #=> Integer
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.load_balancer_attributes.cross_zone_load_balancing.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.load_balancer_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.policies.app_cookie_stickiness_policies #=> Array
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.policies.app_cookie_stickiness_policies[0].cookie_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.policies.app_cookie_stickiness_policies[0].policy_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.policies.lb_cookie_stickiness_policies #=> Array
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.policies.lb_cookie_stickiness_policies[0].cookie_expiration_period #=> Integer
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.policies.lb_cookie_stickiness_policies[0].policy_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.policies.other_policies #=> Array
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.policies.other_policies[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.scheme #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.security_groups #=> Array
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.security_groups[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.source_security_group.group_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.source_security_group.owner_alias #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.subnets #=> Array
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.subnets[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.vpc_id #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_group.attached_managed_policies #=> Array
+    #   resp.findings[0].resources[0].details.aws_iam_group.attached_managed_policies[0].policy_name #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_group.attached_managed_policies[0].policy_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_group.create_date #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_group.group_id #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_group.group_name #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_group.group_policy_list #=> Array
+    #   resp.findings[0].resources[0].details.aws_iam_group.group_policy_list[0].policy_name #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_group.path #=> String
     #   resp.findings[0].resources[0].details.aws_iam_role.assume_role_policy_document #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.attached_managed_policies #=> Array
+    #   resp.findings[0].resources[0].details.aws_iam_role.attached_managed_policies[0].policy_name #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.attached_managed_policies[0].policy_arn #=> String
     #   resp.findings[0].resources[0].details.aws_iam_role.create_date #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.instance_profile_list #=> Array
+    #   resp.findings[0].resources[0].details.aws_iam_role.instance_profile_list[0].arn #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.instance_profile_list[0].create_date #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.instance_profile_list[0].instance_profile_id #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.instance_profile_list[0].instance_profile_name #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.instance_profile_list[0].path #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.instance_profile_list[0].roles #=> Array
+    #   resp.findings[0].resources[0].details.aws_iam_role.instance_profile_list[0].roles[0].arn #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.instance_profile_list[0].roles[0].assume_role_policy_document #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.instance_profile_list[0].roles[0].create_date #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.instance_profile_list[0].roles[0].path #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.instance_profile_list[0].roles[0].role_id #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.instance_profile_list[0].roles[0].role_name #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.permissions_boundary.permissions_boundary_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.permissions_boundary.permissions_boundary_type #=> String
     #   resp.findings[0].resources[0].details.aws_iam_role.role_id #=> String
     #   resp.findings[0].resources[0].details.aws_iam_role.role_name #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.role_policy_list #=> Array
+    #   resp.findings[0].resources[0].details.aws_iam_role.role_policy_list[0].policy_name #=> String
     #   resp.findings[0].resources[0].details.aws_iam_role.max_session_duration #=> Integer
     #   resp.findings[0].resources[0].details.aws_iam_role.path #=> String
     #   resp.findings[0].resources[0].details.aws_kms_key.aws_account_id #=> String
@@ -4758,6 +5695,9 @@ module Aws::SecurityHub
     # Provides the details for the Security Hub master account for the
     # current member account.
     #
+    # Can be used by both member accounts that are in an organization and
+    # accounts that were invited manually.
+    #
     # @return [Types::GetMasterAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMasterAccountResponse#master #master} => Types::Invitation
@@ -4780,6 +5720,13 @@ module Aws::SecurityHub
 
     # Returns the details for the Security Hub member accounts for the
     # specified account IDs.
+    #
+    # A master account can be either a delegated Security Hub administrator
+    # account for an organization or a master account that enabled Security
+    # Hub manually.
+    #
+    # The results include both member accounts that are in an organization
+    # and accounts that were invited manually.
     #
     # @option params [required, Array<String>] :account_ids
     #   The list of account IDs for the Security Hub member accounts to return
@@ -4821,15 +5768,18 @@ module Aws::SecurityHub
     # Invites other AWS accounts to become member accounts for the Security
     # Hub master account that the invitation is sent from.
     #
+    # This operation is only used to invite accounts that do not belong to
+    # an organization. Organization accounts do not receive invitations.
+    #
     # Before you can use this action to invite a member, you must first use
     # the ` CreateMembers ` action to create the member account in Security
     # Hub.
     #
-    # When the account owner accepts the invitation to become a member
-    # account and enables Security Hub, the master account can view the
-    # findings generated from the member account.
+    # When the account owner enables Security Hub and accepts the invitation
+    # to become a member account, the master account can view the findings
+    # generated from the member account.
     #
-    # @option params [Array<String>] :account_ids
+    # @option params [required, Array<String>] :account_ids
     #   The list of account IDs of the AWS accounts to invite to Security Hub
     #   as members.
     #
@@ -4840,7 +5790,7 @@ module Aws::SecurityHub
     # @example Request syntax with placeholder values
     #
     #   resp = client.invite_members({
-    #     account_ids: ["NonEmptyString"],
+    #     account_ids: ["NonEmptyString"], # required
     #   })
     #
     # @example Response structure
@@ -4905,6 +5855,9 @@ module Aws::SecurityHub
     # Lists all Security Hub membership invitations that were sent to the
     # current AWS account.
     #
+    # This operation is only used by accounts that do not belong to an
+    # organization. Organization accounts do not receive invitations.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in the response.
     #
@@ -4952,14 +5905,17 @@ module Aws::SecurityHub
     # Lists details about all member accounts for the current Security Hub
     # master account.
     #
+    # The results include both member accounts that belong to an
+    # organization and member accounts that were invited manually.
+    #
     # @option params [Boolean] :only_associated
     #   Specifies which member accounts to include in the response based on
     #   their relationship status with the master account. The default value
     #   is `TRUE`.
     #
     #   If `OnlyAssociated` is set to `TRUE`, the response includes member
-    #   accounts whose relationship status with the master is set to `ENABLED`
-    #   or `DISABLED`.
+    #   accounts whose relationship status with the master is set to
+    #   `ENABLED`.
     #
     #   If `OnlyAssociated` is set to `FALSE`, the response includes all
     #   existing member accounts.
@@ -5007,6 +5963,49 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def list_members(params = {}, options = {})
       req = build_request(:list_members, params)
+      req.send_request(options)
+    end
+
+    # Lists the Security Hub administrator accounts. Can only be called by
+    # the organization management account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in the response.
+    #
+    # @option params [String] :next_token
+    #   The token that is required for pagination. On your first call to the
+    #   `ListOrganizationAdminAccounts` operation, set the value of this
+    #   parameter to `NULL`. For subsequent calls to the operation, to
+    #   continue listing data, set the value of this parameter to the value
+    #   returned from the previous response.
+    #
+    # @return [Types::ListOrganizationAdminAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOrganizationAdminAccountsResponse#admin_accounts #admin_accounts} => Array&lt;Types::AdminAccount&gt;
+    #   * {Types::ListOrganizationAdminAccountsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_organization_admin_accounts({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.admin_accounts #=> Array
+    #   resp.admin_accounts[0].account_id #=> String
+    #   resp.admin_accounts[0].status #=> String, one of "ENABLED", "DISABLE_IN_PROGRESS"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListOrganizationAdminAccounts AWS API Documentation
+    #
+    # @overload list_organization_admin_accounts(params = {})
+    # @param [Hash] params ({})
+    def list_organization_admin_accounts(params = {}, options = {})
+      req = build_request(:list_organization_admin_accounts, params)
       req.send_request(options)
     end
 
@@ -6306,6 +7305,36 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Used to update the configuration related to Organizations. Can only be
+    # called from a Security Hub administrator account.
+    #
+    # @option params [required, Boolean] :auto_enable
+    #   Whether to automatically enable Security Hub for new accounts in the
+    #   organization.
+    #
+    #   By default, this is `false`, and new accounts are not added
+    #   automatically.
+    #
+    #   To automatically enable Security Hub for new accounts, set this to
+    #   `true`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_organization_configuration({
+    #     auto_enable: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateOrganizationConfiguration AWS API Documentation
+    #
+    # @overload update_organization_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_organization_configuration(params = {}, options = {})
+      req = build_request(:update_organization_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates configuration options for Security Hub.
     #
     # @option params [Boolean] :auto_enable_controls
@@ -6378,7 +7407,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -422,11 +422,6 @@ module Aws::CodePipeline
     #   The category of the custom action, such as a build action or a test
     #   action.
     #
-    #   <note markdown="1"> Although `Source` and `Approval` are listed as valid values, they are
-    #   not currently functional. These values are reserved for future use.
-    #
-    #    </note>
-    #
     # @option params [required, String] :provider
     #   The provider of the service used in the custom action, such as AWS
     #   CodeDeploy.
@@ -1092,6 +1087,8 @@ module Aws::CodePipeline
     #   resp.pipeline_version #=> Integer
     #   resp.stage_states #=> Array
     #   resp.stage_states[0].stage_name #=> String
+    #   resp.stage_states[0].inbound_execution.pipeline_execution_id #=> String
+    #   resp.stage_states[0].inbound_execution.status #=> String, one of "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
     #   resp.stage_states[0].inbound_transition_state.enabled #=> Boolean
     #   resp.stage_states[0].inbound_transition_state.last_changed_by #=> String
     #   resp.stage_states[0].inbound_transition_state.last_changed_at #=> Time
@@ -1101,6 +1098,7 @@ module Aws::CodePipeline
     #   resp.stage_states[0].action_states[0].current_revision.revision_id #=> String
     #   resp.stage_states[0].action_states[0].current_revision.revision_change_id #=> String
     #   resp.stage_states[0].action_states[0].current_revision.created #=> Time
+    #   resp.stage_states[0].action_states[0].latest_execution.action_execution_id #=> String
     #   resp.stage_states[0].action_states[0].latest_execution.status #=> String, one of "InProgress", "Abandoned", "Succeeded", "Failed"
     #   resp.stage_states[0].action_states[0].latest_execution.summary #=> String
     #   resp.stage_states[0].action_states[0].latest_execution.last_status_change #=> Time
@@ -2404,7 +2402,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

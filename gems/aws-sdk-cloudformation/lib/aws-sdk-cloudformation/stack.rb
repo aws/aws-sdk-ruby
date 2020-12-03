@@ -540,10 +540,9 @@ module Aws::CloudFormation
     #     [AWS::Serverless][10] transforms, which are macros hosted by AWS
     #     CloudFormation.
     #
-    #     Change sets do not currently support nested stacks. If you want to
-    #     create a stack from a stack template that contains macros *and*
-    #     nested stacks, you must create the stack directly from the template
-    #     using this capability.
+    #     If you want to create a stack from a stack template that contains
+    #     macros *and* nested stacks, you must create the stack directly from
+    #     the template using this capability.
     #
     #     You should only create stacks directly from a stack template that
     #     contains macros if you know what processing the macro performs.
@@ -880,10 +879,9 @@ module Aws::CloudFormation
     #     [AWS::Serverless][10] transforms, which are macros hosted by AWS
     #     CloudFormation.
     #
-    #     Change sets do not currently support nested stacks. If you want to
-    #     update a stack from a stack template that contains macros *and*
-    #     nested stacks, you must update the stack directly from the template
-    #     using this capability.
+    #     If you want to update a stack from a stack template that contains
+    #     macros *and* nested stacks, you must update the stack directly from
+    #     the template using this capability.
     #
     #     You should only update stacks directly from a stack template that
     #     contains macros if you know what processing the macro performs.

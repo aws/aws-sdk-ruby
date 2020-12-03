@@ -84,6 +84,7 @@ module Aws::CodePipeline
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     Code = Shapes::StringShape.new(name: 'Code')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContinuationToken = Shapes::StringShape.new(name: 'ContinuationToken')
     CreateCustomActionTypeInput = Shapes::StructureShape.new(name: 'CreateCustomActionTypeInput')
     CreateCustomActionTypeOutput = Shapes::StructureShape.new(name: 'CreateCustomActionTypeOutput')
@@ -350,6 +351,7 @@ module Aws::CodePipeline
     ActionDeclaration.add_member(:namespace, Shapes::ShapeRef.new(shape: ActionNamespace, location_name: "namespace"))
     ActionDeclaration.struct_class = Types::ActionDeclaration
 
+    ActionExecution.add_member(:action_execution_id, Shapes::ShapeRef.new(shape: ActionExecutionId, location_name: "actionExecutionId"))
     ActionExecution.add_member(:status, Shapes::ShapeRef.new(shape: ActionExecutionStatus, location_name: "status"))
     ActionExecution.add_member(:summary, Shapes::ShapeRef.new(shape: ExecutionSummary, location_name: "summary"))
     ActionExecution.add_member(:last_status_change, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastStatusChange"))
@@ -487,6 +489,9 @@ module Aws::CodePipeline
 
     ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
 
     CreateCustomActionTypeInput.add_member(:category, Shapes::ShapeRef.new(shape: ActionCategory, required: true, location_name: "category"))
     CreateCustomActionTypeInput.add_member(:provider, Shapes::ShapeRef.new(shape: ActionProvider, required: true, location_name: "provider"))
@@ -926,6 +931,7 @@ module Aws::CodePipeline
     StageNotRetryableException.struct_class = Types::StageNotRetryableException
 
     StageState.add_member(:stage_name, Shapes::ShapeRef.new(shape: StageName, location_name: "stageName"))
+    StageState.add_member(:inbound_execution, Shapes::ShapeRef.new(shape: StageExecution, location_name: "inboundExecution"))
     StageState.add_member(:inbound_transition_state, Shapes::ShapeRef.new(shape: TransitionState, location_name: "inboundTransitionState"))
     StageState.add_member(:action_states, Shapes::ShapeRef.new(shape: ActionStateList, location_name: "actionStates"))
     StageState.add_member(:latest_execution, Shapes::ShapeRef.new(shape: StageExecution, location_name: "latestExecution"))
@@ -1446,6 +1452,7 @@ module Aws::CodePipeline
         o.input = Shapes::ShapeRef.new(shape: RetryStageExecutionInput)
         o.output = Shapes::ShapeRef.new(shape: RetryStageExecutionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: StageNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: StageNotRetryableException)
@@ -1459,6 +1466,7 @@ module Aws::CodePipeline
         o.input = Shapes::ShapeRef.new(shape: StartPipelineExecutionInput)
         o.output = Shapes::ShapeRef.new(shape: StartPipelineExecutionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
       end)
 
@@ -1469,6 +1477,7 @@ module Aws::CodePipeline
         o.input = Shapes::ShapeRef.new(shape: StopPipelineExecutionInput)
         o.output = Shapes::ShapeRef.new(shape: StopPipelineExecutionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: PipelineExecutionNotStoppableException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicatedStopRequestException)

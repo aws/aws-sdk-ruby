@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2020-11-23)
+------------------
+
+* Feature - Documentation updates and corrections for Amazon EC2 Auto Scaling API Reference and SDKs.
+
+1.50.0 (2020-11-19)
+------------------
+
+* Feature - You can now create Auto Scaling groups with multiple launch templates using a mixed instances policy, making it easy to deploy an AMI with an architecture that is different from the rest of the group.
+
+1.49.0 (2020-11-10)
+------------------
+
+* Feature - Documentation updates and corrections for Amazon EC2 Auto Scaling API Reference and SDKs.
+
+1.48.0 (2020-11-04)
+------------------
+
+* Feature - Capacity Rebalance helps you manage and maintain workload availability during Spot interruptions by proactively augmenting your Auto Scaling group with a new instance before interrupting an old one.
+
+1.47.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.46.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.45.0 (2020-08-25)
 ------------------
 

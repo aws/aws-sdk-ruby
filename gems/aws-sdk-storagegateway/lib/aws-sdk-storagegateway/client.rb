@@ -1264,6 +1264,9 @@ module Aws::StorageGateway
     # @option params [Types::CacheAttributes] :cache_attributes
     #   Refresh cache information.
     #
+    # @option params [String] :notification_policy
+    #   The notification policy of the file share.
+    #
     # @return [Types::CreateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNFSFileShareOutput#file_share_arn #file_share_arn} => String
@@ -1300,6 +1303,7 @@ module Aws::StorageGateway
     #     cache_attributes: {
     #       cache_stale_timeout_in_seconds: 1,
     #     },
+    #     notification_policy: "NotificationPolicy",
     #   })
     #
     # @example Response structure
@@ -1420,6 +1424,10 @@ module Aws::StorageGateway
     #
     #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
     #
+    # @option params [Boolean] :access_based_enumeration
+    #   The files and folders on this share will only be visible to users with
+    #   read access.
+    #
     # @option params [Array<String>] :admin_user_list
     #   A list of users or groups in the Active Directory that will be granted
     #   administrator privileges on the file share. These users can do all
@@ -1480,6 +1488,9 @@ module Aws::StorageGateway
     # @option params [Types::CacheAttributes] :cache_attributes
     #   Refresh cache information.
     #
+    # @option params [String] :notification_policy
+    #   The notification policy of the file share.
+    #
     # @return [Types::CreateSMBFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSMBFileShareOutput#file_share_arn #file_share_arn} => String
@@ -1499,6 +1510,7 @@ module Aws::StorageGateway
     #     guess_mime_type_enabled: false,
     #     requester_pays: false,
     #     smbacl_enabled: false,
+    #     access_based_enumeration: false,
     #     admin_user_list: ["FileShareUser"],
     #     valid_user_list: ["FileShareUser"],
     #     invalid_user_list: ["FileShareUser"],
@@ -1515,6 +1527,7 @@ module Aws::StorageGateway
     #     cache_attributes: {
     #       cache_stale_timeout_in_seconds: 1,
     #     },
+    #     notification_policy: "NotificationPolicy",
     #   })
     #
     # @example Response structure
@@ -2815,6 +2828,65 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
+    # Returns information about the bandwidth rate limit schedule of a
+    # gateway. By default, gateways do not have bandwidth rate limit
+    # schedules, which means no bandwidth rate limiting is in effect. This
+    # operation is supported only in the volume and tape gateway types.
+    #
+    # This operation returns information about a gateway's bandwidth rate
+    # limit schedule. A bandwidth rate limit schedule consists of one or
+    # more bandwidth rate limit intervals. A bandwidth rate limit interval
+    # defines a period of time on one or more days of the week, during which
+    # bandwidth rate limits are specified for uploading, downloading, or
+    # both.
+    #
+    # A bandwidth rate limit interval consists of one or more days of the
+    # week, a start hour and minute, an ending hour and minute, and
+    # bandwidth rate limits for uploading and downloading
+    #
+    # If no bandwidth rate limit schedule intervals are set for the gateway,
+    # this operation returns an empty response. To specify which gateway to
+    # describe, use the Amazon Resource Name (ARN) of the gateway in your
+    # request.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #
+    # @return [Types::DescribeBandwidthRateLimitScheduleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBandwidthRateLimitScheduleOutput#gateway_arn #gateway_arn} => String
+    #   * {Types::DescribeBandwidthRateLimitScheduleOutput#bandwidth_rate_limit_intervals #bandwidth_rate_limit_intervals} => Array&lt;Types::BandwidthRateLimitInterval&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_bandwidth_rate_limit_schedule({
+    #     gateway_arn: "GatewayARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #   resp.bandwidth_rate_limit_intervals #=> Array
+    #   resp.bandwidth_rate_limit_intervals[0].start_hour_of_day #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].start_minute_of_hour #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].end_hour_of_day #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].end_minute_of_hour #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].days_of_week #=> Array
+    #   resp.bandwidth_rate_limit_intervals[0].days_of_week[0] #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].average_upload_rate_limit_in_bits_per_sec #=> Integer
+    #   resp.bandwidth_rate_limit_intervals[0].average_download_rate_limit_in_bits_per_sec #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeBandwidthRateLimitSchedule AWS API Documentation
+    #
+    # @overload describe_bandwidth_rate_limit_schedule(params = {})
+    # @param [Hash] params ({})
+    def describe_bandwidth_rate_limit_schedule(params = {}, options = {})
+      req = build_request(:describe_bandwidth_rate_limit_schedule, params)
+      req.send_request(options)
+    end
+
     # Returns information about the cache of a gateway. This operation is
     # only supported in the cached volume, tape, and file gateway types.
     #
@@ -3234,6 +3306,7 @@ module Aws::StorageGateway
     #   resp.nfs_file_share_info_list[0].tags[0].value #=> String
     #   resp.nfs_file_share_info_list[0].file_share_name #=> String
     #   resp.nfs_file_share_info_list[0].cache_attributes.cache_stale_timeout_in_seconds #=> Integer
+    #   resp.nfs_file_share_info_list[0].notification_policy #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeNFSFileShares AWS API Documentation
     #
@@ -3280,6 +3353,7 @@ module Aws::StorageGateway
     #   resp.smb_file_share_info_list[0].guess_mime_type_enabled #=> Boolean
     #   resp.smb_file_share_info_list[0].requester_pays #=> Boolean
     #   resp.smb_file_share_info_list[0].smbacl_enabled #=> Boolean
+    #   resp.smb_file_share_info_list[0].access_based_enumeration #=> Boolean
     #   resp.smb_file_share_info_list[0].admin_user_list #=> Array
     #   resp.smb_file_share_info_list[0].admin_user_list[0] #=> String
     #   resp.smb_file_share_info_list[0].valid_user_list #=> Array
@@ -3294,6 +3368,7 @@ module Aws::StorageGateway
     #   resp.smb_file_share_info_list[0].tags[0].value #=> String
     #   resp.smb_file_share_info_list[0].file_share_name #=> String
     #   resp.smb_file_share_info_list[0].cache_attributes.cache_stale_timeout_in_seconds #=> Integer
+    #   resp.smb_file_share_info_list[0].notification_policy #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBFileShares AWS API Documentation
     #
@@ -3320,6 +3395,7 @@ module Aws::StorageGateway
     #   * {Types::DescribeSMBSettingsOutput#active_directory_status #active_directory_status} => String
     #   * {Types::DescribeSMBSettingsOutput#smb_guest_password_set #smb_guest_password_set} => Boolean
     #   * {Types::DescribeSMBSettingsOutput#smb_security_strategy #smb_security_strategy} => String
+    #   * {Types::DescribeSMBSettingsOutput#file_shares_visible #file_shares_visible} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -3334,6 +3410,7 @@ module Aws::StorageGateway
     #   resp.active_directory_status #=> String, one of "ACCESS_DENIED", "DETACHED", "JOINED", "JOINING", "NETWORK_ERROR", "TIMEOUT", "UNKNOWN_ERROR"
     #   resp.smb_guest_password_set #=> Boolean
     #   resp.smb_security_strategy #=> String, one of "ClientSpecified", "MandatorySigning", "MandatoryEncryption"
+    #   resp.file_shares_visible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettings AWS API Documentation
     #
@@ -4586,6 +4663,8 @@ module Aws::StorageGateway
     #   * {Types::ListTapePoolsOutput#pool_infos #pool_infos} => Array&lt;Types::PoolInfo&gt;
     #   * {Types::ListTapePoolsOutput#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tape_pools({
@@ -5620,6 +5699,56 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
+    # Updates the bandwidth rate limit schedule for a specified gateway. By
+    # default, gateways do not have bandwidth rate limit schedules, which
+    # means no bandwidth rate limiting is in effect. Use this to initiate or
+    # update a gateway's bandwidth rate limit schedule. This operation is
+    # supported in the volume and tape gateway types.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #
+    # @option params [required, Array<Types::BandwidthRateLimitInterval>] :bandwidth_rate_limit_intervals
+    #   An array containing bandwidth rate limit schedule intervals for a
+    #   gateway. When no bandwidth rate limit intervals have been scheduled,
+    #   the array is empty.
+    #
+    # @return [Types::UpdateBandwidthRateLimitScheduleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateBandwidthRateLimitScheduleOutput#gateway_arn #gateway_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_bandwidth_rate_limit_schedule({
+    #     gateway_arn: "GatewayARN", # required
+    #     bandwidth_rate_limit_intervals: [ # required
+    #       {
+    #         start_hour_of_day: 1, # required
+    #         start_minute_of_hour: 1, # required
+    #         end_hour_of_day: 1, # required
+    #         end_minute_of_hour: 1, # required
+    #         days_of_week: [1], # required
+    #         average_upload_rate_limit_in_bits_per_sec: 1,
+    #         average_download_rate_limit_in_bits_per_sec: 1,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateBandwidthRateLimitSchedule AWS API Documentation
+    #
+    # @overload update_bandwidth_rate_limit_schedule(params = {})
+    # @param [Hash] params ({})
+    def update_bandwidth_rate_limit_schedule(params = {}, options = {})
+      req = build_request(:update_bandwidth_rate_limit_schedule, params)
+      req.send_request(options)
+    end
+
     # Updates the Challenge-Handshake Authentication Protocol (CHAP)
     # credentials for a specified iSCSI target. By default, a gateway does
     # not have CHAP enabled; however, for added security, you might use it.
@@ -5923,7 +6052,7 @@ module Aws::StorageGateway
     #
     #  </note>
     #
-    # Updates the following file share setting:
+    # Updates the following file share settings:
     #
     # * Default storage class for your S3 bucket
     #
@@ -5934,11 +6063,6 @@ module Aws::StorageGateway
     # * Squash settings
     #
     # * Write status of your file share
-    #
-    # <note markdown="1"> To leave a file share field unchanged, set the corresponding input
-    # field to null. This operation is only supported in file gateways.
-    #
-    #  </note>
     #
     # @option params [required, String] :file_share_arn
     #   The Amazon Resource Name (ARN) of the file share to be updated.
@@ -6025,6 +6149,9 @@ module Aws::StorageGateway
     # @option params [Types::CacheAttributes] :cache_attributes
     #   Refresh cache information.
     #
+    # @option params [String] :notification_policy
+    #   The notification policy of the file share.
+    #
     # @return [Types::UpdateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateNFSFileShareOutput#file_share_arn #file_share_arn} => String
@@ -6052,6 +6179,7 @@ module Aws::StorageGateway
     #     cache_attributes: {
     #       cache_stale_timeout_in_seconds: 1,
     #     },
+    #     notification_policy: "NotificationPolicy",
     #   })
     #
     # @example Response structure
@@ -6067,10 +6195,11 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Updates a Server Message Block (SMB) file share.
+    # Updates a Server Message Block (SMB) file share. This operation is
+    # only supported for file gateways.
     #
     # <note markdown="1"> To leave a file share field unchanged, set the corresponding input
-    # field to null. This operation is only supported for file gateways.
+    # field to null.
     #
     #  </note>
     #
@@ -6162,6 +6291,10 @@ module Aws::StorageGateway
     #
     #   [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
     #
+    # @option params [Boolean] :access_based_enumeration
+    #   The files and folders on this share will only be visible to users with
+    #   read access.
+    #
     # @option params [Array<String>] :admin_user_list
     #   A list of users or groups in the Active Directory that have
     #   administrator rights to the file share. A group must be prefixed with
@@ -6203,6 +6336,9 @@ module Aws::StorageGateway
     # @option params [Types::CacheAttributes] :cache_attributes
     #   Refresh cache information.
     #
+    # @option params [String] :notification_policy
+    #   The notification policy of the file share.
+    #
     # @return [Types::UpdateSMBFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSMBFileShareOutput#file_share_arn #file_share_arn} => String
@@ -6219,6 +6355,7 @@ module Aws::StorageGateway
     #     guess_mime_type_enabled: false,
     #     requester_pays: false,
     #     smbacl_enabled: false,
+    #     access_based_enumeration: false,
     #     admin_user_list: ["FileShareUser"],
     #     valid_user_list: ["FileShareUser"],
     #     invalid_user_list: ["FileShareUser"],
@@ -6228,6 +6365,7 @@ module Aws::StorageGateway
     #     cache_attributes: {
     #       cache_stale_timeout_in_seconds: 1,
     #     },
+    #     notification_policy: "NotificationPolicy",
     #   })
     #
     # @example Response structure
@@ -6240,6 +6378,41 @@ module Aws::StorageGateway
     # @param [Hash] params ({})
     def update_smb_file_share(params = {}, options = {})
       req = build_request(:update_smb_file_share, params)
+      req.send_request(options)
+    end
+
+    # Controls whether the shares on a gateway are visible in a net view or
+    # browse list.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #
+    # @option params [required, Boolean] :file_shares_visible
+    #   The shares on this gateway appear when listing shares.
+    #
+    # @return [Types::UpdateSMBFileShareVisibilityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSMBFileShareVisibilityOutput#gateway_arn #gateway_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_smb_file_share_visibility({
+    #     gateway_arn: "GatewayARN", # required
+    #     file_shares_visible: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBFileShareVisibility AWS API Documentation
+    #
+    # @overload update_smb_file_share_visibility(params = {})
+    # @param [Hash] params ({})
+    def update_smb_file_share_visibility(params = {}, options = {})
+      req = build_request(:update_smb_file_share_visibility, params)
       req.send_request(options)
     end
 
@@ -6456,7 +6629,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

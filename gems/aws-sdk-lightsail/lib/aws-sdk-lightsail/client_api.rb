@@ -77,6 +77,36 @@ module Aws::Lightsail
     ContactMethodsList = Shapes::ListShape.new(name: 'ContactMethodsList')
     ContactProtocol = Shapes::StringShape.new(name: 'ContactProtocol')
     ContactProtocolsList = Shapes::ListShape.new(name: 'ContactProtocolsList')
+    Container = Shapes::StructureShape.new(name: 'Container')
+    ContainerImage = Shapes::StructureShape.new(name: 'ContainerImage')
+    ContainerImageList = Shapes::ListShape.new(name: 'ContainerImageList')
+    ContainerLabel = Shapes::StringShape.new(name: 'ContainerLabel')
+    ContainerMap = Shapes::MapShape.new(name: 'ContainerMap')
+    ContainerName = Shapes::StringShape.new(name: 'ContainerName')
+    ContainerService = Shapes::StructureShape.new(name: 'ContainerService')
+    ContainerServiceDeployment = Shapes::StructureShape.new(name: 'ContainerServiceDeployment')
+    ContainerServiceDeploymentList = Shapes::ListShape.new(name: 'ContainerServiceDeploymentList')
+    ContainerServiceDeploymentRequest = Shapes::StructureShape.new(name: 'ContainerServiceDeploymentRequest')
+    ContainerServiceDeploymentState = Shapes::StringShape.new(name: 'ContainerServiceDeploymentState')
+    ContainerServiceEndpoint = Shapes::StructureShape.new(name: 'ContainerServiceEndpoint')
+    ContainerServiceHealthCheckConfig = Shapes::StructureShape.new(name: 'ContainerServiceHealthCheckConfig')
+    ContainerServiceList = Shapes::ListShape.new(name: 'ContainerServiceList')
+    ContainerServiceLogEvent = Shapes::StructureShape.new(name: 'ContainerServiceLogEvent')
+    ContainerServiceLogEventList = Shapes::ListShape.new(name: 'ContainerServiceLogEventList')
+    ContainerServiceMetadataEntry = Shapes::MapShape.new(name: 'ContainerServiceMetadataEntry')
+    ContainerServiceMetadataEntryList = Shapes::ListShape.new(name: 'ContainerServiceMetadataEntryList')
+    ContainerServiceMetricName = Shapes::StringShape.new(name: 'ContainerServiceMetricName')
+    ContainerServiceName = Shapes::StringShape.new(name: 'ContainerServiceName')
+    ContainerServicePower = Shapes::StructureShape.new(name: 'ContainerServicePower')
+    ContainerServicePowerList = Shapes::ListShape.new(name: 'ContainerServicePowerList')
+    ContainerServicePowerName = Shapes::StringShape.new(name: 'ContainerServicePowerName')
+    ContainerServiceProtocol = Shapes::StringShape.new(name: 'ContainerServiceProtocol')
+    ContainerServicePublicDomains = Shapes::MapShape.new(name: 'ContainerServicePublicDomains')
+    ContainerServicePublicDomainsList = Shapes::ListShape.new(name: 'ContainerServicePublicDomainsList')
+    ContainerServiceRegistryLogin = Shapes::StructureShape.new(name: 'ContainerServiceRegistryLogin')
+    ContainerServiceScale = Shapes::IntegerShape.new(name: 'ContainerServiceScale')
+    ContainerServiceState = Shapes::StringShape.new(name: 'ContainerServiceState')
+    ContainerServicesListResult = Shapes::StructureShape.new(name: 'ContainerServicesListResult')
     CookieObject = Shapes::StructureShape.new(name: 'CookieObject')
     CopySnapshotRequest = Shapes::StructureShape.new(name: 'CopySnapshotRequest')
     CopySnapshotResult = Shapes::StructureShape.new(name: 'CopySnapshotResult')
@@ -86,6 +116,12 @@ module Aws::Lightsail
     CreateCloudFormationStackResult = Shapes::StructureShape.new(name: 'CreateCloudFormationStackResult')
     CreateContactMethodRequest = Shapes::StructureShape.new(name: 'CreateContactMethodRequest')
     CreateContactMethodResult = Shapes::StructureShape.new(name: 'CreateContactMethodResult')
+    CreateContainerServiceDeploymentRequest = Shapes::StructureShape.new(name: 'CreateContainerServiceDeploymentRequest')
+    CreateContainerServiceDeploymentResult = Shapes::StructureShape.new(name: 'CreateContainerServiceDeploymentResult')
+    CreateContainerServiceRegistryLoginRequest = Shapes::StructureShape.new(name: 'CreateContainerServiceRegistryLoginRequest')
+    CreateContainerServiceRegistryLoginResult = Shapes::StructureShape.new(name: 'CreateContainerServiceRegistryLoginResult')
+    CreateContainerServiceRequest = Shapes::StructureShape.new(name: 'CreateContainerServiceRequest')
+    CreateContainerServiceResult = Shapes::StructureShape.new(name: 'CreateContainerServiceResult')
     CreateDiskFromSnapshotRequest = Shapes::StructureShape.new(name: 'CreateDiskFromSnapshotRequest')
     CreateDiskFromSnapshotResult = Shapes::StructureShape.new(name: 'CreateDiskFromSnapshotResult')
     CreateDiskRequest = Shapes::StructureShape.new(name: 'CreateDiskRequest')
@@ -124,6 +160,10 @@ module Aws::Lightsail
     DeleteCertificateResult = Shapes::StructureShape.new(name: 'DeleteCertificateResult')
     DeleteContactMethodRequest = Shapes::StructureShape.new(name: 'DeleteContactMethodRequest')
     DeleteContactMethodResult = Shapes::StructureShape.new(name: 'DeleteContactMethodResult')
+    DeleteContainerImageRequest = Shapes::StructureShape.new(name: 'DeleteContainerImageRequest')
+    DeleteContainerImageResult = Shapes::StructureShape.new(name: 'DeleteContainerImageResult')
+    DeleteContainerServiceRequest = Shapes::StructureShape.new(name: 'DeleteContainerServiceRequest')
+    DeleteContainerServiceResult = Shapes::StructureShape.new(name: 'DeleteContainerServiceResult')
     DeleteDiskRequest = Shapes::StructureShape.new(name: 'DeleteDiskRequest')
     DeleteDiskResult = Shapes::StructureShape.new(name: 'DeleteDiskResult')
     DeleteDiskSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteDiskSnapshotRequest')
@@ -192,6 +232,8 @@ module Aws::Lightsail
     EligibleToRenew = Shapes::StringShape.new(name: 'EligibleToRenew')
     EnableAddOnRequest = Shapes::StructureShape.new(name: 'EnableAddOnRequest')
     EnableAddOnResult = Shapes::StructureShape.new(name: 'EnableAddOnResult')
+    EndpointRequest = Shapes::StructureShape.new(name: 'EndpointRequest')
+    Environment = Shapes::MapShape.new(name: 'Environment')
     ExportSnapshotRecord = Shapes::StructureShape.new(name: 'ExportSnapshotRecord')
     ExportSnapshotRecordList = Shapes::ListShape.new(name: 'ExportSnapshotRecordList')
     ExportSnapshotRecordSourceInfo = Shapes::StructureShape.new(name: 'ExportSnapshotRecordSourceInfo')
@@ -215,6 +257,19 @@ module Aws::Lightsail
     GetCloudFormationStackRecordsResult = Shapes::StructureShape.new(name: 'GetCloudFormationStackRecordsResult')
     GetContactMethodsRequest = Shapes::StructureShape.new(name: 'GetContactMethodsRequest')
     GetContactMethodsResult = Shapes::StructureShape.new(name: 'GetContactMethodsResult')
+    GetContainerAPIMetadataRequest = Shapes::StructureShape.new(name: 'GetContainerAPIMetadataRequest')
+    GetContainerAPIMetadataResult = Shapes::StructureShape.new(name: 'GetContainerAPIMetadataResult')
+    GetContainerImagesRequest = Shapes::StructureShape.new(name: 'GetContainerImagesRequest')
+    GetContainerImagesResult = Shapes::StructureShape.new(name: 'GetContainerImagesResult')
+    GetContainerLogRequest = Shapes::StructureShape.new(name: 'GetContainerLogRequest')
+    GetContainerLogResult = Shapes::StructureShape.new(name: 'GetContainerLogResult')
+    GetContainerServiceDeploymentsRequest = Shapes::StructureShape.new(name: 'GetContainerServiceDeploymentsRequest')
+    GetContainerServiceDeploymentsResult = Shapes::StructureShape.new(name: 'GetContainerServiceDeploymentsResult')
+    GetContainerServiceMetricDataRequest = Shapes::StructureShape.new(name: 'GetContainerServiceMetricDataRequest')
+    GetContainerServiceMetricDataResult = Shapes::StructureShape.new(name: 'GetContainerServiceMetricDataResult')
+    GetContainerServicePowersRequest = Shapes::StructureShape.new(name: 'GetContainerServicePowersRequest')
+    GetContainerServicePowersResult = Shapes::StructureShape.new(name: 'GetContainerServicePowersResult')
+    GetContainerServicesRequest = Shapes::StructureShape.new(name: 'GetContainerServicesRequest')
     GetDiskRequest = Shapes::StructureShape.new(name: 'GetDiskRequest')
     GetDiskResult = Shapes::StructureShape.new(name: 'GetDiskResult')
     GetDiskSnapshotRequest = Shapes::StructureShape.new(name: 'GetDiskSnapshotRequest')
@@ -403,6 +458,7 @@ module Aws::Lightsail
     PortInfoList = Shapes::ListShape.new(name: 'PortInfoList')
     PortInfoSourceType = Shapes::StringShape.new(name: 'PortInfoSourceType')
     PortList = Shapes::ListShape.new(name: 'PortList')
+    PortMap = Shapes::MapShape.new(name: 'PortMap')
     PortState = Shapes::StringShape.new(name: 'PortState')
     PutAlarmRequest = Shapes::StructureShape.new(name: 'PutAlarmRequest')
     PutAlarmResult = Shapes::StructureShape.new(name: 'PutAlarmResult')
@@ -417,6 +473,8 @@ module Aws::Lightsail
     Region = Shapes::StructureShape.new(name: 'Region')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
     RegionName = Shapes::StringShape.new(name: 'RegionName')
+    RegisterContainerImageRequest = Shapes::StructureShape.new(name: 'RegisterContainerImageRequest')
+    RegisterContainerImageResult = Shapes::StructureShape.new(name: 'RegisterContainerImageResult')
     RelationalDatabase = Shapes::StructureShape.new(name: 'RelationalDatabase')
     RelationalDatabaseBlueprint = Shapes::StructureShape.new(name: 'RelationalDatabaseBlueprint')
     RelationalDatabaseBlueprintList = Shapes::ListShape.new(name: 'RelationalDatabaseBlueprintList')
@@ -483,6 +541,8 @@ module Aws::Lightsail
     UnpeerVpcResult = Shapes::StructureShape.new(name: 'UnpeerVpcResult')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResult = Shapes::StructureShape.new(name: 'UntagResourceResult')
+    UpdateContainerServiceRequest = Shapes::StructureShape.new(name: 'UpdateContainerServiceRequest')
+    UpdateContainerServiceResult = Shapes::StructureShape.new(name: 'UpdateContainerServiceResult')
     UpdateDistributionBundleRequest = Shapes::StructureShape.new(name: 'UpdateDistributionBundleRequest')
     UpdateDistributionBundleResult = Shapes::StructureShape.new(name: 'UpdateDistributionBundleResult')
     UpdateDistributionRequest = Shapes::StructureShape.new(name: 'UpdateDistributionRequest')
@@ -746,6 +806,104 @@ module Aws::Lightsail
 
     ContactProtocolsList.member = Shapes::ShapeRef.new(shape: ContactProtocol)
 
+    Container.add_member(:image, Shapes::ShapeRef.new(shape: string, location_name: "image"))
+    Container.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
+    Container.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "environment"))
+    Container.add_member(:ports, Shapes::ShapeRef.new(shape: PortMap, location_name: "ports"))
+    Container.struct_class = Types::Container
+
+    ContainerImage.add_member(:image, Shapes::ShapeRef.new(shape: string, location_name: "image"))
+    ContainerImage.add_member(:digest, Shapes::ShapeRef.new(shape: string, location_name: "digest"))
+    ContainerImage.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    ContainerImage.struct_class = Types::ContainerImage
+
+    ContainerImageList.member = Shapes::ShapeRef.new(shape: ContainerImage)
+
+    ContainerMap.key = Shapes::ShapeRef.new(shape: ContainerName)
+    ContainerMap.value = Shapes::ShapeRef.new(shape: Container)
+
+    ContainerService.add_member(:container_service_name, Shapes::ShapeRef.new(shape: ContainerServiceName, location_name: "containerServiceName"))
+    ContainerService.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
+    ContainerService.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    ContainerService.add_member(:location, Shapes::ShapeRef.new(shape: ResourceLocation, location_name: "location"))
+    ContainerService.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    ContainerService.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ContainerService.add_member(:power, Shapes::ShapeRef.new(shape: ContainerServicePowerName, location_name: "power"))
+    ContainerService.add_member(:power_id, Shapes::ShapeRef.new(shape: string, location_name: "powerId"))
+    ContainerService.add_member(:state, Shapes::ShapeRef.new(shape: ContainerServiceState, location_name: "state"))
+    ContainerService.add_member(:scale, Shapes::ShapeRef.new(shape: ContainerServiceScale, location_name: "scale"))
+    ContainerService.add_member(:current_deployment, Shapes::ShapeRef.new(shape: ContainerServiceDeployment, location_name: "currentDeployment"))
+    ContainerService.add_member(:next_deployment, Shapes::ShapeRef.new(shape: ContainerServiceDeployment, location_name: "nextDeployment"))
+    ContainerService.add_member(:is_disabled, Shapes::ShapeRef.new(shape: boolean, location_name: "isDisabled"))
+    ContainerService.add_member(:principal_arn, Shapes::ShapeRef.new(shape: string, location_name: "principalArn"))
+    ContainerService.add_member(:private_domain_name, Shapes::ShapeRef.new(shape: string, location_name: "privateDomainName"))
+    ContainerService.add_member(:public_domain_names, Shapes::ShapeRef.new(shape: ContainerServicePublicDomains, location_name: "publicDomainNames"))
+    ContainerService.add_member(:url, Shapes::ShapeRef.new(shape: string, location_name: "url"))
+    ContainerService.struct_class = Types::ContainerService
+
+    ContainerServiceDeployment.add_member(:version, Shapes::ShapeRef.new(shape: integer, location_name: "version"))
+    ContainerServiceDeployment.add_member(:state, Shapes::ShapeRef.new(shape: ContainerServiceDeploymentState, location_name: "state"))
+    ContainerServiceDeployment.add_member(:containers, Shapes::ShapeRef.new(shape: ContainerMap, location_name: "containers"))
+    ContainerServiceDeployment.add_member(:public_endpoint, Shapes::ShapeRef.new(shape: ContainerServiceEndpoint, location_name: "publicEndpoint"))
+    ContainerServiceDeployment.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    ContainerServiceDeployment.struct_class = Types::ContainerServiceDeployment
+
+    ContainerServiceDeploymentList.member = Shapes::ShapeRef.new(shape: ContainerServiceDeployment)
+
+    ContainerServiceDeploymentRequest.add_member(:containers, Shapes::ShapeRef.new(shape: ContainerMap, location_name: "containers"))
+    ContainerServiceDeploymentRequest.add_member(:public_endpoint, Shapes::ShapeRef.new(shape: EndpointRequest, location_name: "publicEndpoint"))
+    ContainerServiceDeploymentRequest.struct_class = Types::ContainerServiceDeploymentRequest
+
+    ContainerServiceEndpoint.add_member(:container_name, Shapes::ShapeRef.new(shape: string, location_name: "containerName"))
+    ContainerServiceEndpoint.add_member(:container_port, Shapes::ShapeRef.new(shape: integer, location_name: "containerPort"))
+    ContainerServiceEndpoint.add_member(:health_check, Shapes::ShapeRef.new(shape: ContainerServiceHealthCheckConfig, location_name: "healthCheck"))
+    ContainerServiceEndpoint.struct_class = Types::ContainerServiceEndpoint
+
+    ContainerServiceHealthCheckConfig.add_member(:healthy_threshold, Shapes::ShapeRef.new(shape: integer, location_name: "healthyThreshold"))
+    ContainerServiceHealthCheckConfig.add_member(:unhealthy_threshold, Shapes::ShapeRef.new(shape: integer, location_name: "unhealthyThreshold"))
+    ContainerServiceHealthCheckConfig.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: integer, location_name: "timeoutSeconds"))
+    ContainerServiceHealthCheckConfig.add_member(:interval_seconds, Shapes::ShapeRef.new(shape: integer, location_name: "intervalSeconds"))
+    ContainerServiceHealthCheckConfig.add_member(:path, Shapes::ShapeRef.new(shape: string, location_name: "path"))
+    ContainerServiceHealthCheckConfig.add_member(:success_codes, Shapes::ShapeRef.new(shape: string, location_name: "successCodes"))
+    ContainerServiceHealthCheckConfig.struct_class = Types::ContainerServiceHealthCheckConfig
+
+    ContainerServiceList.member = Shapes::ShapeRef.new(shape: ContainerService)
+
+    ContainerServiceLogEvent.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    ContainerServiceLogEvent.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    ContainerServiceLogEvent.struct_class = Types::ContainerServiceLogEvent
+
+    ContainerServiceLogEventList.member = Shapes::ShapeRef.new(shape: ContainerServiceLogEvent)
+
+    ContainerServiceMetadataEntry.key = Shapes::ShapeRef.new(shape: string)
+    ContainerServiceMetadataEntry.value = Shapes::ShapeRef.new(shape: string)
+
+    ContainerServiceMetadataEntryList.member = Shapes::ShapeRef.new(shape: ContainerServiceMetadataEntry)
+
+    ContainerServicePower.add_member(:power_id, Shapes::ShapeRef.new(shape: string, location_name: "powerId"))
+    ContainerServicePower.add_member(:price, Shapes::ShapeRef.new(shape: float, location_name: "price"))
+    ContainerServicePower.add_member(:cpu_count, Shapes::ShapeRef.new(shape: float, location_name: "cpuCount"))
+    ContainerServicePower.add_member(:ram_size_in_gb, Shapes::ShapeRef.new(shape: float, location_name: "ramSizeInGb"))
+    ContainerServicePower.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "name"))
+    ContainerServicePower.add_member(:is_active, Shapes::ShapeRef.new(shape: boolean, location_name: "isActive"))
+    ContainerServicePower.struct_class = Types::ContainerServicePower
+
+    ContainerServicePowerList.member = Shapes::ShapeRef.new(shape: ContainerServicePower)
+
+    ContainerServicePublicDomains.key = Shapes::ShapeRef.new(shape: string)
+    ContainerServicePublicDomains.value = Shapes::ShapeRef.new(shape: ContainerServicePublicDomainsList)
+
+    ContainerServicePublicDomainsList.member = Shapes::ShapeRef.new(shape: string)
+
+    ContainerServiceRegistryLogin.add_member(:username, Shapes::ShapeRef.new(shape: string, location_name: "username"))
+    ContainerServiceRegistryLogin.add_member(:password, Shapes::ShapeRef.new(shape: string, location_name: "password"))
+    ContainerServiceRegistryLogin.add_member(:expires_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "expiresAt"))
+    ContainerServiceRegistryLogin.add_member(:registry, Shapes::ShapeRef.new(shape: string, location_name: "registry"))
+    ContainerServiceRegistryLogin.struct_class = Types::ContainerServiceRegistryLogin
+
+    ContainerServicesListResult.add_member(:container_services, Shapes::ShapeRef.new(shape: ContainerServiceList, location_name: "containerServices"))
+    ContainerServicesListResult.struct_class = Types::ContainerServicesListResult
+
     CookieObject.add_member(:option, Shapes::ShapeRef.new(shape: ForwardValues, location_name: "option"))
     CookieObject.add_member(:cookies_allow_list, Shapes::ShapeRef.new(shape: StringList, location_name: "cookiesAllowList"))
     CookieObject.struct_class = Types::CookieObject
@@ -783,6 +941,30 @@ module Aws::Lightsail
 
     CreateContactMethodResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     CreateContactMethodResult.struct_class = Types::CreateContactMethodResult
+
+    CreateContainerServiceDeploymentRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ContainerServiceName, required: true, location_name: "serviceName"))
+    CreateContainerServiceDeploymentRequest.add_member(:containers, Shapes::ShapeRef.new(shape: ContainerMap, location_name: "containers"))
+    CreateContainerServiceDeploymentRequest.add_member(:public_endpoint, Shapes::ShapeRef.new(shape: EndpointRequest, location_name: "publicEndpoint"))
+    CreateContainerServiceDeploymentRequest.struct_class = Types::CreateContainerServiceDeploymentRequest
+
+    CreateContainerServiceDeploymentResult.add_member(:container_service, Shapes::ShapeRef.new(shape: ContainerService, location_name: "containerService"))
+    CreateContainerServiceDeploymentResult.struct_class = Types::CreateContainerServiceDeploymentResult
+
+    CreateContainerServiceRegistryLoginRequest.struct_class = Types::CreateContainerServiceRegistryLoginRequest
+
+    CreateContainerServiceRegistryLoginResult.add_member(:registry_login, Shapes::ShapeRef.new(shape: ContainerServiceRegistryLogin, location_name: "registryLogin"))
+    CreateContainerServiceRegistryLoginResult.struct_class = Types::CreateContainerServiceRegistryLoginResult
+
+    CreateContainerServiceRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ContainerServiceName, required: true, location_name: "serviceName"))
+    CreateContainerServiceRequest.add_member(:power, Shapes::ShapeRef.new(shape: ContainerServicePowerName, required: true, location_name: "power"))
+    CreateContainerServiceRequest.add_member(:scale, Shapes::ShapeRef.new(shape: ContainerServiceScale, required: true, location_name: "scale"))
+    CreateContainerServiceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateContainerServiceRequest.add_member(:public_domain_names, Shapes::ShapeRef.new(shape: ContainerServicePublicDomains, location_name: "publicDomainNames"))
+    CreateContainerServiceRequest.add_member(:deployment, Shapes::ShapeRef.new(shape: ContainerServiceDeploymentRequest, location_name: "deployment"))
+    CreateContainerServiceRequest.struct_class = Types::CreateContainerServiceRequest
+
+    CreateContainerServiceResult.add_member(:container_service, Shapes::ShapeRef.new(shape: ContainerService, location_name: "containerService"))
+    CreateContainerServiceResult.struct_class = Types::CreateContainerServiceResult
 
     CreateDiskFromSnapshotRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
     CreateDiskFromSnapshotRequest.add_member(:disk_snapshot_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "diskSnapshotName"))
@@ -977,6 +1159,17 @@ module Aws::Lightsail
 
     DeleteContactMethodResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     DeleteContactMethodResult.struct_class = Types::DeleteContactMethodResult
+
+    DeleteContainerImageRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ContainerServiceName, required: true, location_name: "serviceName"))
+    DeleteContainerImageRequest.add_member(:image, Shapes::ShapeRef.new(shape: string, required: true, location_name: "image"))
+    DeleteContainerImageRequest.struct_class = Types::DeleteContainerImageRequest
+
+    DeleteContainerImageResult.struct_class = Types::DeleteContainerImageResult
+
+    DeleteContainerServiceRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ContainerServiceName, required: true, location_name: "serviceName"))
+    DeleteContainerServiceRequest.struct_class = Types::DeleteContainerServiceRequest
+
+    DeleteContainerServiceResult.struct_class = Types::DeleteContainerServiceResult
 
     DeleteDiskRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
     DeleteDiskRequest.add_member(:force_delete_add_ons, Shapes::ShapeRef.new(shape: boolean, location_name: "forceDeleteAddOns"))
@@ -1213,6 +1406,14 @@ module Aws::Lightsail
     EnableAddOnResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     EnableAddOnResult.struct_class = Types::EnableAddOnResult
 
+    EndpointRequest.add_member(:container_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "containerName"))
+    EndpointRequest.add_member(:container_port, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "containerPort"))
+    EndpointRequest.add_member(:health_check, Shapes::ShapeRef.new(shape: ContainerServiceHealthCheckConfig, location_name: "healthCheck"))
+    EndpointRequest.struct_class = Types::EndpointRequest
+
+    Environment.key = Shapes::ShapeRef.new(shape: string)
+    Environment.value = Shapes::ShapeRef.new(shape: string)
+
     ExportSnapshotRecord.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     ExportSnapshotRecord.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
     ExportSnapshotRecord.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
@@ -1301,6 +1502,55 @@ module Aws::Lightsail
 
     GetContactMethodsResult.add_member(:contact_methods, Shapes::ShapeRef.new(shape: ContactMethodsList, location_name: "contactMethods"))
     GetContactMethodsResult.struct_class = Types::GetContactMethodsResult
+
+    GetContainerAPIMetadataRequest.struct_class = Types::GetContainerAPIMetadataRequest
+
+    GetContainerAPIMetadataResult.add_member(:metadata, Shapes::ShapeRef.new(shape: ContainerServiceMetadataEntryList, location_name: "metadata"))
+    GetContainerAPIMetadataResult.struct_class = Types::GetContainerAPIMetadataResult
+
+    GetContainerImagesRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ContainerServiceName, required: true, location_name: "serviceName"))
+    GetContainerImagesRequest.struct_class = Types::GetContainerImagesRequest
+
+    GetContainerImagesResult.add_member(:container_images, Shapes::ShapeRef.new(shape: ContainerImageList, location_name: "containerImages"))
+    GetContainerImagesResult.struct_class = Types::GetContainerImagesResult
+
+    GetContainerLogRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ContainerServiceName, required: true, location_name: "serviceName"))
+    GetContainerLogRequest.add_member(:container_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "containerName"))
+    GetContainerLogRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: IsoDate, location_name: "startTime"))
+    GetContainerLogRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: IsoDate, location_name: "endTime"))
+    GetContainerLogRequest.add_member(:filter_pattern, Shapes::ShapeRef.new(shape: string, location_name: "filterPattern"))
+    GetContainerLogRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetContainerLogRequest.struct_class = Types::GetContainerLogRequest
+
+    GetContainerLogResult.add_member(:log_events, Shapes::ShapeRef.new(shape: ContainerServiceLogEventList, location_name: "logEvents"))
+    GetContainerLogResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
+    GetContainerLogResult.struct_class = Types::GetContainerLogResult
+
+    GetContainerServiceDeploymentsRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ContainerServiceName, required: true, location_name: "serviceName"))
+    GetContainerServiceDeploymentsRequest.struct_class = Types::GetContainerServiceDeploymentsRequest
+
+    GetContainerServiceDeploymentsResult.add_member(:deployments, Shapes::ShapeRef.new(shape: ContainerServiceDeploymentList, location_name: "deployments"))
+    GetContainerServiceDeploymentsResult.struct_class = Types::GetContainerServiceDeploymentsResult
+
+    GetContainerServiceMetricDataRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ContainerServiceName, required: true, location_name: "serviceName"))
+    GetContainerServiceMetricDataRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: ContainerServiceMetricName, required: true, location_name: "metricName"))
+    GetContainerServiceMetricDataRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: IsoDate, required: true, location_name: "startTime"))
+    GetContainerServiceMetricDataRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: IsoDate, required: true, location_name: "endTime"))
+    GetContainerServiceMetricDataRequest.add_member(:period, Shapes::ShapeRef.new(shape: MetricPeriod, required: true, location_name: "period"))
+    GetContainerServiceMetricDataRequest.add_member(:statistics, Shapes::ShapeRef.new(shape: MetricStatisticList, required: true, location_name: "statistics"))
+    GetContainerServiceMetricDataRequest.struct_class = Types::GetContainerServiceMetricDataRequest
+
+    GetContainerServiceMetricDataResult.add_member(:metric_name, Shapes::ShapeRef.new(shape: ContainerServiceMetricName, location_name: "metricName"))
+    GetContainerServiceMetricDataResult.add_member(:metric_data, Shapes::ShapeRef.new(shape: MetricDatapointList, location_name: "metricData"))
+    GetContainerServiceMetricDataResult.struct_class = Types::GetContainerServiceMetricDataResult
+
+    GetContainerServicePowersRequest.struct_class = Types::GetContainerServicePowersRequest
+
+    GetContainerServicePowersResult.add_member(:powers, Shapes::ShapeRef.new(shape: ContainerServicePowerList, location_name: "powers"))
+    GetContainerServicePowersResult.struct_class = Types::GetContainerServicePowersResult
+
+    GetContainerServicesRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ContainerServiceName, location_name: "serviceName"))
+    GetContainerServicesRequest.struct_class = Types::GetContainerServicesRequest
 
     GetDiskRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
     GetDiskRequest.struct_class = Types::GetDiskRequest
@@ -1990,6 +2240,9 @@ module Aws::Lightsail
 
     PortList.member = Shapes::ShapeRef.new(shape: Port)
 
+    PortMap.key = Shapes::ShapeRef.new(shape: string)
+    PortMap.value = Shapes::ShapeRef.new(shape: ContainerServiceProtocol)
+
     PutAlarmRequest.add_member(:alarm_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "alarmName"))
     PutAlarmRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "metricName"))
     PutAlarmRequest.add_member(:monitored_resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "monitoredResourceName"))
@@ -2038,6 +2291,14 @@ module Aws::Lightsail
     Region.struct_class = Types::Region
 
     RegionList.member = Shapes::ShapeRef.new(shape: Region)
+
+    RegisterContainerImageRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ContainerServiceName, required: true, location_name: "serviceName"))
+    RegisterContainerImageRequest.add_member(:label, Shapes::ShapeRef.new(shape: ContainerLabel, required: true, location_name: "label"))
+    RegisterContainerImageRequest.add_member(:digest, Shapes::ShapeRef.new(shape: string, required: true, location_name: "digest"))
+    RegisterContainerImageRequest.struct_class = Types::RegisterContainerImageRequest
+
+    RegisterContainerImageResult.add_member(:container_image, Shapes::ShapeRef.new(shape: ContainerImage, location_name: "containerImage"))
+    RegisterContainerImageResult.struct_class = Types::RegisterContainerImageResult
 
     RelationalDatabase.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     RelationalDatabase.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
@@ -2267,6 +2528,16 @@ module Aws::Lightsail
 
     UntagResourceResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     UntagResourceResult.struct_class = Types::UntagResourceResult
+
+    UpdateContainerServiceRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ContainerServiceName, required: true, location_name: "serviceName"))
+    UpdateContainerServiceRequest.add_member(:power, Shapes::ShapeRef.new(shape: ContainerServicePowerName, location_name: "power"))
+    UpdateContainerServiceRequest.add_member(:scale, Shapes::ShapeRef.new(shape: ContainerServiceScale, location_name: "scale"))
+    UpdateContainerServiceRequest.add_member(:is_disabled, Shapes::ShapeRef.new(shape: boolean, location_name: "isDisabled"))
+    UpdateContainerServiceRequest.add_member(:public_domain_names, Shapes::ShapeRef.new(shape: ContainerServicePublicDomains, location_name: "publicDomainNames"))
+    UpdateContainerServiceRequest.struct_class = Types::UpdateContainerServiceRequest
+
+    UpdateContainerServiceResult.add_member(:container_service, Shapes::ShapeRef.new(shape: ContainerService, location_name: "containerService"))
+    UpdateContainerServiceResult.struct_class = Types::UpdateContainerServiceResult
 
     UpdateDistributionBundleRequest.add_member(:distribution_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "distributionName"))
     UpdateDistributionBundleRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: string, location_name: "bundleId"))
@@ -2498,6 +2769,45 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:create_container_service, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateContainerService"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateContainerServiceRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateContainerServiceResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:create_container_service_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateContainerServiceDeployment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateContainerServiceDeploymentRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateContainerServiceDeploymentResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:create_container_service_registry_login, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateContainerServiceRegistryLogin"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateContainerServiceRegistryLoginRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateContainerServiceRegistryLoginResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
@@ -2779,6 +3089,32 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:delete_container_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteContainerImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteContainerImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteContainerImageResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:delete_container_service, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteContainerService"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteContainerServiceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteContainerServiceResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
       api.add_operation(:delete_disk, Seahorse::Model::Operation.new.tap do |o|
@@ -3203,6 +3539,95 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_container_api_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetContainerAPIMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetContainerAPIMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetContainerAPIMetadataResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_container_images, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetContainerImages"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetContainerImagesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetContainerImagesResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_container_log, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetContainerLog"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetContainerLogRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetContainerLogResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_container_service_deployments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetContainerServiceDeployments"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetContainerServiceDeploymentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetContainerServiceDeploymentsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_container_service_metric_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetContainerServiceMetricData"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetContainerServiceMetricDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetContainerServiceMetricDataResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_container_service_powers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetContainerServicePowers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetContainerServicePowersRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetContainerServicePowersResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_container_services, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetContainerServices"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetContainerServicesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ContainerServicesListResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
@@ -3967,6 +4392,19 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
+      api.add_operation(:register_container_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterContainerImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RegisterContainerImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterContainerImageResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
       api.add_operation(:release_static_ip, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ReleaseStaticIp"
         o.http_method = "POST"
@@ -4126,6 +4564,19 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:update_container_service, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateContainerService"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateContainerServiceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateContainerServiceResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 

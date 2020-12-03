@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2020-11-19)
+------------------
+
+* Feature - Additional metadata that may be applicable to the recommendation.
+
+1.52.0 (2020-10-15)
+------------------
+
+* Feature - This release improves email validation for subscriptions on the SDK endpoints.
+
+1.51.0 (2020-10-08)
+------------------
+
+* Feature - You can now create hierarchical cost categories by choosing "Cost Category" as a dimension. You can also track the status of your cost category updates to your cost and usage information.
+
+1.50.0 (2020-10-07)
+------------------
+
+* Feature - Enables Rightsizing Recommendations to analyze and present EC2 instance-level EBS metrics when generating recommendations. Returns AccessDeniedException if the account is not opted into Rightsizing
+
+1.49.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2020-09-23)
+------------------
+
+* Feature - This release provides access to Cost Anomaly Detection Public Preview APIs. Cost Anomaly Detection finds cost anomalies based on your historical cost and usage using Machine Learning models.
+
+1.47.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.46.0 (2020-08-25)
 ------------------
 

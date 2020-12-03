@@ -27,6 +27,8 @@ module Aws::Translate
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {ConcurrentModificationException}
+  # * {ConflictException}
   # * {DetectedLanguageLowConfidenceException}
   # * {InternalServerException}
   # * {InvalidFilterException}
@@ -44,6 +46,36 @@ module Aws::Translate
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class ConcurrentModificationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Translate::Types::ConcurrentModificationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Translate::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class DetectedLanguageLowConfidenceException < ServiceError
 

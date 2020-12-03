@@ -44,7 +44,7 @@ module SpecHelper
         if line.strip == ''
           break
         elsif line =~ /^\s+/ # multiline header value
-          headers[prev_key] << line.strip
+          headers[prev_key][0] = "#{headers[prev_key][0]} #{line.strip}"
         else
           key, value = line.strip.split(':')
           headers[key] << value

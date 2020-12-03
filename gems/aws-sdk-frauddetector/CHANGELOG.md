@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2020-11-05)
+------------------
+
+* Feature - Added support for deleting resources like Variables, ExternalModels, Outcomes, Models, ModelVersions, Labels, EventTypes and EntityTypes. Updated DeleteEvent operation to catch missing exceptions.
+
+1.13.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.12.0 (2020-09-25)
+------------------
+
+* Feature - Increased maximum length of eventVariables values for GetEventPrediction from 256 to 1024.
+
+1.11.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.10.0 (2020-08-25)
 ------------------
 

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2020-11-23)
+------------------
+
+* Feature - Adding MAINTENANCE and REBOOTING_BROKER to Cluster states.
+
+1.30.0 (2020-11-20)
+------------------
+
+* Feature - This release adds support for PER TOPIC PER PARTITION monitoring on AWS MSK clusters.
+
+1.29.0 (2020-10-01)
+------------------
+
+* Feature - Added support for Enabling Zookeeper Encryption in Transit for AWS MSK.
+
+1.28.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2020-09-15)
+------------------
+
+* Feature - Added new API's to support SASL SCRAM Authentication with MSK Clusters.
+
 1.26.0 (2020-08-25)
 ------------------
 

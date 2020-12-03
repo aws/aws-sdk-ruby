@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -27,7 +28,7 @@ require_relative 'aws-sdk-costexplorer/customizations'
 # structure.
 #
 #     cost_explorer = Aws::CostExplorer::Client.new
-#     resp = cost_explorer.create_cost_category_definition(params)
+#     resp = cost_explorer.create_anomaly_monitor(params)
 #
 # See {Client} for more information.
 #
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-costexplorer/customizations'
 # @!group service
 module Aws::CostExplorer
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.53.0'
 
 end

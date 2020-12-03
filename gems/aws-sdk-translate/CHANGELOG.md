@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-11-23)
+------------------
+
+* Feature - This update adds new operations to create and manage parallel data in Amazon Translate. Parallel data is a resource that you can use to run Active Custom Translation jobs.
+
+1.28.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2020-09-23)
+------------------
+
+* Feature - Improvements to DeleteTerminology API.
+
+1.26.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.25.0 (2020-08-25)
 ------------------
 

@@ -13,6 +13,19 @@
     "uid":"dynamodb-2012-08-10"
   },
   "operations":{
+    "BatchExecuteStatement":{
+      "name":"BatchExecuteStatement",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchExecuteStatementInput"},
+      "output":{"shape":"BatchExecuteStatementOutput"},
+      "errors":[
+        {"shape":"RequestLimitExceeded"},
+        {"shape":"InternalServerError"}
+      ]
+    },
     "BatchGetItem":{
       "name":"BatchGetItem",
       "http":{
@@ -207,6 +220,20 @@
       "output":{"shape":"DescribeEndpointsResponse"},
       "endpointoperation":true
     },
+    "DescribeExport":{
+      "name":"DescribeExport",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeExportInput"},
+      "output":{"shape":"DescribeExportOutput"},
+      "errors":[
+        {"shape":"ExportNotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
     "DescribeGlobalTable":{
       "name":"DescribeGlobalTable",
       "http":{
@@ -232,6 +259,21 @@
       "output":{"shape":"DescribeGlobalTableSettingsOutput"},
       "errors":[
         {"shape":"GlobalTableNotFoundException"},
+        {"shape":"InternalServerError"}
+      ],
+      "endpointdiscovery":{
+      }
+    },
+    "DescribeKinesisStreamingDestination":{
+      "name":"DescribeKinesisStreamingDestination",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeKinesisStreamingDestinationInput"},
+      "output":{"shape":"DescribeKinesisStreamingDestinationOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
         {"shape":"InternalServerError"}
       ],
       "endpointdiscovery":{
@@ -294,6 +336,94 @@
       "endpointdiscovery":{
       }
     },
+    "DisableKinesisStreamingDestination":{
+      "name":"DisableKinesisStreamingDestination",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"KinesisStreamingDestinationInput"},
+      "output":{"shape":"KinesisStreamingDestinationOutput"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "endpointdiscovery":{
+      }
+    },
+    "EnableKinesisStreamingDestination":{
+      "name":"EnableKinesisStreamingDestination",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"KinesisStreamingDestinationInput"},
+      "output":{"shape":"KinesisStreamingDestinationOutput"},
+      "errors":[
+        {"shape":"InternalServerError"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "endpointdiscovery":{
+      }
+    },
+    "ExecuteStatement":{
+      "name":"ExecuteStatement",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ExecuteStatementInput"},
+      "output":{"shape":"ExecuteStatementOutput"},
+      "errors":[
+        {"shape":"ConditionalCheckFailedException"},
+        {"shape":"ProvisionedThroughputExceededException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ItemCollectionSizeLimitExceededException"},
+        {"shape":"TransactionConflictException"},
+        {"shape":"RequestLimitExceeded"},
+        {"shape":"InternalServerError"},
+        {"shape":"DuplicateItemException"}
+      ]
+    },
+    "ExecuteTransaction":{
+      "name":"ExecuteTransaction",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ExecuteTransactionInput"},
+      "output":{"shape":"ExecuteTransactionOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TransactionCanceledException"},
+        {"shape":"TransactionInProgressException"},
+        {"shape":"IdempotentParameterMismatchException"},
+        {"shape":"ProvisionedThroughputExceededException"},
+        {"shape":"RequestLimitExceeded"},
+        {"shape":"InternalServerError"}
+      ]
+    },
+    "ExportTableToPointInTime":{
+      "name":"ExportTableToPointInTime",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ExportTableToPointInTimeInput"},
+      "output":{"shape":"ExportTableToPointInTimeOutput"},
+      "errors":[
+        {"shape":"TableNotFoundException"},
+        {"shape":"PointInTimeRecoveryUnavailableException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidExportTimeException"},
+        {"shape":"ExportConflictException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
     "GetItem":{
       "name":"GetItem",
       "http":{
@@ -335,6 +465,19 @@
       "output":{"shape":"ListContributorInsightsOutput"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerError"}
+      ]
+    },
+    "ListExports":{
+      "name":"ListExports",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListExportsInput"},
+      "output":{"shape":"ListExportsOutput"},
+      "errors":[
+        {"shape":"LimitExceededException"},
         {"shape":"InternalServerError"}
       ]
     },
@@ -936,6 +1079,19 @@
       "max":100,
       "min":1
     },
+    "BatchExecuteStatementInput":{
+      "type":"structure",
+      "required":["Statements"],
+      "members":{
+        "Statements":{"shape":"PartiQLBatchRequest"}
+      }
+    },
+    "BatchExecuteStatementOutput":{
+      "type":"structure",
+      "members":{
+        "Responses":{"shape":"PartiQLBatchResponse"}
+      }
+    },
     "BatchGetItemInput":{
       "type":"structure",
       "required":["RequestItems"],
@@ -964,6 +1120,46 @@
       "key":{"shape":"TableName"},
       "value":{"shape":"ItemList"}
     },
+    "BatchStatementError":{
+      "type":"structure",
+      "members":{
+        "Code":{"shape":"BatchStatementErrorCodeEnum"},
+        "Message":{"shape":"String"}
+      }
+    },
+    "BatchStatementErrorCodeEnum":{
+      "type":"string",
+      "enum":[
+        "ConditionalCheckFailed",
+        "ItemCollectionSizeLimitExceeded",
+        "RequestLimitExceeded",
+        "ValidationError",
+        "ProvisionedThroughputExceeded",
+        "TransactionConflict",
+        "ThrottlingError",
+        "InternalServerError",
+        "ResourceNotFound",
+        "AccessDenied",
+        "DuplicateItem"
+      ]
+    },
+    "BatchStatementRequest":{
+      "type":"structure",
+      "required":["Statement"],
+      "members":{
+        "Statement":{"shape":"PartiQLStatement"},
+        "Parameters":{"shape":"PreparedStatementParameters"},
+        "ConsistentRead":{"shape":"ConsistentRead"}
+      }
+    },
+    "BatchStatementResponse":{
+      "type":"structure",
+      "members":{
+        "Error":{"shape":"BatchStatementError"},
+        "TableName":{"shape":"TableName"},
+        "Item":{"shape":"AttributeMap"}
+      }
+    },
     "BatchWriteItemInput":{
       "type":"structure",
       "required":["RequestItems"],
@@ -987,6 +1183,10 @@
       "value":{"shape":"WriteRequests"},
       "max":25,
       "min":1
+    },
+    "BilledSizeBytes":{
+      "type":"long",
+      "min":0
     },
     "BillingMode":{
       "type":"string",
@@ -1036,6 +1236,7 @@
       "max":36,
       "min":1
     },
+    "ClientToken":{"type":"string"},
     "Code":{"type":"string"},
     "ComparisonOperator":{
       "type":"string",
@@ -1416,6 +1617,19 @@
         "Endpoints":{"shape":"Endpoints"}
       }
     },
+    "DescribeExportInput":{
+      "type":"structure",
+      "required":["ExportArn"],
+      "members":{
+        "ExportArn":{"shape":"ExportArn"}
+      }
+    },
+    "DescribeExportOutput":{
+      "type":"structure",
+      "members":{
+        "ExportDescription":{"shape":"ExportDescription"}
+      }
+    },
     "DescribeGlobalTableInput":{
       "type":"structure",
       "required":["GlobalTableName"],
@@ -1441,6 +1655,20 @@
       "members":{
         "GlobalTableName":{"shape":"TableName"},
         "ReplicaSettings":{"shape":"ReplicaSettingsDescriptionList"}
+      }
+    },
+    "DescribeKinesisStreamingDestinationInput":{
+      "type":"structure",
+      "required":["TableName"],
+      "members":{
+        "TableName":{"shape":"TableName"}
+      }
+    },
+    "DescribeKinesisStreamingDestinationOutput":{
+      "type":"structure",
+      "members":{
+        "TableName":{"shape":"TableName"},
+        "KinesisDataStreamDestinations":{"shape":"KinesisDataStreamDestinations"}
       }
     },
     "DescribeLimitsInput":{
@@ -1496,7 +1724,24 @@
         "TimeToLiveDescription":{"shape":"TimeToLiveDescription"}
       }
     },
+    "DestinationStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLING",
+        "ACTIVE",
+        "DISABLING",
+        "DISABLED",
+        "ENABLE_FAILED"
+      ]
+    },
     "Double":{"type":"double"},
+    "DuplicateItemException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
+    },
     "Endpoint":{
       "type":"structure",
       "required":[
@@ -1515,6 +1760,40 @@
     "ErrorMessage":{"type":"string"},
     "ExceptionDescription":{"type":"string"},
     "ExceptionName":{"type":"string"},
+    "ExecuteStatementInput":{
+      "type":"structure",
+      "required":["Statement"],
+      "members":{
+        "Statement":{"shape":"PartiQLStatement"},
+        "Parameters":{"shape":"PreparedStatementParameters"},
+        "ConsistentRead":{"shape":"ConsistentRead"},
+        "NextToken":{"shape":"PartiQLNextToken"}
+      }
+    },
+    "ExecuteStatementOutput":{
+      "type":"structure",
+      "members":{
+        "Items":{"shape":"ItemList"},
+        "NextToken":{"shape":"PartiQLNextToken"}
+      }
+    },
+    "ExecuteTransactionInput":{
+      "type":"structure",
+      "required":["TransactStatements"],
+      "members":{
+        "TransactStatements":{"shape":"ParameterizedStatements"},
+        "ClientRequestToken":{
+          "shape":"ClientRequestToken",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "ExecuteTransactionOutput":{
+      "type":"structure",
+      "members":{
+        "Responses":{"shape":"ItemResponseList"}
+      }
+    },
     "ExpectedAttributeMap":{
       "type":"map",
       "key":{"shape":"AttributeName"},
@@ -1529,6 +1808,107 @@
         "AttributeValueList":{"shape":"AttributeValueList"}
       }
     },
+    "ExportArn":{
+      "type":"string",
+      "max":1024,
+      "min":37
+    },
+    "ExportConflictException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
+    },
+    "ExportDescription":{
+      "type":"structure",
+      "members":{
+        "ExportArn":{"shape":"ExportArn"},
+        "ExportStatus":{"shape":"ExportStatus"},
+        "StartTime":{"shape":"ExportStartTime"},
+        "EndTime":{"shape":"ExportEndTime"},
+        "ExportManifest":{"shape":"ExportManifest"},
+        "TableArn":{"shape":"TableArn"},
+        "TableId":{"shape":"TableId"},
+        "ExportTime":{"shape":"ExportTime"},
+        "ClientToken":{"shape":"ClientToken"},
+        "S3Bucket":{"shape":"S3Bucket"},
+        "S3BucketOwner":{"shape":"S3BucketOwner"},
+        "S3Prefix":{"shape":"S3Prefix"},
+        "S3SseAlgorithm":{"shape":"S3SseAlgorithm"},
+        "S3SseKmsKeyId":{"shape":"S3SseKmsKeyId"},
+        "FailureCode":{"shape":"FailureCode"},
+        "FailureMessage":{"shape":"FailureMessage"},
+        "ExportFormat":{"shape":"ExportFormat"},
+        "BilledSizeBytes":{"shape":"BilledSizeBytes"},
+        "ItemCount":{"shape":"ItemCount"}
+      }
+    },
+    "ExportEndTime":{"type":"timestamp"},
+    "ExportFormat":{
+      "type":"string",
+      "enum":[
+        "DYNAMODB_JSON",
+        "ION"
+      ]
+    },
+    "ExportManifest":{"type":"string"},
+    "ExportNextToken":{"type":"string"},
+    "ExportNotFoundException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
+    },
+    "ExportStartTime":{"type":"timestamp"},
+    "ExportStatus":{
+      "type":"string",
+      "enum":[
+        "IN_PROGRESS",
+        "COMPLETED",
+        "FAILED"
+      ]
+    },
+    "ExportSummaries":{
+      "type":"list",
+      "member":{"shape":"ExportSummary"}
+    },
+    "ExportSummary":{
+      "type":"structure",
+      "members":{
+        "ExportArn":{"shape":"ExportArn"},
+        "ExportStatus":{"shape":"ExportStatus"}
+      }
+    },
+    "ExportTableToPointInTimeInput":{
+      "type":"structure",
+      "required":[
+        "TableArn",
+        "S3Bucket"
+      ],
+      "members":{
+        "TableArn":{"shape":"TableArn"},
+        "ExportTime":{"shape":"ExportTime"},
+        "ClientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true
+        },
+        "S3Bucket":{"shape":"S3Bucket"},
+        "S3BucketOwner":{"shape":"S3BucketOwner"},
+        "S3Prefix":{"shape":"S3Prefix"},
+        "S3SseAlgorithm":{"shape":"S3SseAlgorithm"},
+        "S3SseKmsKeyId":{"shape":"S3SseKmsKeyId"},
+        "ExportFormat":{"shape":"ExportFormat"}
+      }
+    },
+    "ExportTableToPointInTimeOutput":{
+      "type":"structure",
+      "members":{
+        "ExportDescription":{"shape":"ExportDescription"}
+      }
+    },
+    "ExportTime":{"type":"timestamp"},
     "ExpressionAttributeNameMap":{
       "type":"map",
       "key":{"shape":"ExpressionAttributeNameVariable"},
@@ -1541,6 +1921,7 @@
       "value":{"shape":"AttributeValue"}
     },
     "ExpressionAttributeValueVariable":{"type":"string"},
+    "FailureCode":{"type":"string"},
     "FailureException":{
       "type":"structure",
       "members":{
@@ -1548,6 +1929,7 @@
         "ExceptionDescription":{"shape":"ExceptionDescription"}
       }
     },
+    "FailureMessage":{"type":"string"},
     "FilterConditionMap":{
       "type":"map",
       "key":{"shape":"AttributeName"},
@@ -1761,6 +2143,13 @@
       "exception":true,
       "fault":true
     },
+    "InvalidExportTimeException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
+    },
     "InvalidRestoreTimeException":{
       "type":"structure",
       "members":{
@@ -1880,6 +2269,37 @@
         "ExpressionAttributeNames":{"shape":"ExpressionAttributeNameMap"}
       }
     },
+    "KinesisDataStreamDestination":{
+      "type":"structure",
+      "members":{
+        "StreamArn":{"shape":"StreamArn"},
+        "DestinationStatus":{"shape":"DestinationStatus"},
+        "DestinationStatusDescription":{"shape":"String"}
+      }
+    },
+    "KinesisDataStreamDestinations":{
+      "type":"list",
+      "member":{"shape":"KinesisDataStreamDestination"}
+    },
+    "KinesisStreamingDestinationInput":{
+      "type":"structure",
+      "required":[
+        "TableName",
+        "StreamArn"
+      ],
+      "members":{
+        "TableName":{"shape":"TableName"},
+        "StreamArn":{"shape":"StreamArn"}
+      }
+    },
+    "KinesisStreamingDestinationOutput":{
+      "type":"structure",
+      "members":{
+        "TableName":{"shape":"TableName"},
+        "StreamArn":{"shape":"StreamArn"},
+        "DestinationStatus":{"shape":"DestinationStatus"}
+      }
+    },
     "LastUpdateDateTime":{"type":"timestamp"},
     "LimitExceededException":{
       "type":"structure",
@@ -1927,6 +2347,26 @@
       "members":{
         "ContributorInsightsSummaries":{"shape":"ContributorInsightsSummaries"},
         "NextToken":{"shape":"NextTokenString"}
+      }
+    },
+    "ListExportsInput":{
+      "type":"structure",
+      "members":{
+        "TableArn":{"shape":"TableArn"},
+        "MaxResults":{"shape":"ListExportsMaxLimit"},
+        "NextToken":{"shape":"ExportNextToken"}
+      }
+    },
+    "ListExportsMaxLimit":{
+      "type":"integer",
+      "max":25,
+      "min":1
+    },
+    "ListExportsOutput":{
+      "type":"structure",
+      "members":{
+        "ExportSummaries":{"shape":"ExportSummaries"},
+        "NextToken":{"shape":"ExportNextToken"}
       }
     },
     "ListGlobalTablesInput":{
@@ -2050,6 +2490,40 @@
       "type":"list",
       "member":{"shape":"NumberAttributeValue"}
     },
+    "ParameterizedStatement":{
+      "type":"structure",
+      "required":["Statement"],
+      "members":{
+        "Statement":{"shape":"PartiQLStatement"},
+        "Parameters":{"shape":"PreparedStatementParameters"}
+      }
+    },
+    "ParameterizedStatements":{
+      "type":"list",
+      "member":{"shape":"ParameterizedStatement"},
+      "max":25,
+      "min":1
+    },
+    "PartiQLBatchRequest":{
+      "type":"list",
+      "member":{"shape":"BatchStatementRequest"},
+      "max":25,
+      "min":1
+    },
+    "PartiQLBatchResponse":{
+      "type":"list",
+      "member":{"shape":"BatchStatementResponse"}
+    },
+    "PartiQLNextToken":{
+      "type":"string",
+      "max":32768,
+      "min":1
+    },
+    "PartiQLStatement":{
+      "type":"string",
+      "max":8192,
+      "min":1
+    },
     "PointInTimeRecoveryDescription":{
       "type":"structure",
       "members":{
@@ -2085,6 +2559,11 @@
     },
     "PositiveLongObject":{
       "type":"long",
+      "min":1
+    },
+    "PreparedStatementParameters":{
+      "type":"list",
+      "member":{"shape":"AttributeValue"},
       "min":1
     },
     "Projection":{
@@ -2275,7 +2754,8 @@
         "ReplicaStatusPercentProgress":{"shape":"ReplicaStatusPercentProgress"},
         "KMSMasterKeyId":{"shape":"KMSMasterKeyId"},
         "ProvisionedThroughputOverride":{"shape":"ProvisionedThroughputOverride"},
-        "GlobalSecondaryIndexes":{"shape":"ReplicaGlobalSecondaryIndexDescriptionList"}
+        "GlobalSecondaryIndexes":{"shape":"ReplicaGlobalSecondaryIndexDescriptionList"},
+        "ReplicaInaccessibleDateTime":{"shape":"Date"}
       }
     },
     "ReplicaDescriptionList":{
@@ -2413,7 +2893,9 @@
         "CREATION_FAILED",
         "UPDATING",
         "DELETING",
-        "ACTIVE"
+        "ACTIVE",
+        "REGION_DISABLED",
+        "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
       ]
     },
     "ReplicaStatusDescription":{"type":"string"},
@@ -2557,6 +3039,21 @@
         "ALL_OLD",
         "NONE"
       ]
+    },
+    "S3Bucket":{"type":"string"},
+    "S3BucketOwner":{"type":"string"},
+    "S3Prefix":{"type":"string"},
+    "S3SseAlgorithm":{
+      "type":"string",
+      "enum":[
+        "AES256",
+        "KMS"
+      ]
+    },
+    "S3SseKmsKeyId":{
+      "type":"string",
+      "max":2048,
+      "min":1
     },
     "SSEDescription":{
       "type":"structure",

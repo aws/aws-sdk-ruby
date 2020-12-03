@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-inspector/customizations'
 # @!group service
 module Aws::Inspector
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.32.0'
 
 end

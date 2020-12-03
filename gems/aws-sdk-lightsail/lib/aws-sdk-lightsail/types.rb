@@ -1557,6 +1557,549 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes the settings of a container that will be launched, or that
+    # is launched, to an Amazon Lightsail container service.
+    #
+    # @note When making an API call, you may pass Container
+    #   data as a hash:
+    #
+    #       {
+    #         image: "string",
+    #         command: ["string"],
+    #         environment: {
+    #           "string" => "string",
+    #         },
+    #         ports: {
+    #           "string" => "HTTP", # accepts HTTP, HTTPS, TCP, UDP
+    #         },
+    #       }
+    #
+    # @!attribute [rw] image
+    #   The name of the image used for the container.
+    #
+    #   Container images sourced from your Lightsail container service, that
+    #   are registered and stored on your service, start with a colon (`:`).
+    #   For example, `:container-service-1.mystaticwebsite.1`. Container
+    #   images sourced from a public registry like Docker Hub don't start
+    #   with a colon. For example, `nginx:latest` or `nginx`.
+    #   @return [String]
+    #
+    # @!attribute [rw] command
+    #   The launch command for the container.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] environment
+    #   The environment variables of the container.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] ports
+    #   The open firewall ports of the container.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Container AWS API Documentation
+    #
+    class Container < Struct.new(
+      :image,
+      :command,
+      :environment,
+      :ports)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a container image that is registered to an Amazon Lightsail
+    # container service.
+    #
+    # @!attribute [rw] image
+    #   The name of the container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] digest
+    #   The digest of the container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the container image was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ContainerImage AWS API Documentation
+    #
+    class ContainerImage < Struct.new(
+      :image,
+      :digest,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Amazon Lightsail container service.
+    #
+    # @!attribute [rw] container_service_name
+    #   The name of the container service.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the container service.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the container service was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] location
+    #   An object that describes the location of the container service, such
+    #   as the AWS Region and Availability Zone.
+    #   @return [Types::ResourceLocation]
+    #
+    # @!attribute [rw] resource_type
+    #   The Lightsail resource type of the container service (i.e.,
+    #   `ContainerService`).
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag keys and optional values for the resource. For more
+    #   information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] power
+    #   The power specification of the container service.
+    #
+    #   The power specifies the amount of RAM, the number of vCPUs, and the
+    #   base price of the container service.
+    #   @return [String]
+    #
+    # @!attribute [rw] power_id
+    #   The ID of the power of the container service.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the container service.
+    #
+    #   The state can be:
+    #
+    #   * `Pending` - The container service is being created.
+    #
+    #   * `Ready` - The container service is created but does not have a
+    #     container deployment.
+    #
+    #   * `Disabled` - The container service is disabled.
+    #
+    #   * `Updating` - The container service capacity or other setting is
+    #     being updated.
+    #
+    #   * `Deploying` - The container service is launching a container
+    #     deployment.
+    #
+    #   * `Running` - The container service is created and it has a
+    #     container deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] scale
+    #   The scale specification of the container service.
+    #
+    #   The scale specifies the allocated compute nodes of the container
+    #   service.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] current_deployment
+    #   An object that describes the current container deployment of the
+    #   container service.
+    #   @return [Types::ContainerServiceDeployment]
+    #
+    # @!attribute [rw] next_deployment
+    #   An object that describes the next deployment of the container
+    #   service.
+    #
+    #   This value is `null` when there is no deployment in a `pending`
+    #   state.
+    #   @return [Types::ContainerServiceDeployment]
+    #
+    # @!attribute [rw] is_disabled
+    #   A Boolean value indicating whether the container service is
+    #   disabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] principal_arn
+    #   The principal ARN of the container service.
+    #
+    #   The principal ARN can be used to create a trust relationship between
+    #   your standard AWS account and your Lightsail container service. This
+    #   allows you to give your service permission to access resources in
+    #   your standard AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_domain_name
+    #   The private domain name of the container service.
+    #
+    #   The private domain name is accessible only by other resources within
+    #   the default virtual private cloud (VPC) of your Lightsail account.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_domain_names
+    #   The public domain name of the container service, such as
+    #   `example.com` and `www.example.com`.
+    #
+    #   You can specify up to four public domain names for a container
+    #   service. The domain names that you specify are used when you create
+    #   a deployment with a container configured as the public endpoint of
+    #   your container service.
+    #
+    #   If you don't specify public domain names, then you can use the
+    #   default domain of the container service.
+    #
+    #   You must create and validate an SSL/TLS certificate before you can
+    #   use public domain names with your container service. Use the
+    #   `CreateCertificate` action to create a certificate for the public
+    #   domain names you want to use with your container service.
+    #
+    #   See `CreateContainerService` or `UpdateContainerService` for
+    #   information about how to specify public domain names for your
+    #   Lightsail container service.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] url
+    #   The publicly accessible URL of the container service.
+    #
+    #   If no public endpoint is specified in the `currentDeployment`, this
+    #   URL returns a 404 response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ContainerService AWS API Documentation
+    #
+    class ContainerService < Struct.new(
+      :container_service_name,
+      :arn,
+      :created_at,
+      :location,
+      :resource_type,
+      :tags,
+      :power,
+      :power_id,
+      :state,
+      :scale,
+      :current_deployment,
+      :next_deployment,
+      :is_disabled,
+      :principal_arn,
+      :private_domain_name,
+      :public_domain_names,
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a container deployment configuration of an Amazon Lightsail
+    # container service.
+    #
+    # A deployment specifies the settings, such as the ports and launch
+    # command, of containers that are deployed to your container service.
+    #
+    # @!attribute [rw] version
+    #   The version number of the deployment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The state of the deployment.
+    #
+    #   A deployment can be in one of the following states:
+    #
+    #   * `Activating` - The deployment is being created.
+    #
+    #   * `Active` - The deployment was successfully created, and it's
+    #     currently running on the container service. The container service
+    #     can have only one deployment in an active state at a time.
+    #
+    #   * `Inactive` - The deployment was previously successfully created,
+    #     but it is not currently running on the container service.
+    #
+    #   * `Failed` - The deployment failed. Use the `GetContainerLog` action
+    #     to view the log events for the containers in the deployment to try
+    #     to determine the reason for the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] containers
+    #   An object that describes the configuration for the containers of the
+    #   deployment.
+    #   @return [Hash<String,Types::Container>]
+    #
+    # @!attribute [rw] public_endpoint
+    #   An object that describes the endpoint of the deployment.
+    #   @return [Types::ContainerServiceEndpoint]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the deployment was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ContainerServiceDeployment AWS API Documentation
+    #
+    class ContainerServiceDeployment < Struct.new(
+      :version,
+      :state,
+      :containers,
+      :public_endpoint,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a container deployment configuration of an Amazon Lightsail
+    # container service.
+    #
+    # A deployment specifies the settings, such as the ports and launch
+    # command, of containers that are deployed to your container service.
+    #
+    # @note When making an API call, you may pass ContainerServiceDeploymentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         containers: {
+    #           "ContainerName" => {
+    #             image: "string",
+    #             command: ["string"],
+    #             environment: {
+    #               "string" => "string",
+    #             },
+    #             ports: {
+    #               "string" => "HTTP", # accepts HTTP, HTTPS, TCP, UDP
+    #             },
+    #           },
+    #         },
+    #         public_endpoint: {
+    #           container_name: "string", # required
+    #           container_port: 1, # required
+    #           health_check: {
+    #             healthy_threshold: 1,
+    #             unhealthy_threshold: 1,
+    #             timeout_seconds: 1,
+    #             interval_seconds: 1,
+    #             path: "string",
+    #             success_codes: "string",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] containers
+    #   An object that describes the configuration for the containers of the
+    #   deployment.
+    #   @return [Hash<String,Types::Container>]
+    #
+    # @!attribute [rw] public_endpoint
+    #   An object that describes the endpoint of the deployment.
+    #   @return [Types::EndpointRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ContainerServiceDeploymentRequest AWS API Documentation
+    #
+    class ContainerServiceDeploymentRequest < Struct.new(
+      :containers,
+      :public_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the public endpoint configuration of a deployment of an
+    # Amazon Lightsail container service.
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container entry of the deployment that the endpoint
+    #   configuration applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_port
+    #   The port of the specified container to which traffic is forwarded
+    #   to.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] health_check
+    #   An object that describes the health check configuration of the
+    #   container.
+    #   @return [Types::ContainerServiceHealthCheckConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ContainerServiceEndpoint AWS API Documentation
+    #
+    class ContainerServiceEndpoint < Struct.new(
+      :container_name,
+      :container_port,
+      :health_check)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the health check configuration of an Amazon Lightsail
+    # container service.
+    #
+    # @note When making an API call, you may pass ContainerServiceHealthCheckConfig
+    #   data as a hash:
+    #
+    #       {
+    #         healthy_threshold: 1,
+    #         unhealthy_threshold: 1,
+    #         timeout_seconds: 1,
+    #         interval_seconds: 1,
+    #         path: "string",
+    #         success_codes: "string",
+    #       }
+    #
+    # @!attribute [rw] healthy_threshold
+    #   The number of consecutive health checks successes required before
+    #   moving the container to the `Healthy` state.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unhealthy_threshold
+    #   The number of consecutive health check failures required before
+    #   moving the container to the `Unhealthy` state.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout_seconds
+    #   The amount of time, in seconds, during which no response means a
+    #   failed health check. You may specify between 2 and 60 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interval_seconds
+    #   The approximate interval, in seconds, between health checks of an
+    #   individual container. You may specify between 5 and 300 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] path
+    #   The path on the container on which to perform the health check.
+    #   @return [String]
+    #
+    # @!attribute [rw] success_codes
+    #   The HTTP codes to use when checking for a successful response from a
+    #   container. You can specify values between 200 and 499.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ContainerServiceHealthCheckConfig AWS API Documentation
+    #
+    class ContainerServiceHealthCheckConfig < Struct.new(
+      :healthy_threshold,
+      :unhealthy_threshold,
+      :timeout_seconds,
+      :interval_seconds,
+      :path,
+      :success_codes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the log events of a container of an Amazon Lightsail
+    # container service.
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the container service log event was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] message
+    #   The message of the container service log event.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ContainerServiceLogEvent AWS API Documentation
+    #
+    class ContainerServiceLogEvent < Struct.new(
+      :created_at,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the powers that can be specified for an Amazon Lightsail
+    # container service.
+    #
+    # The power specifies the amount of RAM, the number of vCPUs, and the
+    # base price of the container service.
+    #
+    # @!attribute [rw] power_id
+    #   The ID of the power (e.g., `nano-1`).
+    #   @return [String]
+    #
+    # @!attribute [rw] price
+    #   The monthly price of the power in USD.
+    #   @return [Float]
+    #
+    # @!attribute [rw] cpu_count
+    #   The number of vCPUs included in the power.
+    #   @return [Float]
+    #
+    # @!attribute [rw] ram_size_in_gb
+    #   The amount of RAM (in GB) of the power.
+    #   @return [Float]
+    #
+    # @!attribute [rw] name
+    #   The friendly name of the power (e.g., `nano`).
+    #   @return [String]
+    #
+    # @!attribute [rw] is_active
+    #   A Boolean value indicating whether the power is active and can be
+    #   specified for container services.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ContainerServicePower AWS API Documentation
+    #
+    class ContainerServicePower < Struct.new(
+      :power_id,
+      :price,
+      :cpu_count,
+      :ram_size_in_gb,
+      :name,
+      :is_active)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the login information for the container image registry of an
+    # Amazon Lightsail account.
+    #
+    # @!attribute [rw] username
+    #   The container service registry username to use to push container
+    #   images to the container image registry of a Lightsail account.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The container service registry password to use to push container
+    #   images to the container image registry of a Lightsail account
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_at
+    #   The timestamp of when the container image registry username and
+    #   password expire.
+    #
+    #   The log in credentials expire 12 hours after they are created, at
+    #   which point you will need to create a new set of log in credentials
+    #   using the `CreateContainerServiceRegistryLogin` action.
+    #   @return [Time]
+    #
+    # @!attribute [rw] registry
+    #   The address to use to push container images to the container image
+    #   registry of a Lightsail account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ContainerServiceRegistryLogin AWS API Documentation
+    #
+    class ContainerServiceRegistryLogin < Struct.new(
+      :username,
+      :password,
+      :expires_at,
+      :registry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_services
+    #   An array of objects that describe one or more container services.
+    #   @return [Array<Types::ContainerService>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ContainerServicesListResult AWS API Documentation
+    #
+    class ContainerServicesListResult < Struct.new(
+      :container_services)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes whether an Amazon Lightsail content delivery network (CDN)
     # distribution forwards cookies to the origin and, if so, which ones.
     #
@@ -1900,6 +2443,255 @@ module Aws::Lightsail
     #
     class CreateContactMethodResult < Struct.new(
       :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateContainerServiceDeploymentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_name: "ContainerServiceName", # required
+    #         containers: {
+    #           "ContainerName" => {
+    #             image: "string",
+    #             command: ["string"],
+    #             environment: {
+    #               "string" => "string",
+    #             },
+    #             ports: {
+    #               "string" => "HTTP", # accepts HTTP, HTTPS, TCP, UDP
+    #             },
+    #           },
+    #         },
+    #         public_endpoint: {
+    #           container_name: "string", # required
+    #           container_port: 1, # required
+    #           health_check: {
+    #             healthy_threshold: 1,
+    #             unhealthy_threshold: 1,
+    #             timeout_seconds: 1,
+    #             interval_seconds: 1,
+    #             path: "string",
+    #             success_codes: "string",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] service_name
+    #   The name of the container service for which to create the
+    #   deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] containers
+    #   An object that describes the settings of the containers that will be
+    #   launched on the container service.
+    #   @return [Hash<String,Types::Container>]
+    #
+    # @!attribute [rw] public_endpoint
+    #   An object that describes the settings of the public endpoint for the
+    #   container service.
+    #   @return [Types::EndpointRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateContainerServiceDeploymentRequest AWS API Documentation
+    #
+    class CreateContainerServiceDeploymentRequest < Struct.new(
+      :service_name,
+      :containers,
+      :public_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_service
+    #   An object that describes a container service.
+    #   @return [Types::ContainerService]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateContainerServiceDeploymentResult AWS API Documentation
+    #
+    class CreateContainerServiceDeploymentResult < Struct.new(
+      :container_service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateContainerServiceRegistryLoginRequest AWS API Documentation
+    #
+    class CreateContainerServiceRegistryLoginRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] registry_login
+    #   An object that describes the log in information for the container
+    #   service registry of your Lightsail account.
+    #   @return [Types::ContainerServiceRegistryLogin]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateContainerServiceRegistryLoginResult AWS API Documentation
+    #
+    class CreateContainerServiceRegistryLoginResult < Struct.new(
+      :registry_login)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateContainerServiceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_name: "ContainerServiceName", # required
+    #         power: "nano", # required, accepts nano, micro, small, medium, large, xlarge
+    #         scale: 1, # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         public_domain_names: {
+    #           "string" => ["string"],
+    #         },
+    #         deployment: {
+    #           containers: {
+    #             "ContainerName" => {
+    #               image: "string",
+    #               command: ["string"],
+    #               environment: {
+    #                 "string" => "string",
+    #               },
+    #               ports: {
+    #                 "string" => "HTTP", # accepts HTTP, HTTPS, TCP, UDP
+    #               },
+    #             },
+    #           },
+    #           public_endpoint: {
+    #             container_name: "string", # required
+    #             container_port: 1, # required
+    #             health_check: {
+    #               healthy_threshold: 1,
+    #               unhealthy_threshold: 1,
+    #               timeout_seconds: 1,
+    #               interval_seconds: 1,
+    #               path: "string",
+    #               success_codes: "string",
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] service_name
+    #   The name for the container service.
+    #
+    #   The name that you specify for your container service will make up
+    #   part of its default domain. The default domain of a container
+    #   service is typically
+    #   `https://<ServiceName>.<RandomGUID>.<AWSRegion>.cs.amazonlightsail.com`.
+    #   If the name of your container service is `container-service-1`, and
+    #   it's located in the US East (Ohio) AWS region (`us-east-2`), then
+    #   the domain for your container service will be like the following
+    #   example:
+    #   `https://container-service-1.ur4EXAMPLE2uq.us-east-2.cs.amazonlightsail.com`
+    #
+    #   The following are the requirements for container service names:
+    #
+    #   * Must be unique within each AWS Region in your Lightsail account.
+    #
+    #   * Must contain 1 to 63 characters.
+    #
+    #   * Must contain only alphanumeric characters and hyphens.
+    #
+    #   * A hyphen (-) can separate words but cannot be at the start or end
+    #     of the name.
+    #   @return [String]
+    #
+    # @!attribute [rw] power
+    #   The power specification for the container service.
+    #
+    #   The power specifies the amount of memory, vCPUs, and base monthly
+    #   cost of each node of the container service. The `power` and `scale`
+    #   of a container service makes up its configured capacity. To
+    #   determine the monthly price of your container service, multiply the
+    #   base price of the `power` with the `scale` (the number of nodes) of
+    #   the service.
+    #
+    #   Use the `GetContainerServicePowers` action to get a list of power
+    #   options that you can specify using this parameter, and their base
+    #   monthly cost.
+    #   @return [String]
+    #
+    # @!attribute [rw] scale
+    #   The scale specification for the container service.
+    #
+    #   The scale specifies the allocated compute nodes of the container
+    #   service. The `power` and `scale` of a container service makes up its
+    #   configured capacity. To determine the monthly price of your
+    #   container service, multiply the base price of the `power` with the
+    #   `scale` (the number of nodes) of the service.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   The tag keys and optional values for the container service.
+    #
+    #   For more information about tags in Lightsail, see the [Lightsail Dev
+    #   Guide][1].
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] public_domain_names
+    #   The public domain names to use with the container service, such as
+    #   `example.com` and `www.example.com`.
+    #
+    #   You can specify up to four public domain names for a container
+    #   service. The domain names that you specify are used when you create
+    #   a deployment with a container configured as the public endpoint of
+    #   your container service.
+    #
+    #   If you don't specify public domain names, then you can use the
+    #   default domain of the container service.
+    #
+    #   You must create and validate an SSL/TLS certificate before you can
+    #   use public domain names with your container service. Use the
+    #   `CreateCertificate` action to create a certificate for the public
+    #   domain names you want to use with your container service.
+    #
+    #   You can specify public domain names using a string to array map as
+    #   shown in the example later on this page.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] deployment
+    #   An object that describes a deployment for the container service.
+    #
+    #   A deployment specifies the containers that will be launched on the
+    #   container service and their settings, such as the ports to open, the
+    #   environment variables to apply, and the launch command to run. It
+    #   also specifies the container that will serve as the public endpoint
+    #   of the deployment and its settings, such as the HTTP or HTTPS port
+    #   to use, and the health check configuration.
+    #   @return [Types::ContainerServiceDeploymentRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateContainerServiceRequest AWS API Documentation
+    #
+    class CreateContainerServiceRequest < Struct.new(
+      :service_name,
+      :power,
+      :scale,
+      :tags,
+      :public_domain_names,
+      :deployment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_service
+    #   An object that describes a container service.
+    #   @return [Types::ContainerService]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateContainerServiceResult AWS API Documentation
+    #
+    class CreateContainerServiceResult < Struct.new(
+      :container_service)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3609,6 +4401,71 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteContainerImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_name: "ContainerServiceName", # required
+    #         image: "string", # required
+    #       }
+    #
+    # @!attribute [rw] service_name
+    #   The name of the container service for which to delete a registered
+    #   container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] image
+    #   The name of the container image to delete from the container
+    #   service.
+    #
+    #   Use the `GetContainerImages` action to get the name of the container
+    #   images that are registered to a container service.
+    #
+    #   <note markdown="1"> Container images sourced from your Lightsail container service, that
+    #   are registered and stored on your service, start with a colon (`:`).
+    #   For example, `:container-service-1.mystaticwebsite.1`. Container
+    #   images sourced from a public registry like Docker Hub don't start
+    #   with a colon. For example, `nginx:latest` or `nginx`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteContainerImageRequest AWS API Documentation
+    #
+    class DeleteContainerImageRequest < Struct.new(
+      :service_name,
+      :image)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteContainerImageResult AWS API Documentation
+    #
+    class DeleteContainerImageResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteContainerServiceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_name: "ContainerServiceName", # required
+    #       }
+    #
+    # @!attribute [rw] service_name
+    #   The name of the container service to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteContainerServiceRequest AWS API Documentation
+    #
+    class DeleteContainerServiceRequest < Struct.new(
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteContainerServiceResult AWS API Documentation
+    #
+    class DeleteContainerServiceResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteDiskRequest
     #   data as a hash:
     #
@@ -4743,7 +5600,7 @@ module Aws::Lightsail
     #   When `true`, specifies whether the domain entry is an alias used by
     #   the Lightsail load balancer. You can include an alias (A type)
     #   record in your request, which points to a load balancer DNS name and
-    #   routes traffic to your load balancer
+    #   routes traffic to your load balancer.
     #   @return [Boolean]
     #
     # @!attribute [rw] type
@@ -4876,6 +5733,48 @@ module Aws::Lightsail
     #
     class EnableAddOnResult < Struct.new(
       :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the settings of a public endpoint for an Amazon Lightsail
+    # container service.
+    #
+    # @note When making an API call, you may pass EndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "string", # required
+    #         container_port: 1, # required
+    #         health_check: {
+    #           healthy_threshold: 1,
+    #           unhealthy_threshold: 1,
+    #           timeout_seconds: 1,
+    #           interval_seconds: 1,
+    #           path: "string",
+    #           success_codes: "string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container for the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_port
+    #   The port of the container to which traffic is forwarded to.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] health_check
+    #   An object that describes the health check configuration of the
+    #   container.
+    #   @return [Types::ContainerServiceHealthCheckConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/EndpointRequest AWS API Documentation
+    #
+    class EndpointRequest < Struct.new(
+      :container_name,
+      :container_port,
+      :health_check)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5047,7 +5946,7 @@ module Aws::Lightsail
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -5111,7 +6010,7 @@ module Aws::Lightsail
     #   @return [Array<Types::Alarm>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -5209,7 +6108,7 @@ module Aws::Lightsail
     #   @return [Array<Types::Blueprint>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -5265,7 +6164,7 @@ module Aws::Lightsail
     #   @return [Array<Types::Bundle>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -5300,7 +6199,7 @@ module Aws::Lightsail
     #   `ISSUED` status.
     #
     #   When omitted, the response includes all of your certificates in the
-    #   AWS region where the request is made, regardless of their current
+    #   AWS Region where the request is made, regardless of their current
     #   status.
     #   @return [Array<String>]
     #
@@ -5316,7 +6215,7 @@ module Aws::Lightsail
     #   The name for the certificate for which to return information.
     #
     #   When omitted, the response includes all of your certificates in the
-    #   AWS region where the request is made.
+    #   AWS Region where the request is made.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetCertificatesRequest AWS API Documentation
@@ -5370,7 +6269,7 @@ module Aws::Lightsail
     #   @return [Array<Types::CloudFormationStackRecord>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -5420,6 +6319,377 @@ module Aws::Lightsail
     #
     class GetContactMethodsResult < Struct.new(
       :contact_methods)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerAPIMetadataRequest AWS API Documentation
+    #
+    class GetContainerAPIMetadataRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] metadata
+    #   Metadata about Lightsail containers, such as the current version of
+    #   the Lightsail Control (lightsailctl) plugin.
+    #   @return [Array<Hash<String,String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerAPIMetadataResult AWS API Documentation
+    #
+    class GetContainerAPIMetadataResult < Struct.new(
+      :metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetContainerImagesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_name: "ContainerServiceName", # required
+    #       }
+    #
+    # @!attribute [rw] service_name
+    #   The name of the container service for which to return registered
+    #   container images.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerImagesRequest AWS API Documentation
+    #
+    class GetContainerImagesRequest < Struct.new(
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_images
+    #   An array of objects that describe container images that are
+    #   registered to the container service.
+    #   @return [Array<Types::ContainerImage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerImagesResult AWS API Documentation
+    #
+    class GetContainerImagesResult < Struct.new(
+      :container_images)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetContainerLogRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_name: "ContainerServiceName", # required
+    #         container_name: "string", # required
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         filter_pattern: "string",
+    #         page_token: "string",
+    #       }
+    #
+    # @!attribute [rw] service_name
+    #   The name of the container service for which to get a container log.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container that is either running or previously ran
+    #   on the container service for which to return a log.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start of the time interval for which to get log data.
+    #
+    #   Constraints:
+    #
+    #   * Specified in Coordinated Universal Time (UTC).
+    #
+    #   * Specified in the Unix time format.
+    #
+    #     For example, if you wish to use a start time of October 1, 2018,
+    #     at 8 PM UTC, specify `1538424000` as the start time.
+    #
+    #   You can convert a human-friendly time to Unix time format using a
+    #   converter like [Epoch converter][1].
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time interval for which to get log data.
+    #
+    #   Constraints:
+    #
+    #   * Specified in Coordinated Universal Time (UTC).
+    #
+    #   * Specified in the Unix time format.
+    #
+    #     For example, if you wish to use an end time of October 1, 2018, at
+    #     9 PM UTC, specify `1538427600` as the end time.
+    #
+    #   You can convert a human-friendly time to Unix time format using a
+    #   converter like [Epoch converter][1].
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] filter_pattern
+    #   The pattern to use to filter the returned log events to a specific
+    #   term.
+    #
+    #   The following are a few examples of filter patterns that you can
+    #   specify:
+    #
+    #   * To return all log events, specify a filter pattern of `""`.
+    #
+    #   * To exclude log events that contain the `ERROR` term, and return
+    #     all other log events, specify a filter pattern of `"-ERROR"`.
+    #
+    #   * To return log events that contain the `ERROR` term, specify a
+    #     filter pattern of `"ERROR"`.
+    #
+    #   * To return log events that contain both the `ERROR` and `Exception`
+    #     terms, specify a filter pattern of `"ERROR Exception"`.
+    #
+    #   * To return log events that contain the `ERROR` *or* the `Exception`
+    #     term, specify a filter pattern of `"?ERROR ?Exception"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_token
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetContainerLog` request.
+    #   If your results are paginated, the response will return a next page
+    #   token that you can specify as the page token in a subsequent
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerLogRequest AWS API Documentation
+    #
+    class GetContainerLogRequest < Struct.new(
+      :service_name,
+      :container_name,
+      :start_time,
+      :end_time,
+      :filter_pattern,
+      :page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] log_events
+    #   An array of objects that describe the log events of a container.
+    #   @return [Array<Types::ContainerServiceLogEvent>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to advance to the next page of results from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another `GetContainerLog`
+    #   request and specify the next page token using the `pageToken`
+    #   parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerLogResult AWS API Documentation
+    #
+    class GetContainerLogResult < Struct.new(
+      :log_events,
+      :next_page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetContainerServiceDeploymentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_name: "ContainerServiceName", # required
+    #       }
+    #
+    # @!attribute [rw] service_name
+    #   The name of the container service for which to return deployments.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerServiceDeploymentsRequest AWS API Documentation
+    #
+    class GetContainerServiceDeploymentsRequest < Struct.new(
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deployments
+    #   An array of objects that describe deployments for a container
+    #   service.
+    #   @return [Array<Types::ContainerServiceDeployment>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerServiceDeploymentsResult AWS API Documentation
+    #
+    class GetContainerServiceDeploymentsResult < Struct.new(
+      :deployments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetContainerServiceMetricDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_name: "ContainerServiceName", # required
+    #         metric_name: "CPUUtilization", # required, accepts CPUUtilization, MemoryUtilization
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #         period: 1, # required
+    #         statistics: ["Minimum"], # required, accepts Minimum, Maximum, Sum, Average, SampleCount
+    #       }
+    #
+    # @!attribute [rw] service_name
+    #   The name of the container service for which to get metric data.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The metric for which you want to return information.
+    #
+    #   Valid container service metric names are listed below, along with
+    #   the most useful statistics to include in your request, and the
+    #   published unit value.
+    #
+    #   * `CPUUtilization` - The average percentage of compute units that
+    #     are currently in use across all nodes of the container service.
+    #     This metric identifies the processing power required to run
+    #     containers on each node of the container service.
+    #
+    #     Statistics: The most useful statistics are `Maximum` and
+    #     `Average`.
+    #
+    #     Unit: The published unit is `Percent`.
+    #
+    #   * `MemoryUtilization` - The average percentage of available memory
+    #     that is currently in use across all nodes of the container
+    #     service. This metric identifies the memory required to run
+    #     containers on each node of the container service.
+    #
+    #     Statistics: The most useful statistics are `Maximum` and
+    #     `Average`.
+    #
+    #     Unit: The published unit is `Percent`.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the time period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the time period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] period
+    #   The granularity, in seconds, of the returned data points.
+    #
+    #   All container service metric data is available in 5-minute (300
+    #   seconds) granularity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statistics
+    #   The statistic for the metric.
+    #
+    #   The following statistics are available:
+    #
+    #   * `Minimum` - The lowest value observed during the specified period.
+    #     Use this value to determine low volumes of activity for your
+    #     application.
+    #
+    #   * `Maximum` - The highest value observed during the specified
+    #     period. Use this value to determine high volumes of activity for
+    #     your application.
+    #
+    #   * `Sum` - All values submitted for the matching metric added
+    #     together. You can use this statistic to determine the total volume
+    #     of a metric.
+    #
+    #   * `Average` - The value of `Sum` / `SampleCount` during the
+    #     specified period. By comparing this statistic with the `Minimum`
+    #     and `Maximum` values, you can determine the full scope of a metric
+    #     and how close the average use is to the `Minimum` and `Maximum`
+    #     values. This comparison helps you to know when to increase or
+    #     decrease your resources.
+    #
+    #   * `SampleCount` - The count, or number, of data points used for the
+    #     statistical calculation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerServiceMetricDataRequest AWS API Documentation
+    #
+    class GetContainerServiceMetricDataRequest < Struct.new(
+      :service_name,
+      :metric_name,
+      :start_time,
+      :end_time,
+      :period,
+      :statistics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_name
+    #   The name of the metric returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_data
+    #   An array of objects that describe the metric data returned.
+    #   @return [Array<Types::MetricDatapoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerServiceMetricDataResult AWS API Documentation
+    #
+    class GetContainerServiceMetricDataResult < Struct.new(
+      :metric_name,
+      :metric_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerServicePowersRequest AWS API Documentation
+    #
+    class GetContainerServicePowersRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] powers
+    #   An array of objects that describe the powers that can be specified
+    #   for a container service.
+    #   @return [Array<Types::ContainerServicePower>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerServicePowersResult AWS API Documentation
+    #
+    class GetContainerServicePowersResult < Struct.new(
+      :powers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetContainerServicesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_name: "ContainerServiceName",
+    #       }
+    #
+    # @!attribute [rw] service_name
+    #   The name of the container service for which to return information.
+    #
+    #   When omitted, the response includes all of your container services
+    #   in the AWS Region where the request is made.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerServicesRequest AWS API Documentation
+    #
+    class GetContainerServicesRequest < Struct.new(
+      :service_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5516,7 +6786,7 @@ module Aws::Lightsail
     #   @return [Array<Types::DiskSnapshot>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -5564,7 +6834,7 @@ module Aws::Lightsail
     #   @return [Array<Types::Disk>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -5956,7 +7226,7 @@ module Aws::Lightsail
     #   @return [Array<Types::Domain>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -6004,7 +7274,7 @@ module Aws::Lightsail
     #   @return [Array<Types::ExportSnapshotRecord>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -6392,7 +7662,7 @@ module Aws::Lightsail
     #   @return [Array<Types::InstanceSnapshot>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -6472,7 +7742,7 @@ module Aws::Lightsail
     #   @return [Array<Types::Instance>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -6553,7 +7823,7 @@ module Aws::Lightsail
     #   @return [Array<Types::KeyPair>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -6883,7 +8153,7 @@ module Aws::Lightsail
     #   @return [Array<Types::LoadBalancer>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -6982,7 +8252,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -7033,7 +8303,7 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -7067,7 +8337,7 @@ module Aws::Lightsail
     #   @return [Boolean]
     #
     # @!attribute [rw] include_relational_database_availability_zones
-    #   &gt;A Boolean value indicating whether to also include Availability
+    #   A Boolean value indicating whether to also include Availability
     #   Zones for databases in your get regions request. Availability Zones
     #   are indicated with a letter (e.g., `us-east-2a`).
     #   @return [Boolean]
@@ -7124,7 +8394,7 @@ module Aws::Lightsail
     #   @return [Array<Types::RelationalDatabaseBlueprint>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -7173,7 +8443,7 @@ module Aws::Lightsail
     #   @return [Array<Types::RelationalDatabaseBundle>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -7239,7 +8509,7 @@ module Aws::Lightsail
     #   @return [Array<Types::RelationalDatabaseEvent>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -7658,7 +8928,7 @@ module Aws::Lightsail
     #   @return [Array<Types::RelationalDatabaseParameter>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -7769,7 +9039,7 @@ module Aws::Lightsail
     #   @return [Array<Types::RelationalDatabaseSnapshot>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -7818,7 +9088,7 @@ module Aws::Lightsail
     #   @return [Array<Types::RelationalDatabase>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -7899,7 +9169,7 @@ module Aws::Lightsail
     #   @return [Array<Types::StaticIp>]
     #
     # @!attribute [rw] next_page_token
-    #   The token to advance to the next page of resutls from your request.
+    #   The token to advance to the next page of results from your request.
     #
     #   A next page token is not returned if there are no more results to
     #   display.
@@ -10623,6 +11893,75 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RegisterContainerImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_name: "ContainerServiceName", # required
+    #         label: "ContainerLabel", # required
+    #         digest: "string", # required
+    #       }
+    #
+    # @!attribute [rw] service_name
+    #   The name of the container service for which to register a container
+    #   image.
+    #   @return [String]
+    #
+    # @!attribute [rw] label
+    #   The label for the container image when it's registered to the
+    #   container service.
+    #
+    #   Use a descriptive label that you can use to track the different
+    #   versions of your registered container images.
+    #
+    #   Use the `GetContainerImages` action to return the container images
+    #   registered to a Lightsail container service. The label is the
+    #   `<imagelabel>` portion of the following image name example:
+    #
+    #   * `:container-service-1.<imagelabel>.1`
+    #
+    #   ^
+    #
+    #   If the name of your container service is `mycontainerservice`, and
+    #   the label that you specify is `mystaticwebsite`, then the name of
+    #   the registered container image will be
+    #   `:mycontainerservice.mystaticwebsite.1`.
+    #
+    #   The number at the end of these image name examples represents the
+    #   version of the registered container image. If you push and register
+    #   another container image to the same Lightsail container service,
+    #   with the same label, then the version number for the new registered
+    #   container image will be `2`. If you push and register another
+    #   container image, the version number will be `3`, and so on.
+    #   @return [String]
+    #
+    # @!attribute [rw] digest
+    #   The digest of the container image to be registered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RegisterContainerImageRequest AWS API Documentation
+    #
+    class RegisterContainerImageRequest < Struct.new(
+      :service_name,
+      :label,
+      :digest)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_image
+    #   Describes a container image that is registered to an Amazon
+    #   Lightsail container service.
+    #   @return [Types::ContainerImage]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RegisterContainerImageResult AWS API Documentation
+    #
+    class RegisterContainerImageResult < Struct.new(
+      :container_image)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a database.
     #
     # @!attribute [rw] name
@@ -11800,6 +13139,97 @@ module Aws::Lightsail
     #
     class UntagResourceResult < Struct.new(
       :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateContainerServiceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_name: "ContainerServiceName", # required
+    #         power: "nano", # accepts nano, micro, small, medium, large, xlarge
+    #         scale: 1,
+    #         is_disabled: false,
+    #         public_domain_names: {
+    #           "string" => ["string"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] service_name
+    #   The name of the container service to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] power
+    #   The power for the container service.
+    #
+    #   The power specifies the amount of memory, vCPUs, and base monthly
+    #   cost of each node of the container service. The `power` and `scale`
+    #   of a container service makes up its configured capacity. To
+    #   determine the monthly price of your container service, multiply the
+    #   base price of the `power` with the `scale` (the number of nodes) of
+    #   the service.
+    #
+    #   Use the `GetContainerServicePowers` action to view the
+    #   specifications of each power option.
+    #   @return [String]
+    #
+    # @!attribute [rw] scale
+    #   The scale for the container service.
+    #
+    #   The scale specifies the allocated compute nodes of the container
+    #   service. The `power` and `scale` of a container service makes up its
+    #   configured capacity. To determine the monthly price of your
+    #   container service, multiply the base price of the `power` with the
+    #   `scale` (the number of nodes) of the service.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] is_disabled
+    #   A Boolean value to indicate whether the container service is
+    #   disabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] public_domain_names
+    #   The public domain names to use with the container service, such as
+    #   `example.com` and `www.example.com`.
+    #
+    #   You can specify up to four public domain names for a container
+    #   service. The domain names that you specify are used when you create
+    #   a deployment with a container configured as the public endpoint of
+    #   your container service.
+    #
+    #   If you don't specify public domain names, then you can use the
+    #   default domain of the container service.
+    #
+    #   You must create and validate an SSL/TLS certificate before you can
+    #   use public domain names with your container service. Use the
+    #   `CreateCertificate` action to create a certificate for the public
+    #   domain names you want to use with your container service.
+    #
+    #   You can specify public domain names using a string to array map as
+    #   shown in the example later on this page.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateContainerServiceRequest AWS API Documentation
+    #
+    class UpdateContainerServiceRequest < Struct.new(
+      :service_name,
+      :power,
+      :scale,
+      :is_disabled,
+      :public_domain_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_service
+    #   An object that describes a container service.
+    #   @return [Types::ContainerService]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateContainerServiceResult AWS API Documentation
+    #
+    class UpdateContainerServiceResult < Struct.new(
+      :container_service)
       SENSITIVE = []
       include Aws::Structure
     end

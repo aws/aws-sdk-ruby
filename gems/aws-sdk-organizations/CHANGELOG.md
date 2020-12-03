@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2020-10-21)
+------------------
+
+* Feature - AWS Organizations renamed the 'master account' to 'management account'.
+
+1.54.0 (2020-10-21)
+------------------
+
+* Feature - AWS Organizations renamed the 'master account' to 'management account'.
+
+1.53.0 (2020-10-16)
+------------------
+
+* Feature - Documentation updates for AWS Organizations.
+
+1.52.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2020-09-15)
+------------------
+
+* Feature - AWS Organizations now enables you to add tags to the AWS accounts, organizational units, organization root, and policies in your organization.
+
 1.50.0 (2020-08-25)
 ------------------
 

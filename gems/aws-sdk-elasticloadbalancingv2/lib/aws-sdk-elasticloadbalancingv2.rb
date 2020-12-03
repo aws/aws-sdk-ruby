@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -48,6 +49,6 @@ require_relative 'aws-sdk-elasticloadbalancingv2/customizations'
 # @!group service
 module Aws::ElasticLoadBalancingV2
 
-  GEM_VERSION = '1.50.0'
+  GEM_VERSION = '1.56.0'
 
 end

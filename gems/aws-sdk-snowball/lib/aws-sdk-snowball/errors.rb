@@ -28,6 +28,7 @@ module Aws::Snowball
   #
   # ## Error Classes
   # * {ClusterLimitExceededException}
+  # * {ConflictException}
   # * {Ec2RequestFailedException}
   # * {InvalidAddressException}
   # * {InvalidInputCombinationException}
@@ -35,6 +36,7 @@ module Aws::Snowball
   # * {InvalidNextTokenException}
   # * {InvalidResourceException}
   # * {KMSRequestFailedException}
+  # * {ReturnShippingLabelAlreadyExistsException}
   # * {UnsupportedAddressException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -50,6 +52,26 @@ module Aws::Snowball
       # @param [Aws::Snowball::Types::ClusterLimitExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Snowball::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def conflict_resource
+        @data[:conflict_resource]
       end
 
       # @return [String]
@@ -158,6 +180,21 @@ module Aws::Snowball
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Snowball::Types::KMSRequestFailedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ReturnShippingLabelAlreadyExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Snowball::Types::ReturnShippingLabelAlreadyExistsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -28,23 +28,23 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
-require 'aws-sdk-s3/plugins/iad_regional_endpoint.rb'
 require 'aws-sdk-s3/plugins/accelerate.rb'
-require 'aws-sdk-s3/plugins/dualstack.rb'
-require 'aws-sdk-s3/plugins/bucket_arn.rb'
+require 'aws-sdk-s3/plugins/arn.rb'
 require 'aws-sdk-s3/plugins/bucket_dns.rb'
+require 'aws-sdk-s3/plugins/bucket_name_restrictions.rb'
+require 'aws-sdk-s3/plugins/dualstack.rb'
 require 'aws-sdk-s3/plugins/expect_100_continue.rb'
-require 'aws-sdk-s3/plugins/http_200_errors.rb'
-require 'aws-sdk-s3/plugins/s3_host_id.rb'
 require 'aws-sdk-s3/plugins/get_bucket_location_fix.rb'
+require 'aws-sdk-s3/plugins/http_200_errors.rb'
+require 'aws-sdk-s3/plugins/iad_regional_endpoint.rb'
 require 'aws-sdk-s3/plugins/location_constraint.rb'
 require 'aws-sdk-s3/plugins/md5s.rb'
 require 'aws-sdk-s3/plugins/redirects.rb'
-require 'aws-sdk-s3/plugins/sse_cpk.rb'
-require 'aws-sdk-s3/plugins/url_encoded_keys.rb'
+require 'aws-sdk-s3/plugins/s3_host_id.rb'
 require 'aws-sdk-s3/plugins/s3_signer.rb'
-require 'aws-sdk-s3/plugins/bucket_name_restrictions.rb'
+require 'aws-sdk-s3/plugins/sse_cpk.rb'
 require 'aws-sdk-s3/plugins/streaming_retry.rb'
+require 'aws-sdk-s3/plugins/url_encoded_keys.rb'
 require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:s3)
@@ -91,23 +91,23 @@ module Aws::S3
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::Protocols::RestXml)
-    add_plugin(Aws::S3::Plugins::IADRegionalEndpoint)
     add_plugin(Aws::S3::Plugins::Accelerate)
-    add_plugin(Aws::S3::Plugins::Dualstack)
-    add_plugin(Aws::S3::Plugins::BucketARN)
+    add_plugin(Aws::S3::Plugins::ARN)
     add_plugin(Aws::S3::Plugins::BucketDns)
+    add_plugin(Aws::S3::Plugins::BucketNameRestrictions)
+    add_plugin(Aws::S3::Plugins::Dualstack)
     add_plugin(Aws::S3::Plugins::Expect100Continue)
-    add_plugin(Aws::S3::Plugins::Http200Errors)
-    add_plugin(Aws::S3::Plugins::S3HostId)
     add_plugin(Aws::S3::Plugins::GetBucketLocationFix)
+    add_plugin(Aws::S3::Plugins::Http200Errors)
+    add_plugin(Aws::S3::Plugins::IADRegionalEndpoint)
     add_plugin(Aws::S3::Plugins::LocationConstraint)
     add_plugin(Aws::S3::Plugins::Md5s)
     add_plugin(Aws::S3::Plugins::Redirects)
-    add_plugin(Aws::S3::Plugins::SseCpk)
-    add_plugin(Aws::S3::Plugins::UrlEncodedKeys)
+    add_plugin(Aws::S3::Plugins::S3HostId)
     add_plugin(Aws::S3::Plugins::S3Signer)
-    add_plugin(Aws::S3::Plugins::BucketNameRestrictions)
+    add_plugin(Aws::S3::Plugins::SseCpk)
     add_plugin(Aws::S3::Plugins::StreamingRetry)
+    add_plugin(Aws::S3::Plugins::UrlEncodedKeys)
     add_plugin(Aws::Plugins::EventStreamConfiguration)
 
     # @overload initialize(options)
@@ -330,9 +330,9 @@ module Aws::S3
     #     region. Defaults to `legacy` mode using global endpoint.
     #
     #   @option options [Boolean] :s3_use_arn_region (true)
-    #     By default, the SDK will use the S3 ARN region, and cross-region
-    #     requests could be made. Set to `false` to not use the region from
-    #     the S3 ARN.
+    #     For S3 ARNs passed into the `:bucket` parameter, this option will
+    #     use the region in the ARN, allowing for cross-region requests to
+    #     be made. Set to `false` to use the client's region instead.
     #
     #   @option options [String] :secret_access_key
     #
@@ -450,14 +450,24 @@ module Aws::S3
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     #
     # @option params [required, String] :key
     #   Key of the object for which the multipart upload was initiated.
@@ -649,6 +659,7 @@ module Aws::S3
     #   * {Types::CompleteMultipartUploadOutput#server_side_encryption #server_side_encryption} => String
     #   * {Types::CompleteMultipartUploadOutput#version_id #version_id} => String
     #   * {Types::CompleteMultipartUploadOutput#ssekms_key_id #ssekms_key_id} => String
+    #   * {Types::CompleteMultipartUploadOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::CompleteMultipartUploadOutput#request_charged #request_charged} => String
     #
     #
@@ -710,6 +721,7 @@ module Aws::S3
     #   resp.server_side_encryption #=> String, one of "AES256", "aws:kms"
     #   resp.version_id #=> String
     #   resp.ssekms_key_id #=> String
+    #   resp.bucket_key_enabled #=> Boolean
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompleteMultipartUpload AWS API Documentation
@@ -820,22 +832,20 @@ module Aws::S3
     #
     #  </note>
     #
-    # **Encryption**
+    # **Server-side encryption**
     #
-    # The source object that you are copying can be encrypted or
-    # unencrypted. The source object can be encrypted with server-side
-    # encryption using AWS managed encryption keys (SSE-S3 or SSE-KMS) or by
-    # using a customer-provided encryption key. With server-side encryption,
-    # Amazon S3 encrypts your data as it writes it to disks in its data
-    # centers and decrypts the data when you access it.
+    # When you perform a CopyObject operation, you can optionally use the
+    # appropriate encryption-related headers to encrypt the object using
+    # server-side encryption with AWS managed encryption keys (SSE-S3 or
+    # SSE-KMS) or a customer-provided encryption key. With server-side
+    # encryption, Amazon S3 encrypts your data as it writes it to disks in
+    # its data centers and decrypts the data when you access it. For more
+    # information about server-side encryption, see [Using Server-Side
+    # Encryption][8].
     #
-    # You can optionally use the appropriate encryption-related headers to
-    # request server-side encryption for the target object. You have the
-    # option to provide your own encryption key or use SSE-S3 or SSE-KMS,
-    # regardless of the form of server-side encryption that was used to
-    # encrypt the source object. You can even request encryption if the
-    # source object was not encrypted. For more information about
-    # server-side encryption, see [Using Server-Side Encryption][8].
+    # If a target object uses SSE-KMS, you can enable an S3 Bucket Key for
+    # the object. For more information, see [Amazon S3 Bucket Keys][9] in
+    # the *Amazon Simple Storage Service Developer Guide*.
     #
     # **Access Control List (ACL)-Specific Request Headers**
     #
@@ -845,13 +855,13 @@ module Aws::S3
     # permissions to individual AWS accounts or to predefined groups defined
     # by Amazon S3. These permissions are then added to the ACL on the
     # object. For more information, see [Access Control List (ACL)
-    # Overview][9] and [Managing ACLs Using the REST API][10].
+    # Overview][10] and [Managing ACLs Using the REST API][11].
     #
     # **Storage Class Options**
     #
     # You can use the `CopyObject` operation to change the storage class of
     # an object that is already stored in Amazon S3 using the `StorageClass`
-    # parameter. For more information, see [Storage Classes][11] in the
+    # parameter. For more information, see [Storage Classes][12] in the
     # *Amazon S3 Service Developer Guide*.
     #
     # **Versioning**
@@ -872,15 +882,15 @@ module Aws::S3
     #
     # If the source object's storage class is GLACIER, you must restore a
     # copy of this object before you can use it as a source object for the
-    # copy operation. For more information, see [RestoreObject][12].
+    # copy operation. For more information, see [RestoreObject][13].
     #
     # The following operations are related to `CopyObject`\:
     #
-    # * [PutObject][13]
+    # * [PutObject][14]
     #
-    # * [GetObject][14]
+    # * [GetObject][15]
     #
-    # For more information, see [Copying Objects][15].
+    # For more information, see [Copying Objects][16].
     #
     #
     #
@@ -892,19 +902,44 @@ module Aws::S3
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/amazon-s3-policy-keys.html
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html
     # [8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
-    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html
-    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
-    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html
-    # [13]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
-    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
-    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjectsExamples.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
+    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html
+    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
+    # [13]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html
+    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    # [16]: https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjectsExamples.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the object.
     #
+    #   This action is not supported by Amazon S3 on Outposts.
+    #
     # @option params [required, String] :bucket
     #   The name of the destination bucket.
+    #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation with an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     #
     # @option params [String] :cache_control
     #   Specifies caching behavior along the request/reply chain.
@@ -950,6 +985,15 @@ module Aws::S3
     #
     #      </note>
     #
+    #     Alternatively, for objects accessed through Amazon S3 on Outposts,
+    #     specify the ARN of the object as accessed in the format
+    #     `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/object/<key>`.
+    #     For example, to copy the object `reports/january.pdf` through
+    #     outpost `my-outpost` owned by account `123456789012` in Region
+    #     `us-west-2`, use the URL encoding of
+    #     `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf`.
+    #     The value must be URL encoded.
+    #
     #   To copy a specific version of an object, append
     #   `?versionId=<version-id>` to the value (for example,
     #   `awsexamplebucket/reports/january.pdf?versionId=QUpfdndhfd8438MNFDN93jdnJFkdmqnh893`).
@@ -981,14 +1025,22 @@ module Aws::S3
     #   Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the
     #   object.
     #
+    #   This action is not supported by Amazon S3 on Outposts.
+    #
     # @option params [String] :grant_read
     #   Allows grantee to read the object data and its metadata.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     #
     # @option params [String] :grant_read_acp
     #   Allows grantee to read the object ACL.
     #
+    #   This action is not supported by Amazon S3 on Outposts.
+    #
     # @option params [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     #
     # @option params [required, String] :key
     #   The key of the destination object.
@@ -1009,7 +1061,16 @@ module Aws::S3
     #   Amazon S3 (for example, AES256, aws:kms).
     #
     # @option params [String] :storage_class
-    #   The type of storage to use for the object. Defaults to 'STANDARD'.
+    #   By default, Amazon S3 uses the STANDARD Storage Class to store newly
+    #   created objects. The STANDARD storage class provides high durability
+    #   and high availability. Depending on performance needs, you can specify
+    #   a different Storage Class. Amazon S3 on Outposts only uses the
+    #   OUTPOSTS Storage Class. For more information, see [Storage Classes][1]
+    #   in the *Amazon S3 Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
     #
     # @option params [String] :website_redirect_location
     #   If the bucket is configured as a website, redirects requests for this
@@ -1048,6 +1109,15 @@ module Aws::S3
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
+    #
+    # @option params [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with a COPY operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
     #
     # @option params [String] :copy_source_sse_customer_algorithm
     #   Specifies the algorithm to use when decrypting the source object (for
@@ -1110,6 +1180,7 @@ module Aws::S3
     #   * {Types::CopyObjectOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::CopyObjectOutput#ssekms_key_id #ssekms_key_id} => String
     #   * {Types::CopyObjectOutput#ssekms_encryption_context #ssekms_encryption_context} => String
+    #   * {Types::CopyObjectOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::CopyObjectOutput#request_charged #request_charged} => String
     #
     #
@@ -1158,13 +1229,14 @@ module Aws::S3
     #     metadata_directive: "COPY", # accepts COPY, REPLACE
     #     tagging_directive: "COPY", # accepts COPY, REPLACE
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     copy_source_sse_customer_algorithm: "CopySourceSSECustomerAlgorithm",
     #     copy_source_sse_customer_key: "CopySourceSSECustomerKey",
     #     copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
@@ -1189,6 +1261,7 @@ module Aws::S3
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
     #   resp.ssekms_encryption_context #=> String
+    #   resp.bucket_key_enabled #=> Boolean
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObject AWS API Documentation
@@ -1200,21 +1273,23 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Creates a new bucket. To create a bucket, you must register with
+    # Creates a new S3 bucket. To create a bucket, you must register with
     # Amazon S3 and have a valid AWS Access Key ID to authenticate requests.
     # Anonymous requests are never allowed to create buckets. By creating
     # the bucket, you become the bucket owner.
     #
-    # Not every string is an acceptable bucket name. For information on
-    # bucket naming restrictions, see [Working with Amazon S3 Buckets][1].
+    # Not every string is an acceptable bucket name. For information about
+    # bucket naming restrictions, see [Working with Amazon S3 buckets][1].
+    #
+    # If you want to create an Amazon S3 on Outposts bucket, see [Create
+    # Bucket][2].
     #
     # By default, the bucket is created in the US East (N. Virginia) Region.
     # You can optionally specify a Region in the request body. You might
     # choose a Region to optimize latency, minimize costs, or address
     # regulatory requirements. For example, if you reside in Europe, you
     # will probably find it advantageous to create buckets in the Europe
-    # (Ireland) Region. For more information, see [How to Select a Region
-    # for Your Buckets][2].
+    # (Ireland) Region. For more information, see [Accessing a bucket][3].
     #
     # <note markdown="1"> If you send your create bucket request to the `s3.amazonaws.com`
     # endpoint, the request goes to the us-east-1 Region. Accordingly, the
@@ -1223,7 +1298,7 @@ module Aws::S3
     # another Region where the bucket is to be created. If you create a
     # bucket in a Region other than US East (N. Virginia), your application
     # must be able to handle 307 redirect. For more information, see
-    # [Virtual Hosting of Buckets][3].
+    # [Virtual hosting of buckets][4].
     #
     #  </note>
     #
@@ -1235,14 +1310,14 @@ module Aws::S3
     # * Specify a canned ACL using the `x-amz-acl` request header. Amazon S3
     #   supports a set of predefined ACLs, known as *canned ACLs*. Each
     #   canned ACL has a predefined set of grantees and permissions. For
-    #   more information, see [Canned ACL][4].
+    #   more information, see [Canned ACL][5].
     #
     # * Specify access permissions explicitly using the `x-amz-grant-read`,
     #   `x-amz-grant-write`, `x-amz-grant-read-acp`,
     #   `x-amz-grant-write-acp`, and `x-amz-grant-full-control` headers.
     #   These headers map to the set of permissions Amazon S3 supports in an
-    #   ACL. For more information, see [Access Control List (ACL)
-    #   Overview][5].
+    #   ACL. For more information, see [Access control list (ACL)
+    #   overview][6].
     #
     #   You specify each grantee as a type=value pair, where the type is one
     #   of the following:
@@ -1275,7 +1350,7 @@ module Aws::S3
     #     * South America (São Paulo)
     #
     #      For a list of all the Amazon S3 supported Regions and endpoints,
-    #     see [Regions and Endpoints][6] in the AWS General Reference.
+    #     see [Regions and Endpoints][7] in the AWS General Reference.
     #
     #      </note>
     #
@@ -1292,20 +1367,21 @@ module Aws::S3
     #
     # The following operations are related to `CreateBucket`\:
     #
-    # * [PutObject][7]
+    # * [PutObject][8]
     #
-    # * [DeleteBucket][8]
+    # * [DeleteBucket][9]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
-    # [6]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
+    # [7]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the bucket.
@@ -1342,19 +1418,6 @@ module Aws::S3
     #   * {Types::CreateBucketOutput#location #location} => String
     #
     #
-    # @example Example: To create a bucket 
-    #
-    #   # The following example creates a bucket.
-    #
-    #   resp = client.create_bucket({
-    #     bucket: "examplebucket", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     location: "/examplebucket", 
-    #   }
-    #
     # @example Example: To create a bucket in a specific region
     #
     #   # The following example creates a bucket. The request specifies an AWS region where to create the bucket.
@@ -1369,6 +1432,19 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #     location: "http://examplebucket.<Region>.s3.amazonaws.com/", 
+    #   }
+    #
+    # @example Example: To create a bucket 
+    #
+    #   # The following example creates a bucket.
+    #
+    #   resp = client.create_bucket({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     location: "/examplebucket", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -1636,8 +1712,32 @@ module Aws::S3
     # @option params [String] :acl
     #   The canned ACL to apply to the object.
     #
+    #   This action is not supported by Amazon S3 on Outposts.
+    #
     # @option params [required, String] :bucket
     #   The name of the bucket to which to initiate the upload
+    #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation with an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     #
     # @option params [String] :cache_control
     #   Specifies caching behavior along the request/reply chain.
@@ -1663,14 +1763,22 @@ module Aws::S3
     #   Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the
     #   object.
     #
+    #   This action is not supported by Amazon S3 on Outposts.
+    #
     # @option params [String] :grant_read
     #   Allows grantee to read the object data and its metadata.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     #
     # @option params [String] :grant_read_acp
     #   Allows grantee to read the object ACL.
     #
+    #   This action is not supported by Amazon S3 on Outposts.
+    #
     # @option params [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     #
     # @option params [required, String] :key
     #   Object key for which the multipart upload is to be initiated.
@@ -1683,7 +1791,16 @@ module Aws::S3
     #   Amazon S3 (for example, AES256, aws:kms).
     #
     # @option params [String] :storage_class
-    #   The type of storage to use for the object. Defaults to 'STANDARD'.
+    #   By default, Amazon S3 uses the STANDARD Storage Class to store newly
+    #   created objects. The STANDARD storage class provides high durability
+    #   and high availability. Depending on performance needs, you can specify
+    #   a different Storage Class. Amazon S3 on Outposts only uses the
+    #   OUTPOSTS Storage Class. For more information, see [Storage Classes][1]
+    #   in the *Amazon S3 Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
     #
     # @option params [String] :website_redirect_location
     #   If the bucket is configured as a website, redirects requests for this
@@ -1722,6 +1839,15 @@ module Aws::S3
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
+    #
+    # @option params [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with an object operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
     #
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
@@ -1766,6 +1892,7 @@ module Aws::S3
     #   * {Types::CreateMultipartUploadOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::CreateMultipartUploadOutput#ssekms_key_id #ssekms_key_id} => String
     #   * {Types::CreateMultipartUploadOutput#ssekms_encryption_context #ssekms_encryption_context} => String
+    #   * {Types::CreateMultipartUploadOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::CreateMultipartUploadOutput#request_charged #request_charged} => String
     #
     #
@@ -1805,13 +1932,14 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -1832,6 +1960,7 @@ module Aws::S3
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
     #   resp.ssekms_encryption_context #=> String
+    #   resp.bucket_key_enabled #=> Boolean
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateMultipartUpload AWS API Documentation
@@ -1843,7 +1972,7 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Deletes the bucket. All objects (including all object versions and
+    # Deletes the S3 bucket. All objects (including all object versions and
     # delete markers) in the bucket must be deleted before the bucket itself
     # can be deleted.
     #
@@ -2065,6 +2194,68 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # Deletes the S3 Intelligent-Tiering configuration from the specified
+    # bucket.
+    #
+    # The S3 Intelligent-Tiering storage class is designed to optimize
+    # storage costs by automatically moving data to the most cost-effective
+    # storage access tier, without additional operational overhead. S3
+    # Intelligent-Tiering delivers automatic cost savings by moving data
+    # between access tiers, when access patterns change.
+    #
+    # The S3 Intelligent-Tiering storage class is suitable for objects
+    # larger than 128 KB that you plan to store for at least 30 days. If the
+    # size of an object is less than 128 KB, it is not eligible for
+    # auto-tiering. Smaller objects can be stored, but they are always
+    # charged at the frequent access tier rates in the S3
+    # Intelligent-Tiering storage class.
+    #
+    # If you delete an object before the end of the 30-day minimum storage
+    # duration period, you are charged for 30 days. For more information,
+    # see [Storage class for automatically optimizing frequently and
+    # infrequently accessed objects][1].
+    #
+    # Operations related to `DeleteBucketIntelligentTieringConfiguration`
+    # include:
+    #
+    # * [GetBucketIntelligentTieringConfiguration][2]
+    #
+    # * [PutBucketIntelligentTieringConfiguration][3]
+    #
+    # * [ListBucketIntelligentTieringConfigurations][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html
+    #
+    # @option params [required, String] :bucket
+    #   The name of the Amazon S3 bucket whose configuration you want to
+    #   modify or retrieve.
+    #
+    # @option params [required, String] :id
+    #   The ID used to identify the S3 Intelligent-Tiering configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bucket_intelligent_tiering_configuration({
+    #     bucket: "BucketName", # required
+    #     id: "IntelligentTieringId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketIntelligentTieringConfiguration AWS API Documentation
+    #
+    # @overload delete_bucket_intelligent_tiering_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_bucket_intelligent_tiering_configuration(params = {}, options = {})
+      req = build_request(:delete_bucket_intelligent_tiering_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes an inventory configuration (identified by the inventory ID)
     # from the bucket.
     #
@@ -2251,6 +2442,52 @@ module Aws::S3
     # @param [Hash] params ({})
     def delete_bucket_metrics_configuration(params = {}, options = {})
       req = build_request(:delete_bucket_metrics_configuration, params)
+      req.send_request(options)
+    end
+
+    # Removes `OwnershipControls` for an Amazon S3 bucket. To use this
+    # operation, you must have the `s3:PutBucketOwnershipControls`
+    # permission. For more information about Amazon S3 permissions, see
+    # [Specifying Permissions in a Policy][1].
+    #
+    # For information about Amazon S3 Object Ownership, see [Using Object
+    # Ownership][2].
+    #
+    # The following operations are related to
+    # `DeleteBucketOwnershipControls`\:
+    #
+    # * GetBucketOwnershipControls
+    #
+    # * PutBucketOwnershipControls
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/about-object-ownership.html
+    #
+    # @option params [required, String] :bucket
+    #   The Amazon S3 bucket whose `OwnershipControls` you want to delete.
+    #
+    # @option params [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bucket_ownership_controls({
+    #     bucket: "BucketName", # required
+    #     expected_bucket_owner: "AccountId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketOwnershipControls AWS API Documentation
+    #
+    # @overload delete_bucket_ownership_controls(params = {})
+    # @param [Hash] params ({})
+    def delete_bucket_ownership_controls(params = {}, options = {})
+      req = build_request(:delete_bucket_ownership_controls, params)
       req.send_request(options)
     end
 
@@ -2546,14 +2783,24 @@ module Aws::S3
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     #
     # @option params [required, String] :key
     #   Key name of the object to delete.
@@ -2672,14 +2919,24 @@ module Aws::S3
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     #
     # @option params [required, String] :key
     #   Name of the object key.
@@ -2697,6 +2954,21 @@ module Aws::S3
     #   * {Types::DeleteObjectTaggingOutput#version_id #version_id} => String
     #
     #
+    # @example Example: To remove tag set from an object
+    #
+    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the
+    #   # operation removes tag set from the latest object version.
+    #
+    #   resp = client.delete_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version_id: "null", 
+    #   }
+    #
     # @example Example: To remove tag set from an object version
     #
     #   # The following example removes tag set associated with the specified object version. The request specifies both the
@@ -2711,21 +2983,6 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   }
-    #
-    # @example Example: To remove tag set from an object
-    #
-    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the
-    #   # operation removes tag set from the latest object version.
-    #
-    #   resp = client.delete_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     version_id: "null", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -2809,14 +3066,24 @@ module Aws::S3
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     #
     # @option params [required, Types::Delete] :delete
     #   Container for the request.
@@ -2855,42 +3122,6 @@ module Aws::S3
     #   * {Types::DeleteObjectsOutput#errors #errors} => Array&lt;Types::Error&gt;
     #
     #
-    # @example Example: To delete multiple object versions from a versioned bucket
-    #
-    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
-    #   # versions and returns the key and versions of deleted objects in the response.
-    #
-    #   resp = client.delete_objects({
-    #     bucket: "examplebucket", 
-    #     delete: {
-    #       objects: [
-    #         {
-    #           key: "HappyFace.jpg", 
-    #           version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
-    #         }, 
-    #         {
-    #           key: "HappyFace.jpg", 
-    #           version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
-    #         }, 
-    #       ], 
-    #       quiet: false, 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     deleted: [
-    #       {
-    #         key: "HappyFace.jpg", 
-    #         version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
-    #       }, 
-    #       {
-    #         key: "HappyFace.jpg", 
-    #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
-    #       }, 
-    #     ], 
-    #   }
-    #
     # @example Example: To delete multiple objects from a versioned bucket
     #
     #   # The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the
@@ -2923,6 +3154,42 @@ module Aws::S3
     #         delete_marker: true, 
     #         delete_marker_version_id: "iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt", 
     #         key: "objectkey2", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To delete multiple object versions from a versioned bucket
+    #
+    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
+    #   # versions and returns the key and versions of deleted objects in the response.
+    #
+    #   resp = client.delete_objects({
+    #     bucket: "examplebucket", 
+    #     delete: {
+    #       objects: [
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
+    #         }, 
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #         }, 
+    #       ], 
+    #       quiet: false, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deleted: [
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #       }, 
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
     #       }, 
     #     ], 
     #   }
@@ -3061,7 +3328,7 @@ module Aws::S3
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html
     #
     # @option params [required, String] :bucket
-    #   Name of the bucket for which the accelerate configuration is
+    #   The name of the bucket for which the accelerate configuration is
     #   retrieved.
     #
     # @option params [String] :expected_bucket_owner
@@ -3372,6 +3639,7 @@ module Aws::S3
     #   resp.server_side_encryption_configuration.rules #=> Array
     #   resp.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.sse_algorithm #=> String, one of "AES256", "aws:kms"
     #   resp.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.kms_master_key_id #=> String
+    #   resp.server_side_encryption_configuration.rules[0].bucket_key_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketEncryption AWS API Documentation
     #
@@ -3379,6 +3647,85 @@ module Aws::S3
     # @param [Hash] params ({})
     def get_bucket_encryption(params = {}, options = {})
       req = build_request(:get_bucket_encryption, params)
+      req.send_request(options)
+    end
+
+    # Gets the S3 Intelligent-Tiering configuration from the specified
+    # bucket.
+    #
+    # The S3 Intelligent-Tiering storage class is designed to optimize
+    # storage costs by automatically moving data to the most cost-effective
+    # storage access tier, without additional operational overhead. S3
+    # Intelligent-Tiering delivers automatic cost savings by moving data
+    # between access tiers, when access patterns change.
+    #
+    # The S3 Intelligent-Tiering storage class is suitable for objects
+    # larger than 128 KB that you plan to store for at least 30 days. If the
+    # size of an object is less than 128 KB, it is not eligible for
+    # auto-tiering. Smaller objects can be stored, but they are always
+    # charged at the frequent access tier rates in the S3
+    # Intelligent-Tiering storage class.
+    #
+    # If you delete an object before the end of the 30-day minimum storage
+    # duration period, you are charged for 30 days. For more information,
+    # see [Storage class for automatically optimizing frequently and
+    # infrequently accessed objects][1].
+    #
+    # Operations related to `GetBucketIntelligentTieringConfiguration`
+    # include:
+    #
+    # * [DeleteBucketIntelligentTieringConfiguration][2]
+    #
+    # * [PutBucketIntelligentTieringConfiguration][3]
+    #
+    # * [ListBucketIntelligentTieringConfigurations][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html
+    #
+    # @option params [required, String] :bucket
+    #   The name of the Amazon S3 bucket whose configuration you want to
+    #   modify or retrieve.
+    #
+    # @option params [required, String] :id
+    #   The ID used to identify the S3 Intelligent-Tiering configuration.
+    #
+    # @return [Types::GetBucketIntelligentTieringConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBucketIntelligentTieringConfigurationOutput#intelligent_tiering_configuration #intelligent_tiering_configuration} => Types::IntelligentTieringConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bucket_intelligent_tiering_configuration({
+    #     bucket: "BucketName", # required
+    #     id: "IntelligentTieringId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.intelligent_tiering_configuration.id #=> String
+    #   resp.intelligent_tiering_configuration.filter.prefix #=> String
+    #   resp.intelligent_tiering_configuration.filter.tag.key #=> String
+    #   resp.intelligent_tiering_configuration.filter.tag.value #=> String
+    #   resp.intelligent_tiering_configuration.filter.and.prefix #=> String
+    #   resp.intelligent_tiering_configuration.filter.and.tags #=> Array
+    #   resp.intelligent_tiering_configuration.filter.and.tags[0].key #=> String
+    #   resp.intelligent_tiering_configuration.filter.and.tags[0].value #=> String
+    #   resp.intelligent_tiering_configuration.status #=> String, one of "Enabled", "Disabled"
+    #   resp.intelligent_tiering_configuration.tierings #=> Array
+    #   resp.intelligent_tiering_configuration.tierings[0].days #=> Integer
+    #   resp.intelligent_tiering_configuration.tierings[0].access_tier #=> String, one of "ARCHIVE_ACCESS", "DEEP_ARCHIVE_ACCESS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketIntelligentTieringConfiguration AWS API Documentation
+    #
+    # @overload get_bucket_intelligent_tiering_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_bucket_intelligent_tiering_configuration(params = {}, options = {})
+      req = build_request(:get_bucket_intelligent_tiering_configuration, params)
       req.send_request(options)
     end
 
@@ -3578,8 +3925,8 @@ module Aws::S3
     # combination of both. Accordingly, this section describes the latest
     # API. The response describes the new filter element that you can use to
     # specify a filter to select a subset of objects to which the rule
-    # applies. If you are still using previous version of the lifecycle
-    # configuration, it works. For the earlier API description, see
+    # applies. If you are using a previous version of the lifecycle
+    # configuration, it still works. For the earlier API description, see
     # [GetBucketLifecycle][1].
     #
     #  </note>
@@ -3907,7 +4254,8 @@ module Aws::S3
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketNotificationConfiguration.html
     #
     # @option params [required, String] :bucket
-    #   Name of the bucket for which to get the notification configuration.
+    #   The name of the bucket for which to get the notification
+    #   configuration.
     #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
@@ -4040,7 +4388,8 @@ module Aws::S3
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketNotification.html
     #
     # @option params [required, String] :bucket
-    #   Name of the bucket for which to get the notification configuration.
+    #   The name of the bucket for which to get the notification
+    #   configuration.
     #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
@@ -4093,6 +4442,59 @@ module Aws::S3
     # @param [Hash] params ({})
     def get_bucket_notification_configuration(params = {}, options = {})
       req = build_request(:get_bucket_notification_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves `OwnershipControls` for an Amazon S3 bucket. To use this
+    # operation, you must have the `s3:GetBucketOwnershipControls`
+    # permission. For more information about Amazon S3 permissions, see
+    # [Specifying Permissions in a Policy][1].
+    #
+    # For information about Amazon S3 Object Ownership, see [Using Object
+    # Ownership][2].
+    #
+    # The following operations are related to `GetBucketOwnershipControls`\:
+    #
+    # * PutBucketOwnershipControls
+    #
+    # * DeleteBucketOwnershipControls
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/about-object-ownership.html
+    #
+    # @option params [required, String] :bucket
+    #   The name of the Amazon S3 bucket whose `OwnershipControls` you want to
+    #   retrieve.
+    #
+    # @option params [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
+    #
+    # @return [Types::GetBucketOwnershipControlsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBucketOwnershipControlsOutput#ownership_controls #ownership_controls} => Types::OwnershipControls
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_bucket_ownership_controls({
+    #     bucket: "BucketName", # required
+    #     expected_bucket_owner: "AccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ownership_controls.rules #=> Array
+    #   resp.ownership_controls.rules[0].object_ownership #=> String, one of "BucketOwnerPreferred", "ObjectWriter"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketOwnershipControls AWS API Documentation
+    #
+    # @overload get_bucket_ownership_controls(params = {})
+    # @param [Hash] params ({})
+    def get_bucket_ownership_controls(params = {}, options = {})
+      req = build_request(:get_bucket_ownership_controls, params)
       req.send_request(options)
     end
 
@@ -4329,10 +4731,11 @@ module Aws::S3
     #   resp.replication_configuration.rules[0].filter.and.tags[0].value #=> String
     #   resp.replication_configuration.rules[0].status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].source_selection_criteria.sse_kms_encrypted_objects.status #=> String, one of "Enabled", "Disabled"
+    #   resp.replication_configuration.rules[0].source_selection_criteria.replica_modifications.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].existing_object_replication.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].destination.bucket #=> String
     #   resp.replication_configuration.rules[0].destination.account #=> String
-    #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"
+    #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS"
     #   resp.replication_configuration.rules[0].destination.access_control_translation.owner #=> String, one of "Destination"
     #   resp.replication_configuration.rules[0].destination.encryption_configuration.replica_kms_key_id #=> String
     #   resp.replication_configuration.rules[0].destination.replication_time.status #=> String, one of "Enabled", "Disabled"
@@ -4680,11 +5083,13 @@ module Aws::S3
     # For more information about returning the ACL of an object, see
     # [GetObjectAcl][3].
     #
-    # If the object you are retrieving is stored in the GLACIER or
-    # DEEP\_ARCHIVE storage classes, before you can retrieve the object you
-    # must first restore a copy using [RestoreObject][4]. Otherwise, this
-    # operation returns an `InvalidObjectStateError` error. For information
-    # about restoring archived objects, see [Restoring Archived Objects][5].
+    # If the object you are retrieving is stored in the S3 Glacier or S3
+    # Glacier Deep Archive storage class, or S3 Intelligent-Tiering Archive
+    # or S3 Intelligent-Tiering Deep Archive tiers, before you can retrieve
+    # the object you must first restore a copy using [RestoreObject][4].
+    # Otherwise, this operation returns an `InvalidObjectStateError` error.
+    # For information about restoring archived objects, see [Restoring
+    # Archived Objects][5].
     #
     # Encryption request headers, like `x-amz-server-side-encryption`,
     # should not be sent for GET requests if your object uses server-side
@@ -4818,14 +5223,24 @@ module Aws::S3
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     #
     # @option params [String] :if_match
     #   Return the object only if its entity tag (ETag) is the same as the one
@@ -4945,6 +5360,7 @@ module Aws::S3
     #   * {Types::GetObjectOutput#sse_customer_algorithm #sse_customer_algorithm} => String
     #   * {Types::GetObjectOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::GetObjectOutput#ssekms_key_id #ssekms_key_id} => String
+    #   * {Types::GetObjectOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::GetObjectOutput#storage_class #storage_class} => String
     #   * {Types::GetObjectOutput#request_charged #request_charged} => String
     #   * {Types::GetObjectOutput#replication_status #replication_status} => String
@@ -4954,6 +5370,28 @@ module Aws::S3
     #   * {Types::GetObjectOutput#object_lock_retain_until_date #object_lock_retain_until_date} => Time
     #   * {Types::GetObjectOutput#object_lock_legal_hold_status #object_lock_legal_hold_status} => String
     #
+    #
+    # @example Example: To retrieve an object
+    #
+    #   # The following example retrieves an object for an S3 bucket.
+    #
+    #   resp = client.get_object({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accept_ranges: "bytes", 
+    #     content_length: 3191, 
+    #     content_type: "image/jpeg", 
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
+    #     metadata: {
+    #     }, 
+    #     tag_count: 2, 
+    #     version_id: "null", 
+    #   }
     #
     # @example Example: To retrieve a byte range of an object 
     #
@@ -4976,28 +5414,6 @@ module Aws::S3
     #     last_modified: Time.parse("Thu, 09 Oct 2014 22:57:28 GMT"), 
     #     metadata: {
     #     }, 
-    #     version_id: "null", 
-    #   }
-    #
-    # @example Example: To retrieve an object
-    #
-    #   # The following example retrieves an object for an S3 bucket.
-    #
-    #   resp = client.get_object({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     accept_ranges: "bytes", 
-    #     content_length: 3191, 
-    #     content_type: "image/jpeg", 
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
-    #     metadata: {
-    #     }, 
-    #     tag_count: 2, 
     #     version_id: "null", 
     #   }
     #
@@ -5082,7 +5498,8 @@ module Aws::S3
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"
+    #   resp.bucket_key_enabled #=> Boolean
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS"
     #   resp.request_charged #=> String, one of "requester"
     #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
     #   resp.parts_count #=> Integer
@@ -5101,7 +5518,9 @@ module Aws::S3
     end
 
     # Returns the access control list (ACL) of an object. To use this
-    # operation, you must have READ\_ACP access to the object.
+    # operation, you must have `READ_ACP` access to the object.
+    #
+    # This action is not supported by Amazon S3 on Outposts.
     #
     # **Versioning**
     #
@@ -5130,7 +5549,7 @@ module Aws::S3
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
@@ -5254,6 +5673,8 @@ module Aws::S3
     # Gets an object's current Legal Hold status. For more information, see
     # [Locking Objects][1].
     #
+    # This action is not supported by Amazon S3 on Outposts.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html
@@ -5265,7 +5686,7 @@ module Aws::S3
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
@@ -5337,6 +5758,18 @@ module Aws::S3
     # @option params [required, String] :bucket
     #   The bucket whose Object Lock configuration you want to retrieve.
     #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation with an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
@@ -5372,6 +5805,8 @@ module Aws::S3
     # Retrieves an object's retention settings. For more information, see
     # [Locking Objects][1].
     #
+    # This action is not supported by Amazon S3 on Outposts.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html
@@ -5383,7 +5818,7 @@ module Aws::S3
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
@@ -5478,14 +5913,24 @@ module Aws::S3
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     #
     # @option params [required, String] :key
     #   Object key for which to get the tagging information.
@@ -5574,17 +6019,19 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Return torrent files from a bucket. BitTorrent can save you bandwidth
+    # Returns torrent files from a bucket. BitTorrent can save you bandwidth
     # when you're distributing large files. For more information about
-    # BitTorrent, see [Amazon S3 Torrent][1].
+    # BitTorrent, see [Using BitTorrent with Amazon S3][1].
     #
-    # <note markdown="1"> You can get torrent only for objects that are less than 5 GB in size
-    # and that are not encrypted using server-side encryption with
+    # <note markdown="1"> You can get torrent only for objects that are less than 5 GB in size,
+    # and that are not encrypted using server-side encryption with a
     # customer-provided encryption key.
     #
     #  </note>
     #
     # To use GET, you must have READ access to the object.
+    #
+    # This action is not supported by Amazon S3 on Outposts.
     #
     # The following operation is related to `GetObjectTorrent`\:
     #
@@ -5757,6 +6204,28 @@ module Aws::S3
     # @option params [required, String] :bucket
     #   The bucket name.
     #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation with an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
@@ -5882,6 +6351,28 @@ module Aws::S3
     # @option params [required, String] :bucket
     #   The name of the bucket containing the object.
     #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation with an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #
     # @option params [String] :if_match
     #   Return the object only if its entity tag (ETag) is the same as the one
     #   specified, otherwise return a 412 (precondition failed).
@@ -5904,12 +6395,16 @@ module Aws::S3
     # @option params [String] :range
     #   Downloads the specified range bytes of an object. For more information
     #   about the HTTP Range header, see
-    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35]().
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35][1].
     #
     #   <note markdown="1"> Amazon S3 doesn't support retrieving multiple ranges of data per
     #   `GET` request.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
     #
     # @option params [String] :version_id
     #   VersionId used to reference a specific version of the object.
@@ -5958,6 +6453,7 @@ module Aws::S3
     #   * {Types::HeadObjectOutput#accept_ranges #accept_ranges} => String
     #   * {Types::HeadObjectOutput#expiration #expiration} => String
     #   * {Types::HeadObjectOutput#restore #restore} => String
+    #   * {Types::HeadObjectOutput#archive_status #archive_status} => String
     #   * {Types::HeadObjectOutput#last_modified #last_modified} => Time
     #   * {Types::HeadObjectOutput#content_length #content_length} => Integer
     #   * {Types::HeadObjectOutput#etag #etag} => String
@@ -5976,6 +6472,7 @@ module Aws::S3
     #   * {Types::HeadObjectOutput#sse_customer_algorithm #sse_customer_algorithm} => String
     #   * {Types::HeadObjectOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::HeadObjectOutput#ssekms_key_id #ssekms_key_id} => String
+    #   * {Types::HeadObjectOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::HeadObjectOutput#storage_class #storage_class} => String
     #   * {Types::HeadObjectOutput#request_charged #request_charged} => String
     #   * {Types::HeadObjectOutput#replication_status #replication_status} => String
@@ -6031,6 +6528,7 @@ module Aws::S3
     #   resp.accept_ranges #=> String
     #   resp.expiration #=> String
     #   resp.restore #=> String
+    #   resp.archive_status #=> String, one of "ARCHIVE_ACCESS", "DEEP_ARCHIVE_ACCESS"
     #   resp.last_modified #=> Time
     #   resp.content_length #=> Integer
     #   resp.etag #=> String
@@ -6050,7 +6548,8 @@ module Aws::S3
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"
+    #   resp.bucket_key_enabled #=> Boolean
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS"
     #   resp.request_charged #=> String, one of "requester"
     #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
     #   resp.parts_count #=> Integer
@@ -6168,6 +6667,93 @@ module Aws::S3
     # @param [Hash] params ({})
     def list_bucket_analytics_configurations(params = {}, options = {})
       req = build_request(:list_bucket_analytics_configurations, params)
+      req.send_request(options)
+    end
+
+    # Lists the S3 Intelligent-Tiering configuration from the specified
+    # bucket.
+    #
+    # The S3 Intelligent-Tiering storage class is designed to optimize
+    # storage costs by automatically moving data to the most cost-effective
+    # storage access tier, without additional operational overhead. S3
+    # Intelligent-Tiering delivers automatic cost savings by moving data
+    # between access tiers, when access patterns change.
+    #
+    # The S3 Intelligent-Tiering storage class is suitable for objects
+    # larger than 128 KB that you plan to store for at least 30 days. If the
+    # size of an object is less than 128 KB, it is not eligible for
+    # auto-tiering. Smaller objects can be stored, but they are always
+    # charged at the frequent access tier rates in the S3
+    # Intelligent-Tiering storage class.
+    #
+    # If you delete an object before the end of the 30-day minimum storage
+    # duration period, you are charged for 30 days. For more information,
+    # see [Storage class for automatically optimizing frequently and
+    # infrequently accessed objects][1].
+    #
+    # Operations related to `ListBucketIntelligentTieringConfigurations`
+    # include:
+    #
+    # * [DeleteBucketIntelligentTieringConfiguration][2]
+    #
+    # * [PutBucketIntelligentTieringConfiguration][3]
+    #
+    # * [GetBucketIntelligentTieringConfiguration][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html
+    #
+    # @option params [required, String] :bucket
+    #   The name of the Amazon S3 bucket whose configuration you want to
+    #   modify or retrieve.
+    #
+    # @option params [String] :continuation_token
+    #   The ContinuationToken that represents a placeholder from where this
+    #   request should begin.
+    #
+    # @return [Types::ListBucketIntelligentTieringConfigurationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBucketIntelligentTieringConfigurationsOutput#is_truncated #is_truncated} => Boolean
+    #   * {Types::ListBucketIntelligentTieringConfigurationsOutput#continuation_token #continuation_token} => String
+    #   * {Types::ListBucketIntelligentTieringConfigurationsOutput#next_continuation_token #next_continuation_token} => String
+    #   * {Types::ListBucketIntelligentTieringConfigurationsOutput#intelligent_tiering_configuration_list #intelligent_tiering_configuration_list} => Array&lt;Types::IntelligentTieringConfiguration&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bucket_intelligent_tiering_configurations({
+    #     bucket: "BucketName", # required
+    #     continuation_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.is_truncated #=> Boolean
+    #   resp.continuation_token #=> String
+    #   resp.next_continuation_token #=> String
+    #   resp.intelligent_tiering_configuration_list #=> Array
+    #   resp.intelligent_tiering_configuration_list[0].id #=> String
+    #   resp.intelligent_tiering_configuration_list[0].filter.prefix #=> String
+    #   resp.intelligent_tiering_configuration_list[0].filter.tag.key #=> String
+    #   resp.intelligent_tiering_configuration_list[0].filter.tag.value #=> String
+    #   resp.intelligent_tiering_configuration_list[0].filter.and.prefix #=> String
+    #   resp.intelligent_tiering_configuration_list[0].filter.and.tags #=> Array
+    #   resp.intelligent_tiering_configuration_list[0].filter.and.tags[0].key #=> String
+    #   resp.intelligent_tiering_configuration_list[0].filter.and.tags[0].value #=> String
+    #   resp.intelligent_tiering_configuration_list[0].status #=> String, one of "Enabled", "Disabled"
+    #   resp.intelligent_tiering_configuration_list[0].tierings #=> Array
+    #   resp.intelligent_tiering_configuration_list[0].tierings[0].days #=> Integer
+    #   resp.intelligent_tiering_configuration_list[0].tierings[0].access_tier #=> String, one of "ARCHIVE_ACCESS", "DEEP_ARCHIVE_ACCESS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketIntelligentTieringConfigurations AWS API Documentation
+    #
+    # @overload list_bucket_intelligent_tiering_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_bucket_intelligent_tiering_configurations(params = {}, options = {})
+      req = build_request(:list_bucket_intelligent_tiering_configurations, params)
       req.send_request(options)
     end
 
@@ -6472,19 +7058,29 @@ module Aws::S3
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
     #
     # @option params [required, String] :bucket
-    #   Name of the bucket to which the multipart upload was initiated.
+    #   The name of the bucket to which the multipart upload was initiated.
     #
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     #
     # @option params [String] :delimiter
     #   Character you use to group keys.
@@ -6682,7 +7278,7 @@ module Aws::S3
     #   resp.uploads[0].upload_id #=> String
     #   resp.uploads[0].key #=> String
     #   resp.uploads[0].initiated #=> Time
-    #   resp.uploads[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"
+    #   resp.uploads[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS"
     #   resp.uploads[0].owner.display_name #=> String
     #   resp.uploads[0].owner.id #=> String
     #   resp.uploads[0].initiator.id #=> String
@@ -6700,7 +7296,7 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # Returns metadata about all of the versions of objects in a bucket. You
+    # Returns metadata about all versions of the objects in a bucket. You
     # can also use request parameters as selection criteria to return
     # metadata about a subset of all the object versions.
     #
@@ -6711,6 +7307,8 @@ module Aws::S3
     #  </note>
     #
     # To use this operation, you must have READ access to the bucket.
+    #
+    # This action is not supported by Amazon S3 on Outposts.
     #
     # The following operations are related to `ListObjectVersions`\:
     #
@@ -6731,18 +7329,6 @@ module Aws::S3
     #
     # @option params [required, String] :bucket
     #   The bucket name that contains the objects.
-    #
-    #   When using this API with an access point, you must direct requests to
-    #   the access point hostname. The access point hostname takes the form
-    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
-    #   you provide the access point ARN in place of the bucket name. For more
-    #   information about access point ARNs, see [Using Access Points][1] in
-    #   the *Amazon Simple Storage Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #
     # @option params [String] :delimiter
     #   A delimiter is a character that you specify to group keys. All keys
@@ -6936,6 +7522,28 @@ module Aws::S3
     # @option params [required, String] :bucket
     #   The name of the bucket containing the objects.
     #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation with an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #
     # @option params [String] :delimiter
     #   A delimiter is a character you use to group keys.
     #
@@ -7045,7 +7653,7 @@ module Aws::S3
     #   resp.contents[0].last_modified #=> Time
     #   resp.contents[0].etag #=> String
     #   resp.contents[0].size #=> Integer
-    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE"
+    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS"
     #   resp.contents[0].owner.display_name #=> String
     #   resp.contents[0].owner.id #=> String
     #   resp.name #=> String
@@ -7111,14 +7719,24 @@ module Aws::S3
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     #
     # @option params [String] :delimiter
     #   A delimiter is a character you use to group keys.
@@ -7236,7 +7854,7 @@ module Aws::S3
     #   resp.contents[0].last_modified #=> Time
     #   resp.contents[0].etag #=> String
     #   resp.contents[0].size #=> Integer
-    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE"
+    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS"
     #   resp.contents[0].owner.display_name #=> String
     #   resp.contents[0].owner.id #=> String
     #   resp.name #=> String
@@ -7302,19 +7920,29 @@ module Aws::S3
     # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
     #
     # @option params [required, String] :bucket
-    #   Name of the bucket to which the parts are being uploaded.
+    #   The name of the bucket to which the parts are being uploaded.
     #
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     #
     # @option params [required, String] :key
     #   Object key for which the multipart upload was initiated.
@@ -7435,7 +8063,7 @@ module Aws::S3
     #   resp.initiator.display_name #=> String
     #   resp.owner.display_name #=> String
     #   resp.owner.id #=> String
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS"
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListParts AWS API Documentation
@@ -7494,7 +8122,7 @@ module Aws::S3
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
     #
     # @option params [required, String] :bucket
-    #   Name of the bucket for which the accelerate configuration is set.
+    #   The name of the bucket for which the accelerate configuration is set.
     #
     # @option params [required, Types::AccelerateConfiguration] :accelerate_configuration
     #   Container for setting the transfer acceleration state.
@@ -7696,6 +8324,9 @@ module Aws::S3
     #   The base64-encoded 128-bit MD5 digest of the data. This header must be
     #   used as a message integrity check to verify that the request body was
     #   not corrupted in transit. For more information, go to [RFC 1864.][1]
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     #
     #
@@ -7983,6 +8614,9 @@ module Aws::S3
     #   used as a message integrity check to verify that the request body was
     #   not corrupted in transit. For more information, go to [RFC 1864.][1]
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     #
     #
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
@@ -8066,14 +8700,17 @@ module Aws::S3
       req.send_request(options)
     end
 
-    # This implementation of the `PUT` operation uses the `encryption`
-    # subresource to set the default encryption state of an existing bucket.
+    # This operation uses the `encryption` subresource to configure default
+    # encryption and Amazon S3 Bucket Key for an existing bucket.
     #
-    # This implementation of the `PUT` operation sets default encryption for
-    # a bucket using server-side encryption with Amazon S3-managed keys
-    # SSE-S3 or AWS KMS customer master keys (CMKs) (SSE-KMS). For
-    # information about the Amazon S3 default encryption feature, see
-    # [Amazon S3 Default Bucket Encryption][1].
+    # Default encryption for a bucket can use server-side encryption with
+    # Amazon S3-managed keys (SSE-S3) or AWS KMS customer master keys
+    # (SSE-KMS). If you specify default encryption using SSE-KMS, you can
+    # also configure Amazon S3 Bucket Key. For information about default
+    # encryption, see [Amazon S3 default bucket encryption][1] in the
+    # *Amazon Simple Storage Service Developer Guide*. For more information
+    # about S3 Bucket Keys, see [Amazon S3 Bucket Keys][2] in the *Amazon
+    # Simple Storage Service Developer Guide*.
     #
     # This operation requires AWS Signature Version 4. For more information,
     # see [ Authenticating Requests (AWS Signature Version
@@ -8083,23 +8720,24 @@ module Aws::S3
     # `s3:PutEncryptionConfiguration` action. The bucket owner has this
     # permission by default. The bucket owner can grant this permission to
     # others. For more information about permissions, see [Permissions
-    # Related to Bucket Subresource Operations][2] and [Managing Access
-    # Permissions to Your Amazon S3 Resources][3] in the Amazon Simple
+    # Related to Bucket Subresource Operations][3] and [Managing Access
+    # Permissions to Your Amazon S3 Resources][4] in the Amazon Simple
     # Storage Service Developer Guide.
     #
     # **Related Resources**
     #
-    # * [GetBucketEncryption][4]
+    # * [GetBucketEncryption][5]
     #
-    # * [DeleteBucketEncryption][5]
+    # * [DeleteBucketEncryption][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html
     #
     # @option params [required, String] :bucket
     #   Specifies default encryption for a bucket using server-side encryption
@@ -8114,8 +8752,10 @@ module Aws::S3
     #
     # @option params [String] :content_md5
     #   The base64-encoded 128-bit MD5 digest of the server-side encryption
-    #   configuration. This parameter is auto-populated when using the command
-    #   from the CLI.
+    #   configuration.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     # @option params [required, Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
     #   Specifies the default server-side-encryption configuration.
@@ -8139,6 +8779,7 @@ module Aws::S3
     #             sse_algorithm: "AES256", # required, accepts AES256, aws:kms
     #             kms_master_key_id: "SSEKMSKeyId",
     #           },
+    #           bucket_key_enabled: false,
     #         },
     #       ],
     #     },
@@ -8151,6 +8792,96 @@ module Aws::S3
     # @param [Hash] params ({})
     def put_bucket_encryption(params = {}, options = {})
       req = build_request(:put_bucket_encryption, params)
+      req.send_request(options)
+    end
+
+    # Puts a S3 Intelligent-Tiering configuration to the specified bucket.
+    #
+    # The S3 Intelligent-Tiering storage class is designed to optimize
+    # storage costs by automatically moving data to the most cost-effective
+    # storage access tier, without additional operational overhead. S3
+    # Intelligent-Tiering delivers automatic cost savings by moving data
+    # between access tiers, when access patterns change.
+    #
+    # The S3 Intelligent-Tiering storage class is suitable for objects
+    # larger than 128 KB that you plan to store for at least 30 days. If the
+    # size of an object is less than 128 KB, it is not eligible for
+    # auto-tiering. Smaller objects can be stored, but they are always
+    # charged at the frequent access tier rates in the S3
+    # Intelligent-Tiering storage class.
+    #
+    # If you delete an object before the end of the 30-day minimum storage
+    # duration period, you are charged for 30 days. For more information,
+    # see [Storage class for automatically optimizing frequently and
+    # infrequently accessed objects][1].
+    #
+    # Operations related to `PutBucketIntelligentTieringConfiguration`
+    # include:
+    #
+    # * [DeleteBucketIntelligentTieringConfiguration][2]
+    #
+    # * [GetBucketIntelligentTieringConfiguration][3]
+    #
+    # * [ListBucketIntelligentTieringConfigurations][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html
+    #
+    # @option params [required, String] :bucket
+    #   The name of the Amazon S3 bucket whose configuration you want to
+    #   modify or retrieve.
+    #
+    # @option params [required, String] :id
+    #   The ID used to identify the S3 Intelligent-Tiering configuration.
+    #
+    # @option params [required, Types::IntelligentTieringConfiguration] :intelligent_tiering_configuration
+    #   Container for S3 Intelligent-Tiering configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_bucket_intelligent_tiering_configuration({
+    #     bucket: "BucketName", # required
+    #     id: "IntelligentTieringId", # required
+    #     intelligent_tiering_configuration: { # required
+    #       id: "IntelligentTieringId", # required
+    #       filter: {
+    #         prefix: "Prefix",
+    #         tag: {
+    #           key: "ObjectKey", # required
+    #           value: "Value", # required
+    #         },
+    #         and: {
+    #           prefix: "Prefix",
+    #           tags: [
+    #             {
+    #               key: "ObjectKey", # required
+    #               value: "Value", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       status: "Enabled", # required, accepts Enabled, Disabled
+    #       tierings: [ # required
+    #         {
+    #           days: 1, # required
+    #           access_tier: "ARCHIVE_ACCESS", # required, accepts ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketIntelligentTieringConfiguration AWS API Documentation
+    #
+    # @overload put_bucket_intelligent_tiering_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_bucket_intelligent_tiering_configuration(params = {}, options = {})
+      req = build_request(:put_bucket_intelligent_tiering_configuration, params)
       req.send_request(options)
     end
 
@@ -8357,6 +9088,8 @@ module Aws::S3
     # @option params [required, String] :bucket
     #
     # @option params [String] :content_md5
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     # @option params [Types::LifecycleConfiguration] :lifecycle_configuration
     #
@@ -8677,6 +9410,9 @@ module Aws::S3
     # @option params [String] :content_md5
     #   The MD5 hash of the `PutBucketLogging` request body.
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
@@ -8852,6 +9588,9 @@ module Aws::S3
     #
     # @option params [String] :content_md5
     #   The MD5 hash of the `PutPublicAccessBlock` request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     # @option params [required, Types::NotificationConfigurationDeprecated] :notification_configuration
     #   The container for the configuration.
@@ -9071,6 +9810,70 @@ module Aws::S3
       req.send_request(options)
     end
 
+    # Creates or modifies `OwnershipControls` for an Amazon S3 bucket. To
+    # use this operation, you must have the `s3:PutBucketOwnershipControls`
+    # permission. For more information about Amazon S3 permissions, see
+    # [Specifying Permissions in a Policy][1].
+    #
+    # For information about Amazon S3 Object Ownership, see [Using Object
+    # Ownership][2].
+    #
+    # The following operations are related to `PutBucketOwnershipControls`\:
+    #
+    # * GetBucketOwnershipControls
+    #
+    # * DeleteBucketOwnershipControls
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/about-object-ownership.html
+    #
+    # @option params [required, String] :bucket
+    #   The name of the Amazon S3 bucket whose `OwnershipControls` you want to
+    #   set.
+    #
+    # @option params [String] :content_md5
+    #   The MD5 hash of the `OwnershipControls` request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
+    # @option params [String] :expected_bucket_owner
+    #   The account id of the expected bucket owner. If the bucket is owned by
+    #   a different account, the request will fail with an HTTP `403 (Access
+    #   Denied)` error.
+    #
+    # @option params [required, Types::OwnershipControls] :ownership_controls
+    #   The `OwnershipControls` (BucketOwnerPreferred or ObjectWriter) that
+    #   you want to apply to this Amazon S3 bucket.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_bucket_ownership_controls({
+    #     bucket: "BucketName", # required
+    #     content_md5: "ContentMD5",
+    #     expected_bucket_owner: "AccountId",
+    #     ownership_controls: { # required
+    #       rules: [ # required
+    #         {
+    #           object_ownership: "BucketOwnerPreferred", # required, accepts BucketOwnerPreferred, ObjectWriter
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketOwnershipControls AWS API Documentation
+    #
+    # @overload put_bucket_ownership_controls(params = {})
+    # @param [Hash] params ({})
+    def put_bucket_ownership_controls(params = {}, options = {})
+      req = build_request(:put_bucket_ownership_controls, params)
+      req.send_request(options)
+    end
+
     # Applies an Amazon S3 bucket policy to an Amazon S3 bucket. If you are
     # using an identity other than the root user of the AWS account that
     # owns the bucket, the calling identity must have the `PutBucketPolicy`
@@ -9106,6 +9909,9 @@ module Aws::S3
     #
     # @option params [String] :content_md5
     #   The MD5 hash of the request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     # @option params [Boolean] :confirm_remove_self_bucket_access
     #   Set this parameter to true to confirm that you want to remove your
@@ -9161,15 +9967,15 @@ module Aws::S3
     #
     # Specify the replication configuration in the request body. In the
     # replication configuration, you provide the name of the destination
-    # bucket where you want Amazon S3 to replicate objects, the IAM role
-    # that Amazon S3 can assume to replicate objects on your behalf, and
-    # other relevant information.
+    # bucket or buckets where you want Amazon S3 to replicate objects, the
+    # IAM role that Amazon S3 can assume to replicate objects on your
+    # behalf, and other relevant information.
     #
     # A replication configuration must include at least one rule, and can
     # contain a maximum of 1,000. Each rule identifies a subset of objects
     # to replicate by filtering the objects in the source bucket. To choose
     # additional subsets of objects to replicate, add a rule for each
-    # subset. All rules must specify the same destination bucket.
+    # subset.
     #
     # To specify a subset of the objects in the source bucket to apply a
     # replication rule to, add the Filter element as a child of the Rule
@@ -9178,26 +9984,21 @@ module Aws::S3
     # configuration, you must also add the following elements:
     # `DeleteMarkerReplication`, `Status`, and `Priority`.
     #
-    # <note markdown="1"> The latest version of the replication configuration XML is V2. XML V2
-    # replication configurations are those that contain the `Filter` element
-    # for rules, and rules that specify S3 Replication Time Control (S3
-    # RTC). In XML V2 replication configurations, Amazon S3 doesn't
-    # replicate delete markers. Therefore, you must set the
-    # `DeleteMarkerReplication` element to `Disabled`. For backward
-    # compatibility, Amazon S3 continues to support the XML V1 replication
-    # configuration.
+    # <note markdown="1"> If you are using an earlier version of the replication configuration,
+    # Amazon S3 handles replication of delete markers differently. For more
+    # information, see [Backward Compatibility][3].
     #
     #  </note>
     #
     # For information about enabling versioning on a bucket, see [Using
-    # Versioning][3].
+    # Versioning][4].
     #
     # By default, a resource owner, in this case the AWS account that
     # created the bucket, can perform this operation. The resource owner can
     # also grant others permissions to perform the operation. For more
     # information about permissions, see [Specifying Permissions in a
-    # Policy][4] and [Managing Access Permissions to Your Amazon S3
-    # Resources][5].
+    # Policy][5] and [Managing Access Permissions to Your Amazon S3
+    # Resources][6].
     #
     # **Handling Replication of Encrypted Objects**
     #
@@ -9207,28 +10008,29 @@ module Aws::S3
     # `SourceSelectionCriteria`, `SseKmsEncryptedObjects`, `Status`,
     # `EncryptionConfiguration`, and `ReplicaKmsKeyID`. For information
     # about replication configuration, see [Replicating Objects Created with
-    # SSE Using CMKs stored in AWS KMS][6].
+    # SSE Using CMKs stored in AWS KMS][7].
     #
     # For information on `PutBucketReplication` errors, see [List of
-    # replication-related error codes][7]
+    # replication-related error codes][8]
     #
     # The following operations are related to `PutBucketReplication`\:
     #
-    # * [GetBucketReplication][8]
+    # * [GetBucketReplication][9]
     #
-    # * [DeleteBucketReplication][9]
+    # * [DeleteBucketReplication][10]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html
     # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-config-for-kms-objects.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-config-for-kms-objects.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket
@@ -9237,6 +10039,9 @@ module Aws::S3
     #   The base64-encoded 128-bit MD5 digest of the data. You must use this
     #   header as a message integrity check to verify that the request body
     #   was not corrupted in transit. For more information, see [RFC 1864][1].
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     #
     #
@@ -9247,6 +10052,7 @@ module Aws::S3
     #   maximum size of a replication configuration is 2 MB.
     #
     # @option params [String] :token
+    #   A token to allow Object Lock to be enabled for an existing bucket.
     #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
@@ -9310,6 +10116,9 @@ module Aws::S3
     #             sse_kms_encrypted_objects: {
     #               status: "Enabled", # required, accepts Enabled, Disabled
     #             },
+    #             replica_modifications: {
+    #               status: "Enabled", # required, accepts Enabled, Disabled
+    #             },
     #           },
     #           existing_object_replication: {
     #             status: "Enabled", # required, accepts Enabled, Disabled
@@ -9317,7 +10126,7 @@ module Aws::S3
     #           destination: { # required
     #             bucket: "BucketName", # required
     #             account: "AccountId",
-    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
+    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
     #             access_control_translation: {
     #               owner: "Destination", # required, accepts Destination
     #             },
@@ -9332,7 +10141,7 @@ module Aws::S3
     #             },
     #             metrics: {
     #               status: "Enabled", # required, accepts Enabled, Disabled
-    #               event_threshold: { # required
+    #               event_threshold: {
     #                 minutes: 1,
     #               },
     #             },
@@ -9382,6 +10191,9 @@ module Aws::S3
     #   this header as a message integrity check to verify that the request
     #   body was not corrupted in transit. For more information, see [RFC
     #   1864][1].
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     #
     #
@@ -9509,6 +10321,9 @@ module Aws::S3
     #   header as a message integrity check to verify that the request body
     #   was not corrupted in transit. For more information, see [RFC 1864][1].
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     #
     #
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
@@ -9621,6 +10436,9 @@ module Aws::S3
     #   this header as a message integrity check to verify that the request
     #   body was not corrupted in transit. For more information, see [RFC
     #   1864][1].
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     #
     #
@@ -9756,6 +10574,9 @@ module Aws::S3
     #   header as a message integrity check to verify that the request body
     #   was not corrupted in transit. For more information, see [RFC 1864][1].
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     #
     #
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
@@ -9865,8 +10686,13 @@ module Aws::S3
     # encryption, Amazon S3 encrypts your data as it writes it to disks in
     # its data centers and decrypts the data when you access it. You have
     # the option to provide your own encryption key or use AWS managed
-    # encryption keys. For more information, see [Using Server-Side
-    # Encryption][2].
+    # encryption keys (SSE-S3 or SSE-KMS). For more information, see [Using
+    # Server-Side Encryption][2].
+    #
+    # If you request server-side encryption using AWS Key Management Service
+    # (SSE-KMS), you can enable an S3 Bucket Key at the object-level. For
+    # more information, see [Amazon S3 Bucket Keys][3] in the *Amazon Simple
+    # Storage Service Developer Guide*.
     #
     # **Access Control List (ACL)-Specific Request Headers**
     #
@@ -9875,16 +10701,17 @@ module Aws::S3
     # adding a new object, you can grant permissions to individual AWS
     # accounts or to predefined groups defined by Amazon S3. These
     # permissions are then added to the ACL on the object. For more
-    # information, see [Access Control List (ACL) Overview][3] and [Managing
-    # ACLs Using the REST API][4].
+    # information, see [Access Control List (ACL) Overview][4] and [Managing
+    # ACLs Using the REST API][5].
     #
     # **Storage Class Options**
     #
-    # By default, Amazon S3 uses the STANDARD storage class to store newly
+    # By default, Amazon S3 uses the STANDARD Storage Class to store newly
     # created objects. The STANDARD storage class provides high durability
     # and high availability. Depending on performance needs, you can specify
-    # a different storage class. For more information, see [Storage
-    # Classes][5] in the *Amazon S3 Service Developer Guide*.
+    # a different Storage Class. Amazon S3 on Outposts only uses the
+    # OUTPOSTS Storage Class. For more information, see [Storage Classes][6]
+    # in the *Amazon S3 Service Developer Guide*.
     #
     # **Versioning**
     #
@@ -9895,30 +10722,33 @@ module Aws::S3
     # object simultaneously, it stores all of the objects.
     #
     # For more information about versioning, see [Adding Objects to
-    # Versioning Enabled Buckets][6]. For information about returning the
-    # versioning state of a bucket, see [GetBucketVersioning][7].
+    # Versioning Enabled Buckets][7]. For information about returning the
+    # versioning state of a bucket, see [GetBucketVersioning][8].
     #
     # **Related Resources**
     #
-    # * [CopyObject][8]
+    # * [CopyObject][9]
     #
-    # * [DeleteObject][9]
+    # * [DeleteObject][10]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the object. For more information, see
     #   [Canned ACL][1].
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     #
     #
     #
@@ -9928,19 +10758,29 @@ module Aws::S3
     #   Object data.
     #
     # @option params [required, String] :bucket
-    #   Bucket name to which the PUT operation was initiated.
+    #   The bucket name to which the PUT operation was initiated.
     #
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     #
     # @option params [String] :cache_control
     #   Can be used to specify caching behavior along the request/reply chain.
@@ -10017,14 +10857,22 @@ module Aws::S3
     #   Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the
     #   object.
     #
+    #   This action is not supported by Amazon S3 on Outposts.
+    #
     # @option params [String] :grant_read
     #   Allows grantee to read the object data and its metadata.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     #
     # @option params [String] :grant_read_acp
     #   Allows grantee to read the object ACL.
     #
+    #   This action is not supported by Amazon S3 on Outposts.
+    #
     # @option params [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable object.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     #
     # @option params [required, String] :key
     #   Object key for which the PUT operation was initiated.
@@ -10037,8 +10885,16 @@ module Aws::S3
     #   Amazon S3 (for example, AES256, aws:kms).
     #
     # @option params [String] :storage_class
-    #   If you don't specify, S3 Standard is the default storage class.
-    #   Amazon S3 supports other storage classes.
+    #   By default, Amazon S3 uses the STANDARD Storage Class to store newly
+    #   created objects. The STANDARD storage class provides high durability
+    #   and high availability. Depending on performance needs, you can specify
+    #   a different Storage Class. Amazon S3 on Outposts only uses the
+    #   OUTPOSTS Storage Class. For more information, see [Storage Classes][1]
+    #   in the *Amazon S3 Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
     #
     # @option params [String] :website_redirect_location
     #   If the bucket is configured as a website, redirects requests for this
@@ -10100,6 +10956,15 @@ module Aws::S3
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
     #
+    # @option params [Boolean] :bucket_key_enabled
+    #   Specifies whether Amazon S3 should use an S3 Bucket Key for object
+    #   encryption with server-side encryption using AWS KMS (SSE-KMS).
+    #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
+    #   for object encryption with SSE-KMS.
+    #
+    #   Specifying this header with a PUT operation doesn’t affect
+    #   bucket-level settings for S3 Bucket Key.
+    #
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
@@ -10144,8 +11009,64 @@ module Aws::S3
     #   * {Types::PutObjectOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::PutObjectOutput#ssekms_key_id #ssekms_key_id} => String
     #   * {Types::PutObjectOutput#ssekms_encryption_context #ssekms_encryption_context} => String
+    #   * {Types::PutObjectOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
+    #
+    # @example Example: To upload an object
+    #
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #   }
+    #
+    # @example Example: To upload an object and specify canned ACL.
+    #
+    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
+    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     acl: "authenticated-read", 
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
+    #   }
+    #
+    # @example Example: To upload an object (specify optional headers)
+    #
+    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
+    #   # storage class and use server-side encryption.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     server_side_encryption: "AES256", 
+    #     storage_class: "STANDARD_IA", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
+    #   }
     #
     # @example Example: To upload an object and specify server-side encryption and object tags
     #
@@ -10183,44 +11104,6 @@ module Aws::S3
     #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
     #   }
     #
-    # @example Example: To upload an object and specify optional tags
-    #
-    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
-    #   # S3 returns version ID of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "c:\\HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     tagging: "key1=value1&key2=value2", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
-    #   }
-    #
-    # @example Example: To upload an object (specify optional headers)
-    #
-    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
-    #   # storage class and use server-side encryption.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     server_side_encryption: "AES256", 
-    #     storage_class: "STANDARD_IA", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     server_side_encryption: "AES256", 
-    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
-    #   }
-    #
     # @example Example: To upload object and specify user-defined metadata
     #
     #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
@@ -10242,39 +11125,22 @@ module Aws::S3
     #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
     #   }
     #
-    # @example Example: To upload an object and specify canned ACL.
+    # @example Example: To upload an object and specify optional tags
     #
-    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
-    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     acl: "authenticated-read", 
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
-    #   }
-    #
-    # @example Example: To upload an object
-    #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
+    #   # S3 returns version ID of the newly created object.
     #
     #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
+    #     body: "c:\\HappyFace.jpg", 
     #     bucket: "examplebucket", 
     #     key: "HappyFace.jpg", 
+    #     tagging: "key1=value1&key2=value2", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
     #   }
     #
     # @example Streaming a file from disk
@@ -10306,13 +11172,14 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     ssekms_encryption_context: "SSEKMSEncryptionContext",
+    #     bucket_key_enabled: false,
     #     request_payer: "requester", # accepts requester
     #     tagging: "TaggingHeader",
     #     object_lock_mode: "GOVERNANCE", # accepts GOVERNANCE, COMPLIANCE
@@ -10331,6 +11198,7 @@ module Aws::S3
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
     #   resp.ssekms_encryption_context #=> String
+    #   resp.bucket_key_enabled #=> Boolean
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObject AWS API Documentation
@@ -10343,10 +11211,12 @@ module Aws::S3
     end
 
     # Uses the `acl` subresource to set the access control list (ACL)
-    # permissions for an object that already exists in an S3 bucket. You
-    # must have `WRITE_ACP` permission to set the ACL of an object. For more
+    # permissions for a new or existing object in an S3 bucket. You must
+    # have `WRITE_ACP` permission to set the ACL of an object. For more
     # information, see [What permissions can I grant?][1] in the *Amazon
     # Simple Storage Service Developer Guide*.
+    #
+    # This action is not supported by Amazon S3 on Outposts.
     #
     # Depending on your application needs, you can choose to set the ACL on
     # an object using either the request body or the headers. For example,
@@ -10511,7 +11381,7 @@ module Aws::S3
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
@@ -10526,6 +11396,9 @@ module Aws::S3
     #   not corrupted in transit. For more information, go to [RFC
     #   1864.&gt;][1]
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     #
     #
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
@@ -10534,11 +11407,17 @@ module Aws::S3
     #   Allows grantee the read, write, read ACP, and write ACP permissions on
     #   the bucket.
     #
+    #   This action is not supported by Amazon S3 on Outposts.
+    #
     # @option params [String] :grant_read
     #   Allows grantee to list the objects in the bucket.
     #
+    #   This action is not supported by Amazon S3 on Outposts.
+    #
     # @option params [String] :grant_read_acp
     #   Allows grantee to read the bucket ACL.
+    #
+    #   This action is not supported by Amazon S3 on Outposts.
     #
     # @option params [String] :grant_write
     #   Allows grantee to create, overwrite, and delete any object in the
@@ -10547,8 +11426,32 @@ module Aws::S3
     # @option params [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable bucket.
     #
+    #   This action is not supported by Amazon S3 on Outposts.
+    #
     # @option params [required, String] :key
     #   Key for which the PUT operation was initiated.
+    #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation with an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     #
     # @option params [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
@@ -10642,6 +11545,8 @@ module Aws::S3
 
     # Applies a Legal Hold configuration to the specified object.
     #
+    # This action is not supported by Amazon S3 on Outposts.
+    #
     # **Related Resources**
     #
     # * [Locking Objects][1]
@@ -10659,7 +11564,7 @@ module Aws::S3
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
@@ -10691,6 +11596,9 @@ module Aws::S3
     #
     # @option params [String] :content_md5
     #   The MD5 hash for the request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
@@ -10772,6 +11680,9 @@ module Aws::S3
     # @option params [String] :content_md5
     #   The MD5 hash for the request body.
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
@@ -10816,6 +11727,8 @@ module Aws::S3
 
     # Places an Object Retention configuration on an object.
     #
+    # This action is not supported by Amazon S3 on Outposts.
+    #
     # **Related Resources**
     #
     # * [Locking Objects][1]
@@ -10833,7 +11746,7 @@ module Aws::S3
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
@@ -10870,6 +11783,9 @@ module Aws::S3
     #
     # @option params [String] :content_md5
     #   The MD5 hash for the request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     # @option params [String] :expected_bucket_owner
     #   The account id of the expected bucket owner. If the bucket is owned by
@@ -10933,17 +11849,13 @@ module Aws::S3
     #
     # **Special Errors**
     #
-    # * ****
-    #
-    #   * <i>Code: InvalidTagError </i>
+    # * * <i>Code: InvalidTagError </i>
     #
     #   * *Cause: The tag provided was not a valid tag. This error can occur
     #     if the tag did not pass input validation. For more information,
     #     see [Object Tagging][3].*
     #
-    # * ****
-    #
-    #   * <i>Code: MalformedXMLError </i>
+    # * * <i>Code: MalformedXMLError </i>
     #
     #   * *Cause: The XML provided does not match the schema.*
     #
@@ -10975,14 +11887,24 @@ module Aws::S3
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     #
     # @option params [required, String] :key
     #   Name of the object key.
@@ -10992,6 +11914,9 @@ module Aws::S3
     #
     # @option params [String] :content_md5
     #   The MD5 hash for the request body.
+    #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
     #
     # @option params [required, Types::Tagging] :tagging
     #   Container for the `TagSet` and `Tag` elements
@@ -11105,6 +12030,9 @@ module Aws::S3
     # @option params [String] :content_md5
     #   The MD5 hash of the `PutPublicAccessBlock` request body.
     #
+    #   For requests made using the AWS Command Line Interface (CLI) or AWS
+    #   SDKs, this field is calculated automatically.
+    #
     # @option params [required, Types::PublicAccessBlockConfiguration] :public_access_block_configuration
     #   The `PublicAccessBlock` configuration that you want to apply to this
     #   Amazon S3 bucket. You can enable the configuration options in any
@@ -11148,7 +12076,9 @@ module Aws::S3
 
     # Restores an archived copy of an object back into Amazon S3
     #
-    # This operation performs the following types of requests:
+    # This action is not supported by Amazon S3 on Outposts.
+    #
+    # This action performs the following types of requests:
     #
     # * `select` - Perform a select query on an archived object
     #
@@ -11242,66 +12172,66 @@ module Aws::S3
     # * Amazon S3 accepts a select request even if the object has already
     #   been restored. A select request doesn’t return error response `409`.
     #
-    # **Restoring Archives**
+    # **Restoring objects**
     #
-    # Objects in the GLACIER and DEEP\_ARCHIVE storage classes are archived.
-    # To access an archived object, you must first initiate a restore
-    # request. This restores a temporary copy of the archived object. In a
-    # restore request, you specify the number of days that you want the
-    # restored copy to exist. After the specified period, Amazon S3 deletes
-    # the temporary copy but the object remains archived in the GLACIER or
-    # DEEP\_ARCHIVE storage class that object was restored from.
+    # Objects that you archive to the S3 Glacier or S3 Glacier Deep Archive
+    # storage class, and S3 Intelligent-Tiering Archive or S3
+    # Intelligent-Tiering Deep Archive tiers are not accessible in real
+    # time. For objects in Archive Access or Deep Archive Access tiers you
+    # must first initiate a restore request, and then wait until the object
+    # is moved into the Frequent Access tier. For objects in S3 Glacier or
+    # S3 Glacier Deep Archive storage classes you must first initiate a
+    # restore request, and then wait until a temporary copy of the object is
+    # available. To access an archived object, you must restore the object
+    # for the duration (number of days) that you specify.
     #
     # To restore a specific object version, you can provide a version ID. If
     # you don't provide a version ID, Amazon S3 restores the current
     # version.
-    #
-    # The time it takes restore jobs to finish depends on which storage
-    # class the object is being restored from and which data access tier you
-    # specify.
     #
     # When restoring an archived object (or using a select request), you can
     # specify one of the following data access tier options in the `Tier`
     # element of the request body:
     #
     # * <b> <code>Expedited</code> </b> - Expedited retrievals allow you to
-    #   quickly access your data stored in the GLACIER storage class when
-    #   occasional urgent requests for a subset of archives are required.
-    #   For all but the largest archived objects (250 MB+), data accessed
-    #   using Expedited retrievals are typically made available within 1–5
-    #   minutes. Provisioned capacity ensures that retrieval capacity for
-    #   Expedited retrievals is available when you need it. Expedited
-    #   retrievals and provisioned capacity are not available for the
-    #   DEEP\_ARCHIVE storage class.
+    #   quickly access your data stored in the S3 Glacier storage class or
+    #   S3 Intelligent-Tiering Archive tier when occasional urgent requests
+    #   for a subset of archives are required. For all but the largest
+    #   archived objects (250 MB+), data accessed using Expedited retrievals
+    #   is typically made available within 1–5 minutes. Provisioned capacity
+    #   ensures that retrieval capacity for Expedited retrievals is
+    #   available when you need it. Expedited retrievals and provisioned
+    #   capacity are not available for objects stored in the S3 Glacier Deep
+    #   Archive storage class or S3 Intelligent-Tiering Deep Archive tier.
     #
-    # * <b> <code>Standard</code> </b> - S3 Standard retrievals allow you to
+    # * <b> <code>Standard</code> </b> - Standard retrievals allow you to
     #   access any of your archived objects within several hours. This is
-    #   the default option for the GLACIER and DEEP\_ARCHIVE retrieval
-    #   requests that do not specify the retrieval option. S3 Standard
-    #   retrievals typically complete within 3-5 hours from the GLACIER
-    #   storage class and typically complete within 12 hours from the
-    #   DEEP\_ARCHIVE storage class.
+    #   the default option for retrieval requests that do not specify the
+    #   retrieval option. Standard retrievals typically finish within 3–5
+    #   hours for objects stored in the S3 Glacier storage class or S3
+    #   Intelligent-Tiering Archive tier. They typically finish within 12
+    #   hours for objects stored in the S3 Glacier Deep Archive storage
+    #   class or S3 Intelligent-Tiering Deep Archive tier. Standard
+    #   retrievals are free for objects stored in S3 Intelligent-Tiering.
     #
-    # * <b> <code>Bulk</code> </b> - Bulk retrievals are Amazon S3 Glacier’s
-    #   lowest-cost retrieval option, enabling you to retrieve large
-    #   amounts, even petabytes, of data inexpensively in a day. Bulk
-    #   retrievals typically complete within 5-12 hours from the GLACIER
-    #   storage class and typically complete within 48 hours from the
-    #   DEEP\_ARCHIVE storage class.
+    # * <b> <code>Bulk</code> </b> - Bulk retrievals are the lowest-cost
+    #   retrieval option in S3 Glacier, enabling you to retrieve large
+    #   amounts, even petabytes, of data inexpensively. Bulk retrievals
+    #   typically finish within 5–12 hours for objects stored in the S3
+    #   Glacier storage class or S3 Intelligent-Tiering Archive tier. They
+    #   typically finish within 48 hours for objects stored in the S3
+    #   Glacier Deep Archive storage class or S3 Intelligent-Tiering Deep
+    #   Archive tier. Bulk retrievals are free for objects stored in S3
+    #   Intelligent-Tiering.
     #
     # For more information about archive retrieval options and provisioned
     # capacity for `Expedited` data access, see [Restoring Archived
     # Objects][8] in the *Amazon Simple Storage Service Developer Guide*.
     #
     # You can use Amazon S3 restore speed upgrade to change the restore
-    # speed to a faster speed while it is in progress. You upgrade the speed
-    # of an in-progress restoration by issuing another restore request to
-    # the same object, setting a new `Tier` request element. When issuing a
-    # request to upgrade the restore tier, you must choose a tier that is
-    # faster than the tier that the in-progress restore is using. You must
-    # not change any other parameters, such as the `Days` request element.
-    # For more information, see [ Upgrading the Speed of an In-Progress
-    # Restore][9] in the *Amazon Simple Storage Service Developer Guide*.
+    # speed to a faster speed while it is in progress. For more information,
+    # see [ Upgrading the speed of an in-progress restore][9] in the *Amazon
+    # Simple Storage Service Developer Guide*.
     #
     # To get the status of object restoration, you can send a `HEAD`
     # request. Operations return the `x-amz-restore` header, which provides
@@ -11332,17 +12262,15 @@ module Aws::S3
     # A successful operation returns either the `200 OK` or `202 Accepted`
     # status code.
     #
-    # * If the object copy is not previously restored, then Amazon S3
-    #   returns `202 Accepted` in the response.
+    # * If the object is not previously restored, then Amazon S3 returns
+    #   `202 Accepted` in the response.
     #
-    # * If the object copy is previously restored, Amazon S3 returns `200
-    #   OK` in the response.
+    # * If the object is previously restored, Amazon S3 returns `200 OK` in
+    #   the response.
     #
     # **Special Errors**
     #
-    # * ****
-    #
-    #   * *Code: RestoreAlreadyInProgress*
+    # * * *Code: RestoreAlreadyInProgress*
     #
     #   * *Cause: Object restore is already in progress. (This error does
     #     not apply to SELECT type requests.)*
@@ -11351,15 +12279,12 @@ module Aws::S3
     #
     #   * *SOAP Fault Code Prefix: Client*
     #
-    # * ****
+    # * * *Code: GlacierExpeditedRetrievalNotAvailable*
     #
-    #   * *Code: GlacierExpeditedRetrievalNotAvailable*
-    #
-    #   * *Cause: S3 Glacier expedited retrievals are currently not
-    #     available. Try again later. (Returned if there is insufficient
-    #     capacity to process the Expedited request. This error applies only
-    #     to Expedited retrievals and not to S3 Standard or Bulk
-    #     retrievals.)*
+    #   * *Cause: expedited retrievals are currently not available. Try
+    #     again later. (Returned if there is insufficient capacity to
+    #     process the Expedited request. This error applies only to
+    #     Expedited retrievals and not to S3 Standard or Bulk retrievals.)*
     #
     #   * *HTTP Status Code: 503*
     #
@@ -11391,19 +12316,29 @@ module Aws::S3
     # [13]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketNotificationConfiguration.html
     #
     # @option params [required, String] :bucket
-    #   The bucket name or containing the object to restore.
+    #   The bucket name containing the object to restore.
     #
     #   When using this API with an access point, you must direct requests to
     #   the access point hostname. The access point hostname takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation using an access point through the AWS SDKs,
+    #   When using this operation with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For more
     #   information about access point ARNs, see [Using Access Points][1] in
     #   the *Amazon Simple Storage Service Developer Guide*.
     #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     #
     # @option params [required, String] :key
     #   Object key for which the operation was initiated.
@@ -11538,7 +12473,7 @@ module Aws::S3
     #               value: "MetadataValue",
     #             },
     #           ],
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
     #         },
     #       },
     #     },
@@ -11567,6 +12502,8 @@ module Aws::S3
     # Amazon S3 uses this format to parse object data into records, and
     # returns only records that match the specified SQL expression. You must
     # also specify the data serialization format for the response.
+    #
+    # This action is not supported by Amazon S3 on Outposts.
     #
     # For more information about Amazon S3 Select, see [Selecting Content
     # from Objects][1] in the *Amazon Simple Storage Service Developer
@@ -11999,6 +12936,11 @@ module Aws::S3
     # checks the part data against the provided MD5 value. If they do not
     # match, Amazon S3 returns an error.
     #
+    # If the upload request is signed with Signature Version 4, then AWS S3
+    # uses the `x-amz-content-sha256` header as a checksum instead of
+    # `Content-MD5`. For more information see [Authenticating Requests:
+    # Using the Authorization Header (AWS Signature Version 4)][3].
+    #
     # **Note:** After you initiate multipart upload and upload one or more
     # parts, you must either complete or abort multipart upload in order to
     # stop getting charged for storage of the uploaded parts. Only after you
@@ -12006,11 +12948,11 @@ module Aws::S3
     # parts storage and stops charging you for the parts storage.
     #
     # For more information on multipart uploads, go to [Multipart Upload
-    # Overview][3] in the <i>Amazon Simple Storage Service Developer Guide
+    # Overview][4] in the <i>Amazon Simple Storage Service Developer Guide
     # </i>.
     #
     # For information on the permissions required to use the multipart
-    # upload API, go to [Multipart Upload API and Permissions][4] in the
+    # upload API, go to [Multipart Upload API and Permissions][5] in the
     # *Amazon Simple Storage Service Developer Guide*.
     #
     # You can optionally request server-side encryption where Amazon S3
@@ -12021,7 +12963,7 @@ module Aws::S3
     # request headers you provide in the request must match the headers you
     # used in the request to initiate the upload by using
     # [CreateMultipartUpload][2]. For more information, go to [Using
-    # Server-Side Encryption][5] in the *Amazon Simple Storage Service
+    # Server-Side Encryption][6] in the *Amazon Simple Storage Service
     # Developer Guide*.
     #
     # Server-side encryption is supported by the S3 Multipart Upload
@@ -12044,9 +12986,7 @@ module Aws::S3
     #
     # **Special Errors**
     #
-    # * ****
-    #
-    #   * *Code: NoSuchUpload*
+    # * * *Code: NoSuchUpload*
     #
     #   * *Cause: The specified multipart upload does not exist. The upload
     #     ID might be invalid, or the multipart upload might have been
@@ -12060,31 +13000,54 @@ module Aws::S3
     #
     # * [CreateMultipartUpload][2]
     #
-    # * [CompleteMultipartUpload][6]
+    # * [CompleteMultipartUpload][7]
     #
-    # * [AbortMultipartUpload][7]
+    # * [AbortMultipartUpload][8]
     #
-    # * [ListParts][8]
+    # * [ListParts][9]
     #
-    # * [ListMultipartUploads][9]
+    # * [ListMultipartUploads][10]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-auth-using-authorization-header.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
     #
     # @option params [String, StringIO, File] :body
     #   Object data.
     #
     # @option params [required, String] :bucket
-    #   Name of the bucket to which the multipart upload was initiated.
+    #   The name of the bucket to which the multipart upload was initiated.
+    #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation with an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     #
     # @option params [Integer] :content_length
     #   Size of the body in bytes. This parameter is useful when the size of
@@ -12147,6 +13110,7 @@ module Aws::S3
     #   * {Types::UploadPartOutput#sse_customer_algorithm #sse_customer_algorithm} => String
     #   * {Types::UploadPartOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::UploadPartOutput#ssekms_key_id #ssekms_key_id} => String
+    #   * {Types::UploadPartOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::UploadPartOutput#request_charged #request_charged} => String
     #
     #
@@ -12192,6 +13156,7 @@ module Aws::S3
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
+    #   resp.bucket_key_enabled #=> Boolean
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPart AWS API Documentation
@@ -12291,9 +13256,7 @@ module Aws::S3
     #
     # **Special Errors**
     #
-    # * ****
-    #
-    #   * *Code: NoSuchUpload*
+    # * * *Code: NoSuchUpload*
     #
     #   * *Cause: The specified multipart upload does not exist. The upload
     #     ID might be invalid, or the multipart upload might have been
@@ -12301,9 +13264,7 @@ module Aws::S3
     #
     #   * *HTTP Status Code: 404 Not Found*
     #
-    # * ****
-    #
-    #   * *Code: InvalidRequest*
+    # * * *Code: InvalidRequest*
     #
     #   * *Cause: The specified copy source is not supported as a byte-range
     #     copy source.*
@@ -12341,6 +13302,28 @@ module Aws::S3
     # @option params [required, String] :bucket
     #   The bucket name.
     #
+    #   When using this API with an access point, you must direct requests to
+    #   the access point hostname. The access point hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation with an access point through the AWS SDKs,
+    #   you provide the access point ARN in place of the bucket name. For more
+    #   information about access point ARNs, see [Using Access Points][1] in
+    #   the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
+    #   takes the form
+    #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
+    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   you provide the Outposts bucket ARN in place of the bucket name. For
+    #   more information about S3 on Outposts ARNs, see [Using S3 on
+    #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
+    #
     # @option params [required, String] :copy_source
     #   Specifies the source object for the copy operation. You specify the
     #   value in one of two formats, depending on whether you want to access
@@ -12357,9 +13340,9 @@ module Aws::S3
     #     Resource Name (ARN) of the object as accessed through the access
     #     point, in the format
     #     `arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key>`.
-    #     For example, to copy the object `reports/january.pdf` through the
-    #     access point `my-access-point` owned by account `123456789012` in
-    #     Region `us-west-2`, use the URL encoding of
+    #     For example, to copy the object `reports/january.pdf` through access
+    #     point `my-access-point` owned by account `123456789012` in Region
+    #     `us-west-2`, use the URL encoding of
     #     `arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf`.
     #     The value must be URL encoded.
     #
@@ -12367,6 +13350,15 @@ module Aws::S3
     #     source and destination buckets are in the same AWS Region.
     #
     #      </note>
+    #
+    #     Alternatively, for objects accessed through Amazon S3 on Outposts,
+    #     specify the ARN of the object as accessed in the format
+    #     `arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/object/<key>`.
+    #     For example, to copy the object `reports/january.pdf` through
+    #     outpost `my-outpost` owned by account `123456789012` in Region
+    #     `us-west-2`, use the URL encoding of
+    #     `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf`.
+    #     The value must be URL encoded.
     #
     #   To copy a specific version of an object, append
     #   `?versionId=<version-id>` to the value (for example,
@@ -12470,6 +13462,7 @@ module Aws::S3
     #   * {Types::UploadPartCopyOutput#sse_customer_algorithm #sse_customer_algorithm} => String
     #   * {Types::UploadPartCopyOutput#sse_customer_key_md5 #sse_customer_key_md5} => String
     #   * {Types::UploadPartCopyOutput#ssekms_key_id #ssekms_key_id} => String
+    #   * {Types::UploadPartCopyOutput#bucket_key_enabled #bucket_key_enabled} => Boolean
     #   * {Types::UploadPartCopyOutput#request_charged #request_charged} => String
     #
     #
@@ -12548,6 +13541,7 @@ module Aws::S3
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
+    #   resp.bucket_key_enabled #=> Boolean
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartCopy AWS API Documentation
@@ -12572,7 +13566,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

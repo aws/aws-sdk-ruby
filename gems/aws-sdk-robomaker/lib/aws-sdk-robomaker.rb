@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-robomaker/customizations'
 # @!group service
 module Aws::RoboMaker
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.31.0'
 
 end

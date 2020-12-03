@@ -25,7 +25,8 @@ module Seahorse
           SocketError, EOFError, IOError, Timeout::Error,
           Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EPIPE,
           Errno::EINVAL, Errno::ETIMEDOUT, OpenSSL::SSL::SSLError,
-          Errno::EHOSTUNREACH, Errno::ECONNREFUSED
+          Errno::EHOSTUNREACH, Errno::ECONNREFUSED,
+          Net::HTTPFatalError # for proxy connection failures
         ]
 
         # does not exist in Ruby 1.9.3

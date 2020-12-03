@@ -357,6 +357,7 @@ module Aws::XRay
     #   resp.traces #=> Array
     #   resp.traces[0].id #=> String
     #   resp.traces[0].duration #=> Float
+    #   resp.traces[0].limit_exceeded #=> Boolean
     #   resp.traces[0].segments #=> Array
     #   resp.traces[0].segments[0].id #=> String
     #   resp.traces[0].segments[0].document #=> String
@@ -383,9 +384,14 @@ module Aws::XRay
     #   The filter expression defining criteria by which to group traces.
     #
     # @option params [Types::InsightsConfiguration] :insights_configuration
-    #   The structure containing configurations related to insights. The
-    #   InsightsEnabled boolean can be set to true to enable insights for the
-    #   new group or false to disable insights for the new group.
+    #   The structure containing configurations related to insights.
+    #
+    #   * The InsightsEnabled boolean can be set to true to enable insights
+    #     for the new group or false to disable insights for the new group.
+    #
+    #   * The NotifcationsEnabled boolean can be set to true to enable
+    #     insights notifications for the new group. Notifications may only be
+    #     enabled on a group with InsightsEnabled set to true.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A map that contains one or more tag keys and tag values to attach to
@@ -422,6 +428,7 @@ module Aws::XRay
     #     filter_expression: "FilterExpression",
     #     insights_configuration: {
     #       insights_enabled: false,
+    #       notifications_enabled: false,
     #     },
     #     tags: [
     #       {
@@ -437,6 +444,7 @@ module Aws::XRay
     #   resp.group.group_arn #=> String
     #   resp.group.filter_expression #=> String
     #   resp.group.insights_configuration.insights_enabled #=> Boolean
+    #   resp.group.insights_configuration.notifications_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateGroup AWS API Documentation
     #
@@ -664,6 +672,7 @@ module Aws::XRay
     #   resp.group.group_arn #=> String
     #   resp.group.filter_expression #=> String
     #   resp.group.insights_configuration.insights_enabled #=> Boolean
+    #   resp.group.insights_configuration.notifications_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroup AWS API Documentation
     #
@@ -699,6 +708,7 @@ module Aws::XRay
     #   resp.groups[0].group_arn #=> String
     #   resp.groups[0].filter_expression #=> String
     #   resp.groups[0].insights_configuration.insights_enabled #=> Boolean
+    #   resp.groups[0].insights_configuration.notifications_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroups AWS API Documentation
@@ -707,6 +717,277 @@ module Aws::XRay
     # @param [Hash] params ({})
     def get_groups(params = {}, options = {})
       req = build_request(:get_groups, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the summary information of an insight. This includes impact
+    # to clients and root cause services, the top anomalous services, the
+    # category, the state of the insight, and the start and end time of the
+    # insight.
+    #
+    # @option params [required, String] :insight_id
+    #   The insight's unique identifier. Use the GetInsightSummaries action
+    #   to retrieve an InsightId.
+    #
+    # @return [Types::GetInsightResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInsightResult#insight #insight} => Types::Insight
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_insight({
+    #     insight_id: "InsightId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.insight.insight_id #=> String
+    #   resp.insight.group_arn #=> String
+    #   resp.insight.group_name #=> String
+    #   resp.insight.root_cause_service_id.name #=> String
+    #   resp.insight.root_cause_service_id.names #=> Array
+    #   resp.insight.root_cause_service_id.names[0] #=> String
+    #   resp.insight.root_cause_service_id.account_id #=> String
+    #   resp.insight.root_cause_service_id.type #=> String
+    #   resp.insight.categories #=> Array
+    #   resp.insight.categories[0] #=> String, one of "FAULT"
+    #   resp.insight.state #=> String, one of "ACTIVE", "CLOSED"
+    #   resp.insight.start_time #=> Time
+    #   resp.insight.end_time #=> Time
+    #   resp.insight.summary #=> String
+    #   resp.insight.client_request_impact_statistics.fault_count #=> Integer
+    #   resp.insight.client_request_impact_statistics.ok_count #=> Integer
+    #   resp.insight.client_request_impact_statistics.total_count #=> Integer
+    #   resp.insight.root_cause_service_request_impact_statistics.fault_count #=> Integer
+    #   resp.insight.root_cause_service_request_impact_statistics.ok_count #=> Integer
+    #   resp.insight.root_cause_service_request_impact_statistics.total_count #=> Integer
+    #   resp.insight.top_anomalous_services #=> Array
+    #   resp.insight.top_anomalous_services[0].service_id.name #=> String
+    #   resp.insight.top_anomalous_services[0].service_id.names #=> Array
+    #   resp.insight.top_anomalous_services[0].service_id.names[0] #=> String
+    #   resp.insight.top_anomalous_services[0].service_id.account_id #=> String
+    #   resp.insight.top_anomalous_services[0].service_id.type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsight AWS API Documentation
+    #
+    # @overload get_insight(params = {})
+    # @param [Hash] params ({})
+    def get_insight(params = {}, options = {})
+      req = build_request(:get_insight, params)
+      req.send_request(options)
+    end
+
+    # X-Ray reevaluates insights periodically until they're resolved, and
+    # records each intermediate state as an event. You can review an
+    # insight's events in the Impact Timeline on the Inspect page in the
+    # X-Ray console.
+    #
+    # @option params [required, String] :insight_id
+    #   The insight's unique identifier. Use the GetInsightSummaries action
+    #   to retrieve an InsightId.
+    #
+    # @option params [Integer] :max_results
+    #   Used to retrieve at most the specified value of events.
+    #
+    # @option params [String] :next_token
+    #   Specify the pagination token returned by a previous request to
+    #   retrieve the next page of events.
+    #
+    # @return [Types::GetInsightEventsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInsightEventsResult#insight_events #insight_events} => Array&lt;Types::InsightEvent&gt;
+    #   * {Types::GetInsightEventsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_insight_events({
+    #     insight_id: "InsightId", # required
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.insight_events #=> Array
+    #   resp.insight_events[0].summary #=> String
+    #   resp.insight_events[0].event_time #=> Time
+    #   resp.insight_events[0].client_request_impact_statistics.fault_count #=> Integer
+    #   resp.insight_events[0].client_request_impact_statistics.ok_count #=> Integer
+    #   resp.insight_events[0].client_request_impact_statistics.total_count #=> Integer
+    #   resp.insight_events[0].root_cause_service_request_impact_statistics.fault_count #=> Integer
+    #   resp.insight_events[0].root_cause_service_request_impact_statistics.ok_count #=> Integer
+    #   resp.insight_events[0].root_cause_service_request_impact_statistics.total_count #=> Integer
+    #   resp.insight_events[0].top_anomalous_services #=> Array
+    #   resp.insight_events[0].top_anomalous_services[0].service_id.name #=> String
+    #   resp.insight_events[0].top_anomalous_services[0].service_id.names #=> Array
+    #   resp.insight_events[0].top_anomalous_services[0].service_id.names[0] #=> String
+    #   resp.insight_events[0].top_anomalous_services[0].service_id.account_id #=> String
+    #   resp.insight_events[0].top_anomalous_services[0].service_id.type #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsightEvents AWS API Documentation
+    #
+    # @overload get_insight_events(params = {})
+    # @param [Hash] params ({})
+    def get_insight_events(params = {}, options = {})
+      req = build_request(:get_insight_events, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a service graph structure filtered by the specified insight.
+    # The service graph is limited to only structural information. For a
+    # complete service graph, use this API with the GetServiceGraph API.
+    #
+    # @option params [required, String] :insight_id
+    #   The insight's unique identifier. Use the GetInsightSummaries action
+    #   to retrieve an InsightId.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The estimated start time of the insight, in Unix time seconds. The
+    #   StartTime is inclusive of the value provided and can't be more than
+    #   30 days old.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The estimated end time of the insight, in Unix time seconds. The
+    #   EndTime is exclusive of the value provided. The time range between the
+    #   start time and end time can't be more than six hours.
+    #
+    # @option params [String] :next_token
+    #   Specify the pagination token returned by a previous request to
+    #   retrieve the next page of results.
+    #
+    # @return [Types::GetInsightImpactGraphResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInsightImpactGraphResult#insight_id #insight_id} => String
+    #   * {Types::GetInsightImpactGraphResult#start_time #start_time} => Time
+    #   * {Types::GetInsightImpactGraphResult#end_time #end_time} => Time
+    #   * {Types::GetInsightImpactGraphResult#service_graph_start_time #service_graph_start_time} => Time
+    #   * {Types::GetInsightImpactGraphResult#service_graph_end_time #service_graph_end_time} => Time
+    #   * {Types::GetInsightImpactGraphResult#services #services} => Array&lt;Types::InsightImpactGraphService&gt;
+    #   * {Types::GetInsightImpactGraphResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_insight_impact_graph({
+    #     insight_id: "InsightId", # required
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.insight_id #=> String
+    #   resp.start_time #=> Time
+    #   resp.end_time #=> Time
+    #   resp.service_graph_start_time #=> Time
+    #   resp.service_graph_end_time #=> Time
+    #   resp.services #=> Array
+    #   resp.services[0].reference_id #=> Integer
+    #   resp.services[0].type #=> String
+    #   resp.services[0].name #=> String
+    #   resp.services[0].names #=> Array
+    #   resp.services[0].names[0] #=> String
+    #   resp.services[0].account_id #=> String
+    #   resp.services[0].edges #=> Array
+    #   resp.services[0].edges[0].reference_id #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsightImpactGraph AWS API Documentation
+    #
+    # @overload get_insight_impact_graph(params = {})
+    # @param [Hash] params ({})
+    def get_insight_impact_graph(params = {}, options = {})
+      req = build_request(:get_insight_impact_graph, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the summaries of all insights in the specified group
+    # matching the provided filter values.
+    #
+    # @option params [Array<String>] :states
+    #   The list of insight states.
+    #
+    # @option params [String] :group_arn
+    #   The Amazon Resource Name (ARN) of the group. Required if the GroupName
+    #   isn't provided.
+    #
+    # @option params [String] :group_name
+    #   The name of the group. Required if the GroupARN isn't provided.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The beginning of the time frame in which the insights started. The
+    #   start time can't be more than 30 days old.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The end of the time frame in which the insights ended. The end time
+    #   can't be more than 30 days old.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to display.
+    #
+    # @option params [String] :next_token
+    #   Pagination token.
+    #
+    # @return [Types::GetInsightSummariesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInsightSummariesResult#insight_summaries #insight_summaries} => Array&lt;Types::InsightSummary&gt;
+    #   * {Types::GetInsightSummariesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_insight_summaries({
+    #     states: ["ACTIVE"], # accepts ACTIVE, CLOSED
+    #     group_arn: "GroupARN",
+    #     group_name: "GroupName",
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.insight_summaries #=> Array
+    #   resp.insight_summaries[0].insight_id #=> String
+    #   resp.insight_summaries[0].group_arn #=> String
+    #   resp.insight_summaries[0].group_name #=> String
+    #   resp.insight_summaries[0].root_cause_service_id.name #=> String
+    #   resp.insight_summaries[0].root_cause_service_id.names #=> Array
+    #   resp.insight_summaries[0].root_cause_service_id.names[0] #=> String
+    #   resp.insight_summaries[0].root_cause_service_id.account_id #=> String
+    #   resp.insight_summaries[0].root_cause_service_id.type #=> String
+    #   resp.insight_summaries[0].categories #=> Array
+    #   resp.insight_summaries[0].categories[0] #=> String, one of "FAULT"
+    #   resp.insight_summaries[0].state #=> String, one of "ACTIVE", "CLOSED"
+    #   resp.insight_summaries[0].start_time #=> Time
+    #   resp.insight_summaries[0].end_time #=> Time
+    #   resp.insight_summaries[0].summary #=> String
+    #   resp.insight_summaries[0].client_request_impact_statistics.fault_count #=> Integer
+    #   resp.insight_summaries[0].client_request_impact_statistics.ok_count #=> Integer
+    #   resp.insight_summaries[0].client_request_impact_statistics.total_count #=> Integer
+    #   resp.insight_summaries[0].root_cause_service_request_impact_statistics.fault_count #=> Integer
+    #   resp.insight_summaries[0].root_cause_service_request_impact_statistics.ok_count #=> Integer
+    #   resp.insight_summaries[0].root_cause_service_request_impact_statistics.total_count #=> Integer
+    #   resp.insight_summaries[0].top_anomalous_services #=> Array
+    #   resp.insight_summaries[0].top_anomalous_services[0].service_id.name #=> String
+    #   resp.insight_summaries[0].top_anomalous_services[0].service_id.names #=> Array
+    #   resp.insight_summaries[0].top_anomalous_services[0].service_id.names[0] #=> String
+    #   resp.insight_summaries[0].top_anomalous_services[0].service_id.account_id #=> String
+    #   resp.insight_summaries[0].top_anomalous_services[0].service_id.type #=> String
+    #   resp.insight_summaries[0].last_update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetInsightSummaries AWS API Documentation
+    #
+    # @overload get_insight_summaries(params = {})
+    # @param [Hash] params ({})
+    def get_insight_summaries(params = {}, options = {})
+      req = build_request(:get_insight_summaries, params)
       req.send_request(options)
     end
 
@@ -864,10 +1145,11 @@ module Aws::XRay
     #   The end of the timeframe for which to generate a graph.
     #
     # @option params [String] :group_name
-    #   The name of a group to generate a graph based on.
+    #   The name of a group based on which you want to generate a graph.
     #
     # @option params [String] :group_arn
-    #   The ARN of a group to generate a graph based on.
+    #   The Amazon Resource Name (ARN) of a group based on which you want to
+    #   generate a graph.
     #
     # @option params [String] :next_token
     #   Pagination token.
@@ -967,7 +1249,8 @@ module Aws::XRay
     #   from.
     #
     # @option params [String] :group_arn
-    #   The ARN of the group for which to pull statistics from.
+    #   The Amazon Resource Name (ARN) of the group for which to pull
+    #   statistics from.
     #
     # @option params [String] :entity_selector_expression
     #   A filter expression defining entities that will be aggregated for
@@ -976,6 +1259,10 @@ module Aws::XRay
     #
     # @option params [Integer] :period
     #   Aggregation period in seconds.
+    #
+    # @option params [Boolean] :forecast_statistics
+    #   The forecasted high and low fault count values. Forecast enabled
+    #   requests require the EntitySelectorExpression ID be provided.
     #
     # @option params [String] :next_token
     #   Pagination token.
@@ -997,6 +1284,7 @@ module Aws::XRay
     #     group_arn: "GroupARN",
     #     entity_selector_expression: "EntitySelectorExpression",
     #     period: 1,
+    #     forecast_statistics: false,
     #     next_token: "String",
     #   })
     #
@@ -1020,6 +1308,8 @@ module Aws::XRay
     #   resp.time_series_service_statistics[0].service_summary_statistics.fault_statistics.total_count #=> Integer
     #   resp.time_series_service_statistics[0].service_summary_statistics.total_count #=> Integer
     #   resp.time_series_service_statistics[0].service_summary_statistics.total_response_time #=> Float
+    #   resp.time_series_service_statistics[0].service_forecast_statistics.fault_count_high #=> Integer
+    #   resp.time_series_service_statistics[0].service_forecast_statistics.fault_count_low #=> Integer
     #   resp.time_series_service_statistics[0].response_time_histogram #=> Array
     #   resp.time_series_service_statistics[0].response_time_histogram[0].value #=> Float
     #   resp.time_series_service_statistics[0].response_time_histogram[0].count #=> Integer
@@ -1153,7 +1443,7 @@ module Aws::XRay
     #   Set to `true` to get summaries for only a subset of available traces.
     #
     # @option params [Types::SamplingStrategy] :sampling_strategy
-    #   A paramater to indicate whether to enable sampling on trace summaries.
+    #   A parameter to indicate whether to enable sampling on trace summaries.
     #   Input parameters are Name and Value.
     #
     # @option params [String] :filter_expression
@@ -1439,7 +1729,7 @@ module Aws::XRay
     # document schema, see [AWS X-Ray Segment Documents][2] in the *AWS
     # X-Ray Developer Guide*.
     #
-    # **Required Segment Document Fields**
+    # **Required segment document fields**
     #
     # * `name` - The name of the service that handled the request.
     #
@@ -1459,17 +1749,17 @@ module Aws::XRay
     #
     # * `in_progress` - Set to `true` instead of specifying an `end_time` to
     #   record that a segment has been started, but is not complete. Send an
-    #   in progress segment when your application receives a request that
-    #   will take a long time to serve, to trace the fact that the request
-    #   was received. When the response is sent, send the complete segment
-    #   to overwrite the in-progress segment.
+    #   in-progress segment when your application receives a request that
+    #   will take a long time to serve, to trace that the request was
+    #   received. When the response is sent, send the complete segment to
+    #   overwrite the in-progress segment.
     #
     # A `trace_id` consists of three numbers separated by hyphens. For
     # example, 1-58406520-a006649127e371903a2de979. This includes:
     #
     # **Trace ID Format**
     #
-    # * The version number, i.e. `1`.
+    # * The version number, for instance, `1`.
     #
     # * The time of the original request, in Unix epoch time, in 8
     #   hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in
@@ -1608,9 +1898,14 @@ module Aws::XRay
     #   traces.
     #
     # @option params [Types::InsightsConfiguration] :insights_configuration
-    #   The structure containing configurations related to insights. The
-    #   InsightsEnabled boolean can be set to true to enable insights for the
-    #   group or false to disable insights for the group.
+    #   The structure containing configurations related to insights.
+    #
+    #   * The InsightsEnabled boolean can be set to true to enable insights
+    #     for the group or false to disable insights for the group.
+    #
+    #   * The NotifcationsEnabled boolean can be set to true to enable
+    #     insights notifications for the group. Notifications can only be
+    #     enabled on a group with InsightsEnabled set to true.
     #
     # @return [Types::UpdateGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1624,6 +1919,7 @@ module Aws::XRay
     #     filter_expression: "FilterExpression",
     #     insights_configuration: {
     #       insights_enabled: false,
+    #       notifications_enabled: false,
     #     },
     #   })
     #
@@ -1633,6 +1929,7 @@ module Aws::XRay
     #   resp.group.group_arn #=> String
     #   resp.group.filter_expression #=> String
     #   resp.group.insights_configuration.insights_enabled #=> Boolean
+    #   resp.group.insights_configuration.notifications_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateGroup AWS API Documentation
     #
@@ -1714,7 +2011,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-10-28)
+------------------
+
+* Feature - Documentation update for Amazon WorkMail
+
+1.32.0 (2020-10-15)
+------------------
+
+* Feature - Add CreateOrganization and DeleteOrganization API operations.
+
+1.31.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2020-09-22)
+------------------
+
+* Feature - Adding support for Mailbox Export APIs
+
+1.29.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.28.0 (2020-08-25)
 ------------------
 

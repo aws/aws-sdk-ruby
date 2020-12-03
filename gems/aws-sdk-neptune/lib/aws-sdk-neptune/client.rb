@@ -340,6 +340,11 @@ module Aws::Neptune
     #   Neptune DB cluster, for example
     #   `arn:aws:iam::123456789012:role/NeptuneAccessRole`.
     #
+    # @option params [String] :feature_name
+    #   The name of the feature for the Neptune DB cluster that the IAM role
+    #   is to be associated with. For the list of supported feature names, see
+    #   DBEngineVersion.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -347,6 +352,7 @@ module Aws::Neptune
     #   resp = client.add_role_to_db_cluster({
     #     db_cluster_identifier: "String", # required
     #     role_arn: "String", # required
+    #     feature_name: "String",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/AddRoleToDBCluster AWS API Documentation
@@ -874,10 +880,10 @@ module Aws::Neptune
     #   Valid Values: `neptune`
     #
     # @option params [String] :engine_version
-    #   The version number of the database engine to use. Currently, setting
-    #   this parameter has no effect.
+    #   The version number of the database engine to use for the new DB
+    #   cluster.
     #
-    #   Example: `1.0.1`
+    #   Example: `1.0.2.1`
     #
     # @option params [Integer] :port
     #   The port number on which the instances in the DB cluster accept
@@ -991,10 +997,7 @@ module Aws::Neptune
     #   This parameter is not currently supported.
     #
     # @option params [Boolean] :enable_iam_database_authentication
-    #   True to enable mapping of AWS Identity and Access Management (IAM)
-    #   accounts to database accounts, and otherwise false.
-    #
-    #   Default: `false`
+    #   Not supported by Neptune.
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
@@ -1094,6 +1097,7 @@ module Aws::Neptune
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
@@ -1107,6 +1111,85 @@ module Aws::Neptune
     # @param [Hash] params ({})
     def create_db_cluster(params = {}, options = {})
       req = build_request(:create_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Creates a new custom endpoint and associates it with an Amazon Neptune
+    # DB cluster.
+    #
+    # @option params [required, String] :db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster associated with the
+    #   endpoint. This parameter is stored as a lowercase string.
+    #
+    # @option params [required, String] :db_cluster_endpoint_identifier
+    #   The identifier to use for the new endpoint. This parameter is stored
+    #   as a lowercase string.
+    #
+    # @option params [required, String] :endpoint_type
+    #   The type of the endpoint. One of: `READER`, `WRITER`, `ANY`.
+    #
+    # @option params [Array<String>] :static_members
+    #   List of DB instance identifiers that are part of the custom endpoint
+    #   group.
+    #
+    # @option params [Array<String>] :excluded_members
+    #   List of DB instance identifiers that aren't part of the custom
+    #   endpoint group. All other eligible instances are reachable through the
+    #   custom endpoint. Only relevant if the list of static members is empty.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to be assigned to the Amazon Neptune resource.
+    #
+    # @return [Types::CreateDBClusterEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDBClusterEndpointOutput#db_cluster_endpoint_identifier #db_cluster_endpoint_identifier} => String
+    #   * {Types::CreateDBClusterEndpointOutput#db_cluster_identifier #db_cluster_identifier} => String
+    #   * {Types::CreateDBClusterEndpointOutput#db_cluster_endpoint_resource_identifier #db_cluster_endpoint_resource_identifier} => String
+    #   * {Types::CreateDBClusterEndpointOutput#endpoint #endpoint} => String
+    #   * {Types::CreateDBClusterEndpointOutput#status #status} => String
+    #   * {Types::CreateDBClusterEndpointOutput#endpoint_type #endpoint_type} => String
+    #   * {Types::CreateDBClusterEndpointOutput#custom_endpoint_type #custom_endpoint_type} => String
+    #   * {Types::CreateDBClusterEndpointOutput#static_members #static_members} => Array&lt;String&gt;
+    #   * {Types::CreateDBClusterEndpointOutput#excluded_members #excluded_members} => Array&lt;String&gt;
+    #   * {Types::CreateDBClusterEndpointOutput#db_cluster_endpoint_arn #db_cluster_endpoint_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_db_cluster_endpoint({
+    #     db_cluster_identifier: "String", # required
+    #     db_cluster_endpoint_identifier: "String", # required
+    #     endpoint_type: "String", # required
+    #     static_members: ["String"],
+    #     excluded_members: ["String"],
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster_endpoint_identifier #=> String
+    #   resp.db_cluster_identifier #=> String
+    #   resp.db_cluster_endpoint_resource_identifier #=> String
+    #   resp.endpoint #=> String
+    #   resp.status #=> String
+    #   resp.endpoint_type #=> String
+    #   resp.custom_endpoint_type #=> String
+    #   resp.static_members #=> Array
+    #   resp.static_members[0] #=> String
+    #   resp.excluded_members #=> Array
+    #   resp.excluded_members[0] #=> String
+    #   resp.db_cluster_endpoint_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBClusterEndpoint AWS API Documentation
+    #
+    # @overload create_db_cluster_endpoint(params = {})
+    # @param [Hash] params ({})
+    def create_db_cluster_endpoint(params = {}, options = {})
+      req = build_request(:create_db_cluster_endpoint, params)
       req.send_request(options)
     end
 
@@ -2112,6 +2195,7 @@ module Aws::Neptune
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
@@ -2125,6 +2209,56 @@ module Aws::Neptune
     # @param [Hash] params ({})
     def delete_db_cluster(params = {}, options = {})
       req = build_request(:delete_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Deletes a custom endpoint and removes it from an Amazon Neptune DB
+    # cluster.
+    #
+    # @option params [required, String] :db_cluster_endpoint_identifier
+    #   The identifier associated with the custom endpoint. This parameter is
+    #   stored as a lowercase string.
+    #
+    # @return [Types::DeleteDBClusterEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDBClusterEndpointOutput#db_cluster_endpoint_identifier #db_cluster_endpoint_identifier} => String
+    #   * {Types::DeleteDBClusterEndpointOutput#db_cluster_identifier #db_cluster_identifier} => String
+    #   * {Types::DeleteDBClusterEndpointOutput#db_cluster_endpoint_resource_identifier #db_cluster_endpoint_resource_identifier} => String
+    #   * {Types::DeleteDBClusterEndpointOutput#endpoint #endpoint} => String
+    #   * {Types::DeleteDBClusterEndpointOutput#status #status} => String
+    #   * {Types::DeleteDBClusterEndpointOutput#endpoint_type #endpoint_type} => String
+    #   * {Types::DeleteDBClusterEndpointOutput#custom_endpoint_type #custom_endpoint_type} => String
+    #   * {Types::DeleteDBClusterEndpointOutput#static_members #static_members} => Array&lt;String&gt;
+    #   * {Types::DeleteDBClusterEndpointOutput#excluded_members #excluded_members} => Array&lt;String&gt;
+    #   * {Types::DeleteDBClusterEndpointOutput#db_cluster_endpoint_arn #db_cluster_endpoint_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_db_cluster_endpoint({
+    #     db_cluster_endpoint_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster_endpoint_identifier #=> String
+    #   resp.db_cluster_identifier #=> String
+    #   resp.db_cluster_endpoint_resource_identifier #=> String
+    #   resp.endpoint #=> String
+    #   resp.status #=> String
+    #   resp.endpoint_type #=> String
+    #   resp.custom_endpoint_type #=> String
+    #   resp.static_members #=> Array
+    #   resp.static_members[0] #=> String
+    #   resp.excluded_members #=> Array
+    #   resp.excluded_members[0] #=> String
+    #   resp.db_cluster_endpoint_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteDBClusterEndpoint AWS API Documentation
+    #
+    # @overload delete_db_cluster_endpoint(params = {})
+    # @param [Hash] params ({})
+    def delete_db_cluster_endpoint(params = {}, options = {})
+      req = build_request(:delete_db_cluster_endpoint, params)
       req.send_request(options)
     end
 
@@ -2512,6 +2646,98 @@ module Aws::Neptune
     # @param [Hash] params ({})
     def delete_event_subscription(params = {}, options = {})
       req = build_request(:delete_event_subscription, params)
+      req.send_request(options)
+    end
+
+    # Returns information about endpoints for an Amazon Neptune DB cluster.
+    #
+    # <note markdown="1"> This operation can also return information for Amazon RDS clusters and
+    # Amazon DocDB clusters.
+    #
+    #  </note>
+    #
+    # @option params [String] :db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster associated with the
+    #   endpoint. This parameter is stored as a lowercase string.
+    #
+    # @option params [String] :db_cluster_endpoint_identifier
+    #   The identifier of the endpoint to describe. This parameter is stored
+    #   as a lowercase string.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A set of name-value pairs that define which endpoints to include in
+    #   the output. The filters are specified as name-value pairs, in the
+    #   format `Name=endpoint_type,Values=endpoint_type1,endpoint_type2,...`.
+    #   `Name` can be one of: `db-cluster-endpoint-type`,
+    #   `db-cluster-endpoint-custom-type`, `db-cluster-endpoint-id`,
+    #   `db-cluster-endpoint-status`. `Values` for the `
+    #   db-cluster-endpoint-type` filter can be one or more of: `reader`,
+    #   `writer`, `custom`. `Values` for the `db-cluster-endpoint-custom-type`
+    #   filter can be one or more of: `reader`, `any`. `Values` for the
+    #   `db-cluster-endpoint-status` filter can be one or more of:
+    #   `available`, `creating`, `deleting`, `inactive`, `modifying`.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so you can retrieve
+    #   the remaining results.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeDBClusterEndpoints` request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    # @return [Types::DBClusterEndpointMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBClusterEndpointMessage#marker #marker} => String
+    #   * {Types::DBClusterEndpointMessage#db_cluster_endpoints #db_cluster_endpoints} => Array&lt;Types::DBClusterEndpoint&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_db_cluster_endpoints({
+    #     db_cluster_identifier: "String",
+    #     db_cluster_endpoint_identifier: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.db_cluster_endpoints #=> Array
+    #   resp.db_cluster_endpoints[0].db_cluster_endpoint_identifier #=> String
+    #   resp.db_cluster_endpoints[0].db_cluster_identifier #=> String
+    #   resp.db_cluster_endpoints[0].db_cluster_endpoint_resource_identifier #=> String
+    #   resp.db_cluster_endpoints[0].endpoint #=> String
+    #   resp.db_cluster_endpoints[0].status #=> String
+    #   resp.db_cluster_endpoints[0].endpoint_type #=> String
+    #   resp.db_cluster_endpoints[0].custom_endpoint_type #=> String
+    #   resp.db_cluster_endpoints[0].static_members #=> Array
+    #   resp.db_cluster_endpoints[0].static_members[0] #=> String
+    #   resp.db_cluster_endpoints[0].excluded_members #=> Array
+    #   resp.db_cluster_endpoints[0].excluded_members[0] #=> String
+    #   resp.db_cluster_endpoints[0].db_cluster_endpoint_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBClusterEndpoints AWS API Documentation
+    #
+    # @overload describe_db_cluster_endpoints(params = {})
+    # @param [Hash] params ({})
+    def describe_db_cluster_endpoints(params = {}, options = {})
+      req = build_request(:describe_db_cluster_endpoints, params)
       req.send_request(options)
     end
 
@@ -2980,6 +3206,7 @@ module Aws::Neptune
     #   resp.db_clusters[0].associated_roles #=> Array
     #   resp.db_clusters[0].associated_roles[0].role_arn #=> String
     #   resp.db_clusters[0].associated_roles[0].status #=> String
+    #   resp.db_clusters[0].associated_roles[0].feature_name #=> String
     #   resp.db_clusters[0].iam_database_authentication_enabled #=> Boolean
     #   resp.db_clusters[0].clone_group_id #=> String
     #   resp.db_clusters[0].cluster_create_time #=> Time
@@ -4227,6 +4454,7 @@ module Aws::Neptune
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
@@ -4410,12 +4638,18 @@ module Aws::Neptune
     #   to CloudWatch Logs for a specific DB cluster.
     #
     # @option params [String] :engine_version
-    #   The version number of the database engine. Currently, setting this
-    #   parameter has no effect. To upgrade your database engine to the most
-    #   recent release, use the ApplyPendingMaintenanceAction API.
+    #   The version number of the database engine to which you want to
+    #   upgrade. Changing this parameter results in an outage. The change is
+    #   applied during the next maintenance window unless the
+    #   `ApplyImmediately` parameter is set to true.
     #
-    #   For a list of valid engine versions, see CreateDBInstance, or call
-    #   DescribeDBEngineVersions.
+    #   For a list of valid engine versions, see [Engine Releases for Amazon
+    #   Neptune][1], or call [DescribeDBEngineVersions][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/engine-releases.html
+    #   [2]: https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions
     #
     # @option params [Boolean] :deletion_protection
     #   A value that indicates whether the DB cluster has deletion protection
@@ -4495,6 +4729,7 @@ module Aws::Neptune
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
@@ -4508,6 +4743,71 @@ module Aws::Neptune
     # @param [Hash] params ({})
     def modify_db_cluster(params = {}, options = {})
       req = build_request(:modify_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Modifies the properties of an endpoint in an Amazon Neptune DB
+    # cluster.
+    #
+    # @option params [required, String] :db_cluster_endpoint_identifier
+    #   The identifier of the endpoint to modify. This parameter is stored as
+    #   a lowercase string.
+    #
+    # @option params [String] :endpoint_type
+    #   The type of the endpoint. One of: `READER`, `WRITER`, `ANY`.
+    #
+    # @option params [Array<String>] :static_members
+    #   List of DB instance identifiers that are part of the custom endpoint
+    #   group.
+    #
+    # @option params [Array<String>] :excluded_members
+    #   List of DB instance identifiers that aren't part of the custom
+    #   endpoint group. All other eligible instances are reachable through the
+    #   custom endpoint. Only relevant if the list of static members is empty.
+    #
+    # @return [Types::ModifyDBClusterEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyDBClusterEndpointOutput#db_cluster_endpoint_identifier #db_cluster_endpoint_identifier} => String
+    #   * {Types::ModifyDBClusterEndpointOutput#db_cluster_identifier #db_cluster_identifier} => String
+    #   * {Types::ModifyDBClusterEndpointOutput#db_cluster_endpoint_resource_identifier #db_cluster_endpoint_resource_identifier} => String
+    #   * {Types::ModifyDBClusterEndpointOutput#endpoint #endpoint} => String
+    #   * {Types::ModifyDBClusterEndpointOutput#status #status} => String
+    #   * {Types::ModifyDBClusterEndpointOutput#endpoint_type #endpoint_type} => String
+    #   * {Types::ModifyDBClusterEndpointOutput#custom_endpoint_type #custom_endpoint_type} => String
+    #   * {Types::ModifyDBClusterEndpointOutput#static_members #static_members} => Array&lt;String&gt;
+    #   * {Types::ModifyDBClusterEndpointOutput#excluded_members #excluded_members} => Array&lt;String&gt;
+    #   * {Types::ModifyDBClusterEndpointOutput#db_cluster_endpoint_arn #db_cluster_endpoint_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_db_cluster_endpoint({
+    #     db_cluster_endpoint_identifier: "String", # required
+    #     endpoint_type: "String",
+    #     static_members: ["String"],
+    #     excluded_members: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster_endpoint_identifier #=> String
+    #   resp.db_cluster_identifier #=> String
+    #   resp.db_cluster_endpoint_resource_identifier #=> String
+    #   resp.endpoint #=> String
+    #   resp.status #=> String
+    #   resp.endpoint_type #=> String
+    #   resp.custom_endpoint_type #=> String
+    #   resp.static_members #=> Array
+    #   resp.static_members[0] #=> String
+    #   resp.excluded_members #=> Array
+    #   resp.excluded_members[0] #=> String
+    #   resp.db_cluster_endpoint_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBClusterEndpoint AWS API Documentation
+    #
+    # @overload modify_db_cluster_endpoint(params = {})
+    # @param [Hash] params ({})
+    def modify_db_cluster_endpoint(params = {}, options = {})
+      req = build_request(:modify_db_cluster_endpoint, params)
       req.send_request(options)
     end
 
@@ -5386,6 +5686,7 @@ module Aws::Neptune
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
@@ -5559,6 +5860,11 @@ module Aws::Neptune
     #   the DB cluster, for example
     #   `arn:aws:iam::123456789012:role/NeptuneAccessRole`.
     #
+    # @option params [String] :feature_name
+    #   The name of the feature for the DB cluster that the IAM role is to be
+    #   disassociated from. For the list of supported feature names, see
+    #   DBEngineVersion.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -5566,6 +5872,7 @@ module Aws::Neptune
     #   resp = client.remove_role_from_db_cluster({
     #     db_cluster_identifier: "String", # required
     #     role_arn: "String", # required
+    #     feature_name: "String",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RemoveRoleFromDBCluster AWS API Documentation
@@ -5993,6 +6300,7 @@ module Aws::Neptune
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
@@ -6239,6 +6547,7 @@ module Aws::Neptune
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
@@ -6319,6 +6628,7 @@ module Aws::Neptune
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
@@ -6402,6 +6712,7 @@ module Aws::Neptune
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.associated_roles[0].feature_name #=> String
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
@@ -6431,7 +6742,7 @@ module Aws::Neptune
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

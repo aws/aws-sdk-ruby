@@ -169,6 +169,8 @@ module Aws::ApiGatewayV2
     LoggingLevel = Shapes::StringShape.new(name: 'LoggingLevel')
     Model = Shapes::StructureShape.new(name: 'Model')
     Models = Shapes::StructureShape.new(name: 'Models')
+    MutualTlsAuthentication = Shapes::StructureShape.new(name: 'MutualTlsAuthentication')
+    MutualTlsAuthenticationInput = Shapes::StructureShape.new(name: 'MutualTlsAuthenticationInput')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     ParameterConstraints = Shapes::StructureShape.new(name: 'ParameterConstraints')
@@ -290,6 +292,7 @@ module Aws::ApiGatewayV2
     Api.add_member(:created_date, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdDate"))
     Api.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     Api.add_member(:disable_schema_validation, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableSchemaValidation"))
+    Api.add_member(:disable_execute_api_endpoint, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableExecuteApiEndpoint"))
     Api.add_member(:import_info, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "importInfo"))
     Api.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, required: true, location_name: "name"))
     Api.add_member(:protocol_type, Shapes::ShapeRef.new(shape: ProtocolType, required: true, location_name: "protocolType"))
@@ -357,6 +360,7 @@ module Aws::ApiGatewayV2
     CreateApiInput.add_member(:credentials_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "credentialsArn"))
     CreateApiInput.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     CreateApiInput.add_member(:disable_schema_validation, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableSchemaValidation"))
+    CreateApiInput.add_member(:disable_execute_api_endpoint, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableExecuteApiEndpoint"))
     CreateApiInput.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, required: true, location_name: "name"))
     CreateApiInput.add_member(:protocol_type, Shapes::ShapeRef.new(shape: ProtocolType, required: true, location_name: "protocolType"))
     CreateApiInput.add_member(:route_key, Shapes::ShapeRef.new(shape: SelectionKey, location_name: "routeKey"))
@@ -388,6 +392,7 @@ module Aws::ApiGatewayV2
     CreateApiRequest.add_member(:credentials_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "credentialsArn"))
     CreateApiRequest.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     CreateApiRequest.add_member(:disable_schema_validation, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableSchemaValidation"))
+    CreateApiRequest.add_member(:disable_execute_api_endpoint, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableExecuteApiEndpoint"))
     CreateApiRequest.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, required: true, location_name: "name"))
     CreateApiRequest.add_member(:protocol_type, Shapes::ShapeRef.new(shape: ProtocolType, required: true, location_name: "protocolType"))
     CreateApiRequest.add_member(:route_key, Shapes::ShapeRef.new(shape: SelectionKey, location_name: "routeKey"))
@@ -405,6 +410,7 @@ module Aws::ApiGatewayV2
     CreateApiResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdDate"))
     CreateApiResponse.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     CreateApiResponse.add_member(:disable_schema_validation, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableSchemaValidation"))
+    CreateApiResponse.add_member(:disable_execute_api_endpoint, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableExecuteApiEndpoint"))
     CreateApiResponse.add_member(:import_info, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "importInfo"))
     CreateApiResponse.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "name"))
     CreateApiResponse.add_member(:protocol_type, Shapes::ShapeRef.new(shape: ProtocolType, location_name: "protocolType"))
@@ -471,17 +477,20 @@ module Aws::ApiGatewayV2
 
     CreateDomainNameInput.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, required: true, location_name: "domainName"))
     CreateDomainNameInput.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
+    CreateDomainNameInput.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthenticationInput, location_name: "mutualTlsAuthentication"))
     CreateDomainNameInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDomainNameInput.struct_class = Types::CreateDomainNameInput
 
     CreateDomainNameRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, required: true, location_name: "domainName"))
     CreateDomainNameRequest.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
+    CreateDomainNameRequest.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthenticationInput, location_name: "mutualTlsAuthentication"))
     CreateDomainNameRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDomainNameRequest.struct_class = Types::CreateDomainNameRequest
 
     CreateDomainNameResponse.add_member(:api_mapping_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiMappingSelectionExpression"))
     CreateDomainNameResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, location_name: "domainName"))
     CreateDomainNameResponse.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
+    CreateDomainNameResponse.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthentication, location_name: "mutualTlsAuthentication"))
     CreateDomainNameResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDomainNameResponse.struct_class = Types::CreateDomainNameResponse
 
@@ -795,6 +804,7 @@ module Aws::ApiGatewayV2
     DomainName.add_member(:api_mapping_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiMappingSelectionExpression"))
     DomainName.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, required: true, location_name: "domainName"))
     DomainName.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
+    DomainName.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthentication, location_name: "mutualTlsAuthentication"))
     DomainName.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DomainName.struct_class = Types::DomainName
 
@@ -858,6 +868,7 @@ module Aws::ApiGatewayV2
     GetApiResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdDate"))
     GetApiResponse.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     GetApiResponse.add_member(:disable_schema_validation, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableSchemaValidation"))
+    GetApiResponse.add_member(:disable_execute_api_endpoint, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableExecuteApiEndpoint"))
     GetApiResponse.add_member(:import_info, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "importInfo"))
     GetApiResponse.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "name"))
     GetApiResponse.add_member(:protocol_type, Shapes::ShapeRef.new(shape: ProtocolType, location_name: "protocolType"))
@@ -928,6 +939,7 @@ module Aws::ApiGatewayV2
     GetDomainNameResponse.add_member(:api_mapping_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiMappingSelectionExpression"))
     GetDomainNameResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, location_name: "domainName"))
     GetDomainNameResponse.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
+    GetDomainNameResponse.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthentication, location_name: "mutualTlsAuthentication"))
     GetDomainNameResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     GetDomainNameResponse.struct_class = Types::GetDomainNameResponse
 
@@ -1148,6 +1160,7 @@ module Aws::ApiGatewayV2
     ImportApiResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdDate"))
     ImportApiResponse.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     ImportApiResponse.add_member(:disable_schema_validation, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableSchemaValidation"))
+    ImportApiResponse.add_member(:disable_execute_api_endpoint, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableExecuteApiEndpoint"))
     ImportApiResponse.add_member(:import_info, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "importInfo"))
     ImportApiResponse.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "name"))
     ImportApiResponse.add_member(:protocol_type, Shapes::ShapeRef.new(shape: ProtocolType, location_name: "protocolType"))
@@ -1216,6 +1229,15 @@ module Aws::ApiGatewayV2
     Models.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     Models.struct_class = Types::Models
 
+    MutualTlsAuthentication.add_member(:truststore_uri, Shapes::ShapeRef.new(shape: UriWithLengthBetween1And2048, location_name: "truststoreUri"))
+    MutualTlsAuthentication.add_member(:truststore_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "truststoreVersion"))
+    MutualTlsAuthentication.add_member(:truststore_warnings, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "truststoreWarnings"))
+    MutualTlsAuthentication.struct_class = Types::MutualTlsAuthentication
+
+    MutualTlsAuthenticationInput.add_member(:truststore_uri, Shapes::ShapeRef.new(shape: UriWithLengthBetween1And2048, location_name: "truststoreUri"))
+    MutualTlsAuthenticationInput.add_member(:truststore_version, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And64, location_name: "truststoreVersion"))
+    MutualTlsAuthenticationInput.struct_class = Types::MutualTlsAuthenticationInput
+
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     NotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: __string, location_name: "resourceType"))
     NotFoundException.struct_class = Types::NotFoundException
@@ -1240,6 +1262,7 @@ module Aws::ApiGatewayV2
     ReimportApiResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdDate"))
     ReimportApiResponse.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     ReimportApiResponse.add_member(:disable_schema_validation, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableSchemaValidation"))
+    ReimportApiResponse.add_member(:disable_execute_api_endpoint, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableExecuteApiEndpoint"))
     ReimportApiResponse.add_member(:import_info, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "importInfo"))
     ReimportApiResponse.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "name"))
     ReimportApiResponse.add_member(:protocol_type, Shapes::ShapeRef.new(shape: ProtocolType, location_name: "protocolType"))
@@ -1363,6 +1386,7 @@ module Aws::ApiGatewayV2
     UpdateApiInput.add_member(:credentials_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "credentialsArn"))
     UpdateApiInput.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     UpdateApiInput.add_member(:disable_schema_validation, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableSchemaValidation"))
+    UpdateApiInput.add_member(:disable_execute_api_endpoint, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableExecuteApiEndpoint"))
     UpdateApiInput.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "name"))
     UpdateApiInput.add_member(:route_key, Shapes::ShapeRef.new(shape: SelectionKey, location_name: "routeKey"))
     UpdateApiInput.add_member(:route_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "routeSelectionExpression"))
@@ -1394,6 +1418,7 @@ module Aws::ApiGatewayV2
     UpdateApiRequest.add_member(:credentials_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "credentialsArn"))
     UpdateApiRequest.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     UpdateApiRequest.add_member(:disable_schema_validation, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableSchemaValidation"))
+    UpdateApiRequest.add_member(:disable_execute_api_endpoint, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableExecuteApiEndpoint"))
     UpdateApiRequest.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "name"))
     UpdateApiRequest.add_member(:route_key, Shapes::ShapeRef.new(shape: SelectionKey, location_name: "routeKey"))
     UpdateApiRequest.add_member(:route_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "routeSelectionExpression"))
@@ -1409,6 +1434,7 @@ module Aws::ApiGatewayV2
     UpdateApiResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdDate"))
     UpdateApiResponse.add_member(:description, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "description"))
     UpdateApiResponse.add_member(:disable_schema_validation, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableSchemaValidation"))
+    UpdateApiResponse.add_member(:disable_execute_api_endpoint, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableExecuteApiEndpoint"))
     UpdateApiResponse.add_member(:import_info, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "importInfo"))
     UpdateApiResponse.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "name"))
     UpdateApiResponse.add_member(:protocol_type, Shapes::ShapeRef.new(shape: ProtocolType, location_name: "protocolType"))
@@ -1474,15 +1500,18 @@ module Aws::ApiGatewayV2
     UpdateDeploymentResponse.struct_class = Types::UpdateDeploymentResponse
 
     UpdateDomainNameInput.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
+    UpdateDomainNameInput.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthenticationInput, location_name: "mutualTlsAuthentication"))
     UpdateDomainNameInput.struct_class = Types::UpdateDomainNameInput
 
     UpdateDomainNameRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "domainName"))
     UpdateDomainNameRequest.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
+    UpdateDomainNameRequest.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthenticationInput, location_name: "mutualTlsAuthentication"))
     UpdateDomainNameRequest.struct_class = Types::UpdateDomainNameRequest
 
     UpdateDomainNameResponse.add_member(:api_mapping_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "apiMappingSelectionExpression"))
     UpdateDomainNameResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, location_name: "domainName"))
     UpdateDomainNameResponse.add_member(:domain_name_configurations, Shapes::ShapeRef.new(shape: DomainNameConfigurations, location_name: "domainNameConfigurations"))
+    UpdateDomainNameResponse.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthentication, location_name: "mutualTlsAuthentication"))
     UpdateDomainNameResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateDomainNameResponse.struct_class = Types::UpdateDomainNameResponse
 

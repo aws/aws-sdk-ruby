@@ -27,6 +27,7 @@ module Aws::WorkMail
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {DirectoryInUseException}
   # * {DirectoryServiceAuthenticationFailedException}
   # * {DirectoryUnavailableException}
   # * {EmailAddressInUseException}
@@ -52,6 +53,21 @@ module Aws::WorkMail
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class DirectoryInUseException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkMail::Types::DirectoryInUseException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class DirectoryServiceAuthenticationFailedException < ServiceError
 

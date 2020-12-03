@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2020-11-16)
+------------------
+
+* Feature - Adding MoveReplicationTask feature to move replication tasks between instances
+
+1.46.0 (2020-10-30)
+------------------
+
+* Feature - Adding DocDbSettings to support DocumentDB as a source.
+
+1.45.0 (2020-10-15)
+------------------
+
+* Feature - When creating Endpoints, Replication Instances, and Replication Tasks, the feature provides you the option to specify friendly name to the resources.
+
+1.44.0 (2020-10-06)
+------------------
+
+* Feature - Added new S3 endpoint settings to allow partitioning CDC data by date for S3 as target. Exposed some Extra Connection Attributes as endpoint settings for relational databases as target.
+
+1.43.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.41.0 (2020-08-25)
 ------------------
 

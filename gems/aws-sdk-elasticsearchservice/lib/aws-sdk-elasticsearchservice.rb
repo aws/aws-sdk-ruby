@@ -7,6 +7,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
@@ -47,6 +48,6 @@ require_relative 'aws-sdk-elasticsearchservice/customizations'
 # @!group service
 module Aws::ElasticsearchService
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.46.0'
 
 end

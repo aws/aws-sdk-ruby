@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-12-01)
+------------------
+
+* Feature - This release adds an Amazon Connect API that provides the ability to create tasks, and a set of APIs (in preview) to configure AppIntegrations associations with Amazon Connect instances.
+
+1.36.0 (2020-11-20)
+------------------
+
+* Feature - This release adds a set of Amazon Connect APIs to programmatically control instance creation, modification, description and deletion.
+
+1.35.0 (2020-11-17)
+------------------
+
+* Feature - This release adds support for user hierarchy group and user hierarchy structure. For details, see the Release Notes in the Amazon Connect Administrator Guide.
+
+1.34.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2020-09-29)
+------------------
+
+* Feature - Update TagResource API documentation to include Contact Flows and Routing Profiles as supported resources.
+
+1.32.0 (2020-09-16)
+------------------
+
+* Feature - This release adds support for contact flows and routing profiles. For details, see the Release Notes in the Amazon Connect Administrator Guide.
+
+1.31.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.30.0 (2020-08-25)
 ------------------
 

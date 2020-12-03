@@ -89,6 +89,25 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # Indicates whether the user requires a password to authenticate.
+    #
+    # @!attribute [rw] type
+    #   Indicates whether the user requires a password to authenticate.
+    #   @return [String]
+    #
+    # @!attribute [rw] password_count
+    #   The number of passwords belonging to the user. The maximum is two.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Authentication AWS API Documentation
+    #
+    class Authentication < Struct.new(
+      :type,
+      :password_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified Amazon EC2 security group is already authorized for the
     # specified cache security group.
     #
@@ -268,6 +287,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, M6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+    #       eu-west-1 and ap-northeast-1.
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -300,6 +332,19 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, R6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+    #       eu-west-1 and ap-northeast-1.
+    #
+    #        </note>
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -359,6 +404,10 @@ module Aws::ElastiCache
     #   The name of the Availability Zone in which the cluster is located or
     #   "Multiple" if the cache nodes are located in different
     #   Availability Zones.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_outpost_arn
+    #   The outpost ARN in which the cache cluster is created.
     #   @return [String]
     #
     # @!attribute [rw] cache_cluster_create_time
@@ -503,6 +552,7 @@ module Aws::ElastiCache
       :cache_cluster_status,
       :num_cache_nodes,
       :preferred_availability_zone,
+      :preferred_outpost_arn,
       :cache_cluster_create_time,
       :preferred_maintenance_window,
       :pending_modified_values,
@@ -571,8 +621,9 @@ module Aws::ElastiCache
     #   The name of the cache parameter group family associated with this
     #   cache engine.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
+    #   `redis5.0` \| `redis6.x` \|
     #   @return [String]
     #
     # @!attribute [rw] cache_engine_description
@@ -628,6 +679,19 @@ module Aws::ElastiCache
     #
     #   * Current generation:
     #
+    #     **M6g node types** (available only for Redis engine version 5.0.6
+    #     onward and for Memcached engine version 1.5.16 onward).
+    #
+    #     `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #     `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #     `cache.m6g.16xlarge`
+    #
+    #     <note markdown="1"> At this time, M6g node types are available in the following
+    #     regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #     and ap-northeast-1.
+    #
+    #      </note>
+    #
     #     **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #     `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #     `cache.m5.24xlarge`
@@ -660,6 +724,19 @@ module Aws::ElastiCache
     # * Memory optimized:
     #
     #   * Current generation:
+    #
+    #     **R6g node types** (available only for Redis engine version 5.0.6
+    #     onward and for Memcached engine version 1.5.16 onward).
+    #
+    #     `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #     `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #     `cache.r6g.16xlarge`
+    #
+    #     <note markdown="1"> At this time, R6g node types are available in the following
+    #     regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
+    #     and ap-northeast-1.
+    #
+    #      </note>
     #
     #     **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #     `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -724,6 +801,10 @@ module Aws::ElastiCache
     #   The Availability Zone where this node was created and now resides.
     #   @return [String]
     #
+    # @!attribute [rw] customer_outpost_arn
+    #   The customer outpost ARN of the cache node.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheNode AWS API Documentation
     #
     class CacheNode < Struct.new(
@@ -733,7 +814,8 @@ module Aws::ElastiCache
       :endpoint,
       :parameter_group_status,
       :source_cache_node_id,
-      :customer_availability_zone)
+      :customer_availability_zone,
+      :customer_outpost_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -884,8 +966,9 @@ module Aws::ElastiCache
     #   The name of the cache parameter group family that this cache
     #   parameter group is compatible with.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
+    #   `redis5.0` \| `redis6.x` \|
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1049,7 +1132,7 @@ module Aws::ElastiCache
     #   @return [Array<Types::EC2SecurityGroup>]
     #
     # @!attribute [rw] arn
-    #   The ARN (Amazon Resource Name) of the cache security group.
+    #   The ARN of the cache security group,
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSecurityGroup AWS API Documentation
@@ -1278,6 +1361,7 @@ module Aws::ElastiCache
     #         node_group_id: "AllowedNodeGroupId", # required
     #         new_replica_count: 1, # required
     #         preferred_availability_zones: ["String"],
+    #         preferred_outpost_arns: ["String"],
     #       }
     #
     # @!attribute [rw] node_group_id
@@ -1318,12 +1402,17 @@ module Aws::ElastiCache
     #   selects the availability zone for each of the replicas.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] preferred_outpost_arns
+    #   The outpost ARNs in which the cache cluster is created.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ConfigureShard AWS API Documentation
     #
     class ConfigureShard < Struct.new(
       :node_group_id,
       :new_replica_count,
-      :preferred_availability_zones)
+      :preferred_availability_zones,
+      :preferred_outpost_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1365,7 +1454,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access
     #   [2]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html
     #   @return [String]
     #
@@ -1431,6 +1520,9 @@ module Aws::ElastiCache
     #         snapshot_retention_limit: 1,
     #         snapshot_window: "String",
     #         auth_token: "String",
+    #         outpost_mode: "single-outpost", # accepts single-outpost, cross-outpost
+    #         preferred_outpost_arn: "String",
+    #         preferred_outpost_arns: ["String"],
     #       }
     #
     # @!attribute [rw] cache_cluster_id
@@ -1536,6 +1628,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, M6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+    #       eu-west-1 and ap-northeast-1.
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -1568,6 +1673,19 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, R6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+    #       eu-west-1 and ap-northeast-1.
+    #
+    #        </note>
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -1785,6 +1903,19 @@ module Aws::ElastiCache
     #   [1]: http://redis.io/commands/AUTH
     #   @return [String]
     #
+    # @!attribute [rw] outpost_mode
+    #   Specifies whether the nodes in the cluster are created in a single
+    #   outpost or across multiple outposts.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_outpost_arn
+    #   The outpost ARN in which the cache cluster is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_outpost_arns
+    #   The outpost ARNs in which the cache cluster is created.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheClusterMessage AWS API Documentation
     #
     class CreateCacheClusterMessage < Struct.new(
@@ -1810,7 +1941,10 @@ module Aws::ElastiCache
       :auto_minor_version_upgrade,
       :snapshot_retention_limit,
       :snapshot_window,
-      :auth_token)
+      :auth_token,
+      :outpost_mode,
+      :preferred_outpost_arn,
+      :preferred_outpost_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1846,8 +1980,9 @@ module Aws::ElastiCache
     #   The name of the cache parameter group family that the cache
     #   parameter group can be used with.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
+    #   `redis5.0` \| `redis6.x` \|
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1992,8 +2127,20 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] global_replication_group_id_suffix
-    #   The suffix name of a Global Datastore. The suffix guarantees
-    #   uniqueness of the Global Datastore name across multiple regions.
+    #   The suffix name of a Global Datastore. Amazon ElastiCache
+    #   automatically applies a prefix to the Global Datastore ID when it is
+    #   created. Each AWS Region has its own prefix. For instance, a Global
+    #   Datastore ID created in the US-West-1 region will begin with
+    #   "dsdfu" along with the suffix name you provide. The suffix,
+    #   combined with the auto-generated prefix, guarantees uniqueness of
+    #   the Global Datastore name across multiple regions.
+    #
+    #   For a full list of AWS Regions and their respective Global Datastore
+    #   iD prefixes, see [Using the AWS CLI with Global Datastores ][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters-CLI.html
     #   @return [String]
     #
     # @!attribute [rw] global_replication_group_description
@@ -2059,6 +2206,8 @@ module Aws::ElastiCache
     #             replica_count: 1,
     #             primary_availability_zone: "String",
     #             replica_availability_zones: ["String"],
+    #             primary_outpost_arn: "String",
+    #             replica_outpost_arns: ["String"],
     #           },
     #         ],
     #         cache_node_type: "String",
@@ -2086,6 +2235,7 @@ module Aws::ElastiCache
     #         transit_encryption_enabled: false,
     #         at_rest_encryption_enabled: false,
     #         kms_key_id: "String",
+    #         user_group_ids: ["UserGroupId"],
     #       }
     #
     # @!attribute [rw] replication_group_id
@@ -2218,6 +2368,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, M6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+    #       eu-west-1 and ap-northeast-1.
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -2250,6 +2413,19 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, R6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+    #       eu-west-1 and ap-northeast-1.
+    #
+    #        </note>
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -2517,6 +2693,10 @@ module Aws::ElastiCache
     #   The ID of the KMS key used to encrypt the disk in the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] user_group_ids
+    #   The list of user groups to associate with the replication group.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroupMessage AWS API Documentation
     #
     class CreateReplicationGroupMessage < Struct.new(
@@ -2550,7 +2730,8 @@ module Aws::ElastiCache
       :auth_token,
       :transit_encryption_enabled,
       :at_rest_encryption_enabled,
-      :kms_key_id)
+      :kms_key_id,
+      :user_group_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2618,6 +2799,87 @@ module Aws::ElastiCache
     #
     class CreateSnapshotResult < Struct.new(
       :snapshot)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateUserGroupMessage
+    #   data as a hash:
+    #
+    #       {
+    #         user_group_id: "String", # required
+    #         engine: "EngineType", # required
+    #         user_ids: ["UserId"],
+    #       }
+    #
+    # @!attribute [rw] user_group_id
+    #   The ID of the user group.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   Must be Redis.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_ids
+    #   The list of user IDs that belong to the user group.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateUserGroupMessage AWS API Documentation
+    #
+    class CreateUserGroupMessage < Struct.new(
+      :user_group_id,
+      :engine,
+      :user_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateUserMessage
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "UserId", # required
+    #         user_name: "UserName", # required
+    #         engine: "EngineType", # required
+    #         passwords: ["String"],
+    #         access_string: "AccessString", # required
+    #         no_password_required: false,
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The ID of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The username of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   Must be Redis.
+    #   @return [String]
+    #
+    # @!attribute [rw] passwords
+    #   Passwords used for this user account. You can create up to two
+    #   passwords for each user.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] access_string
+    #   Access permissions string used for this user account.
+    #   @return [String]
+    #
+    # @!attribute [rw] no_password_required
+    #   Indicates a password is not required for this user account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateUserMessage AWS API Documentation
+    #
+    class CreateUserMessage < Struct.new(
+      :user_id,
+      :user_name,
+      :engine,
+      :passwords,
+      :access_string,
+      :no_password_required)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2736,6 +2998,7 @@ module Aws::ElastiCache
     #             node_group_id: "AllowedNodeGroupId", # required
     #             new_replica_count: 1, # required
     #             preferred_availability_zones: ["String"],
+    #             preferred_outpost_arns: ["String"],
     #           },
     #         ],
     #         replicas_to_remove: ["String"],
@@ -2807,6 +3070,16 @@ module Aws::ElastiCache
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DefaultUserAssociatedToUserGroupFault AWS API Documentation
+    #
+    class DefaultUserAssociatedToUserGroupFault < Aws::EmptyStructure; end
+
+    # You must add default user to a user group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DefaultUserRequired AWS API Documentation
+    #
+    class DefaultUserRequired < Aws::EmptyStructure; end
 
     # Represents the input of a `DeleteCacheCluster` operation.
     #
@@ -3058,6 +3331,44 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteUserGroupMessage
+    #   data as a hash:
+    #
+    #       {
+    #         user_group_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] user_group_id
+    #   The ID of the user group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteUserGroupMessage AWS API Documentation
+    #
+    class DeleteUserGroupMessage < Struct.new(
+      :user_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteUserMessage
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "UserId", # required
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The ID of the user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteUserMessage AWS API Documentation
+    #
+    class DeleteUserMessage < Struct.new(
+      :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a `DescribeCacheClusters` operation.
     #
     # @note When making an API call, you may pass DescribeCacheClustersMessage
@@ -3147,8 +3458,9 @@ module Aws::ElastiCache
     #   The name of a specific cache parameter group family to return
     #   details for.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
+    #   `redis5.0` \| `redis6.x` \|
     #
     #   Constraints:
     #
@@ -3389,8 +3701,9 @@ module Aws::ElastiCache
     # @!attribute [rw] cache_parameter_group_family
     #   The name of the cache parameter group family.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
+    #   `redis5.0` \| `redis6.x` \|
     #   @return [String]
     #
     # @!attribute [rw] max_records
@@ -3441,7 +3754,7 @@ module Aws::ElastiCache
     #
     #       {
     #         source_identifier: "String",
-    #         source_type: "cache-cluster", # accepts cache-cluster, cache-parameter-group, cache-security-group, cache-subnet-group, replication-group
+    #         source_type: "cache-cluster", # accepts cache-cluster, cache-parameter-group, cache-security-group, cache-subnet-group, replication-group, user, user-group
     #         start_time: Time.now,
     #         end_time: Time.now,
     #         duration: 1,
@@ -3661,6 +3974,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, M6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+    #       eu-west-1 and ap-northeast-1.
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -3693,6 +4019,19 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, R6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+    #       eu-west-1 and ap-northeast-1.
+    #
+    #        </note>
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -3742,7 +4081,7 @@ module Aws::ElastiCache
     #   available offerings matching the specified offering type.
     #
     #   Valid values: `"Light Utilization"|"Medium Utilization"|"Heavy
-    #   Utilization"`
+    #   Utilization"|"All Upfront"|"Partial Upfront"| "No Upfront"`
     #   @return [String]
     #
     # @!attribute [rw] max_records
@@ -3815,6 +4154,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, M6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+    #       eu-west-1 and ap-northeast-1.
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -3847,6 +4199,19 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, R6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+    #       eu-west-1 and ap-northeast-1.
+    #
+    #        </note>
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -3897,7 +4262,7 @@ module Aws::ElastiCache
     #   available offerings matching the specified offering type.
     #
     #   Valid Values: `"Light Utilization"|"Medium Utilization"|"Heavy
-    #   Utilization"`
+    #   Utilization" |"All Upfront"|"Partial Upfront"| "No Upfront"`
     #   @return [String]
     #
     # @!attribute [rw] max_records
@@ -4151,6 +4516,137 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeUserGroupsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         user_group_id: "String",
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] user_group_id
+    #   The ID of the user group.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified MaxRecords value, a marker is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional marker returned from a prior request. Use this marker
+    #   for pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by MaxRecords. &gt;
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeUserGroupsMessage AWS API Documentation
+    #
+    class DescribeUserGroupsMessage < Struct.new(
+      :user_group_id,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_groups
+    #   Returns a list of user groups.
+    #   @return [Array<Types::UserGroup>]
+    #
+    # @!attribute [rw] marker
+    #   An optional marker returned from a prior request. Use this marker
+    #   for pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by MaxRecords. &gt;
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeUserGroupsResult AWS API Documentation
+    #
+    class DescribeUserGroupsResult < Struct.new(
+      :user_groups,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeUsersMessage
+    #   data as a hash:
+    #
+    #       {
+    #         engine: "EngineType",
+    #         user_id: "UserId",
+    #         filters: [
+    #           {
+    #             name: "FilterName", # required
+    #             values: ["FilterValue"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] engine
+    #   The Redis engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The ID of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filter to determine the list of User IDs to return.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified MaxRecords value, a marker is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional marker returned from a prior request. Use this marker
+    #   for pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by MaxRecords. &gt;
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeUsersMessage AWS API Documentation
+    #
+    class DescribeUsersMessage < Struct.new(
+      :engine,
+      :user_id,
+      :filters,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] users
+    #   A list of users.
+    #   @return [Array<Types::User>]
+    #
+    # @!attribute [rw] marker
+    #   An optional marker returned from a prior request. Use this marker
+    #   for pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by MaxRecords. &gt;
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeUsersResult AWS API Documentation
+    #
+    class DescribeUsersResult < Struct.new(
+      :users,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisassociateGlobalReplicationGroupMessage
     #   data as a hash:
     #
@@ -4205,6 +4701,12 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # A user with this username already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DuplicateUserNameFault AWS API Documentation
+    #
+    class DuplicateUserNameFault < Aws::EmptyStructure; end
+
     # Provides ownership and status information for an Amazon EC2 security
     # group.
     #
@@ -4257,8 +4759,9 @@ module Aws::ElastiCache
     #   Specifies the name of the cache parameter group family to which the
     #   engine default parameters apply.
     #
-    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
-    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
+    #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
+    #   `redis5.0` \| `redis6.x` \|
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -4392,6 +4895,34 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # Used to streamline results of a search based on the property being
+    # filtered.
+    #
+    # @note When making an API call, you may pass Filter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "FilterName", # required
+    #         values: ["FilterValue"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The property being filtered. For example, UserId.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The property values to filter on. For example, "user-123".
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Filter AWS API Documentation
+    #
+    class Filter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Indicates the slot configuration and global identifier for a slice
     # group.
     #
@@ -4444,8 +4975,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The Elasticache Redis engine version. For preview, it is Redis
-    #   version 5.0.5 only.
+    #   The Elasticache Redis engine version.
     #   @return [String]
     #
     # @!attribute [rw] members
@@ -4665,6 +5195,7 @@ module Aws::ElastiCache
     #             node_group_id: "AllowedNodeGroupId", # required
     #             new_replica_count: 1, # required
     #             preferred_availability_zones: ["String"],
+    #             preferred_outpost_arns: ["String"],
     #           },
     #         ],
     #         apply_immediately: false, # required
@@ -4817,6 +5348,18 @@ module Aws::ElastiCache
     #
     class InvalidSubnet < Aws::EmptyStructure; end
 
+    # The user group is not in an active state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidUserGroupStateFault AWS API Documentation
+    #
+    class InvalidUserGroupStateFault < Aws::EmptyStructure; end
+
+    # The user is not in active state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidUserStateFault AWS API Documentation
+    #
+    class InvalidUserStateFault < Aws::EmptyStructure; end
+
     # The VPC network is in an invalid state.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidVPCNetworkStateFault AWS API Documentation
@@ -4918,7 +5461,7 @@ module Aws::ElastiCache
     #         snapshot_window: "String",
     #         cache_node_type: "String",
     #         auth_token: "String",
-    #         auth_token_update_strategy: "SET", # accepts SET, ROTATE
+    #         auth_token_update_strategy: "SET", # accepts SET, ROTATE, DELETE
     #       }
     #
     # @!attribute [rw] cache_cluster_id
@@ -5475,7 +6018,10 @@ module Aws::ElastiCache
     #         snapshot_window: "String",
     #         cache_node_type: "String",
     #         auth_token: "String",
-    #         auth_token_update_strategy: "SET", # accepts SET, ROTATE
+    #         auth_token_update_strategy: "SET", # accepts SET, ROTATE, DELETE
+    #         user_group_ids_to_add: ["UserGroupId"],
+    #         user_group_ids_to_remove: ["UserGroupId"],
+    #         remove_user_groups: false,
     #       }
     #
     # @!attribute [rw] replication_group_id
@@ -5688,6 +6234,19 @@ module Aws::ElastiCache
     #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
     #   @return [String]
     #
+    # @!attribute [rw] user_group_ids_to_add
+    #   A list of user group IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_group_ids_to_remove
+    #   A list of users groups to remove, meaning the users in the group no
+    #   longer can access thereplication group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove_user_groups
+    #   Removes the user groups that can access this replication group.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupMessage AWS API Documentation
     #
     class ModifyReplicationGroupMessage < Struct.new(
@@ -5711,7 +6270,10 @@ module Aws::ElastiCache
       :snapshot_window,
       :cache_node_type,
       :auth_token,
-      :auth_token_update_strategy)
+      :auth_token_update_strategy,
+      :user_group_ids_to_add,
+      :user_group_ids_to_remove,
+      :remove_user_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5824,6 +6386,81 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyUserGroupMessage
+    #   data as a hash:
+    #
+    #       {
+    #         user_group_id: "String", # required
+    #         user_ids_to_add: ["UserId"],
+    #         user_ids_to_remove: ["UserId"],
+    #       }
+    #
+    # @!attribute [rw] user_group_id
+    #   The ID of the user group.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_ids_to_add
+    #   The list of user IDs to add to the user group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_ids_to_remove
+    #   The list of user IDs to remove from the user group.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyUserGroupMessage AWS API Documentation
+    #
+    class ModifyUserGroupMessage < Struct.new(
+      :user_group_id,
+      :user_ids_to_add,
+      :user_ids_to_remove)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyUserMessage
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "UserId", # required
+    #         access_string: "AccessString",
+    #         append_access_string: "AccessString",
+    #         passwords: ["String"],
+    #         no_password_required: false,
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The ID of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_string
+    #   Access permissions string used for this user account.
+    #   @return [String]
+    #
+    # @!attribute [rw] append_access_string
+    #   Adds additional user permissions to the access string.
+    #   @return [String]
+    #
+    # @!attribute [rw] passwords
+    #   The passwords belonging to the user account. You are allowed up to
+    #   two.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] no_password_required
+    #   Indicates no password is required for the user account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyUserMessage AWS API Documentation
+    #
+    class ModifyUserMessage < Struct.new(
+      :user_id,
+      :access_string,
+      :append_access_string,
+      :passwords,
+      :no_password_required)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The operation was not performed because no changes were required.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NoOperationFault AWS API Documentation
@@ -5890,6 +6527,8 @@ module Aws::ElastiCache
     #         replica_count: 1,
     #         primary_availability_zone: "String",
     #         replica_availability_zones: ["String"],
+    #         primary_outpost_arn: "String",
+    #         replica_outpost_arns: ["String"],
     #       }
     #
     # @!attribute [rw] node_group_id
@@ -5920,6 +6559,14 @@ module Aws::ElastiCache
     #   `ReplicaCount` or `ReplicasPerNodeGroup` if not specified.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] primary_outpost_arn
+    #   The output ARN of the primary node.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_outpost_arns
+    #   The outpost ARN of the node replicas.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeGroupConfiguration AWS API Documentation
     #
     class NodeGroupConfiguration < Struct.new(
@@ -5927,7 +6574,9 @@ module Aws::ElastiCache
       :slots,
       :replica_count,
       :primary_availability_zone,
-      :replica_availability_zones)
+      :replica_availability_zones,
+      :primary_outpost_arn,
+      :replica_outpost_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5953,6 +6602,10 @@ module Aws::ElastiCache
     #   The name of the Availability Zone in which the node is located.
     #   @return [String]
     #
+    # @!attribute [rw] preferred_outpost_arn
+    #   The outpost ARN of the node group member.
+    #   @return [String]
+    #
     # @!attribute [rw] current_role
     #   The role that is currently assigned to the node - `primary` or
     #   `replica`. This member is only applicable for Redis (cluster mode
@@ -5966,6 +6619,7 @@ module Aws::ElastiCache
       :cache_node_id,
       :read_endpoint,
       :preferred_availability_zone,
+      :preferred_outpost_arn,
       :current_role)
       SENSITIVE = []
       include Aws::Structure
@@ -6689,6 +7343,10 @@ module Aws::ElastiCache
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] member_clusters_outpost_arns
+    #   The outpost ARNs of the replication group's member clusters.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] kms_key_id
     #   The ID of the KMS key used to encrypt the disk in the cluster.
     #   @return [String]
@@ -6696,6 +7354,11 @@ module Aws::ElastiCache
     # @!attribute [rw] arn
     #   The ARN (Amazon Resource Name) of the replication group.
     #   @return [String]
+    #
+    # @!attribute [rw] user_group_ids
+    #   The list of user group IDs that have access to the replication
+    #   group.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroup AWS API Documentation
     #
@@ -6719,8 +7382,10 @@ module Aws::ElastiCache
       :auth_token_last_modified_date,
       :transit_encryption_enabled,
       :at_rest_encryption_enabled,
+      :member_clusters_outpost_arns,
       :kms_key_id,
-      :arn)
+      :arn,
+      :user_group_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6791,13 +7456,18 @@ module Aws::ElastiCache
     #   The auth token status
     #   @return [String]
     #
+    # @!attribute [rw] user_groups
+    #   The user groups being modified.
+    #   @return [Types::UserGroupsUpdateStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupPendingModifiedValues AWS API Documentation
     #
     class ReplicationGroupPendingModifiedValues < Struct.new(
       :primary_cluster_id,
       :automatic_failover_status,
       :resharding,
-      :auth_token_status)
+      :auth_token_status,
+      :user_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6824,6 +7494,19 @@ module Aws::ElastiCache
     #   * General purpose:
     #
     #     * Current generation:
+    #
+    #       **M6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, M6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+    #       eu-west-1 and ap-northeast-1.
+    #
+    #        </note>
     #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
@@ -6857,6 +7540,19 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, R6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+    #       eu-west-1 and ap-northeast-1.
+    #
+    #        </note>
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -7009,6 +7705,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, M6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+    #       eu-west-1 and ap-northeast-1.
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -7041,6 +7750,19 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, R6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+    #       eu-west-1 and ap-northeast-1.
+    #
+    #        </note>
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -7470,6 +8192,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
+    #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
+    #       `cache.m6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, M6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+    #       eu-west-1 and ap-northeast-1.
+    #
+    #        </note>
+    #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
     #       `cache.m5.24xlarge`
@@ -7502,6 +8237,19 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
+    #
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> At this time, R6g node types are available in the following
+    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
+    #       eu-west-1 and ap-northeast-1.
+    #
+    #        </note>
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -7554,6 +8302,10 @@ module Aws::ElastiCache
     # @!attribute [rw] preferred_availability_zone
     #   The name of the Availability Zone in which the source cluster is
     #   located.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_outpost_arn
+    #   The ARN (Amazon Resource Name) of the preferred outpost.
     #   @return [String]
     #
     # @!attribute [rw] cache_cluster_create_time
@@ -7669,6 +8421,7 @@ module Aws::ElastiCache
       :engine_version,
       :num_cache_nodes,
       :preferred_availability_zone,
+      :preferred_outpost_arn,
       :cache_cluster_create_time,
       :preferred_maintenance_window,
       :topic_arn,
@@ -7777,11 +8530,16 @@ module Aws::ElastiCache
     #   The Availability Zone associated with the subnet.
     #   @return [Types::AvailabilityZone]
     #
+    # @!attribute [rw] subnet_outpost
+    #   The outpost ARN of the subnet.
+    #   @return [Types::SubnetOutpost]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Subnet AWS API Documentation
     #
     class Subnet < Struct.new(
       :subnet_identifier,
-      :subnet_availability_zone)
+      :subnet_availability_zone,
+      :subnet_outpost)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7791,6 +8549,29 @@ module Aws::ElastiCache
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/SubnetInUse AWS API Documentation
     #
     class SubnetInUse < Aws::EmptyStructure; end
+
+    # At least one subnet ID does not match the other subnet IDs. This
+    # mismatch typically occurs when a user sets one subnet ID to a regional
+    # Availability Zone and a different one to an outpost. Or when a user
+    # sets the subnet ID to an Outpost when not subscribed on this service.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/SubnetNotAllowedFault AWS API Documentation
+    #
+    class SubnetNotAllowedFault < Aws::EmptyStructure; end
+
+    # The ID of the outpost subnet.
+    #
+    # @!attribute [rw] subnet_outpost_arn
+    #   The outpost ARN of the subnet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/SubnetOutpost AWS API Documentation
+    #
+    class SubnetOutpost < Struct.new(
+      :subnet_outpost_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A cost allocation Tag that can be added to an ElastiCache cluster or
     # replication group. Tags are composed of a Key/Value pair. A tag with a
@@ -8103,6 +8884,171 @@ module Aws::ElastiCache
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] user_id
+    #   The ID of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The username of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates the user status. Can be "active", "modifying" or
+    #   "deleting".
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   Must be Redis.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_string
+    #   Access permissions string used for this user account.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_group_ids
+    #   Returns a list of the user group IDs the user belongs to.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] authentication
+    #   Denotes whether the user requires a password to authenticate.
+    #   @return [Types::Authentication]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the user account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/User AWS API Documentation
+    #
+    class User < Struct.new(
+      :user_id,
+      :user_name,
+      :status,
+      :engine,
+      :access_string,
+      :user_group_ids,
+      :authentication,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A user with this ID already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UserAlreadyExistsFault AWS API Documentation
+    #
+    class UserAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # @!attribute [rw] user_group_id
+    #   The ID of the user group.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates user group status. Can be "creating", "active",
+    #   "modifying", "deleting".
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   Must be Redis.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_ids
+    #   The list of user IDs that belong to the user group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] pending_changes
+    #   A list of updates being applied to the user groups.
+    #   @return [Types::UserGroupPendingChanges]
+    #
+    # @!attribute [rw] replication_groups
+    #   A list of replication groups that the user group can access.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the user group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UserGroup AWS API Documentation
+    #
+    class UserGroup < Struct.new(
+      :user_group_id,
+      :status,
+      :engine,
+      :user_ids,
+      :pending_changes,
+      :replication_groups,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The user group with this ID already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UserGroupAlreadyExistsFault AWS API Documentation
+    #
+    class UserGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The user group was not found or does not exist
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UserGroupNotFoundFault AWS API Documentation
+    #
+    class UserGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # Returns the updates being applied to the user group.
+    #
+    # @!attribute [rw] user_ids_to_remove
+    #   The list of user group IDs ro remove.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_ids_to_add
+    #   The list of user IDs to add.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UserGroupPendingChanges AWS API Documentation
+    #
+    class UserGroupPendingChanges < Struct.new(
+      :user_ids_to_remove,
+      :user_ids_to_add)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of users exceeds the user group limit.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UserGroupQuotaExceededFault AWS API Documentation
+    #
+    class UserGroupQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The status of the user group update.
+    #
+    # @!attribute [rw] user_group_ids_to_add
+    #   The list of user group IDs to add.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_group_ids_to_remove
+    #   The list of user group IDs to remove.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UserGroupsUpdateStatus AWS API Documentation
+    #
+    class UserGroupsUpdateStatus < Struct.new(
+      :user_group_ids_to_add,
+      :user_group_ids_to_remove)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The user does not exist or could not be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UserNotFoundFault AWS API Documentation
+    #
+    class UserNotFoundFault < Aws::EmptyStructure; end
+
+    # The quota of users has been exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UserQuotaExceededFault AWS API Documentation
+    #
+    class UserQuotaExceededFault < Aws::EmptyStructure; end
 
   end
 end

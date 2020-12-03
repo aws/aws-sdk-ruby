@@ -196,6 +196,8 @@ module Aws::APIGateway
     MethodSnapshot = Shapes::StructureShape.new(name: 'MethodSnapshot')
     Model = Shapes::StructureShape.new(name: 'Model')
     Models = Shapes::StructureShape.new(name: 'Models')
+    MutualTlsAuthentication = Shapes::StructureShape.new(name: 'MutualTlsAuthentication')
+    MutualTlsAuthenticationInput = Shapes::StructureShape.new(name: 'MutualTlsAuthenticationInput')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
@@ -420,6 +422,7 @@ module Aws::APIGateway
     CreateDomainNameRequest.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
     CreateDomainNameRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     CreateDomainNameRequest.add_member(:security_policy, Shapes::ShapeRef.new(shape: SecurityPolicy, location_name: "securityPolicy"))
+    CreateDomainNameRequest.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthenticationInput, location_name: "mutualTlsAuthentication"))
     CreateDomainNameRequest.struct_class = Types::CreateDomainNameRequest
 
     CreateModelRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -450,6 +453,7 @@ module Aws::APIGateway
     CreateRestApiRequest.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
     CreateRestApiRequest.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "policy"))
     CreateRestApiRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
+    CreateRestApiRequest.add_member(:disable_execute_api_endpoint, Shapes::ShapeRef.new(shape: Boolean, location_name: "disableExecuteApiEndpoint"))
     CreateRestApiRequest.struct_class = Types::CreateRestApiRequest
 
     CreateStageRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -627,6 +631,7 @@ module Aws::APIGateway
     DomainName.add_member(:domain_name_status_message, Shapes::ShapeRef.new(shape: String, location_name: "domainNameStatusMessage"))
     DomainName.add_member(:security_policy, Shapes::ShapeRef.new(shape: SecurityPolicy, location_name: "securityPolicy"))
     DomainName.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
+    DomainName.add_member(:mutual_tls_authentication, Shapes::ShapeRef.new(shape: MutualTlsAuthentication, location_name: "mutualTlsAuthentication"))
     DomainName.struct_class = Types::DomainName
 
     DomainNames.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
@@ -1061,6 +1066,15 @@ module Aws::APIGateway
     Models.add_member(:items, Shapes::ShapeRef.new(shape: ListOfModel, location_name: "item"))
     Models.struct_class = Types::Models
 
+    MutualTlsAuthentication.add_member(:truststore_uri, Shapes::ShapeRef.new(shape: String, location_name: "truststoreUri"))
+    MutualTlsAuthentication.add_member(:truststore_version, Shapes::ShapeRef.new(shape: String, location_name: "truststoreVersion"))
+    MutualTlsAuthentication.add_member(:truststore_warnings, Shapes::ShapeRef.new(shape: ListOfString, location_name: "truststoreWarnings"))
+    MutualTlsAuthentication.struct_class = Types::MutualTlsAuthentication
+
+    MutualTlsAuthenticationInput.add_member(:truststore_uri, Shapes::ShapeRef.new(shape: String, location_name: "truststoreUri"))
+    MutualTlsAuthenticationInput.add_member(:truststore_version, Shapes::ShapeRef.new(shape: String, location_name: "truststoreVersion"))
+    MutualTlsAuthenticationInput.struct_class = Types::MutualTlsAuthenticationInput
+
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
 
@@ -1177,6 +1191,7 @@ module Aws::APIGateway
     RestApi.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
     RestApi.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "policy"))
     RestApi.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
+    RestApi.add_member(:disable_execute_api_endpoint, Shapes::ShapeRef.new(shape: Boolean, location_name: "disableExecuteApiEndpoint"))
     RestApi.struct_class = Types::RestApi
 
     RestApis.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
@@ -2105,6 +2120,7 @@ module Aws::APIGateway
         o.input = Shapes::ShapeRef.new(shape: GetDeploymentsRequest)
         o.output = Shapes::ShapeRef.new(shape: Deployments)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)

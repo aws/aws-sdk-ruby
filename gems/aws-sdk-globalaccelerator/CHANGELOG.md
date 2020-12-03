@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-10-21)
+------------------
+
+* Feature - This release adds support for specifying port overrides on AWS Global Accelerator endpoint groups.
+
+1.24.0 (2020-10-21)
+------------------
+
+* Feature - This release adds support for specifying port overrides on AWS Global Accelerator endpoint groups.
+
+1.23.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.21.0 (2020-08-25)
 ------------------
 

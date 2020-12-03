@@ -186,6 +186,11 @@ module Aws::QuickSight
     #   The time that the analysis was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] sheets
+    #   A list of the associated sheets with the unique identifier and name
+    #   of each sheet.
+    #   @return [Array<Types::Sheet>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Analysis AWS API Documentation
     #
     class Analysis < Struct.new(
@@ -197,7 +202,8 @@ module Aws::QuickSight
       :data_set_arns,
       :theme_arn,
       :created_time,
-      :last_updated_time)
+      :last_updated_time,
+      :sheets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -618,6 +624,27 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Metadata that contains a description for a column.
+    #
+    # @note When making an API call, you may pass ColumnDescription
+    #   data as a hash:
+    #
+    #       {
+    #         text: "ColumnDescriptiveText",
+    #       }
+    #
+    # @!attribute [rw] text
+    #   The text of a description for a column.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ColumnDescription AWS API Documentation
+    #
+    class ColumnDescription < Struct.new(
+      :text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Groupings of columns that work together in certain Amazon QuickSight
     # features. This is a variant type structure. For this structure to be
     # valid, only one of the attributes can be non-null.
@@ -679,6 +706,38 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A rule defined to grant access on one or more restricted columns. Each
+    # dataset can have multiple rules. To create a restricted column, you
+    # add it to one or more rules. Each rule must contain at least one
+    # column and at least one user or group. To be able to see a restricted
+    # column, a user or group needs to be added to a rule for that column.
+    #
+    # @note When making an API call, you may pass ColumnLevelPermissionRule
+    #   data as a hash:
+    #
+    #       {
+    #         principals: ["String"],
+    #         column_names: ["String"],
+    #       }
+    #
+    # @!attribute [rw] principals
+    #   An array of Amazon Resource Names (ARNs) for QuickSight users or
+    #   groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] column_names
+    #   An array of column names.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ColumnLevelPermissionRule AWS API Documentation
+    #
+    class ColumnLevelPermissionRule < Struct.new(
+      :principals,
+      :column_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The column schema.
     #
     # @!attribute [rw] name
@@ -712,16 +771,24 @@ module Aws::QuickSight
     #
     #       {
     #         column_geographic_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #         column_description: {
+    #           text: "ColumnDescriptiveText",
+    #         },
     #       }
     #
     # @!attribute [rw] column_geographic_role
     #   A geospatial role for a column.
     #   @return [String]
     #
+    # @!attribute [rw] column_description
+    #   A description for a column.
+    #   @return [Types::ColumnDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ColumnTag AWS API Documentation
     #
     class ColumnTag < Struct.new(
-      :column_geographic_role)
+      :column_geographic_role,
+      :column_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -793,10 +860,10 @@ module Aws::QuickSight
     #   Region. You can add these to an AWS account and a QuickSight
     #   namespace.
     #
-    #   For example, you could add a default theme by setting
+    #   For example, you can add a default theme by setting
     #   `AccountCustomization` to the midnight theme:
     #   `"AccountCustomization": \{ "DefaultTheme":
-    #   "arn:aws:quicksight::aws:theme/MIDNIGHT" \}. `. Or, you could add a
+    #   "arn:aws:quicksight::aws:theme/MIDNIGHT" \}`. Or, you can add a
     #   custom theme by specifying `"AccountCustomization": \{
     #   "DefaultTheme":
     #   "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"
@@ -1325,6 +1392,9 @@ module Aws::QuickSight
     #                   tags: [ # required
     #                     {
     #                       column_geographic_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #                       column_description: {
+    #                         text: "ColumnDescriptiveText",
+    #                       },
     #                     },
     #                   ],
     #                 },
@@ -1362,6 +1432,12 @@ module Aws::QuickSight
     #           arn: "Arn", # required
     #           permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
     #         },
+    #         column_level_permission_rules: [
+    #           {
+    #             principals: ["String"],
+    #             column_names: ["String"],
+    #           },
+    #         ],
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -1411,6 +1487,10 @@ module Aws::QuickSight
     #   create.
     #   @return [Types::RowLevelPermissionDataSet]
     #
+    # @!attribute [rw] column_level_permission_rules
+    #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
+    #   @return [Array<Types::ColumnLevelPermissionRule>]
+    #
     # @!attribute [rw] tags
     #   Contains a map of the key-value pairs for the resource tag or tags
     #   assigned to the dataset.
@@ -1428,6 +1508,7 @@ module Aws::QuickSight
       :column_groups,
       :permissions,
       :row_level_permission_data_set,
+      :column_level_permission_rules,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1480,7 +1561,7 @@ module Aws::QuickSight
     #         aws_account_id: "AwsAccountId", # required
     #         data_source_id: "ResourceId", # required
     #         name: "ResourceName", # required
-    #         type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER
+    #         type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM
     #         data_source_parameters: {
     #           amazon_elasticsearch_parameters: {
     #             domain: "Domain", # required
@@ -1510,6 +1591,11 @@ module Aws::QuickSight
     #             database: "Database", # required
     #           },
     #           my_sql_parameters: {
+    #             host: "Host", # required
+    #             port: 1, # required
+    #             database: "Database", # required
+    #           },
+    #           oracle_parameters: {
     #             host: "Host", # required
     #             port: 1, # required
     #             database: "Database", # required
@@ -1601,6 +1687,11 @@ module Aws::QuickSight
     #                   database: "Database", # required
     #                 },
     #                 my_sql_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 oracle_parameters: {
     #                   host: "Host", # required
     #                   port: 1, # required
     #                   database: "Database", # required
@@ -1929,7 +2020,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
-    #   The name of the assignment. It must be unique within an AWS account.
+    #   The name of the assignment, also called a rule. It must be unique
+    #   within an AWS account.
     #   @return [String]
     #
     # @!attribute [rw] assignment_status
@@ -2642,6 +2734,11 @@ module Aws::QuickSight
     #               port: 1, # required
     #               database: "Database", # required
     #             },
+    #             oracle_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
+    #               database: "Database", # required
+    #             },
     #             postgre_sql_parameters: {
     #               host: "Host", # required
     #               port: 1, # required
@@ -2712,7 +2809,7 @@ module Aws::QuickSight
     #   data source parameters when you copy a data source by using a create
     #   or update request. The API operation compares the
     #   `DataSourceParameters` structure that's in the request with the
-    #   structures in the `AlternateDataSourceParameters` allowlist. If the
+    #   structures in the `AlternateDataSourceParameters` allow list. If the
     #   structures are an exact match, the request is allowed to use the new
     #   data source with the existing credentials. If the
     #   `AlternateDataSourceParameters` list is null, the
@@ -3057,6 +3154,11 @@ module Aws::QuickSight
     #   The ARN of the theme associated with a version of the dashboard.
     #   @return [String]
     #
+    # @!attribute [rw] sheets
+    #   A list of the associated sheets with the unique identifier and name
+    #   of each sheet.
+    #   @return [Array<Types::Sheet>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DashboardVersion AWS API Documentation
     #
     class DashboardVersion < Struct.new(
@@ -3068,7 +3170,8 @@ module Aws::QuickSight
       :source_entity_arn,
       :data_set_arns,
       :description,
-      :theme_arn)
+      :theme_arn,
+      :sheets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3113,7 +3216,7 @@ module Aws::QuickSight
     end
 
     # The theme colors that are used for data colors in charts. The colors
-    # description is a hexidecimal color code that consists of six
+    # description is a hexadecimal color code that consists of six
     # alphanumerical characters, prefixed with `#`, for example #37BFF5.
     #
     # @note When making an API call, you may pass DataColorPalette
@@ -3204,6 +3307,10 @@ module Aws::QuickSight
     #   The row-level security configuration for the dataset.
     #   @return [Types::RowLevelPermissionDataSet]
     #
+    # @!attribute [rw] column_level_permission_rules
+    #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
+    #   @return [Array<Types::ColumnLevelPermissionRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSet AWS API Documentation
     #
     class DataSet < Struct.new(
@@ -3218,7 +3325,8 @@ module Aws::QuickSight
       :import_mode,
       :consumed_spice_capacity_in_bytes,
       :column_groups,
-      :row_level_permission_data_set)
+      :row_level_permission_data_set,
+      :column_level_permission_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3318,6 +3426,10 @@ module Aws::QuickSight
     #   The row-level security configuration for the dataset.
     #   @return [Types::RowLevelPermissionDataSet]
     #
+    # @!attribute [rw] column_level_permission_rules_applied
+    #   Indicates if the dataset has column level permission configured.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetSummary AWS API Documentation
     #
     class DataSetSummary < Struct.new(
@@ -3327,7 +3439,8 @@ module Aws::QuickSight
       :created_time,
       :last_updated_time,
       :import_mode,
-      :row_level_permission_data_set)
+      :row_level_permission_data_set,
+      :column_level_permission_rules_applied)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3376,10 +3489,10 @@ module Aws::QuickSight
     #   applied in tandem with the data source parameters when you copy a
     #   data source by using a create or update request. The API operation
     #   compares the `DataSourceParameters` structure that's in the request
-    #   with the structures in the `AlternateDataSourceParameters`
-    #   allowlist. If the structures are an exact match, the request is
-    #   allowed to use the credentials from this existing data source. If
-    #   the `AlternateDataSourceParameters` list is null, the `Credentials`
+    #   with the structures in the `AlternateDataSourceParameters` allow
+    #   list. If the structures are an exact match, the request is allowed
+    #   to use the credentials from this existing data source. If the
+    #   `AlternateDataSourceParameters` list is null, the `Credentials`
     #   originally used with this `DataSourceParameters` are automatically
     #   allowed.
     #   @return [Array<Types::DataSourceParameters>]
@@ -3459,6 +3572,11 @@ module Aws::QuickSight
     #                 database: "Database", # required
     #               },
     #               my_sql_parameters: {
+    #                 host: "Host", # required
+    #                 port: 1, # required
+    #                 database: "Database", # required
+    #               },
+    #               oracle_parameters: {
     #                 host: "Host", # required
     #                 port: 1, # required
     #                 database: "Database", # required
@@ -3600,6 +3718,11 @@ module Aws::QuickSight
     #           port: 1, # required
     #           database: "Database", # required
     #         },
+    #         oracle_parameters: {
+    #           host: "Host", # required
+    #           port: 1, # required
+    #           database: "Database", # required
+    #         },
     #         postgre_sql_parameters: {
     #           host: "Host", # required
     #           port: 1, # required
@@ -3686,6 +3809,10 @@ module Aws::QuickSight
     #   MySQL parameters.
     #   @return [Types::MySqlParameters]
     #
+    # @!attribute [rw] oracle_parameters
+    #   Oracle parameters.
+    #   @return [Types::OracleParameters]
+    #
     # @!attribute [rw] postgre_sql_parameters
     #   PostgreSQL parameters.
     #   @return [Types::PostgreSqlParameters]
@@ -3741,6 +3868,7 @@ module Aws::QuickSight
       :jira_parameters,
       :maria_db_parameters,
       :my_sql_parameters,
+      :oracle_parameters,
       :postgre_sql_parameters,
       :presto_parameters,
       :rds_parameters,
@@ -4755,7 +4883,7 @@ module Aws::QuickSight
     #   The QuickSight settings for this AWS account. This information
     #   includes the edition of Amazon QuickSight that you subscribed to
     #   (Standard or Enterprise) and the notification email for the
-    #   QuickSight subscription. The QuickSight console, the QuickSight
+    #   QuickSight subscription. In the QuickSight console, the QuickSight
     #   subscription is sometimes referred to as a QuickSight "account"
     #   even though it's technically not an account by itself. Instead,
     #   it's a subscription to the QuickSight service for your AWS account.
@@ -5296,7 +5424,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
-    #   The name of the assignment.
+    #   The name of the assignment, also called a rule.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -5971,17 +6099,22 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Parameter input for the `GetDashboardEmbedUrl` operation.
+    #
     # @note When making an API call, you may pass GetDashboardEmbedUrlRequest
     #   data as a hash:
     #
     #       {
     #         aws_account_id: "AwsAccountId", # required
     #         dashboard_id: "RestrictiveResourceId", # required
-    #         identity_type: "IAM", # required, accepts IAM, QUICKSIGHT
+    #         identity_type: "IAM", # required, accepts IAM, QUICKSIGHT, ANONYMOUS
     #         session_lifetime_in_minutes: 1,
     #         undo_redo_disabled: false,
     #         reset_disabled: false,
+    #         state_persistence_enabled: false,
     #         user_arn: "Arn",
+    #         namespace: "Namespace",
+    #         additional_dashboard_ids: ["RestrictiveResourceId"],
     #       }
     #
     # @!attribute [rw] aws_account_id
@@ -6012,6 +6145,17 @@ module Aws::QuickSight
     #   FALSE, which enables the reset button.
     #   @return [Boolean]
     #
+    # @!attribute [rw] state_persistence_enabled
+    #   Adds persistence of state for the user session in an embedded
+    #   dashboard. Persistence applies to the sheet and the parameter
+    #   settings. These are control settings that the dashboard subscriber
+    #   (QuickSight reader) chooses while viewing the dashboard. If this is
+    #   set to `TRUE`, the settings are the same when the the subscriber
+    #   reopens the same dashboard URL. The state is stored in QuickSight,
+    #   not in a browser cookie. If this is set to FALSE, the state of the
+    #   user session is not persisted. The default is `FALSE`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] user_arn
     #   The Amazon QuickSight user's Amazon Resource Name (ARN), for use
     #   with `QUICKSIGHT` identity type. You can use this for any Amazon
@@ -6030,6 +6174,22 @@ module Aws::QuickSight
     #   role-based sessions.
     #   @return [String]
     #
+    # @!attribute [rw] namespace
+    #   The QuickSight namespace that contains the dashboard IDs in this
+    #   request. If you're not using a custom namespace, set this to
+    #   "`default`".
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_dashboard_ids
+    #   A list of one or more dashboard ids that you want to add to a
+    #   session that includes anonymous authorizations. `IdentityType` must
+    #   be set to ANONYMOUS for this to work, because other other identity
+    #   types authenticate as QuickSight users. For example, if you set
+    #   "`--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
+    #   identity-type ANONYMOUS`", the session can access all three
+    #   dashboards.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetDashboardEmbedUrlRequest AWS API Documentation
     #
     class GetDashboardEmbedUrlRequest < Struct.new(
@@ -6039,11 +6199,16 @@ module Aws::QuickSight
       :session_lifetime_in_minutes,
       :undo_redo_disabled,
       :reset_disabled,
-      :user_arn)
+      :state_persistence_enabled,
+      :user_arn,
+      :namespace,
+      :additional_dashboard_ids)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # Output returned from the `GetDashboardEmbedUrl` operation.
+    #
     # @!attribute [rw] embed_url
     #   A single-use URL that you can put into your server-side webpage to
     #   embed your dashboard. This URL is valid for 5 minutes. The API
@@ -7917,6 +8082,9 @@ module Aws::QuickSight
     #               tags: [ # required
     #                 {
     #                   column_geographic_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #                   column_description: {
+    #                     text: "ColumnDescriptiveText",
+    #                   },
     #                 },
     #               ],
     #             },
@@ -8162,10 +8330,47 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Oracle parameters.
+    #
+    # @note When making an API call, you may pass OracleParameters
+    #   data as a hash:
+    #
+    #       {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #         database: "Database", # required
+    #       }
+    #
+    # @!attribute [rw] host
+    #   An Oracle host.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   Port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] database
+    #   Database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OracleParameters AWS API Documentation
+    #
+    class OracleParameters < Struct.new(
+      :host,
+      :port,
+      :database)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Output column.
     #
     # @!attribute [rw] name
     #   A display name for the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for a column.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -8176,6 +8381,7 @@ module Aws::QuickSight
     #
     class OutputColumn < Struct.new(
       :name,
+      :description,
       :type)
       SENSITIVE = []
       include Aws::Structure
@@ -8820,8 +9026,12 @@ module Aws::QuickSight
     #   The Amazon Resource Name (ARN) of the principal. This can be one of
     #   the following:
     #
-    #   * The ARN of an Amazon QuickSight user, group, or namespace. (This
-    #     is most common.)
+    #   * The ARN of an Amazon QuickSight user or group associated with a
+    #     data source or dataset. (This is common.)
+    #
+    #   * The ARN of an Amazon QuickSight user, group, or namespace
+    #     associated with an analysis, dashboard, template, or theme. (This
+    #     is common.)
     #
     #   * The ARN of an AWS account root: This is an IAM ARN rather than a
     #     QuickSight ARN. Use this option only to share resources
@@ -8829,8 +9039,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] actions
-    #   The IAM action to grant or revoke permissions on, for example
-    #   `"quicksight:DescribeDashboard"`.
+    #   The IAM action to grant or revoke permissions on.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ResourcePermission AWS API Documentation
@@ -9228,6 +9437,31 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A *sheet*, which is an object that contains a set of visuals that are
+    # viewed together on one page in the Amazon QuickSight console. Every
+    # analysis and dashboard contains at least one sheet. Each sheet
+    # contains at least one visualization widget, for example a chart, pivot
+    # table, or narrative insight. Sheets can be associated with other
+    # components, such as controls, filters, and so on.
+    #
+    # @!attribute [rw] sheet_id
+    #   The unique identifier associated with a sheet.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of a sheet. This name is displayed on the sheet's tab in
+    #   the QuickSight console.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Sheet AWS API Documentation
+    #
+    class Sheet < Struct.new(
+      :sheet_id,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Sheet controls option.
     #
     # @note When making an API call, you may pass SheetControlsOption
@@ -9467,6 +9701,9 @@ module Aws::QuickSight
     #         tags: [ # required
     #           {
     #             column_geographic_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #             column_description: {
+    #               text: "ColumnDescriptiveText",
+    #             },
     #           },
     #         ],
     #       }
@@ -9804,6 +10041,11 @@ module Aws::QuickSight
     #   The ARN of the theme associated with this version of the template.
     #   @return [String]
     #
+    # @!attribute [rw] sheets
+    #   A list of the associated sheets with the unique identifier and name
+    #   of each sheet.
+    #   @return [Array<Types::Sheet>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TemplateVersion AWS API Documentation
     #
     class TemplateVersion < Struct.new(
@@ -9814,7 +10056,8 @@ module Aws::QuickSight
       :data_set_configurations,
       :description,
       :source_entity_arn,
-      :theme_arn)
+      :theme_arn,
+      :sheets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10279,6 +10522,9 @@ module Aws::QuickSight
     #           tags: [ # required
     #             {
     #               column_geographic_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #               column_description: {
+    #                 text: "ColumnDescriptiveText",
+    #               },
     #             },
     #           ],
     #         },
@@ -10351,7 +10597,7 @@ module Aws::QuickSight
     end
 
     # The theme colors that apply to UI and to charts, excluding data
-    # colors. The colors description is a hexidecimal color code that
+    # colors. The colors description is a hexadecimal color code that
     # consists of six alphanumerical characters, prefixed with `#`, for
     # example #37BFF5. For more information, see [Using Themes in Amazon
     # QuickSight][1] in the *Amazon QuickSight User Guide.*
@@ -10479,6 +10725,32 @@ module Aws::QuickSight
       :dimension_foreground,
       :measure,
       :measure_foreground)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This error indicates that you are calling an embedding operation in
+    # Amazon QuickSight without the required pricing plan on your AWS
+    # account. Before you can use anonymous embedding, a QuickSight
+    # administrator needs to add capacity pricing to QuickSight. You can do
+    # this on the **Manage QuickSight** page.
+    #
+    # After capacity pricing is added, you can enable anonymous embedding by
+    # using the ` GetDashboardEmbedUrl ` API operation with the
+    # `--identity-type ANONYMOUS` option.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UnsupportedPricingPlanException AWS API Documentation
+    #
+    class UnsupportedPricingPlanException < Struct.new(
+      :message,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10640,10 +10912,10 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] default_namespace
-    #   The default namespace for this AWS Account. Currently, the default
-    #   is `default`. IAM users who register for the first time with
-    #   QuickSight provide an email that becomes associated with the default
-    #   namespace.
+    #   The default namespace for this AWS account. Currently, the default
+    #   is `default`. AWS Identity and Access Management (IAM) users that
+    #   register for the first time with QuickSight provide an email that
+    #   becomes associated with the default namespace.
     #   @return [String]
     #
     # @!attribute [rw] notification_email
@@ -11362,6 +11634,9 @@ module Aws::QuickSight
     #                   tags: [ # required
     #                     {
     #                       column_geographic_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #                       column_description: {
+    #                         text: "ColumnDescriptiveText",
+    #                       },
     #                     },
     #                   ],
     #                 },
@@ -11393,6 +11668,12 @@ module Aws::QuickSight
     #           arn: "Arn", # required
     #           permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
     #         },
+    #         column_level_permission_rules: [
+    #           {
+    #             principals: ["String"],
+    #             column_names: ["String"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] aws_account_id
@@ -11432,6 +11713,10 @@ module Aws::QuickSight
     #   create.
     #   @return [Types::RowLevelPermissionDataSet]
     #
+    # @!attribute [rw] column_level_permission_rules
+    #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
+    #   @return [Array<Types::ColumnLevelPermissionRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDataSetRequest AWS API Documentation
     #
     class UpdateDataSetRequest < Struct.new(
@@ -11442,7 +11727,8 @@ module Aws::QuickSight
       :logical_table_map,
       :import_mode,
       :column_groups,
-      :row_level_permission_data_set)
+      :row_level_permission_data_set,
+      :column_level_permission_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11605,6 +11891,11 @@ module Aws::QuickSight
     #             port: 1, # required
     #             database: "Database", # required
     #           },
+    #           oracle_parameters: {
+    #             host: "Host", # required
+    #             port: 1, # required
+    #             database: "Database", # required
+    #           },
     #           postgre_sql_parameters: {
     #             host: "Host", # required
     #             port: 1, # required
@@ -11692,6 +11983,11 @@ module Aws::QuickSight
     #                   database: "Database", # required
     #                 },
     #                 my_sql_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
+    #                   database: "Database", # required
+    #                 },
+    #                 oracle_parameters: {
     #                   host: "Host", # required
     #                   port: 1, # required
     #                   database: "Database", # required
@@ -11922,8 +12218,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
-    #   The name of the assignment. This name must be unique within an AWS
-    #   account.
+    #   The name of the assignment, also called a rule. This name must be
+    #   unique within an AWS account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -11967,7 +12263,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] assignment_name
-    #   The name of the assignment.
+    #   The name of the assignment or rule.
     #   @return [String]
     #
     # @!attribute [rw] assignment_id

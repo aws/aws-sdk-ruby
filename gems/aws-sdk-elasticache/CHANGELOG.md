@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2020-11-23)
+------------------
+
+* Feature - Documentation updates for elasticache
+
+1.46.0 (2020-11-18)
+------------------
+
+* Feature - Adding Memcached 1.6 to parameter family
+
+1.45.0 (2020-10-30)
+------------------
+
+* Feature - Documentation updates for AWS ElastiCache
+
+1.44.0 (2020-10-07)
+------------------
+
+* Feature - This release introduces User and UserGroup to allow customers to have access control list of the Redis resources for AWS ElastiCache. This release also adds support for Outposts  for AWS ElastiCache.
+
+1.43.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.41.0 (2020-08-25)
 ------------------
 

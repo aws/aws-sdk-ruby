@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-12-01)
+------------------
+
+* Feature - Adding client authentication feature for AWS AD Connector
+
+1.35.0 (2020-11-19)
+------------------
+
+* Feature - Adding multi-region replication feature for AWS Managed Microsoft AD
+
+1.34.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.32.0 (2020-08-25)
 ------------------
 

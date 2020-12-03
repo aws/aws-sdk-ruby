@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-11-23)
+------------------
+
+* Feature - Updated the account management API to support the integration with AWS Organizations. Added new methods to allow users to view and manage the delegated administrator account for Security Hub.
+
+1.35.0 (2020-09-30)
+------------------
+
+* Feature - Added several new resource details objects. Added additional details for CloudFront distributions, IAM roles, and IAM access keys. Added a new ResourceRole attribute for resources.
+
+1.34.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.33.0 (2020-09-01)
 ------------------
 

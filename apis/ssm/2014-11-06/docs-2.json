@@ -75,7 +75,7 @@
     "GetOpsItem": "<p>Get information about an OpsItem by using the ID. You must have permission in AWS Identity and Access Management (IAM) to view information about an OpsItem. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html\">Getting started with OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">AWS Systems Manager OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>. </p>",
     "GetOpsSummary": "<p>View a summary of OpsItems based on specified filters and aggregators.</p>",
     "GetParameter": "<p>Get information about a parameter by using the parameter name. Don't confuse this API action with the <a>GetParameters</a> API action.</p>",
-    "GetParameterHistory": "<p>Query a list of all parameters used by the AWS account.</p>",
+    "GetParameterHistory": "<p>Retrieves the history of all changes to a parameter.</p>",
     "GetParameters": "<p>Get details of a parameter. Don't confuse this API action with the <a>GetParameter</a> API action.</p>",
     "GetParametersByPath": "<p>Retrieve information about one or more parameters in a specific hierarchy. </p> <note> <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of <code>MaxResults</code>. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a <code>NextToken</code>. You can specify the <code>NextToken</code> in a subsequent call to get the next set of results.</p> </note>",
     "GetPatchBaseline": "<p>Retrieves information about a patch baseline.</p>",
@@ -391,13 +391,13 @@
     "AssociationFilterKey": {
       "base": null,
       "refs": {
-        "AssociationFilter$key": "<p>The name of the filter.</p>"
+        "AssociationFilter$key": "<p>The name of the filter.</p> <note> <p> <code>InstanceId</code> has been deprecated.</p> </note>"
       }
     },
     "AssociationFilterList": {
       "base": null,
       "refs": {
-        "ListAssociationsRequest$AssociationFilterList": "<p>One or more filters. Use a filter to return a more specific list of results.</p>"
+        "ListAssociationsRequest$AssociationFilterList": "<p>One or more filters. Use a filter to return a more specific list of results.</p> <note> <p>Filtering associations using the <code>InstanceID</code> attribute only returns legacy associations created using the <code>InstanceID</code> attribute. Associations targeting the instance that are part of the Target Attributes <code>ResourceGroup</code> or <code>Tags</code> are not returned.</p> </note>"
       }
     },
     "AssociationFilterOperatorType": {
@@ -622,7 +622,7 @@
     "AttachmentsSourceValues": {
       "base": null,
       "refs": {
-        "AttachmentsSource$Values": "<p>The value of a key-value pair that identifies the location of an attachment to a document. The format for <b>Value</b> depends on the type of key you specify.</p> <ul> <li> <p>For the key <i>SourceUrl</i>, the value is an S3 bucket location. For example:</p> <p> <code>\"Values\": [ \"s3://my-bucket/my-folder\" ]</code> </p> </li> <li> <p>For the key <i>S3FileUrl</i>, the value is a file in an S3 bucket. For example:</p> <p> <code>\"Values\": [ \"s3://my-bucket/my-folder/my-file.py\" ]</code> </p> </li> <li> <p>For the key <i>AttachmentReference</i>, the value is constructed from the name of another SSM document in your account, a version number of that document, and a file attached to that document version that you want to reuse. For example:</p> <p> <code>\"Values\": [ \"MyOtherDocument/3/my-other-file.py\" ]</code> </p> <p>However, if the SSM document is shared with you from another account, the full SSM document ARN must be specified instead of the document name only. For example:</p> <p> <code>\"Values\": [ \"arn:aws:ssm:us-east-2:111122223333:document/OtherAccountDocument/3/their-file.py\" ]</code> </p> </li> </ul>"
+        "AttachmentsSource$Values": "<p>The value of a key-value pair that identifies the location of an attachment to a document. The format for <b>Value</b> depends on the type of key you specify.</p> <ul> <li> <p>For the key <i>SourceUrl</i>, the value is an S3 bucket location. For example:</p> <p> <code>\"Values\": [ \"s3://doc-example-bucket/my-folder\" ]</code> </p> </li> <li> <p>For the key <i>S3FileUrl</i>, the value is a file in an S3 bucket. For example:</p> <p> <code>\"Values\": [ \"s3://doc-example-bucket/my-folder/my-file.py\" ]</code> </p> </li> <li> <p>For the key <i>AttachmentReference</i>, the value is constructed from the name of another SSM document in your account, a version number of that document, and a file attached to that document version that you want to reuse. For example:</p> <p> <code>\"Values\": [ \"MyOtherDocument/3/my-other-file.py\" ]</code> </p> <p>However, if the SSM document is shared with you from another account, the full SSM document ARN must be specified instead of the document name only. For example:</p> <p> <code>\"Values\": [ \"arn:aws:ssm:us-east-2:111122223333:document/OtherAccountDocument/3/their-file.py\" ]</code> </p> </li> </ul>"
       }
     },
     "AttributeName": {
@@ -676,7 +676,7 @@
     "AutomationExecutionFilterKey": {
       "base": null,
       "refs": {
-        "AutomationExecutionFilter$Key": "<p>One or more keys to limit the results. Valid filter keys include the following: DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter.</p>"
+        "AutomationExecutionFilter$Key": "<p>One or more keys to limit the results. Valid filter keys include the following: DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, TargetResourceGroup.</p>"
       }
     },
     "AutomationExecutionFilterList": {
@@ -1199,7 +1199,7 @@
     "ComplianceStatus": {
       "base": null,
       "refs": {
-        "ComplianceItem$Status": "<p>The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.</p>",
+        "ComplianceItem$Status": "<p>The status of the compliance item. An item is either COMPLIANT, NON_COMPLIANT, or an empty string (for Windows patches that aren't applicable).</p>",
         "ComplianceItemEntry$Status": "<p>The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.</p>",
         "ResourceComplianceSummaryItem$Status": "<p>The compliance status for the resource.</p>"
       }
@@ -4904,7 +4904,7 @@
       "base": null,
       "refs": {
         "DeleteParameterRequest$Name": "<p>The name of the parameter to delete.</p>",
-        "GetParameterHistoryRequest$Name": "<p>The name of a parameter you want to query.</p>",
+        "GetParameterHistoryRequest$Name": "<p>The name of the parameter for which you want to review history.</p>",
         "GetParameterRequest$Name": "<p>The name of the parameter you want to query.</p>",
         "GetParametersByPathRequest$Path": "<p>The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A parameter name hierarchy can have a maximum of 15 levels. Here is an example of a hierarchy: <code>/Finance/Prod/IAD/WinServ2016/license33</code> </p>",
         "LabelParameterVersionRequest$Name": "<p>The parameter name on which you want to attach one or more labels.</p>",
@@ -5022,7 +5022,7 @@
       }
     },
     "ParameterMaxVersionLimitExceeded": {
-      "base": "<p>The parameter exceeded the maximum number of allowed versions.</p>",
+      "base": "<p>Parameter Store retains the 100 most recently created versions of a parameter. After this number of versions has been created, Parameter Store deletes the oldest version when a new one is created. However, if the oldest version has a <i>label</i> attached to it, Parameter Store will not delete the version and instead presents this error message:</p> <p> <code>An error occurred (ParameterMaxVersionLimitExceeded) when calling the PutParameter operation: You attempted to create a new version of <i>parameter-name</i> by calling the PutParameter API with the overwrite flag. Version <i>version-number</i>, the oldest version, can't be deleted because it has a label associated with it. Move the label to another version of the parameter, and try again.</code> </p> <p>This safeguard is to prevent parameter versions with mission critical labels assigned to them from being deleted. To continue creating new parameters, first move the label from the oldest version of the parameter to a newer one for use in your operations. For information about moving parameter labels, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-console-move\">Move a parameter label (console)</a> or <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-cli-move\">Move a parameter label (CLI) </a> in the <i>AWS Systems Manager User Guide</i>. </p>",
       "refs": {
       }
     },
@@ -5129,7 +5129,7 @@
         "Parameter$Type": "<p>The type of parameter. Valid values include the following: <code>String</code>, <code>StringList</code>, and <code>SecureString</code>.</p>",
         "ParameterHistory$Type": "<p>The type of parameter used.</p>",
         "ParameterMetadata$Type": "<p>The type of parameter. Valid parameter types include the following: <code>String</code>, <code>StringList</code>, and <code>SecureString</code>.</p>",
-        "PutParameterRequest$Type": "<p>The type of parameter that you want to add to the system.</p> <note> <p> <code>SecureString</code> is not currently supported for AWS CloudFormation templates or in the China Regions.</p> </note> <p>Items in a <code>StringList</code> must be separated by a comma (,). You can't use other punctuation or special character to escape items in the list. If you have a parameter value that requires a comma, then use the <code>String</code> data type.</p> <important> <p>Specifying a parameter type is not required when updating a parameter. You must specify a parameter type when creating a parameter.</p> </important>"
+        "PutParameterRequest$Type": "<p>The type of parameter that you want to add to the system.</p> <note> <p> <code>SecureString</code> is not currently supported for AWS CloudFormation templates.</p> </note> <p>Items in a <code>StringList</code> must be separated by a comma (,). You can't use other punctuation or special character to escape items in the list. If you have a parameter value that requires a comma, then use the <code>String</code> data type.</p> <important> <p>Specifying a parameter type is not required when updating a parameter. You must specify a parameter type when creating a parameter.</p> </important>"
       }
     },
     "ParameterValue": {
@@ -5214,6 +5214,24 @@
         "UpdatePatchBaselineResult$RejectedPatchesAction": "<p>The action specified to take on patches included in the RejectedPatches list. A patch can be allowed only if it is a dependency of another package, or blocked entirely along with packages that include it as a dependency.</p>"
       }
     },
+    "PatchAdvisoryId": {
+      "base": null,
+      "refs": {
+        "PatchAdvisoryIdList$member": null
+      }
+    },
+    "PatchAdvisoryIdList": {
+      "base": null,
+      "refs": {
+        "Patch$AdvisoryIds": "<p>The Advisory ID of the patch. For example, <code>RHSA-2020:3779</code>. Applies to Linux-based instances only.</p>"
+      }
+    },
+    "PatchArch": {
+      "base": null,
+      "refs": {
+        "Patch$Arch": "<p>The architecture of the patch. For example, in <code>example-pkg-0.710.10-2.7.abcd.x86_64</code>, the architecture is indicated by <code>x86_64</code>. Applies to Linux-based instances only.</p>"
+      }
+    },
     "PatchBaselineIdentity": {
       "base": "<p>Defines the basic information about a patch baseline.</p>",
       "refs": {
@@ -5236,10 +5254,40 @@
         "DescribePatchGroupsRequest$MaxResults": "<p>The maximum number of patch groups to return (per page).</p>"
       }
     },
+    "PatchBugzillaId": {
+      "base": null,
+      "refs": {
+        "PatchBugzillaIdList$member": null
+      }
+    },
+    "PatchBugzillaIdList": {
+      "base": null,
+      "refs": {
+        "Patch$BugzillaIds": "<p>The Bugzilla ID of the patch. For example, <code>1600646</code>. Applies to Linux-based instances only.</p>"
+      }
+    },
+    "PatchCVEId": {
+      "base": null,
+      "refs": {
+        "PatchCVEIdList$member": null
+      }
+    },
+    "PatchCVEIdList": {
+      "base": null,
+      "refs": {
+        "Patch$CVEIds": "<p>The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example, <code>CVE-1999-0067</code>. Applies to Linux-based instances only.</p>"
+      }
+    },
+    "PatchCVEIds": {
+      "base": null,
+      "refs": {
+        "PatchComplianceData$CVEIds": "<p>The IDs of one or more Common Vulnerabilities and Exposure (CVE) issues that are resolved by the patch.</p>"
+      }
+    },
     "PatchClassification": {
       "base": null,
       "refs": {
-        "Patch$Classification": "<p>The classification of the patch (for example, SecurityUpdates, Updates, CriticalUpdates).</p>",
+        "Patch$Classification": "<p>The classification of the patch. For example, <code>SecurityUpdates</code>, <code>Updates</code>, or <code>CriticalUpdates</code>.</p>",
         "PatchComplianceData$Classification": "<p>The classification of the patch (for example, SecurityUpdates, Updates, CriticalUpdates).</p>"
       }
     },
@@ -5296,6 +5344,12 @@
       "base": null,
       "refs": {
         "Patch$Description": "<p>The description of the patch.</p>"
+      }
+    },
+    "PatchEpoch": {
+      "base": null,
+      "refs": {
+        "Patch$Epoch": "<p>The epoch of the patch. For example in <code>pkg-example-EE-20180914-2.2.amzn1.noarch</code>, the epoch value is <code>20180914-2</code>. Applies to Linux-based instances only.</p>"
       }
     },
     "PatchFailedCount": {
@@ -5381,7 +5435,7 @@
     "PatchId": {
       "base": null,
       "refs": {
-        "Patch$Id": "<p>The ID of the patch (this is different than the Microsoft Knowledge Base ID).</p>",
+        "Patch$Id": "<p>The ID of the patch. Applies to Windows patches only.</p> <note> <p>This ID is not the same as the Microsoft Knowledge Base ID.</p> </note>",
         "PatchIdList$member": null
       }
     },
@@ -5425,7 +5479,7 @@
     "PatchKbNumber": {
       "base": null,
       "refs": {
-        "Patch$KbNumber": "<p>The Microsoft Knowledge Base ID of the patch.</p>",
+        "Patch$KbNumber": "<p>The Microsoft Knowledge Base ID of the patch. Applies to Windows patches only.</p>",
         "PatchComplianceData$KBId": "<p>The operating system-specific ID of the patch.</p>"
       }
     },
@@ -5450,13 +5504,19 @@
     "PatchMsrcNumber": {
       "base": null,
       "refs": {
-        "Patch$MsrcNumber": "<p>The ID of the MSRC bulletin the patch is related to.</p>"
+        "Patch$MsrcNumber": "<p>The ID of the Microsoft Security Response Center (MSRC) bulletin the patch is related to. For example, <code>MS14-045</code>. Applies to Windows patches only.</p>"
       }
     },
     "PatchMsrcSeverity": {
       "base": null,
       "refs": {
-        "Patch$MsrcSeverity": "<p>The severity of the patch (for example Critical, Important, Moderate).</p>"
+        "Patch$MsrcSeverity": "<p>The severity of the patch, such as <code>Critical</code>, <code>Important</code>, or <code>Moderate</code>. Applies to Windows patches only.</p>"
+      }
+    },
+    "PatchName": {
+      "base": null,
+      "refs": {
+        "Patch$Name": "<p>The name of the patch. Applies to Linux-based instances only.</p>"
       }
     },
     "PatchNotApplicableCount": {
@@ -5508,13 +5568,13 @@
     "PatchProduct": {
       "base": null,
       "refs": {
-        "Patch$Product": "<p>The specific product the patch is applicable for (for example, WindowsServer2016).</p>"
+        "Patch$Product": "<p>The specific product the patch is applicable for. For example, <code>WindowsServer2016</code> or <code>AmazonLinux2018.03</code>.</p>"
       }
     },
     "PatchProductFamily": {
       "base": null,
       "refs": {
-        "Patch$ProductFamily": "<p>The product family the patch is applicable for (for example, Windows).</p>"
+        "Patch$ProductFamily": "<p>The product family the patch is applicable for. For example, <code>Windows</code> or <code>Amazon Linux 2</code>.</p>"
       }
     },
     "PatchPropertiesList": {
@@ -5533,6 +5593,18 @@
       "base": null,
       "refs": {
         "PatchPropertiesList$member": null
+      }
+    },
+    "PatchRelease": {
+      "base": null,
+      "refs": {
+        "Patch$Release": "<p>The particular release of a patch. For example, in <code>pkg-example-EE-20180914-2.2.amzn1.noarch</code>, the release is <code>2.amaz1</code>. Applies to Linux-based instances only.</p>"
+      }
+    },
+    "PatchRepository": {
+      "base": null,
+      "refs": {
+        "Patch$Repository": "<p>The source patch repository for the operating system and version, such as <code>trusty-security</code> for Ubuntu Server 14.04 LTE and <code>focal-security</code> for Ubuntu Server 20.04 LTE. Applies to Linux-based instances only.</p>"
       }
     },
     "PatchRule": {
@@ -5565,6 +5637,7 @@
     "PatchSeverity": {
       "base": null,
       "refs": {
+        "Patch$Severity": "<p>The severity level of the patch. For example, <code>CRITICAL</code> or <code>MODERATE</code>.</p>",
         "PatchComplianceData$Severity": "<p>The severity of the patch (for example, Critical, Important, Moderate).</p>"
       }
     },
@@ -5638,10 +5711,16 @@
         "Patch$Vendor": "<p>The name of the vendor providing the patch.</p>"
       }
     },
+    "PatchVersion": {
+      "base": null,
+      "refs": {
+        "Patch$Version": "<p>The version number of the patch. For example, in <code>example-pkg-1.710.10-2.7.abcd.x86_64</code>, the version number is indicated by <code>-1</code>. Applies to Linux-based instances only.</p>"
+      }
+    },
     "PingStatus": {
       "base": null,
       "refs": {
-        "InstanceInformation$PingStatus": "<p>Connection status of SSM Agent. </p>"
+        "InstanceInformation$PingStatus": "<p>Connection status of SSM Agent. </p> <note> <p>The status <code>Inactive</code> has been deprecated and is no longer in use.</p> </note>"
       }
     },
     "PlatformType": {
@@ -6046,7 +6125,7 @@
       "refs": {
         "CreateResourceDataSyncRequest$SyncType": "<p>Specify <code>SyncToDestination</code> to create a resource data sync that synchronizes data to an S3 bucket for Inventory. If you specify <code>SyncToDestination</code>, you must provide a value for <code>S3Destination</code>. Specify <code>SyncFromSource</code> to synchronize data from a single account and multiple Regions, or multiple AWS accounts and Regions, as listed in AWS Organizations for Explorer. If you specify <code>SyncFromSource</code>, you must provide a value for <code>SyncSource</code>. The default value is <code>SyncToDestination</code>.</p>",
         "DeleteResourceDataSyncRequest$SyncType": "<p>Specify the type of resource data sync to delete.</p>",
-        "ListResourceDataSyncRequest$SyncType": "<p>View a list of resource data syncs according to the sync type. Specify <code>SyncToDestination</code> to view resource data syncs that synchronize data to an Amazon S3 buckets. Specify <code>SyncFromSource</code> to view resource data syncs from AWS Organizations or from multiple AWS Regions. </p>",
+        "ListResourceDataSyncRequest$SyncType": "<p>View a list of resource data syncs according to the sync type. Specify <code>SyncToDestination</code> to view resource data syncs that synchronize data to an Amazon S3 bucket. Specify <code>SyncFromSource</code> to view resource data syncs from AWS Organizations or from multiple AWS Regions.</p>",
         "ResourceDataSyncItem$SyncType": "<p>The type of resource data sync. If <code>SyncType</code> is <code>SyncToDestination</code>, then the resource data sync synchronizes data to an S3 bucket. If the <code>SyncType</code> is <code>SyncFromSource</code> then the resource data sync synchronizes data from AWS Organizations or from multiple AWS Regions.</p>",
         "ResourceDataSyncNotFoundException$SyncType": null,
         "UpdateResourceDataSyncRequest$SyncType": "<p>The type of resource data sync. The supported <code>SyncType</code> is SyncFromSource.</p>"
@@ -6117,7 +6196,7 @@
       "base": null,
       "refs": {
         "Command$OutputS3BucketName": "<p>The S3 bucket where the responses to the command executions should be stored. This was requested when issuing the command.</p>",
-        "CommandPlugin$OutputS3BucketName": "<p>The S3 bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:</p> <p> test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript </p> <p>test_folder is the name of the S3 bucket;</p> <p>ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;</p> <p>i-1234567876543 is the instance ID;</p> <p>awsrunShellScript is the name of the plugin.</p>",
+        "CommandPlugin$OutputS3BucketName": "<p>The S3 bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:</p> <p>doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript </p> <p>doc-example-bucket is the name of the S3 bucket;</p> <p>ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;</p> <p>i-02573cafcfEXAMPLE is the instance ID;</p> <p>awsrunShellScript is the name of the plugin.</p>",
         "LoggingInfo$S3BucketName": "<p>The name of an S3 bucket where execution logs are stored .</p>",
         "MaintenanceWindowRunCommandParameters$OutputS3BucketName": "<p>The name of the S3 bucket.</p>",
         "S3OutputLocation$OutputS3BucketName": "<p>The name of the S3 bucket.</p>",
@@ -6128,7 +6207,7 @@
       "base": null,
       "refs": {
         "Command$OutputS3KeyPrefix": "<p>The S3 directory path inside the bucket where the responses to the command executions should be stored. This was requested when issuing the command.</p>",
-        "CommandPlugin$OutputS3KeyPrefix": "<p>The S3 directory path inside the bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:</p> <p> test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript </p> <p>test_folder is the name of the S3 bucket;</p> <p>ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;</p> <p>i-1234567876543 is the instance ID;</p> <p>awsrunShellScript is the name of the plugin.</p>",
+        "CommandPlugin$OutputS3KeyPrefix": "<p>The S3 directory path inside the bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:</p> <p>doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript </p> <p>doc-example-bucket is the name of the S3 bucket;</p> <p>ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;</p> <p>i-02573cafcfEXAMPLE is the instance ID;</p> <p>awsrunShellScript is the name of the plugin.</p>",
         "LoggingInfo$S3KeyPrefix": "<p>(Optional) The S3 bucket subfolder. </p>",
         "MaintenanceWindowRunCommandParameters$OutputS3KeyPrefix": "<p>The S3 bucket subfolder.</p>",
         "S3OutputLocation$OutputS3KeyPrefix": "<p>The S3 bucket subfolder.</p>",
@@ -6276,7 +6355,7 @@
     "SessionFilterValue": {
       "base": null,
       "refs": {
-        "SessionFilter$value": "<p>The filter value. Valid values for each filter key are as follows:</p> <ul> <li> <p>InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started August 29, 2018, and later.</p> </li> <li> <p>InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started before August 29, 2018.</p> </li> <li> <p>Target: Specify an instance to which session connections have been made.</p> </li> <li> <p>Owner: Specify an AWS user account to see a list of sessions started by that user.</p> </li> <li> <p>Status: Specify a valid session status to see a list of all sessions with that status. Status values you can specify include:</p> <ul> <li> <p>Connected</p> </li> <li> <p>Connecting</p> </li> <li> <p>Disconnected</p> </li> <li> <p>Terminated</p> </li> <li> <p>Terminating</p> </li> <li> <p>Failed</p> </li> </ul> </li> </ul>"
+        "SessionFilter$value": "<p>The filter value. Valid values for each filter key are as follows:</p> <ul> <li> <p>InvokedAfter: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started August 29, 2018, and later.</p> </li> <li> <p>InvokedBefore: Specify a timestamp to limit your results. For example, specify 2018-08-29T00:00:00Z to see sessions that started before August 29, 2018.</p> </li> <li> <p>Target: Specify an instance to which session connections have been made.</p> </li> <li> <p>Owner: Specify an AWS user account to see a list of sessions started by that user.</p> </li> <li> <p>Status: Specify a valid session status to see a list of all sessions with that status. Status values you can specify include:</p> <ul> <li> <p>Connected</p> </li> <li> <p>Connecting</p> </li> <li> <p>Disconnected</p> </li> <li> <p>Terminated</p> </li> <li> <p>Terminating</p> </li> <li> <p>Failed</p> </li> </ul> </li> <li> <p>SessionId: Specify a session ID to return details about the session.</p> </li> </ul>"
       }
     },
     "SessionId": {
@@ -6834,7 +6913,7 @@
       }
     },
     "TargetNotConnected": {
-      "base": "<p>The specified target instance for the session is not fully configured for use with Session Manager. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started.html\">Getting started with Session Manager</a> in the <i>AWS Systems Manager User Guide</i>.</p>",
+      "base": "<p>The specified target instance for the session is not fully configured for use with Session Manager. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started.html\">Getting started with Session Manager</a> in the <i>AWS Systems Manager User Guide</i>. This error is also returned if you attempt to start a session on an instance that is located in a different account or Region</p>",
       "refs": {
       }
     },

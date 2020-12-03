@@ -486,12 +486,10 @@ module Aws::Kendra
 
     # Creates a data source that you use to with an Amazon Kendra index.
     #
-    # You specify a name, connector type and description for your data
-    # source. You can choose between an S3 connector, a SharePoint Online
-    # connector, and a database connector.
-    #
-    # You also specify configuration information such as document metadata
-    # (author, source URI, and so on) and user context information.
+    # You specify a name, data source connector type and description for
+    # your data source. You also specify configuration information such as
+    # document metadata (author, source URI, and so on) and user context
+    # information.
     #
     # `CreateDataSource` is a synchronous operation. The operation returns
     # 200 if the data source was successfully created. Otherwise, an
@@ -508,9 +506,15 @@ module Aws::Kendra
     # @option params [required, String] :type
     #   The type of repository that contains the data source.
     #
-    # @option params [required, Types::DataSourceConfiguration] :configuration
+    # @option params [Types::DataSourceConfiguration] :configuration
     #   The connector configuration information that is required to access the
     #   repository.
+    #
+    #   You can't specify the `Configuration` parameter when the `Type`
+    #   parameter is set to `CUSTOM`. If you do, you receive a
+    #   `ValidationException` exception.
+    #
+    #   The `Configuration` parameter is required for all other data sources.
     #
     # @option params [String] :description
     #   A description for the data source.
@@ -521,10 +525,20 @@ module Aws::Kendra
     #   Kendra will not periodically update the index. You can call the
     #   `StartDataSourceSyncJob` operation to update the index.
     #
-    # @option params [required, String] :role_arn
+    #   You can't specify the `Schedule` parameter when the `Type` parameter
+    #   is set to `CUSTOM`. If you do, you receive a `ValidationException`
+    #   exception.
+    #
+    # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access the
     #   data source. For more information, see [IAM Roles for Amazon
     #   Kendra][1].
+    #
+    #   You can't specify the `RoleArn` parameter when the `Type` parameter
+    #   is set to `CUSTOM`. If you do, you receive a `ValidationException`
+    #   exception.
+    #
+    #   The `RoleArn` parameter is required for all other data sources.
     #
     #
     #
@@ -535,6 +549,14 @@ module Aws::Kendra
     #   the tags to identify and organize your resources and to control access
     #   to resources.
     #
+    # @option params [String] :client_token
+    #   A token that you provide to identify the request to create a data
+    #   source. Multiple calls to the `CreateDataSource` operation with the
+    #   same client token will create only one data source.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::CreateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDataSourceResponse#id #id} => String
@@ -544,11 +566,12 @@ module Aws::Kendra
     #   resp = client.create_data_source({
     #     name: "DataSourceName", # required
     #     index_id: "IndexId", # required
-    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW
-    #     configuration: { # required
+    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE
+    #     configuration: {
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
     #         inclusion_prefixes: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         documents_metadata_configuration: {
     #           s3_prefix: "S3ObjectKey",
@@ -577,6 +600,7 @@ module Aws::Kendra
     #           },
     #         ],
     #         document_title_field_name: "DataSourceFieldName",
+    #         disable_local_groups: false,
     #       },
     #       database_configuration: {
     #         database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -701,6 +725,7 @@ module Aws::Kendra
     #             index_field_name: "IndexFieldName", # required
     #           },
     #         ],
+    #         disable_local_groups: false,
     #       },
     #       service_now_configuration: {
     #         host_url: "ServiceNowHostUrl", # required
@@ -735,16 +760,69 @@ module Aws::Kendra
     #           ],
     #         },
     #       },
+    #       confluence_configuration: {
+    #         server_url: "Url", # required
+    #         secret_arn: "SecretArn", # required
+    #         version: "CLOUD", # required, accepts CLOUD, SERVER
+    #         space_configuration: {
+    #           crawl_personal_spaces: false,
+    #           crawl_archived_spaces: false,
+    #           include_spaces: ["ConfluenceSpaceIdentifier"],
+    #           exclude_spaces: ["ConfluenceSpaceIdentifier"],
+    #           space_field_mappings: [
+    #             {
+    #               data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         page_configuration: {
+    #           page_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         blog_configuration: {
+    #           blog_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         attachment_configuration: {
+    #           crawl_attachments: false,
+    #           attachment_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
-    #     role_arn: "RoleArn", # required
+    #     role_arn: "RoleArn",
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     client_token: "ClientTokenName",
     #   })
     #
     # @example Response structure
@@ -789,6 +867,28 @@ module Aws::Kendra
     #   to identify and organize your resources and to control access to
     #   resources.
     #
+    # @option params [String] :file_format
+    #   The format of the input file. You can choose between a basic CSV
+    #   format, a CSV format that includes customs attributes in a header, and
+    #   a JSON format that includes custom attributes.
+    #
+    #   The format must match the format of the file stored in the S3 bucket
+    #   identified in the `S3Path` parameter.
+    #
+    #   For more information, see [Adding questions and answers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html
+    #
+    # @option params [String] :client_token
+    #   A token that you provide to identify the request to create a FAQ.
+    #   Multiple calls to the `CreateFaqRequest` operation with the same
+    #   client token will create only one FAQ.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::CreateFaqResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFaqResponse#id #id} => String
@@ -810,6 +910,8 @@ module Aws::Kendra
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     file_format: "CSV", # accepts CSV, CSV_WITH_HEADER, JSON
+    #     client_token: "ClientTokenName",
     #   })
     #
     # @example Response structure
@@ -843,11 +945,14 @@ module Aws::Kendra
     #   databases. Once you set the edition for an index, it can't be
     #   changed.
     #
+    #   The `Edition` parameter is optional. If you don't supply a value, the
+    #   default is `ENTERPRISE_EDITION`.
+    #
     # @option params [required, String] :role_arn
-    #   An IAM role that gives Amazon Kendra permissions to access your Amazon
-    #   CloudWatch logs and metrics. This is also the role used when you use
-    #   the `BatchPutDocument` operation to index documents from an Amazon S3
-    #   bucket.
+    #   An AWS Identity and Access Management (IAM) role that gives Amazon
+    #   Kendra permissions to access your Amazon CloudWatch logs and metrics.
+    #   This is also the role used when you use the `BatchPutDocument`
+    #   operation to index documents from an Amazon S3 bucket.
     #
     # @option params [Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
     #   The identifier of the AWS KMS customer managed key (CMK) to use to
@@ -860,7 +965,7 @@ module Aws::Kendra
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create an index.
     #   Multiple calls to the `CreateIndex` operation with the same client
-    #   token will create only one index.”
+    #   token will create only one index.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -869,6 +974,24 @@ module Aws::Kendra
     #   A list of key-value pairs that identify the index. You can use the
     #   tags to identify and organize your resources and to control access to
     #   resources.
+    #
+    # @option params [Array<Types::UserTokenConfiguration>] :user_token_configurations
+    #   The user token configuration.
+    #
+    # @option params [String] :user_context_policy
+    #   The user context policy.
+    #
+    #   ATTRIBUTE\_FILTER
+    #
+    #   : All indexed content is searchable and displayable for all users. If
+    #     there is an access control list, it is ignored. You can filter on
+    #     user and group attributes.
+    #
+    #   USER\_TOKEN
+    #
+    #   : Enables SSO and token-based user access control. All documents with
+    #     no access control and all documents accessible to the user will be
+    #     searchable and displayable.
     #
     # @return [Types::CreateIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -891,6 +1014,24 @@ module Aws::Kendra
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     user_token_configurations: [
+    #       {
+    #         jwt_token_type_configuration: {
+    #           key_location: "URL", # required, accepts URL, SECRET_MANAGER
+    #           url: "Url",
+    #           secret_manager_arn: "RoleArn",
+    #           user_name_attribute_field: "UserNameAttributeField",
+    #           group_attribute_field: "GroupAttributeField",
+    #           issuer: "Issuer",
+    #           claim_regex: "ClaimRegex",
+    #         },
+    #         json_token_type_configuration: {
+    #           user_name_attribute_field: "String", # required
+    #           group_attribute_field: "String", # required
+    #         },
+    #       },
+    #     ],
+    #     user_context_policy: "ATTRIBUTE_FILTER", # accepts ATTRIBUTE_FILTER, USER_TOKEN
     #   })
     #
     # @example Response structure
@@ -1026,10 +1167,12 @@ module Aws::Kendra
     #   resp.id #=> String
     #   resp.index_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW"
+    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE"
     #   resp.configuration.s3_configuration.bucket_name #=> String
     #   resp.configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.configuration.s3_configuration.inclusion_prefixes[0] #=> String
+    #   resp.configuration.s3_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.s3_configuration.inclusion_patterns[0] #=> String
     #   resp.configuration.s3_configuration.exclusion_patterns #=> Array
     #   resp.configuration.s3_configuration.exclusion_patterns[0] #=> String
     #   resp.configuration.s3_configuration.documents_metadata_configuration.s3_prefix #=> String
@@ -1053,6 +1196,7 @@ module Aws::Kendra
     #   resp.configuration.share_point_configuration.field_mappings[0].date_field_format #=> String
     #   resp.configuration.share_point_configuration.field_mappings[0].index_field_name #=> String
     #   resp.configuration.share_point_configuration.document_title_field_name #=> String
+    #   resp.configuration.share_point_configuration.disable_local_groups #=> Boolean
     #   resp.configuration.database_configuration.database_engine_type #=> String, one of "RDS_AURORA_MYSQL", "RDS_AURORA_POSTGRESQL", "RDS_MYSQL", "RDS_POSTGRESQL"
     #   resp.configuration.database_configuration.connection_configuration.database_host #=> String
     #   resp.configuration.database_configuration.connection_configuration.database_port #=> Integer
@@ -1132,6 +1276,7 @@ module Aws::Kendra
     #   resp.configuration.one_drive_configuration.field_mappings[0].data_source_field_name #=> String
     #   resp.configuration.one_drive_configuration.field_mappings[0].date_field_format #=> String
     #   resp.configuration.one_drive_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.one_drive_configuration.disable_local_groups #=> Boolean
     #   resp.configuration.service_now_configuration.host_url #=> String
     #   resp.configuration.service_now_configuration.secret_arn #=> String
     #   resp.configuration.service_now_configuration.service_now_build_version #=> String, one of "LONDON", "OTHERS"
@@ -1157,6 +1302,40 @@ module Aws::Kendra
     #   resp.configuration.service_now_configuration.service_catalog_configuration.field_mappings[0].data_source_field_name #=> String
     #   resp.configuration.service_now_configuration.service_catalog_configuration.field_mappings[0].date_field_format #=> String
     #   resp.configuration.service_now_configuration.service_catalog_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.confluence_configuration.server_url #=> String
+    #   resp.configuration.confluence_configuration.secret_arn #=> String
+    #   resp.configuration.confluence_configuration.version #=> String, one of "CLOUD", "SERVER"
+    #   resp.configuration.confluence_configuration.space_configuration.crawl_personal_spaces #=> Boolean
+    #   resp.configuration.confluence_configuration.space_configuration.crawl_archived_spaces #=> Boolean
+    #   resp.configuration.confluence_configuration.space_configuration.include_spaces #=> Array
+    #   resp.configuration.confluence_configuration.space_configuration.include_spaces[0] #=> String
+    #   resp.configuration.confluence_configuration.space_configuration.exclude_spaces #=> Array
+    #   resp.configuration.confluence_configuration.space_configuration.exclude_spaces[0] #=> String
+    #   resp.configuration.confluence_configuration.space_configuration.space_field_mappings #=> Array
+    #   resp.configuration.confluence_configuration.space_configuration.space_field_mappings[0].data_source_field_name #=> String, one of "DISPLAY_URL", "ITEM_TYPE", "SPACE_KEY", "URL"
+    #   resp.configuration.confluence_configuration.space_configuration.space_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.confluence_configuration.space_configuration.space_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.confluence_configuration.page_configuration.page_field_mappings #=> Array
+    #   resp.configuration.confluence_configuration.page_configuration.page_field_mappings[0].data_source_field_name #=> String, one of "AUTHOR", "CONTENT_STATUS", "CREATED_DATE", "DISPLAY_URL", "ITEM_TYPE", "LABELS", "MODIFIED_DATE", "PARENT_ID", "SPACE_KEY", "SPACE_NAME", "URL", "VERSION"
+    #   resp.configuration.confluence_configuration.page_configuration.page_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.confluence_configuration.page_configuration.page_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.confluence_configuration.blog_configuration.blog_field_mappings #=> Array
+    #   resp.configuration.confluence_configuration.blog_configuration.blog_field_mappings[0].data_source_field_name #=> String, one of "AUTHOR", "DISPLAY_URL", "ITEM_TYPE", "LABELS", "PUBLISH_DATE", "SPACE_KEY", "SPACE_NAME", "URL", "VERSION"
+    #   resp.configuration.confluence_configuration.blog_configuration.blog_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.confluence_configuration.blog_configuration.blog_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.confluence_configuration.attachment_configuration.crawl_attachments #=> Boolean
+    #   resp.configuration.confluence_configuration.attachment_configuration.attachment_field_mappings #=> Array
+    #   resp.configuration.confluence_configuration.attachment_configuration.attachment_field_mappings[0].data_source_field_name #=> String, one of "AUTHOR", "CONTENT_TYPE", "CREATED_DATE", "DISPLAY_URL", "FILE_SIZE", "ITEM_TYPE", "PARENT_ID", "SPACE_KEY", "SPACE_NAME", "URL", "VERSION"
+    #   resp.configuration.confluence_configuration.attachment_configuration.attachment_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.confluence_configuration.attachment_configuration.attachment_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.confluence_configuration.vpc_configuration.subnet_ids #=> Array
+    #   resp.configuration.confluence_configuration.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.configuration.confluence_configuration.vpc_configuration.security_group_ids #=> Array
+    #   resp.configuration.confluence_configuration.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.configuration.confluence_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.confluence_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.confluence_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.confluence_configuration.exclusion_patterns[0] #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.description #=> String
@@ -1194,6 +1373,7 @@ module Aws::Kendra
     #   * {Types::DescribeFaqResponse#status #status} => String
     #   * {Types::DescribeFaqResponse#role_arn #role_arn} => String
     #   * {Types::DescribeFaqResponse#error_message #error_message} => String
+    #   * {Types::DescribeFaqResponse#file_format #file_format} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1215,6 +1395,7 @@ module Aws::Kendra
     #   resp.status #=> String, one of "CREATING", "UPDATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.role_arn #=> String
     #   resp.error_message #=> String
+    #   resp.file_format #=> String, one of "CSV", "CSV_WITH_HEADER", "JSON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeFaq AWS API Documentation
     #
@@ -1245,6 +1426,8 @@ module Aws::Kendra
     #   * {Types::DescribeIndexResponse#index_statistics #index_statistics} => Types::IndexStatistics
     #   * {Types::DescribeIndexResponse#error_message #error_message} => String
     #   * {Types::DescribeIndexResponse#capacity_units #capacity_units} => Types::CapacityUnitsConfiguration
+    #   * {Types::DescribeIndexResponse#user_token_configurations #user_token_configurations} => Array&lt;Types::UserTokenConfiguration&gt;
+    #   * {Types::DescribeIndexResponse#user_context_policy #user_context_policy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1282,6 +1465,17 @@ module Aws::Kendra
     #   resp.error_message #=> String
     #   resp.capacity_units.storage_capacity_units #=> Integer
     #   resp.capacity_units.query_capacity_units #=> Integer
+    #   resp.user_token_configurations #=> Array
+    #   resp.user_token_configurations[0].jwt_token_type_configuration.key_location #=> String, one of "URL", "SECRET_MANAGER"
+    #   resp.user_token_configurations[0].jwt_token_type_configuration.url #=> String
+    #   resp.user_token_configurations[0].jwt_token_type_configuration.secret_manager_arn #=> String
+    #   resp.user_token_configurations[0].jwt_token_type_configuration.user_name_attribute_field #=> String
+    #   resp.user_token_configurations[0].jwt_token_type_configuration.group_attribute_field #=> String
+    #   resp.user_token_configurations[0].jwt_token_type_configuration.issuer #=> String
+    #   resp.user_token_configurations[0].jwt_token_type_configuration.claim_regex #=> String
+    #   resp.user_token_configurations[0].json_token_type_configuration.user_name_attribute_field #=> String
+    #   resp.user_token_configurations[0].json_token_type_configuration.group_attribute_field #=> String
+    #   resp.user_context_policy #=> String, one of "ATTRIBUTE_FILTER", "USER_TOKEN"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeIndex AWS API Documentation
     #
@@ -1398,7 +1592,7 @@ module Aws::Kendra
     #   resp.summary_items #=> Array
     #   resp.summary_items[0].name #=> String
     #   resp.summary_items[0].id #=> String
-    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW"
+    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE"
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
@@ -1449,6 +1643,7 @@ module Aws::Kendra
     #   resp.faq_summary_items[0].status #=> String, one of "CREATING", "UPDATING", "ACTIVE", "DELETING", "FAILED"
     #   resp.faq_summary_items[0].created_at #=> Time
     #   resp.faq_summary_items[0].updated_at #=> Time
+    #   resp.faq_summary_items[0].file_format #=> String, one of "CSV", "CSV_WITH_HEADER", "JSON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListFaqs AWS API Documentation
     #
@@ -1556,6 +1751,8 @@ module Aws::Kendra
     # You can specify that the query return only one type of result using
     # the `QueryResultTypeConfig` parameter.
     #
+    # Each query returns the 100 most relevant results.
+    #
     # @option params [required, String] :index_id
     #   The unique identifier of the index to search. The identifier is
     #   returned in the response from the operation.
@@ -1606,6 +1803,9 @@ module Aws::Kendra
     #
     #   If you don't provide sorting configuration, the results are sorted by
     #   the relevance that Amazon Kendra determines for the result.
+    #
+    # @option params [Types::UserContext] :user_context
+    #   The user context token.
     #
     # @return [Types::QueryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1710,6 +1910,9 @@ module Aws::Kendra
     #       document_attribute_key: "DocumentAttributeKey", # required
     #       sort_order: "DESC", # required, accepts DESC, ASC
     #     },
+    #     user_context: {
+    #       token: "Token",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1745,9 +1948,10 @@ module Aws::Kendra
     #   resp.result_items[0].document_attributes[0].value.string_list_value[0] #=> String
     #   resp.result_items[0].document_attributes[0].value.long_value #=> Integer
     #   resp.result_items[0].document_attributes[0].value.date_value #=> Time
-    #   resp.result_items[0].score_attributes.score_confidence #=> String, one of "VERY_HIGH", "HIGH", "MEDIUM"
+    #   resp.result_items[0].score_attributes.score_confidence #=> String, one of "VERY_HIGH", "HIGH", "MEDIUM", "LOW"
     #   resp.facet_results #=> Array
     #   resp.facet_results[0].document_attribute_key #=> String
+    #   resp.facet_results[0].document_attribute_value_type #=> String, one of "STRING_VALUE", "STRING_LIST_VALUE", "LONG_VALUE", "DATE_VALUE"
     #   resp.facet_results[0].document_attribute_value_count_pairs #=> Array
     #   resp.facet_results[0].document_attribute_value_count_pairs[0].document_attribute_value.string_value #=> String
     #   resp.facet_results[0].document_attribute_value_count_pairs[0].document_attribute_value.string_list_value #=> Array
@@ -1977,6 +2181,7 @@ module Aws::Kendra
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
     #         inclusion_prefixes: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         documents_metadata_configuration: {
     #           s3_prefix: "S3ObjectKey",
@@ -2005,6 +2210,7 @@ module Aws::Kendra
     #           },
     #         ],
     #         document_title_field_name: "DataSourceFieldName",
+    #         disable_local_groups: false,
     #       },
     #       database_configuration: {
     #         database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -2129,6 +2335,7 @@ module Aws::Kendra
     #             index_field_name: "IndexFieldName", # required
     #           },
     #         ],
+    #         disable_local_groups: false,
     #       },
     #       service_now_configuration: {
     #         host_url: "ServiceNowHostUrl", # required
@@ -2162,6 +2369,58 @@ module Aws::Kendra
     #             },
     #           ],
     #         },
+    #       },
+    #       confluence_configuration: {
+    #         server_url: "Url", # required
+    #         secret_arn: "SecretArn", # required
+    #         version: "CLOUD", # required, accepts CLOUD, SERVER
+    #         space_configuration: {
+    #           crawl_personal_spaces: false,
+    #           crawl_archived_spaces: false,
+    #           include_spaces: ["ConfluenceSpaceIdentifier"],
+    #           exclude_spaces: ["ConfluenceSpaceIdentifier"],
+    #           space_field_mappings: [
+    #             {
+    #               data_source_field_name: "DISPLAY_URL", # accepts DISPLAY_URL, ITEM_TYPE, SPACE_KEY, URL
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         page_configuration: {
+    #           page_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_STATUS, CREATED_DATE, DISPLAY_URL, ITEM_TYPE, LABELS, MODIFIED_DATE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         blog_configuration: {
+    #           blog_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, DISPLAY_URL, ITEM_TYPE, LABELS, PUBLISH_DATE, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         attachment_configuration: {
+    #           crawl_attachments: false,
+    #           attachment_field_mappings: [
+    #             {
+    #               data_source_field_name: "AUTHOR", # accepts AUTHOR, CONTENT_TYPE, CREATED_DATE, DISPLAY_URL, FILE_SIZE, ITEM_TYPE, PARENT_ID, SPACE_KEY, SPACE_NAME, URL, VERSION
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName",
+    #             },
+    #           ],
+    #         },
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #       },
     #     },
     #     description: "Description",
@@ -2204,6 +2463,12 @@ module Aws::Kendra
     #   If you are using extra storage units, you can't reduce the storage
     #   capacity below that required to meet the storage needs for your index.
     #
+    # @option params [Array<Types::UserTokenConfiguration>] :user_token_configurations
+    #   The user token configuration.
+    #
+    # @option params [String] :user_context_policy
+    #   The user user token context policy.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2238,6 +2503,24 @@ module Aws::Kendra
     #       storage_capacity_units: 1, # required
     #       query_capacity_units: 1, # required
     #     },
+    #     user_token_configurations: [
+    #       {
+    #         jwt_token_type_configuration: {
+    #           key_location: "URL", # required, accepts URL, SECRET_MANAGER
+    #           url: "Url",
+    #           secret_manager_arn: "RoleArn",
+    #           user_name_attribute_field: "UserNameAttributeField",
+    #           group_attribute_field: "GroupAttributeField",
+    #           issuer: "Issuer",
+    #           claim_regex: "ClaimRegex",
+    #         },
+    #         json_token_type_configuration: {
+    #           user_name_attribute_field: "String", # required
+    #           group_attribute_field: "String", # required
+    #         },
+    #       },
+    #     ],
+    #     user_context_policy: "ATTRIBUTE_FILTER", # accepts ATTRIBUTE_FILTER, USER_TOKEN
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateIndex AWS API Documentation
@@ -2262,7 +2545,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

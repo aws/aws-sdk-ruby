@@ -172,6 +172,8 @@ module Aws::DataSync
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAgentRequest = Shapes::StructureShape.new(name: 'UpdateAgentRequest')
     UpdateAgentResponse = Shapes::StructureShape.new(name: 'UpdateAgentResponse')
+    UpdateTaskExecutionRequest = Shapes::StructureShape.new(name: 'UpdateTaskExecutionRequest')
+    UpdateTaskExecutionResponse = Shapes::StructureShape.new(name: 'UpdateTaskExecutionResponse')
     UpdateTaskRequest = Shapes::StructureShape.new(name: 'UpdateTaskRequest')
     UpdateTaskResponse = Shapes::StructureShape.new(name: 'UpdateTaskResponse')
     VerifyMode = Shapes::StringShape.new(name: 'VerifyMode')
@@ -253,6 +255,7 @@ module Aws::DataSync
     CreateLocationS3Request.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, required: true, location_name: "S3BucketArn"))
     CreateLocationS3Request.add_member(:s3_storage_class, Shapes::ShapeRef.new(shape: S3StorageClass, location_name: "S3StorageClass"))
     CreateLocationS3Request.add_member(:s3_config, Shapes::ShapeRef.new(shape: S3Config, required: true, location_name: "S3Config"))
+    CreateLocationS3Request.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
     CreateLocationS3Request.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
     CreateLocationS3Request.struct_class = Types::CreateLocationS3Request
 
@@ -361,6 +364,7 @@ module Aws::DataSync
     DescribeLocationS3Response.add_member(:location_uri, Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
     DescribeLocationS3Response.add_member(:s3_storage_class, Shapes::ShapeRef.new(shape: S3StorageClass, location_name: "S3StorageClass"))
     DescribeLocationS3Response.add_member(:s3_config, Shapes::ShapeRef.new(shape: S3Config, location_name: "S3Config"))
+    DescribeLocationS3Response.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
     DescribeLocationS3Response.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
     DescribeLocationS3Response.struct_class = Types::DescribeLocationS3Response
 
@@ -602,6 +606,12 @@ module Aws::DataSync
     UpdateAgentRequest.struct_class = Types::UpdateAgentRequest
 
     UpdateAgentResponse.struct_class = Types::UpdateAgentResponse
+
+    UpdateTaskExecutionRequest.add_member(:task_execution_arn, Shapes::ShapeRef.new(shape: TaskExecutionArn, required: true, location_name: "TaskExecutionArn"))
+    UpdateTaskExecutionRequest.add_member(:options, Shapes::ShapeRef.new(shape: Options, required: true, location_name: "Options"))
+    UpdateTaskExecutionRequest.struct_class = Types::UpdateTaskExecutionRequest
+
+    UpdateTaskExecutionResponse.struct_class = Types::UpdateTaskExecutionResponse
 
     UpdateTaskRequest.add_member(:task_arn, Shapes::ShapeRef.new(shape: TaskArn, required: true, location_name: "TaskArn"))
     UpdateTaskRequest.add_member(:options, Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
@@ -969,6 +979,16 @@ module Aws::DataSync
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateTaskRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:update_task_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTaskExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTaskExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTaskExecutionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)

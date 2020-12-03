@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2020-11-20)
+------------------
+
+* Feature - The Amazon Chime SDK for messaging provides the building blocks needed to build chat and other real-time collaboration features.
+
+1.38.0 (2020-11-17)
+------------------
+
+* Feature - This release adds CRUD APIs for Amazon Chime SipMediaApplications and SipRules. It also adds the API for creating outbound PSTN calls for Amazon Chime meetings.
+
+1.37.0 (2020-09-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2020-09-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.35.0 (2020-08-25)
 ------------------
 

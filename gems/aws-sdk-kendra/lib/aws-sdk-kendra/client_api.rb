@@ -35,12 +35,33 @@ module Aws::Kendra
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CapacityUnitsConfiguration = Shapes::StructureShape.new(name: 'CapacityUnitsConfiguration')
     ChangeDetectingColumns = Shapes::ListShape.new(name: 'ChangeDetectingColumns')
+    ClaimRegex = Shapes::StringShape.new(name: 'ClaimRegex')
     ClickFeedback = Shapes::StructureShape.new(name: 'ClickFeedback')
     ClickFeedbackList = Shapes::ListShape.new(name: 'ClickFeedbackList')
     ClientTokenName = Shapes::StringShape.new(name: 'ClientTokenName')
     ColumnConfiguration = Shapes::StructureShape.new(name: 'ColumnConfiguration')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConfluenceAttachmentConfiguration = Shapes::StructureShape.new(name: 'ConfluenceAttachmentConfiguration')
+    ConfluenceAttachmentFieldMappingsList = Shapes::ListShape.new(name: 'ConfluenceAttachmentFieldMappingsList')
+    ConfluenceAttachmentFieldName = Shapes::StringShape.new(name: 'ConfluenceAttachmentFieldName')
+    ConfluenceAttachmentToIndexFieldMapping = Shapes::StructureShape.new(name: 'ConfluenceAttachmentToIndexFieldMapping')
+    ConfluenceBlogConfiguration = Shapes::StructureShape.new(name: 'ConfluenceBlogConfiguration')
+    ConfluenceBlogFieldMappingsList = Shapes::ListShape.new(name: 'ConfluenceBlogFieldMappingsList')
+    ConfluenceBlogFieldName = Shapes::StringShape.new(name: 'ConfluenceBlogFieldName')
+    ConfluenceBlogToIndexFieldMapping = Shapes::StructureShape.new(name: 'ConfluenceBlogToIndexFieldMapping')
+    ConfluenceConfiguration = Shapes::StructureShape.new(name: 'ConfluenceConfiguration')
+    ConfluencePageConfiguration = Shapes::StructureShape.new(name: 'ConfluencePageConfiguration')
+    ConfluencePageFieldMappingsList = Shapes::ListShape.new(name: 'ConfluencePageFieldMappingsList')
+    ConfluencePageFieldName = Shapes::StringShape.new(name: 'ConfluencePageFieldName')
+    ConfluencePageToIndexFieldMapping = Shapes::StructureShape.new(name: 'ConfluencePageToIndexFieldMapping')
+    ConfluenceSpaceConfiguration = Shapes::StructureShape.new(name: 'ConfluenceSpaceConfiguration')
+    ConfluenceSpaceFieldMappingsList = Shapes::ListShape.new(name: 'ConfluenceSpaceFieldMappingsList')
+    ConfluenceSpaceFieldName = Shapes::StringShape.new(name: 'ConfluenceSpaceFieldName')
+    ConfluenceSpaceIdentifier = Shapes::StringShape.new(name: 'ConfluenceSpaceIdentifier')
+    ConfluenceSpaceList = Shapes::ListShape.new(name: 'ConfluenceSpaceList')
+    ConfluenceSpaceToIndexFieldMapping = Shapes::StructureShape.new(name: 'ConfluenceSpaceToIndexFieldMapping')
+    ConfluenceVersion = Shapes::StringShape.new(name: 'ConfluenceVersion')
     ConnectionConfiguration = Shapes::StructureShape.new(name: 'ConnectionConfiguration')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     CreateDataSourceRequest = Shapes::StructureShape.new(name: 'CreateDataSourceRequest')
@@ -110,12 +131,14 @@ module Aws::Kendra
     FacetList = Shapes::ListShape.new(name: 'FacetList')
     FacetResult = Shapes::StructureShape.new(name: 'FacetResult')
     FacetResultList = Shapes::ListShape.new(name: 'FacetResultList')
+    FaqFileFormat = Shapes::StringShape.new(name: 'FaqFileFormat')
     FaqId = Shapes::StringShape.new(name: 'FaqId')
     FaqName = Shapes::StringShape.new(name: 'FaqName')
     FaqStatistics = Shapes::StructureShape.new(name: 'FaqStatistics')
     FaqStatus = Shapes::StringShape.new(name: 'FaqStatus')
     FaqSummary = Shapes::StructureShape.new(name: 'FaqSummary')
     FaqSummaryItems = Shapes::ListShape.new(name: 'FaqSummaryItems')
+    GroupAttributeField = Shapes::StringShape.new(name: 'GroupAttributeField')
     Highlight = Shapes::StructureShape.new(name: 'Highlight')
     HighlightList = Shapes::ListShape.new(name: 'HighlightList')
     Importance = Shapes::IntegerShape.new(name: 'Importance')
@@ -132,6 +155,10 @@ module Aws::Kendra
     IndexedTextDocumentsCount = Shapes::IntegerShape.new(name: 'IndexedTextDocumentsCount')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    Issuer = Shapes::StringShape.new(name: 'Issuer')
+    JsonTokenTypeConfiguration = Shapes::StructureShape.new(name: 'JsonTokenTypeConfiguration')
+    JwtTokenTypeConfiguration = Shapes::StructureShape.new(name: 'JwtTokenTypeConfiguration')
+    KeyLocation = Shapes::StringShape.new(name: 'KeyLocation')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     ListDataSourceSyncJobsRequest = Shapes::StructureShape.new(name: 'ListDataSourceSyncJobsRequest')
     ListDataSourceSyncJobsResponse = Shapes::StructureShape.new(name: 'ListDataSourceSyncJobsResponse')
@@ -240,11 +267,17 @@ module Aws::Kendra
     TimeRange = Shapes::StructureShape.new(name: 'TimeRange')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Title = Shapes::StringShape.new(name: 'Title')
+    Token = Shapes::StringShape.new(name: 'Token')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
     UpdateIndexRequest = Shapes::StructureShape.new(name: 'UpdateIndexRequest')
     Url = Shapes::StringShape.new(name: 'Url')
+    UserContext = Shapes::StructureShape.new(name: 'UserContext')
+    UserContextPolicy = Shapes::StringShape.new(name: 'UserContextPolicy')
+    UserNameAttributeField = Shapes::StringShape.new(name: 'UserNameAttributeField')
+    UserTokenConfiguration = Shapes::StructureShape.new(name: 'UserTokenConfiguration')
+    UserTokenConfigurationList = Shapes::ListShape.new(name: 'UserTokenConfigurationList')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValueImportanceMap = Shapes::MapShape.new(name: 'ValueImportanceMap')
     ValueImportanceMapKey = Shapes::StringShape.new(name: 'ValueImportanceMapKey')
@@ -335,6 +368,65 @@ module Aws::Kendra
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
+    ConfluenceAttachmentConfiguration.add_member(:crawl_attachments, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlAttachments"))
+    ConfluenceAttachmentConfiguration.add_member(:attachment_field_mappings, Shapes::ShapeRef.new(shape: ConfluenceAttachmentFieldMappingsList, location_name: "AttachmentFieldMappings"))
+    ConfluenceAttachmentConfiguration.struct_class = Types::ConfluenceAttachmentConfiguration
+
+    ConfluenceAttachmentFieldMappingsList.member = Shapes::ShapeRef.new(shape: ConfluenceAttachmentToIndexFieldMapping)
+
+    ConfluenceAttachmentToIndexFieldMapping.add_member(:data_source_field_name, Shapes::ShapeRef.new(shape: ConfluenceAttachmentFieldName, location_name: "DataSourceFieldName"))
+    ConfluenceAttachmentToIndexFieldMapping.add_member(:date_field_format, Shapes::ShapeRef.new(shape: DataSourceDateFieldFormat, location_name: "DateFieldFormat"))
+    ConfluenceAttachmentToIndexFieldMapping.add_member(:index_field_name, Shapes::ShapeRef.new(shape: IndexFieldName, location_name: "IndexFieldName"))
+    ConfluenceAttachmentToIndexFieldMapping.struct_class = Types::ConfluenceAttachmentToIndexFieldMapping
+
+    ConfluenceBlogConfiguration.add_member(:blog_field_mappings, Shapes::ShapeRef.new(shape: ConfluenceBlogFieldMappingsList, location_name: "BlogFieldMappings"))
+    ConfluenceBlogConfiguration.struct_class = Types::ConfluenceBlogConfiguration
+
+    ConfluenceBlogFieldMappingsList.member = Shapes::ShapeRef.new(shape: ConfluenceBlogToIndexFieldMapping)
+
+    ConfluenceBlogToIndexFieldMapping.add_member(:data_source_field_name, Shapes::ShapeRef.new(shape: ConfluenceBlogFieldName, location_name: "DataSourceFieldName"))
+    ConfluenceBlogToIndexFieldMapping.add_member(:date_field_format, Shapes::ShapeRef.new(shape: DataSourceDateFieldFormat, location_name: "DateFieldFormat"))
+    ConfluenceBlogToIndexFieldMapping.add_member(:index_field_name, Shapes::ShapeRef.new(shape: IndexFieldName, location_name: "IndexFieldName"))
+    ConfluenceBlogToIndexFieldMapping.struct_class = Types::ConfluenceBlogToIndexFieldMapping
+
+    ConfluenceConfiguration.add_member(:server_url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "ServerUrl"))
+    ConfluenceConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
+    ConfluenceConfiguration.add_member(:version, Shapes::ShapeRef.new(shape: ConfluenceVersion, required: true, location_name: "Version"))
+    ConfluenceConfiguration.add_member(:space_configuration, Shapes::ShapeRef.new(shape: ConfluenceSpaceConfiguration, location_name: "SpaceConfiguration"))
+    ConfluenceConfiguration.add_member(:page_configuration, Shapes::ShapeRef.new(shape: ConfluencePageConfiguration, location_name: "PageConfiguration"))
+    ConfluenceConfiguration.add_member(:blog_configuration, Shapes::ShapeRef.new(shape: ConfluenceBlogConfiguration, location_name: "BlogConfiguration"))
+    ConfluenceConfiguration.add_member(:attachment_configuration, Shapes::ShapeRef.new(shape: ConfluenceAttachmentConfiguration, location_name: "AttachmentConfiguration"))
+    ConfluenceConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, location_name: "VpcConfiguration"))
+    ConfluenceConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
+    ConfluenceConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
+    ConfluenceConfiguration.struct_class = Types::ConfluenceConfiguration
+
+    ConfluencePageConfiguration.add_member(:page_field_mappings, Shapes::ShapeRef.new(shape: ConfluencePageFieldMappingsList, location_name: "PageFieldMappings"))
+    ConfluencePageConfiguration.struct_class = Types::ConfluencePageConfiguration
+
+    ConfluencePageFieldMappingsList.member = Shapes::ShapeRef.new(shape: ConfluencePageToIndexFieldMapping)
+
+    ConfluencePageToIndexFieldMapping.add_member(:data_source_field_name, Shapes::ShapeRef.new(shape: ConfluencePageFieldName, location_name: "DataSourceFieldName"))
+    ConfluencePageToIndexFieldMapping.add_member(:date_field_format, Shapes::ShapeRef.new(shape: DataSourceDateFieldFormat, location_name: "DateFieldFormat"))
+    ConfluencePageToIndexFieldMapping.add_member(:index_field_name, Shapes::ShapeRef.new(shape: IndexFieldName, location_name: "IndexFieldName"))
+    ConfluencePageToIndexFieldMapping.struct_class = Types::ConfluencePageToIndexFieldMapping
+
+    ConfluenceSpaceConfiguration.add_member(:crawl_personal_spaces, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlPersonalSpaces"))
+    ConfluenceSpaceConfiguration.add_member(:crawl_archived_spaces, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlArchivedSpaces"))
+    ConfluenceSpaceConfiguration.add_member(:include_spaces, Shapes::ShapeRef.new(shape: ConfluenceSpaceList, location_name: "IncludeSpaces"))
+    ConfluenceSpaceConfiguration.add_member(:exclude_spaces, Shapes::ShapeRef.new(shape: ConfluenceSpaceList, location_name: "ExcludeSpaces"))
+    ConfluenceSpaceConfiguration.add_member(:space_field_mappings, Shapes::ShapeRef.new(shape: ConfluenceSpaceFieldMappingsList, location_name: "SpaceFieldMappings"))
+    ConfluenceSpaceConfiguration.struct_class = Types::ConfluenceSpaceConfiguration
+
+    ConfluenceSpaceFieldMappingsList.member = Shapes::ShapeRef.new(shape: ConfluenceSpaceToIndexFieldMapping)
+
+    ConfluenceSpaceList.member = Shapes::ShapeRef.new(shape: ConfluenceSpaceIdentifier)
+
+    ConfluenceSpaceToIndexFieldMapping.add_member(:data_source_field_name, Shapes::ShapeRef.new(shape: ConfluenceSpaceFieldName, location_name: "DataSourceFieldName"))
+    ConfluenceSpaceToIndexFieldMapping.add_member(:date_field_format, Shapes::ShapeRef.new(shape: DataSourceDateFieldFormat, location_name: "DateFieldFormat"))
+    ConfluenceSpaceToIndexFieldMapping.add_member(:index_field_name, Shapes::ShapeRef.new(shape: IndexFieldName, location_name: "IndexFieldName"))
+    ConfluenceSpaceToIndexFieldMapping.struct_class = Types::ConfluenceSpaceToIndexFieldMapping
+
     ConnectionConfiguration.add_member(:database_host, Shapes::ShapeRef.new(shape: DatabaseHost, required: true, location_name: "DatabaseHost"))
     ConnectionConfiguration.add_member(:database_port, Shapes::ShapeRef.new(shape: DatabasePort, required: true, location_name: "DatabasePort"))
     ConnectionConfiguration.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location_name: "DatabaseName"))
@@ -345,11 +437,12 @@ module Aws::Kendra
     CreateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, required: true, location_name: "Name"))
     CreateDataSourceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     CreateDataSourceRequest.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceType, required: true, location_name: "Type"))
-    CreateDataSourceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, required: true, location_name: "Configuration"))
+    CreateDataSourceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, location_name: "Configuration"))
     CreateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateDataSourceRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: ScanSchedule, location_name: "Schedule"))
-    CreateDataSourceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    CreateDataSourceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     CreateDataSourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateDataSourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateDataSourceRequest.struct_class = Types::CreateDataSourceRequest
 
     CreateDataSourceResponse.add_member(:id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "Id"))
@@ -361,6 +454,8 @@ module Aws::Kendra
     CreateFaqRequest.add_member(:s3_path, Shapes::ShapeRef.new(shape: S3Path, required: true, location_name: "S3Path"))
     CreateFaqRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreateFaqRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateFaqRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FaqFileFormat, location_name: "FileFormat"))
+    CreateFaqRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateFaqRequest.struct_class = Types::CreateFaqRequest
 
     CreateFaqResponse.add_member(:id, Shapes::ShapeRef.new(shape: FaqId, location_name: "Id"))
@@ -373,6 +468,8 @@ module Aws::Kendra
     CreateIndexRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateIndexRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateIndexRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateIndexRequest.add_member(:user_token_configurations, Shapes::ShapeRef.new(shape: UserTokenConfigurationList, location_name: "UserTokenConfigurations"))
+    CreateIndexRequest.add_member(:user_context_policy, Shapes::ShapeRef.new(shape: UserContextPolicy, location_name: "UserContextPolicy"))
     CreateIndexRequest.struct_class = Types::CreateIndexRequest
 
     CreateIndexResponse.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, location_name: "Id"))
@@ -384,6 +481,7 @@ module Aws::Kendra
     DataSourceConfiguration.add_member(:salesforce_configuration, Shapes::ShapeRef.new(shape: SalesforceConfiguration, location_name: "SalesforceConfiguration"))
     DataSourceConfiguration.add_member(:one_drive_configuration, Shapes::ShapeRef.new(shape: OneDriveConfiguration, location_name: "OneDriveConfiguration"))
     DataSourceConfiguration.add_member(:service_now_configuration, Shapes::ShapeRef.new(shape: ServiceNowConfiguration, location_name: "ServiceNowConfiguration"))
+    DataSourceConfiguration.add_member(:confluence_configuration, Shapes::ShapeRef.new(shape: ConfluenceConfiguration, location_name: "ConfluenceConfiguration"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
     DataSourceInclusionsExclusionsStrings.member = Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStringsMember)
@@ -483,6 +581,7 @@ module Aws::Kendra
     DescribeFaqResponse.add_member(:status, Shapes::ShapeRef.new(shape: FaqStatus, location_name: "Status"))
     DescribeFaqResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     DescribeFaqResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    DescribeFaqResponse.add_member(:file_format, Shapes::ShapeRef.new(shape: FaqFileFormat, location_name: "FileFormat"))
     DescribeFaqResponse.struct_class = Types::DescribeFaqResponse
 
     DescribeIndexRequest.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "Id"))
@@ -501,6 +600,8 @@ module Aws::Kendra
     DescribeIndexResponse.add_member(:index_statistics, Shapes::ShapeRef.new(shape: IndexStatistics, location_name: "IndexStatistics"))
     DescribeIndexResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
     DescribeIndexResponse.add_member(:capacity_units, Shapes::ShapeRef.new(shape: CapacityUnitsConfiguration, location_name: "CapacityUnits"))
+    DescribeIndexResponse.add_member(:user_token_configurations, Shapes::ShapeRef.new(shape: UserTokenConfigurationList, location_name: "UserTokenConfigurations"))
+    DescribeIndexResponse.add_member(:user_context_policy, Shapes::ShapeRef.new(shape: UserContextPolicy, location_name: "UserContextPolicy"))
     DescribeIndexResponse.struct_class = Types::DescribeIndexResponse
 
     Document.add_member(:id, Shapes::ShapeRef.new(shape: DocumentId, required: true, location_name: "Id"))
@@ -555,6 +656,7 @@ module Aws::Kendra
     FacetList.member = Shapes::ShapeRef.new(shape: Facet)
 
     FacetResult.add_member(:document_attribute_key, Shapes::ShapeRef.new(shape: DocumentAttributeKey, location_name: "DocumentAttributeKey"))
+    FacetResult.add_member(:document_attribute_value_type, Shapes::ShapeRef.new(shape: DocumentAttributeValueType, location_name: "DocumentAttributeValueType"))
     FacetResult.add_member(:document_attribute_value_count_pairs, Shapes::ShapeRef.new(shape: DocumentAttributeValueCountPairList, location_name: "DocumentAttributeValueCountPairs"))
     FacetResult.struct_class = Types::FacetResult
 
@@ -568,6 +670,7 @@ module Aws::Kendra
     FaqSummary.add_member(:status, Shapes::ShapeRef.new(shape: FaqStatus, location_name: "Status"))
     FaqSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     FaqSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    FaqSummary.add_member(:file_format, Shapes::ShapeRef.new(shape: FaqFileFormat, location_name: "FileFormat"))
     FaqSummary.struct_class = Types::FaqSummary
 
     FaqSummaryItems.member = Shapes::ShapeRef.new(shape: FaqSummary)
@@ -595,6 +698,19 @@ module Aws::Kendra
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    JsonTokenTypeConfiguration.add_member(:user_name_attribute_field, Shapes::ShapeRef.new(shape: String, required: true, location_name: "UserNameAttributeField"))
+    JsonTokenTypeConfiguration.add_member(:group_attribute_field, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GroupAttributeField"))
+    JsonTokenTypeConfiguration.struct_class = Types::JsonTokenTypeConfiguration
+
+    JwtTokenTypeConfiguration.add_member(:key_location, Shapes::ShapeRef.new(shape: KeyLocation, required: true, location_name: "KeyLocation"))
+    JwtTokenTypeConfiguration.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "URL"))
+    JwtTokenTypeConfiguration.add_member(:secret_manager_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "SecretManagerArn"))
+    JwtTokenTypeConfiguration.add_member(:user_name_attribute_field, Shapes::ShapeRef.new(shape: UserNameAttributeField, location_name: "UserNameAttributeField"))
+    JwtTokenTypeConfiguration.add_member(:group_attribute_field, Shapes::ShapeRef.new(shape: GroupAttributeField, location_name: "GroupAttributeField"))
+    JwtTokenTypeConfiguration.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, location_name: "Issuer"))
+    JwtTokenTypeConfiguration.add_member(:claim_regex, Shapes::ShapeRef.new(shape: ClaimRegex, location_name: "ClaimRegex"))
+    JwtTokenTypeConfiguration.struct_class = Types::JwtTokenTypeConfiguration
 
     ListDataSourceSyncJobsRequest.add_member(:id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "Id"))
     ListDataSourceSyncJobsRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
@@ -646,6 +762,7 @@ module Aws::Kendra
     OneDriveConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
     OneDriveConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
     OneDriveConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
+    OneDriveConfiguration.add_member(:disable_local_groups, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableLocalGroups"))
     OneDriveConfiguration.struct_class = Types::OneDriveConfiguration
 
     OneDriveUserList.member = Shapes::ShapeRef.new(shape: OneDriveUser)
@@ -670,6 +787,7 @@ module Aws::Kendra
     QueryRequest.add_member(:page_number, Shapes::ShapeRef.new(shape: Integer, location_name: "PageNumber"))
     QueryRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: Integer, location_name: "PageSize"))
     QueryRequest.add_member(:sorting_configuration, Shapes::ShapeRef.new(shape: SortingConfiguration, location_name: "SortingConfiguration"))
+    QueryRequest.add_member(:user_context, Shapes::ShapeRef.new(shape: UserContext, location_name: "UserContext"))
     QueryRequest.struct_class = Types::QueryRequest
 
     QueryResult.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "QueryId"))
@@ -718,6 +836,7 @@ module Aws::Kendra
 
     S3DataSourceConfiguration.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "BucketName"))
     S3DataSourceConfiguration.add_member(:inclusion_prefixes, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPrefixes"))
+    S3DataSourceConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
     S3DataSourceConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
     S3DataSourceConfiguration.add_member(:documents_metadata_configuration, Shapes::ShapeRef.new(shape: DocumentsMetadataConfiguration, location_name: "DocumentsMetadataConfiguration"))
     S3DataSourceConfiguration.add_member(:access_control_list_configuration, Shapes::ShapeRef.new(shape: AccessControlListConfiguration, location_name: "AccessControlListConfiguration"))
@@ -828,6 +947,7 @@ module Aws::Kendra
     SharePointConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, location_name: "VpcConfiguration"))
     SharePointConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
     SharePointConfiguration.add_member(:document_title_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, location_name: "DocumentTitleFieldName"))
+    SharePointConfiguration.add_member(:disable_local_groups, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableLocalGroups"))
     SharePointConfiguration.struct_class = Types::SharePointConfiguration
 
     SharePointUrlList.member = Shapes::ShapeRef.new(shape: Url)
@@ -908,7 +1028,18 @@ module Aws::Kendra
     UpdateIndexRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateIndexRequest.add_member(:document_metadata_configuration_updates, Shapes::ShapeRef.new(shape: DocumentMetadataConfigurationList, location_name: "DocumentMetadataConfigurationUpdates"))
     UpdateIndexRequest.add_member(:capacity_units, Shapes::ShapeRef.new(shape: CapacityUnitsConfiguration, location_name: "CapacityUnits"))
+    UpdateIndexRequest.add_member(:user_token_configurations, Shapes::ShapeRef.new(shape: UserTokenConfigurationList, location_name: "UserTokenConfigurations"))
+    UpdateIndexRequest.add_member(:user_context_policy, Shapes::ShapeRef.new(shape: UserContextPolicy, location_name: "UserContextPolicy"))
     UpdateIndexRequest.struct_class = Types::UpdateIndexRequest
+
+    UserContext.add_member(:token, Shapes::ShapeRef.new(shape: Token, location_name: "Token"))
+    UserContext.struct_class = Types::UserContext
+
+    UserTokenConfiguration.add_member(:jwt_token_type_configuration, Shapes::ShapeRef.new(shape: JwtTokenTypeConfiguration, location_name: "JwtTokenTypeConfiguration"))
+    UserTokenConfiguration.add_member(:json_token_type_configuration, Shapes::ShapeRef.new(shape: JsonTokenTypeConfiguration, location_name: "JsonTokenTypeConfiguration"))
+    UserTokenConfiguration.struct_class = Types::UserTokenConfiguration
+
+    UserTokenConfigurationList.member = Shapes::ShapeRef.new(shape: UserTokenConfiguration)
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException

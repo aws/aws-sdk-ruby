@@ -34,6 +34,8 @@ module Aws::CostExplorer
   # * {RequestChangedException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
+  # * {UnknownMonitorException}
+  # * {UnknownSubscriptionException}
   # * {UnresolvableUsageUnitException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -137,6 +139,36 @@ module Aws::CostExplorer
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CostExplorer::Types::ServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class UnknownMonitorException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CostExplorer::Types::UnknownMonitorException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class UnknownSubscriptionException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CostExplorer::Types::UnknownSubscriptionException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
