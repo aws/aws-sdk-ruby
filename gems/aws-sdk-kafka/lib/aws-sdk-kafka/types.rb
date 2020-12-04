@@ -403,7 +403,8 @@ module Aws::Kafka
     #
     # @!attribute [rw] state
     #   The state of the cluster. The possible states are ACTIVE, CREATING,
-    #   DELETING, FAILED, MAINTENANCE, REBOOTING\_BROKER, and UPDATING.
+    #   DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING\_BROKER, and
+    #   UPDATING.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -826,7 +827,8 @@ module Aws::Kafka
     #
     # @!attribute [rw] state
     #   The state of the cluster. The possible states are ACTIVE, CREATING,
-    #   DELETING, FAILED, MAINTENANCE, REBOOTING\_BROKER, and UPDATING.
+    #   DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING\_BROKER, and
+    #   UPDATING.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateClusterResponse AWS API Documentation
@@ -946,7 +948,8 @@ module Aws::Kafka
     #
     # @!attribute [rw] state
     #   The state of the cluster. The possible states are ACTIVE, CREATING,
-    #   DELETING, FAILED, MAINTENANCE, REBOOTING\_BROKER, and UPDATING.
+    #   DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING\_BROKER, and
+    #   UPDATING.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DeleteClusterResponse AWS API Documentation

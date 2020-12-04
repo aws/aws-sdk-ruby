@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2020-12-04)
+------------------
+
+* Feature - Automated Discovery now has support for custom tags, and detects software uninstalls.
+
 1.22.0 (2020-12-03)
 ------------------
 

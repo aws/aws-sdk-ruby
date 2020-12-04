@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2020-12-04)
+------------------
+
+* Feature - Added the additional enum InvalidImage to StateReasonCode and LastUpdateStatusReasonCode fields.
+
 1.55.0 (2020-12-01)
 ------------------
 

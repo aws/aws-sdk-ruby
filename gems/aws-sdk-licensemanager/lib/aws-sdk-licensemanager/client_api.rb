@@ -319,6 +319,7 @@ module Aws::LicenseManager
     CreateLicenseConfigurationRequest.add_member(:license_count_hard_limit, Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "LicenseCountHardLimit"))
     CreateLicenseConfigurationRequest.add_member(:license_rules, Shapes::ShapeRef.new(shape: StringList, location_name: "LicenseRules"))
     CreateLicenseConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateLicenseConfigurationRequest.add_member(:disassociate_when_not_found, Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "DisassociateWhenNotFound"))
     CreateLicenseConfigurationRequest.add_member(:product_information_list, Shapes::ShapeRef.new(shape: ProductInformationList, location_name: "ProductInformationList"))
     CreateLicenseConfigurationRequest.struct_class = Types::CreateLicenseConfigurationRequest
 
@@ -491,6 +492,7 @@ module Aws::LicenseManager
     GetLicenseConfigurationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     GetLicenseConfigurationResponse.add_member(:product_information_list, Shapes::ShapeRef.new(shape: ProductInformationList, location_name: "ProductInformationList"))
     GetLicenseConfigurationResponse.add_member(:automated_discovery_information, Shapes::ShapeRef.new(shape: AutomatedDiscoveryInformation, location_name: "AutomatedDiscoveryInformation"))
+    GetLicenseConfigurationResponse.add_member(:disassociate_when_not_found, Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "DisassociateWhenNotFound"))
     GetLicenseConfigurationResponse.struct_class = Types::GetLicenseConfigurationResponse
 
     GetLicenseRequest.add_member(:license_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "LicenseArn"))
@@ -594,6 +596,7 @@ module Aws::LicenseManager
     LicenseConfiguration.add_member(:license_rules, Shapes::ShapeRef.new(shape: StringList, location_name: "LicenseRules"))
     LicenseConfiguration.add_member(:license_count, Shapes::ShapeRef.new(shape: BoxLong, location_name: "LicenseCount"))
     LicenseConfiguration.add_member(:license_count_hard_limit, Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "LicenseCountHardLimit"))
+    LicenseConfiguration.add_member(:disassociate_when_not_found, Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "DisassociateWhenNotFound"))
     LicenseConfiguration.add_member(:consumed_licenses, Shapes::ShapeRef.new(shape: BoxLong, location_name: "ConsumedLicenses"))
     LicenseConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     LicenseConfiguration.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: String, location_name: "OwnerAccountId"))
@@ -891,6 +894,7 @@ module Aws::LicenseManager
     UpdateLicenseConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     UpdateLicenseConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     UpdateLicenseConfigurationRequest.add_member(:product_information_list, Shapes::ShapeRef.new(shape: ProductInformationList, location_name: "ProductInformationList"))
+    UpdateLicenseConfigurationRequest.add_member(:disassociate_when_not_found, Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "DisassociateWhenNotFound"))
     UpdateLicenseConfigurationRequest.struct_class = Types::UpdateLicenseConfigurationRequest
 
     UpdateLicenseConfigurationResponse.struct_class = Types::UpdateLicenseConfigurationResponse

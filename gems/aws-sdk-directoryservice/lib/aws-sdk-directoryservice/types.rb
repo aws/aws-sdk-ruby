@@ -43,7 +43,7 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # You do not have sufficient access to perform this action.
+    # Client authentication is not available in this region at this time.
     #
     # @!attribute [rw] message
     #   The descriptive message for the exception.
@@ -344,12 +344,14 @@ module Aws::DirectoryService
     #   @return [Time]
     #
     # @!attribute [rw] type
-    #   Select `ClientCertAuth` for smart card integration.
+    #   The function that the registered certificate performs. Valid values
+    #   include `ClientLDAPS` or `ClientCertAuth`. The default value is
+    #   `ClientLDAPS`.
     #   @return [String]
     #
     # @!attribute [rw] client_cert_auth_settings
-    #   Provides information about the client certificate authentication
-    #   settings. The default value is `ClientLDAPS`.
+    #   A `ClientCertAuthSettings` object that contains client certificate
+    #   authentication settings.
     #   @return [Types::ClientCertAuthSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Certificate AWS API Documentation
@@ -445,7 +447,9 @@ module Aws::DirectoryService
     #   @return [Time]
     #
     # @!attribute [rw] type
-    #   Displays the type of certificate.
+    #   The function that the registered certificate performs. Valid values
+    #   include `ClientLDAPS` or `ClientCertAuth`. The default value is
+    #   `ClientLDAPS`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CertificateInfo AWS API Documentation
@@ -481,7 +485,8 @@ module Aws::DirectoryService
     end
 
     # Contains information about the client certificate authentication
-    # settings, such as `ClientLDAPS` or `ClientCertAuth`.
+    # settings for the `RegisterCertificate` and `DescribeCertificate`
+    # operations.
     #
     # @note When making an API call, you may pass ClientCertAuthSettings
     #   data as a hash:
@@ -492,7 +497,8 @@ module Aws::DirectoryService
     #
     # @!attribute [rw] ocsp_url
     #   Specifies the URL of the default OCSP server used to check for
-    #   revocation status.
+    #   revocation status. A secondary value to any OCSP address found in
+    #   the AIA extension of the user certificate.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ClientCertAuthSettings AWS API Documentation
@@ -2485,12 +2491,12 @@ module Aws::DirectoryService
     #       }
     #
     # @!attribute [rw] directory_id
-    #   Disable client authentication in a specified directory for smart
-    #   cards.
+    #   The identifier of the directory
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Disable the type of client authentication request.
+    #   The type of client authentication to disable. Currently, only the
+    #   parameter, `SmartCard` is supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableClientAuthenticationRequest AWS API Documentation
@@ -2703,12 +2709,14 @@ module Aws::DirectoryService
     #       }
     #
     # @!attribute [rw] directory_id
-    #   Enable client authentication in a specified directory for smart
-    #   cards.
+    #   The identifier of the specified directory.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Enable the type of client authentication request.
+    #   The type of client authentication to enable. Currently only the
+    #   value `SmartCard` is supported. Smart card authentication in AD
+    #   Connector requires that you enable Kerberos Constrained Delegation
+    #   for the Service User to the LDAP service in the on-premises AD.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableClientAuthenticationRequest AWS API Documentation
@@ -3020,7 +3028,7 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # The client authorization was invalid.
+    # Client authentication is already enabled.
     #
     # @!attribute [rw] message
     #   The descriptive message for the exception.
@@ -3538,8 +3546,8 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # The LDAP activities could not be performed because at least one valid
-    # certificate must be registered with the system.
+    # Client authentication setup could not be completed because at least
+    # one valid certificate must be registered in the system.
     #
     # @!attribute [rw] message
     #   The descriptive message for the exception.
@@ -3809,12 +3817,14 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The certificate type to register for the request.
+    #   The function that the registered certificate performs. Valid values
+    #   include `ClientLDAPS` or `ClientCertAuth`. The default value is
+    #   `ClientLDAPS`.
     #   @return [String]
     #
     # @!attribute [rw] client_cert_auth_settings
-    #   Contains information about the client certificate authentication
-    #   settings, such as `ClientLDAPS` or `ClientCertAuth`.
+    #   A `ClientCertAuthSettings` object that contains client certificate
+    #   authentication settings.
     #   @return [Types::ClientCertAuthSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterCertificateRequest AWS API Documentation

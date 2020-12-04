@@ -347,7 +347,7 @@ module Aws::RDS
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to associate with the
-    #   Aurora DB cluster, for example
+    #   Aurora DB cluster, for example,
     #   `arn:aws:iam::123456789012:role/AuroraAccessRole`.
     #
     # @option params [String] :feature_name
@@ -1031,11 +1031,12 @@ module Aws::RDS
     #   The pre-signed URL request must contain the following parameter
     #   values:
     #
-    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
-    #     the copy of the DB cluster snapshot in the destination AWS Region.
-    #     This is the same identifier for both the `CopyDBClusterSnapshot`
-    #     action that is called in the destination AWS Region, and the
-    #     action contained in the pre-signed URL.
+    #   * `KmsKeyId` - The AWS KMS key identifier for the customer master
+    #     key (CMK) to use to encrypt the copy of the DB cluster snapshot in
+    #     the destination AWS Region. This is the same identifier for both
+    #     the `CopyDBClusterSnapshot` action that is called in the
+    #     destination AWS Region, and the action contained in the pre-signed
+    #     URL.
     #
     #   * `DestinationRegion` - The name of the AWS Region that the DB
     #     cluster snapshot is to be created in.
@@ -1132,25 +1133,25 @@ module Aws::RDS
     #   Example: `my-cluster-snapshot2`
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key
-    #   ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS
-    #   key alias for the KMS encryption key.
+    #   The AWS KMS key identifier for an encrypted DB cluster snapshot. The
+    #   AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+    #   name for the AWS KMS customer master key (CMK).
     #
     #   If you copy an encrypted DB cluster snapshot from your AWS account,
     #   you can specify a value for `KmsKeyId` to encrypt the copy with a new
-    #   KMS encryption key. If you don't specify a value for `KmsKeyId`, then
-    #   the copy of the DB cluster snapshot is encrypted with the same KMS key
+    #   AWS KMS CMK. If you don't specify a value for `KmsKeyId`, then the
+    #   copy of the DB cluster snapshot is encrypted with the same AWS KMS key
     #   as the source DB cluster snapshot.
     #
     #   If you copy an encrypted DB cluster snapshot that is shared from
     #   another AWS account, then you must specify a value for `KmsKeyId`.
     #
     #   To copy an encrypted DB cluster snapshot to another AWS Region, you
-    #   must set `KmsKeyId` to the KMS key ID you want to use to encrypt the
-    #   copy of the DB cluster snapshot in the destination AWS Region. KMS
-    #   encryption keys are specific to the AWS Region that they are created
-    #   in, and you can't use encryption keys from one AWS Region in another
-    #   AWS Region.
+    #   must set `KmsKeyId` to the AWS KMS key identifier you want to use to
+    #   encrypt the copy of the DB cluster snapshot in the destination AWS
+    #   Region. AWS KMS CMKs are specific to the AWS Region that they are
+    #   created in, and you can't use CMKs from one AWS Region in another AWS
+    #   Region.
     #
     #   If you copy an unencrypted DB cluster snapshot and specify a value for
     #   the `KmsKeyId` parameter, an error is returned.
@@ -1169,9 +1170,9 @@ module Aws::RDS
     #   copied. The pre-signed URL request must contain the following
     #   parameter values:
     #
-    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
-    #     encrypt the copy of the DB cluster snapshot in the destination AWS
-    #     Region. This is the same identifier for both the
+    #   * `KmsKeyId` - The AWS KMS key identifier for the customer master key
+    #     (CMK) to use to encrypt the copy of the DB cluster snapshot in the
+    #     destination AWS Region. This is the same identifier for both the
     #     `CopyDBClusterSnapshot` action that is called in the destination AWS
     #     Region, and the action contained in the pre-signed URL.
     #
@@ -1448,14 +1449,14 @@ module Aws::RDS
     #   Example: `my-db-snapshot`
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key ID for an encrypted DB snapshot. The KMS key ID is the
-    #   Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias
-    #   for the KMS encryption key.
+    #   The AWS KMS key identifier for an encrypted DB snapshot. The AWS KMS
+    #   key identifier is the key ARN, key ID, alias ARN, or alias name for
+    #   the AWS KMS customer master key (CMK).
     #
     #   If you copy an encrypted DB snapshot from your AWS account, you can
-    #   specify a value for this parameter to encrypt the copy with a new KMS
-    #   encryption key. If you don't specify a value for this parameter, then
-    #   the copy of the DB snapshot is encrypted with the same KMS key as the
+    #   specify a value for this parameter to encrypt the copy with a new AWS
+    #   KMS CMK. If you don't specify a value for this parameter, then the
+    #   copy of the DB snapshot is encrypted with the same AWS KMS key as the
     #   source DB snapshot.
     #
     #   If you copy an encrypted DB snapshot that is shared from another AWS
@@ -1465,9 +1466,9 @@ module Aws::RDS
     #   the copy is encrypted.
     #
     #   If you copy an encrypted snapshot to a different AWS Region, then you
-    #   must specify a KMS key for the destination AWS Region. KMS encryption
-    #   keys are specific to the AWS Region that they are created in, and you
-    #   can't use encryption keys from one AWS Region in another AWS Region.
+    #   must specify a AWS KMS key identifier for the destination AWS Region.
+    #   AWS KMS CMKs are specific to the AWS Region that they are created in,
+    #   and you can't use CMKs from one AWS Region in another AWS Region.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
@@ -1507,11 +1508,11 @@ module Aws::RDS
     #     the us-west-2 AWS Region. For this example, the `DestinationRegion`
     #     in the presigned URL must be set to the us-east-1 AWS Region.
     #
-    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
-    #     encrypt the copy of the DB snapshot in the destination AWS Region.
-    #     This is the same identifier for both the `CopyDBSnapshot` action
-    #     that is called in the destination AWS Region, and the action
-    #     contained in the presigned URL.
+    #   * `KmsKeyId` - The AWS KMS key identifier for the customer master key
+    #     (CMK) to use to encrypt the copy of the DB snapshot in the
+    #     destination AWS Region. This is the same identifier for both the
+    #     `CopyDBSnapshot` action that is called in the destination AWS
+    #     Region, and the action contained in the presigned URL.
     #
     #   * `SourceDBSnapshotIdentifier` - The DB snapshot identifier for the
     #     encrypted snapshot to be copied. This identifier must be in the
@@ -2037,30 +2038,27 @@ module Aws::RDS
     # @option params [String] :kms_key_id
     #   The AWS KMS key identifier for an encrypted DB cluster.
     #
-    #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-    #   encryption key. If you are creating a DB cluster with the same AWS
-    #   account that owns the KMS encryption key used to encrypt the new DB
-    #   cluster, then you can use the KMS key alias instead of the ARN for the
-    #   KMS encryption key.
+    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+    #   name for the AWS KMS customer master key (CMK). To use a CMK in a
+    #   different AWS account, specify the key ARN or alias ARN.
     #
-    #   If an encryption key isn't specified in `KmsKeyId`\:
+    #   When a CMK isn't specified in `KmsKeyId`\:
     #
     #   * If `ReplicationSourceIdentifier` identifies an encrypted source,
-    #     then Amazon RDS will use the encryption key used to encrypt the
-    #     source. Otherwise, Amazon RDS will use your default encryption key.
+    #     then Amazon RDS will use the CMK used to encrypt the source.
+    #     Otherwise, Amazon RDS will use your default CMK.
     #
     #   * If the `StorageEncrypted` parameter is enabled and
     #     `ReplicationSourceIdentifier` isn't specified, then Amazon RDS will
-    #     use your default encryption key.
+    #     use your default CMK.
     #
-    #   AWS KMS creates the default encryption key for your AWS account. Your
-    #   AWS account has a different default encryption key for each AWS
-    #   Region.
+    #   There is a default CMK for your AWS account. Your AWS account has a
+    #   different default CMK for each AWS Region.
     #
     #   If you create a read replica of an encrypted DB cluster in another AWS
-    #   Region, you must set `KmsKeyId` to a KMS key ID that is valid in the
-    #   destination AWS Region. This key is used to encrypt the read replica
-    #   in that AWS Region.
+    #   Region, you must set `KmsKeyId` to a AWS KMS key identifier that is
+    #   valid in the destination AWS Region. This CMK is used to encrypt the
+    #   read replica in that AWS Region.
     #
     # @option params [String] :pre_signed_url
     #   A URL that contains a Signature Version 4 signed request for the
@@ -2078,9 +2076,9 @@ module Aws::RDS
     #
     #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
     #     encrypt the copy of the DB cluster in the destination AWS Region.
-    #     This should refer to the same KMS key for both the `CreateDBCluster`
-    #     action that is called in the destination AWS Region, and the action
-    #     contained in the pre-signed URL.
+    #     This should refer to the same AWS KMS CMK for both the
+    #     `CreateDBCluster` action that is called in the destination AWS
+    #     Region, and the action contained in the pre-signed URL.
     #
     #   * `DestinationRegion` - The name of the AWS Region that Aurora read
     #     replica will be created in.
@@ -3421,22 +3419,19 @@ module Aws::RDS
     # @option params [String] :kms_key_id
     #   The AWS KMS key identifier for an encrypted DB instance.
     #
-    #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-    #   encryption key. If you are creating a DB instance with the same AWS
-    #   account that owns the KMS encryption key used to encrypt the new DB
-    #   instance, then you can use the KMS key alias instead of the ARN for
-    #   the KM encryption key.
+    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+    #   name for the AWS KMS customer master key (CMK). To use a CMK in a
+    #   different AWS account, specify the key ARN or alias ARN.
     #
     #   **Amazon Aurora**
     #
-    #   Not applicable. The KMS key identifier is managed by the DB cluster.
-    #   For more information, see `CreateDBCluster`.
+    #   Not applicable. The AWS KMS key identifier is managed by the DB
+    #   cluster. For more information, see `CreateDBCluster`.
     #
     #   If `StorageEncrypted` is enabled, and you do not specify a value for
-    #   the `KmsKeyId` parameter, then Amazon RDS will use your default
-    #   encryption key. AWS KMS creates the default encryption key for your
-    #   AWS account. Your AWS account has a different default encryption key
-    #   for each AWS Region.
+    #   the `KmsKeyId` parameter, then Amazon RDS uses your default CMK. There
+    #   is a default CMK for your AWS account. Your AWS account has a
+    #   different default CMK for each AWS Region.
     #
     # @option params [String] :domain
     #   The Active Directory directory ID to create the DB instance in.
@@ -3538,13 +3533,15 @@ module Aws::RDS
     #
     # @option params [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
-    #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
-    #   identifier, or the KMS key alias for the KMS encryption key.
+    #   data.
+    #
+    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+    #   name for the AWS KMS customer master key (CMK).
     #
     #   If you do not specify a value for `PerformanceInsightsKMSKeyId`, then
-    #   Amazon RDS uses your default encryption key. AWS KMS creates the
-    #   default encryption key for your AWS account. Your AWS account has a
-    #   different default encryption key for each AWS Region.
+    #   Amazon RDS uses your default CMK. There is a default CMK for your AWS
+    #   account. Your AWS account has a different default CMK for each AWS
+    #   Region.
     #
     # @option params [Integer] :performance_insights_retention_period
     #   The amount of time, in days, to retain Performance Insights data.
@@ -3817,6 +3814,8 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -4067,20 +4066,21 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key ID for an encrypted read replica. The KMS key ID is
-    #   the Amazon Resource Name (ARN), KMS key identifier, or the KMS key
-    #   alias for the KMS encryption key.
+    #   The AWS KMS key identifier for an encrypted read replica.
+    #
+    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+    #   name for the AWS KMS CMK.
     #
     #   If you create an encrypted read replica in the same AWS Region as the
     #   source DB instance, then you do not have to specify a value for this
-    #   parameter. The read replica is encrypted with the same KMS key as the
-    #   source DB instance.
+    #   parameter. The read replica is encrypted with the same AWS KMS CMK as
+    #   the source DB instance.
     #
     #   If you create an encrypted read replica in a different AWS Region,
-    #   then you must specify a KMS key for the destination AWS Region. KMS
-    #   encryption keys are specific to the AWS Region that they are created
-    #   in, and you can't use encryption keys from one AWS Region in another
-    #   AWS Region.
+    #   then you must specify a AWS KMS key identifier for the destination AWS
+    #   Region. AWS KMS CMKs are specific to the AWS Region that they are
+    #   created in, and you can't use CMKs from one AWS Region in another AWS
+    #   Region.
     #
     #   You can't create an encrypted read replica from an unencrypted DB
     #   instance.
@@ -4173,13 +4173,15 @@ module Aws::RDS
     #
     # @option params [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
-    #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
-    #   identifier, or the KMS key alias for the KMS encryption key.
+    #   data.
+    #
+    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+    #   name for the AWS KMS customer master key (CMK).
     #
     #   If you do not specify a value for `PerformanceInsightsKMSKeyId`, then
-    #   Amazon RDS uses your default encryption key. AWS KMS creates the
-    #   default encryption key for your AWS account. Your AWS account has a
-    #   different default encryption key for each AWS Region.
+    #   Amazon RDS uses your default CMK. There is a default CMK for your AWS
+    #   account. Your AWS account has a different default CMK for each AWS
+    #   Region.
     #
     # @option params [Integer] :performance_insights_retention_period
     #   The amount of time, in days, to retain Performance Insights data.
@@ -4459,6 +4461,8 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -4790,7 +4794,7 @@ module Aws::RDS
     end
 
     # Creates a snapshot of a DB instance. The source DB instance must be in
-    # the `available` or `storage-optimization`state.
+    # the `available` or `storage-optimization` state.
     #
     # @option params [required, String] :db_snapshot_identifier
     #   The identifier for the DB snapshot.
@@ -5996,6 +6000,8 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -6006,12 +6012,18 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Deletes automated backups based on the source instance's
-    # `DbiResourceId` value or the restorable instance's resource ID.
+    # Deletes automated backups using the `DbiResourceId` value of the
+    # source DB instance or the Amazon Resource Name (ARN) of the automated
+    # backups.
     #
-    # @option params [required, String] :dbi_resource_id
+    # @option params [String] :dbi_resource_id
     #   The identifier for the source DB instance, which can't be changed and
     #   which is unique to an AWS Region.
+    #
+    # @option params [String] :db_instance_automated_backups_arn
+    #   The Amazon Resource Name (ARN) of the automated backups to delete, for
+    #   example,
+    #   `arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE`.
     #
     # @return [Types::DeleteDBInstanceAutomatedBackupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6020,7 +6032,8 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_db_instance_automated_backup({
-    #     dbi_resource_id: "String", # required
+    #     dbi_resource_id: "String",
+    #     db_instance_automated_backups_arn: "String",
     #   })
     #
     # @example Response structure
@@ -6049,6 +6062,10 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.kms_key_id #=> String
     #   resp.db_instance_automated_backup.timezone #=> String
     #   resp.db_instance_automated_backup.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance_automated_backup.backup_retention_period #=> Integer
+    #   resp.db_instance_automated_backup.db_instance_automated_backups_arn #=> String
+    #   resp.db_instance_automated_backup.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceAutomatedBackup AWS API Documentation
     #
@@ -7833,6 +7850,11 @@ module Aws::RDS
     #   parameter is specified the response includes only records beyond the
     #   marker, up to `MaxRecords`.
     #
+    # @option params [String] :db_instance_automated_backups_arn
+    #   The Amazon Resource Name (ARN) of the replicated automated backups,
+    #   for example,
+    #   `arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE`.
+    #
     # @return [Types::DBInstanceAutomatedBackupMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBInstanceAutomatedBackupMessage#marker #marker} => String
@@ -7853,6 +7875,7 @@ module Aws::RDS
     #     ],
     #     max_records: 1,
     #     marker: "String",
+    #     db_instance_automated_backups_arn: "String",
     #   })
     #
     # @example Response structure
@@ -7883,6 +7906,10 @@ module Aws::RDS
     #   resp.db_instance_automated_backups[0].kms_key_id #=> String
     #   resp.db_instance_automated_backups[0].timezone #=> String
     #   resp.db_instance_automated_backups[0].iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance_automated_backups[0].backup_retention_period #=> Integer
+    #   resp.db_instance_automated_backups[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance_automated_backups[0].db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance_automated_backups[0].db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstanceAutomatedBackups AWS API Documentation
     #
@@ -8110,6 +8137,8 @@ module Aws::RDS
     #   resp.db_instances[0].tag_list #=> Array
     #   resp.db_instances[0].tag_list[0].key #=> String
     #   resp.db_instances[0].tag_list[0].value #=> String
+    #   resp.db_instances[0].db_instance_automated_backups_replications #=> Array
+    #   resp.db_instances[0].db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -10697,6 +10726,7 @@ module Aws::RDS
     #   resp.source_regions[0].region_name #=> String
     #   resp.source_regions[0].endpoint #=> String
     #   resp.source_regions[0].status #=> String
+    #   resp.source_regions[0].supports_db_instance_automated_backups_replication #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeSourceRegions AWS API Documentation
     #
@@ -12633,13 +12663,15 @@ module Aws::RDS
     #
     # @option params [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
-    #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
-    #   identifier, or the KMS key alias for the KMS encryption key.
+    #   data.
+    #
+    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+    #   name for the AWS KMS customer master key (CMK).
     #
     #   If you do not specify a value for `PerformanceInsightsKMSKeyId`, then
-    #   Amazon RDS uses your default encryption key. AWS KMS creates the
-    #   default encryption key for your AWS account. Your AWS account has a
-    #   different default encryption key for each AWS Region.
+    #   Amazon RDS uses your default CMK. There is a default CMK for your AWS
+    #   account. Your AWS account has a different default CMK for each AWS
+    #   Region.
     #
     # @option params [Integer] :performance_insights_retention_period
     #   The amount of time, in days, to retain Performance Insights data.
@@ -12926,6 +12958,8 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -14017,6 +14051,8 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -14417,6 +14453,8 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -14586,7 +14624,7 @@ module Aws::RDS
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to disassociate from
-    #   the DB instance, for example
+    #   the DB instance, for example,
     #   `arn:aws:iam::123456789012:role/AccessRole`.
     #
     # @option params [required, String] :feature_name
@@ -15135,17 +15173,14 @@ module Aws::RDS
     # @option params [String] :kms_key_id
     #   The AWS KMS key identifier for an encrypted DB cluster.
     #
-    #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-    #   encryption key. If you are creating a DB cluster with the same AWS
-    #   account that owns the KMS encryption key used to encrypt the new DB
-    #   cluster, then you can use the KMS key alias instead of the ARN for the
-    #   KM encryption key.
+    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+    #   name for the AWS KMS customer master key (CMK). To use a CMK in a
+    #   different AWS account, specify the key ARN or alias ARN.
     #
     #   If the StorageEncrypted parameter is enabled, and you do not specify a
     #   value for the `KmsKeyId` parameter, then Amazon RDS will use your
-    #   default encryption key. AWS KMS creates the default encryption key for
-    #   your AWS account. Your AWS account has a different default encryption
-    #   key for each AWS Region.
+    #   default CMK. There is a default CMK for your AWS account. Your AWS
+    #   account has a different default CMK for each AWS Region.
     #
     # @option params [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of AWS Identity and
@@ -15510,18 +15545,17 @@ module Aws::RDS
     #   The AWS KMS key identifier to use when restoring an encrypted DB
     #   cluster from a DB snapshot or DB cluster snapshot.
     #
-    #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-    #   encryption key. If you are restoring a DB cluster with the same AWS
-    #   account that owns the KMS encryption key used to encrypt the new DB
-    #   cluster, then you can use the KMS key alias instead of the ARN for the
-    #   KMS encryption key.
+    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+    #   name for the AWS KMS customer master key (CMK). To use a CMK in a
+    #   different AWS account, specify the key ARN or alias ARN.
     #
-    #   If you don't specify a value for the `KmsKeyId` parameter, then the
+    #   When you don't specify a value for the `KmsKeyId` parameter, then the
     #   following occurs:
     #
     #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier` is
-    #     encrypted, then the restored DB cluster is encrypted using the KMS
-    #     key that was used to encrypt the DB snapshot or DB cluster snapshot.
+    #     encrypted, then the restored DB cluster is encrypted using the AWS
+    #     KMS CMK that was used to encrypt the DB snapshot or DB cluster
+    #     snapshot.
     #
     #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier`
     #     isn't encrypted, then the restored DB cluster isn't encrypted.
@@ -15898,23 +15932,21 @@ module Aws::RDS
     #   The AWS KMS key identifier to use when restoring an encrypted DB
     #   cluster from an encrypted DB cluster.
     #
-    #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-    #   encryption key. If you are restoring a DB cluster with the same AWS
-    #   account that owns the KMS encryption key used to encrypt the new DB
-    #   cluster, then you can use the KMS key alias instead of the ARN for the
-    #   KMS encryption key.
+    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+    #   name for the AWS KMS customer master key (CMK). To use a CMK in a
+    #   different AWS account, specify the key ARN or alias ARN.
     #
     #   You can restore to a new DB cluster and encrypt the new DB cluster
-    #   with a KMS key that is different than the KMS key used to encrypt the
-    #   source DB cluster. The new DB cluster is encrypted with the KMS key
-    #   identified by the `KmsKeyId` parameter.
+    #   with a AWS KMS CMK that is different than the AWS KMS key used to
+    #   encrypt the source DB cluster. The new DB cluster is encrypted with
+    #   the AWS KMS CMK identified by the `KmsKeyId` parameter.
     #
     #   If you don't specify a value for the `KmsKeyId` parameter, then the
     #   following occurs:
     #
     #   * If the DB cluster is encrypted, then the restored DB cluster is
-    #     encrypted using the KMS key that was used to encrypt the source DB
-    #     cluster.
+    #     encrypted using the AWS KMS CMK that was used to encrypt the source
+    #     DB cluster.
     #
     #   * If the DB cluster isn't encrypted, then the restored DB cluster
     #     isn't encrypted.
@@ -16147,23 +16179,23 @@ module Aws::RDS
     end
 
     # Creates a new DB instance from a DB snapshot. The target database is
-    # created from the source database restore point with the most of
-    # original configuration with the default security group and the default
-    # DB parameter group. By default, the new DB instance is created as a
-    # single-AZ deployment except when the instance is a SQL Server instance
-    # that has an option group that is associated with mirroring; in this
-    # case, the instance becomes a mirrored AZ deployment and not a
-    # single-AZ deployment.
+    # created from the source database restore point with most of the
+    # source's original configuration, including the default security group
+    # and DB parameter group. By default, the new DB instance is created as
+    # a Single-AZ deployment, except when the instance is a SQL Server
+    # instance that has an option group associated with mirroring. In this
+    # case, the instance becomes a Multi-AZ deployment, not a Single-AZ
+    # deployment.
     #
-    # If your intent is to replace your original DB instance with the new,
+    # If you want to replace your original DB instance with the new,
     # restored DB instance, then rename your original DB instance before you
     # call the RestoreDBInstanceFromDBSnapshot action. RDS doesn't allow
-    # two DB instances with the same name. Once you have renamed your
+    # two DB instances with the same name. After you have renamed your
     # original DB instance with a different identifier, then you can pass
     # the original name of the DB instance as the DBInstanceIdentifier in
     # the call to the RestoreDBInstanceFromDBSnapshot action. The result is
-    # that you will replace the original DB instance with the DB instance
-    # created from the snapshot.
+    # that you replace the original DB instance with the DB instance created
+    # from the snapshot.
     #
     # If you are restoring from a shared manual DB snapshot, the
     # `DBSnapshotIdentifier` must be the ARN of the shared DB snapshot.
@@ -16711,6 +16743,8 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -16959,17 +16993,14 @@ module Aws::RDS
     # @option params [String] :kms_key_id
     #   The AWS KMS key identifier for an encrypted DB instance.
     #
-    #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
-    #   encryption key. If you are creating a DB instance with the same AWS
-    #   account that owns the KMS encryption key used to encrypt the new DB
-    #   instance, then you can use the KMS key alias instead of the ARN for
-    #   the KM encryption key.
+    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+    #   name for the AWS KMS customer master key (CMK). To use a CMK in a
+    #   different AWS account, specify the key ARN or alias ARN.
     #
     #   If the `StorageEncrypted` parameter is enabled, and you do not specify
     #   a value for the `KmsKeyId` parameter, then Amazon RDS will use your
-    #   default encryption key. AWS KMS creates the default encryption key for
-    #   your AWS account. Your AWS account has a different default encryption
-    #   key for each AWS Region.
+    #   default CMK. There is a default CMK for your AWS account. Your AWS
+    #   account has a different default CMK for each AWS Region.
     #
     # @option params [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the DB instance
@@ -17050,13 +17081,15 @@ module Aws::RDS
     #
     # @option params [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
-    #   data. The KMS key ID is the Amazon Resource Name (ARN), the KMS key
-    #   identifier, or the KMS key alias for the KMS encryption key.
+    #   data.
+    #
+    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+    #   name for the AWS KMS customer master key (CMK).
     #
     #   If you do not specify a value for `PerformanceInsightsKMSKeyId`, then
-    #   Amazon RDS uses your default encryption key. AWS KMS creates the
-    #   default encryption key for your AWS account. Your AWS account has a
-    #   different default encryption key for each AWS Region.
+    #   Amazon RDS uses your default CMK. There is a default CMK for your AWS
+    #   account. Your AWS account has a different default CMK for each AWS
+    #   Region.
     #
     # @option params [Integer] :performance_insights_retention_period
     #   The amount of time, in days, to retain Performance Insights data.
@@ -17278,6 +17311,8 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -17597,6 +17632,11 @@ module Aws::RDS
     #   The upper limit to which Amazon RDS can automatically scale the
     #   storage of the DB instance.
     #
+    # @option params [String] :source_db_instance_automated_backups_arn
+    #   The Amazon Resource Name (ARN) of the replicated automated backups
+    #   from which to restore, for example,
+    #   `arn:aws:rds:useast-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE`.
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -17742,6 +17782,7 @@ module Aws::RDS
     #     deletion_protection: false,
     #     source_dbi_resource_id: "String",
     #     max_allocated_storage: 1,
+    #     source_db_instance_automated_backups_arn: "String",
     #   })
     #
     # @example Response structure
@@ -17865,6 +17906,8 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -17973,7 +18016,7 @@ module Aws::RDS
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the DB cluster, for example
+    #   The Amazon Resource Name (ARN) of the DB cluster, for example,
     #   `arn:aws:rds:us-east-1:12345667890:cluster:das-cluster`.
     #
     # @option params [required, String] :mode
@@ -17984,8 +18027,8 @@ module Aws::RDS
     #
     # @option params [required, String] :kms_key_id
     #   The AWS KMS key identifier for encrypting messages in the database
-    #   activity stream. The key identifier can be either a key ID, a key ARN,
-    #   or a key alias.
+    #   activity stream. The AWS KMS key identifier is the key ARN, key ID,
+    #   alias ARN, or alias name for the AWS KMS customer master key (CMK).
     #
     # @option params [Boolean] :apply_immediately
     #   Specifies whether or not the database activity stream is to start as
@@ -18297,6 +18340,8 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -18304,6 +18349,90 @@ module Aws::RDS
     # @param [Hash] params ({})
     def start_db_instance(params = {}, options = {})
       req = build_request(:start_db_instance, params)
+      req.send_request(options)
+    end
+
+    # Enables replication of automated backups to a different AWS Region.
+    #
+    # For more information, see [ Replicating Automated Backups to Another
+    # AWS Region][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html
+    #
+    # @option params [required, String] :source_db_instance_arn
+    #   The Amazon Resource Name (ARN) of the source DB instance for the
+    #   replicated automated backups, for example,
+    #   `arn:aws:rds:us-west-2:123456789012:db:mydatabase`.
+    #
+    # @option params [Integer] :backup_retention_period
+    #   The retention period for the replicated automated backups.
+    #
+    # @option params [String] :kms_key_id
+    #   The AWS KMS key identifier for encryption of the replicated automated
+    #   backups. The KMS key ID is the Amazon Resource Name (ARN) for the KMS
+    #   encryption key in the destination AWS Region, for example,
+    #   `arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE`.
+    #
+    # @option params [String] :pre_signed_url
+    #   A URL that contains a Signature Version 4 signed request for the
+    #   StartDBInstanceAutomatedBackupsReplication action to be called in the
+    #   AWS Region of the source DB instance. The presigned URL must be a
+    #   valid request for the StartDBInstanceAutomatedBackupsReplication API
+    #   action that can be executed in the AWS Region that contains the source
+    #   DB instance.
+    #
+    # @return [Types::StartDBInstanceAutomatedBackupsReplicationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDBInstanceAutomatedBackupsReplicationResult#db_instance_automated_backup #db_instance_automated_backup} => Types::DBInstanceAutomatedBackup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_db_instance_automated_backups_replication({
+    #     source_db_instance_arn: "String", # required
+    #     backup_retention_period: 1,
+    #     kms_key_id: "String",
+    #     pre_signed_url: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_instance_automated_backup.db_instance_arn #=> String
+    #   resp.db_instance_automated_backup.dbi_resource_id #=> String
+    #   resp.db_instance_automated_backup.region #=> String
+    #   resp.db_instance_automated_backup.db_instance_identifier #=> String
+    #   resp.db_instance_automated_backup.restore_window.earliest_time #=> Time
+    #   resp.db_instance_automated_backup.restore_window.latest_time #=> Time
+    #   resp.db_instance_automated_backup.allocated_storage #=> Integer
+    #   resp.db_instance_automated_backup.status #=> String
+    #   resp.db_instance_automated_backup.port #=> Integer
+    #   resp.db_instance_automated_backup.availability_zone #=> String
+    #   resp.db_instance_automated_backup.vpc_id #=> String
+    #   resp.db_instance_automated_backup.instance_create_time #=> Time
+    #   resp.db_instance_automated_backup.master_username #=> String
+    #   resp.db_instance_automated_backup.engine #=> String
+    #   resp.db_instance_automated_backup.engine_version #=> String
+    #   resp.db_instance_automated_backup.license_model #=> String
+    #   resp.db_instance_automated_backup.iops #=> Integer
+    #   resp.db_instance_automated_backup.option_group_name #=> String
+    #   resp.db_instance_automated_backup.tde_credential_arn #=> String
+    #   resp.db_instance_automated_backup.encrypted #=> Boolean
+    #   resp.db_instance_automated_backup.storage_type #=> String
+    #   resp.db_instance_automated_backup.kms_key_id #=> String
+    #   resp.db_instance_automated_backup.timezone #=> String
+    #   resp.db_instance_automated_backup.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance_automated_backup.backup_retention_period #=> Integer
+    #   resp.db_instance_automated_backup.db_instance_automated_backups_arn #=> String
+    #   resp.db_instance_automated_backup.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstanceAutomatedBackupsReplication AWS API Documentation
+    #
+    # @overload start_db_instance_automated_backups_replication(params = {})
+    # @param [Hash] params ({})
+    def start_db_instance_automated_backups_replication(params = {}, options = {})
+      req = build_request(:start_db_instance_automated_backups_replication, params)
       req.send_request(options)
     end
 
@@ -18326,11 +18455,11 @@ module Aws::RDS
     #   when exporting a snapshot.
     #
     # @option params [required, String] :kms_key_id
-    #   The ID of the AWS KMS key to use to encrypt the snapshot exported to
-    #   Amazon S3. The KMS key ID is the Amazon Resource Name (ARN), the KMS
-    #   key identifier, or the KMS key alias for the KMS encryption key. The
-    #   caller of this operation must be authorized to execute the following
-    #   operations. These can be set in the KMS key policy:
+    #   The ID of the AWS KMS customer master key (CMK) to use to encrypt the
+    #   snapshot exported to Amazon S3. The AWS KMS key identifier is the key
+    #   ARN, key ID, alias ARN, or alias name for the AWS KMS customer master
+    #   key (CMK). The caller of this operation must be authorized to execute
+    #   the following operations. These can be set in the AWS KMS key policy:
     #
     #   * GrantOperation.Encrypt
     #
@@ -18759,6 +18888,8 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -18766,6 +18897,70 @@ module Aws::RDS
     # @param [Hash] params ({})
     def stop_db_instance(params = {}, options = {})
       req = build_request(:stop_db_instance, params)
+      req.send_request(options)
+    end
+
+    # Stops automated backup replication for a DB instance.
+    #
+    # For more information, see [ Replicating Automated Backups to Another
+    # AWS Region][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html
+    #
+    # @option params [required, String] :source_db_instance_arn
+    #   The Amazon Resource Name (ARN) of the source DB instance for which to
+    #   stop replicating automated backups, for example,
+    #   `arn:aws:rds:us-west-2:123456789012:db:mydatabase`.
+    #
+    # @return [Types::StopDBInstanceAutomatedBackupsReplicationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopDBInstanceAutomatedBackupsReplicationResult#db_instance_automated_backup #db_instance_automated_backup} => Types::DBInstanceAutomatedBackup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_db_instance_automated_backups_replication({
+    #     source_db_instance_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_instance_automated_backup.db_instance_arn #=> String
+    #   resp.db_instance_automated_backup.dbi_resource_id #=> String
+    #   resp.db_instance_automated_backup.region #=> String
+    #   resp.db_instance_automated_backup.db_instance_identifier #=> String
+    #   resp.db_instance_automated_backup.restore_window.earliest_time #=> Time
+    #   resp.db_instance_automated_backup.restore_window.latest_time #=> Time
+    #   resp.db_instance_automated_backup.allocated_storage #=> Integer
+    #   resp.db_instance_automated_backup.status #=> String
+    #   resp.db_instance_automated_backup.port #=> Integer
+    #   resp.db_instance_automated_backup.availability_zone #=> String
+    #   resp.db_instance_automated_backup.vpc_id #=> String
+    #   resp.db_instance_automated_backup.instance_create_time #=> Time
+    #   resp.db_instance_automated_backup.master_username #=> String
+    #   resp.db_instance_automated_backup.engine #=> String
+    #   resp.db_instance_automated_backup.engine_version #=> String
+    #   resp.db_instance_automated_backup.license_model #=> String
+    #   resp.db_instance_automated_backup.iops #=> Integer
+    #   resp.db_instance_automated_backup.option_group_name #=> String
+    #   resp.db_instance_automated_backup.tde_credential_arn #=> String
+    #   resp.db_instance_automated_backup.encrypted #=> Boolean
+    #   resp.db_instance_automated_backup.storage_type #=> String
+    #   resp.db_instance_automated_backup.kms_key_id #=> String
+    #   resp.db_instance_automated_backup.timezone #=> String
+    #   resp.db_instance_automated_backup.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance_automated_backup.backup_retention_period #=> Integer
+    #   resp.db_instance_automated_backup.db_instance_automated_backups_arn #=> String
+    #   resp.db_instance_automated_backup.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstanceAutomatedBackupsReplication AWS API Documentation
+    #
+    # @overload stop_db_instance_automated_backups_replication(params = {})
+    # @param [Hash] params ({})
+    def stop_db_instance_automated_backups_replication(params = {}, options = {})
+      req = build_request(:stop_db_instance_automated_backups_replication, params)
       req.send_request(options)
     end
 
@@ -18782,7 +18977,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

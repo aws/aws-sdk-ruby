@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-12-04)
+------------------
+
+* Feature - Adding HEALING to ClusterState.
+
 1.31.0 (2020-11-23)
 ------------------
 

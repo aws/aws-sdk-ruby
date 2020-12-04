@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.214.0 (2020-12-04)
+------------------
+
+* Feature - This release introduces tag-on-create capability for the CreateImage API. A user can now specify tags that will be applied to the new resources (image, snapshots or both), during creation time.
+
 1.213.0 (2020-12-01)
 ------------------
 
