@@ -731,7 +731,8 @@ module Aws::SSM
     #   By default, when you create a new associations, the system runs it
     #   immediately after it is created and then according to the schedule you
     #   specified. Specify this option if you don't want an association to
-    #   run immediately after you create it.
+    #   run immediately after you create it. This parameter is not supported
+    #   for rate expressions.
     #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1407,6 +1408,44 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # If you create a new application in AppManager, Systems Manager calls
+    # this API action to specify information about the new application,
+    # including the application type.
+    #
+    # @option params [required, String] :resource_id
+    #   A resource ID for a new AppManager application.
+    #
+    # @option params [Hash<String,Types::MetadataValue>] :metadata
+    #   Metadata for a new AppManager application.
+    #
+    # @return [Types::CreateOpsMetadataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateOpsMetadataResult#ops_metadata_arn #ops_metadata_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_ops_metadata({
+    #     resource_id: "OpsMetadataResourceId", # required
+    #     metadata: {
+    #       "MetadataKey" => {
+    #         value: "MetadataValueString",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ops_metadata_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateOpsMetadata AWS API Documentation
+    #
+    # @overload create_ops_metadata(params = {})
+    # @param [Hash] params ({})
+    def create_ops_metadata(params = {}, options = {})
+      req = build_request(:create_ops_metadata, params)
+      req.send_request(options)
+    end
+
     # Creates a patch baseline.
     #
     # <note markdown="1"> For information about valid key and value pairs in `PatchFilters` for
@@ -1517,7 +1556,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_patch_baseline({
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS
     #     name: "BaselineName", # required
     #     global_filters: {
     #       patch_filters: [ # required
@@ -1881,6 +1920,28 @@ module Aws::SSM
     # @param [Hash] params ({})
     def delete_maintenance_window(params = {}, options = {})
       req = build_request(:delete_maintenance_window, params)
+      req.send_request(options)
+    end
+
+    # Delete OpsMetadata related to an application.
+    #
+    # @option params [required, String] :ops_metadata_arn
+    #   The Amazon Resource Name (ARN) of an OpsMetadata Object to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ops_metadata({
+    #     ops_metadata_arn: "OpsMetadataArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteOpsMetadata AWS API Documentation
+    #
+    # @overload delete_ops_metadata(params = {})
+    # @param [Hash] params ({})
+    def delete_ops_metadata(params = {}, options = {})
+      req = build_request(:delete_ops_metadata, params)
       req.send_request(options)
     end
 
@@ -4109,7 +4170,7 @@ module Aws::SSM
     #   resp.baseline_identities #=> Array
     #   resp.baseline_identities[0].baseline_id #=> String
     #   resp.baseline_identities[0].baseline_name #=> String
-    #   resp.baseline_identities[0].operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN"
+    #   resp.baseline_identities[0].operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS"
     #   resp.baseline_identities[0].baseline_description #=> String
     #   resp.baseline_identities[0].default_baseline #=> Boolean
     #   resp.next_token #=> String
@@ -4223,7 +4284,7 @@ module Aws::SSM
     #   resp.mappings[0].patch_group #=> String
     #   resp.mappings[0].baseline_identity.baseline_id #=> String
     #   resp.mappings[0].baseline_identity.baseline_name #=> String
-    #   resp.mappings[0].baseline_identity.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN"
+    #   resp.mappings[0].baseline_identity.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS"
     #   resp.mappings[0].baseline_identity.baseline_description #=> String
     #   resp.mappings[0].baseline_identity.default_baseline #=> Boolean
     #   resp.next_token #=> String
@@ -4263,6 +4324,10 @@ module Aws::SSM
     #
     # : Valid properties: PRODUCT, PRIORITY
     #
+    # MACOS
+    #
+    # : Valid properties: PRODUCT, CLASSIFICATION
+    #
     # ORACLE\_LINUX
     #
     # : Valid properties: PRODUCT, CLASSIFICATION, SEVERITY
@@ -4292,8 +4357,8 @@ module Aws::SSM
     #
     # @option params [String] :patch_set
     #   Indicates whether to list patches for the Windows operating system or
-    #   for Microsoft applications. Not applicable for Linux operating
-    #   systems.
+    #   for Microsoft applications. Not applicable for the Linux or macOS
+    #   operating systems.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -4314,7 +4379,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_patch_properties({
-    #     operating_system: "WINDOWS", # required, accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN
+    #     operating_system: "WINDOWS", # required, accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS
     #     property: "PRODUCT", # required, accepts PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PRIORITY, SEVERITY
     #     patch_set: "OS", # accepts OS, APPLICATION
     #     max_results: 1,
@@ -4714,13 +4779,13 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_default_patch_baseline({
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS
     #   })
     #
     # @example Response structure
     #
     #   resp.baseline_id #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDefaultPatchBaseline AWS API Documentation
     #
@@ -5363,6 +5428,50 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # View operational metadata related to an application in AppManager.
+    #
+    # @option params [required, String] :ops_metadata_arn
+    #   The Amazon Resource Name (ARN) of an OpsMetadata Object to view.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @return [Types::GetOpsMetadataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOpsMetadataResult#resource_id #resource_id} => String
+    #   * {Types::GetOpsMetadataResult#metadata #metadata} => Hash&lt;String,Types::MetadataValue&gt;
+    #   * {Types::GetOpsMetadataResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ops_metadata({
+    #     ops_metadata_arn: "OpsMetadataArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_id #=> String
+    #   resp.metadata #=> Hash
+    #   resp.metadata["MetadataKey"].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsMetadata AWS API Documentation
+    #
+    # @overload get_ops_metadata(params = {})
+    # @param [Hash] params ({})
+    def get_ops_metadata(params = {}, options = {})
+      req = build_request(:get_ops_metadata, params)
+      req.send_request(options)
+    end
+
     # View a summary of OpsItems based on specified filters and aggregators.
     #
     # @option params [String] :sync_name
@@ -5741,7 +5850,7 @@ module Aws::SSM
     #
     #   resp.baseline_id #=> String
     #   resp.name #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS"
     #   resp.global_filters.patch_filters #=> Array
     #   resp.global_filters.patch_filters[0].key #=> String, one of "ARCH", "ADVISORY_ID", "BUGZILLA_ID", "PATCH_SET", "PRODUCT", "PRODUCT_FAMILY", "CLASSIFICATION", "CVE_ID", "EPOCH", "MSRC_SEVERITY", "NAME", "PATCH_ID", "SECTION", "PRIORITY", "REPOSITORY", "RELEASE", "SEVERITY", "SECURITY", "VERSION"
     #   resp.global_filters.patch_filters[0].values #=> Array
@@ -5802,14 +5911,14 @@ module Aws::SSM
     #
     #   resp = client.get_patch_baseline_for_patch_group({
     #     patch_group: "PatchGroup", # required
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS
     #   })
     #
     # @example Response structure
     #
     #   resp.baseline_id #=> String
     #   resp.patch_group #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineForPatchGroup AWS API Documentation
     #
@@ -6619,6 +6728,59 @@ module Aws::SSM
     # @param [Hash] params ({})
     def list_inventory_entries(params = {}, options = {})
       req = build_request(:list_inventory_entries, params)
+      req.send_request(options)
+    end
+
+    # Systems Manager calls this API action when displaying all AppManager
+    # OpsMetadata objects or blobs.
+    #
+    # @option params [Array<Types::OpsMetadataFilter>] :filters
+    #   One or more filters to limit the number of OpsMetadata objects
+    #   returned by the call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @return [Types::ListOpsMetadataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOpsMetadataResult#ops_metadata_list #ops_metadata_list} => Array&lt;Types::OpsMetadata&gt;
+    #   * {Types::ListOpsMetadataResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_ops_metadata({
+    #     filters: [
+    #       {
+    #         key: "OpsMetadataFilterKey", # required
+    #         values: ["OpsMetadataFilterValue"], # required
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ops_metadata_list #=> Array
+    #   resp.ops_metadata_list[0].resource_id #=> String
+    #   resp.ops_metadata_list[0].ops_metadata_arn #=> String
+    #   resp.ops_metadata_list[0].last_modified_date #=> Time
+    #   resp.ops_metadata_list[0].last_modified_user #=> String
+    #   resp.ops_metadata_list[0].creation_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListOpsMetadata AWS API Documentation
+    #
+    # @overload list_ops_metadata(params = {})
+    # @param [Hash] params ({})
+    def list_ops_metadata(params = {}, options = {})
+      req = build_request(:list_ops_metadata, params)
       req.send_request(options)
     end
 
@@ -8495,7 +8657,8 @@ module Aws::SSM
     #   By default, when you update an association, the system runs it
     #   immediately after it is updated and then according to the schedule you
     #   specified. Specify this option if you don't want an association to
-    #   run immediately after you update it.
+    #   run immediately after you update it. This parameter is not supported
+    #   for rate expressions.
     #
     #   Also, if you specified this option when you created the association,
     #   you can reset it. To do so, specify the
@@ -9469,6 +9632,47 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Systems Manager calls this API action when you edit OpsMetadata in
+    # AppManager.
+    #
+    # @option params [required, String] :ops_metadata_arn
+    #   The Amazon Resoure Name (ARN) of the OpsMetadata Object to update.
+    #
+    # @option params [Hash<String,Types::MetadataValue>] :metadata_to_update
+    #   Metadata to add to an OpsMetadata object.
+    #
+    # @option params [Array<String>] :keys_to_delete
+    #   The metadata keys to delete from the OpsMetadata object.
+    #
+    # @return [Types::UpdateOpsMetadataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateOpsMetadataResult#ops_metadata_arn #ops_metadata_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_ops_metadata({
+    #     ops_metadata_arn: "OpsMetadataArn", # required
+    #     metadata_to_update: {
+    #       "MetadataKey" => {
+    #         value: "MetadataValueString",
+    #       },
+    #     },
+    #     keys_to_delete: ["MetadataKey"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ops_metadata_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateOpsMetadata AWS API Documentation
+    #
+    # @overload update_ops_metadata(params = {})
+    # @param [Hash] params ({})
+    def update_ops_metadata(params = {}, options = {})
+      req = build_request(:update_ops_metadata, params)
+      req.send_request(options)
+    end
+
     # Modifies an existing patch baseline. Fields not specified in the
     # request are left unchanged.
     #
@@ -9620,7 +9824,7 @@ module Aws::SSM
     #
     #   resp.baseline_id #=> String
     #   resp.name #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS", "ORACLE_LINUX", "DEBIAN", "MACOS"
     #   resp.global_filters.patch_filters #=> Array
     #   resp.global_filters.patch_filters[0].key #=> String, one of "ARCH", "ADVISORY_ID", "BUGZILLA_ID", "PATCH_SET", "PRODUCT", "PRODUCT_FAMILY", "CLASSIFICATION", "CVE_ID", "EPOCH", "MSRC_SEVERITY", "NAME", "PATCH_ID", "SECTION", "PRIORITY", "REPOSITORY", "RELEASE", "SEVERITY", "SECURITY", "VERSION"
     #   resp.global_filters.patch_filters[0].values #=> Array
@@ -9789,7 +9993,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

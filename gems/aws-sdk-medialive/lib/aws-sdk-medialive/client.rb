@@ -1573,8 +1573,16 @@ module Aws::MediaLive
     #           failover_conditions: [
     #             {
     #               failover_condition_settings: {
+    #                 audio_silence_settings: {
+    #                   audio_selector_name: "__string", # required
+    #                   audio_silence_threshold_msec: 1,
+    #                 },
     #                 input_loss_settings: {
     #                   input_loss_threshold_msec: 1,
+    #                 },
+    #                 video_black_settings: {
+    #                   black_detect_threshold: 1.0,
+    #                   video_black_threshold_msec: 1,
     #                 },
     #               },
     #             },
@@ -2207,7 +2215,11 @@ module Aws::MediaLive
     #   resp.channel.input_attachments #=> Array
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions #=> Array
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.audio_silence_settings.audio_selector_name #=> String
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.audio_silence_settings.audio_silence_threshold_msec #=> Integer
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.input_loss_settings.input_loss_threshold_msec #=> Integer
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.video_black_settings.black_detect_threshold #=> Float
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.video_black_settings.video_black_threshold_msec #=> Integer
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.channel.input_attachments[0].input_attachment_name #=> String
@@ -3155,7 +3167,11 @@ module Aws::MediaLive
     #   resp.input_attachments #=> Array
     #   resp.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
     #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions #=> Array
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.audio_silence_settings.audio_selector_name #=> String
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.audio_silence_settings.audio_silence_threshold_msec #=> Integer
     #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.input_loss_settings.input_loss_threshold_msec #=> Integer
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.video_black_settings.black_detect_threshold #=> Float
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.video_black_settings.video_black_threshold_msec #=> Integer
     #   resp.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
     #   resp.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.input_attachments[0].input_attachment_name #=> String
@@ -4042,7 +4058,11 @@ module Aws::MediaLive
     #   resp.input_attachments #=> Array
     #   resp.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
     #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions #=> Array
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.audio_silence_settings.audio_selector_name #=> String
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.audio_silence_settings.audio_silence_threshold_msec #=> Integer
     #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.input_loss_settings.input_loss_threshold_msec #=> Integer
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.video_black_settings.black_detect_threshold #=> Float
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.video_black_settings.video_black_threshold_msec #=> Integer
     #   resp.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
     #   resp.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.input_attachments[0].input_attachment_name #=> String
@@ -4206,6 +4226,7 @@ module Aws::MediaLive
     #   * {Types::DescribeInputDeviceResponse#network_settings #network_settings} => Types::InputDeviceNetworkSettings
     #   * {Types::DescribeInputDeviceResponse#serial_number #serial_number} => String
     #   * {Types::DescribeInputDeviceResponse#type #type} => String
+    #   * {Types::DescribeInputDeviceResponse#uhd_device_settings #uhd_device_settings} => Types::InputDeviceUhdSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -4238,6 +4259,14 @@ module Aws::MediaLive
     #   resp.network_settings.subnet_mask #=> String
     #   resp.serial_number #=> String
     #   resp.type #=> String, one of "HD"
+    #   resp.uhd_device_settings.active_input #=> String, one of "HDMI", "SDI"
+    #   resp.uhd_device_settings.configured_input #=> String, one of "AUTO", "HDMI", "SDI"
+    #   resp.uhd_device_settings.device_state #=> String, one of "IDLE", "STREAMING"
+    #   resp.uhd_device_settings.framerate #=> Float
+    #   resp.uhd_device_settings.height #=> Integer
+    #   resp.uhd_device_settings.max_bitrate #=> Integer
+    #   resp.uhd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
+    #   resp.uhd_device_settings.width #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDevice AWS API Documentation
     #
@@ -4705,7 +4734,11 @@ module Aws::MediaLive
     #   resp.channels[0].input_attachments #=> Array
     #   resp.channels[0].input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
     #   resp.channels[0].input_attachments[0].automatic_input_failover_settings.failover_conditions #=> Array
+    #   resp.channels[0].input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.audio_silence_settings.audio_selector_name #=> String
+    #   resp.channels[0].input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.audio_silence_settings.audio_silence_threshold_msec #=> Integer
     #   resp.channels[0].input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.input_loss_settings.input_loss_threshold_msec #=> Integer
+    #   resp.channels[0].input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.video_black_settings.black_detect_threshold #=> Float
+    #   resp.channels[0].input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.video_black_settings.video_black_threshold_msec #=> Integer
     #   resp.channels[0].input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
     #   resp.channels[0].input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.channels[0].input_attachments[0].input_attachment_name #=> String
@@ -4855,6 +4888,14 @@ module Aws::MediaLive
     #   resp.input_devices[0].network_settings.subnet_mask #=> String
     #   resp.input_devices[0].serial_number #=> String
     #   resp.input_devices[0].type #=> String, one of "HD"
+    #   resp.input_devices[0].uhd_device_settings.active_input #=> String, one of "HDMI", "SDI"
+    #   resp.input_devices[0].uhd_device_settings.configured_input #=> String, one of "AUTO", "HDMI", "SDI"
+    #   resp.input_devices[0].uhd_device_settings.device_state #=> String, one of "IDLE", "STREAMING"
+    #   resp.input_devices[0].uhd_device_settings.framerate #=> Float
+    #   resp.input_devices[0].uhd_device_settings.height #=> Integer
+    #   resp.input_devices[0].uhd_device_settings.max_bitrate #=> Integer
+    #   resp.input_devices[0].uhd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
+    #   resp.input_devices[0].uhd_device_settings.width #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListInputDevices AWS API Documentation
@@ -5894,7 +5935,11 @@ module Aws::MediaLive
     #   resp.input_attachments #=> Array
     #   resp.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
     #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions #=> Array
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.audio_silence_settings.audio_selector_name #=> String
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.audio_silence_settings.audio_silence_threshold_msec #=> Integer
     #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.input_loss_settings.input_loss_threshold_msec #=> Integer
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.video_black_settings.black_detect_threshold #=> Float
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.video_black_settings.video_black_threshold_msec #=> Integer
     #   resp.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
     #   resp.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.input_attachments[0].input_attachment_name #=> String
@@ -6563,7 +6608,11 @@ module Aws::MediaLive
     #   resp.input_attachments #=> Array
     #   resp.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
     #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions #=> Array
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.audio_silence_settings.audio_selector_name #=> String
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.audio_silence_settings.audio_silence_threshold_msec #=> Integer
     #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.input_loss_settings.input_loss_threshold_msec #=> Integer
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.video_black_settings.black_detect_threshold #=> Float
+    #   resp.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.video_black_settings.video_black_threshold_msec #=> Integer
     #   resp.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
     #   resp.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.input_attachments[0].input_attachment_name #=> String
@@ -7517,8 +7566,16 @@ module Aws::MediaLive
     #           failover_conditions: [
     #             {
     #               failover_condition_settings: {
+    #                 audio_silence_settings: {
+    #                   audio_selector_name: "__string", # required
+    #                   audio_silence_threshold_msec: 1,
+    #                 },
     #                 input_loss_settings: {
     #                   input_loss_threshold_msec: 1,
+    #                 },
+    #                 video_black_settings: {
+    #                   black_detect_threshold: 1.0,
+    #                   video_black_threshold_msec: 1,
     #                 },
     #               },
     #             },
@@ -8146,7 +8203,11 @@ module Aws::MediaLive
     #   resp.channel.input_attachments #=> Array
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions #=> Array
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.audio_silence_settings.audio_selector_name #=> String
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.audio_silence_settings.audio_silence_threshold_msec #=> Integer
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.input_loss_settings.input_loss_threshold_msec #=> Integer
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.video_black_settings.black_detect_threshold #=> Float
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.video_black_settings.video_black_threshold_msec #=> Integer
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.channel.input_attachments[0].input_attachment_name #=> String
@@ -8777,7 +8838,11 @@ module Aws::MediaLive
     #   resp.channel.input_attachments #=> Array
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.error_clear_time_msec #=> Integer
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions #=> Array
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.audio_silence_settings.audio_selector_name #=> String
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.audio_silence_settings.audio_silence_threshold_msec #=> Integer
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.input_loss_settings.input_loss_threshold_msec #=> Integer
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.video_black_settings.black_detect_threshold #=> Float
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.failover_conditions[0].failover_condition_settings.video_black_settings.video_black_threshold_msec #=> Integer
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
     #   resp.channel.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.channel.input_attachments[0].input_attachment_name #=> String
@@ -8943,6 +9008,9 @@ module Aws::MediaLive
     #
     # @option params [String] :name
     #
+    # @option params [Types::InputDeviceConfigurableSettings] :uhd_device_settings
+    #   Configurable settings for the input device.
+    #
     # @return [Types::UpdateInputDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateInputDeviceResponse#arn #arn} => String
@@ -8956,6 +9024,7 @@ module Aws::MediaLive
     #   * {Types::UpdateInputDeviceResponse#network_settings #network_settings} => Types::InputDeviceNetworkSettings
     #   * {Types::UpdateInputDeviceResponse#serial_number #serial_number} => String
     #   * {Types::UpdateInputDeviceResponse#type #type} => String
+    #   * {Types::UpdateInputDeviceResponse#uhd_device_settings #uhd_device_settings} => Types::InputDeviceUhdSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -8966,6 +9035,10 @@ module Aws::MediaLive
     #     },
     #     input_device_id: "__string", # required
     #     name: "__string",
+    #     uhd_device_settings: {
+    #       configured_input: "AUTO", # accepts AUTO, HDMI, SDI
+    #       max_bitrate: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -8993,6 +9066,14 @@ module Aws::MediaLive
     #   resp.network_settings.subnet_mask #=> String
     #   resp.serial_number #=> String
     #   resp.type #=> String, one of "HD"
+    #   resp.uhd_device_settings.active_input #=> String, one of "HDMI", "SDI"
+    #   resp.uhd_device_settings.configured_input #=> String, one of "AUTO", "HDMI", "SDI"
+    #   resp.uhd_device_settings.device_state #=> String, one of "IDLE", "STREAMING"
+    #   resp.uhd_device_settings.framerate #=> Float
+    #   resp.uhd_device_settings.height #=> Integer
+    #   resp.uhd_device_settings.max_bitrate #=> Integer
+    #   resp.uhd_device_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
+    #   resp.uhd_device_settings.width #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputDevice AWS API Documentation
     #
@@ -9250,7 +9331,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

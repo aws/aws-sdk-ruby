@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2020-12-04)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports black video and audio silence as new conditions to trigger automatic input failover.
+
 1.60.0 (2020-11-19)
 ------------------
 
