@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support `pre_signed_url` generation for `StartDBInstanceAutomatedBackupsReplication`.
+
 1.106.0 (2020-11-17)
 ------------------
 
