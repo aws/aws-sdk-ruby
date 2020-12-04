@@ -130,6 +130,7 @@ module BuildTools
         operations += %w[
           CopyDBSnapshotMessage
           CreateDBInstanceReadReplicaMessage
+          StartDBInstanceAutomatedBackupsReplicationMessage
         ]
       end
 
