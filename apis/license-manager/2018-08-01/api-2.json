@@ -959,7 +959,6 @@
         "LicenseCountHardLimit":{"shape":"BoxBoolean"},
         "LicenseRules":{"shape":"StringList"},
         "Tags":{"shape":"TagList"},
-        "DisassociateWhenNotFound":{"shape":"BoxBoolean"},
         "ProductInformationList":{"shape":"ProductInformationList"}
       }
     },
@@ -1366,8 +1365,7 @@
         "ManagedResourceSummaryList":{"shape":"ManagedResourceSummaryList"},
         "Tags":{"shape":"TagList"},
         "ProductInformationList":{"shape":"ProductInformationList"},
-        "AutomatedDiscoveryInformation":{"shape":"AutomatedDiscoveryInformation"},
-        "DisassociateWhenNotFound":{"shape":"BoxBoolean"}
+        "AutomatedDiscoveryInformation":{"shape":"AutomatedDiscoveryInformation"}
       }
     },
     "GetLicenseRequest":{
@@ -1576,7 +1574,6 @@
         "LicenseRules":{"shape":"StringList"},
         "LicenseCount":{"shape":"BoxLong"},
         "LicenseCountHardLimit":{"shape":"BoxBoolean"},
-        "DisassociateWhenNotFound":{"shape":"BoxBoolean"},
         "ConsumedLicenses":{"shape":"BoxLong"},
         "Status":{"shape":"String"},
         "OwnerAccountId":{"shape":"String"},
@@ -2202,8 +2199,7 @@
         "LicenseCountHardLimit":{"shape":"BoxBoolean"},
         "Name":{"shape":"String"},
         "Description":{"shape":"String"},
-        "ProductInformationList":{"shape":"ProductInformationList"},
-        "DisassociateWhenNotFound":{"shape":"BoxBoolean"}
+        "ProductInformationList":{"shape":"ProductInformationList"}
       }
     },
     "UpdateLicenseConfigurationResponse":{

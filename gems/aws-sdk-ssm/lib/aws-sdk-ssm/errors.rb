@@ -110,12 +110,6 @@ module Aws::SSM
   # * {OpsItemInvalidParameterException}
   # * {OpsItemLimitExceededException}
   # * {OpsItemNotFoundException}
-  # * {OpsMetadataAlreadyExistsException}
-  # * {OpsMetadataInvalidArgumentException}
-  # * {OpsMetadataKeyLimitExceededException}
-  # * {OpsMetadataLimitExceededException}
-  # * {OpsMetadataNotFoundException}
-  # * {OpsMetadataTooManyUpdatesException}
   # * {ParameterAlreadyExists}
   # * {ParameterLimitExceeded}
   # * {ParameterMaxVersionLimitExceeded}
@@ -1368,96 +1362,6 @@ module Aws::SSM
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SSM::Types::OpsItemNotFoundException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class OpsMetadataAlreadyExistsException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SSM::Types::OpsMetadataAlreadyExistsException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class OpsMetadataInvalidArgumentException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SSM::Types::OpsMetadataInvalidArgumentException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class OpsMetadataKeyLimitExceededException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SSM::Types::OpsMetadataKeyLimitExceededException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class OpsMetadataLimitExceededException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SSM::Types::OpsMetadataLimitExceededException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class OpsMetadataNotFoundException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SSM::Types::OpsMetadataNotFoundException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-    end
-
-    class OpsMetadataTooManyUpdatesException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::SSM::Types::OpsMetadataTooManyUpdatesException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

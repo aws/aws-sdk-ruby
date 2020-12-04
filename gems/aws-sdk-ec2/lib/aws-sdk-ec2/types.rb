@@ -6398,17 +6398,6 @@ module Aws::EC2
     #         instance_id: "InstanceId", # required
     #         name: "String", # required
     #         no_reboot: false,
-    #         tag_specifications: [
-    #           {
-    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
-    #             tags: [
-    #               {
-    #                 key: "String",
-    #                 value: "String",
-    #               },
-    #             ],
-    #           },
-    #         ],
     #       }
     #
     # @!attribute [rw] block_device_mappings
@@ -6442,32 +6431,11 @@ module Aws::EC2
     #
     # @!attribute [rw] no_reboot
     #   By default, Amazon EC2 attempts to shut down and reboot the instance
-    #   before creating the image. If the `No Reboot` option is set, Amazon
-    #   EC2 doesn't shut down the instance before creating the image. When
-    #   this option is used, file system integrity on the created image
-    #   can't be guaranteed.
+    #   before creating the image. If the 'No Reboot' option is set,
+    #   Amazon EC2 doesn't shut down the instance before creating the
+    #   image. When this option is used, file system integrity on the
+    #   created image can't be guaranteed.
     #   @return [Boolean]
-    #
-    # @!attribute [rw] tag_specifications
-    #   The tags to apply to the AMI and snapshots on creation. You can tag
-    #   the AMI, the snapshots, or both.
-    #
-    #   * To tag the AMI, the value for `ResourceType` must be `image`.
-    #
-    #   * To tag the snapshots that are created of the root volume and of
-    #     other EBS volumes that are attached to the instance, the value for
-    #     `ResourceType` must be `snapshot`. The same tag is applied to all
-    #     of the snapshots that are created.
-    #
-    #   If you specify other values for `ResourceType`, the request fails.
-    #
-    #   To tag an AMI or snapshot after it has been created, see
-    #   [CreateTags][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
-    #   @return [Array<Types::TagSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateImageRequest AWS API Documentation
     #
@@ -6477,8 +6445,7 @@ module Aws::EC2
       :dry_run,
       :instance_id,
       :name,
-      :no_reboot,
-      :tag_specifications)
+      :no_reboot)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49421,13 +49388,13 @@ module Aws::EC2
     #   `carrier-gateway` \| `client-vpn-endpoint` \| `customer-gateway` \|
     #   `dedicated-host` \| `dhcp-options` \| `export-image-task` \|
     #   `export-instance-task` \| `fleet` \| `fpga-image` \|
-    #   `host-reservation` \| `image`\| `import-image-task` \|
-    #   `import-snapshot-task` \| `instance` \| `internet-gateway` \|
-    #   `ipv4pool-ec2` \| `ipv6pool-ec2` \| `key-pair` \| `launch-template`
-    #   \| `placement-group` \| `prefix-list` \| `natgateway` \|
-    #   `network-acl` \| `route-table` \| `security-group`\| `snapshot` \|
-    #   `spot-fleet-request` \| `spot-instances-request` \| `snapshot` \|
-    #   `subnet` \| `traffic-mirror-filter` \| `traffic-mirror-session` \|
+    #   `host-reservation` \| `import-image-task` \| `import-snapshot-task`
+    #   \| `instance` \| `internet-gateway` \| `ipv4pool-ec2` \|
+    #   `ipv6pool-ec2` \| `key-pair` \| `launch-template` \|
+    #   `placement-group` \| `prefix-list` \| `natgateway` \| `network-acl`
+    #   \| `route-table` \| `security-group` \| `spot-fleet-request` \|
+    #   `spot-instances-request` \| `snapshot` \| `subnet` \|
+    #   `traffic-mirror-filter` \| `traffic-mirror-session` \|
     #   `traffic-mirror-target` \| `transit-gateway` \|
     #   `transit-gateway-attachment` \| `transit-gateway-route-table` \|
     #   `volume` \|`vpc` \| ` vpc-peering-connection` \| `vpc-endpoint` (for

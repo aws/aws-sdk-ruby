@@ -883,9 +883,9 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] memory_size
-    #   The amount of memory available to the function at runtime.
-    #   Increasing the function's memory also increases its CPU allocation.
-    #   The default value is 128 MB. The value can be any multiple of 1 MB.
+    #   The amount of memory that your function has access to. Increasing
+    #   the function's memory also increases its CPU allocation. The
+    #   default value is 128 MB. The value must be a multiple of 64 MB.
     #   @return [Integer]
     #
     # @!attribute [rw] publish
@@ -1710,7 +1710,7 @@ module Aws::Lambda
     end
 
     # The code for the Lambda function. You can specify either an object in
-    # Amazon S3, upload a .zip file archive deployment package directly, or
+    # Amazon S3, upload a ZIP archive deployment package directly, or
     # specify the URI of a container image.
     #
     # @note When making an API call, you may pass FunctionCode
@@ -1824,7 +1824,7 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] memory_size
-    #   The amount of memory available to the function at runtime.
+    #   The memory that's allocated to the function.
     #   @return [Integer]
     #
     # @!attribute [rw] last_modified
@@ -1916,7 +1916,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] package_type
     #   The type of deployment package. Set to `Image` for container image
-    #   and set `Zip` for .zip file archive.
+    #   and set `Zip` for ZIP archive.
     #   @return [String]
     #
     # @!attribute [rw] image_config_response
@@ -5337,9 +5337,9 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] memory_size
-    #   The amount of memory available to the function at runtime.
-    #   Increasing the function's memory also increases its CPU allocation.
-    #   The default value is 128 MB. The value can be any multiple of 1 MB.
+    #   The amount of memory that your function has access to. Increasing
+    #   the function's memory also increases its CPU allocation. The
+    #   default value is 128 MB. The value must be a multiple of 64 MB.
     #   @return [Integer]
     #
     # @!attribute [rw] vpc_config

@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.99.0 (2020-12-04)
-------------------
-
-* Feature - AWS Systems Manager Patch Manager MAC OS Support and OpsMetadata Store APIs to store operational metadata for an Application.
-
 1.98.0 (2020-11-10)
 ------------------
 

@@ -236,9 +236,6 @@ module Aws::RDS
 
     # If `StorageEncrypted` is enabled, the AWS KMS key identifier for the
     # encrypted DB cluster.
-    #
-    # The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    # name for the AWS KMS customer master key (CMK).
     # @return [String]
     def kms_key_id
       data[:kms_key_id]
@@ -246,7 +243,7 @@ module Aws::RDS
 
     # The AWS Region-unique, immutable identifier for the DB cluster. This
     # identifier is found in AWS CloudTrail log entries whenever the AWS KMS
-    # CMK for the DB cluster is accessed.
+    # key for the DB cluster is accessed.
     # @return [String]
     def db_cluster_resource_id
       data[:db_cluster_resource_id]
@@ -406,9 +403,6 @@ module Aws::RDS
 
     # The AWS KMS key identifier used for encrypting messages in the
     # database activity stream.
-    #
-    # The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    # name for the AWS KMS customer master key (CMK).
     # @return [String]
     def activity_stream_kms_key_id
       data[:activity_stream_kms_key_id]
@@ -814,27 +808,30 @@ module Aws::RDS
     # @option options [String] :kms_key_id
     #   The AWS KMS key identifier for an encrypted DB cluster.
     #
-    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    #   name for the AWS KMS customer master key (CMK). To use a CMK in a
-    #   different AWS account, specify the key ARN or alias ARN.
+    #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
+    #   encryption key. If you are creating a DB cluster with the same AWS
+    #   account that owns the KMS encryption key used to encrypt the new DB
+    #   cluster, then you can use the KMS key alias instead of the ARN for the
+    #   KMS encryption key.
     #
-    #   When a CMK isn't specified in `KmsKeyId`\:
+    #   If an encryption key isn't specified in `KmsKeyId`\:
     #
     #   * If `ReplicationSourceIdentifier` identifies an encrypted source,
-    #     then Amazon RDS will use the CMK used to encrypt the source.
-    #     Otherwise, Amazon RDS will use your default CMK.
+    #     then Amazon RDS will use the encryption key used to encrypt the
+    #     source. Otherwise, Amazon RDS will use your default encryption key.
     #
     #   * If the `StorageEncrypted` parameter is enabled and
     #     `ReplicationSourceIdentifier` isn't specified, then Amazon RDS will
-    #     use your default CMK.
+    #     use your default encryption key.
     #
-    #   There is a default CMK for your AWS account. Your AWS account has a
-    #   different default CMK for each AWS Region.
+    #   AWS KMS creates the default encryption key for your AWS account. Your
+    #   AWS account has a different default encryption key for each AWS
+    #   Region.
     #
     #   If you create a read replica of an encrypted DB cluster in another AWS
-    #   Region, you must set `KmsKeyId` to a AWS KMS key identifier that is
-    #   valid in the destination AWS Region. This CMK is used to encrypt the
-    #   read replica in that AWS Region.
+    #   Region, you must set `KmsKeyId` to a KMS key ID that is valid in the
+    #   destination AWS Region. This key is used to encrypt the read replica
+    #   in that AWS Region.
     # @option options [String] :pre_signed_url
     #   A URL that contains a Signature Version 4 signed request for the
     #   `CreateDBCluster` action to be called in the source AWS Region where
@@ -851,9 +848,9 @@ module Aws::RDS
     #
     #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
     #     encrypt the copy of the DB cluster in the destination AWS Region.
-    #     This should refer to the same AWS KMS CMK for both the
-    #     `CreateDBCluster` action that is called in the destination AWS
-    #     Region, and the action contained in the pre-signed URL.
+    #     This should refer to the same KMS key for both the `CreateDBCluster`
+    #     action that is called in the destination AWS Region, and the action
+    #     contained in the pre-signed URL.
     #
     #   * `DestinationRegion` - The name of the AWS Region that Aurora read
     #     replica will be created in.
@@ -1527,21 +1524,23 @@ module Aws::RDS
     #   The AWS KMS key identifier to use when restoring an encrypted DB
     #   cluster from an encrypted DB cluster.
     #
-    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    #   name for the AWS KMS customer master key (CMK). To use a CMK in a
-    #   different AWS account, specify the key ARN or alias ARN.
+    #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
+    #   encryption key. If you are restoring a DB cluster with the same AWS
+    #   account that owns the KMS encryption key used to encrypt the new DB
+    #   cluster, then you can use the KMS key alias instead of the ARN for the
+    #   KMS encryption key.
     #
     #   You can restore to a new DB cluster and encrypt the new DB cluster
-    #   with a AWS KMS CMK that is different than the AWS KMS key used to
-    #   encrypt the source DB cluster. The new DB cluster is encrypted with
-    #   the AWS KMS CMK identified by the `KmsKeyId` parameter.
+    #   with a KMS key that is different than the KMS key used to encrypt the
+    #   source DB cluster. The new DB cluster is encrypted with the KMS key
+    #   identified by the `KmsKeyId` parameter.
     #
     #   If you don't specify a value for the `KmsKeyId` parameter, then the
     #   following occurs:
     #
     #   * If the DB cluster is encrypted, then the restored DB cluster is
-    #     encrypted using the AWS KMS CMK that was used to encrypt the source
-    #     DB cluster.
+    #     encrypted using the KMS key that was used to encrypt the source DB
+    #     cluster.
     #
     #   * If the DB cluster isn't encrypted, then the restored DB cluster
     #     isn't encrypted.

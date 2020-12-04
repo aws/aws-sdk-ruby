@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.49.0 (2020-12-04)
-------------------
-
-* Feature - Update the import-workspace-image API to have "BYOL_REGULAR_WSP" as a valid input string for ingestion-process.
-
 1.48.0 (2020-10-15)
 ------------------
 
