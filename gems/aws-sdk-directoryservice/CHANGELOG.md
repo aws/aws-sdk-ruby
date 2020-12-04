@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-12-04)
+------------------
+
+* Feature - Documentation updates for ds - updated descriptions
+
 1.36.0 (2020-12-01)
 ------------------
 

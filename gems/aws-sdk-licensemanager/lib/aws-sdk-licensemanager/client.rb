@@ -820,6 +820,9 @@ module Aws::LicenseManager
     # @option params [Array<Types::Tag>] :tags
     #   Tags to add to the license configuration.
     #
+    # @option params [Boolean] :disassociate_when_not_found
+    #   When true, disassociates a resource when software is uninstalled.
+    #
     # @option params [Array<Types::ProductInformation>] :product_information_list
     #   Product information.
     #
@@ -842,6 +845,7 @@ module Aws::LicenseManager
     #         value: "String",
     #       },
     #     ],
+    #     disassociate_when_not_found: false,
     #     product_information_list: [
     #       {
     #         resource_type: "String", # required
@@ -1345,6 +1349,7 @@ module Aws::LicenseManager
     #   * {Types::GetLicenseConfigurationResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::GetLicenseConfigurationResponse#product_information_list #product_information_list} => Array&lt;Types::ProductInformation&gt;
     #   * {Types::GetLicenseConfigurationResponse#automated_discovery_information #automated_discovery_information} => Types::AutomatedDiscoveryInformation
+    #   * {Types::GetLicenseConfigurationResponse#disassociate_when_not_found #disassociate_when_not_found} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -1383,6 +1388,7 @@ module Aws::LicenseManager
     #   resp.product_information_list[0].product_information_filter_list[0].product_information_filter_value[0] #=> String
     #   resp.product_information_list[0].product_information_filter_list[0].product_information_filter_comparator #=> String
     #   resp.automated_discovery_information.last_run_time #=> Time
+    #   resp.disassociate_when_not_found #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetLicenseConfiguration AWS API Documentation
     #
@@ -1672,6 +1678,7 @@ module Aws::LicenseManager
     #   resp.license_configurations[0].license_rules[0] #=> String
     #   resp.license_configurations[0].license_count #=> Integer
     #   resp.license_configurations[0].license_count_hard_limit #=> Boolean
+    #   resp.license_configurations[0].disassociate_when_not_found #=> Boolean
     #   resp.license_configurations[0].consumed_licenses #=> Integer
     #   resp.license_configurations[0].status #=> String
     #   resp.license_configurations[0].owner_account_id #=> String
@@ -2067,6 +2074,10 @@ module Aws::LicenseManager
     #   * `resource_id` - The ID of the resource. Logical operators are
     #     `EQUALS` \| `NOT_EQUALS`.
     #
+    #   * `tag:<key>` - The key/value combination of a tag assigned to the
+    #     resource. Logical operators are `EQUALS` (single account) or
+    #     `EQUALS` \| `NOT_EQUALS` (cross account).
+    #
     # @return [Types::ListResourceInventoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListResourceInventoryResponse#resource_inventory_list #resource_inventory_list} => Array&lt;Types::ResourceInventory&gt;
@@ -2379,6 +2390,9 @@ module Aws::LicenseManager
     # @option params [Array<Types::ProductInformation>] :product_information_list
     #   New product information.
     #
+    # @option params [Boolean] :disassociate_when_not_found
+    #   When true, disassociates a resource when software is uninstalled.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2403,6 +2417,7 @@ module Aws::LicenseManager
     #         ],
     #       },
     #     ],
+    #     disassociate_when_not_found: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/UpdateLicenseConfiguration AWS API Documentation
@@ -2512,7 +2527,7 @@ module Aws::LicenseManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

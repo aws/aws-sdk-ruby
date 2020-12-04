@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-12-04)
+------------------
+
 * Feature - Support `pre_signed_url` generation for `CopyDBClusterSnapshot` and `CreateDBCluster`.
 
 1.31.0 (2020-10-26)

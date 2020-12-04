@@ -986,6 +986,35 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AudioSilenceFailoverSettings
+    #   data as a hash:
+    #
+    #       {
+    #         audio_selector_name: "__string", # required
+    #         audio_silence_threshold_msec: 1,
+    #       }
+    #
+    # @!attribute [rw] audio_selector_name
+    #   The name of the audio selector in the input that MediaLive should
+    #   monitor to detect silence. Select your most important rendition. If
+    #   you didn't create an audio selector in this input, leave blank.
+    #   @return [String]
+    #
+    # @!attribute [rw] audio_silence_threshold_msec
+    #   The amount of time (in milliseconds) that the active input must be
+    #   silent before automatic input failover occurs. Silence is defined as
+    #   audio loss or audio quieter than -50 dBFS.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioSilenceFailoverSettings AWS API Documentation
+    #
+    class AudioSilenceFailoverSettings < Struct.new(
+      :audio_selector_name,
+      :audio_silence_threshold_msec)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Audio Track
     #
     # @note When making an API call, you may pass AudioTrack
@@ -1042,8 +1071,16 @@ module Aws::MediaLive
     #         failover_conditions: [
     #           {
     #             failover_condition_settings: {
+    #               audio_silence_settings: {
+    #                 audio_selector_name: "__string", # required
+    #                 audio_silence_threshold_msec: 1,
+    #               },
     #               input_loss_settings: {
     #                 input_loss_threshold_msec: 1,
+    #               },
+    #               video_black_settings: {
+    #                 black_detect_threshold: 1.0,
+    #                 video_black_threshold_msec: 1,
     #               },
     #             },
     #           },
@@ -3672,8 +3709,16 @@ module Aws::MediaLive
     #               failover_conditions: [
     #                 {
     #                   failover_condition_settings: {
+    #                     audio_silence_settings: {
+    #                       audio_selector_name: "__string", # required
+    #                       audio_silence_threshold_msec: 1,
+    #                     },
     #                     input_loss_settings: {
     #                       input_loss_threshold_msec: 1,
+    #                     },
+    #                     video_black_settings: {
+    #                       black_detect_threshold: 1.0,
+    #                       video_black_threshold_msec: 1,
     #                     },
     #                   },
     #                 },
@@ -4899,6 +4944,11 @@ module Aws::MediaLive
     #   outputs resolutions up to 1080, choose "HD".
     #   @return [String]
     #
+    # @!attribute [rw] uhd_device_settings
+    #   Settings that describe the active source from the input device, and
+    #   the video characteristics of that source.
+    #   @return [Types::InputDeviceUhdSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDeviceResponse AWS API Documentation
     #
     class DescribeInputDeviceResponse < Struct.new(
@@ -4912,7 +4962,8 @@ module Aws::MediaLive
       :name,
       :network_settings,
       :serial_number,
-      :type)
+      :type,
+      :uhd_device_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6848,8 +6899,16 @@ module Aws::MediaLive
     #
     #       {
     #         failover_condition_settings: {
+    #           audio_silence_settings: {
+    #             audio_selector_name: "__string", # required
+    #             audio_silence_threshold_msec: 1,
+    #           },
     #           input_loss_settings: {
     #             input_loss_threshold_msec: 1,
+    #           },
+    #           video_black_settings: {
+    #             black_detect_threshold: 1.0,
+    #             video_black_threshold_msec: 1,
     #           },
     #         },
     #       }
@@ -6872,20 +6931,40 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         audio_silence_settings: {
+    #           audio_selector_name: "__string", # required
+    #           audio_silence_threshold_msec: 1,
+    #         },
     #         input_loss_settings: {
     #           input_loss_threshold_msec: 1,
     #         },
+    #         video_black_settings: {
+    #           black_detect_threshold: 1.0,
+    #           video_black_threshold_msec: 1,
+    #         },
     #       }
+    #
+    # @!attribute [rw] audio_silence_settings
+    #   MediaLive will perform a failover if the specified audio selector is
+    #   silent for the specified period.
+    #   @return [Types::AudioSilenceFailoverSettings]
     #
     # @!attribute [rw] input_loss_settings
     #   MediaLive will perform a failover if content is not detected in this
     #   input for the specified period.
     #   @return [Types::InputLossFailoverSettings]
     #
+    # @!attribute [rw] video_black_settings
+    #   MediaLive will perform a failover if content is considered black for
+    #   the specified period.
+    #   @return [Types::VideoBlackFailoverSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FailoverConditionSettings AWS API Documentation
     #
     class FailoverConditionSettings < Struct.new(
-      :input_loss_settings)
+      :audio_silence_settings,
+      :input_loss_settings,
+      :video_black_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9046,8 +9125,16 @@ module Aws::MediaLive
     #           failover_conditions: [
     #             {
     #               failover_condition_settings: {
+    #                 audio_silence_settings: {
+    #                   audio_selector_name: "__string", # required
+    #                   audio_silence_threshold_msec: 1,
+    #                 },
     #                 input_loss_settings: {
     #                   input_loss_threshold_msec: 1,
+    #                 },
+    #                 video_black_settings: {
+    #                   black_detect_threshold: 1.0,
+    #                   video_black_threshold_msec: 1,
     #                 },
     #               },
     #             },
@@ -9359,6 +9446,10 @@ module Aws::MediaLive
     #   The type of the input device.
     #   @return [String]
     #
+    # @!attribute [rw] uhd_device_settings
+    #   Settings that describe an input device that is type UHD.
+    #   @return [Types::InputDeviceUhdSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDevice AWS API Documentation
     #
     class InputDevice < Struct.new(
@@ -9372,7 +9463,8 @@ module Aws::MediaLive
       :name,
       :network_settings,
       :serial_number,
-      :type)
+      :type,
+      :uhd_device_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9608,6 +9700,10 @@ module Aws::MediaLive
     #   The type of the input device.
     #   @return [String]
     #
+    # @!attribute [rw] uhd_device_settings
+    #   Settings that describe an input device that is type UHD.
+    #   @return [Types::InputDeviceUhdSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceSummary AWS API Documentation
     #
     class InputDeviceSummary < Struct.new(
@@ -9621,7 +9717,61 @@ module Aws::MediaLive
       :name,
       :network_settings,
       :serial_number,
-      :type)
+      :type,
+      :uhd_device_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings that describe the active source from the input device, and
+    # the video characteristics of that source.
+    #
+    # @!attribute [rw] active_input
+    #   If you specified Auto as the configured input, specifies which of
+    #   the sources is currently active (SDI or HDMI).
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_input
+    #   The source at the input device that is currently active. You can
+    #   specify this source.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_state
+    #   The state of the input device.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate
+    #   The frame rate of the video source.
+    #   @return [Float]
+    #
+    # @!attribute [rw] height
+    #   The height of the video source, in pixels.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_bitrate
+    #   The current maximum bitrate for ingesting this source, in bits per
+    #   second. You can specify this maximum.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scan_type
+    #   The scan type of the video source.
+    #   @return [String]
+    #
+    # @!attribute [rw] width
+    #   The width of the video source, in pixels.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceUhdSettings AWS API Documentation
+    #
+    class InputDeviceUhdSettings < Struct.new(
+      :active_input,
+      :configured_input,
+      :device_state,
+      :framerate,
+      :height,
+      :max_bitrate,
+      :scan_type,
+      :width)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17345,8 +17495,16 @@ module Aws::MediaLive
     #               failover_conditions: [
     #                 {
     #                   failover_condition_settings: {
+    #                     audio_silence_settings: {
+    #                       audio_selector_name: "__string", # required
+    #                       audio_silence_threshold_msec: 1,
+    #                     },
     #                     input_loss_settings: {
     #                       input_loss_threshold_msec: 1,
+    #                     },
+    #                     video_black_settings: {
+    #                       black_detect_threshold: 1.0,
+    #                       video_black_threshold_msec: 1,
     #                     },
     #                   },
     #                 },
@@ -17571,18 +17729,23 @@ module Aws::MediaLive
     # Updates an input device.
     #
     # @!attribute [rw] hd_device_settings
-    #   The settings that you want to apply to the input device.
+    #   The settings that you want to apply to the HD input device.
     #   @return [Types::InputDeviceConfigurableSettings]
     #
     # @!attribute [rw] name
     #   The name that you assigned to this input device (not the unique ID).
     #   @return [String]
     #
+    # @!attribute [rw] uhd_device_settings
+    #   The settings that you want to apply to the UHD input device.
+    #   @return [Types::InputDeviceConfigurableSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputDevice AWS API Documentation
     #
     class UpdateInputDevice < Struct.new(
       :hd_device_settings,
-      :name)
+      :name,
+      :uhd_device_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17597,6 +17760,10 @@ module Aws::MediaLive
     #         },
     #         input_device_id: "__string", # required
     #         name: "__string",
+    #         uhd_device_settings: {
+    #           configured_input: "AUTO", # accepts AUTO, HDMI, SDI
+    #           max_bitrate: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] hd_device_settings
@@ -17609,12 +17776,17 @@ module Aws::MediaLive
     # @!attribute [rw] name
     #   @return [String]
     #
+    # @!attribute [rw] uhd_device_settings
+    #   Configurable settings for the input device.
+    #   @return [Types::InputDeviceConfigurableSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputDeviceRequest AWS API Documentation
     #
     class UpdateInputDeviceRequest < Struct.new(
       :hd_device_settings,
       :input_device_id,
-      :name)
+      :name,
+      :uhd_device_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17665,6 +17837,11 @@ module Aws::MediaLive
     #   outputs resolutions up to 1080, choose "HD".
     #   @return [String]
     #
+    # @!attribute [rw] uhd_device_settings
+    #   Settings that describe the active source from the input device, and
+    #   the video characteristics of that source.
+    #   @return [Types::InputDeviceUhdSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputDeviceResponse AWS API Documentation
     #
     class UpdateInputDeviceResponse < Struct.new(
@@ -17678,7 +17855,8 @@ module Aws::MediaLive
       :name,
       :network_settings,
       :serial_number,
-      :type)
+      :type,
+      :uhd_device_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18065,6 +18243,42 @@ module Aws::MediaLive
     class ValidationError < Struct.new(
       :element_path,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass VideoBlackFailoverSettings
+    #   data as a hash:
+    #
+    #       {
+    #         black_detect_threshold: 1.0,
+    #         video_black_threshold_msec: 1,
+    #       }
+    #
+    # @!attribute [rw] black_detect_threshold
+    #   A value used in calculating the threshold below which MediaLive
+    #   considers a pixel to be 'black'. For the input to be considered
+    #   black, every pixel in a frame must be below this threshold. The
+    #   threshold is calculated as a percentage (expressed as a decimal) of
+    #   white. Therefore .1 means 10% white (or 90% black). Note how the
+    #   formula works for any color depth. For example, if you set this
+    #   field to 0.1 in 10-bit color depth: (1023*0.1=102.3), which means a
+    #   pixel value of 102 or less is 'black'. If you set this field to .1
+    #   in an 8-bit color depth: (255*0.1=25.5), which means a pixel value
+    #   of 25 or less is 'black'. The range is 0.0 to 1.0, with any number
+    #   of decimal places.
+    #   @return [Float]
+    #
+    # @!attribute [rw] video_black_threshold_msec
+    #   The amount of time (in milliseconds) that the active input must be
+    #   black before automatic input failover occurs.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoBlackFailoverSettings AWS API Documentation
+    #
+    class VideoBlackFailoverSettings < Struct.new(
+      :black_detect_threshold,
+      :video_black_threshold_msec)
       SENSITIVE = []
       include Aws::Structure
     end

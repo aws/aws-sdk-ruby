@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2020-12-04)
+------------------
+
+* Feature - Adds support for Amazon RDS Cross-Region Automated Backups, the ability to setup automatic replication of snapshots and transaction logs from a primary AWS Region to a secondary AWS Region.
+
 * Feature - Support `pre_signed_url` generation for `StartDBInstanceAutomatedBackupsReplication`.
 
 1.106.0 (2020-11-17)

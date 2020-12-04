@@ -384,7 +384,8 @@ module Aws::SSM
     #   By default, when you create a new associations, the system runs it
     #   immediately after it is created and then according to the schedule
     #   you specified. Specify this option if you don't want an association
-    #   to run immediately after you create it.
+    #   to run immediately after you create it. This parameter is not
+    #   supported for rate expressions.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationDescription AWS API Documentation
@@ -814,7 +815,8 @@ module Aws::SSM
     #   By default, when you create a new associations, the system runs it
     #   immediately after it is created and then according to the schedule
     #   you specified. Specify this option if you don't want an association
-    #   to run immediately after you create it.
+    #   to run immediately after you create it. This parameter is not
+    #   supported for rate expressions.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationVersionInfo AWS API Documentation
@@ -2597,7 +2599,8 @@ module Aws::SSM
     #   By default, when you create a new associations, the system runs it
     #   immediately after it is created and then according to the schedule
     #   you specified. Specify this option if you don't want an association
-    #   to run immediately after you create it.
+    #   to run immediately after you create it. This parameter is not
+    #   supported for rate expressions.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchRequestEntry AWS API Documentation
@@ -2805,7 +2808,8 @@ module Aws::SSM
     #   By default, when you create a new associations, the system runs it
     #   immediately after it is created and then according to the schedule
     #   you specified. Specify this option if you don't want an association
-    #   to run immediately after you create it.
+    #   to run immediately after you create it. This parameter is not
+    #   supported for rate expressions.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest AWS API Documentation
@@ -3312,11 +3316,53 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateOpsMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "OpsMetadataResourceId", # required
+    #         metadata: {
+    #           "MetadataKey" => {
+    #             value: "MetadataValueString",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   A resource ID for a new AppManager application.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   Metadata for a new AppManager application.
+    #   @return [Hash<String,Types::MetadataValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateOpsMetadataRequest AWS API Documentation
+    #
+    class CreateOpsMetadataRequest < Struct.new(
+      :resource_id,
+      :metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ops_metadata_arn
+    #   The Amazon Resource Name (ARN) of the OpsMetadata Object or blob
+    #   created by the call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateOpsMetadataResult AWS API Documentation
+    #
+    class CreateOpsMetadataResult < Struct.new(
+      :ops_metadata_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreatePatchBaselineRequest
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS
     #         name: "BaselineName", # required
     #         global_filters: {
     #           patch_filters: [ # required
@@ -3812,6 +3858,29 @@ module Aws::SSM
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteOpsMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ops_metadata_arn: "OpsMetadataArn", # required
+    #       }
+    #
+    # @!attribute [rw] ops_metadata_arn
+    #   The Amazon Resource Name (ARN) of an OpsMetadata Object to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteOpsMetadataRequest AWS API Documentation
+    #
+    class DeleteOpsMetadataRequest < Struct.new(
+      :ops_metadata_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteOpsMetadataResult AWS API Documentation
+    #
+    class DeleteOpsMetadataResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteParameterRequest
     #   data as a hash:
@@ -6100,7 +6169,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # required, accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN
+    #         operating_system: "WINDOWS", # required, accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS
     #         property: "PRODUCT", # required, accepts PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PRIORITY, SEVERITY
     #         patch_set: "OS", # accepts OS, APPLICATION
     #         max_results: 1,
@@ -6117,8 +6186,8 @@ module Aws::SSM
     #
     # @!attribute [rw] patch_set
     #   Indicates whether to list patches for the Windows operating system
-    #   or for Microsoft applications. Not applicable for Linux operating
-    #   systems.
+    #   or for Microsoft applications. Not applicable for the Linux or macOS
+    #   operating systems.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -7280,7 +7349,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS
     #       }
     #
     # @!attribute [rw] operating_system
@@ -8197,6 +8266,63 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetOpsMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ops_metadata_arn: "OpsMetadataArn", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] ops_metadata_arn
+    #   The Amazon Resource Name (ARN) of an OpsMetadata Object to view.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsMetadataRequest AWS API Documentation
+    #
+    class GetOpsMetadataRequest < Struct.new(
+      :ops_metadata_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_id
+    #   The resource ID of the AppManager application.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   OpsMetadata for an AppManager application.
+    #   @return [Hash<String,Types::MetadataValue>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetOpsMetadataResult AWS API Documentation
+    #
+    class GetOpsMetadataResult < Struct.new(
+      :resource_id,
+      :metadata,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetOpsSummaryRequest
     #   data as a hash:
     #
@@ -8538,7 +8664,7 @@ module Aws::SSM
     #
     #       {
     #         patch_group: "PatchGroup", # required
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS
     #       }
     #
     # @!attribute [rw] patch_group
@@ -11167,6 +11293,64 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListOpsMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             key: "OpsMetadataFilterKey", # required
+    #             values: ["OpsMetadataFilterValue"], # required
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   One or more filters to limit the number of OpsMetadata objects
+    #   returned by the call.
+    #   @return [Array<Types::OpsMetadataFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListOpsMetadataRequest AWS API Documentation
+    #
+    class ListOpsMetadataRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ops_metadata_list
+    #   Returns a list of OpsMetadata objects.
+    #   @return [Array<Types::OpsMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListOpsMetadataResult AWS API Documentation
+    #
+    class ListOpsMetadataResult < Struct.new(
+      :ops_metadata_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListResourceComplianceSummariesRequest
     #   data as a hash:
     #
@@ -12210,6 +12394,27 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Metadata to assign to an AppManager application.
+    #
+    # @note When making an API call, you may pass MetadataValue
+    #   data as a hash:
+    #
+    #       {
+    #         value: "MetadataValueString",
+    #       }
+    #
+    # @!attribute [rw] value
+    #   Metadata value to assign to an AppManager application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MetadataValue AWS API Documentation
+    #
+    class MetadataValue < Struct.new(
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyDocumentPermissionRequest
     #   data as a hash:
     #
@@ -12858,6 +13063,149 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Operational metadata for an application in AppManager.
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the AppManager application.
+    #   @return [String]
+    #
+    # @!attribute [rw] ops_metadata_arn
+    #   The Amazon Resource Name (ARN) of the OpsMetadata Object or blob.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date the OpsMetadata object was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_user
+    #   The user name who last updated the OpsMetadata object.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date the OpsMetadata objects was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsMetadata AWS API Documentation
+    #
+    class OpsMetadata < Struct.new(
+      :resource_id,
+      :ops_metadata_arn,
+      :last_modified_date,
+      :last_modified_user,
+      :creation_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An OpsMetadata object already exists for the selected resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsMetadataAlreadyExistsException AWS API Documentation
+    #
+    class OpsMetadataAlreadyExistsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter to limit the number of OpsMetadata objects displayed.
+    #
+    # @note When making an API call, you may pass OpsMetadataFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "OpsMetadataFilterKey", # required
+    #         values: ["OpsMetadataFilterValue"], # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   A filter key.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   A filter value.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsMetadataFilter AWS API Documentation
+    #
+    class OpsMetadataFilter < Struct.new(
+      :key,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One of the arguments passed is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsMetadataInvalidArgumentException AWS API Documentation
+    #
+    class OpsMetadataInvalidArgumentException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The OpsMetadata object exceeds the maximum number of OpsMetadata keys
+    # that you can assign to an application in AppManager.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsMetadataKeyLimitExceededException AWS API Documentation
+    #
+    class OpsMetadataKeyLimitExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Your account reached the maximum number of OpsMetadata objects allowed
+    # by AppManager. The maximum is 200 OpsMetadata objects. Delete one or
+    # more OpsMetadata object and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsMetadataLimitExceededException AWS API Documentation
+    #
+    class OpsMetadataLimitExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The OpsMetadata object does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsMetadataNotFoundException AWS API Documentation
+    #
+    class OpsMetadataNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The system is processing too many concurrent updates. Wait a few
+    # moments and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsMetadataTooManyUpdatesException AWS API Documentation
+    #
+    class OpsMetadataTooManyUpdatesException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The OpsItem data type to return.
     #
     # @note When making an API call, you may pass OpsResultAttribute
@@ -13433,7 +13781,7 @@ module Aws::SSM
     #
     # @!attribute [rw] cve_ids
     #   The Common Vulnerabilities and Exposures (CVE) ID of the patch. For
-    #   example, `CVE-1999-0067`. Applies to Linux-based instances only.
+    #   example, `CVE-2011-3192`. Applies to Linux-based instances only.
     #   @return [Array<String>]
     #
     # @!attribute [rw] name
@@ -17162,7 +17510,8 @@ module Aws::SSM
     #   By default, when you update an association, the system runs it
     #   immediately after it is updated and then according to the schedule
     #   you specified. Specify this option if you don't want an association
-    #   to run immediately after you update it.
+    #   to run immediately after you update it. This parameter is not
+    #   supported for rate expressions.
     #
     #   Also, if you specified this option when you created the association,
     #   you can reset it. To do so, specify the
@@ -18156,6 +18505,54 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateOpsItemResponse AWS API Documentation
     #
     class UpdateOpsItemResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateOpsMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ops_metadata_arn: "OpsMetadataArn", # required
+    #         metadata_to_update: {
+    #           "MetadataKey" => {
+    #             value: "MetadataValueString",
+    #           },
+    #         },
+    #         keys_to_delete: ["MetadataKey"],
+    #       }
+    #
+    # @!attribute [rw] ops_metadata_arn
+    #   The Amazon Resoure Name (ARN) of the OpsMetadata Object to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_to_update
+    #   Metadata to add to an OpsMetadata object.
+    #   @return [Hash<String,Types::MetadataValue>]
+    #
+    # @!attribute [rw] keys_to_delete
+    #   The metadata keys to delete from the OpsMetadata object.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateOpsMetadataRequest AWS API Documentation
+    #
+    class UpdateOpsMetadataRequest < Struct.new(
+      :ops_metadata_arn,
+      :metadata_to_update,
+      :keys_to_delete)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ops_metadata_arn
+    #   The Amazon Resource Name (ARN) of the OpsMetadata Object that was
+    #   updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateOpsMetadataResult AWS API Documentation
+    #
+    class UpdateOpsMetadataResult < Struct.new(
+      :ops_metadata_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdatePatchBaselineRequest
     #   data as a hash:
