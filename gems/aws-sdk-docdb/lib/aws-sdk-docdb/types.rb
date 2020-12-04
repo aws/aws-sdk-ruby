@@ -334,6 +334,7 @@ module Aws::DocDB
     #             value: "String",
     #           },
     #         ],
+    #         source_region: "String",
     #       }
     #
     # @!attribute [rw] source_db_cluster_snapshot_identifier
@@ -438,6 +439,11 @@ module Aws::DocDB
     #   The tags to be assigned to the cluster snapshot.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] source_region
+    #   The source region of the snapshot. This is only needed when the
+    #   shapshot is encrypted and in a different region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CopyDBClusterSnapshotMessage AWS API Documentation
     #
     class CopyDBClusterSnapshotMessage < Struct.new(
@@ -446,7 +452,8 @@ module Aws::DocDB
       :kms_key_id,
       :pre_signed_url,
       :copy_tags,
-      :tags)
+      :tags,
+      :source_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -493,6 +500,7 @@ module Aws::DocDB
     #         pre_signed_url: "String",
     #         enable_cloudwatch_logs_exports: ["String"],
     #         deletion_protection: false,
+    #         source_region: "String",
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -671,6 +679,11 @@ module Aws::DocDB
     #   deleted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] source_region
+    #   The source region of the snapshot. This is only needed when the
+    #   shapshot is encrypted and in a different region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBClusterMessage AWS API Documentation
     #
     class CreateDBClusterMessage < Struct.new(
@@ -692,7 +705,8 @@ module Aws::DocDB
       :kms_key_id,
       :pre_signed_url,
       :enable_cloudwatch_logs_exports,
-      :deletion_protection)
+      :deletion_protection,
+      :source_region)
       SENSITIVE = []
       include Aws::Structure
     end

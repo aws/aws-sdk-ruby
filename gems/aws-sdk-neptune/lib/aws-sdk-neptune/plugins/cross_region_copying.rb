@@ -3,7 +3,7 @@
 require 'aws-sigv4'
 
 module Aws
-  module RDS
+  module Neptune
     module Plugins
       # This plugin populates the `:pre_signed_url` request param for APIs
       # that support cross region copying.
@@ -57,8 +57,6 @@ module Aws
           Handler,
           step: :initialize,
           operations: [
-            :copy_db_snapshot,
-            :create_db_instance_read_replica,
             :copy_db_cluster_snapshot,
             :create_db_cluster
           ]

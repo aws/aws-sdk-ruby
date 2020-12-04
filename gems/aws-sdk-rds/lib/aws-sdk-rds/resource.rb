@@ -460,7 +460,6 @@ module Aws::RDS
     #   This parameter only applies to DB clusters that are secondary clusters
     #   in an Aurora global database. By default, Aurora disallows write
     #   operations for secondary clusters.
-    # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.

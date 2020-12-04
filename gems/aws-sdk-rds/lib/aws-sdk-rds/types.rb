@@ -1139,9 +1139,6 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
-    # @!attribute [rw] destination_region
-    #   @return [String]
-    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1156,7 +1153,6 @@ module Aws::RDS
       :pre_signed_url,
       :copy_tags,
       :tags,
-      :destination_region,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -1451,9 +1447,6 @@ module Aws::RDS
     #   Example: `rds-caz-aiqhTgQv`.
     #   @return [String]
     #
-    # @!attribute [rw] destination_region
-    #   @return [String]
-    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1470,7 +1463,6 @@ module Aws::RDS
       :pre_signed_url,
       :option_group_name,
       :target_custom_availability_zone,
-      :destination_region,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -2185,9 +2177,6 @@ module Aws::RDS
     #   disallows write operations for secondary clusters.
     #   @return [Boolean]
     #
-    # @!attribute [rw] destination_region
-    #   @return [String]
-    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2229,7 +2218,6 @@ module Aws::RDS
       :domain,
       :domain_iam_role_name,
       :enable_global_write_forwarding,
-      :destination_region,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -3923,9 +3911,6 @@ module Aws::RDS
     #   storage of the DB instance.
     #   @return [Integer]
     #
-    # @!attribute [rw] destination_region
-    #   @return [String]
-    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3966,7 +3951,6 @@ module Aws::RDS
       :domain_iam_role_name,
       :replica_mode,
       :max_allocated_storage,
-      :destination_region,
       :source_region)
       SENSITIVE = []
       include Aws::Structure

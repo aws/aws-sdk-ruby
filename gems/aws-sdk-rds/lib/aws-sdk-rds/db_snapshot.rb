@@ -531,7 +531,6 @@ module Aws::RDS
     #   CAZ.
     #
     #   Example: `rds-caz-aiqhTgQv`.
-    # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.

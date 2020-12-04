@@ -29,6 +29,7 @@ require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
+require 'aws-sdk-docdb/plugins/cross_region_copying.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:docdb)
 
@@ -75,6 +76,7 @@ module Aws::DocDB
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
+    add_plugin(Aws::DocDB::Plugins::CrossRegionCopying)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -599,6 +601,10 @@ module Aws::DocDB
     # @option params [Array<Types::Tag>] :tags
     #   The tags to be assigned to the cluster snapshot.
     #
+    # @option params [String] :source_region
+    #   The source region of the snapshot. This is only needed when the
+    #   shapshot is encrypted and in a different region.
+    #
     # @return [Types::CopyDBClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CopyDBClusterSnapshotResult#db_cluster_snapshot #db_cluster_snapshot} => Types::DBClusterSnapshot
@@ -617,6 +623,7 @@ module Aws::DocDB
     #         value: "String",
     #       },
     #     ],
+    #     source_region: "String",
     #   })
     #
     # @example Response structure
@@ -807,6 +814,10 @@ module Aws::DocDB
     #   `DeletionProtection` is disabled. `DeletionProtection` protects
     #   clusters from being accidentally deleted.
     #
+    # @option params [String] :source_region
+    #   The source region of the snapshot. This is only needed when the
+    #   shapshot is encrypted and in a different region.
+    #
     # @return [Types::CreateDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -838,6 +849,7 @@ module Aws::DocDB
     #     pre_signed_url: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
     #     deletion_protection: false,
+    #     source_region: "String",
     #   })
     #
     # @example Response structure
