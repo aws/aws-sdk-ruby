@@ -174,9 +174,6 @@ module Aws::RDS
 
     # If `Encrypted` is true, the AWS KMS key identifier for the encrypted
     # DB snapshot.
-    #
-    # The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    # name for the AWS KMS customer master key (CMK).
     # @return [String]
     def kms_key_id
       data[:kms_key_id]
@@ -429,14 +426,14 @@ module Aws::RDS
     #
     #   Example: `my-db-snapshot`
     # @option options [String] :kms_key_id
-    #   The AWS KMS key identifier for an encrypted DB snapshot. The AWS KMS
-    #   key identifier is the key ARN, key ID, alias ARN, or alias name for
-    #   the AWS KMS customer master key (CMK).
+    #   The AWS KMS key ID for an encrypted DB snapshot. The KMS key ID is the
+    #   Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias
+    #   for the KMS encryption key.
     #
     #   If you copy an encrypted DB snapshot from your AWS account, you can
-    #   specify a value for this parameter to encrypt the copy with a new AWS
-    #   KMS CMK. If you don't specify a value for this parameter, then the
-    #   copy of the DB snapshot is encrypted with the same AWS KMS key as the
+    #   specify a value for this parameter to encrypt the copy with a new KMS
+    #   encryption key. If you don't specify a value for this parameter, then
+    #   the copy of the DB snapshot is encrypted with the same KMS key as the
     #   source DB snapshot.
     #
     #   If you copy an encrypted DB snapshot that is shared from another AWS
@@ -446,9 +443,9 @@ module Aws::RDS
     #   the copy is encrypted.
     #
     #   If you copy an encrypted snapshot to a different AWS Region, then you
-    #   must specify a AWS KMS key identifier for the destination AWS Region.
-    #   AWS KMS CMKs are specific to the AWS Region that they are created in,
-    #   and you can't use CMKs from one AWS Region in another AWS Region.
+    #   must specify a KMS key for the destination AWS Region. KMS encryption
+    #   keys are specific to the AWS Region that they are created in, and you
+    #   can't use encryption keys from one AWS Region in another AWS Region.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon RDS
     #   Resources][1] in the *Amazon RDS User Guide.*
@@ -485,11 +482,11 @@ module Aws::RDS
     #     the us-west-2 AWS Region. For this example, the `DestinationRegion`
     #     in the presigned URL must be set to the us-east-1 AWS Region.
     #
-    #   * `KmsKeyId` - The AWS KMS key identifier for the customer master key
-    #     (CMK) to use to encrypt the copy of the DB snapshot in the
-    #     destination AWS Region. This is the same identifier for both the
-    #     `CopyDBSnapshot` action that is called in the destination AWS
-    #     Region, and the action contained in the presigned URL.
+    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
+    #     encrypt the copy of the DB snapshot in the destination AWS Region.
+    #     This is the same identifier for both the `CopyDBSnapshot` action
+    #     that is called in the destination AWS Region, and the action
+    #     contained in the presigned URL.
     #
     #   * `SourceDBSnapshotIdentifier` - The DB snapshot identifier for the
     #     encrypted snapshot to be copied. This identifier must be in the

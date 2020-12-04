@@ -54,7 +54,6 @@ module Aws::MediaLive
     AudioPidSelection = Shapes::StructureShape.new(name: 'AudioPidSelection')
     AudioSelector = Shapes::StructureShape.new(name: 'AudioSelector')
     AudioSelectorSettings = Shapes::StructureShape.new(name: 'AudioSelectorSettings')
-    AudioSilenceFailoverSettings = Shapes::StructureShape.new(name: 'AudioSilenceFailoverSettings')
     AudioTrack = Shapes::StructureShape.new(name: 'AudioTrack')
     AudioTrackSelection = Shapes::StructureShape.new(name: 'AudioTrackSelection')
     AudioType = Shapes::StringShape.new(name: 'AudioType')
@@ -340,7 +339,6 @@ module Aws::MediaLive
     InputDeviceThumbnail = Shapes::BlobShape.new(name: 'InputDeviceThumbnail', streaming: true)
     InputDeviceTransferType = Shapes::StringShape.new(name: 'InputDeviceTransferType')
     InputDeviceType = Shapes::StringShape.new(name: 'InputDeviceType')
-    InputDeviceUhdSettings = Shapes::StructureShape.new(name: 'InputDeviceUhdSettings')
     InputFilter = Shapes::StringShape.new(name: 'InputFilter')
     InputLocation = Shapes::StructureShape.new(name: 'InputLocation')
     InputLossActionForHlsOut = Shapes::StringShape.new(name: 'InputLossActionForHlsOut')
@@ -625,7 +623,6 @@ module Aws::MediaLive
     UpdateReservationResponse = Shapes::StructureShape.new(name: 'UpdateReservationResponse')
     UpdateReservationResultModel = Shapes::StructureShape.new(name: 'UpdateReservationResultModel')
     ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
-    VideoBlackFailoverSettings = Shapes::StructureShape.new(name: 'VideoBlackFailoverSettings')
     VideoCodecSettings = Shapes::StructureShape.new(name: 'VideoCodecSettings')
     VideoDescription = Shapes::StructureShape.new(name: 'VideoDescription')
     VideoDescriptionRespondToAfd = Shapes::StringShape.new(name: 'VideoDescriptionRespondToAfd')
@@ -642,7 +639,6 @@ module Aws::MediaLive
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __doubleMin0 = Shapes::FloatShape.new(name: '__doubleMin0')
-    __doubleMin0Max1 = Shapes::FloatShape.new(name: '__doubleMin0Max1')
     __doubleMin1 = Shapes::FloatShape.new(name: '__doubleMin1')
     __doubleMinNegative59Max0 = Shapes::FloatShape.new(name: '__doubleMinNegative59Max0')
     __integer = Shapes::IntegerShape.new(name: '__integer')
@@ -862,10 +858,6 @@ module Aws::MediaLive
     AudioSelectorSettings.add_member(:audio_pid_selection, Shapes::ShapeRef.new(shape: AudioPidSelection, location_name: "audioPidSelection"))
     AudioSelectorSettings.add_member(:audio_track_selection, Shapes::ShapeRef.new(shape: AudioTrackSelection, location_name: "audioTrackSelection"))
     AudioSelectorSettings.struct_class = Types::AudioSelectorSettings
-
-    AudioSilenceFailoverSettings.add_member(:audio_selector_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "audioSelectorName"))
-    AudioSilenceFailoverSettings.add_member(:audio_silence_threshold_msec, Shapes::ShapeRef.new(shape: __integerMin1000, location_name: "audioSilenceThresholdMsec"))
-    AudioSilenceFailoverSettings.struct_class = Types::AudioSilenceFailoverSettings
 
     AudioTrack.add_member(:track, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "track"))
     AudioTrack.struct_class = Types::AudioTrack
@@ -1346,7 +1338,6 @@ module Aws::MediaLive
     DescribeInputDeviceResponse.add_member(:network_settings, Shapes::ShapeRef.new(shape: InputDeviceNetworkSettings, location_name: "networkSettings"))
     DescribeInputDeviceResponse.add_member(:serial_number, Shapes::ShapeRef.new(shape: __string, location_name: "serialNumber"))
     DescribeInputDeviceResponse.add_member(:type, Shapes::ShapeRef.new(shape: InputDeviceType, location_name: "type"))
-    DescribeInputDeviceResponse.add_member(:uhd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceUhdSettings, location_name: "uhdDeviceSettings"))
     DescribeInputDeviceResponse.struct_class = Types::DescribeInputDeviceResponse
 
     DescribeInputDeviceThumbnailRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
@@ -1558,9 +1549,7 @@ module Aws::MediaLive
     FailoverCondition.add_member(:failover_condition_settings, Shapes::ShapeRef.new(shape: FailoverConditionSettings, location_name: "failoverConditionSettings"))
     FailoverCondition.struct_class = Types::FailoverCondition
 
-    FailoverConditionSettings.add_member(:audio_silence_settings, Shapes::ShapeRef.new(shape: AudioSilenceFailoverSettings, location_name: "audioSilenceSettings"))
     FailoverConditionSettings.add_member(:input_loss_settings, Shapes::ShapeRef.new(shape: InputLossFailoverSettings, location_name: "inputLossSettings"))
-    FailoverConditionSettings.add_member(:video_black_settings, Shapes::ShapeRef.new(shape: VideoBlackFailoverSettings, location_name: "videoBlackSettings"))
     FailoverConditionSettings.struct_class = Types::FailoverConditionSettings
 
     FeatureActivations.add_member(:input_prepare_schedule_actions, Shapes::ShapeRef.new(shape: FeatureActivationsInputPrepareScheduleActions, location_name: "inputPrepareScheduleActions"))
@@ -1862,7 +1851,6 @@ module Aws::MediaLive
     InputDevice.add_member(:network_settings, Shapes::ShapeRef.new(shape: InputDeviceNetworkSettings, location_name: "networkSettings"))
     InputDevice.add_member(:serial_number, Shapes::ShapeRef.new(shape: __string, location_name: "serialNumber"))
     InputDevice.add_member(:type, Shapes::ShapeRef.new(shape: InputDeviceType, location_name: "type"))
-    InputDevice.add_member(:uhd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceUhdSettings, location_name: "uhdDeviceSettings"))
     InputDevice.struct_class = Types::InputDevice
 
     InputDeviceConfigurableSettings.add_member(:configured_input, Shapes::ShapeRef.new(shape: InputDeviceConfiguredInput, location_name: "configuredInput"))
@@ -1907,18 +1895,7 @@ module Aws::MediaLive
     InputDeviceSummary.add_member(:network_settings, Shapes::ShapeRef.new(shape: InputDeviceNetworkSettings, location_name: "networkSettings"))
     InputDeviceSummary.add_member(:serial_number, Shapes::ShapeRef.new(shape: __string, location_name: "serialNumber"))
     InputDeviceSummary.add_member(:type, Shapes::ShapeRef.new(shape: InputDeviceType, location_name: "type"))
-    InputDeviceSummary.add_member(:uhd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceUhdSettings, location_name: "uhdDeviceSettings"))
     InputDeviceSummary.struct_class = Types::InputDeviceSummary
-
-    InputDeviceUhdSettings.add_member(:active_input, Shapes::ShapeRef.new(shape: InputDeviceActiveInput, location_name: "activeInput"))
-    InputDeviceUhdSettings.add_member(:configured_input, Shapes::ShapeRef.new(shape: InputDeviceConfiguredInput, location_name: "configuredInput"))
-    InputDeviceUhdSettings.add_member(:device_state, Shapes::ShapeRef.new(shape: InputDeviceState, location_name: "deviceState"))
-    InputDeviceUhdSettings.add_member(:framerate, Shapes::ShapeRef.new(shape: __double, location_name: "framerate"))
-    InputDeviceUhdSettings.add_member(:height, Shapes::ShapeRef.new(shape: __integer, location_name: "height"))
-    InputDeviceUhdSettings.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integer, location_name: "maxBitrate"))
-    InputDeviceUhdSettings.add_member(:scan_type, Shapes::ShapeRef.new(shape: InputDeviceScanType, location_name: "scanType"))
-    InputDeviceUhdSettings.add_member(:width, Shapes::ShapeRef.new(shape: __integer, location_name: "width"))
-    InputDeviceUhdSettings.struct_class = Types::InputDeviceUhdSettings
 
     InputLocation.add_member(:password_param, Shapes::ShapeRef.new(shape: __string, location_name: "passwordParam"))
     InputLocation.add_member(:uri, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "uri"))
@@ -2852,13 +2829,11 @@ module Aws::MediaLive
 
     UpdateInputDevice.add_member(:hd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceConfigurableSettings, location_name: "hdDeviceSettings"))
     UpdateInputDevice.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
-    UpdateInputDevice.add_member(:uhd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceConfigurableSettings, location_name: "uhdDeviceSettings"))
     UpdateInputDevice.struct_class = Types::UpdateInputDevice
 
     UpdateInputDeviceRequest.add_member(:hd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceConfigurableSettings, location_name: "hdDeviceSettings"))
     UpdateInputDeviceRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
     UpdateInputDeviceRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
-    UpdateInputDeviceRequest.add_member(:uhd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceConfigurableSettings, location_name: "uhdDeviceSettings"))
     UpdateInputDeviceRequest.struct_class = Types::UpdateInputDeviceRequest
 
     UpdateInputDeviceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
@@ -2872,7 +2847,6 @@ module Aws::MediaLive
     UpdateInputDeviceResponse.add_member(:network_settings, Shapes::ShapeRef.new(shape: InputDeviceNetworkSettings, location_name: "networkSettings"))
     UpdateInputDeviceResponse.add_member(:serial_number, Shapes::ShapeRef.new(shape: __string, location_name: "serialNumber"))
     UpdateInputDeviceResponse.add_member(:type, Shapes::ShapeRef.new(shape: InputDeviceType, location_name: "type"))
-    UpdateInputDeviceResponse.add_member(:uhd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceUhdSettings, location_name: "uhdDeviceSettings"))
     UpdateInputDeviceResponse.struct_class = Types::UpdateInputDeviceResponse
 
     UpdateInputRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))
@@ -2947,10 +2921,6 @@ module Aws::MediaLive
     ValidationError.add_member(:element_path, Shapes::ShapeRef.new(shape: __string, location_name: "elementPath"))
     ValidationError.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
     ValidationError.struct_class = Types::ValidationError
-
-    VideoBlackFailoverSettings.add_member(:black_detect_threshold, Shapes::ShapeRef.new(shape: __doubleMin0Max1, location_name: "blackDetectThreshold"))
-    VideoBlackFailoverSettings.add_member(:video_black_threshold_msec, Shapes::ShapeRef.new(shape: __integerMin1000, location_name: "videoBlackThresholdMsec"))
-    VideoBlackFailoverSettings.struct_class = Types::VideoBlackFailoverSettings
 
     VideoCodecSettings.add_member(:frame_capture_settings, Shapes::ShapeRef.new(shape: FrameCaptureSettings, location_name: "frameCaptureSettings"))
     VideoCodecSettings.add_member(:h264_settings, Shapes::ShapeRef.new(shape: H264Settings, location_name: "h264Settings"))

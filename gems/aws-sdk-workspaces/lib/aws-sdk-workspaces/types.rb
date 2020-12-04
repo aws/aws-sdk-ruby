@@ -1615,7 +1615,7 @@ module Aws::WorkSpaces
     #
     #       {
     #         ec2_image_id: "Ec2ImageId", # required
-    #         ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO, BYOL_REGULAR_WSP
+    #         ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO
     #         image_name: "WorkspaceImageName", # required
     #         image_description: "WorkspaceImageDescription", # required
     #         tags: [
@@ -1632,15 +1632,9 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] ingestion_process
-    #   The ingestion process to be used when importing the image, depending
-    #   on which protocol you want to use for your BYOL Workspace image,
-    #   either PCoIP or WorkSpaces Streaming Protocol (WSP). To use WSP,
-    #   specify a value that ends in `_WSP`. To use PCoIP, specify a value
-    #   that does not end in `_WSP`.
-    #
-    #   For non-GPU-enabled bundles (bundles other than Graphics or
-    #   GraphicsPro), specify `BYOL_REGULAR` or `BYOL_REGULAR_WSP`,
-    #   depending on the protocol.
+    #   The ingestion process to be used when importing the image. For
+    #   non-GPU-enabled bundles (bundles other than Graphics or
+    #   GraphicsPro), specify `BYOL_REGULAR`.
     #   @return [String]
     #
     # @!attribute [rw] image_name

@@ -597,7 +597,6 @@ module Aws::LicenseManager
     #             value: "String",
     #           },
     #         ],
-    #         disassociate_when_not_found: false,
     #         product_information_list: [
     #           {
     #             resource_type: "String", # required
@@ -661,10 +660,6 @@ module Aws::LicenseManager
     #   Tags to add to the license configuration.
     #   @return [Array<Types::Tag>]
     #
-    # @!attribute [rw] disassociate_when_not_found
-    #   When true, disassociates a resource when software is uninstalled.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] product_information_list
     #   Product information.
     #   @return [Array<Types::ProductInformation>]
@@ -679,7 +674,6 @@ module Aws::LicenseManager
       :license_count_hard_limit,
       :license_rules,
       :tags,
-      :disassociate_when_not_found,
       :product_information_list)
       SENSITIVE = []
       include Aws::Structure
@@ -1588,10 +1582,6 @@ module Aws::LicenseManager
     #   Automated discovery information.
     #   @return [Types::AutomatedDiscoveryInformation]
     #
-    # @!attribute [rw] disassociate_when_not_found
-    #   When true, disassociates a resource when software is uninstalled.
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetLicenseConfigurationResponse AWS API Documentation
     #
     class GetLicenseConfigurationResponse < Struct.new(
@@ -1610,8 +1600,7 @@ module Aws::LicenseManager
       :managed_resource_summary_list,
       :tags,
       :product_information_list,
-      :automated_discovery_information,
-      :disassociate_when_not_found)
+      :automated_discovery_information)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2108,10 +2097,6 @@ module Aws::LicenseManager
     #   Number of available licenses as a hard limit.
     #   @return [Boolean]
     #
-    # @!attribute [rw] disassociate_when_not_found
-    #   When true, disassociates a resource when software is uninstalled.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] consumed_licenses
     #   Number of licenses consumed.
     #   @return [Integer]
@@ -2151,7 +2136,6 @@ module Aws::LicenseManager
       :license_rules,
       :license_count,
       :license_count_hard_limit,
-      :disassociate_when_not_found,
       :consumed_licenses,
       :status,
       :owner_account_id,
@@ -2915,10 +2899,6 @@ module Aws::LicenseManager
     #
     #   * `resource_id` - The ID of the resource. Logical operators are
     #     `EQUALS` \| `NOT_EQUALS`.
-    #
-    #   * `tag:<key>` - The key/value combination of a tag assigned to the
-    #     resource. Logical operators are `EQUALS` (single account) or
-    #     `EQUALS` \| `NOT_EQUALS` (cross account).
     #   @return [Array<Types::InventoryFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListResourceInventoryRequest AWS API Documentation
@@ -3651,7 +3631,6 @@ module Aws::LicenseManager
     #             ],
     #           },
     #         ],
-    #         disassociate_when_not_found: false,
     #       }
     #
     # @!attribute [rw] license_configuration_arn
@@ -3687,10 +3666,6 @@ module Aws::LicenseManager
     #   New product information.
     #   @return [Array<Types::ProductInformation>]
     #
-    # @!attribute [rw] disassociate_when_not_found
-    #   When true, disassociates a resource when software is uninstalled.
-    #   @return [Boolean]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/UpdateLicenseConfigurationRequest AWS API Documentation
     #
     class UpdateLicenseConfigurationRequest < Struct.new(
@@ -3701,8 +3676,7 @@ module Aws::LicenseManager
       :license_count_hard_limit,
       :name,
       :description,
-      :product_information_list,
-      :disassociate_when_not_found)
+      :product_information_list)
       SENSITIVE = []
       include Aws::Structure
     end

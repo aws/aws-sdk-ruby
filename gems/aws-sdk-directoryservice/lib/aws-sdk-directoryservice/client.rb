@@ -1266,8 +1266,8 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Deletes from the system the certificate that was registered for secure
-    # LDAP or client certificate authentication.
+    # Deletes from the system the certificate that was registered for a
+    # secured LDAP connection.
     #
     # @option params [required, String] :directory_id
     #   The identifier of the directory.
@@ -1322,8 +1322,8 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Displays information about the certificate registered for secure LDAP
-    # or client certificate authentication.
+    # Displays information about the certificate registered for a secured
+    # LDAP connection.
     #
     # @option params [required, String] :directory_id
     #   The identifier of the directory.
@@ -1910,15 +1910,14 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Disables alternative client authentication methods for the specified
-    # directory.
+    # Disable client authentication for smart cards.
     #
     # @option params [required, String] :directory_id
-    #   The identifier of the directory
+    #   Disable client authentication in a specified directory for smart
+    #   cards.
     #
     # @option params [required, String] :type
-    #   The type of client authentication to disable. Currently, only the
-    #   parameter, `SmartCard` is supported.
+    #   Disable the type of client authentication request.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2029,17 +2028,13 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Enables alternative client authentication methods for the specified
-    # directory.
+    # Enable client authentication for smardtcards.
     #
     # @option params [required, String] :directory_id
-    #   The identifier of the specified directory.
+    #   Enable client authentication in a specified directory for smart cards.
     #
     # @option params [required, String] :type
-    #   The type of client authentication to enable. Currently only the value
-    #   `SmartCard` is supported. Smart card authentication in AD Connector
-    #   requires that you enable Kerberos Constrained Delegation for the
-    #   Service User to the LDAP service in the on-premises AD.
+    #   Enable the type of client authentication request.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2225,7 +2220,7 @@ module Aws::DirectoryService
     end
 
     # For the specified directory, lists all the certificates registered for
-    # a secure LDAP or client certificate authentication.
+    # a secured LDAP connection.
     #
     # @option params [required, String] :directory_id
     #   The identifier of the directory.
@@ -2450,8 +2445,7 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Registers a certificate for a secure LDAP or client certificate
-    # authentication.
+    # Registers a certificate for secured LDAP connection.
     #
     # @option params [required, String] :directory_id
     #   The identifier of the directory.
@@ -2460,13 +2454,11 @@ module Aws::DirectoryService
     #   The certificate PEM string that needs to be registered.
     #
     # @option params [String] :type
-    #   The function that the registered certificate performs. Valid values
-    #   include `ClientLDAPS` or `ClientCertAuth`. The default value is
-    #   `ClientLDAPS`.
+    #   The certificate type to register for the request.
     #
     # @option params [Types::ClientCertAuthSettings] :client_cert_auth_settings
-    #   A `ClientCertAuthSettings` object that contains client certificate
-    #   authentication settings.
+    #   Contains information about the client certificate authentication
+    #   settings, such as `ClientLDAPS` or `ClientCertAuth`.
     #
     # @return [Types::RegisterCertificateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3055,7 +3047,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

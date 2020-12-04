@@ -146,8 +146,6 @@ module Aws::RDS
     DBInstanceAutomatedBackupMessage = Shapes::StructureShape.new(name: 'DBInstanceAutomatedBackupMessage')
     DBInstanceAutomatedBackupNotFoundFault = Shapes::StructureShape.new(name: 'DBInstanceAutomatedBackupNotFoundFault')
     DBInstanceAutomatedBackupQuotaExceededFault = Shapes::StructureShape.new(name: 'DBInstanceAutomatedBackupQuotaExceededFault')
-    DBInstanceAutomatedBackupsReplication = Shapes::StructureShape.new(name: 'DBInstanceAutomatedBackupsReplication')
-    DBInstanceAutomatedBackupsReplicationList = Shapes::ListShape.new(name: 'DBInstanceAutomatedBackupsReplicationList')
     DBInstanceList = Shapes::ListShape.new(name: 'DBInstanceList')
     DBInstanceMessage = Shapes::StructureShape.new(name: 'DBInstanceMessage')
     DBInstanceNotFoundFault = Shapes::StructureShape.new(name: 'DBInstanceNotFoundFault')
@@ -522,8 +520,6 @@ module Aws::RDS
     StartActivityStreamResponse = Shapes::StructureShape.new(name: 'StartActivityStreamResponse')
     StartDBClusterMessage = Shapes::StructureShape.new(name: 'StartDBClusterMessage')
     StartDBClusterResult = Shapes::StructureShape.new(name: 'StartDBClusterResult')
-    StartDBInstanceAutomatedBackupsReplicationMessage = Shapes::StructureShape.new(name: 'StartDBInstanceAutomatedBackupsReplicationMessage')
-    StartDBInstanceAutomatedBackupsReplicationResult = Shapes::StructureShape.new(name: 'StartDBInstanceAutomatedBackupsReplicationResult')
     StartDBInstanceMessage = Shapes::StructureShape.new(name: 'StartDBInstanceMessage')
     StartDBInstanceResult = Shapes::StructureShape.new(name: 'StartDBInstanceResult')
     StartExportTaskMessage = Shapes::StructureShape.new(name: 'StartExportTaskMessage')
@@ -531,8 +527,6 @@ module Aws::RDS
     StopActivityStreamResponse = Shapes::StructureShape.new(name: 'StopActivityStreamResponse')
     StopDBClusterMessage = Shapes::StructureShape.new(name: 'StopDBClusterMessage')
     StopDBClusterResult = Shapes::StructureShape.new(name: 'StopDBClusterResult')
-    StopDBInstanceAutomatedBackupsReplicationMessage = Shapes::StructureShape.new(name: 'StopDBInstanceAutomatedBackupsReplicationMessage')
-    StopDBInstanceAutomatedBackupsReplicationResult = Shapes::StructureShape.new(name: 'StopDBInstanceAutomatedBackupsReplicationResult')
     StopDBInstanceMessage = Shapes::StructureShape.new(name: 'StopDBInstanceMessage')
     StopDBInstanceResult = Shapes::StructureShape.new(name: 'StopDBInstanceResult')
     StorageQuotaExceededFault = Shapes::StructureShape.new(name: 'StorageQuotaExceededFault')
@@ -1308,7 +1302,6 @@ module Aws::RDS
     DBInstance.add_member(:listener_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "ListenerEndpoint"))
     DBInstance.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
     DBInstance.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
-    DBInstance.add_member(:db_instance_automated_backups_replications, Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupsReplicationList, location_name: "DBInstanceAutomatedBackupsReplications"))
     DBInstance.struct_class = Types::DBInstance
 
     DBInstanceAlreadyExistsFault.struct_class = Types::DBInstanceAlreadyExistsFault
@@ -1336,9 +1329,6 @@ module Aws::RDS
     DBInstanceAutomatedBackup.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     DBInstanceAutomatedBackup.add_member(:timezone, Shapes::ShapeRef.new(shape: String, location_name: "Timezone"))
     DBInstanceAutomatedBackup.add_member(:iam_database_authentication_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "IAMDatabaseAuthenticationEnabled"))
-    DBInstanceAutomatedBackup.add_member(:backup_retention_period, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "BackupRetentionPeriod"))
-    DBInstanceAutomatedBackup.add_member(:db_instance_automated_backups_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceAutomatedBackupsArn"))
-    DBInstanceAutomatedBackup.add_member(:db_instance_automated_backups_replications, Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupsReplicationList, location_name: "DBInstanceAutomatedBackupsReplications"))
     DBInstanceAutomatedBackup.struct_class = Types::DBInstanceAutomatedBackup
 
     DBInstanceAutomatedBackupList.member = Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackup, location_name: "DBInstanceAutomatedBackup")
@@ -1350,11 +1340,6 @@ module Aws::RDS
     DBInstanceAutomatedBackupNotFoundFault.struct_class = Types::DBInstanceAutomatedBackupNotFoundFault
 
     DBInstanceAutomatedBackupQuotaExceededFault.struct_class = Types::DBInstanceAutomatedBackupQuotaExceededFault
-
-    DBInstanceAutomatedBackupsReplication.add_member(:db_instance_automated_backups_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceAutomatedBackupsArn"))
-    DBInstanceAutomatedBackupsReplication.struct_class = Types::DBInstanceAutomatedBackupsReplication
-
-    DBInstanceAutomatedBackupsReplicationList.member = Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupsReplication, location_name: "DBInstanceAutomatedBackupsReplication")
 
     DBInstanceList.member = Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance")
 
@@ -1603,8 +1588,7 @@ module Aws::RDS
     DeleteDBClusterSnapshotResult.add_member(:db_cluster_snapshot, Shapes::ShapeRef.new(shape: DBClusterSnapshot, location_name: "DBClusterSnapshot"))
     DeleteDBClusterSnapshotResult.struct_class = Types::DeleteDBClusterSnapshotResult
 
-    DeleteDBInstanceAutomatedBackupMessage.add_member(:dbi_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "DbiResourceId"))
-    DeleteDBInstanceAutomatedBackupMessage.add_member(:db_instance_automated_backups_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceAutomatedBackupsArn"))
+    DeleteDBInstanceAutomatedBackupMessage.add_member(:dbi_resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DbiResourceId"))
     DeleteDBInstanceAutomatedBackupMessage.struct_class = Types::DeleteDBInstanceAutomatedBackupMessage
 
     DeleteDBInstanceAutomatedBackupResult.add_member(:db_instance_automated_backup, Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackup, location_name: "DBInstanceAutomatedBackup"))
@@ -1747,7 +1731,6 @@ module Aws::RDS
     DescribeDBInstanceAutomatedBackupsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeDBInstanceAutomatedBackupsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeDBInstanceAutomatedBackupsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
-    DescribeDBInstanceAutomatedBackupsMessage.add_member(:db_instance_automated_backups_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceAutomatedBackupsArn"))
     DescribeDBInstanceAutomatedBackupsMessage.struct_class = Types::DescribeDBInstanceAutomatedBackupsMessage
 
     DescribeDBInstancesMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceIdentifier"))
@@ -3012,7 +2995,6 @@ module Aws::RDS
     RestoreDBInstanceToPointInTimeMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:source_dbi_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "SourceDbiResourceId"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
-    RestoreDBInstanceToPointInTimeMessage.add_member(:source_db_instance_automated_backups_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceDBInstanceAutomatedBackupsArn"))
     RestoreDBInstanceToPointInTimeMessage.struct_class = Types::RestoreDBInstanceToPointInTimeMessage
 
     RestoreDBInstanceToPointInTimeResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3063,7 +3045,6 @@ module Aws::RDS
     SourceRegion.add_member(:region_name, Shapes::ShapeRef.new(shape: String, location_name: "RegionName"))
     SourceRegion.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "Endpoint"))
     SourceRegion.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
-    SourceRegion.add_member(:supports_db_instance_automated_backups_replication, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsDBInstanceAutomatedBackupsReplication"))
     SourceRegion.struct_class = Types::SourceRegion
 
     SourceRegionList.member = Shapes::ShapeRef.new(shape: SourceRegion, location_name: "SourceRegion")
@@ -3090,15 +3071,6 @@ module Aws::RDS
 
     StartDBClusterResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
     StartDBClusterResult.struct_class = Types::StartDBClusterResult
-
-    StartDBInstanceAutomatedBackupsReplicationMessage.add_member(:source_db_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceDBInstanceArn"))
-    StartDBInstanceAutomatedBackupsReplicationMessage.add_member(:backup_retention_period, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "BackupRetentionPeriod"))
-    StartDBInstanceAutomatedBackupsReplicationMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
-    StartDBInstanceAutomatedBackupsReplicationMessage.add_member(:pre_signed_url, Shapes::ShapeRef.new(shape: String, location_name: "PreSignedUrl"))
-    StartDBInstanceAutomatedBackupsReplicationMessage.struct_class = Types::StartDBInstanceAutomatedBackupsReplicationMessage
-
-    StartDBInstanceAutomatedBackupsReplicationResult.add_member(:db_instance_automated_backup, Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackup, location_name: "DBInstanceAutomatedBackup"))
-    StartDBInstanceAutomatedBackupsReplicationResult.struct_class = Types::StartDBInstanceAutomatedBackupsReplicationResult
 
     StartDBInstanceMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
     StartDBInstanceMessage.struct_class = Types::StartDBInstanceMessage
@@ -3129,12 +3101,6 @@ module Aws::RDS
 
     StopDBClusterResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
     StopDBClusterResult.struct_class = Types::StopDBClusterResult
-
-    StopDBInstanceAutomatedBackupsReplicationMessage.add_member(:source_db_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceDBInstanceArn"))
-    StopDBInstanceAutomatedBackupsReplicationMessage.struct_class = Types::StopDBInstanceAutomatedBackupsReplicationMessage
-
-    StopDBInstanceAutomatedBackupsReplicationResult.add_member(:db_instance_automated_backup, Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackup, location_name: "DBInstanceAutomatedBackup"))
-    StopDBInstanceAutomatedBackupsReplicationResult.struct_class = Types::StopDBInstanceAutomatedBackupsReplicationResult
 
     StopDBInstanceMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
     StopDBInstanceMessage.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBSnapshotIdentifier"))
@@ -4964,19 +4930,6 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
       end)
 
-      api.add_operation(:start_db_instance_automated_backups_replication, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "StartDBInstanceAutomatedBackupsReplication"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: StartDBInstanceAutomatedBackupsReplicationMessage)
-        o.output = Shapes::ShapeRef.new(shape: StartDBInstanceAutomatedBackupsReplicationResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
-        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
-      end)
-
       api.add_operation(:start_export_task, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartExportTask"
         o.http_method = "POST"
@@ -5029,16 +4982,6 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBSnapshotAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
-      end)
-
-      api.add_operation(:stop_db_instance_automated_backups_replication, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "StopDBInstanceAutomatedBackupsReplication"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: StopDBInstanceAutomatedBackupsReplicationMessage)
-        o.output = Shapes::ShapeRef.new(shape: StopDBInstanceAutomatedBackupsReplicationResult)
-        o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
       end)
     end
 

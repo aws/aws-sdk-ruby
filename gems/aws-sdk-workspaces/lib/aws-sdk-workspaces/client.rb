@@ -448,14 +448,6 @@ module Aws::WorkSpaces
     # Region. For more information about copying images, see [ Copy a Custom
     # WorkSpaces Image][1].
     #
-    # <note markdown="1"> In the China (Ningxia) Region, you can copy images only within the
-    # same Region.
-    #
-    #  In the AWS GovCloud (US-West) Region, to copy images to and from other
-    # AWS Regions, contact AWS Support.
-    #
-    #  </note>
-    #
     # Before copying a shared image, be sure to verify that it has been
     # shared from the correct AWS account. To determine if an image has been
     # shared and to see the AWS account ID that owns an image, use the
@@ -878,25 +870,6 @@ module Aws::WorkSpaces
     # and returns before the WorkSpace directory is deregistered. If any
     # WorkSpaces are registered to this directory, you must remove them
     # before you can deregister the directory.
-    #
-    # <note markdown="1"> Simple AD and AD Connector are made available to you free of charge to
-    # use with WorkSpaces. If there are no WorkSpaces being used with your
-    # Simple AD or AD Connector directory for 30 consecutive days, this
-    # directory will be automatically deregistered for use with Amazon
-    # WorkSpaces, and you will be charged for this directory as per the [AWS
-    # Directory Services pricing terms][1].
-    #
-    #  To delete empty directories, see [ Delete the Directory for Your
-    # WorkSpaces][2]. If you delete your Simple AD or AD Connector
-    # directory, you can always create a new one when you want to start
-    # using WorkSpaces again.
-    #
-    #  </note>
-    #
-    #
-    #
-    # [1]: http://aws.amazon.com/directoryservice/pricing/
-    # [2]: https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html
     #
     # @option params [required, String] :directory_id
     #   The identifier of the directory. If any WorkSpaces are registered to
@@ -1666,15 +1639,9 @@ module Aws::WorkSpaces
     #   The identifier of the EC2 image.
     #
     # @option params [required, String] :ingestion_process
-    #   The ingestion process to be used when importing the image, depending
-    #   on which protocol you want to use for your BYOL Workspace image,
-    #   either PCoIP or WorkSpaces Streaming Protocol (WSP). To use WSP,
-    #   specify a value that ends in `_WSP`. To use PCoIP, specify a value
-    #   that does not end in `_WSP`.
-    #
-    #   For non-GPU-enabled bundles (bundles other than Graphics or
-    #   GraphicsPro), specify `BYOL_REGULAR` or `BYOL_REGULAR_WSP`, depending
-    #   on the protocol.
+    #   The ingestion process to be used when importing the image. For
+    #   non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro),
+    #   specify `BYOL_REGULAR`.
     #
     # @option params [required, String] :image_name
     #   The name of the WorkSpace image.
@@ -1708,7 +1675,7 @@ module Aws::WorkSpaces
     #
     #   resp = client.import_workspace_image({
     #     ec2_image_id: "Ec2ImageId", # required
-    #     ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO, BYOL_REGULAR_WSP
+    #     ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO
     #     image_name: "WorkspaceImageName", # required
     #     image_description: "WorkspaceImageDescription", # required
     #     tags: [
@@ -2400,25 +2367,9 @@ module Aws::WorkSpaces
     # using [ DescribeWorkSpaces][1]. If the WorkSpace ID isn't returned,
     # then the WorkSpace has been successfully terminated.
     #
-    # <note markdown="1"> Simple AD and AD Connector are made available to you free of charge to
-    # use with WorkSpaces. If there are no WorkSpaces being used with your
-    # Simple AD or AD Connector directory for 30 consecutive days, this
-    # directory will be automatically deregistered for use with Amazon
-    # WorkSpaces, and you will be charged for this directory as per the [AWS
-    # Directory Services pricing terms][2].
-    #
-    #  To delete empty directories, see [ Delete the Directory for Your
-    # WorkSpaces][3]. If you delete your Simple AD or AD Connector
-    # directory, you can always create a new one when you want to start
-    # using WorkSpaces again.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html
-    # [2]: http://aws.amazon.com/directoryservice/pricing/
-    # [3]: https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html
     #
     # @option params [required, Array<Types::TerminateRequest>] :terminate_workspace_requests
     #   The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
@@ -2540,25 +2491,12 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Shares or unshares an image with one account in the same AWS Region by
-    # specifying whether that account has permission to copy the image. If
-    # the copy image permission is granted, the image is shared with that
-    # account. If the copy image permission is revoked, the image is
-    # unshared with the account.
-    #
-    # After an image has been shared, the recipient account can copy the
-    # image to other AWS Regions as needed.
-    #
-    # <note markdown="1"> In the China (Ningxia) Region, you can copy images only within the
-    # same Region.
-    #
-    #  In the AWS GovCloud (US-West) Region, to copy images to and from other
-    # AWS Regions, contact AWS Support.
-    #
-    #  </note>
-    #
-    # For more information about sharing images, see [ Share or Unshare a
-    # Custom WorkSpaces Image][1].
+    # Shares or unshares an image with one account by specifying whether
+    # that account has permission to copy the image. If the copy image
+    # permission is granted, the image is shared with that account. If the
+    # copy image permission is revoked, the image is unshared with the
+    # account. For more information about sharing images, see [ Share or
+    # Unshare a Custom WorkSpaces Image][1].
     #
     # <note markdown="1"> * To delete an image that has been shared, you must unshare the image
     #   before you delete it.
@@ -2619,7 +2557,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

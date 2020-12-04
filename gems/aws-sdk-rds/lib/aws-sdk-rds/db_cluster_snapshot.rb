@@ -136,9 +136,6 @@ module Aws::RDS
 
     # If `StorageEncrypted` is true, the AWS KMS key identifier for the
     # encrypted DB cluster snapshot.
-    #
-    # The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    # name for the AWS KMS customer master key (CMK).
     # @return [String]
     def kms_key_id
       data[:kms_key_id]
@@ -368,25 +365,25 @@ module Aws::RDS
     #
     #   Example: `my-cluster-snapshot2`
     # @option options [String] :kms_key_id
-    #   The AWS KMS key identifier for an encrypted DB cluster snapshot. The
-    #   AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    #   name for the AWS KMS customer master key (CMK).
+    #   The AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key
+    #   ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS
+    #   key alias for the KMS encryption key.
     #
     #   If you copy an encrypted DB cluster snapshot from your AWS account,
     #   you can specify a value for `KmsKeyId` to encrypt the copy with a new
-    #   AWS KMS CMK. If you don't specify a value for `KmsKeyId`, then the
-    #   copy of the DB cluster snapshot is encrypted with the same AWS KMS key
+    #   KMS encryption key. If you don't specify a value for `KmsKeyId`, then
+    #   the copy of the DB cluster snapshot is encrypted with the same KMS key
     #   as the source DB cluster snapshot.
     #
     #   If you copy an encrypted DB cluster snapshot that is shared from
     #   another AWS account, then you must specify a value for `KmsKeyId`.
     #
     #   To copy an encrypted DB cluster snapshot to another AWS Region, you
-    #   must set `KmsKeyId` to the AWS KMS key identifier you want to use to
-    #   encrypt the copy of the DB cluster snapshot in the destination AWS
-    #   Region. AWS KMS CMKs are specific to the AWS Region that they are
-    #   created in, and you can't use CMKs from one AWS Region in another AWS
-    #   Region.
+    #   must set `KmsKeyId` to the KMS key ID you want to use to encrypt the
+    #   copy of the DB cluster snapshot in the destination AWS Region. KMS
+    #   encryption keys are specific to the AWS Region that they are created
+    #   in, and you can't use encryption keys from one AWS Region in another
+    #   AWS Region.
     #
     #   If you copy an unencrypted DB cluster snapshot and specify a value for
     #   the `KmsKeyId` parameter, an error is returned.
@@ -404,9 +401,9 @@ module Aws::RDS
     #   copied. The pre-signed URL request must contain the following
     #   parameter values:
     #
-    #   * `KmsKeyId` - The AWS KMS key identifier for the customer master key
-    #     (CMK) to use to encrypt the copy of the DB cluster snapshot in the
-    #     destination AWS Region. This is the same identifier for both the
+    #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
+    #     encrypt the copy of the DB cluster snapshot in the destination AWS
+    #     Region. This is the same identifier for both the
     #     `CopyDBClusterSnapshot` action that is called in the destination AWS
     #     Region, and the action contained in the pre-signed URL.
     #
@@ -598,17 +595,18 @@ module Aws::RDS
     #   The AWS KMS key identifier to use when restoring an encrypted DB
     #   cluster from a DB snapshot or DB cluster snapshot.
     #
-    #   The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
-    #   name for the AWS KMS customer master key (CMK). To use a CMK in a
-    #   different AWS account, specify the key ARN or alias ARN.
+    #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
+    #   encryption key. If you are restoring a DB cluster with the same AWS
+    #   account that owns the KMS encryption key used to encrypt the new DB
+    #   cluster, then you can use the KMS key alias instead of the ARN for the
+    #   KMS encryption key.
     #
-    #   When you don't specify a value for the `KmsKeyId` parameter, then the
+    #   If you don't specify a value for the `KmsKeyId` parameter, then the
     #   following occurs:
     #
     #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier` is
-    #     encrypted, then the restored DB cluster is encrypted using the AWS
-    #     KMS CMK that was used to encrypt the DB snapshot or DB cluster
-    #     snapshot.
+    #     encrypted, then the restored DB cluster is encrypted using the KMS
+    #     key that was used to encrypt the DB snapshot or DB cluster snapshot.
     #
     #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier`
     #     isn't encrypted, then the restored DB cluster isn't encrypted.
