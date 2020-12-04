@@ -60,7 +60,8 @@ module Aws
             :copy_db_snapshot,
             :create_db_instance_read_replica,
             :copy_db_cluster_snapshot,
-            :create_db_cluster
+            :create_db_cluster,
+            :start_db_instance_automated_backups_replication
           ]
         )
       end

@@ -199,6 +199,49 @@ module Aws
           end
         end
       end
+
+      context 'start_db_instance_automated_backups_replication' do
+        let(:start_db_instance_automated_backups_replication_params) do
+          {
+            kms_key_id: kms_key_id,
+            source_db_instance_arn: "arn:aws:rds:#{source_region}:123456789012:db:source-db-instance"
+          }
+        end
+
+        context 'no source_region and no pre_signed_url' do
+          it 'does not generate pre_signed_url' do
+            resp = client.start_db_instance_automated_backups_replication(
+              start_db_instance_automated_backups_replication_params
+            )
+            expect(resp.context.params[:pre_signed_url]).to eq nil
+          end
+        end
+
+        context 'source_region and pre_signed_url' do
+          it 'uses provided pre_signed_url' do
+            resp = client.start_db_instance_automated_backups_replication(
+              start_db_instance_automated_backups_replication_params.merge(
+                pre_signed_url: 'https://aws.com'
+              )
+            )
+            expect(resp.context.params[:pre_signed_url]).to eq 'https://aws.com'
+          end
+        end
+
+        context 'source_region and no pre_signed_url' do
+          it 'generates pre_signed_url' do
+            resp = client.start_db_instance_automated_backups_replication(
+              start_db_instance_automated_backups_replication_params.merge(
+                source_region: source_region
+              )
+            )
+
+            expect(resp.context.params[:pre_signed_url]).to match(
+              /6beef10ce9ebd1602ed908c7d7121ebfff57f41343ac338a9163a759e66e619c/
+            )
+          end
+        end
+      end
     end
   end
 end
