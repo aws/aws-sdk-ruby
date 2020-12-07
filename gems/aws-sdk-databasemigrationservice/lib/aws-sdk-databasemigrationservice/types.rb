@@ -371,6 +371,10 @@ module Aws::DatabaseMigrationService
     #           date_partition_enabled: false,
     #           date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
     #           date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
+    #           use_csv_no_sup_value: false,
+    #           csv_no_sup_value: "String",
+    #           preserve_transactions: false,
+    #           cdc_path: "String",
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -4300,6 +4304,10 @@ module Aws::DatabaseMigrationService
     #           date_partition_enabled: false,
     #           date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
     #           date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
+    #           use_csv_no_sup_value: false,
+    #           csv_no_sup_value: "String",
+    #           preserve_transactions: false,
+    #           cdc_path: "String",
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -7546,6 +7554,10 @@ module Aws::DatabaseMigrationService
     #         date_partition_enabled: false,
     #         date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
     #         date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
+    #         use_csv_no_sup_value: false,
+    #         csv_no_sup_value: "String",
+    #         preserve_transactions: false,
+    #         cdc_path: "String",
     #       }
     #
     # @!attribute [rw] service_access_role_arn
@@ -7889,6 +7901,78 @@ module Aws::DatabaseMigrationService
     #   `DatePartitionedEnabled` is set to `true`.
     #   @return [String]
     #
+    # @!attribute [rw] use_csv_no_sup_value
+    #   This setting applies if the S3 output files during a change data
+    #   capture (CDC) load are written in .csv format. If set to `true` for
+    #   columns not included in the supplemental log, AWS DMS uses the value
+    #   specified by [ `CsvNoSupValue`
+    #   ](dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CsvNoSupValue).
+    #   If not set or set to `false`, AWS DMS uses the null value for these
+    #   columns.
+    #
+    #   <note markdown="1"> This setting is supported in AWS DMS versions 3.4.1 and later.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] csv_no_sup_value
+    #   This setting only applies if your Amazon S3 output files during a
+    #   change data capture (CDC) load are written in .csv format. If [
+    #   `UseCsvNoSupValue`
+    #   ](dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-UseCsvNoSupValue)
+    #   is set to true, specify a string value that you want AWS DMS to use
+    #   for all columns not included in the supplemental log. If you do not
+    #   specify a string value, AWS DMS uses the null value for these
+    #   columns regardless of the `UseCsvNoSupValue` setting.
+    #
+    #   <note markdown="1"> This setting is supported in AWS DMS versions 3.4.1 and later.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] preserve_transactions
+    #   If set to `true`, AWS DMS saves the transaction order for a change
+    #   data capture (CDC) load on the Amazon S3 target specified by [
+    #   `CdcPath`
+    #   ](dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CdcPath).
+    #
+    #   <note markdown="1"> This setting is supported in AWS DMS versions 3.4.2 and later.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cdc_path
+    #   Specifies the folder path of CDC files. For an S3 source, this
+    #   setting is required if a task captures change data; otherwise, it's
+    #   optional. If `CdcPath` is set, AWS DMS reads CDC files from this
+    #   path and replicates the data changes to the target endpoint. For an
+    #   S3 target, if `CdcPath`is set, it is the folder path where data
+    #   changes are replicated. If you set [ `PreserveTransactions`
+    #   ](dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-PreserveTransactions)
+    #   to `true`, AWS DMS verifies that you have set this parameter to a
+    #   folder path on your S3 target where AWS DMS can save the transaction
+    #   order for the CDC load. AWS DMS creates this CDC folder path in
+    #   either your S3 target working directory or the S3 target location
+    #   specified by [ `BucketFolder`
+    #   ](dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketFolder)
+    #   and [ `BucketName`
+    #   ](dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketName).
+    #
+    #   For example, if you specify `CdcPath` as `MyChangedData`, and you
+    #   specify `BucketName` as `MyTargetBucket` but do not specify
+    #   `BucketFolder`, AWS DMS creates the CDC folder path following:
+    #   `MyTargetBucket/MyChangedData`.
+    #
+    #   If you specify the same `CdcPath`, and you specify `BucketName` as
+    #   `MyTargetBucket` and `BucketFolder` as `MyTargetData`, AWS DMS
+    #   creates the CDC folder path following:
+    #   `MyTargetBucket/MyTargetData/MyChangedData`.
+    #
+    #   <note markdown="1"> This setting is supported in AWS DMS versions 3.4.2 and later.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/S3Settings AWS API Documentation
     #
     class S3Settings < Struct.new(
@@ -7915,7 +7999,11 @@ module Aws::DatabaseMigrationService
       :cdc_inserts_and_updates,
       :date_partition_enabled,
       :date_partition_sequence,
-      :date_partition_delimiter)
+      :date_partition_delimiter,
+      :use_csv_no_sup_value,
+      :csv_no_sup_value,
+      :preserve_transactions,
+      :cdc_path)
       SENSITIVE = []
       include Aws::Structure
     end

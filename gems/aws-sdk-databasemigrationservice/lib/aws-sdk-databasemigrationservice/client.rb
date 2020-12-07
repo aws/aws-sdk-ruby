@@ -854,6 +854,10 @@ module Aws::DatabaseMigrationService
     #       date_partition_enabled: false,
     #       date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
     #       date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
+    #       use_csv_no_sup_value: false,
+    #       csv_no_sup_value: "String",
+    #       preserve_transactions: false,
+    #       cdc_path: "String",
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -1087,6 +1091,10 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.date_partition_enabled #=> Boolean
     #   resp.endpoint.s3_settings.date_partition_sequence #=> String, one of "YYYYMMDD", "YYYYMMDDHH", "YYYYMM", "MMYYYYDD", "DDMMYYYY"
     #   resp.endpoint.s3_settings.date_partition_delimiter #=> String, one of "SLASH", "UNDERSCORE", "DASH", "NONE"
+    #   resp.endpoint.s3_settings.use_csv_no_sup_value #=> Boolean
+    #   resp.endpoint.s3_settings.csv_no_sup_value #=> String
+    #   resp.endpoint.s3_settings.preserve_transactions #=> Boolean
+    #   resp.endpoint.s3_settings.cdc_path #=> String
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -2156,6 +2164,10 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.date_partition_enabled #=> Boolean
     #   resp.endpoint.s3_settings.date_partition_sequence #=> String, one of "YYYYMMDD", "YYYYMMDDHH", "YYYYMM", "MMYYYYDD", "DDMMYYYY"
     #   resp.endpoint.s3_settings.date_partition_delimiter #=> String, one of "SLASH", "UNDERSCORE", "DASH", "NONE"
+    #   resp.endpoint.s3_settings.use_csv_no_sup_value #=> Boolean
+    #   resp.endpoint.s3_settings.csv_no_sup_value #=> String
+    #   resp.endpoint.s3_settings.preserve_transactions #=> Boolean
+    #   resp.endpoint.s3_settings.cdc_path #=> String
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -3204,6 +3216,10 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].s3_settings.date_partition_enabled #=> Boolean
     #   resp.endpoints[0].s3_settings.date_partition_sequence #=> String, one of "YYYYMMDD", "YYYYMMDDHH", "YYYYMM", "MMYYYYDD", "DDMMYYYY"
     #   resp.endpoints[0].s3_settings.date_partition_delimiter #=> String, one of "SLASH", "UNDERSCORE", "DASH", "NONE"
+    #   resp.endpoints[0].s3_settings.use_csv_no_sup_value #=> Boolean
+    #   resp.endpoints[0].s3_settings.csv_no_sup_value #=> String
+    #   resp.endpoints[0].s3_settings.preserve_transactions #=> Boolean
+    #   resp.endpoints[0].s3_settings.cdc_path #=> String
     #   resp.endpoints[0].dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].dms_transfer_settings.bucket_name #=> String
     #   resp.endpoints[0].mongo_db_settings.username #=> String
@@ -4997,6 +5013,10 @@ module Aws::DatabaseMigrationService
     #       date_partition_enabled: false,
     #       date_partition_sequence: "YYYYMMDD", # accepts YYYYMMDD, YYYYMMDDHH, YYYYMM, MMYYYYDD, DDMMYYYY
     #       date_partition_delimiter: "SLASH", # accepts SLASH, UNDERSCORE, DASH, NONE
+    #       use_csv_no_sup_value: false,
+    #       csv_no_sup_value: "String",
+    #       preserve_transactions: false,
+    #       cdc_path: "String",
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -5229,6 +5249,10 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.date_partition_enabled #=> Boolean
     #   resp.endpoint.s3_settings.date_partition_sequence #=> String, one of "YYYYMMDD", "YYYYMMDDHH", "YYYYMM", "MMYYYYDD", "DDMMYYYY"
     #   resp.endpoint.s3_settings.date_partition_delimiter #=> String, one of "SLASH", "UNDERSCORE", "DASH", "NONE"
+    #   resp.endpoint.s3_settings.use_csv_no_sup_value #=> Boolean
+    #   resp.endpoint.s3_settings.csv_no_sup_value #=> String
+    #   resp.endpoint.s3_settings.preserve_transactions #=> Boolean
+    #   resp.endpoint.s3_settings.cdc_path #=> String
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -6665,7 +6689,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

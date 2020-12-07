@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2020-12-07)
+------------------
+
+* Feature - Added PreserveTransaction setting to preserve order of CDC for S3 as target. Added CsvNoSupValue setting to replace empty value for columns not included in the supplemental log for S3 as target.
+
 1.47.0 (2020-11-16)
 ------------------
 

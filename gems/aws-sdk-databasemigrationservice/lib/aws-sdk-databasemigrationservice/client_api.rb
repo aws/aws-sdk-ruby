@@ -1298,6 +1298,10 @@ module Aws::DatabaseMigrationService
     S3Settings.add_member(:date_partition_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DatePartitionEnabled"))
     S3Settings.add_member(:date_partition_sequence, Shapes::ShapeRef.new(shape: DatePartitionSequenceValue, location_name: "DatePartitionSequence"))
     S3Settings.add_member(:date_partition_delimiter, Shapes::ShapeRef.new(shape: DatePartitionDelimiterValue, location_name: "DatePartitionDelimiter"))
+    S3Settings.add_member(:use_csv_no_sup_value, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseCsvNoSupValue"))
+    S3Settings.add_member(:csv_no_sup_value, Shapes::ShapeRef.new(shape: String, location_name: "CsvNoSupValue"))
+    S3Settings.add_member(:preserve_transactions, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PreserveTransactions"))
+    S3Settings.add_member(:cdc_path, Shapes::ShapeRef.new(shape: String, location_name: "CdcPath"))
     S3Settings.struct_class = Types::S3Settings
 
     SNSInvalidTopicFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
