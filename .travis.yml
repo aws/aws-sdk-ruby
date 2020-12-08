@@ -12,6 +12,9 @@ group: edge
 
 rvm:
   - 1.9.3
+  - 2.0
+  - 2.1
+  - 2.2
   - jruby-9.1
 
 matrix:
