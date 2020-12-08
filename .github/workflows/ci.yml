@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: ["2.0", 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, jruby-9.2]
+        ruby: [2.3, 2.4, 2.5, 2.6, 2.7, jruby-9.2]
         env: [PURE_RUBY, KITCHEN_SINK]
         exclude:
           - ruby: jruby-9.1
