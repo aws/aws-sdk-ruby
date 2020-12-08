@@ -45,8 +45,8 @@ jobs:
 
       - name: Install gems
         run: |
-        echo PURE_RUBY=$PURE_RUBY KITCHEN_SINK=$KITCHEN_SINK
-        bundle install
+          echo PURE_RUBY=$PURE_RUBY KITCHEN_SINK=$KITCHEN_SINK
+          bundle install
 
       - name: SDK Build
         run: bundle exec rake build
