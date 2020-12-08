@@ -285,6 +285,7 @@ module Aws::QuickSight
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
     JiraParameters = Shapes::StructureShape.new(name: 'JiraParameters')
     JoinInstruction = Shapes::StructureShape.new(name: 'JoinInstruction')
+    JoinKeyProperties = Shapes::StructureShape.new(name: 'JoinKeyProperties')
     JoinType = Shapes::StringShape.new(name: 'JoinType')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAnalysesRequest = Shapes::StructureShape.new(name: 'ListAnalysesRequest')
@@ -1601,9 +1602,14 @@ module Aws::QuickSight
 
     JoinInstruction.add_member(:left_operand, Shapes::ShapeRef.new(shape: LogicalTableId, required: true, location_name: "LeftOperand"))
     JoinInstruction.add_member(:right_operand, Shapes::ShapeRef.new(shape: LogicalTableId, required: true, location_name: "RightOperand"))
+    JoinInstruction.add_member(:left_join_key_properties, Shapes::ShapeRef.new(shape: JoinKeyProperties, location_name: "LeftJoinKeyProperties"))
+    JoinInstruction.add_member(:right_join_key_properties, Shapes::ShapeRef.new(shape: JoinKeyProperties, location_name: "RightJoinKeyProperties"))
     JoinInstruction.add_member(:type, Shapes::ShapeRef.new(shape: JoinType, required: true, location_name: "Type"))
     JoinInstruction.add_member(:on_clause, Shapes::ShapeRef.new(shape: OnClause, required: true, location_name: "OnClause"))
     JoinInstruction.struct_class = Types::JoinInstruction
+
+    JoinKeyProperties.add_member(:unique_key, Shapes::ShapeRef.new(shape: Boolean, location_name: "UniqueKey", metadata: {"box"=>true}))
+    JoinKeyProperties.struct_class = Types::JoinKeyProperties
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     LimitExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ExceptionResourceType, location_name: "ResourceType"))

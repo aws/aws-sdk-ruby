@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+1.404.0 (2020-12-08)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SagemakerEdgeManager`.
+
+* Feature - Added support for enumerating regions for `Aws::HealthLake`.
+
+* Feature - Added support for enumerating regions for `Aws::EMRContainers`.
+
+* Feature - Added support for enumerating regions for `Aws::AuditManager`.
+
 1.403.0 (2020-12-07)
 ------------------
 

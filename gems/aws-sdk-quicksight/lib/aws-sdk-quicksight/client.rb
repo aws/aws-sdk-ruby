@@ -901,6 +901,12 @@ module Aws::QuickSight
     #           join_instruction: {
     #             left_operand: "LogicalTableId", # required
     #             right_operand: "LogicalTableId", # required
+    #             left_join_key_properties: {
+    #               unique_key: false,
+    #             },
+    #             right_join_key_properties: {
+    #               unique_key: false,
+    #             },
     #             type: "INNER", # required, accepts INNER, OUTER, LEFT, RIGHT
     #             on_clause: "OnClause", # required
     #           },
@@ -2978,6 +2984,8 @@ module Aws::QuickSight
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].tag_column_operation.tags[0].column_description.text #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.left_operand #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.right_operand #=> String
+    #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.left_join_key_properties.unique_key #=> Boolean
+    #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.right_join_key_properties.unique_key #=> Boolean
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.type #=> String, one of "INNER", "OUTER", "LEFT", "RIGHT"
     #   resp.data_set.logical_table_map["LogicalTableId"].source.join_instruction.on_clause #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].source.physical_table_id #=> String
@@ -3909,11 +3917,10 @@ module Aws::QuickSight
     # @option params [Array<String>] :additional_dashboard_ids
     #   A list of one or more dashboard ids that you want to add to a session
     #   that includes anonymous authorizations. `IdentityType` must be set to
-    #   ANONYMOUS for this to work, because other other identity types
-    #   authenticate as QuickSight users. For example, if you set
-    #   "`--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
-    #   identity-type ANONYMOUS`", the session can access all three
-    #   dashboards.
+    #   ANONYMOUS for this to work, because other identity types authenticate
+    #   as QuickSight users. For example, if you set "`--dashboard-id
+    #   dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS`",
+    #   the session can access all three dashboards.
     #
     # @return [Types::GetDashboardEmbedUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6273,6 +6280,12 @@ module Aws::QuickSight
     #           join_instruction: {
     #             left_operand: "LogicalTableId", # required
     #             right_operand: "LogicalTableId", # required
+    #             left_join_key_properties: {
+    #               unique_key: false,
+    #             },
+    #             right_join_key_properties: {
+    #               unique_key: false,
+    #             },
     #             type: "INNER", # required, accepts INNER, OUTER, LEFT, RIGHT
     #             on_clause: "OnClause", # required
     #           },
@@ -7394,7 +7407,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

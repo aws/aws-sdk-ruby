@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+3.91.0 (2020-12-08)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-sagemakeredgemanager` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-healthlake` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-emrcontainers` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-auditmanager` gem.
+
 3.90.0 (2020-12-02)
 ------------------
 

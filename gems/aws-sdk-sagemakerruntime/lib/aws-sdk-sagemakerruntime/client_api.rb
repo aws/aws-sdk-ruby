@@ -17,6 +17,7 @@ module Aws::SageMakerRuntime
     CustomAttributesHeader = Shapes::StringShape.new(name: 'CustomAttributesHeader')
     EndpointName = Shapes::StringShape.new(name: 'EndpointName')
     Header = Shapes::StringShape.new(name: 'Header')
+    InferenceId = Shapes::StringShape.new(name: 'InferenceId')
     InternalFailure = Shapes::StructureShape.new(name: 'InternalFailure')
     InvokeEndpointInput = Shapes::StructureShape.new(name: 'InvokeEndpointInput')
     InvokeEndpointOutput = Shapes::StructureShape.new(name: 'InvokeEndpointOutput')
@@ -39,6 +40,7 @@ module Aws::SageMakerRuntime
     InvokeEndpointInput.add_member(:custom_attributes, Shapes::ShapeRef.new(shape: CustomAttributesHeader, location: "header", location_name: "X-Amzn-SageMaker-Custom-Attributes"))
     InvokeEndpointInput.add_member(:target_model, Shapes::ShapeRef.new(shape: TargetModelHeader, location: "header", location_name: "X-Amzn-SageMaker-Target-Model"))
     InvokeEndpointInput.add_member(:target_variant, Shapes::ShapeRef.new(shape: TargetVariantHeader, location: "header", location_name: "X-Amzn-SageMaker-Target-Variant"))
+    InvokeEndpointInput.add_member(:inference_id, Shapes::ShapeRef.new(shape: InferenceId, location: "header", location_name: "X-Amzn-SageMaker-Inference-Id"))
     InvokeEndpointInput.struct_class = Types::InvokeEndpointInput
     InvokeEndpointInput[:payload] = :body
     InvokeEndpointInput[:payload_member] = InvokeEndpointInput.member(:body)

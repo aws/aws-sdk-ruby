@@ -63,6 +63,9 @@
   "Athena": {
     "models": "athena/2017-05-18"
   },
+  "AuditManager": {
+    "models": "auditmanager/2017-07-25"
+  },
   "AugmentedAIRuntime": {
     "models": "sagemaker-a2i-runtime/2019-11-07"
   },
@@ -286,6 +289,9 @@
   "EMR": {
     "models": "elasticmapreduce/2009-03-31"
   },
+  "EMRContainers": {
+    "models": "emr-containers/2020-10-01"
+  },
   "ElastiCache": {
     "models": "elasticache/2015-02-02"
   },
@@ -359,6 +365,9 @@
   },
   "Health": {
     "models": "health/2016-08-04"
+  },
+  "HealthLake": {
+    "models": "healthlake/2017-07-01"
   },
   "Honeycode": {
     "models": "honeycode/2020-03-01"
@@ -746,6 +755,9 @@
   },
   "SageMakerRuntime": {
     "models": "runtime.sagemaker/2017-05-13"
+  },
+  "SagemakerEdgeManager": {
+    "models": "sagemaker-edge/2020-09-23"
   },
   "SavingsPlans": {
     "models": "savingsplans/2019-06-28"

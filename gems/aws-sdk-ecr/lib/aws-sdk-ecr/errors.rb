@@ -46,6 +46,7 @@ module Aws::ECR
   # * {LifecyclePolicyPreviewNotFoundException}
   # * {LimitExceededException}
   # * {ReferencedImagesNotFoundException}
+  # * {RegistryPolicyNotFoundException}
   # * {RepositoryAlreadyExistsException}
   # * {RepositoryNotEmptyException}
   # * {RepositoryNotFoundException}
@@ -55,6 +56,7 @@ module Aws::ECR
   # * {TooManyTagsException}
   # * {UnsupportedImageTypeException}
   # * {UploadNotFoundException}
+  # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -372,6 +374,21 @@ module Aws::ECR
       end
     end
 
+    class RegistryPolicyNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::RegistryPolicyNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class RepositoryAlreadyExistsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -497,6 +514,21 @@ module Aws::ECR
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ECR::Types::UploadNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ValidationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::ValidationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

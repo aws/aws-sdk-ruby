@@ -10,7 +10,12 @@
 module Aws::Kendra
   module Types
 
-    # Access Control List files for the documents in a data source.
+    # Access Control List files for the documents in a data source. For the
+    # format of the file, see [Access control for S3 data sources][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html
     #
     # @note When making an API call, you may pass AccessControlListConfiguration
     #   data as a hash:
@@ -1364,7 +1369,7 @@ module Aws::Kendra
     #       {
     #         name: "DataSourceName", # required
     #         index_id: "IndexId", # required
-    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE
+    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE
     #         configuration: {
     #           s3_configuration: {
     #             bucket_name: "S3BucketName", # required
@@ -1609,6 +1614,21 @@ module Aws::Kendra
     #             },
     #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           },
+    #           google_drive_configuration: {
+    #             secret_arn: "SecretArn", # required
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             exclude_mime_types: ["MimeType"],
+    #             exclude_user_accounts: ["UserAccount"],
+    #             exclude_shared_drives: ["SharedDriveId"],
     #           },
     #         },
     #         description: "Description",
@@ -2213,6 +2233,21 @@ module Aws::Kendra
     #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         },
+    #         google_drive_configuration: {
+    #           secret_arn: "SecretArn", # required
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           exclude_mime_types: ["MimeType"],
+    #           exclude_user_accounts: ["UserAccount"],
+    #           exclude_shared_drives: ["SharedDriveId"],
+    #         },
     #       }
     #
     # @!attribute [rw] s3_configuration
@@ -2236,7 +2271,7 @@ module Aws::Kendra
     #   @return [Types::SalesforceConfiguration]
     #
     # @!attribute [rw] one_drive_configuration
-    #   Provided configuration for data sources that connect to Microsoft
+    #   Provides configuration for data sources that connect to Microsoft
     #   OneDrive.
     #   @return [Types::OneDriveConfiguration]
     #
@@ -2250,6 +2285,11 @@ module Aws::Kendra
     #   data source.
     #   @return [Types::ConfluenceConfiguration]
     #
+    # @!attribute [rw] google_drive_configuration
+    #   Provides configuration for data sources that connect to Google
+    #   Drive.
+    #   @return [Types::GoogleDriveConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceConfiguration AWS API Documentation
     #
     class DataSourceConfiguration < Struct.new(
@@ -2259,7 +2299,8 @@ module Aws::Kendra
       :salesforce_configuration,
       :one_drive_configuration,
       :service_now_configuration,
-      :confluence_configuration)
+      :confluence_configuration,
+      :google_drive_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3313,6 +3354,103 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides configuration information for data sources that connect to
+    # Google Drive.
+    #
+    # @note When making an API call, you may pass GoogleDriveConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         secret_arn: "SecretArn", # required
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         exclude_mime_types: ["MimeType"],
+    #         exclude_user_accounts: ["UserAccount"],
+    #         exclude_shared_drives: ["SharedDriveId"],
+    #       }
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of a AWS Secrets Manager secret that
+    #   contains the credentials required to connect to Google Drive. For
+    #   more information, see [Using a Google Workspace Drive data
+    #   source][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html
+    #   @return [String]
+    #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of regular expression patterns that apply to path on Google
+    #   Drive. Items that match the pattern are included in the index from
+    #   both shared drives and users' My Drives. Items that don't match
+    #   the pattern are excluded from the index. If an item matches both an
+    #   inclusion pattern and an exclusion pattern, it is excluded from the
+    #   index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_patterns
+    #   A list of regular expression patterns that apply to the path on
+    #   Google Drive. Items that match the pattern are excluded from the
+    #   index from both shared drives and users' My Drives. Items that
+    #   don't match the pattern are included in the index. If an item
+    #   matches both an exclusion pattern and an inclusion pattern, it is
+    #   excluded from the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] field_mappings
+    #   Defines mapping between a field in the Google Drive and a Amazon
+    #   Kendra index field.
+    #
+    #   If you are using the console, you can define index fields when
+    #   creating the mapping. If you are using the API, you must first
+    #   create the field using the UpdateIndex operation.
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] exclude_mime_types
+    #   A list of MIME types to exclude from the index. All documents
+    #   matching the specified MIME type are excluded.
+    #
+    #   For a list of MIME types, see [Using a Google Workspace Drive data
+    #   source][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude_user_accounts
+    #   A list of email addresses of the users. Documents owned by these
+    #   users are excluded from the index. Documents shared with excluded
+    #   users are indexed unless they are excluded in another way.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude_shared_drives
+    #   A list of identifiers or shared drives to exclude from the index.
+    #   All files and folders stored on the shared drive are excluded.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GoogleDriveConfiguration AWS API Documentation
+    #
+    class GoogleDriveConfiguration < Struct.new(
+      :secret_arn,
+      :inclusion_patterns,
+      :exclusion_patterns,
+      :field_mappings,
+      :exclude_mime_types,
+      :exclude_user_accounts,
+      :exclude_shared_drives)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information that you can use to highlight a search result so
     # that your users can quickly identify terms in the response.
     #
@@ -3796,7 +3934,7 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] tenant_domain
-    #   Tha Azure Active Directory domain of the organization.
+    #   The Azure Active Directory domain of the organization.
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
@@ -4022,6 +4160,7 @@ module Aws::Kendra
     #         user_context: {
     #           token: "Token",
     #         },
+    #         visitor_id: "VisitorId",
     #       }
     #
     # @!attribute [rw] index_id
@@ -4089,6 +4228,13 @@ module Aws::Kendra
     #   The user context token.
     #   @return [Types::UserContext]
     #
+    # @!attribute [rw] visitor_id
+    #   Provides an identifier for a specific user. The `VisitorId` should
+    #   be a unique identifier, such as a GUID. Don't use personally
+    #   identifiable information, such as the user's email address, as the
+    #   `VisitorId`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryRequest AWS API Documentation
     #
     class QueryRequest < Struct.new(
@@ -4101,7 +4247,8 @@ module Aws::Kendra
       :page_number,
       :page_size,
       :sorting_configuration,
-      :user_context)
+      :user_context,
+      :visitor_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4193,6 +4340,16 @@ module Aws::Kendra
     #   matches the query.
     #   @return [Types::ScoreAttributes]
     #
+    # @!attribute [rw] feedback_token
+    #   A token that identifies a particular result from a particular query.
+    #   Use this token to provide click-through feedback for the result. For
+    #   more information, see [ Submitting feedback ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryResultItem AWS API Documentation
     #
     class QueryResultItem < Struct.new(
@@ -4204,7 +4361,8 @@ module Aws::Kendra
       :document_excerpt,
       :document_uri,
       :document_attributes,
-      :score_attributes)
+      :score_attributes,
+      :feedback_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4429,7 +4587,12 @@ module Aws::Kendra
     #
     # @!attribute [rw] access_control_list_configuration
     #   Provides the path to the S3 bucket that contains the user context
-    #   filtering files for the data source.
+    #   filtering files for the data source. For the format of the file, see
+    #   [Access control for S3 data sources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html
     #   @return [Types::AccessControlListConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/S3DataSourceConfiguration AWS API Documentation
@@ -6006,6 +6169,21 @@ module Aws::Kendra
     #             },
     #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           },
+    #           google_drive_configuration: {
+    #             secret_arn: "SecretArn", # required
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             exclude_mime_types: ["MimeType"],
+    #             exclude_user_accounts: ["UserAccount"],
+    #             exclude_shared_drives: ["SharedDriveId"],
     #           },
     #         },
     #         description: "Description",

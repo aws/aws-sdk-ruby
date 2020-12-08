@@ -219,6 +219,9 @@ module Aws::ForecastService
     #           },
     #         },
     #         timestamp_format: "TimestampFormat",
+    #         time_zone: "TimeZone",
+    #         use_geolocation_for_time_zone: false,
+    #         geolocation_format: "GeolocationFormat",
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -270,6 +273,37 @@ module Aws::ForecastService
     #   to be "yyyy-MM-dd HH:mm:ss".
     #   @return [String]
     #
+    # @!attribute [rw] time_zone
+    #   A single time zone for every item in your dataset. This option is
+    #   ideal for datasets with all timestamps within a single time zone, or
+    #   if all timestamps are normalized to a single time zone.
+    #
+    #   Refer to the [Joda-Time API][1] for a complete list of valid time
+    #   zone names.
+    #
+    #
+    #
+    #   [1]: http://joda-time.sourceforge.net/timezones.html
+    #   @return [String]
+    #
+    # @!attribute [rw] use_geolocation_for_time_zone
+    #   Automatically derive time zone information from the geolocation
+    #   attribute. This option is ideal for datasets that contain timestamps
+    #   in multiple time zones and those timestamps are expressed in local
+    #   time.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] geolocation_format
+    #   The format of the geolocation attribute. The geolocation attribute
+    #   can be formatted in one of two ways:
+    #
+    #   * `LAT_LONG` - the latitude and longitude in decimal format
+    #     (Example: 47.61\_-122.33).
+    #
+    #   * `CC_POSTALCODE` (US Only) - the country code (US), followed by the
+    #     5-digit ZIP code (Example: US\_98121).
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The optional metadata that you apply to the dataset import job to
     #   help you categorize and organize them. Each tag consists of a key
@@ -310,6 +344,9 @@ module Aws::ForecastService
       :dataset_arn,
       :data_source,
       :timestamp_format,
+      :time_zone,
+      :use_geolocation_for_time_zone,
+      :geolocation_format,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -339,7 +376,7 @@ module Aws::ForecastService
     #           attributes: [
     #             {
     #               attribute_name: "Name",
-    #               attribute_type: "string", # accepts string, integer, float, timestamp
+    #               attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
     #             },
     #           ],
     #         },
@@ -676,9 +713,10 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The destination for an export job, an AWS Identity and Access
-    #   Management (IAM) role that allows Amazon Forecast to access the
-    #   location and, optionally, an AWS Key Management Service (KMS) key.
+    #   The destination for an export job. Provide an S3 path, an AWS
+    #   Identity and Access Management (IAM) role that allows Amazon
+    #   Forecast to access the location, and an AWS Key Management Service
+    #   (KMS) key (optional).
     #   @return [Types::DataDestination]
     #
     # @!attribute [rw] tags
@@ -1003,9 +1041,9 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # The destination for an export job, an AWS Identity and Access
-    # Management (IAM) role that allows Amazon Forecast to access the
-    # location and, optionally, an AWS Key Management Service (KMS) key.
+    # The destination for an export job. Provide an S3 path, an AWS Identity
+    # and Access Management (IAM) role that allows Amazon Forecast to access
+    # the location, and an AWS Key Management Service (KMS) key (optional).
     #
     # @note When making an API call, you may pass DataDestination
     #   data as a hash:
@@ -1472,6 +1510,20 @@ module Aws::ForecastService
     #     optionally, for: Y, M, W, and D
     #   @return [String]
     #
+    # @!attribute [rw] time_zone
+    #   The single time zone applied to every item in the dataset
+    #   @return [String]
+    #
+    # @!attribute [rw] use_geolocation_for_time_zone
+    #   Whether `TimeZone` is automatically derived from the geolocation
+    #   attribute.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] geolocation_format
+    #   The format of the geolocation attribute. Valid Values:`"LAT_LONG"`
+    #   and `"CC_POSTALCODE"`.
+    #   @return [String]
+    #
     # @!attribute [rw] data_source
     #   The location of the training data to import and an AWS Identity and
     #   Access Management (IAM) role that Amazon Forecast can assume to
@@ -1529,6 +1581,9 @@ module Aws::ForecastService
       :dataset_import_job_arn,
       :dataset_arn,
       :timestamp_format,
+      :time_zone,
+      :use_geolocation_for_time_zone,
+      :geolocation_format,
       :data_source,
       :field_statistics,
       :data_size,
@@ -1845,9 +1900,10 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The destination for an export job, an AWS Identity and Access
-    #   Management (IAM) role that allows Amazon Forecast to access the
-    #   location and, optionally, an AWS Key Management Service (KMS) key.
+    #   The destination for an export job. Provide an S3 path, an AWS
+    #   Identity and Access Management (IAM) role that allows Amazon
+    #   Forecast to access the location, and an AWS Key Management Service
+    #   (KMS) key (optional).
     #   @return [Types::DataDestination]
     #
     # @!attribute [rw] message
@@ -3409,9 +3465,10 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The destination for an export job, an AWS Identity and Access
-    #   Management (IAM) role that allows Amazon Forecast to access the
-    #   location and, optionally, an AWS Key Management Service (KMS) key.
+    #   The destination for an export job. Provide an S3 path, an AWS
+    #   Identity and Access Management (IAM) role that allows Amazon
+    #   Forecast to access the location, and an AWS Key Management Service
+    #   (KMS) key (optional).
     #   @return [Types::DataDestination]
     #
     # @!attribute [rw] status
@@ -3663,7 +3720,7 @@ module Aws::ForecastService
     #         attributes: [
     #           {
     #             attribute_name: "Name",
-    #             attribute_type: "string", # accepts string, integer, float, timestamp
+    #             attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
     #           },
     #         ],
     #       }
@@ -3690,7 +3747,7 @@ module Aws::ForecastService
     #
     #       {
     #         attribute_name: "Name",
-    #         attribute_type: "string", # accepts string, integer, float, timestamp
+    #         attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
     #       }
     #
     # @!attribute [rw] attribute_name
@@ -3761,16 +3818,30 @@ module Aws::ForecastService
     end
 
     # Describes a supplementary feature of a dataset group. This object is
-    # part of the InputDataConfig object.
+    # part of the InputDataConfig object. Forecast supports the Weather
+    # Index and Holidays built-in featurizations.
     #
-    # The only supported feature is Holidays. If you use the calendar, all
-    # data in the datasets should belong to the same country as the
-    # calendar. For the holiday calendar data, see the [Jollyday][1]
-    # website.
+    # **Weather Index**
+    #
+    # The Amazon Forecast Weather Index is a built-in featurization that
+    # incorporates historical and projected weather information into your
+    # model. The Weather Index supplements your datasets with over two years
+    # of historical weather data and up to 14 days of projected weather
+    # data. For more information, see [Amazon Forecast Weather Index][1].
+    #
+    # **Holidays**
+    #
+    # Holidays is a built-in featurization that incorporates a
+    # feature-engineered dataset of national holiday information into your
+    # model. It provides native support for the holiday calendars of 66
+    # countries. To view the holiday calendars, refer to the [Jollyday][2]
+    # library. For more information, see [Holidays Featurization][3].
     #
     #
     #
-    # [1]: http://jollyday.sourceforge.net/data.html
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/weather.html
+    # [2]: http://jollyday.sourceforge.net/data.html
+    # [3]: https://docs.aws.amazon.com/forecast/latest/dg/holidays.html
     #
     # @note When making an API call, you may pass SupplementaryFeature
     #   data as a hash:
@@ -3781,11 +3852,18 @@ module Aws::ForecastService
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the feature. This must be "holiday".
+    #   The name of the feature. Valid values: `"holiday"` and `"weather"`.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   One of the following 2 letter country codes:
+    #   **Weather Index**
+    #
+    #   To enable the Weather Index, set the value to `"true"`
+    #
+    #   **Holidays**
+    #
+    #   To enable Holidays, specify a country with one of the following
+    #   two-letter country codes:
     #
     #   * "AL" - ALBANIA
     #
@@ -3984,7 +4062,7 @@ module Aws::ForecastService
     class Tag < Struct.new(
       :key,
       :value)
-      SENSITIVE = []
+      SENSITIVE = [:key, :value]
       include Aws::Structure
     end
 

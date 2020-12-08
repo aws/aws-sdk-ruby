@@ -1404,6 +1404,195 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Creates a definition for a job that monitors data quality and drift.
+    # For information about model monitor, see [Amazon SageMaker Model
+    # Monitor][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html
+    #
+    # @option params [required, String] :job_definition_name
+    #   The name for the monitoring job definition.
+    #
+    # @option params [Types::DataQualityBaselineConfig] :data_quality_baseline_config
+    #   Configures the constraints and baselines for the monitoring job.
+    #
+    # @option params [required, Types::DataQualityAppSpecification] :data_quality_app_specification
+    #   Specifies the container that runs the monitoring job.
+    #
+    # @option params [required, Types::DataQualityJobInput] :data_quality_job_input
+    #   A list of inputs for the monitoring job. Currently endpoints are
+    #   supported as monitoring inputs.
+    #
+    # @option params [required, Types::MonitoringOutputConfig] :data_quality_job_output_config
+    #   The output configuration for monitoring jobs.
+    #
+    # @option params [required, Types::MonitoringResources] :job_resources
+    #   Identifies the resources to deploy for a monitoring job.
+    #
+    # @option params [Types::MonitoringNetworkConfig] :network_config
+    #   Specifies networking configuration for the monitoring job.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
+    #   can assume to perform tasks on your behalf.
+    #
+    # @option params [Types::MonitoringStoppingCondition] :stopping_condition
+    #   A time limit for how long the monitoring job is allowed to run before
+    #   stopping.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   (Optional) An array of key-value pairs. For more information, see
+    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
+    #   Management User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL
+    #
+    # @return [Types::CreateDataQualityJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataQualityJobDefinitionResponse#job_definition_arn #job_definition_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_quality_job_definition({
+    #     job_definition_name: "MonitoringJobDefinitionName", # required
+    #     data_quality_baseline_config: {
+    #       baselining_job_name: "ProcessingJobName",
+    #       constraints_resource: {
+    #         s3_uri: "S3Uri",
+    #       },
+    #       statistics_resource: {
+    #         s3_uri: "S3Uri",
+    #       },
+    #     },
+    #     data_quality_app_specification: { # required
+    #       image_uri: "ImageUri", # required
+    #       container_entrypoint: ["ContainerEntrypointString"],
+    #       container_arguments: ["ContainerArgument"],
+    #       record_preprocessor_source_uri: "S3Uri",
+    #       post_analytics_processor_source_uri: "S3Uri",
+    #       environment: {
+    #         "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
+    #       },
+    #     },
+    #     data_quality_job_input: { # required
+    #       endpoint_input: { # required
+    #         endpoint_name: "EndpointName", # required
+    #         local_path: "ProcessingLocalPath", # required
+    #         s3_input_mode: "Pipe", # accepts Pipe, File
+    #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #         features_attribute: "String",
+    #         inference_attribute: "String",
+    #         probability_attribute: "String",
+    #         probability_threshold_attribute: 1.0,
+    #         start_time_offset: "MonitoringTimeOffsetString",
+    #         end_time_offset: "MonitoringTimeOffsetString",
+    #       },
+    #     },
+    #     data_quality_job_output_config: { # required
+    #       monitoring_outputs: [ # required
+    #         {
+    #           s3_output: { # required
+    #             s3_uri: "MonitoringS3Uri", # required
+    #             local_path: "ProcessingLocalPath", # required
+    #             s3_upload_mode: "Continuous", # accepts Continuous, EndOfJob
+    #           },
+    #         },
+    #       ],
+    #       kms_key_id: "KmsKeyId",
+    #     },
+    #     job_resources: { # required
+    #       cluster_config: { # required
+    #         instance_count: 1, # required
+    #         instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #         volume_size_in_gb: 1, # required
+    #         volume_kms_key_id: "KmsKeyId",
+    #       },
+    #     },
+    #     network_config: {
+    #       enable_inter_container_traffic_encryption: false,
+    #       enable_network_isolation: false,
+    #       vpc_config: {
+    #         security_group_ids: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       },
+    #     },
+    #     role_arn: "RoleArn", # required
+    #     stopping_condition: {
+    #       max_runtime_in_seconds: 1, # required
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_definition_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDataQualityJobDefinition AWS API Documentation
+    #
+    # @overload create_data_quality_job_definition(params = {})
+    # @param [Hash] params ({})
+    def create_data_quality_job_definition(params = {}, options = {})
+      req = build_request(:create_data_quality_job_definition, params)
+      req.send_request(options)
+    end
+
+    # Creates a device fleet.
+    #
+    # @option params [required, String] :device_fleet_name
+    #   The name of the fleet that the device belongs to.
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) that has access to AWS Internet of
+    #   Things (IoT).
+    #
+    # @option params [String] :description
+    #   A description of the fleet.
+    #
+    # @option params [required, Types::EdgeOutputConfig] :output_config
+    #   The output configuration for storing sample data collected by the
+    #   fleet.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Creates tags for the specified fleet.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_device_fleet({
+    #     device_fleet_name: "EntityName", # required
+    #     role_arn: "RoleArn",
+    #     description: "DeviceFleetDescription",
+    #     output_config: { # required
+    #       s3_output_location: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDeviceFleet AWS API Documentation
+    #
+    # @overload create_device_fleet(params = {})
+    # @param [Hash] params ({})
+    def create_device_fleet(params = {}, options = {})
+      req = build_request(:create_device_fleet, params)
+      req.send_request(options)
+    end
+
     # Creates a `Domain` used by Amazon SageMaker Studio. A domain consists
     # of an associated Amazon Elastic File System (EFS) volume, a list of
     # authorized users, and a variety of security, application, policy, and
@@ -1564,6 +1753,71 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def create_domain(params = {}, options = {})
       req = build_request(:create_domain, params)
+      req.send_request(options)
+    end
+
+    # Starts a SageMaker Edge Manager model packaging job. Edge Manager will
+    # use the model artifacts from the Amazon Simple Storage Service bucket
+    # that you specify. After the model has been packaged, Amazon SageMaker
+    # saves the resulting artifacts to an S3 bucket that you specify.
+    #
+    # @option params [required, String] :edge_packaging_job_name
+    #   The name of the edge packaging job.
+    #
+    # @option params [required, String] :compilation_job_name
+    #   The name of the SageMaker Neo compilation job that will be used to
+    #   locate model artifacts for packaging.
+    #
+    # @option params [required, String] :model_name
+    #   The name of the model.
+    #
+    # @option params [required, String] :model_version
+    #   The version of the model.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that enables Amazon
+    #   SageMaker to download and upload the model, and to contact SageMaker
+    #   Neo.
+    #
+    # @option params [required, Types::EdgeOutputConfig] :output_config
+    #   Provides information about the output location for the packaged model.
+    #
+    # @option params [String] :resource_key
+    #   The CMK to use when encrypting the EBS volume the edge packaging job
+    #   runs on.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Creates tags for the packaging job.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_edge_packaging_job({
+    #     edge_packaging_job_name: "EntityName", # required
+    #     compilation_job_name: "EntityName", # required
+    #     model_name: "EntityName", # required
+    #     model_version: "EdgeVersion", # required
+    #     role_arn: "RoleArn", # required
+    #     output_config: { # required
+    #       s3_output_location: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
+    #     },
+    #     resource_key: "KmsKeyId",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEdgePackagingJob AWS API Documentation
+    #
+    # @overload create_edge_packaging_job(params = {})
+    # @param [Hash] params ({})
+    def create_edge_packaging_job(params = {}, options = {})
+      req = build_request(:create_edge_packaging_job, params)
       req.send_request(options)
     end
 
@@ -3069,6 +3323,269 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Creates the definition for a model bias job.
+    #
+    # @option params [required, String] :job_definition_name
+    #   The name of the bias job definition. The name must be unique within an
+    #   AWS Region in the AWS account.
+    #
+    # @option params [Types::ModelBiasBaselineConfig] :model_bias_baseline_config
+    #   The baseline configuration for a model bias job.
+    #
+    # @option params [required, Types::ModelBiasAppSpecification] :model_bias_app_specification
+    #   Configures the model bias job to run a specified Docker container
+    #   image.
+    #
+    # @option params [required, Types::ModelBiasJobInput] :model_bias_job_input
+    #   Inputs for the model bias job.
+    #
+    # @option params [required, Types::MonitoringOutputConfig] :model_bias_job_output_config
+    #   The output configuration for monitoring jobs.
+    #
+    # @option params [required, Types::MonitoringResources] :job_resources
+    #   Identifies the resources to deploy for a monitoring job.
+    #
+    # @option params [Types::MonitoringNetworkConfig] :network_config
+    #   Networking options for a model bias job.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
+    #   can assume to perform tasks on your behalf.
+    #
+    # @option params [Types::MonitoringStoppingCondition] :stopping_condition
+    #   A time limit for how long the monitoring job is allowed to run before
+    #   stopping.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   (Optional) An array of key-value pairs. For more information, see
+    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
+    #   Management User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL
+    #
+    # @return [Types::CreateModelBiasJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateModelBiasJobDefinitionResponse#job_definition_arn #job_definition_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_model_bias_job_definition({
+    #     job_definition_name: "MonitoringJobDefinitionName", # required
+    #     model_bias_baseline_config: {
+    #       baselining_job_name: "ProcessingJobName",
+    #       constraints_resource: {
+    #         s3_uri: "S3Uri",
+    #       },
+    #     },
+    #     model_bias_app_specification: { # required
+    #       image_uri: "ImageUri", # required
+    #       config_uri: "S3Uri", # required
+    #       environment: {
+    #         "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
+    #       },
+    #     },
+    #     model_bias_job_input: { # required
+    #       endpoint_input: { # required
+    #         endpoint_name: "EndpointName", # required
+    #         local_path: "ProcessingLocalPath", # required
+    #         s3_input_mode: "Pipe", # accepts Pipe, File
+    #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #         features_attribute: "String",
+    #         inference_attribute: "String",
+    #         probability_attribute: "String",
+    #         probability_threshold_attribute: 1.0,
+    #         start_time_offset: "MonitoringTimeOffsetString",
+    #         end_time_offset: "MonitoringTimeOffsetString",
+    #       },
+    #       ground_truth_s3_input: { # required
+    #         s3_uri: "MonitoringS3Uri",
+    #       },
+    #     },
+    #     model_bias_job_output_config: { # required
+    #       monitoring_outputs: [ # required
+    #         {
+    #           s3_output: { # required
+    #             s3_uri: "MonitoringS3Uri", # required
+    #             local_path: "ProcessingLocalPath", # required
+    #             s3_upload_mode: "Continuous", # accepts Continuous, EndOfJob
+    #           },
+    #         },
+    #       ],
+    #       kms_key_id: "KmsKeyId",
+    #     },
+    #     job_resources: { # required
+    #       cluster_config: { # required
+    #         instance_count: 1, # required
+    #         instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #         volume_size_in_gb: 1, # required
+    #         volume_kms_key_id: "KmsKeyId",
+    #       },
+    #     },
+    #     network_config: {
+    #       enable_inter_container_traffic_encryption: false,
+    #       enable_network_isolation: false,
+    #       vpc_config: {
+    #         security_group_ids: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       },
+    #     },
+    #     role_arn: "RoleArn", # required
+    #     stopping_condition: {
+    #       max_runtime_in_seconds: 1, # required
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_definition_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelBiasJobDefinition AWS API Documentation
+    #
+    # @overload create_model_bias_job_definition(params = {})
+    # @param [Hash] params ({})
+    def create_model_bias_job_definition(params = {}, options = {})
+      req = build_request(:create_model_bias_job_definition, params)
+      req.send_request(options)
+    end
+
+    # Creates the definition for a model explainability job.
+    #
+    # @option params [required, String] :job_definition_name
+    #   The name of the model explainability job definition. The name must be
+    #   unique within an AWS Region in the AWS account.
+    #
+    # @option params [Types::ModelExplainabilityBaselineConfig] :model_explainability_baseline_config
+    #   The baseline configuration for a model explainability job.
+    #
+    # @option params [required, Types::ModelExplainabilityAppSpecification] :model_explainability_app_specification
+    #   Configures the model explainability job to run a specified Docker
+    #   container image.
+    #
+    # @option params [required, Types::ModelExplainabilityJobInput] :model_explainability_job_input
+    #   Inputs for the model explainability job.
+    #
+    # @option params [required, Types::MonitoringOutputConfig] :model_explainability_job_output_config
+    #   The output configuration for monitoring jobs.
+    #
+    # @option params [required, Types::MonitoringResources] :job_resources
+    #   Identifies the resources to deploy for a monitoring job.
+    #
+    # @option params [Types::MonitoringNetworkConfig] :network_config
+    #   Networking options for a model explainability job.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
+    #   can assume to perform tasks on your behalf.
+    #
+    # @option params [Types::MonitoringStoppingCondition] :stopping_condition
+    #   A time limit for how long the monitoring job is allowed to run before
+    #   stopping.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   (Optional) An array of key-value pairs. For more information, see
+    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
+    #   Management User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL
+    #
+    # @return [Types::CreateModelExplainabilityJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateModelExplainabilityJobDefinitionResponse#job_definition_arn #job_definition_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_model_explainability_job_definition({
+    #     job_definition_name: "MonitoringJobDefinitionName", # required
+    #     model_explainability_baseline_config: {
+    #       baselining_job_name: "ProcessingJobName",
+    #       constraints_resource: {
+    #         s3_uri: "S3Uri",
+    #       },
+    #     },
+    #     model_explainability_app_specification: { # required
+    #       image_uri: "ImageUri", # required
+    #       config_uri: "S3Uri", # required
+    #       environment: {
+    #         "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
+    #       },
+    #     },
+    #     model_explainability_job_input: { # required
+    #       endpoint_input: { # required
+    #         endpoint_name: "EndpointName", # required
+    #         local_path: "ProcessingLocalPath", # required
+    #         s3_input_mode: "Pipe", # accepts Pipe, File
+    #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #         features_attribute: "String",
+    #         inference_attribute: "String",
+    #         probability_attribute: "String",
+    #         probability_threshold_attribute: 1.0,
+    #         start_time_offset: "MonitoringTimeOffsetString",
+    #         end_time_offset: "MonitoringTimeOffsetString",
+    #       },
+    #     },
+    #     model_explainability_job_output_config: { # required
+    #       monitoring_outputs: [ # required
+    #         {
+    #           s3_output: { # required
+    #             s3_uri: "MonitoringS3Uri", # required
+    #             local_path: "ProcessingLocalPath", # required
+    #             s3_upload_mode: "Continuous", # accepts Continuous, EndOfJob
+    #           },
+    #         },
+    #       ],
+    #       kms_key_id: "KmsKeyId",
+    #     },
+    #     job_resources: { # required
+    #       cluster_config: { # required
+    #         instance_count: 1, # required
+    #         instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #         volume_size_in_gb: 1, # required
+    #         volume_kms_key_id: "KmsKeyId",
+    #       },
+    #     },
+    #     network_config: {
+    #       enable_inter_container_traffic_encryption: false,
+    #       enable_network_isolation: false,
+    #       vpc_config: {
+    #         security_group_ids: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       },
+    #     },
+    #     role_arn: "RoleArn", # required
+    #     stopping_condition: {
+    #       max_runtime_in_seconds: 1, # required
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_definition_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelExplainabilityJobDefinition AWS API Documentation
+    #
+    # @overload create_model_explainability_job_definition(params = {})
+    # @param [Hash] params ({})
+    def create_model_explainability_job_definition(params = {}, options = {})
+      req = build_request(:create_model_explainability_job_definition, params)
+      req.send_request(options)
+    end
+
     # Creates a model package that you can use to create Amazon SageMaker
     # models or list on AWS Marketplace, or a versioned model that is part
     # of a model group. Buyers can subscribe to model packages listed on AWS
@@ -3351,6 +3868,148 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Creates a definition for a job that monitors model quality and drift.
+    # For information about model monitor, see [Amazon SageMaker Model
+    # Monitor][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html
+    #
+    # @option params [required, String] :job_definition_name
+    #   The name of the monitoring job definition.
+    #
+    # @option params [Types::ModelQualityBaselineConfig] :model_quality_baseline_config
+    #   Specifies the constraints and baselines for the monitoring job.
+    #
+    # @option params [required, Types::ModelQualityAppSpecification] :model_quality_app_specification
+    #   The container that runs the monitoring job.
+    #
+    # @option params [required, Types::ModelQualityJobInput] :model_quality_job_input
+    #   A list of the inputs that are monitored. Currently endpoints are
+    #   supported.
+    #
+    # @option params [required, Types::MonitoringOutputConfig] :model_quality_job_output_config
+    #   The output configuration for monitoring jobs.
+    #
+    # @option params [required, Types::MonitoringResources] :job_resources
+    #   Identifies the resources to deploy for a monitoring job.
+    #
+    # @option params [Types::MonitoringNetworkConfig] :network_config
+    #   Specifies the network configuration for the monitoring job.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
+    #   can assume to perform tasks on your behalf.
+    #
+    # @option params [Types::MonitoringStoppingCondition] :stopping_condition
+    #   A time limit for how long the monitoring job is allowed to run before
+    #   stopping.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   (Optional) An array of key-value pairs. For more information, see
+    #   [Using Cost Allocation Tags][1] in the *AWS Billing and Cost
+    #   Management User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL
+    #
+    # @return [Types::CreateModelQualityJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateModelQualityJobDefinitionResponse#job_definition_arn #job_definition_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_model_quality_job_definition({
+    #     job_definition_name: "MonitoringJobDefinitionName", # required
+    #     model_quality_baseline_config: {
+    #       baselining_job_name: "ProcessingJobName",
+    #       constraints_resource: {
+    #         s3_uri: "S3Uri",
+    #       },
+    #     },
+    #     model_quality_app_specification: { # required
+    #       image_uri: "ImageUri", # required
+    #       container_entrypoint: ["ContainerEntrypointString"],
+    #       container_arguments: ["ContainerArgument"],
+    #       record_preprocessor_source_uri: "S3Uri",
+    #       post_analytics_processor_source_uri: "S3Uri",
+    #       problem_type: "BinaryClassification", # accepts BinaryClassification, MulticlassClassification, Regression
+    #       environment: {
+    #         "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
+    #       },
+    #     },
+    #     model_quality_job_input: { # required
+    #       endpoint_input: { # required
+    #         endpoint_name: "EndpointName", # required
+    #         local_path: "ProcessingLocalPath", # required
+    #         s3_input_mode: "Pipe", # accepts Pipe, File
+    #         s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #         features_attribute: "String",
+    #         inference_attribute: "String",
+    #         probability_attribute: "String",
+    #         probability_threshold_attribute: 1.0,
+    #         start_time_offset: "MonitoringTimeOffsetString",
+    #         end_time_offset: "MonitoringTimeOffsetString",
+    #       },
+    #       ground_truth_s3_input: { # required
+    #         s3_uri: "MonitoringS3Uri",
+    #       },
+    #     },
+    #     model_quality_job_output_config: { # required
+    #       monitoring_outputs: [ # required
+    #         {
+    #           s3_output: { # required
+    #             s3_uri: "MonitoringS3Uri", # required
+    #             local_path: "ProcessingLocalPath", # required
+    #             s3_upload_mode: "Continuous", # accepts Continuous, EndOfJob
+    #           },
+    #         },
+    #       ],
+    #       kms_key_id: "KmsKeyId",
+    #     },
+    #     job_resources: { # required
+    #       cluster_config: { # required
+    #         instance_count: 1, # required
+    #         instance_type: "ml.t3.medium", # required, accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #         volume_size_in_gb: 1, # required
+    #         volume_kms_key_id: "KmsKeyId",
+    #       },
+    #     },
+    #     network_config: {
+    #       enable_inter_container_traffic_encryption: false,
+    #       enable_network_isolation: false,
+    #       vpc_config: {
+    #         security_group_ids: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       },
+    #     },
+    #     role_arn: "RoleArn", # required
+    #     stopping_condition: {
+    #       max_runtime_in_seconds: 1, # required
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_definition_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelQualityJobDefinition AWS API Documentation
+    #
+    # @overload create_model_quality_job_definition(params = {})
+    # @param [Hash] params ({})
+    def create_model_quality_job_definition(params = {}, options = {})
+      req = build_request(:create_model_quality_job_definition, params)
+      req.send_request(options)
+    end
+
     # Creates a schedule that regularly starts Amazon SageMaker Processing
     # Jobs to monitor the data captured for an Amazon SageMaker Endoint.
     #
@@ -3382,6 +4041,7 @@ module Aws::SageMaker
     #       },
     #       monitoring_job_definition: {
     #         baseline_config: {
+    #           baselining_job_name: "ProcessingJobName",
     #           constraints_resource: {
     #             s3_uri: "S3Uri",
     #           },
@@ -3396,6 +4056,12 @@ module Aws::SageMaker
     #               local_path: "ProcessingLocalPath", # required
     #               s3_input_mode: "Pipe", # accepts Pipe, File
     #               s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #               features_attribute: "String",
+    #               inference_attribute: "String",
+    #               probability_attribute: "String",
+    #               probability_threshold_attribute: 1.0,
+    #               start_time_offset: "MonitoringTimeOffsetString",
+    #               end_time_offset: "MonitoringTimeOffsetString",
     #             },
     #           },
     #         ],
@@ -3442,6 +4108,8 @@ module Aws::SageMaker
     #         },
     #         role_arn: "RoleArn", # required
     #       },
+    #       monitoring_job_definition_name: "MonitoringJobDefinitionName",
+    #       monitoring_type: "DataQuality", # accepts DataQuality, ModelQuality, ModelBias, ModelExplainability
     #     },
     #     tags: [
     #       {
@@ -4370,14 +5038,23 @@ module Aws::SageMaker
     #   training checkpoint data.
     #
     # @option params [Types::DebugHookConfig] :debug_hook_config
-    #   Configuration information for the debug hook parameters, collection
-    #   configuration, and storage paths.
+    #   Configuration information for the Debugger hook parameters, metric and
+    #   tensor collections, and storage paths. To learn more about how to
+    #   configure the `DebugHookConfig` parameter, see [Use the SageMaker and
+    #   Debugger Configuration API Operations to Create, Update, and Debug
+    #   Your Training Job][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html
     #
     # @option params [Array<Types::DebugRuleConfiguration>] :debug_rule_configurations
-    #   Configuration information for debugging rules.
+    #   Configuration information for Debugger rules for debugging output
+    #   tensors.
     #
     # @option params [Types::TensorBoardOutputConfig] :tensor_board_output_config
-    #   Configuration of storage locations for TensorBoard output.
+    #   Configuration of storage locations for the Debugger TensorBoard output
+    #   data.
     #
     # @option params [Types::ExperimentConfig] :experiment_config
     #   Associates a SageMaker job as a trial component with an experiment and
@@ -4388,6 +5065,14 @@ module Aws::SageMaker
     #   * CreateTrainingJob
     #
     #   * CreateTransformJob
+    #
+    # @option params [Types::ProfilerConfig] :profiler_config
+    #   Configuration information for Debugger system monitoring, framework
+    #   profiling, and storage paths.
+    #
+    # @option params [Array<Types::ProfilerRuleConfiguration>] :profiler_rule_configurations
+    #   Configuration information for Debugger rules for profiling system and
+    #   framework metrics.
     #
     # @return [Types::CreateTrainingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4507,6 +5192,26 @@ module Aws::SageMaker
     #       trial_name: "ExperimentEntityName",
     #       trial_component_display_name: "ExperimentEntityName",
     #     },
+    #     profiler_config: {
+    #       s3_output_path: "S3Uri", # required
+    #       profiling_interval_in_milliseconds: 1,
+    #       profiling_parameters: {
+    #         "ConfigKey" => "ConfigValue",
+    #       },
+    #     },
+    #     profiler_rule_configurations: [
+    #       {
+    #         rule_configuration_name: "RuleConfigurationName", # required
+    #         local_path: "DirectoryPath",
+    #         s3_output_path: "S3Uri",
+    #         rule_evaluator_image: "AlgorithmImage", # required
+    #         instance_type: "ml.t3.medium", # accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #         volume_size_in_gb: 1,
+    #         rule_parameters: {
+    #           "ConfigKey" => "ConfigValue",
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -5471,6 +6176,50 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Deletes a data quality monitoring job definition.
+    #
+    # @option params [required, String] :job_definition_name
+    #   The name of the data quality monitoring job definition to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_quality_job_definition({
+    #     job_definition_name: "MonitoringJobDefinitionName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteDataQualityJobDefinition AWS API Documentation
+    #
+    # @overload delete_data_quality_job_definition(params = {})
+    # @param [Hash] params ({})
+    def delete_data_quality_job_definition(params = {}, options = {})
+      req = build_request(:delete_data_quality_job_definition, params)
+      req.send_request(options)
+    end
+
+    # Deletes a fleet.
+    #
+    # @option params [required, String] :device_fleet_name
+    #   The name of the fleet to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_device_fleet({
+    #     device_fleet_name: "EntityName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteDeviceFleet AWS API Documentation
+    #
+    # @overload delete_device_fleet(params = {})
+    # @param [Hash] params ({})
+    def delete_device_fleet(params = {}, options = {})
+      req = build_request(:delete_device_fleet, params)
+      req.send_request(options)
+    end
+
     # Used to delete a domain. If you onboarded with IAM mode, you will need
     # to delete your domain to onboard again using SSO. Use with caution.
     # All of the members of the domain will lose access to their EFS volume,
@@ -5750,6 +6499,50 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Deletes an Amazon SageMaker model bias job definition.
+    #
+    # @option params [required, String] :job_definition_name
+    #   The name of the model bias job definition to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_model_bias_job_definition({
+    #     job_definition_name: "MonitoringJobDefinitionName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelBiasJobDefinition AWS API Documentation
+    #
+    # @overload delete_model_bias_job_definition(params = {})
+    # @param [Hash] params ({})
+    def delete_model_bias_job_definition(params = {}, options = {})
+      req = build_request(:delete_model_bias_job_definition, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon SageMaker model explainability job definition.
+    #
+    # @option params [required, String] :job_definition_name
+    #   The name of the model explainability job definition to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_model_explainability_job_definition({
+    #     job_definition_name: "MonitoringJobDefinitionName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelExplainabilityJobDefinition AWS API Documentation
+    #
+    # @overload delete_model_explainability_job_definition(params = {})
+    # @param [Hash] params ({})
+    def delete_model_explainability_job_definition(params = {}, options = {})
+      req = build_request(:delete_model_explainability_job_definition, params)
+      req.send_request(options)
+    end
+
     # Deletes a model package.
     #
     # A model package is used to create Amazon SageMaker models or list on
@@ -5818,6 +6611,28 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def delete_model_package_group_policy(params = {}, options = {})
       req = build_request(:delete_model_package_group_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes the secified model quality monitoring job definition.
+    #
+    # @option params [required, String] :job_definition_name
+    #   The name of the model quality monitoring job definition to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_model_quality_job_definition({
+    #     job_definition_name: "MonitoringJobDefinitionName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelQualityJobDefinition AWS API Documentation
+    #
+    # @overload delete_model_quality_job_definition(params = {})
+    # @param [Hash] params ({})
+    def delete_model_quality_job_definition(params = {}, options = {})
+      req = build_request(:delete_model_quality_job_definition, params)
       req.send_request(options)
     end
 
@@ -5895,7 +6710,7 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Deletes a pipeline.
+    # Deletes a pipeline if there are no in-progress executions.
     #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline to delete.
@@ -6134,6 +6949,33 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def delete_workteam(params = {}, options = {})
       req = build_request(:delete_workteam, params)
+      req.send_request(options)
+    end
+
+    # Deregisters the specified devices. After you deregister a device, you
+    # will need to re-register the devices.
+    #
+    # @option params [required, String] :device_fleet_name
+    #   The name of the fleet the devices belong to.
+    #
+    # @option params [required, Array<String>] :device_names
+    #   The unique IDs of the devices.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_devices({
+    #     device_fleet_name: "EntityName", # required
+    #     device_names: ["DeviceName"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeregisterDevices AWS API Documentation
+    #
+    # @overload deregister_devices(params = {})
+    # @param [Hash] params ({})
+    def deregister_devices(params = {}, options = {})
+      req = build_request(:deregister_devices, params)
       req.send_request(options)
     end
 
@@ -6761,6 +7603,186 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Gets the details of a data quality monitoring job definition.
+    #
+    # @option params [required, String] :job_definition_name
+    #   The name of the data quality monitoring job definition to describe.
+    #
+    # @return [Types::DescribeDataQualityJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDataQualityJobDefinitionResponse#job_definition_arn #job_definition_arn} => String
+    #   * {Types::DescribeDataQualityJobDefinitionResponse#job_definition_name #job_definition_name} => String
+    #   * {Types::DescribeDataQualityJobDefinitionResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeDataQualityJobDefinitionResponse#data_quality_baseline_config #data_quality_baseline_config} => Types::DataQualityBaselineConfig
+    #   * {Types::DescribeDataQualityJobDefinitionResponse#data_quality_app_specification #data_quality_app_specification} => Types::DataQualityAppSpecification
+    #   * {Types::DescribeDataQualityJobDefinitionResponse#data_quality_job_input #data_quality_job_input} => Types::DataQualityJobInput
+    #   * {Types::DescribeDataQualityJobDefinitionResponse#data_quality_job_output_config #data_quality_job_output_config} => Types::MonitoringOutputConfig
+    #   * {Types::DescribeDataQualityJobDefinitionResponse#job_resources #job_resources} => Types::MonitoringResources
+    #   * {Types::DescribeDataQualityJobDefinitionResponse#network_config #network_config} => Types::MonitoringNetworkConfig
+    #   * {Types::DescribeDataQualityJobDefinitionResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeDataQualityJobDefinitionResponse#stopping_condition #stopping_condition} => Types::MonitoringStoppingCondition
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_data_quality_job_definition({
+    #     job_definition_name: "MonitoringJobDefinitionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_definition_arn #=> String
+    #   resp.job_definition_name #=> String
+    #   resp.creation_time #=> Time
+    #   resp.data_quality_baseline_config.baselining_job_name #=> String
+    #   resp.data_quality_baseline_config.constraints_resource.s3_uri #=> String
+    #   resp.data_quality_baseline_config.statistics_resource.s3_uri #=> String
+    #   resp.data_quality_app_specification.image_uri #=> String
+    #   resp.data_quality_app_specification.container_entrypoint #=> Array
+    #   resp.data_quality_app_specification.container_entrypoint[0] #=> String
+    #   resp.data_quality_app_specification.container_arguments #=> Array
+    #   resp.data_quality_app_specification.container_arguments[0] #=> String
+    #   resp.data_quality_app_specification.record_preprocessor_source_uri #=> String
+    #   resp.data_quality_app_specification.post_analytics_processor_source_uri #=> String
+    #   resp.data_quality_app_specification.environment #=> Hash
+    #   resp.data_quality_app_specification.environment["ProcessingEnvironmentKey"] #=> String
+    #   resp.data_quality_job_input.endpoint_input.endpoint_name #=> String
+    #   resp.data_quality_job_input.endpoint_input.local_path #=> String
+    #   resp.data_quality_job_input.endpoint_input.s3_input_mode #=> String, one of "Pipe", "File"
+    #   resp.data_quality_job_input.endpoint_input.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
+    #   resp.data_quality_job_input.endpoint_input.features_attribute #=> String
+    #   resp.data_quality_job_input.endpoint_input.inference_attribute #=> String
+    #   resp.data_quality_job_input.endpoint_input.probability_attribute #=> String
+    #   resp.data_quality_job_input.endpoint_input.probability_threshold_attribute #=> Float
+    #   resp.data_quality_job_input.endpoint_input.start_time_offset #=> String
+    #   resp.data_quality_job_input.endpoint_input.end_time_offset #=> String
+    #   resp.data_quality_job_output_config.monitoring_outputs #=> Array
+    #   resp.data_quality_job_output_config.monitoring_outputs[0].s3_output.s3_uri #=> String
+    #   resp.data_quality_job_output_config.monitoring_outputs[0].s3_output.local_path #=> String
+    #   resp.data_quality_job_output_config.monitoring_outputs[0].s3_output.s3_upload_mode #=> String, one of "Continuous", "EndOfJob"
+    #   resp.data_quality_job_output_config.kms_key_id #=> String
+    #   resp.job_resources.cluster_config.instance_count #=> Integer
+    #   resp.job_resources.cluster_config.instance_type #=> String, one of "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge"
+    #   resp.job_resources.cluster_config.volume_size_in_gb #=> Integer
+    #   resp.job_resources.cluster_config.volume_kms_key_id #=> String
+    #   resp.network_config.enable_inter_container_traffic_encryption #=> Boolean
+    #   resp.network_config.enable_network_isolation #=> Boolean
+    #   resp.network_config.vpc_config.security_group_ids #=> Array
+    #   resp.network_config.vpc_config.security_group_ids[0] #=> String
+    #   resp.network_config.vpc_config.subnets #=> Array
+    #   resp.network_config.vpc_config.subnets[0] #=> String
+    #   resp.role_arn #=> String
+    #   resp.stopping_condition.max_runtime_in_seconds #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDataQualityJobDefinition AWS API Documentation
+    #
+    # @overload describe_data_quality_job_definition(params = {})
+    # @param [Hash] params ({})
+    def describe_data_quality_job_definition(params = {}, options = {})
+      req = build_request(:describe_data_quality_job_definition, params)
+      req.send_request(options)
+    end
+
+    # Describes the device.
+    #
+    # @option params [String] :next_token
+    #   Next token of device description.
+    #
+    # @option params [required, String] :device_name
+    #   The unique ID of the device.
+    #
+    # @option params [required, String] :device_fleet_name
+    #   The name of the fleet the devices belong to.
+    #
+    # @return [Types::DescribeDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDeviceResponse#device_arn #device_arn} => String
+    #   * {Types::DescribeDeviceResponse#device_name #device_name} => String
+    #   * {Types::DescribeDeviceResponse#description #description} => String
+    #   * {Types::DescribeDeviceResponse#device_fleet_name #device_fleet_name} => String
+    #   * {Types::DescribeDeviceResponse#iot_thing_name #iot_thing_name} => String
+    #   * {Types::DescribeDeviceResponse#registration_time #registration_time} => Time
+    #   * {Types::DescribeDeviceResponse#latest_heartbeat #latest_heartbeat} => Time
+    #   * {Types::DescribeDeviceResponse#models #models} => Array&lt;Types::EdgeModel&gt;
+    #   * {Types::DescribeDeviceResponse#max_models #max_models} => Integer
+    #   * {Types::DescribeDeviceResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_device({
+    #     next_token: "NextToken",
+    #     device_name: "EntityName", # required
+    #     device_fleet_name: "EntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.device_arn #=> String
+    #   resp.device_name #=> String
+    #   resp.description #=> String
+    #   resp.device_fleet_name #=> String
+    #   resp.iot_thing_name #=> String
+    #   resp.registration_time #=> Time
+    #   resp.latest_heartbeat #=> Time
+    #   resp.models #=> Array
+    #   resp.models[0].model_name #=> String
+    #   resp.models[0].model_version #=> String
+    #   resp.models[0].latest_sample_time #=> Time
+    #   resp.models[0].latest_inference #=> Time
+    #   resp.max_models #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDevice AWS API Documentation
+    #
+    # @overload describe_device(params = {})
+    # @param [Hash] params ({})
+    def describe_device(params = {}, options = {})
+      req = build_request(:describe_device, params)
+      req.send_request(options)
+    end
+
+    # A description of the fleet the device belongs to.
+    #
+    # @option params [required, String] :device_fleet_name
+    #   The name of the fleet.
+    #
+    # @return [Types::DescribeDeviceFleetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDeviceFleetResponse#device_fleet_name #device_fleet_name} => String
+    #   * {Types::DescribeDeviceFleetResponse#device_fleet_arn #device_fleet_arn} => String
+    #   * {Types::DescribeDeviceFleetResponse#output_config #output_config} => Types::EdgeOutputConfig
+    #   * {Types::DescribeDeviceFleetResponse#description #description} => String
+    #   * {Types::DescribeDeviceFleetResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeDeviceFleetResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeDeviceFleetResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeDeviceFleetResponse#iot_role_alias #iot_role_alias} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_device_fleet({
+    #     device_fleet_name: "EntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.device_fleet_name #=> String
+    #   resp.device_fleet_arn #=> String
+    #   resp.output_config.s3_output_location #=> String
+    #   resp.output_config.kms_key_id #=> String
+    #   resp.description #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.role_arn #=> String
+    #   resp.iot_role_alias #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDeviceFleet AWS API Documentation
+    #
+    # @overload describe_device_fleet(params = {})
+    # @param [Hash] params ({})
+    def describe_device_fleet(params = {}, options = {})
+      req = build_request(:describe_device_fleet, params)
+      req.send_request(options)
+    end
+
     # The description of the domain.
     #
     # @option params [required, String] :domain_id
@@ -6837,6 +7859,61 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_domain(params = {}, options = {})
       req = build_request(:describe_domain, params)
+      req.send_request(options)
+    end
+
+    # A description of edge packaging jobs.
+    #
+    # @option params [required, String] :edge_packaging_job_name
+    #   The name of the edge packaging job.
+    #
+    # @return [Types::DescribeEdgePackagingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEdgePackagingJobResponse#edge_packaging_job_arn #edge_packaging_job_arn} => String
+    #   * {Types::DescribeEdgePackagingJobResponse#edge_packaging_job_name #edge_packaging_job_name} => String
+    #   * {Types::DescribeEdgePackagingJobResponse#compilation_job_name #compilation_job_name} => String
+    #   * {Types::DescribeEdgePackagingJobResponse#model_name #model_name} => String
+    #   * {Types::DescribeEdgePackagingJobResponse#model_version #model_version} => String
+    #   * {Types::DescribeEdgePackagingJobResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeEdgePackagingJobResponse#output_config #output_config} => Types::EdgeOutputConfig
+    #   * {Types::DescribeEdgePackagingJobResponse#resource_key #resource_key} => String
+    #   * {Types::DescribeEdgePackagingJobResponse#edge_packaging_job_status #edge_packaging_job_status} => String
+    #   * {Types::DescribeEdgePackagingJobResponse#edge_packaging_job_status_message #edge_packaging_job_status_message} => String
+    #   * {Types::DescribeEdgePackagingJobResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeEdgePackagingJobResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeEdgePackagingJobResponse#model_artifact #model_artifact} => String
+    #   * {Types::DescribeEdgePackagingJobResponse#model_signature #model_signature} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_edge_packaging_job({
+    #     edge_packaging_job_name: "EntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.edge_packaging_job_arn #=> String
+    #   resp.edge_packaging_job_name #=> String
+    #   resp.compilation_job_name #=> String
+    #   resp.model_name #=> String
+    #   resp.model_version #=> String
+    #   resp.role_arn #=> String
+    #   resp.output_config.s3_output_location #=> String
+    #   resp.output_config.kms_key_id #=> String
+    #   resp.resource_key #=> String
+    #   resp.edge_packaging_job_status #=> String, one of "STARTING", "INPROGRESS", "COMPLETED", "FAILED", "STOPPING", "STOPPED"
+    #   resp.edge_packaging_job_status_message #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.model_artifact #=> String
+    #   resp.model_signature #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEdgePackagingJob AWS API Documentation
+    #
+    # @overload describe_edge_packaging_job(params = {})
+    # @param [Hash] params ({})
+    def describe_edge_packaging_job(params = {}, options = {})
+      req = build_request(:describe_edge_packaging_job, params)
       req.send_request(options)
     end
 
@@ -7656,6 +8733,155 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Returns a description of a model bias job definition.
+    #
+    # @option params [required, String] :job_definition_name
+    #   The name of the model bias job definition. The name must be unique
+    #   within an AWS Region in the AWS account.
+    #
+    # @return [Types::DescribeModelBiasJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeModelBiasJobDefinitionResponse#job_definition_arn #job_definition_arn} => String
+    #   * {Types::DescribeModelBiasJobDefinitionResponse#job_definition_name #job_definition_name} => String
+    #   * {Types::DescribeModelBiasJobDefinitionResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeModelBiasJobDefinitionResponse#model_bias_baseline_config #model_bias_baseline_config} => Types::ModelBiasBaselineConfig
+    #   * {Types::DescribeModelBiasJobDefinitionResponse#model_bias_app_specification #model_bias_app_specification} => Types::ModelBiasAppSpecification
+    #   * {Types::DescribeModelBiasJobDefinitionResponse#model_bias_job_input #model_bias_job_input} => Types::ModelBiasJobInput
+    #   * {Types::DescribeModelBiasJobDefinitionResponse#model_bias_job_output_config #model_bias_job_output_config} => Types::MonitoringOutputConfig
+    #   * {Types::DescribeModelBiasJobDefinitionResponse#job_resources #job_resources} => Types::MonitoringResources
+    #   * {Types::DescribeModelBiasJobDefinitionResponse#network_config #network_config} => Types::MonitoringNetworkConfig
+    #   * {Types::DescribeModelBiasJobDefinitionResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeModelBiasJobDefinitionResponse#stopping_condition #stopping_condition} => Types::MonitoringStoppingCondition
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_model_bias_job_definition({
+    #     job_definition_name: "MonitoringJobDefinitionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_definition_arn #=> String
+    #   resp.job_definition_name #=> String
+    #   resp.creation_time #=> Time
+    #   resp.model_bias_baseline_config.baselining_job_name #=> String
+    #   resp.model_bias_baseline_config.constraints_resource.s3_uri #=> String
+    #   resp.model_bias_app_specification.image_uri #=> String
+    #   resp.model_bias_app_specification.config_uri #=> String
+    #   resp.model_bias_app_specification.environment #=> Hash
+    #   resp.model_bias_app_specification.environment["ProcessingEnvironmentKey"] #=> String
+    #   resp.model_bias_job_input.endpoint_input.endpoint_name #=> String
+    #   resp.model_bias_job_input.endpoint_input.local_path #=> String
+    #   resp.model_bias_job_input.endpoint_input.s3_input_mode #=> String, one of "Pipe", "File"
+    #   resp.model_bias_job_input.endpoint_input.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
+    #   resp.model_bias_job_input.endpoint_input.features_attribute #=> String
+    #   resp.model_bias_job_input.endpoint_input.inference_attribute #=> String
+    #   resp.model_bias_job_input.endpoint_input.probability_attribute #=> String
+    #   resp.model_bias_job_input.endpoint_input.probability_threshold_attribute #=> Float
+    #   resp.model_bias_job_input.endpoint_input.start_time_offset #=> String
+    #   resp.model_bias_job_input.endpoint_input.end_time_offset #=> String
+    #   resp.model_bias_job_input.ground_truth_s3_input.s3_uri #=> String
+    #   resp.model_bias_job_output_config.monitoring_outputs #=> Array
+    #   resp.model_bias_job_output_config.monitoring_outputs[0].s3_output.s3_uri #=> String
+    #   resp.model_bias_job_output_config.monitoring_outputs[0].s3_output.local_path #=> String
+    #   resp.model_bias_job_output_config.monitoring_outputs[0].s3_output.s3_upload_mode #=> String, one of "Continuous", "EndOfJob"
+    #   resp.model_bias_job_output_config.kms_key_id #=> String
+    #   resp.job_resources.cluster_config.instance_count #=> Integer
+    #   resp.job_resources.cluster_config.instance_type #=> String, one of "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge"
+    #   resp.job_resources.cluster_config.volume_size_in_gb #=> Integer
+    #   resp.job_resources.cluster_config.volume_kms_key_id #=> String
+    #   resp.network_config.enable_inter_container_traffic_encryption #=> Boolean
+    #   resp.network_config.enable_network_isolation #=> Boolean
+    #   resp.network_config.vpc_config.security_group_ids #=> Array
+    #   resp.network_config.vpc_config.security_group_ids[0] #=> String
+    #   resp.network_config.vpc_config.subnets #=> Array
+    #   resp.network_config.vpc_config.subnets[0] #=> String
+    #   resp.role_arn #=> String
+    #   resp.stopping_condition.max_runtime_in_seconds #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelBiasJobDefinition AWS API Documentation
+    #
+    # @overload describe_model_bias_job_definition(params = {})
+    # @param [Hash] params ({})
+    def describe_model_bias_job_definition(params = {}, options = {})
+      req = build_request(:describe_model_bias_job_definition, params)
+      req.send_request(options)
+    end
+
+    # Returns a description of a model explainability job definition.
+    #
+    # @option params [required, String] :job_definition_name
+    #   The name of the model explainability job definition. The name must be
+    #   unique within an AWS Region in the AWS account.
+    #
+    # @return [Types::DescribeModelExplainabilityJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeModelExplainabilityJobDefinitionResponse#job_definition_arn #job_definition_arn} => String
+    #   * {Types::DescribeModelExplainabilityJobDefinitionResponse#job_definition_name #job_definition_name} => String
+    #   * {Types::DescribeModelExplainabilityJobDefinitionResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeModelExplainabilityJobDefinitionResponse#model_explainability_baseline_config #model_explainability_baseline_config} => Types::ModelExplainabilityBaselineConfig
+    #   * {Types::DescribeModelExplainabilityJobDefinitionResponse#model_explainability_app_specification #model_explainability_app_specification} => Types::ModelExplainabilityAppSpecification
+    #   * {Types::DescribeModelExplainabilityJobDefinitionResponse#model_explainability_job_input #model_explainability_job_input} => Types::ModelExplainabilityJobInput
+    #   * {Types::DescribeModelExplainabilityJobDefinitionResponse#model_explainability_job_output_config #model_explainability_job_output_config} => Types::MonitoringOutputConfig
+    #   * {Types::DescribeModelExplainabilityJobDefinitionResponse#job_resources #job_resources} => Types::MonitoringResources
+    #   * {Types::DescribeModelExplainabilityJobDefinitionResponse#network_config #network_config} => Types::MonitoringNetworkConfig
+    #   * {Types::DescribeModelExplainabilityJobDefinitionResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeModelExplainabilityJobDefinitionResponse#stopping_condition #stopping_condition} => Types::MonitoringStoppingCondition
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_model_explainability_job_definition({
+    #     job_definition_name: "MonitoringJobDefinitionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_definition_arn #=> String
+    #   resp.job_definition_name #=> String
+    #   resp.creation_time #=> Time
+    #   resp.model_explainability_baseline_config.baselining_job_name #=> String
+    #   resp.model_explainability_baseline_config.constraints_resource.s3_uri #=> String
+    #   resp.model_explainability_app_specification.image_uri #=> String
+    #   resp.model_explainability_app_specification.config_uri #=> String
+    #   resp.model_explainability_app_specification.environment #=> Hash
+    #   resp.model_explainability_app_specification.environment["ProcessingEnvironmentKey"] #=> String
+    #   resp.model_explainability_job_input.endpoint_input.endpoint_name #=> String
+    #   resp.model_explainability_job_input.endpoint_input.local_path #=> String
+    #   resp.model_explainability_job_input.endpoint_input.s3_input_mode #=> String, one of "Pipe", "File"
+    #   resp.model_explainability_job_input.endpoint_input.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
+    #   resp.model_explainability_job_input.endpoint_input.features_attribute #=> String
+    #   resp.model_explainability_job_input.endpoint_input.inference_attribute #=> String
+    #   resp.model_explainability_job_input.endpoint_input.probability_attribute #=> String
+    #   resp.model_explainability_job_input.endpoint_input.probability_threshold_attribute #=> Float
+    #   resp.model_explainability_job_input.endpoint_input.start_time_offset #=> String
+    #   resp.model_explainability_job_input.endpoint_input.end_time_offset #=> String
+    #   resp.model_explainability_job_output_config.monitoring_outputs #=> Array
+    #   resp.model_explainability_job_output_config.monitoring_outputs[0].s3_output.s3_uri #=> String
+    #   resp.model_explainability_job_output_config.monitoring_outputs[0].s3_output.local_path #=> String
+    #   resp.model_explainability_job_output_config.monitoring_outputs[0].s3_output.s3_upload_mode #=> String, one of "Continuous", "EndOfJob"
+    #   resp.model_explainability_job_output_config.kms_key_id #=> String
+    #   resp.job_resources.cluster_config.instance_count #=> Integer
+    #   resp.job_resources.cluster_config.instance_type #=> String, one of "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge"
+    #   resp.job_resources.cluster_config.volume_size_in_gb #=> Integer
+    #   resp.job_resources.cluster_config.volume_kms_key_id #=> String
+    #   resp.network_config.enable_inter_container_traffic_encryption #=> Boolean
+    #   resp.network_config.enable_network_isolation #=> Boolean
+    #   resp.network_config.vpc_config.security_group_ids #=> Array
+    #   resp.network_config.vpc_config.security_group_ids[0] #=> String
+    #   resp.network_config.vpc_config.subnets #=> Array
+    #   resp.network_config.vpc_config.subnets[0] #=> String
+    #   resp.role_arn #=> String
+    #   resp.stopping_condition.max_runtime_in_seconds #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelExplainabilityJobDefinition AWS API Documentation
+    #
+    # @overload describe_model_explainability_job_definition(params = {})
+    # @param [Hash] params ({})
+    def describe_model_explainability_job_definition(params = {}, options = {})
+      req = build_request(:describe_model_explainability_job_definition, params)
+      req.send_request(options)
+    end
+
     # Returns a description of the specified model package, which is used to
     # create Amazon SageMaker models or list them on AWS Marketplace.
     #
@@ -7829,6 +9055,87 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Returns a description of a model quality job definition.
+    #
+    # @option params [required, String] :job_definition_name
+    #   The name of the model quality job. The name must be unique within an
+    #   AWS Region in the AWS account.
+    #
+    # @return [Types::DescribeModelQualityJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeModelQualityJobDefinitionResponse#job_definition_arn #job_definition_arn} => String
+    #   * {Types::DescribeModelQualityJobDefinitionResponse#job_definition_name #job_definition_name} => String
+    #   * {Types::DescribeModelQualityJobDefinitionResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeModelQualityJobDefinitionResponse#model_quality_baseline_config #model_quality_baseline_config} => Types::ModelQualityBaselineConfig
+    #   * {Types::DescribeModelQualityJobDefinitionResponse#model_quality_app_specification #model_quality_app_specification} => Types::ModelQualityAppSpecification
+    #   * {Types::DescribeModelQualityJobDefinitionResponse#model_quality_job_input #model_quality_job_input} => Types::ModelQualityJobInput
+    #   * {Types::DescribeModelQualityJobDefinitionResponse#model_quality_job_output_config #model_quality_job_output_config} => Types::MonitoringOutputConfig
+    #   * {Types::DescribeModelQualityJobDefinitionResponse#job_resources #job_resources} => Types::MonitoringResources
+    #   * {Types::DescribeModelQualityJobDefinitionResponse#network_config #network_config} => Types::MonitoringNetworkConfig
+    #   * {Types::DescribeModelQualityJobDefinitionResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeModelQualityJobDefinitionResponse#stopping_condition #stopping_condition} => Types::MonitoringStoppingCondition
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_model_quality_job_definition({
+    #     job_definition_name: "MonitoringJobDefinitionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_definition_arn #=> String
+    #   resp.job_definition_name #=> String
+    #   resp.creation_time #=> Time
+    #   resp.model_quality_baseline_config.baselining_job_name #=> String
+    #   resp.model_quality_baseline_config.constraints_resource.s3_uri #=> String
+    #   resp.model_quality_app_specification.image_uri #=> String
+    #   resp.model_quality_app_specification.container_entrypoint #=> Array
+    #   resp.model_quality_app_specification.container_entrypoint[0] #=> String
+    #   resp.model_quality_app_specification.container_arguments #=> Array
+    #   resp.model_quality_app_specification.container_arguments[0] #=> String
+    #   resp.model_quality_app_specification.record_preprocessor_source_uri #=> String
+    #   resp.model_quality_app_specification.post_analytics_processor_source_uri #=> String
+    #   resp.model_quality_app_specification.problem_type #=> String, one of "BinaryClassification", "MulticlassClassification", "Regression"
+    #   resp.model_quality_app_specification.environment #=> Hash
+    #   resp.model_quality_app_specification.environment["ProcessingEnvironmentKey"] #=> String
+    #   resp.model_quality_job_input.endpoint_input.endpoint_name #=> String
+    #   resp.model_quality_job_input.endpoint_input.local_path #=> String
+    #   resp.model_quality_job_input.endpoint_input.s3_input_mode #=> String, one of "Pipe", "File"
+    #   resp.model_quality_job_input.endpoint_input.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
+    #   resp.model_quality_job_input.endpoint_input.features_attribute #=> String
+    #   resp.model_quality_job_input.endpoint_input.inference_attribute #=> String
+    #   resp.model_quality_job_input.endpoint_input.probability_attribute #=> String
+    #   resp.model_quality_job_input.endpoint_input.probability_threshold_attribute #=> Float
+    #   resp.model_quality_job_input.endpoint_input.start_time_offset #=> String
+    #   resp.model_quality_job_input.endpoint_input.end_time_offset #=> String
+    #   resp.model_quality_job_input.ground_truth_s3_input.s3_uri #=> String
+    #   resp.model_quality_job_output_config.monitoring_outputs #=> Array
+    #   resp.model_quality_job_output_config.monitoring_outputs[0].s3_output.s3_uri #=> String
+    #   resp.model_quality_job_output_config.monitoring_outputs[0].s3_output.local_path #=> String
+    #   resp.model_quality_job_output_config.monitoring_outputs[0].s3_output.s3_upload_mode #=> String, one of "Continuous", "EndOfJob"
+    #   resp.model_quality_job_output_config.kms_key_id #=> String
+    #   resp.job_resources.cluster_config.instance_count #=> Integer
+    #   resp.job_resources.cluster_config.instance_type #=> String, one of "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge"
+    #   resp.job_resources.cluster_config.volume_size_in_gb #=> Integer
+    #   resp.job_resources.cluster_config.volume_kms_key_id #=> String
+    #   resp.network_config.enable_inter_container_traffic_encryption #=> Boolean
+    #   resp.network_config.enable_network_isolation #=> Boolean
+    #   resp.network_config.vpc_config.security_group_ids #=> Array
+    #   resp.network_config.vpc_config.security_group_ids[0] #=> String
+    #   resp.network_config.vpc_config.subnets #=> Array
+    #   resp.network_config.vpc_config.subnets[0] #=> String
+    #   resp.role_arn #=> String
+    #   resp.stopping_condition.max_runtime_in_seconds #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelQualityJobDefinition AWS API Documentation
+    #
+    # @overload describe_model_quality_job_definition(params = {})
+    # @param [Hash] params ({})
+    def describe_model_quality_job_definition(params = {}, options = {})
+      req = build_request(:describe_model_quality_job_definition, params)
+      req.send_request(options)
+    end
+
     # Describes the schedule for a monitoring job.
     #
     # @option params [required, String] :monitoring_schedule_name
@@ -7839,6 +9146,7 @@ module Aws::SageMaker
     #   * {Types::DescribeMonitoringScheduleResponse#monitoring_schedule_arn #monitoring_schedule_arn} => String
     #   * {Types::DescribeMonitoringScheduleResponse#monitoring_schedule_name #monitoring_schedule_name} => String
     #   * {Types::DescribeMonitoringScheduleResponse#monitoring_schedule_status #monitoring_schedule_status} => String
+    #   * {Types::DescribeMonitoringScheduleResponse#monitoring_type #monitoring_type} => String
     #   * {Types::DescribeMonitoringScheduleResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeMonitoringScheduleResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeMonitoringScheduleResponse#last_modified_time #last_modified_time} => Time
@@ -7857,10 +9165,12 @@ module Aws::SageMaker
     #   resp.monitoring_schedule_arn #=> String
     #   resp.monitoring_schedule_name #=> String
     #   resp.monitoring_schedule_status #=> String, one of "Pending", "Failed", "Scheduled", "Stopped"
+    #   resp.monitoring_type #=> String, one of "DataQuality", "ModelQuality", "ModelBias", "ModelExplainability"
     #   resp.failure_reason #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.monitoring_schedule_config.schedule_config.schedule_expression #=> String
+    #   resp.monitoring_schedule_config.monitoring_job_definition.baseline_config.baselining_job_name #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.baseline_config.constraints_resource.s3_uri #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.baseline_config.statistics_resource.s3_uri #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs #=> Array
@@ -7868,6 +9178,12 @@ module Aws::SageMaker
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.local_path #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.s3_input_mode #=> String, one of "Pipe", "File"
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.features_attribute #=> String
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.inference_attribute #=> String
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.probability_attribute #=> String
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.probability_threshold_attribute #=> Float
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.start_time_offset #=> String
+    #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.end_time_offset #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs #=> Array
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs[0].s3_output.s3_uri #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs[0].s3_output.local_path #=> String
@@ -7894,6 +9210,8 @@ module Aws::SageMaker
     #   resp.monitoring_schedule_config.monitoring_job_definition.network_config.vpc_config.subnets #=> Array
     #   resp.monitoring_schedule_config.monitoring_job_definition.network_config.vpc_config.subnets[0] #=> String
     #   resp.monitoring_schedule_config.monitoring_job_definition.role_arn #=> String
+    #   resp.monitoring_schedule_config.monitoring_job_definition_name #=> String
+    #   resp.monitoring_schedule_config.monitoring_type #=> String, one of "DataQuality", "ModelQuality", "ModelBias", "ModelExplainability"
     #   resp.endpoint_name #=> String
     #   resp.last_monitoring_execution_summary.monitoring_schedule_name #=> String
     #   resp.last_monitoring_execution_summary.scheduled_time #=> Time
@@ -7903,6 +9221,8 @@ module Aws::SageMaker
     #   resp.last_monitoring_execution_summary.processing_job_arn #=> String
     #   resp.last_monitoring_execution_summary.endpoint_name #=> String
     #   resp.last_monitoring_execution_summary.failure_reason #=> String
+    #   resp.last_monitoring_execution_summary.monitoring_job_definition_name #=> String
+    #   resp.last_monitoring_execution_summary.monitoring_type #=> String, one of "DataQuality", "ModelQuality", "ModelBias", "ModelExplainability"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeMonitoringSchedule AWS API Documentation
     #
@@ -8419,6 +9739,10 @@ module Aws::SageMaker
     #   * {Types::DescribeTrainingJobResponse#debug_rule_configurations #debug_rule_configurations} => Array&lt;Types::DebugRuleConfiguration&gt;
     #   * {Types::DescribeTrainingJobResponse#tensor_board_output_config #tensor_board_output_config} => Types::TensorBoardOutputConfig
     #   * {Types::DescribeTrainingJobResponse#debug_rule_evaluation_statuses #debug_rule_evaluation_statuses} => Array&lt;Types::DebugRuleEvaluationStatus&gt;
+    #   * {Types::DescribeTrainingJobResponse#profiler_config #profiler_config} => Types::ProfilerConfig
+    #   * {Types::DescribeTrainingJobResponse#profiler_rule_configurations #profiler_rule_configurations} => Array&lt;Types::ProfilerRuleConfiguration&gt;
+    #   * {Types::DescribeTrainingJobResponse#profiler_rule_evaluation_statuses #profiler_rule_evaluation_statuses} => Array&lt;Types::ProfilerRuleEvaluationStatus&gt;
+    #   * {Types::DescribeTrainingJobResponse#profiling_status #profiling_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -8523,6 +9847,26 @@ module Aws::SageMaker
     #   resp.debug_rule_evaluation_statuses[0].rule_evaluation_status #=> String, one of "InProgress", "NoIssuesFound", "IssuesFound", "Error", "Stopping", "Stopped"
     #   resp.debug_rule_evaluation_statuses[0].status_details #=> String
     #   resp.debug_rule_evaluation_statuses[0].last_modified_time #=> Time
+    #   resp.profiler_config.s3_output_path #=> String
+    #   resp.profiler_config.profiling_interval_in_milliseconds #=> Integer
+    #   resp.profiler_config.profiling_parameters #=> Hash
+    #   resp.profiler_config.profiling_parameters["ConfigKey"] #=> String
+    #   resp.profiler_rule_configurations #=> Array
+    #   resp.profiler_rule_configurations[0].rule_configuration_name #=> String
+    #   resp.profiler_rule_configurations[0].local_path #=> String
+    #   resp.profiler_rule_configurations[0].s3_output_path #=> String
+    #   resp.profiler_rule_configurations[0].rule_evaluator_image #=> String
+    #   resp.profiler_rule_configurations[0].instance_type #=> String, one of "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge"
+    #   resp.profiler_rule_configurations[0].volume_size_in_gb #=> Integer
+    #   resp.profiler_rule_configurations[0].rule_parameters #=> Hash
+    #   resp.profiler_rule_configurations[0].rule_parameters["ConfigKey"] #=> String
+    #   resp.profiler_rule_evaluation_statuses #=> Array
+    #   resp.profiler_rule_evaluation_statuses[0].rule_configuration_name #=> String
+    #   resp.profiler_rule_evaluation_statuses[0].rule_evaluation_job_arn #=> String
+    #   resp.profiler_rule_evaluation_statuses[0].rule_evaluation_status #=> String, one of "InProgress", "NoIssuesFound", "IssuesFound", "Error", "Stopping", "Stopped"
+    #   resp.profiler_rule_evaluation_statuses[0].status_details #=> String
+    #   resp.profiler_rule_evaluation_statuses[0].last_modified_time #=> Time
+    #   resp.profiling_status #=> String, one of "Enabled", "Disabled"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -8998,6 +10342,58 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def enable_sagemaker_servicecatalog_portfolio(params = {}, options = {})
       req = build_request(:enable_sagemaker_servicecatalog_portfolio, params)
+      req.send_request(options)
+    end
+
+    # Describes a fleet.
+    #
+    # @option params [required, String] :device_fleet_name
+    #   The name of the fleet.
+    #
+    # @return [Types::GetDeviceFleetReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeviceFleetReportResponse#device_fleet_arn #device_fleet_arn} => String
+    #   * {Types::GetDeviceFleetReportResponse#device_fleet_name #device_fleet_name} => String
+    #   * {Types::GetDeviceFleetReportResponse#output_config #output_config} => Types::EdgeOutputConfig
+    #   * {Types::GetDeviceFleetReportResponse#description #description} => String
+    #   * {Types::GetDeviceFleetReportResponse#report_generated #report_generated} => Time
+    #   * {Types::GetDeviceFleetReportResponse#device_stats #device_stats} => Types::DeviceStats
+    #   * {Types::GetDeviceFleetReportResponse#agent_versions #agent_versions} => Array&lt;Types::AgentVersion&gt;
+    #   * {Types::GetDeviceFleetReportResponse#model_stats #model_stats} => Array&lt;Types::EdgeModelStat&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_device_fleet_report({
+    #     device_fleet_name: "EntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.device_fleet_arn #=> String
+    #   resp.device_fleet_name #=> String
+    #   resp.output_config.s3_output_location #=> String
+    #   resp.output_config.kms_key_id #=> String
+    #   resp.description #=> String
+    #   resp.report_generated #=> Time
+    #   resp.device_stats.connected_device_count #=> Integer
+    #   resp.device_stats.registered_device_count #=> Integer
+    #   resp.agent_versions #=> Array
+    #   resp.agent_versions[0].version #=> String
+    #   resp.agent_versions[0].agent_count #=> Integer
+    #   resp.model_stats #=> Array
+    #   resp.model_stats[0].model_name #=> String
+    #   resp.model_stats[0].model_version #=> String
+    #   resp.model_stats[0].offline_device_count #=> Integer
+    #   resp.model_stats[0].connected_device_count #=> Integer
+    #   resp.model_stats[0].active_device_count #=> Integer
+    #   resp.model_stats[0].sampling_device_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetDeviceFleetReport AWS API Documentation
+    #
+    # @overload get_device_fleet_report(params = {})
+    # @param [Hash] params ({})
+    def get_device_fleet_report(params = {}, options = {})
+      req = build_request(:get_device_fleet_report, params)
       req.send_request(options)
     end
 
@@ -9947,6 +11343,208 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists the data quality job definitions in your account.
+    #
+    # @option params [String] :endpoint_name
+    #   A filter that lists the data quality job definitions associated with
+    #   the specified endpoint.
+    #
+    # @option params [String] :sort_by
+    #   The field to sort results by. The default is `CreationTime`.
+    #
+    # @option params [String] :sort_order
+    #   The sort order for results. The default is `Descending`.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous `ListDataQualityJobDefinitions` request
+    #   was truncated, the response includes a `NextToken`. To retrieve the
+    #   next set of transform jobs, use the token in the next request.&gt;
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of data quality monitoring job definitions to
+    #   return in the response.
+    #
+    # @option params [String] :name_contains
+    #   A string in the data quality monitoring job definition name. This
+    #   filter returns only data quality monitoring job definitions whose name
+    #   contains the specified string.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   A filter that returns only data quality monitoring job definitions
+    #   created before the specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   A filter that returns only data quality monitoring job definitions
+    #   created after the specified time.
+    #
+    # @return [Types::ListDataQualityJobDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataQualityJobDefinitionsResponse#job_definition_summaries #job_definition_summaries} => Array&lt;Types::MonitoringJobDefinitionSummary&gt;
+    #   * {Types::ListDataQualityJobDefinitionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_quality_job_definitions({
+    #     endpoint_name: "EndpointName",
+    #     sort_by: "Name", # accepts Name, CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     name_contains: "NameContains",
+    #     creation_time_before: Time.now,
+    #     creation_time_after: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_definition_summaries #=> Array
+    #   resp.job_definition_summaries[0].monitoring_job_definition_name #=> String
+    #   resp.job_definition_summaries[0].monitoring_job_definition_arn #=> String
+    #   resp.job_definition_summaries[0].creation_time #=> Time
+    #   resp.job_definition_summaries[0].endpoint_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListDataQualityJobDefinitions AWS API Documentation
+    #
+    # @overload list_data_quality_job_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_data_quality_job_definitions(params = {}, options = {})
+      req = build_request(:list_data_quality_job_definitions, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of devices in the fleet.
+    #
+    # @option params [String] :next_token
+    #   The response from the last list when returning a list large enough to
+    #   need tokening.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to select.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   Filter fleets where packaging job was created after specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Filter fleets where the edge packaging job was created before
+    #   specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_after
+    #   Select fleets where the job was updated after X
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_before
+    #   Select fleets where the job was updated before X
+    #
+    # @option params [String] :name_contains
+    #   Filter for fleets containing this name in their fleet device name.
+    #
+    # @option params [String] :sort_by
+    #   The column to sort by.
+    #
+    # @option params [String] :sort_order
+    #   What direction to sort in.
+    #
+    # @return [Types::ListDeviceFleetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDeviceFleetsResponse#device_fleet_summaries #device_fleet_summaries} => Array&lt;Types::DeviceFleetSummary&gt;
+    #   * {Types::ListDeviceFleetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_device_fleets({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     last_modified_time_after: Time.now,
+    #     last_modified_time_before: Time.now,
+    #     name_contains: "NameContains",
+    #     sort_by: "NAME", # accepts NAME, CREATION_TIME, LAST_MODIFIED_TIME
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.device_fleet_summaries #=> Array
+    #   resp.device_fleet_summaries[0].device_fleet_arn #=> String
+    #   resp.device_fleet_summaries[0].device_fleet_name #=> String
+    #   resp.device_fleet_summaries[0].creation_time #=> Time
+    #   resp.device_fleet_summaries[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListDeviceFleets AWS API Documentation
+    #
+    # @overload list_device_fleets(params = {})
+    # @param [Hash] params ({})
+    def list_device_fleets(params = {}, options = {})
+      req = build_request(:list_device_fleets, params)
+      req.send_request(options)
+    end
+
+    # A list of devices.
+    #
+    # @option params [String] :next_token
+    #   The response from the last list when returning a list large enough to
+    #   need tokening.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to select.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :latest_heartbeat_after
+    #   Select fleets where the job was updated after X
+    #
+    # @option params [String] :model_name
+    #   A filter that searches devices that contains this name in any of their
+    #   models.
+    #
+    # @option params [String] :device_fleet_name
+    #   Filter for fleets containing this name in their device fleet name.
+    #
+    # @return [Types::ListDevicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDevicesResponse#device_summaries #device_summaries} => Array&lt;Types::DeviceSummary&gt;
+    #   * {Types::ListDevicesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_devices({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     latest_heartbeat_after: Time.now,
+    #     model_name: "EntityName",
+    #     device_fleet_name: "EntityName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.device_summaries #=> Array
+    #   resp.device_summaries[0].device_name #=> String
+    #   resp.device_summaries[0].device_arn #=> String
+    #   resp.device_summaries[0].description #=> String
+    #   resp.device_summaries[0].device_fleet_name #=> String
+    #   resp.device_summaries[0].iot_thing_name #=> String
+    #   resp.device_summaries[0].registration_time #=> Time
+    #   resp.device_summaries[0].latest_heartbeat #=> Time
+    #   resp.device_summaries[0].models #=> Array
+    #   resp.device_summaries[0].models[0].model_name #=> String
+    #   resp.device_summaries[0].models[0].model_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListDevices AWS API Documentation
+    #
+    # @overload list_devices(params = {})
+    # @param [Hash] params ({})
+    def list_devices(params = {}, options = {})
+      req = build_request(:list_devices, params)
+      req.send_request(options)
+    end
+
     # Lists the domains.
     #
     # @option params [String] :next_token
@@ -9988,6 +11586,87 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def list_domains(params = {}, options = {})
       req = build_request(:list_domains, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of edge packaging jobs.
+    #
+    # @option params [String] :next_token
+    #   The response from the last list when returning a list large enough to
+    #   need tokening.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to select.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   Select jobs where the job was created after specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Select jobs where the job was created before specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_after
+    #   Select jobs where the job was updated after specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_before
+    #   Select jobs where the job was updated before specified time.
+    #
+    # @option params [String] :name_contains
+    #   Filter for jobs containing this name in their packaging job name.
+    #
+    # @option params [String] :model_name_contains
+    #   Filter for jobs where the model name contains this string.
+    #
+    # @option params [String] :status_equals
+    #   The job status to filter for.
+    #
+    # @option params [String] :sort_by
+    #   Use to specify what column to sort by.
+    #
+    # @option params [String] :sort_order
+    #   What direction to sort by.
+    #
+    # @return [Types::ListEdgePackagingJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEdgePackagingJobsResponse#edge_packaging_job_summaries #edge_packaging_job_summaries} => Array&lt;Types::EdgePackagingJobSummary&gt;
+    #   * {Types::ListEdgePackagingJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_edge_packaging_jobs({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     last_modified_time_after: Time.now,
+    #     last_modified_time_before: Time.now,
+    #     name_contains: "NameContains",
+    #     model_name_contains: "NameContains",
+    #     status_equals: "STARTING", # accepts STARTING, INPROGRESS, COMPLETED, FAILED, STOPPING, STOPPED
+    #     sort_by: "NAME", # accepts NAME, MODEL_NAME, CREATION_TIME, LAST_MODIFIED_TIME, STATUS
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.edge_packaging_job_summaries #=> Array
+    #   resp.edge_packaging_job_summaries[0].edge_packaging_job_arn #=> String
+    #   resp.edge_packaging_job_summaries[0].edge_packaging_job_name #=> String
+    #   resp.edge_packaging_job_summaries[0].edge_packaging_job_status #=> String, one of "STARTING", "INPROGRESS", "COMPLETED", "FAILED", "STOPPING", "STOPPED"
+    #   resp.edge_packaging_job_summaries[0].compilation_job_name #=> String
+    #   resp.edge_packaging_job_summaries[0].model_name #=> String
+    #   resp.edge_packaging_job_summaries[0].model_version #=> String
+    #   resp.edge_packaging_job_summaries[0].creation_time #=> Time
+    #   resp.edge_packaging_job_summaries[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEdgePackagingJobs AWS API Documentation
+    #
+    # @overload list_edge_packaging_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_edge_packaging_jobs(params = {}, options = {})
+      req = build_request(:list_edge_packaging_jobs, params)
       req.send_request(options)
     end
 
@@ -10818,6 +12497,148 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists model bias jobs definitions that satisfy various filters.
+    #
+    # @option params [String] :endpoint_name
+    #   Name of the endpoint to monitor for model bias.
+    #
+    # @option params [String] :sort_by
+    #   Whether to sort results by the `Name` or `CreationTime` field. The
+    #   default is `CreationTime`.
+    #
+    # @option params [String] :sort_order
+    #   Whether to sort the results in `Ascending` or `Descending` order. The
+    #   default is `Descending`.
+    #
+    # @option params [String] :next_token
+    #   The token returned if the response is truncated. To retrieve the next
+    #   set of job executions, use it in the next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of model bias jobs to return in the response. The
+    #   default value is 10.
+    #
+    # @option params [String] :name_contains
+    #   Filter for model bias jobs whose name contains a specified string.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   A filter that returns only model bias jobs created before a specified
+    #   time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   A filter that returns only model bias jobs created after a specified
+    #   time.
+    #
+    # @return [Types::ListModelBiasJobDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListModelBiasJobDefinitionsResponse#job_definition_summaries #job_definition_summaries} => Array&lt;Types::MonitoringJobDefinitionSummary&gt;
+    #   * {Types::ListModelBiasJobDefinitionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_model_bias_job_definitions({
+    #     endpoint_name: "EndpointName",
+    #     sort_by: "Name", # accepts Name, CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     name_contains: "NameContains",
+    #     creation_time_before: Time.now,
+    #     creation_time_after: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_definition_summaries #=> Array
+    #   resp.job_definition_summaries[0].monitoring_job_definition_name #=> String
+    #   resp.job_definition_summaries[0].monitoring_job_definition_arn #=> String
+    #   resp.job_definition_summaries[0].creation_time #=> Time
+    #   resp.job_definition_summaries[0].endpoint_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelBiasJobDefinitions AWS API Documentation
+    #
+    # @overload list_model_bias_job_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_model_bias_job_definitions(params = {}, options = {})
+      req = build_request(:list_model_bias_job_definitions, params)
+      req.send_request(options)
+    end
+
+    # Lists model explainability job definitions that satisfy various
+    # filters.
+    #
+    # @option params [String] :endpoint_name
+    #   Name of the endpoint to monitor for model explainability.
+    #
+    # @option params [String] :sort_by
+    #   Whether to sort results by the `Name` or `CreationTime` field. The
+    #   default is `CreationTime`.
+    #
+    # @option params [String] :sort_order
+    #   Whether to sort the results in `Ascending` or `Descending` order. The
+    #   default is `Descending`.
+    #
+    # @option params [String] :next_token
+    #   The token returned if the response is truncated. To retrieve the next
+    #   set of job executions, use it in the next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of jobs to return in the response. The default
+    #   value is 10.
+    #
+    # @option params [String] :name_contains
+    #   Filter for model explainability jobs whose name contains a specified
+    #   string.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   A filter that returns only model explainability jobs created before a
+    #   specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   A filter that returns only model explainability jobs created after a
+    #   specified time.
+    #
+    # @return [Types::ListModelExplainabilityJobDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListModelExplainabilityJobDefinitionsResponse#job_definition_summaries #job_definition_summaries} => Array&lt;Types::MonitoringJobDefinitionSummary&gt;
+    #   * {Types::ListModelExplainabilityJobDefinitionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_model_explainability_job_definitions({
+    #     endpoint_name: "EndpointName",
+    #     sort_by: "Name", # accepts Name, CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     name_contains: "NameContains",
+    #     creation_time_before: Time.now,
+    #     creation_time_after: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_definition_summaries #=> Array
+    #   resp.job_definition_summaries[0].monitoring_job_definition_name #=> String
+    #   resp.job_definition_summaries[0].monitoring_job_definition_arn #=> String
+    #   resp.job_definition_summaries[0].creation_time #=> Time
+    #   resp.job_definition_summaries[0].endpoint_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelExplainabilityJobDefinitions AWS API Documentation
+    #
+    # @overload list_model_explainability_job_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_model_explainability_job_definitions(params = {}, options = {})
+      req = build_request(:list_model_explainability_job_definitions, params)
+      req.send_request(options)
+    end
+
     # Gets a list of the model groups in your AWS account.
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
@@ -10975,6 +12796,80 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Gets a list of model quality monitoring job definitions in your
+    # account.
+    #
+    # @option params [String] :endpoint_name
+    #   A filter that returns only model quality monitoring job definitions
+    #   that are associated with the specified endpoint.
+    #
+    # @option params [String] :sort_by
+    #   The field to sort results by. The default is `CreationTime`.
+    #
+    # @option params [String] :sort_order
+    #   The sort order for results. The default is `Descending`.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous `ListModelQualityJobDefinitions` request
+    #   was truncated, the response includes a `NextToken`. To retrieve the
+    #   next set of model quality monitoring job definitions, use the token in
+    #   the next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a call to
+    #   `ListModelQualityJobDefinitions`.
+    #
+    # @option params [String] :name_contains
+    #   A string in the transform job name. This filter returns only model
+    #   quality monitoring job definitions whose name contains the specified
+    #   string.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   A filter that returns only model quality monitoring job definitions
+    #   created before the specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   A filter that returns only model quality monitoring job definitions
+    #   created after the specified time.
+    #
+    # @return [Types::ListModelQualityJobDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListModelQualityJobDefinitionsResponse#job_definition_summaries #job_definition_summaries} => Array&lt;Types::MonitoringJobDefinitionSummary&gt;
+    #   * {Types::ListModelQualityJobDefinitionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_model_quality_job_definitions({
+    #     endpoint_name: "EndpointName",
+    #     sort_by: "Name", # accepts Name, CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     name_contains: "NameContains",
+    #     creation_time_before: Time.now,
+    #     creation_time_after: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_definition_summaries #=> Array
+    #   resp.job_definition_summaries[0].monitoring_job_definition_name #=> String
+    #   resp.job_definition_summaries[0].monitoring_job_definition_arn #=> String
+    #   resp.job_definition_summaries[0].creation_time #=> Time
+    #   resp.job_definition_summaries[0].endpoint_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelQualityJobDefinitions AWS API Documentation
+    #
+    # @overload list_model_quality_job_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_model_quality_job_definitions(params = {}, options = {})
+      req = build_request(:list_model_quality_job_definitions, params)
+      req.send_request(options)
+    end
+
     # Lists models created with the CreateModel API.
     #
     # @option params [String] :sort_by
@@ -11084,6 +12979,14 @@ module Aws::SageMaker
     # @option params [String] :status_equals
     #   A filter that retrieves only jobs with a specific status.
     #
+    # @option params [String] :monitoring_job_definition_name
+    #   Gets a list of the monitoring job runs of the specified monitoring job
+    #   definitions.
+    #
+    # @option params [String] :monitoring_type_equals
+    #   A filter that returns only the monitoring job runs of the specified
+    #   monitoring type.
+    #
     # @return [Types::ListMonitoringExecutionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListMonitoringExecutionsResponse#monitoring_execution_summaries #monitoring_execution_summaries} => Array&lt;Types::MonitoringExecutionSummary&gt;
@@ -11107,6 +13010,8 @@ module Aws::SageMaker
     #     last_modified_time_before: Time.now,
     #     last_modified_time_after: Time.now,
     #     status_equals: "Pending", # accepts Pending, Completed, CompletedWithViolations, InProgress, Failed, Stopping, Stopped
+    #     monitoring_job_definition_name: "MonitoringJobDefinitionName",
+    #     monitoring_type_equals: "DataQuality", # accepts DataQuality, ModelQuality, ModelBias, ModelExplainability
     #   })
     #
     # @example Response structure
@@ -11120,6 +13025,8 @@ module Aws::SageMaker
     #   resp.monitoring_execution_summaries[0].processing_job_arn #=> String
     #   resp.monitoring_execution_summaries[0].endpoint_name #=> String
     #   resp.monitoring_execution_summaries[0].failure_reason #=> String
+    #   resp.monitoring_execution_summaries[0].monitoring_job_definition_name #=> String
+    #   resp.monitoring_execution_summaries[0].monitoring_type #=> String, one of "DataQuality", "ModelQuality", "ModelBias", "ModelExplainability"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListMonitoringExecutions AWS API Documentation
@@ -11176,6 +13083,14 @@ module Aws::SageMaker
     #   A filter that returns only monitoring schedules modified before a
     #   specified time.
     #
+    # @option params [String] :monitoring_job_definition_name
+    #   Gets a list of the monitoring schedules for the specified monitoring
+    #   job definition.
+    #
+    # @option params [String] :monitoring_type_equals
+    #   A filter that returns only the monitoring schedules for the specified
+    #   monitoring type.
+    #
     # @return [Types::ListMonitoringSchedulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListMonitoringSchedulesResponse#monitoring_schedule_summaries #monitoring_schedule_summaries} => Array&lt;Types::MonitoringScheduleSummary&gt;
@@ -11197,6 +13112,8 @@ module Aws::SageMaker
     #     last_modified_time_before: Time.now,
     #     last_modified_time_after: Time.now,
     #     status_equals: "Pending", # accepts Pending, Failed, Scheduled, Stopped
+    #     monitoring_job_definition_name: "MonitoringJobDefinitionName",
+    #     monitoring_type_equals: "DataQuality", # accepts DataQuality, ModelQuality, ModelBias, ModelExplainability
     #   })
     #
     # @example Response structure
@@ -11208,6 +13125,8 @@ module Aws::SageMaker
     #   resp.monitoring_schedule_summaries[0].last_modified_time #=> Time
     #   resp.monitoring_schedule_summaries[0].monitoring_schedule_status #=> String, one of "Pending", "Failed", "Scheduled", "Stopped"
     #   resp.monitoring_schedule_summaries[0].endpoint_name #=> String
+    #   resp.monitoring_schedule_summaries[0].monitoring_job_definition_name #=> String
+    #   resp.monitoring_schedule_summaries[0].monitoring_type #=> String, one of "DataQuality", "ModelQuality", "ModelBias", "ModelExplainability"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListMonitoringSchedules AWS API Documentation
@@ -12546,6 +14465,47 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Register devices.
+    #
+    # @option params [required, String] :device_fleet_name
+    #   The name of the fleet.
+    #
+    # @option params [required, Array<Types::Device>] :devices
+    #   A list of devices to register with SageMaker Edge Manager.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags associated with devices.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_devices({
+    #     device_fleet_name: "EntityName", # required
+    #     devices: [ # required
+    #       {
+    #         device_name: "DeviceName", # required
+    #         description: "DeviceDescription",
+    #         iot_thing_name: "ThingName",
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RegisterDevices AWS API Documentation
+    #
+    # @overload register_devices(params = {})
+    # @param [Hash] params ({})
+    def register_devices(params = {}, options = {})
+      req = build_request(:register_devices, params)
+      req.send_request(options)
+    end
+
     # Renders the UI template so that you can preview the worker's
     # experience.
     #
@@ -13110,10 +15070,12 @@ module Aws::SageMaker
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_arn #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_name #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_status #=> String, one of "Pending", "Failed", "Scheduled", "Stopped"
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_type #=> String, one of "DataQuality", "ModelQuality", "ModelBias", "ModelExplainability"
     #   resp.results[0].endpoint.monitoring_schedules[0].failure_reason #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].creation_time #=> Time
     #   resp.results[0].endpoint.monitoring_schedules[0].last_modified_time #=> Time
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.schedule_config.schedule_expression #=> String
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.baseline_config.baselining_job_name #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.baseline_config.constraints_resource.s3_uri #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.baseline_config.statistics_resource.s3_uri #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs #=> Array
@@ -13121,6 +15083,12 @@ module Aws::SageMaker
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.local_path #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.s3_input_mode #=> String, one of "Pipe", "File"
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.features_attribute #=> String
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.inference_attribute #=> String
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.probability_attribute #=> String
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.probability_threshold_attribute #=> Float
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.start_time_offset #=> String
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_inputs[0].endpoint_input.end_time_offset #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs #=> Array
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs[0].s3_output.s3_uri #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs[0].s3_output.local_path #=> String
@@ -13147,6 +15115,8 @@ module Aws::SageMaker
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.network_config.vpc_config.subnets #=> Array
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.network_config.vpc_config.subnets[0] #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition.role_arn #=> String
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_job_definition_name #=> String
+    #   resp.results[0].endpoint.monitoring_schedules[0].monitoring_schedule_config.monitoring_type #=> String, one of "DataQuality", "ModelQuality", "ModelBias", "ModelExplainability"
     #   resp.results[0].endpoint.monitoring_schedules[0].endpoint_name #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].last_monitoring_execution_summary.monitoring_schedule_name #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].last_monitoring_execution_summary.scheduled_time #=> Time
@@ -13156,6 +15126,8 @@ module Aws::SageMaker
     #   resp.results[0].endpoint.monitoring_schedules[0].last_monitoring_execution_summary.processing_job_arn #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].last_monitoring_execution_summary.endpoint_name #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].last_monitoring_execution_summary.failure_reason #=> String
+    #   resp.results[0].endpoint.monitoring_schedules[0].last_monitoring_execution_summary.monitoring_job_definition_name #=> String
+    #   resp.results[0].endpoint.monitoring_schedules[0].last_monitoring_execution_summary.monitoring_type #=> String, one of "DataQuality", "ModelQuality", "ModelBias", "ModelExplainability"
     #   resp.results[0].endpoint.monitoring_schedules[0].tags #=> Array
     #   resp.results[0].endpoint.monitoring_schedules[0].tags[0].key #=> String
     #   resp.results[0].endpoint.monitoring_schedules[0].tags[0].value #=> String
@@ -13332,7 +15304,8 @@ module Aws::SageMaker
 
     # Starts a previously stopped monitoring schedule.
     #
-    # <note markdown="1"> New monitoring schedules are immediately started after creation.
+    # <note markdown="1"> By default, when you successfully create a new schedule, the status of
+    # a monitoring schedule is `scheduled`.
     #
     #  </note>
     #
@@ -13486,6 +15459,28 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def stop_compilation_job(params = {}, options = {})
       req = build_request(:stop_compilation_job, params)
+      req.send_request(options)
+    end
+
+    # Request to stop an edge packaging job.
+    #
+    # @option params [required, String] :edge_packaging_job_name
+    #   The name of the edge packaging job.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_edge_packaging_job({
+    #     edge_packaging_job_name: "EntityName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopEdgePackagingJob AWS API Documentation
+    #
+    # @overload stop_edge_packaging_job(params = {})
+    # @param [Hash] params ({})
+    def stop_edge_packaging_job(params = {}, options = {})
+      req = build_request(:stop_edge_packaging_job, params)
       req.send_request(options)
     end
 
@@ -13926,6 +15921,75 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Updates a fleet of devices.
+    #
+    # @option params [required, String] :device_fleet_name
+    #   The name of the fleet.
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of the device.
+    #
+    # @option params [String] :description
+    #   Description of the fleet.
+    #
+    # @option params [required, Types::EdgeOutputConfig] :output_config
+    #   Output configuration for storing sample data collected by the fleet.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_device_fleet({
+    #     device_fleet_name: "EntityName", # required
+    #     role_arn: "RoleArn",
+    #     description: "DeviceFleetDescription",
+    #     output_config: { # required
+    #       s3_output_location: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateDeviceFleet AWS API Documentation
+    #
+    # @overload update_device_fleet(params = {})
+    # @param [Hash] params ({})
+    def update_device_fleet(params = {}, options = {})
+      req = build_request(:update_device_fleet, params)
+      req.send_request(options)
+    end
+
+    # Updates one or more devices in a fleet.
+    #
+    # @option params [required, String] :device_fleet_name
+    #   The name of the fleet the devices belong to.
+    #
+    # @option params [required, Array<Types::Device>] :devices
+    #   List of devices to register with Edge Manager agent.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_devices({
+    #     device_fleet_name: "EntityName", # required
+    #     devices: [ # required
+    #       {
+    #         device_name: "DeviceName", # required
+    #         description: "DeviceDescription",
+    #         iot_thing_name: "ThingName",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateDevices AWS API Documentation
+    #
+    # @overload update_devices(params = {})
+    # @param [Hash] params ({})
+    def update_devices(params = {}, options = {})
+      req = build_request(:update_devices, params)
+      req.send_request(options)
+    end
+
     # Updates the default settings for new user profiles in the domain.
     #
     # @option params [required, String] :domain_id
@@ -14286,6 +16350,7 @@ module Aws::SageMaker
     #       },
     #       monitoring_job_definition: {
     #         baseline_config: {
+    #           baselining_job_name: "ProcessingJobName",
     #           constraints_resource: {
     #             s3_uri: "S3Uri",
     #           },
@@ -14300,6 +16365,12 @@ module Aws::SageMaker
     #               local_path: "ProcessingLocalPath", # required
     #               s3_input_mode: "Pipe", # accepts Pipe, File
     #               s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #               features_attribute: "String",
+    #               inference_attribute: "String",
+    #               probability_attribute: "String",
+    #               probability_threshold_attribute: 1.0,
+    #               start_time_offset: "MonitoringTimeOffsetString",
+    #               end_time_offset: "MonitoringTimeOffsetString",
     #             },
     #           },
     #         ],
@@ -14346,6 +16417,8 @@ module Aws::SageMaker
     #         },
     #         role_arn: "RoleArn", # required
     #       },
+    #       monitoring_job_definition_name: "MonitoringJobDefinitionName",
+    #       monitoring_type: "DataQuality", # accepts DataQuality, ModelQuality, ModelBias, ModelExplainability
     #     },
     #   })
     #
@@ -14626,6 +16699,65 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def update_pipeline_execution(params = {}, options = {})
       req = build_request(:update_pipeline_execution, params)
+      req.send_request(options)
+    end
+
+    # Update a model training job to request a new Debugger profiling
+    # configuration.
+    #
+    # @option params [required, String] :training_job_name
+    #   The name of a training job to update the Debugger profiling
+    #   configuration.
+    #
+    # @option params [Types::ProfilerConfigForUpdate] :profiler_config
+    #   Configuration information for Debugger system monitoring, framework
+    #   profiling, and storage paths.
+    #
+    # @option params [Array<Types::ProfilerRuleConfiguration>] :profiler_rule_configurations
+    #   Configuration information for Debugger rules for profiling system and
+    #   framework metrics.
+    #
+    # @return [Types::UpdateTrainingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTrainingJobResponse#training_job_arn #training_job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_training_job({
+    #     training_job_name: "TrainingJobName", # required
+    #     profiler_config: {
+    #       s3_output_path: "S3Uri",
+    #       profiling_interval_in_milliseconds: 1,
+    #       profiling_parameters: {
+    #         "ConfigKey" => "ConfigValue",
+    #       },
+    #       disable_profiler: false,
+    #     },
+    #     profiler_rule_configurations: [
+    #       {
+    #         rule_configuration_name: "RuleConfigurationName", # required
+    #         local_path: "DirectoryPath",
+    #         s3_output_path: "S3Uri",
+    #         rule_evaluator_image: "AlgorithmImage", # required
+    #         instance_type: "ml.t3.medium", # accepts ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #         volume_size_in_gb: 1,
+    #         rule_parameters: {
+    #           "ConfigKey" => "ConfigValue",
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.training_job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateTrainingJob AWS API Documentation
+    #
+    # @overload update_training_job(params = {})
+    # @param [Hash] params ({})
+    def update_training_job(params = {}, options = {})
+      req = build_request(:update_training_job, params)
       req.send_request(options)
     end
 
@@ -15035,7 +17167,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

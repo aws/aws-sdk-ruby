@@ -1404,6 +1404,12 @@ module Aws::QuickSight
     #               join_instruction: {
     #                 left_operand: "LogicalTableId", # required
     #                 right_operand: "LogicalTableId", # required
+    #                 left_join_key_properties: {
+    #                   unique_key: false,
+    #                 },
+    #                 right_join_key_properties: {
+    #                   unique_key: false,
+    #                 },
     #                 type: "INNER", # required, accepts INNER, OUTER, LEFT, RIGHT
     #                 on_clause: "OnClause", # required
     #               },
@@ -6183,8 +6189,8 @@ module Aws::QuickSight
     # @!attribute [rw] additional_dashboard_ids
     #   A list of one or more dashboard ids that you want to add to a
     #   session that includes anonymous authorizations. `IdentityType` must
-    #   be set to ANONYMOUS for this to work, because other other identity
-    #   types authenticate as QuickSight users. For example, if you set
+    #   be set to ANONYMOUS for this to work, because other identity types
+    #   authenticate as QuickSight users. For example, if you set
     #   "`--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
     #   identity-type ANONYMOUS`", the session can access all three
     #   dashboards.
@@ -6672,7 +6678,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Join instruction.
+    # The instructions associated with a join.
     #
     # @note When making an API call, you may pass JoinInstruction
     #   data as a hash:
@@ -6680,24 +6686,38 @@ module Aws::QuickSight
     #       {
     #         left_operand: "LogicalTableId", # required
     #         right_operand: "LogicalTableId", # required
+    #         left_join_key_properties: {
+    #           unique_key: false,
+    #         },
+    #         right_join_key_properties: {
+    #           unique_key: false,
+    #         },
     #         type: "INNER", # required, accepts INNER, OUTER, LEFT, RIGHT
     #         on_clause: "OnClause", # required
     #       }
     #
     # @!attribute [rw] left_operand
-    #   Left operand.
+    #   The operand on the left side of a join.
     #   @return [String]
     #
     # @!attribute [rw] right_operand
-    #   Right operand.
+    #   The operand on the right side of a join.
     #   @return [String]
     #
+    # @!attribute [rw] left_join_key_properties
+    #   Join key properties of the left operand.
+    #   @return [Types::JoinKeyProperties]
+    #
+    # @!attribute [rw] right_join_key_properties
+    #   Join key properties of the right operand.
+    #   @return [Types::JoinKeyProperties]
+    #
     # @!attribute [rw] type
-    #   Type.
+    #   The type of join that it is.
     #   @return [String]
     #
     # @!attribute [rw] on_clause
-    #   On Clause.
+    #   The join instructions provided in the `ON` clause of a join.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/JoinInstruction AWS API Documentation
@@ -6705,8 +6725,33 @@ module Aws::QuickSight
     class JoinInstruction < Struct.new(
       :left_operand,
       :right_operand,
+      :left_join_key_properties,
+      :right_join_key_properties,
       :type,
       :on_clause)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Properties associated with the columns participating in a join.
+    #
+    # @note When making an API call, you may pass JoinKeyProperties
+    #   data as a hash:
+    #
+    #       {
+    #         unique_key: false,
+    #       }
+    #
+    # @!attribute [rw] unique_key
+    #   Indicates that a row in a table is uniquely identified by the
+    #   columns in a join key. This is used by QuickSight to optimize query
+    #   performance.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/JoinKeyProperties AWS API Documentation
+    #
+    class JoinKeyProperties < Struct.new(
+      :unique_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8094,6 +8139,12 @@ module Aws::QuickSight
     #           join_instruction: {
     #             left_operand: "LogicalTableId", # required
     #             right_operand: "LogicalTableId", # required
+    #             left_join_key_properties: {
+    #               unique_key: false,
+    #             },
+    #             right_join_key_properties: {
+    #               unique_key: false,
+    #             },
     #             type: "INNER", # required, accepts INNER, OUTER, LEFT, RIGHT
     #             on_clause: "OnClause", # required
     #           },
@@ -8134,6 +8185,12 @@ module Aws::QuickSight
     #         join_instruction: {
     #           left_operand: "LogicalTableId", # required
     #           right_operand: "LogicalTableId", # required
+    #           left_join_key_properties: {
+    #             unique_key: false,
+    #           },
+    #           right_join_key_properties: {
+    #             unique_key: false,
+    #           },
     #           type: "INNER", # required, accepts INNER, OUTER, LEFT, RIGHT
     #           on_clause: "OnClause", # required
     #         },
@@ -11646,6 +11703,12 @@ module Aws::QuickSight
     #               join_instruction: {
     #                 left_operand: "LogicalTableId", # required
     #                 right_operand: "LogicalTableId", # required
+    #                 left_join_key_properties: {
+    #                   unique_key: false,
+    #                 },
+    #                 right_join_key_properties: {
+    #                   unique_key: false,
+    #                 },
     #                 type: "INNER", # required, accepts INNER, OUTER, LEFT, RIGHT
     #                 on_clause: "OnClause", # required
     #               },

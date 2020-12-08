@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2020-12-08)
+------------------
+
+* Feature - This feature helps you monitor model performance characteristics such as accuracy, identify undesired bias in your ML models, and explain model decisions better with explainability drift detection.
+
 1.73.0 (2020-12-01)
 ------------------
 

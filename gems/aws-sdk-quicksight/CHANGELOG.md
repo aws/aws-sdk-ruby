@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-12-08)
+------------------
+
+* Feature - Added new parameters for join optimization.
+
 1.37.0 (2020-11-24)
 ------------------
 

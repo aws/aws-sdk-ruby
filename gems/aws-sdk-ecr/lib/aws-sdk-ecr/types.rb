@@ -440,6 +440,29 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRegistryPolicyRequest AWS API Documentation
+    #
+    class DeleteRegistryPolicyRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_text
+    #   The contents of the registry permissions policy that was deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRegistryPolicyResponse AWS API Documentation
+    #
+    class DeleteRegistryPolicyResponse < Struct.new(
+      :registry_id,
+      :policy_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteRepositoryPolicyRequest
     #   data as a hash:
     #
@@ -750,6 +773,29 @@ module Aws::ECR
     class DescribeImagesResponse < Struct.new(
       :image_details,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRegistryRequest AWS API Documentation
+    #
+    class DescribeRegistryRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] registry_id
+    #   The ID of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_configuration
+    #   The replication configuration for the registry.
+    #   @return [Types::ReplicationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRegistryResponse AWS API Documentation
+    #
+    class DescribeRegistryResponse < Struct.new(
+      :registry_id,
+      :replication_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1175,6 +1221,29 @@ module Aws::ECR
       :repository_name,
       :lifecycle_policy_text,
       :last_evaluated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetRegistryPolicyRequest AWS API Documentation
+    #
+    class GetRegistryPolicyRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] registry_id
+    #   The ID of the registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_text
+    #   The JSON text of the permissions policy for a registry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetRegistryPolicyResponse AWS API Documentation
+    #
+    class GetRegistryPolicyResponse < Struct.new(
+      :registry_id,
+      :policy_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2362,6 +2431,91 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutRegistryPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         policy_text: "RegistryPolicyText", # required
+    #       }
+    #
+    # @!attribute [rw] policy_text
+    #   The JSON policy text to apply to your registry. The policy text
+    #   follows the same format as IAM policy text. For more information,
+    #   see [Registry permissions][1] in the *Amazon Elastic Container
+    #   Registry User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutRegistryPolicyRequest AWS API Documentation
+    #
+    class PutRegistryPolicyRequest < Struct.new(
+      :policy_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_text
+    #   The JSON policy text for your registry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutRegistryPolicyResponse AWS API Documentation
+    #
+    class PutRegistryPolicyResponse < Struct.new(
+      :registry_id,
+      :policy_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutReplicationConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         replication_configuration: { # required
+    #           rules: [ # required
+    #             {
+    #               destinations: [ # required
+    #                 {
+    #                   region: "Region", # required
+    #                   registry_id: "RegistryId", # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] replication_configuration
+    #   An object representing the replication configuration for a registry.
+    #   @return [Types::ReplicationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutReplicationConfigurationRequest AWS API Documentation
+    #
+    class PutReplicationConfigurationRequest < Struct.new(
+      :replication_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_configuration
+    #   The contents of the replication configuration for the registry.
+    #   @return [Types::ReplicationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutReplicationConfigurationResponse AWS API Documentation
+    #
+    class PutReplicationConfigurationResponse < Struct.new(
+      :replication_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The manifest list is referencing an image that does not exist.
     #
     # @!attribute [rw] message
@@ -2371,6 +2525,110 @@ module Aws::ECR
     #
     class ReferencedImagesNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The registry doesn't have an associated registry policy.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/RegistryPolicyNotFoundException AWS API Documentation
+    #
+    class RegistryPolicyNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The replication configuration for a registry.
+    #
+    # @note When making an API call, you may pass ReplicationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         rules: [ # required
+    #           {
+    #             destinations: [ # required
+    #               {
+    #                 region: "Region", # required
+    #                 registry_id: "RegistryId", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] rules
+    #   An array of objects representing the replication rules for a
+    #   replication configuration. A replication configuration may contain
+    #   only one replication rule but the rule may contain one or more
+    #   replication destinations.
+    #   @return [Array<Types::ReplicationRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ReplicationConfiguration AWS API Documentation
+    #
+    class ReplicationConfiguration < Struct.new(
+      :rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array of objects representing the details of a replication
+    # destination.
+    #
+    # @note When making an API call, you may pass ReplicationDestination
+    #   data as a hash:
+    #
+    #       {
+    #         region: "Region", # required
+    #         registry_id: "RegistryId", # required
+    #       }
+    #
+    # @!attribute [rw] region
+    #   A Region to replicate to.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_id
+    #   The account ID of the destination registry to replicate to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ReplicationDestination AWS API Documentation
+    #
+    class ReplicationDestination < Struct.new(
+      :region,
+      :registry_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array of objects representing the replication destinations for a
+    # replication configuration. A replication configuration may contain
+    # only one replication rule but the rule may contain one or more
+    # replication destinations.
+    #
+    # @note When making an API call, you may pass ReplicationRule
+    #   data as a hash:
+    #
+    #       {
+    #         destinations: [ # required
+    #           {
+    #             region: "Region", # required
+    #             registry_id: "RegistryId", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] destinations
+    #   An array of objects representing the details of a replication
+    #   destination.
+    #   @return [Array<Types::ReplicationDestination>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ReplicationRule AWS API Documentation
+    #
+    class ReplicationRule < Struct.new(
+      :destinations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2937,6 +3195,19 @@ module Aws::ECR
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UploadNotFoundException AWS API Documentation
     #
     class UploadNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # There was an exception validating this request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure

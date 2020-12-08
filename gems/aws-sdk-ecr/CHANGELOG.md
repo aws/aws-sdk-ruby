@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-12-08)
+------------------
+
+* Feature - This release adds support for configuring cross-region and cross-account replication of your Amazon ECR images.
+
 1.39.0 (2020-09-30)
 ------------------
 

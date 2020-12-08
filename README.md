@@ -287,6 +287,7 @@ RubyGems.org page under "LINKS" section.
 | AWS App Mesh                                          | Aws::AppMesh                         | aws-sdk-appmesh                         | 2019-01-25  |
 | AWS AppSync                                           | Aws::AppSync                         | aws-sdk-appsync                         | 2017-07-25  |
 | AWS Application Discovery Service                     | Aws::ApplicationDiscoveryService     | aws-sdk-applicationdiscoveryservice     | 2015-11-01  |
+| AWS Audit Manager                                     | Aws::AuditManager                    | aws-sdk-auditmanager                    | 2017-07-25  |
 | AWS Auto Scaling Plans                                | Aws::AutoScalingPlans                | aws-sdk-autoscalingplans                | 2018-01-06  |
 | AWS Backup                                            | Aws::Backup                          | aws-sdk-backup                          | 2018-11-15  |
 | AWS Batch                                             | Aws::Batch                           | aws-sdk-batch                           | 2016-08-10  |
@@ -433,6 +434,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon DynamoDB Streams                               | Aws::DynamoDBStreams                 | aws-sdk-dynamodbstreams                 | 2012-08-10  |
 | Amazon EC2 Container Registry                         | Aws::ECR                             | aws-sdk-ecr                             | 2015-09-21  |
 | Amazon EC2 Container Service                          | Aws::ECS                             | aws-sdk-ecs                             | 2014-11-13  |
+| Amazon EMR Containers                                 | Aws::EMRContainers                   | aws-sdk-emrcontainers                   | 2020-10-01  |
 | Amazon ElastiCache                                    | Aws::ElastiCache                     | aws-sdk-elasticache                     | 2015-02-02  |
 | Amazon Elastic  Inference                             | Aws::ElasticInference                | aws-sdk-elasticinference                | 2017-07-25  |
 | Amazon Elastic Block Store                            | Aws::EBS                             | aws-sdk-ebs                             | 2019-11-02  |
@@ -451,6 +453,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon GameLift                                       | Aws::GameLift                        | aws-sdk-gamelift                        | 2015-10-01  |
 | Amazon Glacier                                        | Aws::Glacier                         | aws-sdk-glacier                         | 2012-06-01  |
 | Amazon GuardDuty                                      | Aws::GuardDuty                       | aws-sdk-guardduty                       | 2017-11-28  |
+| Amazon HealthLake                                     | Aws::HealthLake                      | aws-sdk-healthlake                      | 2017-07-01  |
 | Amazon Honeycode                                      | Aws::Honeycode                       | aws-sdk-honeycode                       | 2020-03-01  |
 | Amazon Import/Export Snowball                         | Aws::Snowball                        | aws-sdk-snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Aws::Inspector                       | aws-sdk-inspector                       | 2016-02-16  |
@@ -493,6 +496,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon SageMaker Feature Store Runtime                | Aws::SageMakerFeatureStoreRuntime    | aws-sdk-sagemakerfeaturestoreruntime    | 2020-07-01  |
 | Amazon SageMaker Runtime                              | Aws::SageMakerRuntime                | aws-sdk-sagemakerruntime                | 2017-05-13  |
 | Amazon SageMaker Service                              | Aws::SageMaker                       | aws-sdk-sagemaker                       | 2017-07-24  |
+| Amazon Sagemaker Edge Manager                         | Aws::SagemakerEdgeManager            | aws-sdk-sagemakeredgemanager            | 2020-09-23  |
 | Amazon Simple Email Service                           | Aws::SES                             | aws-sdk-ses                             | 2010-12-01  |
 | Amazon Simple Email Service                           | Aws::SESV2                           | aws-sdk-sesv2                           | 2019-09-27  |
 | Amazon Simple Notification Service                    | Aws::SNS                             | aws-sdk-sns                             | 2010-03-31  |

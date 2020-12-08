@@ -344,9 +344,9 @@ module Aws::SageMakerRuntime
     #
     # A customer's model containers must respond to requests within 60
     # seconds. The model itself can have a maximum processing time of 60
-    # seconds before responding to the /invocations. If your model is going
-    # to take 50-60 seconds of processing time, the SDK socket timeout
-    # should be set to be 70 seconds.
+    # seconds before responding to invocations. If your model is going to
+    # take 50-60 seconds of processing time, the SDK socket timeout should
+    # be set to be 70 seconds.
     #
     # <note markdown="1"> Endpoints are scoped to an individual account, and are not public. The
     # URL does not contain the account ID, but Amazon SageMaker determines
@@ -358,7 +358,7 @@ module Aws::SageMakerRuntime
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html
-    # [2]: http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint that you specified when you created the
@@ -395,6 +395,13 @@ module Aws::SageMakerRuntime
     #   was programmed to process. The value must consist of no more than 1024
     #   visible US-ASCII characters as specified in [Section 3.3.6. Field
     #   Value Components][1] of the Hypertext Transfer Protocol (HTTP/1.1).
+    #
+    #   The code in your model is responsible for setting or updating any
+    #   custom attributes in the response. If your code does not set this
+    #   value in the response, an empty value is returned. For example, if a
+    #   custom attribute represents the trace ID, your model can prepend the
+    #   custom attribute with `Trace ID:` in your post-processing function.
+    #
     #   This feature is currently supported in the AWS SDKs but not in the
     #   Amazon SageMaker Python SDK.
     #
@@ -411,6 +418,22 @@ module Aws::SageMakerRuntime
     #   invoking an endpoint that is running two or more variants. Note that
     #   this parameter overrides the default behavior for the endpoint, which
     #   is to distribute the invocation traffic based on the variant weights.
+    #
+    #   For information about how to use variant targeting to perform a/b
+    #   testing, see [Test models in production][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-ab-testing.html
+    #
+    # @option params [String] :inference_id
+    #   If you provide a value, it is added to the captured data when you
+    #   enable data capture on the endpoint. For information about data
+    #   capture, see [Capture Data][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html
     #
     # @return [Types::InvokeEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -429,6 +452,7 @@ module Aws::SageMakerRuntime
     #     custom_attributes: "CustomAttributesHeader",
     #     target_model: "TargetModelHeader",
     #     target_variant: "TargetVariantHeader",
+    #     inference_id: "InferenceId",
     #   })
     #
     # @example Response structure
@@ -460,7 +484,7 @@ module Aws::SageMakerRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

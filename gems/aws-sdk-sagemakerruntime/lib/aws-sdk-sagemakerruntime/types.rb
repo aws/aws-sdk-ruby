@@ -34,6 +34,7 @@ module Aws::SageMakerRuntime
     #         custom_attributes: "CustomAttributesHeader",
     #         target_model: "TargetModelHeader",
     #         target_variant: "TargetVariantHeader",
+    #         inference_id: "InferenceId",
     #       }
     #
     # @!attribute [rw] endpoint_name
@@ -75,8 +76,16 @@ module Aws::SageMakerRuntime
     #   was programmed to process. The value must consist of no more than
     #   1024 visible US-ASCII characters as specified in [Section 3.3.6.
     #   Field Value Components][1] of the Hypertext Transfer Protocol
-    #   (HTTP/1.1). This feature is currently supported in the AWS SDKs but
-    #   not in the Amazon SageMaker Python SDK.
+    #   (HTTP/1.1).
+    #
+    #   The code in your model is responsible for setting or updating any
+    #   custom attributes in the response. If your code does not set this
+    #   value in the response, an empty value is returned. For example, if a
+    #   custom attribute represents the trace ID, your model can prepend the
+    #   custom attribute with `Trace ID:` in your post-processing function.
+    #
+    #   This feature is currently supported in the AWS SDKs but not in the
+    #   Amazon SageMaker Python SDK.
     #
     #
     #
@@ -94,6 +103,23 @@ module Aws::SageMakerRuntime
     #   this parameter overrides the default behavior for the endpoint,
     #   which is to distribute the invocation traffic based on the variant
     #   weights.
+    #
+    #   For information about how to use variant targeting to perform a/b
+    #   testing, see [Test models in production][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-ab-testing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_id
+    #   If you provide a value, it is added to the captured data when you
+    #   enable data capture on the endpoint. For information about data
+    #   capture, see [Capture Data][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointInput AWS API Documentation
@@ -105,7 +131,8 @@ module Aws::SageMakerRuntime
       :accept,
       :custom_attributes,
       :target_model,
-      :target_variant)
+      :target_variant,
+      :inference_id)
       SENSITIVE = [:body, :custom_attributes]
       include Aws::Structure
     end
@@ -141,6 +168,12 @@ module Aws::SageMakerRuntime
     #   Protocol (HTTP/1.1). If the customer wants the custom attribute
     #   returned, the model must set the custom attribute to be included on
     #   the way back.
+    #
+    #   The code in your model is responsible for setting or updating any
+    #   custom attributes in the response. If your code does not set this
+    #   value in the response, an empty value is returned. For example, if a
+    #   custom attribute represents the trace ID, your model can prepend the
+    #   custom attribute with `Trace ID:` in your post-processing function.
     #
     #   This feature is currently supported in the AWS SDKs but not in the
     #   Amazon SageMaker Python SDK.

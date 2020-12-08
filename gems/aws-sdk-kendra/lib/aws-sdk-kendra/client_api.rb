@@ -127,6 +127,9 @@ module Aws::Kendra
     Duration = Shapes::StringShape.new(name: 'Duration')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ExcludeMimeTypesList = Shapes::ListShape.new(name: 'ExcludeMimeTypesList')
+    ExcludeSharedDrivesList = Shapes::ListShape.new(name: 'ExcludeSharedDrivesList')
+    ExcludeUserAccountsList = Shapes::ListShape.new(name: 'ExcludeUserAccountsList')
     Facet = Shapes::StructureShape.new(name: 'Facet')
     FacetList = Shapes::ListShape.new(name: 'FacetList')
     FacetResult = Shapes::StructureShape.new(name: 'FacetResult')
@@ -138,6 +141,8 @@ module Aws::Kendra
     FaqStatus = Shapes::StringShape.new(name: 'FaqStatus')
     FaqSummary = Shapes::StructureShape.new(name: 'FaqSummary')
     FaqSummaryItems = Shapes::ListShape.new(name: 'FaqSummaryItems')
+    FeedbackToken = Shapes::StringShape.new(name: 'FeedbackToken')
+    GoogleDriveConfiguration = Shapes::StructureShape.new(name: 'GoogleDriveConfiguration')
     GroupAttributeField = Shapes::StringShape.new(name: 'GroupAttributeField')
     Highlight = Shapes::StructureShape.new(name: 'Highlight')
     HighlightList = Shapes::ListShape.new(name: 'HighlightList')
@@ -176,6 +181,7 @@ module Aws::Kendra
     MaxResultsIntegerForListFaqsRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListFaqsRequest')
     MaxResultsIntegerForListIndicesRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListIndicesRequest')
     MetricValue = Shapes::StringShape.new(name: 'MetricValue')
+    MimeType = Shapes::StringShape.new(name: 'MimeType')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OneDriveConfiguration = Shapes::StructureShape.new(name: 'OneDriveConfiguration')
     OneDriveUser = Shapes::StringShape.new(name: 'OneDriveUser')
@@ -241,6 +247,7 @@ module Aws::Kendra
     SharePointConfiguration = Shapes::StructureShape.new(name: 'SharePointConfiguration')
     SharePointUrlList = Shapes::ListShape.new(name: 'SharePointUrlList')
     SharePointVersion = Shapes::StringShape.new(name: 'SharePointVersion')
+    SharedDriveId = Shapes::StringShape.new(name: 'SharedDriveId')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     SortingConfiguration = Shapes::StructureShape.new(name: 'SortingConfiguration')
     SqlConfiguration = Shapes::StructureShape.new(name: 'SqlConfiguration')
@@ -273,6 +280,7 @@ module Aws::Kendra
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
     UpdateIndexRequest = Shapes::StructureShape.new(name: 'UpdateIndexRequest')
     Url = Shapes::StringShape.new(name: 'Url')
+    UserAccount = Shapes::StringShape.new(name: 'UserAccount')
     UserContext = Shapes::StructureShape.new(name: 'UserContext')
     UserContextPolicy = Shapes::StringShape.new(name: 'UserContextPolicy')
     UserNameAttributeField = Shapes::StringShape.new(name: 'UserNameAttributeField')
@@ -281,6 +289,7 @@ module Aws::Kendra
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValueImportanceMap = Shapes::MapShape.new(name: 'ValueImportanceMap')
     ValueImportanceMapKey = Shapes::StringShape.new(name: 'ValueImportanceMapKey')
+    VisitorId = Shapes::StringShape.new(name: 'VisitorId')
     VpcSecurityGroupId = Shapes::StringShape.new(name: 'VpcSecurityGroupId')
 
     AccessControlListConfiguration.add_member(:key_path, Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "KeyPath"))
@@ -482,6 +491,7 @@ module Aws::Kendra
     DataSourceConfiguration.add_member(:one_drive_configuration, Shapes::ShapeRef.new(shape: OneDriveConfiguration, location_name: "OneDriveConfiguration"))
     DataSourceConfiguration.add_member(:service_now_configuration, Shapes::ShapeRef.new(shape: ServiceNowConfiguration, location_name: "ServiceNowConfiguration"))
     DataSourceConfiguration.add_member(:confluence_configuration, Shapes::ShapeRef.new(shape: ConfluenceConfiguration, location_name: "ConfluenceConfiguration"))
+    DataSourceConfiguration.add_member(:google_drive_configuration, Shapes::ShapeRef.new(shape: GoogleDriveConfiguration, location_name: "GoogleDriveConfiguration"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
     DataSourceInclusionsExclusionsStrings.member = Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStringsMember)
@@ -650,6 +660,12 @@ module Aws::Kendra
     DocumentsMetadataConfiguration.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "S3Prefix"))
     DocumentsMetadataConfiguration.struct_class = Types::DocumentsMetadataConfiguration
 
+    ExcludeMimeTypesList.member = Shapes::ShapeRef.new(shape: MimeType)
+
+    ExcludeSharedDrivesList.member = Shapes::ShapeRef.new(shape: SharedDriveId)
+
+    ExcludeUserAccountsList.member = Shapes::ShapeRef.new(shape: UserAccount)
+
     Facet.add_member(:document_attribute_key, Shapes::ShapeRef.new(shape: DocumentAttributeKey, location_name: "DocumentAttributeKey"))
     Facet.struct_class = Types::Facet
 
@@ -674,6 +690,15 @@ module Aws::Kendra
     FaqSummary.struct_class = Types::FaqSummary
 
     FaqSummaryItems.member = Shapes::ShapeRef.new(shape: FaqSummary)
+
+    GoogleDriveConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
+    GoogleDriveConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
+    GoogleDriveConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
+    GoogleDriveConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
+    GoogleDriveConfiguration.add_member(:exclude_mime_types, Shapes::ShapeRef.new(shape: ExcludeMimeTypesList, location_name: "ExcludeMimeTypes"))
+    GoogleDriveConfiguration.add_member(:exclude_user_accounts, Shapes::ShapeRef.new(shape: ExcludeUserAccountsList, location_name: "ExcludeUserAccounts"))
+    GoogleDriveConfiguration.add_member(:exclude_shared_drives, Shapes::ShapeRef.new(shape: ExcludeSharedDrivesList, location_name: "ExcludeSharedDrives"))
+    GoogleDriveConfiguration.struct_class = Types::GoogleDriveConfiguration
 
     Highlight.add_member(:begin_offset, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "BeginOffset"))
     Highlight.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "EndOffset"))
@@ -788,6 +813,7 @@ module Aws::Kendra
     QueryRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: Integer, location_name: "PageSize"))
     QueryRequest.add_member(:sorting_configuration, Shapes::ShapeRef.new(shape: SortingConfiguration, location_name: "SortingConfiguration"))
     QueryRequest.add_member(:user_context, Shapes::ShapeRef.new(shape: UserContext, location_name: "UserContext"))
+    QueryRequest.add_member(:visitor_id, Shapes::ShapeRef.new(shape: VisitorId, location_name: "VisitorId"))
     QueryRequest.struct_class = Types::QueryRequest
 
     QueryResult.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "QueryId"))
@@ -805,6 +831,7 @@ module Aws::Kendra
     QueryResultItem.add_member(:document_uri, Shapes::ShapeRef.new(shape: Url, location_name: "DocumentURI"))
     QueryResultItem.add_member(:document_attributes, Shapes::ShapeRef.new(shape: DocumentAttributeList, location_name: "DocumentAttributes"))
     QueryResultItem.add_member(:score_attributes, Shapes::ShapeRef.new(shape: ScoreAttributes, location_name: "ScoreAttributes"))
+    QueryResultItem.add_member(:feedback_token, Shapes::ShapeRef.new(shape: FeedbackToken, location_name: "FeedbackToken"))
     QueryResultItem.struct_class = Types::QueryResultItem
 
     QueryResultItemList.member = Shapes::ShapeRef.new(shape: QueryResultItem)

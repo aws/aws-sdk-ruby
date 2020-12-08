@@ -566,7 +566,7 @@ module Aws::Kendra
     #   resp = client.create_data_source({
     #     name: "DataSourceName", # required
     #     index_id: "IndexId", # required
-    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE
+    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE
     #     configuration: {
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
@@ -811,6 +811,21 @@ module Aws::Kendra
     #         },
     #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #       },
+    #       google_drive_configuration: {
+    #         secret_arn: "SecretArn", # required
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         exclude_mime_types: ["MimeType"],
+    #         exclude_user_accounts: ["UserAccount"],
+    #         exclude_shared_drives: ["SharedDriveId"],
     #       },
     #     },
     #     description: "Description",
@@ -1167,7 +1182,7 @@ module Aws::Kendra
     #   resp.id #=> String
     #   resp.index_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE"
+    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE"
     #   resp.configuration.s3_configuration.bucket_name #=> String
     #   resp.configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.configuration.s3_configuration.inclusion_prefixes[0] #=> String
@@ -1336,6 +1351,21 @@ module Aws::Kendra
     #   resp.configuration.confluence_configuration.inclusion_patterns[0] #=> String
     #   resp.configuration.confluence_configuration.exclusion_patterns #=> Array
     #   resp.configuration.confluence_configuration.exclusion_patterns[0] #=> String
+    #   resp.configuration.google_drive_configuration.secret_arn #=> String
+    #   resp.configuration.google_drive_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.google_drive_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.google_drive_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.google_drive_configuration.exclusion_patterns[0] #=> String
+    #   resp.configuration.google_drive_configuration.field_mappings #=> Array
+    #   resp.configuration.google_drive_configuration.field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.google_drive_configuration.field_mappings[0].date_field_format #=> String
+    #   resp.configuration.google_drive_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.google_drive_configuration.exclude_mime_types #=> Array
+    #   resp.configuration.google_drive_configuration.exclude_mime_types[0] #=> String
+    #   resp.configuration.google_drive_configuration.exclude_user_accounts #=> Array
+    #   resp.configuration.google_drive_configuration.exclude_user_accounts[0] #=> String
+    #   resp.configuration.google_drive_configuration.exclude_shared_drives #=> Array
+    #   resp.configuration.google_drive_configuration.exclude_shared_drives[0] #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.description #=> String
@@ -1592,7 +1622,7 @@ module Aws::Kendra
     #   resp.summary_items #=> Array
     #   resp.summary_items[0].name #=> String
     #   resp.summary_items[0].id #=> String
-    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE"
+    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE"
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
@@ -1807,6 +1837,12 @@ module Aws::Kendra
     # @option params [Types::UserContext] :user_context
     #   The user context token.
     #
+    # @option params [String] :visitor_id
+    #   Provides an identifier for a specific user. The `VisitorId` should be
+    #   a unique identifier, such as a GUID. Don't use personally
+    #   identifiable information, such as the user's email address, as the
+    #   `VisitorId`.
+    #
     # @return [Types::QueryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::QueryResult#query_id #query_id} => String
@@ -1913,6 +1949,7 @@ module Aws::Kendra
     #     user_context: {
     #       token: "Token",
     #     },
+    #     visitor_id: "VisitorId",
     #   })
     #
     # @example Response structure
@@ -1949,6 +1986,7 @@ module Aws::Kendra
     #   resp.result_items[0].document_attributes[0].value.long_value #=> Integer
     #   resp.result_items[0].document_attributes[0].value.date_value #=> Time
     #   resp.result_items[0].score_attributes.score_confidence #=> String, one of "VERY_HIGH", "HIGH", "MEDIUM", "LOW"
+    #   resp.result_items[0].feedback_token #=> String
     #   resp.facet_results #=> Array
     #   resp.facet_results[0].document_attribute_key #=> String
     #   resp.facet_results[0].document_attribute_value_type #=> String, one of "STRING_VALUE", "STRING_LIST_VALUE", "LONG_VALUE", "DATE_VALUE"
@@ -2422,6 +2460,21 @@ module Aws::Kendra
     #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #       },
+    #       google_drive_configuration: {
+    #         secret_arn: "SecretArn", # required
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         exclude_mime_types: ["MimeType"],
+    #         exclude_user_accounts: ["UserAccount"],
+    #         exclude_shared_drives: ["SharedDriveId"],
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -2545,7 +2598,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
