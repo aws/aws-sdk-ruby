@@ -33,13 +33,15 @@ jobs:
       - name: Install gems
         run: bundle install --gemfile=${{ matrix.gemfile }}
 
-      - env:
-        PURE_RUBY: 1
+      - name: 'set PURE_RUBY'
+        env:
+          PURE_RUBY: 1
         if: ${{ matrix.env }} == "pure_ruby"
 
-      - env:
-        KITCHEN_SINK: 1
+      - name: 'set KITCHEN_SINK'
+        env:
+          KITCHEN_SINK: 1
         if: ${{ matrix.env }} == "kitchen_sink"
-        
+
       - name: Test
         run: BUNDLE_GEMFILE=${{ matrix.gemfile }} bundle exec rake
