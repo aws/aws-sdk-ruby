@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: [1.9.3, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, jruby-9.1, jruby-9.2]
+        env: [pure_ruby, kitchen_sink]
+        exclude:
+          - ruby: jruby-9.1
+            env: kitchen_sink
+          - ruby: jruby-9.2
+            env: kitchen_sink
+
+    steps:
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+
+      - uses: actions/checkout@v2
+      - name: Install gems
+        run: bundle install --gemfile=${{ matrix.gemfile }}
+
+      - name: Test
+        env:
+          PURE_RUBY: 1
+          if: ${{ matrix.env }} == "pure_ruby"
+        env:
+          KITCHEN_SINK: 1
+          if: ${{ matrix.env }} == "kitchen_sink"
+        run: BUNDLE_GEMFILE=${{ matrix.gemfile }} bundle exec rake
