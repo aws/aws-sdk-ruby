@@ -30,20 +30,24 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
 
       - uses: actions/checkout@v2
-      - name: Install gems
-        run: bundle install --gemfile=${{ matrix.gemfile }}
 
       - name: 'set PURE_RUBY'
+        if: ${{ matrix.env }} == "pure_ruby"
         env:
           PURE_RUBY: 1
         run: echo $PURE_RUBY
-        if: ${{ matrix.env }} == "pure_ruby"
 
       - name: 'set KITCHEN_SINK'
+        if: ${{ matrix.env }} == "kitchen_sink"
         env:
           KITCHEN_SINK: 1
         run: echo $KITCHEN_SINK
-        if: ${{ matrix.env }} == "kitchen_sink"
 
-      - name: Test
-        run: BUNDLE_GEMFILE=${{ matrix.gemfile }} bundle exec rake
+      - name: Install gems
+        run: bundle install
+
+      - name: SDK Build
+        run: bundle exec rake build
+
+      - name: Tests
+        run: bundle exec rake test:spec
