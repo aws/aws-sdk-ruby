@@ -31,21 +31,13 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - name: 'set PURE_RUBY'
-        if: ${{ matrix.env == 'pure_ruby' }}
-        env:
-          PURE_RUBY: 1
-        run: echo $PURE_RUBY
-
-      - name: 'set KITCHEN_SINK'
-        if: ${{ matrix.env == 'kitchen_sink' }}
-        env:
-          KITCHEN_SINK: 1
-        run: echo $KITCHEN_SINK
+      - name: 'set ENV'
+        run: echo "${{ matrix.ruby }}=1" >> $GITHUB_ENV
 
       - name: Install gems
         run: |
           echo PURE_RUBY=$PURE_RUBY KITCHEN_SINK=$KITCHEN_SINK
+          bundle config set without 'docs repl'
           bundle install
 
       - name: SDK Build
