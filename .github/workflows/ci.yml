@@ -11,11 +11,11 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-18.04
     strategy:
       fail-fast: false
       matrix:
-        ruby: [1.9.3, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, jruby-9.1, jruby-9.2]
+        ruby: [2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, jruby-9.1, jruby-9.2]
         env: [pure_ruby, kitchen_sink]
         exclude:
           - ruby: jruby-9.1
@@ -44,7 +44,9 @@ jobs:
         run: echo $KITCHEN_SINK
 
       - name: Install gems
-        run: bundle install
+        run: |
+        echo PURE_RUBY=$PURE_RUBY KITCHEN_SINK=$KITCHEN_SINK
+        bundle install
 
       - name: SDK Build
         run: bundle exec rake build
