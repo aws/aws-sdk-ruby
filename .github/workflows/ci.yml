@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: 'set ENV'
-        run: echo "${{ matrix.ruby }}=1" >> $GITHUB_ENV
+        run: echo "${{ matrix.env }}=1" >> $GITHUB_ENV
 
       - name: Install gems
         run: |
