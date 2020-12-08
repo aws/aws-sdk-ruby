@@ -36,11 +36,13 @@ jobs:
       - name: 'set PURE_RUBY'
         env:
           PURE_RUBY: 1
+        run: echo $PURE_RUBY
         if: ${{ matrix.env }} == "pure_ruby"
 
       - name: 'set KITCHEN_SINK'
         env:
           KITCHEN_SINK: 1
+        run: echo $KITCHEN_SINK
         if: ${{ matrix.env }} == "kitchen_sink"
 
       - name: Test
