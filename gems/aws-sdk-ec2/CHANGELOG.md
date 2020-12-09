@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.215.0 (2020-12-09)
+------------------
+
+* Feature - This release adds support for G4ad instances powered by AMD Radeon Pro V520 GPUs and AMD 2nd Generation EPYC processors
+
 1.214.0 (2020-12-04)
 ------------------
 

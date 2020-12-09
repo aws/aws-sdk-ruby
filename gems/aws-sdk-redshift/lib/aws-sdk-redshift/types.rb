@@ -705,6 +705,10 @@ module Aws::Redshift
     #   * ResizeType: Returns ClassicResize
     #   @return [Types::ResizeInfo]
     #
+    # @!attribute [rw] availability_zone_relocation_status
+    #   Describes the status of the Availability Zone relocation operation.
+    #   @return [String]
+    #
     # @!attribute [rw] cluster_namespace_arn
     #   The namespace Amazon Resource Name (ARN) of the cluster.
     #   @return [String]
@@ -758,6 +762,7 @@ module Aws::Redshift
       :expected_next_snapshot_schedule_time_status,
       :next_maintenance_window_start_time,
       :resize_info,
+      :availability_zone_relocation_status,
       :cluster_namespace_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -1621,6 +1626,7 @@ module Aws::Redshift
     #         iam_roles: ["String"],
     #         maintenance_track_name: "String",
     #         snapshot_schedule_identifier: "String",
+    #         availability_zone_relocation: false,
     #       }
     #
     # @!attribute [rw] db_name
@@ -1689,8 +1695,8 @@ module Aws::Redshift
     #   Redshift Cluster Management Guide*.
     #
     #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `dc1.large` \|
-    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.4xlarge` \|
-    #   `ra3.16xlarge`
+    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.xlplus` \|
+    #   `ra3.4xlarge` \| `ra3.16xlarge`
     #
     #
     #
@@ -1974,6 +1980,11 @@ module Aws::Redshift
     #   A unique identifier for the snapshot schedule.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_relocation
+    #   The option to enable relocation for an Amazon Redshift cluster
+    #   between Availability Zones after the cluster is created.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterMessage AWS API Documentation
     #
     class CreateClusterMessage < Struct.new(
@@ -2006,7 +2017,8 @@ module Aws::Redshift
       :additional_info,
       :iam_roles,
       :maintenance_track_name,
-      :snapshot_schedule_identifier)
+      :snapshot_schedule_identifier,
+      :availability_zone_relocation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5441,11 +5453,16 @@ module Aws::Redshift
     #   The port that the database engine is listening on.
     #   @return [Integer]
     #
+    # @!attribute [rw] vpc_endpoints
+    #   Describes a connection endpoint.
+    #   @return [Array<Types::SpartaProxyVpcEndpoint>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
       :address,
-      :port)
+      :port,
+      :vpc_endpoints)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6569,6 +6586,9 @@ module Aws::Redshift
     #         maintenance_track_name: "String",
     #         encrypted: false,
     #         kms_key_id: "String",
+    #         availability_zone_relocation: false,
+    #         availability_zone: "String",
+    #         port: 1,
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -6599,8 +6619,8 @@ module Aws::Redshift
     #   Management Guide*.
     #
     #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `dc1.large` \|
-    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.4xlarge` \|
-    #   `ra3.16xlarge`
+    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.xlplus` \|
+    #   `ra3.4xlarge` \| `ra3.16xlarge`
     #
     #
     #
@@ -6843,6 +6863,21 @@ module Aws::Redshift
     #   that you want to use to encrypt data in the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_relocation
+    #   The option to enable relocation for an Amazon Redshift cluster
+    #   between Availability Zones after the cluster modification is
+    #   complete.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] availability_zone
+    #   The option to initiate relocation for an Amazon Redshift cluster to
+    #   the target Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The option to change the port of an Amazon Redshift cluster.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMessage AWS API Documentation
     #
     class ModifyClusterMessage < Struct.new(
@@ -6867,7 +6902,10 @@ module Aws::Redshift
       :enhanced_vpc_routing,
       :maintenance_track_name,
       :encrypted,
-      :kms_key_id)
+      :kms_key_id,
+      :availability_zone_relocation,
+      :availability_zone,
+      :port)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8347,6 +8385,7 @@ module Aws::Redshift
     #         maintenance_track_name: "String",
     #         snapshot_schedule_identifier: "String",
     #         number_of_nodes: 1,
+    #         availability_zone_relocation: false,
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -8591,6 +8630,11 @@ module Aws::Redshift
     #   cluster.
     #   @return [Integer]
     #
+    # @!attribute [rw] availability_zone_relocation
+    #   The option to enable relocation for an Amazon Redshift cluster
+    #   between Availability Zones after the cluster is restored.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage AWS API Documentation
     #
     class RestoreFromClusterSnapshotMessage < Struct.new(
@@ -8619,7 +8663,8 @@ module Aws::Redshift
       :iam_roles,
       :maintenance_track_name,
       :snapshot_schedule_identifier,
-      :number_of_nodes)
+      :number_of_nodes,
+      :availability_zone_relocation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9253,6 +9298,11 @@ module Aws::Redshift
     #   cluster.
     #   @return [String]
     #
+    # @!attribute [rw] engine_full_version
+    #   The cluster version of the cluster used to create the snapshot. For
+    #   example, 1.0.15503.
+    #   @return [String]
+    #
     # @!attribute [rw] snapshot_type
     #   The snapshot type. Snapshots created using CreateClusterSnapshot and
     #   CopyClusterSnapshot are of type "manual".
@@ -9396,6 +9446,7 @@ module Aws::Redshift
       :cluster_create_time,
       :master_username,
       :cluster_version,
+      :engine_full_version,
       :snapshot_type,
       :node_type,
       :number_of_nodes,
@@ -9681,6 +9732,22 @@ module Aws::Redshift
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SourceNotFoundFault AWS API Documentation
     #
     class SourceNotFoundFault < Aws::EmptyStructure; end
+
+    # The connection endpoint for connecting an Amazon Redshift cluster
+    # through the proxy.
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The connection endpoint ID for connecting an Amazon Redshift cluster
+    #   through the proxy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SpartaProxyVpcEndpoint AWS API Documentation
+    #
+    class SpartaProxyVpcEndpoint < Struct.new(
+      :vpc_endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Describes a subnet.
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2020-12-09)
+------------------
+
+* Feature - This release adds support for custom routing accelerators
+
 1.25.0 (2020-10-21)
 ------------------
 

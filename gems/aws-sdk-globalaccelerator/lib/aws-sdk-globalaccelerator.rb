@@ -28,7 +28,7 @@ require_relative 'aws-sdk-globalaccelerator/customizations'
 # structure.
 #
 #     global_accelerator = Aws::GlobalAccelerator::Client.new
-#     resp = global_accelerator.advertise_byoip_cidr(params)
+#     resp = global_accelerator.add_custom_routing_endpoints(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-globalaccelerator/customizations'
 # @!group service
 module Aws::GlobalAccelerator
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.26.0'
 
 end

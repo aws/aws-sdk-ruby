@@ -392,6 +392,8 @@ module Aws::Redshift
     SourceIdsList = Shapes::ListShape.new(name: 'SourceIdsList')
     SourceNotFoundFault = Shapes::StructureShape.new(name: 'SourceNotFoundFault')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
+    SpartaProxyVpcEndpoint = Shapes::StructureShape.new(name: 'SpartaProxyVpcEndpoint')
+    SpartaProxyVpcEndpointList = Shapes::ListShape.new(name: 'SpartaProxyVpcEndpointList')
     String = Shapes::StringShape.new(name: 'String')
     Subnet = Shapes::StructureShape.new(name: 'Subnet')
     SubnetAlreadyInUse = Shapes::StructureShape.new(name: 'SubnetAlreadyInUse')
@@ -579,6 +581,7 @@ module Aws::Redshift
     Cluster.add_member(:expected_next_snapshot_schedule_time_status, Shapes::ShapeRef.new(shape: String, location_name: "ExpectedNextSnapshotScheduleTimeStatus"))
     Cluster.add_member(:next_maintenance_window_start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "NextMaintenanceWindowStartTime"))
     Cluster.add_member(:resize_info, Shapes::ShapeRef.new(shape: ResizeInfo, location_name: "ResizeInfo"))
+    Cluster.add_member(:availability_zone_relocation_status, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZoneRelocationStatus"))
     Cluster.add_member(:cluster_namespace_arn, Shapes::ShapeRef.new(shape: String, location_name: "ClusterNamespaceArn"))
     Cluster.struct_class = Types::Cluster
 
@@ -781,6 +784,7 @@ module Aws::Redshift
     CreateClusterMessage.add_member(:iam_roles, Shapes::ShapeRef.new(shape: IamRoleArnList, location_name: "IamRoles"))
     CreateClusterMessage.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
     CreateClusterMessage.add_member(:snapshot_schedule_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotScheduleIdentifier"))
+    CreateClusterMessage.add_member(:availability_zone_relocation, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AvailabilityZoneRelocation"))
     CreateClusterMessage.struct_class = Types::CreateClusterMessage
 
     CreateClusterParameterGroupMessage.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ParameterGroupName"))
@@ -1205,6 +1209,7 @@ module Aws::Redshift
 
     Endpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "Address"))
     Endpoint.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "Port"))
+    Endpoint.add_member(:vpc_endpoints, Shapes::ShapeRef.new(shape: SpartaProxyVpcEndpointList, location_name: "VpcEndpoints"))
     Endpoint.struct_class = Types::Endpoint
 
     Event.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SourceIdentifier"))
@@ -1456,6 +1461,9 @@ module Aws::Redshift
     ModifyClusterMessage.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
     ModifyClusterMessage.add_member(:encrypted, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Encrypted"))
     ModifyClusterMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    ModifyClusterMessage.add_member(:availability_zone_relocation, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AvailabilityZoneRelocation"))
+    ModifyClusterMessage.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
+    ModifyClusterMessage.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
     ModifyClusterMessage.struct_class = Types::ModifyClusterMessage
 
     ModifyClusterParameterGroupMessage.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ParameterGroupName"))
@@ -1671,7 +1679,7 @@ module Aws::Redshift
     ResizeClusterMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     ResizeClusterMessage.add_member(:cluster_type, Shapes::ShapeRef.new(shape: String, location_name: "ClusterType"))
     ResizeClusterMessage.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
-    ResizeClusterMessage.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfNodes"))
+    ResizeClusterMessage.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumberOfNodes"))
     ResizeClusterMessage.add_member(:classic, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Classic"))
     ResizeClusterMessage.struct_class = Types::ResizeClusterMessage
 
@@ -1732,6 +1740,7 @@ module Aws::Redshift
     RestoreFromClusterSnapshotMessage.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
     RestoreFromClusterSnapshotMessage.add_member(:snapshot_schedule_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotScheduleIdentifier"))
     RestoreFromClusterSnapshotMessage.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumberOfNodes"))
+    RestoreFromClusterSnapshotMessage.add_member(:availability_zone_relocation, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AvailabilityZoneRelocation"))
     RestoreFromClusterSnapshotMessage.struct_class = Types::RestoreFromClusterSnapshotMessage
 
     RestoreFromClusterSnapshotResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
@@ -1853,6 +1862,7 @@ module Aws::Redshift
     Snapshot.add_member(:cluster_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ClusterCreateTime"))
     Snapshot.add_member(:master_username, Shapes::ShapeRef.new(shape: String, location_name: "MasterUsername"))
     Snapshot.add_member(:cluster_version, Shapes::ShapeRef.new(shape: String, location_name: "ClusterVersion"))
+    Snapshot.add_member(:engine_full_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineFullVersion"))
     Snapshot.add_member(:snapshot_type, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotType"))
     Snapshot.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
     Snapshot.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfNodes"))
@@ -1944,6 +1954,11 @@ module Aws::Redshift
     SourceIdsList.member = Shapes::ShapeRef.new(shape: String, location_name: "SourceId")
 
     SourceNotFoundFault.struct_class = Types::SourceNotFoundFault
+
+    SpartaProxyVpcEndpoint.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcEndpointId"))
+    SpartaProxyVpcEndpoint.struct_class = Types::SpartaProxyVpcEndpoint
+
+    SpartaProxyVpcEndpointList.member = Shapes::ShapeRef.new(shape: SpartaProxyVpcEndpoint, location_name: "SpartaProxyVpcEndpoint")
 
     Subnet.add_member(:subnet_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier"))
     Subnet.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "SubnetAvailabilityZone"))
@@ -2343,6 +2358,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: SnapshotScheduleQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: ScheduleDefinitionTypeUnsupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
       end)
 
       api.add_operation(:create_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -2354,6 +2370,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
       end)
 
       api.add_operation(:create_usage_limit, Seahorse::Model::Operation.new.tap do |o|
@@ -3293,6 +3310,7 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: ResumeClusterResult)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientClusterCapacityFault)
       end)
 
       api.add_operation(:revoke_cluster_security_group_ingress, Seahorse::Model::Operation.new.tap do |o|

@@ -337,11 +337,70 @@ module Aws::GlobalAccelerator
 
     # @!group API Operations
 
+    # Associate a virtual private cloud (VPC) subnet endpoint with your
+    # custom routing accelerator.
+    #
+    # The listener port range must be large enough to support the number of
+    # IP addresses that can be specified in your subnet. The number of ports
+    # required is: subnet size times the number of ports per destination EC2
+    # instances. For example, a subnet defined as /24 requires a listener
+    # port range of at least 255 ports.
+    #
+    # Note: You must have enough remaining listener ports available to map
+    # to the subnet ports, or the call will fail with a
+    # LimitExceededException.
+    #
+    # By default, all destinations in a subnet in a custom routing
+    # accelerator cannot receive traffic. To enable all destinations to
+    # receive traffic, or to specify individual port mappings that can
+    # receive traffic, see the [ AllowCustomRoutingTraffic][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/api/API_AllowCustomRoutingTraffic.html
+    #
+    # @option params [required, Array<Types::CustomRoutingEndpointConfiguration>] :endpoint_configurations
+    #   The list of endpoint objects to add to a custom routing accelerator.
+    #
+    # @option params [required, String] :endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group for the custom
+    #   routing endpoint.
+    #
+    # @return [Types::AddCustomRoutingEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddCustomRoutingEndpointsResponse#endpoint_descriptions #endpoint_descriptions} => Array&lt;Types::CustomRoutingEndpointDescription&gt;
+    #   * {Types::AddCustomRoutingEndpointsResponse#endpoint_group_arn #endpoint_group_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_custom_routing_endpoints({
+    #     endpoint_configurations: [ # required
+    #       {
+    #         endpoint_id: "GenericString",
+    #       },
+    #     ],
+    #     endpoint_group_arn: "GenericString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_descriptions #=> Array
+    #   resp.endpoint_descriptions[0].endpoint_id #=> String
+    #   resp.endpoint_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AddCustomRoutingEndpoints AWS API Documentation
+    #
+    # @overload add_custom_routing_endpoints(params = {})
+    # @param [Hash] params ({})
+    def add_custom_routing_endpoints(params = {}, options = {})
+      req = build_request(:add_custom_routing_endpoints, params)
+      req.send_request(options)
+    end
+
     # Advertises an IPv4 address range that is provisioned for use with your
     # AWS resources through bring your own IP addresses (BYOIP). It can take
     # a few minutes before traffic to the specified addresses starts routing
-    # to AWS because of propagation delays. To see an AWS CLI example of
-    # advertising an address range, scroll down to **Example**.
+    # to AWS because of propagation delays.
     #
     # To stop advertising the BYOIP address range, use [
     # WithdrawByoipCidr][1].
@@ -386,11 +445,80 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
+    # Specify the Amazon EC2 instance (destination) IP addresses and ports
+    # for a VPC subnet endpoint that can receive traffic for a custom
+    # routing accelerator. You can allow traffic to all destinations in the
+    # subnet endpoint, or allow traffic to a specified list of destination
+    # IP addresses and ports in the subnet. Note that you cannot specify IP
+    # addresses or ports outside of the range that you configured for the
+    # endpoint group.
+    #
+    # After you make changes, you can verify that the updates are complete
+    # by checking the status of your accelerator: the status changes from
+    # IN\_PROGRESS to DEPLOYED.
+    #
+    # @option params [required, String] :endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group.
+    #
+    # @option params [required, String] :endpoint_id
+    #   An ID for the endpoint. For custom routing accelerators, this is the
+    #   virtual private cloud (VPC) subnet ID.
+    #
+    # @option params [Array<String>] :destination_addresses
+    #   A list of specific Amazon EC2 instance IP addresses (destination
+    #   addresses) in a subnet that you want to allow to receive traffic. The
+    #   IP addresses must be a subset of the IP addresses that you specified
+    #   for the endpoint group.
+    #
+    #   `DestinationAddresses` is required if `AllowAllTrafficToEndpoint` is
+    #   `FALSE` or is not specified.
+    #
+    # @option params [Array<Integer>] :destination_ports
+    #   A list of specific Amazon EC2 instance ports (destination ports) that
+    #   you want to allow to receive traffic.
+    #
+    # @option params [Boolean] :allow_all_traffic_to_endpoint
+    #   Indicates whether all destination IP addresses and ports for a
+    #   specified VPC subnet endpoint can receive traffic from a custom
+    #   routing accelerator. The value is TRUE or FALSE.
+    #
+    #   When set to TRUE, *all* destinations in the custom routing VPC subnet
+    #   can receive traffic. Note that you cannot specify destination IP
+    #   addresses and ports when the value is set to TRUE.
+    #
+    #   When set to FALSE (or not specified), you *must* specify a list of
+    #   destination IP addresses that are allowed to receive traffic. A list
+    #   of ports is optional. If you don't specify a list of ports, the ports
+    #   that can accept traffic is the same as the ports configured for the
+    #   endpoint group.
+    #
+    #   The default value is FALSE.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.allow_custom_routing_traffic({
+    #     endpoint_group_arn: "GenericString", # required
+    #     endpoint_id: "GenericString", # required
+    #     destination_addresses: ["IpAddress"],
+    #     destination_ports: [1],
+    #     allow_all_traffic_to_endpoint: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AllowCustomRoutingTraffic AWS API Documentation
+    #
+    # @overload allow_custom_routing_traffic(params = {})
+    # @param [Hash] params ({})
+    def allow_custom_routing_traffic(params = {}, options = {})
+      req = build_request(:allow_custom_routing_traffic, params)
+      req.send_request(options)
+    end
+
     # Create an accelerator. An accelerator includes one or more listeners
     # that process inbound connections and direct traffic to one or more
     # endpoint groups, each of which includes endpoints, such as Network
-    # Load Balancers. To see an AWS CLI example of creating an accelerator,
-    # scroll down to **Example**.
+    # Load Balancers.
     #
     # Global Accelerator is a global service that supports endpoints in
     # multiple AWS Regions but you must specify the US West (Oregon) Region
@@ -495,12 +623,221 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
+    # Create a custom routing accelerator. A custom routing accelerator
+    # directs traffic to one of possibly thousands of Amazon EC2 instance
+    # destinations running in a single or multiple virtual private clouds
+    # (VPC) subnet endpoints.
+    #
+    # Be aware that, by default, all destination EC2 instances in a VPC
+    # subnet endpoint cannot receive traffic. To enable all destinations to
+    # receive traffic, or to specify individual port mappings that can
+    # receive traffic, see the [ AllowCustomRoutingTraffic][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/api/API_AllowCustomRoutingTraffic.html
+    #
+    # @option params [required, String] :name
+    #   The name of a custom routing accelerator. The name can have a maximum
+    #   of 64 characters, must contain only alphanumeric characters or hyphens
+    #   (-), and must not begin or end with a hyphen.
+    #
+    # @option params [String] :ip_address_type
+    #   The value for the address type must be IPv4.
+    #
+    # @option params [Boolean] :enabled
+    #   Indicates whether an accelerator is enabled. The value is true or
+    #   false. The default value is true.
+    #
+    #   If the value is set to true, an accelerator cannot be deleted. If set
+    #   to false, the accelerator can be deleted.
+    #
+    # @option params [required, String] :idempotency_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency—that is, the uniqueness—of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Create tags for an accelerator.
+    #
+    #   For more information, see [Tagging in AWS Global Accelerator][1] in
+    #   the *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html
+    #
+    # @return [Types::CreateCustomRoutingAcceleratorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCustomRoutingAcceleratorResponse#accelerator #accelerator} => Types::CustomRoutingAccelerator
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_routing_accelerator({
+    #     name: "GenericString", # required
+    #     ip_address_type: "IPV4", # accepts IPV4
+    #     enabled: false,
+    #     idempotency_token: "IdempotencyToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.accelerator.accelerator_arn #=> String
+    #   resp.accelerator.name #=> String
+    #   resp.accelerator.ip_address_type #=> String, one of "IPV4"
+    #   resp.accelerator.enabled #=> Boolean
+    #   resp.accelerator.ip_sets #=> Array
+    #   resp.accelerator.ip_sets[0].ip_family #=> String
+    #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
+    #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerator.dns_name #=> String
+    #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
+    #   resp.accelerator.created_time #=> Time
+    #   resp.accelerator.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateCustomRoutingAccelerator AWS API Documentation
+    #
+    # @overload create_custom_routing_accelerator(params = {})
+    # @param [Hash] params ({})
+    def create_custom_routing_accelerator(params = {}, options = {})
+      req = build_request(:create_custom_routing_accelerator, params)
+      req.send_request(options)
+    end
+
+    # Create an endpoint group for the specified listener for a custom
+    # routing accelerator. An endpoint group is a collection of endpoints in
+    # one AWS Region.
+    #
+    # @option params [required, String] :listener_arn
+    #   The Amazon Resource Name (ARN) of the listener for a custom routing
+    #   endpoint.
+    #
+    # @option params [required, String] :endpoint_group_region
+    #   The AWS Region where the endpoint group is located. A listener can
+    #   have only one endpoint group in a specific Region.
+    #
+    # @option params [required, Array<Types::CustomRoutingDestinationConfiguration>] :destination_configurations
+    #   Sets the port range and protocol for all endpoints (virtual private
+    #   cloud subnets) in a custom routing endpoint group to accept client
+    #   traffic on.
+    #
+    # @option params [required, String] :idempotency_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency—that is, the uniqueness—of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateCustomRoutingEndpointGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCustomRoutingEndpointGroupResponse#endpoint_group #endpoint_group} => Types::CustomRoutingEndpointGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_routing_endpoint_group({
+    #     listener_arn: "GenericString", # required
+    #     endpoint_group_region: "GenericString", # required
+    #     destination_configurations: [ # required
+    #       {
+    #         from_port: 1, # required
+    #         to_port: 1, # required
+    #         protocols: ["TCP"], # required, accepts TCP, UDP
+    #       },
+    #     ],
+    #     idempotency_token: "IdempotencyToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_group.endpoint_group_arn #=> String
+    #   resp.endpoint_group.endpoint_group_region #=> String
+    #   resp.endpoint_group.destination_descriptions #=> Array
+    #   resp.endpoint_group.destination_descriptions[0].from_port #=> Integer
+    #   resp.endpoint_group.destination_descriptions[0].to_port #=> Integer
+    #   resp.endpoint_group.destination_descriptions[0].protocols #=> Array
+    #   resp.endpoint_group.destination_descriptions[0].protocols[0] #=> String, one of "TCP", "UDP"
+    #   resp.endpoint_group.endpoint_descriptions #=> Array
+    #   resp.endpoint_group.endpoint_descriptions[0].endpoint_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateCustomRoutingEndpointGroup AWS API Documentation
+    #
+    # @overload create_custom_routing_endpoint_group(params = {})
+    # @param [Hash] params ({})
+    def create_custom_routing_endpoint_group(params = {}, options = {})
+      req = build_request(:create_custom_routing_endpoint_group, params)
+      req.send_request(options)
+    end
+
+    # Create a listener to process inbound connections from clients to a
+    # custom routing accelerator. Connections arrive to assigned static IP
+    # addresses on the port range that you specify.
+    #
+    # @option params [required, String] :accelerator_arn
+    #   The Amazon Resource Name (ARN) of the accelerator for a custom routing
+    #   listener.
+    #
+    # @option params [required, Array<Types::PortRange>] :port_ranges
+    #   The port range to support for connections from clients to your
+    #   accelerator.
+    #
+    #   Separately, you set port ranges for endpoints. For more information,
+    #   see [About endpoints for custom routing accelerators][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-custom-routing-endpoints.html
+    #
+    # @option params [required, String] :idempotency_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency—that is, the uniqueness—of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateCustomRoutingListenerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCustomRoutingListenerResponse#listener #listener} => Types::CustomRoutingListener
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_routing_listener({
+    #     accelerator_arn: "GenericString", # required
+    #     port_ranges: [ # required
+    #       {
+    #         from_port: 1,
+    #         to_port: 1,
+    #       },
+    #     ],
+    #     idempotency_token: "IdempotencyToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.listener.listener_arn #=> String
+    #   resp.listener.port_ranges #=> Array
+    #   resp.listener.port_ranges[0].from_port #=> Integer
+    #   resp.listener.port_ranges[0].to_port #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateCustomRoutingListener AWS API Documentation
+    #
+    # @overload create_custom_routing_listener(params = {})
+    # @param [Hash] params ({})
+    def create_custom_routing_listener(params = {}, options = {})
+      req = build_request(:create_custom_routing_listener, params)
+      req.send_request(options)
+    end
+
     # Create an endpoint group for the specified listener. An endpoint group
     # is a collection of endpoints in one AWS Region. A resource must be
     # valid and active when you add it as an endpoint.
-    #
-    # To see an AWS CLI example of creating an endpoint group, scroll down
-    # to **Example**.
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
@@ -588,7 +925,7 @@ module Aws::GlobalAccelerator
     #     traffic_dial_percentage: 1.0,
     #     health_check_port: 1,
     #     health_check_protocol: "TCP", # accepts TCP, HTTP, HTTPS
-    #     health_check_path: "GenericString",
+    #     health_check_path: "HealthCheckPath",
     #     health_check_interval_seconds: 1,
     #     threshold_count: 1,
     #     idempotency_token: "IdempotencyToken", # required
@@ -631,8 +968,7 @@ module Aws::GlobalAccelerator
 
     # Create a listener to process inbound connections from clients to an
     # accelerator. Connections arrive to assigned static IP addresses on a
-    # port, port range, or list of port ranges that you specify. To see an
-    # AWS CLI example of creating a listener, scroll down to **Example**.
+    # port, port range, or list of port ranges that you specify.
     #
     # @option params [required, String] :accelerator_arn
     #   The Amazon Resource Name (ARN) of your accelerator.
@@ -758,6 +1094,95 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
+    # Delete a custom routing accelerator. Before you can delete an
+    # accelerator, you must disable it and remove all dependent resources
+    # (listeners and endpoint groups). To disable the accelerator, update
+    # the accelerator to set `Enabled` to false.
+    #
+    # When you create a custom routing accelerator, by default, Global
+    # Accelerator provides you with a set of two static IP addresses.
+    #
+    #  The IP addresses are assigned to your accelerator for as long as it
+    # exists, even if you disable the accelerator and it no longer accepts
+    # or routes traffic. However, when you *delete* an accelerator, you lose
+    # the static IP addresses that are assigned to the accelerator, so you
+    # can no longer route traffic by using them. As a best practice, ensure
+    # that you have permissions in place to avoid inadvertently deleting
+    # accelerators. You can use IAM policies with Global Accelerator to
+    # limit the users who have permissions to delete an accelerator. For
+    # more information, see [Authentication and Access Control][1] in the
+    # *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/auth-and-access-control.html
+    #
+    # @option params [required, String] :accelerator_arn
+    #   The Amazon Resource Name (ARN) of the custom routing accelerator to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_routing_accelerator({
+    #     accelerator_arn: "GenericString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DeleteCustomRoutingAccelerator AWS API Documentation
+    #
+    # @overload delete_custom_routing_accelerator(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_routing_accelerator(params = {}, options = {})
+      req = build_request(:delete_custom_routing_accelerator, params)
+      req.send_request(options)
+    end
+
+    # Delete an endpoint group from a listener for a custom routing
+    # accelerator.
+    #
+    # @option params [required, String] :endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_routing_endpoint_group({
+    #     endpoint_group_arn: "GenericString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DeleteCustomRoutingEndpointGroup AWS API Documentation
+    #
+    # @overload delete_custom_routing_endpoint_group(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_routing_endpoint_group(params = {}, options = {})
+      req = build_request(:delete_custom_routing_endpoint_group, params)
+      req.send_request(options)
+    end
+
+    # Delete a listener for a custom routing accelerator.
+    #
+    # @option params [required, String] :listener_arn
+    #   The Amazon Resource Name (ARN) of the listener to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_routing_listener({
+    #     listener_arn: "GenericString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DeleteCustomRoutingListener AWS API Documentation
+    #
+    # @overload delete_custom_routing_listener(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_routing_listener(params = {}, options = {})
+      req = build_request(:delete_custom_routing_listener, params)
+      req.send_request(options)
+    end
+
     # Delete an endpoint group from a listener.
     #
     # @option params [required, String] :endpoint_group_arn
@@ -802,10 +1227,75 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
+    # Specify the Amazon EC2 instance (destination) IP addresses and ports
+    # for a VPC subnet endpoint that cannot receive traffic for a custom
+    # routing accelerator. You can deny traffic to all destinations in the
+    # VPC endpoint, or deny traffic to a specified list of destination IP
+    # addresses and ports. Note that you cannot specify IP addresses or
+    # ports outside of the range that you configured for the endpoint group.
+    #
+    # After you make changes, you can verify that the updates are complete
+    # by checking the status of your accelerator: the status changes from
+    # IN\_PROGRESS to DEPLOYED.
+    #
+    # @option params [required, String] :endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group.
+    #
+    # @option params [required, String] :endpoint_id
+    #   An ID for the endpoint. For custom routing accelerators, this is the
+    #   virtual private cloud (VPC) subnet ID.
+    #
+    # @option params [Array<String>] :destination_addresses
+    #   A list of specific Amazon EC2 instance IP addresses (destination
+    #   addresses) in a subnet that you want to prevent from receiving
+    #   traffic. The IP addresses must be a subset of the IP addresses allowed
+    #   for the VPC subnet associated with the endpoint group.
+    #
+    # @option params [Array<Integer>] :destination_ports
+    #   A list of specific Amazon EC2 instance ports (destination ports) in a
+    #   subnet endpoint that you want to prevent from receiving traffic.
+    #
+    # @option params [Boolean] :deny_all_traffic_to_endpoint
+    #   Indicates whether all destination IP addresses and ports for a
+    #   specified VPC subnet endpoint *cannot* receive traffic from a custom
+    #   routing accelerator. The value is TRUE or FALSE.
+    #
+    #   When set to TRUE, *no* destinations in the custom routing VPC subnet
+    #   can receive traffic. Note that you cannot specify destination IP
+    #   addresses and ports when the value is set to TRUE.
+    #
+    #   When set to FALSE (or not specified), you *must* specify a list of
+    #   destination IP addresses that cannot receive traffic. A list of ports
+    #   is optional. If you don't specify a list of ports, the ports that can
+    #   accept traffic is the same as the ports configured for the endpoint
+    #   group.
+    #
+    #   The default value is FALSE.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deny_custom_routing_traffic({
+    #     endpoint_group_arn: "GenericString", # required
+    #     endpoint_id: "GenericString", # required
+    #     destination_addresses: ["IpAddress"],
+    #     destination_ports: [1],
+    #     deny_all_traffic_to_endpoint: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DenyCustomRoutingTraffic AWS API Documentation
+    #
+    # @overload deny_custom_routing_traffic(params = {})
+    # @param [Hash] params ({})
+    def deny_custom_routing_traffic(params = {}, options = {})
+      req = build_request(:deny_custom_routing_traffic, params)
+      req.send_request(options)
+    end
+
     # Releases the specified address range that you provisioned to use with
     # your AWS resources through bring your own IP addresses (BYOIP) and
-    # deletes the corresponding address pool. To see an AWS CLI example of
-    # deprovisioning an address range, scroll down to **Example**.
+    # deletes the corresponding address pool.
     #
     # Before you can release an address range, you must stop advertising it
     # by using [WithdrawByoipCidr][1] and you must not have any accelerators
@@ -850,8 +1340,7 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # Describe an accelerator. To see an AWS CLI example of describing an
-    # accelerator, scroll down to **Example**.
+    # Describe an accelerator.
     #
     # @option params [required, String] :accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator to describe.
@@ -890,9 +1379,7 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # Describe the attributes of an accelerator. To see an AWS CLI example
-    # of describing the attributes of an accelerator, scroll down to
-    # **Example**.
+    # Describe the attributes of an accelerator.
     #
     # @option params [required, String] :accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator with the attributes
@@ -923,8 +1410,144 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # Describe an endpoint group. To see an AWS CLI example of describing an
-    # endpoint group, scroll down to **Example**.
+    # Describe a custom routing accelerator.
+    #
+    # @option params [required, String] :accelerator_arn
+    #   The Amazon Resource Name (ARN) of the accelerator to describe.
+    #
+    # @return [Types::DescribeCustomRoutingAcceleratorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCustomRoutingAcceleratorResponse#accelerator #accelerator} => Types::CustomRoutingAccelerator
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_custom_routing_accelerator({
+    #     accelerator_arn: "GenericString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.accelerator.accelerator_arn #=> String
+    #   resp.accelerator.name #=> String
+    #   resp.accelerator.ip_address_type #=> String, one of "IPV4"
+    #   resp.accelerator.enabled #=> Boolean
+    #   resp.accelerator.ip_sets #=> Array
+    #   resp.accelerator.ip_sets[0].ip_family #=> String
+    #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
+    #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerator.dns_name #=> String
+    #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
+    #   resp.accelerator.created_time #=> Time
+    #   resp.accelerator.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeCustomRoutingAccelerator AWS API Documentation
+    #
+    # @overload describe_custom_routing_accelerator(params = {})
+    # @param [Hash] params ({})
+    def describe_custom_routing_accelerator(params = {}, options = {})
+      req = build_request(:describe_custom_routing_accelerator, params)
+      req.send_request(options)
+    end
+
+    # Describe the attributes of a custom routing accelerator.
+    #
+    # @option params [required, String] :accelerator_arn
+    #   The Amazon Resource Name (ARN) of the custom routing accelerator to
+    #   describe the attributes for.
+    #
+    # @return [Types::DescribeCustomRoutingAcceleratorAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCustomRoutingAcceleratorAttributesResponse#accelerator_attributes #accelerator_attributes} => Types::CustomRoutingAcceleratorAttributes
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_custom_routing_accelerator_attributes({
+    #     accelerator_arn: "GenericString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.accelerator_attributes.flow_logs_enabled #=> Boolean
+    #   resp.accelerator_attributes.flow_logs_s3_bucket #=> String
+    #   resp.accelerator_attributes.flow_logs_s3_prefix #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeCustomRoutingAcceleratorAttributes AWS API Documentation
+    #
+    # @overload describe_custom_routing_accelerator_attributes(params = {})
+    # @param [Hash] params ({})
+    def describe_custom_routing_accelerator_attributes(params = {}, options = {})
+      req = build_request(:describe_custom_routing_accelerator_attributes, params)
+      req.send_request(options)
+    end
+
+    # Describe an endpoint group for a custom routing accelerator.
+    #
+    # @option params [required, String] :endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group to describe.
+    #
+    # @return [Types::DescribeCustomRoutingEndpointGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCustomRoutingEndpointGroupResponse#endpoint_group #endpoint_group} => Types::CustomRoutingEndpointGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_custom_routing_endpoint_group({
+    #     endpoint_group_arn: "GenericString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_group.endpoint_group_arn #=> String
+    #   resp.endpoint_group.endpoint_group_region #=> String
+    #   resp.endpoint_group.destination_descriptions #=> Array
+    #   resp.endpoint_group.destination_descriptions[0].from_port #=> Integer
+    #   resp.endpoint_group.destination_descriptions[0].to_port #=> Integer
+    #   resp.endpoint_group.destination_descriptions[0].protocols #=> Array
+    #   resp.endpoint_group.destination_descriptions[0].protocols[0] #=> String, one of "TCP", "UDP"
+    #   resp.endpoint_group.endpoint_descriptions #=> Array
+    #   resp.endpoint_group.endpoint_descriptions[0].endpoint_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeCustomRoutingEndpointGroup AWS API Documentation
+    #
+    # @overload describe_custom_routing_endpoint_group(params = {})
+    # @param [Hash] params ({})
+    def describe_custom_routing_endpoint_group(params = {}, options = {})
+      req = build_request(:describe_custom_routing_endpoint_group, params)
+      req.send_request(options)
+    end
+
+    # The description of a listener for a custom routing accelerator.
+    #
+    # @option params [required, String] :listener_arn
+    #   The Amazon Resource Name (ARN) of the listener to describe.
+    #
+    # @return [Types::DescribeCustomRoutingListenerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCustomRoutingListenerResponse#listener #listener} => Types::CustomRoutingListener
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_custom_routing_listener({
+    #     listener_arn: "GenericString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.listener.listener_arn #=> String
+    #   resp.listener.port_ranges #=> Array
+    #   resp.listener.port_ranges[0].from_port #=> Integer
+    #   resp.listener.port_ranges[0].to_port #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeCustomRoutingListener AWS API Documentation
+    #
+    # @overload describe_custom_routing_listener(params = {})
+    # @param [Hash] params ({})
+    def describe_custom_routing_listener(params = {}, options = {})
+      req = build_request(:describe_custom_routing_listener, params)
+      req.send_request(options)
+    end
+
+    # Describe an endpoint group.
     #
     # @option params [required, String] :endpoint_group_arn
     #   The Amazon Resource Name (ARN) of the endpoint group to describe.
@@ -968,8 +1591,7 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # Describe a listener. To see an AWS CLI example of describing a
-    # listener, scroll down to **Example**.
+    # Describe a listener.
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener to describe.
@@ -1002,9 +1624,7 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # List the accelerators for an AWS account. To see an AWS CLI example of
-    # listing the accelerators for an AWS account, scroll down to
-    # **Example**.
+    # List the accelerators for an AWS account.
     #
     # @option params [Integer] :max_results
     #   The number of Global Accelerator objects that you want to return with
@@ -1018,6 +1638,8 @@ module Aws::GlobalAccelerator
     #
     #   * {Types::ListAcceleratorsResponse#accelerators #accelerators} => Array&lt;Types::Accelerator&gt;
     #   * {Types::ListAcceleratorsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1055,9 +1677,6 @@ module Aws::GlobalAccelerator
     # Lists the IP address ranges that were specified in calls to
     # [ProvisionByoipCidr][1], including the current state and a history of
     # state changes.
-    #
-    # To see an AWS CLI example of listing BYOIP CIDR addresses, scroll down
-    # to **Example**.
     #
     #
     #
@@ -1102,9 +1721,292 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # List the endpoint groups that are associated with a listener. To see
-    # an AWS CLI example of listing the endpoint groups for listener, scroll
-    # down to **Example**.
+    # List the custom routing accelerators for an AWS account.
+    #
+    # @option params [Integer] :max_results
+    #   The number of custom routing Global Accelerator objects that you want
+    #   to return with this call. The default value is 10.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #
+    # @return [Types::ListCustomRoutingAcceleratorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomRoutingAcceleratorsResponse#accelerators #accelerators} => Array&lt;Types::CustomRoutingAccelerator&gt;
+    #   * {Types::ListCustomRoutingAcceleratorsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_routing_accelerators({
+    #     max_results: 1,
+    #     next_token: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.accelerators #=> Array
+    #   resp.accelerators[0].accelerator_arn #=> String
+    #   resp.accelerators[0].name #=> String
+    #   resp.accelerators[0].ip_address_type #=> String, one of "IPV4"
+    #   resp.accelerators[0].enabled #=> Boolean
+    #   resp.accelerators[0].ip_sets #=> Array
+    #   resp.accelerators[0].ip_sets[0].ip_family #=> String
+    #   resp.accelerators[0].ip_sets[0].ip_addresses #=> Array
+    #   resp.accelerators[0].ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerators[0].dns_name #=> String
+    #   resp.accelerators[0].status #=> String, one of "DEPLOYED", "IN_PROGRESS"
+    #   resp.accelerators[0].created_time #=> Time
+    #   resp.accelerators[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCustomRoutingAccelerators AWS API Documentation
+    #
+    # @overload list_custom_routing_accelerators(params = {})
+    # @param [Hash] params ({})
+    def list_custom_routing_accelerators(params = {}, options = {})
+      req = build_request(:list_custom_routing_accelerators, params)
+      req.send_request(options)
+    end
+
+    # List the endpoint groups that are associated with a listener for a
+    # custom routing accelerator.
+    #
+    # @option params [required, String] :listener_arn
+    #   The Amazon Resource Name (ARN) of the listener to list endpoint groups
+    #   for.
+    #
+    # @option params [Integer] :max_results
+    #   The number of endpoint group objects that you want to return with this
+    #   call. The default value is 10.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #
+    # @return [Types::ListCustomRoutingEndpointGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomRoutingEndpointGroupsResponse#endpoint_groups #endpoint_groups} => Array&lt;Types::CustomRoutingEndpointGroup&gt;
+    #   * {Types::ListCustomRoutingEndpointGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_routing_endpoint_groups({
+    #     listener_arn: "GenericString", # required
+    #     max_results: 1,
+    #     next_token: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_groups #=> Array
+    #   resp.endpoint_groups[0].endpoint_group_arn #=> String
+    #   resp.endpoint_groups[0].endpoint_group_region #=> String
+    #   resp.endpoint_groups[0].destination_descriptions #=> Array
+    #   resp.endpoint_groups[0].destination_descriptions[0].from_port #=> Integer
+    #   resp.endpoint_groups[0].destination_descriptions[0].to_port #=> Integer
+    #   resp.endpoint_groups[0].destination_descriptions[0].protocols #=> Array
+    #   resp.endpoint_groups[0].destination_descriptions[0].protocols[0] #=> String, one of "TCP", "UDP"
+    #   resp.endpoint_groups[0].endpoint_descriptions #=> Array
+    #   resp.endpoint_groups[0].endpoint_descriptions[0].endpoint_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCustomRoutingEndpointGroups AWS API Documentation
+    #
+    # @overload list_custom_routing_endpoint_groups(params = {})
+    # @param [Hash] params ({})
+    def list_custom_routing_endpoint_groups(params = {}, options = {})
+      req = build_request(:list_custom_routing_endpoint_groups, params)
+      req.send_request(options)
+    end
+
+    # List the listeners for a custom routing accelerator.
+    #
+    # @option params [required, String] :accelerator_arn
+    #   The Amazon Resource Name (ARN) of the accelerator to list listeners
+    #   for.
+    #
+    # @option params [Integer] :max_results
+    #   The number of listener objects that you want to return with this call.
+    #   The default value is 10.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #
+    # @return [Types::ListCustomRoutingListenersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomRoutingListenersResponse#listeners #listeners} => Array&lt;Types::CustomRoutingListener&gt;
+    #   * {Types::ListCustomRoutingListenersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_routing_listeners({
+    #     accelerator_arn: "GenericString", # required
+    #     max_results: 1,
+    #     next_token: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.listeners #=> Array
+    #   resp.listeners[0].listener_arn #=> String
+    #   resp.listeners[0].port_ranges #=> Array
+    #   resp.listeners[0].port_ranges[0].from_port #=> Integer
+    #   resp.listeners[0].port_ranges[0].to_port #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCustomRoutingListeners AWS API Documentation
+    #
+    # @overload list_custom_routing_listeners(params = {})
+    # @param [Hash] params ({})
+    def list_custom_routing_listeners(params = {}, options = {})
+      req = build_request(:list_custom_routing_listeners, params)
+      req.send_request(options)
+    end
+
+    # Provides a complete mapping from the public accelerator IP address and
+    # port to destination EC2 instance IP addresses and ports in the virtual
+    # public cloud (VPC) subnet endpoint for a custom routing accelerator.
+    # For each subnet endpoint that you add, Global Accelerator creates a
+    # new static port mapping for the accelerator. The port mappings don't
+    # change after Global Accelerator generates them, so you can retrieve
+    # and cache the full mapping on your servers.
+    #
+    # If you remove a subnet from your accelerator, Global Accelerator
+    # removes (reclaims) the port mappings. If you add a subnet to your
+    # accelerator, Global Accelerator creates new port mappings (the
+    # existing ones don't change). If you add or remove EC2 instances in
+    # your subnet, the port mappings don't change, because the mappings are
+    # created when you add the subnet to Global Accelerator.
+    #
+    # The mappings also include a flag for each destination denoting which
+    # destination IP addresses and ports are allowed or denied traffic.
+    #
+    # @option params [required, String] :accelerator_arn
+    #   The Amazon Resource Name (ARN) of the accelerator to list the custom
+    #   routing port mappings for.
+    #
+    # @option params [String] :endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group to list the
+    #   custom routing port mappings for.
+    #
+    # @option params [Integer] :max_results
+    #   The number of destination port mappings that you want to return with
+    #   this call. The default value is 10.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #
+    # @return [Types::ListCustomRoutingPortMappingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomRoutingPortMappingsResponse#port_mappings #port_mappings} => Array&lt;Types::PortMapping&gt;
+    #   * {Types::ListCustomRoutingPortMappingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_routing_port_mappings({
+    #     accelerator_arn: "GenericString", # required
+    #     endpoint_group_arn: "GenericString",
+    #     max_results: 1,
+    #     next_token: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.port_mappings #=> Array
+    #   resp.port_mappings[0].accelerator_port #=> Integer
+    #   resp.port_mappings[0].endpoint_group_arn #=> String
+    #   resp.port_mappings[0].endpoint_id #=> String
+    #   resp.port_mappings[0].destination_socket_address.ip_address #=> String
+    #   resp.port_mappings[0].destination_socket_address.port #=> Integer
+    #   resp.port_mappings[0].protocols #=> Array
+    #   resp.port_mappings[0].protocols[0] #=> String, one of "TCP", "UDP"
+    #   resp.port_mappings[0].destination_traffic_state #=> String, one of "ALLOW", "DENY"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCustomRoutingPortMappings AWS API Documentation
+    #
+    # @overload list_custom_routing_port_mappings(params = {})
+    # @param [Hash] params ({})
+    def list_custom_routing_port_mappings(params = {}, options = {})
+      req = build_request(:list_custom_routing_port_mappings, params)
+      req.send_request(options)
+    end
+
+    # List the port mappings for a specific EC2 instance (destination) in a
+    # VPC subnet endpoint. The response is the mappings for one destination
+    # IP address. This is useful when your subnet endpoint has mappings that
+    # span multiple custom routing accelerators in your account, or for
+    # scenarios where you only want to list the port mappings for a specific
+    # destination instance.
+    #
+    # @option params [required, String] :endpoint_id
+    #   The ID for the virtual private cloud (VPC) subnet.
+    #
+    # @option params [required, String] :destination_address
+    #   The endpoint IP address in a virtual private cloud (VPC) subnet for
+    #   which you want to receive back port mappings.
+    #
+    # @option params [Integer] :max_results
+    #   The number of destination port mappings that you want to return with
+    #   this call. The default value is 10.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #
+    # @return [Types::ListCustomRoutingPortMappingsByDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomRoutingPortMappingsByDestinationResponse#destination_port_mappings #destination_port_mappings} => Array&lt;Types::DestinationPortMapping&gt;
+    #   * {Types::ListCustomRoutingPortMappingsByDestinationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_routing_port_mappings_by_destination({
+    #     endpoint_id: "GenericString", # required
+    #     destination_address: "GenericString", # required
+    #     max_results: 1,
+    #     next_token: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.destination_port_mappings #=> Array
+    #   resp.destination_port_mappings[0].accelerator_arn #=> String
+    #   resp.destination_port_mappings[0].accelerator_socket_addresses #=> Array
+    #   resp.destination_port_mappings[0].accelerator_socket_addresses[0].ip_address #=> String
+    #   resp.destination_port_mappings[0].accelerator_socket_addresses[0].port #=> Integer
+    #   resp.destination_port_mappings[0].endpoint_group_arn #=> String
+    #   resp.destination_port_mappings[0].endpoint_id #=> String
+    #   resp.destination_port_mappings[0].endpoint_group_region #=> String
+    #   resp.destination_port_mappings[0].destination_socket_address.ip_address #=> String
+    #   resp.destination_port_mappings[0].destination_socket_address.port #=> Integer
+    #   resp.destination_port_mappings[0].ip_address_type #=> String, one of "IPV4"
+    #   resp.destination_port_mappings[0].destination_traffic_state #=> String, one of "ALLOW", "DENY"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCustomRoutingPortMappingsByDestination AWS API Documentation
+    #
+    # @overload list_custom_routing_port_mappings_by_destination(params = {})
+    # @param [Hash] params ({})
+    def list_custom_routing_port_mappings_by_destination(params = {}, options = {})
+      req = build_request(:list_custom_routing_port_mappings_by_destination, params)
+      req.send_request(options)
+    end
+
+    # List the endpoint groups that are associated with a listener.
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
@@ -1121,6 +2023,8 @@ module Aws::GlobalAccelerator
     #
     #   * {Types::ListEndpointGroupsResponse#endpoint_groups #endpoint_groups} => Array&lt;Types::EndpointGroup&gt;
     #   * {Types::ListEndpointGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1161,8 +2065,7 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # List the listeners for an accelerator. To see an AWS CLI example of
-    # listing the listeners for an accelerator, scroll down to **Example**.
+    # List the listeners for an accelerator.
     #
     # @option params [required, String] :accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator for which you want
@@ -1180,6 +2083,8 @@ module Aws::GlobalAccelerator
     #
     #   * {Types::ListListenersResponse#listeners #listeners} => Array&lt;Types::Listener&gt;
     #   * {Types::ListListenersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1209,8 +2114,7 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # List all tags for an accelerator. To see an AWS CLI example of listing
-    # tags for an accelerator, scroll down to **Example**.
+    # List all tags for an accelerator.
     #
     # For more information, see [Tagging in AWS Global Accelerator][1] in
     # the *AWS Global Accelerator Developer Guide*.
@@ -1252,9 +2156,6 @@ module Aws::GlobalAccelerator
     # bring your own IP addresses (BYOIP) and creates a corresponding
     # address pool. After the address range is provisioned, it is ready to
     # be advertised using [ AdvertiseByoipCidr][1].
-    #
-    # To see an AWS CLI example of provisioning an address range for BYOIP,
-    # scroll down to **Example**.
     #
     # For more information, see [Bring Your Own IP Addresses (BYOIP)][2] in
     # the *AWS Global Accelerator Developer Guide*.
@@ -1305,8 +2206,35 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # Add tags to an accelerator resource. To see an AWS CLI example of
-    # adding tags to an accelerator, scroll down to **Example**.
+    # Remove endpoints from a custom routing accelerator.
+    #
+    # @option params [required, Array<String>] :endpoint_ids
+    #   The IDs for the endpoints. For custom routing accelerators, endpoint
+    #   IDs are the virtual private cloud (VPC) subnet IDs.
+    #
+    # @option params [required, String] :endpoint_group_arn
+    #   The Amazon Resource Name (ARN) of the endpoint group to remove
+    #   endpoints from.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_custom_routing_endpoints({
+    #     endpoint_ids: ["GenericString"], # required
+    #     endpoint_group_arn: "GenericString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/RemoveCustomRoutingEndpoints AWS API Documentation
+    #
+    # @overload remove_custom_routing_endpoints(params = {})
+    # @param [Hash] params ({})
+    def remove_custom_routing_endpoints(params = {}, options = {})
+      req = build_request(:remove_custom_routing_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Add tags to an accelerator resource.
     #
     # For more information, see [Tagging in AWS Global Accelerator][1] in
     # the *AWS Global Accelerator Developer Guide*.
@@ -1347,10 +2275,9 @@ module Aws::GlobalAccelerator
     end
 
     # Remove tags from a Global Accelerator resource. When you specify a tag
-    # key, the action removes both that key and its associated value. To see
-    # an AWS CLI example of removing tags from an accelerator, scroll down
-    # to **Example**. The operation succeeds even if you attempt to remove
-    # tags from an accelerator that was already removed.
+    # key, the action removes both that key and its associated value. The
+    # operation succeeds even if you attempt to remove tags from an
+    # accelerator that was already removed.
     #
     # For more information, see [Tagging in AWS Global Accelerator][1] in
     # the *AWS Global Accelerator Developer Guide*.
@@ -1385,8 +2312,7 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # Update an accelerator. To see an AWS CLI example of updating an
-    # accelerator, scroll down to **Example**.
+    # Update an accelerator.
     #
     # Global Accelerator is a global service that supports endpoints in
     # multiple AWS Regions but you must specify the US West (Oregon) Region
@@ -1401,7 +2327,7 @@ module Aws::GlobalAccelerator
     #   and must not begin or end with a hyphen.
     #
     # @option params [String] :ip_address_type
-    #   The value for the address type must be IPv4.
+    #   The IP address type, which must be IPv4.
     #
     # @option params [Boolean] :enabled
     #   Indicates whether an accelerator is enabled. The value is true or
@@ -1447,9 +2373,7 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # Update the attributes for an accelerator. To see an AWS CLI example of
-    # updating an accelerator to enable flow logs, scroll down to
-    # **Example**.
+    # Update the attributes for an accelerator.
     #
     # @option params [required, String] :accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator that you want to
@@ -1512,11 +2436,177 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
+    # Update a custom routing accelerator.
+    #
+    # @option params [required, String] :accelerator_arn
+    #   The Amazon Resource Name (ARN) of the accelerator to update.
+    #
+    # @option params [String] :name
+    #   The name of the accelerator. The name can have a maximum of 32
+    #   characters, must contain only alphanumeric characters or hyphens (-),
+    #   and must not begin or end with a hyphen.
+    #
+    # @option params [String] :ip_address_type
+    #   The value for the address type must be IPv4.
+    #
+    # @option params [Boolean] :enabled
+    #   Indicates whether an accelerator is enabled. The value is true or
+    #   false. The default value is true.
+    #
+    #   If the value is set to true, the accelerator cannot be deleted. If set
+    #   to false, the accelerator can be deleted.
+    #
+    # @return [Types::UpdateCustomRoutingAcceleratorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCustomRoutingAcceleratorResponse#accelerator #accelerator} => Types::CustomRoutingAccelerator
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_custom_routing_accelerator({
+    #     accelerator_arn: "GenericString", # required
+    #     name: "GenericString",
+    #     ip_address_type: "IPV4", # accepts IPV4
+    #     enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.accelerator.accelerator_arn #=> String
+    #   resp.accelerator.name #=> String
+    #   resp.accelerator.ip_address_type #=> String, one of "IPV4"
+    #   resp.accelerator.enabled #=> Boolean
+    #   resp.accelerator.ip_sets #=> Array
+    #   resp.accelerator.ip_sets[0].ip_family #=> String
+    #   resp.accelerator.ip_sets[0].ip_addresses #=> Array
+    #   resp.accelerator.ip_sets[0].ip_addresses[0] #=> String
+    #   resp.accelerator.dns_name #=> String
+    #   resp.accelerator.status #=> String, one of "DEPLOYED", "IN_PROGRESS"
+    #   resp.accelerator.created_time #=> Time
+    #   resp.accelerator.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateCustomRoutingAccelerator AWS API Documentation
+    #
+    # @overload update_custom_routing_accelerator(params = {})
+    # @param [Hash] params ({})
+    def update_custom_routing_accelerator(params = {}, options = {})
+      req = build_request(:update_custom_routing_accelerator, params)
+      req.send_request(options)
+    end
+
+    # Update the attributes for a custom routing accelerator.
+    #
+    # @option params [required, String] :accelerator_arn
+    #   The Amazon Resource Name (ARN) of the custom routing accelerator to
+    #   update attributes for.
+    #
+    # @option params [Boolean] :flow_logs_enabled
+    #   Update whether flow logs are enabled. The default value is false. If
+    #   the value is true, `FlowLogsS3Bucket` and `FlowLogsS3Prefix` must be
+    #   specified.
+    #
+    #   For more information, see [Flow Logs][1] in the *AWS Global
+    #   Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html
+    #
+    # @option params [String] :flow_logs_s3_bucket
+    #   The name of the Amazon S3 bucket for the flow logs. Attribute is
+    #   required if `FlowLogsEnabled` is `true`. The bucket must exist and
+    #   have a bucket policy that grants AWS Global Accelerator permission to
+    #   write to the bucket.
+    #
+    # @option params [String] :flow_logs_s3_prefix
+    #   Update the prefix for the location in the Amazon S3 bucket for the
+    #   flow logs. Attribute is required if `FlowLogsEnabled` is `true`.
+    #
+    #   If you don’t specify a prefix, the flow logs are stored in the root of
+    #   the bucket. If you specify slash (/) for the S3 bucket prefix, the log
+    #   file bucket folder structure will include a double slash (//), like
+    #   the following:
+    #
+    #   DOC-EXAMPLE-BUCKET//AWSLogs/aws\_account\_id
+    #
+    # @return [Types::UpdateCustomRoutingAcceleratorAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCustomRoutingAcceleratorAttributesResponse#accelerator_attributes #accelerator_attributes} => Types::CustomRoutingAcceleratorAttributes
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_custom_routing_accelerator_attributes({
+    #     accelerator_arn: "GenericString", # required
+    #     flow_logs_enabled: false,
+    #     flow_logs_s3_bucket: "GenericString",
+    #     flow_logs_s3_prefix: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.accelerator_attributes.flow_logs_enabled #=> Boolean
+    #   resp.accelerator_attributes.flow_logs_s3_bucket #=> String
+    #   resp.accelerator_attributes.flow_logs_s3_prefix #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateCustomRoutingAcceleratorAttributes AWS API Documentation
+    #
+    # @overload update_custom_routing_accelerator_attributes(params = {})
+    # @param [Hash] params ({})
+    def update_custom_routing_accelerator_attributes(params = {}, options = {})
+      req = build_request(:update_custom_routing_accelerator_attributes, params)
+      req.send_request(options)
+    end
+
+    # Update a listener for a custom routing accelerator.
+    #
+    # @option params [required, String] :listener_arn
+    #   The Amazon Resource Name (ARN) of the listener to update.
+    #
+    # @option params [required, Array<Types::PortRange>] :port_ranges
+    #   The updated port range to support for connections from clients to your
+    #   accelerator. If you remove ports that are currently being used by a
+    #   subnet endpoint, the call fails.
+    #
+    #   Separately, you set port ranges for endpoints. For more information,
+    #   see [About endpoints for custom routing accelerators][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-custom-routing-endpoints.html
+    #
+    # @return [Types::UpdateCustomRoutingListenerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCustomRoutingListenerResponse#listener #listener} => Types::CustomRoutingListener
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_custom_routing_listener({
+    #     listener_arn: "GenericString", # required
+    #     port_ranges: [ # required
+    #       {
+    #         from_port: 1,
+    #         to_port: 1,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.listener.listener_arn #=> String
+    #   resp.listener.port_ranges #=> Array
+    #   resp.listener.port_ranges[0].from_port #=> Integer
+    #   resp.listener.port_ranges[0].to_port #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateCustomRoutingListener AWS API Documentation
+    #
+    # @overload update_custom_routing_listener(params = {})
+    # @param [Hash] params ({})
+    def update_custom_routing_listener(params = {}, options = {})
+      req = build_request(:update_custom_routing_listener, params)
+      req.send_request(options)
+    end
+
     # Update an endpoint group. A resource must be valid and active when you
     # add it as an endpoint.
-    #
-    # To see an AWS CLI example of updating an endpoint group, scroll down
-    # to **Example**.
     #
     # @option params [required, String] :endpoint_group_arn
     #   The Amazon Resource Name (ARN) of the endpoint group.
@@ -1593,7 +2683,7 @@ module Aws::GlobalAccelerator
     #     traffic_dial_percentage: 1.0,
     #     health_check_port: 1,
     #     health_check_protocol: "TCP", # accepts TCP, HTTP, HTTPS
-    #     health_check_path: "GenericString",
+    #     health_check_path: "HealthCheckPath",
     #     health_check_interval_seconds: 1,
     #     threshold_count: 1,
     #     port_overrides: [
@@ -1633,8 +2723,7 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # Update a listener. To see an AWS CLI example of updating listener,
-    # scroll down to **Example**.
+    # Update a listener.
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener to update.
@@ -1710,9 +2799,7 @@ module Aws::GlobalAccelerator
 
     # Stops advertising an address range that is provisioned as an address
     # pool. You can perform this operation at most once every 10 seconds,
-    # even if you specify different address ranges each time. To see an AWS
-    # CLI example of withdrawing an address range for BYOIP so it will no
-    # longer be advertised by AWS, scroll down to **Example**.
+    # even if you specify different address ranges each time.
     #
     # It can take a few minutes before traffic to the specified addresses
     # stops routing to AWS because of propagation delays.
@@ -1767,7 +2854,7 @@ module Aws::GlobalAccelerator
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-globalaccelerator'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

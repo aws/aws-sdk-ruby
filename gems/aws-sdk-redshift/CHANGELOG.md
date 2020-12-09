@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2020-12-09)
+------------------
+
+* Feature - Add support for availability zone relocation feature.
+
 1.51.0 (2020-11-19)
 ------------------
 

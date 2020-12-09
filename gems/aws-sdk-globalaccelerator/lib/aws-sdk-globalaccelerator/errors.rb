@@ -33,8 +33,11 @@ module Aws::GlobalAccelerator
   # * {AssociatedEndpointGroupFoundException}
   # * {AssociatedListenerFoundException}
   # * {ByoipCidrNotFoundException}
+  # * {ConflictException}
+  # * {EndpointAlreadyExistsException}
   # * {EndpointGroupAlreadyExistsException}
   # * {EndpointGroupNotFoundException}
+  # * {EndpointNotFoundException}
   # * {IncorrectCidrStateException}
   # * {InternalServiceErrorException}
   # * {InvalidArgumentException}
@@ -139,6 +142,36 @@ module Aws::GlobalAccelerator
       end
     end
 
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::GlobalAccelerator::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class EndpointAlreadyExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::GlobalAccelerator::Types::EndpointAlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class EndpointGroupAlreadyExistsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -159,6 +192,21 @@ module Aws::GlobalAccelerator
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::GlobalAccelerator::Types::EndpointGroupNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class EndpointNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::GlobalAccelerator::Types::EndpointNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
