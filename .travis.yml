@@ -15,13 +15,12 @@ rvm:
   - 2.0
   - 2.1
   - 2.2
-  - 2.3
-  - 2.4
-  - 2.5
-  - 2.6
-  - 2.7
   - jruby-9.1
-  - jruby-9.2
+
+matrix:
+exclude:
+  - rvm: jruby-9.1
+    env: KITCHEN_SINK=1
 
 sudo: false
 
@@ -36,20 +35,6 @@ script: >
   (bundle exec rake test:spec)
 
 bundler_args: --without docs repl
-
-matrix:
-  exclude:
-    - rvm: jruby-9.1
-      env: KITCHEN_SINK=1
-    - rvm: jruby-9.2
-      env: KITCHEN_SINK=1
-  include:
-    - rvm: 2.3
-      env: OLD_OJ=1
-    - rvm: 2.3
-      env: OLD_OX=1
-    - rvm: 2.3
-      env: NO_H2=1
 
 notifications:
   webhooks:

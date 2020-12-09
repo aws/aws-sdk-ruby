@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-18.04
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: [2.3, 2.4, 2.5, 2.6, 2.7, jruby-9.2]
+        env: [PURE_RUBY, KITCHEN_SINK]
+        exclude:
+          - ruby: jruby-9.1
+            env: KITCHEN_SINK
+          - ruby: jruby-9.2
+            env: KITCHEN_SINK
+        include:
+          - ruby: 2.3
+            env: OLD_OJ=1
+          - ruby: 2.3
+            env: OLD_OX=1
+          - ruby: 2.3
+            env: NO_H2=1
+
+    steps:
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+
+      - uses: actions/checkout@v2
+
+      - name: 'set ENV'
+        run: echo "${{ matrix.env }}=1" >> $GITHUB_ENV
+
+      - name: Install gems
+        run: |
+          echo PURE_RUBY=$PURE_RUBY KITCHEN_SINK=$KITCHEN_SINK
+          bundle config set without 'docs repl'
+          bundle install
+
+      - name: SDK Build
+        run: bundle exec rake build
+
+      - name: Tests
+        run: bundle exec rake test:spec
