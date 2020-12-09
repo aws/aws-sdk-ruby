@@ -64,6 +64,11 @@ module AwsSdkCodeGenerator
       # @return [Array<Dependency>]
       def dependencies
         @service.gem_dependencies.map do |gem, version|
+          version = if version.is_a? Array
+            version.map { |v| "'#{v}'" }.join(', ')
+          else
+            "'#{version}'"
+          end
           Dependency.new(gem, version)
         end
       end
