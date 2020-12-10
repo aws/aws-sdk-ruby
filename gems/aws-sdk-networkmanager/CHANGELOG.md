@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2020-12-10)
+------------------
+
+* Feature - This release adds API support for Transit Gateway Connect integration into AWS Network Manager.
+
 1.8.0 (2020-09-30)
 ------------------
 

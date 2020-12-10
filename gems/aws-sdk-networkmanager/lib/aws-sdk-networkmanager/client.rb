@@ -435,12 +435,142 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Associates a transit gateway Connect peer with a device, and
+    # optionally, with a link. If you specify a link, it must be associated
+    # with the specified device.
+    #
+    # You can only associate transit gateway Connect peers that have been
+    # created on a transit gateway that's registered in your global
+    # network.
+    #
+    # You cannot associate a transit gateway Connect peer with more than one
+    # device and link.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network.
+    #
+    # @option params [required, String] :transit_gateway_connect_peer_arn
+    #   The Amazon Resource Name (ARN) of the Connect peer.
+    #
+    # @option params [required, String] :device_id
+    #   The ID of the device.
+    #
+    # @option params [String] :link_id
+    #   The ID of the link.
+    #
+    # @return [Types::AssociateTransitGatewayConnectPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateTransitGatewayConnectPeerResponse#transit_gateway_connect_peer_association #transit_gateway_connect_peer_association} => Types::TransitGatewayConnectPeerAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_transit_gateway_connect_peer({
+    #     global_network_id: "String", # required
+    #     transit_gateway_connect_peer_arn: "String", # required
+    #     device_id: "String", # required
+    #     link_id: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_connect_peer_association.transit_gateway_connect_peer_arn #=> String
+    #   resp.transit_gateway_connect_peer_association.global_network_id #=> String
+    #   resp.transit_gateway_connect_peer_association.device_id #=> String
+    #   resp.transit_gateway_connect_peer_association.link_id #=> String
+    #   resp.transit_gateway_connect_peer_association.state #=> String, one of "PENDING", "AVAILABLE", "DELETING", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AssociateTransitGatewayConnectPeer AWS API Documentation
+    #
+    # @overload associate_transit_gateway_connect_peer(params = {})
+    # @param [Hash] params ({})
+    def associate_transit_gateway_connect_peer(params = {}, options = {})
+      req = build_request(:associate_transit_gateway_connect_peer, params)
+      req.send_request(options)
+    end
+
+    # Creates a connection between two devices. The devices can be a
+    # physical or virtual appliance that connects to a third-party appliance
+    # in a VPC, or a physical appliance that connects to another physical
+    # appliance in an on-premises network.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network.
+    #
+    # @option params [required, String] :device_id
+    #   The ID of the first device in the connection.
+    #
+    # @option params [required, String] :connected_device_id
+    #   The ID of the second device in the connection.
+    #
+    # @option params [String] :link_id
+    #   The ID of the link for the first device.
+    #
+    # @option params [String] :connected_link_id
+    #   The ID of the link for the second device.
+    #
+    # @option params [String] :description
+    #   A description of the connection.
+    #
+    #   Length Constraints: Maximum length of 256 characters.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to apply to the resource during creation.
+    #
+    # @return [Types::CreateConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConnectionResponse#connection #connection} => Types::Connection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_connection({
+    #     global_network_id: "String", # required
+    #     device_id: "String", # required
+    #     connected_device_id: "String", # required
+    #     link_id: "String",
+    #     connected_link_id: "String",
+    #     description: "String",
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection.connection_id #=> String
+    #   resp.connection.connection_arn #=> String
+    #   resp.connection.global_network_id #=> String
+    #   resp.connection.device_id #=> String
+    #   resp.connection.connected_device_id #=> String
+    #   resp.connection.link_id #=> String
+    #   resp.connection.connected_link_id #=> String
+    #   resp.connection.description #=> String
+    #   resp.connection.created_at #=> Time
+    #   resp.connection.state #=> String, one of "PENDING", "AVAILABLE", "DELETING", "UPDATING"
+    #   resp.connection.tags #=> Array
+    #   resp.connection.tags[0].key #=> String
+    #   resp.connection.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateConnection AWS API Documentation
+    #
+    # @overload create_connection(params = {})
+    # @param [Hash] params ({})
+    def create_connection(params = {}, options = {})
+      req = build_request(:create_connection, params)
+      req.send_request(options)
+    end
+
     # Creates a new device in a global network. If you specify both a site
     # ID and a location, the location of the site is used for visualization
     # in the Network Manager console.
     #
     # @option params [required, String] :global_network_id
     #   The ID of the global network.
+    #
+    # @option params [Types::AWSLocation] :aws_location
+    #   The AWS location of the device.
     #
     # @option params [String] :description
     #   A description of the device.
@@ -482,6 +612,10 @@ module Aws::NetworkManager
     #
     #   resp = client.create_device({
     #     global_network_id: "String", # required
+    #     aws_location: {
+    #       zone: "String",
+    #       subnet_arn: "String",
+    #     },
     #     description: "String",
     #     type: "String",
     #     vendor: "String",
@@ -506,6 +640,8 @@ module Aws::NetworkManager
     #   resp.device.device_id #=> String
     #   resp.device.device_arn #=> String
     #   resp.device.global_network_id #=> String
+    #   resp.device.aws_location.zone #=> String
+    #   resp.device.aws_location.subnet_arn #=> String
     #   resp.device.description #=> String
     #   resp.device.type #=> String
     #   resp.device.vendor #=> String
@@ -729,6 +865,50 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Deletes the specified connection in your global network.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network.
+    #
+    # @option params [required, String] :connection_id
+    #   The ID of the connection.
+    #
+    # @return [Types::DeleteConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteConnectionResponse#connection #connection} => Types::Connection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_connection({
+    #     global_network_id: "String", # required
+    #     connection_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection.connection_id #=> String
+    #   resp.connection.connection_arn #=> String
+    #   resp.connection.global_network_id #=> String
+    #   resp.connection.device_id #=> String
+    #   resp.connection.connected_device_id #=> String
+    #   resp.connection.link_id #=> String
+    #   resp.connection.connected_link_id #=> String
+    #   resp.connection.description #=> String
+    #   resp.connection.created_at #=> Time
+    #   resp.connection.state #=> String, one of "PENDING", "AVAILABLE", "DELETING", "UPDATING"
+    #   resp.connection.tags #=> Array
+    #   resp.connection.tags[0].key #=> String
+    #   resp.connection.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteConnection AWS API Documentation
+    #
+    # @overload delete_connection(params = {})
+    # @param [Hash] params ({})
+    def delete_connection(params = {}, options = {})
+      req = build_request(:delete_connection, params)
+      req.send_request(options)
+    end
+
     # Deletes an existing device. You must first disassociate the device
     # from any links and customer gateways.
     #
@@ -754,6 +934,8 @@ module Aws::NetworkManager
     #   resp.device.device_id #=> String
     #   resp.device.device_arn #=> String
     #   resp.device.global_network_id #=> String
+    #   resp.device.aws_location.zone #=> String
+    #   resp.device.aws_location.subnet_arn #=> String
     #   resp.device.description #=> String
     #   resp.device.type #=> String
     #   resp.device.vendor #=> String
@@ -1075,6 +1257,104 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Disassociates a transit gateway Connect peer from a device and link.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network.
+    #
+    # @option params [required, String] :transit_gateway_connect_peer_arn
+    #   The Amazon Resource Name (ARN) of the transit gateway Connect peer.
+    #
+    # @return [Types::DisassociateTransitGatewayConnectPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateTransitGatewayConnectPeerResponse#transit_gateway_connect_peer_association #transit_gateway_connect_peer_association} => Types::TransitGatewayConnectPeerAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_transit_gateway_connect_peer({
+    #     global_network_id: "String", # required
+    #     transit_gateway_connect_peer_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_connect_peer_association.transit_gateway_connect_peer_arn #=> String
+    #   resp.transit_gateway_connect_peer_association.global_network_id #=> String
+    #   resp.transit_gateway_connect_peer_association.device_id #=> String
+    #   resp.transit_gateway_connect_peer_association.link_id #=> String
+    #   resp.transit_gateway_connect_peer_association.state #=> String, one of "PENDING", "AVAILABLE", "DELETING", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DisassociateTransitGatewayConnectPeer AWS API Documentation
+    #
+    # @overload disassociate_transit_gateway_connect_peer(params = {})
+    # @param [Hash] params ({})
+    def disassociate_transit_gateway_connect_peer(params = {}, options = {})
+      req = build_request(:disassociate_transit_gateway_connect_peer, params)
+      req.send_request(options)
+    end
+
+    # Gets information about one or more of your connections in a global
+    # network.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network.
+    #
+    # @option params [Array<String>] :connection_ids
+    #   One or more connection IDs.
+    #
+    # @option params [String] :device_id
+    #   The ID of the device.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::GetConnectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectionsResponse#connections #connections} => Array&lt;Types::Connection&gt;
+    #   * {Types::GetConnectionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connections({
+    #     global_network_id: "String", # required
+    #     connection_ids: ["String"],
+    #     device_id: "String",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connections #=> Array
+    #   resp.connections[0].connection_id #=> String
+    #   resp.connections[0].connection_arn #=> String
+    #   resp.connections[0].global_network_id #=> String
+    #   resp.connections[0].device_id #=> String
+    #   resp.connections[0].connected_device_id #=> String
+    #   resp.connections[0].link_id #=> String
+    #   resp.connections[0].connected_link_id #=> String
+    #   resp.connections[0].description #=> String
+    #   resp.connections[0].created_at #=> Time
+    #   resp.connections[0].state #=> String, one of "PENDING", "AVAILABLE", "DELETING", "UPDATING"
+    #   resp.connections[0].tags #=> Array
+    #   resp.connections[0].tags[0].key #=> String
+    #   resp.connections[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetConnections AWS API Documentation
+    #
+    # @overload get_connections(params = {})
+    # @param [Hash] params ({})
+    def get_connections(params = {}, options = {})
+      req = build_request(:get_connections, params)
+      req.send_request(options)
+    end
+
     # Gets the association information for customer gateways that are
     # associated with devices and links in your global network.
     #
@@ -1172,6 +1452,8 @@ module Aws::NetworkManager
     #   resp.devices[0].device_id #=> String
     #   resp.devices[0].device_arn #=> String
     #   resp.devices[0].global_network_id #=> String
+    #   resp.devices[0].aws_location.zone #=> String
+    #   resp.devices[0].aws_location.subnet_arn #=> String
     #   resp.devices[0].description #=> String
     #   resp.devices[0].type #=> String
     #   resp.devices[0].vendor #=> String
@@ -1381,6 +1663,56 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Gets information about one or more of your transit gateway Connect
+    # peer associations in a global network.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network.
+    #
+    # @option params [Array<String>] :transit_gateway_connect_peer_arns
+    #   One or more transit gateway Connect peer Amazon Resource Names (ARNs).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::GetTransitGatewayConnectPeerAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTransitGatewayConnectPeerAssociationsResponse#transit_gateway_connect_peer_associations #transit_gateway_connect_peer_associations} => Array&lt;Types::TransitGatewayConnectPeerAssociation&gt;
+    #   * {Types::GetTransitGatewayConnectPeerAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_transit_gateway_connect_peer_associations({
+    #     global_network_id: "String", # required
+    #     transit_gateway_connect_peer_arns: ["String"],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_connect_peer_associations #=> Array
+    #   resp.transit_gateway_connect_peer_associations[0].transit_gateway_connect_peer_arn #=> String
+    #   resp.transit_gateway_connect_peer_associations[0].global_network_id #=> String
+    #   resp.transit_gateway_connect_peer_associations[0].device_id #=> String
+    #   resp.transit_gateway_connect_peer_associations[0].link_id #=> String
+    #   resp.transit_gateway_connect_peer_associations[0].state #=> String, one of "PENDING", "AVAILABLE", "DELETING", "DELETED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetTransitGatewayConnectPeerAssociations AWS API Documentation
+    #
+    # @overload get_transit_gateway_connect_peer_associations(params = {})
+    # @param [Hash] params ({})
+    def get_transit_gateway_connect_peer_associations(params = {}, options = {})
+      req = build_request(:get_transit_gateway_connect_peer_associations, params)
+      req.send_request(options)
+    end
+
     # Gets information about the transit gateway registrations in a
     # specified global network.
     #
@@ -1561,6 +1893,65 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Updates the information for an existing connection. To remove
+    # information for any of the parameters, specify an empty string.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network.
+    #
+    # @option params [required, String] :connection_id
+    #   The ID of the connection.
+    #
+    # @option params [String] :link_id
+    #   The ID of the link for the first device in the connection.
+    #
+    # @option params [String] :connected_link_id
+    #   The ID of the link for the second device in the connection.
+    #
+    # @option params [String] :description
+    #   A description of the connection.
+    #
+    #   Length Constraints: Maximum length of 256 characters.
+    #
+    # @return [Types::UpdateConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConnectionResponse#connection #connection} => Types::Connection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_connection({
+    #     global_network_id: "String", # required
+    #     connection_id: "String", # required
+    #     link_id: "String",
+    #     connected_link_id: "String",
+    #     description: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection.connection_id #=> String
+    #   resp.connection.connection_arn #=> String
+    #   resp.connection.global_network_id #=> String
+    #   resp.connection.device_id #=> String
+    #   resp.connection.connected_device_id #=> String
+    #   resp.connection.link_id #=> String
+    #   resp.connection.connected_link_id #=> String
+    #   resp.connection.description #=> String
+    #   resp.connection.created_at #=> Time
+    #   resp.connection.state #=> String, one of "PENDING", "AVAILABLE", "DELETING", "UPDATING"
+    #   resp.connection.tags #=> Array
+    #   resp.connection.tags[0].key #=> String
+    #   resp.connection.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateConnection AWS API Documentation
+    #
+    # @overload update_connection(params = {})
+    # @param [Hash] params ({})
+    def update_connection(params = {}, options = {})
+      req = build_request(:update_connection, params)
+      req.send_request(options)
+    end
+
     # Updates the details for an existing device. To remove information for
     # any of the parameters, specify an empty string.
     #
@@ -1569,6 +1960,9 @@ module Aws::NetworkManager
     #
     # @option params [required, String] :device_id
     #   The ID of the device.
+    #
+    # @option params [Types::AWSLocation] :aws_location
+    #   The AWS location of the device.
     #
     # @option params [String] :description
     #   A description of the device.
@@ -1608,6 +2002,10 @@ module Aws::NetworkManager
     #   resp = client.update_device({
     #     global_network_id: "String", # required
     #     device_id: "String", # required
+    #     aws_location: {
+    #       zone: "String",
+    #       subnet_arn: "String",
+    #     },
     #     description: "String",
     #     type: "String",
     #     vendor: "String",
@@ -1626,6 +2024,8 @@ module Aws::NetworkManager
     #   resp.device.device_id #=> String
     #   resp.device.device_arn #=> String
     #   resp.device.global_network_id #=> String
+    #   resp.device.aws_location.zone #=> String
+    #   resp.device.aws_location.subnet_arn #=> String
     #   resp.device.description #=> String
     #   resp.device.type #=> String
     #   resp.device.vendor #=> String
@@ -1840,7 +2240,7 @@ module Aws::NetworkManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkmanager'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.216.0 (2020-12-10)
+------------------
+
+* Feature - TGW connect simplifies connectivity of SD-WAN appliances; IGMP support for TGW multicast; VPC Reachability Analyzer for VPC resources connectivity analysis.
+
 1.215.0 (2020-12-09)
 ------------------
 

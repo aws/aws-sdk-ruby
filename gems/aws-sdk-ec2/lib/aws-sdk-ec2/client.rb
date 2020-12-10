@@ -378,6 +378,58 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Accepts a request to associate subnets with a transit gateway
+    # multicast domain.
+    #
+    # @option params [String] :transit_gateway_multicast_domain_id
+    #   The ID of the transit gateway multicast domain.
+    #
+    # @option params [String] :transit_gateway_attachment_id
+    #   The ID of the transit gateway attachment.
+    #
+    # @option params [Array<String>] :subnet_ids
+    #   The IDs of the subnets to associate with the transit gateway multicast
+    #   domain.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::AcceptTransitGatewayMulticastDomainAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptTransitGatewayMulticastDomainAssociationsResult#associations #associations} => Types::TransitGatewayMulticastDomainAssociations
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_transit_gateway_multicast_domain_associations({
+    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId",
+    #     subnet_ids: ["String"],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associations.transit_gateway_multicast_domain_id #=> String
+    #   resp.associations.transit_gateway_attachment_id #=> String
+    #   resp.associations.resource_id #=> String
+    #   resp.associations.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
+    #   resp.associations.resource_owner_id #=> String
+    #   resp.associations.subnets #=> Array
+    #   resp.associations.subnets[0].subnet_id #=> String
+    #   resp.associations.subnets[0].state #=> String, one of "pendingAcceptance", "associating", "associated", "disassociating", "disassociated", "rejected", "failed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptTransitGatewayMulticastDomainAssociations AWS API Documentation
+    #
+    # @overload accept_transit_gateway_multicast_domain_associations(params = {})
+    # @param [Hash] params ({})
+    def accept_transit_gateway_multicast_domain_associations(params = {}, options = {})
+      req = build_request(:accept_transit_gateway_multicast_domain_associations, params)
+      req.send_request(options)
+    end
+
     # Accepts a transit gateway peering attachment request. The peering
     # attachment must be in the `pendingAcceptance` state.
     #
@@ -885,7 +937,7 @@ module Aws::EC2
     #     quantity: 1, # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -1686,7 +1738,7 @@ module Aws::EC2
     #   resp = client.associate_transit_gateway_multicast_domain({
     #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
     #     transit_gateway_attachment_id: "TransitGatewayAttachmentId",
-    #     subnet_ids: ["String"],
+    #     subnet_ids: ["SubnetId"],
     #     dry_run: false,
     #   })
     #
@@ -1695,10 +1747,11 @@ module Aws::EC2
     #   resp.associations.transit_gateway_multicast_domain_id #=> String
     #   resp.associations.transit_gateway_attachment_id #=> String
     #   resp.associations.resource_id #=> String
-    #   resp.associations.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.associations.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
+    #   resp.associations.resource_owner_id #=> String
     #   resp.associations.subnets #=> Array
     #   resp.associations.subnets[0].subnet_id #=> String
-    #   resp.associations.subnets[0].state #=> String, one of "associating", "associated", "disassociating", "disassociated"
+    #   resp.associations.subnets[0].state #=> String, one of "pendingAcceptance", "associating", "associated", "disassociating", "disassociated", "rejected", "failed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateTransitGatewayMulticastDomain AWS API Documentation
     #
@@ -1742,7 +1795,7 @@ module Aws::EC2
     #   resp.association.transit_gateway_route_table_id #=> String
     #   resp.association.transit_gateway_attachment_id #=> String
     #   resp.association.resource_id #=> String
-    #   resp.association.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.association.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
     #   resp.association.state #=> String, one of "associating", "associated", "disassociating", "disassociated"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateTransitGatewayRouteTable AWS API Documentation
@@ -3558,7 +3611,7 @@ module Aws::EC2
     #     source_snapshot_id: "String", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -3744,7 +3797,7 @@ module Aws::EC2
     #     instance_match_criteria: "open", # accepts open, targeted
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -3830,7 +3883,7 @@ module Aws::EC2
     #     vpc_id: "VpcId", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -4019,7 +4072,7 @@ module Aws::EC2
     #     client_token: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -4236,7 +4289,7 @@ module Aws::EC2
     #     type: "ipsec.1", # required, accepts ipsec.1
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -4520,7 +4573,7 @@ module Aws::EC2
     #     ],
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -4594,7 +4647,7 @@ module Aws::EC2
     #     vpc_id: "VpcId", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -4801,7 +4854,7 @@ module Aws::EC2
     #     replace_unhealthy_instances: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -5007,7 +5060,7 @@ module Aws::EC2
     #     log_format: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -5106,7 +5159,7 @@ module Aws::EC2
     #     client_token: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -5259,7 +5312,7 @@ module Aws::EC2
     #     no_reboot: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -5328,7 +5381,7 @@ module Aws::EC2
     #     target_environment: "citrix", # required, accepts citrix, vmware, microsoft
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -5411,7 +5464,7 @@ module Aws::EC2
     #   resp = client.create_internet_gateway({
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -5500,7 +5553,7 @@ module Aws::EC2
     #     dry_run: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -5702,7 +5755,7 @@ module Aws::EC2
     #       user_data: "String",
     #       tag_specifications: [
     #         {
-    #           resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #           resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #           tags: [
     #             {
     #               key: "String",
@@ -5767,7 +5820,7 @@ module Aws::EC2
     #     },
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -5988,7 +6041,7 @@ module Aws::EC2
     #       user_data: "String",
     #       tag_specifications: [
     #         {
-    #           resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #           resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #           tags: [
     #             {
     #               key: "String",
@@ -6115,7 +6168,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
     #   resp.launch_template_version.launch_template_data.user_data #=> String
     #   resp.launch_template_version.launch_template_data.tag_specifications #=> Array
-    #   resp.launch_template_version.launch_template_data.tag_specifications[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "egress-only-internet-gateway", "elastic-ip", "elastic-gpu", "export-image-task", "export-instance-task", "fleet", "fpga-image", "host-reservation", "image", "import-image-task", "import-snapshot-task", "instance", "internet-gateway", "key-pair", "launch-template", "local-gateway-route-table-vpc-association", "natgateway", "network-acl", "network-interface", "placement-group", "reserved-instances", "route-table", "security-group", "snapshot", "spot-fleet-request", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-multicast-domain", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway", "vpc-flow-log"
+    #   resp.launch_template_version.launch_template_data.tag_specifications[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "egress-only-internet-gateway", "elastic-ip", "elastic-gpu", "export-image-task", "export-instance-task", "fleet", "fpga-image", "host-reservation", "image", "import-image-task", "import-snapshot-task", "instance", "internet-gateway", "key-pair", "launch-template", "local-gateway-route-table-vpc-association", "natgateway", "network-acl", "network-interface", "network-insights-analysis", "network-insights-path", "placement-group", "reserved-instances", "route-table", "security-group", "snapshot", "spot-fleet-request", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-connect-peer", "transit-gateway-multicast-domain", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway", "vpc-flow-log"
     #   resp.launch_template_version.launch_template_data.tag_specifications[0].tags #=> Array
     #   resp.launch_template_version.launch_template_data.tag_specifications[0].tags[0].key #=> String
     #   resp.launch_template_version.launch_template_data.tag_specifications[0].tags[0].value #=> String
@@ -6240,7 +6293,7 @@ module Aws::EC2
     #     vpc_id: "VpcId", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -6339,7 +6392,7 @@ module Aws::EC2
     #     max_entries: 1, # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -6460,7 +6513,7 @@ module Aws::EC2
     #     subnet_id: "SubnetId", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -6577,7 +6630,7 @@ module Aws::EC2
     #     vpc_id: "VpcId", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -6748,6 +6801,108 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Creates a path to analyze for reachability.
+    #
+    # Reachability Analyzer enables you to analyze and debug network
+    # reachability between two resources in your virtual private cloud
+    # (VPC). For more information, see [What is Reachability Analyzer][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/reachability/
+    #
+    # @option params [String] :source_ip
+    #   The IP address of the AWS resource that is the source of the path.
+    #
+    # @option params [String] :destination_ip
+    #   The IP address of the AWS resource that is the destination of the
+    #   path.
+    #
+    # @option params [required, String] :source
+    #   The AWS resource that is the source of the path.
+    #
+    # @option params [required, String] :destination
+    #   The AWS resource that is the destination of the path.
+    #
+    # @option params [required, String] :protocol
+    #   The protocol.
+    #
+    # @option params [Integer] :destination_port
+    #   The destination port.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to add to the path.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateNetworkInsightsPathResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateNetworkInsightsPathResult#network_insights_path #network_insights_path} => Types::NetworkInsightsPath
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_network_insights_path({
+    #     source_ip: "IpAddress",
+    #     destination_ip: "IpAddress",
+    #     source: "String", # required
+    #     destination: "String", # required
+    #     protocol: "tcp", # required, accepts tcp, udp
+    #     destination_port: 1,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #     client_token: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_insights_path.network_insights_path_id #=> String
+    #   resp.network_insights_path.network_insights_path_arn #=> String
+    #   resp.network_insights_path.created_date #=> Time
+    #   resp.network_insights_path.source #=> String
+    #   resp.network_insights_path.destination #=> String
+    #   resp.network_insights_path.source_ip #=> String
+    #   resp.network_insights_path.destination_ip #=> String
+    #   resp.network_insights_path.protocol #=> String, one of "tcp", "udp"
+    #   resp.network_insights_path.destination_port #=> Integer
+    #   resp.network_insights_path.tags #=> Array
+    #   resp.network_insights_path.tags[0].key #=> String
+    #   resp.network_insights_path.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInsightsPath AWS API Documentation
+    #
+    # @overload create_network_insights_path(params = {})
+    # @param [Hash] params ({})
+    def create_network_insights_path(params = {}, options = {})
+      req = build_request(:create_network_insights_path, params)
+      req.send_request(options)
+    end
+
     # Creates a network interface in the specified subnet.
     #
     # For more information about network interfaces, see [Elastic Network
@@ -6895,7 +7050,7 @@ module Aws::EC2
     #     subnet_id: "SubnetId", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -7091,7 +7246,7 @@ module Aws::EC2
     #     partition_count: 1,
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -7426,7 +7581,7 @@ module Aws::EC2
     #     vpc_id: "VpcId", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -7576,7 +7731,7 @@ module Aws::EC2
     #     vpc_id: "VpcId",
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -7706,7 +7861,7 @@ module Aws::EC2
     #     volume_id: "VolumeId", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -7785,7 +7940,7 @@ module Aws::EC2
     #     },
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -8010,7 +8165,7 @@ module Aws::EC2
     #   resp = client.create_subnet({
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -8190,7 +8345,7 @@ module Aws::EC2
     #     description: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -8464,7 +8619,7 @@ module Aws::EC2
     #     description: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -8563,7 +8718,7 @@ module Aws::EC2
     #     description: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -8653,10 +8808,11 @@ module Aws::EC2
     #       vpn_ecmp_support: "enable", # accepts enable, disable
     #       dns_support: "enable", # accepts enable, disable
     #       multicast_support: "enable", # accepts enable, disable
+    #       transit_gateway_cidr_blocks: ["String"],
     #     },
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -8677,6 +8833,8 @@ module Aws::EC2
     #   resp.transit_gateway.description #=> String
     #   resp.transit_gateway.creation_time #=> Time
     #   resp.transit_gateway.options.amazon_side_asn #=> Integer
+    #   resp.transit_gateway.options.transit_gateway_cidr_blocks #=> Array
+    #   resp.transit_gateway.options.transit_gateway_cidr_blocks[0] #=> String
     #   resp.transit_gateway.options.auto_accept_shared_attachments #=> String, one of "enable", "disable"
     #   resp.transit_gateway.options.default_route_table_association #=> String, one of "enable", "disable"
     #   resp.transit_gateway.options.association_default_route_table_id #=> String
@@ -8698,6 +8856,179 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Creates a Connect attachment from a specified transit gateway
+    # attachment. A Connect attachment is a GRE-based tunnel attachment that
+    # you can use to establish a connection between a transit gateway and an
+    # appliance.
+    #
+    # A Connect attachment uses an existing VPC or AWS Direct Connect
+    # attachment as the underlying transport mechanism.
+    #
+    # @option params [required, String] :transport_transit_gateway_attachment_id
+    #   The ID of the transit gateway attachment. You can specify a VPC
+    #   attachment or a AWS Direct Connect attachment.
+    #
+    # @option params [required, Types::CreateTransitGatewayConnectRequestOptions] :options
+    #   The Connect attachment options.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the Connect attachment.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateTransitGatewayConnectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTransitGatewayConnectResult#transit_gateway_connect #transit_gateway_connect} => Types::TransitGatewayConnect
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_transit_gateway_connect({
+    #     transport_transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     options: { # required
+    #       protocol: "gre", # required, accepts gre
+    #     },
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_connect.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_connect.transport_transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_connect.transit_gateway_id #=> String
+    #   resp.transit_gateway_connect.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_connect.creation_time #=> Time
+    #   resp.transit_gateway_connect.options.protocol #=> String, one of "gre"
+    #   resp.transit_gateway_connect.tags #=> Array
+    #   resp.transit_gateway_connect.tags[0].key #=> String
+    #   resp.transit_gateway_connect.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayConnect AWS API Documentation
+    #
+    # @overload create_transit_gateway_connect(params = {})
+    # @param [Hash] params ({})
+    def create_transit_gateway_connect(params = {}, options = {})
+      req = build_request(:create_transit_gateway_connect, params)
+      req.send_request(options)
+    end
+
+    # Creates a Connect peer for a specified transit gateway Connect
+    # attachment between a transit gateway and an appliance.
+    #
+    # The peer address and transit gateway address must be the same IP
+    # address family (IPv4 or IPv6).
+    #
+    # For more information, see [Connect peers][1] in the *Transit Gateways
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html#tgw-connect-peer
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   The ID of the Connect attachment.
+    #
+    # @option params [String] :transit_gateway_address
+    #   The peer IP address (GRE outer IP address) on the transit gateway side
+    #   of the Connect peer, which must be specified from a transit gateway
+    #   CIDR block. If not specified, Amazon automatically assigns the first
+    #   available IP address from the transit gateway CIDR block.
+    #
+    # @option params [required, String] :peer_address
+    #   The peer IP address (GRE outer IP address) on the appliance side of
+    #   the Connect peer.
+    #
+    # @option params [Types::TransitGatewayConnectRequestBgpOptions] :bgp_options
+    #   The BGP options for the Connect peer.
+    #
+    # @option params [required, Array<String>] :inside_cidr_blocks
+    #   The range of inside IP addresses that are used for BGP peering. You
+    #   must specify a size /29 IPv4 CIDR block from the `169.254.0.0/16`
+    #   range. The first address from the range must be configured on the
+    #   appliance as the BGP IP address. You can also optionally specify a
+    #   size /125 IPv6 CIDR block from the `fd00::/8` range.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the Connect peer.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::CreateTransitGatewayConnectPeerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTransitGatewayConnectPeerResult#transit_gateway_connect_peer #transit_gateway_connect_peer} => Types::TransitGatewayConnectPeer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_transit_gateway_connect_peer({
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     transit_gateway_address: "String",
+    #     peer_address: "String", # required
+    #     bgp_options: {
+    #       peer_asn: 1,
+    #     },
+    #     inside_cidr_blocks: ["String"], # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_connect_peer.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_connect_peer.transit_gateway_connect_peer_id #=> String
+    #   resp.transit_gateway_connect_peer.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.transit_gateway_connect_peer.creation_time #=> Time
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.transit_gateway_address #=> String
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.peer_address #=> String
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.inside_cidr_blocks #=> Array
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.inside_cidr_blocks[0] #=> String
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.protocol #=> String, one of "gre"
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.bgp_configurations #=> Array
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.bgp_configurations[0].transit_gateway_asn #=> Integer
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.bgp_configurations[0].peer_asn #=> Integer
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.bgp_configurations[0].transit_gateway_address #=> String
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.bgp_configurations[0].peer_address #=> String
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.bgp_configurations[0].bgp_status #=> String, one of "up", "down"
+    #   resp.transit_gateway_connect_peer.tags #=> Array
+    #   resp.transit_gateway_connect_peer.tags[0].key #=> String
+    #   resp.transit_gateway_connect_peer.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayConnectPeer AWS API Documentation
+    #
+    # @overload create_transit_gateway_connect_peer(params = {})
+    # @param [Hash] params ({})
+    def create_transit_gateway_connect_peer(params = {}, options = {})
+      req = build_request(:create_transit_gateway_connect_peer, params)
+      req.send_request(options)
+    end
+
     # Creates a multicast domain using the specified transit gateway.
     #
     # The transit gateway must be in the available state before you create a
@@ -8710,6 +9041,9 @@ module Aws::EC2
     #
     # @option params [required, String] :transit_gateway_id
     #   The ID of the transit gateway.
+    #
+    # @option params [Types::CreateTransitGatewayMulticastDomainRequestOptions] :options
+    #   The options for the transit gateway multicast domain.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags for the transit gateway multicast domain.
@@ -8728,9 +9062,14 @@ module Aws::EC2
     #
     #   resp = client.create_transit_gateway_multicast_domain({
     #     transit_gateway_id: "TransitGatewayId", # required
+    #     options: {
+    #       igmpv_2_support: "enable", # accepts enable, disable
+    #       static_sources_support: "enable", # accepts enable, disable
+    #       auto_accept_shared_associations: "enable", # accepts enable, disable
+    #     },
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -8746,6 +9085,11 @@ module Aws::EC2
     #
     #   resp.transit_gateway_multicast_domain.transit_gateway_multicast_domain_id #=> String
     #   resp.transit_gateway_multicast_domain.transit_gateway_id #=> String
+    #   resp.transit_gateway_multicast_domain.transit_gateway_multicast_domain_arn #=> String
+    #   resp.transit_gateway_multicast_domain.owner_id #=> String
+    #   resp.transit_gateway_multicast_domain.options.igmpv_2_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_multicast_domain.options.static_sources_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_multicast_domain.options.auto_accept_shared_associations #=> String, one of "enable", "disable"
     #   resp.transit_gateway_multicast_domain.state #=> String, one of "pending", "available", "deleting", "deleted"
     #   resp.transit_gateway_multicast_domain.creation_time #=> Time
     #   resp.transit_gateway_multicast_domain.tags #=> Array
@@ -8804,7 +9148,7 @@ module Aws::EC2
     #     peer_region: "String", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -8885,7 +9229,7 @@ module Aws::EC2
     #   resp.transit_gateway_prefix_list_reference.state #=> String, one of "pending", "available", "modifying", "deleting"
     #   resp.transit_gateway_prefix_list_reference.blackhole #=> Boolean
     #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.transit_gateway_attachment_id #=> String
-    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
     #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayPrefixListReference AWS API Documentation
@@ -8939,7 +9283,7 @@ module Aws::EC2
     #   resp.route.transit_gateway_attachments #=> Array
     #   resp.route.transit_gateway_attachments[0].resource_id #=> String
     #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
-    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
     #   resp.route.type #=> String, one of "static", "propagated"
     #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #
@@ -8976,7 +9320,7 @@ module Aws::EC2
     #     transit_gateway_id: "TransitGatewayId", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -9059,7 +9403,7 @@ module Aws::EC2
     #     },
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -9352,7 +9696,7 @@ module Aws::EC2
     #     dry_run: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -9515,7 +9859,7 @@ module Aws::EC2
     #     ipv_6_cidr_block_network_border_group: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -9672,7 +10016,7 @@ module Aws::EC2
     #     private_dns_enabled: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -9878,7 +10222,7 @@ module Aws::EC2
     #     client_token: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -9991,7 +10335,7 @@ module Aws::EC2
     #     peer_region: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -10167,7 +10511,7 @@ module Aws::EC2
     #     },
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -10328,7 +10672,7 @@ module Aws::EC2
     #     type: "ipsec.1", # required, accepts ipsec.1
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -11290,6 +11634,76 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Deletes the specified network insights analysis.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :network_insights_analysis_id
+    #   The ID of the network insights analysis.
+    #
+    # @return [Types::DeleteNetworkInsightsAnalysisResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteNetworkInsightsAnalysisResult#network_insights_analysis_id #network_insights_analysis_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_network_insights_analysis({
+    #     dry_run: false,
+    #     network_insights_analysis_id: "NetworkInsightsAnalysisId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_insights_analysis_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkInsightsAnalysis AWS API Documentation
+    #
+    # @overload delete_network_insights_analysis(params = {})
+    # @param [Hash] params ({})
+    def delete_network_insights_analysis(params = {}, options = {})
+      req = build_request(:delete_network_insights_analysis, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified path.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :network_insights_path_id
+    #   The ID of the path.
+    #
+    # @return [Types::DeleteNetworkInsightsPathResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteNetworkInsightsPathResult#network_insights_path_id #network_insights_path_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_network_insights_path({
+    #     dry_run: false,
+    #     network_insights_path_id: "NetworkInsightsPathId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_insights_path_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkInsightsPath AWS API Documentation
+    #
+    # @overload delete_network_insights_path(params = {})
+    # @param [Hash] params ({})
+    def delete_network_insights_path(params = {}, options = {})
+      req = build_request(:delete_network_insights_path, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified network interface. You must detach the network
     # interface before you can delete it.
     #
@@ -11992,6 +12406,8 @@ module Aws::EC2
     #   resp.transit_gateway.description #=> String
     #   resp.transit_gateway.creation_time #=> Time
     #   resp.transit_gateway.options.amazon_side_asn #=> Integer
+    #   resp.transit_gateway.options.transit_gateway_cidr_blocks #=> Array
+    #   resp.transit_gateway.options.transit_gateway_cidr_blocks[0] #=> String
     #   resp.transit_gateway.options.auto_accept_shared_attachments #=> String, one of "enable", "disable"
     #   resp.transit_gateway.options.default_route_table_association #=> String, one of "enable", "disable"
     #   resp.transit_gateway.options.association_default_route_table_id #=> String
@@ -12010,6 +12426,102 @@ module Aws::EC2
     # @param [Hash] params ({})
     def delete_transit_gateway(params = {}, options = {})
       req = build_request(:delete_transit_gateway, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified Connect attachment. You must first delete any
+    # Connect peers for the attachment.
+    #
+    # @option params [required, String] :transit_gateway_attachment_id
+    #   The ID of the Connect attachment.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteTransitGatewayConnectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTransitGatewayConnectResult#transit_gateway_connect #transit_gateway_connect} => Types::TransitGatewayConnect
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_transit_gateway_connect({
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_connect.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_connect.transport_transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_connect.transit_gateway_id #=> String
+    #   resp.transit_gateway_connect.state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_connect.creation_time #=> Time
+    #   resp.transit_gateway_connect.options.protocol #=> String, one of "gre"
+    #   resp.transit_gateway_connect.tags #=> Array
+    #   resp.transit_gateway_connect.tags[0].key #=> String
+    #   resp.transit_gateway_connect.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayConnect AWS API Documentation
+    #
+    # @overload delete_transit_gateway_connect(params = {})
+    # @param [Hash] params ({})
+    def delete_transit_gateway_connect(params = {}, options = {})
+      req = build_request(:delete_transit_gateway_connect, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified Connect peer.
+    #
+    # @option params [required, String] :transit_gateway_connect_peer_id
+    #   The ID of the Connect peer.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DeleteTransitGatewayConnectPeerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTransitGatewayConnectPeerResult#transit_gateway_connect_peer #transit_gateway_connect_peer} => Types::TransitGatewayConnectPeer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_transit_gateway_connect_peer({
+    #     transit_gateway_connect_peer_id: "TransitGatewayConnectPeerId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_connect_peer.transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_connect_peer.transit_gateway_connect_peer_id #=> String
+    #   resp.transit_gateway_connect_peer.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.transit_gateway_connect_peer.creation_time #=> Time
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.transit_gateway_address #=> String
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.peer_address #=> String
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.inside_cidr_blocks #=> Array
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.inside_cidr_blocks[0] #=> String
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.protocol #=> String, one of "gre"
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.bgp_configurations #=> Array
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.bgp_configurations[0].transit_gateway_asn #=> Integer
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.bgp_configurations[0].peer_asn #=> Integer
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.bgp_configurations[0].transit_gateway_address #=> String
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.bgp_configurations[0].peer_address #=> String
+    #   resp.transit_gateway_connect_peer.connect_peer_configuration.bgp_configurations[0].bgp_status #=> String, one of "up", "down"
+    #   resp.transit_gateway_connect_peer.tags #=> Array
+    #   resp.transit_gateway_connect_peer.tags[0].key #=> String
+    #   resp.transit_gateway_connect_peer.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayConnectPeer AWS API Documentation
+    #
+    # @overload delete_transit_gateway_connect_peer(params = {})
+    # @param [Hash] params ({})
+    def delete_transit_gateway_connect_peer(params = {}, options = {})
+      req = build_request(:delete_transit_gateway_connect_peer, params)
       req.send_request(options)
     end
 
@@ -12039,6 +12551,11 @@ module Aws::EC2
     #
     #   resp.transit_gateway_multicast_domain.transit_gateway_multicast_domain_id #=> String
     #   resp.transit_gateway_multicast_domain.transit_gateway_id #=> String
+    #   resp.transit_gateway_multicast_domain.transit_gateway_multicast_domain_arn #=> String
+    #   resp.transit_gateway_multicast_domain.owner_id #=> String
+    #   resp.transit_gateway_multicast_domain.options.igmpv_2_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_multicast_domain.options.static_sources_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_multicast_domain.options.auto_accept_shared_associations #=> String, one of "enable", "disable"
     #   resp.transit_gateway_multicast_domain.state #=> String, one of "pending", "available", "deleting", "deleted"
     #   resp.transit_gateway_multicast_domain.creation_time #=> Time
     #   resp.transit_gateway_multicast_domain.tags #=> Array
@@ -12137,7 +12654,7 @@ module Aws::EC2
     #   resp.transit_gateway_prefix_list_reference.state #=> String, one of "pending", "available", "modifying", "deleting"
     #   resp.transit_gateway_prefix_list_reference.blackhole #=> Boolean
     #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.transit_gateway_attachment_id #=> String
-    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
     #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTransitGatewayPrefixListReference AWS API Documentation
@@ -12184,7 +12701,7 @@ module Aws::EC2
     #   resp.route.transit_gateway_attachments #=> Array
     #   resp.route.transit_gateway_attachments[0].resource_id #=> String
     #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
-    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
     #   resp.route.type #=> String, one of "static", "propagated"
     #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #
@@ -18594,7 +19111,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
     #   resp.launch_template_versions[0].launch_template_data.user_data #=> String
     #   resp.launch_template_versions[0].launch_template_data.tag_specifications #=> Array
-    #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "egress-only-internet-gateway", "elastic-ip", "elastic-gpu", "export-image-task", "export-instance-task", "fleet", "fpga-image", "host-reservation", "image", "import-image-task", "import-snapshot-task", "instance", "internet-gateway", "key-pair", "launch-template", "local-gateway-route-table-vpc-association", "natgateway", "network-acl", "network-interface", "placement-group", "reserved-instances", "route-table", "security-group", "snapshot", "spot-fleet-request", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-multicast-domain", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway", "vpc-flow-log"
+    #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "egress-only-internet-gateway", "elastic-ip", "elastic-gpu", "export-image-task", "export-instance-task", "fleet", "fpga-image", "host-reservation", "image", "import-image-task", "import-snapshot-task", "instance", "internet-gateway", "key-pair", "launch-template", "local-gateway-route-table-vpc-association", "natgateway", "network-acl", "network-interface", "network-insights-analysis", "network-insights-path", "placement-group", "reserved-instances", "route-table", "security-group", "snapshot", "spot-fleet-request", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-connect-peer", "transit-gateway-multicast-domain", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway", "vpc-flow-log"
     #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].tags #=> Array
     #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].tags[0].key #=> String
     #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].tags[0].value #=> String
@@ -19706,6 +20223,399 @@ module Aws::EC2
     # @param [Hash] params ({})
     def describe_network_acls(params = {}, options = {})
       req = build_request(:describe_network_acls, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more of your network insights analyses.
+    #
+    # @option params [Array<String>] :network_insights_analysis_ids
+    #   The ID of the network insights analyses. You must specify either
+    #   analysis IDs or a path ID.
+    #
+    # @option params [String] :network_insights_path_id
+    #   The ID of the path. You must specify either a path ID or analysis IDs.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :analysis_start_time
+    #   The time when the network insights analyses started.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :analysis_end_time
+    #   The time when the network insights analyses ended.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filters. The following are possible values:
+    #
+    #   * PathFound - A Boolean value that indicates whether a feasible path
+    #     is found.
+    #
+    #   * Status - The status of the analysis (running \| succeeded \|
+    #     failed).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::DescribeNetworkInsightsAnalysesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeNetworkInsightsAnalysesResult#network_insights_analyses #network_insights_analyses} => Array&lt;Types::NetworkInsightsAnalysis&gt;
+    #   * {Types::DescribeNetworkInsightsAnalysesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_network_insights_analyses({
+    #     network_insights_analysis_ids: ["NetworkInsightsAnalysisId"],
+    #     network_insights_path_id: "NetworkInsightsPathId",
+    #     analysis_start_time: Time.now,
+    #     analysis_end_time: Time.now,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     dry_run: false,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_insights_analyses #=> Array
+    #   resp.network_insights_analyses[0].network_insights_analysis_id #=> String
+    #   resp.network_insights_analyses[0].network_insights_analysis_arn #=> String
+    #   resp.network_insights_analyses[0].network_insights_path_id #=> String
+    #   resp.network_insights_analyses[0].filter_in_arns #=> Array
+    #   resp.network_insights_analyses[0].filter_in_arns[0] #=> String
+    #   resp.network_insights_analyses[0].start_date #=> Time
+    #   resp.network_insights_analyses[0].status #=> String, one of "running", "succeeded", "failed"
+    #   resp.network_insights_analyses[0].status_message #=> String
+    #   resp.network_insights_analyses[0].network_path_found #=> Boolean
+    #   resp.network_insights_analyses[0].forward_path_components #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].sequence_number #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].acl_rule.cidr #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].acl_rule.egress #=> Boolean
+    #   resp.network_insights_analyses[0].forward_path_components[0].acl_rule.port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].acl_rule.port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].acl_rule.protocol #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].acl_rule.rule_action #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].acl_rule.rule_number #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].component.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].component.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].destination_vpc.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].destination_vpc.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].outbound_header.destination_addresses #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].outbound_header.destination_addresses[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].outbound_header.destination_port_ranges #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].outbound_header.destination_port_ranges[0].from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].outbound_header.destination_port_ranges[0].to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].outbound_header.protocol #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].outbound_header.source_addresses #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].outbound_header.source_addresses[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].outbound_header.source_port_ranges #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].outbound_header.source_port_ranges[0].from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].outbound_header.source_port_ranges[0].to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].inbound_header.destination_addresses #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].inbound_header.destination_addresses[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].inbound_header.destination_port_ranges #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].inbound_header.destination_port_ranges[0].from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].inbound_header.destination_port_ranges[0].to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].inbound_header.protocol #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].inbound_header.source_addresses #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].inbound_header.source_addresses[0] #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].inbound_header.source_port_ranges #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].inbound_header.source_port_ranges[0].from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].inbound_header.source_port_ranges[0].to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.destination_prefix_list_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.egress_only_internet_gateway_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.gateway_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.instance_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.nat_gateway_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.network_interface_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.origin #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.transit_gateway_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].security_group_rule.cidr #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].security_group_rule.direction #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].security_group_rule.security_group_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].security_group_rule.port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].security_group_rule.port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].forward_path_components[0].security_group_rule.prefix_list_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].security_group_rule.protocol #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].source_vpc.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].source_vpc.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].subnet.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].subnet.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].vpc.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].vpc.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].sequence_number #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].acl_rule.cidr #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].acl_rule.egress #=> Boolean
+    #   resp.network_insights_analyses[0].return_path_components[0].acl_rule.port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].acl_rule.port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].acl_rule.protocol #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].acl_rule.rule_action #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].acl_rule.rule_number #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].component.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].component.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].destination_vpc.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].destination_vpc.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].outbound_header.destination_addresses #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].outbound_header.destination_addresses[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].outbound_header.destination_port_ranges #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].outbound_header.destination_port_ranges[0].from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].outbound_header.destination_port_ranges[0].to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].outbound_header.protocol #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].outbound_header.source_addresses #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].outbound_header.source_addresses[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].outbound_header.source_port_ranges #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].outbound_header.source_port_ranges[0].from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].outbound_header.source_port_ranges[0].to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].inbound_header.destination_addresses #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].inbound_header.destination_addresses[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].inbound_header.destination_port_ranges #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].inbound_header.destination_port_ranges[0].from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].inbound_header.destination_port_ranges[0].to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].inbound_header.protocol #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].inbound_header.source_addresses #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].inbound_header.source_addresses[0] #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].inbound_header.source_port_ranges #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].inbound_header.source_port_ranges[0].from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].inbound_header.source_port_ranges[0].to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.destination_prefix_list_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.egress_only_internet_gateway_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.gateway_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.instance_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.nat_gateway_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.network_interface_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.origin #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.transit_gateway_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].security_group_rule.cidr #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].security_group_rule.direction #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].security_group_rule.security_group_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].security_group_rule.port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].security_group_rule.port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].return_path_components[0].security_group_rule.prefix_list_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].security_group_rule.protocol #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].source_vpc.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].source_vpc.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].subnet.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].subnet.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].vpc.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].vpc.arn #=> String
+    #   resp.network_insights_analyses[0].explanations #=> Array
+    #   resp.network_insights_analyses[0].explanations[0].acl.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].acl.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].acl_rule.cidr #=> String
+    #   resp.network_insights_analyses[0].explanations[0].acl_rule.egress #=> Boolean
+    #   resp.network_insights_analyses[0].explanations[0].acl_rule.port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].acl_rule.port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].acl_rule.protocol #=> String
+    #   resp.network_insights_analyses[0].explanations[0].acl_rule.rule_action #=> String
+    #   resp.network_insights_analyses[0].explanations[0].acl_rule.rule_number #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].address #=> String
+    #   resp.network_insights_analyses[0].explanations[0].addresses #=> Array
+    #   resp.network_insights_analyses[0].explanations[0].addresses[0] #=> String
+    #   resp.network_insights_analyses[0].explanations[0].attached_to.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].attached_to.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].availability_zones #=> Array
+    #   resp.network_insights_analyses[0].explanations[0].availability_zones[0] #=> String
+    #   resp.network_insights_analyses[0].explanations[0].cidrs #=> Array
+    #   resp.network_insights_analyses[0].explanations[0].cidrs[0] #=> String
+    #   resp.network_insights_analyses[0].explanations[0].component.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].component.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].customer_gateway.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].customer_gateway.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].destination.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].destination.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].destination_vpc.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].destination_vpc.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].direction #=> String
+    #   resp.network_insights_analyses[0].explanations[0].explanation_code #=> String
+    #   resp.network_insights_analyses[0].explanations[0].ingress_route_table.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].ingress_route_table.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].internet_gateway.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].internet_gateway.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].load_balancer_arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].classic_load_balancer_listener.load_balancer_port #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].classic_load_balancer_listener.instance_port #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].load_balancer_listener_port #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].load_balancer_target.address #=> String
+    #   resp.network_insights_analyses[0].explanations[0].load_balancer_target.availability_zone #=> String
+    #   resp.network_insights_analyses[0].explanations[0].load_balancer_target.instance.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].load_balancer_target.instance.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].load_balancer_target.port #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].load_balancer_target_group.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].load_balancer_target_group.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].load_balancer_target_groups #=> Array
+    #   resp.network_insights_analyses[0].explanations[0].load_balancer_target_groups[0].id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].load_balancer_target_groups[0].arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].load_balancer_target_port #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].elastic_load_balancer_listener.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].elastic_load_balancer_listener.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].missing_component #=> String
+    #   resp.network_insights_analyses[0].explanations[0].nat_gateway.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].nat_gateway.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].network_interface.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].network_interface.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].packet_field #=> String
+    #   resp.network_insights_analyses[0].explanations[0].vpc_peering_connection.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].vpc_peering_connection.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].port #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].port_ranges #=> Array
+    #   resp.network_insights_analyses[0].explanations[0].port_ranges[0].from #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].port_ranges[0].to #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].prefix_list.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].prefix_list.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].protocols #=> Array
+    #   resp.network_insights_analyses[0].explanations[0].protocols[0] #=> String
+    #   resp.network_insights_analyses[0].explanations[0].route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analyses[0].explanations[0].route_table_route.destination_prefix_list_id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].route_table_route.egress_only_internet_gateway_id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].route_table_route.gateway_id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].route_table_route.instance_id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].route_table_route.nat_gateway_id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].route_table_route.network_interface_id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].route_table_route.origin #=> String
+    #   resp.network_insights_analyses[0].explanations[0].route_table_route.transit_gateway_id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].route_table.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].route_table.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].security_group.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].security_group.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].security_group_rule.cidr #=> String
+    #   resp.network_insights_analyses[0].explanations[0].security_group_rule.direction #=> String
+    #   resp.network_insights_analyses[0].explanations[0].security_group_rule.security_group_id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].security_group_rule.port_range.from #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].security_group_rule.port_range.to #=> Integer
+    #   resp.network_insights_analyses[0].explanations[0].security_group_rule.prefix_list_id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].security_group_rule.protocol #=> String
+    #   resp.network_insights_analyses[0].explanations[0].security_groups #=> Array
+    #   resp.network_insights_analyses[0].explanations[0].security_groups[0].id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].security_groups[0].arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].source_vpc.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].source_vpc.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].state #=> String
+    #   resp.network_insights_analyses[0].explanations[0].subnet.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].subnet.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].subnet_route_table.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].subnet_route_table.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].vpc.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].vpc.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].vpc_endpoint.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].vpc_endpoint.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].vpn_connection.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].vpn_connection.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].vpn_gateway.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].vpn_gateway.arn #=> String
+    #   resp.network_insights_analyses[0].alternate_path_hints #=> Array
+    #   resp.network_insights_analyses[0].alternate_path_hints[0].component_id #=> String
+    #   resp.network_insights_analyses[0].alternate_path_hints[0].component_arn #=> String
+    #   resp.network_insights_analyses[0].tags #=> Array
+    #   resp.network_insights_analyses[0].tags[0].key #=> String
+    #   resp.network_insights_analyses[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInsightsAnalyses AWS API Documentation
+    #
+    # @overload describe_network_insights_analyses(params = {})
+    # @param [Hash] params ({})
+    def describe_network_insights_analyses(params = {}, options = {})
+      req = build_request(:describe_network_insights_analyses, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more of your paths.
+    #
+    # @option params [Array<String>] :network_insights_path_ids
+    #   The IDs of the paths.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filters. The following are possible values:
+    #
+    #   * Destination - The ID of the resource.
+    #
+    #   * DestinationPort - The destination port.
+    #
+    #   * Name - The path name.
+    #
+    #   * Protocol - The protocol.
+    #
+    #   * Source - The ID of the resource.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::DescribeNetworkInsightsPathsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeNetworkInsightsPathsResult#network_insights_paths #network_insights_paths} => Array&lt;Types::NetworkInsightsPath&gt;
+    #   * {Types::DescribeNetworkInsightsPathsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_network_insights_paths({
+    #     network_insights_path_ids: ["NetworkInsightsPathId"],
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     dry_run: false,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_insights_paths #=> Array
+    #   resp.network_insights_paths[0].network_insights_path_id #=> String
+    #   resp.network_insights_paths[0].network_insights_path_arn #=> String
+    #   resp.network_insights_paths[0].created_date #=> Time
+    #   resp.network_insights_paths[0].source #=> String
+    #   resp.network_insights_paths[0].destination #=> String
+    #   resp.network_insights_paths[0].source_ip #=> String
+    #   resp.network_insights_paths[0].destination_ip #=> String
+    #   resp.network_insights_paths[0].protocol #=> String, one of "tcp", "udp"
+    #   resp.network_insights_paths[0].destination_port #=> Integer
+    #   resp.network_insights_paths[0].tags #=> Array
+    #   resp.network_insights_paths[0].tags[0].key #=> String
+    #   resp.network_insights_paths[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInsightsPaths AWS API Documentation
+    #
+    # @overload describe_network_insights_paths(params = {})
+    # @param [Hash] params ({})
+    def describe_network_insights_paths(params = {}, options = {})
+      req = build_request(:describe_network_insights_paths, params)
       req.send_request(options)
     end
 
@@ -22763,7 +23673,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].user_data #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].weighted_capacity #=> Float
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "egress-only-internet-gateway", "elastic-ip", "elastic-gpu", "export-image-task", "export-instance-task", "fleet", "fpga-image", "host-reservation", "image", "import-image-task", "import-snapshot-task", "instance", "internet-gateway", "key-pair", "launch-template", "local-gateway-route-table-vpc-association", "natgateway", "network-acl", "network-interface", "placement-group", "reserved-instances", "route-table", "security-group", "snapshot", "spot-fleet-request", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-multicast-domain", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway", "vpc-flow-log"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "egress-only-internet-gateway", "elastic-ip", "elastic-gpu", "export-image-task", "export-instance-task", "fleet", "fpga-image", "host-reservation", "image", "import-image-task", "import-snapshot-task", "instance", "internet-gateway", "key-pair", "launch-template", "local-gateway-route-table-vpc-association", "natgateway", "network-acl", "network-interface", "network-insights-analysis", "network-insights-path", "placement-group", "reserved-instances", "route-table", "security-group", "snapshot", "spot-fleet-request", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-connect-peer", "transit-gateway-multicast-domain", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway", "vpc-flow-log"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].tags #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].tags[0].key #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].tags[0].value #=> String
@@ -22795,7 +23705,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.load_balancers_config.target_groups_config.target_groups[0].arn #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.instance_pools_to_use_count #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.tag_specifications #=> Array
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.tag_specifications[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "egress-only-internet-gateway", "elastic-ip", "elastic-gpu", "export-image-task", "export-instance-task", "fleet", "fpga-image", "host-reservation", "image", "import-image-task", "import-snapshot-task", "instance", "internet-gateway", "key-pair", "launch-template", "local-gateway-route-table-vpc-association", "natgateway", "network-acl", "network-interface", "placement-group", "reserved-instances", "route-table", "security-group", "snapshot", "spot-fleet-request", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-multicast-domain", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway", "vpc-flow-log"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.tag_specifications[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "egress-only-internet-gateway", "elastic-ip", "elastic-gpu", "export-image-task", "export-instance-task", "fleet", "fpga-image", "host-reservation", "image", "import-image-task", "import-snapshot-task", "instance", "internet-gateway", "key-pair", "launch-template", "local-gateway-route-table-vpc-association", "natgateway", "network-acl", "network-interface", "network-insights-analysis", "network-insights-path", "placement-group", "reserved-instances", "route-table", "security-group", "snapshot", "spot-fleet-request", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-connect-peer", "transit-gateway-multicast-domain", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway", "vpc-flow-log"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.tag_specifications[0].tags #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.tag_specifications[0].tags[0].key #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.tag_specifications[0].tags[0].value #=> String
@@ -23669,7 +24579,7 @@ module Aws::EC2
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].resource_id #=> String
-    #   resp.tags[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "egress-only-internet-gateway", "elastic-ip", "elastic-gpu", "export-image-task", "export-instance-task", "fleet", "fpga-image", "host-reservation", "image", "import-image-task", "import-snapshot-task", "instance", "internet-gateway", "key-pair", "launch-template", "local-gateway-route-table-vpc-association", "natgateway", "network-acl", "network-interface", "placement-group", "reserved-instances", "route-table", "security-group", "snapshot", "spot-fleet-request", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-multicast-domain", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway", "vpc-flow-log"
+    #   resp.tags[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "egress-only-internet-gateway", "elastic-ip", "elastic-gpu", "export-image-task", "export-instance-task", "fleet", "fpga-image", "host-reservation", "image", "import-image-task", "import-snapshot-task", "instance", "internet-gateway", "key-pair", "launch-template", "local-gateway-route-table-vpc-association", "natgateway", "network-acl", "network-interface", "network-insights-analysis", "network-insights-path", "placement-group", "reserved-instances", "route-table", "security-group", "snapshot", "spot-fleet-request", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-connect-peer", "transit-gateway-multicast-domain", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway", "vpc-flow-log"
     #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTags AWS API Documentation
@@ -23974,7 +24884,7 @@ module Aws::EC2
     #     resource.
     #
     #   * `resource-type` - The resource type. Valid values are `vpc` \| `vpn`
-    #     \| `direct-connect-gateway` \| `peering`.
+    #     \| `direct-connect-gateway` \| `peering` \| `connect`.
     #
     #   * `state` - The state of the attachment. Valid values are `available`
     #     \| `deleted` \| `deleting` \| `failed` \| `failing` \|
@@ -24031,7 +24941,7 @@ module Aws::EC2
     #   resp.transit_gateway_attachments[0].transit_gateway_id #=> String
     #   resp.transit_gateway_attachments[0].transit_gateway_owner_id #=> String
     #   resp.transit_gateway_attachments[0].resource_owner_id #=> String
-    #   resp.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
     #   resp.transit_gateway_attachments[0].resource_id #=> String
     #   resp.transit_gateway_attachments[0].state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
     #   resp.transit_gateway_attachments[0].association.transit_gateway_route_table_id #=> String
@@ -24048,6 +24958,170 @@ module Aws::EC2
     # @param [Hash] params ({})
     def describe_transit_gateway_attachments(params = {}, options = {})
       req = build_request(:describe_transit_gateway_attachments, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more Connect peers.
+    #
+    # @option params [Array<String>] :transit_gateway_connect_peer_ids
+    #   The IDs of the Connect peers.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `state` - The state of the Connect peer (`pending` \| `available` \|
+    #     `deleting` \| `deleted`).
+    #
+    #   * `transit-gateway-attachment-id` - The ID of the attachment.
+    #
+    #   * `transit-gateway-connect-peer-id` - The ID of the Connect peer.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeTransitGatewayConnectPeersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTransitGatewayConnectPeersResult#transit_gateway_connect_peers #transit_gateway_connect_peers} => Array&lt;Types::TransitGatewayConnectPeer&gt;
+    #   * {Types::DescribeTransitGatewayConnectPeersResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_transit_gateway_connect_peers({
+    #     transit_gateway_connect_peer_ids: ["TransitGatewayConnectPeerId"],
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_connect_peers #=> Array
+    #   resp.transit_gateway_connect_peers[0].transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_connect_peers[0].transit_gateway_connect_peer_id #=> String
+    #   resp.transit_gateway_connect_peers[0].state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.transit_gateway_connect_peers[0].creation_time #=> Time
+    #   resp.transit_gateway_connect_peers[0].connect_peer_configuration.transit_gateway_address #=> String
+    #   resp.transit_gateway_connect_peers[0].connect_peer_configuration.peer_address #=> String
+    #   resp.transit_gateway_connect_peers[0].connect_peer_configuration.inside_cidr_blocks #=> Array
+    #   resp.transit_gateway_connect_peers[0].connect_peer_configuration.inside_cidr_blocks[0] #=> String
+    #   resp.transit_gateway_connect_peers[0].connect_peer_configuration.protocol #=> String, one of "gre"
+    #   resp.transit_gateway_connect_peers[0].connect_peer_configuration.bgp_configurations #=> Array
+    #   resp.transit_gateway_connect_peers[0].connect_peer_configuration.bgp_configurations[0].transit_gateway_asn #=> Integer
+    #   resp.transit_gateway_connect_peers[0].connect_peer_configuration.bgp_configurations[0].peer_asn #=> Integer
+    #   resp.transit_gateway_connect_peers[0].connect_peer_configuration.bgp_configurations[0].transit_gateway_address #=> String
+    #   resp.transit_gateway_connect_peers[0].connect_peer_configuration.bgp_configurations[0].peer_address #=> String
+    #   resp.transit_gateway_connect_peers[0].connect_peer_configuration.bgp_configurations[0].bgp_status #=> String, one of "up", "down"
+    #   resp.transit_gateway_connect_peers[0].tags #=> Array
+    #   resp.transit_gateway_connect_peers[0].tags[0].key #=> String
+    #   resp.transit_gateway_connect_peers[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewayConnectPeers AWS API Documentation
+    #
+    # @overload describe_transit_gateway_connect_peers(params = {})
+    # @param [Hash] params ({})
+    def describe_transit_gateway_connect_peers(params = {}, options = {})
+      req = build_request(:describe_transit_gateway_connect_peers, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more Connect attachments.
+    #
+    # @option params [Array<String>] :transit_gateway_attachment_ids
+    #   The IDs of the attachments.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters. The possible values are:
+    #
+    #   * `options.protocol` - The tunnel protocol (`gre`).
+    #
+    #   * `state` - The state of the attachment (`initiating` \|
+    #     `initiatingRequest` \| `pendingAcceptance` \| `rollingBack` \|
+    #     `pending` \| `available` \| `modifying` \| `deleting` \| `deleted`
+    #     \| `failed` \| `rejected` \| `rejecting` \| `failing`).
+    #
+    #   * `transit-gateway-attachment-id` - The ID of the Connect attachment.
+    #
+    #   * `transit-gateway-id` - The ID of the transit gateway.
+    #
+    #   * `transport-transit-gateway-attachment-id` - The ID of the transit
+    #     gateway attachment from which the Connect attachment was created.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeTransitGatewayConnectsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTransitGatewayConnectsResult#transit_gateway_connects #transit_gateway_connects} => Array&lt;Types::TransitGatewayConnect&gt;
+    #   * {Types::DescribeTransitGatewayConnectsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_transit_gateway_connects({
+    #     transit_gateway_attachment_ids: ["TransitGatewayAttachmentId"],
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transit_gateway_connects #=> Array
+    #   resp.transit_gateway_connects[0].transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_connects[0].transport_transit_gateway_attachment_id #=> String
+    #   resp.transit_gateway_connects[0].transit_gateway_id #=> String
+    #   resp.transit_gateway_connects[0].state #=> String, one of "initiating", "initiatingRequest", "pendingAcceptance", "rollingBack", "pending", "available", "modifying", "deleting", "deleted", "failed", "rejected", "rejecting", "failing"
+    #   resp.transit_gateway_connects[0].creation_time #=> Time
+    #   resp.transit_gateway_connects[0].options.protocol #=> String, one of "gre"
+    #   resp.transit_gateway_connects[0].tags #=> Array
+    #   resp.transit_gateway_connects[0].tags[0].key #=> String
+    #   resp.transit_gateway_connects[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTransitGatewayConnects AWS API Documentation
+    #
+    # @overload describe_transit_gateway_connects(params = {})
+    # @param [Hash] params ({})
+    def describe_transit_gateway_connects(params = {}, options = {})
+      req = build_request(:describe_transit_gateway_connects, params)
       req.send_request(options)
     end
 
@@ -24108,6 +25182,11 @@ module Aws::EC2
     #   resp.transit_gateway_multicast_domains #=> Array
     #   resp.transit_gateway_multicast_domains[0].transit_gateway_multicast_domain_id #=> String
     #   resp.transit_gateway_multicast_domains[0].transit_gateway_id #=> String
+    #   resp.transit_gateway_multicast_domains[0].transit_gateway_multicast_domain_arn #=> String
+    #   resp.transit_gateway_multicast_domains[0].owner_id #=> String
+    #   resp.transit_gateway_multicast_domains[0].options.igmpv_2_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_multicast_domains[0].options.static_sources_support #=> String, one of "enable", "disable"
+    #   resp.transit_gateway_multicast_domains[0].options.auto_accept_shared_associations #=> String, one of "enable", "disable"
     #   resp.transit_gateway_multicast_domains[0].state #=> String, one of "pending", "available", "deleting", "deleted"
     #   resp.transit_gateway_multicast_domains[0].creation_time #=> Time
     #   resp.transit_gateway_multicast_domains[0].tags #=> Array
@@ -24480,6 +25559,8 @@ module Aws::EC2
     #   resp.transit_gateways[0].description #=> String
     #   resp.transit_gateways[0].creation_time #=> Time
     #   resp.transit_gateways[0].options.amazon_side_asn #=> Integer
+    #   resp.transit_gateways[0].options.transit_gateway_cidr_blocks #=> Array
+    #   resp.transit_gateways[0].options.transit_gateway_cidr_blocks[0] #=> String
     #   resp.transit_gateways[0].options.auto_accept_shared_attachments #=> String, one of "enable", "disable"
     #   resp.transit_gateways[0].options.default_route_table_association #=> String, one of "enable", "disable"
     #   resp.transit_gateways[0].options.association_default_route_table_id #=> String
@@ -26877,7 +27958,7 @@ module Aws::EC2
     #
     #   resp.propagation.transit_gateway_attachment_id #=> String
     #   resp.propagation.resource_id #=> String
-    #   resp.propagation.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.propagation.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
     #   resp.propagation.transit_gateway_route_table_id #=> String
     #   resp.propagation.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
     #
@@ -27339,7 +28420,7 @@ module Aws::EC2
     #   resp = client.disassociate_transit_gateway_multicast_domain({
     #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
     #     transit_gateway_attachment_id: "TransitGatewayAttachmentId",
-    #     subnet_ids: ["String"],
+    #     subnet_ids: ["SubnetId"],
     #     dry_run: false,
     #   })
     #
@@ -27348,10 +28429,11 @@ module Aws::EC2
     #   resp.associations.transit_gateway_multicast_domain_id #=> String
     #   resp.associations.transit_gateway_attachment_id #=> String
     #   resp.associations.resource_id #=> String
-    #   resp.associations.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.associations.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
+    #   resp.associations.resource_owner_id #=> String
     #   resp.associations.subnets #=> Array
     #   resp.associations.subnets[0].subnet_id #=> String
-    #   resp.associations.subnets[0].state #=> String, one of "associating", "associated", "disassociating", "disassociated"
+    #   resp.associations.subnets[0].state #=> String, one of "pendingAcceptance", "associating", "associated", "disassociating", "disassociated", "rejected", "failed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateTransitGatewayMulticastDomain AWS API Documentation
     #
@@ -27394,7 +28476,7 @@ module Aws::EC2
     #   resp.association.transit_gateway_route_table_id #=> String
     #   resp.association.transit_gateway_attachment_id #=> String
     #   resp.association.resource_id #=> String
-    #   resp.association.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.association.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
     #   resp.association.state #=> String, one of "associating", "associated", "disassociating", "disassociated"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateTransitGatewayRouteTable AWS API Documentation
@@ -27609,7 +28691,7 @@ module Aws::EC2
     #
     #   resp.propagation.transit_gateway_attachment_id #=> String
     #   resp.propagation.resource_id #=> String
-    #   resp.propagation.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.propagation.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
     #   resp.propagation.transit_gateway_route_table_id #=> String
     #   resp.propagation.state #=> String, one of "enabling", "enabled", "disabling", "disabled"
     #
@@ -27943,7 +29025,7 @@ module Aws::EC2
     #     role_name: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -28815,7 +29897,7 @@ module Aws::EC2
     #   resp.launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
     #   resp.launch_template_data.user_data #=> String
     #   resp.launch_template_data.tag_specifications #=> Array
-    #   resp.launch_template_data.tag_specifications[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "egress-only-internet-gateway", "elastic-ip", "elastic-gpu", "export-image-task", "export-instance-task", "fleet", "fpga-image", "host-reservation", "image", "import-image-task", "import-snapshot-task", "instance", "internet-gateway", "key-pair", "launch-template", "local-gateway-route-table-vpc-association", "natgateway", "network-acl", "network-interface", "placement-group", "reserved-instances", "route-table", "security-group", "snapshot", "spot-fleet-request", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-multicast-domain", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway", "vpc-flow-log"
+    #   resp.launch_template_data.tag_specifications[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "egress-only-internet-gateway", "elastic-ip", "elastic-gpu", "export-image-task", "export-instance-task", "fleet", "fpga-image", "host-reservation", "image", "import-image-task", "import-snapshot-task", "instance", "internet-gateway", "key-pair", "launch-template", "local-gateway-route-table-vpc-association", "natgateway", "network-acl", "network-interface", "network-insights-analysis", "network-insights-path", "placement-group", "reserved-instances", "route-table", "security-group", "snapshot", "spot-fleet-request", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-connect-peer", "transit-gateway-multicast-domain", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway", "vpc-flow-log"
     #   resp.launch_template_data.tag_specifications[0].tags #=> Array
     #   resp.launch_template_data.tag_specifications[0].tags[0].key #=> String
     #   resp.launch_template_data.tag_specifications[0].tags[0].value #=> String
@@ -29243,9 +30325,10 @@ module Aws::EC2
     #   resp.multicast_domain_associations #=> Array
     #   resp.multicast_domain_associations[0].transit_gateway_attachment_id #=> String
     #   resp.multicast_domain_associations[0].resource_id #=> String
-    #   resp.multicast_domain_associations[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.multicast_domain_associations[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
+    #   resp.multicast_domain_associations[0].resource_owner_id #=> String
     #   resp.multicast_domain_associations[0].subnet.subnet_id #=> String
-    #   resp.multicast_domain_associations[0].subnet.state #=> String, one of "associating", "associated", "disassociating", "disassociated"
+    #   resp.multicast_domain_associations[0].subnet.state #=> String, one of "pendingAcceptance", "associating", "associated", "disassociating", "disassociated", "rejected", "failed"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayMulticastDomainAssociations AWS API Documentation
@@ -29331,7 +30414,7 @@ module Aws::EC2
     #   resp.transit_gateway_prefix_list_references[0].state #=> String, one of "pending", "available", "modifying", "deleting"
     #   resp.transit_gateway_prefix_list_references[0].blackhole #=> Boolean
     #   resp.transit_gateway_prefix_list_references[0].transit_gateway_attachment.transit_gateway_attachment_id #=> String
-    #   resp.transit_gateway_prefix_list_references[0].transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.transit_gateway_prefix_list_references[0].transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
     #   resp.transit_gateway_prefix_list_references[0].transit_gateway_attachment.resource_id #=> String
     #   resp.next_token #=> String
     #
@@ -29356,7 +30439,7 @@ module Aws::EC2
     #   * `resource-id` - The ID of the resource.
     #
     #   * `resource-type` - The resource type. Valid values are `vpc` \| `vpn`
-    #     \| `direct-connect-gateway` \| `peering`.
+    #     \| `direct-connect-gateway` \| `peering` \| `connect`.
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #
@@ -29401,7 +30484,7 @@ module Aws::EC2
     #   resp.associations #=> Array
     #   resp.associations[0].transit_gateway_attachment_id #=> String
     #   resp.associations[0].resource_id #=> String
-    #   resp.associations[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.associations[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
     #   resp.associations[0].state #=> String, one of "associating", "associated", "disassociating", "disassociated"
     #   resp.next_token #=> String
     #
@@ -29426,7 +30509,7 @@ module Aws::EC2
     #   * `resource-id` - The ID of the resource.
     #
     #   * `resource-type` - The resource type. Valid values are `vpc` \| `vpn`
-    #     \| `direct-connect-gateway` \| `peering`.
+    #     \| `direct-connect-gateway` \| `peering` \| `connect`.
     #
     #   * `transit-gateway-attachment-id` - The ID of the attachment.
     #
@@ -29471,7 +30554,7 @@ module Aws::EC2
     #   resp.transit_gateway_route_table_propagations #=> Array
     #   resp.transit_gateway_route_table_propagations[0].transit_gateway_attachment_id #=> String
     #   resp.transit_gateway_route_table_propagations[0].resource_id #=> String
-    #   resp.transit_gateway_route_table_propagations[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.transit_gateway_route_table_propagations[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
     #   resp.transit_gateway_route_table_propagations[0].state #=> String, one of "enabling", "enabled", "disabling", "disabled"
     #   resp.next_token #=> String
     #
@@ -29709,7 +30792,7 @@ module Aws::EC2
     #     ],
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -29929,7 +31012,7 @@ module Aws::EC2
     #     public_key_material: "data", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -30065,7 +31148,7 @@ module Aws::EC2
     #     role_name: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -32664,6 +33747,8 @@ module Aws::EC2
     #     transit_gateway_id: "TransitGatewayId", # required
     #     description: "String",
     #     options: {
+    #       add_transit_gateway_cidr_blocks: ["String"],
+    #       remove_transit_gateway_cidr_blocks: ["String"],
     #       vpn_ecmp_support: "enable", # accepts enable, disable
     #       dns_support: "enable", # accepts enable, disable
     #       auto_accept_shared_attachments: "enable", # accepts enable, disable
@@ -32684,6 +33769,8 @@ module Aws::EC2
     #   resp.transit_gateway.description #=> String
     #   resp.transit_gateway.creation_time #=> Time
     #   resp.transit_gateway.options.amazon_side_asn #=> Integer
+    #   resp.transit_gateway.options.transit_gateway_cidr_blocks #=> Array
+    #   resp.transit_gateway.options.transit_gateway_cidr_blocks[0] #=> String
     #   resp.transit_gateway.options.auto_accept_shared_attachments #=> String, one of "enable", "disable"
     #   resp.transit_gateway.options.default_route_table_association #=> String, one of "enable", "disable"
     #   resp.transit_gateway.options.association_default_route_table_id #=> String
@@ -32748,7 +33835,7 @@ module Aws::EC2
     #   resp.transit_gateway_prefix_list_reference.state #=> String, one of "pending", "available", "modifying", "deleting"
     #   resp.transit_gateway_prefix_list_reference.blackhole #=> Boolean
     #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.transit_gateway_attachment_id #=> String
-    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
     #   resp.transit_gateway_prefix_list_reference.transit_gateway_attachment.resource_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayPrefixListReference AWS API Documentation
@@ -34213,7 +35300,7 @@ module Aws::EC2
     #     dry_run: false,
     #     pool_tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -34296,7 +35383,7 @@ module Aws::EC2
     #     offering_id: "OfferingId", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -34927,6 +36014,58 @@ module Aws::EC2
     # @param [Hash] params ({})
     def register_transit_gateway_multicast_group_sources(params = {}, options = {})
       req = build_request(:register_transit_gateway_multicast_group_sources, params)
+      req.send_request(options)
+    end
+
+    # Rejects a request to associate cross-account subnets with a transit
+    # gateway multicast domain.
+    #
+    # @option params [String] :transit_gateway_multicast_domain_id
+    #   The ID of the transit gateway multicast domain.
+    #
+    # @option params [String] :transit_gateway_attachment_id
+    #   The ID of the transit gateway attachment.
+    #
+    # @option params [Array<String>] :subnet_ids
+    #   The IDs of the subnets to associate with the transit gateway multicast
+    #   domain.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::RejectTransitGatewayMulticastDomainAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RejectTransitGatewayMulticastDomainAssociationsResult#associations #associations} => Types::TransitGatewayMulticastDomainAssociations
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_transit_gateway_multicast_domain_associations({
+    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId",
+    #     subnet_ids: ["String"],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associations.transit_gateway_multicast_domain_id #=> String
+    #   resp.associations.transit_gateway_attachment_id #=> String
+    #   resp.associations.resource_id #=> String
+    #   resp.associations.resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
+    #   resp.associations.resource_owner_id #=> String
+    #   resp.associations.subnets #=> Array
+    #   resp.associations.subnets[0].subnet_id #=> String
+    #   resp.associations.subnets[0].state #=> String, one of "pendingAcceptance", "associating", "associated", "disassociating", "disassociated", "rejected", "failed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectTransitGatewayMulticastDomainAssociations AWS API Documentation
+    #
+    # @overload reject_transit_gateway_multicast_domain_associations(params = {})
+    # @param [Hash] params ({})
+    def reject_transit_gateway_multicast_domain_associations(params = {}, options = {})
+      req = build_request(:reject_transit_gateway_multicast_domain_associations, params)
       req.send_request(options)
     end
 
@@ -35689,7 +36828,7 @@ module Aws::EC2
     #   resp.route.transit_gateway_attachments #=> Array
     #   resp.route.transit_gateway_attachments[0].resource_id #=> String
     #   resp.route.transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
-    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.route.transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
     #   resp.route.type #=> String, one of "static", "propagated"
     #   resp.route.state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #
@@ -36077,7 +37216,7 @@ module Aws::EC2
     #           weighted_capacity: 1.0,
     #           tag_specifications: [
     #             {
-    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #               tags: [
     #                 {
     #                   key: "String",
@@ -36137,7 +37276,7 @@ module Aws::EC2
     #       instance_pools_to_use_count: 1,
     #       tag_specifications: [
     #         {
-    #           resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #           resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #           tags: [
     #             {
     #               key: "String",
@@ -36428,7 +37567,7 @@ module Aws::EC2
     #     valid_until: Time.now,
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -37846,7 +38985,7 @@ module Aws::EC2
     #     ],
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -38384,7 +39523,8 @@ module Aws::EC2
     #   resp.multicast_groups[0].transit_gateway_attachment_id #=> String
     #   resp.multicast_groups[0].subnet_id #=> String
     #   resp.multicast_groups[0].resource_id #=> String
-    #   resp.multicast_groups[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.multicast_groups[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
+    #   resp.multicast_groups[0].resource_owner_id #=> String
     #   resp.multicast_groups[0].network_interface_id #=> String
     #   resp.multicast_groups[0].group_member #=> Boolean
     #   resp.multicast_groups[0].group_source #=> Boolean
@@ -38416,7 +39556,8 @@ module Aws::EC2
     #     attachment.
     #
     #   * `attachment.resource-type` - The attachment resource type. Valid
-    #     values are `vpc` \| `vpn` \| `direct-connect-gateway` \| `peering`.
+    #     values are `vpc` \| `vpn` \| `direct-connect-gateway` \| `peering`
+    #     \| `connect`.
     #
     #   * `prefix-list-id` - The ID of the prefix list.
     #
@@ -38475,7 +39616,7 @@ module Aws::EC2
     #   resp.routes[0].transit_gateway_attachments #=> Array
     #   resp.routes[0].transit_gateway_attachments[0].resource_id #=> String
     #   resp.routes[0].transit_gateway_attachments[0].transit_gateway_attachment_id #=> String
-    #   resp.routes[0].transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "peering", "tgw-peering"
+    #   resp.routes[0].transit_gateway_attachments[0].resource_type #=> String, one of "vpc", "vpn", "direct-connect-gateway", "connect", "peering", "tgw-peering"
     #   resp.routes[0].type #=> String, one of "static", "propagated"
     #   resp.routes[0].state #=> String, one of "pending", "active", "blackhole", "deleting", "deleted"
     #   resp.additional_routes_available #=> Boolean
@@ -38638,6 +39779,309 @@ module Aws::EC2
     # @param [Hash] params ({})
     def start_instances(params = {}, options = {})
       req = build_request(:start_instances, params)
+      req.send_request(options)
+    end
+
+    # Starts analyzing the specified path. If the path is reachable, the
+    # operation returns the shortest feasible path.
+    #
+    # @option params [required, String] :network_insights_path_id
+    #   The ID of the path.
+    #
+    # @option params [Array<String>] :filter_in_arns
+    #   The Amazon Resource Names (ARN) of the resources that the path must
+    #   traverse.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::StartNetworkInsightsAnalysisResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartNetworkInsightsAnalysisResult#network_insights_analysis #network_insights_analysis} => Types::NetworkInsightsAnalysis
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_network_insights_analysis({
+    #     network_insights_path_id: "NetworkInsightsPathId", # required
+    #     filter_in_arns: ["ResourceArn"],
+    #     dry_run: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     client_token: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_insights_analysis.network_insights_analysis_id #=> String
+    #   resp.network_insights_analysis.network_insights_analysis_arn #=> String
+    #   resp.network_insights_analysis.network_insights_path_id #=> String
+    #   resp.network_insights_analysis.filter_in_arns #=> Array
+    #   resp.network_insights_analysis.filter_in_arns[0] #=> String
+    #   resp.network_insights_analysis.start_date #=> Time
+    #   resp.network_insights_analysis.status #=> String, one of "running", "succeeded", "failed"
+    #   resp.network_insights_analysis.status_message #=> String
+    #   resp.network_insights_analysis.network_path_found #=> Boolean
+    #   resp.network_insights_analysis.forward_path_components #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].sequence_number #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].acl_rule.cidr #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].acl_rule.egress #=> Boolean
+    #   resp.network_insights_analysis.forward_path_components[0].acl_rule.port_range.from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].acl_rule.port_range.to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].acl_rule.protocol #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].acl_rule.rule_action #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].acl_rule.rule_number #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].component.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].component.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].destination_vpc.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].destination_vpc.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].outbound_header.destination_addresses #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].outbound_header.destination_addresses[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].outbound_header.destination_port_ranges #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].outbound_header.destination_port_ranges[0].from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].outbound_header.destination_port_ranges[0].to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].outbound_header.protocol #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].outbound_header.source_addresses #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].outbound_header.source_addresses[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].outbound_header.source_port_ranges #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].outbound_header.source_port_ranges[0].from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].outbound_header.source_port_ranges[0].to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].inbound_header.destination_addresses #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].inbound_header.destination_addresses[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].inbound_header.destination_port_ranges #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].inbound_header.destination_port_ranges[0].from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].inbound_header.destination_port_ranges[0].to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].inbound_header.protocol #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].inbound_header.source_addresses #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].inbound_header.source_addresses[0] #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].inbound_header.source_port_ranges #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].inbound_header.source_port_ranges[0].from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].inbound_header.source_port_ranges[0].to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].route_table_route.destination_prefix_list_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].route_table_route.egress_only_internet_gateway_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].route_table_route.gateway_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].route_table_route.instance_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].route_table_route.nat_gateway_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].route_table_route.network_interface_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].route_table_route.origin #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].route_table_route.transit_gateway_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].security_group_rule.cidr #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].security_group_rule.direction #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].security_group_rule.security_group_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].security_group_rule.port_range.from #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].security_group_rule.port_range.to #=> Integer
+    #   resp.network_insights_analysis.forward_path_components[0].security_group_rule.prefix_list_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].security_group_rule.protocol #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].source_vpc.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].source_vpc.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].subnet.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].subnet.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].vpc.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].vpc.arn #=> String
+    #   resp.network_insights_analysis.return_path_components #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].sequence_number #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].acl_rule.cidr #=> String
+    #   resp.network_insights_analysis.return_path_components[0].acl_rule.egress #=> Boolean
+    #   resp.network_insights_analysis.return_path_components[0].acl_rule.port_range.from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].acl_rule.port_range.to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].acl_rule.protocol #=> String
+    #   resp.network_insights_analysis.return_path_components[0].acl_rule.rule_action #=> String
+    #   resp.network_insights_analysis.return_path_components[0].acl_rule.rule_number #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].component.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].component.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].destination_vpc.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].destination_vpc.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].outbound_header.destination_addresses #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].outbound_header.destination_addresses[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].outbound_header.destination_port_ranges #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].outbound_header.destination_port_ranges[0].from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].outbound_header.destination_port_ranges[0].to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].outbound_header.protocol #=> String
+    #   resp.network_insights_analysis.return_path_components[0].outbound_header.source_addresses #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].outbound_header.source_addresses[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].outbound_header.source_port_ranges #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].outbound_header.source_port_ranges[0].from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].outbound_header.source_port_ranges[0].to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].inbound_header.destination_addresses #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].inbound_header.destination_addresses[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].inbound_header.destination_port_ranges #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].inbound_header.destination_port_ranges[0].from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].inbound_header.destination_port_ranges[0].to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].inbound_header.protocol #=> String
+    #   resp.network_insights_analysis.return_path_components[0].inbound_header.source_addresses #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].inbound_header.source_addresses[0] #=> String
+    #   resp.network_insights_analysis.return_path_components[0].inbound_header.source_port_ranges #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].inbound_header.source_port_ranges[0].from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].inbound_header.source_port_ranges[0].to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analysis.return_path_components[0].route_table_route.destination_prefix_list_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].route_table_route.egress_only_internet_gateway_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].route_table_route.gateway_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].route_table_route.instance_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].route_table_route.nat_gateway_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].route_table_route.network_interface_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].route_table_route.origin #=> String
+    #   resp.network_insights_analysis.return_path_components[0].route_table_route.transit_gateway_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].security_group_rule.cidr #=> String
+    #   resp.network_insights_analysis.return_path_components[0].security_group_rule.direction #=> String
+    #   resp.network_insights_analysis.return_path_components[0].security_group_rule.security_group_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].security_group_rule.port_range.from #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].security_group_rule.port_range.to #=> Integer
+    #   resp.network_insights_analysis.return_path_components[0].security_group_rule.prefix_list_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].security_group_rule.protocol #=> String
+    #   resp.network_insights_analysis.return_path_components[0].source_vpc.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].source_vpc.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].subnet.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].subnet.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].vpc.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].vpc.arn #=> String
+    #   resp.network_insights_analysis.explanations #=> Array
+    #   resp.network_insights_analysis.explanations[0].acl.id #=> String
+    #   resp.network_insights_analysis.explanations[0].acl.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].acl_rule.cidr #=> String
+    #   resp.network_insights_analysis.explanations[0].acl_rule.egress #=> Boolean
+    #   resp.network_insights_analysis.explanations[0].acl_rule.port_range.from #=> Integer
+    #   resp.network_insights_analysis.explanations[0].acl_rule.port_range.to #=> Integer
+    #   resp.network_insights_analysis.explanations[0].acl_rule.protocol #=> String
+    #   resp.network_insights_analysis.explanations[0].acl_rule.rule_action #=> String
+    #   resp.network_insights_analysis.explanations[0].acl_rule.rule_number #=> Integer
+    #   resp.network_insights_analysis.explanations[0].address #=> String
+    #   resp.network_insights_analysis.explanations[0].addresses #=> Array
+    #   resp.network_insights_analysis.explanations[0].addresses[0] #=> String
+    #   resp.network_insights_analysis.explanations[0].attached_to.id #=> String
+    #   resp.network_insights_analysis.explanations[0].attached_to.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].availability_zones #=> Array
+    #   resp.network_insights_analysis.explanations[0].availability_zones[0] #=> String
+    #   resp.network_insights_analysis.explanations[0].cidrs #=> Array
+    #   resp.network_insights_analysis.explanations[0].cidrs[0] #=> String
+    #   resp.network_insights_analysis.explanations[0].component.id #=> String
+    #   resp.network_insights_analysis.explanations[0].component.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].customer_gateway.id #=> String
+    #   resp.network_insights_analysis.explanations[0].customer_gateway.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].destination.id #=> String
+    #   resp.network_insights_analysis.explanations[0].destination.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].destination_vpc.id #=> String
+    #   resp.network_insights_analysis.explanations[0].destination_vpc.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].direction #=> String
+    #   resp.network_insights_analysis.explanations[0].explanation_code #=> String
+    #   resp.network_insights_analysis.explanations[0].ingress_route_table.id #=> String
+    #   resp.network_insights_analysis.explanations[0].ingress_route_table.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].internet_gateway.id #=> String
+    #   resp.network_insights_analysis.explanations[0].internet_gateway.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].load_balancer_arn #=> String
+    #   resp.network_insights_analysis.explanations[0].classic_load_balancer_listener.load_balancer_port #=> Integer
+    #   resp.network_insights_analysis.explanations[0].classic_load_balancer_listener.instance_port #=> Integer
+    #   resp.network_insights_analysis.explanations[0].load_balancer_listener_port #=> Integer
+    #   resp.network_insights_analysis.explanations[0].load_balancer_target.address #=> String
+    #   resp.network_insights_analysis.explanations[0].load_balancer_target.availability_zone #=> String
+    #   resp.network_insights_analysis.explanations[0].load_balancer_target.instance.id #=> String
+    #   resp.network_insights_analysis.explanations[0].load_balancer_target.instance.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].load_balancer_target.port #=> Integer
+    #   resp.network_insights_analysis.explanations[0].load_balancer_target_group.id #=> String
+    #   resp.network_insights_analysis.explanations[0].load_balancer_target_group.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].load_balancer_target_groups #=> Array
+    #   resp.network_insights_analysis.explanations[0].load_balancer_target_groups[0].id #=> String
+    #   resp.network_insights_analysis.explanations[0].load_balancer_target_groups[0].arn #=> String
+    #   resp.network_insights_analysis.explanations[0].load_balancer_target_port #=> Integer
+    #   resp.network_insights_analysis.explanations[0].elastic_load_balancer_listener.id #=> String
+    #   resp.network_insights_analysis.explanations[0].elastic_load_balancer_listener.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].missing_component #=> String
+    #   resp.network_insights_analysis.explanations[0].nat_gateway.id #=> String
+    #   resp.network_insights_analysis.explanations[0].nat_gateway.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].network_interface.id #=> String
+    #   resp.network_insights_analysis.explanations[0].network_interface.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].packet_field #=> String
+    #   resp.network_insights_analysis.explanations[0].vpc_peering_connection.id #=> String
+    #   resp.network_insights_analysis.explanations[0].vpc_peering_connection.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].port #=> Integer
+    #   resp.network_insights_analysis.explanations[0].port_ranges #=> Array
+    #   resp.network_insights_analysis.explanations[0].port_ranges[0].from #=> Integer
+    #   resp.network_insights_analysis.explanations[0].port_ranges[0].to #=> Integer
+    #   resp.network_insights_analysis.explanations[0].prefix_list.id #=> String
+    #   resp.network_insights_analysis.explanations[0].prefix_list.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].protocols #=> Array
+    #   resp.network_insights_analysis.explanations[0].protocols[0] #=> String
+    #   resp.network_insights_analysis.explanations[0].route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analysis.explanations[0].route_table_route.destination_prefix_list_id #=> String
+    #   resp.network_insights_analysis.explanations[0].route_table_route.egress_only_internet_gateway_id #=> String
+    #   resp.network_insights_analysis.explanations[0].route_table_route.gateway_id #=> String
+    #   resp.network_insights_analysis.explanations[0].route_table_route.instance_id #=> String
+    #   resp.network_insights_analysis.explanations[0].route_table_route.nat_gateway_id #=> String
+    #   resp.network_insights_analysis.explanations[0].route_table_route.network_interface_id #=> String
+    #   resp.network_insights_analysis.explanations[0].route_table_route.origin #=> String
+    #   resp.network_insights_analysis.explanations[0].route_table_route.transit_gateway_id #=> String
+    #   resp.network_insights_analysis.explanations[0].route_table_route.vpc_peering_connection_id #=> String
+    #   resp.network_insights_analysis.explanations[0].route_table.id #=> String
+    #   resp.network_insights_analysis.explanations[0].route_table.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].security_group.id #=> String
+    #   resp.network_insights_analysis.explanations[0].security_group.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].security_group_rule.cidr #=> String
+    #   resp.network_insights_analysis.explanations[0].security_group_rule.direction #=> String
+    #   resp.network_insights_analysis.explanations[0].security_group_rule.security_group_id #=> String
+    #   resp.network_insights_analysis.explanations[0].security_group_rule.port_range.from #=> Integer
+    #   resp.network_insights_analysis.explanations[0].security_group_rule.port_range.to #=> Integer
+    #   resp.network_insights_analysis.explanations[0].security_group_rule.prefix_list_id #=> String
+    #   resp.network_insights_analysis.explanations[0].security_group_rule.protocol #=> String
+    #   resp.network_insights_analysis.explanations[0].security_groups #=> Array
+    #   resp.network_insights_analysis.explanations[0].security_groups[0].id #=> String
+    #   resp.network_insights_analysis.explanations[0].security_groups[0].arn #=> String
+    #   resp.network_insights_analysis.explanations[0].source_vpc.id #=> String
+    #   resp.network_insights_analysis.explanations[0].source_vpc.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].state #=> String
+    #   resp.network_insights_analysis.explanations[0].subnet.id #=> String
+    #   resp.network_insights_analysis.explanations[0].subnet.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].subnet_route_table.id #=> String
+    #   resp.network_insights_analysis.explanations[0].subnet_route_table.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].vpc.id #=> String
+    #   resp.network_insights_analysis.explanations[0].vpc.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].vpc_endpoint.id #=> String
+    #   resp.network_insights_analysis.explanations[0].vpc_endpoint.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].vpn_connection.id #=> String
+    #   resp.network_insights_analysis.explanations[0].vpn_connection.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].vpn_gateway.id #=> String
+    #   resp.network_insights_analysis.explanations[0].vpn_gateway.arn #=> String
+    #   resp.network_insights_analysis.alternate_path_hints #=> Array
+    #   resp.network_insights_analysis.alternate_path_hints[0].component_id #=> String
+    #   resp.network_insights_analysis.alternate_path_hints[0].component_arn #=> String
+    #   resp.network_insights_analysis.tags #=> Array
+    #   resp.network_insights_analysis.tags[0].key #=> String
+    #   resp.network_insights_analysis.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StartNetworkInsightsAnalysis AWS API Documentation
+    #
+    # @overload start_network_insights_analysis(params = {})
+    # @param [Hash] params ({})
+    def start_network_insights_analysis(params = {}, options = {})
+      req = build_request(:start_network_insights_analysis, params)
       req.send_request(options)
     end
 
@@ -39395,7 +40839,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.215.0'
+      context[:gem_version] = '1.216.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

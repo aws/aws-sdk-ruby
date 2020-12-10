@@ -1062,6 +1062,76 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Creates a thesaurus for an index. The thesaurus contains a list of
+    # synonyms in Solr format.
+    #
+    # @option params [required, String] :index_id
+    #   The unique identifier of the index for the new thesaurus.
+    #
+    # @option params [required, String] :name
+    #   The name for the new thesaurus.
+    #
+    # @option params [String] :description
+    #   The description for the new thesaurus.
+    #
+    # @option params [required, String] :role_arn
+    #   An AWS Identity and Access Management (IAM) role that gives Amazon
+    #   Kendra permissions to access thesaurus file specified in
+    #   `SourceS3Path`.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs that identify the thesaurus. You can use the
+    #   tags to identify and organize your resources and to control access to
+    #   resources.
+    #
+    # @option params [required, Types::S3Path] :source_s3_path
+    #   The thesaurus file Amazon S3 source path.
+    #
+    # @option params [String] :client_token
+    #   A token that you provide to identify the request to create a
+    #   thesaurus. Multiple calls to the `CreateThesaurus` operation with the
+    #   same client token will create only one index.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateThesaurusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateThesaurusResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_thesaurus({
+    #     index_id: "IndexId", # required
+    #     name: "ThesaurusName", # required
+    #     description: "Description",
+    #     role_arn: "RoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     source_s3_path: { # required
+    #       bucket: "S3BucketName", # required
+    #       key: "S3ObjectKey", # required
+    #     },
+    #     client_token: "ClientTokenName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateThesaurus AWS API Documentation
+    #
+    # @overload create_thesaurus(params = {})
+    # @param [Hash] params ({})
+    def create_thesaurus(params = {}, options = {})
+      req = build_request(:create_thesaurus, params)
+      req.send_request(options)
+    end
+
     # Deletes an Amazon Kendra data source. An exception is not thrown if
     # the data source is already being deleted. While the data source is
     # being deleted, the `Status` field returned by a call to the operation
@@ -1144,6 +1214,32 @@ module Aws::Kendra
     # @param [Hash] params ({})
     def delete_index(params = {}, options = {})
       req = build_request(:delete_index, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing Amazon Kendra thesaurus.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the thesaurus to delete.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index associated with the thesaurus to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_thesaurus({
+    #     id: "ThesaurusId", # required
+    #     index_id: "IndexId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteThesaurus AWS API Documentation
+    #
+    # @overload delete_thesaurus(params = {})
+    # @param [Hash] params ({})
+    def delete_thesaurus(params = {}, options = {})
+      req = build_request(:delete_thesaurus, params)
       req.send_request(options)
     end
 
@@ -1516,6 +1612,63 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Describes an existing Amazon Kendra thesaurus.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the thesaurus to describe.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index associated with the thesaurus to describe.
+    #
+    # @return [Types::DescribeThesaurusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeThesaurusResponse#id #id} => String
+    #   * {Types::DescribeThesaurusResponse#index_id #index_id} => String
+    #   * {Types::DescribeThesaurusResponse#name #name} => String
+    #   * {Types::DescribeThesaurusResponse#description #description} => String
+    #   * {Types::DescribeThesaurusResponse#status #status} => String
+    #   * {Types::DescribeThesaurusResponse#error_message #error_message} => String
+    #   * {Types::DescribeThesaurusResponse#created_at #created_at} => Time
+    #   * {Types::DescribeThesaurusResponse#updated_at #updated_at} => Time
+    #   * {Types::DescribeThesaurusResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeThesaurusResponse#source_s3_path #source_s3_path} => Types::S3Path
+    #   * {Types::DescribeThesaurusResponse#file_size_bytes #file_size_bytes} => Integer
+    #   * {Types::DescribeThesaurusResponse#term_count #term_count} => Integer
+    #   * {Types::DescribeThesaurusResponse#synonym_rule_count #synonym_rule_count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_thesaurus({
+    #     id: "ThesaurusId", # required
+    #     index_id: "IndexId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.index_id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "ACTIVE_BUT_UPDATE_FAILED", "FAILED"
+    #   resp.error_message #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.role_arn #=> String
+    #   resp.source_s3_path.bucket #=> String
+    #   resp.source_s3_path.key #=> String
+    #   resp.file_size_bytes #=> Integer
+    #   resp.term_count #=> Integer
+    #   resp.synonym_rule_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeThesaurus AWS API Documentation
+    #
+    # @overload describe_thesaurus(params = {})
+    # @param [Hash] params ({})
+    def describe_thesaurus(params = {}, options = {})
+      req = build_request(:describe_thesaurus, params)
+      req.send_request(options)
+    end
+
     # Gets statistics about synchronizing Amazon Kendra with a data source.
     #
     # @option params [required, String] :id
@@ -1761,6 +1914,52 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Lists the Amazon Kendra thesauri associated with an index.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index associated with the thesaurus to list.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there is more data to
+    #   retrieve), Amazon Kendra returns a pagination token in the response.
+    #   You can use this pagination token to retrieve the next set of thesauri
+    #   (`ThesaurusSummaryItems`).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of thesauri to return.
+    #
+    # @return [Types::ListThesauriResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListThesauriResponse#next_token #next_token} => String
+    #   * {Types::ListThesauriResponse#thesaurus_summary_items #thesaurus_summary_items} => Array&lt;Types::ThesaurusSummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_thesauri({
+    #     index_id: "IndexId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.thesaurus_summary_items #=> Array
+    #   resp.thesaurus_summary_items[0].id #=> String
+    #   resp.thesaurus_summary_items[0].name #=> String
+    #   resp.thesaurus_summary_items[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "ACTIVE_BUT_UPDATE_FAILED", "FAILED"
+    #   resp.thesaurus_summary_items[0].created_at #=> Time
+    #   resp.thesaurus_summary_items[0].updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListThesauri AWS API Documentation
+    #
+    # @overload list_thesauri(params = {})
+    # @param [Hash] params ({})
+    def list_thesauri(params = {}, options = {})
+      req = build_request(:list_thesauri, params)
+      req.send_request(options)
+    end
+
     # Searches an active index. Use this API to search your documents using
     # query. The `Query` operation enables to do faceted search and to
     # filter results based on document attributes.
@@ -1966,17 +2165,20 @@ module Aws::Kendra
     #   resp.result_items[0].additional_attributes[0].value.text_with_highlights_value.highlights[0].begin_offset #=> Integer
     #   resp.result_items[0].additional_attributes[0].value.text_with_highlights_value.highlights[0].end_offset #=> Integer
     #   resp.result_items[0].additional_attributes[0].value.text_with_highlights_value.highlights[0].top_answer #=> Boolean
+    #   resp.result_items[0].additional_attributes[0].value.text_with_highlights_value.highlights[0].type #=> String, one of "STANDARD", "THESAURUS_SYNONYM"
     #   resp.result_items[0].document_id #=> String
     #   resp.result_items[0].document_title.text #=> String
     #   resp.result_items[0].document_title.highlights #=> Array
     #   resp.result_items[0].document_title.highlights[0].begin_offset #=> Integer
     #   resp.result_items[0].document_title.highlights[0].end_offset #=> Integer
     #   resp.result_items[0].document_title.highlights[0].top_answer #=> Boolean
+    #   resp.result_items[0].document_title.highlights[0].type #=> String, one of "STANDARD", "THESAURUS_SYNONYM"
     #   resp.result_items[0].document_excerpt.text #=> String
     #   resp.result_items[0].document_excerpt.highlights #=> Array
     #   resp.result_items[0].document_excerpt.highlights[0].begin_offset #=> Integer
     #   resp.result_items[0].document_excerpt.highlights[0].end_offset #=> Integer
     #   resp.result_items[0].document_excerpt.highlights[0].top_answer #=> Boolean
+    #   resp.result_items[0].document_excerpt.highlights[0].type #=> String, one of "STANDARD", "THESAURUS_SYNONYM"
     #   resp.result_items[0].document_uri #=> String
     #   resp.result_items[0].document_attributes #=> Array
     #   resp.result_items[0].document_attributes[0].key #=> String
@@ -2585,6 +2787,51 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Updates a thesaurus file associated with an index.
+    #
+    # @option params [required, String] :id
+    #   The identifier of the thesaurus to update.
+    #
+    # @option params [String] :name
+    #   The updated name of the thesaurus.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index associated with the thesaurus to update.
+    #
+    # @option params [String] :description
+    #   The updated description of the thesaurus.
+    #
+    # @option params [String] :role_arn
+    #   The updated role ARN of the thesaurus.
+    #
+    # @option params [Types::S3Path] :source_s3_path
+    #   Information required to find a specific file in an Amazon S3 bucket.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_thesaurus({
+    #     id: "ThesaurusId", # required
+    #     name: "ThesaurusName",
+    #     index_id: "IndexId", # required
+    #     description: "Description",
+    #     role_arn: "RoleArn",
+    #     source_s3_path: {
+    #       bucket: "S3BucketName", # required
+    #       key: "S3ObjectKey", # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateThesaurus AWS API Documentation
+    #
+    # @overload update_thesaurus(params = {})
+    # @param [Hash] params ({})
+    def update_thesaurus(params = {}, options = {})
+      req = build_request(:update_thesaurus, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2598,7 +2845,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

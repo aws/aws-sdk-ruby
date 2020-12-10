@@ -13,13 +13,21 @@ module Aws::NetworkManager
 
     include Seahorse::Model
 
+    AWSLocation = Shapes::StructureShape.new(name: 'AWSLocation')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AssociateCustomerGatewayRequest = Shapes::StructureShape.new(name: 'AssociateCustomerGatewayRequest')
     AssociateCustomerGatewayResponse = Shapes::StructureShape.new(name: 'AssociateCustomerGatewayResponse')
     AssociateLinkRequest = Shapes::StructureShape.new(name: 'AssociateLinkRequest')
     AssociateLinkResponse = Shapes::StructureShape.new(name: 'AssociateLinkResponse')
+    AssociateTransitGatewayConnectPeerRequest = Shapes::StructureShape.new(name: 'AssociateTransitGatewayConnectPeerRequest')
+    AssociateTransitGatewayConnectPeerResponse = Shapes::StructureShape.new(name: 'AssociateTransitGatewayConnectPeerResponse')
     Bandwidth = Shapes::StructureShape.new(name: 'Bandwidth')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    Connection = Shapes::StructureShape.new(name: 'Connection')
+    ConnectionList = Shapes::ListShape.new(name: 'ConnectionList')
+    ConnectionState = Shapes::StringShape.new(name: 'ConnectionState')
+    CreateConnectionRequest = Shapes::StructureShape.new(name: 'CreateConnectionRequest')
+    CreateConnectionResponse = Shapes::StructureShape.new(name: 'CreateConnectionResponse')
     CreateDeviceRequest = Shapes::StructureShape.new(name: 'CreateDeviceRequest')
     CreateDeviceResponse = Shapes::StructureShape.new(name: 'CreateDeviceResponse')
     CreateGlobalNetworkRequest = Shapes::StructureShape.new(name: 'CreateGlobalNetworkRequest')
@@ -32,6 +40,8 @@ module Aws::NetworkManager
     CustomerGatewayAssociationList = Shapes::ListShape.new(name: 'CustomerGatewayAssociationList')
     CustomerGatewayAssociationState = Shapes::StringShape.new(name: 'CustomerGatewayAssociationState')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
+    DeleteConnectionRequest = Shapes::StructureShape.new(name: 'DeleteConnectionRequest')
+    DeleteConnectionResponse = Shapes::StructureShape.new(name: 'DeleteConnectionResponse')
     DeleteDeviceRequest = Shapes::StructureShape.new(name: 'DeleteDeviceRequest')
     DeleteDeviceResponse = Shapes::StructureShape.new(name: 'DeleteDeviceResponse')
     DeleteGlobalNetworkRequest = Shapes::StructureShape.new(name: 'DeleteGlobalNetworkRequest')
@@ -51,6 +61,10 @@ module Aws::NetworkManager
     DisassociateCustomerGatewayResponse = Shapes::StructureShape.new(name: 'DisassociateCustomerGatewayResponse')
     DisassociateLinkRequest = Shapes::StructureShape.new(name: 'DisassociateLinkRequest')
     DisassociateLinkResponse = Shapes::StructureShape.new(name: 'DisassociateLinkResponse')
+    DisassociateTransitGatewayConnectPeerRequest = Shapes::StructureShape.new(name: 'DisassociateTransitGatewayConnectPeerRequest')
+    DisassociateTransitGatewayConnectPeerResponse = Shapes::StructureShape.new(name: 'DisassociateTransitGatewayConnectPeerResponse')
+    GetConnectionsRequest = Shapes::StructureShape.new(name: 'GetConnectionsRequest')
+    GetConnectionsResponse = Shapes::StructureShape.new(name: 'GetConnectionsResponse')
     GetCustomerGatewayAssociationsRequest = Shapes::StructureShape.new(name: 'GetCustomerGatewayAssociationsRequest')
     GetCustomerGatewayAssociationsResponse = Shapes::StructureShape.new(name: 'GetCustomerGatewayAssociationsResponse')
     GetDevicesRequest = Shapes::StructureShape.new(name: 'GetDevicesRequest')
@@ -61,6 +75,8 @@ module Aws::NetworkManager
     GetLinksResponse = Shapes::StructureShape.new(name: 'GetLinksResponse')
     GetSitesRequest = Shapes::StructureShape.new(name: 'GetSitesRequest')
     GetSitesResponse = Shapes::StructureShape.new(name: 'GetSitesResponse')
+    GetTransitGatewayConnectPeerAssociationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayConnectPeerAssociationsRequest')
+    GetTransitGatewayConnectPeerAssociationsResponse = Shapes::StructureShape.new(name: 'GetTransitGatewayConnectPeerAssociationsResponse')
     GetTransitGatewayRegistrationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayRegistrationsRequest')
     GetTransitGatewayRegistrationsResponse = Shapes::StructureShape.new(name: 'GetTransitGatewayRegistrationsResponse')
     GlobalNetwork = Shapes::StructureShape.new(name: 'GlobalNetwork')
@@ -97,12 +113,17 @@ module Aws::NetworkManager
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TransitGatewayConnectPeerAssociation = Shapes::StructureShape.new(name: 'TransitGatewayConnectPeerAssociation')
+    TransitGatewayConnectPeerAssociationList = Shapes::ListShape.new(name: 'TransitGatewayConnectPeerAssociationList')
+    TransitGatewayConnectPeerAssociationState = Shapes::StringShape.new(name: 'TransitGatewayConnectPeerAssociationState')
     TransitGatewayRegistration = Shapes::StructureShape.new(name: 'TransitGatewayRegistration')
     TransitGatewayRegistrationList = Shapes::ListShape.new(name: 'TransitGatewayRegistrationList')
     TransitGatewayRegistrationState = Shapes::StringShape.new(name: 'TransitGatewayRegistrationState')
     TransitGatewayRegistrationStateReason = Shapes::StructureShape.new(name: 'TransitGatewayRegistrationStateReason')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateConnectionRequest = Shapes::StructureShape.new(name: 'UpdateConnectionRequest')
+    UpdateConnectionResponse = Shapes::StructureShape.new(name: 'UpdateConnectionResponse')
     UpdateDeviceRequest = Shapes::StructureShape.new(name: 'UpdateDeviceRequest')
     UpdateDeviceResponse = Shapes::StructureShape.new(name: 'UpdateDeviceResponse')
     UpdateGlobalNetworkRequest = Shapes::StructureShape.new(name: 'UpdateGlobalNetworkRequest')
@@ -115,6 +136,10 @@ module Aws::NetworkManager
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+
+    AWSLocation.add_member(:zone, Shapes::ShapeRef.new(shape: String, location_name: "Zone"))
+    AWSLocation.add_member(:subnet_arn, Shapes::ShapeRef.new(shape: String, location_name: "SubnetArn"))
+    AWSLocation.struct_class = Types::AWSLocation
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -136,6 +161,15 @@ module Aws::NetworkManager
     AssociateLinkResponse.add_member(:link_association, Shapes::ShapeRef.new(shape: LinkAssociation, location_name: "LinkAssociation"))
     AssociateLinkResponse.struct_class = Types::AssociateLinkResponse
 
+    AssociateTransitGatewayConnectPeerRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
+    AssociateTransitGatewayConnectPeerRequest.add_member(:transit_gateway_connect_peer_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TransitGatewayConnectPeerArn"))
+    AssociateTransitGatewayConnectPeerRequest.add_member(:device_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DeviceId"))
+    AssociateTransitGatewayConnectPeerRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: String, location_name: "LinkId"))
+    AssociateTransitGatewayConnectPeerRequest.struct_class = Types::AssociateTransitGatewayConnectPeerRequest
+
+    AssociateTransitGatewayConnectPeerResponse.add_member(:transit_gateway_connect_peer_association, Shapes::ShapeRef.new(shape: TransitGatewayConnectPeerAssociation, location_name: "TransitGatewayConnectPeerAssociation"))
+    AssociateTransitGatewayConnectPeerResponse.struct_class = Types::AssociateTransitGatewayConnectPeerResponse
+
     Bandwidth.add_member(:upload_speed, Shapes::ShapeRef.new(shape: Integer, location_name: "UploadSpeed"))
     Bandwidth.add_member(:download_speed, Shapes::ShapeRef.new(shape: Integer, location_name: "DownloadSpeed"))
     Bandwidth.struct_class = Types::Bandwidth
@@ -145,7 +179,35 @@ module Aws::NetworkManager
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceType"))
     ConflictException.struct_class = Types::ConflictException
 
+    Connection.add_member(:connection_id, Shapes::ShapeRef.new(shape: String, location_name: "ConnectionId"))
+    Connection.add_member(:connection_arn, Shapes::ShapeRef.new(shape: String, location_name: "ConnectionArn"))
+    Connection.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, location_name: "GlobalNetworkId"))
+    Connection.add_member(:device_id, Shapes::ShapeRef.new(shape: String, location_name: "DeviceId"))
+    Connection.add_member(:connected_device_id, Shapes::ShapeRef.new(shape: String, location_name: "ConnectedDeviceId"))
+    Connection.add_member(:link_id, Shapes::ShapeRef.new(shape: String, location_name: "LinkId"))
+    Connection.add_member(:connected_link_id, Shapes::ShapeRef.new(shape: String, location_name: "ConnectedLinkId"))
+    Connection.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    Connection.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedAt"))
+    Connection.add_member(:state, Shapes::ShapeRef.new(shape: ConnectionState, location_name: "State"))
+    Connection.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    Connection.struct_class = Types::Connection
+
+    ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
+
+    CreateConnectionRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
+    CreateConnectionRequest.add_member(:device_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DeviceId"))
+    CreateConnectionRequest.add_member(:connected_device_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ConnectedDeviceId"))
+    CreateConnectionRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: String, location_name: "LinkId"))
+    CreateConnectionRequest.add_member(:connected_link_id, Shapes::ShapeRef.new(shape: String, location_name: "ConnectedLinkId"))
+    CreateConnectionRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateConnectionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateConnectionRequest.struct_class = Types::CreateConnectionRequest
+
+    CreateConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, location_name: "Connection"))
+    CreateConnectionResponse.struct_class = Types::CreateConnectionResponse
+
     CreateDeviceRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
+    CreateDeviceRequest.add_member(:aws_location, Shapes::ShapeRef.new(shape: AWSLocation, location_name: "AWSLocation"))
     CreateDeviceRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CreateDeviceRequest.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     CreateDeviceRequest.add_member(:vendor, Shapes::ShapeRef.new(shape: String, location_name: "Vendor"))
@@ -196,6 +258,13 @@ module Aws::NetworkManager
 
     CustomerGatewayAssociationList.member = Shapes::ShapeRef.new(shape: CustomerGatewayAssociation)
 
+    DeleteConnectionRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
+    DeleteConnectionRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "connectionId"))
+    DeleteConnectionRequest.struct_class = Types::DeleteConnectionRequest
+
+    DeleteConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, location_name: "Connection"))
+    DeleteConnectionResponse.struct_class = Types::DeleteConnectionResponse
+
     DeleteDeviceRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
     DeleteDeviceRequest.add_member(:device_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "deviceId"))
     DeleteDeviceRequest.struct_class = Types::DeleteDeviceRequest
@@ -242,6 +311,7 @@ module Aws::NetworkManager
     Device.add_member(:device_id, Shapes::ShapeRef.new(shape: String, location_name: "DeviceId"))
     Device.add_member(:device_arn, Shapes::ShapeRef.new(shape: String, location_name: "DeviceArn"))
     Device.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, location_name: "GlobalNetworkId"))
+    Device.add_member(:aws_location, Shapes::ShapeRef.new(shape: AWSLocation, location_name: "AWSLocation"))
     Device.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     Device.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     Device.add_member(:vendor, Shapes::ShapeRef.new(shape: String, location_name: "Vendor"))
@@ -270,6 +340,24 @@ module Aws::NetworkManager
 
     DisassociateLinkResponse.add_member(:link_association, Shapes::ShapeRef.new(shape: LinkAssociation, location_name: "LinkAssociation"))
     DisassociateLinkResponse.struct_class = Types::DisassociateLinkResponse
+
+    DisassociateTransitGatewayConnectPeerRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
+    DisassociateTransitGatewayConnectPeerRequest.add_member(:transit_gateway_connect_peer_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "transitGatewayConnectPeerArn"))
+    DisassociateTransitGatewayConnectPeerRequest.struct_class = Types::DisassociateTransitGatewayConnectPeerRequest
+
+    DisassociateTransitGatewayConnectPeerResponse.add_member(:transit_gateway_connect_peer_association, Shapes::ShapeRef.new(shape: TransitGatewayConnectPeerAssociation, location_name: "TransitGatewayConnectPeerAssociation"))
+    DisassociateTransitGatewayConnectPeerResponse.struct_class = Types::DisassociateTransitGatewayConnectPeerResponse
+
+    GetConnectionsRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
+    GetConnectionsRequest.add_member(:connection_ids, Shapes::ShapeRef.new(shape: StringList, location: "querystring", location_name: "connectionIds"))
+    GetConnectionsRequest.add_member(:device_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "deviceId"))
+    GetConnectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    GetConnectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    GetConnectionsRequest.struct_class = Types::GetConnectionsRequest
+
+    GetConnectionsResponse.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionList, location_name: "Connections"))
+    GetConnectionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetConnectionsResponse.struct_class = Types::GetConnectionsResponse
 
     GetCustomerGatewayAssociationsRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
     GetCustomerGatewayAssociationsRequest.add_member(:customer_gateway_arns, Shapes::ShapeRef.new(shape: StringList, location: "querystring", location_name: "customerGatewayArns"))
@@ -325,6 +413,16 @@ module Aws::NetworkManager
     GetSitesResponse.add_member(:sites, Shapes::ShapeRef.new(shape: SiteList, location_name: "Sites"))
     GetSitesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetSitesResponse.struct_class = Types::GetSitesResponse
+
+    GetTransitGatewayConnectPeerAssociationsRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
+    GetTransitGatewayConnectPeerAssociationsRequest.add_member(:transit_gateway_connect_peer_arns, Shapes::ShapeRef.new(shape: StringList, location: "querystring", location_name: "transitGatewayConnectPeerArns"))
+    GetTransitGatewayConnectPeerAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    GetTransitGatewayConnectPeerAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    GetTransitGatewayConnectPeerAssociationsRequest.struct_class = Types::GetTransitGatewayConnectPeerAssociationsRequest
+
+    GetTransitGatewayConnectPeerAssociationsResponse.add_member(:transit_gateway_connect_peer_associations, Shapes::ShapeRef.new(shape: TransitGatewayConnectPeerAssociationList, location_name: "TransitGatewayConnectPeerAssociations"))
+    GetTransitGatewayConnectPeerAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetTransitGatewayConnectPeerAssociationsResponse.struct_class = Types::GetTransitGatewayConnectPeerAssociationsResponse
 
     GetTransitGatewayRegistrationsRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
     GetTransitGatewayRegistrationsRequest.add_member(:transit_gateway_arns, Shapes::ShapeRef.new(shape: StringList, location: "querystring", location_name: "transitGatewayArns"))
@@ -435,6 +533,15 @@ module Aws::NetworkManager
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location: "header", location_name: "Retry-After"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    TransitGatewayConnectPeerAssociation.add_member(:transit_gateway_connect_peer_arn, Shapes::ShapeRef.new(shape: String, location_name: "TransitGatewayConnectPeerArn"))
+    TransitGatewayConnectPeerAssociation.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, location_name: "GlobalNetworkId"))
+    TransitGatewayConnectPeerAssociation.add_member(:device_id, Shapes::ShapeRef.new(shape: String, location_name: "DeviceId"))
+    TransitGatewayConnectPeerAssociation.add_member(:link_id, Shapes::ShapeRef.new(shape: String, location_name: "LinkId"))
+    TransitGatewayConnectPeerAssociation.add_member(:state, Shapes::ShapeRef.new(shape: TransitGatewayConnectPeerAssociationState, location_name: "State"))
+    TransitGatewayConnectPeerAssociation.struct_class = Types::TransitGatewayConnectPeerAssociation
+
+    TransitGatewayConnectPeerAssociationList.member = Shapes::ShapeRef.new(shape: TransitGatewayConnectPeerAssociation)
+
     TransitGatewayRegistration.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, location_name: "GlobalNetworkId"))
     TransitGatewayRegistration.add_member(:transit_gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "TransitGatewayArn"))
     TransitGatewayRegistration.add_member(:state, Shapes::ShapeRef.new(shape: TransitGatewayRegistrationStateReason, location_name: "State"))
@@ -452,8 +559,19 @@ module Aws::NetworkManager
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateConnectionRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
+    UpdateConnectionRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "connectionId"))
+    UpdateConnectionRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: String, location_name: "LinkId"))
+    UpdateConnectionRequest.add_member(:connected_link_id, Shapes::ShapeRef.new(shape: String, location_name: "ConnectedLinkId"))
+    UpdateConnectionRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    UpdateConnectionRequest.struct_class = Types::UpdateConnectionRequest
+
+    UpdateConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, location_name: "Connection"))
+    UpdateConnectionResponse.struct_class = Types::UpdateConnectionResponse
+
     UpdateDeviceRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
     UpdateDeviceRequest.add_member(:device_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "deviceId"))
+    UpdateDeviceRequest.add_member(:aws_location, Shapes::ShapeRef.new(shape: AWSLocation, location_name: "AWSLocation"))
     UpdateDeviceRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     UpdateDeviceRequest.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     UpdateDeviceRequest.add_member(:vendor, Shapes::ShapeRef.new(shape: String, location_name: "Vendor"))
@@ -553,6 +671,35 @@ module Aws::NetworkManager
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:associate_transit_gateway_connect_peer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateTransitGatewayConnectPeer"
+        o.http_method = "POST"
+        o.http_request_uri = "/global-networks/{globalNetworkId}/transit-gateway-connect-peer-associations"
+        o.input = Shapes::ShapeRef.new(shape: AssociateTransitGatewayConnectPeerRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateTransitGatewayConnectPeerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateConnection"
+        o.http_method = "POST"
+        o.http_request_uri = "/global-networks/{globalNetworkId}/connections"
+        o.input = Shapes::ShapeRef.new(shape: CreateConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateConnectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_device, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDevice"
         o.http_method = "POST"
@@ -605,6 +752,20 @@ module Aws::NetworkManager
         o.output = Shapes::ShapeRef.new(shape: CreateSiteResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteConnection"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/global-networks/{globalNetworkId}/connections/{connectionId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteConnectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -729,6 +890,39 @@ module Aws::NetworkManager
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:disassociate_transit_gateway_connect_peer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateTransitGatewayConnectPeer"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/global-networks/{globalNetworkId}/transit-gateway-connect-peer-associations/{transitGatewayConnectPeerArn}"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateTransitGatewayConnectPeerRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateTransitGatewayConnectPeerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_connections, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetConnections"
+        o.http_method = "GET"
+        o.http_request_uri = "/global-networks/{globalNetworkId}/connections"
+        o.input = Shapes::ShapeRef.new(shape: GetConnectionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetConnectionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_customer_gateway_associations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetCustomerGatewayAssociations"
         o.http_method = "GET"
@@ -825,6 +1019,26 @@ module Aws::NetworkManager
         )
       end)
 
+      api.add_operation(:get_transit_gateway_connect_peer_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTransitGatewayConnectPeerAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/global-networks/{globalNetworkId}/transit-gateway-connect-peer-associations"
+        o.input = Shapes::ShapeRef.new(shape: GetTransitGatewayConnectPeerAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTransitGatewayConnectPeerAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_transit_gateway_registrations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTransitGatewayRegistrations"
         o.http_method = "GET"
@@ -892,6 +1106,20 @@ module Aws::NetworkManager
         o.http_request_uri = "/tags/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConnection"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/global-networks/{globalNetworkId}/connections/{connectionId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateConnectionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

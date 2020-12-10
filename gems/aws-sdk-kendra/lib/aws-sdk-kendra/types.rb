@@ -1983,6 +1983,90 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateThesaurusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         name: "ThesaurusName", # required
+    #         description: "Description",
+    #         role_arn: "RoleArn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #         source_s3_path: { # required
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
+    #         client_token: "ClientTokenName",
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The unique identifier of the index for the new thesaurus.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name for the new thesaurus.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the new thesaurus.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   An AWS Identity and Access Management (IAM) role that gives Amazon
+    #   Kendra permissions to access thesaurus file specified in
+    #   `SourceS3Path`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs that identify the thesaurus. You can use
+    #   the tags to identify and organize your resources and to control
+    #   access to resources.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] source_s3_path
+    #   The thesaurus file Amazon S3 source path.
+    #   @return [Types::S3Path]
+    #
+    # @!attribute [rw] client_token
+    #   A token that you provide to identify the request to create a
+    #   thesaurus. Multiple calls to the `CreateThesaurus` operation with
+    #   the same client token will create only one index.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateThesaurusRequest AWS API Documentation
+    #
+    class CreateThesaurusRequest < Struct.new(
+      :index_id,
+      :name,
+      :description,
+      :role_arn,
+      :tags,
+      :source_s3_path,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The unique identifier of the thesaurus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateThesaurusResponse AWS API Documentation
+    #
+    class CreateThesaurusResponse < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration information for a Amazon Kendra data source.
     #
     # @note When making an API call, you may pass DataSourceConfiguration
@@ -2687,6 +2771,31 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteThesaurusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ThesaurusId", # required
+    #         index_id: "IndexId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the thesaurus to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index associated with the thesaurus to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteThesaurusRequest AWS API Documentation
+    #
+    class DeleteThesaurusRequest < Struct.new(
+      :id,
+      :index_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeDataSourceRequest
     #   data as a hash:
     #
@@ -2901,7 +3010,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   the name of the index.
+    #   The name of the index.
     #   @return [String]
     #
     # @!attribute [rw] edition
@@ -2986,6 +3095,115 @@ module Aws::Kendra
       :capacity_units,
       :user_token_configurations,
       :user_context_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeThesaurusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ThesaurusId", # required
+    #         index_id: "IndexId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the thesaurus to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index associated with the thesaurus to
+    #   describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeThesaurusRequest AWS API Documentation
+    #
+    class DescribeThesaurusRequest < Struct.new(
+      :id,
+      :index_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier of the thesaurus.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index associated with the thesaurus to
+    #   describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The thesaurus name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The thesaurus description.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the thesaurus. When the value is `ACTIVE`,
+    #   queries are able to use the thesaurus. If the `Status` field value
+    #   is `FAILED`, the `ErrorMessage` field provides more information.
+    #
+    #   If the status is `ACTIVE_BUT_UPDATE_FAILED`, it means that Amazon
+    #   Kendra could not ingest the new thesaurus file. The old thesaurus
+    #   file is still active.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   When the `Status` field value is `FAILED`, the `ErrorMessage` field
+    #   provides more information.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix datetime that the thesaurus was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix datetime that the thesaurus was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] role_arn
+    #   An AWS Identity and Access Management (IAM) role that gives Amazon
+    #   Kendra permissions to access thesaurus file specified in
+    #   `SourceS3Path`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_s3_path
+    #   Information required to find a specific file in an Amazon S3 bucket.
+    #   @return [Types::S3Path]
+    #
+    # @!attribute [rw] file_size_bytes
+    #   The size of the thesaurus file in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] term_count
+    #   The number of unique terms in the thesaurus file. For example, the
+    #   synonyms `a,b,c` and `a=>d`, the term count would be 4.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] synonym_rule_count
+    #   The number of synonym rules in the thesaurus file.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeThesaurusResponse AWS API Documentation
+    #
+    class DescribeThesaurusResponse < Struct.new(
+      :id,
+      :index_id,
+      :name,
+      :description,
+      :status,
+      :error_message,
+      :created_at,
+      :updated_at,
+      :role_arn,
+      :source_s3_path,
+      :file_size_bytes,
+      :term_count,
+      :synonym_rule_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3469,12 +3687,17 @@ module Aws::Kendra
     #   the best response; otherwise, false.
     #   @return [Boolean]
     #
+    # @!attribute [rw] type
+    #   The highlight type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Highlight AWS API Documentation
     #
     class Highlight < Struct.new(
       :begin_offset,
       :end_offset,
-      :top_answer)
+      :top_answer,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3901,6 +4124,59 @@ module Aws::Kendra
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListThesauriRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index associated with the thesaurus to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more data
+    #   to retrieve), Amazon Kendra returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of thesauri (`ThesaurusSummaryItems`).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of thesauri to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListThesauriRequest AWS API Documentation
+    #
+    class ListThesauriRequest < Struct.new(
+      :index_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Kendra returns this token that
+    #   you can use in the subsequent request to retrieve the next set of
+    #   thesauri.
+    #   @return [String]
+    #
+    # @!attribute [rw] thesaurus_summary_items
+    #   An array of summary information for one or more thesauruses.
+    #   @return [Array<Types::ThesaurusSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListThesauriResponse AWS API Documentation
+    #
+    class ListThesauriResponse < Struct.new(
+      :next_token,
+      :thesaurus_summary_items)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5849,6 +6125,40 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # An array of summary information for one or more thesauruses.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the thesaurus.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the thesaurus.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the thesaurus.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix datetime that the thesaurus was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The Unix datetime that the thesaurus was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ThesaurusSummary AWS API Documentation
+    #
+    class ThesaurusSummary < Struct.new(
+      :id,
+      :name,
+      :status,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -6339,6 +6649,58 @@ module Aws::Kendra
       :capacity_units,
       :user_token_configurations,
       :user_context_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateThesaurusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ThesaurusId", # required
+    #         name: "ThesaurusName",
+    #         index_id: "IndexId", # required
+    #         description: "Description",
+    #         role_arn: "RoleArn",
+    #         source_s3_path: {
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the thesaurus to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The updated name of the thesaurus.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index associated with the thesaurus to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the thesaurus.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The updated role ARN of the thesaurus.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_s3_path
+    #   Information required to find a specific file in an Amazon S3 bucket.
+    #   @return [Types::S3Path]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateThesaurusRequest AWS API Documentation
+    #
+    class UpdateThesaurusRequest < Struct.new(
+      :id,
+      :name,
+      :index_id,
+      :description,
+      :role_arn,
+      :source_s3_path)
       SENSITIVE = []
       include Aws::Structure
     end

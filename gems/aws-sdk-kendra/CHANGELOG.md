@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2020-12-10)
+------------------
+
+* Feature - Amazon Kendra now supports adding synonyms to an index through the new Thesaurus resource.
+
 1.19.0 (2020-12-08)
 ------------------
 

@@ -10,6 +10,35 @@
 module Aws::NetworkManager
   module Types
 
+    # Specifies a location in AWS.
+    #
+    # @note When making an API call, you may pass AWSLocation
+    #   data as a hash:
+    #
+    #       {
+    #         zone: "String",
+    #         subnet_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] zone
+    #   The Zone the device is located in. This can be the ID of an
+    #   Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_arn
+    #   The Amazon Resource Name (ARN) of the subnet the device is located
+    #   in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AWSLocation AWS API Documentation
+    #
+    class AWSLocation < Struct.new(
+      :zone,
+      :subnet_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You do not have sufficient access to perform this action.
     #
     # @!attribute [rw] message
@@ -120,6 +149,55 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateTransitGatewayConnectPeerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "String", # required
+    #         transit_gateway_connect_peer_arn: "String", # required
+    #         device_id: "String", # required
+    #         link_id: "String",
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_connect_peer_arn
+    #   The Amazon Resource Name (ARN) of the Connect peer.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The ID of the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_id
+    #   The ID of the link.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AssociateTransitGatewayConnectPeerRequest AWS API Documentation
+    #
+    class AssociateTransitGatewayConnectPeerRequest < Struct.new(
+      :global_network_id,
+      :transit_gateway_connect_peer_arn,
+      :device_id,
+      :link_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_connect_peer_association
+    #   The transit gateway Connect peer association.
+    #   @return [Types::TransitGatewayConnectPeerAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AssociateTransitGatewayConnectPeerResponse AWS API Documentation
+    #
+    class AssociateTransitGatewayConnectPeerResponse < Struct.new(
+      :transit_gateway_connect_peer_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes bandwidth information.
     #
     # @note When making an API call, you may pass Bandwidth
@@ -171,11 +249,153 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Describes a connection.
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_arn
+    #   The Amazon Resource Name (ARN) of the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The ID of the first device in the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] connected_device_id
+    #   The ID of the second device in the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_id
+    #   The ID of the link for the first device in the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] connected_link_id
+    #   The ID of the link for the second device in the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the connection was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the connection.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/Connection AWS API Documentation
+    #
+    class Connection < Struct.new(
+      :connection_id,
+      :connection_arn,
+      :global_network_id,
+      :device_id,
+      :connected_device_id,
+      :link_id,
+      :connected_link_id,
+      :description,
+      :created_at,
+      :state,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "String", # required
+    #         device_id: "String", # required
+    #         connected_device_id: "String", # required
+    #         link_id: "String",
+    #         connected_link_id: "String",
+    #         description: "String",
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The ID of the first device in the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] connected_device_id
+    #   The ID of the second device in the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_id
+    #   The ID of the link for the first device.
+    #   @return [String]
+    #
+    # @!attribute [rw] connected_link_id
+    #   The ID of the link for the second device.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the connection.
+    #
+    #   Length Constraints: Maximum length of 256 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to apply to the resource during creation.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateConnectionRequest AWS API Documentation
+    #
+    class CreateConnectionRequest < Struct.new(
+      :global_network_id,
+      :device_id,
+      :connected_device_id,
+      :link_id,
+      :connected_link_id,
+      :description,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection
+    #   Information about the connection.
+    #   @return [Types::Connection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateConnectionResponse AWS API Documentation
+    #
+    class CreateConnectionResponse < Struct.new(
+      :connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDeviceRequest
     #   data as a hash:
     #
     #       {
     #         global_network_id: "String", # required
+    #         aws_location: {
+    #           zone: "String",
+    #           subnet_arn: "String",
+    #         },
     #         description: "String",
     #         type: "String",
     #         vendor: "String",
@@ -198,6 +418,10 @@ module Aws::NetworkManager
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
     #   @return [String]
+    #
+    # @!attribute [rw] aws_location
+    #   The AWS location of the device.
+    #   @return [Types::AWSLocation]
     #
     # @!attribute [rw] description
     #   A description of the device.
@@ -243,6 +467,7 @@ module Aws::NetworkManager
     #
     class CreateDeviceRequest < Struct.new(
       :global_network_id,
+      :aws_location,
       :description,
       :type,
       :vendor,
@@ -251,7 +476,7 @@ module Aws::NetworkManager
       :location,
       :site_id,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:location]
       include Aws::Structure
     end
 
@@ -448,7 +673,7 @@ module Aws::NetworkManager
       :description,
       :location,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:location]
       include Aws::Structure
     end
 
@@ -495,6 +720,43 @@ module Aws::NetworkManager
       :device_id,
       :link_id,
       :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "String", # required
+    #         connection_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteConnectionRequest AWS API Documentation
+    #
+    class DeleteConnectionRequest < Struct.new(
+      :global_network_id,
+      :connection_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection
+    #   Information about the connection.
+    #   @return [Types::Connection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteConnectionResponse AWS API Documentation
+    #
+    class DeleteConnectionResponse < Struct.new(
+      :connection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -740,6 +1002,10 @@ module Aws::NetworkManager
     #   The ID of the global network.
     #   @return [String]
     #
+    # @!attribute [rw] aws_location
+    #   The AWS location of the device.
+    #   @return [Types::AWSLocation]
+    #
     # @!attribute [rw] description
     #   The description of the device.
     #   @return [String]
@@ -786,6 +1052,7 @@ module Aws::NetworkManager
       :device_id,
       :device_arn,
       :global_network_id,
+      :aws_location,
       :description,
       :type,
       :vendor,
@@ -796,7 +1063,7 @@ module Aws::NetworkManager
       :created_at,
       :state,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:location]
       include Aws::Structure
     end
 
@@ -881,6 +1148,103 @@ module Aws::NetworkManager
     #
     class DisassociateLinkResponse < Struct.new(
       :link_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociateTransitGatewayConnectPeerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "String", # required
+    #         transit_gateway_connect_peer_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_connect_peer_arn
+    #   The Amazon Resource Name (ARN) of the transit gateway Connect peer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DisassociateTransitGatewayConnectPeerRequest AWS API Documentation
+    #
+    class DisassociateTransitGatewayConnectPeerRequest < Struct.new(
+      :global_network_id,
+      :transit_gateway_connect_peer_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_connect_peer_association
+    #   The transit gateway Connect peer association.
+    #   @return [Types::TransitGatewayConnectPeerAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DisassociateTransitGatewayConnectPeerResponse AWS API Documentation
+    #
+    class DisassociateTransitGatewayConnectPeerResponse < Struct.new(
+      :transit_gateway_connect_peer_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetConnectionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "String", # required
+    #         connection_ids: ["String"],
+    #         device_id: "String",
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_ids
+    #   One or more connection IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] device_id
+    #   The ID of the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetConnectionsRequest AWS API Documentation
+    #
+    class GetConnectionsRequest < Struct.new(
+      :global_network_id,
+      :connection_ids,
+      :device_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connections
+    #   Information about the connections.
+    #   @return [Array<Types::Connection>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetConnectionsResponse AWS API Documentation
+    #
+    class GetConnectionsResponse < Struct.new(
+      :connections,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1186,6 +1550,61 @@ module Aws::NetworkManager
     #
     class GetSitesResponse < Struct.new(
       :sites,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetTransitGatewayConnectPeerAssociationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "String", # required
+    #         transit_gateway_connect_peer_arns: ["String"],
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_connect_peer_arns
+    #   One or more transit gateway Connect peer Amazon Resource Names
+    #   (ARNs).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetTransitGatewayConnectPeerAssociationsRequest AWS API Documentation
+    #
+    class GetTransitGatewayConnectPeerAssociationsRequest < Struct.new(
+      :global_network_id,
+      :transit_gateway_connect_peer_arns,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_connect_peer_associations
+    #   Information about the transit gateway Connect peer associations.
+    #   @return [Array<Types::TransitGatewayConnectPeerAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetTransitGatewayConnectPeerAssociationsResponse AWS API Documentation
+    #
+    class GetTransitGatewayConnectPeerAssociationsResponse < Struct.new(
+      :transit_gateway_connect_peer_associations,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1604,7 +2023,7 @@ module Aws::NetworkManager
       :created_at,
       :state,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:location]
       include Aws::Structure
     end
 
@@ -1691,6 +2110,40 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Describes a transit gateway Connect peer association.
+    #
+    # @!attribute [rw] transit_gateway_connect_peer_arn
+    #   The Amazon Resource Name (ARN) of the transit gateway Connect peer.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The ID of the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_id
+    #   The ID of the link.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/TransitGatewayConnectPeerAssociation AWS API Documentation
+    #
+    class TransitGatewayConnectPeerAssociation < Struct.new(
+      :transit_gateway_connect_peer_arn,
+      :global_network_id,
+      :device_id,
+      :link_id,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the registration of a transit gateway to a global network.
     #
     # @!attribute [rw] global_network_id
@@ -1763,12 +2216,73 @@ module Aws::NetworkManager
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "String", # required
+    #         connection_id: "String", # required
+    #         link_id: "String",
+    #         connected_link_id: "String",
+    #         description: "String",
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_id
+    #   The ID of the link for the first device in the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] connected_link_id
+    #   The ID of the link for the second device in the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the connection.
+    #
+    #   Length Constraints: Maximum length of 256 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateConnectionRequest AWS API Documentation
+    #
+    class UpdateConnectionRequest < Struct.new(
+      :global_network_id,
+      :connection_id,
+      :link_id,
+      :connected_link_id,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection
+    #   Information about the connection.
+    #   @return [Types::Connection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateConnectionResponse AWS API Documentation
+    #
+    class UpdateConnectionResponse < Struct.new(
+      :connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateDeviceRequest
     #   data as a hash:
     #
     #       {
     #         global_network_id: "String", # required
     #         device_id: "String", # required
+    #         aws_location: {
+    #           zone: "String",
+    #           subnet_arn: "String",
+    #         },
     #         description: "String",
     #         type: "String",
     #         vendor: "String",
@@ -1789,6 +2303,10 @@ module Aws::NetworkManager
     # @!attribute [rw] device_id
     #   The ID of the device.
     #   @return [String]
+    #
+    # @!attribute [rw] aws_location
+    #   The AWS location of the device.
+    #   @return [Types::AWSLocation]
     #
     # @!attribute [rw] description
     #   A description of the device.
@@ -1831,6 +2349,7 @@ module Aws::NetworkManager
     class UpdateDeviceRequest < Struct.new(
       :global_network_id,
       :device_id,
+      :aws_location,
       :description,
       :type,
       :vendor,
@@ -1838,7 +2357,7 @@ module Aws::NetworkManager
       :serial_number,
       :location,
       :site_id)
-      SENSITIVE = []
+      SENSITIVE = [:location]
       include Aws::Structure
     end
 
@@ -2008,7 +2527,7 @@ module Aws::NetworkManager
       :site_id,
       :description,
       :location)
-      SENSITIVE = []
+      SENSITIVE = [:location]
       include Aws::Structure
     end
 

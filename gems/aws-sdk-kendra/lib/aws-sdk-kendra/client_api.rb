@@ -70,6 +70,8 @@ module Aws::Kendra
     CreateFaqResponse = Shapes::StructureShape.new(name: 'CreateFaqResponse')
     CreateIndexRequest = Shapes::StructureShape.new(name: 'CreateIndexRequest')
     CreateIndexResponse = Shapes::StructureShape.new(name: 'CreateIndexResponse')
+    CreateThesaurusRequest = Shapes::StructureShape.new(name: 'CreateThesaurusRequest')
+    CreateThesaurusResponse = Shapes::StructureShape.new(name: 'CreateThesaurusResponse')
     DataSourceConfiguration = Shapes::StructureShape.new(name: 'DataSourceConfiguration')
     DataSourceDateFieldFormat = Shapes::StringShape.new(name: 'DataSourceDateFieldFormat')
     DataSourceFieldName = Shapes::StringShape.new(name: 'DataSourceFieldName')
@@ -98,12 +100,15 @@ module Aws::Kendra
     DeleteDataSourceRequest = Shapes::StructureShape.new(name: 'DeleteDataSourceRequest')
     DeleteFaqRequest = Shapes::StructureShape.new(name: 'DeleteFaqRequest')
     DeleteIndexRequest = Shapes::StructureShape.new(name: 'DeleteIndexRequest')
+    DeleteThesaurusRequest = Shapes::StructureShape.new(name: 'DeleteThesaurusRequest')
     DescribeDataSourceRequest = Shapes::StructureShape.new(name: 'DescribeDataSourceRequest')
     DescribeDataSourceResponse = Shapes::StructureShape.new(name: 'DescribeDataSourceResponse')
     DescribeFaqRequest = Shapes::StructureShape.new(name: 'DescribeFaqRequest')
     DescribeFaqResponse = Shapes::StructureShape.new(name: 'DescribeFaqResponse')
     DescribeIndexRequest = Shapes::StructureShape.new(name: 'DescribeIndexRequest')
     DescribeIndexResponse = Shapes::StructureShape.new(name: 'DescribeIndexResponse')
+    DescribeThesaurusRequest = Shapes::StructureShape.new(name: 'DescribeThesaurusRequest')
+    DescribeThesaurusResponse = Shapes::StructureShape.new(name: 'DescribeThesaurusResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     Document = Shapes::StructureShape.new(name: 'Document')
     DocumentAttribute = Shapes::StructureShape.new(name: 'DocumentAttribute')
@@ -146,6 +151,7 @@ module Aws::Kendra
     GroupAttributeField = Shapes::StringShape.new(name: 'GroupAttributeField')
     Highlight = Shapes::StructureShape.new(name: 'Highlight')
     HighlightList = Shapes::ListShape.new(name: 'HighlightList')
+    HighlightType = Shapes::StringShape.new(name: 'HighlightType')
     Importance = Shapes::IntegerShape.new(name: 'Importance')
     IndexConfigurationSummary = Shapes::StructureShape.new(name: 'IndexConfigurationSummary')
     IndexConfigurationSummaryList = Shapes::ListShape.new(name: 'IndexConfigurationSummaryList')
@@ -175,11 +181,14 @@ module Aws::Kendra
     ListIndicesResponse = Shapes::StructureShape.new(name: 'ListIndicesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListThesauriRequest = Shapes::StructureShape.new(name: 'ListThesauriRequest')
+    ListThesauriResponse = Shapes::StructureShape.new(name: 'ListThesauriResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResultsIntegerForListDataSourceSyncJobsRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListDataSourceSyncJobsRequest')
     MaxResultsIntegerForListDataSourcesRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListDataSourcesRequest')
     MaxResultsIntegerForListFaqsRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListFaqsRequest')
     MaxResultsIntegerForListIndicesRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListIndicesRequest')
+    MaxResultsIntegerForListThesauriRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListThesauriRequest')
     MetricValue = Shapes::StringShape.new(name: 'MetricValue')
     MimeType = Shapes::StringShape.new(name: 'MimeType')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -270,6 +279,11 @@ module Aws::Kendra
     TenantDomain = Shapes::StringShape.new(name: 'TenantDomain')
     TextDocumentStatistics = Shapes::StructureShape.new(name: 'TextDocumentStatistics')
     TextWithHighlights = Shapes::StructureShape.new(name: 'TextWithHighlights')
+    ThesaurusId = Shapes::StringShape.new(name: 'ThesaurusId')
+    ThesaurusName = Shapes::StringShape.new(name: 'ThesaurusName')
+    ThesaurusStatus = Shapes::StringShape.new(name: 'ThesaurusStatus')
+    ThesaurusSummary = Shapes::StructureShape.new(name: 'ThesaurusSummary')
+    ThesaurusSummaryItems = Shapes::ListShape.new(name: 'ThesaurusSummaryItems')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeRange = Shapes::StructureShape.new(name: 'TimeRange')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -279,6 +293,7 @@ module Aws::Kendra
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
     UpdateIndexRequest = Shapes::StructureShape.new(name: 'UpdateIndexRequest')
+    UpdateThesaurusRequest = Shapes::StructureShape.new(name: 'UpdateThesaurusRequest')
     Url = Shapes::StringShape.new(name: 'Url')
     UserAccount = Shapes::StringShape.new(name: 'UserAccount')
     UserContext = Shapes::StructureShape.new(name: 'UserContext')
@@ -484,6 +499,18 @@ module Aws::Kendra
     CreateIndexResponse.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, location_name: "Id"))
     CreateIndexResponse.struct_class = Types::CreateIndexResponse
 
+    CreateThesaurusRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    CreateThesaurusRequest.add_member(:name, Shapes::ShapeRef.new(shape: ThesaurusName, required: true, location_name: "Name"))
+    CreateThesaurusRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateThesaurusRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    CreateThesaurusRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateThesaurusRequest.add_member(:source_s3_path, Shapes::ShapeRef.new(shape: S3Path, required: true, location_name: "SourceS3Path"))
+    CreateThesaurusRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateThesaurusRequest.struct_class = Types::CreateThesaurusRequest
+
+    CreateThesaurusResponse.add_member(:id, Shapes::ShapeRef.new(shape: ThesaurusId, location_name: "Id"))
+    CreateThesaurusResponse.struct_class = Types::CreateThesaurusResponse
+
     DataSourceConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DataSourceConfiguration, location_name: "S3Configuration"))
     DataSourceConfiguration.add_member(:share_point_configuration, Shapes::ShapeRef.new(shape: SharePointConfiguration, location_name: "SharePointConfiguration"))
     DataSourceConfiguration.add_member(:database_configuration, Shapes::ShapeRef.new(shape: DatabaseConfiguration, location_name: "DatabaseConfiguration"))
@@ -559,6 +586,10 @@ module Aws::Kendra
     DeleteIndexRequest.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "Id"))
     DeleteIndexRequest.struct_class = Types::DeleteIndexRequest
 
+    DeleteThesaurusRequest.add_member(:id, Shapes::ShapeRef.new(shape: ThesaurusId, required: true, location_name: "Id"))
+    DeleteThesaurusRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    DeleteThesaurusRequest.struct_class = Types::DeleteThesaurusRequest
+
     DescribeDataSourceRequest.add_member(:id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "Id"))
     DescribeDataSourceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     DescribeDataSourceRequest.struct_class = Types::DescribeDataSourceRequest
@@ -613,6 +644,25 @@ module Aws::Kendra
     DescribeIndexResponse.add_member(:user_token_configurations, Shapes::ShapeRef.new(shape: UserTokenConfigurationList, location_name: "UserTokenConfigurations"))
     DescribeIndexResponse.add_member(:user_context_policy, Shapes::ShapeRef.new(shape: UserContextPolicy, location_name: "UserContextPolicy"))
     DescribeIndexResponse.struct_class = Types::DescribeIndexResponse
+
+    DescribeThesaurusRequest.add_member(:id, Shapes::ShapeRef.new(shape: ThesaurusId, required: true, location_name: "Id"))
+    DescribeThesaurusRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    DescribeThesaurusRequest.struct_class = Types::DescribeThesaurusRequest
+
+    DescribeThesaurusResponse.add_member(:id, Shapes::ShapeRef.new(shape: ThesaurusId, location_name: "Id"))
+    DescribeThesaurusResponse.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, location_name: "IndexId"))
+    DescribeThesaurusResponse.add_member(:name, Shapes::ShapeRef.new(shape: ThesaurusName, location_name: "Name"))
+    DescribeThesaurusResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    DescribeThesaurusResponse.add_member(:status, Shapes::ShapeRef.new(shape: ThesaurusStatus, location_name: "Status"))
+    DescribeThesaurusResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    DescribeThesaurusResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    DescribeThesaurusResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    DescribeThesaurusResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    DescribeThesaurusResponse.add_member(:source_s3_path, Shapes::ShapeRef.new(shape: S3Path, location_name: "SourceS3Path"))
+    DescribeThesaurusResponse.add_member(:file_size_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "FileSizeBytes"))
+    DescribeThesaurusResponse.add_member(:term_count, Shapes::ShapeRef.new(shape: Long, location_name: "TermCount"))
+    DescribeThesaurusResponse.add_member(:synonym_rule_count, Shapes::ShapeRef.new(shape: Long, location_name: "SynonymRuleCount"))
+    DescribeThesaurusResponse.struct_class = Types::DescribeThesaurusResponse
 
     Document.add_member(:id, Shapes::ShapeRef.new(shape: DocumentId, required: true, location_name: "Id"))
     Document.add_member(:title, Shapes::ShapeRef.new(shape: Title, location_name: "Title"))
@@ -703,6 +753,7 @@ module Aws::Kendra
     Highlight.add_member(:begin_offset, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "BeginOffset"))
     Highlight.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "EndOffset"))
     Highlight.add_member(:top_answer, Shapes::ShapeRef.new(shape: Boolean, location_name: "TopAnswer"))
+    Highlight.add_member(:type, Shapes::ShapeRef.new(shape: HighlightType, location_name: "Type"))
     Highlight.struct_class = Types::Highlight
 
     HighlightList.member = Shapes::ShapeRef.new(shape: Highlight)
@@ -780,6 +831,15 @@ module Aws::Kendra
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListThesauriRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    ListThesauriRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListThesauriRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsIntegerForListThesauriRequest, location_name: "MaxResults"))
+    ListThesauriRequest.struct_class = Types::ListThesauriRequest
+
+    ListThesauriResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListThesauriResponse.add_member(:thesaurus_summary_items, Shapes::ShapeRef.new(shape: ThesaurusSummaryItems, location_name: "ThesaurusSummaryItems"))
+    ListThesauriResponse.struct_class = Types::ListThesauriResponse
 
     OneDriveConfiguration.add_member(:tenant_domain, Shapes::ShapeRef.new(shape: TenantDomain, required: true, location_name: "TenantDomain"))
     OneDriveConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
@@ -1027,6 +1087,15 @@ module Aws::Kendra
     TextWithHighlights.add_member(:highlights, Shapes::ShapeRef.new(shape: HighlightList, location_name: "Highlights"))
     TextWithHighlights.struct_class = Types::TextWithHighlights
 
+    ThesaurusSummary.add_member(:id, Shapes::ShapeRef.new(shape: ThesaurusId, location_name: "Id"))
+    ThesaurusSummary.add_member(:name, Shapes::ShapeRef.new(shape: ThesaurusName, location_name: "Name"))
+    ThesaurusSummary.add_member(:status, Shapes::ShapeRef.new(shape: ThesaurusStatus, location_name: "Status"))
+    ThesaurusSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    ThesaurusSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    ThesaurusSummary.struct_class = Types::ThesaurusSummary
+
+    ThesaurusSummaryItems.member = Shapes::ShapeRef.new(shape: ThesaurusSummary)
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
@@ -1058,6 +1127,14 @@ module Aws::Kendra
     UpdateIndexRequest.add_member(:user_token_configurations, Shapes::ShapeRef.new(shape: UserTokenConfigurationList, location_name: "UserTokenConfigurations"))
     UpdateIndexRequest.add_member(:user_context_policy, Shapes::ShapeRef.new(shape: UserContextPolicy, location_name: "UserContextPolicy"))
     UpdateIndexRequest.struct_class = Types::UpdateIndexRequest
+
+    UpdateThesaurusRequest.add_member(:id, Shapes::ShapeRef.new(shape: ThesaurusId, required: true, location_name: "Id"))
+    UpdateThesaurusRequest.add_member(:name, Shapes::ShapeRef.new(shape: ThesaurusName, location_name: "Name"))
+    UpdateThesaurusRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    UpdateThesaurusRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateThesaurusRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    UpdateThesaurusRequest.add_member(:source_s3_path, Shapes::ShapeRef.new(shape: S3Path, location_name: "SourceS3Path"))
+    UpdateThesaurusRequest.struct_class = Types::UpdateThesaurusRequest
 
     UserContext.add_member(:token, Shapes::ShapeRef.new(shape: Token, location_name: "Token"))
     UserContext.struct_class = Types::UserContext
@@ -1169,6 +1246,21 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_thesaurus, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateThesaurus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateThesaurusRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateThesaurusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_data_source, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDataSource"
         o.http_method = "POST"
@@ -1211,6 +1303,20 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_thesaurus, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteThesaurus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteThesaurusRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:describe_data_source, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDataSource"
         o.http_method = "POST"
@@ -1243,6 +1349,19 @@ module Aws::Kendra
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeIndexRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeIndexResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_thesaurus, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeThesaurus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeThesaurusRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeThesaurusResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1328,6 +1447,19 @@ module Aws::Kendra
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_thesauri, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListThesauri"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListThesauriRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListThesauriResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1442,6 +1574,20 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_thesaurus, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateThesaurus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateThesaurusRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
     end
