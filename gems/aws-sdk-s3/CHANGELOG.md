@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Bump minimum KMS dependency. (#2449)
+
 1.86.0 (2020-12-01)
 ------------------
 
