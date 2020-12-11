@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Use `URI::DEFAULT_PARSER.escape` (an alias for `URI.escape`) in the legacy signer because Ruby 3 removes WEBrick from stdlib.
+
 1.86.1 (2020-12-11)
 ------------------
 
