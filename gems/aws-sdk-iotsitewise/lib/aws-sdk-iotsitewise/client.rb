@@ -477,10 +477,10 @@ module Aws::IoTSiteWise
     #   property's alias, see [UpdateAssetProperty][2].
     #
     # With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs
-    # that have a timestamp of no more than 15 minutes in the past and no
-    # more than 5 minutes in the future. AWS IoT SiteWise rejects timestamps
-    # outside of the inclusive range of \[-15, +5\] minutes and returns a
-    # `TimestampOutOfRangeException` error.
+    # that have a timestamp of no more than 7 days in the past and no more
+    # than 5 minutes in the future. AWS IoT SiteWise rejects timestamps
+    # outside of the inclusive range of \[-7 days, +5 minutes\] and returns
+    # a `TimestampOutOfRangeException` error.
     #
     #  For each asset property, AWS IoT SiteWise overwrites TQVs with
     # duplicate timestamps unless the newer TQV has a different quality. For
@@ -736,6 +736,13 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html
     #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
     #
+    # @option params [Array<Types::AssetModelCompositeModelDefinition>] :asset_model_composite_models
+    #   The composite asset models that are part of this asset model.
+    #   Composite asset models are asset models that contain specific
+    #   properties. Each composite model has a type that defines the
+    #   properties that the composite model supports. Use composite asset
+    #   models to define alarms on this asset model.
+    #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
     #   idempotency of the request. Don't reuse this client token if a new
@@ -767,7 +774,8 @@ module Aws::IoTSiteWise
     #     asset_model_properties: [
     #       {
     #         name: "Name", # required
-    #         data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN
+    #         data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
+    #         data_type_spec: "Name",
     #         unit: "PropertyUnit",
     #         type: { # required
     #           attribute: {
@@ -811,6 +819,57 @@ module Aws::IoTSiteWise
     #       {
     #         name: "Name", # required
     #         child_asset_model_id: "ID", # required
+    #       },
+    #     ],
+    #     asset_model_composite_models: [
+    #       {
+    #         name: "Name", # required
+    #         description: "Description",
+    #         type: "Name", # required
+    #         properties: [
+    #           {
+    #             name: "Name", # required
+    #             data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
+    #             data_type_spec: "Name",
+    #             unit: "PropertyUnit",
+    #             type: { # required
+    #               attribute: {
+    #                 default_value: "DefaultValue",
+    #               },
+    #               measurement: {
+    #               },
+    #               transform: {
+    #                 expression: "Expression", # required
+    #                 variables: [ # required
+    #                   {
+    #                     name: "VariableName", # required
+    #                     value: { # required
+    #                       property_id: "Macro", # required
+    #                       hierarchy_id: "Macro",
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #               metric: {
+    #                 expression: "Expression", # required
+    #                 variables: [ # required
+    #                   {
+    #                     name: "VariableName", # required
+    #                     value: { # required
+    #                       property_id: "Macro", # required
+    #                       hierarchy_id: "Macro",
+    #                     },
+    #                   },
+    #                 ],
+    #                 window: { # required
+    #                   tumbling: {
+    #                     interval: "Interval", # required
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
     #     client_token: "ClientToken",
@@ -1024,9 +1083,8 @@ module Aws::IoTSiteWise
     #     Regions.
     #
     #   * `IAM` – The portal uses AWS Identity and Access Management (IAM) to
-    #     authenticate users and manage user permissions. IAM users must have
-    #     the `iotsitewise:CreatePresignedPortalUrl` permission to sign in to
-    #     the portal. This option is only available in the China Regions.
+    #     authenticate users and manage user permissions. This option is only
+    #     available in the China Regions.
     #
     #   You can't change this value after you create a portal.
     #
@@ -1076,42 +1134,6 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def create_portal(params = {}, options = {})
       req = build_request(:create_portal, params)
-      req.send_request(options)
-    end
-
-    # Creates a pre-signed URL to a portal. Use this operation to create
-    # URLs to portals that use AWS Identity and Access Management (IAM) to
-    # authenticate users. An IAM user with access to a portal can call this
-    # API to get a URL to that portal. The URL contains an authentication
-    # token that lets the IAM user access the portal.
-    #
-    # @option params [required, String] :portal_id
-    #   The ID of the portal to access.
-    #
-    # @option params [Integer] :session_duration_seconds
-    #   The duration (in seconds) for which the session at the URL is valid.
-    #
-    #   Default: 43,200 seconds (12 hours)
-    #
-    # @return [Types::CreatePresignedPortalUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::CreatePresignedPortalUrlResponse#presigned_portal_url #presigned_portal_url} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.create_presigned_portal_url({
-    #     portal_id: "ID", # required
-    #     session_duration_seconds: 1,
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.presigned_portal_url #=> String
-    #
-    # @overload create_presigned_portal_url(params = {})
-    # @param [Hash] params ({})
-    def create_presigned_portal_url(params = {}, options = {})
-      req = build_request(:create_presigned_portal_url, params)
       req.send_request(options)
     end
 
@@ -1469,6 +1491,7 @@ module Aws::IoTSiteWise
     #   * {Types::DescribeAssetResponse#asset_model_id #asset_model_id} => String
     #   * {Types::DescribeAssetResponse#asset_properties #asset_properties} => Array&lt;Types::AssetProperty&gt;
     #   * {Types::DescribeAssetResponse#asset_hierarchies #asset_hierarchies} => Array&lt;Types::AssetHierarchy&gt;
+    #   * {Types::DescribeAssetResponse#asset_composite_models #asset_composite_models} => Array&lt;Types::AssetCompositeModel&gt;
     #   * {Types::DescribeAssetResponse#asset_creation_date #asset_creation_date} => Time
     #   * {Types::DescribeAssetResponse#asset_last_update_date #asset_last_update_date} => Time
     #   * {Types::DescribeAssetResponse#asset_status #asset_status} => Types::AssetStatus
@@ -1491,11 +1514,25 @@ module Aws::IoTSiteWise
     #   resp.asset_properties[0].alias #=> String
     #   resp.asset_properties[0].notification.topic #=> String
     #   resp.asset_properties[0].notification.state #=> String, one of "ENABLED", "DISABLED"
-    #   resp.asset_properties[0].data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN"
+    #   resp.asset_properties[0].data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"
+    #   resp.asset_properties[0].data_type_spec #=> String
     #   resp.asset_properties[0].unit #=> String
     #   resp.asset_hierarchies #=> Array
     #   resp.asset_hierarchies[0].id #=> String
     #   resp.asset_hierarchies[0].name #=> String
+    #   resp.asset_composite_models #=> Array
+    #   resp.asset_composite_models[0].name #=> String
+    #   resp.asset_composite_models[0].description #=> String
+    #   resp.asset_composite_models[0].type #=> String
+    #   resp.asset_composite_models[0].properties #=> Array
+    #   resp.asset_composite_models[0].properties[0].id #=> String
+    #   resp.asset_composite_models[0].properties[0].name #=> String
+    #   resp.asset_composite_models[0].properties[0].alias #=> String
+    #   resp.asset_composite_models[0].properties[0].notification.topic #=> String
+    #   resp.asset_composite_models[0].properties[0].notification.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.asset_composite_models[0].properties[0].data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"
+    #   resp.asset_composite_models[0].properties[0].data_type_spec #=> String
+    #   resp.asset_composite_models[0].properties[0].unit #=> String
     #   resp.asset_creation_date #=> Time
     #   resp.asset_last_update_date #=> Time
     #   resp.asset_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
@@ -1528,6 +1565,7 @@ module Aws::IoTSiteWise
     #   * {Types::DescribeAssetModelResponse#asset_model_description #asset_model_description} => String
     #   * {Types::DescribeAssetModelResponse#asset_model_properties #asset_model_properties} => Array&lt;Types::AssetModelProperty&gt;
     #   * {Types::DescribeAssetModelResponse#asset_model_hierarchies #asset_model_hierarchies} => Array&lt;Types::AssetModelHierarchy&gt;
+    #   * {Types::DescribeAssetModelResponse#asset_model_composite_models #asset_model_composite_models} => Array&lt;Types::AssetModelCompositeModel&gt;
     #   * {Types::DescribeAssetModelResponse#asset_model_creation_date #asset_model_creation_date} => Time
     #   * {Types::DescribeAssetModelResponse#asset_model_last_update_date #asset_model_last_update_date} => Time
     #   * {Types::DescribeAssetModelResponse#asset_model_status #asset_model_status} => Types::AssetModelStatus
@@ -1547,7 +1585,8 @@ module Aws::IoTSiteWise
     #   resp.asset_model_properties #=> Array
     #   resp.asset_model_properties[0].id #=> String
     #   resp.asset_model_properties[0].name #=> String
-    #   resp.asset_model_properties[0].data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN"
+    #   resp.asset_model_properties[0].data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"
+    #   resp.asset_model_properties[0].data_type_spec #=> String
     #   resp.asset_model_properties[0].unit #=> String
     #   resp.asset_model_properties[0].type.attribute.default_value #=> String
     #   resp.asset_model_properties[0].type.transform.expression #=> String
@@ -1565,6 +1604,28 @@ module Aws::IoTSiteWise
     #   resp.asset_model_hierarchies[0].id #=> String
     #   resp.asset_model_hierarchies[0].name #=> String
     #   resp.asset_model_hierarchies[0].child_asset_model_id #=> String
+    #   resp.asset_model_composite_models #=> Array
+    #   resp.asset_model_composite_models[0].name #=> String
+    #   resp.asset_model_composite_models[0].description #=> String
+    #   resp.asset_model_composite_models[0].type #=> String
+    #   resp.asset_model_composite_models[0].properties #=> Array
+    #   resp.asset_model_composite_models[0].properties[0].id #=> String
+    #   resp.asset_model_composite_models[0].properties[0].name #=> String
+    #   resp.asset_model_composite_models[0].properties[0].data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"
+    #   resp.asset_model_composite_models[0].properties[0].data_type_spec #=> String
+    #   resp.asset_model_composite_models[0].properties[0].unit #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.attribute.default_value #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.transform.expression #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.transform.variables #=> Array
+    #   resp.asset_model_composite_models[0].properties[0].type.transform.variables[0].name #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.transform.variables[0].value.property_id #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.transform.variables[0].value.hierarchy_id #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.metric.expression #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.metric.variables #=> Array
+    #   resp.asset_model_composite_models[0].properties[0].type.metric.variables[0].name #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.metric.variables[0].value.property_id #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.metric.variables[0].value.hierarchy_id #=> String
+    #   resp.asset_model_composite_models[0].properties[0].type.metric.window.tumbling.interval #=> String
     #   resp.asset_model_creation_date #=> Time
     #   resp.asset_model_last_update_date #=> Time
     #   resp.asset_model_status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "PROPAGATING", "DELETING", "FAILED"
@@ -1612,6 +1673,7 @@ module Aws::IoTSiteWise
     #   * {Types::DescribeAssetPropertyResponse#asset_name #asset_name} => String
     #   * {Types::DescribeAssetPropertyResponse#asset_model_id #asset_model_id} => String
     #   * {Types::DescribeAssetPropertyResponse#asset_property #asset_property} => Types::Property
+    #   * {Types::DescribeAssetPropertyResponse#composite_model #composite_model} => Types::CompositeModelProperty
     #
     # @example Request syntax with placeholder values
     #
@@ -1630,7 +1692,7 @@ module Aws::IoTSiteWise
     #   resp.asset_property.alias #=> String
     #   resp.asset_property.notification.topic #=> String
     #   resp.asset_property.notification.state #=> String, one of "ENABLED", "DISABLED"
-    #   resp.asset_property.data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN"
+    #   resp.asset_property.data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"
     #   resp.asset_property.unit #=> String
     #   resp.asset_property.type.attribute.default_value #=> String
     #   resp.asset_property.type.transform.expression #=> String
@@ -1644,6 +1706,27 @@ module Aws::IoTSiteWise
     #   resp.asset_property.type.metric.variables[0].value.property_id #=> String
     #   resp.asset_property.type.metric.variables[0].value.hierarchy_id #=> String
     #   resp.asset_property.type.metric.window.tumbling.interval #=> String
+    #   resp.composite_model.name #=> String
+    #   resp.composite_model.type #=> String
+    #   resp.composite_model.asset_property.id #=> String
+    #   resp.composite_model.asset_property.name #=> String
+    #   resp.composite_model.asset_property.alias #=> String
+    #   resp.composite_model.asset_property.notification.topic #=> String
+    #   resp.composite_model.asset_property.notification.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.composite_model.asset_property.data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"
+    #   resp.composite_model.asset_property.unit #=> String
+    #   resp.composite_model.asset_property.type.attribute.default_value #=> String
+    #   resp.composite_model.asset_property.type.transform.expression #=> String
+    #   resp.composite_model.asset_property.type.transform.variables #=> Array
+    #   resp.composite_model.asset_property.type.transform.variables[0].name #=> String
+    #   resp.composite_model.asset_property.type.transform.variables[0].value.property_id #=> String
+    #   resp.composite_model.asset_property.type.transform.variables[0].value.hierarchy_id #=> String
+    #   resp.composite_model.asset_property.type.metric.expression #=> String
+    #   resp.composite_model.asset_property.type.metric.variables #=> Array
+    #   resp.composite_model.asset_property.type.metric.variables[0].name #=> String
+    #   resp.composite_model.asset_property.type.metric.variables[0].value.property_id #=> String
+    #   resp.composite_model.asset_property.type.metric.variables[0].value.hierarchy_id #=> String
+    #   resp.composite_model.asset_property.type.metric.window.tumbling.interval #=> String
     #
     # @overload describe_asset_property(params = {})
     # @param [Hash] params ({})
@@ -2357,6 +2440,61 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def list_asset_models(params = {}, options = {})
       req = build_request(:list_asset_models, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a paginated list of asset relationships for an asset. You
+    # can use this operation to identify an asset's root asset and all
+    # associated assets between that asset and its root.
+    #
+    # @option params [required, String] :asset_id
+    #   The ID of the asset.
+    #
+    # @option params [required, String] :traversal_type
+    #   The type of traversal to use to identify asset relationships. Choose
+    #   the following option:
+    #
+    #   * `PATH_TO_ROOT` – Identify the asset's parent assets up to the root
+    #     asset. The asset that you specify in `assetId` is the first result
+    #     in the list of `assetRelationshipSummaries`, and the root asset is
+    #     the last result.
+    #
+    #   ^
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per paginated request.
+    #
+    # @return [Types::ListAssetRelationshipsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssetRelationshipsResponse#asset_relationship_summaries #asset_relationship_summaries} => Array&lt;Types::AssetRelationshipSummary&gt;
+    #   * {Types::ListAssetRelationshipsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_asset_relationships({
+    #     asset_id: "ID", # required
+    #     traversal_type: "PATH_TO_ROOT", # required, accepts PATH_TO_ROOT
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_relationship_summaries #=> Array
+    #   resp.asset_relationship_summaries[0].hierarchy_info.parent_asset_id #=> String
+    #   resp.asset_relationship_summaries[0].hierarchy_info.child_asset_id #=> String
+    #   resp.asset_relationship_summaries[0].relationship_type #=> String, one of "HIERARCHY"
+    #   resp.next_token #=> String
+    #
+    # @overload list_asset_relationships(params = {})
+    # @param [Hash] params ({})
+    def list_asset_relationships(params = {}, options = {})
+      req = build_request(:list_asset_relationships, params)
       req.send_request(options)
     end
 
@@ -3081,6 +3219,13 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html
     #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
     #
+    # @option params [Array<Types::AssetModelCompositeModel>] :asset_model_composite_models
+    #   The composite asset models that are part of this asset model.
+    #   Composite asset models are asset models that contain specific
+    #   properties. Each composite model has a type that defines the
+    #   properties that the composite model supports. Use composite asset
+    #   models to define alarms on this asset model.
+    #
     # @option params [String] :client_token
     #   A unique case-sensitive identifier that you can provide to ensure the
     #   idempotency of the request. Don't reuse this client token if a new
@@ -3103,7 +3248,8 @@ module Aws::IoTSiteWise
     #       {
     #         id: "ID",
     #         name: "Name", # required
-    #         data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN
+    #         data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
+    #         data_type_spec: "Name",
     #         unit: "PropertyUnit",
     #         type: { # required
     #           attribute: {
@@ -3148,6 +3294,58 @@ module Aws::IoTSiteWise
     #         id: "ID",
     #         name: "Name", # required
     #         child_asset_model_id: "ID", # required
+    #       },
+    #     ],
+    #     asset_model_composite_models: [
+    #       {
+    #         name: "Name", # required
+    #         description: "Description",
+    #         type: "Name", # required
+    #         properties: [
+    #           {
+    #             id: "ID",
+    #             name: "Name", # required
+    #             data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
+    #             data_type_spec: "Name",
+    #             unit: "PropertyUnit",
+    #             type: { # required
+    #               attribute: {
+    #                 default_value: "DefaultValue",
+    #               },
+    #               measurement: {
+    #               },
+    #               transform: {
+    #                 expression: "Expression", # required
+    #                 variables: [ # required
+    #                   {
+    #                     name: "VariableName", # required
+    #                     value: { # required
+    #                       property_id: "Macro", # required
+    #                       hierarchy_id: "Macro",
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #               metric: {
+    #                 expression: "Expression", # required
+    #                 variables: [ # required
+    #                   {
+    #                     name: "VariableName", # required
+    #                     value: { # required
+    #                       property_id: "Macro", # required
+    #                       hierarchy_id: "Macro",
+    #                     },
+    #                   },
+    #                 ],
+    #                 window: { # required
+    #                   tumbling: {
+    #                     interval: "Interval", # required
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
     #     client_token: "ClientToken",
@@ -3491,7 +3689,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2020-12-11)
+------------------
+
+* Feature - Added the ListAssetRelationships operation and support for composite asset models, which represent structured sets of properties within asset models.
+
 1.15.0 (2020-11-24)
 ------------------
 

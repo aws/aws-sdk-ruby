@@ -1169,16 +1169,17 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Configures an event selector for your trail. Use event selectors to
-    # further specify the management and data event settings for your trail.
-    # By default, trails created without specific event selectors will be
-    # configured to log all read and write management events, and no data
-    # events.
+    # Configures an event selector or advanced event selectors for your
+    # trail. Use event selectors or advanced event selectors to specify
+    # management and data event settings for your trail. By default, trails
+    # created without specific event selectors are configured to log all
+    # read and write management events, and no data events.
     #
     # When an event occurs in your account, CloudTrail evaluates the event
-    # selectors in all trails. For each trail, if the event matches any
-    # event selector, the trail processes and logs the event. If the event
-    # doesn't match any event selector, the trail doesn't log the event.
+    # selectors or advanced event selectors in all trails. For each trail,
+    # if the event matches any event selector, the trail processes and logs
+    # the event. If the event doesn't match any event selector, the trail
+    # doesn't log the event.
     #
     # Example
     #
@@ -1194,21 +1195,30 @@ module Aws::CloudTrail
     # 4.  The `RunInstances` is a write-only event and it matches your event
     #     selector. The trail logs the event.
     #
-    # 5.  The `GetConsoleOutput` is a read-only event but it doesn't match
+    # 5.  The `GetConsoleOutput` is a read-only event that doesn't match
     #     your event selector. The trail doesn't log the event.
     #
     # The `PutEventSelectors` operation must be called from the region in
     # which the trail was created; otherwise, an
-    # `InvalidHomeRegionException` is thrown.
+    # `InvalidHomeRegionException` exception is thrown.
     #
     # You can configure up to five event selectors for each trail. For more
-    # information, see [Logging Data and Management Events for Trails ][1]
-    # and [Limits in AWS CloudTrail][2] in the *AWS CloudTrail User Guide*.
+    # information, see [Logging data and management events for trails ][1]
+    # and [Quotas in AWS CloudTrail][2] in the *AWS CloudTrail User Guide*.
+    #
+    # You can add advanced event selectors, and conditions for your advanced
+    # event selectors, up to a maximum of 500 values for all conditions and
+    # selectors on a trail. You can use either `AdvancedEventSelectors` or
+    # `EventSelectors`, but not both. If you apply `AdvancedEventSelectors`
+    # to a trail, any existing `EventSelectors` are overwritten. For more
+    # information about advanced event selectors, see [Logging data events
+    # for trails][3] in the *AWS CloudTrail User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html
     # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
+    # [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
     #
     # @option params [required, String] :trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
@@ -1232,9 +1242,24 @@ module Aws::CloudTrail
     #
     # @option params [Array<Types::EventSelector>] :event_selectors
     #   Specifies the settings for your event selectors. You can configure up
-    #   to five event selectors for a trail.
+    #   to five event selectors for a trail. You can use either
+    #   `EventSelectors` or `AdvancedEventSelectors` in a `PutEventSelectors`
+    #   request, but not both. If you apply `EventSelectors` to a trail, any
+    #   existing `AdvancedEventSelectors` are overwritten.
     #
     # @option params [Array<Types::AdvancedEventSelector>] :advanced_event_selectors
+    #   Specifies the settings for advanced event selectors. You can add
+    #   advanced event selectors, and conditions for your advanced event
+    #   selectors, up to a maximum of 500 values for all conditions and
+    #   selectors on a trail. You can use either `AdvancedEventSelectors` or
+    #   `EventSelectors`, but not both. If you apply `AdvancedEventSelectors`
+    #   to a trail, any existing `EventSelectors` are overwritten. For more
+    #   information about advanced event selectors, see [Logging data events
+    #   for trails][1] in the *AWS CloudTrail User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
     #
     # @return [Types::PutEventSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1261,7 +1286,7 @@ module Aws::CloudTrail
     #     ],
     #     advanced_event_selectors: [
     #       {
-    #         name: "SelectorName", # required
+    #         name: "SelectorName",
     #         field_selectors: [ # required
     #           {
     #             field: "SelectorField", # required
@@ -1645,7 +1670,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

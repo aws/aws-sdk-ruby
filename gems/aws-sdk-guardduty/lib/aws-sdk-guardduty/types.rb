@@ -24,13 +24,13 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] master_id
-    #   The account ID of the master GuardDuty account whose invitation
-    #   you're accepting.
+    #   The account ID of the GuardDuty administrator account whose
+    #   invitation you're accepting.
     #   @return [String]
     #
     # @!attribute [rw] invitation_id
-    #   The value that is used to validate the master account to the member
-    #   account.
+    #   The value that is used to validate the administrator account to the
+    #   member account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptInvitationRequest AWS API Documentation
@@ -550,13 +550,11 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] finding_publishing_frequency
-    #   An enum value that specifies how frequently updated findings are
-    #   exported.
+    #   A value that specifies how frequently updated findings are exported.
     #   @return [String]
     #
     # @!attribute [rw] data_sources
-    #   An object that describes which data sources will be enabled for the
-    #   detector.
+    #   Describes which data sources will be enabled for the detector.
     #   @return [Types::DataSourceConfigurations]
     #
     # @!attribute [rw] tags
@@ -621,12 +619,14 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector of the GuardDuty account that you want
-    #   to create a filter for.
+    #   The ID of the detector belonging to the GuardDuty account that you
+    #   want to create a filter for.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the filter.
+    #   The name of the filter. Minimum length of 3. Maximum length of 64.
+    #   Valid characters include alphanumeric characters, dot (.),
+    #   underscore (\_), and dash (-). Spaces are not allowed.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -701,6 +701,8 @@ module Aws::GuardDuty
     #   * service.action.awsApiCallAction.api
     #
     #   * service.action.awsApiCallAction.callerType
+    #
+    #   * service.action.awsApiCallAction.errorCode
     #
     #   * service.action.awsApiCallAction.remoteIpDetails.city.cityName
     #
@@ -896,7 +898,7 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] account_details
     #   A list of account ID and email address pairs of the accounts that
-    #   you want to associate with the master GuardDuty account.
+    #   you want to associate with the GuardDuty administrator account.
     #   @return [Array<Types::AccountDetail>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMembersRequest AWS API Documentation
@@ -1454,12 +1456,13 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] member_account_limit_reached
     #   Indicates whether the maximum number of allowed member accounts are
-    #   already associated with the delegated administrator master account.
+    #   already associated with the delegated administrator account for your
+    #   organization.
     #   @return [Boolean]
     #
     # @!attribute [rw] data_sources
-    #   An object that describes which data sources are enabled
-    #   automatically for member accounts.
+    #   Describes which data sources are enabled automatically for member
+    #   accounts.
     #   @return [Types::OrganizationDataSourceConfigurationsResult]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfigurationResponse AWS API Documentation
@@ -1645,12 +1648,12 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty account whose members
-    #   you want to disassociate from the master account.
+    #   you want to disassociate from the administrator account.
     #   @return [String]
     #
     # @!attribute [rw] account_ids
     #   A list of account IDs of the GuardDuty member accounts that you want
-    #   to disassociate from the master account.
+    #   to disassociate from the administrator account.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateMembersRequest AWS API Documentation
@@ -1953,8 +1956,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] data_sources
-    #   An object that describes which data sources are enabled for the
-    #   detector.
+    #   Describes which data sources are enabled for the detector.
     #   @return [Types::DataSourceConfigurationsResult]
     #
     # @!attribute [rw] tags
@@ -2245,7 +2247,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] master
-    #   The master account details.
+    #   The administrator account details.
     #   @return [Types::Master]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccountResponse AWS API Documentation
@@ -2265,7 +2267,7 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The detector ID for the master account.
+    #   The detector ID for the administrator account.
     #   @return [String]
     #
     # @!attribute [rw] account_ids
@@ -3178,8 +3180,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] admin_accounts
-    #   An AdminAccounts object that includes a list of accounts configured
-    #   as GuardDuty delegated administrators.
+    #   A list of accounts configured as GuardDuty delegated administrators.
     #   @return [Array<Types::AdminAccount>]
     #
     # @!attribute [rw] next_token
@@ -3373,18 +3374,19 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the master account and invitation.
+    # Contains information about the administrator account and invitation.
     #
     # @!attribute [rw] account_id
-    #   The ID of the account used as the master account.
+    #   The ID of the account used as the administrator account.
     #   @return [String]
     #
     # @!attribute [rw] invitation_id
-    #   The value used to validate the master account to the member account.
+    #   The value used to validate the administrator account to the member
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] relationship_status
-    #   The status of the relationship between the master and member
+    #   The status of the relationship between the administrator and member
     #   accounts.
     #   @return [String]
     #
@@ -3414,7 +3416,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] master_id
-    #   The master account ID.
+    #   The administrator account ID.
     #   @return [String]
     #
     # @!attribute [rw] email
@@ -3422,7 +3424,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] relationship_status
-    #   The status of the relationship between the member and the master.
+    #   The status of the relationship between the member and the
+    #   administrator.
     #   @return [String]
     #
     # @!attribute [rw] invited_at
@@ -4119,7 +4122,7 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector of the GuardDuty master account
+    #   The unique ID of the detector of the GuardDuty administrator account
     #   associated with the member accounts to monitor.
     #   @return [String]
     #
@@ -4159,8 +4162,8 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector associated with the GuardDuty master
-    #   account that is monitoring member accounts.
+    #   The unique ID of the detector associated with the GuardDuty
+    #   administrator account that is monitoring member accounts.
     #   @return [String]
     #
     # @!attribute [rw] account_ids
@@ -4387,7 +4390,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] data_sources
-    #   An object that describes which data sources will be updated.
+    #   Describes which data sources will be updated.
     #   @return [Types::DataSourceConfigurations]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorRequest AWS API Documentation
@@ -4595,7 +4598,7 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The detector ID of the master account.
+    #   The detector ID of the administrator account.
     #   @return [String]
     #
     # @!attribute [rw] account_ids
@@ -4603,7 +4606,7 @@ module Aws::GuardDuty
     #   @return [Array<String>]
     #
     # @!attribute [rw] data_sources
-    #   An object describes which data sources will be updated.
+    #   Describes which data sources will be updated.
     #   @return [Types::DataSourceConfigurations]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateMemberDetectorsRequest AWS API Documentation
@@ -4652,7 +4655,7 @@ module Aws::GuardDuty
     #   @return [Boolean]
     #
     # @!attribute [rw] data_sources
-    #   An object describes which data sources will be updated.
+    #   Describes which data sources will be updated.
     #   @return [Types::OrganizationDataSourceConfigurations]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateOrganizationConfigurationRequest AWS API Documentation
@@ -4736,8 +4739,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The updated URI of the file that contains the ThreateIntelSet. For
-    #   example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The updated URI of the file that contains the ThreateIntelSet.
     #   @return [String]
     #
     # @!attribute [rw] activate

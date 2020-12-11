@@ -23,6 +23,7 @@ module Aws::CloudTrail
     ByteBuffer = Shapes::BlobShape.new(name: 'ByteBuffer')
     CloudTrailARNInvalidException = Shapes::StructureShape.new(name: 'CloudTrailARNInvalidException')
     CloudTrailAccessNotEnabledException = Shapes::StructureShape.new(name: 'CloudTrailAccessNotEnabledException')
+    CloudTrailInvalidClientTokenIdException = Shapes::StructureShape.new(name: 'CloudTrailInvalidClientTokenIdException')
     CloudWatchLogsDeliveryUnavailableException = Shapes::StructureShape.new(name: 'CloudWatchLogsDeliveryUnavailableException')
     CreateTrailRequest = Shapes::StructureShape.new(name: 'CreateTrailRequest')
     CreateTrailResponse = Shapes::StructureShape.new(name: 'CreateTrailResponse')
@@ -142,7 +143,7 @@ module Aws::CloudTrail
 
     AddTagsResponse.struct_class = Types::AddTagsResponse
 
-    AdvancedEventSelector.add_member(:name, Shapes::ShapeRef.new(shape: SelectorName, required: true, location_name: "Name"))
+    AdvancedEventSelector.add_member(:name, Shapes::ShapeRef.new(shape: SelectorName, location_name: "Name"))
     AdvancedEventSelector.add_member(:field_selectors, Shapes::ShapeRef.new(shape: AdvancedFieldSelectors, required: true, location_name: "FieldSelectors"))
     AdvancedEventSelector.struct_class = Types::AdvancedEventSelector
 
@@ -162,6 +163,8 @@ module Aws::CloudTrail
     CloudTrailARNInvalidException.struct_class = Types::CloudTrailARNInvalidException
 
     CloudTrailAccessNotEnabledException.struct_class = Types::CloudTrailAccessNotEnabledException
+
+    CloudTrailInvalidClientTokenIdException.struct_class = Types::CloudTrailInvalidClientTokenIdException
 
     CloudWatchLogsDeliveryUnavailableException.struct_class = Types::CloudWatchLogsDeliveryUnavailableException
 
@@ -595,6 +598,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationsNotInUseException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotInAllFeaturesModeException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudTrailInvalidClientTokenIdException)
       end)
 
       api.add_operation(:delete_trail, Seahorse::Model::Operation.new.tap do |o|
@@ -857,6 +861,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationsNotInUseException)
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotInAllFeaturesModeException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudTrailInvalidClientTokenIdException)
       end)
     end
 

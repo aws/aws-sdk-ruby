@@ -39,7 +39,7 @@ module Aws::AutoScaling
     #
     #   autoscalinggroup = auto_scaling.create_group({
     #     auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #     launch_configuration_name: "ResourceName",
+    #     launch_configuration_name: "XmlStringMaxLen255",
     #     launch_template: {
     #       launch_template_id: "XmlStringMaxLen255",
     #       launch_template_name: "LaunchTemplateName",
@@ -96,7 +96,7 @@ module Aws::AutoScaling
     #         heartbeat_timeout: 1,
     #         default_result: "LifecycleActionResult",
     #         notification_target_arn: "NotificationTargetResourceName",
-    #         role_arn: "ResourceName",
+    #         role_arn: "XmlStringMaxLen255",
     #       },
     #     ],
     #     tags: [
@@ -629,7 +629,7 @@ module Aws::AutoScaling
     #
     #   activities = auto_scaling.activities({
     #     activity_ids: ["XmlString"],
-    #     auto_scaling_group_name: "ResourceName",
+    #     auto_scaling_group_name: "XmlStringMaxLen255",
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :activity_ids
@@ -680,7 +680,7 @@ module Aws::AutoScaling
     # @example Request syntax with placeholder values
     #
     #   groups = auto_scaling.groups({
-    #     auto_scaling_group_names: ["ResourceName"],
+    #     auto_scaling_group_names: ["XmlStringMaxLen255"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :auto_scaling_group_names
@@ -750,7 +750,7 @@ module Aws::AutoScaling
     # @example Request syntax with placeholder values
     #
     #   launch_configurations = auto_scaling.launch_configurations({
-    #     launch_configuration_names: ["ResourceName"],
+    #     launch_configuration_names: ["XmlStringMaxLen255"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :launch_configuration_names
@@ -778,7 +778,7 @@ module Aws::AutoScaling
     # @example Request syntax with placeholder values
     #
     #   policies = auto_scaling.policies({
-    #     auto_scaling_group_name: "ResourceName",
+    #     auto_scaling_group_name: "XmlStringMaxLen255",
     #     policy_names: ["ResourceName"],
     #     policy_types: ["XmlStringMaxLen64"],
     #   })
@@ -833,8 +833,8 @@ module Aws::AutoScaling
     # @example Request syntax with placeholder values
     #
     #   scheduled_actions = auto_scaling.scheduled_actions({
-    #     auto_scaling_group_name: "ResourceName",
-    #     scheduled_action_names: ["ResourceName"],
+    #     auto_scaling_group_name: "XmlStringMaxLen255",
+    #     scheduled_action_names: ["XmlStringMaxLen255"],
     #     start_time: Time.now,
     #     end_time: Time.now,
     #   })

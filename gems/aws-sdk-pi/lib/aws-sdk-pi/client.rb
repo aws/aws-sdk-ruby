@@ -340,30 +340,37 @@ module Aws::PI
     # For a specific time period, retrieve the top `N` dimension keys for a
     # metric.
     #
+    # <note markdown="1"> Each response element returns a maximum of 500 bytes. For larger
+    # elements, such as SQL statements, only the first 500 bytes are
+    # returned.
+    #
+    #  </note>
+    #
     # @option params [required, String] :service_type
     #   The AWS service for which Performance Insights will return metrics.
-    #   The only valid value for *ServiceType* is: `RDS`
+    #   The only valid value for *ServiceType* is `RDS`.
     #
     # @option params [required, String] :identifier
     #   An immutable, AWS Region-unique identifier for a data source.
     #   Performance Insights gathers metrics from this data source.
     #
     #   To use an Amazon RDS instance as a data source, you specify its
-    #   `DbiResourceId` value - for example: `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`
+    #   `DbiResourceId` value. For example, specify
+    #   `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The date and time specifying the beginning of the requested time
-    #   series data. You can't specify a `StartTime` that's earlier than 7
-    #   days ago. The value specified is *inclusive* - data points equal to or
-    #   greater than `StartTime` will be returned.
+    #   series data. You must specify a `StartTime` within the past 7 days.
+    #   The value specified is *inclusive*, which means that data points equal
+    #   to or greater than `StartTime` are returned.
     #
     #   The value for `StartTime` must be earlier than the value for
     #   `EndTime`.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   The date and time specifying the end of the requested time series
-    #   data. The value specified is *exclusive* - data points less than (but
-    #   not equal to) `EndTime` will be returned.
+    #   data. The value specified is *exclusive*, which means that data points
+    #   less than (but not equal to) `EndTime` are returned.
     #
     #   The value for `EndTime` must be later than the value for `StartTime`.
     #
@@ -377,6 +384,14 @@ module Aws::PI
     #
     #   * `db.sampledload.avg` - the raw number of active sessions for the
     #     database engine.
+    #
+    #   If the number of active sessions is less than an internal Performance
+    #   Insights threshold, `db.load.avg` and `db.sampledload.avg` are the
+    #   same value. If the number of active sessions is greater than the
+    #   internal threshold, Performance Insights samples the active sessions,
+    #   with `db.load.avg` showing the scaled values, `db.sampledload.avg`
+    #   showing the raw values, and `db.sampledload.avg` less than
+    #   `db.load.avg`. For most use cases, you can query `db.load.avg` only.
     #
     # @option params [Integer] :period_in_seconds
     #   The granularity, in seconds, of the data points returned from
@@ -394,16 +409,16 @@ module Aws::PI
     #   * `86400` (twenty-four hours)
     #
     #   If you don't specify `PeriodInSeconds`, then Performance Insights
-    #   will choose a value for you, with a goal of returning roughly 100-200
-    #   data points in the response.
+    #   chooses a value for you, with a goal of returning roughly 100-200 data
+    #   points in the response.
     #
     # @option params [required, Types::DimensionGroup] :group_by
     #   A specification for how to aggregate the data points from a query
     #   result. You must specify a valid dimension group. Performance Insights
-    #   will return all of the dimensions within that group, unless you
-    #   provide the names of specific dimensions within that group. You can
-    #   also request that Performance Insights return a limited number of
-    #   values for a dimension.
+    #   returns all dimensions within this group, unless you provide the names
+    #   of specific dimensions within this group. You can also request that
+    #   Performance Insights return a limited number of values for a
+    #   dimension.
     #
     # @option params [Types::DimensionGroup] :partition_by
     #   For each dimension specified in `GroupBy`, specify a secondary
@@ -491,16 +506,22 @@ module Aws::PI
     # dimensions, and provide aggregation and filtering criteria for each
     # group.
     #
+    # <note markdown="1"> Each response element returns a maximum of 500 bytes. For larger
+    # elements, such as SQL statements, only the first 500 bytes are
+    # returned.
+    #
+    #  </note>
+    #
     # @option params [required, String] :service_type
-    #   The AWS service for which Performance Insights will return metrics.
-    #   The only valid value for *ServiceType* is: `RDS`
+    #   The AWS service for which Performance Insights returns metrics. The
+    #   only valid value for *ServiceType* is `RDS`.
     #
     # @option params [required, String] :identifier
     #   An immutable, AWS Region-unique identifier for a data source.
     #   Performance Insights gathers metrics from this data source.
     #
-    #   To use an Amazon RDS instance as a data source, you specify its
-    #   `DbiResourceId` value - for example: `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`
+    #   To use a DB instance as a data source, specify its `DbiResourceId`
+    #   value. For example, specify `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`.
     #
     # @option params [required, Array<Types::MetricQuery>] :metric_queries
     #   An array of one or more queries to perform. Each query must specify a
@@ -517,7 +538,7 @@ module Aws::PI
     #   `EndTime`.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
-    #   The date and time specifiying the end of the requested time series
+    #   The date and time specifying the end of the requested time series
     #   data. The value specified is *exclusive* - data points less than (but
     #   not equal to) `EndTime` will be returned.
     #
@@ -622,7 +643,7 @@ module Aws::PI
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pi'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

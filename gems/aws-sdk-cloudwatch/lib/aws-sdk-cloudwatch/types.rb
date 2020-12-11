@@ -2876,7 +2876,8 @@ module Aws::CloudWatch
     #   state from any other state. Each action is specified as an Amazon
     #   Resource Name (ARN).
     #
-    #   Valid Values: `arn:aws:sns:region:account-id:sns-topic-name `
+    #   Valid Values: `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:ssm:region:account-id:opsitem:severity `
     #   @return [Array<String>]
     #
     # @!attribute [rw] alarm_description
@@ -3221,7 +3222,7 @@ module Aws::CloudWatch
     #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-    #   `
+    #   ` \| `arn:aws:ssm:region:account-id:opsitem:severity `
     #
     #   Valid Values (for use with IAM roles):
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
@@ -3441,6 +3442,15 @@ module Aws::CloudWatch
     #   also use them to scope user permissions by granting a user
     #   permission to access or change only resources with certain tag
     #   values.
+    #
+    #   If you are using this operation to update an existing alarm, any
+    #   tags you specify in this parameter are ignored. To change the tags
+    #   of an existing alarm, use [TagResource][1] or [UntagResource][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] threshold_metric_id

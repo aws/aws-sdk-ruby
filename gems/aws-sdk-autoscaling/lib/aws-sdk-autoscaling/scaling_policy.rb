@@ -281,7 +281,7 @@ module Aws::AutoScaling
     # @example Request syntax with placeholder values
     #
     #   scaling_policy.delete({
-    #     auto_scaling_group_name: "ResourceName",
+    #     auto_scaling_group_name: "XmlStringMaxLen255",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :auto_scaling_group_name
@@ -296,7 +296,7 @@ module Aws::AutoScaling
     # @example Request syntax with placeholder values
     #
     #   scaling_policy.execute({
-    #     auto_scaling_group_name: "ResourceName",
+    #     auto_scaling_group_name: "XmlStringMaxLen255",
     #     honor_cooldown: false,
     #     metric_value: 1.0,
     #     breach_threshold: 1.0,

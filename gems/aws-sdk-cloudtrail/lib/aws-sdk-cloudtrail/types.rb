@@ -52,11 +52,36 @@ module Aws::CloudTrail
     #
     class AddTagsResponse < Aws::EmptyStructure; end
 
+    # Advanced event selectors let you create fine-grained selectors for the
+    # following AWS CloudTrail event record ﬁelds. They help you control
+    # costs by logging only those events that are important to you. For more
+    # information about advanced event selectors, see [Logging data events
+    # for trails][1] in the *AWS CloudTrail User Guide*.
+    #
+    # * `readOnly`
+    #
+    # * `eventSource`
+    #
+    # * `eventName`
+    #
+    # * `eventCategory`
+    #
+    # * `resources.type`
+    #
+    # * `resources.ARN`
+    #
+    # You cannot apply both event selectors and advanced event selectors to
+    # a trail.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
+    #
     # @note When making an API call, you may pass AdvancedEventSelector
     #   data as a hash:
     #
     #       {
-    #         name: "SelectorName", # required
+    #         name: "SelectorName",
     #         field_selectors: [ # required
     #           {
     #             field: "SelectorField", # required
@@ -71,9 +96,12 @@ module Aws::CloudTrail
     #       }
     #
     # @!attribute [rw] name
+    #   An optional, descriptive name for an advanced event selector, such
+    #   as "Log data events for only two S3 buckets".
     #   @return [String]
     #
     # @!attribute [rw] field_selectors
+    #   Contains all selector statements in an advanced event selector.
     #   @return [Array<Types::AdvancedFieldSelector>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AdvancedEventSelector AWS API Documentation
@@ -85,6 +113,8 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # A single selector statement in an advanced event selector.
+    #
     # @note When making an API call, you may pass AdvancedFieldSelector
     #   data as a hash:
     #
@@ -99,24 +129,85 @@ module Aws::CloudTrail
     #       }
     #
     # @!attribute [rw] field
+    #   A field in an event record on which to filter events to be logged.
+    #   Supported fields include `readOnly`, `eventCategory`, `eventSource`
+    #   (for management events), `eventName`, `resources.type`, and
+    #   `resources.ARN`.
+    #
+    #   * <b> <code>readOnly</code> </b> - Optional. Can be set to `Equals`
+    #     a value of `true` or `false`. A value of `false` logs both `read`
+    #     and `write` events.
+    #
+    #   * <b> <code>eventSource</code> </b> - For filtering management
+    #     events only. This can be set only to `NotEquals`
+    #     `kms.amazonaws.com`.
+    #
+    #   * <b> <code>eventName</code> </b> - Can use any operator. You can
+    #     use it to ﬁlter in or ﬁlter out any data event logged to
+    #     CloudTrail, such as `PutBucket`. You can have multiple values for
+    #     this ﬁeld, separated by commas.
+    #
+    #   * <b> <code>eventCategory</code> </b> - This is required. It must be
+    #     set to `Equals`, and the value must be `Management` or `Data`.
+    #
+    #   * <b> <code>resources.type</code> </b> - This ﬁeld is required.
+    #     `resources.type` can only use the `Equals` operator, and the value
+    #     can be one of the following: `AWS::S3::Object` or
+    #     `AWS::Lambda::Function`. You can have only one `resources.type`
+    #     ﬁeld per selector. To log data events on more than one resource
+    #     type, add another selector.
+    #
+    #   * <b> <code>resources.ARN</code> </b> - You can use any operator
+    #     with resources.ARN, but if you use `Equals` or `NotEquals`, the
+    #     value must exactly match the ARN of a valid resource of the type
+    #     you've speciﬁed in the template as the value of resources.type.
+    #     For example, if resources.type equals `AWS::S3::Object`, the ARN
+    #     must be in one of the following formats. The trailing slash is
+    #     intentional; do not exclude it.
+    #
+    #     * `arn:partition:s3:::bucket_name/`
+    #
+    #     * `arn:partition:s3:::bucket_name/object_or_file_name/`
+    #
+    #     When resources.type equals `AWS::Lambda::Function`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:partition:lambda:region:account_ID:function:function_name`
+    #
+    #     ^
     #   @return [String]
     #
     # @!attribute [rw] equals
+    #   An operator that includes events that match the exact value of the
+    #   event record field specified as the value of `Field`. This is the
+    #   only valid operator that you can use with the `readOnly`,
+    #   `eventCategory`, and `resources.type` fields.
     #   @return [Array<String>]
     #
     # @!attribute [rw] starts_with
+    #   An operator that includes events that match the first few characters
+    #   of the event record field specified as the value of `Field`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] ends_with
+    #   An operator that includes events that match the last few characters
+    #   of the event record field specified as the value of `Field`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] not_equals
+    #   An operator that excludes events that match the exact value of the
+    #   event record field specified as the value of `Field`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] not_starts_with
+    #   An operator that excludes events that match the first few characters
+    #   of the event record field specified as the value of `Field`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] not_ends_with
+    #   An operator that excludes events that match the last few characters
+    #   of the event record field specified as the value of `Field`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AdvancedFieldSelector AWS API Documentation
@@ -155,6 +246,15 @@ module Aws::CloudTrail
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CloudTrailAccessNotEnabledException AWS API Documentation
     #
     class CloudTrailAccessNotEnabledException < Aws::EmptyStructure; end
+
+    # This exception is thrown when a call results in the
+    # `InvalidClientTokenId` error code. This can occur when you are
+    # creating or updating a trail to send notifications to an Amazon SNS
+    # topic that is in a suspended AWS account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CloudTrailInvalidClientTokenIdException AWS API Documentation
+    #
+    class CloudTrailInvalidClientTokenIdException < Aws::EmptyStructure; end
 
     # Cannot set a CloudWatch Logs delivery for this region.
     #
@@ -423,6 +523,10 @@ module Aws::CloudTrail
     # <note markdown="1"> The total number of allowed data resources is 250. This number can be
     # distributed between 1 and 5 event selectors, but the total cannot
     # exceed 250 across all selectors.
+    #
+    #  If you are using advanced event selectors, the maximum total number of
+    # values for all conditions, across all advanced event selectors for the
+    # trail, is 500.
     #
     #  </note>
     #
@@ -707,6 +811,9 @@ module Aws::CloudTrail
     #
     # You can configure up to five event selectors for a trail.
     #
+    # You cannot apply both event selectors and advanced event selectors to
+    # a trail.
+    #
     # @note When making an API call, you may pass EventSelector
     #   data as a hash:
     #
@@ -833,6 +940,7 @@ module Aws::CloudTrail
     #   @return [Array<Types::EventSelector>]
     #
     # @!attribute [rw] advanced_event_selectors
+    #   The advanced event selectors that are configured for the trail.
     #   @return [Array<Types::AdvancedEventSelector>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventSelectorsResponse AWS API Documentation
@@ -1185,11 +1293,14 @@ module Aws::CloudTrail
     class InvalidEventCategoryException < Aws::EmptyStructure; end
 
     # This exception is thrown when the `PutEventSelectors` operation is
-    # called with a number of event selectors or data resources that is not
-    # valid. The combination of event selectors and data resources is not
-    # valid. A trail can have up to 5 event selectors. A trail is limited to
-    # 250 data resources. These data resources can be distributed across
-    # event selectors, but the overall total cannot exceed 250.
+    # called with a number of event selectors, advanced event selectors, or
+    # data resources that is not valid. The combination of event selectors
+    # or advanced event selectors and data resources is not valid. A trail
+    # can have up to 5 event selectors. If a trail uses advanced event
+    # selectors, a maximum of 500 total values for all conditions in all
+    # advanced event selectors is allowed. A trail is limited to 250 data
+    # resources. These data resources can be distributed across event
+    # selectors, but the overall total cannot exceed 250.
     #
     # You can:
     #
@@ -1200,6 +1311,9 @@ module Aws::CloudTrail
     #   selector is configurable up to 250. However, this upper limit is
     #   allowed only if the total number of data resources does not exceed
     #   250 across all event selectors for a trail.
+    #
+    # * Specify up to 500 values for all conditions in all advanced event
+    #   selectors for a trail.
     #
     # * Specify a valid value for a parameter. For example, specifying the
     #   `ReadWriteType` parameter with a value of `read-only` is invalid.
@@ -1717,7 +1831,7 @@ module Aws::CloudTrail
     #         ],
     #         advanced_event_selectors: [
     #           {
-    #             name: "SelectorName", # required
+    #             name: "SelectorName",
     #             field_selectors: [ # required
     #               {
     #                 field: "SelectorField", # required
@@ -1756,10 +1870,27 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] event_selectors
     #   Specifies the settings for your event selectors. You can configure
-    #   up to five event selectors for a trail.
+    #   up to five event selectors for a trail. You can use either
+    #   `EventSelectors` or `AdvancedEventSelectors` in a
+    #   `PutEventSelectors` request, but not both. If you apply
+    #   `EventSelectors` to a trail, any existing `AdvancedEventSelectors`
+    #   are overwritten.
     #   @return [Array<Types::EventSelector>]
     #
     # @!attribute [rw] advanced_event_selectors
+    #   Specifies the settings for advanced event selectors. You can add
+    #   advanced event selectors, and conditions for your advanced event
+    #   selectors, up to a maximum of 500 values for all conditions and
+    #   selectors on a trail. You can use either `AdvancedEventSelectors` or
+    #   `EventSelectors`, but not both. If you apply
+    #   `AdvancedEventSelectors` to a trail, any existing `EventSelectors`
+    #   are overwritten. For more information about advanced event
+    #   selectors, see [Logging data events for trails][1] in the *AWS
+    #   CloudTrail User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
     #   @return [Array<Types::AdvancedEventSelector>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventSelectorsRequest AWS API Documentation
@@ -1784,6 +1915,7 @@ module Aws::CloudTrail
     #   @return [Array<Types::EventSelector>]
     #
     # @!attribute [rw] advanced_event_selectors
+    #   Specifies the advanced event selectors configured for your trail.
     #   @return [Array<Types::AdvancedEventSelector>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventSelectorsResponse AWS API Documentation

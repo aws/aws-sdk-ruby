@@ -327,18 +327,19 @@ module Aws::GuardDuty
 
     # @!group API Operations
 
-    # Accepts the invitation to be monitored by a master GuardDuty account.
+    # Accepts the invitation to be monitored by a GuardDuty administrator
+    # account.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty member account.
     #
     # @option params [required, String] :master_id
-    #   The account ID of the master GuardDuty account whose invitation
+    #   The account ID of the GuardDuty administrator account whose invitation
     #   you're accepting.
     #
     # @option params [required, String] :invitation_id
-    #   The value that is used to validate the master account to the member
-    #   account.
+    #   The value that is used to validate the administrator account to the
+    #   member account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -362,8 +363,8 @@ module Aws::GuardDuty
     # Archives GuardDuty findings that are specified by the list of finding
     # IDs.
     #
-    # <note markdown="1"> Only the master account can archive findings. Member accounts don't
-    # have permission to archive findings from their accounts.
+    # <note markdown="1"> Only the administrator account can archive findings. Member accounts
+    # don't have permission to archive findings from their accounts.
     #
     #  </note>
     #
@@ -408,12 +409,10 @@ module Aws::GuardDuty
     #   not need to pass this option.**
     #
     # @option params [String] :finding_publishing_frequency
-    #   An enum value that specifies how frequently updated findings are
-    #   exported.
+    #   A value that specifies how frequently updated findings are exported.
     #
     # @option params [Types::DataSourceConfigurations] :data_sources
-    #   An object that describes which data sources will be enabled for the
-    #   detector.
+    #   Describes which data sources will be enabled for the detector.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to be added to a new detector resource.
@@ -454,11 +453,13 @@ module Aws::GuardDuty
     # Creates a filter using the specified finding criteria.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector of the GuardDuty account that you want
-    #   to create a filter for.
+    #   The ID of the detector belonging to the GuardDuty account that you
+    #   want to create a filter for.
     #
     # @option params [required, String] :name
-    #   The name of the filter.
+    #   The name of the filter. Minimum length of 3. Maximum length of 64.
+    #   Valid characters include alphanumeric characters, dot (.), underscore
+    #   (\_), and dash (-). Spaces are not allowed.
     #
     # @option params [String] :description
     #   The description of the filter.
@@ -529,6 +530,8 @@ module Aws::GuardDuty
     #   * service.action.awsApiCallAction.api
     #
     #   * service.action.awsApiCallAction.callerType
+    #
+    #   * service.action.awsApiCallAction.errorCode
     #
     #   * service.action.awsApiCallAction.remoteIpDetails.city.cityName
     #
@@ -649,8 +652,8 @@ module Aws::GuardDuty
     # user interface. An IPSet is a list of IP addresses that are trusted
     # for secure communication with AWS infrastructure and applications.
     # GuardDuty doesn't generate findings for IP addresses that are
-    # included in IPSets. Only users from the master account can use this
-    # operation.
+    # included in IPSets. Only users from the administrator account can use
+    # this operation.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account that you want
@@ -720,8 +723,9 @@ module Aws::GuardDuty
     #
     # When using `Create Members` as an organizations delegated
     # administrator this action will enable GuardDuty in the added member
-    # accounts, with the exception of the organization master account, which
-    # must enable GuardDuty prior to being added as a member.
+    # accounts, with the exception of the organization delegated
+    # administrator account, which must enable GuardDuty prior to being
+    # added as a member.
     #
     # If you are adding accounts by invitation use this action after
     # GuardDuty has been enabled in potential member accounts and before
@@ -737,7 +741,7 @@ module Aws::GuardDuty
     #
     # @option params [required, Array<Types::AccountDetail>] :account_details
     #   A list of account ID and email address pairs of the accounts that you
-    #   want to associate with the master GuardDuty account.
+    #   want to associate with the GuardDuty administrator account.
     #
     # @return [Types::CreateMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -850,7 +854,7 @@ module Aws::GuardDuty
 
     # Creates a new ThreatIntelSet. ThreatIntelSets consist of known
     # malicious IP addresses. GuardDuty generates findings based on
-    # ThreatIntelSets. Only users of the master account can use this
+    # ThreatIntelSets. Only users of the administrator account can use this
     # operation.
     #
     # @option params [required, String] :detector_id
@@ -1053,8 +1057,8 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Deletes GuardDuty member accounts (to the current GuardDuty master
-    # account) specified by the account IDs.
+    # Deletes GuardDuty member accounts (to the current GuardDuty
+    # administrator account) specified by the account IDs.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account whose members
@@ -1245,8 +1249,8 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Disassociates the current GuardDuty member account from its master
-    # account.
+    # Disassociates the current GuardDuty member account from its
+    # administrator account.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty member account.
@@ -1269,15 +1273,15 @@ module Aws::GuardDuty
     end
 
     # Disassociates GuardDuty member accounts (to the current GuardDuty
-    # master account) specified by the account IDs.
+    # administrator account) specified by the account IDs.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account whose members
-    #   you want to disassociate from the master account.
+    #   you want to disassociate from the administrator account.
     #
     # @option params [required, Array<String>] :account_ids
     #   A list of account IDs of the GuardDuty member accounts that you want
-    #   to disassociate from the master account.
+    #   to disassociate from the administrator account.
     #
     # @return [Types::DisassociateMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1727,8 +1731,8 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Provides the details for the GuardDuty master account associated with
-    # the current GuardDuty member account.
+    # Provides the details for the GuardDuty administrator account
+    # associated with the current GuardDuty member account.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty member account.
@@ -1763,7 +1767,7 @@ module Aws::GuardDuty
     # detector.
     #
     # @option params [required, String] :detector_id
-    #   The detector ID for the master account.
+    #   The detector ID for the administrator account.
     #
     # @option params [required, Array<String>] :account_ids
     #   The account ID of the member account.
@@ -1801,8 +1805,8 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Retrieves GuardDuty member accounts (to the current GuardDuty master
-    # account) specified by the account IDs.
+    # Retrieves GuardDuty member accounts (of the current GuardDuty
+    # administrator account) specified by the account IDs.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account whose members
@@ -1978,8 +1982,8 @@ module Aws::GuardDuty
 
     # Invites other AWS accounts (created as members of the current AWS
     # account by CreateMembers) to enable GuardDuty, and allow the current
-    # AWS account to view and manage these accounts' GuardDuty findings on
-    # their behalf as the master account.
+    # AWS account to view and manage these accounts' findings on their
+    # behalf as the GuardDuty administrator account.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account that you want
@@ -2301,7 +2305,7 @@ module Aws::GuardDuty
 
     # Lists the IPSets of the GuardDuty service specified by the detector
     # ID. If you use this operation from a member account, the IPSets
-    # returned are the IPSets from the associated master account.
+    # returned are the IPSets from the associated administrator account.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that the IPSet is associated with.
@@ -2396,7 +2400,7 @@ module Aws::GuardDuty
     end
 
     # Lists details about all member accounts for the current GuardDuty
-    # master account.
+    # administrator account.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector the member is associated with.
@@ -2579,7 +2583,8 @@ module Aws::GuardDuty
 
     # Lists the ThreatIntelSets of the GuardDuty service specified by the
     # detector ID. If you use this operation from a member account, the
-    # ThreatIntelSets associated with the master account are returned.
+    # ThreatIntelSets associated with the administrator account are
+    # returned.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector that the threatIntelSet is associated
@@ -2632,7 +2637,7 @@ module Aws::GuardDuty
     # monitoring with the `StopMonitoringMembers` operation.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector of the GuardDuty master account
+    #   The unique ID of the detector of the GuardDuty administrator account
     #   associated with the member accounts to monitor.
     #
     # @option params [required, Array<String>] :account_ids
@@ -2670,8 +2675,8 @@ module Aws::GuardDuty
     # accounts.
     #
     # @option params [required, String] :detector_id
-    #   The unique ID of the detector associated with the GuardDuty master
-    #   account that is monitoring member accounts.
+    #   The unique ID of the detector associated with the GuardDuty
+    #   administrator account that is monitoring member accounts.
     #
     # @option params [required, Array<String>] :account_ids
     #   A list of account IDs for the member accounts to stop monitoring.
@@ -2796,7 +2801,7 @@ module Aws::GuardDuty
     #   such as to CloudWatch Events.
     #
     # @option params [Types::DataSourceConfigurations] :data_sources
-    #   An object that describes which data sources will be updated.
+    #   Describes which data sources will be updated.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2971,13 +2976,13 @@ module Aws::GuardDuty
     # Contains information on member accounts to be updated.
     #
     # @option params [required, String] :detector_id
-    #   The detector ID of the master account.
+    #   The detector ID of the administrator account.
     #
     # @option params [required, Array<String>] :account_ids
     #   A list of member account IDs to be updated.
     #
     # @option params [Types::DataSourceConfigurations] :data_sources
-    #   An object describes which data sources will be updated.
+    #   Describes which data sources will be updated.
     #
     # @return [Types::UpdateMemberDetectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3020,7 +3025,7 @@ module Aws::GuardDuty
     #   organization.
     #
     # @option params [Types::OrganizationDataSourceConfigurations] :data_sources
-    #   An object describes which data sources will be updated.
+    #   Describes which data sources will be updated.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3096,8 +3101,7 @@ module Aws::GuardDuty
     #   update.
     #
     # @option params [String] :location
-    #   The updated URI of the file that contains the ThreateIntelSet. For
-    #   example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The updated URI of the file that contains the ThreateIntelSet.
     #
     # @option params [Boolean] :activate
     #   The updated Boolean value that specifies whether the ThreateIntelSet
@@ -3137,7 +3141,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -233,7 +233,7 @@ module Aws::AutoScaling
     # @example Request syntax with placeholder values
     #
     #   scheduled_action.delete({
-    #     auto_scaling_group_name: "ResourceName", # required
+    #     auto_scaling_group_name: "XmlStringMaxLen255", # required
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :auto_scaling_group_name

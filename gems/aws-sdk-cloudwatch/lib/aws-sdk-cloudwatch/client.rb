@@ -557,7 +557,7 @@ module Aws::CloudWatch
     end
 
     # Retrieves the specified alarms. You can filter the results by
-    # specifying a a prefix for the alarm name, the alarm state, or a prefix
+    # specifying a prefix for the alarm name, the alarm state, or a prefix
     # for any action.
     #
     # @option params [Array<String>] :alarm_names
@@ -2062,6 +2062,9 @@ module Aws::CloudWatch
     # the update completely overwrites the previous configuration of the
     # alarm.
     #
+    # If you are an IAM user, you must have `iam:CreateServiceLinkedRole` to
+    # create a composite alarm that has Systems Manager OpsItem actions.
+    #
     # @option params [Boolean] :actions_enabled
     #   Indicates whether actions should be executed during any changes to the
     #   alarm state of the composite alarm. The default is `TRUE`.
@@ -2071,7 +2074,8 @@ module Aws::CloudWatch
     #   state from any other state. Each action is specified as an Amazon
     #   Resource Name (ARN).
     #
-    #   Valid Values: `arn:aws:sns:region:account-id:sns-topic-name `
+    #   Valid Values: `arn:aws:sns:region:account-id:sns-topic-name ` \|
+    #   `arn:aws:ssm:region:account-id:opsitem:severity `
     #
     # @option params [String] :alarm_description
     #   The description for the composite alarm.
@@ -2345,36 +2349,17 @@ module Aws::CloudWatch
     # If you are an IAM user, you must have Amazon EC2 permissions for some
     # alarm operations:
     #
-    # * `iam:CreateServiceLinkedRole` for all alarms with EC2 actions
+    # * The `iam:CreateServiceLinkedRole` for all alarms with EC2 actions
     #
-    # * `ec2:DescribeInstanceStatus` and `ec2:DescribeInstances` for all
-    #   alarms on EC2 instance status metrics
-    #
-    # * `ec2:StopInstances` for alarms with stop actions
-    #
-    # * `ec2:TerminateInstances` for alarms with terminate actions
-    #
-    # * No specific permissions are needed for alarms with recover actions
-    #
-    # If you have read/write permissions for Amazon CloudWatch but not for
-    # Amazon EC2, you can still create an alarm, but the stop or terminate
-    # actions are not performed. However, if you are later granted the
-    # required permissions, the alarm actions that you created earlier are
-    # performed.
-    #
-    # If you are using an IAM role (for example, an EC2 instance profile),
-    # you cannot stop or terminate the instance using alarm actions.
-    # However, you can still see the alarm state and perform any other
-    # actions such as Amazon SNS notifications or Auto Scaling policies.
-    #
-    # If you are using temporary security credentials granted using AWS STS,
-    # you cannot stop or terminate an EC2 instance using alarm actions.
+    # * The `iam:CreateServiceLinkedRole` to create an alarm with Systems
+    #   Manager OpsItem actions.
     #
     # The first time you create an alarm in the AWS Management Console, the
     # CLI, or by using the PutMetricAlarm API, CloudWatch creates the
-    # necessary service-linked role for you. The service-linked role is
-    # called `AWSServiceRoleForCloudWatchEvents`. For more information, see
-    # [AWS service-linked role][1].
+    # necessary service-linked rolea for you. The service-linked roles are
+    # called `AWSServiceRoleForCloudWatchEvents` and
+    # `AWSServiceRoleForCloudWatchAlarms_ActionSSM`. For more information,
+    # see [AWS service-linked role][1].
     #
     #
     #
@@ -2421,7 +2406,7 @@ module Aws::CloudWatch
     #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
     #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-    #   `
+    #   ` \| `arn:aws:ssm:region:account-id:opsitem:severity `
     #
     #   Valid Values (for use with IAM roles):
     #   `arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0`
@@ -2621,6 +2606,15 @@ module Aws::CloudWatch
     #   Tags can help you organize and categorize your resources. You can also
     #   use them to scope user permissions by granting a user permission to
     #   access or change only resources with certain tag values.
+    #
+    #   If you are using this operation to update an existing alarm, any tags
+    #   you specify in this parameter are ignored. To change the tags of an
+    #   existing alarm, use [TagResource][1] or [UntagResource][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html
     #
     # @option params [String] :threshold_metric_id
     #   If this is an alarm based on an anomaly detection model, make this
@@ -2987,7 +2981,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

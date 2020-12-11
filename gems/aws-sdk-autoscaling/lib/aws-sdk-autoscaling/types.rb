@@ -173,7 +173,7 @@ module Aws::AutoScaling
     #
     #       {
     #         instance_ids: ["XmlStringMaxLen19"],
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #       }
     #
     # @!attribute [rw] instance_ids
@@ -201,7 +201,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         target_group_arns: ["XmlStringMaxLen511"], # required
     #       }
     #
@@ -237,7 +237,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         load_balancer_names: ["XmlStringMaxLen255"], # required
     #       }
     #
@@ -420,7 +420,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_names: ["ResourceName"],
+    #         auto_scaling_group_names: ["XmlStringMaxLen255"],
     #         next_token: "XmlString",
     #         max_records: 1,
     #       }
@@ -580,8 +580,8 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
-    #         scheduled_action_names: ["ResourceName"], # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #         scheduled_action_names: ["XmlStringMaxLen255"], # required
     #       }
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -619,7 +619,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         scheduled_update_group_actions: [ # required
     #           {
     #             scheduled_action_name: "XmlStringMaxLen255", # required
@@ -801,7 +801,7 @@ module Aws::AutoScaling
     #
     #       {
     #         auto_scaling_group_name: "XmlStringMaxLen255", # required
-    #         launch_configuration_name: "ResourceName",
+    #         launch_configuration_name: "XmlStringMaxLen255",
     #         launch_template: {
     #           launch_template_id: "XmlStringMaxLen255",
     #           launch_template_name: "LaunchTemplateName",
@@ -858,7 +858,7 @@ module Aws::AutoScaling
     #             heartbeat_timeout: 1,
     #             default_result: "LifecycleActionResult",
     #             notification_target_arn: "NotificationTargetResourceName",
-    #             role_arn: "ResourceName",
+    #             role_arn: "XmlStringMaxLen255",
     #           },
     #         ],
     #         tags: [
@@ -1623,7 +1623,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         force_delete: false,
     #       }
     #
@@ -1656,7 +1656,7 @@ module Aws::AutoScaling
     #
     #       {
     #         lifecycle_hook_name: "AsciiStringMaxLen255", # required
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #       }
     #
     # @!attribute [rw] lifecycle_hook_name
@@ -1680,8 +1680,8 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
-    #         topic_arn: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #         topic_arn: "XmlStringMaxLen255", # required
     #       }
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -1706,7 +1706,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName",
+    #         auto_scaling_group_name: "XmlStringMaxLen255",
     #         policy_name: "ResourceName", # required
     #       }
     #
@@ -1731,8 +1731,8 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
-    #         scheduled_action_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #         scheduled_action_name: "XmlStringMaxLen255", # required
     #       }
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -1956,7 +1956,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         lifecycle_hook_names: ["AsciiStringMaxLen255"],
     #       }
     #
@@ -1982,7 +1982,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         next_token: "XmlString",
     #         max_records: 1,
     #       }
@@ -2036,7 +2036,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         next_token: "XmlString",
     #         max_records: 1,
     #       }
@@ -2128,7 +2128,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_names: ["ResourceName"],
+    #         auto_scaling_group_names: ["XmlStringMaxLen255"],
     #         next_token: "XmlString",
     #         max_records: 1,
     #       }
@@ -2161,7 +2161,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName",
+    #         auto_scaling_group_name: "XmlStringMaxLen255",
     #         policy_names: ["ResourceName"],
     #         policy_types: ["XmlStringMaxLen64"],
     #         next_token: "XmlString",
@@ -2211,7 +2211,7 @@ module Aws::AutoScaling
     #
     #       {
     #         activity_ids: ["XmlString"],
-    #         auto_scaling_group_name: "ResourceName",
+    #         auto_scaling_group_name: "XmlStringMaxLen255",
     #         max_records: 1,
     #         next_token: "XmlString",
     #       }
@@ -2253,8 +2253,8 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName",
-    #         scheduled_action_names: ["ResourceName"],
+    #         auto_scaling_group_name: "XmlStringMaxLen255",
+    #         scheduled_action_names: ["XmlStringMaxLen255"],
     #         start_time: Time.now,
     #         end_time: Time.now,
     #         next_token: "XmlString",
@@ -2378,7 +2378,7 @@ module Aws::AutoScaling
     #
     #       {
     #         instance_ids: ["XmlStringMaxLen19"],
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         should_decrement_desired_capacity: false, # required
     #       }
     #
@@ -2413,7 +2413,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         target_group_arns: ["XmlStringMaxLen511"], # required
     #       }
     #
@@ -2443,7 +2443,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         load_balancer_names: ["XmlStringMaxLen255"], # required
     #       }
     #
@@ -2469,7 +2469,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         metrics: ["XmlStringMaxLen255"],
     #       }
     #
@@ -2642,7 +2642,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         metrics: ["XmlStringMaxLen255"],
     #         granularity: "XmlStringMaxLen255", # required
     #       }
@@ -2764,7 +2764,7 @@ module Aws::AutoScaling
     #
     #       {
     #         instance_ids: ["XmlStringMaxLen19"],
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         should_decrement_desired_capacity: false, # required
     #       }
     #
@@ -2795,7 +2795,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName",
+    #         auto_scaling_group_name: "XmlStringMaxLen255",
     #         policy_name: "ResourceName", # required
     #         honor_cooldown: false,
     #         metric_value: 1.0,
@@ -2873,7 +2873,7 @@ module Aws::AutoScaling
     #
     #       {
     #         instance_ids: ["XmlStringMaxLen19"],
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #       }
     #
     # @!attribute [rw] instance_ids
@@ -3526,7 +3526,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         launch_configuration_name: "ResourceName", # required
+    #         launch_configuration_name: "XmlStringMaxLen255", # required
     #       }
     #
     # @!attribute [rw] launch_configuration_name
@@ -3545,7 +3545,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         launch_configuration_names: ["ResourceName"],
+    #         launch_configuration_names: ["XmlStringMaxLen255"],
     #         next_token: "XmlString",
     #         max_records: 1,
     #       }
@@ -3923,7 +3923,7 @@ module Aws::AutoScaling
     #         heartbeat_timeout: 1,
     #         default_result: "LifecycleActionResult",
     #         notification_target_arn: "NotificationTargetResourceName",
-    #         role_arn: "ResourceName",
+    #         role_arn: "XmlStringMaxLen255",
     #       }
     #
     # @!attribute [rw] lifecycle_hook_name
@@ -4452,9 +4452,9 @@ module Aws::AutoScaling
     #
     #       {
     #         lifecycle_hook_name: "AsciiStringMaxLen255", # required
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         lifecycle_transition: "LifecycleTransition",
-    #         role_arn: "ResourceName",
+    #         role_arn: "XmlStringMaxLen255",
     #         notification_target_arn: "NotificationTargetResourceName",
     #         notification_metadata: "XmlStringMaxLen1023",
     #         heartbeat_timeout: 1,
@@ -4550,8 +4550,8 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
-    #         topic_arn: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #         topic_arn: "XmlStringMaxLen255", # required
     #         notification_types: ["XmlStringMaxLen255"], # required
     #       }
     #
@@ -4584,7 +4584,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         policy_name: "XmlStringMaxLen255", # required
     #         policy_type: "XmlStringMaxLen64",
     #         adjustment_type: "XmlStringMaxLen255",
@@ -4798,7 +4798,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         scheduled_action_name: "XmlStringMaxLen255", # required
     #         time: Time.now,
     #         start_time: Time.now,
@@ -5119,7 +5119,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         scaling_processes: ["XmlStringMaxLen255"],
     #       }
     #
@@ -5349,7 +5349,7 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         desired_capacity: 1, # required
     #         honor_cooldown: false,
     #       }
@@ -5436,7 +5436,7 @@ module Aws::AutoScaling
     #
     #       {
     #         instance_ids: ["XmlStringMaxLen19"], # required
-    #         auto_scaling_group_name: "ResourceName", # required
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         protected_from_scale_in: false, # required
     #       }
     #
@@ -5830,8 +5830,8 @@ module Aws::AutoScaling
     #   data as a hash:
     #
     #       {
-    #         auto_scaling_group_name: "ResourceName", # required
-    #         launch_configuration_name: "ResourceName",
+    #         auto_scaling_group_name: "XmlStringMaxLen255", # required
+    #         launch_configuration_name: "XmlStringMaxLen255",
     #         launch_template: {
     #           launch_template_id: "XmlStringMaxLen255",
     #           launch_template_name: "LaunchTemplateName",

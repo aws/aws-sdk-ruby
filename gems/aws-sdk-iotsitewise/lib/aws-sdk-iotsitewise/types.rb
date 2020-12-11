@@ -112,6 +112,36 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Contains information about a composite model in an asset. This object
+    # contains the asset's properties that you define in the composite
+    # model.
+    #
+    # @!attribute [rw] name
+    #   The name of the composite model.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the composite model.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the composite model. For alarm composite models, this
+    #   type is `AWS/ALARM`.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   The asset properties that this composite model defines.
+    #   @return [Array<Types::AssetProperty>]
+    #
+    class AssetCompositeModel < Struct.new(
+      :name,
+      :description,
+      :type,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains error details for the requested associate project asset
     # action.
     #
@@ -154,6 +184,191 @@ module Aws::IoTSiteWise
     class AssetHierarchy < Struct.new(
       :id,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a parent asset and a child asset that are
+    # related through an asset hierarchy.
+    #
+    # @!attribute [rw] parent_asset_id
+    #   The ID of the parent asset in this asset relationship.
+    #   @return [String]
+    #
+    # @!attribute [rw] child_asset_id
+    #   The ID of the child asset in this asset relationship.
+    #   @return [String]
+    #
+    class AssetHierarchyInfo < Struct.new(
+      :parent_asset_id,
+      :child_asset_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a composite model in an asset model. This
+    # object contains the asset property definitions that you define in the
+    # composite model.
+    #
+    # @note When making an API call, you may pass AssetModelCompositeModel
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         description: "Description",
+    #         type: "Name", # required
+    #         properties: [
+    #           {
+    #             id: "ID",
+    #             name: "Name", # required
+    #             data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
+    #             data_type_spec: "Name",
+    #             unit: "PropertyUnit",
+    #             type: { # required
+    #               attribute: {
+    #                 default_value: "DefaultValue",
+    #               },
+    #               measurement: {
+    #               },
+    #               transform: {
+    #                 expression: "Expression", # required
+    #                 variables: [ # required
+    #                   {
+    #                     name: "VariableName", # required
+    #                     value: { # required
+    #                       property_id: "Macro", # required
+    #                       hierarchy_id: "Macro",
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #               metric: {
+    #                 expression: "Expression", # required
+    #                 variables: [ # required
+    #                   {
+    #                     name: "VariableName", # required
+    #                     value: { # required
+    #                       property_id: "Macro", # required
+    #                       hierarchy_id: "Macro",
+    #                     },
+    #                   },
+    #                 ],
+    #                 window: { # required
+    #                   tumbling: {
+    #                     interval: "Interval", # required
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the composite model.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the composite model.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the composite model. For alarm composite models, this
+    #   type is `AWS/ALARM`.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   The asset property definitions for this composite model.
+    #   @return [Array<Types::AssetModelProperty>]
+    #
+    class AssetModelCompositeModel < Struct.new(
+      :name,
+      :description,
+      :type,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a composite model definition in an asset model. This
+    # composite model definition is applied to all assets created from the
+    # asset model.
+    #
+    # @note When making an API call, you may pass AssetModelCompositeModelDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         description: "Description",
+    #         type: "Name", # required
+    #         properties: [
+    #           {
+    #             name: "Name", # required
+    #             data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
+    #             data_type_spec: "Name",
+    #             unit: "PropertyUnit",
+    #             type: { # required
+    #               attribute: {
+    #                 default_value: "DefaultValue",
+    #               },
+    #               measurement: {
+    #               },
+    #               transform: {
+    #                 expression: "Expression", # required
+    #                 variables: [ # required
+    #                   {
+    #                     name: "VariableName", # required
+    #                     value: { # required
+    #                       property_id: "Macro", # required
+    #                       hierarchy_id: "Macro",
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #               metric: {
+    #                 expression: "Expression", # required
+    #                 variables: [ # required
+    #                   {
+    #                     name: "VariableName", # required
+    #                     value: { # required
+    #                       property_id: "Macro", # required
+    #                       hierarchy_id: "Macro",
+    #                     },
+    #                   },
+    #                 ],
+    #                 window: { # required
+    #                   tumbling: {
+    #                     interval: "Interval", # required
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the composite model.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the composite model.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the composite model. For alarm composite models, this
+    #   type is `AWS/ALARM`.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   The asset property definitions for this composite model.
+    #   @return [Array<Types::AssetModelPropertyDefinition>]
+    #
+    class AssetModelCompositeModelDefinition < Struct.new(
+      :name,
+      :description,
+      :type,
+      :properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -239,7 +454,8 @@ module Aws::IoTSiteWise
     #       {
     #         id: "ID",
     #         name: "Name", # required
-    #         data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN
+    #         data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
+    #         data_type_spec: "Name",
     #         unit: "PropertyUnit",
     #         type: { # required
     #           attribute: {
@@ -291,6 +507,11 @@ module Aws::IoTSiteWise
     #   The data type of the asset model property.
     #   @return [String]
     #
+    # @!attribute [rw] data_type_spec
+    #   The data type of the structure for this property. This parameter
+    #   exists on properties that have the `STRUCT` data type.
+    #   @return [String]
+    #
     # @!attribute [rw] unit
     #   The unit of the asset model property, such as `Newtons` or `RPM`.
     #   @return [String]
@@ -303,6 +524,7 @@ module Aws::IoTSiteWise
       :id,
       :name,
       :data_type,
+      :data_type_spec,
       :unit,
       :type)
       SENSITIVE = []
@@ -317,7 +539,8 @@ module Aws::IoTSiteWise
     #
     #       {
     #         name: "Name", # required
-    #         data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN
+    #         data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
+    #         data_type_spec: "Name",
     #         unit: "PropertyUnit",
     #         type: { # required
     #           attribute: {
@@ -363,6 +586,18 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] data_type
     #   The data type of the property definition.
+    #
+    #   If you specify `STRUCT`, you must also specify `dataTypeSpec` to
+    #   identify the type of the structure for this property.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type_spec
+    #   The data type of the structure for this property. This parameter is
+    #   required on properties that have the `STRUCT` data type.
+    #
+    #   The options for this parameter depend on the type of the composite
+    #   model in which you define this property. Use `AWS/ALARM_STATE` for
+    #   alarm state in alarm composite models.
     #   @return [String]
     #
     # @!attribute [rw] unit
@@ -377,6 +612,7 @@ module Aws::IoTSiteWise
     class AssetModelPropertyDefinition < Struct.new(
       :name,
       :data_type,
+      :data_type_spec,
       :unit,
       :type)
       SENSITIVE = []
@@ -489,6 +725,11 @@ module Aws::IoTSiteWise
     #   The data type of the asset property.
     #   @return [String]
     #
+    # @!attribute [rw] data_type_spec
+    #   The data type of the structure for this property. This parameter
+    #   exists on properties that have the `STRUCT` data type.
+    #   @return [String]
+    #
     # @!attribute [rw] unit
     #   The unit (such as `Newtons` or `RPM`) of the asset property.
     #   @return [String]
@@ -499,6 +740,7 @@ module Aws::IoTSiteWise
       :alias,
       :notification,
       :data_type,
+      :data_type_spec,
       :unit)
       SENSITIVE = []
       include Aws::Structure
@@ -539,6 +781,32 @@ module Aws::IoTSiteWise
       :value,
       :timestamp,
       :quality)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about assets that are related to one another.
+    #
+    # @!attribute [rw] hierarchy_info
+    #   The assets that are related through an asset hierarchy.
+    #
+    #   This object is present if the `relationshipType` is `HIERARCHY`.
+    #   @return [Types::AssetHierarchyInfo]
+    #
+    # @!attribute [rw] relationship_type
+    #   The relationship type of the assets in this relationship. This value
+    #   is one of the following:
+    #
+    #   * `HIERARCHY` – The assets are related through an asset hierarchy.
+    #     If you specify this relationship type, this asset relationship
+    #     includes the `hierarchyInfo` object.
+    #
+    #   ^
+    #   @return [String]
+    #
+    class AssetRelationshipSummary < Struct.new(
+      :hierarchy_info,
+      :relationship_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -937,10 +1205,36 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Contains information about a composite model property on an asset.
+    #
+    # @!attribute [rw] name
+    #   The name of the property.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the composite model that defines this property.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_property
+    #   Contains asset property information.
+    #   @return [Types::Property]
+    #
+    class CompositeModelProperty < Struct.new(
+      :name,
+      :type,
+      :asset_property)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the details of an AWS IoT SiteWise configuration error.
+    #
     # @!attribute [rw] code
+    #   The error code.
     #   @return [String]
     #
     # @!attribute [rw] message
+    #   The error message.
     #   @return [String]
     #
     class ConfigurationErrorDetails < Struct.new(
@@ -950,10 +1244,14 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Contains current status information for the configuration.
+    #
     # @!attribute [rw] state
+    #   The current state of the configuration.
     #   @return [String]
     #
     # @!attribute [rw] error
+    #   Contains associated error information, if any.
     #   @return [Types::ConfigurationErrorDetails]
     #
     class ConfigurationStatus < Struct.new(
@@ -1090,7 +1388,8 @@ module Aws::IoTSiteWise
     #         asset_model_properties: [
     #           {
     #             name: "Name", # required
-    #             data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN
+    #             data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
+    #             data_type_spec: "Name",
     #             unit: "PropertyUnit",
     #             type: { # required
     #               attribute: {
@@ -1136,6 +1435,57 @@ module Aws::IoTSiteWise
     #             child_asset_model_id: "ID", # required
     #           },
     #         ],
+    #         asset_model_composite_models: [
+    #           {
+    #             name: "Name", # required
+    #             description: "Description",
+    #             type: "Name", # required
+    #             properties: [
+    #               {
+    #                 name: "Name", # required
+    #                 data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
+    #                 data_type_spec: "Name",
+    #                 unit: "PropertyUnit",
+    #                 type: { # required
+    #                   attribute: {
+    #                     default_value: "DefaultValue",
+    #                   },
+    #                   measurement: {
+    #                   },
+    #                   transform: {
+    #                     expression: "Expression", # required
+    #                     variables: [ # required
+    #                       {
+    #                         name: "VariableName", # required
+    #                         value: { # required
+    #                           property_id: "Macro", # required
+    #                           hierarchy_id: "Macro",
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                   metric: {
+    #                     expression: "Expression", # required
+    #                     variables: [ # required
+    #                       {
+    #                         name: "VariableName", # required
+    #                         value: { # required
+    #                           property_id: "Macro", # required
+    #                           hierarchy_id: "Macro",
+    #                         },
+    #                       },
+    #                     ],
+    #                     window: { # required
+    #                       tumbling: {
+    #                         interval: "Interval", # required
+    #                       },
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         ],
     #         client_token: "ClientToken",
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -1178,6 +1528,14 @@ module Aws::IoTSiteWise
     #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
     #   @return [Array<Types::AssetModelHierarchyDefinition>]
     #
+    # @!attribute [rw] asset_model_composite_models
+    #   The composite asset models that are part of this asset model.
+    #   Composite asset models are asset models that contain specific
+    #   properties. Each composite model has a type that defines the
+    #   properties that the composite model supports. Use composite asset
+    #   models to define alarms on this asset model.
+    #   @return [Array<Types::AssetModelCompositeModelDefinition>]
+    #
     # @!attribute [rw] client_token
     #   A unique case-sensitive identifier that you can provide to ensure
     #   the idempotency of the request. Don't reuse this client token if a
@@ -1202,6 +1560,7 @@ module Aws::IoTSiteWise
       :asset_model_description,
       :asset_model_properties,
       :asset_model_hierarchies,
+      :asset_model_composite_models,
       :client_token,
       :tags)
       SENSITIVE = []
@@ -1542,10 +1901,8 @@ module Aws::IoTSiteWise
     #     Regions.
     #
     #   * `IAM` – The portal uses AWS Identity and Access Management (IAM)
-    #     to authenticate users and manage user permissions. IAM users must
-    #     have the `iotsitewise:CreatePresignedPortalUrl` permission to sign
-    #     in to the portal. This option is only available in the China
-    #     Regions.
+    #     to authenticate users and manage user permissions. This option is
+    #     only available in the China Regions.
     #
     #   You can't change this value after you create a portal.
     #
@@ -1586,13 +1943,8 @@ module Aws::IoTSiteWise
     # @!attribute [rw] portal_start_url
     #   The URL for the AWS IoT SiteWise Monitor portal. You can use this
     #   URL to access portals that use AWS SSO for authentication. For
-    #   portals that use IAM for authentication, you must use the
-    #   [CreatePresignedPortalUrl][1] operation to create a URL that you can
-    #   use to access the portal.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWS IoT SiteWise API ReferenceAPI_CreatePresignedPortalUrl.html
+    #   portals that use IAM for authentication, you must use the AWS IoT
+    #   SiteWise console to get a URL that you can use to access the portal.
     #   @return [String]
     #
     # @!attribute [rw] portal_status
@@ -1610,45 +1962,6 @@ module Aws::IoTSiteWise
       :portal_start_url,
       :portal_status,
       :sso_application_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass CreatePresignedPortalUrlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_id: "ID", # required
-    #         session_duration_seconds: 1,
-    #       }
-    #
-    # @!attribute [rw] portal_id
-    #   The ID of the portal to access.
-    #   @return [String]
-    #
-    # @!attribute [rw] session_duration_seconds
-    #   The duration (in seconds) for which the session at the URL is valid.
-    #
-    #   Default: 43,200 seconds (12 hours)
-    #   @return [Integer]
-    #
-    class CreatePresignedPortalUrlRequest < Struct.new(
-      :portal_id,
-      :session_duration_seconds)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] presigned_portal_url
-    #   The pre-signed URL to the portal. The URL contains the portal ID and
-    #   an authentication token that lets you access the portal. The URL has
-    #   the following format.
-    #
-    #   `https://<portal-id>.app.iotsitewise.aws/iam?token=<encrypted-token>`
-    #   @return [String]
-    #
-    class CreatePresignedPortalUrlResponse < Struct.new(
-      :presigned_portal_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2091,6 +2404,10 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] asset_model_properties
     #   The list of asset properties for the asset model.
+    #
+    #   This object doesn't include properties that you define in composite
+    #   models. You can find composite model properties in the
+    #   `assetModelCompositeModels` object.
     #   @return [Array<Types::AssetModelProperty>]
     #
     # @!attribute [rw] asset_model_hierarchies
@@ -2099,6 +2416,10 @@ module Aws::IoTSiteWise
     #   specifies allowed parent/child asset relationships for an asset
     #   model.
     #   @return [Array<Types::AssetModelHierarchy>]
+    #
+    # @!attribute [rw] asset_model_composite_models
+    #   The list of composite asset models for the asset model.
+    #   @return [Array<Types::AssetModelCompositeModel>]
     #
     # @!attribute [rw] asset_model_creation_date
     #   The date the asset model was created, in Unix epoch time.
@@ -2120,6 +2441,7 @@ module Aws::IoTSiteWise
       :asset_model_description,
       :asset_model_properties,
       :asset_model_hierarchies,
+      :asset_model_composite_models,
       :asset_model_creation_date,
       :asset_model_last_update_date,
       :asset_model_status)
@@ -2164,13 +2486,23 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] asset_property
     #   The asset property's definition, alias, and notification state.
+    #
+    #   This response includes this object for normal asset properties. If
+    #   you describe an asset property in a composite model, this response
+    #   includes the asset property information in `compositeModel`.
     #   @return [Types::Property]
+    #
+    # @!attribute [rw] composite_model
+    #   The composite asset model that declares this asset property, if this
+    #   asset property exists in a composite model.
+    #   @return [Types::CompositeModelProperty]
     #
     class DescribeAssetPropertyResponse < Struct.new(
       :asset_id,
       :asset_name,
       :asset_model_id,
-      :asset_property)
+      :asset_property,
+      :composite_model)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2216,12 +2548,20 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] asset_properties
     #   The list of asset properties for the asset.
+    #
+    #   This object doesn't include properties that you define in composite
+    #   models. You can find composite model properties in the
+    #   `assetCompositeModels` object.
     #   @return [Array<Types::AssetProperty>]
     #
     # @!attribute [rw] asset_hierarchies
     #   A list of asset hierarchies that each contain a `hierarchyId`. A
     #   hierarchy specifies allowed parent/child asset relationships.
     #   @return [Array<Types::AssetHierarchy>]
+    #
+    # @!attribute [rw] asset_composite_models
+    #   The composite models for the asset.
+    #   @return [Array<Types::AssetCompositeModel>]
     #
     # @!attribute [rw] asset_creation_date
     #   The date the asset was created, in Unix epoch time.
@@ -2243,6 +2583,7 @@ module Aws::IoTSiteWise
       :asset_model_id,
       :asset_properties,
       :asset_hierarchies,
+      :asset_composite_models,
       :asset_creation_date,
       :asset_last_update_date,
       :asset_status)
@@ -2549,13 +2890,8 @@ module Aws::IoTSiteWise
     # @!attribute [rw] portal_start_url
     #   The URL for the AWS IoT SiteWise Monitor portal. You can use this
     #   URL to access portals that use AWS SSO for authentication. For
-    #   portals that use IAM for authentication, you must use the
-    #   [CreatePresignedPortalUrl][1] operation to create a URL that you can
-    #   use to access the portal.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWS IoT SiteWise API ReferenceAPI_CreatePresignedPortalUrl.html
+    #   portals that use IAM for authentication, you must use the AWS IoT
+    #   SiteWise console to get a URL that you can use to access the portal.
     #   @return [String]
     #
     # @!attribute [rw] portal_contact_email
@@ -3175,10 +3511,8 @@ module Aws::IoTSiteWise
     #       }
     #
     # @!attribute [rw] arn
-    #   The ARN of the IAM user. IAM users must have the
-    #   `iotsitewise:CreatePresignedPortalUrl` permission to sign in to the
-    #   portal. For more information, see [IAM ARNs][1] in the *IAM User
-    #   Guide*.
+    #   The ARN of the IAM user. For more information, see [IAM ARNs][1] in
+    #   the *IAM User Guide*.
     #
     #   <note markdown="1"> If you delete the IAM user, access policies that contain this
     #   identity include an empty `arn`. You can delete the access policy
@@ -3487,6 +3821,65 @@ module Aws::IoTSiteWise
     #
     class ListAssetModelsResponse < Struct.new(
       :asset_model_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAssetRelationshipsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         asset_id: "ID", # required
+    #         traversal_type: "PATH_TO_ROOT", # required, accepts PATH_TO_ROOT
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] traversal_type
+    #   The type of traversal to use to identify asset relationships. Choose
+    #   the following option:
+    #
+    #   * `PATH_TO_ROOT` – Identify the asset's parent assets up to the
+    #     root asset. The asset that you specify in `assetId` is the first
+    #     result in the list of `assetRelationshipSummaries`, and the root
+    #     asset is the last result.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per paginated request.
+    #   @return [Integer]
+    #
+    class ListAssetRelationshipsRequest < Struct.new(
+      :asset_id,
+      :traversal_type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_relationship_summaries
+    #   A list that summarizes each asset relationship.
+    #   @return [Array<Types::AssetRelationshipSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    class ListAssetRelationshipsResponse < Struct.new(
+      :asset_relationship_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4089,13 +4482,8 @@ module Aws::IoTSiteWise
     # @!attribute [rw] start_url
     #   The URL for the AWS IoT SiteWise Monitor portal. You can use this
     #   URL to access portals that use AWS SSO for authentication. For
-    #   portals that use IAM for authentication, you must use the
-    #   [CreatePresignedPortalUrl][1] operation to create a URL that you can
-    #   use to access the portal.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWS IoT SiteWise API ReferenceAPI_CreatePresignedPortalUrl.html
+    #   portals that use IAM for authentication, you must use the AWS IoT
+    #   SiteWise console to get a URL that you can use to access the portal.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -4756,6 +5144,17 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # You are not authorized.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -4864,7 +5263,8 @@ module Aws::IoTSiteWise
     #           {
     #             id: "ID",
     #             name: "Name", # required
-    #             data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN
+    #             data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
+    #             data_type_spec: "Name",
     #             unit: "PropertyUnit",
     #             type: { # required
     #               attribute: {
@@ -4911,6 +5311,58 @@ module Aws::IoTSiteWise
     #             child_asset_model_id: "ID", # required
     #           },
     #         ],
+    #         asset_model_composite_models: [
+    #           {
+    #             name: "Name", # required
+    #             description: "Description",
+    #             type: "Name", # required
+    #             properties: [
+    #               {
+    #                 id: "ID",
+    #                 name: "Name", # required
+    #                 data_type: "STRING", # required, accepts STRING, INTEGER, DOUBLE, BOOLEAN, STRUCT
+    #                 data_type_spec: "Name",
+    #                 unit: "PropertyUnit",
+    #                 type: { # required
+    #                   attribute: {
+    #                     default_value: "DefaultValue",
+    #                   },
+    #                   measurement: {
+    #                   },
+    #                   transform: {
+    #                     expression: "Expression", # required
+    #                     variables: [ # required
+    #                       {
+    #                         name: "VariableName", # required
+    #                         value: { # required
+    #                           property_id: "Macro", # required
+    #                           hierarchy_id: "Macro",
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                   metric: {
+    #                     expression: "Expression", # required
+    #                     variables: [ # required
+    #                       {
+    #                         name: "VariableName", # required
+    #                         value: { # required
+    #                           property_id: "Macro", # required
+    #                           hierarchy_id: "Macro",
+    #                         },
+    #                       },
+    #                     ],
+    #                     window: { # required
+    #                       tumbling: {
+    #                         interval: "Interval", # required
+    #                       },
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         ],
     #         client_token: "ClientToken",
     #       }
     #
@@ -4955,6 +5407,14 @@ module Aws::IoTSiteWise
     #   [2]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
     #   @return [Array<Types::AssetModelHierarchy>]
     #
+    # @!attribute [rw] asset_model_composite_models
+    #   The composite asset models that are part of this asset model.
+    #   Composite asset models are asset models that contain specific
+    #   properties. Each composite model has a type that defines the
+    #   properties that the composite model supports. Use composite asset
+    #   models to define alarms on this asset model.
+    #   @return [Array<Types::AssetModelCompositeModel>]
+    #
     # @!attribute [rw] client_token
     #   A unique case-sensitive identifier that you can provide to ensure
     #   the idempotency of the request. Don't reuse this client token if a
@@ -4970,6 +5430,7 @@ module Aws::IoTSiteWise
       :asset_model_description,
       :asset_model_properties,
       :asset_model_hierarchies,
+      :asset_model_composite_models,
       :client_token)
       SENSITIVE = []
       include Aws::Structure

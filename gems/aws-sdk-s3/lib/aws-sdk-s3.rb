@@ -69,6 +69,6 @@ require_relative 'aws-sdk-s3/event_streams'
 # @!group service
 module Aws::S3
 
-  GEM_VERSION = '1.86.0'
+  GEM_VERSION = '1.86.1'
 
 end

@@ -879,7 +879,7 @@ module Aws::AutoScaling
     # @example Request syntax with placeholder values
     #
     #   autoscalinggroup = auto_scaling_group.update({
-    #     launch_configuration_name: "ResourceName",
+    #     launch_configuration_name: "XmlStringMaxLen255",
     #     launch_template: {
     #       launch_template_id: "XmlStringMaxLen255",
     #       launch_template_name: "LaunchTemplateName",
@@ -1274,7 +1274,7 @@ module Aws::AutoScaling
     # @example Request syntax with placeholder values
     #
     #   scheduled_actions = auto_scaling_group.scheduled_actions({
-    #     scheduled_action_names: ["ResourceName"],
+    #     scheduled_action_names: ["XmlStringMaxLen255"],
     #     start_time: Time.now,
     #     end_time: Time.now,
     #   })

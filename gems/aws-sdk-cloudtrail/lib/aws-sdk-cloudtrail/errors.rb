@@ -29,6 +29,7 @@ module Aws::CloudTrail
   # ## Error Classes
   # * {CloudTrailARNInvalidException}
   # * {CloudTrailAccessNotEnabledException}
+  # * {CloudTrailInvalidClientTokenIdException}
   # * {CloudWatchLogsDeliveryUnavailableException}
   # * {InsightNotEnabledException}
   # * {InsufficientDependencyServiceAccessPermissionException}
@@ -91,6 +92,16 @@ module Aws::CloudTrail
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudTrail::Types::CloudTrailAccessNotEnabledException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class CloudTrailInvalidClientTokenIdException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::CloudTrailInvalidClientTokenIdException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
