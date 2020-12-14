@@ -1695,6 +1695,8 @@ module Aws::GlobalAccelerator
     #   * {Types::ListByoipCidrsResponse#byoip_cidrs #byoip_cidrs} => Array&lt;Types::ByoipCidr&gt;
     #   * {Types::ListByoipCidrsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_byoip_cidrs({
@@ -2854,7 +2856,7 @@ module Aws::GlobalAccelerator
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-globalaccelerator'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.217.0 (2020-12-14)
+------------------
+
+* Feature - Add c5n.metal to ec2 instance types list
+
 1.216.0 (2020-12-10)
 ------------------
 

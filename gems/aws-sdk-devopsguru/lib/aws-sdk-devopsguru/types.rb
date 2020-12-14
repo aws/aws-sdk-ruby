@@ -10,6 +10,15 @@
 module Aws::DevOpsGuru
   module Types
 
+    # You don't have permissions to perform the requested operation. The
+    # user or role that is making the request must have at least one IAM
+    # permissions policy attached that grants the required permissions. For
+    # more information, see [Access Management][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -27,12 +36,15 @@ module Aws::DevOpsGuru
     #       {
     #         config: { # required
     #           sns: { # required
-    #             topic_arn: "__stringMin36Max1024PatternArnAwsAZ09SnsAZ09D12",
+    #             topic_arn: "TopicArn",
     #           },
     #         },
     #       }
     #
     # @!attribute [rw] config
+    #   A `NotificationChannelConfig` object that specifies what type of
+    #   notification channel to add. The one supported notification channel
+    #   is Amazon Simple Notification Service (Amazon SNS).
     #   @return [Types::NotificationChannelConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/AddNotificationChannelRequest AWS API Documentation
@@ -44,6 +56,7 @@ module Aws::DevOpsGuru
     end
 
     # @!attribute [rw] id
+    #   The ID of the added notification channel.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/AddNotificationChannelResponse AWS API Documentation
@@ -54,7 +67,14 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Details about the source of the anomalous operational data that
+    # triggered the anomaly. The one supported source is Amazon CloudWatch
+    # metrics.
+    #
     # @!attribute [rw] cloud_watch_metrics
+    #   An array of `CloudWatchMetricsDetail` object that contains
+    #   information about the analyzed metrics that displayed anomalous
+    #   behavior.
     #   @return [Array<Types::CloudWatchMetricsDetail>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/AnomalySourceDetails AWS API Documentation
@@ -65,29 +85,43 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @!attribute [rw] end_time
-    #   @return [Time]
+    # A time range that specifies when the observed unusual behavior in an
+    # anomaly started and ended.
     #
     # @!attribute [rw] start_time
+    #   The time when the anomalous behavior started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time when the anomalous behavior ended.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/AnomalyTimeRange AWS API Documentation
     #
     class AnomalyTimeRange < Struct.new(
-      :end_time,
-      :start_time)
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # Information about AWS CloudFormation stacks. You can use stacks to
+    # specify which AWS resources in your account to analyze. For more
+    # information, see [Stacks][1] in the *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html
+    #
     # @note When making an API call, you may pass CloudFormationCollection
     #   data as a hash:
     #
     #       {
-    #         stack_names: ["__stringMin1Max128PatternAZAZAZAZ09"],
+    #         stack_names: ["StackName"],
     #       }
     #
     # @!attribute [rw] stack_names
+    #   An array of CloudFormation stack names.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/CloudFormationCollection AWS API Documentation
@@ -98,7 +132,16 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Information about AWS CloudFormation stacks. You can use stacks to
+    # specify which AWS resources in your account to analyze. For more
+    # information, see [Stacks][1] in the *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html
+    #
     # @!attribute [rw] stack_names
+    #   An array of CloudFormation stack names.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/CloudFormationCollectionFilter AWS API Documentation
@@ -109,56 +152,94 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @!attribute [rw] insight
-    #   @return [Types::InsightHealth]
+    # Information about the health of AWS resources in your account that are
+    # specified by an AWS CloudFormation stack.
     #
     # @!attribute [rw] stack_name
+    #   The name of the CloudFormation stack.
     #   @return [String]
+    #
+    # @!attribute [rw] insight
+    #   Information about the health of the AWS resources in your account
+    #   that are specified by an AWS CloudFormation stack, including the
+    #   number of open proactive, open reactive insights, and the Mean Time
+    #   to Recover (MTTR) of closed insights.
+    #   @return [Types::InsightHealth]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/CloudFormationHealth AWS API Documentation
     #
     class CloudFormationHealth < Struct.new(
-      :insight,
-      :stack_name)
+      :stack_name,
+      :insight)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] dimensions
-    #   @return [Array<Types::CloudWatchMetricsDimension>]
+    # Information about an Amazon CloudWatch metric.
     #
     # @!attribute [rw] metric_name
+    #   The name of the CloudWatch metric.
     #   @return [String]
     #
     # @!attribute [rw] namespace
+    #   The namespace of the CloudWatch metric. A namespace is a container
+    #   for CloudWatch metrics.
     #   @return [String]
     #
-    # @!attribute [rw] period
-    #   @return [Integer]
+    # @!attribute [rw] dimensions
+    #   An array of CloudWatch dimensions associated with
+    #   @return [Array<Types::CloudWatchMetricsDimension>]
     #
     # @!attribute [rw] stat
+    #   The type of statistic associated with the CloudWatch metric. For
+    #   more information, see [Statistics][1] in the *Amazon CloudWatch User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic
     #   @return [String]
     #
     # @!attribute [rw] unit
+    #   The unit of measure used for the CloudWatch metric. For example,
+    #   `Bytes`, `Seconds`, `Count`, and `Percent`.
     #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   The length of time associated with the CloudWatch metric in number
+    #   of seconds.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/CloudWatchMetricsDetail AWS API Documentation
     #
     class CloudWatchMetricsDetail < Struct.new(
-      :dimensions,
       :metric_name,
       :namespace,
-      :period,
+      :dimensions,
       :stat,
-      :unit)
+      :unit,
+      :period)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # The dimension of a Amazon CloudWatch metric that is used when DevOps
+    # Guru analyzes the resources in your account for operational problems
+    # and anomalous behaviour. A dimension is a name/value pair that is part
+    # of the identity of a metric. A metric can have up to 10 dimensions.
+    # For more information, see [Dimensions][1] in the *Amazon CloudWatch
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension
+    #
     # @!attribute [rw] name
+    #   The name of the CloudWatch dimension.
     #   @return [String]
     #
     # @!attribute [rw] value
+    #   The value of the CloudWatch dimension.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/CloudWatchMetricsDimension AWS API Documentation
@@ -170,13 +251,17 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # An exception that is thrown when a conflict occurs.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
     # @!attribute [rw] resource_id
+    #   The ID of the AWS resource in which a conflict occurred.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
+    #   The type of the AWS resource in which a conflict occurred.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ConflictException AWS API Documentation
@@ -195,21 +280,27 @@ module Aws::DevOpsGuru
     #
     class DescribeAccountHealthRequest < Aws::EmptyStructure; end
 
-    # @!attribute [rw] metrics_analyzed
+    # @!attribute [rw] open_reactive_insights
+    #   An integer that specifies the number of open reactive insights in
+    #   your AWS account.
     #   @return [Integer]
     #
     # @!attribute [rw] open_proactive_insights
+    #   An integer that specifies the number of open proactive insights in
+    #   your AWS account.
     #   @return [Integer]
     #
-    # @!attribute [rw] open_reactive_insights
+    # @!attribute [rw] metrics_analyzed
+    #   An integer that specifies the number of metrics that have been
+    #   analyzed in your AWS account.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAccountHealthResponse AWS API Documentation
     #
     class DescribeAccountHealthResponse < Struct.new(
-      :metrics_analyzed,
+      :open_reactive_insights,
       :open_proactive_insights,
-      :open_reactive_insights)
+      :metrics_analyzed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -223,9 +314,16 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] from_time
+    #   The start of the time range passed in. The start time granularity is
+    #   at the day level. The floor of the start time is used. Returned
+    #   information occurred after this day.
     #   @return [Time]
     #
     # @!attribute [rw] to_time
+    #   The end of the time range passed in. The start time granularity is
+    #   at the day level. The floor of the start time is used. Returned
+    #   information occurred before this day. If this is not specified, then
+    #   the current day is used.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAccountOverviewRequest AWS API Documentation
@@ -237,21 +335,27 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @!attribute [rw] mean_time_to_recover_in_milliseconds
+    # @!attribute [rw] reactive_insights
+    #   An integer that specifies the number of open reactive insights in
+    #   your AWS account that were created during the time range passed in.
     #   @return [Integer]
     #
     # @!attribute [rw] proactive_insights
+    #   An integer that specifies the number of open proactive insights in
+    #   your AWS account that were created during the time range passed in.
     #   @return [Integer]
     #
-    # @!attribute [rw] reactive_insights
+    # @!attribute [rw] mean_time_to_recover_in_milliseconds
+    #   The Mean Time to Recover (MTTR) for all closed insights that were
+    #   created during the time range passed in.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAccountOverviewResponse AWS API Documentation
     #
     class DescribeAccountOverviewResponse < Struct.new(
-      :mean_time_to_recover_in_milliseconds,
+      :reactive_insights,
       :proactive_insights,
-      :reactive_insights)
+      :mean_time_to_recover_in_milliseconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -260,10 +364,11 @@ module Aws::DevOpsGuru
     #   data as a hash:
     #
     #       {
-    #         id: "__string", # required
+    #         id: "AnomalyId", # required
     #       }
     #
     # @!attribute [rw] id
+    #   The ID of the anomaly.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAnomalyRequest AWS API Documentation
@@ -275,9 +380,11 @@ module Aws::DevOpsGuru
     end
 
     # @!attribute [rw] proactive_anomaly
+    #   An `ReactiveAnomaly` object that represents the requested anomaly.
     #   @return [Types::ProactiveAnomaly]
     #
     # @!attribute [rw] reactive_anomaly
+    #   An `ProactiveAnomaly` object that represents the requested anomaly.
     #   @return [Types::ReactiveAnomaly]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAnomalyResponse AWS API Documentation
@@ -293,10 +400,11 @@ module Aws::DevOpsGuru
     #   data as a hash:
     #
     #       {
-    #         id: "__string", # required
+    #         id: "InsightId", # required
     #       }
     #
     # @!attribute [rw] id
+    #   The ID of the insight.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeInsightRequest AWS API Documentation
@@ -308,9 +416,11 @@ module Aws::DevOpsGuru
     end
 
     # @!attribute [rw] proactive_insight
+    #   An `ProactiveInsight` object that represents the requested insight.
     #   @return [Types::ProactiveInsight]
     #
     # @!attribute [rw] reactive_insight
+    #   An `ReactiveInsight` object that represents the requested insight.
     #   @return [Types::ReactiveInsight]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeInsightResponse AWS API Documentation
@@ -326,29 +436,41 @@ module Aws::DevOpsGuru
     #   data as a hash:
     #
     #       {
-    #         next_token: "__string",
-    #         resource_collection_type: "__string", # required
+    #         resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION
+    #         next_token: "UuidNextToken",
     #       }
     #
-    # @!attribute [rw] next_token
+    # @!attribute [rw] resource_collection_type
+    #   An AWS resource collection type. This type specifies how analyzed
+    #   AWS resources are defined. The one type of AWS resource collection
+    #   supported is AWS CloudFormation stacks. DevOps Guru can be
+    #   configured to analyze only the AWS resources that are defined in the
+    #   stacks.
     #   @return [String]
     #
-    # @!attribute [rw] resource_collection_type
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeResourceCollectionHealthRequest AWS API Documentation
     #
     class DescribeResourceCollectionHealthRequest < Struct.new(
-      :next_token,
-      :resource_collection_type)
+      :resource_collection_type,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] cloud_formation
+    #   The returned `CloudFormationHealthOverview` object that contains an
+    #   `InsightHealthOverview` object with the requested system health
+    #   information.
     #   @return [Array<Types::CloudFormationHealth>]
     #
     # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeResourceCollectionHealthResponse AWS API Documentation
@@ -367,6 +489,8 @@ module Aws::DevOpsGuru
     class DescribeServiceIntegrationRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] service_integration
+    #   Information about the integration of DevOps Guru with another AWS
+    #   service, such as AWS Systems Manager.
     #   @return [Types::ServiceIntegrationConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeServiceIntegrationResponse AWS API Documentation
@@ -377,6 +501,9 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # A range of time that specifies when anomalous behavior in an anomaly
+    # or insight ended.
+    #
     # @note When making an API call, you may pass EndTimeRange
     #   data as a hash:
     #
@@ -386,9 +513,11 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] from_time
+    #   The earliest end time in the time range.
     #   @return [Time]
     #
     # @!attribute [rw] to_time
+    #   The latest end time in the time range.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/EndTimeRange AWS API Documentation
@@ -400,64 +529,95 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @!attribute [rw] data_source
-    #   @return [String]
+    # An AWS resource event. AWS resource events and metrics are analyzed by
+    # DevOps Guru to find anomalous behavior and provide recommendations to
+    # improve your operational solutions.
     #
-    # @!attribute [rw] event_class
-    #   @return [String]
-    #
-    # @!attribute [rw] event_source
-    #   @return [String]
+    # @!attribute [rw] resource_collection
+    #   A collection of AWS resources supported by DevOps Guru. The one type
+    #   of AWS resource collection supported is AWS CloudFormation stacks.
+    #   DevOps Guru can be configured to analyze only the AWS resources that
+    #   are defined in the stacks.
+    #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] id
+    #   The ID of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] time
+    #   A `Timestamp` that specifies the time the event occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] event_source
+    #   The AWS source that emitted the event.
     #   @return [String]
     #
     # @!attribute [rw] name
+    #   The name of the event.
     #   @return [String]
     #
-    # @!attribute [rw] resource_collection
-    #   @return [Types::ResourceCollection]
+    # @!attribute [rw] data_source
+    #   The source, `AWS_CLOUD_TRAIL` or `AWS_CODE_DEPLOY`, where DevOps
+    #   Guru analysis found the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_class
+    #   The class of the event. The class specifies what the event is
+    #   related to, such as an infrastructure change, a deployment, or a
+    #   schema change.
+    #   @return [String]
     #
     # @!attribute [rw] resources
+    #   An `EventResource` object that contains information about the
+    #   resource that emitted the event.
     #   @return [Array<Types::EventResource>]
-    #
-    # @!attribute [rw] time
-    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/Event AWS API Documentation
     #
     class Event < Struct.new(
+      :resource_collection,
+      :id,
+      :time,
+      :event_source,
+      :name,
       :data_source,
       :event_class,
-      :event_source,
-      :id,
-      :name,
-      :resource_collection,
-      :resources,
-      :time)
+      :resources)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] arn
+    # The AWS resource that emitted an event. AWS resource events and
+    # metrics are analyzed by DevOps Guru to find anomalous behavior and
+    # provide recommendations to improve your operational solutions.
+    #
+    # @!attribute [rw] type
+    #   The type of resource that emitted an event.
     #   @return [String]
     #
     # @!attribute [rw] name
+    #   The name of the resource that emitted an event.
     #   @return [String]
     #
-    # @!attribute [rw] type
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the resource that emitted an
+    #   event.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/EventResource AWS API Documentation
     #
     class EventResource < Struct.new(
-      :arn,
+      :type,
       :name,
-      :type)
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # The time range during which an AWS event occurred. AWS resource events
+    # and metrics are analyzed by DevOps Guru to find anomalous behavior and
+    # provide recommendations to improve your operational solutions.
+    #
     # @note When making an API call, you may pass EventTimeRange
     #   data as a hash:
     #
@@ -467,9 +627,11 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] from_time
+    #   The time when the event started.
     #   @return [Time]
     #
     # @!attribute [rw] to_time
+    #   The time when the event ended.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/EventTimeRange AWS API Documentation
@@ -485,104 +647,137 @@ module Aws::DevOpsGuru
     #   data as a hash:
     #
     #       {
-    #         next_token: "__string",
-    #         resource_collection_type: "__string", # required
+    #         resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION
+    #         next_token: "UuidNextToken",
     #       }
     #
-    # @!attribute [rw] next_token
+    # @!attribute [rw] resource_collection_type
+    #   The type of AWS resource collections to return. The one valid value
+    #   is `CLOUD_FORMATION` for AWS CloudFormation stacks.
     #   @return [String]
     #
-    # @!attribute [rw] resource_collection_type
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/GetResourceCollectionRequest AWS API Documentation
     #
     class GetResourceCollectionRequest < Struct.new(
-      :next_token,
-      :resource_collection_type)
+      :resource_collection_type,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] next_token
-    #   @return [String]
-    #
     # @!attribute [rw] resource_collection
+    #   The requested list of AWS resource collections. The one type of AWS
+    #   resource collection supported is AWS CloudFormation stacks. DevOps
+    #   Guru can be configured to analyze only the AWS resources that are
+    #   defined in the stacks.
     #   @return [Types::ResourceCollectionFilter]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/GetResourceCollectionResponse AWS API Documentation
     #
     class GetResourceCollectionResponse < Struct.new(
-      :next_token,
-      :resource_collection)
+      :resource_collection,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # Information about insight feedback received from a customer.
+    #
     # @note When making an API call, you may pass InsightFeedback
     #   data as a hash:
     #
     #       {
+    #         id: "InsightId",
     #         feedback: "VALID_COLLECTION", # accepts VALID_COLLECTION, RECOMMENDATION_USEFUL, ALERT_TOO_SENSITIVE, DATA_NOISY_ANOMALY, DATA_INCORRECT
-    #         id: "__stringMin1Max100PatternW",
     #       }
     #
-    # @!attribute [rw] feedback
+    # @!attribute [rw] id
+    #   The insight feedback ID.
     #   @return [String]
     #
-    # @!attribute [rw] id
+    # @!attribute [rw] feedback
+    #   The feedback provided by the customer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/InsightFeedback AWS API Documentation
     #
     class InsightFeedback < Struct.new(
-      :feedback,
-      :id)
+      :id,
+      :feedback)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] mean_time_to_recover_in_milliseconds
-    #   @return [Integer]
+    # Information about the number of open reactive and proactive insights
+    # that can be used to gauge the health of your system.
     #
     # @!attribute [rw] open_proactive_insights
+    #   The number of open proactive insights.
     #   @return [Integer]
     #
     # @!attribute [rw] open_reactive_insights
+    #   The number of open reactive insights.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mean_time_to_recover_in_milliseconds
+    #   The Meant Time to Recover (MTTR) for the insight.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/InsightHealth AWS API Documentation
     #
     class InsightHealth < Struct.new(
-      :mean_time_to_recover_in_milliseconds,
       :open_proactive_insights,
-      :open_reactive_insights)
+      :open_reactive_insights,
+      :mean_time_to_recover_in_milliseconds)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] end_time
-    #   @return [Time]
+    # A time ranged that specifies when the observed behavior in an insight
+    # started and ended.
     #
     # @!attribute [rw] start_time
+    #   The time when the behavior described in an insight started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time when the behavior described in an insight ended.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/InsightTimeRange AWS API Documentation
     #
     class InsightTimeRange < Struct.new(
-      :end_time,
-      :start_time)
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # An internal failure in an Amazon service occurred.
+    #
     # @!attribute [rw] message
     #   @return [String]
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   The number of seconds after which the action that caused the
+    #   internal server exception can be retried.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/InternalServerException AWS API Documentation
     #
     class InternalServerException < Struct.new(
-      :message)
+      :message,
+      :retry_after_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -591,102 +786,133 @@ module Aws::DevOpsGuru
     #   data as a hash:
     #
     #       {
-    #         insight_id: "__string", # required
-    #         max_results: 1,
-    #         next_token: "__stringMin36Max36PatternAF098AF094AF094AF094AF0912",
+    #         insight_id: "InsightId", # required
     #         start_time_range: {
     #           from_time: Time.now,
     #           to_time: Time.now,
     #         },
+    #         max_results: 1,
+    #         next_token: "UuidNextToken",
     #       }
     #
     # @!attribute [rw] insight_id
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
+    #   The ID of the insight. The returned anomalies belong to this
+    #   insight.
     #   @return [String]
     #
     # @!attribute [rw] start_time_range
+    #   A time range used to specify when the requested anomalies started.
+    #   All returned anomalies started during this time range.
     #   @return [Types::StartTimeRange]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListAnomaliesForInsightRequest AWS API Documentation
     #
     class ListAnomaliesForInsightRequest < Struct.new(
       :insight_id,
+      :start_time_range,
       :max_results,
-      :next_token,
-      :start_time_range)
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] next_token
-    #   @return [String]
-    #
     # @!attribute [rw] proactive_anomalies
+    #   An array of `ProactiveAnomalySummary` objects that represent the
+    #   requested anomalies
     #   @return [Array<Types::ProactiveAnomalySummary>]
     #
     # @!attribute [rw] reactive_anomalies
+    #   An array of `ReactiveAnomalySummary` objects that represent the
+    #   requested anomalies
     #   @return [Array<Types::ReactiveAnomalySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListAnomaliesForInsightResponse AWS API Documentation
     #
     class ListAnomaliesForInsightResponse < Struct.new(
-      :next_token,
       :proactive_anomalies,
-      :reactive_anomalies)
+      :reactive_anomalies,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # Filters you can use to specify which events are returned when
+    # `ListEvents` is called.
+    #
     # @note When making an API call, you may pass ListEventsFilters
     #   data as a hash:
     #
     #       {
-    #         data_source: "AWS_CLOUD_TRAIL", # accepts AWS_CLOUD_TRAIL, AWS_CODE_DEPLOY
-    #         event_class: "INFRASTRUCTURE", # accepts INFRASTRUCTURE, DEPLOYMENT, SECURITY_CHANGE, CONFIG_CHANGE, SCHEMA_CHANGE
-    #         event_source: "__stringMin10Max50PatternAZAZ09AmazonawsComAwsEvents",
+    #         insight_id: "InsightId",
     #         event_time_range: {
     #           from_time: Time.now, # required
     #           to_time: Time.now, # required
     #         },
-    #         insight_id: "__stringMin1Max100PatternW",
+    #         event_class: "INFRASTRUCTURE", # accepts INFRASTRUCTURE, DEPLOYMENT, SECURITY_CHANGE, CONFIG_CHANGE, SCHEMA_CHANGE
+    #         event_source: "EventSource",
+    #         data_source: "AWS_CLOUD_TRAIL", # accepts AWS_CLOUD_TRAIL, AWS_CODE_DEPLOY
     #         resource_collection: {
     #           cloud_formation: {
-    #             stack_names: ["__stringMin1Max128PatternAZAZAZAZ09"],
+    #             stack_names: ["StackName"],
     #           },
     #         },
     #       }
     #
-    # @!attribute [rw] data_source
-    #   @return [String]
-    #
-    # @!attribute [rw] event_class
-    #   @return [String]
-    #
-    # @!attribute [rw] event_source
+    # @!attribute [rw] insight_id
+    #   An ID of an insight that is related to the events you want to filter
+    #   for.
     #   @return [String]
     #
     # @!attribute [rw] event_time_range
+    #   A time range during which you want the filtered events to have
+    #   occurred.
     #   @return [Types::EventTimeRange]
     #
-    # @!attribute [rw] insight_id
+    # @!attribute [rw] event_class
+    #   The class of the events you want to filter for, such as an
+    #   infrastructure change, a deployment, or a schema change.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_source
+    #   The AWS source that emitted the events you want to filter for.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The source, `AWS_CLOUD_TRAIL` or `AWS_CODE_DEPLOY`, of the events
+    #   you want returned.
     #   @return [String]
     #
     # @!attribute [rw] resource_collection
+    #   A collection of AWS resources supported by DevOps Guru. The one type
+    #   of AWS resource collection supported is AWS CloudFormation stacks.
+    #   DevOps Guru can be configured to analyze only the AWS resources that
+    #   are defined in the stacks.
     #   @return [Types::ResourceCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListEventsFilters AWS API Documentation
     #
     class ListEventsFilters < Struct.new(
-      :data_source,
+      :insight_id,
+      :event_time_range,
       :event_class,
       :event_source,
-      :event_time_range,
-      :insight_id,
+      :data_source,
       :resource_collection)
       SENSITIVE = []
       include Aws::Structure
@@ -697,31 +923,37 @@ module Aws::DevOpsGuru
     #
     #       {
     #         filters: { # required
-    #           data_source: "AWS_CLOUD_TRAIL", # accepts AWS_CLOUD_TRAIL, AWS_CODE_DEPLOY
-    #           event_class: "INFRASTRUCTURE", # accepts INFRASTRUCTURE, DEPLOYMENT, SECURITY_CHANGE, CONFIG_CHANGE, SCHEMA_CHANGE
-    #           event_source: "__stringMin10Max50PatternAZAZ09AmazonawsComAwsEvents",
+    #           insight_id: "InsightId",
     #           event_time_range: {
     #             from_time: Time.now, # required
     #             to_time: Time.now, # required
     #           },
-    #           insight_id: "__stringMin1Max100PatternW",
+    #           event_class: "INFRASTRUCTURE", # accepts INFRASTRUCTURE, DEPLOYMENT, SECURITY_CHANGE, CONFIG_CHANGE, SCHEMA_CHANGE
+    #           event_source: "EventSource",
+    #           data_source: "AWS_CLOUD_TRAIL", # accepts AWS_CLOUD_TRAIL, AWS_CODE_DEPLOY
     #           resource_collection: {
     #             cloud_formation: {
-    #               stack_names: ["__stringMin1Max128PatternAZAZAZAZ09"],
+    #               stack_names: ["StackName"],
     #             },
     #           },
     #         },
     #         max_results: 1,
-    #         next_token: "__stringMin36Max36PatternAF098AF094AF094AF094AF0912",
+    #         next_token: "UuidNextToken",
     #       }
     #
     # @!attribute [rw] filters
+    #   A `ListEventsFilters` object used to specify which events to return.
     #   @return [Types::ListEventsFilters]
     #
     # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListEventsRequest AWS API Documentation
@@ -735,9 +967,12 @@ module Aws::DevOpsGuru
     end
 
     # @!attribute [rw] events
+    #   A list of the requested events.
     #   @return [Array<Types::Event>]
     #
     # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListEventsResponse AWS API Documentation
@@ -749,58 +984,70 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Used to filter for insights that have any status.
+    #
     # @note When making an API call, you may pass ListInsightsAnyStatusFilter
     #   data as a hash:
     #
     #       {
+    #         type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
     #         start_time_range: { # required
     #           from_time: Time.now,
     #           to_time: Time.now,
     #         },
-    #         type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
     #       }
     #
-    # @!attribute [rw] start_time_range
-    #   @return [Types::StartTimeRange]
-    #
     # @!attribute [rw] type
+    #   Use to filter for either `REACTIVE` or `PROACTIVE` insights.
     #   @return [String]
+    #
+    # @!attribute [rw] start_time_range
+    #   A time range used to specify when the behavior of the filtered
+    #   insights started.
+    #   @return [Types::StartTimeRange]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListInsightsAnyStatusFilter AWS API Documentation
     #
     class ListInsightsAnyStatusFilter < Struct.new(
-      :start_time_range,
-      :type)
+      :type,
+      :start_time_range)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # Used to filter for insights that have the status `CLOSED`.
+    #
     # @note When making an API call, you may pass ListInsightsClosedStatusFilter
     #   data as a hash:
     #
     #       {
+    #         type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
     #         end_time_range: { # required
     #           from_time: Time.now,
     #           to_time: Time.now,
     #         },
-    #         type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
     #       }
     #
-    # @!attribute [rw] end_time_range
-    #   @return [Types::EndTimeRange]
-    #
     # @!attribute [rw] type
+    #   Use to filter for either `REACTIVE` or `PROACTIVE` insights.
     #   @return [String]
+    #
+    # @!attribute [rw] end_time_range
+    #   A time range used to specify when the behavior of the filtered
+    #   insights ended.
+    #   @return [Types::EndTimeRange]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListInsightsClosedStatusFilter AWS API Documentation
     #
     class ListInsightsClosedStatusFilter < Struct.new(
-      :end_time_range,
-      :type)
+      :type,
+      :end_time_range)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # Used to filter for insights that have the status `ONGOING`.
+    #
     # @note When making an API call, you may pass ListInsightsOngoingStatusFilter
     #   data as a hash:
     #
@@ -809,6 +1056,7 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] type
+    #   Use to filter for either `REACTIVE` or `PROACTIVE` insights.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListInsightsOngoingStatusFilter AWS API Documentation
@@ -823,105 +1071,124 @@ module Aws::DevOpsGuru
     #   data as a hash:
     #
     #       {
-    #         max_results: 1,
-    #         next_token: "__stringMin36Max36PatternAF098AF094AF094AF094AF0912",
     #         status_filter: { # required
-    #           any: {
-    #             start_time_range: { # required
-    #               from_time: Time.now,
-    #               to_time: Time.now,
-    #             },
+    #           ongoing: {
     #             type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
     #           },
     #           closed: {
+    #             type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
     #             end_time_range: { # required
     #               from_time: Time.now,
     #               to_time: Time.now,
     #             },
-    #             type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
     #           },
-    #           ongoing: {
+    #           any: {
     #             type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
+    #             start_time_range: { # required
+    #               from_time: Time.now,
+    #               to_time: Time.now,
+    #             },
     #           },
     #         },
+    #         max_results: 1,
+    #         next_token: "UuidNextToken",
     #       }
     #
+    # @!attribute [rw] status_filter
+    #   A filter used to filter the returned insights by their status. You
+    #   can specify one status filter.
+    #   @return [Types::ListInsightsStatusFilter]
+    #
     # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
-    #
-    # @!attribute [rw] status_filter
-    #   @return [Types::ListInsightsStatusFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListInsightsRequest AWS API Documentation
     #
     class ListInsightsRequest < Struct.new(
+      :status_filter,
       :max_results,
-      :next_token,
-      :status_filter)
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] next_token
-    #   @return [String]
-    #
     # @!attribute [rw] proactive_insights
+    #   The returned list of proactive insights.
     #   @return [Array<Types::ProactiveInsightSummary>]
     #
     # @!attribute [rw] reactive_insights
+    #   The returned list of reactive insights.
     #   @return [Array<Types::ReactiveInsightSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListInsightsResponse AWS API Documentation
     #
     class ListInsightsResponse < Struct.new(
-      :next_token,
       :proactive_insights,
-      :reactive_insights)
+      :reactive_insights,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # A filter used by `ListInsights` to specify which insights to return.
+    #
     # @note When making an API call, you may pass ListInsightsStatusFilter
     #   data as a hash:
     #
     #       {
-    #         any: {
-    #           start_time_range: { # required
-    #             from_time: Time.now,
-    #             to_time: Time.now,
-    #           },
+    #         ongoing: {
     #           type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
     #         },
     #         closed: {
+    #           type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
     #           end_time_range: { # required
     #             from_time: Time.now,
     #             to_time: Time.now,
     #           },
-    #           type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
     #         },
-    #         ongoing: {
+    #         any: {
     #           type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
+    #           start_time_range: { # required
+    #             from_time: Time.now,
+    #             to_time: Time.now,
+    #           },
     #         },
     #       }
     #
-    # @!attribute [rw] any
-    #   @return [Types::ListInsightsAnyStatusFilter]
+    # @!attribute [rw] ongoing
+    #   A `ListInsightsAnyStatusFilter` that specifies ongoing insights that
+    #   are either `REACTIVE` or `PROACTIVE`.
+    #   @return [Types::ListInsightsOngoingStatusFilter]
     #
     # @!attribute [rw] closed
+    #   A `ListInsightsClosedStatusFilter` that specifies closed insights
+    #   that are either `REACTIVE` or `PROACTIVE`.
     #   @return [Types::ListInsightsClosedStatusFilter]
     #
-    # @!attribute [rw] ongoing
-    #   @return [Types::ListInsightsOngoingStatusFilter]
+    # @!attribute [rw] any
+    #   A `ListInsightsAnyStatusFilter` that specifies insights of any
+    #   status that are either `REACTIVE` or `PROACTIVE`.
+    #   @return [Types::ListInsightsAnyStatusFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListInsightsStatusFilter AWS API Documentation
     #
     class ListInsightsStatusFilter < Struct.new(
-      :any,
+      :ongoing,
       :closed,
-      :ongoing)
+      :any)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -930,10 +1197,12 @@ module Aws::DevOpsGuru
     #   data as a hash:
     #
     #       {
-    #         next_token: "__stringMin36Max36PatternAF098AF094AF094AF094AF0912",
+    #         next_token: "UuidNextToken",
     #       }
     #
     # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListNotificationChannelsRequest AWS API Documentation
@@ -945,9 +1214,12 @@ module Aws::DevOpsGuru
     end
 
     # @!attribute [rw] channels
+    #   An array that contains the requested notification channels.
     #   @return [Array<Types::NotificationChannel>]
     #
     # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListNotificationChannelsResponse AWS API Documentation
@@ -963,14 +1235,17 @@ module Aws::DevOpsGuru
     #   data as a hash:
     #
     #       {
-    #         insight_id: "__stringMin1Max100PatternW", # required
-    #         next_token: "__stringMin36Max36PatternAF098AF094AF094AF094AF0912",
+    #         insight_id: "InsightId", # required
+    #         next_token: "UuidNextToken",
     #       }
     #
     # @!attribute [rw] insight_id
+    #   The ID of the requested insight.
     #   @return [String]
     #
     # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListRecommendationsRequest AWS API Documentation
@@ -982,46 +1257,96 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @!attribute [rw] next_token
-    #   @return [String]
-    #
     # @!attribute [rw] recommendations
+    #   An array of the requested recommendations.
     #   @return [Array<Types::Recommendation>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListRecommendationsResponse AWS API Documentation
     #
     class ListRecommendationsResponse < Struct.new(
-      :next_token,
-      :recommendations)
+      :recommendations,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] config
-    #   @return [Types::NotificationChannelConfig]
+    # Information about a notification channel. A notification channel is
+    # used to notify you when DevOps Guru creates an insight. The one
+    # supported notification channel is Amazon Simple Notification Service
+    # (Amazon SNS).
+    #
+    # If you use an Amazon SNS topic in another account, you must attach a
+    # policy to it that grants DevOps Guru permission to it notifications.
+    # DevOps Guru adds the required policy on your behalf to send
+    # notifications using Amazon SNS in your account. For more information,
+    # see [Permissions for cross account Amazon SNS topics][1].
+    #
+    # If you use an Amazon SNS topic that is encrypted by an AWS Key
+    # Management Service customer-managed key (CMK), then you must add
+    # permissions to the CMK. For more information, see [Permissions for AWS
+    # KMS–encrypted Amazon SNS topics][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html
+    # [2]: https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html
     #
     # @!attribute [rw] id
+    #   The ID of a notification channel.
     #   @return [String]
+    #
+    # @!attribute [rw] config
+    #   A `NotificationChannelConfig` object that contains information about
+    #   configured notification channels.
+    #   @return [Types::NotificationChannelConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/NotificationChannel AWS API Documentation
     #
     class NotificationChannel < Struct.new(
-      :config,
-      :id)
+      :id,
+      :config)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # Information about notification channels you have configured with
+    # DevOps Guru. The one supported notification channel is Amazon Simple
+    # Notification Service (Amazon SNS).
+    #
     # @note When making an API call, you may pass NotificationChannelConfig
     #   data as a hash:
     #
     #       {
     #         sns: { # required
-    #           topic_arn: "__stringMin36Max1024PatternArnAwsAZ09SnsAZ09D12",
+    #           topic_arn: "TopicArn",
     #         },
     #       }
     #
     # @!attribute [rw] sns
+    #   Information about a notification channel configured in DevOps Guru
+    #   to send notifications when insights are created.
+    #
+    #   If you use an Amazon SNS topic in another account, you must attach a
+    #   policy to it that grants DevOps Guru permission to it notifications.
+    #   DevOps Guru adds the required policy on your behalf to send
+    #   notifications using Amazon SNS in your account. For more
+    #   information, see [Permissions for cross account Amazon SNS
+    #   topics][1].
+    #
+    #   If you use an Amazon SNS topic that is encrypted by an AWS Key
+    #   Management Service customer-managed key (CMK), then you must add
+    #   permissions to the CMK. For more information, see [Permissions for
+    #   AWS KMS–encrypted Amazon SNS topics][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html
+    #   [2]: https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html
     #   @return [Types::SnsChannelConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/NotificationChannelConfig AWS API Documentation
@@ -1032,7 +1357,12 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Information about whether DevOps Guru is configured to create an
+    # OpsItem in AWS Systems Manager OpsCenter for each created insight.
+    #
     # @!attribute [rw] opt_in_status
+    #   Specifies if DevOps Guru is enabled to create an AWS Systems Manager
+    #   OpsItem for each created insight.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/OpsCenterIntegration AWS API Documentation
@@ -1043,6 +1373,9 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Information about whether DevOps Guru is configured to create an
+    # OpsItem in AWS Systems Manager OpsCenter for each created insight.
+    #
     # @note When making an API call, you may pass OpsCenterIntegrationConfig
     #   data as a hash:
     #
@@ -1051,6 +1384,8 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] opt_in_status
+    #   Specifies if DevOps Guru is enabled to create an AWS Systems Manager
+    #   OpsItem for each created insight.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/OpsCenterIntegrationConfig AWS API Documentation
@@ -1061,185 +1396,271 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # @!attribute [rw] end_time
-    #   @return [Time]
+    # The time range during which anomalous behavior in a proactive anomaly
+    # or an insight is expected to occur.
     #
     # @!attribute [rw] start_time
+    #   The time range during which a metric limit is expected to be
+    #   exceeded. This applies to proactive insights only.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time when the behavior in a proactive insight is expected to
+    #   end.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/PredictionTimeRange AWS API Documentation
     #
     class PredictionTimeRange < Struct.new(
-      :end_time,
-      :start_time)
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] anomaly_time_range
-    #   @return [Types::AnomalyTimeRange]
-    #
-    # @!attribute [rw] associated_insight_id
-    #   @return [String]
+    # Information about an anomaly. This object is returned by
+    # `ListAnomalies`.
     #
     # @!attribute [rw] id
+    #   The ID of a proactive anomaly.
     #   @return [String]
-    #
-    # @!attribute [rw] limit
-    #   @return [Float]
-    #
-    # @!attribute [rw] prediction_time_range
-    #   @return [Types::PredictionTimeRange]
-    #
-    # @!attribute [rw] resource_collection
-    #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] severity
+    #   The severity of a proactive anomaly.
     #   @return [String]
     #
-    # @!attribute [rw] source_details
-    #   @return [Types::AnomalySourceDetails]
-    #
     # @!attribute [rw] status
+    #   The status of a proactive anomaly.
     #   @return [String]
     #
     # @!attribute [rw] update_time
+    #   The time of the anomaly's most recent update.
     #   @return [Time]
+    #
+    # @!attribute [rw] anomaly_time_range
+    #   A time range that specifies when the observed unusual behavior in an
+    #   anomaly started and ended.
+    #   @return [Types::AnomalyTimeRange]
+    #
+    # @!attribute [rw] prediction_time_range
+    #   The time range during which anomalous behavior in a proactive
+    #   anomaly or an insight is expected to occur.
+    #   @return [Types::PredictionTimeRange]
+    #
+    # @!attribute [rw] source_details
+    #   Details about the source of the analyzed operational data that
+    #   triggered the anomaly. The one supported source is Amazon CloudWatch
+    #   metrics.
+    #   @return [Types::AnomalySourceDetails]
+    #
+    # @!attribute [rw] associated_insight_id
+    #   The ID of the insight that contains this anomaly. An insight is
+    #   composed of related anomalies.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_collection
+    #   A collection of AWS resources supported by DevOps Guru. The one type
+    #   of AWS resource collection supported is AWS CloudFormation stacks.
+    #   DevOps Guru can be configured to analyze only the AWS resources that
+    #   are defined in the stacks.
+    #   @return [Types::ResourceCollection]
+    #
+    # @!attribute [rw] limit
+    #   A threshold that was exceeded by behavior in analyzed resources.
+    #   Exceeding this threshold is related to the anomalous behavior that
+    #   generated this anomaly.
+    #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ProactiveAnomaly AWS API Documentation
     #
     class ProactiveAnomaly < Struct.new(
-      :anomaly_time_range,
-      :associated_insight_id,
       :id,
-      :limit,
-      :prediction_time_range,
-      :resource_collection,
       :severity,
-      :source_details,
       :status,
-      :update_time)
+      :update_time,
+      :anomaly_time_range,
+      :prediction_time_range,
+      :source_details,
+      :associated_insight_id,
+      :resource_collection,
+      :limit)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] anomaly_time_range
-    #   @return [Types::AnomalyTimeRange]
-    #
-    # @!attribute [rw] associated_insight_id
-    #   @return [String]
+    # Details about a proactive anomaly. This object is returned by
+    # `DescribeAnomaly.`
     #
     # @!attribute [rw] id
+    #   The ID of the anomaly.
     #   @return [String]
-    #
-    # @!attribute [rw] limit
-    #   @return [Float]
-    #
-    # @!attribute [rw] prediction_time_range
-    #   @return [Types::PredictionTimeRange]
-    #
-    # @!attribute [rw] resource_collection
-    #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] severity
+    #   The severity of the anomaly.
     #   @return [String]
     #
-    # @!attribute [rw] source_details
-    #   @return [Types::AnomalySourceDetails]
-    #
     # @!attribute [rw] status
+    #   The status of the anomaly.
     #   @return [String]
     #
     # @!attribute [rw] update_time
+    #   The time of the anomaly's most recent update.
     #   @return [Time]
+    #
+    # @!attribute [rw] anomaly_time_range
+    #   A time range that specifies when the observed unusual behavior in an
+    #   anomaly started and ended.
+    #   @return [Types::AnomalyTimeRange]
+    #
+    # @!attribute [rw] prediction_time_range
+    #   The time range during which anomalous behavior in a proactive
+    #   anomaly or an insight is expected to occur.
+    #   @return [Types::PredictionTimeRange]
+    #
+    # @!attribute [rw] source_details
+    #   Details about the source of the analyzed operational data that
+    #   triggered the anomaly. The one supported source is Amazon CloudWatch
+    #   metrics.
+    #   @return [Types::AnomalySourceDetails]
+    #
+    # @!attribute [rw] associated_insight_id
+    #   The ID of the insight that contains this anomaly. An insight is
+    #   composed of related anomalies.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_collection
+    #   A collection of AWS resources supported by DevOps Guru. The one type
+    #   of AWS resource collection supported is AWS CloudFormation stacks.
+    #   DevOps Guru can be configured to analyze only the AWS resources that
+    #   are defined in the stacks.
+    #   @return [Types::ResourceCollection]
+    #
+    # @!attribute [rw] limit
+    #   A threshold that was exceeded by behavior in analyzed resources.
+    #   Exceeding this threshold is related to the anomalous behavior that
+    #   generated this anomaly.
+    #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ProactiveAnomalySummary AWS API Documentation
     #
     class ProactiveAnomalySummary < Struct.new(
-      :anomaly_time_range,
-      :associated_insight_id,
       :id,
-      :limit,
-      :prediction_time_range,
-      :resource_collection,
       :severity,
-      :source_details,
       :status,
-      :update_time)
+      :update_time,
+      :anomaly_time_range,
+      :prediction_time_range,
+      :source_details,
+      :associated_insight_id,
+      :resource_collection,
+      :limit)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] id
-    #   @return [String]
+    # Details about a proactive insight. This object is returned by
+    # `ListInsights`.
     #
-    # @!attribute [rw] insight_time_range
-    #   @return [Types::InsightTimeRange]
+    # @!attribute [rw] id
+    #   The ID of the proactive insight.
+    #   @return [String]
     #
     # @!attribute [rw] name
+    #   The name of the proactive insight.
     #   @return [String]
-    #
-    # @!attribute [rw] prediction_time_range
-    #   @return [Types::PredictionTimeRange]
-    #
-    # @!attribute [rw] resource_collection
-    #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] severity
-    #   @return [String]
-    #
-    # @!attribute [rw] ssm_ops_item_id
+    #   The severity of the proactive insight.
     #   @return [String]
     #
     # @!attribute [rw] status
+    #   The status of the proactive insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_time_range
+    #   A time ranged that specifies when the observed behavior in an
+    #   insight started and ended.
+    #   @return [Types::InsightTimeRange]
+    #
+    # @!attribute [rw] prediction_time_range
+    #   The time range during which anomalous behavior in a proactive
+    #   anomaly or an insight is expected to occur.
+    #   @return [Types::PredictionTimeRange]
+    #
+    # @!attribute [rw] resource_collection
+    #   A collection of AWS resources supported by DevOps Guru. The one type
+    #   of AWS resource collection supported is AWS CloudFormation stacks.
+    #   DevOps Guru can be configured to analyze only the AWS resources that
+    #   are defined in the stacks.
+    #   @return [Types::ResourceCollection]
+    #
+    # @!attribute [rw] ssm_ops_item_id
+    #   The ID of the AWS System Manager OpsItem created for this insight.
+    #   You must enable the creation of OpstItems insights before they are
+    #   created for each insight.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ProactiveInsight AWS API Documentation
     #
     class ProactiveInsight < Struct.new(
       :id,
-      :insight_time_range,
       :name,
+      :severity,
+      :status,
+      :insight_time_range,
       :prediction_time_range,
       :resource_collection,
-      :severity,
-      :ssm_ops_item_id,
-      :status)
+      :ssm_ops_item_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] id
-    #   @return [String]
+    # Details about a proactive insight. This object is returned by
+    # `DescribeInsight.`
     #
-    # @!attribute [rw] insight_time_range
-    #   @return [Types::InsightTimeRange]
+    # @!attribute [rw] id
+    #   The ID of the proactive insight.
+    #   @return [String]
     #
     # @!attribute [rw] name
+    #   The name of the proactive insight.
     #   @return [String]
     #
-    # @!attribute [rw] prediction_time_range
-    #   @return [Types::PredictionTimeRange]
-    #
-    # @!attribute [rw] resource_collection
-    #   @return [Types::ResourceCollection]
-    #
     # @!attribute [rw] severity
+    #   The severity of the proactive insight.
     #   @return [String]
     #
     # @!attribute [rw] status
+    #   The status of the proactive insight.
     #   @return [String]
+    #
+    # @!attribute [rw] insight_time_range
+    #   A time ranged that specifies when the observed behavior in an
+    #   insight started and ended.
+    #   @return [Types::InsightTimeRange]
+    #
+    # @!attribute [rw] prediction_time_range
+    #   The time range during which anomalous behavior in a proactive
+    #   anomaly or an insight is expected to occur.
+    #   @return [Types::PredictionTimeRange]
+    #
+    # @!attribute [rw] resource_collection
+    #   A collection of AWS resources supported by DevOps Guru. The one type
+    #   of AWS resource collection supported is AWS CloudFormation stacks.
+    #   DevOps Guru can be configured to analyze only the AWS resources that
+    #   are defined in the stacks.
+    #   @return [Types::ResourceCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ProactiveInsightSummary AWS API Documentation
     #
     class ProactiveInsightSummary < Struct.new(
       :id,
-      :insight_time_range,
       :name,
-      :prediction_time_range,
-      :resource_collection,
       :severity,
-      :status)
+      :status,
+      :insight_time_range,
+      :prediction_time_range,
+      :resource_collection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1249,12 +1670,14 @@ module Aws::DevOpsGuru
     #
     #       {
     #         insight_feedback: {
+    #           id: "InsightId",
     #           feedback: "VALID_COLLECTION", # accepts VALID_COLLECTION, RECOMMENDATION_USEFUL, ALERT_TOO_SENSITIVE, DATA_NOISY_ANOMALY, DATA_INCORRECT
-    #           id: "__stringMin1Max100PatternW",
     #         },
     #       }
     #
     # @!attribute [rw] insight_feedback
+    #   The feedback from customers is about the recommendations in this
+    #   insight.
     #   @return [Types::InsightFeedback]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/PutFeedbackRequest AWS API Documentation
@@ -1269,159 +1692,233 @@ module Aws::DevOpsGuru
     #
     class PutFeedbackResponse < Aws::EmptyStructure; end
 
-    # @!attribute [rw] anomaly_time_range
-    #   @return [Types::AnomalyTimeRange]
-    #
-    # @!attribute [rw] associated_insight_id
-    #   @return [String]
+    # Details about a reactive anomaly. This object is returned by
+    # `ListAnomalies`.
     #
     # @!attribute [rw] id
+    #   The ID of the reactive anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity of the anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] anomaly_time_range
+    #   A time range that specifies when the observed unusual behavior in an
+    #   anomaly started and ended.
+    #   @return [Types::AnomalyTimeRange]
+    #
+    # @!attribute [rw] source_details
+    #   Details about the source of the analyzed operational data that
+    #   triggered the anomaly. The one supported source is Amazon CloudWatch
+    #   metrics.
+    #   @return [Types::AnomalySourceDetails]
+    #
+    # @!attribute [rw] associated_insight_id
+    #   The ID of the insight that contains this anomaly. An insight is
+    #   composed of related anomalies.
     #   @return [String]
     #
     # @!attribute [rw] resource_collection
+    #   A collection of AWS resources supported by DevOps Guru. The one type
+    #   of AWS resource collection supported is AWS CloudFormation stacks.
+    #   DevOps Guru can be configured to analyze only the AWS resources that
+    #   are defined in the stacks.
     #   @return [Types::ResourceCollection]
-    #
-    # @!attribute [rw] severity
-    #   @return [String]
-    #
-    # @!attribute [rw] source_details
-    #   @return [Types::AnomalySourceDetails]
-    #
-    # @!attribute [rw] status
-    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ReactiveAnomaly AWS API Documentation
     #
     class ReactiveAnomaly < Struct.new(
-      :anomaly_time_range,
-      :associated_insight_id,
       :id,
-      :resource_collection,
       :severity,
+      :status,
+      :anomaly_time_range,
       :source_details,
-      :status)
+      :associated_insight_id,
+      :resource_collection)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] anomaly_time_range
-    #   @return [Types::AnomalyTimeRange]
-    #
-    # @!attribute [rw] associated_insight_id
-    #   @return [String]
+    # Details about a reactive anomaly. This object is returned by
+    # `DescribeAnomaly.`
     #
     # @!attribute [rw] id
+    #   The ID of the reactive anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity of the reactive anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the reactive anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] anomaly_time_range
+    #   A time range that specifies when the observed unusual behavior in an
+    #   anomaly started and ended.
+    #   @return [Types::AnomalyTimeRange]
+    #
+    # @!attribute [rw] source_details
+    #   Details about the source of the analyzed operational data that
+    #   triggered the anomaly. The one supported source is Amazon CloudWatch
+    #   metrics.
+    #   @return [Types::AnomalySourceDetails]
+    #
+    # @!attribute [rw] associated_insight_id
+    #   The ID of the insight that contains this anomaly. An insight is
+    #   composed of related anomalies.
     #   @return [String]
     #
     # @!attribute [rw] resource_collection
+    #   A collection of AWS resources supported by DevOps Guru. The one type
+    #   of AWS resource collection supported is AWS CloudFormation stacks.
+    #   DevOps Guru can be configured to analyze only the AWS resources that
+    #   are defined in the stacks.
     #   @return [Types::ResourceCollection]
-    #
-    # @!attribute [rw] severity
-    #   @return [String]
-    #
-    # @!attribute [rw] source_details
-    #   @return [Types::AnomalySourceDetails]
-    #
-    # @!attribute [rw] status
-    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ReactiveAnomalySummary AWS API Documentation
     #
     class ReactiveAnomalySummary < Struct.new(
-      :anomaly_time_range,
-      :associated_insight_id,
       :id,
-      :resource_collection,
       :severity,
+      :status,
+      :anomaly_time_range,
       :source_details,
-      :status)
+      :associated_insight_id,
+      :resource_collection)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] id
-    #   @return [String]
+    # Information about a reactive insight. This object is returned by
+    # `ListInsights`.
     #
-    # @!attribute [rw] insight_time_range
-    #   @return [Types::InsightTimeRange]
+    # @!attribute [rw] id
+    #   The ID of a reactive insight.
+    #   @return [String]
     #
     # @!attribute [rw] name
+    #   The name of a reactive insight.
     #   @return [String]
-    #
-    # @!attribute [rw] resource_collection
-    #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] severity
-    #   @return [String]
-    #
-    # @!attribute [rw] ssm_ops_item_id
+    #   The severity of a reactive insight.
     #   @return [String]
     #
     # @!attribute [rw] status
+    #   The status of a reactive insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_time_range
+    #   A time ranged that specifies when the observed behavior in an
+    #   insight started and ended.
+    #   @return [Types::InsightTimeRange]
+    #
+    # @!attribute [rw] resource_collection
+    #   A collection of AWS resources supported by DevOps Guru. The one type
+    #   of AWS resource collection supported is AWS CloudFormation stacks.
+    #   DevOps Guru can be configured to analyze only the AWS resources that
+    #   are defined in the stacks.
+    #   @return [Types::ResourceCollection]
+    #
+    # @!attribute [rw] ssm_ops_item_id
+    #   The ID of the AWS System Manager OpsItem created for this insight.
+    #   You must enable the creation of OpstItems insights before they are
+    #   created for each insight.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ReactiveInsight AWS API Documentation
     #
     class ReactiveInsight < Struct.new(
       :id,
-      :insight_time_range,
       :name,
-      :resource_collection,
       :severity,
-      :ssm_ops_item_id,
-      :status)
+      :status,
+      :insight_time_range,
+      :resource_collection,
+      :ssm_ops_item_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] id
-    #   @return [String]
+    # Information about a reactive insight. This object is returned by
+    # `DescribeInsight.`
     #
-    # @!attribute [rw] insight_time_range
-    #   @return [Types::InsightTimeRange]
+    # @!attribute [rw] id
+    #   The ID of a reactive summary.
+    #   @return [String]
     #
     # @!attribute [rw] name
+    #   The name of a reactive insight.
     #   @return [String]
     #
-    # @!attribute [rw] resource_collection
-    #   @return [Types::ResourceCollection]
-    #
     # @!attribute [rw] severity
+    #   The severity of a reactive insight.
     #   @return [String]
     #
     # @!attribute [rw] status
+    #   The status of a reactive insight.
     #   @return [String]
+    #
+    # @!attribute [rw] insight_time_range
+    #   A time ranged that specifies when the observed behavior in an
+    #   insight started and ended.
+    #   @return [Types::InsightTimeRange]
+    #
+    # @!attribute [rw] resource_collection
+    #   A collection of AWS resources supported by DevOps Guru. The one type
+    #   of AWS resource collection supported is AWS CloudFormation stacks.
+    #   DevOps Guru can be configured to analyze only the AWS resources that
+    #   are defined in the stacks.
+    #   @return [Types::ResourceCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ReactiveInsightSummary AWS API Documentation
     #
     class ReactiveInsightSummary < Struct.new(
       :id,
-      :insight_time_range,
       :name,
-      :resource_collection,
       :severity,
-      :status)
+      :status,
+      :insight_time_range,
+      :resource_collection)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # Recommendation information to help you remediate detected anomalous
+    # behavior that generated an insight.
+    #
     # @!attribute [rw] description
+    #   A description of the problem.
     #   @return [String]
     #
     # @!attribute [rw] link
+    #   A hyperlink to information to help you address the problem.
     #   @return [String]
     #
     # @!attribute [rw] name
+    #   The name of the recommendation.
     #   @return [String]
     #
     # @!attribute [rw] reason
+    #   The reason DevOps Guru flagged the anomalous behavior as a problem.
     #   @return [String]
     #
-    # @!attribute [rw] related_anomalies
-    #   @return [Array<Types::RecommendationRelatedAnomaly>]
-    #
     # @!attribute [rw] related_events
+    #   Events that are related to the problem. Use these events to learn
+    #   more about what's happening and to help address the issue.
     #   @return [Array<Types::RecommendationRelatedEvent>]
+    #
+    # @!attribute [rw] related_anomalies
+    #   Anomalies that are related to the problem. Use these Anomalies to
+    #   learn more about what's happening and to help address the issue.
+    #   @return [Array<Types::RecommendationRelatedAnomaly>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/Recommendation AWS API Documentation
     #
@@ -1430,16 +1927,24 @@ module Aws::DevOpsGuru
       :link,
       :name,
       :reason,
-      :related_anomalies,
-      :related_events)
+      :related_events,
+      :related_anomalies)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # Information about an anomaly that is related to a recommendation.
+    #
     # @!attribute [rw] resources
+    #   An array of objects that represent resources in which DevOps Guru
+    #   detected anomalous behavior. Each object contains the name and type
+    #   of the resource.
     #   @return [Array<Types::RecommendationRelatedAnomalyResource>]
     #
     # @!attribute [rw] source_details
+    #   Information about where the anomalous behavior related the
+    #   recommendation was found. For example, details in Amazon CloudWatch
+    #   metrics.
     #   @return [Array<Types::RecommendationRelatedAnomalySourceDetail>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/RecommendationRelatedAnomaly AWS API Documentation
@@ -1451,10 +1956,15 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Information about a resource in which DevOps Guru detected anomalous
+    # behavior.
+    #
     # @!attribute [rw] name
+    #   The name of the resource.
     #   @return [String]
     #
     # @!attribute [rw] type
+    #   The type of the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/RecommendationRelatedAnomalyResource AWS API Documentation
@@ -1466,7 +1976,14 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Contains an array of
+    # `RecommendationRelatedCloudWatchMetricsSourceDetail` objects that
+    # contain the name and namespace of an Amazon CloudWatch metric.
+    #
     # @!attribute [rw] cloud_watch_metrics
+    #   An array of `CloudWatchMetricsDetail` objects that contains
+    #   information about the analyzed metrics that displayed anomalous
+    #   behavior.
     #   @return [Array<Types::RecommendationRelatedCloudWatchMetricsSourceDetail>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/RecommendationRelatedAnomalySourceDetail AWS API Documentation
@@ -1477,10 +1994,17 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Information about an Amazon CloudWatch metric that is analyzed by
+    # DevOps Guru. It is one of many analyzed metrics that are used to
+    # generate insights.
+    #
     # @!attribute [rw] metric_name
+    #   The name of the CloudWatch metric.
     #   @return [String]
     #
     # @!attribute [rw] namespace
+    #   The namespace of the CloudWatch metric. A namespace is a container
+    #   for CloudWatch metrics.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/RecommendationRelatedCloudWatchMetricsSourceDetail AWS API Documentation
@@ -1492,10 +2016,16 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Information about an event that is related to a recommendation.
+    #
     # @!attribute [rw] name
+    #   The name of the event. This corresponds to the `Name` field in an
+    #   `Event` object.
     #   @return [String]
     #
     # @!attribute [rw] resources
+    #   A `ResourceCollection` object that contains arrays of the names of
+    #   AWS CloudFormation stacks.
     #   @return [Array<Types::RecommendationRelatedEventResource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/RecommendationRelatedEvent AWS API Documentation
@@ -1507,10 +2037,17 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Information about an AWS resource that emitted and event that is
+    # related to a recommendation in an insight.
+    #
     # @!attribute [rw] name
+    #   The name of the resource that emitted the event. This corresponds to
+    #   the `Name` field in an `EventResource` object.
     #   @return [String]
     #
     # @!attribute [rw] type
+    #   The type of the resource that emitted the event. This corresponds to
+    #   the `Type` field in an `EventResource` object.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/RecommendationRelatedEventResource AWS API Documentation
@@ -1526,10 +2063,11 @@ module Aws::DevOpsGuru
     #   data as a hash:
     #
     #       {
-    #         id: "__string", # required
+    #         id: "NotificationChannelId", # required
     #       }
     #
     # @!attribute [rw] id
+    #   The ID of the notification channel to be removed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/RemoveNotificationChannelRequest AWS API Documentation
@@ -1544,16 +2082,23 @@ module Aws::DevOpsGuru
     #
     class RemoveNotificationChannelResponse < Aws::EmptyStructure; end
 
+    # A collection of AWS resources supported by DevOps Guru. The one type
+    # of AWS resource collection supported is AWS CloudFormation stacks.
+    # DevOps Guru can be configured to analyze only the AWS resources that
+    # are defined in the stacks.
+    #
     # @note When making an API call, you may pass ResourceCollection
     #   data as a hash:
     #
     #       {
     #         cloud_formation: {
-    #           stack_names: ["__stringMin1Max128PatternAZAZAZAZ09"],
+    #           stack_names: ["StackName"],
     #         },
     #       }
     #
     # @!attribute [rw] cloud_formation
+    #   An array of the names of AWS CloudFormation stacks. The stacks
+    #   define AWS resources that DevOps Guru analyzes.
     #   @return [Types::CloudFormationCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ResourceCollection AWS API Documentation
@@ -1564,7 +2109,17 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Information about a filter used to specify which AWS resources are
+    # analyzed for anomalous behavior by DevOps Guru.
+    #
     # @!attribute [rw] cloud_formation
+    #   Information about AWS CloudFormation stacks. You can use stacks to
+    #   specify which AWS resources in your account to analyze. For more
+    #   information, see [Stacks][1] in the *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html
     #   @return [Types::CloudFormationCollectionFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ResourceCollectionFilter AWS API Documentation
@@ -1575,13 +2130,17 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # A requested resource could not be found
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
     # @!attribute [rw] resource_id
+    #   The ID of the AWS resource that could not be found.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
+    #   The type of the AWS resource that could not be found.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ResourceNotFoundException AWS API Documentation
@@ -1594,34 +2153,43 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Specifies one or more severity values and one or more status values
+    # that are used to search for insights.
+    #
     # @note When making an API call, you may pass SearchInsightsFilters
     #   data as a hash:
     #
     #       {
-    #         resource_collection: {
-    #           cloud_formation: {
-    #             stack_names: ["__stringMin1Max128PatternAZAZAZAZ09"],
-    #           },
-    #         },
     #         severities: ["LOW"], # accepts LOW, MEDIUM, HIGH
     #         statuses: ["ONGOING"], # accepts ONGOING, CLOSED
+    #         resource_collection: {
+    #           cloud_formation: {
+    #             stack_names: ["StackName"],
+    #           },
+    #         },
     #       }
     #
-    # @!attribute [rw] resource_collection
-    #   @return [Types::ResourceCollection]
-    #
     # @!attribute [rw] severities
+    #   An array of severity values used to search for insights.
     #   @return [Array<String>]
     #
     # @!attribute [rw] statuses
+    #   An array of status values used to search for insights.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_collection
+    #   A collection of AWS resources supported by DevOps Guru. The one type
+    #   of AWS resource collection supported is AWS CloudFormation stacks.
+    #   DevOps Guru can be configured to analyze only the AWS resources that
+    #   are defined in the stacks.
+    #   @return [Types::ResourceCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/SearchInsightsFilters AWS API Documentation
     #
     class SearchInsightsFilters < Struct.new(
-      :resource_collection,
       :severities,
-      :statuses)
+      :statuses,
+      :resource_collection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1630,71 +2198,91 @@ module Aws::DevOpsGuru
     #   data as a hash:
     #
     #       {
-    #         filters: {
-    #           resource_collection: {
-    #             cloud_formation: {
-    #               stack_names: ["__stringMin1Max128PatternAZAZAZAZ09"],
-    #             },
-    #           },
-    #           severities: ["LOW"], # accepts LOW, MEDIUM, HIGH
-    #           statuses: ["ONGOING"], # accepts ONGOING, CLOSED
-    #         },
-    #         max_results: 1,
-    #         next_token: "__stringMin36Max36PatternAF098AF094AF094AF094AF0912",
     #         start_time_range: { # required
     #           from_time: Time.now,
     #           to_time: Time.now,
     #         },
+    #         filters: {
+    #           severities: ["LOW"], # accepts LOW, MEDIUM, HIGH
+    #           statuses: ["ONGOING"], # accepts ONGOING, CLOSED
+    #           resource_collection: {
+    #             cloud_formation: {
+    #               stack_names: ["StackName"],
+    #             },
+    #           },
+    #         },
+    #         max_results: 1,
+    #         next_token: "UuidNextToken",
     #         type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
     #       }
     #
+    # @!attribute [rw] start_time_range
+    #   The start of the time range passed in. Returned insights occurred
+    #   after this time.
+    #   @return [Types::StartTimeRange]
+    #
     # @!attribute [rw] filters
+    #   A `SearchInsightsFilters` object that is used to set the severity
+    #   and status filters on your insight search.
     #   @return [Types::SearchInsightsFilters]
     #
     # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
     #
-    # @!attribute [rw] start_time_range
-    #   @return [Types::StartTimeRange]
-    #
     # @!attribute [rw] type
+    #   The type of insights you are searching for (`REACTIVE` or
+    #   `PROACTIVE`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/SearchInsightsRequest AWS API Documentation
     #
     class SearchInsightsRequest < Struct.new(
+      :start_time_range,
       :filters,
       :max_results,
       :next_token,
-      :start_time_range,
       :type)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] next_token
-    #   @return [String]
-    #
     # @!attribute [rw] proactive_insights
+    #   The returned proactive insights.
     #   @return [Array<Types::ProactiveInsightSummary>]
     #
     # @!attribute [rw] reactive_insights
+    #   The returned reactive insights.
     #   @return [Array<Types::ReactiveInsightSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/SearchInsightsResponse AWS API Documentation
     #
     class SearchInsightsResponse < Struct.new(
-      :next_token,
       :proactive_insights,
-      :reactive_insights)
+      :reactive_insights,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # Information about the integration of DevOps Guru with another AWS
+    # service, such as AWS Systems Manager.
+    #
     # @!attribute [rw] ops_center
+    #   Information about whether DevOps Guru is configured to create an
+    #   OpsItem in AWS Systems Manager OpsCenter for each created insight.
     #   @return [Types::OpsCenterIntegration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ServiceIntegrationConfig AWS API Documentation
@@ -1705,6 +2293,8 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # The request contains a value that exceeds a maximum quota.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -1716,14 +2306,35 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Contains the Amazon Resource Name (ARN) of an Amazon Simple
+    # Notification Service topic.
+    #
+    # If you use an Amazon SNS topic in another account, you must attach a
+    # policy to it that grants DevOps Guru permission to it notifications.
+    # DevOps Guru adds the required policy on your behalf to send
+    # notifications using Amazon SNS in your account. For more information,
+    # see [Permissions for cross account Amazon SNS topics][1].
+    #
+    # If you use an Amazon SNS topic that is encrypted by an AWS Key
+    # Management Service customer-managed key (CMK), then you must add
+    # permissions to the CMK. For more information, see [Permissions for AWS
+    # KMS–encrypted Amazon SNS topics][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html
+    # [2]: https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html
+    #
     # @note When making an API call, you may pass SnsChannelConfig
     #   data as a hash:
     #
     #       {
-    #         topic_arn: "__stringMin36Max1024PatternArnAwsAZ09SnsAZ09D12",
+    #         topic_arn: "TopicArn",
     #       }
     #
     # @!attribute [rw] topic_arn
+    #   The Amazon Resource Name (ARN) of an Amazon Simple Notification
+    #   Service topic.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/SnsChannelConfig AWS API Documentation
@@ -1734,6 +2345,9 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # A time range used to specify when the behavior of an insight or
+    # anomaly started.
+    #
     # @note When making an API call, you may pass StartTimeRange
     #   data as a hash:
     #
@@ -1743,9 +2357,11 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] from_time
+    #   The start time of the time range.
     #   @return [Time]
     #
     # @!attribute [rw] to_time
+    #   The end time of the time range.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/StartTimeRange AWS API Documentation
@@ -1757,33 +2373,48 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # The request was denied due to a request throttling.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
     # @!attribute [rw] quota_code
+    #   The code of the quota that was exceeded, causing the throttling
+    #   exception.
     #   @return [String]
     #
     # @!attribute [rw] service_code
+    #   The code of the service that caused the throttling exception.
     #   @return [String]
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   The number of seconds after which the action that caused the
+    #   throttling exception can be retried.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
       :message,
       :quota_code,
-      :service_code)
+      :service_code,
+      :retry_after_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # Contains the names of AWS CloudFormation stacks used to update a
+    # collection of stacks.
+    #
     # @note When making an API call, you may pass UpdateCloudFormationCollectionFilter
     #   data as a hash:
     #
     #       {
-    #         stack_names: ["__stringMin1Max128PatternAZAZAZAZ09"],
+    #         stack_names: ["StackName"],
     #       }
     #
     # @!attribute [rw] stack_names
+    #   An array of the name of stacks to update.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateCloudFormationCollectionFilter AWS API Documentation
@@ -1794,16 +2425,19 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Contains information used to update a collection of AWS resources.
+    #
     # @note When making an API call, you may pass UpdateResourceCollectionFilter
     #   data as a hash:
     #
     #       {
     #         cloud_formation: {
-    #           stack_names: ["__stringMin1Max128PatternAZAZAZAZ09"],
+    #           stack_names: ["StackName"],
     #         },
     #       }
     #
     # @!attribute [rw] cloud_formation
+    #   An collection of AWS CloudFormation stacks.
     #   @return [Types::UpdateCloudFormationCollectionFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateResourceCollectionFilter AWS API Documentation
@@ -1821,15 +2455,18 @@ module Aws::DevOpsGuru
     #         action: "ADD", # required, accepts ADD, REMOVE
     #         resource_collection: { # required
     #           cloud_formation: {
-    #             stack_names: ["__stringMin1Max128PatternAZAZAZAZ09"],
+    #             stack_names: ["StackName"],
     #           },
     #         },
     #       }
     #
     # @!attribute [rw] action
+    #   Specifies if the resource collection in the request is added or
+    #   deleted to the resource collection.
     #   @return [String]
     #
     # @!attribute [rw] resource_collection
+    #   Contains information used to update a collection of AWS resources.
     #   @return [Types::UpdateResourceCollectionFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateResourceCollectionRequest AWS API Documentation
@@ -1845,6 +2482,9 @@ module Aws::DevOpsGuru
     #
     class UpdateResourceCollectionResponse < Aws::EmptyStructure; end
 
+    # Information about updating the integration status of an AWS service,
+    # such as AWS Systems Manager, with DevOps Guru.
+    #
     # @note When making an API call, you may pass UpdateServiceIntegrationConfig
     #   data as a hash:
     #
@@ -1855,6 +2495,8 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] ops_center
+    #   Information about whether DevOps Guru is configured to create an
+    #   OpsItem in AWS Systems Manager OpsCenter for each created insight.
     #   @return [Types::OpsCenterIntegrationConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateServiceIntegrationConfig AWS API Documentation
@@ -1877,6 +2519,9 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] service_integration
+    #   An `IntegratedServiceConfig` object used to specify the integrated
+    #   service you want to update, and whether you want to update it to
+    #   enabled or disabled.
     #   @return [Types::UpdateServiceIntegrationConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateServiceIntegrationRequest AWS API Documentation
@@ -1891,36 +2536,48 @@ module Aws::DevOpsGuru
     #
     class UpdateServiceIntegrationResponse < Aws::EmptyStructure; end
 
-    # @!attribute [rw] fields
-    #   @return [Array<Types::ValidationExceptionField>]
+    # Contains information about data passed in to a field during a request
+    # that is not valid.
     #
     # @!attribute [rw] message
+    #   A message that describes the validation exception.
     #   @return [String]
     #
     # @!attribute [rw] reason
+    #   The reason the validation exception was thrown.
     #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   An array of fields that are associated with the validation
+    #   exception.
+    #   @return [Array<Types::ValidationExceptionField>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
-      :fields,
       :message,
-      :reason)
+      :reason,
+      :fields)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] message
-    #   @return [String]
+    # The field associated with the validation exception.
     #
     # @!attribute [rw] name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message associated with the validation exception with
+    #   information to help determine its cause.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ValidationExceptionField AWS API Documentation
     #
     class ValidationExceptionField < Struct.new(
-      :message,
-      :name)
+      :name,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

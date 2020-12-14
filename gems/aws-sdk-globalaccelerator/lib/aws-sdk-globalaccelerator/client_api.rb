@@ -1138,6 +1138,12 @@ module Aws::GlobalAccelerator
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_custom_routing_accelerators, Seahorse::Model::Operation.new.tap do |o|

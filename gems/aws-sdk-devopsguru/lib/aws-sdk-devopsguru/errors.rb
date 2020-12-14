@@ -94,6 +94,11 @@ module Aws::DevOpsGuru
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def retry_after_seconds
+        @data[:retry_after_seconds]
+      end
     end
 
     class ResourceNotFoundException < ServiceError
@@ -159,6 +164,11 @@ module Aws::DevOpsGuru
       def service_code
         @data[:service_code]
       end
+
+      # @return [String]
+      def retry_after_seconds
+        @data[:retry_after_seconds]
+      end
     end
 
     class ValidationException < ServiceError
@@ -171,11 +181,6 @@ module Aws::DevOpsGuru
       end
 
       # @return [String]
-      def fields
-        @data[:fields]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -183,6 +188,11 @@ module Aws::DevOpsGuru
       # @return [String]
       def reason
         @data[:reason]
+      end
+
+      # @return [String]
+      def fields
+        @data[:fields]
       end
     end
 
