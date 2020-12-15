@@ -7,33 +7,97 @@ module Aws
     # @api private
     METADATA_TOKEN_PATH = '/latest/api/token'.freeze
 
+    # Raised when the PUT request is not valid (should never be thrown).
     # @api private
     class TokenRetrievalError < RuntimeError; end
 
+    # Token has expired, and the request can be retried with a new token.
     # @api private
     class TokenExpiredError < RuntimeError; end
 
+    # The requested metadata path does not exist.
     # @api private
     class MetadataNotFoundError < RuntimeError; end
 
+    # The request is not allowed or IMDS is turned off.
     # @api private
     class RequestForbiddenError < RuntimeError; end
 
-    # TODO - docs
+    # Creates a client that can query version 2 of the EC2 Instance Metadata
+    #   service (IMDS).
+    #
+    # @note Customers using containers may need to increase their hop limit
+    #   to access IMDSv2.
+    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html#instance-metadata-transition-to-version-2
+    #
+    # @param [Hash] options
+    # @option options [Integer] :token_ttl (21600) The session token's TTL,
+    #   defaulting to 6 hours.
+    # @option options [Integer] :retries (1) The number of retries for failed
+    #   requests.
+    # @option options [String] :endpoint (169.254.169.254) The IMDS endpoint.
+    # @option options [Integer] :port (80) The IMDS endpoint port.
+    # @option options [Integer] :http_open_timeout (1) The number of seconds to
+    #   wait for the connection to open.
+    # @option options [Integer] :http_read_timeout (1) The number of seconds for
+    #   one chunk of data to be read.
+    # @option options [IO] :http_debug_output An output stream for debugging. Do
+    #   not use this in production.
+    # @option options [Integer,Proc] :backoff A backoff used for retryable
+    #   requests. When given an Integer, it sleeps that amount. When given a
+    #   Proc, it is called with the current number of failed retries.
     def initialize(options = {})
+      @token_ttl = options[:token_ttl] || 21_600
       @retries = options[:retries] || 1
+      @backoff = backoff(options[:backoff])
+
       @endpoint = options[:endpoint] || '169.254.169.254'
       @port = options[:port] || 80
+
       @http_open_timeout = options[:http_open_timeout] || 1
       @http_read_timeout = options[:http_read_timeout] || 1
       @http_debug_output = options[:http_debug_output]
-      @backoff = backoff(options[:backoff])
-      @token_ttl = options[:token_ttl] || 21_600
 
       @token = nil
       @mutex = Mutex.new
     end
 
+    # Fetches a given metadata category using a String path, and returns the
+    #   result as a String. A path starts with the API version (usually
+    #   "/latest/"). See the instance data categories for possible paths.
+    #
+    # @example Fetching the instance ID
+    #
+    #   ec2_metadata = Aws::EC2Metadata.new
+    #   ec2_metadata.get('/latest/meta-data/instance-id')
+    #   => "i-023a25f10a73a0f79"
+    #
+    # @Note This implementation always returns a String and will not parse any
+    #   responses. Parsable responses may include JSON objects or directory
+    #   listings, which are strings separated by line feeds (ASCII 10).
+    #
+    # @example Fetching and parsing JSON meta-data
+    #
+    #   require 'json'
+    #   data = ec2_metadata.get('/latest/dynamic/instance-identity/document')
+    #   JSON.parse(data)
+    #   => {"accountId"=>"012345678912", ... }
+    #
+    # @example Fetching and parsing directory listings
+    #
+    #   listing = ec2_metadata.get('/latest/meta-data')
+    #   listing.split(10.chr)
+    #   => ["ami-id", "ami-launch-index", ...]
+    #
+    # @Note Unlike other services, IMDS does not have a service API model. This
+    #   means that we cannot confidently generate code with methods and
+    #   response structures. This implementation ensures that new IMDS features
+    #   are always supported by being deployed to the instance and does not
+    #   require code changes.
+    #
+    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-categories.html
+    # @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html
+    # @param [String] path The full path to the metadata.
     def get(path)
       retry_errors(max_retries: @retries) do
         @mutex.synchronize do
@@ -108,8 +172,11 @@ module Aws
       retries = 0
       begin
         yield
-      rescue TokenRetrievalError, MetadataNotFoundError, MetadataNotFoundError
+      # These errors should not be retried.
+      rescue TokenRetrievalError, MetadataNotFoundError, RequestForbiddenError
         raise
+      # StandardError is not ideal but it covers Net::HTTP errors.
+      # https://gist.github.com/tenderlove/245188
       rescue StandardError, TokenExpiredError
         raise unless retries < max_retries
 
