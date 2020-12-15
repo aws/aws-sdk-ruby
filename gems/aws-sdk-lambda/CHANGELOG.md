@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2020-12-15)
+------------------
+
+* Feature - Added support for Apache Kafka as a event source. Added support for TumblingWindowInSeconds for streams event source mappings. Added support for FunctionResponseTypes for streams event source mappings
+
 1.56.0 (2020-12-04)
 ------------------
 

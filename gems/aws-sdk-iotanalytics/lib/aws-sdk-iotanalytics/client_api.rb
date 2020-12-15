@@ -30,6 +30,7 @@ module Aws::IoTAnalytics
     Channel = Shapes::StructureShape.new(name: 'Channel')
     ChannelActivity = Shapes::StructureShape.new(name: 'ChannelActivity')
     ChannelArn = Shapes::StringShape.new(name: 'ChannelArn')
+    ChannelMessages = Shapes::StructureShape.new(name: 'ChannelMessages')
     ChannelName = Shapes::StringShape.new(name: 'ChannelName')
     ChannelStatistics = Shapes::StructureShape.new(name: 'ChannelStatistics')
     ChannelStatus = Shapes::StringShape.new(name: 'ChannelStatus')
@@ -37,6 +38,10 @@ module Aws::IoTAnalytics
     ChannelStorageSummary = Shapes::StructureShape.new(name: 'ChannelStorageSummary')
     ChannelSummaries = Shapes::ListShape.new(name: 'ChannelSummaries')
     ChannelSummary = Shapes::StructureShape.new(name: 'ChannelSummary')
+    Column = Shapes::StructureShape.new(name: 'Column')
+    ColumnDataType = Shapes::StringShape.new(name: 'ColumnDataType')
+    ColumnName = Shapes::StringShape.new(name: 'ColumnName')
+    Columns = Shapes::ListShape.new(name: 'Columns')
     ComputeType = Shapes::StringShape.new(name: 'ComputeType')
     ContainerDatasetAction = Shapes::StructureShape.new(name: 'ContainerDatasetAction')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
@@ -113,6 +118,8 @@ module Aws::IoTAnalytics
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EstimatedResourceSize = Shapes::StructureShape.new(name: 'EstimatedResourceSize')
+    FileFormatConfiguration = Shapes::StructureShape.new(name: 'FileFormatConfiguration')
+    FileFormatType = Shapes::StringShape.new(name: 'FileFormatType')
     FilterActivity = Shapes::StructureShape.new(name: 'FilterActivity')
     FilterExpression = Shapes::StringShape.new(name: 'FilterExpression')
     GetDatasetContentRequest = Shapes::StructureShape.new(name: 'GetDatasetContentRequest')
@@ -126,6 +133,7 @@ module Aws::IoTAnalytics
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     IotEventsDestinationConfiguration = Shapes::StructureShape.new(name: 'IotEventsDestinationConfiguration')
     IotEventsInputName = Shapes::StringShape.new(name: 'IotEventsInputName')
+    JsonConfiguration = Shapes::StructureShape.new(name: 'JsonConfiguration')
     LambdaActivity = Shapes::StructureShape.new(name: 'LambdaActivity')
     LambdaName = Shapes::StringShape.new(name: 'LambdaName')
     LateDataRule = Shapes::StructureShape.new(name: 'LateDataRule')
@@ -163,6 +171,7 @@ module Aws::IoTAnalytics
     OffsetSeconds = Shapes::IntegerShape.new(name: 'OffsetSeconds')
     OutputFileName = Shapes::StringShape.new(name: 'OutputFileName')
     OutputFileUriValue = Shapes::StructureShape.new(name: 'OutputFileUriValue')
+    ParquetConfiguration = Shapes::StructureShape.new(name: 'ParquetConfiguration')
     Pipeline = Shapes::StructureShape.new(name: 'Pipeline')
     PipelineActivities = Shapes::ListShape.new(name: 'PipelineActivities')
     PipelineActivity = Shapes::StructureShape.new(name: 'PipelineActivity')
@@ -191,10 +200,13 @@ module Aws::IoTAnalytics
     RunPipelineActivityResponse = Shapes::StructureShape.new(name: 'RunPipelineActivityResponse')
     S3DestinationConfiguration = Shapes::StructureShape.new(name: 'S3DestinationConfiguration')
     S3KeyPrefix = Shapes::StringShape.new(name: 'S3KeyPrefix')
+    S3PathChannelMessage = Shapes::StringShape.new(name: 'S3PathChannelMessage')
+    S3PathChannelMessages = Shapes::ListShape.new(name: 'S3PathChannelMessages')
     SampleChannelDataRequest = Shapes::StructureShape.new(name: 'SampleChannelDataRequest')
     SampleChannelDataResponse = Shapes::StructureShape.new(name: 'SampleChannelDataResponse')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
+    SchemaDefinition = Shapes::StructureShape.new(name: 'SchemaDefinition')
     SelectAttributesActivity = Shapes::StructureShape.new(name: 'SelectAttributesActivity')
     ServiceManagedChannelS3Storage = Shapes::StructureShape.new(name: 'ServiceManagedChannelS3Storage')
     ServiceManagedChannelS3StorageSummary = Shapes::StructureShape.new(name: 'ServiceManagedChannelS3StorageSummary')
@@ -282,6 +294,9 @@ module Aws::IoTAnalytics
     ChannelActivity.add_member(:next, Shapes::ShapeRef.new(shape: ActivityName, location_name: "next"))
     ChannelActivity.struct_class = Types::ChannelActivity
 
+    ChannelMessages.add_member(:s3_paths, Shapes::ShapeRef.new(shape: S3PathChannelMessages, location_name: "s3Paths"))
+    ChannelMessages.struct_class = Types::ChannelMessages
+
     ChannelStatistics.add_member(:size, Shapes::ShapeRef.new(shape: EstimatedResourceSize, location_name: "size"))
     ChannelStatistics.struct_class = Types::ChannelStatistics
 
@@ -302,6 +317,12 @@ module Aws::IoTAnalytics
     ChannelSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
     ChannelSummary.add_member(:last_message_arrival_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastMessageArrivalTime"))
     ChannelSummary.struct_class = Types::ChannelSummary
+
+    Column.add_member(:name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "name"))
+    Column.add_member(:type, Shapes::ShapeRef.new(shape: ColumnDataType, required: true, location_name: "type"))
+    Column.struct_class = Types::Column
+
+    Columns.member = Shapes::ShapeRef.new(shape: Column)
 
     ContainerDatasetAction.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "image"))
     ContainerDatasetAction.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "executionRoleArn"))
@@ -346,6 +367,7 @@ module Aws::IoTAnalytics
     CreateDatastoreRequest.add_member(:datastore_storage, Shapes::ShapeRef.new(shape: DatastoreStorage, location_name: "datastoreStorage"))
     CreateDatastoreRequest.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "retentionPeriod"))
     CreateDatastoreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateDatastoreRequest.add_member(:file_format_configuration, Shapes::ShapeRef.new(shape: FileFormatConfiguration, location_name: "fileFormatConfiguration"))
     CreateDatastoreRequest.struct_class = Types::CreateDatastoreRequest
 
     CreateDatastoreResponse.add_member(:datastore_name, Shapes::ShapeRef.new(shape: DatastoreName, location_name: "datastoreName"))
@@ -464,6 +486,7 @@ module Aws::IoTAnalytics
     Datastore.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     Datastore.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
     Datastore.add_member(:last_message_arrival_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastMessageArrivalTime"))
+    Datastore.add_member(:file_format_configuration, Shapes::ShapeRef.new(shape: FileFormatConfiguration, location_name: "fileFormatConfiguration"))
     Datastore.struct_class = Types::Datastore
 
     DatastoreActivity.add_member(:name, Shapes::ShapeRef.new(shape: ActivityName, required: true, location_name: "name"))
@@ -489,6 +512,7 @@ module Aws::IoTAnalytics
     DatastoreSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     DatastoreSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
     DatastoreSummary.add_member(:last_message_arrival_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastMessageArrivalTime"))
+    DatastoreSummary.add_member(:file_format_type, Shapes::ShapeRef.new(shape: FileFormatType, location_name: "fileFormatType"))
     DatastoreSummary.struct_class = Types::DatastoreSummary
 
     DeleteChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location: "uri", location_name: "channelName"))
@@ -565,6 +589,10 @@ module Aws::IoTAnalytics
     EstimatedResourceSize.add_member(:estimated_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "estimatedOn"))
     EstimatedResourceSize.struct_class = Types::EstimatedResourceSize
 
+    FileFormatConfiguration.add_member(:json_configuration, Shapes::ShapeRef.new(shape: JsonConfiguration, location_name: "jsonConfiguration"))
+    FileFormatConfiguration.add_member(:parquet_configuration, Shapes::ShapeRef.new(shape: ParquetConfiguration, location_name: "parquetConfiguration"))
+    FileFormatConfiguration.struct_class = Types::FileFormatConfiguration
+
     FilterActivity.add_member(:name, Shapes::ShapeRef.new(shape: ActivityName, required: true, location_name: "name"))
     FilterActivity.add_member(:filter, Shapes::ShapeRef.new(shape: FilterExpression, required: true, location_name: "filter"))
     FilterActivity.add_member(:next, Shapes::ShapeRef.new(shape: ActivityName, location_name: "next"))
@@ -592,6 +620,8 @@ module Aws::IoTAnalytics
     IotEventsDestinationConfiguration.add_member(:input_name, Shapes::ShapeRef.new(shape: IotEventsInputName, required: true, location_name: "inputName"))
     IotEventsDestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     IotEventsDestinationConfiguration.struct_class = Types::IotEventsDestinationConfiguration
+
+    JsonConfiguration.struct_class = Types::JsonConfiguration
 
     LambdaActivity.add_member(:name, Shapes::ShapeRef.new(shape: ActivityName, required: true, location_name: "name"))
     LambdaActivity.add_member(:lambda_name, Shapes::ShapeRef.new(shape: LambdaName, required: true, location_name: "lambdaName"))
@@ -682,6 +712,9 @@ module Aws::IoTAnalytics
     OutputFileUriValue.add_member(:file_name, Shapes::ShapeRef.new(shape: OutputFileName, required: true, location_name: "fileName"))
     OutputFileUriValue.struct_class = Types::OutputFileUriValue
 
+    ParquetConfiguration.add_member(:schema_definition, Shapes::ShapeRef.new(shape: SchemaDefinition, location_name: "schemaDefinition"))
+    ParquetConfiguration.struct_class = Types::ParquetConfiguration
+
     Pipeline.add_member(:name, Shapes::ShapeRef.new(shape: PipelineName, location_name: "name"))
     Pipeline.add_member(:arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "arn"))
     Pipeline.add_member(:activities, Shapes::ShapeRef.new(shape: PipelineActivities, location_name: "activities"))
@@ -762,6 +795,8 @@ module Aws::IoTAnalytics
     S3DestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     S3DestinationConfiguration.struct_class = Types::S3DestinationConfiguration
 
+    S3PathChannelMessages.member = Shapes::ShapeRef.new(shape: S3PathChannelMessage)
+
     SampleChannelDataRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location: "uri", location_name: "channelName"))
     SampleChannelDataRequest.add_member(:max_messages, Shapes::ShapeRef.new(shape: MaxMessages, location: "querystring", location_name: "maxMessages"))
     SampleChannelDataRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, location: "querystring", location_name: "startTime"))
@@ -773,6 +808,9 @@ module Aws::IoTAnalytics
 
     Schedule.add_member(:expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "expression"))
     Schedule.struct_class = Types::Schedule
+
+    SchemaDefinition.add_member(:columns, Shapes::ShapeRef.new(shape: Columns, location_name: "columns"))
+    SchemaDefinition.struct_class = Types::SchemaDefinition
 
     SelectAttributesActivity.add_member(:name, Shapes::ShapeRef.new(shape: ActivityName, required: true, location_name: "name"))
     SelectAttributesActivity.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeNames, required: true, location_name: "attributes"))
@@ -797,6 +835,7 @@ module Aws::IoTAnalytics
     StartPipelineReprocessingRequest.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location: "uri", location_name: "pipelineName"))
     StartPipelineReprocessingRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, location_name: "startTime"))
     StartPipelineReprocessingRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: EndTime, location_name: "endTime"))
+    StartPipelineReprocessingRequest.add_member(:channel_messages, Shapes::ShapeRef.new(shape: ChannelMessages, location_name: "channelMessages"))
     StartPipelineReprocessingRequest.struct_class = Types::StartPipelineReprocessingRequest
 
     StartPipelineReprocessingResponse.add_member(:reprocessing_id, Shapes::ShapeRef.new(shape: ReprocessingId, location_name: "reprocessingId"))
@@ -845,6 +884,7 @@ module Aws::IoTAnalytics
     UpdateDatastoreRequest.add_member(:datastore_name, Shapes::ShapeRef.new(shape: DatastoreName, required: true, location: "uri", location_name: "datastoreName"))
     UpdateDatastoreRequest.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "retentionPeriod"))
     UpdateDatastoreRequest.add_member(:datastore_storage, Shapes::ShapeRef.new(shape: DatastoreStorage, location_name: "datastoreStorage"))
+    UpdateDatastoreRequest.add_member(:file_format_configuration, Shapes::ShapeRef.new(shape: FileFormatConfiguration, location_name: "fileFormatConfiguration"))
     UpdateDatastoreRequest.struct_class = Types::UpdateDatastoreRequest
 
     UpdatePipelineRequest.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location: "uri", location_name: "pipelineName"))

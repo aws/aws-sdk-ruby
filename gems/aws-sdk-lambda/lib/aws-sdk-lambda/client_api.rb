@@ -73,6 +73,10 @@ module Aws::Lambda
     EFSMountTimeoutException = Shapes::StructureShape.new(name: 'EFSMountTimeoutException')
     ENILimitReachedException = Shapes::StructureShape.new(name: 'ENILimitReachedException')
     Enabled = Shapes::BooleanShape.new(name: 'Enabled')
+    EndPointType = Shapes::StringShape.new(name: 'EndPointType')
+    Endpoint = Shapes::StringShape.new(name: 'Endpoint')
+    EndpointLists = Shapes::ListShape.new(name: 'EndpointLists')
+    Endpoints = Shapes::MapShape.new(name: 'Endpoints')
     Environment = Shapes::StructureShape.new(name: 'Environment')
     EnvironmentError = Shapes::StructureShape.new(name: 'EnvironmentError')
     EnvironmentResponse = Shapes::StructureShape.new(name: 'EnvironmentResponse')
@@ -95,6 +99,8 @@ module Aws::Lambda
     FunctionEventInvokeConfigList = Shapes::ListShape.new(name: 'FunctionEventInvokeConfigList')
     FunctionList = Shapes::ListShape.new(name: 'FunctionList')
     FunctionName = Shapes::StringShape.new(name: 'FunctionName')
+    FunctionResponseType = Shapes::StringShape.new(name: 'FunctionResponseType')
+    FunctionResponseTypeList = Shapes::ListShape.new(name: 'FunctionResponseTypeList')
     FunctionVersion = Shapes::StringShape.new(name: 'FunctionVersion')
     GetAccountSettingsRequest = Shapes::StructureShape.new(name: 'GetAccountSettingsRequest')
     GetAccountSettingsResponse = Shapes::StructureShape.new(name: 'GetAccountSettingsResponse')
@@ -242,6 +248,7 @@ module Aws::Lambda
     S3ObjectVersion = Shapes::StringShape.new(name: 'S3ObjectVersion')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
+    SelfManagedEventSource = Shapes::StructureShape.new(name: 'SelfManagedEventSource')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
     SigningProfileVersionArns = Shapes::ListShape.new(name: 'SigningProfileVersionArns')
@@ -272,6 +279,8 @@ module Aws::Lambda
     TracingConfig = Shapes::StructureShape.new(name: 'TracingConfig')
     TracingConfigResponse = Shapes::StructureShape.new(name: 'TracingConfigResponse')
     TracingMode = Shapes::StringShape.new(name: 'TracingMode')
+    TumblingWindowInSeconds = Shapes::IntegerShape.new(name: 'TumblingWindowInSeconds')
+    URI = Shapes::StringShape.new(name: 'URI')
     UnreservedConcurrentExecutions = Shapes::IntegerShape.new(name: 'UnreservedConcurrentExecutions')
     UnsupportedMediaTypeException = Shapes::StructureShape.new(name: 'UnsupportedMediaTypeException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -391,7 +400,7 @@ module Aws::Lambda
     CreateCodeSigningConfigResponse.add_member(:code_signing_config, Shapes::ShapeRef.new(shape: CodeSigningConfig, required: true, location_name: "CodeSigningConfig"))
     CreateCodeSigningConfigResponse.struct_class = Types::CreateCodeSigningConfigResponse
 
-    CreateEventSourceMappingRequest.add_member(:event_source_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "EventSourceArn"))
+    CreateEventSourceMappingRequest.add_member(:event_source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "EventSourceArn"))
     CreateEventSourceMappingRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "FunctionName"))
     CreateEventSourceMappingRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled"))
     CreateEventSourceMappingRequest.add_member(:batch_size, Shapes::ShapeRef.new(shape: BatchSize, location_name: "BatchSize"))
@@ -403,9 +412,12 @@ module Aws::Lambda
     CreateEventSourceMappingRequest.add_member(:maximum_record_age_in_seconds, Shapes::ShapeRef.new(shape: MaximumRecordAgeInSeconds, location_name: "MaximumRecordAgeInSeconds"))
     CreateEventSourceMappingRequest.add_member(:bisect_batch_on_function_error, Shapes::ShapeRef.new(shape: BisectBatchOnFunctionError, location_name: "BisectBatchOnFunctionError"))
     CreateEventSourceMappingRequest.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttemptsEventSourceMapping, location_name: "MaximumRetryAttempts"))
+    CreateEventSourceMappingRequest.add_member(:tumbling_window_in_seconds, Shapes::ShapeRef.new(shape: TumblingWindowInSeconds, location_name: "TumblingWindowInSeconds"))
     CreateEventSourceMappingRequest.add_member(:topics, Shapes::ShapeRef.new(shape: Topics, location_name: "Topics"))
     CreateEventSourceMappingRequest.add_member(:queues, Shapes::ShapeRef.new(shape: Queues, location_name: "Queues"))
     CreateEventSourceMappingRequest.add_member(:source_access_configurations, Shapes::ShapeRef.new(shape: SourceAccessConfigurations, location_name: "SourceAccessConfigurations"))
+    CreateEventSourceMappingRequest.add_member(:self_managed_event_source, Shapes::ShapeRef.new(shape: SelfManagedEventSource, location_name: "SelfManagedEventSource"))
+    CreateEventSourceMappingRequest.add_member(:function_response_types, Shapes::ShapeRef.new(shape: FunctionResponseTypeList, location_name: "FunctionResponseTypes"))
     CreateEventSourceMappingRequest.struct_class = Types::CreateEventSourceMappingRequest
 
     CreateFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "FunctionName"))
@@ -504,6 +516,11 @@ module Aws::Lambda
     ENILimitReachedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ENILimitReachedException.struct_class = Types::ENILimitReachedException
 
+    EndpointLists.member = Shapes::ShapeRef.new(shape: Endpoint)
+
+    Endpoints.key = Shapes::ShapeRef.new(shape: EndPointType)
+    Endpoints.value = Shapes::ShapeRef.new(shape: EndpointLists)
+
     Environment.add_member(:variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "Variables"))
     Environment.struct_class = Types::Environment
 
@@ -534,9 +551,12 @@ module Aws::Lambda
     EventSourceMappingConfiguration.add_member(:topics, Shapes::ShapeRef.new(shape: Topics, location_name: "Topics"))
     EventSourceMappingConfiguration.add_member(:queues, Shapes::ShapeRef.new(shape: Queues, location_name: "Queues"))
     EventSourceMappingConfiguration.add_member(:source_access_configurations, Shapes::ShapeRef.new(shape: SourceAccessConfigurations, location_name: "SourceAccessConfigurations"))
+    EventSourceMappingConfiguration.add_member(:self_managed_event_source, Shapes::ShapeRef.new(shape: SelfManagedEventSource, location_name: "SelfManagedEventSource"))
     EventSourceMappingConfiguration.add_member(:maximum_record_age_in_seconds, Shapes::ShapeRef.new(shape: MaximumRecordAgeInSeconds, location_name: "MaximumRecordAgeInSeconds"))
     EventSourceMappingConfiguration.add_member(:bisect_batch_on_function_error, Shapes::ShapeRef.new(shape: BisectBatchOnFunctionError, location_name: "BisectBatchOnFunctionError"))
     EventSourceMappingConfiguration.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttemptsEventSourceMapping, location_name: "MaximumRetryAttempts"))
+    EventSourceMappingConfiguration.add_member(:tumbling_window_in_seconds, Shapes::ShapeRef.new(shape: TumblingWindowInSeconds, location_name: "TumblingWindowInSeconds"))
+    EventSourceMappingConfiguration.add_member(:function_response_types, Shapes::ShapeRef.new(shape: FunctionResponseTypeList, location_name: "FunctionResponseTypes"))
     EventSourceMappingConfiguration.struct_class = Types::EventSourceMappingConfiguration
 
     EventSourceMappingsList.member = Shapes::ShapeRef.new(shape: EventSourceMappingConfiguration)
@@ -605,6 +625,8 @@ module Aws::Lambda
     FunctionEventInvokeConfigList.member = Shapes::ShapeRef.new(shape: FunctionEventInvokeConfig)
 
     FunctionList.member = Shapes::ShapeRef.new(shape: FunctionConfiguration)
+
+    FunctionResponseTypeList.member = Shapes::ShapeRef.new(shape: FunctionResponseType)
 
     GetAccountSettingsRequest.struct_class = Types::GetAccountSettingsRequest
 
@@ -1045,6 +1067,9 @@ module Aws::Lambda
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
+    SelfManagedEventSource.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, location_name: "Endpoints"))
+    SelfManagedEventSource.struct_class = Types::SelfManagedEventSource
+
     ServiceException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     ServiceException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ServiceException.struct_class = Types::ServiceException
@@ -1052,7 +1077,7 @@ module Aws::Lambda
     SigningProfileVersionArns.member = Shapes::ShapeRef.new(shape: Arn)
 
     SourceAccessConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: SourceAccessType, location_name: "Type"))
-    SourceAccessConfiguration.add_member(:uri, Shapes::ShapeRef.new(shape: Arn, location_name: "URI"))
+    SourceAccessConfiguration.add_member(:uri, Shapes::ShapeRef.new(shape: URI, location_name: "URI"))
     SourceAccessConfiguration.struct_class = Types::SourceAccessConfiguration
 
     SourceAccessConfigurations.member = Shapes::ShapeRef.new(shape: SourceAccessConfiguration)
@@ -1124,6 +1149,8 @@ module Aws::Lambda
     UpdateEventSourceMappingRequest.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttemptsEventSourceMapping, location_name: "MaximumRetryAttempts"))
     UpdateEventSourceMappingRequest.add_member(:parallelization_factor, Shapes::ShapeRef.new(shape: ParallelizationFactor, location_name: "ParallelizationFactor"))
     UpdateEventSourceMappingRequest.add_member(:source_access_configurations, Shapes::ShapeRef.new(shape: SourceAccessConfigurations, location_name: "SourceAccessConfigurations"))
+    UpdateEventSourceMappingRequest.add_member(:tumbling_window_in_seconds, Shapes::ShapeRef.new(shape: TumblingWindowInSeconds, location_name: "TumblingWindowInSeconds"))
+    UpdateEventSourceMappingRequest.add_member(:function_response_types, Shapes::ShapeRef.new(shape: FunctionResponseTypeList, location_name: "FunctionResponseTypes"))
     UpdateEventSourceMappingRequest.struct_class = Types::UpdateEventSourceMappingRequest
 
     UpdateFunctionCodeRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))

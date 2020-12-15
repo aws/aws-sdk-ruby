@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2020-12-15)
+------------------
+
+* Feature - Adding support for Change Manager API content
+
 1.99.0 (2020-12-04)
 ------------------
 

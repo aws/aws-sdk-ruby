@@ -609,7 +609,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         event_source_arn: "Arn", # required
+    #         event_source_arn: "Arn",
     #         function_name: "FunctionName", # required
     #         enabled: false,
     #         batch_size: 1,
@@ -628,14 +628,21 @@ module Aws::Lambda
     #         maximum_record_age_in_seconds: 1,
     #         bisect_batch_on_function_error: false,
     #         maximum_retry_attempts: 1,
+    #         tumbling_window_in_seconds: 1,
     #         topics: ["Topic"],
     #         queues: ["Queue"],
     #         source_access_configurations: [
     #           {
-    #             type: "BASIC_AUTH", # accepts BASIC_AUTH
-    #             uri: "Arn",
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH
+    #             uri: "URI",
     #           },
     #         ],
+    #         self_managed_event_source: {
+    #           endpoints: {
+    #             "KAFKA_BOOTSTRAP_SERVERS" => ["Endpoint"],
+    #           },
+    #         },
+    #         function_response_types: ["ReportBatchItemFailures"], # accepts ReportBatchItemFailures
     #       }
     #
     # @!attribute [rw] event_source_arn
@@ -683,15 +690,18 @@ module Aws::Lambda
     #
     #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
     #
-    #   * **Amazon Simple Queue Service** - Default 10. Max 10.
+    #   * **Amazon Simple Queue Service** - Default 10. For standard queues
+    #     the max is 10,000. For FIFO queues the max is 10.
     #
     #   * **Amazon Managed Streaming for Apache Kafka** - Default 100. Max
     #     10,000.
+    #
+    #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
-    #   (Streams) The maximum amount of time to gather records before
-    #   invoking the function, in seconds.
+    #   (Streams and SQS standard queues) The maximum amount of time to
+    #   gather records before invoking the function, in seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
@@ -731,8 +741,13 @@ module Aws::Lambda
     #   records will be retried until the record expires.
     #   @return [Integer]
     #
+    # @!attribute [rw] tumbling_window_in_seconds
+    #   (Streams) The duration of a processing window in seconds. The range
+    #   is between 1 second up to 15 minutes.
+    #   @return [Integer]
+    #
     # @!attribute [rw] topics
-    #   (MSK) The name of the Kafka topic.
+    #   The name of the Kafka topic.
     #   @return [Array<String>]
     #
     # @!attribute [rw] queues
@@ -740,18 +755,18 @@ module Aws::Lambda
     #   @return [Array<String>]
     #
     # @!attribute [rw] source_access_configurations
-    #   (MQ) The Secrets Manager secret that stores your broker credentials.
-    #   To store your secret, use the following format: ` \{ "username":
-    #   "your username", "password": "your password" \}`
-    #
-    #   To reference the secret, use the following format: `[ \{ "Type":
-    #   "BASIC_AUTH", "URI": "secretARN" \} ]`
-    #
-    #   The value of `Type` is always `BASIC_AUTH`. To encrypt the secret,
-    #   you can use customer or service managed keys. When using a customer
-    #   managed KMS key, the Lambda execution role requires `kms:Decrypt`
-    #   permissions.
+    #   An array of the authentication protocol, or the VPC components to
+    #   secure your event source.
     #   @return [Array<Types::SourceAccessConfiguration>]
+    #
+    # @!attribute [rw] self_managed_event_source
+    #   The Self-Managed Apache Kafka cluster to send records.
+    #   @return [Types::SelfManagedEventSource]
+    #
+    # @!attribute [rw] function_response_types
+    #   (Streams) A list of current response type enums applied to the event
+    #   source mapping.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMappingRequest AWS API Documentation
     #
@@ -768,9 +783,12 @@ module Aws::Lambda
       :maximum_record_age_in_seconds,
       :bisect_batch_on_function_error,
       :maximum_retry_attempts,
+      :tumbling_window_in_seconds,
       :topics,
       :queues,
-      :source_access_configurations)
+      :source_access_configurations,
+      :self_managed_event_source,
+      :function_response_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1571,8 +1589,9 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
-    #   (Streams) The maximum amount of time to gather records before
-    #   invoking the function, in seconds. The default value is zero.
+    #   (Streams and SQS standard queues) The maximum amount of time to
+    #   gather records before invoking the function, in seconds. The default
+    #   value is zero.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
@@ -1615,7 +1634,7 @@ module Aws::Lambda
     #   @return [Types::DestinationConfig]
     #
     # @!attribute [rw] topics
-    #   (MSK) The name of the Kafka topic to consume.
+    #   The name of the Kafka topic.
     #   @return [Array<String>]
     #
     # @!attribute [rw] queues
@@ -1623,18 +1642,13 @@ module Aws::Lambda
     #   @return [Array<String>]
     #
     # @!attribute [rw] source_access_configurations
-    #   (MQ) The Secrets Manager secret that stores your broker credentials.
-    #   To store your secret, use the following format: ` \{ "username":
-    #   "your username", "password": "your password" \}`
-    #
-    #   To reference the secret, use the following format: `[ \{ "Type":
-    #   "BASIC_AUTH", "URI": "secretARN" \} ]`
-    #
-    #   The value of `Type` is always `BASIC_AUTH`. To encrypt the secret,
-    #   you can use customer or service managed keys. When using a customer
-    #   managed KMS key, the Lambda execution role requires `kms:Decrypt`
-    #   permissions.
+    #   An array of the authentication protocol, or the VPC components to
+    #   secure your event source.
     #   @return [Array<Types::SourceAccessConfiguration>]
+    #
+    # @!attribute [rw] self_managed_event_source
+    #   The Self-Managed Apache Kafka cluster for your event source.
+    #   @return [Types::SelfManagedEventSource]
     #
     # @!attribute [rw] maximum_record_age_in_seconds
     #   (Streams) Discard records older than the specified age. The default
@@ -1652,6 +1666,16 @@ module Aws::Lambda
     #   default value is infinite (-1). When set to infinite (-1), failed
     #   records are retried until the record expires.
     #   @return [Integer]
+    #
+    # @!attribute [rw] tumbling_window_in_seconds
+    #   (Streams) The duration of a processing window in seconds. The range
+    #   is between 1 second up to 15 minutes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] function_response_types
+    #   (Streams) A list of current response type enums applied to the event
+    #   source mapping.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingConfiguration AWS API Documentation
     #
@@ -1672,9 +1696,12 @@ module Aws::Lambda
       :topics,
       :queues,
       :source_access_configurations,
+      :self_managed_event_source,
       :maximum_record_age_in_seconds,
       :bisect_batch_on_function_error,
-      :maximum_retry_attempts)
+      :maximum_retry_attempts,
+      :tumbling_window_in_seconds,
+      :function_response_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2659,12 +2686,12 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Configuration values that override the container image Dockerfile. See
-    # [Override Container settings][1].
+    # Configuration values that override the container image Dockerfile
+    # settings. See [Container settings][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-images-settings.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html
     #
     # @note When making an API call, you may pass ImageConfig
     #   data as a hash:
@@ -4701,6 +4728,31 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # The Self-Managed Apache Kafka cluster for your event source.
+    #
+    # @note When making an API call, you may pass SelfManagedEventSource
+    #   data as a hash:
+    #
+    #       {
+    #         endpoints: {
+    #           "KAFKA_BOOTSTRAP_SERVERS" => ["Endpoint"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] endpoints
+    #   The list of bootstrap servers for your Kafka brokers in the
+    #   following format: `"KAFKA_BOOTSTRAP_SERVERS":
+    #   ["abc.xyz.com:xxxx","abc2.xyz.com:xxxx"]`.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/SelfManagedEventSource AWS API Documentation
+    #
+    class SelfManagedEventSource < Struct.new(
+      :endpoints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The AWS Lambda service encountered an internal error.
     #
     # @!attribute [rw] type
@@ -4718,36 +4770,41 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # (MQ) The Secrets Manager secret that stores your broker credentials.
-    # To store your secret, use the following format: ` \{ "username": "your
-    # username", "password": "your password" \}`
+    # You can specify the authentication protocol, or the VPC components to
+    # secure access to your event source.
     #
     # @note When making an API call, you may pass SourceAccessConfiguration
     #   data as a hash:
     #
     #       {
-    #         type: "BASIC_AUTH", # accepts BASIC_AUTH
-    #         uri: "Arn",
+    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH
+    #         uri: "URI",
     #       }
     #
     # @!attribute [rw] type
-    #   To reference the secret, use the following format: `[ \{ "Type":
-    #   "BASIC_AUTH", "URI": "secretARN" \} ]`
+    #   The type of authentication protocol or the VPC components for your
+    #   event source. For example: `"Type":"SASL_SCRAM_512_AUTH"`.
     #
-    #   The value of `Type` is always `BASIC_AUTH`. To encrypt the secret,
-    #   you can use customer or service managed keys. When using a customer
-    #   managed KMS key, the Lambda execution role requires `kms:Decrypt`
-    #   permissions.
+    #   * `BASIC_AUTH` - (MQ) The Secrets Manager secret that stores your
+    #     broker credentials.
+    #
+    #   * `VPC_SUBNET` - The subnets associated with your VPC. Lambda
+    #     connects to these subnets to fetch data from your Kafka cluster.
+    #
+    #   * `VPC_SECURITY_GROUP` - The VPC security group used to manage
+    #     access to your Kafka brokers.
+    #
+    #   * `SASL_SCRAM_256_AUTH` - The ARN of your secret key used for SASL
+    #     SCRAM-256 authentication of your Kafka brokers.
+    #
+    #   * `SASL_SCRAM_512_AUTH` - The ARN of your secret key used for SASL
+    #     SCRAM-512 authentication of your Kafka brokers.
     #   @return [String]
     #
     # @!attribute [rw] uri
-    #   To reference the secret, use the following format: `[ \{ "Type":
-    #   "BASIC_AUTH", "URI": "secretARN" \} ]`
-    #
-    #   The value of `Type` is always `BASIC_AUTH`. To encrypt the secret,
-    #   you can use customer or service managed keys. When using a customer
-    #   managed KMS key, the Lambda execution role requires `kms:Decrypt`
-    #   permissions.
+    #   The value for your chosen configuration in `Type`. For example:
+    #   `"URI":
+    #   "arn:aws:secretsmanager:us-east-1:01234567890:secret:MyBrokerSecretName"`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/SourceAccessConfiguration AWS API Documentation
@@ -5056,10 +5113,12 @@ module Aws::Lambda
     #         parallelization_factor: 1,
     #         source_access_configurations: [
     #           {
-    #             type: "BASIC_AUTH", # accepts BASIC_AUTH
-    #             uri: "Arn",
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH
+    #             uri: "URI",
     #           },
     #         ],
+    #         tumbling_window_in_seconds: 1,
+    #         function_response_types: ["ReportBatchItemFailures"], # accepts ReportBatchItemFailures
     #       }
     #
     # @!attribute [rw] uuid
@@ -5097,15 +5156,18 @@ module Aws::Lambda
     #
     #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
     #
-    #   * **Amazon Simple Queue Service** - Default 10. Max 10.
+    #   * **Amazon Simple Queue Service** - Default 10. For standard queues
+    #     the max is 10,000. For FIFO queues the max is 10.
     #
     #   * **Amazon Managed Streaming for Apache Kafka** - Default 100. Max
     #     10,000.
+    #
+    #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
-    #   (Streams) The maximum amount of time to gather records before
-    #   invoking the function, in seconds.
+    #   (Streams and SQS standard queues) The maximum amount of time to
+    #   gather records before invoking the function, in seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] destination_config
@@ -5135,18 +5197,19 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] source_access_configurations
-    #   (MQ) The Secrets Manager secret that stores your broker credentials.
-    #   To store your secret, use the following format: ` \{ "username":
-    #   "your username", "password": "your password" \}`
-    #
-    #   To reference the secret, use the following format: `[ \{ "Type":
-    #   "BASIC_AUTH", "URI": "secretARN" \} ]`
-    #
-    #   The value of `Type` is always `BASIC_AUTH`. To encrypt the secret,
-    #   you can use customer or service managed keys. When using a customer
-    #   managed KMS key, the Lambda execution role requires `kms:Decrypt`
-    #   permissions.
+    #   An array of the authentication protocol, or the VPC components to
+    #   secure your event source.
     #   @return [Array<Types::SourceAccessConfiguration>]
+    #
+    # @!attribute [rw] tumbling_window_in_seconds
+    #   (Streams) The duration of a processing window in seconds. The range
+    #   is between 1 second up to 15 minutes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] function_response_types
+    #   (Streams) A list of current response type enums applied to the event
+    #   source mapping.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMappingRequest AWS API Documentation
     #
@@ -5161,7 +5224,9 @@ module Aws::Lambda
       :bisect_batch_on_function_error,
       :maximum_retry_attempts,
       :parallelization_factor,
-      :source_access_configurations)
+      :source_access_configurations,
+      :tumbling_window_in_seconds,
+      :function_response_types)
       SENSITIVE = []
       include Aws::Structure
     end

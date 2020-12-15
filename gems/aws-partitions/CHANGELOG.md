@@ -1,6 +1,19 @@
 Unreleased Changes
 ------------------
 
+1.407.0 (2020-12-15)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PrometheusService`.
+
+* Feature - Added support for enumerating regions for `Aws::IoTWireless`.
+
+* Feature - Added support for enumerating regions for `Aws::IoTFleetHub`.
+
+* Feature - Added support for enumerating regions for `Aws::IoTDeviceAdvisor`.
+
+* Feature - Added support for enumerating regions for `Aws::GreengrassV2`.
+
 1.406.0 (2020-12-14)
 ------------------
 

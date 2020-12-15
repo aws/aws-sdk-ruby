@@ -267,6 +267,15 @@ module Aws::IoT
     #             },
     #           },
     #         },
+    #         kafka: {
+    #           destination_arn: "AwsArn", # required
+    #           topic: "String", # required
+    #           key: "String",
+    #           partition: "String",
+    #           client_properties: { # required
+    #             "String" => "String",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] dynamo_db
@@ -358,6 +367,11 @@ module Aws::IoT
     #   Send data to an HTTPS endpoint.
     #   @return [Types::HttpAction]
     #
+    # @!attribute [rw] kafka
+    #   Send messages to an Amazon Managed Streaming for Apache Kafka
+    #   (Amazon MSK) or self-managed Apache Kafka cluster.
+    #   @return [Types::KafkaAction]
+    #
     class Action < Struct.new(
       :dynamo_db,
       :dynamo_d_bv_2,
@@ -378,7 +392,8 @@ module Aws::IoT
       :iot_site_wise,
       :step_functions,
       :timestream,
-      :http)
+      :http,
+      :kafka)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -395,17 +410,21 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] security_profile_name
-    #   The security profile whose behavior is in violation.
+    #   The security profile with the behavior is in violation.
     #   @return [String]
     #
     # @!attribute [rw] behavior
-    #   The behavior which is being violated.
+    #   The behavior that is being violated.
     #   @return [Types::Behavior]
     #
     # @!attribute [rw] last_violation_value
-    #   The value of the metric (the measurement) which caused the most
+    #   The value of the metric (the measurement) that caused the most
     #   recent violation.
     #   @return [Types::MetricValue]
+    #
+    # @!attribute [rw] violation_event_additional_info
+    #   The details of a violation event.
+    #   @return [Types::ViolationEventAdditionalInfo]
     #
     # @!attribute [rw] last_violation_time
     #   The time the most recent violation occurred.
@@ -421,6 +440,7 @@ module Aws::IoT
       :security_profile_name,
       :behavior,
       :last_violation_value,
+      :violation_event_additional_info,
       :last_violation_time,
       :violation_start_time)
       SENSITIVE = []
@@ -524,14 +544,14 @@ module Aws::IoT
     # @!attribute [rw] thing_group_names
     #   The list of groups to which you want to add the things that
     #   triggered the mitigation action. You can add a thing to a maximum of
-    #   10 groups, but you cannot add a thing to more than one group in the
+    #   10 groups, but you can't add a thing to more than one group in the
     #   same hierarchy.
     #   @return [Array<String>]
     #
     # @!attribute [rw] override_dynamic_groups
     #   Specifies if this mitigation action can move the things that
     #   triggered the mitigation action even if they are part of one or more
-    #   dynamic things groups.
+    #   dynamic thing groups.
     #   @return [Boolean]
     #
     class AddThingsToThingGroupParams < Struct.new(
@@ -552,7 +572,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] alert_target_arn
-    #   The ARN of the notification target to which alerts are sent.
+    #   The Amazon Resource Name (ARN) of the notification target to which
+    #   alerts are sent.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -1642,11 +1663,14 @@ module Aws::IoT
     #           operator: "IN", # accepts IN, NOT_IN
     #         },
     #         criteria: {
-    #           comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
+    #           comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set, in-set, not-in-set
     #           value: {
     #             count: 1,
     #             cidrs: ["Cidr"],
     #             ports: [1],
+    #             number: 1.0,
+    #             numbers: [1.0],
+    #             strings: ["stringValue"],
     #           },
     #           duration_seconds: 1,
     #           consecutive_datapoints_to_alarm: 1,
@@ -1654,11 +1678,15 @@ module Aws::IoT
     #           statistical_threshold: {
     #             statistic: "EvaluationStatistic",
     #           },
+    #           ml_detection_config: {
+    #             confidence_level: "LOW", # required, accepts LOW, MEDIUM, HIGH
+    #           },
     #         },
+    #         suppress_alerts: false,
     #       }
     #
     # @!attribute [rw] name
-    #   The name you have given to the behavior.
+    #   The name you've given to the behavior.
     #   @return [String]
     #
     # @!attribute [rw] metric
@@ -1668,8 +1696,8 @@ module Aws::IoT
     # @!attribute [rw] metric_dimension
     #   The dimension for a metric in your behavior. For example, using a
     #   `TOPIC_FILTER` dimension, you can narrow down the scope of the
-    #   metric only to MQTT topics whose name match the pattern specified in
-    #   the dimension.
+    #   metric to only MQTT topics where the name matches the pattern
+    #   specified in the dimension. This can't be used with custom metrics.
     #   @return [Types::MetricDimension]
     #
     # @!attribute [rw] criteria
@@ -1677,11 +1705,16 @@ module Aws::IoT
     #   regard to the `metric`.
     #   @return [Types::BehaviorCriteria]
     #
+    # @!attribute [rw] suppress_alerts
+    #   Suppresses alerts.
+    #   @return [Boolean]
+    #
     class Behavior < Struct.new(
       :name,
       :metric,
       :metric_dimension,
-      :criteria)
+      :criteria,
+      :suppress_alerts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1692,11 +1725,14 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
+    #         comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set, in-set, not-in-set
     #         value: {
     #           count: 1,
     #           cidrs: ["Cidr"],
     #           ports: [1],
+    #           number: 1.0,
+    #           numbers: [1.0],
+    #           strings: ["stringValue"],
     #         },
     #         duration_seconds: 1,
     #         consecutive_datapoints_to_alarm: 1,
@@ -1704,11 +1740,24 @@ module Aws::IoT
     #         statistical_threshold: {
     #           statistic: "EvaluationStatistic",
     #         },
+    #         ml_detection_config: {
+    #           confidence_level: "LOW", # required, accepts LOW, MEDIUM, HIGH
+    #         },
     #       }
     #
     # @!attribute [rw] comparison_operator
     #   The operator that relates the thing measured (`metric`) to the
-    #   criteria (containing a `value` or `statisticalThreshold`).
+    #   criteria (containing a `value` or `statisticalThreshold`). Valid
+    #   operators include:
+    #
+    #   * `string-list`\: `in-set` and `not-in-set`
+    #
+    #   * `number-list`\: `in-set` and `not-in-set`
+    #
+    #   * `ip-address-list`\: `in-cidr-set` and `not-in-cidr-set`
+    #
+    #   * `number`\: `less-than`, `less-than-equals`, `greater-than`, and
+    #     `greater-than-equals`
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -1717,12 +1766,13 @@ module Aws::IoT
     #
     # @!attribute [rw] duration_seconds
     #   Use this to specify the time duration over which the behavior is
-    #   evaluated, for those criteria which have a time dimension (for
+    #   evaluated, for those criteria that have a time dimension (for
     #   example, `NUM_MESSAGES_SENT`). For a `statisticalThreshhold` metric
     #   comparison, measurements from all devices are accumulated over this
     #   time duration before being used to calculate percentiles, and later,
     #   measurements from an individual device are also accumulated over
-    #   this time duration before being given a percentile rank.
+    #   this time duration before being given a percentile rank. Cannot be
+    #   used with list-based metric datatypes.
     #   @return [Integer]
     #
     # @!attribute [rw] consecutive_datapoints_to_alarm
@@ -1739,10 +1789,14 @@ module Aws::IoT
     #   @return [Integer]
     #
     # @!attribute [rw] statistical_threshold
-    #   A statistical ranking (percentile) which indicates a threshold value
+    #   A statistical ranking (percentile)that indicates a threshold value
     #   by which a behavior is determined to be in compliance or in
     #   violation of the behavior.
     #   @return [Types::StatisticalThreshold]
+    #
+    # @!attribute [rw] ml_detection_config
+    #   The configuration of an ML Detect
+    #   @return [Types::MachineLearningDetectionConfig]
     #
     class BehaviorCriteria < Struct.new(
       :comparison_operator,
@@ -1750,7 +1804,45 @@ module Aws::IoT
       :duration_seconds,
       :consecutive_datapoints_to_alarm,
       :consecutive_datapoints_to_clear,
-      :statistical_threshold)
+      :statistical_threshold,
+      :ml_detection_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of an ML Detect behavior model.
+    #
+    # @!attribute [rw] security_profile_name
+    #   The name of the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] behavior_name
+    #   The name of the behavior.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_data_collection_start_date
+    #   The date a training model started collecting data.
+    #   @return [Time]
+    #
+    # @!attribute [rw] model_status
+    #   The status of the behavior model.
+    #   @return [String]
+    #
+    # @!attribute [rw] datapoints_collection_percentage
+    #   The percentage of datapoints collected.
+    #   @return [Float]
+    #
+    # @!attribute [rw] last_model_refresh_date
+    #   The date the model was last refreshed.
+    #   @return [Time]
+    #
+    class BehaviorModelTrainingSummary < Struct.new(
+      :security_profile_name,
+      :behavior_name,
+      :training_data_collection_start_date,
+      :model_status,
+      :datapoints_collection_percentage,
+      :last_model_refresh_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1883,7 +1975,7 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         task_id: "AuditMitigationActionsTaskId", # required
+    #         task_id: "MitigationActionsTaskId", # required
     #       }
     #
     # @!attribute [rw] task_id
@@ -1937,6 +2029,25 @@ module Aws::IoT
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass CancelDetectMitigationActionsTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_id: "MitigationActionsTaskId", # required
+    #       }
+    #
+    # @!attribute [rw] task_id
+    #   The unique identifier of the task.
+    #   @return [String]
+    #
+    class CancelDetectMitigationActionsTaskRequest < Struct.new(
+      :task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class CancelDetectMitigationActionsTaskResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CancelJobExecutionRequest
     #   data as a hash:
@@ -2772,6 +2883,80 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateCustomMetricRequest
+    #   data as a hash:
+    #
+    #       {
+    #         metric_name: "MetricName", # required
+    #         display_name: "CustomMetricDisplayName",
+    #         metric_type: "string-list", # required, accepts string-list, ip-address-list, number-list, number
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         client_request_token: "ClientRequestToken", # required
+    #       }
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the custom metric. This will be used in the metric
+    #   report submitted from the device/thing. Shouldn't begin with
+    #   `aws:`. Cannot be updated once defined.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   Field represents a friendly name in the console for the custom
+    #   metric; it doesn't have to be unique. Don't use this name as the
+    #   metric identifier in the device metric report. Can be updated once
+    #   defined.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_type
+    #   The type of the custom metric. Types include `string-list`,
+    #   `ip-address-list`, `number-list`, and `number`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Metadata that can be used to manage the custom metric.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_request_token
+    #   Each custom metric must have a unique client request token. If you
+    #   try to create a new custom metric that already exists with a
+    #   different token, an exception occurs. If you omit this value, AWS
+    #   SDKs will automatically generate a unique client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class CreateCustomMetricRequest < Struct.new(
+      :metric_name,
+      :display_name,
+      :metric_type,
+      :tags,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_name
+    #   The name of the custom metric to be used in the metric report.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_arn
+    #   The Amazon Resource Number (ARN) of the custom metric, e.g.
+    #   `arn:aws-partition:iot:region:accountId:custommetric/metricName `
+    #   @return [String]
+    #
+    class CreateCustomMetricResponse < Struct.new(
+      :metric_name,
+      :metric_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDimensionRequest
     #   data as a hash:
     #
@@ -2833,7 +3018,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN (Amazon resource name) of the created dimension.
+    #   The Amazon Resource Name (ARN) of the created dimension.
     #   @return [String]
     #
     class CreateDimensionResponse < Struct.new(
@@ -3965,24 +4150,24 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] frequency
-    #   How often the scheduled audit takes place. Can be one of "DAILY",
-    #   "WEEKLY", "BIWEEKLY" or "MONTHLY". The start time of each
-    #   audit is determined by the system.
+    #   How often the scheduled audit takes place, either `DAILY`, `WEEKLY`,
+    #   `BIWEEKLY` or `MONTHLY`. The start time of each audit is determined
+    #   by the system.
     #   @return [String]
     #
     # @!attribute [rw] day_of_month
-    #   The day of the month on which the scheduled audit takes place. Can
-    #   be "1" through "31" or "LAST". This field is required if the
-    #   "frequency" parameter is set to "MONTHLY". If days 29-31 are
-    #   specified, and the month does not have that many days, the audit
-    #   takes place on the "LAST" day of the month.
+    #   The day of the month on which the scheduled audit takes place. This
+    #   can be "1" through "31" or "LAST". This field is required if
+    #   the "frequency" parameter is set to `MONTHLY`. If days 29 to 31
+    #   are specified, and the month doesn't have that many days, the audit
+    #   takes place on the `LAST` day of the month.
     #   @return [String]
     #
     # @!attribute [rw] day_of_week
-    #   The day of the week on which the scheduled audit takes place. Can be
-    #   one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or
-    #   "SAT". This field is required if the "frequency" parameter is
-    #   set to "WEEKLY" or "BIWEEKLY".
+    #   The day of the week on which the scheduled audit takes place, either
+    #   `SUN`, `MON`, `TUE`, `WED`, `THU`, `FRI`, or `SAT`. This field is
+    #   required if the `frequency` parameter is set to `WEEKLY` or
+    #   `BIWEEKLY`.
     #   @return [String]
     #
     # @!attribute [rw] target_check_names
@@ -4038,11 +4223,14 @@ module Aws::IoT
     #               operator: "IN", # accepts IN, NOT_IN
     #             },
     #             criteria: {
-    #               comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
+    #               comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set, in-set, not-in-set
     #               value: {
     #                 count: 1,
     #                 cidrs: ["Cidr"],
     #                 ports: [1],
+    #                 number: 1.0,
+    #                 numbers: [1.0],
+    #                 strings: ["stringValue"],
     #               },
     #               duration_seconds: 1,
     #               consecutive_datapoints_to_alarm: 1,
@@ -4050,7 +4238,11 @@ module Aws::IoT
     #               statistical_threshold: {
     #                 statistic: "EvaluationStatistic",
     #               },
+    #               ml_detection_config: {
+    #                 confidence_level: "LOW", # required, accepts LOW, MEDIUM, HIGH
+    #               },
     #             },
+    #             suppress_alerts: false,
     #           },
     #         ],
     #         alert_targets: {
@@ -4102,13 +4294,15 @@ module Aws::IoT
     #
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the profile's `behaviors`, but
-    #   it is also retained for any metric specified here.
+    #   it is also retained for any metric specified here. Can be used with
+    #   custom metrics; cannot be used with dimensions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] additional_metrics_to_retain_v2
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the profile's `behaviors`, but
-    #   it is also retained for any metric specified here.
+    #   it is also retained for any metric specified here. Can be used with
+    #   custom metrics; cannot be used with dimensions.
     #   @return [Array<Types::MetricToRetain>]
     #
     # @!attribute [rw] tags
@@ -4433,6 +4627,12 @@ module Aws::IoT
     #           http_url_configuration: {
     #             confirmation_url: "Url", # required
     #           },
+    #           vpc_configuration: {
+    #             subnet_ids: ["SubnetId"], # required
+    #             security_groups: ["SecurityGroupId"],
+    #             vpc_id: "VpcId", # required
+    #             role_arn: "AwsArn", # required
+    #           },
     #         },
     #       }
     #
@@ -4625,6 +4825,15 @@ module Aws::IoT
     #                   },
     #                 },
     #               },
+    #               kafka: {
+    #                 destination_arn: "AwsArn", # required
+    #                 topic: "String", # required
+    #                 key: "String",
+    #                 partition: "String",
+    #                 client_properties: { # required
+    #                   "String" => "String",
+    #                 },
+    #               },
     #             },
     #           ],
     #           rule_disabled: false,
@@ -4785,6 +4994,15 @@ module Aws::IoT
     #                   service_name: "ServiceName", # required
     #                   role_arn: "AwsArn", # required
     #                 },
+    #               },
+    #             },
+    #             kafka: {
+    #               destination_arn: "AwsArn", # required
+    #               topic: "String", # required
+    #               key: "String",
+    #               partition: "String",
+    #               client_properties: { # required
+    #                 "String" => "String",
     #               },
     #             },
     #           },
@@ -5035,6 +5253,25 @@ module Aws::IoT
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteCustomMetricRequest
+    #   data as a hash:
+    #
+    #       {
+    #         metric_name: "MetricName", # required
+    #       }
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the custom metric.
+    #   @return [String]
+    #
+    class DeleteCustomMetricRequest < Struct.new(
+      :metric_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DeleteCustomMetricResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteDimensionRequest
     #   data as a hash:
@@ -5710,7 +5947,7 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         task_id: "AuditMitigationActionsTaskId", # required
+    #         task_id: "MitigationActionsTaskId", # required
     #       }
     #
     # @!attribute [rw] task_id
@@ -6042,6 +6279,62 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeCustomMetricRequest
+    #   data as a hash:
+    #
+    #       {
+    #         metric_name: "MetricName", # required
+    #       }
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the custom metric.
+    #   @return [String]
+    #
+    class DescribeCustomMetricRequest < Struct.new(
+      :metric_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_name
+    #   The name of the custom metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_arn
+    #   The Amazon Resource Number (ARN) of the custom metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_type
+    #   The type of the custom metric. Types include `string-list`,
+    #   `ip-address-list`, `number-list`, and `number`.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   Field represents a friendly name in the console for the custom
+    #   metric; doesn't have to be unique. Don't use this name as the
+    #   metric identifier in the device metric report. Can be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The creation date of the custom metric in milliseconds since epoch.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The time the custom metric was last modified in milliseconds since
+    #   epoch.
+    #   @return [Time]
+    #
+    class DescribeCustomMetricResponse < Struct.new(
+      :metric_name,
+      :metric_arn,
+      :metric_type,
+      :display_name,
+      :creation_date,
+      :last_modified_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     class DescribeDefaultAuthorizerRequest < Aws::EmptyStructure; end
@@ -6052,6 +6345,33 @@ module Aws::IoT
     #
     class DescribeDefaultAuthorizerResponse < Struct.new(
       :authorizer_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeDetectMitigationActionsTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_id: "MitigationActionsTaskId", # required
+    #       }
+    #
+    # @!attribute [rw] task_id
+    #   The unique identifier of the task.
+    #   @return [String]
+    #
+    class DescribeDetectMitigationActionsTaskRequest < Struct.new(
+      :task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_summary
+    #   The description of a task.
+    #   @return [Types::DetectMitigationActionsTaskSummary]
+    #
+    class DescribeDetectMitigationActionsTaskResponse < Struct.new(
+      :task_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6078,7 +6398,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN (Amazon resource name) for the dimension.
+    #   The Amazon Resource Name (ARN) for the dimension.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -6615,21 +6935,21 @@ module Aws::IoT
     end
 
     # @!attribute [rw] frequency
-    #   How often the scheduled audit takes place. One of "DAILY",
-    #   "WEEKLY", "BIWEEKLY", or "MONTHLY". The start time of each
-    #   audit is determined by the system.
+    #   How often the scheduled audit takes place, either one of `DAILY`,
+    #   `WEEKLY`, `BIWEEKLY`, or `MONTHLY`. The start time of each audit is
+    #   determined by the system.
     #   @return [String]
     #
     # @!attribute [rw] day_of_month
-    #   The day of the month on which the scheduled audit takes place. Will
-    #   be "1" through "31" or "LAST". If days 29-31 are specified,
-    #   and the month does not have that many days, the audit takes place on
-    #   the "LAST" day of the month.
+    #   The day of the month on which the scheduled audit takes place. This
+    #   is will be `1` through `31` or `LAST`. If days `29`-`31` are
+    #   specified, and the month does not have that many days, the audit
+    #   takes place on the `LAST` day of the month.
     #   @return [String]
     #
     # @!attribute [rw] day_of_week
-    #   The day of the week on which the scheduled audit takes place. One of
-    #   "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT".
+    #   The day of the week on which the scheduled audit takes place, either
+    #   one of `SUN`, `MON`, `TUE`, `WED`, `THU`, `FRI`, or `SAT`.
     #   @return [String]
     #
     # @!attribute [rw] target_check_names
@@ -7195,6 +7515,170 @@ module Aws::IoT
     #
     class DetachThingPrincipalResponse < Aws::EmptyStructure; end
 
+    # Describes which mitigation actions should be executed.
+    #
+    # @!attribute [rw] task_id
+    #   The unique identifier of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] violation_id
+    #   The unique identifier of the violation.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_name
+    #   The friendly name that uniquely identifies the mitigation action.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the thing.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_start_date
+    #   The date a mitigation action was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] execution_end_date
+    #   The date a mitigation action ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of a mitigation action.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code of a mitigation action.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message of a mitigation action.
+    #   @return [String]
+    #
+    class DetectMitigationActionExecution < Struct.new(
+      :task_id,
+      :violation_id,
+      :action_name,
+      :thing_name,
+      :execution_start_date,
+      :execution_end_date,
+      :status,
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The statistics of a mitigation action task.
+    #
+    # @!attribute [rw] actions_executed
+    #   The actions that were performed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] actions_skipped
+    #   The actions that were skipped.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] actions_failed
+    #   The actions that failed.
+    #   @return [Integer]
+    #
+    class DetectMitigationActionsTaskStatistics < Struct.new(
+      :actions_executed,
+      :actions_skipped,
+      :actions_failed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of the mitigation action tasks.
+    #
+    # @!attribute [rw] task_id
+    #   The unique identifier of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_status
+    #   The status of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_start_time
+    #   The date the task started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] task_end_time
+    #   The date the task ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] target
+    #   Specifies the ML Detect findings to which the mitigation actions are
+    #   applied.
+    #   @return [Types::DetectMitigationActionsTaskTarget]
+    #
+    # @!attribute [rw] violation_event_occurrence_range
+    #   Specifies the time period of which violation events occurred
+    #   between.
+    #   @return [Types::ViolationEventOccurrenceRange]
+    #
+    # @!attribute [rw] only_active_violations_included
+    #   Includes only active violations.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] suppressed_alerts_included
+    #   Includes suppressed alerts.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] actions_definition
+    #   The definition of the actions.
+    #   @return [Array<Types::MitigationAction>]
+    #
+    # @!attribute [rw] task_statistics
+    #   The statistics of a mitigation action task.
+    #   @return [Types::DetectMitigationActionsTaskStatistics]
+    #
+    class DetectMitigationActionsTaskSummary < Struct.new(
+      :task_id,
+      :task_status,
+      :task_start_time,
+      :task_end_time,
+      :target,
+      :violation_event_occurrence_range,
+      :only_active_violations_included,
+      :suppressed_alerts_included,
+      :actions_definition,
+      :task_statistics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The target of a mitigation action task.
+    #
+    # @note When making an API call, you may pass DetectMitigationActionsTaskTarget
+    #   data as a hash:
+    #
+    #       {
+    #         violation_ids: ["ViolationId"],
+    #         security_profile_name: "SecurityProfileName",
+    #         behavior_name: "BehaviorName",
+    #       }
+    #
+    # @!attribute [rw] violation_ids
+    #   The unique identifiers of the violations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_profile_name
+    #   The name of the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] behavior_name
+    #   The name of the behavior.
+    #   @return [String]
+    #
+    class DetectMitigationActionsTaskTarget < Struct.new(
+      :violation_ids,
+      :security_profile_name,
+      :behavior_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input for the DisableTopicRuleRequest operation.
     #
     # @note When making an API call, you may pass DisableTopicRuleRequest
@@ -7459,11 +7943,11 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] role_arn_for_logging
-    #   The ARN of the IAM role used for logging.
+    #   The Amazon Resource Name (ARN) of the IAM role used for logging.
     #   @return [String]
     #
     # @!attribute [rw] log_level
-    #   Specifies the types of information to be logged.
+    #   Specifies the type of information to be logged.
     #   @return [String]
     #
     class EnableIoTLoggingParams < Struct.new(
@@ -7664,6 +8148,53 @@ module Aws::IoT
       :delivery_stream_name,
       :separator,
       :batch_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetBehaviorModelTrainingSummariesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         security_profile_name: "SecurityProfileName",
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] security_profile_name
+    #   The name of the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    class GetBehaviorModelTrainingSummariesRequest < Struct.new(
+      :security_profile_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] summaries
+    #   A list of all ML Detect behaviors and their model status for a given
+    #   Security Profile.
+    #   @return [Array<Types::BehaviorModelTrainingSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` if there are no additional results.
+    #   @return [String]
+    #
+    class GetBehaviorModelTrainingSummariesResponse < Struct.new(
+      :summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9086,6 +9617,52 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon
+    # MSK) or self-managed Apache Kafka cluster.
+    #
+    # @note When making an API call, you may pass KafkaAction
+    #   data as a hash:
+    #
+    #       {
+    #         destination_arn: "AwsArn", # required
+    #         topic: "String", # required
+    #         key: "String",
+    #         partition: "String",
+    #         client_properties: { # required
+    #           "String" => "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] destination_arn
+    #   The ARN of Kafka action's VPC `TopicRuleDestination`.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic
+    #   The Kafka topic for messages to be sent to the Kafka broker.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The Kafka message key.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition
+    #   The Kafka message partition.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_properties
+    #   Properties of the Apache Kafka producer client.
+    #   @return [Hash<String,String>]
+    #
+    class KafkaAction < Struct.new(
+      :destination_arn,
+      :topic,
+      :key,
+      :partition,
+      :client_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a key pair.
     #
     # @!attribute [rw] public_key
@@ -9172,6 +9749,8 @@ module Aws::IoT
     #       {
     #         thing_name: "DeviceDefenderThingName",
     #         security_profile_name: "SecurityProfileName",
+    #         behavior_criteria_type: "STATIC", # accepts STATIC, STATISTICAL, MACHINE_LEARNING
+    #         list_suppressed_alerts: false,
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
@@ -9185,6 +9764,14 @@ module Aws::IoT
     #   violations are listed.
     #   @return [String]
     #
+    # @!attribute [rw] behavior_criteria_type
+    #   The criteria for a behavior.
+    #   @return [String]
+    #
+    # @!attribute [rw] list_suppressed_alerts
+    #   A list of all suppressed alerts.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] next_token
     #   The token for the next set of results.
     #   @return [String]
@@ -9196,6 +9783,8 @@ module Aws::IoT
     class ListActiveViolationsRequest < Struct.new(
       :thing_name,
       :security_profile_name,
+      :behavior_criteria_type,
+      :list_suppressed_alerts,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -9376,7 +9965,7 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         task_id: "AuditMitigationActionsTaskId", # required
+    #         task_id: "MitigationActionsTaskId", # required
     #         action_status: "IN_PROGRESS", # accepts IN_PROGRESS, COMPLETED, FAILED, CANCELED, SKIPPED, PENDING
     #         finding_id: "FindingId", # required
     #         max_results: 1,
@@ -9904,6 +10493,175 @@ module Aws::IoT
     class ListCertificatesResponse < Struct.new(
       :certificates,
       :next_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCustomMetricsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #   @return [Integer]
+    #
+    class ListCustomMetricsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_names
+    #   The name of the custom metric.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` if there are no additional results.
+    #   @return [String]
+    #
+    class ListCustomMetricsResponse < Struct.new(
+      :metric_names,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDetectMitigationActionsExecutionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_id: "MitigationActionsTaskId",
+    #         violation_id: "ViolationId",
+    #         thing_name: "DeviceDefenderThingName",
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] task_id
+    #   The unique identifier of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] violation_id
+    #   The unique identifier of the violation.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the thing whose mitigation actions are listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   A filter to limit results to those found after the specified time.
+    #   You must specify either the startTime and endTime or the taskId, but
+    #   not both.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time period for which ML Detect mitigation actions
+    #   executions are returned.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    class ListDetectMitigationActionsExecutionsRequest < Struct.new(
+      :task_id,
+      :violation_id,
+      :thing_name,
+      :start_time,
+      :end_time,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] actions_executions
+    #   List of actions executions.
+    #   @return [Array<Types::DetectMitigationActionExecution>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` if there are no additional results.
+    #   @return [String]
+    #
+    class ListDetectMitigationActionsExecutionsResponse < Struct.new(
+      :actions_executions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDetectMitigationActionsTasksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time. The default is
+    #   25.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   A filter to limit results to those found after the specified time.
+    #   You must specify either the startTime and endTime or the taskId, but
+    #   not both.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time period for which ML Detect mitigation actions
+    #   tasks are returned.
+    #   @return [Time]
+    #
+    class ListDetectMitigationActionsTasksRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tasks
+    #   The collection of ML Detect mitigation tasks that matched the filter
+    #   criteria.
+    #   @return [Array<Types::DetectMitigationActionsTaskSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` if there are no additional results.
+    #   @return [String]
+    #
+    class ListDetectMitigationActionsTasksResponse < Struct.new(
+      :tasks,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10851,6 +11609,7 @@ module Aws::IoT
     #         next_token: "NextToken",
     #         max_results: 1,
     #         dimension_name: "DimensionName",
+    #         metric_name: "MetricName",
     #       }
     #
     # @!attribute [rw] next_token
@@ -10863,13 +11622,18 @@ module Aws::IoT
     #
     # @!attribute [rw] dimension_name
     #   A filter to limit results to the security profiles that use the
-    #   defined dimension.
+    #   defined dimension. Cannot be used with `metricName`
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the custom metric. Cannot be used with `dimensionName`.
     #   @return [String]
     #
     class ListSecurityProfilesRequest < Struct.new(
       :next_token,
       :max_results,
-      :dimension_name)
+      :dimension_name,
+      :metric_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11697,6 +12461,8 @@ module Aws::IoT
     #         end_time: Time.now, # required
     #         thing_name: "DeviceDefenderThingName",
     #         security_profile_name: "SecurityProfileName",
+    #         behavior_criteria_type: "STATIC", # accepts STATIC, STATISTICAL, MACHINE_LEARNING
+    #         list_suppressed_alerts: false,
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
@@ -11719,6 +12485,14 @@ module Aws::IoT
     #   security profile.
     #   @return [String]
     #
+    # @!attribute [rw] behavior_criteria_type
+    #   The criteria for a behavior.
+    #   @return [String]
+    #
+    # @!attribute [rw] list_suppressed_alerts
+    #   A list of all suppressed alerts.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] next_token
     #   The token for the next set of results.
     #   @return [String]
@@ -11732,6 +12506,8 @@ module Aws::IoT
       :end_time,
       :thing_name,
       :security_profile_name,
+      :behavior_criteria_type,
+      :list_suppressed_alerts,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -11823,6 +12599,26 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The configuration of an ML Detect Security Profile.
+    #
+    # @note When making an API call, you may pass MachineLearningDetectionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         confidence_level: "LOW", # required, accepts LOW, MEDIUM, HIGH
+    #       }
+    #
+    # @!attribute [rw] confidence_level
+    #   The sensitivity of anomalous behavior evaluation. Can be `Low`,
+    #   `Medium`, or `High`.
+    #   @return [String]
+    #
+    class MachineLearningDetectionConfig < Struct.new(
+      :confidence_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The policy documentation is not valid.
     #
     # @!attribute [rw] message
@@ -11884,7 +12680,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] metric_dimension
-    #   The dimension of a metric.
+    #   The dimension of a metric. This can't be used with custom metrics.
     #   @return [Types::MetricDimension]
     #
     class MetricToRetain < Struct.new(
@@ -11903,6 +12699,9 @@ module Aws::IoT
     #         count: 1,
     #         cidrs: ["Cidr"],
     #         ports: [1],
+    #         number: 1.0,
+    #         numbers: [1.0],
+    #         strings: ["stringValue"],
     #       }
     #
     # @!attribute [rw] count
@@ -11920,10 +12719,25 @@ module Aws::IoT
     #   specify that set to be compared with the `metric`.
     #   @return [Array<Integer>]
     #
+    # @!attribute [rw] number
+    #   The numeral value of a metric.
+    #   @return [Float]
+    #
+    # @!attribute [rw] numbers
+    #   The numeral values of a metric.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] strings
+    #   The string values of a metric.
+    #   @return [Array<String>]
+    #
     class MetricValue < Struct.new(
       :count,
       :cidrs,
-      :ports)
+      :ports,
+      :number,
+      :numbers,
+      :strings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12038,8 +12852,8 @@ module Aws::IoT
     #
     # @!attribute [rw] publish_finding_to_sns_params
     #   Parameters to define a mitigation action that publishes findings to
-    #   Amazon SNS. You can implement your own custom actions in response to
-    #   the Amazon SNS messages.
+    #   Amazon Simple Notification Service (Amazon SNS. You can implement
+    #   your own custom actions in response to the Amazon SNS messages.
     #   @return [Types::PublishFindingToSnsParams]
     #
     class MitigationActionParams < Struct.new(
@@ -13279,6 +14093,15 @@ module Aws::IoT
     #                   },
     #                 },
     #               },
+    #               kafka: {
+    #                 destination_arn: "AwsArn", # required
+    #                 topic: "String", # required
+    #                 key: "String",
+    #                 partition: "String",
+    #                 client_properties: { # required
+    #                   "String" => "String",
+    #                 },
+    #               },
     #             },
     #           ],
     #           rule_disabled: false,
@@ -13439,6 +14262,15 @@ module Aws::IoT
     #                   service_name: "ServiceName", # required
     #                   role_arn: "AwsArn", # required
     #                 },
+    #               },
+    #             },
+    #             kafka: {
+    #               destination_arn: "AwsArn", # required
+    #               topic: "String", # required
+    #               key: "String",
+    #               partition: "String",
+    #               client_properties: { # required
+    #                 "String" => "String",
     #               },
     #             },
     #           },
@@ -13880,7 +14712,7 @@ module Aws::IoT
     # Identifying information for a Device Defender security profile.
     #
     # @!attribute [rw] name
-    #   The name you have given to the security profile.
+    #   The name you've given to the security profile.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -14248,7 +15080,7 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         task_id: "AuditMitigationActionsTaskId", # required
+    #         task_id: "MitigationActionsTaskId", # required
     #         target: { # required
     #           audit_task_id: "AuditTaskId",
     #           finding_ids: ["FindingId"],
@@ -14270,7 +15102,7 @@ module Aws::IoT
     # @!attribute [rw] target
     #   Specifies the audit findings to which the mitigation actions are
     #   applied. You can apply them to a type of audit check, to all
-    #   findings from an audit, or to a speecific set of findings.
+    #   findings from an audit, or to a specific set of findings.
     #   @return [Types::AuditMitigationActionsTaskTarget]
     #
     # @!attribute [rw] audit_check_to_actions_mapping
@@ -14303,6 +15135,84 @@ module Aws::IoT
     #   @return [String]
     #
     class StartAuditMitigationActionsTaskResponse < Struct.new(
+      :task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartDetectMitigationActionsTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_id: "MitigationActionsTaskId", # required
+    #         target: { # required
+    #           violation_ids: ["ViolationId"],
+    #           security_profile_name: "SecurityProfileName",
+    #           behavior_name: "BehaviorName",
+    #         },
+    #         actions: ["MitigationActionName"], # required
+    #         violation_event_occurrence_range: {
+    #           start_time: Time.now, # required
+    #           end_time: Time.now, # required
+    #         },
+    #         include_only_active_violations: false,
+    #         include_suppressed_alerts: false,
+    #         client_request_token: "ClientRequestToken", # required
+    #       }
+    #
+    # @!attribute [rw] task_id
+    #   The unique identifier of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   Specifies the ML Detect findings to which the mitigation actions are
+    #   applied.
+    #   @return [Types::DetectMitigationActionsTaskTarget]
+    #
+    # @!attribute [rw] actions
+    #   The actions to be performed when a device has unexpected behavior.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] violation_event_occurrence_range
+    #   Specifies the time period of which violation events occurred
+    #   between.
+    #   @return [Types::ViolationEventOccurrenceRange]
+    #
+    # @!attribute [rw] include_only_active_violations
+    #   Specifies to list only active violations.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_suppressed_alerts
+    #   Specifies to include suppressed alerts.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_request_token
+    #   Each mitigation action task must have a unique client request token.
+    #   If you try to create a new task with the same token as a task that
+    #   already exists, an exception occurs. If you omit this value, AWS
+    #   SDKs will automatically generate a unique client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class StartDetectMitigationActionsTaskRequest < Struct.new(
+      :task_id,
+      :target,
+      :actions,
+      :violation_event_occurrence_range,
+      :include_only_active_violations,
+      :include_suppressed_alerts,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_id
+    #   The unique identifier of the task.
+    #   @return [String]
+    #
+    class StartDetectMitigationActionsTaskResponse < Struct.new(
       :task_id)
       SENSITIVE = []
       include Aws::Structure
@@ -14427,9 +15337,9 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # A statistical ranking (percentile) which indicates a threshold value
-    # by which a behavior is determined to be in compliance or in violation
-    # of the behavior.
+    # A statistical ranking (percentile) that indicates a threshold value by
+    # which a behavior is determined to be in compliance or in violation of
+    # the behavior.
     #
     # @note When making an API call, you may pass StatisticalThreshold
     #   data as a hash:
@@ -14439,7 +15349,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] statistic
-    #   The percentile which resolves to a threshold value by which
+    #   The percentile that resolves to a threshold value by which
     #   compliance with a behavior is determined. Metrics are collected over
     #   the specified period (`durationSeconds`) from all reporting devices
     #   in your account and statistical ranks are calculated. Then, the
@@ -15648,6 +16558,14 @@ module Aws::IoT
     #     to be sent to your confirmation endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The date and time when the topic rule destination was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The date and time when the topic rule destination was last updated.
+    #   @return [Time]
+    #
     # @!attribute [rw] status_reason
     #   Additional details or reason why the topic rule destination is in
     #   the current status.
@@ -15657,11 +16575,18 @@ module Aws::IoT
     #   Properties of the HTTP URL.
     #   @return [Types::HttpUrlDestinationProperties]
     #
+    # @!attribute [rw] vpc_properties
+    #   Properties of the virtual private cloud (VPC) connection.
+    #   @return [Types::VpcDestinationProperties]
+    #
     class TopicRuleDestination < Struct.new(
       :arn,
       :status,
+      :created_at,
+      :last_updated_at,
       :status_reason,
-      :http_url_properties)
+      :http_url_properties,
+      :vpc_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15675,14 +16600,25 @@ module Aws::IoT
     #         http_url_configuration: {
     #           confirmation_url: "Url", # required
     #         },
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_groups: ["SecurityGroupId"],
+    #           vpc_id: "VpcId", # required
+    #           role_arn: "AwsArn", # required
+    #         },
     #       }
     #
     # @!attribute [rw] http_url_configuration
     #   Configuration of the HTTP URL.
     #   @return [Types::HttpUrlDestinationConfiguration]
     #
+    # @!attribute [rw] vpc_configuration
+    #   Configuration of the virtual private cloud (VPC) connection.
+    #   @return [Types::VpcDestinationConfiguration]
+    #
     class TopicRuleDestinationConfiguration < Struct.new(
-      :http_url_configuration)
+      :http_url_configuration,
+      :vpc_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15726,6 +16662,14 @@ module Aws::IoT
     #     to be sent to your confirmation endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The date and time when the topic rule destination was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The date and time when the topic rule destination was last updated.
+    #   @return [Time]
+    #
     # @!attribute [rw] status_reason
     #   The reason the topic rule destination is in the current status.
     #   @return [String]
@@ -15734,11 +16678,18 @@ module Aws::IoT
     #   Information about the HTTP URL.
     #   @return [Types::HttpUrlDestinationSummary]
     #
+    # @!attribute [rw] vpc_destination_summary
+    #   Information about the virtual private cloud (VPC) connection.
+    #   @return [Types::VpcDestinationSummary]
+    #
     class TopicRuleDestinationSummary < Struct.new(
       :arn,
       :status,
+      :created_at,
+      :last_updated_at,
       :status_reason,
-      :http_url_summary)
+      :http_url_summary,
+      :vpc_destination_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15942,6 +16893,15 @@ module Aws::IoT
     #                 },
     #               },
     #             },
+    #             kafka: {
+    #               destination_arn: "AwsArn", # required
+    #               topic: "String", # required
+    #               key: "String",
+    #               partition: "String",
+    #               client_properties: { # required
+    #                 "String" => "String",
+    #               },
+    #             },
     #           },
     #         ],
     #         rule_disabled: false,
@@ -16102,6 +17062,15 @@ module Aws::IoT
     #                 service_name: "ServiceName", # required
     #                 role_arn: "AwsArn", # required
     #               },
+    #             },
+    #           },
+    #           kafka: {
+    #             destination_arn: "AwsArn", # required
+    #             topic: "String", # required
+    #             key: "String",
+    #             partition: "String",
+    #             client_properties: { # required
+    #               "String" => "String",
     #             },
     #           },
     #         },
@@ -16306,9 +17275,9 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the role that grants permission to AWS IoT to access
-    #   information about your devices, policies, certificates and other
-    #   items as required when performing an audit.
+    #   The Amazon Resource Name (ARN) of the role that grants permission to
+    #   AWS IoT to access information about your devices, policies,
+    #   certificates, and other items as required when performing an audit.
     #   @return [String]
     #
     # @!attribute [rw] audit_notification_target_configurations
@@ -16324,7 +17293,7 @@ module Aws::IoT
     #   enabled. When a check is disabled, any data collected so far in
     #   relation to the check is deleted.
     #
-    #   You cannot disable a check if it is used by any scheduled audit. You
+    #   You cannot disable a check if it's used by any scheduled audit. You
     #   must first delete the check from the scheduled audit or delete the
     #   scheduled audit itself.
     #
@@ -16515,7 +17484,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] action
-    #   The action that you want to apply to the CA cerrtificate. The only
+    #   The action that you want to apply to the CA certificate. The only
     #   supported value is `DEACTIVATE`.
     #   @return [String]
     #
@@ -16609,6 +17578,68 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateCustomMetricRequest
+    #   data as a hash:
+    #
+    #       {
+    #         metric_name: "MetricName", # required
+    #         display_name: "CustomMetricDisplayName", # required
+    #       }
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the custom metric. Cannot be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   Field represents a friendly name in the console for the custom
+    #   metric, it doesn't have to be unique. Don't use this name as the
+    #   metric identifier in the device metric report. Can be updated.
+    #   @return [String]
+    #
+    class UpdateCustomMetricRequest < Struct.new(
+      :metric_name,
+      :display_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_name
+    #   The name of the custom metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_arn
+    #   The Amazon Resource Number (ARN) of the custom metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_type
+    #   The type of the custom metric. Types include `string-list`,
+    #   `ip-address-list`, `number-list`, and `number`.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   A friendly name in the console for the custom metric
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The creation date of the custom metric in milliseconds since epoch.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The time the custom metric was last modified in milliseconds since
+    #   epoch.
+    #   @return [Time]
+    #
+    class UpdateCustomMetricResponse < Struct.new(
+      :metric_name,
+      :metric_arn,
+      :metric_type,
+      :display_name,
+      :creation_date,
+      :last_modified_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Parameters to define a mitigation action that changes the state of the
     # device certificate to inactive.
     #
@@ -16620,7 +17651,7 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] action
-    #   The action that you want to apply to the device cerrtificate. The
+    #   The action that you want to apply to the device certificate. The
     #   only supported value is `DEACTIVATE`.
     #   @return [String]
     #
@@ -16662,7 +17693,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN (Amazon resource name) of the created dimension.
+    #   The Amazon Resource Name (ARN)of the created dimension.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -17022,9 +18053,9 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] action_name
-    #   The friendly name for the mitigation action. You can't change the
+    #   The friendly name for the mitigation action. You cannot change the
     #   name by using `UpdateMitigationAction`. Instead, you must delete and
-    #   re-create the mitigation action with the new name.
+    #   recreate the mitigation action with the new name.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -17173,24 +18204,24 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] frequency
-    #   How often the scheduled audit takes place. Can be one of "DAILY",
-    #   "WEEKLY", "BIWEEKLY", or "MONTHLY". The start time of each
-    #   audit is determined by the system.
+    #   How often the scheduled audit takes place, either `DAILY`, `WEEKLY`,
+    #   `BIWEEKLY`, or `MONTHLY`. The start time of each audit is determined
+    #   by the system.
     #   @return [String]
     #
     # @!attribute [rw] day_of_month
-    #   The day of the month on which the scheduled audit takes place. Can
-    #   be "1" through "31" or "LAST". This field is required if the
-    #   "frequency" parameter is set to "MONTHLY". If days 29-31 are
+    #   The day of the month on which the scheduled audit takes place. This
+    #   can be `1` through `31` or `LAST`. This field is required if the
+    #   `frequency` parameter is set to `MONTHLY`. If days 29-31 are
     #   specified, and the month does not have that many days, the audit
     #   takes place on the "LAST" day of the month.
     #   @return [String]
     #
     # @!attribute [rw] day_of_week
-    #   The day of the week on which the scheduled audit takes place. Can be
-    #   one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or
-    #   "SAT". This field is required if the "frequency" parameter is
-    #   set to "WEEKLY" or "BIWEEKLY".
+    #   The day of the week on which the scheduled audit takes place. This
+    #   can be one of `SUN`, `MON`, `TUE`, `WED`, `THU`, `FRI`, or `SAT`.
+    #   This field is required if the "frequency" parameter is set to
+    #   `WEEKLY` or `BIWEEKLY`.
     #   @return [String]
     #
     # @!attribute [rw] target_check_names
@@ -17241,11 +18272,14 @@ module Aws::IoT
     #               operator: "IN", # accepts IN, NOT_IN
     #             },
     #             criteria: {
-    #               comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
+    #               comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set, in-set, not-in-set
     #               value: {
     #                 count: 1,
     #                 cidrs: ["Cidr"],
     #                 ports: [1],
+    #                 number: 1.0,
+    #                 numbers: [1.0],
+    #                 strings: ["stringValue"],
     #               },
     #               duration_seconds: 1,
     #               consecutive_datapoints_to_alarm: 1,
@@ -17253,7 +18287,11 @@ module Aws::IoT
     #               statistical_threshold: {
     #                 statistic: "EvaluationStatistic",
     #               },
+    #               ml_detection_config: {
+    #                 confidence_level: "LOW", # required, accepts LOW, MEDIUM, HIGH
+    #               },
     #             },
+    #             suppress_alerts: false,
     #           },
     #         ],
     #         alert_targets: {
@@ -17301,13 +18339,15 @@ module Aws::IoT
     #
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the profile's `behaviors`, but
-    #   it is also retained for any metric specified here.
+    #   it is also retained for any metric specified here. Can be used with
+    #   custom metrics; cannot be used with dimensions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] additional_metrics_to_retain_v2
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the profile's behaviors, but it
-    #   is also retained for any metric specified here.
+    #   is also retained for any metric specified here. Can be used with
+    #   custom metrics; cannot be used with dimensions.
     #   @return [Array<Types::MetricToRetain>]
     #
     # @!attribute [rw] delete_behaviors
@@ -17383,7 +18423,8 @@ module Aws::IoT
     # @!attribute [rw] additional_metrics_to_retain_v2
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the profile's behaviors, but it
-    #   is also retained for any metric specified here.
+    #   is also retained for any metric specified here. Can be used with
+    #   custom metrics; cannot be used with dimensions.
     #   @return [Array<Types::MetricToRetain>]
     #
     # @!attribute [rw] version
@@ -17642,7 +18683,7 @@ module Aws::IoT
     #
     #       {
     #         arn: "AwsArn", # required
-    #         status: "ENABLED", # required, accepts ENABLED, IN_PROGRESS, DISABLED, ERROR
+    #         status: "ENABLED", # required, accepts ENABLED, IN_PROGRESS, DISABLED, ERROR, DELETING
     #       }
     #
     # @!attribute [rw] arn
@@ -17704,11 +18745,14 @@ module Aws::IoT
     #               operator: "IN", # accepts IN, NOT_IN
     #             },
     #             criteria: {
-    #               comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
+    #               comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set, in-set, not-in-set
     #               value: {
     #                 count: 1,
     #                 cidrs: ["Cidr"],
     #                 ports: [1],
+    #                 number: 1.0,
+    #                 numbers: [1.0],
+    #                 strings: ["stringValue"],
     #               },
     #               duration_seconds: 1,
     #               consecutive_datapoints_to_alarm: 1,
@@ -17716,7 +18760,11 @@ module Aws::IoT
     #               statistical_threshold: {
     #                 statistic: "EvaluationStatistic",
     #               },
+    #               ml_detection_config: {
+    #                 confidence_level: "LOW", # required, accepts LOW, MEDIUM, HIGH
+    #               },
     #             },
+    #             suppress_alerts: false,
     #           },
     #         ],
     #       }
@@ -17801,12 +18849,16 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] behavior
-    #   The behavior which was violated.
+    #   The behavior that was violated.
     #   @return [Types::Behavior]
     #
     # @!attribute [rw] metric_value
     #   The value of the metric (the measurement).
     #   @return [Types::MetricValue]
+    #
+    # @!attribute [rw] violation_event_additional_info
+    #   The details of a violation event.
+    #   @return [Types::ViolationEventAdditionalInfo]
     #
     # @!attribute [rw] violation_event_type
     #   The type of violation event.
@@ -17822,8 +18874,144 @@ module Aws::IoT
       :security_profile_name,
       :behavior,
       :metric_value,
+      :violation_event_additional_info,
       :violation_event_type,
       :violation_event_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of a violation event.
+    #
+    # @!attribute [rw] confidence_level
+    #   The sensitivity of anomalous behavior evaluation. Can be `Low`,
+    #   `Medium`, or `High`.
+    #   @return [String]
+    #
+    class ViolationEventAdditionalInfo < Struct.new(
+      :confidence_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the time period of which violation events occurred between.
+    #
+    # @note When making an API call, you may pass ViolationEventOccurrenceRange
+    #   data as a hash:
+    #
+    #       {
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] start_time
+    #   The start date and time of a time period in which violation events
+    #   occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end date and time of a time period in which violation events
+    #   occurred.
+    #   @return [Time]
+    #
+    class ViolationEventOccurrenceRange < Struct.new(
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration information for a virtual private cloud (VPC)
+    # destination.
+    #
+    # @note When making an API call, you may pass VpcDestinationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         subnet_ids: ["SubnetId"], # required
+    #         security_groups: ["SecurityGroupId"],
+    #         vpc_id: "VpcId", # required
+    #         role_arn: "AwsArn", # required
+    #       }
+    #
+    # @!attribute [rw] subnet_ids
+    #   The subnet IDs of the VPC destination.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   The security groups of the VPC destination.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of a role that has permission to create and attach to
+    #   elastic network interfaces (ENIs).
+    #   @return [String]
+    #
+    class VpcDestinationConfiguration < Struct.new(
+      :subnet_ids,
+      :security_groups,
+      :vpc_id,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties of a virtual private cloud (VPC) destination.
+    #
+    # @!attribute [rw] subnet_ids
+    #   The subnet IDs of the VPC destination.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   The security groups of the VPC destination.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of a role that has permission to create and attach to
+    #   elastic network interfaces (ENIs).
+    #   @return [String]
+    #
+    class VpcDestinationProperties < Struct.new(
+      :subnet_ids,
+      :security_groups,
+      :vpc_id,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of a virtual private cloud (VPC) destination.
+    #
+    # @!attribute [rw] subnet_ids
+    #   The subnet IDs of the VPC destination.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   The security groups of the VPC destination.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of a role that has permission to create and attach to
+    #   elastic network interfaces (ENIs).
+    #   @return [String]
+    #
+    class VpcDestinationSummary < Struct.new(
+      :subnet_ids,
+      :security_groups,
+      :vpc_id,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end

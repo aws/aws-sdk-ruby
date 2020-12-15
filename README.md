@@ -338,13 +338,17 @@ RubyGems.org page under "LINKS" section.
 | AWS IoT 1-Click Devices Service                       | Aws::IoT1ClickDevicesService         | aws-sdk-iot1clickdevicesservice         | 2018-05-14  |
 | AWS IoT 1-Click Projects Service                      | Aws::IoT1ClickProjects               | aws-sdk-iot1clickprojects               | 2018-05-14  |
 | AWS IoT Analytics                                     | Aws::IoTAnalytics                    | aws-sdk-iotanalytics                    | 2017-11-27  |
+| AWS IoT Core Device Advisor                           | Aws::IoTDeviceAdvisor                | aws-sdk-iotdeviceadvisor                | 2020-09-18  |
 | AWS IoT Data Plane                                    | Aws::IoTDataPlane                    | aws-sdk-iotdataplane                    | 2015-05-28  |
 | AWS IoT Events                                        | Aws::IoTEvents                       | aws-sdk-iotevents                       | 2018-07-27  |
 | AWS IoT Events Data                                   | Aws::IoTEventsData                   | aws-sdk-ioteventsdata                   | 2018-10-23  |
+| AWS IoT Fleet Hub                                     | Aws::IoTFleetHub                     | aws-sdk-iotfleethub                     | 2020-11-03  |
+| AWS IoT Greengrass V2                                 | Aws::GreengrassV2                    | aws-sdk-greengrassv2                    | 2020-11-30  |
 | AWS IoT Jobs Data Plane                               | Aws::IoTJobsDataPlane                | aws-sdk-iotjobsdataplane                | 2017-09-29  |
 | AWS IoT Secure Tunneling                              | Aws::IoTSecureTunneling              | aws-sdk-iotsecuretunneling              | 2018-10-05  |
 | AWS IoT SiteWise                                      | Aws::IoTSiteWise                     | aws-sdk-iotsitewise                     | 2019-12-02  |
 | AWS IoT Things Graph                                  | Aws::IoTThingsGraph                  | aws-sdk-iotthingsgraph                  | 2018-09-06  |
+| AWS IoT Wireless                                      | Aws::IoTWireless                     | aws-sdk-iotwireless                     | 2020-11-22  |
 | AWS Key Management Service                            | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
 | AWS Lake Formation                                    | Aws::LakeFormation                   | aws-sdk-lakeformation                   | 2017-03-31  |
 | AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
@@ -483,6 +487,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Pinpoint Email Service                         | Aws::PinpointEmail                   | aws-sdk-pinpointemail                   | 2018-07-26  |
 | Amazon Pinpoint SMS and Voice Service                 | Aws::PinpointSMSVoice                | aws-sdk-pinpointsmsvoice                | 2018-09-05  |
 | Amazon Polly                                          | Aws::Polly                           | aws-sdk-polly                           | 2016-06-10  |
+| Amazon Prometheus Service                             | Aws::PrometheusService               | aws-sdk-prometheusservice               | 2020-08-01  |
 | Amazon QLDB                                           | Aws::QLDB                            | aws-sdk-qldb                            | 2019-01-02  |
 | Amazon QLDB Session                                   | Aws::QLDBSession                     | aws-sdk-qldbsession                     | 2019-07-11  |
 | Amazon QuickSight                                     | Aws::QuickSight                      | aws-sdk-quicksight                      | 2018-04-01  |

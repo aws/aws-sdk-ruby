@@ -733,6 +733,8 @@ module Aws::Lambda
     #
     # * [Using AWS Lambda with Amazon MSK][5]
     #
+    # * [Using AWS Lambda with Self-Managed Apache Kafka][6]
+    #
     # The following error handling options are only available for stream
     # sources (DynamoDB and Kinesis):
     #
@@ -760,8 +762,9 @@ module Aws::Lambda
     # [3]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html
     # [4]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html
     # [5]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html
+    # [6]: https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html
     #
-    # @option params [required, String] :event_source_arn
+    # @option params [String] :event_source_arn
     #   The Amazon Resource Name (ARN) of the event source.
     #
     #   * **Amazon Kinesis** - The ARN of the data stream or a stream
@@ -803,14 +806,17 @@ module Aws::Lambda
     #
     #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
     #
-    #   * **Amazon Simple Queue Service** - Default 10. Max 10.
+    #   * **Amazon Simple Queue Service** - Default 10. For standard queues
+    #     the max is 10,000. For FIFO queues the max is 10.
     #
     #   * **Amazon Managed Streaming for Apache Kafka** - Default 100. Max
     #     10,000.
     #
+    #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
+    #
     # @option params [Integer] :maximum_batching_window_in_seconds
-    #   (Streams) The maximum amount of time to gather records before invoking
-    #   the function, in seconds.
+    #   (Streams and SQS standard queues) The maximum amount of time to gather
+    #   records before invoking the function, in seconds.
     #
     # @option params [Integer] :parallelization_factor
     #   (Streams) The number of batches to process from each shard
@@ -842,24 +848,26 @@ module Aws::Lambda
     #   default value is infinite (-1). When set to infinite (-1), failed
     #   records will be retried until the record expires.
     #
+    # @option params [Integer] :tumbling_window_in_seconds
+    #   (Streams) The duration of a processing window in seconds. The range is
+    #   between 1 second up to 15 minutes.
+    #
     # @option params [Array<String>] :topics
-    #   (MSK) The name of the Kafka topic.
+    #   The name of the Kafka topic.
     #
     # @option params [Array<String>] :queues
     #   (MQ) The name of the Amazon MQ broker destination queue to consume.
     #
     # @option params [Array<Types::SourceAccessConfiguration>] :source_access_configurations
-    #   (MQ) The Secrets Manager secret that stores your broker credentials.
-    #   To store your secret, use the following format: ` \{ "username": "your
-    #   username", "password": "your password" \}`
+    #   An array of the authentication protocol, or the VPC components to
+    #   secure your event source.
     #
-    #   To reference the secret, use the following format: `[ \{ "Type":
-    #   "BASIC_AUTH", "URI": "secretARN" \} ]`
+    # @option params [Types::SelfManagedEventSource] :self_managed_event_source
+    #   The Self-Managed Apache Kafka cluster to send records.
     #
-    #   The value of `Type` is always `BASIC_AUTH`. To encrypt the secret, you
-    #   can use customer or service managed keys. When using a customer
-    #   managed KMS key, the Lambda execution role requires `kms:Decrypt`
-    #   permissions.
+    # @option params [Array<String>] :function_response_types
+    #   (Streams) A list of current response type enums applied to the event
+    #   source mapping.
     #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -879,9 +887,12 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#queues #queues} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#source_access_configurations #source_access_configurations} => Array&lt;Types::SourceAccessConfiguration&gt;
+    #   * {Types::EventSourceMappingConfiguration#self_managed_event_source #self_managed_event_source} => Types::SelfManagedEventSource
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
+    #   * {Types::EventSourceMappingConfiguration#tumbling_window_in_seconds #tumbling_window_in_seconds} => Integer
+    #   * {Types::EventSourceMappingConfiguration#function_response_types #function_response_types} => Array&lt;String&gt;
     #
     #
     # @example Example: To create a mapping between an event source and an AWS Lambda function
@@ -908,7 +919,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_event_source_mapping({
-    #     event_source_arn: "Arn", # required
+    #     event_source_arn: "Arn",
     #     function_name: "FunctionName", # required
     #     enabled: false,
     #     batch_size: 1,
@@ -927,14 +938,21 @@ module Aws::Lambda
     #     maximum_record_age_in_seconds: 1,
     #     bisect_batch_on_function_error: false,
     #     maximum_retry_attempts: 1,
+    #     tumbling_window_in_seconds: 1,
     #     topics: ["Topic"],
     #     queues: ["Queue"],
     #     source_access_configurations: [
     #       {
-    #         type: "BASIC_AUTH", # accepts BASIC_AUTH
-    #         uri: "Arn",
+    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH
+    #         uri: "URI",
     #       },
     #     ],
+    #     self_managed_event_source: {
+    #       endpoints: {
+    #         "KAFKA_BOOTSTRAP_SERVERS" => ["Endpoint"],
+    #       },
+    #     },
+    #     function_response_types: ["ReportBatchItemFailures"], # accepts ReportBatchItemFailures
     #   })
     #
     # @example Response structure
@@ -958,11 +976,17 @@ module Aws::Lambda
     #   resp.queues #=> Array
     #   resp.queues[0] #=> String
     #   resp.source_access_configurations #=> Array
-    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH"
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH"
     #   resp.source_access_configurations[0].uri #=> String
+    #   resp.self_managed_event_source.endpoints #=> Hash
+    #   resp.self_managed_event_source.endpoints["EndPointType"] #=> Array
+    #   resp.self_managed_event_source.endpoints["EndPointType"][0] #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
+    #   resp.tumbling_window_in_seconds #=> Integer
+    #   resp.function_response_types #=> Array
+    #   resp.function_response_types[0] #=> String, one of "ReportBatchItemFailures"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMapping AWS API Documentation
     #
@@ -1464,9 +1488,12 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#queues #queues} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#source_access_configurations #source_access_configurations} => Array&lt;Types::SourceAccessConfiguration&gt;
+    #   * {Types::EventSourceMappingConfiguration#self_managed_event_source #self_managed_event_source} => Types::SelfManagedEventSource
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
+    #   * {Types::EventSourceMappingConfiguration#tumbling_window_in_seconds #tumbling_window_in_seconds} => Integer
+    #   * {Types::EventSourceMappingConfiguration#function_response_types #function_response_types} => Array&lt;String&gt;
     #
     #
     # @example Example: To delete a Lambda function event source mapping
@@ -1515,11 +1542,17 @@ module Aws::Lambda
     #   resp.queues #=> Array
     #   resp.queues[0] #=> String
     #   resp.source_access_configurations #=> Array
-    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH"
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH"
     #   resp.source_access_configurations[0].uri #=> String
+    #   resp.self_managed_event_source.endpoints #=> Hash
+    #   resp.self_managed_event_source.endpoints["EndPointType"] #=> Array
+    #   resp.self_managed_event_source.endpoints["EndPointType"][0] #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
+    #   resp.tumbling_window_in_seconds #=> Integer
+    #   resp.function_response_types #=> Array
+    #   resp.function_response_types[0] #=> String, one of "ReportBatchItemFailures"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMapping AWS API Documentation
     #
@@ -2001,9 +2034,12 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#queues #queues} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#source_access_configurations #source_access_configurations} => Array&lt;Types::SourceAccessConfiguration&gt;
+    #   * {Types::EventSourceMappingConfiguration#self_managed_event_source #self_managed_event_source} => Types::SelfManagedEventSource
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
+    #   * {Types::EventSourceMappingConfiguration#tumbling_window_in_seconds #tumbling_window_in_seconds} => Integer
+    #   * {Types::EventSourceMappingConfiguration#function_response_types #function_response_types} => Array&lt;String&gt;
     #
     #
     # @example Example: To get a Lambda function's event source mapping
@@ -2059,11 +2095,17 @@ module Aws::Lambda
     #   resp.queues #=> Array
     #   resp.queues[0] #=> String
     #   resp.source_access_configurations #=> Array
-    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH"
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH"
     #   resp.source_access_configurations[0].uri #=> String
+    #   resp.self_managed_event_source.endpoints #=> Hash
+    #   resp.self_managed_event_source.endpoints["EndPointType"] #=> Array
+    #   resp.self_managed_event_source.endpoints["EndPointType"][0] #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
+    #   resp.tumbling_window_in_seconds #=> Integer
+    #   resp.function_response_types #=> Array
+    #   resp.function_response_types[0] #=> String, one of "ReportBatchItemFailures"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMapping AWS API Documentation
     #
@@ -2897,9 +2939,9 @@ module Aws::Lambda
     #   * {Types::GetProvisionedConcurrencyConfigResponse#last_modified #last_modified} => Time
     #
     #
-    # @example Example: To get a provisioned concurrency configuration
+    # @example Example: To view a provisioned concurrency configuration
     #
-    #   # The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified
     #   # function.
     #
     #   resp = client.get_provisioned_concurrency_config({
@@ -2916,9 +2958,9 @@ module Aws::Lambda
     #     status: "READY", 
     #   }
     #
-    # @example Example: To view a provisioned concurrency configuration
+    # @example Example: To get a provisioned concurrency configuration
     #
-    #   # The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified
     #   # function.
     #
     #   resp = client.get_provisioned_concurrency_config({
@@ -3443,11 +3485,17 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].queues #=> Array
     #   resp.event_source_mappings[0].queues[0] #=> String
     #   resp.event_source_mappings[0].source_access_configurations #=> Array
-    #   resp.event_source_mappings[0].source_access_configurations[0].type #=> String, one of "BASIC_AUTH"
+    #   resp.event_source_mappings[0].source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH"
     #   resp.event_source_mappings[0].source_access_configurations[0].uri #=> String
+    #   resp.event_source_mappings[0].self_managed_event_source.endpoints #=> Hash
+    #   resp.event_source_mappings[0].self_managed_event_source.endpoints["EndPointType"] #=> Array
+    #   resp.event_source_mappings[0].self_managed_event_source.endpoints["EndPointType"][0] #=> String
     #   resp.event_source_mappings[0].maximum_record_age_in_seconds #=> Integer
     #   resp.event_source_mappings[0].bisect_batch_on_function_error #=> Boolean
     #   resp.event_source_mappings[0].maximum_retry_attempts #=> Integer
+    #   resp.event_source_mappings[0].tumbling_window_in_seconds #=> Integer
+    #   resp.event_source_mappings[0].function_response_types #=> Array
+    #   resp.event_source_mappings[0].function_response_types[0] #=> String, one of "ReportBatchItemFailures"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappings AWS API Documentation
     #
@@ -5337,14 +5385,17 @@ module Aws::Lambda
     #
     #   * **Amazon DynamoDB Streams** - Default 100. Max 1,000.
     #
-    #   * **Amazon Simple Queue Service** - Default 10. Max 10.
+    #   * **Amazon Simple Queue Service** - Default 10. For standard queues
+    #     the max is 10,000. For FIFO queues the max is 10.
     #
     #   * **Amazon Managed Streaming for Apache Kafka** - Default 100. Max
     #     10,000.
     #
+    #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
+    #
     # @option params [Integer] :maximum_batching_window_in_seconds
-    #   (Streams) The maximum amount of time to gather records before invoking
-    #   the function, in seconds.
+    #   (Streams and SQS standard queues) The maximum amount of time to gather
+    #   records before invoking the function, in seconds.
     #
     # @option params [Types::DestinationConfig] :destination_config
     #   (Streams) An Amazon SQS queue or Amazon SNS topic destination for
@@ -5368,17 +5419,16 @@ module Aws::Lambda
     #   concurrently.
     #
     # @option params [Array<Types::SourceAccessConfiguration>] :source_access_configurations
-    #   (MQ) The Secrets Manager secret that stores your broker credentials.
-    #   To store your secret, use the following format: ` \{ "username": "your
-    #   username", "password": "your password" \}`
+    #   An array of the authentication protocol, or the VPC components to
+    #   secure your event source.
     #
-    #   To reference the secret, use the following format: `[ \{ "Type":
-    #   "BASIC_AUTH", "URI": "secretARN" \} ]`
+    # @option params [Integer] :tumbling_window_in_seconds
+    #   (Streams) The duration of a processing window in seconds. The range is
+    #   between 1 second up to 15 minutes.
     #
-    #   The value of `Type` is always `BASIC_AUTH`. To encrypt the secret, you
-    #   can use customer or service managed keys. When using a customer
-    #   managed KMS key, the Lambda execution role requires `kms:Decrypt`
-    #   permissions.
+    # @option params [Array<String>] :function_response_types
+    #   (Streams) A list of current response type enums applied to the event
+    #   source mapping.
     #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5398,9 +5448,12 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#topics #topics} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#queues #queues} => Array&lt;String&gt;
     #   * {Types::EventSourceMappingConfiguration#source_access_configurations #source_access_configurations} => Array&lt;Types::SourceAccessConfiguration&gt;
+    #   * {Types::EventSourceMappingConfiguration#self_managed_event_source #self_managed_event_source} => Types::SelfManagedEventSource
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
+    #   * {Types::EventSourceMappingConfiguration#tumbling_window_in_seconds #tumbling_window_in_seconds} => Integer
+    #   * {Types::EventSourceMappingConfiguration#function_response_types #function_response_types} => Array&lt;String&gt;
     #
     #
     # @example Example: To update a Lambda function event source mapping
@@ -5448,10 +5501,12 @@ module Aws::Lambda
     #     parallelization_factor: 1,
     #     source_access_configurations: [
     #       {
-    #         type: "BASIC_AUTH", # accepts BASIC_AUTH
-    #         uri: "Arn",
+    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH
+    #         uri: "URI",
     #       },
     #     ],
+    #     tumbling_window_in_seconds: 1,
+    #     function_response_types: ["ReportBatchItemFailures"], # accepts ReportBatchItemFailures
     #   })
     #
     # @example Response structure
@@ -5475,11 +5530,17 @@ module Aws::Lambda
     #   resp.queues #=> Array
     #   resp.queues[0] #=> String
     #   resp.source_access_configurations #=> Array
-    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH"
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH"
     #   resp.source_access_configurations[0].uri #=> String
+    #   resp.self_managed_event_source.endpoints #=> Hash
+    #   resp.self_managed_event_source.endpoints["EndPointType"] #=> Array
+    #   resp.self_managed_event_source.endpoints["EndPointType"][0] #=> String
     #   resp.maximum_record_age_in_seconds #=> Integer
     #   resp.bisect_batch_on_function_error #=> Boolean
     #   resp.maximum_retry_attempts #=> Integer
+    #   resp.tumbling_window_in_seconds #=> Integer
+    #   resp.function_response_types #=> Array
+    #   resp.function_response_types[0] #=> String, one of "ReportBatchItemFailures"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMapping AWS API Documentation
     #
@@ -6121,7 +6182,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

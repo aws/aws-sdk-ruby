@@ -1,6 +1,19 @@
 Unreleased Changes
 ------------------
 
+3.92.0 (2020-12-15)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-prometheusservice` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-iotwireless` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-iotfleethub` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-iotdeviceadvisor` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-greengrassv2` gem.
+
 3.91.0 (2020-12-08)
 ------------------
 

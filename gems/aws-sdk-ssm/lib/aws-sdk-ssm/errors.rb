@@ -34,6 +34,7 @@ module Aws::SSM
   # * {AssociationExecutionDoesNotExist}
   # * {AssociationLimitExceeded}
   # * {AssociationVersionLimitExceeded}
+  # * {AutomationDefinitionNotApprovedException}
   # * {AutomationDefinitionNotFoundException}
   # * {AutomationDefinitionVersionNotFoundException}
   # * {AutomationExecutionLimitExceededException}
@@ -233,6 +234,21 @@ module Aws::SSM
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SSM::Types::AssociationVersionLimitExceeded] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class AutomationDefinitionNotApprovedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::AutomationDefinitionNotApprovedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -709,6 +709,18 @@ module Aws::IoTAnalytics
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the data store.
     #
+    # @option params [Types::FileFormatConfiguration] :file_format_configuration
+    #   Contains the configuration information of file formats. AWS IoT
+    #   Analytics data stores support JSON and [Parquet][1].
+    #
+    #   The default file format is JSON. You can specify only one format.
+    #
+    #   You can't change the file format after you create the data store.
+    #
+    #
+    #
+    #   [1]: https://parquet.apache.org/
+    #
     # @return [Types::CreateDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDatastoreResponse#datastore_name #datastore_name} => String
@@ -738,6 +750,20 @@ module Aws::IoTAnalytics
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     file_format_configuration: {
+    #       json_configuration: {
+    #       },
+    #       parquet_configuration: {
+    #         schema_definition: {
+    #           columns: [
+    #             {
+    #               name: "ColumnName", # required
+    #               type: "ColumnDataType", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1125,6 +1151,9 @@ module Aws::IoTAnalytics
     #   resp.datastore.creation_time #=> Time
     #   resp.datastore.last_update_time #=> Time
     #   resp.datastore.last_message_arrival_time #=> Time
+    #   resp.datastore.file_format_configuration.parquet_configuration.schema_definition.columns #=> Array
+    #   resp.datastore.file_format_configuration.parquet_configuration.schema_definition.columns[0].name #=> String
+    #   resp.datastore.file_format_configuration.parquet_configuration.schema_definition.columns[0].type #=> String
     #   resp.statistics.size.estimated_size_in_bytes #=> Float
     #   resp.statistics.size.estimated_on #=> Time
     #
@@ -1448,6 +1477,7 @@ module Aws::IoTAnalytics
     #   resp.datastore_summaries[0].creation_time #=> Time
     #   resp.datastore_summaries[0].last_update_time #=> Time
     #   resp.datastore_summaries[0].last_message_arrival_time #=> Time
+    #   resp.datastore_summaries[0].file_format_type #=> String, one of "JSON", "PARQUET"
     #   resp.next_token #=> String
     #
     # @overload list_datastores(params = {})
@@ -1704,8 +1734,21 @@ module Aws::IoTAnalytics
     # @option params [Time,DateTime,Date,Integer,String] :start_time
     #   The start time (inclusive) of raw message data that is reprocessed.
     #
+    #   If you specify a value for the `startTime` parameter, you must not use
+    #   the `channelMessages` object.
+    #
     # @option params [Time,DateTime,Date,Integer,String] :end_time
     #   The end time (exclusive) of raw message data that is reprocessed.
+    #
+    #   If you specify a value for the `endTime` parameter, you must not use
+    #   the `channelMessages` object.
+    #
+    # @option params [Types::ChannelMessages] :channel_messages
+    #   Specifies one or more sets of channel messages that you want to
+    #   reprocess.
+    #
+    #   If you use the `channelMessages` object, you must not specify a value
+    #   for `startTime` and `endTime`.
     #
     # @return [Types::StartPipelineReprocessingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1717,6 +1760,9 @@ module Aws::IoTAnalytics
     #     pipeline_name: "PipelineName", # required
     #     start_time: Time.now,
     #     end_time: Time.now,
+    #     channel_messages: {
+    #       s3_paths: ["S3PathChannelMessage"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -1984,6 +2030,18 @@ module Aws::IoTAnalytics
     #   the default is`serviceManagedS3`. You cannot change this storage
     #   option after the data store is created.
     #
+    # @option params [Types::FileFormatConfiguration] :file_format_configuration
+    #   Contains the configuration information of file formats. AWS IoT
+    #   Analytics data stores support JSON and [Parquet][1].
+    #
+    #   The default file format is JSON. You can specify only one format.
+    #
+    #   You can't change the file format after you create the data store.
+    #
+    #
+    #
+    #   [1]: https://parquet.apache.org/
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2001,6 +2059,20 @@ module Aws::IoTAnalytics
     #         bucket: "BucketName", # required
     #         key_prefix: "S3KeyPrefix",
     #         role_arn: "RoleArn", # required
+    #       },
+    #     },
+    #     file_format_configuration: {
+    #       json_configuration: {
+    #       },
+    #       parquet_configuration: {
+    #         schema_definition: {
+    #           columns: [
+    #             {
+    #               name: "ColumnName", # required
+    #               type: "ColumnDataType", # required
+    #             },
+    #           ],
+    #         },
     #       },
     #     },
     #   })
@@ -2122,7 +2194,7 @@ module Aws::IoTAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotanalytics'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

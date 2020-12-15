@@ -357,6 +357,9 @@
   "Greengrass": {
     "models": "greengrass/2017-06-07"
   },
+  "GreengrassV2": {
+    "models": "greengrassv2/2020-11-30"
+  },
   "GroundStation": {
     "models": "groundstation/2019-05-23"
   },
@@ -406,11 +409,17 @@
     "models": "iot-data/2015-05-28",
     "partitionsKey": null
   },
+  "IoTDeviceAdvisor": {
+    "models": "iotdeviceadvisor/2020-09-18"
+  },
   "IoTEvents": {
     "models": "iotevents/2018-07-27"
   },
   "IoTEventsData": {
     "models": "iotevents-data/2018-10-23"
+  },
+  "IoTFleetHub": {
+    "models": "iotfleethub/2020-11-03"
   },
   "IoTJobsDataPlane": {
     "models": "iot-jobs-data/2017-09-29"
@@ -423,6 +432,9 @@
   },
   "IoTThingsGraph": {
     "models": "iotthingsgraph/2018-09-06"
+  },
+  "IoTWireless": {
+    "models": "iotwireless/2020-11-22"
   },
   "KMS": {
     "models": "kms/2014-11-01"
@@ -597,6 +609,9 @@
   },
   "Pricing": {
     "models": "pricing/2017-10-15"
+  },
+  "PrometheusService": {
+    "models": "amp/2020-08-01"
   },
   "QLDB": {
     "models": "qldb/2019-01-02"

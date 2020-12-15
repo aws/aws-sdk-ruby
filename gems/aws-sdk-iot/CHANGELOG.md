@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2020-12-15)
+------------------
+
+* Feature - AWS IoT Rules Engine adds Kafka Action that allows sending data to Apache Kafka clusters inside a VPC. AWS IoT Device Defender adds custom metrics and machine-learning based anomaly detection.
+
 1.63.0 (2020-11-23)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-12-15)
+------------------
+
+* Feature - FileFormatConfiguration enables data store to save data in JSON or Parquet format. S3Paths enables you to specify the S3 objects that save your channel messages when you reprocess the pipeline.
+
 1.35.0 (2020-11-09)
 ------------------
 

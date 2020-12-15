@@ -388,6 +388,11 @@ module Aws::SSM
     #   supported for rate expressions.
     #   @return [Boolean]
     #
+    # @!attribute [rw] target_locations
+    #   The combination of AWS Regions and AWS accounts where you want to
+    #   run the association.
+    #   @return [Array<Types::TargetLocation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationDescription AWS API Documentation
     #
     class AssociationDescription < Struct.new(
@@ -412,7 +417,8 @@ module Aws::SSM
       :max_concurrency,
       :compliance_severity,
       :sync_compliance,
-      :apply_only_at_cron_interval)
+      :apply_only_at_cron_interval,
+      :target_locations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -819,6 +825,11 @@ module Aws::SSM
     #   supported for rate expressions.
     #   @return [Boolean]
     #
+    # @!attribute [rw] target_locations
+    #   The combination of AWS Regions and AWS accounts where you wanted to
+    #   run the association when this association version was created.
+    #   @return [Array<Types::TargetLocation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationVersionInfo AWS API Documentation
     #
     class AssociationVersionInfo < Struct.new(
@@ -836,7 +847,8 @@ module Aws::SSM
       :max_concurrency,
       :compliance_severity,
       :sync_compliance,
-      :apply_only_at_cron_interval)
+      :apply_only_at_cron_interval,
+      :target_locations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -963,6 +975,20 @@ module Aws::SSM
       :key,
       :values,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates that the Change Manager change template used in the change
+    # request was rejected or is still in a pending state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationDefinitionNotApprovedException AWS API Documentation
+    #
+    class AutomationDefinitionNotApprovedException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1109,6 +1135,40 @@ module Aws::SSM
     #   for a multi-Region and multi-account Automation execution.
     #   @return [Types::ProgressCounters]
     #
+    # @!attribute [rw] automation_subtype
+    #   The subtype of the Automation operation. Currently, the only
+    #   supported value is `ChangeRequest`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_time
+    #   The date and time the Automation operation is scheduled to start.
+    #   @return [Time]
+    #
+    # @!attribute [rw] runbooks
+    #   Information about the Automation runbooks (Automation documents)
+    #   that are run as part of a runbook workflow.
+    #
+    #   <note markdown="1"> The Automation runbooks specified for the runbook workflow can't
+    #   run until all required approvals for the change request have been
+    #   received.
+    #
+    #    </note>
+    #   @return [Array<Types::Runbook>]
+    #
+    # @!attribute [rw] ops_item_id
+    #   The ID of an OpsItem that is created to represent a Change Manager
+    #   change request.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_id
+    #   The ID of a State Manager association used in the Automation
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_request_name
+    #   The name of the Change Manager change request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecution AWS API Documentation
     #
     class AutomationExecution < Struct.new(
@@ -1136,7 +1196,13 @@ module Aws::SSM
       :max_errors,
       :target,
       :target_locations,
-      :progress_counters)
+      :progress_counters,
+      :automation_subtype,
+      :scheduled_time,
+      :runbooks,
+      :ops_item_id,
+      :association_id,
+      :change_request_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1148,7 +1214,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey, TargetResourceGroup
+    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey, TargetResourceGroup, AutomationSubtype, OpsItemId
     #         values: ["AutomationExecutionFilterValue"], # required
     #       }
     #
@@ -1289,6 +1355,40 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html
     #   @return [String]
     #
+    # @!attribute [rw] automation_subtype
+    #   The subtype of the Automation operation. Currently, the only
+    #   supported value is `ChangeRequest`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_time
+    #   The date and time the Automation operation is scheduled to start.
+    #   @return [Time]
+    #
+    # @!attribute [rw] runbooks
+    #   Information about the Automation runbooks (Automation documents)
+    #   that are run during a runbook workflow in Change Manager.
+    #
+    #   <note markdown="1"> The Automation runbooks specified for the runbook workflow can't
+    #   run until all required approvals for the change request have been
+    #   received.
+    #
+    #    </note>
+    #   @return [Array<Types::Runbook>]
+    #
+    # @!attribute [rw] ops_item_id
+    #   The ID of an OpsItem that is created to represent a Change Manager
+    #   change request.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_id
+    #   The ID of a State Manager association used in the Automation
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_request_name
+    #   The name of the Change Manager change request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecutionMetadata AWS API Documentation
     #
     class AutomationExecutionMetadata < Struct.new(
@@ -1313,7 +1413,13 @@ module Aws::SSM
       :max_concurrency,
       :max_errors,
       :target,
-      :automation_type)
+      :automation_type,
+      :automation_subtype,
+      :scheduled_time,
+      :runbooks,
+      :ops_item_id,
+      :association_id,
+      :change_request_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2434,6 +2540,15 @@ module Aws::SSM
     #             compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #             sync_compliance: "AUTO", # accepts AUTO, MANUAL
     #             apply_only_at_cron_interval: false,
+    #             target_locations: [
+    #               {
+    #                 accounts: ["Account"],
+    #                 regions: ["Region"],
+    #                 target_location_max_concurrency: "MaxConcurrency",
+    #                 target_location_max_errors: "MaxErrors",
+    #                 execution_role_name: "ExecutionRoleName",
+    #               },
+    #             ],
     #           },
     #         ],
     #       }
@@ -2484,6 +2599,15 @@ module Aws::SSM
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
     #         apply_only_at_cron_interval: false,
+    #         target_locations: [
+    #           {
+    #             accounts: ["Account"],
+    #             regions: ["Region"],
+    #             target_location_max_concurrency: "MaxConcurrency",
+    #             target_location_max_errors: "MaxErrors",
+    #             execution_role_name: "ExecutionRoleName",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -2603,6 +2727,11 @@ module Aws::SSM
     #   supported for rate expressions.
     #   @return [Boolean]
     #
+    # @!attribute [rw] target_locations
+    #   Use this action to create an association in multiple Regions and
+    #   multiple accounts.
+    #   @return [Array<Types::TargetLocation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchRequestEntry AWS API Documentation
     #
     class CreateAssociationBatchRequestEntry < Struct.new(
@@ -2619,7 +2748,8 @@ module Aws::SSM
       :max_concurrency,
       :compliance_severity,
       :sync_compliance,
-      :apply_only_at_cron_interval)
+      :apply_only_at_cron_interval,
+      :target_locations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2672,6 +2802,15 @@ module Aws::SSM
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
     #         apply_only_at_cron_interval: false,
+    #         target_locations: [
+    #           {
+    #             accounts: ["Account"],
+    #             regions: ["Region"],
+    #             target_location_max_concurrency: "MaxConcurrency",
+    #             target_location_max_errors: "MaxErrors",
+    #             execution_role_name: "ExecutionRoleName",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -2812,6 +2951,12 @@ module Aws::SSM
     #   supported for rate expressions.
     #   @return [Boolean]
     #
+    # @!attribute [rw] target_locations
+    #   A location is a combination of AWS Regions and AWS accounts where
+    #   you want to run the association. Use this action to create an
+    #   association in multiple Regions and multiple accounts.
+    #   @return [Array<Types::TargetLocation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest AWS API Documentation
     #
     class CreateAssociationRequest < Struct.new(
@@ -2828,7 +2973,8 @@ module Aws::SSM
       :max_concurrency,
       :compliance_severity,
       :sync_compliance,
-      :apply_only_at_cron_interval)
+      :apply_only_at_cron_interval,
+      :target_locations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2865,7 +3011,7 @@ module Aws::SSM
     #         ],
     #         name: "DocumentName", # required
     #         version_name: "DocumentVersionName",
-    #         document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy, ChangeCalendar
+    #         document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy, ChangeCalendar, Automation.ChangeTemplate
     #         document_format: "YAML", # accepts YAML, JSON, TEXT
     #         target_type: "TargetType",
     #         tags: [
@@ -3060,8 +3206,8 @@ module Aws::SSM
     # @!attribute [rw] schedule_timezone
     #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
-    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
-    #   For more information, see the [Time Zone Database][1] on the IANA
+    #   example: "America/Los\_Angeles", "UTC", or "Asia/Seoul". For
+    #   more information, see the [Time Zone Database][1] on the IANA
     #   website.
     #
     #
@@ -3076,7 +3222,7 @@ module Aws::SSM
     #   For example, the following cron expression schedules a maintenance
     #   window to run on the third Tuesday of every month at 11:30 PM.
     #
-    #   `cron(0 30 23 ? * TUE#3 *)`
+    #   `cron(30 23 ? * TUE#3 *)`
     #
     #   If the schedule offset is `2`, the maintenance window won't run
     #   until two days later.
@@ -3165,6 +3311,7 @@ module Aws::SSM
     #
     #       {
     #         description: "OpsItemDescription", # required
+    #         ops_item_type: "OpsItemType",
     #         operational_data: {
     #           "OpsItemDataKey" => {
     #             value: "OpsItemDataValueString",
@@ -3192,10 +3339,19 @@ module Aws::SSM
     #         ],
     #         category: "OpsItemCategory",
     #         severity: "OpsItemSeverity",
+    #         actual_start_time: Time.now,
+    #         actual_end_time: Time.now,
+    #         planned_start_time: Time.now,
+    #         planned_end_time: Time.now,
     #       }
     #
     # @!attribute [rw] description
     #   Information about the OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] ops_item_type
+    #   The type of OpsItem to create. Currently, the only valid values are
+    #   `/aws/changerequest` and `/aws/issue`.
     #   @return [String]
     #
     # @!attribute [rw] operational_data
@@ -3287,10 +3443,33 @@ module Aws::SSM
     #   Specify a severity to assign to an OpsItem.
     #   @return [String]
     #
+    # @!attribute [rw] actual_start_time
+    #   The time a runbook workflow started. Currently reported only for the
+    #   OpsItem type `/aws/changerequest`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] actual_end_time
+    #   The time a runbook workflow ended. Currently reported only for the
+    #   OpsItem type `/aws/changerequest`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] planned_start_time
+    #   The time specified in a change request for a runbook workflow to
+    #   start. Currently supported only for the OpsItem type
+    #   `/aws/changerequest`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] planned_end_time
+    #   The time specified in a change request for a runbook workflow to
+    #   end. Currently supported only for the OpsItem type
+    #   `/aws/changerequest`.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateOpsItemRequest AWS API Documentation
     #
     class CreateOpsItemRequest < Struct.new(
       :description,
+      :ops_item_type,
       :operational_data,
       :notifications,
       :priority,
@@ -3299,7 +3478,11 @@ module Aws::SSM
       :title,
       :tags,
       :category,
-      :severity)
+      :severity,
+      :actual_start_time,
+      :actual_end_time,
+      :planned_start_time,
+      :planned_end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3329,11 +3512,11 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] resource_id
-    #   A resource ID for a new AppManager application.
+    #   A resource ID for a new Application Manager application.
     #   @return [String]
     #
     # @!attribute [rw] metadata
-    #   Metadata for a new AppManager application.
+    #   Metadata for a new Application Manager application.
     #   @return [Hash<String,Types::MetadataValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateOpsMetadataRequest AWS API Documentation
@@ -4453,7 +4636,7 @@ module Aws::SSM
     #       {
     #         filters: [
     #           {
-    #             key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey, TargetResourceGroup
+    #             key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey, TargetResourceGroup, AutomationSubtype, OpsItemId
     #             values: ["AutomationExecutionFilterValue"], # required
     #           },
     #         ],
@@ -5764,7 +5947,7 @@ module Aws::SSM
     #       {
     #         ops_item_filters: [
     #           {
-    #             key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId, Category, Severity
+    #             key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, ActualStartTime, ActualEndTime, PlannedStartTime, PlannedEndTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId, Category, Severity, OpsItemType, ChangeRequestByRequesterArn, ChangeRequestByRequesterName, ChangeRequestByApproverArn, ChangeRequestByApproverName, ChangeRequestByTemplate, ChangeRequestByTargetsResourceGroup
     #             values: ["OpsItemFilterValue"], # required
     #             operator: "Equal", # required, accepts Equal, Contains, GreaterThan, LessThan
     #           },
@@ -6448,6 +6631,27 @@ module Aws::SSM
     #   `ApplicationConfigurationSchema` document.
     #   @return [Array<Types::DocumentRequires>]
     #
+    # @!attribute [rw] author
+    #   The user in your organization who created the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] review_information
+    #   Details about the review of a document.
+    #   @return [Array<Types::ReviewInformation>]
+    #
+    # @!attribute [rw] approved_version
+    #   The version of the document currently approved for use in the
+    #   organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_review_version
+    #   The version of the document that is currently under review.
+    #   @return [String]
+    #
+    # @!attribute [rw] review_status
+    #   The current status of the review.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentDescription AWS API Documentation
     #
     class DocumentDescription < Struct.new(
@@ -6472,7 +6676,12 @@ module Aws::SSM
       :target_type,
       :tags,
       :attachments_information,
-      :requires)
+      :requires,
+      :author,
+      :review_information,
+      :approved_version,
+      :pending_review_version,
+      :review_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6561,6 +6770,14 @@ module Aws::SSM
     #   `ApplicationConfigurationSchema` document.
     #   @return [Array<Types::DocumentRequires>]
     #
+    # @!attribute [rw] review_status
+    #   The current status of a document review.
+    #   @return [String]
+    #
+    # @!attribute [rw] author
+    #   The user in your organization who created the document.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentIdentifier AWS API Documentation
     #
     class DocumentIdentifier < Struct.new(
@@ -6574,7 +6791,9 @@ module Aws::SSM
       :document_format,
       :target_type,
       :tags,
-      :requires)
+      :requires,
+      :review_status,
+      :author)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6695,6 +6914,20 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Details about the response to a document review request.
+    #
+    # @!attribute [rw] reviewer_response
+    #   Details about a reviewer's response to a document review request.
+    #   @return [Array<Types::DocumentReviewerResponseSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentMetadataResponseInfo AWS API Documentation
+    #
+    class DocumentMetadataResponseInfo < Struct.new(
+      :reviewer_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Parameters specified in a System Manager document that run on the
     # server when the command is run.
     #
@@ -6772,6 +7005,114 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Information about comments added to a document review request.
+    #
+    # @note When making an API call, you may pass DocumentReviewCommentSource
+    #   data as a hash:
+    #
+    #       {
+    #         type: "Comment", # accepts Comment
+    #         content: "DocumentReviewComment",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of information added to a review request. Currently, only
+    #   the value `Comment` is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of a comment entered by a user who requests a review of
+    #   a new document version, or who reviews the new version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentReviewCommentSource AWS API Documentation
+    #
+    class DocumentReviewCommentSource < Struct.new(
+      :type,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a reviewer's response to a document review request.
+    #
+    # @!attribute [rw] create_time
+    #   The date and time that a reviewer entered a response to a document
+    #   review request.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_time
+    #   The date and time that a reviewer last updated a response to a
+    #   document review request.
+    #   @return [Time]
+    #
+    # @!attribute [rw] review_status
+    #   The current review status of a new custom SSM document created by a
+    #   member of your organization, or of the latest version of an existing
+    #   SSM document.
+    #
+    #   Only one version of a document can be in the APPROVED state at a
+    #   time. When a new version is approved, the status of the previous
+    #   version changes to REJECTED.
+    #
+    #   Only one version of a document can be in review, or PENDING, at a
+    #   time.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   The comment entered by a reviewer as part of their document review
+    #   response.
+    #   @return [Array<Types::DocumentReviewCommentSource>]
+    #
+    # @!attribute [rw] reviewer
+    #   The user in your organization assigned to review a document request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentReviewerResponseSource AWS API Documentation
+    #
+    class DocumentReviewerResponseSource < Struct.new(
+      :create_time,
+      :updated_time,
+      :review_status,
+      :comment,
+      :reviewer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a document approval review.
+    #
+    # @note When making an API call, you may pass DocumentReviews
+    #   data as a hash:
+    #
+    #       {
+    #         action: "SendForReview", # required, accepts SendForReview, UpdateReview, Approve, Reject
+    #         comment: [
+    #           {
+    #             type: "Comment", # accepts Comment
+    #             content: "DocumentReviewComment",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action to take on a document approval review request.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   A comment entered by a user in your organization about the document
+    #   review request.
+    #   @return [Array<Types::DocumentReviewCommentSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentReviews AWS API Documentation
+    #
+    class DocumentReviews < Struct.new(
+      :action,
+      :comment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Version information about the document.
     #
     # @!attribute [rw] name
@@ -6812,6 +7153,11 @@ module Aws::SSM
     #   exist. Verify that the URL of the S3 bucket is correct."
     #   @return [String]
     #
+    # @!attribute [rw] review_status
+    #   The current status of the approval review for the latest version of
+    #   the document.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentVersionInfo AWS API Documentation
     #
     class DocumentVersionInfo < Struct.new(
@@ -6822,7 +7168,8 @@ module Aws::SSM
       :is_default_version,
       :document_format,
       :status,
-      :status_information)
+      :status_information,
+      :review_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7527,6 +7874,19 @@ module Aws::SSM
     #   locations, sizes, and so on.
     #   @return [Array<Types::AttachmentContent>]
     #
+    # @!attribute [rw] review_status
+    #   The current review status of a new custom Systems Manager document
+    #   (SSM document) created by a member of your organization, or of the
+    #   latest version of an existing SSM document.
+    #
+    #   Only one version of an SSM document can be in the APPROVED state at
+    #   a time. When a new version is approved, the status of the previous
+    #   version changes to REJECTED.
+    #
+    #   Only one version of an SSM document can be in review, or PENDING, at
+    #   a time.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDocumentResult AWS API Documentation
     #
     class GetDocumentResult < Struct.new(
@@ -7539,7 +7899,8 @@ module Aws::SSM
       :document_type,
       :document_format,
       :requires,
-      :attachments_content)
+      :attachments_content,
+      :review_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8039,8 +8400,8 @@ module Aws::SSM
     # @!attribute [rw] schedule_timezone
     #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
-    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
-    #   For more information, see the [Time Zone Database][1] on the IANA
+    #   example: "America/Los\_Angeles", "UTC", or "Asia/Seoul". For
+    #   more information, see the [Time Zone Database][1] on the IANA
     #   website.
     #
     #
@@ -8301,11 +8662,11 @@ module Aws::SSM
     end
 
     # @!attribute [rw] resource_id
-    #   The resource ID of the AppManager application.
+    #   The resource ID of the Application Manager application.
     #   @return [String]
     #
     # @!attribute [rw] metadata
-    #   OpsMetadata for an AppManager application.
+    #   OpsMetadata for an Application Manager application.
     #   @return [Hash<String,Types::MetadataValue>]
     #
     # @!attribute [rw] next_token
@@ -9107,7 +9468,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] last_ping_date_time
-    #   The date and time when agent last pinged Systems Manager service.
+    #   The date and time when the agent last pinged the Systems Manager
+    #   service.
     #   @return [Time]
     #
     # @!attribute [rw] agent_version
@@ -11073,6 +11435,88 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListDocumentMetadataHistoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "DocumentName", # required
+    #         document_version: "DocumentVersion",
+    #         metadata: "DocumentReviews", # required, accepts DocumentReviews
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_version
+    #   The version of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The type of data for which details are being requested. Currently,
+    #   the only supported value is `DocumentReviews`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocumentMetadataHistoryRequest AWS API Documentation
+    #
+    class ListDocumentMetadataHistoryRequest < Struct.new(
+      :name,
+      :document_version,
+      :metadata,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_version
+    #   The version of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] author
+    #   The user ID of the person in the organization who requested the
+    #   document review.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   Information about the response to the document approval request.
+    #   @return [Types::DocumentMetadataResponseInfo]
+    #
+    # @!attribute [rw] next_token
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocumentMetadataHistoryResponse AWS API Documentation
+    #
+    class ListDocumentMetadataHistoryResponse < Struct.new(
+      :name,
+      :document_version,
+      :author,
+      :metadata,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListDocumentVersionsRequest
     #   data as a hash:
     #
@@ -11289,6 +11733,65 @@ module Aws::SSM
       :capture_time,
       :entries,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListOpsItemEventsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             key: "OpsItemId", # required, accepts OpsItemId
+    #             values: ["OpsItemEventFilterValue"], # required
+    #             operator: "Equal", # required, accepts Equal
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   One or more OpsItem filters. Use a filter to return a more specific
+    #   list of results.
+    #   @return [Array<Types::OpsItemEventFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListOpsItemEventsRequest AWS API Documentation
+    #
+    class ListOpsItemEventsRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] summaries
+    #   A list of event information for the specified OpsItems.
+    #   @return [Array<Types::OpsItemEventSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListOpsItemEventsResponse AWS API Documentation
+    #
+    class ListOpsItemEventsResponse < Struct.new(
+      :next_token,
+      :summaries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12394,7 +12897,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Metadata to assign to an AppManager application.
+    # Metadata to assign to an Application Manager application.
     #
     # @note When making an API call, you may pass MetadataValue
     #   data as a hash:
@@ -12404,7 +12907,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] value
-    #   Metadata value to assign to an AppManager application.
+    #   Metadata value to assign to an Application Manager application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MetadataValue AWS API Documentation
@@ -12701,6 +13204,11 @@ module Aws::SSM
     #   The ARN of the AWS account that created the OpsItem.
     #   @return [String]
     #
+    # @!attribute [rw] ops_item_type
+    #   The type of OpsItem. Currently, the only valid values are
+    #   `/aws/changerequest` and `/aws/issue`.
+    #   @return [String]
+    #
     # @!attribute [rw] created_time
     #   The date and time the OpsItem was created.
     #   @return [Time]
@@ -12802,10 +13310,33 @@ module Aws::SSM
     #   The severity of the OpsItem. Severity options range from 1 to 4.
     #   @return [String]
     #
+    # @!attribute [rw] actual_start_time
+    #   The time a runbook workflow started. Currently reported only for the
+    #   OpsItem type `/aws/changerequest`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] actual_end_time
+    #   The time a runbook workflow ended. Currently reported only for the
+    #   OpsItem type `/aws/changerequest`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] planned_start_time
+    #   The time specified in a change request for a runbook workflow to
+    #   start. Currently supported only for the OpsItem type
+    #   `/aws/changerequest`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] planned_end_time
+    #   The time specified in a change request for a runbook workflow to
+    #   end. Currently supported only for the OpsItem type
+    #   `/aws/changerequest`.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItem AWS API Documentation
     #
     class OpsItem < Struct.new(
       :created_by,
+      :ops_item_type,
       :created_time,
       :description,
       :last_modified_by,
@@ -12820,7 +13351,11 @@ module Aws::SSM
       :source,
       :operational_data,
       :category,
-      :severity)
+      :severity,
+      :actual_start_time,
+      :actual_end_time,
+      :planned_start_time,
+      :planned_end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12871,13 +13406,95 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Describes a filter for a specific list of OpsItem events. You can
+    # filter event information by using tags. You specify tags by using a
+    # key-value pair mapping.
+    #
+    # @note When making an API call, you may pass OpsItemEventFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "OpsItemId", # required, accepts OpsItemId
+    #         values: ["OpsItemEventFilterValue"], # required
+    #         operator: "Equal", # required, accepts Equal
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of the filter key. Currently, the only supported value is
+    #   `OpsItemId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values for the filter, consisting of one or more OpsItem IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operator
+    #   The operator used by the filter call. Currently, the only supported
+    #   value is `Equal`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemEventFilter AWS API Documentation
+    #
+    class OpsItemEventFilter < Struct.new(
+      :key,
+      :values,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about an OpsItem event.
+    #
+    # @!attribute [rw] ops_item_id
+    #   The ID of the OpsItem.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_id
+    #   The ID of the OpsItem event.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source of the OpsItem event.
+    #   @return [String]
+    #
+    # @!attribute [rw] detail_type
+    #   The type of information provided as a detail.
+    #   @return [String]
+    #
+    # @!attribute [rw] detail
+    #   Specific information about the OpsItem event.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   Information about the user or resource that created the OpsItem
+    #   event.
+    #   @return [Types::OpsItemIdentity]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time the OpsItem event was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemEventSummary AWS API Documentation
+    #
+    class OpsItemEventSummary < Struct.new(
+      :ops_item_id,
+      :event_id,
+      :source,
+      :detail_type,
+      :detail,
+      :created_by,
+      :created_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an OpsItem filter.
     #
     # @note When making an API call, you may pass OpsItemFilter
     #   data as a hash:
     #
     #       {
-    #         key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId, Category, Severity
+    #         key: "Status", # required, accepts Status, CreatedBy, Source, Priority, Title, OpsItemId, CreatedTime, LastModifiedTime, ActualStartTime, ActualEndTime, PlannedStartTime, PlannedEndTime, OperationalData, OperationalDataKey, OperationalDataValue, ResourceId, AutomationId, Category, Severity, OpsItemType, ChangeRequestByRequesterArn, ChangeRequestByRequesterName, ChangeRequestByApproverArn, ChangeRequestByApproverName, ChangeRequestByTemplate, ChangeRequestByTargetsResourceGroup
     #         values: ["OpsItemFilterValue"], # required
     #         operator: "Equal", # required, accepts Equal, Contains, GreaterThan, LessThan
     #       }
@@ -12900,6 +13517,21 @@ module Aws::SSM
       :key,
       :values,
       :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the user or resource that created an OpsItem event.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the IAM entity that created the
+    #   OpsItem event.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemIdentity AWS API Documentation
+    #
+    class OpsItemIdentity < Struct.new(
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13044,6 +13676,33 @@ module Aws::SSM
     #   A list of OpsItems by severity.
     #   @return [String]
     #
+    # @!attribute [rw] ops_item_type
+    #   The type of OpsItem. Currently, the only valid values are
+    #   `/aws/changerequest` and `/aws/issue`.
+    #   @return [String]
+    #
+    # @!attribute [rw] actual_start_time
+    #   The time a runbook workflow started. Currently reported only for the
+    #   OpsItem type `/aws/changerequest`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] actual_end_time
+    #   The time a runbook workflow ended. Currently reported only for the
+    #   OpsItem type `/aws/changerequest`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] planned_start_time
+    #   The time specified in a change request for a runbook workflow to
+    #   start. Currently supported only for the OpsItem type
+    #   `/aws/changerequest`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] planned_end_time
+    #   The time specified in a change request for a runbook workflow to
+    #   end. Currently supported only for the OpsItem type
+    #   `/aws/changerequest`.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemSummary AWS API Documentation
     #
     class OpsItemSummary < Struct.new(
@@ -13058,15 +13717,20 @@ module Aws::SSM
       :title,
       :operational_data,
       :category,
-      :severity)
+      :severity,
+      :ops_item_type,
+      :actual_start_time,
+      :actual_end_time,
+      :planned_start_time,
+      :planned_end_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Operational metadata for an application in AppManager.
+    # Operational metadata for an application in Application Manager.
     #
     # @!attribute [rw] resource_id
-    #   The ID of the AppManager application.
+    #   The ID of the Application Manager application.
     #   @return [String]
     #
     # @!attribute [rw] ops_metadata_arn
@@ -13151,7 +13815,7 @@ module Aws::SSM
     end
 
     # The OpsMetadata object exceeds the maximum number of OpsMetadata keys
-    # that you can assign to an application in AppManager.
+    # that you can assign to an application in Application Manager.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -13165,8 +13829,8 @@ module Aws::SSM
     end
 
     # Your account reached the maximum number of OpsMetadata objects allowed
-    # by AppManager. The maximum is 200 OpsMetadata objects. Delete one or
-    # more OpsMetadata object and try again.
+    # by Application Manager. The maximum is 200 OpsMetadata objects. Delete
+    # one or more OpsMetadata object and try again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -15044,7 +15708,7 @@ module Aws::SSM
     #
     #   Specify maintenance window targets using the following format:
     #
-    #   `Key=WindowTargetIds;,Values=<window-target-id-1>,<window-target-id-2>`
+    #   `Key=WindowTargetIds,Values=<window-target-id-1>,<window-target-id-2>`
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] task_arn
@@ -15874,6 +16538,126 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Information about the result of a document review request.
+    #
+    # @!attribute [rw] reviewed_time
+    #   The time that the reviewer took action on the document review
+    #   request.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the document review request.
+    #   @return [String]
+    #
+    # @!attribute [rw] reviewer
+    #   The reviewer assigned to take action on the document review request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ReviewInformation AWS API Documentation
+    #
+    class ReviewInformation < Struct.new(
+      :reviewed_time,
+      :status,
+      :reviewer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an Automation runbook (Automation document) used in
+    # a runbook workflow in Change Manager.
+    #
+    # <note markdown="1"> The Automation runbooks specified for the runbook workflow can't run
+    # until all required approvals for the change request have been
+    # received.
+    #
+    #  </note>
+    #
+    # @note When making an API call, you may pass Runbook
+    #   data as a hash:
+    #
+    #       {
+    #         document_name: "DocumentARN", # required
+    #         document_version: "DocumentVersion",
+    #         parameters: {
+    #           "AutomationParameterKey" => ["AutomationParameterValue"],
+    #         },
+    #         target_parameter_name: "AutomationParameterKey",
+    #         targets: [
+    #           {
+    #             key: "TargetKey",
+    #             values: ["TargetValue"],
+    #           },
+    #         ],
+    #         max_concurrency: "MaxConcurrency",
+    #         max_errors: "MaxErrors",
+    #         target_locations: [
+    #           {
+    #             accounts: ["Account"],
+    #             regions: ["Region"],
+    #             target_location_max_concurrency: "MaxConcurrency",
+    #             target_location_max_errors: "MaxErrors",
+    #             execution_role_name: "ExecutionRoleName",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] document_name
+    #   The name of the Automation runbook (Automation document) used in a
+    #   runbook workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_version
+    #   The version of the Automation runbook (Automation document) used in
+    #   a runbook workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The key-value map of execution parameters, which were supplied when
+    #   calling `StartChangeRequestExecution`.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] target_parameter_name
+    #   The name of the parameter used as the target resource for the
+    #   rate-controlled runbook workflow. Required if you specify `Targets`.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   A key-value mapping to target resources that the Runbook operation
+    #   performs tasks on. Required if you specify `TargetParameterName`.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The `MaxConcurrency` value specified by the user when the operation
+    #   started, indicating the maximum number of resources that the runbook
+    #   operation can run on at the same time.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_errors
+    #   The `MaxErrors` value specified by the user when the execution
+    #   started, indicating the maximum number of errors that can occur
+    #   during the operation before the updates are stopped or rolled back.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_locations
+    #   Information about the AWS Regions and accounts targeted by the
+    #   current Runbook operation.
+    #   @return [Array<Types::TargetLocation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Runbook AWS API Documentation
+    #
+    class Runbook < Struct.new(
+      :document_name,
+      :document_version,
+      :parameters,
+      :target_parameter_name,
+      :targets,
+      :max_concurrency,
+      :max_errors,
+      :target_locations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An S3 bucket where you want to store the results of this request.
     #
     # @note When making an API call, you may pass S3OutputLocation
@@ -16683,6 +17467,141 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartChangeRequestExecutionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         scheduled_time: Time.now,
+    #         document_name: "DocumentARN", # required
+    #         document_version: "DocumentVersion",
+    #         parameters: {
+    #           "AutomationParameterKey" => ["AutomationParameterValue"],
+    #         },
+    #         change_request_name: "ChangeRequestName",
+    #         client_token: "IdempotencyToken",
+    #         runbooks: [ # required
+    #           {
+    #             document_name: "DocumentARN", # required
+    #             document_version: "DocumentVersion",
+    #             parameters: {
+    #               "AutomationParameterKey" => ["AutomationParameterValue"],
+    #             },
+    #             target_parameter_name: "AutomationParameterKey",
+    #             targets: [
+    #               {
+    #                 key: "TargetKey",
+    #                 values: ["TargetValue"],
+    #               },
+    #             ],
+    #             max_concurrency: "MaxConcurrency",
+    #             max_errors: "MaxErrors",
+    #             target_locations: [
+    #               {
+    #                 accounts: ["Account"],
+    #                 regions: ["Region"],
+    #                 target_location_max_concurrency: "MaxConcurrency",
+    #                 target_location_max_errors: "MaxErrors",
+    #                 execution_role_name: "ExecutionRoleName",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] scheduled_time
+    #   The date and time specified in the change request to run the
+    #   Automation runbooks.
+    #
+    #   <note markdown="1"> The Automation runbooks specified for the runbook workflow can't
+    #   run until all required approvals for the change request have been
+    #   received.
+    #
+    #    </note>
+    #   @return [Time]
+    #
+    # @!attribute [rw] document_name
+    #   The name of the change template document to run during the runbook
+    #   workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_version
+    #   The version of the change template document to run during the
+    #   runbook workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   A key-value map of parameters that match the declared parameters in
+    #   the change template document.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] change_request_name
+    #   The name of the change request associated with the runbook workflow
+    #   to be run.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The user-provided idempotency token. The token must be unique, is
+    #   case insensitive, enforces the UUID format, and can't be reused.
+    #   @return [String]
+    #
+    # @!attribute [rw] runbooks
+    #   Information about the Automation runbooks (Automation documents)
+    #   that are run during the runbook workflow.
+    #
+    #   <note markdown="1"> The Automation runbooks specified for the runbook workflow can't
+    #   run until all required approvals for the change request have been
+    #   received.
+    #
+    #    </note>
+    #   @return [Array<Types::Runbook>]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata that you assign to a resource. You can specify a
+    #   maximum of five tags for a change request. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner,
+    #   or environment. For example, you might want to tag a change request
+    #   to identify an environment or target AWS Region. In this case, you
+    #   could specify the following key-value pairs:
+    #
+    #   * `Key=Environment,Value=Production`
+    #
+    #   * `Key=Region,Value=us-east-2`
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartChangeRequestExecutionRequest AWS API Documentation
+    #
+    class StartChangeRequestExecutionRequest < Struct.new(
+      :scheduled_time,
+      :document_name,
+      :document_version,
+      :parameters,
+      :change_request_name,
+      :client_token,
+      :runbooks,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] automation_execution_id
+    #   The unique ID of a runbook workflow operation. (A runbook workflow
+    #   is a type of Automation operation.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartChangeRequestExecutionResult AWS API Documentation
+    #
+    class StartChangeRequestExecutionResult < Struct.new(
+      :automation_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartSessionRequest
     #   data as a hash:
     #
@@ -17130,7 +18049,7 @@ module Aws::SSM
     #
     # @!attribute [rw] target_location_max_concurrency
     #   The maximum number of AWS accounts and AWS regions allowed to run
-    #   the Automation concurrently
+    #   the Automation concurrently.
     #   @return [String]
     #
     # @!attribute [rw] target_location_max_errors
@@ -17141,7 +18060,8 @@ module Aws::SSM
     #
     # @!attribute [rw] execution_role_name
     #   The Automation execution role used by the currently running
-    #   Automation.
+    #   Automation. If not specified, the default value is
+    #   `AWS-SystemsManager-AutomationExecutionRole`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TargetLocation AWS API Documentation
@@ -17386,6 +18306,15 @@ module Aws::SSM
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
     #         apply_only_at_cron_interval: false,
+    #         target_locations: [
+    #           {
+    #             accounts: ["Account"],
+    #             regions: ["Region"],
+    #             target_location_max_concurrency: "MaxConcurrency",
+    #             target_location_max_errors: "MaxErrors",
+    #             execution_role_name: "ExecutionRoleName",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] association_id
@@ -17521,6 +18450,12 @@ module Aws::SSM
     #   the interval specified.
     #   @return [Boolean]
     #
+    # @!attribute [rw] target_locations
+    #   A location is a combination of AWS Regions and AWS accounts where
+    #   you want to run the association. Use this action to update an
+    #   association in multiple Regions and multiple accounts.
+    #   @return [Array<Types::TargetLocation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationRequest AWS API Documentation
     #
     class UpdateAssociationRequest < Struct.new(
@@ -17538,7 +18473,8 @@ module Aws::SSM
       :max_concurrency,
       :compliance_severity,
       :sync_compliance,
-      :apply_only_at_cron_interval)
+      :apply_only_at_cron_interval,
+      :target_locations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17642,6 +18578,49 @@ module Aws::SSM
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UpdateDocumentMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "DocumentName", # required
+    #         document_version: "DocumentVersion",
+    #         document_reviews: { # required
+    #           action: "SendForReview", # required, accepts SendForReview, UpdateReview, Approve, Reject
+    #           comment: [
+    #             {
+    #               type: "Comment", # accepts Comment
+    #               content: "DocumentReviewComment",
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the document for which a version is to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_version
+    #   The version of a document to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_reviews
+    #   The document review details to update.
+    #   @return [Types::DocumentReviews]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentMetadataRequest AWS API Documentation
+    #
+    class UpdateDocumentMetadataRequest < Struct.new(
+      :name,
+      :document_version,
+      :document_reviews)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentMetadataResponse AWS API Documentation
+    #
+    class UpdateDocumentMetadataResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateDocumentRequest
     #   data as a hash:
@@ -17759,8 +18738,8 @@ module Aws::SSM
     # @!attribute [rw] start_date
     #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
-    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
-    #   For more information, see the [Time Zone Database][1] on the IANA
+    #   example: "America/Los\_Angeles", "UTC", or "Asia/Seoul". For
+    #   more information, see the [Time Zone Database][1] on the IANA
     #   website.
     #
     #
@@ -17783,8 +18762,8 @@ module Aws::SSM
     # @!attribute [rw] schedule_timezone
     #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
-    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
-    #   For more information, see the [Time Zone Database][1] on the IANA
+    #   example: "America/Los\_Angeles", "UTC", or "Asia/Seoul". For
+    #   more information, see the [Time Zone Database][1] on the IANA
     #   website.
     #
     #
@@ -17799,7 +18778,7 @@ module Aws::SSM
     #   For example, the following cron expression schedules a maintenance
     #   window to run the third Tuesday of every month at 11:30 PM.
     #
-    #   `cron(0 30 23 ? * TUE#3 *)`
+    #   `cron(30 23 ? * TUE#3 *)`
     #
     #   If the schedule offset is `2`, the maintenance window won't run
     #   until two days later.
@@ -17881,8 +18860,8 @@ module Aws::SSM
     # @!attribute [rw] schedule_timezone
     #   The time zone that the scheduled maintenance window executions are
     #   based on, in Internet Assigned Numbers Authority (IANA) format. For
-    #   example: "America/Los\_Angeles", "etc/UTC", or "Asia/Seoul".
-    #   For more information, see the [Time Zone Database][1] on the IANA
+    #   example: "America/Los\_Angeles", "UTC", or "Asia/Seoul". For
+    #   more information, see the [Time Zone Database][1] on the IANA
     #   website.
     #
     #
@@ -18390,11 +19369,15 @@ module Aws::SSM
     #             ops_item_id: "String", # required
     #           },
     #         ],
-    #         status: "Open", # accepts Open, InProgress, Resolved
+    #         status: "Open", # accepts Open, InProgress, Resolved, Pending, TimedOut, Cancelling, Cancelled, Failed, CompletedWithSuccess, CompletedWithFailure, Scheduled, RunbookInProgress, PendingChangeCalendarOverride, ChangeCalendarOverrideApproved, ChangeCalendarOverrideRejected, PendingApproval, Approved, Rejected
     #         ops_item_id: "OpsItemId", # required
     #         title: "OpsItemTitle",
     #         category: "OpsItemCategory",
     #         severity: "OpsItemSeverity",
+    #         actual_start_time: Time.now,
+    #         actual_end_time: Time.now,
+    #         planned_start_time: Time.now,
+    #         planned_end_time: Time.now,
     #       }
     #
     # @!attribute [rw] description
@@ -18484,6 +19467,28 @@ module Aws::SSM
     #   Specify a new severity for an OpsItem.
     #   @return [String]
     #
+    # @!attribute [rw] actual_start_time
+    #   The time a runbook workflow started. Currently reported only for the
+    #   OpsItem type `/aws/changerequest`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] actual_end_time
+    #   The time a runbook workflow ended. Currently reported only for the
+    #   OpsItem type `/aws/changerequest`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] planned_start_time
+    #   The time specified in a change request for a runbook workflow to
+    #   start. Currently supported only for the OpsItem type
+    #   `/aws/changerequest`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] planned_end_time
+    #   The time specified in a change request for a runbook workflow to
+    #   end. Currently supported only for the OpsItem type
+    #   `/aws/changerequest`.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateOpsItemRequest AWS API Documentation
     #
     class UpdateOpsItemRequest < Struct.new(
@@ -18497,7 +19502,11 @@ module Aws::SSM
       :ops_item_id,
       :title,
       :category,
-      :severity)
+      :severity,
+      :actual_start_time,
+      :actual_end_time,
+      :planned_start_time,
+      :planned_end_time)
       SENSITIVE = []
       include Aws::Structure
     end

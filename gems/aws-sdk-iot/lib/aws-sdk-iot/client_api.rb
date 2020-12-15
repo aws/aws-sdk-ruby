@@ -89,7 +89,6 @@ module Aws::IoT
     AuditMitigationActionExecutionMetadata = Shapes::StructureShape.new(name: 'AuditMitigationActionExecutionMetadata')
     AuditMitigationActionExecutionMetadataList = Shapes::ListShape.new(name: 'AuditMitigationActionExecutionMetadataList')
     AuditMitigationActionsExecutionStatus = Shapes::StringShape.new(name: 'AuditMitigationActionsExecutionStatus')
-    AuditMitigationActionsTaskId = Shapes::StringShape.new(name: 'AuditMitigationActionsTaskId')
     AuditMitigationActionsTaskMetadata = Shapes::StructureShape.new(name: 'AuditMitigationActionsTaskMetadata')
     AuditMitigationActionsTaskMetadataList = Shapes::ListShape.new(name: 'AuditMitigationActionsTaskMetadataList')
     AuditMitigationActionsTaskStatistics = Shapes::MapShape.new(name: 'AuditMitigationActionsTaskStatistics')
@@ -144,7 +143,10 @@ module Aws::IoT
     BatchMode = Shapes::BooleanShape.new(name: 'BatchMode')
     Behavior = Shapes::StructureShape.new(name: 'Behavior')
     BehaviorCriteria = Shapes::StructureShape.new(name: 'BehaviorCriteria')
+    BehaviorCriteriaType = Shapes::StringShape.new(name: 'BehaviorCriteriaType')
     BehaviorMetric = Shapes::StringShape.new(name: 'BehaviorMetric')
+    BehaviorModelTrainingSummaries = Shapes::ListShape.new(name: 'BehaviorModelTrainingSummaries')
+    BehaviorModelTrainingSummary = Shapes::StructureShape.new(name: 'BehaviorModelTrainingSummary')
     BehaviorName = Shapes::StringShape.new(name: 'BehaviorName')
     Behaviors = Shapes::ListShape.new(name: 'Behaviors')
     BillingGroupArn = Shapes::StringShape.new(name: 'BillingGroupArn')
@@ -167,6 +169,8 @@ module Aws::IoT
     CancelAuditTaskRequest = Shapes::StructureShape.new(name: 'CancelAuditTaskRequest')
     CancelAuditTaskResponse = Shapes::StructureShape.new(name: 'CancelAuditTaskResponse')
     CancelCertificateTransferRequest = Shapes::StructureShape.new(name: 'CancelCertificateTransferRequest')
+    CancelDetectMitigationActionsTaskRequest = Shapes::StructureShape.new(name: 'CancelDetectMitigationActionsTaskRequest')
+    CancelDetectMitigationActionsTaskResponse = Shapes::StructureShape.new(name: 'CancelDetectMitigationActionsTaskResponse')
     CancelJobExecutionRequest = Shapes::StructureShape.new(name: 'CancelJobExecutionRequest')
     CancelJobRequest = Shapes::StructureShape.new(name: 'CancelJobRequest')
     CancelJobResponse = Shapes::StructureShape.new(name: 'CancelJobResponse')
@@ -196,6 +200,7 @@ module Aws::IoT
     ClearDefaultAuthorizerRequest = Shapes::StructureShape.new(name: 'ClearDefaultAuthorizerRequest')
     ClearDefaultAuthorizerResponse = Shapes::StructureShape.new(name: 'ClearDefaultAuthorizerResponse')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
+    ClientProperties = Shapes::MapShape.new(name: 'ClientProperties')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     CloudwatchAlarmAction = Shapes::StructureShape.new(name: 'CloudwatchAlarmAction')
     CloudwatchLogsAction = Shapes::StructureShape.new(name: 'CloudwatchLogsAction')
@@ -208,6 +213,7 @@ module Aws::IoT
     Comment = Shapes::StringShape.new(name: 'Comment')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
     CompliantChecksCount = Shapes::IntegerShape.new(name: 'CompliantChecksCount')
+    ConfidenceLevel = Shapes::StringShape.new(name: 'ConfidenceLevel')
     Configuration = Shapes::StructureShape.new(name: 'Configuration')
     ConfirmTopicRuleDestinationRequest = Shapes::StructureShape.new(name: 'ConfirmTopicRuleDestinationRequest')
     ConfirmTopicRuleDestinationResponse = Shapes::StructureShape.new(name: 'ConfirmTopicRuleDestinationResponse')
@@ -225,6 +231,8 @@ module Aws::IoT
     CreateBillingGroupResponse = Shapes::StructureShape.new(name: 'CreateBillingGroupResponse')
     CreateCertificateFromCsrRequest = Shapes::StructureShape.new(name: 'CreateCertificateFromCsrRequest')
     CreateCertificateFromCsrResponse = Shapes::StructureShape.new(name: 'CreateCertificateFromCsrResponse')
+    CreateCustomMetricRequest = Shapes::StructureShape.new(name: 'CreateCustomMetricRequest')
+    CreateCustomMetricResponse = Shapes::StructureShape.new(name: 'CreateCustomMetricResponse')
     CreateDimensionRequest = Shapes::StructureShape.new(name: 'CreateDimensionRequest')
     CreateDimensionResponse = Shapes::StructureShape.new(name: 'CreateDimensionResponse')
     CreateDomainConfigurationRequest = Shapes::StructureShape.new(name: 'CreateDomainConfigurationRequest')
@@ -270,7 +278,11 @@ module Aws::IoT
     CreationDate = Shapes::TimestampShape.new(name: 'CreationDate')
     CredentialDurationSeconds = Shapes::IntegerShape.new(name: 'CredentialDurationSeconds')
     CustomCodeSigning = Shapes::StructureShape.new(name: 'CustomCodeSigning')
+    CustomMetricArn = Shapes::StringShape.new(name: 'CustomMetricArn')
+    CustomMetricDisplayName = Shapes::StringShape.new(name: 'CustomMetricDisplayName')
+    CustomMetricType = Shapes::StringShape.new(name: 'CustomMetricType')
     CustomerVersion = Shapes::IntegerShape.new(name: 'CustomerVersion')
+    DataCollectionPercentage = Shapes::FloatShape.new(name: 'DataCollectionPercentage')
     DateType = Shapes::TimestampShape.new(name: 'DateType')
     DayOfMonth = Shapes::StringShape.new(name: 'DayOfMonth')
     DayOfWeek = Shapes::StringShape.new(name: 'DayOfWeek')
@@ -289,6 +301,8 @@ module Aws::IoT
     DeleteCACertificateResponse = Shapes::StructureShape.new(name: 'DeleteCACertificateResponse')
     DeleteCertificateRequest = Shapes::StructureShape.new(name: 'DeleteCertificateRequest')
     DeleteConflictException = Shapes::StructureShape.new(name: 'DeleteConflictException')
+    DeleteCustomMetricRequest = Shapes::StructureShape.new(name: 'DeleteCustomMetricRequest')
+    DeleteCustomMetricResponse = Shapes::StructureShape.new(name: 'DeleteCustomMetricResponse')
     DeleteDimensionRequest = Shapes::StructureShape.new(name: 'DeleteDimensionRequest')
     DeleteDimensionResponse = Shapes::StructureShape.new(name: 'DeleteDimensionResponse')
     DeleteDomainConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteDomainConfigurationRequest')
@@ -352,8 +366,12 @@ module Aws::IoT
     DescribeCACertificateResponse = Shapes::StructureShape.new(name: 'DescribeCACertificateResponse')
     DescribeCertificateRequest = Shapes::StructureShape.new(name: 'DescribeCertificateRequest')
     DescribeCertificateResponse = Shapes::StructureShape.new(name: 'DescribeCertificateResponse')
+    DescribeCustomMetricRequest = Shapes::StructureShape.new(name: 'DescribeCustomMetricRequest')
+    DescribeCustomMetricResponse = Shapes::StructureShape.new(name: 'DescribeCustomMetricResponse')
     DescribeDefaultAuthorizerRequest = Shapes::StructureShape.new(name: 'DescribeDefaultAuthorizerRequest')
     DescribeDefaultAuthorizerResponse = Shapes::StructureShape.new(name: 'DescribeDefaultAuthorizerResponse')
+    DescribeDetectMitigationActionsTaskRequest = Shapes::StructureShape.new(name: 'DescribeDetectMitigationActionsTaskRequest')
+    DescribeDetectMitigationActionsTaskResponse = Shapes::StructureShape.new(name: 'DescribeDetectMitigationActionsTaskResponse')
     DescribeDimensionRequest = Shapes::StructureShape.new(name: 'DescribeDimensionRequest')
     DescribeDimensionResponse = Shapes::StructureShape.new(name: 'DescribeDimensionResponse')
     DescribeDomainConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeDomainConfigurationRequest')
@@ -401,6 +419,16 @@ module Aws::IoT
     DetailsKey = Shapes::StringShape.new(name: 'DetailsKey')
     DetailsMap = Shapes::MapShape.new(name: 'DetailsMap')
     DetailsValue = Shapes::StringShape.new(name: 'DetailsValue')
+    DetectMitigationActionExecution = Shapes::StructureShape.new(name: 'DetectMitigationActionExecution')
+    DetectMitigationActionExecutionErrorCode = Shapes::StringShape.new(name: 'DetectMitigationActionExecutionErrorCode')
+    DetectMitigationActionExecutionList = Shapes::ListShape.new(name: 'DetectMitigationActionExecutionList')
+    DetectMitigationActionExecutionStatus = Shapes::StringShape.new(name: 'DetectMitigationActionExecutionStatus')
+    DetectMitigationActionsTaskStatistics = Shapes::StructureShape.new(name: 'DetectMitigationActionsTaskStatistics')
+    DetectMitigationActionsTaskStatus = Shapes::StringShape.new(name: 'DetectMitigationActionsTaskStatus')
+    DetectMitigationActionsTaskSummary = Shapes::StructureShape.new(name: 'DetectMitigationActionsTaskSummary')
+    DetectMitigationActionsTaskSummaryList = Shapes::ListShape.new(name: 'DetectMitigationActionsTaskSummaryList')
+    DetectMitigationActionsTaskTarget = Shapes::StructureShape.new(name: 'DetectMitigationActionsTaskTarget')
+    DetectMitigationActionsToExecuteList = Shapes::ListShape.new(name: 'DetectMitigationActionsToExecuteList')
     DeviceCertificateUpdateAction = Shapes::StringShape.new(name: 'DeviceCertificateUpdateAction')
     DeviceDefenderThingName = Shapes::StringShape.new(name: 'DeviceDefenderThingName')
     DimensionArn = Shapes::StringShape.new(name: 'DimensionArn')
@@ -472,6 +500,9 @@ module Aws::IoT
     Forced = Shapes::BooleanShape.new(name: 'Forced')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     GenerationId = Shapes::StringShape.new(name: 'GenerationId')
+    GenericLongValue = Shapes::IntegerShape.new(name: 'GenericLongValue')
+    GetBehaviorModelTrainingSummariesRequest = Shapes::StructureShape.new(name: 'GetBehaviorModelTrainingSummariesRequest')
+    GetBehaviorModelTrainingSummariesResponse = Shapes::StructureShape.new(name: 'GetBehaviorModelTrainingSummariesResponse')
     GetCardinalityRequest = Shapes::StructureShape.new(name: 'GetCardinalityRequest')
     GetCardinalityResponse = Shapes::StructureShape.new(name: 'GetCardinalityResponse')
     GetEffectivePoliciesRequest = Shapes::StructureShape.new(name: 'GetEffectivePoliciesRequest')
@@ -566,6 +597,7 @@ module Aws::IoT
     JobSummaryList = Shapes::ListShape.new(name: 'JobSummaryList')
     JobTargets = Shapes::ListShape.new(name: 'JobTargets')
     JsonDocument = Shapes::StringShape.new(name: 'JsonDocument')
+    KafkaAction = Shapes::StructureShape.new(name: 'KafkaAction')
     Key = Shapes::StringShape.new(name: 'Key')
     KeyName = Shapes::StringShape.new(name: 'KeyName')
     KeyPair = Shapes::StructureShape.new(name: 'KeyPair')
@@ -574,6 +606,7 @@ module Aws::IoT
     LambdaAction = Shapes::StructureShape.new(name: 'LambdaAction')
     LaserMaxResults = Shapes::IntegerShape.new(name: 'LaserMaxResults')
     LastModifiedDate = Shapes::TimestampShape.new(name: 'LastModifiedDate')
+    LastUpdatedAtDate = Shapes::TimestampShape.new(name: 'LastUpdatedAtDate')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListActiveViolationsRequest = Shapes::StructureShape.new(name: 'ListActiveViolationsRequest')
     ListActiveViolationsResponse = Shapes::StructureShape.new(name: 'ListActiveViolationsResponse')
@@ -599,6 +632,12 @@ module Aws::IoT
     ListCertificatesByCAResponse = Shapes::StructureShape.new(name: 'ListCertificatesByCAResponse')
     ListCertificatesRequest = Shapes::StructureShape.new(name: 'ListCertificatesRequest')
     ListCertificatesResponse = Shapes::StructureShape.new(name: 'ListCertificatesResponse')
+    ListCustomMetricsRequest = Shapes::StructureShape.new(name: 'ListCustomMetricsRequest')
+    ListCustomMetricsResponse = Shapes::StructureShape.new(name: 'ListCustomMetricsResponse')
+    ListDetectMitigationActionsExecutionsRequest = Shapes::StructureShape.new(name: 'ListDetectMitigationActionsExecutionsRequest')
+    ListDetectMitigationActionsExecutionsResponse = Shapes::StructureShape.new(name: 'ListDetectMitigationActionsExecutionsResponse')
+    ListDetectMitigationActionsTasksRequest = Shapes::StructureShape.new(name: 'ListDetectMitigationActionsTasksRequest')
+    ListDetectMitigationActionsTasksResponse = Shapes::StructureShape.new(name: 'ListDetectMitigationActionsTasksResponse')
     ListDimensionsRequest = Shapes::StructureShape.new(name: 'ListDimensionsRequest')
     ListDimensionsResponse = Shapes::StructureShape.new(name: 'ListDimensionsResponse')
     ListDomainConfigurationsRequest = Shapes::StructureShape.new(name: 'ListDomainConfigurationsRequest')
@@ -641,6 +680,7 @@ module Aws::IoT
     ListSecurityProfilesResponse = Shapes::StructureShape.new(name: 'ListSecurityProfilesResponse')
     ListStreamsRequest = Shapes::StructureShape.new(name: 'ListStreamsRequest')
     ListStreamsResponse = Shapes::StructureShape.new(name: 'ListStreamsResponse')
+    ListSuppressedAlerts = Shapes::BooleanShape.new(name: 'ListSuppressedAlerts')
     ListSuppressedFindings = Shapes::BooleanShape.new(name: 'ListSuppressedFindings')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
@@ -682,6 +722,7 @@ module Aws::IoT
     LogTargetName = Shapes::StringShape.new(name: 'LogTargetName')
     LogTargetType = Shapes::StringShape.new(name: 'LogTargetType')
     LoggingOptionsPayload = Shapes::StructureShape.new(name: 'LoggingOptionsPayload')
+    MachineLearningDetectionConfig = Shapes::StructureShape.new(name: 'MachineLearningDetectionConfig')
     MalformedPolicyException = Shapes::StructureShape.new(name: 'MalformedPolicyException')
     Marker = Shapes::StringShape.new(name: 'Marker')
     MaxJobExecutionsPerMin = Shapes::IntegerShape.new(name: 'MaxJobExecutionsPerMin')
@@ -692,6 +733,8 @@ module Aws::IoT
     MessageFormat = Shapes::StringShape.new(name: 'MessageFormat')
     MessageId = Shapes::StringShape.new(name: 'MessageId')
     MetricDimension = Shapes::StructureShape.new(name: 'MetricDimension')
+    MetricName = Shapes::StringShape.new(name: 'MetricName')
+    MetricNames = Shapes::ListShape.new(name: 'MetricNames')
     MetricToRetain = Shapes::StructureShape.new(name: 'MetricToRetain')
     MetricValue = Shapes::StructureShape.new(name: 'MetricValue')
     Minimum = Shapes::FloatShape.new(name: 'Minimum')
@@ -708,6 +751,8 @@ module Aws::IoT
     MitigationActionNameList = Shapes::ListShape.new(name: 'MitigationActionNameList')
     MitigationActionParams = Shapes::StructureShape.new(name: 'MitigationActionParams')
     MitigationActionType = Shapes::StringShape.new(name: 'MitigationActionType')
+    MitigationActionsTaskId = Shapes::StringShape.new(name: 'MitigationActionsTaskId')
+    ModelStatus = Shapes::StringShape.new(name: 'ModelStatus')
     MqttClientId = Shapes::StringShape.new(name: 'MqttClientId')
     MqttContext = Shapes::StructureShape.new(name: 'MqttContext')
     MqttPassword = Shapes::BlobShape.new(name: 'MqttPassword')
@@ -718,6 +763,9 @@ module Aws::IoT
     NonCompliantResource = Shapes::StructureShape.new(name: 'NonCompliantResource')
     NonCompliantResourcesCount = Shapes::IntegerShape.new(name: 'NonCompliantResourcesCount')
     NotConfiguredException = Shapes::StructureShape.new(name: 'NotConfiguredException')
+    NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
+    Number = Shapes::FloatShape.new(name: 'Number')
+    NumberList = Shapes::ListShape.new(name: 'NumberList')
     NumberOfThings = Shapes::IntegerShape.new(name: 'NumberOfThings')
     OTAUpdateArn = Shapes::StringShape.new(name: 'OTAUpdateArn')
     OTAUpdateDescription = Shapes::StringShape.new(name: 'OTAUpdateDescription')
@@ -765,6 +813,7 @@ module Aws::IoT
     Ports = Shapes::ListShape.new(name: 'Ports')
     Prefix = Shapes::StringShape.new(name: 'Prefix')
     PresignedUrlConfig = Shapes::StructureShape.new(name: 'PresignedUrlConfig')
+    PrimitiveBoolean = Shapes::BooleanShape.new(name: 'PrimitiveBoolean')
     Principal = Shapes::StringShape.new(name: 'Principal')
     PrincipalArn = Shapes::StringShape.new(name: 'PrincipalArn')
     PrincipalId = Shapes::StringShape.new(name: 'PrincipalId')
@@ -870,6 +919,8 @@ module Aws::IoT
     SearchIndexResponse = Shapes::StructureShape.new(name: 'SearchIndexResponse')
     SearchableAttributes = Shapes::ListShape.new(name: 'SearchableAttributes')
     Seconds = Shapes::IntegerShape.new(name: 'Seconds')
+    SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
+    SecurityGroupList = Shapes::ListShape.new(name: 'SecurityGroupList')
     SecurityProfileArn = Shapes::StringShape.new(name: 'SecurityProfileArn')
     SecurityProfileDescription = Shapes::StringShape.new(name: 'SecurityProfileDescription')
     SecurityProfileIdentifier = Shapes::StructureShape.new(name: 'SecurityProfileIdentifier')
@@ -913,6 +964,8 @@ module Aws::IoT
     SqsAction = Shapes::StructureShape.new(name: 'SqsAction')
     StartAuditMitigationActionsTaskRequest = Shapes::StructureShape.new(name: 'StartAuditMitigationActionsTaskRequest')
     StartAuditMitigationActionsTaskResponse = Shapes::StructureShape.new(name: 'StartAuditMitigationActionsTaskResponse')
+    StartDetectMitigationActionsTaskRequest = Shapes::StructureShape.new(name: 'StartDetectMitigationActionsTaskRequest')
+    StartDetectMitigationActionsTaskResponse = Shapes::StructureShape.new(name: 'StartDetectMitigationActionsTaskResponse')
     StartOnDemandAuditTaskRequest = Shapes::StructureShape.new(name: 'StartOnDemandAuditTaskRequest')
     StartOnDemandAuditTaskResponse = Shapes::StructureShape.new(name: 'StartOnDemandAuditTaskResponse')
     StartSigningJobParameter = Shapes::StructureShape.new(name: 'StartSigningJobParameter')
@@ -940,11 +993,15 @@ module Aws::IoT
     StreamVersion = Shapes::IntegerShape.new(name: 'StreamVersion')
     StreamsSummary = Shapes::ListShape.new(name: 'StreamsSummary')
     String = Shapes::StringShape.new(name: 'String')
+    StringList = Shapes::ListShape.new(name: 'StringList')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
+    SubnetId = Shapes::StringShape.new(name: 'SubnetId')
+    SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
     SucceededFindingsCount = Shapes::IntegerShape.new(name: 'SucceededFindingsCount')
     SucceededThings = Shapes::IntegerShape.new(name: 'SucceededThings')
     Sum = Shapes::FloatShape.new(name: 'Sum')
     SumOfSquares = Shapes::FloatShape.new(name: 'SumOfSquares')
+    SuppressAlerts = Shapes::BooleanShape.new(name: 'SuppressAlerts')
     SuppressIndefinitely = Shapes::BooleanShape.new(name: 'SuppressIndefinitely')
     SuppressedNonCompliantResourcesCount = Shapes::IntegerShape.new(name: 'SuppressedNonCompliantResourcesCount')
     TableName = Shapes::StringShape.new(name: 'TableName')
@@ -959,6 +1016,7 @@ module Aws::IoT
     TargetArn = Shapes::StringShape.new(name: 'TargetArn')
     TargetAuditCheckNames = Shapes::ListShape.new(name: 'TargetAuditCheckNames')
     TargetSelection = Shapes::StringShape.new(name: 'TargetSelection')
+    TargetViolationIdsForDetectMitigationActions = Shapes::ListShape.new(name: 'TargetViolationIdsForDetectMitigationActions')
     Targets = Shapes::ListShape.new(name: 'Targets')
     TaskAlreadyExistsException = Shapes::StructureShape.new(name: 'TaskAlreadyExistsException')
     TaskId = Shapes::StringShape.new(name: 'TaskId')
@@ -1022,6 +1080,7 @@ module Aws::IoT
     TimestreamTimestamp = Shapes::StructureShape.new(name: 'TimestreamTimestamp')
     TimestreamTimestampUnit = Shapes::StringShape.new(name: 'TimestreamTimestampUnit')
     TimestreamTimestampValue = Shapes::StringShape.new(name: 'TimestreamTimestampValue')
+    TinyMaxResults = Shapes::IntegerShape.new(name: 'TinyMaxResults')
     TlsContext = Shapes::StructureShape.new(name: 'TlsContext')
     Token = Shapes::StringShape.new(name: 'Token')
     TokenKeyName = Shapes::StringShape.new(name: 'TokenKeyName')
@@ -1063,6 +1122,8 @@ module Aws::IoT
     UpdateCACertificateParams = Shapes::StructureShape.new(name: 'UpdateCACertificateParams')
     UpdateCACertificateRequest = Shapes::StructureShape.new(name: 'UpdateCACertificateRequest')
     UpdateCertificateRequest = Shapes::StructureShape.new(name: 'UpdateCertificateRequest')
+    UpdateCustomMetricRequest = Shapes::StructureShape.new(name: 'UpdateCustomMetricRequest')
+    UpdateCustomMetricResponse = Shapes::StructureShape.new(name: 'UpdateCustomMetricResponse')
     UpdateDeviceCertificateParams = Shapes::StructureShape.new(name: 'UpdateDeviceCertificateParams')
     UpdateDimensionRequest = Shapes::StructureShape.new(name: 'UpdateDimensionRequest')
     UpdateDimensionResponse = Shapes::StructureShape.new(name: 'UpdateDimensionResponse')
@@ -1109,13 +1170,20 @@ module Aws::IoT
     VersionNumber = Shapes::IntegerShape.new(name: 'VersionNumber')
     VersionsLimitExceededException = Shapes::StructureShape.new(name: 'VersionsLimitExceededException')
     ViolationEvent = Shapes::StructureShape.new(name: 'ViolationEvent')
+    ViolationEventAdditionalInfo = Shapes::StructureShape.new(name: 'ViolationEventAdditionalInfo')
+    ViolationEventOccurrenceRange = Shapes::StructureShape.new(name: 'ViolationEventOccurrenceRange')
     ViolationEventType = Shapes::StringShape.new(name: 'ViolationEventType')
     ViolationEvents = Shapes::ListShape.new(name: 'ViolationEvents')
     ViolationId = Shapes::StringShape.new(name: 'ViolationId')
+    VpcDestinationConfiguration = Shapes::StructureShape.new(name: 'VpcDestinationConfiguration')
+    VpcDestinationProperties = Shapes::StructureShape.new(name: 'VpcDestinationProperties')
+    VpcDestinationSummary = Shapes::StructureShape.new(name: 'VpcDestinationSummary')
+    VpcId = Shapes::StringShape.new(name: 'VpcId')
     WaitingForDataCollectionChecksCount = Shapes::IntegerShape.new(name: 'WaitingForDataCollectionChecksCount')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
     resourceArn = Shapes::StringShape.new(name: 'resourceArn')
     resourceId = Shapes::StringShape.new(name: 'resourceId')
+    stringValue = Shapes::StringShape.new(name: 'stringValue')
 
     AbortConfig.add_member(:criteria_list, Shapes::ShapeRef.new(shape: AbortCriteriaList, required: true, location_name: "criteriaList"))
     AbortConfig.struct_class = Types::AbortConfig
@@ -1152,6 +1220,7 @@ module Aws::IoT
     Action.add_member(:step_functions, Shapes::ShapeRef.new(shape: StepFunctionsAction, location_name: "stepFunctions"))
     Action.add_member(:timestream, Shapes::ShapeRef.new(shape: TimestreamAction, location_name: "timestream"))
     Action.add_member(:http, Shapes::ShapeRef.new(shape: HttpAction, location_name: "http"))
+    Action.add_member(:kafka, Shapes::ShapeRef.new(shape: KafkaAction, location_name: "kafka"))
     Action.struct_class = Types::Action
 
     ActionList.member = Shapes::ShapeRef.new(shape: Action)
@@ -1161,6 +1230,7 @@ module Aws::IoT
     ActiveViolation.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location_name: "securityProfileName"))
     ActiveViolation.add_member(:behavior, Shapes::ShapeRef.new(shape: Behavior, location_name: "behavior"))
     ActiveViolation.add_member(:last_violation_value, Shapes::ShapeRef.new(shape: MetricValue, location_name: "lastViolationValue"))
+    ActiveViolation.add_member(:violation_event_additional_info, Shapes::ShapeRef.new(shape: ViolationEventAdditionalInfo, location_name: "violationEventAdditionalInfo"))
     ActiveViolation.add_member(:last_violation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastViolationTime"))
     ActiveViolation.add_member(:violation_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "violationStartTime"))
     ActiveViolation.struct_class = Types::ActiveViolation
@@ -1302,7 +1372,7 @@ module Aws::IoT
 
     AuditFindings.member = Shapes::ShapeRef.new(shape: AuditFinding)
 
-    AuditMitigationActionExecutionMetadata.add_member(:task_id, Shapes::ShapeRef.new(shape: AuditMitigationActionsTaskId, location_name: "taskId"))
+    AuditMitigationActionExecutionMetadata.add_member(:task_id, Shapes::ShapeRef.new(shape: MitigationActionsTaskId, location_name: "taskId"))
     AuditMitigationActionExecutionMetadata.add_member(:finding_id, Shapes::ShapeRef.new(shape: FindingId, location_name: "findingId"))
     AuditMitigationActionExecutionMetadata.add_member(:action_name, Shapes::ShapeRef.new(shape: MitigationActionName, location_name: "actionName"))
     AuditMitigationActionExecutionMetadata.add_member(:action_id, Shapes::ShapeRef.new(shape: MitigationActionId, location_name: "actionId"))
@@ -1315,7 +1385,7 @@ module Aws::IoT
 
     AuditMitigationActionExecutionMetadataList.member = Shapes::ShapeRef.new(shape: AuditMitigationActionExecutionMetadata)
 
-    AuditMitigationActionsTaskMetadata.add_member(:task_id, Shapes::ShapeRef.new(shape: AuditMitigationActionsTaskId, location_name: "taskId"))
+    AuditMitigationActionsTaskMetadata.add_member(:task_id, Shapes::ShapeRef.new(shape: MitigationActionsTaskId, location_name: "taskId"))
     AuditMitigationActionsTaskMetadata.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     AuditMitigationActionsTaskMetadata.add_member(:task_status, Shapes::ShapeRef.new(shape: AuditMitigationActionsTaskStatus, location_name: "taskStatus"))
     AuditMitigationActionsTaskMetadata.struct_class = Types::AuditMitigationActionsTaskMetadata
@@ -1424,6 +1494,7 @@ module Aws::IoT
     Behavior.add_member(:metric, Shapes::ShapeRef.new(shape: BehaviorMetric, location_name: "metric"))
     Behavior.add_member(:metric_dimension, Shapes::ShapeRef.new(shape: MetricDimension, location_name: "metricDimension"))
     Behavior.add_member(:criteria, Shapes::ShapeRef.new(shape: BehaviorCriteria, location_name: "criteria"))
+    Behavior.add_member(:suppress_alerts, Shapes::ShapeRef.new(shape: SuppressAlerts, location_name: "suppressAlerts"))
     Behavior.struct_class = Types::Behavior
 
     BehaviorCriteria.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, location_name: "comparisonOperator"))
@@ -1432,7 +1503,18 @@ module Aws::IoT
     BehaviorCriteria.add_member(:consecutive_datapoints_to_alarm, Shapes::ShapeRef.new(shape: ConsecutiveDatapointsToAlarm, location_name: "consecutiveDatapointsToAlarm"))
     BehaviorCriteria.add_member(:consecutive_datapoints_to_clear, Shapes::ShapeRef.new(shape: ConsecutiveDatapointsToClear, location_name: "consecutiveDatapointsToClear"))
     BehaviorCriteria.add_member(:statistical_threshold, Shapes::ShapeRef.new(shape: StatisticalThreshold, location_name: "statisticalThreshold"))
+    BehaviorCriteria.add_member(:ml_detection_config, Shapes::ShapeRef.new(shape: MachineLearningDetectionConfig, location_name: "mlDetectionConfig"))
     BehaviorCriteria.struct_class = Types::BehaviorCriteria
+
+    BehaviorModelTrainingSummaries.member = Shapes::ShapeRef.new(shape: BehaviorModelTrainingSummary)
+
+    BehaviorModelTrainingSummary.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location_name: "securityProfileName"))
+    BehaviorModelTrainingSummary.add_member(:behavior_name, Shapes::ShapeRef.new(shape: BehaviorName, location_name: "behaviorName"))
+    BehaviorModelTrainingSummary.add_member(:training_data_collection_start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "trainingDataCollectionStartDate"))
+    BehaviorModelTrainingSummary.add_member(:model_status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "modelStatus"))
+    BehaviorModelTrainingSummary.add_member(:datapoints_collection_percentage, Shapes::ShapeRef.new(shape: DataCollectionPercentage, location_name: "datapointsCollectionPercentage"))
+    BehaviorModelTrainingSummary.add_member(:last_model_refresh_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModelRefreshDate"))
+    BehaviorModelTrainingSummary.struct_class = Types::BehaviorModelTrainingSummary
 
     Behaviors.member = Shapes::ShapeRef.new(shape: Behavior)
 
@@ -1465,7 +1547,7 @@ module Aws::IoT
 
     CACertificates.member = Shapes::ShapeRef.new(shape: CACertificate)
 
-    CancelAuditMitigationActionsTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: AuditMitigationActionsTaskId, required: true, location: "uri", location_name: "taskId"))
+    CancelAuditMitigationActionsTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: MitigationActionsTaskId, required: true, location: "uri", location_name: "taskId"))
     CancelAuditMitigationActionsTaskRequest.struct_class = Types::CancelAuditMitigationActionsTaskRequest
 
     CancelAuditMitigationActionsTaskResponse.struct_class = Types::CancelAuditMitigationActionsTaskResponse
@@ -1477,6 +1559,11 @@ module Aws::IoT
 
     CancelCertificateTransferRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "certificateId"))
     CancelCertificateTransferRequest.struct_class = Types::CancelCertificateTransferRequest
+
+    CancelDetectMitigationActionsTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: MitigationActionsTaskId, required: true, location: "uri", location_name: "taskId"))
+    CancelDetectMitigationActionsTaskRequest.struct_class = Types::CancelDetectMitigationActionsTaskRequest
+
+    CancelDetectMitigationActionsTaskResponse.struct_class = Types::CancelDetectMitigationActionsTaskResponse
 
     CancelJobExecutionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     CancelJobExecutionRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
@@ -1539,6 +1626,9 @@ module Aws::IoT
     ClearDefaultAuthorizerRequest.struct_class = Types::ClearDefaultAuthorizerRequest
 
     ClearDefaultAuthorizerResponse.struct_class = Types::ClearDefaultAuthorizerResponse
+
+    ClientProperties.key = Shapes::ShapeRef.new(shape: String)
+    ClientProperties.value = Shapes::ShapeRef.new(shape: String)
 
     CloudwatchAlarmAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
     CloudwatchAlarmAction.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, required: true, location_name: "alarmName"))
@@ -1622,6 +1712,17 @@ module Aws::IoT
     CreateCertificateFromCsrResponse.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, location_name: "certificateId"))
     CreateCertificateFromCsrResponse.add_member(:certificate_pem, Shapes::ShapeRef.new(shape: CertificatePem, location_name: "certificatePem"))
     CreateCertificateFromCsrResponse.struct_class = Types::CreateCertificateFromCsrResponse
+
+    CreateCustomMetricRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location: "uri", location_name: "metricName"))
+    CreateCustomMetricRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: CustomMetricDisplayName, location_name: "displayName"))
+    CreateCustomMetricRequest.add_member(:metric_type, Shapes::ShapeRef.new(shape: CustomMetricType, required: true, location_name: "metricType"))
+    CreateCustomMetricRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateCustomMetricRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateCustomMetricRequest.struct_class = Types::CreateCustomMetricRequest
+
+    CreateCustomMetricResponse.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "metricName"))
+    CreateCustomMetricResponse.add_member(:metric_arn, Shapes::ShapeRef.new(shape: CustomMetricArn, location_name: "metricArn"))
+    CreateCustomMetricResponse.struct_class = Types::CreateCustomMetricResponse
 
     CreateDimensionRequest.add_member(:name, Shapes::ShapeRef.new(shape: DimensionName, required: true, location: "uri", location_name: "name"))
     CreateDimensionRequest.add_member(:type, Shapes::ShapeRef.new(shape: DimensionType, required: true, location_name: "type"))
@@ -1911,6 +2012,11 @@ module Aws::IoT
     DeleteConflictException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     DeleteConflictException.struct_class = Types::DeleteConflictException
 
+    DeleteCustomMetricRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location: "uri", location_name: "metricName"))
+    DeleteCustomMetricRequest.struct_class = Types::DeleteCustomMetricRequest
+
+    DeleteCustomMetricResponse.struct_class = Types::DeleteCustomMetricResponse
+
     DeleteDimensionRequest.add_member(:name, Shapes::ShapeRef.new(shape: DimensionName, required: true, location: "uri", location_name: "name"))
     DeleteDimensionRequest.struct_class = Types::DeleteDimensionRequest
 
@@ -2046,7 +2152,7 @@ module Aws::IoT
     DescribeAuditFindingResponse.add_member(:finding, Shapes::ShapeRef.new(shape: AuditFinding, location_name: "finding"))
     DescribeAuditFindingResponse.struct_class = Types::DescribeAuditFindingResponse
 
-    DescribeAuditMitigationActionsTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: AuditMitigationActionsTaskId, required: true, location: "uri", location_name: "taskId"))
+    DescribeAuditMitigationActionsTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: MitigationActionsTaskId, required: true, location: "uri", location_name: "taskId"))
     DescribeAuditMitigationActionsTaskRequest.struct_class = Types::DescribeAuditMitigationActionsTaskRequest
 
     DescribeAuditMitigationActionsTaskResponse.add_member(:task_status, Shapes::ShapeRef.new(shape: AuditMitigationActionsTaskStatus, location_name: "taskStatus"))
@@ -2110,10 +2216,27 @@ module Aws::IoT
     DescribeCertificateResponse.add_member(:certificate_description, Shapes::ShapeRef.new(shape: CertificateDescription, location_name: "certificateDescription"))
     DescribeCertificateResponse.struct_class = Types::DescribeCertificateResponse
 
+    DescribeCustomMetricRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location: "uri", location_name: "metricName"))
+    DescribeCustomMetricRequest.struct_class = Types::DescribeCustomMetricRequest
+
+    DescribeCustomMetricResponse.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "metricName"))
+    DescribeCustomMetricResponse.add_member(:metric_arn, Shapes::ShapeRef.new(shape: CustomMetricArn, location_name: "metricArn"))
+    DescribeCustomMetricResponse.add_member(:metric_type, Shapes::ShapeRef.new(shape: CustomMetricType, location_name: "metricType"))
+    DescribeCustomMetricResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: CustomMetricDisplayName, location_name: "displayName"))
+    DescribeCustomMetricResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))
+    DescribeCustomMetricResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedDate"))
+    DescribeCustomMetricResponse.struct_class = Types::DescribeCustomMetricResponse
+
     DescribeDefaultAuthorizerRequest.struct_class = Types::DescribeDefaultAuthorizerRequest
 
     DescribeDefaultAuthorizerResponse.add_member(:authorizer_description, Shapes::ShapeRef.new(shape: AuthorizerDescription, location_name: "authorizerDescription"))
     DescribeDefaultAuthorizerResponse.struct_class = Types::DescribeDefaultAuthorizerResponse
+
+    DescribeDetectMitigationActionsTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: MitigationActionsTaskId, required: true, location: "uri", location_name: "taskId"))
+    DescribeDetectMitigationActionsTaskRequest.struct_class = Types::DescribeDetectMitigationActionsTaskRequest
+
+    DescribeDetectMitigationActionsTaskResponse.add_member(:task_summary, Shapes::ShapeRef.new(shape: DetectMitigationActionsTaskSummary, location_name: "taskSummary"))
+    DescribeDetectMitigationActionsTaskResponse.struct_class = Types::DescribeDetectMitigationActionsTaskResponse
 
     DescribeDimensionRequest.add_member(:name, Shapes::ShapeRef.new(shape: DimensionName, required: true, location: "uri", location_name: "name"))
     DescribeDimensionRequest.struct_class = Types::DescribeDimensionRequest
@@ -2333,6 +2456,45 @@ module Aws::IoT
     DetailsMap.key = Shapes::ShapeRef.new(shape: DetailsKey)
     DetailsMap.value = Shapes::ShapeRef.new(shape: DetailsValue)
 
+    DetectMitigationActionExecution.add_member(:task_id, Shapes::ShapeRef.new(shape: MitigationActionsTaskId, location_name: "taskId"))
+    DetectMitigationActionExecution.add_member(:violation_id, Shapes::ShapeRef.new(shape: ViolationId, location_name: "violationId"))
+    DetectMitigationActionExecution.add_member(:action_name, Shapes::ShapeRef.new(shape: MitigationActionName, location_name: "actionName"))
+    DetectMitigationActionExecution.add_member(:thing_name, Shapes::ShapeRef.new(shape: DeviceDefenderThingName, location_name: "thingName"))
+    DetectMitigationActionExecution.add_member(:execution_start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "executionStartDate"))
+    DetectMitigationActionExecution.add_member(:execution_end_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "executionEndDate"))
+    DetectMitigationActionExecution.add_member(:status, Shapes::ShapeRef.new(shape: DetectMitigationActionExecutionStatus, location_name: "status"))
+    DetectMitigationActionExecution.add_member(:error_code, Shapes::ShapeRef.new(shape: DetectMitigationActionExecutionErrorCode, location_name: "errorCode"))
+    DetectMitigationActionExecution.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DetectMitigationActionExecution.struct_class = Types::DetectMitigationActionExecution
+
+    DetectMitigationActionExecutionList.member = Shapes::ShapeRef.new(shape: DetectMitigationActionExecution)
+
+    DetectMitigationActionsTaskStatistics.add_member(:actions_executed, Shapes::ShapeRef.new(shape: GenericLongValue, location_name: "actionsExecuted"))
+    DetectMitigationActionsTaskStatistics.add_member(:actions_skipped, Shapes::ShapeRef.new(shape: GenericLongValue, location_name: "actionsSkipped"))
+    DetectMitigationActionsTaskStatistics.add_member(:actions_failed, Shapes::ShapeRef.new(shape: GenericLongValue, location_name: "actionsFailed"))
+    DetectMitigationActionsTaskStatistics.struct_class = Types::DetectMitigationActionsTaskStatistics
+
+    DetectMitigationActionsTaskSummary.add_member(:task_id, Shapes::ShapeRef.new(shape: MitigationActionsTaskId, location_name: "taskId"))
+    DetectMitigationActionsTaskSummary.add_member(:task_status, Shapes::ShapeRef.new(shape: DetectMitigationActionsTaskStatus, location_name: "taskStatus"))
+    DetectMitigationActionsTaskSummary.add_member(:task_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "taskStartTime"))
+    DetectMitigationActionsTaskSummary.add_member(:task_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "taskEndTime"))
+    DetectMitigationActionsTaskSummary.add_member(:target, Shapes::ShapeRef.new(shape: DetectMitigationActionsTaskTarget, location_name: "target"))
+    DetectMitigationActionsTaskSummary.add_member(:violation_event_occurrence_range, Shapes::ShapeRef.new(shape: ViolationEventOccurrenceRange, location_name: "violationEventOccurrenceRange"))
+    DetectMitigationActionsTaskSummary.add_member(:only_active_violations_included, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "onlyActiveViolationsIncluded"))
+    DetectMitigationActionsTaskSummary.add_member(:suppressed_alerts_included, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "suppressedAlertsIncluded"))
+    DetectMitigationActionsTaskSummary.add_member(:actions_definition, Shapes::ShapeRef.new(shape: MitigationActionList, location_name: "actionsDefinition"))
+    DetectMitigationActionsTaskSummary.add_member(:task_statistics, Shapes::ShapeRef.new(shape: DetectMitigationActionsTaskStatistics, location_name: "taskStatistics"))
+    DetectMitigationActionsTaskSummary.struct_class = Types::DetectMitigationActionsTaskSummary
+
+    DetectMitigationActionsTaskSummaryList.member = Shapes::ShapeRef.new(shape: DetectMitigationActionsTaskSummary)
+
+    DetectMitigationActionsTaskTarget.add_member(:violation_ids, Shapes::ShapeRef.new(shape: TargetViolationIdsForDetectMitigationActions, location_name: "violationIds"))
+    DetectMitigationActionsTaskTarget.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location_name: "securityProfileName"))
+    DetectMitigationActionsTaskTarget.add_member(:behavior_name, Shapes::ShapeRef.new(shape: BehaviorName, location_name: "behaviorName"))
+    DetectMitigationActionsTaskTarget.struct_class = Types::DetectMitigationActionsTaskTarget
+
+    DetectMitigationActionsToExecuteList.member = Shapes::ShapeRef.new(shape: MitigationActionName)
+
     DimensionNames.member = Shapes::ShapeRef.new(shape: DimensionName)
 
     DimensionStringValues.member = Shapes::ShapeRef.new(shape: DimensionStringValue)
@@ -2416,6 +2578,15 @@ module Aws::IoT
     FirehoseAction.add_member(:separator, Shapes::ShapeRef.new(shape: FirehoseSeparator, location_name: "separator"))
     FirehoseAction.add_member(:batch_mode, Shapes::ShapeRef.new(shape: BatchMode, location_name: "batchMode"))
     FirehoseAction.struct_class = Types::FirehoseAction
+
+    GetBehaviorModelTrainingSummariesRequest.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location: "querystring", location_name: "securityProfileName"))
+    GetBehaviorModelTrainingSummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TinyMaxResults, location: "querystring", location_name: "maxResults"))
+    GetBehaviorModelTrainingSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    GetBehaviorModelTrainingSummariesRequest.struct_class = Types::GetBehaviorModelTrainingSummariesRequest
+
+    GetBehaviorModelTrainingSummariesResponse.add_member(:summaries, Shapes::ShapeRef.new(shape: BehaviorModelTrainingSummaries, location_name: "summaries"))
+    GetBehaviorModelTrainingSummariesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetBehaviorModelTrainingSummariesResponse.struct_class = Types::GetBehaviorModelTrainingSummariesResponse
 
     GetCardinalityRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
     GetCardinalityRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "queryString"))
@@ -2692,6 +2863,13 @@ module Aws::IoT
 
     JobTargets.member = Shapes::ShapeRef.new(shape: TargetArn)
 
+    KafkaAction.add_member(:destination_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "destinationArn"))
+    KafkaAction.add_member(:topic, Shapes::ShapeRef.new(shape: String, required: true, location_name: "topic"))
+    KafkaAction.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
+    KafkaAction.add_member(:partition, Shapes::ShapeRef.new(shape: String, location_name: "partition"))
+    KafkaAction.add_member(:client_properties, Shapes::ShapeRef.new(shape: ClientProperties, required: true, location_name: "clientProperties"))
+    KafkaAction.struct_class = Types::KafkaAction
+
     KeyPair.add_member(:public_key, Shapes::ShapeRef.new(shape: PublicKey, location_name: "PublicKey"))
     KeyPair.add_member(:private_key, Shapes::ShapeRef.new(shape: PrivateKey, location_name: "PrivateKey"))
     KeyPair.struct_class = Types::KeyPair
@@ -2709,6 +2887,8 @@ module Aws::IoT
 
     ListActiveViolationsRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: DeviceDefenderThingName, location: "querystring", location_name: "thingName"))
     ListActiveViolationsRequest.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location: "querystring", location_name: "securityProfileName"))
+    ListActiveViolationsRequest.add_member(:behavior_criteria_type, Shapes::ShapeRef.new(shape: BehaviorCriteriaType, location: "querystring", location_name: "behaviorCriteriaType"))
+    ListActiveViolationsRequest.add_member(:list_suppressed_alerts, Shapes::ShapeRef.new(shape: ListSuppressedAlerts, location: "querystring", location_name: "listSuppressedAlerts"))
     ListActiveViolationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListActiveViolationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListActiveViolationsRequest.struct_class = Types::ListActiveViolationsRequest
@@ -2741,7 +2921,7 @@ module Aws::IoT
     ListAuditFindingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAuditFindingsResponse.struct_class = Types::ListAuditFindingsResponse
 
-    ListAuditMitigationActionsExecutionsRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: AuditMitigationActionsTaskId, required: true, location: "querystring", location_name: "taskId"))
+    ListAuditMitigationActionsExecutionsRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: MitigationActionsTaskId, required: true, location: "querystring", location_name: "taskId"))
     ListAuditMitigationActionsExecutionsRequest.add_member(:action_status, Shapes::ShapeRef.new(shape: AuditMitigationActionsExecutionStatus, location: "querystring", location_name: "actionStatus"))
     ListAuditMitigationActionsExecutionsRequest.add_member(:finding_id, Shapes::ShapeRef.new(shape: FindingId, required: true, location: "querystring", location_name: "findingId"))
     ListAuditMitigationActionsExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -2834,6 +3014,37 @@ module Aws::IoT
     ListCertificatesResponse.add_member(:certificates, Shapes::ShapeRef.new(shape: Certificates, location_name: "certificates"))
     ListCertificatesResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "nextMarker"))
     ListCertificatesResponse.struct_class = Types::ListCertificatesResponse
+
+    ListCustomMetricsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListCustomMetricsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListCustomMetricsRequest.struct_class = Types::ListCustomMetricsRequest
+
+    ListCustomMetricsResponse.add_member(:metric_names, Shapes::ShapeRef.new(shape: MetricNames, location_name: "metricNames"))
+    ListCustomMetricsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListCustomMetricsResponse.struct_class = Types::ListCustomMetricsResponse
+
+    ListDetectMitigationActionsExecutionsRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: MitigationActionsTaskId, location: "querystring", location_name: "taskId"))
+    ListDetectMitigationActionsExecutionsRequest.add_member(:violation_id, Shapes::ShapeRef.new(shape: ViolationId, location: "querystring", location_name: "violationId"))
+    ListDetectMitigationActionsExecutionsRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: DeviceDefenderThingName, location: "querystring", location_name: "thingName"))
+    ListDetectMitigationActionsExecutionsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "startTime"))
+    ListDetectMitigationActionsExecutionsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "endTime"))
+    ListDetectMitigationActionsExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListDetectMitigationActionsExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListDetectMitigationActionsExecutionsRequest.struct_class = Types::ListDetectMitigationActionsExecutionsRequest
+
+    ListDetectMitigationActionsExecutionsResponse.add_member(:actions_executions, Shapes::ShapeRef.new(shape: DetectMitigationActionExecutionList, location_name: "actionsExecutions"))
+    ListDetectMitigationActionsExecutionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDetectMitigationActionsExecutionsResponse.struct_class = Types::ListDetectMitigationActionsExecutionsResponse
+
+    ListDetectMitigationActionsTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListDetectMitigationActionsTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListDetectMitigationActionsTasksRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "startTime"))
+    ListDetectMitigationActionsTasksRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "endTime"))
+    ListDetectMitigationActionsTasksRequest.struct_class = Types::ListDetectMitigationActionsTasksRequest
+
+    ListDetectMitigationActionsTasksResponse.add_member(:tasks, Shapes::ShapeRef.new(shape: DetectMitigationActionsTaskSummaryList, location_name: "tasks"))
+    ListDetectMitigationActionsTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDetectMitigationActionsTasksResponse.struct_class = Types::ListDetectMitigationActionsTasksResponse
 
     ListDimensionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListDimensionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -3012,6 +3223,7 @@ module Aws::IoT
     ListSecurityProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListSecurityProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListSecurityProfilesRequest.add_member(:dimension_name, Shapes::ShapeRef.new(shape: DimensionName, location: "querystring", location_name: "dimensionName"))
+    ListSecurityProfilesRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location: "querystring", location_name: "metricName"))
     ListSecurityProfilesRequest.struct_class = Types::ListSecurityProfilesRequest
 
     ListSecurityProfilesResponse.add_member(:security_profile_identifiers, Shapes::ShapeRef.new(shape: SecurityProfileIdentifiers, location_name: "securityProfileIdentifiers"))
@@ -3172,6 +3384,8 @@ module Aws::IoT
     ListViolationEventsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "endTime"))
     ListViolationEventsRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: DeviceDefenderThingName, location: "querystring", location_name: "thingName"))
     ListViolationEventsRequest.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location: "querystring", location_name: "securityProfileName"))
+    ListViolationEventsRequest.add_member(:behavior_criteria_type, Shapes::ShapeRef.new(shape: BehaviorCriteriaType, location: "querystring", location_name: "behaviorCriteriaType"))
+    ListViolationEventsRequest.add_member(:list_suppressed_alerts, Shapes::ShapeRef.new(shape: ListSuppressedAlerts, location: "querystring", location_name: "listSuppressedAlerts"))
     ListViolationEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListViolationEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListViolationEventsRequest.struct_class = Types::ListViolationEventsRequest
@@ -3194,12 +3408,17 @@ module Aws::IoT
     LoggingOptionsPayload.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
     LoggingOptionsPayload.struct_class = Types::LoggingOptionsPayload
 
+    MachineLearningDetectionConfig.add_member(:confidence_level, Shapes::ShapeRef.new(shape: ConfidenceLevel, required: true, location_name: "confidenceLevel"))
+    MachineLearningDetectionConfig.struct_class = Types::MachineLearningDetectionConfig
+
     MalformedPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     MalformedPolicyException.struct_class = Types::MalformedPolicyException
 
     MetricDimension.add_member(:dimension_name, Shapes::ShapeRef.new(shape: DimensionName, required: true, location_name: "dimensionName"))
     MetricDimension.add_member(:operator, Shapes::ShapeRef.new(shape: DimensionValueOperator, location_name: "operator"))
     MetricDimension.struct_class = Types::MetricDimension
+
+    MetricNames.member = Shapes::ShapeRef.new(shape: MetricName)
 
     MetricToRetain.add_member(:metric, Shapes::ShapeRef.new(shape: BehaviorMetric, required: true, location_name: "metric"))
     MetricToRetain.add_member(:metric_dimension, Shapes::ShapeRef.new(shape: MetricDimension, location_name: "metricDimension"))
@@ -3208,6 +3427,9 @@ module Aws::IoT
     MetricValue.add_member(:count, Shapes::ShapeRef.new(shape: UnsignedLong, location_name: "count"))
     MetricValue.add_member(:cidrs, Shapes::ShapeRef.new(shape: Cidrs, location_name: "cidrs"))
     MetricValue.add_member(:ports, Shapes::ShapeRef.new(shape: Ports, location_name: "ports"))
+    MetricValue.add_member(:number, Shapes::ShapeRef.new(shape: Number, location_name: "number"))
+    MetricValue.add_member(:numbers, Shapes::ShapeRef.new(shape: NumberList, location_name: "numbers"))
+    MetricValue.add_member(:strings, Shapes::ShapeRef.new(shape: StringList, location_name: "strings"))
     MetricValue.struct_class = Types::MetricValue
 
     MissingContextValues.member = Shapes::ShapeRef.new(shape: MissingContextValue)
@@ -3249,6 +3471,8 @@ module Aws::IoT
 
     NotConfiguredException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     NotConfiguredException.struct_class = Types::NotConfiguredException
+
+    NumberList.member = Shapes::ShapeRef.new(shape: Number)
 
     OTAUpdateFile.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, location_name: "fileName"))
     OTAUpdateFile.add_member(:file_type, Shapes::ShapeRef.new(shape: FileType, location_name: "fileType"))
@@ -3553,6 +3777,8 @@ module Aws::IoT
 
     SearchableAttributes.member = Shapes::ShapeRef.new(shape: AttributeName)
 
+    SecurityGroupList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
+
     SecurityProfileIdentifier.add_member(:name, Shapes::ShapeRef.new(shape: SecurityProfileName, required: true, location_name: "name"))
     SecurityProfileIdentifier.add_member(:arn, Shapes::ShapeRef.new(shape: SecurityProfileArn, required: true, location_name: "arn"))
     SecurityProfileIdentifier.struct_class = Types::SecurityProfileIdentifier
@@ -3630,14 +3856,26 @@ module Aws::IoT
     SqsAction.add_member(:use_base_64, Shapes::ShapeRef.new(shape: UseBase64, location_name: "useBase64"))
     SqsAction.struct_class = Types::SqsAction
 
-    StartAuditMitigationActionsTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: AuditMitigationActionsTaskId, required: true, location: "uri", location_name: "taskId"))
+    StartAuditMitigationActionsTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: MitigationActionsTaskId, required: true, location: "uri", location_name: "taskId"))
     StartAuditMitigationActionsTaskRequest.add_member(:target, Shapes::ShapeRef.new(shape: AuditMitigationActionsTaskTarget, required: true, location_name: "target"))
     StartAuditMitigationActionsTaskRequest.add_member(:audit_check_to_actions_mapping, Shapes::ShapeRef.new(shape: AuditCheckToActionsMapping, required: true, location_name: "auditCheckToActionsMapping"))
     StartAuditMitigationActionsTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     StartAuditMitigationActionsTaskRequest.struct_class = Types::StartAuditMitigationActionsTaskRequest
 
-    StartAuditMitigationActionsTaskResponse.add_member(:task_id, Shapes::ShapeRef.new(shape: AuditMitigationActionsTaskId, location_name: "taskId"))
+    StartAuditMitigationActionsTaskResponse.add_member(:task_id, Shapes::ShapeRef.new(shape: MitigationActionsTaskId, location_name: "taskId"))
     StartAuditMitigationActionsTaskResponse.struct_class = Types::StartAuditMitigationActionsTaskResponse
+
+    StartDetectMitigationActionsTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: MitigationActionsTaskId, required: true, location: "uri", location_name: "taskId"))
+    StartDetectMitigationActionsTaskRequest.add_member(:target, Shapes::ShapeRef.new(shape: DetectMitigationActionsTaskTarget, required: true, location_name: "target"))
+    StartDetectMitigationActionsTaskRequest.add_member(:actions, Shapes::ShapeRef.new(shape: DetectMitigationActionsToExecuteList, required: true, location_name: "actions"))
+    StartDetectMitigationActionsTaskRequest.add_member(:violation_event_occurrence_range, Shapes::ShapeRef.new(shape: ViolationEventOccurrenceRange, location_name: "violationEventOccurrenceRange"))
+    StartDetectMitigationActionsTaskRequest.add_member(:include_only_active_violations, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "includeOnlyActiveViolations"))
+    StartDetectMitigationActionsTaskRequest.add_member(:include_suppressed_alerts, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "includeSuppressedAlerts"))
+    StartDetectMitigationActionsTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartDetectMitigationActionsTaskRequest.struct_class = Types::StartDetectMitigationActionsTaskRequest
+
+    StartDetectMitigationActionsTaskResponse.add_member(:task_id, Shapes::ShapeRef.new(shape: MitigationActionsTaskId, location_name: "taskId"))
+    StartDetectMitigationActionsTaskResponse.struct_class = Types::StartDetectMitigationActionsTaskResponse
 
     StartOnDemandAuditTaskRequest.add_member(:target_check_names, Shapes::ShapeRef.new(shape: TargetAuditCheckNames, required: true, location_name: "targetCheckNames"))
     StartOnDemandAuditTaskRequest.struct_class = Types::StartOnDemandAuditTaskRequest
@@ -3710,8 +3948,12 @@ module Aws::IoT
 
     StreamsSummary.member = Shapes::ShapeRef.new(shape: StreamSummary)
 
+    StringList.member = Shapes::ShapeRef.new(shape: stringValue)
+
     StringMap.key = Shapes::ShapeRef.new(shape: String)
     StringMap.value = Shapes::ShapeRef.new(shape: String)
+
+    SubnetIdList.member = Shapes::ShapeRef.new(shape: SubnetId)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
@@ -3728,6 +3970,8 @@ module Aws::IoT
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
     TargetAuditCheckNames.member = Shapes::ShapeRef.new(shape: AuditCheckName)
+
+    TargetViolationIdsForDetectMitigationActions.member = Shapes::ShapeRef.new(shape: ViolationId)
 
     Targets.member = Shapes::ShapeRef.new(shape: Target)
 
@@ -3896,19 +4140,26 @@ module Aws::IoT
 
     TopicRuleDestination.add_member(:arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "arn"))
     TopicRuleDestination.add_member(:status, Shapes::ShapeRef.new(shape: TopicRuleDestinationStatus, location_name: "status"))
+    TopicRuleDestination.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAtDate, location_name: "createdAt"))
+    TopicRuleDestination.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdatedAtDate, location_name: "lastUpdatedAt"))
     TopicRuleDestination.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     TopicRuleDestination.add_member(:http_url_properties, Shapes::ShapeRef.new(shape: HttpUrlDestinationProperties, location_name: "httpUrlProperties"))
+    TopicRuleDestination.add_member(:vpc_properties, Shapes::ShapeRef.new(shape: VpcDestinationProperties, location_name: "vpcProperties"))
     TopicRuleDestination.struct_class = Types::TopicRuleDestination
 
     TopicRuleDestinationConfiguration.add_member(:http_url_configuration, Shapes::ShapeRef.new(shape: HttpUrlDestinationConfiguration, location_name: "httpUrlConfiguration"))
+    TopicRuleDestinationConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcDestinationConfiguration, location_name: "vpcConfiguration"))
     TopicRuleDestinationConfiguration.struct_class = Types::TopicRuleDestinationConfiguration
 
     TopicRuleDestinationSummaries.member = Shapes::ShapeRef.new(shape: TopicRuleDestinationSummary)
 
     TopicRuleDestinationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "arn"))
     TopicRuleDestinationSummary.add_member(:status, Shapes::ShapeRef.new(shape: TopicRuleDestinationStatus, location_name: "status"))
+    TopicRuleDestinationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAtDate, location_name: "createdAt"))
+    TopicRuleDestinationSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdatedAtDate, location_name: "lastUpdatedAt"))
     TopicRuleDestinationSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     TopicRuleDestinationSummary.add_member(:http_url_summary, Shapes::ShapeRef.new(shape: HttpUrlDestinationSummary, location_name: "httpUrlSummary"))
+    TopicRuleDestinationSummary.add_member(:vpc_destination_summary, Shapes::ShapeRef.new(shape: VpcDestinationSummary, location_name: "vpcDestinationSummary"))
     TopicRuleDestinationSummary.struct_class = Types::TopicRuleDestinationSummary
 
     TopicRuleList.member = Shapes::ShapeRef.new(shape: TopicRuleListItem)
@@ -4006,6 +4257,18 @@ module Aws::IoT
     UpdateCertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "certificateId"))
     UpdateCertificateRequest.add_member(:new_status, Shapes::ShapeRef.new(shape: CertificateStatus, required: true, location: "querystring", location_name: "newStatus"))
     UpdateCertificateRequest.struct_class = Types::UpdateCertificateRequest
+
+    UpdateCustomMetricRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location: "uri", location_name: "metricName"))
+    UpdateCustomMetricRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: CustomMetricDisplayName, required: true, location_name: "displayName"))
+    UpdateCustomMetricRequest.struct_class = Types::UpdateCustomMetricRequest
+
+    UpdateCustomMetricResponse.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "metricName"))
+    UpdateCustomMetricResponse.add_member(:metric_arn, Shapes::ShapeRef.new(shape: CustomMetricArn, location_name: "metricArn"))
+    UpdateCustomMetricResponse.add_member(:metric_type, Shapes::ShapeRef.new(shape: CustomMetricType, location_name: "metricType"))
+    UpdateCustomMetricResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: CustomMetricDisplayName, location_name: "displayName"))
+    UpdateCustomMetricResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDate"))
+    UpdateCustomMetricResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedDate"))
+    UpdateCustomMetricResponse.struct_class = Types::UpdateCustomMetricResponse
 
     UpdateDeviceCertificateParams.add_member(:action, Shapes::ShapeRef.new(shape: DeviceCertificateUpdateAction, required: true, location_name: "action"))
     UpdateDeviceCertificateParams.struct_class = Types::UpdateDeviceCertificateParams
@@ -4192,11 +4455,37 @@ module Aws::IoT
     ViolationEvent.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location_name: "securityProfileName"))
     ViolationEvent.add_member(:behavior, Shapes::ShapeRef.new(shape: Behavior, location_name: "behavior"))
     ViolationEvent.add_member(:metric_value, Shapes::ShapeRef.new(shape: MetricValue, location_name: "metricValue"))
+    ViolationEvent.add_member(:violation_event_additional_info, Shapes::ShapeRef.new(shape: ViolationEventAdditionalInfo, location_name: "violationEventAdditionalInfo"))
     ViolationEvent.add_member(:violation_event_type, Shapes::ShapeRef.new(shape: ViolationEventType, location_name: "violationEventType"))
     ViolationEvent.add_member(:violation_event_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "violationEventTime"))
     ViolationEvent.struct_class = Types::ViolationEvent
 
+    ViolationEventAdditionalInfo.add_member(:confidence_level, Shapes::ShapeRef.new(shape: ConfidenceLevel, location_name: "confidenceLevel"))
+    ViolationEventAdditionalInfo.struct_class = Types::ViolationEventAdditionalInfo
+
+    ViolationEventOccurrenceRange.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
+    ViolationEventOccurrenceRange.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTime"))
+    ViolationEventOccurrenceRange.struct_class = Types::ViolationEventOccurrenceRange
+
     ViolationEvents.member = Shapes::ShapeRef.new(shape: ViolationEvent)
+
+    VpcDestinationConfiguration.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, required: true, location_name: "subnetIds"))
+    VpcDestinationConfiguration.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroupList, location_name: "securityGroups"))
+    VpcDestinationConfiguration.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
+    VpcDestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
+    VpcDestinationConfiguration.struct_class = Types::VpcDestinationConfiguration
+
+    VpcDestinationProperties.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
+    VpcDestinationProperties.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroupList, location_name: "securityGroups"))
+    VpcDestinationProperties.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
+    VpcDestinationProperties.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "roleArn"))
+    VpcDestinationProperties.struct_class = Types::VpcDestinationProperties
+
+    VpcDestinationSummary.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
+    VpcDestinationSummary.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroupList, location_name: "securityGroups"))
+    VpcDestinationSummary.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
+    VpcDestinationSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "roleArn"))
+    VpcDestinationSummary.struct_class = Types::VpcDestinationSummary
 
 
     # @api private
@@ -4365,6 +4654,18 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:cancel_detect_mitigation_actions_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelDetectMitigationActionsTask"
+        o.http_method = "PUT"
+        o.http_request_uri = "/detect/mitigationactions/tasks/{taskId}/cancel"
+        o.input = Shapes::ShapeRef.new(shape: CancelDetectMitigationActionsTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelDetectMitigationActionsTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:cancel_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CancelJob"
         o.http_method = "PUT"
@@ -4468,6 +4769,19 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:create_custom_metric, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCustomMetric"
+        o.http_method = "POST"
+        o.http_request_uri = "/custom-metric/{metricName}"
+        o.input = Shapes::ShapeRef.new(shape: CreateCustomMetricRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCustomMetricResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -4848,6 +5162,17 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_custom_metric, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCustomMetric"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/custom-metric/{metricName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCustomMetricRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCustomMetricResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
       api.add_operation(:delete_dimension, Seahorse::Model::Operation.new.tap do |o|
@@ -5271,6 +5596,18 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_custom_metric, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCustomMetric"
+        o.http_method = "GET"
+        o.http_request_uri = "/custom-metric/{metricName}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCustomMetricRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCustomMetricResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:describe_default_authorizer, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDefaultAuthorizer"
         o.http_method = "GET"
@@ -5282,6 +5619,18 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:describe_detect_mitigation_actions_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDetectMitigationActionsTask"
+        o.http_method = "GET"
+        o.http_request_uri = "/detect/mitigationactions/tasks/{taskId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDetectMitigationActionsTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDetectMitigationActionsTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -5593,6 +5942,24 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingResourceUpdateException)
+      end)
+
+      api.add_operation(:get_behavior_model_training_summaries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBehaviorModelTrainingSummaries"
+        o.http_method = "GET"
+        o.http_request_uri = "/behavior-model-training/summaries"
+        o.input = Shapes::ShapeRef.new(shape: GetBehaviorModelTrainingSummariesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBehaviorModelTrainingSummariesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_cardinality, Seahorse::Model::Operation.new.tap do |o|
@@ -6001,6 +6368,57 @@ module Aws::IoT
           limit_key: "page_size",
           tokens: {
             "next_marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:list_custom_metrics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCustomMetrics"
+        o.http_method = "GET"
+        o.http_request_uri = "/custom-metrics"
+        o.input = Shapes::ShapeRef.new(shape: ListCustomMetricsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCustomMetricsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_detect_mitigation_actions_executions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDetectMitigationActionsExecutions"
+        o.http_method = "GET"
+        o.http_request_uri = "/detect/mitigationactions/executions"
+        o.input = Shapes::ShapeRef.new(shape: ListDetectMitigationActionsExecutionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDetectMitigationActionsExecutionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_detect_mitigation_actions_tasks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDetectMitigationActionsTasks"
+        o.http_method = "GET"
+        o.http_request_uri = "/detect/mitigationactions/tasks"
+        o.input = Shapes::ShapeRef.new(shape: ListDetectMitigationActionsTasksRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDetectMitigationActionsTasksResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
           }
         )
       end)
@@ -6895,6 +7313,19 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:start_detect_mitigation_actions_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDetectMitigationActionsTask"
+        o.http_method = "PUT"
+        o.http_request_uri = "/detect/mitigationactions/tasks/{taskId}"
+        o.input = Shapes::ShapeRef.new(shape: StartDetectMitigationActionsTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartDetectMitigationActionsTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TaskAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:start_on_demand_audit_task, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartOnDemandAuditTask"
         o.http_method = "POST"
@@ -7080,6 +7511,18 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_custom_metric, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCustomMetric"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/custom-metric/{metricName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCustomMetricRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCustomMetricResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 

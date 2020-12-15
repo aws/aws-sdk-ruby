@@ -251,6 +251,26 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # Specifies one or more sets of channel messages.
+    #
+    # @note When making an API call, you may pass ChannelMessages
+    #   data as a hash:
+    #
+    #       {
+    #         s3_paths: ["S3PathChannelMessage"],
+    #       }
+    #
+    # @!attribute [rw] s3_paths
+    #   Specifies one or more keys that identify the Amazon Simple Storage
+    #   Service (Amazon S3) objects that save your channel messages.
+    #   @return [Array<String>]
+    #
+    class ChannelMessages < Struct.new(
+      :s3_paths)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Statistics information about the channel.
     #
     # @!attribute [rw] size
@@ -360,6 +380,36 @@ module Aws::IoTAnalytics
       :creation_time,
       :last_update_time,
       :last_message_arrival_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a column that stores your data.
+    #
+    # @note When making an API call, you may pass Column
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ColumnName", # required
+    #         type: "ColumnDataType", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of data. For more information about the supported data
+    #   types, see [Common data types][1] in the *AWS Glue Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html
+    #   @return [String]
+    #
+    class Column < Struct.new(
+      :name,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -755,6 +805,20 @@ module Aws::IoTAnalytics
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         file_format_configuration: {
+    #           json_configuration: {
+    #           },
+    #           parquet_configuration: {
+    #             schema_definition: {
+    #               columns: [
+    #                 {
+    #                   name: "ColumnName", # required
+    #                   type: "ColumnDataType", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] datastore_name
@@ -777,11 +841,25 @@ module Aws::IoTAnalytics
     #   Metadata which can be used to manage the data store.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] file_format_configuration
+    #   Contains the configuration information of file formats. AWS IoT
+    #   Analytics data stores support JSON and [Parquet][1].
+    #
+    #   The default file format is JSON. You can specify only one format.
+    #
+    #   You can't change the file format after you create the data store.
+    #
+    #
+    #
+    #   [1]: https://parquet.apache.org/
+    #   @return [Types::FileFormatConfiguration]
+    #
     class CreateDatastoreRequest < Struct.new(
       :datastore_name,
       :datastore_storage,
       :retention_period,
-      :tags)
+      :tags,
+      :file_format_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1518,6 +1596,19 @@ module Aws::IoTAnalytics
     #   after October 23, 2020.
     #   @return [Time]
     #
+    # @!attribute [rw] file_format_configuration
+    #   Contains the configuration information of file formats. AWS IoT
+    #   Analytics data stores support JSON and [Parquet][1].
+    #
+    #   The default file format is JSON. You can specify only one format.
+    #
+    #   You can't change the file format after you create the data store.
+    #
+    #
+    #
+    #   [1]: https://parquet.apache.org/
+    #   @return [Types::FileFormatConfiguration]
+    #
     class Datastore < Struct.new(
       :name,
       :storage,
@@ -1526,7 +1617,8 @@ module Aws::IoTAnalytics
       :retention_period,
       :creation_time,
       :last_update_time,
-      :last_message_arrival_time)
+      :last_message_arrival_time,
+      :file_format_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1659,13 +1751,18 @@ module Aws::IoTAnalytics
     #   after October 23, 2020.
     #   @return [Time]
     #
+    # @!attribute [rw] file_format_type
+    #   The file format of the data in the data store.
+    #   @return [String]
+    #
     class DatastoreSummary < Struct.new(
       :datastore_name,
       :datastore_storage,
       :status,
       :creation_time,
       :last_update_time,
-      :last_message_arrival_time)
+      :last_message_arrival_time,
+      :file_format_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2101,6 +2198,50 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # Contains the configuration information of file formats. AWS IoT
+    # Analytics data stores support JSON and [Parquet][1].
+    #
+    # The default file format is JSON. You can specify only one format.
+    #
+    # You can't change the file format after you create the data store.
+    #
+    #
+    #
+    # [1]: https://parquet.apache.org/
+    #
+    # @note When making an API call, you may pass FileFormatConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         json_configuration: {
+    #         },
+    #         parquet_configuration: {
+    #           schema_definition: {
+    #             columns: [
+    #               {
+    #                 name: "ColumnName", # required
+    #                 type: "ColumnDataType", # required
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] json_configuration
+    #   Contains the configuration information of the JSON format.
+    #   @return [Types::JsonConfiguration]
+    #
+    # @!attribute [rw] parquet_configuration
+    #   Contains the configuration information of the Parquet format.
+    #   @return [Types::ParquetConfiguration]
+    #
+    class FileFormatConfiguration < Struct.new(
+      :json_configuration,
+      :parquet_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An activity that filters a message based on its attributes.
     #
     # @note When making an API call, you may pass FilterActivity
@@ -2259,6 +2400,12 @@ module Aws::IoTAnalytics
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Contains the configuration information of the JSON format.
+    #
+    # @api private
+    #
+    class JsonConfiguration < Aws::EmptyStructure; end
 
     # An activity that runs a Lambda function to modify the message.
     #
@@ -2733,6 +2880,32 @@ module Aws::IoTAnalytics
     #
     class OutputFileUriValue < Struct.new(
       :file_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the configuration information of the Parquet format.
+    #
+    # @note When making an API call, you may pass ParquetConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         schema_definition: {
+    #           columns: [
+    #             {
+    #               name: "ColumnName", # required
+    #               type: "ColumnDataType", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] schema_definition
+    #   Information needed to define a schema.
+    #   @return [Types::SchemaDefinition]
+    #
+    class ParquetConfiguration < Struct.new(
+      :schema_definition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3353,6 +3526,33 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # Information needed to define a schema.
+    #
+    # @note When making an API call, you may pass SchemaDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         columns: [
+    #           {
+    #             name: "ColumnName", # required
+    #             type: "ColumnDataType", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] columns
+    #   Specifies one or more columns that store your data.
+    #
+    #   Each schema can have up to 100 columns. Each column can have up to
+    #   100 nested types
+    #   @return [Array<Types::Column>]
+    #
+    class SchemaDefinition < Struct.new(
+      :columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Creates a new message using only the specified attributes from the
     # original message.
     #
@@ -3461,6 +3661,9 @@ module Aws::IoTAnalytics
     #         pipeline_name: "PipelineName", # required
     #         start_time: Time.now,
     #         end_time: Time.now,
+    #         channel_messages: {
+    #           s3_paths: ["S3PathChannelMessage"],
+    #         },
     #       }
     #
     # @!attribute [rw] pipeline_name
@@ -3469,16 +3672,31 @@ module Aws::IoTAnalytics
     #
     # @!attribute [rw] start_time
     #   The start time (inclusive) of raw message data that is reprocessed.
+    #
+    #   If you specify a value for the `startTime` parameter, you must not
+    #   use the `channelMessages` object.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The end time (exclusive) of raw message data that is reprocessed.
+    #
+    #   If you specify a value for the `endTime` parameter, you must not use
+    #   the `channelMessages` object.
     #   @return [Time]
+    #
+    # @!attribute [rw] channel_messages
+    #   Specifies one or more sets of channel messages that you want to
+    #   reprocess.
+    #
+    #   If you use the `channelMessages` object, you must not specify a
+    #   value for `startTime` and `endTime`.
+    #   @return [Types::ChannelMessages]
     #
     class StartPipelineReprocessingRequest < Struct.new(
       :pipeline_name,
       :start_time,
-      :end_time)
+      :end_time,
+      :channel_messages)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3817,6 +4035,20 @@ module Aws::IoTAnalytics
     #             role_arn: "RoleArn", # required
     #           },
     #         },
+    #         file_format_configuration: {
+    #           json_configuration: {
+    #           },
+    #           parquet_configuration: {
+    #             schema_definition: {
+    #               columns: [
+    #                 {
+    #                   name: "ColumnName", # required
+    #                   type: "ColumnDataType", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] datastore_name
@@ -3836,10 +4068,24 @@ module Aws::IoTAnalytics
     #   option after the data store is created.
     #   @return [Types::DatastoreStorage]
     #
+    # @!attribute [rw] file_format_configuration
+    #   Contains the configuration information of file formats. AWS IoT
+    #   Analytics data stores support JSON and [Parquet][1].
+    #
+    #   The default file format is JSON. You can specify only one format.
+    #
+    #   You can't change the file format after you create the data store.
+    #
+    #
+    #
+    #   [1]: https://parquet.apache.org/
+    #   @return [Types::FileFormatConfiguration]
+    #
     class UpdateDatastoreRequest < Struct.new(
       :datastore_name,
       :retention_period,
-      :datastore_storage)
+      :datastore_storage,
+      :file_format_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
