@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.408.0 (2020-12-16)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::WellArchitected`.
+
+* Feature - Added support for enumerating regions for `Aws::LocationService`.
+
 1.407.0 (2020-12-15)
 ------------------
 

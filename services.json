@@ -487,6 +487,9 @@
   "Lightsail": {
     "models": "lightsail/2016-11-28"
   },
+  "LocationService": {
+    "models": "location/2020-11-19"
+  },
   "LookoutforVision": {
     "models": "lookoutvision/2020-11-20"
   },
@@ -851,6 +854,9 @@
   },
   "WAFV2": {
     "models": "wafv2/2019-07-29"
+  },
+  "WellArchitected": {
+    "models": "wellarchitected/2020-03-31"
   },
   "WorkDocs": {
     "models": "workdocs/2016-05-01"

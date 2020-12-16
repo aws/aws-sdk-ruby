@@ -396,6 +396,7 @@ RubyGems.org page under "LINKS" section.
 | AWS WAF                                               | Aws::WAF                             | aws-sdk-waf                             | 2015-08-24  |
 | AWS WAF Regional                                      | Aws::WAFRegional                     | aws-sdk-wafregional                     | 2016-11-28  |
 | AWS WAFV2                                             | Aws::WAFV2                           | aws-sdk-wafv2                           | 2019-07-29  |
+| AWS Well-Architected Tool                             | Aws::WellArchitected                 | aws-sdk-wellarchitected                 | 2020-03-31  |
 | AWS X-Ray                                             | Aws::XRay                            | aws-sdk-xray                            | 2016-04-12  |
 | AWSKendraFrontendService                              | Aws::Kendra                          | aws-sdk-kendra                          | 2019-02-03  |
 | AWSMarketplace Metering                               | Aws::MarketplaceMetering             | aws-sdk-marketplacemetering             | 2016-01-14  |
@@ -473,6 +474,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Lex Model Building Service                     | Aws::LexModelBuildingService         | aws-sdk-lexmodelbuildingservice         | 2017-04-19  |
 | Amazon Lex Runtime Service                            | Aws::Lex                             | aws-sdk-lex                             | 2016-11-28  |
 | Amazon Lightsail                                      | Aws::Lightsail                       | aws-sdk-lightsail                       | 2016-11-28  |
+| Amazon Location Service                               | Aws::LocationService                 | aws-sdk-locationservice                 | 2020-11-19  |
 | Amazon Lookout for Vision                             | Aws::LookoutforVision                | aws-sdk-lookoutforvision                | 2020-11-20  |
 | Amazon Machine Learning                               | Aws::MachineLearning                 | aws-sdk-machinelearning                 | 2014-12-12  |
 | Amazon Macie                                          | Aws::Macie                           | aws-sdk-macie                           | 2017-12-19  |

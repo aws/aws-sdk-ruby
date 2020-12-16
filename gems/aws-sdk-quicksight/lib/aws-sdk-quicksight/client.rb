@@ -817,6 +817,7 @@ module Aws::QuickSight
     #       "PhysicalTableId" => {
     #         relational_table: {
     #           data_source_arn: "Arn", # required
+    #           catalog: "RelationalTableCatalog",
     #           schema: "RelationalTableSchema",
     #           name: "RelationalTableName", # required
     #           input_columns: [ # required
@@ -1445,7 +1446,7 @@ module Aws::QuickSight
     #
     #
     #
-    # [1]: https://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/
+    # [1]: http://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/
     #
     # @option params [required, String] :data_set_id
     #   The ID of the dataset used in the ingestion.
@@ -2943,6 +2944,7 @@ module Aws::QuickSight
     #   resp.data_set.last_updated_time #=> Time
     #   resp.data_set.physical_table_map #=> Hash
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.data_source_arn #=> String
+    #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.catalog #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.schema #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns #=> Array
@@ -3853,19 +3855,20 @@ module Aws::QuickSight
     #
     # * The resulting user session is valid for 10 hours.
     #
-    # For more information, see [Embedding Amazon QuickSight][1] in the
-    # *Amazon QuickSight User Guide* .
+    # For more information, see [Embedded Analytics][1] in the *Amazon
+    # QuickSight User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html
+    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html
     #
     # @option params [required, String] :aws_account_id
     #   The ID for the AWS account that contains the dashboard that you're
     #   embedding.
     #
     # @option params [required, String] :dashboard_id
-    #   The ID for the dashboard, also added to the IAM policy.
+    #   The ID for the dashboard, also added to the AWS Identity and Access
+    #   Management (IAM) policy.
     #
     # @option params [required, String] :identity_type
     #   The authentication method that the user uses to sign in.
@@ -3887,10 +3890,10 @@ module Aws::QuickSight
     #   dashboard. Persistence applies to the sheet and the parameter
     #   settings. These are control settings that the dashboard subscriber
     #   (QuickSight reader) chooses while viewing the dashboard. If this is
-    #   set to `TRUE`, the settings are the same when the the subscriber
-    #   reopens the same dashboard URL. The state is stored in QuickSight, not
-    #   in a browser cookie. If this is set to FALSE, the state of the user
-    #   session is not persisted. The default is `FALSE`.
+    #   set to `TRUE`, the settings are the same when the subscriber reopens
+    #   the same dashboard URL. The state is stored in QuickSight, not in a
+    #   browser cookie. If this is set to FALSE, the state of the user session
+    #   is not persisted. The default is `FALSE`.
     #
     # @option params [String] :user_arn
     #   The Amazon QuickSight user's Amazon Resource Name (ARN), for use with
@@ -3915,12 +3918,13 @@ module Aws::QuickSight
     #   "`default`".
     #
     # @option params [Array<String>] :additional_dashboard_ids
-    #   A list of one or more dashboard ids that you want to add to a session
-    #   that includes anonymous authorizations. `IdentityType` must be set to
-    #   ANONYMOUS for this to work, because other identity types authenticate
-    #   as QuickSight users. For example, if you set "`--dashboard-id
-    #   dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS`",
-    #   the session can access all three dashboards.
+    #   A list of one or more dashboard IDs that you want to add to a session
+    #   that includes anonymous users. The `IdentityType` parameter must be
+    #   set to `ANONYMOUS` for this to work, because other identity types
+    #   authenticate as QuickSight or IAM users. For example, if you set
+    #   "`--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
+    #   identity-type ANONYMOUS`", the session can access all three
+    #   dashboards.
     #
     # @return [Types::GetDashboardEmbedUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4015,11 +4019,11 @@ module Aws::QuickSight
     #
     #   2.  Invited nonfederated users
     #
-    #   3.  IAM users and IAM role-based sessions authenticated through
-    #       Federated Single Sign-On using SAML, OpenID Connect, or IAM
-    #       federation
+    #   3.  AWS Identity and Access Management (IAM) users and IAM role-based
+    #       sessions authenticated through Federated Single Sign-On using
+    #       SAML, OpenID Connect, or IAM federation
     #
-    #   Omit this parameter for users in the third group – IAM users and IAM
+    #   Omit this parameter for users in the third group, IAM users and IAM
     #   role-based sessions.
     #
     # @return [Types::GetSessionEmbedUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -5276,7 +5280,7 @@ module Aws::QuickSight
     #
     #
     #
-    #   [1]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role.html
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html
     #
     # @option params [required, String] :aws_account_id
     #   The ID for the AWS account that the user is in. Currently, you use the
@@ -6196,6 +6200,7 @@ module Aws::QuickSight
     #       "PhysicalTableId" => {
     #         relational_table: {
     #           data_source_arn: "Arn", # required
+    #           catalog: "RelationalTableCatalog",
     #           schema: "RelationalTableSchema",
     #           name: "RelationalTableName", # required
     #           input_columns: [ # required
@@ -7407,7 +7412,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1320,6 +1320,7 @@ module Aws::QuickSight
     #           "PhysicalTableId" => {
     #             relational_table: {
     #               data_source_arn: "Arn", # required
+    #               catalog: "RelationalTableCatalog",
     #               schema: "RelationalTableSchema",
     #               name: "RelationalTableName", # required
     #               input_columns: [ # required
@@ -3296,7 +3297,8 @@ module Aws::QuickSight
     #   @return [Array<Types::OutputColumn>]
     #
     # @!attribute [rw] import_mode
-    #   Indicates whether you want to import the data into SPICE.
+    #   A value that indicates whether you want to import the data into
+    #   SPICE.
     #   @return [String]
     #
     # @!attribute [rw] consumed_spice_capacity_in_bytes
@@ -3425,7 +3427,8 @@ module Aws::QuickSight
     #   @return [Time]
     #
     # @!attribute [rw] import_mode
-    #   Indicates whether you want to import the data into SPICE.
+    #   A value that indicates whether you want to import the data into
+    #   SPICE.
     #   @return [String]
     #
     # @!attribute [rw] row_level_permission_data_set
@@ -3433,7 +3436,8 @@ module Aws::QuickSight
     #   @return [Types::RowLevelPermissionDataSet]
     #
     # @!attribute [rw] column_level_permission_rules_applied
-    #   Indicates if the dataset has column level permission configured.
+    #   A value that indicates if the dataset has column level permission
+    #   configured.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetSummary AWS API Documentation
@@ -6105,8 +6109,6 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Parameter input for the `GetDashboardEmbedUrl` operation.
-    #
     # @note When making an API call, you may pass GetDashboardEmbedUrlRequest
     #   data as a hash:
     #
@@ -6129,7 +6131,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
-    #   The ID for the dashboard, also added to the IAM policy.
+    #   The ID for the dashboard, also added to the AWS Identity and Access
+    #   Management (IAM) policy.
     #   @return [String]
     #
     # @!attribute [rw] identity_type
@@ -6156,10 +6159,10 @@ module Aws::QuickSight
     #   dashboard. Persistence applies to the sheet and the parameter
     #   settings. These are control settings that the dashboard subscriber
     #   (QuickSight reader) chooses while viewing the dashboard. If this is
-    #   set to `TRUE`, the settings are the same when the the subscriber
-    #   reopens the same dashboard URL. The state is stored in QuickSight,
-    #   not in a browser cookie. If this is set to FALSE, the state of the
-    #   user session is not persisted. The default is `FALSE`.
+    #   set to `TRUE`, the settings are the same when the subscriber reopens
+    #   the same dashboard URL. The state is stored in QuickSight, not in a
+    #   browser cookie. If this is set to FALSE, the state of the user
+    #   session is not persisted. The default is `FALSE`.
     #   @return [Boolean]
     #
     # @!attribute [rw] user_arn
@@ -6187,11 +6190,11 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] additional_dashboard_ids
-    #   A list of one or more dashboard ids that you want to add to a
-    #   session that includes anonymous authorizations. `IdentityType` must
-    #   be set to ANONYMOUS for this to work, because other identity types
-    #   authenticate as QuickSight users. For example, if you set
-    #   "`--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
+    #   A list of one or more dashboard IDs that you want to add to a
+    #   session that includes anonymous users. The `IdentityType` parameter
+    #   must be set to `ANONYMOUS` for this to work, because other identity
+    #   types authenticate as QuickSight or IAM users. For example, if you
+    #   set "`--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
     #   identity-type ANONYMOUS`", the session can access all three
     #   dashboards.
     #   @return [Array<String>]
@@ -6290,11 +6293,11 @@ module Aws::QuickSight
     #
     #   2.  Invited nonfederated users
     #
-    #   3.  IAM users and IAM role-based sessions authenticated through
-    #       Federated Single Sign-On using SAML, OpenID Connect, or IAM
-    #       federation
+    #   3.  AWS Identity and Access Management (IAM) users and IAM
+    #       role-based sessions authenticated through Federated Single
+    #       Sign-On using SAML, OpenID Connect, or IAM federation
     #
-    #   Omit this parameter for users in the third group – IAM users and IAM
+    #   Omit this parameter for users in the third group, IAM users and IAM
     #   role-based sessions.
     #   @return [String]
     #
@@ -6743,9 +6746,9 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] unique_key
-    #   Indicates that a row in a table is uniquely identified by the
-    #   columns in a join key. This is used by QuickSight to optimize query
-    #   performance.
+    #   A value that indicates that a row in a table is uniquely identified
+    #   by the columns in a join key. This is used by QuickSight to optimize
+    #   query performance.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/JoinKeyProperties AWS API Documentation
@@ -8514,6 +8517,7 @@ module Aws::QuickSight
     #       {
     #         relational_table: {
     #           data_source_arn: "Arn", # required
+    #           catalog: "RelationalTableCatalog",
     #           schema: "RelationalTableSchema",
     #           name: "RelationalTableName", # required
     #           input_columns: [ # required
@@ -8855,7 +8859,7 @@ module Aws::QuickSight
     #
     #
     #
-    #   [1]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role.html
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
@@ -8958,6 +8962,7 @@ module Aws::QuickSight
     #
     #       {
     #         data_source_arn: "Arn", # required
+    #         catalog: "RelationalTableCatalog",
     #         schema: "RelationalTableSchema",
     #         name: "RelationalTableName", # required
     #         input_columns: [ # required
@@ -8970,6 +8975,10 @@ module Aws::QuickSight
     #
     # @!attribute [rw] data_source_arn
     #   The Amazon Resource Name (ARN) for the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog
+    #   The catalog associated with a table.
     #   @return [String]
     #
     # @!attribute [rw] schema
@@ -8989,6 +8998,7 @@ module Aws::QuickSight
     #
     class RelationalTable < Struct.new(
       :data_source_arn,
+      :catalog,
       :schema,
       :name,
       :input_columns)
@@ -10788,13 +10798,12 @@ module Aws::QuickSight
 
     # This error indicates that you are calling an embedding operation in
     # Amazon QuickSight without the required pricing plan on your AWS
-    # account. Before you can use anonymous embedding, a QuickSight
-    # administrator needs to add capacity pricing to QuickSight. You can do
-    # this on the **Manage QuickSight** page.
+    # account. Before you can use embedding for anonymous users, a
+    # QuickSight administrator needs to add capacity pricing to QuickSight.
+    # You can do this on the **Manage QuickSight** page.
     #
-    # After capacity pricing is added, you can enable anonymous embedding by
-    # using the ` GetDashboardEmbedUrl ` API operation with the
-    # `--identity-type ANONYMOUS` option.
+    # After capacity pricing is added, you can use the GetDashboardEmbedUrl
+    # API operation with the `--identity-type ANONYMOUS` option.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -11619,6 +11628,7 @@ module Aws::QuickSight
     #           "PhysicalTableId" => {
     #             relational_table: {
     #               data_source_arn: "Arn", # required
+    #               catalog: "RelationalTableCatalog",
     #               schema: "RelationalTableSchema",
     #               name: "RelationalTableName", # required
     #               input_columns: [ # required

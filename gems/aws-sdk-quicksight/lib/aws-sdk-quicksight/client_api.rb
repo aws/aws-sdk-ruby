@@ -375,6 +375,7 @@ module Aws::QuickSight
     RegisterUserRequest = Shapes::StructureShape.new(name: 'RegisterUserRequest')
     RegisterUserResponse = Shapes::StructureShape.new(name: 'RegisterUserResponse')
     RelationalTable = Shapes::StructureShape.new(name: 'RelationalTable')
+    RelationalTableCatalog = Shapes::StringShape.new(name: 'RelationalTableCatalog')
     RelationalTableName = Shapes::StringShape.new(name: 'RelationalTableName')
     RelationalTableSchema = Shapes::StringShape.new(name: 'RelationalTableSchema')
     RenameColumnOperation = Shapes::StructureShape.new(name: 'RenameColumnOperation')
@@ -1978,6 +1979,7 @@ module Aws::QuickSight
     RegisterUserResponse.struct_class = Types::RegisterUserResponse
 
     RelationalTable.add_member(:data_source_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DataSourceArn"))
+    RelationalTable.add_member(:catalog, Shapes::ShapeRef.new(shape: RelationalTableCatalog, location_name: "Catalog"))
     RelationalTable.add_member(:schema, Shapes::ShapeRef.new(shape: RelationalTableSchema, location_name: "Schema"))
     RelationalTable.add_member(:name, Shapes::ShapeRef.new(shape: RelationalTableName, required: true, location_name: "Name"))
     RelationalTable.add_member(:input_columns, Shapes::ShapeRef.new(shape: InputColumnList, required: true, location_name: "InputColumns"))

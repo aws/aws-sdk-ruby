@@ -423,7 +423,7 @@ module Aws::CostExplorer
     #     anomaly_subscription: { # required
     #       subscription_arn: "GenericString",
     #       account_id: "GenericString",
-    #       monitor_arn_list: ["Value"], # required
+    #       monitor_arn_list: ["Arn"], # required
     #       subscribers: [ # required
     #         {
     #           address: "SubscriberAddress",
@@ -3156,7 +3156,7 @@ module Aws::CostExplorer
     #     subscription_arn: "GenericString", # required
     #     threshold: 1.0,
     #     frequency: "DAILY", # accepts DAILY, IMMEDIATE, WEEKLY
-    #     monitor_arn_list: ["Value"],
+    #     monitor_arn_list: ["Arn"],
     #     subscribers: [
     #       {
     #         address: "SubscriberAddress",
@@ -3273,7 +3273,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

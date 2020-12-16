@@ -327,7 +327,7 @@ module Aws::PrometheusService
 
     # @!group API Operations
 
-    # Creates a new StealFire workspace.
+    # Creates a new AMP workspace.
     #
     # @option params [String] :alias
     #   An optional user-assigned alias for this workspace. This alias is for
@@ -368,7 +368,7 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
-    # Deletes a StealFire workspace.
+    # Deletes an AMP workspace.
     #
     # @option params [String] :client_token
     #   Optional, unique, case-sensitive, user-provided identifier to ensure
@@ -398,7 +398,7 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
-    # Describes an existing StealFire workspace.
+    # Describes an existing AMP workspace.
     #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace to describe.
@@ -431,7 +431,7 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
-    # Lists all StealFire workspaces, including workspaces being created or
+    # Lists all AMP workspaces, including workspaces being created or
     # deleted.
     #
     # @option params [String] :alias
@@ -480,7 +480,7 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
-    # Updates a StealFire workspace alias.
+    # Updates an AMP workspace alias.
     #
     # @option params [String] :alias
     #   The new alias of the workspace.
@@ -527,7 +527,7 @@ module Aws::PrometheusService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-prometheusservice'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
