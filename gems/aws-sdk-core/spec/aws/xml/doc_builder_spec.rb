@@ -2,6 +2,7 @@
 
 require_relative '../../spec_helper'
 require 'ostruct'
+require 'base64'
 
 module Aws
   module Xml
@@ -81,6 +82,39 @@ module Aws
           xml.node('this & that')
         end
         expect(result).to eq('<xml xmlns="a&quot;b"><this & that/></xml>')
+      end
+
+      it 'escapes carriage return in attributes' do
+        xml.node('xml', key: "my\rkey")
+        expect(result).to include("my&#xD;key")
+      end
+
+      context 'End Of Line Characters' do
+        it 'encodes line feeds' do
+          input = "\n \n"
+          xml.node('xml', input)
+          expect(result).to include('&#xA; &#xA;')
+        end
+
+        it 'encodes line feeds and carriage returns' do
+          # human readable input is tricky for these - so use a base64 encoded
+          # string to ensure we get exactly what should be tested
+          input = Base64.decode64('YQ0KIGIKIGMN')
+          xml.node('xml', input)
+          expect(result).to include('a&#xD;&#xA; b&#xA; c&#xD;')
+        end
+
+        it 'encodes next lines' do
+          input = "a\r\u0085 b\u0085"
+          xml.node('xml', input)
+          expect(result).to include('a&#xD;&#x85; b&#x85;')
+        end
+
+        it 'encodes line separators' do
+          input = "a\r\u2028 b\u0085 c\u2028"
+          xml.node('xml', input)
+          expect(result).to include('a&#xD;&#x2028; b&#x85; c&#x2028;')
+        end
       end
 
       it 'accepts :indent and initial :pad options' do
