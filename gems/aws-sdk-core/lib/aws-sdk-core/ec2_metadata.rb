@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require 'time'
 require 'net/http'
 
 module Aws
+  # A client that can query version 2 of the EC2 Instance Metadata
   class EC2Metadata
     # Path for PUT request for token
     # @api private
