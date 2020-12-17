@@ -1185,7 +1185,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   accoun
+    #   Amazon Resource Name (ARN) associated with the resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -1431,13 +1431,19 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_bucket
-    #   Conformance pack template that is used to create a pack. The
-    #   delivery bucket name should start with awsconfigconforms. For
-    #   example: "Resource": "arn:aws:s3:::your\_bucket\_name/*".
+    #   Amazon S3 bucket where AWS Config stores conformance pack templates.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_key_prefix
     #   The prefix for the Amazon S3 bucket.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] conformance_pack_input_parameters
@@ -3591,6 +3597,44 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ExternalEvaluation
+    #   data as a hash:
+    #
+    #       {
+    #         compliance_resource_type: "StringWithCharLimit256", # required
+    #         compliance_resource_id: "BaseResourceId", # required
+    #         compliance_type: "COMPLIANT", # required, accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
+    #         annotation: "StringWithCharLimit256",
+    #         ordering_timestamp: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] compliance_resource_type
+    #   @return [String]
+    #
+    # @!attribute [rw] compliance_resource_id
+    #   @return [String]
+    #
+    # @!attribute [rw] compliance_type
+    #   @return [String]
+    #
+    # @!attribute [rw] annotation
+    #   @return [String]
+    #
+    # @!attribute [rw] ordering_timestamp
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ExternalEvaluation AWS API Documentation
+    #
+    class ExternalEvaluation < Struct.new(
+      :compliance_resource_type,
+      :compliance_resource_id,
+      :compliance_type,
+      :annotation,
+      :ordering_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # List of each of the failed delete remediation exceptions with specific
     # reasons.
     #
@@ -4721,8 +4765,8 @@ module Aws::ConfigService
     #
     # @!attribute [rw] limit
     #   The maximum number of resource identifiers returned on each page.
-    #   The default is 100. You cannot specify a number greater than 100. If
-    #   you specify 0, AWS Config uses the default.
+    #   You cannot specify a number greater than 100. If you specify 0, AWS
+    #   Config uses the default.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -5312,13 +5356,19 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_bucket
-    #   Location of an Amazon S3 bucket where AWS Config can deliver
-    #   evaluation results and conformance pack template that is used to
-    #   create a pack.
+    #   Amazon S3 bucket where AWS Config stores conformance pack templates.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_key_prefix
     #   Any folder structure you want to add to an Amazon S3 bucket.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] conformance_pack_input_parameters
@@ -6028,12 +6078,19 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_bucket
-    #   AWS Config stores intermediate files while processing conformance
-    #   pack template.
+    #   Amazon S3 bucket where AWS Config stores conformance pack templates.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_key_prefix
     #   The prefix for the Amazon S3 bucket.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] conformance_pack_input_parameters
@@ -6160,6 +6217,39 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutExternalEvaluationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_name: "ConfigRuleName", # required
+    #         external_evaluation: { # required
+    #           compliance_resource_type: "StringWithCharLimit256", # required
+    #           compliance_resource_id: "BaseResourceId", # required
+    #           compliance_type: "COMPLIANT", # required, accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
+    #           annotation: "StringWithCharLimit256",
+    #           ordering_timestamp: Time.now, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] config_rule_name
+    #   @return [String]
+    #
+    # @!attribute [rw] external_evaluation
+    #   @return [Types::ExternalEvaluation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutExternalEvaluationRequest AWS API Documentation
+    #
+    class PutExternalEvaluationRequest < Struct.new(
+      :config_rule_name,
+      :external_evaluation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutExternalEvaluationResponse AWS API Documentation
+    #
+    class PutExternalEvaluationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass PutOrganizationConfigRuleRequest
     #   data as a hash:
     #
@@ -6267,22 +6357,19 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_bucket
-    #   Location of an Amazon S3 bucket where AWS Config can deliver
-    #   evaluation results. AWS Config stores intermediate files while
-    #   processing conformance pack template.
+    #   Amazon S3 bucket where AWS Config stores conformance pack templates.
     #
-    #   The delivery bucket name should start with awsconfigconforms. For
-    #   example: "Resource": "arn:aws:s3:::your\_bucket\_name/*". For
-    #   more information, see [Permissions for cross account bucket
-    #   access][1].
+    #   <note markdown="1"> This field is optional.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/conformance-pack-organization-apis.html
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_key_prefix
     #   The prefix for the Amazon S3 bucket.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] conformance_pack_input_parameters
@@ -6771,7 +6858,7 @@ module Aws::ConfigService
     #   do not select a number, the default is 5.
     #
     #   For example, if you specify MaximumAutomaticAttempts as 5 with
-    #   RetryAttemptsSeconds as 50 seconds, AWS Config will put a
+    #   RetryAttemptSeconds as 50 seconds, AWS Config will put a
     #   RemediationException on your behalf for the failing resource after
     #   the 5th failed attempt within 50 seconds.
     #   @return [Integer]
@@ -6780,7 +6867,7 @@ module Aws::ConfigService
     #   Maximum time in seconds that AWS Config runs auto-remediation. If
     #   you do not select a number, the default is 60 seconds.
     #
-    #   For example, if you specify RetryAttemptsSeconds as 50 seconds and
+    #   For example, if you specify RetryAttemptSeconds as 50 seconds and
     #   MaximumAutomaticAttempts as 5, AWS Config will run auto-remediations
     #   5 times within 50 seconds before throwing an exception.
     #   @return [Integer]

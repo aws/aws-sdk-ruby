@@ -1125,6 +1125,38 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
+    # Gets DNSSEC validation information for a specified resource.
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the virtual private cloud (VPC) for the DNSSEC validation
+    #   status.
+    #
+    # @return [Types::GetResolverDnssecConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResolverDnssecConfigResponse#resolver_dnssec_config #resolver_dnssec_config} => Types::ResolverDnssecConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resolver_dnssec_config({
+    #     resource_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resolver_dnssec_config.id #=> String
+    #   resp.resolver_dnssec_config.owner_id #=> String
+    #   resp.resolver_dnssec_config.resource_id #=> String
+    #   resp.resolver_dnssec_config.validation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverDnssecConfig AWS API Documentation
+    #
+    # @overload get_resolver_dnssec_config(params = {})
+    # @param [Hash] params ({})
+    def get_resolver_dnssec_config(params = {}, options = {})
+      req = build_request(:get_resolver_dnssec_config, params)
+      req.send_request(options)
+    end
+
     # Gets information about a specified Resolver endpoint, such as whether
     # it's an inbound or an outbound Resolver endpoint, and the current
     # status of the endpoint.
@@ -1362,13 +1394,14 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
-    # Gets information about a Resolver rule policy. A Resolver rule policy
-    # specifies the Resolver operations and resources that you want to allow
-    # another AWS account to be able to use.
+    # Gets information about the Resolver rule policy for a specified rule.
+    # A Resolver rule policy includes the rule that you want to share with
+    # another account, the account that you want to share the rule with, and
+    # the Resolver operations that you want to allow the account to use.
     #
     # @option params [required, String] :arn
-    #   The ID of the Resolver rule policy that you want to get information
-    #   about.
+    #   The ID of the Resolver rule that you want to get the Resolver rule
+    #   policy for.
     #
     # @return [Types::GetResolverRulePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1390,6 +1423,67 @@ module Aws::Route53Resolver
     # @param [Hash] params ({})
     def get_resolver_rule_policy(params = {}, options = {})
       req = build_request(:get_resolver_rule_policy, params)
+      req.send_request(options)
+    end
+
+    # Lists the configurations for DNSSEC validation that are associated
+    # with the current AWS account.
+    #
+    # @option params [Integer] :max_results
+    #   *Optional*\: An integer that specifies the maximum number of DNSSEC
+    #   configuration results that you want Amazon Route 53 to return. If you
+    #   don't specify a value for `MaxResults`, Route 53 returns up to 100
+    #   configuration per page.
+    #
+    # @option params [String] :next_token
+    #   (Optional) If the current AWS account has more than `MaxResults`
+    #   DNSSEC configurations, use `NextToken` to get the second and
+    #   subsequent pages of results.
+    #
+    #   For the first `ListResolverDnssecConfigs` request, omit this value.
+    #
+    #   For the second and subsequent requests, get the value of `NextToken`
+    #   from the previous response and specify that value for `NextToken` in
+    #   the request.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   An optional specification to return a subset of objects.
+    #
+    # @return [Types::ListResolverDnssecConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResolverDnssecConfigsResponse#next_token #next_token} => String
+    #   * {Types::ListResolverDnssecConfigsResponse#resolver_dnssec_configs #resolver_dnssec_configs} => Array&lt;Types::ResolverDnssecConfig&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resolver_dnssec_configs({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         name: "FilterName",
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.resolver_dnssec_configs #=> Array
+    #   resp.resolver_dnssec_configs[0].id #=> String
+    #   resp.resolver_dnssec_configs[0].owner_id #=> String
+    #   resp.resolver_dnssec_configs[0].resource_id #=> String
+    #   resp.resolver_dnssec_configs[0].validation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverDnssecConfigs AWS API Documentation
+    #
+    # @overload list_resolver_dnssec_configs(params = {})
+    # @param [Hash] params ({})
+    def list_resolver_dnssec_configs(params = {}, options = {})
+      req = build_request(:list_resolver_dnssec_configs, params)
       req.send_request(options)
     end
 
@@ -2064,19 +2158,19 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
-    # Specifies an AWS account that you want to share rules with, the
-    # Resolver rules that you want to share, and the operations that you
-    # want the account to be able to perform on those rules.
+    # Specifies an AWS rule that you want to share with another account, the
+    # account that you want to share the rule with, and the operations that
+    # you want the account to be able to perform on the rule.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the account that you want to share
-    #   rules with.
+    #   The Amazon Resource Name (ARN) of the rule that you want to share with
+    #   another account.
     #
     # @option params [required, String] :resolver_rule_policy
     #   An AWS Identity and Access Management policy statement that lists the
     #   rules that you want to share with another AWS account and the
     #   operations that you want the account to be able to perform. You can
-    #   specify the following operations in the `Actions` section of the
+    #   specify the following operations in the `Action` section of the
     #   statement:
     #
     #   * `route53resolver:GetResolverRule`
@@ -2089,9 +2183,9 @@ module Aws::Route53Resolver
     #
     #   * `route53resolver:ListResolverRuleAssociations`
     #
-    #   In the `Resource` section of the statement, you specify the ARNs for
-    #   the rules that you want to share with the account that you specified
-    #   in `Arn`.
+    #   In the `Resource` section of the statement, specify the ARN for the
+    #   rule that you want to share with another account. Specify the same ARN
+    #   that you specified in `Arn`.
     #
     # @return [Types::PutResolverRulePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2220,6 +2314,45 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
+    # Updates an existing DNSSEC validation configuration. If there is no
+    # existing DNSSEC validation configuration, one is created.
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the virtual private cloud (VPC) that you're updating the
+    #   DNSSEC validation status for.
+    #
+    # @option params [required, String] :validation
+    #   The new value that you are specifying for DNSSEC validation for the
+    #   VPC. The value can be `ENABLE` or `DISABLE`. Be aware that it can take
+    #   time for a validation status change to be completed.
+    #
+    # @return [Types::UpdateResolverDnssecConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateResolverDnssecConfigResponse#resolver_dnssec_config #resolver_dnssec_config} => Types::ResolverDnssecConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_resolver_dnssec_config({
+    #     resource_id: "ResourceId", # required
+    #     validation: "ENABLE", # required, accepts ENABLE, DISABLE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resolver_dnssec_config.id #=> String
+    #   resp.resolver_dnssec_config.owner_id #=> String
+    #   resp.resolver_dnssec_config.resource_id #=> String
+    #   resp.resolver_dnssec_config.validation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverDnssecConfig AWS API Documentation
+    #
+    # @overload update_resolver_dnssec_config(params = {})
+    # @param [Hash] params ({})
+    def update_resolver_dnssec_config(params = {}, options = {})
+      req = build_request(:update_resolver_dnssec_config, params)
+      req.send_request(options)
+    end
+
     # Updates the name of an inbound or an outbound Resolver endpoint.
     #
     # @option params [required, String] :resolver_endpoint_id
@@ -2335,7 +2468,7 @@ module Aws::Route53Resolver
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

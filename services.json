@@ -673,7 +673,7 @@
   "S3": {
     "models": "s3/2006-03-01",
     "dependencies": {
-      "aws-sdk-kms": "~> 1.26",
+      "aws-sdk-kms": "~> 1",
       "aws-sigv4": "~> 1.1"
     },
     "removePlugins": [

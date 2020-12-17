@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-12-17)
+------------------
+
+* Feature - Provide Cross-account copy event based policy support in DataLifecycleManager (DLM)
+
 1.36.0 (2020-11-06)
 ------------------
 

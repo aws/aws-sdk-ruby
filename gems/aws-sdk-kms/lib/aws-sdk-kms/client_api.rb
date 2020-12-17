@@ -194,6 +194,8 @@ module Aws::KMS
     AliasListEntry.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasNameType, location_name: "AliasName"))
     AliasListEntry.add_member(:alias_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "AliasArn"))
     AliasListEntry.add_member(:target_key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "TargetKeyId"))
+    AliasListEntry.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
+    AliasListEntry.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: DateType, location_name: "LastUpdatedDate"))
     AliasListEntry.struct_class = Types::AliasListEntry
 
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))

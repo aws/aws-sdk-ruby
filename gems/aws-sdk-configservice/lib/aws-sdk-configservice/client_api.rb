@@ -209,6 +209,7 @@ module Aws::ConfigService
     ExcludedAccounts = Shapes::ListShape.new(name: 'ExcludedAccounts')
     ExecutionControls = Shapes::StructureShape.new(name: 'ExecutionControls')
     Expression = Shapes::StringShape.new(name: 'Expression')
+    ExternalEvaluation = Shapes::StructureShape.new(name: 'ExternalEvaluation')
     FailedDeleteRemediationExceptionsBatch = Shapes::StructureShape.new(name: 'FailedDeleteRemediationExceptionsBatch')
     FailedDeleteRemediationExceptionsBatches = Shapes::ListShape.new(name: 'FailedDeleteRemediationExceptionsBatches')
     FailedRemediationBatch = Shapes::StructureShape.new(name: 'FailedRemediationBatch')
@@ -353,6 +354,8 @@ module Aws::ConfigService
     PutDeliveryChannelRequest = Shapes::StructureShape.new(name: 'PutDeliveryChannelRequest')
     PutEvaluationsRequest = Shapes::StructureShape.new(name: 'PutEvaluationsRequest')
     PutEvaluationsResponse = Shapes::StructureShape.new(name: 'PutEvaluationsResponse')
+    PutExternalEvaluationRequest = Shapes::StructureShape.new(name: 'PutExternalEvaluationRequest')
+    PutExternalEvaluationResponse = Shapes::StructureShape.new(name: 'PutExternalEvaluationResponse')
     PutOrganizationConfigRuleRequest = Shapes::StructureShape.new(name: 'PutOrganizationConfigRuleRequest')
     PutOrganizationConfigRuleResponse = Shapes::StructureShape.new(name: 'PutOrganizationConfigRuleResponse')
     PutOrganizationConformancePackRequest = Shapes::StructureShape.new(name: 'PutOrganizationConformancePackRequest')
@@ -1108,6 +1111,13 @@ module Aws::ConfigService
     ExecutionControls.add_member(:ssm_controls, Shapes::ShapeRef.new(shape: SsmControls, location_name: "SsmControls"))
     ExecutionControls.struct_class = Types::ExecutionControls
 
+    ExternalEvaluation.add_member(:compliance_resource_type, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "ComplianceResourceType"))
+    ExternalEvaluation.add_member(:compliance_resource_id, Shapes::ShapeRef.new(shape: BaseResourceId, required: true, location_name: "ComplianceResourceId"))
+    ExternalEvaluation.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceType, required: true, location_name: "ComplianceType"))
+    ExternalEvaluation.add_member(:annotation, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "Annotation"))
+    ExternalEvaluation.add_member(:ordering_timestamp, Shapes::ShapeRef.new(shape: OrderingTimestamp, required: true, location_name: "OrderingTimestamp"))
+    ExternalEvaluation.struct_class = Types::ExternalEvaluation
+
     FailedDeleteRemediationExceptionsBatch.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
     FailedDeleteRemediationExceptionsBatch.add_member(:failed_items, Shapes::ShapeRef.new(shape: RemediationExceptionResourceKeys, location_name: "FailedItems"))
     FailedDeleteRemediationExceptionsBatch.struct_class = Types::FailedDeleteRemediationExceptionsBatch
@@ -1540,6 +1550,12 @@ module Aws::ConfigService
 
     PutEvaluationsResponse.add_member(:failed_evaluations, Shapes::ShapeRef.new(shape: Evaluations, location_name: "FailedEvaluations"))
     PutEvaluationsResponse.struct_class = Types::PutEvaluationsResponse
+
+    PutExternalEvaluationRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, required: true, location_name: "ConfigRuleName"))
+    PutExternalEvaluationRequest.add_member(:external_evaluation, Shapes::ShapeRef.new(shape: ExternalEvaluation, required: true, location_name: "ExternalEvaluation"))
+    PutExternalEvaluationRequest.struct_class = Types::PutExternalEvaluationRequest
+
+    PutExternalEvaluationResponse.struct_class = Types::PutExternalEvaluationResponse
 
     PutOrganizationConfigRuleRequest.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: OrganizationConfigRuleName, required: true, location_name: "OrganizationConfigRuleName"))
     PutOrganizationConfigRuleRequest.add_member(:organization_managed_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationManagedRuleMetadata, location_name: "OrganizationManagedRuleMetadata"))
@@ -2575,6 +2591,16 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResultTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+      end)
+
+      api.add_operation(:put_external_evaluation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutExternalEvaluation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutExternalEvaluationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutExternalEvaluationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
 
       api.add_operation(:put_organization_config_rule, Seahorse::Model::Operation.new.tap do |o|

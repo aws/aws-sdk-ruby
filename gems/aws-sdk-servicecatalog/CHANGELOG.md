@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2020-12-17)
+------------------
+
+* Feature - Support TagOptions sharing with Service Catalog portfolio sharing.
+
 1.55.0 (2020-11-16)
 ------------------
 

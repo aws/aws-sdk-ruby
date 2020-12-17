@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2020-12-17)
+------------------
+
+* Feature - Adding PutExternalEvaluation API which grants permission to deliver evaluation result to AWS Config
+
 1.53.0 (2020-09-30)
 ------------------
 

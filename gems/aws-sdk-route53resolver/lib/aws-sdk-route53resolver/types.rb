@@ -662,9 +662,10 @@ module Aws::Route53Resolver
 
     # For Resolver list operations ([ListResolverEndpoints][1],
     # [ListResolverRules][2], [ListResolverRuleAssociations][3],
-    # [ListResolverQueryLogConfigs][4], and
-    # [ListResolverQueryLogConfigAssociations][5]), an optional
-    # specification to return a subset of objects.
+    # [ListResolverQueryLogConfigs][4],
+    # [ListResolverQueryLogConfigAssociations][5]), and
+    # [ListResolverDnssecConfigs][6]), an optional specification to return a
+    # subset of objects.
     #
     # To filter objects, such as Resolver endpoints or Resolver rules, you
     # specify `Name` and `Values`. For example, to list only inbound
@@ -678,6 +679,7 @@ module Aws::Route53Resolver
     # [3]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html
     # [4]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigs.html
     # [5]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigAssociations.html
+    # [6]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverDnssecConfigs.html
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -867,7 +869,7 @@ module Aws::Route53Resolver
     #   [7]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html
     #   [8]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverEndpoint.html
     #   [9]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverQueryLogConfig.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfig-Status
-    #   [10]: https://docs.aws.amazon.com/API_route53resolver_ResolverQueryLogConfigAssociation.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfigAssociation-Status
+    #   [10]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverQueryLogConfigAssociation.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfigAssociation-Status
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -883,6 +885,38 @@ module Aws::Route53Resolver
     class Filter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetResolverDnssecConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the virtual private cloud (VPC) for the DNSSEC validation
+    #   status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverDnssecConfigRequest AWS API Documentation
+    #
+    class GetResolverDnssecConfigRequest < Struct.new(
+      :resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resolver_dnssec_config
+    #   The information about a configuration for DNSSEC validation.
+    #   @return [Types::ResolverDnssecConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverDnssecConfigResponse AWS API Documentation
+    #
+    class GetResolverDnssecConfigResponse < Struct.new(
+      :resolver_dnssec_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1062,8 +1096,8 @@ module Aws::Route53Resolver
     #       }
     #
     # @!attribute [rw] arn
-    #   The ID of the Resolver rule policy that you want to get information
-    #   about.
+    #   The ID of the Resolver rule that you want to get the Resolver rule
+    #   policy for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverRulePolicyRequest AWS API Documentation
@@ -1075,7 +1109,7 @@ module Aws::Route53Resolver
     end
 
     # @!attribute [rw] resolver_rule_policy
-    #   Information about the Resolver rule policy that you specified in a
+    #   The Resolver rule policy for the rule that you specified in a
     #   `GetResolverRulePolicy` request.
     #   @return [String]
     #
@@ -1355,6 +1389,88 @@ module Aws::Route53Resolver
     class LimitExceededException < Struct.new(
       :message,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListResolverDnssecConfigsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         filters: [
+    #           {
+    #             name: "FilterName",
+    #             values: ["FilterValue"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   *Optional*\: An integer that specifies the maximum number of DNSSEC
+    #   configuration results that you want Amazon Route 53 to return. If
+    #   you don't specify a value for `MaxResults`, Route 53 returns up to
+    #   100 configuration per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) If the current AWS account has more than `MaxResults`
+    #   DNSSEC configurations, use `NextToken` to get the second and
+    #   subsequent pages of results.
+    #
+    #   For the first `ListResolverDnssecConfigs` request, omit this value.
+    #
+    #   For the second and subsequent requests, get the value of `NextToken`
+    #   from the previous response and specify that value for `NextToken` in
+    #   the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   An optional specification to return a subset of objects.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverDnssecConfigsRequest AWS API Documentation
+    #
+    class ListResolverDnssecConfigsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If a response includes the last of the DNSSEC configurations that
+    #   are associated with the current AWS account, `NextToken` doesn't
+    #   appear in the response.
+    #
+    #   If a response doesn't include the last of the configurations, you
+    #   can get more configurations by submitting another
+    #   [ListResolverDnssecConfigs][1] request. Get the value of `NextToken`
+    #   that Amazon Route 53 returned in the previous response and include
+    #   it in `NextToken` in the next request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListResolverDnssecConfigs.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resolver_dnssec_configs
+    #   An array that contains one [ResolverDnssecConfig][1] element for
+    #   each configuration for DNSSEC validation that is associated with the
+    #   current AWS account.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ResolverDnssecConfig.html
+    #   @return [Array<Types::ResolverDnssecConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverDnssecConfigsResponse AWS API Documentation
+    #
+    class ListResolverDnssecConfigsResponse < Struct.new(
+      :next_token,
+      :resolver_dnssec_configs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2121,15 +2237,15 @@ module Aws::Route53Resolver
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the account that you want to share
-    #   rules with.
+    #   The Amazon Resource Name (ARN) of the rule that you want to share
+    #   with another account.
     #   @return [String]
     #
     # @!attribute [rw] resolver_rule_policy
     #   An AWS Identity and Access Management policy statement that lists
     #   the rules that you want to share with another AWS account and the
     #   operations that you want the account to be able to perform. You can
-    #   specify the following operations in the `Actions` section of the
+    #   specify the following operations in the `Action` section of the
     #   statement:
     #
     #   * `route53resolver:GetResolverRule`
@@ -2142,9 +2258,9 @@ module Aws::Route53Resolver
     #
     #   * `route53resolver:ListResolverRuleAssociations`
     #
-    #   In the `Resource` section of the statement, you specify the ARNs for
-    #   the rules that you want to share with the account that you specified
-    #   in `Arn`.
+    #   In the `Resource` section of the statement, specify the ARN for the
+    #   rule that you want to share with another account. Specify the same
+    #   ARN that you specified in `Arn`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/PutResolverRulePolicyRequest AWS API Documentation
@@ -2166,6 +2282,49 @@ module Aws::Route53Resolver
     #
     class PutResolverRulePolicyResponse < Struct.new(
       :return_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that contains information about a configuration for
+    # DNSSEC validation.
+    #
+    # @!attribute [rw] id
+    #   The ID for a configuration for DNSSEC validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The owner account ID of the virtual private cloud (VPC) for a
+    #   configuration for DNSSEC validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the virtual private cloud (VPC) that you're configuring
+    #   the DNSSEC validation status for.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_status
+    #   The validation status for a DNSSEC configuration. The status can be
+    #   one of the following:
+    #
+    #   * **ENABLING:** DNSSEC validation is being enabled but is not
+    #     complete.
+    #
+    #   * **ENABLED:** DNSSEC validation is enabled.
+    #
+    #   * **DISABLING:** DNSSEC validation is being disabled but is not
+    #     complete.
+    #
+    #   * **DISABLED** DNSSEC validation is disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ResolverDnssecConfig AWS API Documentation
+    #
+    class ResolverDnssecConfig < Struct.new(
+      :id,
+      :owner_id,
+      :resource_id,
+      :validation_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2997,6 +3156,47 @@ module Aws::Route53Resolver
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateResolverDnssecConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "ResourceId", # required
+    #         validation: "ENABLE", # required, accepts ENABLE, DISABLE
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the virtual private cloud (VPC) that you're updating the
+    #   DNSSEC validation status for.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation
+    #   The new value that you are specifying for DNSSEC validation for the
+    #   VPC. The value can be `ENABLE` or `DISABLE`. Be aware that it can
+    #   take time for a validation status change to be completed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverDnssecConfigRequest AWS API Documentation
+    #
+    class UpdateResolverDnssecConfigRequest < Struct.new(
+      :resource_id,
+      :validation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resolver_dnssec_config
+    #   A complex type that contains settings for the specified DNSSEC
+    #   configuration.
+    #   @return [Types::ResolverDnssecConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverDnssecConfigResponse AWS API Documentation
+    #
+    class UpdateResolverDnssecConfigResponse < Struct.new(
+      :resolver_dnssec_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateResolverEndpointRequest
     #   data as a hash:

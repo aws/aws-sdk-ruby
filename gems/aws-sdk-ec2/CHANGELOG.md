@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.218.0 (2020-12-17)
+------------------
+
+* Feature - C6gn instances are powered by AWS Graviton2 processors and offer 100 Gbps networking bandwidth. These instances deliver up to 40% better price-performance benefit versus comparable x86-based instances
+
 1.217.0 (2020-12-14)
 ------------------
 

@@ -457,6 +457,112 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
+    # Creates a new container recipe. Container recipes define how images
+    # are configured, tested, and assessed.
+    #
+    # @option params [required, String] :container_type
+    #   The type of container to create.
+    #
+    # @option params [required, String] :name
+    #   The name of the container recipe.
+    #
+    # @option params [String] :description
+    #   The description of the container recipe.
+    #
+    # @option params [required, String] :semantic_version
+    #   The semantic version of the container recipe
+    #   (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).
+    #
+    # @option params [required, Array<Types::ComponentConfiguration>] :components
+    #   Components for build and test that are included in the container
+    #   recipe.
+    #
+    # @option params [required, String] :dockerfile_template_data
+    #   The Dockerfile template used to build your image as an inline data
+    #   blob.
+    #
+    # @option params [String] :dockerfile_template_uri
+    #   The S3 URI for the Dockerfile that will be used to build your
+    #   container image.
+    #
+    # @option params [String] :platform_override
+    #   Specifies the operating system platform when you use a custom source
+    #   image.
+    #
+    # @option params [String] :image_os_version_override
+    #   Specifies the operating system version for the source image.
+    #
+    # @option params [required, String] :parent_image
+    #   The source image for the container recipe.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags that are attached to the container recipe.
+    #
+    # @option params [String] :working_directory
+    #   The working directory for use during build and test workflows.
+    #
+    # @option params [required, Types::TargetContainerRepository] :target_repository
+    #   The destination repository for the container image.
+    #
+    # @option params [String] :kms_key_id
+    #   Identifies which KMS key is used to encrypt the container image.
+    #
+    # @option params [required, String] :client_token
+    #   The client token used to make this request idempotent.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateContainerRecipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateContainerRecipeResponse#request_id #request_id} => String
+    #   * {Types::CreateContainerRecipeResponse#client_token #client_token} => String
+    #   * {Types::CreateContainerRecipeResponse#container_recipe_arn #container_recipe_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_container_recipe({
+    #     container_type: "DOCKER", # required, accepts DOCKER
+    #     name: "ResourceName", # required
+    #     description: "NonEmptyString",
+    #     semantic_version: "VersionNumber", # required
+    #     components: [ # required
+    #       {
+    #         component_arn: "ComponentVersionArnOrBuildVersionArn", # required
+    #       },
+    #     ],
+    #     dockerfile_template_data: "InlineDockerFileTemplate", # required
+    #     dockerfile_template_uri: "Uri",
+    #     platform_override: "Windows", # accepts Windows, Linux
+    #     image_os_version_override: "NonEmptyString",
+    #     parent_image: "NonEmptyString", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     working_directory: "NonEmptyString",
+    #     target_repository: { # required
+    #       service: "ECR", # required, accepts ECR
+    #       repository_name: "NonEmptyString", # required
+    #     },
+    #     kms_key_id: "NonEmptyString",
+    #     client_token: "ClientToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.client_token #=> String
+    #   resp.container_recipe_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateContainerRecipe AWS API Documentation
+    #
+    # @overload create_container_recipe(params = {})
+    # @param [Hash] params ({})
+    def create_container_recipe(params = {}, options = {})
+      req = build_request(:create_container_recipe, params)
+      req.send_request(options)
+    end
+
     # Creates a new distribution configuration. Distribution configurations
     # define and configure the outputs of your pipeline.
     #
@@ -505,6 +611,14 @@ module Aws::Imagebuilder
     #             user_groups: ["NonEmptyString"],
     #           },
     #         },
+    #         container_distribution_configuration: {
+    #           description: "NonEmptyString",
+    #           container_tags: ["NonEmptyString"],
+    #           target_repository: { # required
+    #             service: "ECR", # required, accepts ECR
+    #             repository_name: "NonEmptyString", # required
+    #           },
+    #         },
     #         license_configuration_arns: ["LicenseConfigurationArn"],
     #       },
     #     ],
@@ -533,9 +647,13 @@ module Aws::Imagebuilder
     # all of the configured output resources defined in the distribution
     # configuration.
     #
-    # @option params [required, String] :image_recipe_arn
+    # @option params [String] :image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that defines how
     #   images are configured, tested, and assessed.
+    #
+    # @option params [String] :container_recipe_arn
+    #   The Amazon Resource Name (ARN) of the container recipe that defines
+    #   how images are configured and tested.
     #
     # @option params [String] :distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration that
@@ -573,7 +691,8 @@ module Aws::Imagebuilder
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_image({
-    #     image_recipe_arn: "ImageRecipeArn", # required
+    #     image_recipe_arn: "ImageRecipeArn",
+    #     container_recipe_arn: "ContainerRecipeArn",
     #     distribution_configuration_arn: "DistributionConfigurationArn",
     #     infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
     #     image_tests_configuration: {
@@ -611,9 +730,13 @@ module Aws::Imagebuilder
     # @option params [String] :description
     #   The description of the image pipeline.
     #
-    # @option params [required, String] :image_recipe_arn
+    # @option params [String] :image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that will be used
     #   to configure images created by this image pipeline.
+    #
+    # @option params [String] :container_recipe_arn
+    #   The Amazon Resource Name (ARN) of the container recipe that is used to
+    #   configure images created by this container pipeline.
     #
     # @option params [required, String] :infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
@@ -659,7 +782,8 @@ module Aws::Imagebuilder
     #   resp = client.create_image_pipeline({
     #     name: "ResourceName", # required
     #     description: "NonEmptyString",
-    #     image_recipe_arn: "ImageRecipeArn", # required
+    #     image_recipe_arn: "ImageRecipeArn",
+    #     container_recipe_arn: "ContainerRecipeArn",
     #     infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
     #     distribution_configuration_arn: "DistributionConfigurationArn",
     #     image_tests_configuration: {
@@ -923,6 +1047,36 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
+    # Deletes a container recipe.
+    #
+    # @option params [required, String] :container_recipe_arn
+    #   The Amazon Resource Name (ARN) of the container recipe to delete.
+    #
+    # @return [Types::DeleteContainerRecipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteContainerRecipeResponse#request_id #request_id} => String
+    #   * {Types::DeleteContainerRecipeResponse#container_recipe_arn #container_recipe_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_container_recipe({
+    #     container_recipe_arn: "ContainerRecipeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.container_recipe_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/DeleteContainerRecipe AWS API Documentation
+    #
+    # @overload delete_container_recipe(params = {})
+    # @param [Hash] params ({})
+    def delete_container_recipe(params = {}, options = {})
+      req = build_request(:delete_container_recipe, params)
+      req.send_request(options)
+    end
+
     # Deletes a distribution configuration.
     #
     # @option params [required, String] :distribution_configuration_arn
@@ -1152,6 +1306,85 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
+    # Retrieves a container recipe.
+    #
+    # @option params [required, String] :container_recipe_arn
+    #   The Amazon Resource Name (ARN) of the container recipe to retrieve.
+    #
+    # @return [Types::GetContainerRecipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetContainerRecipeResponse#request_id #request_id} => String
+    #   * {Types::GetContainerRecipeResponse#container_recipe #container_recipe} => Types::ContainerRecipe
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_container_recipe({
+    #     container_recipe_arn: "ContainerRecipeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.container_recipe.arn #=> String
+    #   resp.container_recipe.container_type #=> String, one of "DOCKER"
+    #   resp.container_recipe.name #=> String
+    #   resp.container_recipe.description #=> String
+    #   resp.container_recipe.platform #=> String, one of "Windows", "Linux"
+    #   resp.container_recipe.owner #=> String
+    #   resp.container_recipe.version #=> String
+    #   resp.container_recipe.components #=> Array
+    #   resp.container_recipe.components[0].component_arn #=> String
+    #   resp.container_recipe.dockerfile_template_data #=> String
+    #   resp.container_recipe.kms_key_id #=> String
+    #   resp.container_recipe.encrypted #=> Boolean
+    #   resp.container_recipe.parent_image #=> String
+    #   resp.container_recipe.date_created #=> String
+    #   resp.container_recipe.tags #=> Hash
+    #   resp.container_recipe.tags["TagKey"] #=> String
+    #   resp.container_recipe.working_directory #=> String
+    #   resp.container_recipe.target_repository.service #=> String, one of "ECR"
+    #   resp.container_recipe.target_repository.repository_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetContainerRecipe AWS API Documentation
+    #
+    # @overload get_container_recipe(params = {})
+    # @param [Hash] params ({})
+    def get_container_recipe(params = {}, options = {})
+      req = build_request(:get_container_recipe, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the policy for a container recipe.
+    #
+    # @option params [required, String] :container_recipe_arn
+    #   The Amazon Resource Name (ARN) of the container recipe for the policy
+    #   being requested.
+    #
+    # @return [Types::GetContainerRecipePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetContainerRecipePolicyResponse#request_id #request_id} => String
+    #   * {Types::GetContainerRecipePolicyResponse#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_container_recipe_policy({
+    #     container_recipe_arn: "ContainerRecipeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetContainerRecipePolicy AWS API Documentation
+    #
+    # @overload get_container_recipe_policy(params = {})
+    # @param [Hash] params ({})
+    def get_container_recipe_policy(params = {}, options = {})
+      req = build_request(:get_container_recipe_policy, params)
+      req.send_request(options)
+    end
+
     # Gets a distribution configuration.
     #
     # @option params [required, String] :distribution_configuration_arn
@@ -1188,6 +1421,11 @@ module Aws::Imagebuilder
     #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_ids[0] #=> String
     #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_groups #=> Array
     #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_groups[0] #=> String
+    #   resp.distribution_configuration.distributions[0].container_distribution_configuration.description #=> String
+    #   resp.distribution_configuration.distributions[0].container_distribution_configuration.container_tags #=> Array
+    #   resp.distribution_configuration.distributions[0].container_distribution_configuration.container_tags[0] #=> String
+    #   resp.distribution_configuration.distributions[0].container_distribution_configuration.target_repository.service #=> String, one of "ECR"
+    #   resp.distribution_configuration.distributions[0].container_distribution_configuration.target_repository.repository_name #=> String
     #   resp.distribution_configuration.distributions[0].license_configuration_arns #=> Array
     #   resp.distribution_configuration.distributions[0].license_configuration_arns[0] #=> String
     #   resp.distribution_configuration.timeout_minutes #=> Integer
@@ -1225,6 +1463,7 @@ module Aws::Imagebuilder
     #
     #   resp.request_id #=> String
     #   resp.image.arn #=> String
+    #   resp.image.type #=> String, one of "AMI", "DOCKER"
     #   resp.image.name #=> String
     #   resp.image.version #=> String
     #   resp.image.platform #=> String, one of "Windows", "Linux"
@@ -1233,6 +1472,7 @@ module Aws::Imagebuilder
     #   resp.image.state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED"
     #   resp.image.state.reason #=> String
     #   resp.image.image_recipe.arn #=> String
+    #   resp.image.image_recipe.type #=> String, one of "AMI", "DOCKER"
     #   resp.image.image_recipe.name #=> String
     #   resp.image.image_recipe.description #=> String
     #   resp.image.image_recipe.platform #=> String, one of "Windows", "Linux"
@@ -1256,6 +1496,25 @@ module Aws::Imagebuilder
     #   resp.image.image_recipe.tags #=> Hash
     #   resp.image.image_recipe.tags["TagKey"] #=> String
     #   resp.image.image_recipe.working_directory #=> String
+    #   resp.image.container_recipe.arn #=> String
+    #   resp.image.container_recipe.container_type #=> String, one of "DOCKER"
+    #   resp.image.container_recipe.name #=> String
+    #   resp.image.container_recipe.description #=> String
+    #   resp.image.container_recipe.platform #=> String, one of "Windows", "Linux"
+    #   resp.image.container_recipe.owner #=> String
+    #   resp.image.container_recipe.version #=> String
+    #   resp.image.container_recipe.components #=> Array
+    #   resp.image.container_recipe.components[0].component_arn #=> String
+    #   resp.image.container_recipe.dockerfile_template_data #=> String
+    #   resp.image.container_recipe.kms_key_id #=> String
+    #   resp.image.container_recipe.encrypted #=> Boolean
+    #   resp.image.container_recipe.parent_image #=> String
+    #   resp.image.container_recipe.date_created #=> String
+    #   resp.image.container_recipe.tags #=> Hash
+    #   resp.image.container_recipe.tags["TagKey"] #=> String
+    #   resp.image.container_recipe.working_directory #=> String
+    #   resp.image.container_recipe.target_repository.service #=> String, one of "ECR"
+    #   resp.image.container_recipe.target_repository.repository_name #=> String
     #   resp.image.source_pipeline_name #=> String
     #   resp.image.source_pipeline_arn #=> String
     #   resp.image.infrastructure_configuration.arn #=> String
@@ -1294,6 +1553,11 @@ module Aws::Imagebuilder
     #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_ids[0] #=> String
     #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_groups #=> Array
     #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_groups[0] #=> String
+    #   resp.image.distribution_configuration.distributions[0].container_distribution_configuration.description #=> String
+    #   resp.image.distribution_configuration.distributions[0].container_distribution_configuration.container_tags #=> Array
+    #   resp.image.distribution_configuration.distributions[0].container_distribution_configuration.container_tags[0] #=> String
+    #   resp.image.distribution_configuration.distributions[0].container_distribution_configuration.target_repository.service #=> String, one of "ECR"
+    #   resp.image.distribution_configuration.distributions[0].container_distribution_configuration.target_repository.repository_name #=> String
     #   resp.image.distribution_configuration.distributions[0].license_configuration_arns #=> Array
     #   resp.image.distribution_configuration.distributions[0].license_configuration_arns[0] #=> String
     #   resp.image.distribution_configuration.timeout_minutes #=> Integer
@@ -1312,6 +1576,10 @@ module Aws::Imagebuilder
     #   resp.image.output_resources.amis[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED"
     #   resp.image.output_resources.amis[0].state.reason #=> String
     #   resp.image.output_resources.amis[0].account_id #=> String
+    #   resp.image.output_resources.containers #=> Array
+    #   resp.image.output_resources.containers[0].region #=> String
+    #   resp.image.output_resources.containers[0].image_uris #=> Array
+    #   resp.image.output_resources.containers[0].image_uris[0] #=> String
     #   resp.image.tags #=> Hash
     #   resp.image.tags["TagKey"] #=> String
     #
@@ -1350,6 +1618,7 @@ module Aws::Imagebuilder
     #   resp.image_pipeline.platform #=> String, one of "Windows", "Linux"
     #   resp.image_pipeline.enhanced_image_metadata_enabled #=> Boolean
     #   resp.image_pipeline.image_recipe_arn #=> String
+    #   resp.image_pipeline.container_recipe_arn #=> String
     #   resp.image_pipeline.infrastructure_configuration_arn #=> String
     #   resp.image_pipeline.distribution_configuration_arn #=> String
     #   resp.image_pipeline.image_tests_configuration.image_tests_enabled #=> Boolean
@@ -1425,6 +1694,7 @@ module Aws::Imagebuilder
     #
     #   resp.request_id #=> String
     #   resp.image_recipe.arn #=> String
+    #   resp.image_recipe.type #=> String, one of "AMI", "DOCKER"
     #   resp.image_recipe.name #=> String
     #   resp.image_recipe.description #=> String
     #   resp.image_recipe.platform #=> String, one of "Windows", "Linux"
@@ -1701,6 +1971,10 @@ module Aws::Imagebuilder
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
+    # @option params [Boolean] :by_name
+    #   Returns the list of component build versions for the specified
+    #   semantic version.
+    #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
     #
@@ -1726,6 +2000,7 @@ module Aws::Imagebuilder
     #         values: ["FilterValue"],
     #       },
     #     ],
+    #     by_name: false,
     #     max_results: 1,
     #     next_token: "PaginationToken",
     #   })
@@ -1752,6 +2027,71 @@ module Aws::Imagebuilder
     # @param [Hash] params ({})
     def list_components(params = {}, options = {})
       req = build_request(:list_components, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of container recipes.
+    #
+    # @option params [String] :owner
+    #   Returns container recipes belonging to the specified owner, that have
+    #   been shared with you. You can omit this field to return container
+    #   recipes belonging to your account.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Request filters that are used to narrow the list of container images
+    #   that are returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the list.
+    #
+    # @option params [String] :next_token
+    #   Provides a token for pagination, which determines where to begin the
+    #   next set of results when the current set reaches the maximum for one
+    #   request.
+    #
+    # @return [Types::ListContainerRecipesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContainerRecipesResponse#request_id #request_id} => String
+    #   * {Types::ListContainerRecipesResponse#container_recipe_summary_list #container_recipe_summary_list} => Array&lt;Types::ContainerRecipeSummary&gt;
+    #   * {Types::ListContainerRecipesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_container_recipes({
+    #     owner: "Self", # accepts Self, Shared, Amazon
+    #     filters: [
+    #       {
+    #         name: "FilterName",
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NonEmptyString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.container_recipe_summary_list #=> Array
+    #   resp.container_recipe_summary_list[0].arn #=> String
+    #   resp.container_recipe_summary_list[0].container_type #=> String, one of "DOCKER"
+    #   resp.container_recipe_summary_list[0].name #=> String
+    #   resp.container_recipe_summary_list[0].platform #=> String, one of "Windows", "Linux"
+    #   resp.container_recipe_summary_list[0].owner #=> String
+    #   resp.container_recipe_summary_list[0].parent_image #=> String
+    #   resp.container_recipe_summary_list[0].date_created #=> String
+    #   resp.container_recipe_summary_list[0].tags #=> Hash
+    #   resp.container_recipe_summary_list[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListContainerRecipes AWS API Documentation
+    #
+    # @overload list_container_recipes(params = {})
+    # @param [Hash] params ({})
+    def list_container_recipes(params = {}, options = {})
+      req = build_request(:list_container_recipes, params)
       req.send_request(options)
     end
 
@@ -1803,6 +2143,8 @@ module Aws::Imagebuilder
     #   resp.distribution_configuration_summary_list[0].date_updated #=> String
     #   resp.distribution_configuration_summary_list[0].tags #=> Hash
     #   resp.distribution_configuration_summary_list[0].tags["TagKey"] #=> String
+    #   resp.distribution_configuration_summary_list[0].regions #=> Array
+    #   resp.distribution_configuration_summary_list[0].regions[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListDistributionConfigurations AWS API Documentation
@@ -1858,6 +2200,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list #=> Array
     #   resp.image_summary_list[0].arn #=> String
     #   resp.image_summary_list[0].name #=> String
+    #   resp.image_summary_list[0].type #=> String, one of "AMI", "DOCKER"
     #   resp.image_summary_list[0].version #=> String
     #   resp.image_summary_list[0].platform #=> String, one of "Windows", "Linux"
     #   resp.image_summary_list[0].os_version #=> String
@@ -1873,6 +2216,10 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].output_resources.amis[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED"
     #   resp.image_summary_list[0].output_resources.amis[0].state.reason #=> String
     #   resp.image_summary_list[0].output_resources.amis[0].account_id #=> String
+    #   resp.image_summary_list[0].output_resources.containers #=> Array
+    #   resp.image_summary_list[0].output_resources.containers[0].region #=> String
+    #   resp.image_summary_list[0].output_resources.containers[0].image_uris #=> Array
+    #   resp.image_summary_list[0].output_resources.containers[0].image_uris[0] #=> String
     #   resp.image_summary_list[0].tags #=> Hash
     #   resp.image_summary_list[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -1930,6 +2277,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list #=> Array
     #   resp.image_summary_list[0].arn #=> String
     #   resp.image_summary_list[0].name #=> String
+    #   resp.image_summary_list[0].type #=> String, one of "AMI", "DOCKER"
     #   resp.image_summary_list[0].version #=> String
     #   resp.image_summary_list[0].platform #=> String, one of "Windows", "Linux"
     #   resp.image_summary_list[0].os_version #=> String
@@ -1945,6 +2293,10 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].output_resources.amis[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED"
     #   resp.image_summary_list[0].output_resources.amis[0].state.reason #=> String
     #   resp.image_summary_list[0].output_resources.amis[0].account_id #=> String
+    #   resp.image_summary_list[0].output_resources.containers #=> Array
+    #   resp.image_summary_list[0].output_resources.containers[0].region #=> String
+    #   resp.image_summary_list[0].output_resources.containers[0].image_uris #=> Array
+    #   resp.image_summary_list[0].output_resources.containers[0].image_uris[0] #=> String
     #   resp.image_summary_list[0].tags #=> Hash
     #   resp.image_summary_list[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -2001,6 +2353,7 @@ module Aws::Imagebuilder
     #   resp.image_pipeline_list[0].platform #=> String, one of "Windows", "Linux"
     #   resp.image_pipeline_list[0].enhanced_image_metadata_enabled #=> Boolean
     #   resp.image_pipeline_list[0].image_recipe_arn #=> String
+    #   resp.image_pipeline_list[0].container_recipe_arn #=> String
     #   resp.image_pipeline_list[0].infrastructure_configuration_arn #=> String
     #   resp.image_pipeline_list[0].distribution_configuration_arn #=> String
     #   resp.image_pipeline_list[0].image_tests_configuration.image_tests_enabled #=> Boolean
@@ -2101,12 +2454,18 @@ module Aws::Imagebuilder
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
+    # @option params [Boolean] :by_name
+    #   Requests a list of images with a specific recipe name.
+    #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
     #
     # @option params [String] :next_token
     #   A token to specify where to start paginating. This is the NextToken
     #   from a previously truncated response.
+    #
+    # @option params [Boolean] :include_deprecated
+    #   Includes deprecated images in the response list.
     #
     # @return [Types::ListImagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2126,8 +2485,10 @@ module Aws::Imagebuilder
     #         values: ["FilterValue"],
     #       },
     #     ],
+    #     by_name: false,
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     include_deprecated: false,
     #   })
     #
     # @example Response structure
@@ -2136,6 +2497,7 @@ module Aws::Imagebuilder
     #   resp.image_version_list #=> Array
     #   resp.image_version_list[0].arn #=> String
     #   resp.image_version_list[0].name #=> String
+    #   resp.image_version_list[0].type #=> String, one of "AMI", "DOCKER"
     #   resp.image_version_list[0].version #=> String
     #   resp.image_version_list[0].platform #=> String, one of "Windows", "Linux"
     #   resp.image_version_list[0].os_version #=> String
@@ -2280,6 +2642,49 @@ module Aws::Imagebuilder
     # @param [Hash] params ({})
     def put_component_policy(params = {}, options = {})
       req = build_request(:put_component_policy, params)
+      req.send_request(options)
+    end
+
+    # Applies a policy to a container image. We recommend that you call the
+    # RAM API CreateResourceShare
+    # (https://docs.aws.amazon.com/ram/latest/APIReference/API\_CreateResourceShare.html)
+    # to share resources. If you call the Image Builder API
+    # `PutContainerImagePolicy`, you must also call the RAM API
+    # PromoteResourceShareCreatedFromPolicy
+    # (https://docs.aws.amazon.com/ram/latest/APIReference/API\_PromoteResourceShareCreatedFromPolicy.html)
+    # in order for the resource to be visible to all principals with whom
+    # the resource is shared.
+    #
+    # @option params [required, String] :container_recipe_arn
+    #   The Amazon Resource Name (ARN) of the container recipe that this
+    #   policy should be applied to.
+    #
+    # @option params [required, String] :policy
+    #   The policy to apply to the container recipe.
+    #
+    # @return [Types::PutContainerRecipePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutContainerRecipePolicyResponse#request_id #request_id} => String
+    #   * {Types::PutContainerRecipePolicyResponse#container_recipe_arn #container_recipe_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_container_recipe_policy({
+    #     container_recipe_arn: "ContainerRecipeArn", # required
+    #     policy: "ResourcePolicyDocument", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.container_recipe_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/PutContainerRecipePolicy AWS API Documentation
+    #
+    # @overload put_container_recipe_policy(params = {})
+    # @param [Hash] params ({})
+    def put_container_recipe_policy(params = {}, options = {})
+      req = build_request(:put_container_recipe_policy, params)
       req.send_request(options)
     end
 
@@ -2512,6 +2917,14 @@ module Aws::Imagebuilder
     #             user_groups: ["NonEmptyString"],
     #           },
     #         },
+    #         container_distribution_configuration: {
+    #           description: "NonEmptyString",
+    #           container_tags: ["NonEmptyString"],
+    #           target_repository: { # required
+    #             service: "ECR", # required, accepts ECR
+    #             repository_name: "NonEmptyString", # required
+    #           },
+    #         },
     #         license_configuration_arns: ["LicenseConfigurationArn"],
     #       },
     #     ],
@@ -2543,9 +2956,12 @@ module Aws::Imagebuilder
     # @option params [String] :description
     #   The description of the image pipeline.
     #
-    # @option params [required, String] :image_recipe_arn
+    # @option params [String] :image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that will be used
     #   to configure images updated by this image pipeline.
+    #
+    # @option params [String] :container_recipe_arn
+    #   The Amazon Resource Name (ARN) of the container pipeline to update.
     #
     # @option params [required, String] :infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
@@ -2588,7 +3004,8 @@ module Aws::Imagebuilder
     #   resp = client.update_image_pipeline({
     #     image_pipeline_arn: "ImagePipelineArn", # required
     #     description: "NonEmptyString",
-    #     image_recipe_arn: "ImageRecipeArn", # required
+    #     image_recipe_arn: "ImageRecipeArn",
+    #     container_recipe_arn: "ContainerRecipeArn",
     #     infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
     #     distribution_configuration_arn: "DistributionConfigurationArn",
     #     image_tests_configuration: {
@@ -2729,7 +3146,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

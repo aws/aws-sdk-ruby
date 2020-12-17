@@ -1765,11 +1765,6 @@ module Aws::ConfigService
     # Provides organization config rule deployment status for an
     # organization.
     #
-    # Only a master account and a delegated administrator account can call
-    # this API. When calling this API with a delegated administrator, you
-    # must ensure AWS Organizations `ListDelegatedAdministrator` permissions
-    # are added.
-    #
     # <note markdown="1"> The status is not considered successful until organization config rule
     # is successfully deployed in all the member accounts with an exception
     # of excluded accounts.
@@ -1828,11 +1823,6 @@ module Aws::ConfigService
     end
 
     # Returns a list of organization config rules.
-    #
-    # Only a master account and a delegated administrator account can call
-    # this API. When calling this API with a delegated administrator, you
-    # must ensure AWS Organizations `ListDelegatedAdministrator` permissions
-    # are added. 
     #
     # <note markdown="1"> When you specify the limit and the next token, you receive a paginated
     # response. Limit and next token are not applicable if you specify
@@ -1910,11 +1900,6 @@ module Aws::ConfigService
     # Provides organization conformance pack deployment status for an
     # organization.
     #
-    # Only a master account and a delegated administrator account can call
-    # this API. When calling this API with a delegated administrator, you
-    # must ensure AWS Organizations `ListDelegatedAdministrator` permissions
-    # are added.
-    #
     # <note markdown="1"> The status is not considered successful until organization conformance
     # pack is successfully deployed in all the member accounts with an
     # exception of excluded accounts.
@@ -1973,11 +1958,6 @@ module Aws::ConfigService
     end
 
     # Returns a list of organization conformance packs.
-    #
-    # Only a master account and a delegated administrator account can call
-    # this API. When calling this API with a delegated administrator, you
-    # must ensure AWS Organizations `ListDelegatedAdministrator` permissions
-    # are added.
     #
     # <note markdown="1"> When you specify the limit and the next token, you receive a paginated
     # response.
@@ -2985,11 +2965,6 @@ module Aws::ConfigService
     # Returns detailed status for each member account within an organization
     # for a given organization config rule.
     #
-    # Only a master account and a delegated administrator account can call
-    # this API. When calling this API with a delegated administrator, you
-    # must ensure AWS Organizations `ListDelegatedAdministrator` permissions
-    # are added.
-    #
     # @option params [required, String] :organization_config_rule_name
     #   The name of organization config rule for which you want status details
     #   for member accounts.
@@ -3045,11 +3020,6 @@ module Aws::ConfigService
 
     # Returns detailed status for each member account within an organization
     # for a given organization conformance pack.
-    #
-    # Only a master account and a delegated administrator account can call
-    # this API. When calling this API with a delegated administrator, you
-    # must ensure AWS Organizations `ListDelegatedAdministrator` permissions
-    # are added.
     #
     # @option params [required, String] :organization_conformance_pack_name
     #   The name of organization conformance pack for which you want status
@@ -3234,9 +3204,9 @@ module Aws::ConfigService
     #   Filters the results based on the `ResourceFilters` object.
     #
     # @option params [Integer] :limit
-    #   The maximum number of resource identifiers returned on each page. The
-    #   default is 100. You cannot specify a number greater than 100. If you
-    #   specify 0, AWS Config uses the default.
+    #   The maximum number of resource identifiers returned on each page. You
+    #   cannot specify a number greater than 100. If you specify 0, AWS Config
+    #   uses the default.
     #
     # @option params [String] :next_token
     #   The `nextToken` string returned on a previous page that you use to get
@@ -3714,11 +3684,18 @@ module Aws::ConfigService
     #    </note>
     #
     # @option params [String] :delivery_s3_bucket
-    #   AWS Config stores intermediate files while processing conformance pack
-    #   template.
+    #   Amazon S3 bucket where AWS Config stores conformance pack templates.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
     #
     # @option params [String] :delivery_s3_key_prefix
     #   The prefix for the Amazon S3 bucket.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
     #
     # @option params [Array<Types::ConformancePackInputParameter>] :conformance_pack_input_parameters
     #   A list of `ConformancePackInputParameter` objects.
@@ -3862,6 +3839,34 @@ module Aws::ConfigService
     # @param [Hash] params ({})
     def put_evaluations(params = {}, options = {})
       req = build_request(:put_evaluations, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :config_rule_name
+    #
+    # @option params [required, Types::ExternalEvaluation] :external_evaluation
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_external_evaluation({
+    #     config_rule_name: "ConfigRuleName", # required
+    #     external_evaluation: { # required
+    #       compliance_resource_type: "StringWithCharLimit256", # required
+    #       compliance_resource_id: "BaseResourceId", # required
+    #       compliance_type: "COMPLIANT", # required, accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
+    #       annotation: "StringWithCharLimit256",
+    #       ordering_timestamp: Time.now, # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutExternalEvaluation AWS API Documentation
+    #
+    # @overload put_external_evaluation(params = {})
+    # @param [Hash] params ({})
+    def put_external_evaluation(params = {}, options = {})
+      req = build_request(:put_external_evaluation, params)
       req.send_request(options)
     end
 
@@ -4016,21 +4021,18 @@ module Aws::ConfigService
     #   maximum length of 51,200 bytes.
     #
     # @option params [String] :delivery_s3_bucket
-    #   Location of an Amazon S3 bucket where AWS Config can deliver
-    #   evaluation results. AWS Config stores intermediate files while
-    #   processing conformance pack template.
+    #   Amazon S3 bucket where AWS Config stores conformance pack templates.
     #
-    #   The delivery bucket name should start with awsconfigconforms. For
-    #   example: "Resource": "arn:aws:s3:::your\_bucket\_name/*". For
-    #   more information, see [Permissions for cross account bucket
-    #   access][1].
+    #   <note markdown="1"> This field is optional.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/conformance-pack-organization-apis.html
+    #    </note>
     #
     # @option params [String] :delivery_s3_key_prefix
     #   The prefix for the Amazon S3 bucket.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
     #
     # @option params [Array<Types::ConformancePackInputParameter>] :conformance_pack_input_parameters
     #   A list of `ConformancePackInputParameter` objects.
@@ -4082,6 +4084,11 @@ module Aws::ConfigService
     #
     # <note markdown="1"> If you make backward incompatible changes to the SSM document, you
     # must call this again to ensure the remediations can run.
+    #
+    #  This API does not support adding remediation configurations for
+    # service-linked AWS Config Rules such as Organization Config rules, the
+    # rules deployed by conformance packs, and rules deployed by AWS
+    # Security Hub.
     #
     #  </note>
     #
@@ -4160,7 +4167,7 @@ module Aws::ConfigService
 
     # A remediation exception is when a specific resource is no longer
     # considered for auto-remediation. This API adds a new exception or
-    # updates an exisiting exception for a specific resource with a specific
+    # updates an existing exception for a specific resource with a specific
     # AWS Config rule.
     #
     # <note markdown="1"> AWS Config generates a remediation exception when a problem occurs
@@ -4692,7 +4699,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

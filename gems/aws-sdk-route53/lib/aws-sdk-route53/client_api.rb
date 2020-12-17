@@ -16,6 +16,8 @@ module Aws::Route53
     AWSAccountID = Shapes::StringShape.new(name: 'AWSAccountID')
     AccountLimit = Shapes::StructureShape.new(name: 'AccountLimit')
     AccountLimitType = Shapes::StringShape.new(name: 'AccountLimitType')
+    ActivateKeySigningKeyRequest = Shapes::StructureShape.new(name: 'ActivateKeySigningKeyRequest')
+    ActivateKeySigningKeyResponse = Shapes::StructureShape.new(name: 'ActivateKeySigningKeyResponse')
     AlarmIdentifier = Shapes::StructureShape.new(name: 'AlarmIdentifier')
     AlarmName = Shapes::StringShape.new(name: 'AlarmName')
     AliasHealthEnabled = Shapes::BooleanShape.new(name: 'AliasHealthEnabled')
@@ -46,6 +48,8 @@ module Aws::Route53
     CreateHealthCheckResponse = Shapes::StructureShape.new(name: 'CreateHealthCheckResponse')
     CreateHostedZoneRequest = Shapes::StructureShape.new(name: 'CreateHostedZoneRequest')
     CreateHostedZoneResponse = Shapes::StructureShape.new(name: 'CreateHostedZoneResponse')
+    CreateKeySigningKeyRequest = Shapes::StructureShape.new(name: 'CreateKeySigningKeyRequest')
+    CreateKeySigningKeyResponse = Shapes::StructureShape.new(name: 'CreateKeySigningKeyResponse')
     CreateQueryLoggingConfigRequest = Shapes::StructureShape.new(name: 'CreateQueryLoggingConfigRequest')
     CreateQueryLoggingConfigResponse = Shapes::StructureShape.new(name: 'CreateQueryLoggingConfigResponse')
     CreateReusableDelegationSetRequest = Shapes::StructureShape.new(name: 'CreateReusableDelegationSetRequest')
@@ -60,6 +64,10 @@ module Aws::Route53
     CreateVPCAssociationAuthorizationResponse = Shapes::StructureShape.new(name: 'CreateVPCAssociationAuthorizationResponse')
     DNSName = Shapes::StringShape.new(name: 'DNSName')
     DNSRCode = Shapes::StringShape.new(name: 'DNSRCode')
+    DNSSECNotFound = Shapes::StructureShape.new(name: 'DNSSECNotFound')
+    DNSSECStatus = Shapes::StructureShape.new(name: 'DNSSECStatus')
+    DeactivateKeySigningKeyRequest = Shapes::StructureShape.new(name: 'DeactivateKeySigningKeyRequest')
+    DeactivateKeySigningKeyResponse = Shapes::StructureShape.new(name: 'DeactivateKeySigningKeyResponse')
     DelegationSet = Shapes::StructureShape.new(name: 'DelegationSet')
     DelegationSetAlreadyCreated = Shapes::StructureShape.new(name: 'DelegationSetAlreadyCreated')
     DelegationSetAlreadyReusable = Shapes::StructureShape.new(name: 'DelegationSetAlreadyReusable')
@@ -72,6 +80,8 @@ module Aws::Route53
     DeleteHealthCheckResponse = Shapes::StructureShape.new(name: 'DeleteHealthCheckResponse')
     DeleteHostedZoneRequest = Shapes::StructureShape.new(name: 'DeleteHostedZoneRequest')
     DeleteHostedZoneResponse = Shapes::StructureShape.new(name: 'DeleteHostedZoneResponse')
+    DeleteKeySigningKeyRequest = Shapes::StructureShape.new(name: 'DeleteKeySigningKeyRequest')
+    DeleteKeySigningKeyResponse = Shapes::StructureShape.new(name: 'DeleteKeySigningKeyResponse')
     DeleteQueryLoggingConfigRequest = Shapes::StructureShape.new(name: 'DeleteQueryLoggingConfigRequest')
     DeleteQueryLoggingConfigResponse = Shapes::StructureShape.new(name: 'DeleteQueryLoggingConfigResponse')
     DeleteReusableDelegationSetRequest = Shapes::StructureShape.new(name: 'DeleteReusableDelegationSetRequest')
@@ -85,10 +95,14 @@ module Aws::Route53
     Dimension = Shapes::StructureShape.new(name: 'Dimension')
     DimensionField = Shapes::StringShape.new(name: 'DimensionField')
     DimensionList = Shapes::ListShape.new(name: 'DimensionList')
+    DisableHostedZoneDNSSECRequest = Shapes::StructureShape.new(name: 'DisableHostedZoneDNSSECRequest')
+    DisableHostedZoneDNSSECResponse = Shapes::StructureShape.new(name: 'DisableHostedZoneDNSSECResponse')
     Disabled = Shapes::BooleanShape.new(name: 'Disabled')
     DisassociateVPCComment = Shapes::StringShape.new(name: 'DisassociateVPCComment')
     DisassociateVPCFromHostedZoneRequest = Shapes::StructureShape.new(name: 'DisassociateVPCFromHostedZoneRequest')
     DisassociateVPCFromHostedZoneResponse = Shapes::StructureShape.new(name: 'DisassociateVPCFromHostedZoneResponse')
+    EnableHostedZoneDNSSECRequest = Shapes::StructureShape.new(name: 'EnableHostedZoneDNSSECRequest')
+    EnableHostedZoneDNSSECResponse = Shapes::StructureShape.new(name: 'EnableHostedZoneDNSSECResponse')
     EnableSNI = Shapes::BooleanShape.new(name: 'EnableSNI')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorMessages = Shapes::ListShape.new(name: 'ErrorMessages')
@@ -110,6 +124,8 @@ module Aws::Route53
     GetChangeResponse = Shapes::StructureShape.new(name: 'GetChangeResponse')
     GetCheckerIpRangesRequest = Shapes::StructureShape.new(name: 'GetCheckerIpRangesRequest')
     GetCheckerIpRangesResponse = Shapes::StructureShape.new(name: 'GetCheckerIpRangesResponse')
+    GetDNSSECRequest = Shapes::StructureShape.new(name: 'GetDNSSECRequest')
+    GetDNSSECResponse = Shapes::StructureShape.new(name: 'GetDNSSECResponse')
     GetGeoLocationRequest = Shapes::StructureShape.new(name: 'GetGeoLocationRequest')
     GetGeoLocationResponse = Shapes::StructureShape.new(name: 'GetGeoLocationResponse')
     GetHealthCheckCountRequest = Shapes::StructureShape.new(name: 'GetHealthCheckCountRequest')
@@ -165,6 +181,7 @@ module Aws::Route53
     HostedZoneNotPrivate = Shapes::StructureShape.new(name: 'HostedZoneNotPrivate')
     HostedZoneOwner = Shapes::StructureShape.new(name: 'HostedZoneOwner')
     HostedZoneOwningService = Shapes::StringShape.new(name: 'HostedZoneOwningService')
+    HostedZonePartiallyDelegated = Shapes::StructureShape.new(name: 'HostedZonePartiallyDelegated')
     HostedZoneRRSetCount = Shapes::IntegerShape.new(name: 'HostedZoneRRSetCount')
     HostedZoneSummaries = Shapes::ListShape.new(name: 'HostedZoneSummaries')
     HostedZoneSummary = Shapes::StructureShape.new(name: 'HostedZoneSummary')
@@ -178,11 +195,21 @@ module Aws::Route53
     InvalidChangeBatch = Shapes::StructureShape.new(name: 'InvalidChangeBatch')
     InvalidDomainName = Shapes::StructureShape.new(name: 'InvalidDomainName')
     InvalidInput = Shapes::StructureShape.new(name: 'InvalidInput')
+    InvalidKMSArn = Shapes::StructureShape.new(name: 'InvalidKMSArn')
+    InvalidKeySigningKeyName = Shapes::StructureShape.new(name: 'InvalidKeySigningKeyName')
+    InvalidKeySigningKeyStatus = Shapes::StructureShape.new(name: 'InvalidKeySigningKeyStatus')
     InvalidPaginationToken = Shapes::StructureShape.new(name: 'InvalidPaginationToken')
+    InvalidSigningStatus = Shapes::StructureShape.new(name: 'InvalidSigningStatus')
     InvalidTrafficPolicyDocument = Shapes::StructureShape.new(name: 'InvalidTrafficPolicyDocument')
     InvalidVPCId = Shapes::StructureShape.new(name: 'InvalidVPCId')
     Inverted = Shapes::BooleanShape.new(name: 'Inverted')
     IsPrivateZone = Shapes::BooleanShape.new(name: 'IsPrivateZone')
+    KeySigningKey = Shapes::StructureShape.new(name: 'KeySigningKey')
+    KeySigningKeyAlreadyExists = Shapes::StructureShape.new(name: 'KeySigningKeyAlreadyExists')
+    KeySigningKeyInParentDSRecord = Shapes::StructureShape.new(name: 'KeySigningKeyInParentDSRecord')
+    KeySigningKeyInUse = Shapes::StructureShape.new(name: 'KeySigningKeyInUse')
+    KeySigningKeyWithActiveStatusNotFound = Shapes::StructureShape.new(name: 'KeySigningKeyWithActiveStatusNotFound')
+    KeySigningKeys = Shapes::ListShape.new(name: 'KeySigningKeys')
     LastVPCAssociation = Shapes::StructureShape.new(name: 'LastVPCAssociation')
     LimitValue = Shapes::IntegerShape.new(name: 'LimitValue')
     LimitsExceeded = Shapes::StructureShape.new(name: 'LimitsExceeded')
@@ -231,6 +258,7 @@ module Aws::Route53
     NoSuchGeoLocation = Shapes::StructureShape.new(name: 'NoSuchGeoLocation')
     NoSuchHealthCheck = Shapes::StructureShape.new(name: 'NoSuchHealthCheck')
     NoSuchHostedZone = Shapes::StructureShape.new(name: 'NoSuchHostedZone')
+    NoSuchKeySigningKey = Shapes::StructureShape.new(name: 'NoSuchKeySigningKey')
     NoSuchQueryLoggingConfig = Shapes::StructureShape.new(name: 'NoSuchQueryLoggingConfig')
     NoSuchTrafficPolicy = Shapes::StructureShape.new(name: 'NoSuchTrafficPolicy')
     NoSuchTrafficPolicyInstance = Shapes::StructureShape.new(name: 'NoSuchTrafficPolicyInstance')
@@ -273,7 +301,14 @@ module Aws::Route53
     ReusableDelegationSetLimit = Shapes::StructureShape.new(name: 'ReusableDelegationSetLimit')
     ReusableDelegationSetLimitType = Shapes::StringShape.new(name: 'ReusableDelegationSetLimitType')
     SearchString = Shapes::StringShape.new(name: 'SearchString')
+    ServeSignature = Shapes::StringShape.new(name: 'ServeSignature')
     ServicePrincipal = Shapes::StringShape.new(name: 'ServicePrincipal')
+    SigningKeyInteger = Shapes::IntegerShape.new(name: 'SigningKeyInteger')
+    SigningKeyName = Shapes::StringShape.new(name: 'SigningKeyName')
+    SigningKeyStatus = Shapes::StringShape.new(name: 'SigningKeyStatus')
+    SigningKeyStatusMessage = Shapes::StringShape.new(name: 'SigningKeyStatusMessage')
+    SigningKeyString = Shapes::StringShape.new(name: 'SigningKeyString')
+    SigningKeyTag = Shapes::IntegerShape.new(name: 'SigningKeyTag')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusReport = Shapes::StructureShape.new(name: 'StatusReport')
@@ -294,6 +329,7 @@ module Aws::Route53
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
     TooManyHealthChecks = Shapes::StructureShape.new(name: 'TooManyHealthChecks')
     TooManyHostedZones = Shapes::StructureShape.new(name: 'TooManyHostedZones')
+    TooManyKeySigningKeys = Shapes::StructureShape.new(name: 'TooManyKeySigningKeys')
     TooManyTrafficPolicies = Shapes::StructureShape.new(name: 'TooManyTrafficPolicies')
     TooManyTrafficPolicyInstances = Shapes::StructureShape.new(name: 'TooManyTrafficPolicyInstances')
     TooManyTrafficPolicyVersionsForCurrentPolicy = Shapes::StructureShape.new(name: 'TooManyTrafficPolicyVersionsForCurrentPolicy')
@@ -336,6 +372,13 @@ module Aws::Route53
     AccountLimit.add_member(:type, Shapes::ShapeRef.new(shape: AccountLimitType, required: true, location_name: "Type"))
     AccountLimit.add_member(:value, Shapes::ShapeRef.new(shape: LimitValue, required: true, location_name: "Value"))
     AccountLimit.struct_class = Types::AccountLimit
+
+    ActivateKeySigningKeyRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "HostedZoneId"))
+    ActivateKeySigningKeyRequest.add_member(:name, Shapes::ShapeRef.new(shape: SigningKeyName, required: true, location: "uri", location_name: "Name"))
+    ActivateKeySigningKeyRequest.struct_class = Types::ActivateKeySigningKeyRequest
+
+    ActivateKeySigningKeyResponse.add_member(:change_info, Shapes::ShapeRef.new(shape: ChangeInfo, required: true, location_name: "ChangeInfo"))
+    ActivateKeySigningKeyResponse.struct_class = Types::ActivateKeySigningKeyResponse
 
     AlarmIdentifier.add_member(:region, Shapes::ShapeRef.new(shape: CloudWatchRegion, required: true, location_name: "Region"))
     AlarmIdentifier.add_member(:name, Shapes::ShapeRef.new(shape: AlarmName, required: true, location_name: "Name"))
@@ -430,6 +473,18 @@ module Aws::Route53
     CreateHostedZoneResponse.add_member(:location, Shapes::ShapeRef.new(shape: ResourceURI, required: true, location: "header", location_name: "Location"))
     CreateHostedZoneResponse.struct_class = Types::CreateHostedZoneResponse
 
+    CreateKeySigningKeyRequest.add_member(:caller_reference, Shapes::ShapeRef.new(shape: Nonce, required: true, location_name: "CallerReference"))
+    CreateKeySigningKeyRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "HostedZoneId"))
+    CreateKeySigningKeyRequest.add_member(:key_management_service_arn, Shapes::ShapeRef.new(shape: SigningKeyString, required: true, location_name: "KeyManagementServiceArn"))
+    CreateKeySigningKeyRequest.add_member(:name, Shapes::ShapeRef.new(shape: SigningKeyName, required: true, location_name: "Name"))
+    CreateKeySigningKeyRequest.add_member(:status, Shapes::ShapeRef.new(shape: SigningKeyStatus, required: true, location_name: "Status"))
+    CreateKeySigningKeyRequest.struct_class = Types::CreateKeySigningKeyRequest
+
+    CreateKeySigningKeyResponse.add_member(:change_info, Shapes::ShapeRef.new(shape: ChangeInfo, required: true, location_name: "ChangeInfo"))
+    CreateKeySigningKeyResponse.add_member(:key_signing_key, Shapes::ShapeRef.new(shape: KeySigningKey, required: true, location_name: "KeySigningKey"))
+    CreateKeySigningKeyResponse.add_member(:location, Shapes::ShapeRef.new(shape: ResourceURI, required: true, location: "header", location_name: "Location"))
+    CreateKeySigningKeyResponse.struct_class = Types::CreateKeySigningKeyResponse
+
     CreateQueryLoggingConfigRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "HostedZoneId"))
     CreateQueryLoggingConfigRequest.add_member(:cloud_watch_logs_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogsLogGroupArn, required: true, location_name: "CloudWatchLogsLogGroupArn"))
     CreateQueryLoggingConfigRequest.struct_class = Types::CreateQueryLoggingConfigRequest
@@ -483,6 +538,20 @@ module Aws::Route53
     CreateVPCAssociationAuthorizationResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VPC, required: true, location_name: "VPC"))
     CreateVPCAssociationAuthorizationResponse.struct_class = Types::CreateVPCAssociationAuthorizationResponse
 
+    DNSSECNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DNSSECNotFound.struct_class = Types::DNSSECNotFound
+
+    DNSSECStatus.add_member(:serve_signature, Shapes::ShapeRef.new(shape: ServeSignature, location_name: "ServeSignature"))
+    DNSSECStatus.add_member(:status_message, Shapes::ShapeRef.new(shape: SigningKeyStatusMessage, location_name: "StatusMessage"))
+    DNSSECStatus.struct_class = Types::DNSSECStatus
+
+    DeactivateKeySigningKeyRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "HostedZoneId"))
+    DeactivateKeySigningKeyRequest.add_member(:name, Shapes::ShapeRef.new(shape: SigningKeyName, required: true, location: "uri", location_name: "Name"))
+    DeactivateKeySigningKeyRequest.struct_class = Types::DeactivateKeySigningKeyRequest
+
+    DeactivateKeySigningKeyResponse.add_member(:change_info, Shapes::ShapeRef.new(shape: ChangeInfo, required: true, location_name: "ChangeInfo"))
+    DeactivateKeySigningKeyResponse.struct_class = Types::DeactivateKeySigningKeyResponse
+
     DelegationSet.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
     DelegationSet.add_member(:caller_reference, Shapes::ShapeRef.new(shape: Nonce, location_name: "CallerReference"))
     DelegationSet.add_member(:name_servers, Shapes::ShapeRef.new(shape: DelegationSetNameServers, required: true, location_name: "NameServers"))
@@ -518,6 +587,13 @@ module Aws::Route53
     DeleteHostedZoneResponse.add_member(:change_info, Shapes::ShapeRef.new(shape: ChangeInfo, required: true, location_name: "ChangeInfo"))
     DeleteHostedZoneResponse.struct_class = Types::DeleteHostedZoneResponse
 
+    DeleteKeySigningKeyRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "HostedZoneId"))
+    DeleteKeySigningKeyRequest.add_member(:name, Shapes::ShapeRef.new(shape: SigningKeyName, required: true, location: "uri", location_name: "Name"))
+    DeleteKeySigningKeyRequest.struct_class = Types::DeleteKeySigningKeyRequest
+
+    DeleteKeySigningKeyResponse.add_member(:change_info, Shapes::ShapeRef.new(shape: ChangeInfo, required: true, location_name: "ChangeInfo"))
+    DeleteKeySigningKeyResponse.struct_class = Types::DeleteKeySigningKeyResponse
+
     DeleteQueryLoggingConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: QueryLoggingConfigId, required: true, location: "uri", location_name: "Id"))
     DeleteQueryLoggingConfigRequest.struct_class = Types::DeleteQueryLoggingConfigRequest
 
@@ -551,6 +627,12 @@ module Aws::Route53
 
     DimensionList.member = Shapes::ShapeRef.new(shape: Dimension, location_name: "Dimension")
 
+    DisableHostedZoneDNSSECRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
+    DisableHostedZoneDNSSECRequest.struct_class = Types::DisableHostedZoneDNSSECRequest
+
+    DisableHostedZoneDNSSECResponse.add_member(:change_info, Shapes::ShapeRef.new(shape: ChangeInfo, required: true, location_name: "ChangeInfo"))
+    DisableHostedZoneDNSSECResponse.struct_class = Types::DisableHostedZoneDNSSECResponse
+
     DisassociateVPCFromHostedZoneRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
     DisassociateVPCFromHostedZoneRequest.add_member(:vpc, Shapes::ShapeRef.new(shape: VPC, required: true, location_name: "VPC"))
     DisassociateVPCFromHostedZoneRequest.add_member(:comment, Shapes::ShapeRef.new(shape: DisassociateVPCComment, location_name: "Comment"))
@@ -558,6 +640,12 @@ module Aws::Route53
 
     DisassociateVPCFromHostedZoneResponse.add_member(:change_info, Shapes::ShapeRef.new(shape: ChangeInfo, required: true, location_name: "ChangeInfo"))
     DisassociateVPCFromHostedZoneResponse.struct_class = Types::DisassociateVPCFromHostedZoneResponse
+
+    EnableHostedZoneDNSSECRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
+    EnableHostedZoneDNSSECRequest.struct_class = Types::EnableHostedZoneDNSSECRequest
+
+    EnableHostedZoneDNSSECResponse.add_member(:change_info, Shapes::ShapeRef.new(shape: ChangeInfo, required: true, location_name: "ChangeInfo"))
+    EnableHostedZoneDNSSECResponse.struct_class = Types::EnableHostedZoneDNSSECResponse
 
     ErrorMessages.member = Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message")
 
@@ -593,6 +681,13 @@ module Aws::Route53
 
     GetCheckerIpRangesResponse.add_member(:checker_ip_ranges, Shapes::ShapeRef.new(shape: CheckerIpRanges, required: true, location_name: "CheckerIpRanges"))
     GetCheckerIpRangesResponse.struct_class = Types::GetCheckerIpRangesResponse
+
+    GetDNSSECRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
+    GetDNSSECRequest.struct_class = Types::GetDNSSECRequest
+
+    GetDNSSECResponse.add_member(:status, Shapes::ShapeRef.new(shape: DNSSECStatus, required: true, location_name: "Status"))
+    GetDNSSECResponse.add_member(:key_signing_keys, Shapes::ShapeRef.new(shape: KeySigningKeys, required: true, location_name: "KeySigningKeys"))
+    GetDNSSECResponse.struct_class = Types::GetDNSSECResponse
 
     GetGeoLocationRequest.add_member(:continent_code, Shapes::ShapeRef.new(shape: GeoLocationContinentCode, location: "querystring", location_name: "continentcode"))
     GetGeoLocationRequest.add_member(:country_code, Shapes::ShapeRef.new(shape: GeoLocationCountryCode, location: "querystring", location_name: "countrycode"))
@@ -763,6 +858,9 @@ module Aws::Route53
     HostedZoneOwner.add_member(:owning_service, Shapes::ShapeRef.new(shape: HostedZoneOwningService, location_name: "OwningService"))
     HostedZoneOwner.struct_class = Types::HostedZoneOwner
 
+    HostedZonePartiallyDelegated.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    HostedZonePartiallyDelegated.struct_class = Types::HostedZonePartiallyDelegated
+
     HostedZoneSummaries.member = Shapes::ShapeRef.new(shape: HostedZoneSummary, location_name: "HostedZoneSummary")
 
     HostedZoneSummary.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "HostedZoneId"))
@@ -791,14 +889,58 @@ module Aws::Route53
     InvalidInput.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidInput.struct_class = Types::InvalidInput
 
+    InvalidKMSArn.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidKMSArn.struct_class = Types::InvalidKMSArn
+
+    InvalidKeySigningKeyName.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidKeySigningKeyName.struct_class = Types::InvalidKeySigningKeyName
+
+    InvalidKeySigningKeyStatus.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidKeySigningKeyStatus.struct_class = Types::InvalidKeySigningKeyStatus
+
     InvalidPaginationToken.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidPaginationToken.struct_class = Types::InvalidPaginationToken
+
+    InvalidSigningStatus.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidSigningStatus.struct_class = Types::InvalidSigningStatus
 
     InvalidTrafficPolicyDocument.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidTrafficPolicyDocument.struct_class = Types::InvalidTrafficPolicyDocument
 
     InvalidVPCId.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidVPCId.struct_class = Types::InvalidVPCId
+
+    KeySigningKey.add_member(:name, Shapes::ShapeRef.new(shape: SigningKeyName, location_name: "Name"))
+    KeySigningKey.add_member(:kms_arn, Shapes::ShapeRef.new(shape: SigningKeyString, location_name: "KmsArn"))
+    KeySigningKey.add_member(:flag, Shapes::ShapeRef.new(shape: SigningKeyInteger, location_name: "Flag"))
+    KeySigningKey.add_member(:signing_algorithm_mnemonic, Shapes::ShapeRef.new(shape: SigningKeyString, location_name: "SigningAlgorithmMnemonic"))
+    KeySigningKey.add_member(:signing_algorithm_type, Shapes::ShapeRef.new(shape: SigningKeyInteger, location_name: "SigningAlgorithmType"))
+    KeySigningKey.add_member(:digest_algorithm_mnemonic, Shapes::ShapeRef.new(shape: SigningKeyString, location_name: "DigestAlgorithmMnemonic"))
+    KeySigningKey.add_member(:digest_algorithm_type, Shapes::ShapeRef.new(shape: SigningKeyInteger, location_name: "DigestAlgorithmType"))
+    KeySigningKey.add_member(:key_tag, Shapes::ShapeRef.new(shape: SigningKeyTag, location_name: "KeyTag"))
+    KeySigningKey.add_member(:digest_value, Shapes::ShapeRef.new(shape: SigningKeyString, location_name: "DigestValue"))
+    KeySigningKey.add_member(:public_key, Shapes::ShapeRef.new(shape: SigningKeyString, location_name: "PublicKey"))
+    KeySigningKey.add_member(:ds_record, Shapes::ShapeRef.new(shape: SigningKeyString, location_name: "DSRecord"))
+    KeySigningKey.add_member(:dnskey_record, Shapes::ShapeRef.new(shape: SigningKeyString, location_name: "DNSKEYRecord"))
+    KeySigningKey.add_member(:status, Shapes::ShapeRef.new(shape: SigningKeyStatus, location_name: "Status"))
+    KeySigningKey.add_member(:status_message, Shapes::ShapeRef.new(shape: SigningKeyStatusMessage, location_name: "StatusMessage"))
+    KeySigningKey.add_member(:created_date, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "CreatedDate"))
+    KeySigningKey.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "LastModifiedDate"))
+    KeySigningKey.struct_class = Types::KeySigningKey
+
+    KeySigningKeyAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KeySigningKeyAlreadyExists.struct_class = Types::KeySigningKeyAlreadyExists
+
+    KeySigningKeyInParentDSRecord.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KeySigningKeyInParentDSRecord.struct_class = Types::KeySigningKeyInParentDSRecord
+
+    KeySigningKeyInUse.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KeySigningKeyInUse.struct_class = Types::KeySigningKeyInUse
+
+    KeySigningKeyWithActiveStatusNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    KeySigningKeyWithActiveStatusNotFound.struct_class = Types::KeySigningKeyWithActiveStatusNotFound
+
+    KeySigningKeys.member = Shapes::ShapeRef.new(shape: KeySigningKey)
 
     LastVPCAssociation.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     LastVPCAssociation.struct_class = Types::LastVPCAssociation
@@ -1013,6 +1155,9 @@ module Aws::Route53
     NoSuchHostedZone.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     NoSuchHostedZone.struct_class = Types::NoSuchHostedZone
 
+    NoSuchKeySigningKey.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    NoSuchKeySigningKey.struct_class = Types::NoSuchKeySigningKey
+
     NoSuchQueryLoggingConfig.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     NoSuchQueryLoggingConfig.struct_class = Types::NoSuchQueryLoggingConfig
 
@@ -1116,6 +1261,9 @@ module Aws::Route53
 
     TooManyHostedZones.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     TooManyHostedZones.struct_class = Types::TooManyHostedZones
+
+    TooManyKeySigningKeys.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyKeySigningKeys.struct_class = Types::TooManyKeySigningKeys
 
     TooManyTrafficPolicies.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     TooManyTrafficPolicies.struct_class = Types::TooManyTrafficPolicies
@@ -1246,6 +1394,19 @@ module Aws::Route53
         "uid" => "route53-2013-04-01",
       }
 
+      api.add_operation(:activate_key_signing_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ActivateKeySigningKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/2013-04-01/keysigningkey/{HostedZoneId}/{Name}/activate"
+        o.input = Shapes::ShapeRef.new(shape: ActivateKeySigningKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: ActivateKeySigningKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModification)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchKeySigningKey)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKeySigningKeyStatus)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSigningStatus)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSArn)
+      end)
+
       api.add_operation(:associate_vpc_with_hosted_zone, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateVPCWithHostedZone"
         o.http_method = "POST"
@@ -1339,6 +1500,29 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: ConflictingDomainExists)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchDelegationSet)
         o.errors << Shapes::ShapeRef.new(shape: DelegationSetNotReusable)
+      end)
+
+      api.add_operation(:create_key_signing_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateKeySigningKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/2013-04-01/keysigningkey"
+        o.input = Shapes::ShapeRef.new(shape: CreateKeySigningKeyRequest,
+          location_name: "CreateKeySigningKeyRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: CreateKeySigningKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSArn)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKeySigningKeyStatus)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSigningStatus)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKeySigningKeyName)
+        o.errors << Shapes::ShapeRef.new(shape: KeySigningKeyAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyKeySigningKeys)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModification)
       end)
 
       api.add_operation(:create_query_logging_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1451,6 +1635,20 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
       end)
 
+      api.add_operation(:deactivate_key_signing_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeactivateKeySigningKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/2013-04-01/keysigningkey/{HostedZoneId}/{Name}/deactivate"
+        o.input = Shapes::ShapeRef.new(shape: DeactivateKeySigningKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeactivateKeySigningKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModification)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchKeySigningKey)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKeySigningKeyStatus)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSigningStatus)
+        o.errors << Shapes::ShapeRef.new(shape: KeySigningKeyInUse)
+        o.errors << Shapes::ShapeRef.new(shape: KeySigningKeyInParentDSRecord)
+      end)
+
       api.add_operation(:delete_health_check, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteHealthCheck"
         o.http_method = "DELETE"
@@ -1473,6 +1671,19 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDomainName)
+      end)
+
+      api.add_operation(:delete_key_signing_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteKeySigningKey"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2013-04-01/keysigningkey/{HostedZoneId}/{Name}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteKeySigningKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteKeySigningKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModification)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchKeySigningKey)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKeySigningKeyStatus)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSigningStatus)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSArn)
       end)
 
       api.add_operation(:delete_query_logging_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1539,6 +1750,21 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
       end)
 
+      api.add_operation(:disable_hosted_zone_dnssec, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableHostedZoneDNSSEC"
+        o.http_method = "POST"
+        o.http_request_uri = "/2013-04-01/hostedzone/{Id}/disable-dnssec"
+        o.input = Shapes::ShapeRef.new(shape: DisableHostedZoneDNSSECRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableHostedZoneDNSSECResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModification)
+        o.errors << Shapes::ShapeRef.new(shape: KeySigningKeyInParentDSRecord)
+        o.errors << Shapes::ShapeRef.new(shape: DNSSECNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKeySigningKeyStatus)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSArn)
+      end)
+
       api.add_operation(:disassociate_vpc_from_hosted_zone, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateVPCFromHostedZone"
         o.http_method = "POST"
@@ -1555,6 +1781,22 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: VPCAssociationNotFound)
         o.errors << Shapes::ShapeRef.new(shape: LastVPCAssociation)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+      end)
+
+      api.add_operation(:enable_hosted_zone_dnssec, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableHostedZoneDNSSEC"
+        o.http_method = "POST"
+        o.http_request_uri = "/2013-04-01/hostedzone/{Id}/enable-dnssec"
+        o.input = Shapes::ShapeRef.new(shape: EnableHostedZoneDNSSECRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableHostedZoneDNSSECResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModification)
+        o.errors << Shapes::ShapeRef.new(shape: KeySigningKeyWithActiveStatusNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSArn)
+        o.errors << Shapes::ShapeRef.new(shape: HostedZonePartiallyDelegated)
+        o.errors << Shapes::ShapeRef.new(shape: DNSSECNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKeySigningKeyStatus)
       end)
 
       api.add_operation(:get_account_limit, Seahorse::Model::Operation.new.tap do |o|
@@ -1582,6 +1824,16 @@ module Aws::Route53
         o.http_request_uri = "/2013-04-01/checkeripranges"
         o.input = Shapes::ShapeRef.new(shape: GetCheckerIpRangesRequest)
         o.output = Shapes::ShapeRef.new(shape: GetCheckerIpRangesResponse)
+      end)
+
+      api.add_operation(:get_dnssec, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDNSSEC"
+        o.http_method = "GET"
+        o.http_request_uri = "/2013-04-01/hostedzone/{Id}/dnssec"
+        o.input = Shapes::ShapeRef.new(shape: GetDNSSECRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDNSSECResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
       api.add_operation(:get_geo_location, Seahorse::Model::Operation.new.tap do |o|

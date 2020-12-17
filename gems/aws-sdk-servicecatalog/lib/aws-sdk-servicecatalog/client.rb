@@ -984,8 +984,13 @@ module Aws::ServiceCatalog
     # `AWSOrganizationsAccess` must be enabled in order to create a
     # portfolio share to an organization node.
     #
-    # You can't share a shared resource. This includes portfolios that
-    # contain a shared product.
+    # You can't share a shared resource, including portfolios that contain
+    # a shared product.
+    #
+    # If the portfolio share with the specified account or organization node
+    # already exists, this action will have no effect and will not return an
+    # error. To update an existing share, you must use the `
+    # UpdatePortfolioShare` API instead.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1010,6 +1015,10 @@ module Aws::ServiceCatalog
     #   in order for the administrator to monitor the status of the
     #   `PortfolioShare` creation process.
     #
+    # @option params [Boolean] :share_tag_options
+    #   Enables or disables `TagOptions ` sharing when creating the portfolio
+    #   share. If this flag is not provided, TagOptions sharing is disabled.
+    #
     # @return [Types::CreatePortfolioShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePortfolioShareOutput#portfolio_share_token #portfolio_share_token} => String
@@ -1024,6 +1033,7 @@ module Aws::ServiceCatalog
     #       type: "ORGANIZATION", # accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
     #       value: "OrganizationNodeValue",
     #     },
+    #     share_tag_options: false,
     #   })
     #
     # @example Response structure
@@ -1042,6 +1052,11 @@ module Aws::ServiceCatalog
     # Creates a product.
     #
     # A delegated admin is authorized to invoke this command.
+    #
+    # The user or role that performs this operation must have the
+    # `cloudformation:GetTemplate` IAM policy permission. This policy
+    # permission is required when using the `ImportFromPhysicalId` template
+    # source in the information data section.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1073,6 +1088,8 @@ module Aws::ServiceCatalog
     # @option params [String] :support_url
     #   The contact URL for product support.
     #
+    #   `^https?:\/\// `/ is the pattern used to validate SupportUrl.
+    #
     # @option params [required, String] :product_type
     #   The type of product.
     #
@@ -1080,8 +1097,7 @@ module Aws::ServiceCatalog
     #   One or more tags.
     #
     # @option params [required, Types::ProvisioningArtifactProperties] :provisioning_artifact_parameters
-    #   The configuration of the provisioning artifact. The `info` field
-    #   accepts `ImportFromPhysicalID`.
+    #   The configuration of the provisioning artifact.
     #
     # @option params [required, String] :idempotency_token
     #   A unique identifier that you provide to ensure idempotency. If
@@ -1288,6 +1304,11 @@ module Aws::ServiceCatalog
     # You cannot create a provisioning artifact for a product that was
     # shared with you.
     #
+    # The user or role that performs this operation must have the
+    # `cloudformation:GetTemplate` IAM policy permission. This policy
+    # permission is required when using the `ImportFromPhysicalId` template
+    # source in the information data section.
+    #
     # @option params [String] :accept_language
     #   The language code.
     #
@@ -1301,8 +1322,7 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #
     # @option params [required, Types::ProvisioningArtifactProperties] :parameters
-    #   The configuration for the provisioning artifact. The `info` field
-    #   accepts `ImportFromPhysicalID`.
+    #   The configuration for the provisioning artifact.
     #
     # @option params [required, String] :idempotency_token
     #   A unique identifier that you provide to ensure idempotency. If
@@ -1477,6 +1497,7 @@ module Aws::ServiceCatalog
     #   resp.tag_option_detail.value #=> String
     #   resp.tag_option_detail.active #=> Boolean
     #   resp.tag_option_detail.id #=> String
+    #   resp.tag_option_detail.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateTagOption AWS API Documentation
     #
@@ -1922,6 +1943,7 @@ module Aws::ServiceCatalog
     #   resp.tag_options[0].value #=> String
     #   resp.tag_options[0].active #=> Boolean
     #   resp.tag_options[0].id #=> String
+    #   resp.tag_options[0].owner #=> String
     #   resp.budgets #=> Array
     #   resp.budgets[0].budget_name #=> String
     #
@@ -1976,6 +1998,76 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def describe_portfolio_share_status(params = {}, options = {})
       req = build_request(:describe_portfolio_share_status, params)
+      req.send_request(options)
+    end
+
+    # Returns a summary of each of the portfolio shares that were created
+    # for the specified portfolio.
+    #
+    # You can use this API to determine which accounts or organizational
+    # nodes this portfolio have been shared, whether the recipient entity
+    # has imported the share, and whether TagOptions are included with the
+    # share.
+    #
+    # The `PortfolioId` and `Type` parameters are both required.
+    #
+    # @option params [required, String] :portfolio_id
+    #   The unique identifier of the portfolio for which shares will be
+    #   retrieved.
+    #
+    # @option params [required, String] :type
+    #   The type of portfolio share to summarize. This field acts as a filter
+    #   on the type of portfolio share, which can be one of the following:
+    #
+    #   1\. `ACCOUNT` - Represents an external account to account share.
+    #
+    #   2\. `ORGANIZATION` - Represents a share to an organization. This share
+    #   is available to every account in the organization.
+    #
+    #   3\. `ORGANIZATIONAL_UNIT` - Represents a share to an organizational
+    #   unit.
+    #
+    #   4\. `ORGANIZATION_MEMBER_ACCOUNT` - Represents a share to an account in
+    #   the organization.
+    #
+    # @option params [String] :page_token
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of items to return with this call.
+    #
+    # @return [Types::DescribePortfolioSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePortfolioSharesOutput#next_page_token #next_page_token} => String
+    #   * {Types::DescribePortfolioSharesOutput#portfolio_share_details #portfolio_share_details} => Array&lt;Types::PortfolioShareDetail&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_portfolio_shares({
+    #     portfolio_id: "Id", # required
+    #     type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION, ORGANIZATIONAL_UNIT, ORGANIZATION_MEMBER_ACCOUNT
+    #     page_token: "PageToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_page_token #=> String
+    #   resp.portfolio_share_details #=> Array
+    #   resp.portfolio_share_details[0].principal_id #=> String
+    #   resp.portfolio_share_details[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATIONAL_UNIT", "ORGANIZATION_MEMBER_ACCOUNT"
+    #   resp.portfolio_share_details[0].accepted #=> Boolean
+    #   resp.portfolio_share_details[0].share_tag_options #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioShares AWS API Documentation
+    #
+    # @overload describe_portfolio_shares(params = {})
+    # @param [Hash] params ({})
+    def describe_portfolio_shares(params = {}, options = {})
+      req = build_request(:describe_portfolio_shares, params)
       req.send_request(options)
     end
 
@@ -2063,6 +2155,16 @@ module Aws::ServiceCatalog
     # @option params [String] :name
     #   The product name.
     #
+    # @option params [String] :source_portfolio_id
+    #   The unique identifier of the shared portfolio that the specified
+    #   product is associated with.
+    #
+    #   You can provide this parameter to retrieve the shared TagOptions
+    #   associated with the product. If this parameter is provided and if
+    #   TagOptions sharing is enabled in the portfolio share, the API returns
+    #   both local and shared TagOptions associated with the product.
+    #   Otherwise only local TagOptions will be returned.
+    #
     # @return [Types::DescribeProductAsAdminOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeProductAsAdminOutput#product_view_detail #product_view_detail} => Types::ProductViewDetail
@@ -2077,6 +2179,7 @@ module Aws::ServiceCatalog
     #     accept_language: "AcceptLanguage",
     #     id: "Id",
     #     name: "ProductViewName",
+    #     source_portfolio_id: "Id",
     #   })
     #
     # @example Response structure
@@ -2110,6 +2213,7 @@ module Aws::ServiceCatalog
     #   resp.tag_options[0].value #=> String
     #   resp.tag_options[0].active #=> Boolean
     #   resp.tag_options[0].id #=> String
+    #   resp.tag_options[0].owner #=> String
     #   resp.budgets #=> Array
     #   resp.budgets[0].budget_name #=> String
     #
@@ -2693,6 +2797,7 @@ module Aws::ServiceCatalog
     #   resp.tag_option_detail.value #=> String
     #   resp.tag_option_detail.active #=> Boolean
     #   resp.tag_option_detail.id #=> String
+    #   resp.tag_option_detail.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeTagOption AWS API Documentation
     #
@@ -3153,19 +3258,23 @@ module Aws::ServiceCatalog
 
     # Requests the import of a resource as a Service Catalog provisioned
     # product that is associated to a Service Catalog product and
-    # provisioning artifact. Once imported all supported Service Catalog
+    # provisioning artifact. Once imported, all supported Service Catalog
     # governance actions are supported on the provisioned product.
     #
     # Resource import only supports CloudFormation stack ARNs.
     # CloudFormation StackSets and non-root nested stacks are not supported.
     #
     # The CloudFormation stack must have one of the following statuses to be
-    # imported: CREATE\_COMPLETE, UPDATE\_COMPLETE,
-    # UPDATE\_ROLLBACK\_COMPLETE, IMPORT\_COMPLETE,
-    # IMPORT\_ROLLBACK\_COMPLETE.
+    # imported: `CREATE_COMPLETE`, `UPDATE_COMPLETE`,
+    # `UPDATE_ROLLBACK_COMPLETE`, `IMPORT_COMPLETE`,
+    # `IMPORT_ROLLBACK_COMPLETE`.
     #
     # Import of the resource requires that the CloudFormation stack template
     # matches the associated Service Catalog product provisioning artifact.
+    #
+    # The user or role that performs this operation must have the
+    # `cloudformation:GetTemplate` and `cloudformation:DescribeStacks` IAM
+    # policy permissions.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -4294,6 +4403,7 @@ module Aws::ServiceCatalog
     #   resp.tag_option_details[0].value #=> String
     #   resp.tag_option_details[0].active #=> Boolean
     #   resp.tag_option_details[0].id #=> String
+    #   resp.tag_option_details[0].owner #=> String
     #   resp.page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListTagOptions AWS API Documentation
@@ -4866,7 +4976,7 @@ module Aws::ServiceCatalog
     #
     # @option params [Boolean] :retain_physical_resources
     #   When this boolean parameter is set to true, the
-    #   TerminateProvisionedProduct API deletes the Service Catalog
+    #   `TerminateProvisionedProduct` API deletes the Service Catalog
     #   provisioned product. However, it does not remove the CloudFormation
     #   stack, stack set, or the underlying resources of the deleted
     #   provisioned product. The default value is false.
@@ -5114,6 +5224,81 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def update_portfolio(params = {}, options = {})
       req = build_request(:update_portfolio, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified portfolio share. You can use this API to enable
+    # or disable TagOptions sharing for an existing portfolio share.
+    #
+    # The portfolio share cannot be updated if the ` CreatePortfolioShare`
+    # operation is `IN_PROGRESS`, as the share is not available to recipient
+    # entities. In this case, you must wait for the portfolio share to be
+    # COMPLETED.
+    #
+    # You must provide the `accountId` or organization node in the input,
+    # but not both.
+    #
+    # If the portfolio is shared to both an external account and an
+    # organization node, and both shares need to be updated, you must invoke
+    # `UpdatePortfolioShare` separately for each share type.
+    #
+    # This API cannot be used for removing the portfolio share. You must use
+    # `DeletePortfolioShare` API for that action.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [required, String] :portfolio_id
+    #   The unique identifier of the portfolio for which the share will be
+    #   updated.
+    #
+    # @option params [String] :account_id
+    #   The AWS Account Id of the recipient account. This field is required
+    #   when updating an external account to account type share.
+    #
+    # @option params [Types::OrganizationNode] :organization_node
+    #   Information about the organization node.
+    #
+    # @option params [Boolean] :share_tag_options
+    #   A flag to enable or disable TagOptions sharing for the portfolio
+    #   share. If this field is not provided, the current state of TagOptions
+    #   sharing on the portfolio share will not be modified.
+    #
+    # @return [Types::UpdatePortfolioShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePortfolioShareOutput#portfolio_share_token #portfolio_share_token} => String
+    #   * {Types::UpdatePortfolioShareOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_portfolio_share({
+    #     accept_language: "AcceptLanguage",
+    #     portfolio_id: "Id", # required
+    #     account_id: "AccountId",
+    #     organization_node: {
+    #       type: "ORGANIZATION", # accepts ORGANIZATION, ORGANIZATIONAL_UNIT, ACCOUNT
+    #       value: "OrganizationNodeValue",
+    #     },
+    #     share_tag_options: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.portfolio_share_token #=> String
+    #   resp.status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERRORS", "ERROR"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdatePortfolioShare AWS API Documentation
+    #
+    # @overload update_portfolio_share(params = {})
+    # @param [Hash] params ({})
+    def update_portfolio_share(params = {}, options = {})
+      req = build_request(:update_portfolio_share, params)
       req.send_request(options)
     end
 
@@ -5613,6 +5798,7 @@ module Aws::ServiceCatalog
     #   resp.tag_option_detail.value #=> String
     #   resp.tag_option_detail.active #=> Boolean
     #   resp.tag_option_detail.id #=> String
+    #   resp.tag_option_detail.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateTagOption AWS API Documentation
     #
@@ -5636,7 +5822,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-12-17)
+------------------
+
+* Feature - Added CreationDate and LastUpdatedDate timestamps to ListAliases API response
+
 1.39.0 (2020-09-30)
 ------------------
 
