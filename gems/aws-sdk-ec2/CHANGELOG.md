@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.219.0 (2020-12-18)
+------------------
+
+* Feature - EBS io2 volumes now supports Multi-Attach
+
 1.218.0 (2020-12-17)
 ------------------
 

@@ -2418,6 +2418,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -2785,8 +2793,8 @@ module Aws::RDS
     #   **PostgreSQL**
     #
     #   The name of the database to create when the DB instance is created. If
-    #   this parameter isn't specified, the default "postgres" database is
-    #   created in the DB instance.
+    #   this parameter isn't specified, no database is created in the DB
+    #   instance.
     #
     #   Constraints:
     #
@@ -3749,6 +3757,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -4072,9 +4081,9 @@ module Aws::RDS
     #   name for the AWS KMS CMK.
     #
     #   If you create an encrypted read replica in the same AWS Region as the
-    #   source DB instance, then you do not have to specify a value for this
-    #   parameter. The read replica is encrypted with the same AWS KMS CMK as
-    #   the source DB instance.
+    #   source DB instance, then do not specify a value for this parameter. A
+    #   read replica in the same Region is always encrypted with the same AWS
+    #   KMS CMK as the source DB instance.
     #
     #   If you create an encrypted read replica in a different AWS Region,
     #   then you must specify a AWS KMS key identifier for the destination AWS
@@ -4396,6 +4405,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -5564,6 +5574,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -5935,6 +5953,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -7630,6 +7649,14 @@ module Aws::RDS
     #   resp.db_clusters[0].tag_list[0].value #=> String
     #   resp.db_clusters[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_clusters[0].global_write_forwarding_requested #=> Boolean
+    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_clusters[0].pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_clusters[0].pending_modified_values.master_user_password #=> String
+    #   resp.db_clusters[0].pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_clusters[0].pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -8072,6 +8099,7 @@ module Aws::RDS
     #   resp.db_instances[0].pending_modified_values.processor_features #=> Array
     #   resp.db_instances[0].pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instances[0].pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instances[0].pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instances[0].latest_restorable_time #=> Time
     #   resp.db_instances[0].multi_az #=> Boolean
     #   resp.db_instances[0].engine_version #=> String
@@ -11026,6 +11054,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -11807,6 +11843,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -12893,6 +12937,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -13986,6 +14031,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -14173,6 +14219,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -14388,6 +14442,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -15403,6 +15458,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -15797,6 +15860,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -16168,6 +16239,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -16678,6 +16757,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -17246,6 +17326,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -17841,6 +17922,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -18180,6 +18262,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -18275,6 +18365,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -18726,6 +18817,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -18828,6 +18927,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -18982,7 +19082,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

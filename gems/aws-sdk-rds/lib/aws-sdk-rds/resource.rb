@@ -623,8 +623,8 @@ module Aws::RDS
     #   **PostgreSQL**
     #
     #   The name of the database to create when the DB instance is created. If
-    #   this parameter isn't specified, the default "postgres" database is
-    #   created in the DB instance.
+    #   this parameter isn't specified, no database is created in the DB
+    #   instance.
     #
     #   Constraints:
     #

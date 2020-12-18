@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2020-12-18)
+------------------
+
+* Feature - Adds IAM DB authentication information to the PendingModifiedValues output of the DescribeDBInstances API. Adds ClusterPendingModifiedValues information to the output of the DescribeDBClusters API.
+
 1.107.0 (2020-12-04)
 ------------------
 

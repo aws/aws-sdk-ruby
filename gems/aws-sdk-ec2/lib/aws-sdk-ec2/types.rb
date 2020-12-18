@@ -10355,7 +10355,7 @@ module Aws::EC2
     #   Indicates whether to enable Amazon EBS Multi-Attach. If you enable
     #   Multi-Attach, you can attach the volume to up to 16 [Instances built
     #   on the Nitro System][1] in the same Availability Zone. This
-    #   parameter is supported with `io1` volumes only. For more
+    #   parameter is supported with `io1` and `io2` volumes only. For more
     #   information, see [ Amazon EBS Multi-Attach][2] in the *Amazon
     #   Elastic Compute Cloud User Guide*.
     #
@@ -39007,6 +39007,7 @@ module Aws::EC2
     #         volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #         iops: 1,
     #         throughput: 1,
+    #         multi_attach_enabled: false,
     #       }
     #
     # @!attribute [rw] dry_run
@@ -39075,6 +39076,20 @@ module Aws::EC2
     #   Valid Range: Minimum value of 125. Maximum value of 1000.
     #   @return [Integer]
     #
+    # @!attribute [rw] multi_attach_enabled
+    #   Specifies whether to enable Amazon EBS Multi-Attach. If you enable
+    #   Multi-Attach, you can attach the volume to up to 16 [ Nitro-based
+    #   instances][1] in the same Availability Zone. This parameter is
+    #   supported with `io1` and `io2` volumes only. For more information,
+    #   see [ Amazon EBS Multi-Attach][2] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVolumeRequest AWS API Documentation
     #
     class ModifyVolumeRequest < Struct.new(
@@ -39083,7 +39098,8 @@ module Aws::EC2
       :size,
       :volume_type,
       :iops,
-      :throughput)
+      :throughput,
+      :multi_attach_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -54046,6 +54062,10 @@ module Aws::EC2
     #   The target throughput of the volume, in MiB/s.
     #   @return [Integer]
     #
+    # @!attribute [rw] target_multi_attach_enabled
+    #   The target setting for Amazon EBS Multi-Attach.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] original_size
     #   The original size of the volume, in GiB.
     #   @return [Integer]
@@ -54061,6 +54081,10 @@ module Aws::EC2
     # @!attribute [rw] original_throughput
     #   The original throughput of the volume, in MiB/s.
     #   @return [Integer]
+    #
+    # @!attribute [rw] original_multi_attach_enabled
+    #   The original setting for Amazon EBS Multi-Attach.
+    #   @return [Boolean]
     #
     # @!attribute [rw] progress
     #   The modification progress, from 0 to 100 percent complete.
@@ -54084,10 +54108,12 @@ module Aws::EC2
       :target_iops,
       :target_volume_type,
       :target_throughput,
+      :target_multi_attach_enabled,
       :original_size,
       :original_iops,
       :original_volume_type,
       :original_throughput,
+      :original_multi_attach_enabled,
       :progress,
       :start_time,
       :end_time)

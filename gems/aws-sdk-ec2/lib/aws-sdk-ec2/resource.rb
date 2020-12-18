@@ -1276,9 +1276,9 @@ module Aws::EC2
     #   Indicates whether to enable Amazon EBS Multi-Attach. If you enable
     #   Multi-Attach, you can attach the volume to up to 16 [Instances built
     #   on the Nitro System][1] in the same Availability Zone. This parameter
-    #   is supported with `io1` volumes only. For more information, see [
-    #   Amazon EBS Multi-Attach][2] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   is supported with `io1` and `io2` volumes only. For more information,
+    #   see [ Amazon EBS Multi-Attach][2] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
     #
     #
     #

@@ -755,6 +755,45 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # This data type is used as a response element in the `ModifyDBCluster`
+    # operation and contains changes that will be applied during the next
+    # maintenance window.
+    #
+    # @!attribute [rw] pending_cloudwatch_logs_exports
+    #   A list of the log types whose configuration is still pending. In
+    #   other words, these log types are in the process of being activated
+    #   or deactivated.
+    #   @return [Types::PendingCloudwatchLogsExports]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DBClusterIdentifier for the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_user_password
+    #   The master credentials for the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_database_authentication_enabled
+    #   Whether mapping of AWS Identity and Access Management (IAM) accounts
+    #   to database accounts is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] engine_version
+    #   The database engine version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ClusterPendingModifiedValues AWS API Documentation
+    #
+    class ClusterPendingModifiedValues < Struct.new(
+      :pending_cloudwatch_logs_exports,
+      :db_cluster_identifier,
+      :master_user_password,
+      :iam_database_authentication_enabled,
+      :engine_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the settings that control the size and behavior of the
     # connection pool associated with a `DBProxyTargetGroup`.
     #
@@ -2485,8 +2524,8 @@ module Aws::RDS
     #   **PostgreSQL**
     #
     #   The name of the database to create when the DB instance is created.
-    #   If this parameter isn't specified, the default "postgres"
-    #   database is created in the DB instance.
+    #   If this parameter isn't specified, no database is created in the DB
+    #   instance.
     #
     #   Constraints:
     #
@@ -3709,9 +3748,9 @@ module Aws::RDS
     #   alias name for the AWS KMS CMK.
     #
     #   If you create an encrypted read replica in the same AWS Region as
-    #   the source DB instance, then you do not have to specify a value for
-    #   this parameter. The read replica is encrypted with the same AWS KMS
-    #   CMK as the source DB instance.
+    #   the source DB instance, then do not specify a value for this
+    #   parameter. A read replica in the same Region is always encrypted
+    #   with the same AWS KMS CMK as the source DB instance.
     #
     #   If you create an encrypted read replica in a different AWS Region,
     #   then you must specify a AWS KMS key identifier for the destination
@@ -5080,6 +5119,12 @@ module Aws::RDS
     #   cluster.
     #   @return [Boolean]
     #
+    # @!attribute [rw] pending_modified_values
+    #   Specifies that changes to the DB cluster are pending. This element
+    #   is only included when changes are pending. Specific changes are
+    #   identified by subelements.
+    #   @return [Types::ClusterPendingModifiedValues]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -5137,7 +5182,8 @@ module Aws::RDS
       :domain_memberships,
       :tag_list,
       :global_write_forwarding_status,
-      :global_write_forwarding_requested)
+      :global_write_forwarding_requested,
+      :pending_modified_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12039,6 +12085,10 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The `GlobalClusterIdentifier` already exists. Choose a new global
+    # database identifier (unique name) to create a new global database
+    # cluster.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalClusterAlreadyExistsFault AWS API Documentation
     #
     class GlobalClusterAlreadyExistsFault < Aws::EmptyStructure; end
@@ -12078,10 +12128,16 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The `GlobalClusterIdentifier` doesn't refer to an existing global
+    # database cluster.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalClusterNotFoundFault AWS API Documentation
     #
     class GlobalClusterNotFoundFault < Aws::EmptyStructure; end
 
+    # The number of global database clusters for this account is already at
+    # the maximum allowed.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalClusterQuotaExceededFault AWS API Documentation
     #
     class GlobalClusterQuotaExceededFault < Aws::EmptyStructure; end
@@ -12469,6 +12525,9 @@ module Aws::RDS
     #
     class InvalidExportTaskStateFault < Aws::EmptyStructure; end
 
+    # The global cluster is in an invalid state and can't perform the
+    # requested operation.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidGlobalClusterStateFault AWS API Documentation
     #
     class InvalidGlobalClusterStateFault < Aws::EmptyStructure; end
@@ -15575,39 +15634,38 @@ module Aws::RDS
     end
 
     # This data type is used as a response element in the `ModifyDBInstance`
-    # action.
+    # action and contains changes that will be applied during the next
+    # maintenance window.
     #
     # @!attribute [rw] db_instance_class
-    #   Contains the new `DBInstanceClass` for the DB instance that will be
-    #   applied or is currently being applied.
+    #   The name of the compute and memory capacity class for the DB
+    #   instance.
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
-    #   Contains the new `AllocatedStorage` size for the DB instance that
-    #   will be applied or is currently being applied.
+    #   The allocated storage size for the DB instance specified in
+    #   gibibytes .
     #   @return [Integer]
     #
     # @!attribute [rw] master_user_password
-    #   Contains the pending or currently-in-progress change of the master
-    #   credentials for the DB instance.
+    #   The master credentials for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   Specifies the pending port for the DB instance.
+    #   The port for the DB instance.
     #   @return [Integer]
     #
     # @!attribute [rw] backup_retention_period
-    #   Specifies the pending number of days for which automated backups are
-    #   retained.
+    #   The number of days for which automated backups are retained.
     #   @return [Integer]
     #
     # @!attribute [rw] multi_az
-    #   Indicates that the Single-AZ DB instance is to change to a Multi-AZ
+    #   Indicates that the Single-AZ DB instance will change to a Multi-AZ
     #   deployment.
     #   @return [Boolean]
     #
     # @!attribute [rw] engine_version
-    #   Indicates the database engine version.
+    #   The database engine version.
     #   @return [String]
     #
     # @!attribute [rw] license_model
@@ -15618,25 +15676,23 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] iops
-    #   Specifies the new Provisioned IOPS value for the DB instance that
-    #   will be applied or is currently being applied.
+    #   The Provisioned IOPS value for the DB instance.
     #   @return [Integer]
     #
     # @!attribute [rw] db_instance_identifier
-    #   Contains the new `DBInstanceIdentifier` for the DB instance that
-    #   will be applied or is currently being applied.
+    #   The database identifier for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] storage_type
-    #   Specifies the storage type to be associated with the DB instance.
+    #   The storage type of the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] ca_certificate_identifier
-    #   Specifies the identifier of the CA certificate for the DB instance.
+    #   The identifier of the CA certificate for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_name
-    #   The new DB subnet group for the DB instance.
+    #   The DB subnet group for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] pending_cloudwatch_logs_exports
@@ -15649,6 +15705,11 @@ module Aws::RDS
     #   The number of CPU cores and the number of threads per core for the
     #   DB instance class of the DB instance.
     #   @return [Array<Types::ProcessorFeature>]
+    #
+    # @!attribute [rw] iam_database_authentication_enabled
+    #   Whether mapping of AWS Identity and Access Management (IAM) accounts
+    #   to database accounts is enabled.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingModifiedValues AWS API Documentation
     #
@@ -15667,7 +15728,8 @@ module Aws::RDS
       :ca_certificate_identifier,
       :db_subnet_group_name,
       :pending_cloudwatch_logs_exports,
-      :processor_features)
+      :processor_features,
+      :iam_database_authentication_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

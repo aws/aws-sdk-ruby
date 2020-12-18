@@ -9594,9 +9594,9 @@ module Aws::EC2
     #   Indicates whether to enable Amazon EBS Multi-Attach. If you enable
     #   Multi-Attach, you can attach the volume to up to 16 [Instances built
     #   on the Nitro System][1] in the same Availability Zone. This parameter
-    #   is supported with `io1` volumes only. For more information, see [
-    #   Amazon EBS Multi-Attach][2] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   is supported with `io1` and `io2` volumes only. For more information,
+    #   see [ Amazon EBS Multi-Attach][2] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
     #
     #
     #
@@ -26225,10 +26225,12 @@ module Aws::EC2
     #   resp.volumes_modifications[0].target_iops #=> Integer
     #   resp.volumes_modifications[0].target_volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
     #   resp.volumes_modifications[0].target_throughput #=> Integer
+    #   resp.volumes_modifications[0].target_multi_attach_enabled #=> Boolean
     #   resp.volumes_modifications[0].original_size #=> Integer
     #   resp.volumes_modifications[0].original_iops #=> Integer
     #   resp.volumes_modifications[0].original_volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
     #   resp.volumes_modifications[0].original_throughput #=> Integer
+    #   resp.volumes_modifications[0].original_multi_attach_enabled #=> Boolean
     #   resp.volumes_modifications[0].progress #=> Integer
     #   resp.volumes_modifications[0].start_time #=> Time
     #   resp.volumes_modifications[0].end_time #=> Time
@@ -34020,6 +34022,19 @@ module Aws::EC2
     #
     #   Valid Range: Minimum value of 125. Maximum value of 1000.
     #
+    # @option params [Boolean] :multi_attach_enabled
+    #   Specifies whether to enable Amazon EBS Multi-Attach. If you enable
+    #   Multi-Attach, you can attach the volume to up to 16 [ Nitro-based
+    #   instances][1] in the same Availability Zone. This parameter is
+    #   supported with `io1` and `io2` volumes only. For more information, see
+    #   [ Amazon EBS Multi-Attach][2] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html
+    #
     # @return [Types::ModifyVolumeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyVolumeResult#volume_modification #volume_modification} => Types::VolumeModification
@@ -34033,6 +34048,7 @@ module Aws::EC2
     #     volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #     iops: 1,
     #     throughput: 1,
+    #     multi_attach_enabled: false,
     #   })
     #
     # @example Response structure
@@ -34044,10 +34060,12 @@ module Aws::EC2
     #   resp.volume_modification.target_iops #=> Integer
     #   resp.volume_modification.target_volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
     #   resp.volume_modification.target_throughput #=> Integer
+    #   resp.volume_modification.target_multi_attach_enabled #=> Boolean
     #   resp.volume_modification.original_size #=> Integer
     #   resp.volume_modification.original_iops #=> Integer
     #   resp.volume_modification.original_volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
     #   resp.volume_modification.original_throughput #=> Integer
+    #   resp.volume_modification.original_multi_attach_enabled #=> Boolean
     #   resp.volume_modification.progress #=> Integer
     #   resp.volume_modification.start_time #=> Time
     #   resp.volume_modification.end_time #=> Time
@@ -40839,7 +40857,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.218.0'
+      context[:gem_version] = '1.219.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
