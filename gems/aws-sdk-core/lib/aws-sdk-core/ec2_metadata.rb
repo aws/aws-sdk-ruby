@@ -10,7 +10,8 @@ module Aws
     # @api private
     METADATA_TOKEN_PATH = '/latest/api/token'.freeze
 
-    # Raised when the PUT request is not valid (should never be thrown).
+    # Raised when the PUT request is not valid. This would be thrown if
+    # `token_ttl` is not an Integer.
     # @api private
     class TokenRetrievalError < RuntimeError; end
 
@@ -36,7 +37,7 @@ module Aws
     # @param [Hash] options
     # @option options [Integer] :token_ttl (21600) The session token's TTL,
     #   defaulting to 6 hours.
-    # @option options [Integer] :retries (1) The number of retries for failed
+    # @option options [Integer] :retries (3) The number of retries for failed
     #   requests.
     # @option options [String] :endpoint (169.254.169.254) The IMDS endpoint.
     # @option options [Integer] :port (80) The IMDS endpoint port.
@@ -51,7 +52,7 @@ module Aws
     #   Proc, it is called with the current number of failed retries.
     def initialize(options = {})
       @token_ttl = options[:token_ttl] || 21_600
-      @retries = options[:retries] || 1
+      @retries = options[:retries] || 3
       @backoff = backoff(options[:backoff])
 
       @endpoint = options[:endpoint] || '169.254.169.254'
