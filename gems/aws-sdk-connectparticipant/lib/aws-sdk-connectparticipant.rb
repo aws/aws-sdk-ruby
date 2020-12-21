@@ -28,7 +28,7 @@ require_relative 'aws-sdk-connectparticipant/customizations'
 # structure.
 #
 #     connect_participant = Aws::ConnectParticipant::Client.new
-#     resp = connect_participant.create_participant_connection(params)
+#     resp = connect_participant.complete_attachment_upload(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-connectparticipant/customizations'
 # @!group service
 module Aws::ConnectParticipant
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.9.0'
 
 end

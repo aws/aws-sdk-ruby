@@ -28,7 +28,9 @@ module Aws::ConnectParticipant
   #
   # ## Error Classes
   # * {AccessDeniedException}
+  # * {ConflictException}
   # * {InternalServerException}
+  # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
   # * {ValidationException}
   #
@@ -53,11 +55,41 @@ module Aws::ConnectParticipant
       end
     end
 
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ConnectParticipant::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class InternalServerException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ConnectParticipant::Types::InternalServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ConnectParticipant::Types::ServiceQuotaExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

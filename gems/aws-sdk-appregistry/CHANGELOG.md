@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2020-12-21)
+------------------
+
+* Feature - New API `SyncResouce` to update AppRegistry system tags.
+
 1.2.0 (2020-12-07)
 ------------------
 

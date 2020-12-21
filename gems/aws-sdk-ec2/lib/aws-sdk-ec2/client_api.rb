@@ -2317,6 +2317,7 @@ module Aws::EC2
     AllocateAddressRequest.add_member(:network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "NetworkBorderGroup"))
     AllocateAddressRequest.add_member(:customer_owned_ipv_4_pool, Shapes::ShapeRef.new(shape: String, location_name: "CustomerOwnedIpv4Pool"))
     AllocateAddressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    AllocateAddressRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     AllocateAddressRequest.struct_class = Types::AllocateAddressRequest
 
     AllocateAddressResult.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "publicIp"))

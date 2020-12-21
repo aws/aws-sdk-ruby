@@ -6219,8 +6219,9 @@ module Aws::APIGateway
     #   @return [Integer]
     #
     # @!attribute [rw] offset
-    #   The number of requests subtracted from the given limit in the
-    #   initial time period.
+    #   The day that a time period starts. For example, with a time period
+    #   of `WEEK`, an offset of `0` starts on Sunday, and an offset of `1`
+    #   starts on Monday.
     #   @return [Integer]
     #
     # @!attribute [rw] period

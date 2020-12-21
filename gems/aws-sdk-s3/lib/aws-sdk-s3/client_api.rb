@@ -480,7 +480,7 @@ module Aws::S3
     ResponseContentEncoding = Shapes::StringShape.new(name: 'ResponseContentEncoding')
     ResponseContentLanguage = Shapes::StringShape.new(name: 'ResponseContentLanguage')
     ResponseContentType = Shapes::StringShape.new(name: 'ResponseContentType')
-    ResponseExpires = Shapes::TimestampShape.new(name: 'ResponseExpires')
+    ResponseExpires = Shapes::TimestampShape.new(name: 'ResponseExpires', timestampFormat: "rfc822")
     Restore = Shapes::StringShape.new(name: 'Restore')
     RestoreObjectOutput = Shapes::StructureShape.new(name: 'RestoreObjectOutput')
     RestoreObjectRequest = Shapes::StructureShape.new(name: 'RestoreObjectRequest')

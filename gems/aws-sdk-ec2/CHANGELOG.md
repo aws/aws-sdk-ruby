@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.220.0 (2020-12-21)
+------------------
+
+* Feature - This release adds Tag On Create feature support for the AllocateAddress API.
+
 1.219.0 (2020-12-18)
 ------------------
 

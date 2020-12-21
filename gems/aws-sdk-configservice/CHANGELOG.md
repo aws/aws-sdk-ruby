@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2020-12-21)
+------------------
+
+* Feature - AWS Config adds support to save advanced queries. New API operations - GetStoredQuery, PutStoredQuery, ListStoredQueries, DeleteStoredQuery
+
 1.54.0 (2020-12-17)
 ------------------
 

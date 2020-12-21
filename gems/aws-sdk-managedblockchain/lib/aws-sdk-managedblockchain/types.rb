@@ -12,15 +12,24 @@ module Aws::ManagedBlockchain
 
     # You do not have sufficient access to perform this action.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/AccessDeniedException AWS API Documentation
     #
-    class AccessDeniedException < Aws::EmptyStructure; end
+    class AccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A policy type that defines the voting rules for the network. The rules
     # decide if a proposal is approved. Approval may be based on criteria
     # such as the percentage of `YES` votes and the duration of the
     # proposal. The policy applies to all proposals and is specified when
     # the network is created.
+    #
+    # Applies only to Hyperledger Fabric.
     #
     # @note When making an API call, you may pass ApprovalThresholdPolicy
     #   data as a hash:
@@ -147,7 +156,7 @@ module Aws::ManagedBlockchain
     #         client_request_token: "ClientRequestTokenString", # required
     #         name: "NameString", # required
     #         description: "DescriptionString",
-    #         framework: "HYPERLEDGER_FABRIC", # required, accepts HYPERLEDGER_FABRIC
+    #         framework: "HYPERLEDGER_FABRIC", # required, accepts HYPERLEDGER_FABRIC, ETHEREUM
     #         framework_version: "FrameworkVersionString", # required
     #         framework_configuration: {
     #           fabric: {
@@ -261,10 +270,10 @@ module Aws::ManagedBlockchain
     #       {
     #         client_request_token: "ClientRequestTokenString", # required
     #         network_id: "ResourceIdString", # required
-    #         member_id: "ResourceIdString", # required
+    #         member_id: "ResourceIdString",
     #         node_configuration: { # required
     #           instance_type: "InstanceTypeString", # required
-    #           availability_zone: "AvailabilityZoneString", # required
+    #           availability_zone: "AvailabilityZoneString",
     #           log_publishing_configuration: {
     #             fabric: {
     #               chaincode_logs: {
@@ -295,11 +304,21 @@ module Aws::ManagedBlockchain
     #   @return [String]
     #
     # @!attribute [rw] network_id
-    #   The unique identifier of the network in which this node runs.
+    #   The unique identifier of the network for the node.
+    #
+    #   Ethereum public networks have the following `NetworkId`s:
+    #
+    #   * `n-ethereum-mainnet`
+    #
+    #   * `n-ethereum-rinkeby`
+    #
+    #   * `n-ethereum-ropsten`
     #   @return [String]
     #
     # @!attribute [rw] member_id
     #   The unique identifier of the member that owns this node.
+    #
+    #   Applies only to Hyperledger Fabric.
     #   @return [String]
     #
     # @!attribute [rw] node_configuration
@@ -444,16 +463,27 @@ module Aws::ManagedBlockchain
     #
     #       {
     #         network_id: "ResourceIdString", # required
-    #         member_id: "ResourceIdString", # required
+    #         member_id: "ResourceIdString",
     #         node_id: "ResourceIdString", # required
     #       }
     #
     # @!attribute [rw] network_id
-    #   The unique identifier of the network that the node belongs to.
+    #   The unique identifier of the network that the node is on.
+    #
+    #   Ethereum public networks have the following `NetworkId`s:
+    #
+    #   * `n-ethereum-mainnet`
+    #
+    #   * `n-ethereum-rinkeby`
+    #
+    #   * `n-ethereum-ropsten`
     #   @return [String]
     #
     # @!attribute [rw] member_id
     #   The unique identifier of the member that owns this node.
+    #
+    #   Applies only to Hyperledger Fabric and is required for Hyperledger
+    #   Fabric.
     #   @return [String]
     #
     # @!attribute [rw] node_id
@@ -547,16 +577,19 @@ module Aws::ManagedBlockchain
     #
     #       {
     #         network_id: "ResourceIdString", # required
-    #         member_id: "ResourceIdString", # required
+    #         member_id: "ResourceIdString",
     #         node_id: "ResourceIdString", # required
     #       }
     #
     # @!attribute [rw] network_id
-    #   The unique identifier of the network to which the node belongs.
+    #   The unique identifier of the network that the node is on.
     #   @return [String]
     #
     # @!attribute [rw] member_id
     #   The unique identifier of the member that owns the node.
+    #
+    #   Applies only to Hyperledger Fabric and is required for Hyperledger
+    #   Fabric.
     #   @return [String]
     #
     # @!attribute [rw] node_id
@@ -657,6 +690,8 @@ module Aws::ManagedBlockchain
     # An invitation to an AWS account to create a member and join the
     # network.
     #
+    # Applies only to Hyperledger Fabric.
+    #
     # @!attribute [rw] invitation_id
     #   The unique identifier for the invitation.
     #   @return [String]
@@ -710,6 +745,8 @@ module Aws::ManagedBlockchain
     # An action to invite a specific AWS account to create a member and join
     # the network. The `InviteAction` is carried out when a `Proposal` is
     # `APPROVED`.
+    #
+    # Applies only to Hyperledger Fabric.
     #
     # @note When making an API call, you may pass InviteAction
     #   data as a hash:
@@ -852,7 +889,7 @@ module Aws::ManagedBlockchain
     #
     #       {
     #         name: "String",
-    #         framework: "HYPERLEDGER_FABRIC", # accepts HYPERLEDGER_FABRIC
+    #         framework: "HYPERLEDGER_FABRIC", # accepts HYPERLEDGER_FABRIC, ETHEREUM
     #         status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, DELETING, DELETED
     #         max_results: 1,
     #         next_token: "PaginationToken",
@@ -870,6 +907,8 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] status
     #   An optional status specifier. If provided, only networks currently
     #   in this status are listed.
+    #
+    #   Applies only to Hyperledger Fabric.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -917,8 +956,8 @@ module Aws::ManagedBlockchain
     #
     #       {
     #         network_id: "ResourceIdString", # required
-    #         member_id: "ResourceIdString", # required
-    #         status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, UPDATING, DELETING, DELETED, FAILED
+    #         member_id: "ResourceIdString",
+    #         status: "CREATING", # accepts CREATING, AVAILABLE, UNHEALTHY, CREATE_FAILED, UPDATING, DELETING, DELETED, FAILED
     #         max_results: 1,
     #         next_token: "PaginationToken",
     #       }
@@ -929,6 +968,9 @@ module Aws::ManagedBlockchain
     #
     # @!attribute [rw] member_id
     #   The unique identifier of the member who owns the nodes to list.
+    #
+    #   Applies only to Hyperledger Fabric and is required for Hyperledger
+    #   Fabric.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1015,7 +1057,7 @@ module Aws::ManagedBlockchain
     end
 
     # @!attribute [rw] proposal_votes
-    #   The listing of votes.
+    #   The list of votes.
     #   @return [Array<Types::VoteSummary>]
     #
     # @!attribute [rw] next_token
@@ -1128,6 +1170,8 @@ module Aws::ManagedBlockchain
 
     # Member configuration properties.
     #
+    # Applies only to Hyperledger Fabric.
+    #
     # @!attribute [rw] network_id
     #   The unique identifier of the network to which the member belongs.
     #   @return [String]
@@ -1197,6 +1241,8 @@ module Aws::ManagedBlockchain
     end
 
     # Configuration properties of the member.
+    #
+    # Applies only to Hyperledger Fabric.
     #
     # @note When making an API call, you may pass MemberConfiguration
     #   data as a hash:
@@ -1290,8 +1336,8 @@ module Aws::ManagedBlockchain
     #   `AdminPassword` must be at least eight characters long and no more
     #   than 32 characters. It must contain at least one uppercase letter,
     #   one lowercase letter, and one digit. It cannot have a single
-    #   quote(‘), double quote(“), forward slash(/), backward slash(\\), @,
-    #   or a space.
+    #   quotation mark (‘), a double quotation marks (“), a forward
+    #   slash(/), a backward slash(\\), @, or a space.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/MemberFabricConfiguration AWS API Documentation
@@ -1406,6 +1452,8 @@ module Aws::ManagedBlockchain
     end
 
     # A summary of configuration properties for a member.
+    #
+    # Applies only to Hyperledger Fabric.
     #
     # @!attribute [rw] id
     #   The unique identifier of the member.
@@ -1526,6 +1574,27 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
+    # Attributes of Ethereum for a network.
+    #
+    # @!attribute [rw] chain_id
+    #   The Ethereum `CHAIN_ID` associated with the Ethereum network. Chain
+    #   IDs are as follows:
+    #
+    #   * mainnet = `1`
+    #
+    #   * rinkeby = `4`
+    #
+    #   * ropsten = `3`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NetworkEthereumAttributes AWS API Documentation
+    #
+    class NetworkEthereumAttributes < Struct.new(
+      :chain_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Attributes of Hyperledger Fabric for a network.
     #
     # @!attribute [rw] ordering_service_endpoint
@@ -1585,10 +1654,16 @@ module Aws::ManagedBlockchain
     #   that uses Hyperledger Fabric.
     #   @return [Types::NetworkFabricAttributes]
     #
+    # @!attribute [rw] ethereum
+    #   Attributes of an Ethereum network for Managed Blockchain resources
+    #   participating in an Ethereum network.
+    #   @return [Types::NetworkEthereumAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NetworkFrameworkAttributes AWS API Documentation
     #
     class NetworkFrameworkAttributes < Struct.new(
-      :fabric)
+      :fabric,
+      :ethereum)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1662,14 +1737,16 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # Configuration properties of a peer node.
+    # Configuration properties of a node.
     #
     # @!attribute [rw] network_id
-    #   The unique identifier of the network that the node is in.
+    #   The unique identifier of the network that the node is on.
     #   @return [String]
     #
     # @!attribute [rw] member_id
     #   The unique identifier of the member to which the node belongs.
+    #
+    #   Applies only to Hyperledger Fabric.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -1690,12 +1767,14 @@ module Aws::ManagedBlockchain
     #
     # @!attribute [rw] log_publishing_configuration
     #   Configuration properties for logging events associated with a peer
-    #   node owned by a member in a Managed Blockchain network.
+    #   node on a Hyperledger Fabric network on Managed Blockchain.
     #   @return [Types::NodeLogPublishingConfiguration]
     #
     # @!attribute [rw] state_db
     #   The state database that the node uses. Values are `LevelDB` or
     #   `CouchDB`.
+    #
+    #   Applies only to Hyperledger Fabric.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1723,14 +1802,14 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # Configuration properties of a peer node.
+    # Configuration properties of a node.
     #
     # @note When making an API call, you may pass NodeConfiguration
     #   data as a hash:
     #
     #       {
     #         instance_type: "InstanceTypeString", # required
-    #         availability_zone: "AvailabilityZoneString", # required
+    #         availability_zone: "AvailabilityZoneString",
     #         log_publishing_configuration: {
     #           fabric: {
     #             chaincode_logs: {
@@ -1758,13 +1837,15 @@ module Aws::ManagedBlockchain
     #
     # @!attribute [rw] log_publishing_configuration
     #   Configuration properties for logging events associated with a peer
-    #   node owned by a member in a Managed Blockchain network.
+    #   node on a Hyperledger Fabric network on Managed Blockchain.
     #   @return [Types::NodeLogPublishingConfiguration]
     #
     # @!attribute [rw] state_db
     #   The state database that the node uses. Values are `LevelDB` or
     #   `CouchDB`. When using an Amazon Managed Blockchain network with
     #   Hyperledger Fabric version 1.4 or later, the default is `CouchDB`.
+    #
+    #   Applies only to Hyperledger Fabric.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NodeConfiguration AWS API Documentation
@@ -1778,8 +1859,43 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # Attributes of Hyperledger Fabric for a peer node on a Managed
-    # Blockchain network that uses Hyperledger Fabric.
+    # Attributes of an Ethereum node.
+    #
+    # @!attribute [rw] http_endpoint
+    #   The endpoint on which the Ethereum node listens to run Ethereum
+    #   JSON-RPC methods over HTTP connections from a client. Use this
+    #   endpoint in client code for smart contracts when using an HTTP
+    #   connection. Connections to this endpoint are authenticated using
+    #   [Signature Version 4][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #   @return [String]
+    #
+    # @!attribute [rw] web_socket_endpoint
+    #   The endpoint on which the Ethereum node listens to run Ethereum
+    #   JSON-RPC methods over WebSockets connections from a client. Use this
+    #   endpoint in client code for smart contracts when using a WebSockets
+    #   connection. Connections to this endpoint are authenticated using
+    #   [Signature Version 4][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NodeEthereumAttributes AWS API Documentation
+    #
+    class NodeEthereumAttributes < Struct.new(
+      :http_endpoint,
+      :web_socket_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Attributes of Hyperledger Fabric for a peer node on a Hyperledger
+    # Fabric network on Managed Blockchain.
     #
     # @!attribute [rw] peer_endpoint
     #   The endpoint that identifies the peer node for all services except
@@ -1844,24 +1960,30 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # Attributes relevant to a peer node on a Managed Blockchain network for
-    # the blockchain framework that the network uses.
+    # Attributes relevant to a node on a Managed Blockchain network for the
+    # blockchain framework that the network uses.
     #
     # @!attribute [rw] fabric
     #   Attributes of Hyperledger Fabric for a peer node on a Managed
     #   Blockchain network that uses Hyperledger Fabric.
     #   @return [Types::NodeFabricAttributes]
     #
+    # @!attribute [rw] ethereum
+    #   Attributes of Ethereum for a node on a Managed Blockchain network
+    #   that uses Ethereum.
+    #   @return [Types::NodeEthereumAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NodeFrameworkAttributes AWS API Documentation
     #
     class NodeFrameworkAttributes < Struct.new(
-      :fabric)
+      :fabric,
+      :ethereum)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Configuration properties for logging events associated with a peer
-    # node owned by a member in a Managed Blockchain network.
+    # node on a Hyperledger Fabric network on Managed Blockchain.
     #
     # @note When making an API call, you may pass NodeLogPublishingConfiguration
     #   data as a hash:
@@ -1895,7 +2017,7 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # A summary of configuration properties for a peer node.
+    # A summary of configuration properties for a node.
     #
     # @!attribute [rw] id
     #   The unique identifier of the node.
@@ -1930,6 +2052,8 @@ module Aws::ManagedBlockchain
     end
 
     # Properties of a proposal on a Managed Blockchain network.
+    #
+    # Applies only to Hyperledger Fabric.
     #
     # @!attribute [rw] proposal_id
     #   The unique identifier of the proposal.
@@ -2027,6 +2151,8 @@ module Aws::ManagedBlockchain
 
     # The actions to carry out if a proposal is `APPROVED`.
     #
+    # Applies only to Hyperledger Fabric.
+    #
     # @note When making an API call, you may pass ProposalActions
     #   data as a hash:
     #
@@ -2064,6 +2190,8 @@ module Aws::ManagedBlockchain
     end
 
     # Properties of a proposal.
+    #
+    # Applies only to Hyperledger Fabric.
     #
     # @!attribute [rw] proposal_id
     #   The unique identifier of the proposal.
@@ -2157,6 +2285,8 @@ module Aws::ManagedBlockchain
     # An action to remove a member from a Managed Blockchain network as the
     # result of a removal proposal that is `APPROVED`. The member and all
     # associated resources are deleted from the network.
+    #
+    # Applies only to Hyperledger Fabric.
     #
     # @note When making an API call, you may pass RemoveAction
     #   data as a hash:
@@ -2261,12 +2391,12 @@ module Aws::ManagedBlockchain
     #       }
     #
     # @!attribute [rw] network_id
-    #   The unique ID of the Managed Blockchain network to which the member
-    #   belongs.
+    #   The unique identifier of the Managed Blockchain network to which the
+    #   member belongs.
     #   @return [String]
     #
     # @!attribute [rw] member_id
-    #   The unique ID of the member.
+    #   The unique identifier of the member.
     #   @return [String]
     #
     # @!attribute [rw] log_publishing_configuration
@@ -2292,7 +2422,7 @@ module Aws::ManagedBlockchain
     #
     #       {
     #         network_id: "ResourceIdString", # required
-    #         member_id: "ResourceIdString", # required
+    #         member_id: "ResourceIdString",
     #         node_id: "ResourceIdString", # required
     #         log_publishing_configuration: {
     #           fabric: {
@@ -2311,16 +2441,17 @@ module Aws::ManagedBlockchain
     #       }
     #
     # @!attribute [rw] network_id
-    #   The unique ID of the Managed Blockchain network to which the node
-    #   belongs.
+    #   The unique identifier of the network that the node is on.
     #   @return [String]
     #
     # @!attribute [rw] member_id
-    #   The unique ID of the member that owns the node.
+    #   The unique identifier of the member that owns the node.
+    #
+    #   Applies only to Hyperledger Fabric.
     #   @return [String]
     #
     # @!attribute [rw] node_id
-    #   The unique ID of the node.
+    #   The unique identifier of the node.
     #   @return [String]
     #
     # @!attribute [rw] log_publishing_configuration
@@ -2385,6 +2516,8 @@ module Aws::ManagedBlockchain
 
     # Properties of an individual vote that a member cast for a proposal.
     #
+    # Applies only to Hyperledger Fabric.
+    #
     # @!attribute [rw] vote
     #   The vote value, either `YES` or `NO`.
     #   @return [String]
@@ -2408,6 +2541,8 @@ module Aws::ManagedBlockchain
     end
 
     # The voting rules for the network to decide if a proposal is accepted
+    #
+    # Applies only to Hyperledger Fabric.
     #
     # @note When making an API call, you may pass VotingPolicy
     #   data as a hash:

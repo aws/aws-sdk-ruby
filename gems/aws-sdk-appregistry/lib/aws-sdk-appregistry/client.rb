@@ -983,11 +983,55 @@ module Aws::AppRegistry
       req.send_request(options)
     end
 
+    # Syncs the resource with what is currently recorded in App registry.
+    # Specifically, the resource’s App registry system tags are synced with
+    # its associated application. The resource is removed if it is not
+    # associated with the application. The caller must have permissions to
+    # read and update the resource.
+    #
+    # @option params [required, String] :resource_type
+    #   The type of resource of which the application will be associated.
+    #
+    # @option params [required, String] :resource
+    #   An entity you can work with and specify with a name or ID. Examples
+    #   include an Amazon EC2 instance, an AWS CloudFormation stack, or an
+    #   Amazon S3 bucket.
+    #
+    # @return [Types::SyncResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SyncResourceResponse#application_arn #application_arn} => String
+    #   * {Types::SyncResourceResponse#resource_arn #resource_arn} => String
+    #   * {Types::SyncResourceResponse#action_taken #action_taken} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.sync_resource({
+    #     resource_type: "CFN_STACK", # required, accepts CFN_STACK
+    #     resource: "ResourceSpecifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_arn #=> String
+    #   resp.resource_arn #=> String
+    #   resp.action_taken #=> String, one of "START_SYNC", "NO_ACTION"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/SyncResource AWS API Documentation
+    #
+    # @overload sync_resource(params = {})
+    # @param [Hash] params ({})
+    def sync_resource(params = {}, options = {})
+      req = build_request(:sync_resource, params)
+      req.send_request(options)
+    end
+
     # Assigns one or more tags (key-value pairs) to the specified resource.
     #
     # Each tag consists of a key and an optional value. If a tag with the
     # same key is already associated with the resource, this action updates
     # its value.
+    #
+    # This operation returns an empty response if the call was successful.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon resource name (ARN) that specifies the resource.
@@ -1016,6 +1060,8 @@ module Aws::AppRegistry
     end
 
     # Removes tags from a resource.
+    #
+    # This operation returns an empty response if the call was successful.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon resource name (ARN) that specifies the resource.
@@ -1149,7 +1195,7 @@ module Aws::AppRegistry
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appregistry'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

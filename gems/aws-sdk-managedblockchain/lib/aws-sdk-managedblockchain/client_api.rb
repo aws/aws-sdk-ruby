@@ -80,6 +80,7 @@ module Aws::ManagedBlockchain
     MemberSummaryList = Shapes::ListShape.new(name: 'MemberSummaryList')
     NameString = Shapes::StringShape.new(name: 'NameString')
     Network = Shapes::StructureShape.new(name: 'Network')
+    NetworkEthereumAttributes = Shapes::StructureShape.new(name: 'NetworkEthereumAttributes')
     NetworkFabricAttributes = Shapes::StructureShape.new(name: 'NetworkFabricAttributes')
     NetworkFabricConfiguration = Shapes::StructureShape.new(name: 'NetworkFabricConfiguration')
     NetworkFrameworkAttributes = Shapes::StructureShape.new(name: 'NetworkFrameworkAttributes')
@@ -91,6 +92,7 @@ module Aws::ManagedBlockchain
     NetworkSummaryList = Shapes::ListShape.new(name: 'NetworkSummaryList')
     Node = Shapes::StructureShape.new(name: 'Node')
     NodeConfiguration = Shapes::StructureShape.new(name: 'NodeConfiguration')
+    NodeEthereumAttributes = Shapes::StructureShape.new(name: 'NodeEthereumAttributes')
     NodeFabricAttributes = Shapes::StructureShape.new(name: 'NodeFabricAttributes')
     NodeFabricLogPublishingConfiguration = Shapes::StructureShape.new(name: 'NodeFabricLogPublishingConfiguration')
     NodeFrameworkAttributes = Shapes::StructureShape.new(name: 'NodeFrameworkAttributes')
@@ -137,6 +139,7 @@ module Aws::ManagedBlockchain
     VoteValue = Shapes::StringShape.new(name: 'VoteValue')
     VotingPolicy = Shapes::StructureShape.new(name: 'VotingPolicy')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     ApprovalThresholdPolicy.add_member(:threshold_percentage, Shapes::ShapeRef.new(shape: ThresholdPercentageInt, location_name: "ThresholdPercentage"))
@@ -169,7 +172,7 @@ module Aws::ManagedBlockchain
 
     CreateNodeInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateNodeInput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "networkId"))
-    CreateNodeInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "memberId"))
+    CreateNodeInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "MemberId"))
     CreateNodeInput.add_member(:node_configuration, Shapes::ShapeRef.new(shape: NodeConfiguration, required: true, location_name: "NodeConfiguration"))
     CreateNodeInput.struct_class = Types::CreateNodeInput
 
@@ -193,7 +196,7 @@ module Aws::ManagedBlockchain
     DeleteMemberOutput.struct_class = Types::DeleteMemberOutput
 
     DeleteNodeInput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "networkId"))
-    DeleteNodeInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "memberId"))
+    DeleteNodeInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, location: "querystring", location_name: "memberId"))
     DeleteNodeInput.add_member(:node_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "nodeId"))
     DeleteNodeInput.struct_class = Types::DeleteNodeInput
 
@@ -213,7 +216,7 @@ module Aws::ManagedBlockchain
     GetNetworkOutput.struct_class = Types::GetNetworkOutput
 
     GetNodeInput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "networkId"))
-    GetNodeInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "memberId"))
+    GetNodeInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, location: "querystring", location_name: "memberId"))
     GetNodeInput.add_member(:node_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "nodeId"))
     GetNodeInput.struct_class = Types::GetNodeInput
 
@@ -281,7 +284,7 @@ module Aws::ManagedBlockchain
     ListNetworksOutput.struct_class = Types::ListNetworksOutput
 
     ListNodesInput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "networkId"))
-    ListNodesInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "memberId"))
+    ListNodesInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, location: "querystring", location_name: "memberId"))
     ListNodesInput.add_member(:status, Shapes::ShapeRef.new(shape: NodeStatus, location: "querystring", location_name: "status"))
     ListNodesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: NodeListMaxResults, location: "querystring", location_name: "maxResults"))
     ListNodesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -374,6 +377,9 @@ module Aws::ManagedBlockchain
     Network.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
     Network.struct_class = Types::Network
 
+    NetworkEthereumAttributes.add_member(:chain_id, Shapes::ShapeRef.new(shape: String, location_name: "ChainId"))
+    NetworkEthereumAttributes.struct_class = Types::NetworkEthereumAttributes
+
     NetworkFabricAttributes.add_member(:ordering_service_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "OrderingServiceEndpoint"))
     NetworkFabricAttributes.add_member(:edition, Shapes::ShapeRef.new(shape: Edition, location_name: "Edition"))
     NetworkFabricAttributes.struct_class = Types::NetworkFabricAttributes
@@ -382,6 +388,7 @@ module Aws::ManagedBlockchain
     NetworkFabricConfiguration.struct_class = Types::NetworkFabricConfiguration
 
     NetworkFrameworkAttributes.add_member(:fabric, Shapes::ShapeRef.new(shape: NetworkFabricAttributes, location_name: "Fabric"))
+    NetworkFrameworkAttributes.add_member(:ethereum, Shapes::ShapeRef.new(shape: NetworkEthereumAttributes, location_name: "Ethereum"))
     NetworkFrameworkAttributes.struct_class = Types::NetworkFrameworkAttributes
 
     NetworkFrameworkConfiguration.add_member(:fabric, Shapes::ShapeRef.new(shape: NetworkFabricConfiguration, location_name: "Fabric"))
@@ -411,10 +418,14 @@ module Aws::ManagedBlockchain
     Node.struct_class = Types::Node
 
     NodeConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceTypeString, required: true, location_name: "InstanceType"))
-    NodeConfiguration.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneString, required: true, location_name: "AvailabilityZone"))
+    NodeConfiguration.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneString, location_name: "AvailabilityZone"))
     NodeConfiguration.add_member(:log_publishing_configuration, Shapes::ShapeRef.new(shape: NodeLogPublishingConfiguration, location_name: "LogPublishingConfiguration"))
     NodeConfiguration.add_member(:state_db, Shapes::ShapeRef.new(shape: StateDBType, location_name: "StateDB"))
     NodeConfiguration.struct_class = Types::NodeConfiguration
+
+    NodeEthereumAttributes.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "HttpEndpoint"))
+    NodeEthereumAttributes.add_member(:web_socket_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "WebSocketEndpoint"))
+    NodeEthereumAttributes.struct_class = Types::NodeEthereumAttributes
 
     NodeFabricAttributes.add_member(:peer_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "PeerEndpoint"))
     NodeFabricAttributes.add_member(:peer_event_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "PeerEventEndpoint"))
@@ -425,6 +436,7 @@ module Aws::ManagedBlockchain
     NodeFabricLogPublishingConfiguration.struct_class = Types::NodeFabricLogPublishingConfiguration
 
     NodeFrameworkAttributes.add_member(:fabric, Shapes::ShapeRef.new(shape: NodeFabricAttributes, location_name: "Fabric"))
+    NodeFrameworkAttributes.add_member(:ethereum, Shapes::ShapeRef.new(shape: NodeEthereumAttributes, location_name: "Ethereum"))
     NodeFrameworkAttributes.struct_class = Types::NodeFrameworkAttributes
 
     NodeLogPublishingConfiguration.add_member(:fabric, Shapes::ShapeRef.new(shape: NodeFabricLogPublishingConfiguration, location_name: "Fabric"))
@@ -502,7 +514,7 @@ module Aws::ManagedBlockchain
     UpdateMemberOutput.struct_class = Types::UpdateMemberOutput
 
     UpdateNodeInput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "networkId"))
-    UpdateNodeInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "memberId"))
+    UpdateNodeInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "MemberId"))
     UpdateNodeInput.add_member(:node_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "nodeId"))
     UpdateNodeInput.add_member(:log_publishing_configuration, Shapes::ShapeRef.new(shape: NodeLogPublishingConfiguration, location_name: "LogPublishingConfiguration"))
     UpdateNodeInput.struct_class = Types::UpdateNodeInput
@@ -577,7 +589,7 @@ module Aws::ManagedBlockchain
       api.add_operation(:create_node, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateNode"
         o.http_method = "POST"
-        o.http_request_uri = "/networks/{networkId}/members/{memberId}/nodes"
+        o.http_request_uri = "/networks/{networkId}/nodes"
         o.input = Shapes::ShapeRef.new(shape: CreateNodeInput)
         o.output = Shapes::ShapeRef.new(shape: CreateNodeOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -621,7 +633,7 @@ module Aws::ManagedBlockchain
       api.add_operation(:delete_node, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteNode"
         o.http_method = "DELETE"
-        o.http_request_uri = "/networks/{networkId}/members/{memberId}/nodes/{nodeId}"
+        o.http_request_uri = "/networks/{networkId}/nodes/{nodeId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteNodeInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteNodeOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -661,7 +673,7 @@ module Aws::ManagedBlockchain
       api.add_operation(:get_node, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetNode"
         o.http_method = "GET"
-        o.http_request_uri = "/networks/{networkId}/members/{memberId}/nodes/{nodeId}"
+        o.http_request_uri = "/networks/{networkId}/nodes/{nodeId}"
         o.input = Shapes::ShapeRef.new(shape: GetNodeInput)
         o.output = Shapes::ShapeRef.new(shape: GetNodeOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -743,7 +755,7 @@ module Aws::ManagedBlockchain
       api.add_operation(:list_nodes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListNodes"
         o.http_method = "GET"
-        o.http_request_uri = "/networks/{networkId}/members/{memberId}/nodes"
+        o.http_request_uri = "/networks/{networkId}/nodes"
         o.input = Shapes::ShapeRef.new(shape: ListNodesInput)
         o.output = Shapes::ShapeRef.new(shape: ListNodesOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -825,7 +837,7 @@ module Aws::ManagedBlockchain
       api.add_operation(:update_node, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateNode"
         o.http_method = "PATCH"
-        o.http_request_uri = "/networks/{networkId}/members/{memberId}/nodes/{nodeId}"
+        o.http_request_uri = "/networks/{networkId}/nodes/{nodeId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateNodeInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateNodeOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)

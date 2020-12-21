@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-12-21)
+------------------
+
+* Feature - Finding providers can now use BatchImportFindings to update Confidence, Criticality, RelatedFindings, Severity, and Types.
+
 1.36.0 (2020-11-23)
 ------------------
 

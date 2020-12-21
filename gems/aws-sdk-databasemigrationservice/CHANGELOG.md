@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2020-12-21)
+------------------
+
+* Feature - AWS DMS launches support for AWS Secrets Manager to manage source and target database credentials.
+
 1.48.0 (2020-12-07)
 ------------------
 

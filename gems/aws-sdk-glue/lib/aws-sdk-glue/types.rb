@@ -1963,6 +1963,18 @@ module Aws::Glue
     #     validation of the CA cert file or not. AWS Glue validates for
     #     three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA.
     #     Default value is "false".
+    #
+    #   * `SECRET_ID` - The secret ID used for the secret manager of
+    #     credentials.
+    #
+    #   * `CONNECTOR_URL` - The connector URL for a MARKETPLACE or CUSTOM
+    #     connection.
+    #
+    #   * `CONNECTOR_TYPE` - The connector type for a MARKETPLACE or CUSTOM
+    #     connection.
+    #
+    #   * `CONNECTOR_CLASS_NAME` - The connector class name for a
+    #     MARKETPLACE or CUSTOM connection.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
@@ -2008,7 +2020,7 @@ module Aws::Glue
     #       {
     #         name: "NameString", # required
     #         description: "DescriptionString",
-    #         connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
+    #         connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM
     #         match_criteria: ["NameString"],
     #         connection_properties: { # required
     #           "HOST" => "ValueString",
@@ -2042,6 +2054,14 @@ module Aws::Glue
     #
     #   * `NETWORK` - Designates a network connection to a data source
     #     within an Amazon Virtual Private Cloud environment (Amazon VPC).
+    #
+    #   * `MARKETPLACE` - Uses configuration settings contained in a
+    #     connector purchased from AWS Marketplace to read from and write to
+    #     data stores that are not natively supported by AWS Glue.
+    #
+    #   * `CUSTOM` - Uses configuration settings contained in a custom
+    #     connector to read from and write to data stores that are not
+    #     natively supported by AWS Glue.
     #
     #   SFTP is not supported.
     #   @return [String]
@@ -2557,7 +2577,7 @@ module Aws::Glue
     #         connection_input: { # required
     #           name: "NameString", # required
     #           description: "DescriptionString",
-    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
+    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM
     #           match_criteria: ["NameString"],
     #           connection_properties: { # required
     #             "HOST" => "ValueString",
@@ -6788,7 +6808,7 @@ module Aws::Glue
     #
     #       {
     #         match_criteria: ["NameString"],
-    #         connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
+    #         connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM
     #       }
     #
     # @!attribute [rw] match_criteria
@@ -6816,7 +6836,7 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         filter: {
     #           match_criteria: ["NameString"],
-    #           connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
+    #           connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM
     #         },
     #         hide_password: false,
     #         next_token: "Token",
@@ -13093,6 +13113,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The unique ID of the schema in the AWS Glue schema registry.
+    #
     # @note When making an API call, you may pass SchemaId
     #   data as a hash:
     #
@@ -13103,12 +13125,17 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] schema_arn
+    #   The Amazon Resource Name (ARN) of the schema. One of `SchemaArn` or
+    #   `SchemaName` has to be provided.
     #   @return [String]
     #
     # @!attribute [rw] schema_name
+    #   The name of the schema. One of `SchemaArn` or `SchemaName` has to be
+    #   provided.
     #   @return [String]
     #
     # @!attribute [rw] registry_name
+    #   The name of the schema registry that contains the schema.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SchemaId AWS API Documentation
@@ -13259,6 +13286,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A structure containing the schema version information.
+    #
     # @note When making an API call, you may pass SchemaVersionNumber
     #   data as a hash:
     #
@@ -13268,9 +13297,11 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] latest_version
+    #   The latest version available for the schema.
     #   @return [Boolean]
     #
     # @!attribute [rw] version_number
+    #   The version number of the schema.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SchemaVersionNumber AWS API Documentation
@@ -15502,7 +15533,7 @@ module Aws::Glue
     #         connection_input: { # required
     #           name: "NameString", # required
     #           description: "DescriptionString",
-    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
+    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM
     #           match_criteria: ["NameString"],
     #           connection_properties: { # required
     #             "HOST" => "ValueString",

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2020-12-21)
+------------------
+
+* Feature - Documentation updates for batch
+
 1.42.0 (2020-12-03)
 ------------------
 

@@ -386,7 +386,7 @@ module Aws::Batch
     # EC2 Spot Instances, or to use Fargate and Fargate Spot capacity in
     # your managed compute environment. You can optionally set a maximum
     # price so that Spot Instances only launch when the Spot Instance price
-    # is below a specified percentage of the On-Demand price.
+    # is less than a specified percentage of the On-Demand price.
     #
     # <note markdown="1"> Multi-node parallel jobs are not supported on Spot Instances.
     #
@@ -400,7 +400,7 @@ module Aws::Batch
     # instance AMIs][2] in the *Amazon Elastic Container Service Developer
     # Guide*. After you have created your unmanaged compute environment, you
     # can use the DescribeComputeEnvironments operation to find the Amazon
-    # ECS cluster that is associated with it. Then, manually launch your
+    # ECS cluster that's associated with it. Then, manually launch your
     # container instances into that Amazon ECS cluster. For more
     # information, see [Launching an Amazon ECS container instance][3] in
     # the *Amazon Elastic Container Service Developer Guide*.
@@ -448,6 +448,18 @@ module Aws::Batch
     #   the compute environment accepts jobs from a queue and can scale out
     #   automatically based on queues.
     #
+    #   If the state is `ENABLED`, then the AWS Batch scheduler can attempt to
+    #   place jobs from an associated job queue on the compute resources
+    #   within the environment. If the compute environment is managed, then it
+    #   can scale its instances out or in automatically, based on the job
+    #   queue demand.
+    #
+    #   If the state is `DISABLED`, then the AWS Batch scheduler doesn't
+    #   attempt to place jobs within the environment. Jobs in a `STARTING` or
+    #   `RUNNING` state continue to progress normally. Managed compute
+    #   environments in the `DISABLED` state don't scale out. However, they
+    #   scale in to `minvCpus` value after instances become idle.
+    #
     # @option params [Types::ComputeResource] :compute_resources
     #   Details about the compute resources managed by the compute
     #   environment. This parameter is required for managed compute
@@ -460,20 +472,26 @@ module Aws::Batch
     #
     # @option params [required, String] :service_role
     #   The full Amazon Resource Name (ARN) of the IAM role that allows AWS
-    #   Batch to make calls to other AWS services on your behalf.
+    #   Batch to make calls to other AWS services on your behalf. For more
+    #   information, see [AWS Batch service IAM role][1] in the *AWS Batch
+    #   User Guide*.
     #
     #   If your specified role has a path other than `/`, then you must either
     #   specify the full role ARN (this is recommended) or prefix the role
     #   name with the path.
     #
-    #   <note markdown="1"> Depending on how you created your AWS Batch service role, its ARN may
-    #   contain the `service-role` path prefix. When you only specify the name
-    #   of the service role, AWS Batch assumes that your ARN doesn't use the
-    #   `service-role` path prefix. Because of this, we recommend that you
-    #   specify the full ARN of your service role when you create compute
+    #   <note markdown="1"> Depending on how you created your AWS Batch service role, its ARN
+    #   might contain the `service-role` path prefix. When you only specify
+    #   the name of the service role, AWS Batch assumes that your ARN doesn't
+    #   use the `service-role` path prefix. Because of this, we recommend that
+    #   you specify the full ARN of your service role when you create compute
     #   environments.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html
     #
     # @option params [Hash<String,String>] :tags
     #   The tags that you apply to the compute environment to help you
@@ -650,7 +668,8 @@ module Aws::Batch
     # preference for scheduling jobs to that compute environment.
     #
     # @option params [required, String] :job_queue_name
-    #   The name of the job queue.
+    #   The name of the job queue. Up to 128 letters (uppercase and
+    #   lowercase), numbers, and underscores are allowed.
     #
     # @option params [String] :state
     #   The state of the job queue. If the job queue state is `ENABLED`, it is
@@ -664,7 +683,9 @@ module Aws::Batch
     #   when associated with the same compute environment. Priority is
     #   determined in descending order. For example, a job queue with a
     #   priority value of `10` is given scheduling preference over a job queue
-    #   with a priority value of `1`.
+    #   with a priority value of `1`. All of the compute environments must be
+    #   either EC2 (`EC2` or `SPOT`) or Fargate (`FARGATE` or `FARGATE_SPOT`);
+    #   EC2 and Fargate compute environments cannot be mixed.
     #
     # @option params [required, Array<Types::ComputeEnvironmentOrder>] :compute_environment_order
     #   The set of compute environments mapped to a job queue and their order
@@ -676,15 +697,21 @@ module Aws::Batch
     #   either EC2 (`EC2` or `SPOT`) or Fargate (`FARGATE` or `FARGATE_SPOT`);
     #   EC2 and Fargate compute environments can't be mixed.
     #
+    #   <note markdown="1"> All compute environments that are associated with a job queue must
+    #   share the same architecture. AWS Batch doesn't support mixing compute
+    #   environment architecture types in a single job queue.
+    #
+    #    </note>
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags that you apply to the job queue to help you categorize and
     #   organize your resources. Each tag consists of a key and an optional
-    #   value. For more information, see [Tagging AWS Resources][1] in *AWS
-    #   General Reference*.
+    #   value. For more information, see [Tagging your AWS Batch resources][1]
+    #   in *AWS Batch User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html
     #
     # @return [Types::CreateJobQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -818,7 +845,8 @@ module Aws::Batch
 
     # Deletes the specified job queue. You must first disable submissions
     # for a queue with the UpdateJobQueue operation. All jobs in the queue
-    # are terminated when you delete a job queue.
+    # are eventually terminated when you delete a job queue. The jobs are
+    # terminated at a rate of about 16 jobs each second.
     #
     # It's not necessary to disassociate compute environments from a queue
     # before submitting a `DeleteJobQueue` request.
@@ -923,7 +951,7 @@ module Aws::Batch
     #   from the end of the previous results that returned the `nextToken`
     #   value. This value is `null` when there are no more results to return.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   <note markdown="1"> This token should be treated as an opaque identifier that's only used
     #   to retrieve the next items in a list and not for other programmatic
     #   purposes.
     #
@@ -1073,7 +1101,7 @@ module Aws::Batch
     #   from the end of the previous results that returned the `nextToken`
     #   value. This value is `null` when there are no more results to return.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   <note markdown="1"> This token should be treated as an opaque identifier that's only used
     #   to retrieve the next items in a list and not for other programmatic
     #   purposes.
     #
@@ -1301,7 +1329,7 @@ module Aws::Batch
     #   from the end of the previous results that returned the `nextToken`
     #   value. This value is `null` when there are no more results to return.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   <note markdown="1"> This token should be treated as an opaque identifier that's only used
     #   to retrieve the next items in a list and not for other programmatic
     #   purposes.
     #
@@ -1669,7 +1697,7 @@ module Aws::Batch
     #   results that returned the `nextToken` value. This value is `null` when
     #   there are no more results to return.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   <note markdown="1"> This token should be treated as an opaque identifier that's only used
     #   to retrieve the next items in a list and not for other programmatic
     #   purposes.
     #
@@ -1870,7 +1898,7 @@ module Aws::Batch
     #
     # @option params [Types::RetryStrategy] :retry_strategy
     #   The retry strategy to use for failed jobs that are submitted with this
-    #   job definition. Any retry strategy that is specified during a
+    #   job definition. Any retry strategy that's specified during a
     #   SubmitJob operation overrides the retry strategy defined here. If a
     #   job is terminated due to a timeout, it isn't retried.
     #
@@ -1888,7 +1916,7 @@ module Aws::Batch
     #   definition, after which AWS Batch terminates your jobs if they have
     #   not finished. If a job is terminated due to a timeout, it isn't
     #   retried. The minimum value for the timeout is 60 seconds. Any timeout
-    #   configuration that is specified during a SubmitJob operation overrides
+    #   configuration that's specified during a SubmitJob operation overrides
     #   the timeout configuration defined here. For more information, see [Job
     #   Timeouts][1] in the *AWS Batch User Guide*.
     #
@@ -2257,7 +2285,7 @@ module Aws::Batch
     #   A list of container overrides in JSON format that specify the name of
     #   a container in the specified job definition and the overrides it
     #   should receive. You can override the default command for a container
-    #   (that is specified in the job definition or the Docker image) with a
+    #   (that's specified in the job definition or the Docker image) with a
     #   `command` override. You can also override existing environment
     #   variables (that are specified in the job definition or Docker image)
     #   on a container or add new environment variables to it with an
@@ -2593,13 +2621,32 @@ module Aws::Batch
     #   `ENABLED` state can accept jobs from a queue and scale in or out
     #   automatically based on the workload demand of its associated queues.
     #
+    #   If the state is `ENABLED`, then the AWS Batch scheduler can attempt to
+    #   place jobs from an associated job queue on the compute resources
+    #   within the environment. If the compute environment is managed, then it
+    #   can scale its instances out or in automatically, based on the job
+    #   queue demand.
+    #
+    #   If the state is `DISABLED`, then the AWS Batch scheduler doesn't
+    #   attempt to place jobs within the environment. Jobs in a `STARTING` or
+    #   `RUNNING` state continue to progress normally. Managed compute
+    #   environments in the `DISABLED` state don't scale out. However, they
+    #   scale in to `minvCpus` value after instances become idle.
+    #
     # @option params [Types::ComputeResourceUpdate] :compute_resources
     #   Details of the compute resources managed by the compute environment.
-    #   Required for a managed compute environment.
+    #   Required for a managed compute environment. For more information, see
+    #   [Compute Environments][1] in the *AWS Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
     #
     # @option params [String] :service_role
     #   The full Amazon Resource Name (ARN) of the IAM role that allows AWS
-    #   Batch to make calls to other AWS services on your behalf.
+    #   Batch to make calls to other AWS services on your behalf. For more
+    #   information, see [AWS Batch service IAM role][1] in the *AWS Batch
+    #   User Guide*.
     #
     #   If your specified role has a path other than `/`, then you must either
     #   specify the full role ARN (this is recommended) or prefix the role
@@ -2613,6 +2660,10 @@ module Aws::Batch
     #   environments.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html
     #
     # @return [Types::UpdateComputeEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2681,15 +2732,25 @@ module Aws::Batch
     #   when associated with the same compute environment. Priority is
     #   determined in descending order, for example, a job queue with a
     #   priority value of `10` is given scheduling preference over a job queue
-    #   with a priority value of `1`.
+    #   with a priority value of `1`. All of the compute environments must be
+    #   either EC2 (`EC2` or `SPOT`) or Fargate (`FARGATE` or `FARGATE_SPOT`);
+    #   EC2 and Fargate compute environments cannot be mixed.
     #
     # @option params [Array<Types::ComputeEnvironmentOrder>] :compute_environment_order
     #   Details the set of compute environments mapped to a job queue and
     #   their order relative to each other. This is one of the parameters used
     #   by the job scheduler to determine which compute environment should run
-    #   a given job. All of the compute environments must be either EC2 (`EC2`
-    #   or `SPOT`) or Fargate (`FARGATE` or `FARGATE_SPOT`); EC2 and Fargate
-    #   compute environments can't be mixed.
+    #   a given job. Compute environments must be in the `VALID` state before
+    #   you can associate them with a job queue. All of the compute
+    #   environments must be either EC2 (`EC2` or `SPOT`) or Fargate
+    #   (`FARGATE` or `FARGATE_SPOT`); EC2 and Fargate compute environments
+    #   can't be mixed.
+    #
+    #   <note markdown="1"> All compute environments that are associated with a job queue must
+    #   share the same architecture. AWS Batch doesn't support mixing compute
+    #   environment architecture types in a single job queue.
+    #
+    #    </note>
     #
     # @return [Types::UpdateJobQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2753,7 +2814,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

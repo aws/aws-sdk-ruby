@@ -14,20 +14,33 @@ module Aws::ConnectParticipant
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    ArtifactId = Shapes::StringShape.new(name: 'ArtifactId')
+    ArtifactStatus = Shapes::StringShape.new(name: 'ArtifactStatus')
+    AttachmentIdList = Shapes::ListShape.new(name: 'AttachmentIdList')
+    AttachmentItem = Shapes::StructureShape.new(name: 'AttachmentItem')
+    AttachmentName = Shapes::StringShape.new(name: 'AttachmentName')
+    AttachmentSizeInBytes = Shapes::IntegerShape.new(name: 'AttachmentSizeInBytes')
+    Attachments = Shapes::ListShape.new(name: 'Attachments')
     ChatContent = Shapes::StringShape.new(name: 'ChatContent')
     ChatContentType = Shapes::StringShape.new(name: 'ChatContentType')
     ChatItemId = Shapes::StringShape.new(name: 'ChatItemId')
     ChatItemType = Shapes::StringShape.new(name: 'ChatItemType')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    CompleteAttachmentUploadRequest = Shapes::StructureShape.new(name: 'CompleteAttachmentUploadRequest')
+    CompleteAttachmentUploadResponse = Shapes::StructureShape.new(name: 'CompleteAttachmentUploadResponse')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectionCredentials = Shapes::StructureShape.new(name: 'ConnectionCredentials')
     ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
     ConnectionTypeList = Shapes::ListShape.new(name: 'ConnectionTypeList')
     ContactId = Shapes::StringShape.new(name: 'ContactId')
+    ContentType = Shapes::StringShape.new(name: 'ContentType')
     CreateParticipantConnectionRequest = Shapes::StructureShape.new(name: 'CreateParticipantConnectionRequest')
     CreateParticipantConnectionResponse = Shapes::StructureShape.new(name: 'CreateParticipantConnectionResponse')
     DisconnectParticipantRequest = Shapes::StructureShape.new(name: 'DisconnectParticipantRequest')
     DisconnectParticipantResponse = Shapes::StructureShape.new(name: 'DisconnectParticipantResponse')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
+    GetAttachmentRequest = Shapes::StructureShape.new(name: 'GetAttachmentRequest')
+    GetAttachmentResponse = Shapes::StructureShape.new(name: 'GetAttachmentResponse')
     GetTranscriptRequest = Shapes::StructureShape.new(name: 'GetTranscriptRequest')
     GetTranscriptResponse = Shapes::StructureShape.new(name: 'GetTranscriptResponse')
     ISO8601Datetime = Shapes::StringShape.new(name: 'ISO8601Datetime')
@@ -38,9 +51,11 @@ module Aws::ConnectParticipant
     Message = Shapes::StringShape.new(name: 'Message')
     MostRecent = Shapes::IntegerShape.new(name: 'MostRecent')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NonEmptyClientToken = Shapes::StringShape.new(name: 'NonEmptyClientToken')
     ParticipantId = Shapes::StringShape.new(name: 'ParticipantId')
     ParticipantRole = Shapes::StringShape.new(name: 'ParticipantRole')
     ParticipantToken = Shapes::StringShape.new(name: 'ParticipantToken')
+    PreSignedAttachmentUrl = Shapes::StringShape.new(name: 'PreSignedAttachmentUrl')
     PreSignedConnectionUrl = Shapes::StringShape.new(name: 'PreSignedConnectionUrl')
     Reason = Shapes::StringShape.new(name: 'Reason')
     ScanDirection = Shapes::StringShape.new(name: 'ScanDirection')
@@ -48,15 +63,43 @@ module Aws::ConnectParticipant
     SendEventResponse = Shapes::StructureShape.new(name: 'SendEventResponse')
     SendMessageRequest = Shapes::StructureShape.new(name: 'SendMessageRequest')
     SendMessageResponse = Shapes::StructureShape.new(name: 'SendMessageResponse')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SortKey = Shapes::StringShape.new(name: 'SortKey')
+    StartAttachmentUploadRequest = Shapes::StructureShape.new(name: 'StartAttachmentUploadRequest')
+    StartAttachmentUploadResponse = Shapes::StructureShape.new(name: 'StartAttachmentUploadResponse')
     StartPosition = Shapes::StructureShape.new(name: 'StartPosition')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Transcript = Shapes::ListShape.new(name: 'Transcript')
+    UploadMetadata = Shapes::StructureShape.new(name: 'UploadMetadata')
+    UploadMetadataSignedHeaders = Shapes::MapShape.new(name: 'UploadMetadataSignedHeaders')
+    UploadMetadataSignedHeadersKey = Shapes::StringShape.new(name: 'UploadMetadataSignedHeadersKey')
+    UploadMetadataSignedHeadersValue = Shapes::StringShape.new(name: 'UploadMetadataSignedHeadersValue')
+    UploadMetadataUrl = Shapes::StringShape.new(name: 'UploadMetadataUrl')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Websocket = Shapes::StructureShape.new(name: 'Websocket')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AttachmentIdList.member = Shapes::ShapeRef.new(shape: ArtifactId)
+
+    AttachmentItem.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
+    AttachmentItem.add_member(:attachment_id, Shapes::ShapeRef.new(shape: ArtifactId, location_name: "AttachmentId"))
+    AttachmentItem.add_member(:attachment_name, Shapes::ShapeRef.new(shape: AttachmentName, location_name: "AttachmentName"))
+    AttachmentItem.add_member(:status, Shapes::ShapeRef.new(shape: ArtifactStatus, location_name: "Status"))
+    AttachmentItem.struct_class = Types::AttachmentItem
+
+    Attachments.member = Shapes::ShapeRef.new(shape: AttachmentItem)
+
+    CompleteAttachmentUploadRequest.add_member(:attachment_ids, Shapes::ShapeRef.new(shape: AttachmentIdList, required: true, location_name: "AttachmentIds"))
+    CompleteAttachmentUploadRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CompleteAttachmentUploadRequest.add_member(:connection_token, Shapes::ShapeRef.new(shape: ParticipantToken, required: true, location: "header", location_name: "X-Amz-Bearer"))
+    CompleteAttachmentUploadRequest.struct_class = Types::CompleteAttachmentUploadRequest
+
+    CompleteAttachmentUploadResponse.struct_class = Types::CompleteAttachmentUploadResponse
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Reason, required: true, location_name: "Message"))
+    ConflictException.struct_class = Types::ConflictException
 
     ConnectionCredentials.add_member(:connection_token, Shapes::ShapeRef.new(shape: ParticipantToken, location_name: "ConnectionToken"))
     ConnectionCredentials.add_member(:expiry, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "Expiry"))
@@ -77,6 +120,14 @@ module Aws::ConnectParticipant
     DisconnectParticipantRequest.struct_class = Types::DisconnectParticipantRequest
 
     DisconnectParticipantResponse.struct_class = Types::DisconnectParticipantResponse
+
+    GetAttachmentRequest.add_member(:attachment_id, Shapes::ShapeRef.new(shape: ArtifactId, required: true, location_name: "AttachmentId"))
+    GetAttachmentRequest.add_member(:connection_token, Shapes::ShapeRef.new(shape: ParticipantToken, required: true, location: "header", location_name: "X-Amz-Bearer"))
+    GetAttachmentRequest.struct_class = Types::GetAttachmentRequest
+
+    GetAttachmentResponse.add_member(:url, Shapes::ShapeRef.new(shape: PreSignedAttachmentUrl, location_name: "Url"))
+    GetAttachmentResponse.add_member(:url_expiry, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "UrlExpiry"))
+    GetAttachmentResponse.struct_class = Types::GetAttachmentResponse
 
     GetTranscriptRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
     GetTranscriptRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -103,6 +154,7 @@ module Aws::ConnectParticipant
     Item.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "ParticipantId"))
     Item.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     Item.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, location_name: "ParticipantRole"))
+    Item.add_member(:attachments, Shapes::ShapeRef.new(shape: Attachments, location_name: "Attachments"))
     Item.struct_class = Types::Item
 
     SendEventRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ChatContentType, required: true, location_name: "ContentType"))
@@ -125,6 +177,20 @@ module Aws::ConnectParticipant
     SendMessageResponse.add_member(:absolute_time, Shapes::ShapeRef.new(shape: Instant, location_name: "AbsoluteTime"))
     SendMessageResponse.struct_class = Types::SendMessageResponse
 
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    StartAttachmentUploadRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, required: true, location_name: "ContentType"))
+    StartAttachmentUploadRequest.add_member(:attachment_size_in_bytes, Shapes::ShapeRef.new(shape: AttachmentSizeInBytes, required: true, location_name: "AttachmentSizeInBytes"))
+    StartAttachmentUploadRequest.add_member(:attachment_name, Shapes::ShapeRef.new(shape: AttachmentName, required: true, location_name: "AttachmentName"))
+    StartAttachmentUploadRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: NonEmptyClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartAttachmentUploadRequest.add_member(:connection_token, Shapes::ShapeRef.new(shape: ParticipantToken, required: true, location: "header", location_name: "X-Amz-Bearer"))
+    StartAttachmentUploadRequest.struct_class = Types::StartAttachmentUploadRequest
+
+    StartAttachmentUploadResponse.add_member(:attachment_id, Shapes::ShapeRef.new(shape: ArtifactId, location_name: "AttachmentId"))
+    StartAttachmentUploadResponse.add_member(:upload_metadata, Shapes::ShapeRef.new(shape: UploadMetadata, location_name: "UploadMetadata"))
+    StartAttachmentUploadResponse.struct_class = Types::StartAttachmentUploadResponse
+
     StartPosition.add_member(:id, Shapes::ShapeRef.new(shape: ChatItemId, location_name: "Id"))
     StartPosition.add_member(:absolute_time, Shapes::ShapeRef.new(shape: Instant, location_name: "AbsoluteTime"))
     StartPosition.add_member(:most_recent, Shapes::ShapeRef.new(shape: MostRecent, location_name: "MostRecent"))
@@ -134,6 +200,14 @@ module Aws::ConnectParticipant
     ThrottlingException.struct_class = Types::ThrottlingException
 
     Transcript.member = Shapes::ShapeRef.new(shape: Item)
+
+    UploadMetadata.add_member(:url, Shapes::ShapeRef.new(shape: UploadMetadataUrl, location_name: "Url"))
+    UploadMetadata.add_member(:url_expiry, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "UrlExpiry"))
+    UploadMetadata.add_member(:headers_to_include, Shapes::ShapeRef.new(shape: UploadMetadataSignedHeaders, location_name: "HeadersToInclude"))
+    UploadMetadata.struct_class = Types::UploadMetadata
+
+    UploadMetadataSignedHeaders.key = Shapes::ShapeRef.new(shape: UploadMetadataSignedHeadersKey)
+    UploadMetadataSignedHeaders.value = Shapes::ShapeRef.new(shape: UploadMetadataSignedHeadersValue)
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: Reason, required: true, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
@@ -161,6 +235,20 @@ module Aws::ConnectParticipant
         "uid" => "connectparticipant-2018-09-07",
       }
 
+      api.add_operation(:complete_attachment_upload, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CompleteAttachmentUpload"
+        o.http_method = "POST"
+        o.http_request_uri = "/participant/complete-attachment-upload"
+        o.input = Shapes::ShapeRef.new(shape: CompleteAttachmentUploadRequest)
+        o.output = Shapes::ShapeRef.new(shape: CompleteAttachmentUploadResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:create_participant_connection, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateParticipantConnection"
         o.http_method = "POST"
@@ -179,6 +267,18 @@ module Aws::ConnectParticipant
         o.http_request_uri = "/participant/disconnect"
         o.input = Shapes::ShapeRef.new(shape: DisconnectParticipantRequest)
         o.output = Shapes::ShapeRef.new(shape: DisconnectParticipantResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_attachment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAttachment"
+        o.http_method = "POST"
+        o.http_request_uri = "/participant/attachment"
+        o.input = Shapes::ShapeRef.new(shape: GetAttachmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAttachmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -225,6 +325,19 @@ module Aws::ConnectParticipant
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:start_attachment_upload, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAttachmentUpload"
+        o.http_method = "POST"
+        o.http_request_uri = "/participant/start-attachment-upload"
+        o.input = Shapes::ShapeRef.new(shape: StartAttachmentUploadRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartAttachmentUploadResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
     end
 

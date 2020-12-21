@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2020-12-21)
+------------------
+
+* Feature - Format GetObject's Expires header to be an http-date instead of iso8601
+
 1.86.2 (2020-12-14)
 ------------------
 

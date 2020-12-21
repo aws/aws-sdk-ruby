@@ -51,6 +51,11 @@ module Aws::ManagedBlockchain
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class IllegalActionException < ServiceError

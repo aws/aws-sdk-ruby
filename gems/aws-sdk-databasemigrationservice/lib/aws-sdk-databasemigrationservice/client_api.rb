@@ -673,6 +673,8 @@ module Aws::DatabaseMigrationService
     DocDbSettings.add_member(:extract_doc_id, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ExtractDocId"))
     DocDbSettings.add_member(:docs_to_investigate, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "DocsToInvestigate"))
     DocDbSettings.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    DocDbSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
+    DocDbSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     DocDbSettings.struct_class = Types::DocDbSettings
 
     DynamoDbSettings.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceAccessRoleArn"))
@@ -769,6 +771,8 @@ module Aws::DatabaseMigrationService
     IBMDb2Settings.add_member(:current_lsn, Shapes::ShapeRef.new(shape: String, location_name: "CurrentLsn"))
     IBMDb2Settings.add_member(:max_k_bytes_per_read, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxKBytesPerRead"))
     IBMDb2Settings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    IBMDb2Settings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
+    IBMDb2Settings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     IBMDb2Settings.struct_class = Types::IBMDb2Settings
 
     ImportCertificateMessage.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CertificateIdentifier"))
@@ -858,6 +862,8 @@ module Aws::DatabaseMigrationService
     MicrosoftSQLServerSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
     MicrosoftSQLServerSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
     MicrosoftSQLServerSettings.add_member(:use_bcp_full_load, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseBcpFullLoad"))
+    MicrosoftSQLServerSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
+    MicrosoftSQLServerSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     MicrosoftSQLServerSettings.struct_class = Types::MicrosoftSQLServerSettings
 
     ModifyEndpointMessage.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
@@ -955,6 +961,8 @@ module Aws::DatabaseMigrationService
     MongoDbSettings.add_member(:docs_to_investigate, Shapes::ShapeRef.new(shape: String, location_name: "DocsToInvestigate"))
     MongoDbSettings.add_member(:auth_source, Shapes::ShapeRef.new(shape: String, location_name: "AuthSource"))
     MongoDbSettings.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    MongoDbSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
+    MongoDbSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     MongoDbSettings.struct_class = Types::MongoDbSettings
 
     MoveReplicationTaskMessage.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationTaskArn"))
@@ -975,6 +983,8 @@ module Aws::DatabaseMigrationService
     MySQLSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
     MySQLSettings.add_member(:server_timezone, Shapes::ShapeRef.new(shape: String, location_name: "ServerTimezone"))
     MySQLSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    MySQLSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
+    MySQLSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     MySQLSettings.struct_class = Types::MySQLSettings
 
     NeptuneSettings.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServiceAccessRoleArn"))
@@ -1016,6 +1026,8 @@ module Aws::DatabaseMigrationService
     OracleSettings.add_member(:security_db_encryption_name, Shapes::ShapeRef.new(shape: String, location_name: "SecurityDbEncryptionName"))
     OracleSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
     OracleSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    OracleSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
+    OracleSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     OracleSettings.struct_class = Types::OracleSettings
 
     OrderableReplicationInstance.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
@@ -1055,6 +1067,8 @@ module Aws::DatabaseMigrationService
     PostgreSQLSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
     PostgreSQLSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
     PostgreSQLSettings.add_member(:slot_name, Shapes::ShapeRef.new(shape: String, location_name: "SlotName"))
+    PostgreSQLSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
+    PostgreSQLSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     PostgreSQLSettings.struct_class = Types::PostgreSQLSettings
 
     RebootReplicationInstanceMessage.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationInstanceArn"))
@@ -1092,6 +1106,8 @@ module Aws::DatabaseMigrationService
     RedshiftSettings.add_member(:truncate_columns, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TruncateColumns"))
     RedshiftSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
     RedshiftSettings.add_member(:write_buffer_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "WriteBufferSize"))
+    RedshiftSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
+    RedshiftSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     RedshiftSettings.struct_class = Types::RedshiftSettings
 
     RefreshSchemasMessage.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
@@ -1379,6 +1395,8 @@ module Aws::DatabaseMigrationService
     SybaseSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
     SybaseSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
     SybaseSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    SybaseSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
+    SybaseSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     SybaseSettings.struct_class = Types::SybaseSettings
 
     TableListToReload.member = Shapes::ShapeRef.new(shape: TableToReload)

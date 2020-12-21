@@ -519,6 +519,17 @@ module Aws::EC2
     #         network_border_group: "String",
     #         customer_owned_ipv_4_pool: "String",
     #         dry_run: false,
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] domain
@@ -576,6 +587,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the Elastic IP address.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateAddressRequest AWS API Documentation
     #
     class AllocateAddressRequest < Struct.new(
@@ -584,7 +599,8 @@ module Aws::EC2
       :public_ipv_4_pool,
       :network_border_group,
       :customer_owned_ipv_4_pool,
-      :dry_run)
+      :dry_run,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51183,22 +51199,24 @@ module Aws::EC2
     #   The type of resource to tag. Currently, the resource types that
     #   support tagging on creation are: `capacity-reservation` \|
     #   `carrier-gateway` \| `client-vpn-endpoint` \| `customer-gateway` \|
-    #   `dedicated-host` \| `dhcp-options` \| `export-image-task` \|
+    #   `dedicated-host` \| `dhcp-options` \| `egress-only-internet-gateway`
+    #   \| `elastic-ip` \| `elastic-gpu` \| `export-image-task` \|
     #   `export-instance-task` \| `fleet` \| `fpga-image` \|
-    #   `host-reservation` \| `import-image-task` \| `import-snapshot-task`
-    #   \| `instance` \| `internet-gateway` \| `ipv4pool-ec2` \|
-    #   `ipv6pool-ec2` \| `key-pair` \| `launch-template` \|
-    #   `placement-group` \| `prefix-list` \| `natgateway` \| `network-acl`
-    #   \| `route-table` \| `security-group` \| `spot-fleet-request` \|
+    #   `host-reservation` \| `image`\| `import-image-task` \|
+    #   `import-snapshot-task` \| `instance` \| `internet-gateway` \|
+    #   `ipv4pool-ec2` \| `ipv6pool-ec2` \| `key-pair` \| `launch-template`
+    #   \| `local-gateway-route-table-vpc-association` \| `placement-group`
+    #   \| `prefix-list` \| `natgateway` \| `network-acl` \|
+    #   `network-interface` \| `reserved-instances` \|`route-table` \|
+    #   `security-group`\| `snapshot` \| `spot-fleet-request` \|
     #   `spot-instances-request` \| `snapshot` \| `subnet` \|
     #   `traffic-mirror-filter` \| `traffic-mirror-session` \|
     #   `traffic-mirror-target` \| `transit-gateway` \|
-    #   `transit-gateway-attachment` \| `transit-gateway-connect-peer` \|
-    #   `transit-gateway-multicast-domain` \| `transit-gateway-route-table`
-    #   \| `volume` \|`vpc` \| ` vpc-peering-connection` \| `vpc-endpoint`
-    #   (for interface and gateway endpoints) \| `vpc-endpoint-service` (for
-    #   AWS PrivateLink) \| `vpc-flow-log` \| `vpn-connection` \|
-    #   `vpn-gateway`.
+    #   `transit-gateway-attachment` \| `transit-gateway-multicast-domain`
+    #   \| `transit-gateway-route-table` \| `volume` \|`vpc` \| `
+    #   vpc-peering-connection` \| `vpc-endpoint` (for interface and gateway
+    #   endpoints) \| `vpc-endpoint-service` (for AWS PrivateLink) \|
+    #   `vpc-flow-log` \| `vpn-connection` \| `vpn-gateway`.
     #
     #   To tag a resource after it has been created, see [CreateTags][1].
     #

@@ -784,6 +784,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the Elastic IP address.
+    #
     # @return [Types::AllocateAddressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AllocateAddressResult#public_ip #public_ip} => String
@@ -833,6 +836,17 @@ module Aws::EC2
     #     network_border_group: "String",
     #     customer_owned_ipv_4_pool: "String",
     #     dry_run: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -40857,7 +40871,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.219.0'
+      context[:gem_version] = '1.220.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

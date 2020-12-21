@@ -136,6 +136,8 @@ module Aws::ConfigService
     DeleteRemediationExceptionsResponse = Shapes::StructureShape.new(name: 'DeleteRemediationExceptionsResponse')
     DeleteResourceConfigRequest = Shapes::StructureShape.new(name: 'DeleteResourceConfigRequest')
     DeleteRetentionConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteRetentionConfigurationRequest')
+    DeleteStoredQueryRequest = Shapes::StructureShape.new(name: 'DeleteStoredQueryRequest')
+    DeleteStoredQueryResponse = Shapes::StructureShape.new(name: 'DeleteStoredQueryResponse')
     DeliverConfigSnapshotRequest = Shapes::StructureShape.new(name: 'DeliverConfigSnapshotRequest')
     DeliverConfigSnapshotResponse = Shapes::StructureShape.new(name: 'DeliverConfigSnapshotResponse')
     DeliveryChannel = Shapes::StructureShape.new(name: 'DeliveryChannel')
@@ -199,6 +201,7 @@ module Aws::ConfigService
     DiscoveredResourceIdentifierList = Shapes::ListShape.new(name: 'DiscoveredResourceIdentifierList')
     EarlierTime = Shapes::TimestampShape.new(name: 'EarlierTime')
     EmptiableStringWithCharLimit256 = Shapes::StringShape.new(name: 'EmptiableStringWithCharLimit256')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Evaluation = Shapes::StructureShape.new(name: 'Evaluation')
     EvaluationResult = Shapes::StructureShape.new(name: 'EvaluationResult')
     EvaluationResultIdentifier = Shapes::StructureShape.new(name: 'EvaluationResultIdentifier')
@@ -247,6 +250,8 @@ module Aws::ConfigService
     GetOrganizationConformancePackDetailedStatusResponse = Shapes::StructureShape.new(name: 'GetOrganizationConformancePackDetailedStatusResponse')
     GetResourceConfigHistoryRequest = Shapes::StructureShape.new(name: 'GetResourceConfigHistoryRequest')
     GetResourceConfigHistoryResponse = Shapes::StructureShape.new(name: 'GetResourceConfigHistoryResponse')
+    GetStoredQueryRequest = Shapes::StructureShape.new(name: 'GetStoredQueryRequest')
+    GetStoredQueryResponse = Shapes::StructureShape.new(name: 'GetStoredQueryResponse')
     GroupByAPILimit = Shapes::IntegerShape.new(name: 'GroupByAPILimit')
     GroupedResourceCount = Shapes::StructureShape.new(name: 'GroupedResourceCount')
     GroupedResourceCountList = Shapes::ListShape.new(name: 'GroupedResourceCountList')
@@ -274,6 +279,8 @@ module Aws::ConfigService
     ListAggregateDiscoveredResourcesResponse = Shapes::StructureShape.new(name: 'ListAggregateDiscoveredResourcesResponse')
     ListDiscoveredResourcesRequest = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesRequest')
     ListDiscoveredResourcesResponse = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesResponse')
+    ListStoredQueriesRequest = Shapes::StructureShape.new(name: 'ListStoredQueriesRequest')
+    ListStoredQueriesResponse = Shapes::StructureShape.new(name: 'ListStoredQueriesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -367,7 +374,14 @@ module Aws::ConfigService
     PutResourceConfigRequest = Shapes::StructureShape.new(name: 'PutResourceConfigRequest')
     PutRetentionConfigurationRequest = Shapes::StructureShape.new(name: 'PutRetentionConfigurationRequest')
     PutRetentionConfigurationResponse = Shapes::StructureShape.new(name: 'PutRetentionConfigurationResponse')
+    PutStoredQueryRequest = Shapes::StructureShape.new(name: 'PutStoredQueryRequest')
+    PutStoredQueryResponse = Shapes::StructureShape.new(name: 'PutStoredQueryResponse')
+    QueryArn = Shapes::StringShape.new(name: 'QueryArn')
+    QueryDescription = Shapes::StringShape.new(name: 'QueryDescription')
+    QueryExpression = Shapes::StringShape.new(name: 'QueryExpression')
+    QueryId = Shapes::StringShape.new(name: 'QueryId')
     QueryInfo = Shapes::StructureShape.new(name: 'QueryInfo')
+    QueryName = Shapes::StringShape.new(name: 'QueryName')
     RecorderName = Shapes::StringShape.new(name: 'RecorderName')
     RecorderStatus = Shapes::StringShape.new(name: 'RecorderStatus')
     RecordingGroup = Shapes::StructureShape.new(name: 'RecordingGroup')
@@ -393,6 +407,7 @@ module Aws::ConfigService
     RemediationParameterValue = Shapes::StructureShape.new(name: 'RemediationParameterValue')
     RemediationParameters = Shapes::MapShape.new(name: 'RemediationParameters')
     RemediationTargetType = Shapes::StringShape.new(name: 'RemediationTargetType')
+    ResourceConcurrentModificationException = Shapes::StructureShape.new(name: 'ResourceConcurrentModificationException')
     ResourceCount = Shapes::StructureShape.new(name: 'ResourceCount')
     ResourceCountFilters = Shapes::StructureShape.new(name: 'ResourceCountFilters')
     ResourceCountGroupKey = Shapes::StringShape.new(name: 'ResourceCountGroupKey')
@@ -445,6 +460,9 @@ module Aws::ConfigService
     StaticValue = Shapes::StructureShape.new(name: 'StaticValue')
     StatusDetailFilters = Shapes::StructureShape.new(name: 'StatusDetailFilters')
     StopConfigurationRecorderRequest = Shapes::StructureShape.new(name: 'StopConfigurationRecorderRequest')
+    StoredQuery = Shapes::StructureShape.new(name: 'StoredQuery')
+    StoredQueryMetadata = Shapes::StructureShape.new(name: 'StoredQueryMetadata')
+    StoredQueryMetadataList = Shapes::ListShape.new(name: 'StoredQueryMetadataList')
     String = Shapes::StringShape.new(name: 'String')
     StringWithCharLimit1024 = Shapes::StringShape.new(name: 'StringWithCharLimit1024')
     StringWithCharLimit128 = Shapes::StringShape.new(name: 'StringWithCharLimit128')
@@ -845,6 +863,11 @@ module Aws::ConfigService
 
     DeleteRetentionConfigurationRequest.add_member(:retention_configuration_name, Shapes::ShapeRef.new(shape: RetentionConfigurationName, required: true, location_name: "RetentionConfigurationName"))
     DeleteRetentionConfigurationRequest.struct_class = Types::DeleteRetentionConfigurationRequest
+
+    DeleteStoredQueryRequest.add_member(:query_name, Shapes::ShapeRef.new(shape: QueryName, required: true, location_name: "QueryName"))
+    DeleteStoredQueryRequest.struct_class = Types::DeleteStoredQueryRequest
+
+    DeleteStoredQueryResponse.struct_class = Types::DeleteStoredQueryResponse
 
     DeliverConfigSnapshotRequest.add_member(:delivery_channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location_name: "deliveryChannelName"))
     DeliverConfigSnapshotRequest.struct_class = Types::DeliverConfigSnapshotRequest
@@ -1278,6 +1301,12 @@ module Aws::ConfigService
     GetResourceConfigHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     GetResourceConfigHistoryResponse.struct_class = Types::GetResourceConfigHistoryResponse
 
+    GetStoredQueryRequest.add_member(:query_name, Shapes::ShapeRef.new(shape: QueryName, required: true, location_name: "QueryName"))
+    GetStoredQueryRequest.struct_class = Types::GetStoredQueryRequest
+
+    GetStoredQueryResponse.add_member(:stored_query, Shapes::ShapeRef.new(shape: StoredQuery, location_name: "StoredQuery"))
+    GetStoredQueryResponse.struct_class = Types::GetStoredQueryResponse
+
     GroupedResourceCount.add_member(:group_name, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "GroupName"))
     GroupedResourceCount.add_member(:resource_count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "ResourceCount"))
     GroupedResourceCount.struct_class = Types::GroupedResourceCount
@@ -1338,6 +1367,14 @@ module Aws::ConfigService
     ListDiscoveredResourcesResponse.add_member(:resource_identifiers, Shapes::ShapeRef.new(shape: ResourceIdentifierList, location_name: "resourceIdentifiers"))
     ListDiscoveredResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListDiscoveredResourcesResponse.struct_class = Types::ListDiscoveredResourcesResponse
+
+    ListStoredQueriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken", metadata: {"box"=>true}))
+    ListStoredQueriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Limit, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListStoredQueriesRequest.struct_class = Types::ListStoredQueriesRequest
+
+    ListStoredQueriesResponse.add_member(:stored_query_metadata, Shapes::ShapeRef.new(shape: StoredQueryMetadataList, location_name: "StoredQueryMetadata"))
+    ListStoredQueriesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListStoredQueriesResponse.struct_class = Types::ListStoredQueriesResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceArn"))
     ListTagsForResourceRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
@@ -1607,6 +1644,13 @@ module Aws::ConfigService
     PutRetentionConfigurationResponse.add_member(:retention_configuration, Shapes::ShapeRef.new(shape: RetentionConfiguration, location_name: "RetentionConfiguration"))
     PutRetentionConfigurationResponse.struct_class = Types::PutRetentionConfigurationResponse
 
+    PutStoredQueryRequest.add_member(:stored_query, Shapes::ShapeRef.new(shape: StoredQuery, required: true, location_name: "StoredQuery"))
+    PutStoredQueryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsList, location_name: "Tags"))
+    PutStoredQueryRequest.struct_class = Types::PutStoredQueryRequest
+
+    PutStoredQueryResponse.add_member(:query_arn, Shapes::ShapeRef.new(shape: QueryArn, location_name: "QueryArn"))
+    PutStoredQueryResponse.struct_class = Types::PutStoredQueryResponse
+
     QueryInfo.add_member(:select_fields, Shapes::ShapeRef.new(shape: FieldInfoList, location_name: "SelectFields"))
     QueryInfo.struct_class = Types::QueryInfo
 
@@ -1684,6 +1728,9 @@ module Aws::ConfigService
 
     RemediationParameters.key = Shapes::ShapeRef.new(shape: StringWithCharLimit256)
     RemediationParameters.value = Shapes::ShapeRef.new(shape: RemediationParameterValue)
+
+    ResourceConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceConcurrentModificationException.struct_class = Types::ResourceConcurrentModificationException
 
     ResourceCount.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
     ResourceCount.add_member(:count, Shapes::ShapeRef.new(shape: Long, location_name: "count"))
@@ -1816,6 +1863,21 @@ module Aws::ConfigService
 
     StopConfigurationRecorderRequest.add_member(:configuration_recorder_name, Shapes::ShapeRef.new(shape: RecorderName, required: true, location_name: "ConfigurationRecorderName"))
     StopConfigurationRecorderRequest.struct_class = Types::StopConfigurationRecorderRequest
+
+    StoredQuery.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "QueryId", metadata: {"box"=>true}))
+    StoredQuery.add_member(:query_arn, Shapes::ShapeRef.new(shape: QueryArn, location_name: "QueryArn", metadata: {"box"=>true}))
+    StoredQuery.add_member(:query_name, Shapes::ShapeRef.new(shape: QueryName, required: true, location_name: "QueryName"))
+    StoredQuery.add_member(:description, Shapes::ShapeRef.new(shape: QueryDescription, location_name: "Description", metadata: {"box"=>true}))
+    StoredQuery.add_member(:expression, Shapes::ShapeRef.new(shape: QueryExpression, location_name: "Expression", metadata: {"box"=>true}))
+    StoredQuery.struct_class = Types::StoredQuery
+
+    StoredQueryMetadata.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, required: true, location_name: "QueryId"))
+    StoredQueryMetadata.add_member(:query_arn, Shapes::ShapeRef.new(shape: QueryArn, required: true, location_name: "QueryArn"))
+    StoredQueryMetadata.add_member(:query_name, Shapes::ShapeRef.new(shape: QueryName, required: true, location_name: "QueryName"))
+    StoredQueryMetadata.add_member(:description, Shapes::ShapeRef.new(shape: QueryDescription, location_name: "Description"))
+    StoredQueryMetadata.struct_class = Types::StoredQueryMetadata
+
+    StoredQueryMetadataList.member = Shapes::ShapeRef.new(shape: StoredQueryMetadata)
 
     SupplementaryConfiguration.key = Shapes::ShapeRef.new(shape: SupplementaryConfigurationName)
     SupplementaryConfiguration.value = Shapes::ShapeRef.new(shape: SupplementaryConfigurationValue)
@@ -2022,6 +2084,16 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchRetentionConfigurationException)
+      end)
+
+      api.add_operation(:delete_stored_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteStoredQuery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteStoredQueryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteStoredQueryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:deliver_config_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -2470,6 +2542,16 @@ module Aws::ConfigService
         )
       end)
 
+      api.add_operation(:get_stored_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetStoredQuery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetStoredQueryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetStoredQueryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:list_aggregate_discovered_resources, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAggregateDiscoveredResources"
         o.http_method = "POST"
@@ -2492,6 +2574,22 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoAvailableConfigurationRecorderException)
+      end)
+
+      api.add_operation(:list_stored_queries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStoredQueries"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListStoredQueriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListStoredQueriesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -2675,6 +2773,17 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: PutRetentionConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MaxNumberOfRetentionConfigurationsExceededException)
+      end)
+
+      api.add_operation(:put_stored_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutStoredQuery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutStoredQueryRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutStoredQueryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConcurrentModificationException)
       end)
 
       api.add_operation(:select_aggregate_resource_config, Seahorse::Model::Operation.new.tap do |o|

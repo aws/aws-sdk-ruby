@@ -329,6 +329,8 @@ module Aws::ManagedBlockchain
 
     # Creates a member within a Managed Blockchain network.
     #
+    # Applies only to Hyperledger Fabric.
+    #
     # @option params [required, String] :client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the operation. An idempotent operation completes no
@@ -395,6 +397,8 @@ module Aws::ManagedBlockchain
 
     # Creates a new blockchain network using Amazon Managed Blockchain.
     #
+    # Applies only to Hyperledger Fabric.
+    #
     # @option params [required, String] :client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the operation. An idempotent operation completes no
@@ -439,7 +443,7 @@ module Aws::ManagedBlockchain
     #     client_request_token: "ClientRequestTokenString", # required
     #     name: "NameString", # required
     #     description: "DescriptionString",
-    #     framework: "HYPERLEDGER_FABRIC", # required, accepts HYPERLEDGER_FABRIC
+    #     framework: "HYPERLEDGER_FABRIC", # required, accepts HYPERLEDGER_FABRIC, ETHEREUM
     #     framework_version: "FrameworkVersionString", # required
     #     framework_configuration: {
     #       fabric: {
@@ -488,7 +492,9 @@ module Aws::ManagedBlockchain
       req.send_request(options)
     end
 
-    # Creates a peer node in a member.
+    # Creates a node on the specified blockchain network.
+    #
+    # Applies to Hyperledger Fabric and Ethereum.
     #
     # @option params [required, String] :client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -501,10 +507,20 @@ module Aws::ManagedBlockchain
     #   not need to pass this option.**
     #
     # @option params [required, String] :network_id
-    #   The unique identifier of the network in which this node runs.
+    #   The unique identifier of the network for the node.
     #
-    # @option params [required, String] :member_id
+    #   Ethereum public networks have the following `NetworkId`s:
+    #
+    #   * `n-ethereum-mainnet`
+    #
+    #   * `n-ethereum-rinkeby`
+    #
+    #   * `n-ethereum-ropsten`
+    #
+    # @option params [String] :member_id
     #   The unique identifier of the member that owns this node.
+    #
+    #   Applies only to Hyperledger Fabric.
     #
     # @option params [required, Types::NodeConfiguration] :node_configuration
     #   The properties of a node configuration.
@@ -518,10 +534,10 @@ module Aws::ManagedBlockchain
     #   resp = client.create_node({
     #     client_request_token: "ClientRequestTokenString", # required
     #     network_id: "ResourceIdString", # required
-    #     member_id: "ResourceIdString", # required
+    #     member_id: "ResourceIdString",
     #     node_configuration: { # required
     #       instance_type: "InstanceTypeString", # required
-    #       availability_zone: "AvailabilityZoneString", # required
+    #       availability_zone: "AvailabilityZoneString",
     #       log_publishing_configuration: {
     #         fabric: {
     #           chaincode_logs: {
@@ -556,6 +572,8 @@ module Aws::ManagedBlockchain
     # Creates a proposal for a change to the network that other members of
     # the network can vote on, for example, a proposal to add a new member
     # to the network. Any member can create a proposal.
+    #
+    # Applies only to Hyperledger Fabric.
     #
     # @option params [required, String] :client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -632,6 +650,8 @@ module Aws::ManagedBlockchain
     # member in a network specified by the last AWS account, the network is
     # deleted also.
     #
+    # Applies only to Hyperledger Fabric.
+    #
     # @option params [required, String] :network_id
     #   The unique identifier of the network from which the member is removed.
     #
@@ -656,14 +676,27 @@ module Aws::ManagedBlockchain
       req.send_request(options)
     end
 
-    # Deletes a peer node from a member that your AWS account owns. All data
-    # on the node is lost and cannot be recovered.
+    # Deletes a node that your AWS account owns. All data on the node is
+    # lost and cannot be recovered.
+    #
+    # Applies to Hyperledger Fabric and Ethereum.
     #
     # @option params [required, String] :network_id
-    #   The unique identifier of the network that the node belongs to.
+    #   The unique identifier of the network that the node is on.
     #
-    # @option params [required, String] :member_id
+    #   Ethereum public networks have the following `NetworkId`s:
+    #
+    #   * `n-ethereum-mainnet`
+    #
+    #   * `n-ethereum-rinkeby`
+    #
+    #   * `n-ethereum-ropsten`
+    #
+    # @option params [String] :member_id
     #   The unique identifier of the member that owns this node.
+    #
+    #   Applies only to Hyperledger Fabric and is required for Hyperledger
+    #   Fabric.
     #
     # @option params [required, String] :node_id
     #   The unique identifier of the node.
@@ -674,7 +707,7 @@ module Aws::ManagedBlockchain
     #
     #   resp = client.delete_node({
     #     network_id: "ResourceIdString", # required
-    #     member_id: "ResourceIdString", # required
+    #     member_id: "ResourceIdString",
     #     node_id: "ResourceIdString", # required
     #   })
     #
@@ -688,6 +721,8 @@ module Aws::ManagedBlockchain
     end
 
     # Returns detailed information about a member.
+    #
+    # Applies only to Hyperledger Fabric.
     #
     # @option params [required, String] :network_id
     #   The unique identifier of the network to which the member belongs.
@@ -729,6 +764,8 @@ module Aws::ManagedBlockchain
 
     # Returns detailed information about a network.
     #
+    # Applies to Hyperledger Fabric and Ethereum.
+    #
     # @option params [required, String] :network_id
     #   The unique identifier of the network to get information about.
     #
@@ -747,10 +784,11 @@ module Aws::ManagedBlockchain
     #   resp.network.id #=> String
     #   resp.network.name #=> String
     #   resp.network.description #=> String
-    #   resp.network.framework #=> String, one of "HYPERLEDGER_FABRIC"
+    #   resp.network.framework #=> String, one of "HYPERLEDGER_FABRIC", "ETHEREUM"
     #   resp.network.framework_version #=> String
     #   resp.network.framework_attributes.fabric.ordering_service_endpoint #=> String
     #   resp.network.framework_attributes.fabric.edition #=> String, one of "STARTER", "STANDARD"
+    #   resp.network.framework_attributes.ethereum.chain_id #=> String
     #   resp.network.vpc_endpoint_service_name #=> String
     #   resp.network.voting_policy.approval_threshold_policy.threshold_percentage #=> Integer
     #   resp.network.voting_policy.approval_threshold_policy.proposal_duration_in_hours #=> Integer
@@ -767,13 +805,18 @@ module Aws::ManagedBlockchain
       req.send_request(options)
     end
 
-    # Returns detailed information about a peer node.
+    # Returns detailed information about a node.
+    #
+    # Applies to Hyperledger Fabric and Ethereum.
     #
     # @option params [required, String] :network_id
-    #   The unique identifier of the network to which the node belongs.
+    #   The unique identifier of the network that the node is on.
     #
-    # @option params [required, String] :member_id
+    # @option params [String] :member_id
     #   The unique identifier of the member that owns the node.
+    #
+    #   Applies only to Hyperledger Fabric and is required for Hyperledger
+    #   Fabric.
     #
     # @option params [required, String] :node_id
     #   The unique identifier of the node.
@@ -786,7 +829,7 @@ module Aws::ManagedBlockchain
     #
     #   resp = client.get_node({
     #     network_id: "ResourceIdString", # required
-    #     member_id: "ResourceIdString", # required
+    #     member_id: "ResourceIdString",
     #     node_id: "ResourceIdString", # required
     #   })
     #
@@ -799,10 +842,12 @@ module Aws::ManagedBlockchain
     #   resp.node.availability_zone #=> String
     #   resp.node.framework_attributes.fabric.peer_endpoint #=> String
     #   resp.node.framework_attributes.fabric.peer_event_endpoint #=> String
+    #   resp.node.framework_attributes.ethereum.http_endpoint #=> String
+    #   resp.node.framework_attributes.ethereum.web_socket_endpoint #=> String
     #   resp.node.log_publishing_configuration.fabric.chaincode_logs.cloudwatch.enabled #=> Boolean
     #   resp.node.log_publishing_configuration.fabric.peer_logs.cloudwatch.enabled #=> Boolean
     #   resp.node.state_db #=> String, one of "LevelDB", "CouchDB"
-    #   resp.node.status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED", "FAILED"
+    #   resp.node.status #=> String, one of "CREATING", "AVAILABLE", "UNHEALTHY", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED", "FAILED"
     #   resp.node.creation_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/GetNode AWS API Documentation
@@ -815,6 +860,8 @@ module Aws::ManagedBlockchain
     end
 
     # Returns detailed information about a proposal.
+    #
+    # Applies only to Hyperledger Fabric.
     #
     # @option params [required, String] :network_id
     #   The unique identifier of the network for which the proposal is made.
@@ -860,7 +907,9 @@ module Aws::ManagedBlockchain
       req.send_request(options)
     end
 
-    # Returns a listing of all invitations for the current AWS account.
+    # Returns a list of all invitations for the current AWS account.
+    #
+    # Applies only to Hyperledger Fabric.
     #
     # @option params [Integer] :max_results
     #   The maximum number of invitations to return.
@@ -893,7 +942,7 @@ module Aws::ManagedBlockchain
     #   resp.invitations[0].network_summary.id #=> String
     #   resp.invitations[0].network_summary.name #=> String
     #   resp.invitations[0].network_summary.description #=> String
-    #   resp.invitations[0].network_summary.framework #=> String, one of "HYPERLEDGER_FABRIC"
+    #   resp.invitations[0].network_summary.framework #=> String, one of "HYPERLEDGER_FABRIC", "ETHEREUM"
     #   resp.invitations[0].network_summary.framework_version #=> String
     #   resp.invitations[0].network_summary.status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "DELETING", "DELETED"
     #   resp.invitations[0].network_summary.creation_date #=> Time
@@ -908,8 +957,10 @@ module Aws::ManagedBlockchain
       req.send_request(options)
     end
 
-    # Returns a listing of the members in a network and properties of their
+    # Returns a list of the members in a network and properties of their
     # configurations.
+    #
+    # Applies only to Hyperledger Fabric.
     #
     # @option params [required, String] :network_id
     #   The unique identifier of the network for which to list members.
@@ -972,7 +1023,9 @@ module Aws::ManagedBlockchain
     end
 
     # Returns information about the networks in which the current AWS
-    # account has members.
+    # account participates.
+    #
+    # Applies to Hyperledger Fabric and Ethereum.
     #
     # @option params [String] :name
     #   The name of the network.
@@ -984,6 +1037,8 @@ module Aws::ManagedBlockchain
     # @option params [String] :status
     #   An optional status specifier. If provided, only networks currently in
     #   this status are listed.
+    #
+    #   Applies only to Hyperledger Fabric.
     #
     # @option params [Integer] :max_results
     #   The maximum number of networks to list.
@@ -1003,7 +1058,7 @@ module Aws::ManagedBlockchain
     #
     #   resp = client.list_networks({
     #     name: "String",
-    #     framework: "HYPERLEDGER_FABRIC", # accepts HYPERLEDGER_FABRIC
+    #     framework: "HYPERLEDGER_FABRIC", # accepts HYPERLEDGER_FABRIC, ETHEREUM
     #     status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, DELETING, DELETED
     #     max_results: 1,
     #     next_token: "PaginationToken",
@@ -1015,7 +1070,7 @@ module Aws::ManagedBlockchain
     #   resp.networks[0].id #=> String
     #   resp.networks[0].name #=> String
     #   resp.networks[0].description #=> String
-    #   resp.networks[0].framework #=> String, one of "HYPERLEDGER_FABRIC"
+    #   resp.networks[0].framework #=> String, one of "HYPERLEDGER_FABRIC", "ETHEREUM"
     #   resp.networks[0].framework_version #=> String
     #   resp.networks[0].status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "DELETING", "DELETED"
     #   resp.networks[0].creation_date #=> Time
@@ -1032,11 +1087,16 @@ module Aws::ManagedBlockchain
 
     # Returns information about the nodes within a network.
     #
+    # Applies to Hyperledger Fabric and Ethereum.
+    #
     # @option params [required, String] :network_id
     #   The unique identifier of the network for which to list nodes.
     #
-    # @option params [required, String] :member_id
+    # @option params [String] :member_id
     #   The unique identifier of the member who owns the nodes to list.
+    #
+    #   Applies only to Hyperledger Fabric and is required for Hyperledger
+    #   Fabric.
     #
     # @option params [String] :status
     #   An optional status specifier. If provided, only nodes currently in
@@ -1060,8 +1120,8 @@ module Aws::ManagedBlockchain
     #
     #   resp = client.list_nodes({
     #     network_id: "ResourceIdString", # required
-    #     member_id: "ResourceIdString", # required
-    #     status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, UPDATING, DELETING, DELETED, FAILED
+    #     member_id: "ResourceIdString",
+    #     status: "CREATING", # accepts CREATING, AVAILABLE, UNHEALTHY, CREATE_FAILED, UPDATING, DELETING, DELETED, FAILED
     #     max_results: 1,
     #     next_token: "PaginationToken",
     #   })
@@ -1070,7 +1130,7 @@ module Aws::ManagedBlockchain
     #
     #   resp.nodes #=> Array
     #   resp.nodes[0].id #=> String
-    #   resp.nodes[0].status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED", "FAILED"
+    #   resp.nodes[0].status #=> String, one of "CREATING", "AVAILABLE", "UNHEALTHY", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED", "FAILED"
     #   resp.nodes[0].creation_date #=> Time
     #   resp.nodes[0].availability_zone #=> String
     #   resp.nodes[0].instance_type #=> String
@@ -1085,9 +1145,11 @@ module Aws::ManagedBlockchain
       req.send_request(options)
     end
 
-    # Returns the listing of votes for a specified proposal, including the
+    # Returns the list of votes for a specified proposal, including the
     # value of each vote and the unique identifier of the member that cast
     # the vote.
+    #
+    # Applies only to Hyperledger Fabric.
     #
     # @option params [required, String] :network_id
     #   The unique identifier of the network.
@@ -1135,7 +1197,9 @@ module Aws::ManagedBlockchain
       req.send_request(options)
     end
 
-    # Returns a listing of proposals for the network.
+    # Returns a list of proposals for the network.
+    #
+    # Applies only to Hyperledger Fabric.
     #
     # @option params [required, String] :network_id
     #   The unique identifier of the network.
@@ -1187,6 +1251,8 @@ module Aws::ManagedBlockchain
     # a principal in an AWS account that has received an invitation to
     # create a member and join a network.
     #
+    # Applies only to Hyperledger Fabric.
+    #
     # @option params [required, String] :invitation_id
     #   The unique identifier of the invitation to reject.
     #
@@ -1209,12 +1275,14 @@ module Aws::ManagedBlockchain
 
     # Updates a member configuration with new parameters.
     #
+    # Applies only to Hyperledger Fabric.
+    #
     # @option params [required, String] :network_id
-    #   The unique ID of the Managed Blockchain network to which the member
-    #   belongs.
+    #   The unique identifier of the Managed Blockchain network to which the
+    #   member belongs.
     #
     # @option params [required, String] :member_id
-    #   The unique ID of the member.
+    #   The unique identifier of the member.
     #
     # @option params [Types::MemberLogPublishingConfiguration] :log_publishing_configuration
     #   Configuration properties for publishing to Amazon CloudWatch Logs.
@@ -1248,15 +1316,18 @@ module Aws::ManagedBlockchain
 
     # Updates a node configuration with new parameters.
     #
-    # @option params [required, String] :network_id
-    #   The unique ID of the Managed Blockchain network to which the node
-    #   belongs.
+    # Applies only to Hyperledger Fabric.
     #
-    # @option params [required, String] :member_id
-    #   The unique ID of the member that owns the node.
+    # @option params [required, String] :network_id
+    #   The unique identifier of the network that the node is on.
+    #
+    # @option params [String] :member_id
+    #   The unique identifier of the member that owns the node.
+    #
+    #   Applies only to Hyperledger Fabric.
     #
     # @option params [required, String] :node_id
-    #   The unique ID of the node.
+    #   The unique identifier of the node.
     #
     # @option params [Types::NodeLogPublishingConfiguration] :log_publishing_configuration
     #   Configuration properties for publishing to Amazon CloudWatch Logs.
@@ -1267,7 +1338,7 @@ module Aws::ManagedBlockchain
     #
     #   resp = client.update_node({
     #     network_id: "ResourceIdString", # required
-    #     member_id: "ResourceIdString", # required
+    #     member_id: "ResourceIdString",
     #     node_id: "ResourceIdString", # required
     #     log_publishing_configuration: {
     #       fabric: {
@@ -1297,6 +1368,8 @@ module Aws::ManagedBlockchain
     # Casts a vote for a specified `ProposalId` on behalf of a member. The
     # member to vote as, specified by `VoterMemberId`, must be in the same
     # AWS account as the principal that calls the action.
+    #
+    # Applies only to Hyperledger Fabric.
     #
     # @option params [required, String] :network_id
     #   The unique identifier of the network.
@@ -1343,7 +1416,7 @@ module Aws::ManagedBlockchain
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedblockchain'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

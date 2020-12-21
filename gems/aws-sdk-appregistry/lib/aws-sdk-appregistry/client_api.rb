@@ -74,6 +74,9 @@ module Aws::AppRegistry
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StackArn = Shapes::StringShape.new(name: 'StackArn')
     String = Shapes::StringShape.new(name: 'String')
+    SyncAction = Shapes::StringShape.new(name: 'SyncAction')
+    SyncResourceRequest = Shapes::StructureShape.new(name: 'SyncResourceRequest')
+    SyncResourceResponse = Shapes::StructureShape.new(name: 'SyncResourceResponse')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
@@ -277,6 +280,15 @@ module Aws::AppRegistry
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    SyncResourceRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location: "uri", location_name: "resourceType"))
+    SyncResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceSpecifier, required: true, location: "uri", location_name: "resource"))
+    SyncResourceRequest.struct_class = Types::SyncResourceRequest
+
+    SyncResourceResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "applicationArn"))
+    SyncResourceResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn"))
+    SyncResourceResponse.add_member(:action_taken, Shapes::ShapeRef.new(shape: SyncAction, location_name: "actionTaken"))
+    SyncResourceResponse.struct_class = Types::SyncResourceResponse
 
     TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -521,6 +533,17 @@ module Aws::AppRegistry
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:sync_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SyncResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/sync/{resourceType}/{resource}"
+        o.input = Shapes::ShapeRef.new(shape: SyncResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: SyncResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

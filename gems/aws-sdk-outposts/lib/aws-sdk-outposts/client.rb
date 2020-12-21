@@ -333,7 +333,7 @@ module Aws::Outposts
     #   The name of the Outpost.
     #
     # @option params [String] :description
-    #   The Outpost description.
+    #   The description of the Outpost.
     #
     # @option params [required, String] :site_id
     #   The ID of the site.
@@ -605,6 +605,89 @@ module Aws::Outposts
       req.send_request(options)
     end
 
+    # Lists the tags for the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Adds tags to the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags to add to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -618,7 +701,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
