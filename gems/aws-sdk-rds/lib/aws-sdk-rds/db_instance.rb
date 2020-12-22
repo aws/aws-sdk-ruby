@@ -545,6 +545,30 @@ module Aws::RDS
       data[:db_instance_automated_backups_replications]
     end
 
+    # Specifies whether a customer-owned IP address (CoIP) is enabled for an
+    # RDS on Outposts DB instance.
+    #
+    # A <i>CoIP </i>provides local or external connectivity to resources in
+    # your Outpost subnets through your on-premises network. For some use
+    # cases, a CoIP can provide lower latency for connections to the DB
+    # instance from outside of its virtual private cloud (VPC) on your local
+    # network.
+    #
+    # For more information about RDS on Outposts, see [Working with Amazon
+    # RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    # For more information about CoIPs, see [Customer-owned IP addresses][2]
+    # in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    # [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    # @return [Boolean]
+    def customer_owned_ip_enabled
+      data[:customer_owned_ip_enabled]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -738,6 +762,7 @@ module Aws::RDS
     #     ],
     #     deletion_protection: false,
     #     max_allocated_storage: 1,
+    #     enable_customer_owned_ip: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -1076,8 +1101,8 @@ module Aws::RDS
     #   specify the identifier of the custom Availability Zone to create the
     #   DB instance in.
     #
-    #    For more information about RDS on VMware, see the [ *RDS on VMware
-    #   User Guide.* ][2]
+    #    For more information about RDS on VMware, see the [ RDS on VMware User
+    #   Guide.][2]
     #
     #    </note>
     #
@@ -1539,6 +1564,25 @@ module Aws::RDS
     # @option options [Integer] :max_allocated_storage
     #   The upper limit to which Amazon RDS can automatically scale the
     #   storage of the DB instance.
+    # @option options [Boolean] :enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts DB instance.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in your
+    #   Outpost subnets through your on-premises network. For some use cases,
+    #   a CoIP can provide lower latency for connections to the DB instance
+    #   from outside of its virtual private cloud (VPC) on your local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP addresses][2]
+    #   in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -2106,6 +2150,7 @@ module Aws::RDS
     #     max_allocated_storage: 1,
     #     certificate_rotation_restart: false,
     #     replica_mode: "open-read-only", # accepts open-read-only, mounted
+    #     enable_customer_owned_ip: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -2139,8 +2184,8 @@ module Aws::RDS
     #   The new DB subnet group for the DB instance. You can use this
     #   parameter to move your DB instance to a different VPC. If your DB
     #   instance isn't in a VPC, you can also use this parameter to move your
-    #   DB instance into a VPC. For more information, see [Updating the VPC
-    #   for a DB Instance][1] in the *Amazon RDS User Guide.*
+    #   DB instance into a VPC. For more information, see [Working with a DB
+    #   instance in a VPC][1] in the *Amazon RDS User Guide.*
     #
     #   Changing the subnet group causes an outage during the change. The
     #   change is applied during the next maintenance window, unless you
@@ -2153,7 +2198,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC
     # @option options [Array<String>] :db_security_groups
     #   A list of DB security groups to authorize on this DB instance.
     #   Changing this setting doesn't result in an outage and the change is
@@ -2693,6 +2738,25 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
+    # @option options [Boolean] :enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts DB instance.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in your
+    #   Outpost subnets through your on-premises network. For some use cases,
+    #   a CoIP can provide lower latency for connections to the DB instance
+    #   from outside of its virtual private cloud (VPC) on your local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP addresses][2]
+    #   in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -2825,6 +2889,7 @@ module Aws::RDS
     #     source_dbi_resource_id: "String",
     #     max_allocated_storage: 1,
     #     source_db_instance_automated_backups_arn: "String",
+    #     enable_customer_owned_ip: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_instance_identifier
@@ -3081,6 +3146,25 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) of the replicated automated backups
     #   from which to restore, for example,
     #   `arn:aws:rds:useast-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE`.
+    # @option options [Boolean] :enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts DB instance.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in your
+    #   Outpost subnets through your on-premises network. For some use cases,
+    #   a CoIP can provide lower latency for connections to the DB instance
+    #   from outside of its virtual private cloud (VPC) on your local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP addresses][2]
+    #   in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)

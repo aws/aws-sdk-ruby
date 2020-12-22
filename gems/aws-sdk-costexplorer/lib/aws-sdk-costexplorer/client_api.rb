@@ -928,6 +928,7 @@ module Aws::CostExplorer
     RightsizingRecommendationMetadata.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "RecommendationId"))
     RightsizingRecommendationMetadata.add_member(:generation_timestamp, Shapes::ShapeRef.new(shape: GenericString, location_name: "GenerationTimestamp"))
     RightsizingRecommendationMetadata.add_member(:lookback_period_in_days, Shapes::ShapeRef.new(shape: LookbackPeriodInDays, location_name: "LookbackPeriodInDays"))
+    RightsizingRecommendationMetadata.add_member(:additional_metadata, Shapes::ShapeRef.new(shape: GenericString, location_name: "AdditionalMetadata"))
     RightsizingRecommendationMetadata.struct_class = Types::RightsizingRecommendationMetadata
 
     RightsizingRecommendationSummary.add_member(:total_recommendation_count, Shapes::ShapeRef.new(shape: GenericString, location_name: "TotalRecommendationCount"))

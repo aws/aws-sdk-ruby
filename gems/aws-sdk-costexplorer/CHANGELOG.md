@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2020-12-22)
+------------------
+
+* Feature - This release adds additional metadata that may be applicable to the Rightsizing Recommendations.
+
 1.54.0 (2020-12-16)
 ------------------
 

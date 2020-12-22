@@ -878,6 +878,7 @@ module Aws::RDS
     CreateDBInstanceMessage.add_member(:processor_features, Shapes::ShapeRef.new(shape: ProcessorFeatureList, location_name: "ProcessorFeatures"))
     CreateDBInstanceMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     CreateDBInstanceMessage.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
+    CreateDBInstanceMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
     CreateDBInstanceMessage.struct_class = Types::CreateDBInstanceMessage
 
     CreateDBInstanceReadReplicaMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
@@ -1318,6 +1319,7 @@ module Aws::RDS
     DBInstance.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
     DBInstance.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     DBInstance.add_member(:db_instance_automated_backups_replications, Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupsReplicationList, location_name: "DBInstanceAutomatedBackupsReplications"))
+    DBInstance.add_member(:customer_owned_ip_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CustomerOwnedIpEnabled"))
     DBInstance.struct_class = Types::DBInstance
 
     DBInstanceAlreadyExistsFault.struct_class = Types::DBInstanceAlreadyExistsFault
@@ -2369,6 +2371,7 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
     ModifyDBInstanceMessage.add_member(:certificate_rotation_restart, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CertificateRotationRestart"))
     ModifyDBInstanceMessage.add_member(:replica_mode, Shapes::ShapeRef.new(shape: ReplicaMode, location_name: "ReplicaMode"))
+    ModifyDBInstanceMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
     ModifyDBInstanceMessage.struct_class = Types::ModifyDBInstanceMessage
 
     ModifyDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -2936,6 +2939,7 @@ module Aws::RDS
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:use_default_processor_features, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseDefaultProcessorFeatures"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:db_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBParameterGroupName"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
     RestoreDBInstanceFromDBSnapshotMessage.struct_class = Types::RestoreDBInstanceFromDBSnapshotMessage
 
     RestoreDBInstanceFromDBSnapshotResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3023,6 +3027,7 @@ module Aws::RDS
     RestoreDBInstanceToPointInTimeMessage.add_member(:source_dbi_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "SourceDbiResourceId"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:source_db_instance_automated_backups_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceDBInstanceAutomatedBackupsArn"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
     RestoreDBInstanceToPointInTimeMessage.struct_class = Types::RestoreDBInstanceToPointInTimeMessage
 
     RestoreDBInstanceToPointInTimeResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))

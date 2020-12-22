@@ -2205,6 +2205,7 @@ module Aws::CostExplorer
     #   resp.metadata.recommendation_id #=> String
     #   resp.metadata.generation_timestamp #=> String
     #   resp.metadata.lookback_period_in_days #=> String, one of "SEVEN_DAYS", "THIRTY_DAYS", "SIXTY_DAYS"
+    #   resp.metadata.additional_metadata #=> String
     #   resp.summary.total_recommendation_count #=> String
     #   resp.summary.estimated_total_monthly_savings_amount #=> String
     #   resp.summary.savings_currency_code #=> String
@@ -3138,7 +3139,7 @@ module Aws::CostExplorer
     #   notifications.
     #
     # @option params [Array<String>] :monitor_arn_list
-    #   A list of cost anomaly subscription ARNs.
+    #   A list of cost anomaly monitor ARNs.
     #
     # @option params [Array<Types::Subscriber>] :subscribers
     #   The update to the subscriber list.
@@ -3273,7 +3274,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

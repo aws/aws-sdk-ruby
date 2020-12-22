@@ -584,6 +584,7 @@ module Aws::RDS
     #     ],
     #     deletion_protection: false,
     #     max_allocated_storage: 1,
+    #     enable_customer_owned_ip: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -935,8 +936,8 @@ module Aws::RDS
     #   specify the identifier of the custom Availability Zone to create the
     #   DB instance in.
     #
-    #    For more information about RDS on VMware, see the [ *RDS on VMware
-    #   User Guide.* ][2]
+    #    For more information about RDS on VMware, see the [ RDS on VMware User
+    #   Guide.][2]
     #
     #    </note>
     #
@@ -1398,6 +1399,25 @@ module Aws::RDS
     # @option options [Integer] :max_allocated_storage
     #   The upper limit to which Amazon RDS can automatically scale the
     #   storage of the DB instance.
+    # @option options [Boolean] :enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts DB instance.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in your
+    #   Outpost subnets through your on-premises network. For some use cases,
+    #   a CoIP can provide lower latency for connections to the DB instance
+    #   from outside of its virtual private cloud (VPC) on your local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP addresses][2]
+    #   in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
     # @return [DBInstance]
     def create_db_instance(options = {})
       resp = @client.create_db_instance(options)

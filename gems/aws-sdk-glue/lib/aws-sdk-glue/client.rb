@@ -5254,6 +5254,9 @@ module Aws::Glue
     #   resp.evaluation_metrics.find_matches_metrics.confusion_matrix.num_false_positives #=> Integer
     #   resp.evaluation_metrics.find_matches_metrics.confusion_matrix.num_true_negatives #=> Integer
     #   resp.evaluation_metrics.find_matches_metrics.confusion_matrix.num_false_negatives #=> Integer
+    #   resp.evaluation_metrics.find_matches_metrics.column_importances #=> Array
+    #   resp.evaluation_metrics.find_matches_metrics.column_importances[0].column_name #=> String
+    #   resp.evaluation_metrics.find_matches_metrics.column_importances[0].importance #=> Float
     #   resp.label_count #=> Integer
     #   resp.schema #=> Array
     #   resp.schema[0].name #=> String
@@ -5359,6 +5362,9 @@ module Aws::Glue
     #   resp.transforms[0].evaluation_metrics.find_matches_metrics.confusion_matrix.num_false_positives #=> Integer
     #   resp.transforms[0].evaluation_metrics.find_matches_metrics.confusion_matrix.num_true_negatives #=> Integer
     #   resp.transforms[0].evaluation_metrics.find_matches_metrics.confusion_matrix.num_false_negatives #=> Integer
+    #   resp.transforms[0].evaluation_metrics.find_matches_metrics.column_importances #=> Array
+    #   resp.transforms[0].evaluation_metrics.find_matches_metrics.column_importances[0].column_name #=> String
+    #   resp.transforms[0].evaluation_metrics.find_matches_metrics.column_importances[0].importance #=> Float
     #   resp.transforms[0].label_count #=> Integer
     #   resp.transforms[0].schema #=> Array
     #   resp.transforms[0].schema[0].name #=> String
@@ -10590,7 +10596,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

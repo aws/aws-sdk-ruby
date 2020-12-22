@@ -1547,8 +1547,8 @@ module Aws::RDS
     #   to another, and your DB instance uses a nondefault option group. If
     #   your source DB instance uses Transparent Data Encryption for Oracle or
     #   Microsoft SQL Server, you must specify this option when copying across
-    #   AWS Regions. For more information, see [Option Group
-    #   Considerations][1] in the *Amazon RDS User Guide.*
+    #   AWS Regions. For more information, see [Option group
+    #   considerations][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -1767,8 +1767,8 @@ module Aws::RDS
     # A custom AZ is an on-premises AZ that is integrated with a VMware
     # vSphere cluster.
     #
-    # For more information about RDS on VMware, see the [ *RDS on VMware
-    # User Guide.* ][1]
+    # For more information about RDS on VMware, see the [ RDS on VMware User
+    # Guide.][1]
     #
     #
     #
@@ -3114,8 +3114,8 @@ module Aws::RDS
     #   specify the identifier of the custom Availability Zone to create the
     #   DB instance in.
     #
-    #    For more information about RDS on VMware, see the [ *RDS on VMware
-    #   User Guide.* ][2]
+    #    For more information about RDS on VMware, see the [ RDS on VMware User
+    #   Guide.][2]
     #
     #    </note>
     #
@@ -3615,6 +3615,26 @@ module Aws::RDS
     #   The upper limit to which Amazon RDS can automatically scale the
     #   storage of the DB instance.
     #
+    # @option params [Boolean] :enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts DB instance.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in your
+    #   Outpost subnets through your on-premises network. For some use cases,
+    #   a CoIP can provide lower latency for connections to the DB instance
+    #   from outside of its virtual private cloud (VPC) on your local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP addresses][2]
+    #   in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -3699,6 +3719,7 @@ module Aws::RDS
     #     ],
     #     deletion_protection: false,
     #     max_allocated_storage: 1,
+    #     enable_customer_owned_ip: false,
     #   })
     #
     # @example Response structure
@@ -3825,6 +3846,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -4473,6 +4495,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -5364,8 +5387,8 @@ module Aws::RDS
     # A custom AZ is an on-premises AZ that is integrated with a VMware
     # vSphere cluster.
     #
-    # For more information about RDS on VMware, see the [ *RDS on VMware
-    # User Guide.* ][1]
+    # For more information about RDS on VMware, see the [ RDS on VMware User
+    # Guide.][1]
     #
     #
     #
@@ -6021,6 +6044,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -6713,8 +6737,8 @@ module Aws::RDS
     # A custom AZ is an on-premises AZ that is integrated with a VMware
     # vSphere cluster.
     #
-    # For more information about RDS on VMware, see the [ *RDS on VMware
-    # User Guide.* ][1]
+    # For more information about RDS on VMware, see the [ RDS on VMware User
+    # Guide.][1]
     #
     #
     #
@@ -7848,20 +7872,19 @@ module Aws::RDS
     #
     #     * `active` - automated backups for current instances
     #
-    #     * `retained` - automated backups for deleted instances
+    #     * `retained` - automated backups for deleted instances and after
+    #       backup replication is stopped
     #
     #     * `creating` - automated backups that are waiting for the first
     #       automated snapshot to be available
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and Amazon
-    #     Resource Names (ARNs) for DB instances. The results list includes
-    #     only information about the DB instance automated backupss identified
-    #     by these ARNs.
+    #     Resource Names (ARNs). The results list includes only information
+    #     about the DB instance automated backups identified by these ARNs.
     #
-    #   * `dbi-resource-id` - Accepts DB instance resource identifiers and DB
-    #     Amazon Resource Names (ARNs) for DB instances. The results list
-    #     includes only information about the DB instance resources identified
-    #     by these ARNs.
+    #   * `dbi-resource-id` - Accepts DB resource identifiers and Amazon
+    #     Resource Names (ARNs). The results list includes only information
+    #     about the DB instance resources identified by these ARNs.
     #
     #   Returns all resources by default. The status for each resource is
     #   specified in the response.
@@ -8167,6 +8190,7 @@ module Aws::RDS
     #   resp.db_instances[0].tag_list[0].value #=> String
     #   resp.db_instances[0].db_instance_automated_backups_replications #=> Array
     #   resp.db_instances[0].db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instances[0].customer_owned_ip_enabled #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -10631,8 +10655,8 @@ module Aws::RDS
     end
 
     # Returns a list of the source AWS Regions where the current AWS Region
-    # can create a read replica or copy a DB snapshot from. This API action
-    # supports pagination.
+    # can create a read replica, copy a DB snapshot from, or replicate
+    # automated backups from. This API action supports pagination.
     #
     # @option params [String] :region_name
     #   The source AWS Region name. For example, `us-east-1`.
@@ -12205,8 +12229,8 @@ module Aws::RDS
     #   The new DB subnet group for the DB instance. You can use this
     #   parameter to move your DB instance to a different VPC. If your DB
     #   instance isn't in a VPC, you can also use this parameter to move your
-    #   DB instance into a VPC. For more information, see [Updating the VPC
-    #   for a DB Instance][1] in the *Amazon RDS User Guide.*
+    #   DB instance into a VPC. For more information, see [Working with a DB
+    #   instance in a VPC][1] in the *Amazon RDS User Guide.*
     #
     #   Changing the subnet group causes an outage during the change. The
     #   change is applied during the next maintenance window, unless you
@@ -12219,7 +12243,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC
     #
     # @option params [Array<String>] :db_security_groups
     #   A list of DB security groups to authorize on this DB instance.
@@ -12799,6 +12823,26 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     #
+    # @option params [Boolean] :enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts DB instance.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in your
+    #   Outpost subnets through your on-premises network. For some use cases,
+    #   a CoIP can provide lower latency for connections to the DB instance
+    #   from outside of its virtual private cloud (VPC) on your local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP addresses][2]
+    #   in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -12879,6 +12923,7 @@ module Aws::RDS
     #     max_allocated_storage: 1,
     #     certificate_rotation_restart: false,
     #     replica_mode: "open-read-only", # accepts open-read-only, mounted
+    #     enable_customer_owned_ip: false,
     #   })
     #
     # @example Response structure
@@ -13005,6 +13050,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -13329,11 +13375,11 @@ module Aws::RDS
     #   You can specify this parameter when you upgrade an Oracle DB snapshot.
     #   The same option group considerations apply when upgrading a DB
     #   snapshot as when upgrading a DB instance. For more information, see
-    #   [Option Group Considerations][1] in the *Amazon RDS User Guide.*
+    #   [Option group considerations][1] in the *Amazon RDS User Guide.*
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG
     #
     # @return [Types::ModifyDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -14099,6 +14145,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -14510,6 +14557,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -16559,6 +16607,26 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #
+    # @option params [Boolean] :enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts DB instance.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in your
+    #   Outpost subnets through your on-premises network. For some use cases,
+    #   a CoIP can provide lower latency for connections to the DB instance
+    #   from outside of its virtual private cloud (VPC) on your local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP addresses][2]
+    #   in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -16699,6 +16767,7 @@ module Aws::RDS
     #     use_default_processor_features: false,
     #     db_parameter_group_name: "String",
     #     deletion_protection: false,
+    #     enable_customer_owned_ip: false,
     #   })
     #
     # @example Response structure
@@ -16825,6 +16894,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -17394,6 +17464,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -17718,6 +17789,26 @@ module Aws::RDS
     #   from which to restore, for example,
     #   `arn:aws:rds:useast-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE`.
     #
+    # @option params [Boolean] :enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts DB instance.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in your
+    #   Outpost subnets through your on-premises network. For some use cases,
+    #   a CoIP can provide lower latency for connections to the DB instance
+    #   from outside of its virtual private cloud (VPC) on your local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP addresses][2]
+    #   in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -17864,6 +17955,7 @@ module Aws::RDS
     #     source_dbi_resource_id: "String",
     #     max_allocated_storage: 1,
     #     source_db_instance_automated_backups_arn: "String",
+    #     enable_customer_owned_ip: false,
     #   })
     #
     # @example Response structure
@@ -17990,6 +18082,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -18433,6 +18526,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -18995,6 +19089,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -19082,7 +19177,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2020-12-22)
+------------------
+
+* Feature - AWS Glue Find Matches machine learning transforms now support column importance scores.
+
 1.81.0 (2020-12-21)
 ------------------
 

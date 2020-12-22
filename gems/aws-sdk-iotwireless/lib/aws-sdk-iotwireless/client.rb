@@ -1214,7 +1214,7 @@ module Aws::IoTWireless
     # @example Response structure
     #
     #   resp.sidewalk.amazon_id #=> String
-    #   resp.sidewalk.app_server_private_key #=> String
+    #   resp.sidewalk.fingerprint #=> String
     #   resp.account_linked #=> Boolean
     #
     # @overload get_partner_account(params = {})
@@ -1714,7 +1714,7 @@ module Aws::IoTWireless
     #   resp.next_token #=> String
     #   resp.sidewalk #=> Array
     #   resp.sidewalk[0].amazon_id #=> String
-    #   resp.sidewalk[0].app_server_private_key #=> String
+    #   resp.sidewalk[0].fingerprint #=> String
     #
     # @overload list_partner_accounts(params = {})
     # @param [Hash] params ({})
@@ -2217,7 +2217,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

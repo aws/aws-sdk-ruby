@@ -2140,7 +2140,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters-CLI.html
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html
     #   @return [String]
     #
     # @!attribute [rw] global_replication_group_description

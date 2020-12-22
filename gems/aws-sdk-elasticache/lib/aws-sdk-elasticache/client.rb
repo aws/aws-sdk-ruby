@@ -1702,7 +1702,7 @@ module Aws::ElastiCache
     # Redis to enable low-latency reads and disaster recovery across
     # regions. For more information, see [Replication Across Regions Using
     # Global
-    # Datastore](/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters.html).
+    # Datastore](/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores.html).
     #
     # * The **GlobalReplicationGroupIdSuffix** is the name of the Global
     #   Datastore.
@@ -1725,7 +1725,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters-CLI.html
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html
     #
     # @option params [String] :global_replication_group_description
     #   Provides details of the Global Datastore
@@ -9682,7 +9682,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

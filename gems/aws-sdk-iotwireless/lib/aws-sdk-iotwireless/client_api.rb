@@ -101,6 +101,7 @@ module Aws::IoTWireless
     FNwkSIntKey = Shapes::StringShape.new(name: 'FNwkSIntKey')
     FPort = Shapes::IntegerShape.new(name: 'FPort')
     FactoryPresetFreqsList = Shapes::ListShape.new(name: 'FactoryPresetFreqsList')
+    Fingerprint = Shapes::StringShape.new(name: 'Fingerprint')
     GatewayEui = Shapes::StringShape.new(name: 'GatewayEui')
     GetDestinationRequest = Shapes::StructureShape.new(name: 'GetDestinationRequest')
     GetDestinationResponse = Shapes::StructureShape.new(name: 'GetDestinationResponse')
@@ -804,7 +805,7 @@ module Aws::IoTWireless
     SidewalkAccountInfo.struct_class = Types::SidewalkAccountInfo
 
     SidewalkAccountInfoWithFingerprint.add_member(:amazon_id, Shapes::ShapeRef.new(shape: AmazonId, location_name: "AmazonId"))
-    SidewalkAccountInfoWithFingerprint.add_member(:app_server_private_key, Shapes::ShapeRef.new(shape: AppServerPrivateKey, location_name: "AppServerPrivateKey"))
+    SidewalkAccountInfoWithFingerprint.add_member(:fingerprint, Shapes::ShapeRef.new(shape: Fingerprint, location_name: "Fingerprint"))
     SidewalkAccountInfoWithFingerprint.struct_class = Types::SidewalkAccountInfoWithFingerprint
 
     SidewalkAccountList.member = Shapes::ShapeRef.new(shape: SidewalkAccountInfoWithFingerprint)

@@ -4812,12 +4812,17 @@ module Aws::CostExplorer
     #   recommendation.
     #   @return [String]
     #
+    # @!attribute [rw] additional_metadata
+    #   Additional metadata that may be applicable to the recommendation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RightsizingRecommendationMetadata AWS API Documentation
     #
     class RightsizingRecommendationMetadata < Struct.new(
       :recommendation_id,
       :generation_timestamp,
-      :lookback_period_in_days)
+      :lookback_period_in_days,
+      :additional_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5726,7 +5731,7 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] monitor_arn_list
-    #   A list of cost anomaly subscription ARNs.
+    #   A list of cost anomaly monitor ARNs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subscribers

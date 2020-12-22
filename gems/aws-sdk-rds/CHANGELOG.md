@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2020-12-22)
+------------------
+
+* Feature - Adds customer-owned IP address (CoIP) support to Amazon RDS on AWS Outposts.
+
 1.108.0 (2020-12-18)
 ------------------
 

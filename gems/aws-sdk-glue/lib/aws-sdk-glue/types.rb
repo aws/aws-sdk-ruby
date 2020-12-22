@@ -1506,6 +1506,30 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A structure containing the column name and column importance score for
+    # a column.
+    #
+    # Column importance helps you understand how columns contribute to your
+    # model, by identifying which columns in your records are more important
+    # than others.
+    #
+    # @!attribute [rw] column_name
+    #   The name of a column.
+    #   @return [String]
+    #
+    # @!attribute [rw] importance
+    #   The column importance score for the column, as a decimal.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnImportance AWS API Documentation
+    #
+    class ColumnImportance < Struct.new(
+      :column_name,
+      :importance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the generated column-level statistics for a table or
     # partition.
     #
@@ -6422,6 +6446,11 @@ module Aws::Glue
     #   [1]: https://en.wikipedia.org/wiki/Confusion_matrix
     #   @return [Types::ConfusionMatrix]
     #
+    # @!attribute [rw] column_importances
+    #   A list of `ColumnImportance` structures containing column importance
+    #   metrics, sorted in order of descending importance.
+    #   @return [Array<Types::ColumnImportance>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FindMatchesMetrics AWS API Documentation
     #
     class FindMatchesMetrics < Struct.new(
@@ -6429,7 +6458,8 @@ module Aws::Glue
       :precision,
       :recall,
       :f1,
-      :confusion_matrix)
+      :confusion_matrix,
+      :column_importances)
       SENSITIVE = []
       include Aws::Structure
     end

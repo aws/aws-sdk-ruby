@@ -3758,15 +3758,15 @@ module Aws::SSM
     RegisterTargetWithMaintenanceWindowResult.struct_class = Types::RegisterTargetWithMaintenanceWindowResult
 
     RegisterTaskWithMaintenanceWindowRequest.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, required: true, location_name: "WindowId"))
-    RegisterTaskWithMaintenanceWindowRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, required: true, location_name: "Targets"))
+    RegisterTaskWithMaintenanceWindowRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets", metadata: {"box"=>true}))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:task_arn, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskArn, required: true, location_name: "TaskArn"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:service_role_arn, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "ServiceRoleArn"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:task_type, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskType, required: true, location_name: "TaskType"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:task_parameters, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskParameters, location_name: "TaskParameters"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:task_invocation_parameters, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskInvocationParameters, location_name: "TaskInvocationParameters"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:priority, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskPriority, location_name: "Priority", metadata: {"box"=>true}))
-    RegisterTaskWithMaintenanceWindowRequest.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, required: true, location_name: "MaxConcurrency"))
-    RegisterTaskWithMaintenanceWindowRequest.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, required: true, location_name: "MaxErrors"))
+    RegisterTaskWithMaintenanceWindowRequest.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency", metadata: {"box"=>true}))
+    RegisterTaskWithMaintenanceWindowRequest.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors", metadata: {"box"=>true}))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "LoggingInfo"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:name, Shapes::ShapeRef.new(shape: MaintenanceWindowName, location_name: "Name"))
     RegisterTaskWithMaintenanceWindowRequest.add_member(:description, Shapes::ShapeRef.new(shape: MaintenanceWindowDescription, location_name: "Description"))
