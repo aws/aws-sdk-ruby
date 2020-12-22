@@ -259,6 +259,13 @@ Please use any of these resources for getting help:
 * Join the AWS SDK for Ruby [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby).
 * Open a support ticket with [AWS Support](https://console.aws.amazon.com/support/home).
 
+## Maintenance and support for SDK major versions
+
+For information about maintenance and support for SDK major versions and their underlying dependencies, see the following in the [AWS SDKs and Tools Shared Configuration and Credentials Reference Guide](https://docs.aws.amazon.com/credref/latest/refdocs/overview.html):
+
+* [AWS SDKs and Tools Maintenance Policy](https://docs.aws.amazon.com/credref/latest/refdocs/maint-policy.html)
+* [AWS SDKs and Tools Version Support Matrix](https://docs.aws.amazon.com/credref/latest/refdocs/version-support-matrix.html)
+
 ## Opening Issues
 
 If you encounter a bug or have a feature request, we would like to hear about
