@@ -58,6 +58,10 @@ module Aws::ComputeOptimizer
     FilterValues = Shapes::ListShape.new(name: 'FilterValues')
     Filters = Shapes::ListShape.new(name: 'Filters')
     Finding = Shapes::StringShape.new(name: 'Finding')
+    FindingReasonCode = Shapes::StringShape.new(name: 'FindingReasonCode')
+    FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
+    FunctionArns = Shapes::ListShape.new(name: 'FunctionArns')
+    FunctionVersion = Shapes::StringShape.new(name: 'FunctionVersion')
     GetAutoScalingGroupRecommendationsRequest = Shapes::StructureShape.new(name: 'GetAutoScalingGroupRecommendationsRequest')
     GetAutoScalingGroupRecommendationsResponse = Shapes::StructureShape.new(name: 'GetAutoScalingGroupRecommendationsResponse')
     GetEBSVolumeRecommendationsRequest = Shapes::StructureShape.new(name: 'GetEBSVolumeRecommendationsRequest')
@@ -68,6 +72,8 @@ module Aws::ComputeOptimizer
     GetEC2RecommendationProjectedMetricsResponse = Shapes::StructureShape.new(name: 'GetEC2RecommendationProjectedMetricsResponse')
     GetEnrollmentStatusRequest = Shapes::StructureShape.new(name: 'GetEnrollmentStatusRequest')
     GetEnrollmentStatusResponse = Shapes::StructureShape.new(name: 'GetEnrollmentStatusResponse')
+    GetLambdaFunctionRecommendationsRequest = Shapes::StructureShape.new(name: 'GetLambdaFunctionRecommendationsRequest')
+    GetLambdaFunctionRecommendationsResponse = Shapes::StructureShape.new(name: 'GetLambdaFunctionRecommendationsResponse')
     GetRecommendationError = Shapes::StructureShape.new(name: 'GetRecommendationError')
     GetRecommendationErrors = Shapes::ListShape.new(name: 'GetRecommendationErrors')
     GetRecommendationSummariesRequest = Shapes::StructureShape.new(name: 'GetRecommendationSummariesRequest')
@@ -89,6 +95,24 @@ module Aws::ComputeOptimizer
     JobId = Shapes::StringShape.new(name: 'JobId')
     JobIds = Shapes::ListShape.new(name: 'JobIds')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
+    LambdaFunctionMemoryMetricName = Shapes::StringShape.new(name: 'LambdaFunctionMemoryMetricName')
+    LambdaFunctionMemoryMetricStatistic = Shapes::StringShape.new(name: 'LambdaFunctionMemoryMetricStatistic')
+    LambdaFunctionMemoryProjectedMetric = Shapes::StructureShape.new(name: 'LambdaFunctionMemoryProjectedMetric')
+    LambdaFunctionMemoryProjectedMetrics = Shapes::ListShape.new(name: 'LambdaFunctionMemoryProjectedMetrics')
+    LambdaFunctionMemoryRecommendationOption = Shapes::StructureShape.new(name: 'LambdaFunctionMemoryRecommendationOption')
+    LambdaFunctionMemoryRecommendationOptions = Shapes::ListShape.new(name: 'LambdaFunctionMemoryRecommendationOptions')
+    LambdaFunctionMetricName = Shapes::StringShape.new(name: 'LambdaFunctionMetricName')
+    LambdaFunctionMetricStatistic = Shapes::StringShape.new(name: 'LambdaFunctionMetricStatistic')
+    LambdaFunctionRecommendation = Shapes::StructureShape.new(name: 'LambdaFunctionRecommendation')
+    LambdaFunctionRecommendationFilter = Shapes::StructureShape.new(name: 'LambdaFunctionRecommendationFilter')
+    LambdaFunctionRecommendationFilterName = Shapes::StringShape.new(name: 'LambdaFunctionRecommendationFilterName')
+    LambdaFunctionRecommendationFilters = Shapes::ListShape.new(name: 'LambdaFunctionRecommendationFilters')
+    LambdaFunctionRecommendationFinding = Shapes::StringShape.new(name: 'LambdaFunctionRecommendationFinding')
+    LambdaFunctionRecommendationFindingReasonCode = Shapes::StringShape.new(name: 'LambdaFunctionRecommendationFindingReasonCode')
+    LambdaFunctionRecommendationFindingReasonCodes = Shapes::ListShape.new(name: 'LambdaFunctionRecommendationFindingReasonCodes')
+    LambdaFunctionRecommendations = Shapes::ListShape.new(name: 'LambdaFunctionRecommendations')
+    LambdaFunctionUtilizationMetric = Shapes::StructureShape.new(name: 'LambdaFunctionUtilizationMetric')
+    LambdaFunctionUtilizationMetrics = Shapes::ListShape.new(name: 'LambdaFunctionUtilizationMetrics')
     LastRefreshTimestamp = Shapes::TimestampShape.new(name: 'LastRefreshTimestamp')
     LastUpdatedTimestamp = Shapes::TimestampShape.new(name: 'LastUpdatedTimestamp')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -96,6 +120,7 @@ module Aws::ComputeOptimizer
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxSize = Shapes::IntegerShape.new(name: 'MaxSize')
     MemberAccountsEnrolled = Shapes::BooleanShape.new(name: 'MemberAccountsEnrolled')
+    MemorySize = Shapes::IntegerShape.new(name: 'MemorySize')
     Message = Shapes::StringShape.new(name: 'Message')
     MetadataKey = Shapes::StringShape.new(name: 'MetadataKey')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
@@ -105,6 +130,7 @@ module Aws::ComputeOptimizer
     MinSize = Shapes::IntegerShape.new(name: 'MinSize')
     MissingAuthenticationToken = Shapes::StructureShape.new(name: 'MissingAuthenticationToken')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NumberOfInvocations = Shapes::IntegerShape.new(name: 'NumberOfInvocations')
     OptInRequiredException = Shapes::StructureShape.new(name: 'OptInRequiredException')
     PerformanceRisk = Shapes::FloatShape.new(name: 'PerformanceRisk')
     Period = Shapes::IntegerShape.new(name: 'Period')
@@ -112,6 +138,8 @@ module Aws::ComputeOptimizer
     ProjectedMetrics = Shapes::ListShape.new(name: 'ProjectedMetrics')
     ProjectedUtilizationMetrics = Shapes::ListShape.new(name: 'ProjectedUtilizationMetrics')
     Rank = Shapes::IntegerShape.new(name: 'Rank')
+    ReasonCodeSummaries = Shapes::ListShape.new(name: 'ReasonCodeSummaries')
+    ReasonCodeSummary = Shapes::StructureShape.new(name: 'ReasonCodeSummary')
     RecommendationExportJob = Shapes::StructureShape.new(name: 'RecommendationExportJob')
     RecommendationExportJobs = Shapes::ListShape.new(name: 'RecommendationExportJobs')
     RecommendationOptions = Shapes::ListShape.new(name: 'RecommendationOptions')
@@ -251,6 +279,8 @@ module Aws::ComputeOptimizer
 
     Filters.member = Shapes::ShapeRef.new(shape: Filter)
 
+    FunctionArns.member = Shapes::ShapeRef.new(shape: FunctionArn)
+
     GetAutoScalingGroupRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
     GetAutoScalingGroupRecommendationsRequest.add_member(:auto_scaling_group_arns, Shapes::ShapeRef.new(shape: AutoScalingGroupArns, location_name: "autoScalingGroupArns"))
     GetAutoScalingGroupRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -304,6 +334,17 @@ module Aws::ComputeOptimizer
     GetEnrollmentStatusResponse.add_member(:member_accounts_enrolled, Shapes::ShapeRef.new(shape: MemberAccountsEnrolled, location_name: "memberAccountsEnrolled"))
     GetEnrollmentStatusResponse.struct_class = Types::GetEnrollmentStatusResponse
 
+    GetLambdaFunctionRecommendationsRequest.add_member(:function_arns, Shapes::ShapeRef.new(shape: FunctionArns, location_name: "functionArns"))
+    GetLambdaFunctionRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    GetLambdaFunctionRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: LambdaFunctionRecommendationFilters, location_name: "filters"))
+    GetLambdaFunctionRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetLambdaFunctionRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetLambdaFunctionRecommendationsRequest.struct_class = Types::GetLambdaFunctionRecommendationsRequest
+
+    GetLambdaFunctionRecommendationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetLambdaFunctionRecommendationsResponse.add_member(:lambda_function_recommendations, Shapes::ShapeRef.new(shape: LambdaFunctionRecommendations, location_name: "lambdaFunctionRecommendations"))
+    GetLambdaFunctionRecommendationsResponse.struct_class = Types::GetLambdaFunctionRecommendationsResponse
+
     GetRecommendationError.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, location_name: "identifier"))
     GetRecommendationError.add_member(:code, Shapes::ShapeRef.new(shape: Code, location_name: "code"))
     GetRecommendationError.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
@@ -356,6 +397,50 @@ module Aws::ComputeOptimizer
 
     JobIds.member = Shapes::ShapeRef.new(shape: JobId)
 
+    LambdaFunctionMemoryProjectedMetric.add_member(:name, Shapes::ShapeRef.new(shape: LambdaFunctionMemoryMetricName, location_name: "name"))
+    LambdaFunctionMemoryProjectedMetric.add_member(:statistic, Shapes::ShapeRef.new(shape: LambdaFunctionMemoryMetricStatistic, location_name: "statistic"))
+    LambdaFunctionMemoryProjectedMetric.add_member(:value, Shapes::ShapeRef.new(shape: MetricValue, location_name: "value"))
+    LambdaFunctionMemoryProjectedMetric.struct_class = Types::LambdaFunctionMemoryProjectedMetric
+
+    LambdaFunctionMemoryProjectedMetrics.member = Shapes::ShapeRef.new(shape: LambdaFunctionMemoryProjectedMetric)
+
+    LambdaFunctionMemoryRecommendationOption.add_member(:rank, Shapes::ShapeRef.new(shape: Rank, location_name: "rank"))
+    LambdaFunctionMemoryRecommendationOption.add_member(:memory_size, Shapes::ShapeRef.new(shape: MemorySize, location_name: "memorySize"))
+    LambdaFunctionMemoryRecommendationOption.add_member(:projected_utilization_metrics, Shapes::ShapeRef.new(shape: LambdaFunctionMemoryProjectedMetrics, location_name: "projectedUtilizationMetrics"))
+    LambdaFunctionMemoryRecommendationOption.struct_class = Types::LambdaFunctionMemoryRecommendationOption
+
+    LambdaFunctionMemoryRecommendationOptions.member = Shapes::ShapeRef.new(shape: LambdaFunctionMemoryRecommendationOption)
+
+    LambdaFunctionRecommendation.add_member(:function_arn, Shapes::ShapeRef.new(shape: FunctionArn, location_name: "functionArn"))
+    LambdaFunctionRecommendation.add_member(:function_version, Shapes::ShapeRef.new(shape: FunctionVersion, location_name: "functionVersion"))
+    LambdaFunctionRecommendation.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    LambdaFunctionRecommendation.add_member(:current_memory_size, Shapes::ShapeRef.new(shape: MemorySize, location_name: "currentMemorySize"))
+    LambdaFunctionRecommendation.add_member(:number_of_invocations, Shapes::ShapeRef.new(shape: NumberOfInvocations, location_name: "numberOfInvocations"))
+    LambdaFunctionRecommendation.add_member(:utilization_metrics, Shapes::ShapeRef.new(shape: LambdaFunctionUtilizationMetrics, location_name: "utilizationMetrics"))
+    LambdaFunctionRecommendation.add_member(:lookback_period_in_days, Shapes::ShapeRef.new(shape: LookBackPeriodInDays, location_name: "lookbackPeriodInDays"))
+    LambdaFunctionRecommendation.add_member(:last_refresh_timestamp, Shapes::ShapeRef.new(shape: LastRefreshTimestamp, location_name: "lastRefreshTimestamp"))
+    LambdaFunctionRecommendation.add_member(:finding, Shapes::ShapeRef.new(shape: LambdaFunctionRecommendationFinding, location_name: "finding"))
+    LambdaFunctionRecommendation.add_member(:finding_reason_codes, Shapes::ShapeRef.new(shape: LambdaFunctionRecommendationFindingReasonCodes, location_name: "findingReasonCodes"))
+    LambdaFunctionRecommendation.add_member(:memory_size_recommendation_options, Shapes::ShapeRef.new(shape: LambdaFunctionMemoryRecommendationOptions, location_name: "memorySizeRecommendationOptions"))
+    LambdaFunctionRecommendation.struct_class = Types::LambdaFunctionRecommendation
+
+    LambdaFunctionRecommendationFilter.add_member(:name, Shapes::ShapeRef.new(shape: LambdaFunctionRecommendationFilterName, location_name: "name"))
+    LambdaFunctionRecommendationFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "values"))
+    LambdaFunctionRecommendationFilter.struct_class = Types::LambdaFunctionRecommendationFilter
+
+    LambdaFunctionRecommendationFilters.member = Shapes::ShapeRef.new(shape: LambdaFunctionRecommendationFilter)
+
+    LambdaFunctionRecommendationFindingReasonCodes.member = Shapes::ShapeRef.new(shape: LambdaFunctionRecommendationFindingReasonCode)
+
+    LambdaFunctionRecommendations.member = Shapes::ShapeRef.new(shape: LambdaFunctionRecommendation)
+
+    LambdaFunctionUtilizationMetric.add_member(:name, Shapes::ShapeRef.new(shape: LambdaFunctionMetricName, location_name: "name"))
+    LambdaFunctionUtilizationMetric.add_member(:statistic, Shapes::ShapeRef.new(shape: LambdaFunctionMetricStatistic, location_name: "statistic"))
+    LambdaFunctionUtilizationMetric.add_member(:value, Shapes::ShapeRef.new(shape: MetricValue, location_name: "value"))
+    LambdaFunctionUtilizationMetric.struct_class = Types::LambdaFunctionUtilizationMetric
+
+    LambdaFunctionUtilizationMetrics.member = Shapes::ShapeRef.new(shape: LambdaFunctionUtilizationMetric)
+
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
@@ -375,6 +460,12 @@ module Aws::ComputeOptimizer
     ProjectedMetrics.member = Shapes::ShapeRef.new(shape: ProjectedMetric)
 
     ProjectedUtilizationMetrics.member = Shapes::ShapeRef.new(shape: UtilizationMetric)
+
+    ReasonCodeSummaries.member = Shapes::ShapeRef.new(shape: ReasonCodeSummary)
+
+    ReasonCodeSummary.add_member(:name, Shapes::ShapeRef.new(shape: FindingReasonCode, location_name: "name"))
+    ReasonCodeSummary.add_member(:value, Shapes::ShapeRef.new(shape: SummaryValue, location_name: "value"))
+    ReasonCodeSummary.struct_class = Types::ReasonCodeSummary
 
     RecommendationExportJob.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
     RecommendationExportJob.add_member(:destination, Shapes::ShapeRef.new(shape: ExportDestination, location_name: "destination"))
@@ -428,6 +519,7 @@ module Aws::ComputeOptimizer
 
     Summary.add_member(:name, Shapes::ShapeRef.new(shape: Finding, location_name: "name"))
     Summary.add_member(:value, Shapes::ShapeRef.new(shape: SummaryValue, location_name: "value"))
+    Summary.add_member(:reason_code_summaries, Shapes::ShapeRef.new(shape: ReasonCodeSummaries, location_name: "reasonCodeSummaries"))
     Summary.struct_class = Types::Summary
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
@@ -622,6 +714,22 @@ module Aws::ComputeOptimizer
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_lambda_function_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLambdaFunctionRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLambdaFunctionRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLambdaFunctionRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:get_recommendation_summaries, Seahorse::Model::Operation.new.tap do |o|

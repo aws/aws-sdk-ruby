@@ -1013,6 +1013,8 @@ module Aws::DatabaseMigrationService
     #       username: "String",
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #       secrets_manager_oracle_asm_access_role_arn: "String",
+    #       secrets_manager_oracle_asm_secret_id: "String",
     #     },
     #     sybase_settings: {
     #       database_name: "String",
@@ -1248,6 +1250,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.username #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
     #   resp.endpoint.sybase_settings.database_name #=> String
     #   resp.endpoint.sybase_settings.password #=> String
     #   resp.endpoint.sybase_settings.port #=> Integer
@@ -2339,6 +2343,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.username #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
     #   resp.endpoint.sybase_settings.database_name #=> String
     #   resp.endpoint.sybase_settings.password #=> String
     #   resp.endpoint.sybase_settings.port #=> Integer
@@ -3409,6 +3415,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].oracle_settings.username #=> String
     #   resp.endpoints[0].oracle_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoints[0].oracle_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoints[0].oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
+    #   resp.endpoints[0].oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
     #   resp.endpoints[0].sybase_settings.database_name #=> String
     #   resp.endpoints[0].sybase_settings.password #=> String
     #   resp.endpoints[0].sybase_settings.port #=> Integer
@@ -5244,6 +5252,8 @@ module Aws::DatabaseMigrationService
     #       username: "String",
     #       secrets_manager_access_role_arn: "String",
     #       secrets_manager_secret_id: "String",
+    #       secrets_manager_oracle_asm_access_role_arn: "String",
+    #       secrets_manager_oracle_asm_secret_id: "String",
     #     },
     #     sybase_settings: {
     #       database_name: "String",
@@ -5478,6 +5488,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.username #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_access_role_arn #=> String
     #   resp.endpoint.oracle_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
     #   resp.endpoint.sybase_settings.database_name #=> String
     #   resp.endpoint.sybase_settings.password #=> String
     #   resp.endpoint.sybase_settings.port #=> Integer
@@ -6797,7 +6809,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2020-12-23)
+------------------
+
+* Feature - This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for lambda functions.
+
 1.10.0 (2020-12-03)
 ------------------
 

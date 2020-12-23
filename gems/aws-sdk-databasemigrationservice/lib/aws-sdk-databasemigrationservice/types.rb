@@ -530,6 +530,8 @@ module Aws::DatabaseMigrationService
     #           username: "String",
     #           secrets_manager_access_role_arn: "String",
     #           secrets_manager_secret_id: "String",
+    #           secrets_manager_oracle_asm_access_role_arn: "String",
+    #           secrets_manager_oracle_asm_secret_id: "String",
     #         },
     #         sybase_settings: {
     #           database_name: "String",
@@ -4583,6 +4585,8 @@ module Aws::DatabaseMigrationService
     #           username: "String",
     #           secrets_manager_access_role_arn: "String",
     #           secrets_manager_secret_id: "String",
+    #           secrets_manager_oracle_asm_access_role_arn: "String",
+    #           secrets_manager_oracle_asm_secret_id: "String",
     #         },
     #         sybase_settings: {
     #           database_name: "String",
@@ -5780,6 +5784,8 @@ module Aws::DatabaseMigrationService
     #         username: "String",
     #         secrets_manager_access_role_arn: "String",
     #         secrets_manager_secret_id: "String",
+    #         secrets_manager_oracle_asm_access_role_arn: "String",
+    #         secrets_manager_oracle_asm_secret_id: "String",
     #       }
     #
     # @!attribute [rw] add_supplemental_logging
@@ -6047,6 +6053,39 @@ module Aws::DatabaseMigrationService
     #   details.
     #   @return [String]
     #
+    # @!attribute [rw] secrets_manager_oracle_asm_access_role_arn
+    #   Required only if your Oracle endpoint uses Advanced Storage Manager
+    #   (ASM). The full ARN of the IAM role that specifies AWS DMS as the
+    #   trusted entity and grants the required permissions to access the
+    #   `SecretsManagerOracleAsmSecret`. This
+    #   `SecretsManagerOracleAsmSecret` has the secret value that allows
+    #   access to the Oracle ASM of the endpoint.
+    #
+    #   <note markdown="1"> You can specify one of two sets of values for these permissions. You
+    #   can specify the values for this setting and
+    #   `SecretsManagerOracleAsmSecretId`. Or you can specify clear-text
+    #   values for `AsmUserName`, `AsmPassword`, and `AsmServerName`. You
+    #   can't specify both. For more information on creating this
+    #   `SecretsManagerOracleAsmSecret` and the
+    #   `SecretsManagerOracleAsmAccessRoleArn` and
+    #   `SecretsManagerOracleAsmSecretId` required to access it, see [Using
+    #   secrets to access AWS Database Migration Service resources][1] in
+    #   the *AWS Database Migration Service User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager
+    #   @return [String]
+    #
+    # @!attribute [rw] secrets_manager_oracle_asm_secret_id
+    #   Required only if your Oracle endpoint uses Advanced Storage Manager
+    #   (ASM). The full ARN, partial ARN, or friendly name of the
+    #   `SecretsManagerOracleAsmSecret` that contains the Oracle ASM
+    #   connection details for the Oracle endpoint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/OracleSettings AWS API Documentation
     #
     class OracleSettings < Struct.new(
@@ -6081,7 +6120,9 @@ module Aws::DatabaseMigrationService
       :server_name,
       :username,
       :secrets_manager_access_role_arn,
-      :secrets_manager_secret_id)
+      :secrets_manager_secret_id,
+      :secrets_manager_oracle_asm_access_role_arn,
+      :secrets_manager_oracle_asm_secret_id)
       SENSITIVE = [:asm_password, :password, :security_db_encryption]
       include Aws::Structure
     end

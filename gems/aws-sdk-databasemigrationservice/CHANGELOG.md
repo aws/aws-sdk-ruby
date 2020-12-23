@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2020-12-23)
+------------------
+
+* Feature - AWS DMS launches support for AWS Secrets Manager to manage Oracle ASM Database credentials
+
 1.49.0 (2020-12-21)
 ------------------
 

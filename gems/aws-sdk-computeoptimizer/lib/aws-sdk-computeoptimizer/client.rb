@@ -943,7 +943,7 @@ module Aws::ComputeOptimizer
     #   resp.instance_recommendations[0].recommendation_options[0].rank #=> Integer
     #   resp.instance_recommendations[0].recommendation_sources #=> Array
     #   resp.instance_recommendations[0].recommendation_sources[0].recommendation_source_arn #=> String
-    #   resp.instance_recommendations[0].recommendation_sources[0].recommendation_source_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume"
+    #   resp.instance_recommendations[0].recommendation_sources[0].recommendation_source_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction"
     #   resp.instance_recommendations[0].last_refresh_timestamp #=> Time
     #   resp.errors #=> Array
     #   resp.errors[0].identifier #=> String
@@ -1053,6 +1053,112 @@ module Aws::ComputeOptimizer
       req.send_request(options)
     end
 
+    # Returns AWS Lambda function recommendations.
+    #
+    # AWS Compute Optimizer generates recommendations for functions that
+    # meet a specific set of requirements. For more information, see the
+    # [Supported resources and requirements][1] in the *AWS Compute
+    # Optimizer User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
+    #
+    # @option params [Array<String>] :function_arns
+    #   The Amazon Resource Name (ARN) of the functions for which to return
+    #   recommendations.
+    #
+    #   You can specify a qualified or unqualified ARN. If you specify an
+    #   unqualified ARN without a function version suffix, Compute Optimizer
+    #   will return recommendations for the latest (`$LATEST`) version of the
+    #   function. If you specify a qualified ARN with a version suffix,
+    #   Compute Optimizer will return recommendations for the specified
+    #   function version. For more information about using function versions,
+    #   see [Using versions][1] in the *AWS Lambda Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using
+    #
+    # @option params [Array<String>] :account_ids
+    #   The IDs of the AWS accounts for which to return function
+    #   recommendations.
+    #
+    #   If your account is the management account of an organization, use this
+    #   parameter to specify the member accounts for which you want to return
+    #   function recommendations.
+    #
+    #   Only one account ID can be specified per request.
+    #
+    # @option params [Array<Types::LambdaFunctionRecommendationFilter>] :filters
+    #   An array of objects that describe a filter that returns a more
+    #   specific list of function recommendations.
+    #
+    # @option params [String] :next_token
+    #   The token to advance to the next page of function recommendations.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of function recommendations to return with a single
+    #   request.
+    #
+    #   To retrieve the remaining results, make another request with the
+    #   returned `NextToken` value.
+    #
+    # @return [Types::GetLambdaFunctionRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLambdaFunctionRecommendationsResponse#next_token #next_token} => String
+    #   * {Types::GetLambdaFunctionRecommendationsResponse#lambda_function_recommendations #lambda_function_recommendations} => Array&lt;Types::LambdaFunctionRecommendation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_lambda_function_recommendations({
+    #     function_arns: ["FunctionArn"],
+    #     account_ids: ["AccountId"],
+    #     filters: [
+    #       {
+    #         name: "Finding", # accepts Finding, FindingReasonCode
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.lambda_function_recommendations #=> Array
+    #   resp.lambda_function_recommendations[0].function_arn #=> String
+    #   resp.lambda_function_recommendations[0].function_version #=> String
+    #   resp.lambda_function_recommendations[0].account_id #=> String
+    #   resp.lambda_function_recommendations[0].current_memory_size #=> Integer
+    #   resp.lambda_function_recommendations[0].number_of_invocations #=> Integer
+    #   resp.lambda_function_recommendations[0].utilization_metrics #=> Array
+    #   resp.lambda_function_recommendations[0].utilization_metrics[0].name #=> String, one of "Duration", "Memory"
+    #   resp.lambda_function_recommendations[0].utilization_metrics[0].statistic #=> String, one of "Maximum", "Average"
+    #   resp.lambda_function_recommendations[0].utilization_metrics[0].value #=> Float
+    #   resp.lambda_function_recommendations[0].lookback_period_in_days #=> Float
+    #   resp.lambda_function_recommendations[0].last_refresh_timestamp #=> Time
+    #   resp.lambda_function_recommendations[0].finding #=> String, one of "Optimized", "NotOptimized", "Unavailable"
+    #   resp.lambda_function_recommendations[0].finding_reason_codes #=> Array
+    #   resp.lambda_function_recommendations[0].finding_reason_codes[0] #=> String, one of "MemoryOverprovisioned", "MemoryUnderprovisioned", "InsufficientData", "Inconclusive"
+    #   resp.lambda_function_recommendations[0].memory_size_recommendation_options #=> Array
+    #   resp.lambda_function_recommendations[0].memory_size_recommendation_options[0].rank #=> Integer
+    #   resp.lambda_function_recommendations[0].memory_size_recommendation_options[0].memory_size #=> Integer
+    #   resp.lambda_function_recommendations[0].memory_size_recommendation_options[0].projected_utilization_metrics #=> Array
+    #   resp.lambda_function_recommendations[0].memory_size_recommendation_options[0].projected_utilization_metrics[0].name #=> String, one of "Duration"
+    #   resp.lambda_function_recommendations[0].memory_size_recommendation_options[0].projected_utilization_metrics[0].statistic #=> String, one of "LowerBound", "UpperBound", "Expected"
+    #   resp.lambda_function_recommendations[0].memory_size_recommendation_options[0].projected_utilization_metrics[0].value #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetLambdaFunctionRecommendations AWS API Documentation
+    #
+    # @overload get_lambda_function_recommendations(params = {})
+    # @param [Hash] params ({})
+    def get_lambda_function_recommendations(params = {}, options = {})
+      req = build_request(:get_lambda_function_recommendations, params)
+      req.send_request(options)
+    end
+
     # Returns the optimization findings for an account.
     #
     # For example, it returns the number of Amazon EC2 instances in an
@@ -1100,7 +1206,10 @@ module Aws::ComputeOptimizer
     #   resp.recommendation_summaries[0].summaries #=> Array
     #   resp.recommendation_summaries[0].summaries[0].name #=> String, one of "Underprovisioned", "Overprovisioned", "Optimized", "NotOptimized"
     #   resp.recommendation_summaries[0].summaries[0].value #=> Float
-    #   resp.recommendation_summaries[0].recommendation_resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume"
+    #   resp.recommendation_summaries[0].summaries[0].reason_code_summaries #=> Array
+    #   resp.recommendation_summaries[0].summaries[0].reason_code_summaries[0].name #=> String, one of "MemoryOverprovisioned", "MemoryUnderprovisioned"
+    #   resp.recommendation_summaries[0].summaries[0].reason_code_summaries[0].value #=> Float
+    #   resp.recommendation_summaries[0].recommendation_resource_type #=> String, one of "Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction"
     #   resp.recommendation_summaries[0].account_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetRecommendationSummaries AWS API Documentation
@@ -1167,7 +1276,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
