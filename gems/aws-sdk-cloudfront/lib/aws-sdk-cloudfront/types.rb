@@ -12683,7 +12683,7 @@ module Aws::CloudFront
     #   certificate.
     #
     #   If you specify an IAM certificate ID, you must also specify values
-    #   for `MinimumProtocolVerison` and `SSLSupportMethod`.
+    #   for `MinimumProtocolVersion` and `SSLSupportMethod`.
     #
     #
     #
@@ -12698,7 +12698,7 @@ module Aws::CloudFront
     #   East (N. Virginia) Region (`us-east-1`).
     #
     #   If you specify an ACM certificate ARN, you must also specify values
-    #   for `MinimumProtocolVerison` and `SSLSupportMethod`.
+    #   for `MinimumProtocolVersion` and `SSLSupportMethod`.
     #
     #
     #
