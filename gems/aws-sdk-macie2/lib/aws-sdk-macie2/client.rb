@@ -872,8 +872,8 @@ module Aws::Macie2
     # or more S3 buckets that Amazon Macie monitors and analyzes.
     #
     # @option params [Hash<String,Types::BucketCriteriaAdditionalProperties>] :criteria
-    #   Specifies, as a map, one or more attribute-based conditions that
-    #   filter the results of a query for information about S3 buckets.
+    #   Specifies, as a map, one or more property-based conditions that filter
+    #   the results of a query for information about S3 buckets.
     #
     # @option params [Integer] :max_results
     #
@@ -2544,7 +2544,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
