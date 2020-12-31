@@ -23,7 +23,6 @@ module Aws::ServiceCatalog
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIds = Shapes::ListShape.new(name: 'AccountIds')
     AddTags = Shapes::ListShape.new(name: 'AddTags')
-    AllowedValue = Shapes::StringShape.new(name: 'AllowedValue')
     AllowedValues = Shapes::ListShape.new(name: 'AllowedValues')
     ApproximateCount = Shapes::IntegerShape.new(name: 'ApproximateCount')
     AssociateBudgetWithResourceInput = Shapes::StructureShape.new(name: 'AssociateBudgetWithResourceInput')
@@ -420,6 +419,7 @@ module Aws::ServiceCatalog
     Status = Shapes::StringShape.new(name: 'Status')
     StatusDetail = Shapes::StringShape.new(name: 'StatusDetail')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
+    String = Shapes::StringShape.new(name: 'String')
     SuccessfulShares = Shapes::ListShape.new(name: 'SuccessfulShares')
     SupportDescription = Shapes::StringShape.new(name: 'SupportDescription')
     SupportEmail = Shapes::StringShape.new(name: 'SupportEmail')
@@ -486,7 +486,7 @@ module Aws::ServiceCatalog
 
     AddTags.member = Shapes::ShapeRef.new(shape: Tag)
 
-    AllowedValues.member = Shapes::ShapeRef.new(shape: AllowedValue)
+    AllowedValues.member = Shapes::ShapeRef.new(shape: String)
 
     AssociateBudgetWithResourceInput.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
     AssociateBudgetWithResourceInput.add_member(:resource_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ResourceId"))
@@ -1232,6 +1232,12 @@ module Aws::ServiceCatalog
     OutputKeys.member = Shapes::ShapeRef.new(shape: OutputKey)
 
     ParameterConstraints.add_member(:allowed_values, Shapes::ShapeRef.new(shape: AllowedValues, location_name: "AllowedValues"))
+    ParameterConstraints.add_member(:allowed_pattern, Shapes::ShapeRef.new(shape: String, location_name: "AllowedPattern"))
+    ParameterConstraints.add_member(:constraint_description, Shapes::ShapeRef.new(shape: String, location_name: "ConstraintDescription"))
+    ParameterConstraints.add_member(:max_length, Shapes::ShapeRef.new(shape: String, location_name: "MaxLength"))
+    ParameterConstraints.add_member(:min_length, Shapes::ShapeRef.new(shape: String, location_name: "MinLength"))
+    ParameterConstraints.add_member(:max_value, Shapes::ShapeRef.new(shape: String, location_name: "MaxValue"))
+    ParameterConstraints.add_member(:min_value, Shapes::ShapeRef.new(shape: String, location_name: "MinValue"))
     ParameterConstraints.struct_class = Types::ParameterConstraints
 
     PortfolioDetail.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))

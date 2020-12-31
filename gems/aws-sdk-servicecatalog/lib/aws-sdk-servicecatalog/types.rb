@@ -4638,10 +4638,59 @@ module Aws::ServiceCatalog
     #   The values that the administrator has allowed for the parameter.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] allowed_pattern
+    #   A regular expression that represents the patterns that allow for
+    #   `String` types. The pattern must match the entire parameter value
+    #   provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] constraint_description
+    #   A string that explains a constraint when the constraint is violated.
+    #   For example, without a constraint description, a parameter that has
+    #   an allowed pattern of `[A-Za-z0-9]+` displays the following error
+    #   message when the user specifies an invalid value:
+    #
+    #   `Malformed input-Parameter MyParameter must match pattern
+    #   [A-Za-z0-9]+`
+    #
+    #   By adding a constraint description, such as must only contain
+    #   letters (uppercase and lowercase) and numbers, you can display the
+    #   following customized error message:
+    #
+    #   `Malformed input-Parameter MyParameter must only contain uppercase
+    #   and lowercase letters and numbers.`
+    #   @return [String]
+    #
+    # @!attribute [rw] max_length
+    #   An integer value that determines the largest number of characters
+    #   you want to allow for `String` types.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_length
+    #   An integer value that determines the smallest number of characters
+    #   you want to allow for `String` types.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_value
+    #   A numeric value that determines the largest numeric value you want
+    #   to allow for `Number` types.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_value
+    #   A numeric value that determines the smallest numeric value you want
+    #   to allow for `Number` types.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ParameterConstraints AWS API Documentation
     #
     class ParameterConstraints < Struct.new(
-      :allowed_values)
+      :allowed_values,
+      :allowed_pattern,
+      :constraint_description,
+      :max_length,
+      :min_length,
+      :max_value,
+      :min_value)
       SENSITIVE = []
       include Aws::Structure
     end

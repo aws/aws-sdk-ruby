@@ -2573,6 +2573,12 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_parameters[0].description #=> String
     #   resp.provisioning_artifact_parameters[0].parameter_constraints.allowed_values #=> Array
     #   resp.provisioning_artifact_parameters[0].parameter_constraints.allowed_values[0] #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.allowed_pattern #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.constraint_description #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.max_length #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.min_length #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.max_value #=> String
+    #   resp.provisioning_artifact_parameters[0].parameter_constraints.min_value #=> String
     #   resp.constraint_summaries #=> Array
     #   resp.constraint_summaries[0].type #=> String
     #   resp.constraint_summaries[0].description #=> String
@@ -5822,7 +5828,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2020-12-31)
+------------------
+
+* Feature - Enhanced Service Catalog DescribeProvisioningParameters API to return new parameter constraints, i.e., MinLength, MaxLength, MinValue, MaxValue, ConstraintDescription and AllowedPattern
+
 1.56.0 (2020-12-17)
 ------------------
 
