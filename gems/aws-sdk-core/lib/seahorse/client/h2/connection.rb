@@ -43,7 +43,7 @@ module Seahorse
             instance_variable_set("@#{opt_name}", value)
           end
           @h2_client = HTTP2::Client.new(
-            settings_max_concurrent_streams: max_concurrent_streams
+            **{ settings_max_concurrent_streams: max_concurrent_streams }
           )
           @logger = options[:logger] || Logger.new($stdout) if @http_wire_trace
           @chunk_size = options[:read_chunk_size] || CHUNKSIZE
@@ -75,7 +75,7 @@ module Seahorse
         def connect(endpoint)
           @mutex.synchronize {
             if @status == :ready
-              tcp, addr = _tcp_socket(endpoint) 
+              tcp, addr = _tcp_socket(endpoint)
               debug_output("opening connection to #{endpoint.host}:#{endpoint.port} ...")
               _nonblocking_connect(tcp, addr)
               debug_output('opened')
@@ -245,4 +245,3 @@ module Seahorse
     end
   end
 end
-
