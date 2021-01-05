@@ -43,7 +43,7 @@ module Seahorse
             instance_variable_set("@#{opt_name}", value)
           end
           @h2_client = HTTP2::Client.new(
-            **{ settings_max_concurrent_streams: max_concurrent_streams }
+            settings_max_concurrent_streams: max_concurrent_streams
           )
           @logger = options[:logger] || Logger.new($stdout) if @http_wire_trace
           @chunk_size = options[:read_chunk_size] || CHUNKSIZE
