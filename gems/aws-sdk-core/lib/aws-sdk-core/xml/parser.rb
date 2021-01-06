@@ -70,6 +70,11 @@ module Aws
           [:ox, :oga, :libxml, :nokogiri, :rexml].each do |name|
             @engine ||= try_load_engine(name)
           end
+          unless @engine
+            raise 'Unable to find a compatible xml library. ' \
+            'Ensure that you have installed or added to your Gemfile one of ' \
+            'ox, oga, libxml, nokogiri or rexml'
+          end
         end
 
         private

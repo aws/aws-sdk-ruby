@@ -81,7 +81,7 @@ module Aws
           expect(msg).to be_nil
           expect(eof).to be true
 
-          expect(decoder.send(:message_buffer)).to eq(first_part)
+          expect(decoder.send(:message_buffer).force_encoding('utf-8')).to eq(first_part)
 
           msg, eof = decoder.decode_chunk(second_part)
           expect_msg = SpecHelper.expected_decoded_message(file)

@@ -75,7 +75,7 @@ module Seahorse
         def connect(endpoint)
           @mutex.synchronize {
             if @status == :ready
-              tcp, addr = _tcp_socket(endpoint) 
+              tcp, addr = _tcp_socket(endpoint)
               debug_output("opening connection to #{endpoint.host}:#{endpoint.port} ...")
               _nonblocking_connect(tcp, addr)
               debug_output('opened')
@@ -245,4 +245,3 @@ module Seahorse
     end
   end
 end
-
