@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
+use_system_rexml = ((RUBY_VERSION <=> "2.0.0") < 0)
+if use_system_rexml
+  require "rbconfig"
+  $LOAD_PATH.unshift(RbConfig::CONFIG["rubylibdir"])
+end
+
 require 'rexml/document'
 require 'rexml/streamlistener'
+
+$LOAD_PATH.shift if use_system_rexml
 
 module Aws
   module Xml
