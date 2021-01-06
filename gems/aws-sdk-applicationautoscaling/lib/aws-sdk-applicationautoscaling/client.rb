@@ -2128,16 +2128,17 @@ module Aws::ApplicationAutoScaling
     #   For rate expressions, *value* is a positive integer and *unit* is
     #   `minute` \| `minutes` \| `hour` \| `hours` \| `day` \| `days`.
     #
-    #   For more information about cron expressions, see [Cron Expressions][1]
-    #   in the *Amazon CloudWatch Events User Guide*.
+    #   For cron expressions, *fields* is a cron expression. The supported
+    #   cron format consists of six fields separated by white spaces:
+    #   \[Minutes\] \[Hours\] \[Day\_of\_Month\] \[Month\] \[Day\_of\_Week\]
+    #   \[Year\].
     #
-    #   For examples of using these expressions, see [Scheduled Scaling][2] in
-    #   the *Application Auto Scaling User Guide*.
+    #   For more information and examples, see [Scheduled Scaling][1] in the
+    #   *Application Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
-    #   [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html
     #
     # @option params [required, String] :scheduled_action_name
     #   The name of the scheduled action. This name must be unique among all
@@ -2469,8 +2470,8 @@ module Aws::ApplicationAutoScaling
     #   The minimum value that you plan to scale in to. When a scaling policy
     #   is in effect, Application Auto Scaling can scale in (contract) as
     #   needed to the minimum capacity limit in response to changing demand.
+    #   This property is required when registering a new scalable target.
     #
-    #   This parameter is required if you are registering a scalable target.
     #   For certain resources, the minimum value allowed is 0. This includes
     #   Lambda provisioned concurrency, Spot Fleet, ECS services, Aurora DB
     #   clusters, EMR clusters, and custom resources. For all other resources,
@@ -2480,8 +2481,7 @@ module Aws::ApplicationAutoScaling
     #   The maximum value that you plan to scale out to. When a scaling policy
     #   is in effect, Application Auto Scaling can scale out (expand) as
     #   needed to the maximum capacity limit in response to changing demand.
-    #
-    #   This parameter is required if you are registering a scalable target.
+    #   This property is required when registering a new scalable target.
     #
     #   Although you can specify a large maximum capacity, note that service
     #   quotas may impose lower limits. Each service has its own default
@@ -2591,7 +2591,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

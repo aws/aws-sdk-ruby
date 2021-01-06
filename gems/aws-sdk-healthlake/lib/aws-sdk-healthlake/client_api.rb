@@ -30,8 +30,11 @@ module Aws::HealthLake
     DeleteFHIRDatastoreResponse = Shapes::StructureShape.new(name: 'DeleteFHIRDatastoreResponse')
     DescribeFHIRDatastoreRequest = Shapes::StructureShape.new(name: 'DescribeFHIRDatastoreRequest')
     DescribeFHIRDatastoreResponse = Shapes::StructureShape.new(name: 'DescribeFHIRDatastoreResponse')
+    DescribeFHIRExportJobRequest = Shapes::StructureShape.new(name: 'DescribeFHIRExportJobRequest')
+    DescribeFHIRExportJobResponse = Shapes::StructureShape.new(name: 'DescribeFHIRExportJobResponse')
     DescribeFHIRImportJobRequest = Shapes::StructureShape.new(name: 'DescribeFHIRImportJobRequest')
     DescribeFHIRImportJobResponse = Shapes::StructureShape.new(name: 'DescribeFHIRImportJobResponse')
+    ExportJobProperties = Shapes::StructureShape.new(name: 'ExportJobProperties')
     FHIRVersion = Shapes::StringShape.new(name: 'FHIRVersion')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     ImportJobProperties = Shapes::StructureShape.new(name: 'ImportJobProperties')
@@ -45,10 +48,13 @@ module Aws::HealthLake
     MaxResultsInteger = Shapes::IntegerShape.new(name: 'MaxResultsInteger')
     Message = Shapes::StringShape.new(name: 'Message')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
     PreloadDataConfig = Shapes::StructureShape.new(name: 'PreloadDataConfig')
     PreloadDataType = Shapes::StringShape.new(name: 'PreloadDataType')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
+    StartFHIRExportJobRequest = Shapes::StructureShape.new(name: 'StartFHIRExportJobRequest')
+    StartFHIRExportJobResponse = Shapes::StructureShape.new(name: 'StartFHIRExportJobResponse')
     StartFHIRImportJobRequest = Shapes::StructureShape.new(name: 'StartFHIRImportJobRequest')
     StartFHIRImportJobResponse = Shapes::StructureShape.new(name: 'StartFHIRImportJobResponse')
     String = Shapes::StringShape.new(name: 'String')
@@ -107,12 +113,30 @@ module Aws::HealthLake
     DescribeFHIRDatastoreResponse.add_member(:datastore_properties, Shapes::ShapeRef.new(shape: DatastoreProperties, required: true, location_name: "DatastoreProperties"))
     DescribeFHIRDatastoreResponse.struct_class = Types::DescribeFHIRDatastoreResponse
 
+    DescribeFHIRExportJobRequest.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
+    DescribeFHIRExportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    DescribeFHIRExportJobRequest.struct_class = Types::DescribeFHIRExportJobRequest
+
+    DescribeFHIRExportJobResponse.add_member(:export_job_properties, Shapes::ShapeRef.new(shape: ExportJobProperties, required: true, location_name: "ExportJobProperties"))
+    DescribeFHIRExportJobResponse.struct_class = Types::DescribeFHIRExportJobResponse
+
     DescribeFHIRImportJobRequest.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
     DescribeFHIRImportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     DescribeFHIRImportJobRequest.struct_class = Types::DescribeFHIRImportJobRequest
 
     DescribeFHIRImportJobResponse.add_member(:import_job_properties, Shapes::ShapeRef.new(shape: ImportJobProperties, required: true, location_name: "ImportJobProperties"))
     DescribeFHIRImportJobResponse.struct_class = Types::DescribeFHIRImportJobResponse
+
+    ExportJobProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    ExportJobProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
+    ExportJobProperties.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, required: true, location_name: "JobStatus"))
+    ExportJobProperties.add_member(:submit_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "SubmitTime"))
+    ExportJobProperties.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    ExportJobProperties.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
+    ExportJobProperties.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "OutputDataConfig"))
+    ExportJobProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
+    ExportJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ExportJobProperties.struct_class = Types::ExportJobProperties
 
     ImportJobProperties.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     ImportJobProperties.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
@@ -140,11 +164,26 @@ module Aws::HealthLake
     ListFHIRDatastoresResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListFHIRDatastoresResponse.struct_class = Types::ListFHIRDatastoresResponse
 
+    OutputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
+    OutputDataConfig.struct_class = Types::OutputDataConfig
+
     PreloadDataConfig.add_member(:preload_data_type, Shapes::ShapeRef.new(shape: PreloadDataType, required: true, location_name: "PreloadDataType"))
     PreloadDataConfig.struct_class = Types::PreloadDataConfig
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    StartFHIRExportJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
+    StartFHIRExportJobRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "OutputDataConfig"))
+    StartFHIRExportJobRequest.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
+    StartFHIRExportJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
+    StartFHIRExportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartFHIRExportJobRequest.struct_class = Types::StartFHIRExportJobRequest
+
+    StartFHIRExportJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    StartFHIRExportJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, required: true, location_name: "JobStatus"))
+    StartFHIRExportJobResponse.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, location_name: "DatastoreId"))
+    StartFHIRExportJobResponse.struct_class = Types::StartFHIRExportJobResponse
 
     StartFHIRImportJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     StartFHIRImportJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
@@ -221,6 +260,18 @@ module Aws::HealthLake
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:describe_fhir_export_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFHIRExportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFHIRExportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFHIRExportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:describe_fhir_import_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeFHIRImportJob"
         o.http_method = "POST"
@@ -248,6 +299,19 @@ module Aws::HealthLake
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:start_fhir_export_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartFHIRExportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartFHIRExportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartFHIRExportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:start_fhir_import_job, Seahorse::Model::Operation.new.tap do |o|
