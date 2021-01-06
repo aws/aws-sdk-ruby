@@ -72,7 +72,7 @@ module Aws
           end
           unless @engine
             raise 'Unable to find a compatible xml library. ' \
-            ' Make sure you have installed or added to your Gemfile one of ' \
+            'Ensure that you have installed or added to your Gemfile one of ' \
             'ox, oga, libxml, nokogiri or rexml'
           end
         end
