@@ -193,7 +193,7 @@ module Aws
     def backoff(backoff)
       case backoff
       when Proc then backoff
-      when Numeric then ->(_) { sleep(backoff) }
+      when Numeric then ->(_) { Kernel.sleep(backoff) }
       else ->(num_failures) { Kernel.sleep(1.2**num_failures) }
       end
     end
