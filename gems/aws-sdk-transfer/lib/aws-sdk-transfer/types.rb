@@ -43,6 +43,7 @@ module Aws::Transfer
     #
     #       {
     #         certificate: "Certificate",
+    #         domain: "S3", # accepts S3, EFS
     #         endpoint_details: {
     #           address_allocation_ids: ["AddressAllocationId"],
     #           subnet_ids: ["SubnetId"],
@@ -106,6 +107,9 @@ module Aws::Transfer
     #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html
     #   [2]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
     #   [3]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-private.html
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
     #   @return [String]
     #
     # @!attribute [rw] endpoint_details
@@ -216,6 +220,7 @@ module Aws::Transfer
     #
     class CreateServerRequest < Struct.new(
       :certificate,
+      :domain,
       :endpoint_details,
       :endpoint_type,
       :host_key,
@@ -254,6 +259,11 @@ module Aws::Transfer
     #           },
     #         ],
     #         policy: "Policy",
+    #         posix_profile: {
+    #           uid: 1, # required
+    #           gid: 1, # required
+    #           secondary_gids: [1],
+    #         },
     #         role: "Role", # required
     #         server_id: "ServerId", # required
     #         ssh_public_key_body: "SshPublicKeyBody",
@@ -340,6 +350,9 @@ module Aws::Transfer
     #   [2]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
     #   @return [String]
     #
+    # @!attribute [rw] posix_profile
+    #   @return [Types::PosixProfile]
+    #
     # @!attribute [rw] role
     #   The IAM role that controls your users' access to your Amazon S3
     #   bucket. The policies attached to this role will determine the level
@@ -380,6 +393,7 @@ module Aws::Transfer
       :home_directory_type,
       :home_directory_mappings,
       :policy,
+      :posix_profile,
       :role,
       :server_id,
       :ssh_public_key_body,
@@ -662,6 +676,9 @@ module Aws::Transfer
     #   Required when `Protocols` is set to `FTPS`.
     #   @return [String]
     #
+    # @!attribute [rw] domain
+    #   @return [String]
+    #
     # @!attribute [rw] endpoint_details
     #   Specifies the virtual private cloud (VPC) endpoint settings that you
     #   configured for your server.
@@ -752,6 +769,7 @@ module Aws::Transfer
     class DescribedServer < Struct.new(
       :arn,
       :certificate,
+      :domain,
       :endpoint_details,
       :endpoint_type,
       :host_key_fingerprint,
@@ -812,6 +830,9 @@ module Aws::Transfer
     #   Specifies the name of the policy in use for the described user.
     #   @return [String]
     #
+    # @!attribute [rw] posix_profile
+    #   @return [Types::PosixProfile]
+    #
     # @!attribute [rw] role
     #   Specifies the IAM role that controls your users' access to your
     #   Amazon S3 bucket. The policies attached to this role will determine
@@ -845,6 +866,7 @@ module Aws::Transfer
       :home_directory_mappings,
       :home_directory_type,
       :policy,
+      :posix_profile,
       :role,
       :ssh_public_keys,
       :tags,
@@ -1321,6 +1343,9 @@ module Aws::Transfer
     #   listed.
     #   @return [String]
     #
+    # @!attribute [rw] domain
+    #   @return [String]
+    #
     # @!attribute [rw] identity_provider_type
     #   Specifies the authentication method used to validate a user for a
     #   server that was specified. This can include Secure Shell (SSH), user
@@ -1365,6 +1390,7 @@ module Aws::Transfer
     #
     class ListedServer < Struct.new(
       :arn,
+      :domain,
       :identity_provider_type,
       :endpoint_type,
       :logging_role,
@@ -1424,6 +1450,34 @@ module Aws::Transfer
       :role,
       :ssh_public_key_count,
       :user_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PosixProfile
+    #   data as a hash:
+    #
+    #       {
+    #         uid: 1, # required
+    #         gid: 1, # required
+    #         secondary_gids: [1],
+    #       }
+    #
+    # @!attribute [rw] uid
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gid
+    #   @return [Integer]
+    #
+    # @!attribute [rw] secondary_gids
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/PosixProfile AWS API Documentation
+    #
+    class PosixProfile < Struct.new(
+      :uid,
+      :gid,
+      :secondary_gids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1942,6 +1996,11 @@ module Aws::Transfer
     #           },
     #         ],
     #         policy: "Policy",
+    #         posix_profile: {
+    #           uid: 1, # required
+    #           gid: 1, # required
+    #           secondary_gids: [1],
+    #         },
     #         role: "Role",
     #         server_id: "ServerId", # required
     #         user_name: "UserName", # required
@@ -2020,6 +2079,9 @@ module Aws::Transfer
     #   [2]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
     #   @return [String]
     #
+    # @!attribute [rw] posix_profile
+    #   @return [Types::PosixProfile]
+    #
     # @!attribute [rw] role
     #   The IAM role that controls your users' access to your Amazon S3
     #   bucket. The policies attached to this role will determine the level
@@ -2050,6 +2112,7 @@ module Aws::Transfer
       :home_directory_type,
       :home_directory_mappings,
       :policy,
+      :posix_profile,
       :role,
       :server_id,
       :user_name)

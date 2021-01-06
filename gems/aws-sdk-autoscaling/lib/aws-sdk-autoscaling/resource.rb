@@ -122,8 +122,8 @@ module Aws::AutoScaling
     #   (`LaunchTemplate` or `MixedInstancesPolicy`) or a launch configuration
     #   (`LaunchConfigurationName` or `InstanceId`).
     # @option options [Types::LaunchTemplateSpecification] :launch_template
-    #   Parameters used to specify the [launch template][1] and version to use
-    #   to launch instances.
+    #   Parameters used to specify the launch template and version to use to
+    #   launch instances.
     #
     #   Conditional: You must specify either a launch template
     #   (`LaunchTemplate` or `MixedInstancesPolicy`) or a launch configuration
@@ -131,15 +131,14 @@ module Aws::AutoScaling
     #
     #   <note markdown="1"> The launch template that is specified must be configured for use with
     #   an Auto Scaling group. For more information, see [Creating a launch
-    #   template for an Auto Scaling group][2] in the *Amazon EC2 Auto Scaling
+    #   template for an Auto Scaling group][1] in the *Amazon EC2 Auto Scaling
     #   User Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html
-    #   [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html
     # @option options [Types::MixedInstancesPolicy] :mixed_instances_policy
     #   An embedded object that specifies a mixed instances policy. The
     #   required parameters must be specified. If optional parameters are
@@ -456,13 +455,17 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
     #   [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink
     # @option options [String] :user_data
-    #   The Base64-encoded user data to make available to the launched EC2
-    #   instances. For more information, see [Instance metadata and user
-    #   data][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #   The user data to make available to the launched EC2 instances. For
+    #   more information, see [Instance metadata and user data][1] (Linux) and
+    #   [Instance metadata and user data][2] (Windows). If you are using a
+    #   command line tool, base64-encoding is performed for you, and you can
+    #   load the text from a file. Otherwise, you must provide base64-encoded
+    #   text. User data is limited to 16 KB.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html
     # @option options [String] :instance_id
     #   The ID of the instance to use to create the launch configuration. The
     #   new launch configuration derives attributes from the instance, except
@@ -485,7 +488,7 @@ module Aws::AutoScaling
     #   Specifies the instance type of the EC2 instance.
     #
     #   For information about available instance types, see [Available
-    #   Instance Types][1] in the *Amazon EC2 User Guide for Linux Instances.*
+    #   Instance Types][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #   If you do not specify `InstanceId`, you must specify `InstanceType`.
     #

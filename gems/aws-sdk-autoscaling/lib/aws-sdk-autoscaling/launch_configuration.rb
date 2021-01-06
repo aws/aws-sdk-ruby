@@ -108,13 +108,17 @@ module Aws::AutoScaling
       data[:classic_link_vpc_security_groups]
     end
 
-    # The Base64-encoded user data to make available to the launched EC2
-    # instances. For more information, see [Instance metadata and user
-    # data][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    # The user data to make available to the launched EC2 instances. For
+    # more information, see [Instance metadata and user data][1] (Linux) and
+    # [Instance metadata and user data][2] (Windows). If you are using a
+    # command line tool, base64-encoding is performed for you, and you can
+    # load the text from a file. Otherwise, you must provide base64-encoded
+    # text. User data is limited to 16 KB.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html
     # @return [String]
     def user_data
       data[:user_data]
@@ -123,7 +127,7 @@ module Aws::AutoScaling
     # The instance type for the instances.
     #
     # For information about available instance types, see [Available
-    # Instance Types][1] in the *Amazon EC2 User Guide for Linux Instances.*
+    # Instance Types][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #

@@ -36,6 +36,7 @@ module Aws::Transfer
     DescribedSecurityPolicy = Shapes::StructureShape.new(name: 'DescribedSecurityPolicy')
     DescribedServer = Shapes::StructureShape.new(name: 'DescribedServer')
     DescribedUser = Shapes::StructureShape.new(name: 'DescribedUser')
+    Domain = Shapes::StringShape.new(name: 'Domain')
     EndpointDetails = Shapes::StructureShape.new(name: 'EndpointDetails')
     EndpointType = Shapes::StringShape.new(name: 'EndpointType')
     Fips = Shapes::BooleanShape.new(name: 'Fips')
@@ -71,6 +72,8 @@ module Aws::Transfer
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NullableRole = Shapes::StringShape.new(name: 'NullableRole')
     Policy = Shapes::StringShape.new(name: 'Policy')
+    PosixId = Shapes::IntegerShape.new(name: 'PosixId')
+    PosixProfile = Shapes::StructureShape.new(name: 'PosixProfile')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     Protocols = Shapes::ListShape.new(name: 'Protocols')
     Resource = Shapes::StringShape.new(name: 'Resource')
@@ -80,6 +83,7 @@ module Aws::Transfer
     Response = Shapes::StringShape.new(name: 'Response')
     RetryAfterSeconds = Shapes::StringShape.new(name: 'RetryAfterSeconds')
     Role = Shapes::StringShape.new(name: 'Role')
+    SecondaryGids = Shapes::ListShape.new(name: 'SecondaryGids')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SecurityPolicyName = Shapes::StringShape.new(name: 'SecurityPolicyName')
@@ -131,6 +135,7 @@ module Aws::Transfer
     ConflictException.struct_class = Types::ConflictException
 
     CreateServerRequest.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
+    CreateServerRequest.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "Domain"))
     CreateServerRequest.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetails, location_name: "EndpointDetails"))
     CreateServerRequest.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
     CreateServerRequest.add_member(:host_key, Shapes::ShapeRef.new(shape: HostKey, location_name: "HostKey"))
@@ -149,6 +154,7 @@ module Aws::Transfer
     CreateUserRequest.add_member(:home_directory_type, Shapes::ShapeRef.new(shape: HomeDirectoryType, location_name: "HomeDirectoryType"))
     CreateUserRequest.add_member(:home_directory_mappings, Shapes::ShapeRef.new(shape: HomeDirectoryMappings, location_name: "HomeDirectoryMappings"))
     CreateUserRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
+    CreateUserRequest.add_member(:posix_profile, Shapes::ShapeRef.new(shape: PosixProfile, location_name: "PosixProfile"))
     CreateUserRequest.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "Role"))
     CreateUserRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     CreateUserRequest.add_member(:ssh_public_key_body, Shapes::ShapeRef.new(shape: SshPublicKeyBody, location_name: "SshPublicKeyBody"))
@@ -202,6 +208,7 @@ module Aws::Transfer
 
     DescribedServer.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     DescribedServer.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
+    DescribedServer.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "Domain"))
     DescribedServer.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetails, location_name: "EndpointDetails"))
     DescribedServer.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
     DescribedServer.add_member(:host_key_fingerprint, Shapes::ShapeRef.new(shape: HostKeyFingerprint, location_name: "HostKeyFingerprint"))
@@ -221,6 +228,7 @@ module Aws::Transfer
     DescribedUser.add_member(:home_directory_mappings, Shapes::ShapeRef.new(shape: HomeDirectoryMappings, location_name: "HomeDirectoryMappings"))
     DescribedUser.add_member(:home_directory_type, Shapes::ShapeRef.new(shape: HomeDirectoryType, location_name: "HomeDirectoryType"))
     DescribedUser.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
+    DescribedUser.add_member(:posix_profile, Shapes::ShapeRef.new(shape: PosixProfile, location_name: "PosixProfile"))
     DescribedUser.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
     DescribedUser.add_member(:ssh_public_keys, Shapes::ShapeRef.new(shape: SshPublicKeys, location_name: "SshPublicKeys"))
     DescribedUser.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -300,6 +308,7 @@ module Aws::Transfer
     ListUsersResponse.struct_class = Types::ListUsersResponse
 
     ListedServer.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    ListedServer.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "Domain"))
     ListedServer.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "IdentityProviderType"))
     ListedServer.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
     ListedServer.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
@@ -320,6 +329,11 @@ module Aws::Transfer
 
     ListedUsers.member = Shapes::ShapeRef.new(shape: ListedUser)
 
+    PosixProfile.add_member(:uid, Shapes::ShapeRef.new(shape: PosixId, required: true, location_name: "Uid"))
+    PosixProfile.add_member(:gid, Shapes::ShapeRef.new(shape: PosixId, required: true, location_name: "Gid"))
+    PosixProfile.add_member(:secondary_gids, Shapes::ShapeRef.new(shape: SecondaryGids, location_name: "SecondaryGids"))
+    PosixProfile.struct_class = Types::PosixProfile
+
     Protocols.member = Shapes::ShapeRef.new(shape: Protocol)
 
     ResourceExistsException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
@@ -331,6 +345,8 @@ module Aws::Transfer
     ResourceNotFoundException.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "Resource"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    SecondaryGids.member = Shapes::ShapeRef.new(shape: PosixId)
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
@@ -406,6 +422,7 @@ module Aws::Transfer
     UpdateUserRequest.add_member(:home_directory_type, Shapes::ShapeRef.new(shape: HomeDirectoryType, location_name: "HomeDirectoryType"))
     UpdateUserRequest.add_member(:home_directory_mappings, Shapes::ShapeRef.new(shape: HomeDirectoryMappings, location_name: "HomeDirectoryMappings"))
     UpdateUserRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
+    UpdateUserRequest.add_member(:posix_profile, Shapes::ShapeRef.new(shape: PosixProfile, location_name: "PosixProfile"))
     UpdateUserRequest.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
     UpdateUserRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     UpdateUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, required: true, location_name: "UserName"))
