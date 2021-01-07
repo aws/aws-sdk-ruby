@@ -661,6 +661,7 @@ module Aws::MediaConvert
     #             output_channels: [
     #               {
     #                 input_channels: [1],
+    #                 input_channels_fine_tune: [1.0],
     #               },
     #             ],
     #           },
@@ -883,6 +884,7 @@ module Aws::MediaConvert
     #             output_channels: [
     #               {
     #                 input_channels: [1],
+    #                 input_channels_fine_tune: [1.0],
     #               },
     #             ],
     #           },
@@ -1304,18 +1306,24 @@ module Aws::MediaConvert
     # Required when you set your output video codec to AVC-Intra. For more
     # information about the AVC-I settings, see the relevant specification.
     # For detailed information about SD and HD in AVC-I, see
-    # https://ieeexplore.ieee.org/document/7290936.
+    # https://ieeexplore.ieee.org/document/7290936. For information about
+    # 4K/2K in AVC-I, see
+    # https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf.
     #
     # @note When making an API call, you may pass AvcIntraSettings
     #   data as a hash:
     #
     #       {
-    #         avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #         avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200, CLASS_4K_2K
+    #         avc_intra_uhd_settings: {
+    #           quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
+    #         },
     #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #         framerate_denominator: 1,
     #         framerate_numerator: 1,
     #         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #         telecine: "NONE", # accepts NONE, HARD
     #       }
@@ -1324,8 +1332,15 @@ module Aws::MediaConvert
     #   Specify the AVC-Intra class of your output. The AVC-Intra class
     #   selection determines the output video bit rate depending on the
     #   frame rate of the output. Outputs with higher class values have
-    #   higher bitrates and improved image quality.
+    #   higher bitrates and improved image quality. Note that for Class
+    #   4K/2K, MediaConvert supports only 4:2:2 chroma subsampling.
     #   @return [String]
+    #
+    # @!attribute [rw] avc_intra_uhd_settings
+    #   Optional when you set AVC-Intra class (avcIntraClass) to Class 4K/2K
+    #   (CLASS\_4K\_2K). When you set AVC-Intra class to a different value,
+    #   this object isn't allowed.
+    #   @return [Types::AvcIntraUhdSettings]
     #
     # @!attribute [rw] framerate_control
     #   If you are using the console, use the Framerate setting to specify
@@ -1395,6 +1410,24 @@ module Aws::MediaConvert
     #   the Follow options you choose.
     #   @return [String]
     #
+    # @!attribute [rw] scan_type_conversion_mode
+    #   Use this setting for interlaced outputs, when your output frame rate
+    #   is half of your input frame rate. In this situation, choose
+    #   Optimized interlacing (INTERLACED\_OPTIMIZE) to create a better
+    #   quality interlaced output. In this case, each progressive frame from
+    #   the input corresponds to an interlaced field in the output. Keep the
+    #   default value, Basic interlacing (INTERLACED), for all other output
+    #   frame rates. With basic interlacing, MediaConvert performs any frame
+    #   rate conversion first and then interlaces the frames. When you
+    #   choose Optimized interlacing and you set your output frame rate to a
+    #   value that isn't suitable for optimized interlacing, MediaConvert
+    #   automatically falls back to basic interlacing. Required settings: To
+    #   use optimized interlacing, you must set Telecine (telecine) to None
+    #   (NONE) or Soft (SOFT). You can't use optimized interlacing for hard
+    #   telecine outputs. You must also set Interlace mode (interlaceMode)
+    #   to a value other than Progressive (PROGRESSIVE).
+    #   @return [String]
+    #
     # @!attribute [rw] slow_pal
     #   Ignore this setting unless your input frame rate is 23.976 or 24
     #   frames per second (fps). Enable slow PAL to create a 25 fps output.
@@ -1420,13 +1453,45 @@ module Aws::MediaConvert
     #
     class AvcIntraSettings < Struct.new(
       :avc_intra_class,
+      :avc_intra_uhd_settings,
       :framerate_control,
       :framerate_conversion_algorithm,
       :framerate_denominator,
       :framerate_numerator,
       :interlace_mode,
+      :scan_type_conversion_mode,
       :slow_pal,
       :telecine)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Optional when you set AVC-Intra class (avcIntraClass) to Class 4K/2K
+    # (CLASS\_4K\_2K). When you set AVC-Intra class to a different value,
+    # this object isn't allowed.
+    #
+    # @note When making an API call, you may pass AvcIntraUhdSettings
+    #   data as a hash:
+    #
+    #       {
+    #         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
+    #       }
+    #
+    # @!attribute [rw] quality_tuning_level
+    #   Optional. Use Quality tuning level (qualityTuningLevel) to choose
+    #   how many transcoding passes MediaConvert does with your video. When
+    #   you choose Multi-pass (MULTI\_PASS), your video quality is better
+    #   and your output bitrate is more accurate. That is, the actual
+    #   bitrate of your output is closer to the target bitrate defined in
+    #   the specification. When you choose Single-pass (SINGLE\_PASS), your
+    #   encoding time is faster. The default behavior is Single-pass
+    #   (SINGLE\_PASS).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AvcIntraUhdSettings AWS API Documentation
+    #
+    class AvcIntraUhdSettings < Struct.new(
+      :quality_tuning_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2218,10 +2283,18 @@ module Aws::MediaConvert
     end
 
     # Channel mapping (ChannelMapping) contains the group of fields that
-    # hold the remixing value for each channel. Units are in dB. Acceptable
-    # values are within the range from -60 (mute) through 6. A setting of 0
-    # passes the input channel unchanged to the output channel (no
-    # attenuation or amplification).
+    # hold the remixing value for each channel, in dB. Specify remix values
+    # to indicate how much of the content from your input audio channel you
+    # want in your output audio channels. Each instance of the InputChannels
+    # or InputChannelsFineTune array specifies these values for one output
+    # channel. Use one instance of this array for each output channel. In
+    # the console, each array corresponds to a column in the graphical
+    # depiction of the mapping matrix. The rows of the graphical matrix
+    # correspond to input channels. Valid values are within the range from
+    # -60 (mute) through 6. A setting of 0 passes the input channel
+    # unchanged to the output channel (no attenuation or amplification). Use
+    # InputChannels or InputChannelsFineTune to specify your remix values.
+    # Don't use both.
     #
     # @note When making an API call, you may pass ChannelMapping
     #   data as a hash:
@@ -2230,12 +2303,16 @@ module Aws::MediaConvert
     #         output_channels: [
     #           {
     #             input_channels: [1],
+    #             input_channels_fine_tune: [1.0],
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] output_channels
-    #   List of output channels
+    #   In your JSON job specification, include one child of OutputChannels
+    #   for each audio channel that you want in your output. Each child
+    #   should contain one instance of InputChannels or
+    #   InputChannelsFineTune.
     #   @return [Array<Types::OutputChannelMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ChannelMapping AWS API Documentation
@@ -2596,6 +2673,7 @@ module Aws::MediaConvert
     #
     #       {
     #         audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #         i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         scte_35_esam: "INSERT", # accepts INSERT, NONE
     #         scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #       }
@@ -2619,6 +2697,17 @@ module Aws::MediaConvert
     #   output audio codec.
     #   @return [String]
     #
+    # @!attribute [rw] i_frame_only_manifest
+    #   Choose Include (INCLUDE) to have MediaConvert generate an HLS child
+    #   manifest that lists only the I-frames for this rendition, in
+    #   addition to your regular manifest for this rendition. You might use
+    #   this manifest as part of a workflow that creates preview functions
+    #   for your video. MediaConvert adds both the I-frame only child
+    #   manifest and the regular child manifest to the parent manifest. When
+    #   you don't need the I-frame only child manifest, keep the default
+    #   value Exclude (EXCLUDE).
+    #   @return [String]
+    #
     # @!attribute [rw] scte_35_esam
     #   Use this setting only when you specify SCTE-35 markers from ESAM.
     #   Choose INSERT to put SCTE-35 markers in this output at the insertion
@@ -2638,6 +2727,7 @@ module Aws::MediaConvert
     #
     class CmfcSettings < Struct.new(
       :audio_duration,
+      :i_frame_only_manifest,
       :scte_35_esam,
       :scte_35_source)
       SENSITIVE = []
@@ -2746,6 +2836,7 @@ module Aws::MediaConvert
     #       {
     #         cmfc_settings: {
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #           i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #         },
@@ -2975,6 +3066,7 @@ module Aws::MediaConvert
     #                       output_channels: [
     #                         {
     #                           input_channels: [1],
+    #                           input_channels_fine_tune: [1.0],
     #                         },
     #                       ],
     #                     },
@@ -3472,6 +3564,7 @@ module Aws::MediaConvert
     #                           output_channels: [
     #                             {
     #                               input_channels: [1],
+    #                               input_channels_fine_tune: [1.0],
     #                             },
     #                           ],
     #                         },
@@ -3551,6 +3644,7 @@ module Aws::MediaConvert
     #                   container_settings: {
     #                     cmfc_settings: {
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #                       i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
@@ -3691,12 +3785,16 @@ module Aws::MediaConvert
     #                         spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       },
     #                       avc_intra_settings: {
-    #                         avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                         avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200, CLASS_4K_2K
+    #                         avc_intra_uhd_settings: {
+    #                           quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
+    #                         },
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                       },
@@ -3742,6 +3840,7 @@ module Aws::MediaConvert
     #                         },
     #                         rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                         repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                         slices: 1,
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -3786,6 +3885,7 @@ module Aws::MediaConvert
     #                         },
     #                         rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                         sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                         slices: 1,
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -3822,6 +3922,7 @@ module Aws::MediaConvert
     #                         par_numerator: 1,
     #                         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
     #                         rate_control_mode: "VBR", # accepts VBR, CBR
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         softness: 1,
@@ -3840,6 +3941,7 @@ module Aws::MediaConvert
     #                         par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         par_denominator: 1,
     #                         par_numerator: 1,
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                       },
@@ -3849,6 +3951,7 @@ module Aws::MediaConvert
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                         vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
@@ -4202,6 +4305,7 @@ module Aws::MediaConvert
     #                       output_channels: [
     #                         {
     #                           input_channels: [1],
+    #                           input_channels_fine_tune: [1.0],
     #                         },
     #                       ],
     #                     },
@@ -4691,6 +4795,7 @@ module Aws::MediaConvert
     #                           output_channels: [
     #                             {
     #                               input_channels: [1],
+    #                               input_channels_fine_tune: [1.0],
     #                             },
     #                           ],
     #                         },
@@ -4770,6 +4875,7 @@ module Aws::MediaConvert
     #                   container_settings: {
     #                     cmfc_settings: {
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #                       i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
@@ -4910,12 +5016,16 @@ module Aws::MediaConvert
     #                         spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       },
     #                       avc_intra_settings: {
-    #                         avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                         avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200, CLASS_4K_2K
+    #                         avc_intra_uhd_settings: {
+    #                           quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
+    #                         },
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                       },
@@ -4961,6 +5071,7 @@ module Aws::MediaConvert
     #                         },
     #                         rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                         repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                         slices: 1,
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -5005,6 +5116,7 @@ module Aws::MediaConvert
     #                         },
     #                         rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                         sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                         slices: 1,
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -5041,6 +5153,7 @@ module Aws::MediaConvert
     #                         par_numerator: 1,
     #                         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
     #                         rate_control_mode: "VBR", # accepts VBR, CBR
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         softness: 1,
@@ -5059,6 +5172,7 @@ module Aws::MediaConvert
     #                         par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         par_denominator: 1,
     #                         par_numerator: 1,
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                       },
@@ -5068,6 +5182,7 @@ module Aws::MediaConvert
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                         vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
@@ -5456,6 +5571,7 @@ module Aws::MediaConvert
     #                   output_channels: [
     #                     {
     #                       input_channels: [1],
+    #                       input_channels_fine_tune: [1.0],
     #                     },
     #                   ],
     #                 },
@@ -5534,6 +5650,7 @@ module Aws::MediaConvert
     #           container_settings: {
     #             cmfc_settings: {
     #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #               i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             },
@@ -5661,12 +5778,16 @@ module Aws::MediaConvert
     #                 spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #               },
     #               avc_intra_settings: {
-    #                 avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                 avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200, CLASS_4K_2K
+    #                 avc_intra_uhd_settings: {
+    #                   quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
+    #                 },
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                 scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                 telecine: "NONE", # accepts NONE, HARD
     #               },
@@ -5712,6 +5833,7 @@ module Aws::MediaConvert
     #                 },
     #                 rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                 repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
+    #                 scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                 slices: 1,
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -5756,6 +5878,7 @@ module Aws::MediaConvert
     #                 },
     #                 rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                 sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
+    #                 scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                 slices: 1,
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -5792,6 +5915,7 @@ module Aws::MediaConvert
     #                 par_numerator: 1,
     #                 quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
     #                 rate_control_mode: "VBR", # accepts VBR, CBR
+    #                 scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                 softness: 1,
@@ -5810,6 +5934,7 @@ module Aws::MediaConvert
     #                 par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                 par_denominator: 1,
     #                 par_numerator: 1,
+    #                 scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                 telecine: "NONE", # accepts NONE, HARD
     #               },
@@ -5819,6 +5944,7 @@ module Aws::MediaConvert
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #                 scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                 telecine: "NONE", # accepts NONE, HARD
     #                 vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
@@ -7985,6 +8111,7 @@ module Aws::MediaConvert
     #         },
     #         rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #         repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
+    #         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #         slices: 1,
     #         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -8245,6 +8372,24 @@ module Aws::MediaConvert
     #   Places a PPS header on each encoded picture, even if repeated.
     #   @return [String]
     #
+    # @!attribute [rw] scan_type_conversion_mode
+    #   Use this setting for interlaced outputs, when your output frame rate
+    #   is half of your input frame rate. In this situation, choose
+    #   Optimized interlacing (INTERLACED\_OPTIMIZE) to create a better
+    #   quality interlaced output. In this case, each progressive frame from
+    #   the input corresponds to an interlaced field in the output. Keep the
+    #   default value, Basic interlacing (INTERLACED), for all other output
+    #   frame rates. With basic interlacing, MediaConvert performs any frame
+    #   rate conversion first and then interlaces the frames. When you
+    #   choose Optimized interlacing and you set your output frame rate to a
+    #   value that isn't suitable for optimized interlacing, MediaConvert
+    #   automatically falls back to basic interlacing. Required settings: To
+    #   use optimized interlacing, you must set Telecine (telecine) to None
+    #   (NONE) or Soft (SOFT). You can't use optimized interlacing for hard
+    #   telecine outputs. You must also set Interlace mode (interlaceMode)
+    #   to a value other than Progressive (PROGRESSIVE).
+    #   @return [String]
+    #
     # @!attribute [rw] scene_change_detect
     #   Enable this setting to insert I-frames at scene changes that the
     #   service automatically detects. This improves video quality and is
@@ -8399,6 +8544,7 @@ module Aws::MediaConvert
       :qvbr_settings,
       :rate_control_mode,
       :repeat_pps,
+      :scan_type_conversion_mode,
       :scene_change_detect,
       :slices,
       :slow_pal,
@@ -8508,6 +8654,7 @@ module Aws::MediaConvert
     #         },
     #         rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #         sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
+    #         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #         slices: 1,
     #         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -8751,6 +8898,24 @@ module Aws::MediaConvert
     #   dynamically selects best strength based on content
     #   @return [String]
     #
+    # @!attribute [rw] scan_type_conversion_mode
+    #   Use this setting for interlaced outputs, when your output frame rate
+    #   is half of your input frame rate. In this situation, choose
+    #   Optimized interlacing (INTERLACED\_OPTIMIZE) to create a better
+    #   quality interlaced output. In this case, each progressive frame from
+    #   the input corresponds to an interlaced field in the output. Keep the
+    #   default value, Basic interlacing (INTERLACED), for all other output
+    #   frame rates. With basic interlacing, MediaConvert performs any frame
+    #   rate conversion first and then interlaces the frames. When you
+    #   choose Optimized interlacing and you set your output frame rate to a
+    #   value that isn't suitable for optimized interlacing, MediaConvert
+    #   automatically falls back to basic interlacing. Required settings: To
+    #   use optimized interlacing, you must set Telecine (telecine) to None
+    #   (NONE) or Soft (SOFT). You can't use optimized interlacing for hard
+    #   telecine outputs. You must also set Interlace mode (interlaceMode)
+    #   to a value other than Progressive (PROGRESSIVE).
+    #   @return [String]
+    #
     # @!attribute [rw] scene_change_detect
     #   Enable this setting to insert I-frames at scene changes that the
     #   service automatically detects. This improves video quality and is
@@ -8896,6 +9061,7 @@ module Aws::MediaConvert
       :qvbr_settings,
       :rate_control_mode,
       :sample_adaptive_offset_filter_mode,
+      :scan_type_conversion_mode,
       :scene_change_detect,
       :slices,
       :slow_pal,
@@ -9514,8 +9680,14 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] i_frame_only_manifest
-    #   When set to INCLUDE, writes I-Frame Only Manifest in addition to the
-    #   HLS manifest
+    #   Choose Include (INCLUDE) to have MediaConvert generate a child
+    #   manifest that lists only the I-frames for this rendition, in
+    #   addition to your regular manifest for this rendition. You might use
+    #   this manifest as part of a workflow that creates preview functions
+    #   for your video. MediaConvert adds both the I-frame only child
+    #   manifest and the regular child manifest to the parent manifest. When
+    #   you don't need the I-frame only child manifest, keep the default
+    #   value Exclude (EXCLUDE).
     #   @return [String]
     #
     # @!attribute [rw] segment_modifier
@@ -9702,6 +9874,7 @@ module Aws::MediaConvert
     #                 output_channels: [
     #                   {
     #                     input_channels: [1],
+    #                     input_channels_fine_tune: [1.0],
     #                   },
     #                 ],
     #               },
@@ -10142,6 +10315,7 @@ module Aws::MediaConvert
     #                 output_channels: [
     #                   {
     #                     input_channels: [1],
+    #                     input_channels_fine_tune: [1.0],
     #                   },
     #                 ],
     #               },
@@ -10780,6 +10954,7 @@ module Aws::MediaConvert
     #                     output_channels: [
     #                       {
     #                         input_channels: [1],
+    #                         input_channels_fine_tune: [1.0],
     #                       },
     #                     ],
     #                   },
@@ -11277,6 +11452,7 @@ module Aws::MediaConvert
     #                         output_channels: [
     #                           {
     #                             input_channels: [1],
+    #                             input_channels_fine_tune: [1.0],
     #                           },
     #                         ],
     #                       },
@@ -11356,6 +11532,7 @@ module Aws::MediaConvert
     #                 container_settings: {
     #                   cmfc_settings: {
     #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #                     i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   },
@@ -11496,12 +11673,16 @@ module Aws::MediaConvert
     #                       spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                     },
     #                     avc_intra_settings: {
-    #                       avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                       avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200, CLASS_4K_2K
+    #                       avc_intra_uhd_settings: {
+    #                         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
+    #                       },
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                       scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                       telecine: "NONE", # accepts NONE, HARD
     #                     },
@@ -11547,6 +11728,7 @@ module Aws::MediaConvert
     #                       },
     #                       rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                       repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
+    #                       scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                       scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                       slices: 1,
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -11591,6 +11773,7 @@ module Aws::MediaConvert
     #                       },
     #                       rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                       sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
+    #                       scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                       scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                       slices: 1,
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -11627,6 +11810,7 @@ module Aws::MediaConvert
     #                       par_numerator: 1,
     #                       quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
     #                       rate_control_mode: "VBR", # accepts VBR, CBR
+    #                       scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                       scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                       softness: 1,
@@ -11645,6 +11829,7 @@ module Aws::MediaConvert
     #                       par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                       par_denominator: 1,
     #                       par_numerator: 1,
+    #                       scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                       telecine: "NONE", # accepts NONE, HARD
     #                     },
@@ -11654,6 +11839,7 @@ module Aws::MediaConvert
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #                       scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                       telecine: "NONE", # accepts NONE, HARD
     #                       vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
@@ -12033,6 +12219,7 @@ module Aws::MediaConvert
     #                     output_channels: [
     #                       {
     #                         input_channels: [1],
+    #                         input_channels_fine_tune: [1.0],
     #                       },
     #                     ],
     #                   },
@@ -12522,6 +12709,7 @@ module Aws::MediaConvert
     #                         output_channels: [
     #                           {
     #                             input_channels: [1],
+    #                             input_channels_fine_tune: [1.0],
     #                           },
     #                         ],
     #                       },
@@ -12601,6 +12789,7 @@ module Aws::MediaConvert
     #                 container_settings: {
     #                   cmfc_settings: {
     #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #                     i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   },
@@ -12741,12 +12930,16 @@ module Aws::MediaConvert
     #                       spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                     },
     #                     avc_intra_settings: {
-    #                       avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                       avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200, CLASS_4K_2K
+    #                       avc_intra_uhd_settings: {
+    #                         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
+    #                       },
     #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                       scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                       telecine: "NONE", # accepts NONE, HARD
     #                     },
@@ -12792,6 +12985,7 @@ module Aws::MediaConvert
     #                       },
     #                       rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                       repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
+    #                       scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                       scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                       slices: 1,
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -12836,6 +13030,7 @@ module Aws::MediaConvert
     #                       },
     #                       rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                       sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
+    #                       scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                       scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                       slices: 1,
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -12872,6 +13067,7 @@ module Aws::MediaConvert
     #                       par_numerator: 1,
     #                       quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
     #                       rate_control_mode: "VBR", # accepts VBR, CBR
+    #                       scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                       scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                       softness: 1,
@@ -12890,6 +13086,7 @@ module Aws::MediaConvert
     #                       par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                       par_denominator: 1,
     #                       par_numerator: 1,
+    #                       scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                       telecine: "NONE", # accepts NONE, HARD
     #                     },
@@ -12899,6 +13096,7 @@ module Aws::MediaConvert
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
     #                       interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #                       scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                       telecine: "NONE", # accepts NONE, HARD
     #                       vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
@@ -14521,6 +14719,7 @@ module Aws::MediaConvert
     #         par_numerator: 1,
     #         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
     #         rate_control_mode: "VBR", # accepts VBR, CBR
+    #         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #         softness: 1,
@@ -14723,8 +14922,26 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] rate_control_mode
-    #   Use Rate control mode (Mpeg2RateControlMode) to specifiy whether the
+    #   Use Rate control mode (Mpeg2RateControlMode) to specify whether the
     #   bitrate is variable (vbr) or constant (cbr).
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_type_conversion_mode
+    #   Use this setting for interlaced outputs, when your output frame rate
+    #   is half of your input frame rate. In this situation, choose
+    #   Optimized interlacing (INTERLACED\_OPTIMIZE) to create a better
+    #   quality interlaced output. In this case, each progressive frame from
+    #   the input corresponds to an interlaced field in the output. Keep the
+    #   default value, Basic interlacing (INTERLACED), for all other output
+    #   frame rates. With basic interlacing, MediaConvert performs any frame
+    #   rate conversion first and then interlaces the frames. When you
+    #   choose Optimized interlacing and you set your output frame rate to a
+    #   value that isn't suitable for optimized interlacing, MediaConvert
+    #   automatically falls back to basic interlacing. Required settings: To
+    #   use optimized interlacing, you must set Telecine (telecine) to None
+    #   (NONE) or Soft (SOFT). You can't use optimized interlacing for hard
+    #   telecine outputs. You must also set Interlace mode (interlaceMode)
+    #   to a value other than Progressive (PROGRESSIVE).
     #   @return [String]
     #
     # @!attribute [rw] scene_change_detect
@@ -14843,6 +15060,7 @@ module Aws::MediaConvert
       :par_numerator,
       :quality_tuning_level,
       :rate_control_mode,
+      :scan_type_conversion_mode,
       :scene_change_detect,
       :slow_pal,
       :softness,
@@ -15638,6 +15856,7 @@ module Aws::MediaConvert
     #                 output_channels: [
     #                   {
     #                     input_channels: [1],
+    #                     input_channels_fine_tune: [1.0],
     #                   },
     #                 ],
     #               },
@@ -15717,6 +15936,7 @@ module Aws::MediaConvert
     #         container_settings: {
     #           cmfc_settings: {
     #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #             i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           },
@@ -15857,12 +16077,16 @@ module Aws::MediaConvert
     #               spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             },
     #             avc_intra_settings: {
-    #               avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #               avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200, CLASS_4K_2K
+    #               avc_intra_uhd_settings: {
+    #                 quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
+    #               },
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #               scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #               telecine: "NONE", # accepts NONE, HARD
     #             },
@@ -15908,6 +16132,7 @@ module Aws::MediaConvert
     #               },
     #               rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #               repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
+    #               scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #               slices: 1,
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -15952,6 +16177,7 @@ module Aws::MediaConvert
     #               },
     #               rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #               sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
+    #               scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #               slices: 1,
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -15988,6 +16214,7 @@ module Aws::MediaConvert
     #               par_numerator: 1,
     #               quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
     #               rate_control_mode: "VBR", # accepts VBR, CBR
+    #               scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #               softness: 1,
@@ -16006,6 +16233,7 @@ module Aws::MediaConvert
     #               par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #               par_denominator: 1,
     #               par_numerator: 1,
+    #               scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #               telecine: "NONE", # accepts NONE, HARD
     #             },
@@ -16015,6 +16243,7 @@ module Aws::MediaConvert
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #               scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #               telecine: "NONE", # accepts NONE, HARD
     #               vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
@@ -16200,7 +16429,7 @@ module Aws::MediaConvert
     #   @return [Types::OutputSettings]
     #
     # @!attribute [rw] preset
-    #   Use Preset (Preset) to specifiy a preset for your transcoding
+    #   Use Preset (Preset) to specify a preset for your transcoding
     #   settings. Provide the system or custom preset name. You can specify
     #   either Preset (Preset) or Container settings (ContainerSettings),
     #   but not both.
@@ -16235,16 +16464,25 @@ module Aws::MediaConvert
     #
     #       {
     #         input_channels: [1],
+    #         input_channels_fine_tune: [1.0],
     #       }
     #
     # @!attribute [rw] input_channels
-    #   List of input channels
+    #   Use this setting to specify your remix values when they are
+    #   integers, such as -10, 0, or 4.
     #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] input_channels_fine_tune
+    #   Use this setting to specify your remix values when they have a
+    #   decimal component, such as -10.312, 0.08, or 4.9. MediaConvert
+    #   rounds your remixing values to the nearest thousandth.
+    #   @return [Array<Float>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/OutputChannelMapping AWS API Documentation
     #
     class OutputChannelMapping < Struct.new(
-      :input_channels)
+      :input_channels,
+      :input_channels_fine_tune)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16614,6 +16852,7 @@ module Aws::MediaConvert
     #                     output_channels: [
     #                       {
     #                         input_channels: [1],
+    #                         input_channels_fine_tune: [1.0],
     #                       },
     #                     ],
     #                   },
@@ -16693,6 +16932,7 @@ module Aws::MediaConvert
     #             container_settings: {
     #               cmfc_settings: {
     #                 audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #                 i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                 scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #               },
@@ -16833,12 +17073,16 @@ module Aws::MediaConvert
     #                   spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                 },
     #                 avc_intra_settings: {
-    #                   avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                   avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200, CLASS_4K_2K
+    #                   avc_intra_uhd_settings: {
+    #                     quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
+    #                   },
     #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
     #                   interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                   scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                   slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                   telecine: "NONE", # accepts NONE, HARD
     #                 },
@@ -16884,6 +17128,7 @@ module Aws::MediaConvert
     #                   },
     #                   rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                   repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
+    #                   scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                   slices: 1,
     #                   slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -16928,6 +17173,7 @@ module Aws::MediaConvert
     #                   },
     #                   rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                   sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
+    #                   scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                   slices: 1,
     #                   slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -16964,6 +17210,7 @@ module Aws::MediaConvert
     #                   par_numerator: 1,
     #                   quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
     #                   rate_control_mode: "VBR", # accepts VBR, CBR
+    #                   scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                   slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                   softness: 1,
@@ -16982,6 +17229,7 @@ module Aws::MediaConvert
     #                   par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                   par_denominator: 1,
     #                   par_numerator: 1,
+    #                   scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                   slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                   telecine: "NONE", # accepts NONE, HARD
     #                 },
@@ -16991,6 +17239,7 @@ module Aws::MediaConvert
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
     #                   interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #                   scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                   slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                   telecine: "NONE", # accepts NONE, HARD
     #                   vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
@@ -17685,6 +17934,7 @@ module Aws::MediaConvert
     #                 output_channels: [
     #                   {
     #                     input_channels: [1],
+    #                     input_channels_fine_tune: [1.0],
     #                   },
     #                 ],
     #               },
@@ -17763,6 +18013,7 @@ module Aws::MediaConvert
     #         container_settings: {
     #           cmfc_settings: {
     #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #             i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           },
@@ -17890,12 +18141,16 @@ module Aws::MediaConvert
     #               spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             },
     #             avc_intra_settings: {
-    #               avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #               avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200, CLASS_4K_2K
+    #               avc_intra_uhd_settings: {
+    #                 quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
+    #               },
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #               scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #               telecine: "NONE", # accepts NONE, HARD
     #             },
@@ -17941,6 +18196,7 @@ module Aws::MediaConvert
     #               },
     #               rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #               repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
+    #               scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #               slices: 1,
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -17985,6 +18241,7 @@ module Aws::MediaConvert
     #               },
     #               rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #               sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
+    #               scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #               slices: 1,
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -18021,6 +18278,7 @@ module Aws::MediaConvert
     #               par_numerator: 1,
     #               quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
     #               rate_control_mode: "VBR", # accepts VBR, CBR
+    #               scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #               softness: 1,
@@ -18039,6 +18297,7 @@ module Aws::MediaConvert
     #               par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #               par_denominator: 1,
     #               par_numerator: 1,
+    #               scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #               telecine: "NONE", # accepts NONE, HARD
     #             },
@@ -18048,6 +18307,7 @@ module Aws::MediaConvert
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
     #               interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #               scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #               telecine: "NONE", # accepts NONE, HARD
     #               vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
@@ -18240,13 +18500,14 @@ module Aws::MediaConvert
     #         par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #         par_denominator: 1,
     #         par_numerator: 1,
+    #         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #         telecine: "NONE", # accepts NONE, HARD
     #       }
     #
     # @!attribute [rw] codec_profile
-    #   Use Profile (ProResCodecProfile) to specifiy the type of Apple
-    #   ProRes codec to use for this output.
+    #   Use Profile (ProResCodecProfile) to specify the type of Apple ProRes
+    #   codec to use for this output.
     #   @return [String]
     #
     # @!attribute [rw] framerate_control
@@ -18346,6 +18607,24 @@ module Aws::MediaConvert
     #   ratio 40:33. In this example, the value for parNumerator is 40.
     #   @return [Integer]
     #
+    # @!attribute [rw] scan_type_conversion_mode
+    #   Use this setting for interlaced outputs, when your output frame rate
+    #   is half of your input frame rate. In this situation, choose
+    #   Optimized interlacing (INTERLACED\_OPTIMIZE) to create a better
+    #   quality interlaced output. In this case, each progressive frame from
+    #   the input corresponds to an interlaced field in the output. Keep the
+    #   default value, Basic interlacing (INTERLACED), for all other output
+    #   frame rates. With basic interlacing, MediaConvert performs any frame
+    #   rate conversion first and then interlaces the frames. When you
+    #   choose Optimized interlacing and you set your output frame rate to a
+    #   value that isn't suitable for optimized interlacing, MediaConvert
+    #   automatically falls back to basic interlacing. Required settings: To
+    #   use optimized interlacing, you must set Telecine (telecine) to None
+    #   (NONE) or Soft (SOFT). You can't use optimized interlacing for hard
+    #   telecine outputs. You must also set Interlace mode (interlaceMode)
+    #   to a value other than Progressive (PROGRESSIVE).
+    #   @return [String]
+    #
     # @!attribute [rw] slow_pal
     #   Ignore this setting unless your input frame rate is 23.976 or 24
     #   frames per second (fps). Enable slow PAL to create a 25 fps output.
@@ -18379,6 +18658,7 @@ module Aws::MediaConvert
       :par_control,
       :par_denominator,
       :par_numerator,
+      :scan_type_conversion_mode,
       :slow_pal,
       :telecine)
       SENSITIVE = []
@@ -18545,6 +18825,7 @@ module Aws::MediaConvert
     #           output_channels: [
     #             {
     #               input_channels: [1],
+    #               input_channels_fine_tune: [1.0],
     #             },
     #           ],
     #         },
@@ -18554,22 +18835,36 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] channel_mapping
     #   Channel mapping (ChannelMapping) contains the group of fields that
-    #   hold the remixing value for each channel. Units are in dB.
-    #   Acceptable values are within the range from -60 (mute) through 6. A
-    #   setting of 0 passes the input channel unchanged to the output
-    #   channel (no attenuation or amplification).
+    #   hold the remixing value for each channel, in dB. Specify remix
+    #   values to indicate how much of the content from your input audio
+    #   channel you want in your output audio channels. Each instance of the
+    #   InputChannels or InputChannelsFineTune array specifies these values
+    #   for one output channel. Use one instance of this array for each
+    #   output channel. In the console, each array corresponds to a column
+    #   in the graphical depiction of the mapping matrix. The rows of the
+    #   graphical matrix correspond to input channels. Valid values are
+    #   within the range from -60 (mute) through 6. A setting of 0 passes
+    #   the input channel unchanged to the output channel (no attenuation or
+    #   amplification). Use InputChannels or InputChannelsFineTune to
+    #   specify your remix values. Don't use both.
     #   @return [Types::ChannelMapping]
     #
     # @!attribute [rw] channels_in
     #   Specify the number of audio channels from your input that you want
     #   to use in your output. With remixing, you might combine or split the
     #   data in these channels, so the number of channels in your final
-    #   output might be different.
+    #   output might be different. If you are doing both input channel
+    #   mapping and output channel mapping, the number of output channels in
+    #   your input mapping must be the same as the number of input channels
+    #   in your output mapping.
     #   @return [Integer]
     #
     # @!attribute [rw] channels_out
     #   Specify the number of channels in this output after remixing. Valid
-    #   values: 1, 2, 4, 6, 8... 64. (1 and even numbers to 64.)
+    #   values: 1, 2, 4, 6, 8... 64. (1 and even numbers to 64.) If you are
+    #   doing both input channel mapping and output channel mapping, the
+    #   number of output channels in your input mapping must be the same as
+    #   the number of input channels in your output mapping.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/RemixSettings AWS API Documentation
@@ -19420,6 +19715,7 @@ module Aws::MediaConvert
     #                       output_channels: [
     #                         {
     #                           input_channels: [1],
+    #                           input_channels_fine_tune: [1.0],
     #                         },
     #                       ],
     #                     },
@@ -19909,6 +20205,7 @@ module Aws::MediaConvert
     #                           output_channels: [
     #                             {
     #                               input_channels: [1],
+    #                               input_channels_fine_tune: [1.0],
     #                             },
     #                           ],
     #                         },
@@ -19988,6 +20285,7 @@ module Aws::MediaConvert
     #                   container_settings: {
     #                     cmfc_settings: {
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #                       i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
@@ -20128,12 +20426,16 @@ module Aws::MediaConvert
     #                         spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       },
     #                       avc_intra_settings: {
-    #                         avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                         avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200, CLASS_4K_2K
+    #                         avc_intra_uhd_settings: {
+    #                           quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
+    #                         },
     #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                       },
@@ -20179,6 +20481,7 @@ module Aws::MediaConvert
     #                         },
     #                         rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                         repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                         slices: 1,
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -20223,6 +20526,7 @@ module Aws::MediaConvert
     #                         },
     #                         rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                         sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                         slices: 1,
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -20259,6 +20563,7 @@ module Aws::MediaConvert
     #                         par_numerator: 1,
     #                         quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
     #                         rate_control_mode: "VBR", # accepts VBR, CBR
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         softness: 1,
@@ -20277,6 +20582,7 @@ module Aws::MediaConvert
     #                         par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                         par_denominator: 1,
     #                         par_numerator: 1,
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                       },
@@ -20286,6 +20592,7 @@ module Aws::MediaConvert
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
     #                         interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #                         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                         vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
@@ -20661,6 +20968,7 @@ module Aws::MediaConvert
     #                   output_channels: [
     #                     {
     #                       input_channels: [1],
+    #                       input_channels_fine_tune: [1.0],
     #                     },
     #                   ],
     #                 },
@@ -20739,6 +21047,7 @@ module Aws::MediaConvert
     #           container_settings: {
     #             cmfc_settings: {
     #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
+    #               i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             },
@@ -20866,12 +21175,16 @@ module Aws::MediaConvert
     #                 spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #               },
     #               avc_intra_settings: {
-    #                 avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #                 avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200, CLASS_4K_2K
+    #                 avc_intra_uhd_settings: {
+    #                   quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
+    #                 },
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #                 scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                 telecine: "NONE", # accepts NONE, HARD
     #               },
@@ -20917,6 +21230,7 @@ module Aws::MediaConvert
     #                 },
     #                 rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                 repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
+    #                 scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                 slices: 1,
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -20961,6 +21275,7 @@ module Aws::MediaConvert
     #                 },
     #                 rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                 sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
+    #                 scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #                 slices: 1,
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -20997,6 +21312,7 @@ module Aws::MediaConvert
     #                 par_numerator: 1,
     #                 quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
     #                 rate_control_mode: "VBR", # accepts VBR, CBR
+    #                 scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                 softness: 1,
@@ -21015,6 +21331,7 @@ module Aws::MediaConvert
     #                 par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                 par_denominator: 1,
     #                 par_numerator: 1,
+    #                 scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                 telecine: "NONE", # accepts NONE, HARD
     #               },
@@ -21024,6 +21341,7 @@ module Aws::MediaConvert
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
     #                 interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #                 scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                 telecine: "NONE", # accepts NONE, HARD
     #                 vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
@@ -21293,6 +21611,7 @@ module Aws::MediaConvert
     #         framerate_denominator: 1,
     #         framerate_numerator: 1,
     #         interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #         scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #         telecine: "NONE", # accepts NONE, HARD
     #         vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
@@ -21354,6 +21673,24 @@ module Aws::MediaConvert
     #   specify a value, MediaConvert will create a progressive output.
     #   @return [String]
     #
+    # @!attribute [rw] scan_type_conversion_mode
+    #   Use this setting for interlaced outputs, when your output frame rate
+    #   is half of your input frame rate. In this situation, choose
+    #   Optimized interlacing (INTERLACED\_OPTIMIZE) to create a better
+    #   quality interlaced output. In this case, each progressive frame from
+    #   the input corresponds to an interlaced field in the output. Keep the
+    #   default value, Basic interlacing (INTERLACED), for all other output
+    #   frame rates. With basic interlacing, MediaConvert performs any frame
+    #   rate conversion first and then interlaces the frames. When you
+    #   choose Optimized interlacing and you set your output frame rate to a
+    #   value that isn't suitable for optimized interlacing, MediaConvert
+    #   automatically falls back to basic interlacing. Required settings: To
+    #   use optimized interlacing, you must set Telecine (telecine) to None
+    #   (NONE) or Soft (SOFT). You can't use optimized interlacing for hard
+    #   telecine outputs. You must also set Interlace mode (interlaceMode)
+    #   to a value other than Progressive (PROGRESSIVE).
+    #   @return [String]
+    #
     # @!attribute [rw] slow_pal
     #   Ignore this setting unless your input frame rate is 23.976 or 24
     #   frames per second (fps). Enable slow PAL to create a 25 fps output
@@ -21393,6 +21730,7 @@ module Aws::MediaConvert
       :framerate_denominator,
       :framerate_numerator,
       :interlace_mode,
+      :scan_type_conversion_mode,
       :slow_pal,
       :telecine,
       :vc_3_class)
@@ -21433,12 +21771,16 @@ module Aws::MediaConvert
     #           spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #         },
     #         avc_intra_settings: {
-    #           avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #           avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200, CLASS_4K_2K
+    #           avc_intra_uhd_settings: {
+    #             quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
+    #           },
     #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #           interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #           scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #           slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #           telecine: "NONE", # accepts NONE, HARD
     #         },
@@ -21484,6 +21826,7 @@ module Aws::MediaConvert
     #           },
     #           rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #           repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
+    #           scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #           scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #           slices: 1,
     #           slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -21528,6 +21871,7 @@ module Aws::MediaConvert
     #           },
     #           rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #           sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
+    #           scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #           scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #           slices: 1,
     #           slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -21564,6 +21908,7 @@ module Aws::MediaConvert
     #           par_numerator: 1,
     #           quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
     #           rate_control_mode: "VBR", # accepts VBR, CBR
+    #           scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #           scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #           slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #           softness: 1,
@@ -21582,6 +21927,7 @@ module Aws::MediaConvert
     #           par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #           par_denominator: 1,
     #           par_numerator: 1,
+    #           scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #           slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #           telecine: "NONE", # accepts NONE, HARD
     #         },
@@ -21591,6 +21937,7 @@ module Aws::MediaConvert
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #           interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #           scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #           slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #           telecine: "NONE", # accepts NONE, HARD
     #           vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT
@@ -21636,7 +21983,9 @@ module Aws::MediaConvert
     #   Required when you set your output video codec to AVC-Intra. For more
     #   information about the AVC-I settings, see the relevant
     #   specification. For detailed information about SD and HD in AVC-I,
-    #   see https://ieeexplore.ieee.org/document/7290936.
+    #   see https://ieeexplore.ieee.org/document/7290936. For information
+    #   about 4K/2K in AVC-I, see
+    #   https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf.
     #   @return [Types::AvcIntraSettings]
     #
     # @!attribute [rw] codec
@@ -21728,12 +22077,16 @@ module Aws::MediaConvert
     #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #           },
     #           avc_intra_settings: {
-    #             avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
+    #             avc_intra_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200, CLASS_4K_2K
+    #             avc_intra_uhd_settings: {
+    #               quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
+    #             },
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE, FRAMEFORMER
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #             interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
+    #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             telecine: "NONE", # accepts NONE, HARD
     #           },
@@ -21779,6 +22132,7 @@ module Aws::MediaConvert
     #             },
     #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
+    #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #             slices: 1,
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -21823,6 +22177,7 @@ module Aws::MediaConvert
     #             },
     #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
+    #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED, TRANSITION_DETECTION
     #             slices: 1,
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
@@ -21859,6 +22214,7 @@ module Aws::MediaConvert
     #             par_numerator: 1,
     #             quality_tuning_level: "SINGLE_PASS", # accepts SINGLE_PASS, MULTI_PASS
     #             rate_control_mode: "VBR", # accepts VBR, CBR
+    #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             softness: 1,
@@ -21877,6 +22233,7 @@ module Aws::MediaConvert
     #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             par_denominator: 1,
     #             par_numerator: 1,
+    #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             telecine: "NONE", # accepts NONE, HARD
     #           },
@@ -21886,6 +22243,7 @@ module Aws::MediaConvert
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
     #             interlace_mode: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
+    #             scan_type_conversion_mode: "INTERLACED", # accepts INTERLACED, INTERLACED_OPTIMIZE
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             telecine: "NONE", # accepts NONE, HARD
     #             vc_3_class: "CLASS_145_8BIT", # accepts CLASS_145_8BIT, CLASS_220_8BIT, CLASS_220_10BIT

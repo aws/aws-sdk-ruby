@@ -190,6 +190,7 @@ module Aws::CodePipeline
     PipelineExecutionNotFoundException = Shapes::StructureShape.new(name: 'PipelineExecutionNotFoundException')
     PipelineExecutionNotStoppableException = Shapes::StructureShape.new(name: 'PipelineExecutionNotStoppableException')
     PipelineExecutionStatus = Shapes::StringShape.new(name: 'PipelineExecutionStatus')
+    PipelineExecutionStatusSummary = Shapes::StringShape.new(name: 'PipelineExecutionStatusSummary')
     PipelineExecutionSummary = Shapes::StructureShape.new(name: 'PipelineExecutionSummary')
     PipelineExecutionSummaryList = Shapes::ListShape.new(name: 'PipelineExecutionSummaryList')
     PipelineList = Shapes::ListShape.new(name: 'PipelineList')
@@ -767,6 +768,7 @@ module Aws::CodePipeline
     PipelineExecution.add_member(:pipeline_version, Shapes::ShapeRef.new(shape: PipelineVersion, location_name: "pipelineVersion"))
     PipelineExecution.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, location_name: "pipelineExecutionId"))
     PipelineExecution.add_member(:status, Shapes::ShapeRef.new(shape: PipelineExecutionStatus, location_name: "status"))
+    PipelineExecution.add_member(:status_summary, Shapes::ShapeRef.new(shape: PipelineExecutionStatusSummary, location_name: "statusSummary"))
     PipelineExecution.add_member(:artifact_revisions, Shapes::ShapeRef.new(shape: ArtifactRevisionList, location_name: "artifactRevisions"))
     PipelineExecution.struct_class = Types::PipelineExecution
 

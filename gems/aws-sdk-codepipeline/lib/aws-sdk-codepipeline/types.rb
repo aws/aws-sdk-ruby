@@ -2866,6 +2866,9 @@ module Aws::CodePipeline
     # @!attribute [rw] status
     #   The status of the pipeline execution.
     #
+    #   * Cancelled: The pipeline’s definition was updated before the
+    #     pipeline execution could be completed.
+    #
     #   * InProgress: The pipeline execution is currently running.
     #
     #   * Stopped: The pipeline execution was manually stopped. For more
@@ -2891,6 +2894,11 @@ module Aws::CodePipeline
     #   [2]: https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded
     #   @return [String]
     #
+    # @!attribute [rw] status_summary
+    #   A summary that contains a description of the pipeline execution
+    #   status.
+    #   @return [String]
+    #
     # @!attribute [rw] artifact_revisions
     #   A list of `ArtifactRevision` objects included in a pipeline
     #   execution.
@@ -2903,6 +2911,7 @@ module Aws::CodePipeline
       :pipeline_version,
       :pipeline_execution_id,
       :status,
+      :status_summary,
       :artifact_revisions)
       SENSITIVE = []
       include Aws::Structure
@@ -3824,6 +3833,11 @@ module Aws::CodePipeline
     # @!attribute [rw] status
     #   The status of the stage, or for a completed stage, the last status
     #   of the stage.
+    #
+    #   <note markdown="1"> A status of cancelled means that the pipeline’s definition was
+    #   updated before the stage execution could be completed.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageExecution AWS API Documentation

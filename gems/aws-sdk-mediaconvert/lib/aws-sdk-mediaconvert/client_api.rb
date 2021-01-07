@@ -69,9 +69,12 @@ module Aws::MediaConvert
     AvcIntraFramerateControl = Shapes::StringShape.new(name: 'AvcIntraFramerateControl')
     AvcIntraFramerateConversionAlgorithm = Shapes::StringShape.new(name: 'AvcIntraFramerateConversionAlgorithm')
     AvcIntraInterlaceMode = Shapes::StringShape.new(name: 'AvcIntraInterlaceMode')
+    AvcIntraScanTypeConversionMode = Shapes::StringShape.new(name: 'AvcIntraScanTypeConversionMode')
     AvcIntraSettings = Shapes::StructureShape.new(name: 'AvcIntraSettings')
     AvcIntraSlowPal = Shapes::StringShape.new(name: 'AvcIntraSlowPal')
     AvcIntraTelecine = Shapes::StringShape.new(name: 'AvcIntraTelecine')
+    AvcIntraUhdQualityTuningLevel = Shapes::StringShape.new(name: 'AvcIntraUhdQualityTuningLevel')
+    AvcIntraUhdSettings = Shapes::StructureShape.new(name: 'AvcIntraUhdSettings')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BillingTagsSource = Shapes::StringShape.new(name: 'BillingTagsSource')
     BurninDestinationSettings = Shapes::StructureShape.new(name: 'BurninDestinationSettings')
@@ -109,6 +112,7 @@ module Aws::MediaConvert
     CmafWriteHLSManifest = Shapes::StringShape.new(name: 'CmafWriteHLSManifest')
     CmafWriteSegmentTimelineInRepresentation = Shapes::StringShape.new(name: 'CmafWriteSegmentTimelineInRepresentation')
     CmfcAudioDuration = Shapes::StringShape.new(name: 'CmfcAudioDuration')
+    CmfcIFrameOnlyManifest = Shapes::StringShape.new(name: 'CmfcIFrameOnlyManifest')
     CmfcScte35Esam = Shapes::StringShape.new(name: 'CmfcScte35Esam')
     CmfcScte35Source = Shapes::StringShape.new(name: 'CmfcScte35Source')
     CmfcSettings = Shapes::StructureShape.new(name: 'CmfcSettings')
@@ -237,6 +241,7 @@ module Aws::MediaConvert
     H264QvbrSettings = Shapes::StructureShape.new(name: 'H264QvbrSettings')
     H264RateControlMode = Shapes::StringShape.new(name: 'H264RateControlMode')
     H264RepeatPps = Shapes::StringShape.new(name: 'H264RepeatPps')
+    H264ScanTypeConversionMode = Shapes::StringShape.new(name: 'H264ScanTypeConversionMode')
     H264SceneChangeDetect = Shapes::StringShape.new(name: 'H264SceneChangeDetect')
     H264Settings = Shapes::StructureShape.new(name: 'H264Settings')
     H264SlowPal = Shapes::StringShape.new(name: 'H264SlowPal')
@@ -261,6 +266,7 @@ module Aws::MediaConvert
     H265QvbrSettings = Shapes::StructureShape.new(name: 'H265QvbrSettings')
     H265RateControlMode = Shapes::StringShape.new(name: 'H265RateControlMode')
     H265SampleAdaptiveOffsetFilterMode = Shapes::StringShape.new(name: 'H265SampleAdaptiveOffsetFilterMode')
+    H265ScanTypeConversionMode = Shapes::StringShape.new(name: 'H265ScanTypeConversionMode')
     H265SceneChangeDetect = Shapes::StringShape.new(name: 'H265SceneChangeDetect')
     H265Settings = Shapes::StructureShape.new(name: 'H265Settings')
     H265SlowPal = Shapes::StringShape.new(name: 'H265SlowPal')
@@ -390,6 +396,7 @@ module Aws::MediaConvert
     Mpeg2ParControl = Shapes::StringShape.new(name: 'Mpeg2ParControl')
     Mpeg2QualityTuningLevel = Shapes::StringShape.new(name: 'Mpeg2QualityTuningLevel')
     Mpeg2RateControlMode = Shapes::StringShape.new(name: 'Mpeg2RateControlMode')
+    Mpeg2ScanTypeConversionMode = Shapes::StringShape.new(name: 'Mpeg2ScanTypeConversionMode')
     Mpeg2SceneChangeDetect = Shapes::StringShape.new(name: 'Mpeg2SceneChangeDetect')
     Mpeg2Settings = Shapes::StructureShape.new(name: 'Mpeg2Settings')
     Mpeg2SlowPal = Shapes::StringShape.new(name: 'Mpeg2SlowPal')
@@ -439,6 +446,7 @@ module Aws::MediaConvert
     ProresFramerateConversionAlgorithm = Shapes::StringShape.new(name: 'ProresFramerateConversionAlgorithm')
     ProresInterlaceMode = Shapes::StringShape.new(name: 'ProresInterlaceMode')
     ProresParControl = Shapes::StringShape.new(name: 'ProresParControl')
+    ProresScanTypeConversionMode = Shapes::StringShape.new(name: 'ProresScanTypeConversionMode')
     ProresSettings = Shapes::StructureShape.new(name: 'ProresSettings')
     ProresSlowPal = Shapes::StringShape.new(name: 'ProresSlowPal')
     ProresTelecine = Shapes::StringShape.new(name: 'ProresTelecine')
@@ -496,6 +504,7 @@ module Aws::MediaConvert
     Vc3FramerateControl = Shapes::StringShape.new(name: 'Vc3FramerateControl')
     Vc3FramerateConversionAlgorithm = Shapes::StringShape.new(name: 'Vc3FramerateConversionAlgorithm')
     Vc3InterlaceMode = Shapes::StringShape.new(name: 'Vc3InterlaceMode')
+    Vc3ScanTypeConversionMode = Shapes::StringShape.new(name: 'Vc3ScanTypeConversionMode')
     Vc3Settings = Shapes::StructureShape.new(name: 'Vc3Settings')
     Vc3SlowPal = Shapes::StringShape.new(name: 'Vc3SlowPal')
     Vc3Telecine = Shapes::StringShape.new(name: 'Vc3Telecine')
@@ -529,6 +538,7 @@ module Aws::MediaConvert
     __doubleMin0Max2147483647 = Shapes::FloatShape.new(name: '__doubleMin0Max2147483647')
     __doubleMinNegative59Max0 = Shapes::FloatShape.new(name: '__doubleMinNegative59Max0')
     __doubleMinNegative60Max3 = Shapes::FloatShape.new(name: '__doubleMinNegative60Max3')
+    __doubleMinNegative60Max6 = Shapes::FloatShape.new(name: '__doubleMinNegative60Max6')
     __doubleMinNegative60MaxNegative1 = Shapes::FloatShape.new(name: '__doubleMinNegative60MaxNegative1')
     __doubleMinNegative6Max3 = Shapes::FloatShape.new(name: '__doubleMinNegative6Max3')
     __integer = Shapes::IntegerShape.new(name: '__integer')
@@ -644,6 +654,7 @@ module Aws::MediaConvert
     __listOfQueue = Shapes::ListShape.new(name: '__listOfQueue')
     __listOfQueueTransition = Shapes::ListShape.new(name: '__listOfQueueTransition')
     __listOfTeletextPageType = Shapes::ListShape.new(name: '__listOfTeletextPageType')
+    __listOf__doubleMinNegative60Max6 = Shapes::ListShape.new(name: '__listOf__doubleMinNegative60Max6')
     __listOf__integerMin1Max2147483647 = Shapes::ListShape.new(name: '__listOf__integerMin1Max2147483647')
     __listOf__integerMin32Max8182 = Shapes::ListShape.new(name: '__listOf__integerMin32Max8182')
     __listOf__integerMinNegative60Max6 = Shapes::ListShape.new(name: '__listOf__integerMinNegative60Max6')
@@ -821,14 +832,19 @@ module Aws::MediaConvert
     AvailBlanking.struct_class = Types::AvailBlanking
 
     AvcIntraSettings.add_member(:avc_intra_class, Shapes::ShapeRef.new(shape: AvcIntraClass, location_name: "avcIntraClass"))
+    AvcIntraSettings.add_member(:avc_intra_uhd_settings, Shapes::ShapeRef.new(shape: AvcIntraUhdSettings, location_name: "avcIntraUhdSettings"))
     AvcIntraSettings.add_member(:framerate_control, Shapes::ShapeRef.new(shape: AvcIntraFramerateControl, location_name: "framerateControl"))
     AvcIntraSettings.add_member(:framerate_conversion_algorithm, Shapes::ShapeRef.new(shape: AvcIntraFramerateConversionAlgorithm, location_name: "framerateConversionAlgorithm"))
     AvcIntraSettings.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max1001, location_name: "framerateDenominator"))
     AvcIntraSettings.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin24Max60000, location_name: "framerateNumerator"))
     AvcIntraSettings.add_member(:interlace_mode, Shapes::ShapeRef.new(shape: AvcIntraInterlaceMode, location_name: "interlaceMode"))
+    AvcIntraSettings.add_member(:scan_type_conversion_mode, Shapes::ShapeRef.new(shape: AvcIntraScanTypeConversionMode, location_name: "scanTypeConversionMode"))
     AvcIntraSettings.add_member(:slow_pal, Shapes::ShapeRef.new(shape: AvcIntraSlowPal, location_name: "slowPal"))
     AvcIntraSettings.add_member(:telecine, Shapes::ShapeRef.new(shape: AvcIntraTelecine, location_name: "telecine"))
     AvcIntraSettings.struct_class = Types::AvcIntraSettings
+
+    AvcIntraUhdSettings.add_member(:quality_tuning_level, Shapes::ShapeRef.new(shape: AvcIntraUhdQualityTuningLevel, location_name: "qualityTuningLevel"))
+    AvcIntraUhdSettings.struct_class = Types::AvcIntraUhdSettings
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
@@ -935,6 +951,7 @@ module Aws::MediaConvert
     CmafGroupSettings.struct_class = Types::CmafGroupSettings
 
     CmfcSettings.add_member(:audio_duration, Shapes::ShapeRef.new(shape: CmfcAudioDuration, location_name: "audioDuration"))
+    CmfcSettings.add_member(:i_frame_only_manifest, Shapes::ShapeRef.new(shape: CmfcIFrameOnlyManifest, location_name: "iFrameOnlyManifest"))
     CmfcSettings.add_member(:scte_35_esam, Shapes::ShapeRef.new(shape: CmfcScte35Esam, location_name: "scte35Esam"))
     CmfcSettings.add_member(:scte_35_source, Shapes::ShapeRef.new(shape: CmfcScte35Source, location_name: "scte35Source"))
     CmfcSettings.struct_class = Types::CmfcSettings
@@ -1269,6 +1286,7 @@ module Aws::MediaConvert
     H264Settings.add_member(:qvbr_settings, Shapes::ShapeRef.new(shape: H264QvbrSettings, location_name: "qvbrSettings"))
     H264Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: H264RateControlMode, location_name: "rateControlMode"))
     H264Settings.add_member(:repeat_pps, Shapes::ShapeRef.new(shape: H264RepeatPps, location_name: "repeatPps"))
+    H264Settings.add_member(:scan_type_conversion_mode, Shapes::ShapeRef.new(shape: H264ScanTypeConversionMode, location_name: "scanTypeConversionMode"))
     H264Settings.add_member(:scene_change_detect, Shapes::ShapeRef.new(shape: H264SceneChangeDetect, location_name: "sceneChangeDetect"))
     H264Settings.add_member(:slices, Shapes::ShapeRef.new(shape: __integerMin1Max32, location_name: "slices"))
     H264Settings.add_member(:slow_pal, Shapes::ShapeRef.new(shape: H264SlowPal, location_name: "slowPal"))
@@ -1314,6 +1332,7 @@ module Aws::MediaConvert
     H265Settings.add_member(:qvbr_settings, Shapes::ShapeRef.new(shape: H265QvbrSettings, location_name: "qvbrSettings"))
     H265Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: H265RateControlMode, location_name: "rateControlMode"))
     H265Settings.add_member(:sample_adaptive_offset_filter_mode, Shapes::ShapeRef.new(shape: H265SampleAdaptiveOffsetFilterMode, location_name: "sampleAdaptiveOffsetFilterMode"))
+    H265Settings.add_member(:scan_type_conversion_mode, Shapes::ShapeRef.new(shape: H265ScanTypeConversionMode, location_name: "scanTypeConversionMode"))
     H265Settings.add_member(:scene_change_detect, Shapes::ShapeRef.new(shape: H265SceneChangeDetect, location_name: "sceneChangeDetect"))
     H265Settings.add_member(:slices, Shapes::ShapeRef.new(shape: __integerMin1Max32, location_name: "slices"))
     H265Settings.add_member(:slow_pal, Shapes::ShapeRef.new(shape: H265SlowPal, location_name: "slowPal"))
@@ -1731,6 +1750,7 @@ module Aws::MediaConvert
     Mpeg2Settings.add_member(:par_numerator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "parNumerator"))
     Mpeg2Settings.add_member(:quality_tuning_level, Shapes::ShapeRef.new(shape: Mpeg2QualityTuningLevel, location_name: "qualityTuningLevel"))
     Mpeg2Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: Mpeg2RateControlMode, location_name: "rateControlMode"))
+    Mpeg2Settings.add_member(:scan_type_conversion_mode, Shapes::ShapeRef.new(shape: Mpeg2ScanTypeConversionMode, location_name: "scanTypeConversionMode"))
     Mpeg2Settings.add_member(:scene_change_detect, Shapes::ShapeRef.new(shape: Mpeg2SceneChangeDetect, location_name: "sceneChangeDetect"))
     Mpeg2Settings.add_member(:slow_pal, Shapes::ShapeRef.new(shape: Mpeg2SlowPal, location_name: "slowPal"))
     Mpeg2Settings.add_member(:softness, Shapes::ShapeRef.new(shape: __integerMin0Max128, location_name: "softness"))
@@ -1822,6 +1842,7 @@ module Aws::MediaConvert
     Output.struct_class = Types::Output
 
     OutputChannelMapping.add_member(:input_channels, Shapes::ShapeRef.new(shape: __listOf__integerMinNegative60Max6, location_name: "inputChannels"))
+    OutputChannelMapping.add_member(:input_channels_fine_tune, Shapes::ShapeRef.new(shape: __listOf__doubleMinNegative60Max6, location_name: "inputChannelsFineTune"))
     OutputChannelMapping.struct_class = Types::OutputChannelMapping
 
     OutputDetail.add_member(:duration_in_ms, Shapes::ShapeRef.new(shape: __integer, location_name: "durationInMs"))
@@ -1877,6 +1898,7 @@ module Aws::MediaConvert
     ProresSettings.add_member(:par_control, Shapes::ShapeRef.new(shape: ProresParControl, location_name: "parControl"))
     ProresSettings.add_member(:par_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "parDenominator"))
     ProresSettings.add_member(:par_numerator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "parNumerator"))
+    ProresSettings.add_member(:scan_type_conversion_mode, Shapes::ShapeRef.new(shape: ProresScanTypeConversionMode, location_name: "scanTypeConversionMode"))
     ProresSettings.add_member(:slow_pal, Shapes::ShapeRef.new(shape: ProresSlowPal, location_name: "slowPal"))
     ProresSettings.add_member(:telecine, Shapes::ShapeRef.new(shape: ProresTelecine, location_name: "telecine"))
     ProresSettings.struct_class = Types::ProresSettings
@@ -2044,6 +2066,7 @@ module Aws::MediaConvert
     Vc3Settings.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max1001, location_name: "framerateDenominator"))
     Vc3Settings.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin24Max60000, location_name: "framerateNumerator"))
     Vc3Settings.add_member(:interlace_mode, Shapes::ShapeRef.new(shape: Vc3InterlaceMode, location_name: "interlaceMode"))
+    Vc3Settings.add_member(:scan_type_conversion_mode, Shapes::ShapeRef.new(shape: Vc3ScanTypeConversionMode, location_name: "scanTypeConversionMode"))
     Vc3Settings.add_member(:slow_pal, Shapes::ShapeRef.new(shape: Vc3SlowPal, location_name: "slowPal"))
     Vc3Settings.add_member(:telecine, Shapes::ShapeRef.new(shape: Vc3Telecine, location_name: "telecine"))
     Vc3Settings.add_member(:vc_3_class, Shapes::ShapeRef.new(shape: Vc3Class, location_name: "vc3Class"))
@@ -2195,6 +2218,8 @@ module Aws::MediaConvert
     __listOfQueueTransition.member = Shapes::ShapeRef.new(shape: QueueTransition)
 
     __listOfTeletextPageType.member = Shapes::ShapeRef.new(shape: TeletextPageType)
+
+    __listOf__doubleMinNegative60Max6.member = Shapes::ShapeRef.new(shape: __doubleMinNegative60Max6)
 
     __listOf__integerMin1Max2147483647.member = Shapes::ShapeRef.new(shape: __integerMin1Max2147483647)
 

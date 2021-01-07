@@ -1037,7 +1037,8 @@ module Aws::CodePipeline
     #   resp.pipeline_execution.pipeline_name #=> String
     #   resp.pipeline_execution.pipeline_version #=> Integer
     #   resp.pipeline_execution.pipeline_execution_id #=> String
-    #   resp.pipeline_execution.status #=> String, one of "InProgress", "Stopped", "Stopping", "Succeeded", "Superseded", "Failed"
+    #   resp.pipeline_execution.status #=> String, one of "Cancelled", "InProgress", "Stopped", "Stopping", "Succeeded", "Superseded", "Failed"
+    #   resp.pipeline_execution.status_summary #=> String
     #   resp.pipeline_execution.artifact_revisions #=> Array
     #   resp.pipeline_execution.artifact_revisions[0].name #=> String
     #   resp.pipeline_execution.artifact_revisions[0].revision_id #=> String
@@ -1088,7 +1089,7 @@ module Aws::CodePipeline
     #   resp.stage_states #=> Array
     #   resp.stage_states[0].stage_name #=> String
     #   resp.stage_states[0].inbound_execution.pipeline_execution_id #=> String
-    #   resp.stage_states[0].inbound_execution.status #=> String, one of "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
+    #   resp.stage_states[0].inbound_execution.status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
     #   resp.stage_states[0].inbound_transition_state.enabled #=> Boolean
     #   resp.stage_states[0].inbound_transition_state.last_changed_by #=> String
     #   resp.stage_states[0].inbound_transition_state.last_changed_at #=> Time
@@ -1112,7 +1113,7 @@ module Aws::CodePipeline
     #   resp.stage_states[0].action_states[0].entity_url #=> String
     #   resp.stage_states[0].action_states[0].revision_url #=> String
     #   resp.stage_states[0].latest_execution.pipeline_execution_id #=> String
-    #   resp.stage_states[0].latest_execution.status #=> String, one of "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
+    #   resp.stage_states[0].latest_execution.status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
     #   resp.created #=> Time
     #   resp.updated #=> Time
     #
@@ -1382,7 +1383,7 @@ module Aws::CodePipeline
     #
     #   resp.pipeline_execution_summaries #=> Array
     #   resp.pipeline_execution_summaries[0].pipeline_execution_id #=> String
-    #   resp.pipeline_execution_summaries[0].status #=> String, one of "InProgress", "Stopped", "Stopping", "Succeeded", "Superseded", "Failed"
+    #   resp.pipeline_execution_summaries[0].status #=> String, one of "Cancelled", "InProgress", "Stopped", "Stopping", "Succeeded", "Superseded", "Failed"
     #   resp.pipeline_execution_summaries[0].start_time #=> Time
     #   resp.pipeline_execution_summaries[0].last_update_time #=> Time
     #   resp.pipeline_execution_summaries[0].source_revisions #=> Array
@@ -2402,7 +2403,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

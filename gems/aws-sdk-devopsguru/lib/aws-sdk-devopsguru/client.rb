@@ -389,12 +389,14 @@ module Aws::DevOpsGuru
     #   * {Types::DescribeAccountHealthResponse#open_reactive_insights #open_reactive_insights} => Integer
     #   * {Types::DescribeAccountHealthResponse#open_proactive_insights #open_proactive_insights} => Integer
     #   * {Types::DescribeAccountHealthResponse#metrics_analyzed #metrics_analyzed} => Integer
+    #   * {Types::DescribeAccountHealthResponse#resource_hours #resource_hours} => Integer
     #
     # @example Response structure
     #
     #   resp.open_reactive_insights #=> Integer
     #   resp.open_proactive_insights #=> Integer
     #   resp.metrics_analyzed #=> Integer
+    #   resp.resource_hours #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAccountHealth AWS API Documentation
     #
@@ -1239,7 +1241,7 @@ module Aws::DevOpsGuru
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devopsguru'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

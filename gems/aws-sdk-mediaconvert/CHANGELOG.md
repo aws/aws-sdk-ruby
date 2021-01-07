@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2021-01-07)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for I-Frame-only HLS manifest generation in CMAF outputs.
+
 1.60.0 (2020-11-24)
 ------------------
 

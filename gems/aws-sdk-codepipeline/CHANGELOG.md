@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2021-01-07)
+------------------
+
+* Feature - Adding cancelled status and summary for executions aborted by pipeline updates.
+
 1.38.0 (2020-11-16)
 ------------------
 
