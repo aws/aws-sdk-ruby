@@ -30,7 +30,7 @@ module Aws
         ).to_return(
           status: 200, body: "foo\n"
         )
-        expect(client.get(metadata_path)).to be "foo\n"
+        expect(client.get(metadata_path)).to eq "foo\n"
       end
 
       it 'should fetch a new token if the original token is expired' do
@@ -49,7 +49,7 @@ module Aws
         ).to_return(
           status: 200, body: "foo\n"
         )
-        expect(client.get(metadata_path)).to be "foo\n"
+        expect(client.get(metadata_path)).to eq "foo\n"
       end
 
       context 'when retryable' do
