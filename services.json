@@ -253,7 +253,10 @@
     ]
   },
   "DynamoDBStreams": {
-    "models": "streams.dynamodb/2012-08-10"
+    "models": "streams.dynamodb/2012-08-10",
+    "addPlugins": [
+      "Aws::DynamoDBStreams::Plugins::SimpleAttributes"
+    ]
   },
   "EBS": {
     "models": "ebs/2019-11-02"
