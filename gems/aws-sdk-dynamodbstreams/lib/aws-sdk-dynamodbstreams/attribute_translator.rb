@@ -5,7 +5,7 @@ module Aws
     class AttributeTranslator
       # Parse a DynamoDBStream event hash from Lambda that contains 1 or more
       # records. When using the SDK to retrieve DynamoDB stream records, use the
-      # `simple_attributes: true` option instead.
+      # `simple_attributes: true` client option instead.
       #
       # @param [Hash] event A DynamoDBStream event.
       #
@@ -32,7 +32,7 @@ module Aws
           shape_ref, :unmarshal
         )
         parser = Aws::Json::Parser.new(shape_ref)
-        input = parser.parse(JSON.dump(event))
+        input = parser.parse(Aws::Json.dump(event))
         translator.apply(input).records
       end
     end

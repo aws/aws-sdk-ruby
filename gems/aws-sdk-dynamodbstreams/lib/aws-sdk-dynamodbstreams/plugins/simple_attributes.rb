@@ -4,8 +4,7 @@ module Aws
   module DynamoDBStreams
     module Plugins
       # Simplifies working with Amazon DynamoDBStreams attribute values.
-      # Translates attribute values for requests and responses to sensible
-      # Ruby natives.
+      # Translates attribute values from responses to sensible Ruby natives.
       #
       # This plugin is disabled by default for all {DynamoDBStreams::Client}
       # objects. You can enable this plugin by passing

@@ -10,67 +10,11 @@ module Aws
     class AttributeValue
 
       def initialize
-        @marshaler = Marshaler.new
         @unmarshaler = Unmarshaler.new
-      end
-
-      def marshal(value)
-        @marshaler.format(value)
       end
 
       def unmarshal(value)
         @unmarshaler.format(value)
-      end
-
-      class Marshaler
-        HASHY_TEST = lambda { |val| val.nil? ? false : val.respond_to?(:to_h) }
-        STRINGY_TEST = lambda { |val| val.respond_to?(:to_str) }
-
-        def format(obj)
-          case obj
-          when Hash
-            obj.each.with_object(m:{}) do |(key, value), map|
-              map[:m][key.to_s] = format(value)
-            end
-          when Array
-            obj.each.with_object(l:[]) do |value, list|
-              list[:l] << format(value)
-            end
-          when String then { s: obj }
-          when Symbol then { s: obj.to_s }
-          when STRINGY_TEST then { s: obj.to_str }
-          when Numeric then { n: obj.to_s }
-          when StringIO, IO then { b: obj }
-          when Set then format_set(obj)
-          when HASHY_TEST
-            hash = obj.to_h
-            hash.each.with_object(m:{}) do |(key, value), map|
-              map[:m][key.to_s] = format(value)
-            end
-          when true, false then { bool: obj }
-          when nil then { null: true }
-          else
-            msg = 'unsupported type, expected Hash, Array, Set, String, Numeric, '\
-                  "IO, true, false, or nil, got #{obj.class.name}"
-            raise ArgumentError, msg
-          end
-        end
-
-        private
-
-        def format_set(set)
-          return { ss: [] } if set.empty?
-          case set.first
-          when String, Symbol then { ss: set.map(&:to_s) }
-          when STRINGY_TEST then { ss: set.map(&:to_str) }
-          when Numeric then { ns: set.map(&:to_s) }
-          when StringIO, IO then { bs: set.to_a }
-          else
-            msg = 'set types only support String, Numeric, or IO objects'
-            raise ArgumentError, msg
-          end
-        end
-
       end
 
       class Unmarshaler
