@@ -269,12 +269,8 @@ module Aws::DynamoDBStreams
     #   @option options [String] :session_token
     #
     #   @option options [Boolean] :simple_attributes (false)
-    #     Enables working with DynamoDB attribute values using
+    #     When enabled, returns DynamoDBStream attribute values using
     #     hashes, arrays, sets, integers, floats, booleans, and nil.
-    #
-    #     Disabling this option requires that all attribute values have
-    #     their types specified, e.g. `{ s: 'abc' }` instead of simply
-    #     `'abc'`.
     #
     #   @option options [Boolean] :simple_json (false)
     #     Disables request parameter conversion, validation, and formatting.

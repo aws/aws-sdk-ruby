@@ -3,7 +3,7 @@
 module Aws
   module DynamoDBStreams
     module Plugins
-      # Simplifies working with Amazon DynamoDBStream attribute values.
+      # Simplifies working with Amazon DynamoDBStreams attribute values.
       # Translates attribute values for requests and responses to sensible
       # Ruby natives.
       #
@@ -11,7 +11,7 @@ module Aws
       # objects. You can enable this plugin by passing
       # `simple_attributes: false` to the client constructor:
       #
-      #     ddb = Aws::DynamoDB::Client.new(simple_attributes: true)
+      #     ddb = Aws::DynamoDBStreams::Client.new(simple_attributes: true)
       #
       # ## Output Examples
       #
