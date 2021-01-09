@@ -25,9 +25,7 @@ module Aws
             context.http_response.signal_done(
               status_code: 200,
               headers: {},
-              body: <<-body
-{"Records":[{"eventID":"fa16df60c5de0eed42b0999b156d52c2","eventName":"INSERT","eventVersion":"1.1","eventSource":"aws:dynamodb","awsRegion":"us-west-2","dynamodb":{"ApproximateCreationDateTime":1610128821.0,"Keys":{"id":{"S":"guid"}},"NewImage":{"value":{"N":"123"},"id":{"S":"guid"}},"SequenceNumber":"8231000000000005323959474","SizeBytes":93,"StreamViewType":"NEW_AND_OLD_IMAGES"},"eventSourceARN":"arn:aws:dynamodb:test-arn"}]}
-              body
+              body: '{"Records":[{"dynamodb":{"Keys":{"id":{"S":"guid"}}}}]}'
             )
             Seahorse::Client::Response.new(context: context)
           end
