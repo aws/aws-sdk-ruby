@@ -22,13 +22,13 @@ module Aws
         it 'nmarshals returned attribute values' do
           ddb = Client.new(stub_responses: true, simple_attributes: true)
           ddb.stub_responses(:get_records, {
-            :records=>
-              [{:event_id=>"event_1",
-                :dynamodb=>
-                 {
-                  :keys=>{"id"=>{:s=>"guid"}},
-                  :new_image=>{"id"=>{:s=>"guid"}},
-                  }
+            records:
+              [{event_id: "event_1",
+                dynamodb:
+                {
+                  keys: {"id"=>{s: "guid"}},
+                  new_image: {"id"=>{s: "guid"}},
+                }
               }]
             })
 
