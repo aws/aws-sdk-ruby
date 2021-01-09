@@ -19,18 +19,22 @@ module Aws
           expect(ddb.config.simple_attributes).to be(true)
         end
 
-        it 'unmarshals returned attribute values' do
-          ddb = Client.new(opts.merge(simple_attributes: true))
-          ddb.handle(step: :send) do |context|
-            context.http_response.signal_done(
-              status_code: 200,
-              headers: {},
-              body: '{"Records":[{"dynamodb":{"Keys":{"id":{"S":"guid"}}}}]}'
-            )
-            Seahorse::Client::Response.new(context: context)
-          end
-          resp = ddb.get_records(shard_iterator: 'itr')
-          expect(resp.data.records.first.dynamodb.keys).to eq('id' => 'guid')
+        it 'nmarshals returned attribute values' do
+          ddb = Client.new(stub_responses: true, simple_attributes: true)
+          ddb.stub_responses(:get_records, {
+            :records=>
+              [{:event_id=>"event_1",
+                :dynamodb=>
+                 {
+                  :keys=>{"id"=>{:s=>"guid"}},
+                  :new_image=>{"id"=>{:s=>"guid"}},
+                  }
+              }]
+            })
+
+            resp = ddb.get_records(shard_iterator: 'itr')
+            expect(resp.data.records.first.dynamodb.keys).to eq('id' => 'guid')
+            expect(resp.data.records.first.dynamodb.new_image).to eq('id' => 'guid')
         end
       end
     end
