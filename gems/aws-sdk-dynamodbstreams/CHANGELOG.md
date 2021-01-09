@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Adds a utility class `Aws::DynamoDBStreams::AttributeTranslator` to translate records from DynamoDBStream events given to a lambda function into a native Ruby hash.
+
+* Feature - Adds a `:simple_attributes` client option for returning native Ruby hashes on records returned by the `get_records` operation.
+
 1.26.0 (2020-10-05)
 ------------------
 
