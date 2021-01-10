@@ -87,9 +87,9 @@ module Aws
                     ' kms+context.  Please configure the client with the' \
                     ' required kms_key_id'
               else
-              raise ArgumentError, 'Unsupported wrap-alg: ' \
-                "#{envelope['x-amz-wrap-alg']}"
-            end
+                raise ArgumentError, 'Unsupported wrap-alg: ' \
+                      "#{envelope['x-amz-wrap-alg']}"
+              end
             iv = decode64(envelope['x-amz-iv'])
             Utils.aes_decryption_cipher(:GCM, key, iv)
           end
