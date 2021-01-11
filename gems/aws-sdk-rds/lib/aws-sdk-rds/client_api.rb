@@ -2441,6 +2441,8 @@ module Aws::RDS
     ModifyGlobalClusterMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "GlobalClusterIdentifier"))
     ModifyGlobalClusterMessage.add_member(:new_global_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "NewGlobalClusterIdentifier"))
     ModifyGlobalClusterMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
+    ModifyGlobalClusterMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
+    ModifyGlobalClusterMessage.add_member(:allow_major_version_upgrade, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AllowMajorVersionUpgrade"))
     ModifyGlobalClusterMessage.struct_class = Types::ModifyGlobalClusterMessage
 
     ModifyGlobalClusterResult.add_member(:global_cluster, Shapes::ShapeRef.new(shape: GlobalCluster, location_name: "GlobalCluster"))
@@ -4621,6 +4623,8 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: ModifyGlobalClusterResult)
         o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
       end)
 
       api.add_operation(:modify_option_group, Seahorse::Model::Operation.new.tap do |o|

@@ -163,9 +163,9 @@ module Aws::RDS
       data[:preferred_maintenance_window]
     end
 
-    # Specifies that changes to the DB instance are pending. This element is
-    # only included when changes are pending. Specific changes are
-    # identified by subelements.
+    # A value that specifies that changes to the DB instance are pending.
+    # This element is only included when changes are pending. Specific
+    # changes are identified by subelements.
     # @return [Types::PendingModifiedValues]
     def pending_modified_values
       data[:pending_modified_values]
@@ -190,7 +190,8 @@ module Aws::RDS
       data[:engine_version]
     end
 
-    # Indicates that minor version patches are applied automatically.
+    # A value that indicates that minor version patches are applied
+    # automatically.
     # @return [Boolean]
     def auto_minor_version_upgrade
       data[:auto_minor_version_upgrade]
@@ -1278,8 +1279,8 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   See [Supported PostgreSQL Database Versions][5] in the *Amazon RDS
-    #   User Guide.*
+    #   See [Amazon RDS for PostgreSQL versions and extensions][5] in the
+    #   *Amazon RDS User Guide.*
     #
     #
     #
@@ -1287,7 +1288,7 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
     #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
-    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions
+    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
     # @option options [Boolean] :auto_minor_version_upgrade
     #   A value that indicates whether minor engine upgrades are applied
     #   automatically to the DB instance during the maintenance window. By
@@ -1312,8 +1313,8 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
     # @option options [String] :option_group_name
-    #   Indicates that the DB instance should be associated with the specified
-    #   option group.
+    #   A value that indicates that the DB instance should be associated with
+    #   the specified option group.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
     #   TDE, can't be removed from an option group. Also, that option group
@@ -1533,7 +1534,8 @@ module Aws::RDS
     #
     #   **Oracle**
     #
-    #   Possible values are `alert`, `audit`, `listener`, and `trace`.
+    #   Possible values are `alert`, `audit`, `listener`, `trace`, and
+    #   `oemagent`.
     #
     #   **PostgreSQL**
     #
@@ -2383,8 +2385,10 @@ module Aws::RDS
     #   family for the new engine version must be specified. The new DB
     #   parameter group can be the default for that DB parameter group family.
     #
-    #   For information about valid engine versions, see `CreateDBInstance`,
-    #   or call `DescribeDBEngineVersions`.
+    #   If you specify only a major version, Amazon RDS will update the DB
+    #   instance to the default minor version if the current minor version is
+    #   lower. For information about valid engine versions, see
+    #   `CreateDBInstance`, or call `DescribeDBEngineVersions`.
     # @option options [Boolean] :allow_major_version_upgrade
     #   A value that indicates whether major version upgrades are allowed.
     #   Changing this parameter doesn't result in an outage and the change is
@@ -2439,14 +2443,14 @@ module Aws::RDS
     #
     #   Default: Uses existing setting
     # @option options [String] :option_group_name
-    #   Indicates that the DB instance should be associated with the specified
-    #   option group. Changing this parameter doesn't result in an outage
-    #   except in the following case and the change is applied during the next
-    #   maintenance window unless the `ApplyImmediately` parameter is enabled
-    #   for this request. If the parameter change results in an option group
-    #   that enables OEM, this change can cause a brief (sub-second) period
-    #   during which new connections are rejected but existing connections are
-    #   not interrupted.
+    #   A value that indicates the DB instance should be associated with the
+    #   specified option group. Changing this parameter doesn't result in an
+    #   outage except in the following case and the change is applied during
+    #   the next maintenance window unless the `ApplyImmediately` parameter is
+    #   enabled for this request. If the parameter change results in an option
+    #   group that enables OEM, this change can cause a brief (sub-second)
+    #   period during which new connections are rejected but existing
+    #   connections are not interrupted.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
     #   TDE, can't be removed from an option group, and that option group

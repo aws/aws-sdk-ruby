@@ -471,9 +471,9 @@ module Aws::RDS
       data[:global_write_forwarding_requested]
     end
 
-    # Specifies that changes to the DB cluster are pending. This element is
-    # only included when changes are pending. Specific changes are
-    # identified by subelements.
+    # A value that specifies that changes to the DB cluster are pending.
+    # This element is only included when changes are pending. Specific
+    # changes are identified by subelements.
     # @return [Types::ClusterPendingModifiedValues]
     def pending_modified_values
       data[:pending_modified_values]

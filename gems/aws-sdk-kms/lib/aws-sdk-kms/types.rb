@@ -21,18 +21,13 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] target_key_id
-    #   String that contains the key identifier of the CMK associated with
-    #   the alias.
+    #   String that contains the key identifier referred to by the alias.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   Date and time that the alias was most recently created in the
-    #   account and Region. Formatted as Unix time.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_date
-    #   Date and time that the alias was most recently associated with a CMK
-    #   in the account and Region. Formatted as Unix time.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/AliasListEntry AWS API Documentation
@@ -562,8 +557,8 @@ module Aws::KMS
     # @!attribute [rw] grant_id
     #   The unique identifier for the grant.
     #
-    #   You can use the `GrantId` in a subsequent RetireGrant or RevokeGrant
-    #   operation.
+    #   You can use the `GrantId` in a ListGrants, RetireGrant, or
+    #   RevokeGrant operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateGrantResponse AWS API Documentation
@@ -3346,6 +3341,8 @@ module Aws::KMS
     #         limit: 1,
     #         marker: "MarkerType",
     #         key_id: "KeyIdType", # required
+    #         grant_id: "GrantIdType",
+    #         grantee_principal: "PrincipalIdType",
     #       }
     #
     # @!attribute [rw] limit
@@ -3365,7 +3362,8 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the customer master key (CMK).
+    #   Returns only grants for the specified customer master key (CMK).
+    #   This parameter is required.
     #
     #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To
     #   specify a CMK in a different AWS account, you must use the key ARN.
@@ -3381,12 +3379,24 @@ module Aws::KMS
     #   DescribeKey.
     #   @return [String]
     #
+    # @!attribute [rw] grant_id
+    #   Returns only the grant with the specified grant ID. The grant ID
+    #   uniquely identifies the grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] grantee_principal
+    #   Returns only grants where the specified principal is the grantee
+    #   principal for the grant.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrantsRequest AWS API Documentation
     #
     class ListGrantsRequest < Struct.new(
       :limit,
       :marker,
-      :key_id)
+      :key_id,
+      :grant_id,
+      :grantee_principal)
       SENSITIVE = []
       include Aws::Structure
     end

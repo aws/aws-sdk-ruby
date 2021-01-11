@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2021-01-11)
+------------------
+
+* Feature - Adds support for filtering grants by grant ID and grantee principal in ListGrants requests to AWS KMS.
+
 1.40.0 (2020-12-17)
 ------------------
 

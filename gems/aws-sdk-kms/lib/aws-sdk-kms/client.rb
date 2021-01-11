@@ -4131,6 +4131,9 @@ module Aws::KMS
 
     # Gets a list of all grants for the specified customer master key (CMK).
     #
+    # You must specify the CMK in all requests. You can filter the grant
+    # list by grant ID or grantee principal.
+    #
     # <note markdown="1"> The `GranteePrincipal` field in the `ListGrants` response usually
     # contains the user or role designated as the grantee principal in the
     # grant. However, when the grantee principal in the grant is an AWS
@@ -4175,7 +4178,8 @@ module Aws::KMS
     #   from the truncated response you just received.
     #
     # @option params [required, String] :key_id
-    #   A unique identifier for the customer master key (CMK).
+    #   Returns only grants for the specified customer master key (CMK). This
+    #   parameter is required.
     #
     #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To
     #   specify a CMK in a different AWS account, you must use the key ARN.
@@ -4188,6 +4192,14 @@ module Aws::KMS
     #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
+    #
+    # @option params [String] :grant_id
+    #   Returns only the grant with the specified grant ID. The grant ID
+    #   uniquely identifies the grant.
+    #
+    # @option params [String] :grantee_principal
+    #   Returns only grants where the specified principal is the grantee
+    #   principal for the grant.
     #
     # @return [Types::ListGrantsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4270,6 +4282,8 @@ module Aws::KMS
     #     limit: 1,
     #     marker: "MarkerType",
     #     key_id: "KeyIdType", # required
+    #     grant_id: "GrantIdType",
+    #     grantee_principal: "PrincipalIdType",
     #   })
     #
     # @example Response structure
@@ -6219,7 +6233,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3299,8 +3299,8 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   See [Supported PostgreSQL Database Versions][5] in the *Amazon RDS
-    #   User Guide.*
+    #   See [Amazon RDS for PostgreSQL versions and extensions][5] in the
+    #   *Amazon RDS User Guide.*
     #
     #
     #
@@ -3308,7 +3308,7 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
     #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
-    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions
+    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   A value that indicates whether minor engine upgrades are applied
@@ -3337,8 +3337,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
     #
     # @option params [String] :option_group_name
-    #   Indicates that the DB instance should be associated with the specified
-    #   option group.
+    #   A value that indicates that the DB instance should be associated with
+    #   the specified option group.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
     #   TDE, can't be removed from an option group. Also, that option group
@@ -3580,7 +3580,8 @@ module Aws::RDS
     #
     #   **Oracle**
     #
-    #   Possible values are `alert`, `audit`, `listener`, and `trace`.
+    #   Possible values are `alert`, `audit`, `listener`, `trace`, and
+    #   `oemagent`.
     #
     #   **PostgreSQL**
     #
@@ -12438,8 +12439,10 @@ module Aws::RDS
     #   family for the new engine version must be specified. The new DB
     #   parameter group can be the default for that DB parameter group family.
     #
-    #   For information about valid engine versions, see `CreateDBInstance`,
-    #   or call `DescribeDBEngineVersions`.
+    #   If you specify only a major version, Amazon RDS will update the DB
+    #   instance to the default minor version if the current minor version is
+    #   lower. For information about valid engine versions, see
+    #   `CreateDBInstance`, or call `DescribeDBEngineVersions`.
     #
     # @option params [Boolean] :allow_major_version_upgrade
     #   A value that indicates whether major version upgrades are allowed.
@@ -12499,14 +12502,14 @@ module Aws::RDS
     #   Default: Uses existing setting
     #
     # @option params [String] :option_group_name
-    #   Indicates that the DB instance should be associated with the specified
-    #   option group. Changing this parameter doesn't result in an outage
-    #   except in the following case and the change is applied during the next
-    #   maintenance window unless the `ApplyImmediately` parameter is enabled
-    #   for this request. If the parameter change results in an option group
-    #   that enables OEM, this change can cause a brief (sub-second) period
-    #   during which new connections are rejected but existing connections are
-    #   not interrupted.
+    #   A value that indicates the DB instance should be associated with the
+    #   specified option group. Changing this parameter doesn't result in an
+    #   outage except in the following case and the change is applied during
+    #   the next maintenance window unless the `ApplyImmediately` parameter is
+    #   enabled for this request. If the parameter change results in an option
+    #   group that enables OEM, this change can cause a brief (sub-second)
+    #   period during which new connections are rejected but existing
+    #   connections are not interrupted.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
     #   TDE, can't be removed from an option group, and that option group
@@ -13766,6 +13769,42 @@ module Aws::RDS
     #   enabled. The global database cluster can't be deleted when deletion
     #   protection is enabled.
     #
+    # @option params [String] :engine_version
+    #   The version number of the database engine to which you want to
+    #   upgrade. Changing this parameter results in an outage. The change is
+    #   applied during the next maintenance window unless `ApplyImmediately`
+    #   is enabled.
+    #
+    #   To list all of the available engine versions for `aurora` (for MySQL
+    #   5.6-compatible Aurora), use the following command:
+    #
+    #   `` aws rds describe-db-engine-versions --engine aurora --query
+    #   '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' ``
+    #
+    #   To list all of the available engine versions for `aurora-mysql` (for
+    #   MySQL 5.7-compatible Aurora), use the following command:
+    #
+    #   `` aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' ``
+    #
+    #   To list all of the available engine versions for `aurora-postgresql`,
+    #   use the following command:
+    #
+    #   `` aws rds describe-db-engine-versions --engine aurora-postgresql
+    #   --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' ``
+    #
+    # @option params [Boolean] :allow_major_version_upgrade
+    #   A value that indicates whether major version upgrades are allowed.
+    #
+    #   Constraints: You must allow major version upgrades when specifying a
+    #   value for the `EngineVersion` parameter that is a different major
+    #   version than the DB cluster's current version.
+    #
+    #   If you upgrade the major version of a global database, the cluster and
+    #   DB instance parameter groups are set to the default parameter groups
+    #   for the new version. Apply any custom parameter groups after
+    #   completing the upgrade.
+    #
     # @return [Types::ModifyGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
@@ -13776,6 +13815,8 @@ module Aws::RDS
     #     global_cluster_identifier: "String",
     #     new_global_cluster_identifier: "String",
     #     deletion_protection: false,
+    #     engine_version: "String",
+    #     allow_major_version_upgrade: false,
     #   })
     #
     # @example Response structure
@@ -19177,7 +19218,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

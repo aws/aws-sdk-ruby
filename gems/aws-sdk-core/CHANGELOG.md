@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.111.0 (2021-01-11)
+------------------
+
 * Feature - Adds an IMDSv2 client as `Aws::EC2Metadata`.
 
 3.110.0 (2020-12-03)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2021-01-11)
+------------------
+
+* Feature - This releases adds support for Major Version Upgrades on Aurora MySQL Global Clusters. Customers will be able to upgrade their whole Aurora MySQL Global Cluster to a new major engine version.
+
 1.109.0 (2020-12-22)
 ------------------
 

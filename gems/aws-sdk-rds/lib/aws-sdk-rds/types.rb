@@ -766,7 +766,7 @@ module Aws::RDS
     #   @return [Types::PendingCloudwatchLogsExports]
     #
     # @!attribute [rw] db_cluster_identifier
-    #   The DBClusterIdentifier for the DB cluster.
+    #   The DBClusterIdentifier value for the DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
@@ -774,8 +774,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] iam_database_authentication_enabled
-    #   Whether mapping of AWS Identity and Access Management (IAM) accounts
-    #   to database accounts is enabled.
+    #   A value that indicates whether mapping of AWS Identity and Access
+    #   Management (IAM) accounts to database accounts is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] engine_version
@@ -3050,8 +3050,8 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   See [Supported PostgreSQL Database Versions][5] in the *Amazon RDS
-    #   User Guide.*
+    #   See [Amazon RDS for PostgreSQL versions and extensions][5] in the
+    #   *Amazon RDS User Guide.*
     #
     #
     #
@@ -3059,7 +3059,7 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
     #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
-    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions
+    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -3092,8 +3092,8 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] option_group_name
-    #   Indicates that the DB instance should be associated with the
-    #   specified option group.
+    #   A value that indicates that the DB instance should be associated
+    #   with the specified option group.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced
     #   Security TDE, can't be removed from an option group. Also, that
@@ -3359,7 +3359,8 @@ module Aws::RDS
     #
     #   **Oracle**
     #
-    #   Possible values are `alert`, `audit`, `listener`, and `trace`.
+    #   Possible values are `alert`, `audit`, `listener`, `trace`, and
+    #   `oemagent`.
     #
     #   **PostgreSQL**
     #
@@ -5144,9 +5145,9 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] pending_modified_values
-    #   Specifies that changes to the DB cluster are pending. This element
-    #   is only included when changes are pending. Specific changes are
-    #   identified by subelements.
+    #   A value that specifies that changes to the DB cluster are pending.
+    #   This element is only included when changes are pending. Specific
+    #   changes are identified by subelements.
     #   @return [Types::ClusterPendingModifiedValues]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
@@ -6200,9 +6201,9 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] pending_modified_values
-    #   Specifies that changes to the DB instance are pending. This element
-    #   is only included when changes are pending. Specific changes are
-    #   identified by subelements.
+    #   A value that specifies that changes to the DB instance are pending.
+    #   This element is only included when changes are pending. Specific
+    #   changes are identified by subelements.
     #   @return [Types::PendingModifiedValues]
     #
     # @!attribute [rw] latest_restorable_time
@@ -6219,7 +6220,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   Indicates that minor version patches are applied automatically.
+    #   A value that indicates that minor version patches are applied
+    #   automatically.
     #   @return [Boolean]
     #
     # @!attribute [rw] read_replica_source_db_instance_identifier
@@ -13654,8 +13656,10 @@ module Aws::RDS
     #   parameter group can be the default for that DB parameter group
     #   family.
     #
-    #   For information about valid engine versions, see `CreateDBInstance`,
-    #   or call `DescribeDBEngineVersions`.
+    #   If you specify only a major version, Amazon RDS will update the DB
+    #   instance to the default minor version if the current minor version
+    #   is lower. For information about valid engine versions, see
+    #   `CreateDBInstance`, or call `DescribeDBEngineVersions`.
     #   @return [String]
     #
     # @!attribute [rw] allow_major_version_upgrade
@@ -13721,7 +13725,7 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] option_group_name
-    #   Indicates that the DB instance should be associated with the
+    #   A value that indicates the DB instance should be associated with the
     #   specified option group. Changing this parameter doesn't result in
     #   an outage except in the following case and the change is applied
     #   during the next maintenance window unless the `ApplyImmediately`
@@ -14666,6 +14670,8 @@ module Aws::RDS
     #         global_cluster_identifier: "String",
     #         new_global_cluster_identifier: "String",
     #         deletion_protection: false,
+    #         engine_version: "String",
+    #         allow_major_version_upgrade: false,
     #       }
     #
     # @!attribute [rw] global_cluster_identifier
@@ -14701,12 +14707,53 @@ module Aws::RDS
     #   protection is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] engine_version
+    #   The version number of the database engine to which you want to
+    #   upgrade. Changing this parameter results in an outage. The change is
+    #   applied during the next maintenance window unless `ApplyImmediately`
+    #   is enabled.
+    #
+    #   To list all of the available engine versions for `aurora` (for MySQL
+    #   5.6-compatible Aurora), use the following command:
+    #
+    #   `` aws rds describe-db-engine-versions --engine aurora --query
+    #   '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' ``
+    #
+    #   To list all of the available engine versions for `aurora-mysql` (for
+    #   MySQL 5.7-compatible Aurora), use the following command:
+    #
+    #   `` aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' ``
+    #
+    #   To list all of the available engine versions for
+    #   `aurora-postgresql`, use the following command:
+    #
+    #   `` aws rds describe-db-engine-versions --engine aurora-postgresql
+    #   --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'
+    #   ``
+    #   @return [String]
+    #
+    # @!attribute [rw] allow_major_version_upgrade
+    #   A value that indicates whether major version upgrades are allowed.
+    #
+    #   Constraints: You must allow major version upgrades when specifying a
+    #   value for the `EngineVersion` parameter that is a different major
+    #   version than the DB cluster's current version.
+    #
+    #   If you upgrade the major version of a global database, the cluster
+    #   and DB instance parameter groups are set to the default parameter
+    #   groups for the new version. Apply any custom parameter groups after
+    #   completing the upgrade.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyGlobalClusterMessage AWS API Documentation
     #
     class ModifyGlobalClusterMessage < Struct.new(
       :global_cluster_identifier,
       :new_global_cluster_identifier,
-      :deletion_protection)
+      :deletion_protection,
+      :engine_version,
+      :allow_major_version_upgrade)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15704,7 +15751,7 @@ module Aws::RDS
     end
 
     # This data type is used as a response element in the `ModifyDBInstance`
-    # action and contains changes that will be applied during the next
+    # operation and contains changes that will be applied during the next
     # maintenance window.
     #
     # @!attribute [rw] db_instance_class
@@ -15730,8 +15777,8 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] multi_az
-    #   Indicates that the Single-AZ DB instance will change to a Multi-AZ
-    #   deployment.
+    #   A value that indicates that the Single-AZ DB instance will change to
+    #   a Multi-AZ deployment.
     #   @return [Boolean]
     #
     # @!attribute [rw] engine_version

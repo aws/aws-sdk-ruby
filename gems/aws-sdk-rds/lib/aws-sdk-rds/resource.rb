@@ -1113,8 +1113,8 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   See [Supported PostgreSQL Database Versions][5] in the *Amazon RDS
-    #   User Guide.*
+    #   See [Amazon RDS for PostgreSQL versions and extensions][5] in the
+    #   *Amazon RDS User Guide.*
     #
     #
     #
@@ -1122,7 +1122,7 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
     #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
-    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions
+    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
     # @option options [Boolean] :auto_minor_version_upgrade
     #   A value that indicates whether minor engine upgrades are applied
     #   automatically to the DB instance during the maintenance window. By
@@ -1147,8 +1147,8 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
     # @option options [String] :option_group_name
-    #   Indicates that the DB instance should be associated with the specified
-    #   option group.
+    #   A value that indicates that the DB instance should be associated with
+    #   the specified option group.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
     #   TDE, can't be removed from an option group. Also, that option group
@@ -1368,7 +1368,8 @@ module Aws::RDS
     #
     #   **Oracle**
     #
-    #   Possible values are `alert`, `audit`, `listener`, and `trace`.
+    #   Possible values are `alert`, `audit`, `listener`, `trace`, and
+    #   `oemagent`.
     #
     #   **PostgreSQL**
     #
