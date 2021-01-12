@@ -20,6 +20,7 @@ module Aws::Imagebuilder
     AmiList = Shapes::ListShape.new(name: 'AmiList')
     AmiNameString = Shapes::StringShape.new(name: 'AmiNameString')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CallRateLimitExceededException = Shapes::StructureShape.new(name: 'CallRateLimitExceededException')
     CancelImageCreationRequest = Shapes::StructureShape.new(name: 'CancelImageCreationRequest')
     CancelImageCreationResponse = Shapes::StructureShape.new(name: 'CancelImageCreationResponse')
@@ -38,8 +39,19 @@ module Aws::Imagebuilder
     ComponentVersionArn = Shapes::StringShape.new(name: 'ComponentVersionArn')
     ComponentVersionArnOrBuildVersionArn = Shapes::StringShape.new(name: 'ComponentVersionArnOrBuildVersionArn')
     ComponentVersionList = Shapes::ListShape.new(name: 'ComponentVersionList')
+    Container = Shapes::StructureShape.new(name: 'Container')
+    ContainerDistributionConfiguration = Shapes::StructureShape.new(name: 'ContainerDistributionConfiguration')
+    ContainerList = Shapes::ListShape.new(name: 'ContainerList')
+    ContainerRecipe = Shapes::StructureShape.new(name: 'ContainerRecipe')
+    ContainerRecipeArn = Shapes::StringShape.new(name: 'ContainerRecipeArn')
+    ContainerRecipeSummary = Shapes::StructureShape.new(name: 'ContainerRecipeSummary')
+    ContainerRecipeSummaryList = Shapes::ListShape.new(name: 'ContainerRecipeSummaryList')
+    ContainerRepositoryService = Shapes::StringShape.new(name: 'ContainerRepositoryService')
+    ContainerType = Shapes::StringShape.new(name: 'ContainerType')
     CreateComponentRequest = Shapes::StructureShape.new(name: 'CreateComponentRequest')
     CreateComponentResponse = Shapes::StructureShape.new(name: 'CreateComponentResponse')
+    CreateContainerRecipeRequest = Shapes::StructureShape.new(name: 'CreateContainerRecipeRequest')
+    CreateContainerRecipeResponse = Shapes::StructureShape.new(name: 'CreateContainerRecipeResponse')
     CreateDistributionConfigurationRequest = Shapes::StructureShape.new(name: 'CreateDistributionConfigurationRequest')
     CreateDistributionConfigurationResponse = Shapes::StructureShape.new(name: 'CreateDistributionConfigurationResponse')
     CreateImagePipelineRequest = Shapes::StructureShape.new(name: 'CreateImagePipelineRequest')
@@ -53,6 +65,8 @@ module Aws::Imagebuilder
     DateTime = Shapes::StringShape.new(name: 'DateTime')
     DeleteComponentRequest = Shapes::StructureShape.new(name: 'DeleteComponentRequest')
     DeleteComponentResponse = Shapes::StructureShape.new(name: 'DeleteComponentResponse')
+    DeleteContainerRecipeRequest = Shapes::StructureShape.new(name: 'DeleteContainerRecipeRequest')
+    DeleteContainerRecipeResponse = Shapes::StructureShape.new(name: 'DeleteContainerRecipeResponse')
     DeleteDistributionConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteDistributionConfigurationRequest')
     DeleteDistributionConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteDistributionConfigurationResponse')
     DeleteImagePipelineRequest = Shapes::StructureShape.new(name: 'DeleteImagePipelineRequest')
@@ -70,6 +84,7 @@ module Aws::Imagebuilder
     DistributionConfigurationSummaryList = Shapes::ListShape.new(name: 'DistributionConfigurationSummaryList')
     DistributionList = Shapes::ListShape.new(name: 'DistributionList')
     DistributionTimeoutMinutes = Shapes::IntegerShape.new(name: 'DistributionTimeoutMinutes')
+    DockerFileTemplate = Shapes::StringShape.new(name: 'DockerFileTemplate')
     EbsInstanceBlockDeviceSpecification = Shapes::StructureShape.new(name: 'EbsInstanceBlockDeviceSpecification')
     EbsIopsInteger = Shapes::IntegerShape.new(name: 'EbsIopsInteger')
     EbsVolumeSizeInteger = Shapes::IntegerShape.new(name: 'EbsVolumeSizeInteger')
@@ -86,6 +101,10 @@ module Aws::Imagebuilder
     GetComponentPolicyResponse = Shapes::StructureShape.new(name: 'GetComponentPolicyResponse')
     GetComponentRequest = Shapes::StructureShape.new(name: 'GetComponentRequest')
     GetComponentResponse = Shapes::StructureShape.new(name: 'GetComponentResponse')
+    GetContainerRecipePolicyRequest = Shapes::StructureShape.new(name: 'GetContainerRecipePolicyRequest')
+    GetContainerRecipePolicyResponse = Shapes::StructureShape.new(name: 'GetContainerRecipePolicyResponse')
+    GetContainerRecipeRequest = Shapes::StructureShape.new(name: 'GetContainerRecipeRequest')
+    GetContainerRecipeResponse = Shapes::StructureShape.new(name: 'GetContainerRecipeResponse')
     GetDistributionConfigurationRequest = Shapes::StructureShape.new(name: 'GetDistributionConfigurationRequest')
     GetDistributionConfigurationResponse = Shapes::StructureShape.new(name: 'GetDistributionConfigurationResponse')
     GetImagePipelineRequest = Shapes::StructureShape.new(name: 'GetImagePipelineRequest')
@@ -117,6 +136,7 @@ module Aws::Imagebuilder
     ImageSummaryList = Shapes::ListShape.new(name: 'ImageSummaryList')
     ImageTestsConfiguration = Shapes::StructureShape.new(name: 'ImageTestsConfiguration')
     ImageTestsTimeoutMinutes = Shapes::IntegerShape.new(name: 'ImageTestsTimeoutMinutes')
+    ImageType = Shapes::StringShape.new(name: 'ImageType')
     ImageVersion = Shapes::StructureShape.new(name: 'ImageVersion')
     ImageVersionArn = Shapes::StringShape.new(name: 'ImageVersionArn')
     ImageVersionArnOrBuildVersionArn = Shapes::StringShape.new(name: 'ImageVersionArnOrBuildVersionArn')
@@ -128,6 +148,7 @@ module Aws::Imagebuilder
     InfrastructureConfigurationSummary = Shapes::StructureShape.new(name: 'InfrastructureConfigurationSummary')
     InfrastructureConfigurationSummaryList = Shapes::ListShape.new(name: 'InfrastructureConfigurationSummaryList')
     InlineComponentData = Shapes::StringShape.new(name: 'InlineComponentData')
+    InlineDockerFileTemplate = Shapes::StringShape.new(name: 'InlineDockerFileTemplate')
     InstanceBlockDeviceMapping = Shapes::StructureShape.new(name: 'InstanceBlockDeviceMapping')
     InstanceBlockDeviceMappings = Shapes::ListShape.new(name: 'InstanceBlockDeviceMappings')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
@@ -145,6 +166,8 @@ module Aws::Imagebuilder
     ListComponentBuildVersionsResponse = Shapes::StructureShape.new(name: 'ListComponentBuildVersionsResponse')
     ListComponentsRequest = Shapes::StructureShape.new(name: 'ListComponentsRequest')
     ListComponentsResponse = Shapes::StructureShape.new(name: 'ListComponentsResponse')
+    ListContainerRecipesRequest = Shapes::StructureShape.new(name: 'ListContainerRecipesRequest')
+    ListContainerRecipesResponse = Shapes::StructureShape.new(name: 'ListContainerRecipesResponse')
     ListDistributionConfigurationsRequest = Shapes::StructureShape.new(name: 'ListDistributionConfigurationsRequest')
     ListDistributionConfigurationsResponse = Shapes::StructureShape.new(name: 'ListDistributionConfigurationsResponse')
     ListImageBuildVersionsRequest = Shapes::StructureShape.new(name: 'ListImageBuildVersionsRequest')
@@ -174,10 +197,13 @@ module Aws::Imagebuilder
     Platform = Shapes::StringShape.new(name: 'Platform')
     PutComponentPolicyRequest = Shapes::StructureShape.new(name: 'PutComponentPolicyRequest')
     PutComponentPolicyResponse = Shapes::StructureShape.new(name: 'PutComponentPolicyResponse')
+    PutContainerRecipePolicyRequest = Shapes::StructureShape.new(name: 'PutContainerRecipePolicyRequest')
+    PutContainerRecipePolicyResponse = Shapes::StructureShape.new(name: 'PutContainerRecipePolicyResponse')
     PutImagePolicyRequest = Shapes::StructureShape.new(name: 'PutImagePolicyRequest')
     PutImagePolicyResponse = Shapes::StructureShape.new(name: 'PutImagePolicyResponse')
     PutImageRecipePolicyRequest = Shapes::StructureShape.new(name: 'PutImageRecipePolicyRequest')
     PutImageRecipePolicyResponse = Shapes::StructureShape.new(name: 'PutImageRecipePolicyResponse')
+    RegionList = Shapes::ListShape.new(name: 'RegionList')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceDependencyException = Shapes::StructureShape.new(name: 'ResourceDependencyException')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
@@ -202,6 +228,7 @@ module Aws::Imagebuilder
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TargetContainerRepository = Shapes::StructureShape.new(name: 'TargetContainerRepository')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDistributionConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateDistributionConfigurationRequest')
@@ -297,6 +324,47 @@ module Aws::Imagebuilder
 
     ComponentVersionList.member = Shapes::ShapeRef.new(shape: ComponentVersion)
 
+    Container.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "region"))
+    Container.add_member(:image_uris, Shapes::ShapeRef.new(shape: StringList, location_name: "imageUris"))
+    Container.struct_class = Types::Container
+
+    ContainerDistributionConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    ContainerDistributionConfiguration.add_member(:container_tags, Shapes::ShapeRef.new(shape: StringList, location_name: "containerTags"))
+    ContainerDistributionConfiguration.add_member(:target_repository, Shapes::ShapeRef.new(shape: TargetContainerRepository, required: true, location_name: "targetRepository"))
+    ContainerDistributionConfiguration.struct_class = Types::ContainerDistributionConfiguration
+
+    ContainerList.member = Shapes::ShapeRef.new(shape: Container)
+
+    ContainerRecipe.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
+    ContainerRecipe.add_member(:container_type, Shapes::ShapeRef.new(shape: ContainerType, location_name: "containerType"))
+    ContainerRecipe.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    ContainerRecipe.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    ContainerRecipe.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
+    ContainerRecipe.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
+    ContainerRecipe.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
+    ContainerRecipe.add_member(:components, Shapes::ShapeRef.new(shape: ComponentConfigurationList, location_name: "components"))
+    ContainerRecipe.add_member(:dockerfile_template_data, Shapes::ShapeRef.new(shape: DockerFileTemplate, location_name: "dockerfileTemplateData"))
+    ContainerRecipe.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
+    ContainerRecipe.add_member(:encrypted, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "encrypted"))
+    ContainerRecipe.add_member(:parent_image, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "parentImage"))
+    ContainerRecipe.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
+    ContainerRecipe.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ContainerRecipe.add_member(:working_directory, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "workingDirectory"))
+    ContainerRecipe.add_member(:target_repository, Shapes::ShapeRef.new(shape: TargetContainerRepository, location_name: "targetRepository"))
+    ContainerRecipe.struct_class = Types::ContainerRecipe
+
+    ContainerRecipeSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
+    ContainerRecipeSummary.add_member(:container_type, Shapes::ShapeRef.new(shape: ContainerType, location_name: "containerType"))
+    ContainerRecipeSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    ContainerRecipeSummary.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
+    ContainerRecipeSummary.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
+    ContainerRecipeSummary.add_member(:parent_image, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "parentImage"))
+    ContainerRecipeSummary.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
+    ContainerRecipeSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ContainerRecipeSummary.struct_class = Types::ContainerRecipeSummary
+
+    ContainerRecipeSummaryList.member = Shapes::ShapeRef.new(shape: ContainerRecipeSummary)
+
     CreateComponentRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     CreateComponentRequest.add_member(:semantic_version, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "semanticVersion"))
     CreateComponentRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
@@ -315,6 +383,28 @@ module Aws::Imagebuilder
     CreateComponentResponse.add_member(:component_build_version_arn, Shapes::ShapeRef.new(shape: ComponentBuildVersionArn, location_name: "componentBuildVersionArn"))
     CreateComponentResponse.struct_class = Types::CreateComponentResponse
 
+    CreateContainerRecipeRequest.add_member(:container_type, Shapes::ShapeRef.new(shape: ContainerType, required: true, location_name: "containerType"))
+    CreateContainerRecipeRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
+    CreateContainerRecipeRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    CreateContainerRecipeRequest.add_member(:semantic_version, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "semanticVersion"))
+    CreateContainerRecipeRequest.add_member(:components, Shapes::ShapeRef.new(shape: ComponentConfigurationList, required: true, location_name: "components"))
+    CreateContainerRecipeRequest.add_member(:dockerfile_template_data, Shapes::ShapeRef.new(shape: InlineDockerFileTemplate, required: true, location_name: "dockerfileTemplateData"))
+    CreateContainerRecipeRequest.add_member(:dockerfile_template_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "dockerfileTemplateUri"))
+    CreateContainerRecipeRequest.add_member(:platform_override, Shapes::ShapeRef.new(shape: Platform, location_name: "platformOverride"))
+    CreateContainerRecipeRequest.add_member(:image_os_version_override, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "imageOsVersionOverride"))
+    CreateContainerRecipeRequest.add_member(:parent_image, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "parentImage"))
+    CreateContainerRecipeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateContainerRecipeRequest.add_member(:working_directory, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "workingDirectory"))
+    CreateContainerRecipeRequest.add_member(:target_repository, Shapes::ShapeRef.new(shape: TargetContainerRepository, required: true, location_name: "targetRepository"))
+    CreateContainerRecipeRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
+    CreateContainerRecipeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateContainerRecipeRequest.struct_class = Types::CreateContainerRecipeRequest
+
+    CreateContainerRecipeResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
+    CreateContainerRecipeResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    CreateContainerRecipeResponse.add_member(:container_recipe_arn, Shapes::ShapeRef.new(shape: ContainerRecipeArn, location_name: "containerRecipeArn"))
+    CreateContainerRecipeResponse.struct_class = Types::CreateContainerRecipeResponse
+
     CreateDistributionConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     CreateDistributionConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     CreateDistributionConfigurationRequest.add_member(:distributions, Shapes::ShapeRef.new(shape: DistributionList, required: true, location_name: "distributions"))
@@ -329,7 +419,8 @@ module Aws::Imagebuilder
 
     CreateImagePipelineRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     CreateImagePipelineRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
-    CreateImagePipelineRequest.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: ImageRecipeArn, required: true, location_name: "imageRecipeArn"))
+    CreateImagePipelineRequest.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: ImageRecipeArn, location_name: "imageRecipeArn"))
+    CreateImagePipelineRequest.add_member(:container_recipe_arn, Shapes::ShapeRef.new(shape: ContainerRecipeArn, location_name: "containerRecipeArn"))
     CreateImagePipelineRequest.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, required: true, location_name: "infrastructureConfigurationArn"))
     CreateImagePipelineRequest.add_member(:distribution_configuration_arn, Shapes::ShapeRef.new(shape: DistributionConfigurationArn, location_name: "distributionConfigurationArn"))
     CreateImagePipelineRequest.add_member(:image_tests_configuration, Shapes::ShapeRef.new(shape: ImageTestsConfiguration, location_name: "imageTestsConfiguration"))
@@ -361,7 +452,8 @@ module Aws::Imagebuilder
     CreateImageRecipeResponse.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: ImageRecipeArn, location_name: "imageRecipeArn"))
     CreateImageRecipeResponse.struct_class = Types::CreateImageRecipeResponse
 
-    CreateImageRequest.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: ImageRecipeArn, required: true, location_name: "imageRecipeArn"))
+    CreateImageRequest.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: ImageRecipeArn, location_name: "imageRecipeArn"))
+    CreateImageRequest.add_member(:container_recipe_arn, Shapes::ShapeRef.new(shape: ContainerRecipeArn, location_name: "containerRecipeArn"))
     CreateImageRequest.add_member(:distribution_configuration_arn, Shapes::ShapeRef.new(shape: DistributionConfigurationArn, location_name: "distributionConfigurationArn"))
     CreateImageRequest.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, required: true, location_name: "infrastructureConfigurationArn"))
     CreateImageRequest.add_member(:image_tests_configuration, Shapes::ShapeRef.new(shape: ImageTestsConfiguration, location_name: "imageTestsConfiguration"))
@@ -402,6 +494,13 @@ module Aws::Imagebuilder
     DeleteComponentResponse.add_member(:component_build_version_arn, Shapes::ShapeRef.new(shape: ComponentBuildVersionArn, location_name: "componentBuildVersionArn"))
     DeleteComponentResponse.struct_class = Types::DeleteComponentResponse
 
+    DeleteContainerRecipeRequest.add_member(:container_recipe_arn, Shapes::ShapeRef.new(shape: ContainerRecipeArn, required: true, location: "querystring", location_name: "containerRecipeArn"))
+    DeleteContainerRecipeRequest.struct_class = Types::DeleteContainerRecipeRequest
+
+    DeleteContainerRecipeResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
+    DeleteContainerRecipeResponse.add_member(:container_recipe_arn, Shapes::ShapeRef.new(shape: ContainerRecipeArn, location_name: "containerRecipeArn"))
+    DeleteContainerRecipeResponse.struct_class = Types::DeleteContainerRecipeResponse
+
     DeleteDistributionConfigurationRequest.add_member(:distribution_configuration_arn, Shapes::ShapeRef.new(shape: DistributionConfigurationArn, required: true, location: "querystring", location_name: "distributionConfigurationArn"))
     DeleteDistributionConfigurationRequest.struct_class = Types::DeleteDistributionConfigurationRequest
 
@@ -439,6 +538,7 @@ module Aws::Imagebuilder
 
     Distribution.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "region"))
     Distribution.add_member(:ami_distribution_configuration, Shapes::ShapeRef.new(shape: AmiDistributionConfiguration, location_name: "amiDistributionConfiguration"))
+    Distribution.add_member(:container_distribution_configuration, Shapes::ShapeRef.new(shape: ContainerDistributionConfiguration, location_name: "containerDistributionConfiguration"))
     Distribution.add_member(:license_configuration_arns, Shapes::ShapeRef.new(shape: LicenseConfigurationArnList, location_name: "licenseConfigurationArns"))
     Distribution.struct_class = Types::Distribution
 
@@ -458,6 +558,7 @@ module Aws::Imagebuilder
     DistributionConfigurationSummary.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
     DistributionConfigurationSummary.add_member(:date_updated, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateUpdated"))
     DistributionConfigurationSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    DistributionConfigurationSummary.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "regions"))
     DistributionConfigurationSummary.struct_class = Types::DistributionConfigurationSummary
 
     DistributionConfigurationSummaryList.member = Shapes::ShapeRef.new(shape: DistributionConfigurationSummary)
@@ -497,6 +598,20 @@ module Aws::Imagebuilder
     GetComponentResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
     GetComponentResponse.add_member(:component, Shapes::ShapeRef.new(shape: Component, location_name: "component"))
     GetComponentResponse.struct_class = Types::GetComponentResponse
+
+    GetContainerRecipePolicyRequest.add_member(:container_recipe_arn, Shapes::ShapeRef.new(shape: ContainerRecipeArn, required: true, location: "querystring", location_name: "containerRecipeArn"))
+    GetContainerRecipePolicyRequest.struct_class = Types::GetContainerRecipePolicyRequest
+
+    GetContainerRecipePolicyResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
+    GetContainerRecipePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, location_name: "policy"))
+    GetContainerRecipePolicyResponse.struct_class = Types::GetContainerRecipePolicyResponse
+
+    GetContainerRecipeRequest.add_member(:container_recipe_arn, Shapes::ShapeRef.new(shape: ContainerRecipeArn, required: true, location: "querystring", location_name: "containerRecipeArn"))
+    GetContainerRecipeRequest.struct_class = Types::GetContainerRecipeRequest
+
+    GetContainerRecipeResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
+    GetContainerRecipeResponse.add_member(:container_recipe, Shapes::ShapeRef.new(shape: ContainerRecipe, location_name: "containerRecipe"))
+    GetContainerRecipeResponse.struct_class = Types::GetContainerRecipeResponse
 
     GetDistributionConfigurationRequest.add_member(:distribution_configuration_arn, Shapes::ShapeRef.new(shape: DistributionConfigurationArn, required: true, location: "querystring", location_name: "distributionConfigurationArn"))
     GetDistributionConfigurationRequest.struct_class = Types::GetDistributionConfigurationRequest
@@ -551,6 +666,7 @@ module Aws::Imagebuilder
     IdempotentParameterMismatchException.struct_class = Types::IdempotentParameterMismatchException
 
     Image.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
+    Image.add_member(:type, Shapes::ShapeRef.new(shape: ImageType, location_name: "type"))
     Image.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     Image.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
     Image.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
@@ -558,6 +674,7 @@ module Aws::Imagebuilder
     Image.add_member(:os_version, Shapes::ShapeRef.new(shape: OsVersion, location_name: "osVersion"))
     Image.add_member(:state, Shapes::ShapeRef.new(shape: ImageState, location_name: "state"))
     Image.add_member(:image_recipe, Shapes::ShapeRef.new(shape: ImageRecipe, location_name: "imageRecipe"))
+    Image.add_member(:container_recipe, Shapes::ShapeRef.new(shape: ContainerRecipe, location_name: "containerRecipe"))
     Image.add_member(:source_pipeline_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "sourcePipelineName"))
     Image.add_member(:source_pipeline_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "sourcePipelineArn"))
     Image.add_member(:infrastructure_configuration, Shapes::ShapeRef.new(shape: InfrastructureConfiguration, location_name: "infrastructureConfiguration"))
@@ -574,6 +691,7 @@ module Aws::Imagebuilder
     ImagePipeline.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
     ImagePipeline.add_member(:enhanced_image_metadata_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "enhancedImageMetadataEnabled"))
     ImagePipeline.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "imageRecipeArn"))
+    ImagePipeline.add_member(:container_recipe_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "containerRecipeArn"))
     ImagePipeline.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "infrastructureConfigurationArn"))
     ImagePipeline.add_member(:distribution_configuration_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "distributionConfigurationArn"))
     ImagePipeline.add_member(:image_tests_configuration, Shapes::ShapeRef.new(shape: ImageTestsConfiguration, location_name: "imageTestsConfiguration"))
@@ -589,6 +707,7 @@ module Aws::Imagebuilder
     ImagePipelineList.member = Shapes::ShapeRef.new(shape: ImagePipeline)
 
     ImageRecipe.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
+    ImageRecipe.add_member(:type, Shapes::ShapeRef.new(shape: ImageType, location_name: "type"))
     ImageRecipe.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     ImageRecipe.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     ImageRecipe.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
@@ -619,6 +738,7 @@ module Aws::Imagebuilder
 
     ImageSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
     ImageSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    ImageSummary.add_member(:type, Shapes::ShapeRef.new(shape: ImageType, location_name: "type"))
     ImageSummary.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
     ImageSummary.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
     ImageSummary.add_member(:os_version, Shapes::ShapeRef.new(shape: OsVersion, location_name: "osVersion"))
@@ -637,6 +757,7 @@ module Aws::Imagebuilder
 
     ImageVersion.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
     ImageVersion.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    ImageVersion.add_member(:type, Shapes::ShapeRef.new(shape: ImageType, location_name: "type"))
     ImageVersion.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
     ImageVersion.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
     ImageVersion.add_member(:os_version, Shapes::ShapeRef.new(shape: OsVersion, location_name: "osVersion"))
@@ -739,6 +860,7 @@ module Aws::Imagebuilder
 
     ListComponentsRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Ownership, location_name: "owner"))
     ListComponentsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
+    ListComponentsRequest.add_member(:by_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "byName"))
     ListComponentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
     ListComponentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListComponentsRequest.struct_class = Types::ListComponentsRequest
@@ -747,6 +869,17 @@ module Aws::Imagebuilder
     ListComponentsResponse.add_member(:component_version_list, Shapes::ShapeRef.new(shape: ComponentVersionList, location_name: "componentVersionList"))
     ListComponentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListComponentsResponse.struct_class = Types::ListComponentsResponse
+
+    ListContainerRecipesRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Ownership, location_name: "owner"))
+    ListContainerRecipesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
+    ListContainerRecipesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListContainerRecipesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListContainerRecipesRequest.struct_class = Types::ListContainerRecipesRequest
+
+    ListContainerRecipesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
+    ListContainerRecipesResponse.add_member(:container_recipe_summary_list, Shapes::ShapeRef.new(shape: ContainerRecipeSummaryList, location_name: "containerRecipeSummaryList"))
+    ListContainerRecipesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListContainerRecipesResponse.struct_class = Types::ListContainerRecipesResponse
 
     ListDistributionConfigurationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
     ListDistributionConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
@@ -803,8 +936,10 @@ module Aws::Imagebuilder
 
     ListImagesRequest.add_member(:owner, Shapes::ShapeRef.new(shape: Ownership, location_name: "owner"))
     ListImagesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
+    ListImagesRequest.add_member(:by_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "byName"))
     ListImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
     ListImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListImagesRequest.add_member(:include_deprecated, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "includeDeprecated"))
     ListImagesRequest.struct_class = Types::ListImagesRequest
 
     ListImagesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -834,6 +969,7 @@ module Aws::Imagebuilder
     OsVersionList.member = Shapes::ShapeRef.new(shape: OsVersion)
 
     OutputResources.add_member(:amis, Shapes::ShapeRef.new(shape: AmiList, location_name: "amis"))
+    OutputResources.add_member(:containers, Shapes::ShapeRef.new(shape: ContainerList, location_name: "containers"))
     OutputResources.struct_class = Types::OutputResources
 
     PutComponentPolicyRequest.add_member(:component_arn, Shapes::ShapeRef.new(shape: ComponentBuildVersionArn, required: true, location_name: "componentArn"))
@@ -843,6 +979,14 @@ module Aws::Imagebuilder
     PutComponentPolicyResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
     PutComponentPolicyResponse.add_member(:component_arn, Shapes::ShapeRef.new(shape: ComponentBuildVersionArn, location_name: "componentArn"))
     PutComponentPolicyResponse.struct_class = Types::PutComponentPolicyResponse
+
+    PutContainerRecipePolicyRequest.add_member(:container_recipe_arn, Shapes::ShapeRef.new(shape: ContainerRecipeArn, required: true, location_name: "containerRecipeArn"))
+    PutContainerRecipePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, required: true, location_name: "policy"))
+    PutContainerRecipePolicyRequest.struct_class = Types::PutContainerRecipePolicyRequest
+
+    PutContainerRecipePolicyResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
+    PutContainerRecipePolicyResponse.add_member(:container_recipe_arn, Shapes::ShapeRef.new(shape: ContainerRecipeArn, location_name: "containerRecipeArn"))
+    PutContainerRecipePolicyResponse.struct_class = Types::PutContainerRecipePolicyResponse
 
     PutImagePolicyRequest.add_member(:image_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, required: true, location_name: "imageArn"))
     PutImagePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, required: true, location_name: "policy"))
@@ -859,6 +1003,8 @@ module Aws::Imagebuilder
     PutImageRecipePolicyResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
     PutImageRecipePolicyResponse.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: ImageRecipeArn, location_name: "imageRecipeArn"))
     PutImageRecipePolicyResponse.struct_class = Types::PutImageRecipePolicyResponse
+
+    RegionList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
@@ -916,6 +1062,10 @@ module Aws::Imagebuilder
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    TargetContainerRepository.add_member(:service, Shapes::ShapeRef.new(shape: ContainerRepositoryService, required: true, location_name: "service"))
+    TargetContainerRepository.add_member(:repository_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "repositoryName"))
+    TargetContainerRepository.struct_class = Types::TargetContainerRepository
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -935,7 +1085,8 @@ module Aws::Imagebuilder
 
     UpdateImagePipelineRequest.add_member(:image_pipeline_arn, Shapes::ShapeRef.new(shape: ImagePipelineArn, required: true, location_name: "imagePipelineArn"))
     UpdateImagePipelineRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
-    UpdateImagePipelineRequest.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: ImageRecipeArn, required: true, location_name: "imageRecipeArn"))
+    UpdateImagePipelineRequest.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: ImageRecipeArn, location_name: "imageRecipeArn"))
+    UpdateImagePipelineRequest.add_member(:container_recipe_arn, Shapes::ShapeRef.new(shape: ContainerRecipeArn, location_name: "containerRecipeArn"))
     UpdateImagePipelineRequest.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, required: true, location_name: "infrastructureConfigurationArn"))
     UpdateImagePipelineRequest.add_member(:distribution_configuration_arn, Shapes::ShapeRef.new(shape: DistributionConfigurationArn, location_name: "distributionConfigurationArn"))
     UpdateImagePipelineRequest.add_member(:image_tests_configuration, Shapes::ShapeRef.new(shape: ImageTestsConfiguration, location_name: "imageTestsConfiguration"))
@@ -1020,6 +1171,25 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: InvalidVersionNumberException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:create_container_recipe, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateContainerRecipe"
+        o.http_method = "PUT"
+        o.http_request_uri = "/CreateContainerRecipe"
+        o.input = Shapes::ShapeRef.new(shape: CreateContainerRecipeRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateContainerRecipeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidVersionNumberException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
@@ -1129,6 +1299,21 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: ResourceDependencyException)
       end)
 
+      api.add_operation(:delete_container_recipe, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteContainerRecipe"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/DeleteContainerRecipe"
+        o.input = Shapes::ShapeRef.new(shape: DeleteContainerRecipeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteContainerRecipeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceDependencyException)
+      end)
+
       api.add_operation(:delete_distribution_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDistributionConfiguration"
         o.http_method = "DELETE"
@@ -1228,6 +1413,34 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+      end)
+
+      api.add_operation(:get_container_recipe, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetContainerRecipe"
+        o.http_method = "GET"
+        o.http_request_uri = "/GetContainerRecipe"
+        o.input = Shapes::ShapeRef.new(shape: GetContainerRecipeRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetContainerRecipeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+      end)
+
+      api.add_operation(:get_container_recipe_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetContainerRecipePolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/GetContainerRecipePolicy"
+        o.input = Shapes::ShapeRef.new(shape: GetContainerRecipePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetContainerRecipePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
       end)
@@ -1375,6 +1588,27 @@ module Aws::Imagebuilder
         o.http_request_uri = "/ListComponents"
         o.input = Shapes::ShapeRef.new(shape: ListComponentsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListComponentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_container_recipes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListContainerRecipes"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListContainerRecipes"
+        o.input = Shapes::ShapeRef.new(shape: ListContainerRecipesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListContainerRecipesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
@@ -1555,6 +1789,22 @@ module Aws::Imagebuilder
         o.http_request_uri = "/PutComponentPolicy"
         o.input = Shapes::ShapeRef.new(shape: PutComponentPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: PutComponentPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+      end)
+
+      api.add_operation(:put_container_recipe_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutContainerRecipePolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/PutContainerRecipePolicy"
+        o.input = Shapes::ShapeRef.new(shape: PutContainerRecipePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutContainerRecipePolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)

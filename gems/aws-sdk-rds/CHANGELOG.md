@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2021-01-11)
+------------------
+
+* Feature - This releases adds support for Major Version Upgrades on Aurora MySQL Global Clusters. Customers will be able to upgrade their whole Aurora MySQL Global Cluster to a new major engine version.
+
+1.109.0 (2020-12-22)
+------------------
+
+* Feature - Adds customer-owned IP address (CoIP) support to Amazon RDS on AWS Outposts.
+
+1.108.0 (2020-12-18)
+------------------
+
+* Feature - Adds IAM DB authentication information to the PendingModifiedValues output of the DescribeDBInstances API. Adds ClusterPendingModifiedValues information to the output of the DescribeDBClusters API.
+
 1.107.0 (2020-12-04)
 ------------------
 

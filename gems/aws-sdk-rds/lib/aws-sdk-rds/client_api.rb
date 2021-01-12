@@ -49,6 +49,7 @@ module Aws::RDS
     CertificateNotFoundFault = Shapes::StructureShape.new(name: 'CertificateNotFoundFault')
     CharacterSet = Shapes::StructureShape.new(name: 'CharacterSet')
     CloudwatchLogsExportConfiguration = Shapes::StructureShape.new(name: 'CloudwatchLogsExportConfiguration')
+    ClusterPendingModifiedValues = Shapes::StructureShape.new(name: 'ClusterPendingModifiedValues')
     ConnectionPoolConfiguration = Shapes::StructureShape.new(name: 'ConnectionPoolConfiguration')
     ConnectionPoolConfigurationInfo = Shapes::StructureShape.new(name: 'ConnectionPoolConfigurationInfo')
     CopyDBClusterParameterGroupMessage = Shapes::StructureShape.new(name: 'CopyDBClusterParameterGroupMessage')
@@ -683,6 +684,13 @@ module Aws::RDS
     CloudwatchLogsExportConfiguration.add_member(:disable_log_types, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "DisableLogTypes"))
     CloudwatchLogsExportConfiguration.struct_class = Types::CloudwatchLogsExportConfiguration
 
+    ClusterPendingModifiedValues.add_member(:pending_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: PendingCloudwatchLogsExports, location_name: "PendingCloudwatchLogsExports"))
+    ClusterPendingModifiedValues.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterIdentifier"))
+    ClusterPendingModifiedValues.add_member(:master_user_password, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserPassword"))
+    ClusterPendingModifiedValues.add_member(:iam_database_authentication_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IAMDatabaseAuthenticationEnabled"))
+    ClusterPendingModifiedValues.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
+    ClusterPendingModifiedValues.struct_class = Types::ClusterPendingModifiedValues
+
     ConnectionPoolConfiguration.add_member(:max_connections_percent, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxConnectionsPercent"))
     ConnectionPoolConfiguration.add_member(:max_idle_connections_percent, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxIdleConnectionsPercent"))
     ConnectionPoolConfiguration.add_member(:connection_borrow_timeout, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ConnectionBorrowTimeout"))
@@ -870,6 +878,7 @@ module Aws::RDS
     CreateDBInstanceMessage.add_member(:processor_features, Shapes::ShapeRef.new(shape: ProcessorFeatureList, location_name: "ProcessorFeatures"))
     CreateDBInstanceMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     CreateDBInstanceMessage.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
+    CreateDBInstanceMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
     CreateDBInstanceMessage.struct_class = Types::CreateDBInstanceMessage
 
     CreateDBInstanceReadReplicaMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
@@ -1069,6 +1078,7 @@ module Aws::RDS
     DBCluster.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     DBCluster.add_member(:global_write_forwarding_status, Shapes::ShapeRef.new(shape: WriteForwardingStatus, location_name: "GlobalWriteForwardingStatus"))
     DBCluster.add_member(:global_write_forwarding_requested, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "GlobalWriteForwardingRequested"))
+    DBCluster.add_member(:pending_modified_values, Shapes::ShapeRef.new(shape: ClusterPendingModifiedValues, location_name: "PendingModifiedValues"))
     DBCluster.struct_class = Types::DBCluster
 
     DBClusterAlreadyExistsFault.struct_class = Types::DBClusterAlreadyExistsFault
@@ -1309,6 +1319,7 @@ module Aws::RDS
     DBInstance.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
     DBInstance.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     DBInstance.add_member(:db_instance_automated_backups_replications, Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupsReplicationList, location_name: "DBInstanceAutomatedBackupsReplications"))
+    DBInstance.add_member(:customer_owned_ip_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CustomerOwnedIpEnabled"))
     DBInstance.struct_class = Types::DBInstance
 
     DBInstanceAlreadyExistsFault.struct_class = Types::DBInstanceAlreadyExistsFault
@@ -2360,6 +2371,7 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
     ModifyDBInstanceMessage.add_member(:certificate_rotation_restart, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CertificateRotationRestart"))
     ModifyDBInstanceMessage.add_member(:replica_mode, Shapes::ShapeRef.new(shape: ReplicaMode, location_name: "ReplicaMode"))
+    ModifyDBInstanceMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
     ModifyDBInstanceMessage.struct_class = Types::ModifyDBInstanceMessage
 
     ModifyDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -2429,6 +2441,8 @@ module Aws::RDS
     ModifyGlobalClusterMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "GlobalClusterIdentifier"))
     ModifyGlobalClusterMessage.add_member(:new_global_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "NewGlobalClusterIdentifier"))
     ModifyGlobalClusterMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
+    ModifyGlobalClusterMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
+    ModifyGlobalClusterMessage.add_member(:allow_major_version_upgrade, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AllowMajorVersionUpgrade"))
     ModifyGlobalClusterMessage.struct_class = Types::ModifyGlobalClusterMessage
 
     ModifyGlobalClusterResult.add_member(:global_cluster, Shapes::ShapeRef.new(shape: GlobalCluster, location_name: "GlobalCluster"))
@@ -2645,6 +2659,7 @@ module Aws::RDS
     PendingModifiedValues.add_member(:db_subnet_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBSubnetGroupName"))
     PendingModifiedValues.add_member(:pending_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: PendingCloudwatchLogsExports, location_name: "PendingCloudwatchLogsExports"))
     PendingModifiedValues.add_member(:processor_features, Shapes::ShapeRef.new(shape: ProcessorFeatureList, location_name: "ProcessorFeatures"))
+    PendingModifiedValues.add_member(:iam_database_authentication_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IAMDatabaseAuthenticationEnabled"))
     PendingModifiedValues.struct_class = Types::PendingModifiedValues
 
     PointInTimeRestoreNotEnabledFault.struct_class = Types::PointInTimeRestoreNotEnabledFault
@@ -2926,6 +2941,7 @@ module Aws::RDS
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:use_default_processor_features, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseDefaultProcessorFeatures"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:db_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBParameterGroupName"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
     RestoreDBInstanceFromDBSnapshotMessage.struct_class = Types::RestoreDBInstanceFromDBSnapshotMessage
 
     RestoreDBInstanceFromDBSnapshotResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3013,6 +3029,7 @@ module Aws::RDS
     RestoreDBInstanceToPointInTimeMessage.add_member(:source_dbi_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "SourceDbiResourceId"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:source_db_instance_automated_backups_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceDBInstanceAutomatedBackupsArn"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
     RestoreDBInstanceToPointInTimeMessage.struct_class = Types::RestoreDBInstanceToPointInTimeMessage
 
     RestoreDBInstanceToPointInTimeResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -4606,6 +4623,8 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: ModifyGlobalClusterResult)
         o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
       end)
 
       api.add_operation(:modify_option_group, Seahorse::Model::Operation.new.tap do |o|

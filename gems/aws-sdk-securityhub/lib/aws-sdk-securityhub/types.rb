@@ -21269,9 +21269,9 @@ module Aws::SecurityHub
 
     # The severity of the finding.
     #
-    # The finding provider can provide the initial severity, but cannot
-    # update it after that. The severity can only be updated by a master
-    # account. It cannot be updated by a member account.
+    # The finding provider can provide the initial severity. The finding
+    # provider can only update the severity if it has not been updated using
+    # `BatchUpdateFindings`.
     #
     # The finding must have either `Label` or `Normalized` populated. If
     # only one of these attributes is populated, then Security Hub

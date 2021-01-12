@@ -523,8 +523,8 @@ module Aws::RDS
     #   to another, and your DB instance uses a nondefault option group. If
     #   your source DB instance uses Transparent Data Encryption for Oracle or
     #   Microsoft SQL Server, you must specify this option when copying across
-    #   AWS Regions. For more information, see [Option Group
-    #   Considerations][1] in the *Amazon RDS User Guide.*
+    #   AWS Regions. For more information, see [Option group
+    #   considerations][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -605,6 +605,7 @@ module Aws::RDS
     #     use_default_processor_features: false,
     #     db_parameter_group_name: "String",
     #     deletion_protection: false,
+    #     enable_customer_owned_ip: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_instance_identifier
@@ -845,6 +846,25 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
+    # @option options [Boolean] :enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts DB instance.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in your
+    #   Outpost subnets through your on-premises network. For some use cases,
+    #   a CoIP can provide lower latency for connections to the DB instance
+    #   from outside of its virtual private cloud (VPC) on your local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP addresses][2]
+    #   in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(db_snapshot_identifier: @snapshot_id)

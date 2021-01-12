@@ -23,6 +23,95 @@ module Aws::ConnectParticipant
       include Aws::Structure
     end
 
+    # The case-insensitive input to indicate standard MIME type that
+    # describes the format of the file that will be uploaded.
+    #
+    # @!attribute [rw] content_type
+    #   Describes the MIME file type of the attachment. For a list of
+    #   supported file types, see [Feature specifications][1] in the *Amazon
+    #   Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_id
+    #   A unique identifier for the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_name
+    #   A case-sensitive name of the attachment being uploaded.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/AttachmentItem AWS API Documentation
+    #
+    class AttachmentItem < Struct.new(
+      :content_type,
+      :attachment_id,
+      :attachment_name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CompleteAttachmentUploadRequest
+    #   data as a hash:
+    #
+    #       {
+    #         attachment_ids: ["ArtifactId"], # required
+    #         client_token: "NonEmptyClientToken", # required
+    #         connection_token: "ParticipantToken", # required
+    #       }
+    #
+    # @!attribute [rw] attachment_ids
+    #   A list of unique identifiers for the attachments.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_token
+    #   The authentication token associated with the participant's
+    #   connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/CompleteAttachmentUploadRequest AWS API Documentation
+    #
+    class CompleteAttachmentUploadRequest < Struct.new(
+      :attachment_ids,
+      :client_token,
+      :connection_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/CompleteAttachmentUploadResponse AWS API Documentation
+    #
+    class CompleteAttachmentUploadResponse < Aws::EmptyStructure; end
+
+    # An attachment with that identifier is already being uploaded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Connection credentials.
     #
     # @!attribute [rw] connection_token
@@ -58,12 +147,14 @@ module Aws::ConnectParticipant
     #   @return [Array<String>]
     #
     # @!attribute [rw] participant_token
-    #   Participant Token as obtained from [StartChatContact][1] API
+    #   This is a header parameter.
+    #
+    #   The Participant Token as obtained from [StartChatContact][1] API
     #   response.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContactResponse.html
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/CreateParticipantConnectionRequest AWS API Documentation
@@ -126,6 +217,52 @@ module Aws::ConnectParticipant
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/DisconnectParticipantResponse AWS API Documentation
     #
     class DisconnectParticipantResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass GetAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         attachment_id: "ArtifactId", # required
+    #         connection_token: "ParticipantToken", # required
+    #       }
+    #
+    # @!attribute [rw] attachment_id
+    #   A unique identifier for the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_token
+    #   The authentication token associated with the participant's
+    #   connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/GetAttachmentRequest AWS API Documentation
+    #
+    class GetAttachmentRequest < Struct.new(
+      :attachment_id,
+      :connection_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] url
+    #   The pre-signed URL using which file would be downloaded from Amazon
+    #   S3 by the API caller.
+    #   @return [String]
+    #
+    # @!attribute [rw] url_expiry
+    #   The expiration time of the URL in ISO timestamp. It's specified in
+    #   ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
+    #   2019-11-08T02:41:28.172Z.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/GetAttachmentResponse AWS API Documentation
+    #
+    class GetAttachmentResponse < Struct.new(
+      :url,
+      :url_expiry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass GetTranscriptRequest
     #   data as a hash:
@@ -266,6 +403,10 @@ module Aws::ConnectParticipant
     #   system.
     #   @return [String]
     #
+    # @!attribute [rw] attachments
+    #   Provides information about the attachments.
+    #   @return [Array<Types::AttachmentItem>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/Item AWS API Documentation
     #
     class Item < Struct.new(
@@ -276,7 +417,8 @@ module Aws::ConnectParticipant
       :type,
       :participant_id,
       :display_name,
-      :participant_role)
+      :participant_role,
+      :attachments)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -409,6 +551,90 @@ module Aws::ConnectParticipant
       include Aws::Structure
     end
 
+    # The number of attachments per contact exceeds the quota.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartAttachmentUploadRequest
+    #   data as a hash:
+    #
+    #       {
+    #         content_type: "ContentType", # required
+    #         attachment_size_in_bytes: 1, # required
+    #         attachment_name: "AttachmentName", # required
+    #         client_token: "NonEmptyClientToken", # required
+    #         connection_token: "ParticipantToken", # required
+    #       }
+    #
+    # @!attribute [rw] content_type
+    #   Describes the MIME file type of the attachment. For a list of
+    #   supported file types, see [Feature specifications][1] in the *Amazon
+    #   Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_size_in_bytes
+    #   The size of the attachment in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] attachment_name
+    #   A case-sensitive name of the attachment being uploaded.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case sensitive identifier to support idempotency of
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_token
+    #   The authentication token associated with the participant's
+    #   connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/StartAttachmentUploadRequest AWS API Documentation
+    #
+    class StartAttachmentUploadRequest < Struct.new(
+      :content_type,
+      :attachment_size_in_bytes,
+      :attachment_name,
+      :client_token,
+      :connection_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attachment_id
+    #   A unique identifier for the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] upload_metadata
+    #   Fields to be used while uploading the attachment.
+    #   @return [Types::UploadMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/StartAttachmentUploadResponse AWS API Documentation
+    #
+    class StartAttachmentUploadResponse < Struct.new(
+      :attachment_id,
+      :upload_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A filtering option for where to start. For example, if you sent 100
     # messages, start with message 50.
     #
@@ -456,6 +682,33 @@ module Aws::ConnectParticipant
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Fields to be used while uploading the attachment.
+    #
+    # @!attribute [rw] url
+    #   The pre-signed URL using which file would be downloaded from Amazon
+    #   S3 by the API caller.
+    #   @return [String]
+    #
+    # @!attribute [rw] url_expiry
+    #   The expiration time of the URL in ISO timestamp. It's specified in
+    #   ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
+    #   2019-11-08T02:41:28.172Z.
+    #   @return [String]
+    #
+    # @!attribute [rw] headers_to_include
+    #   The headers to be provided while uploading the file to the URL.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/UploadMetadata AWS API Documentation
+    #
+    class UploadMetadata < Struct.new(
+      :url,
+      :url_expiry,
+      :headers_to_include)
       SENSITIVE = []
       include Aws::Structure
     end

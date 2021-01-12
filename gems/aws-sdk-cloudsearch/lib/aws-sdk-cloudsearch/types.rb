@@ -2280,7 +2280,7 @@ module Aws::CloudSearch
     #   data as a hash:
     #
     #       {
-    #         desired_instance_type: "search.m1.small", # accepts search.m1.small, search.m1.large, search.m2.xlarge, search.m2.2xlarge, search.m3.medium, search.m3.large, search.m3.xlarge, search.m3.2xlarge
+    #         desired_instance_type: "search.m1.small", # accepts search.m1.small, search.m1.large, search.m2.xlarge, search.m2.2xlarge, search.m3.medium, search.m3.large, search.m3.xlarge, search.m3.2xlarge, search.small, search.medium, search.large, search.xlarge, search.2xlarge
     #         desired_replication_count: 1,
     #         desired_partition_count: 1,
     #       }
@@ -2615,7 +2615,7 @@ module Aws::CloudSearch
     #       {
     #         domain_name: "DomainName", # required
     #         scaling_parameters: { # required
-    #           desired_instance_type: "search.m1.small", # accepts search.m1.small, search.m1.large, search.m2.xlarge, search.m2.2xlarge, search.m3.medium, search.m3.large, search.m3.xlarge, search.m3.2xlarge
+    #           desired_instance_type: "search.m1.small", # accepts search.m1.small, search.m1.large, search.m2.xlarge, search.m2.2xlarge, search.m3.medium, search.m3.large, search.m3.xlarge, search.m3.2xlarge, search.small, search.medium, search.large, search.xlarge, search.2xlarge
     #           desired_replication_count: 1,
     #           desired_partition_count: 1,
     #         },

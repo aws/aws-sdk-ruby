@@ -24,12 +24,20 @@ module Aws::KMS
     #   String that contains the key identifier referred to by the alias.
     #   @return [String]
     #
+    # @!attribute [rw] creation_date
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/AliasListEntry AWS API Documentation
     #
     class AliasListEntry < Struct.new(
       :alias_name,
       :alias_arn,
-      :target_key_id)
+      :target_key_id,
+      :creation_date,
+      :last_updated_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -274,21 +282,45 @@ module Aws::KMS
     #
     # @!attribute [rw] alias_name
     #   Specifies the alias name. This value must begin with `alias/`
-    #   followed by a name, such as `alias/ExampleAlias`. The alias name
-    #   cannot begin with `alias/aws/`. The `alias/aws/` prefix is reserved
-    #   for AWS managed CMKs.
+    #   followed by a name, such as `alias/ExampleAlias`.
+    #
+    #   The `AliasName` value must be string of 1-256 characters. It can
+    #   contain only alphanumeric characters, forward slashes (/),
+    #   underscores (\_), and dashes (-). The alias name cannot begin with
+    #   `alias/aws/`. The `alias/aws/` prefix is reserved for [AWS managed
+    #   CMKs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
     #   @return [String]
     #
     # @!attribute [rw] target_key_id
-    #   Identifies the CMK to which the alias refers. Specify the key ID or
-    #   the Amazon Resource Name (ARN) of the CMK. You cannot specify
-    #   another alias. For help finding the key ID and ARN, see [Finding the
-    #   Key ID and ARN][1] in the *AWS Key Management Service Developer
-    #   Guide*.
+    #   Associates the alias with the specified [customer managed CMK][1].
+    #   The CMK must be in the same AWS Region.
+    #
+    #   A valid CMK ID is required. If you supply a null or empty string
+    #   value, this operation returns an error.
+    #
+    #   For help finding the key ID and ARN, see [Finding the Key ID and
+    #   ARN][2] in the *AWS Key Management Service Developer Guide*.
+    #
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html#find-cmk-id-arn
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html#find-cmk-id-arn
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateAliasRequest AWS API Documentation
@@ -458,6 +490,11 @@ module Aws::KMS
     #   [Encryption Context][2] in the <i> <i>AWS Key Management Service
     #   Developer Guide</i> </i>.
     #
+    #   Grant constraints are not applied to operations that do not support
+    #   an encryption context, such as cryptographic operations with
+    #   asymmetric CMKs and management operations, such as DescribeKey or
+    #   RetireGrant.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
@@ -476,9 +513,8 @@ module Aws::KMS
     #   @return [Array<String>]
     #
     # @!attribute [rw] name
-    #   A friendly name for identifying the grant. Use this value to prevent
-    #   the unintended creation of duplicate grants when retrying this
-    #   request.
+    #   A friendly name for the grant. Use this value to prevent the
+    #   unintended creation of duplicate grants when retrying this request.
     #
     #   When this value is absent, all `CreateGrant` requests result in a
     #   new grant with a unique `GrantId` even if all the supplied
@@ -489,8 +525,8 @@ module Aws::KMS
     #   with identical parameters; if the grant already exists, the original
     #   `GrantId` is returned without creating a new grant. Note that the
     #   returned grant token is unique with every `CreateGrant` request,
-    #   even when a duplicate `GrantId` is returned. All grant tokens
-    #   obtained in this way can be used interchangeably.
+    #   even when a duplicate `GrantId` is returned. All grant tokens for
+    #   the same grant ID can be used interchangeably.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateGrantRequest AWS API Documentation
@@ -521,8 +557,8 @@ module Aws::KMS
     # @!attribute [rw] grant_id
     #   The unique identifier for the grant.
     #
-    #   You can use the `GrantId` in a subsequent RetireGrant or RevokeGrant
-    #   operation.
+    #   You can use the `GrantId` in a ListGrants, RetireGrant, or
+    #   RevokeGrant operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateGrantResponse AWS API Documentation
@@ -582,11 +618,15 @@ module Aws::KMS
     #
     #   The key policy size quota is 32 kilobytes (32768 bytes).
     #
+    #   For help writing and formatting a JSON policy document, see the [IAM
+    #   JSON Policy Reference][4] in the <i> <i>IAM User Guide</i> </i>.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
     #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
+    #   [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -765,9 +805,13 @@ module Aws::KMS
     #   Use this parameter to tag the CMK when it is created. To add tags to
     #   an existing CMK, use the TagResource operation.
     #
+    #   To use this parameter, you must have [kms:TagResource][2] permission
+    #   in an IAM policy.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateKeyRequest AWS API Documentation
@@ -1059,23 +1103,20 @@ module Aws::KMS
     #   @return [Array<String>]
     #
     # @!attribute [rw] key_id
-    #   Specifies the customer master key (CMK) that AWS KMS will use to
-    #   decrypt the ciphertext. Enter a key ID of the CMK that was used to
-    #   encrypt the ciphertext.
-    #
-    #   If you specify a `KeyId` value, the `Decrypt` operation succeeds
-    #   only if the specified CMK was used to encrypt the ciphertext.
+    #   Specifies the customer master key (CMK) that AWS KMS uses to decrypt
+    #   the ciphertext. Enter a key ID of the CMK that was used to encrypt
+    #   the ciphertext.
     #
     #   This parameter is required only when the ciphertext was encrypted
-    #   under an asymmetric CMK. Otherwise, AWS KMS uses the metadata that
-    #   it adds to the ciphertext blob to determine which CMK was used to
-    #   encrypt the ciphertext. However, you can use this parameter to
-    #   ensure that a particular CMK (of any kind) is used to decrypt the
-    #   ciphertext.
+    #   under an asymmetric CMK. If you used a symmetric CMK, AWS KMS can
+    #   get the CMK from metadata that it adds to the symmetric ciphertext
+    #   blob. However, it is always recommended as a best practice. This
+    #   practice ensures that you use the CMK that you intend.
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   `"alias/"`.
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must
+    #   use the key ARN or alias ARN.
     #
     #   For example:
     #
@@ -1424,8 +1465,8 @@ module Aws::KMS
     #
     # @!attribute [rw] key_id
     #   Identifies a symmetric customer master key (CMK). You cannot enable
-    #   automatic rotation of [asymmetric CMKs][1], CMKs with [imported key
-    #   material][2], or CMKs in a [custom key store][3].
+    #   or disable automatic rotation of [asymmetric CMKs][1], CMKs with
+    #   [imported key material][2], or CMKs in a [custom key store][3].
     #
     #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
@@ -1869,7 +1910,8 @@ module Aws::KMS
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   `"alias/"`.
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must
+    #   use the key ARN or alias ARN.
     #
     #   For example:
     #
@@ -2549,7 +2591,7 @@ module Aws::KMS
     # operations with a [symmetric CMK][3]. Grant constraints are not
     # applied to operations that do not support an encryption context, such
     # as cryptographic operations with asymmetric CMKs and management
-    # operations, such as DescribeKey or ScheduleKeyDeletion.
+    # operations, such as DescribeKey or RetireGrant.
     #
     # In a cryptographic operation, the encryption context in the decryption
     # operation must be an exact, case-sensitive match for the keys and
@@ -3221,13 +3263,23 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   Lists only aliases that refer to the specified CMK. The value of
-    #   this parameter can be the ID or Amazon Resource Name (ARN) of a CMK
-    #   in the caller's account and region. You cannot use an alias name or
-    #   alias ARN in this value.
+    #   Lists only aliases that are associated with the specified CMK. Enter
+    #   a CMK in your AWS account.
     #
     #   This parameter is optional. If you omit it, `ListAliases` returns
-    #   all aliases in the account and region.
+    #   all aliases in the account and Region.
+    #
+    #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -3289,6 +3341,8 @@ module Aws::KMS
     #         limit: 1,
     #         marker: "MarkerType",
     #         key_id: "KeyIdType", # required
+    #         grant_id: "GrantIdType",
+    #         grantee_principal: "PrincipalIdType",
     #       }
     #
     # @!attribute [rw] limit
@@ -3308,7 +3362,8 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the customer master key (CMK).
+    #   Returns only grants for the specified customer master key (CMK).
+    #   This parameter is required.
     #
     #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To
     #   specify a CMK in a different AWS account, you must use the key ARN.
@@ -3324,12 +3379,24 @@ module Aws::KMS
     #   DescribeKey.
     #   @return [String]
     #
+    # @!attribute [rw] grant_id
+    #   Returns only the grant with the specified grant ID. The grant ID
+    #   uniquely identifies the grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] grantee_principal
+    #   Returns only grants where the specified principal is the grantee
+    #   principal for the grant.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrantsRequest AWS API Documentation
     #
     class ListGrantsRequest < Struct.new(
       :limit,
       :marker,
-      :key_id)
+      :key_id,
+      :grant_id,
+      :grantee_principal)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3605,7 +3672,8 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] retiring_principal
-    #   The retiring principal for which to list grants.
+    #   The retiring principal for which to list grants. Enter a principal
+    #   in your AWS account.
     #
     #   To specify the retiring principal, use the [Amazon Resource Name
     #   (ARN)][1] of an AWS principal. Valid AWS principals include AWS
@@ -3798,23 +3866,20 @@ module Aws::KMS
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] source_key_id
-    #   A unique identifier for the CMK that is used to decrypt the
-    #   ciphertext before it reencrypts it using the destination CMK.
+    #   Specifies the customer master key (CMK) that AWS KMS will use to
+    #   decrypt the ciphertext before it is re-encrypted. Enter a key ID of
+    #   the CMK that was used to encrypt the ciphertext.
     #
     #   This parameter is required only when the ciphertext was encrypted
-    #   under an asymmetric CMK. Otherwise, AWS KMS uses the metadata that
-    #   it adds to the ciphertext blob to determine which CMK was used to
-    #   encrypt the ciphertext. However, you can use this parameter to
-    #   ensure that a particular CMK (of any kind) is used to decrypt the
-    #   ciphertext before it is reencrypted.
-    #
-    #   If you specify a `KeyId` value, the decrypt part of the `ReEncrypt`
-    #   operation succeeds only if the specified CMK was used to encrypt the
-    #   ciphertext.
+    #   under an asymmetric CMK. If you used a symmetric CMK, AWS KMS can
+    #   get the CMK from metadata that it adds to the symmetric ciphertext
+    #   blob. However, it is always recommended as a best practice. This
+    #   practice ensures that you use the CMK that you intend.
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
-    #   `"alias/"`.
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must
+    #   use the key ARN or alias ARN.
     #
     #   For example:
     #
@@ -4300,7 +4365,7 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the CMK you are tagging.
+    #   Identifies a customer managed CMK in the account and Region.
     #
     #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
@@ -4316,7 +4381,14 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags. Each tag consists of a tag key and a tag value.
+    #   One or more tags.
+    #
+    #   Each tag consists of a tag key and a tag value. The tag value can be
+    #   an empty (null) string.
+    #
+    #   You cannot have more than one tag on a CMK with the same tag key. If
+    #   you specify an existing tag key with a different tag value, AWS KMS
+    #   replaces the current tag value with the specified one.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/TagResourceRequest AWS API Documentation
@@ -4351,7 +4423,7 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the CMK from which you are removing tags.
+    #   Identifies the CMK from which you are removing tags.
     #
     #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
@@ -4395,8 +4467,9 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] target_key_id
-    #   Identifies the CMK to associate with the alias. When the update
-    #   operation completes, the alias will point to this CMK.
+    #   Identifies the [customer managed CMK][1] to associate with the
+    #   alias. You don't have permission to associate an alias with an [AWS
+    #   managed CMK][2].
     #
     #   The CMK must be in the same AWS account and Region as the alias.
     #   Also, the new target CMK must be the same type as the current target
@@ -4417,6 +4490,11 @@ module Aws::KMS
     #
     #   To verify that the alias is mapped to the correct CMK, use
     #   ListAliases.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateAliasRequest AWS API Documentation

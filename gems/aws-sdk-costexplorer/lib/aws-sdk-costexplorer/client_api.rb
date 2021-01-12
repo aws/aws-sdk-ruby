@@ -35,6 +35,7 @@ module Aws::CostExplorer
     CostCategory = Shapes::StructureShape.new(name: 'CostCategory')
     CostCategoryMaxResults = Shapes::IntegerShape.new(name: 'CostCategoryMaxResults')
     CostCategoryName = Shapes::StringShape.new(name: 'CostCategoryName')
+    CostCategoryNamesList = Shapes::ListShape.new(name: 'CostCategoryNamesList')
     CostCategoryProcessingStatus = Shapes::StructureShape.new(name: 'CostCategoryProcessingStatus')
     CostCategoryProcessingStatusList = Shapes::ListShape.new(name: 'CostCategoryProcessingStatusList')
     CostCategoryReference = Shapes::StructureShape.new(name: 'CostCategoryReference')
@@ -103,6 +104,8 @@ module Aws::CostExplorer
     GetCostAndUsageResponse = Shapes::StructureShape.new(name: 'GetCostAndUsageResponse')
     GetCostAndUsageWithResourcesRequest = Shapes::StructureShape.new(name: 'GetCostAndUsageWithResourcesRequest')
     GetCostAndUsageWithResourcesResponse = Shapes::StructureShape.new(name: 'GetCostAndUsageWithResourcesResponse')
+    GetCostCategoriesRequest = Shapes::StructureShape.new(name: 'GetCostCategoriesRequest')
+    GetCostCategoriesResponse = Shapes::StructureShape.new(name: 'GetCostCategoriesResponse')
     GetCostForecastRequest = Shapes::StructureShape.new(name: 'GetCostForecastRequest')
     GetCostForecastResponse = Shapes::StructureShape.new(name: 'GetCostForecastResponse')
     GetDimensionValuesRequest = Shapes::StructureShape.new(name: 'GetDimensionValuesRequest')
@@ -154,6 +157,7 @@ module Aws::CostExplorer
     MetricValue = Shapes::StructureShape.new(name: 'MetricValue')
     Metrics = Shapes::MapShape.new(name: 'Metrics')
     ModifyRecommendationDetail = Shapes::StructureShape.new(name: 'ModifyRecommendationDetail')
+    MonitorArnList = Shapes::ListShape.new(name: 'MonitorArnList')
     MonitorDimension = Shapes::StringShape.new(name: 'MonitorDimension')
     MonitorType = Shapes::StringShape.new(name: 'MonitorType')
     NetRISavings = Shapes::StringShape.new(name: 'NetRISavings')
@@ -174,6 +178,8 @@ module Aws::CostExplorer
     PurchasedHours = Shapes::StringShape.new(name: 'PurchasedHours')
     PurchasedUnits = Shapes::StringShape.new(name: 'PurchasedUnits')
     RDSInstanceDetails = Shapes::StructureShape.new(name: 'RDSInstanceDetails')
+    RICostForUnusedHours = Shapes::StringShape.new(name: 'RICostForUnusedHours')
+    RealizedSavings = Shapes::StringShape.new(name: 'RealizedSavings')
     RecommendationTarget = Shapes::StringShape.new(name: 'RecommendationTarget')
     RedshiftInstanceDetails = Shapes::StructureShape.new(name: 'RedshiftInstanceDetails')
     RequestChangedException = Shapes::StructureShape.new(name: 'RequestChangedException')
@@ -210,6 +216,8 @@ module Aws::CostExplorer
     SavingsPlansCoverage = Shapes::StructureShape.new(name: 'SavingsPlansCoverage')
     SavingsPlansCoverageData = Shapes::StructureShape.new(name: 'SavingsPlansCoverageData')
     SavingsPlansCoverages = Shapes::ListShape.new(name: 'SavingsPlansCoverages')
+    SavingsPlansDataType = Shapes::StringShape.new(name: 'SavingsPlansDataType')
+    SavingsPlansDataTypes = Shapes::ListShape.new(name: 'SavingsPlansDataTypes')
     SavingsPlansDetails = Shapes::StructureShape.new(name: 'SavingsPlansDetails')
     SavingsPlansPurchaseRecommendation = Shapes::StructureShape.new(name: 'SavingsPlansPurchaseRecommendation')
     SavingsPlansPurchaseRecommendationDetail = Shapes::StructureShape.new(name: 'SavingsPlansPurchaseRecommendationDetail')
@@ -226,6 +234,10 @@ module Aws::CostExplorer
     SearchString = Shapes::StringShape.new(name: 'SearchString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceSpecification = Shapes::StructureShape.new(name: 'ServiceSpecification')
+    SortDefinition = Shapes::StructureShape.new(name: 'SortDefinition')
+    SortDefinitionKey = Shapes::StringShape.new(name: 'SortDefinitionKey')
+    SortDefinitions = Shapes::ListShape.new(name: 'SortDefinitions')
+    SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     Subscriber = Shapes::StructureShape.new(name: 'Subscriber')
     SubscriberAddress = Shapes::StringShape.new(name: 'SubscriberAddress')
     SubscriberStatus = Shapes::StringShape.new(name: 'SubscriberStatus')
@@ -249,6 +261,7 @@ module Aws::CostExplorer
     TotalRunningNormalizedUnits = Shapes::StringShape.new(name: 'TotalRunningNormalizedUnits')
     UnknownMonitorException = Shapes::StructureShape.new(name: 'UnknownMonitorException')
     UnknownSubscriptionException = Shapes::StructureShape.new(name: 'UnknownSubscriptionException')
+    UnrealizedSavings = Shapes::StringShape.new(name: 'UnrealizedSavings')
     UnresolvableUsageUnitException = Shapes::StructureShape.new(name: 'UnresolvableUsageUnitException')
     UnusedHours = Shapes::StringShape.new(name: 'UnusedHours')
     UnusedUnits = Shapes::StringShape.new(name: 'UnusedUnits')
@@ -303,7 +316,7 @@ module Aws::CostExplorer
 
     AnomalySubscription.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: GenericString, location_name: "SubscriptionArn"))
     AnomalySubscription.add_member(:account_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "AccountId"))
-    AnomalySubscription.add_member(:monitor_arn_list, Shapes::ShapeRef.new(shape: Values, required: true, location_name: "MonitorArnList"))
+    AnomalySubscription.add_member(:monitor_arn_list, Shapes::ShapeRef.new(shape: MonitorArnList, required: true, location_name: "MonitorArnList"))
     AnomalySubscription.add_member(:subscribers, Shapes::ShapeRef.new(shape: Subscribers, required: true, location_name: "Subscribers"))
     AnomalySubscription.add_member(:threshold, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, required: true, location_name: "Threshold"))
     AnomalySubscription.add_member(:frequency, Shapes::ShapeRef.new(shape: AnomalySubscriptionFrequency, required: true, location_name: "Frequency"))
@@ -326,6 +339,8 @@ module Aws::CostExplorer
     CostCategory.add_member(:rules, Shapes::ShapeRef.new(shape: CostCategoryRulesList, required: true, location_name: "Rules"))
     CostCategory.add_member(:processing_status, Shapes::ShapeRef.new(shape: CostCategoryProcessingStatusList, location_name: "ProcessingStatus"))
     CostCategory.struct_class = Types::CostCategory
+
+    CostCategoryNamesList.member = Shapes::ShapeRef.new(shape: CostCategoryName)
 
     CostCategoryProcessingStatus.add_member(:component, Shapes::ShapeRef.new(shape: CostCategoryStatusComponent, location_name: "Component"))
     CostCategoryProcessingStatus.add_member(:status, Shapes::ShapeRef.new(shape: CostCategoryStatus, location_name: "Status"))
@@ -571,6 +586,7 @@ module Aws::CostExplorer
     GetCostAndUsageResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
     GetCostAndUsageResponse.add_member(:group_definitions, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupDefinitions"))
     GetCostAndUsageResponse.add_member(:results_by_time, Shapes::ShapeRef.new(shape: ResultsByTime, location_name: "ResultsByTime"))
+    GetCostAndUsageResponse.add_member(:dimension_value_attributes, Shapes::ShapeRef.new(shape: DimensionValuesWithAttributesList, location_name: "DimensionValueAttributes"))
     GetCostAndUsageResponse.struct_class = Types::GetCostAndUsageResponse
 
     GetCostAndUsageWithResourcesRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
@@ -584,7 +600,24 @@ module Aws::CostExplorer
     GetCostAndUsageWithResourcesResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
     GetCostAndUsageWithResourcesResponse.add_member(:group_definitions, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupDefinitions"))
     GetCostAndUsageWithResourcesResponse.add_member(:results_by_time, Shapes::ShapeRef.new(shape: ResultsByTime, location_name: "ResultsByTime"))
+    GetCostAndUsageWithResourcesResponse.add_member(:dimension_value_attributes, Shapes::ShapeRef.new(shape: DimensionValuesWithAttributesList, location_name: "DimensionValueAttributes"))
     GetCostAndUsageWithResourcesResponse.struct_class = Types::GetCostAndUsageWithResourcesResponse
+
+    GetCostCategoriesRequest.add_member(:search_string, Shapes::ShapeRef.new(shape: SearchString, location_name: "SearchString"))
+    GetCostCategoriesRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
+    GetCostCategoriesRequest.add_member(:cost_category_name, Shapes::ShapeRef.new(shape: CostCategoryName, location_name: "CostCategoryName"))
+    GetCostCategoriesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetCostCategoriesRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortDefinitions, location_name: "SortBy"))
+    GetCostCategoriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetCostCategoriesRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetCostCategoriesRequest.struct_class = Types::GetCostCategoriesRequest
+
+    GetCostCategoriesResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetCostCategoriesResponse.add_member(:cost_category_names, Shapes::ShapeRef.new(shape: CostCategoryNamesList, location_name: "CostCategoryNames"))
+    GetCostCategoriesResponse.add_member(:cost_category_values, Shapes::ShapeRef.new(shape: CostCategoryValuesList, location_name: "CostCategoryValues"))
+    GetCostCategoriesResponse.add_member(:return_size, Shapes::ShapeRef.new(shape: PageSize, required: true, location_name: "ReturnSize"))
+    GetCostCategoriesResponse.add_member(:total_size, Shapes::ShapeRef.new(shape: PageSize, required: true, location_name: "TotalSize"))
+    GetCostCategoriesResponse.struct_class = Types::GetCostCategoriesResponse
 
     GetCostForecastRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
     GetCostForecastRequest.add_member(:metric, Shapes::ShapeRef.new(shape: Metric, required: true, location_name: "Metric"))
@@ -601,6 +634,9 @@ module Aws::CostExplorer
     GetDimensionValuesRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
     GetDimensionValuesRequest.add_member(:dimension, Shapes::ShapeRef.new(shape: Dimension, required: true, location_name: "Dimension"))
     GetDimensionValuesRequest.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "Context"))
+    GetDimensionValuesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetDimensionValuesRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortDefinitions, location_name: "SortBy"))
+    GetDimensionValuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     GetDimensionValuesRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
     GetDimensionValuesRequest.struct_class = Types::GetDimensionValuesRequest
 
@@ -616,6 +652,8 @@ module Aws::CostExplorer
     GetReservationCoverageRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
     GetReservationCoverageRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricNames, location_name: "Metrics"))
     GetReservationCoverageRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetReservationCoverageRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortDefinition, location_name: "SortBy"))
+    GetReservationCoverageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     GetReservationCoverageRequest.struct_class = Types::GetReservationCoverageRequest
 
     GetReservationCoverageResponse.add_member(:coverages_by_time, Shapes::ShapeRef.new(shape: CoveragesByTime, required: true, location_name: "CoveragesByTime"))
@@ -625,6 +663,7 @@ module Aws::CostExplorer
 
     GetReservationPurchaseRecommendationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "AccountId"))
     GetReservationPurchaseRecommendationRequest.add_member(:service, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Service"))
+    GetReservationPurchaseRecommendationRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
     GetReservationPurchaseRecommendationRequest.add_member(:account_scope, Shapes::ShapeRef.new(shape: AccountScope, location_name: "AccountScope"))
     GetReservationPurchaseRecommendationRequest.add_member(:lookback_period_in_days, Shapes::ShapeRef.new(shape: LookbackPeriodInDays, location_name: "LookbackPeriodInDays"))
     GetReservationPurchaseRecommendationRequest.add_member(:term_in_years, Shapes::ShapeRef.new(shape: TermInYears, location_name: "TermInYears"))
@@ -643,7 +682,9 @@ module Aws::CostExplorer
     GetReservationUtilizationRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupBy"))
     GetReservationUtilizationRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, location_name: "Granularity"))
     GetReservationUtilizationRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetReservationUtilizationRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortDefinition, location_name: "SortBy"))
     GetReservationUtilizationRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetReservationUtilizationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     GetReservationUtilizationRequest.struct_class = Types::GetReservationUtilizationRequest
 
     GetReservationUtilizationResponse.add_member(:utilizations_by_time, Shapes::ShapeRef.new(shape: UtilizationsByTime, required: true, location_name: "UtilizationsByTime"))
@@ -672,6 +713,7 @@ module Aws::CostExplorer
     GetSavingsPlansCoverageRequest.add_member(:metrics, Shapes::ShapeRef.new(shape: MetricNames, location_name: "Metrics"))
     GetSavingsPlansCoverageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
     GetSavingsPlansCoverageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetSavingsPlansCoverageRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortDefinition, location_name: "SortBy"))
     GetSavingsPlansCoverageRequest.struct_class = Types::GetSavingsPlansCoverageRequest
 
     GetSavingsPlansCoverageResponse.add_member(:savings_plans_coverages, Shapes::ShapeRef.new(shape: SavingsPlansCoverages, required: true, location_name: "SavingsPlansCoverages"))
@@ -695,8 +737,10 @@ module Aws::CostExplorer
 
     GetSavingsPlansUtilizationDetailsRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
     GetSavingsPlansUtilizationDetailsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetSavingsPlansUtilizationDetailsRequest.add_member(:data_type, Shapes::ShapeRef.new(shape: SavingsPlansDataTypes, location_name: "DataType"))
     GetSavingsPlansUtilizationDetailsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
     GetSavingsPlansUtilizationDetailsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetSavingsPlansUtilizationDetailsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortDefinition, location_name: "SortBy"))
     GetSavingsPlansUtilizationDetailsRequest.struct_class = Types::GetSavingsPlansUtilizationDetailsRequest
 
     GetSavingsPlansUtilizationDetailsResponse.add_member(:savings_plans_utilization_details, Shapes::ShapeRef.new(shape: SavingsPlansUtilizationDetails, required: true, location_name: "SavingsPlansUtilizationDetails"))
@@ -708,6 +752,7 @@ module Aws::CostExplorer
     GetSavingsPlansUtilizationRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
     GetSavingsPlansUtilizationRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, location_name: "Granularity"))
     GetSavingsPlansUtilizationRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetSavingsPlansUtilizationRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortDefinition, location_name: "SortBy"))
     GetSavingsPlansUtilizationRequest.struct_class = Types::GetSavingsPlansUtilizationRequest
 
     GetSavingsPlansUtilizationResponse.add_member(:savings_plans_utilizations_by_time, Shapes::ShapeRef.new(shape: SavingsPlansUtilizationsByTime, location_name: "SavingsPlansUtilizationsByTime"))
@@ -717,6 +762,9 @@ module Aws::CostExplorer
     GetTagsRequest.add_member(:search_string, Shapes::ShapeRef.new(shape: SearchString, location_name: "SearchString"))
     GetTagsRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
     GetTagsRequest.add_member(:tag_key, Shapes::ShapeRef.new(shape: TagKey, location_name: "TagKey"))
+    GetTagsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetTagsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortDefinitions, location_name: "SortBy"))
+    GetTagsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     GetTagsRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
     GetTagsRequest.struct_class = Types::GetTagsRequest
 
@@ -791,6 +839,8 @@ module Aws::CostExplorer
     ModifyRecommendationDetail.add_member(:target_instances, Shapes::ShapeRef.new(shape: TargetInstancesList, location_name: "TargetInstances"))
     ModifyRecommendationDetail.struct_class = Types::ModifyRecommendationDetail
 
+    MonitorArnList.member = Shapes::ShapeRef.new(shape: Arn)
+
     ProvideAnomalyFeedbackRequest.add_member(:anomaly_id, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "AnomalyId"))
     ProvideAnomalyFeedbackRequest.add_member(:feedback, Shapes::ShapeRef.new(shape: AnomalyFeedbackType, required: true, location_name: "Feedback"))
     ProvideAnomalyFeedbackRequest.struct_class = Types::ProvideAnomalyFeedbackRequest
@@ -833,6 +883,9 @@ module Aws::CostExplorer
     ReservationAggregates.add_member(:amortized_upfront_fee, Shapes::ShapeRef.new(shape: AmortizedUpfrontFee, location_name: "AmortizedUpfrontFee"))
     ReservationAggregates.add_member(:amortized_recurring_fee, Shapes::ShapeRef.new(shape: AmortizedRecurringFee, location_name: "AmortizedRecurringFee"))
     ReservationAggregates.add_member(:total_amortized_fee, Shapes::ShapeRef.new(shape: TotalAmortizedFee, location_name: "TotalAmortizedFee"))
+    ReservationAggregates.add_member(:ri_cost_for_unused_hours, Shapes::ShapeRef.new(shape: RICostForUnusedHours, location_name: "RICostForUnusedHours"))
+    ReservationAggregates.add_member(:realized_savings, Shapes::ShapeRef.new(shape: RealizedSavings, location_name: "RealizedSavings"))
+    ReservationAggregates.add_member(:unrealized_savings, Shapes::ShapeRef.new(shape: UnrealizedSavings, location_name: "UnrealizedSavings"))
     ReservationAggregates.struct_class = Types::ReservationAggregates
 
     ReservationCoverageGroup.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
@@ -925,6 +978,7 @@ module Aws::CostExplorer
     RightsizingRecommendationMetadata.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "RecommendationId"))
     RightsizingRecommendationMetadata.add_member(:generation_timestamp, Shapes::ShapeRef.new(shape: GenericString, location_name: "GenerationTimestamp"))
     RightsizingRecommendationMetadata.add_member(:lookback_period_in_days, Shapes::ShapeRef.new(shape: LookbackPeriodInDays, location_name: "LookbackPeriodInDays"))
+    RightsizingRecommendationMetadata.add_member(:additional_metadata, Shapes::ShapeRef.new(shape: GenericString, location_name: "AdditionalMetadata"))
     RightsizingRecommendationMetadata.struct_class = Types::RightsizingRecommendationMetadata
 
     RightsizingRecommendationSummary.add_member(:total_recommendation_count, Shapes::ShapeRef.new(shape: GenericString, location_name: "TotalRecommendationCount"))
@@ -958,6 +1012,8 @@ module Aws::CostExplorer
     SavingsPlansCoverageData.struct_class = Types::SavingsPlansCoverageData
 
     SavingsPlansCoverages.member = Shapes::ShapeRef.new(shape: SavingsPlansCoverage)
+
+    SavingsPlansDataTypes.member = Shapes::ShapeRef.new(shape: SavingsPlansDataType)
 
     SavingsPlansDetails.add_member(:region, Shapes::ShapeRef.new(shape: GenericString, location_name: "Region"))
     SavingsPlansDetails.add_member(:instance_family, Shapes::ShapeRef.new(shape: GenericString, location_name: "InstanceFamily"))
@@ -1049,6 +1105,12 @@ module Aws::CostExplorer
     ServiceSpecification.add_member(:ec2_specification, Shapes::ShapeRef.new(shape: EC2Specification, location_name: "EC2Specification"))
     ServiceSpecification.struct_class = Types::ServiceSpecification
 
+    SortDefinition.add_member(:key, Shapes::ShapeRef.new(shape: SortDefinitionKey, required: true, location_name: "Key"))
+    SortDefinition.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    SortDefinition.struct_class = Types::SortDefinition
+
+    SortDefinitions.member = Shapes::ShapeRef.new(shape: SortDefinition)
+
     Subscriber.add_member(:address, Shapes::ShapeRef.new(shape: SubscriberAddress, location_name: "Address"))
     Subscriber.add_member(:type, Shapes::ShapeRef.new(shape: SubscriberType, location_name: "Type"))
     Subscriber.add_member(:status, Shapes::ShapeRef.new(shape: SubscriberStatus, location_name: "Status"))
@@ -1103,7 +1165,7 @@ module Aws::CostExplorer
     UpdateAnomalySubscriptionRequest.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "SubscriptionArn"))
     UpdateAnomalySubscriptionRequest.add_member(:threshold, Shapes::ShapeRef.new(shape: NullableNonNegativeDouble, location_name: "Threshold"))
     UpdateAnomalySubscriptionRequest.add_member(:frequency, Shapes::ShapeRef.new(shape: AnomalySubscriptionFrequency, location_name: "Frequency"))
-    UpdateAnomalySubscriptionRequest.add_member(:monitor_arn_list, Shapes::ShapeRef.new(shape: Values, location_name: "MonitorArnList"))
+    UpdateAnomalySubscriptionRequest.add_member(:monitor_arn_list, Shapes::ShapeRef.new(shape: MonitorArnList, location_name: "MonitorArnList"))
     UpdateAnomalySubscriptionRequest.add_member(:subscribers, Shapes::ShapeRef.new(shape: Subscribers, location_name: "Subscribers"))
     UpdateAnomalySubscriptionRequest.add_member(:subscription_name, Shapes::ShapeRef.new(shape: GenericString, location_name: "SubscriptionName"))
     UpdateAnomalySubscriptionRequest.struct_class = Types::UpdateAnomalySubscriptionRequest
@@ -1272,6 +1334,19 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: BillExpirationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
+      end)
+
+      api.add_operation(:get_cost_categories, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCostCategories"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCostCategoriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCostCategoriesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: BillExpirationException)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
       end)

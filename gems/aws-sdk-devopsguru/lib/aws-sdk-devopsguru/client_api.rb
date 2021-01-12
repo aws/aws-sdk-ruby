@@ -158,6 +158,7 @@ module Aws::DevOpsGuru
     ResourceCollection = Shapes::StructureShape.new(name: 'ResourceCollection')
     ResourceCollectionFilter = Shapes::StructureShape.new(name: 'ResourceCollectionFilter')
     ResourceCollectionType = Shapes::StringShape.new(name: 'ResourceCollectionType')
+    ResourceHours = Shapes::IntegerShape.new(name: 'ResourceHours')
     ResourceIdString = Shapes::StringShape.new(name: 'ResourceIdString')
     ResourceIdType = Shapes::StringShape.new(name: 'ResourceIdType')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -247,6 +248,7 @@ module Aws::DevOpsGuru
     DescribeAccountHealthResponse.add_member(:open_reactive_insights, Shapes::ShapeRef.new(shape: NumOpenReactiveInsights, required: true, location_name: "OpenReactiveInsights"))
     DescribeAccountHealthResponse.add_member(:open_proactive_insights, Shapes::ShapeRef.new(shape: NumOpenProactiveInsights, required: true, location_name: "OpenProactiveInsights"))
     DescribeAccountHealthResponse.add_member(:metrics_analyzed, Shapes::ShapeRef.new(shape: NumMetricsAnalyzed, required: true, location_name: "MetricsAnalyzed"))
+    DescribeAccountHealthResponse.add_member(:resource_hours, Shapes::ShapeRef.new(shape: ResourceHours, required: true, location_name: "ResourceHours"))
     DescribeAccountHealthResponse.struct_class = Types::DescribeAccountHealthResponse
 
     DescribeAccountOverviewRequest.add_member(:from_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "FromTime"))

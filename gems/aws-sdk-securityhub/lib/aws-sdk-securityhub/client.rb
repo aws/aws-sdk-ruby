@@ -463,23 +463,29 @@ module Aws::SecurityHub
     # update the following finding fields and objects, which Security Hub
     # customers use to manage their investigation workflow.
     #
-    # * `Confidence`
-    #
-    # * `Criticality`
-    #
     # * `Note`
-    #
-    # * `RelatedFindings`
-    #
-    # * `Severity`
-    #
-    # * `Types`
     #
     # * `UserDefinedFields`
     #
     # * `VerificationState`
     #
     # * `Workflow`
+    #
+    # `BatchImportFindings` can be used to update the following finding
+    # fields and objects only if they have not been updated using
+    # `BatchUpdateFindings`. After they are updated using
+    # `BatchUpdateFindings`, these fields cannot be updated using
+    # `BatchImportFindings`.
+    #
+    # * `Confidence`
+    #
+    # * `Criticality`
+    #
+    # * `RelatedFindings`
+    #
+    # * `Severity`
+    #
+    # * `Types`
     #
     # @option params [required, Array<Types::AwsSecurityFinding>] :findings
     #   A list of findings to import. To successfully import a finding, it
@@ -7407,7 +7413,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -259,6 +259,13 @@ Please use any of these resources for getting help:
 * Join the AWS SDK for Ruby [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby).
 * Open a support ticket with [AWS Support](https://console.aws.amazon.com/support/home).
 
+## Maintenance and support for SDK major versions
+
+For information about maintenance and support for SDK major versions and their underlying dependencies, see the following in the [AWS SDKs and Tools Shared Configuration and Credentials Reference Guide](https://docs.aws.amazon.com/credref/latest/refdocs/overview.html):
+
+* [AWS SDKs and Tools Maintenance Policy](https://docs.aws.amazon.com/credref/latest/refdocs/maint-policy.html)
+* [AWS SDKs and Tools Version Support Matrix](https://docs.aws.amazon.com/credref/latest/refdocs/version-support-matrix.html)
+
 ## Opening Issues
 
 If you encounter a bug or have a feature request, we would like to hear about
@@ -396,6 +403,7 @@ RubyGems.org page under "LINKS" section.
 | AWS WAF                                               | Aws::WAF                             | aws-sdk-waf                             | 2015-08-24  |
 | AWS WAF Regional                                      | Aws::WAFRegional                     | aws-sdk-wafregional                     | 2016-11-28  |
 | AWS WAFV2                                             | Aws::WAFV2                           | aws-sdk-wafv2                           | 2019-07-29  |
+| AWS Well-Architected Tool                             | Aws::WellArchitected                 | aws-sdk-wellarchitected                 | 2020-03-31  |
 | AWS X-Ray                                             | Aws::XRay                            | aws-sdk-xray                            | 2016-04-12  |
 | AWSKendraFrontendService                              | Aws::Kendra                          | aws-sdk-kendra                          | 2019-02-03  |
 | AWSMarketplace Metering                               | Aws::MarketplaceMetering             | aws-sdk-marketplacemetering             | 2016-01-14  |
@@ -473,6 +481,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Lex Model Building Service                     | Aws::LexModelBuildingService         | aws-sdk-lexmodelbuildingservice         | 2017-04-19  |
 | Amazon Lex Runtime Service                            | Aws::Lex                             | aws-sdk-lex                             | 2016-11-28  |
 | Amazon Lightsail                                      | Aws::Lightsail                       | aws-sdk-lightsail                       | 2016-11-28  |
+| Amazon Location Service                               | Aws::LocationService                 | aws-sdk-locationservice                 | 2020-11-19  |
 | Amazon Lookout for Vision                             | Aws::LookoutforVision                | aws-sdk-lookoutforvision                | 2020-11-20  |
 | Amazon Machine Learning                               | Aws::MachineLearning                 | aws-sdk-machinelearning                 | 2014-12-12  |
 | Amazon Macie                                          | Aws::Macie                           | aws-sdk-macie                           | 2017-12-19  |

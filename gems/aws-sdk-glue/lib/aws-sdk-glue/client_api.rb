@@ -98,6 +98,8 @@ module Aws::Glue
     Column = Shapes::StructureShape.new(name: 'Column')
     ColumnError = Shapes::StructureShape.new(name: 'ColumnError')
     ColumnErrors = Shapes::ListShape.new(name: 'ColumnErrors')
+    ColumnImportance = Shapes::StructureShape.new(name: 'ColumnImportance')
+    ColumnImportanceList = Shapes::ListShape.new(name: 'ColumnImportanceList')
     ColumnList = Shapes::ListShape.new(name: 'ColumnList')
     ColumnNameString = Shapes::StringShape.new(name: 'ColumnNameString')
     ColumnStatistics = Shapes::StructureShape.new(name: 'ColumnStatistics')
@@ -1037,6 +1039,12 @@ module Aws::Glue
 
     ColumnErrors.member = Shapes::ShapeRef.new(shape: ColumnError)
 
+    ColumnImportance.add_member(:column_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ColumnName"))
+    ColumnImportance.add_member(:importance, Shapes::ShapeRef.new(shape: GenericBoundedDouble, location_name: "Importance"))
+    ColumnImportance.struct_class = Types::ColumnImportance
+
+    ColumnImportanceList.member = Shapes::ShapeRef.new(shape: ColumnImportance)
+
     ColumnList.member = Shapes::ShapeRef.new(shape: Column)
 
     ColumnStatistics.add_member(:column_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "ColumnName"))
@@ -1740,6 +1748,7 @@ module Aws::Glue
     FindMatchesMetrics.add_member(:recall, Shapes::ShapeRef.new(shape: GenericBoundedDouble, location_name: "Recall"))
     FindMatchesMetrics.add_member(:f1, Shapes::ShapeRef.new(shape: GenericBoundedDouble, location_name: "F1"))
     FindMatchesMetrics.add_member(:confusion_matrix, Shapes::ShapeRef.new(shape: ConfusionMatrix, location_name: "ConfusionMatrix"))
+    FindMatchesMetrics.add_member(:column_importances, Shapes::ShapeRef.new(shape: ColumnImportanceList, location_name: "ColumnImportances"))
     FindMatchesMetrics.struct_class = Types::FindMatchesMetrics
 
     FindMatchesParameters.add_member(:primary_key_column_name, Shapes::ShapeRef.new(shape: ColumnNameString, location_name: "PrimaryKeyColumnName"))

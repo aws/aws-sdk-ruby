@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-12-17)
+------------------
+
+* Feature - Amazon SQS adds queue attributes to enable high throughput FIFO.
+
 1.34.0 (2020-09-30)
 ------------------
 

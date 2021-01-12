@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2020-12-17)
+------------------
+
+* Feature - This release adds support for DNSSEC signing in Amazon Route 53.
+
 1.44.0 (2020-09-30)
 ------------------
 

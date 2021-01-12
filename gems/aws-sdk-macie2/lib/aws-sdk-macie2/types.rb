@@ -412,7 +412,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies the operator to use in an attribute-based condition that
+    # Specifies the operator to use in a property-based condition that
     # filters the results of a query for information about S3 buckets.
     #
     # @note When making an API call, you may pass BucketCriteriaAdditionalProperties
@@ -1301,7 +1301,13 @@ module Aws::Macie2
     class CreateSampleFindingsResponse < Aws::EmptyStructure; end
 
     # Specifies the operator to use in a property-based condition that
-    # filters the results of a query for findings.
+    # filters the results of a query for findings. For detailed information
+    # and examples of each operator, see [Fundamentals of filtering
+    # findings][1] in the *Amazon Macie User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/macie/latest/user/findings-filter-basics.html
     #
     # @note When making an API call, you may pass CriterionAdditionalProperties
     #   data as a hash:
@@ -1630,7 +1636,7 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] criteria
-    #   Specifies, as a map, one or more attribute-based conditions that
+    #   Specifies, as a map, one or more property-based conditions that
     #   filter the results of a query for information about S3 buckets.
     #   @return [Hash<String,Types::BucketCriteriaAdditionalProperties>]
     #
@@ -1764,11 +1770,14 @@ module Aws::Macie2
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] user_paused_details
-    #   Provides information about when a classification job was paused and
-    #   when it will expire and be cancelled if it isn't resumed. This
-    #   object is present only if a job's current status (jobStatus) is
-    #   USER\_PAUSED. The information in this object applies only to a job
-    #   that was paused while it had a status of RUNNING.
+    #   Provides information about when a classification job was paused. For
+    #   a one-time job, this object also specifies when the job will expire
+    #   and be cancelled if it isn't resumed. For a recurring job, this
+    #   object also specifies when the paused job run will expire and be
+    #   cancelled if it isn't resumed. This object is present only if a
+    #   job's current status (jobStatus) is USER\_PAUSED. The information
+    #   in this object applies only to a job that was paused while it had a
+    #   status of RUNNING.
     #   @return [Types::UserPausedDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DescribeClassificationJobResponse AWS API Documentation
@@ -2180,8 +2189,16 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] criterion
-    #   Specifies a condition that defines a property, operator, and value
-    #   to use to filter the results of a query for findings.
+    #   Specifies a condition that defines a property, operator, and one or
+    #   more values to filter the results of a query for findings. The
+    #   number of values depends on the property and operator specified by
+    #   the condition. For information about defining filter conditions, see
+    #   [Fundamentals of filtering findings][1] in the *Amazon Macie User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/findings-filter-basics.html
     #   @return [Hash<String,Types::CriterionAdditionalProperties>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/FindingCriteria AWS API Documentation
@@ -3254,11 +3271,14 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] user_paused_details
-    #   Provides information about when a classification job was paused and
-    #   when it will expire and be cancelled if it isn't resumed. This
-    #   object is present only if a job's current status (jobStatus) is
-    #   USER\_PAUSED. The information in this object applies only to a job
-    #   that was paused while it had a status of RUNNING.
+    #   Provides information about when a classification job was paused. For
+    #   a one-time job, this object also specifies when the job will expire
+    #   and be cancelled if it isn't resumed. For a recurring job, this
+    #   object also specifies when the paused job run will expire and be
+    #   cancelled if it isn't resumed. This object is present only if a
+    #   job's current status (jobStatus) is USER\_PAUSED. The information
+    #   in this object applies only to a job that was paused while it had a
+    #   status of RUNNING.
     #   @return [Types::UserPausedDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/JobSummary AWS API Documentation
@@ -4988,7 +5008,13 @@ module Aws::Macie2
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
-    # Changes the status of a classification job.
+    # Changes the status of a classification job. For more information about
+    # pausing, resuming, or cancelling jobs, see [Managing and monitoring
+    # sensitive data discovery jobs][1] in the *Amazon Macie User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-manage.html
     #
     # @note When making an API call, you may pass UpdateClassificationJobRequest
     #   data as a hash:
@@ -5409,11 +5435,14 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about when a classification job was paused and
-    # when it will expire and be cancelled if it isn't resumed. This object
-    # is present only if a job's current status (jobStatus) is
-    # USER\_PAUSED. The information in this object applies only to a job
-    # that was paused while it had a status of RUNNING.
+    # Provides information about when a classification job was paused. For a
+    # one-time job, this object also specifies when the job will expire and
+    # be cancelled if it isn't resumed. For a recurring job, this object
+    # also specifies when the paused job run will expire and be cancelled if
+    # it isn't resumed. This object is present only if a job's current
+    # status (jobStatus) is USER\_PAUSED. The information in this object
+    # applies only to a job that was paused while it had a status of
+    # RUNNING.
     #
     # @!attribute [rw] job_expires_at
     #   @return [Time]

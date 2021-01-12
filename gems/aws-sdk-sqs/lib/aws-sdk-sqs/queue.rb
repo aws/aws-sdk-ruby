@@ -195,7 +195,7 @@ module Aws::SQS
     # @example Request syntax with placeholder values
     #
     #   message = queue.receive_messages({
-    #     attribute_names: ["All"], # accepts All, Policy, VisibilityTimeout, MaximumMessageSize, MessageRetentionPeriod, ApproximateNumberOfMessages, ApproximateNumberOfMessagesNotVisible, CreatedTimestamp, LastModifiedTimestamp, QueueArn, ApproximateNumberOfMessagesDelayed, DelaySeconds, ReceiveMessageWaitTimeSeconds, RedrivePolicy, FifoQueue, ContentBasedDeduplication, KmsMasterKeyId, KmsDataKeyReusePeriodSeconds
+    #     attribute_names: ["All"], # accepts All, Policy, VisibilityTimeout, MaximumMessageSize, MessageRetentionPeriod, ApproximateNumberOfMessages, ApproximateNumberOfMessagesNotVisible, CreatedTimestamp, LastModifiedTimestamp, QueueArn, ApproximateNumberOfMessagesDelayed, DelaySeconds, ReceiveMessageWaitTimeSeconds, RedrivePolicy, FifoQueue, ContentBasedDeduplication, KmsMasterKeyId, KmsDataKeyReusePeriodSeconds, DeduplicationScope, FifoThroughputLimit
     #     message_attribute_names: ["MessageAttributeName"],
     #     max_number_of_messages: 1,
     #     visibility_timeout: 1,
@@ -682,9 +682,9 @@ module Aws::SQS
     #
     #   * `ContentBasedDeduplication` – Enables content-based deduplication.
     #     For more information, see [Exactly-Once Processing][10] in the
-    #     *Amazon Simple Queue Service Developer Guide*.
+    #     *Amazon Simple Queue Service Developer Guide*. Note the following:
     #
-    #     * Every message must have a unique `MessageDeduplicationId`,
+    #     * Every message must have a unique `MessageDeduplicationId`.
     #
     #       * You may provide a `MessageDeduplicationId` explicitly.
     #
@@ -712,6 +712,50 @@ module Aws::SQS
     #       `MessageDeduplicationId`, the two messages are treated as
     #       duplicates and only one copy of the message is delivered.
     #
+    #   **Preview: High throughput for FIFO queues**
+    #
+    #   **High throughput for Amazon SQS FIFO queues is in preview release and
+    #   is subject to change.** This feature provides a high number of
+    #   transactions per second (TPS) for messages in FIFO queues. For
+    #   information on throughput quotas, see [Quotas related to messages][11]
+    #   in the *Amazon Simple Queue Service Developer Guide*.
+    #
+    #   This preview includes two new attributes:
+    #
+    #   * `DeduplicationScope` – Specifies whether message deduplication
+    #     occurs at the message group or queue level. Valid values are
+    #     `messageGroup` and `queue`.
+    #
+    #   * `FifoThroughputLimit` – Specifies whether the FIFO queue throughput
+    #     quota applies to the entire queue or per message group. Valid values
+    #     are `perQueue` and `perMessageGroupId`. The `perMessageGroupId`
+    #     value is allowed only when the value for `DeduplicationScope` is
+    #     `messageGroup`.
+    #
+    #   To enable high throughput for FIFO queues, do the following:
+    #
+    #   * Set `DeduplicationScope` to `messageGroup`.
+    #
+    #   * Set `FifoThroughputLimit` to `perMessageGroupId`.
+    #
+    #   If you set these attributes to anything other than the values shown
+    #   for enabling high throughput, standard throughput is in effect and
+    #   deduplication occurs as specified.
+    #
+    #   This preview is available in the following AWS Regions:
+    #
+    #   * US East (Ohio); us-east-2
+    #
+    #   * US East (N. Virginia); us-east-1
+    #
+    #   * US West (Oregon); us-west-2
+    #
+    #   * Europe (Ireland); eu-west-1
+    #
+    #   For more information about high throughput for FIFO queues, see
+    #   [Preview: High throughput for FIFO queues][12] in the *Amazon Simple
+    #   Queue Service Developer Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html
@@ -724,6 +768,8 @@ module Aws::SQS
     #   [8]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work
     #   [9]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
     #   [10]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
+    #   [11]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html
+    #   [12]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/high-throughput-fifo.html
     # @return [EmptyStructure]
     def set_attributes(options = {})
       options = options.merge(queue_url: @url)

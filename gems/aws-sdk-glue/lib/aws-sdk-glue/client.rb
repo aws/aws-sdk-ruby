@@ -1487,7 +1487,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -4153,7 +4153,7 @@ module Aws::Glue
     #
     #   resp.connection.name #=> String
     #   resp.connection.description #=> String
-    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK"
+    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM"
     #   resp.connection.match_criteria #=> Array
     #   resp.connection.match_criteria[0] #=> String
     #   resp.connection.connection_properties #=> Hash
@@ -4211,7 +4211,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     filter: {
     #       match_criteria: ["NameString"],
-    #       connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
+    #       connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM
     #     },
     #     hide_password: false,
     #     next_token: "Token",
@@ -4223,7 +4223,7 @@ module Aws::Glue
     #   resp.connection_list #=> Array
     #   resp.connection_list[0].name #=> String
     #   resp.connection_list[0].description #=> String
-    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK"
+    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM"
     #   resp.connection_list[0].match_criteria #=> Array
     #   resp.connection_list[0].match_criteria[0] #=> String
     #   resp.connection_list[0].connection_properties #=> Hash
@@ -5254,6 +5254,9 @@ module Aws::Glue
     #   resp.evaluation_metrics.find_matches_metrics.confusion_matrix.num_false_positives #=> Integer
     #   resp.evaluation_metrics.find_matches_metrics.confusion_matrix.num_true_negatives #=> Integer
     #   resp.evaluation_metrics.find_matches_metrics.confusion_matrix.num_false_negatives #=> Integer
+    #   resp.evaluation_metrics.find_matches_metrics.column_importances #=> Array
+    #   resp.evaluation_metrics.find_matches_metrics.column_importances[0].column_name #=> String
+    #   resp.evaluation_metrics.find_matches_metrics.column_importances[0].importance #=> Float
     #   resp.label_count #=> Integer
     #   resp.schema #=> Array
     #   resp.schema[0].name #=> String
@@ -5359,6 +5362,9 @@ module Aws::Glue
     #   resp.transforms[0].evaluation_metrics.find_matches_metrics.confusion_matrix.num_false_positives #=> Integer
     #   resp.transforms[0].evaluation_metrics.find_matches_metrics.confusion_matrix.num_true_negatives #=> Integer
     #   resp.transforms[0].evaluation_metrics.find_matches_metrics.confusion_matrix.num_false_negatives #=> Integer
+    #   resp.transforms[0].evaluation_metrics.find_matches_metrics.column_importances #=> Array
+    #   resp.transforms[0].evaluation_metrics.find_matches_metrics.column_importances[0].column_name #=> String
+    #   resp.transforms[0].evaluation_metrics.find_matches_metrics.column_importances[0].importance #=> Float
     #   resp.transforms[0].label_count #=> Integer
     #   resp.transforms[0].schema #=> Array
     #   resp.transforms[0].schema[0].name #=> String
@@ -9574,7 +9580,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -10590,7 +10596,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

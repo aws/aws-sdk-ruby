@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.220.0 (2020-12-21)
+------------------
+
+* Feature - This release adds Tag On Create feature support for the AllocateAddress API.
+
+1.219.0 (2020-12-18)
+------------------
+
+* Feature - EBS io2 volumes now supports Multi-Attach
+
+1.218.0 (2020-12-17)
+------------------
+
+* Feature - C6gn instances are powered by AWS Graviton2 processors and offer 100 Gbps networking bandwidth. These instances deliver up to 40% better price-performance benefit versus comparable x86-based instances
+
 1.217.0 (2020-12-14)
 ------------------
 

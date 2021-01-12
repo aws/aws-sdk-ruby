@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2020-12-28)
+------------------
+
+* Feature - Amazon CloudFront has deprecated the CreateStreamingDistribution and CreateStreamingDistributionWithTags APIs as part of discontinuing support for Real-Time Messaging Protocol (RTMP) distributions.
+
 1.46.0 (2020-10-21)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-12-22)
+------------------
+
+* Feature - This release adds support for quick connects. For details, see the Release Notes in the Amazon Connect Administrator Guide.
+
 1.37.0 (2020-12-01)
 ------------------
 

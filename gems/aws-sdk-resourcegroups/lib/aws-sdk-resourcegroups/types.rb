@@ -66,12 +66,17 @@ module Aws::ResourceGroups
     #
     # @!attribute [rw] resource_query
     #   The resource query that determines which AWS resources are members
-    #   of this group.
+    #   of this group. For more information about resource queries, see
+    #   [Create a tag-based group in Resource Groups][1].
     #
-    #   <note markdown="1"> You can specify either a `ResourceQuery` or a `Configuration`, but
-    #   not both.
+    #   <note markdown="1"> A resource group can contain either a `ResourceQuery` or a
+    #   `Configuration`, but not both.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag
     #   @return [Types::ResourceQuery]
     #
     # @!attribute [rw] tags
@@ -82,12 +87,17 @@ module Aws::ResourceGroups
     #   A configuration associates the resource group with an AWS service
     #   and specifies how the service can interact with the resources in the
     #   group. A configuration is an array of GroupConfigurationItem
-    #   elements.
+    #   elements. For details about the syntax of service configurations,
+    #   see [Service configurations for resource groups][1].
     #
-    #   <note markdown="1"> You can specify either a `Configuration` or a `ResourceQuery` in a
-    #   group, but not both.
+    #   <note markdown="1"> A resource group can contain either a `Configuration` or a
+    #   `ResourceQuery`, but not both.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
     #   @return [Array<Types::GroupConfigurationItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/CreateGroupInput AWS API Documentation
@@ -107,7 +117,13 @@ module Aws::ResourceGroups
     #   @return [Types::Group]
     #
     # @!attribute [rw] resource_query
-    #   The resource query associated with the group.
+    #   The resource query associated with the group. For more information
+    #   about resource queries, see [Create a tag-based group in Resource
+    #   Groups][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag
     #   @return [Types::ResourceQuery]
     #
     # @!attribute [rw] tags
@@ -115,19 +131,13 @@ module Aws::ResourceGroups
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] group_configuration
-    #   The service configuration associated with the resource group. AWS
-    #   Resource Groups supports adding service configurations for the
-    #   following resource group types:
-    #
-    #   * `AWS::EC2::CapacityReservationPool` - Amazon EC2 capacity
-    #     reservation pools. For more information, see [Working with
-    #     capacity reservation groups][1] in the *EC2 Users Guide*.
-    #
-    #   ^
+    #   The service configuration associated with the resource group. For
+    #   details about the syntax of a service configuration, see [Service
+    #   configurations for resource groups][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
     #   @return [Types::GroupConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/CreateGroupOutput AWS API Documentation
@@ -150,7 +160,7 @@ module Aws::ResourceGroups
     #       }
     #
     # @!attribute [rw] group_name
-    #   Don't use this parameter. Use `Group` instead.
+    #   Deprecated - don't use this parameter. Use `Group` instead.
     #   @return [String]
     #
     # @!attribute [rw] group
@@ -235,7 +245,13 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] group_configuration
-    #   The configuration associated with the specified group.
+    #   The service configuration associated with the specified group. For
+    #   details about the service configuration syntax, see [Service
+    #   configurations for resource groups][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
     #   @return [Types::GroupConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupConfigurationOutput AWS API Documentation
@@ -255,7 +271,7 @@ module Aws::ResourceGroups
     #       }
     #
     # @!attribute [rw] group_name
-    #   Don't use this parameter. Use `Group` instead.
+    #   Deprecated - don't use this parameter. Use `Group` instead.
     #   @return [String]
     #
     # @!attribute [rw] group
@@ -309,7 +325,13 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] group_query
-    #   The resource query associated with the specified group.
+    #   The resource query associated with the specified group. For more
+    #   information about resource queries, see [Create a tag-based group in
+    #   Resource Groups][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag
     #   @return [Types::GroupQuery]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupQueryOutput AWS API Documentation
@@ -363,7 +385,8 @@ module Aws::ResourceGroups
     # * ResourceQuery - Use a resource query to specify a set of tag keys
     #   and values. All resources in the same AWS Region and AWS account
     #   that have those keys with the same values are included in the group.
-    #   You can add a resource query when you create the group.
+    #   You can add a resource query when you create the group, or later by
+    #   using the PutGroupConfiguration operation.
     #
     # * GroupConfiguration - Use a service configuration to associate the
     #   group with an AWS service. The configuration specifies which
@@ -394,7 +417,14 @@ module Aws::ResourceGroups
     # A service configuration associated with a resource group. The
     # configuration options are determined by the AWS service that defines
     # the `Type`, and specifies which resources can be included in the
-    # group. You can add a service configuration when you create the group.
+    # group. You can add a service configuration when you create the group
+    # by using CreateGroup, or later by using the PutGroupConfiguration
+    # operation. For details about group service configuration syntax, see
+    # [Service configurations for resource groups][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
     #
     # @!attribute [rw] configuration
     #   The configuration currently associated with the group and in effect.
@@ -425,8 +455,13 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # An item in a group configuration. A group configuration can have one
-    # or more items.
+    # An item in a group configuration. A group service configuration can
+    # have one or more items. For details about group service configuration
+    # syntax, see [Service configurations for resource groups][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
     #
     # @note When making an API call, you may pass GroupConfigurationItem
     #   data as a hash:
@@ -443,26 +478,23 @@ module Aws::ResourceGroups
     #
     # @!attribute [rw] type
     #   Specifies the type of group configuration item. Each item must have
-    #   a unique value for `type`.
-    #
-    #   You can specify the following string values:
-    #
-    #   * `AWS::EC2::CapacityReservationPool`
-    #
-    #     For more information about EC2 capacity reservation groups, see
-    #     [Working with capacity reservation groups][1] in the *EC2 Users
-    #     Guide*.
-    #
-    #   * `AWS::ResourceGroups::Generic` - Supports parameters that
-    #     configure the behavior of resource groups of any type.
+    #   a unique value for `type`. For the list of types that you can
+    #   specify for a configuration item, see [Supported resource types and
+    #   parameters][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   A collection of parameters for this group configuration item.
+    #   A collection of parameters for this group configuration item. For
+    #   the list of parameters that you can use with each configuration item
+    #   type, see [Supported resource types and parameters][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types
     #   @return [Array<Types::GroupConfigurationParameter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupConfigurationItem AWS API Documentation
@@ -474,7 +506,13 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # A parameter for a group configuration item.
+    # A parameter for a group configuration item. For details about group
+    # service configuration syntax, see [Service configurations for resource
+    # groups][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
     #
     # @note When making an API call, you may pass GroupConfigurationParameter
     #   data as a hash:
@@ -485,42 +523,23 @@ module Aws::ResourceGroups
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the group configuration parameter.
-    #
-    #   You can specify the following string values:
-    #
-    #   * For configuration item type `AWS::ResourceGroups::Generic`\:
-    #
-    #     * `allowed-resource-types`
-    #
-    #       Specifies the types of resources that you can add to this group
-    #       by using the GroupResources operation.
-    #
-    #   * For configuration item type `AWS::EC2::CapacityReservationPool`\:
-    #
-    #     * None - This configuration item type doesn't support any
-    #       parameters.
-    #
-    #     ^
-    #
-    #     For more information about EC2 capacity reservation groups, see
-    #     [Working with capacity reservation groups][1] in the *EC2 Users
-    #     Guide*.
+    #   The name of the group configuration parameter. For the list of
+    #   parameters that you can use with each configuration item type, see
+    #   [Supported resource types and parameters][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The values of for this parameter.
+    #   The value or values to be used for the specified parameter. For the
+    #   list of values you can use with each parameter, see [Supported
+    #   resource types and parameters][1].
     #
-    #   You can specify the following string value:
     #
-    #   * For item type `allowed-resource-types`\: the only supported
-    #     parameter value is `AWS::EC2::CapacityReservation`.
     #
-    #   ^
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupConfigurationParameter AWS API Documentation
@@ -628,20 +647,30 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] succeeded
-    #   The ARNs of the resources that were successfully added to the group
-    #   by this operation.
+    #   A list of ARNs of resources that were successfully added to the
+    #   group by this operation.
     #   @return [Array<String>]
     #
     # @!attribute [rw] failed
-    #   The ARNs of the resources that failed to be added to the group by
-    #   this operation.
+    #   A list of ARNs of any resources that failed to be added to the group
+    #   by this operation.
     #   @return [Array<Types::FailedResource>]
+    #
+    # @!attribute [rw] pending
+    #   A list of ARNs of any resources that are still in the process of
+    #   being added to the group by this operation. These pending additions
+    #   continue asynchronously. You can check the status of pending
+    #   additions by using the ` ListGroupResources ` operation, and
+    #   checking the `Resources` array in the response and the `Status`
+    #   field of each object in that array.
+    #   @return [Array<Types::PendingResource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupResourcesOutput AWS API Documentation
     #
     class GroupResourcesOutput < Struct.new(
       :succeeded,
-      :failed)
+      :failed,
+      :pending)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -677,7 +706,8 @@ module Aws::ResourceGroups
     #       }
     #
     # @!attribute [rw] group_name
-    #   Don't use this parameter. Use `Group` instead.
+    #   <i> <b>Deprecated - don't use this parameter. Use the
+    #   <code>Group</code> request field instead.</b> </i>
     #   @return [String]
     #
     # @!attribute [rw] group
@@ -749,9 +779,42 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
+    # A structure returned by the ListGroupResources operation that contains
+    # identity and group membership status information for one of the
+    # resources in the group.
+    #
+    # @!attribute [rw] identifier
+    #   A structure that contains the ARN of a resource and its resource
+    #   type.
+    #   @return [Types::ResourceIdentifier]
+    #
+    # @!attribute [rw] status
+    #   A structure that contains the status of this resource's membership
+    #   in the group.
+    #
+    #   <note markdown="1"> This field is present in the response only if the group is of type
+    #   `AWS::EC2::HostManagement`.
+    #
+    #    </note>
+    #   @return [Types::ResourceStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupResourcesItem AWS API Documentation
+    #
+    class ListGroupResourcesItem < Struct.new(
+      :identifier,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resources
+    #   An array of resources from which you can determine each resource's
+    #   identity, type, and group membership status.
+    #   @return [Array<Types::ListGroupResourcesItem>]
+    #
     # @!attribute [rw] resource_identifiers
-    #   The ARNs and resource types of resources that are members of the
-    #   group that you specified.
+    #   <b> <i>Deprecated - don't use this parameter. Use the
+    #   <code>Resources</code> response field instead.</i> </b>
     #   @return [Array<Types::ResourceIdentifier>]
     #
     # @!attribute [rw] next_token
@@ -772,6 +835,7 @@ module Aws::ResourceGroups
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupResourcesOutput AWS API Documentation
     #
     class ListGroupResourcesOutput < Struct.new(
+      :resources,
       :resource_identifiers,
       :next_token,
       :query_errors)
@@ -806,9 +870,9 @@ module Aws::ResourceGroups
     #     groups that have the specified configuration types attached. The
     #     current supported values are:
     #
-    #     * AWS:EC2::CapacityReservationPool
+    #     * `AWS:EC2::CapacityReservationPool`
     #
-    #     ^
+    #     * `AWS:EC2::HostManagement`
     #   @return [Array<Types::GroupFilter>]
     #
     # @!attribute [rw] max_results
@@ -848,8 +912,8 @@ module Aws::ResourceGroups
     #   @return [Array<Types::GroupIdentifier>]
     #
     # @!attribute [rw] groups
-    #   This output element is deprecated and shouldn't be used. Refer to
-    #   `GroupIdentifiers` instead.
+    #   <i> <b>Deprecated - don't use this field. Use the
+    #   <code>GroupIdentifiers</code> response field instead.</b> </i>
     #   @return [Array<Types::Group>]
     #
     # @!attribute [rw] next_token
@@ -896,6 +960,80 @@ module Aws::ResourceGroups
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # A structure that identifies a resource that is currently pending
+    # addition to the group as a member. Adding a resource to a resource
+    # group happens asynchronously as a background task and this one isn't
+    # completed yet.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon resource name (ARN) of the resource that's in a pending
+    #   state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/PendingResource AWS API Documentation
+    #
+    class PendingResource < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutGroupConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         group: "GroupString",
+    #         configuration: [
+    #           {
+    #             type: "GroupConfigurationType", # required
+    #             parameters: [
+    #               {
+    #                 name: "GroupConfigurationParameterName", # required
+    #                 values: ["GroupConfigurationParameterValue"],
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] group
+    #   The name or ARN of the resource group with the configuration that
+    #   you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The new configuration to associate with the specified group. A
+    #   configuration associates the resource group with an AWS service and
+    #   specifies how the service can interact with the resources in the
+    #   group. A configuration is an array of GroupConfigurationItem
+    #   elements.
+    #
+    #   For information about the syntax of a service configuration, see
+    #   [Service configurations for resource groups][1].
+    #
+    #   <note markdown="1"> A resource group can contain either a `Configuration` or a
+    #   `ResourceQuery`, but not both.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
+    #   @return [Array<Types::GroupConfigurationItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/PutGroupConfigurationInput AWS API Documentation
+    #
+    class PutGroupConfigurationInput < Struct.new(
+      :group,
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/PutGroupConfigurationOutput AWS API Documentation
+    #
+    class PutGroupConfigurationOutput < Aws::EmptyStructure; end
 
     # A two-part error structure that can occur in `ListGroupResources` or
     # `SearchResources` operations on CloudFormation stack-based queries.
@@ -956,7 +1094,7 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
-    # The ARN of a resource, and its resource type.
+    # A structure that contains the ARN of a resource and its resource type.
     #
     # @!attribute [rw] resource_arn
     #   The ARN of a resource.
@@ -1107,6 +1245,23 @@ module Aws::ResourceGroups
     class ResourceQuery < Struct.new(
       :type,
       :query)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that identifies the current group membership status for a
+    # resource. Adding a resource to a resource group is performed
+    # asynchronously as a background task. A `PENDING` status indicates, for
+    # this resource, that the process isn't completed yet.
+    #
+    # @!attribute [rw] name
+    #   The current status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ResourceStatus AWS API Documentation
+    #
+    class ResourceStatus < Struct.new(
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1289,19 +1444,30 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] succeeded
-    #   The ARNs of the resources that were successfully removed from the
-    #   group.
+    #   A list of resources that were successfully removed from the group by
+    #   this operation.
     #   @return [Array<String>]
     #
     # @!attribute [rw] failed
-    #   The resources that failed to be removed from the group.
+    #   A list of any resources that failed to be removed from the group by
+    #   this operation.
     #   @return [Array<Types::FailedResource>]
+    #
+    # @!attribute [rw] pending
+    #   A list of any resources that are still in the process of being
+    #   removed from the group by this operation. These pending removals
+    #   continue asynchronously. You can check the status of pending
+    #   removals by using the ` ListGroupResources ` operation. After the
+    #   resource is successfully removed, it no longer appears in the
+    #   response.
+    #   @return [Array<Types::PendingResource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UngroupResourcesOutput AWS API Documentation
     #
     class UngroupResourcesOutput < Struct.new(
       :succeeded,
-      :failed)
+      :failed,
+      :pending)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1418,6 +1584,11 @@ module Aws::ResourceGroups
     # @!attribute [rw] resource_query
     #   The resource query to determine which AWS resources are members of
     #   this resource group.
+    #
+    #   <note markdown="1"> A resource group can contain either a `Configuration` or a
+    #   `ResourceQuery`, but not both.
+    #
+    #    </note>
     #   @return [Types::ResourceQuery]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UpdateGroupQueryInput AWS API Documentation

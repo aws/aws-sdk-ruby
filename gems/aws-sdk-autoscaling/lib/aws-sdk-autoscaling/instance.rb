@@ -56,7 +56,18 @@ module Aws::AutoScaling
       data[:availability_zone]
     end
 
-    # The lifecycle state for the instance.
+    # The lifecycle state for the instance. The `Quarantined` state is not
+    # used. For information about lifecycle states, see [Instance
+    # lifecycle][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    # Valid Values: `Pending` \| `Pending:Wait` \| `Pending:Proceed` \|
+    # `Quarantined` \| `InService` \| `Terminating` \| `Terminating:Wait` \|
+    # `Terminating:Proceed` \| `Terminated` \| `Detaching` \| `Detached` \|
+    # `EnteringStandby` \| `Standby`
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html
     # @return [String]
     def lifecycle_state
       data[:lifecycle_state]

@@ -1547,8 +1547,8 @@ module Aws::RDS
     #   to another, and your DB instance uses a nondefault option group. If
     #   your source DB instance uses Transparent Data Encryption for Oracle or
     #   Microsoft SQL Server, you must specify this option when copying across
-    #   AWS Regions. For more information, see [Option Group
-    #   Considerations][1] in the *Amazon RDS User Guide.*
+    #   AWS Regions. For more information, see [Option group
+    #   considerations][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -1767,8 +1767,8 @@ module Aws::RDS
     # A custom AZ is an on-premises AZ that is integrated with a VMware
     # vSphere cluster.
     #
-    # For more information about RDS on VMware, see the [ *RDS on VMware
-    # User Guide.* ][1]
+    # For more information about RDS on VMware, see the [ RDS on VMware User
+    # Guide.][1]
     #
     #
     #
@@ -2418,6 +2418,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -2785,8 +2793,8 @@ module Aws::RDS
     #   **PostgreSQL**
     #
     #   The name of the database to create when the DB instance is created. If
-    #   this parameter isn't specified, the default "postgres" database is
-    #   created in the DB instance.
+    #   this parameter isn't specified, no database is created in the DB
+    #   instance.
     #
     #   Constraints:
     #
@@ -3106,8 +3114,8 @@ module Aws::RDS
     #   specify the identifier of the custom Availability Zone to create the
     #   DB instance in.
     #
-    #    For more information about RDS on VMware, see the [ *RDS on VMware
-    #   User Guide.* ][2]
+    #    For more information about RDS on VMware, see the [ RDS on VMware User
+    #   Guide.][2]
     #
     #    </note>
     #
@@ -3291,8 +3299,8 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   See [Supported PostgreSQL Database Versions][5] in the *Amazon RDS
-    #   User Guide.*
+    #   See [Amazon RDS for PostgreSQL versions and extensions][5] in the
+    #   *Amazon RDS User Guide.*
     #
     #
     #
@@ -3300,7 +3308,7 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
     #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
-    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions
+    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   A value that indicates whether minor engine upgrades are applied
@@ -3329,8 +3337,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
     #
     # @option params [String] :option_group_name
-    #   Indicates that the DB instance should be associated with the specified
-    #   option group.
+    #   A value that indicates that the DB instance should be associated with
+    #   the specified option group.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
     #   TDE, can't be removed from an option group. Also, that option group
@@ -3572,7 +3580,8 @@ module Aws::RDS
     #
     #   **Oracle**
     #
-    #   Possible values are `alert`, `audit`, `listener`, and `trace`.
+    #   Possible values are `alert`, `audit`, `listener`, `trace`, and
+    #   `oemagent`.
     #
     #   **PostgreSQL**
     #
@@ -3606,6 +3615,26 @@ module Aws::RDS
     # @option params [Integer] :max_allocated_storage
     #   The upper limit to which Amazon RDS can automatically scale the
     #   storage of the DB instance.
+    #
+    # @option params [Boolean] :enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts DB instance.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in your
+    #   Outpost subnets through your on-premises network. For some use cases,
+    #   a CoIP can provide lower latency for connections to the DB instance
+    #   from outside of its virtual private cloud (VPC) on your local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP addresses][2]
+    #   in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
     #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3691,6 +3720,7 @@ module Aws::RDS
     #     ],
     #     deletion_protection: false,
     #     max_allocated_storage: 1,
+    #     enable_customer_owned_ip: false,
     #   })
     #
     # @example Response structure
@@ -3749,6 +3779,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -3816,6 +3847,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -4072,9 +4104,9 @@ module Aws::RDS
     #   name for the AWS KMS CMK.
     #
     #   If you create an encrypted read replica in the same AWS Region as the
-    #   source DB instance, then you do not have to specify a value for this
-    #   parameter. The read replica is encrypted with the same AWS KMS CMK as
-    #   the source DB instance.
+    #   source DB instance, then do not specify a value for this parameter. A
+    #   read replica in the same Region is always encrypted with the same AWS
+    #   KMS CMK as the source DB instance.
     #
     #   If you create an encrypted read replica in a different AWS Region,
     #   then you must specify a AWS KMS key identifier for the destination AWS
@@ -4396,6 +4428,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -4463,6 +4496,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -5354,8 +5388,8 @@ module Aws::RDS
     # A custom AZ is an on-premises AZ that is integrated with a VMware
     # vSphere cluster.
     #
-    # For more information about RDS on VMware, see the [ *RDS on VMware
-    # User Guide.* ][1]
+    # For more information about RDS on VMware, see the [ RDS on VMware User
+    # Guide.][1]
     #
     #
     #
@@ -5564,6 +5598,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -5935,6 +5977,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -6002,6 +6045,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -6694,8 +6738,8 @@ module Aws::RDS
     # A custom AZ is an on-premises AZ that is integrated with a VMware
     # vSphere cluster.
     #
-    # For more information about RDS on VMware, see the [ *RDS on VMware
-    # User Guide.* ][1]
+    # For more information about RDS on VMware, see the [ RDS on VMware User
+    # Guide.][1]
     #
     #
     #
@@ -7630,6 +7674,14 @@ module Aws::RDS
     #   resp.db_clusters[0].tag_list[0].value #=> String
     #   resp.db_clusters[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_clusters[0].global_write_forwarding_requested #=> Boolean
+    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_clusters[0].pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_clusters[0].pending_modified_values.master_user_password #=> String
+    #   resp.db_clusters[0].pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_clusters[0].pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -7821,20 +7873,19 @@ module Aws::RDS
     #
     #     * `active` - automated backups for current instances
     #
-    #     * `retained` - automated backups for deleted instances
+    #     * `retained` - automated backups for deleted instances and after
+    #       backup replication is stopped
     #
     #     * `creating` - automated backups that are waiting for the first
     #       automated snapshot to be available
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and Amazon
-    #     Resource Names (ARNs) for DB instances. The results list includes
-    #     only information about the DB instance automated backupss identified
-    #     by these ARNs.
+    #     Resource Names (ARNs). The results list includes only information
+    #     about the DB instance automated backups identified by these ARNs.
     #
-    #   * `dbi-resource-id` - Accepts DB instance resource identifiers and DB
-    #     Amazon Resource Names (ARNs) for DB instances. The results list
-    #     includes only information about the DB instance resources identified
-    #     by these ARNs.
+    #   * `dbi-resource-id` - Accepts DB resource identifiers and Amazon
+    #     Resource Names (ARNs). The results list includes only information
+    #     about the DB instance resources identified by these ARNs.
     #
     #   Returns all resources by default. The status for each resource is
     #   specified in the response.
@@ -8072,6 +8123,7 @@ module Aws::RDS
     #   resp.db_instances[0].pending_modified_values.processor_features #=> Array
     #   resp.db_instances[0].pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instances[0].pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instances[0].pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instances[0].latest_restorable_time #=> Time
     #   resp.db_instances[0].multi_az #=> Boolean
     #   resp.db_instances[0].engine_version #=> String
@@ -8139,6 +8191,7 @@ module Aws::RDS
     #   resp.db_instances[0].tag_list[0].value #=> String
     #   resp.db_instances[0].db_instance_automated_backups_replications #=> Array
     #   resp.db_instances[0].db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instances[0].customer_owned_ip_enabled #=> Boolean
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -10603,8 +10656,8 @@ module Aws::RDS
     end
 
     # Returns a list of the source AWS Regions where the current AWS Region
-    # can create a read replica or copy a DB snapshot from. This API action
-    # supports pagination.
+    # can create a read replica, copy a DB snapshot from, or replicate
+    # automated backups from. This API action supports pagination.
     #
     # @option params [String] :region_name
     #   The source AWS Region name. For example, `us-east-1`.
@@ -11026,6 +11079,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -11807,6 +11868,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -12161,8 +12230,8 @@ module Aws::RDS
     #   The new DB subnet group for the DB instance. You can use this
     #   parameter to move your DB instance to a different VPC. If your DB
     #   instance isn't in a VPC, you can also use this parameter to move your
-    #   DB instance into a VPC. For more information, see [Updating the VPC
-    #   for a DB Instance][1] in the *Amazon RDS User Guide.*
+    #   DB instance into a VPC. For more information, see [Working with a DB
+    #   instance in a VPC][1] in the *Amazon RDS User Guide.*
     #
     #   Changing the subnet group causes an outage during the change. The
     #   change is applied during the next maintenance window, unless you
@@ -12175,7 +12244,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC
     #
     # @option params [Array<String>] :db_security_groups
     #   A list of DB security groups to authorize on this DB instance.
@@ -12370,8 +12439,10 @@ module Aws::RDS
     #   family for the new engine version must be specified. The new DB
     #   parameter group can be the default for that DB parameter group family.
     #
-    #   For information about valid engine versions, see `CreateDBInstance`,
-    #   or call `DescribeDBEngineVersions`.
+    #   If you specify only a major version, Amazon RDS will update the DB
+    #   instance to the default minor version if the current minor version is
+    #   lower. For information about valid engine versions, see
+    #   `CreateDBInstance`, or call `DescribeDBEngineVersions`.
     #
     # @option params [Boolean] :allow_major_version_upgrade
     #   A value that indicates whether major version upgrades are allowed.
@@ -12431,14 +12502,14 @@ module Aws::RDS
     #   Default: Uses existing setting
     #
     # @option params [String] :option_group_name
-    #   Indicates that the DB instance should be associated with the specified
-    #   option group. Changing this parameter doesn't result in an outage
-    #   except in the following case and the change is applied during the next
-    #   maintenance window unless the `ApplyImmediately` parameter is enabled
-    #   for this request. If the parameter change results in an option group
-    #   that enables OEM, this change can cause a brief (sub-second) period
-    #   during which new connections are rejected but existing connections are
-    #   not interrupted.
+    #   A value that indicates the DB instance should be associated with the
+    #   specified option group. Changing this parameter doesn't result in an
+    #   outage except in the following case and the change is applied during
+    #   the next maintenance window unless the `ApplyImmediately` parameter is
+    #   enabled for this request. If the parameter change results in an option
+    #   group that enables OEM, this change can cause a brief (sub-second)
+    #   period during which new connections are rejected but existing
+    #   connections are not interrupted.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
     #   TDE, can't be removed from an option group, and that option group
@@ -12755,6 +12826,26 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     #
+    # @option params [Boolean] :enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts DB instance.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in your
+    #   Outpost subnets through your on-premises network. For some use cases,
+    #   a CoIP can provide lower latency for connections to the DB instance
+    #   from outside of its virtual private cloud (VPC) on your local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP addresses][2]
+    #   in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -12835,6 +12926,7 @@ module Aws::RDS
     #     max_allocated_storage: 1,
     #     certificate_rotation_restart: false,
     #     replica_mode: "open-read-only", # accepts open-read-only, mounted
+    #     enable_customer_owned_ip: false,
     #   })
     #
     # @example Response structure
@@ -12893,6 +12985,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -12960,6 +13053,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -13284,11 +13378,11 @@ module Aws::RDS
     #   You can specify this parameter when you upgrade an Oracle DB snapshot.
     #   The same option group considerations apply when upgrading a DB
     #   snapshot as when upgrading a DB instance. For more information, see
-    #   [Option Group Considerations][1] in the *Amazon RDS User Guide.*
+    #   [Option group considerations][1] in the *Amazon RDS User Guide.*
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG
     #
     # @return [Types::ModifyDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -13675,6 +13769,42 @@ module Aws::RDS
     #   enabled. The global database cluster can't be deleted when deletion
     #   protection is enabled.
     #
+    # @option params [String] :engine_version
+    #   The version number of the database engine to which you want to
+    #   upgrade. Changing this parameter results in an outage. The change is
+    #   applied during the next maintenance window unless `ApplyImmediately`
+    #   is enabled.
+    #
+    #   To list all of the available engine versions for `aurora` (for MySQL
+    #   5.6-compatible Aurora), use the following command:
+    #
+    #   `` aws rds describe-db-engine-versions --engine aurora --query
+    #   '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' ``
+    #
+    #   To list all of the available engine versions for `aurora-mysql` (for
+    #   MySQL 5.7-compatible Aurora), use the following command:
+    #
+    #   `` aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' ``
+    #
+    #   To list all of the available engine versions for `aurora-postgresql`,
+    #   use the following command:
+    #
+    #   `` aws rds describe-db-engine-versions --engine aurora-postgresql
+    #   --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' ``
+    #
+    # @option params [Boolean] :allow_major_version_upgrade
+    #   A value that indicates whether major version upgrades are allowed.
+    #
+    #   Constraints: You must allow major version upgrades when specifying a
+    #   value for the `EngineVersion` parameter that is a different major
+    #   version than the DB cluster's current version.
+    #
+    #   If you upgrade the major version of a global database, the cluster and
+    #   DB instance parameter groups are set to the default parameter groups
+    #   for the new version. Apply any custom parameter groups after
+    #   completing the upgrade.
+    #
     # @return [Types::ModifyGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
@@ -13685,6 +13815,8 @@ module Aws::RDS
     #     global_cluster_identifier: "String",
     #     new_global_cluster_identifier: "String",
     #     deletion_protection: false,
+    #     engine_version: "String",
+    #     allow_major_version_upgrade: false,
     #   })
     #
     # @example Response structure
@@ -13986,6 +14118,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -14053,6 +14186,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -14173,6 +14307,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -14388,6 +14530,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -14455,6 +14598,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -15403,6 +15547,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -15797,6 +15949,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -16168,6 +16328,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -16480,6 +16648,26 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #
+    # @option params [Boolean] :enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts DB instance.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in your
+    #   Outpost subnets through your on-premises network. For some use cases,
+    #   a CoIP can provide lower latency for connections to the DB instance
+    #   from outside of its virtual private cloud (VPC) on your local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP addresses][2]
+    #   in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -16620,6 +16808,7 @@ module Aws::RDS
     #     use_default_processor_features: false,
     #     db_parameter_group_name: "String",
     #     deletion_protection: false,
+    #     enable_customer_owned_ip: false,
     #   })
     #
     # @example Response structure
@@ -16678,6 +16867,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -16745,6 +16935,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -17246,6 +17437,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -17313,6 +17505,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -17637,6 +17830,26 @@ module Aws::RDS
     #   from which to restore, for example,
     #   `arn:aws:rds:useast-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE`.
     #
+    # @option params [Boolean] :enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts DB instance.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in your
+    #   Outpost subnets through your on-premises network. For some use cases,
+    #   a CoIP can provide lower latency for connections to the DB instance
+    #   from outside of its virtual private cloud (VPC) on your local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP addresses][2]
+    #   in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -17783,6 +17996,7 @@ module Aws::RDS
     #     source_dbi_resource_id: "String",
     #     max_allocated_storage: 1,
     #     source_db_instance_automated_backups_arn: "String",
+    #     enable_customer_owned_ip: false,
     #   })
     #
     # @example Response structure
@@ -17841,6 +18055,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -17908,6 +18123,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -18180,6 +18396,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -18275,6 +18499,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -18342,6 +18567,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -18726,6 +18952,14 @@ module Aws::RDS
     #   resp.db_cluster.tag_list[0].value #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -18828,6 +19062,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -18895,6 +19130,7 @@ module Aws::RDS
     #   resp.db_instance.tag_list[0].value #=> String
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -18982,7 +19218,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

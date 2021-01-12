@@ -30,6 +30,7 @@ module Aws::Route53
   # * {ConcurrentModification}
   # * {ConflictingDomainExists}
   # * {ConflictingTypes}
+  # * {DNSSECNotFound}
   # * {DelegationSetAlreadyCreated}
   # * {DelegationSetAlreadyReusable}
   # * {DelegationSetInUse}
@@ -42,15 +43,24 @@ module Aws::Route53
   # * {HostedZoneNotEmpty}
   # * {HostedZoneNotFound}
   # * {HostedZoneNotPrivate}
+  # * {HostedZonePartiallyDelegated}
   # * {IncompatibleVersion}
   # * {InsufficientCloudWatchLogsResourcePolicy}
   # * {InvalidArgument}
   # * {InvalidChangeBatch}
   # * {InvalidDomainName}
   # * {InvalidInput}
+  # * {InvalidKMSArn}
+  # * {InvalidKeySigningKeyName}
+  # * {InvalidKeySigningKeyStatus}
   # * {InvalidPaginationToken}
+  # * {InvalidSigningStatus}
   # * {InvalidTrafficPolicyDocument}
   # * {InvalidVPCId}
+  # * {KeySigningKeyAlreadyExists}
+  # * {KeySigningKeyInParentDSRecord}
+  # * {KeySigningKeyInUse}
+  # * {KeySigningKeyWithActiveStatusNotFound}
   # * {LastVPCAssociation}
   # * {LimitsExceeded}
   # * {NoSuchChange}
@@ -59,6 +69,7 @@ module Aws::Route53
   # * {NoSuchGeoLocation}
   # * {NoSuchHealthCheck}
   # * {NoSuchHostedZone}
+  # * {NoSuchKeySigningKey}
   # * {NoSuchQueryLoggingConfig}
   # * {NoSuchTrafficPolicy}
   # * {NoSuchTrafficPolicyInstance}
@@ -69,6 +80,7 @@ module Aws::Route53
   # * {ThrottlingException}
   # * {TooManyHealthChecks}
   # * {TooManyHostedZones}
+  # * {TooManyKeySigningKeys}
   # * {TooManyTrafficPolicies}
   # * {TooManyTrafficPolicyInstances}
   # * {TooManyTrafficPolicyVersionsForCurrentPolicy}
@@ -120,6 +132,21 @@ module Aws::Route53
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Route53::Types::ConflictingTypes] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class DNSSECNotFound < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::DNSSECNotFound] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -310,6 +337,21 @@ module Aws::Route53
       end
     end
 
+    class HostedZonePartiallyDelegated < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::HostedZonePartiallyDelegated] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class IncompatibleVersion < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -405,11 +447,71 @@ module Aws::Route53
       end
     end
 
+    class InvalidKMSArn < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::InvalidKMSArn] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidKeySigningKeyName < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::InvalidKeySigningKeyName] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidKeySigningKeyStatus < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::InvalidKeySigningKeyStatus] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class InvalidPaginationToken < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Route53::Types::InvalidPaginationToken] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidSigningStatus < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::InvalidSigningStatus] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -440,6 +542,66 @@ module Aws::Route53
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Route53::Types::InvalidVPCId] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class KeySigningKeyAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::KeySigningKeyAlreadyExists] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class KeySigningKeyInParentDSRecord < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::KeySigningKeyInParentDSRecord] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class KeySigningKeyInUse < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::KeySigningKeyInUse] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class KeySigningKeyWithActiveStatusNotFound < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::KeySigningKeyWithActiveStatusNotFound] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -560,6 +722,21 @@ module Aws::Route53
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Route53::Types::NoSuchHostedZone] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class NoSuchKeySigningKey < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::NoSuchKeySigningKey] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -710,6 +887,21 @@ module Aws::Route53
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Route53::Types::TooManyHostedZones] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyKeySigningKeys < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53::Types::TooManyKeySigningKeys] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

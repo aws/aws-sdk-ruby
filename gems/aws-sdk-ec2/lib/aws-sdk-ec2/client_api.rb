@@ -2317,6 +2317,7 @@ module Aws::EC2
     AllocateAddressRequest.add_member(:network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "NetworkBorderGroup"))
     AllocateAddressRequest.add_member(:customer_owned_ipv_4_pool, Shapes::ShapeRef.new(shape: String, location_name: "CustomerOwnedIpv4Pool"))
     AllocateAddressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    AllocateAddressRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     AllocateAddressRequest.struct_class = Types::AllocateAddressRequest
 
     AllocateAddressResult.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "publicIp"))
@@ -8029,6 +8030,7 @@ module Aws::EC2
     ModifyVolumeRequest.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
     ModifyVolumeRequest.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "Iops"))
     ModifyVolumeRequest.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "Throughput"))
+    ModifyVolumeRequest.add_member(:multi_attach_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MultiAttachEnabled"))
     ModifyVolumeRequest.struct_class = Types::ModifyVolumeRequest
 
     ModifyVolumeResult.add_member(:volume_modification, Shapes::ShapeRef.new(shape: VolumeModification, location_name: "volumeModification"))
@@ -10584,10 +10586,12 @@ module Aws::EC2
     VolumeModification.add_member(:target_iops, Shapes::ShapeRef.new(shape: Integer, location_name: "targetIops"))
     VolumeModification.add_member(:target_volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "targetVolumeType"))
     VolumeModification.add_member(:target_throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "targetThroughput"))
+    VolumeModification.add_member(:target_multi_attach_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "targetMultiAttachEnabled"))
     VolumeModification.add_member(:original_size, Shapes::ShapeRef.new(shape: Integer, location_name: "originalSize"))
     VolumeModification.add_member(:original_iops, Shapes::ShapeRef.new(shape: Integer, location_name: "originalIops"))
     VolumeModification.add_member(:original_volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "originalVolumeType"))
     VolumeModification.add_member(:original_throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "originalThroughput"))
+    VolumeModification.add_member(:original_multi_attach_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "originalMultiAttachEnabled"))
     VolumeModification.add_member(:progress, Shapes::ShapeRef.new(shape: Long, location_name: "progress"))
     VolumeModification.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "startTime"))
     VolumeModification.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "endTime"))

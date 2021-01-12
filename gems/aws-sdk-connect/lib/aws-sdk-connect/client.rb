@@ -327,6 +327,9 @@ module Aws::Connect
 
     # @!group API Operations
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Associates an approved origin to an Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
@@ -353,6 +356,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Associates a storage resource type for the first time. You can only
     # associate one type of storage configuration in a single call. This
     # means, for example, that you can't define an instance with multiple
@@ -422,6 +428,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Allows the specified Amazon Connect instance to access the specified
     # Lambda function.
     #
@@ -450,6 +459,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Allows the specified Amazon Connect instance to access the specified
     # Amazon Lex bot.
     #
@@ -519,6 +531,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Associates a security key to the instance.
     #
     # @option params [required, String] :instance_id
@@ -675,7 +690,7 @@ module Aws::Connect
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
-    # Create an AppIntegration association with anAmazon Connect instance.
+    # Create an AppIntegration association with an Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance.
@@ -722,6 +737,70 @@ module Aws::Connect
     # @param [Hash] params ({})
     def create_integration_association(params = {}, options = {})
       req = build_request(:create_integration_association, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Creates a quick connect for the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the quick connect.
+    #
+    # @option params [String] :description
+    #   The description of the quick connect.
+    #
+    # @option params [required, Types::QuickConnectConfig] :quick_connect_config
+    #   Configuration settings for the quick connect.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   One or more tags.
+    #
+    # @return [Types::CreateQuickConnectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateQuickConnectResponse#quick_connect_arn #quick_connect_arn} => String
+    #   * {Types::CreateQuickConnectResponse#quick_connect_id #quick_connect_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_quick_connect({
+    #     instance_id: "InstanceId", # required
+    #     name: "QuickConnectName", # required
+    #     description: "QuickConnectDescription",
+    #     quick_connect_config: { # required
+    #       quick_connect_type: "USER", # required, accepts USER, QUEUE, PHONE_NUMBER
+    #       user_config: {
+    #         user_id: "UserId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #       },
+    #       queue_config: {
+    #         queue_id: "QueueId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #       },
+    #       phone_config: {
+    #         phone_number: "PhoneNumber", # required
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.quick_connect_arn #=> String
+    #   resp.quick_connect_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateQuickConnect AWS API Documentation
+    #
+    # @overload create_quick_connect(params = {})
+    # @param [Hash] params ({})
+    def create_quick_connect(params = {}, options = {})
+      req = build_request(:create_quick_connect, params)
       req.send_request(options)
     end
 
@@ -1039,6 +1118,35 @@ module Aws::Connect
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
+    # Deletes a quick connect.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :quick_connect_id
+    #   The identifier for the quick connect.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_quick_connect({
+    #     instance_id: "InstanceId", # required
+    #     quick_connect_id: "QuickConnectId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteQuickConnect AWS API Documentation
+    #
+    # @overload delete_quick_connect(params = {})
+    # @param [Hash] params ({})
+    def delete_quick_connect(params = {}, options = {})
+      req = build_request(:delete_quick_connect, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Deletes a use case from an AppIntegration association.
     #
     # @option params [required, String] :instance_id
@@ -1176,6 +1284,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Returns the current state of the specified instance identifier. It
     # tracks the instance while it is being created and returns an error
     # status if applicable.
@@ -1220,6 +1331,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Describes the specified instance attribute.
     #
     # @option params [required, String] :instance_id
@@ -1253,6 +1367,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Retrieves the current storage configurations for the specified
     # resource type, association ID, and instance ID.
     #
@@ -1299,6 +1416,52 @@ module Aws::Connect
     # @param [Hash] params ({})
     def describe_instance_storage_config(params = {}, options = {})
       req = build_request(:describe_instance_storage_config, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Describes the quick connect.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :quick_connect_id
+    #   The identifier for the quick connect.
+    #
+    # @return [Types::DescribeQuickConnectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeQuickConnectResponse#quick_connect #quick_connect} => Types::QuickConnect
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_quick_connect({
+    #     instance_id: "InstanceId", # required
+    #     quick_connect_id: "QuickConnectId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.quick_connect.quick_connect_arn #=> String
+    #   resp.quick_connect.quick_connect_id #=> String
+    #   resp.quick_connect.name #=> String
+    #   resp.quick_connect.description #=> String
+    #   resp.quick_connect.quick_connect_config.quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER"
+    #   resp.quick_connect.quick_connect_config.user_config.user_id #=> String
+    #   resp.quick_connect.quick_connect_config.user_config.contact_flow_id #=> String
+    #   resp.quick_connect.quick_connect_config.queue_config.queue_id #=> String
+    #   resp.quick_connect.quick_connect_config.queue_config.contact_flow_id #=> String
+    #   resp.quick_connect.quick_connect_config.phone_config.phone_number #=> String
+    #   resp.quick_connect.tags #=> Hash
+    #   resp.quick_connect.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeQuickConnect AWS API Documentation
+    #
+    # @overload describe_quick_connect(params = {})
+    # @param [Hash] params ({})
+    def describe_quick_connect(params = {}, options = {})
+      req = build_request(:describe_quick_connect, params)
       req.send_request(options)
     end
 
@@ -1488,6 +1651,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Revokes access to integrated applications from Amazon Connect.
     #
     # @option params [required, String] :instance_id
@@ -1514,6 +1680,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Removes the storage type configurations for the specified resource
     # type and association ID.
     #
@@ -1546,6 +1715,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Remove the Lambda function from the drop-down options available in the
     # relevant contact flow blocks.
     #
@@ -1574,6 +1746,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Revokes authorization from the specified instance to access the
     # specified Amazon Lex bot.
     #
@@ -1640,6 +1815,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Deletes the specified security key.
     #
     # @option params [required, String] :instance_id
@@ -2208,6 +2386,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Returns a paginated list of all approved origins associated with the
     # instance.
     #
@@ -2584,6 +2765,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Returns a paginated list of all the Lambda functions that show up in
     # the drop-down options in the relevant contact flow blocks.
     #
@@ -2628,6 +2812,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Returns a paginated list of all the Amazon Lex bots currently
     # associated with the instance.
     #
@@ -2841,6 +3028,63 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Provides information about the quick connects for the specified Amazon
+    # Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximimum number of results to return per page.
+    #
+    # @option params [Array<String>] :quick_connect_types
+    #   The type of quick connect. In the Amazon Connect console, when you
+    #   create a quick connect, you are prompted to assign one of the
+    #   following types: Agent (USER), External (PHONE\_NUMBER), or Queue
+    #   (QUEUE).
+    #
+    # @return [Types::ListQuickConnectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListQuickConnectsResponse#quick_connect_summary_list #quick_connect_summary_list} => Array&lt;Types::QuickConnectSummary&gt;
+    #   * {Types::ListQuickConnectsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_quick_connects({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     quick_connect_types: ["USER"], # accepts USER, QUEUE, PHONE_NUMBER
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.quick_connect_summary_list #=> Array
+    #   resp.quick_connect_summary_list[0].id #=> String
+    #   resp.quick_connect_summary_list[0].arn #=> String
+    #   resp.quick_connect_summary_list[0].name #=> String
+    #   resp.quick_connect_summary_list[0].quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQuickConnects AWS API Documentation
+    #
+    # @overload list_quick_connects(params = {})
+    # @param [Hash] params ({})
+    def list_quick_connects(params = {}, options = {})
+      req = build_request(:list_quick_connects, params)
+      req.send_request(options)
+    end
+
     # List the queues associated with a routing profile.
     #
     # @option params [required, String] :instance_id
@@ -2948,6 +3192,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Returns a paginated list of all security keys associated with the
     # instance.
     #
@@ -3710,8 +3957,8 @@ module Aws::Connect
 
     # Adds the specified tags to the specified resource.
     #
-    # The supported resource types are users, routing profiles, and contact
-    # flows.
+    # The supported resource types are users, routing profiles, quick
+    # connects, and contact flows.
     #
     # For sample policies that use tags, see [Amazon Connect Identity-Based
     # Policy Examples][1] in the *Amazon Connect Administrator Guide*.
@@ -4011,6 +4258,91 @@ module Aws::Connect
     # @param [Hash] params ({})
     def update_instance_storage_config(params = {}, options = {})
       req = build_request(:update_instance_storage_config, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Updates the configuration settings for the specified quick connect.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :quick_connect_id
+    #   The identifier for the quick connect.
+    #
+    # @option params [required, Types::QuickConnectConfig] :quick_connect_config
+    #   Information about the configuration settings for the quick connect.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_quick_connect_config({
+    #     instance_id: "InstanceId", # required
+    #     quick_connect_id: "QuickConnectId", # required
+    #     quick_connect_config: { # required
+    #       quick_connect_type: "USER", # required, accepts USER, QUEUE, PHONE_NUMBER
+    #       user_config: {
+    #         user_id: "UserId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #       },
+    #       queue_config: {
+    #         queue_id: "QueueId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #       },
+    #       phone_config: {
+    #         phone_number: "PhoneNumber", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQuickConnectConfig AWS API Documentation
+    #
+    # @overload update_quick_connect_config(params = {})
+    # @param [Hash] params ({})
+    def update_quick_connect_config(params = {}, options = {})
+      req = build_request(:update_quick_connect_config, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Updates the name and description of a quick connect. The request
+    # accepts the following data in JSON format. At least Name or
+    # Description must be provided.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance.
+    #
+    # @option params [required, String] :quick_connect_id
+    #   The identifier for the quick connect.
+    #
+    # @option params [String] :name
+    #   The name of the quick connect.
+    #
+    # @option params [String] :description
+    #   The description of the quick connect.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_quick_connect_name({
+    #     instance_id: "InstanceId", # required
+    #     quick_connect_id: "QuickConnectId", # required
+    #     name: "QuickConnectName",
+    #     description: "QuickConnectDescription",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQuickConnectName AWS API Documentation
+    #
+    # @overload update_quick_connect_name(params = {})
+    # @param [Hash] params ({})
+    def update_quick_connect_name(params = {}, options = {})
+      req = build_request(:update_quick_connect_name, params)
       req.send_request(options)
     end
 
@@ -4417,7 +4749,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

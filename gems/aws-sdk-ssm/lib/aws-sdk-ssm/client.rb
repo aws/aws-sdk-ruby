@@ -3845,6 +3845,14 @@ module Aws::SSM
 
     # Lists the tasks in a maintenance window.
     #
+    # <note markdown="1"> For maintenance window tasks without a specified target, you cannot
+    # supply values for `--max-errors` and `--max-concurrency`. Instead, the
+    # system inserts a placeholder value of `1`, which may be reported in
+    # the response to this command. These values do not affect the running
+    # of your task and can be ignored.
+    #
+    #  </note>
+    #
     # @option params [required, String] :window_id
     #   The ID of the maintenance window whose tasks should be retrieved.
     #
@@ -5434,6 +5442,14 @@ module Aws::SSM
     end
 
     # Lists the tasks in a maintenance window.
+    #
+    # <note markdown="1"> For maintenance window tasks without a specified target, you cannot
+    # supply values for `--max-errors` and `--max-concurrency`. Instead, the
+    # system inserts a placeholder value of `1`, which may be reported in
+    # the response to this command. These values do not affect the running
+    # of your task and can be ignored.
+    #
+    #  </note>
     #
     # @option params [required, String] :window_id
     #   The maintenance window ID that includes the task to retrieve.
@@ -7958,8 +7974,17 @@ module Aws::SSM
     # @option params [required, String] :window_id
     #   The ID of the maintenance window the task should be added to.
     #
-    # @option params [required, Array<Types::Target>] :targets
+    # @option params [Array<Types::Target>] :targets
     #   The targets (either instances or maintenance window targets).
+    #
+    #   <note markdown="1"> One or more targets must be specified for maintenance window Run
+    #   Command-type tasks. Depending on the task, targets are optional for
+    #   other maintenance window task types (Automation, AWS Lambda, and AWS
+    #   Step Functions). For more information about running tasks that do not
+    #   specify targets, see see [Registering maintenance window tasks without
+    #   targets][1] in the *AWS Systems Manager User Guide*.
+    #
+    #    </note>
     #
     #   Specify instances using the following format:
     #
@@ -7968,6 +7993,10 @@ module Aws::SSM
     #   Specify maintenance window targets using the following format:
     #
     #   `Key=WindowTargetIds,Values=<window-target-id-1>,<window-target-id-2>`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #
     # @option params [required, String] :task_arn
     #   The ARN of the task to run.
@@ -8017,12 +8046,26 @@ module Aws::SSM
     #   scheduled in priority order with tasks that have the same priority
     #   scheduled in parallel.
     #
-    # @option params [required, String] :max_concurrency
+    # @option params [String] :max_concurrency
     #   The maximum number of targets this task can be run for in parallel.
     #
-    # @option params [required, String] :max_errors
+    #   <note markdown="1"> For maintenance window tasks without a target specified, you cannot
+    #   supply a value for this option. Instead, the system inserts a
+    #   placeholder value of `1`. This value does not affect the running of
+    #   your task.
+    #
+    #    </note>
+    #
+    # @option params [String] :max_errors
     #   The maximum number of errors allowed before this task stops being
     #   scheduled.
+    #
+    #   <note markdown="1"> For maintenance window tasks without a target specified, you cannot
+    #   supply a value for this option. Instead, the system inserts a
+    #   placeholder value of `1`. This value does not affect the running of
+    #   your task.
+    #
+    #    </note>
     #
     # @option params [Types::LoggingInfo] :logging_info
     #   A structure containing information about an S3 bucket to write
@@ -8057,7 +8100,7 @@ module Aws::SSM
     #
     #   resp = client.register_task_with_maintenance_window({
     #     window_id: "MaintenanceWindowId", # required
-    #     targets: [ # required
+    #     targets: [
     #       {
     #         key: "TargetKey",
     #         values: ["TargetValue"],
@@ -8111,8 +8154,8 @@ module Aws::SSM
     #       },
     #     },
     #     priority: 1,
-    #     max_concurrency: "MaxConcurrency", # required
-    #     max_errors: "MaxErrors", # required
+    #     max_concurrency: "MaxConcurrency",
+    #     max_errors: "MaxErrors",
     #     logging_info: {
     #       s3_bucket_name: "S3BucketName", # required
     #       s3_key_prefix: "S3KeyPrefix",
@@ -9702,6 +9745,15 @@ module Aws::SSM
     #
     # * MaxErrors
     #
+    # <note markdown="1"> One or more targets must be specified for maintenance window Run
+    # Command-type tasks. Depending on the task, targets are optional for
+    # other maintenance window task types (Automation, AWS Lambda, and AWS
+    # Step Functions). For more information about running tasks that do not
+    # specify targets, see see [Registering maintenance window tasks without
+    # targets][1] in the *AWS Systems Manager User Guide*.
+    #
+    #  </note>
+    #
     # If the value for a parameter in `UpdateMaintenanceWindowTask` is null,
     # then the corresponding field is not modified. If you set `Replace` to
     # true, then all fields required by the
@@ -9718,6 +9770,10 @@ module Aws::SSM
     # and specify only a different `OutputS3BucketName` value, the values
     # for `Comment` and `NotificationConfig` are removed.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
+    #
     # @option params [required, String] :window_id
     #   The maintenance window ID that contains the task to modify.
     #
@@ -9728,6 +9784,19 @@ module Aws::SSM
     #   The targets (either instances or tags) to modify. Instances are
     #   specified using Key=instanceids,Values=instanceID\_1,instanceID\_2.
     #   Tags are specified using Key=tag\_name,Values=tag\_value.
+    #
+    #   <note markdown="1"> One or more targets must be specified for maintenance window Run
+    #   Command-type tasks. Depending on the task, targets are optional for
+    #   other maintenance window task types (Automation, AWS Lambda, and AWS
+    #   Step Functions). For more information about running tasks that do not
+    #   specify targets, see see [Registering maintenance window tasks without
+    #   targets][1] in the *AWS Systems Manager User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #
     # @option params [String] :task_arn
     #   The task ARN to modify.
@@ -9794,10 +9863,26 @@ module Aws::SSM
     #   is the number of targets that are allowed to run this task in
     #   parallel.
     #
+    #   <note markdown="1"> For maintenance window tasks without a target specified, you cannot
+    #   supply a value for this option. Instead, the system inserts a
+    #   placeholder value of `1`, which may be reported in the response to
+    #   this command. This value does not affect the running of your task and
+    #   can be ignored.
+    #
+    #    </note>
+    #
     # @option params [String] :max_errors
     #   The new `MaxErrors` value to specify. `MaxErrors` is the maximum
     #   number of errors that are allowed before the task stops being
     #   scheduled.
+    #
+    #   <note markdown="1"> For maintenance window tasks without a target specified, you cannot
+    #   supply a value for this option. Instead, the system inserts a
+    #   placeholder value of `1`, which may be reported in the response to
+    #   this command. This value does not affect the running of your task and
+    #   can be ignored.
+    #
+    #    </note>
     #
     # @option params [Types::LoggingInfo] :logging_info
     #   The new logging location in Amazon S3 to specify.
@@ -10507,7 +10592,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

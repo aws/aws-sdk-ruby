@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2021-01-06)
+------------------
+
+* Feature - Documentation updates for AWS Auto Scaling
+
 1.28.0 (2020-09-30)
 ------------------
 

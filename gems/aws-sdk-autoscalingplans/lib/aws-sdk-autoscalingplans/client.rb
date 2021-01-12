@@ -347,8 +347,22 @@ module Aws::AutoScalingPlans
     #   A CloudFormation stack or set of tags. You can create one scaling plan
     #   per application source.
     #
+    #   For more information, see [ApplicationSource][1] in the *AWS Auto
+    #   Scaling API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ApplicationSource.html
+    #
     # @option params [required, Array<Types::ScalingInstruction>] :scaling_instructions
     #   The scaling instructions.
+    #
+    #   For more information, see [ScalingInstruction][1] in the *AWS Auto
+    #   Scaling API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ScalingInstruction.html
     #
     # @return [Types::CreateScalingPlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -450,7 +464,8 @@ module Aws::AutoScalingPlans
     #   The name of the scaling plan.
     #
     # @option params [required, Integer] :scaling_plan_version
-    #   The version number of the scaling plan.
+    #   The version number of the scaling plan. Currently, the only valid
+    #   value is `1`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -476,7 +491,8 @@ module Aws::AutoScalingPlans
     #   The name of the scaling plan.
     #
     # @option params [required, Integer] :scaling_plan_version
-    #   The version number of the scaling plan.
+    #   The version number of the scaling plan. Currently, the only valid
+    #   value is `1`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of scalable resources to return. The value must be
@@ -544,8 +560,13 @@ module Aws::AutoScalingPlans
     #   sources, you cannot specify scaling plan names.
     #
     # @option params [Integer] :scaling_plan_version
-    #   The version number of the scaling plan. If you specify a scaling plan
-    #   version, you must also specify a scaling plan name.
+    #   The version number of the scaling plan. Currently, the only valid
+    #   value is `1`.
+    #
+    #   <note markdown="1"> If you specify a scaling plan version, you must also specify a scaling
+    #   plan name.
+    #
+    #    </note>
     #
     # @option params [Array<Types::ApplicationSource>] :application_sources
     #   The sources for the applications (up to 10). If you specify scaling
@@ -655,39 +676,21 @@ module Aws::AutoScalingPlans
     #   The name of the scaling plan.
     #
     # @option params [required, Integer] :scaling_plan_version
-    #   The version number of the scaling plan.
+    #   The version number of the scaling plan. Currently, the only valid
+    #   value is `1`.
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service.
+    #   The namespace of the AWS service. The only valid value is
+    #   `autoscaling`.
     #
     # @option params [required, String] :resource_id
-    #   The ID of the resource. This string consists of the resource type and
-    #   unique identifier.
-    #
-    #   * Auto Scaling group - The resource type is `autoScalingGroup` and the
-    #     unique identifier is the name of the Auto Scaling group. Example:
-    #     `autoScalingGroup/my-asg`.
-    #
-    #   * ECS service - The resource type is `service` and the unique
-    #     identifier is the cluster name and service name. Example:
-    #     `service/default/sample-webapp`.
-    #
-    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot Fleet request ID. Example:
-    #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
-    #
-    #   * DynamoDB table - The resource type is `table` and the unique
-    #     identifier is the resource ID. Example: `table/my-table`.
-    #
-    #   * DynamoDB global secondary index - The resource type is `index` and
-    #     the unique identifier is the resource ID. Example:
-    #     `table/my-table/index/my-table-index`.
-    #
-    #   * Aurora DB cluster - The resource type is `cluster` and the unique
-    #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #   The ID of the resource. This string consists of a prefix
+    #   (`autoScalingGroup`) followed by the name of a specified Auto Scaling
+    #   group (`my-asg`). Example: `autoScalingGroup/my-asg`.
     #
     # @option params [required, String] :scalable_dimension
-    #   The scalable dimension for the resource.
+    #   The scalable dimension for the resource. The only valid value is
+    #   `autoscaling:autoScalingGroup:DesiredCapacity`.
     #
     # @option params [required, String] :forecast_data_type
     #   The type of forecast data to get.
@@ -762,13 +765,28 @@ module Aws::AutoScalingPlans
     #   The name of the scaling plan.
     #
     # @option params [required, Integer] :scaling_plan_version
-    #   The version number of the scaling plan.
+    #   The version number of the scaling plan. The only valid value is `1`.
+    #   Currently, you cannot have multiple scaling plan versions.
     #
     # @option params [Types::ApplicationSource] :application_source
     #   A CloudFormation stack or set of tags.
     #
+    #   For more information, see [ApplicationSource][1] in the *AWS Auto
+    #   Scaling API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ApplicationSource.html
+    #
     # @option params [Array<Types::ScalingInstruction>] :scaling_instructions
     #   The scaling instructions.
+    #
+    #   For more information, see [ScalingInstruction][1] in the *AWS Auto
+    #   Scaling API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ScalingInstruction.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -866,7 +884,7 @@ module Aws::AutoScalingPlans
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscalingplans'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

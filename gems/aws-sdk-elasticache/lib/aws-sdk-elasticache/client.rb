@@ -1701,8 +1701,7 @@ module Aws::ElastiCache
     # can create cross-region read replica clusters for ElastiCache for
     # Redis to enable low-latency reads and disaster recovery across
     # regions. For more information, see [Replication Across Regions Using
-    # Global
-    # Datastore](/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters.html).
+    # Global Datastore][1].
     #
     # * The **GlobalReplicationGroupIdSuffix** is the name of the Global
     #   Datastore.
@@ -1710,6 +1709,10 @@ module Aws::ElastiCache
     # * The **PrimaryReplicationGroupId** represents the name of the primary
     #   cluster that accepts writes and will replicate updates to the
     #   secondary cluster.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html
     #
     # @option params [required, String] :global_replication_group_id_suffix
     #   The suffix name of a Global Datastore. Amazon ElastiCache
@@ -1725,7 +1728,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters-CLI.html
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html
     #
     # @option params [String] :global_replication_group_description
     #   Provides details of the Global Datastore
@@ -2671,17 +2674,17 @@ module Aws::ElastiCache
     #   The username of the user.
     #
     # @option params [required, String] :engine
-    #   Must be Redis.
+    #   The current supported value is Redis.
     #
     # @option params [Array<String>] :passwords
-    #   Passwords used for this user account. You can create up to two
-    #   passwords for each user.
+    #   Passwords used for this user. You can create up to two passwords for
+    #   each user.
     #
     # @option params [required, String] :access_string
-    #   Access permissions string used for this user account.
+    #   Access permissions string used for this user.
     #
     # @option params [Boolean] :no_password_required
-    #   Indicates a password is not required for this user account.
+    #   Indicates a password is not required for this user.
     #
     # @return [Types::User] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2738,7 +2741,7 @@ module Aws::ElastiCache
     #   The ID of the user group.
     #
     # @option params [required, String] :engine
-    #   Must be Redis.
+    #   The current supported value is Redis.
     #
     # @option params [Array<String>] :user_ids
     #   The list of user IDs that belong to the user group.
@@ -7963,7 +7966,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
     #
     # @return [Types::ModifyCacheClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8540,7 +8543,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
     #
     # @option params [Array<String>] :user_group_ids_to_add
     #   A list of user group IDs.
@@ -8852,17 +8855,16 @@ module Aws::ElastiCache
     #   The ID of the user.
     #
     # @option params [String] :access_string
-    #   Access permissions string used for this user account.
+    #   Access permissions string used for this user.
     #
     # @option params [String] :append_access_string
     #   Adds additional user permissions to the access string.
     #
     # @option params [Array<String>] :passwords
-    #   The passwords belonging to the user account. You are allowed up to
-    #   two.
+    #   The passwords belonging to the user. You are allowed up to two.
     #
     # @option params [Boolean] :no_password_required
-    #   Indicates no password is required for the user account.
+    #   Indicates no password is required for the user.
     #
     # @return [Types::User] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9682,7 +9684,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

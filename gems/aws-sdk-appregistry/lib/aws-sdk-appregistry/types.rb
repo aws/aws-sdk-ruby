@@ -1016,6 +1016,56 @@ module Aws::AppRegistry
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SyncResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "CFN_STACK", # required, accepts CFN_STACK
+    #         resource: "ResourceSpecifier", # required
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource of which the application will be associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   An entity you can work with and specify with a name or ID. Examples
+    #   include an Amazon EC2 instance, an AWS CloudFormation stack, or an
+    #   Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/SyncResourceRequest AWS API Documentation
+    #
+    class SyncResourceRequest < Struct.new(
+      :resource_type,
+      :resource)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_arn
+    #   The Amazon resource name (ARN) that specifies the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon resource name (ARN) that specifies the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_taken
+    #   The results of the output if an application is associated with an
+    #   ARN value, which could be `syncStarted` or None.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWS242AppRegistry-2020-06-24/SyncResourceResponse AWS API Documentation
+    #
+    class SyncResourceResponse < Struct.new(
+      :application_arn,
+      :resource_arn,
+      :action_taken)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
     #

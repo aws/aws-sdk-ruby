@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2020-12-22)
+------------------
+
+* Feature - SSM Maintenance Window support for registering/updating maintenance window tasks without targets.
+
 1.100.0 (2020-12-15)
 ------------------
 

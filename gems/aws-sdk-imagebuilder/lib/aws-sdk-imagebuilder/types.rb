@@ -417,6 +417,209 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # A container encapsulates the runtime environment for an application.
+    #
+    # @!attribute [rw] region
+    #   Containers and container images are Region-specific. This is the
+    #   Region context for the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_uris
+    #   A list of URIs for containers created in the context Region.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Container AWS API Documentation
+    #
+    class Container < Struct.new(
+      :region,
+      :image_uris)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container distribution settings for encryption, licensing, and sharing
+    # in a specific Region.
+    #
+    # @note When making an API call, you may pass ContainerDistributionConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         description: "NonEmptyString",
+    #         container_tags: ["NonEmptyString"],
+    #         target_repository: { # required
+    #           service: "ECR", # required, accepts ECR
+    #           repository_name: "NonEmptyString", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] description
+    #   The description of the container distribution configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_tags
+    #   Tags that are attached to the container distribution configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] target_repository
+    #   The destination repository for the container distribution
+    #   configuration.
+    #   @return [Types::TargetContainerRepository]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ContainerDistributionConfiguration AWS API Documentation
+    #
+    class ContainerDistributionConfiguration < Struct.new(
+      :description,
+      :container_tags,
+      :target_repository)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A container recipe.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the container recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_type
+    #   Specifies the type of container, such as Docker.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the container recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the container recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The system platform for the container, such as Windows or Linux.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The owner of the container recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The semantic version of the container recipe
+    #   (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).
+    #   @return [String]
+    #
+    # @!attribute [rw] components
+    #   Components for build and test that are included in the container
+    #   recipe.
+    #   @return [Array<Types::ComponentConfiguration>]
+    #
+    # @!attribute [rw] dockerfile_template_data
+    #   Dockerfiles are text documents that are used to build Docker
+    #   containers, and ensure that they contain all of the elements
+    #   required by the application running inside. The template data
+    #   consists of contextual variables where Image Builder places build
+    #   information or scripts, based on your container image recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   Identifies which KMS key is used to encrypt the container image for
+    #   distribution to the target Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] encrypted
+    #   A flag that indicates if the target container is encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] parent_image
+    #   The source image for the container recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_created
+    #   The date when this container recipe was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags that are attached to the container recipe.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] working_directory
+    #   The working directory for use during build and test workflows.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_repository
+    #   The destination repository for the container image.
+    #   @return [Types::TargetContainerRepository]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ContainerRecipe AWS API Documentation
+    #
+    class ContainerRecipe < Struct.new(
+      :arn,
+      :container_type,
+      :name,
+      :description,
+      :platform,
+      :owner,
+      :version,
+      :components,
+      :dockerfile_template_data,
+      :kms_key_id,
+      :encrypted,
+      :parent_image,
+      :date_created,
+      :tags,
+      :working_directory,
+      :target_repository)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a container recipe
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the container recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_type
+    #   Specifies the type of container, such as "Docker".
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the container recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The system platform for the container, such as Windows or Linux.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The owner of the container recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_image
+    #   The source image for the container recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_created
+    #   The date when this container recipe was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags that are attached to the container recipe.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ContainerRecipeSummary AWS API Documentation
+    #
+    class ContainerRecipeSummary < Struct.new(
+      :arn,
+      :container_type,
+      :name,
+      :platform,
+      :owner,
+      :parent_image,
+      :date_created,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateComponentRequest
     #   data as a hash:
     #
@@ -536,6 +739,149 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateContainerRecipeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         container_type: "DOCKER", # required, accepts DOCKER
+    #         name: "ResourceName", # required
+    #         description: "NonEmptyString",
+    #         semantic_version: "VersionNumber", # required
+    #         components: [ # required
+    #           {
+    #             component_arn: "ComponentVersionArnOrBuildVersionArn", # required
+    #           },
+    #         ],
+    #         dockerfile_template_data: "InlineDockerFileTemplate", # required
+    #         dockerfile_template_uri: "Uri",
+    #         platform_override: "Windows", # accepts Windows, Linux
+    #         image_os_version_override: "NonEmptyString",
+    #         parent_image: "NonEmptyString", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         working_directory: "NonEmptyString",
+    #         target_repository: { # required
+    #           service: "ECR", # required, accepts ECR
+    #           repository_name: "NonEmptyString", # required
+    #         },
+    #         kms_key_id: "NonEmptyString",
+    #         client_token: "ClientToken", # required
+    #       }
+    #
+    # @!attribute [rw] container_type
+    #   The type of container to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the container recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the container recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] semantic_version
+    #   The semantic version of the container recipe
+    #   (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).
+    #   @return [String]
+    #
+    # @!attribute [rw] components
+    #   Components for build and test that are included in the container
+    #   recipe.
+    #   @return [Array<Types::ComponentConfiguration>]
+    #
+    # @!attribute [rw] dockerfile_template_data
+    #   The Dockerfile template used to build your image as an inline data
+    #   blob.
+    #   @return [String]
+    #
+    # @!attribute [rw] dockerfile_template_uri
+    #   The S3 URI for the Dockerfile that will be used to build your
+    #   container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_override
+    #   Specifies the operating system platform when you use a custom source
+    #   image.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_os_version_override
+    #   Specifies the operating system version for the source image.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_image
+    #   The source image for the container recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags that are attached to the container recipe.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] working_directory
+    #   The working directory for use during build and test workflows.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_repository
+    #   The destination repository for the container image.
+    #   @return [Types::TargetContainerRepository]
+    #
+    # @!attribute [rw] kms_key_id
+    #   Identifies which KMS key is used to encrypt the container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The client token used to make this request idempotent.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateContainerRecipeRequest AWS API Documentation
+    #
+    class CreateContainerRecipeRequest < Struct.new(
+      :container_type,
+      :name,
+      :description,
+      :semantic_version,
+      :components,
+      :dockerfile_template_data,
+      :dockerfile_template_uri,
+      :platform_override,
+      :image_os_version_override,
+      :parent_image,
+      :tags,
+      :working_directory,
+      :target_repository,
+      :kms_key_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The request ID that uniquely identifies this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The client token used to make this request idempotent.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_recipe_arn
+    #   Returns the Amazon Resource Name (ARN) of the container recipe that
+    #   the request created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateContainerRecipeResponse AWS API Documentation
+    #
+    class CreateContainerRecipeResponse < Struct.new(
+      :request_id,
+      :client_token,
+      :container_recipe_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDistributionConfigurationRequest
     #   data as a hash:
     #
@@ -556,6 +902,14 @@ module Aws::Imagebuilder
     #               launch_permission: {
     #                 user_ids: ["AccountId"],
     #                 user_groups: ["NonEmptyString"],
+    #               },
+    #             },
+    #             container_distribution_configuration: {
+    #               description: "NonEmptyString",
+    #               container_tags: ["NonEmptyString"],
+    #               target_repository: { # required
+    #                 service: "ECR", # required, accepts ECR
+    #                 repository_name: "NonEmptyString", # required
     #               },
     #             },
     #             license_configuration_arns: ["LicenseConfigurationArn"],
@@ -631,7 +985,8 @@ module Aws::Imagebuilder
     #       {
     #         name: "ResourceName", # required
     #         description: "NonEmptyString",
-    #         image_recipe_arn: "ImageRecipeArn", # required
+    #         image_recipe_arn: "ImageRecipeArn",
+    #         container_recipe_arn: "ContainerRecipeArn",
     #         infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
     #         distribution_configuration_arn: "DistributionConfigurationArn",
     #         image_tests_configuration: {
@@ -661,6 +1016,11 @@ module Aws::Imagebuilder
     # @!attribute [rw] image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that will be used
     #   to configure images created by this image pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_recipe_arn
+    #   The Amazon Resource Name (ARN) of the container recipe that is used
+    #   to configure images created by this container pipeline.
     #   @return [String]
     #
     # @!attribute [rw] infrastructure_configuration_arn
@@ -710,6 +1070,7 @@ module Aws::Imagebuilder
       :name,
       :description,
       :image_recipe_arn,
+      :container_recipe_arn,
       :infrastructure_configuration_arn,
       :distribution_configuration_arn,
       :image_tests_configuration,
@@ -870,7 +1231,8 @@ module Aws::Imagebuilder
     #   data as a hash:
     #
     #       {
-    #         image_recipe_arn: "ImageRecipeArn", # required
+    #         image_recipe_arn: "ImageRecipeArn",
+    #         container_recipe_arn: "ContainerRecipeArn",
     #         distribution_configuration_arn: "DistributionConfigurationArn",
     #         infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
     #         image_tests_configuration: {
@@ -887,6 +1249,11 @@ module Aws::Imagebuilder
     # @!attribute [rw] image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that defines how
     #   images are configured, tested, and assessed.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_recipe_arn
+    #   The Amazon Resource Name (ARN) of the container recipe that defines
+    #   how images are configured and tested.
     #   @return [String]
     #
     # @!attribute [rw] distribution_configuration_arn
@@ -926,6 +1293,7 @@ module Aws::Imagebuilder
     #
     class CreateImageRequest < Struct.new(
       :image_recipe_arn,
+      :container_recipe_arn,
       :distribution_configuration_arn,
       :infrastructure_configuration_arn,
       :image_tests_configuration,
@@ -1128,6 +1496,43 @@ module Aws::Imagebuilder
     class DeleteComponentResponse < Struct.new(
       :request_id,
       :component_build_version_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteContainerRecipeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         container_recipe_arn: "ContainerRecipeArn", # required
+    #       }
+    #
+    # @!attribute [rw] container_recipe_arn
+    #   The Amazon Resource Name (ARN) of the container recipe to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/DeleteContainerRecipeRequest AWS API Documentation
+    #
+    class DeleteContainerRecipeRequest < Struct.new(
+      :container_recipe_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The request ID that uniquely identifies this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_recipe_arn
+    #   The Amazon Resource Name (ARN) of the container recipe that was
+    #   deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/DeleteContainerRecipeResponse AWS API Documentation
+    #
+    class DeleteContainerRecipeResponse < Struct.new(
+      :request_id,
+      :container_recipe_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1337,6 +1742,14 @@ module Aws::Imagebuilder
     #             user_groups: ["NonEmptyString"],
     #           },
     #         },
+    #         container_distribution_configuration: {
+    #           description: "NonEmptyString",
+    #           container_tags: ["NonEmptyString"],
+    #           target_repository: { # required
+    #             service: "ECR", # required, accepts ECR
+    #             repository_name: "NonEmptyString", # required
+    #           },
+    #         },
     #         license_configuration_arns: ["LicenseConfigurationArn"],
     #       }
     #
@@ -1349,6 +1762,11 @@ module Aws::Imagebuilder
     #   tags).
     #   @return [Types::AmiDistributionConfiguration]
     #
+    # @!attribute [rw] container_distribution_configuration
+    #   Container distribution settings for encryption, licensing, and
+    #   sharing in a specific Region.
+    #   @return [Types::ContainerDistributionConfiguration]
+    #
     # @!attribute [rw] license_configuration_arns
     #   The License Manager Configuration to associate with the AMI in the
     #   specified Region.
@@ -1359,6 +1777,7 @@ module Aws::Imagebuilder
     class Distribution < Struct.new(
       :region,
       :ami_distribution_configuration,
+      :container_distribution_configuration,
       :license_configuration_arns)
       SENSITIVE = []
       include Aws::Structure
@@ -1439,6 +1858,10 @@ module Aws::Imagebuilder
     #   The tags associated with the distribution configuration.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] regions
+    #   A list of Regions where the container image is distributed to.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/DistributionConfigurationSummary AWS API Documentation
     #
     class DistributionConfigurationSummary < Struct.new(
@@ -1447,7 +1870,8 @@ module Aws::Imagebuilder
       :description,
       :date_created,
       :date_updated,
-      :tags)
+      :tags,
+      :regions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1622,6 +2046,79 @@ module Aws::Imagebuilder
     class GetComponentResponse < Struct.new(
       :request_id,
       :component)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetContainerRecipePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         container_recipe_arn: "ContainerRecipeArn", # required
+    #       }
+    #
+    # @!attribute [rw] container_recipe_arn
+    #   The Amazon Resource Name (ARN) of the container recipe for the
+    #   policy being requested.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetContainerRecipePolicyRequest AWS API Documentation
+    #
+    class GetContainerRecipePolicyRequest < Struct.new(
+      :container_recipe_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The request ID that uniquely identifies this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The container recipe policy object that is returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetContainerRecipePolicyResponse AWS API Documentation
+    #
+    class GetContainerRecipePolicyResponse < Struct.new(
+      :request_id,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetContainerRecipeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         container_recipe_arn: "ContainerRecipeArn", # required
+    #       }
+    #
+    # @!attribute [rw] container_recipe_arn
+    #   The Amazon Resource Name (ARN) of the container recipe to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetContainerRecipeRequest AWS API Documentation
+    #
+    class GetContainerRecipeRequest < Struct.new(
+      :container_recipe_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The request ID that uniquely identifies this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_recipe
+    #   The container recipe object that is returned.
+    #   @return [Types::ContainerRecipe]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetContainerRecipeResponse AWS API Documentation
+    #
+    class GetContainerRecipeResponse < Struct.new(
+      :request_id,
+      :container_recipe)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1910,6 +2407,10 @@ module Aws::Imagebuilder
     #   The Amazon Resource Name (ARN) of the image.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   Specifies whether this is an AMI or container image.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the image.
     #   @return [String]
@@ -1941,6 +2442,10 @@ module Aws::Imagebuilder
     # @!attribute [rw] image_recipe
     #   The image recipe used when creating the image.
     #   @return [Types::ImageRecipe]
+    #
+    # @!attribute [rw] container_recipe
+    #   The container recipe used to create the container image type.
+    #   @return [Types::ContainerRecipe]
     #
     # @!attribute [rw] source_pipeline_name
     #   The name of the image pipeline that created this image.
@@ -1979,6 +2484,7 @@ module Aws::Imagebuilder
     #
     class Image < Struct.new(
       :arn,
+      :type,
       :name,
       :version,
       :platform,
@@ -1986,6 +2492,7 @@ module Aws::Imagebuilder
       :os_version,
       :state,
       :image_recipe,
+      :container_recipe,
       :source_pipeline_name,
       :source_pipeline_arn,
       :infrastructure_configuration,
@@ -2026,6 +2533,11 @@ module Aws::Imagebuilder
     # @!attribute [rw] image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe associated with
     #   this image pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_recipe_arn
+    #   The Amazon Resource Name (ARN) of the container recipe that is used
+    #   for this pipeline.
     #   @return [String]
     #
     # @!attribute [rw] infrastructure_configuration_arn
@@ -2079,6 +2591,7 @@ module Aws::Imagebuilder
       :platform,
       :enhanced_image_metadata_enabled,
       :image_recipe_arn,
+      :container_recipe_arn,
       :infrastructure_configuration_arn,
       :distribution_configuration_arn,
       :image_tests_configuration,
@@ -2097,6 +2610,11 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the image recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Specifies which type of image is created by the recipe - an AMI or a
+    #   container image.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2148,6 +2666,7 @@ module Aws::Imagebuilder
     #
     class ImageRecipe < Struct.new(
       :arn,
+      :type,
       :name,
       :description,
       :platform,
@@ -2236,6 +2755,10 @@ module Aws::Imagebuilder
     #   The name of the image.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   Specifies whether this is an AMI or container image.
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   The version of the image.
     #   @return [String]
@@ -2274,6 +2797,7 @@ module Aws::Imagebuilder
     class ImageSummary < Struct.new(
       :arn,
       :name,
+      :type,
       :version,
       :platform,
       :os_version,
@@ -2323,6 +2847,10 @@ module Aws::Imagebuilder
     #   The name of the image semantic version.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   Specifies whether this is an AMI or container image.
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   The semantic version of the image semantic version.
     #   @return [String]
@@ -2349,6 +2877,7 @@ module Aws::Imagebuilder
     class ImageVersion < Struct.new(
       :arn,
       :name,
+      :type,
       :version,
       :platform,
       :os_version,
@@ -2846,6 +3375,7 @@ module Aws::Imagebuilder
     #             values: ["FilterValue"],
     #           },
     #         ],
+    #         by_name: false,
     #         max_results: 1,
     #         next_token: "PaginationToken",
     #       }
@@ -2862,6 +3392,11 @@ module Aws::Imagebuilder
     #   The filters.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] by_name
+    #   Returns the list of component build versions for the specified
+    #   semantic version.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] max_results
     #   The maximum items to return in a request.
     #   @return [Integer]
@@ -2876,6 +3411,7 @@ module Aws::Imagebuilder
     class ListComponentsRequest < Struct.new(
       :owner,
       :filters,
+      :by_name,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -2902,6 +3438,78 @@ module Aws::Imagebuilder
     class ListComponentsResponse < Struct.new(
       :request_id,
       :component_version_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListContainerRecipesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         owner: "Self", # accepts Self, Shared, Amazon
+    #         filters: [
+    #           {
+    #             name: "FilterName",
+    #             values: ["FilterValue"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] owner
+    #   Returns container recipes belonging to the specified owner, that
+    #   have been shared with you. You can omit this field to return
+    #   container recipes belonging to your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Request filters that are used to narrow the list of container images
+    #   that are returned.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Provides a token for pagination, which determines where to begin the
+    #   next set of results when the current set reaches the maximum for one
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListContainerRecipesRequest AWS API Documentation
+    #
+    class ListContainerRecipesRequest < Struct.new(
+      :owner,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The request ID that uniquely identifies this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_recipe_summary_list
+    #   The list of container recipes returned for the request.
+    #   @return [Array<Types::ContainerRecipeSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The next token field is used for paginated responses. When this is
+    #   not empty, there are additional container recipes that the service
+    #   has not included in this response. Use this token with the next
+    #   request to retrieve additional list items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListContainerRecipesResponse AWS API Documentation
+    #
+    class ListContainerRecipesResponse < Struct.new(
+      :request_id,
+      :container_recipe_summary_list,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3256,8 +3864,10 @@ module Aws::Imagebuilder
     #             values: ["FilterValue"],
     #           },
     #         ],
+    #         by_name: false,
     #         max_results: 1,
     #         next_token: "PaginationToken",
+    #         include_deprecated: false,
     #       }
     #
     # @!attribute [rw] owner
@@ -3272,6 +3882,10 @@ module Aws::Imagebuilder
     #   The filters.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] by_name
+    #   Requests a list of images with a specific recipe name.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] max_results
     #   The maximum items to return in a request.
     #   @return [Integer]
@@ -3281,13 +3895,19 @@ module Aws::Imagebuilder
     #   from a previously truncated response.
     #   @return [String]
     #
+    # @!attribute [rw] include_deprecated
+    #   Includes deprecated images in the response list.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagesRequest AWS API Documentation
     #
     class ListImagesRequest < Struct.new(
       :owner,
       :filters,
+      :by_name,
       :max_results,
-      :next_token)
+      :next_token,
+      :include_deprecated)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3441,10 +4061,16 @@ module Aws::Imagebuilder
     #   The EC2 AMIs created by this image.
     #   @return [Array<Types::Ami>]
     #
+    # @!attribute [rw] containers
+    #   Container images that the pipeline has generated and stored in the
+    #   output repository.
+    #   @return [Array<Types::Container>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/OutputResources AWS API Documentation
     #
     class OutputResources < Struct.new(
-      :amis)
+      :amis,
+      :containers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3489,6 +4115,50 @@ module Aws::Imagebuilder
     class PutComponentPolicyResponse < Struct.new(
       :request_id,
       :component_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutContainerRecipePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         container_recipe_arn: "ContainerRecipeArn", # required
+    #         policy: "ResourcePolicyDocument", # required
+    #       }
+    #
+    # @!attribute [rw] container_recipe_arn
+    #   The Amazon Resource Name (ARN) of the container recipe that this
+    #   policy should be applied to.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The policy to apply to the container recipe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/PutContainerRecipePolicyRequest AWS API Documentation
+    #
+    class PutContainerRecipePolicyRequest < Struct.new(
+      :container_recipe_arn,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The request ID that uniquely identifies this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_recipe_arn
+    #   The Amazon Resource Name (ARN) of the container recipe that this
+    #   policy was applied to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/PutContainerRecipePolicyResponse AWS API Documentation
+    #
+    class PutContainerRecipePolicyResponse < Struct.new(
+      :request_id,
+      :container_recipe_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3842,6 +4512,34 @@ module Aws::Imagebuilder
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # The container repository where the output container image is stored.
+    #
+    # @note When making an API call, you may pass TargetContainerRepository
+    #   data as a hash:
+    #
+    #       {
+    #         service: "ECR", # required, accepts ECR
+    #         repository_name: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] service
+    #   Specifies the service in which this image was registered.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the container repository where the output container
+    #   image is stored. This name is prefixed by the repository location.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/TargetContainerRepository AWS API Documentation
+    #
+    class TargetContainerRepository < Struct.new(
+      :service,
+      :repository_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -3892,6 +4590,14 @@ module Aws::Imagebuilder
     #               launch_permission: {
     #                 user_ids: ["AccountId"],
     #                 user_groups: ["NonEmptyString"],
+    #               },
+    #             },
+    #             container_distribution_configuration: {
+    #               description: "NonEmptyString",
+    #               container_tags: ["NonEmptyString"],
+    #               target_repository: { # required
+    #                 service: "ECR", # required, accepts ECR
+    #                 repository_name: "NonEmptyString", # required
     #               },
     #             },
     #             license_configuration_arns: ["LicenseConfigurationArn"],
@@ -3960,7 +4666,8 @@ module Aws::Imagebuilder
     #       {
     #         image_pipeline_arn: "ImagePipelineArn", # required
     #         description: "NonEmptyString",
-    #         image_recipe_arn: "ImageRecipeArn", # required
+    #         image_recipe_arn: "ImageRecipeArn",
+    #         container_recipe_arn: "ContainerRecipeArn",
     #         infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
     #         distribution_configuration_arn: "DistributionConfigurationArn",
     #         image_tests_configuration: {
@@ -3988,6 +4695,10 @@ module Aws::Imagebuilder
     # @!attribute [rw] image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that will be used
     #   to configure images updated by this image pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_recipe_arn
+    #   The Amazon Resource Name (ARN) of the container pipeline to update.
     #   @return [String]
     #
     # @!attribute [rw] infrastructure_configuration_arn
@@ -4033,6 +4744,7 @@ module Aws::Imagebuilder
       :image_pipeline_arn,
       :description,
       :image_recipe_arn,
+      :container_recipe_arn,
       :infrastructure_configuration_arn,
       :distribution_configuration_arn,
       :image_tests_configuration,

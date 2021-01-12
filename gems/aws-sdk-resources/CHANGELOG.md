@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.93.0 (2020-12-16)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-wellarchitected` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-locationservice` gem.
+
 3.92.0 (2020-12-15)
 ------------------
 

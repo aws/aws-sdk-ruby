@@ -337,16 +337,16 @@ module Aws::HealthLake
 
     # @!group API Operations
 
-    # Creates a datastore that can ingest and export FHIR data.
+    # Creates a Data Store that can ingest and export FHIR formatted data.
     #
     # @option params [String] :datastore_name
-    #   The user generated name for the datastore.
+    #   The user generated name for the Data Store.
     #
     # @option params [required, String] :datastore_type_version
-    #   The FHIR version of the datastore. The only supported version is R4.
+    #   The FHIR version of the Data Store. The only supported version is R4.
     #
     # @option params [Types::PreloadDataConfig] :preload_data_config
-    #   Optional parameter to preload data upon creation of the datastore.
+    #   Optional parameter to preload data upon creation of the Data Store.
     #   Currently, the only supported preloaded data is synthetic data
     #   generated from Synthea.
     #
@@ -390,10 +390,10 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Deletes a datastore.
+    # Deletes a Data Store.
     #
     # @option params [String] :datastore_id
-    #   The AWS-generated ID for the datastore to be deleted.
+    #   The AWS-generated ID for the Data Store to be deleted.
     #
     # @return [Types::DeleteFHIRDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -424,12 +424,12 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Gets the properties associated with the FHIR datastore, including the
-    # datastore ID, datastore ARN, datastore name, datastore status, created
-    # at, datastore type version, and datastore endpoint.
+    # Gets the properties associated with the FHIR Data Store, including the
+    # Data Store ID, Data Store ARN, Data Store name, Data Store status,
+    # created at, Data Store type version, and Data Store endpoint.
     #
     # @option params [String] :datastore_id
-    #   The AWS-generated datastore id. This is part of the
+    #   The AWS-generated Data Store id. This is part of the
     #   ‘CreateFHIRDatastore’ output.
     #
     # @return [Types::DescribeFHIRDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -462,11 +462,53 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Displays the properties of a FHIR import job, including the ID, ARN,
-    # name, and the status of the datastore.
+    # Displays the properties of a FHIR export job, including the ID, ARN,
+    # name, and the status of the job.
     #
     # @option params [required, String] :datastore_id
-    #   The AWS-generated ID of the datastore.
+    #   The AWS generated ID for the Data Store from which files are being
+    #   exported from for an export job.
+    #
+    # @option params [required, String] :job_id
+    #   The AWS generated ID for an export job.
+    #
+    # @return [Types::DescribeFHIRExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFHIRExportJobResponse#export_job_properties #export_job_properties} => Types::ExportJobProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_fhir_export_job({
+    #     datastore_id: "DatastoreId", # required
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_job_properties.job_id #=> String
+    #   resp.export_job_properties.job_name #=> String
+    #   resp.export_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.export_job_properties.submit_time #=> Time
+    #   resp.export_job_properties.end_time #=> Time
+    #   resp.export_job_properties.datastore_id #=> String
+    #   resp.export_job_properties.output_data_config.s3_uri #=> String
+    #   resp.export_job_properties.data_access_role_arn #=> String
+    #   resp.export_job_properties.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DescribeFHIRExportJob AWS API Documentation
+    #
+    # @overload describe_fhir_export_job(params = {})
+    # @param [Hash] params ({})
+    def describe_fhir_export_job(params = {}, options = {})
+      req = build_request(:describe_fhir_export_job, params)
+      req.send_request(options)
+    end
+
+    # Displays the properties of a FHIR import job, including the ID, ARN,
+    # name, and the status of the job.
+    #
+    # @option params [required, String] :datastore_id
+    #   The AWS-generated ID of the Data Store.
     #
     # @option params [required, String] :job_id
     #   The AWS-generated job ID.
@@ -503,17 +545,17 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Lists all FHIR datastores that are in the user’s account, regardless
-    # of datastore status.
+    # Lists all FHIR Data Stores that are in the user’s account, regardless
+    # of Data Store status.
     #
     # @option params [Types::DatastoreFilter] :filter
-    #   Lists all filters associated with a FHIR datastore request.
+    #   Lists all filters associated with a FHIR Data Store request.
     #
     # @option params [String] :next_token
-    #   Fetches the next page of datastores when results are paginated.
+    #   Fetches the next page of Data Stores when results are paginated.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of datastores returned in a single page of a
+    #   The maximum number of Data Stores returned in a single page of a
     #   ListFHIRDatastoresRequest call.
     #
     # @return [Types::ListFHIRDatastoresResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -558,6 +600,61 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
+    # Begins a FHIR export job.
+    #
+    # @option params [String] :job_name
+    #   The user generated name for an export job.
+    #
+    # @option params [required, Types::OutputDataConfig] :output_data_config
+    #   The output data configuration that was supplied when the export job
+    #   was created.
+    #
+    # @option params [required, String] :datastore_id
+    #   The AWS generated ID for the Data Store from which files are being
+    #   exported for an export job.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name used during the initiation of the job.
+    #
+    # @option params [required, String] :client_token
+    #   An optional user provided token used for ensuring idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartFHIRExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartFHIRExportJobResponse#job_id #job_id} => String
+    #   * {Types::StartFHIRExportJobResponse#job_status #job_status} => String
+    #   * {Types::StartFHIRExportJobResponse#datastore_id #datastore_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_fhir_export_job({
+    #     job_name: "JobName",
+    #     output_data_config: { # required
+    #       s3_uri: "S3Uri",
+    #     },
+    #     datastore_id: "DatastoreId", # required
+    #     data_access_role_arn: "IamRoleArn", # required
+    #     client_token: "ClientTokenString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.datastore_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/StartFHIRExportJob AWS API Documentation
+    #
+    # @overload start_fhir_export_job(params = {})
+    # @param [Hash] params ({})
+    def start_fhir_export_job(params = {}, options = {})
+      req = build_request(:start_fhir_export_job, params)
+      req.send_request(options)
+    end
+
     # Begins a FHIR Import job.
     #
     # @option params [String] :job_name
@@ -568,7 +665,7 @@ module Aws::HealthLake
     #   request.
     #
     # @option params [required, String] :datastore_id
-    #   The AWS-generated datastore ID.
+    #   The AWS-generated Data Store ID.
     #
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) that gives Amazon HealthLake access
@@ -626,7 +723,7 @@ module Aws::HealthLake
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-healthlake'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

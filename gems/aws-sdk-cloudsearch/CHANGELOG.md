@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2021-01-04)
+------------------
+
+* Feature - This release adds support for new Amazon CloudSearch instances.
+
 1.26.0 (2020-09-30)
 ------------------
 

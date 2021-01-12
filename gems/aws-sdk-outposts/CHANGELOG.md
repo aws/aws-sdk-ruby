@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2020-12-21)
+------------------
+
+* Feature - In this release, AWS Outposts adds support for three new APIs: TagResource, UntagResource, and ListTagsForResource. Customers can now manage tags for their resources through the SDK.
+
 1.12.0 (2020-11-23)
 ------------------
 

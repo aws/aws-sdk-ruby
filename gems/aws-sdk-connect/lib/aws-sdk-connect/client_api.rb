@@ -62,6 +62,8 @@ module Aws::Connect
     CreateInstanceResponse = Shapes::StructureShape.new(name: 'CreateInstanceResponse')
     CreateIntegrationAssociationRequest = Shapes::StructureShape.new(name: 'CreateIntegrationAssociationRequest')
     CreateIntegrationAssociationResponse = Shapes::StructureShape.new(name: 'CreateIntegrationAssociationResponse')
+    CreateQuickConnectRequest = Shapes::StructureShape.new(name: 'CreateQuickConnectRequest')
+    CreateQuickConnectResponse = Shapes::StructureShape.new(name: 'CreateQuickConnectResponse')
     CreateRoutingProfileRequest = Shapes::StructureShape.new(name: 'CreateRoutingProfileRequest')
     CreateRoutingProfileResponse = Shapes::StructureShape.new(name: 'CreateRoutingProfileResponse')
     CreateUseCaseRequest = Shapes::StructureShape.new(name: 'CreateUseCaseRequest')
@@ -81,6 +83,7 @@ module Aws::Connect
     Delay = Shapes::IntegerShape.new(name: 'Delay')
     DeleteInstanceRequest = Shapes::StructureShape.new(name: 'DeleteInstanceRequest')
     DeleteIntegrationAssociationRequest = Shapes::StructureShape.new(name: 'DeleteIntegrationAssociationRequest')
+    DeleteQuickConnectRequest = Shapes::StructureShape.new(name: 'DeleteQuickConnectRequest')
     DeleteUseCaseRequest = Shapes::StructureShape.new(name: 'DeleteUseCaseRequest')
     DeleteUserHierarchyGroupRequest = Shapes::StructureShape.new(name: 'DeleteUserHierarchyGroupRequest')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
@@ -92,6 +95,8 @@ module Aws::Connect
     DescribeInstanceResponse = Shapes::StructureShape.new(name: 'DescribeInstanceResponse')
     DescribeInstanceStorageConfigRequest = Shapes::StructureShape.new(name: 'DescribeInstanceStorageConfigRequest')
     DescribeInstanceStorageConfigResponse = Shapes::StructureShape.new(name: 'DescribeInstanceStorageConfigResponse')
+    DescribeQuickConnectRequest = Shapes::StructureShape.new(name: 'DescribeQuickConnectRequest')
+    DescribeQuickConnectResponse = Shapes::StructureShape.new(name: 'DescribeQuickConnectResponse')
     DescribeRoutingProfileRequest = Shapes::StructureShape.new(name: 'DescribeRoutingProfileRequest')
     DescribeRoutingProfileResponse = Shapes::StructureShape.new(name: 'DescribeRoutingProfileResponse')
     DescribeUserHierarchyGroupRequest = Shapes::StructureShape.new(name: 'DescribeUserHierarchyGroupRequest')
@@ -207,6 +212,8 @@ module Aws::Connect
     ListPromptsResponse = Shapes::StructureShape.new(name: 'ListPromptsResponse')
     ListQueuesRequest = Shapes::StructureShape.new(name: 'ListQueuesRequest')
     ListQueuesResponse = Shapes::StructureShape.new(name: 'ListQueuesResponse')
+    ListQuickConnectsRequest = Shapes::StructureShape.new(name: 'ListQuickConnectsRequest')
+    ListQuickConnectsResponse = Shapes::StructureShape.new(name: 'ListQuickConnectsResponse')
     ListRoutingProfileQueuesRequest = Shapes::StructureShape.new(name: 'ListRoutingProfileQueuesRequest')
     ListRoutingProfileQueuesResponse = Shapes::StructureShape.new(name: 'ListRoutingProfileQueuesResponse')
     ListRoutingProfilesRequest = Shapes::StructureShape.new(name: 'ListRoutingProfilesRequest')
@@ -247,6 +254,7 @@ module Aws::Connect
     PhoneNumberCountryCode = Shapes::StringShape.new(name: 'PhoneNumberCountryCode')
     PhoneNumberCountryCodes = Shapes::ListShape.new(name: 'PhoneNumberCountryCodes')
     PhoneNumberId = Shapes::StringShape.new(name: 'PhoneNumberId')
+    PhoneNumberQuickConnectConfig = Shapes::StructureShape.new(name: 'PhoneNumberQuickConnectConfig')
     PhoneNumberSummary = Shapes::StructureShape.new(name: 'PhoneNumberSummary')
     PhoneNumberSummaryList = Shapes::ListShape.new(name: 'PhoneNumberSummaryList')
     PhoneNumberType = Shapes::StringShape.new(name: 'PhoneNumberType')
@@ -263,12 +271,22 @@ module Aws::Connect
     PromptSummaryList = Shapes::ListShape.new(name: 'PromptSummaryList')
     QueueId = Shapes::StringShape.new(name: 'QueueId')
     QueueName = Shapes::StringShape.new(name: 'QueueName')
+    QueueQuickConnectConfig = Shapes::StructureShape.new(name: 'QueueQuickConnectConfig')
     QueueReference = Shapes::StructureShape.new(name: 'QueueReference')
     QueueSummary = Shapes::StructureShape.new(name: 'QueueSummary')
     QueueSummaryList = Shapes::ListShape.new(name: 'QueueSummaryList')
     QueueType = Shapes::StringShape.new(name: 'QueueType')
     QueueTypes = Shapes::ListShape.new(name: 'QueueTypes')
     Queues = Shapes::ListShape.new(name: 'Queues')
+    QuickConnect = Shapes::StructureShape.new(name: 'QuickConnect')
+    QuickConnectConfig = Shapes::StructureShape.new(name: 'QuickConnectConfig')
+    QuickConnectDescription = Shapes::StringShape.new(name: 'QuickConnectDescription')
+    QuickConnectId = Shapes::StringShape.new(name: 'QuickConnectId')
+    QuickConnectName = Shapes::StringShape.new(name: 'QuickConnectName')
+    QuickConnectSummary = Shapes::StructureShape.new(name: 'QuickConnectSummary')
+    QuickConnectSummaryList = Shapes::ListShape.new(name: 'QuickConnectSummaryList')
+    QuickConnectType = Shapes::StringShape.new(name: 'QuickConnectType')
+    QuickConnectTypes = Shapes::ListShape.new(name: 'QuickConnectTypes')
     Reference = Shapes::StructureShape.new(name: 'Reference')
     ReferenceKey = Shapes::StringShape.new(name: 'ReferenceKey')
     ReferenceType = Shapes::StringShape.new(name: 'ReferenceType')
@@ -338,6 +356,8 @@ module Aws::Connect
     UpdateContactFlowNameRequest = Shapes::StructureShape.new(name: 'UpdateContactFlowNameRequest')
     UpdateInstanceAttributeRequest = Shapes::StructureShape.new(name: 'UpdateInstanceAttributeRequest')
     UpdateInstanceStorageConfigRequest = Shapes::StructureShape.new(name: 'UpdateInstanceStorageConfigRequest')
+    UpdateQuickConnectConfigRequest = Shapes::StructureShape.new(name: 'UpdateQuickConnectConfigRequest')
+    UpdateQuickConnectNameRequest = Shapes::StructureShape.new(name: 'UpdateQuickConnectNameRequest')
     UpdateRoutingProfileConcurrencyRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileConcurrencyRequest')
     UpdateRoutingProfileDefaultOutboundQueueRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileDefaultOutboundQueueRequest')
     UpdateRoutingProfileNameRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileNameRequest')
@@ -358,6 +378,7 @@ module Aws::Connect
     UserIdentityInfo = Shapes::StructureShape.new(name: 'UserIdentityInfo')
     UserNotFoundException = Shapes::StructureShape.new(name: 'UserNotFoundException')
     UserPhoneConfig = Shapes::StructureShape.new(name: 'UserPhoneConfig')
+    UserQuickConnectConfig = Shapes::StructureShape.new(name: 'UserQuickConnectConfig')
     UserSummary = Shapes::StructureShape.new(name: 'UserSummary')
     UserSummaryList = Shapes::ListShape.new(name: 'UserSummaryList')
     Value = Shapes::FloatShape.new(name: 'Value')
@@ -476,6 +497,17 @@ module Aws::Connect
     CreateIntegrationAssociationResponse.add_member(:integration_association_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "IntegrationAssociationArn"))
     CreateIntegrationAssociationResponse.struct_class = Types::CreateIntegrationAssociationResponse
 
+    CreateQuickConnectRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    CreateQuickConnectRequest.add_member(:name, Shapes::ShapeRef.new(shape: QuickConnectName, required: true, location_name: "Name"))
+    CreateQuickConnectRequest.add_member(:description, Shapes::ShapeRef.new(shape: QuickConnectDescription, location_name: "Description"))
+    CreateQuickConnectRequest.add_member(:quick_connect_config, Shapes::ShapeRef.new(shape: QuickConnectConfig, required: true, location_name: "QuickConnectConfig"))
+    CreateQuickConnectRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateQuickConnectRequest.struct_class = Types::CreateQuickConnectRequest
+
+    CreateQuickConnectResponse.add_member(:quick_connect_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "QuickConnectARN"))
+    CreateQuickConnectResponse.add_member(:quick_connect_id, Shapes::ShapeRef.new(shape: QuickConnectId, location_name: "QuickConnectId"))
+    CreateQuickConnectResponse.struct_class = Types::CreateQuickConnectResponse
+
     CreateRoutingProfileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreateRoutingProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: RoutingProfileName, required: true, location_name: "Name"))
     CreateRoutingProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: RoutingProfileDescription, required: true, location_name: "Description"))
@@ -554,6 +586,10 @@ module Aws::Connect
     DeleteIntegrationAssociationRequest.add_member(:integration_association_id, Shapes::ShapeRef.new(shape: IntegrationAssociationId, required: true, location: "uri", location_name: "IntegrationAssociationId"))
     DeleteIntegrationAssociationRequest.struct_class = Types::DeleteIntegrationAssociationRequest
 
+    DeleteQuickConnectRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DeleteQuickConnectRequest.add_member(:quick_connect_id, Shapes::ShapeRef.new(shape: QuickConnectId, required: true, location: "uri", location_name: "QuickConnectId"))
+    DeleteQuickConnectRequest.struct_class = Types::DeleteQuickConnectRequest
+
     DeleteUseCaseRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteUseCaseRequest.add_member(:integration_association_id, Shapes::ShapeRef.new(shape: IntegrationAssociationId, required: true, location: "uri", location_name: "IntegrationAssociationId"))
     DeleteUseCaseRequest.add_member(:use_case_id, Shapes::ShapeRef.new(shape: UseCaseId, required: true, location: "uri", location_name: "UseCaseId"))
@@ -594,6 +630,13 @@ module Aws::Connect
 
     DescribeInstanceStorageConfigResponse.add_member(:storage_config, Shapes::ShapeRef.new(shape: InstanceStorageConfig, location_name: "StorageConfig"))
     DescribeInstanceStorageConfigResponse.struct_class = Types::DescribeInstanceStorageConfigResponse
+
+    DescribeQuickConnectRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DescribeQuickConnectRequest.add_member(:quick_connect_id, Shapes::ShapeRef.new(shape: QuickConnectId, required: true, location: "uri", location_name: "QuickConnectId"))
+    DescribeQuickConnectRequest.struct_class = Types::DescribeQuickConnectRequest
+
+    DescribeQuickConnectResponse.add_member(:quick_connect, Shapes::ShapeRef.new(shape: QuickConnect, location_name: "QuickConnect"))
+    DescribeQuickConnectResponse.struct_class = Types::DescribeQuickConnectResponse
 
     DescribeRoutingProfileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DescribeRoutingProfileRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location: "uri", location_name: "RoutingProfileId"))
@@ -975,6 +1018,16 @@ module Aws::Connect
     ListQueuesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListQueuesResponse.struct_class = Types::ListQueuesResponse
 
+    ListQuickConnectsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListQuickConnectsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListQuickConnectsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListQuickConnectsRequest.add_member(:quick_connect_types, Shapes::ShapeRef.new(shape: QuickConnectTypes, location: "querystring", location_name: "QuickConnectTypes"))
+    ListQuickConnectsRequest.struct_class = Types::ListQuickConnectsRequest
+
+    ListQuickConnectsResponse.add_member(:quick_connect_summary_list, Shapes::ShapeRef.new(shape: QuickConnectSummaryList, location_name: "QuickConnectSummaryList"))
+    ListQuickConnectsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListQuickConnectsResponse.struct_class = Types::ListQuickConnectsResponse
+
     ListRoutingProfileQueuesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListRoutingProfileQueuesRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location: "uri", location_name: "RoutingProfileId"))
     ListRoutingProfileQueuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -1062,6 +1115,9 @@ module Aws::Connect
 
     PhoneNumberCountryCodes.member = Shapes::ShapeRef.new(shape: PhoneNumberCountryCode)
 
+    PhoneNumberQuickConnectConfig.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "PhoneNumber"))
+    PhoneNumberQuickConnectConfig.struct_class = Types::PhoneNumberQuickConnectConfig
+
     PhoneNumberSummary.add_member(:id, Shapes::ShapeRef.new(shape: PhoneNumberId, location_name: "Id"))
     PhoneNumberSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     PhoneNumberSummary.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
@@ -1085,6 +1141,10 @@ module Aws::Connect
 
     PromptSummaryList.member = Shapes::ShapeRef.new(shape: PromptSummary)
 
+    QueueQuickConnectConfig.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location_name: "QueueId"))
+    QueueQuickConnectConfig.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location_name: "ContactFlowId"))
+    QueueQuickConnectConfig.struct_class = Types::QueueQuickConnectConfig
+
     QueueReference.add_member(:id, Shapes::ShapeRef.new(shape: QueueId, location_name: "Id"))
     QueueReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     QueueReference.struct_class = Types::QueueReference
@@ -1100,6 +1160,30 @@ module Aws::Connect
     QueueTypes.member = Shapes::ShapeRef.new(shape: QueueType)
 
     Queues.member = Shapes::ShapeRef.new(shape: QueueId)
+
+    QuickConnect.add_member(:quick_connect_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "QuickConnectARN"))
+    QuickConnect.add_member(:quick_connect_id, Shapes::ShapeRef.new(shape: QuickConnectId, location_name: "QuickConnectId"))
+    QuickConnect.add_member(:name, Shapes::ShapeRef.new(shape: QuickConnectName, location_name: "Name"))
+    QuickConnect.add_member(:description, Shapes::ShapeRef.new(shape: QuickConnectDescription, location_name: "Description"))
+    QuickConnect.add_member(:quick_connect_config, Shapes::ShapeRef.new(shape: QuickConnectConfig, location_name: "QuickConnectConfig"))
+    QuickConnect.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    QuickConnect.struct_class = Types::QuickConnect
+
+    QuickConnectConfig.add_member(:quick_connect_type, Shapes::ShapeRef.new(shape: QuickConnectType, required: true, location_name: "QuickConnectType"))
+    QuickConnectConfig.add_member(:user_config, Shapes::ShapeRef.new(shape: UserQuickConnectConfig, location_name: "UserConfig"))
+    QuickConnectConfig.add_member(:queue_config, Shapes::ShapeRef.new(shape: QueueQuickConnectConfig, location_name: "QueueConfig"))
+    QuickConnectConfig.add_member(:phone_config, Shapes::ShapeRef.new(shape: PhoneNumberQuickConnectConfig, location_name: "PhoneConfig"))
+    QuickConnectConfig.struct_class = Types::QuickConnectConfig
+
+    QuickConnectSummary.add_member(:id, Shapes::ShapeRef.new(shape: QuickConnectId, location_name: "Id"))
+    QuickConnectSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    QuickConnectSummary.add_member(:name, Shapes::ShapeRef.new(shape: QuickConnectName, location_name: "Name"))
+    QuickConnectSummary.add_member(:quick_connect_type, Shapes::ShapeRef.new(shape: QuickConnectType, location_name: "QuickConnectType"))
+    QuickConnectSummary.struct_class = Types::QuickConnectSummary
+
+    QuickConnectSummaryList.member = Shapes::ShapeRef.new(shape: QuickConnectSummary)
+
+    QuickConnectTypes.member = Shapes::ShapeRef.new(shape: QuickConnectType)
 
     Reference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, required: true, location_name: "Value"))
     Reference.add_member(:type, Shapes::ShapeRef.new(shape: ReferenceType, required: true, location_name: "Type"))
@@ -1302,6 +1386,17 @@ module Aws::Connect
     UpdateInstanceStorageConfigRequest.add_member(:storage_config, Shapes::ShapeRef.new(shape: InstanceStorageConfig, required: true, location_name: "StorageConfig"))
     UpdateInstanceStorageConfigRequest.struct_class = Types::UpdateInstanceStorageConfigRequest
 
+    UpdateQuickConnectConfigRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateQuickConnectConfigRequest.add_member(:quick_connect_id, Shapes::ShapeRef.new(shape: QuickConnectId, required: true, location: "uri", location_name: "QuickConnectId"))
+    UpdateQuickConnectConfigRequest.add_member(:quick_connect_config, Shapes::ShapeRef.new(shape: QuickConnectConfig, required: true, location_name: "QuickConnectConfig"))
+    UpdateQuickConnectConfigRequest.struct_class = Types::UpdateQuickConnectConfigRequest
+
+    UpdateQuickConnectNameRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateQuickConnectNameRequest.add_member(:quick_connect_id, Shapes::ShapeRef.new(shape: QuickConnectId, required: true, location: "uri", location_name: "QuickConnectId"))
+    UpdateQuickConnectNameRequest.add_member(:name, Shapes::ShapeRef.new(shape: QuickConnectName, location_name: "Name"))
+    UpdateQuickConnectNameRequest.add_member(:description, Shapes::ShapeRef.new(shape: QuickConnectDescription, location_name: "Description"))
+    UpdateQuickConnectNameRequest.struct_class = Types::UpdateQuickConnectNameRequest
+
     UpdateRoutingProfileConcurrencyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateRoutingProfileConcurrencyRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location: "uri", location_name: "RoutingProfileId"))
     UpdateRoutingProfileConcurrencyRequest.add_member(:media_concurrencies, Shapes::ShapeRef.new(shape: MediaConcurrencies, required: true, location_name: "MediaConcurrencies"))
@@ -1389,6 +1484,10 @@ module Aws::Connect
     UserPhoneConfig.add_member(:after_contact_work_time_limit, Shapes::ShapeRef.new(shape: AfterContactWorkTimeLimit, location_name: "AfterContactWorkTimeLimit"))
     UserPhoneConfig.add_member(:desk_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DeskPhoneNumber"))
     UserPhoneConfig.struct_class = Types::UserPhoneConfig
+
+    UserQuickConnectConfig.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
+    UserQuickConnectConfig.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location_name: "ContactFlowId"))
+    UserQuickConnectConfig.struct_class = Types::UserQuickConnectConfig
 
     UserSummary.add_member(:id, Shapes::ShapeRef.new(shape: UserId, location_name: "Id"))
     UserSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
@@ -1548,6 +1647,21 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:create_quick_connect, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateQuickConnect"
+        o.http_method = "PUT"
+        o.http_request_uri = "/quick-connects/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: CreateQuickConnectRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateQuickConnectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:create_routing_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateRoutingProfile"
         o.http_method = "PUT"
@@ -1627,6 +1741,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_quick_connect, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteQuickConnect"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/quick-connects/{InstanceId}/{QuickConnectId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteQuickConnectRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:delete_use_case, Seahorse::Model::Operation.new.tap do |o|
@@ -1717,6 +1844,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_quick_connect, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeQuickConnect"
+        o.http_method = "GET"
+        o.http_request_uri = "/quick-connects/{InstanceId}/{QuickConnectId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeQuickConnectRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeQuickConnectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:describe_routing_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -2136,6 +2276,25 @@ module Aws::Connect
         )
       end)
 
+      api.add_operation(:list_quick_connects, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListQuickConnects"
+        o.http_method = "GET"
+        o.http_request_uri = "/quick-connects/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: ListQuickConnectsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListQuickConnectsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_routing_profile_queues, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListRoutingProfileQueues"
         o.http_method = "GET"
@@ -2471,6 +2630,32 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_quick_connect_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateQuickConnectConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/quick-connects/{InstanceId}/{QuickConnectId}/config"
+        o.input = Shapes::ShapeRef.new(shape: UpdateQuickConnectConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_quick_connect_name, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateQuickConnectName"
+        o.http_method = "POST"
+        o.http_request_uri = "/quick-connects/{InstanceId}/{QuickConnectId}/name"
+        o.input = Shapes::ShapeRef.new(shape: UpdateQuickConnectNameRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:update_routing_profile_concurrency, Seahorse::Model::Operation.new.tap do |o|

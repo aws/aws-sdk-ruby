@@ -329,6 +329,42 @@ module Aws::Route53
 
     # @!group API Operations
 
+    # Activates a key signing key (KSK) so that it can be used for signing
+    # by DNSSEC. This operation changes the KSK status to `ACTIVE`.
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   A unique string used to identify a hosted zone.
+    #
+    # @option params [required, String] :name
+    #   An alphanumeric string used to identify a key signing key (KSK).
+    #
+    # @return [Types::ActivateKeySigningKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ActivateKeySigningKeyResponse#change_info #change_info} => Types::ChangeInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.activate_key_signing_key({
+    #     hosted_zone_id: "ResourceId", # required
+    #     name: "SigningKeyName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.change_info.id #=> String
+    #   resp.change_info.status #=> String, one of "PENDING", "INSYNC"
+    #   resp.change_info.submitted_at #=> Time
+    #   resp.change_info.comment #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ActivateKeySigningKey AWS API Documentation
+    #
+    # @overload activate_key_signing_key(params = {})
+    # @param [Hash] params ({})
+    def activate_key_signing_key(params = {}, options = {})
+      req = build_request(:activate_key_signing_key, params)
+      req.send_request(options)
+    end
+
     # Associates an Amazon VPC with a private hosted zone.
     #
     # To perform the association, the VPC and the private hosted zone must
@@ -1118,7 +1154,7 @@ module Aws::Route53
     #           action: "CREATE", # required, accepts CREATE, DELETE, UPSERT
     #           resource_record_set: { # required
     #             name: "DNSName", # required
-    #             type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
+    #             type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #             set_identifier: "ResourceRecordSetIdentifier",
     #             weight: 1,
     #             region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1, af-south-1, eu-south-1
@@ -1553,6 +1589,118 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # Creates a new key signing key (KSK) associated with a hosted zone. You
+    # can only have two KSKs per hosted zone.
+    #
+    # @option params [required, String] :caller_reference
+    #   A unique string that identifies the request.
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   The unique string (ID) used to identify a hosted zone.
+    #
+    # @option params [required, String] :key_management_service_arn
+    #   The Amazon resource name (ARN) for a customer managed key (CMK) in AWS
+    #   Key Management Service (KMS). The `KeyManagementServiceArn` must be
+    #   unique for each key signing key (KSK) in a single hosted zone. To see
+    #   an example of `KeyManagementServiceArn` that grants the correct
+    #   permissions for DNSSEC, scroll down to **Example**.
+    #
+    #   You must configure the CMK as follows:
+    #
+    #   Status
+    #
+    #   : Enabled
+    #
+    #   Key spec
+    #
+    #   : ECC\_NIST\_P256
+    #
+    #   Key usage
+    #
+    #   : Sign and verify
+    #
+    #   Key policy
+    #
+    #   : The key policy must give permission for the following actions:
+    #
+    #     * DescribeKey
+    #
+    #     * GetPublicKey
+    #
+    #     * Sign
+    #
+    #     The key policy must also include the Amazon Route 53 service in the
+    #     principal for your account. Specify the following:
+    #
+    #     * `"Service": "api-service.dnssec.route53.aws.internal"`
+    #
+    #     ^
+    #
+    #   For more information about working with CMK in KMS, see [AWS Key
+    #   Management Service concepts][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html
+    #
+    # @option params [required, String] :name
+    #   An alphanumeric string used to identify a key signing key (KSK).
+    #   `Name` must be unique for each key signing key in the same hosted
+    #   zone.
+    #
+    # @option params [required, String] :status
+    #   A string specifying the initial status of the key signing key (KSK).
+    #   You can set the value to `ACTIVE` or `INACTIVE`.
+    #
+    # @return [Types::CreateKeySigningKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateKeySigningKeyResponse#change_info #change_info} => Types::ChangeInfo
+    #   * {Types::CreateKeySigningKeyResponse#key_signing_key #key_signing_key} => Types::KeySigningKey
+    #   * {Types::CreateKeySigningKeyResponse#location #location} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_key_signing_key({
+    #     caller_reference: "Nonce", # required
+    #     hosted_zone_id: "ResourceId", # required
+    #     key_management_service_arn: "SigningKeyString", # required
+    #     name: "SigningKeyName", # required
+    #     status: "SigningKeyStatus", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.change_info.id #=> String
+    #   resp.change_info.status #=> String, one of "PENDING", "INSYNC"
+    #   resp.change_info.submitted_at #=> Time
+    #   resp.change_info.comment #=> String
+    #   resp.key_signing_key.name #=> String
+    #   resp.key_signing_key.kms_arn #=> String
+    #   resp.key_signing_key.flag #=> Integer
+    #   resp.key_signing_key.signing_algorithm_mnemonic #=> String
+    #   resp.key_signing_key.signing_algorithm_type #=> Integer
+    #   resp.key_signing_key.digest_algorithm_mnemonic #=> String
+    #   resp.key_signing_key.digest_algorithm_type #=> Integer
+    #   resp.key_signing_key.key_tag #=> Integer
+    #   resp.key_signing_key.digest_value #=> String
+    #   resp.key_signing_key.public_key #=> String
+    #   resp.key_signing_key.ds_record #=> String
+    #   resp.key_signing_key.dnskey_record #=> String
+    #   resp.key_signing_key.status #=> String
+    #   resp.key_signing_key.status_message #=> String
+    #   resp.key_signing_key.created_date #=> Time
+    #   resp.key_signing_key.last_modified_date #=> Time
+    #   resp.location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateKeySigningKey AWS API Documentation
+    #
+    # @overload create_key_signing_key(params = {})
+    # @param [Hash] params ({})
+    def create_key_signing_key(params = {}, options = {})
+      req = build_request(:create_key_signing_key, params)
+      req.send_request(options)
+    end
+
     # Creates a configuration for DNS query logging. After you create a
     # query logging configuration, Amazon Route 53 begins to publish log
     # data to an Amazon CloudWatch Logs log group.
@@ -1862,7 +2010,7 @@ module Aws::Route53
     #   resp.traffic_policy.id #=> String
     #   resp.traffic_policy.version #=> Integer
     #   resp.traffic_policy.name #=> String
-    #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #   resp.traffic_policy.document #=> String
     #   resp.traffic_policy.comment #=> String
     #   resp.location #=> String
@@ -1932,7 +2080,7 @@ module Aws::Route53
     #   resp.traffic_policy_instance.message #=> String
     #   resp.traffic_policy_instance.traffic_policy_id #=> String
     #   resp.traffic_policy_instance.traffic_policy_version #=> Integer
-    #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #   resp.location #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyInstance AWS API Documentation
@@ -1989,7 +2137,7 @@ module Aws::Route53
     #   resp.traffic_policy.id #=> String
     #   resp.traffic_policy.version #=> Integer
     #   resp.traffic_policy.name #=> String
-    #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #   resp.traffic_policy.document #=> String
     #   resp.traffic_policy.comment #=> String
     #   resp.location #=> String
@@ -2052,6 +2200,43 @@ module Aws::Route53
     # @param [Hash] params ({})
     def create_vpc_association_authorization(params = {}, options = {})
       req = build_request(:create_vpc_association_authorization, params)
+      req.send_request(options)
+    end
+
+    # Deactivates a key signing key (KSK) so that it will not be used for
+    # signing by DNSSEC. This operation changes the KSK status to
+    # `INACTIVE`.
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   A unique string used to identify a hosted zone.
+    #
+    # @option params [required, String] :name
+    #   An alphanumeric string used to identify a key signing key (KSK).
+    #
+    # @return [Types::DeactivateKeySigningKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeactivateKeySigningKeyResponse#change_info #change_info} => Types::ChangeInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deactivate_key_signing_key({
+    #     hosted_zone_id: "ResourceId", # required
+    #     name: "SigningKeyName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.change_info.id #=> String
+    #   resp.change_info.status #=> String, one of "PENDING", "INSYNC"
+    #   resp.change_info.submitted_at #=> Time
+    #   resp.change_info.comment #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeactivateKeySigningKey AWS API Documentation
+    #
+    # @overload deactivate_key_signing_key(params = {})
+    # @param [Hash] params ({})
+    def deactivate_key_signing_key(params = {}, options = {})
+      req = build_request(:deactivate_key_signing_key, params)
       req.send_request(options)
     end
 
@@ -2179,6 +2364,43 @@ module Aws::Route53
     # @param [Hash] params ({})
     def delete_hosted_zone(params = {}, options = {})
       req = build_request(:delete_hosted_zone, params)
+      req.send_request(options)
+    end
+
+    # Deletes a key signing key (KSK). Before you can delete a KSK, you must
+    # deactivate it. The KSK must be deactived before you can delete it
+    # regardless of whether the hosted zone is enabled for DNSSEC signing.
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   A unique string used to identify a hosted zone.
+    #
+    # @option params [required, String] :name
+    #   An alphanumeric string used to identify a key signing key (KSK).
+    #
+    # @return [Types::DeleteKeySigningKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteKeySigningKeyResponse#change_info #change_info} => Types::ChangeInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_key_signing_key({
+    #     hosted_zone_id: "ResourceId", # required
+    #     name: "SigningKeyName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.change_info.id #=> String
+    #   resp.change_info.status #=> String, one of "PENDING", "INSYNC"
+    #   resp.change_info.submitted_at #=> Time
+    #   resp.change_info.comment #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteKeySigningKey AWS API Documentation
+    #
+    # @overload delete_key_signing_key(params = {})
+    # @param [Hash] params ({})
+    def delete_key_signing_key(params = {}, options = {})
+      req = build_request(:delete_key_signing_key, params)
       req.send_request(options)
     end
 
@@ -2367,6 +2589,39 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # Disables DNSSEC signing in a specific hosted zone. This action does
+    # not deactivate any key signing keys (KSKs) that are active in the
+    # hosted zone.
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   A unique string used to identify a hosted zone.
+    #
+    # @return [Types::DisableHostedZoneDNSSECResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableHostedZoneDNSSECResponse#change_info #change_info} => Types::ChangeInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_hosted_zone_dnssec({
+    #     hosted_zone_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.change_info.id #=> String
+    #   resp.change_info.status #=> String, one of "PENDING", "INSYNC"
+    #   resp.change_info.submitted_at #=> Time
+    #   resp.change_info.comment #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DisableHostedZoneDNSSEC AWS API Documentation
+    #
+    # @overload disable_hosted_zone_dnssec(params = {})
+    # @param [Hash] params ({})
+    def disable_hosted_zone_dnssec(params = {}, options = {})
+      req = build_request(:disable_hosted_zone_dnssec, params)
+      req.send_request(options)
+    end
+
     # Disassociates an Amazon Virtual Private Cloud (Amazon VPC) from an
     # Amazon Route 53 private hosted zone. Note the following:
     #
@@ -2434,6 +2689,37 @@ module Aws::Route53
     # @param [Hash] params ({})
     def disassociate_vpc_from_hosted_zone(params = {}, options = {})
       req = build_request(:disassociate_vpc_from_hosted_zone, params)
+      req.send_request(options)
+    end
+
+    # Enables DNSSEC signing in a specific hosted zone.
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   A unique string used to identify a hosted zone.
+    #
+    # @return [Types::EnableHostedZoneDNSSECResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableHostedZoneDNSSECResponse#change_info #change_info} => Types::ChangeInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_hosted_zone_dnssec({
+    #     hosted_zone_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.change_info.id #=> String
+    #   resp.change_info.status #=> String, one of "PENDING", "INSYNC"
+    #   resp.change_info.submitted_at #=> Time
+    #   resp.change_info.comment #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/EnableHostedZoneDNSSEC AWS API Documentation
+    #
+    # @overload enable_hosted_zone_dnssec(params = {})
+    # @param [Hash] params ({})
+    def enable_hosted_zone_dnssec(params = {}, options = {})
+      req = build_request(:enable_hosted_zone_dnssec, params)
       req.send_request(options)
     end
 
@@ -2573,6 +2859,55 @@ module Aws::Route53
     # @param [Hash] params ({})
     def get_checker_ip_ranges(params = {}, options = {})
       req = build_request(:get_checker_ip_ranges, params)
+      req.send_request(options)
+    end
+
+    # Returns information about DNSSEC for a specific hosted zone, including
+    # the key signing keys (KSKs) and zone signing keys (ZSKs) in the hosted
+    # zone.
+    #
+    # @option params [required, String] :hosted_zone_id
+    #   A unique string used to identify a hosted zone.
+    #
+    # @return [Types::GetDNSSECResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDNSSECResponse#status #status} => Types::DNSSECStatus
+    #   * {Types::GetDNSSECResponse#key_signing_keys #key_signing_keys} => Array&lt;Types::KeySigningKey&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_dnssec({
+    #     hosted_zone_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.serve_signature #=> String
+    #   resp.status.status_message #=> String
+    #   resp.key_signing_keys #=> Array
+    #   resp.key_signing_keys[0].name #=> String
+    #   resp.key_signing_keys[0].kms_arn #=> String
+    #   resp.key_signing_keys[0].flag #=> Integer
+    #   resp.key_signing_keys[0].signing_algorithm_mnemonic #=> String
+    #   resp.key_signing_keys[0].signing_algorithm_type #=> Integer
+    #   resp.key_signing_keys[0].digest_algorithm_mnemonic #=> String
+    #   resp.key_signing_keys[0].digest_algorithm_type #=> Integer
+    #   resp.key_signing_keys[0].key_tag #=> Integer
+    #   resp.key_signing_keys[0].digest_value #=> String
+    #   resp.key_signing_keys[0].public_key #=> String
+    #   resp.key_signing_keys[0].ds_record #=> String
+    #   resp.key_signing_keys[0].dnskey_record #=> String
+    #   resp.key_signing_keys[0].status #=> String
+    #   resp.key_signing_keys[0].status_message #=> String
+    #   resp.key_signing_keys[0].created_date #=> Time
+    #   resp.key_signing_keys[0].last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetDNSSEC AWS API Documentation
+    #
+    # @overload get_dnssec(params = {})
+    # @param [Hash] params ({})
+    def get_dnssec(params = {}, options = {})
+      req = build_request(:get_dnssec, params)
       req.send_request(options)
     end
 
@@ -3130,7 +3465,7 @@ module Aws::Route53
     #   resp.traffic_policy.id #=> String
     #   resp.traffic_policy.version #=> Integer
     #   resp.traffic_policy.name #=> String
-    #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #   resp.traffic_policy.document #=> String
     #   resp.traffic_policy.comment #=> String
     #
@@ -3182,7 +3517,7 @@ module Aws::Route53
     #   resp.traffic_policy_instance.message #=> String
     #   resp.traffic_policy_instance.traffic_policy_id #=> String
     #   resp.traffic_policy_instance.traffic_policy_version #=> Integer
-    #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstance AWS API Documentation
     #
@@ -3900,7 +4235,7 @@ module Aws::Route53
     #   resp = client.list_resource_record_sets({
     #     hosted_zone_id: "ResourceId", # required
     #     start_record_name: "DNSName",
-    #     start_record_type: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
+    #     start_record_type: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #     start_record_identifier: "ResourceRecordSetIdentifier",
     #     max_items: 1,
     #   })
@@ -3909,7 +4244,7 @@ module Aws::Route53
     #
     #   resp.resource_record_sets #=> Array
     #   resp.resource_record_sets[0].name #=> String
-    #   resp.resource_record_sets[0].type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.resource_record_sets[0].type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #   resp.resource_record_sets[0].set_identifier #=> String
     #   resp.resource_record_sets[0].weight #=> Integer
     #   resp.resource_record_sets[0].region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-north-1", "cn-northwest-1", "ap-east-1", "me-south-1", "ap-south-1", "af-south-1", "eu-south-1"
@@ -3928,7 +4263,7 @@ module Aws::Route53
     #   resp.resource_record_sets[0].traffic_policy_instance_id #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.next_record_name #=> String
-    #   resp.next_record_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.next_record_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #   resp.next_record_identifier #=> String
     #   resp.max_items #=> Integer
     #
@@ -4145,7 +4480,7 @@ module Aws::Route53
     #   resp.traffic_policy_summaries #=> Array
     #   resp.traffic_policy_summaries[0].id #=> String
     #   resp.traffic_policy_summaries[0].name #=> String
-    #   resp.traffic_policy_summaries[0].type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.traffic_policy_summaries[0].type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #   resp.traffic_policy_summaries[0].latest_version #=> Integer
     #   resp.traffic_policy_summaries[0].traffic_policy_count #=> Integer
     #   resp.is_truncated #=> Boolean
@@ -4234,7 +4569,7 @@ module Aws::Route53
     #   resp = client.list_traffic_policy_instances({
     #     hosted_zone_id_marker: "ResourceId",
     #     traffic_policy_instance_name_marker: "DNSName",
-    #     traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
+    #     traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #     max_items: 1,
     #   })
     #
@@ -4249,10 +4584,10 @@ module Aws::Route53
     #   resp.traffic_policy_instances[0].message #=> String
     #   resp.traffic_policy_instances[0].traffic_policy_id #=> String
     #   resp.traffic_policy_instances[0].traffic_policy_version #=> Integer
-    #   resp.traffic_policy_instances[0].traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.traffic_policy_instances[0].traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #   resp.hosted_zone_id_marker #=> String
     #   resp.traffic_policy_instance_name_marker #=> String
-    #   resp.traffic_policy_instance_type_marker #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.traffic_policy_instance_type_marker #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #   resp.is_truncated #=> Boolean
     #   resp.max_items #=> Integer
     #
@@ -4331,7 +4666,7 @@ module Aws::Route53
     #   resp = client.list_traffic_policy_instances_by_hosted_zone({
     #     hosted_zone_id: "ResourceId", # required
     #     traffic_policy_instance_name_marker: "DNSName",
-    #     traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
+    #     traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #     max_items: 1,
     #   })
     #
@@ -4346,9 +4681,9 @@ module Aws::Route53
     #   resp.traffic_policy_instances[0].message #=> String
     #   resp.traffic_policy_instances[0].traffic_policy_id #=> String
     #   resp.traffic_policy_instances[0].traffic_policy_version #=> Integer
-    #   resp.traffic_policy_instances[0].traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.traffic_policy_instances[0].traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #   resp.traffic_policy_instance_name_marker #=> String
-    #   resp.traffic_policy_instance_type_marker #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.traffic_policy_instance_type_marker #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #   resp.is_truncated #=> Boolean
     #   resp.max_items #=> Integer
     #
@@ -4453,7 +4788,7 @@ module Aws::Route53
     #     traffic_policy_version: 1, # required
     #     hosted_zone_id_marker: "ResourceId",
     #     traffic_policy_instance_name_marker: "DNSName",
-    #     traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
+    #     traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #     max_items: 1,
     #   })
     #
@@ -4468,10 +4803,10 @@ module Aws::Route53
     #   resp.traffic_policy_instances[0].message #=> String
     #   resp.traffic_policy_instances[0].traffic_policy_id #=> String
     #   resp.traffic_policy_instances[0].traffic_policy_version #=> Integer
-    #   resp.traffic_policy_instances[0].traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.traffic_policy_instances[0].traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #   resp.hosted_zone_id_marker #=> String
     #   resp.traffic_policy_instance_name_marker #=> String
-    #   resp.traffic_policy_instance_type_marker #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.traffic_policy_instance_type_marker #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #   resp.is_truncated #=> Boolean
     #   resp.max_items #=> Integer
     #
@@ -4534,7 +4869,7 @@ module Aws::Route53
     #   resp.traffic_policies[0].id #=> String
     #   resp.traffic_policies[0].version #=> Integer
     #   resp.traffic_policies[0].name #=> String
-    #   resp.traffic_policies[0].type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.traffic_policies[0].type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #   resp.traffic_policies[0].document #=> String
     #   resp.traffic_policies[0].comment #=> String
     #   resp.is_truncated #=> Boolean
@@ -4661,7 +4996,7 @@ module Aws::Route53
     #   resp = client.test_dns_answer({
     #     hosted_zone_id: "ResourceId", # required
     #     record_name: "DNSName", # required
-    #     record_type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA
+    #     record_type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #     resolver_ip: "IPAddress",
     #     edns0_client_subnet_ip: "IPAddress",
     #     edns0_client_subnet_mask: "SubnetMask",
@@ -4671,7 +5006,7 @@ module Aws::Route53
     #
     #   resp.nameserver #=> String
     #   resp.record_name #=> String
-    #   resp.record_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.record_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #   resp.record_data #=> Array
     #   resp.record_data[0] #=> String
     #   resp.response_code #=> String
@@ -5167,7 +5502,7 @@ module Aws::Route53
     #   resp.traffic_policy.id #=> String
     #   resp.traffic_policy.version #=> Integer
     #   resp.traffic_policy.name #=> String
-    #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #   resp.traffic_policy.document #=> String
     #   resp.traffic_policy.comment #=> String
     #
@@ -5240,7 +5575,7 @@ module Aws::Route53
     #   resp.traffic_policy_instance.message #=> String
     #   resp.traffic_policy_instance.traffic_policy_id #=> String
     #   resp.traffic_policy_instance.traffic_policy_version #=> Integer
-    #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA"
+    #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyInstance AWS API Documentation
     #
@@ -5264,7 +5599,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

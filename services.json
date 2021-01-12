@@ -253,7 +253,10 @@
     ]
   },
   "DynamoDBStreams": {
-    "models": "streams.dynamodb/2012-08-10"
+    "models": "streams.dynamodb/2012-08-10",
+    "addPlugins": [
+      "Aws::DynamoDBStreams::Plugins::SimpleAttributes"
+    ]
   },
   "EBS": {
     "models": "ebs/2019-11-02"
@@ -487,6 +490,9 @@
   "Lightsail": {
     "models": "lightsail/2016-11-28"
   },
+  "LocationService": {
+    "models": "location/2020-11-19"
+  },
   "LookoutforVision": {
     "models": "lookoutvision/2020-11-20"
   },
@@ -670,7 +676,7 @@
   "S3": {
     "models": "s3/2006-03-01",
     "dependencies": {
-      "aws-sdk-kms": "~> 1.26",
+      "aws-sdk-kms": "~> 1",
       "aws-sigv4": "~> 1.1"
     },
     "removePlugins": [
@@ -851,6 +857,9 @@
   },
   "WAFV2": {
     "models": "wafv2/2019-07-29"
+  },
+  "WellArchitected": {
+    "models": "wellarchitected/2020-03-31"
   },
   "WorkDocs": {
     "models": "workdocs/2016-05-01"

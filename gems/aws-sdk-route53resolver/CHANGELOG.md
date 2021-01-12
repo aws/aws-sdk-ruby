@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2020-12-17)
+------------------
+
+* Feature - Route 53 Resolver adds support for enabling resolver DNSSEC validation in virtual private cloud (VPC).
+
 1.21.0 (2020-09-30)
 ------------------
 

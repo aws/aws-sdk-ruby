@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2020-12-21)
+------------------
+
+* Feature - Adds "TimingInformation" to all SendCommand API results and "IOUsage" to ExecuteStatementResult, FetchPageResult and CommitTransactionResult.
+
 1.9.0 (2020-09-30)
 ------------------
 

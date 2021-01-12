@@ -790,17 +790,42 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[1-64\].
     #
     # @option params [Hash<String,String>] :request_parameters
-    #   A key-value map specifying response parameters that are passed to the
-    #   method response from the backend. The key is a method response header
-    #   parameter name and the mapped value is an integration response header
-    #   value, a static value enclosed within a pair of single quotes, or a
-    #   JSON expression from the integration response body. The mapping key
-    #   must match the pattern of method.response.header.\\\{name\\}, where
-    #   name is a valid and unique header name. The mapped non-static value
-    #   must match the pattern of integration.response.header.\\\{name\\} or
-    #   integration.response.body.\\\{JSON-expression\\}, where name is a
-    #   valid and unique response header name and JSON-expression is a valid
-    #   JSON expression without the $ prefix.
+    #   For WebSocket APIs, a key-value map specifying request parameters that
+    #   are passed from the method request to the backend. The key is an
+    #   integration request parameter name and the associated value is a
+    #   method request parameter value or static value that must be enclosed
+    #   within single quotes and pre-encoded as required by the backend. The
+    #   method request parameter value must match the pattern of
+    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
+    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
+    #   must be a valid and unique method request parameter name.
+    #
+    #   For HTTP API integrations with a specified integrationSubtype, request
+    #   parameters are a key-value map specifying parameters that are passed
+    #   to AWS\_PROXY integrations. You can provide static values, or map
+    #   request data, stage variables, or context variables that are evaluated
+    #   at runtime. To learn more, see [Working with AWS service integrations
+    #   for HTTP APIs][1].
+    #
+    #   For HTTP API integrations without a specified integrationSubtype
+    #   request parameters are a key-value map specifying how to transform
+    #   HTTP requests before sending them to the backend. The key should
+    #   follow the pattern
+    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   where action can be append, overwrite or remove. For values, you can
+    #   provide static values, or map request data, stage variables, or
+    #   context variables that are evaluated at runtime. To learn more, see
+    #   [Transforming API requests and responses][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html
+    #   [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html
+    #
+    # @option params [Hash<String,Hash>] :response_parameters
+    #   Supported only for HTTP APIs. You use response parameters to transform
+    #   the HTTP response from a backend integration before returning the
+    #   response to clients.
     #
     # @option params [Hash<String,String>] :request_templates
     #   A mapping of identifier keys to templates. The value is an actual
@@ -840,6 +865,7 @@ module Aws::ApiGatewayV2
     #   * {Types::CreateIntegrationResult#passthrough_behavior #passthrough_behavior} => String
     #   * {Types::CreateIntegrationResult#payload_format_version #payload_format_version} => String
     #   * {Types::CreateIntegrationResult#request_parameters #request_parameters} => Hash&lt;String,String&gt;
+    #   * {Types::CreateIntegrationResult#response_parameters #response_parameters} => Hash&lt;String,Hash&lt;String,String&gt;&gt;
     #   * {Types::CreateIntegrationResult#request_templates #request_templates} => Hash&lt;String,String&gt;
     #   * {Types::CreateIntegrationResult#template_selection_expression #template_selection_expression} => String
     #   * {Types::CreateIntegrationResult#timeout_in_millis #timeout_in_millis} => Integer
@@ -862,6 +888,11 @@ module Aws::ApiGatewayV2
     #     payload_format_version: "StringWithLengthBetween1And64",
     #     request_parameters: {
     #       "__string" => "StringWithLengthBetween1And512",
+    #     },
+    #     response_parameters: {
+    #       "__string" => {
+    #         "__string" => "StringWithLengthBetween1And512",
+    #       },
     #     },
     #     request_templates: {
     #       "__string" => "StringWithLengthBetween0And32K",
@@ -891,6 +922,9 @@ module Aws::ApiGatewayV2
     #   resp.payload_format_version #=> String
     #   resp.request_parameters #=> Hash
     #   resp.request_parameters["__string"] #=> String
+    #   resp.response_parameters #=> Hash
+    #   resp.response_parameters["__string"] #=> Hash
+    #   resp.response_parameters["__string"]["__string"] #=> String
     #   resp.request_templates #=> Hash
     #   resp.request_templates["__string"] #=> String
     #   resp.template_selection_expression #=> String
@@ -925,17 +959,37 @@ module Aws::ApiGatewayV2
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [Hash<String,String>] :response_parameters
-    #   A key-value map specifying response parameters that are passed to the
-    #   method response from the backend. The key is a method response header
-    #   parameter name and the mapped value is an integration response header
-    #   value, a static value enclosed within a pair of single quotes, or a
-    #   JSON expression from the integration response body. The mapping key
-    #   must match the pattern of method.response.header.\\\{name\\}, where
-    #   name is a valid and unique header name. The mapped non-static value
-    #   must match the pattern of integration.response.header.\\\{name\\} or
-    #   integration.response.body.\\\{JSON-expression\\}, where name is a
-    #   valid and unique response header name and JSON-expression is a valid
-    #   JSON expression without the $ prefix.
+    #   For WebSocket APIs, a key-value map specifying request parameters that
+    #   are passed from the method request to the backend. The key is an
+    #   integration request parameter name and the associated value is a
+    #   method request parameter value or static value that must be enclosed
+    #   within single quotes and pre-encoded as required by the backend. The
+    #   method request parameter value must match the pattern of
+    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
+    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
+    #   must be a valid and unique method request parameter name.
+    #
+    #   For HTTP API integrations with a specified integrationSubtype, request
+    #   parameters are a key-value map specifying parameters that are passed
+    #   to AWS\_PROXY integrations. You can provide static values, or map
+    #   request data, stage variables, or context variables that are evaluated
+    #   at runtime. To learn more, see [Working with AWS service integrations
+    #   for HTTP APIs][1].
+    #
+    #   For HTTP API integrations without a specified integrationSubtype
+    #   request parameters are a key-value map specifying how to transform
+    #   HTTP requests before sending them to the backend. The key should
+    #   follow the pattern
+    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   where action can be append, overwrite or remove. For values, you can
+    #   provide static values, or map request data, stage variables, or
+    #   context variables that are evaluated at runtime. To learn more, see
+    #   [Transforming API requests and responses][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html
+    #   [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html
     #
     # @option params [Hash<String,String>] :response_templates
     #   A mapping of identifier keys to templates. The value is an actual
@@ -2330,6 +2384,7 @@ module Aws::ApiGatewayV2
     #   * {Types::GetIntegrationResult#passthrough_behavior #passthrough_behavior} => String
     #   * {Types::GetIntegrationResult#payload_format_version #payload_format_version} => String
     #   * {Types::GetIntegrationResult#request_parameters #request_parameters} => Hash&lt;String,String&gt;
+    #   * {Types::GetIntegrationResult#response_parameters #response_parameters} => Hash&lt;String,Hash&lt;String,String&gt;&gt;
     #   * {Types::GetIntegrationResult#request_templates #request_templates} => Hash&lt;String,String&gt;
     #   * {Types::GetIntegrationResult#template_selection_expression #template_selection_expression} => String
     #   * {Types::GetIntegrationResult#timeout_in_millis #timeout_in_millis} => Integer
@@ -2360,6 +2415,9 @@ module Aws::ApiGatewayV2
     #   resp.payload_format_version #=> String
     #   resp.request_parameters #=> Hash
     #   resp.request_parameters["__string"] #=> String
+    #   resp.response_parameters #=> Hash
+    #   resp.response_parameters["__string"] #=> Hash
+    #   resp.response_parameters["__string"]["__string"] #=> String
     #   resp.request_templates #=> Hash
     #   resp.request_templates["__string"] #=> String
     #   resp.template_selection_expression #=> String
@@ -2500,6 +2558,9 @@ module Aws::ApiGatewayV2
     #   resp.items[0].payload_format_version #=> String
     #   resp.items[0].request_parameters #=> Hash
     #   resp.items[0].request_parameters["__string"] #=> String
+    #   resp.items[0].response_parameters #=> Hash
+    #   resp.items[0].response_parameters["__string"] #=> Hash
+    #   resp.items[0].response_parameters["__string"]["__string"] #=> String
     #   resp.items[0].request_templates #=> Hash
     #   resp.items[0].request_templates["__string"] #=> String
     #   resp.items[0].template_selection_expression #=> String
@@ -3693,17 +3754,42 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[1-64\].
     #
     # @option params [Hash<String,String>] :request_parameters
-    #   A key-value map specifying response parameters that are passed to the
-    #   method response from the backend. The key is a method response header
-    #   parameter name and the mapped value is an integration response header
-    #   value, a static value enclosed within a pair of single quotes, or a
-    #   JSON expression from the integration response body. The mapping key
-    #   must match the pattern of method.response.header.\\\{name\\}, where
-    #   name is a valid and unique header name. The mapped non-static value
-    #   must match the pattern of integration.response.header.\\\{name\\} or
-    #   integration.response.body.\\\{JSON-expression\\}, where name is a
-    #   valid and unique response header name and JSON-expression is a valid
-    #   JSON expression without the $ prefix.
+    #   For WebSocket APIs, a key-value map specifying request parameters that
+    #   are passed from the method request to the backend. The key is an
+    #   integration request parameter name and the associated value is a
+    #   method request parameter value or static value that must be enclosed
+    #   within single quotes and pre-encoded as required by the backend. The
+    #   method request parameter value must match the pattern of
+    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
+    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
+    #   must be a valid and unique method request parameter name.
+    #
+    #   For HTTP API integrations with a specified integrationSubtype, request
+    #   parameters are a key-value map specifying parameters that are passed
+    #   to AWS\_PROXY integrations. You can provide static values, or map
+    #   request data, stage variables, or context variables that are evaluated
+    #   at runtime. To learn more, see [Working with AWS service integrations
+    #   for HTTP APIs][1].
+    #
+    #   For HTTP API integrations without a specified integrationSubtype
+    #   request parameters are a key-value map specifying how to transform
+    #   HTTP requests before sending them to the backend. The key should
+    #   follow the pattern
+    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   where action can be append, overwrite or remove. For values, you can
+    #   provide static values, or map request data, stage variables, or
+    #   context variables that are evaluated at runtime. To learn more, see
+    #   [Transforming API requests and responses][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html
+    #   [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html
+    #
+    # @option params [Hash<String,Hash>] :response_parameters
+    #   Supported only for HTTP APIs. You use response parameters to transform
+    #   the HTTP response from a backend integration before returning the
+    #   response to clients.
     #
     # @option params [Hash<String,String>] :request_templates
     #   A mapping of identifier keys to templates. The value is an actual
@@ -3743,6 +3829,7 @@ module Aws::ApiGatewayV2
     #   * {Types::UpdateIntegrationResult#passthrough_behavior #passthrough_behavior} => String
     #   * {Types::UpdateIntegrationResult#payload_format_version #payload_format_version} => String
     #   * {Types::UpdateIntegrationResult#request_parameters #request_parameters} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateIntegrationResult#response_parameters #response_parameters} => Hash&lt;String,Hash&lt;String,String&gt;&gt;
     #   * {Types::UpdateIntegrationResult#request_templates #request_templates} => Hash&lt;String,String&gt;
     #   * {Types::UpdateIntegrationResult#template_selection_expression #template_selection_expression} => String
     #   * {Types::UpdateIntegrationResult#timeout_in_millis #timeout_in_millis} => Integer
@@ -3766,6 +3853,11 @@ module Aws::ApiGatewayV2
     #     payload_format_version: "StringWithLengthBetween1And64",
     #     request_parameters: {
     #       "__string" => "StringWithLengthBetween1And512",
+    #     },
+    #     response_parameters: {
+    #       "__string" => {
+    #         "__string" => "StringWithLengthBetween1And512",
+    #       },
     #     },
     #     request_templates: {
     #       "__string" => "StringWithLengthBetween0And32K",
@@ -3795,6 +3887,9 @@ module Aws::ApiGatewayV2
     #   resp.payload_format_version #=> String
     #   resp.request_parameters #=> Hash
     #   resp.request_parameters["__string"] #=> String
+    #   resp.response_parameters #=> Hash
+    #   resp.response_parameters["__string"] #=> Hash
+    #   resp.response_parameters["__string"]["__string"] #=> String
     #   resp.request_templates #=> Hash
     #   resp.request_templates["__string"] #=> String
     #   resp.template_selection_expression #=> String
@@ -3831,17 +3926,37 @@ module Aws::ApiGatewayV2
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [Hash<String,String>] :response_parameters
-    #   A key-value map specifying response parameters that are passed to the
-    #   method response from the backend. The key is a method response header
-    #   parameter name and the mapped value is an integration response header
-    #   value, a static value enclosed within a pair of single quotes, or a
-    #   JSON expression from the integration response body. The mapping key
-    #   must match the pattern of method.response.header.\\\{name\\}, where
-    #   name is a valid and unique header name. The mapped non-static value
-    #   must match the pattern of integration.response.header.\\\{name\\} or
-    #   integration.response.body.\\\{JSON-expression\\}, where name is a
-    #   valid and unique response header name and JSON-expression is a valid
-    #   JSON expression without the $ prefix.
+    #   For WebSocket APIs, a key-value map specifying request parameters that
+    #   are passed from the method request to the backend. The key is an
+    #   integration request parameter name and the associated value is a
+    #   method request parameter value or static value that must be enclosed
+    #   within single quotes and pre-encoded as required by the backend. The
+    #   method request parameter value must match the pattern of
+    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
+    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
+    #   must be a valid and unique method request parameter name.
+    #
+    #   For HTTP API integrations with a specified integrationSubtype, request
+    #   parameters are a key-value map specifying parameters that are passed
+    #   to AWS\_PROXY integrations. You can provide static values, or map
+    #   request data, stage variables, or context variables that are evaluated
+    #   at runtime. To learn more, see [Working with AWS service integrations
+    #   for HTTP APIs][1].
+    #
+    #   For HTTP API integrations without a specified integrationSubtype
+    #   request parameters are a key-value map specifying how to transform
+    #   HTTP requests before sending them to the backend. The key should
+    #   follow the pattern
+    #   &lt;action&gt;\:&lt;header\|querystring\|path&gt;.&lt;location&gt;
+    #   where action can be append, overwrite or remove. For values, you can
+    #   provide static values, or map request data, stage variables, or
+    #   context variables that are evaluated at runtime. To learn more, see
+    #   [Transforming API requests and responses][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html
+    #   [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html
     #
     # @option params [Hash<String,String>] :response_templates
     #   A mapping of identifier keys to templates. The value is an actual
@@ -4336,7 +4451,7 @@ module Aws::ApiGatewayV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigatewayv2'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

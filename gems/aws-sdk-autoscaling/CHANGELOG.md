@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-01-06)
+------------------
+
+* Feature - This update increases the number of instance types that can be added to the overrides within an mixed instances group configuration.
+
 1.52.0 (2020-12-11)
 ------------------
 

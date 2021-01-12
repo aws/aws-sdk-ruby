@@ -601,6 +601,81 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateQuickConnectRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         name: "QuickConnectName", # required
+    #         description: "QuickConnectDescription",
+    #         quick_connect_config: { # required
+    #           quick_connect_type: "USER", # required, accepts USER, QUEUE, PHONE_NUMBER
+    #           user_config: {
+    #             user_id: "UserId", # required
+    #             contact_flow_id: "ContactFlowId", # required
+    #           },
+    #           queue_config: {
+    #             queue_id: "QueueId", # required
+    #             contact_flow_id: "ContactFlowId", # required
+    #           },
+    #           phone_config: {
+    #             phone_number: "PhoneNumber", # required
+    #           },
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the quick connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the quick connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_connect_config
+    #   Configuration settings for the quick connect.
+    #   @return [Types::QuickConnectConfig]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateQuickConnectRequest AWS API Documentation
+    #
+    class CreateQuickConnectRequest < Struct.new(
+      :instance_id,
+      :name,
+      :description,
+      :quick_connect_config,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] quick_connect_arn
+    #   The Amazon Resource Name (ARN) for the quick connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_connect_id
+    #   The identifier for the quick connect.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateQuickConnectResponse AWS API Documentation
+    #
+    class CreateQuickConnectResponse < Struct.new(
+      :quick_connect_arn,
+      :quick_connect_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateRoutingProfileRequest
     #   data as a hash:
     #
@@ -1057,6 +1132,31 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteQuickConnectRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         quick_connect_id: "QuickConnectId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_connect_id
+    #   The identifier for the quick connect.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteQuickConnectRequest AWS API Documentation
+    #
+    class DeleteQuickConnectRequest < Struct.new(
+      :instance_id,
+      :quick_connect_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteUseCaseRequest
     #   data as a hash:
     #
@@ -1283,6 +1383,43 @@ module Aws::Connect
     #
     class DescribeInstanceStorageConfigResponse < Struct.new(
       :storage_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeQuickConnectRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         quick_connect_id: "QuickConnectId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_connect_id
+    #   The identifier for the quick connect.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeQuickConnectRequest AWS API Documentation
+    #
+    class DescribeQuickConnectRequest < Struct.new(
+      :instance_id,
+      :quick_connect_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] quick_connect
+    #   Information about the quick connect.
+    #   @return [Types::QuickConnect]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeQuickConnectResponse AWS API Documentation
+    #
+    class DescribeQuickConnectResponse < Struct.new(
+      :quick_connect)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3669,6 +3806,66 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListQuickConnectsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         quick_connect_types: ["USER"], # accepts USER, QUEUE, PHONE_NUMBER
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximimum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quick_connect_types
+    #   The type of quick connect. In the Amazon Connect console, when you
+    #   create a quick connect, you are prompted to assign one of the
+    #   following types: Agent (USER), External (PHONE\_NUMBER), or Queue
+    #   (QUEUE).
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQuickConnectsRequest AWS API Documentation
+    #
+    class ListQuickConnectsRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :quick_connect_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] quick_connect_summary_list
+    #   Information about the quick connects.
+    #   @return [Array<Types::QuickConnectSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQuickConnectsResponse AWS API Documentation
+    #
+    class ListQuickConnectsResponse < Struct.new(
+      :quick_connect_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListRoutingProfileQueuesRequest
     #   data as a hash:
     #
@@ -4137,6 +4334,27 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Contains information about a phone number for a quick connect.
+    #
+    # @note When making an API call, you may pass PhoneNumberQuickConnectConfig
+    #   data as a hash:
+    #
+    #       {
+    #         phone_number: "PhoneNumber", # required
+    #       }
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number in E.164 format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PhoneNumberQuickConnectConfig AWS API Documentation
+    #
+    class PhoneNumberQuickConnectConfig < Struct.new(
+      :phone_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains summary information about a phone number for a contact
     # center.
     #
@@ -4210,6 +4428,34 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Contains information about a queue for a quick connect. The contact
+    # flow must be of type Transfer to Queue.
+    #
+    # @note When making an API call, you may pass QueueQuickConnectConfig
+    #   data as a hash:
+    #
+    #       {
+    #         queue_id: "QueueId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #       }
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QueueQuickConnectConfig AWS API Documentation
+    #
+    class QueueQuickConnectConfig < Struct.new(
+      :queue_id,
+      :contact_flow_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a queue resource for which metrics are
     # returned.
     #
@@ -4255,6 +4501,130 @@ module Aws::Connect
       :arn,
       :name,
       :queue_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a quick connect.
+    #
+    # @!attribute [rw] quick_connect_arn
+    #   The Amazon Resource Name (ARN) of the quick connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_connect_id
+    #   The identifier for the quick connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the quick connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_connect_config
+    #   Contains information about the quick connect.
+    #   @return [Types::QuickConnectConfig]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QuickConnect AWS API Documentation
+    #
+    class QuickConnect < Struct.new(
+      :quick_connect_arn,
+      :quick_connect_id,
+      :name,
+      :description,
+      :quick_connect_config,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration settings for a quick connect.
+    #
+    # @note When making an API call, you may pass QuickConnectConfig
+    #   data as a hash:
+    #
+    #       {
+    #         quick_connect_type: "USER", # required, accepts USER, QUEUE, PHONE_NUMBER
+    #         user_config: {
+    #           user_id: "UserId", # required
+    #           contact_flow_id: "ContactFlowId", # required
+    #         },
+    #         queue_config: {
+    #           queue_id: "QueueId", # required
+    #           contact_flow_id: "ContactFlowId", # required
+    #         },
+    #         phone_config: {
+    #           phone_number: "PhoneNumber", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] quick_connect_type
+    #   The type of quick connect. In the Amazon Connect console, when you
+    #   create a quick connect, you are prompted to assign one of the
+    #   following types: Agent (USER), External (PHONE\_NUMBER), or Queue
+    #   (QUEUE).
+    #   @return [String]
+    #
+    # @!attribute [rw] user_config
+    #   The user configuration. This is required only if QuickConnectType is
+    #   USER.
+    #   @return [Types::UserQuickConnectConfig]
+    #
+    # @!attribute [rw] queue_config
+    #   The queue configuration. This is required only if QuickConnectType
+    #   is QUEUE.
+    #   @return [Types::QueueQuickConnectConfig]
+    #
+    # @!attribute [rw] phone_config
+    #   The phone configuration. This is required only if QuickConnectType
+    #   is PHONE\_NUMBER.
+    #   @return [Types::PhoneNumberQuickConnectConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QuickConnectConfig AWS API Documentation
+    #
+    class QuickConnectConfig < Struct.new(
+      :quick_connect_type,
+      :user_config,
+      :queue_config,
+      :phone_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a quick connect.
+    #
+    # @!attribute [rw] id
+    #   The identifier for the quick connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_connect_type
+    #   The type of quick connect. In the Amazon Connect console, when you
+    #   create a quick connect, you are prompted to assign one of the
+    #   following types: Agent (USER), External (PHONE\_NUMBER), or Queue
+    #   (QUEUE).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QuickConnectSummary AWS API Documentation
+    #
+    class QuickConnectSummary < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :quick_connect_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5420,6 +5790,87 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateQuickConnectConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         quick_connect_id: "QuickConnectId", # required
+    #         quick_connect_config: { # required
+    #           quick_connect_type: "USER", # required, accepts USER, QUEUE, PHONE_NUMBER
+    #           user_config: {
+    #             user_id: "UserId", # required
+    #             contact_flow_id: "ContactFlowId", # required
+    #           },
+    #           queue_config: {
+    #             queue_id: "QueueId", # required
+    #             contact_flow_id: "ContactFlowId", # required
+    #           },
+    #           phone_config: {
+    #             phone_number: "PhoneNumber", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_connect_id
+    #   The identifier for the quick connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_connect_config
+    #   Information about the configuration settings for the quick connect.
+    #   @return [Types::QuickConnectConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQuickConnectConfigRequest AWS API Documentation
+    #
+    class UpdateQuickConnectConfigRequest < Struct.new(
+      :instance_id,
+      :quick_connect_id,
+      :quick_connect_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateQuickConnectNameRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         quick_connect_id: "QuickConnectId", # required
+    #         name: "QuickConnectName",
+    #         description: "QuickConnectDescription",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_connect_id
+    #   The identifier for the quick connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the quick connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the quick connect.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQuickConnectNameRequest AWS API Documentation
+    #
+    class UpdateQuickConnectNameRequest < Struct.new(
+      :instance_id,
+      :quick_connect_id,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateRoutingProfileConcurrencyRequest
     #   data as a hash:
     #
@@ -5978,6 +6429,34 @@ module Aws::Connect
       :auto_accept,
       :after_contact_work_time_limit,
       :desk_phone_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the quick connect configuration settings
+    # for a user. The contact flow must be of type Transfer to Agent.
+    #
+    # @note When making an API call, you may pass UserQuickConnectConfig
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "UserId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserQuickConnectConfig AWS API Documentation
+    #
+    class UserQuickConnectConfig < Struct.new(
+      :user_id,
+      :contact_flow_id)
       SENSITIVE = []
       include Aws::Structure
     end

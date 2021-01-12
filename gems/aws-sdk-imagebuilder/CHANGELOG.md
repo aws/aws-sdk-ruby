@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2020-12-17)
+------------------
+
+* Feature - This release adds support for building and distributing container images within EC2 Image Builder.
+
 1.16.0 (2020-10-30)
 ------------------
 

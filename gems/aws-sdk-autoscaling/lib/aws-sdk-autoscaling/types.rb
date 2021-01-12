@@ -493,7 +493,18 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_state
-    #   The lifecycle state for the instance.
+    #   The lifecycle state for the instance. The `Quarantined` state is not
+    #   used. For information about lifecycle states, see [Instance
+    #   lifecycle][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   Valid Values: `Pending` \| `Pending:Wait` \| `Pending:Proceed` \|
+    #   `Quarantined` \| `InService` \| `Terminating` \| `Terminating:Wait`
+    #   \| `Terminating:Proceed` \| `Terminated` \| `Detaching` \|
+    #   `Detached` \| `EnteringStandby` \| `Standby`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html
     #   @return [String]
     #
     # @!attribute [rw] health_status
@@ -888,8 +899,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] launch_template
-    #   Parameters used to specify the [launch template][1] and version to
-    #   use to launch instances.
+    #   Parameters used to specify the launch template and version to use to
+    #   launch instances.
     #
     #   Conditional: You must specify either a launch template
     #   (`LaunchTemplate` or `MixedInstancesPolicy`) or a launch
@@ -897,15 +908,14 @@ module Aws::AutoScaling
     #
     #   <note markdown="1"> The launch template that is specified must be configured for use
     #   with an Auto Scaling group. For more information, see [Creating a
-    #   launch template for an Auto Scaling group][2] in the *Amazon EC2
+    #   launch template for an Auto Scaling group][1] in the *Amazon EC2
     #   Auto Scaling User Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html
-    #   [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] mixed_instances_policy
@@ -1304,13 +1314,17 @@ module Aws::AutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_data
-    #   The Base64-encoded user data to make available to the launched EC2
-    #   instances. For more information, see [Instance metadata and user
-    #   data][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #   The user data to make available to the launched EC2 instances. For
+    #   more information, see [Instance metadata and user data][1] (Linux)
+    #   and [Instance metadata and user data][2] (Windows). If you are using
+    #   a command line tool, base64-encoding is performed for you, and you
+    #   can load the text from a file. Otherwise, you must provide
+    #   base64-encoded text. User data is limited to 16 KB.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -1338,7 +1352,7 @@ module Aws::AutoScaling
     #
     #   For information about available instance types, see [Available
     #   Instance Types][1] in the *Amazon EC2 User Guide for Linux
-    #   Instances.*
+    #   Instances*.
     #
     #   If you do not specify `InstanceId`, you must specify `InstanceType`.
     #
@@ -2970,7 +2984,12 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] lifecycle_state
     #   A description of the current lifecycle state. The `Quarantined`
-    #   state is not used.
+    #   state is not used. For information about lifecycle states, see
+    #   [Instance lifecycle][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html
     #   @return [String]
     #
     # @!attribute [rw] health_status
@@ -3057,8 +3076,6 @@ module Aws::AutoScaling
     #   requests can travel.
     #
     #   Default: 1
-    #
-    #   Possible values: Integers from 1 to 64
     #   @return [Integer]
     #
     # @!attribute [rw] http_endpoint
@@ -3371,13 +3388,17 @@ module Aws::AutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_data
-    #   The Base64-encoded user data to make available to the launched EC2
-    #   instances. For more information, see [Instance metadata and user
-    #   data][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #   The user data to make available to the launched EC2 instances. For
+    #   more information, see [Instance metadata and user data][1] (Linux)
+    #   and [Instance metadata and user data][2] (Windows). If you are using
+    #   a command line tool, base64-encoding is performed for you, and you
+    #   can load the text from a file. Otherwise, you must provide
+    #   base64-encoded text. User data is limited to 16 KB.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -3385,7 +3406,7 @@ module Aws::AutoScaling
     #
     #   For information about available instance types, see [Available
     #   Instance Types][1] in the *Amazon EC2 User Guide for Linux
-    #   Instances.*
+    #   Instances*.
     #
     #
     #
@@ -3650,8 +3671,10 @@ module Aws::AutoScaling
 
     # Describes an override for a launch template. The maximum number of
     # instance types that can be associated with an Auto Scaling group is
-    # 20. For more information, see [Configuring overrides][1] in the
-    # *Amazon EC2 Auto Scaling User Guide*.
+    # 40. The maximum number of distinct launch templates you can define for
+    # an Auto Scaling group is 20. For more information about configuring
+    # overrides, see [Configuring overrides][1] in the *Amazon EC2 Auto
+    # Scaling User Guide*.
     #
     #
     #

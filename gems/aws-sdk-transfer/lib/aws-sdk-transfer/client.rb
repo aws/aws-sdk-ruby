@@ -382,6 +382,8 @@ module Aws::Transfer
     #   [2]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
     #   [3]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-private.html
     #
+    # @option params [String] :domain
+    #
     # @option params [Types::EndpointDetails] :endpoint_details
     #   The virtual private cloud (VPC) endpoint settings that are configured
     #   for your server. When you host your endpoint within your VPC, you can
@@ -483,6 +485,7 @@ module Aws::Transfer
     #
     #   resp = client.create_server({
     #     certificate: "Certificate",
+    #     domain: "S3", # accepts S3, EFS
     #     endpoint_details: {
     #       address_allocation_ids: ["AddressAllocationId"],
     #       subnet_ids: ["SubnetId"],
@@ -599,6 +602,8 @@ module Aws::Transfer
     #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down
     #   [2]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
     #
+    # @option params [Types::PosixProfile] :posix_profile
+    #
     # @option params [required, String] :role
     #   The IAM role that controls your users' access to your Amazon S3
     #   bucket. The policies attached to this role will determine the level of
@@ -644,6 +649,11 @@ module Aws::Transfer
     #       },
     #     ],
     #     policy: "Policy",
+    #     posix_profile: {
+    #       uid: 1, # required
+    #       gid: 1, # required
+    #       secondary_gids: [1],
+    #     },
     #     role: "Role", # required
     #     server_id: "ServerId", # required
     #     ssh_public_key_body: "SshPublicKeyBody",
@@ -832,6 +842,7 @@ module Aws::Transfer
     #
     #   resp.server.arn #=> String
     #   resp.server.certificate #=> String
+    #   resp.server.domain #=> String, one of "S3", "EFS"
     #   resp.server.endpoint_details.address_allocation_ids #=> Array
     #   resp.server.endpoint_details.address_allocation_ids[0] #=> String
     #   resp.server.endpoint_details.subnet_ids #=> Array
@@ -902,6 +913,10 @@ module Aws::Transfer
     #   resp.user.home_directory_mappings[0].target #=> String
     #   resp.user.home_directory_type #=> String, one of "PATH", "LOGICAL"
     #   resp.user.policy #=> String
+    #   resp.user.posix_profile.uid #=> Integer
+    #   resp.user.posix_profile.gid #=> Integer
+    #   resp.user.posix_profile.secondary_gids #=> Array
+    #   resp.user.posix_profile.secondary_gids[0] #=> Integer
     #   resp.user.role #=> String
     #   resp.user.ssh_public_keys #=> Array
     #   resp.user.ssh_public_keys[0].date_imported #=> Time
@@ -1040,6 +1055,7 @@ module Aws::Transfer
     #   resp.next_token #=> String
     #   resp.servers #=> Array
     #   resp.servers[0].arn #=> String
+    #   resp.servers[0].domain #=> String, one of "S3", "EFS"
     #   resp.servers[0].identity_provider_type #=> String, one of "SERVICE_MANAGED", "API_GATEWAY"
     #   resp.servers[0].endpoint_type #=> String, one of "PUBLIC", "VPC", "VPC_ENDPOINT"
     #   resp.servers[0].logging_role #=> String
@@ -1608,6 +1624,8 @@ module Aws::Transfer
     #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down
     #   [2]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
     #
+    # @option params [Types::PosixProfile] :posix_profile
+    #
     # @option params [String] :role
     #   The IAM role that controls your users' access to your Amazon S3
     #   bucket. The policies attached to this role will determine the level of
@@ -1645,6 +1663,11 @@ module Aws::Transfer
     #       },
     #     ],
     #     policy: "Policy",
+    #     posix_profile: {
+    #       uid: 1, # required
+    #       gid: 1, # required
+    #       secondary_gids: [1],
+    #     },
     #     role: "Role",
     #     server_id: "ServerId", # required
     #     user_name: "UserName", # required
@@ -1677,7 +1700,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

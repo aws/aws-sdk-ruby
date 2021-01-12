@@ -876,6 +876,8 @@ module Aws::DatabaseMigrationService
     #       docs_to_investigate: "String",
     #       auth_source: "String",
     #       kms_key_id: "String",
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
     #     },
     #     kinesis_settings: {
     #       stream_arn: "String",
@@ -944,6 +946,8 @@ module Aws::DatabaseMigrationService
     #       truncate_columns: false,
     #       username: "String",
     #       write_buffer_size: 1,
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
     #     },
     #     postgre_sql_settings: {
     #       after_connect_script: "String",
@@ -958,6 +962,8 @@ module Aws::DatabaseMigrationService
     #       server_name: "String",
     #       username: "String",
     #       slot_name: "String",
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
@@ -971,6 +977,8 @@ module Aws::DatabaseMigrationService
     #       server_name: "String",
     #       server_timezone: "String",
     #       username: "String",
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
     #     },
     #     oracle_settings: {
     #       add_supplemental_logging: false,
@@ -1003,6 +1011,10 @@ module Aws::DatabaseMigrationService
     #       security_db_encryption_name: "String",
     #       server_name: "String",
     #       username: "String",
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
+    #       secrets_manager_oracle_asm_access_role_arn: "String",
+    #       secrets_manager_oracle_asm_secret_id: "String",
     #     },
     #     sybase_settings: {
     #       database_name: "String",
@@ -1010,6 +1022,8 @@ module Aws::DatabaseMigrationService
     #       port: 1,
     #       server_name: "String",
     #       username: "String",
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
     #     },
     #     microsoft_sql_server_settings: {
     #       port: 1,
@@ -1022,6 +1036,8 @@ module Aws::DatabaseMigrationService
     #       server_name: "String",
     #       username: "String",
     #       use_bcp_full_load: false,
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
     #     },
     #     ibm_db_2_settings: {
     #       database_name: "String",
@@ -1032,6 +1048,8 @@ module Aws::DatabaseMigrationService
     #       current_lsn: "String",
     #       max_k_bytes_per_read: 1,
     #       username: "String",
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
     #     },
     #     resource_identifier: "String",
     #     doc_db_settings: {
@@ -1044,6 +1062,8 @@ module Aws::DatabaseMigrationService
     #       extract_doc_id: false,
     #       docs_to_investigate: 1,
     #       kms_key_id: "String",
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
     #     },
     #   })
     #
@@ -1109,6 +1129,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.docs_to_investigate #=> String
     #   resp.endpoint.mongo_db_settings.auth_source #=> String
     #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
+    #   resp.endpoint.mongo_db_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.mongo_db_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.kinesis_settings.stream_arn #=> String
     #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json", "json-unformatted"
     #   resp.endpoint.kinesis_settings.service_access_role_arn #=> String
@@ -1167,6 +1189,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.truncate_columns #=> Boolean
     #   resp.endpoint.redshift_settings.username #=> String
     #   resp.endpoint.redshift_settings.write_buffer_size #=> Integer
+    #   resp.endpoint.redshift_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.redshift_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.postgre_sql_settings.after_connect_script #=> String
     #   resp.endpoint.postgre_sql_settings.capture_ddls #=> Boolean
     #   resp.endpoint.postgre_sql_settings.max_file_size #=> Integer
@@ -1179,6 +1203,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.server_name #=> String
     #   resp.endpoint.postgre_sql_settings.username #=> String
     #   resp.endpoint.postgre_sql_settings.slot_name #=> String
+    #   resp.endpoint.postgre_sql_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.database_name #=> String
     #   resp.endpoint.my_sql_settings.events_poll_interval #=> Integer
@@ -1190,6 +1216,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.my_sql_settings.server_name #=> String
     #   resp.endpoint.my_sql_settings.server_timezone #=> String
     #   resp.endpoint.my_sql_settings.username #=> String
+    #   resp.endpoint.my_sql_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.my_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
@@ -1220,11 +1248,17 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.security_db_encryption_name #=> String
     #   resp.endpoint.oracle_settings.server_name #=> String
     #   resp.endpoint.oracle_settings.username #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
     #   resp.endpoint.sybase_settings.database_name #=> String
     #   resp.endpoint.sybase_settings.password #=> String
     #   resp.endpoint.sybase_settings.port #=> Integer
     #   resp.endpoint.sybase_settings.server_name #=> String
     #   resp.endpoint.sybase_settings.username #=> String
+    #   resp.endpoint.sybase_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.sybase_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.microsoft_sql_server_settings.port #=> Integer
     #   resp.endpoint.microsoft_sql_server_settings.bcp_packet_size #=> Integer
     #   resp.endpoint.microsoft_sql_server_settings.database_name #=> String
@@ -1235,6 +1269,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.microsoft_sql_server_settings.server_name #=> String
     #   resp.endpoint.microsoft_sql_server_settings.username #=> String
     #   resp.endpoint.microsoft_sql_server_settings.use_bcp_full_load #=> Boolean
+    #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.ibm_db_2_settings.database_name #=> String
     #   resp.endpoint.ibm_db_2_settings.password #=> String
     #   resp.endpoint.ibm_db_2_settings.port #=> Integer
@@ -1243,6 +1279,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.ibm_db_2_settings.current_lsn #=> String
     #   resp.endpoint.ibm_db_2_settings.max_k_bytes_per_read #=> Integer
     #   resp.endpoint.ibm_db_2_settings.username #=> String
+    #   resp.endpoint.ibm_db_2_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.ibm_db_2_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.doc_db_settings.username #=> String
     #   resp.endpoint.doc_db_settings.password #=> String
     #   resp.endpoint.doc_db_settings.server_name #=> String
@@ -1252,6 +1290,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.doc_db_settings.extract_doc_id #=> Boolean
     #   resp.endpoint.doc_db_settings.docs_to_investigate #=> Integer
     #   resp.endpoint.doc_db_settings.kms_key_id #=> String
+    #   resp.endpoint.doc_db_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.doc_db_settings.secrets_manager_secret_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpoint AWS API Documentation
     #
@@ -2182,6 +2222,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.docs_to_investigate #=> String
     #   resp.endpoint.mongo_db_settings.auth_source #=> String
     #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
+    #   resp.endpoint.mongo_db_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.mongo_db_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.kinesis_settings.stream_arn #=> String
     #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json", "json-unformatted"
     #   resp.endpoint.kinesis_settings.service_access_role_arn #=> String
@@ -2240,6 +2282,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.truncate_columns #=> Boolean
     #   resp.endpoint.redshift_settings.username #=> String
     #   resp.endpoint.redshift_settings.write_buffer_size #=> Integer
+    #   resp.endpoint.redshift_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.redshift_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.postgre_sql_settings.after_connect_script #=> String
     #   resp.endpoint.postgre_sql_settings.capture_ddls #=> Boolean
     #   resp.endpoint.postgre_sql_settings.max_file_size #=> Integer
@@ -2252,6 +2296,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.server_name #=> String
     #   resp.endpoint.postgre_sql_settings.username #=> String
     #   resp.endpoint.postgre_sql_settings.slot_name #=> String
+    #   resp.endpoint.postgre_sql_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.database_name #=> String
     #   resp.endpoint.my_sql_settings.events_poll_interval #=> Integer
@@ -2263,6 +2309,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.my_sql_settings.server_name #=> String
     #   resp.endpoint.my_sql_settings.server_timezone #=> String
     #   resp.endpoint.my_sql_settings.username #=> String
+    #   resp.endpoint.my_sql_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.my_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
@@ -2293,11 +2341,17 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.security_db_encryption_name #=> String
     #   resp.endpoint.oracle_settings.server_name #=> String
     #   resp.endpoint.oracle_settings.username #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
     #   resp.endpoint.sybase_settings.database_name #=> String
     #   resp.endpoint.sybase_settings.password #=> String
     #   resp.endpoint.sybase_settings.port #=> Integer
     #   resp.endpoint.sybase_settings.server_name #=> String
     #   resp.endpoint.sybase_settings.username #=> String
+    #   resp.endpoint.sybase_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.sybase_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.microsoft_sql_server_settings.port #=> Integer
     #   resp.endpoint.microsoft_sql_server_settings.bcp_packet_size #=> Integer
     #   resp.endpoint.microsoft_sql_server_settings.database_name #=> String
@@ -2308,6 +2362,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.microsoft_sql_server_settings.server_name #=> String
     #   resp.endpoint.microsoft_sql_server_settings.username #=> String
     #   resp.endpoint.microsoft_sql_server_settings.use_bcp_full_load #=> Boolean
+    #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.ibm_db_2_settings.database_name #=> String
     #   resp.endpoint.ibm_db_2_settings.password #=> String
     #   resp.endpoint.ibm_db_2_settings.port #=> Integer
@@ -2316,6 +2372,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.ibm_db_2_settings.current_lsn #=> String
     #   resp.endpoint.ibm_db_2_settings.max_k_bytes_per_read #=> Integer
     #   resp.endpoint.ibm_db_2_settings.username #=> String
+    #   resp.endpoint.ibm_db_2_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.ibm_db_2_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.doc_db_settings.username #=> String
     #   resp.endpoint.doc_db_settings.password #=> String
     #   resp.endpoint.doc_db_settings.server_name #=> String
@@ -2325,6 +2383,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.doc_db_settings.extract_doc_id #=> Boolean
     #   resp.endpoint.doc_db_settings.docs_to_investigate #=> Integer
     #   resp.endpoint.doc_db_settings.kms_key_id #=> String
+    #   resp.endpoint.doc_db_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.doc_db_settings.secrets_manager_secret_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpoint AWS API Documentation
     #
@@ -3234,6 +3294,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].mongo_db_settings.docs_to_investigate #=> String
     #   resp.endpoints[0].mongo_db_settings.auth_source #=> String
     #   resp.endpoints[0].mongo_db_settings.kms_key_id #=> String
+    #   resp.endpoints[0].mongo_db_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoints[0].mongo_db_settings.secrets_manager_secret_id #=> String
     #   resp.endpoints[0].kinesis_settings.stream_arn #=> String
     #   resp.endpoints[0].kinesis_settings.message_format #=> String, one of "json", "json-unformatted"
     #   resp.endpoints[0].kinesis_settings.service_access_role_arn #=> String
@@ -3292,6 +3354,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].redshift_settings.truncate_columns #=> Boolean
     #   resp.endpoints[0].redshift_settings.username #=> String
     #   resp.endpoints[0].redshift_settings.write_buffer_size #=> Integer
+    #   resp.endpoints[0].redshift_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoints[0].redshift_settings.secrets_manager_secret_id #=> String
     #   resp.endpoints[0].postgre_sql_settings.after_connect_script #=> String
     #   resp.endpoints[0].postgre_sql_settings.capture_ddls #=> Boolean
     #   resp.endpoints[0].postgre_sql_settings.max_file_size #=> Integer
@@ -3304,6 +3368,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].postgre_sql_settings.server_name #=> String
     #   resp.endpoints[0].postgre_sql_settings.username #=> String
     #   resp.endpoints[0].postgre_sql_settings.slot_name #=> String
+    #   resp.endpoints[0].postgre_sql_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoints[0].postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoints[0].my_sql_settings.after_connect_script #=> String
     #   resp.endpoints[0].my_sql_settings.database_name #=> String
     #   resp.endpoints[0].my_sql_settings.events_poll_interval #=> Integer
@@ -3315,6 +3381,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].my_sql_settings.server_name #=> String
     #   resp.endpoints[0].my_sql_settings.server_timezone #=> String
     #   resp.endpoints[0].my_sql_settings.username #=> String
+    #   resp.endpoints[0].my_sql_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoints[0].my_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoints[0].oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoints[0].oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoints[0].oracle_settings.additional_archived_log_dest_id #=> Integer
@@ -3345,11 +3413,17 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].oracle_settings.security_db_encryption_name #=> String
     #   resp.endpoints[0].oracle_settings.server_name #=> String
     #   resp.endpoints[0].oracle_settings.username #=> String
+    #   resp.endpoints[0].oracle_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoints[0].oracle_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoints[0].oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
+    #   resp.endpoints[0].oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
     #   resp.endpoints[0].sybase_settings.database_name #=> String
     #   resp.endpoints[0].sybase_settings.password #=> String
     #   resp.endpoints[0].sybase_settings.port #=> Integer
     #   resp.endpoints[0].sybase_settings.server_name #=> String
     #   resp.endpoints[0].sybase_settings.username #=> String
+    #   resp.endpoints[0].sybase_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoints[0].sybase_settings.secrets_manager_secret_id #=> String
     #   resp.endpoints[0].microsoft_sql_server_settings.port #=> Integer
     #   resp.endpoints[0].microsoft_sql_server_settings.bcp_packet_size #=> Integer
     #   resp.endpoints[0].microsoft_sql_server_settings.database_name #=> String
@@ -3360,6 +3434,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].microsoft_sql_server_settings.server_name #=> String
     #   resp.endpoints[0].microsoft_sql_server_settings.username #=> String
     #   resp.endpoints[0].microsoft_sql_server_settings.use_bcp_full_load #=> Boolean
+    #   resp.endpoints[0].microsoft_sql_server_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoints[0].microsoft_sql_server_settings.secrets_manager_secret_id #=> String
     #   resp.endpoints[0].ibm_db_2_settings.database_name #=> String
     #   resp.endpoints[0].ibm_db_2_settings.password #=> String
     #   resp.endpoints[0].ibm_db_2_settings.port #=> Integer
@@ -3368,6 +3444,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].ibm_db_2_settings.current_lsn #=> String
     #   resp.endpoints[0].ibm_db_2_settings.max_k_bytes_per_read #=> Integer
     #   resp.endpoints[0].ibm_db_2_settings.username #=> String
+    #   resp.endpoints[0].ibm_db_2_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoints[0].ibm_db_2_settings.secrets_manager_secret_id #=> String
     #   resp.endpoints[0].doc_db_settings.username #=> String
     #   resp.endpoints[0].doc_db_settings.password #=> String
     #   resp.endpoints[0].doc_db_settings.server_name #=> String
@@ -3377,6 +3455,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].doc_db_settings.extract_doc_id #=> Boolean
     #   resp.endpoints[0].doc_db_settings.docs_to_investigate #=> Integer
     #   resp.endpoints[0].doc_db_settings.kms_key_id #=> String
+    #   resp.endpoints[0].doc_db_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoints[0].doc_db_settings.secrets_manager_secret_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5035,6 +5115,8 @@ module Aws::DatabaseMigrationService
     #       docs_to_investigate: "String",
     #       auth_source: "String",
     #       kms_key_id: "String",
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
     #     },
     #     kinesis_settings: {
     #       stream_arn: "String",
@@ -5103,6 +5185,8 @@ module Aws::DatabaseMigrationService
     #       truncate_columns: false,
     #       username: "String",
     #       write_buffer_size: 1,
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
     #     },
     #     postgre_sql_settings: {
     #       after_connect_script: "String",
@@ -5117,6 +5201,8 @@ module Aws::DatabaseMigrationService
     #       server_name: "String",
     #       username: "String",
     #       slot_name: "String",
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
     #     },
     #     my_sql_settings: {
     #       after_connect_script: "String",
@@ -5130,6 +5216,8 @@ module Aws::DatabaseMigrationService
     #       server_name: "String",
     #       server_timezone: "String",
     #       username: "String",
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
     #     },
     #     oracle_settings: {
     #       add_supplemental_logging: false,
@@ -5162,6 +5250,10 @@ module Aws::DatabaseMigrationService
     #       security_db_encryption_name: "String",
     #       server_name: "String",
     #       username: "String",
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
+    #       secrets_manager_oracle_asm_access_role_arn: "String",
+    #       secrets_manager_oracle_asm_secret_id: "String",
     #     },
     #     sybase_settings: {
     #       database_name: "String",
@@ -5169,6 +5261,8 @@ module Aws::DatabaseMigrationService
     #       port: 1,
     #       server_name: "String",
     #       username: "String",
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
     #     },
     #     microsoft_sql_server_settings: {
     #       port: 1,
@@ -5181,6 +5275,8 @@ module Aws::DatabaseMigrationService
     #       server_name: "String",
     #       username: "String",
     #       use_bcp_full_load: false,
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
     #     },
     #     ibm_db_2_settings: {
     #       database_name: "String",
@@ -5191,6 +5287,8 @@ module Aws::DatabaseMigrationService
     #       current_lsn: "String",
     #       max_k_bytes_per_read: 1,
     #       username: "String",
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
     #     },
     #     doc_db_settings: {
     #       username: "String",
@@ -5202,6 +5300,8 @@ module Aws::DatabaseMigrationService
     #       extract_doc_id: false,
     #       docs_to_investigate: 1,
     #       kms_key_id: "String",
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
     #     },
     #   })
     #
@@ -5267,6 +5367,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.docs_to_investigate #=> String
     #   resp.endpoint.mongo_db_settings.auth_source #=> String
     #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
+    #   resp.endpoint.mongo_db_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.mongo_db_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.kinesis_settings.stream_arn #=> String
     #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json", "json-unformatted"
     #   resp.endpoint.kinesis_settings.service_access_role_arn #=> String
@@ -5325,6 +5427,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redshift_settings.truncate_columns #=> Boolean
     #   resp.endpoint.redshift_settings.username #=> String
     #   resp.endpoint.redshift_settings.write_buffer_size #=> Integer
+    #   resp.endpoint.redshift_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.redshift_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.postgre_sql_settings.after_connect_script #=> String
     #   resp.endpoint.postgre_sql_settings.capture_ddls #=> Boolean
     #   resp.endpoint.postgre_sql_settings.max_file_size #=> Integer
@@ -5337,6 +5441,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.postgre_sql_settings.server_name #=> String
     #   resp.endpoint.postgre_sql_settings.username #=> String
     #   resp.endpoint.postgre_sql_settings.slot_name #=> String
+    #   resp.endpoint.postgre_sql_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.postgre_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.my_sql_settings.after_connect_script #=> String
     #   resp.endpoint.my_sql_settings.database_name #=> String
     #   resp.endpoint.my_sql_settings.events_poll_interval #=> Integer
@@ -5348,6 +5454,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.my_sql_settings.server_name #=> String
     #   resp.endpoint.my_sql_settings.server_timezone #=> String
     #   resp.endpoint.my_sql_settings.username #=> String
+    #   resp.endpoint.my_sql_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.my_sql_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.oracle_settings.add_supplemental_logging #=> Boolean
     #   resp.endpoint.oracle_settings.archived_log_dest_id #=> Integer
     #   resp.endpoint.oracle_settings.additional_archived_log_dest_id #=> Integer
@@ -5378,11 +5486,17 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.oracle_settings.security_db_encryption_name #=> String
     #   resp.endpoint.oracle_settings.server_name #=> String
     #   resp.endpoint.oracle_settings.username #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_secret_id #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_access_role_arn #=> String
+    #   resp.endpoint.oracle_settings.secrets_manager_oracle_asm_secret_id #=> String
     #   resp.endpoint.sybase_settings.database_name #=> String
     #   resp.endpoint.sybase_settings.password #=> String
     #   resp.endpoint.sybase_settings.port #=> Integer
     #   resp.endpoint.sybase_settings.server_name #=> String
     #   resp.endpoint.sybase_settings.username #=> String
+    #   resp.endpoint.sybase_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.sybase_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.microsoft_sql_server_settings.port #=> Integer
     #   resp.endpoint.microsoft_sql_server_settings.bcp_packet_size #=> Integer
     #   resp.endpoint.microsoft_sql_server_settings.database_name #=> String
@@ -5393,6 +5507,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.microsoft_sql_server_settings.server_name #=> String
     #   resp.endpoint.microsoft_sql_server_settings.username #=> String
     #   resp.endpoint.microsoft_sql_server_settings.use_bcp_full_load #=> Boolean
+    #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.microsoft_sql_server_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.ibm_db_2_settings.database_name #=> String
     #   resp.endpoint.ibm_db_2_settings.password #=> String
     #   resp.endpoint.ibm_db_2_settings.port #=> Integer
@@ -5401,6 +5517,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.ibm_db_2_settings.current_lsn #=> String
     #   resp.endpoint.ibm_db_2_settings.max_k_bytes_per_read #=> Integer
     #   resp.endpoint.ibm_db_2_settings.username #=> String
+    #   resp.endpoint.ibm_db_2_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.ibm_db_2_settings.secrets_manager_secret_id #=> String
     #   resp.endpoint.doc_db_settings.username #=> String
     #   resp.endpoint.doc_db_settings.password #=> String
     #   resp.endpoint.doc_db_settings.server_name #=> String
@@ -5410,6 +5528,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.doc_db_settings.extract_doc_id #=> Boolean
     #   resp.endpoint.doc_db_settings.docs_to_investigate #=> Integer
     #   resp.endpoint.doc_db_settings.kms_key_id #=> String
+    #   resp.endpoint.doc_db_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.doc_db_settings.secrets_manager_secret_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpoint AWS API Documentation
     #
@@ -5559,7 +5679,7 @@ module Aws::DatabaseMigrationService
     #   A value that indicates that minor version upgrades are applied
     #   automatically to the replication instance during the maintenance
     #   window. Changing this parameter doesn't result in an outage, except
-    #   in the case dsecribed following. The change is asynchronously applied
+    #   in the case described following. The change is asynchronously applied
     #   as soon as possible.
     #
     #   An outage does result if these factors apply:
@@ -6689,7 +6809,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

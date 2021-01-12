@@ -1844,16 +1844,17 @@ module Aws::ApplicationAutoScaling
     #   For rate expressions, *value* is a positive integer and *unit* is
     #   `minute` \| `minutes` \| `hour` \| `hours` \| `day` \| `days`.
     #
-    #   For more information about cron expressions, see [Cron
-    #   Expressions][1] in the *Amazon CloudWatch Events User Guide*.
+    #   For cron expressions, *fields* is a cron expression. The supported
+    #   cron format consists of six fields separated by white spaces:
+    #   \[Minutes\] \[Hours\] \[Day\_of\_Month\] \[Month\] \[Day\_of\_Week\]
+    #   \[Year\].
     #
-    #   For examples of using these expressions, see [Scheduled Scaling][2]
-    #   in the *Application Auto Scaling User Guide*.
+    #   For more information and examples, see [Scheduled Scaling][1] in the
+    #   *Application Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
-    #   [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html
     #   @return [String]
     #
     # @!attribute [rw] scheduled_action_name
@@ -2178,9 +2179,9 @@ module Aws::ApplicationAutoScaling
     #   The minimum value that you plan to scale in to. When a scaling
     #   policy is in effect, Application Auto Scaling can scale in
     #   (contract) as needed to the minimum capacity limit in response to
-    #   changing demand.
+    #   changing demand. This property is required when registering a new
+    #   scalable target.
     #
-    #   This parameter is required if you are registering a scalable target.
     #   For certain resources, the minimum value allowed is 0. This includes
     #   Lambda provisioned concurrency, Spot Fleet, ECS services, Aurora DB
     #   clusters, EMR clusters, and custom resources. For all other
@@ -2191,9 +2192,8 @@ module Aws::ApplicationAutoScaling
     #   The maximum value that you plan to scale out to. When a scaling
     #   policy is in effect, Application Auto Scaling can scale out (expand)
     #   as needed to the maximum capacity limit in response to changing
-    #   demand.
-    #
-    #   This parameter is required if you are registering a scalable target.
+    #   demand. This property is required when registering a new scalable
+    #   target.
     #
     #   Although you can specify a large maximum capacity, note that service
     #   quotas may impose lower limits. Each service has its own default
@@ -2888,16 +2888,17 @@ module Aws::ApplicationAutoScaling
     #   For rate expressions, *value* is a positive integer and *unit* is
     #   `minute` \| `minutes` \| `hour` \| `hours` \| `day` \| `days`.
     #
-    #   For more information about cron expressions, see [Cron
-    #   Expressions][1] in the *Amazon CloudWatch Events User Guide*.
+    #   For cron expressions, *fields* is a cron expression. The supported
+    #   cron format consists of six fields separated by white spaces:
+    #   \[Minutes\] \[Hours\] \[Day\_of\_Month\] \[Month\] \[Day\_of\_Week\]
+    #   \[Year\].
     #
-    #   For examples of using these expressions, see [Scheduled Scaling][2]
-    #   in the *Application Auto Scaling User Guide*.
+    #   For more information and examples, see [Scheduled Scaling][1] in the
+    #   *Application Auto Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
-    #   [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -3347,8 +3348,13 @@ module Aws::ApplicationAutoScaling
     #       }
     #
     # @!attribute [rw] target_value
-    #   The target value for the metric. The range is 8.515920e-109 to
-    #   1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
+    #   The target value for the metric. Although this property accepts
+    #   numbers of type Double, it won't accept values that are either too
+    #   small or too large. Values must be in the range of -2^360 to 2^360.
+    #   The value must be a valid number based on the choice of metric. For
+    #   example, if the metric is CPU utilization, then the target value is
+    #   a percent value that represents how much of the CPU can be used
+    #   before scaling out.
     #   @return [Float]
     #
     # @!attribute [rw] predefined_metric_specification

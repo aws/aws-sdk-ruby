@@ -2140,7 +2140,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters-CLI.html
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html
     #   @return [String]
     #
     # @!attribute [rw] global_replication_group_description
@@ -2817,7 +2817,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   Must be Redis.
+    #   The current supported value is Redis.
     #   @return [String]
     #
     # @!attribute [rw] user_ids
@@ -2855,20 +2855,20 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   Must be Redis.
+    #   The current supported value is Redis.
     #   @return [String]
     #
     # @!attribute [rw] passwords
-    #   Passwords used for this user account. You can create up to two
-    #   passwords for each user.
+    #   Passwords used for this user. You can create up to two passwords for
+    #   each user.
     #   @return [Array<String>]
     #
     # @!attribute [rw] access_string
-    #   Access permissions string used for this user account.
+    #   Access permissions string used for this user.
     #   @return [String]
     #
     # @!attribute [rw] no_password_required
-    #   Indicates a password is not required for this user account.
+    #   Indicates a password is not required for this user.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateUserMessage AWS API Documentation
@@ -5785,7 +5785,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheClusterMessage AWS API Documentation
@@ -6231,7 +6231,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
+    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
     #   @return [String]
     #
     # @!attribute [rw] user_group_ids_to_add
@@ -6433,7 +6433,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] access_string
-    #   Access permissions string used for this user account.
+    #   Access permissions string used for this user.
     #   @return [String]
     #
     # @!attribute [rw] append_access_string
@@ -6441,12 +6441,11 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] passwords
-    #   The passwords belonging to the user account. You are allowed up to
-    #   two.
+    #   The passwords belonging to the user. You are allowed up to two.
     #   @return [Array<String>]
     #
     # @!attribute [rw] no_password_required
-    #   Indicates no password is required for the user account.
+    #   Indicates no password is required for the user.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyUserMessage AWS API Documentation
@@ -6560,7 +6559,7 @@ module Aws::ElastiCache
     #   @return [Array<String>]
     #
     # @!attribute [rw] primary_outpost_arn
-    #   The output ARN of the primary node.
+    #   The outpost ARN of the primary node.
     #   @return [String]
     #
     # @!attribute [rw] replica_outpost_arns
@@ -8899,11 +8898,11 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   Must be Redis.
+    #   The current supported value is Redis.
     #   @return [String]
     #
     # @!attribute [rw] access_string
-    #   Access permissions string used for this user account.
+    #   Access permissions string used for this user.
     #   @return [String]
     #
     # @!attribute [rw] user_group_ids
@@ -8915,7 +8914,7 @@ module Aws::ElastiCache
     #   @return [Types::Authentication]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the user account.
+    #   The Amazon Resource Name (ARN) of the user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/User AWS API Documentation
@@ -8949,7 +8948,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   Must be Redis.
+    #   The current supported value is Redis.
     #   @return [String]
     #
     # @!attribute [rw] user_ids
@@ -8997,7 +8996,7 @@ module Aws::ElastiCache
     # Returns the updates being applied to the user group.
     #
     # @!attribute [rw] user_ids_to_remove
-    #   The list of user group IDs ro remove.
+    #   The list of user IDs to remove.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_ids_to_add

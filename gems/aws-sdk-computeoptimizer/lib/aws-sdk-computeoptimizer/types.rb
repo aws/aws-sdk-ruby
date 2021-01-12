@@ -1034,6 +1034,101 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetLambdaFunctionRecommendationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_arns: ["FunctionArn"],
+    #         account_ids: ["AccountId"],
+    #         filters: [
+    #           {
+    #             name: "Finding", # accepts Finding, FindingReasonCode
+    #             values: ["FilterValue"],
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] function_arns
+    #   The Amazon Resource Name (ARN) of the functions for which to return
+    #   recommendations.
+    #
+    #   You can specify a qualified or unqualified ARN. If you specify an
+    #   unqualified ARN without a function version suffix, Compute Optimizer
+    #   will return recommendations for the latest (`$LATEST`) version of
+    #   the function. If you specify a qualified ARN with a version suffix,
+    #   Compute Optimizer will return recommendations for the specified
+    #   function version. For more information about using function
+    #   versions, see [Using versions][1] in the *AWS Lambda Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] account_ids
+    #   The IDs of the AWS accounts for which to return function
+    #   recommendations.
+    #
+    #   If your account is the management account of an organization, use
+    #   this parameter to specify the member accounts for which you want to
+    #   return function recommendations.
+    #
+    #   Only one account ID can be specified per request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   An array of objects that describe a filter that returns a more
+    #   specific list of function recommendations.
+    #   @return [Array<Types::LambdaFunctionRecommendationFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to advance to the next page of function recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of function recommendations to return with a
+    #   single request.
+    #
+    #   To retrieve the remaining results, make another request with the
+    #   returned `NextToken` value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetLambdaFunctionRecommendationsRequest AWS API Documentation
+    #
+    class GetLambdaFunctionRecommendationsRequest < Struct.new(
+      :function_arns,
+      :account_ids,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use to advance to the next page of function
+    #   recommendations.
+    #
+    #   This value is null when there are no more pages of function
+    #   recommendations to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_function_recommendations
+    #   An array of objects that describe function recommendations.
+    #   @return [Array<Types::LambdaFunctionRecommendation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetLambdaFunctionRecommendationsResponse AWS API Documentation
+    #
+    class GetLambdaFunctionRecommendationsResponse < Struct.new(
+      :next_token,
+      :lambda_function_recommendations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an error experienced when getting recommendations.
     #
     # For example, an error is returned if you request recommendations for
@@ -1336,6 +1431,261 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # Describes a projected utilization metric of an AWS Lambda function
+    # recommendation option.
+    #
+    # @!attribute [rw] name
+    #   The name of the projected utilization metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic of the projected utilization metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The values of the projected utilization metrics.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LambdaFunctionMemoryProjectedMetric AWS API Documentation
+    #
+    class LambdaFunctionMemoryProjectedMetric < Struct.new(
+      :name,
+      :statistic,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a recommendation option for an AWS Lambda function.
+    #
+    # @!attribute [rw] rank
+    #   The rank of the function recommendation option.
+    #
+    #   The top recommendation option is ranked as `1`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] memory_size
+    #   The memory size, in MB, of the function recommendation option.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] projected_utilization_metrics
+    #   An array of objects that describe the projected utilization metrics
+    #   of the function recommendation option.
+    #   @return [Array<Types::LambdaFunctionMemoryProjectedMetric>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LambdaFunctionMemoryRecommendationOption AWS API Documentation
+    #
+    class LambdaFunctionMemoryRecommendationOption < Struct.new(
+      :rank,
+      :memory_size,
+      :projected_utilization_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an AWS Lambda function recommendation.
+    #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) of the current function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_version
+    #   The version number of the current function.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_memory_size
+    #   The amount of memory, in MB, that's allocated to the current
+    #   function.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_invocations
+    #   The number of times your function code was executed during the
+    #   look-back period.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] utilization_metrics
+    #   An array of objects that describe the utilization metrics of the
+    #   function.
+    #   @return [Array<Types::LambdaFunctionUtilizationMetric>]
+    #
+    # @!attribute [rw] lookback_period_in_days
+    #   The number of days for which utilization metrics were analyzed for
+    #   the function.
+    #   @return [Float]
+    #
+    # @!attribute [rw] last_refresh_timestamp
+    #   The time stamp of when the function recommendation was last
+    #   refreshed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] finding
+    #   The finding classification for the function.
+    #
+    #   Findings for functions include:
+    #
+    #   * <b> <code>Optimized</code> </b> — The function is correctly
+    #     provisioned to run your workload based on its current
+    #     configuration and its utilization history. This finding
+    #     classification does not include finding reason codes.
+    #
+    #   * <b> <code>NotOptimized</code> </b> — The function is performing at
+    #     a higher level (over-provisioned) or at a lower level
+    #     (under-provisioned) than required for your workload because its
+    #     current configuration is not optimal. Over-provisioned resources
+    #     might lead to unnecessary infrastructure cost, and
+    #     under-provisioned resources might lead to poor application
+    #     performance. This finding classification can include the
+    #     `MemoryUnderprovisioned` and `MemoryUnderprovisioned` finding
+    #     reason codes.
+    #
+    #   * <b> <code>Unavailable</code> </b> — Compute Optimizer was unable
+    #     to generate a recommendation for the function. This could be
+    #     because the function has not accumulated sufficient metric data,
+    #     or the function does not qualify for a recommendation. This
+    #     finding classification can include the `InsufficientData` and
+    #     `Inconclusive` finding reason codes.
+    #
+    #     <note markdown="1"> Functions with a finding of unavailable are not returned unless
+    #     you specify the `filter` parameter with a value of `Unavailable`
+    #     in your `GetLambdaFunctionRecommendations` request.
+    #
+    #      </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_reason_codes
+    #   The reason for the finding classification of the function.
+    #
+    #   <note markdown="1"> Functions that have a finding classification of `Optimized` don't
+    #   have a finding reason code.
+    #
+    #    </note>
+    #
+    #   Reason codes include:
+    #
+    #   * <b> <code>MemoryOverprovisioned</code> </b> — The function is
+    #     over-provisioned when its memory configuration can be sized down
+    #     while still meeting the performance requirements of your workload.
+    #     An over-provisioned function might lead to unnecessary
+    #     infrastructure cost. This finding reason code is part of the
+    #     `NotOptimized` finding classification.
+    #
+    #   * <b> <code>MemoryUnderprovisioned</code> </b> — The function is
+    #     under-provisioned when its memory configuration doesn't meet the
+    #     performance requirements of the workload. An under-provisioned
+    #     function might lead to poor application performance. This finding
+    #     reason code is part of the `NotOptimized` finding classification.
+    #
+    #   * <b> <code>InsufficientData</code> </b> — The function does not
+    #     have sufficient metric data for Compute Optimizer to generate a
+    #     recommendation. For more information, see the [Supported resources
+    #     and requirements][1] in the *AWS Compute Optimizer User Guide*.
+    #     This finding reason code is part of the `Unavailable` finding
+    #     classification.
+    #
+    #   * <b> <code>Inconclusive</code> </b> — The function does not qualify
+    #     for a recommendation, or there was an internal error. This finding
+    #     reason code is part of the `Unavailable` finding classification.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] memory_size_recommendation_options
+    #   An array of objects that describe the memory configuration
+    #   recommendation options for the function.
+    #   @return [Array<Types::LambdaFunctionMemoryRecommendationOption>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LambdaFunctionRecommendation AWS API Documentation
+    #
+    class LambdaFunctionRecommendation < Struct.new(
+      :function_arn,
+      :function_version,
+      :account_id,
+      :current_memory_size,
+      :number_of_invocations,
+      :utilization_metrics,
+      :lookback_period_in_days,
+      :last_refresh_timestamp,
+      :finding,
+      :finding_reason_codes,
+      :memory_size_recommendation_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a filter that returns a more specific list of AWS Lambda
+    # function recommendations.
+    #
+    # @note When making an API call, you may pass LambdaFunctionRecommendationFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Finding", # accepts Finding, FindingReasonCode
+    #         values: ["FilterValue"],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the filter.
+    #
+    #   Specify `Finding` to return recommendations with a specific finding
+    #   classification (e.g., `NotOptimized`).
+    #
+    #   Specify `FindingReasonCode` to return recommendations with a
+    #   specific finding reason code (e.g., `MemoryUnderprovisioned`).
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The value of the filter.
+    #
+    #   The valid values for this parameter are as follows, depending on
+    #   what you specify for the `name` parameter:
+    #
+    #   * Specify `Optimized`, `NotOptimized`, or `Unavailable` if you
+    #     specified the `name` parameter as `Finding`.
+    #
+    #   * Specify `MemoryOverprovisioned`, `MemoryUnderprovisioned`,
+    #     `InsufficientData`, or `Inconclusive` if you specified the `name`
+    #     parameter as `FindingReasonCode`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LambdaFunctionRecommendationFilter AWS API Documentation
+    #
+    class LambdaFunctionRecommendationFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a utilization metric of an AWS Lambda function.
+    #
+    # @!attribute [rw] name
+    #   The name of the utilization metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic of the utilization metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the utilization metric.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LambdaFunctionUtilizationMetric AWS API Documentation
+    #
+    class LambdaFunctionUtilizationMetric < Struct.new(
+      :name,
+      :statistic,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request exceeds a limit of the service.
     #
     # @!attribute [rw] message
@@ -1447,6 +1797,25 @@ module Aws::ComputeOptimizer
       :name,
       :timestamps,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a finding reason code.
+    #
+    # @!attribute [rw] name
+    #   The name of the finding reason code.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the finding reason code summary.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ReasonCodeSummary AWS API Documentation
+    #
+    class ReasonCodeSummary < Struct.new(
+      :name,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1702,11 +2071,16 @@ module Aws::ComputeOptimizer
     #   The value of the recommendation summary.
     #   @return [Float]
     #
+    # @!attribute [rw] reason_code_summaries
+    #   An array of objects that summarize a finding reason code.
+    #   @return [Array<Types::ReasonCodeSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/Summary AWS API Documentation
     #
     class Summary < Struct.new(
       :name,
-      :value)
+      :value,
+      :reason_code_summaries)
       SENSITIVE = []
       include Aws::Structure
     end

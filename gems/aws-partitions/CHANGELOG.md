@@ -1,6 +1,53 @@
 Unreleased Changes
 ------------------
 
+1.416.0 (2021-01-11)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.415.0 (2021-01-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.414.0 (2020-12-30)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.413.0 (2020-12-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.412.0 (2020-12-22)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.411.0 (2020-12-21)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.410.0 (2020-12-18)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.409.0 (2020-12-17)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.408.0 (2020-12-16)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::WellArchitected`.
+
+* Feature - Added support for enumerating regions for `Aws::LocationService`.
+
 1.407.0 (2020-12-15)
 ------------------
 

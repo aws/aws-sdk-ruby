@@ -65,7 +65,11 @@ module Aws::ACMPCA
     #   @return [String]
     #
     # @!attribute [rw] common_name
-    #   Fully qualified domain name (FQDN) associated with the certificate
+    #   For CA and end-entity certificates in a private PKI, the common name
+    #   (CN) can be any string within the length limit.
+    #
+    #   Note: In publicly trusted certificates, the common name must be a
+    #   fully qualified domain name (FQDN) associated with the certificate
     #   subject.
     #   @return [String]
     #
@@ -127,6 +131,106 @@ module Aws::ACMPCA
       :initials,
       :pseudonym,
       :generation_qualifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides access information used by the `authorityInfoAccess` and
+    # `subjectInfoAccess` extensions described in [RFC 5280][1].
+    #
+    #
+    #
+    # [1]: https://tools.ietf.org/html/rfc5280
+    #
+    # @note When making an API call, you may pass AccessDescription
+    #   data as a hash:
+    #
+    #       {
+    #         access_method: { # required
+    #           custom_object_identifier: "CustomObjectIdentifier",
+    #           access_method_type: "CA_REPOSITORY", # accepts CA_REPOSITORY, RESOURCE_PKI_MANIFEST, RESOURCE_PKI_NOTIFY
+    #         },
+    #         access_location: { # required
+    #           other_name: {
+    #             type_id: "CustomObjectIdentifier", # required
+    #             value: "String256", # required
+    #           },
+    #           rfc_822_name: "String256",
+    #           dns_name: "String253",
+    #           directory_name: {
+    #             country: "CountryCodeString",
+    #             organization: "String64",
+    #             organizational_unit: "String64",
+    #             distinguished_name_qualifier: "ASN1PrintableString64",
+    #             state: "String128",
+    #             common_name: "String64",
+    #             serial_number: "ASN1PrintableString64",
+    #             locality: "String128",
+    #             title: "String64",
+    #             surname: "String40",
+    #             given_name: "String16",
+    #             initials: "String5",
+    #             pseudonym: "String128",
+    #             generation_qualifier: "String3",
+    #           },
+    #           edi_party_name: {
+    #             party_name: "String256", # required
+    #             name_assigner: "String256",
+    #           },
+    #           uniform_resource_identifier: "String253",
+    #           ip_address: "String39",
+    #           registered_id: "CustomObjectIdentifier",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] access_method
+    #   The type and format of `AccessDescription` information.
+    #   @return [Types::AccessMethod]
+    #
+    # @!attribute [rw] access_location
+    #   The location of `AccessDescription` information.
+    #   @return [Types::GeneralName]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/AccessDescription AWS API Documentation
+    #
+    class AccessDescription < Struct.new(
+      :access_method,
+      :access_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the type and format of extension access. Only one of
+    # `CustomObjectIdentifier` or `AccessMethodType` may be provided.
+    # Providing both results in `InvalidArgsException`.
+    #
+    # @note When making an API call, you may pass AccessMethod
+    #   data as a hash:
+    #
+    #       {
+    #         custom_object_identifier: "CustomObjectIdentifier",
+    #         access_method_type: "CA_REPOSITORY", # accepts CA_REPOSITORY, RESOURCE_PKI_MANIFEST, RESOURCE_PKI_NOTIFY
+    #       }
+    #
+    # @!attribute [rw] custom_object_identifier
+    #   An object identifier (OID) specifying the `AccessMethod`. The OID
+    #   must satisfy the regular expression shown below. For more
+    #   information, see NIST's definition of [Object Identifier (OID)][1].
+    #
+    #
+    #
+    #   [1]: https://csrc.nist.gov/glossary/term/Object_Identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] access_method_type
+    #   Specifies the `AccessMethod`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/AccessMethod AWS API Documentation
+    #
+    class AccessMethod < Struct.new(
+      :custom_object_identifier,
+      :access_method_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -264,6 +368,58 @@ module Aws::ACMPCA
     #           pseudonym: "String128",
     #           generation_qualifier: "String3",
     #         },
+    #         csr_extensions: {
+    #           key_usage: {
+    #             digital_signature: false,
+    #             non_repudiation: false,
+    #             key_encipherment: false,
+    #             data_encipherment: false,
+    #             key_agreement: false,
+    #             key_cert_sign: false,
+    #             crl_sign: false,
+    #             encipher_only: false,
+    #             decipher_only: false,
+    #           },
+    #           subject_information_access: [
+    #             {
+    #               access_method: { # required
+    #                 custom_object_identifier: "CustomObjectIdentifier",
+    #                 access_method_type: "CA_REPOSITORY", # accepts CA_REPOSITORY, RESOURCE_PKI_MANIFEST, RESOURCE_PKI_NOTIFY
+    #               },
+    #               access_location: { # required
+    #                 other_name: {
+    #                   type_id: "CustomObjectIdentifier", # required
+    #                   value: "String256", # required
+    #                 },
+    #                 rfc_822_name: "String256",
+    #                 dns_name: "String253",
+    #                 directory_name: {
+    #                   country: "CountryCodeString",
+    #                   organization: "String64",
+    #                   organizational_unit: "String64",
+    #                   distinguished_name_qualifier: "ASN1PrintableString64",
+    #                   state: "String128",
+    #                   common_name: "String64",
+    #                   serial_number: "ASN1PrintableString64",
+    #                   locality: "String128",
+    #                   title: "String64",
+    #                   surname: "String40",
+    #                   given_name: "String16",
+    #                   initials: "String5",
+    #                   pseudonym: "String128",
+    #                   generation_qualifier: "String3",
+    #                 },
+    #                 edi_party_name: {
+    #                   party_name: "String256", # required
+    #                   name_assigner: "String256",
+    #                 },
+    #                 uniform_resource_identifier: "String253",
+    #                 ip_address: "String39",
+    #                 registered_id: "CustomObjectIdentifier",
+    #               },
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] key_algorithm
@@ -286,12 +442,18 @@ module Aws::ACMPCA
     #   your private CA.
     #   @return [Types::ASN1Subject]
     #
+    # @!attribute [rw] csr_extensions
+    #   Specifies information to be added to the extension section of the
+    #   certificate signing request (CSR).
+    #   @return [Types::CsrExtensions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CertificateAuthorityConfiguration AWS API Documentation
     #
     class CertificateAuthorityConfiguration < Struct.new(
       :key_algorithm,
       :signing_algorithm,
-      :subject)
+      :subject,
+      :csr_extensions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -399,6 +561,58 @@ module Aws::ACMPCA
     #             initials: "String5",
     #             pseudonym: "String128",
     #             generation_qualifier: "String3",
+    #           },
+    #           csr_extensions: {
+    #             key_usage: {
+    #               digital_signature: false,
+    #               non_repudiation: false,
+    #               key_encipherment: false,
+    #               data_encipherment: false,
+    #               key_agreement: false,
+    #               key_cert_sign: false,
+    #               crl_sign: false,
+    #               encipher_only: false,
+    #               decipher_only: false,
+    #             },
+    #             subject_information_access: [
+    #               {
+    #                 access_method: { # required
+    #                   custom_object_identifier: "CustomObjectIdentifier",
+    #                   access_method_type: "CA_REPOSITORY", # accepts CA_REPOSITORY, RESOURCE_PKI_MANIFEST, RESOURCE_PKI_NOTIFY
+    #                 },
+    #                 access_location: { # required
+    #                   other_name: {
+    #                     type_id: "CustomObjectIdentifier", # required
+    #                     value: "String256", # required
+    #                   },
+    #                   rfc_822_name: "String256",
+    #                   dns_name: "String253",
+    #                   directory_name: {
+    #                     country: "CountryCodeString",
+    #                     organization: "String64",
+    #                     organizational_unit: "String64",
+    #                     distinguished_name_qualifier: "ASN1PrintableString64",
+    #                     state: "String128",
+    #                     common_name: "String64",
+    #                     serial_number: "ASN1PrintableString64",
+    #                     locality: "String128",
+    #                     title: "String64",
+    #                     surname: "String40",
+    #                     given_name: "String16",
+    #                     initials: "String5",
+    #                     pseudonym: "String128",
+    #                     generation_qualifier: "String3",
+    #                   },
+    #                   edi_party_name: {
+    #                     party_name: "String256", # required
+    #                     name_assigner: "String256",
+    #                   },
+    #                   uniform_resource_identifier: "String253",
+    #                   ip_address: "String39",
+    #                   registered_id: "CustomObjectIdentifier",
+    #                 },
+    #               },
+    #             ],
     #           },
     #         },
     #         revocation_configuration: {
@@ -635,7 +849,7 @@ module Aws::ACMPCA
     #   @return [Boolean]
     #
     # @!attribute [rw] expiration_in_days
-    #   Number of days until a certificate expires.
+    #   Validity period of the CRL in days.
     #   @return [Integer]
     #
     # @!attribute [rw] custom_cname
@@ -666,6 +880,89 @@ module Aws::ACMPCA
       :expiration_in_days,
       :custom_cname,
       :s3_bucket_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the certificate extensions to be added to the certificate
+    # signing request (CSR).
+    #
+    # @note When making an API call, you may pass CsrExtensions
+    #   data as a hash:
+    #
+    #       {
+    #         key_usage: {
+    #           digital_signature: false,
+    #           non_repudiation: false,
+    #           key_encipherment: false,
+    #           data_encipherment: false,
+    #           key_agreement: false,
+    #           key_cert_sign: false,
+    #           crl_sign: false,
+    #           encipher_only: false,
+    #           decipher_only: false,
+    #         },
+    #         subject_information_access: [
+    #           {
+    #             access_method: { # required
+    #               custom_object_identifier: "CustomObjectIdentifier",
+    #               access_method_type: "CA_REPOSITORY", # accepts CA_REPOSITORY, RESOURCE_PKI_MANIFEST, RESOURCE_PKI_NOTIFY
+    #             },
+    #             access_location: { # required
+    #               other_name: {
+    #                 type_id: "CustomObjectIdentifier", # required
+    #                 value: "String256", # required
+    #               },
+    #               rfc_822_name: "String256",
+    #               dns_name: "String253",
+    #               directory_name: {
+    #                 country: "CountryCodeString",
+    #                 organization: "String64",
+    #                 organizational_unit: "String64",
+    #                 distinguished_name_qualifier: "ASN1PrintableString64",
+    #                 state: "String128",
+    #                 common_name: "String64",
+    #                 serial_number: "ASN1PrintableString64",
+    #                 locality: "String128",
+    #                 title: "String64",
+    #                 surname: "String40",
+    #                 given_name: "String16",
+    #                 initials: "String5",
+    #                 pseudonym: "String128",
+    #                 generation_qualifier: "String3",
+    #               },
+    #               edi_party_name: {
+    #                 party_name: "String256", # required
+    #                 name_assigner: "String256",
+    #               },
+    #               uniform_resource_identifier: "String253",
+    #               ip_address: "String39",
+    #               registered_id: "CustomObjectIdentifier",
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] key_usage
+    #   Indicates the purpose of the certificate and of the key contained in
+    #   the certificate.
+    #   @return [Types::KeyUsage]
+    #
+    # @!attribute [rw] subject_information_access
+    #   For CA certificates, provides a path to additional information
+    #   pertaining to the CA, such as revocation and policy. For more
+    #   information, see [Subject Information Access][1] in RFC 5280.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc5280#section-4.2.2.2
+    #   @return [Array<Types::AccessDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CsrExtensions AWS API Documentation
+    #
+    class CsrExtensions < Struct.new(
+      :key_usage,
+      :subject_information_access)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -882,6 +1179,142 @@ module Aws::ACMPCA
       include Aws::Structure
     end
 
+    # Describes an Electronic Data Interchange (EDI) entity as described in
+    # as defined in [Subject Alternative Name][1] in RFC 5280.
+    #
+    #
+    #
+    # [1]: https://tools.ietf.org/html/rfc5280
+    #
+    # @note When making an API call, you may pass EdiPartyName
+    #   data as a hash:
+    #
+    #       {
+    #         party_name: "String256", # required
+    #         name_assigner: "String256",
+    #       }
+    #
+    # @!attribute [rw] party_name
+    #   Specifies the party name.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_assigner
+    #   Specifies the name assigner.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/EdiPartyName AWS API Documentation
+    #
+    class EdiPartyName < Struct.new(
+      :party_name,
+      :name_assigner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an ASN.1 X.400 `GeneralName` as defined in [RFC 5280][1].
+    # Only one of the following naming options should be providied.
+    # Providing more than one option results in an `InvalidArgsException`
+    # error.
+    #
+    #
+    #
+    # [1]: https://tools.ietf.org/html/rfc5280
+    #
+    # @note When making an API call, you may pass GeneralName
+    #   data as a hash:
+    #
+    #       {
+    #         other_name: {
+    #           type_id: "CustomObjectIdentifier", # required
+    #           value: "String256", # required
+    #         },
+    #         rfc_822_name: "String256",
+    #         dns_name: "String253",
+    #         directory_name: {
+    #           country: "CountryCodeString",
+    #           organization: "String64",
+    #           organizational_unit: "String64",
+    #           distinguished_name_qualifier: "ASN1PrintableString64",
+    #           state: "String128",
+    #           common_name: "String64",
+    #           serial_number: "ASN1PrintableString64",
+    #           locality: "String128",
+    #           title: "String64",
+    #           surname: "String40",
+    #           given_name: "String16",
+    #           initials: "String5",
+    #           pseudonym: "String128",
+    #           generation_qualifier: "String3",
+    #         },
+    #         edi_party_name: {
+    #           party_name: "String256", # required
+    #           name_assigner: "String256",
+    #         },
+    #         uniform_resource_identifier: "String253",
+    #         ip_address: "String39",
+    #         registered_id: "CustomObjectIdentifier",
+    #       }
+    #
+    # @!attribute [rw] other_name
+    #   Represents `GeneralName` using an `OtherName` object.
+    #   @return [Types::OtherName]
+    #
+    # @!attribute [rw] rfc_822_name
+    #   Represents `GeneralName` as an [RFC 822][1] email address.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc822
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_name
+    #   Represents `GeneralName` as a DNS name.
+    #   @return [String]
+    #
+    # @!attribute [rw] directory_name
+    #   Contains information about the certificate subject. The certificate
+    #   can be one issued by your private certificate authority (CA) or it
+    #   can be your private CA certificate. The **Subject** field in the
+    #   certificate identifies the entity that owns or controls the public
+    #   key in the certificate. The entity can be a user, computer, device,
+    #   or service. The **Subject** must contain an X.500 distinguished name
+    #   (DN). A DN is a sequence of relative distinguished names (RDNs). The
+    #   RDNs are separated by commas in the certificate. The DN must be
+    #   unique for each entity, but your private CA can issue more than one
+    #   certificate with the same DN to the same entity.
+    #   @return [Types::ASN1Subject]
+    #
+    # @!attribute [rw] edi_party_name
+    #   Represents `GeneralName` as an `EdiPartyName` object.
+    #   @return [Types::EdiPartyName]
+    #
+    # @!attribute [rw] uniform_resource_identifier
+    #   Represents `GeneralName` as a URI.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   Represents `GeneralName` as an IPv4 or IPv6 address.
+    #   @return [String]
+    #
+    # @!attribute [rw] registered_id
+    #   Represents `GeneralName` as an object identifier (OID).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/GeneralName AWS API Documentation
+    #
+    class GeneralName < Struct.new(
+      :other_name,
+      :rfc_822_name,
+      :dns_name,
+      :directory_name,
+      :edi_party_name,
+      :uniform_resource_identifier,
+      :ip_address,
+      :registered_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetCertificateAuthorityCertificateRequest
     #   data as a hash:
     #
@@ -911,10 +1344,9 @@ module Aws::ACMPCA
     #
     # @!attribute [rw] certificate_chain
     #   Base64-encoded certificate chain that includes any intermediate
-    #   certificates and chains up to root on-premises certificate that you
-    #   used to sign your private CA certificate. The chain does not include
-    #   your private CA certificate. If this is a root CA, the value will be
-    #   null.
+    #   certificates and chains up to root certificate that you used to sign
+    #   your private CA certificate. The chain does not include your private
+    #   CA certificate. If this is a root CA, the value will be null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/GetCertificateAuthorityCertificateResponse AWS API Documentation
@@ -1009,9 +1441,8 @@ module Aws::ACMPCA
     #   @return [String]
     #
     # @!attribute [rw] certificate_chain
-    #   The base64 PEM-encoded certificate chain that chains up to the
-    #   on-premises root CA certificate that you used to sign your private
-    #   CA certificate.
+    #   The base64 PEM-encoded certificate chain that chains up to the root
+    #   CA certificate that you used to sign your private CA certificate.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/GetCertificateResponse AWS API Documentation
@@ -1156,7 +1587,7 @@ module Aws::ACMPCA
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1363,6 +1794,76 @@ module Aws::ACMPCA
     #
     class IssueCertificateResponse < Struct.new(
       :certificate_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines one or more purposes for which the key contained in the
+    # certificate can be used. Default value for each option is false.
+    #
+    # @note When making an API call, you may pass KeyUsage
+    #   data as a hash:
+    #
+    #       {
+    #         digital_signature: false,
+    #         non_repudiation: false,
+    #         key_encipherment: false,
+    #         data_encipherment: false,
+    #         key_agreement: false,
+    #         key_cert_sign: false,
+    #         crl_sign: false,
+    #         encipher_only: false,
+    #         decipher_only: false,
+    #       }
+    #
+    # @!attribute [rw] digital_signature
+    #   Key can be used for digital signing.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] non_repudiation
+    #   Key can be used for non-repudiation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] key_encipherment
+    #   Key can be used to encipher data.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] data_encipherment
+    #   Key can be used to decipher data.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] key_agreement
+    #   Key can be used in a key-agreement protocol.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] key_cert_sign
+    #   Key can be used to sign certificates.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crl_sign
+    #   Key can be used to sign CRLs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] encipher_only
+    #   Key can be used only to encipher data.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] decipher_only
+    #   Key can be used only to decipher data.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/KeyUsage AWS API Documentation
+    #
+    class KeyUsage < Struct.new(
+      :digital_signature,
+      :non_repudiation,
+      :key_encipherment,
+      :data_encipherment,
+      :key_agreement,
+      :key_cert_sign,
+      :crl_sign,
+      :encipher_only,
+      :decipher_only)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1606,6 +2107,40 @@ module Aws::ACMPCA
     #
     class MalformedCertificateException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a custom ASN.1 X.400 `GeneralName` using an object identifier
+    # (OID) and value. The OID must satisfy the regular expression shown
+    # below. For more information, see NIST's definition of [Object
+    # Identifier (OID)][1].
+    #
+    #
+    #
+    # [1]: https://csrc.nist.gov/glossary/term/Object_Identifier
+    #
+    # @note When making an API call, you may pass OtherName
+    #   data as a hash:
+    #
+    #       {
+    #         type_id: "CustomObjectIdentifier", # required
+    #         value: "String256", # required
+    #       }
+    #
+    # @!attribute [rw] type_id
+    #   Specifies an OID.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Specifies an OID value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/OtherName AWS API Documentation
+    #
+    class OtherName < Struct.new(
+      :type_id,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2116,6 +2651,10 @@ module Aws::ACMPCA
     #   * Sample input value: 90
     #
     #   * Output expiration date: 01/10/2020 12:34:54 UTC
+    #
+    #   The minimum validity duration for a certificate using relative time
+    #   (`DAYS`) is one day. The minimum validity for a certificate using
+    #   absolute time (`ABSOLUTE` or `END_DATE`) is one second.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/Validity AWS API Documentation

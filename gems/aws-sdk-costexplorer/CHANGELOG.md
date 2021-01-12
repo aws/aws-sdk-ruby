@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2021-01-05)
+------------------
+
+* Feature - Add new GetCostcategories API - Support filter for GetDimensions, GetTags and GetCostcategories api - Support sortBy metrics for GetDimensions, GetTags and GetCostcategories api
+
+1.55.0 (2020-12-22)
+------------------
+
+* Feature - This release adds additional metadata that may be applicable to the Rightsizing Recommendations.
+
+1.54.0 (2020-12-16)
+------------------
+
+* Feature - This release updates the "MonitorArnList" from a list of String to be a list of Arn for both CreateAnomalySubscription and UpdateAnomalySubscription APIs
+
 1.53.0 (2020-11-19)
 ------------------
 

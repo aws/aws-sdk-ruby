@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2020-12-16)
+------------------
+
+* Feature - QuickSight now supports connecting to federated data sources of Athena
+
 1.38.0 (2020-12-08)
 ------------------
 

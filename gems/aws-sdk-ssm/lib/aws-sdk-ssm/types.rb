@@ -8547,11 +8547,27 @@ module Aws::SSM
     #
     # @!attribute [rw] max_concurrency
     #   The maximum number of targets allowed to run this task in parallel.
+    #
+    #   <note markdown="1"> For maintenance window tasks without a target specified, you cannot
+    #   supply a value for this option. Instead, the system inserts a
+    #   placeholder value of `1`, which may be reported in the response to
+    #   this command. This value does not affect the running of your task
+    #   and can be ignored.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_errors
     #   The maximum number of errors allowed before the task stops being
     #   scheduled.
+    #
+    #   <note markdown="1"> For maintenance window tasks without a target specified, you cannot
+    #   supply a value for this option. Instead, the system inserts a
+    #   placeholder value of `1`, which may be reported in the response to
+    #   this command. This value does not affect the running of your task
+    #   and can be ignored.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] logging_info
@@ -15629,7 +15645,7 @@ module Aws::SSM
     #
     #       {
     #         window_id: "MaintenanceWindowId", # required
-    #         targets: [ # required
+    #         targets: [
     #           {
     #             key: "TargetKey",
     #             values: ["TargetValue"],
@@ -15683,8 +15699,8 @@ module Aws::SSM
     #           },
     #         },
     #         priority: 1,
-    #         max_concurrency: "MaxConcurrency", # required
-    #         max_errors: "MaxErrors", # required
+    #         max_concurrency: "MaxConcurrency",
+    #         max_errors: "MaxErrors",
     #         logging_info: {
     #           s3_bucket_name: "S3BucketName", # required
     #           s3_key_prefix: "S3KeyPrefix",
@@ -15702,6 +15718,15 @@ module Aws::SSM
     # @!attribute [rw] targets
     #   The targets (either instances or maintenance window targets).
     #
+    #   <note markdown="1"> One or more targets must be specified for maintenance window Run
+    #   Command-type tasks. Depending on the task, targets are optional for
+    #   other maintenance window task types (Automation, AWS Lambda, and AWS
+    #   Step Functions). For more information about running tasks that do
+    #   not specify targets, see see [Registering maintenance window tasks
+    #   without targets][1] in the *AWS Systems Manager User Guide*.
+    #
+    #    </note>
+    #
     #   Specify instances using the following format:
     #
     #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
@@ -15709,6 +15734,10 @@ module Aws::SSM
     #   Specify maintenance window targets using the following format:
     #
     #   `Key=WindowTargetIds,Values=<window-target-id-1>,<window-target-id-2>`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] task_arn
@@ -15768,11 +15797,25 @@ module Aws::SSM
     #
     # @!attribute [rw] max_concurrency
     #   The maximum number of targets this task can be run for in parallel.
+    #
+    #   <note markdown="1"> For maintenance window tasks without a target specified, you cannot
+    #   supply a value for this option. Instead, the system inserts a
+    #   placeholder value of `1`. This value does not affect the running of
+    #   your task.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_errors
     #   The maximum number of errors allowed before this task stops being
     #   scheduled.
+    #
+    #   <note markdown="1"> For maintenance window tasks without a target specified, you cannot
+    #   supply a value for this option. Instead, the system inserts a
+    #   placeholder value of `1`. This value does not affect the running of
+    #   your task.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] logging_info
@@ -17924,6 +17967,15 @@ module Aws::SSM
     # An array of search criteria that targets instances using a Key,Value
     # combination that you specify.
     #
+    # <note markdown="1"> One or more targets must be specified for maintenance window Run
+    # Command-type tasks. Depending on the task, targets are optional for
+    # other maintenance window task types (Automation, AWS Lambda, and AWS
+    # Step Functions). For more information about running tasks that do not
+    # specify targets, see see [Registering maintenance window tasks without
+    # targets][1] in the *AWS Systems Manager User Guide*.
+    #
+    #  </note>
+    #
     # Supported formats include the following.
     #
     # * `Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3 `
@@ -17974,12 +18026,13 @@ module Aws::SSM
     #   AWS Region where the association was created.
     #
     # For more information about how to send commands that target instances
-    # using `Key,Value` parameters, see [Targeting multiple instances][1] in
+    # using `Key,Value` parameters, see [Targeting multiple instances][2] in
     # the *AWS Systems Manager User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
+    # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting
     #
     # @note When making an API call, you may pass Target
     #   data as a hash:
@@ -19096,6 +19149,19 @@ module Aws::SSM
     #   The targets (either instances or tags) to modify. Instances are
     #   specified using Key=instanceids,Values=instanceID\_1,instanceID\_2.
     #   Tags are specified using Key=tag\_name,Values=tag\_value.
+    #
+    #   <note markdown="1"> One or more targets must be specified for maintenance window Run
+    #   Command-type tasks. Depending on the task, targets are optional for
+    #   other maintenance window task types (Automation, AWS Lambda, and AWS
+    #   Step Functions). For more information about running tasks that do
+    #   not specify targets, see see [Registering maintenance window tasks
+    #   without targets][1] in the *AWS Systems Manager User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] task_arn
@@ -19170,12 +19236,28 @@ module Aws::SSM
     #   The new `MaxConcurrency` value you want to specify. `MaxConcurrency`
     #   is the number of targets that are allowed to run this task in
     #   parallel.
+    #
+    #   <note markdown="1"> For maintenance window tasks without a target specified, you cannot
+    #   supply a value for this option. Instead, the system inserts a
+    #   placeholder value of `1`, which may be reported in the response to
+    #   this command. This value does not affect the running of your task
+    #   and can be ignored.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_errors
     #   The new `MaxErrors` value to specify. `MaxErrors` is the maximum
     #   number of errors that are allowed before the task stops being
     #   scheduled.
+    #
+    #   <note markdown="1"> For maintenance window tasks without a target specified, you cannot
+    #   supply a value for this option. Instead, the system inserts a
+    #   placeholder value of `1`, which may be reported in the response to
+    #   this command. This value does not affect the running of your task
+    #   and can be ignored.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] logging_info

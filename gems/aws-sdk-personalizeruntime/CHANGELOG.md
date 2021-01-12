@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2020-12-18)
+------------------
+
+* Feature - Updated FilterValues regex pattern to align with Filter Expression.
+
 1.19.0 (2020-11-12)
 ------------------
 

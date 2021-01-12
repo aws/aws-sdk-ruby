@@ -73,6 +73,7 @@ module Aws::ConfigService
   # * {OrganizationConformancePackTemplateValidationException}
   # * {OversizedConfigurationItemException}
   # * {RemediationInProgressException}
+  # * {ResourceConcurrentModificationException}
   # * {ResourceInUseException}
   # * {ResourceNotDiscoveredException}
   # * {ResourceNotFoundException}
@@ -542,6 +543,21 @@ module Aws::ConfigService
       # @param [Aws::ConfigService::Types::RemediationInProgressException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+    end
+
+    class ResourceConcurrentModificationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ConfigService::Types::ResourceConcurrentModificationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

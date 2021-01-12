@@ -428,6 +428,58 @@ module Aws::ACMPCA
     #         pseudonym: "String128",
     #         generation_qualifier: "String3",
     #       },
+    #       csr_extensions: {
+    #         key_usage: {
+    #           digital_signature: false,
+    #           non_repudiation: false,
+    #           key_encipherment: false,
+    #           data_encipherment: false,
+    #           key_agreement: false,
+    #           key_cert_sign: false,
+    #           crl_sign: false,
+    #           encipher_only: false,
+    #           decipher_only: false,
+    #         },
+    #         subject_information_access: [
+    #           {
+    #             access_method: { # required
+    #               custom_object_identifier: "CustomObjectIdentifier",
+    #               access_method_type: "CA_REPOSITORY", # accepts CA_REPOSITORY, RESOURCE_PKI_MANIFEST, RESOURCE_PKI_NOTIFY
+    #             },
+    #             access_location: { # required
+    #               other_name: {
+    #                 type_id: "CustomObjectIdentifier", # required
+    #                 value: "String256", # required
+    #               },
+    #               rfc_822_name: "String256",
+    #               dns_name: "String253",
+    #               directory_name: {
+    #                 country: "CountryCodeString",
+    #                 organization: "String64",
+    #                 organizational_unit: "String64",
+    #                 distinguished_name_qualifier: "ASN1PrintableString64",
+    #                 state: "String128",
+    #                 common_name: "String64",
+    #                 serial_number: "ASN1PrintableString64",
+    #                 locality: "String128",
+    #                 title: "String64",
+    #                 surname: "String40",
+    #                 given_name: "String16",
+    #                 initials: "String5",
+    #                 pseudonym: "String128",
+    #                 generation_qualifier: "String3",
+    #               },
+    #               edi_party_name: {
+    #                 party_name: "String256", # required
+    #                 name_assigner: "String256",
+    #               },
+    #               uniform_resource_identifier: "String253",
+    #               ip_address: "String39",
+    #               registered_id: "CustomObjectIdentifier",
+    #             },
+    #           },
+    #         ],
+    #       },
     #     },
     #     revocation_configuration: {
     #       crl_configuration: {
@@ -547,12 +599,13 @@ module Aws::ACMPCA
     #   renewals. Instead, the ACM certificate owner must set up a
     #   resource-based policy to enable cross-account issuance and renewals.
     #   For more information, see [Using a Resource Based Policy with ACM
-    #   Private CA](acm-pca/latest/userguide/pca-rbp.html).
+    #   Private CA][3].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html
     # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html
+    # [3]: https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html
     #
     # @option params [required, String] :certificate_authority_arn
     #   The Amazon Resource Name (ARN) of the CA that grants the permissions.
@@ -695,12 +748,13 @@ module Aws::ACMPCA
     #   renewals. Instead, the ACM certificate owner must set up a
     #   resource-based policy to enable cross-account issuance and renewals.
     #   For more information, see [Using a Resource Based Policy with ACM
-    #   Private CA](acm-pca/latest/userguide/pca-rbp.html).
+    #   Private CA][3].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html
     # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html
+    # [3]: https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html
     #
     # @option params [required, String] :certificate_authority_arn
     #   The Amazon Resource Number (ARN) of the private CA that issued the
@@ -760,8 +814,7 @@ module Aws::ACMPCA
     # * A policy grants access on a private CA to an AWS customer account,
     #   to AWS Organizations, or to an AWS Organizations unit. Policies are
     #   under the control of a CA administrator. For more information, see
-    #   [Using a Resource Based Policy with ACM Private
-    #   CA](acm-pca/latest/userguide/pca-rbp.html).
+    #   [Using a Resource Based Policy with ACM Private CA][3].
     #
     # * A policy permits a user of AWS Certificate Manager (ACM) to issue
     #   ACM certificates signed by a CA in another account.
@@ -770,18 +823,19 @@ module Aws::ACMPCA
     #   user must configure a Service Linked Role (SLR). The SLR allows the
     #   ACM service to assume the identity of the user, subject to
     #   confirmation against the ACM Private CA policy. For more
-    #   information, see [Using a Service Linked Role with ACM][3].
+    #   information, see [Using a Service Linked Role with ACM][4].
     #
     # * Updates made in AWS Resource Manager (RAM) are reflected in
-    #   policies. For more information, see [Using AWS Resource Access
-    #   Manager (RAM) with ACM Private
-    #   CA](acm-pca/latest/userguide/pca-ram.html).
+    #   policies. For more information, see [Attach a Policy for
+    #   Cross-Account Access][5].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetPolicy.html
     # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_PutPolicy.html
-    # [3]: https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html
+    # [3]: https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html
+    # [4]: https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html
+    # [5]: https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-ram.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Number (ARN) of the private CA that will have its
@@ -887,6 +941,41 @@ module Aws::ACMPCA
     #   resp.certificate_authority.certificate_authority_configuration.subject.initials #=> String
     #   resp.certificate_authority.certificate_authority_configuration.subject.pseudonym #=> String
     #   resp.certificate_authority.certificate_authority_configuration.subject.generation_qualifier #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.key_usage.digital_signature #=> Boolean
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.key_usage.non_repudiation #=> Boolean
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.key_usage.key_encipherment #=> Boolean
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.key_usage.data_encipherment #=> Boolean
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.key_usage.key_agreement #=> Boolean
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.key_usage.key_cert_sign #=> Boolean
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.key_usage.crl_sign #=> Boolean
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.key_usage.encipher_only #=> Boolean
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.key_usage.decipher_only #=> Boolean
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access #=> Array
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_method.custom_object_identifier #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_method.access_method_type #=> String, one of "CA_REPOSITORY", "RESOURCE_PKI_MANIFEST", "RESOURCE_PKI_NOTIFY"
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.other_name.type_id #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.other_name.value #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.rfc_822_name #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.dns_name #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.country #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.organization #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.organizational_unit #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.distinguished_name_qualifier #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.state #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.common_name #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.serial_number #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.locality #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.title #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.surname #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.given_name #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.initials #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.pseudonym #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.generation_qualifier #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.edi_party_name.party_name #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.edi_party_name.name_assigner #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.uniform_resource_identifier #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.ip_address #=> String
+    #   resp.certificate_authority.certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.registered_id #=> String
     #   resp.certificate_authority.revocation_configuration.crl_configuration.enabled #=> Boolean
     #   resp.certificate_authority.revocation_configuration.crl_configuration.expiration_in_days #=> Integer
     #   resp.certificate_authority.revocation_configuration.crl_configuration.custom_cname #=> String
@@ -1123,16 +1212,14 @@ module Aws::ACMPCA
     # action returns a `ResourceNotFoundException`.
     #
     # The policy can be attached or updated with [PutPolicy][1] and removed
-    # with
-    # [DeletePolicy](acm-pca/latest/APIReference/API_DeletePolicy.html).
+    # with [DeletePolicy][2].
     #
     # **About Policies**
     #
     # * A policy grants access on a private CA to an AWS customer account,
     #   to AWS Organizations, or to an AWS Organizations unit. Policies are
     #   under the control of a CA administrator. For more information, see
-    #   [Using a Resource Based Policy with ACM Private
-    #   CA](acm-pca/latest/userguide/pca-rbp.html).
+    #   [Using a Resource Based Policy with ACM Private CA][3].
     #
     # * A policy permits a user of AWS Certificate Manager (ACM) to issue
     #   ACM certificates signed by a CA in another account.
@@ -1141,17 +1228,19 @@ module Aws::ACMPCA
     #   user must configure a Service Linked Role (SLR). The SLR allows the
     #   ACM service to assume the identity of the user, subject to
     #   confirmation against the ACM Private CA policy. For more
-    #   information, see [Using a Service Linked Role with ACM][2].
+    #   information, see [Using a Service Linked Role with ACM][4].
     #
     # * Updates made in AWS Resource Manager (RAM) are reflected in
-    #   policies. For more information, see [Using AWS Resource Access
-    #   Manager (RAM) with ACM Private
-    #   CA](acm-pca/latest/userguide/pca-ram.html).
+    #   policies. For more information, see [Attach a Policy for
+    #   Cross-Account Access][5].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_PutPolicy.html
-    # [2]: https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html
+    # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePolicy.html
+    # [3]: https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html
+    # [4]: https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html
+    # [5]: https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-ram.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Number (ARN) of the private CA that will have its
@@ -1199,22 +1288,31 @@ module Aws::ACMPCA
     # 4.  Create a certificate chain and copy the signed certificate and the
     #     certificate chain to your working directory.
     #
-    # The following requirements apply when you import a CA certificate.
+    # ACM Private CA supports three scenarios for installing a CA
+    # certificate:
     #
-    # * You cannot import a non-self-signed certificate for use as a root
-    #   CA.
+    # * Installing a certificate for a root CA hosted by ACM Private CA.
     #
-    # * You cannot import a self-signed certificate for use as a subordinate
-    #   CA.
+    # * Installing a subordinate CA certificate whose parent authority is
+    #   hosted by ACM Private CA.
+    #
+    # * Installing a subordinate CA certificate whose parent authority is
+    #   externally hosted.
+    #
+    # The following addtitional requirements apply when you import a CA
+    # certificate.
+    #
+    # * Only a self-signed certificate can be imported as a root CA.
+    #
+    # * A self-signed certificate cannot be imported as a subordinate CA.
     #
     # * Your certificate chain must not include the private CA certificate
     #   that you are importing.
     #
-    # * Your ACM Private CA-hosted or on-premises CA certificate must be the
-    #   last certificate in your chain. The subordinate certificate, if any,
-    #   that your root CA signed must be next to last. The subordinate
-    #   certificate signed by the preceding subordinate CA must come next,
-    #   and so on until your chain is built.
+    # * Your root CA must be the last certificate in your chain. The
+    #   subordinate certificate, if any, that your root CA signed must be
+    #   next to last. The subordinate certificate signed by the preceding
+    #   subordinate CA must come next, and so on until your chain is built.
     #
     # * The chain must be PEM-encoded.
     #
@@ -1538,6 +1636,41 @@ module Aws::ACMPCA
     #   resp.certificate_authorities[0].certificate_authority_configuration.subject.initials #=> String
     #   resp.certificate_authorities[0].certificate_authority_configuration.subject.pseudonym #=> String
     #   resp.certificate_authorities[0].certificate_authority_configuration.subject.generation_qualifier #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.key_usage.digital_signature #=> Boolean
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.key_usage.non_repudiation #=> Boolean
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.key_usage.key_encipherment #=> Boolean
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.key_usage.data_encipherment #=> Boolean
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.key_usage.key_agreement #=> Boolean
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.key_usage.key_cert_sign #=> Boolean
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.key_usage.crl_sign #=> Boolean
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.key_usage.encipher_only #=> Boolean
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.key_usage.decipher_only #=> Boolean
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access #=> Array
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_method.custom_object_identifier #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_method.access_method_type #=> String, one of "CA_REPOSITORY", "RESOURCE_PKI_MANIFEST", "RESOURCE_PKI_NOTIFY"
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.other_name.type_id #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.other_name.value #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.rfc_822_name #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.dns_name #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.country #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.organization #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.organizational_unit #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.distinguished_name_qualifier #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.state #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.common_name #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.serial_number #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.locality #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.title #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.surname #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.given_name #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.initials #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.pseudonym #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.directory_name.generation_qualifier #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.edi_party_name.party_name #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.edi_party_name.name_assigner #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.uniform_resource_identifier #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.ip_address #=> String
+    #   resp.certificate_authorities[0].certificate_authority_configuration.csr_extensions.subject_information_access[0].access_location.registered_id #=> String
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.enabled #=> Boolean
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.expiration_in_days #=> Integer
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.custom_cname #=> String
@@ -1578,12 +1711,13 @@ module Aws::ACMPCA
     #   renewals. Instead, the ACM certificate owner must set up a
     #   resource-based policy to enable cross-account issuance and renewals.
     #   For more information, see [Using a Resource Based Policy with ACM
-    #   Private CA](acm-pca/latest/userguide/pca-rbp.html).
+    #   Private CA][3].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html
     # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html
+    # [3]: https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html
     #
     # @option params [required, String] :certificate_authority_arn
     #   The Amazon Resource Number (ARN) of the private CA to inspect. You can
@@ -1713,8 +1847,9 @@ module Aws::ACMPCA
 
     # Attaches a resource-based policy to a private CA.
     #
-    # A policy can also be applied by [sharing][1] a private CA through AWS
-    # Resource Access Manager (RAM).
+    # A policy can also be applied by sharing a private CA through AWS
+    # Resource Access Manager (RAM). For more information, see [Attach a
+    # Policy for Cross-Account Access][1].
     #
     # The policy can be displayed with [GetPolicy][2] and removed with
     # [DeletePolicy][3].
@@ -1724,8 +1859,7 @@ module Aws::ACMPCA
     # * A policy grants access on a private CA to an AWS customer account,
     #   to AWS Organizations, or to an AWS Organizations unit. Policies are
     #   under the control of a CA administrator. For more information, see
-    #   [Using a Resource Based Policy with ACM Private
-    #   CA](acm-pca/latest/userguide/pca-rbp.html).
+    #   [Using a Resource Based Policy with ACM Private CA][4].
     #
     # * A policy permits a user of AWS Certificate Manager (ACM) to issue
     #   ACM certificates signed by a CA in another account.
@@ -1734,19 +1868,19 @@ module Aws::ACMPCA
     #   user must configure a Service Linked Role (SLR). The SLR allows the
     #   ACM service to assume the identity of the user, subject to
     #   confirmation against the ACM Private CA policy. For more
-    #   information, see [Using a Service Linked Role with ACM][4].
+    #   information, see [Using a Service Linked Role with ACM][5].
     #
     # * Updates made in AWS Resource Manager (RAM) are reflected in
-    #   policies. For more information, see [Using AWS Resource Access
-    #   Manager (RAM) with ACM Private
-    #   CA](acm-pca/latest/userguide/pca-ram.html).
+    #   policies. For more information, see [Attach a Policy for
+    #   Cross-Account Access][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-ram.html
     # [2]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetPolicy.html
     # [3]: https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePolicy.html
-    # [4]: https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html
+    # [4]: https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html
+    # [5]: https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Number (ARN) of the private CA to associate with
@@ -2095,7 +2229,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

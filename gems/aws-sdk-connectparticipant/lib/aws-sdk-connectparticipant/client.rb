@@ -327,11 +327,47 @@ module Aws::ConnectParticipant
 
     # @!group API Operations
 
+    # Allows you to confirm that the attachment has been uploaded using the
+    # pre-signed URL provided in StartAttachmentUpload API.
+    #
+    # @option params [required, Array<String>] :attachment_ids
+    #   A list of unique identifiers for the attachments.
+    #
+    # @option params [required, String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :connection_token
+    #   The authentication token associated with the participant's
+    #   connection.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.complete_attachment_upload({
+    #     attachment_ids: ["ArtifactId"], # required
+    #     client_token: "NonEmptyClientToken", # required
+    #     connection_token: "ParticipantToken", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/CompleteAttachmentUpload AWS API Documentation
+    #
+    # @overload complete_attachment_upload(params = {})
+    # @param [Hash] params ({})
+    def complete_attachment_upload(params = {}, options = {})
+      req = build_request(:complete_attachment_upload, params)
+      req.send_request(options)
+    end
+
     # Creates the participant's connection. Note that ParticipantToken is
     # used for invoking this API instead of ConnectionToken.
     #
     # The participant token is valid for the lifetime of the participant –
-    # until the they are part of a contact.
+    # until they are part of a contact.
     #
     # The response URL for `WEBSOCKET` Type has a connect expiry timeout of
     # 100s. Clients must manually connect to the returned websocket URL and
@@ -346,15 +382,27 @@ module Aws::ConnectParticipant
     # ConnectionExpiry parameter, clients need to call this API again to
     # obtain a new websocket URL and perform the same steps as before.
     #
+    # <note markdown="1"> The Amazon Connect Participant Service APIs do not use [Signature
+    # Version 4 authentication][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #
     # @option params [required, Array<String>] :type
     #   Type of connection information required.
     #
     # @option params [required, String] :participant_token
-    #   Participant Token as obtained from [StartChatContact][1] API response.
+    #   This is a header parameter.
+    #
+    #   The Participant Token as obtained from [StartChatContact][1] API
+    #   response.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContactResponse.html
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html
     #
     # @return [Types::CreateParticipantConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -387,6 +435,13 @@ module Aws::ConnectParticipant
     # Disconnects a participant. Note that ConnectionToken is used for
     # invoking this API instead of ParticipantToken.
     #
+    # The Amazon Connect Participant Service APIs do not use [Signature
+    # Version 4 authentication][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -416,8 +471,52 @@ module Aws::ConnectParticipant
       req.send_request(options)
     end
 
-    # Retrieves a transcript of the session. Note that ConnectionToken is
-    # used for invoking this API instead of ParticipantToken.
+    # Provides a pre-signed URL for download of a completed attachment. This
+    # is an asynchronous API for use with active contacts.
+    #
+    # @option params [required, String] :attachment_id
+    #   A unique identifier for the attachment.
+    #
+    # @option params [required, String] :connection_token
+    #   The authentication token associated with the participant's
+    #   connection.
+    #
+    # @return [Types::GetAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAttachmentResponse#url #url} => String
+    #   * {Types::GetAttachmentResponse#url_expiry #url_expiry} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_attachment({
+    #     attachment_id: "ArtifactId", # required
+    #     connection_token: "ParticipantToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.url #=> String
+    #   resp.url_expiry #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/GetAttachment AWS API Documentation
+    #
+    # @overload get_attachment(params = {})
+    # @param [Hash] params ({})
+    def get_attachment(params = {}, options = {})
+      req = build_request(:get_attachment, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a transcript of the session, including details about any
+    # attachments. Note that ConnectionToken is used for invoking this API
+    # instead of ParticipantToken.
+    #
+    # The Amazon Connect Participant Service APIs do not use [Signature
+    # Version 4 authentication][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [String] :contact_id
     #   The contactId from the current contact chain for which transcript is
@@ -477,10 +576,15 @@ module Aws::ConnectParticipant
     #   resp.transcript[0].content #=> String
     #   resp.transcript[0].content_type #=> String
     #   resp.transcript[0].id #=> String
-    #   resp.transcript[0].type #=> String, one of "MESSAGE", "EVENT", "CONNECTION_ACK"
+    #   resp.transcript[0].type #=> String, one of "TYPING", "PARTICIPANT_JOINED", "PARTICIPANT_LEFT", "CHAT_ENDED", "TRANSFER_SUCCEEDED", "TRANSFER_FAILED", "MESSAGE", "EVENT", "ATTACHMENT", "CONNECTION_ACK"
     #   resp.transcript[0].participant_id #=> String
     #   resp.transcript[0].display_name #=> String
     #   resp.transcript[0].participant_role #=> String, one of "AGENT", "CUSTOMER", "SYSTEM"
+    #   resp.transcript[0].attachments #=> Array
+    #   resp.transcript[0].attachments[0].content_type #=> String
+    #   resp.transcript[0].attachments[0].attachment_id #=> String
+    #   resp.transcript[0].attachments[0].attachment_name #=> String
+    #   resp.transcript[0].attachments[0].status #=> String, one of "APPROVED", "REJECTED", "IN_PROGRESS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/GetTranscript AWS API Documentation
@@ -494,6 +598,13 @@ module Aws::ConnectParticipant
 
     # Sends an event. Note that ConnectionToken is used for invoking this
     # API instead of ParticipantToken.
+    #
+    # The Amazon Connect Participant Service APIs do not use [Signature
+    # Version 4 authentication][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [required, String] :content_type
     #   The content type of the request. Supported types are:
@@ -548,6 +659,15 @@ module Aws::ConnectParticipant
     # Sends a message. Note that ConnectionToken is used for invoking this
     # API instead of ParticipantToken.
     #
+    # <note markdown="1"> The Amazon Connect Participant Service APIs do not use [Signature
+    # Version 4 authentication][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #
     # @option params [required, String] :content_type
     #   The type of the content. Supported types are text/plain.
     #
@@ -592,6 +712,66 @@ module Aws::ConnectParticipant
       req.send_request(options)
     end
 
+    # Provides a pre-signed Amazon S3 URL in response for uploading the file
+    # directly to S3.
+    #
+    # @option params [required, String] :content_type
+    #   Describes the MIME file type of the attachment. For a list of
+    #   supported file types, see [Feature specifications][1] in the *Amazon
+    #   Connect Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits
+    #
+    # @option params [required, Integer] :attachment_size_in_bytes
+    #   The size of the attachment in bytes.
+    #
+    # @option params [required, String] :attachment_name
+    #   A case-sensitive name of the attachment being uploaded.
+    #
+    # @option params [required, String] :client_token
+    #   A unique case sensitive identifier to support idempotency of request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :connection_token
+    #   The authentication token associated with the participant's
+    #   connection.
+    #
+    # @return [Types::StartAttachmentUploadResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartAttachmentUploadResponse#attachment_id #attachment_id} => String
+    #   * {Types::StartAttachmentUploadResponse#upload_metadata #upload_metadata} => Types::UploadMetadata
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_attachment_upload({
+    #     content_type: "ContentType", # required
+    #     attachment_size_in_bytes: 1, # required
+    #     attachment_name: "AttachmentName", # required
+    #     client_token: "NonEmptyClientToken", # required
+    #     connection_token: "ParticipantToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attachment_id #=> String
+    #   resp.upload_metadata.url #=> String
+    #   resp.upload_metadata.url_expiry #=> String
+    #   resp.upload_metadata.headers_to_include #=> Hash
+    #   resp.upload_metadata.headers_to_include["UploadMetadataSignedHeadersKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/StartAttachmentUpload AWS API Documentation
+    #
+    # @overload start_attachment_upload(params = {})
+    # @param [Hash] params ({})
+    def start_attachment_upload(params = {}, options = {})
+      req = build_request(:start_attachment_upload, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -605,7 +785,7 @@ module Aws::ConnectParticipant
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectparticipant'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2020-12-21)
+------------------
+
+* Feature - This release adds three new APIs: StartAttachmentUpload, CompleteAttachmentUpload, and GetAttachment. For Amazon Connect Chat, you can use these APIs to share files in chat conversations.
+
 1.8.0 (2020-09-30)
 ------------------
 

@@ -225,7 +225,7 @@ module Aws::DevOpsGuru
 
     # The dimension of a Amazon CloudWatch metric that is used when DevOps
     # Guru analyzes the resources in your account for operational problems
-    # and anomalous behaviour. A dimension is a name/value pair that is part
+    # and anomalous behavior. A dimension is a name/value pair that is part
     # of the identity of a metric. A metric can have up to 10 dimensions.
     # For more information, see [Dimensions][1] in the *Amazon CloudWatch
     # User Guide*.
@@ -295,12 +295,18 @@ module Aws::DevOpsGuru
     #   analyzed in your AWS account.
     #   @return [Integer]
     #
+    # @!attribute [rw] resource_hours
+    #   The number of Amazon DevOps Guru resource analysis hours billed to
+    #   the current AWS account in the last hour.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAccountHealthResponse AWS API Documentation
     #
     class DescribeAccountHealthResponse < Struct.new(
       :open_reactive_insights,
       :open_proactive_insights,
-      :metrics_analyzed)
+      :metrics_analyzed,
+      :resource_hours)
       SENSITIVE = []
       include Aws::Structure
     end

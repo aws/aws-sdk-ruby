@@ -755,6 +755,45 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # This data type is used as a response element in the `ModifyDBCluster`
+    # operation and contains changes that will be applied during the next
+    # maintenance window.
+    #
+    # @!attribute [rw] pending_cloudwatch_logs_exports
+    #   A list of the log types whose configuration is still pending. In
+    #   other words, these log types are in the process of being activated
+    #   or deactivated.
+    #   @return [Types::PendingCloudwatchLogsExports]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DBClusterIdentifier value for the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_user_password
+    #   The master credentials for the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_database_authentication_enabled
+    #   A value that indicates whether mapping of AWS Identity and Access
+    #   Management (IAM) accounts to database accounts is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] engine_version
+    #   The database engine version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ClusterPendingModifiedValues AWS API Documentation
+    #
+    class ClusterPendingModifiedValues < Struct.new(
+      :pending_cloudwatch_logs_exports,
+      :db_cluster_identifier,
+      :master_user_password,
+      :iam_database_authentication_enabled,
+      :engine_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the settings that control the size and behavior of the
     # connection pool associated with a `DBProxyTargetGroup`.
     #
@@ -1434,7 +1473,7 @@ module Aws::RDS
     #   group. If your source DB instance uses Transparent Data Encryption
     #   for Oracle or Microsoft SQL Server, you must specify this option
     #   when copying across AWS Regions. For more information, see [Option
-    #   Group Considerations][1] in the *Amazon RDS User Guide.*
+    #   group considerations][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -1608,8 +1647,8 @@ module Aws::RDS
     #   A custom Availability Zone (AZ) is an on-premises AZ that is
     #   integrated with a VMware vSphere cluster.
     #
-    #   For more information about RDS on VMware, see the [ *RDS on VMware
-    #   User Guide.* ][1]
+    #   For more information about RDS on VMware, see the [ RDS on VMware
+    #   User Guide.][1]
     #
     #
     #
@@ -2446,6 +2485,7 @@ module Aws::RDS
     #         ],
     #         deletion_protection: false,
     #         max_allocated_storage: 1,
+    #         enable_customer_owned_ip: false,
     #       }
     #
     # @!attribute [rw] db_name
@@ -2485,8 +2525,8 @@ module Aws::RDS
     #   **PostgreSQL**
     #
     #   The name of the database to create when the DB instance is created.
-    #   If this parameter isn't specified, the default "postgres"
-    #   database is created in the DB instance.
+    #   If this parameter isn't specified, no database is created in the DB
+    #   instance.
     #
     #   Constraints:
     #
@@ -2816,8 +2856,8 @@ module Aws::RDS
     #   specify the identifier of the custom Availability Zone to create the
     #   DB instance in.
     #
-    #    For more information about RDS on VMware, see the [ *RDS on VMware
-    #   User Guide.* ][2]
+    #    For more information about RDS on VMware, see the [ RDS on VMware
+    #   User Guide.][2]
     #
     #    </note>
     #
@@ -3010,8 +3050,8 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   See [Supported PostgreSQL Database Versions][5] in the *Amazon RDS
-    #   User Guide.*
+    #   See [Amazon RDS for PostgreSQL versions and extensions][5] in the
+    #   *Amazon RDS User Guide.*
     #
     #
     #
@@ -3019,7 +3059,7 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
     #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
-    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions
+    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -3052,8 +3092,8 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] option_group_name
-    #   Indicates that the DB instance should be associated with the
-    #   specified option group.
+    #   A value that indicates that the DB instance should be associated
+    #   with the specified option group.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced
     #   Security TDE, can't be removed from an option group. Also, that
@@ -3319,7 +3359,8 @@ module Aws::RDS
     #
     #   **Oracle**
     #
-    #   Possible values are `alert`, `audit`, `listener`, and `trace`.
+    #   Possible values are `alert`, `audit`, `listener`, `trace`, and
+    #   `oemagent`.
     #
     #   **PostgreSQL**
     #
@@ -3357,6 +3398,28 @@ module Aws::RDS
     #   The upper limit to which Amazon RDS can automatically scale the
     #   storage of the DB instance.
     #   @return [Integer]
+    #
+    # @!attribute [rw] enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts DB instance.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in
+    #   your Outpost subnets through your on-premises network. For some use
+    #   cases, a CoIP can provide lower latency for connections to the DB
+    #   instance from outside of its virtual private cloud (VPC) on your
+    #   local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP
+    #   addresses][2] in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
@@ -3407,7 +3470,8 @@ module Aws::RDS
       :enable_cloudwatch_logs_exports,
       :processor_features,
       :deletion_protection,
-      :max_allocated_storage)
+      :max_allocated_storage,
+      :enable_customer_owned_ip)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3709,9 +3773,9 @@ module Aws::RDS
     #   alias name for the AWS KMS CMK.
     #
     #   If you create an encrypted read replica in the same AWS Region as
-    #   the source DB instance, then you do not have to specify a value for
-    #   this parameter. The read replica is encrypted with the same AWS KMS
-    #   CMK as the source DB instance.
+    #   the source DB instance, then do not specify a value for this
+    #   parameter. A read replica in the same Region is always encrypted
+    #   with the same AWS KMS CMK as the source DB instance.
     #
     #   If you create an encrypted read replica in a different AWS Region,
     #   then you must specify a AWS KMS key identifier for the destination
@@ -4658,8 +4722,8 @@ module Aws::RDS
     # A custom Availability Zone (AZ) is an on-premises AZ that is
     # integrated with a VMware vSphere cluster.
     #
-    # For more information about RDS on VMware, see the [ *RDS on VMware
-    # User Guide.* ][1]
+    # For more information about RDS on VMware, see the [ RDS on VMware User
+    # Guide.][1]
     #
     #
     #
@@ -5080,6 +5144,12 @@ module Aws::RDS
     #   cluster.
     #   @return [Boolean]
     #
+    # @!attribute [rw] pending_modified_values
+    #   A value that specifies that changes to the DB cluster are pending.
+    #   This element is only included when changes are pending. Specific
+    #   changes are identified by subelements.
+    #   @return [Types::ClusterPendingModifiedValues]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -5137,7 +5207,8 @@ module Aws::RDS
       :domain_memberships,
       :tag_list,
       :global_write_forwarding_status,
-      :global_write_forwarding_requested)
+      :global_write_forwarding_requested,
+      :pending_modified_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6130,9 +6201,9 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] pending_modified_values
-    #   Specifies that changes to the DB instance are pending. This element
-    #   is only included when changes are pending. Specific changes are
-    #   identified by subelements.
+    #   A value that specifies that changes to the DB instance are pending.
+    #   This element is only included when changes are pending. Specific
+    #   changes are identified by subelements.
     #   @return [Types::PendingModifiedValues]
     #
     # @!attribute [rw] latest_restorable_time
@@ -6149,7 +6220,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   Indicates that minor version patches are applied automatically.
+    #   A value that indicates that minor version patches are applied
+    #   automatically.
     #   @return [Boolean]
     #
     # @!attribute [rw] read_replica_source_db_instance_identifier
@@ -6423,6 +6495,28 @@ module Aws::RDS
     #   instance.
     #   @return [Array<Types::DBInstanceAutomatedBackupsReplication>]
     #
+    # @!attribute [rw] customer_owned_ip_enabled
+    #   Specifies whether a customer-owned IP address (CoIP) is enabled for
+    #   an RDS on Outposts DB instance.
+    #
+    #   A <i>CoIP </i>provides local or external connectivity to resources
+    #   in your Outpost subnets through your on-premises network. For some
+    #   use cases, a CoIP can provide lower latency for connections to the
+    #   DB instance from outside of its virtual private cloud (VPC) on your
+    #   local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP
+    #   addresses][2] in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -6487,7 +6581,8 @@ module Aws::RDS
       :listener_endpoint,
       :max_allocated_storage,
       :tag_list,
-      :db_instance_automated_backups_replications)
+      :db_instance_automated_backups_replications,
+      :customer_owned_ip_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7790,8 +7885,8 @@ module Aws::RDS
     #   A custom Availability Zone (AZ) is an on-premises AZ that is
     #   integrated with a VMware vSphere cluster.
     #
-    #   For more information about RDS on VMware, see the [ *RDS on VMware
-    #   User Guide.* ][1]
+    #   For more information about RDS on VMware, see the [ RDS on VMware
+    #   User Guide.][1]
     #
     #
     #
@@ -9243,20 +9338,19 @@ module Aws::RDS
     #
     #     * `active` - automated backups for current instances
     #
-    #     * `retained` - automated backups for deleted instances
+    #     * `retained` - automated backups for deleted instances and after
+    #       backup replication is stopped
     #
     #     * `creating` - automated backups that are waiting for the first
     #       automated snapshot to be available
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and Amazon
-    #     Resource Names (ARNs) for DB instances. The results list includes
-    #     only information about the DB instance automated backupss
-    #     identified by these ARNs.
+    #     Resource Names (ARNs). The results list includes only information
+    #     about the DB instance automated backups identified by these ARNs.
     #
-    #   * `dbi-resource-id` - Accepts DB instance resource identifiers and
-    #     DB Amazon Resource Names (ARNs) for DB instances. The results list
-    #     includes only information about the DB instance resources
-    #     identified by these ARNs.
+    #   * `dbi-resource-id` - Accepts DB resource identifiers and Amazon
+    #     Resource Names (ARNs). The results list includes only information
+    #     about the DB instance resources identified by these ARNs.
     #
     #   Returns all resources by default. The status for each resource is
     #   specified in the response.
@@ -12039,6 +12133,10 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The `GlobalClusterIdentifier` already exists. Choose a new global
+    # database identifier (unique name) to create a new global database
+    # cluster.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalClusterAlreadyExistsFault AWS API Documentation
     #
     class GlobalClusterAlreadyExistsFault < Aws::EmptyStructure; end
@@ -12078,10 +12176,16 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The `GlobalClusterIdentifier` doesn't refer to an existing global
+    # database cluster.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalClusterNotFoundFault AWS API Documentation
     #
     class GlobalClusterNotFoundFault < Aws::EmptyStructure; end
 
+    # The number of global database clusters for this account is already at
+    # the maximum allowed.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalClusterQuotaExceededFault AWS API Documentation
     #
     class GlobalClusterQuotaExceededFault < Aws::EmptyStructure; end
@@ -12469,6 +12573,9 @@ module Aws::RDS
     #
     class InvalidExportTaskStateFault < Aws::EmptyStructure; end
 
+    # The global cluster is in an invalid state and can't perform the
+    # requested operation.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidGlobalClusterStateFault AWS API Documentation
     #
     class InvalidGlobalClusterStateFault < Aws::EmptyStructure; end
@@ -13278,6 +13385,7 @@ module Aws::RDS
     #         max_allocated_storage: 1,
     #         certificate_rotation_restart: false,
     #         replica_mode: "open-read-only", # accepts open-read-only, mounted
+    #         enable_customer_owned_ip: false,
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -13326,8 +13434,8 @@ module Aws::RDS
     #   The new DB subnet group for the DB instance. You can use this
     #   parameter to move your DB instance to a different VPC. If your DB
     #   instance isn't in a VPC, you can also use this parameter to move
-    #   your DB instance into a VPC. For more information, see [Updating the
-    #   VPC for a DB Instance][1] in the *Amazon RDS User Guide.*
+    #   your DB instance into a VPC. For more information, see [Working with
+    #   a DB instance in a VPC][1] in the *Amazon RDS User Guide.*
     #
     #   Changing the subnet group causes an outage during the change. The
     #   change is applied during the next maintenance window, unless you
@@ -13340,7 +13448,7 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC
     #   @return [String]
     #
     # @!attribute [rw] db_security_groups
@@ -13548,8 +13656,10 @@ module Aws::RDS
     #   parameter group can be the default for that DB parameter group
     #   family.
     #
-    #   For information about valid engine versions, see `CreateDBInstance`,
-    #   or call `DescribeDBEngineVersions`.
+    #   If you specify only a major version, Amazon RDS will update the DB
+    #   instance to the default minor version if the current minor version
+    #   is lower. For information about valid engine versions, see
+    #   `CreateDBInstance`, or call `DescribeDBEngineVersions`.
     #   @return [String]
     #
     # @!attribute [rw] allow_major_version_upgrade
@@ -13615,7 +13725,7 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] option_group_name
-    #   Indicates that the DB instance should be associated with the
+    #   A value that indicates the DB instance should be associated with the
     #   specified option group. Changing this parameter doesn't result in
     #   an outage except in the following case and the change is applied
     #   during the next maintenance window unless the `ApplyImmediately`
@@ -13968,6 +14078,28 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     #   @return [String]
     #
+    # @!attribute [rw] enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts DB instance.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in
+    #   your Outpost subnets through your on-premises network. For some use
+    #   cases, a CoIP can provide lower latency for connections to the DB
+    #   instance from outside of its virtual private cloud (VPC) on your
+    #   local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP
+    #   addresses][2] in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -14013,7 +14145,8 @@ module Aws::RDS
       :deletion_protection,
       :max_allocated_storage,
       :certificate_rotation_restart,
-      :replica_mode)
+      :replica_mode,
+      :enable_customer_owned_ip)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14375,11 +14508,11 @@ module Aws::RDS
     #   You can specify this parameter when you upgrade an Oracle DB
     #   snapshot. The same option group considerations apply when upgrading
     #   a DB snapshot as when upgrading a DB instance. For more information,
-    #   see [Option Group Considerations][1] in the *Amazon RDS User Guide.*
+    #   see [Option group considerations][1] in the *Amazon RDS User Guide.*
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshotMessage AWS API Documentation
@@ -14537,6 +14670,8 @@ module Aws::RDS
     #         global_cluster_identifier: "String",
     #         new_global_cluster_identifier: "String",
     #         deletion_protection: false,
+    #         engine_version: "String",
+    #         allow_major_version_upgrade: false,
     #       }
     #
     # @!attribute [rw] global_cluster_identifier
@@ -14572,12 +14707,53 @@ module Aws::RDS
     #   protection is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] engine_version
+    #   The version number of the database engine to which you want to
+    #   upgrade. Changing this parameter results in an outage. The change is
+    #   applied during the next maintenance window unless `ApplyImmediately`
+    #   is enabled.
+    #
+    #   To list all of the available engine versions for `aurora` (for MySQL
+    #   5.6-compatible Aurora), use the following command:
+    #
+    #   `` aws rds describe-db-engine-versions --engine aurora --query
+    #   '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' ``
+    #
+    #   To list all of the available engine versions for `aurora-mysql` (for
+    #   MySQL 5.7-compatible Aurora), use the following command:
+    #
+    #   `` aws rds describe-db-engine-versions --engine aurora-mysql --query
+    #   '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' ``
+    #
+    #   To list all of the available engine versions for
+    #   `aurora-postgresql`, use the following command:
+    #
+    #   `` aws rds describe-db-engine-versions --engine aurora-postgresql
+    #   --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'
+    #   ``
+    #   @return [String]
+    #
+    # @!attribute [rw] allow_major_version_upgrade
+    #   A value that indicates whether major version upgrades are allowed.
+    #
+    #   Constraints: You must allow major version upgrades when specifying a
+    #   value for the `EngineVersion` parameter that is a different major
+    #   version than the DB cluster's current version.
+    #
+    #   If you upgrade the major version of a global database, the cluster
+    #   and DB instance parameter groups are set to the default parameter
+    #   groups for the new version. Apply any custom parameter groups after
+    #   completing the upgrade.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyGlobalClusterMessage AWS API Documentation
     #
     class ModifyGlobalClusterMessage < Struct.new(
       :global_cluster_identifier,
       :new_global_cluster_identifier,
-      :deletion_protection)
+      :deletion_protection,
+      :engine_version,
+      :allow_major_version_upgrade)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15575,39 +15751,38 @@ module Aws::RDS
     end
 
     # This data type is used as a response element in the `ModifyDBInstance`
-    # action.
+    # operation and contains changes that will be applied during the next
+    # maintenance window.
     #
     # @!attribute [rw] db_instance_class
-    #   Contains the new `DBInstanceClass` for the DB instance that will be
-    #   applied or is currently being applied.
+    #   The name of the compute and memory capacity class for the DB
+    #   instance.
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
-    #   Contains the new `AllocatedStorage` size for the DB instance that
-    #   will be applied or is currently being applied.
+    #   The allocated storage size for the DB instance specified in
+    #   gibibytes .
     #   @return [Integer]
     #
     # @!attribute [rw] master_user_password
-    #   Contains the pending or currently-in-progress change of the master
-    #   credentials for the DB instance.
+    #   The master credentials for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   Specifies the pending port for the DB instance.
+    #   The port for the DB instance.
     #   @return [Integer]
     #
     # @!attribute [rw] backup_retention_period
-    #   Specifies the pending number of days for which automated backups are
-    #   retained.
+    #   The number of days for which automated backups are retained.
     #   @return [Integer]
     #
     # @!attribute [rw] multi_az
-    #   Indicates that the Single-AZ DB instance is to change to a Multi-AZ
-    #   deployment.
+    #   A value that indicates that the Single-AZ DB instance will change to
+    #   a Multi-AZ deployment.
     #   @return [Boolean]
     #
     # @!attribute [rw] engine_version
-    #   Indicates the database engine version.
+    #   The database engine version.
     #   @return [String]
     #
     # @!attribute [rw] license_model
@@ -15618,25 +15793,23 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] iops
-    #   Specifies the new Provisioned IOPS value for the DB instance that
-    #   will be applied or is currently being applied.
+    #   The Provisioned IOPS value for the DB instance.
     #   @return [Integer]
     #
     # @!attribute [rw] db_instance_identifier
-    #   Contains the new `DBInstanceIdentifier` for the DB instance that
-    #   will be applied or is currently being applied.
+    #   The database identifier for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] storage_type
-    #   Specifies the storage type to be associated with the DB instance.
+    #   The storage type of the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] ca_certificate_identifier
-    #   Specifies the identifier of the CA certificate for the DB instance.
+    #   The identifier of the CA certificate for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_name
-    #   The new DB subnet group for the DB instance.
+    #   The DB subnet group for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] pending_cloudwatch_logs_exports
@@ -15649,6 +15822,11 @@ module Aws::RDS
     #   The number of CPU cores and the number of threads per core for the
     #   DB instance class of the DB instance.
     #   @return [Array<Types::ProcessorFeature>]
+    #
+    # @!attribute [rw] iam_database_authentication_enabled
+    #   Whether mapping of AWS Identity and Access Management (IAM) accounts
+    #   to database accounts is enabled.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingModifiedValues AWS API Documentation
     #
@@ -15667,7 +15845,8 @@ module Aws::RDS
       :ca_certificate_identifier,
       :db_subnet_group_name,
       :pending_cloudwatch_logs_exports,
-      :processor_features)
+      :processor_features,
+      :iam_database_authentication_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17740,6 +17919,7 @@ module Aws::RDS
     #         use_default_processor_features: false,
     #         db_parameter_group_name: "String",
     #         deletion_protection: false,
+    #         enable_customer_owned_ip: false,
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -18049,6 +18229,28 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts DB instance.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in
+    #   your Outpost subnets through your on-premises network. For some use
+    #   cases, a CoIP can provide lower latency for connections to the DB
+    #   instance from outside of its virtual private cloud (VPC) on your
+    #   local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP
+    #   addresses][2] in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshotMessage AWS API Documentation
     #
     class RestoreDBInstanceFromDBSnapshotMessage < Struct.new(
@@ -18079,7 +18281,8 @@ module Aws::RDS
       :processor_features,
       :use_default_processor_features,
       :db_parameter_group_name,
-      :deletion_protection)
+      :deletion_protection,
+      :enable_customer_owned_ip)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18682,6 +18885,7 @@ module Aws::RDS
     #         source_dbi_resource_id: "String",
     #         max_allocated_storage: 1,
     #         source_db_instance_automated_backups_arn: "String",
+    #         enable_customer_owned_ip: false,
     #       }
     #
     # @!attribute [rw] source_db_instance_identifier
@@ -19016,6 +19220,28 @@ module Aws::RDS
     #   `arn:aws:rds:useast-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE`.
     #   @return [String]
     #
+    # @!attribute [rw] enable_customer_owned_ip
+    #   A value that indicates whether to enable a customer-owned IP address
+    #   (CoIP) for an RDS on Outposts DB instance.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in
+    #   your Outpost subnets through your on-premises network. For some use
+    #   cases, a CoIP can provide lower latency for connections to the DB
+    #   instance from outside of its virtual private cloud (VPC) on your
+    #   local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on AWS Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP
+    #   addresses][2] in the *AWS Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBInstanceToPointInTimeMessage < Struct.new(
@@ -19051,7 +19277,8 @@ module Aws::RDS
       :deletion_protection,
       :source_dbi_resource_id,
       :max_allocated_storage,
-      :source_db_instance_automated_backups_arn)
+      :source_db_instance_automated_backups_arn,
+      :enable_customer_owned_ip)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20277,8 +20504,8 @@ module Aws::RDS
     # Information about the virtual private network (VPN) between the VMware
     # vSphere cluster and the AWS website.
     #
-    # For more information about RDS on VMware, see the [ *RDS on VMware
-    # User Guide.* ][1]
+    # For more information about RDS on VMware, see the [ RDS on VMware User
+    # Guide.][1]
     #
     #
     #

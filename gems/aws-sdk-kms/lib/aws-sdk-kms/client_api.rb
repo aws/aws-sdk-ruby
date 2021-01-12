@@ -194,6 +194,8 @@ module Aws::KMS
     AliasListEntry.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasNameType, location_name: "AliasName"))
     AliasListEntry.add_member(:alias_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "AliasArn"))
     AliasListEntry.add_member(:target_key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "TargetKeyId"))
+    AliasListEntry.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
+    AliasListEntry.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: DateType, location_name: "LastUpdatedDate"))
     AliasListEntry.struct_class = Types::AliasListEntry
 
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
@@ -579,6 +581,8 @@ module Aws::KMS
     ListGrantsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location_name: "Limit"))
     ListGrantsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: MarkerType, location_name: "Marker"))
     ListGrantsRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
+    ListGrantsRequest.add_member(:grant_id, Shapes::ShapeRef.new(shape: GrantIdType, location_name: "GrantId"))
+    ListGrantsRequest.add_member(:grantee_principal, Shapes::ShapeRef.new(shape: PrincipalIdType, location_name: "GranteePrincipal"))
     ListGrantsRequest.struct_class = Types::ListGrantsRequest
 
     ListGrantsResponse.add_member(:grants, Shapes::ShapeRef.new(shape: GrantList, location_name: "Grants"))
@@ -1188,6 +1192,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGrantIdException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)

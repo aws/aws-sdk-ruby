@@ -15,6 +15,7 @@ module Aws::Outposts
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    Arn = Shapes::StringShape.new(name: 'Arn')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
     AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
     CreateOutpostInput = Shapes::StructureShape.new(name: 'CreateOutpostInput')
@@ -37,6 +38,8 @@ module Aws::Outposts
     ListOutpostsOutput = Shapes::StructureShape.new(name: 'ListOutpostsOutput')
     ListSitesInput = Shapes::StructureShape.new(name: 'ListSitesInput')
     ListSitesOutput = Shapes::StructureShape.new(name: 'ListSitesOutput')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults1000 = Shapes::IntegerShape.new(name: 'MaxResults1000')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     Outpost = Shapes::StructureShape.new(name: 'Outpost')
@@ -51,9 +54,14 @@ module Aws::Outposts
     SiteId = Shapes::StringShape.new(name: 'SiteId')
     SiteName = Shapes::StringShape.new(name: 'SiteName')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Token = Shapes::StringShape.new(name: 'Token')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     outpostListDefinition = Shapes::ListShape.new(name: 'outpostListDefinition')
     siteListDefinition = Shapes::ListShape.new(name: 'siteListDefinition')
@@ -123,6 +131,12 @@ module Aws::Outposts
     ListSitesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListSitesOutput.struct_class = Types::ListSitesOutput
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     NotFoundException.struct_class = Types::NotFoundException
 
@@ -148,8 +162,22 @@ module Aws::Outposts
     Site.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     Site.struct_class = Types::Site
 
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
     TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
     TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
@@ -270,6 +298,39 @@ module Aws::Outposts
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
     end
 

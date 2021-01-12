@@ -1122,8 +1122,6 @@ module Aws::IoTWireless
 
     # @!attribute [rw] sidewalk
     #   The Sidewalk account credentials.
-    #
-    #   The `AppServerPrivateKey` value is empty to protect its security.
     #   @return [Types::SidewalkAccountInfoWithFingerprint]
     #
     # @!attribute [rw] account_linked
@@ -1266,7 +1264,8 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] thing_name
-    #   The name of the thing associated with the wireless device.
+    #   The name of the thing associated with the wireless device. The value
+    #   is empty if a thing isn't associated with the device.
     #   @return [String]
     #
     # @!attribute [rw] thing_arn
@@ -1426,7 +1425,8 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] thing_name
-    #   The name of the thing associated with the wireless gateway.
+    #   The name of the thing associated with the wireless gateway. The
+    #   value is empty if a thing isn't associated with the gateway.
     #   @return [String]
     #
     # @!attribute [rw] thing_arn
@@ -1688,8 +1688,6 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] sidewalk
     #   The Sidewalk account credentials.
-    #
-    #   The `AppServerPrivateKey` value is empty to protect its security.
     #   @return [Array<Types::SidewalkAccountInfoWithFingerprint>]
     #
     class ListPartnerAccountsResponse < Struct.new(
@@ -1926,7 +1924,7 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # LoRa object for create functions.
+    # LoRaWAN object for create functions.
     #
     # @note When making an API call, you may pass LoRaWANDevice
     #   data as a hash:
@@ -1987,7 +1985,7 @@ module Aws::IoTWireless
     #   @return [Types::AbpV1_1]
     #
     # @!attribute [rw] abp_v1_0_x
-    #   LoRa object for create APIs
+    #   LoRaWAN object for create APIs
     #   @return [Types::AbpV1_0_x]
     #
     class LoRaWANDevice < Struct.new(
@@ -2095,7 +2093,7 @@ module Aws::IoTWireless
     #   @return [Integer]
     #
     # @!attribute [rw] mac_version
-    #   The MAC version (such as OTAA 1.1 or OTA 1.0.3) to use with this
+    #   The MAC version (such as OTAA 1.1 or OTAA 1.0.3) to use with this
     #   device profile.
     #   @return [String]
     #
@@ -2412,7 +2410,7 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # LoRa object for update functions.
+    # LoRaWAN object for update functions.
     #
     # @note When making an API call, you may pass LoRaWANUpdateDevice
     #   data as a hash:
@@ -2743,14 +2741,14 @@ module Aws::IoTWireless
     #   The Sidewalk Amazon ID.
     #   @return [String]
     #
-    # @!attribute [rw] app_server_private_key
-    #   The Sidewalk application server private key.
+    # @!attribute [rw] fingerprint
+    #   Fingerprint for Sidewalk application server private key.
     #   @return [String]
     #
     class SidewalkAccountInfoWithFingerprint < Struct.new(
       :amazon_id,
-      :app_server_private_key)
-      SENSITIVE = [:app_server_private_key]
+      :fingerprint)
+      SENSITIVE = [:fingerprint]
       include Aws::Structure
     end
 

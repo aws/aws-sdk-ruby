@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2020-12-22)
+------------------
+
+* Feature - AWS Glue Find Matches machine learning transforms now support column importance scores.
+
+1.81.0 (2020-12-21)
+------------------
+
+* Feature - Add 4 connection properties: SECRET_ID, CONNECTOR_URL, CONNECTOR_TYPE, CONNECTOR_CLASS_NAME. Add two connection types: MARKETPLACE, CUSTOM
+
 1.80.0 (2020-11-23)
 ------------------
 
