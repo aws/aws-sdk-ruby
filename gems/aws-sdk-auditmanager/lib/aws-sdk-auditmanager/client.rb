@@ -750,6 +750,9 @@ module Aws::AuditManager
     # @option params [required, Array<Types::CreateAssessmentFrameworkControlSet>] :control_sets
     #   The control sets to be associated with the framework.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags associated with the framework.
+    #
     # @return [Types::CreateAssessmentFrameworkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssessmentFrameworkResponse#framework #framework} => Types::Framework
@@ -770,6 +773,9 @@ module Aws::AuditManager
     #         ],
     #       },
     #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -815,6 +821,8 @@ module Aws::AuditManager
     #   resp.framework.last_updated_at #=> Time
     #   resp.framework.created_by #=> String
     #   resp.framework.last_updated_by #=> String
+    #   resp.framework.tags #=> Hash
+    #   resp.framework.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/CreateAssessmentFramework AWS API Documentation
     #
@@ -887,8 +895,7 @@ module Aws::AuditManager
     #   The recommended actions to carry out if the control is not fulfilled.
     #
     # @option params [required, Array<Types::CreateControlMappingSource>] :control_mapping_sources
-    #   The data source that determines from where AWS Audit Manager collects
-    #   evidence for the control.
+    #   The data mapping sources for the specified control.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags associated with the control.
@@ -1303,6 +1310,8 @@ module Aws::AuditManager
     #   resp.framework.last_updated_at #=> Time
     #   resp.framework.created_by #=> String
     #   resp.framework.last_updated_by #=> String
+    #   resp.framework.tags #=> Hash
+    #   resp.framework.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetAssessmentFramework AWS API Documentation
     #
@@ -1915,6 +1924,7 @@ module Aws::AuditManager
     # @example Response structure
     #
     #   resp.framework_metadata_list #=> Array
+    #   resp.framework_metadata_list[0].arn #=> String
     #   resp.framework_metadata_list[0].id #=> String
     #   resp.framework_metadata_list[0].type #=> String, one of "Standard", "Custom"
     #   resp.framework_metadata_list[0].name #=> String
@@ -2682,6 +2692,8 @@ module Aws::AuditManager
     #   resp.framework.last_updated_at #=> Time
     #   resp.framework.created_by #=> String
     #   resp.framework.last_updated_by #=> String
+    #   resp.framework.tags #=> Hash
+    #   resp.framework.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateAssessmentFramework AWS API Documentation
     #
@@ -2822,8 +2834,7 @@ module Aws::AuditManager
     #   The recommended actions to carry out if the control is not fulfilled.
     #
     # @option params [required, Array<Types::ControlMappingSource>] :control_mapping_sources
-    #   The data source that determines from where AWS Audit Manager collects
-    #   evidence for the control.
+    #   The data mapping sources for the specified control.
     #
     # @return [Types::UpdateControlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2999,7 +3010,7 @@ module Aws::AuditManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-auditmanager'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

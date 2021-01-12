@@ -361,6 +361,10 @@ module Aws::AuditManager
 
     # The metadata associated with a standard or custom framework.
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the framework.
+    #   @return [String]
+    #
     # @!attribute [rw] id
     #   The unique identified for the specified framework.
     #   @return [String]
@@ -405,6 +409,7 @@ module Aws::AuditManager
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/AssessmentFrameworkMetadata AWS API Documentation
     #
     class AssessmentFrameworkMetadata < Struct.new(
+      :arn,
       :id,
       :type,
       :name,
@@ -982,7 +987,7 @@ module Aws::AuditManager
     #
     # @!attribute [rw] error_message
     #   The error message returned by the
-    #   `BatchImportEvidenceToAssessmentControlError` API.
+    #   `BatchImportEvidenceToAssessmentControl` API.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/BatchImportEvidenceToAssessmentControlError AWS API Documentation
@@ -1121,7 +1126,8 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] control_sources
-    #   The data mapping sources for the specified control.
+    #   The data source that determines from where AWS Audit Manager
+    #   collects evidence for the control.
     #   @return [String]
     #
     # @!attribute [rw] control_mapping_sources
@@ -1402,6 +1408,9 @@ module Aws::AuditManager
     #             ],
     #           },
     #         ],
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1421,13 +1430,18 @@ module Aws::AuditManager
     #   The control sets to be associated with the framework.
     #   @return [Array<Types::CreateAssessmentFrameworkControlSet>]
     #
+    # @!attribute [rw] tags
+    #   The tags associated with the framework.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/CreateAssessmentFrameworkRequest AWS API Documentation
     #
     class CreateAssessmentFrameworkRequest < Struct.new(
       :name,
       :description,
       :compliance_type,
-      :control_sets)
+      :control_sets,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1699,8 +1713,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] control_mapping_sources
-    #   The data source that determines from where AWS Audit Manager
-    #   collects evidence for the control.
+    #   The data mapping sources for the specified control.
     #   @return [Array<Types::CreateControlMappingSource>]
     #
     # @!attribute [rw] tags
@@ -2218,6 +2231,10 @@ module Aws::AuditManager
     #   The IAM user or role that most recently updated the framework.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags associated with the framework.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/Framework AWS API Documentation
     #
     class Framework < Struct.new(
@@ -2233,7 +2250,8 @@ module Aws::AuditManager
       :created_at,
       :last_updated_at,
       :created_by,
-      :last_updated_by)
+      :last_updated_by,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4010,8 +4028,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] control_mapping_sources
-    #   The data source that determines from where AWS Audit Manager
-    #   collects evidence for the control.
+    #   The data mapping sources for the specified control.
     #   @return [Array<Types::ControlMappingSource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateControlRequest AWS API Documentation

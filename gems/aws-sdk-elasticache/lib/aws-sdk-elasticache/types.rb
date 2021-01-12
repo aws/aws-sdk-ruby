@@ -294,9 +294,7 @@ module Aws::ElastiCache
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
     #
-    #       <note markdown="1"> At this time, M6g node types are available in the following
-    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
-    #       eu-west-1 and ap-northeast-1.
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
     #
@@ -340,9 +338,7 @@ module Aws::ElastiCache
     #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
     #       `cache.r6g.16xlarge`
     #
-    #       <note markdown="1"> At this time, R6g node types are available in the following
-    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
-    #       eu-west-1 and ap-northeast-1.
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
     #
@@ -375,6 +371,10 @@ module Aws::ElastiCache
     #
     #   * Redis configuration variables `appendonly` and `appendfsync` are
     #     not supported on Redis version 2.8.22 and later.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -686,9 +686,7 @@ module Aws::ElastiCache
     #     `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #     `cache.m6g.16xlarge`
     #
-    #     <note markdown="1"> At this time, M6g node types are available in the following
-    #     regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
-    #     and ap-northeast-1.
+    #     <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #      </note>
     #
@@ -732,9 +730,7 @@ module Aws::ElastiCache
     #     `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
     #     `cache.r6g.16xlarge`
     #
-    #     <note markdown="1"> At this time, R6g node types are available in the following
-    #     regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1
-    #     and ap-northeast-1.
+    #     <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #      </note>
     #
@@ -767,6 +763,10 @@ module Aws::ElastiCache
     #
     # * Redis configuration variables `appendonly` and `appendfsync` are not
     #   supported on Redis version 2.8.22 and later.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
     #
     # @!attribute [rw] cache_node_id
     #   The cache node identifier. A node ID is a numeric identifier (0001,
@@ -1635,9 +1635,7 @@ module Aws::ElastiCache
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
     #
-    #       <note markdown="1"> At this time, M6g node types are available in the following
-    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
-    #       eu-west-1 and ap-northeast-1.
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
     #
@@ -1681,9 +1679,7 @@ module Aws::ElastiCache
     #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
     #       `cache.r6g.16xlarge`
     #
-    #       <note markdown="1"> At this time, R6g node types are available in the following
-    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
-    #       eu-west-1 and ap-northeast-1.
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
     #
@@ -1716,6 +1712,10 @@ module Aws::ElastiCache
     #
     #   * Redis configuration variables `appendonly` and `appendfsync` are
     #     not supported on Redis version 2.8.22 and later.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -2375,9 +2375,7 @@ module Aws::ElastiCache
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
     #
-    #       <note markdown="1"> At this time, M6g node types are available in the following
-    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
-    #       eu-west-1 and ap-northeast-1.
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
     #
@@ -2421,9 +2419,7 @@ module Aws::ElastiCache
     #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
     #       `cache.r6g.16xlarge`
     #
-    #       <note markdown="1"> At this time, R6g node types are available in the following
-    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
-    #       eu-west-1 and ap-northeast-1.
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
     #
@@ -2456,6 +2452,10 @@ module Aws::ElastiCache
     #
     #   * Redis configuration variables `appendonly` and `appendfsync` are
     #     not supported on Redis version 2.8.22 and later.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -3981,9 +3981,7 @@ module Aws::ElastiCache
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
     #
-    #       <note markdown="1"> At this time, M6g node types are available in the following
-    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
-    #       eu-west-1 and ap-northeast-1.
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
     #
@@ -4027,9 +4025,7 @@ module Aws::ElastiCache
     #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
     #       `cache.r6g.16xlarge`
     #
-    #       <note markdown="1"> At this time, R6g node types are available in the following
-    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
-    #       eu-west-1 and ap-northeast-1.
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
     #
@@ -4062,6 +4058,10 @@ module Aws::ElastiCache
     #
     #   * Redis configuration variables `appendonly` and `appendfsync` are
     #     not supported on Redis version 2.8.22 and later.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
     #   @return [String]
     #
     # @!attribute [rw] duration
@@ -4161,9 +4161,7 @@ module Aws::ElastiCache
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
     #
-    #       <note markdown="1"> At this time, M6g node types are available in the following
-    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
-    #       eu-west-1 and ap-northeast-1.
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
     #
@@ -4207,9 +4205,7 @@ module Aws::ElastiCache
     #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
     #       `cache.r6g.16xlarge`
     #
-    #       <note markdown="1"> At this time, R6g node types are available in the following
-    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
-    #       eu-west-1 and ap-northeast-1.
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
     #
@@ -4242,6 +4238,10 @@ module Aws::ElastiCache
     #
     #   * Redis configuration variables `appendonly` and `appendfsync` are
     #     not supported on Redis version 2.8.22 and later.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
     #   @return [String]
     #
     # @!attribute [rw] duration
@@ -5005,6 +5005,9 @@ module Aws::ElastiCache
     #   cluster is created. To enable in-transit encryption on a cluster you
     #   must set `TransitEncryptionEnabled` to true when you create a
     #   cluster.
+    #
+    #   **Required:** Only available when creating a replication group in an
+    #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
     #   @return [Boolean]
     #
     # @!attribute [rw] at_rest_encryption_enabled
@@ -7501,9 +7504,7 @@ module Aws::ElastiCache
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
     #
-    #       <note markdown="1"> At this time, M6g node types are available in the following
-    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
-    #       eu-west-1 and ap-northeast-1.
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
     #
@@ -7547,9 +7548,7 @@ module Aws::ElastiCache
     #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
     #       `cache.r6g.16xlarge`
     #
-    #       <note markdown="1"> At this time, R6g node types are available in the following
-    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
-    #       eu-west-1 and ap-northeast-1.
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
     #
@@ -7582,6 +7581,10 @@ module Aws::ElastiCache
     #
     #   * Redis configuration variables `appendonly` and `appendfsync` are
     #     not supported on Redis version 2.8.22 and later.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -7711,9 +7714,7 @@ module Aws::ElastiCache
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
     #
-    #       <note markdown="1"> At this time, M6g node types are available in the following
-    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
-    #       eu-west-1 and ap-northeast-1.
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
     #
@@ -7757,9 +7758,7 @@ module Aws::ElastiCache
     #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
     #       `cache.r6g.16xlarge`
     #
-    #       <note markdown="1"> At this time, R6g node types are available in the following
-    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
-    #       eu-west-1 and ap-northeast-1.
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
     #
@@ -7792,6 +7791,10 @@ module Aws::ElastiCache
     #
     #   * Redis configuration variables `appendonly` and `appendfsync` are
     #     not supported on Redis version 2.8.22 and later.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
     #   @return [String]
     #
     # @!attribute [rw] duration
@@ -8198,9 +8201,7 @@ module Aws::ElastiCache
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
     #
-    #       <note markdown="1"> At this time, M6g node types are available in the following
-    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
-    #       eu-west-1 and ap-northeast-1.
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
     #
@@ -8244,9 +8245,7 @@ module Aws::ElastiCache
     #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
     #       `cache.r6g.16xlarge`
     #
-    #       <note markdown="1"> At this time, R6g node types are available in the following
-    #       regions: us-east-1, us-west-2, us-east-2, eu-central-1,
-    #       eu-west-1 and ap-northeast-1.
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
     #
@@ -8279,6 +8278,10 @@ module Aws::ElastiCache
     #
     #   * Redis configuration variables `appendonly` and `appendfsync` are
     #     not supported on Redis version 2.8.22 and later.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
     #   @return [String]
     #
     # @!attribute [rw] engine

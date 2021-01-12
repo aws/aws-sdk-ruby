@@ -1219,10 +1219,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] key
-    #   One or more keys to limit the results. Valid filter keys include the
-    #   following: DocumentNamePrefix, ExecutionStatus, ExecutionId,
-    #   ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter,
-    #   TargetResourceGroup.
+    #   One or more keys to limit the results.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -4822,6 +4819,8 @@ module Aws::SSM
     #       {
     #         name: "DocumentName", # required
     #         permission_type: "Share", # required, accepts Share
+    #         max_results: 1,
+    #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] name
@@ -4833,11 +4832,24 @@ module Aws::SSM
     #   *Share*.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentPermissionRequest AWS API Documentation
     #
     class DescribeDocumentPermissionRequest < Struct.new(
       :name,
-      :permission_type)
+      :permission_type,
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4852,11 +4864,17 @@ module Aws::SSM
     #   version shared with each account.
     #   @return [Array<Types::AccountSharingInfo>]
     #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentPermissionResponse AWS API Documentation
     #
     class DescribeDocumentPermissionResponse < Struct.new(
       :account_ids,
-      :account_sharing_info_list)
+      :account_sharing_info_list,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8917,9 +8935,11 @@ module Aws::SSM
     #
     # @!attribute [rw] path
     #   The hierarchy for the parameter. Hierarchies start with a forward
-    #   slash (/) and end with the parameter name. A parameter name
-    #   hierarchy can have a maximum of 15 levels. Here is an example of a
-    #   hierarchy: `/Finance/Prod/IAD/WinServ2016/license33`
+    #   slash (/). The hierachy is the parameter name except the last part
+    #   of the parameter. For the API call to succeeed, the last part of the
+    #   parameter name cannot be in the path. A parameter name hierarchy can
+    #   have a maximum of 15 levels. Here is an example of a hierarchy:
+    #   `/Finance/Prod/IAD/WinServ2016/license33 `
     #   @return [String]
     #
     # @!attribute [rw] recursive
@@ -14877,11 +14897,20 @@ module Aws::SSM
     #
     #   `[main]`
     #
-    #   `cachedir=/var/cache/yum/$basesearch$releasever`
+    #   `name=MyCustomRepository`
     #
-    #   `keepcache=0`
+    #   `baseurl=https://my-custom-repository`
     #
-    #   `debuglevel=2`
+    #   `enabled=1`
+    #
+    #   <note markdown="1"> For information about other options available for your yum
+    #   repository configuration, see [dnf.conf(5)][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://man7.org/linux/man-pages/man5/dnf.conf.5.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchSource AWS API Documentation
@@ -15722,7 +15751,7 @@ module Aws::SSM
     #   Command-type tasks. Depending on the task, targets are optional for
     #   other maintenance window task types (Automation, AWS Lambda, and AWS
     #   Step Functions). For more information about running tasks that do
-    #   not specify targets, see see [Registering maintenance window tasks
+    #   not specify targets, see [Registering maintenance window tasks
     #   without targets][1] in the *AWS Systems Manager User Guide*.
     #
     #    </note>
@@ -16908,8 +16937,15 @@ module Aws::SSM
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] document_name
-    #   Required. The name of the Systems Manager document to run. This can
-    #   be a public document or a custom document.
+    #   The name of the Systems Manager document to run. This can be a
+    #   public document or a custom document. To run a shared document
+    #   belonging to another account, specify the document ARN. For more
+    #   information about how to use shared documents, see [Using shared SSM
+    #   documents][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -17387,7 +17423,15 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] document_name
-    #   The name of the Automation document to use for this execution.
+    #   The name of the Systems Manager document to run. This can be a
+    #   public document or a custom document. To run a shared document
+    #   belonging to another account, specify the document ARN. For more
+    #   information about how to use shared documents, see [Using shared SSM
+    #   documents][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -17971,7 +18015,7 @@ module Aws::SSM
     # Command-type tasks. Depending on the task, targets are optional for
     # other maintenance window task types (Automation, AWS Lambda, and AWS
     # Step Functions). For more information about running tasks that do not
-    # specify targets, see see [Registering maintenance window tasks without
+    # specify targets, see [Registering maintenance window tasks without
     # targets][1] in the *AWS Systems Manager User Guide*.
     #
     #  </note>
@@ -19154,7 +19198,7 @@ module Aws::SSM
     #   Command-type tasks. Depending on the task, targets are optional for
     #   other maintenance window task types (Automation, AWS Lambda, and AWS
     #   Step Functions). For more information about running tasks that do
-    #   not specify targets, see see [Registering maintenance window tasks
+    #   not specify targets, see [Registering maintenance window tasks
     #   without targets][1] in the *AWS Systems Manager User Guide*.
     #
     #    </note>

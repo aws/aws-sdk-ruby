@@ -2941,16 +2941,28 @@ module Aws::SSM
     #   The permission type for the document. The permission type can be
     #   *Share*.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
     # @return [Types::DescribeDocumentPermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDocumentPermissionResponse#account_ids #account_ids} => Array&lt;String&gt;
     #   * {Types::DescribeDocumentPermissionResponse#account_sharing_info_list #account_sharing_info_list} => Array&lt;Types::AccountSharingInfo&gt;
+    #   * {Types::DescribeDocumentPermissionResponse#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_document_permission({
     #     name: "DocumentName", # required
     #     permission_type: "Share", # required, accepts Share
+    #     max_results: 1,
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -2960,6 +2972,7 @@ module Aws::SSM
     #   resp.account_sharing_info_list #=> Array
     #   resp.account_sharing_info_list[0].account_id #=> String
     #   resp.account_sharing_info_list[0].shared_document_version #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentPermission AWS API Documentation
     #
@@ -5911,9 +5924,11 @@ module Aws::SSM
     #
     # @option params [required, String] :path
     #   The hierarchy for the parameter. Hierarchies start with a forward
-    #   slash (/) and end with the parameter name. A parameter name hierarchy
-    #   can have a maximum of 15 levels. Here is an example of a hierarchy:
-    #   `/Finance/Prod/IAD/WinServ2016/license33`
+    #   slash (/). The hierachy is the parameter name except the last part of
+    #   the parameter. For the API call to succeeed, the last part of the
+    #   parameter name cannot be in the path. A parameter name hierarchy can
+    #   have a maximum of 15 levels. Here is an example of a hierarchy:
+    #   `/Finance/Prod/IAD/WinServ2016/license33 `
     #
     # @option params [Boolean] :recursive
     #   Retrieve all parameters within a hierarchy.
@@ -7981,7 +7996,7 @@ module Aws::SSM
     #   Command-type tasks. Depending on the task, targets are optional for
     #   other maintenance window task types (Automation, AWS Lambda, and AWS
     #   Step Functions). For more information about running tasks that do not
-    #   specify targets, see see [Registering maintenance window tasks without
+    #   specify targets, see [Registering maintenance window tasks without
     #   targets][1] in the *AWS Systems Manager User Guide*.
     #
     #    </note>
@@ -8413,8 +8428,15 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
     #
     # @option params [required, String] :document_name
-    #   Required. The name of the Systems Manager document to run. This can be
-    #   a public document or a custom document.
+    #   The name of the Systems Manager document to run. This can be a public
+    #   document or a custom document. To run a shared document belonging to
+    #   another account, specify the document ARN. For more information about
+    #   how to use shared documents, see [Using shared SSM documents][1] in
+    #   the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html
     #
     # @option params [String] :document_version
     #   The SSM document version to use in the request. You can specify
@@ -8617,7 +8639,15 @@ module Aws::SSM
     # Initiates execution of an Automation document.
     #
     # @option params [required, String] :document_name
-    #   The name of the Automation document to use for this execution.
+    #   The name of the Systems Manager document to run. This can be a public
+    #   document or a custom document. To run a shared document belonging to
+    #   another account, specify the document ARN. For more information about
+    #   how to use shared documents, see [Using shared SSM documents][1] in
+    #   the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html
     #
     # @option params [String] :document_version
     #   The version of the Automation document to use for this execution.
@@ -9749,7 +9779,7 @@ module Aws::SSM
     # Command-type tasks. Depending on the task, targets are optional for
     # other maintenance window task types (Automation, AWS Lambda, and AWS
     # Step Functions). For more information about running tasks that do not
-    # specify targets, see see [Registering maintenance window tasks without
+    # specify targets, see [Registering maintenance window tasks without
     # targets][1] in the *AWS Systems Manager User Guide*.
     #
     #  </note>
@@ -9789,7 +9819,7 @@ module Aws::SSM
     #   Command-type tasks. Depending on the task, targets are optional for
     #   other maintenance window task types (Automation, AWS Lambda, and AWS
     #   Step Functions). For more information about running tasks that do not
-    #   specify targets, see see [Registering maintenance window tasks without
+    #   specify targets, see [Registering maintenance window tasks without
     #   targets][1] in the *AWS Systems Manager User Guide*.
     #
     #    </note>
@@ -10592,7 +10622,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

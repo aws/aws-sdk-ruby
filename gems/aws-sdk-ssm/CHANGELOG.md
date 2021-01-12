@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2021-01-12)
+------------------
+
+* Feature - AWS Systems Manager adds pagination support for DescribeDocumentPermission API
+
 1.101.0 (2020-12-22)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2021-01-12)
+------------------
+
+* Feature - Adds support for the Smart Card Redirection feature
+
 1.48.0 (2020-09-30)
 ------------------
 

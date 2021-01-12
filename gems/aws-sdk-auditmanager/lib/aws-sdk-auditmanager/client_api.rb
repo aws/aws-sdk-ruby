@@ -356,6 +356,7 @@ module Aws::AuditManager
     AssessmentFramework.add_member(:control_sets, Shapes::ShapeRef.new(shape: AssessmentControlSets, location_name: "controlSets"))
     AssessmentFramework.struct_class = Types::AssessmentFramework
 
+    AssessmentFrameworkMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: AuditManagerArn, location_name: "arn"))
     AssessmentFrameworkMetadata.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "id"))
     AssessmentFrameworkMetadata.add_member(:type, Shapes::ShapeRef.new(shape: FrameworkType, location_name: "type"))
     AssessmentFrameworkMetadata.add_member(:name, Shapes::ShapeRef.new(shape: FrameworkName, location_name: "name"))
@@ -573,6 +574,7 @@ module Aws::AuditManager
     CreateAssessmentFrameworkRequest.add_member(:description, Shapes::ShapeRef.new(shape: FrameworkDescription, location_name: "description"))
     CreateAssessmentFrameworkRequest.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceType, location_name: "complianceType"))
     CreateAssessmentFrameworkRequest.add_member(:control_sets, Shapes::ShapeRef.new(shape: CreateAssessmentFrameworkControlSets, required: true, location_name: "controlSets"))
+    CreateAssessmentFrameworkRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateAssessmentFrameworkRequest.struct_class = Types::CreateAssessmentFrameworkRequest
 
     CreateAssessmentFrameworkResponse.add_member(:framework, Shapes::ShapeRef.new(shape: Framework, location_name: "framework"))
@@ -733,6 +735,7 @@ module Aws::AuditManager
     Framework.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
     Framework.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
     Framework.add_member(:last_updated_by, Shapes::ShapeRef.new(shape: LastUpdatedBy, location_name: "lastUpdatedBy"))
+    Framework.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     Framework.struct_class = Types::Framework
 
     FrameworkMetadata.add_member(:name, Shapes::ShapeRef.new(shape: AssessmentName, location_name: "name"))

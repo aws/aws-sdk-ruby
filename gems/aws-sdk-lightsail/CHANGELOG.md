@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2021-01-12)
+------------------
+
+* Feature - This release adds IPv6 support for Amazon Lightsail instances, container services, CDN distributions, and load balancers.
+
 1.40.0 (2020-11-12)
 ------------------
 

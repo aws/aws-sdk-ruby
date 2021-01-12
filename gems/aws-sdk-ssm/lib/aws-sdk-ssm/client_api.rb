@@ -337,6 +337,7 @@ module Aws::SSM
     DocumentParameterName = Shapes::StringShape.new(name: 'DocumentParameterName')
     DocumentParameterType = Shapes::StringShape.new(name: 'DocumentParameterType')
     DocumentPermissionLimit = Shapes::StructureShape.new(name: 'DocumentPermissionLimit')
+    DocumentPermissionMaxResults = Shapes::IntegerShape.new(name: 'DocumentPermissionMaxResults')
     DocumentPermissionType = Shapes::StringShape.new(name: 'DocumentPermissionType')
     DocumentRequires = Shapes::StructureShape.new(name: 'DocumentRequires')
     DocumentRequiresList = Shapes::ListShape.new(name: 'DocumentRequiresList')
@@ -1878,10 +1879,13 @@ module Aws::SSM
 
     DescribeDocumentPermissionRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
     DescribeDocumentPermissionRequest.add_member(:permission_type, Shapes::ShapeRef.new(shape: DocumentPermissionType, required: true, location_name: "PermissionType"))
+    DescribeDocumentPermissionRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DocumentPermissionMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    DescribeDocumentPermissionRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeDocumentPermissionRequest.struct_class = Types::DescribeDocumentPermissionRequest
 
     DescribeDocumentPermissionResponse.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "AccountIds"))
     DescribeDocumentPermissionResponse.add_member(:account_sharing_info_list, Shapes::ShapeRef.new(shape: AccountSharingInfoList, location_name: "AccountSharingInfoList"))
+    DescribeDocumentPermissionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeDocumentPermissionResponse.struct_class = Types::DescribeDocumentPermissionResponse
 
     DescribeDocumentRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "Name"))
@@ -4842,7 +4846,9 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: DescribeDocumentPermissionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDocument)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPermissionType)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDocumentOperation)
       end)
 
       api.add_operation(:describe_effective_instance_associations, Seahorse::Model::Operation.new.tap do |o|

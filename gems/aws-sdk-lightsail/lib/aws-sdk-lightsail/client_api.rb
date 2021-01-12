@@ -392,7 +392,9 @@ module Aws::Lightsail
     InstanceState = Shapes::StructureShape.new(name: 'InstanceState')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
-    IpV6Address = Shapes::StringShape.new(name: 'IpV6Address')
+    IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
+    Ipv6Address = Shapes::StringShape.new(name: 'Ipv6Address')
+    Ipv6AddressList = Shapes::ListShape.new(name: 'Ipv6AddressList')
     IsVpcPeeredRequest = Shapes::StructureShape.new(name: 'IsVpcPeeredRequest')
     IsVpcPeeredResult = Shapes::StructureShape.new(name: 'IsVpcPeeredResult')
     IsoDate = Shapes::TimestampShape.new(name: 'IsoDate')
@@ -512,6 +514,8 @@ module Aws::Lightsail
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     SerialNumber = Shapes::StringShape.new(name: 'SerialNumber')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
+    SetIpAddressTypeRequest = Shapes::StructureShape.new(name: 'SetIpAddressTypeRequest')
+    SetIpAddressTypeResult = Shapes::StructureShape.new(name: 'SetIpAddressTypeResult')
     StartInstanceRequest = Shapes::StructureShape.new(name: 'StartInstanceRequest')
     StartInstanceResult = Shapes::StructureShape.new(name: 'StartInstanceResult')
     StartRelationalDatabaseRequest = Shapes::StructureShape.new(name: 'StartRelationalDatabaseRequest')
@@ -1005,6 +1009,7 @@ module Aws::Lightsail
     CreateDistributionRequest.add_member(:cache_behavior_settings, Shapes::ShapeRef.new(shape: CacheSettings, location_name: "cacheBehaviorSettings"))
     CreateDistributionRequest.add_member(:cache_behaviors, Shapes::ShapeRef.new(shape: CacheBehaviorList, location_name: "cacheBehaviors"))
     CreateDistributionRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "bundleId"))
+    CreateDistributionRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     CreateDistributionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateDistributionRequest.struct_class = Types::CreateDistributionRequest
 
@@ -1043,6 +1048,7 @@ module Aws::Lightsail
     CreateInstancesFromSnapshotRequest.add_member(:key_pair_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "keyPairName"))
     CreateInstancesFromSnapshotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateInstancesFromSnapshotRequest.add_member(:add_ons, Shapes::ShapeRef.new(shape: AddOnRequestList, location_name: "addOns"))
+    CreateInstancesFromSnapshotRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     CreateInstancesFromSnapshotRequest.add_member(:source_instance_name, Shapes::ShapeRef.new(shape: string, location_name: "sourceInstanceName"))
     CreateInstancesFromSnapshotRequest.add_member(:restore_date, Shapes::ShapeRef.new(shape: string, location_name: "restoreDate"))
     CreateInstancesFromSnapshotRequest.add_member(:use_latest_restorable_auto_snapshot, Shapes::ShapeRef.new(shape: boolean, location_name: "useLatestRestorableAutoSnapshot"))
@@ -1060,6 +1066,7 @@ module Aws::Lightsail
     CreateInstancesRequest.add_member(:key_pair_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "keyPairName"))
     CreateInstancesRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateInstancesRequest.add_member(:add_ons, Shapes::ShapeRef.new(shape: AddOnRequestList, location_name: "addOns"))
+    CreateInstancesRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     CreateInstancesRequest.struct_class = Types::CreateInstancesRequest
 
     CreateInstancesResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
@@ -1082,6 +1089,7 @@ module Aws::Lightsail
     CreateLoadBalancerRequest.add_member(:certificate_domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "certificateDomainName"))
     CreateLoadBalancerRequest.add_member(:certificate_alternative_names, Shapes::ShapeRef.new(shape: DomainNameList, location_name: "certificateAlternativeNames"))
     CreateLoadBalancerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateLoadBalancerRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     CreateLoadBalancerRequest.struct_class = Types::CreateLoadBalancerRequest
 
     CreateLoadBalancerResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
@@ -1916,7 +1924,8 @@ module Aws::Lightsail
     Instance.add_member(:is_static_ip, Shapes::ShapeRef.new(shape: boolean, location_name: "isStaticIp"))
     Instance.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "privateIpAddress"))
     Instance.add_member(:public_ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "publicIpAddress"))
-    Instance.add_member(:ipv6_address, Shapes::ShapeRef.new(shape: IpV6Address, location_name: "ipv6Address"))
+    Instance.add_member(:ipv6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, location_name: "ipv6Addresses"))
+    Instance.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     Instance.add_member(:hardware, Shapes::ShapeRef.new(shape: InstanceHardware, location_name: "hardware"))
     Instance.add_member(:networking, Shapes::ShapeRef.new(shape: InstanceNetworking, location_name: "networking"))
     Instance.add_member(:state, Shapes::ShapeRef.new(shape: InstanceState, location_name: "state"))
@@ -1973,6 +1982,7 @@ module Aws::Lightsail
     InstancePortInfo.add_member(:common_name, Shapes::ShapeRef.new(shape: string, location_name: "commonName"))
     InstancePortInfo.add_member(:access_direction, Shapes::ShapeRef.new(shape: AccessDirection, location_name: "accessDirection"))
     InstancePortInfo.add_member(:cidrs, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrs"))
+    InstancePortInfo.add_member(:ipv6_cidrs, Shapes::ShapeRef.new(shape: StringList, location_name: "ipv6Cidrs"))
     InstancePortInfo.add_member(:cidr_list_aliases, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrListAliases"))
     InstancePortInfo.struct_class = Types::InstancePortInfo
 
@@ -1983,6 +1993,7 @@ module Aws::Lightsail
     InstancePortState.add_member(:protocol, Shapes::ShapeRef.new(shape: NetworkProtocol, location_name: "protocol"))
     InstancePortState.add_member(:state, Shapes::ShapeRef.new(shape: PortState, location_name: "state"))
     InstancePortState.add_member(:cidrs, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrs"))
+    InstancePortState.add_member(:ipv6_cidrs, Shapes::ShapeRef.new(shape: StringList, location_name: "ipv6Cidrs"))
     InstancePortState.add_member(:cidr_list_aliases, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrListAliases"))
     InstancePortState.struct_class = Types::InstancePortState
 
@@ -2023,6 +2034,8 @@ module Aws::Lightsail
     InvalidInputException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
     InvalidInputException.struct_class = Types::InvalidInputException
 
+    Ipv6AddressList.member = Shapes::ShapeRef.new(shape: Ipv6Address)
+
     IsVpcPeeredRequest.struct_class = Types::IsVpcPeeredRequest
 
     IsVpcPeeredResult.add_member(:is_peered, Shapes::ShapeRef.new(shape: boolean, location_name: "isPeered"))
@@ -2058,6 +2071,7 @@ module Aws::Lightsail
     LightsailDistribution.add_member(:cache_behavior_settings, Shapes::ShapeRef.new(shape: CacheSettings, location_name: "cacheBehaviorSettings"))
     LightsailDistribution.add_member(:cache_behaviors, Shapes::ShapeRef.new(shape: CacheBehaviorList, location_name: "cacheBehaviors"))
     LightsailDistribution.add_member(:able_to_update_bundle, Shapes::ShapeRef.new(shape: boolean, location_name: "ableToUpdateBundle"))
+    LightsailDistribution.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     LightsailDistribution.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     LightsailDistribution.struct_class = Types::LightsailDistribution
 
@@ -2077,6 +2091,7 @@ module Aws::Lightsail
     LoadBalancer.add_member(:instance_health_summary, Shapes::ShapeRef.new(shape: InstanceHealthSummaryList, location_name: "instanceHealthSummary"))
     LoadBalancer.add_member(:tls_certificate_summaries, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateSummaryList, location_name: "tlsCertificateSummaries"))
     LoadBalancer.add_member(:configuration_options, Shapes::ShapeRef.new(shape: LoadBalancerConfigurationOptions, location_name: "configurationOptions"))
+    LoadBalancer.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     LoadBalancer.struct_class = Types::LoadBalancer
 
     LoadBalancerConfigurationOptions.key = Shapes::ShapeRef.new(shape: LoadBalancerAttributeName)
@@ -2233,6 +2248,7 @@ module Aws::Lightsail
     PortInfo.add_member(:to_port, Shapes::ShapeRef.new(shape: Port, location_name: "toPort"))
     PortInfo.add_member(:protocol, Shapes::ShapeRef.new(shape: NetworkProtocol, location_name: "protocol"))
     PortInfo.add_member(:cidrs, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrs"))
+    PortInfo.add_member(:ipv6_cidrs, Shapes::ShapeRef.new(shape: StringList, location_name: "ipv6Cidrs"))
     PortInfo.add_member(:cidr_list_aliases, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrListAliases"))
     PortInfo.struct_class = Types::PortInfo
 
@@ -2443,6 +2459,14 @@ module Aws::Lightsail
     ServiceException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     ServiceException.add_member(:tip, Shapes::ShapeRef.new(shape: string, location_name: "tip"))
     ServiceException.struct_class = Types::ServiceException
+
+    SetIpAddressTypeRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
+    SetIpAddressTypeRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "resourceName"))
+    SetIpAddressTypeRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, required: true, location_name: "ipAddressType"))
+    SetIpAddressTypeRequest.struct_class = Types::SetIpAddressTypeRequest
+
+    SetIpAddressTypeResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    SetIpAddressTypeResult.struct_class = Types::SetIpAddressTypeResult
 
     StartInstanceRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
     StartInstanceRequest.struct_class = Types::StartInstanceRequest
@@ -4446,6 +4470,21 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:set_ip_address_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SetIpAddressType"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SetIpAddressTypeRequest)
+        o.output = Shapes::ShapeRef.new(shape: SetIpAddressTypeResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
       api.add_operation(:start_instance, Seahorse::Model::Operation.new.tap do |o|

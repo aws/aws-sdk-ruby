@@ -1361,6 +1361,7 @@ module Aws::Lightsail
     #           to_port: 1,
     #           protocol: "tcp", # accepts tcp, all, udp, icmp
     #           cidrs: ["string"],
+    #           ipv6_cidrs: ["string"],
     #           cidr_list_aliases: ["string"],
     #         },
     #         instance_name: "ResourceName", # required
@@ -3047,6 +3048,7 @@ module Aws::Lightsail
     #           },
     #         ],
     #         bundle_id: "string", # required
+    #         ip_address_type: "dualstack", # accepts dualstack, ipv4
     #         tags: [
     #           {
     #             key: "TagKey",
@@ -3092,6 +3094,15 @@ module Aws::Lightsail
     #   distribution bundle IDs that you can specify.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type for the distribution.
+    #
+    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for
+    #   IPv4 and IPv6.
+    #
+    #   The default value is `dualstack`.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tag keys and optional values to add to the distribution during
     #   create.
@@ -3108,6 +3119,7 @@ module Aws::Lightsail
       :cache_behavior_settings,
       :cache_behaviors,
       :bundle_id,
+      :ip_address_type,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -3322,6 +3334,7 @@ module Aws::Lightsail
     #             },
     #           },
     #         ],
+    #         ip_address_type: "dualstack", # accepts dualstack, ipv4
     #         source_instance_name: "string",
     #         restore_date: "string",
     #         use_latest_restorable_auto_snapshot: false,
@@ -3399,6 +3412,15 @@ module Aws::Lightsail
     #   instance.
     #   @return [Array<Types::AddOnRequest>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type for the instance.
+    #
+    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for
+    #   IPv4 and IPv6.
+    #
+    #   The default value is `dualstack`.
+    #   @return [String]
+    #
     # @!attribute [rw] source_instance_name
     #   The name of the source instance from which the source automatic
     #   snapshot was created.
@@ -3472,6 +3494,7 @@ module Aws::Lightsail
       :key_pair_name,
       :tags,
       :add_ons,
+      :ip_address_type,
       :source_instance_name,
       :restore_date,
       :use_latest_restorable_auto_snapshot)
@@ -3518,6 +3541,7 @@ module Aws::Lightsail
     #             },
     #           },
     #         ],
+    #         ip_address_type: "dualstack", # accepts dualstack, ipv4
     #       }
     #
     # @!attribute [rw] instance_names
@@ -3600,6 +3624,15 @@ module Aws::Lightsail
     #   instance.
     #   @return [Array<Types::AddOnRequest>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type for the instance.
+    #
+    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for
+    #   IPv4 and IPv6.
+    #
+    #   The default value is `dualstack`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstancesRequest AWS API Documentation
     #
     class CreateInstancesRequest < Struct.new(
@@ -3611,7 +3644,8 @@ module Aws::Lightsail
       :user_data,
       :key_pair_name,
       :tags,
-      :add_ons)
+      :add_ons,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3709,6 +3743,7 @@ module Aws::Lightsail
     #             value: "TagValue",
     #           },
     #         ],
+    #         ip_address_type: "dualstack", # accepts dualstack, ipv4
     #       }
     #
     # @!attribute [rw] load_balancer_name
@@ -3757,6 +3792,15 @@ module Aws::Lightsail
     #   Use the `TagResource` action to tag a resource after it's created.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type for the load balancer.
+    #
+    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for
+    #   IPv4 and IPv6.
+    #
+    #   The default value is `dualstack`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateLoadBalancerRequest AWS API Documentation
     #
     class CreateLoadBalancerRequest < Struct.new(
@@ -3766,7 +3810,8 @@ module Aws::Lightsail
       :certificate_name,
       :certificate_domain_name,
       :certificate_alternative_names,
-      :tags)
+      :tags,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9457,8 +9502,15 @@ module Aws::Lightsail
     #   The public IP address of the instance.
     #   @return [String]
     #
-    # @!attribute [rw] ipv6_address
-    #   The IPv6 address of the instance.
+    # @!attribute [rw] ipv6_addresses
+    #   The IPv6 addresses of the instance.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type of the instance.
+    #
+    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for
+    #   IPv4 and IPv6.
     #   @return [String]
     #
     # @!attribute [rw] hardware
@@ -9500,7 +9552,8 @@ module Aws::Lightsail
       :is_static_ip,
       :private_ip_address,
       :public_ip_address,
-      :ipv6_address,
+      :ipv6_addresses,
+      :ip_address_type,
       :hardware,
       :networking,
       :state,
@@ -9628,14 +9681,26 @@ module Aws::Lightsail
     #   The following configuration options are available:
     #
     #   * `DEFAULT` - Use the default firewall settings from the Lightsail
-    #     instance blueprint.
+    #     instance blueprint. If this is specified, then IPv4 and IPv6 will
+    #     be configured for the new instance that is created in Amazon EC2.
     #
     #   * `INSTANCE` - Use the configured firewall settings from the source
-    #     Lightsail instance.
+    #     Lightsail instance. If this is specified, the new instance that is
+    #     created in Amazon EC2 will be configured to match the
+    #     configuration of the source Lightsail instance. For example, if
+    #     the source instance is configured for dual-stack (IPv4 and IPv6),
+    #     then IPv4 and IPv6 will be configured for the new instance that is
+    #     created in Amazon EC2. If the source instance is configured for
+    #     IPv4 only, then only IPv4 will be configured for the new instance
+    #     that is created in Amazon EC2.
     #
-    #   * `NONE` - Use the default Amazon EC2 security group.
+    #   * `NONE` - Use the default Amazon EC2 security group. If this is
+    #     specified, then only IPv4 will be configured for the new instance
+    #     that is created in Amazon EC2.
     #
-    #   * `CLOSED` - All ports closed.
+    #   * `CLOSED` - All ports closed. If this is specified, then only IPv4
+    #     will be configured for the new instance that is created in Amazon
+    #     EC2.
     #
     #   <note markdown="1"> If you configured `lightsail-connect` as a `cidrListAliases` on your
     #   instance, or if you chose to allow the Lightsail browser-based SSH
@@ -9810,14 +9875,20 @@ module Aws::Lightsail
     #
     #   * TCP and UDP - `0` to `65535`
     #
-    #   * ICMP - The ICMP type. For example, specify `8` as the `fromPort`
-    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
-    #     Ping. For more information, see [Control Messages][1] on
-    #     *Wikipedia*.
+    #   * ICMP - The ICMP type for IPv4 addresses. For example, specify `8`
+    #     as the `fromPort` (ICMP type), and `-1` as the `toPort` (ICMP
+    #     code), to enable ICMP Ping. For more information, see [Control
+    #     Messages][1] on *Wikipedia*.
+    #
+    #   * ICMPv6 - The ICMP type for IPv6 addresses. For example, specify
+    #     `128` as the `fromPort` (ICMPv6 type), and `0` as `toPort` (ICMPv6
+    #     code). For more information, see [Internet Control Message
+    #     Protocol for IPv6][2].
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
+    #   [2]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
@@ -9827,14 +9898,20 @@ module Aws::Lightsail
     #
     #   * TCP and UDP - `0` to `65535`
     #
-    #   * ICMP - The ICMP code. For example, specify `8` as the `fromPort`
-    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
-    #     Ping. For more information, see [Control Messages][1] on
-    #     *Wikipedia*.
+    #   * ICMP - The ICMP code for IPv4 addresses. For example, specify `8`
+    #     as the `fromPort` (ICMP type), and `-1` as the `toPort` (ICMP
+    #     code), to enable ICMP Ping. For more information, see [Control
+    #     Messages][1] on *Wikipedia*.
+    #
+    #   * ICMPv6 - The ICMP code for IPv6 addresses. For example, specify
+    #     `128` as the `fromPort` (ICMPv6 type), and `0` as `toPort` (ICMPv6
+    #     code). For more information, see [Internet Control Message
+    #     Protocol for IPv6][2].
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
+    #   [2]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
@@ -9896,9 +9973,33 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] cidrs
-    #   The IP address, or range of IP addresses in CIDR notation, that are
-    #   allowed to connect to an instance through the ports, and the
-    #   protocol. Lightsail supports IPv4 addresses.
+    #   The IPv4 address, or range of IPv4 addresses (in CIDR notation) that
+    #   are allowed to connect to an instance through the ports, and the
+    #   protocol.
+    #
+    #   <note markdown="1"> The `ipv6Cidrs` parameter lists the IPv6 addresses that are allowed
+    #   to connect to an instance.
+    #
+    #    </note>
+    #
+    #   For more information about CIDR block notation, see [Classless
+    #   Inter-Domain Routing][1] on *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ipv6_cidrs
+    #   The IPv6 address, or range of IPv6 addresses (in CIDR notation) that
+    #   are allowed to connect to an instance through the ports, and the
+    #   protocol. Only devices with an IPv6 address can connect to an
+    #   instance through IPv6; otherwise, IPv4 should be used.
+    #
+    #   <note markdown="1"> The `cidrs` parameter lists the IPv4 addresses that are allowed to
+    #   connect to an instance.
+    #
+    #    </note>
     #
     #   For more information about CIDR block notation, see [Classless
     #   Inter-Domain Routing][1] on *Wikipedia*.
@@ -9928,6 +10029,7 @@ module Aws::Lightsail
       :common_name,
       :access_direction,
       :cidrs,
+      :ipv6_cidrs,
       :cidr_list_aliases)
       SENSITIVE = []
       include Aws::Structure
@@ -9943,14 +10045,20 @@ module Aws::Lightsail
     #
     #   * TCP and UDP - `0` to `65535`
     #
-    #   * ICMP - The ICMP type. For example, specify `8` as the `fromPort`
-    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
-    #     Ping. For more information, see [Control Messages][1] on
-    #     *Wikipedia*.
+    #   * ICMP - The ICMP type for IPv4 addresses. For example, specify `8`
+    #     as the `fromPort` (ICMP type), and `-1` as the `toPort` (ICMP
+    #     code), to enable ICMP Ping. For more information, see [Control
+    #     Messages][1] on *Wikipedia*.
+    #
+    #   * ICMPv6 - The ICMP type for IPv6 addresses. For example, specify
+    #     `128` as the `fromPort` (ICMPv6 type), and `0` as `toPort` (ICMPv6
+    #     code). For more information, see [Internet Control Message
+    #     Protocol for IPv6][2].
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
+    #   [2]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
@@ -9960,14 +10068,20 @@ module Aws::Lightsail
     #
     #   * TCP and UDP - `0` to `65535`
     #
-    #   * ICMP - The ICMP code. For example, specify `8` as the `fromPort`
-    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
-    #     Ping. For more information, see [Control Messages][1] on
-    #     *Wikipedia*.
+    #   * ICMP - The ICMP code for IPv4 addresses. For example, specify `8`
+    #     as the `fromPort` (ICMP type), and `-1` as the `toPort` (ICMP
+    #     code), to enable ICMP Ping. For more information, see [Control
+    #     Messages][1] on *Wikipedia*.
+    #
+    #   * ICMPv6 - The ICMP code for IPv6 addresses. For example, specify
+    #     `128` as the `fromPort` (ICMPv6 type), and `0` as `toPort` (ICMPv6
+    #     code). For more information, see [Internet Control Message
+    #     Protocol for IPv6][2].
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
+    #   [2]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
@@ -10015,9 +10129,33 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] cidrs
-    #   The IP address, or range of IP addresses in CIDR notation, that are
-    #   allowed to connect to an instance through the ports, and the
-    #   protocol. Lightsail supports IPv4 addresses.
+    #   The IPv4 address, or range of IPv4 addresses (in CIDR notation) that
+    #   are allowed to connect to an instance through the ports, and the
+    #   protocol.
+    #
+    #   <note markdown="1"> The `ipv6Cidrs` parameter lists the IPv6 addresses that are allowed
+    #   to connect to an instance.
+    #
+    #    </note>
+    #
+    #   For more information about CIDR block notation, see [Classless
+    #   Inter-Domain Routing][1] on *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ipv6_cidrs
+    #   The IPv6 address, or range of IPv6 addresses (in CIDR notation) that
+    #   are allowed to connect to an instance through the ports, and the
+    #   protocol. Only devices with an IPv6 address can connect to an
+    #   instance through IPv6; otherwise, IPv4 should be used.
+    #
+    #   <note markdown="1"> The `cidrs` parameter lists the IPv4 addresses that are allowed to
+    #   connect to an instance.
+    #
+    #    </note>
     #
     #   For more information about CIDR block notation, see [Classless
     #   Inter-Domain Routing][1] on *Wikipedia*.
@@ -10044,6 +10182,7 @@ module Aws::Lightsail
       :protocol,
       :state,
       :cidrs,
+      :ipv6_cidrs,
       :cidr_list_aliases)
       SENSITIVE = []
       include Aws::Structure
@@ -10206,9 +10345,9 @@ module Aws::Lightsail
     # Lightsail throws this exception when user input does not conform to
     # the validation rules of an input field.
     #
-    # <note markdown="1"> Domain-related APIs are only available in the N. Virginia (us-east-1)
-    # Region. Please set your AWS Region configuration to us-east-1 to
-    # create, view, or edit these resources.
+    # <note markdown="1"> Domain and distribution APIs are only available in the N. Virginia
+    # (`us-east-1`) AWS Region. Please set your AWS Region configuration to
+    # `us-east-1` to create, view, or edit these resources.
     #
     #  </note>
     #
@@ -10411,6 +10550,13 @@ module Aws::Lightsail
     #   distribution's bundle.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type of the distribution.
+    #
+    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for
+    #   IPv4 and IPv6.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tag keys and optional values for the resource. For more
     #   information about tags in Lightsail, see the [Lightsail Dev
@@ -10442,6 +10588,7 @@ module Aws::Lightsail
       :cache_behavior_settings,
       :cache_behaviors,
       :able_to_update_bundle,
+      :ip_address_type,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -10536,6 +10683,13 @@ module Aws::Lightsail
     #   balancer. Valid values are listed below.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type of the load balancer.
+    #
+    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for
+    #   IPv4 and IPv6.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancer AWS API Documentation
     #
     class LoadBalancer < Struct.new(
@@ -10554,7 +10708,8 @@ module Aws::Lightsail
       :instance_port,
       :instance_health_summary,
       :tls_certificate_summaries,
-      :configuration_options)
+      :configuration_options,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11092,6 +11247,7 @@ module Aws::Lightsail
     #           to_port: 1,
     #           protocol: "tcp", # accepts tcp, all, udp, icmp
     #           cidrs: ["string"],
+    #           ipv6_cidrs: ["string"],
     #           cidr_list_aliases: ["string"],
     #         },
     #         instance_name: "ResourceName", # required
@@ -11380,6 +11536,7 @@ module Aws::Lightsail
     #         to_port: 1,
     #         protocol: "tcp", # accepts tcp, all, udp, icmp
     #         cidrs: ["string"],
+    #         ipv6_cidrs: ["string"],
     #         cidr_list_aliases: ["string"],
     #       }
     #
@@ -11390,14 +11547,20 @@ module Aws::Lightsail
     #
     #   * TCP and UDP - `0` to `65535`
     #
-    #   * ICMP - The ICMP type. For example, specify `8` as the `fromPort`
-    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
-    #     Ping. For more information, see [Control Messages][1] on
-    #     *Wikipedia*.
+    #   * ICMP - The ICMP type for IPv4 addresses. For example, specify `8`
+    #     as the `fromPort` (ICMP type), and `-1` as the `toPort` (ICMP
+    #     code), to enable ICMP Ping. For more information, see [Control
+    #     Messages][1] on *Wikipedia*.
+    #
+    #   * ICMPv6 - The ICMP type for IPv6 addresses. For example, specify
+    #     `128` as the `fromPort` (ICMPv6 type), and `0` as `toPort` (ICMPv6
+    #     code). For more information, see [Internet Control Message
+    #     Protocol for IPv6][2].
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
+    #   [2]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
@@ -11407,14 +11570,20 @@ module Aws::Lightsail
     #
     #   * TCP and UDP - `0` to `65535`
     #
-    #   * ICMP - The ICMP code. For example, specify `8` as the `fromPort`
-    #     (ICMP type), and `-1` as the `toPort` (ICMP code), to enable ICMP
-    #     Ping. For more information, see [Control Messages][1] on
-    #     *Wikipedia*.
+    #   * ICMP - The ICMP code for IPv4 addresses. For example, specify `8`
+    #     as the `fromPort` (ICMP type), and `-1` as the `toPort` (ICMP
+    #     code), to enable ICMP Ping. For more information, see [Control
+    #     Messages][1] on *Wikipedia*.
+    #
+    #   * ICMPv6 - The ICMP code for IPv6 addresses. For example, specify
+    #     `128` as the `fromPort` (ICMPv6 type), and `0` as `toPort` (ICMPv6
+    #     code). For more information, see [Internet Control Message
+    #     Protocol for IPv6][2].
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages
+    #   [2]: https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
@@ -11454,9 +11623,14 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] cidrs
-    #   The IP address, or range of IP addresses in CIDR notation, that are
-    #   allowed to connect to an instance through the ports, and the
-    #   protocol. Lightsail supports IPv4 addresses.
+    #   The IPv4 address, or range of IPv4 addresses (in CIDR notation) that
+    #   are allowed to connect to an instance through the ports, and the
+    #   protocol.
+    #
+    #   <note markdown="1"> The `ipv6Cidrs` parameter lists the IPv6 addresses that are allowed
+    #   to connect to an instance.
+    #
+    #    </note>
     #
     #   Examples:
     #
@@ -11465,6 +11639,25 @@ module Aws::Lightsail
     #
     #   * To allow the IP addresses `192.0.2.0` to `192.0.2.255`, specify
     #     `192.0.2.0/24`.
+    #
+    #   For more information about CIDR block notation, see [Classless
+    #   Inter-Domain Routing][1] on *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ipv6_cidrs
+    #   The IPv6 address, or range of IPv6 addresses (in CIDR notation) that
+    #   are allowed to connect to an instance through the ports, and the
+    #   protocol. Only devices with an IPv6 address can connect to an
+    #   instance through IPv6; otherwise, IPv4 should be used.
+    #
+    #   <note markdown="1"> The `cidrs` parameter lists the IPv4 addresses that are allowed to
+    #   connect to an instance.
+    #
+    #    </note>
     #
     #   For more information about CIDR block notation, see [Classless
     #   Inter-Domain Routing][1] on *Wikipedia*.
@@ -11490,6 +11683,7 @@ module Aws::Lightsail
       :to_port,
       :protocol,
       :cidrs,
+      :ipv6_cidrs,
       :cidr_list_aliases)
       SENSITIVE = []
       include Aws::Structure
@@ -11706,6 +11900,7 @@ module Aws::Lightsail
     #             to_port: 1,
     #             protocol: "tcp", # accepts tcp, all, udp, icmp
     #             cidrs: ["string"],
+    #             ipv6_cidrs: ["string"],
     #             cidr_list_aliases: ["string"],
     #           },
     #         ],
@@ -12696,6 +12891,63 @@ module Aws::Lightsail
       :docs,
       :message,
       :tip)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SetIpAddressTypeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "ContainerService", # required, accepts ContainerService, Instance, StaticIp, KeyPair, InstanceSnapshot, Domain, PeeredVpc, LoadBalancer, LoadBalancerTlsCertificate, Disk, DiskSnapshot, RelationalDatabase, RelationalDatabaseSnapshot, ExportSnapshotRecord, CloudFormationStackRecord, Alarm, ContactMethod, Distribution, Certificate
+    #         resource_name: "ResourceName", # required
+    #         ip_address_type: "dualstack", # required, accepts dualstack, ipv4
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #
+    #   The possible values are `Distribution`, `Instance`, and
+    #   `LoadBalancer`.
+    #
+    #   <note markdown="1"> Distribution-related APIs are available only in the N. Virginia
+    #   (`us-east-1`) AWS Region. Set your AWS Region configuration to
+    #   `us-east-1` to create, view, or edit distributions.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the resource for which to set the IP address type.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type to set for the specified resource.
+    #
+    #   The possible values are `ipv4` for IPv4 only, and `dualstack` for
+    #   IPv4 and IPv6.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/SetIpAddressTypeRequest AWS API Documentation
+    #
+    class SetIpAddressTypeRequest < Struct.new(
+      :resource_type,
+      :resource_name,
+      :ip_address_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An array of objects that describe the result of the action, such as
+    #   the status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/SetIpAddressTypeResult AWS API Documentation
+    #
+    class SetIpAddressTypeResult < Struct.new(
+      :operations)
       SENSITIVE = []
       include Aws::Structure
     end

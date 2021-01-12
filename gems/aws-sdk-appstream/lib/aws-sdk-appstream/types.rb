@@ -471,6 +471,8 @@ module Aws::AppStream
     #   The instance type to use when launching fleet instances. The
     #   following instance types are available:
     #
+    #   * stream.standard.small
+    #
     #   * stream.standard.medium
     #
     #   * stream.standard.large
@@ -761,6 +763,8 @@ module Aws::AppStream
     #   The instance type to use when launching the image builder. The
     #   following instance types are available:
     #
+    #   * stream.standard.small
+    #
     #   * stream.standard.medium
     #
     #   * stream.standard.large
@@ -992,7 +996,7 @@ module Aws::AppStream
     #         feedback_url: "FeedbackURL",
     #         user_settings: [
     #           {
-    #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN
     #             permission: "ENABLED", # required, accepts ENABLED, DISABLED
     #           },
     #         ],
@@ -1140,6 +1144,9 @@ module Aws::AppStream
     # @!attribute [rw] application_id
     #   The name of the application to launch after the session starts. This
     #   is the name that you specified as **Name** in the Image Assistant.
+    #   If your fleet is enabled for the **Desktop** stream view, you can
+    #   also choose to launch directly to the operating system desktop. To
+    #   do so, specify **Desktop**.
     #   @return [String]
     #
     # @!attribute [rw] validity
@@ -2249,6 +2256,8 @@ module Aws::AppStream
     #   The instance type to use when launching fleet instances. The
     #   following instance types are available:
     #
+    #   * stream.standard.small
+    #
     #   * stream.standard.medium
     #
     #   * stream.standard.large
@@ -2609,6 +2618,8 @@ module Aws::AppStream
     # @!attribute [rw] instance_type
     #   The instance type for the image builder. The following instance
     #   types are available:
+    #
+    #   * stream.standard.small
     #
     #   * stream.standard.medium
     #
@@ -3707,6 +3718,8 @@ module Aws::AppStream
     #   The instance type to use when launching fleet instances. The
     #   following instance types are available:
     #
+    #   * stream.standard.small
+    #
     #   * stream.standard.medium
     #
     #   * stream.standard.large
@@ -3979,7 +3992,7 @@ module Aws::AppStream
     #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS
     #         user_settings: [
     #           {
-    #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN
     #             permission: "ENABLED", # required, accepts ENABLED, DISABLED
     #           },
     #         ],
@@ -4196,7 +4209,7 @@ module Aws::AppStream
     #   data as a hash:
     #
     #       {
-    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN
     #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
     #       }
     #
