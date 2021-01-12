@@ -90,28 +90,32 @@ module Aws
       end
 
       context 'End Of Line Characters' do
+        # human readable input is tricky for these - so use a base64 encoded
+        # string to ensure we get exactly what should be tested
         it 'encodes line feeds' do
-          input = "\n \n"
+          # "\n \n"
+          input = Base64.decode64('CiAK').force_encoding('utf-8')
           xml.node('xml', input)
           expect(result).to include('&#xA; &#xA;')
         end
 
         it 'encodes line feeds and carriage returns' do
-          # human readable input is tricky for these - so use a base64 encoded
-          # string to ensure we get exactly what should be tested
-          input = Base64.decode64('YQ0KIGIKIGMN')
+          # "a\r\n b\n c\r"
+          input = Base64.decode64('YQ0KIGIKIGMN').force_encoding('utf-8')
           xml.node('xml', input)
           expect(result).to include('a&#xD;&#xA; b&#xA; c&#xD;')
         end
 
         it 'encodes next lines' do
-          input = "a\r\u0085 b\u0085"
+          # "a\r\u0085 b\u0085"
+          input = Base64.decode64('YQ3ChSBiwoU=').force_encoding('utf-8')
           xml.node('xml', input)
           expect(result).to include('a&#xD;&#x85; b&#x85;')
         end
 
         it 'encodes line separators' do
-          input = "a\r\u2028 b\u0085 c\u2028"
+          # "a\r\u2028 b\u0085 c\u2028"
+          input = Base64.decode64('YQ3igKggYsKFIGPigKg=').force_encoding('utf-8')
           xml.node('xml', input)
           expect(result).to include('a&#xD;&#x2028; b&#x85; c&#x2028;')
         end
