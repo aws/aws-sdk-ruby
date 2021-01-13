@@ -67,12 +67,7 @@ module Aws
       end
 
       def escape(string, text_or_attr)
-        string.to_s
-          .encode(:xml => text_or_attr)
-          .gsub("\u{000D}", '&#xD;') # Carriage Return
-          .gsub("\u{000A}", '&#xA;') # Line Feed
-          .gsub("\u{0085}", '&#x85;') # Next Line
-          .gsub("\u{2028}", '&#x2028;') # Line Separator
+        string.to_s.encode(:xml => text_or_attr)
       end
 
       def attributes(attr)
