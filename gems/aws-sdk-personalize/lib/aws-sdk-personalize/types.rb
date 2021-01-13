@@ -240,9 +240,11 @@ module Aws::Personalize
     #       }
     #
     # @!attribute [rw] item_exploration_config
-    #   A string to string map specifying the inference hyperparameters you
-    #   wish to use for hyperparameter optimization. See
-    #   customizing-solution-config-hpo.
+    #   A string to string map specifying the exploration configuration
+    #   hyperparameters, including `explorationWeight` and
+    #   `explorationItemAgeCutOff`, you want to use to configure the amount
+    #   of item exploration Amazon Personalize uses when recommending items.
+    #   See native-recipe-new-item-USER\_PERSONALIZATION.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/BatchInferenceJobConfig AWS API Documentation
@@ -442,9 +444,16 @@ module Aws::Personalize
     #       }
     #
     # @!attribute [rw] item_exploration_config
-    #   A string to string map specifying the inference hyperparameters you
-    #   wish to use for hyperparameter optimization. See
-    #   customizing-solution-config-hpo.
+    #   A string to string map specifying the exploration configuration
+    #   hyperparameters, including `explorationWeight` and
+    #   `explorationItemAgeCutOff`, you want to use to configure the amount
+    #   of item exploration Amazon Personalize uses when recommending items.
+    #   Provide `itemExplorationConfig` data only if your solution uses the
+    #   [User-Personalization][1] recipe.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CampaignConfig AWS API Documentation
@@ -988,20 +997,10 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] filter_expression
-    #   The filter expression that designates the interaction types that the
-    #   filter will filter out. A filter expression must follow the
-    #   following format:
-    #
-    #   `EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")`
-    #
-    #   Where "EVENT\_TYPE" is the type of event to filter out. To filter
-    #   out all items with any interactions history, set `"*"` as the
-    #   EVENT\_TYPE. For more information, see [Using Filters with Amazon
-    #   Personalize][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filters.html
+    #   The filter expression defines which items are included or excluded
+    #   from recommendations. Filter expression must follow specific format
+    #   rules. For information about filter expression structure and syntax,
+    #   see filter-expressions.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateFilterRequest AWS API Documentation
@@ -1159,12 +1158,20 @@ module Aws::Personalize
     #   When your have multiple event types (using an `EVENT_TYPE` schema
     #   field), this parameter specifies which event type (for example,
     #   'click' or 'like') is used for training the model.
+    #
+    #   If you do not provide an `eventType`, Amazon Personalize will use
+    #   all interactions for training with equal weight regardless of type.
     #   @return [String]
     #
     # @!attribute [rw] solution_config
     #   The configuration to use with the solution. When `performAutoML` is
     #   set to true, Amazon Personalize only evaluates the `autoMLConfig`
     #   section of the solution configuration.
+    #
+    #   <note markdown="1"> Amazon Personalize doesn't support configuring the `hpoObjective`
+    #   at this time.
+    #
+    #    </note>
     #   @return [Types::SolutionConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateSolutionRequest AWS API Documentation
@@ -1218,7 +1225,12 @@ module Aws::Personalize
     #   The `UPDATE` option can only be used when you already have an active
     #   solution version created from the input solution using the `FULL`
     #   option and the input solution was trained with the
-    #   native-recipe-hrnn-coldstart recipe.
+    #   [User-Personalization][1] recipe or the [HRNN-Coldstart][2] recipe.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateSolutionVersionRequest AWS API Documentation
@@ -2533,17 +2545,9 @@ module Aws::Personalize
     #
     # @!attribute [rw] filter_expression
     #   Specifies the type of item interactions to filter out of
-    #   recommendation results. The filter expression must follow the
-    #   following format:
-    #
-    #   `EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")`
-    #
-    #   Where "EVENT\_TYPE" is the type of event to filter out. For more
-    #   information, see [Using Filters with Amazon Personalize][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filters.html
+    #   recommendation results. The filter expression must follow specific
+    #   format rules. For information about filter expression structure and
+    #   syntax, see filter-expressions.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2646,9 +2650,7 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # Describes the properties for hyperparameter optimization (HPO). For
-    # use with the bring-your-own-recipe feature. Do not use for Amazon
-    # Personalize native recipes.
+    # Describes the properties for hyperparameter optimization (HPO).
     #
     # @note When making an API call, you may pass HPOConfig
     #   data as a hash:
@@ -2689,6 +2691,11 @@ module Aws::Personalize
     #
     # @!attribute [rw] hpo_objective
     #   The metric to optimize during HPO.
+    #
+    #   <note markdown="1"> Amazon Personalize doesn't support configuring the `hpoObjective`
+    #   at this time.
+    #
+    #    </note>
     #   @return [Types::HPOObjective]
     #
     # @!attribute [rw] hpo_resource_config
@@ -2710,6 +2717,11 @@ module Aws::Personalize
     end
 
     # The metric to optimize during hyperparameter optimization (HPO).
+    #
+    # <note markdown="1"> Amazon Personalize doesn't support configuring the `hpoObjective` at
+    # this time.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass HPOObjective
     #   data as a hash:
@@ -3633,7 +3645,9 @@ module Aws::Personalize
     #
     # @!attribute [rw] event_type
     #   The event type (for example, 'click' or 'like') that is used for
-    #   training the model.
+    #   training the model. If no `eventType` is provided, Amazon
+    #   Personalize uses all interactions for training with equal weight
+    #   regardless of type.
     #   @return [String]
     #
     # @!attribute [rw] solution_config
@@ -3863,17 +3877,23 @@ module Aws::Personalize
     #   @return [Float]
     #
     # @!attribute [rw] training_mode
-    #   The scope of training used to create the solution version. The
-    #   `FULL` option trains the solution version based on the entirety of
-    #   the input solution's training data, while the `UPDATE` option
-    #   processes only the training data that has changed since the creation
-    #   of the last solution version. Choose `UPDATE` when you want to start
-    #   recommending items added to the dataset without retraining the
-    #   model.
+    #   The scope of training to be performed when creating the solution
+    #   version. The `FULL` option trains the solution version based on the
+    #   entirety of the input solution's training data, while the `UPDATE`
+    #   option processes only the data that has changed in comparison to the
+    #   input solution. Choose `UPDATE` when you want to incrementally
+    #   update your solution version instead of creating an entirely new
+    #   one.
     #
-    #   The `UPDATE` option can only be used after you've created a
-    #   solution version with the `FULL` option and the training solution
-    #   uses the native-recipe-hrnn-coldstart.
+    #   The `UPDATE` option can only be used when you already have an active
+    #   solution version created from the input solution using the `FULL`
+    #   option and the input solution was trained with the
+    #   [User-Personalization][1] recipe or the [HRNN-Coldstart][2] recipe.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html
     #   @return [String]
     #
     # @!attribute [rw] tuned_hpo_params

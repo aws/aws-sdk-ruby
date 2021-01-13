@@ -3509,7 +3509,7 @@ module Aws::FraudDetector
     #         model_id: "modelIdentifier", # required
     #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #         model_version_number: "floatVersionString", # required
-    #         status: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #         status: "ACTIVE", # required, accepts ACTIVE, INACTIVE, TRAINING_CANCELLED
     #       }
     #
     # @!attribute [rw] model_id

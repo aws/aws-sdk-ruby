@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2021-01-13)
+------------------
+
+* Feature - Added support for cancelling a model version that is TRAINING_IN_PROGRESS.
+
 1.14.0 (2020-11-05)
 ------------------
 

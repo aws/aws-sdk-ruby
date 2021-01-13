@@ -819,8 +819,8 @@ module Aws::FraudDetector
     # You cannot delete an entity type that is included in an event type.
     #
     # When you delete an entity type, Amazon Fraud Detector permanently
-    # deletes that entity type from the evaluation history, and the data is
-    # no longer stored in Amazon Fraud Detector.
+    # deletes that entity type and the data is no longer stored in Amazon
+    # Fraud Detector.
     #
     # @option params [required, String] :name
     #   The name of the entity type to delete.
@@ -845,8 +845,8 @@ module Aws::FraudDetector
     # Deletes the specified event.
     #
     # When you delete an event, Amazon Fraud Detector permanently deletes
-    # that event from the evaluation history, and the event data is no
-    # longer stored in Amazon Fraud Detector.
+    # that event and the event data is no longer stored in Amazon Fraud
+    # Detector.
     #
     # @option params [required, String] :event_id
     #   The ID of the event to delete.
@@ -877,8 +877,8 @@ module Aws::FraudDetector
     # You cannot delete an event type that is used in a detector or a model.
     #
     # When you delete an entity type, Amazon Fraud Detector permanently
-    # deletes that entity type from the evaluation history, and the data is
-    # no longer stored in Amazon Fraud Detector.
+    # deletes that entity type and the data is no longer stored in Amazon
+    # Fraud Detector.
     #
     # @option params [required, String] :name
     #   The name of the event type to delete.
@@ -935,8 +935,7 @@ module Aws::FraudDetector
     # delete the relevant event ID.
     #
     # When you delete a label, Amazon Fraud Detector permanently deletes
-    # that label from the evaluation history, and the data is no longer
-    # stored in Amazon Fraud Detector.
+    # that label and the data is no longer stored in Amazon Fraud Detector.
     #
     # @option params [required, String] :name
     #   The name of the label to delete.
@@ -964,8 +963,7 @@ module Aws::FraudDetector
     # provided that they are not associated with a detector version.
     #
     # When you delete a model, Amazon Fraud Detector permanently deletes
-    # that model from the evaluation history, and the data is no longer
-    # stored in Amazon Fraud Detector.
+    # that model and the data is no longer stored in Amazon Fraud Detector.
     #
     # @option params [required, String] :model_id
     #   The model ID of the model to delete.
@@ -997,8 +995,8 @@ module Aws::FraudDetector
     # provided that they are not associated with a detector version.
     #
     # When you delete a model version, Amazon Fraud Detector permanently
-    # deletes that model version from the evaluation history, and the data
-    # is no longer stored in Amazon Fraud Detector.
+    # deletes that model version and the data is no longer stored in Amazon
+    # Fraud Detector.
     #
     # @option params [required, String] :model_id
     #   The model ID of the model version to delete.
@@ -1033,8 +1031,8 @@ module Aws::FraudDetector
     # You cannot delete an outcome that is used in a rule version.
     #
     # When you delete an outcome, Amazon Fraud Detector permanently deletes
-    # that outcome from the evaluation history, and the data is no longer
-    # stored in Amazon Fraud Detector.
+    # that outcome and the data is no longer stored in Amazon Fraud
+    # Detector.
     #
     # @option params [required, String] :name
     #   The name of the outcome to delete.
@@ -1060,8 +1058,7 @@ module Aws::FraudDetector
     # `ACTIVE` or `INACTIVE` detector version.
     #
     # When you delete a rule, Amazon Fraud Detector permanently deletes that
-    # rule from the evaluation history, and the data is no longer stored in
-    # Amazon Fraud Detector.
+    # rule and the data is no longer stored in Amazon Fraud Detector.
     #
     # @option params [required, Types::Rule] :rule
     #   A rule.
@@ -1097,8 +1094,8 @@ module Aws::FraudDetector
     # delete these variables manually.
     #
     # When you delete a variable, Amazon Fraud Detector permanently deletes
-    # that variable from the evaluation history, and the data is no longer
-    # stored in Amazon Fraud Detector.
+    # that variable and the data is no longer stored in Amazon Fraud
+    # Detector.
     #
     # @option params [required, String] :name
     #   The name of the variable to delete.
@@ -2632,7 +2629,7 @@ module Aws::FraudDetector
     #     model_id: "modelIdentifier", # required
     #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
     #     model_version_number: "floatVersionString", # required
-    #     status: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+    #     status: "ACTIVE", # required, accepts ACTIVE, INACTIVE, TRAINING_CANCELLED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/UpdateModelVersionStatus AWS API Documentation
@@ -2785,7 +2782,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

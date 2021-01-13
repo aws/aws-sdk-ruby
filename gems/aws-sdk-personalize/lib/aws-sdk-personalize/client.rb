@@ -427,11 +427,16 @@ module Aws::Personalize
     # throughput and unit of billing for Amazon Personalize. The minimum
     # provisioned TPS (`minProvisionedTPS`) specifies the baseline
     # throughput provisioned by Amazon Personalize, and thus, the minimum
-    # billing charge. If your TPS increases beyond `minProvisionedTPS`,
-    # Amazon Personalize auto-scales the provisioned capacity up and down,
-    # but never below `minProvisionedTPS`, to maintain a 70% utilization.
-    # There's a short time delay while the capacity is increased that might
-    # cause loss of transactions. It's recommended to start with a low
+    # billing charge.
+    #
+    # If your TPS increases beyond `minProvisionedTPS`, Amazon Personalize
+    # auto-scales the provisioned capacity up and down, but never below
+    # `minProvisionedTPS`. There's a short time delay while the capacity is
+    # increased that might cause loss of transactions.
+    #
+    # The actual TPS used is calculated as the average requests/second
+    # within a 5-minute window. You pay for maximum of either the minimum
+    # provisioned TPS or the actual TPS. We recommend starting with a low
     # `minProvisionedTPS`, track your usage using Amazon CloudWatch metrics,
     # and then increase the `minProvisionedTPS` as necessary.
     #
@@ -686,7 +691,8 @@ module Aws::Personalize
     # from the data source, as Amazon Personalize makes a copy of your data
     # and processes it in an internal AWS system.
     #
-    # The dataset import job replaces any previous data in the dataset.
+    # The dataset import job replaces any existing data in the dataset that
+    # you imported in bulk.
     #
     # **Status**
     #
@@ -755,14 +761,8 @@ module Aws::Personalize
       req.send_request(options)
     end
 
-    # Creates an event tracker that you use when sending event data to the
+    # Creates an event tracker that you use when adding event data to a
     # specified dataset group using the [PutEvents][1] API.
-    #
-    # When Amazon Personalize creates an event tracker, it also creates an
-    # *event-interactions* dataset in the dataset group associated with the
-    # event tracker. The event-interactions dataset stores the event data
-    # from the `PutEvents` call. The contents of this dataset are not
-    # available to the user.
     #
     # <note markdown="1"> Only one event tracker can be associated with a dataset group. You
     # will get an error if you call `CreateEventTracker` using the same
@@ -770,8 +770,11 @@ module Aws::Personalize
     #
     #  </note>
     #
-    # When you send event data you include your tracking ID. The tracking ID
-    # identifies the customer and authorizes the customer to send the data.
+    # When you create an event tracker, the response includes a tracking ID,
+    # which you pass as a parameter when you use the [PutEvents][1]
+    # operation. Amazon Personalize then appends the event data to the
+    # Interactions dataset of the dataset group you specify in your event
+    # tracker.
     #
     # The event tracker can be in one of the following states:
     #
@@ -832,12 +835,7 @@ module Aws::Personalize
       req.send_request(options)
     end
 
-    # Creates a recommendation filter. For more information, see [Using
-    # Filters with Amazon Personalize][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/filters.html
+    # Creates a recommendation filter. For more information, see filter.
     #
     # @option params [required, String] :name
     #   The name of the filter to create.
@@ -846,20 +844,10 @@ module Aws::Personalize
     #   The ARN of the dataset group that the filter will belong to.
     #
     # @option params [required, String] :filter_expression
-    #   The filter expression that designates the interaction types that the
-    #   filter will filter out. A filter expression must follow the following
-    #   format:
-    #
-    #   `EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")`
-    #
-    #   Where "EVENT\_TYPE" is the type of event to filter out. To filter
-    #   out all items with any interactions history, set `"*"` as the
-    #   EVENT\_TYPE. For more information, see [Using Filters with Amazon
-    #   Personalize][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filters.html
+    #   The filter expression defines which items are included or excluded
+    #   from recommendations. Filter expression must follow specific format
+    #   rules. For information about filter expression structure and syntax,
+    #   see filter-expressions.
     #
     # @return [Types::CreateFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -950,6 +938,11 @@ module Aws::Personalize
     # `performAutoML` and Amazon Personalize will analyze your data and
     # select the optimum USER\_PERSONALIZATION recipe for you.
     #
+    # <note markdown="1"> Amazon Personalize doesn't support configuring the `hpoObjective` for
+    # solution hyperparameter optimization at this time.
+    #
+    #  </note>
+    #
     # **Status**
     #
     # A solution can be in one of the following states:
@@ -1015,10 +1008,18 @@ module Aws::Personalize
     #   field), this parameter specifies which event type (for example,
     #   'click' or 'like') is used for training the model.
     #
+    #   If you do not provide an `eventType`, Amazon Personalize will use all
+    #   interactions for training with equal weight regardless of type.
+    #
     # @option params [Types::SolutionConfig] :solution_config
     #   The configuration to use with the solution. When `performAutoML` is
     #   set to true, Amazon Personalize only evaluates the `autoMLConfig`
     #   section of the solution configuration.
+    #
+    #   <note markdown="1"> Amazon Personalize doesn't support configuring the `hpoObjective` at
+    #   this time.
+    #
+    #    </note>
     #
     # @return [Types::CreateSolutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1144,7 +1145,12 @@ module Aws::Personalize
     #   The `UPDATE` option can only be used when you already have an active
     #   solution version created from the input solution using the `FULL`
     #   option and the input solution was trained with the
-    #   native-recipe-hrnn-coldstart recipe.
+    #   [User-Personalization][1] recipe or the [HRNN-Coldstart][2] recipe.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html
     #
     # @return [Types::CreateSolutionVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2587,7 +2593,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2021-01-13)
+------------------
+
+* Feature - Miscellaneous updates and improvements to the documentation
+
 1.19.0 (2020-09-30)
 ------------------
 
