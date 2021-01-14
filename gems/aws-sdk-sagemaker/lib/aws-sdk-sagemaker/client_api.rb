@@ -871,6 +871,7 @@ module Aws::SageMaker
     ModelBiasAppSpecification = Shapes::StructureShape.new(name: 'ModelBiasAppSpecification')
     ModelBiasBaselineConfig = Shapes::StructureShape.new(name: 'ModelBiasBaselineConfig')
     ModelBiasJobInput = Shapes::StructureShape.new(name: 'ModelBiasJobInput')
+    ModelCacheSetting = Shapes::StringShape.new(name: 'ModelCacheSetting')
     ModelClientConfig = Shapes::StructureShape.new(name: 'ModelClientConfig')
     ModelDataQuality = Shapes::StructureShape.new(name: 'ModelDataQuality')
     ModelDigests = Shapes::StructureShape.new(name: 'ModelDigests')
@@ -950,6 +951,7 @@ module Aws::SageMaker
     MonitoringTimeOffsetString = Shapes::StringShape.new(name: 'MonitoringTimeOffsetString')
     MonitoringType = Shapes::StringShape.new(name: 'MonitoringType')
     MountPath = Shapes::StringShape.new(name: 'MountPath')
+    MultiModelConfig = Shapes::StructureShape.new(name: 'MultiModelConfig')
     NameContains = Shapes::StringShape.new(name: 'NameContains')
     NestedFilters = Shapes::StructureShape.new(name: 'NestedFilters')
     NestedFiltersList = Shapes::ListShape.new(name: 'NestedFiltersList')
@@ -1765,6 +1767,7 @@ module Aws::SageMaker
     ContainerDefinition.add_member(:model_data_url, Shapes::ShapeRef.new(shape: Url, location_name: "ModelDataUrl"))
     ContainerDefinition.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentMap, location_name: "Environment"))
     ContainerDefinition.add_member(:model_package_name, Shapes::ShapeRef.new(shape: VersionedArnOrName, location_name: "ModelPackageName"))
+    ContainerDefinition.add_member(:multi_model_config, Shapes::ShapeRef.new(shape: MultiModelConfig, location_name: "MultiModelConfig"))
     ContainerDefinition.struct_class = Types::ContainerDefinition
 
     ContainerDefinitionList.member = Shapes::ShapeRef.new(shape: ContainerDefinition)
@@ -4977,6 +4980,9 @@ module Aws::SageMaker
 
     MonitoringStoppingCondition.add_member(:max_runtime_in_seconds, Shapes::ShapeRef.new(shape: MonitoringMaxRuntimeInSeconds, required: true, location_name: "MaxRuntimeInSeconds"))
     MonitoringStoppingCondition.struct_class = Types::MonitoringStoppingCondition
+
+    MultiModelConfig.add_member(:model_cache_setting, Shapes::ShapeRef.new(shape: ModelCacheSetting, location_name: "ModelCacheSetting"))
+    MultiModelConfig.struct_class = Types::MultiModelConfig
 
     NestedFilters.add_member(:nested_property_name, Shapes::ShapeRef.new(shape: ResourcePropertyName, required: true, location_name: "NestedPropertyName"))
     NestedFilters.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, required: true, location_name: "Filters"))

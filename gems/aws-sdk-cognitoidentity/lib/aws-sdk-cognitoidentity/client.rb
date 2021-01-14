@@ -382,7 +382,7 @@ module Aws::CognitoIdentity
     #   Please take care in setting this parameter.
     #
     # @option params [Array<String>] :open_id_connect_provider_arns
-    #   A list of OpendID Connect provider ARNs.
+    #   The Amazon Resource Names (ARN) of the OpenID Connect providers.
     #
     # @option params [Array<Types::CognitoIdentityProvider>] :cognito_identity_providers
     #   An array of Amazon Cognito user pools and their client IDs.
@@ -634,13 +634,13 @@ module Aws::CognitoIdentity
     #   unauthenticated identity.
     #
     #   The Logins parameter is required when using identities associated with
-    #   external identity providers such as FaceBook. For examples of `Logins`
+    #   external identity providers such as Facebook. For examples of `Logins`
     #   maps, see the code examples in the [External Identity Providers][1]
     #   section of the Amazon Cognito Developer Guide.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html
     #
     # @option params [String] :custom_role_arn
     #   The Amazon Resource Name (ARN) of the role to be assumed when multiple
@@ -783,7 +783,7 @@ module Aws::CognitoIdentity
     # is returned by GetId. You can optionally add additional logins for the
     # identity. Supplying multiple logins creates an implicit link.
     #
-    # The OpenId token is valid for 10 minutes.
+    # The OpenID token is valid for 10 minutes.
     #
     # This is a public API. You do not need any credentials to call this
     # API.
@@ -796,7 +796,7 @@ module Aws::CognitoIdentity
     #   tokens. When using graph.facebook.com and www.amazon.com, supply the
     #   access\_token returned from the provider's authflow. For
     #   accounts.google.com, an Amazon Cognito user pool provider, or any
-    #   other OpenId Connect provider, always include the `id_token`.
+    #   other OpenID Connect provider, always include the `id_token`.
     #
     # @return [Types::GetOpenIdTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -862,6 +862,10 @@ module Aws::CognitoIdentity
     #   a user. When you create an identity pool, you can specify the
     #   supported logins.
     #
+    # @option params [Hash<String,String>] :principal_tags
+    #   Use this operation to configure attribute mappings for custom
+    #   providers.
+    #
     # @option params [Integer] :token_duration
     #   The expiration time of the token, in seconds. You can specify a custom
     #   expiration time for the token so that you can cache it. If you don't
@@ -891,6 +895,9 @@ module Aws::CognitoIdentity
     #     logins: { # required
     #       "IdentityProviderName" => "IdentityProviderToken",
     #     },
+    #     principal_tags: {
+    #       "PrincipalTagID" => "PrincipalTagValue",
+    #     },
     #     token_duration: 1,
     #   })
     #
@@ -905,6 +912,47 @@ module Aws::CognitoIdentity
     # @param [Hash] params ({})
     def get_open_id_token_for_developer_identity(params = {}, options = {})
       req = build_request(:get_open_id_token_for_developer_identity, params)
+      req.send_request(options)
+    end
+
+    # Use `GetPrincipalTagAttributeMap` to list all mappings between
+    # `PrincipalTags` and user attributes.
+    #
+    # @option params [required, String] :identity_pool_id
+    #   You can use this operation to get the ID of the Identity Pool you
+    #   setup attribute mappings for.
+    #
+    # @option params [required, String] :identity_provider_name
+    #   You can use this operation to get the provider name.
+    #
+    # @return [Types::GetPrincipalTagAttributeMapResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPrincipalTagAttributeMapResponse#identity_pool_id #identity_pool_id} => String
+    #   * {Types::GetPrincipalTagAttributeMapResponse#identity_provider_name #identity_provider_name} => String
+    #   * {Types::GetPrincipalTagAttributeMapResponse#use_defaults #use_defaults} => Boolean
+    #   * {Types::GetPrincipalTagAttributeMapResponse#principal_tags #principal_tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_principal_tag_attribute_map({
+    #     identity_pool_id: "IdentityPoolId", # required
+    #     identity_provider_name: "IdentityProviderName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identity_pool_id #=> String
+    #   resp.identity_provider_name #=> String
+    #   resp.use_defaults #=> Boolean
+    #   resp.principal_tags #=> Hash
+    #   resp.principal_tags["PrincipalTagID"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetPrincipalTagAttributeMap AWS API Documentation
+    #
+    # @overload get_principal_tag_attribute_map(params = {})
+    # @param [Hash] params ({})
+    def get_principal_tag_attribute_map(params = {}, options = {})
+      req = build_request(:get_principal_tag_attribute_map, params)
       req.send_request(options)
     end
 
@@ -1191,7 +1239,7 @@ module Aws::CognitoIdentity
     #   How users for a specific identity provider are to mapped to roles.
     #   This is a string to RoleMapping object map. The string identifies the
     #   identity provider, for example, "graph.facebook.com" or
-    #   "cognito-idp-east-1.amazonaws.com/us-east-1\_abcdefghi:app\_client\_id".
+    #   "cognito-idp.us-east-1.amazonaws.com/us-east-1\_abcdefghi:app\_client\_id".
     #
     #   Up to 25 rules can be specified per identity provider.
     #
@@ -1231,10 +1279,61 @@ module Aws::CognitoIdentity
       req.send_request(options)
     end
 
-    # Assigns a set of tags to an Amazon Cognito identity pool. A tag is a
-    # label that you can use to categorize and manage identity pools in
-    # different ways, such as by purpose, owner, environment, or other
-    # criteria.
+    # You can use this operation to use default (username and clientID)
+    # attribute or custom attribute mappings.
+    #
+    # @option params [required, String] :identity_pool_id
+    #   The ID of the Identity Pool you want to set attribute mappings for.
+    #
+    # @option params [required, String] :identity_provider_name
+    #   The provider name you want to use for attribute mappings.
+    #
+    # @option params [Boolean] :use_defaults
+    #   You can use this operation to use default (username and clientID)
+    #   attribute mappings.
+    #
+    # @option params [Hash<String,String>] :principal_tags
+    #   You can use this operation to add principal tags.
+    #
+    # @return [Types::SetPrincipalTagAttributeMapResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SetPrincipalTagAttributeMapResponse#identity_pool_id #identity_pool_id} => String
+    #   * {Types::SetPrincipalTagAttributeMapResponse#identity_provider_name #identity_provider_name} => String
+    #   * {Types::SetPrincipalTagAttributeMapResponse#use_defaults #use_defaults} => Boolean
+    #   * {Types::SetPrincipalTagAttributeMapResponse#principal_tags #principal_tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_principal_tag_attribute_map({
+    #     identity_pool_id: "IdentityPoolId", # required
+    #     identity_provider_name: "IdentityProviderName", # required
+    #     use_defaults: false,
+    #     principal_tags: {
+    #       "PrincipalTagID" => "PrincipalTagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identity_pool_id #=> String
+    #   resp.identity_provider_name #=> String
+    #   resp.use_defaults #=> Boolean
+    #   resp.principal_tags #=> Hash
+    #   resp.principal_tags["PrincipalTagID"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/SetPrincipalTagAttributeMap AWS API Documentation
+    #
+    # @overload set_principal_tag_attribute_map(params = {})
+    # @param [Hash] params ({})
+    def set_principal_tag_attribute_map(params = {}, options = {})
+      req = build_request(:set_principal_tag_attribute_map, params)
+      req.send_request(options)
+    end
+
+    # Assigns a set of tags to the specified Amazon Cognito identity pool. A
+    # tag is a label that you can use to categorize and manage identity
+    # pools in different ways, such as by purpose, owner, environment, or
+    # other criteria.
     #
     # Each tag consists of a key and value, both of which you define. A key
     # is a general category for more specific values. For example, if you
@@ -1253,8 +1352,7 @@ module Aws::CognitoIdentity
     # identity pool can have as many as 50 tags.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the identity pool to assign the tags
-    #   to.
+    #   The Amazon Resource Name (ARN) of the identity pool.
     #
     # @option params [required, Hash<String,String>] :tags
     #   The tags to assign to the identity pool.
@@ -1358,12 +1456,11 @@ module Aws::CognitoIdentity
       req.send_request(options)
     end
 
-    # Removes the specified tags from an Amazon Cognito identity pool. You
-    # can use this action up to 5 times per second, per account
+    # Removes the specified tags from the specified Amazon Cognito identity
+    # pool. You can use this action up to 5 times per second, per account
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the identity pool that the tags are
-    #   assigned to.
+    #   The Amazon Resource Name (ARN) of the identity pool.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The keys of the tags to remove from the user pool.
@@ -1415,7 +1512,7 @@ module Aws::CognitoIdentity
     #   The "domain" by which Cognito will refer to your users.
     #
     # @option params [Array<String>] :open_id_connect_provider_arns
-    #   A list of OpendID Connect provider ARNs.
+    #   The ARNs of the OpenID Connect providers.
     #
     # @option params [Array<Types::CognitoIdentityProvider>] :cognito_identity_providers
     #   A list representing an Amazon Cognito user pool and its client ID.
@@ -1510,7 +1607,7 @@ module Aws::CognitoIdentity
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentity'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

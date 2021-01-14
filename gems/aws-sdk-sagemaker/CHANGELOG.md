@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2021-01-14)
+------------------
+
+* Feature - This feature allows customers to enable/disable model caching on Multi-Model endpoints.
+
 1.74.0 (2020-12-08)
 ------------------
 

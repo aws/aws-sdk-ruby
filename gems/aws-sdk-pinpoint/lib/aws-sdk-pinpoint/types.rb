@@ -1268,7 +1268,7 @@ module Aws::Pinpoint
     #                   dimensions: {
     #                     attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -1291,7 +1291,7 @@ module Aws::Pinpoint
     #                 segment_dimensions: {
     #                   attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -1348,7 +1348,7 @@ module Aws::Pinpoint
     #                   },
     #                   user_attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -1385,7 +1385,7 @@ module Aws::Pinpoint
     #                   dimensions: {
     #                     attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -1408,7 +1408,7 @@ module Aws::Pinpoint
     #                 segment_dimensions: {
     #                   attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -1465,7 +1465,7 @@ module Aws::Pinpoint
     #                   },
     #                   user_attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -2015,15 +2015,26 @@ module Aws::Pinpoint
     #   data as a hash:
     #
     #       {
-    #         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #         values: ["__string"], # required
     #       }
     #
     # @!attribute [rw] attribute_type
-    #   The type of segment dimension to use. Valid values are: INCLUSIVE,
-    #   endpoints that match the criteria are included in the segment; and,
-    #   EXCLUSIVE, endpoints that match the criteria are excluded from the
-    #   segment.
+    #   * INCLUSIVE - endpoints that have attributes matching the values are
+    #     included in the segment.
+    #   * EXCLUSIVE - endpoints that have attributes matching the values are
+    #     excluded in the segment.
+    #   * CONTAINS - endpoints that have attributes' substrings match the
+    #     values are included in the segment.
+    #   * BEFORE - endpoints with attributes read as ISO\_INSTANT datetimes
+    #     before the value are included in the segment.
+    #   * AFTER - endpoints with attributes read as ISO\_INSTANT datetimes
+    #     after the value are included in the segment.
+    #   * ON - endpoints with attributes read as ISO\_INSTANT dates on the
+    #     value are included in the segment. Time is ignored in this
+    #     comparison.
+    #   * BETWEEN - endpoints with attributes read as ISO\_INSTANT datetimes
+    #     between the values are included in the segment.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -2495,7 +2506,7 @@ module Aws::Pinpoint
     #         dimensions: { # required
     #           attributes: {
     #             "__string" => {
-    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #               values: ["__string"], # required
     #             },
     #           },
@@ -2948,7 +2959,7 @@ module Aws::Pinpoint
     #               dimensions: {
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -2971,7 +2982,7 @@ module Aws::Pinpoint
     #             segment_dimensions: {
     #               attributes: {
     #                 "__string" => {
-    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                   values: ["__string"], # required
     #                 },
     #               },
@@ -3028,7 +3039,7 @@ module Aws::Pinpoint
     #               },
     #               user_attributes: {
     #                 "__string" => {
-    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                   values: ["__string"], # required
     #                 },
     #               },
@@ -3086,7 +3097,7 @@ module Aws::Pinpoint
     #                 dimensions: {
     #                   attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -3109,7 +3120,7 @@ module Aws::Pinpoint
     #               segment_dimensions: {
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -3166,7 +3177,7 @@ module Aws::Pinpoint
     #                 },
     #                 user_attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -3406,7 +3417,7 @@ module Aws::Pinpoint
     #                   dimensions: { # required
     #                     attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -3566,7 +3577,7 @@ module Aws::Pinpoint
     #               dimensions: { # required
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -3818,7 +3829,7 @@ module Aws::Pinpoint
     #                         dimensions: {
     #                           attributes: {
     #                             "__string" => {
-    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                               values: ["__string"], # required
     #                             },
     #                           },
@@ -3841,7 +3852,7 @@ module Aws::Pinpoint
     #                       segment_dimensions: {
     #                         attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -3898,7 +3909,7 @@ module Aws::Pinpoint
     #                         },
     #                         user_attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -3935,7 +3946,7 @@ module Aws::Pinpoint
     #                         dimensions: {
     #                           attributes: {
     #                             "__string" => {
-    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                               values: ["__string"], # required
     #                             },
     #                           },
@@ -3958,7 +3969,7 @@ module Aws::Pinpoint
     #                       segment_dimensions: {
     #                         attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -4015,7 +4026,7 @@ module Aws::Pinpoint
     #                         },
     #                         user_attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -4091,7 +4102,7 @@ module Aws::Pinpoint
     #                 dimensions: { # required
     #                   attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -4440,7 +4451,7 @@ module Aws::Pinpoint
     #           dimensions: {
     #             attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -4497,7 +4508,7 @@ module Aws::Pinpoint
     #             },
     #             user_attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -4510,7 +4521,7 @@ module Aws::Pinpoint
     #                   {
     #                     attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -4567,7 +4578,7 @@ module Aws::Pinpoint
     #                     },
     #                     user_attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -7379,7 +7390,7 @@ module Aws::Pinpoint
     #         dimensions: {
     #           attributes: {
     #             "__string" => {
-    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #               values: ["__string"], # required
     #             },
     #           },
@@ -7424,7 +7435,7 @@ module Aws::Pinpoint
     #       {
     #         attributes: {
     #           "__string" => {
-    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #             values: ["__string"], # required
     #           },
     #         },
@@ -7485,7 +7496,7 @@ module Aws::Pinpoint
     #         dimensions: { # required
     #           attributes: {
     #             "__string" => {
-    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #               values: ["__string"], # required
     #             },
     #           },
@@ -7561,7 +7572,7 @@ module Aws::Pinpoint
     #           dimensions: { # required
     #             attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -11953,7 +11964,7 @@ module Aws::Pinpoint
     #             dimensions: {
     #               attributes: {
     #                 "__string" => {
-    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                   values: ["__string"], # required
     #                 },
     #               },
@@ -11976,7 +11987,7 @@ module Aws::Pinpoint
     #           segment_dimensions: {
     #             attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -12033,7 +12044,7 @@ module Aws::Pinpoint
     #             },
     #             user_attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -12089,7 +12100,7 @@ module Aws::Pinpoint
     #                 dimensions: {
     #                   attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -12112,7 +12123,7 @@ module Aws::Pinpoint
     #               segment_dimensions: {
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -12169,7 +12180,7 @@ module Aws::Pinpoint
     #                 },
     #                 user_attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -13762,7 +13773,7 @@ module Aws::Pinpoint
     #           dimensions: { # required
     #             attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -13987,7 +13998,7 @@ module Aws::Pinpoint
     #       {
     #         attributes: {
     #           "__string" => {
-    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #             values: ["__string"], # required
     #           },
     #         },
@@ -14044,7 +14055,7 @@ module Aws::Pinpoint
     #         },
     #         user_attributes: {
     #           "__string" => {
-    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #             values: ["__string"], # required
     #           },
     #         },
@@ -14102,7 +14113,7 @@ module Aws::Pinpoint
     #           {
     #             attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -14159,7 +14170,7 @@ module Aws::Pinpoint
     #             },
     #             user_attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -14230,7 +14241,7 @@ module Aws::Pinpoint
     #               {
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -14287,7 +14298,7 @@ module Aws::Pinpoint
     #                 },
     #                 user_attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -15380,7 +15391,7 @@ module Aws::Pinpoint
     #           dimensions: {
     #             attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -15403,7 +15414,7 @@ module Aws::Pinpoint
     #         segment_dimensions: {
     #           attributes: {
     #             "__string" => {
-    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #               values: ["__string"], # required
     #             },
     #           },
@@ -15460,7 +15471,7 @@ module Aws::Pinpoint
     #           },
     #           user_attributes: {
     #             "__string" => {
-    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #               values: ["__string"], # required
     #             },
     #           },
@@ -15581,7 +15592,7 @@ module Aws::Pinpoint
     #             dimensions: { # required
     #               attributes: {
     #                 "__string" => {
-    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                   values: ["__string"], # required
     #                 },
     #               },
@@ -16559,7 +16570,7 @@ module Aws::Pinpoint
     #                   dimensions: { # required
     #                     attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -16719,7 +16730,7 @@ module Aws::Pinpoint
     #               dimensions: { # required
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -17136,7 +17147,7 @@ module Aws::Pinpoint
     #                         dimensions: {
     #                           attributes: {
     #                             "__string" => {
-    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                               values: ["__string"], # required
     #                             },
     #                           },
@@ -17159,7 +17170,7 @@ module Aws::Pinpoint
     #                       segment_dimensions: {
     #                         attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -17216,7 +17227,7 @@ module Aws::Pinpoint
     #                         },
     #                         user_attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -17253,7 +17264,7 @@ module Aws::Pinpoint
     #                         dimensions: {
     #                           attributes: {
     #                             "__string" => {
-    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                               values: ["__string"], # required
     #                             },
     #                           },
@@ -17276,7 +17287,7 @@ module Aws::Pinpoint
     #                       segment_dimensions: {
     #                         attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -17333,7 +17344,7 @@ module Aws::Pinpoint
     #                         },
     #                         user_attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -17409,7 +17420,7 @@ module Aws::Pinpoint
     #                 dimensions: { # required
     #                   attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -17822,7 +17833,7 @@ module Aws::Pinpoint
     #           dimensions: {
     #             attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -17879,7 +17890,7 @@ module Aws::Pinpoint
     #             },
     #             user_attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -17892,7 +17903,7 @@ module Aws::Pinpoint
     #                   {
     #                     attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -17949,7 +17960,7 @@ module Aws::Pinpoint
     #                     },
     #                     user_attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -18836,7 +18847,7 @@ module Aws::Pinpoint
     #                 dimensions: { # required
     #                   attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -18996,7 +19007,7 @@ module Aws::Pinpoint
     #             dimensions: { # required
     #               attributes: {
     #                 "__string" => {
-    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                   values: ["__string"], # required
     #                 },
     #               },
@@ -19214,7 +19225,7 @@ module Aws::Pinpoint
     #                       dimensions: {
     #                         attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -19237,7 +19248,7 @@ module Aws::Pinpoint
     #                     segment_dimensions: {
     #                       attributes: {
     #                         "__string" => {
-    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                           values: ["__string"], # required
     #                         },
     #                       },
@@ -19294,7 +19305,7 @@ module Aws::Pinpoint
     #                       },
     #                       user_attributes: {
     #                         "__string" => {
-    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                           values: ["__string"], # required
     #                         },
     #                       },
@@ -19331,7 +19342,7 @@ module Aws::Pinpoint
     #                       dimensions: {
     #                         attributes: {
     #                           "__string" => {
-    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                             values: ["__string"], # required
     #                           },
     #                         },
@@ -19354,7 +19365,7 @@ module Aws::Pinpoint
     #                     segment_dimensions: {
     #                       attributes: {
     #                         "__string" => {
-    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                           values: ["__string"], # required
     #                         },
     #                       },
@@ -19411,7 +19422,7 @@ module Aws::Pinpoint
     #                       },
     #                       user_attributes: {
     #                         "__string" => {
-    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                           values: ["__string"], # required
     #                         },
     #                       },
@@ -19487,7 +19498,7 @@ module Aws::Pinpoint
     #               dimensions: { # required
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -19634,7 +19645,7 @@ module Aws::Pinpoint
     #         dimensions: {
     #           attributes: {
     #             "__string" => {
-    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #               values: ["__string"], # required
     #             },
     #           },
@@ -19691,7 +19702,7 @@ module Aws::Pinpoint
     #           },
     #           user_attributes: {
     #             "__string" => {
-    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #               values: ["__string"], # required
     #             },
     #           },
@@ -19704,7 +19715,7 @@ module Aws::Pinpoint
     #                 {
     #                   attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -19761,7 +19772,7 @@ module Aws::Pinpoint
     #                   },
     #                   user_attributes: {
     #                     "__string" => {
-    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                       attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                       values: ["__string"], # required
     #                     },
     #                   },
@@ -19919,7 +19930,7 @@ module Aws::Pinpoint
     #             dimensions: { # required
     #               attributes: {
     #                 "__string" => {
-    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                   values: ["__string"], # required
     #                 },
     #               },

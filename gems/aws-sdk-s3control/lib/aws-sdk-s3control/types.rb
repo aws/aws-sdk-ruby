@@ -616,7 +616,7 @@ module Aws::S3Control
     #   @return [Boolean]
     #
     # @!attribute [rw] operation
-    #   The operation that you want this job to perform on each object
+    #   The operation that you want this job to perform on every object
     #   listed in the manifest. For more information about the available
     #   operations, see [Operations][1] in the *Amazon Simple Storage
     #   Service Developer Guide*.
@@ -657,7 +657,7 @@ module Aws::S3Control
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) for the AWS Identity and Access
     #   Management (IAM) role that Batch Operations will use to run this
-    #   job's operation on each object in the manifest.
+    #   job's operation on every object in the manifest.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1833,7 +1833,7 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] operation
-    #   The operation that the specified job is configured to run on each
+    #   The operation that the specified job is configured to run on every
     #   object listed in the manifest.
     #   @return [String]
     #
@@ -1978,7 +1978,7 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # The operation that you want this job to perform on each object listed
+    # The operation that you want this job to perform on every object listed
     # in the manifest. For more information about the available operations,
     # see [Operations][1] in the *Amazon Simple Storage Service Developer
     # Guide*.
@@ -2088,36 +2088,36 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] lambda_invoke
-    #   Directs the specified job to invoke an AWS Lambda function on each
+    #   Directs the specified job to invoke an AWS Lambda function on every
     #   object in the manifest.
     #   @return [Types::LambdaInvokeOperation]
     #
     # @!attribute [rw] s3_put_object_copy
-    #   Directs the specified job to run a PUT Copy object call on each
+    #   Directs the specified job to run a PUT Copy object call on every
     #   object in the manifest.
     #   @return [Types::S3CopyObjectOperation]
     #
     # @!attribute [rw] s3_put_object_acl
-    #   Directs the specified job to run a PUT Object acl call on each
+    #   Directs the specified job to run a PUT Object acl call on every
     #   object in the manifest.
     #   @return [Types::S3SetObjectAclOperation]
     #
     # @!attribute [rw] s3_put_object_tagging
-    #   Directs the specified job to run a PUT Object tagging call on each
+    #   Directs the specified job to run a PUT Object tagging call on every
     #   object in the manifest.
     #   @return [Types::S3SetObjectTaggingOperation]
     #
     # @!attribute [rw] s3_initiate_restore_object
-    #   Directs the specified job to run an Initiate Glacier Restore call on
-    #   each object in the manifest.
+    #   Directs the specified job to initiate restore requests for every
+    #   archived object in the manifest.
     #   @return [Types::S3InitiateRestoreObjectOperation]
     #
     # @!attribute [rw] s3_put_object_legal_hold
     #   Contains the configuration for an S3 Object Lock legal hold
-    #   operation that an S3 Batch Operations job passes each object through
-    #   to the underlying `PutObjectLegalHold` API. For more information,
-    #   see [Using S3 Object Lock legal hold with S3 Batch Operations][1] in
-    #   the *Amazon Simple Storage Service Developer Guide*.
+    #   operation that an S3 Batch Operations job passes every object to the
+    #   underlying `PutObjectLegalHold` API. For more information, see
+    #   [Using S3 Object Lock legal hold with S3 Batch Operations][1] in the
+    #   *Amazon Simple Storage Service Developer Guide*.
     #
     #
     #
@@ -2126,8 +2126,8 @@ module Aws::S3Control
     #
     # @!attribute [rw] s3_put_object_retention
     #   Contains the configuration parameters for the Object Lock retention
-    #   action for an S3 Batch Operations job. Batch Operations passes each
-    #   value through to the underlying `PutObjectRetention` API. For more
+    #   action for an S3 Batch Operations job. Batch Operations passes every
+    #   object to the underlying `PutObjectRetention` API. For more
     #   information, see [Using S3 Object Lock retention with S3 Batch
     #   Operations][1] in the *Amazon Simple Storage Service Developer
     #   Guide*.
@@ -2246,7 +2246,7 @@ module Aws::S3Control
     #
     # @!attribute [rw] function_arn
     #   The Amazon Resource Name (ARN) for the AWS Lambda function that the
-    #   specified job will invoke for each object in the manifest.
+    #   specified job will invoke on every object in the manifest.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LambdaInvokeOperation AWS API Documentation
@@ -3714,8 +3714,8 @@ module Aws::S3Control
     end
 
     # Contains the configuration parameters for a PUT Copy object operation.
-    # S3 Batch Operations passes each value through to the underlying PUT
-    # Copy object API. For more information about the parameters for this
+    # S3 Batch Operations passes every object to the underlying PUT Copy
+    # object API. For more information about the parameters for this
     # operation, see [PUT Object - Copy][1].
     #
     #
@@ -3915,8 +3915,8 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # Contains the configuration parameters for an Initiate Glacier Restore
-    # job. S3 Batch Operations passes each value through to the underlying
+    # Contains the configuration parameters for an S3 Initiate Restore
+    # Object job. S3 Batch Operations passes every object to the underlying
     # POST Object restore API. For more information about the parameters for
     # this operation, see [RestoreObject][1].
     #
@@ -3933,9 +3933,29 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] expiration_in_days
+    #   This argument specifies how long the S3 Glacier or S3 Glacier Deep
+    #   Archive object remains available in Amazon S3. S3 Initiate Restore
+    #   Object jobs that target S3 Glacier and S3 Glacier Deep Archive
+    #   objects require `ExpirationInDays` set to 1 or greater.
+    #
+    #   Conversely, do *not* set `ExpirationInDays` when creating S3
+    #   Initiate Restore Object jobs that target S3 Intelligent-Tiering
+    #   Archive Access and Deep Archive Access tier objects. Objects in S3
+    #   Intelligent-Tiering archive access tiers are not subject to restore
+    #   expiry, so specifying `ExpirationInDays` results in restore request
+    #   failure.
+    #
+    #   S3 Batch Operations jobs can operate either on S3 Glacier and S3
+    #   Glacier Deep Archive storage class objects or on S3
+    #   Intelligent-Tiering Archive Access and Deep Archive Access storage
+    #   tier objects, but not both types in the same job. If you need to
+    #   restore objects of both types you *must* create separate Batch
+    #   Operations jobs.
     #   @return [Integer]
     #
     # @!attribute [rw] glacier_job_tier
+    #   S3 Batch Operations supports `STANDARD` and `BULK` retrieval tiers,
+    #   but not the `EXPEDITED` retrieval tier.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3InitiateRestoreObjectOperation AWS API Documentation
@@ -4102,9 +4122,9 @@ module Aws::S3Control
     end
 
     # Contains the configuration parameters for a Set Object ACL operation.
-    # S3 Batch Operations passes each value through to the underlying PUT
-    # Object acl API. For more information about the parameters for this
-    # operation, see [PUT Object acl][1].
+    # S3 Batch Operations passes every object to the underlying PUT Object
+    # acl API. For more information about the parameters for this operation,
+    # see [PUT Object acl][1].
     #
     #
     #
@@ -4147,10 +4167,10 @@ module Aws::S3Control
     end
 
     # Contains the configuration for an S3 Object Lock legal hold operation
-    # that an S3 Batch Operations job passes each object through to the
-    # underlying `PutObjectLegalHold` API. For more information, see [Using
-    # S3 Object Lock legal hold with S3 Batch Operations][1] in the *Amazon
-    # Simple Storage Service Developer Guide*.
+    # that an S3 Batch Operations job passes every object to the underlying
+    # `PutObjectLegalHold` API. For more information, see [Using S3 Object
+    # Lock legal hold with S3 Batch Operations][1] in the *Amazon Simple
+    # Storage Service Developer Guide*.
     #
     #
     #
@@ -4179,8 +4199,8 @@ module Aws::S3Control
     end
 
     # Contains the configuration parameters for the Object Lock retention
-    # action for an S3 Batch Operations job. Batch Operations passes each
-    # value through to the underlying `PutObjectRetention` API. For more
+    # action for an S3 Batch Operations job. Batch Operations passes every
+    # object to the underlying `PutObjectRetention` API. For more
     # information, see [Using S3 Object Lock retention with S3 Batch
     # Operations][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
@@ -4226,9 +4246,9 @@ module Aws::S3Control
     end
 
     # Contains the configuration parameters for a Set Object Tagging
-    # operation. S3 Batch Operations passes each value through to the
-    # underlying PUT Object tagging API. For more information about the
-    # parameters for this operation, see [PUT Object tagging][1].
+    # operation. S3 Batch Operations passes every object to the underlying
+    # PUT Object tagging API. For more information about the parameters for
+    # this operation, see [PUT Object tagging][1].
     #
     #
     #

@@ -480,7 +480,7 @@ module Aws::Pinpoint
     #               dimensions: { # required
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -640,7 +640,7 @@ module Aws::Pinpoint
     #           dimensions: { # required
     #             attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -771,7 +771,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
-    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -889,7 +889,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
-    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -1126,7 +1126,7 @@ module Aws::Pinpoint
     #                     dimensions: {
     #                       attributes: {
     #                         "__string" => {
-    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                           values: ["__string"], # required
     #                         },
     #                       },
@@ -1149,7 +1149,7 @@ module Aws::Pinpoint
     #                   segment_dimensions: {
     #                     attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -1206,7 +1206,7 @@ module Aws::Pinpoint
     #                     },
     #                     user_attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -1243,7 +1243,7 @@ module Aws::Pinpoint
     #                     dimensions: {
     #                       attributes: {
     #                         "__string" => {
-    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                           values: ["__string"], # required
     #                         },
     #                       },
@@ -1266,7 +1266,7 @@ module Aws::Pinpoint
     #                   segment_dimensions: {
     #                     attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -1323,7 +1323,7 @@ module Aws::Pinpoint
     #                     },
     #                     user_attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -1399,7 +1399,7 @@ module Aws::Pinpoint
     #             dimensions: { # required
     #               attributes: {
     #                 "__string" => {
-    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                   values: ["__string"], # required
     #                 },
     #               },
@@ -1438,7 +1438,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].custom.template_version #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -1450,7 +1450,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.message_activity #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_condition.segment_id #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -1483,7 +1483,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].value #=> Float
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes #=> Hash
-    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.operator #=> String, one of "ALL", "ANY"
@@ -1500,7 +1500,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].holdout.percentage #=> Integer
     #   resp.journey_response.activities["__string"].multi_condition.branches #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -1512,7 +1512,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.message_activity #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_condition.segment_id #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -1545,7 +1545,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].value #=> Float
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes #=> Hash
-    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].next_activity #=> String
@@ -1585,7 +1585,7 @@ module Aws::Pinpoint
     #   resp.journey_response.start_activity #=> String
     #   resp.journey_response.start_condition.description #=> String
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes #=> Hash
-    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -1777,7 +1777,7 @@ module Aws::Pinpoint
     #       dimensions: {
     #         attributes: {
     #           "__string" => {
-    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #             values: ["__string"], # required
     #           },
     #         },
@@ -1834,7 +1834,7 @@ module Aws::Pinpoint
     #         },
     #         user_attributes: {
     #           "__string" => {
-    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #             values: ["__string"], # required
     #           },
     #         },
@@ -1847,7 +1847,7 @@ module Aws::Pinpoint
     #               {
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -1904,7 +1904,7 @@ module Aws::Pinpoint
     #                 },
     #                 user_attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -1934,7 +1934,7 @@ module Aws::Pinpoint
     #   resp.segment_response.arn #=> String
     #   resp.segment_response.creation_date #=> String
     #   resp.segment_response.dimensions.attributes #=> Hash
-    #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.dimensions.attributes["__string"].values #=> Array
     #   resp.segment_response.dimensions.attributes["__string"].values[0] #=> String
     #   resp.segment_response.dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -1967,7 +1967,7 @@ module Aws::Pinpoint
     #   resp.segment_response.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.segment_response.dimensions.metrics["__string"].value #=> Float
     #   resp.segment_response.dimensions.user_attributes #=> Hash
-    #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.dimensions.user_attributes["__string"].values #=> Array
     #   resp.segment_response.dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.segment_response.id #=> String
@@ -1983,7 +1983,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes #=> Hash
-    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values[0] #=> String
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -2016,7 +2016,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].comparison_operator #=> String
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].value #=> Float
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes #=> Hash
-    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values[0] #=> String
     #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
@@ -2482,7 +2482,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
-    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -2600,7 +2600,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
-    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -2877,7 +2877,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].custom.template_version #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -2889,7 +2889,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.message_activity #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_condition.segment_id #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -2922,7 +2922,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].value #=> Float
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes #=> Hash
-    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.operator #=> String, one of "ALL", "ANY"
@@ -2939,7 +2939,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].holdout.percentage #=> Integer
     #   resp.journey_response.activities["__string"].multi_condition.branches #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -2951,7 +2951,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.message_activity #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_condition.segment_id #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -2984,7 +2984,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].value #=> Float
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes #=> Hash
-    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].next_activity #=> String
@@ -3024,7 +3024,7 @@ module Aws::Pinpoint
     #   resp.journey_response.start_activity #=> String
     #   resp.journey_response.start_condition.description #=> String
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes #=> Hash
-    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -3143,7 +3143,7 @@ module Aws::Pinpoint
     #   resp.segment_response.arn #=> String
     #   resp.segment_response.creation_date #=> String
     #   resp.segment_response.dimensions.attributes #=> Hash
-    #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.dimensions.attributes["__string"].values #=> Array
     #   resp.segment_response.dimensions.attributes["__string"].values[0] #=> String
     #   resp.segment_response.dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -3176,7 +3176,7 @@ module Aws::Pinpoint
     #   resp.segment_response.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.segment_response.dimensions.metrics["__string"].value #=> Float
     #   resp.segment_response.dimensions.user_attributes #=> Hash
-    #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.dimensions.user_attributes["__string"].values #=> Array
     #   resp.segment_response.dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.segment_response.id #=> String
@@ -3192,7 +3192,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes #=> Hash
-    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values[0] #=> String
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -3225,7 +3225,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].comparison_operator #=> String
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].value #=> Float
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes #=> Hash
-    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values[0] #=> String
     #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
@@ -3940,7 +3940,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
-    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -4058,7 +4058,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
-    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -4308,7 +4308,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
-    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -4426,7 +4426,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
-    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -4570,7 +4570,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.end_time #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
-    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -4688,7 +4688,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].name #=> String
     #   resp.campaigns_response.item[0].schedule.end_time #=> String
     #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes #=> Hash
-    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -4831,7 +4831,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.end_time #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
-    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -4949,7 +4949,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].name #=> String
     #   resp.campaigns_response.item[0].schedule.end_time #=> String
     #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes #=> Hash
-    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -5485,7 +5485,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].custom.template_version #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -5497,7 +5497,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.message_activity #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_condition.segment_id #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -5530,7 +5530,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].value #=> Float
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes #=> Hash
-    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.operator #=> String, one of "ALL", "ANY"
@@ -5547,7 +5547,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].holdout.percentage #=> Integer
     #   resp.journey_response.activities["__string"].multi_condition.branches #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -5559,7 +5559,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.message_activity #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_condition.segment_id #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -5592,7 +5592,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].value #=> Float
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes #=> Hash
-    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].next_activity #=> String
@@ -5632,7 +5632,7 @@ module Aws::Pinpoint
     #   resp.journey_response.start_activity #=> String
     #   resp.journey_response.start_condition.description #=> String
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes #=> Hash
-    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -5994,7 +5994,7 @@ module Aws::Pinpoint
     #   resp.segment_response.arn #=> String
     #   resp.segment_response.creation_date #=> String
     #   resp.segment_response.dimensions.attributes #=> Hash
-    #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.dimensions.attributes["__string"].values #=> Array
     #   resp.segment_response.dimensions.attributes["__string"].values[0] #=> String
     #   resp.segment_response.dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -6027,7 +6027,7 @@ module Aws::Pinpoint
     #   resp.segment_response.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.segment_response.dimensions.metrics["__string"].value #=> Float
     #   resp.segment_response.dimensions.user_attributes #=> Hash
-    #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.dimensions.user_attributes["__string"].values #=> Array
     #   resp.segment_response.dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.segment_response.id #=> String
@@ -6043,7 +6043,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes #=> Hash
-    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values[0] #=> String
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -6076,7 +6076,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].comparison_operator #=> String
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].value #=> Float
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes #=> Hash
-    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values[0] #=> String
     #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
@@ -6241,7 +6241,7 @@ module Aws::Pinpoint
     #   resp.segment_response.arn #=> String
     #   resp.segment_response.creation_date #=> String
     #   resp.segment_response.dimensions.attributes #=> Hash
-    #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.dimensions.attributes["__string"].values #=> Array
     #   resp.segment_response.dimensions.attributes["__string"].values[0] #=> String
     #   resp.segment_response.dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -6274,7 +6274,7 @@ module Aws::Pinpoint
     #   resp.segment_response.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.segment_response.dimensions.metrics["__string"].value #=> Float
     #   resp.segment_response.dimensions.user_attributes #=> Hash
-    #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.dimensions.user_attributes["__string"].values #=> Array
     #   resp.segment_response.dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.segment_response.id #=> String
@@ -6290,7 +6290,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes #=> Hash
-    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values[0] #=> String
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -6323,7 +6323,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].comparison_operator #=> String
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].value #=> Float
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes #=> Hash
-    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values[0] #=> String
     #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
@@ -6378,7 +6378,7 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].arn #=> String
     #   resp.segments_response.item[0].creation_date #=> String
     #   resp.segments_response.item[0].dimensions.attributes #=> Hash
-    #   resp.segments_response.item[0].dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segments_response.item[0].dimensions.attributes["__string"].values #=> Array
     #   resp.segments_response.item[0].dimensions.attributes["__string"].values[0] #=> String
     #   resp.segments_response.item[0].dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -6411,7 +6411,7 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.segments_response.item[0].dimensions.metrics["__string"].value #=> Float
     #   resp.segments_response.item[0].dimensions.user_attributes #=> Hash
-    #   resp.segments_response.item[0].dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segments_response.item[0].dimensions.user_attributes["__string"].values #=> Array
     #   resp.segments_response.item[0].dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.segments_response.item[0].id #=> String
@@ -6427,7 +6427,7 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].segment_groups.groups #=> Array
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions #=> Array
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes #=> Hash
-    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes["__string"].values #=> Array
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes["__string"].values[0] #=> String
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -6460,7 +6460,7 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].metrics["__string"].comparison_operator #=> String
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].metrics["__string"].value #=> Float
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes #=> Hash
-    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes["__string"].values #=> Array
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes["__string"].values[0] #=> String
     #   resp.segments_response.item[0].segment_groups.groups[0].source_segments #=> Array
@@ -6512,7 +6512,7 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].arn #=> String
     #   resp.segments_response.item[0].creation_date #=> String
     #   resp.segments_response.item[0].dimensions.attributes #=> Hash
-    #   resp.segments_response.item[0].dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segments_response.item[0].dimensions.attributes["__string"].values #=> Array
     #   resp.segments_response.item[0].dimensions.attributes["__string"].values[0] #=> String
     #   resp.segments_response.item[0].dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -6545,7 +6545,7 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.segments_response.item[0].dimensions.metrics["__string"].value #=> Float
     #   resp.segments_response.item[0].dimensions.user_attributes #=> Hash
-    #   resp.segments_response.item[0].dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segments_response.item[0].dimensions.user_attributes["__string"].values #=> Array
     #   resp.segments_response.item[0].dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.segments_response.item[0].id #=> String
@@ -6561,7 +6561,7 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].segment_groups.groups #=> Array
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions #=> Array
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes #=> Hash
-    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes["__string"].values #=> Array
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].attributes["__string"].values[0] #=> String
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -6594,7 +6594,7 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].metrics["__string"].comparison_operator #=> String
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].metrics["__string"].value #=> Float
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes #=> Hash
-    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes["__string"].values #=> Array
     #   resp.segments_response.item[0].segment_groups.groups[0].dimensions[0].user_attributes["__string"].values[0] #=> String
     #   resp.segments_response.item[0].segment_groups.groups[0].source_segments #=> Array
@@ -6879,7 +6879,7 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].activities["__string"].custom.template_version #=> String
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions #=> Array
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
-    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values #=> Array
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -6891,7 +6891,7 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.message_activity #=> String
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_condition.segment_id #=> String
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes #=> Hash
-    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values #=> Array
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values[0] #=> String
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -6924,7 +6924,7 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].value #=> Float
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes #=> Hash
-    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values #=> Array
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.operator #=> String, one of "ALL", "ANY"
@@ -6941,7 +6941,7 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].activities["__string"].holdout.percentage #=> Integer
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches #=> Array
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes #=> Hash
-    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values #=> Array
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -6953,7 +6953,7 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.event_condition.message_activity #=> String
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_condition.segment_id #=> String
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes #=> Hash
-    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values #=> Array
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values[0] #=> String
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -6986,7 +6986,7 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].value #=> Float
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes #=> Hash
-    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values #=> Array
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches[0].next_activity #=> String
@@ -7026,7 +7026,7 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].start_activity #=> String
     #   resp.journeys_response.item[0].start_condition.description #=> String
     #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.dimensions.attributes #=> Hash
-    #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journeys_response.item[0].start_condition.event_start_condition.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -8427,7 +8427,7 @@ module Aws::Pinpoint
     #               dimensions: { # required
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -8587,7 +8587,7 @@ module Aws::Pinpoint
     #           dimensions: { # required
     #             attributes: {
     #               "__string" => {
-    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                 values: ["__string"], # required
     #               },
     #             },
@@ -8718,7 +8718,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
-    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -8836,7 +8836,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
-    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -9225,7 +9225,7 @@ module Aws::Pinpoint
     #                     dimensions: {
     #                       attributes: {
     #                         "__string" => {
-    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                           values: ["__string"], # required
     #                         },
     #                       },
@@ -9248,7 +9248,7 @@ module Aws::Pinpoint
     #                   segment_dimensions: {
     #                     attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -9305,7 +9305,7 @@ module Aws::Pinpoint
     #                     },
     #                     user_attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -9342,7 +9342,7 @@ module Aws::Pinpoint
     #                     dimensions: {
     #                       attributes: {
     #                         "__string" => {
-    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                           attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                           values: ["__string"], # required
     #                         },
     #                       },
@@ -9365,7 +9365,7 @@ module Aws::Pinpoint
     #                   segment_dimensions: {
     #                     attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -9422,7 +9422,7 @@ module Aws::Pinpoint
     #                     },
     #                     user_attributes: {
     #                       "__string" => {
-    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                         attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                         values: ["__string"], # required
     #                       },
     #                     },
@@ -9498,7 +9498,7 @@ module Aws::Pinpoint
     #             dimensions: { # required
     #               attributes: {
     #                 "__string" => {
-    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                   attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                   values: ["__string"], # required
     #                 },
     #               },
@@ -9537,7 +9537,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].custom.template_version #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -9549,7 +9549,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.message_activity #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_condition.segment_id #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -9582,7 +9582,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].value #=> Float
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes #=> Hash
-    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.operator #=> String, one of "ALL", "ANY"
@@ -9599,7 +9599,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].holdout.percentage #=> Integer
     #   resp.journey_response.activities["__string"].multi_condition.branches #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -9611,7 +9611,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.message_activity #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_condition.segment_id #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -9644,7 +9644,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].value #=> Float
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes #=> Hash
-    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].next_activity #=> String
@@ -9684,7 +9684,7 @@ module Aws::Pinpoint
     #   resp.journey_response.start_activity #=> String
     #   resp.journey_response.start_condition.description #=> String
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes #=> Hash
-    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -9744,7 +9744,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].custom.template_version #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -9756,7 +9756,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.message_activity #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_condition.segment_id #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -9789,7 +9789,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.metrics["__string"].value #=> Float
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes #=> Hash
-    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].segment_dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.operator #=> String, one of "ALL", "ANY"
@@ -9806,7 +9806,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].holdout.percentage #=> Integer
     #   resp.journey_response.activities["__string"].multi_condition.branches #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -9818,7 +9818,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.event_condition.message_activity #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_condition.segment_id #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes #=> Hash
-    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -9851,7 +9851,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.metrics["__string"].value #=> Float
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes #=> Hash
-    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values #=> Array
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].condition.segment_dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.journey_response.activities["__string"].multi_condition.branches[0].next_activity #=> String
@@ -9891,7 +9891,7 @@ module Aws::Pinpoint
     #   resp.journey_response.start_activity #=> String
     #   resp.journey_response.start_condition.description #=> String
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes #=> Hash
-    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values #=> Array
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.attributes["__string"].values[0] #=> String
     #   resp.journey_response.start_condition.event_start_condition.event_filter.dimensions.event_type.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -10094,7 +10094,7 @@ module Aws::Pinpoint
     #       dimensions: {
     #         attributes: {
     #           "__string" => {
-    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #             values: ["__string"], # required
     #           },
     #         },
@@ -10151,7 +10151,7 @@ module Aws::Pinpoint
     #         },
     #         user_attributes: {
     #           "__string" => {
-    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #             values: ["__string"], # required
     #           },
     #         },
@@ -10164,7 +10164,7 @@ module Aws::Pinpoint
     #               {
     #                 attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -10221,7 +10221,7 @@ module Aws::Pinpoint
     #                 },
     #                 user_attributes: {
     #                   "__string" => {
-    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                     attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE, CONTAINS, BEFORE, AFTER, BETWEEN, ON
     #                     values: ["__string"], # required
     #                   },
     #                 },
@@ -10251,7 +10251,7 @@ module Aws::Pinpoint
     #   resp.segment_response.arn #=> String
     #   resp.segment_response.creation_date #=> String
     #   resp.segment_response.dimensions.attributes #=> Hash
-    #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.dimensions.attributes["__string"].values #=> Array
     #   resp.segment_response.dimensions.attributes["__string"].values[0] #=> String
     #   resp.segment_response.dimensions.behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -10284,7 +10284,7 @@ module Aws::Pinpoint
     #   resp.segment_response.dimensions.metrics["__string"].comparison_operator #=> String
     #   resp.segment_response.dimensions.metrics["__string"].value #=> Float
     #   resp.segment_response.dimensions.user_attributes #=> Hash
-    #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.dimensions.user_attributes["__string"].values #=> Array
     #   resp.segment_response.dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.segment_response.id #=> String
@@ -10300,7 +10300,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes #=> Hash
-    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].attributes["__string"].values[0] #=> String
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].behavior.recency.duration #=> String, one of "HR_24", "DAY_7", "DAY_14", "DAY_30"
@@ -10333,7 +10333,7 @@ module Aws::Pinpoint
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].comparison_operator #=> String
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].metrics["__string"].value #=> Float
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes #=> Hash
-    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values #=> Array
     #   resp.segment_response.segment_groups.groups[0].dimensions[0].user_attributes["__string"].values[0] #=> String
     #   resp.segment_response.segment_groups.groups[0].source_segments #=> Array
@@ -10599,7 +10599,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

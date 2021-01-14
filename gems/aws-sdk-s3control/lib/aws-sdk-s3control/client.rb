@@ -667,7 +667,7 @@ module Aws::S3Control
     #   S3 console.
     #
     # @option params [required, Types::JobOperation] :operation
-    #   The operation that you want this job to perform on each object listed
+    #   The operation that you want this job to perform on every object listed
     #   in the manifest. For more information about the available operations,
     #   see [Operations][1] in the *Amazon Simple Storage Service Developer
     #   Guide*.
@@ -701,7 +701,7 @@ module Aws::S3Control
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) for the AWS Identity and Access
     #   Management (IAM) role that Batch Operations will use to run this
-    #   job's operation on each object in the manifest.
+    #   job's operation on every object in the manifest.
     #
     # @option params [Array<Types::S3Tag>] :tags
     #   A set of tags to associate with the S3 Batch Operations job. This is
@@ -1077,7 +1077,7 @@ module Aws::S3Control
     # `x-amz-outpost-id` derived using the access point ARN, see the
     # [Examples][3] section.
     #
-    # For more information about object expiration, see [ Elements to
+    # For more information about object expiration, see [Elements to
     # Describe Lifecycle Actions][4].
     #
     # Related actions include:
@@ -1156,8 +1156,7 @@ module Aws::S3Control
     # denies the root user the ability to perform this action.
     #
     # For more information about bucket policies, see [Using Bucket Policies
-    # and User Policies](
-    # https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html).
+    # and User Policies][3].
     #
     # All Amazon S3 on Outposts REST API requests for this action require an
     # additional parameter of `x-amz-outpost-id` to be passed with the
@@ -1165,21 +1164,22 @@ module Aws::S3Control
     # `s3-control`. For an example of the request syntax for Amazon S3 on
     # Outposts that uses the S3 on Outposts endpoint hostname prefix and the
     # `x-amz-outpost-id` derived using the access point ARN, see the
-    # [Examples][3] section.
+    # [Examples][4] section.
     #
     # The following actions are related to `DeleteBucketPolicy`\:
     #
-    # * [GetBucketPolicy][4]
+    # * [GetBucketPolicy][5]
     #
-    # * [PutBucketPolicy][5]
+    # * [PutBucketPolicy][6]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html
     #
     # @option params [required, String] :account_id
     #   The account ID of the Outposts bucket.
@@ -1385,8 +1385,8 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html
     #
     # @option params [required, String] :config_id
     #   The ID of the S3 Storage Lens configuration.
@@ -1425,8 +1425,8 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html
     #
     # @option params [required, String] :config_id
     #   The ID of the S3 Storage Lens configuration.
@@ -2263,8 +2263,8 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html
     #
     # @option params [required, String] :config_id
     #   The ID of the Amazon S3 Storage Lens configuration.
@@ -2332,8 +2332,8 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html
     #
     # @option params [required, String] :config_id
     #   The ID of the Amazon S3 Storage Lens configuration.
@@ -2624,8 +2624,8 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html
     #
     # @option params [required, String] :account_id
     #   The account ID of the requester.
@@ -2973,7 +2973,7 @@ module Aws::S3Control
     #
     # <note markdown="1"> Within a bucket, if you add a tag that has the same key as an existing
     # tag, the new value overwrites the old value. For more information, see
-    # [Using Cost Allocation in Amazon S3 Bucket Tags][4].
+    # [ Using Cost Allocation in Amazon S3 Bucket Tags][4].
     #
     #  </note>
     #
@@ -3245,8 +3245,8 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html
     #
     # @option params [required, String] :config_id
     #   The ID of the S3 Storage Lens configuration.
@@ -3354,8 +3354,8 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html
     #
     # @option params [required, String] :config_id
     #   The ID of the S3 Storage Lens configuration.
@@ -3533,7 +3533,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

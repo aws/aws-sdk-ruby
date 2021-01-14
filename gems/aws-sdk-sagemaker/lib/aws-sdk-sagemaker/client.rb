@@ -2981,14 +2981,30 @@ module Aws::SageMaker
     # The output can be used as the manifest file for another labeling job
     # or as training data for your machine learning models.
     #
+    # You can use this operation to create a static labeling job or a
+    # streaming labeling job. A static labeling job stops if all data
+    # objects in the input manifest file identified in `ManifestS3Uri` have
+    # been labeled. A streaming labeling job runs perpetually until it is
+    # manually stopped, or remains idle for 10 days. You can send new data
+    # objects to an active (`InProgress`) streaming labeling job in real
+    # time. To learn how to create a static labeling job, see [Create a
+    # Labeling Job (API) ][3] in the Amazon SageMaker Developer Guide. To
+    # learn how to create a streaming labeling job, see [Create a Streaming
+    # Labeling Job][4].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-automated-labeling.html
     # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-data.html
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-create-labeling-job-api.html
+    # [4]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-create-job.html
     #
     # @option params [required, String] :labeling_job_name
     #   The name of the labeling job. This name is used to identify the job in
-    #   a list of labeling jobs.
+    #   a list of labeling jobs. Labeling job names must be unique within an
+    #   AWS account and region. `LabelingJobName` is not case sensitive. For
+    #   example, Example-job and example-job are considered the same labeling
+    #   job name by Ground Truth.
     #
     # @option params [required, String] :label_attribute_name
     #   The attribute name to use for the label in the output manifest file.
@@ -3014,10 +3030,12 @@ module Aws::SageMaker
     #   successfully complete data labeling.
     #
     # @option params [String] :label_category_config_s3_uri
-    #   The S3 URI of the file that defines the categories used to label the
-    #   data objects.
+    #   The S3 URI of the file, referred to as a *label category configuration
+    #   file*, that defines the categories used to label the data objects.
     #
-    #   For 3D point cloud task types, see [Create a Labeling Category
+    #   For 3D point cloud and video frame task types, you can add label
+    #   category attributes and frame attributes to your label category
+    #   configuration file. To learn how, see [Create a Labeling Category
     #   Configuration File for 3D Point Cloud Labeling Jobs][1].
     #
     #   For all other [built-in task types][2] and [custom tasks][3], your
@@ -3280,6 +3298,9 @@ module Aws::SageMaker
     #         "EnvironmentKey" => "EnvironmentValue",
     #       },
     #       model_package_name: "VersionedArnOrName",
+    #       multi_model_config: {
+    #         model_cache_setting: "Enabled", # accepts Enabled, Disabled
+    #       },
     #     },
     #     containers: [
     #       {
@@ -3294,6 +3315,9 @@ module Aws::SageMaker
     #           "EnvironmentKey" => "EnvironmentValue",
     #         },
     #         model_package_name: "VersionedArnOrName",
+    #         multi_model_config: {
+    #           model_cache_setting: "Enabled", # accepts Enabled, Disabled
+    #         },
     #       },
     #     ],
     #     execution_role_arn: "RoleArn", # required
@@ -4867,7 +4891,7 @@ module Aws::SageMaker
     #   learning models by up to 80% by using Amazon EC2 Spot instances. For
     #   more information, see [Managed Spot Training][2].
     #
-    # * `RoleArn` - The Amazon Resource Number (ARN) that Amazon SageMaker
+    # * `RoleArn` - The Amazon Resource Name (ARN) that Amazon SageMaker
     #   assumes to perform tasks on your behalf during model training. You
     #   must grant this role the necessary permissions so that Amazon
     #   SageMaker can successfully complete model training.
@@ -8706,6 +8730,7 @@ module Aws::SageMaker
     #   resp.primary_container.environment #=> Hash
     #   resp.primary_container.environment["EnvironmentKey"] #=> String
     #   resp.primary_container.model_package_name #=> String
+    #   resp.primary_container.multi_model_config.model_cache_setting #=> String, one of "Enabled", "Disabled"
     #   resp.containers #=> Array
     #   resp.containers[0].container_hostname #=> String
     #   resp.containers[0].image #=> String
@@ -8715,6 +8740,7 @@ module Aws::SageMaker
     #   resp.containers[0].environment #=> Hash
     #   resp.containers[0].environment["EnvironmentKey"] #=> String
     #   resp.containers[0].model_package_name #=> String
+    #   resp.containers[0].multi_model_config.model_cache_setting #=> String, one of "Enabled", "Disabled"
     #   resp.execution_role_arn #=> String
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
@@ -17167,7 +17193,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
