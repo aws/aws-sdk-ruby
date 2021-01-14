@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix an issue with `max_attempts` validation raising incorrectly.
+
 3.111.0 (2021-01-11)
 ------------------
 

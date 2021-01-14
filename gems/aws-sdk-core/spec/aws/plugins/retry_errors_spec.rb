@@ -48,13 +48,13 @@ module Aws
 
       it 'can configure max_attempts with shared config' do
         allow_any_instance_of(Aws::SharedConfig)
-          .to receive(:max_attempts).and_return(5)
+          .to receive(:max_attempts).and_return('5')
         expect(client.config.max_attempts).to eq(5)
       end
 
       it 'can configure max_attempts using ENV with precedence over config' do
         allow_any_instance_of(Aws::SharedConfig)
-          .to receive(:max_attempts).and_return(3)
+          .to receive(:max_attempts).and_return('3')
         ENV['AWS_MAX_ATTEMPTS'] = '1'
         expect(client.config.max_attempts).to eq(1)
       end

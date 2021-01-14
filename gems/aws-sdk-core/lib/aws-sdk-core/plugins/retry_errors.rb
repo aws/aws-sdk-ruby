@@ -176,11 +176,12 @@ a clock skew correction and retry requests with skewed client clocks.
       end
 
       def self.resolve_max_attempts(cfg)
-        value = (ENV['AWS_MAX_ATTEMPTS'] && ENV['AWS_MAX_ATTEMPTS'].to_i) ||
+        value = (ENV['AWS_MAX_ATTEMPTS']) ||
                 Aws.shared_config.max_attempts(profile: cfg.profile) ||
-                3
+                '3'
+        value = value.to_i
         # Raise if provided value is not a positive integer
-        if !value.is_a?(Integer) || value <= 0
+        if value <= 0
           raise ArgumentError,
             'Must provide a positive integer for max_attempts profile '\
             'option or for ENV[\'AWS_MAX_ATTEMPTS\']'
