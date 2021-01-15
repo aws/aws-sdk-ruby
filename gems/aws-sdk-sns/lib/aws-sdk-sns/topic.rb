@@ -434,7 +434,7 @@ module Aws::SNS
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :protocol
-    #   The protocol you want to use. Supported protocols include:
+    #   The protocol that you want to use. Supported protocols include:
     #
     #   * `http` – delivery of JSON-encoded message via HTTP POST
     #
@@ -449,35 +449,41 @@ module Aws::SNS
     #   * `sqs` – delivery of JSON-encoded message to an Amazon SQS queue
     #
     #   * `application` – delivery of JSON-encoded message to an EndpointArn
-    #     for a mobile app and device.
+    #     for a mobile app and device
     #
-    #   * `lambda` – delivery of JSON-encoded message to an Amazon Lambda
-    #     function.
+    #   * `lambda` – delivery of JSON-encoded message to an AWS Lambda
+    #     function
+    #
+    #   * `firehose` – delivery of JSON-encoded message to an Amazon Kinesis
+    #     Data Firehose delivery stream.
     # @option options [String] :endpoint
     #   The endpoint that you want to receive notifications. Endpoints vary by
     #   protocol:
     #
     #   * For the `http` protocol, the (public) endpoint is a URL beginning
-    #     with `http://`
+    #     with `http://`.
     #
     #   * For the `https` protocol, the (public) endpoint is a URL beginning
-    #     with `https://`
+    #     with `https://`.
     #
-    #   * For the `email` protocol, the endpoint is an email address
+    #   * For the `email` protocol, the endpoint is an email address.
     #
-    #   * For the `email-json` protocol, the endpoint is an email address
+    #   * For the `email-json` protocol, the endpoint is an email address.
     #
     #   * For the `sms` protocol, the endpoint is a phone number of an
-    #     SMS-enabled device
+    #     SMS-enabled device.
     #
     #   * For the `sqs` protocol, the endpoint is the ARN of an Amazon SQS
-    #     queue
+    #     queue.
     #
     #   * For the `application` protocol, the endpoint is the EndpointArn of a
     #     mobile app and device.
     #
-    #   * For the `lambda` protocol, the endpoint is the ARN of an Amazon
-    #     Lambda function.
+    #   * For the `lambda` protocol, the endpoint is the ARN of an AWS Lambda
+    #     function.
+    #
+    #   * For the `firehose` protocol, the endpoint is the ARN of an Amazon
+    #     Kinesis Data Firehose delivery stream.
     # @option options [Hash<String,String>] :attributes
     #   A map of attributes with their corresponding values.
     #
@@ -502,6 +508,25 @@ module Aws::SNS
     #     endpoint is unreachable) or server errors (for example, when the
     #     service that powers the subscribed endpoint becomes unavailable) are
     #     held in the dead-letter queue for further analysis or reprocessing.
+    #
+    #   The following attribute applies only to Amazon Kinesis Data Firehose
+    #   delivery stream subscriptions:
+    #
+    #   * `SubscriptionRoleArn` – The ARN of the IAM role that has the
+    #     following:
+    #
+    #     * Permission to write to the Kinesis Data Firehose delivery stream
+    #
+    #     * Amazon SNS listed as a trusted entity
+    #
+    #     Specifying a valid ARN for this attribute is required for Kinesis
+    #     Data Firehose delivery stream subscriptions. For more information,
+    #     see [Fanout to Kinesis Data Firehose delivery streams][1] in the
+    #     *Amazon SNS Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-kinesis-subscriber.html
     # @option options [Boolean] :return_subscription_arn
     #   Sets whether the response from the `Subscribe` request includes the
     #   subscription ARN, even if the subscription is not yet confirmed.
