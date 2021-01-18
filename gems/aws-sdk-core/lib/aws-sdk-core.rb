@@ -89,10 +89,10 @@ require_relative 'aws-sdk-core/arn_parser'
 require_relative 'aws-sdk-core/ec2_metadata'
 
 # aws-sdk-sts is included to support Aws::AssumeRoleCredentials
-require 'aws-sdk-sts'
+require_relative 'aws-sdk-sts'
 
 # aws-sdk-sso is included to support Aws::SSOCredentials
-require 'aws-sdk-sso'
+require_relative 'aws-sdk-sso'
 
 module Aws
 
