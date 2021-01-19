@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix a loading issue with SSO and STS gem aliases using `require_relative` instead of `require`.
+
 3.111.1 (2021-01-15)
 ------------------
 
