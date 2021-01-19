@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2021-01-19)
+------------------
+
+* Feature - This release adds support to include task definition metadata information such as registeredAt, deregisteredAt, registeredBy as part of DescribeTaskDefinition API.
+
 1.72.0 (2020-11-23)
 ------------------
 

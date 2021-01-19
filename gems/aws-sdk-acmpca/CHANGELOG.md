@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2021-01-19)
+------------------
+
+* Feature - ACM Private CA is launching additional certificate templates and API parameters. This allows customers to create custom certificates for their identity and secure communication use cases.
+
 1.31.0 (2020-12-29)
 ------------------
 

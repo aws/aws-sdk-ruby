@@ -23,6 +23,7 @@ module Aws::ACMPCA
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     ActionList = Shapes::ListShape.new(name: 'ActionList')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
+    ApiPassthrough = Shapes::StructureShape.new(name: 'ApiPassthrough')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AuditReportId = Shapes::StringShape.new(name: 'AuditReportId')
     AuditReportResponseFormat = Shapes::StringShape.new(name: 'AuditReportResponseFormat')
@@ -38,6 +39,7 @@ module Aws::ACMPCA
     CertificateChain = Shapes::StringShape.new(name: 'CertificateChain')
     CertificateChainBlob = Shapes::BlobShape.new(name: 'CertificateChainBlob')
     CertificateMismatchException = Shapes::StructureShape.new(name: 'CertificateMismatchException')
+    CertificatePolicyList = Shapes::ListShape.new(name: 'CertificatePolicyList')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     CountryCodeString = Shapes::StringShape.new(name: 'CountryCodeString')
     CreateCertificateAuthorityAuditReportRequest = Shapes::StructureShape.new(name: 'CreateCertificateAuthorityAuditReportRequest')
@@ -58,8 +60,13 @@ module Aws::ACMPCA
     DescribeCertificateAuthorityRequest = Shapes::StructureShape.new(name: 'DescribeCertificateAuthorityRequest')
     DescribeCertificateAuthorityResponse = Shapes::StructureShape.new(name: 'DescribeCertificateAuthorityResponse')
     EdiPartyName = Shapes::StructureShape.new(name: 'EdiPartyName')
+    ExtendedKeyUsage = Shapes::StructureShape.new(name: 'ExtendedKeyUsage')
+    ExtendedKeyUsageList = Shapes::ListShape.new(name: 'ExtendedKeyUsageList')
+    ExtendedKeyUsageType = Shapes::StringShape.new(name: 'ExtendedKeyUsageType')
+    Extensions = Shapes::StructureShape.new(name: 'Extensions')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     GeneralName = Shapes::StructureShape.new(name: 'GeneralName')
+    GeneralNameList = Shapes::ListShape.new(name: 'GeneralNameList')
     GetCertificateAuthorityCertificateRequest = Shapes::StructureShape.new(name: 'GetCertificateAuthorityCertificateRequest')
     GetCertificateAuthorityCertificateResponse = Shapes::StructureShape.new(name: 'GetCertificateAuthorityCertificateResponse')
     GetCertificateAuthorityCsrRequest = Shapes::StructureShape.new(name: 'GetCertificateAuthorityCsrRequest')
@@ -99,9 +106,14 @@ module Aws::ACMPCA
     Permission = Shapes::StructureShape.new(name: 'Permission')
     PermissionAlreadyExistsException = Shapes::StructureShape.new(name: 'PermissionAlreadyExistsException')
     PermissionList = Shapes::ListShape.new(name: 'PermissionList')
+    PolicyInformation = Shapes::StructureShape.new(name: 'PolicyInformation')
+    PolicyQualifierId = Shapes::StringShape.new(name: 'PolicyQualifierId')
+    PolicyQualifierInfo = Shapes::StructureShape.new(name: 'PolicyQualifierInfo')
+    PolicyQualifierInfoList = Shapes::ListShape.new(name: 'PolicyQualifierInfoList')
     PositiveLong = Shapes::IntegerShape.new(name: 'PositiveLong')
     Principal = Shapes::StringShape.new(name: 'Principal')
     PutPolicyRequest = Shapes::StructureShape.new(name: 'PutPolicyRequest')
+    Qualifier = Shapes::StructureShape.new(name: 'Qualifier')
     RequestAlreadyProcessedException = Shapes::StructureShape.new(name: 'RequestAlreadyProcessedException')
     RequestFailedException = Shapes::StructureShape.new(name: 'RequestFailedException')
     RequestInProgressException = Shapes::StructureShape.new(name: 'RequestInProgressException')
@@ -165,6 +177,10 @@ module Aws::ACMPCA
 
     ActionList.member = Shapes::ShapeRef.new(shape: ActionType)
 
+    ApiPassthrough.add_member(:extensions, Shapes::ShapeRef.new(shape: Extensions, location_name: "Extensions"))
+    ApiPassthrough.add_member(:subject, Shapes::ShapeRef.new(shape: ASN1Subject, location_name: "Subject"))
+    ApiPassthrough.struct_class = Types::ApiPassthrough
+
     CertificateAuthorities.member = Shapes::ShapeRef.new(shape: CertificateAuthority)
 
     CertificateAuthority.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -190,6 +206,8 @@ module Aws::ACMPCA
 
     CertificateMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     CertificateMismatchException.struct_class = Types::CertificateMismatchException
+
+    CertificatePolicyList.member = Shapes::ShapeRef.new(shape: PolicyInformation)
 
     ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
@@ -261,6 +279,18 @@ module Aws::ACMPCA
     EdiPartyName.add_member(:name_assigner, Shapes::ShapeRef.new(shape: String256, location_name: "NameAssigner"))
     EdiPartyName.struct_class = Types::EdiPartyName
 
+    ExtendedKeyUsage.add_member(:extended_key_usage_type, Shapes::ShapeRef.new(shape: ExtendedKeyUsageType, location_name: "ExtendedKeyUsageType"))
+    ExtendedKeyUsage.add_member(:extended_key_usage_object_identifier, Shapes::ShapeRef.new(shape: CustomObjectIdentifier, location_name: "ExtendedKeyUsageObjectIdentifier"))
+    ExtendedKeyUsage.struct_class = Types::ExtendedKeyUsage
+
+    ExtendedKeyUsageList.member = Shapes::ShapeRef.new(shape: ExtendedKeyUsage)
+
+    Extensions.add_member(:certificate_policies, Shapes::ShapeRef.new(shape: CertificatePolicyList, location_name: "CertificatePolicies"))
+    Extensions.add_member(:extended_key_usage, Shapes::ShapeRef.new(shape: ExtendedKeyUsageList, location_name: "ExtendedKeyUsage"))
+    Extensions.add_member(:key_usage, Shapes::ShapeRef.new(shape: KeyUsage, location_name: "KeyUsage"))
+    Extensions.add_member(:subject_alternative_names, Shapes::ShapeRef.new(shape: GeneralNameList, location_name: "SubjectAlternativeNames"))
+    Extensions.struct_class = Types::Extensions
+
     GeneralName.add_member(:other_name, Shapes::ShapeRef.new(shape: OtherName, location_name: "OtherName"))
     GeneralName.add_member(:rfc_822_name, Shapes::ShapeRef.new(shape: String256, location_name: "Rfc822Name"))
     GeneralName.add_member(:dns_name, Shapes::ShapeRef.new(shape: String253, location_name: "DnsName"))
@@ -270,6 +300,8 @@ module Aws::ACMPCA
     GeneralName.add_member(:ip_address, Shapes::ShapeRef.new(shape: String39, location_name: "IpAddress"))
     GeneralName.add_member(:registered_id, Shapes::ShapeRef.new(shape: CustomObjectIdentifier, location_name: "RegisteredId"))
     GeneralName.struct_class = Types::GeneralName
+
+    GeneralNameList.member = Shapes::ShapeRef.new(shape: GeneralName)
 
     GetCertificateAuthorityCertificateRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateAuthorityArn"))
     GetCertificateAuthorityCertificateRequest.struct_class = Types::GetCertificateAuthorityCertificateRequest
@@ -324,11 +356,13 @@ module Aws::ACMPCA
     InvalidTagException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidTagException.struct_class = Types::InvalidTagException
 
+    IssueCertificateRequest.add_member(:api_passthrough, Shapes::ShapeRef.new(shape: ApiPassthrough, location_name: "ApiPassthrough"))
     IssueCertificateRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateAuthorityArn"))
     IssueCertificateRequest.add_member(:csr, Shapes::ShapeRef.new(shape: CsrBlob, required: true, location_name: "Csr"))
     IssueCertificateRequest.add_member(:signing_algorithm, Shapes::ShapeRef.new(shape: SigningAlgorithm, required: true, location_name: "SigningAlgorithm"))
     IssueCertificateRequest.add_member(:template_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "TemplateArn"))
     IssueCertificateRequest.add_member(:validity, Shapes::ShapeRef.new(shape: Validity, required: true, location_name: "Validity"))
+    IssueCertificateRequest.add_member(:validity_not_before, Shapes::ShapeRef.new(shape: Validity, location_name: "ValidityNotBefore"))
     IssueCertificateRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken"))
     IssueCertificateRequest.struct_class = Types::IssueCertificateRequest
 
@@ -402,9 +436,22 @@ module Aws::ACMPCA
 
     PermissionList.member = Shapes::ShapeRef.new(shape: Permission)
 
+    PolicyInformation.add_member(:cert_policy_id, Shapes::ShapeRef.new(shape: CustomObjectIdentifier, required: true, location_name: "CertPolicyId"))
+    PolicyInformation.add_member(:policy_qualifiers, Shapes::ShapeRef.new(shape: PolicyQualifierInfoList, location_name: "PolicyQualifiers"))
+    PolicyInformation.struct_class = Types::PolicyInformation
+
+    PolicyQualifierInfo.add_member(:policy_qualifier_id, Shapes::ShapeRef.new(shape: PolicyQualifierId, required: true, location_name: "PolicyQualifierId"))
+    PolicyQualifierInfo.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, required: true, location_name: "Qualifier"))
+    PolicyQualifierInfo.struct_class = Types::PolicyQualifierInfo
+
+    PolicyQualifierInfoList.member = Shapes::ShapeRef.new(shape: PolicyQualifierInfo)
+
     PutPolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
     PutPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: AWSPolicy, required: true, location_name: "Policy"))
     PutPolicyRequest.struct_class = Types::PutPolicyRequest
+
+    Qualifier.add_member(:cps_uri, Shapes::ShapeRef.new(shape: String256, required: true, location_name: "CpsUri"))
+    Qualifier.struct_class = Types::Qualifier
 
     RequestAlreadyProcessedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     RequestAlreadyProcessedException.struct_class = Types::RequestAlreadyProcessedException

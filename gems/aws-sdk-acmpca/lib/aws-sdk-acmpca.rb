@@ -49,6 +49,6 @@ require_relative 'aws-sdk-acmpca/customizations'
 # @!group service
 module Aws::ACMPCA
 
-  GEM_VERSION = '1.31.0'
+  GEM_VERSION = '1.32.0'
 
 end
