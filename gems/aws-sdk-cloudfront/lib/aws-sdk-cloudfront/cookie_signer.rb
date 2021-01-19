@@ -12,7 +12,7 @@ module Aws
     #
     #     signer = Aws::CloudFront::CookieSigner.new(
     #       key_pair_id: "cf-keypair-id",
-    #       private_key_path: "./cf_private_key.pem"
+    #       private_key_path: "./unit_test_dummy_key"
     #     )
     #     cookies = signer.signed_cookie(url,
     #       policy: policy.to_json
