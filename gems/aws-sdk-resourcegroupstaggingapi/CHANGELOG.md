@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-01-21)
+------------------
+
+* Feature - This release adds a new parameter ResourceARNList to Resource Groups Tagging api GetResources api to allow customers retrieve tag data for specific resources.
+
 1.34.0 (2020-09-30)
 ------------------
 

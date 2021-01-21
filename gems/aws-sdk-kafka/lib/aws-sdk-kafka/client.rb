@@ -366,7 +366,7 @@ module Aws::Kafka
     # Creates a new MSK cluster.
     #
     # @option params [required, Types::BrokerNodeGroupInfo] :broker_node_group_info
-    #   Information about the broker nodes in the cluster.
+    #   Information about the brokers.
     #
     # @option params [Types::ClientAuthentication] :client_authentication
     #   Includes all client authentication related information.
@@ -718,6 +718,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.s3.bucket #=> String
     #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.s3.enabled #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.s3.prefix #=> String
+    #   resp.cluster_operation_info.source_cluster_info.instance_type #=> String
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info #=> Array
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info[0].volume_size_gb #=> Integer
@@ -735,6 +736,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.s3.bucket #=> String
     #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.s3.enabled #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.s3.prefix #=> String
+    #   resp.cluster_operation_info.target_cluster_info.instance_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterOperation AWS API Documentation
     #
@@ -979,6 +981,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.s3.bucket #=> String
     #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.s3.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.s3.prefix #=> String
+    #   resp.cluster_operation_info_list[0].source_cluster_info.instance_type #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info #=> Array
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info[0].volume_size_gb #=> Integer
@@ -996,6 +999,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.s3.bucket #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.s3.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.s3.prefix #=> String
+    #   resp.cluster_operation_info_list[0].target_cluster_info.instance_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClusterOperations AWS API Documentation
@@ -1449,6 +1453,44 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Updates all the brokers in the cluster to the specified type.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [required, String] :current_version
+    #   The current version of the cluster.
+    #
+    # @option params [required, String] :target_instance_type
+    #   The Amazon MSK broker type that you want all of the brokers in this
+    #   cluster to be.
+    #
+    # @return [Types::UpdateBrokerTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateBrokerTypeResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::UpdateBrokerTypeResponse#cluster_operation_arn #cluster_operation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_broker_type({
+    #     cluster_arn: "__string", # required
+    #     current_version: "__string", # required
+    #     target_instance_type: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.cluster_operation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateBrokerType AWS API Documentation
+    #
+    # @overload update_broker_type(params = {})
+    # @param [Hash] params ({})
+    def update_broker_type(params = {}, options = {})
+      req = build_request(:update_broker_type, params)
+      req.send_request(options)
+    end
+
     # Updates the EBS storage associated with MSK brokers.
     #
     # @option params [required, String] :cluster_arn
@@ -1712,7 +1754,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

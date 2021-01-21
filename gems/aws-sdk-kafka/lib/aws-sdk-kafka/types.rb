@@ -175,10 +175,7 @@ module Aws::Kafka
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_type
-    #   The type of Amazon EC2 instances to use for Kafka brokers. The
-    #   following instance types are allowed: kafka.m5.large,
-    #   kafka.m5.xlarge, kafka.m5.2xlarge, kafka.m5.4xlarge,
-    #   kafka.m5.12xlarge, and kafka.m5.24xlarge.
+    #   The type of broker used in the Amazon MSK cluster.
     #   @return [String]
     #
     # @!attribute [rw] security_groups
@@ -341,7 +338,7 @@ module Aws::Kafka
     #   @return [String]
     #
     # @!attribute [rw] broker_node_group_info
-    #   Information about the broker nodes.
+    #   Information about the brokers.
     #   @return [Types::BrokerNodeGroupInfo]
     #
     # @!attribute [rw] client_authentication
@@ -751,7 +748,7 @@ module Aws::Kafka
     #       }
     #
     # @!attribute [rw] broker_node_group_info
-    #   Information about the broker nodes in the cluster.
+    #   Information about the brokers.
     #   @return [Types::BrokerNodeGroupInfo]
     #
     # @!attribute [rw] client_authentication
@@ -1989,6 +1986,11 @@ module Aws::Kafka
     #   LoggingInfo details.
     #   @return [Types::LoggingInfo]
     #
+    # @!attribute [rw] instance_type
+    #   The Amazon MSK broker type that you want all of the brokers in this
+    #   cluster to be.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/MutableClusterInfo AWS API Documentation
     #
     class MutableClusterInfo < Struct.new(
@@ -1998,7 +2000,8 @@ module Aws::Kafka
       :open_monitoring,
       :enhanced_monitoring,
       :kafka_version,
-      :logging_info)
+      :logging_info,
+      :instance_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2280,6 +2283,58 @@ module Aws::Kafka
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request body for UpdateBrokerType.
+    #
+    # @note When making an API call, you may pass UpdateBrokerTypeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_arn: "__string", # required
+    #         current_version: "__string", # required
+    #         target_instance_type: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] current_version
+    #   The current version of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_instance_type
+    #   The Amazon MSK broker type that you want all of the brokers in this
+    #   cluster to be.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateBrokerTypeRequest AWS API Documentation
+    #
+    class UpdateBrokerTypeRequest < Struct.new(
+      :cluster_arn,
+      :current_version,
+      :target_instance_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for UpdateBrokerType.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_operation_arn
+    #   The Amazon Resource Name (ARN) of the cluster operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateBrokerTypeResponse AWS API Documentation
+    #
+    class UpdateBrokerTypeResponse < Struct.new(
+      :cluster_arn,
+      :cluster_operation_arn)
       SENSITIVE = []
       include Aws::Structure
     end
