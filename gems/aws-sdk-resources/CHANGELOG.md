@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.94.0 (2021-01-22)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-lexruntimev2` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-lexmodelsv2` gem.
+
 3.93.0 (2020-12-16)
 ------------------
 

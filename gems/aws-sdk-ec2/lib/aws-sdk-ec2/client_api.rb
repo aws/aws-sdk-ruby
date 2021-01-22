@@ -2814,6 +2814,7 @@ module Aws::EC2
     CapacityReservation.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsOptimized"))
     CapacityReservation.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: Boolean, location_name: "ephemeralStorage"))
     CapacityReservation.add_member(:state, Shapes::ShapeRef.new(shape: CapacityReservationState, location_name: "state"))
+    CapacityReservation.add_member(:start_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "startDate"))
     CapacityReservation.add_member(:end_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "endDate"))
     CapacityReservation.add_member(:end_date_type, Shapes::ShapeRef.new(shape: EndDateType, location_name: "endDateType"))
     CapacityReservation.add_member(:instance_match_criteria, Shapes::ShapeRef.new(shape: InstanceMatchCriteria, location_name: "instanceMatchCriteria"))
@@ -7709,6 +7710,7 @@ module Aws::EC2
     ModifyCapacityReservationRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstanceCount"))
     ModifyCapacityReservationRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "EndDate"))
     ModifyCapacityReservationRequest.add_member(:end_date_type, Shapes::ShapeRef.new(shape: EndDateType, location_name: "EndDateType"))
+    ModifyCapacityReservationRequest.add_member(:accept, Shapes::ShapeRef.new(shape: Boolean, location_name: "Accept"))
     ModifyCapacityReservationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyCapacityReservationRequest.struct_class = Types::ModifyCapacityReservationRequest
 

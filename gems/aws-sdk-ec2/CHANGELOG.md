@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.221.0 (2021-01-22)
+------------------
+
+* Feature - Introducing startDate field for CapacityReservation object for the date and time which the reservation started and adding reserved parameter for ModifyCapacityReservation.
+
 1.220.0 (2020-12-21)
 ------------------
 

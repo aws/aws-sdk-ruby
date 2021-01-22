@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2021-01-22)
+------------------
+
+* Feature - Update VPC endpoint field names.
+
 1.52.0 (2020-12-09)
 ------------------
 

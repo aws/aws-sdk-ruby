@@ -484,6 +484,12 @@
   "LexModelBuildingService": {
     "models": "lex-models/2017-04-19"
   },
+  "LexModelsV2": {
+    "models": "models.lex.v2/2020-08-07"
+  },
+  "LexRuntimeV2": {
+    "models": "runtime.lex.v2/2020-08-07"
+  },
   "LicenseManager": {
     "models": "license-manager/2018-08-01"
   },

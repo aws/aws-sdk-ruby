@@ -242,7 +242,7 @@ module Aws::EC2
     #   must be specified here or in a launch template.
     # @option options [String] :instance_type
     #   The instance type. For more information, see [Instance types][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   the *Amazon EC2 User Guide*.
     #
     #   Default: `m1.small`
     #
@@ -272,8 +272,8 @@ module Aws::EC2
     #   The ID of the kernel.
     #
     #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
-    #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   For more information, see [ PV-GRUB][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #
     #
@@ -328,8 +328,8 @@ module Aws::EC2
     #   go to the AWS Resource Center and search for the kernel ID.
     #
     #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
-    #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   For more information, see [ PV-GRUB][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #
     #
@@ -439,8 +439,7 @@ module Aws::EC2
     #   An elastic GPU to associate with the instance. An Elastic GPU is a GPU
     #   resource that you can attach to your Windows instance to accelerate
     #   the graphics performance of your applications. For more information,
-    #   see [ Amazon EC2 Elastic GPUs][1] in the *Amazon Elastic Compute Cloud
-    #   User Guide*.
+    #   see [Amazon EC2 Elastic GPUs][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -478,7 +477,7 @@ module Aws::EC2
     #   Valid values are `standard` and `unlimited`. To change this attribute
     #   after launch, use [ ModifyInstanceCreditSpecification][1]. For more
     #   information, see [Burstable performance instances][2] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   EC2 User Guide*.
     #
     #   Default: `standard` (T2 instances) or `unlimited` (T3/T3a instances)
     #
@@ -488,8 +487,7 @@ module Aws::EC2
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     # @option options [Types::CpuOptionsRequest] :cpu_options
     #   The CPU options for the instance. For more information, see
-    #   [Optimizing CPU options][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   [Optimizing CPU options][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -502,8 +500,8 @@ module Aws::EC2
     #   platform, Availability Zone).
     # @option options [Types::HibernationOptionsRequest] :hibernation_options
     #   Indicates whether an instance is enabled for hibernation. For more
-    #   information, see [Hibernate your instance][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   information, see [Hibernate your instance][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #   You can't enable hibernation and AWS Nitro Enclaves on the same
     #   instance.

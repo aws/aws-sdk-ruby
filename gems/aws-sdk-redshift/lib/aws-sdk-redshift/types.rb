@@ -5455,7 +5455,7 @@ module Aws::Redshift
     #
     # @!attribute [rw] vpc_endpoints
     #   Describes a connection endpoint.
-    #   @return [Array<Types::SpartaProxyVpcEndpoint>]
+    #   @return [Array<Types::VpcEndpoint>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Endpoint AWS API Documentation
     #
@@ -9733,22 +9733,6 @@ module Aws::Redshift
     #
     class SourceNotFoundFault < Aws::EmptyStructure; end
 
-    # The connection endpoint for connecting an Amazon Redshift cluster
-    # through the proxy.
-    #
-    # @!attribute [rw] vpc_endpoint_id
-    #   The connection endpoint ID for connecting an Amazon Redshift cluster
-    #   through the proxy.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SpartaProxyVpcEndpoint AWS API Documentation
-    #
-    class SpartaProxyVpcEndpoint < Struct.new(
-      :vpc_endpoint_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Describes a subnet.
     #
     # @!attribute [rw] subnet_identifier
@@ -10236,6 +10220,22 @@ module Aws::Redshift
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UsageLimitNotFoundFault AWS API Documentation
     #
     class UsageLimitNotFoundFault < Aws::EmptyStructure; end
+
+    # The connection endpoint for connecting an Amazon Redshift cluster
+    # through the proxy.
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The connection endpoint ID for connecting an Amazon Redshift cluster
+    #   through the proxy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/VpcEndpoint AWS API Documentation
+    #
+    class VpcEndpoint < Struct.new(
+      :vpc_endpoint_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Describes the members of a VPC security group.
     #

@@ -877,8 +877,8 @@ module Aws::EC2
     #   Indicates whether the host accepts any untargeted instance launches
     #   that match its instance type configuration, or if it only accepts Host
     #   tenancy instance launches that specify its unique host ID. For more
-    #   information, see [ Understanding Instance Placement and Host
-    #   Affinity][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #   information, see [ Understanding auto-placement and affinity][1] in
+    #   the *Amazon EC2 User Guide*.
     #
     #   Default: `on`
     #
@@ -891,7 +891,7 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   Idempotency][1].
     #
     #
@@ -928,7 +928,7 @@ module Aws::EC2
     # @option params [String] :host_recovery
     #   Indicates whether to enable or disable host recovery for the Dedicated
     #   Host. Host recovery is disabled by default. For more information, see
-    #   [ Host Recovery][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   [ Host recovery][1] in the *Amazon EC2 User Guide*.
     #
     #   Default: `off`
     #
@@ -2998,7 +2998,7 @@ module Aws::EC2
     # Instance Marketplace.
     #
     # For more information, see [Reserved Instance Marketplace][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EC2 User Guide*.
     #
     #
     #
@@ -3661,8 +3661,8 @@ module Aws::EC2
     # still get the Regional RI discounts for that usage. By creating
     # Capacity Reservations, you ensure that you always have access to
     # Amazon EC2 capacity when you need it, for as long as you need it. For
-    # more information, see [Capacity Reservations][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # more information, see [Capacity Reservations][1] in the *Amazon EC2
+    # User Guide*.
     #
     # Your request to create a Capacity Reservation could fail if Amazon EC2
     # does not have sufficient capacity to fulfill the request. If your
@@ -3677,7 +3677,7 @@ module Aws::EC2
     # request fails due to limit constraints, increase your On-Demand
     # Instance limit for the required instance type and try again. For more
     # information about increasing your instance limits, see [Amazon EC2
-    # Service Limits][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # Service Quotas][2] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -3686,7 +3686,7 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
+    #   idempotency of the request. For more information, see [Ensure
     #   Idempotency][1].
     #
     #
@@ -3695,8 +3695,7 @@ module Aws::EC2
     #
     # @option params [required, String] :instance_type
     #   The instance type for which to reserve capacity. For more information,
-    #   see [Instance Types][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   see [Instance types][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -3838,6 +3837,7 @@ module Aws::EC2
     #   resp.capacity_reservation.ebs_optimized #=> Boolean
     #   resp.capacity_reservation.ephemeral_storage #=> Boolean
     #   resp.capacity_reservation.state #=> String, one of "active", "expired", "cancelled", "pending", "failed"
+    #   resp.capacity_reservation.start_date #=> Time
     #   resp.capacity_reservation.end_date #=> Time
     #   resp.capacity_reservation.end_date_type #=> String, one of "unlimited", "limited"
     #   resp.capacity_reservation.instance_match_criteria #=> String, one of "open", "targeted"
@@ -4699,7 +4699,7 @@ module Aws::EC2
     # subnet.
     #
     # For more information, see [Launching an EC2 Fleet][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # EC2 User Guide*.
     #
     #
     #
@@ -4744,7 +4744,7 @@ module Aws::EC2
     # @option params [String] :type
     #   The type of request. The default value is `maintain`.
     #
-    #   * `maintain` - The EC2 Fleet plaees an asynchronous request for your
+    #   * `maintain` - The EC2 Fleet places an asynchronous request for your
     #     desired capacity, and continues to maintain your desired Spot
     #     capacity by replenishing interrupted Spot Instances.
     #
@@ -4758,7 +4758,7 @@ module Aws::EC2
     #     could not be launched.
     #
     #   For more information, see [EC2 Fleet request types][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   EC2 User Guide*.
     #
     #
     #
@@ -7204,8 +7204,8 @@ module Aws::EC2
     # instances in different partitions, where instances in one partition do
     # not share the same hardware with instances in another partition.
     #
-    # For more information, see [Placement groups][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # For more information, see [Placement groups][1] in the *Amazon EC2
+    # User Guide*.
     #
     #
     #
@@ -7318,7 +7318,7 @@ module Aws::EC2
     # DescribeReservedInstancesListings operation.
     #
     # For more information, see [Reserved Instance Marketplace][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EC2 User Guide*.
     #
     #
     #
@@ -10997,7 +10997,7 @@ module Aws::EC2
     #   `instant` fleets.
     #
     # For more information, see [Deleting an EC2 Fleet][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # EC2 User Guide*.
     #
     #
     #
@@ -11803,7 +11803,7 @@ module Aws::EC2
     # Deletes the specified placement group. You must terminate all
     # instances in the placement group before you can delete the placement
     # group. For more information, see [Placement groups][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # EC2 User Guide*.
     #
     #
     #
@@ -14169,8 +14169,8 @@ module Aws::EC2
     #       date and time specified in your request. The reserved capacity is
     #       no longer available for your use.
     #
-    #     * `cancelled` - The Capacity Reservation was manually cancelled. The
-    #       reserved capacity is no longer available for your use.
+    #     * `cancelled` - The Capacity Reservation was cancelled. The reserved
+    #       capacity is no longer available for your use.
     #
     #     * `pending` - The Capacity Reservation request was successful but
     #       the capacity provisioning is still pending.
@@ -14256,6 +14256,7 @@ module Aws::EC2
     #   resp.capacity_reservations[0].ebs_optimized #=> Boolean
     #   resp.capacity_reservations[0].ephemeral_storage #=> Boolean
     #   resp.capacity_reservations[0].state #=> String, one of "active", "expired", "cancelled", "pending", "failed"
+    #   resp.capacity_reservations[0].start_date #=> Time
     #   resp.capacity_reservations[0].end_date #=> Time
     #   resp.capacity_reservations[0].end_date_type #=> String, one of "unlimited", "limited"
     #   resp.capacity_reservations[0].instance_match_criteria #=> String, one of "open", "targeted"
@@ -15630,6 +15631,13 @@ module Aws::EC2
     # and not miss a recorded event. EC2 Fleet events are available for 48
     # hours.
     #
+    # For more information, see [Monitoring your EC2 Fleet][1] in the
+    # *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html#monitor-ec2-fleet
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -15698,6 +15706,13 @@ module Aws::EC2
 
     # Describes the running instances for the specified EC2 Fleet.
     #
+    # For more information, see [Monitoring your EC2 Fleet][1] in the
+    # *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html#monitor-ec2-fleet
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -15764,6 +15779,13 @@ module Aws::EC2
     end
 
     # Describes the specified EC2 Fleets or all of your EC2 Fleets.
+    #
+    # For more information, see [Monitoring your EC2 Fleet][1] in the
+    # *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html#monitor-ec2-fleet
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -16191,8 +16213,8 @@ module Aws::EC2
     # Region of your Dedicated Hosts. When purchasing an offering, ensure
     # that the instance family and Region of the offering matches that of
     # the Dedicated Hosts with which it is to be associated. For more
-    # information about supported instance types, see [Dedicated Hosts
-    # Overview][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # information about supported instance types, see [Dedicated Hosts][1]
+    # in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -17388,7 +17410,7 @@ module Aws::EC2
     # in an unaffected zone, the call works normally.
     #
     # For more information, see [Burstable performance instances][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EC2 User Guide*.
     #
     #
     #
@@ -17505,18 +17527,17 @@ module Aws::EC2
     #   instances to identify hardware and software issues. For more
     #   information, see [Status checks for your instances][1] and
     #   [Troubleshooting instances with failed status checks][2] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   *Amazon EC2 User Guide*.
     #
     # * **Scheduled events** - Amazon EC2 can schedule events (such as
     #   reboot, stop, or terminate) for your instances related to hardware
     #   issues, software updates, or system maintenance. For more
     #   information, see [Scheduled events for your instances][3] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   *Amazon EC2 User Guide*.
     #
     # * **Instance state** - You can manage your instances from the moment
     #   you launch them through their termination. For more information, see
-    #   [Instance lifecycle][4] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   [Instance lifecycle][4] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -17791,8 +17812,8 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :instance_types
-    #   The instance types. For more information, see [Instance Types][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   The instance types. For more information, see [Instance types][1] in
+    #   the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -21129,7 +21150,7 @@ module Aws::EC2
 
     # Describes the specified placement groups or all of your placement
     # groups. For more information, see [Placement groups][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # EC2 User Guide*.
     #
     #
     #
@@ -21570,7 +21591,7 @@ module Aws::EC2
     # Describes one or more of the Reserved Instances that you purchased.
     #
     # For more information about Reserved Instances, see [Reserved
-    # Instances][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # Instances][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -21726,7 +21747,7 @@ module Aws::EC2
     # based on the total price of all of the listings that you purchase.
     #
     # For more information, see [Reserved Instance Marketplace][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EC2 User Guide*.
     #
     #
     #
@@ -21805,7 +21826,7 @@ module Aws::EC2
     # only information about the specific modification is returned.
     #
     # For more information, see [Modifying Reserved Instances][1] in the
-    # Amazon Elastic Compute Cloud User Guide.
+    # *Amazon EC2 User Guide*.
     #
     #
     #
@@ -21918,7 +21939,7 @@ module Aws::EC2
     # Instances.
     #
     # For more information, see [Reserved Instance Marketplace][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EC2 User Guide*.
     #
     #
     #
@@ -21973,8 +21994,8 @@ module Aws::EC2
     #
     # @option params [String] :instance_type
     #   The instance type that the reservation will cover (for example,
-    #   `m1.small`). For more information, see [Instance Types][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   `m1.small`). For more information, see [Instance types][1] in the
+    #   *Amazon EC2 User Guide*.
     #
     #
     #
@@ -29424,8 +29445,8 @@ module Aws::EC2
     # time during the instance lifecycle. This option is supported on
     # instance types that use the Nitro hypervisor.
     #
-    # For more information, see [Instance Console Output][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # For more information, see [Instance console output][1] in the *Amazon
+    # EC2 User Guide*.
     #
     #
     #
@@ -29539,7 +29560,7 @@ module Aws::EC2
     # performance instance family.
     #
     # For more information, see [Burstable performance instances][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EC2 User Guide*.
     #
     #
     #
@@ -30071,8 +30092,8 @@ module Aws::EC2
     # The Windows password is generated at boot by the `EC2Config` service
     # or `EC2Launch` scripts (Windows Server 2016 and later). This usually
     # only happens the first time an instance is launched. For more
-    # information, see [EC2Config][1] and [EC2Launch][2] in the Amazon
-    # Elastic Compute Cloud User Guide.
+    # information, see [EC2Config][1] and [EC2Launch][2] in the *Amazon EC2
+    # User Guide*.
     #
     # For the `EC2Config` service, the password is not generated for
     # rebundled AMIs unless `Ec2SetPassword` is enabled before bundling.
@@ -31391,6 +31412,10 @@ module Aws::EC2
     #     specified date and time. You must provide an `EndDate` value if
     #     `EndDateType` is `limited`.
     #
+    # @option params [Boolean] :accept
+    #   Reserved. Capacity Reservations you have created are accepted by
+    #   default.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -31408,6 +31433,7 @@ module Aws::EC2
     #     instance_count: 1,
     #     end_date: Time.now,
     #     end_date_type: "unlimited", # accepts unlimited, limited
+    #     accept: false,
     #     dry_run: false,
     #   })
     #
@@ -31555,7 +31581,7 @@ module Aws::EC2
     # for updates.
     #
     # For more information, see [Burstable performance instances][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EC2 User Guide*.
     #
     #
     #
@@ -31903,8 +31929,8 @@ module Aws::EC2
     #
     # @option params [String] :host_recovery
     #   Indicates whether to enable or disable host recovery for the Dedicated
-    #   Host. For more information, see [ Host Recovery][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   Host. For more information, see [ Host recovery][1] in the *Amazon EC2
+    #   User Guide*.
     #
     #
     #
@@ -32252,7 +32278,7 @@ module Aws::EC2
     #
     # To modify some attributes, the instance must be stopped. For more
     # information, see [Modifying attributes of a stopped instance][1] in
-    # the *Amazon Elastic Compute Cloud User Guide*.
+    # the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -32276,7 +32302,7 @@ module Aws::EC2
     #   To add instance store volumes to an Amazon EBS-backed instance, you
     #   must add them when you launch the instance. For more information, see
     #   [Updating the block device mapping when launching an instance][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -32322,8 +32348,9 @@ module Aws::EC2
     #
     # @option params [Types::AttributeValue] :instance_type
     #   Changes the instance type to the specified value. For more
-    #   information, see [Instance types][1]. If the instance type is not
-    #   valid, the error returned is `InvalidInstanceAttributeValue`.
+    #   information, see [Instance types][1] in the *Amazon EC2 User Guide*.
+    #   If the instance type is not valid, the error returned is
+    #   `InvalidInstanceAttributeValue`.
     #
     #
     #
@@ -32504,7 +32531,7 @@ module Aws::EC2
     # `unlimited`.
     #
     # For more information, see [Burstable performance instances][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EC2 User Guide*.
     #
     #
     #
@@ -32619,7 +32646,8 @@ module Aws::EC2
     # “pending”. After the parameter modifications are successfully applied
     # to the instance, the state of the modifications changes from “pending”
     # to “applied” in subsequent describe-instances API calls. For more
-    # information, see [Instance metadata and user data][1].
+    # information, see [Instance metadata and user data][1] in the *Amazon
+    # EC2 User Guide*.
     #
     #
     #
@@ -33073,7 +33101,7 @@ module Aws::EC2
     # Availability Zone, network platform, and instance type.
     #
     # For more information, see [Modifying Reserved Instances][1] in the
-    # Amazon Elastic Compute Cloud User Guide.
+    # *Amazon EC2 User Guide*.
     #
     #
     #
@@ -35160,8 +35188,7 @@ module Aws::EC2
 
     # Enables detailed monitoring for a running instance. Otherwise, basic
     # monitoring is enabled. For more information, see [Monitoring your
-    # instances and volumes][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # instances and volumes][1] in the *Amazon EC2 User Guide*.
     #
     # To disable detailed monitoring, see .
     #
@@ -35366,7 +35393,7 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   Idempotency][1].
     #
     #
@@ -35466,8 +35493,7 @@ module Aws::EC2
     # current time.
     #
     # For more information, see [Reserved Instances][1] and [Reserved
-    # Instance Marketplace][2] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # Instance Marketplace][2] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -35660,8 +35686,7 @@ module Aws::EC2
     # EC2 performs a hard reboot.
     #
     # For more information about troubleshooting, see [Getting console
-    # output and rebooting instances][1] in the *Amazon Elastic Compute
-    # Cloud User Guide*.
+    # output and rebooting instances][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -37839,8 +37864,8 @@ module Aws::EC2
     # The `sourceDestCheck` attribute controls whether source/destination
     # checking is enabled. The default value is `true`, which means checking
     # is enabled. This value must be `false` for a NAT instance to perform
-    # NAT. For more information, see [NAT Instances][1] in the *Amazon
-    # Virtual Private Cloud User Guide*.
+    # NAT. For more information, see [NAT Instances][1] in the *Amazon VPC
+    # User Guide*.
     #
     #
     #
@@ -38512,12 +38537,10 @@ module Aws::EC2
     # Linux instances have access to the public key of the key pair at boot.
     # You can use this key to provide secure access to the instance. Amazon
     # EC2 public images use this feature to provide secure access without
-    # passwords. For more information, see [Key pairs][6] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # passwords. For more information, see [Key pairs][6].
     #
     # For troubleshooting, see [What to do if an instance immediately
-    # terminates][7], and [Troubleshooting connecting to your instance][8]
-    # in the *Amazon Elastic Compute Cloud User Guide*.
+    # terminates][7], and [Troubleshooting connecting to your instance][8].
     #
     #
     #
@@ -38539,7 +38562,7 @@ module Aws::EC2
     #
     # @option params [String] :instance_type
     #   The instance type. For more information, see [Instance types][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   the *Amazon EC2 User Guide*.
     #
     #   Default: `m1.small`
     #
@@ -38572,8 +38595,8 @@ module Aws::EC2
     #   The ID of the kernel.
     #
     #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
-    #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   For more information, see [ PV-GRUB][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #
     #
@@ -38634,8 +38657,8 @@ module Aws::EC2
     #   go to the AWS Resource Center and search for the kernel ID.
     #
     #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
-    #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   For more information, see [ PV-GRUB][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #
     #
@@ -38762,8 +38785,7 @@ module Aws::EC2
     #   An elastic GPU to associate with the instance. An Elastic GPU is a GPU
     #   resource that you can attach to your Windows instance to accelerate
     #   the graphics performance of your applications. For more information,
-    #   see [ Amazon EC2 Elastic GPUs][1] in the *Amazon Elastic Compute Cloud
-    #   User Guide*.
+    #   see [Amazon EC2 Elastic GPUs][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -38806,7 +38828,7 @@ module Aws::EC2
     #   Valid values are `standard` and `unlimited`. To change this attribute
     #   after launch, use [ ModifyInstanceCreditSpecification][1]. For more
     #   information, see [Burstable performance instances][2] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   EC2 User Guide*.
     #
     #   Default: `standard` (T2 instances) or `unlimited` (T3/T3a instances)
     #
@@ -38817,8 +38839,7 @@ module Aws::EC2
     #
     # @option params [Types::CpuOptionsRequest] :cpu_options
     #   The CPU options for the instance. For more information, see
-    #   [Optimizing CPU options][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   [Optimizing CPU options][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -38833,8 +38854,8 @@ module Aws::EC2
     #
     # @option params [Types::HibernationOptionsRequest] :hibernation_options
     #   Indicates whether an instance is enabled for hibernation. For more
-    #   information, see [Hibernate your instance][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   information, see [Hibernate your instance][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #   You can't enable hibernation and AWS Nitro Enclaves on the same
     #   instance.
@@ -39220,7 +39241,7 @@ module Aws::EC2
     # it as needed. If you terminate a Scheduled Instance before the current
     # scheduled time period ends, you can launch it again after a few
     # minutes. For more information, see [Scheduled Instances][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EC2 User Guide*.
     #
     #
     #
@@ -39737,8 +39758,8 @@ module Aws::EC2
     # Performing this operation on an instance that uses an instance store
     # as its root device returns an error.
     #
-    # For more information, see [Stopping instances][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # For more information, see [Stopping instances][1] in the *Amazon EC2
+    # User Guide*.
     #
     #
     #
@@ -40169,7 +40190,7 @@ module Aws::EC2
     # You can use the Stop action to hibernate an instance if the instance
     # is [enabled for hibernation][1] and it meets the [hibernation
     # prerequisites][2]. For more information, see [Hibernate your
-    # instance][3] in the *Amazon Elastic Compute Cloud User Guide*.
+    # instance][3] in the *Amazon EC2 User Guide*.
     #
     # We don't charge usage for a stopped instance, or data transfer fees;
     # however, your root partition Amazon EBS volume remains and continues
@@ -40186,7 +40207,7 @@ module Aws::EC2
     # can't use the Stop action to hibernate Spot Instances, but you can
     # specify that Amazon EC2 should hibernate Spot Instances when they are
     # interrupted. For more information, see [Hibernating interrupted Spot
-    # Instances][4] in the *Amazon Elastic Compute Cloud User Guide*.
+    # Instances][4] in the *Amazon EC2 User Guide*.
     #
     # When you stop or hibernate an instance, we shut it down. You can
     # restart your instance at any time. Before stopping or hibernating an
@@ -40202,13 +40223,13 @@ module Aws::EC2
     # devices attached during the instance launch are automatically deleted.
     # For more information about the differences between rebooting,
     # stopping, hibernating, and terminating instances, see [Instance
-    # lifecycle][5] in the *Amazon Elastic Compute Cloud User Guide*.
+    # lifecycle][5] in the *Amazon EC2 User Guide*.
     #
     # When you stop an instance, we attempt to shut it down forcibly after a
     # short while. If your instance appears stuck in the stopping state
     # after a period of time, there may be an issue with the underlying host
     # computer. For more information, see [Troubleshooting stopping your
-    # instance][6] in the *Amazon Elastic Compute Cloud User Guide*.
+    # instance][6] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -40226,7 +40247,7 @@ module Aws::EC2
     #   Hibernates the instance if the instance was enabled for hibernation at
     #   launch. If the instance cannot hibernate successfully, a normal
     #   shutdown occurs. For more information, see [Hibernate your
-    #   instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   instance][1] in the *Amazon EC2 User Guide*.
     #
     #   Default: `false`
     #
@@ -40385,12 +40406,10 @@ module Aws::EC2
     # volumes with the `DeleteOnTermination` block device mapping parameter
     # set to `true` are automatically deleted. For more information about
     # the differences between stopping and terminating instances, see
-    # [Instance lifecycle][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # [Instance lifecycle][1] in the *Amazon EC2 User Guide*.
     #
     # For more information about troubleshooting, see [Troubleshooting
-    # terminating your instance][2] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # terminating your instance][2] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -40544,7 +40563,7 @@ module Aws::EC2
 
     # Disables detailed monitoring for a running instance. For more
     # information, see [Monitoring your instances and volumes][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EC2 User Guide*.
     #
     #
     #
@@ -40871,7 +40890,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.220.0'
+      context[:gem_version] = '1.221.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

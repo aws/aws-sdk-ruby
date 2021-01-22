@@ -263,7 +263,7 @@ module Aws::EC2
     # the instance. A value of `true` means that checking is enabled, and
     # `false` means that checking is disabled. The value must be `false` for
     # the instance to perform NAT. For more information, see [NAT
-    # Instances][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # instances][1] in the *Amazon VPC User Guide*.
     #
     #
     #
@@ -942,7 +942,7 @@ module Aws::EC2
     #   To add instance store volumes to an Amazon EBS-backed instance, you
     #   must add them when you launch the instance. For more information, see
     #   [Updating the block device mapping when launching an instance][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -978,8 +978,9 @@ module Aws::EC2
     #   system shutdown).
     # @option options [Types::AttributeValue] :instance_type
     #   Changes the instance type to the specified value. For more
-    #   information, see [Instance types][1]. If the instance type is not
-    #   valid, the error returned is `InvalidInstanceAttributeValue`.
+    #   information, see [Instance types][1] in the *Amazon EC2 User Guide*.
+    #   If the instance type is not valid, the error returned is
+    #   `InvalidInstanceAttributeValue`.
     #
     #
     #
@@ -1258,7 +1259,7 @@ module Aws::EC2
     #   Hibernates the instance if the instance was enabled for hibernation at
     #   launch. If the instance cannot hibernate successfully, a normal
     #   shutdown occurs. For more information, see [Hibernate your
-    #   instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   instance][1] in the *Amazon EC2 User Guide*.
     #
     #   Default: `false`
     #
@@ -1797,7 +1798,7 @@ module Aws::EC2
       #   Hibernates the instance if the instance was enabled for hibernation at
       #   launch. If the instance cannot hibernate successfully, a normal
       #   shutdown occurs. For more information, see [Hibernate your
-      #   instance][1] in the *Amazon Elastic Compute Cloud User Guide*.
+      #   instance][1] in the *Amazon EC2 User Guide*.
       #
       #   Default: `false`
       #

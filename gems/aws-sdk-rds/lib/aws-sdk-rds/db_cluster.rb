@@ -935,7 +935,7 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :engine_mode
-    #   The DB engine mode of the DB cluster, either `provisioned`
+    #   The DB engine mode of the DB cluster, either `provisioned`,
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     #
     #   The `parallelquery` engine mode isn't required for Aurora MySQL

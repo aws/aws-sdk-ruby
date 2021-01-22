@@ -803,8 +803,8 @@ module Aws::RDS
     #   **PostgreSQL**
     #
     #   The name of the database to create when the DB instance is created. If
-    #   this parameter isn't specified, no database is created in the DB
-    #   instance.
+    #   this parameter isn't specified, a database named `postgres` is
+    #   created in the DB instance.
     #
     #   Constraints:
     #
@@ -833,17 +833,34 @@ module Aws::RDS
     #
     #   Not applicable. Must be null.
     #
-    #   **Amazon Aurora**
+    #   **Amazon Aurora MySQL**
     #
-    #   The name of the database to create when the primary instance of the DB
-    #   cluster is created. If this parameter isn't specified, no database is
-    #   created in the DB instance.
+    #   The name of the database to create when the primary DB instance of the
+    #   Aurora MySQL DB cluster is created. If this parameter isn't specified
+    #   for an Aurora MySQL DB cluster, no database is created in the DB
+    #   cluster.
     #
     #   Constraints:
     #
-    #   * Must contain 1 to 64 letters or numbers.
+    #   * It must contain 1 to 64 alphanumeric characters.
     #
-    #   * Can't be a word reserved by the specified database engine
+    #   * It can't be a word reserved by the database engine.
+    #
+    #   **Amazon Aurora PostgreSQL**
+    #
+    #   The name of the database to create when the primary DB instance of the
+    #   Aurora PostgreSQL DB cluster is created. If this parameter isn't
+    #   specified for an Aurora PostgreSQL DB cluster, a database named
+    #   `postgres` is created in the DB cluster.
+    #
+    #   Constraints:
+    #
+    #   * It must contain 1 to 63 alphanumeric characters.
+    #
+    #   * It must begin with a letter or an underscore. Subsequent characters
+    #     can be letters, underscores, or digits (0 to 9).
+    #
+    #   * It can't be a word reserved by the database engine.
     # @option options [Integer] :allocated_storage
     #   The amount of storage (in gibibytes) to allocate for the DB instance.
     #
@@ -1566,6 +1583,14 @@ module Aws::RDS
     # @option options [Integer] :max_allocated_storage
     #   The upper limit to which Amazon RDS can automatically scale the
     #   storage of the DB instance.
+    #
+    #   For more information about this setting, including limitations that
+    #   apply to it, see [ Managing capacity automatically with Amazon RDS
+    #   storage autoscaling][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling
     # @option options [Boolean] :enable_customer_owned_ip
     #   A value that indicates whether to enable a customer-owned IP address
     #   (CoIP) for an RDS on Outposts DB instance.
@@ -1981,6 +2006,14 @@ module Aws::RDS
     # @option options [Integer] :max_allocated_storage
     #   The upper limit to which Amazon RDS can automatically scale the
     #   storage of the DB instance.
+    #
+    #   For more information about this setting, including limitations that
+    #   apply to it, see [ Managing capacity automatically with Amazon RDS
+    #   storage autoscaling][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2696,6 +2729,14 @@ module Aws::RDS
     # @option options [Integer] :max_allocated_storage
     #   The upper limit to which Amazon RDS can automatically scale the
     #   storage of the DB instance.
+    #
+    #   For more information about this setting, including limitations that
+    #   apply to it, see [ Managing capacity automatically with Amazon RDS
+    #   storage autoscaling][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling
     # @option options [Boolean] :certificate_rotation_restart
     #   A value that indicates whether the DB instance is restarted when you
     #   rotate your SSL/TLS certificate.
@@ -3146,6 +3187,14 @@ module Aws::RDS
     # @option options [Integer] :max_allocated_storage
     #   The upper limit to which Amazon RDS can automatically scale the
     #   storage of the DB instance.
+    #
+    #   For more information about this setting, including limitations that
+    #   apply to it, see [ Managing capacity automatically with Amazon RDS
+    #   storage autoscaling][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling
     # @option options [String] :source_db_instance_automated_backups_arn
     #   The Amazon Resource Name (ARN) of the replicated automated backups
     #   from which to restore, for example,

@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.418.0 (2021-01-22)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::LexRuntimeV2`.
+
+* Feature - Added support for enumerating regions for `Aws::LexModelsV2`.
+
 1.417.0 (2021-01-19)
 ------------------
 
