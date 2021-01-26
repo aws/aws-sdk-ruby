@@ -518,7 +518,7 @@ module Aws::Backup
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
     #   create them and the AWS Region where they are created. They consist of
-    #   lowercase letters, numbers, and hyphens.
+    #   letters, numbers, and hyphens.
     #
     # @option params [Hash<String,String>] :backup_vault_tags
     #   Metadata that you can assign to help organize the resources that you
@@ -894,7 +894,8 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # The current feature settings for the AWS Account.
+    # Describes the global settings of the AWS account, including whether it
+    # is opted in to cross-account backup.
     #
     # @return [Types::DescribeGlobalSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1532,11 +1533,16 @@ module Aws::Backup
     #
     #   * `RDS` for Amazon Relational Database Service
     #
+    #   * `Aurora` for Amazon Aurora
+    #
     #   * `Storage Gateway` for AWS Storage Gateway
     #
     # @option params [String] :by_account_id
     #   The account ID to list the jobs from. Returns only backup jobs
     #   associated with the specified account ID.
+    #
+    #   If used from an AWS Organizations management account, passing `*`
+    #   returns all jobs across the organization.
     #
     # @return [Types::ListBackupJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1888,6 +1894,8 @@ module Aws::Backup
     #   * `EFS` for Amazon Elastic File System
     #
     #   * `RDS` for Amazon Relational Database Service
+    #
+    #   * `Aurora` for Amazon Aurora
     #
     #   * `Storage Gateway` for AWS Storage Gateway
     #
@@ -2351,12 +2359,15 @@ module Aws::Backup
     #
     # @option params [Integer] :start_window_minutes
     #   A value in minutes after a backup is scheduled before a job will be
-    #   canceled if it doesn't start successfully. This value is optional.
+    #   canceled if it doesn't start successfully. This value is optional,
+    #   and the default is 8 hours.
     #
     # @option params [Integer] :complete_window_minutes
-    #   A value in minutes after a backup job is successfully started before
-    #   it must be completed or it will be canceled by AWS Backup. This value
-    #   is optional.
+    #   A value in minutes during which a successfully started backup must
+    #   complete, or else AWS Backup will cancel the job. This value is
+    #   optional. This value begins counting down from when the backup was
+    #   scheduled. It does not add additional time for `StartWindowMinutes`,
+    #   or if the backup started later than scheduled.
     #
     # @option params [Types::Lifecycle] :lifecycle
     #   The lifecycle defines when a protected resource is transitioned to
@@ -2369,6 +2380,9 @@ module Aws::Backup
     #   must be 90 days greater than the “transition to cold after days”
     #   setting. The “transition to cold after days” setting cannot be changed
     #   after a backup has been transitioned to cold.
+    #
+    #   Only Amazon EFS file system backups can be transitioned to cold
+    #   storage.
     #
     # @option params [Hash<String,String>] :recovery_point_tags
     #   To help organize your resources, you can assign your own metadata to
@@ -2461,6 +2475,9 @@ module Aws::Backup
     #   after days” setting. The “transition to cold after days” setting
     #   cannot be changed after a backup has been transitioned to cold.
     #
+    #   Only Amazon EFS file system backups can be transitioned to cold
+    #   storage.
+    #
     # @return [Types::StartCopyJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartCopyJobOutput#copy_job_id #copy_job_id} => String
@@ -2537,10 +2554,11 @@ module Aws::Backup
     #   * `newFileSystem`\: A Boolean value that, if true, specifies that the
     #     recovery point is restored to a new Amazon EFS file system.
     #
-    #   * `ItemsToRestore `\: A serialized list of up to five strings where
-    #     each string is a file path. Use `ItemsToRestore` to restore specific
+    #   * `ItemsToRestore `\: An array of one to five strings where each
+    #     string is a file path. Use `ItemsToRestore` to restore specific
     #     files or directories rather than the entire file system. This
-    #     parameter is optional.
+    #     parameter is optional. For example,
+    #     `"itemsToRestore":"["/my.test"]"`.
     #
     # @option params [required, String] :iam_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to
@@ -2564,6 +2582,8 @@ module Aws::Backup
     #   * `EFS` for Amazon Elastic File System
     #
     #   * `RDS` for Amazon Relational Database Service
+    #
+    #   * `Aurora` for Amazon Aurora
     #
     #   * `Storage Gateway` for AWS Storage Gateway
     #
@@ -2759,7 +2779,7 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Updates the current global settings for the AWS Account. Use the
+    # Updates the current global settings for the AWS account. Use the
     # `DescribeGlobalSettings` API to determine the current settings.
     #
     # @option params [Hash<String,String>] :global_settings
@@ -2795,6 +2815,9 @@ module Aws::Backup
     # must be 90 days greater than the “transition to cold after days”
     # setting. The “transition to cold after days” setting cannot be changed
     # after a backup has been transitioned to cold.
+    #
+    # Only Amazon EFS file system backups can be transitioned to cold
+    # storage.
     #
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
@@ -2898,7 +2921,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
