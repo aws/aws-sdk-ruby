@@ -297,6 +297,8 @@ module Aws::SESV2
     PutDedicatedIpWarmupAttributesResponse = Shapes::StructureShape.new(name: 'PutDedicatedIpWarmupAttributesResponse')
     PutDeliverabilityDashboardOptionRequest = Shapes::StructureShape.new(name: 'PutDeliverabilityDashboardOptionRequest')
     PutDeliverabilityDashboardOptionResponse = Shapes::StructureShape.new(name: 'PutDeliverabilityDashboardOptionResponse')
+    PutEmailIdentityConfigurationSetAttributesRequest = Shapes::StructureShape.new(name: 'PutEmailIdentityConfigurationSetAttributesRequest')
+    PutEmailIdentityConfigurationSetAttributesResponse = Shapes::StructureShape.new(name: 'PutEmailIdentityConfigurationSetAttributesResponse')
     PutEmailIdentityDkimAttributesRequest = Shapes::StructureShape.new(name: 'PutEmailIdentityDkimAttributesRequest')
     PutEmailIdentityDkimAttributesResponse = Shapes::StructureShape.new(name: 'PutEmailIdentityDkimAttributesResponse')
     PutEmailIdentityDkimSigningAttributesRequest = Shapes::StructureShape.new(name: 'PutEmailIdentityDkimSigningAttributesRequest')
@@ -543,6 +545,7 @@ module Aws::SESV2
     CreateEmailIdentityRequest.add_member(:email_identity, Shapes::ShapeRef.new(shape: Identity, required: true, location_name: "EmailIdentity"))
     CreateEmailIdentityRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateEmailIdentityRequest.add_member(:dkim_signing_attributes, Shapes::ShapeRef.new(shape: DkimSigningAttributes, location_name: "DkimSigningAttributes"))
+    CreateEmailIdentityRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
     CreateEmailIdentityRequest.struct_class = Types::CreateEmailIdentityRequest
 
     CreateEmailIdentityResponse.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, location_name: "IdentityType"))
@@ -886,6 +889,7 @@ module Aws::SESV2
     GetEmailIdentityResponse.add_member(:mail_from_attributes, Shapes::ShapeRef.new(shape: MailFromAttributes, location_name: "MailFromAttributes"))
     GetEmailIdentityResponse.add_member(:policies, Shapes::ShapeRef.new(shape: PolicyMap, location_name: "Policies"))
     GetEmailIdentityResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    GetEmailIdentityResponse.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
     GetEmailIdentityResponse.struct_class = Types::GetEmailIdentityResponse
 
     GetEmailTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: EmailTemplateName, required: true, location: "uri", location_name: "TemplateName"))
@@ -1189,6 +1193,12 @@ module Aws::SESV2
     PutDeliverabilityDashboardOptionRequest.struct_class = Types::PutDeliverabilityDashboardOptionRequest
 
     PutDeliverabilityDashboardOptionResponse.struct_class = Types::PutDeliverabilityDashboardOptionResponse
+
+    PutEmailIdentityConfigurationSetAttributesRequest.add_member(:email_identity, Shapes::ShapeRef.new(shape: Identity, required: true, location: "uri", location_name: "EmailIdentity"))
+    PutEmailIdentityConfigurationSetAttributesRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    PutEmailIdentityConfigurationSetAttributesRequest.struct_class = Types::PutEmailIdentityConfigurationSetAttributesRequest
+
+    PutEmailIdentityConfigurationSetAttributesResponse.struct_class = Types::PutEmailIdentityConfigurationSetAttributesResponse
 
     PutEmailIdentityDkimAttributesRequest.add_member(:email_identity, Shapes::ShapeRef.new(shape: Identity, required: true, location: "uri", location_name: "EmailIdentity"))
     PutEmailIdentityDkimAttributesRequest.add_member(:signing_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "SigningEnabled"))
@@ -1550,6 +1560,7 @@ module Aws::SESV2
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:create_email_identity_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -2224,6 +2235,17 @@ module Aws::SESV2
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:put_email_identity_configuration_set_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutEmailIdentityConfigurationSetAttributes"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v2/email/identities/{EmailIdentity}/configuration-set"
+        o.input = Shapes::ShapeRef.new(shape: PutEmailIdentityConfigurationSetAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutEmailIdentityConfigurationSetAttributesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 

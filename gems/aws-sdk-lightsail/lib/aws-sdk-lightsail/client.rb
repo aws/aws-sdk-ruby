@@ -1507,9 +1507,9 @@ module Aws::Lightsail
     # in credentials.
     #
     # <note markdown="1"> You can only push container images to the container service registry
-    # of your Lightsail account. You cannot pull container images perform
+    # of your Lightsail account. You cannot pull container images or perform
     # any other container image management actions on the container service
-    # registry of your Lightsail account.
+    # registry.
     #
     #  </note>
     #
@@ -1521,10 +1521,13 @@ module Aws::Lightsail
     # Control (lightsailctl) plugin to push container images to your
     # Lightsail container service. For more information, see [Pushing and
     # managing container images on your Amazon Lightsail container
-    # services](amazon-lightsail-pushing-container-images) in the *Lightsail
-    # Dev Guide*.
+    # services][1] in the *Lightsail Dev Guide*.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images
     #
     # @return [Types::CreateContainerServiceRegistryLoginResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10500,7 +10503,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

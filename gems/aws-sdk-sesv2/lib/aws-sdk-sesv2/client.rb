@@ -766,6 +766,16 @@ module Aws::SESV2
     # the public key that you want to use for DKIM authentication) and a
     # private key.
     #
+    # When you verify a domain, this operation provides a set of DKIM
+    # tokens, which you can convert into CNAME tokens. You add these CNAME
+    # tokens to the DNS configuration for your domain. Your domain is
+    # verified when Amazon SES detects these records in the DNS
+    # configuration for your domain. For some DNS providers, it can take 72
+    # hours or more to complete the domain verification process.
+    #
+    # Additionally, you can associate an existing configuration set with the
+    # email identity that you're verifying.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
@@ -789,6 +799,11 @@ module Aws::SESV2
     #
     #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
     #
+    # @option params [String] :configuration_set_name
+    #   The configuration set to use by default when sending from this
+    #   identity. Note that any configuration set defined in the email sending
+    #   request takes precedence.
+    #
     # @return [Types::CreateEmailIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEmailIdentityResponse#identity_type #identity_type} => String
@@ -809,6 +824,7 @@ module Aws::SESV2
     #       domain_signing_selector: "Selector", # required
     #       domain_signing_private_key: "PrivateKey", # required
     #     },
+    #     configuration_set_name: "ConfigurationSetName",
     #   })
     #
     # @example Response structure
@@ -1889,6 +1905,7 @@ module Aws::SESV2
     #   * {Types::GetEmailIdentityResponse#mail_from_attributes #mail_from_attributes} => Types::MailFromAttributes
     #   * {Types::GetEmailIdentityResponse#policies #policies} => Hash&lt;String,String&gt;
     #   * {Types::GetEmailIdentityResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::GetEmailIdentityResponse#configuration_set_name #configuration_set_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1914,6 +1931,7 @@ module Aws::SESV2
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.configuration_set_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetEmailIdentity AWS API Documentation
     #
@@ -3148,6 +3166,34 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Used to associate a configuration set with an email identity.
+    #
+    # @option params [required, String] :email_identity
+    #   The email address or domain that you want to associate with a
+    #   configuration set.
+    #
+    # @option params [String] :configuration_set_name
+    #   The configuration set that you want to associate with an email
+    #   identity.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_email_identity_configuration_set_attributes({
+    #     email_identity: "Identity", # required
+    #     configuration_set_name: "ConfigurationSetName",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutEmailIdentityConfigurationSetAttributes AWS API Documentation
+    #
+    # @overload put_email_identity_configuration_set_attributes(params = {})
+    # @param [Hash] params ({})
+    def put_email_identity_configuration_set_attributes(params = {}, options = {})
+      req = build_request(:put_email_identity_configuration_set_attributes, params)
+      req.send_request(options)
+    end
+
     # Used to enable or disable DKIM authentication for an email identity.
     #
     # @option params [required, String] :email_identity
@@ -4156,7 +4202,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

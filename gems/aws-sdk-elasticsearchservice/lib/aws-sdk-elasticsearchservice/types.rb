@@ -3745,6 +3745,13 @@ module Aws::ElasticsearchService
     #             session_timeout_minutes: 1,
     #           },
     #         },
+    #         node_to_node_encryption_options: {
+    #           enabled: false,
+    #         },
+    #         encryption_at_rest_options: {
+    #           enabled: false,
+    #           kms_key_id: "KmsKeyId",
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
@@ -3814,6 +3821,14 @@ module Aws::ElasticsearchService
     #   Specifies advanced security options.
     #   @return [Types::AdvancedSecurityOptionsInput]
     #
+    # @!attribute [rw] node_to_node_encryption_options
+    #   Specifies the NodeToNodeEncryptionOptions.
+    #   @return [Types::NodeToNodeEncryptionOptions]
+    #
+    # @!attribute [rw] encryption_at_rest_options
+    #   Specifies the Encryption At Rest Options.
+    #   @return [Types::EncryptionAtRestOptions]
+    #
     class UpdateElasticsearchDomainConfigRequest < Struct.new(
       :domain_name,
       :elasticsearch_cluster_config,
@@ -3825,7 +3840,9 @@ module Aws::ElasticsearchService
       :access_policies,
       :log_publishing_options,
       :domain_endpoint_options,
-      :advanced_security_options)
+      :advanced_security_options,
+      :node_to_node_encryption_options,
+      :encryption_at_rest_options)
       SENSITIVE = []
       include Aws::Structure
     end

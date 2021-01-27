@@ -208,7 +208,7 @@ module Aws::CustomerProfiles
     DeleteDomainResponse.struct_class = Types::DeleteDomainResponse
 
     DeleteIntegrationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
-    DeleteIntegrationRequest.add_member(:uri, Shapes::ShapeRef.new(shape: string1To255, location_name: "Uri"))
+    DeleteIntegrationRequest.add_member(:uri, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "Uri"))
     DeleteIntegrationRequest.struct_class = Types::DeleteIntegrationRequest
 
     DeleteIntegrationResponse.add_member(:message, Shapes::ShapeRef.new(shape: message, required: true, location_name: "Message"))
@@ -273,7 +273,7 @@ module Aws::CustomerProfiles
     GetDomainResponse.struct_class = Types::GetDomainResponse
 
     GetIntegrationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
-    GetIntegrationRequest.add_member(:uri, Shapes::ShapeRef.new(shape: string1To255, location_name: "Uri"))
+    GetIntegrationRequest.add_member(:uri, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "Uri"))
     GetIntegrationRequest.struct_class = Types::GetIntegrationRequest
 
     GetIntegrationResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "DomainName"))

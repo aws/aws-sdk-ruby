@@ -261,10 +261,9 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] configuration_endpoint
-    #   Represents a Memcached cluster endpoint which, if Automatic
-    #   Discovery is enabled on the cluster, can be used by an application
-    #   to connect to any node in the cluster. The configuration endpoint
-    #   will always have `.cfg` in it.
+    #   Represents a Memcached cluster endpoint which can be used by an
+    #   application to connect to any node in the cluster. The configuration
+    #   endpoint will always have `.cfg` in it.
     #
     #   Example: `mem-3.9dvc4r.cfg.usw2.cache.amazonaws.com:11211`
     #   @return [Types::Endpoint]
@@ -2484,12 +2483,6 @@ module Aws::ElastiCache
     #   The name of the parameter group to associate with this replication
     #   group. If this argument is omitted, the default cache parameter
     #   group for the specified engine is used.
-    #
-    #   <note markdown="1"> If you are restoring to an engine version that is different than the
-    #   original, you must specify the default version of that version. For
-    #   example, `CacheParameterGroupName=default.redis4.0`.
-    #
-    #    </note>
     #
     #   If you are running Redis version 3.2.4 or later, only one node group
     #   (shard), and want to use a default parameter group, we recommend
@@ -5927,6 +5920,7 @@ module Aws::ElastiCache
     #         apply_immediately: false, # required
     #         cache_node_type: "String",
     #         engine_version: "String",
+    #         cache_parameter_group_name: "String",
     #         global_replication_group_description: "String",
     #         automatic_failover_enabled: false,
     #       }
@@ -5952,6 +5946,12 @@ module Aws::ElastiCache
     #   in the Global Datastore.
     #   @return [String]
     #
+    # @!attribute [rw] cache_parameter_group_name
+    #   The name of the cache parameter group to use with the Global
+    #   datastore. It must be compatible with the major engine version used
+    #   by the Global datastore.
+    #   @return [String]
+    #
     # @!attribute [rw] global_replication_group_description
     #   A description of the Global Datastore
     #   @return [String]
@@ -5968,6 +5968,7 @@ module Aws::ElastiCache
       :apply_immediately,
       :cache_node_type,
       :engine_version,
+      :cache_parameter_group_name,
       :global_replication_group_description,
       :automatic_failover_enabled)
       SENSITIVE = []

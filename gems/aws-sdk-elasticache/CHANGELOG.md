@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2021-01-27)
+------------------
+
+* Feature - Add support to pass ParameterGroup name as part updating Engine Version of Global Datastore.
+
 1.50.0 (2021-01-12)
 ------------------
 

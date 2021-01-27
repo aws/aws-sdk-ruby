@@ -1079,6 +1079,7 @@ module Aws::SESV2
     #           domain_signing_selector: "Selector", # required
     #           domain_signing_private_key: "PrivateKey", # required
     #         },
+    #         configuration_set_name: "ConfigurationSetName",
     #       }
     #
     # @!attribute [rw] email_identity
@@ -1104,12 +1105,19 @@ module Aws::SESV2
     #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
     #   @return [Types::DkimSigningAttributes]
     #
+    # @!attribute [rw] configuration_set_name
+    #   The configuration set to use by default when sending from this
+    #   identity. Note that any configuration set defined in the email
+    #   sending request takes precedence.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateEmailIdentityRequest AWS API Documentation
     #
     class CreateEmailIdentityRequest < Struct.new(
       :email_identity,
       :tags,
-      :dkim_signing_attributes)
+      :dkim_signing_attributes,
+      :configuration_set_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3294,6 +3302,11 @@ module Aws::SESV2
     #   associated with the email identity.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] configuration_set_name
+    #   The configuration set used by default when sending from this
+    #   identity.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetEmailIdentityResponse AWS API Documentation
     #
     class GetEmailIdentityResponse < Struct.new(
@@ -3303,7 +3316,8 @@ module Aws::SESV2
       :dkim_attributes,
       :mail_from_attributes,
       :policies,
-      :tags)
+      :tags,
+      :configuration_set_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5258,6 +5272,42 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutDeliverabilityDashboardOptionResponse AWS API Documentation
     #
     class PutDeliverabilityDashboardOptionResponse < Aws::EmptyStructure; end
+
+    # A request to associate a configuration set with an email identity.
+    #
+    # @note When making an API call, you may pass PutEmailIdentityConfigurationSetAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         email_identity: "Identity", # required
+    #         configuration_set_name: "ConfigurationSetName",
+    #       }
+    #
+    # @!attribute [rw] email_identity
+    #   The email address or domain that you want to associate with a
+    #   configuration set.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The configuration set that you want to associate with an email
+    #   identity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutEmailIdentityConfigurationSetAttributesRequest AWS API Documentation
+    #
+    class PutEmailIdentityConfigurationSetAttributesRequest < Struct.new(
+      :email_identity,
+      :configuration_set_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If the action is successful, the service sends back an HTTP 200
+    # response with an empty HTTP body.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutEmailIdentityConfigurationSetAttributesResponse AWS API Documentation
+    #
+    class PutEmailIdentityConfigurationSetAttributesResponse < Aws::EmptyStructure; end
 
     # A request to enable or disable DKIM signing of email that you send
     # from an email identity.

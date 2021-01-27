@@ -1135,6 +1135,7 @@ module Aws::ElastiCache
     ModifyGlobalReplicationGroupMessage.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ApplyImmediately"))
     ModifyGlobalReplicationGroupMessage.add_member(:cache_node_type, Shapes::ShapeRef.new(shape: String, location_name: "CacheNodeType"))
     ModifyGlobalReplicationGroupMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
+    ModifyGlobalReplicationGroupMessage.add_member(:cache_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "CacheParameterGroupName"))
     ModifyGlobalReplicationGroupMessage.add_member(:global_replication_group_description, Shapes::ShapeRef.new(shape: String, location_name: "GlobalReplicationGroupDescription"))
     ModifyGlobalReplicationGroupMessage.add_member(:automatic_failover_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutomaticFailoverEnabled"))
     ModifyGlobalReplicationGroupMessage.struct_class = Types::ModifyGlobalReplicationGroupMessage
