@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2021-01-28)
+------------------
+
+* Feature - Update to SDK to support label time zones in CloudWatch GetMetricData
+
 1.47.0 (2020-12-11)
 ------------------
 

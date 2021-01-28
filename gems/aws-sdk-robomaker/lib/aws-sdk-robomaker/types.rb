@@ -1025,6 +1025,14 @@ module Aws::RoboMaker
     #               },
     #               stream_ui: false,
     #             },
+    #             upload_configurations: [
+    #               {
+    #                 name: "Name", # required
+    #                 path: "Path", # required
+    #                 upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
+    #               },
+    #             ],
+    #             use_default_upload_configurations: false,
     #           },
     #         ],
     #         simulation_applications: [
@@ -1048,11 +1056,19 @@ module Aws::RoboMaker
     #               },
     #               stream_ui: false,
     #             },
+    #             upload_configurations: [
+    #               {
+    #                 name: "Name", # required
+    #                 path: "Path", # required
+    #                 upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
+    #               },
+    #             ],
     #             world_configs: [
     #               {
     #                 world: "Arn",
     #               },
     #             ],
+    #             use_default_upload_configurations: false,
     #           },
     #         ],
     #         data_sources: [
@@ -3527,7 +3543,7 @@ module Aws::RoboMaker
     #   Boolean indicating whether a streaming session will be configured
     #   for the application. If `True`, AWS RoboMaker will configure a
     #   connection so you can interact with your application as it is
-    #   running in the simulation. You must configure and luanch the
+    #   running in the simulation. You must configure and launch the
     #   component. It must have a graphical user interface.
     #   @return [Boolean]
     #
@@ -4787,6 +4803,14 @@ module Aws::RoboMaker
     #           },
     #           stream_ui: false,
     #         },
+    #         upload_configurations: [
+    #           {
+    #             name: "Name", # required
+    #             path: "Path", # required
+    #             upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
+    #           },
+    #         ],
+    #         use_default_upload_configurations: false,
     #       }
     #
     # @!attribute [rw] application
@@ -4801,12 +4825,26 @@ module Aws::RoboMaker
     #   The launch configuration for the robot application.
     #   @return [Types::LaunchConfig]
     #
+    # @!attribute [rw] upload_configurations
+    #   The upload configurations for the robot application.
+    #   @return [Array<Types::UploadConfiguration>]
+    #
+    # @!attribute [rw] use_default_upload_configurations
+    #   A Boolean indicating whether to use default upload configurations.
+    #   By default, `.ros` and `.gazebo` files are uploaded when the
+    #   application terminates and all ROS topics will be recorded.
+    #
+    #   If you set this value, you must specify an `outputLocation`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RobotApplicationConfig AWS API Documentation
     #
     class RobotApplicationConfig < Struct.new(
       :application,
       :application_version,
-      :launch_config)
+      :launch_config,
+      :upload_configurations,
+      :use_default_upload_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5009,11 +5047,19 @@ module Aws::RoboMaker
     #           },
     #           stream_ui: false,
     #         },
+    #         upload_configurations: [
+    #           {
+    #             name: "Name", # required
+    #             path: "Path", # required
+    #             upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
+    #           },
+    #         ],
     #         world_configs: [
     #           {
     #             world: "Arn",
     #           },
     #         ],
+    #         use_default_upload_configurations: false,
     #       }
     #
     # @!attribute [rw] application
@@ -5028,9 +5074,22 @@ module Aws::RoboMaker
     #   The launch configuration for the simulation application.
     #   @return [Types::LaunchConfig]
     #
+    # @!attribute [rw] upload_configurations
+    #   Information about upload configurations for the simulation
+    #   application.
+    #   @return [Array<Types::UploadConfiguration>]
+    #
     # @!attribute [rw] world_configs
     #   A list of world configurations.
     #   @return [Array<Types::WorldConfig>]
+    #
+    # @!attribute [rw] use_default_upload_configurations
+    #   A Boolean indicating whether to use default upload configurations.
+    #   By default, `.ros` and `.gazebo` files are uploaded when the
+    #   application terminates and all ROS topics will be recorded.
+    #
+    #   If you set this value, you must specify an `outputLocation`.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationApplicationConfig AWS API Documentation
     #
@@ -5038,7 +5097,9 @@ module Aws::RoboMaker
       :application,
       :application_version,
       :launch_config,
-      :world_configs)
+      :upload_configurations,
+      :world_configs,
+      :use_default_upload_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5344,6 +5405,14 @@ module Aws::RoboMaker
     #               },
     #               stream_ui: false,
     #             },
+    #             upload_configurations: [
+    #               {
+    #                 name: "Name", # required
+    #                 path: "Path", # required
+    #                 upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
+    #               },
+    #             ],
+    #             use_default_upload_configurations: false,
     #           },
     #         ],
     #         simulation_applications: [
@@ -5367,11 +5436,19 @@ module Aws::RoboMaker
     #               },
     #               stream_ui: false,
     #             },
+    #             upload_configurations: [
+    #               {
+    #                 name: "Name", # required
+    #                 path: "Path", # required
+    #                 upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
+    #               },
+    #             ],
     #             world_configs: [
     #               {
     #                 world: "Arn",
     #               },
     #             ],
+    #             use_default_upload_configurations: false,
     #           },
     #         ],
     #         data_sources: [
@@ -5427,8 +5504,9 @@ module Aws::RoboMaker
     #   @return [String]
     #
     # @!attribute [rw] use_default_applications
-    #   Boolean indicating whether to use default simulation tool
-    #   applications.
+    #   A Boolean indicating whether to use default applications in the
+    #   simulation job. Default applications include Gazebo, rqt, rviz and
+    #   terminal access.
     #   @return [Boolean]
     #
     # @!attribute [rw] robot_applications
@@ -5662,6 +5740,14 @@ module Aws::RoboMaker
     #                   },
     #                   stream_ui: false,
     #                 },
+    #                 upload_configurations: [
+    #                   {
+    #                     name: "Name", # required
+    #                     path: "Path", # required
+    #                     upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
+    #                   },
+    #                 ],
+    #                 use_default_upload_configurations: false,
     #               },
     #             ],
     #             simulation_applications: [
@@ -5685,11 +5771,19 @@ module Aws::RoboMaker
     #                   },
     #                   stream_ui: false,
     #                 },
+    #                 upload_configurations: [
+    #                   {
+    #                     name: "Name", # required
+    #                     path: "Path", # required
+    #                     upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
+    #                   },
+    #                 ],
     #                 world_configs: [
     #                   {
     #                     world: "Arn",
     #                   },
     #                 ],
+    #                 use_default_upload_configurations: false,
     #               },
     #             ],
     #             data_sources: [
@@ -6414,6 +6508,70 @@ module Aws::RoboMaker
       :name,
       :created_at,
       :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides upload configuration information. Files are uploaded from the
+    # simulation job to a location you specify.
+    #
+    # @note When making an API call, you may pass UploadConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         path: "Path", # required
+    #         upload_behavior: "UPLOAD_ON_TERMINATE", # required, accepts UPLOAD_ON_TERMINATE, UPLOAD_ROLLING_AUTO_REMOVE
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A prefix that specifies where files will be uploaded in Amazon S3.
+    #   It is appended to the simulation output location to determine the
+    #   final path.
+    #
+    #   For example, if your simulation output location is `s3://my-bucket`
+    #   and your upload configuration name is `robot-test`, your files will
+    #   be uploaded to `s3://my-bucket/<simid>/<runid>/robot-test`.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   Specifies the path of the file(s) to upload. Standard Unix glob
+    #   matching rules are accepted, with the addition of `**` as a *super
+    #   asterisk*. For example, specifying `/var/log/**.log` causes all .log
+    #   files in the `/var/log` directory tree to be collected. For more
+    #   examples, see [Glob Library][1].
+    #
+    #
+    #
+    #   [1]: https://github.com/gobwas/glob
+    #   @return [String]
+    #
+    # @!attribute [rw] upload_behavior
+    #   Specifies how to upload the files:
+    #
+    #   UPLOAD\_ON\_TERMINATE
+    #
+    #   : Matching files are uploaded once the simulation enters the
+    #     `TERMINATING` state. Matching files are not uploaded until all of
+    #     your code (including tools) have stopped.
+    #
+    #     If there is a problem uploading a file, the upload is retried. If
+    #     problems persist, no further upload attempts will be made.
+    #
+    #   UPLOAD\_ROLLING\_AUTO\_REMOVE
+    #
+    #   : Matching files are uploaded as they are created. They are deleted
+    #     after they are uploaded. The specified path is checked every 5
+    #     seconds. A final check is made when all of your code (including
+    #     tools) have stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/UploadConfiguration AWS API Documentation
+    #
+    class UploadConfiguration < Struct.new(
+      :name,
+      :path,
+      :upload_behavior)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1395,6 +1395,11 @@ module Aws::CloudWatch
     #   The maximum number of data points the request should return before
     #   paginating. If you omit this, the default of 100,800 is used.
     #
+    # @option params [Types::LabelOptions] :label_options
+    #   This structure includes the `Timezone` parameter, which you can use to
+    #   specify your time zone so that the labels of returned data display the
+    #   correct time for your time zone.
+    #
     # @return [Types::GetMetricDataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMetricDataOutput#metric_data_results #metric_data_results} => Array&lt;Types::MetricDataResult&gt;
@@ -1435,6 +1440,9 @@ module Aws::CloudWatch
     #     next_token: "NextToken",
     #     scan_by: "TimestampDescending", # accepts TimestampDescending, TimestampAscending
     #     max_datapoints: 1,
+    #     label_options: {
+    #       timezone: "GetMetricDataLabelTimezone",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2981,7 +2989,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

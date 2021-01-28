@@ -99,6 +99,9 @@ module Aws::ManagedBlockchain
     #               },
     #             },
     #           },
+    #           tags: {
+    #             "TagKey" => "TagValue",
+    #           },
     #         },
     #       }
     #
@@ -188,6 +191,12 @@ module Aws::ManagedBlockchain
     #               },
     #             },
     #           },
+    #           tags: {
+    #             "TagKey" => "TagValue",
+    #           },
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
     #         },
     #       }
     #
@@ -232,6 +241,25 @@ module Aws::ManagedBlockchain
     #   Configuration properties for the first member within the network.
     #   @return [Types::MemberConfiguration]
     #
+    # @!attribute [rw] tags
+    #   Tags to assign to the network. Each tag consists of a key and
+    #   optional value.
+    #
+    #   When specifying tags during creation, you can specify multiple
+    #   key-value pairs in a single request, with an overall maximum of 50
+    #   added to each resource.
+    #
+    #   For more information about tags, see [Tagging Resources][1] in the
+    #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
+    #   Resources][2] in the *Amazon Managed Blockchain Hyperledger Fabric
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
+    #   [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/CreateNetworkInput AWS API Documentation
     #
     class CreateNetworkInput < Struct.new(
@@ -242,7 +270,8 @@ module Aws::ManagedBlockchain
       :framework_version,
       :framework_configuration,
       :voting_policy,
-      :member_configuration)
+      :member_configuration,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -290,6 +319,9 @@ module Aws::ManagedBlockchain
     #           },
     #           state_db: "LevelDB", # accepts LevelDB, CouchDB
     #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] client_request_token
@@ -325,13 +357,33 @@ module Aws::ManagedBlockchain
     #   The properties of a node configuration.
     #   @return [Types::NodeConfiguration]
     #
+    # @!attribute [rw] tags
+    #   Tags to assign to the node. Each tag consists of a key and optional
+    #   value.
+    #
+    #   When specifying tags during creation, you can specify multiple
+    #   key-value pairs in a single request, with an overall maximum of 50
+    #   added to each resource.
+    #
+    #   For more information about tags, see [Tagging Resources][1] in the
+    #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
+    #   Resources][2] in the *Amazon Managed Blockchain Hyperledger Fabric
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
+    #   [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/CreateNodeInput AWS API Documentation
     #
     class CreateNodeInput < Struct.new(
       :client_request_token,
       :network_id,
       :member_id,
-      :node_configuration)
+      :node_configuration,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -368,6 +420,9 @@ module Aws::ManagedBlockchain
     #           ],
     #         },
     #         description: "DescriptionString",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] client_request_token
@@ -404,6 +459,26 @@ module Aws::ManagedBlockchain
     #   for example, "Proposal to add Example Corp. as member."
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Tags to assign to the proposal. Each tag consists of a key and
+    #   optional value.
+    #
+    #   When specifying tags during creation, you can specify multiple
+    #   key-value pairs in a single request, with an overall maximum of 50
+    #   added to each resource. If the proposal is for a network invitation,
+    #   the invitation inherits the tags added to the proposal.
+    #
+    #   For more information about tags, see [Tagging Resources][1] in the
+    #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
+    #   Resources][2] in the *Amazon Managed Blockchain Hyperledger Fabric
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
+    #   [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/CreateProposalInput AWS API Documentation
     #
     class CreateProposalInput < Struct.new(
@@ -411,7 +486,8 @@ module Aws::ManagedBlockchain
       :network_id,
       :member_id,
       :actions,
-      :description)
+      :description,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -730,6 +806,16 @@ module Aws::ManagedBlockchain
     #   A summary of network configuration properties.
     #   @return [Types::NetworkSummary]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the invitation. For more
+    #   information about ARNs and their format, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/Invitation AWS API Documentation
     #
     class Invitation < Struct.new(
@@ -737,7 +823,8 @@ module Aws::ManagedBlockchain
       :creation_date,
       :expiration_date,
       :status,
-      :network_summary)
+      :network_summary,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1124,6 +1211,43 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ArnString", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. For more information
+    #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
+    #   in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags assigned to the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A configuration for logging events.
     #
     # @note When making an API call, you may pass LogConfiguration
@@ -1225,6 +1349,27 @@ module Aws::ManagedBlockchain
     #   The date and time that the member was created.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   Tags assigned to the member. Tags consist of a key and optional
+    #   value. For more information about tags, see [Tagging Resources][1]
+    #   in the *Amazon Managed Blockchain Hyperledger Fabric Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the member. For more information
+    #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
+    #   in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/Member AWS API Documentation
     #
     class Member < Struct.new(
@@ -1235,7 +1380,9 @@ module Aws::ManagedBlockchain
       :framework_attributes,
       :log_publishing_configuration,
       :status,
-      :creation_date)
+      :creation_date,
+      :tags,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1265,6 +1412,9 @@ module Aws::ManagedBlockchain
     #             },
     #           },
     #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1285,13 +1435,29 @@ module Aws::ManagedBlockchain
     #   of a Managed Blockchain network.
     #   @return [Types::MemberLogPublishingConfiguration]
     #
+    # @!attribute [rw] tags
+    #   Tags assigned to the member. Tags consist of a key and optional
+    #   value. For more information about tags, see [Tagging Resources][1]
+    #   in the *Amazon Managed Blockchain Hyperledger Fabric Developer
+    #   Guide*.
+    #
+    #   When specifying tags during creation, you can specify multiple
+    #   key-value pairs in a single request, with an overall maximum of 50
+    #   added to each resource.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/MemberConfiguration AWS API Documentation
     #
     class MemberConfiguration < Struct.new(
       :name,
       :description,
       :framework_configuration,
-      :log_publishing_configuration)
+      :log_publishing_configuration,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1499,6 +1665,16 @@ module Aws::ManagedBlockchain
     #   different AWS account.
     #   @return [Boolean]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the member. For more information
+    #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
+    #   in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/MemberSummary AWS API Documentation
     #
     class MemberSummary < Struct.new(
@@ -1507,7 +1683,8 @@ module Aws::ManagedBlockchain
       :description,
       :status,
       :creation_date,
-      :is_owned)
+      :is_owned,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1557,6 +1734,31 @@ module Aws::ManagedBlockchain
     #   The date and time that the network was created.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   Tags assigned to the network. Each tag consists of a key and
+    #   optional value.
+    #
+    #   For more information about tags, see [Tagging Resources][1] in the
+    #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
+    #   Resources][2] in the *Amazon Managed Blockchain Hyperledger Fabric
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
+    #   [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the network. For more information
+    #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
+    #   in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/Network AWS API Documentation
     #
     class Network < Struct.new(
@@ -1569,12 +1771,15 @@ module Aws::ManagedBlockchain
       :vpc_endpoint_service_name,
       :voting_policy,
       :status,
-      :creation_date)
+      :creation_date,
+      :tags,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Attributes of Ethereum for a network.
+    # Attributes of Ethereum for a network. Ethereum on Managed Blockchain
+    # is in preview release and is subject to change.
     #
     # @!attribute [rw] chain_id
     #   The Ethereum `CHAIN_ID` associated with the Ethereum network. Chain
@@ -1656,7 +1861,8 @@ module Aws::ManagedBlockchain
     #
     # @!attribute [rw] ethereum
     #   Attributes of an Ethereum network for Managed Blockchain resources
-    #   participating in an Ethereum network.
+    #   participating in an Ethereum network. Ethereum on Managed Blockchain
+    #   is in preview release and is subject to change.
     #   @return [Types::NetworkEthereumAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NetworkFrameworkAttributes AWS API Documentation
@@ -1723,6 +1929,16 @@ module Aws::ManagedBlockchain
     #   The date and time that the network was created.
     #   @return [Time]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the network. For more information
+    #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
+    #   in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NetworkSummary AWS API Documentation
     #
     class NetworkSummary < Struct.new(
@@ -1732,7 +1948,8 @@ module Aws::ManagedBlockchain
       :framework,
       :framework_version,
       :status,
-      :creation_date)
+      :creation_date,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1758,7 +1975,9 @@ module Aws::ManagedBlockchain
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
-    #   The Availability Zone in which the node exists.
+    #   The Availability Zone in which the node exists. Required for
+    #   Ethereum nodes. Ethereum on Managed Blockchain is in preview release
+    #   and is subject to change.
     #   @return [String]
     #
     # @!attribute [rw] framework_attributes
@@ -1785,6 +2004,31 @@ module Aws::ManagedBlockchain
     #   The date and time that the node was created.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   Tags assigned to the node. Each tag consists of a key and optional
+    #   value.
+    #
+    #   For more information about tags, see [Tagging Resources][1] in the
+    #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
+    #   Resources][2] in the *Amazon Managed Blockchain Hyperledger Fabric
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
+    #   [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the node. For more information
+    #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
+    #   in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/Node AWS API Documentation
     #
     class Node < Struct.new(
@@ -1797,7 +2041,9 @@ module Aws::ManagedBlockchain
       :log_publishing_configuration,
       :state_db,
       :status,
-      :creation_date)
+      :creation_date,
+      :tags,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1832,7 +2078,9 @@ module Aws::ManagedBlockchain
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
-    #   The Availability Zone in which the node exists.
+    #   The Availability Zone in which the node exists. Required for
+    #   Ethereum nodes. Ethereum on Managed Blockchain is in preview release
+    #   and is subject to change.
     #   @return [String]
     #
     # @!attribute [rw] log_publishing_configuration
@@ -1859,7 +2107,8 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # Attributes of an Ethereum node.
+    # Attributes of an Ethereum node. Ethereum on Managed Blockchain is in
+    # preview release and is subject to change.
     #
     # @!attribute [rw] http_endpoint
     #   The endpoint on which the Ethereum node listens to run Ethereum
@@ -1970,7 +2219,8 @@ module Aws::ManagedBlockchain
     #
     # @!attribute [rw] ethereum
     #   Attributes of Ethereum for a node on a Managed Blockchain network
-    #   that uses Ethereum.
+    #   that uses Ethereum. Ethereum on Managed Blockchain is in preview
+    #   release and is subject to change.
     #   @return [Types::NodeEthereumAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NodeFrameworkAttributes AWS API Documentation
@@ -2039,6 +2289,16 @@ module Aws::ManagedBlockchain
     #   The EC2 instance type for the node.
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the node. For more information
+    #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
+    #   in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NodeSummary AWS API Documentation
     #
     class NodeSummary < Struct.new(
@@ -2046,7 +2306,8 @@ module Aws::ManagedBlockchain
       :status,
       :creation_date,
       :availability_zone,
-      :instance_type)
+      :instance_type,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2130,6 +2391,31 @@ module Aws::ManagedBlockchain
     #   and `NO` votes.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   Tags assigned to the proposal. Each tag consists of a key and
+    #   optional value.
+    #
+    #   For more information about tags, see [Tagging Resources][1] in the
+    #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
+    #   Resources][2] in the *Amazon Managed Blockchain Hyperledger Fabric
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
+    #   [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the proposal. For more information
+    #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
+    #   in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/Proposal AWS API Documentation
     #
     class Proposal < Struct.new(
@@ -2144,7 +2430,9 @@ module Aws::ManagedBlockchain
       :expiration_date,
       :yes_vote_count,
       :no_vote_count,
-      :outstanding_vote_count)
+      :outstanding_vote_count,
+      :tags,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2245,6 +2533,16 @@ module Aws::ManagedBlockchain
     #   `Actions` are not carried out.
     #   @return [Time]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the proposal. For more information
+    #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
+    #   in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ProposalSummary AWS API Documentation
     #
     class ProposalSummary < Struct.new(
@@ -2254,7 +2552,8 @@ module Aws::ManagedBlockchain
       :proposed_by_member_name,
       :status,
       :creation_date,
-      :expiration_date)
+      :expiration_date,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2335,16 +2634,22 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # A requested resource does not exist on the network. It may have been
-    # deleted or referenced inaccurately.
+    # A requested resource does not exist. It may have been deleted or
+    # referenced inaccurately.
     #
     # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   A requested resource does not exist. It may have been deleted or
+    #   referenced inaccurately.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Struct.new(
-      :message)
+      :message,
+      :resource_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2363,6 +2668,46 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ArnString", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. For more information
+    #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
+    #   in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to assign to the specified resource. Tag values can be
+    #   empty, for example, `"MyTagKey" : ""`. You can specify multiple
+    #   key-value pairs in a single request, with an overall maximum of 50
+    #   added to each resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # The request or operation could not be performed because a service is
     # throttling requests. The most common source of throttling errors is
     # launching EC2 instances such that your service limit for EC2 instances
@@ -2372,6 +2717,56 @@ module Aws::ManagedBlockchain
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Aws::EmptyStructure; end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message,
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ArnString", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. For more information
+    #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1]
+    #   in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag keys.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateMemberInput
     #   data as a hash:

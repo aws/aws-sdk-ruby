@@ -3393,12 +3393,15 @@ module Aws::IoT
     #   The ID of the OTA update to delete.
     #
     # @option params [Boolean] :delete_stream
-    #   Specifies if the stream associated with an OTA update should be
-    #   deleted when the OTA update is deleted.
+    #   When true, the stream created by the OTAUpdate process is deleted when
+    #   the OTA update is deleted. Ignored if the stream specified in the
+    #   OTAUpdate is supplied by the user.
     #
     # @option params [Boolean] :force_delete_aws_job
-    #   Specifies if the AWS Job associated with the OTA update should be
-    #   deleted when the OTA update is deleted.
+    #   When true, deletes the AWS job created by the OTAUpdate process even
+    #   if it is "IN\_PROGRESS". Otherwise, if the job is not in a terminal
+    #   state ("COMPLETED" or "CANCELED") an exception will occur. The
+    #   default is false.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -11343,7 +11346,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

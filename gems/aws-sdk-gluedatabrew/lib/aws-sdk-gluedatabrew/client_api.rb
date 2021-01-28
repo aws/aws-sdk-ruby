@@ -47,6 +47,8 @@ module Aws::GlueDataBrew
     CreateScheduleResponse = Shapes::StructureShape.new(name: 'CreateScheduleResponse')
     CreatedBy = Shapes::StringShape.new(name: 'CreatedBy')
     CronExpression = Shapes::StringShape.new(name: 'CronExpression')
+    CsvOptions = Shapes::StructureShape.new(name: 'CsvOptions')
+    CsvOutputOptions = Shapes::StructureShape.new(name: 'CsvOutputOptions')
     DataCatalogInputDefinition = Shapes::StructureShape.new(name: 'DataCatalogInputDefinition')
     DatabaseName = Shapes::StringShape.new(name: 'DatabaseName')
     Dataset = Shapes::StructureShape.new(name: 'Dataset')
@@ -63,6 +65,7 @@ module Aws::GlueDataBrew
     DeleteRecipeVersionResponse = Shapes::StructureShape.new(name: 'DeleteRecipeVersionResponse')
     DeleteScheduleRequest = Shapes::StructureShape.new(name: 'DeleteScheduleRequest')
     DeleteScheduleResponse = Shapes::StructureShape.new(name: 'DeleteScheduleResponse')
+    Delimiter = Shapes::StringShape.new(name: 'Delimiter')
     DescribeDatasetRequest = Shapes::StructureShape.new(name: 'DescribeDatasetRequest')
     DescribeDatasetResponse = Shapes::StructureShape.new(name: 'DescribeDatasetResponse')
     DescribeJobRequest = Shapes::StructureShape.new(name: 'DescribeJobRequest')
@@ -123,6 +126,7 @@ module Aws::GlueDataBrew
     Operation = Shapes::StringShape.new(name: 'Operation')
     Output = Shapes::StructureShape.new(name: 'Output')
     OutputFormat = Shapes::StringShape.new(name: 'OutputFormat')
+    OutputFormatOptions = Shapes::StructureShape.new(name: 'OutputFormatOptions')
     OutputList = Shapes::ListShape.new(name: 'OutputList')
     OverwriteOutput = Shapes::BooleanShape.new(name: 'OverwriteOutput')
     ParameterMap = Shapes::MapShape.new(name: 'ParameterMap')
@@ -296,6 +300,12 @@ module Aws::GlueDataBrew
     CreateScheduleResponse.add_member(:name, Shapes::ShapeRef.new(shape: ScheduleName, required: true, location_name: "Name"))
     CreateScheduleResponse.struct_class = Types::CreateScheduleResponse
 
+    CsvOptions.add_member(:delimiter, Shapes::ShapeRef.new(shape: Delimiter, location_name: "Delimiter"))
+    CsvOptions.struct_class = Types::CsvOptions
+
+    CsvOutputOptions.add_member(:delimiter, Shapes::ShapeRef.new(shape: Delimiter, location_name: "Delimiter"))
+    CsvOutputOptions.struct_class = Types::CsvOutputOptions
+
     DataCatalogInputDefinition.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogId, location_name: "CatalogId"))
     DataCatalogInputDefinition.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location_name: "DatabaseName"))
     DataCatalogInputDefinition.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
@@ -446,6 +456,7 @@ module Aws::GlueDataBrew
 
     FormatOptions.add_member(:json, Shapes::ShapeRef.new(shape: JsonOptions, location_name: "Json"))
     FormatOptions.add_member(:excel, Shapes::ShapeRef.new(shape: ExcelOptions, location_name: "Excel"))
+    FormatOptions.add_member(:csv, Shapes::ShapeRef.new(shape: CsvOptions, location_name: "Csv"))
     FormatOptions.struct_class = Types::FormatOptions
 
     HiddenColumnList.member = Shapes::ShapeRef.new(shape: ColumnName)
@@ -577,7 +588,11 @@ module Aws::GlueDataBrew
     Output.add_member(:partition_columns, Shapes::ShapeRef.new(shape: ColumnNameList, location_name: "PartitionColumns"))
     Output.add_member(:location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "Location"))
     Output.add_member(:overwrite, Shapes::ShapeRef.new(shape: OverwriteOutput, location_name: "Overwrite"))
+    Output.add_member(:format_options, Shapes::ShapeRef.new(shape: OutputFormatOptions, location_name: "FormatOptions"))
     Output.struct_class = Types::Output
+
+    OutputFormatOptions.add_member(:csv, Shapes::ShapeRef.new(shape: CsvOutputOptions, location_name: "Csv"))
+    OutputFormatOptions.struct_class = Types::OutputFormatOptions
 
     OutputList.member = Shapes::ShapeRef.new(shape: Output)
 
@@ -848,6 +863,10 @@ module Aws::GlueDataBrew
         o.http_request_uri = "/profileJobs"
         o.input = Shapes::ShapeRef.new(shape: CreateProfileJobRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateProfileJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -880,6 +899,10 @@ module Aws::GlueDataBrew
         o.http_request_uri = "/recipeJobs"
         o.input = Shapes::ShapeRef.new(shape: CreateRecipeJobRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateRecipeJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -889,6 +912,8 @@ module Aws::GlueDataBrew
         o.http_request_uri = "/schedules"
         o.input = Shapes::ShapeRef.new(shape: CreateScheduleRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateScheduleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -898,6 +923,7 @@ module Aws::GlueDataBrew
         o.http_request_uri = "/datasets/{name}"
         o.input = Shapes::ShapeRef.new(shape: DeleteDatasetRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteDatasetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -908,6 +934,7 @@ module Aws::GlueDataBrew
         o.http_request_uri = "/jobs/{name}"
         o.input = Shapes::ShapeRef.new(shape: DeleteJobRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -918,6 +945,7 @@ module Aws::GlueDataBrew
         o.http_request_uri = "/projects/{name}"
         o.input = Shapes::ShapeRef.new(shape: DeleteProjectRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -928,6 +956,7 @@ module Aws::GlueDataBrew
         o.http_request_uri = "/recipes/{name}/recipeVersion/{recipeVersion}"
         o.input = Shapes::ShapeRef.new(shape: DeleteRecipeVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteRecipeVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -1117,6 +1146,7 @@ module Aws::GlueDataBrew
         o.output = Shapes::ShapeRef.new(shape: PublishRecipeResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:send_project_session_action, Seahorse::Model::Operation.new.tap do |o|
@@ -1136,7 +1166,9 @@ module Aws::GlueDataBrew
         o.http_request_uri = "/jobs/{name}/startJobRun"
         o.input = Shapes::ShapeRef.new(shape: StartJobRunRequest)
         o.output = Shapes::ShapeRef.new(shape: StartJobRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -1146,7 +1178,9 @@ module Aws::GlueDataBrew
         o.http_request_uri = "/projects/{name}/startProjectSession"
         o.input = Shapes::ShapeRef.new(shape: StartProjectSessionRequest)
         o.output = Shapes::ShapeRef.new(shape: StartProjectSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -1188,6 +1222,7 @@ module Aws::GlueDataBrew
         o.http_request_uri = "/datasets/{name}"
         o.input = Shapes::ShapeRef.new(shape: UpdateDatasetRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDatasetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -1198,6 +1233,8 @@ module Aws::GlueDataBrew
         o.http_request_uri = "/profileJobs/{name}"
         o.input = Shapes::ShapeRef.new(shape: UpdateProfileJobRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateProfileJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -1227,6 +1264,8 @@ module Aws::GlueDataBrew
         o.http_request_uri = "/recipeJobs/{name}"
         o.input = Shapes::ShapeRef.new(shape: UpdateRecipeJobRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateRecipeJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -1236,6 +1275,8 @@ module Aws::GlueDataBrew
         o.http_request_uri = "/schedules/{name}"
         o.input = Shapes::ShapeRef.new(shape: UpdateScheduleRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateScheduleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
     end

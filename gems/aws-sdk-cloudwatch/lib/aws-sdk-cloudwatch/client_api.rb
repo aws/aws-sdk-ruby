@@ -103,6 +103,7 @@ module Aws::CloudWatch
     GetInsightRuleReportInput = Shapes::StructureShape.new(name: 'GetInsightRuleReportInput')
     GetInsightRuleReportOutput = Shapes::StructureShape.new(name: 'GetInsightRuleReportOutput')
     GetMetricDataInput = Shapes::StructureShape.new(name: 'GetMetricDataInput')
+    GetMetricDataLabelTimezone = Shapes::StringShape.new(name: 'GetMetricDataLabelTimezone')
     GetMetricDataMaxDatapoints = Shapes::IntegerShape.new(name: 'GetMetricDataMaxDatapoints')
     GetMetricDataOutput = Shapes::StructureShape.new(name: 'GetMetricDataOutput')
     GetMetricStatisticsInput = Shapes::StructureShape.new(name: 'GetMetricStatisticsInput')
@@ -142,6 +143,7 @@ module Aws::CloudWatch
     InvalidNextToken = Shapes::StructureShape.new(name: 'InvalidNextToken')
     InvalidParameterCombinationException = Shapes::StructureShape.new(name: 'InvalidParameterCombinationException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
+    LabelOptions = Shapes::StructureShape.new(name: 'LabelOptions')
     LastModified = Shapes::TimestampShape.new(name: 'LastModified')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LimitExceededFault = Shapes::StructureShape.new(name: 'LimitExceededFault')
@@ -466,6 +468,7 @@ module Aws::CloudWatch
     GetMetricDataInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetMetricDataInput.add_member(:scan_by, Shapes::ShapeRef.new(shape: ScanBy, location_name: "ScanBy"))
     GetMetricDataInput.add_member(:max_datapoints, Shapes::ShapeRef.new(shape: GetMetricDataMaxDatapoints, location_name: "MaxDatapoints"))
+    GetMetricDataInput.add_member(:label_options, Shapes::ShapeRef.new(shape: LabelOptions, location_name: "LabelOptions"))
     GetMetricDataInput.struct_class = Types::GetMetricDataInput
 
     GetMetricDataOutput.add_member(:metric_data_results, Shapes::ShapeRef.new(shape: MetricDataResults, location_name: "MetricDataResults"))
@@ -550,6 +553,9 @@ module Aws::CloudWatch
 
     InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
     InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
+    LabelOptions.add_member(:timezone, Shapes::ShapeRef.new(shape: GetMetricDataLabelTimezone, location_name: "Timezone"))
+    LabelOptions.struct_class = Types::LabelOptions
 
     LimitExceededException.struct_class = Types::LimitExceededException
 

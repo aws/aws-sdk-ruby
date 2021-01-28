@@ -1623,6 +1623,8 @@ module Aws::WellArchitected
     # @option params [Array<String>] :selected_choices
     #   List of selected choice IDs in a question answer.
     #
+    #   The values entered replace the previously selected choices.
+    #
     # @option params [String] :notes
     #   The notes associated with the workload.
     #
@@ -2058,7 +2060,7 @@ module Aws::WellArchitected
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wellarchitected'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

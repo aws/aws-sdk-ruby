@@ -329,11 +329,40 @@ module Aws::GlueDataBrew
 
     # Deletes one or more versions of a recipe at a time.
     #
+    # The entire request will be rejected if:
+    #
+    # * The recipe does not exist.
+    #
+    # * There is an invalid version identifier in the list of versions.
+    #
+    # * The verision list is empty.
+    #
+    # * The version list size exceeds 50.
+    #
+    # * The verison list contains duplicate entries.
+    #
+    # The request will complete successfully, but with partial failures, if:
+    #
+    # * A version does not exist.
+    #
+    # * A version is being used by a job.
+    #
+    # * You specify `LATEST_WORKING`, but it's being used by a project.
+    #
+    # * The version fails to be deleted.
+    #
+    # The `LATEST_WORKING` version will only be deleted if the recipe has no
+    # other versions. If you try to delete `LATEST_WORKING` while other
+    # versions exist (or if they can't be deleted), then `LATEST_WORKING`
+    # will be listed as partial failure in the response.
+    #
     # @option params [required, String] :name
-    #   The name of the recipe to be modified.
+    #   The name of the recipe whose versions are to be deleted.
     #
     # @option params [required, Array<String>] :recipe_versions
-    #   An array of version identifiers to be deleted.
+    #   An array of version identifiers, for the recipe versions to be
+    #   deleted. You can specify numeric versions (`X.Y`) or `LATEST_WORKING`.
+    #   `LATEST_PUBLISHED` is not supported.
     #
     # @return [Types::BatchDeleteRecipeVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -364,18 +393,18 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Creates a new AWS Glue DataBrew dataset for this AWS account.
+    # Creates a new DataBrew dataset.
     #
     # @option params [required, String] :name
-    #   The name of the dataset to be created.
+    #   The name of the dataset to be created. Valid characters are
+    #   alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
     #
     # @option params [Types::FormatOptions] :format_options
-    #   Options that define how Microsoft Excel input is to be interpreted by
-    #   DataBrew.
+    #   Options that define the structure of either Csv, Excel, or JSON input.
     #
     # @option params [required, Types::Input] :input
-    #   Information on how AWS Glue DataBrew can find data, in either the AWS
-    #   Glue Data Catalog or Amazon S3.
+    #   Information on how DataBrew can find data, in either the AWS Glue Data
+    #   Catalog or Amazon S3.
     #
     # @option params [Hash<String,String>] :tags
     #   Metadata tags to apply to this dataset.
@@ -395,6 +424,9 @@ module Aws::GlueDataBrew
     #       excel: {
     #         sheet_names: ["SheetName"],
     #         sheet_indexes: [1],
+    #       },
+    #       csv: {
+    #         delimiter: "Delimiter",
     #       },
     #     },
     #     input: { # required
@@ -430,8 +462,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Creates a new job to profile an AWS Glue DataBrew dataset that exists
-    # in the current AWS account.
+    # Creates a new job to analyze a dataset and create its data profile.
     #
     # @option params [required, String] :dataset_name
     #   The name of the dataset that this job is to act upon.
@@ -449,12 +480,12 @@ module Aws::GlueDataBrew
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #
     # @option params [required, String] :name
-    #   The name of the job to be created.
+    #   The name of the job to be created. Valid characters are alphanumeric
+    #   (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
     #
     # @option params [String] :log_subscription
-    #   A value that enables or disables Amazon CloudWatch logging for the
-    #   current AWS account. If logging is enabled, CloudWatch writes one log
-    #   stream for each job run.
+    #   Enables or disables Amazon CloudWatch logging for the job. If logging
+    #   is enabled, CloudWatch writes one log stream for each job run.
     #
     # @option params [Integer] :max_capacity
     #   The maximum number of nodes that DataBrew can use when the job
@@ -469,7 +500,7 @@ module Aws::GlueDataBrew
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed for this request.
+    #   Management (IAM) role to be assumed when DataBrew runs the job.
     #
     # @option params [Hash<String,String>] :tags
     #   Metadata tags to apply to this job.
@@ -516,20 +547,21 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Creates a new AWS Glue DataBrew project in the current AWS account.
+    # Creates a new DataBrew project.
     #
     # @option params [required, String] :dataset_name
-    #   The name of the dataset to associate this project with.
+    #   The name of an existing dataset to associate this project with.
     #
     # @option params [required, String] :name
-    #   A unique name for the new project.
+    #   A unique name for the new project. Valid characters are alphanumeric
+    #   (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
     #
     # @option params [required, String] :recipe_name
     #   The name of an existing recipe to associate with the project.
     #
     # @option params [Types::Sample] :sample
-    #   Represents the sample size and sampling type for AWS Glue DataBrew to
-    #   use for interactive data analysis.
+    #   Represents the sample size and sampling type for DataBrew to use for
+    #   interactive data analysis.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
@@ -571,13 +603,14 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Creates a new AWS Glue DataBrew recipe for the current AWS account.
+    # Creates a new DataBrew recipe.
     #
     # @option params [String] :description
     #   A description for the recipe.
     #
     # @option params [required, String] :name
-    #   A unique name for the recipe.
+    #   A unique name for the recipe. Valid characters are alphanumeric (A-Z,
+    #   a-z, 0-9), hyphen (-), period (.), and space.
     #
     # @option params [required, Array<Types::RecipeStep>] :steps
     #   An array containing the steps to be performed by the recipe. Each
@@ -631,9 +664,8 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Creates a new job for an existing AWS Glue DataBrew recipe in the
-    # current AWS account. You can create a standalone job using either a
-    # project, or a combination of a recipe and a dataset.
+    # Creates a new job to transform input data, using steps defined in an
+    # existing AWS Glue DataBrew recipe
     #
     # @option params [String] :dataset_name
     #   The name of the dataset that this job processes.
@@ -650,12 +682,12 @@ module Aws::GlueDataBrew
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #
     # @option params [required, String] :name
-    #   A unique name for the job.
+    #   A unique name for the job. Valid characters are alphanumeric (A-Z,
+    #   a-z, 0-9), hyphen (-), period (.), and space.
     #
     # @option params [String] :log_subscription
-    #   A value that enables or disables Amazon CloudWatch logging for the
-    #   current AWS account. If logging is enabled, CloudWatch writes one log
-    #   stream for each job run.
+    #   Enables or disables Amazon CloudWatch logging for the job. If logging
+    #   is enabled, CloudWatch writes one log stream for each job run.
     #
     # @option params [Integer] :max_capacity
     #   The maximum number of nodes that DataBrew can consume when the job
@@ -672,14 +704,14 @@ module Aws::GlueDataBrew
     #   and a dataset to associate with the recipe.
     #
     # @option params [Types::RecipeReference] :recipe_reference
-    #   Represents all of the attributes of an AWS Glue DataBrew recipe.
+    #   Represents the name and version of a DataBrew recipe.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed for this request.
+    #   Management (IAM) role to be assumed when DataBrew runs the job.
     #
     # @option params [Hash<String,String>] :tags
-    #   Metadata tags to apply to this job dataset.
+    #   Metadata tags to apply to this job.
     #
     # @option params [Integer] :timeout
     #   The job's timeout in minutes. A job that attempts to run longer than
@@ -709,6 +741,11 @@ module Aws::GlueDataBrew
     #           key: "Key",
     #         },
     #         overwrite: false,
+    #         format_options: {
+    #           csv: {
+    #             delimiter: "Delimiter",
+    #           },
+    #         },
     #       },
     #     ],
     #     project_name: "ProjectName",
@@ -736,21 +773,27 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Creates a new schedule for one or more AWS Glue DataBrew jobs. Jobs
-    # can be run at a specific date and time, or at regular intervals.
+    # Creates a new schedule for one or more DataBrew jobs. Jobs can be run
+    # at a specific date and time, or at regular intervals.
     #
     # @option params [Array<String>] :job_names
     #   The name or names of one or more jobs to be run.
     #
     # @option params [required, String] :cron_expression
-    #   The date or dates and time or times, in `cron` format, when the jobs
-    #   are to be run.
+    #   The date or dates and time or times when the jobs are to be run. For
+    #   more information, see [Cron expressions][1] in the *AWS Glue DataBrew
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html
     #
     # @option params [Hash<String,String>] :tags
     #   Metadata tags to apply to this schedule.
     #
     # @option params [required, String] :name
-    #   A unique name for the schedule.
+    #   A unique name for the schedule. Valid characters are alphanumeric
+    #   (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
     #
     # @return [Types::CreateScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -780,7 +823,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Deletes a dataset from AWS Glue DataBrew.
+    # Deletes a dataset from DataBrew.
     #
     # @option params [required, String] :name
     #   The name of the dataset to be deleted.
@@ -808,8 +851,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Deletes the specified AWS Glue DataBrew job from the current AWS
-    # account. The job can be for a recipe or for a profile.
+    # Deletes the specified DataBrew job.
     #
     # @option params [required, String] :name
     #   The name of the job to be deleted.
@@ -837,8 +879,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Deletes an existing AWS Glue DataBrew project from the current AWS
-    # account.
+    # Deletes an existing DataBrew project.
     #
     # @option params [required, String] :name
     #   The name of the project to be deleted.
@@ -866,13 +907,15 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Deletes a single version of an AWS Glue DataBrew recipe.
+    # Deletes a single version of a DataBrew recipe.
     #
     # @option params [required, String] :name
-    #   The name of the recipe to be deleted.
+    #   The name of the recipe.
     #
     # @option params [required, String] :recipe_version
-    #   The version of the recipe to be deleted.
+    #   The version of the recipe to be deleted. You can specify a numeric
+    #   versions (`X.Y`) or `LATEST_WORKING`. `LATEST_PUBLISHED` is not
+    #   supported.
     #
     # @return [Types::DeleteRecipeVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -900,8 +943,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Deletes the specified AWS Glue DataBrew schedule from the current AWS
-    # account.
+    # Deletes the specified DataBrew schedule.
     #
     # @option params [required, String] :name
     #   The name of the schedule to be deleted.
@@ -929,8 +971,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Returns the definition of a specific AWS Glue DataBrew dataset that is
-    # in the current AWS account.
+    # Returns the definition of a specific DataBrew dataset.
     #
     # @option params [required, String] :name
     #   The name of the dataset to be described.
@@ -964,6 +1005,7 @@ module Aws::GlueDataBrew
     #   resp.format_options.excel.sheet_names[0] #=> String
     #   resp.format_options.excel.sheet_indexes #=> Array
     #   resp.format_options.excel.sheet_indexes[0] #=> Integer
+    #   resp.format_options.csv.delimiter #=> String
     #   resp.input.s3_input_definition.bucket #=> String
     #   resp.input.s3_input_definition.key #=> String
     #   resp.input.data_catalog_input_definition.catalog_id #=> String
@@ -987,8 +1029,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Returns the definition of a specific AWS Glue DataBrew job that is in
-    # the current AWS account.
+    # Returns the definition of a specific DataBrew job.
     #
     # @option params [required, String] :name
     #   The name of the job to be described.
@@ -1043,6 +1084,7 @@ module Aws::GlueDataBrew
     #   resp.outputs[0].location.bucket #=> String
     #   resp.outputs[0].location.key #=> String
     #   resp.outputs[0].overwrite #=> Boolean
+    #   resp.outputs[0].format_options.csv.delimiter #=> String
     #   resp.project_name #=> String
     #   resp.recipe_reference.name #=> String
     #   resp.recipe_reference.recipe_version #=> String
@@ -1061,8 +1103,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Returns the definition of a specific AWS Glue DataBrew project that is
-    # in the current AWS account.
+    # Returns the definition of a specific DataBrew project.
     #
     # @option params [required, String] :name
     #   The name of the project to be described.
@@ -1118,8 +1159,8 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Returns the definition of a specific AWS Glue DataBrew recipe that is
-    # in the current AWS account.
+    # Returns the definition of a specific DataBrew recipe corresponding to
+    # a particular version.
     #
     # @option params [required, String] :name
     #   The name of the recipe to be described.
@@ -1184,8 +1225,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Returns the definition of a specific AWS Glue DataBrew schedule that
-    # is in the current AWS account.
+    # Returns the definition of a specific DataBrew schedule.
     #
     # @option params [required, String] :name
     #   The name of the schedule to be described.
@@ -1231,17 +1271,14 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Lists all of the AWS Glue DataBrew datasets for the current AWS
-    # account.
+    # Lists all of the DataBrew datasets.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this request.
     #
     # @option params [String] :next_token
-    #   A token generated by DataBrew that specifies where to continue
-    #   pagination if a previous request was truncated. To get the next set of
-    #   pages, pass in the NextToken value from the response object of the
-    #   previous page call.
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
     #
     # @return [Types::ListDatasetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1269,6 +1306,7 @@ module Aws::GlueDataBrew
     #   resp.datasets[0].format_options.excel.sheet_names[0] #=> String
     #   resp.datasets[0].format_options.excel.sheet_indexes #=> Array
     #   resp.datasets[0].format_options.excel.sheet_indexes[0] #=> Integer
+    #   resp.datasets[0].format_options.csv.delimiter #=> String
     #   resp.datasets[0].input.s3_input_definition.bucket #=> String
     #   resp.datasets[0].input.s3_input_definition.key #=> String
     #   resp.datasets[0].input.data_catalog_input_definition.catalog_id #=> String
@@ -1293,8 +1331,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Lists all of the previous runs of a particular AWS Glue DataBrew job
-    # in the current AWS account.
+    # Lists all of the previous runs of a particular DataBrew job.
     #
     # @option params [required, String] :name
     #   The name of the job.
@@ -1303,10 +1340,8 @@ module Aws::GlueDataBrew
     #   The maximum number of results to return in this request.
     #
     # @option params [String] :next_token
-    #   A token generated by AWS Glue DataBrew that specifies where to
-    #   continue pagination if a previous request was truncated. To get the
-    #   next set of pages, pass in the NextToken value from the response
-    #   object of the previous page call.
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
     #
     # @return [Types::ListJobRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1344,6 +1379,7 @@ module Aws::GlueDataBrew
     #   resp.job_runs[0].outputs[0].location.bucket #=> String
     #   resp.job_runs[0].outputs[0].location.key #=> String
     #   resp.job_runs[0].outputs[0].overwrite #=> Boolean
+    #   resp.job_runs[0].outputs[0].format_options.csv.delimiter #=> String
     #   resp.job_runs[0].recipe_reference.name #=> String
     #   resp.job_runs[0].recipe_reference.recipe_version #=> String
     #   resp.job_runs[0].started_by #=> String
@@ -1359,7 +1395,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Lists the AWS Glue DataBrew jobs in the current AWS account.
+    # Lists all of the DataBrew jobs that are defined.
     #
     # @option params [String] :dataset_name
     #   The name of a dataset. Using this parameter indicates to return only
@@ -1418,6 +1454,7 @@ module Aws::GlueDataBrew
     #   resp.jobs[0].outputs[0].location.bucket #=> String
     #   resp.jobs[0].outputs[0].location.key #=> String
     #   resp.jobs[0].outputs[0].overwrite #=> Boolean
+    #   resp.jobs[0].outputs[0].format_options.csv.delimiter #=> String
     #   resp.jobs[0].project_name #=> String
     #   resp.jobs[0].recipe_reference.name #=> String
     #   resp.jobs[0].recipe_reference.recipe_version #=> String
@@ -1437,10 +1474,11 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Lists all of the DataBrew projects in the current AWS account.
+    # Lists all of the DataBrew projects that are defined.
     #
     # @option params [String] :next_token
-    #   A pagination token that can be used in a subsequent request.
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this request.
@@ -1489,14 +1527,15 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Lists all of the versions of a particular AWS Glue DataBrew recipe in
-    # the current AWS account.
+    # Lists the versions of a particular DataBrew recipe, except for
+    # `LATEST_WORKING`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this request.
     #
     # @option params [String] :next_token
-    #   A pagination token that can be used in a subsequent request.
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
     #
     # @option params [required, String] :name
     #   The name of the recipe for which to return version information.
@@ -1551,17 +1590,21 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Lists all of the AWS Glue DataBrew recipes in the current AWS account.
+    # Lists all of the DataBrew recipes that are defined.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this request.
     #
     # @option params [String] :next_token
-    #   A pagination token that can be used in a subsequent request.
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
     #
     # @option params [String] :recipe_version
-    #   A version identifier. Using this parameter indicates to return only
-    #   those recipes that have this version identifier.
+    #   Return only those recipes with a version identifier of
+    #   `LATEST_WORKING` or `LATEST_PUBLISHED`. If `RecipeVersion` is omitted,
+    #   `ListRecipes` returns all of the `LATEST_PUBLISHED` recipe versions.
+    #
+    #   Valid values: `LATEST_WORKING` \| `LATEST_PUBLISHED`
     #
     # @return [Types::ListRecipesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1613,7 +1656,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Lists the AWS Glue DataBrew schedules in the current AWS account.
+    # Lists the DataBrew schedules that are defined.
     #
     # @option params [String] :job_name
     #   The name of the job that these schedules apply to.
@@ -1622,7 +1665,8 @@ module Aws::GlueDataBrew
     #   The maximum number of results to return in this request.
     #
     # @option params [String] :next_token
-    #   A pagination token that can be used in a subsequent request.
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
     #
     # @return [Types::ListSchedulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1665,7 +1709,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Lists all the tags for an AWS Glue DataBrew resource.
+    # Lists all the tags for a DataBrew resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
@@ -1695,8 +1739,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Publishes a new major version of an AWS Glue DataBrew recipe that
-    # exists in the current AWS account.
+    # Publishes a new version of a DataBrew recipe.
     #
     # @option params [String] :description
     #   A description of the recipe to be published, for this version of the
@@ -1729,19 +1772,18 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Performs a recipe step within an interactive AWS Glue DataBrew session
-    # that's currently open.
+    # Performs a recipe step within an interactive DataBrew session that's
+    # currently open.
     #
     # @option params [Boolean] :preview
-    #   Returns the result of the recipe step, without applying it. The result
-    #   isn't added to the view frame stack.
+    #   If true, the result of the recipe step will be returned, but not
+    #   applied.
     #
     # @option params [required, String] :name
     #   The name of the project to apply the action to.
     #
     # @option params [Types::RecipeStep] :recipe_step
-    #   Represents a single step to be performed in an AWS Glue DataBrew
-    #   recipe.
+    #   Represents a single step from a DataBrew recipe to be performed.
     #
     # @option params [Integer] :step_index
     #   The index from which to preview a step. This index is used to preview
@@ -1753,8 +1795,7 @@ module Aws::GlueDataBrew
     #   and ready for work. The action will be performed on this session.
     #
     # @option params [Types::ViewFrame] :view_frame
-    #   Represents the data being being transformed during an AWS Glue
-    #   DataBrew project session.
+    #   Represents the data being being transformed during an action.
     #
     # @return [Types::SendProjectSessionActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1806,7 +1847,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Runs an AWS Glue DataBrew job that exists in the current AWS account.
+    # Runs a DataBrew job.
     #
     # @option params [required, String] :name
     #   The name of the job to be run.
@@ -1834,7 +1875,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Creates an interactive session, enabling you to manipulate an AWS Glue
+    # Creates an interactive session, enabling you to manipulate data in a
     # DataBrew project.
     #
     # @option params [required, String] :name
@@ -1870,7 +1911,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Stops the specified job from running in the current AWS account.
+    # Stops a particular run of a job.
     #
     # @option params [required, String] :name
     #   The name of the job to be stopped.
@@ -1902,8 +1943,8 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Adds metadata tags to an AWS Glue DataBrew resource, such as a
-    # dataset, job, project, or recipe.
+    # Adds metadata tags to a DataBrew resource, such as a dataset, project,
+    # recipe, job, or schedule.
     #
     # @option params [required, String] :resource_arn
     #   The DataBrew resource to which tags should be added. The value for
@@ -1933,10 +1974,10 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Removes metadata tags from an AWS Glue DataBrew resource.
+    # Removes metadata tags from a DataBrew resource.
     #
     # @option params [required, String] :resource_arn
-    #   An DataBrew resource from which you want to remove a tag or tags. The
+    #   A DataBrew resource from which you want to remove a tag or tags. The
     #   value for this parameter is an Amazon Resource Name (ARN).
     #
     # @option params [required, Array<String>] :tag_keys
@@ -1960,19 +2001,17 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Modifies the definition of an existing AWS Glue DataBrew dataset in
-    # the current AWS account.
+    # Modifies the definition of an existing DataBrew dataset.
     #
     # @option params [required, String] :name
     #   The name of the dataset to be updated.
     #
     # @option params [Types::FormatOptions] :format_options
-    #   Options that define how Microsoft Excel input is to be interpreted by
-    #   DataBrew.
+    #   Options that define the structure of either Csv, Excel, or JSON input.
     #
     # @option params [required, Types::Input] :input
-    #   Information on how AWS Glue DataBrew can find data, in either the AWS
-    #   Glue Data Catalog or Amazon S3.
+    #   Information on how DataBrew can find data, in either the AWS Glue Data
+    #   Catalog or Amazon S3.
     #
     # @return [Types::UpdateDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1989,6 +2028,9 @@ module Aws::GlueDataBrew
     #       excel: {
     #         sheet_names: ["SheetName"],
     #         sheet_indexes: [1],
+    #       },
+    #       csv: {
+    #         delimiter: "Delimiter",
     #       },
     #     },
     #     input: { # required
@@ -2021,8 +2063,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Modifies the definition of an existing AWS Glue DataBrew job in the
-    # current AWS account.
+    # Modifies the definition of an existing profile job.
     #
     # @option params [String] :encryption_key_arn
     #   The Amazon Resource Name (ARN) of an encryption key that is used to
@@ -2039,12 +2080,11 @@ module Aws::GlueDataBrew
     #   The name of the job to be updated.
     #
     # @option params [String] :log_subscription
-    #   A value that enables or disables Amazon CloudWatch logging for the
-    #   current AWS account. If logging is enabled, CloudWatch writes one log
-    #   stream for each job run.
+    #   Enables or disables Amazon CloudWatch logging for the job. If logging
+    #   is enabled, CloudWatch writes one log stream for each job run.
     #
     # @option params [Integer] :max_capacity
-    #   The maximum number of nodes that DataBrew can use when the job
+    #   The maximum number of compute nodes that DataBrew can use when the job
     #   processes data.
     #
     # @option params [Integer] :max_retries
@@ -2056,7 +2096,7 @@ module Aws::GlueDataBrew
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed for this request.
+    #   Management (IAM) role to be assumed when DataBrew runs the job.
     #
     # @option params [Integer] :timeout
     #   The job's timeout in minutes. A job that attempts to run longer than
@@ -2096,12 +2136,11 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Modifies the definition of an existing AWS Glue DataBrew project in
-    # the current AWS account.
+    # Modifies the definition of an existing DataBrew project.
     #
     # @option params [Types::Sample] :sample
-    #   Represents the sample size and sampling type for AWS Glue DataBrew to
-    #   use for interactive data analysis.
+    #   Represents the sample size and sampling type for DataBrew to use for
+    #   interactive data analysis.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to be assumed for this
@@ -2140,8 +2179,8 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Modifies the definition of the latest working version of an AWS Glue
-    # DataBrew recipe in the current AWS account.
+    # Modifies the definition of the `LATEST_WORKING` version of a DataBrew
+    # recipe.
     #
     # @option params [String] :description
     #   A description of the recipe.
@@ -2194,8 +2233,7 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Modifies the definition of an existing AWS Glue DataBrew recipe job in
-    # the current AWS account.
+    # Modifies the definition of an existing DataBrew recipe job.
     #
     # @option params [String] :encryption_key_arn
     #   The Amazon Resource Name (ARN) of an encryption key that is used to
@@ -2212,9 +2250,8 @@ module Aws::GlueDataBrew
     #   The name of the job to update.
     #
     # @option params [String] :log_subscription
-    #   A value that enables or disables Amazon CloudWatch logging for the
-    #   current AWS account. If logging is enabled, CloudWatch writes one log
-    #   stream for each job run.
+    #   Enables or disables Amazon CloudWatch logging for the job. If logging
+    #   is enabled, CloudWatch writes one log stream for each job run.
     #
     # @option params [Integer] :max_capacity
     #   The maximum number of nodes that DataBrew can consume when the job
@@ -2228,7 +2265,7 @@ module Aws::GlueDataBrew
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed for this request.
+    #   Management (IAM) role to be assumed when DataBrew runs the job.
     #
     # @option params [Integer] :timeout
     #   The job's timeout in minutes. A job that attempts to run longer than
@@ -2257,6 +2294,11 @@ module Aws::GlueDataBrew
     #           key: "Key",
     #         },
     #         overwrite: false,
+    #         format_options: {
+    #           csv: {
+    #             delimiter: "Delimiter",
+    #           },
+    #         },
     #       },
     #     ],
     #     role_arn: "Arn", # required
@@ -2276,15 +2318,19 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
-    # Modifies the definition of an existing AWS Glue DataBrew schedule in
-    # the current AWS account.
+    # Modifies the definition of an existing DataBrew schedule.
     #
     # @option params [Array<String>] :job_names
     #   The name or names of one or more jobs to be run for this schedule.
     #
     # @option params [required, String] :cron_expression
-    #   The date or dates and time or times, in `cron` format, when the jobs
-    #   are to be run.
+    #   The date or dates and time or times when the jobs are to be run. For
+    #   more information, see [Cron expressions][1] in the *AWS Glue DataBrew
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html
     #
     # @option params [required, String] :name
     #   The name of the schedule to update.
@@ -2327,7 +2373,7 @@ module Aws::GlueDataBrew
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gluedatabrew'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

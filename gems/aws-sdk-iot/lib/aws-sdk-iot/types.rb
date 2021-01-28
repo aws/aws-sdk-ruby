@@ -5491,13 +5491,16 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] delete_stream
-    #   Specifies if the stream associated with an OTA update should be
-    #   deleted when the OTA update is deleted.
+    #   When true, the stream created by the OTAUpdate process is deleted
+    #   when the OTA update is deleted. Ignored if the stream specified in
+    #   the OTAUpdate is supplied by the user.
     #   @return [Boolean]
     #
     # @!attribute [rw] force_delete_aws_job
-    #   Specifies if the AWS Job associated with the OTA update should be
-    #   deleted when the OTA update is deleted.
+    #   When true, deletes the AWS job created by the OTAUpdate process even
+    #   if it is "IN\_PROGRESS". Otherwise, if the job is not in a
+    #   terminal state ("COMPLETED" or "CANCELED") an exception will
+    #   occur. The default is false.
     #   @return [Boolean]
     #
     class DeleteOTAUpdateRequest < Struct.new(

@@ -1297,6 +1297,9 @@ module Aws::CloudWatch
     #         next_token: "NextToken",
     #         scan_by: "TimestampDescending", # accepts TimestampDescending, TimestampAscending
     #         max_datapoints: 1,
+    #         label_options: {
+    #           timezone: "GetMetricDataLabelTimezone",
+    #         },
     #       }
     #
     # @!attribute [rw] metric_data_queries
@@ -1374,6 +1377,12 @@ module Aws::CloudWatch
     #   paginating. If you omit this, the default of 100,800 is used.
     #   @return [Integer]
     #
+    # @!attribute [rw] label_options
+    #   This structure includes the `Timezone` parameter, which you can use
+    #   to specify your time zone so that the labels of returned data
+    #   display the correct time for your time zone.
+    #   @return [Types::LabelOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricDataInput AWS API Documentation
     #
     class GetMetricDataInput < Struct.new(
@@ -1382,7 +1391,8 @@ module Aws::CloudWatch
       :end_time,
       :next_token,
       :scan_by,
-      :max_datapoints)
+      :max_datapoints,
+      :label_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1926,6 +1936,42 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # This structure includes the `Timezone` parameter, which you can use to
+    # specify your time zone so that the labels that are associated with
+    # returned metrics display the correct time for your time zone.
+    #
+    # The `Timezone` value affects a label only if you have a time-based
+    # dynamic expression in the label. For more information about dynamic
+    # expressions in labels, see [Using Dynamic Labels][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html
+    #
+    # @note When making an API call, you may pass LabelOptions
+    #   data as a hash:
+    #
+    #       {
+    #         timezone: "GetMetricDataLabelTimezone",
+    #       }
+    #
+    # @!attribute [rw] timezone
+    #   The time zone to use for metric data return in this operation. The
+    #   format is `+` or `-` followed by four digits. The first two digits
+    #   indicate the number of hours ahead or behind of UTC, and the final
+    #   two digits are the number of minutes. For example, +0130 indicates a
+    #   time zone that is 1 hour and 30 minutes ahead of UTC. The default is
+    #   +0000.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/LabelOptions AWS API Documentation
+    #
+    class LabelOptions < Struct.new(
+      :timezone)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The operation exceeded one or more limits.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/LimitExceededException AWS API Documentation
@@ -2445,6 +2491,13 @@ module Aws::CloudWatch
     #   the value represents. If the metric or expression is shown in a
     #   CloudWatch dashboard widget, the label is shown. If Label is
     #   omitted, CloudWatch generates a default.
+    #
+    #   You can put dynamic expressions into a label, so that it is more
+    #   descriptive. For more information, see [Using Dynamic Labels][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html
     #   @return [String]
     #
     # @!attribute [rw] return_data
