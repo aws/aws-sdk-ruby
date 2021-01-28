@@ -485,7 +485,10 @@
     "models": "lex-models/2017-04-19"
   },
   "LexModelsV2": {
-    "models": "models.lex.v2/2020-08-07"
+    "models": "models.lex.v2/2020-08-07",
+    "addPlugins": [
+      "Aws::LexModelsV2::Plugins::ContentType"
+    ]
   },
   "LexRuntimeV2": {
     "models": "runtime.lex.v2/2020-08-07"
