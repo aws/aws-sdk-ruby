@@ -4,7 +4,7 @@ Unreleased Changes
 1.62.0 (2021-01-29)
 ------------------
 
-* Feature - "AWS Elemental MediaLive now supports output to a private VPC. When this property is specified, the output will egress from a user specified VPC."
+* Feature - AWS Elemental MediaLive now supports output to a private VPC. When this property is specified, the output will egress from a user specified VPC.
 
 1.61.0 (2020-12-04)
 ------------------
