@@ -40,7 +40,7 @@ module Aws::TranscribeStreamingService
     #
     # @!attribute [rw] audio_chunk
     #   An audio blob that contains the next part of the audio that you want
-    #   to transcribe.
+    #   to transcribe. The maximum audio chunk size is 32 KB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/AudioEvent AWS API Documentation
@@ -176,11 +176,57 @@ module Aws::TranscribeStreamingService
     #   represents one or more interpretations of the input audio.
     #   @return [Array<Types::MedicalItem>]
     #
+    # @!attribute [rw] entities
+    #   Contains the medical entities identified as personal health
+    #   information in the transcription output.
+    #   @return [Array<Types::MedicalEntity>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalAlternative AWS API Documentation
     #
     class MedicalAlternative < Struct.new(
       :transcript,
-      :items)
+      :items,
+      :entities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The medical entity identified as personal health information.
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the speech that was identified as a medical
+    #   entity.
+    #   @return [Float]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the speech that was identified as a medical entity.
+    #   @return [Float]
+    #
+    # @!attribute [rw] category
+    #   The type of personal health information of the medical entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The word or words in the transcription output that have been
+    #   identified as a medical entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   A value between zero and one that Amazon Transcribe Medical assigned
+    #   to the personal health information that it identified in the source
+    #   audio. Larger values indicate that Amazon Transcribe Medical has
+    #   higher confidence in the personal health information that it
+    #   identified.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/MedicalEntity AWS API Documentation
+    #
+    class MedicalEntity < Struct.new(
+      :start_time,
+      :end_time,
+      :category,
+      :content,
+      :confidence)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -403,6 +449,7 @@ module Aws::TranscribeStreamingService
     #         input_event_stream_hander: EventStreams::AudioStream.new,
     #         enable_channel_identification: false,
     #         number_of_channels: 1,
+    #         content_identification_type: "PHI", # accepts PHI
     #       }
     #
     # @!attribute [rw] language_code
@@ -468,6 +515,11 @@ module Aws::TranscribeStreamingService
     #   The number of channels that are in your audio stream.
     #   @return [Integer]
     #
+    # @!attribute [rw] content_identification_type
+    #   Set this field to `PHI` to identify personal health information in
+    #   the transcription output.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartMedicalStreamTranscriptionRequest AWS API Documentation
     #
     class StartMedicalStreamTranscriptionRequest < Struct.new(
@@ -481,7 +533,8 @@ module Aws::TranscribeStreamingService
       :session_id,
       :audio_stream,
       :enable_channel_identification,
-      :number_of_channels)
+      :number_of_channels,
+      :content_identification_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -538,6 +591,11 @@ module Aws::TranscribeStreamingService
     #   The number of channels identified in the stream.
     #   @return [Integer]
     #
+    # @!attribute [rw] content_identification_type
+    #   If the value is `PHI`, indicates that you've configured your stream
+    #   to identify personal health information.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartMedicalStreamTranscriptionResponse AWS API Documentation
     #
     class StartMedicalStreamTranscriptionResponse < Struct.new(
@@ -552,7 +610,8 @@ module Aws::TranscribeStreamingService
       :session_id,
       :transcript_result_stream,
       :enable_channel_identification,
-      :number_of_channels)
+      :number_of_channels,
+      :content_identification_type)
       SENSITIVE = []
       include Aws::Structure
     end

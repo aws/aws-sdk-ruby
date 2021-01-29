@@ -1077,8 +1077,8 @@ module Aws::Macie2
     S3Bucket.add_member(:tags, Shapes::ShapeRef.new(shape: KeyValuePairList, location_name: "tags"))
     S3Bucket.struct_class = Types::S3Bucket
 
-    S3BucketDefinitionForJob.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
-    S3BucketDefinitionForJob.add_member(:buckets, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "buckets"))
+    S3BucketDefinitionForJob.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "accountId"))
+    S3BucketDefinitionForJob.add_member(:buckets, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "buckets"))
     S3BucketDefinitionForJob.struct_class = Types::S3BucketDefinitionForJob
 
     S3BucketOwner.add_member(:display_name, Shapes::ShapeRef.new(shape: __string, location_name: "displayName"))

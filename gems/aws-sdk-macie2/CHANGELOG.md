@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2021-01-29)
+------------------
+
+* Feature - This release of the Amazon Macie API adds support for using object prefixes to refine the scope of a classification job.
+
 1.19.0 (2020-12-30)
 ------------------
 

@@ -436,8 +436,8 @@ module Aws::Macie2
     #     s3_job_definition: { # required
     #       bucket_definitions: [
     #         {
-    #           account_id: "__string",
-    #           buckets: ["__string"],
+    #           account_id: "__string", # required
+    #           buckets: ["__string"], # required
     #         },
     #       ],
     #       scoping: {
@@ -445,12 +445,12 @@ module Aws::Macie2
     #           and: [
     #             {
     #               simple_scope_term: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
-    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
     #                 values: ["__string"],
     #               },
     #               tag_scope_term: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #                 key: "__string",
     #                 tag_values: [
     #                   {
@@ -467,12 +467,12 @@ module Aws::Macie2
     #           and: [
     #             {
     #               simple_scope_term: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
-    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
     #                 values: ["__string"],
     #               },
     #               tag_scope_term: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #                 key: "__string",
     #                 tag_values: [
     #                   {
@@ -1024,22 +1024,22 @@ module Aws::Macie2
     #   resp.s3_job_definition.bucket_definitions[0].buckets #=> Array
     #   resp.s3_job_definition.bucket_definitions[0].buckets[0] #=> String
     #   resp.s3_job_definition.scoping.excludes.and #=> Array
-    #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS"
-    #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.key #=> String, one of "BUCKET_CREATION_DATE", "OBJECT_EXTENSION", "OBJECT_LAST_MODIFIED_DATE", "OBJECT_SIZE", "TAG"
+    #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.key #=> String, one of "BUCKET_CREATION_DATE", "OBJECT_EXTENSION", "OBJECT_LAST_MODIFIED_DATE", "OBJECT_SIZE", "TAG", "OBJECT_KEY"
     #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.values #=> Array
     #   resp.s3_job_definition.scoping.excludes.and[0].simple_scope_term.values[0] #=> String
-    #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS"
+    #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
     #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.key #=> String
     #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.tag_values #=> Array
     #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.tag_values[0].key #=> String
     #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.tag_values[0].value #=> String
     #   resp.s3_job_definition.scoping.excludes.and[0].tag_scope_term.target #=> String, one of "S3_OBJECT"
     #   resp.s3_job_definition.scoping.includes.and #=> Array
-    #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS"
-    #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.key #=> String, one of "BUCKET_CREATION_DATE", "OBJECT_EXTENSION", "OBJECT_LAST_MODIFIED_DATE", "OBJECT_SIZE", "TAG"
+    #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
+    #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.key #=> String, one of "BUCKET_CREATION_DATE", "OBJECT_EXTENSION", "OBJECT_LAST_MODIFIED_DATE", "OBJECT_SIZE", "TAG", "OBJECT_KEY"
     #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.values #=> Array
     #   resp.s3_job_definition.scoping.includes.and[0].simple_scope_term.values[0] #=> String
-    #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS"
+    #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.comparator #=> String, one of "EQ", "GT", "GTE", "LT", "LTE", "NE", "CONTAINS", "STARTS_WITH"
     #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.key #=> String
     #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.tag_values #=> Array
     #   resp.s3_job_definition.scoping.includes.and[0].tag_scope_term.tag_values[0].key #=> String
@@ -1892,14 +1892,14 @@ module Aws::Macie2
     #     filter_criteria: {
     #       excludes: [
     #         {
-    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #           key: "jobType", # accepts jobType, jobStatus, createdAt, name
     #           values: ["__string"],
     #         },
     #       ],
     #       includes: [
     #         {
-    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #           key: "jobType", # accepts jobType, jobStatus, createdAt, name
     #           values: ["__string"],
     #         },
@@ -2544,7 +2544,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

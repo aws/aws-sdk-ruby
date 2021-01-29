@@ -33,6 +33,9 @@ module Aws::TranscribeStreamingService
     MediaSampleRateHertz = Shapes::IntegerShape.new(name: 'MediaSampleRateHertz')
     MedicalAlternative = Shapes::StructureShape.new(name: 'MedicalAlternative')
     MedicalAlternativeList = Shapes::ListShape.new(name: 'MedicalAlternativeList')
+    MedicalContentIdentificationType = Shapes::StringShape.new(name: 'MedicalContentIdentificationType')
+    MedicalEntity = Shapes::StructureShape.new(name: 'MedicalEntity')
+    MedicalEntityList = Shapes::ListShape.new(name: 'MedicalEntityList')
     MedicalItem = Shapes::StructureShape.new(name: 'MedicalItem')
     MedicalItemList = Shapes::ListShape.new(name: 'MedicalItemList')
     MedicalResult = Shapes::StructureShape.new(name: 'MedicalResult')
@@ -96,9 +99,19 @@ module Aws::TranscribeStreamingService
 
     MedicalAlternative.add_member(:transcript, Shapes::ShapeRef.new(shape: String, location_name: "Transcript"))
     MedicalAlternative.add_member(:items, Shapes::ShapeRef.new(shape: MedicalItemList, location_name: "Items"))
+    MedicalAlternative.add_member(:entities, Shapes::ShapeRef.new(shape: MedicalEntityList, location_name: "Entities"))
     MedicalAlternative.struct_class = Types::MedicalAlternative
 
     MedicalAlternativeList.member = Shapes::ShapeRef.new(shape: MedicalAlternative)
+
+    MedicalEntity.add_member(:start_time, Shapes::ShapeRef.new(shape: Double, location_name: "StartTime"))
+    MedicalEntity.add_member(:end_time, Shapes::ShapeRef.new(shape: Double, location_name: "EndTime"))
+    MedicalEntity.add_member(:category, Shapes::ShapeRef.new(shape: String, location_name: "Category"))
+    MedicalEntity.add_member(:content, Shapes::ShapeRef.new(shape: String, location_name: "Content"))
+    MedicalEntity.add_member(:confidence, Shapes::ShapeRef.new(shape: Confidence, location_name: "Confidence"))
+    MedicalEntity.struct_class = Types::MedicalEntity
+
+    MedicalEntityList.member = Shapes::ShapeRef.new(shape: MedicalEntity)
 
     MedicalItem.add_member(:start_time, Shapes::ShapeRef.new(shape: Double, location_name: "StartTime"))
     MedicalItem.add_member(:end_time, Shapes::ShapeRef.new(shape: Double, location_name: "EndTime"))
@@ -158,6 +171,7 @@ module Aws::TranscribeStreamingService
     StartMedicalStreamTranscriptionRequest.add_member(:audio_stream, Shapes::ShapeRef.new(shape: AudioStream, required: true, eventstream: true, location_name: "AudioStream"))
     StartMedicalStreamTranscriptionRequest.add_member(:enable_channel_identification, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-enable-channel-identification"))
     StartMedicalStreamTranscriptionRequest.add_member(:number_of_channels, Shapes::ShapeRef.new(shape: NumberOfChannels, location: "header", location_name: "x-amzn-transcribe-number-of-channels"))
+    StartMedicalStreamTranscriptionRequest.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: MedicalContentIdentificationType, location: "header", location_name: "x-amzn-transcribe-content-identification-type"))
     StartMedicalStreamTranscriptionRequest.struct_class = Types::StartMedicalStreamTranscriptionRequest
     StartMedicalStreamTranscriptionRequest[:payload] = :audio_stream
     StartMedicalStreamTranscriptionRequest[:payload_member] = StartMedicalStreamTranscriptionRequest.member(:audio_stream)
@@ -174,6 +188,7 @@ module Aws::TranscribeStreamingService
     StartMedicalStreamTranscriptionResponse.add_member(:transcript_result_stream, Shapes::ShapeRef.new(shape: MedicalTranscriptResultStream, eventstream: true, location_name: "TranscriptResultStream"))
     StartMedicalStreamTranscriptionResponse.add_member(:enable_channel_identification, Shapes::ShapeRef.new(shape: Boolean, location: "header", location_name: "x-amzn-transcribe-enable-channel-identification"))
     StartMedicalStreamTranscriptionResponse.add_member(:number_of_channels, Shapes::ShapeRef.new(shape: NumberOfChannels, location: "header", location_name: "x-amzn-transcribe-number-of-channels"))
+    StartMedicalStreamTranscriptionResponse.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: MedicalContentIdentificationType, location: "header", location_name: "x-amzn-transcribe-content-identification-type"))
     StartMedicalStreamTranscriptionResponse.struct_class = Types::StartMedicalStreamTranscriptionResponse
     StartMedicalStreamTranscriptionResponse[:payload] = :transcript_result_stream
     StartMedicalStreamTranscriptionResponse[:payload_member] = StartMedicalStreamTranscriptionResponse.member(:transcript_result_stream)

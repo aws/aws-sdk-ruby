@@ -2705,6 +2705,10 @@ module Aws::MediaLive
     #   A collection of key-value pairs.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] vpc
+    #   Settings for VPC output
+    #   @return [Types::VpcOutputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Channel AWS API Documentation
     #
     class Channel < Struct.new(
@@ -2723,7 +2727,8 @@ module Aws::MediaLive
       :pipelines_running_count,
       :role_arn,
       :state,
-      :tags)
+      :tags,
+      :vpc)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2815,6 +2820,10 @@ module Aws::MediaLive
     #   A collection of key-value pairs.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] vpc
+    #   Settings for VPC output
+    #   @return [Types::VpcOutputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelSummary AWS API Documentation
     #
     class ChannelSummary < Struct.new(
@@ -2831,7 +2840,8 @@ module Aws::MediaLive
       :pipelines_running_count,
       :role_arn,
       :state,
-      :tags)
+      :tags,
+      :vpc)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2905,6 +2915,10 @@ module Aws::MediaLive
     #   A collection of key-value pairs.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] vpc
+    #   Settings for VPC output
+    #   @return [Types::VpcOutputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
     class CreateChannel < Struct.new(
@@ -2919,7 +2933,8 @@ module Aws::MediaLive
       :request_id,
       :reserved,
       :role_arn,
-      :tags)
+      :tags,
+      :vpc)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3825,6 +3840,11 @@ module Aws::MediaLive
     #         tags: {
     #           "__string" => "__string",
     #         },
+    #         vpc: {
+    #           public_address_allocation_ids: ["__string"],
+    #           security_group_ids: ["__string"],
+    #           subnet_ids: ["__string"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] cdi_input_specification
@@ -3869,6 +3889,12 @@ module Aws::MediaLive
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] vpc
+    #   The properties for a private VPC Output When this property is
+    #   specified, the output egress addresses will be created in a user
+    #   specified VPC
+    #   @return [Types::VpcOutputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
@@ -3883,7 +3909,8 @@ module Aws::MediaLive
       :request_id,
       :reserved,
       :role_arn,
-      :tags)
+      :tags,
+      :vpc)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4455,6 +4482,12 @@ module Aws::MediaLive
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] vpc
+    #   The properties for a private VPC Output When this property is
+    #   specified, the output egress addresses will be created in a user
+    #   specified VPC
+    #   @return [Types::VpcOutputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannelResponse AWS API Documentation
     #
     class DeleteChannelResponse < Struct.new(
@@ -4473,7 +4506,8 @@ module Aws::MediaLive
       :pipelines_running_count,
       :role_arn,
       :state,
-      :tags)
+      :tags,
+      :vpc)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4857,6 +4891,12 @@ module Aws::MediaLive
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] vpc
+    #   The properties for a private VPC Output When this property is
+    #   specified, the output egress addresses will be created in a user
+    #   specified VPC
+    #   @return [Types::VpcOutputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannelResponse AWS API Documentation
     #
     class DescribeChannelResponse < Struct.new(
@@ -4875,7 +4915,8 @@ module Aws::MediaLive
       :pipelines_running_count,
       :role_arn,
       :state,
-      :tags)
+      :tags,
+      :vpc)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15625,6 +15666,12 @@ module Aws::MediaLive
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] vpc
+    #   The properties for a private VPC Output When this property is
+    #   specified, the output egress addresses will be created in a user
+    #   specified VPC
+    #   @return [Types::VpcOutputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannelResponse AWS API Documentation
     #
     class StartChannelResponse < Struct.new(
@@ -15643,7 +15690,8 @@ module Aws::MediaLive
       :pipelines_running_count,
       :role_arn,
       :state,
-      :tags)
+      :tags,
+      :vpc)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15971,6 +16019,12 @@ module Aws::MediaLive
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] vpc
+    #   The properties for a private VPC Output When this property is
+    #   specified, the output egress addresses will be created in a user
+    #   specified VPC
+    #   @return [Types::VpcOutputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannelResponse AWS API Documentation
     #
     class StopChannelResponse < Struct.new(
@@ -15989,7 +16043,8 @@ module Aws::MediaLive
       :pipelines_running_count,
       :role_arn,
       :state,
-      :tags)
+      :tags,
+      :vpc)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18783,6 +18838,46 @@ module Aws::MediaLive
     class VideoSelectorSettings < Struct.new(
       :video_selector_pid,
       :video_selector_program_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties for a private VPC Output When this property is
+    # specified, the output egress addresses will be created in a user
+    # specified VPC
+    #
+    # @note When making an API call, you may pass VpcOutputSettings
+    #   data as a hash:
+    #
+    #       {
+    #         public_address_allocation_ids: ["__string"],
+    #         security_group_ids: ["__string"],
+    #         subnet_ids: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] public_address_allocation_ids
+    #   List of public address allocation ids to associate with ENIs that
+    #   will be created in Output VPC. Must specify one for
+    #   SINGLE\_PIPELINE, two for STANDARD channels
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of up to 5 EC2 VPC security group IDs to attach to the Output
+    #   VPC network interfaces. If none are specified then the VPC default
+    #   security group will be used
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of VPC subnet IDs from the same VPC. If STANDARD channel,
+    #   subnet IDs must be mapped to two unique availability zones (AZ).
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VpcOutputSettings AWS API Documentation
+    #
+    class VpcOutputSettings < Struct.new(
+      :public_address_allocation_ids,
+      :security_group_ids,
+      :subnet_ids)
       SENSITIVE = []
       include Aws::Structure
     end
