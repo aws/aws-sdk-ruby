@@ -958,15 +958,32 @@ module Aws::AppMesh
     #       backend_defaults: {
     #         client_policy: {
     #           tls: {
+    #             certificate: {
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #                 private_key: "FilePath", # required
+    #               },
+    #               sds: {
+    #                 secret_name: "VirtualGatewaySdsSecretName", # required
+    #               },
+    #             },
     #             enforce: false,
     #             ports: [1],
     #             validation: { # required
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
     #               trust: { # required
     #                 acm: {
     #                   certificate_authority_arns: ["Arn"], # required
     #                 },
     #                 file: {
     #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "VirtualGatewaySdsSecretName", # required
     #                 },
     #               },
     #             },
@@ -1009,8 +1026,26 @@ module Aws::AppMesh
     #                 certificate_chain: "FilePath", # required
     #                 private_key: "FilePath", # required
     #               },
+    #               sds: {
+    #                 secret_name: "VirtualGatewaySdsSecretName", # required
+    #               },
     #             },
     #             mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #             validation: {
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
+    #               trust: { # required
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "VirtualGatewaySdsSecretName", # required
+    #                 },
+    #               },
+    #             },
     #           },
     #         },
     #       ],
@@ -1041,12 +1076,18 @@ module Aws::AppMesh
     #   resp.virtual_gateway.metadata.resource_owner #=> String
     #   resp.virtual_gateway.metadata.uid #=> String
     #   resp.virtual_gateway.metadata.version #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports #=> Array
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.listeners #=> Array
     #   resp.virtual_gateway.spec.listeners[0].connection_pool.grpc.max_requests #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].connection_pool.http.max_connections #=> Integer
@@ -1064,7 +1105,12 @@ module Aws::AppMesh
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.mode #=> String, one of "STRICT", "PERMISSIVE", "DISABLED"
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.subject_alternative_names.match.exact[0] #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.logging.access_log.file.path #=> String
     #   resp.virtual_gateway.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_gateway.virtual_gateway_name #=> String
@@ -1168,15 +1214,32 @@ module Aws::AppMesh
     #       backend_defaults: {
     #         client_policy: {
     #           tls: {
+    #             certificate: {
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #                 private_key: "FilePath", # required
+    #               },
+    #               sds: {
+    #                 secret_name: "SdsSecretName", # required
+    #               },
+    #             },
     #             enforce: false,
     #             ports: [1],
     #             validation: { # required
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
     #               trust: { # required
     #                 acm: {
     #                   certificate_authority_arns: ["Arn"], # required
     #                 },
     #                 file: {
     #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "SdsSecretName", # required
     #                 },
     #               },
     #             },
@@ -1188,15 +1251,32 @@ module Aws::AppMesh
     #           virtual_service: {
     #             client_policy: {
     #               tls: {
+    #                 certificate: {
+    #                   file: {
+    #                     certificate_chain: "FilePath", # required
+    #                     private_key: "FilePath", # required
+    #                   },
+    #                   sds: {
+    #                     secret_name: "SdsSecretName", # required
+    #                   },
+    #                 },
     #                 enforce: false,
     #                 ports: [1],
     #                 validation: { # required
+    #                   subject_alternative_names: {
+    #                     match: { # required
+    #                       exact: ["SubjectAlternativeName"], # required
+    #                     },
+    #                   },
     #                   trust: { # required
     #                     acm: {
     #                       certificate_authority_arns: ["Arn"], # required
     #                     },
     #                     file: {
     #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                     sds: {
+    #                       secret_name: "SdsSecretName", # required
     #                     },
     #                   },
     #                 },
@@ -1295,8 +1375,26 @@ module Aws::AppMesh
     #                 certificate_chain: "FilePath", # required
     #                 private_key: "FilePath", # required
     #               },
+    #               sds: {
+    #                 secret_name: "SdsSecretName", # required
+    #               },
     #             },
     #             mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #             validation: {
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
+    #               trust: { # required
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "SdsSecretName", # required
+    #                 },
+    #               },
+    #             },
     #           },
     #         },
     #       ],
@@ -1342,19 +1440,31 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.resource_owner #=> String
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports #=> Array
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports #=> Array
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
     #   resp.virtual_node.spec.listeners[0].connection_pool.grpc.max_requests #=> Integer
@@ -1394,7 +1504,12 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "STRICT", "PERMISSIVE", "DISABLED"
+    #   resp.virtual_node.spec.listeners[0].tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.listeners[0].tls.validation.subject_alternative_names.match.exact[0] #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -1909,12 +2024,18 @@ module Aws::AppMesh
     #   resp.virtual_gateway.metadata.resource_owner #=> String
     #   resp.virtual_gateway.metadata.uid #=> String
     #   resp.virtual_gateway.metadata.version #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports #=> Array
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.listeners #=> Array
     #   resp.virtual_gateway.spec.listeners[0].connection_pool.grpc.max_requests #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].connection_pool.http.max_connections #=> Integer
@@ -1932,7 +2053,12 @@ module Aws::AppMesh
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.mode #=> String, one of "STRICT", "PERMISSIVE", "DISABLED"
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.subject_alternative_names.match.exact[0] #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.logging.access_log.file.path #=> String
     #   resp.virtual_gateway.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_gateway.virtual_gateway_name #=> String
@@ -1989,19 +2115,31 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.resource_owner #=> String
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports #=> Array
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports #=> Array
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
     #   resp.virtual_node.spec.listeners[0].connection_pool.grpc.max_requests #=> Integer
@@ -2041,7 +2179,12 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "STRICT", "PERMISSIVE", "DISABLED"
+    #   resp.virtual_node.spec.listeners[0].tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.listeners[0].tls.validation.subject_alternative_names.match.exact[0] #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -2467,12 +2610,18 @@ module Aws::AppMesh
     #   resp.virtual_gateway.metadata.resource_owner #=> String
     #   resp.virtual_gateway.metadata.uid #=> String
     #   resp.virtual_gateway.metadata.version #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports #=> Array
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.listeners #=> Array
     #   resp.virtual_gateway.spec.listeners[0].connection_pool.grpc.max_requests #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].connection_pool.http.max_connections #=> Integer
@@ -2490,7 +2639,12 @@ module Aws::AppMesh
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.mode #=> String, one of "STRICT", "PERMISSIVE", "DISABLED"
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.subject_alternative_names.match.exact[0] #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.logging.access_log.file.path #=> String
     #   resp.virtual_gateway.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_gateway.virtual_gateway_name #=> String
@@ -2544,19 +2698,31 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.resource_owner #=> String
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports #=> Array
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports #=> Array
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
     #   resp.virtual_node.spec.listeners[0].connection_pool.grpc.max_requests #=> Integer
@@ -2596,7 +2762,12 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "STRICT", "PERMISSIVE", "DISABLED"
+    #   resp.virtual_node.spec.listeners[0].tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.listeners[0].tls.validation.subject_alternative_names.match.exact[0] #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -3863,15 +4034,32 @@ module Aws::AppMesh
     #       backend_defaults: {
     #         client_policy: {
     #           tls: {
+    #             certificate: {
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #                 private_key: "FilePath", # required
+    #               },
+    #               sds: {
+    #                 secret_name: "VirtualGatewaySdsSecretName", # required
+    #               },
+    #             },
     #             enforce: false,
     #             ports: [1],
     #             validation: { # required
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
     #               trust: { # required
     #                 acm: {
     #                   certificate_authority_arns: ["Arn"], # required
     #                 },
     #                 file: {
     #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "VirtualGatewaySdsSecretName", # required
     #                 },
     #               },
     #             },
@@ -3914,8 +4102,26 @@ module Aws::AppMesh
     #                 certificate_chain: "FilePath", # required
     #                 private_key: "FilePath", # required
     #               },
+    #               sds: {
+    #                 secret_name: "VirtualGatewaySdsSecretName", # required
+    #               },
     #             },
     #             mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #             validation: {
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
+    #               trust: { # required
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "VirtualGatewaySdsSecretName", # required
+    #                 },
+    #               },
+    #             },
     #           },
     #         },
     #       ],
@@ -3940,12 +4146,18 @@ module Aws::AppMesh
     #   resp.virtual_gateway.metadata.resource_owner #=> String
     #   resp.virtual_gateway.metadata.uid #=> String
     #   resp.virtual_gateway.metadata.version #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports #=> Array
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.backend_defaults.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.listeners #=> Array
     #   resp.virtual_gateway.spec.listeners[0].connection_pool.grpc.max_requests #=> Integer
     #   resp.virtual_gateway.spec.listeners[0].connection_pool.http.max_connections #=> Integer
@@ -3963,7 +4175,12 @@ module Aws::AppMesh
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.certificate.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.listeners[0].tls.mode #=> String, one of "STRICT", "PERMISSIVE", "DISABLED"
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.subject_alternative_names.match.exact[0] #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_gateway.spec.listeners[0].tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_gateway.spec.logging.access_log.file.path #=> String
     #   resp.virtual_gateway.status.status #=> String, one of "ACTIVE", "INACTIVE", "DELETED"
     #   resp.virtual_gateway.virtual_gateway_name #=> String
@@ -4021,15 +4238,32 @@ module Aws::AppMesh
     #       backend_defaults: {
     #         client_policy: {
     #           tls: {
+    #             certificate: {
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #                 private_key: "FilePath", # required
+    #               },
+    #               sds: {
+    #                 secret_name: "SdsSecretName", # required
+    #               },
+    #             },
     #             enforce: false,
     #             ports: [1],
     #             validation: { # required
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
     #               trust: { # required
     #                 acm: {
     #                   certificate_authority_arns: ["Arn"], # required
     #                 },
     #                 file: {
     #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "SdsSecretName", # required
     #                 },
     #               },
     #             },
@@ -4041,15 +4275,32 @@ module Aws::AppMesh
     #           virtual_service: {
     #             client_policy: {
     #               tls: {
+    #                 certificate: {
+    #                   file: {
+    #                     certificate_chain: "FilePath", # required
+    #                     private_key: "FilePath", # required
+    #                   },
+    #                   sds: {
+    #                     secret_name: "SdsSecretName", # required
+    #                   },
+    #                 },
     #                 enforce: false,
     #                 ports: [1],
     #                 validation: { # required
+    #                   subject_alternative_names: {
+    #                     match: { # required
+    #                       exact: ["SubjectAlternativeName"], # required
+    #                     },
+    #                   },
     #                   trust: { # required
     #                     acm: {
     #                       certificate_authority_arns: ["Arn"], # required
     #                     },
     #                     file: {
     #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                     sds: {
+    #                       secret_name: "SdsSecretName", # required
     #                     },
     #                   },
     #                 },
@@ -4148,8 +4399,26 @@ module Aws::AppMesh
     #                 certificate_chain: "FilePath", # required
     #                 private_key: "FilePath", # required
     #               },
+    #               sds: {
+    #                 secret_name: "SdsSecretName", # required
+    #               },
     #             },
     #             mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #             validation: {
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
+    #               trust: { # required
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "SdsSecretName", # required
+    #                 },
+    #               },
+    #             },
     #           },
     #         },
     #       ],
@@ -4189,19 +4458,31 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.resource_owner #=> String
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports #=> Array
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.enforce #=> Boolean
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports #=> Array
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.subject_alternative_names.match.exact[0] #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
     #   resp.virtual_node.spec.listeners[0].connection_pool.grpc.max_requests #=> Integer
@@ -4241,7 +4522,12 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
     #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.sds.secret_name #=> String
     #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "STRICT", "PERMISSIVE", "DISABLED"
+    #   resp.virtual_node.spec.listeners[0].tls.validation.subject_alternative_names.match.exact #=> Array
+    #   resp.virtual_node.spec.listeners[0].tls.validation.subject_alternative_names.match.exact[0] #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.validation.trust.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.validation.trust.sds.secret_name #=> String
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -4429,7 +4715,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

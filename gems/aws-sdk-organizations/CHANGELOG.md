@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2021-02-02)
+------------------
+
+* Feature - Documentation updates for AWS Organizations.
+
 1.55.0 (2020-10-21)
 ------------------
 

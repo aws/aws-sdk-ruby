@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2021-02-02)
+------------------
+
+* Feature - With this release, scheduled actions of Application Auto Scaling can be created in the local time zone and automatically adjusted according to daylight saving changes.
+
 1.49.0 (2021-01-05)
 ------------------
 

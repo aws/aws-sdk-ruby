@@ -3447,6 +3447,8 @@ module Aws::MediaLive
     #                           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                         },
+    #                         frame_capture_hls_settings: {
+    #                         },
     #                         standard_hls_settings: {
     #                           audio_rendition_sets: "__string",
     #                           m3u_8_settings: { # required
@@ -3579,7 +3581,7 @@ module Aws::MediaLive
     #             {
     #               codec_settings: {
     #                 frame_capture_settings: {
-    #                   capture_interval: 1, # required
+    #                   capture_interval: 1,
     #                   capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #                 },
     #                 h264_settings: {
@@ -6601,6 +6603,8 @@ module Aws::MediaLive
     #                         nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                         timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                       },
+    #                       frame_capture_hls_settings: {
+    #                       },
     #                       standard_hls_settings: {
     #                         audio_rendition_sets: "__string",
     #                         m3u_8_settings: { # required
@@ -6733,7 +6737,7 @@ module Aws::MediaLive
     #           {
     #             codec_settings: {
     #               frame_capture_settings: {
-    #                 capture_interval: 1, # required
+    #                 capture_interval: 1,
     #                 capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #               },
     #               h264_settings: {
@@ -7208,6 +7212,14 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Frame Capture Hls Settings
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureHlsSettings AWS API Documentation
+    #
+    class FrameCaptureHlsSettings < Aws::EmptyStructure; end
+
     # Frame Capture Output Settings
     #
     # @note When making an API call, you may pass FrameCaptureOutputSettings
@@ -7236,7 +7248,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         capture_interval: 1, # required
+    #         capture_interval: 1,
     #         capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #       }
     #
@@ -8862,6 +8874,8 @@ module Aws::MediaLive
     #             nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #             timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #           },
+    #           frame_capture_hls_settings: {
+    #           },
     #           standard_hls_settings: {
     #             audio_rendition_sets: "__string",
     #             m3u_8_settings: { # required
@@ -8941,6 +8955,8 @@ module Aws::MediaLive
     #           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #         },
+    #         frame_capture_hls_settings: {
+    #         },
     #         standard_hls_settings: {
     #           audio_rendition_sets: "__string",
     #           m3u_8_settings: { # required
@@ -8973,6 +8989,10 @@ module Aws::MediaLive
     #   Fmp4 Hls Settings
     #   @return [Types::Fmp4HlsSettings]
     #
+    # @!attribute [rw] frame_capture_hls_settings
+    #   Frame Capture Hls Settings
+    #   @return [Types::FrameCaptureHlsSettings]
+    #
     # @!attribute [rw] standard_hls_settings
     #   Standard Hls Settings
     #   @return [Types::StandardHlsSettings]
@@ -8982,6 +9002,7 @@ module Aws::MediaLive
     class HlsSettings < Struct.new(
       :audio_only_hls_settings,
       :fmp_4_hls_settings,
+      :frame_capture_hls_settings,
       :standard_hls_settings)
       SENSITIVE = []
       include Aws::Structure
@@ -12980,6 +13001,8 @@ module Aws::MediaLive
     #                 nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                 timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #               },
+    #               frame_capture_hls_settings: {
+    #               },
     #               standard_hls_settings: {
     #                 audio_rendition_sets: "__string",
     #                 m3u_8_settings: { # required
@@ -13478,6 +13501,8 @@ module Aws::MediaLive
     #                     nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                     timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                   },
+    #                   frame_capture_hls_settings: {
+    #                   },
     #                   standard_hls_settings: {
     #                     audio_rendition_sets: "__string",
     #                     m3u_8_settings: { # required
@@ -13940,6 +13965,8 @@ module Aws::MediaLive
     #               audio_rendition_sets: "__string",
     #               nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #               timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #             },
+    #             frame_capture_hls_settings: {
     #             },
     #             standard_hls_settings: {
     #               audio_rendition_sets: "__string",
@@ -17273,6 +17300,8 @@ module Aws::MediaLive
     #                           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                         },
+    #                         frame_capture_hls_settings: {
+    #                         },
     #                         standard_hls_settings: {
     #                           audio_rendition_sets: "__string",
     #                           m3u_8_settings: { # required
@@ -17405,7 +17434,7 @@ module Aws::MediaLive
     #             {
     #               codec_settings: {
     #                 frame_capture_settings: {
-    #                   capture_interval: 1, # required
+    #                   capture_interval: 1,
     #                   capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #                 },
     #                 h264_settings: {
@@ -18345,7 +18374,7 @@ module Aws::MediaLive
     #
     #       {
     #         frame_capture_settings: {
-    #           capture_interval: 1, # required
+    #           capture_interval: 1,
     #           capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #         },
     #         h264_settings: {
@@ -18510,7 +18539,7 @@ module Aws::MediaLive
     #       {
     #         codec_settings: {
     #           frame_capture_settings: {
-    #             capture_interval: 1, # required
+    #             capture_interval: 1,
     #             capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #           },
     #           h264_settings: {

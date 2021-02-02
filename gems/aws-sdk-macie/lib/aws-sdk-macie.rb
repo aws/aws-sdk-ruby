@@ -48,6 +48,6 @@ require_relative 'aws-sdk-macie/customizations'
 # @!group service
 module Aws::Macie
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.26.0'
 
 end

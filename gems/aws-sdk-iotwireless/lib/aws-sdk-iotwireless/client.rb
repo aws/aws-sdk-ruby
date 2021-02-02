@@ -485,7 +485,7 @@ module Aws::IoTWireless
     #
     #   resp = client.create_destination({
     #     name: "DestinationName", # required
-    #     expression_type: "RuleName", # required, accepts RuleName
+    #     expression_type: "RuleName", # required, accepts RuleName, MqttTopic
     #     expression: "Expression", # required
     #     description: "Description",
     #     role_arn: "RoleArn", # required
@@ -1128,7 +1128,7 @@ module Aws::IoTWireless
     #   resp.arn #=> String
     #   resp.name #=> String
     #   resp.expression #=> String
-    #   resp.expression_type #=> String, one of "RuleName"
+    #   resp.expression_type #=> String, one of "RuleName", "MqttTopic"
     #   resp.description #=> String
     #   resp.role_arn #=> String
     #
@@ -1458,6 +1458,7 @@ module Aws::IoTWireless
     # @return [Types::GetWirelessGatewayCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetWirelessGatewayCertificateResponse#iot_certificate_id #iot_certificate_id} => String
+    #   * {Types::GetWirelessGatewayCertificateResponse#lo_ra_wan_network_server_certificate_id #lo_ra_wan_network_server_certificate_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1468,6 +1469,7 @@ module Aws::IoTWireless
     # @example Response structure
     #
     #   resp.iot_certificate_id #=> String
+    #   resp.lo_ra_wan_network_server_certificate_id #=> String
     #
     # @overload get_wireless_gateway_certificate(params = {})
     # @param [Hash] params ({})
@@ -1636,7 +1638,7 @@ module Aws::IoTWireless
     #   resp.destination_list #=> Array
     #   resp.destination_list[0].arn #=> String
     #   resp.destination_list[0].name #=> String
-    #   resp.destination_list[0].expression_type #=> String, one of "RuleName"
+    #   resp.destination_list[0].expression_type #=> String, one of "RuleName", "MqttTopic"
     #   resp.destination_list[0].expression #=> String
     #   resp.destination_list[0].description #=> String
     #   resp.destination_list[0].role_arn #=> String
@@ -1950,8 +1952,7 @@ module Aws::IoTWireless
     #
     # @option params [required, Integer] :transmit_mode
     #   The transmit mode to use to send data to the wireless device. Can be:
-    #   `0` for UM (unacknowledge mode), `1` for AM (acknowledge mode), or `2`
-    #   for (TM) transparent mode.
+    #   `0` for UM (unacknowledge mode) or `1` for AM (acknowledge mode).
     #
     # @option params [required, String] :payload_data
     #   The message payload to send.
@@ -2094,7 +2095,7 @@ module Aws::IoTWireless
     #
     #   resp = client.update_destination({
     #     name: "DestinationName", # required
-    #     expression_type: "RuleName", # accepts RuleName
+    #     expression_type: "RuleName", # accepts RuleName, MqttTopic
     #     expression: "Expression",
     #     description: "Description",
     #     role_arn: "RoleArn",
@@ -2217,7 +2218,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

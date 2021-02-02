@@ -126,15 +126,32 @@ module Aws::AppMesh
     #         virtual_service: {
     #           client_policy: {
     #             tls: {
+    #               certificate: {
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                   private_key: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "SdsSecretName", # required
+    #                 },
+    #               },
     #               enforce: false,
     #               ports: [1],
     #               validation: { # required
+    #                 subject_alternative_names: {
+    #                   match: { # required
+    #                     exact: ["SubjectAlternativeName"], # required
+    #                   },
+    #                 },
     #                 trust: { # required
     #                   acm: {
     #                     certificate_authority_arns: ["Arn"], # required
     #                   },
     #                   file: {
     #                     certificate_chain: "FilePath", # required
+    #                   },
+    #                   sds: {
+    #                     secret_name: "SdsSecretName", # required
     #                   },
     #                 },
     #               },
@@ -164,15 +181,32 @@ module Aws::AppMesh
     #       {
     #         client_policy: {
     #           tls: {
+    #             certificate: {
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #                 private_key: "FilePath", # required
+    #               },
+    #               sds: {
+    #                 secret_name: "SdsSecretName", # required
+    #               },
+    #             },
     #             enforce: false,
     #             ports: [1],
     #             validation: { # required
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
     #               trust: { # required
     #                 acm: {
     #                   certificate_authority_arns: ["Arn"], # required
     #                 },
     #                 file: {
     #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "SdsSecretName", # required
     #                 },
     #               },
     #             },
@@ -213,15 +247,32 @@ module Aws::AppMesh
     #
     #       {
     #         tls: {
+    #           certificate: {
+    #             file: {
+    #               certificate_chain: "FilePath", # required
+    #               private_key: "FilePath", # required
+    #             },
+    #             sds: {
+    #               secret_name: "SdsSecretName", # required
+    #             },
+    #           },
     #           enforce: false,
     #           ports: [1],
     #           validation: { # required
+    #             subject_alternative_names: {
+    #               match: { # required
+    #                 exact: ["SubjectAlternativeName"], # required
+    #               },
+    #             },
     #             trust: { # required
     #               acm: {
     #                 certificate_authority_arns: ["Arn"], # required
     #               },
     #               file: {
     #                 certificate_chain: "FilePath", # required
+    #               },
+    #               sds: {
+    #                 secret_name: "SdsSecretName", # required
     #               },
     #             },
     #           },
@@ -248,9 +299,23 @@ module Aws::AppMesh
     #   data as a hash:
     #
     #       {
+    #         certificate: {
+    #           file: {
+    #             certificate_chain: "FilePath", # required
+    #             private_key: "FilePath", # required
+    #           },
+    #           sds: {
+    #             secret_name: "SdsSecretName", # required
+    #           },
+    #         },
     #         enforce: false,
     #         ports: [1],
     #         validation: { # required
+    #           subject_alternative_names: {
+    #             match: { # required
+    #               exact: ["SubjectAlternativeName"], # required
+    #             },
+    #           },
     #           trust: { # required
     #             acm: {
     #               certificate_authority_arns: ["Arn"], # required
@@ -258,9 +323,17 @@ module Aws::AppMesh
     #             file: {
     #               certificate_chain: "FilePath", # required
     #             },
+    #             sds: {
+    #               secret_name: "SdsSecretName", # required
+    #             },
     #           },
     #         },
     #       }
+    #
+    # @!attribute [rw] certificate
+    #   A reference to an object that represents a client's TLS
+    #   certificate.
+    #   @return [Types::ClientTlsCertificate]
     #
     # @!attribute [rw] enforce
     #   Whether the policy is enforced. The default is `True`, if a value
@@ -278,9 +351,50 @@ module Aws::AppMesh
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ClientPolicyTls AWS API Documentation
     #
     class ClientPolicyTls < Struct.new(
+      :certificate,
       :enforce,
       :ports,
       :validation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the client's certificate.
+    #
+    # @note When making an API call, you may pass ClientTlsCertificate
+    #   data as a hash:
+    #
+    #       {
+    #         file: {
+    #           certificate_chain: "FilePath", # required
+    #           private_key: "FilePath", # required
+    #         },
+    #         sds: {
+    #           secret_name: "SdsSecretName", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file
+    #   An object that represents a local file certificate. The certificate
+    #   must meet specific requirements and you must have proxy
+    #   authorization enabled. For more information, see [Transport Layer
+    #   Security (TLS)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites
+    #   @return [Types::ListenerTlsFileCertificate]
+    #
+    # @!attribute [rw] sds
+    #   A reference to an object that represents a client's TLS Secret
+    #   Discovery Service certificate.
+    #   @return [Types::ListenerTlsSdsCertificate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ClientTlsCertificate AWS API Documentation
+    #
+    class ClientTlsCertificate < Struct.new(
+      :file,
+      :sds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -782,15 +896,32 @@ module Aws::AppMesh
     #           backend_defaults: {
     #             client_policy: {
     #               tls: {
+    #                 certificate: {
+    #                   file: {
+    #                     certificate_chain: "FilePath", # required
+    #                     private_key: "FilePath", # required
+    #                   },
+    #                   sds: {
+    #                     secret_name: "VirtualGatewaySdsSecretName", # required
+    #                   },
+    #                 },
     #                 enforce: false,
     #                 ports: [1],
     #                 validation: { # required
+    #                   subject_alternative_names: {
+    #                     match: { # required
+    #                       exact: ["SubjectAlternativeName"], # required
+    #                     },
+    #                   },
     #                   trust: { # required
     #                     acm: {
     #                       certificate_authority_arns: ["Arn"], # required
     #                     },
     #                     file: {
     #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                     sds: {
+    #                       secret_name: "VirtualGatewaySdsSecretName", # required
     #                     },
     #                   },
     #                 },
@@ -833,8 +964,26 @@ module Aws::AppMesh
     #                     certificate_chain: "FilePath", # required
     #                     private_key: "FilePath", # required
     #                   },
+    #                   sds: {
+    #                     secret_name: "VirtualGatewaySdsSecretName", # required
+    #                   },
     #                 },
     #                 mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #                 validation: {
+    #                   subject_alternative_names: {
+    #                     match: { # required
+    #                       exact: ["SubjectAlternativeName"], # required
+    #                     },
+    #                   },
+    #                   trust: { # required
+    #                     file: {
+    #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                     sds: {
+    #                       secret_name: "VirtualGatewaySdsSecretName", # required
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             },
     #           ],
@@ -937,15 +1086,32 @@ module Aws::AppMesh
     #           backend_defaults: {
     #             client_policy: {
     #               tls: {
+    #                 certificate: {
+    #                   file: {
+    #                     certificate_chain: "FilePath", # required
+    #                     private_key: "FilePath", # required
+    #                   },
+    #                   sds: {
+    #                     secret_name: "SdsSecretName", # required
+    #                   },
+    #                 },
     #                 enforce: false,
     #                 ports: [1],
     #                 validation: { # required
+    #                   subject_alternative_names: {
+    #                     match: { # required
+    #                       exact: ["SubjectAlternativeName"], # required
+    #                     },
+    #                   },
     #                   trust: { # required
     #                     acm: {
     #                       certificate_authority_arns: ["Arn"], # required
     #                     },
     #                     file: {
     #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                     sds: {
+    #                       secret_name: "SdsSecretName", # required
     #                     },
     #                   },
     #                 },
@@ -957,15 +1123,32 @@ module Aws::AppMesh
     #               virtual_service: {
     #                 client_policy: {
     #                   tls: {
+    #                     certificate: {
+    #                       file: {
+    #                         certificate_chain: "FilePath", # required
+    #                         private_key: "FilePath", # required
+    #                       },
+    #                       sds: {
+    #                         secret_name: "SdsSecretName", # required
+    #                       },
+    #                     },
     #                     enforce: false,
     #                     ports: [1],
     #                     validation: { # required
+    #                       subject_alternative_names: {
+    #                         match: { # required
+    #                           exact: ["SubjectAlternativeName"], # required
+    #                         },
+    #                       },
     #                       trust: { # required
     #                         acm: {
     #                           certificate_authority_arns: ["Arn"], # required
     #                         },
     #                         file: {
     #                           certificate_chain: "FilePath", # required
+    #                         },
+    #                         sds: {
+    #                           secret_name: "SdsSecretName", # required
     #                         },
     #                       },
     #                     },
@@ -1064,8 +1247,26 @@ module Aws::AppMesh
     #                     certificate_chain: "FilePath", # required
     #                     private_key: "FilePath", # required
     #                   },
+    #                   sds: {
+    #                     secret_name: "SdsSecretName", # required
+    #                   },
     #                 },
     #                 mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #                 validation: {
+    #                   subject_alternative_names: {
+    #                     match: { # required
+    #                       exact: ["SubjectAlternativeName"], # required
+    #                     },
+    #                   },
+    #                   trust: { # required
+    #                     file: {
+    #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                     sds: {
+    #                       secret_name: "SdsSecretName", # required
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             },
     #           ],
@@ -4240,8 +4441,26 @@ module Aws::AppMesh
     #               certificate_chain: "FilePath", # required
     #               private_key: "FilePath", # required
     #             },
+    #             sds: {
+    #               secret_name: "SdsSecretName", # required
+    #             },
     #           },
     #           mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #           validation: {
+    #             subject_alternative_names: {
+    #               match: { # required
+    #                 exact: ["SubjectAlternativeName"], # required
+    #               },
+    #             },
+    #             trust: { # required
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #               },
+    #               sds: {
+    #                 secret_name: "SdsSecretName", # required
+    #               },
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -4369,13 +4588,31 @@ module Aws::AppMesh
     #             certificate_chain: "FilePath", # required
     #             private_key: "FilePath", # required
     #           },
+    #           sds: {
+    #             secret_name: "SdsSecretName", # required
+    #           },
     #         },
     #         mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #         validation: {
+    #           subject_alternative_names: {
+    #             match: { # required
+    #               exact: ["SubjectAlternativeName"], # required
+    #             },
+    #           },
+    #           trust: { # required
+    #             file: {
+    #               certificate_chain: "FilePath", # required
+    #             },
+    #             sds: {
+    #               secret_name: "SdsSecretName", # required
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] certificate
-    #   A reference to an object that represents a listener's TLS
-    #   certificate.
+    #   A reference to an object that represents a listener's Transport
+    #   Layer Security (TLS) certificate.
     #   @return [Types::ListenerTlsCertificate]
     #
     # @!attribute [rw] mode
@@ -4389,11 +4626,17 @@ module Aws::AppMesh
     #   * ****DISABLED – Listener only accepts connections without TLS.
     #   @return [String]
     #
+    # @!attribute [rw] validation
+    #   A reference to an object that represents a listener's Transport
+    #   Layer Security (TLS) validation context.
+    #   @return [Types::ListenerTlsValidationContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListenerTls AWS API Documentation
     #
     class ListenerTls < Struct.new(
       :certificate,
-      :mode)
+      :mode,
+      :validation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4440,6 +4683,9 @@ module Aws::AppMesh
     #           certificate_chain: "FilePath", # required
     #           private_key: "FilePath", # required
     #         },
+    #         sds: {
+    #           secret_name: "SdsSecretName", # required
+    #         },
     #       }
     #
     # @!attribute [rw] acm
@@ -4451,11 +4697,17 @@ module Aws::AppMesh
     #   A reference to an object that represents a local file certificate.
     #   @return [Types::ListenerTlsFileCertificate]
     #
+    # @!attribute [rw] sds
+    #   A reference to an object that represents a listener's Secret
+    #   Discovery Service certificate.
+    #   @return [Types::ListenerTlsSdsCertificate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListenerTlsCertificate AWS API Documentation
     #
     class ListenerTlsCertificate < Struct.new(
       :acm,
-      :file)
+      :file,
+      :sds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4491,6 +4743,113 @@ module Aws::AppMesh
     class ListenerTlsFileCertificate < Struct.new(
       :certificate_chain,
       :private_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the listener's Secret Discovery Service
+    # certificate. The proxy must be configured with a local SDS provider
+    # via a Unix Domain Socket. See App Mesh [TLS documentation][1] for more
+    # info.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html
+    #
+    # @note When making an API call, you may pass ListenerTlsSdsCertificate
+    #   data as a hash:
+    #
+    #       {
+    #         secret_name: "SdsSecretName", # required
+    #       }
+    #
+    # @!attribute [rw] secret_name
+    #   A reference to an object that represents the name of the secret
+    #   requested from the Secret Discovery Service provider representing
+    #   Transport Layer Security (TLS) materials like a certificate or
+    #   certificate chain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListenerTlsSdsCertificate AWS API Documentation
+    #
+    class ListenerTlsSdsCertificate < Struct.new(
+      :secret_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents a listener's Transport Layer Security (TLS)
+    # validation context.
+    #
+    # @note When making an API call, you may pass ListenerTlsValidationContext
+    #   data as a hash:
+    #
+    #       {
+    #         subject_alternative_names: {
+    #           match: { # required
+    #             exact: ["SubjectAlternativeName"], # required
+    #           },
+    #         },
+    #         trust: { # required
+    #           file: {
+    #             certificate_chain: "FilePath", # required
+    #           },
+    #           sds: {
+    #             secret_name: "SdsSecretName", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] subject_alternative_names
+    #   A reference to an object that represents the SANs for a listener's
+    #   Transport Layer Security (TLS) validation context.
+    #   @return [Types::SubjectAlternativeNames]
+    #
+    # @!attribute [rw] trust
+    #   A reference to where to retrieve the trust chain when validating a
+    #   peer’s Transport Layer Security (TLS) certificate.
+    #   @return [Types::ListenerTlsValidationContextTrust]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListenerTlsValidationContext AWS API Documentation
+    #
+    class ListenerTlsValidationContext < Struct.new(
+      :subject_alternative_names,
+      :trust)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents a listener's Transport Layer Security (TLS)
+    # validation context trust.
+    #
+    # @note When making an API call, you may pass ListenerTlsValidationContextTrust
+    #   data as a hash:
+    #
+    #       {
+    #         file: {
+    #           certificate_chain: "FilePath", # required
+    #         },
+    #         sds: {
+    #           secret_name: "SdsSecretName", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file
+    #   An object that represents a Transport Layer Security (TLS)
+    #   validation context trust for a local file.
+    #   @return [Types::TlsValidationContextFileTrust]
+    #
+    # @!attribute [rw] sds
+    #   A reference to an object that represents a listener's Transport
+    #   Layer Security (TLS) Secret Discovery Service validation context
+    #   trust.
+    #   @return [Types::TlsValidationContextSdsTrust]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListenerTlsValidationContextTrust AWS API Documentation
+    #
+    class ListenerTlsValidationContextTrust < Struct.new(
+      :file,
+      :sds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5227,6 +5586,53 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents the methods by which a subject alternative
+    # name on a peer Transport Layer Security (TLS) certificate can be
+    # matched.
+    #
+    # @note When making an API call, you may pass SubjectAlternativeNameMatchers
+    #   data as a hash:
+    #
+    #       {
+    #         exact: ["SubjectAlternativeName"], # required
+    #       }
+    #
+    # @!attribute [rw] exact
+    #   The values sent must match the specified values exactly.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/SubjectAlternativeNameMatchers AWS API Documentation
+    #
+    class SubjectAlternativeNameMatchers < Struct.new(
+      :exact)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the subject alternative names secured by the
+    # certificate.
+    #
+    # @note When making an API call, you may pass SubjectAlternativeNames
+    #   data as a hash:
+    #
+    #       {
+    #         match: { # required
+    #           exact: ["SubjectAlternativeName"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] match
+    #   An object that represents the criteria for determining a SANs match.
+    #   @return [Types::SubjectAlternativeNameMatchers]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/SubjectAlternativeNames AWS API Documentation
+    #
+    class SubjectAlternativeNames < Struct.new(
+      :match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Optional metadata that you apply to a resource to assist with
     # categorization and organization. Each tag consists of a key and an
     # optional value, both of which you define. Tag keys can have a maximum
@@ -5398,13 +5804,18 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
-    # An object that represents a Transport Layer Security (TLS) validation
-    # context.
+    # An object that represents how the proxy will validate its peer during
+    # Transport Layer Security (TLS) negotiation.
     #
     # @note When making an API call, you may pass TlsValidationContext
     #   data as a hash:
     #
     #       {
+    #         subject_alternative_names: {
+    #           match: { # required
+    #             exact: ["SubjectAlternativeName"], # required
+    #           },
+    #         },
     #         trust: { # required
     #           acm: {
     #             certificate_authority_arns: ["Arn"], # required
@@ -5412,24 +5823,33 @@ module Aws::AppMesh
     #           file: {
     #             certificate_chain: "FilePath", # required
     #           },
+    #           sds: {
+    #             secret_name: "SdsSecretName", # required
+    #           },
     #         },
     #       }
     #
+    # @!attribute [rw] subject_alternative_names
+    #   A reference to an object that represents the SANs for a Transport
+    #   Layer Security (TLS) validation context.
+    #   @return [Types::SubjectAlternativeNames]
+    #
     # @!attribute [rw] trust
-    #   A reference to an object that represents a TLS validation context
-    #   trust.
+    #   A reference to where to retrieve the trust chain when validating a
+    #   peer’s Transport Layer Security (TLS) certificate.
     #   @return [Types::TlsValidationContextTrust]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TlsValidationContext AWS API Documentation
     #
     class TlsValidationContext < Struct.new(
+      :subject_alternative_names,
       :trust)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # An object that represents a TLS validation context trust for an AWS
-    # Certicate Manager (ACM) certificate.
+    # An object that represents a Transport Layer Security (TLS) validation
+    # context trust for an AWS Certicate Manager (ACM) certificate.
     #
     # @note When making an API call, you may pass TlsValidationContextAcmTrust
     #   data as a hash:
@@ -5473,6 +5893,36 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents a Transport Layer Security (TLS) Secret
+    # Discovery Service validation context trust. The proxy must be
+    # configured with a local SDS provider via a Unix Domain Socket. See App
+    # Mesh [TLS documentation][1] for more info.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html
+    #
+    # @note When making an API call, you may pass TlsValidationContextSdsTrust
+    #   data as a hash:
+    #
+    #       {
+    #         secret_name: "SdsSecretName", # required
+    #       }
+    #
+    # @!attribute [rw] secret_name
+    #   A reference to an object that represents the name of the secret for
+    #   a Transport Layer Security (TLS) Secret Discovery Service validation
+    #   context trust.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TlsValidationContextSdsTrust AWS API Documentation
+    #
+    class TlsValidationContextSdsTrust < Struct.new(
+      :secret_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents a Transport Layer Security (TLS) validation
     # context trust.
     #
@@ -5486,23 +5936,33 @@ module Aws::AppMesh
     #         file: {
     #           certificate_chain: "FilePath", # required
     #         },
+    #         sds: {
+    #           secret_name: "SdsSecretName", # required
+    #         },
     #       }
     #
     # @!attribute [rw] acm
-    #   A reference to an object that represents a TLS validation context
-    #   trust for an AWS Certicate Manager (ACM) certificate.
+    #   A reference to an object that represents a Transport Layer Security
+    #   (TLS) validation context trust for an AWS Certicate Manager (ACM)
+    #   certificate.
     #   @return [Types::TlsValidationContextAcmTrust]
     #
     # @!attribute [rw] file
-    #   An object that represents a TLS validation context trust for a local
-    #   file.
+    #   An object that represents a Transport Layer Security (TLS)
+    #   validation context trust for a local file.
     #   @return [Types::TlsValidationContextFileTrust]
+    #
+    # @!attribute [rw] sds
+    #   A reference to an object that represents a Transport Layer Security
+    #   (TLS) Secret Discovery Service validation context trust.
+    #   @return [Types::TlsValidationContextSdsTrust]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TlsValidationContextTrust AWS API Documentation
     #
     class TlsValidationContextTrust < Struct.new(
       :acm,
-      :file)
+      :file,
+      :sds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6009,15 +6469,32 @@ module Aws::AppMesh
     #           backend_defaults: {
     #             client_policy: {
     #               tls: {
+    #                 certificate: {
+    #                   file: {
+    #                     certificate_chain: "FilePath", # required
+    #                     private_key: "FilePath", # required
+    #                   },
+    #                   sds: {
+    #                     secret_name: "VirtualGatewaySdsSecretName", # required
+    #                   },
+    #                 },
     #                 enforce: false,
     #                 ports: [1],
     #                 validation: { # required
+    #                   subject_alternative_names: {
+    #                     match: { # required
+    #                       exact: ["SubjectAlternativeName"], # required
+    #                     },
+    #                   },
     #                   trust: { # required
     #                     acm: {
     #                       certificate_authority_arns: ["Arn"], # required
     #                     },
     #                     file: {
     #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                     sds: {
+    #                       secret_name: "VirtualGatewaySdsSecretName", # required
     #                     },
     #                   },
     #                 },
@@ -6060,8 +6537,26 @@ module Aws::AppMesh
     #                     certificate_chain: "FilePath", # required
     #                     private_key: "FilePath", # required
     #                   },
+    #                   sds: {
+    #                     secret_name: "VirtualGatewaySdsSecretName", # required
+    #                   },
     #                 },
     #                 mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #                 validation: {
+    #                   subject_alternative_names: {
+    #                     match: { # required
+    #                       exact: ["SubjectAlternativeName"], # required
+    #                     },
+    #                   },
+    #                   trust: { # required
+    #                     file: {
+    #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                     sds: {
+    #                       secret_name: "VirtualGatewaySdsSecretName", # required
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             },
     #           ],
@@ -6148,15 +6643,32 @@ module Aws::AppMesh
     #           backend_defaults: {
     #             client_policy: {
     #               tls: {
+    #                 certificate: {
+    #                   file: {
+    #                     certificate_chain: "FilePath", # required
+    #                     private_key: "FilePath", # required
+    #                   },
+    #                   sds: {
+    #                     secret_name: "SdsSecretName", # required
+    #                   },
+    #                 },
     #                 enforce: false,
     #                 ports: [1],
     #                 validation: { # required
+    #                   subject_alternative_names: {
+    #                     match: { # required
+    #                       exact: ["SubjectAlternativeName"], # required
+    #                     },
+    #                   },
     #                   trust: { # required
     #                     acm: {
     #                       certificate_authority_arns: ["Arn"], # required
     #                     },
     #                     file: {
     #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                     sds: {
+    #                       secret_name: "SdsSecretName", # required
     #                     },
     #                   },
     #                 },
@@ -6168,15 +6680,32 @@ module Aws::AppMesh
     #               virtual_service: {
     #                 client_policy: {
     #                   tls: {
+    #                     certificate: {
+    #                       file: {
+    #                         certificate_chain: "FilePath", # required
+    #                         private_key: "FilePath", # required
+    #                       },
+    #                       sds: {
+    #                         secret_name: "SdsSecretName", # required
+    #                       },
+    #                     },
     #                     enforce: false,
     #                     ports: [1],
     #                     validation: { # required
+    #                       subject_alternative_names: {
+    #                         match: { # required
+    #                           exact: ["SubjectAlternativeName"], # required
+    #                         },
+    #                       },
     #                       trust: { # required
     #                         acm: {
     #                           certificate_authority_arns: ["Arn"], # required
     #                         },
     #                         file: {
     #                           certificate_chain: "FilePath", # required
+    #                         },
+    #                         sds: {
+    #                           secret_name: "SdsSecretName", # required
     #                         },
     #                       },
     #                     },
@@ -6275,8 +6804,26 @@ module Aws::AppMesh
     #                     certificate_chain: "FilePath", # required
     #                     private_key: "FilePath", # required
     #                   },
+    #                   sds: {
+    #                     secret_name: "SdsSecretName", # required
+    #                   },
     #                 },
     #                 mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #                 validation: {
+    #                   subject_alternative_names: {
+    #                     match: { # required
+    #                       exact: ["SubjectAlternativeName"], # required
+    #                     },
+    #                   },
+    #                   trust: { # required
+    #                     file: {
+    #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                     sds: {
+    #                       secret_name: "SdsSecretName", # required
+    #                     },
+    #                   },
+    #                 },
     #               },
     #             },
     #           ],
@@ -6568,15 +7115,32 @@ module Aws::AppMesh
     #       {
     #         client_policy: {
     #           tls: {
+    #             certificate: {
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #                 private_key: "FilePath", # required
+    #               },
+    #               sds: {
+    #                 secret_name: "VirtualGatewaySdsSecretName", # required
+    #               },
+    #             },
     #             enforce: false,
     #             ports: [1],
     #             validation: { # required
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
     #               trust: { # required
     #                 acm: {
     #                   certificate_authority_arns: ["Arn"], # required
     #                 },
     #                 file: {
     #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "VirtualGatewaySdsSecretName", # required
     #                 },
     #               },
     #             },
@@ -6603,15 +7167,32 @@ module Aws::AppMesh
     #
     #       {
     #         tls: {
+    #           certificate: {
+    #             file: {
+    #               certificate_chain: "FilePath", # required
+    #               private_key: "FilePath", # required
+    #             },
+    #             sds: {
+    #               secret_name: "VirtualGatewaySdsSecretName", # required
+    #             },
+    #           },
     #           enforce: false,
     #           ports: [1],
     #           validation: { # required
+    #             subject_alternative_names: {
+    #               match: { # required
+    #                 exact: ["SubjectAlternativeName"], # required
+    #               },
+    #             },
     #             trust: { # required
     #               acm: {
     #                 certificate_authority_arns: ["Arn"], # required
     #               },
     #               file: {
     #                 certificate_chain: "FilePath", # required
+    #               },
+    #               sds: {
+    #                 secret_name: "VirtualGatewaySdsSecretName", # required
     #               },
     #             },
     #           },
@@ -6638,9 +7219,23 @@ module Aws::AppMesh
     #   data as a hash:
     #
     #       {
+    #         certificate: {
+    #           file: {
+    #             certificate_chain: "FilePath", # required
+    #             private_key: "FilePath", # required
+    #           },
+    #           sds: {
+    #             secret_name: "VirtualGatewaySdsSecretName", # required
+    #           },
+    #         },
     #         enforce: false,
     #         ports: [1],
     #         validation: { # required
+    #           subject_alternative_names: {
+    #             match: { # required
+    #               exact: ["SubjectAlternativeName"], # required
+    #             },
+    #           },
     #           trust: { # required
     #             acm: {
     #               certificate_authority_arns: ["Arn"], # required
@@ -6648,9 +7243,17 @@ module Aws::AppMesh
     #             file: {
     #               certificate_chain: "FilePath", # required
     #             },
+    #             sds: {
+    #               secret_name: "VirtualGatewaySdsSecretName", # required
+    #             },
     #           },
     #         },
     #       }
+    #
+    # @!attribute [rw] certificate
+    #   A reference to an object that represents a virtual gateway's
+    #   client's Transport Layer Security (TLS) certificate.
+    #   @return [Types::VirtualGatewayClientTlsCertificate]
     #
     # @!attribute [rw] enforce
     #   Whether the policy is enforced. The default is `True`, if a value
@@ -6662,15 +7265,58 @@ module Aws::AppMesh
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] validation
-    #   A reference to an object that represents a TLS validation context.
+    #   A reference to an object that represents a Transport Layer Security
+    #   (TLS) validation context.
     #   @return [Types::VirtualGatewayTlsValidationContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayClientPolicyTls AWS API Documentation
     #
     class VirtualGatewayClientPolicyTls < Struct.new(
+      :certificate,
       :enforce,
       :ports,
       :validation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the virtual gateway's client's Transport
+    # Layer Security (TLS) certificate.
+    #
+    # @note When making an API call, you may pass VirtualGatewayClientTlsCertificate
+    #   data as a hash:
+    #
+    #       {
+    #         file: {
+    #           certificate_chain: "FilePath", # required
+    #           private_key: "FilePath", # required
+    #         },
+    #         sds: {
+    #           secret_name: "VirtualGatewaySdsSecretName", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file
+    #   An object that represents a local file certificate. The certificate
+    #   must meet specific requirements and you must have proxy
+    #   authorization enabled. For more information, see [Transport Layer
+    #   Security (TLS)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites
+    #   @return [Types::VirtualGatewayListenerTlsFileCertificate]
+    #
+    # @!attribute [rw] sds
+    #   A reference to an object that represents a virtual gateway's
+    #   client's Secret Discovery Service certificate.
+    #   @return [Types::VirtualGatewayListenerTlsSdsCertificate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayClientTlsCertificate AWS API Documentation
+    #
+    class VirtualGatewayClientTlsCertificate < Struct.new(
+      :file,
+      :sds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6965,8 +7611,26 @@ module Aws::AppMesh
     #               certificate_chain: "FilePath", # required
     #               private_key: "FilePath", # required
     #             },
+    #             sds: {
+    #               secret_name: "VirtualGatewaySdsSecretName", # required
+    #             },
     #           },
     #           mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #           validation: {
+    #             subject_alternative_names: {
+    #               match: { # required
+    #                 exact: ["SubjectAlternativeName"], # required
+    #               },
+    #             },
+    #             trust: { # required
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #               },
+    #               sds: {
+    #                 secret_name: "VirtualGatewaySdsSecretName", # required
+    #               },
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -7013,8 +7677,26 @@ module Aws::AppMesh
     #             certificate_chain: "FilePath", # required
     #             private_key: "FilePath", # required
     #           },
+    #           sds: {
+    #             secret_name: "VirtualGatewaySdsSecretName", # required
+    #           },
     #         },
     #         mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #         validation: {
+    #           subject_alternative_names: {
+    #             match: { # required
+    #               exact: ["SubjectAlternativeName"], # required
+    #             },
+    #           },
+    #           trust: { # required
+    #             file: {
+    #               certificate_chain: "FilePath", # required
+    #             },
+    #             sds: {
+    #               secret_name: "VirtualGatewaySdsSecretName", # required
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] certificate
@@ -7033,11 +7715,17 @@ module Aws::AppMesh
     #   * ****DISABLED – Listener only accepts connections without TLS.
     #   @return [String]
     #
+    # @!attribute [rw] validation
+    #   A reference to an object that represents a virtual gateway's
+    #   listener's Transport Layer Security (TLS) validation context.
+    #   @return [Types::VirtualGatewayListenerTlsValidationContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayListenerTls AWS API Documentation
     #
     class VirtualGatewayListenerTls < Struct.new(
       :certificate,
-      :mode)
+      :mode,
+      :validation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7084,6 +7772,9 @@ module Aws::AppMesh
     #           certificate_chain: "FilePath", # required
     #           private_key: "FilePath", # required
     #         },
+    #         sds: {
+    #           secret_name: "VirtualGatewaySdsSecretName", # required
+    #         },
     #       }
     #
     # @!attribute [rw] acm
@@ -7095,11 +7786,17 @@ module Aws::AppMesh
     #   A reference to an object that represents a local file certificate.
     #   @return [Types::VirtualGatewayListenerTlsFileCertificate]
     #
+    # @!attribute [rw] sds
+    #   A reference to an object that represents a virtual gateway's
+    #   listener's Secret Discovery Service certificate.
+    #   @return [Types::VirtualGatewayListenerTlsSdsCertificate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayListenerTlsCertificate AWS API Documentation
     #
     class VirtualGatewayListenerTlsCertificate < Struct.new(
       :acm,
-      :file)
+      :file,
+      :sds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7135,6 +7832,114 @@ module Aws::AppMesh
     class VirtualGatewayListenerTlsFileCertificate < Struct.new(
       :certificate_chain,
       :private_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the virtual gateway's listener's Secret
+    # Discovery Service certificate.The proxy must be configured with a
+    # local SDS provider via a Unix Domain Socket. See App Mesh [TLS
+    # documentation][1] for more info.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html
+    #
+    # @note When making an API call, you may pass VirtualGatewayListenerTlsSdsCertificate
+    #   data as a hash:
+    #
+    #       {
+    #         secret_name: "VirtualGatewaySdsSecretName", # required
+    #       }
+    #
+    # @!attribute [rw] secret_name
+    #   A reference to an object that represents the name of the secret
+    #   secret requested from the Secret Discovery Service provider
+    #   representing Transport Layer Security (TLS) materials like a
+    #   certificate or certificate chain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayListenerTlsSdsCertificate AWS API Documentation
+    #
+    class VirtualGatewayListenerTlsSdsCertificate < Struct.new(
+      :secret_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents a virtual gateway's listener's Transport
+    # Layer Security (TLS) validation context.
+    #
+    # @note When making an API call, you may pass VirtualGatewayListenerTlsValidationContext
+    #   data as a hash:
+    #
+    #       {
+    #         subject_alternative_names: {
+    #           match: { # required
+    #             exact: ["SubjectAlternativeName"], # required
+    #           },
+    #         },
+    #         trust: { # required
+    #           file: {
+    #             certificate_chain: "FilePath", # required
+    #           },
+    #           sds: {
+    #             secret_name: "VirtualGatewaySdsSecretName", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] subject_alternative_names
+    #   A reference to an object that represents the SANs for a virtual
+    #   gateway listener's Transport Layer Security (TLS) validation
+    #   context.
+    #   @return [Types::SubjectAlternativeNames]
+    #
+    # @!attribute [rw] trust
+    #   A reference to where to retrieve the trust chain when validating a
+    #   peer’s Transport Layer Security (TLS) certificate.
+    #   @return [Types::VirtualGatewayListenerTlsValidationContextTrust]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayListenerTlsValidationContext AWS API Documentation
+    #
+    class VirtualGatewayListenerTlsValidationContext < Struct.new(
+      :subject_alternative_names,
+      :trust)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents a virtual gateway's listener's Transport
+    # Layer Security (TLS) validation context trust.
+    #
+    # @note When making an API call, you may pass VirtualGatewayListenerTlsValidationContextTrust
+    #   data as a hash:
+    #
+    #       {
+    #         file: {
+    #           certificate_chain: "FilePath", # required
+    #         },
+    #         sds: {
+    #           secret_name: "VirtualGatewaySdsSecretName", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file
+    #   An object that represents a Transport Layer Security (TLS)
+    #   validation context trust for a local file.
+    #   @return [Types::VirtualGatewayTlsValidationContextFileTrust]
+    #
+    # @!attribute [rw] sds
+    #   A reference to an object that represents a virtual gateway's
+    #   listener's Transport Layer Security (TLS) Secret Discovery Service
+    #   validation context trust.
+    #   @return [Types::VirtualGatewayTlsValidationContextSdsTrust]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayListenerTlsValidationContextTrust AWS API Documentation
+    #
+    class VirtualGatewayListenerTlsValidationContextTrust < Struct.new(
+      :file,
+      :sds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7268,15 +8073,32 @@ module Aws::AppMesh
     #         backend_defaults: {
     #           client_policy: {
     #             tls: {
+    #               certificate: {
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                   private_key: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "VirtualGatewaySdsSecretName", # required
+    #                 },
+    #               },
     #               enforce: false,
     #               ports: [1],
     #               validation: { # required
+    #                 subject_alternative_names: {
+    #                   match: { # required
+    #                     exact: ["SubjectAlternativeName"], # required
+    #                   },
+    #                 },
     #                 trust: { # required
     #                   acm: {
     #                     certificate_authority_arns: ["Arn"], # required
     #                   },
     #                   file: {
     #                     certificate_chain: "FilePath", # required
+    #                   },
+    #                   sds: {
+    #                     secret_name: "VirtualGatewaySdsSecretName", # required
     #                   },
     #                 },
     #               },
@@ -7319,8 +8141,26 @@ module Aws::AppMesh
     #                   certificate_chain: "FilePath", # required
     #                   private_key: "FilePath", # required
     #                 },
+    #                 sds: {
+    #                   secret_name: "VirtualGatewaySdsSecretName", # required
+    #                 },
     #               },
     #               mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #               validation: {
+    #                 subject_alternative_names: {
+    #                   match: { # required
+    #                     exact: ["SubjectAlternativeName"], # required
+    #                   },
+    #                 },
+    #                 trust: { # required
+    #                   file: {
+    #                     certificate_chain: "FilePath", # required
+    #                   },
+    #                   sds: {
+    #                     secret_name: "VirtualGatewaySdsSecretName", # required
+    #                   },
+    #                 },
+    #               },
     #             },
     #           },
     #         ],
@@ -7377,6 +8217,11 @@ module Aws::AppMesh
     #   data as a hash:
     #
     #       {
+    #         subject_alternative_names: {
+    #           match: { # required
+    #             exact: ["SubjectAlternativeName"], # required
+    #           },
+    #         },
     #         trust: { # required
     #           acm: {
     #             certificate_authority_arns: ["Arn"], # required
@@ -7384,24 +8229,34 @@ module Aws::AppMesh
     #           file: {
     #             certificate_chain: "FilePath", # required
     #           },
+    #           sds: {
+    #             secret_name: "VirtualGatewaySdsSecretName", # required
+    #           },
     #         },
     #       }
     #
+    # @!attribute [rw] subject_alternative_names
+    #   A reference to an object that represents the SANs for a virtual
+    #   gateway's listener's Transport Layer Security (TLS) validation
+    #   context.
+    #   @return [Types::SubjectAlternativeNames]
+    #
     # @!attribute [rw] trust
-    #   A reference to an object that represents a TLS validation context
-    #   trust.
+    #   A reference to where to retrieve the trust chain when validating a
+    #   peer’s Transport Layer Security (TLS) certificate.
     #   @return [Types::VirtualGatewayTlsValidationContextTrust]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayTlsValidationContext AWS API Documentation
     #
     class VirtualGatewayTlsValidationContext < Struct.new(
+      :subject_alternative_names,
       :trust)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # An object that represents a TLS validation context trust for an AWS
-    # Certicate Manager (ACM) certificate.
+    # An object that represents a Transport Layer Security (TLS) validation
+    # context trust for an AWS Certicate Manager (ACM) certificate.
     #
     # @note When making an API call, you may pass VirtualGatewayTlsValidationContextAcmTrust
     #   data as a hash:
@@ -7445,6 +8300,36 @@ module Aws::AppMesh
       include Aws::Structure
     end
 
+    # An object that represents a virtual gateway's listener's Transport
+    # Layer Security (TLS) Secret Discovery Service validation context
+    # trust. The proxy must be configured with a local SDS provider via a
+    # Unix Domain Socket. See App Mesh [TLS documentation][1] for more info.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html
+    #
+    # @note When making an API call, you may pass VirtualGatewayTlsValidationContextSdsTrust
+    #   data as a hash:
+    #
+    #       {
+    #         secret_name: "VirtualGatewaySdsSecretName", # required
+    #       }
+    #
+    # @!attribute [rw] secret_name
+    #   A reference to an object that represents the name of the secret for
+    #   a virtual gateway's Transport Layer Security (TLS) Secret Discovery
+    #   Service validation context trust.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayTlsValidationContextSdsTrust AWS API Documentation
+    #
+    class VirtualGatewayTlsValidationContextSdsTrust < Struct.new(
+      :secret_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents a Transport Layer Security (TLS) validation
     # context trust.
     #
@@ -7458,23 +8343,34 @@ module Aws::AppMesh
     #         file: {
     #           certificate_chain: "FilePath", # required
     #         },
+    #         sds: {
+    #           secret_name: "VirtualGatewaySdsSecretName", # required
+    #         },
     #       }
     #
     # @!attribute [rw] acm
-    #   A reference to an object that represents a TLS validation context
-    #   trust for an AWS Certicate Manager (ACM) certificate.
+    #   A reference to an object that represents a Transport Layer Security
+    #   (TLS) validation context trust for an AWS Certicate Manager (ACM)
+    #   certificate.
     #   @return [Types::VirtualGatewayTlsValidationContextAcmTrust]
     #
     # @!attribute [rw] file
-    #   An object that represents a TLS validation context trust for a local
-    #   file.
+    #   An object that represents a Transport Layer Security (TLS)
+    #   validation context trust for a local file.
     #   @return [Types::VirtualGatewayTlsValidationContextFileTrust]
+    #
+    # @!attribute [rw] sds
+    #   A reference to an object that represents a virtual gateway's
+    #   Transport Layer Security (TLS) Secret Discovery Service validation
+    #   context trust.
+    #   @return [Types::VirtualGatewayTlsValidationContextSdsTrust]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualGatewayTlsValidationContextTrust AWS API Documentation
     #
     class VirtualGatewayTlsValidationContextTrust < Struct.new(
       :acm,
-      :file)
+      :file,
+      :sds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7737,15 +8633,32 @@ module Aws::AppMesh
     #         backend_defaults: {
     #           client_policy: {
     #             tls: {
+    #               certificate: {
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                   private_key: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "SdsSecretName", # required
+    #                 },
+    #               },
     #               enforce: false,
     #               ports: [1],
     #               validation: { # required
+    #                 subject_alternative_names: {
+    #                   match: { # required
+    #                     exact: ["SubjectAlternativeName"], # required
+    #                   },
+    #                 },
     #                 trust: { # required
     #                   acm: {
     #                     certificate_authority_arns: ["Arn"], # required
     #                   },
     #                   file: {
     #                     certificate_chain: "FilePath", # required
+    #                   },
+    #                   sds: {
+    #                     secret_name: "SdsSecretName", # required
     #                   },
     #                 },
     #               },
@@ -7757,15 +8670,32 @@ module Aws::AppMesh
     #             virtual_service: {
     #               client_policy: {
     #                 tls: {
+    #                   certificate: {
+    #                     file: {
+    #                       certificate_chain: "FilePath", # required
+    #                       private_key: "FilePath", # required
+    #                     },
+    #                     sds: {
+    #                       secret_name: "SdsSecretName", # required
+    #                     },
+    #                   },
     #                   enforce: false,
     #                   ports: [1],
     #                   validation: { # required
+    #                     subject_alternative_names: {
+    #                       match: { # required
+    #                         exact: ["SubjectAlternativeName"], # required
+    #                       },
+    #                     },
     #                     trust: { # required
     #                       acm: {
     #                         certificate_authority_arns: ["Arn"], # required
     #                       },
     #                       file: {
     #                         certificate_chain: "FilePath", # required
+    #                       },
+    #                       sds: {
+    #                         secret_name: "SdsSecretName", # required
     #                       },
     #                     },
     #                   },
@@ -7864,8 +8794,26 @@ module Aws::AppMesh
     #                   certificate_chain: "FilePath", # required
     #                   private_key: "FilePath", # required
     #                 },
+    #                 sds: {
+    #                   secret_name: "SdsSecretName", # required
+    #                 },
     #               },
     #               mode: "STRICT", # required, accepts STRICT, PERMISSIVE, DISABLED
+    #               validation: {
+    #                 subject_alternative_names: {
+    #                   match: { # required
+    #                     exact: ["SubjectAlternativeName"], # required
+    #                   },
+    #                 },
+    #                 trust: { # required
+    #                   file: {
+    #                     certificate_chain: "FilePath", # required
+    #                   },
+    #                   sds: {
+    #                     secret_name: "SdsSecretName", # required
+    #                   },
+    #                 },
+    #               },
     #             },
     #           },
     #         ],
@@ -8166,15 +9114,32 @@ module Aws::AppMesh
     #       {
     #         client_policy: {
     #           tls: {
+    #             certificate: {
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #                 private_key: "FilePath", # required
+    #               },
+    #               sds: {
+    #                 secret_name: "SdsSecretName", # required
+    #               },
+    #             },
     #             enforce: false,
     #             ports: [1],
     #             validation: { # required
+    #               subject_alternative_names: {
+    #                 match: { # required
+    #                   exact: ["SubjectAlternativeName"], # required
+    #                 },
+    #               },
     #               trust: { # required
     #                 acm: {
     #                   certificate_authority_arns: ["Arn"], # required
     #                 },
     #                 file: {
     #                   certificate_chain: "FilePath", # required
+    #                 },
+    #                 sds: {
+    #                   secret_name: "SdsSecretName", # required
     #                 },
     #               },
     #             },

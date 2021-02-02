@@ -630,13 +630,13 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # S3 Batch Operations performs large-scale Batch Operations on Amazon S3
-    # objects. Batch Operations can run a single operation or action on
-    # lists of Amazon S3 objects that you specify. For more information, see
-    # [S3 Batch Operations][1] in the *Amazon Simple Storage Service
-    # Developer Guide*.
+    # You can use S3 Batch Operations to perform large-scale batch
+    # operations on Amazon S3 objects. Batch Operations can run a single
+    # operation on lists of Amazon S3 objects that you specify. For more
+    # information, see [S3 Batch Operations][1] in the *Amazon Simple
+    # Storage Service Developer Guide*.
     #
-    # This operation creates an S3 Batch Operations job.
+    # This operation creates a S3 Batch Operations job.
     #
     #
     #
@@ -650,6 +650,8 @@ module Aws::S3Control
     #
     # * [UpdateJobStatus][5]
     #
+    # * [JobOperation][6]
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
@@ -657,6 +659,7 @@ module Aws::S3Control
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_JobOperation.html
     #
     # @option params [required, String] :account_id
     #   The AWS account ID that creates the job.
@@ -794,6 +797,8 @@ module Aws::S3Control
     #             value: "TagValueString", # required
     #           },
     #         ],
+    #       },
+    #       s3_delete_object_tagging: {
     #       },
     #       s3_initiate_restore_object: {
     #         expiration_in_days: 1,
@@ -1373,8 +1378,9 @@ module Aws::S3Control
     end
 
     # Deletes the Amazon S3 Storage Lens configuration. For more information
-    # about S3 Storage Lens, see [Working with Amazon S3 Storage Lens][1] in
-    # the *Amazon Simple Storage Service Developer Guide*.
+    # about S3 Storage Lens, see [Assessing your storage activity and usage
+    # with Amazon S3 Storage Lens ][1] in the *Amazon Simple Storage Service
+    # Developer Guide*.
     #
     # <note markdown="1"> To use this action, you must have permission to perform the
     # `s3:DeleteStorageLensConfiguration` action. For more information, see
@@ -1413,8 +1419,9 @@ module Aws::S3Control
     end
 
     # Deletes the Amazon S3 Storage Lens configuration tags. For more
-    # information about S3 Storage Lens, see [Working with Amazon S3 Storage
-    # Lens][1] in the *Amazon Simple Storage Service Developer Guide*.
+    # information about S3 Storage Lens, see [Assessing your storage
+    # activity and usage with Amazon S3 Storage Lens ][1] in the *Amazon
+    # Simple Storage Service Developer Guide*.
     #
     # <note markdown="1"> To use this action, you must have permission to perform the
     # `s3:DeleteStorageLensConfigurationTagging` action. For more
@@ -2251,8 +2258,8 @@ module Aws::S3Control
     end
 
     # Gets the Amazon S3 Storage Lens configuration. For more information,
-    # see [Working with Amazon S3 Storage Lens][1] in the *Amazon Simple
-    # Storage Service Developer Guide*.
+    # see [Assessing your storage activity and usage with Amazon S3 Storage
+    # Lens ][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
     # <note markdown="1"> To use this action, you must have permission to perform the
     # `s3:GetStorageLensConfiguration` action. For more information, see
@@ -2320,8 +2327,9 @@ module Aws::S3Control
     end
 
     # Gets the tags of Amazon S3 Storage Lens configuration. For more
-    # information about S3 Storage Lens, see [Working with Amazon S3 Storage
-    # Lens][1] in the *Amazon Simple Storage Service Developer Guide*.
+    # information about S3 Storage Lens, see [Assessing your storage
+    # activity and usage with Amazon S3 Storage Lens ][1] in the *Amazon
+    # Simple Storage Service Developer Guide*.
     #
     # <note markdown="1"> To use this action, you must have permission to perform the
     # `s3:GetStorageLensConfigurationTagging` action. For more information,
@@ -2530,7 +2538,7 @@ module Aws::S3Control
     #   resp.jobs #=> Array
     #   resp.jobs[0].job_id #=> String
     #   resp.jobs[0].description #=> String
-    #   resp.jobs[0].operation #=> String, one of "LambdaInvoke", "S3PutObjectCopy", "S3PutObjectAcl", "S3PutObjectTagging", "S3InitiateRestoreObject", "S3PutObjectLegalHold", "S3PutObjectRetention"
+    #   resp.jobs[0].operation #=> String, one of "LambdaInvoke", "S3PutObjectCopy", "S3PutObjectAcl", "S3PutObjectTagging", "S3DeleteObjectTagging", "S3InitiateRestoreObject", "S3PutObjectLegalHold", "S3PutObjectRetention"
     #   resp.jobs[0].priority #=> Integer
     #   resp.jobs[0].status #=> String, one of "Active", "Cancelled", "Cancelling", "Complete", "Completing", "Failed", "Failing", "New", "Paused", "Pausing", "Preparing", "Ready", "Suspended"
     #   resp.jobs[0].creation_time #=> Time
@@ -2612,8 +2620,9 @@ module Aws::S3Control
     end
 
     # Gets a list of Amazon S3 Storage Lens configurations. For more
-    # information about S3 Storage Lens, see [Working with Amazon S3 Storage
-    # Lens][1] in the *Amazon Simple Storage Service Developer Guide*.
+    # information about S3 Storage Lens, see [Assessing your storage
+    # activity and usage with Amazon S3 Storage Lens ][1] in the *Amazon
+    # Simple Storage Service Developer Guide*.
     #
     # <note markdown="1"> To use this action, you must have permission to perform the
     # `s3:ListStorageLensConfigurations` action. For more information, see
@@ -3342,8 +3351,8 @@ module Aws::S3Control
 
     # Put or replace tags on an existing Amazon S3 Storage Lens
     # configuration. For more information about S3 Storage Lens, see
-    # [Working with Amazon S3 Storage Lens][1] in the *Amazon Simple Storage
-    # Service Developer Guide*.
+    # [Assessing your storage activity and usage with Amazon S3 Storage Lens
+    # ][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
     # <note markdown="1"> To use this action, you must have permission to perform the
     # `s3:PutStorageLensConfigurationTagging` action. For more information,
@@ -3533,7 +3542,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

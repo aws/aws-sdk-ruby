@@ -65,7 +65,9 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   An alphanumeric string used to identify a key signing key (KSK).
+    #   A string used to identify a key-signing key (KSK). `Name` can
+    #   include numbers, letters, and underscores (\_). `Name` must be
+    #   unique for each key-signing key in the same hosted zone.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ActivateKeySigningKeyRequest AWS API Documentation
@@ -107,13 +109,13 @@ module Aws::Route53
     #   use to determine whether this health check is healthy, the region
     #   that the alarm was created in.
     #
-    #   For the current list of CloudWatch regions, see [Amazon
-    #   CloudWatch][1] in the *AWS Service Endpoints* chapter of the *Amazon
-    #   Web Services General Reference*.
+    #   For the current list of CloudWatch regions, see [Amazon CloudWatch
+    #   endpoints and quotas][1] in the *Amazon Web Services General
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#cw_region
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/cw_region.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -207,21 +209,19 @@ module Aws::Route53
     #   : Specify the hosted zone ID for the region that you created the
     #     environment in. The environment must have a regionalized
     #     subdomain. For a list of regions and the corresponding hosted zone
-    #     IDs, see [AWS Elastic Beanstalk][3] in the "AWS Service
-    #     Endpoints" chapter of the *Amazon Web Services General
-    #     Reference*.
+    #     IDs, see [AWS Elastic Beanstalk endpoints and quotas][3] in the
+    #     the *Amazon Web Services General Reference*.
     #
     #   ELB load balancer
     #
     #   : Specify the value of the hosted zone ID for the load balancer. Use
     #     the following methods to get the hosted zone ID:
     #
-    #     * [Service Endpoints][4] table in the "Elastic Load Balancing
-    #       Endpoints and Quotas" topic in the *Amazon Web Services General
-    #       Reference*\: Use the value that corresponds with the region that
-    #       you created your load balancer in. Note that there are separate
-    #       columns for Application and Classic Load Balancers and for
-    #       Network Load Balancers.
+    #     * [Elastic Load Balancing endpoints and quotas][4] topic in the
+    #       *Amazon Web Services General Reference*\: Use the value that
+    #       corresponds with the region that you created your load balancer
+    #       in. Note that there are separate columns for Application and
+    #       Classic Load Balancers and for Network Load Balancers.
     #
     #     * **AWS Management Console**\: Go to the Amazon EC2 page, choose
     #       **Load Balancers** in the navigation pane, select the load
@@ -271,7 +271,7 @@ module Aws::Route53
     #
     #   [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-domain-names.html
     #   [2]: https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-vpc-endpoints.html
-    #   [3]: https://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region
+    #   [3]: https://docs.aws.amazon.com/general/latest/gr/elasticbeanstalk.html
     #   [4]: https://docs.aws.amazon.com/general/latest/gr/elb.html
     #   [5]: https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html
     #   [6]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
@@ -1312,13 +1312,14 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] key_management_service_arn
-    #   The Amazon resource name (ARN) for a customer managed key (CMK) in
-    #   AWS Key Management Service (KMS). The `KeyManagementServiceArn` must
-    #   be unique for each key signing key (KSK) in a single hosted zone. To
-    #   see an example of `KeyManagementServiceArn` that grants the correct
-    #   permissions for DNSSEC, scroll down to **Example**.
+    #   The Amazon resource name (ARN) for a customer managed customer
+    #   master key (CMK) in AWS Key Management Service (AWS KMS). The
+    #   `KeyManagementServiceArn` must be unique for each key-signing key
+    #   (KSK) in a single hosted zone. To see an example of
+    #   `KeyManagementServiceArn` that grants the correct permissions for
+    #   DNSSEC, scroll down to **Example**.
     #
-    #   You must configure the CMK as follows:
+    #   You must configure the customer managed CMK as follows:
     #
     #   Status
     #
@@ -1349,8 +1350,8 @@ module Aws::Route53
     #
     #     ^
     #
-    #   For more information about working with CMK in KMS, see [AWS Key
-    #   Management Service concepts][1].
+    #   For more information about working with a customer managed CMK in
+    #   AWS KMS, see [AWS Key Management Service concepts][1].
     #
     #
     #
@@ -1358,13 +1359,13 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   An alphanumeric string used to identify a key signing key (KSK).
-    #   `Name` must be unique for each key signing key in the same hosted
-    #   zone.
+    #   A string used to identify a key-signing key (KSK). `Name` can
+    #   include numbers, letters, and underscores (\_). `Name` must be
+    #   unique for each key-signing key in the same hosted zone.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   A string specifying the initial status of the key signing key (KSK).
+    #   A string specifying the initial status of the key-signing key (KSK).
     #   You can set the value to `ACTIVE` or `INACTIVE`.
     #   @return [String]
     #
@@ -1386,11 +1387,11 @@ module Aws::Route53
     #   @return [Types::ChangeInfo]
     #
     # @!attribute [rw] key_signing_key
-    #   The key signing key (KSK) that the request creates.
+    #   The key-signing key (KSK) that the request creates.
     #   @return [Types::KeySigningKey]
     #
     # @!attribute [rw] location
-    #   The unique URL representing the new key signing key (KSK).
+    #   The unique URL representing the new key-signing key (KSK).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateKeySigningKeyResponse AWS API Documentation
@@ -1782,15 +1783,36 @@ module Aws::Route53
     # A string repesenting the status of DNSSEC signing.
     #
     # @!attribute [rw] serve_signature
-    #   Indicates your hosted zone signging status: `SIGNING`,
-    #   `NOT_SIGNING`, or `INTERNAL_FAILURE`. If the status is
-    #   `INTERNAL_FAILURE`, see `StatusMessage` for information about steps
-    #   that you can take to correct the problem.
+    #   A string that represents the current hosted zone signing status.
     #
-    #   A status `INTERNAL_FAILURE` means there was an error during a
-    #   request. Before you can continue to work with DNSSEC signing,
-    #   including working with key signing keys (KSKs), you must correct the
-    #   problem by enabling or disabling DNSSEC signing for the hosted zone.
+    #   Status can have one of the following values:
+    #
+    #   SIGNING
+    #
+    #   : DNSSEC signing is enabled for the hosted zone.
+    #
+    #   NOT\_SIGNING
+    #
+    #   : DNSSEC signing is not enabled for the hosted zone.
+    #
+    #   DELETING
+    #
+    #   : DNSSEC signing is in the process of being removed for the hosted
+    #     zone.
+    #
+    #   ACTION\_NEEDED
+    #
+    #   : There is a problem with signing in the hosted zone that requires
+    #     you to take action to resolve. For example, the customer managed
+    #     customer master key (CMK) might have been deleted, or the
+    #     permissions for the customer managed CMK might have been changed.
+    #
+    #   INTERNAL\_FAILURE
+    #
+    #   : There was an error during a request. Before you can continue to
+    #     work with DNSSEC signing, including with key-signing keys (KSKs),
+    #     you must correct the problem by enabling or disabling DNSSEC
+    #     signing for the hosted zone.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -1822,7 +1844,7 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   An alphanumeric string used to identify a key signing key (KSK).
+    #   A string used to identify a key-signing key (KSK).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeactivateKeySigningKeyRequest AWS API Documentation
@@ -2022,7 +2044,7 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   An alphanumeric string used to identify a key signing key (KSK).
+    #   A string used to identify a key-signing key (KSK).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteKeySigningKeyRequest AWS API Documentation
@@ -2436,8 +2458,16 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] subdivision_code
-    #   The code for the subdivision. Route 53 currently supports only
-    #   states in the United States.
+    #   The code for the subdivision, such as a particular state within the
+    #   United States. For a list of US state abbreviations, see [Appendix
+    #   B: Two–Letter State and Possession Abbreviations][1] on the United
+    #   States Postal Service website. For a list of all supported
+    #   subdivision codes, use the [ListGeoLocations][2] API.
+    #
+    #
+    #
+    #   [1]: https://pe.usps.com/text/pub28/28apb.htm
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListGeoLocations.html
     #   @return [String]
     #
     # @!attribute [rw] subdivision_name
@@ -2609,7 +2639,7 @@ module Aws::Route53
     #   @return [Types::DNSSECStatus]
     #
     # @!attribute [rw] key_signing_keys
-    #   The key signing keys (KSKs) in your account.
+    #   The key-signing keys (KSKs) in your account.
     #   @return [Array<Types::KeySigningKey>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetDNSSECResponse AWS API Documentation
@@ -2664,17 +2694,16 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] subdivision_code
-    #   For `SubdivisionCode`, Amazon Route 53 supports only states of the
-    #   United States. For a list of state abbreviations, see [Appendix B:
-    #   Two–Letter State and Possession Abbreviations][1] on the United
-    #   States Postal Service website.
-    #
-    #   If you specify `subdivisioncode`, you must also specify `US` for
-    #   `CountryCode`.
+    #   The code for the subdivision, such as a particular state within the
+    #   United States. For a list of US state abbreviations, see [Appendix
+    #   B: Two–Letter State and Possession Abbreviations][1] on the United
+    #   States Postal Service website. For a list of all supported
+    #   subdivision codes, use the [ListGeoLocations][2] API.
     #
     #
     #
     #   [1]: https://pe.usps.com/text/pub28/28apb.htm
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListGeoLocations.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetGeoLocationRequest AWS API Documentation
@@ -3232,10 +3261,10 @@ module Aws::Route53
     # is associated with the current AWS account.
     #
     # @!attribute [rw] id
-    #   The identifier that Amazon Route 53assigned to the health check when
-    #   you created it. When you add or update a resource record set, you
-    #   use this value to specify which health check to use. The value can
-    #   be up to 64 characters long.
+    #   The identifier that Amazon Route 53 assigned to the health check
+    #   when you created it. When you add or update a resource record set,
+    #   you use this value to specify which health check to use. The value
+    #   can be up to 64 characters long.
     #   @return [String]
     #
     # @!attribute [rw] caller_reference
@@ -4123,7 +4152,7 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # The key signing key (KSK) name that you specified isn't a valid name.
+    # The key-signing key (KSK) name that you specified isn't a valid name.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4136,7 +4165,7 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # The key signing key (KSK) status isn't valid or another KSK has the
+    # The key-signing key (KSK) status isn't valid or another KSK has the
     # status `INTERNAL_FAILURE`.
     #
     # @!attribute [rw] message
@@ -4206,22 +4235,23 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # A key signing key (KSK) is a complex type that represents a
+    # A key-signing key (KSK) is a complex type that represents a
     # public/private key pair. The private key is used to generate a digital
     # signature for the zone signing key (ZSK). The public key is stored in
     # the DNS and is used to authenticate the ZSK. A KSK is always
     # associated with a hosted zone; it cannot exist by itself.
     #
     # @!attribute [rw] name
-    #   An alphanumeric string used to identify a key signing key (KSK).
-    #   `Name` must be unique for each key signing key in the same hosted
-    #   zone.
+    #   A string used to identify a key-signing key (KSK). `Name` can
+    #   include numbers, letters, and underscores (\_). `Name` must be
+    #   unique for each key-signing key in the same hosted zone.
     #   @return [String]
     #
     # @!attribute [rw] kms_arn
     #   The Amazon resource name (ARN) used to identify the customer managed
-    #   key (CMK) in AWS Key Management Service (KMS). The `KmsArn` must be
-    #   unique for each key signing key (KSK) in a single hosted zone.
+    #   customer master key (CMK) in AWS Key Management Service (AWS KMS).
+    #   The `KmsArn` must be unique for each key-signing key (KSK) in a
+    #   single hosted zone.
     #
     #   You must configure the CMK as follows:
     #
@@ -4254,8 +4284,8 @@ module Aws::Route53
     #
     #     ^
     #
-    #   For more information about working with the customer managed key
-    #   (CMK) in KMS, see [AWS Key Management Service concepts][1].
+    #   For more information about working with the customer managed CMK in
+    #   AWS KMS, see [AWS Key Management Service concepts][1].
     #
     #
     #
@@ -4263,7 +4293,7 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] flag
-    #   An integer that specifies how the key is used. For key signing key
+    #   An integer that specifies how the key is used. For key-signing key
     #   (KSK), this value is always 257.
     #   @return [Integer]
     #
@@ -4340,7 +4370,7 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   A string that represents the current key signing key (KSK) status.
+    #   A string that represents the current key-signing key (KSK) status.
     #
     #   Status can have one of the following values:
     #
@@ -4352,10 +4382,16 @@ module Aws::Route53
     #
     #   : The KSK is not being used for signing.
     #
+    #   DELETING
+    #
+    #   : The KSK is in the process of being deleted.
+    #
     #   ACTION\_NEEDED
     #
-    #   : There is an error in the KSK that requires you to take action to
-    #     resolve.
+    #   : There is a problem with the KSK that requires you to take action
+    #     to resolve. For example, the customer managed customer master key
+    #     (CMK) might have been deleted, or the permissions for the customer
+    #     managed CMK might have been changed.
     #
     #   INTERNAL\_FAILURE
     #
@@ -4366,18 +4402,18 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] status_message
-    #   The status message provided for the following key signing key (KSK)
+    #   The status message provided for the following key-signing key (KSK)
     #   statuses: `ACTION_NEEDED` or `INTERNAL_FAILURE`. The status message
     #   includes information about what the problem might be and steps that
     #   you can take to correct the issue.
     #   @return [String]
     #
     # @!attribute [rw] created_date
-    #   The date when the key signing key (KSK) was created.
+    #   The date when the key-signing key (KSK) was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_date
-    #   The last time that the key signing key (KSK) was changed.
+    #   The last time that the key-signing key (KSK) was changed.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/KeySigningKey AWS API Documentation
@@ -4403,8 +4439,8 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # You've already created a key signing key (KSK) with this name or with
-    # the same customer managed key (CMK) ARN.
+    # You've already created a key-signing key (KSK) with this name or with
+    # the same customer managed customer master key (CMK) ARN.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4417,7 +4453,7 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # The key signing key (KSK) is specified in a parent DS record.
+    # The key-signing key (KSK) is specified in a parent DS record.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4430,7 +4466,7 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # The key signing key (KSK) that you specified can't be deactivated
+    # The key-signing key (KSK) that you specified can't be deactivated
     # because it's the only KSK for a currently-enabled DNSSEC. Disable
     # DNSSEC signing, or add or enable another KSK.
     #
@@ -4445,7 +4481,7 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # A key signing key (KSK) with `ACTIVE` status wasn't found.
+    # A key-signing key (KSK) with `ACTIVE` status wasn't found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -6160,7 +6196,7 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # The specified key signing key (KSK) doesn't exist.
+    # The specified key-signing key (KSK) doesn't exist.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -6425,8 +6461,8 @@ module Aws::Route53
     #   Types][1] in the *Amazon Route 53 Developer Guide*.
     #
     #   Valid values for basic resource record sets: `A` \| `AAAA` \| `CAA`
-    #   \| `CNAME` \| `MX` \| `NAPTR` \| `NS` \| `PTR` \| `SOA` \| `SPF` \|
-    #   `SRV` \| `TXT`
+    #   \| `CNAME` \| `DS` \|`MX` \| `NAPTR` \| `NS` \| `PTR` \| `SOA` \|
+    #   `SPF` \| `SRV` \| `TXT`
     #
     #   Values for weighted, latency, geolocation, and failover resource
     #   record sets: `A` \| `AAAA` \| `CAA` \| `CNAME` \| `MX` \| `NAPTR` \|
@@ -7272,7 +7308,7 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # You've reached the limit for the number of key signing keys (KSKs).
+    # You've reached the limit for the number of key-signing keys (KSKs).
     # Remove at least one KSK, and then try again.
     #
     # @!attribute [rw] message

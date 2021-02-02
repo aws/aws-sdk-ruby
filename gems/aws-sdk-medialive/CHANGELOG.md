@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2021-02-02)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports Image Media Playlists on HLS outputs, version 0.4 (trick-mode).
+
 1.62.0 (2021-01-29)
 ------------------
 

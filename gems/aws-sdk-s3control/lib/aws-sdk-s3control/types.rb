@@ -558,6 +558,8 @@ module Aws::S3Control
     #               },
     #             ],
     #           },
+    #           s3_delete_object_tagging: {
+    #           },
     #           s3_initiate_restore_object: {
     #             expiration_in_days: 1,
     #             glacier_job_tier: "BULK", # accepts BULK, STANDARD
@@ -1926,6 +1928,14 @@ module Aws::S3Control
     #
     # @!attribute [rw] object_arn
     #   The Amazon Resource Name (ARN) for a manifest object.
+    #
+    #   Replacement must be made for object keys containing special
+    #   characters (such as carriage returns) when using XML requests. For
+    #   more information, see [ XML related object key constraints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
     #   @return [String]
     #
     # @!attribute [rw] object_version_id
@@ -2069,6 +2079,8 @@ module Aws::S3Control
     #             },
     #           ],
     #         },
+    #         s3_delete_object_tagging: {
+    #         },
     #         s3_initiate_restore_object: {
     #           expiration_in_days: 1,
     #           glacier_job_tier: "BULK", # accepts BULK, STANDARD
@@ -2107,6 +2119,11 @@ module Aws::S3Control
     #   object in the manifest.
     #   @return [Types::S3SetObjectTaggingOperation]
     #
+    # @!attribute [rw] s3_delete_object_tagging
+    #   Directs the specified job to execute a DELETE Object tagging call on
+    #   every object in the manifest.
+    #   @return [Types::S3DeleteObjectTaggingOperation]
+    #
     # @!attribute [rw] s3_initiate_restore_object
     #   Directs the specified job to initiate restore requests for every
     #   archived object in the manifest.
@@ -2144,6 +2161,7 @@ module Aws::S3Control
       :s3_put_object_copy,
       :s3_put_object_acl,
       :s3_put_object_tagging,
+      :s3_delete_object_tagging,
       :s3_initiate_restore_object,
       :s3_put_object_legal_hold,
       :s3_put_object_retention)
@@ -2544,6 +2562,14 @@ module Aws::S3Control
     #
     # @!attribute [rw] prefix
     #   Prefix identifying one or more objects to which the rule applies.
+    #
+    #   Replacement must be made for object keys containing special
+    #   characters (such as carriage returns) when using XML requests. For
+    #   more information, see [ XML related object key constraints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
     #   @return [String]
     #
     # @!attribute [rw] tag
@@ -3860,6 +3886,16 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # Contains no configuration parameters because the DELETE Object tagging
+    # API only accepts the bucket name and key name as parameters, which are
+    # defined in the job's manifest.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3DeleteObjectTaggingOperation AWS API Documentation
+    #
+    class S3DeleteObjectTaggingOperation < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass S3Grant
     #   data as a hash:
     #
@@ -4531,6 +4567,11 @@ module Aws::S3Control
     # @!attribute [rw] s3_bucket_destination
     #   A container for the bucket where the S3 Storage Lens metrics export
     #   will be located.
+    #
+    #   <note markdown="1"> This bucket must be located in the same Region as the storage lens
+    #   configuration.
+    #
+    #    </note>
     #   @return [Types::S3BucketDestination]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensDataExport AWS API Documentation

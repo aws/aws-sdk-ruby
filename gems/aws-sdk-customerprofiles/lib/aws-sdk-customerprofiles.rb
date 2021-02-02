@@ -48,6 +48,6 @@ require_relative 'aws-sdk-customerprofiles/customizations'
 # @!group service
 module Aws::CustomerProfiles
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.3.0'
 
 end

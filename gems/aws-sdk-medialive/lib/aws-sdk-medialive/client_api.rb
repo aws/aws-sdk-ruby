@@ -224,6 +224,7 @@ module Aws::MediaLive
     FollowPoint = Shapes::StringShape.new(name: 'FollowPoint')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     FrameCaptureGroupSettings = Shapes::StructureShape.new(name: 'FrameCaptureGroupSettings')
+    FrameCaptureHlsSettings = Shapes::StructureShape.new(name: 'FrameCaptureHlsSettings')
     FrameCaptureIntervalUnit = Shapes::StringShape.new(name: 'FrameCaptureIntervalUnit')
     FrameCaptureOutputSettings = Shapes::StructureShape.new(name: 'FrameCaptureOutputSettings')
     FrameCaptureSettings = Shapes::StructureShape.new(name: 'FrameCaptureSettings')
@@ -1596,10 +1597,12 @@ module Aws::MediaLive
     FrameCaptureGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
     FrameCaptureGroupSettings.struct_class = Types::FrameCaptureGroupSettings
 
+    FrameCaptureHlsSettings.struct_class = Types::FrameCaptureHlsSettings
+
     FrameCaptureOutputSettings.add_member(:name_modifier, Shapes::ShapeRef.new(shape: __string, location_name: "nameModifier"))
     FrameCaptureOutputSettings.struct_class = Types::FrameCaptureOutputSettings
 
-    FrameCaptureSettings.add_member(:capture_interval, Shapes::ShapeRef.new(shape: __integerMin1Max3600000, required: true, location_name: "captureInterval"))
+    FrameCaptureSettings.add_member(:capture_interval, Shapes::ShapeRef.new(shape: __integerMin1Max3600000, location_name: "captureInterval"))
     FrameCaptureSettings.add_member(:capture_interval_units, Shapes::ShapeRef.new(shape: FrameCaptureIntervalUnit, location_name: "captureIntervalUnits"))
     FrameCaptureSettings.struct_class = Types::FrameCaptureSettings
 
@@ -1798,6 +1801,7 @@ module Aws::MediaLive
 
     HlsSettings.add_member(:audio_only_hls_settings, Shapes::ShapeRef.new(shape: AudioOnlyHlsSettings, location_name: "audioOnlyHlsSettings"))
     HlsSettings.add_member(:fmp_4_hls_settings, Shapes::ShapeRef.new(shape: Fmp4HlsSettings, location_name: "fmp4HlsSettings"))
+    HlsSettings.add_member(:frame_capture_hls_settings, Shapes::ShapeRef.new(shape: FrameCaptureHlsSettings, location_name: "frameCaptureHlsSettings"))
     HlsSettings.add_member(:standard_hls_settings, Shapes::ShapeRef.new(shape: StandardHlsSettings, location_name: "standardHlsSettings"))
     HlsSettings.struct_class = Types::HlsSettings
 

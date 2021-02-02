@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2021-02-02)
+------------------
+
+* Feature - Amazon S3 Batch Operations now supports Delete Object Tagging
+
 * Feature - Support PrivateLink using the client `:endpoint` option. This patch has several minor behavioral changes. 1) Any operation using the `outpost_id` parameter with a client configured with `:use_dualstack_endpoint` will now raise an `ArgumentError` as dualstack is not supported by S3 Outposts. 2) Fix a bug where clients configured with `:use_dualstack_endpoint` resolved to the wrong endpoint by not prefixing the account id to the host. 3) A client constructed using both `:use_dualstack_endpoint` and `:endpoint` will now raise an `ArgumentError`.
 
 1.26.0 (2021-01-14)

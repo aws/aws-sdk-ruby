@@ -389,7 +389,7 @@ module Aws::RDSDataService
     #       [
     #         {
     #           name: "ParameterName",
-    #           type_hint: "DATE", # accepts DATE, DECIMAL, TIME, TIMESTAMP
+    #           type_hint: "JSON", # accepts JSON, UUID, TIMESTAMP, DATE, TIME, DECIMAL
     #           value: {
     #             array_value: {
     #               array_values: [
@@ -652,6 +652,10 @@ module Aws::RDSDataService
     # @option params [String] :schema
     #   The name of the database schema.
     #
+    #   <note markdown="1"> Currently, the `schema` parameter isn't supported.
+    #
+    #    </note>
+    #
     # @option params [required, String] :secret_arn
     #   The name or ARN of the secret that enables access to the DB cluster.
     #
@@ -682,7 +686,7 @@ module Aws::RDSDataService
     #     parameters: [
     #       {
     #         name: "ParameterName",
-    #         type_hint: "DATE", # accepts DATE, DECIMAL, TIME, TIMESTAMP
+    #         type_hint: "JSON", # accepts JSON, UUID, TIMESTAMP, DATE, TIME, DECIMAL
     #         value: {
     #           array_value: {
     #             array_values: [
@@ -706,7 +710,7 @@ module Aws::RDSDataService
     #     ],
     #     resource_arn: "Arn", # required
     #     result_set_options: {
-    #       decimal_return_type: "DOUBLE_OR_LONG", # accepts DOUBLE_OR_LONG, STRING
+    #       decimal_return_type: "STRING", # accepts STRING, DOUBLE_OR_LONG
     #     },
     #     schema: "DbName",
     #     secret_arn: "Arn", # required
@@ -827,7 +831,7 @@ module Aws::RDSDataService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rdsdataservice'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

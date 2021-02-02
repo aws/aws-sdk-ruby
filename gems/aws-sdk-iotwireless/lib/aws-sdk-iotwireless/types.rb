@@ -229,7 +229,7 @@ module Aws::IoTWireless
     #
     #       {
     #         name: "DestinationName", # required
-    #         expression_type: "RuleName", # required, accepts RuleName
+    #         expression_type: "RuleName", # required, accepts RuleName, MqttTopic
     #         expression: "Expression", # required
     #         description: "Description",
     #         role_arn: "RoleArn", # required
@@ -1348,8 +1348,14 @@ module Aws::IoTWireless
     #   The ID of the certificate associated with the wireless gateway.
     #   @return [String]
     #
+    # @!attribute [rw] lo_ra_wan_network_server_certificate_id
+    #   The ID of the certificate associated with the wireless gateway and
+    #   used for LoRaWANNetworkServer endpoint.
+    #   @return [String]
+    #
     class GetWirelessGatewayCertificateResponse < Struct.new(
-      :iot_certificate_id)
+      :iot_certificate_id,
+      :lo_ra_wan_network_server_certificate_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2595,8 +2601,8 @@ module Aws::IoTWireless
     #
     # @!attribute [rw] transmit_mode
     #   The transmit mode to use to send data to the wireless device. Can
-    #   be: `0` for UM (unacknowledge mode), `1` for AM (acknowledge mode),
-    #   or `2` for (TM) transparent mode.
+    #   be: `0` for UM (unacknowledge mode) or `1` for AM (acknowledge
+    #   mode).
     #   @return [Integer]
     #
     # @!attribute [rw] payload_data
@@ -2742,7 +2748,7 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] fingerprint
-    #   Fingerprint for Sidewalk application server private key.
+    #   The fingerprint of the Sidewalk application server private key.
     #   @return [String]
     #
     class SidewalkAccountInfoWithFingerprint < Struct.new(
@@ -2942,7 +2948,7 @@ module Aws::IoTWireless
     #
     #       {
     #         name: "DestinationName", # required
-    #         expression_type: "RuleName", # accepts RuleName
+    #         expression_type: "RuleName", # accepts RuleName, MqttTopic
     #         expression: "Expression",
     #         description: "Description",
     #         role_arn: "RoleArn",

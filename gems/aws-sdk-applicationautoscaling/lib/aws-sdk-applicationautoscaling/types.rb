@@ -622,9 +622,7 @@ module Aws::ApplicationAutoScaling
     #
     # @!attribute [rw] resource_ids
     #   The identifier of the resource associated with the scalable target.
-    #   This string consists of the resource type and unique identifier. If
-    #   you specify a scalable dimension, you must also specify a resource
-    #   ID.
+    #   This string consists of the resource type and unique identifier.
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
@@ -814,9 +812,7 @@ module Aws::ApplicationAutoScaling
     #
     # @!attribute [rw] resource_id
     #   The identifier of the resource associated with the scaling activity.
-    #   This string consists of the resource type and unique identifier. If
-    #   you specify a scalable dimension, you must also specify a resource
-    #   ID.
+    #   This string consists of the resource type and unique identifier.
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
@@ -1010,9 +1006,7 @@ module Aws::ApplicationAutoScaling
     #
     # @!attribute [rw] resource_id
     #   The identifier of the resource associated with the scaling policy.
-    #   This string consists of the resource type and unique identifier. If
-    #   you specify a scalable dimension, you must also specify a resource
-    #   ID.
+    #   This string consists of the resource type and unique identifier.
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
@@ -1207,9 +1201,7 @@ module Aws::ApplicationAutoScaling
     #
     # @!attribute [rw] resource_id
     #   The identifier of the resource associated with the scheduled action.
-    #   This string consists of the resource type and unique identifier. If
-    #   you specify a scalable dimension, you must also specify a resource
-    #   ID.
+    #   This string consists of the resource type and unique identifier.
     #
     #   * ECS service - The resource type is `service` and the unique
     #     identifier is the cluster name and service name. Example:
@@ -1428,11 +1420,11 @@ module Aws::ApplicationAutoScaling
     end
 
     # A per-account resource limit is exceeded. For more information, see
-    # [Application Auto Scaling Limits][1].
+    # [Application Auto Scaling service quotas][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/ApplicationAutoScaling/latest/userguide/application-auto-scaling-limits.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-limits.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1496,7 +1488,7 @@ module Aws::ApplicationAutoScaling
     # Only the AWS services that you're using send metrics to Amazon
     # CloudWatch. To determine whether a desired metric already exists by
     # looking up its namespace and dimension using the CloudWatch metrics
-    # dashboard in the console, follow the procedure in [Building Dashboards
+    # dashboard in the console, follow the procedure in [Building dashboards
     # with CloudWatch][1] in the *Application Auto Scaling User Guide*.
     #
     #
@@ -1749,8 +1741,8 @@ module Aws::ApplicationAutoScaling
     #   `StepScaling`—Not supported for DynamoDB, Amazon Comprehend, Lambda,
     #   Amazon Keyspaces (for Apache Cassandra), or Amazon MSK.
     #
-    #   For more information, see [Target Tracking Scaling Policies][1] and
-    #   [Step Scaling Policies][2] in the *Application Auto Scaling User
+    #   For more information, see [Target tracking scaling policies][1] and
+    #   [Step scaling policies][2] in the *Application Auto Scaling User
     #   Guide*.
     #
     #
@@ -1812,6 +1804,7 @@ module Aws::ApplicationAutoScaling
     #       {
     #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka
     #         schedule: "ResourceIdMaxLen1600",
+    #         timezone: "ResourceIdMaxLen1600",
     #         scheduled_action_name: "ScheduledActionName", # required
     #         resource_id: "ResourceIdMaxLen1600", # required
     #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize
@@ -1838,23 +1831,43 @@ module Aws::ApplicationAutoScaling
     #
     #   * Cron expressions - "`cron(fields)`"
     #
-    #   At expressions are useful for one-time schedules. Specify the time
-    #   in UTC.
+    #   At expressions are useful for one-time schedules. Cron expressions
+    #   are useful for scheduled actions that run periodically at a
+    #   specified date and time, and rate expressions are useful for
+    #   scheduled actions that run at a regular interval.
+    #
+    #   At and cron expressions use Universal Coordinated Time (UTC) by
+    #   default.
+    #
+    #   The cron format consists of six fields separated by white spaces:
+    #   \[Minutes\] \[Hours\] \[Day\_of\_Month\] \[Month\] \[Day\_of\_Week\]
+    #   \[Year\].
     #
     #   For rate expressions, *value* is a positive integer and *unit* is
     #   `minute` \| `minutes` \| `hour` \| `hours` \| `day` \| `days`.
     #
-    #   For cron expressions, *fields* is a cron expression. The supported
-    #   cron format consists of six fields separated by white spaces:
-    #   \[Minutes\] \[Hours\] \[Day\_of\_Month\] \[Month\] \[Day\_of\_Week\]
-    #   \[Year\].
-    #
-    #   For more information and examples, see [Scheduled Scaling][1] in the
-    #   *Application Auto Scaling User Guide*.
+    #   For more information and examples, see [Example scheduled actions
+    #   for Application Auto Scaling][1] in the *Application Auto Scaling
+    #   User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/examples-scheduled-actions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] timezone
+    #   Specifies the time zone used when setting a scheduled action by
+    #   using an at or cron expression. If a time zone is not provided, UTC
+    #   is used by default.
+    #
+    #   Valid values are the canonical names of the IANA time zones
+    #   supported by Joda-Time (such as `Etc/GMT+9` or `Pacific/Tahiti`).
+    #   For more information, see
+    #   [https://www.joda.org/joda-time/timezones.html][1].
+    #
+    #
+    #
+    #   [1]: https://www.joda.org/joda-time/timezones.html
     #   @return [String]
     #
     # @!attribute [rw] scheduled_action_name
@@ -1989,11 +2002,11 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The date and time for this scheduled action to start.
+    #   The date and time for this scheduled action to start, in UTC.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The date and time for the recurring schedule to end.
+    #   The date and time for the recurring schedule to end, in UTC.
     #   @return [Time]
     #
     # @!attribute [rw] scalable_target_action
@@ -2010,6 +2023,7 @@ module Aws::ApplicationAutoScaling
     class PutScheduledActionRequest < Struct.new(
       :service_namespace,
       :schedule,
+      :timezone,
       :scheduled_action_name,
       :resource_id,
       :scalable_dimension,
@@ -2218,7 +2232,7 @@ module Aws::ApplicationAutoScaling
     #   If the service supports service-linked roles, Application Auto
     #   Scaling uses a service-linked role, which it creates if it does not
     #   yet exist. For more information, see [Application Auto Scaling IAM
-    #   Roles][1].
+    #   roles][1].
     #
     #
     #
@@ -2246,7 +2260,7 @@ module Aws::ApplicationAutoScaling
     #     all scaling activities that involve scheduled actions are
     #     suspended.
     #
-    #   For more information, see [Suspending and Resuming Scaling][1] in
+    #   For more information, see [Suspending and resuming scaling][1] in
     #   the *Application Auto Scaling User Guide*.
     #
     #
@@ -2882,23 +2896,34 @@ module Aws::ApplicationAutoScaling
     #
     #   * Cron expressions - "`cron(fields)`"
     #
-    #   At expressions are useful for one-time schedules. Specify the time
-    #   in UTC.
+    #   At expressions are useful for one-time schedules. Cron expressions
+    #   are useful for scheduled actions that run periodically at a
+    #   specified date and time, and rate expressions are useful for
+    #   scheduled actions that run at a regular interval.
+    #
+    #   At and cron expressions use Universal Coordinated Time (UTC) by
+    #   default.
+    #
+    #   The cron format consists of six fields separated by white spaces:
+    #   \[Minutes\] \[Hours\] \[Day\_of\_Month\] \[Month\] \[Day\_of\_Week\]
+    #   \[Year\].
     #
     #   For rate expressions, *value* is a positive integer and *unit* is
     #   `minute` \| `minutes` \| `hour` \| `hours` \| `day` \| `days`.
     #
-    #   For cron expressions, *fields* is a cron expression. The supported
-    #   cron format consists of six fields separated by white spaces:
-    #   \[Minutes\] \[Hours\] \[Day\_of\_Month\] \[Month\] \[Day\_of\_Week\]
-    #   \[Year\].
-    #
-    #   For more information and examples, see [Scheduled Scaling][1] in the
-    #   *Application Auto Scaling User Guide*.
+    #   For more information and examples, see [Example scheduled actions
+    #   for Application Auto Scaling][1] in the *Application Auto Scaling
+    #   User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/examples-scheduled-actions.html
+    #   @return [String]
+    #
+    # @!attribute [rw] timezone
+    #   The time zone used when referring to the date and time of a
+    #   scheduled action, when the scheduled action uses an at or cron
+    #   expression.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -3028,11 +3053,11 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The date and time that the action is scheduled to begin.
+    #   The date and time that the action is scheduled to begin, in UTC.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The date and time that the action is scheduled to end.
+    #   The date and time that the action is scheduled to end, in UTC.
     #   @return [Time]
     #
     # @!attribute [rw] scalable_target_action
@@ -3055,6 +3080,7 @@ module Aws::ApplicationAutoScaling
       :scheduled_action_arn,
       :service_namespace,
       :schedule,
+      :timezone,
       :resource_id,
       :scalable_dimension,
       :start_time,
@@ -3255,7 +3281,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * Amazon Keyspaces tables
     #
-    #   * Amazon MSK cluster storage
+    #   * Amazon MSK broker storage
     #   @return [Integer]
     #
     # @!attribute [rw] metric_aggregation_type
@@ -3411,7 +3437,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * Amazon Keyspaces tables
     #
-    #   * Amazon MSK cluster storage
+    #   * Amazon MSK broker storage
     #   @return [Integer]
     #
     # @!attribute [rw] scale_in_cooldown
@@ -3456,7 +3482,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * Amazon Keyspaces tables
     #
-    #   * Amazon MSK cluster storage
+    #   * Amazon MSK broker storage
     #   @return [Integer]
     #
     # @!attribute [rw] disable_scale_in

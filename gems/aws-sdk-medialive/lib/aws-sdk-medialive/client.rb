@@ -1301,6 +1301,8 @@ module Aws::MediaLive
     #                       nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                       timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                     },
+    #                     frame_capture_hls_settings: {
+    #                     },
     #                     standard_hls_settings: {
     #                       audio_rendition_sets: "__string",
     #                       m3u_8_settings: { # required
@@ -1433,7 +1435,7 @@ module Aws::MediaLive
     #         {
     #           codec_settings: {
     #             frame_capture_settings: {
-    #               capture_interval: 1, # required
+    #               capture_interval: 1,
     #               capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #             },
     #             h264_settings: {
@@ -7339,6 +7341,8 @@ module Aws::MediaLive
     #                       nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                       timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                     },
+    #                     frame_capture_hls_settings: {
+    #                     },
     #                     standard_hls_settings: {
     #                       audio_rendition_sets: "__string",
     #                       m3u_8_settings: { # required
@@ -7471,7 +7475,7 @@ module Aws::MediaLive
     #         {
     #           codec_settings: {
     #             frame_capture_settings: {
-    #               capture_interval: 1, # required
+    #               capture_interval: 1,
     #               capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #             },
     #             h264_settings: {
@@ -9393,7 +9397,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

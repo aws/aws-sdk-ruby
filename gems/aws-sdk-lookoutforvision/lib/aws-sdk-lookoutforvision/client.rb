@@ -337,7 +337,10 @@ module Aws::LookoutforVision
     # To have a project with separate training and test datasets, call
     # `CreateDataset` twice. On the first call, specify `train` for the
     # value of `DatasetType`. On the second call, specify `test` for the
-    # value of `DatasetType`. of dataset with
+    # value of `DatasetType`.
+    #
+    # This operation requires permissions to perform the
+    # `lookoutvision:CreateDataset` operation.
     #
     # @option params [required, String] :project_name
     #   The name of the project in which you want to create a dataset.
@@ -427,10 +430,15 @@ module Aws::LookoutforVision
     # After training completes, the evaluation metrics are stored at the
     # location specified in `OutputConfig`.
     #
+    # This operation requires permissions to perform the
+    # `lookoutvision:CreateModel` operation. If you want to tag your model,
+    # you also require permission to the `lookoutvision:TagResource`
+    # operation.
+    #
     # @option params [required, String] :project_name
     #   The name of the project in which you want to create a model version.
     #
-    # @option params [Types::ModelDescription] :description
+    # @option params [String] :description
     #   A description for the version of the model.
     #
     # @option params [String] :client_token
@@ -457,6 +465,9 @@ module Aws::LookoutforVision
     #   not specified, the model is encrypted by a key that AWS owns and
     #   manages.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A set of tags (key-value pairs) that you want to attach to the model.
+    #
     # @return [Types::CreateModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateModelResponse#model_metadata #model_metadata} => Types::ModelMetadata
@@ -465,35 +476,7 @@ module Aws::LookoutforVision
     #
     #   resp = client.create_model({
     #     project_name: "ProjectName", # required
-    #     description: {
-    #       model_version: "ModelVersion",
-    #       model_arn: "ModelArn",
-    #       creation_timestamp: Time.now,
-    #       description: "ModelDescriptionMessage",
-    #       status: "TRAINING", # accepts TRAINING, TRAINED, TRAINING_FAILED, STARTING_HOSTING, HOSTED, HOSTING_FAILED, STOPPING_HOSTING, SYSTEM_UPDATING, DELETING
-    #       status_message: "ModelStatusMessage",
-    #       performance: {
-    #         f1_score: 1.0,
-    #         recall: 1.0,
-    #         precision: 1.0,
-    #       },
-    #       output_config: {
-    #         s3_location: { # required
-    #           bucket: "S3BucketName", # required
-    #           prefix: "S3KeyPrefix",
-    #         },
-    #       },
-    #       evaluation_manifest: {
-    #         bucket: "S3BucketName", # required
-    #         key: "S3ObjectKey", # required
-    #       },
-    #       evaluation_result: {
-    #         bucket: "S3BucketName", # required
-    #         key: "S3ObjectKey", # required
-    #       },
-    #       evaluation_end_timestamp: Time.now,
-    #       kms_key_id: "KmsKeyId",
-    #     },
+    #     description: "ModelDescriptionMessage",
     #     client_token: "ClientToken",
     #     output_config: { # required
     #       s3_location: { # required
@@ -502,6 +485,12 @@ module Aws::LookoutforVision
     #       },
     #     },
     #     kms_key_id: "KmsKeyId",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -528,8 +517,11 @@ module Aws::LookoutforVision
     # Creates an empty Amazon Lookout for Vision project. After you create
     # the project, add a dataset by calling CreateDataset.
     #
+    # This operation requires permissions to perform the
+    # `lookoutvision:CreateProject` operation.
+    #
     # @option params [required, String] :project_name
-    #   S nsme for the project.
+    #   The name for the project.
     #
     # @option params [String] :client_token
     #   ClientToken is an idempotency token that ensures a call to
@@ -591,6 +583,9 @@ module Aws::LookoutforVision
     # status, check the `Status` field in the response from a call to
     # DescribeDataset.
     #
+    # This operation requires permissions to perform the
+    # `lookoutvision:DeleteDataset` operation.
+    #
     # @option params [required, String] :project_name
     #   The name of the project that contains the dataset that you want to
     #   delete.
@@ -635,6 +630,9 @@ module Aws::LookoutforVision
 
     # Deletes an Amazon Lookout for Vision model. You can't delete a
     # running model. To stop a running model, use the StopModel operation.
+    #
+    # This operation requires permissions to perform the
+    # `lookoutvision:DeleteModel` operation.
     #
     # @option params [required, String] :project_name
     #   The name of the project that contains the model that you want to
@@ -688,8 +686,12 @@ module Aws::LookoutforVision
     # associated with the project. To delete a model use the DeleteModel
     # operation.
     #
-    # The training and test datasets are deleted automatically for you. The
-    # images referenced by the training and test datasets aren't deleted.
+    # You also have to delete the dataset(s) associated with the model. For
+    # more information, see DeleteDataset. The images referenced by the
+    # training and test datasets aren't deleted.
+    #
+    # This operation requires permissions to perform the
+    # `lookoutvision:DeleteProject` operation.
     #
     # @option params [required, String] :project_name
     #   The name of the project to delete.
@@ -734,6 +736,9 @@ module Aws::LookoutforVision
 
     # Describe an Amazon Lookout for Vision dataset.
     #
+    # This operation requires permissions to perform the
+    # `lookoutvision:DescribeDataset` operation.
+    #
     # @option params [required, String] :project_name
     #   The name of the project that contains the dataset that you want to
     #   describe.
@@ -777,6 +782,9 @@ module Aws::LookoutforVision
     end
 
     # Describes a version of an Amazon Lookout for Vision model.
+    #
+    # This operation requires permissions to perform the
+    # `lookoutvision:DescribeModel` operation.
     #
     # @option params [required, String] :project_name
     #   The project that contains the version of a model that you want to
@@ -827,6 +835,9 @@ module Aws::LookoutforVision
 
     # Describes an Amazon Lookout for Vision project.
     #
+    # This operation requires permissions to perform the
+    # `lookoutvision:DescribeProject` operation.
+    #
     # @option params [required, String] :project_name
     #   The name of the project that you want to describe.
     #
@@ -874,6 +885,9 @@ module Aws::LookoutforVision
     #
     #  </note>
     #
+    # This operation requires permissions to perform the
+    # `lookoutvision:DetectAnomalies` operation.
+    #
     # @option params [required, String] :project_name
     #   The name of the project that contains the model version that you want
     #   to use.
@@ -919,6 +933,9 @@ module Aws::LookoutforVision
     # Lists the JSON Lines within a dataset. An Amazon Lookout for Vision
     # JSON Line contains the anomaly information for a single image,
     # including the image location and the assigned label.
+    #
+    # This operation requires permissions to perform the
+    # `lookoutvision:ListDatasetEntries` operation.
     #
     # @option params [required, String] :project_name
     #   The name of the project that contains the dataset that you want to
@@ -1001,6 +1018,9 @@ module Aws::LookoutforVision
 
     # Lists the versions of a model in an Amazon Lookout for Vision project.
     #
+    # This operation requires permissions to perform the
+    # `lookoutvision:ListModels` operation.
+    #
     # @option params [required, String] :project_name
     #   The name of the project that contains the model versions that you want
     #   to list.
@@ -1057,6 +1077,9 @@ module Aws::LookoutforVision
 
     # Lists the Amazon Lookout for Vision projects in your AWS account.
     #
+    # This operation requires permissions to perform the
+    # `lookoutvision:ListProjects` operation.
+    #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more data to
     #   retrieve), Amazon Lookout for Vision returns a pagination token in the
@@ -1100,6 +1123,41 @@ module Aws::LookoutforVision
       req.send_request(options)
     end
 
+    # Returns a list of tags attached to the specified Amazon Lookout for
+    # Vision model.
+    #
+    # This operation requires permissions to perform the
+    # `lookoutvision:ListTagsForResource` operation.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the model for which you want to list
+    #   tags.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "TagArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Starts the running of the version of an Amazon Lookout for Vision
     # model. Starting a model takes a while to complete. To check the
     # current state of the model, use DescribeModel.
@@ -1111,6 +1169,9 @@ module Aws::LookoutforVision
     # stop a running model, call StopModel.
     #
     #  </note>
+    #
+    # This operation requires permissions to perform the
+    # `lookoutvision:StartModel` operation.
     #
     # @option params [required, String] :project_name
     #   The name of the project that contains the model that you want to
@@ -1169,6 +1230,9 @@ module Aws::LookoutforVision
     # Stops a running model. The operation might take a while to complete.
     # To check the current status, call DescribeModel.
     #
+    # This operation requires permissions to perform the
+    # `lookoutvision:StopModel` operation.
+    #
     # @option params [required, String] :project_name
     #   The name of the project that contains the model that you want to stop.
     #
@@ -1213,6 +1277,74 @@ module Aws::LookoutforVision
       req.send_request(options)
     end
 
+    # Adds one or more key-value tags to an Amazon Lookout for Vision model.
+    # For more information, see *Tagging a model* in the *Amazon Lookout for
+    # Vision Developer Guide*.
+    #
+    # This operation requires permissions to perform the
+    # `lookoutvision:TagResource` operation.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the model to assign the tags.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The key-value tags to assign to the model.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "TagArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags from an Amazon Lookout for Vision model. For
+    # more information, see *Tagging a model* in the *Amazon Lookout for
+    # Vision Developer Guide*.
+    #
+    # This operation requires permissions to perform the
+    # `lookoutvision:UntagResource` operation.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the model from which you want to
+    #   remove tags.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of the keys of the tags that you want to remove.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "TagArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Adds one or more JSON Line entries to a dataset. A JSON Line includes
     # information about an image used for training or testing an Amazon
     # Lookout for Vision model. The following is an example JSON Line.
@@ -1220,6 +1352,9 @@ module Aws::LookoutforVision
     # Updating a dataset might take a while to complete. To check the
     # current status, call DescribeDataset and check the `Status` field in
     # the response.
+    #
+    # This operation requires permissions to perform the
+    # `lookoutvision:UpdateDatasetEntries` operation.
     #
     # @option params [required, String] :project_name
     #   The name of the project that contains the dataset that you want to
@@ -1286,7 +1421,7 @@ module Aws::LookoutforVision
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutforvision'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

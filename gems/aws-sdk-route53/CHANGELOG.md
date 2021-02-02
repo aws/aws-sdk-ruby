@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2021-02-02)
+------------------
+
+* Feature - Documentation updates for Route 53
+
 1.45.0 (2020-12-17)
 ------------------
 

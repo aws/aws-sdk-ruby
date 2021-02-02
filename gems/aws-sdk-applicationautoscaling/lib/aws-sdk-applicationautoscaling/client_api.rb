@@ -216,6 +216,7 @@ module Aws::ApplicationAutoScaling
 
     PutScheduledActionRequest.add_member(:service_namespace, Shapes::ShapeRef.new(shape: ServiceNamespace, required: true, location_name: "ServiceNamespace"))
     PutScheduledActionRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "Schedule"))
+    PutScheduledActionRequest.add_member(:timezone, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "Timezone"))
     PutScheduledActionRequest.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: ScheduledActionName, required: true, location_name: "ScheduledActionName"))
     PutScheduledActionRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "ResourceId"))
     PutScheduledActionRequest.add_member(:scalable_dimension, Shapes::ShapeRef.new(shape: ScalableDimension, required: true, location_name: "ScalableDimension"))
@@ -288,6 +289,7 @@ module Aws::ApplicationAutoScaling
     ScheduledAction.add_member(:scheduled_action_arn, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "ScheduledActionARN"))
     ScheduledAction.add_member(:service_namespace, Shapes::ShapeRef.new(shape: ServiceNamespace, required: true, location_name: "ServiceNamespace"))
     ScheduledAction.add_member(:schedule, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "Schedule"))
+    ScheduledAction.add_member(:timezone, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, location_name: "Timezone"))
     ScheduledAction.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceIdMaxLen1600, required: true, location_name: "ResourceId"))
     ScheduledAction.add_member(:scalable_dimension, Shapes::ShapeRef.new(shape: ScalableDimension, location_name: "ScalableDimension"))
     ScheduledAction.add_member(:start_time, Shapes::ShapeRef.new(shape: TimestampType, location_name: "StartTime"))

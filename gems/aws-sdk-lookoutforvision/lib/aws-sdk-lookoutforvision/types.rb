@@ -131,35 +131,7 @@ module Aws::LookoutforVision
     #
     #       {
     #         project_name: "ProjectName", # required
-    #         description: {
-    #           model_version: "ModelVersion",
-    #           model_arn: "ModelArn",
-    #           creation_timestamp: Time.now,
-    #           description: "ModelDescriptionMessage",
-    #           status: "TRAINING", # accepts TRAINING, TRAINED, TRAINING_FAILED, STARTING_HOSTING, HOSTED, HOSTING_FAILED, STOPPING_HOSTING, SYSTEM_UPDATING, DELETING
-    #           status_message: "ModelStatusMessage",
-    #           performance: {
-    #             f1_score: 1.0,
-    #             recall: 1.0,
-    #             precision: 1.0,
-    #           },
-    #           output_config: {
-    #             s3_location: { # required
-    #               bucket: "S3BucketName", # required
-    #               prefix: "S3KeyPrefix",
-    #             },
-    #           },
-    #           evaluation_manifest: {
-    #             bucket: "S3BucketName", # required
-    #             key: "S3ObjectKey", # required
-    #           },
-    #           evaluation_result: {
-    #             bucket: "S3BucketName", # required
-    #             key: "S3ObjectKey", # required
-    #           },
-    #           evaluation_end_timestamp: Time.now,
-    #           kms_key_id: "KmsKeyId",
-    #         },
+    #         description: "ModelDescriptionMessage",
     #         client_token: "ClientToken",
     #         output_config: { # required
     #           s3_location: { # required
@@ -168,6 +140,12 @@ module Aws::LookoutforVision
     #           },
     #         },
     #         kms_key_id: "KmsKeyId",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] project_name
@@ -176,7 +154,7 @@ module Aws::LookoutforVision
     #
     # @!attribute [rw] description
     #   A description for the version of the model.
-    #   @return [Types::ModelDescription]
+    #   @return [String]
     #
     # @!attribute [rw] client_token
     #   ClientToken is an idempotency token that ensures a call to
@@ -205,6 +183,11 @@ module Aws::LookoutforVision
     #   manages.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A set of tags (key-value pairs) that you want to attach to the
+    #   model.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/CreateModelRequest AWS API Documentation
     #
     class CreateModelRequest < Struct.new(
@@ -212,7 +195,8 @@ module Aws::LookoutforVision
       :description,
       :client_token,
       :output_config,
-      :kms_key_id)
+      :kms_key_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -238,7 +222,7 @@ module Aws::LookoutforVision
     #       }
     #
     # @!attribute [rw] project_name
-    #   S nsme for the project.
+    #   The name for the project.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -1053,40 +1037,39 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # Describes an Amazon Lookout for Vision model.
-    #
-    # @note When making an API call, you may pass ModelDescription
+    # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
     #       {
-    #         model_version: "ModelVersion",
-    #         model_arn: "ModelArn",
-    #         creation_timestamp: Time.now,
-    #         description: "ModelDescriptionMessage",
-    #         status: "TRAINING", # accepts TRAINING, TRAINED, TRAINING_FAILED, STARTING_HOSTING, HOSTED, HOSTING_FAILED, STOPPING_HOSTING, SYSTEM_UPDATING, DELETING
-    #         status_message: "ModelStatusMessage",
-    #         performance: {
-    #           f1_score: 1.0,
-    #           recall: 1.0,
-    #           precision: 1.0,
-    #         },
-    #         output_config: {
-    #           s3_location: { # required
-    #             bucket: "S3BucketName", # required
-    #             prefix: "S3KeyPrefix",
-    #           },
-    #         },
-    #         evaluation_manifest: {
-    #           bucket: "S3BucketName", # required
-    #           key: "S3ObjectKey", # required
-    #         },
-    #         evaluation_result: {
-    #           bucket: "S3BucketName", # required
-    #           key: "S3ObjectKey", # required
-    #         },
-    #         evaluation_end_timestamp: Time.now,
-    #         kms_key_id: "KmsKeyId",
+    #         resource_arn: "TagArn", # required
     #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the model for which you want to
+    #   list tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A map of tag keys and values attached to the specified model.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Amazon Lookout for Vision model.
     #
     # @!attribute [rw] model_version
     #   The version of the model
@@ -1187,7 +1170,8 @@ module Aws::LookoutforVision
     #   @return [String]
     #
     # @!attribute [rw] performance
-    #   Performance metrics for the model. Created during training.
+    #   Performance metrics for the model. Not available until training has
+    #   successfully completed.
     #   @return [Types::ModelPerformance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ModelMetadata AWS API Documentation
@@ -1205,15 +1189,6 @@ module Aws::LookoutforVision
     end
 
     # Information about the evaluation performance of a trained model.
-    #
-    # @note When making an API call, you may pass ModelPerformance
-    #   data as a hash:
-    #
-    #       {
-    #         f1_score: 1.0,
-    #         recall: 1.0,
-    #         precision: 1.0,
-    #       }
     #
     # @!attribute [rw] f1_score
     #   The overall F1 score metric for the trained model.
@@ -1263,14 +1238,6 @@ module Aws::LookoutforVision
     end
 
     # The S3 location where Amazon Lookout for Vision saves training output.
-    #
-    # @note When making an API call, you may pass OutputS3Object
-    #   data as a hash:
-    #
-    #       {
-    #         bucket: "S3BucketName", # required
-    #         key: "S3ObjectKey", # required
-    #       }
     #
     # @!attribute [rw] bucket
     #   The bucket that contains the training output.
@@ -1550,6 +1517,68 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
+    # A key and value pair that is attached to the specified Amazon Lookout
+    # for Vision model.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key of the tag that is attached to the specified model.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the tag that is attached to the specified model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "TagArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the model to assign the tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value tags to assign to the model.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # Amazon Lookout for Vision is temporarily unable to process the
     # request. Try your call again.
     #
@@ -1578,6 +1607,36 @@ module Aws::LookoutforVision
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "TagArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the model from which you want to
+    #   remove tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of the keys of the tags that you want to remove.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateDatasetEntriesRequest
     #   data as a hash:

@@ -197,6 +197,7 @@ module Aws::S3Control
     S3CannedAccessControlList = Shapes::StringShape.new(name: 'S3CannedAccessControlList')
     S3ContentLength = Shapes::IntegerShape.new(name: 'S3ContentLength')
     S3CopyObjectOperation = Shapes::StructureShape.new(name: 'S3CopyObjectOperation')
+    S3DeleteObjectTaggingOperation = Shapes::StructureShape.new(name: 'S3DeleteObjectTaggingOperation')
     S3ExpirationInDays = Shapes::IntegerShape.new(name: 'S3ExpirationInDays')
     S3GlacierJobTier = Shapes::StringShape.new(name: 'S3GlacierJobTier')
     S3Grant = Shapes::StructureShape.new(name: 'S3Grant')
@@ -550,6 +551,7 @@ module Aws::S3Control
     JobOperation.add_member(:s3_put_object_copy, Shapes::ShapeRef.new(shape: S3CopyObjectOperation, location_name: "S3PutObjectCopy", metadata: {"box"=>true}))
     JobOperation.add_member(:s3_put_object_acl, Shapes::ShapeRef.new(shape: S3SetObjectAclOperation, location_name: "S3PutObjectAcl", metadata: {"box"=>true}))
     JobOperation.add_member(:s3_put_object_tagging, Shapes::ShapeRef.new(shape: S3SetObjectTaggingOperation, location_name: "S3PutObjectTagging", metadata: {"box"=>true}))
+    JobOperation.add_member(:s3_delete_object_tagging, Shapes::ShapeRef.new(shape: S3DeleteObjectTaggingOperation, location_name: "S3DeleteObjectTagging", metadata: {"box"=>true}))
     JobOperation.add_member(:s3_initiate_restore_object, Shapes::ShapeRef.new(shape: S3InitiateRestoreObjectOperation, location_name: "S3InitiateRestoreObject", metadata: {"box"=>true}))
     JobOperation.add_member(:s3_put_object_legal_hold, Shapes::ShapeRef.new(shape: S3SetObjectLegalHoldOperation, location_name: "S3PutObjectLegalHold", metadata: {"box"=>true}))
     JobOperation.add_member(:s3_put_object_retention, Shapes::ShapeRef.new(shape: S3SetObjectRetentionOperation, location_name: "S3PutObjectRetention", metadata: {"box"=>true}))
@@ -774,6 +776,8 @@ module Aws::S3Control
     S3CopyObjectOperation.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: S3ObjectLockMode, location_name: "ObjectLockMode"))
     S3CopyObjectOperation.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "ObjectLockRetainUntilDate"))
     S3CopyObjectOperation.struct_class = Types::S3CopyObjectOperation
+
+    S3DeleteObjectTaggingOperation.struct_class = Types::S3DeleteObjectTaggingOperation
 
     S3Grant.add_member(:grantee, Shapes::ShapeRef.new(shape: S3Grantee, location_name: "Grantee"))
     S3Grant.add_member(:permission, Shapes::ShapeRef.new(shape: S3Permission, location_name: "Permission"))

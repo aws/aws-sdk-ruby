@@ -543,6 +543,7 @@ module Aws::IoTWireless
     GetWirelessGatewayCertificateRequest.struct_class = Types::GetWirelessGatewayCertificateRequest
 
     GetWirelessGatewayCertificateResponse.add_member(:iot_certificate_id, Shapes::ShapeRef.new(shape: IotCertificateId, location_name: "IotCertificateId"))
+    GetWirelessGatewayCertificateResponse.add_member(:lo_ra_wan_network_server_certificate_id, Shapes::ShapeRef.new(shape: IotCertificateId, location_name: "LoRaWANNetworkServerCertificateId"))
     GetWirelessGatewayCertificateResponse.struct_class = Types::GetWirelessGatewayCertificateResponse
 
     GetWirelessGatewayFirmwareInformationRequest.add_member(:id, Shapes::ShapeRef.new(shape: WirelessGatewayId, required: true, location: "uri", location_name: "Id"))

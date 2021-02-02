@@ -121,12 +121,12 @@ module Aws::Organizations
     #   The Amazon Resource Name (ARN) of the account.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
-    #   Supported by Organizations][1] in the *AWS Organizations User
-    #   Guide*.
+    #   Supported by Organizations][1] in the *AWS Service Authorization
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies
     #   @return [String]
     #
     # @!attribute [rw] email
@@ -2129,12 +2129,12 @@ module Aws::Organizations
     #   The Amazon Resource Name (ARN) of a handshake.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
-    #   Supported by Organizations][1] in the *AWS Organizations User
-    #   Guide*.
+    #   Supported by Organizations][1] in the *AWS Service Authorization
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies
     #   @return [String]
     #
     # @!attribute [rw] parties
@@ -3941,12 +3941,12 @@ module Aws::Organizations
     #   The Amazon Resource Name (ARN) of an organization.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
-    #   Supported by Organizations][1] in the *AWS Organizations User
-    #   Guide*.
+    #   Supported by Organizations][1] in the *AWS Service Authorization
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies
     #   @return [String]
     #
     # @!attribute [rw] feature_set
@@ -3968,12 +3968,12 @@ module Aws::Organizations
     #   the management account for the organization.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
-    #   Supported by Organizations][1] in the *AWS Organizations User
-    #   Guide*.
+    #   Supported by Organizations][1] in the *AWS Service Authorization
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies
     #   @return [String]
     #
     # @!attribute [rw] master_account_id
@@ -4053,12 +4053,12 @@ module Aws::Organizations
     #   The Amazon Resource Name (ARN) of this OU.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
-    #   Supported by Organizations][1] in the *AWS Organizations User
-    #   Guide*.
+    #   Supported by Organizations][1] in the *AWS Service Authorization
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4254,12 +4254,12 @@ module Aws::Organizations
     #   The Amazon Resource Name (ARN) of the policy.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
-    #   Supported by Organizations][1] in the *AWS Organizations User
-    #   Guide*.
+    #   Supported by Organizations][1] in the *AWS Service Authorization
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4329,12 +4329,12 @@ module Aws::Organizations
     #   The Amazon Resource Name (ARN) of the policy target.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
-    #   Supported by Organizations][1] in the *AWS Organizations User
-    #   Guide*.
+    #   Supported by Organizations][1] in the *AWS Service Authorization
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4515,12 +4515,12 @@ module Aws::Organizations
     #   The Amazon Resource Name (ARN) of the root.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
-    #   Supported by Organizations][1] in the *AWS Organizations User
-    #   Guide*.
+    #   Supported by Organizations][1] in the *AWS Service Authorization
+    #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies
     #   @return [String]
     #
     # @!attribute [rw] name

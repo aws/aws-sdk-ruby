@@ -1770,7 +1770,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrated-services-list.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html
     #
     # @option params [required, String] :account_id
     #   The account ID number of the member account in the organization that
@@ -2412,25 +2412,56 @@ module Aws::Organizations
     # operations in older accounts until the service completes its clean-up
     # from AWS Organizations.
     #
+    # We <b> <i>strongly recommend</i> </b> that you don't use this command
+    # to disable integration between AWS Organizations and the specified AWS
+    # service. Instead, use the console or commands that are provided by the
+    # specified service. This lets the trusted service perform any required
+    # initialization when enabling trusted access, such as creating any
+    # required resources and any required clean up of resources when
+    # disabling trusted access.
     #
+    #  For information about how to disable trusted service access to your
+    # organization using the trusted service, see the **Learn more** link
+    # under the **Supports Trusted Access** column at [AWS services that you
+    # can use with AWS Organizations][2]. on this page.
     #
-    # We recommend that you disable integration between AWS Organizations
-    # and the specified AWS service by using the console or commands that
-    # are provided by the specified service. Doing so ensures that the other
-    # service is aware that it can clean up any resources that are required
-    # only for the integration. How the service cleans up its resources in
-    # the organization's accounts depends on that service. For more
-    # information, see the documentation for the other AWS service.
+    #  If you disable access by using this command, it causes the following
+    # actions to occur:
+    #
+    #  * The service can no longer create a service-linked role in the
+    #   accounts in your organization. This means that the service can't
+    #   perform operations on your behalf on any new accounts in your
+    #   organization. The service can still perform operations in older
+    #   accounts until the service completes its clean-up from AWS
+    #   Organizations.
+    #
+    # * The service can no longer perform tasks in the member accounts in
+    #   the organization, unless those operations are explicitly permitted
+    #   by the IAM policies that are attached to your roles. This includes
+    #   any data aggregation from the member accounts to the management
+    #   account, or to a delegated administrator account, where relevant.
+    #
+    # * Some services detect this and clean up any remaining data or
+    #   resources related to the integration, while other services stop
+    #   accessing the organization but leave any historical data and
+    #   configuration in place to support a possible re-enabling of the
+    #   integration.
+    #
+    #  Using the other service's console or commands to disable the
+    # integration ensures that the other service is aware that it can clean
+    # up any resources that are required only for the integration. How the
+    # service cleans up its resources in the organization's accounts
+    # depends on that service. For more information, see the documentation
+    # for the other AWS service.
     #
     # After you perform the `DisableAWSServiceAccess` operation, the
     # specified service can no longer perform operations in your
-    # organization's accounts unless the operations are explicitly
-    # permitted by the IAM policies that are attached to your roles.
+    # organization's accounts
     #
     # For more information about integrating other services with AWS
     # Organizations, including the list of services that work with
     # Organizations, see [Integrating AWS Organizations with Other AWS
-    # Services][2] in the *AWS Organizations User Guide.*
+    # Services][3] in the *AWS Organizations User Guide.*
     #
     # This operation can be called only from the organization's management
     # account.
@@ -2438,7 +2469,8 @@ module Aws::Organizations
     #
     #
     # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html
-    # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
+    # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html
+    # [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
     #
     # @option params [required, String] :service_principal
     #   The service principal name of the AWS service for which you want to
@@ -3040,6 +3072,12 @@ module Aws::Organizations
     #   an organization. Follow the steps at [ To leave an organization when
     #   all required account information has not yet been provided][1] in
     #   the *AWS Organizations User Guide.*
+    #
+    # * The account that you want to leave must not be a delegated
+    #   administrator account for any AWS service enabled for your
+    #   organization. If the account is a delegated administrator, you must
+    #   first change the delegated administrator account to another account
+    #   that is remaining in the organization.
     #
     # * You can leave an organization only after you enable IAM user access
     #   to billing in your account. For more information, see [Activating
@@ -4946,7 +4984,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrated-services-list.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html
     #
     # @option params [required, String] :account_id
     #   The account ID number of the member account in the organization to
@@ -5001,6 +5039,12 @@ module Aws::Organizations
     #   steps at [ To leave an organization when all required account
     #   information has not yet been provided][1] in the *AWS Organizations
     #   User Guide.*
+    #
+    # * The account that you want to leave must not be a delegated
+    #   administrator account for any AWS service enabled for your
+    #   organization. If the account is a delegated administrator, you must
+    #   first change the delegated administrator account to another account
+    #   that is remaining in the organization.
     #
     # * After the account leaves the organization, all tags that were
     #   attached to the account object in the organization are deleted. AWS
@@ -5380,7 +5424,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -329,14 +329,16 @@ module Aws::Route53
 
     # @!group API Operations
 
-    # Activates a key signing key (KSK) so that it can be used for signing
+    # Activates a key-signing key (KSK) so that it can be used for signing
     # by DNSSEC. This operation changes the KSK status to `ACTIVE`.
     #
     # @option params [required, String] :hosted_zone_id
     #   A unique string used to identify a hosted zone.
     #
     # @option params [required, String] :name
-    #   An alphanumeric string used to identify a key signing key (KSK).
+    #   A string used to identify a key-signing key (KSK). `Name` can include
+    #   numbers, letters, and underscores (\_). `Name` must be unique for each
+    #   key-signing key in the same hosted zone.
     #
     # @return [Types::ActivateKeySigningKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1589,7 +1591,7 @@ module Aws::Route53
       req.send_request(options)
     end
 
-    # Creates a new key signing key (KSK) associated with a hosted zone. You
+    # Creates a new key-signing key (KSK) associated with a hosted zone. You
     # can only have two KSKs per hosted zone.
     #
     # @option params [required, String] :caller_reference
@@ -1599,13 +1601,14 @@ module Aws::Route53
     #   The unique string (ID) used to identify a hosted zone.
     #
     # @option params [required, String] :key_management_service_arn
-    #   The Amazon resource name (ARN) for a customer managed key (CMK) in AWS
-    #   Key Management Service (KMS). The `KeyManagementServiceArn` must be
-    #   unique for each key signing key (KSK) in a single hosted zone. To see
-    #   an example of `KeyManagementServiceArn` that grants the correct
-    #   permissions for DNSSEC, scroll down to **Example**.
+    #   The Amazon resource name (ARN) for a customer managed customer master
+    #   key (CMK) in AWS Key Management Service (AWS KMS). The
+    #   `KeyManagementServiceArn` must be unique for each key-signing key
+    #   (KSK) in a single hosted zone. To see an example of
+    #   `KeyManagementServiceArn` that grants the correct permissions for
+    #   DNSSEC, scroll down to **Example**.
     #
-    #   You must configure the CMK as follows:
+    #   You must configure the customer managed CMK as follows:
     #
     #   Status
     #
@@ -1636,20 +1639,20 @@ module Aws::Route53
     #
     #     ^
     #
-    #   For more information about working with CMK in KMS, see [AWS Key
-    #   Management Service concepts][1].
+    #   For more information about working with a customer managed CMK in AWS
+    #   KMS, see [AWS Key Management Service concepts][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html
     #
     # @option params [required, String] :name
-    #   An alphanumeric string used to identify a key signing key (KSK).
-    #   `Name` must be unique for each key signing key in the same hosted
-    #   zone.
+    #   A string used to identify a key-signing key (KSK). `Name` can include
+    #   numbers, letters, and underscores (\_). `Name` must be unique for each
+    #   key-signing key in the same hosted zone.
     #
     # @option params [required, String] :status
-    #   A string specifying the initial status of the key signing key (KSK).
+    #   A string specifying the initial status of the key-signing key (KSK).
     #   You can set the value to `ACTIVE` or `INACTIVE`.
     #
     # @return [Types::CreateKeySigningKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2203,7 +2206,7 @@ module Aws::Route53
       req.send_request(options)
     end
 
-    # Deactivates a key signing key (KSK) so that it will not be used for
+    # Deactivates a key-signing key (KSK) so that it will not be used for
     # signing by DNSSEC. This operation changes the KSK status to
     # `INACTIVE`.
     #
@@ -2211,7 +2214,7 @@ module Aws::Route53
     #   A unique string used to identify a hosted zone.
     #
     # @option params [required, String] :name
-    #   An alphanumeric string used to identify a key signing key (KSK).
+    #   A string used to identify a key-signing key (KSK).
     #
     # @return [Types::DeactivateKeySigningKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2367,7 +2370,7 @@ module Aws::Route53
       req.send_request(options)
     end
 
-    # Deletes a key signing key (KSK). Before you can delete a KSK, you must
+    # Deletes a key-signing key (KSK). Before you can delete a KSK, you must
     # deactivate it. The KSK must be deactived before you can delete it
     # regardless of whether the hosted zone is enabled for DNSSEC signing.
     #
@@ -2375,7 +2378,7 @@ module Aws::Route53
     #   A unique string used to identify a hosted zone.
     #
     # @option params [required, String] :name
-    #   An alphanumeric string used to identify a key signing key (KSK).
+    #   A string used to identify a key-signing key (KSK).
     #
     # @return [Types::DeleteKeySigningKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2590,7 +2593,7 @@ module Aws::Route53
     end
 
     # Disables DNSSEC signing in a specific hosted zone. This action does
-    # not deactivate any key signing keys (KSKs) that are active in the
+    # not deactivate any key-signing keys (KSKs) that are active in the
     # hosted zone.
     #
     # @option params [required, String] :hosted_zone_id
@@ -2835,6 +2838,9 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # Route 53 does not perform authorization for this API because it
+    # retrieves information that is already available to the public.
+    #
     # `GetCheckerIpRanges` still works, but we recommend that you download
     # ip-ranges.json, which includes IP address ranges for all AWS services.
     # For more information, see [IP Address Ranges of Amazon Route 53
@@ -2863,8 +2869,7 @@ module Aws::Route53
     end
 
     # Returns information about DNSSEC for a specific hosted zone, including
-    # the key signing keys (KSKs) and zone signing keys (ZSKs) in the hosted
-    # zone.
+    # the key-signing keys (KSKs) in the hosted zone.
     #
     # @option params [required, String] :hosted_zone_id
     #   A unique string used to identify a hosted zone.
@@ -2914,6 +2919,9 @@ module Aws::Route53
     # Gets information about whether a specified geographic location is
     # supported for Amazon Route 53 geolocation resource record sets.
     #
+    # Route 53 does not perform authorization for this API because it
+    # retrieves information that is already available to the public.
+    #
     # Use the following syntax to determine whether a continent is supported
     # for geolocation:
     #
@@ -2959,17 +2967,16 @@ module Aws::Route53
     #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
     #
     # @option params [String] :subdivision_code
-    #   For `SubdivisionCode`, Amazon Route 53 supports only states of the
-    #   United States. For a list of state abbreviations, see [Appendix B:
+    #   The code for the subdivision, such as a particular state within the
+    #   United States. For a list of US state abbreviations, see [Appendix B:
     #   Two–Letter State and Possession Abbreviations][1] on the United States
-    #   Postal Service website.
-    #
-    #   If you specify `subdivisioncode`, you must also specify `US` for
-    #   `CountryCode`.
+    #   Postal Service website. For a list of all supported subdivision codes,
+    #   use the [ListGeoLocations][2] API.
     #
     #
     #
     #   [1]: https://pe.usps.com/text/pub28/28apb.htm
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListGeoLocations.html
     #
     # @return [Types::GetGeoLocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3554,6 +3561,9 @@ module Aws::Route53
     # Route 53 supports subdivisions for a country (for example, states or
     # provinces), the subdivisions for that country are listed in
     # alphabetical order immediately after the corresponding country.
+    #
+    # Route 53 does not perform authorization for this API because it
+    # retrieves information that is already available to the public.
     #
     # For a list of supported geolocation codes, see the [GeoLocation][1]
     # data type.
@@ -5599,7 +5609,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
