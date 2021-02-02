@@ -6857,13 +6857,19 @@ module Aws::SSM
     #   This data type is deprecated. Instead, use `Filters`.
     #
     # @option params [Array<Types::DocumentKeyValuesFilter>] :filters
-    #   One or more DocumentKeyValuesFilter objects. Use a filter to return a
-    #   more specific list of results. For keys, you can specify one or more
+    #   One or more `DocumentKeyValuesFilter` objects. Use a filter to return
+    #   a more specific list of results. For keys, you can specify one or more
     #   key-value pair tags that have been applied to a document. Other valid
     #   keys include `Owner`, `Name`, `PlatformTypes`, `DocumentType`, and
     #   `TargetType`. For example, to return documents you own use
     #   `Key=Owner,Values=Self`. To specify a custom key-value pair, use the
     #   format `Key=tag:tagName,Values=valueName`.
+    #
+    #   <note markdown="1"> This API action only supports filtering documents by using a single
+    #   tag key and one or more tag values. For example:
+    #   `Key=tag:tagName,Values=valueName1,valueName2`
+    #
+    #    </note>
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -10622,7 +10628,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

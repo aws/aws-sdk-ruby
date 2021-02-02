@@ -370,6 +370,8 @@ module Aws
             'LambdaPreview' => 'lambda',
             'Lex' => 'runtime.lex',
             'LexModelBuildingService' => 'models.lex',
+            'LexModelsV2' => 'models-v2-lex',
+            'LexRuntimeV2' => 'runtime-v2-lex',
             'LicenseManager' => 'license-manager',
             'Lightsail' => 'lightsail',
             'LocationService' => 'geo',

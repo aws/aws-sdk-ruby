@@ -58,6 +58,8 @@ module Aws::WellArchitected
     #
     # @!attribute [rw] selected_choices
     #   List of selected choice IDs in a question answer.
+    #
+    #   The values entered replace the previously selected choices.
     #   @return [Array<String>]
     #
     # @!attribute [rw] is_applicable
@@ -112,6 +114,8 @@ module Aws::WellArchitected
     #
     # @!attribute [rw] selected_choices
     #   List of selected choice IDs in a question answer.
+    #
+    #   The values entered replace the previously selected choices.
     #   @return [Array<String>]
     #
     # @!attribute [rw] is_applicable
@@ -2207,6 +2211,8 @@ module Aws::WellArchitected
     #
     # @!attribute [rw] selected_choices
     #   List of selected choice IDs in a question answer.
+    #
+    #   The values entered replace the previously selected choices.
     #   @return [Array<String>]
     #
     # @!attribute [rw] notes

@@ -118,6 +118,8 @@ module Aws::Kafka
     UpdateBrokerCountResponse = Shapes::StructureShape.new(name: 'UpdateBrokerCountResponse')
     UpdateBrokerStorageRequest = Shapes::StructureShape.new(name: 'UpdateBrokerStorageRequest')
     UpdateBrokerStorageResponse = Shapes::StructureShape.new(name: 'UpdateBrokerStorageResponse')
+    UpdateBrokerTypeRequest = Shapes::StructureShape.new(name: 'UpdateBrokerTypeRequest')
+    UpdateBrokerTypeResponse = Shapes::StructureShape.new(name: 'UpdateBrokerTypeResponse')
     UpdateClusterConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateClusterConfigurationRequest')
     UpdateClusterConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateClusterConfigurationResponse')
     UpdateClusterKafkaVersionRequest = Shapes::StructureShape.new(name: 'UpdateClusterKafkaVersionRequest')
@@ -490,6 +492,7 @@ module Aws::Kafka
     MutableClusterInfo.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoring, location_name: "enhancedMonitoring"))
     MutableClusterInfo.add_member(:kafka_version, Shapes::ShapeRef.new(shape: __string, location_name: "kafkaVersion"))
     MutableClusterInfo.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "loggingInfo"))
+    MutableClusterInfo.add_member(:instance_type, Shapes::ShapeRef.new(shape: __stringMin5Max32, location_name: "instanceType"))
     MutableClusterInfo.struct_class = Types::MutableClusterInfo
 
     NodeExporter.add_member(:enabled_in_broker, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabledInBroker"))
@@ -595,6 +598,15 @@ module Aws::Kafka
     UpdateBrokerStorageResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
     UpdateBrokerStorageResponse.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterOperationArn"))
     UpdateBrokerStorageResponse.struct_class = Types::UpdateBrokerStorageResponse
+
+    UpdateBrokerTypeRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    UpdateBrokerTypeRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "currentVersion"))
+    UpdateBrokerTypeRequest.add_member(:target_instance_type, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "targetInstanceType"))
+    UpdateBrokerTypeRequest.struct_class = Types::UpdateBrokerTypeRequest
+
+    UpdateBrokerTypeResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
+    UpdateBrokerTypeResponse.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterOperationArn"))
+    UpdateBrokerTypeResponse.struct_class = Types::UpdateBrokerTypeResponse
 
     UpdateClusterConfigurationRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
     UpdateClusterConfigurationRequest.add_member(:configuration_info, Shapes::ShapeRef.new(shape: ConfigurationInfo, required: true, location_name: "configurationInfo"))
@@ -1043,6 +1055,21 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:update_broker_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateBrokerType"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/nodes/type"
+        o.input = Shapes::ShapeRef.new(shape: UpdateBrokerTypeRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateBrokerTypeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_broker_storage, Seahorse::Model::Operation.new.tap do |o|

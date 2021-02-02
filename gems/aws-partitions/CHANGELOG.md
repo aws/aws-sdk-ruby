@@ -1,6 +1,38 @@
 Unreleased Changes
 ------------------
 
+1.422.0 (2021-01-29)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.421.0 (2021-01-28)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.420.0 (2021-01-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.419.0 (2021-01-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.418.0 (2021-01-22)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::LexRuntimeV2`.
+
+* Feature - Added support for enumerating regions for `Aws::LexModelsV2`.
+
+1.417.0 (2021-01-19)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.416.0 (2021-01-11)
 ------------------
 

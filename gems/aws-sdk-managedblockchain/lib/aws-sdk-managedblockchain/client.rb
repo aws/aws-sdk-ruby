@@ -379,6 +379,9 @@ module Aws::ManagedBlockchain
     #           },
     #         },
     #       },
+    #       tags: {
+    #         "TagKey" => "TagValue",
+    #       },
     #     },
     #   })
     #
@@ -432,6 +435,24 @@ module Aws::ManagedBlockchain
     # @option params [required, Types::MemberConfiguration] :member_configuration
     #   Configuration properties for the first member within the network.
     #
+    # @option params [Hash<String,String>] :tags
+    #   Tags to assign to the network. Each tag consists of a key and optional
+    #   value.
+    #
+    #   When specifying tags during creation, you can specify multiple
+    #   key-value pairs in a single request, with an overall maximum of 50
+    #   added to each resource.
+    #
+    #   For more information about tags, see [Tagging Resources][1] in the
+    #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
+    #   Resources][2] in the *Amazon Managed Blockchain Hyperledger Fabric
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
+    #   [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #
     # @return [Types::CreateNetworkOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNetworkOutput#network_id #network_id} => String
@@ -475,6 +496,12 @@ module Aws::ManagedBlockchain
     #           },
     #         },
     #       },
+    #       tags: {
+    #         "TagKey" => "TagValue",
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
@@ -495,6 +522,9 @@ module Aws::ManagedBlockchain
     # Creates a node on the specified blockchain network.
     #
     # Applies to Hyperledger Fabric and Ethereum.
+    #
+    # Ethereum on Managed Blockchain is in preview release and is subject to
+    # change.
     #
     # @option params [required, String] :client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -525,6 +555,24 @@ module Aws::ManagedBlockchain
     # @option params [required, Types::NodeConfiguration] :node_configuration
     #   The properties of a node configuration.
     #
+    # @option params [Hash<String,String>] :tags
+    #   Tags to assign to the node. Each tag consists of a key and optional
+    #   value.
+    #
+    #   When specifying tags during creation, you can specify multiple
+    #   key-value pairs in a single request, with an overall maximum of 50
+    #   added to each resource.
+    #
+    #   For more information about tags, see [Tagging Resources][1] in the
+    #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
+    #   Resources][2] in the *Amazon Managed Blockchain Hyperledger Fabric
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
+    #   [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #
     # @return [Types::CreateNodeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNodeOutput#node_id #node_id} => String
@@ -553,6 +601,9 @@ module Aws::ManagedBlockchain
     #         },
     #       },
     #       state_db: "LevelDB", # accepts LevelDB, CouchDB
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
@@ -603,6 +654,25 @@ module Aws::ManagedBlockchain
     #   A description for the proposal that is visible to voting members, for
     #   example, "Proposal to add Example Corp. as member."
     #
+    # @option params [Hash<String,String>] :tags
+    #   Tags to assign to the proposal. Each tag consists of a key and
+    #   optional value.
+    #
+    #   When specifying tags during creation, you can specify multiple
+    #   key-value pairs in a single request, with an overall maximum of 50
+    #   added to each resource. If the proposal is for a network invitation,
+    #   the invitation inherits the tags added to the proposal.
+    #
+    #   For more information about tags, see [Tagging Resources][1] in the
+    #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
+    #   Resources][2] in the *Amazon Managed Blockchain Hyperledger Fabric
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
+    #   [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #
     # @return [Types::CreateProposalOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProposalOutput#proposal_id #proposal_id} => String
@@ -626,6 +696,9 @@ module Aws::ManagedBlockchain
     #       ],
     #     },
     #     description: "DescriptionString",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -752,6 +825,9 @@ module Aws::ManagedBlockchain
     #   resp.member.log_publishing_configuration.fabric.ca_logs.cloudwatch.enabled #=> Boolean
     #   resp.member.status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED"
     #   resp.member.creation_date #=> Time
+    #   resp.member.tags #=> Hash
+    #   resp.member.tags["TagKey"] #=> String
+    #   resp.member.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/GetMember AWS API Documentation
     #
@@ -795,6 +871,9 @@ module Aws::ManagedBlockchain
     #   resp.network.voting_policy.approval_threshold_policy.threshold_comparator #=> String, one of "GREATER_THAN", "GREATER_THAN_OR_EQUAL_TO"
     #   resp.network.status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "DELETING", "DELETED"
     #   resp.network.creation_date #=> Time
+    #   resp.network.tags #=> Hash
+    #   resp.network.tags["TagKey"] #=> String
+    #   resp.network.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/GetNetwork AWS API Documentation
     #
@@ -849,6 +928,9 @@ module Aws::ManagedBlockchain
     #   resp.node.state_db #=> String, one of "LevelDB", "CouchDB"
     #   resp.node.status #=> String, one of "CREATING", "AVAILABLE", "UNHEALTHY", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED", "FAILED"
     #   resp.node.creation_date #=> Time
+    #   resp.node.tags #=> Hash
+    #   resp.node.tags["TagKey"] #=> String
+    #   resp.node.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/GetNode AWS API Documentation
     #
@@ -897,6 +979,9 @@ module Aws::ManagedBlockchain
     #   resp.proposal.yes_vote_count #=> Integer
     #   resp.proposal.no_vote_count #=> Integer
     #   resp.proposal.outstanding_vote_count #=> Integer
+    #   resp.proposal.tags #=> Hash
+    #   resp.proposal.tags["TagKey"] #=> String
+    #   resp.proposal.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/GetProposal AWS API Documentation
     #
@@ -946,6 +1031,8 @@ module Aws::ManagedBlockchain
     #   resp.invitations[0].network_summary.framework_version #=> String
     #   resp.invitations[0].network_summary.status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "DELETING", "DELETED"
     #   resp.invitations[0].network_summary.creation_date #=> Time
+    #   resp.invitations[0].network_summary.arn #=> String
+    #   resp.invitations[0].arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListInvitations AWS API Documentation
@@ -1011,6 +1098,7 @@ module Aws::ManagedBlockchain
     #   resp.members[0].status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED"
     #   resp.members[0].creation_date #=> Time
     #   resp.members[0].is_owned #=> Boolean
+    #   resp.members[0].arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListMembers AWS API Documentation
@@ -1074,6 +1162,7 @@ module Aws::ManagedBlockchain
     #   resp.networks[0].framework_version #=> String
     #   resp.networks[0].status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "DELETING", "DELETED"
     #   resp.networks[0].creation_date #=> Time
+    #   resp.networks[0].arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListNetworks AWS API Documentation
@@ -1134,6 +1223,7 @@ module Aws::ManagedBlockchain
     #   resp.nodes[0].creation_date #=> Time
     #   resp.nodes[0].availability_zone #=> String
     #   resp.nodes[0].instance_type #=> String
+    #   resp.nodes[0].arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListNodes AWS API Documentation
@@ -1236,6 +1326,7 @@ module Aws::ManagedBlockchain
     #   resp.proposals[0].status #=> String, one of "IN_PROGRESS", "APPROVED", "REJECTED", "EXPIRED", "ACTION_FAILED"
     #   resp.proposals[0].creation_date #=> Time
     #   resp.proposals[0].expiration_date #=> Time
+    #   resp.proposals[0].arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListProposals AWS API Documentation
@@ -1244,6 +1335,52 @@ module Aws::ManagedBlockchain
     # @param [Hash] params ({})
     def list_proposals(params = {}, options = {})
       req = build_request(:list_proposals, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of tags for the specified resource. Each tag consists
+    # of a key and optional value.
+    #
+    # For more information about tags, see [Tagging Resources][1] in the
+    # *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
+    # Resources][2] in the *Amazon Managed Blockchain Hyperledger Fabric
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
+    # [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. For more information
+    #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ArnString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -1270,6 +1407,104 @@ module Aws::ManagedBlockchain
     # @param [Hash] params ({})
     def reject_invitation(params = {}, options = {})
       req = build_request(:reject_invitation, params)
+      req.send_request(options)
+    end
+
+    # Adds or overwrites the specified tags for the specified Amazon Managed
+    # Blockchain resource. Each tag consists of a key and optional value.
+    #
+    # When you specify a tag key that already exists, the tag value is
+    # overwritten with the new value. Use `UntagResource` to remove tag
+    # keys.
+    #
+    # A resource can have up to 50 tags. If you try to create more than 50
+    # tags for a resource, your request fails and returns an error.
+    #
+    # For more information about tags, see [Tagging Resources][1] in the
+    # *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
+    # Resources][2] in the *Amazon Managed Blockchain Hyperledger Fabric
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
+    # [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. For more information
+    #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags to assign to the specified resource. Tag values can be empty,
+    #   for example, `"MyTagKey" : ""`. You can specify multiple key-value
+    #   pairs in a single request, with an overall maximum of 50 added to each
+    #   resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ArnString", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified tags from the Amazon Managed Blockchain
+    # resource.
+    #
+    # For more information about tags, see [Tagging Resources][1] in the
+    # *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
+    # Resources][2] in the *Amazon Managed Blockchain Hyperledger Fabric
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html
+    # [2]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. For more information
+    #   about ARNs and their format, see [Amazon Resource Names (ARNs)][1] in
+    #   the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ArnString", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -1416,7 +1651,7 @@ module Aws::ManagedBlockchain
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedblockchain'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

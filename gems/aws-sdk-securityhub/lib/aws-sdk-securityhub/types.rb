@@ -85,6 +85,313 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about one of the following actions that were detected
+    # for the finding:
+    #
+    # * A remote IP address issued an AWS API call
+    #
+    # * A DNS request was received
+    #
+    # * A remote IP address attempted to connect to an EC2 instance
+    #
+    # * A remote IP address attempted a port probe on an EC2 instance
+    #
+    # @note When making an API call, you may pass Action
+    #   data as a hash:
+    #
+    #       {
+    #         action_type: "NonEmptyString",
+    #         network_connection_action: {
+    #           connection_direction: "NonEmptyString",
+    #           remote_ip_details: {
+    #             ip_address_v4: "NonEmptyString",
+    #             organization: {
+    #               asn: 1,
+    #               asn_org: "NonEmptyString",
+    #               isp: "NonEmptyString",
+    #               org: "NonEmptyString",
+    #             },
+    #             country: {
+    #               country_code: "NonEmptyString",
+    #               country_name: "NonEmptyString",
+    #             },
+    #             city: {
+    #               city_name: "NonEmptyString",
+    #             },
+    #             geo_location: {
+    #               lon: 1.0,
+    #               lat: 1.0,
+    #             },
+    #           },
+    #           remote_port_details: {
+    #             port: 1,
+    #             port_name: "NonEmptyString",
+    #           },
+    #           local_port_details: {
+    #             port: 1,
+    #             port_name: "NonEmptyString",
+    #           },
+    #           protocol: "NonEmptyString",
+    #           blocked: false,
+    #         },
+    #         aws_api_call_action: {
+    #           api: "NonEmptyString",
+    #           service_name: "NonEmptyString",
+    #           caller_type: "NonEmptyString",
+    #           remote_ip_details: {
+    #             ip_address_v4: "NonEmptyString",
+    #             organization: {
+    #               asn: 1,
+    #               asn_org: "NonEmptyString",
+    #               isp: "NonEmptyString",
+    #               org: "NonEmptyString",
+    #             },
+    #             country: {
+    #               country_code: "NonEmptyString",
+    #               country_name: "NonEmptyString",
+    #             },
+    #             city: {
+    #               city_name: "NonEmptyString",
+    #             },
+    #             geo_location: {
+    #               lon: 1.0,
+    #               lat: 1.0,
+    #             },
+    #           },
+    #           domain_details: {
+    #             domain: "NonEmptyString",
+    #           },
+    #           affected_resources: {
+    #             "NonEmptyString" => "NonEmptyString",
+    #           },
+    #           first_seen: "NonEmptyString",
+    #           last_seen: "NonEmptyString",
+    #         },
+    #         dns_request_action: {
+    #           domain: "NonEmptyString",
+    #           protocol: "NonEmptyString",
+    #           blocked: false,
+    #         },
+    #         port_probe_action: {
+    #           port_probe_details: [
+    #             {
+    #               local_port_details: {
+    #                 port: 1,
+    #                 port_name: "NonEmptyString",
+    #               },
+    #               local_ip_details: {
+    #                 ip_address_v4: "NonEmptyString",
+    #               },
+    #               remote_ip_details: {
+    #                 ip_address_v4: "NonEmptyString",
+    #                 organization: {
+    #                   asn: 1,
+    #                   asn_org: "NonEmptyString",
+    #                   isp: "NonEmptyString",
+    #                   org: "NonEmptyString",
+    #                 },
+    #                 country: {
+    #                   country_code: "NonEmptyString",
+    #                   country_name: "NonEmptyString",
+    #                 },
+    #                 city: {
+    #                   city_name: "NonEmptyString",
+    #                 },
+    #                 geo_location: {
+    #                   lon: 1.0,
+    #                   lat: 1.0,
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           blocked: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action_type
+    #   The type of action that was detected. The possible action types are:
+    #
+    #   * `NETWORK_CONNECTION`
+    #
+    #   * `AWS_API_CALL`
+    #
+    #   * `DNS_REQUEST`
+    #
+    #   * `PORT_PROBE`
+    #   @return [String]
+    #
+    # @!attribute [rw] network_connection_action
+    #   Included if `ActionType` is `NETWORK_CONNECTION`. Provides details
+    #   about the network connection that was detected.
+    #   @return [Types::NetworkConnectionAction]
+    #
+    # @!attribute [rw] aws_api_call_action
+    #   Included if `ActionType` is `AWS_API_CALL`. Provides details about
+    #   the API call that was detected.
+    #   @return [Types::AwsApiCallAction]
+    #
+    # @!attribute [rw] dns_request_action
+    #   Included if `ActionType` is `DNS_REQUEST`. Provides details about
+    #   the DNS request that was detected.
+    #   @return [Types::DnsRequestAction]
+    #
+    # @!attribute [rw] port_probe_action
+    #   Included if `ActionType` is `PORT_PROBE`. Provides details about the
+    #   port probe that was detected.
+    #   @return [Types::PortProbeAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Action AWS API Documentation
+    #
+    class Action < Struct.new(
+      :action_type,
+      :network_connection_action,
+      :aws_api_call_action,
+      :dns_request_action,
+      :port_probe_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the IP address where the scanned port is
+    # located.
+    #
+    # @note When making an API call, you may pass ActionLocalIpDetails
+    #   data as a hash:
+    #
+    #       {
+    #         ip_address_v4: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] ip_address_v4
+    #   The IP address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ActionLocalIpDetails AWS API Documentation
+    #
+    class ActionLocalIpDetails < Struct.new(
+      :ip_address_v4)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For `NetworkConnectionAction` and `PortProbeDetails`,
+    # `LocalPortDetails` provides information about the local port that was
+    # involved in the action.
+    #
+    # @note When making an API call, you may pass ActionLocalPortDetails
+    #   data as a hash:
+    #
+    #       {
+    #         port: 1,
+    #         port_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] port
+    #   The number of the port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] port_name
+    #   The port name of the local connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ActionLocalPortDetails AWS API Documentation
+    #
+    class ActionLocalPortDetails < Struct.new(
+      :port,
+      :port_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # For `AwsApiAction`, `NetworkConnectionAction`, and `PortProbeAction`,
+    # `RemoteIpDetails` provides information about the remote IP address
+    # that was involved in the action.
+    #
+    # @note When making an API call, you may pass ActionRemoteIpDetails
+    #   data as a hash:
+    #
+    #       {
+    #         ip_address_v4: "NonEmptyString",
+    #         organization: {
+    #           asn: 1,
+    #           asn_org: "NonEmptyString",
+    #           isp: "NonEmptyString",
+    #           org: "NonEmptyString",
+    #         },
+    #         country: {
+    #           country_code: "NonEmptyString",
+    #           country_name: "NonEmptyString",
+    #         },
+    #         city: {
+    #           city_name: "NonEmptyString",
+    #         },
+    #         geo_location: {
+    #           lon: 1.0,
+    #           lat: 1.0,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ip_address_v4
+    #   The IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization
+    #   The internet service provider (ISP) organization associated with the
+    #   remote IP address.
+    #   @return [Types::IpOrganizationDetails]
+    #
+    # @!attribute [rw] country
+    #   The country where the remote IP address is located.
+    #   @return [Types::Country]
+    #
+    # @!attribute [rw] city
+    #   The city where the remote IP address is located.
+    #   @return [Types::City]
+    #
+    # @!attribute [rw] geo_location
+    #   The coordinates of the location of the remote IP address.
+    #   @return [Types::GeoLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ActionRemoteIpDetails AWS API Documentation
+    #
+    class ActionRemoteIpDetails < Struct.new(
+      :ip_address_v4,
+      :organization,
+      :country,
+      :city,
+      :geo_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the remote port that was involved in an
+    # attempted network connection.
+    #
+    # @note When making an API call, you may pass ActionRemotePortDetails
+    #   data as a hash:
+    #
+    #       {
+    #         port: 1,
+    #         port_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] port
+    #   The number of the port.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] port_name
+    #   The port name of the remote connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ActionRemotePortDetails AWS API Documentation
+    #
+    class ActionRemotePortDetails < Struct.new(
+      :port,
+      :port_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An `ActionTarget` object.
     #
     # @!attribute [rw] action_target_arn
@@ -156,6 +463,120 @@ module Aws::SecurityHub
     class AvailabilityZone < Struct.new(
       :zone_name,
       :subnet_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provided if `ActionType` is `AWS_API_CALL`. It provides details about
+    # the API call that was detected.
+    #
+    # @note When making an API call, you may pass AwsApiCallAction
+    #   data as a hash:
+    #
+    #       {
+    #         api: "NonEmptyString",
+    #         service_name: "NonEmptyString",
+    #         caller_type: "NonEmptyString",
+    #         remote_ip_details: {
+    #           ip_address_v4: "NonEmptyString",
+    #           organization: {
+    #             asn: 1,
+    #             asn_org: "NonEmptyString",
+    #             isp: "NonEmptyString",
+    #             org: "NonEmptyString",
+    #           },
+    #           country: {
+    #             country_code: "NonEmptyString",
+    #             country_name: "NonEmptyString",
+    #           },
+    #           city: {
+    #             city_name: "NonEmptyString",
+    #           },
+    #           geo_location: {
+    #             lon: 1.0,
+    #             lat: 1.0,
+    #           },
+    #         },
+    #         domain_details: {
+    #           domain: "NonEmptyString",
+    #         },
+    #         affected_resources: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         first_seen: "NonEmptyString",
+    #         last_seen: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] api
+    #   The name of the API method that was issued.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the AWS service that the API method belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] caller_type
+    #   Indicates whether the API call originated from a remote IP address
+    #   (`remoteip`) or from a DNS domain (`domain`).
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_ip_details
+    #   Provided if `CallerType` is `remoteIp`. Provides information about
+    #   the remote IP address that the API call originated from.
+    #   @return [Types::ActionRemoteIpDetails]
+    #
+    # @!attribute [rw] domain_details
+    #   Provided if `CallerType` is `domain`. Provides information about the
+    #   DNS domain that the API call originated from.
+    #   @return [Types::AwsApiCallActionDomainDetails]
+    #
+    # @!attribute [rw] affected_resources
+    #   Identifies the resources that were affected by the API call.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] first_seen
+    #   An ISO8601-formatted timestamp that indicates when the API call was
+    #   first observed.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_seen
+    #   An ISO8601-formatted timestamp that indicates when the API call was
+    #   most recently observed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiCallAction AWS API Documentation
+    #
+    class AwsApiCallAction < Struct.new(
+      :api,
+      :service_name,
+      :caller_type,
+      :remote_ip_details,
+      :domain_details,
+      :affected_resources,
+      :first_seen,
+      :last_seen)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provided if `CallerType` is `domain`. It provides information about
+    # the DNS domain that issued the API call.
+    #
+    # @note When making an API call, you may pass AwsApiCallActionDomainDetails
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   The name of the DNS domain that issued the API call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiCallActionDomainDetails AWS API Documentation
+    #
+    class AwsApiCallActionDomainDetails < Struct.new(
+      :domain)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3488,6 +3909,19 @@ module Aws::SecurityHub
     #           },
     #         ],
     #         source_dest_check: false,
+    #         ip_v6_addresses: [
+    #           {
+    #             ip_v6_address: "NonEmptyString",
+    #           },
+    #         ],
+    #         private_ip_addresses: [
+    #           {
+    #             private_ip_address: "NonEmptyString",
+    #             private_dns_name: "NonEmptyString",
+    #           },
+    #         ],
+    #         public_dns_name: "NonEmptyString",
+    #         public_ip: "NonEmptyString",
     #       }
     #
     # @!attribute [rw] attachment
@@ -3506,13 +3940,84 @@ module Aws::SecurityHub
     #   Indicates whether traffic to or from the instance is validated.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ip_v6_addresses
+    #   The IPv6 addresses associated with the network interface.
+    #   @return [Array<Types::AwsEc2NetworkInterfaceIpV6AddressDetail>]
+    #
+    # @!attribute [rw] private_ip_addresses
+    #   The private IPv4 addresses associated with the network interface.
+    #   @return [Array<Types::AwsEc2NetworkInterfacePrivateIpAddressDetail>]
+    #
+    # @!attribute [rw] public_dns_name
+    #   The public DNS name of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ip
+    #   The address of the Elastic IP address bound to the network
+    #   interface.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2NetworkInterfaceDetails AWS API Documentation
     #
     class AwsEc2NetworkInterfaceDetails < Struct.new(
       :attachment,
       :network_interface_id,
       :security_groups,
-      :source_dest_check)
+      :source_dest_check,
+      :ip_v6_addresses,
+      :private_ip_addresses,
+      :public_dns_name,
+      :public_ip)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about an IPV6 address that is associated with the
+    # network interface.
+    #
+    # @note When making an API call, you may pass AwsEc2NetworkInterfaceIpV6AddressDetail
+    #   data as a hash:
+    #
+    #       {
+    #         ip_v6_address: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] ip_v6_address
+    #   The IPV6 address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2NetworkInterfaceIpV6AddressDetail AWS API Documentation
+    #
+    class AwsEc2NetworkInterfaceIpV6AddressDetail < Struct.new(
+      :ip_v6_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about a private IPv4 address that is with the
+    # network interface.
+    #
+    # @note When making an API call, you may pass AwsEc2NetworkInterfacePrivateIpAddressDetail
+    #   data as a hash:
+    #
+    #       {
+    #         private_ip_address: "NonEmptyString",
+    #         private_dns_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] private_ip_address
+    #   The IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_dns_name
+    #   The private DNS name for the IP address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2NetworkInterfacePrivateIpAddressDetail AWS API Documentation
+    #
+    class AwsEc2NetworkInterfacePrivateIpAddressDetail < Struct.new(
+      :private_ip_address,
+      :private_dns_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6884,6 +7389,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] engine
+    #   The name of the database engine that you want to use for this DB
+    #   instance.
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
@@ -7667,6 +8174,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # An option group membership.
+    #
     # @note When making an API call, you may pass AwsRdsDbOptionGroupMembership
     #   data as a hash:
     #
@@ -7676,9 +8185,11 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] option_group_name
+    #   The name of the option group.
     #   @return [String]
     #
     # @!attribute [rw] status
+    #   The status of the option group membership.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbOptionGroupMembership AWS API Documentation
@@ -7690,6 +8201,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides information about a parameter group for a DB instance.
+    #
     # @note When making an API call, you may pass AwsRdsDbParameterGroup
     #   data as a hash:
     #
@@ -7699,9 +8212,11 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] db_parameter_group_name
+    #   The name of the parameter group.
     #   @return [String]
     #
     # @!attribute [rw] parameter_apply_status
+    #   The status of parameter updates.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbParameterGroup AWS API Documentation
@@ -7713,6 +8228,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Changes to a DB instance that are currently pending.
+    #
     # @note When making an API call, you may pass AwsRdsDbPendingModifiedValues
     #   data as a hash:
     #
@@ -7743,48 +8260,64 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] db_instance_class
+    #   The new DB instance class for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
+    #   The new value of the allocated storage for the DB instance.
     #   @return [Integer]
     #
     # @!attribute [rw] master_user_password
+    #   The new master user password for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] port
+    #   The new port for the DB instance.
     #   @return [Integer]
     #
     # @!attribute [rw] backup_retention_period
+    #   The new backup retention period for the DB instance.
     #   @return [Integer]
     #
     # @!attribute [rw] multi_az
+    #   Indicates that a single Availability Zone DB instance is changing to
+    #   a multiple Availability Zone deployment.
     #   @return [Boolean]
     #
     # @!attribute [rw] engine_version
+    #   The new engine version for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] license_model
+    #   The new license model value for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] iops
+    #   The new provisioned IOPS value for the DB instance.
     #   @return [Integer]
     #
     # @!attribute [rw] db_instance_identifier
+    #   The new DB instance identifier for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] storage_type
+    #   The new storage type for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] ca_certificate_identifier
+    #   The new CA certificate identifier for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_name
+    #   The name of the new subnet group for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] pending_cloud_watch_logs_exports
+    #   A list of log types that are being enabled or disabled.
     #   @return [Types::AwsRdsPendingCloudWatchLogsExports]
     #
     # @!attribute [rw] processor_features
+    #   Processor features that are being updated.
     #   @return [Array<Types::AwsRdsDbProcessorFeature>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbPendingModifiedValues AWS API Documentation
@@ -7809,6 +8342,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # A processor feature.
+    #
     # @note When making an API call, you may pass AwsRdsDbProcessorFeature
     #   data as a hash:
     #
@@ -7818,9 +8353,11 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] name
+    #   The name of the processor feature.
     #   @return [String]
     #
     # @!attribute [rw] value
+    #   The value of the processor feature.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbProcessorFeature AWS API Documentation
@@ -7832,6 +8369,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides details about an Amazon RDS DB cluster snapshot.
+    #
     # @note When making an API call, you may pass AwsRdsDbSnapshotDetails
     #   data as a hash:
     #
@@ -7871,84 +8410,120 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] db_snapshot_identifier
+    #   The name or ARN of the DB snapshot that is used to restore the DB
+    #   instance.
     #   @return [String]
     #
     # @!attribute [rw] db_instance_identifier
+    #   A name for the DB instance.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_create_time
+    #   When the snapshot was taken in Coordinated Universal Time (UTC).
     #   @return [String]
     #
     # @!attribute [rw] engine
+    #   The name of the database engine to use for this DB instance.
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
+    #   The amount of storage (in gigabytes) to be initially allocated for
+    #   the database instance.
     #   @return [Integer]
     #
     # @!attribute [rw] status
+    #   The status of this DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] port
+    #   The port that the database engine was listening on at the time of
+    #   the snapshot.
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone
+    #   Specifies the name of the Availability Zone in which the DB instance
+    #   was located at the time of the DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
+    #   The VPC ID associated with the DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] instance_create_time
+    #   Specifies the time in Coordinated Universal Time (UTC) when the DB
+    #   instance, from which the snapshot was taken, was created.
     #   @return [String]
     #
     # @!attribute [rw] master_username
+    #   The master user name for the DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
+    #   The version of the database engine.
     #   @return [String]
     #
     # @!attribute [rw] license_model
+    #   License model information for the restored DB instance.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_type
+    #   The type of the DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] iops
+    #   The provisioned IOPS (I/O operations per second) value of the DB
+    #   instance at the time of the snapshot.
     #   @return [Integer]
     #
     # @!attribute [rw] option_group_name
+    #   The option group name for the DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] percent_progress
+    #   The percentage of the estimated data that has been transferred.
     #   @return [Integer]
     #
     # @!attribute [rw] source_region
+    #   The AWS Region that the DB snapshot was created in or copied from.
     #   @return [String]
     #
     # @!attribute [rw] source_db_snapshot_identifier
+    #   The DB snapshot ARN that the DB snapshot was copied from.
     #   @return [String]
     #
     # @!attribute [rw] storage_type
+    #   The storage type associated with the DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] tde_credential_arn
+    #   The ARN from the key store with which to associate the instance for
+    #   TDE encryption.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
+    #   Whether the DB snapshot is encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
+    #   If `Encrypted` is `true`, the AWS KMS key identifier for the
+    #   encrypted DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] timezone
+    #   The time zone of the DB snapshot.
     #   @return [String]
     #
     # @!attribute [rw] iam_database_authentication_enabled
+    #   Whether mapping of IAM accounts to database accounts is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
     #   @return [Array<Types::AwsRdsDbProcessorFeature>]
     #
     # @!attribute [rw] dbi_resource_id
+    #   The identifier for the source DB instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbSnapshotDetails AWS API Documentation
@@ -9741,6 +10316,19 @@ module Aws::SecurityHub
     #                   },
     #                 ],
     #                 source_dest_check: false,
+    #                 ip_v6_addresses: [
+    #                   {
+    #                     ip_v6_address: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 private_ip_addresses: [
+    #                   {
+    #                     private_ip_address: "NonEmptyString",
+    #                     private_dns_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 public_dns_name: "NonEmptyString",
+    #                 public_ip: "NonEmptyString",
     #               },
     #               aws_ec2_security_group: {
     #                 group_name: "NonEmptyString",
@@ -10240,6 +10828,30 @@ module Aws::SecurityHub
     #                 sns_topic_arn: "NonEmptyString",
     #                 sns_topic_name: "NonEmptyString",
     #                 trail_arn: "NonEmptyString",
+    #               },
+    #               aws_ssm_patch_compliance: {
+    #                 patch: {
+    #                   compliance_summary: {
+    #                     status: "NonEmptyString",
+    #                     compliant_critical_count: 1,
+    #                     compliant_high_count: 1,
+    #                     compliant_medium_count: 1,
+    #                     execution_type: "NonEmptyString",
+    #                     non_compliant_critical_count: 1,
+    #                     compliant_informational_count: 1,
+    #                     non_compliant_informational_count: 1,
+    #                     compliant_unspecified_count: 1,
+    #                     non_compliant_low_count: 1,
+    #                     non_compliant_high_count: 1,
+    #                     compliant_low_count: 1,
+    #                     compliance_type: "NonEmptyString",
+    #                     patch_baseline_id: "NonEmptyString",
+    #                     overall_severity: "NonEmptyString",
+    #                     non_compliant_medium_count: 1,
+    #                     non_compliant_unspecified_count: 1,
+    #                     patch_group: "NonEmptyString",
+    #                   },
+    #                 },
     #               },
     #               aws_certificate_manager_certificate: {
     #                 certificate_authority_arn: "NonEmptyString",
@@ -11017,6 +11629,114 @@ module Aws::SecurityHub
     #           reboot_option: "NonEmptyString",
     #           operation: "NonEmptyString",
     #         },
+    #         action: {
+    #           action_type: "NonEmptyString",
+    #           network_connection_action: {
+    #             connection_direction: "NonEmptyString",
+    #             remote_ip_details: {
+    #               ip_address_v4: "NonEmptyString",
+    #               organization: {
+    #                 asn: 1,
+    #                 asn_org: "NonEmptyString",
+    #                 isp: "NonEmptyString",
+    #                 org: "NonEmptyString",
+    #               },
+    #               country: {
+    #                 country_code: "NonEmptyString",
+    #                 country_name: "NonEmptyString",
+    #               },
+    #               city: {
+    #                 city_name: "NonEmptyString",
+    #               },
+    #               geo_location: {
+    #                 lon: 1.0,
+    #                 lat: 1.0,
+    #               },
+    #             },
+    #             remote_port_details: {
+    #               port: 1,
+    #               port_name: "NonEmptyString",
+    #             },
+    #             local_port_details: {
+    #               port: 1,
+    #               port_name: "NonEmptyString",
+    #             },
+    #             protocol: "NonEmptyString",
+    #             blocked: false,
+    #           },
+    #           aws_api_call_action: {
+    #             api: "NonEmptyString",
+    #             service_name: "NonEmptyString",
+    #             caller_type: "NonEmptyString",
+    #             remote_ip_details: {
+    #               ip_address_v4: "NonEmptyString",
+    #               organization: {
+    #                 asn: 1,
+    #                 asn_org: "NonEmptyString",
+    #                 isp: "NonEmptyString",
+    #                 org: "NonEmptyString",
+    #               },
+    #               country: {
+    #                 country_code: "NonEmptyString",
+    #                 country_name: "NonEmptyString",
+    #               },
+    #               city: {
+    #                 city_name: "NonEmptyString",
+    #               },
+    #               geo_location: {
+    #                 lon: 1.0,
+    #                 lat: 1.0,
+    #               },
+    #             },
+    #             domain_details: {
+    #               domain: "NonEmptyString",
+    #             },
+    #             affected_resources: {
+    #               "NonEmptyString" => "NonEmptyString",
+    #             },
+    #             first_seen: "NonEmptyString",
+    #             last_seen: "NonEmptyString",
+    #           },
+    #           dns_request_action: {
+    #             domain: "NonEmptyString",
+    #             protocol: "NonEmptyString",
+    #             blocked: false,
+    #           },
+    #           port_probe_action: {
+    #             port_probe_details: [
+    #               {
+    #                 local_port_details: {
+    #                   port: 1,
+    #                   port_name: "NonEmptyString",
+    #                 },
+    #                 local_ip_details: {
+    #                   ip_address_v4: "NonEmptyString",
+    #                 },
+    #                 remote_ip_details: {
+    #                   ip_address_v4: "NonEmptyString",
+    #                   organization: {
+    #                     asn: 1,
+    #                     asn_org: "NonEmptyString",
+    #                     isp: "NonEmptyString",
+    #                     org: "NonEmptyString",
+    #                   },
+    #                   country: {
+    #                     country_code: "NonEmptyString",
+    #                     country_name: "NonEmptyString",
+    #                   },
+    #                   city: {
+    #                     city_name: "NonEmptyString",
+    #                   },
+    #                   geo_location: {
+    #                     lon: 1.0,
+    #                     lat: 1.0,
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #             blocked: false,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] schema_version
@@ -11232,6 +11952,10 @@ module Aws::SecurityHub
     #   against a selected compliance standard.
     #   @return [Types::PatchSummary]
     #
+    # @!attribute [rw] action
+    #   Provides details about an action that was detected for the finding.
+    #   @return [Types::Action]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFinding AWS API Documentation
     #
     class AwsSecurityFinding < Struct.new(
@@ -11268,7 +11992,8 @@ module Aws::SecurityHub
       :related_findings,
       :note,
       :vulnerabilities,
-      :patch_summary)
+      :patch_summary,
+      :action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12196,6 +12921,14 @@ module Aws::SecurityHub
     #
     #   * `NEW` - The initial state of a finding, before it is reviewed.
     #
+    #     Security Hub also resets the workflow status from `NOTIFIED` or
+    #     `RESOLVED` to `NEW` in the following cases:
+    #
+    #     * The record state changes from `ARCHIVED` to `ACTIVE`.
+    #
+    #     * The compliance status changes from `PASSED` to either `WARNING`,
+    #       `FAILED`, or `NOT_AVAILABLE`.
+    #
     #   * `NOTIFIED` - Indicates that the resource owner has been notified
     #     about the security issue. Used when the initial reviewer is not
     #     the resource owner, and needs intervention from the resource
@@ -12471,6 +13204,236 @@ module Aws::SecurityHub
       :kms_master_key_id,
       :queue_name,
       :dead_letter_target_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the details about the compliance status for a patch.
+    #
+    # @note When making an API call, you may pass AwsSsmComplianceSummary
+    #   data as a hash:
+    #
+    #       {
+    #         status: "NonEmptyString",
+    #         compliant_critical_count: 1,
+    #         compliant_high_count: 1,
+    #         compliant_medium_count: 1,
+    #         execution_type: "NonEmptyString",
+    #         non_compliant_critical_count: 1,
+    #         compliant_informational_count: 1,
+    #         non_compliant_informational_count: 1,
+    #         compliant_unspecified_count: 1,
+    #         non_compliant_low_count: 1,
+    #         non_compliant_high_count: 1,
+    #         compliant_low_count: 1,
+    #         compliance_type: "NonEmptyString",
+    #         patch_baseline_id: "NonEmptyString",
+    #         overall_severity: "NonEmptyString",
+    #         non_compliant_medium_count: 1,
+    #         non_compliant_unspecified_count: 1,
+    #         patch_group: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The current patch compliance status.
+    #
+    #   The possible status values are:
+    #
+    #   * `COMPLIANT`
+    #
+    #   * `NON_COMPLIANT`
+    #
+    #   * `UNSPECIFIED_DATA`
+    #   @return [String]
+    #
+    # @!attribute [rw] compliant_critical_count
+    #   For the patches that are compliant, the number that have a severity
+    #   of `CRITICAL`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compliant_high_count
+    #   For the patches that are compliant, the number that have a severity
+    #   of `HIGH`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compliant_medium_count
+    #   For the patches that are compliant, the number that have a severity
+    #   of `MEDIUM`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] execution_type
+    #   The type of execution that was used determine compliance.
+    #   @return [String]
+    #
+    # @!attribute [rw] non_compliant_critical_count
+    #   For the patch items that are noncompliant, the number of items that
+    #   have a severity of `CRITICAL`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compliant_informational_count
+    #   For the patches that are compliant, the number that have a severity
+    #   of `INFORMATIONAL`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] non_compliant_informational_count
+    #   For the patches that are noncompliant, the number that have a
+    #   severity of `INFORMATIONAL`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compliant_unspecified_count
+    #   For the patches that are compliant, the number that have a severity
+    #   of `UNSPECIFIED`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] non_compliant_low_count
+    #   For the patches that are noncompliant, the number that have a
+    #   severity of `LOW`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] non_compliant_high_count
+    #   For the patches that are noncompliant, the number that have a
+    #   severity of `HIGH`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compliant_low_count
+    #   For the patches that are compliant, the number that have a severity
+    #   of `LOW`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compliance_type
+    #   The type of resource for which the compliance was determined. For
+    #   `AwsSsmPatchCompliance`, `ComplianceType` is `Patch`.
+    #   @return [String]
+    #
+    # @!attribute [rw] patch_baseline_id
+    #   The identifier of the patch baseline. The patch baseline lists the
+    #   patches that are approved for installation.
+    #   @return [String]
+    #
+    # @!attribute [rw] overall_severity
+    #   The highest severity for the patches.
+    #   @return [String]
+    #
+    # @!attribute [rw] non_compliant_medium_count
+    #   For the patches that are noncompliant, the number that have a
+    #   severity of `MEDIUM`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] non_compliant_unspecified_count
+    #   For the patches that are noncompliant, the number that have a
+    #   severity of `UNSPECIFIED`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] patch_group
+    #   The identifier of the patch group for which compliance was
+    #   determined. A patch group uses tags to group EC2 instances that
+    #   should have the same patch compliance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSsmComplianceSummary AWS API Documentation
+    #
+    class AwsSsmComplianceSummary < Struct.new(
+      :status,
+      :compliant_critical_count,
+      :compliant_high_count,
+      :compliant_medium_count,
+      :execution_type,
+      :non_compliant_critical_count,
+      :compliant_informational_count,
+      :non_compliant_informational_count,
+      :compliant_unspecified_count,
+      :non_compliant_low_count,
+      :non_compliant_high_count,
+      :compliant_low_count,
+      :compliance_type,
+      :patch_baseline_id,
+      :overall_severity,
+      :non_compliant_medium_count,
+      :non_compliant_unspecified_count,
+      :patch_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about the compliance for a patch.
+    #
+    # @note When making an API call, you may pass AwsSsmPatch
+    #   data as a hash:
+    #
+    #       {
+    #         compliance_summary: {
+    #           status: "NonEmptyString",
+    #           compliant_critical_count: 1,
+    #           compliant_high_count: 1,
+    #           compliant_medium_count: 1,
+    #           execution_type: "NonEmptyString",
+    #           non_compliant_critical_count: 1,
+    #           compliant_informational_count: 1,
+    #           non_compliant_informational_count: 1,
+    #           compliant_unspecified_count: 1,
+    #           non_compliant_low_count: 1,
+    #           non_compliant_high_count: 1,
+    #           compliant_low_count: 1,
+    #           compliance_type: "NonEmptyString",
+    #           patch_baseline_id: "NonEmptyString",
+    #           overall_severity: "NonEmptyString",
+    #           non_compliant_medium_count: 1,
+    #           non_compliant_unspecified_count: 1,
+    #           patch_group: "NonEmptyString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] compliance_summary
+    #   The compliance status details for the patch.
+    #   @return [Types::AwsSsmComplianceSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSsmPatch AWS API Documentation
+    #
+    class AwsSsmPatch < Struct.new(
+      :compliance_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the state of a patch on an instance based
+    # on the patch baseline that was used to patch the instance.
+    #
+    # @note When making an API call, you may pass AwsSsmPatchComplianceDetails
+    #   data as a hash:
+    #
+    #       {
+    #         patch: {
+    #           compliance_summary: {
+    #             status: "NonEmptyString",
+    #             compliant_critical_count: 1,
+    #             compliant_high_count: 1,
+    #             compliant_medium_count: 1,
+    #             execution_type: "NonEmptyString",
+    #             non_compliant_critical_count: 1,
+    #             compliant_informational_count: 1,
+    #             non_compliant_informational_count: 1,
+    #             compliant_unspecified_count: 1,
+    #             non_compliant_low_count: 1,
+    #             non_compliant_high_count: 1,
+    #             compliant_low_count: 1,
+    #             compliance_type: "NonEmptyString",
+    #             patch_baseline_id: "NonEmptyString",
+    #             overall_severity: "NonEmptyString",
+    #             non_compliant_medium_count: 1,
+    #             non_compliant_unspecified_count: 1,
+    #             patch_group: "NonEmptyString",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] patch
+    #   Information about the status of a patch.
+    #   @return [Types::AwsSsmPatch]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSsmPatchComplianceDetails AWS API Documentation
+    #
+    class AwsSsmPatchComplianceDetails < Struct.new(
+      :patch)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12937,6 +13900,19 @@ module Aws::SecurityHub
     #                       },
     #                     ],
     #                     source_dest_check: false,
+    #                     ip_v6_addresses: [
+    #                       {
+    #                         ip_v6_address: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     private_ip_addresses: [
+    #                       {
+    #                         private_ip_address: "NonEmptyString",
+    #                         private_dns_name: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     public_dns_name: "NonEmptyString",
+    #                     public_ip: "NonEmptyString",
     #                   },
     #                   aws_ec2_security_group: {
     #                     group_name: "NonEmptyString",
@@ -13436,6 +14412,30 @@ module Aws::SecurityHub
     #                     sns_topic_arn: "NonEmptyString",
     #                     sns_topic_name: "NonEmptyString",
     #                     trail_arn: "NonEmptyString",
+    #                   },
+    #                   aws_ssm_patch_compliance: {
+    #                     patch: {
+    #                       compliance_summary: {
+    #                         status: "NonEmptyString",
+    #                         compliant_critical_count: 1,
+    #                         compliant_high_count: 1,
+    #                         compliant_medium_count: 1,
+    #                         execution_type: "NonEmptyString",
+    #                         non_compliant_critical_count: 1,
+    #                         compliant_informational_count: 1,
+    #                         non_compliant_informational_count: 1,
+    #                         compliant_unspecified_count: 1,
+    #                         non_compliant_low_count: 1,
+    #                         non_compliant_high_count: 1,
+    #                         compliant_low_count: 1,
+    #                         compliance_type: "NonEmptyString",
+    #                         patch_baseline_id: "NonEmptyString",
+    #                         overall_severity: "NonEmptyString",
+    #                         non_compliant_medium_count: 1,
+    #                         non_compliant_unspecified_count: 1,
+    #                         patch_group: "NonEmptyString",
+    #                       },
+    #                     },
     #                   },
     #                   aws_certificate_manager_certificate: {
     #                     certificate_authority_arn: "NonEmptyString",
@@ -14213,6 +15213,114 @@ module Aws::SecurityHub
     #               reboot_option: "NonEmptyString",
     #               operation: "NonEmptyString",
     #             },
+    #             action: {
+    #               action_type: "NonEmptyString",
+    #               network_connection_action: {
+    #                 connection_direction: "NonEmptyString",
+    #                 remote_ip_details: {
+    #                   ip_address_v4: "NonEmptyString",
+    #                   organization: {
+    #                     asn: 1,
+    #                     asn_org: "NonEmptyString",
+    #                     isp: "NonEmptyString",
+    #                     org: "NonEmptyString",
+    #                   },
+    #                   country: {
+    #                     country_code: "NonEmptyString",
+    #                     country_name: "NonEmptyString",
+    #                   },
+    #                   city: {
+    #                     city_name: "NonEmptyString",
+    #                   },
+    #                   geo_location: {
+    #                     lon: 1.0,
+    #                     lat: 1.0,
+    #                   },
+    #                 },
+    #                 remote_port_details: {
+    #                   port: 1,
+    #                   port_name: "NonEmptyString",
+    #                 },
+    #                 local_port_details: {
+    #                   port: 1,
+    #                   port_name: "NonEmptyString",
+    #                 },
+    #                 protocol: "NonEmptyString",
+    #                 blocked: false,
+    #               },
+    #               aws_api_call_action: {
+    #                 api: "NonEmptyString",
+    #                 service_name: "NonEmptyString",
+    #                 caller_type: "NonEmptyString",
+    #                 remote_ip_details: {
+    #                   ip_address_v4: "NonEmptyString",
+    #                   organization: {
+    #                     asn: 1,
+    #                     asn_org: "NonEmptyString",
+    #                     isp: "NonEmptyString",
+    #                     org: "NonEmptyString",
+    #                   },
+    #                   country: {
+    #                     country_code: "NonEmptyString",
+    #                     country_name: "NonEmptyString",
+    #                   },
+    #                   city: {
+    #                     city_name: "NonEmptyString",
+    #                   },
+    #                   geo_location: {
+    #                     lon: 1.0,
+    #                     lat: 1.0,
+    #                   },
+    #                 },
+    #                 domain_details: {
+    #                   domain: "NonEmptyString",
+    #                 },
+    #                 affected_resources: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 first_seen: "NonEmptyString",
+    #                 last_seen: "NonEmptyString",
+    #               },
+    #               dns_request_action: {
+    #                 domain: "NonEmptyString",
+    #                 protocol: "NonEmptyString",
+    #                 blocked: false,
+    #               },
+    #               port_probe_action: {
+    #                 port_probe_details: [
+    #                   {
+    #                     local_port_details: {
+    #                       port: 1,
+    #                       port_name: "NonEmptyString",
+    #                     },
+    #                     local_ip_details: {
+    #                       ip_address_v4: "NonEmptyString",
+    #                     },
+    #                     remote_ip_details: {
+    #                       ip_address_v4: "NonEmptyString",
+    #                       organization: {
+    #                         asn: 1,
+    #                         asn_org: "NonEmptyString",
+    #                         isp: "NonEmptyString",
+    #                         org: "NonEmptyString",
+    #                       },
+    #                       country: {
+    #                         country_code: "NonEmptyString",
+    #                         country_name: "NonEmptyString",
+    #                       },
+    #                       city: {
+    #                         city_name: "NonEmptyString",
+    #                       },
+    #                       geo_location: {
+    #                         lon: 1.0,
+    #                         lat: 1.0,
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
+    #                 blocked: false,
+    #               },
+    #             },
     #           },
     #         ],
     #       }
@@ -14469,6 +15577,27 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Information about a city.
+    #
+    # @note When making an API call, you may pass City
+    #   data as a hash:
+    #
+    #       {
+    #         city_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] city_name
+    #   The name of the city.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/City AWS API Documentation
+    #
+    class City < Struct.new(
+      :city_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains finding details that are specific to control-based findings.
     # Only returned for findings generated from controls.
     #
@@ -14576,6 +15705,33 @@ module Aws::SecurityHub
       :image_id,
       :image_name,
       :launched_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a country.
+    #
+    # @note When making an API call, you may pass Country
+    #   data as a hash:
+    #
+    #       {
+    #         country_code: "NonEmptyString",
+    #         country_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] country_code
+    #   The 2-letter ISO 3166 country code for the country.
+    #   @return [String]
+    #
+    # @!attribute [rw] country_name
+    #   The name of the country.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Country AWS API Documentation
+    #
+    class Country < Struct.new(
+      :country_code,
+      :country_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15895,6 +17051,40 @@ module Aws::SecurityHub
     #
     class DisassociateMembersResponse < Aws::EmptyStructure; end
 
+    # Provided if `ActionType` is `DNS_REQUEST`. It provides details about
+    # the DNS request that was detected.
+    #
+    # @note When making an API call, you may pass DnsRequestAction
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "NonEmptyString",
+    #         protocol: "NonEmptyString",
+    #         blocked: false,
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   The DNS domain that is associated with the DNS request.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol that was used for the DNS request.
+    #   @return [String]
+    #
+    # @!attribute [rw] blocked
+    #   Indicates whether the DNS request was blocked.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DnsRequestAction AWS API Documentation
+    #
+    class DnsRequestAction < Struct.new(
+      :domain,
+      :protocol,
+      :blocked)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass EnableImportFindingsForProductRequest
     #   data as a hash:
     #
@@ -15985,6 +17175,33 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHubResponse AWS API Documentation
     #
     class EnableSecurityHubResponse < Aws::EmptyStructure; end
+
+    # Provides the latitude and longitude coordinates of a location.
+    #
+    # @note When making an API call, you may pass GeoLocation
+    #   data as a hash:
+    #
+    #       {
+    #         lon: 1.0,
+    #         lat: 1.0,
+    #       }
+    #
+    # @!attribute [rw] lon
+    #   The longitude of the location.
+    #   @return [Float]
+    #
+    # @!attribute [rw] lat
+    #   The latitude of the location.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GeoLocation AWS API Documentation
+    #
+    class GeoLocation < Struct.new(
+      :lon,
+      :lat)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass GetEnabledStandardsRequest
     #   data as a hash:
@@ -17080,6 +18297,45 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides information about an internet provider.
+    #
+    # @note When making an API call, you may pass IpOrganizationDetails
+    #   data as a hash:
+    #
+    #       {
+    #         asn: 1,
+    #         asn_org: "NonEmptyString",
+    #         isp: "NonEmptyString",
+    #         org: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] asn
+    #   The Autonomous System Number (ASN) of the internet provider
+    #   @return [Integer]
+    #
+    # @!attribute [rw] asn_org
+    #   The name of the organization that registered the ASN.
+    #   @return [String]
+    #
+    # @!attribute [rw] isp
+    #   The ISP information for the internet provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] org
+    #   The name of the internet provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/IpOrganizationDetails AWS API Documentation
+    #
+    class IpOrganizationDetails < Struct.new(
+      :asn,
+      :asn_org,
+      :isp,
+      :org)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An IPV6 CIDR block association.
     #
     # @note When making an API call, you may pass Ipv6CidrBlockAssociation
@@ -17681,6 +18937,84 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provided if `ActionType` is `NETWORK_CONNECTION`. It provides details
+    # about the attempted network connection that was detected.
+    #
+    # @note When making an API call, you may pass NetworkConnectionAction
+    #   data as a hash:
+    #
+    #       {
+    #         connection_direction: "NonEmptyString",
+    #         remote_ip_details: {
+    #           ip_address_v4: "NonEmptyString",
+    #           organization: {
+    #             asn: 1,
+    #             asn_org: "NonEmptyString",
+    #             isp: "NonEmptyString",
+    #             org: "NonEmptyString",
+    #           },
+    #           country: {
+    #             country_code: "NonEmptyString",
+    #             country_name: "NonEmptyString",
+    #           },
+    #           city: {
+    #             city_name: "NonEmptyString",
+    #           },
+    #           geo_location: {
+    #             lon: 1.0,
+    #             lat: 1.0,
+    #           },
+    #         },
+    #         remote_port_details: {
+    #           port: 1,
+    #           port_name: "NonEmptyString",
+    #         },
+    #         local_port_details: {
+    #           port: 1,
+    #           port_name: "NonEmptyString",
+    #         },
+    #         protocol: "NonEmptyString",
+    #         blocked: false,
+    #       }
+    #
+    # @!attribute [rw] connection_direction
+    #   The direction of the network connection request (`IN` or `OUT`).
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_ip_details
+    #   Information about the remote IP address that issued the network
+    #   connection request.
+    #   @return [Types::ActionRemoteIpDetails]
+    #
+    # @!attribute [rw] remote_port_details
+    #   Information about the port on the remote IP address.
+    #   @return [Types::ActionRemotePortDetails]
+    #
+    # @!attribute [rw] local_port_details
+    #   Information about the port on the EC2 instance.
+    #   @return [Types::ActionLocalPortDetails]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used to make the network connection request.
+    #   @return [String]
+    #
+    # @!attribute [rw] blocked
+    #   Indicates whether the network connection attempt was blocked.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/NetworkConnectionAction AWS API Documentation
+    #
+    class NetworkConnectionAction < Struct.new(
+      :connection_direction,
+      :remote_ip_details,
+      :remote_port_details,
+      :local_port_details,
+      :protocol,
+      :blocked)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about a network path component that occurs before or after the
     # current component.
     #
@@ -18056,6 +19390,126 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provided if `ActionType` is `PORT_PROBE`. It provides details about
+    # the attempted port probe that was detected.
+    #
+    # @note When making an API call, you may pass PortProbeAction
+    #   data as a hash:
+    #
+    #       {
+    #         port_probe_details: [
+    #           {
+    #             local_port_details: {
+    #               port: 1,
+    #               port_name: "NonEmptyString",
+    #             },
+    #             local_ip_details: {
+    #               ip_address_v4: "NonEmptyString",
+    #             },
+    #             remote_ip_details: {
+    #               ip_address_v4: "NonEmptyString",
+    #               organization: {
+    #                 asn: 1,
+    #                 asn_org: "NonEmptyString",
+    #                 isp: "NonEmptyString",
+    #                 org: "NonEmptyString",
+    #               },
+    #               country: {
+    #                 country_code: "NonEmptyString",
+    #                 country_name: "NonEmptyString",
+    #               },
+    #               city: {
+    #                 city_name: "NonEmptyString",
+    #               },
+    #               geo_location: {
+    #                 lon: 1.0,
+    #                 lat: 1.0,
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         blocked: false,
+    #       }
+    #
+    # @!attribute [rw] port_probe_details
+    #   Information about the ports affected by the port probe.
+    #   @return [Array<Types::PortProbeDetail>]
+    #
+    # @!attribute [rw] blocked
+    #   Indicates whether the port probe was blocked.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/PortProbeAction AWS API Documentation
+    #
+    class PortProbeAction < Struct.new(
+      :port_probe_details,
+      :blocked)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A port scan that was part of the port probe. For each scan,
+    # PortProbeDetails provides information about the local IP address and
+    # port that were scanned, and the remote IP address that the scan
+    # originated from.
+    #
+    # @note When making an API call, you may pass PortProbeDetail
+    #   data as a hash:
+    #
+    #       {
+    #         local_port_details: {
+    #           port: 1,
+    #           port_name: "NonEmptyString",
+    #         },
+    #         local_ip_details: {
+    #           ip_address_v4: "NonEmptyString",
+    #         },
+    #         remote_ip_details: {
+    #           ip_address_v4: "NonEmptyString",
+    #           organization: {
+    #             asn: 1,
+    #             asn_org: "NonEmptyString",
+    #             isp: "NonEmptyString",
+    #             org: "NonEmptyString",
+    #           },
+    #           country: {
+    #             country_code: "NonEmptyString",
+    #             country_name: "NonEmptyString",
+    #           },
+    #           city: {
+    #             city_name: "NonEmptyString",
+    #           },
+    #           geo_location: {
+    #             lon: 1.0,
+    #             lat: 1.0,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] local_port_details
+    #   Provides information about the port that was scanned.
+    #   @return [Types::ActionLocalPortDetails]
+    #
+    # @!attribute [rw] local_ip_details
+    #   Provides information about the IP address where the scanned port is
+    #   located.
+    #   @return [Types::ActionLocalIpDetails]
+    #
+    # @!attribute [rw] remote_ip_details
+    #   Provides information about the remote IP address that performed the
+    #   scan.
+    #   @return [Types::ActionRemoteIpDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/PortProbeDetail AWS API Documentation
+    #
+    class PortProbeDetail < Struct.new(
+      :local_port_details,
+      :local_ip_details,
+      :remote_ip_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A range of ports.
     #
     # @note When making an API call, you may pass PortRange
@@ -18418,6 +19872,19 @@ module Aws::SecurityHub
     #               },
     #             ],
     #             source_dest_check: false,
+    #             ip_v6_addresses: [
+    #               {
+    #                 ip_v6_address: "NonEmptyString",
+    #               },
+    #             ],
+    #             private_ip_addresses: [
+    #               {
+    #                 private_ip_address: "NonEmptyString",
+    #                 private_dns_name: "NonEmptyString",
+    #               },
+    #             ],
+    #             public_dns_name: "NonEmptyString",
+    #             public_ip: "NonEmptyString",
     #           },
     #           aws_ec2_security_group: {
     #             group_name: "NonEmptyString",
@@ -18917,6 +20384,30 @@ module Aws::SecurityHub
     #             sns_topic_arn: "NonEmptyString",
     #             sns_topic_name: "NonEmptyString",
     #             trail_arn: "NonEmptyString",
+    #           },
+    #           aws_ssm_patch_compliance: {
+    #             patch: {
+    #               compliance_summary: {
+    #                 status: "NonEmptyString",
+    #                 compliant_critical_count: 1,
+    #                 compliant_high_count: 1,
+    #                 compliant_medium_count: 1,
+    #                 execution_type: "NonEmptyString",
+    #                 non_compliant_critical_count: 1,
+    #                 compliant_informational_count: 1,
+    #                 non_compliant_informational_count: 1,
+    #                 compliant_unspecified_count: 1,
+    #                 non_compliant_low_count: 1,
+    #                 non_compliant_high_count: 1,
+    #                 compliant_low_count: 1,
+    #                 compliance_type: "NonEmptyString",
+    #                 patch_baseline_id: "NonEmptyString",
+    #                 overall_severity: "NonEmptyString",
+    #                 non_compliant_medium_count: 1,
+    #                 non_compliant_unspecified_count: 1,
+    #                 patch_group: "NonEmptyString",
+    #               },
+    #             },
     #           },
     #           aws_certificate_manager_certificate: {
     #             certificate_authority_arn: "NonEmptyString",
@@ -19648,6 +21139,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] resource_role
+    #   Identifies the role of the resource in the finding. A resource is
+    #   either the actor or target of the finding activity,
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -19817,6 +21310,19 @@ module Aws::SecurityHub
     #             },
     #           ],
     #           source_dest_check: false,
+    #           ip_v6_addresses: [
+    #             {
+    #               ip_v6_address: "NonEmptyString",
+    #             },
+    #           ],
+    #           private_ip_addresses: [
+    #             {
+    #               private_ip_address: "NonEmptyString",
+    #               private_dns_name: "NonEmptyString",
+    #             },
+    #           ],
+    #           public_dns_name: "NonEmptyString",
+    #           public_ip: "NonEmptyString",
     #         },
     #         aws_ec2_security_group: {
     #           group_name: "NonEmptyString",
@@ -20316,6 +21822,30 @@ module Aws::SecurityHub
     #           sns_topic_arn: "NonEmptyString",
     #           sns_topic_name: "NonEmptyString",
     #           trail_arn: "NonEmptyString",
+    #         },
+    #         aws_ssm_patch_compliance: {
+    #           patch: {
+    #             compliance_summary: {
+    #               status: "NonEmptyString",
+    #               compliant_critical_count: 1,
+    #               compliant_high_count: 1,
+    #               compliant_medium_count: 1,
+    #               execution_type: "NonEmptyString",
+    #               non_compliant_critical_count: 1,
+    #               compliant_informational_count: 1,
+    #               non_compliant_informational_count: 1,
+    #               compliant_unspecified_count: 1,
+    #               non_compliant_low_count: 1,
+    #               non_compliant_high_count: 1,
+    #               compliant_low_count: 1,
+    #               compliance_type: "NonEmptyString",
+    #               patch_baseline_id: "NonEmptyString",
+    #               overall_severity: "NonEmptyString",
+    #               non_compliant_medium_count: 1,
+    #               non_compliant_unspecified_count: 1,
+    #               patch_group: "NonEmptyString",
+    #             },
+    #           },
     #         },
     #         aws_certificate_manager_certificate: {
     #           certificate_authority_arn: "NonEmptyString",
@@ -21091,9 +22621,11 @@ module Aws::SecurityHub
     #   @return [Types::AwsIamPolicyDetails]
     #
     # @!attribute [rw] aws_api_gateway_v2_stage
+    #   Provides information about a version 2 stage for Amazon API Gateway.
     #   @return [Types::AwsApiGatewayV2StageDetails]
     #
     # @!attribute [rw] aws_api_gateway_v2_api
+    #   Provides information about a version 2 API in Amazon API Gateway.
     #   @return [Types::AwsApiGatewayV2ApiDetails]
     #
     # @!attribute [rw] aws_dynamo_db_table
@@ -21101,24 +22633,37 @@ module Aws::SecurityHub
     #   @return [Types::AwsDynamoDbTableDetails]
     #
     # @!attribute [rw] aws_api_gateway_stage
+    #   Provides information about a version 1 Amazon API Gateway stage.
     #   @return [Types::AwsApiGatewayStageDetails]
     #
     # @!attribute [rw] aws_api_gateway_rest_api
+    #   Provides information about a REST API in version 1 of Amazon API
+    #   Gateway.
     #   @return [Types::AwsApiGatewayRestApiDetails]
     #
     # @!attribute [rw] aws_cloud_trail_trail
+    #   Provides details about a CloudTrail trail.
     #   @return [Types::AwsCloudTrailTrailDetails]
     #
+    # @!attribute [rw] aws_ssm_patch_compliance
+    #   Provides information about the state of a patch on an instance based
+    #   on the patch baseline that was used to patch the instance.
+    #   @return [Types::AwsSsmPatchComplianceDetails]
+    #
     # @!attribute [rw] aws_certificate_manager_certificate
+    #   Provides details about an AWS Certificate Manager (ACM) certificate.
     #   @return [Types::AwsCertificateManagerCertificateDetails]
     #
     # @!attribute [rw] aws_redshift_cluster
+    #   Contains details about an Amazon Redshift cluster.
     #   @return [Types::AwsRedshiftClusterDetails]
     #
     # @!attribute [rw] aws_elb_load_balancer
+    #   contains details about a Classic Load Balancer.
     #   @return [Types::AwsElbLoadBalancerDetails]
     #
     # @!attribute [rw] aws_iam_group
+    #   Contains details about an IAM group.
     #   @return [Types::AwsIamGroupDetails]
     #
     # @!attribute [rw] aws_iam_role
@@ -21209,6 +22754,7 @@ module Aws::SecurityHub
       :aws_api_gateway_stage,
       :aws_api_gateway_rest_api,
       :aws_cloud_trail_trail,
+      :aws_ssm_patch_compliance,
       :aws_certificate_manager_certificate,
       :aws_redshift_cluster,
       :aws_elb_load_balancer,
@@ -21613,7 +23159,20 @@ module Aws::SecurityHub
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] standards_status
-    #   The status of the standards subscription.
+    #   The status of the standard subscription.
+    #
+    #   The status values are as follows:
+    #
+    #   * `PENDING` - Standard is in the process of being enabled.
+    #
+    #   * `READY` - Standard is enabled.
+    #
+    #   * `INCOMPLETE` - Standard could not be enabled completely. Some
+    #     controls may not be available.
+    #
+    #   * `DELETING` - Standard is in the process of being disabled.
+    #
+    #   * `FAILED` - Standard could not be disabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsSubscription AWS API Documentation
@@ -23457,6 +25016,14 @@ module Aws::SecurityHub
     #
     #   * `NEW` - The initial state of a finding, before it is reviewed.
     #
+    #     Security Hub also resets the workflow status from `NOTIFIED` or
+    #     `RESOLVED` to `NEW` in the following cases:
+    #
+    #     * `RecordState` changes from `ARCHIVED` to `ACTIVE`.
+    #
+    #     * `ComplianceStatus` changes from `PASSED` to either `WARNING`,
+    #       `FAILED`, or `NOT_AVAILABLE`.
+    #
     #   * `NOTIFIED` - Indicates that you notified the resource owner about
     #     the security issue. Used when the initial reviewer is not the
     #     resource owner, and needs intervention from the resource owner.
@@ -23490,6 +25057,14 @@ module Aws::SecurityHub
     #   are the following.
     #
     #   * `NEW` - The initial state of a finding, before it is reviewed.
+    #
+    #     Security Hub also resets `WorkFlowStatus` from `NOTIFIED` or
+    #     `RESOLVED` to `NEW` in the following cases:
+    #
+    #     * The record state changes from `ARCHIVED` to `ACTIVE`.
+    #
+    #     * The compliance status changes from `PASSED` to either `WARNING`,
+    #       `FAILED`, or `NOT_AVAILABLE`.
     #
     #   * `NOTIFIED` - Indicates that you notified the resource owner about
     #     the security issue. Used when the initial reviewer is not the

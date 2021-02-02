@@ -23,10 +23,16 @@ module Aws::Backup
     #       }
     #
     # @!attribute [rw] resource_type
-    #   The type of AWS resource to be backed up. For VSS Windows backups,
-    #   the only supported resource type is Amazon EC2.
+    #   Specifies an object containing resource type and backup options. The
+    #   only supported resource type is Amazon EC2 instances with Windows
+    #   VSS. For an CloudFormation example, see the [sample CloudFormation
+    #   template to enable Windows VSS][1] in the *AWS Backup User Guide*.
     #
     #   Valid values: `EC2`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/integrate-cloudformation-with-aws-backup.html
     #   @return [String]
     #
     # @!attribute [rw] backup_options
@@ -160,8 +166,11 @@ module Aws::Backup
     #   @return [Integer]
     #
     # @!attribute [rw] iam_role_arn
-    #   Specifies the IAM role ARN used to create the target recovery point;
-    #   for example, `arn:aws:iam::123456789012:role/S3Access`.
+    #   Specifies the IAM role ARN used to create the target recovery point.
+    #   IAM roles other than the default role must include either
+    #   `AWSBackup` or `AwsBackup` in the role name. For example,
+    #   `arn:aws:iam::123456789012:role/AWSBackupRDSAccess`. Role names
+    #   without those strings lack permissions to perform backup jobs.
     #   @return [String]
     #
     # @!attribute [rw] created_by
@@ -475,6 +484,9 @@ module Aws::Backup
     #   must be 90 days greater than the “transition to cold after days”
     #   setting. The “transition to cold after days” setting cannot be
     #   changed after a backup has been transitioned to cold.
+    #
+    #   Only Amazon EFS file system backups can be transitioned to cold
+    #   storage.
     #   @return [Types::Lifecycle]
     #
     # @!attribute [rw] recovery_point_tags
@@ -574,6 +586,9 @@ module Aws::Backup
     #   must be 90 days greater than the “transition to cold after days”
     #   setting. The “transition to cold after days” setting cannot be
     #   changed after a backup has been transitioned to cold.
+    #
+    #   Only Amazon EFS file system backups can be transitioned to cold
+    #   storage.
     #   @return [Types::Lifecycle]
     #
     # @!attribute [rw] recovery_point_tags
@@ -637,7 +652,8 @@ module Aws::Backup
     # @!attribute [rw] list_of_tags
     #   An array of conditions used to specify a set of resources to assign
     #   to a backup plan; for example, `"StringEquals":
-    #   \{"ec2:ResourceTag/Department": "accounting"`.
+    #   \{"ec2:ResourceTag/Department": "accounting"`. Assigns the backup
+    #   plan to every resource with at least one matching tag.
     #   @return [Array<Types::Condition>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupSelection AWS API Documentation
@@ -762,6 +778,9 @@ module Aws::Backup
     # setting. The “transition to cold after days” setting cannot be changed
     # after a backup has been transitioned to cold.
     #
+    # Only Amazon EFS file system backups can be transitioned to cold
+    # storage.
+    #
     # @!attribute [rw] move_to_cold_storage_at
     #   A timestamp that specifies when to transition a recovery point to
     #   cold storage.
@@ -844,6 +863,9 @@ module Aws::Backup
     #   cold after days” setting. The “transition to cold after days”
     #   setting cannot be changed after a backup has been transitioned to
     #   cold.
+    #
+    #   Only Amazon EFS file system backups can be transitioned to cold
+    #   storage.
     #   @return [Types::Lifecycle]
     #
     # @!attribute [rw] destination_backup_vault_arn
@@ -1167,7 +1189,7 @@ module Aws::Backup
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used
     #   to create them and the AWS Region where they are created. They
-    #   consist of lowercase letters, numbers, and hyphens.
+    #   consist of letters, numbers, and hyphens.
     #   @return [String]
     #
     # @!attribute [rw] backup_vault_tags
@@ -1704,7 +1726,7 @@ module Aws::Backup
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] last_update_time
-    #   The date and time that the global settings was last updated. This
+    #   The date and time that the global settings were last updated. This
     #   update is in Unix format and Coordinated Universal Time (UTC). The
     #   value of `LastUpdateTime` is accurate to milliseconds. For example,
     #   the value 1516925490.087 represents Friday, January 26, 2018
@@ -1888,6 +1910,9 @@ module Aws::Backup
     #   setting must be 90 days greater than the “transition to cold after
     #   days” setting. The “transition to cold after days” setting cannot be
     #   changed after a backup has been transitioned to cold.
+    #
+    #   Only Amazon EFS file system backups can be transitioned to cold
+    #   storage.
     #   @return [Types::Lifecycle]
     #
     # @!attribute [rw] encryption_key_arn
@@ -2500,6 +2525,8 @@ module Aws::Backup
     #
     #   * `RDS` for Amazon Relational Database Service
     #
+    #   * `Aurora` for Amazon Aurora
+    #
     #   * `Storage Gateway` for AWS Storage Gateway
     #   @return [Array<String>]
     #
@@ -2571,6 +2598,9 @@ module Aws::Backup
     # days” setting must be 90 days greater than the “transition to cold
     # after days” setting. The “transition to cold after days” setting
     # cannot be changed after a backup has been transitioned to cold.
+    #
+    # Only Amazon EFS file system backups can be transitioned to cold
+    # storage.
     #
     # @note When making an API call, you may pass Lifecycle
     #   data as a hash:
@@ -2690,12 +2720,17 @@ module Aws::Backup
     #
     #   * `RDS` for Amazon Relational Database Service
     #
+    #   * `Aurora` for Amazon Aurora
+    #
     #   * `Storage Gateway` for AWS Storage Gateway
     #   @return [String]
     #
     # @!attribute [rw] by_account_id
     #   The account ID to list the jobs from. Returns only backup jobs
     #   associated with the specified account ID.
+    #
+    #   If used from an AWS Organizations management account, passing `*`
+    #   returns all jobs across the organization.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupJobsInput AWS API Documentation
@@ -3056,6 +3091,8 @@ module Aws::Backup
     #   * `EFS` for Amazon Elastic File System
     #
     #   * `RDS` for Amazon Relational Database Service
+    #
+    #   * `Aurora` for Amazon Aurora
     #
     #   * `Storage Gateway` for AWS Storage Gateway
     #   @return [String]
@@ -3648,6 +3685,9 @@ module Aws::Backup
     #   must be 90 days greater than the “transition to cold after days”
     #   setting. The “transition to cold after days” setting cannot be
     #   changed after a backup has been transitioned to cold.
+    #
+    #   Only Amazon EFS file system backups can be transitioned to cold
+    #   storage.
     #   @return [Types::Lifecycle]
     #
     # @!attribute [rw] encryption_key_arn
@@ -3962,13 +4002,16 @@ module Aws::Backup
     #
     # @!attribute [rw] start_window_minutes
     #   A value in minutes after a backup is scheduled before a job will be
-    #   canceled if it doesn't start successfully. This value is optional.
+    #   canceled if it doesn't start successfully. This value is optional,
+    #   and the default is 8 hours.
     #   @return [Integer]
     #
     # @!attribute [rw] complete_window_minutes
-    #   A value in minutes after a backup job is successfully started before
-    #   it must be completed or it will be canceled by AWS Backup. This
-    #   value is optional.
+    #   A value in minutes during which a successfully started backup must
+    #   complete, or else AWS Backup will cancel the job. This value is
+    #   optional. This value begins counting down from when the backup was
+    #   scheduled. It does not add additional time for `StartWindowMinutes`,
+    #   or if the backup started later than scheduled.
     #   @return [Integer]
     #
     # @!attribute [rw] lifecycle
@@ -3982,6 +4025,9 @@ module Aws::Backup
     #   must be 90 days greater than the “transition to cold after days”
     #   setting. The “transition to cold after days” setting cannot be
     #   changed after a backup has been transitioned to cold.
+    #
+    #   Only Amazon EFS file system backups can be transitioned to cold
+    #   storage.
     #   @return [Types::Lifecycle]
     #
     # @!attribute [rw] recovery_point_tags
@@ -4025,7 +4071,7 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The date and time that a backup job is started, in Unix format and
+    #   The date and time that a backup job is created, in Unix format and
     #   Coordinated Universal Time (UTC). The value of `CreationDate` is
     #   accurate to milliseconds. For example, the value 1516925490.087
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
@@ -4096,6 +4142,9 @@ module Aws::Backup
     #   cold after days” setting. The “transition to cold after days”
     #   setting cannot be changed after a backup has been transitioned to
     #   cold.
+    #
+    #   Only Amazon EFS file system backups can be transitioned to cold
+    #   storage.
     #   @return [Types::Lifecycle]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartCopyJobInput AWS API Documentation
@@ -4116,7 +4165,7 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The date and time that a copy job is started, in Unix format and
+    #   The date and time that a copy job is created, in Unix format and
     #   Coordinated Universal Time (UTC). The value of `CreationDate` is
     #   accurate to milliseconds. For example, the value 1516925490.087
     #   represents Friday, January 26, 2018 12:11:30.087 AM.
@@ -4185,10 +4234,11 @@ module Aws::Backup
     #   * `newFileSystem`\: A Boolean value that, if true, specifies that
     #     the recovery point is restored to a new Amazon EFS file system.
     #
-    #   * `ItemsToRestore `\: A serialized list of up to five strings where
-    #     each string is a file path. Use `ItemsToRestore` to restore
-    #     specific files or directories rather than the entire file system.
-    #     This parameter is optional.
+    #   * `ItemsToRestore `\: An array of one to five strings where each
+    #     string is a file path. Use `ItemsToRestore` to restore specific
+    #     files or directories rather than the entire file system. This
+    #     parameter is optional. For example,
+    #     `"itemsToRestore":"["/my.test"]"`.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] iam_role_arn
@@ -4215,6 +4265,8 @@ module Aws::Backup
     #   * `EFS` for Amazon Elastic File System
     #
     #   * `RDS` for Amazon Relational Database Service
+    #
+    #   * `Aurora` for Amazon Aurora
     #
     #   * `Storage Gateway` for AWS Storage Gateway
     #   @return [String]
@@ -4507,6 +4559,9 @@ module Aws::Backup
     #   must be 90 days greater than the “transition to cold after days”
     #   setting. The “transition to cold after days” setting cannot be
     #   changed after a backup has been transitioned to cold.
+    #
+    #   Only Amazon EFS file system backups can be transitioned to cold
+    #   storage.
     #   @return [Types::Lifecycle]
     #
     # @!attribute [rw] calculated_lifecycle

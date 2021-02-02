@@ -426,7 +426,7 @@ module Aws::GreengrassV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/greengrass/v2/tag-resources.html
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
     #
     # @return [Types::CreateComponentVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -545,7 +545,7 @@ module Aws::GreengrassV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/greengrass/v2/latest/developerguide/create-deployments.html
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html
     #
     # @option params [required, String] :target_arn
     #   The [ARN][1] of the target AWS IoT thing or thing group.
@@ -583,7 +583,7 @@ module Aws::GreengrassV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/greengrass/v2/tag-resources.html
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
     #
     # @return [Types::CreateDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -827,12 +827,13 @@ module Aws::GreengrassV2
       req.send_request(options)
     end
 
-    # Gets the pre-signed URL to a component artifact in an S3 bucket. Core
-    # devices can call this operation to identify the URL that they can use
-    # to download an artifact to install.
+    # Gets the pre-signed URL to download a public component artifact. Core
+    # devices call this operation to identify the URL that they can use to
+    # download an artifact to install.
     #
     # @option params [required, String] :arn
-    #   The [ARN][1] of the component version.
+    #   The [ARN][1] of the component version. Specify the ARN of a public
+    #   component version.
     #
     #
     #
@@ -840,6 +841,16 @@ module Aws::GreengrassV2
     #
     # @option params [required, String] :artifact_name
     #   The name of the artifact.
+    #
+    #   You can use the [GetComponent][1] operation to download the component
+    #   recipe, which includes the URI of the artifact. The artifact name is
+    #   the section of the URI after the scheme. For example, in the artifact
+    #   URI `greengrass:SomeArtifact.zip`, the artifact name is
+    #   `SomeArtifact.zip`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponent.html
     #
     # @return [Types::GetComponentVersionArtifactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1359,7 +1370,7 @@ module Aws::GreengrassV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/general/latest/gr/greengrass.html
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/greengrass.html
     #
     # @option params [required, Types::ComponentPlatform] :platform
     #   The platform to use to resolve compatible components.
@@ -1425,7 +1436,7 @@ module Aws::GreengrassV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/greengrass/v2/tag-resources.html
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1490,7 +1501,7 @@ module Aws::GreengrassV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrassv2'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

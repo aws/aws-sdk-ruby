@@ -154,6 +154,8 @@ module Aws
   autoload :LambdaPreview, 'aws-sdk-lambdapreview'
   autoload :Lex, 'aws-sdk-lex'
   autoload :LexModelBuildingService, 'aws-sdk-lexmodelbuildingservice'
+  autoload :LexModelsV2, 'aws-sdk-lexmodelsv2'
+  autoload :LexRuntimeV2, 'aws-sdk-lexruntimev2'
   autoload :LicenseManager, 'aws-sdk-licensemanager'
   autoload :Lightsail, 'aws-sdk-lightsail'
   autoload :LocationService, 'aws-sdk-locationservice'

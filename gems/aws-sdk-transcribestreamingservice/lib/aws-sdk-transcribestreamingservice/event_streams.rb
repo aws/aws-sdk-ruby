@@ -17,7 +17,7 @@ module Aws::TranscribeStreamingService
 
       # @option params [String, StringIO, File] :audio_chunk
       #   An audio blob that contains the next part of the audio that you want
-      #   to transcribe.
+      #   to transcribe. The maximum audio chunk size is 32 KB.
       #
       def signal_audio_event_event(params = {})
         @event_emitter.emit(:audio_event, params)
@@ -41,7 +41,7 @@ module Aws::TranscribeStreamingService
 
       # @option params [String, StringIO, File] :audio_chunk
       #   An audio blob that contains the next part of the audio that you want
-      #   to transcribe.
+      #   to transcribe. The maximum audio chunk size is 32 KB.
       #
       def signal_audio_event_event(params = {})
         @event_emitter.emit(:audio_event, params)

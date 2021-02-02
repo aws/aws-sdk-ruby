@@ -392,8 +392,6 @@ module Aws::Redshift
     SourceIdsList = Shapes::ListShape.new(name: 'SourceIdsList')
     SourceNotFoundFault = Shapes::StructureShape.new(name: 'SourceNotFoundFault')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
-    SpartaProxyVpcEndpoint = Shapes::StructureShape.new(name: 'SpartaProxyVpcEndpoint')
-    SpartaProxyVpcEndpointList = Shapes::ListShape.new(name: 'SpartaProxyVpcEndpointList')
     String = Shapes::StringShape.new(name: 'String')
     Subnet = Shapes::StructureShape.new(name: 'Subnet')
     SubnetAlreadyInUse = Shapes::StructureShape.new(name: 'SubnetAlreadyInUse')
@@ -440,6 +438,8 @@ module Aws::Redshift
     UsageLimitPeriod = Shapes::StringShape.new(name: 'UsageLimitPeriod')
     UsageLimits = Shapes::ListShape.new(name: 'UsageLimits')
     ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
+    VpcEndpoint = Shapes::StructureShape.new(name: 'VpcEndpoint')
+    VpcEndpointsList = Shapes::ListShape.new(name: 'VpcEndpointsList')
     VpcSecurityGroupIdList = Shapes::ListShape.new(name: 'VpcSecurityGroupIdList')
     VpcSecurityGroupMembership = Shapes::StructureShape.new(name: 'VpcSecurityGroupMembership')
     VpcSecurityGroupMembershipList = Shapes::ListShape.new(name: 'VpcSecurityGroupMembershipList')
@@ -1209,7 +1209,7 @@ module Aws::Redshift
 
     Endpoint.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "Address"))
     Endpoint.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "Port"))
-    Endpoint.add_member(:vpc_endpoints, Shapes::ShapeRef.new(shape: SpartaProxyVpcEndpointList, location_name: "VpcEndpoints"))
+    Endpoint.add_member(:vpc_endpoints, Shapes::ShapeRef.new(shape: VpcEndpointsList, location_name: "VpcEndpoints"))
     Endpoint.struct_class = Types::Endpoint
 
     Event.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SourceIdentifier"))
@@ -1955,11 +1955,6 @@ module Aws::Redshift
 
     SourceNotFoundFault.struct_class = Types::SourceNotFoundFault
 
-    SpartaProxyVpcEndpoint.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcEndpointId"))
-    SpartaProxyVpcEndpoint.struct_class = Types::SpartaProxyVpcEndpoint
-
-    SpartaProxyVpcEndpointList.member = Shapes::ShapeRef.new(shape: SpartaProxyVpcEndpoint, location_name: "SpartaProxyVpcEndpoint")
-
     Subnet.add_member(:subnet_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier"))
     Subnet.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "SubnetAvailabilityZone"))
     Subnet.add_member(:subnet_status, Shapes::ShapeRef.new(shape: String, location_name: "SubnetStatus"))
@@ -2080,6 +2075,11 @@ module Aws::Redshift
     UsageLimits.member = Shapes::ShapeRef.new(shape: UsageLimit)
 
     ValueStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
+    VpcEndpoint.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcEndpointId"))
+    VpcEndpoint.struct_class = Types::VpcEndpoint
+
+    VpcEndpointsList.member = Shapes::ShapeRef.new(shape: VpcEndpoint, location_name: "VpcEndpoint")
 
     VpcSecurityGroupIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "VpcSecurityGroupId")
 

@@ -32,11 +32,13 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the recipe to be modified.
+    #   The name of the recipe whose versions are to be deleted.
     #   @return [String]
     #
     # @!attribute [rw] recipe_versions
-    #   An array of version identifiers to be deleted.
+    #   An array of version identifiers, for the recipe versions to be
+    #   deleted. You can specify numeric versions (`X.Y`) or
+    #   `LATEST_WORKING`. `LATEST_PUBLISHED` is not supported.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/BatchDeleteRecipeVersionRequest AWS API Documentation
@@ -53,7 +55,7 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] errors
-    #   Errors, if any, that were encountered when deleting the recipe
+    #   Errors, if any, that occurred while attempting to delete the recipe
     #   versions.
     #   @return [Array<Types::RecipeVersionErrorDetail>]
     #
@@ -92,7 +94,7 @@ module Aws::GlueDataBrew
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/databrew/latest/dg/recipe-structure.html
+    #   [1]: https://docs.aws.amazon.com/databrew/latest/dg/recipes.html#recipes.structure
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -101,8 +103,7 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] target_column
-    #   A column to apply this condition to, within an AWS Glue DataBrew
-    #   dataset.
+    #   A column to apply this condition to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ConditionExpression AWS API Documentation
@@ -141,6 +142,9 @@ module Aws::GlueDataBrew
     #             sheet_names: ["SheetName"],
     #             sheet_indexes: [1],
     #           },
+    #           csv: {
+    #             delimiter: "Delimiter",
+    #           },
     #         },
     #         input: { # required
     #           s3_input_definition: {
@@ -163,17 +167,18 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the dataset to be created.
+    #   The name of the dataset to be created. Valid characters are
+    #   alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
     #   @return [String]
     #
     # @!attribute [rw] format_options
-    #   Options that define how Microsoft Excel input is to be interpreted
-    #   by DataBrew.
+    #   Options that define the structure of either Csv, Excel, or JSON
+    #   input.
     #   @return [Types::FormatOptions]
     #
     # @!attribute [rw] input
-    #   Information on how AWS Glue DataBrew can find data, in either the
-    #   AWS Glue Data Catalog or Amazon S3.
+    #   Information on how DataBrew can find data, in either the AWS Glue
+    #   Data Catalog or Amazon S3.
     #   @return [Types::Input]
     #
     # @!attribute [rw] tags
@@ -244,13 +249,14 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the job to be created.
+    #   The name of the job to be created. Valid characters are alphanumeric
+    #   (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
     #   @return [String]
     #
     # @!attribute [rw] log_subscription
-    #   A value that enables or disables Amazon CloudWatch logging for the
-    #   current AWS account. If logging is enabled, CloudWatch writes one
-    #   log stream for each job run.
+    #   Enables or disables Amazon CloudWatch logging for the job. If
+    #   logging is enabled, CloudWatch writes one log stream for each job
+    #   run.
     #   @return [String]
     #
     # @!attribute [rw] max_capacity
@@ -269,7 +275,7 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed for this request.
+    #   Management (IAM) role to be assumed when DataBrew runs the job.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -329,11 +335,12 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] dataset_name
-    #   The name of the dataset to associate this project with.
+    #   The name of an existing dataset to associate this project with.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   A unique name for the new project.
+    #   A unique name for the new project. Valid characters are alphanumeric
+    #   (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
     #   @return [String]
     #
     # @!attribute [rw] recipe_name
@@ -341,8 +348,8 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] sample
-    #   Represents the sample size and sampling type for AWS Glue DataBrew
-    #   to use for interactive data analysis.
+    #   Represents the sample size and sampling type for DataBrew to use for
+    #   interactive data analysis.
     #   @return [Types::Sample]
     #
     # @!attribute [rw] role_arn
@@ -400,6 +407,11 @@ module Aws::GlueDataBrew
     #               key: "Key",
     #             },
     #             overwrite: false,
+    #             format_options: {
+    #               csv: {
+    #                 delimiter: "Delimiter",
+    #               },
+    #             },
     #           },
     #         ],
     #         project_name: "ProjectName",
@@ -432,13 +444,14 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   A unique name for the job.
+    #   A unique name for the job. Valid characters are alphanumeric (A-Z,
+    #   a-z, 0-9), hyphen (-), period (.), and space.
     #   @return [String]
     #
     # @!attribute [rw] log_subscription
-    #   A value that enables or disables Amazon CloudWatch logging for the
-    #   current AWS account. If logging is enabled, CloudWatch writes one
-    #   log stream for each job run.
+    #   Enables or disables Amazon CloudWatch logging for the job. If
+    #   logging is enabled, CloudWatch writes one log stream for each job
+    #   run.
     #   @return [String]
     #
     # @!attribute [rw] max_capacity
@@ -461,16 +474,16 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] recipe_reference
-    #   Represents all of the attributes of an AWS Glue DataBrew recipe.
+    #   Represents the name and version of a DataBrew recipe.
     #   @return [Types::RecipeReference]
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed for this request.
+    #   Management (IAM) role to be assumed when DataBrew runs the job.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Metadata tags to apply to this job dataset.
+    #   Metadata tags to apply to this job.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] timeout
@@ -543,7 +556,8 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   A unique name for the recipe.
+    #   A unique name for the recipe. Valid characters are alphanumeric
+    #   (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
     #   @return [String]
     #
     # @!attribute [rw] steps
@@ -596,8 +610,13 @@ module Aws::GlueDataBrew
     #   @return [Array<String>]
     #
     # @!attribute [rw] cron_expression
-    #   The date or dates and time or times, in `cron` format, when the jobs
-    #   are to be run.
+    #   The date or dates and time or times when the jobs are to be run. For
+    #   more information, see [Cron expressions][1] in the *AWS Glue
+    #   DataBrew Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -605,7 +624,8 @@ module Aws::GlueDataBrew
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] name
-    #   A unique name for the schedule.
+    #   A unique name for the schedule. Valid characters are alphanumeric
+    #   (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/CreateScheduleRequest AWS API Documentation
@@ -631,8 +651,53 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
+    # Options that define how DataBrew will read a Csv file when creating a
+    # dataset from that file.
+    #
+    # @note When making an API call, you may pass CsvOptions
+    #   data as a hash:
+    #
+    #       {
+    #         delimiter: "Delimiter",
+    #       }
+    #
+    # @!attribute [rw] delimiter
+    #   A single character that specifies the delimiter being used in the
+    #   Csv file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/CsvOptions AWS API Documentation
+    #
+    class CsvOptions < Struct.new(
+      :delimiter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options that define how DataBrew will write a Csv file a.
+    #
+    # @note When making an API call, you may pass CsvOutputOptions
+    #   data as a hash:
+    #
+    #       {
+    #         delimiter: "Delimiter",
+    #       }
+    #
+    # @!attribute [rw] delimiter
+    #   A single character that specifies the delimiter used to create Csv
+    #   job output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/CsvOutputOptions AWS API Documentation
+    #
+    class CsvOutputOptions < Struct.new(
+      :delimiter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents how metadata stored in the AWS Glue Data Catalog is defined
-    # in an AWS Glue DataBrew dataset.
+    # in a DataBrew dataset.
     #
     # @note When making an API call, you may pass DataCatalogInputDefinition
     #   data as a hash:
@@ -677,14 +742,14 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Represents a dataset that can be processed by AWS Glue DataBrew.
+    # Represents a dataset that can be processed by DataBrew.
     #
     # @!attribute [rw] account_id
     #   The ID of the AWS account that owns the dataset.
     #   @return [String]
     #
     # @!attribute [rw] created_by
-    #   The identifier (the user name) of the user who created the dataset.
+    #   The Amazon Resource Name (ARN) of the user who created the dataset.
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -709,7 +774,7 @@ module Aws::GlueDataBrew
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   The identifier (the user name) of the user who last modified the
+    #   The Amazon Resource Name (ARN) of the user who last modified the
     #   dataset.
     #   @return [String]
     #
@@ -846,11 +911,13 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the recipe to be deleted.
+    #   The name of the recipe.
     #   @return [String]
     #
     # @!attribute [rw] recipe_version
-    #   The version of the recipe to be deleted.
+    #   The version of the recipe to be deleted. You can specify a numeric
+    #   versions (`X.Y`) or `LATEST_WORKING`. `LATEST_PUBLISHED` is not
+    #   supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DeleteRecipeVersionRequest AWS API Documentation
@@ -942,13 +1009,13 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] format_options
-    #   Options that define how Microsoft Excel input is to be interpreted
-    #   by DataBrew.
+    #   Options that define the structure of either Csv, Excel, or JSON
+    #   input.
     #   @return [Types::FormatOptions]
     #
     # @!attribute [rw] input
-    #   Information on how AWS Glue DataBrew can find data, in either the
-    #   AWS Glue Data Catalog or Amazon S3.
+    #   Information on how DataBrew can find data, in either the AWS Glue
+    #   Data Catalog or Amazon S3.
     #   @return [Types::Input]
     #
     # @!attribute [rw] last_modified_date
@@ -1058,12 +1125,11 @@ module Aws::GlueDataBrew
     #   @return [Time]
     #
     # @!attribute [rw] log_subscription
-    #   A value that indicates whether Amazon CloudWatch logging is enabled
-    #   for this job.
+    #   Indicates whether Amazon CloudWatch logging is enabled for this job.
     #   @return [String]
     #
     # @!attribute [rw] max_capacity
-    #   The maximum number of nodes that AWS Glue DataBrew can consume when
+    #   The maximum number of compute nodes that DataBrew can consume when
     #   the job processes data.
     #   @return [Integer]
     #
@@ -1081,7 +1147,7 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] recipe_reference
-    #   Represents all of the attributes of an AWS Glue DataBrew recipe.
+    #   Represents the name and version of a DataBrew recipe.
     #   @return [Types::RecipeReference]
     #
     # @!attribute [rw] resource_arn
@@ -1089,8 +1155,8 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the AWS Identity and Access Management (IAM) role that
-    #   was assumed for this request.
+    #   The ARN of the AWS Identity and Access Management (IAM) role to be
+    #   assumed when DataBrew runs the job.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1181,13 +1247,13 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] sample
-    #   Represents the sample size and sampling type for AWS Glue DataBrew
-    #   to use for interactive data analysis.
+    #   Represents the sample size and sampling type for DataBrew to use for
+    #   interactive data analysis.
     #   @return [Types::Sample]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the AWS Identity and Access Management (IAM) role that
-    #   was assumed for this request.
+    #   The ARN of the AWS Identity and Access Management (IAM) role to be
+    #   assumed when DataBrew runs the job.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1381,8 +1447,13 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] cron_expression
-    #   The date or dates and time or times, in `cron` format, when the jobs
-    #   are to be run for the schedule.
+    #   The date or dates and time or times when the jobs are to be run for
+    #   the schedule. For more information, see [Cron expressions][1] in the
+    #   *AWS Glue DataBrew Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1439,8 +1510,7 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Options that define how Microsoft Excel input is to be interpreted by
-    # DataBrew.
+    # Options that define the structure of either Csv, Excel, or JSON input.
     #
     # @note When making an API call, you may pass FormatOptions
     #   data as a hash:
@@ -1453,6 +1523,9 @@ module Aws::GlueDataBrew
     #           sheet_names: ["SheetName"],
     #           sheet_indexes: [1],
     #         },
+    #         csv: {
+    #           delimiter: "Delimiter",
+    #         },
     #       }
     #
     # @!attribute [rw] json
@@ -1464,17 +1537,22 @@ module Aws::GlueDataBrew
     #   DataBrew.
     #   @return [Types::ExcelOptions]
     #
+    # @!attribute [rw] csv
+    #   Options that define how Csv input is to be interpreted by DataBrew.
+    #   @return [Types::CsvOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/FormatOptions AWS API Documentation
     #
     class FormatOptions < Struct.new(
       :json,
-      :excel)
+      :excel,
+      :csv)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Information on how AWS Glue DataBrew can find data, in either the AWS
-    # Glue Data Catalog or Amazon S3.
+    # Information on how DataBrew can find data, in either the AWS Glue Data
+    # Catalog or Amazon S3.
     #
     # @note When making an API call, you may pass Input
     #   data as a hash:
@@ -1525,14 +1603,14 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Represents all of the attributes of an AWS Glue DataBrew job.
+    # Represents all of the attributes of a DataBrew job.
     #
     # @!attribute [rw] account_id
     #   The ID of the AWS account that owns the job.
     #   @return [String]
     #
     # @!attribute [rw] created_by
-    #   The identifier (the user name) of the user who created the job.
+    #   The Amazon Resource Name (ARN) of the user who created the job.
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -1545,7 +1623,12 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] encryption_key_arn
     #   The Amazon Resource Name (ARN) of an encryption key that is used to
-    #   protect a job.
+    #   protect the job output. For more information, see [Encrypting data
+    #   written by DataBrew jobs][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/databrew/latest/dg/encryption-security-configuration.html
     #   @return [String]
     #
     # @!attribute [rw] encryption_mode
@@ -1571,7 +1654,7 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] last_modified_by
-    #   The identifier (the user name) of the user who last modified the
+    #   The Amazon Resource Name (ARN) of the user who last modified the
     #   job.
     #   @return [String]
     #
@@ -1649,7 +1732,7 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Represents one run of an AWS Glue DataBrew job.
+    # Represents one run of a DataBrew job.
     #
     # @!attribute [rw] attempt
     #   The number of times that DataBrew has attempted to run the job.
@@ -1703,7 +1786,7 @@ module Aws::GlueDataBrew
     #   @return [Types::RecipeReference]
     #
     # @!attribute [rw] started_by
-    #   The identifier (the user name) of the user who initiated the job
+    #   The Amazon Resource Name (ARN) of the user who initiated the job
     #   run.
     #   @return [String]
     #
@@ -1768,10 +1851,8 @@ module Aws::GlueDataBrew
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token generated by DataBrew that specifies where to continue
-    #   pagination if a previous request was truncated. To get the next set
-    #   of pages, pass in the NextToken value from the response object of
-    #   the previous page call.
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ListDatasetsRequest AWS API Documentation
@@ -1784,14 +1865,12 @@ module Aws::GlueDataBrew
     end
 
     # @!attribute [rw] datasets
-    #   A list of datasets that are defined in the current AWS account.
+    #   A list of datasets that are defined.
     #   @return [Array<Types::Dataset>]
     #
     # @!attribute [rw] next_token
-    #   A token generated by DataBrew that specifies where to continue
-    #   pagination if a previous request was truncated. To obtain the next
-    #   set of pages, pass in the NextToken from the response object of the
-    #   previous page call.
+    #   A token that you can use in a subsequent call to retrieve the next
+    #   set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ListDatasetsResponse AWS API Documentation
@@ -1821,10 +1900,8 @@ module Aws::GlueDataBrew
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token generated by AWS Glue DataBrew that specifies where to
-    #   continue pagination if a previous request was truncated. To get the
-    #   next set of pages, pass in the NextToken value from the response
-    #   object of the previous page call.
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ListJobRunsRequest AWS API Documentation
@@ -1842,10 +1919,8 @@ module Aws::GlueDataBrew
     #   @return [Array<Types::JobRun>]
     #
     # @!attribute [rw] next_token
-    #   A token generated by DataBrew that specifies where to continue
-    #   pagination if a previous request was truncated. To obtain the next
-    #   set of pages, pass in the NextToken from the response object of the
-    #   previous page call.
+    #   A token that you can use in a subsequent call to retrieve the next
+    #   set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ListJobRunsResponse AWS API Documentation
@@ -1900,14 +1975,12 @@ module Aws::GlueDataBrew
     end
 
     # @!attribute [rw] jobs
-    #   A list of jobs that are defined in the current AWS account.
+    #   A list of jobs that are defined.
     #   @return [Array<Types::Job>]
     #
     # @!attribute [rw] next_token
-    #   A token generated by DataBrew that specifies where to continue
-    #   pagination if a previous request was truncated. To obtain the next
-    #   set of pages, pass in the NextToken from the response object of the
-    #   previous page call.
+    #   A token that you can use in a subsequent call to retrieve the next
+    #   set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ListJobsResponse AWS API Documentation
@@ -1928,7 +2001,8 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] next_token
-    #   A pagination token that can be used in a subsequent request.
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1945,14 +2019,12 @@ module Aws::GlueDataBrew
     end
 
     # @!attribute [rw] projects
-    #   A list of projects that are defined in the current AWS account.
+    #   A list of projects that are defined .
     #   @return [Array<Types::Project>]
     #
     # @!attribute [rw] next_token
-    #   A token generated by DataBrew that specifies where to continue
-    #   pagination if a previous request was truncated. To get the next set
-    #   of pages, pass in the NextToken value from the response object of
-    #   the previous page call.
+    #   A token that you can use in a subsequent call to retrieve the next
+    #   set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ListProjectsResponse AWS API Documentation
@@ -1978,7 +2050,8 @@ module Aws::GlueDataBrew
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A pagination token that can be used in a subsequent request.
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1996,10 +2069,8 @@ module Aws::GlueDataBrew
     end
 
     # @!attribute [rw] next_token
-    #   A token generated by DataBrew that specifies where to continue
-    #   pagination if a previous request was truncated. To get the next set
-    #   of pages, pass in the NextToken value from the response object of
-    #   the previous page call.
+    #   A token that you can use in a subsequent call to retrieve the next
+    #   set of results.
     #   @return [String]
     #
     # @!attribute [rw] recipes
@@ -2029,12 +2100,17 @@ module Aws::GlueDataBrew
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A pagination token that can be used in a subsequent request.
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] recipe_version
-    #   A version identifier. Using this parameter indicates to return only
-    #   those recipes that have this version identifier.
+    #   Return only those recipes with a version identifier of
+    #   `LATEST_WORKING` or `LATEST_PUBLISHED`. If `RecipeVersion` is
+    #   omitted, `ListRecipes` returns all of the `LATEST_PUBLISHED` recipe
+    #   versions.
+    #
+    #   Valid values: `LATEST_WORKING` \| `LATEST_PUBLISHED`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ListRecipesRequest AWS API Documentation
@@ -2048,14 +2124,12 @@ module Aws::GlueDataBrew
     end
 
     # @!attribute [rw] recipes
-    #   A list of recipes that are defined in the current AWS account.
+    #   A list of recipes that are defined.
     #   @return [Array<Types::Recipe>]
     #
     # @!attribute [rw] next_token
-    #   A token generated by DataBrew that specifies where to continue
-    #   pagination if a previous request was truncated. To get the next set
-    #   of pages, pass in the NextToken value from the response object of
-    #   the previous page call.
+    #   A token that you can use in a subsequent call to retrieve the next
+    #   set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ListRecipesResponse AWS API Documentation
@@ -2085,7 +2159,8 @@ module Aws::GlueDataBrew
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A pagination token that can be used in a subsequent request.
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ListSchedulesRequest AWS API Documentation
@@ -2099,14 +2174,12 @@ module Aws::GlueDataBrew
     end
 
     # @!attribute [rw] schedules
-    #   A list of schedules in the current AWS account.
+    #   A list of schedules that are defined.
     #   @return [Array<Types::Schedule>]
     #
     # @!attribute [rw] next_token
-    #   A token generated by DataBrew that specifies where to continue
-    #   pagination if a previous request was truncated. To get the next set
-    #   of pages, pass in the NextToken value from the response object of
-    #   the previous page call.
+    #   A token that you can use in a subsequent call to retrieve the next
+    #   set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ListSchedulesResponse AWS API Documentation
@@ -2150,7 +2223,8 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Represents individual output from a particular job run.
+    # Parameters that specify how and where DataBrew will write the output
+    # generated by recipe jobs or profile jobs.
     #
     # @note When making an API call, you may pass Output
     #   data as a hash:
@@ -2164,6 +2238,11 @@ module Aws::GlueDataBrew
     #           key: "Key",
     #         },
     #         overwrite: false,
+    #         format_options: {
+    #           csv: {
+    #             delimiter: "Delimiter",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] compression_format
@@ -2189,6 +2268,10 @@ module Aws::GlueDataBrew
     #   for output is overwritten with new output.
     #   @return [Boolean]
     #
+    # @!attribute [rw] format_options
+    #   Options that define how DataBrew formats job output files.
+    #   @return [Types::OutputFormatOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/Output AWS API Documentation
     #
     class Output < Struct.new(
@@ -2196,12 +2279,36 @@ module Aws::GlueDataBrew
       :format,
       :partition_columns,
       :location,
-      :overwrite)
+      :overwrite,
+      :format_options)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Represents all of the attributes of an AWS Glue DataBrew project.
+    # Options that define the structure of Csv job output.
+    #
+    # @note When making an API call, you may pass OutputFormatOptions
+    #   data as a hash:
+    #
+    #       {
+    #         csv: {
+    #           delimiter: "Delimiter",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] csv
+    #   Options that define how DataBrew writes Csv output.
+    #   @return [Types::CsvOutputOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/OutputFormatOptions AWS API Documentation
+    #
+    class OutputFormatOptions < Struct.new(
+      :csv)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents all of the attributes of a DataBrew project.
     #
     # @!attribute [rw] account_id
     #   The ID of the AWS account that owns the project.
@@ -2212,7 +2319,7 @@ module Aws::GlueDataBrew
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   The identifier (the user name) of the user who crated the project.
+    #   The Amazon Resource Name (ARN) of the user who crated the project.
     #   @return [String]
     #
     # @!attribute [rw] dataset_name
@@ -2224,7 +2331,7 @@ module Aws::GlueDataBrew
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   The identifier (user name) of the user who last modified the
+    #   The Amazon Resource Name (ARN) of the user who last modified the
     #   project.
     #   @return [String]
     #
@@ -2257,7 +2364,7 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] opened_by
-    #   The identifier (the user name) of the user that opened the project
+    #   The Amazon Resource Name (ARN) of the user that opened the project
     #   for use.
     #   @return [String]
     #
@@ -2324,11 +2431,10 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Represents one or more actions to be performed on an AWS Glue DataBrew
-    # dataset.
+    # Represents one or more actions to be performed on a DataBrew dataset.
     #
     # @!attribute [rw] created_by
-    #   The identifier (the user name) of the user who created the recipe.
+    #   The Amazon Resource Name (ARN) of the user who created the recipe.
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -2336,7 +2442,8 @@ module Aws::GlueDataBrew
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
-    #   The identifier (user name) of the user who last modified the recipe.
+    #   The Amazon Resource Name (ARN) of the user who last modified the
+    #   recipe.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
@@ -2348,7 +2455,7 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] published_by
-    #   The identifier (the user name) of the user who published the recipe.
+    #   The Amazon Resource Name (ARN) of the user who published the recipe.
     #   @return [String]
     #
     # @!attribute [rw] published_date
@@ -2376,7 +2483,18 @@ module Aws::GlueDataBrew
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] recipe_version
-    #   The identifier for the version for the recipe.
+    #   The identifier for the version for the recipe. Must be one of the
+    #   following:
+    #
+    #   * Numeric version (`X.Y`) - `X` and `Y` stand for major and minor
+    #     version numbers. The maximum length of each is 6 digits, and
+    #     neither can be negative values. Both `X` and `Y` are required, and
+    #     "0.0" is not a valid version.
+    #
+    #   * `LATEST_WORKING` - the most recent valid version being developed
+    #     in a DataBrew project.
+    #
+    #   * `LATEST_PUBLISHED` - the most recent published version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/Recipe AWS API Documentation
@@ -2400,8 +2518,8 @@ module Aws::GlueDataBrew
     end
 
     # Represents a transformation and associated parameters that are used to
-    # apply a change to an AWS Glue DataBrew dataset. For more information,
-    # see [Recipe structure][1] and [ecipe actions reference][2] .
+    # apply a change to a DataBrew dataset. For more information, see
+    # [Recipe structure][1] and [Recipe actions reference][2].
     #
     #
     #
@@ -2436,7 +2554,7 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Represents all of the attributes of an AWS Glue DataBrew recipe.
+    # Represents the name and version of a DataBrew recipe.
     #
     # @note When making an API call, you may pass RecipeReference
     #   data as a hash:
@@ -2463,8 +2581,7 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Represents a single step to be performed in an AWS Glue DataBrew
-    # recipe.
+    # Represents a single step from a DataBrew recipe to be performed.
     #
     # @note When making an API call, you may pass RecipeStep
     #   data as a hash:
@@ -2574,8 +2691,8 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Represents the sample size and sampling type for AWS Glue DataBrew to
-    # use for interactive data analysis.
+    # Represents the sample size and sampling type for DataBrew to use for
+    # interactive data analysis.
     #
     # @note When making an API call, you may pass Sample
     #   data as a hash:
@@ -2609,7 +2726,7 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] created_by
-    #   The identifier (the user name) of the user who created the schedule.
+    #   The Amazon Resource Name (ARN) of the user who created the schedule.
     #   @return [String]
     #
     # @!attribute [rw] create_date
@@ -2621,7 +2738,7 @@ module Aws::GlueDataBrew
     #   @return [Array<String>]
     #
     # @!attribute [rw] last_modified_by
-    #   The identifier (the user name) of the user who last modified the
+    #   The Amazon Resource Name (ARN) of the user who last modified the
     #   schedule.
     #   @return [String]
     #
@@ -2634,7 +2751,13 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] cron_expression
-    #   The date(s) and time(s), in `cron` format, when the job will run.
+    #   The date(s) and time(s) when the job will run. For more information,
+    #   see [Cron expressions][1] in the *AWS Glue DataBrew Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2693,8 +2816,8 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] preview
-    #   Returns the result of the recipe step, without applying it. The
-    #   result isn't added to the view frame stack.
+    #   If true, the result of the recipe step will be returned, but not
+    #   applied.
     #   @return [Boolean]
     #
     # @!attribute [rw] name
@@ -2702,8 +2825,7 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] recipe_step
-    #   Represents a single step to be performed in an AWS Glue DataBrew
-    #   recipe.
+    #   Represents a single step from a DataBrew recipe to be performed.
     #   @return [Types::RecipeStep]
     #
     # @!attribute [rw] step_index
@@ -2719,8 +2841,7 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] view_frame
-    #   Represents the data being being transformed during an AWS Glue
-    #   DataBrew project session.
+    #   Represents the data being being transformed during an action.
     #   @return [Types::ViewFrame]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/SendProjectSessionActionRequest AWS API Documentation
@@ -2924,8 +3045,8 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   An DataBrew resource from which you want to remove a tag or tags.
-    #   The value for this parameter is an Amazon Resource Name (ARN).
+    #   A DataBrew resource from which you want to remove a tag or tags. The
+    #   value for this parameter is an Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -2958,6 +3079,9 @@ module Aws::GlueDataBrew
     #             sheet_names: ["SheetName"],
     #             sheet_indexes: [1],
     #           },
+    #           csv: {
+    #             delimiter: "Delimiter",
+    #           },
     #         },
     #         input: { # required
     #           s3_input_definition: {
@@ -2981,13 +3105,13 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] format_options
-    #   Options that define how Microsoft Excel input is to be interpreted
-    #   by DataBrew.
+    #   Options that define the structure of either Csv, Excel, or JSON
+    #   input.
     #   @return [Types::FormatOptions]
     #
     # @!attribute [rw] input
-    #   Information on how AWS Glue DataBrew can find data, in either the
-    #   AWS Glue Data Catalog or Amazon S3.
+    #   Information on how DataBrew can find data, in either the AWS Glue
+    #   Data Catalog or Amazon S3.
     #   @return [Types::Input]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/UpdateDatasetRequest AWS API Documentation
@@ -3048,14 +3172,14 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] log_subscription
-    #   A value that enables or disables Amazon CloudWatch logging for the
-    #   current AWS account. If logging is enabled, CloudWatch writes one
-    #   log stream for each job run.
+    #   Enables or disables Amazon CloudWatch logging for the job. If
+    #   logging is enabled, CloudWatch writes one log stream for each job
+    #   run.
     #   @return [String]
     #
     # @!attribute [rw] max_capacity
-    #   The maximum number of nodes that DataBrew can use when the job
-    #   processes data.
+    #   The maximum number of compute nodes that DataBrew can use when the
+    #   job processes data.
     #   @return [Integer]
     #
     # @!attribute [rw] max_retries
@@ -3069,7 +3193,7 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed for this request.
+    #   Management (IAM) role to be assumed when DataBrew runs the job.
     #   @return [String]
     #
     # @!attribute [rw] timeout
@@ -3118,8 +3242,8 @@ module Aws::GlueDataBrew
     #       }
     #
     # @!attribute [rw] sample
-    #   Represents the sample size and sampling type for AWS Glue DataBrew
-    #   to use for interactive data analysis.
+    #   Represents the sample size and sampling type for DataBrew to use for
+    #   interactive data analysis.
     #   @return [Types::Sample]
     #
     # @!attribute [rw] role_arn
@@ -3178,6 +3302,11 @@ module Aws::GlueDataBrew
     #               key: "Key",
     #             },
     #             overwrite: false,
+    #             format_options: {
+    #               csv: {
+    #                 delimiter: "Delimiter",
+    #               },
+    #             },
     #           },
     #         ],
     #         role_arn: "Arn", # required
@@ -3202,9 +3331,9 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] log_subscription
-    #   A value that enables or disables Amazon CloudWatch logging for the
-    #   current AWS account. If logging is enabled, CloudWatch writes one
-    #   log stream for each job run.
+    #   Enables or disables Amazon CloudWatch logging for the job. If
+    #   logging is enabled, CloudWatch writes one log stream for each job
+    #   run.
     #   @return [String]
     #
     # @!attribute [rw] max_capacity
@@ -3223,7 +3352,7 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role to be assumed for this request.
+    #   Management (IAM) role to be assumed when DataBrew runs the job.
     #   @return [String]
     #
     # @!attribute [rw] timeout
@@ -3334,8 +3463,13 @@ module Aws::GlueDataBrew
     #   @return [Array<String>]
     #
     # @!attribute [rw] cron_expression
-    #   The date or dates and time or times, in `cron` format, when the jobs
-    #   are to be run.
+    #   The date or dates and time or times when the jobs are to be run. For
+    #   more information, see [Cron expressions][1] in the *AWS Glue
+    #   DataBrew Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3377,8 +3511,7 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Represents the data being being transformed during an AWS Glue
-    # DataBrew project session.
+    # Represents the data being being transformed during an action.
     #
     # @note When making an API call, you may pass ViewFrame
     #   data as a hash:

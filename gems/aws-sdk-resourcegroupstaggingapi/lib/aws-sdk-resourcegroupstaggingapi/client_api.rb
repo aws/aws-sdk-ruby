@@ -47,7 +47,8 @@ module Aws::ResourceGroupsTaggingAPI
     Region = Shapes::StringShape.new(name: 'Region')
     RegionFilterList = Shapes::ListShape.new(name: 'RegionFilterList')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
-    ResourceARNList = Shapes::ListShape.new(name: 'ResourceARNList')
+    ResourceARNListForGet = Shapes::ListShape.new(name: 'ResourceARNListForGet')
+    ResourceARNListForTagUntag = Shapes::ListShape.new(name: 'ResourceARNListForTagUntag')
     ResourceTagMapping = Shapes::StructureShape.new(name: 'ResourceTagMapping')
     ResourceTagMappingList = Shapes::ListShape.new(name: 'ResourceTagMappingList')
     ResourceTypeFilterList = Shapes::ListShape.new(name: 'ResourceTypeFilterList')
@@ -128,6 +129,7 @@ module Aws::ResourceGroupsTaggingAPI
     GetResourcesInput.add_member(:resource_type_filters, Shapes::ShapeRef.new(shape: ResourceTypeFilterList, location_name: "ResourceTypeFilters"))
     GetResourcesInput.add_member(:include_compliance_details, Shapes::ShapeRef.new(shape: IncludeComplianceDetails, location_name: "IncludeComplianceDetails"))
     GetResourcesInput.add_member(:exclude_compliant_resources, Shapes::ShapeRef.new(shape: ExcludeCompliantResources, location_name: "ExcludeCompliantResources"))
+    GetResourcesInput.add_member(:resource_arn_list, Shapes::ShapeRef.new(shape: ResourceARNListForGet, location_name: "ResourceARNList"))
     GetResourcesInput.struct_class = Types::GetResourcesInput
 
     GetResourcesOutput.add_member(:pagination_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "PaginationToken"))
@@ -162,7 +164,9 @@ module Aws::ResourceGroupsTaggingAPI
 
     RegionFilterList.member = Shapes::ShapeRef.new(shape: Region)
 
-    ResourceARNList.member = Shapes::ShapeRef.new(shape: ResourceARN)
+    ResourceARNListForGet.member = Shapes::ShapeRef.new(shape: ResourceARN)
+
+    ResourceARNListForTagUntag.member = Shapes::ShapeRef.new(shape: ResourceARN)
 
     ResourceTagMapping.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
     ResourceTagMapping.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -209,7 +213,7 @@ module Aws::ResourceGroupsTaggingAPI
     TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
     TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
 
-    TagResourcesInput.add_member(:resource_arn_list, Shapes::ShapeRef.new(shape: ResourceARNList, required: true, location_name: "ResourceARNList"))
+    TagResourcesInput.add_member(:resource_arn_list, Shapes::ShapeRef.new(shape: ResourceARNListForTagUntag, required: true, location_name: "ResourceARNList"))
     TagResourcesInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
     TagResourcesInput.struct_class = Types::TagResourcesInput
 
@@ -225,7 +229,7 @@ module Aws::ResourceGroupsTaggingAPI
     ThrottledException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     ThrottledException.struct_class = Types::ThrottledException
 
-    UntagResourcesInput.add_member(:resource_arn_list, Shapes::ShapeRef.new(shape: ResourceARNList, required: true, location_name: "ResourceARNList"))
+    UntagResourcesInput.add_member(:resource_arn_list, Shapes::ShapeRef.new(shape: ResourceARNListForTagUntag, required: true, location_name: "ResourceARNList"))
     UntagResourcesInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyListForUntag, required: true, location_name: "TagKeys"))
     UntagResourcesInput.struct_class = Types::UntagResourcesInput
 

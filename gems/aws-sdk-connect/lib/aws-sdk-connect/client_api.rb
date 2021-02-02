@@ -23,6 +23,7 @@ module Aws::Connect
     AssociateInstanceStorageConfigResponse = Shapes::StructureShape.new(name: 'AssociateInstanceStorageConfigResponse')
     AssociateLambdaFunctionRequest = Shapes::StructureShape.new(name: 'AssociateLambdaFunctionRequest')
     AssociateLexBotRequest = Shapes::StructureShape.new(name: 'AssociateLexBotRequest')
+    AssociateQueueQuickConnectsRequest = Shapes::StructureShape.new(name: 'AssociateQueueQuickConnectsRequest')
     AssociateRoutingProfileQueuesRequest = Shapes::StructureShape.new(name: 'AssociateRoutingProfileQueuesRequest')
     AssociateSecurityKeyRequest = Shapes::StructureShape.new(name: 'AssociateSecurityKeyRequest')
     AssociateSecurityKeyResponse = Shapes::StructureShape.new(name: 'AssociateSecurityKeyResponse')
@@ -41,6 +42,8 @@ module Aws::Connect
     ChatContentType = Shapes::StringShape.new(name: 'ChatContentType')
     ChatMessage = Shapes::StructureShape.new(name: 'ChatMessage')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    CommonDescriptionLength250 = Shapes::StringShape.new(name: 'CommonDescriptionLength250')
+    CommonNameLength127 = Shapes::StringShape.new(name: 'CommonNameLength127')
     Comparison = Shapes::StringShape.new(name: 'Comparison')
     Concurrency = Shapes::IntegerShape.new(name: 'Concurrency')
     ContactFlow = Shapes::StructureShape.new(name: 'ContactFlow')
@@ -62,6 +65,8 @@ module Aws::Connect
     CreateInstanceResponse = Shapes::StructureShape.new(name: 'CreateInstanceResponse')
     CreateIntegrationAssociationRequest = Shapes::StructureShape.new(name: 'CreateIntegrationAssociationRequest')
     CreateIntegrationAssociationResponse = Shapes::StructureShape.new(name: 'CreateIntegrationAssociationResponse')
+    CreateQueueRequest = Shapes::StructureShape.new(name: 'CreateQueueRequest')
+    CreateQueueResponse = Shapes::StructureShape.new(name: 'CreateQueueResponse')
     CreateQuickConnectRequest = Shapes::StructureShape.new(name: 'CreateQuickConnectRequest')
     CreateQuickConnectResponse = Shapes::StructureShape.new(name: 'CreateQuickConnectResponse')
     CreateRoutingProfileRequest = Shapes::StructureShape.new(name: 'CreateRoutingProfileRequest')
@@ -89,12 +94,16 @@ module Aws::Connect
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
     DescribeContactFlowRequest = Shapes::StructureShape.new(name: 'DescribeContactFlowRequest')
     DescribeContactFlowResponse = Shapes::StructureShape.new(name: 'DescribeContactFlowResponse')
+    DescribeHoursOfOperationRequest = Shapes::StructureShape.new(name: 'DescribeHoursOfOperationRequest')
+    DescribeHoursOfOperationResponse = Shapes::StructureShape.new(name: 'DescribeHoursOfOperationResponse')
     DescribeInstanceAttributeRequest = Shapes::StructureShape.new(name: 'DescribeInstanceAttributeRequest')
     DescribeInstanceAttributeResponse = Shapes::StructureShape.new(name: 'DescribeInstanceAttributeResponse')
     DescribeInstanceRequest = Shapes::StructureShape.new(name: 'DescribeInstanceRequest')
     DescribeInstanceResponse = Shapes::StructureShape.new(name: 'DescribeInstanceResponse')
     DescribeInstanceStorageConfigRequest = Shapes::StructureShape.new(name: 'DescribeInstanceStorageConfigRequest')
     DescribeInstanceStorageConfigResponse = Shapes::StructureShape.new(name: 'DescribeInstanceStorageConfigResponse')
+    DescribeQueueRequest = Shapes::StructureShape.new(name: 'DescribeQueueRequest')
+    DescribeQueueResponse = Shapes::StructureShape.new(name: 'DescribeQueueResponse')
     DescribeQuickConnectRequest = Shapes::StructureShape.new(name: 'DescribeQuickConnectRequest')
     DescribeQuickConnectResponse = Shapes::StructureShape.new(name: 'DescribeQuickConnectResponse')
     DescribeRoutingProfileRequest = Shapes::StructureShape.new(name: 'DescribeRoutingProfileRequest')
@@ -116,6 +125,7 @@ module Aws::Connect
     DisassociateInstanceStorageConfigRequest = Shapes::StructureShape.new(name: 'DisassociateInstanceStorageConfigRequest')
     DisassociateLambdaFunctionRequest = Shapes::StructureShape.new(name: 'DisassociateLambdaFunctionRequest')
     DisassociateLexBotRequest = Shapes::StructureShape.new(name: 'DisassociateLexBotRequest')
+    DisassociateQueueQuickConnectsRequest = Shapes::StructureShape.new(name: 'DisassociateQueueQuickConnectsRequest')
     DisassociateRoutingProfileQueuesRequest = Shapes::StructureShape.new(name: 'DisassociateRoutingProfileQueuesRequest')
     DisassociateSecurityKeyRequest = Shapes::StructureShape.new(name: 'DisassociateSecurityKeyRequest')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
@@ -156,10 +166,16 @@ module Aws::Connect
     HistoricalMetricResults = Shapes::ListShape.new(name: 'HistoricalMetricResults')
     HistoricalMetrics = Shapes::ListShape.new(name: 'HistoricalMetrics')
     Hours = Shapes::IntegerShape.new(name: 'Hours')
+    Hours24Format = Shapes::IntegerShape.new(name: 'Hours24Format')
+    HoursOfOperation = Shapes::StructureShape.new(name: 'HoursOfOperation')
+    HoursOfOperationConfig = Shapes::StructureShape.new(name: 'HoursOfOperationConfig')
+    HoursOfOperationConfigList = Shapes::ListShape.new(name: 'HoursOfOperationConfigList')
+    HoursOfOperationDays = Shapes::StringShape.new(name: 'HoursOfOperationDays')
     HoursOfOperationId = Shapes::StringShape.new(name: 'HoursOfOperationId')
     HoursOfOperationName = Shapes::StringShape.new(name: 'HoursOfOperationName')
     HoursOfOperationSummary = Shapes::StructureShape.new(name: 'HoursOfOperationSummary')
     HoursOfOperationSummaryList = Shapes::ListShape.new(name: 'HoursOfOperationSummaryList')
+    HoursOfOperationTimeSlice = Shapes::StructureShape.new(name: 'HoursOfOperationTimeSlice')
     InboundCallsEnabled = Shapes::BooleanShape.new(name: 'InboundCallsEnabled')
     Instance = Shapes::StructureShape.new(name: 'Instance')
     InstanceAttributeType = Shapes::StringShape.new(name: 'InstanceAttributeType')
@@ -210,6 +226,8 @@ module Aws::Connect
     ListPhoneNumbersResponse = Shapes::StructureShape.new(name: 'ListPhoneNumbersResponse')
     ListPromptsRequest = Shapes::StructureShape.new(name: 'ListPromptsRequest')
     ListPromptsResponse = Shapes::StructureShape.new(name: 'ListPromptsResponse')
+    ListQueueQuickConnectsRequest = Shapes::StructureShape.new(name: 'ListQueueQuickConnectsRequest')
+    ListQueueQuickConnectsResponse = Shapes::StructureShape.new(name: 'ListQueueQuickConnectsResponse')
     ListQueuesRequest = Shapes::StructureShape.new(name: 'ListQueuesRequest')
     ListQueuesResponse = Shapes::StructureShape.new(name: 'ListQueuesResponse')
     ListQuickConnectsRequest = Shapes::StructureShape.new(name: 'ListQuickConnectsRequest')
@@ -239,10 +257,13 @@ module Aws::Connect
     MediaConcurrencies = Shapes::ListShape.new(name: 'MediaConcurrencies')
     MediaConcurrency = Shapes::StructureShape.new(name: 'MediaConcurrency')
     Message = Shapes::StringShape.new(name: 'Message')
+    MinutesLimit60 = Shapes::IntegerShape.new(name: 'MinutesLimit60')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     Origin = Shapes::StringShape.new(name: 'Origin')
     OriginsList = Shapes::ListShape.new(name: 'OriginsList')
+    OutboundCallerConfig = Shapes::StructureShape.new(name: 'OutboundCallerConfig')
+    OutboundCallerIdName = Shapes::StringShape.new(name: 'OutboundCallerIdName')
     OutboundCallsEnabled = Shapes::BooleanShape.new(name: 'OutboundCallsEnabled')
     OutboundContactNotPermittedException = Shapes::StructureShape.new(name: 'OutboundContactNotPermittedException')
     PEM = Shapes::StringShape.new(name: 'PEM')
@@ -269,10 +290,14 @@ module Aws::Connect
     PromptName = Shapes::StringShape.new(name: 'PromptName')
     PromptSummary = Shapes::StructureShape.new(name: 'PromptSummary')
     PromptSummaryList = Shapes::ListShape.new(name: 'PromptSummaryList')
+    Queue = Shapes::StructureShape.new(name: 'Queue')
+    QueueDescription = Shapes::StringShape.new(name: 'QueueDescription')
     QueueId = Shapes::StringShape.new(name: 'QueueId')
+    QueueMaxContacts = Shapes::IntegerShape.new(name: 'QueueMaxContacts')
     QueueName = Shapes::StringShape.new(name: 'QueueName')
     QueueQuickConnectConfig = Shapes::StructureShape.new(name: 'QueueQuickConnectConfig')
     QueueReference = Shapes::StructureShape.new(name: 'QueueReference')
+    QueueStatus = Shapes::StringShape.new(name: 'QueueStatus')
     QueueSummary = Shapes::StructureShape.new(name: 'QueueSummary')
     QueueSummaryList = Shapes::ListShape.new(name: 'QueueSummaryList')
     QueueType = Shapes::StringShape.new(name: 'QueueType')
@@ -287,6 +312,7 @@ module Aws::Connect
     QuickConnectSummaryList = Shapes::ListShape.new(name: 'QuickConnectSummaryList')
     QuickConnectType = Shapes::StringShape.new(name: 'QuickConnectType')
     QuickConnectTypes = Shapes::ListShape.new(name: 'QuickConnectTypes')
+    QuickConnectsList = Shapes::ListShape.new(name: 'QuickConnectsList')
     Reference = Shapes::StructureShape.new(name: 'Reference')
     ReferenceKey = Shapes::StringShape.new(name: 'ReferenceKey')
     ReferenceType = Shapes::StringShape.new(name: 'ReferenceType')
@@ -346,6 +372,7 @@ module Aws::Connect
     Threshold = Shapes::StructureShape.new(name: 'Threshold')
     ThresholdValue = Shapes::FloatShape.new(name: 'ThresholdValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TimeZone = Shapes::StringShape.new(name: 'TimeZone')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     URI = Shapes::StringShape.new(name: 'URI')
     Unit = Shapes::StringShape.new(name: 'Unit')
@@ -356,6 +383,11 @@ module Aws::Connect
     UpdateContactFlowNameRequest = Shapes::StructureShape.new(name: 'UpdateContactFlowNameRequest')
     UpdateInstanceAttributeRequest = Shapes::StructureShape.new(name: 'UpdateInstanceAttributeRequest')
     UpdateInstanceStorageConfigRequest = Shapes::StructureShape.new(name: 'UpdateInstanceStorageConfigRequest')
+    UpdateQueueHoursOfOperationRequest = Shapes::StructureShape.new(name: 'UpdateQueueHoursOfOperationRequest')
+    UpdateQueueMaxContactsRequest = Shapes::StructureShape.new(name: 'UpdateQueueMaxContactsRequest')
+    UpdateQueueNameRequest = Shapes::StructureShape.new(name: 'UpdateQueueNameRequest')
+    UpdateQueueOutboundCallerConfigRequest = Shapes::StructureShape.new(name: 'UpdateQueueOutboundCallerConfigRequest')
+    UpdateQueueStatusRequest = Shapes::StructureShape.new(name: 'UpdateQueueStatusRequest')
     UpdateQuickConnectConfigRequest = Shapes::StructureShape.new(name: 'UpdateQuickConnectConfigRequest')
     UpdateQuickConnectNameRequest = Shapes::StructureShape.new(name: 'UpdateQuickConnectNameRequest')
     UpdateRoutingProfileConcurrencyRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileConcurrencyRequest')
@@ -405,6 +437,11 @@ module Aws::Connect
     AssociateLexBotRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     AssociateLexBotRequest.add_member(:lex_bot, Shapes::ShapeRef.new(shape: LexBot, required: true, location_name: "LexBot"))
     AssociateLexBotRequest.struct_class = Types::AssociateLexBotRequest
+
+    AssociateQueueQuickConnectsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    AssociateQueueQuickConnectsRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "QueueId"))
+    AssociateQueueQuickConnectsRequest.add_member(:quick_connect_ids, Shapes::ShapeRef.new(shape: QuickConnectsList, required: true, location_name: "QuickConnectIds"))
+    AssociateQueueQuickConnectsRequest.struct_class = Types::AssociateQueueQuickConnectsRequest
 
     AssociateRoutingProfileQueuesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     AssociateRoutingProfileQueuesRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location: "uri", location_name: "RoutingProfileId"))
@@ -496,6 +533,20 @@ module Aws::Connect
     CreateIntegrationAssociationResponse.add_member(:integration_association_id, Shapes::ShapeRef.new(shape: IntegrationAssociationId, location_name: "IntegrationAssociationId"))
     CreateIntegrationAssociationResponse.add_member(:integration_association_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "IntegrationAssociationArn"))
     CreateIntegrationAssociationResponse.struct_class = Types::CreateIntegrationAssociationResponse
+
+    CreateQueueRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    CreateQueueRequest.add_member(:name, Shapes::ShapeRef.new(shape: CommonNameLength127, required: true, location_name: "Name"))
+    CreateQueueRequest.add_member(:description, Shapes::ShapeRef.new(shape: QueueDescription, location_name: "Description"))
+    CreateQueueRequest.add_member(:outbound_caller_config, Shapes::ShapeRef.new(shape: OutboundCallerConfig, location_name: "OutboundCallerConfig"))
+    CreateQueueRequest.add_member(:hours_of_operation_id, Shapes::ShapeRef.new(shape: HoursOfOperationId, required: true, location_name: "HoursOfOperationId"))
+    CreateQueueRequest.add_member(:max_contacts, Shapes::ShapeRef.new(shape: QueueMaxContacts, location_name: "MaxContacts", metadata: {"box"=>true}))
+    CreateQueueRequest.add_member(:quick_connect_ids, Shapes::ShapeRef.new(shape: QuickConnectsList, location_name: "QuickConnectIds"))
+    CreateQueueRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateQueueRequest.struct_class = Types::CreateQueueRequest
+
+    CreateQueueResponse.add_member(:queue_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "QueueArn"))
+    CreateQueueResponse.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, location_name: "QueueId"))
+    CreateQueueResponse.struct_class = Types::CreateQueueResponse
 
     CreateQuickConnectRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreateQuickConnectRequest.add_member(:name, Shapes::ShapeRef.new(shape: QuickConnectName, required: true, location_name: "Name"))
@@ -610,6 +661,13 @@ module Aws::Connect
     DescribeContactFlowResponse.add_member(:contact_flow, Shapes::ShapeRef.new(shape: ContactFlow, location_name: "ContactFlow"))
     DescribeContactFlowResponse.struct_class = Types::DescribeContactFlowResponse
 
+    DescribeHoursOfOperationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DescribeHoursOfOperationRequest.add_member(:hours_of_operation_id, Shapes::ShapeRef.new(shape: HoursOfOperationId, required: true, location: "uri", location_name: "HoursOfOperationId"))
+    DescribeHoursOfOperationRequest.struct_class = Types::DescribeHoursOfOperationRequest
+
+    DescribeHoursOfOperationResponse.add_member(:hours_of_operation, Shapes::ShapeRef.new(shape: HoursOfOperation, location_name: "HoursOfOperation"))
+    DescribeHoursOfOperationResponse.struct_class = Types::DescribeHoursOfOperationResponse
+
     DescribeInstanceAttributeRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DescribeInstanceAttributeRequest.add_member(:attribute_type, Shapes::ShapeRef.new(shape: InstanceAttributeType, required: true, location: "uri", location_name: "AttributeType"))
     DescribeInstanceAttributeRequest.struct_class = Types::DescribeInstanceAttributeRequest
@@ -630,6 +688,13 @@ module Aws::Connect
 
     DescribeInstanceStorageConfigResponse.add_member(:storage_config, Shapes::ShapeRef.new(shape: InstanceStorageConfig, location_name: "StorageConfig"))
     DescribeInstanceStorageConfigResponse.struct_class = Types::DescribeInstanceStorageConfigResponse
+
+    DescribeQueueRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DescribeQueueRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "QueueId"))
+    DescribeQueueRequest.struct_class = Types::DescribeQueueRequest
+
+    DescribeQueueResponse.add_member(:queue, Shapes::ShapeRef.new(shape: Queue, location_name: "Queue"))
+    DescribeQueueResponse.struct_class = Types::DescribeQueueResponse
 
     DescribeQuickConnectRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DescribeQuickConnectRequest.add_member(:quick_connect_id, Shapes::ShapeRef.new(shape: QuickConnectId, required: true, location: "uri", location_name: "QuickConnectId"))
@@ -689,6 +754,11 @@ module Aws::Connect
     DisassociateLexBotRequest.add_member(:bot_name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "querystring", location_name: "botName"))
     DisassociateLexBotRequest.add_member(:lex_region, Shapes::ShapeRef.new(shape: LexRegion, required: true, location: "querystring", location_name: "lexRegion"))
     DisassociateLexBotRequest.struct_class = Types::DisassociateLexBotRequest
+
+    DisassociateQueueQuickConnectsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DisassociateQueueQuickConnectsRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "QueueId"))
+    DisassociateQueueQuickConnectsRequest.add_member(:quick_connect_ids, Shapes::ShapeRef.new(shape: QuickConnectsList, required: true, location_name: "QuickConnectIds"))
+    DisassociateQueueQuickConnectsRequest.struct_class = Types::DisassociateQueueQuickConnectsRequest
 
     DisassociateRoutingProfileQueuesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DisassociateRoutingProfileQueuesRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location: "uri", location_name: "RoutingProfileId"))
@@ -817,12 +887,32 @@ module Aws::Connect
 
     HistoricalMetrics.member = Shapes::ShapeRef.new(shape: HistoricalMetric)
 
+    HoursOfOperation.add_member(:hours_of_operation_id, Shapes::ShapeRef.new(shape: HoursOfOperationId, location_name: "HoursOfOperationId"))
+    HoursOfOperation.add_member(:hours_of_operation_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "HoursOfOperationArn"))
+    HoursOfOperation.add_member(:name, Shapes::ShapeRef.new(shape: CommonNameLength127, location_name: "Name"))
+    HoursOfOperation.add_member(:description, Shapes::ShapeRef.new(shape: CommonDescriptionLength250, location_name: "Description"))
+    HoursOfOperation.add_member(:time_zone, Shapes::ShapeRef.new(shape: TimeZone, location_name: "TimeZone"))
+    HoursOfOperation.add_member(:config, Shapes::ShapeRef.new(shape: HoursOfOperationConfigList, location_name: "Config"))
+    HoursOfOperation.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    HoursOfOperation.struct_class = Types::HoursOfOperation
+
+    HoursOfOperationConfig.add_member(:day, Shapes::ShapeRef.new(shape: HoursOfOperationDays, location_name: "Day"))
+    HoursOfOperationConfig.add_member(:start_time, Shapes::ShapeRef.new(shape: HoursOfOperationTimeSlice, location_name: "StartTime"))
+    HoursOfOperationConfig.add_member(:end_time, Shapes::ShapeRef.new(shape: HoursOfOperationTimeSlice, location_name: "EndTime"))
+    HoursOfOperationConfig.struct_class = Types::HoursOfOperationConfig
+
+    HoursOfOperationConfigList.member = Shapes::ShapeRef.new(shape: HoursOfOperationConfig)
+
     HoursOfOperationSummary.add_member(:id, Shapes::ShapeRef.new(shape: HoursOfOperationId, location_name: "Id"))
     HoursOfOperationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     HoursOfOperationSummary.add_member(:name, Shapes::ShapeRef.new(shape: HoursOfOperationName, location_name: "Name"))
     HoursOfOperationSummary.struct_class = Types::HoursOfOperationSummary
 
     HoursOfOperationSummaryList.member = Shapes::ShapeRef.new(shape: HoursOfOperationSummary)
+
+    HoursOfOperationTimeSlice.add_member(:hours, Shapes::ShapeRef.new(shape: Hours24Format, location_name: "Hours"))
+    HoursOfOperationTimeSlice.add_member(:minutes, Shapes::ShapeRef.new(shape: MinutesLimit60, location_name: "Minutes"))
+    HoursOfOperationTimeSlice.struct_class = Types::HoursOfOperationTimeSlice
 
     Instance.add_member(:id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "Id"))
     Instance.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
@@ -1008,6 +1098,16 @@ module Aws::Connect
     ListPromptsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListPromptsResponse.struct_class = Types::ListPromptsResponse
 
+    ListQueueQuickConnectsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListQueueQuickConnectsRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "QueueId"))
+    ListQueueQuickConnectsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListQueueQuickConnectsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListQueueQuickConnectsRequest.struct_class = Types::ListQueueQuickConnectsRequest
+
+    ListQueueQuickConnectsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListQueueQuickConnectsResponse.add_member(:quick_connect_summary_list, Shapes::ShapeRef.new(shape: QuickConnectSummaryList, location_name: "QuickConnectSummaryList"))
+    ListQueueQuickConnectsResponse.struct_class = Types::ListQueueQuickConnectsResponse
+
     ListQueuesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListQueuesRequest.add_member(:queue_types, Shapes::ShapeRef.new(shape: QueueTypes, location: "querystring", location_name: "queueTypes"))
     ListQueuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -1107,6 +1207,11 @@ module Aws::Connect
 
     OriginsList.member = Shapes::ShapeRef.new(shape: Origin)
 
+    OutboundCallerConfig.add_member(:outbound_caller_id_name, Shapes::ShapeRef.new(shape: OutboundCallerIdName, location_name: "OutboundCallerIdName"))
+    OutboundCallerConfig.add_member(:outbound_caller_id_number_id, Shapes::ShapeRef.new(shape: PhoneNumberId, location_name: "OutboundCallerIdNumberId"))
+    OutboundCallerConfig.add_member(:outbound_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "OutboundFlowId"))
+    OutboundCallerConfig.struct_class = Types::OutboundCallerConfig
+
     OutboundContactNotPermittedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     OutboundContactNotPermittedException.struct_class = Types::OutboundContactNotPermittedException
 
@@ -1140,6 +1245,17 @@ module Aws::Connect
     PromptSummary.struct_class = Types::PromptSummary
 
     PromptSummaryList.member = Shapes::ShapeRef.new(shape: PromptSummary)
+
+    Queue.add_member(:name, Shapes::ShapeRef.new(shape: CommonNameLength127, location_name: "Name"))
+    Queue.add_member(:queue_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "QueueArn"))
+    Queue.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, location_name: "QueueId"))
+    Queue.add_member(:description, Shapes::ShapeRef.new(shape: QueueDescription, location_name: "Description"))
+    Queue.add_member(:outbound_caller_config, Shapes::ShapeRef.new(shape: OutboundCallerConfig, location_name: "OutboundCallerConfig"))
+    Queue.add_member(:hours_of_operation_id, Shapes::ShapeRef.new(shape: HoursOfOperationId, location_name: "HoursOfOperationId"))
+    Queue.add_member(:max_contacts, Shapes::ShapeRef.new(shape: QueueMaxContacts, location_name: "MaxContacts", metadata: {"box"=>true}))
+    Queue.add_member(:status, Shapes::ShapeRef.new(shape: QueueStatus, location_name: "Status"))
+    Queue.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    Queue.struct_class = Types::Queue
 
     QueueQuickConnectConfig.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location_name: "QueueId"))
     QueueQuickConnectConfig.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location_name: "ContactFlowId"))
@@ -1184,6 +1300,8 @@ module Aws::Connect
     QuickConnectSummaryList.member = Shapes::ShapeRef.new(shape: QuickConnectSummary)
 
     QuickConnectTypes.member = Shapes::ShapeRef.new(shape: QuickConnectType)
+
+    QuickConnectsList.member = Shapes::ShapeRef.new(shape: QuickConnectId)
 
     Reference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, required: true, location_name: "Value"))
     Reference.add_member(:type, Shapes::ShapeRef.new(shape: ReferenceType, required: true, location_name: "Type"))
@@ -1386,6 +1504,32 @@ module Aws::Connect
     UpdateInstanceStorageConfigRequest.add_member(:storage_config, Shapes::ShapeRef.new(shape: InstanceStorageConfig, required: true, location_name: "StorageConfig"))
     UpdateInstanceStorageConfigRequest.struct_class = Types::UpdateInstanceStorageConfigRequest
 
+    UpdateQueueHoursOfOperationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateQueueHoursOfOperationRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "QueueId"))
+    UpdateQueueHoursOfOperationRequest.add_member(:hours_of_operation_id, Shapes::ShapeRef.new(shape: HoursOfOperationId, required: true, location_name: "HoursOfOperationId"))
+    UpdateQueueHoursOfOperationRequest.struct_class = Types::UpdateQueueHoursOfOperationRequest
+
+    UpdateQueueMaxContactsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateQueueMaxContactsRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "QueueId"))
+    UpdateQueueMaxContactsRequest.add_member(:max_contacts, Shapes::ShapeRef.new(shape: QueueMaxContacts, required: true, location_name: "MaxContacts", metadata: {"box"=>true}))
+    UpdateQueueMaxContactsRequest.struct_class = Types::UpdateQueueMaxContactsRequest
+
+    UpdateQueueNameRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateQueueNameRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "QueueId"))
+    UpdateQueueNameRequest.add_member(:name, Shapes::ShapeRef.new(shape: CommonNameLength127, location_name: "Name"))
+    UpdateQueueNameRequest.add_member(:description, Shapes::ShapeRef.new(shape: QueueDescription, location_name: "Description"))
+    UpdateQueueNameRequest.struct_class = Types::UpdateQueueNameRequest
+
+    UpdateQueueOutboundCallerConfigRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateQueueOutboundCallerConfigRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "QueueId"))
+    UpdateQueueOutboundCallerConfigRequest.add_member(:outbound_caller_config, Shapes::ShapeRef.new(shape: OutboundCallerConfig, required: true, location_name: "OutboundCallerConfig"))
+    UpdateQueueOutboundCallerConfigRequest.struct_class = Types::UpdateQueueOutboundCallerConfigRequest
+
+    UpdateQueueStatusRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateQueueStatusRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, required: true, location: "uri", location_name: "QueueId"))
+    UpdateQueueStatusRequest.add_member(:status, Shapes::ShapeRef.new(shape: QueueStatus, required: true, location_name: "Status"))
+    UpdateQueueStatusRequest.struct_class = Types::UpdateQueueStatusRequest
+
     UpdateQuickConnectConfigRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateQuickConnectConfigRequest.add_member(:quick_connect_id, Shapes::ShapeRef.new(shape: QuickConnectId, required: true, location: "uri", location_name: "QuickConnectId"))
     UpdateQuickConnectConfigRequest.add_member(:quick_connect_config, Shapes::ShapeRef.new(shape: QuickConnectConfig, required: true, location_name: "QuickConnectConfig"))
@@ -1577,6 +1721,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:associate_queue_quick_connects, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateQueueQuickConnects"
+        o.http_method = "POST"
+        o.http_request_uri = "/queues/{InstanceId}/{QueueId}/associate-quick-connects"
+        o.input = Shapes::ShapeRef.new(shape: AssociateQueueQuickConnectsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:associate_routing_profile_queues, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateRoutingProfileQueues"
         o.http_method = "POST"
@@ -1645,6 +1803,21 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_queue, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateQueue"
+        o.http_method = "PUT"
+        o.http_request_uri = "/queues/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: CreateQueueRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateQueueResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:create_quick_connect, Seahorse::Model::Operation.new.tap do |o|
@@ -1809,6 +1982,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:describe_hours_of_operation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeHoursOfOperation"
+        o.http_method = "GET"
+        o.http_request_uri = "/hours-of-operations/{InstanceId}/{HoursOfOperationId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeHoursOfOperationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeHoursOfOperationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:describe_instance, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeInstance"
         o.http_method = "GET"
@@ -1844,6 +2030,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:describe_queue, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeQueue"
+        o.http_method = "GET"
+        o.http_request_uri = "/queues/{InstanceId}/{QueueId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeQueueRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeQueueResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:describe_quick_connect, Seahorse::Model::Operation.new.tap do |o|
@@ -1961,6 +2160,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:disassociate_queue_quick_connects, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateQueueQuickConnects"
+        o.http_method = "POST"
+        o.http_request_uri = "/queues/{InstanceId}/{QueueId}/disassociate-quick-connects"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateQueueQuickConnectsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:disassociate_routing_profile_queues, Seahorse::Model::Operation.new.tap do |o|
@@ -2244,6 +2456,25 @@ module Aws::Connect
         o.http_request_uri = "/prompts-summary/{InstanceId}"
         o.input = Shapes::ShapeRef.new(shape: ListPromptsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPromptsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_queue_quick_connects, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListQueueQuickConnects"
+        o.http_method = "GET"
+        o.http_request_uri = "/queues/{InstanceId}/{QueueId}/quick-connects"
+        o.input = Shapes::ShapeRef.new(shape: ListQueueQuickConnectsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListQueueQuickConnectsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2630,6 +2861,72 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_queue_hours_of_operation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateQueueHoursOfOperation"
+        o.http_method = "POST"
+        o.http_request_uri = "/queues/{InstanceId}/{QueueId}/hours-of-operation"
+        o.input = Shapes::ShapeRef.new(shape: UpdateQueueHoursOfOperationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_queue_max_contacts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateQueueMaxContacts"
+        o.http_method = "POST"
+        o.http_request_uri = "/queues/{InstanceId}/{QueueId}/max-contacts"
+        o.input = Shapes::ShapeRef.new(shape: UpdateQueueMaxContactsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_queue_name, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateQueueName"
+        o.http_method = "POST"
+        o.http_request_uri = "/queues/{InstanceId}/{QueueId}/name"
+        o.input = Shapes::ShapeRef.new(shape: UpdateQueueNameRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_queue_outbound_caller_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateQueueOutboundCallerConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/queues/{InstanceId}/{QueueId}/outbound-caller-config"
+        o.input = Shapes::ShapeRef.new(shape: UpdateQueueOutboundCallerConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_queue_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateQueueStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/queues/{InstanceId}/{QueueId}/status"
+        o.input = Shapes::ShapeRef.new(shape: UpdateQueueStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:update_quick_connect_config, Seahorse::Model::Operation.new.tap do |o|

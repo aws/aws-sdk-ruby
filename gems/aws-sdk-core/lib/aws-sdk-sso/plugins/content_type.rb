@@ -11,7 +11,7 @@ module Aws
 
         class Handler < Seahorse::Client::Handler
           def call(context)
-            # Some SSO operations break when given an empty content-type header.
+            # Some operations break when given an empty content-type header.
             # The SDK adds this blank content-type header
             # since Net::HTTP provides a default that can break services.
             # We're setting one here even though it's not used or necessary.

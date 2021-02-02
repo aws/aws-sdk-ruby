@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-01-19)
+------------------
+
+* Feature - Add support for specifying ChimeBearer header as part of the request for Amazon Chime SDK messaging APIs. Documentation updates.
+
 1.39.0 (2020-11-20)
 ------------------
 

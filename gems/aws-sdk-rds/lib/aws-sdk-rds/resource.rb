@@ -371,7 +371,7 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     # @option options [String] :engine_mode
-    #   The DB engine mode of the DB cluster, either `provisioned`
+    #   The DB engine mode of the DB cluster, either `provisioned`,
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     #
     #   The `parallelquery` engine mode isn't required for Aurora MySQL
@@ -624,8 +624,8 @@ module Aws::RDS
     #   **PostgreSQL**
     #
     #   The name of the database to create when the DB instance is created. If
-    #   this parameter isn't specified, no database is created in the DB
-    #   instance.
+    #   this parameter isn't specified, a database named `postgres` is
+    #   created in the DB instance.
     #
     #   Constraints:
     #
@@ -654,17 +654,34 @@ module Aws::RDS
     #
     #   Not applicable. Must be null.
     #
-    #   **Amazon Aurora**
+    #   **Amazon Aurora MySQL**
     #
-    #   The name of the database to create when the primary instance of the DB
-    #   cluster is created. If this parameter isn't specified, no database is
-    #   created in the DB instance.
+    #   The name of the database to create when the primary DB instance of the
+    #   Aurora MySQL DB cluster is created. If this parameter isn't specified
+    #   for an Aurora MySQL DB cluster, no database is created in the DB
+    #   cluster.
     #
     #   Constraints:
     #
-    #   * Must contain 1 to 64 letters or numbers.
+    #   * It must contain 1 to 64 alphanumeric characters.
     #
-    #   * Can't be a word reserved by the specified database engine
+    #   * It can't be a word reserved by the database engine.
+    #
+    #   **Amazon Aurora PostgreSQL**
+    #
+    #   The name of the database to create when the primary DB instance of the
+    #   Aurora PostgreSQL DB cluster is created. If this parameter isn't
+    #   specified for an Aurora PostgreSQL DB cluster, a database named
+    #   `postgres` is created in the DB cluster.
+    #
+    #   Constraints:
+    #
+    #   * It must contain 1 to 63 alphanumeric characters.
+    #
+    #   * It must begin with a letter or an underscore. Subsequent characters
+    #     can be letters, underscores, or digits (0 to 9).
+    #
+    #   * It can't be a word reserved by the database engine.
     # @option options [required, String] :db_instance_identifier
     #   The DB instance identifier. This parameter is stored as a lowercase
     #   string.
@@ -1400,6 +1417,14 @@ module Aws::RDS
     # @option options [Integer] :max_allocated_storage
     #   The upper limit to which Amazon RDS can automatically scale the
     #   storage of the DB instance.
+    #
+    #   For more information about this setting, including limitations that
+    #   apply to it, see [ Managing capacity automatically with Amazon RDS
+    #   storage autoscaling][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling
     # @option options [Boolean] :enable_customer_owned_ip
     #   A value that indicates whether to enable a customer-owned IP address
     #   (CoIP) for an RDS on Outposts DB instance.
@@ -1688,6 +1713,30 @@ module Aws::RDS
     # @option options [required, String] :engine_name
     #   Specifies the name of the engine that this option group should be
     #   associated with.
+    #
+    #   Valid Values:
+    #
+    #   * `mariadb`
+    #
+    #   * `mysql`
+    #
+    #   * `oracle-ee`
+    #
+    #   * `oracle-se2`
+    #
+    #   * `oracle-se1`
+    #
+    #   * `oracle-se`
+    #
+    #   * `postgres`
+    #
+    #   * `sqlserver-ee`
+    #
+    #   * `sqlserver-se`
+    #
+    #   * `sqlserver-ex`
+    #
+    #   * `sqlserver-web`
     # @option options [required, String] :major_engine_version
     #   Specifies the major version of the engine that this option group
     #   should be associated with.
@@ -1936,6 +1985,36 @@ module Aws::RDS
     # @param [Hash] options ({})
     # @option options [String] :engine
     #   The database engine to return.
+    #
+    #   Valid Values:
+    #
+    #   * `aurora` (for MySQL 5.6-compatible Aurora)
+    #
+    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
+    #
+    #   * `aurora-postgresql`
+    #
+    #   * `mariadb`
+    #
+    #   * `mysql`
+    #
+    #   * `oracle-ee`
+    #
+    #   * `oracle-se2`
+    #
+    #   * `oracle-se1`
+    #
+    #   * `oracle-se`
+    #
+    #   * `postgres`
+    #
+    #   * `sqlserver-ee`
+    #
+    #   * `sqlserver-se`
+    #
+    #   * `sqlserver-ex`
+    #
+    #   * `sqlserver-web`
     # @option options [String] :engine_version
     #   The database engine version to return.
     #
@@ -2562,6 +2641,30 @@ module Aws::RDS
     # @option options [String] :engine_name
     #   Filters the list of option groups to only include groups associated
     #   with a specific database engine.
+    #
+    #   Valid Values:
+    #
+    #   * `mariadb`
+    #
+    #   * `mysql`
+    #
+    #   * `oracle-ee`
+    #
+    #   * `oracle-se2`
+    #
+    #   * `oracle-se1`
+    #
+    #   * `oracle-se`
+    #
+    #   * `postgres`
+    #
+    #   * `sqlserver-ee`
+    #
+    #   * `sqlserver-se`
+    #
+    #   * `sqlserver-ex`
+    #
+    #   * `sqlserver-web`
     # @option options [String] :major_engine_version
     #   Filters the list of option groups to only include groups associated
     #   with a specific database engine version. If specified, then EngineName

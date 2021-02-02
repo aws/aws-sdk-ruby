@@ -751,6 +751,19 @@ module Aws::SecurityHub
     #                   },
     #                 ],
     #                 source_dest_check: false,
+    #                 ip_v6_addresses: [
+    #                   {
+    #                     ip_v6_address: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 private_ip_addresses: [
+    #                   {
+    #                     private_ip_address: "NonEmptyString",
+    #                     private_dns_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 public_dns_name: "NonEmptyString",
+    #                 public_ip: "NonEmptyString",
     #               },
     #               aws_ec2_security_group: {
     #                 group_name: "NonEmptyString",
@@ -1250,6 +1263,30 @@ module Aws::SecurityHub
     #                 sns_topic_arn: "NonEmptyString",
     #                 sns_topic_name: "NonEmptyString",
     #                 trail_arn: "NonEmptyString",
+    #               },
+    #               aws_ssm_patch_compliance: {
+    #                 patch: {
+    #                   compliance_summary: {
+    #                     status: "NonEmptyString",
+    #                     compliant_critical_count: 1,
+    #                     compliant_high_count: 1,
+    #                     compliant_medium_count: 1,
+    #                     execution_type: "NonEmptyString",
+    #                     non_compliant_critical_count: 1,
+    #                     compliant_informational_count: 1,
+    #                     non_compliant_informational_count: 1,
+    #                     compliant_unspecified_count: 1,
+    #                     non_compliant_low_count: 1,
+    #                     non_compliant_high_count: 1,
+    #                     compliant_low_count: 1,
+    #                     compliance_type: "NonEmptyString",
+    #                     patch_baseline_id: "NonEmptyString",
+    #                     overall_severity: "NonEmptyString",
+    #                     non_compliant_medium_count: 1,
+    #                     non_compliant_unspecified_count: 1,
+    #                     patch_group: "NonEmptyString",
+    #                   },
+    #                 },
     #               },
     #               aws_certificate_manager_certificate: {
     #                 certificate_authority_arn: "NonEmptyString",
@@ -2026,6 +2063,114 @@ module Aws::SecurityHub
     #           operation_end_time: "NonEmptyString",
     #           reboot_option: "NonEmptyString",
     #           operation: "NonEmptyString",
+    #         },
+    #         action: {
+    #           action_type: "NonEmptyString",
+    #           network_connection_action: {
+    #             connection_direction: "NonEmptyString",
+    #             remote_ip_details: {
+    #               ip_address_v4: "NonEmptyString",
+    #               organization: {
+    #                 asn: 1,
+    #                 asn_org: "NonEmptyString",
+    #                 isp: "NonEmptyString",
+    #                 org: "NonEmptyString",
+    #               },
+    #               country: {
+    #                 country_code: "NonEmptyString",
+    #                 country_name: "NonEmptyString",
+    #               },
+    #               city: {
+    #                 city_name: "NonEmptyString",
+    #               },
+    #               geo_location: {
+    #                 lon: 1.0,
+    #                 lat: 1.0,
+    #               },
+    #             },
+    #             remote_port_details: {
+    #               port: 1,
+    #               port_name: "NonEmptyString",
+    #             },
+    #             local_port_details: {
+    #               port: 1,
+    #               port_name: "NonEmptyString",
+    #             },
+    #             protocol: "NonEmptyString",
+    #             blocked: false,
+    #           },
+    #           aws_api_call_action: {
+    #             api: "NonEmptyString",
+    #             service_name: "NonEmptyString",
+    #             caller_type: "NonEmptyString",
+    #             remote_ip_details: {
+    #               ip_address_v4: "NonEmptyString",
+    #               organization: {
+    #                 asn: 1,
+    #                 asn_org: "NonEmptyString",
+    #                 isp: "NonEmptyString",
+    #                 org: "NonEmptyString",
+    #               },
+    #               country: {
+    #                 country_code: "NonEmptyString",
+    #                 country_name: "NonEmptyString",
+    #               },
+    #               city: {
+    #                 city_name: "NonEmptyString",
+    #               },
+    #               geo_location: {
+    #                 lon: 1.0,
+    #                 lat: 1.0,
+    #               },
+    #             },
+    #             domain_details: {
+    #               domain: "NonEmptyString",
+    #             },
+    #             affected_resources: {
+    #               "NonEmptyString" => "NonEmptyString",
+    #             },
+    #             first_seen: "NonEmptyString",
+    #             last_seen: "NonEmptyString",
+    #           },
+    #           dns_request_action: {
+    #             domain: "NonEmptyString",
+    #             protocol: "NonEmptyString",
+    #             blocked: false,
+    #           },
+    #           port_probe_action: {
+    #             port_probe_details: [
+    #               {
+    #                 local_port_details: {
+    #                   port: 1,
+    #                   port_name: "NonEmptyString",
+    #                 },
+    #                 local_ip_details: {
+    #                   ip_address_v4: "NonEmptyString",
+    #                 },
+    #                 remote_ip_details: {
+    #                   ip_address_v4: "NonEmptyString",
+    #                   organization: {
+    #                     asn: 1,
+    #                     asn_org: "NonEmptyString",
+    #                     isp: "NonEmptyString",
+    #                     org: "NonEmptyString",
+    #                   },
+    #                   country: {
+    #                     country_code: "NonEmptyString",
+    #                     country_name: "NonEmptyString",
+    #                   },
+    #                   city: {
+    #                     city_name: "NonEmptyString",
+    #                   },
+    #                   geo_location: {
+    #                     lon: 1.0,
+    #                     lat: 1.0,
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #             blocked: false,
+    #           },
     #         },
     #       },
     #     ],
@@ -4422,6 +4567,13 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_ec2_network_interface.security_groups[0].group_name #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_network_interface.security_groups[0].group_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_network_interface.source_dest_check #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.ip_v6_addresses #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.ip_v6_addresses[0].ip_v6_address #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.private_ip_addresses #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.private_ip_addresses[0].private_ip_address #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.private_ip_addresses[0].private_dns_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.public_dns_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.public_ip #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_security_group.group_name #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_security_group.group_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_security_group.owner_id #=> String
@@ -4755,6 +4907,24 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.sns_topic_arn #=> String
     #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.sns_topic_name #=> String
     #   resp.findings[0].resources[0].details.aws_cloud_trail_trail.trail_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.status #=> String
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.compliant_critical_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.compliant_high_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.compliant_medium_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.execution_type #=> String
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.non_compliant_critical_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.compliant_informational_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.non_compliant_informational_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.compliant_unspecified_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.non_compliant_low_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.non_compliant_high_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.compliant_low_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.compliance_type #=> String
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.patch_baseline_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.overall_severity #=> String
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.non_compliant_medium_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.non_compliant_unspecified_count #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ssm_patch_compliance.patch.compliance_summary.patch_group #=> String
     #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.certificate_authority_arn #=> String
     #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.created_at #=> String
     #   resp.findings[0].resources[0].details.aws_certificate_manager_certificate.domain_name #=> String
@@ -5304,6 +5474,60 @@ module Aws::SecurityHub
     #   resp.findings[0].patch_summary.operation_end_time #=> String
     #   resp.findings[0].patch_summary.reboot_option #=> String
     #   resp.findings[0].patch_summary.operation #=> String
+    #   resp.findings[0].action.action_type #=> String
+    #   resp.findings[0].action.network_connection_action.connection_direction #=> String
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.organization.asn #=> Integer
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.organization.asn_org #=> String
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.organization.isp #=> String
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.organization.org #=> String
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.country.country_code #=> String
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.country.country_name #=> String
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.city.city_name #=> String
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.geo_location.lon #=> Float
+    #   resp.findings[0].action.network_connection_action.remote_ip_details.geo_location.lat #=> Float
+    #   resp.findings[0].action.network_connection_action.remote_port_details.port #=> Integer
+    #   resp.findings[0].action.network_connection_action.remote_port_details.port_name #=> String
+    #   resp.findings[0].action.network_connection_action.local_port_details.port #=> Integer
+    #   resp.findings[0].action.network_connection_action.local_port_details.port_name #=> String
+    #   resp.findings[0].action.network_connection_action.protocol #=> String
+    #   resp.findings[0].action.network_connection_action.blocked #=> Boolean
+    #   resp.findings[0].action.aws_api_call_action.api #=> String
+    #   resp.findings[0].action.aws_api_call_action.service_name #=> String
+    #   resp.findings[0].action.aws_api_call_action.caller_type #=> String
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.organization.asn #=> Integer
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.organization.asn_org #=> String
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.organization.isp #=> String
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.organization.org #=> String
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.country.country_code #=> String
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.country.country_name #=> String
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.city.city_name #=> String
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.geo_location.lon #=> Float
+    #   resp.findings[0].action.aws_api_call_action.remote_ip_details.geo_location.lat #=> Float
+    #   resp.findings[0].action.aws_api_call_action.domain_details.domain #=> String
+    #   resp.findings[0].action.aws_api_call_action.affected_resources #=> Hash
+    #   resp.findings[0].action.aws_api_call_action.affected_resources["NonEmptyString"] #=> String
+    #   resp.findings[0].action.aws_api_call_action.first_seen #=> String
+    #   resp.findings[0].action.aws_api_call_action.last_seen #=> String
+    #   resp.findings[0].action.dns_request_action.domain #=> String
+    #   resp.findings[0].action.dns_request_action.protocol #=> String
+    #   resp.findings[0].action.dns_request_action.blocked #=> Boolean
+    #   resp.findings[0].action.port_probe_action.port_probe_details #=> Array
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].local_port_details.port #=> Integer
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].local_port_details.port_name #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].local_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.organization.asn #=> Integer
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.organization.asn_org #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.organization.isp #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.organization.org #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.country.country_code #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.country.country_name #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.city.city_name #=> String
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.geo_location.lon #=> Float
+    #   resp.findings[0].action.port_probe_action.port_probe_details[0].remote_ip_details.geo_location.lat #=> Float
+    #   resp.findings[0].action.port_probe_action.blocked #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindings AWS API Documentation
@@ -7413,7 +7637,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

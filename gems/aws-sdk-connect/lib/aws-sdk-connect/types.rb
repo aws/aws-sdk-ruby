@@ -158,6 +158,37 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateQueueQuickConnectsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         queue_id: "QueueId", # required
+    #         quick_connect_ids: ["QuickConnectId"], # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier for the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_connect_ids
+    #   The quick connects to associate with this queue.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateQueueQuickConnectsRequest AWS API Documentation
+    #
+    class AssociateQueueQuickConnectsRequest < Struct.new(
+      :instance_id,
+      :queue_id,
+      :quick_connect_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateRoutingProfileQueuesRequest
     #   data as a hash:
     #
@@ -266,7 +297,7 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] content_type
-    #   The type of the content. Supported types are text/plain.
+    #   The type of the content. Supported types are text and plain.
     #   @return [String]
     #
     # @!attribute [rw] content
@@ -498,11 +529,11 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] inbound_calls_enabled
-    #   Whether your contact center handles incoming contacts.
+    #   Your contact center handles incoming contacts.
     #   @return [Boolean]
     #
     # @!attribute [rw] outbound_calls_enabled
-    #   Whether your contact center allows outbound calls.
+    #   Your contact center allows outbound calls.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateInstanceRequest AWS API Documentation
@@ -597,6 +628,91 @@ module Aws::Connect
     class CreateIntegrationAssociationResponse < Struct.new(
       :integration_association_id,
       :integration_association_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateQueueRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         name: "CommonNameLength127", # required
+    #         description: "QueueDescription",
+    #         outbound_caller_config: {
+    #           outbound_caller_id_name: "OutboundCallerIdName",
+    #           outbound_caller_id_number_id: "PhoneNumberId",
+    #           outbound_flow_id: "ContactFlowId",
+    #         },
+    #         hours_of_operation_id: "HoursOfOperationId", # required
+    #         max_contacts: 1,
+    #         quick_connect_ids: ["QuickConnectId"],
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] outbound_caller_config
+    #   The outbound caller ID name, number, and outbound whisper flow.
+    #   @return [Types::OutboundCallerConfig]
+    #
+    # @!attribute [rw] hours_of_operation_id
+    #   The identifier for the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_contacts
+    #   The maximum number of contacts that can be in the queue before it is
+    #   considered full.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quick_connect_ids
+    #   The quick connects available to agents who are working the queue.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateQueueRequest AWS API Documentation
+    #
+    class CreateQueueRequest < Struct.new(
+      :instance_id,
+      :name,
+      :description,
+      :outbound_caller_config,
+      :hours_of_operation_id,
+      :max_contacts,
+      :quick_connect_ids,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue_arn
+    #   The Amazon Resource Name (ARN) of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier for the queue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateQueueResponse AWS API Documentation
+    #
+    class CreateQueueResponse < Struct.new(
+      :queue_arn,
+      :queue_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -725,12 +841,12 @@ module Aws::Connect
     #
     # @!attribute [rw] queue_configs
     #   The inbound queues associated with the routing profile. If no queue
-    #   is added, the agent can only make outbound calls.
+    #   is added, the agent can make only outbound calls.
     #   @return [Array<Types::RoutingProfileQueueConfig>]
     #
     # @!attribute [rw] media_concurrencies
-    #   The channels agents can handle in the Contact Control Panel (CCP)
-    #   for this routing profile.
+    #   The channels that agents can handle in the Contact Control Panel
+    #   (CCP) for this routing profile.
     #   @return [Array<Types::MediaConcurrency>]
     #
     # @!attribute [rw] tags
@@ -1275,6 +1391,43 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeHoursOfOperationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         hours_of_operation_id: "HoursOfOperationId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] hours_of_operation_id
+    #   The identifier for the hours of operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeHoursOfOperationRequest AWS API Documentation
+    #
+    class DescribeHoursOfOperationRequest < Struct.new(
+      :instance_id,
+      :hours_of_operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hours_of_operation
+    #   The hours of operation.
+    #   @return [Types::HoursOfOperation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeHoursOfOperationResponse AWS API Documentation
+    #
+    class DescribeHoursOfOperationResponse < Struct.new(
+      :hours_of_operation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeInstanceAttributeRequest
     #   data as a hash:
     #
@@ -1383,6 +1536,43 @@ module Aws::Connect
     #
     class DescribeInstanceStorageConfigResponse < Struct.new(
       :storage_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeQueueRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         queue_id: "QueueId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier for the queue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeQueueRequest AWS API Documentation
+    #
+    class DescribeQueueRequest < Struct.new(
+      :instance_id,
+      :queue_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queue
+    #   The name of the queue.
+    #   @return [Types::Queue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeQueueResponse AWS API Documentation
+    #
+    class DescribeQueueResponse < Struct.new(
+      :queue)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1569,7 +1759,7 @@ module Aws::Connect
     # Outbound calls to the destination number are not allowed.
     #
     # @!attribute [rw] message
-    #   The message.
+    #   The message about the outbound calls.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DestinationNotAllowedException AWS API Documentation
@@ -1709,6 +1899,37 @@ module Aws::Connect
       :instance_id,
       :bot_name,
       :lex_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociateQueueQuickConnectsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         queue_id: "QueueId", # required
+    #         quick_connect_ids: ["QuickConnectId"], # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier for the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_connect_ids
+    #   The quick connects to disassociate from the queue.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateQueueQuickConnectsRequest AWS API Documentation
+    #
+    class DisassociateQueueQuickConnectsRequest < Struct.new(
+      :instance_id,
+      :queue_id,
+      :quick_connect_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2044,7 +2265,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentMetricDataRequest AWS API Documentation
@@ -2363,7 +2584,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetMetricDataRequest AWS API Documentation
@@ -2718,6 +2939,74 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about of the hours of operation.
+    #
+    # @!attribute [rw] hours_of_operation_id
+    #   The identifier for the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] hours_of_operation_arn
+    #   The Amazon Resource Name (ARN) for the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name for the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_zone
+    #   The time zone for the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] config
+    #   Configuration information for the hours of operation.
+    #   @return [Array<Types::HoursOfOperationConfig>]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HoursOfOperation AWS API Documentation
+    #
+    class HoursOfOperation < Struct.new(
+      :hours_of_operation_id,
+      :hours_of_operation_arn,
+      :name,
+      :description,
+      :time_zone,
+      :config,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the hours of operation.
+    #
+    # @!attribute [rw] day
+    #   The day that the hours of operation applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time that your contact center is open.
+    #   @return [Types::HoursOfOperationTimeSlice]
+    #
+    # @!attribute [rw] end_time
+    #   The end time that your contact center is closes.
+    #   @return [Types::HoursOfOperationTimeSlice]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HoursOfOperationConfig AWS API Documentation
+    #
+    class HoursOfOperationConfig < Struct.new(
+      :day,
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains summary information about hours of operation for a contact
     # center.
     #
@@ -2739,6 +3028,25 @@ module Aws::Connect
       :id,
       :arn,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The start time or end time for an hours of operation.
+    #
+    # @!attribute [rw] hours
+    #   The hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minutes
+    #   The minutes.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HoursOfOperationTimeSlice AWS API Documentation
+    #
+    class HoursOfOperationTimeSlice < Struct.new(
+      :hours,
+      :minutes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2858,7 +3166,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] s3_config
-    #   The S3 configuration.
+    #   The S3 bucket configuration.
     #   @return [Types::S3Config]
     #
     # @!attribute [rw] kinesis_video_stream_config
@@ -2989,7 +3297,8 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Request processing failed due to an error or failure with the service.
+    # Request processing failed because of an error or failure with the
+    # service.
     #
     # @!attribute [rw] message
     #   The message.
@@ -3020,7 +3329,7 @@ module Aws::Connect
     # One or more of the specified parameters are not valid.
     #
     # @!attribute [rw] message
-    #   The message.
+    #   The message about the parameters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InvalidParameterException AWS API Documentation
@@ -3034,7 +3343,7 @@ module Aws::Connect
     # The request is not valid.
     #
     # @!attribute [rw] message
-    #   The message.
+    #   The message about the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InvalidRequestException AWS API Documentation
@@ -3045,7 +3354,7 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Configuration information of a Kinesis Firehose delivery stream.
+    # Configuration information of a Kinesis Data Firehose delivery stream.
     #
     # @note When making an API call, you may pass KinesisFirehoseConfig
     #   data as a hash:
@@ -3143,7 +3452,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] lex_region
-    #   The Region the Amazon Lex bot was created in.
+    #   The Region that the Amazon Lex bot was created in.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/LexBot AWS API Documentation
@@ -3158,7 +3467,7 @@ module Aws::Connect
     # The allowed limit for the resource has been exceeded.
     #
     # @!attribute [rw] message
-    #   The message.
+    #   The message about the limit.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/LimitExceededException AWS API Documentation
@@ -3189,7 +3498,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListApprovedOriginsRequest AWS API Documentation
@@ -3245,7 +3554,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactFlowsRequest AWS API Documentation
@@ -3297,7 +3606,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListHoursOfOperationsRequest AWS API Documentation
@@ -3348,7 +3657,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListInstanceAttributesRequest AWS API Documentation
@@ -3404,7 +3713,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListInstanceStorageConfigsRequest AWS API Documentation
@@ -3451,7 +3760,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListInstancesRequest AWS API Documentation
@@ -3501,7 +3810,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListIntegrationAssociationsRequest AWS API Documentation
@@ -3552,7 +3861,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListLambdaFunctionsRequest AWS API Documentation
@@ -3603,7 +3912,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListLexBotsRequest AWS API Documentation
@@ -3617,7 +3926,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] lex_bots
-    #   The the names and regions of the Amazon Lex bots associated with the
+    #   The names and Regions of the Amazon Lex bots associated with the
     #   specified instance.
     #   @return [Array<Types::LexBot>]
     #
@@ -3665,7 +3974,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersRequest AWS API Documentation
@@ -3749,6 +4058,63 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListQueueQuickConnectsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         queue_id: "QueueId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier for the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQueueQuickConnectsRequest AWS API Documentation
+    #
+    class ListQueueQuickConnectsRequest < Struct.new(
+      :instance_id,
+      :queue_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_connect_summary_list
+    #   Information about the quick connects.
+    #   @return [Array<Types::QuickConnectSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQueueQuickConnectsResponse AWS API Documentation
+    #
+    class ListQueueQuickConnectsResponse < Struct.new(
+      :next_token,
+      :quick_connect_summary_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListQueuesRequest
     #   data as a hash:
     #
@@ -3774,7 +4140,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQueuesRequest AWS API Documentation
@@ -3827,7 +4193,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @!attribute [rw] quick_connect_types
@@ -3891,7 +4257,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfileQueuesRequest AWS API Documentation
@@ -3943,7 +4309,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfilesRequest AWS API Documentation
@@ -3994,7 +4360,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityKeysRequest AWS API Documentation
@@ -4045,7 +4411,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfilesRequest AWS API Documentation
@@ -4135,7 +4501,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUseCasesRequest AWS API Documentation
@@ -4187,7 +4553,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserHierarchyGroupsRequest AWS API Documentation
@@ -4238,7 +4604,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximimum number of results to return per page.
+    #   The maximum number of results to return per page.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUsersRequest AWS API Documentation
@@ -4299,10 +4665,43 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The outbound caller ID name, number, and outbound whisper flow.
+    #
+    # @note When making an API call, you may pass OutboundCallerConfig
+    #   data as a hash:
+    #
+    #       {
+    #         outbound_caller_id_name: "OutboundCallerIdName",
+    #         outbound_caller_id_number_id: "PhoneNumberId",
+    #         outbound_flow_id: "ContactFlowId",
+    #       }
+    #
+    # @!attribute [rw] outbound_caller_id_name
+    #   The caller ID name.
+    #   @return [String]
+    #
+    # @!attribute [rw] outbound_caller_id_number_id
+    #   The caller ID number.
+    #   @return [String]
+    #
+    # @!attribute [rw] outbound_flow_id
+    #   The outbound whisper flow to be used during an outbound call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/OutboundCallerConfig AWS API Documentation
+    #
+    class OutboundCallerConfig < Struct.new(
+      :outbound_caller_id_name,
+      :outbound_caller_id_number_id,
+      :outbound_flow_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The contact is not permitted.
     #
     # @!attribute [rw] message
-    #   The message.
+    #   The message about the contact.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/OutboundContactNotPermittedException AWS API Documentation
@@ -4428,6 +4827,61 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Contains information about a queue.
+    #
+    # @!attribute [rw] name
+    #   The name of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_arn
+    #   The Amazon Resource Name (ARN) for the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier for the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] outbound_caller_config
+    #   The outbound caller ID name, number, and outbound whisper flow.
+    #   @return [Types::OutboundCallerConfig]
+    #
+    # @!attribute [rw] hours_of_operation_id
+    #   The identifier for the hours of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_contacts
+    #   The maximum number of contacts that can be in the queue before it is
+    #   considered full.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Queue AWS API Documentation
+    #
+    class Queue < Struct.new(
+      :name,
+      :queue_arn,
+      :queue_id,
+      :description,
+      :outbound_caller_config,
+      :hours_of_operation_id,
+      :max_contacts,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a queue for a quick connect. The contact
     # flow must be of type Transfer to Queue.
     #
@@ -4440,7 +4894,7 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] queue_id
-    #   The identifier of the queue.
+    #   The identifier for the queue.
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
@@ -4604,11 +5058,11 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN).
+    #   The Amazon Resource Name (ARN) of the quick connect.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name.
+    #   The name of the quick connect.
     #   @return [String]
     #
     # @!attribute [rw] quick_connect_type
@@ -4641,8 +5095,8 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] value
-    #   A formatted URL that will be shown to an agent in the Contact
-    #   Control Panel (CCP)
+    #   A formatted URL that displays to an agent in the Contact Control
+    #   Panel (CCP)
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -4697,7 +5151,7 @@ module Aws::Connect
     # The specified resource was not found.
     #
     # @!attribute [rw] message
-    #   The message.
+    #   The message about the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResourceNotFoundException AWS API Documentation
@@ -4846,7 +5300,7 @@ module Aws::Connect
     # Contains summary information about a routing profile queue.
     #
     # @!attribute [rw] queue_id
-    #   The identifier of the queue.
+    #   The identifier for the queue.
     #   @return [String]
     #
     # @!attribute [rw] queue_arn
@@ -4905,7 +5359,7 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] queue_id
-    #   The identifier of the queue.
+    #   The identifier for the queue.
     #   @return [String]
     #
     # @!attribute [rw] channel
@@ -4946,7 +5400,8 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Information about the S3 storage type.
+    # Information about the Amazon Simple Storage Service (Amazon S3)
+    # storage type.
     #
     # @note When making an API call, you may pass S3Config
     #   data as a hash:
@@ -4969,7 +5424,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] encryption_config
-    #   The S3 encryption configuration.
+    #   The Amazon S3 encryption configuration.
     #   @return [Types::EncryptionConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/S3Config AWS API Documentation
@@ -5080,7 +5535,7 @@ module Aws::Connect
     #
     # @!attribute [rw] attributes
     #   A custom key-value pair using an attribute map. The attributes are
-    #   standard Amazon Connect attributes, and can be accessed in contact
+    #   standard Amazon Connect attributes. They can be accessed in contact
     #   flows just like any other contact attributes.
     #
     #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
@@ -5172,7 +5627,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] voice_recording_configuration
-    #   Who is being recorded.
+    #   The person being recorded.
     #   @return [Types::VoiceRecordingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartContactRecordingRequest AWS API Documentation
@@ -5790,6 +6245,172 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateQueueHoursOfOperationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         queue_id: "QueueId", # required
+    #         hours_of_operation_id: "HoursOfOperationId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier for the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] hours_of_operation_id
+    #   The identifier for the hours of operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQueueHoursOfOperationRequest AWS API Documentation
+    #
+    class UpdateQueueHoursOfOperationRequest < Struct.new(
+      :instance_id,
+      :queue_id,
+      :hours_of_operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateQueueMaxContactsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         queue_id: "QueueId", # required
+    #         max_contacts: 1, # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier for the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_contacts
+    #   The maximum number of contacts that can be in the queue before it is
+    #   considered full.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQueueMaxContactsRequest AWS API Documentation
+    #
+    class UpdateQueueMaxContactsRequest < Struct.new(
+      :instance_id,
+      :queue_id,
+      :max_contacts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateQueueNameRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         queue_id: "QueueId", # required
+    #         name: "CommonNameLength127",
+    #         description: "QueueDescription",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier for the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the queue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQueueNameRequest AWS API Documentation
+    #
+    class UpdateQueueNameRequest < Struct.new(
+      :instance_id,
+      :queue_id,
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateQueueOutboundCallerConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         queue_id: "QueueId", # required
+    #         outbound_caller_config: { # required
+    #           outbound_caller_id_name: "OutboundCallerIdName",
+    #           outbound_caller_id_number_id: "PhoneNumberId",
+    #           outbound_flow_id: "ContactFlowId",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier for the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] outbound_caller_config
+    #   The outbound caller ID name, number, and outbound whisper flow.
+    #   @return [Types::OutboundCallerConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQueueOutboundCallerConfigRequest AWS API Documentation
+    #
+    class UpdateQueueOutboundCallerConfigRequest < Struct.new(
+      :instance_id,
+      :queue_id,
+      :outbound_caller_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateQueueStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         queue_id: "QueueId", # required
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier for the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the queue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateQueueStatusRequest AWS API Documentation
+    #
+    class UpdateQueueStatusRequest < Struct.new(
+      :instance_id,
+      :queue_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateQuickConnectConfigRequest
     #   data as a hash:
     #
@@ -5894,7 +6515,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] media_concurrencies
-    #   The channels agents can handle in the Contact Control Panel (CCP).
+    #   The channels that agents can handle in the Contact Control Panel
+    #   (CCP).
     #   @return [Array<Types::MediaConcurrency>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRoutingProfileConcurrencyRequest AWS API Documentation

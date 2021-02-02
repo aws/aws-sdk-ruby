@@ -785,6 +785,11 @@ module Aws::MediaLive
     #
     # @option params [Hash<String,String>] :tags
     #
+    # @option params [Types::VpcOutputSettings] :vpc
+    #   The properties for a private VPC Output When this property is
+    #   specified, the output egress addresses will be created in a user
+    #   specified VPC
+    #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#channel #channel} => Types::Channel
@@ -1689,6 +1694,11 @@ module Aws::MediaLive
     #     tags: {
     #       "__string" => "__string",
     #     },
+    #     vpc: {
+    #       public_address_allocation_ids: ["__string"],
+    #       security_group_ids: ["__string"],
+    #       subnet_ids: ["__string"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2273,6 +2283,12 @@ module Aws::MediaLive
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["__string"] #=> String
+    #   resp.channel.vpc.public_address_allocation_ids #=> Array
+    #   resp.channel.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.channel.vpc.security_group_ids #=> Array
+    #   resp.channel.vpc.security_group_ids[0] #=> String
+    #   resp.channel.vpc.subnet_ids #=> Array
+    #   resp.channel.vpc.subnet_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
@@ -2636,6 +2652,7 @@ module Aws::MediaLive
     #   * {Types::DeleteChannelResponse#role_arn #role_arn} => String
     #   * {Types::DeleteChannelResponse#state #state} => String
     #   * {Types::DeleteChannelResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DeleteChannelResponse#vpc #vpc} => Types::VpcOutputSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -3225,6 +3242,12 @@ module Aws::MediaLive
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
+    #   resp.vpc.public_address_allocation_ids #=> Array
+    #   resp.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.vpc.security_group_ids #=> Array
+    #   resp.vpc.security_group_ids[0] #=> String
+    #   resp.vpc.subnet_ids #=> Array
+    #   resp.vpc.subnet_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannel AWS API Documentation
     #
@@ -3527,6 +3550,7 @@ module Aws::MediaLive
     #   * {Types::DescribeChannelResponse#role_arn #role_arn} => String
     #   * {Types::DescribeChannelResponse#state #state} => String
     #   * {Types::DescribeChannelResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeChannelResponse#vpc #vpc} => Types::VpcOutputSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -4116,6 +4140,12 @@ module Aws::MediaLive
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
+    #   resp.vpc.public_address_allocation_ids #=> Array
+    #   resp.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.vpc.security_group_ids #=> Array
+    #   resp.vpc.security_group_ids[0] #=> String
+    #   resp.vpc.subnet_ids #=> Array
+    #   resp.vpc.subnet_ids[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4788,6 +4818,12 @@ module Aws::MediaLive
     #   resp.channels[0].state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.channels[0].tags #=> Hash
     #   resp.channels[0].tags["__string"] #=> String
+    #   resp.channels[0].vpc.public_address_allocation_ids #=> Array
+    #   resp.channels[0].vpc.public_address_allocation_ids[0] #=> String
+    #   resp.channels[0].vpc.security_group_ids #=> Array
+    #   resp.channels[0].vpc.security_group_ids[0] #=> String
+    #   resp.channels[0].vpc.subnet_ids #=> Array
+    #   resp.channels[0].vpc.subnet_ids[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListChannels AWS API Documentation
@@ -5404,6 +5440,7 @@ module Aws::MediaLive
     #   * {Types::StartChannelResponse#role_arn #role_arn} => String
     #   * {Types::StartChannelResponse#state #state} => String
     #   * {Types::StartChannelResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::StartChannelResponse#vpc #vpc} => Types::VpcOutputSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -5993,6 +6030,12 @@ module Aws::MediaLive
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
+    #   resp.vpc.public_address_allocation_ids #=> Array
+    #   resp.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.vpc.security_group_ids #=> Array
+    #   resp.vpc.security_group_ids[0] #=> String
+    #   resp.vpc.subnet_ids #=> Array
+    #   resp.vpc.subnet_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannel AWS API Documentation
     #
@@ -6077,6 +6120,7 @@ module Aws::MediaLive
     #   * {Types::StopChannelResponse#role_arn #role_arn} => String
     #   * {Types::StopChannelResponse#state #state} => String
     #   * {Types::StopChannelResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::StopChannelResponse#vpc #vpc} => Types::VpcOutputSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -6666,6 +6710,12 @@ module Aws::MediaLive
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
+    #   resp.vpc.public_address_allocation_ids #=> Array
+    #   resp.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.vpc.security_group_ids #=> Array
+    #   resp.vpc.security_group_ids[0] #=> String
+    #   resp.vpc.subnet_ids #=> Array
+    #   resp.vpc.subnet_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannel AWS API Documentation
     #
@@ -8261,6 +8311,12 @@ module Aws::MediaLive
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["__string"] #=> String
+    #   resp.channel.vpc.public_address_allocation_ids #=> Array
+    #   resp.channel.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.channel.vpc.security_group_ids #=> Array
+    #   resp.channel.vpc.security_group_ids[0] #=> String
+    #   resp.channel.vpc.subnet_ids #=> Array
+    #   resp.channel.vpc.subnet_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannel AWS API Documentation
     #
@@ -8896,6 +8952,12 @@ module Aws::MediaLive
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["__string"] #=> String
+    #   resp.channel.vpc.public_address_allocation_ids #=> Array
+    #   resp.channel.vpc.public_address_allocation_ids[0] #=> String
+    #   resp.channel.vpc.security_group_ids #=> Array
+    #   resp.channel.vpc.security_group_ids[0] #=> String
+    #   resp.channel.vpc.subnet_ids #=> Array
+    #   resp.channel.vpc.subnet_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelClass AWS API Documentation
     #
@@ -9331,7 +9393,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

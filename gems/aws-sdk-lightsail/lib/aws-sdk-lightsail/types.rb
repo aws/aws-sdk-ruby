@@ -1215,7 +1215,7 @@ module Aws::Lightsail
     #
     #   [1]: https://console.aws.amazon.com/support/home
     #   [2]: https://www.virustotal.com/gui/home/url
-    #   [3]: https://www.google.com/webmasters/hacked/?hl=en
+    #   [3]: https://developers.google.com/web/fundamentals/security/hacked
     #   @return [String]
     #
     # @!attribute [rw] in_use_resource_count

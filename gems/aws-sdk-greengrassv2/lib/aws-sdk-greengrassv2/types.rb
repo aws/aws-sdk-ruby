@@ -607,7 +607,7 @@ module Aws::GreengrassV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/greengrass/v2/tag-resources.html
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/CreateComponentVersionRequest AWS API Documentation
@@ -759,7 +759,7 @@ module Aws::GreengrassV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/greengrass/v2/tag-resources.html
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/CreateDeploymentRequest AWS API Documentation
@@ -935,8 +935,8 @@ module Aws::GreengrassV2
     #     [SubscribeToComponentUpdates][1] IPC operation to receive these
     #     notifications. Then, components can respond with the
     #     [DeferComponentUpdate][2] IPC operation. For more information, see
-    #     the [Create deployments][3] in the *AWS IoT Greengrass V2
-    #     Developer Guide*.
+    #     [Create deployments][3] in the *AWS IoT Greengrass V2 Developer
+    #     Guide*.
     #
     #   * `SKIP_NOTIFY_COMPONENTS` – The deployment doesn't notify
     #     components or wait for them to be safe to update.
@@ -947,7 +947,7 @@ module Aws::GreengrassV2
     #
     #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetocomponentupdates
     #   [2]: https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate
-    #   [3]: https://docs.aws.amazon.com/greengrass/v2/latest/developerguide/create-deployments.html
+    #   [3]: https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DeploymentComponentUpdatePolicy AWS API Documentation
@@ -965,14 +965,14 @@ module Aws::GreengrassV2
     # receive notifications when a deployment specifies a configuration
     # update. Then, components can respond with the
     # [SendConfigurationValidityReport][2] IPC operation. For more
-    # information, see the [Create deployments][3] in the *AWS IoT
-    # Greengrass V2 Developer Guide*.
+    # information, see [Create deployments][3] in the *AWS IoT Greengrass V2
+    # Developer Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetovalidateconfigurationupdates
     # [2]: https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-sendconfigurationvalidityreport
-    # [3]: https://docs.aws.amazon.com/greengrass/v2/latest/developerguide/create-deployments.html
+    # [3]: https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html
     #
     # @note When making an API call, you may pass DeploymentConfigurationValidationPolicy
     #   data as a hash:
@@ -1169,7 +1169,7 @@ module Aws::GreengrassV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/greengrass/v2/tag-resources.html
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DescribeComponentResponse AWS API Documentation
@@ -1310,7 +1310,7 @@ module Aws::GreengrassV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/greengrass/v2/tag-resources.html
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetComponentResponse AWS API Documentation
@@ -1332,7 +1332,8 @@ module Aws::GreengrassV2
     #       }
     #
     # @!attribute [rw] arn
-    #   The [ARN][1] of the component version.
+    #   The [ARN][1] of the component version. Specify the ARN of a public
+    #   component version.
     #
     #
     #
@@ -1341,6 +1342,16 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] artifact_name
     #   The name of the artifact.
+    #
+    #   You can use the [GetComponent][1] operation to download the
+    #   component recipe, which includes the URI of the artifact. The
+    #   artifact name is the section of the URI after the scheme. For
+    #   example, in the artifact URI `greengrass:SomeArtifact.zip`, the
+    #   artifact name is `SomeArtifact.zip`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponent.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetComponentVersionArtifactRequest AWS API Documentation
@@ -1353,7 +1364,7 @@ module Aws::GreengrassV2
     end
 
     # @!attribute [rw] pre_signed_url
-    #   The URL to the artifact.
+    #   The URL of the artifact.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetComponentVersionArtifactResponse AWS API Documentation
@@ -1431,7 +1442,7 @@ module Aws::GreengrassV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/greengrass/v2/tag-resources.html
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetCoreDeviceResponse AWS API Documentation
@@ -1543,7 +1554,7 @@ module Aws::GreengrassV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/greengrass/v2/tag-resources.html
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetDeploymentResponse AWS API Documentation
@@ -2697,7 +2708,7 @@ module Aws::GreengrassV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/greengrass/v2/tag-resources.html
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListTagsForResourceResponse AWS API Documentation
@@ -2884,7 +2895,7 @@ module Aws::GreengrassV2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/greengrass/v2/tag-resources.html
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/TagResourceRequest AWS API Documentation

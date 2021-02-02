@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2021-01-28)
+------------------
+
+* Feature - Documentation updates for IoT DeleteOTAUpdate API
+
 1.64.0 (2020-12-15)
 ------------------
 

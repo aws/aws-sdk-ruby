@@ -2525,6 +2525,9 @@ module Aws::ECS
     #   resp.task_definition.proxy_configuration.properties #=> Array
     #   resp.task_definition.proxy_configuration.properties[0].name #=> String
     #   resp.task_definition.proxy_configuration.properties[0].value #=> String
+    #   resp.task_definition.registered_at #=> Time
+    #   resp.task_definition.deregistered_at #=> Time
+    #   resp.task_definition.registered_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinition AWS API Documentation
     #
@@ -3403,6 +3406,9 @@ module Aws::ECS
     #   resp.task_definition.proxy_configuration.properties #=> Array
     #   resp.task_definition.proxy_configuration.properties[0].name #=> String
     #   resp.task_definition.proxy_configuration.properties[0].value #=> String
+    #   resp.task_definition.registered_at #=> Time
+    #   resp.task_definition.deregistered_at #=> Time
+    #   resp.task_definition.registered_by #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -5976,6 +5982,9 @@ module Aws::ECS
     #   resp.task_definition.proxy_configuration.properties #=> Array
     #   resp.task_definition.proxy_configuration.properties[0].name #=> String
     #   resp.task_definition.proxy_configuration.properties[0].value #=> String
+    #   resp.task_definition.registered_at #=> Time
+    #   resp.task_definition.deregistered_at #=> Time
+    #   resp.task_definition.registered_by #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -7205,11 +7214,11 @@ module Aws::ECS
     # Modifies the parameters for a capacity provider.
     #
     # @option params [required, String] :name
-    #   An object representing the parameters to update for the Auto Scaling
-    #   group capacity provider.
+    #   The name of the capacity provider to update.
     #
     # @option params [required, Types::AutoScalingGroupProviderUpdate] :auto_scaling_group_provider
-    #   The name of the capacity provider to update.
+    #   An object representing the parameters to update for the Auto Scaling
+    #   group capacity provider.
     #
     # @return [Types::UpdateCapacityProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8201,7 +8210,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

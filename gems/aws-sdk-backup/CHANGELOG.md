@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2021-01-26)
+------------------
+
+* Feature - Documentation updates for AWS Backup
+
 1.25.0 (2020-11-18)
 ------------------
 

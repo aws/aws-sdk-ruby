@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2021-01-21)
+------------------
+
+* Feature - Amazon MSK has added a new API that allows you to update all the brokers in the cluster to the specified type.
+
 1.32.0 (2020-12-04)
 ------------------
 

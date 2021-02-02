@@ -1792,19 +1792,32 @@ module Aws::ElastiCache
     # others are read-only replicas. Writes to the primary are
     # asynchronously propagated to the replicas.
     #
-    # A Redis (cluster mode enabled) replication group is a collection of 1
-    # to 90 node groups (shards). Each node group (shard) has one read/write
-    # primary node and up to 5 read-only replica nodes. Writes to the
-    # primary are asynchronously propagated to the replicas. Redis (cluster
-    # mode enabled) replication groups partition the data across node groups
-    # (shards).
+    # A Redis cluster-mode enabled cluster is comprised of from 1 to 90
+    # shards (API/CLI: node groups). Each shard has a primary node and up to
+    # 5 read-only replica nodes. The configuration can range from 90 shards
+    # and 0 replicas to 15 shards and 5 replicas, which is the maximum
+    # number or replicas allowed.
+    #
+    # The node or shard limit can be increased to a maximum of 500 per
+    # cluster if the Redis engine version is 5.0.6 or higher. For example,
+    # you can choose to configure a 500 node cluster that ranges between 83
+    # shards (one primary and 5 replicas per shard) and 500 shards (single
+    # primary and no replicas). Make sure there are enough available IP
+    # addresses to accommodate the increase. Common pitfalls include the
+    # subnets in the subnet group have too small a CIDR range or the subnets
+    # are shared and heavily used by other clusters. For more information,
+    # see [Creating a Subnet Group][1]. For versions below 5.0.6, the limit
+    # is 250 per cluster.
+    #
+    # To request a limit increase, see [AWS Service Limits][2] and choose
+    # the limit type **Nodes per cluster per instance type**.
     #
     # When a Redis (cluster mode disabled) replication group has been
     # successfully created, you can add one or more read replicas to it, up
     # to a total of 5 read replicas. If you need to increase or decrease the
     # number of node groups (console: shards), you can avail yourself of
     # ElastiCache for Redis' scaling. For more information, see [Scaling
-    # ElastiCache for Redis Clusters][1] in the *ElastiCache User Guide*.
+    # ElastiCache for Redis Clusters][3] in the *ElastiCache User Guide*.
     #
     # <note markdown="1"> This operation is valid for Redis only.
     #
@@ -1812,7 +1825,9 @@ module Aws::ElastiCache
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html
+    # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+    # [3]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html
     #
     # @option params [required, String] :replication_group_id
     #   The replication group identifier. This parameter is stored as a
@@ -2044,12 +2059,6 @@ module Aws::ElastiCache
     #   The name of the parameter group to associate with this replication
     #   group. If this argument is omitted, the default cache parameter group
     #   for the specified engine is used.
-    #
-    #   <note markdown="1"> If you are restoring to an engine version that is different than the
-    #   original, you must specify the default version of that version. For
-    #   example, `CacheParameterGroupName=default.redis4.0`.
-    #
-    #    </note>
     #
     #   If you are running Redis version 3.2.4 or later, only one node group
     #   (shard), and want to use a default parameter group, we recommend that
@@ -3608,8 +3617,8 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # For Redis engine version 6.x onwards: Deletes a ser group. The user
-    # group must first be disassociated from the replcation group before it
+    # For Redis engine version 6.x onwards: Deletes a user group. The user
+    # group must first be disassociated from the replication group before it
     # can be deleted. For more information, see [Using Role Based Access
     # Control (RBAC)][1].
     #
@@ -7393,7 +7402,7 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Dynamically increases the number of replics in a Redis (cluster mode
+    # Dynamically increases the number of replicas in a Redis (cluster mode
     # disabled) replication group or the number of replica nodes in one or
     # more node groups (shards) of a Redis (cluster mode enabled)
     # replication group. This operation is performed with no cluster down
@@ -8292,6 +8301,11 @@ module Aws::ElastiCache
     #   The upgraded version of the cache engine to be run on the clusters in
     #   the Global Datastore.
     #
+    # @option params [String] :cache_parameter_group_name
+    #   The name of the cache parameter group to use with the Global
+    #   datastore. It must be compatible with the major engine version used by
+    #   the Global datastore.
+    #
     # @option params [String] :global_replication_group_description
     #   A description of the Global Datastore
     #
@@ -8310,6 +8324,7 @@ module Aws::ElastiCache
     #     apply_immediately: false, # required
     #     cache_node_type: "String",
     #     engine_version: "String",
+    #     cache_parameter_group_name: "String",
     #     global_replication_group_description: "String",
     #     automatic_failover_enabled: false,
     #   })
@@ -8967,7 +8982,15 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Allows you to purchase a reserved cache node offering.
+    # Allows you to purchase a reserved cache node offering. Reserved nodes
+    # are not eligible for cancellation and are non-refundable. For more
+    # information, see [Managing Costs with Reserved Nodes][1] for Redis or
+    # [Managing Costs with Reserved Nodes][2] for Memcached.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/reserved-nodes.html
+    # [2]: https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/reserved-nodes.html
     #
     # @option params [required, String] :reserved_cache_nodes_offering_id
     #   The ID of the reserved cache node offering to purchase.
@@ -9689,7 +9712,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

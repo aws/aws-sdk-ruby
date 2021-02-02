@@ -15,6 +15,7 @@ module Aws::ManagedBlockchain
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     ApprovalThresholdPolicy = Shapes::StructureShape.new(name: 'ApprovalThresholdPolicy')
+    ArnString = Shapes::StringShape.new(name: 'ArnString')
     AvailabilityZoneString = Shapes::StringShape.new(name: 'AvailabilityZoneString')
     ClientRequestTokenString = Shapes::StringShape.new(name: 'ClientRequestTokenString')
     CreateMemberInput = Shapes::StructureShape.new(name: 'CreateMemberInput')
@@ -32,6 +33,7 @@ module Aws::ManagedBlockchain
     DescriptionString = Shapes::StringShape.new(name: 'DescriptionString')
     Edition = Shapes::StringShape.new(name: 'Edition')
     Enabled = Shapes::BooleanShape.new(name: 'Enabled')
+    ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     Framework = Shapes::StringShape.new(name: 'Framework')
     FrameworkVersionString = Shapes::StringShape.new(name: 'FrameworkVersionString')
     GetMemberInput = Shapes::StructureShape.new(name: 'GetMemberInput')
@@ -43,6 +45,7 @@ module Aws::ManagedBlockchain
     GetProposalInput = Shapes::StructureShape.new(name: 'GetProposalInput')
     GetProposalOutput = Shapes::StructureShape.new(name: 'GetProposalOutput')
     IllegalActionException = Shapes::StructureShape.new(name: 'IllegalActionException')
+    InputTagMap = Shapes::MapShape.new(name: 'InputTagMap')
     InstanceTypeString = Shapes::StringShape.new(name: 'InstanceTypeString')
     InternalServiceErrorException = Shapes::StructureShape.new(name: 'InternalServiceErrorException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
@@ -64,6 +67,8 @@ module Aws::ManagedBlockchain
     ListProposalVotesOutput = Shapes::StructureShape.new(name: 'ListProposalVotesOutput')
     ListProposalsInput = Shapes::StructureShape.new(name: 'ListProposalsInput')
     ListProposalsOutput = Shapes::StructureShape.new(name: 'ListProposalsOutput')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LogConfiguration = Shapes::StructureShape.new(name: 'LogConfiguration')
     LogConfigurations = Shapes::StructureShape.new(name: 'LogConfigurations')
     Member = Shapes::StructureShape.new(name: 'Member')
@@ -101,6 +106,7 @@ module Aws::ManagedBlockchain
     NodeStatus = Shapes::StringShape.new(name: 'NodeStatus')
     NodeSummary = Shapes::StructureShape.new(name: 'NodeSummary')
     NodeSummaryList = Shapes::ListShape.new(name: 'NodeSummaryList')
+    OutputTagMap = Shapes::MapShape.new(name: 'OutputTagMap')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PasswordString = Shapes::StringShape.new(name: 'PasswordString')
     PrincipalString = Shapes::StringShape.new(name: 'PrincipalString')
@@ -123,10 +129,18 @@ module Aws::ManagedBlockchain
     ResourceNotReadyException = Shapes::StructureShape.new(name: 'ResourceNotReadyException')
     StateDBType = Shapes::StringShape.new(name: 'StateDBType')
     String = Shapes::StringShape.new(name: 'String')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThresholdComparator = Shapes::StringShape.new(name: 'ThresholdComparator')
     ThresholdPercentageInt = Shapes::IntegerShape.new(name: 'ThresholdPercentageInt')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateMemberInput = Shapes::StructureShape.new(name: 'UpdateMemberInput')
     UpdateMemberOutput = Shapes::StructureShape.new(name: 'UpdateMemberOutput')
     UpdateNodeInput = Shapes::StructureShape.new(name: 'UpdateNodeInput')
@@ -164,6 +178,7 @@ module Aws::ManagedBlockchain
     CreateNetworkInput.add_member(:framework_configuration, Shapes::ShapeRef.new(shape: NetworkFrameworkConfiguration, location_name: "FrameworkConfiguration"))
     CreateNetworkInput.add_member(:voting_policy, Shapes::ShapeRef.new(shape: VotingPolicy, required: true, location_name: "VotingPolicy"))
     CreateNetworkInput.add_member(:member_configuration, Shapes::ShapeRef.new(shape: MemberConfiguration, required: true, location_name: "MemberConfiguration"))
+    CreateNetworkInput.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagMap, location_name: "Tags"))
     CreateNetworkInput.struct_class = Types::CreateNetworkInput
 
     CreateNetworkOutput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "NetworkId"))
@@ -174,6 +189,7 @@ module Aws::ManagedBlockchain
     CreateNodeInput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "networkId"))
     CreateNodeInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "MemberId"))
     CreateNodeInput.add_member(:node_configuration, Shapes::ShapeRef.new(shape: NodeConfiguration, required: true, location_name: "NodeConfiguration"))
+    CreateNodeInput.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagMap, location_name: "Tags"))
     CreateNodeInput.struct_class = Types::CreateNodeInput
 
     CreateNodeOutput.add_member(:node_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "NodeId"))
@@ -184,6 +200,7 @@ module Aws::ManagedBlockchain
     CreateProposalInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location_name: "MemberId"))
     CreateProposalInput.add_member(:actions, Shapes::ShapeRef.new(shape: ProposalActions, required: true, location_name: "Actions"))
     CreateProposalInput.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    CreateProposalInput.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagMap, location_name: "Tags"))
     CreateProposalInput.struct_class = Types::CreateProposalInput
 
     CreateProposalOutput.add_member(:proposal_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "ProposalId"))
@@ -233,6 +250,9 @@ module Aws::ManagedBlockchain
     IllegalActionException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     IllegalActionException.struct_class = Types::IllegalActionException
 
+    InputTagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    InputTagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
     InternalServiceErrorException.struct_class = Types::InternalServiceErrorException
 
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -243,6 +263,7 @@ module Aws::ManagedBlockchain
     Invitation.add_member(:expiration_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpirationDate"))
     Invitation.add_member(:status, Shapes::ShapeRef.new(shape: InvitationStatus, location_name: "Status"))
     Invitation.add_member(:network_summary, Shapes::ShapeRef.new(shape: NetworkSummary, location_name: "NetworkSummary"))
+    Invitation.add_member(:arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "Arn"))
     Invitation.struct_class = Types::Invitation
 
     InvitationList.member = Shapes::ShapeRef.new(shape: Invitation)
@@ -313,6 +334,12 @@ module Aws::ManagedBlockchain
     ListProposalsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListProposalsOutput.struct_class = Types::ListProposalsOutput
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ArnString, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: OutputTagMap, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     LogConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled"))
     LogConfiguration.struct_class = Types::LogConfiguration
 
@@ -327,12 +354,15 @@ module Aws::ManagedBlockchain
     Member.add_member(:log_publishing_configuration, Shapes::ShapeRef.new(shape: MemberLogPublishingConfiguration, location_name: "LogPublishingConfiguration"))
     Member.add_member(:status, Shapes::ShapeRef.new(shape: MemberStatus, location_name: "Status"))
     Member.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
+    Member.add_member(:tags, Shapes::ShapeRef.new(shape: OutputTagMap, location_name: "Tags"))
+    Member.add_member(:arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "Arn"))
     Member.struct_class = Types::Member
 
     MemberConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: NetworkMemberNameString, required: true, location_name: "Name"))
     MemberConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     MemberConfiguration.add_member(:framework_configuration, Shapes::ShapeRef.new(shape: MemberFrameworkConfiguration, required: true, location_name: "FrameworkConfiguration"))
     MemberConfiguration.add_member(:log_publishing_configuration, Shapes::ShapeRef.new(shape: MemberLogPublishingConfiguration, location_name: "LogPublishingConfiguration"))
+    MemberConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagMap, location_name: "Tags"))
     MemberConfiguration.struct_class = Types::MemberConfiguration
 
     MemberFabricAttributes.add_member(:admin_username, Shapes::ShapeRef.new(shape: UsernameString, location_name: "AdminUsername"))
@@ -361,6 +391,7 @@ module Aws::ManagedBlockchain
     MemberSummary.add_member(:status, Shapes::ShapeRef.new(shape: MemberStatus, location_name: "Status"))
     MemberSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
     MemberSummary.add_member(:is_owned, Shapes::ShapeRef.new(shape: IsOwned, location_name: "IsOwned"))
+    MemberSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "Arn"))
     MemberSummary.struct_class = Types::MemberSummary
 
     MemberSummaryList.member = Shapes::ShapeRef.new(shape: MemberSummary)
@@ -375,6 +406,8 @@ module Aws::ManagedBlockchain
     Network.add_member(:voting_policy, Shapes::ShapeRef.new(shape: VotingPolicy, location_name: "VotingPolicy"))
     Network.add_member(:status, Shapes::ShapeRef.new(shape: NetworkStatus, location_name: "Status"))
     Network.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
+    Network.add_member(:tags, Shapes::ShapeRef.new(shape: OutputTagMap, location_name: "Tags"))
+    Network.add_member(:arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "Arn"))
     Network.struct_class = Types::Network
 
     NetworkEthereumAttributes.add_member(:chain_id, Shapes::ShapeRef.new(shape: String, location_name: "ChainId"))
@@ -401,6 +434,7 @@ module Aws::ManagedBlockchain
     NetworkSummary.add_member(:framework_version, Shapes::ShapeRef.new(shape: FrameworkVersionString, location_name: "FrameworkVersion"))
     NetworkSummary.add_member(:status, Shapes::ShapeRef.new(shape: NetworkStatus, location_name: "Status"))
     NetworkSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
+    NetworkSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "Arn"))
     NetworkSummary.struct_class = Types::NetworkSummary
 
     NetworkSummaryList.member = Shapes::ShapeRef.new(shape: NetworkSummary)
@@ -415,6 +449,8 @@ module Aws::ManagedBlockchain
     Node.add_member(:state_db, Shapes::ShapeRef.new(shape: StateDBType, location_name: "StateDB"))
     Node.add_member(:status, Shapes::ShapeRef.new(shape: NodeStatus, location_name: "Status"))
     Node.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
+    Node.add_member(:tags, Shapes::ShapeRef.new(shape: OutputTagMap, location_name: "Tags"))
+    Node.add_member(:arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "Arn"))
     Node.struct_class = Types::Node
 
     NodeConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceTypeString, required: true, location_name: "InstanceType"))
@@ -447,9 +483,13 @@ module Aws::ManagedBlockchain
     NodeSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
     NodeSummary.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneString, location_name: "AvailabilityZone"))
     NodeSummary.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceTypeString, location_name: "InstanceType"))
+    NodeSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "Arn"))
     NodeSummary.struct_class = Types::NodeSummary
 
     NodeSummaryList.member = Shapes::ShapeRef.new(shape: NodeSummary)
+
+    OutputTagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    OutputTagMap.value = Shapes::ShapeRef.new(shape: TagValue)
 
     Proposal.add_member(:proposal_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "ProposalId"))
     Proposal.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "NetworkId"))
@@ -463,6 +503,8 @@ module Aws::ManagedBlockchain
     Proposal.add_member(:yes_vote_count, Shapes::ShapeRef.new(shape: VoteCount, location_name: "YesVoteCount"))
     Proposal.add_member(:no_vote_count, Shapes::ShapeRef.new(shape: VoteCount, location_name: "NoVoteCount"))
     Proposal.add_member(:outstanding_vote_count, Shapes::ShapeRef.new(shape: VoteCount, location_name: "OutstandingVoteCount"))
+    Proposal.add_member(:tags, Shapes::ShapeRef.new(shape: OutputTagMap, location_name: "Tags"))
+    Proposal.add_member(:arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "Arn"))
     Proposal.struct_class = Types::Proposal
 
     ProposalActions.add_member(:invitations, Shapes::ShapeRef.new(shape: InviteActionList, location_name: "Invitations"))
@@ -476,6 +518,7 @@ module Aws::ManagedBlockchain
     ProposalSummary.add_member(:status, Shapes::ShapeRef.new(shape: ProposalStatus, location_name: "Status"))
     ProposalSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
     ProposalSummary.add_member(:expiration_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpirationDate"))
+    ProposalSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "Arn"))
     ProposalSummary.struct_class = Types::ProposalSummary
 
     ProposalSummaryList.member = Shapes::ShapeRef.new(shape: ProposalSummary)
@@ -499,12 +542,31 @@ module Aws::ManagedBlockchain
     ResourceLimitExceededException.struct_class = Types::ResourceLimitExceededException
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceNotFoundException.add_member(:resource_name, Shapes::ShapeRef.new(shape: ArnString, location_name: "ResourceName"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ResourceNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceNotReadyException.struct_class = Types::ResourceNotReadyException
 
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ArnString, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagMap, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TooManyTagsException.add_member(:resource_name, Shapes::ShapeRef.new(shape: ArnString, location_name: "ResourceName"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ArnString, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateMemberInput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "networkId"))
     UpdateMemberInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "memberId"))
@@ -570,6 +632,7 @@ module Aws::ManagedBlockchain
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_network, Seahorse::Model::Operation.new.tap do |o|
@@ -584,6 +647,7 @@ module Aws::ManagedBlockchain
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_node, Seahorse::Model::Operation.new.tap do |o|
@@ -600,6 +664,7 @@ module Aws::ManagedBlockchain
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_proposal, Seahorse::Model::Operation.new.tap do |o|
@@ -614,6 +679,7 @@ module Aws::ManagedBlockchain
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:delete_member, Seahorse::Model::Operation.new.tap do |o|
@@ -807,6 +873,18 @@ module Aws::ManagedBlockchain
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
+      end)
+
       api.add_operation(:reject_invitation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RejectInvitation"
         o.http_method = "DELETE"
@@ -819,6 +897,31 @@ module Aws::ManagedBlockchain
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
       end)
 
       api.add_operation(:update_member, Seahorse::Model::Operation.new.tap do |o|

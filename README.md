@@ -479,7 +479,9 @@ RubyGems.org page under "LINKS" section.
 | Amazon Kinesis Video Streams Archived Media           | Aws::KinesisVideoArchivedMedia       | aws-sdk-kinesisvideoarchivedmedia       | 2017-09-30  |
 | Amazon Kinesis Video Streams Media                    | Aws::KinesisVideoMedia               | aws-sdk-kinesisvideomedia               | 2017-09-30  |
 | Amazon Lex Model Building Service                     | Aws::LexModelBuildingService         | aws-sdk-lexmodelbuildingservice         | 2017-04-19  |
+| Amazon Lex Model Building V2                          | Aws::LexModelsV2                     | aws-sdk-lexmodelsv2                     | 2020-08-07  |
 | Amazon Lex Runtime Service                            | Aws::Lex                             | aws-sdk-lex                             | 2016-11-28  |
+| Amazon Lex Runtime V2                                 | Aws::LexRuntimeV2                    | aws-sdk-lexruntimev2                    | 2020-08-07  |
 | Amazon Lightsail                                      | Aws::Lightsail                       | aws-sdk-lightsail                       | 2016-11-28  |
 | Amazon Location Service                               | Aws::LocationService                 | aws-sdk-locationservice                 | 2020-11-19  |
 | Amazon Lookout for Vision                             | Aws::LookoutforVision                | aws-sdk-lookoutforvision                | 2020-11-20  |

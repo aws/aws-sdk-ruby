@@ -508,7 +508,7 @@ module Aws::CustomerProfiles
     #
     #       {
     #         domain_name: "name", # required
-    #         uri: "string1To255",
+    #         uri: "string1To255", # required
     #       }
     #
     # @!attribute [rw] domain_name
@@ -821,7 +821,7 @@ module Aws::CustomerProfiles
     #
     #       {
     #         domain_name: "name", # required
-    #         uri: "string1To255",
+    #         uri: "string1To255", # required
     #       }
     #
     # @!attribute [rw] domain_name

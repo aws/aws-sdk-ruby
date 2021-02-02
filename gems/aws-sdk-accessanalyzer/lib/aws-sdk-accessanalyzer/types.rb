@@ -141,10 +141,10 @@ module Aws::AccessAnalyzer
     #   The status of the analyzer. An `Active` analyzer successfully
     #   monitors supported resources and generates new findings. The
     #   analyzer is `Disabled` when a user action, such as removing trusted
-    #   access for IAM Access Analyzer from AWS Organizations, causes the
-    #   analyzer to stop generating new findings. The status is `Creating`
-    #   when the analyzer creation is in progress and `Failed` when the
-    #   analyzer creation has failed.
+    #   access for AWS IAM Access Analyzer from AWS Organizations, causes
+    #   the analyzer to stop generating new findings. The status is
+    #   `Creating` when the analyzer creation is in progress and `Failed`
+    #   when the analyzer creation has failed.
     #   @return [String]
     #
     # @!attribute [rw] status_reason
@@ -318,8 +318,10 @@ module Aws::AccessAnalyzer
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
-    #   The type of analyzer to create. Only ACCOUNT analyzers are
-    #   supported. You can create only one analyzer per account per Region.
+    #   The type of analyzer to create. Only ACCOUNT and ORGANIZATION
+    #   analyzers are supported. You can create only one analyzer per
+    #   account per Region. You can create up to 5 analyzers per
+    #   organization per Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CreateAnalyzerRequest AWS API Documentation
@@ -937,7 +939,7 @@ module Aws::AccessAnalyzer
     #         analyzer_arn: "AnalyzerArn", # required
     #         max_results: 1,
     #         next_token: "Token",
-    #         resource_type: "AWS::S3::Bucket", # accepts AWS::S3::Bucket, AWS::IAM::Role, AWS::SQS::Queue, AWS::Lambda::Function, AWS::Lambda::LayerVersion, AWS::KMS::Key
+    #         resource_type: "AWS::S3::Bucket", # accepts AWS::S3::Bucket, AWS::IAM::Role, AWS::SQS::Queue, AWS::Lambda::Function, AWS::Lambda::LayerVersion, AWS::KMS::Key, AWS::SecretsManager::Secret
     #       }
     #
     # @!attribute [rw] analyzer_arn

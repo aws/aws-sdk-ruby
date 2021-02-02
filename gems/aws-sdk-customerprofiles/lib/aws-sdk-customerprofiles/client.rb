@@ -644,7 +644,7 @@ module Aws::CustomerProfiles
     # @option params [required, String] :domain_name
     #   The unique name of the domain.
     #
-    # @option params [String] :uri
+    # @option params [required, String] :uri
     #   The URI of the S3 bucket or any other type of data source.
     #
     # @return [Types::DeleteIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -655,7 +655,7 @@ module Aws::CustomerProfiles
     #
     #   resp = client.delete_integration({
     #     domain_name: "name", # required
-    #     uri: "string1To255",
+    #     uri: "string1To255", # required
     #   })
     #
     # @example Response structure
@@ -872,7 +872,7 @@ module Aws::CustomerProfiles
     # @option params [required, String] :domain_name
     #   The unique name of the domain.
     #
-    # @option params [String] :uri
+    # @option params [required, String] :uri
     #   The URI of the S3 bucket or any other type of data source.
     #
     # @return [Types::GetIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -888,7 +888,7 @@ module Aws::CustomerProfiles
     #
     #   resp = client.get_integration({
     #     domain_name: "name", # required
-    #     uri: "string1To255",
+    #     uri: "string1To255", # required
     #   })
     #
     # @example Response structure
@@ -1972,7 +1972,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

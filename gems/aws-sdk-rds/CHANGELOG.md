@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2021-01-22)
+------------------
+
+* Feature - Documentation updates for Amazon RDS
+
 1.110.0 (2021-01-11)
 ------------------
 

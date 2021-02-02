@@ -104,12 +104,12 @@ module Aws::Macie2
     #   Provides information about the block public access settings for an
     #   S3 bucket. These settings can apply to a bucket at the account level
     #   or bucket level. For detailed information about each setting, see
-    #   [Using Amazon S3 block public access][1] in the *Amazon Simple
-    #   Storage Service Developer Guide*.
+    #   [Blocking public access to your Amazon S3 storage][1] in the *Amazon
+    #   Simple Storage Service User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html
     #   @return [Types::BlockPublicAccess]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AccountLevelPermissions AWS API Documentation
@@ -306,13 +306,13 @@ module Aws::Macie2
 
     # Provides information about the block public access settings for an S3
     # bucket. These settings can apply to a bucket at the account level or
-    # bucket level. For detailed information about each setting, see [Using
-    # Amazon S3 block public access][1] in the *Amazon Simple Storage
-    # Service Developer Guide*.
+    # bucket level. For detailed information about each setting, see
+    # [Blocking public access to your Amazon S3 storage][1] in the *Amazon
+    # Simple Storage Service User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html
     #
     # @!attribute [rw] block_public_acls
     #   @return [Boolean]
@@ -475,12 +475,12 @@ module Aws::Macie2
     #   Provides information about the block public access settings for an
     #   S3 bucket. These settings can apply to a bucket at the account level
     #   or bucket level. For detailed information about each setting, see
-    #   [Using Amazon S3 block public access][1] in the *Amazon Simple
-    #   Storage Service Developer Guide*.
+    #   [Blocking public access to your Amazon S3 storage][1] in the *Amazon
+    #   Simple Storage Service User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html
     #   @return [Types::BlockPublicAccess]
     #
     # @!attribute [rw] bucket_policy
@@ -869,8 +869,8 @@ module Aws::Macie2
     #         s3_job_definition: { # required
     #           bucket_definitions: [
     #             {
-    #               account_id: "__string",
-    #               buckets: ["__string"],
+    #               account_id: "__string", # required
+    #               buckets: ["__string"], # required
     #             },
     #           ],
     #           scoping: {
@@ -878,12 +878,12 @@ module Aws::Macie2
     #               and: [
     #                 {
     #                   simple_scope_term: {
-    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
-    #                     key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG
+    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                     key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
     #                     values: ["__string"],
     #                   },
     #                   tag_scope_term: {
-    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #                     key: "__string",
     #                     tag_values: [
     #                       {
@@ -900,12 +900,12 @@ module Aws::Macie2
     #               and: [
     #                 {
     #                   simple_scope_term: {
-    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
-    #                     key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG
+    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                     key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
     #                     values: ["__string"],
     #                   },
     #                   tag_scope_term: {
-    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #                     comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #                     key: "__string",
     #                     tag_values: [
     #                       {
@@ -3161,12 +3161,12 @@ module Aws::Macie2
     #
     #       {
     #         simple_scope_term: {
-    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
-    #           key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG
+    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #           key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
     #           values: ["__string"],
     #         },
     #         tag_scope_term: {
-    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #           comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #           key: "__string",
     #           tag_values: [
     #             {
@@ -3209,12 +3209,12 @@ module Aws::Macie2
     #         and: [
     #           {
     #             simple_scope_term: {
-    #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
-    #               key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG
+    #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #               key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
     #               values: ["__string"],
     #             },
     #             tag_scope_term: {
-    #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #               key: "__string",
     #               tag_values: [
     #                 {
@@ -3345,14 +3345,14 @@ module Aws::Macie2
     #         filter_criteria: {
     #           excludes: [
     #             {
-    #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #               key: "jobType", # accepts jobType, jobStatus, createdAt, name
     #               values: ["__string"],
     #             },
     #           ],
     #           includes: [
     #             {
-    #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #               comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #               key: "jobType", # accepts jobType, jobStatus, createdAt, name
     #               values: ["__string"],
     #             },
@@ -3618,14 +3618,14 @@ module Aws::Macie2
     #       {
     #         excludes: [
     #           {
-    #             comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #             comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #             key: "jobType", # accepts jobType, jobStatus, createdAt, name
     #             values: ["__string"],
     #           },
     #         ],
     #         includes: [
     #           {
-    #             comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #             comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #             key: "jobType", # accepts jobType, jobStatus, createdAt, name
     #             values: ["__string"],
     #           },
@@ -3655,7 +3655,7 @@ module Aws::Macie2
     #   data as a hash:
     #
     #       {
-    #         comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #         comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #         key: "jobType", # accepts jobType, jobStatus, createdAt, name
     #         values: ["__string"],
     #       }
@@ -4243,8 +4243,8 @@ module Aws::Macie2
     #   data as a hash:
     #
     #       {
-    #         account_id: "__string",
-    #         buckets: ["__string"],
+    #         account_id: "__string", # required
+    #         buckets: ["__string"], # required
     #       }
     #
     # @!attribute [rw] account_id
@@ -4319,8 +4319,8 @@ module Aws::Macie2
     #       {
     #         bucket_definitions: [
     #           {
-    #             account_id: "__string",
-    #             buckets: ["__string"],
+    #             account_id: "__string", # required
+    #             buckets: ["__string"], # required
     #           },
     #         ],
     #         scoping: {
@@ -4328,12 +4328,12 @@ module Aws::Macie2
     #             and: [
     #               {
     #                 simple_scope_term: {
-    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
-    #                   key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG
+    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                   key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
     #                   values: ["__string"],
     #                 },
     #                 tag_scope_term: {
-    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #                   key: "__string",
     #                   tag_values: [
     #                     {
@@ -4350,12 +4350,12 @@ module Aws::Macie2
     #             and: [
     #               {
     #                 simple_scope_term: {
-    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
-    #                   key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG
+    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                   key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
     #                   values: ["__string"],
     #                 },
     #                 tag_scope_term: {
-    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #                   comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #                   key: "__string",
     #                   tag_values: [
     #                     {
@@ -4466,12 +4466,12 @@ module Aws::Macie2
     #           and: [
     #             {
     #               simple_scope_term: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
-    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
     #                 values: ["__string"],
     #               },
     #               tag_scope_term: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #                 key: "__string",
     #                 tag_values: [
     #                   {
@@ -4488,12 +4488,12 @@ module Aws::Macie2
     #           and: [
     #             {
     #               simple_scope_term: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
-    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #                 key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
     #                 values: ["__string"],
     #               },
     #               tag_scope_term: {
-    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #                 comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #                 key: "__string",
     #                 tag_values: [
     #                   {
@@ -4711,8 +4711,8 @@ module Aws::Macie2
     #   data as a hash:
     #
     #       {
-    #         comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
-    #         key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG
+    #         comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
+    #         key: "BUCKET_CREATION_DATE", # accepts BUCKET_CREATION_DATE, OBJECT_EXTENSION, OBJECT_LAST_MODIFIED_DATE, OBJECT_SIZE, TAG, OBJECT_KEY
     #         values: ["__string"],
     #       }
     #
@@ -4825,7 +4825,7 @@ module Aws::Macie2
     #   data as a hash:
     #
     #       {
-    #         comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS
+    #         comparator: "EQ", # accepts EQ, GT, GTE, LT, LTE, NE, CONTAINS, STARTS_WITH
     #         key: "__string",
     #         tag_values: [
     #           {

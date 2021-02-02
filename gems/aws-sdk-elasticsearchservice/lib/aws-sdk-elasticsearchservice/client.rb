@@ -2360,6 +2360,12 @@ module Aws::ElasticsearchService
     # @option params [Types::AdvancedSecurityOptionsInput] :advanced_security_options
     #   Specifies advanced security options.
     #
+    # @option params [Types::NodeToNodeEncryptionOptions] :node_to_node_encryption_options
+    #   Specifies the NodeToNodeEncryptionOptions.
+    #
+    # @option params [Types::EncryptionAtRestOptions] :encryption_at_rest_options
+    #   Specifies the Encryption At Rest Options.
+    #
     # @return [Types::UpdateElasticsearchDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateElasticsearchDomainConfigResponse#domain_config #domain_config} => Types::ElasticsearchDomainConfig
@@ -2438,6 +2444,13 @@ module Aws::ElasticsearchService
     #         roles_key: "String",
     #         session_timeout_minutes: 1,
     #       },
+    #     },
+    #     node_to_node_encryption_options: {
+    #       enabled: false,
+    #     },
+    #     encryption_at_rest_options: {
+    #       enabled: false,
+    #       kms_key_id: "KmsKeyId",
     #     },
     #   })
     #
@@ -2674,7 +2687,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

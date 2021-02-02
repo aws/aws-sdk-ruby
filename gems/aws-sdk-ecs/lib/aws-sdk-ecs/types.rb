@@ -1332,9 +1332,6 @@ module Aws::ECS
     #   Variables][3] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
-    #   This field is not valid for containers in tasks using the Fargate
-    #   launch type.
-    #
     #
     #
     #   [1]: https://docs.docker.com/engine/reference/run/#security-configuration
@@ -10193,6 +10190,18 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
     #   @return [Types::ProxyConfiguration]
     #
+    # @!attribute [rw] registered_at
+    #   The Unix timestamp for when the task definition was registered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] deregistered_at
+    #   The Unix timestamp for when the task definition was deregistered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] registered_by
+    #   The principal that registered the task definition.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinition AWS API Documentation
     #
     class TaskDefinition < Struct.new(
@@ -10214,7 +10223,10 @@ module Aws::ECS
       :inference_accelerators,
       :pid_mode,
       :ipc_mode,
-      :proxy_configuration)
+      :proxy_configuration,
+      :registered_at,
+      :deregistered_at,
+      :registered_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10714,12 +10726,12 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] name
-    #   An object representing the parameters to update for the Auto Scaling
-    #   group capacity provider.
+    #   The name of the capacity provider to update.
     #   @return [String]
     #
     # @!attribute [rw] auto_scaling_group_provider
-    #   The name of the capacity provider to update.
+    #   An object representing the parameters to update for the Auto Scaling
+    #   group capacity provider.
     #   @return [Types::AutoScalingGroupProviderUpdate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateCapacityProviderRequest AWS API Documentation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2021-01-28)
+------------------
+
+* Feature - This release supports tagging on Amazon Managed Blockchain resources.
+
 1.18.0 (2020-12-21)
 ------------------
 

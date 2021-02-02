@@ -288,6 +288,10 @@ module Aws::TranscribeStreamingService
     # @option params [Integer] :number_of_channels
     #   The number of channels that are in your audio stream.
     #
+    # @option params [String] :content_identification_type
+    #   Set this field to `PHI` to identify personal health information in the
+    #   transcription output.
+    #
     # @return [Types::StartMedicalStreamTranscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartMedicalStreamTranscriptionResponse#request_id #request_id} => String
@@ -302,6 +306,7 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartMedicalStreamTranscriptionResponse#transcript_result_stream #transcript_result_stream} => Types::MedicalTranscriptResultStream
     #   * {Types::StartMedicalStreamTranscriptionResponse#enable_channel_identification #enable_channel_identification} => Boolean
     #   * {Types::StartMedicalStreamTranscriptionResponse#number_of_channels #number_of_channels} => Integer
+    #   * {Types::StartMedicalStreamTranscriptionResponse#content_identification_type #content_identification_type} => String
     #
     # @example Bi-directional EventStream Operation Example
     #
@@ -409,6 +414,7 @@ module Aws::TranscribeStreamingService
     #     input_event_stream_hander: EventStreams::AudioStream.new,
     #     enable_channel_identification: false,
     #     number_of_channels: 1,
+    #     content_identification_type: "PHI", # accepts PHI
     #   })
     #   # => Seahorse::Client::AsyncResponse
     #   async_resp.wait
@@ -445,6 +451,12 @@ module Aws::TranscribeStreamingService
     #   event.transcript.results[0].alternatives[0].items[0].content #=> String
     #   event.transcript.results[0].alternatives[0].items[0].confidence #=> Float
     #   event.transcript.results[0].alternatives[0].items[0].speaker #=> String
+    #   event.transcript.results[0].alternatives[0].entities #=> Array
+    #   event.transcript.results[0].alternatives[0].entities[0].start_time #=> Float
+    #   event.transcript.results[0].alternatives[0].entities[0].end_time #=> Float
+    #   event.transcript.results[0].alternatives[0].entities[0].category #=> String
+    #   event.transcript.results[0].alternatives[0].entities[0].content #=> String
+    #   event.transcript.results[0].alternatives[0].entities[0].confidence #=> Float
     #   event.transcript.results[0].channel_id #=> String
     #
     #   For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
@@ -464,6 +476,7 @@ module Aws::TranscribeStreamingService
     #
     #   resp.enable_channel_identification #=> Boolean
     #   resp.number_of_channels #=> Integer
+    #   resp.content_identification_type #=> String, one of "PHI"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartMedicalStreamTranscription AWS API Documentation
     #
@@ -779,7 +792,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
