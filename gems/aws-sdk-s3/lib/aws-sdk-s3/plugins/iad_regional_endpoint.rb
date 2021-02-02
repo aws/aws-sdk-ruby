@@ -30,8 +30,7 @@ region. Defaults to `legacy` mode using global endpoint.
             if context.config.s3_us_east_1_regional_endpoint == 'legacy'
               host = context.http_request.endpoint.host
               # if it's an ARN, don't touch the endpoint at all
-              # TODO this should use context.metadata[:s3_arn] later
-              unless host.include?('.s3-outposts.') || host.include?('.s3-accesspoint.')
+              unless context.metadata[:s3_arn]
                 legacy_host = IADRegionalEndpoint.legacy_host(host)
                 context.http_request.endpoint.host = legacy_host
               end

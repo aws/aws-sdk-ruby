@@ -73,22 +73,14 @@ module Aws
                 region: context[:cached_sigv4_region],
                 credentials: context.config.credentials
               )
-            else
-              resolved_region, arn = ARN.resolve_arn!(
-                context.params[:bucket],
-                context.config.sigv4_signer.region,
-                context.config.s3_use_arn_region
+            elsif (arn = context.metadata[:s3_arn])
+              S3Signer.build_v4_signer(
+                service: arn[:arn].service,
+                region: arn[:resolved_region],
+                credentials: context.config.credentials
               )
-
-              if arn
-                S3Signer.build_v4_signer(
-                  service: arn.service,
-                  region: resolved_region,
-                  credentials: context.config.credentials
-                )
-              else
-                context.config.sigv4_signer
-              end
+            else
+              context.config.sigv4_signer
             end
           end
         end
@@ -173,10 +165,14 @@ module Aws
               context, actual_region
             )
             context.metadata[:redirect_region] = actual_region
+            # if it's an ARN, use the service in the ARN
+            if (arn = context.metadata[:s3_arn])
+              service = arn[:arn].service
+            end
             Aws::Plugins::SignatureV4.apply_signature(
               context: context,
               signer: S3Signer.build_v4_signer(
-                service: 's3',
+                service: service || 's3',
                 region: actual_region,
                 credentials: context.config.credentials
               )
@@ -219,20 +215,16 @@ module Aws
             )
           end
 
+          # Check to see if the bucket is actually an ARN
+          # Otherwise it will retry with the ARN as the bucket name.
           def new_hostname(context, region)
-            # Check to see if the bucket is actually an ARN and resolve it
-            # Otherwise it will retry with the ARN as the bucket name.
-            resolved_region, arn = ARN.resolve_arn!(
-              context.params[:bucket],
-              region,
-              context.config.s3_use_arn_region
-            )
             uri = URI.parse(
-              Aws::Partitions::EndpointProvider.resolve(resolved_region, 's3')
+              Aws::Partitions::EndpointProvider.resolve(region, 's3')
             )
 
-            if arn
-              ARN.resolve_url!(uri, arn).host
+            if (arn = context.metadata[:s3_arn])
+              # Retry with the response region and not the ARN resolved one
+              ARN.resolve_url!(uri, arn[:arn], region).host
             else
               "#{context.params[:bucket]}.#{uri.host}"
             end
