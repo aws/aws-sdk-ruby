@@ -429,7 +429,7 @@ module Aws::ComputeOptimizer
     #   recommendations.
     #
     #   If your account is the management account of an organization, use this
-    #   parameter to specify the member accounts for which you want to export
+    #   parameter to specify the member account for which you want to export
     #   recommendations.
     #
     #   This parameter cannot be specified together with the include member
@@ -552,7 +552,7 @@ module Aws::ComputeOptimizer
     #   recommendations.
     #
     #   If your account is the management account of an organization, use this
-    #   parameter to specify the member accounts for which you want to export
+    #   parameter to specify the member account for which you want to export
     #   recommendations.
     #
     #   This parameter cannot be specified together with the include member
@@ -664,11 +664,11 @@ module Aws::ComputeOptimizer
     # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
     #
     # @option params [Array<String>] :account_ids
-    #   The IDs of the AWS accounts for which to return Auto Scaling group
+    #   The ID of the AWS account for which to return Auto Scaling group
     #   recommendations.
     #
     #   If your account is the management account of an organization, use this
-    #   parameter to specify the member accounts for which you want to return
+    #   parameter to specify the member account for which you want to return
     #   Auto Scaling group recommendations.
     #
     #   Only one account ID can be specified per request.
@@ -787,11 +787,10 @@ module Aws::ComputeOptimizer
     #   specific list of volume recommendations.
     #
     # @option params [Array<String>] :account_ids
-    #   The IDs of the AWS accounts for which to return volume
-    #   recommendations.
+    #   The ID of the AWS account for which to return volume recommendations.
     #
     #   If your account is the management account of an organization, use this
-    #   parameter to specify the member accounts for which you want to return
+    #   parameter to specify the member account for which you want to return
     #   volume recommendations.
     #
     #   Only one account ID can be specified per request.
@@ -889,11 +888,11 @@ module Aws::ComputeOptimizer
     #   specific list of instance recommendations.
     #
     # @option params [Array<String>] :account_ids
-    #   The IDs of the AWS accounts for which to return instance
+    #   The ID of the AWS account for which to return instance
     #   recommendations.
     #
     #   If your account is the management account of an organization, use this
-    #   parameter to specify the member accounts for which you want to return
+    #   parameter to specify the member account for which you want to return
     #   instance recommendations.
     #
     #   Only one account ID can be specified per request.
@@ -1081,11 +1080,11 @@ module Aws::ComputeOptimizer
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using
     #
     # @option params [Array<String>] :account_ids
-    #   The IDs of the AWS accounts for which to return function
+    #   The ID of the AWS account for which to return function
     #   recommendations.
     #
     #   If your account is the management account of an organization, use this
-    #   parameter to specify the member accounts for which you want to return
+    #   parameter to specify the member account for which you want to return
     #   function recommendations.
     #
     #   Only one account ID can be specified per request.
@@ -1167,11 +1166,11 @@ module Aws::ComputeOptimizer
     # not optimized, or optimized.
     #
     # @option params [Array<String>] :account_ids
-    #   The IDs of the AWS accounts for which to return recommendation
+    #   The ID of the AWS account for which to return recommendation
     #   summaries.
     #
     #   If your account is the management account of an organization, use this
-    #   parameter to specify the member accounts for which you want to return
+    #   parameter to specify the member account for which you want to return
     #   recommendation summaries.
     #
     #   Only one account ID can be specified per request.
@@ -1276,7 +1275,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

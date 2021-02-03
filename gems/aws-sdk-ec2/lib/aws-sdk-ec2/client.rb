@@ -10005,7 +10005,9 @@ module Aws::EC2
     #   attributes to `true`\: `enableDnsHostnames` and `enableDnsSupport`.
     #   Use ModifyVpcAttribute to set the VPC attributes.
     #
-    #   Default: `true`
+    #   Private DNS is not supported for Amazon S3 interface endpoints.
+    #
+    #   Default: `true` for supported endpoints
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to associate with the endpoint.
@@ -12996,12 +12998,28 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Deletes one or more specified VPC endpoints. Deleting a gateway
-    # endpoint also deletes the endpoint routes in the route tables that
-    # were associated with the endpoint. Deleting an interface endpoint or a
-    # Gateway Load Balancer endpoint deletes the endpoint network
-    # interfaces. Gateway Load Balancer endpoints can only be deleted if the
-    # routes that are associated with the endpoint are deleted.
+    # Deletes one or more specified VPC endpoints. You can delete any of the
+    # following types of VPC endpoints.
+    #
+    # * Gateway endpoint,
+    #
+    # * Gateway Load Balancer endpoint,
+    #
+    # * Interface endpoint
+    #
+    # The following rules apply when you delete a VPC endpoint:
+    #
+    # * When you delete a gateway endpoint, we delete the endpoint routes in
+    #   the route tables that are associated with the endpoint.
+    #
+    # * When you delete a Gateway Load Balancer endpoint, we delete the
+    #   endpoint network interfaces.
+    #
+    #   You can only delete Gateway Load Balancer endpoints when the routes
+    #   that are associated with the endpoint are deleted.
+    #
+    # * When you delete an interface endpoint, we delete the endpoint
+    #   network interfaces.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -13749,6 +13767,70 @@ module Aws::EC2
     # @param [Hash] params ({})
     def describe_addresses(params = {}, options = {})
       req = build_request(:describe_addresses, params)
+      req.send_request(options)
+    end
+
+    # Describes the attributes of the specified Elastic IP addresses. For
+    # requirements, see [Using reverse DNS for email applications][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS
+    #
+    # @option params [Array<String>] :allocation_ids
+    #   \[EC2-VPC\] The allocation IDs.
+    #
+    # @option params [String] :attribute
+    #   The attribute of the IP address.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeAddressesAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAddressesAttributeResult#addresses #addresses} => Array&lt;Types::AddressAttribute&gt;
+    #   * {Types::DescribeAddressesAttributeResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_addresses_attribute({
+    #     allocation_ids: ["AllocationId"],
+    #     attribute: "domain-name", # accepts domain-name
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.addresses #=> Array
+    #   resp.addresses[0].public_ip #=> String
+    #   resp.addresses[0].allocation_id #=> String
+    #   resp.addresses[0].ptr_record #=> String
+    #   resp.addresses[0].ptr_record_update.value #=> String
+    #   resp.addresses[0].ptr_record_update.status #=> String
+    #   resp.addresses[0].ptr_record_update.reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddressesAttribute AWS API Documentation
+    #
+    # @overload describe_addresses_attribute(params = {})
+    # @param [Hash] params ({})
+    def describe_addresses_attribute(params = {}, options = {})
+      req = build_request(:describe_addresses_attribute, params)
       req.send_request(options)
     end
 
@@ -26811,13 +26893,13 @@ module Aws::EC2
 
     # Describes available services to which you can create a VPC endpoint.
     #
-    # When the service provider and the consumer have different accounts
+    # When the service provider and the consumer have different accounts in
     # multiple Availability Zones, and the consumer views the VPC endpoint
     # service information, the response only includes the common
     # Availability Zones. For example, when the service provider account
     # uses `us-east-1a` and `us-east-1c` and the consumer uses `us-east-1a`
-    # and us-east-1a and us-east-1b, the response includes the VPC endpoint
-    # services in the common Availability Zone, `us-east-1a`.
+    # and `us-east-1b`, the response includes the VPC endpoint services in
+    # the common Availability Zone, `us-east-1a`.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -31317,6 +31399,55 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Modifies an attribute of the specified Elastic IP address. For
+    # requirements, see [Using reverse DNS for email applications][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS
+    #
+    # @option params [required, String] :allocation_id
+    #   \[EC2-VPC\] The allocation ID.
+    #
+    # @option params [String] :domain_name
+    #   The domain name to modify for the IP address.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyAddressAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyAddressAttributeResult#address #address} => Types::AddressAttribute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_address_attribute({
+    #     allocation_id: "AllocationId", # required
+    #     domain_name: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address.public_ip #=> String
+    #   resp.address.allocation_id #=> String
+    #   resp.address.ptr_record #=> String
+    #   resp.address.ptr_record_update.value #=> String
+    #   resp.address.ptr_record_update.status #=> String
+    #   resp.address.ptr_record_update.reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyAddressAttribute AWS API Documentation
+    #
+    # @overload modify_address_attribute(params = {})
+    # @param [Hash] params ({})
+    def modify_address_attribute(params = {}, options = {})
+      req = build_request(:modify_address_attribute, params)
+      req.send_request(options)
+    end
+
     # Changes the opt-in status of the Local Zone and Wavelength Zone group
     # for your account.
     #
@@ -34314,6 +34445,8 @@ module Aws::EC2
     # @option params [Boolean] :private_dns_enabled
     #   (Interface endpoint) Indicates whether a private hosted zone is
     #   associated with the VPC.
+    #
+    #   Private DNS is not supported for Amazon S3 interface endpoints.
     #
     # @return [Types::ModifyVpcEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -37722,6 +37855,55 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Resets the attribute of the specified IP address. For requirements,
+    # see [Using reverse DNS for email applications][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS
+    #
+    # @option params [required, String] :allocation_id
+    #   \[EC2-VPC\] The allocation ID.
+    #
+    # @option params [required, String] :attribute
+    #   The attribute of the IP address.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ResetAddressAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResetAddressAttributeResult#address #address} => Types::AddressAttribute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_address_attribute({
+    #     allocation_id: "AllocationId", # required
+    #     attribute: "domain-name", # required, accepts domain-name
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address.public_ip #=> String
+    #   resp.address.allocation_id #=> String
+    #   resp.address.ptr_record #=> String
+    #   resp.address.ptr_record_update.value #=> String
+    #   resp.address.ptr_record_update.status #=> String
+    #   resp.address.ptr_record_update.reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetAddressAttribute AWS API Documentation
+    #
+    # @overload reset_address_attribute(params = {})
+    # @param [Hash] params ({})
+    def reset_address_attribute(params = {}, options = {})
+      req = build_request(:reset_address_attribute, params)
+      req.send_request(options)
+    end
+
     # Resets the default customer master key (CMK) for EBS encryption for
     # your account in this Region to the AWS managed CMK for EBS.
     #
@@ -40890,7 +41072,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.222.0'
+      context[:gem_version] = '1.223.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

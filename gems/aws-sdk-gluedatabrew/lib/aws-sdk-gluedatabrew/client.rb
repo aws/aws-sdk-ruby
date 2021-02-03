@@ -1103,6 +1103,73 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
+    # Represents one run of a DataBrew job.
+    #
+    # @option params [required, String] :name
+    #   The name of the job being processed during this run.
+    #
+    # @option params [required, String] :run_id
+    #   The unique identifier of the job run.
+    #
+    # @return [Types::DescribeJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeJobRunResponse#attempt #attempt} => Integer
+    #   * {Types::DescribeJobRunResponse#completed_on #completed_on} => Time
+    #   * {Types::DescribeJobRunResponse#dataset_name #dataset_name} => String
+    #   * {Types::DescribeJobRunResponse#error_message #error_message} => String
+    #   * {Types::DescribeJobRunResponse#execution_time #execution_time} => Integer
+    #   * {Types::DescribeJobRunResponse#job_name #job_name} => String
+    #   * {Types::DescribeJobRunResponse#run_id #run_id} => String
+    #   * {Types::DescribeJobRunResponse#state #state} => String
+    #   * {Types::DescribeJobRunResponse#log_subscription #log_subscription} => String
+    #   * {Types::DescribeJobRunResponse#log_group_name #log_group_name} => String
+    #   * {Types::DescribeJobRunResponse#outputs #outputs} => Array&lt;Types::Output&gt;
+    #   * {Types::DescribeJobRunResponse#recipe_reference #recipe_reference} => Types::RecipeReference
+    #   * {Types::DescribeJobRunResponse#started_by #started_by} => String
+    #   * {Types::DescribeJobRunResponse#started_on #started_on} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_job_run({
+    #     name: "JobName", # required
+    #     run_id: "JobRunId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attempt #=> Integer
+    #   resp.completed_on #=> Time
+    #   resp.dataset_name #=> String
+    #   resp.error_message #=> String
+    #   resp.execution_time #=> Integer
+    #   resp.job_name #=> String
+    #   resp.run_id #=> String
+    #   resp.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
+    #   resp.log_subscription #=> String, one of "ENABLE", "DISABLE"
+    #   resp.log_group_name #=> String
+    #   resp.outputs #=> Array
+    #   resp.outputs[0].compression_format #=> String, one of "GZIP", "LZ4", "SNAPPY", "BZIP2", "DEFLATE", "LZO", "BROTLI", "ZSTD", "ZLIB"
+    #   resp.outputs[0].format #=> String, one of "CSV", "JSON", "PARQUET", "GLUEPARQUET", "AVRO", "ORC", "XML"
+    #   resp.outputs[0].partition_columns #=> Array
+    #   resp.outputs[0].partition_columns[0] #=> String
+    #   resp.outputs[0].location.bucket #=> String
+    #   resp.outputs[0].location.key #=> String
+    #   resp.outputs[0].overwrite #=> Boolean
+    #   resp.outputs[0].format_options.csv.delimiter #=> String
+    #   resp.recipe_reference.name #=> String
+    #   resp.recipe_reference.recipe_version #=> String
+    #   resp.started_by #=> String
+    #   resp.started_on #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DescribeJobRun AWS API Documentation
+    #
+    # @overload describe_job_run(params = {})
+    # @param [Hash] params ({})
+    def describe_job_run(params = {}, options = {})
+      req = build_request(:describe_job_run, params)
+      req.send_request(options)
+    end
+
     # Returns the definition of a specific DataBrew project.
     #
     # @option params [required, String] :name
@@ -2373,7 +2440,7 @@ module Aws::GlueDataBrew
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gluedatabrew'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

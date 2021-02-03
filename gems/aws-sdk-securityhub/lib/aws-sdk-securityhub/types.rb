@@ -85,8 +85,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Provides details about one of the following actions that were detected
-    # for the finding:
+    # Provides details about one of the following actions that affects or
+    # that was taken on a resource:
     #
     # * A remote IP address issued an AWS API call
     #
@@ -11953,7 +11953,8 @@ module Aws::SecurityHub
     #   @return [Types::PatchSummary]
     #
     # @!attribute [rw] action
-    #   Provides details about an action that was detected for the finding.
+    #   Provides details about an action that affects or that was taken on a
+    #   resource.
     #   @return [Types::Action]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFinding AWS API Documentation
@@ -16814,6 +16815,7 @@ module Aws::SecurityHub
     #       {
     #         next_token: "NextToken",
     #         max_results: 1,
+    #         product_arn: "NonEmptyString",
     #       }
     #
     # @!attribute [rw] next_token
@@ -16830,11 +16832,16 @@ module Aws::SecurityHub
     #   The maximum number of results to return.
     #   @return [Integer]
     #
+    # @!attribute [rw] product_arn
+    #   The ARN of the integration to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeProductsRequest AWS API Documentation
     #
     class DescribeProductsRequest < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :product_arn)
       SENSITIVE = []
       include Aws::Structure
     end

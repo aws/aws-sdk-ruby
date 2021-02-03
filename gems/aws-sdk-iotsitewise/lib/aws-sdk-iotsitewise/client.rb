@@ -603,6 +603,9 @@ module Aws::IoTSiteWise
     #       iam_user: {
     #         arn: "ARN", # required
     #       },
+    #       iam_role: {
+    #         arn: "ARN", # required
+    #       },
     #     },
     #     access_policy_resource: { # required
     #       portal: {
@@ -1137,6 +1140,35 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # @option params [required, String] :portal_id
+    #
+    # @option params [Integer] :session_duration_seconds
+    #
+    # @option params [String] :state
+    #
+    # @return [Types::CreatePresignedPortalUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePresignedPortalUrlResponse#presigned_portal_url #presigned_portal_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_presigned_portal_url({
+    #     portal_id: "ID", # required
+    #     session_duration_seconds: 1,
+    #     state: "state",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.presigned_portal_url #=> String
+    #
+    # @overload create_presigned_portal_url(params = {})
+    # @param [Hash] params ({})
+    def create_presigned_portal_url(params = {}, options = {})
+      req = build_request(:create_presigned_portal_url, params)
+      req.send_request(options)
+    end
+
     # Creates a project in the specified portal.
     #
     # @option params [required, String] :portal_id
@@ -1465,6 +1497,7 @@ module Aws::IoTSiteWise
     #   resp.access_policy_identity.user.id #=> String
     #   resp.access_policy_identity.group.id #=> String
     #   resp.access_policy_identity.iam_user.arn #=> String
+    #   resp.access_policy_identity.iam_role.arn #=> String
     #   resp.access_policy_resource.portal.id #=> String
     #   resp.access_policy_resource.project.id #=> String
     #   resp.access_policy_permission #=> String, one of "ADMINISTRATOR", "VIEWER"
@@ -2384,6 +2417,7 @@ module Aws::IoTSiteWise
     #   resp.access_policy_summaries[0].identity.user.id #=> String
     #   resp.access_policy_summaries[0].identity.group.id #=> String
     #   resp.access_policy_summaries[0].identity.iam_user.arn #=> String
+    #   resp.access_policy_summaries[0].identity.iam_role.arn #=> String
     #   resp.access_policy_summaries[0].resource.portal.id #=> String
     #   resp.access_policy_summaries[0].resource.project.id #=> String
     #   resp.access_policy_summaries[0].permission #=> String, one of "ADMINISTRATOR", "VIEWER"
@@ -3094,6 +3128,9 @@ module Aws::IoTSiteWise
     #       iam_user: {
     #         arn: "ARN", # required
     #       },
+    #       iam_role: {
+    #         arn: "ARN", # required
+    #       },
     #     },
     #     access_policy_resource: { # required
     #       portal: {
@@ -3689,7 +3726,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

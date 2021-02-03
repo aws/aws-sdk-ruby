@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2021-02-03)
+------------------
+
+* Feature - Documentation updates for codebuild
+
 1.66.0 (2021-02-02)
 ------------------
 

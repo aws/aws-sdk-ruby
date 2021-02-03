@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2021-02-03)
+------------------
+
+* Feature - This release adds the DescribeJobRun API to allow customers retrieve details of a given job run
+
 1.2.0 (2021-02-02)
 ------------------
 

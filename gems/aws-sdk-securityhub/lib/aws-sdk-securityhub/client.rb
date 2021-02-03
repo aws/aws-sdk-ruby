@@ -3348,9 +3348,13 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns information about the available products that you can
-    # subscribe to and integrate with Security Hub in order to consolidate
-    # findings.
+    # Returns information about product integrations in Security Hub.
+    #
+    # You can optionally provide an integration ARN. If you provide an
+    # integration ARN, then the results only include that integration.
+    #
+    # If you do not provide an integration ARN, then the results include all
+    # of the available product integrations.
     #
     # @option params [String] :next_token
     #   The token that is required for pagination. On your first call to the
@@ -3364,6 +3368,9 @@ module Aws::SecurityHub
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
     #
+    # @option params [String] :product_arn
+    #   The ARN of the integration to return.
+    #
     # @return [Types::DescribeProductsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeProductsResponse#products #products} => Array&lt;Types::Product&gt;
@@ -3376,6 +3383,7 @@ module Aws::SecurityHub
     #   resp = client.describe_products({
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     product_arn: "NonEmptyString",
     #   })
     #
     # @example Response structure
@@ -7637,7 +7645,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

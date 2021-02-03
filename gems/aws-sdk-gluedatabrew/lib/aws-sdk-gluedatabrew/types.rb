@@ -674,7 +674,7 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Options that define how DataBrew will write a Csv file a.
+    # Options that define how DataBrew will write a Csv file.
     #
     # @note When making an API call, you may pass CsvOutputOptions
     #   data as a hash:
@@ -1190,6 +1190,112 @@ module Aws::GlueDataBrew
       :role_arn,
       :tags,
       :timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeJobRunRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "JobName", # required
+    #         run_id: "JobRunId", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the job being processed during this run.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   The unique identifier of the job run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DescribeJobRunRequest AWS API Documentation
+    #
+    class DescribeJobRunRequest < Struct.new(
+      :name,
+      :run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attempt
+    #   The number of times that DataBrew has attempted to run the job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] completed_on
+    #   The date and time when the job completed processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] dataset_name
+    #   The name of the dataset for the job to process.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A message indicating an error (if any) that was encountered when the
+    #   job ran.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_time
+    #   The amount of time, in seconds, during which a job run consumed
+    #   resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the job being processed during this run.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   The unique identifier of the job run.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the job run entity itself.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_subscription
+    #   The current status of Amazon CloudWatch logging for the job run.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of an Amazon CloudWatch log group, where the job writes
+    #   diagnostic messages when it runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] outputs
+    #   One or more output artifacts from a job run.
+    #   @return [Array<Types::Output>]
+    #
+    # @!attribute [rw] recipe_reference
+    #   Represents the name and version of a DataBrew recipe.
+    #   @return [Types::RecipeReference]
+    #
+    # @!attribute [rw] started_by
+    #   The Amazon Resource Name (ARN) of the user who initiated the job
+    #   run.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_on
+    #   The date and time when the job run began.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DescribeJobRunResponse AWS API Documentation
+    #
+    class DescribeJobRunResponse < Struct.new(
+      :attempt,
+      :completed_on,
+      :dataset_name,
+      :error_message,
+      :execution_time,
+      :job_name,
+      :run_id,
+      :state,
+      :log_subscription,
+      :log_group_name,
+      :outputs,
+      :recipe_reference,
+      :started_by,
+      :started_on)
       SENSITIVE = []
       include Aws::Structure
     end

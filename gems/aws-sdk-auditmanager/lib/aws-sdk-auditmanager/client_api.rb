@@ -1524,6 +1524,7 @@ module Aws::AuditManager
         o.http_request_uri = "/services"
         o.input = Shapes::ShapeRef.new(shape: GetServicesInScopeRequest)
         o.output = Shapes::ShapeRef.new(shape: GetServicesInScopeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)

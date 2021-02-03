@@ -467,6 +467,35 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The attributes associated with an Elastic IP address.
+    #
+    # @!attribute [rw] public_ip
+    #   The public IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocation_id
+    #   \[EC2-VPC\] The allocation ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] ptr_record
+    #   The pointer (PTR) record for the IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] ptr_record_update
+    #   The updated PTR record for the IP address.
+    #   @return [Types::PtrUpdateStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AddressAttribute AWS API Documentation
+    #
+    class AddressAttribute < Struct.new(
+      :public_ip,
+      :allocation_id,
+      :ptr_record,
+      :ptr_record_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AdvertiseByoipCidrRequest
     #   data as a hash:
     #
@@ -10585,7 +10614,9 @@ module Aws::EC2
     #   attributes to `true`\: `enableDnsHostnames` and `enableDnsSupport`.
     #   Use ModifyVpcAttribute to set the VPC attributes.
     #
-    #   Default: `true`
+    #   Private DNS is not supported for Amazon S3 interface endpoints.
+    #
+    #   Default: `true` for supported endpoints
     #   @return [Boolean]
     #
     # @!attribute [rw] tag_specifications
@@ -13781,6 +13812,72 @@ module Aws::EC2
     #
     class DescribeAccountAttributesResult < Struct.new(
       :account_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAddressesAttributeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         allocation_ids: ["AllocationId"],
+    #         attribute: "domain-name", # accepts domain-name
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] allocation_ids
+    #   \[EC2-VPC\] The allocation IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] attribute
+    #   The attribute of the IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddressesAttributeRequest AWS API Documentation
+    #
+    class DescribeAddressesAttributeRequest < Struct.new(
+      :allocation_ids,
+      :attribute,
+      :next_token,
+      :max_results,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] addresses
+    #   Information about the IP addresses.
+    #   @return [Array<Types::AddressAttribute>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddressesAttributeResult AWS API Documentation
+    #
+    class DescribeAddressesAttributeResult < Struct.new(
+      :addresses,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36547,6 +36644,52 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyAddressAttributeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         allocation_id: "AllocationId", # required
+    #         domain_name: "String",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] allocation_id
+    #   \[EC2-VPC\] The allocation ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name to modify for the IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyAddressAttributeRequest AWS API Documentation
+    #
+    class ModifyAddressAttributeRequest < Struct.new(
+      :allocation_id,
+      :domain_name,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address
+    #   Information about the Elastic IP address.
+    #   @return [Types::AddressAttribute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyAddressAttributeResult AWS API Documentation
+    #
+    class ModifyAddressAttributeResult < Struct.new(
+      :address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyAvailabilityZoneGroupRequest
     #   data as a hash:
     #
@@ -39316,6 +39459,8 @@ module Aws::EC2
     # @!attribute [rw] private_dns_enabled
     #   (Interface endpoint) Indicates whether a private hosted zone is
     #   associated with the VPC.
+    #
+    #   Private DNS is not supported for Amazon S3 interface endpoints.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointRequest AWS API Documentation
@@ -42372,6 +42517,31 @@ module Aws::EC2
       :request_time,
       :requested,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of an updated pointer (PTR) record for an Elastic IP
+    # address.
+    #
+    # @!attribute [rw] value
+    #   The value for the PTR record update.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the PTR record update.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for the PTR record update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PtrUpdateStatus AWS API Documentation
+    #
+    class PtrUpdateStatus < Struct.new(
+      :value,
+      :status,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -45581,6 +45751,52 @@ module Aws::EC2
       :pricing_details,
       :recurring_charges,
       :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ResetAddressAttributeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         allocation_id: "AllocationId", # required
+    #         attribute: "domain-name", # required, accepts domain-name
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] allocation_id
+    #   \[EC2-VPC\] The allocation ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute
+    #   The attribute of the IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetAddressAttributeRequest AWS API Documentation
+    #
+    class ResetAddressAttributeRequest < Struct.new(
+      :allocation_id,
+      :attribute,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address
+    #   Information about the IP address.
+    #   @return [Types::AddressAttribute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetAddressAttributeResult AWS API Documentation
+    #
+    class ResetAddressAttributeResult < Struct.new(
+      :address)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -2195,6 +2195,7 @@ module Aws::SecurityHub
 
     DescribeProductsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     DescribeProductsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    DescribeProductsRequest.add_member(:product_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location: "querystring", location_name: "ProductArn"))
     DescribeProductsRequest.struct_class = Types::DescribeProductsRequest
 
     DescribeProductsResponse.add_member(:products, Shapes::ShapeRef.new(shape: ProductsList, required: true, location_name: "Products"))

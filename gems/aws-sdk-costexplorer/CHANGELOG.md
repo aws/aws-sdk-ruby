@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-02-03)
+------------------
+
+* Feature - Clarify valid values for the filter parameter for certain APIs.
+
 1.57.0 (2021-02-02)
 ------------------
 

@@ -2072,11 +2072,69 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
+    # Analyzes and accumulates test report values for the specified test
+    # reports.
+    #
     # @option params [required, String] :report_group_arn
+    #   The ARN of the report group that contains the reports to analyze.
     #
     # @option params [Integer] :num_of_reports
+    #   The number of reports to analyze. This operation always retrieves the
+    #   most recent reports.
+    #
+    #   If this parameter is omitted, the most recent 100 reports are
+    #   analyzed.
     #
     # @option params [required, String] :trend_field
+    #   The test report value to accumulate. This must be one of the following
+    #   values:
+    #
+    #   Test reports:
+    #   : DURATION
+    #
+    #     : Accumulate the test run times for the specified reports.
+    #
+    #     PASS\_RATE
+    #
+    #     : Accumulate the percentage of tests that passed for the specified
+    #       test reports.
+    #
+    #     TOTAL
+    #
+    #     : Accumulate the total number of tests for the specified test
+    #       reports.
+    #   ^
+    #
+    #   Code coverage reports:
+    #   : BRANCH\_COVERAGE
+    #
+    #     : Accumulate the branch coverage percentages for the specified test
+    #       reports.
+    #
+    #     BRANCHES\_COVERED
+    #
+    #     : Accumulate the branches covered values for the specified test
+    #       reports.
+    #
+    #     BRANCHES\_MISSED
+    #
+    #     : Accumulate the branches missed values for the specified test
+    #       reports.
+    #
+    #     LINE\_COVERAGE
+    #
+    #     : Accumulate the line coverage percentages for the specified test
+    #       reports.
+    #
+    #     LINES\_COVERED
+    #
+    #     : Accumulate the lines covered values for the specified test
+    #       reports.
+    #
+    #     LINES\_MISSED
+    #
+    #     : Accumulate the lines not covered values for the specified test
+    #       reports.
     #
     # @return [Types::GetReportGroupTrendOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2376,18 +2434,24 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
-    # Gets a list of build IDs for the specified build project, with each
-    # build ID representing a single build.
+    # Gets a list of build identifiers for the specified build project, with
+    # each build identifier representing a single build.
     #
     # @option params [required, String] :project_name
     #   The name of the AWS CodeBuild project.
     #
     # @option params [String] :sort_order
-    #   The order to list build IDs. Valid values include:
+    #   The order to list results in. The results are sorted by build number,
+    #   not the build identifier.
+    #
+    #   Valid values include:
     #
     #   * `ASCENDING`\: List the build IDs in ascending order by build ID.
     #
     #   * `DESCENDING`\: List the build IDs in descending order by build ID.
+    #
+    #   If the project has more than 100 builds, setting the sort order will
+    #   result in an error.
     #
     # @option params [String] :next_token
     #   During a previous call, if there are more than 100 items in the list,
@@ -3334,12 +3398,22 @@ module Aws::CodeBuild
     #   Set to true to report to your source provider the status of a build's
     #   start and completion. If you use this option with a source provider
     #   other than GitHub, GitHub Enterprise, or Bitbucket, an
-    #   invalidInputException is thrown.
+    #   `invalidInputException` is thrown.
+    #
+    #   To be able to report the build status to the source provider, the user
+    #   associated with the source provider must have write access to the
+    #   repo. If the user does not have write access, the build status cannot
+    #   be updated. For more information, see [Source provider access][1] in
+    #   the *AWS CodeBuild User Guide*.
     #
     #   <note markdown="1"> The status of a build triggered by a webhook is always reported to
     #   your source provider.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html
     #
     # @option params [Types::BuildStatusConfig] :build_status_config_override
     #   Contains information that defines how the build project reports the
@@ -5026,7 +5100,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

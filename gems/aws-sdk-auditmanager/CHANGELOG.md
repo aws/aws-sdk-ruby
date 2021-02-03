@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2021-02-03)
+------------------
+
+* Feature - This release adds AccessDeniedException to GetServicesInScope API.
+
 1.2.0 (2021-02-02)
 ------------------
 

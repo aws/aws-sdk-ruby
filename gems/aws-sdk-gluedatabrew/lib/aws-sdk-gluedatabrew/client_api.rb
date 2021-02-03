@@ -70,6 +70,8 @@ module Aws::GlueDataBrew
     DescribeDatasetResponse = Shapes::StructureShape.new(name: 'DescribeDatasetResponse')
     DescribeJobRequest = Shapes::StructureShape.new(name: 'DescribeJobRequest')
     DescribeJobResponse = Shapes::StructureShape.new(name: 'DescribeJobResponse')
+    DescribeJobRunRequest = Shapes::StructureShape.new(name: 'DescribeJobRunRequest')
+    DescribeJobRunResponse = Shapes::StructureShape.new(name: 'DescribeJobRunResponse')
     DescribeProjectRequest = Shapes::StructureShape.new(name: 'DescribeProjectRequest')
     DescribeProjectResponse = Shapes::StructureShape.new(name: 'DescribeProjectResponse')
     DescribeRecipeRequest = Shapes::StructureShape.new(name: 'DescribeRecipeRequest')
@@ -397,6 +399,26 @@ module Aws::GlueDataBrew
     DescribeJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     DescribeJobResponse.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     DescribeJobResponse.struct_class = Types::DescribeJobResponse
+
+    DescribeJobRunRequest.add_member(:name, Shapes::ShapeRef.new(shape: JobName, required: true, location: "uri", location_name: "name"))
+    DescribeJobRunRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: JobRunId, required: true, location: "uri", location_name: "runId"))
+    DescribeJobRunRequest.struct_class = Types::DescribeJobRunRequest
+
+    DescribeJobRunResponse.add_member(:attempt, Shapes::ShapeRef.new(shape: Attempt, location_name: "Attempt"))
+    DescribeJobRunResponse.add_member(:completed_on, Shapes::ShapeRef.new(shape: Date, location_name: "CompletedOn"))
+    DescribeJobRunResponse.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, location_name: "DatasetName"))
+    DescribeJobRunResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: JobRunErrorMessage, location_name: "ErrorMessage"))
+    DescribeJobRunResponse.add_member(:execution_time, Shapes::ShapeRef.new(shape: ExecutionTime, location_name: "ExecutionTime"))
+    DescribeJobRunResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "JobName"))
+    DescribeJobRunResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: JobRunId, location_name: "RunId"))
+    DescribeJobRunResponse.add_member(:state, Shapes::ShapeRef.new(shape: JobRunState, location_name: "State"))
+    DescribeJobRunResponse.add_member(:log_subscription, Shapes::ShapeRef.new(shape: LogSubscription, location_name: "LogSubscription"))
+    DescribeJobRunResponse.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "LogGroupName"))
+    DescribeJobRunResponse.add_member(:outputs, Shapes::ShapeRef.new(shape: OutputList, location_name: "Outputs"))
+    DescribeJobRunResponse.add_member(:recipe_reference, Shapes::ShapeRef.new(shape: RecipeReference, location_name: "RecipeReference"))
+    DescribeJobRunResponse.add_member(:started_by, Shapes::ShapeRef.new(shape: StartedBy, location_name: "StartedBy"))
+    DescribeJobRunResponse.add_member(:started_on, Shapes::ShapeRef.new(shape: Date, location_name: "StartedOn"))
+    DescribeJobRunResponse.struct_class = Types::DescribeJobRunResponse
 
     DescribeProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location: "uri", location_name: "name"))
     DescribeProjectRequest.struct_class = Types::DescribeProjectRequest
@@ -987,6 +1009,16 @@ module Aws::GlueDataBrew
         o.http_request_uri = "/jobs/{name}"
         o.input = Shapes::ShapeRef.new(shape: DescribeJobRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:describe_job_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeJobRun"
+        o.http_method = "GET"
+        o.http_request_uri = "/jobs/{name}/jobRun/{runId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeJobRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeJobRunResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)

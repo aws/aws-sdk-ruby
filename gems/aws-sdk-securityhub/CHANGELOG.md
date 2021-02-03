@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-02-03)
+------------------
+
+* Feature - Added a ProductArn parameter to DescribeProducts. ProductArn is used to identify the integration to return details for.
+
 1.39.0 (2021-02-02)
 ------------------
 

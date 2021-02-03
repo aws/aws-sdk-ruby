@@ -1298,6 +1298,9 @@ module Aws::IoTSiteWise
     #           iam_user: {
     #             arn: "ARN", # required
     #           },
+    #           iam_role: {
+    #             arn: "ARN", # required
+    #           },
     #         },
     #         access_policy_resource: { # required
     #           portal: {
@@ -1962,6 +1965,41 @@ module Aws::IoTSiteWise
       :portal_start_url,
       :portal_status,
       :sso_application_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreatePresignedPortalUrlRequest
+    #   data as a hash:
+    #
+    #       {
+    #         portal_id: "ID", # required
+    #         session_duration_seconds: 1,
+    #         state: "state",
+    #       }
+    #
+    # @!attribute [rw] portal_id
+    #   @return [String]
+    #
+    # @!attribute [rw] session_duration_seconds
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   @return [String]
+    #
+    class CreatePresignedPortalUrlRequest < Struct.new(
+      :portal_id,
+      :session_duration_seconds,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] presigned_portal_url
+    #   @return [String]
+    #
+    class CreatePresignedPortalUrlResponse < Struct.new(
+      :presigned_portal_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3501,6 +3539,36 @@ module Aws::IoTSiteWise
     end
 
     # Contains information about an AWS Identity and Access Management (IAM)
+    # role. For more information, see [IAM roles][1] in the *IAM User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
+    #
+    # @note When making an API call, you may pass IAMRoleIdentity
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "ARN", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the IAM role. For more information, see [IAM ARNs][1] in
+    #   the *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.htmll#identifiers-arns
+    #   @return [String]
+    #
+    class IAMRoleIdentity < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an AWS Identity and Access Management (IAM)
     # user.
     #
     # @note When making an API call, you may pass IAMUserIdentity
@@ -3557,6 +3625,9 @@ module Aws::IoTSiteWise
     #         iam_user: {
     #           arn: "ARN", # required
     #         },
+    #         iam_role: {
+    #           arn: "ARN", # required
+    #         },
     #       }
     #
     # @!attribute [rw] user
@@ -3571,10 +3642,15 @@ module Aws::IoTSiteWise
     #   An IAM user identity.
     #   @return [Types::IAMUserIdentity]
     #
+    # @!attribute [rw] iam_role
+    #   An IAM role identity.
+    #   @return [Types::IAMRoleIdentity]
+    #
     class Identity < Struct.new(
       :user,
       :group,
-      :iam_user)
+      :iam_user,
+      :iam_role)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4308,9 +4384,8 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # Contains an asset measurement property. This structure is empty. For
-    # more information, see [Measurements][1] in the *AWS IoT SiteWise User
-    # Guide*.
+    # Contains an asset measurement property. For more information, see
+    # [Measurements][1] in the *AWS IoT SiteWise User Guide*.
     #
     #
     #
@@ -5197,6 +5272,9 @@ module Aws::IoTSiteWise
     #             id: "IdentityId", # required
     #           },
     #           iam_user: {
+    #             arn: "ARN", # required
+    #           },
+    #           iam_role: {
     #             arn: "ARN", # required
     #           },
     #         },

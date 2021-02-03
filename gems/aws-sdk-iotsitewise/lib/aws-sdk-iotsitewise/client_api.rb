@@ -100,6 +100,8 @@ module Aws::IoTSiteWise
     CreateGatewayResponse = Shapes::StructureShape.new(name: 'CreateGatewayResponse')
     CreatePortalRequest = Shapes::StructureShape.new(name: 'CreatePortalRequest')
     CreatePortalResponse = Shapes::StructureShape.new(name: 'CreatePortalResponse')
+    CreatePresignedPortalUrlRequest = Shapes::StructureShape.new(name: 'CreatePresignedPortalUrlRequest')
+    CreatePresignedPortalUrlResponse = Shapes::StructureShape.new(name: 'CreatePresignedPortalUrlResponse')
     CreateProjectRequest = Shapes::StructureShape.new(name: 'CreateProjectRequest')
     CreateProjectResponse = Shapes::StructureShape.new(name: 'CreateProjectResponse')
     DashboardDefinition = Shapes::StringShape.new(name: 'DashboardDefinition')
@@ -166,6 +168,7 @@ module Aws::IoTSiteWise
     GetAssetPropertyValueResponse = Shapes::StructureShape.new(name: 'GetAssetPropertyValueResponse')
     Greengrass = Shapes::StructureShape.new(name: 'Greengrass')
     GroupIdentity = Shapes::StructureShape.new(name: 'GroupIdentity')
+    IAMRoleIdentity = Shapes::StructureShape.new(name: 'IAMRoleIdentity')
     IAMUserIdentity = Shapes::StructureShape.new(name: 'IAMUserIdentity')
     ID = Shapes::StringShape.new(name: 'ID')
     IDs = Shapes::ListShape.new(name: 'IDs')
@@ -257,6 +260,7 @@ module Aws::IoTSiteWise
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     SSOApplicationId = Shapes::StringShape.new(name: 'SSOApplicationId')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    SessionDurationSeconds = Shapes::IntegerShape.new(name: 'SessionDurationSeconds')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -298,6 +302,7 @@ module Aws::IoTSiteWise
     VariableName = Shapes::StringShape.new(name: 'VariableName')
     VariableValue = Shapes::StructureShape.new(name: 'VariableValue')
     Variant = Shapes::StructureShape.new(name: 'Variant')
+    state = Shapes::StringShape.new(name: 'state')
 
     AccessPolicySummaries.member = Shapes::ShapeRef.new(shape: AccessPolicySummary)
 
@@ -608,6 +613,14 @@ module Aws::IoTSiteWise
     CreatePortalResponse.add_member(:sso_application_id, Shapes::ShapeRef.new(shape: SSOApplicationId, required: true, location_name: "ssoApplicationId"))
     CreatePortalResponse.struct_class = Types::CreatePortalResponse
 
+    CreatePresignedPortalUrlRequest.add_member(:portal_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "portalId"))
+    CreatePresignedPortalUrlRequest.add_member(:session_duration_seconds, Shapes::ShapeRef.new(shape: SessionDurationSeconds, location_name: "sessionDurationSeconds"))
+    CreatePresignedPortalUrlRequest.add_member(:state, Shapes::ShapeRef.new(shape: state, location_name: "state"))
+    CreatePresignedPortalUrlRequest.struct_class = Types::CreatePresignedPortalUrlRequest
+
+    CreatePresignedPortalUrlResponse.add_member(:presigned_portal_url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "presignedPortalUrl"))
+    CreatePresignedPortalUrlResponse.struct_class = Types::CreatePresignedPortalUrlResponse
+
     CreateProjectRequest.add_member(:portal_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "portalId"))
     CreateProjectRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "projectName"))
     CreateProjectRequest.add_member(:project_description, Shapes::ShapeRef.new(shape: Description, location_name: "projectDescription"))
@@ -880,6 +893,9 @@ module Aws::IoTSiteWise
     GroupIdentity.add_member(:id, Shapes::ShapeRef.new(shape: IdentityId, required: true, location_name: "id"))
     GroupIdentity.struct_class = Types::GroupIdentity
 
+    IAMRoleIdentity.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "arn"))
+    IAMRoleIdentity.struct_class = Types::IAMRoleIdentity
+
     IAMUserIdentity.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "arn"))
     IAMUserIdentity.struct_class = Types::IAMUserIdentity
 
@@ -888,6 +904,7 @@ module Aws::IoTSiteWise
     Identity.add_member(:user, Shapes::ShapeRef.new(shape: UserIdentity, location_name: "user"))
     Identity.add_member(:group, Shapes::ShapeRef.new(shape: GroupIdentity, location_name: "group"))
     Identity.add_member(:iam_user, Shapes::ShapeRef.new(shape: IAMUserIdentity, location_name: "iamUser"))
+    Identity.add_member(:iam_role, Shapes::ShapeRef.new(shape: IAMRoleIdentity, location_name: "iamRole"))
     Identity.struct_class = Types::Identity
 
     Image.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "id"))
@@ -1432,6 +1449,20 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:create_presigned_portal_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePresignedPortalUrl"
+        o.http_method = "POST"
+        o.http_request_uri = "/portals/{portalId}/presigned-url"
+        o.endpoint_pattern = {
+          "hostPrefix" => "monitor.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreatePresignedPortalUrlRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePresignedPortalUrlResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_project, Seahorse::Model::Operation.new.tap do |o|

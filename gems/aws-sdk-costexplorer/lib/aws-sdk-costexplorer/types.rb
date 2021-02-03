@@ -2398,6 +2398,8 @@ module Aws::CostExplorer
     #   The maximum number of objects that to be returned for this request.
     #   If `MaxResults` is not specified with `SortBy`, the request will
     #   return 1000 results as the default value for this parameter.
+    #
+    #   For `GetCostCategories`, MaxResults has an upper limit of 1000.
     #   @return [Integer]
     #
     # @!attribute [rw] next_page_token
@@ -2539,8 +2541,55 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] filter
-    #   The filters that you want to use to filter your forecast. Cost
-    #   Explorer API supports all of the Cost Explorer filters.
+    #   The filters that you want to use to filter your forecast. The
+    #   `GetCostForecast` API supports filtering by the following
+    #   dimensions:
+    #
+    #   * `AZ`
+    #
+    #   * `INSTANCE_TYPE`
+    #
+    #   * `LINKED_ACCOUNT`
+    #
+    #   * `LINKED_ACCOUNT_NAME`
+    #
+    #   * `OPERATION`
+    #
+    #   * `PURCHASE_TYPE`
+    #
+    #   * `REGION`
+    #
+    #   * `SERVICE`
+    #
+    #   * `USAGE_TYPE`
+    #
+    #   * `USAGE_TYPE_GROUP`
+    #
+    #   * `RECORD_TYPE`
+    #
+    #   * `OPERATING_SYSTEM`
+    #
+    #   * `TENANCY`
+    #
+    #   * `SCOPE`
+    #
+    #   * `PLATFORM`
+    #
+    #   * `SUBSCRIPTION_ID`
+    #
+    #   * `LEGAL_ENTITY_NAME`
+    #
+    #   * `DEPLOYMENT_OPTION`
+    #
+    #   * `DATABASE_ENGINE`
+    #
+    #   * `INSTANCE_TYPE_FAMILY`
+    #
+    #   * `BILLING_ENTITY`
+    #
+    #   * `RESERVATION_ID`
+    #
+    #   * `SAVINGS_PLAN_ARN`
     #   @return [Types::Expression]
     #
     # @!attribute [rw] prediction_interval_level
@@ -2851,6 +2900,8 @@ module Aws::CostExplorer
     #   maximum number of objects that to be returned for this request. If
     #   MaxResults is not specified with SortBy, the request will return
     #   1000 results as the default value for this parameter.
+    #
+    #   For `GetDimensionValues`, MaxResults has an upper limit of 1000.
     #   @return [Integer]
     #
     # @!attribute [rw] next_page_token
@@ -4547,6 +4598,8 @@ module Aws::CostExplorer
     #   maximum number of objects that to be returned for this request. If
     #   MaxResults is not specified with SortBy, the request will return
     #   1000 results as the default value for this parameter.
+    #
+    #   For `GetTags`, MaxResults has an upper limit of 1000.
     #   @return [Integer]
     #
     # @!attribute [rw] next_page_token
@@ -4670,8 +4723,55 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] filter
-    #   The filters that you want to use to filter your forecast. Cost
-    #   Explorer API supports all of the Cost Explorer filters.
+    #   The filters that you want to use to filter your forecast. The
+    #   `GetUsageForecast` API supports filtering by the following
+    #   dimensions:
+    #
+    #   * `AZ`
+    #
+    #   * `INSTANCE_TYPE`
+    #
+    #   * `LINKED_ACCOUNT`
+    #
+    #   * `LINKED_ACCOUNT_NAME`
+    #
+    #   * `OPERATION`
+    #
+    #   * `PURCHASE_TYPE`
+    #
+    #   * `REGION`
+    #
+    #   * `SERVICE`
+    #
+    #   * `USAGE_TYPE`
+    #
+    #   * `USAGE_TYPE_GROUP`
+    #
+    #   * `RECORD_TYPE`
+    #
+    #   * `OPERATING_SYSTEM`
+    #
+    #   * `TENANCY`
+    #
+    #   * `SCOPE`
+    #
+    #   * `PLATFORM`
+    #
+    #   * `SUBSCRIPTION_ID`
+    #
+    #   * `LEGAL_ENTITY_NAME`
+    #
+    #   * `DEPLOYMENT_OPTION`
+    #
+    #   * `DATABASE_ENGINE`
+    #
+    #   * `INSTANCE_TYPE_FAMILY`
+    #
+    #   * `BILLING_ENTITY`
+    #
+    #   * `RESERVATION_ID`
+    #
+    #   * `SAVINGS_PLAN_ARN`
     #   @return [Types::Expression]
     #
     # @!attribute [rw] prediction_interval_level

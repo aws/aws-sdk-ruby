@@ -742,8 +742,8 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] tumbling_window_in_seconds
-    #   (Streams) The duration of a processing window in seconds. The range
-    #   is between 1 second up to 15 minutes.
+    #   (Streams) The duration in seconds of a processing window. The range
+    #   is between 1 second up to 900 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] topics
@@ -798,7 +798,7 @@ module Aws::Lambda
     #
     #       {
     #         function_name: "FunctionName", # required
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         role: "RoleArn", # required
     #         handler: "Handler",
     #         code: { # required
@@ -975,7 +975,12 @@ module Aws::Lambda
     #   @return [Array<Types::FileSystemConfig>]
     #
     # @!attribute [rw] image_config
-    #   Configuration values that override the container image Dockerfile.
+    #   [Container image configuration values][1] that override the values
+    #   in the container image Dockerfile.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html
     #   @return [Types::ImageConfig]
     #
     # @!attribute [rw] code_signing_config_arn
@@ -1668,8 +1673,8 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] tumbling_window_in_seconds
-    #   (Streams) The duration of a processing window in seconds. The range
-    #   is between 1 second up to 15 minutes.
+    #   (Streams) The duration in seconds of a processing window. The range
+    #   is between 1 second up to 900 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] function_response_types
@@ -2691,7 +2696,7 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms
     #
     # @note When making an API call, you may pass ImageConfig
     #   data as a hash:
@@ -3690,7 +3695,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         layer_name: "LayerName", # required
     #         marker: "String",
     #         max_items: 1,
@@ -3745,7 +3750,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         marker: "String",
     #         max_items: 1,
     #       }
@@ -4107,7 +4112,7 @@ module Aws::Lambda
     #           s3_object_version: "S3ObjectVersion",
     #           zip_file: "data",
     #         },
-    #         compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         license_info: "LicenseInfo",
     #       }
     #
@@ -4789,16 +4794,19 @@ module Aws::Lambda
     #     broker credentials.
     #
     #   * `VPC_SUBNET` - The subnets associated with your VPC. Lambda
-    #     connects to these subnets to fetch data from your Kafka cluster.
+    #     connects to these subnets to fetch data from your Self-Managed
+    #     Apache Kafka cluster.
     #
     #   * `VPC_SECURITY_GROUP` - The VPC security group used to manage
-    #     access to your Kafka brokers.
+    #     access to your Self-Managed Apache Kafka brokers.
     #
-    #   * `SASL_SCRAM_256_AUTH` - The ARN of your secret key used for SASL
-    #     SCRAM-256 authentication of your Kafka brokers.
+    #   * `SASL_SCRAM_256_AUTH` - The Secrets Manager ARN of your secret key
+    #     used for SASL SCRAM-256 authentication of your Self-Managed Apache
+    #     Kafka brokers.
     #
-    #   * `SASL_SCRAM_512_AUTH` - The ARN of your secret key used for SASL
-    #     SCRAM-512 authentication of your Kafka brokers.
+    #   * `SASL_SCRAM_512_AUTH` - The Secrets Manager ARN of your secret key
+    #     used for SASL SCRAM-512 authentication of your Self-Managed Apache
+    #     Kafka brokers.
     #   @return [String]
     #
     # @!attribute [rw] uri
@@ -5202,8 +5210,8 @@ module Aws::Lambda
     #   @return [Array<Types::SourceAccessConfiguration>]
     #
     # @!attribute [rw] tumbling_window_in_seconds
-    #   (Streams) The duration of a processing window in seconds. The range
-    #   is between 1 second up to 15 minutes.
+    #   (Streams) The duration in seconds of a processing window. The range
+    #   is between 1 second up to 900 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] function_response_types
@@ -5337,7 +5345,7 @@ module Aws::Lambda
     #             "EnvironmentVariableName" => "EnvironmentVariableValue",
     #           },
     #         },
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #         dead_letter_config: {
     #           target_arn: "ResourceArn",
     #         },
@@ -5472,7 +5480,12 @@ module Aws::Lambda
     #   @return [Array<Types::FileSystemConfig>]
     #
     # @!attribute [rw] image_config
-    #   Configuration values that override the container image Dockerfile.
+    #   [Container image configuration values][1] that override the values
+    #   in the container image Dockerfile.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html
     #   @return [Types::ImageConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest AWS API Documentation

@@ -1328,6 +1328,8 @@ module Aws::CostExplorer
     #   `MaxResults` is not specified with `SortBy`, the request will return
     #   1000 results as the default value for this parameter.
     #
+    #   For `GetCostCategories`, MaxResults has an upper limit of 1000.
+    #
     # @option params [String] :next_page_token
     #   If the number of objects that are still available for retrieval
     #   exceeds the limit, AWS returns a NextPageToken value in the response.
@@ -1448,8 +1450,54 @@ module Aws::CostExplorer
     #   granularities.
     #
     # @option params [Types::Expression] :filter
-    #   The filters that you want to use to filter your forecast. Cost
-    #   Explorer API supports all of the Cost Explorer filters.
+    #   The filters that you want to use to filter your forecast. The
+    #   `GetCostForecast` API supports filtering by the following dimensions:
+    #
+    #   * `AZ`
+    #
+    #   * `INSTANCE_TYPE`
+    #
+    #   * `LINKED_ACCOUNT`
+    #
+    #   * `LINKED_ACCOUNT_NAME`
+    #
+    #   * `OPERATION`
+    #
+    #   * `PURCHASE_TYPE`
+    #
+    #   * `REGION`
+    #
+    #   * `SERVICE`
+    #
+    #   * `USAGE_TYPE`
+    #
+    #   * `USAGE_TYPE_GROUP`
+    #
+    #   * `RECORD_TYPE`
+    #
+    #   * `OPERATING_SYSTEM`
+    #
+    #   * `TENANCY`
+    #
+    #   * `SCOPE`
+    #
+    #   * `PLATFORM`
+    #
+    #   * `SUBSCRIPTION_ID`
+    #
+    #   * `LEGAL_ENTITY_NAME`
+    #
+    #   * `DEPLOYMENT_OPTION`
+    #
+    #   * `DATABASE_ENGINE`
+    #
+    #   * `INSTANCE_TYPE_FAMILY`
+    #
+    #   * `BILLING_ENTITY`
+    #
+    #   * `RESERVATION_ID`
+    #
+    #   * `SAVINGS_PLAN_ARN`
     #
     # @option params [Integer] :prediction_interval_level
     #   Cost Explorer always returns the mean forecast as a single point. You
@@ -1738,6 +1786,8 @@ module Aws::CostExplorer
     #   maximum number of objects that to be returned for this request. If
     #   MaxResults is not specified with SortBy, the request will return 1000
     #   results as the default value for this parameter.
+    #
+    #   For `GetDimensionValues`, MaxResults has an upper limit of 1000.
     #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. AWS provides the token
@@ -3519,6 +3569,8 @@ module Aws::CostExplorer
     #   MaxResults is not specified with SortBy, the request will return 1000
     #   results as the default value for this parameter.
     #
+    #   For `GetTags`, MaxResults has an upper limit of 1000.
+    #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. AWS provides the token
     #   when the response from a previous call has more results than the
@@ -3627,8 +3679,54 @@ module Aws::CostExplorer
     #   granularities.
     #
     # @option params [Types::Expression] :filter
-    #   The filters that you want to use to filter your forecast. Cost
-    #   Explorer API supports all of the Cost Explorer filters.
+    #   The filters that you want to use to filter your forecast. The
+    #   `GetUsageForecast` API supports filtering by the following dimensions:
+    #
+    #   * `AZ`
+    #
+    #   * `INSTANCE_TYPE`
+    #
+    #   * `LINKED_ACCOUNT`
+    #
+    #   * `LINKED_ACCOUNT_NAME`
+    #
+    #   * `OPERATION`
+    #
+    #   * `PURCHASE_TYPE`
+    #
+    #   * `REGION`
+    #
+    #   * `SERVICE`
+    #
+    #   * `USAGE_TYPE`
+    #
+    #   * `USAGE_TYPE_GROUP`
+    #
+    #   * `RECORD_TYPE`
+    #
+    #   * `OPERATING_SYSTEM`
+    #
+    #   * `TENANCY`
+    #
+    #   * `SCOPE`
+    #
+    #   * `PLATFORM`
+    #
+    #   * `SUBSCRIPTION_ID`
+    #
+    #   * `LEGAL_ENTITY_NAME`
+    #
+    #   * `DEPLOYMENT_OPTION`
+    #
+    #   * `DATABASE_ENGINE`
+    #
+    #   * `INSTANCE_TYPE_FAMILY`
+    #
+    #   * `BILLING_ENTITY`
+    #
+    #   * `RESERVATION_ID`
+    #
+    #   * `SAVINGS_PLAN_ARN`
     #
     # @option params [Integer] :prediction_interval_level
     #   Cost Explorer always returns the mean forecast as a single point. You
@@ -3978,7 +4076,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

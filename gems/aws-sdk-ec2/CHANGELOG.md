@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.223.0 (2021-02-03)
+------------------
+
+* Feature - EC2 Public IP now supports API for setting PTR records on Elastic IP address.
+
 1.222.0 (2021-02-02)
 ------------------
 

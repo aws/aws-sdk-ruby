@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2021-02-03)
+------------------
+
+* Feature - Update AccessPolicy API input to support IAM role for IAM mode. Iam role is added as part of accessPolicyIdentity.
+
 1.17.0 (2021-02-02)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-02-03)
+------------------
+
+* Feature - Increased maximum length of ipRanges values for Access Control Rules from 10 to 1024.
+
 1.34.0 (2021-02-02)
 ------------------
 

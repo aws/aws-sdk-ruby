@@ -2394,12 +2394,67 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] report_group_arn
+    #   The ARN of the report group that contains the reports to analyze.
     #   @return [String]
     #
     # @!attribute [rw] num_of_reports
+    #   The number of reports to analyze. This operation always retrieves
+    #   the most recent reports.
+    #
+    #   If this parameter is omitted, the most recent 100 reports are
+    #   analyzed.
     #   @return [Integer]
     #
     # @!attribute [rw] trend_field
+    #   The test report value to accumulate. This must be one of the
+    #   following values:
+    #
+    #   Test reports:
+    #   : DURATION
+    #
+    #     : Accumulate the test run times for the specified reports.
+    #
+    #     PASS\_RATE
+    #
+    #     : Accumulate the percentage of tests that passed for the specified
+    #       test reports.
+    #
+    #     TOTAL
+    #
+    #     : Accumulate the total number of tests for the specified test
+    #       reports.
+    #   ^
+    #
+    #   Code coverage reports:
+    #   : BRANCH\_COVERAGE
+    #
+    #     : Accumulate the branch coverage percentages for the specified
+    #       test reports.
+    #
+    #     BRANCHES\_COVERED
+    #
+    #     : Accumulate the branches covered values for the specified test
+    #       reports.
+    #
+    #     BRANCHES\_MISSED
+    #
+    #     : Accumulate the branches missed values for the specified test
+    #       reports.
+    #
+    #     LINE\_COVERAGE
+    #
+    #     : Accumulate the line coverage percentages for the specified test
+    #       reports.
+    #
+    #     LINES\_COVERED
+    #
+    #     : Accumulate the lines covered values for the specified test
+    #       reports.
+    #
+    #     LINES\_MISSED
+    #
+    #     : Accumulate the lines not covered values for the specified test
+    #       reports.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/GetReportGroupTrendInput AWS API Documentation
@@ -2413,9 +2468,11 @@ module Aws::CodeBuild
     end
 
     # @!attribute [rw] stats
+    #   Contains the accumulated trend data.
     #   @return [Types::ReportGroupTrendStats]
     #
     # @!attribute [rw] raw_data
+    #   An array that contains the raw data for each report.
     #   @return [Array<Types::ReportWithRawData>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/GetReportGroupTrendOutput AWS API Documentation
@@ -2731,11 +2788,17 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The order to list build IDs. Valid values include:
+    #   The order to list results in. The results are sorted by build
+    #   number, not the build identifier.
+    #
+    #   Valid values include:
     #
     #   * `ASCENDING`\: List the build IDs in ascending order by build ID.
     #
     #   * `DESCENDING`\: List the build IDs in descending order by build ID.
+    #
+    #   If the project has more than 100 builds, setting the sort order will
+    #   result in an error.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4405,13 +4468,23 @@ module Aws::CodeBuild
     #   Set to true to report the status of a build's start and finish to
     #   your source provider. This option is valid only when your source
     #   provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set
-    #   and you use a different source provider, an invalidInputException is
-    #   thrown.
+    #   and you use a different source provider, an `invalidInputException`
+    #   is thrown.
+    #
+    #   To be able to report the build status to the source provider, the
+    #   user associated with the source provider must have write access to
+    #   the repo. If the user does not have write access, the build status
+    #   cannot be updated. For more information, see [Source provider
+    #   access][1] in the *AWS CodeBuild User Guide*.
     #
     #   <note markdown="1"> The status of a build triggered by a webhook is always reported to
     #   your source provider.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html
     #   @return [Boolean]
     #
     # @!attribute [rw] build_status_config
@@ -4748,15 +4821,24 @@ module Aws::CodeBuild
     # one or more paths to the test case files.
     #
     # @!attribute [rw] arn
-    #   The ARN of a `ReportGroup`.
+    #   The ARN of the `ReportGroup`.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of a `ReportGroup`.
+    #   The name of the `ReportGroup`.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the `ReportGroup`. The one valid value is `TEST`.
+    #   The type of the `ReportGroup`. This can be one of the following
+    #   values:
+    #
+    #   CODE\_COVERAGE
+    #
+    #   : The report group contains code coverage reports.
+    #
+    #   TEST
+    #
+    #   : The report group contains test reports.
     #   @return [String]
     #
     # @!attribute [rw] export_config
@@ -4780,6 +4862,17 @@ module Aws::CodeBuild
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] status
+    #   The status of the report group. This property is read-only.
+    #
+    #   This can be one of the following values:
+    #
+    #   ACTIVE
+    #
+    #   : The report group is active.
+    #
+    #   DELETING
+    #
+    #   : The report group is in the process of being deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ReportGroup AWS API Documentation
@@ -4797,13 +4890,20 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Contains trend statistics for a set of reports. The actual values
+    # depend on the type of trend being collected. For more information, see
+    # .
+    #
     # @!attribute [rw] average
+    #   Contains the average of all values analyzed.
     #   @return [String]
     #
     # @!attribute [rw] max
+    #   Contains the maximum value analyzed.
     #   @return [String]
     #
     # @!attribute [rw] min
+    #   Contains the minimum value analyzed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ReportGroupTrendStats AWS API Documentation
@@ -4816,10 +4916,15 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Contains the unmodified data for the report. For more information, see
+    # .
+    #
     # @!attribute [rw] report_arn
+    #   The ARN of the report.
     #   @return [String]
     #
     # @!attribute [rw] data
+    #   The value of the requested data field from the report.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ReportWithRawData AWS API Documentation
@@ -5771,12 +5876,22 @@ module Aws::CodeBuild
     #   Set to true to report to your source provider the status of a
     #   build's start and completion. If you use this option with a source
     #   provider other than GitHub, GitHub Enterprise, or Bitbucket, an
-    #   invalidInputException is thrown.
+    #   `invalidInputException` is thrown.
+    #
+    #   To be able to report the build status to the source provider, the
+    #   user associated with the source provider must have write access to
+    #   the repo. If the user does not have write access, the build status
+    #   cannot be updated. For more information, see [Source provider
+    #   access][1] in the *AWS CodeBuild User Guide*.
     #
     #   <note markdown="1"> The status of a build triggered by a webhook is always reported to
     #   your source provider.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html
     #   @return [Boolean]
     #
     # @!attribute [rw] build_status_config_override

@@ -373,7 +373,7 @@ module Aws::ComputeOptimizer
     #   recommendations.
     #
     #   If your account is the management account of an organization, use
-    #   this parameter to specify the member accounts for which you want to
+    #   this parameter to specify the member account for which you want to
     #   export recommendations.
     #
     #   This parameter cannot be specified together with the include member
@@ -519,7 +519,7 @@ module Aws::ComputeOptimizer
     #   recommendations.
     #
     #   If your account is the management account of an organization, use
-    #   this parameter to specify the member accounts for which you want to
+    #   this parameter to specify the member account for which you want to
     #   export recommendations.
     #
     #   This parameter cannot be specified together with the include member
@@ -689,11 +689,11 @@ module Aws::ComputeOptimizer
     #       }
     #
     # @!attribute [rw] account_ids
-    #   The IDs of the AWS accounts for which to return Auto Scaling group
+    #   The ID of the AWS account for which to return Auto Scaling group
     #   recommendations.
     #
     #   If your account is the management account of an organization, use
-    #   this parameter to specify the member accounts for which you want to
+    #   this parameter to specify the member account for which you want to
     #   return Auto Scaling group recommendations.
     #
     #   Only one account ID can be specified per request.
@@ -803,11 +803,11 @@ module Aws::ComputeOptimizer
     #   @return [Array<Types::EBSFilter>]
     #
     # @!attribute [rw] account_ids
-    #   The IDs of the AWS accounts for which to return volume
+    #   The ID of the AWS account for which to return volume
     #   recommendations.
     #
     #   If your account is the management account of an organization, use
-    #   this parameter to specify the member accounts for which you want to
+    #   this parameter to specify the member account for which you want to
     #   return volume recommendations.
     #
     #   Only one account ID can be specified per request.
@@ -893,11 +893,11 @@ module Aws::ComputeOptimizer
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] account_ids
-    #   The IDs of the AWS accounts for which to return instance
+    #   The ID of the AWS account for which to return instance
     #   recommendations.
     #
     #   If your account is the management account of an organization, use
-    #   this parameter to specify the member accounts for which you want to
+    #   this parameter to specify the member account for which you want to
     #   return instance recommendations.
     #
     #   Only one account ID can be specified per request.
@@ -1069,11 +1069,11 @@ module Aws::ComputeOptimizer
     #   @return [Array<String>]
     #
     # @!attribute [rw] account_ids
-    #   The IDs of the AWS accounts for which to return function
+    #   The ID of the AWS account for which to return function
     #   recommendations.
     #
     #   If your account is the management account of an organization, use
-    #   this parameter to specify the member accounts for which you want to
+    #   this parameter to specify the member account for which you want to
     #   return function recommendations.
     #
     #   Only one account ID can be specified per request.
@@ -1167,11 +1167,11 @@ module Aws::ComputeOptimizer
     #       }
     #
     # @!attribute [rw] account_ids
-    #   The IDs of the AWS accounts for which to return recommendation
+    #   The ID of the AWS account for which to return recommendation
     #   summaries.
     #
     #   If your account is the management account of an organization, use
-    #   this parameter to specify the member accounts for which you want to
+    #   this parameter to specify the member account for which you want to
     #   return recommendation summaries.
     #
     #   Only one account ID can be specified per request.
@@ -1587,7 +1587,8 @@ module Aws::ComputeOptimizer
     #     classification.
     #
     #   * <b> <code>Inconclusive</code> </b> — The function does not qualify
-    #     for a recommendation, or there was an internal error. This finding
+    #     for a recommendation because Compute Optimizer cannot generate a
+    #     recommendation with a high degree of confidence. This finding
     #     reason code is part of the `Unavailable` finding classification.
     #
     #

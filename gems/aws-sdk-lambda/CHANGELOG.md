@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2021-02-03)
+------------------
+
+* Feature - Support for creating Lambda Functions using 'nodejs14.x'
+
 1.58.0 (2021-02-02)
 ------------------
 
