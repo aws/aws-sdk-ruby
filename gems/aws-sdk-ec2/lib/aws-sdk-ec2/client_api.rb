@@ -37,11 +37,7 @@ module Aws::EC2
     AddPrefixListEntries = Shapes::ListShape.new(name: 'AddPrefixListEntries')
     AddPrefixListEntry = Shapes::StructureShape.new(name: 'AddPrefixListEntry')
     Address = Shapes::StructureShape.new(name: 'Address')
-    AddressAttribute = Shapes::StructureShape.new(name: 'AddressAttribute')
-    AddressAttributeName = Shapes::StringShape.new(name: 'AddressAttributeName')
     AddressList = Shapes::ListShape.new(name: 'AddressList')
-    AddressMaxResults = Shapes::IntegerShape.new(name: 'AddressMaxResults')
-    AddressSet = Shapes::ListShape.new(name: 'AddressSet')
     AdvertiseByoipCidrRequest = Shapes::StructureShape.new(name: 'AdvertiseByoipCidrRequest')
     AdvertiseByoipCidrResult = Shapes::StructureShape.new(name: 'AdvertiseByoipCidrResult')
     Affinity = Shapes::StringShape.new(name: 'Affinity')
@@ -51,7 +47,6 @@ module Aws::EC2
     AllocateHostsResult = Shapes::StructureShape.new(name: 'AllocateHostsResult')
     AllocationId = Shapes::StringShape.new(name: 'AllocationId')
     AllocationIdList = Shapes::ListShape.new(name: 'AllocationIdList')
-    AllocationIds = Shapes::ListShape.new(name: 'AllocationIds')
     AllocationState = Shapes::StringShape.new(name: 'AllocationState')
     AllocationStrategy = Shapes::StringShape.new(name: 'AllocationStrategy')
     AllowedPrincipal = Shapes::StructureShape.new(name: 'AllowedPrincipal')
@@ -536,8 +531,6 @@ module Aws::EC2
     DeregisterTransitGatewayMulticastGroupSourcesResult = Shapes::StructureShape.new(name: 'DeregisterTransitGatewayMulticastGroupSourcesResult')
     DescribeAccountAttributesRequest = Shapes::StructureShape.new(name: 'DescribeAccountAttributesRequest')
     DescribeAccountAttributesResult = Shapes::StructureShape.new(name: 'DescribeAccountAttributesResult')
-    DescribeAddressesAttributeRequest = Shapes::StructureShape.new(name: 'DescribeAddressesAttributeRequest')
-    DescribeAddressesAttributeResult = Shapes::StructureShape.new(name: 'DescribeAddressesAttributeResult')
     DescribeAddressesRequest = Shapes::StructureShape.new(name: 'DescribeAddressesRequest')
     DescribeAddressesResult = Shapes::StructureShape.new(name: 'DescribeAddressesResult')
     DescribeAggregateIdFormatRequest = Shapes::StructureShape.new(name: 'DescribeAggregateIdFormatRequest')
@@ -1411,8 +1404,6 @@ module Aws::EC2
     MemoryInfo = Shapes::StructureShape.new(name: 'MemoryInfo')
     MemorySize = Shapes::IntegerShape.new(name: 'MemorySize')
     MillisecondDateTime = Shapes::TimestampShape.new(name: 'MillisecondDateTime')
-    ModifyAddressAttributeRequest = Shapes::StructureShape.new(name: 'ModifyAddressAttributeRequest')
-    ModifyAddressAttributeResult = Shapes::StructureShape.new(name: 'ModifyAddressAttributeResult')
     ModifyAvailabilityZoneGroupRequest = Shapes::StructureShape.new(name: 'ModifyAvailabilityZoneGroupRequest')
     ModifyAvailabilityZoneGroupResult = Shapes::StructureShape.new(name: 'ModifyAvailabilityZoneGroupResult')
     ModifyAvailabilityZoneOptInStatus = Shapes::StringShape.new(name: 'ModifyAvailabilityZoneOptInStatus')
@@ -1665,7 +1656,6 @@ module Aws::EC2
     ProvisionByoipCidrRequest = Shapes::StructureShape.new(name: 'ProvisionByoipCidrRequest')
     ProvisionByoipCidrResult = Shapes::StructureShape.new(name: 'ProvisionByoipCidrResult')
     ProvisionedBandwidth = Shapes::StructureShape.new(name: 'ProvisionedBandwidth')
-    PtrUpdateStatus = Shapes::StructureShape.new(name: 'PtrUpdateStatus')
     PublicIpAddress = Shapes::StringShape.new(name: 'PublicIpAddress')
     PublicIpStringList = Shapes::ListShape.new(name: 'PublicIpStringList')
     PublicIpv4Pool = Shapes::StructureShape.new(name: 'PublicIpv4Pool')
@@ -1773,8 +1763,6 @@ module Aws::EC2
     ReservedInstancesOfferingIdStringList = Shapes::ListShape.new(name: 'ReservedInstancesOfferingIdStringList')
     ReservedInstancesOfferingList = Shapes::ListShape.new(name: 'ReservedInstancesOfferingList')
     ReservedIntancesIds = Shapes::ListShape.new(name: 'ReservedIntancesIds')
-    ResetAddressAttributeRequest = Shapes::StructureShape.new(name: 'ResetAddressAttributeRequest')
-    ResetAddressAttributeResult = Shapes::StructureShape.new(name: 'ResetAddressAttributeResult')
     ResetEbsDefaultKmsKeyIdRequest = Shapes::StructureShape.new(name: 'ResetEbsDefaultKmsKeyIdRequest')
     ResetEbsDefaultKmsKeyIdResult = Shapes::StructureShape.new(name: 'ResetEbsDefaultKmsKeyIdResult')
     ResetFpgaImageAttributeName = Shapes::StringShape.new(name: 'ResetFpgaImageAttributeName')
@@ -2314,15 +2302,7 @@ module Aws::EC2
     Address.add_member(:carrier_ip, Shapes::ShapeRef.new(shape: String, location_name: "carrierIp"))
     Address.struct_class = Types::Address
 
-    AddressAttribute.add_member(:public_ip, Shapes::ShapeRef.new(shape: PublicIpAddress, location_name: "publicIp"))
-    AddressAttribute.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, location_name: "allocationId"))
-    AddressAttribute.add_member(:ptr_record, Shapes::ShapeRef.new(shape: String, location_name: "ptrRecord"))
-    AddressAttribute.add_member(:ptr_record_update, Shapes::ShapeRef.new(shape: PtrUpdateStatus, location_name: "ptrRecordUpdate"))
-    AddressAttribute.struct_class = Types::AddressAttribute
-
     AddressList.member = Shapes::ShapeRef.new(shape: Address, location_name: "item")
-
-    AddressSet.member = Shapes::ShapeRef.new(shape: AddressAttribute, location_name: "item")
 
     AdvertiseByoipCidrRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
     AdvertiseByoipCidrRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -2364,8 +2344,6 @@ module Aws::EC2
     AllocateHostsResult.struct_class = Types::AllocateHostsResult
 
     AllocationIdList.member = Shapes::ShapeRef.new(shape: AllocationId, location_name: "AllocationId")
-
-    AllocationIds.member = Shapes::ShapeRef.new(shape: AllocationId, location_name: "item")
 
     AllowedPrincipal.add_member(:principal_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "principalType"))
     AllowedPrincipal.add_member(:principal, Shapes::ShapeRef.new(shape: String, location_name: "principal"))
@@ -3115,6 +3093,7 @@ module Aws::EC2
     CopyImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     CopyImageRequest.add_member(:source_image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceImageId"))
     CopyImageRequest.add_member(:source_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceRegion"))
+    CopyImageRequest.add_member(:destination_outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "DestinationOutpostArn"))
     CopyImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CopyImageRequest.struct_class = Types::CopyImageRequest
 
@@ -3122,6 +3101,7 @@ module Aws::EC2
     CopyImageResult.struct_class = Types::CopyImageResult
 
     CopySnapshotRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CopySnapshotRequest.add_member(:destination_outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "DestinationOutpostArn"))
     CopySnapshotRequest.add_member(:destination_region, Shapes::ShapeRef.new(shape: String, location_name: "destinationRegion"))
     CopySnapshotRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     CopySnapshotRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
@@ -3539,6 +3519,7 @@ module Aws::EC2
     CreateSecurityGroupResult.struct_class = Types::CreateSecurityGroupResult
 
     CreateSnapshotRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateSnapshotRequest.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "OutpostArn"))
     CreateSnapshotRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
     CreateSnapshotRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateSnapshotRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -3546,6 +3527,7 @@ module Aws::EC2
 
     CreateSnapshotsRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CreateSnapshotsRequest.add_member(:instance_specification, Shapes::ShapeRef.new(shape: InstanceSpecification, required: true, location_name: "InstanceSpecification"))
+    CreateSnapshotsRequest.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "OutpostArn"))
     CreateSnapshotsRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateSnapshotsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateSnapshotsRequest.add_member(:copy_tags_from_source, Shapes::ShapeRef.new(shape: CopyTagsFromSource, location_name: "CopyTagsFromSource"))
@@ -4296,17 +4278,6 @@ module Aws::EC2
 
     DescribeAccountAttributesResult.add_member(:account_attributes, Shapes::ShapeRef.new(shape: AccountAttributeList, location_name: "accountAttributeSet"))
     DescribeAccountAttributesResult.struct_class = Types::DescribeAccountAttributesResult
-
-    DescribeAddressesAttributeRequest.add_member(:allocation_ids, Shapes::ShapeRef.new(shape: AllocationIds, location_name: "AllocationId"))
-    DescribeAddressesAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: AddressAttributeName, location_name: "Attribute"))
-    DescribeAddressesAttributeRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
-    DescribeAddressesAttributeRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: AddressMaxResults, location_name: "MaxResults"))
-    DescribeAddressesAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
-    DescribeAddressesAttributeRequest.struct_class = Types::DescribeAddressesAttributeRequest
-
-    DescribeAddressesAttributeResult.add_member(:addresses, Shapes::ShapeRef.new(shape: AddressSet, location_name: "addressSet"))
-    DescribeAddressesAttributeResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    DescribeAddressesAttributeResult.struct_class = Types::DescribeAddressesAttributeResult
 
     DescribeAddressesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeAddressesRequest.add_member(:public_ips, Shapes::ShapeRef.new(shape: PublicIpStringList, location_name: "PublicIp"))
@@ -5822,6 +5793,7 @@ module Aws::EC2
     EbsBlockDevice.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
     EbsBlockDevice.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     EbsBlockDevice.add_member(:throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "throughput"))
+    EbsBlockDevice.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
     EbsBlockDevice.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     EbsBlockDevice.struct_class = Types::EbsBlockDevice
 
@@ -7731,14 +7703,6 @@ module Aws::EC2
     MemoryInfo.add_member(:size_in_mi_b, Shapes::ShapeRef.new(shape: MemorySize, location_name: "sizeInMiB"))
     MemoryInfo.struct_class = Types::MemoryInfo
 
-    ModifyAddressAttributeRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, required: true, location_name: "AllocationId"))
-    ModifyAddressAttributeRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainName"))
-    ModifyAddressAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
-    ModifyAddressAttributeRequest.struct_class = Types::ModifyAddressAttributeRequest
-
-    ModifyAddressAttributeResult.add_member(:address, Shapes::ShapeRef.new(shape: AddressAttribute, location_name: "address"))
-    ModifyAddressAttributeResult.struct_class = Types::ModifyAddressAttributeResult
-
     ModifyAvailabilityZoneGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GroupName"))
     ModifyAvailabilityZoneGroupRequest.add_member(:opt_in_status, Shapes::ShapeRef.new(shape: ModifyAvailabilityZoneOptInStatus, required: true, location_name: "OptInStatus"))
     ModifyAvailabilityZoneGroupRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -8707,11 +8671,6 @@ module Aws::EC2
     ProvisionedBandwidth.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     ProvisionedBandwidth.struct_class = Types::ProvisionedBandwidth
 
-    PtrUpdateStatus.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
-    PtrUpdateStatus.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
-    PtrUpdateStatus.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
-    PtrUpdateStatus.struct_class = Types::PtrUpdateStatus
-
     PublicIpStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "PublicIp")
 
     PublicIpv4Pool.add_member(:pool_id, Shapes::ShapeRef.new(shape: String, location_name: "poolId"))
@@ -9186,14 +9145,6 @@ module Aws::EC2
     ReservedInstancesOfferingList.member = Shapes::ShapeRef.new(shape: ReservedInstancesOffering, location_name: "item")
 
     ReservedIntancesIds.member = Shapes::ShapeRef.new(shape: ReservedInstancesId, location_name: "item")
-
-    ResetAddressAttributeRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, required: true, location_name: "AllocationId"))
-    ResetAddressAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: AddressAttributeName, required: true, location_name: "Attribute"))
-    ResetAddressAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
-    ResetAddressAttributeRequest.struct_class = Types::ResetAddressAttributeRequest
-
-    ResetAddressAttributeResult.add_member(:address, Shapes::ShapeRef.new(shape: AddressAttribute, location_name: "address"))
-    ResetAddressAttributeResult.struct_class = Types::ResetAddressAttributeResult
 
     ResetEbsDefaultKmsKeyIdRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ResetEbsDefaultKmsKeyIdRequest.struct_class = Types::ResetEbsDefaultKmsKeyIdRequest
@@ -9682,6 +9633,7 @@ module Aws::EC2
     Snapshot.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeId"))
     Snapshot.add_member(:volume_size, Shapes::ShapeRef.new(shape: Integer, location_name: "volumeSize"))
     Snapshot.add_member(:owner_alias, Shapes::ShapeRef.new(shape: String, location_name: "ownerAlias"))
+    Snapshot.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
     Snapshot.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     Snapshot.struct_class = Types::Snapshot
 
@@ -9717,6 +9669,7 @@ module Aws::EC2
     SnapshotInfo.add_member(:progress, Shapes::ShapeRef.new(shape: String, location_name: "progress"))
     SnapshotInfo.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     SnapshotInfo.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
+    SnapshotInfo.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
     SnapshotInfo.struct_class = Types::SnapshotInfo
 
     SnapshotList.member = Shapes::ShapeRef.new(shape: Snapshot, location_name: "item")
@@ -12237,20 +12190,6 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DescribeAddressesResult)
       end)
 
-      api.add_operation(:describe_addresses_attribute, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DescribeAddressesAttribute"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: DescribeAddressesAttributeRequest)
-        o.output = Shapes::ShapeRef.new(shape: DescribeAddressesAttributeResult)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "max_results",
-          tokens: {
-            "next_token" => "next_token"
-          }
-        )
-      end)
-
       api.add_operation(:describe_aggregate_id_format, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeAggregateIdFormat"
         o.http_method = "POST"
@@ -14208,14 +14147,6 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: ImportVolumeResult)
       end)
 
-      api.add_operation(:modify_address_attribute, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ModifyAddressAttribute"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: ModifyAddressAttributeRequest)
-        o.output = Shapes::ShapeRef.new(shape: ModifyAddressAttributeResult)
-      end)
-
       api.add_operation(:modify_availability_zone_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ModifyAvailabilityZoneGroup"
         o.http_method = "POST"
@@ -14774,14 +14705,6 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RequestSpotInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: RequestSpotInstancesResult)
-      end)
-
-      api.add_operation(:reset_address_attribute, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ResetAddressAttribute"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: ResetAddressAttributeRequest)
-        o.output = Shapes::ShapeRef.new(shape: ResetAddressAttributeResult)
       end)
 
       api.add_operation(:reset_ebs_default_kms_key_id, Seahorse::Model::Operation.new.tap do |o|

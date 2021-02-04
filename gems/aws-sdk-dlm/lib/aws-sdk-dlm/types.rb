@@ -59,6 +59,7 @@ module Aws::DLM
     #         policy_details: { # required
     #           policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT, EVENT_BASED_POLICY
     #           resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
+    #           resource_locations: ["CLOUD"], # accepts CLOUD, OUTPOST
     #           target_tags: [
     #             {
     #               key: "String", # required
@@ -82,6 +83,7 @@ module Aws::DLM
     #                 },
     #               ],
     #               create_rule: {
+    #                 location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
     #                 interval: 1,
     #                 interval_unit: "HOURS", # accepts HOURS
     #                 times: ["Time"],
@@ -100,7 +102,8 @@ module Aws::DLM
     #               },
     #               cross_region_copy_rules: [
     #                 {
-    #                   target_region: "TargetRegion", # required
+    #                   target_region: "TargetRegion",
+    #                   target: "Target",
     #                   encrypted: false, # required
     #                   cmk_arn: "CmkArn",
     #                   copy_tags: false,
@@ -210,11 +213,27 @@ module Aws::DLM
     #   data as a hash:
     #
     #       {
+    #         location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
     #         interval: 1,
     #         interval_unit: "HOURS", # accepts HOURS
     #         times: ["Time"],
     #         cron_expression: "CronExpression",
     #       }
+    #
+    # @!attribute [rw] location
+    #   Specifies the destination for snapshots created by the policy. To
+    #   create snapshots in the same Region as the source resource, specify
+    #   `CLOUD`. To create snapshots on the same Outpost as the source
+    #   resource, specify `OUTPOST_LOCAL`. If you omit this parameter,
+    #   `CLOUD` is used by default.
+    #
+    #   If the policy targets resources in an AWS Region, then you must
+    #   create snapshots in the same Region as the source resource.
+    #
+    #   If the policy targets resources on an Outpost, then you can create
+    #   snapshots on the same Outpost as the source resource, or in the
+    #   Region of that Outpost.
+    #   @return [String]
     #
     # @!attribute [rw] interval
     #   The interval between snapshots. The supported values are 1, 2, 3, 4,
@@ -247,6 +266,7 @@ module Aws::DLM
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/CreateRule AWS API Documentation
     #
     class CreateRule < Struct.new(
+      :location,
       :interval,
       :interval_unit,
       :times,
@@ -328,7 +348,8 @@ module Aws::DLM
     #   data as a hash:
     #
     #       {
-    #         target_region: "TargetRegion", # required
+    #         target_region: "TargetRegion",
+    #         target: "Target",
     #         encrypted: false, # required
     #         cmk_arn: "CmkArn",
     #         copy_tags: false,
@@ -339,7 +360,18 @@ module Aws::DLM
     #       }
     #
     # @!attribute [rw] target_region
-    #   The target Region.
+    #   The target Region for the snapshot copies.
+    #
+    #   If you specify a target Region, you must omit **Target**. You cannot
+    #   specify a target Region and a target Outpost in the same rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The Amazon Resource Name (ARN) of the target AWS Outpost for the
+    #   snapshot copies.
+    #
+    #   If you specify an ARN, you must omit **TargetRegion**. You cannot
+    #   specify a target Region and a target Outpost in the same rule.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -368,6 +400,7 @@ module Aws::DLM
     #
     class CrossRegionCopyRule < Struct.new(
       :target_region,
+      :target,
       :encrypted,
       :cmk_arn,
       :copy_tags,
@@ -885,6 +918,7 @@ module Aws::DLM
     #       {
     #         policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT, EVENT_BASED_POLICY
     #         resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
+    #         resource_locations: ["CLOUD"], # accepts CLOUD, OUTPOST
     #         target_tags: [
     #           {
     #             key: "String", # required
@@ -908,6 +942,7 @@ module Aws::DLM
     #               },
     #             ],
     #             create_rule: {
+    #               location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
     #               interval: 1,
     #               interval_unit: "HOURS", # accepts HOURS
     #               times: ["Time"],
@@ -926,7 +961,8 @@ module Aws::DLM
     #             },
     #             cross_region_copy_rules: [
     #               {
-    #                 target_region: "TargetRegion", # required
+    #                 target_region: "TargetRegion",
+    #                 target: "Target",
     #                 encrypted: false, # required
     #                 cmk_arn: "CmkArn",
     #                 copy_tags: false,
@@ -999,6 +1035,16 @@ module Aws::DLM
     #   you are creating an event-based policy, omit this parameter.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] resource_locations
+    #   The location of the resources to backup. If the source resources are
+    #   located in an AWS Region, specify `CLOUD`. If the source resources
+    #   are located on an AWS Outpost in your account, specify `OUTPOST`.
+    #
+    #   If you specify `OUTPOST`, Amazon Data Lifecycle Manager backs up all
+    #   resources of the specified type with matching target tags across all
+    #   of the Outposts in your account.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] target_tags
     #   The single tag that identifies targeted resources for this policy.
     #
@@ -1043,6 +1089,7 @@ module Aws::DLM
     class PolicyDetails < Struct.new(
       :policy_type,
       :resource_types,
+      :resource_locations,
       :target_tags,
       :schedules,
       :parameters,
@@ -1136,6 +1183,7 @@ module Aws::DLM
     #           },
     #         ],
     #         create_rule: {
+    #           location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
     #           interval: 1,
     #           interval_unit: "HOURS", # accepts HOURS
     #           times: ["Time"],
@@ -1154,7 +1202,8 @@ module Aws::DLM
     #         },
     #         cross_region_copy_rules: [
     #           {
-    #             target_region: "TargetRegion", # required
+    #             target_region: "TargetRegion",
+    #             target: "Target",
     #             encrypted: false, # required
     #             cmk_arn: "CmkArn",
     #             copy_tags: false,
@@ -1209,6 +1258,12 @@ module Aws::DLM
     #
     # @!attribute [rw] cross_region_copy_rules
     #   The rule for cross-Region snapshot copies.
+    #
+    #   You can only specify cross-Region copy rules for policies that
+    #   create snapshots in a Region. If the policy creates snapshots on an
+    #   Outpost, then you cannot copy the snapshots to a Region or to an
+    #   Outpost. If the policy creates snapshots in a Region, then snapshots
+    #   can be copied to up to three Regions or Outposts.
     #   @return [Array<Types::CrossRegionCopyRule>]
     #
     # @!attribute [rw] share_rules
@@ -1363,6 +1418,7 @@ module Aws::DLM
     #         policy_details: {
     #           policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT, EVENT_BASED_POLICY
     #           resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
+    #           resource_locations: ["CLOUD"], # accepts CLOUD, OUTPOST
     #           target_tags: [
     #             {
     #               key: "String", # required
@@ -1386,6 +1442,7 @@ module Aws::DLM
     #                 },
     #               ],
     #               create_rule: {
+    #                 location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
     #                 interval: 1,
     #                 interval_unit: "HOURS", # accepts HOURS
     #                 times: ["Time"],
@@ -1404,7 +1461,8 @@ module Aws::DLM
     #               },
     #               cross_region_copy_rules: [
     #                 {
-    #                   target_region: "TargetRegion", # required
+    #                   target_region: "TargetRegion",
+    #                   target: "Target",
     #                   encrypted: false, # required
     #                   cmk_arn: "CmkArn",
     #                   copy_tags: false,

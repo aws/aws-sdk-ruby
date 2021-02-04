@@ -123,6 +123,18 @@ module Aws::EC2
       data[:owner_alias]
     end
 
+    # The ARN of the AWS Outpost on which the snapshot is stored. For more
+    # information, see [EBS Local Snapshot on Outposts][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html
+    # @return [String]
+    def outpost_arn
+      data[:outpost_arn]
+    end
+
     # Any tags assigned to the snapshot.
     # @return [Array<Types::Tag>]
     def tags
@@ -285,6 +297,7 @@ module Aws::EC2
     #
     #   snapshot.copy({
     #     description: "String",
+    #     destination_outpost_arn: "String",
     #     destination_region: "String",
     #     encrypted: false,
     #     kms_key_id: "KmsKeyId",
@@ -306,6 +319,19 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [String] :description
     #   A description for the EBS snapshot.
+    # @option options [String] :destination_outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost to which to copy the
+    #   snapshot. Only specify this parameter when copying a snapshot from an
+    #   AWS Region to an Outpost. The snapshot must be in the Region for the
+    #   destination Outpost. You cannot copy a snapshot from an Outpost to a
+    #   Region, from one Outpost to another, or within the same Outpost.
+    #
+    #   For more information, see [ Copying snapshots from an AWS Region to an
+    #   Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-snapshots
     # @option options [String] :destination_region
     #   The destination Region to use in the `PresignedUrl` parameter of a
     #   snapshot copy operation. This parameter is only valid for specifying

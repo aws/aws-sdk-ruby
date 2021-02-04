@@ -191,6 +191,7 @@ module Aws::Appflow
     SalesforceSourceProperties = Shapes::StructureShape.new(name: 'SalesforceSourceProperties')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
     ScheduleFrequencyType = Shapes::StringShape.new(name: 'ScheduleFrequencyType')
+    ScheduleOffset = Shapes::IntegerShape.new(name: 'ScheduleOffset')
     ScheduledTriggerProperties = Shapes::StructureShape.new(name: 'ScheduledTriggerProperties')
     SchedulingFrequencyTypeList = Shapes::ListShape.new(name: 'SchedulingFrequencyTypeList')
     SecretKey = Shapes::StringShape.new(name: 'SecretKey')
@@ -587,6 +588,8 @@ module Aws::Appflow
     ExecutionRecord.add_member(:execution_result, Shapes::ShapeRef.new(shape: ExecutionResult, location_name: "executionResult"))
     ExecutionRecord.add_member(:started_at, Shapes::ShapeRef.new(shape: Date, location_name: "startedAt"))
     ExecutionRecord.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedAt"))
+    ExecutionRecord.add_member(:data_pull_start_time, Shapes::ShapeRef.new(shape: Date, location_name: "dataPullStartTime"))
+    ExecutionRecord.add_member(:data_pull_end_time, Shapes::ShapeRef.new(shape: Date, location_name: "dataPullEndTime"))
     ExecutionRecord.struct_class = Types::ExecutionRecord
 
     ExecutionResult.add_member(:error_info, Shapes::ShapeRef.new(shape: ErrorInfo, location_name: "errorInfo"))
@@ -768,6 +771,7 @@ module Aws::Appflow
     ScheduledTriggerProperties.add_member(:schedule_start_time, Shapes::ShapeRef.new(shape: Date, location_name: "scheduleStartTime"))
     ScheduledTriggerProperties.add_member(:schedule_end_time, Shapes::ShapeRef.new(shape: Date, location_name: "scheduleEndTime"))
     ScheduledTriggerProperties.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "timezone"))
+    ScheduledTriggerProperties.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "scheduleOffset", metadata: {"box"=>true}))
     ScheduledTriggerProperties.struct_class = Types::ScheduledTriggerProperties
 
     SchedulingFrequencyTypeList.member = Shapes::ShapeRef.new(shape: ScheduleFrequencyType)

@@ -3326,22 +3326,37 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Initiates the copy of an AMI from the specified source Region to the
-    # current Region. You specify the destination Region by using its
-    # endpoint when making the request.
+    # Initiates the copy of an AMI. You can copy an AMI from one Region to
+    # another, or from a Region to an AWS Outpost. You can't copy an AMI
+    # from an Outpost to a Region, from one Outpost to another, or within
+    # the same Outpost.
     #
-    # Copies of encrypted backing snapshots for the AMI are encrypted.
-    # Copies of unencrypted backing snapshots remain unencrypted, unless you
-    # set `Encrypted` during the copy operation. You cannot create an
-    # unencrypted copy of an encrypted backing snapshot.
+    # To copy an AMI from one Region to another, specify the source Region
+    # using the **SourceRegion** parameter, and specify the destination
+    # Region using its endpoint. Copies of encrypted backing snapshots for
+    # the AMI are encrypted. Copies of unencrypted backing snapshots remain
+    # unencrypted, unless you set `Encrypted` during the copy operation. You
+    # cannot create an unencrypted copy of an encrypted backing snapshot.
+    #
+    # To copy an AMI from a Region to an Outpost, specify the source Region
+    # using the **SourceRegion** parameter, and specify the ARN of the
+    # destination Outpost using **DestinationOutpostArn**. Backing snapshots
+    # copied to an Outpost are encrypted by default using the default
+    # encryption key for the Region, or a different key that you specify in
+    # the request using **KmsKeyId**. Outposts do not support unencrypted
+    # snapshots. For more information, [ Amazon EBS local snapshots on
+    # Outposts][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
     #
     # For more information about the prerequisites and limits when copying
-    # an AMI, see [Copying an AMI][1] in the *Amazon Elastic Compute Cloud
+    # an AMI, see [Copying an AMI][2] in the *Amazon Elastic Compute Cloud
     # User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency of
@@ -3403,6 +3418,20 @@ module Aws::EC2
     # @option params [required, String] :source_region
     #   The name of the Region that contains the AMI to copy.
     #
+    # @option params [String] :destination_outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost to which to copy the
+    #   AMI. Only specify this parameter when copying an AMI from an AWS
+    #   Region to an Outpost. The AMI must be in the Region of the destination
+    #   Outpost. You cannot copy an AMI from an Outpost to a Region, from one
+    #   Outpost to another, or within the same Outpost.
+    #
+    #   For more information, see [ Copying AMIs from an AWS Region to an
+    #   Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-amis
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -3440,6 +3469,7 @@ module Aws::EC2
     #     name: "String", # required
     #     source_image_id: "String", # required
     #     source_region: "String", # required
+    #     destination_outpost_arn: "String",
     #     dry_run: false,
     #   })
     #
@@ -3457,32 +3487,57 @@ module Aws::EC2
     end
 
     # Copies a point-in-time snapshot of an EBS volume and stores it in
-    # Amazon S3. You can copy the snapshot within the same Region or from
-    # one Region to another. You can use the snapshot to create EBS volumes
-    # or Amazon Machine Images (AMIs).
+    # Amazon S3. You can copy a snapshot within the same Region, from one
+    # Region to another, or from a Region to an Outpost. You can't copy a
+    # snapshot from an Outpost to a Region, from one Outpost to another, or
+    # within the same Outpost.
     #
-    # Copies of encrypted EBS snapshots remain encrypted. Copies of
-    # unencrypted snapshots remain unencrypted, unless you enable encryption
-    # for the snapshot copy operation. By default, encrypted snapshot copies
-    # use the default AWS Key Management Service (AWS KMS) customer master
-    # key (CMK); however, you can specify a different CMK.
+    # You can use the snapshot to create EBS volumes or Amazon Machine
+    # Images (AMIs).
     #
-    # To copy an encrypted snapshot that has been shared from another
-    # account, you must have permissions for the CMK used to encrypt the
-    # snapshot.
+    # When copying snapshots to a Region, copies of encrypted EBS snapshots
+    # remain encrypted. Copies of unencrypted snapshots remain unencrypted,
+    # unless you enable encryption for the snapshot copy operation. By
+    # default, encrypted snapshot copies use the default AWS Key Management
+    # Service (AWS KMS) customer master key (CMK); however, you can specify
+    # a different CMK. To copy an encrypted snapshot that has been shared
+    # from another account, you must have permissions for the CMK used to
+    # encrypt the snapshot.
+    #
+    # Snapshots copied to an Outpost are encrypted by default using the
+    # default encryption key for the Region, or a different key that you
+    # specify in the request using **KmsKeyId**. Outposts do not support
+    # unencrypted snapshots. For more information, [ Amazon EBS local
+    # snapshots on Outposts][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     # Snapshots created by copying another snapshot have an arbitrary volume
     # ID that should not be used for any purpose.
     #
-    # For more information, see [Copying an Amazon EBS snapshot][1] in the
+    # For more information, see [Copying an Amazon EBS snapshot][2] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html
     #
     # @option params [String] :description
     #   A description for the EBS snapshot.
+    #
+    # @option params [String] :destination_outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost to which to copy the
+    #   snapshot. Only specify this parameter when copying a snapshot from an
+    #   AWS Region to an Outpost. The snapshot must be in the Region for the
+    #   destination Outpost. You cannot copy a snapshot from an Outpost to a
+    #   Region, from one Outpost to another, or within the same Outpost.
+    #
+    #   For more information, see [ Copying snapshots from an AWS Region to an
+    #   Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-snapshots
     #
     # @option params [String] :destination_region
     #   The destination Region to use in the `PresignedUrl` parameter of a
@@ -3617,6 +3672,7 @@ module Aws::EC2
     #
     #   resp = client.copy_snapshot({
     #     description: "String",
+    #     destination_outpost_arn: "String",
     #     destination_region: "String",
     #     encrypted: false,
     #     kms_key_id: "KmsKeyId",
@@ -4776,7 +4832,13 @@ module Aws::EC2
     #   specified, the request remains until you cancel it.
     #
     # @option params [Boolean] :replace_unhealthy_instances
-    #   Indicates whether EC2 Fleet should replace unhealthy instances.
+    #   Indicates whether EC2 Fleet should replace unhealthy Spot Instances.
+    #   Supported only for fleets of type `maintain`. For more information,
+    #   see [EC2 Fleet health checks][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#ec2-fleet-health-checks
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The key-value pair for tagging the EC2 Fleet request on creation. The
@@ -5314,6 +5376,7 @@ module Aws::EC2
     #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #           kms_key_id: "String",
     #           throughput: 1,
+    #           outpost_arn: "String",
     #           encrypted: false,
     #         },
     #         no_device: "String",
@@ -7777,6 +7840,13 @@ module Aws::EC2
     # can use snapshots for backups, to make copies of EBS volumes, and to
     # save data before shutting down an instance.
     #
+    # You can create snapshots of volumes in a Region and volumes on an
+    # Outpost. If you create a snapshot of a volume in a Region, the
+    # snapshot must be stored in the same Region as the volume. If you
+    # create a snapshot of a volume on an Outpost, the snapshot can be
+    # stored on the same Outpost as the volume, or in the Region for that
+    # Outpost.
+    #
     # When a snapshot is created, any AWS Marketplace product codes that are
     # associated with the source volume are propagated to the snapshot.
     #
@@ -7815,6 +7885,28 @@ module Aws::EC2
     # @option params [String] :description
     #   A description for the snapshot.
     #
+    # @option params [String] :outpost_arn
+    #   The Amazon Resource Name (ARN) of the AWS Outpost on which to create a
+    #   local snapshot.
+    #
+    #   * To create a snapshot of a volume in a Region, omit this parameter.
+    #     The snapshot is created in the same Region as the volume.
+    #
+    #   * To create a snapshot of a volume on an Outpost and store the
+    #     snapshot in the Region, omit this parameter. The snapshot is created
+    #     in the Region for the Outpost.
+    #
+    #   * To create a snapshot of a volume on an Outpost and store the
+    #     snapshot on an Outpost, specify the ARN of the destination Outpost.
+    #     The snapshot must be created on the same Outpost as the volume.
+    #
+    #   For more information, see [ Creating local snapshots from volumes on
+    #   an Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-snapshot
+    #
     # @option params [required, String] :volume_id
     #   The ID of the EBS volume.
     #
@@ -7842,6 +7934,7 @@ module Aws::EC2
     #   * {Types::Snapshot#volume_id #volume_id} => String
     #   * {Types::Snapshot#volume_size #volume_size} => Integer
     #   * {Types::Snapshot#owner_alias #owner_alias} => String
+    #   * {Types::Snapshot#outpost_arn #outpost_arn} => String
     #   * {Types::Snapshot#tags #tags} => Array&lt;Types::Tag&gt;
     #
     #
@@ -7872,6 +7965,7 @@ module Aws::EC2
     #
     #   resp = client.create_snapshot({
     #     description: "String",
+    #     outpost_arn: "String",
     #     volume_id: "VolumeId", # required
     #     tag_specifications: [
     #       {
@@ -7902,6 +7996,7 @@ module Aws::EC2
     #   resp.volume_id #=> String
     #   resp.volume_size #=> Integer
     #   resp.owner_alias #=> String
+    #   resp.outpost_arn #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -7921,12 +8016,43 @@ module Aws::EC2
     # crash-consistent across the instance. Boot volumes can be excluded by
     # changing the parameters.
     #
+    # You can create multi-volume snapshots of instances in a Region and
+    # instances on an Outpost. If you create snapshots from an instance in a
+    # Region, the snapshots must be stored in the same Region as the
+    # instance. If you create snapshots from an instance on an Outpost, the
+    # snapshots can be stored on the same Outpost as the instance, or in the
+    # Region for that Outpost.
+    #
     # @option params [String] :description
     #   A description propagated to every snapshot specified by the instance.
     #
     # @option params [required, Types::InstanceSpecification] :instance_specification
     #   The instance to specify which volumes should be included in the
     #   snapshots.
+    #
+    # @option params [String] :outpost_arn
+    #   The Amazon Resource Name (ARN) of the AWS Outpost on which to create
+    #   the local snapshots.
+    #
+    #   * To create snapshots from an instance in a Region, omit this
+    #     parameter. The snapshots are created in the same Region as the
+    #     instance.
+    #
+    #   * To create snapshots from an instance on an Outpost and store the
+    #     snapshots in the Region, omit this parameter. The snapshots are
+    #     created in the Region for the Outpost.
+    #
+    #   * To create snapshots from an instance on an Outpost and store the
+    #     snapshots on an Outpost, specify the ARN of the destination Outpost.
+    #     The snapshots must be created on the same Outpost as the instance.
+    #
+    #   For more information, see [ Creating multi-volume local snapshots from
+    #   instances on an Outpost][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-multivol-snapshot
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   Tags to apply to every snapshot specified by the instance.
@@ -7952,6 +8078,7 @@ module Aws::EC2
     #       instance_id: "InstanceId",
     #       exclude_boot_volume: false,
     #     },
+    #     outpost_arn: "String",
     #     tag_specifications: [
     #       {
     #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
@@ -7982,6 +8109,7 @@ module Aws::EC2
     #   resp.snapshots[0].progress #=> String
     #   resp.snapshots[0].owner_id #=> String
     #   resp.snapshots[0].snapshot_id #=> String
+    #   resp.snapshots[0].outpost_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSnapshots AWS API Documentation
     #
@@ -10005,9 +10133,7 @@ module Aws::EC2
     #   attributes to `true`\: `enableDnsHostnames` and `enableDnsSupport`.
     #   Use ModifyVpcAttribute to set the VPC attributes.
     #
-    #   Private DNS is not supported for Amazon S3 interface endpoints.
-    #
-    #   Default: `true` for supported endpoints
+    #   Default: `true`
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to associate with the endpoint.
@@ -12998,28 +13124,12 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Deletes one or more specified VPC endpoints. You can delete any of the
-    # following types of VPC endpoints.
-    #
-    # * Gateway endpoint,
-    #
-    # * Gateway Load Balancer endpoint,
-    #
-    # * Interface endpoint
-    #
-    # The following rules apply when you delete a VPC endpoint:
-    #
-    # * When you delete a gateway endpoint, we delete the endpoint routes in
-    #   the route tables that are associated with the endpoint.
-    #
-    # * When you delete a Gateway Load Balancer endpoint, we delete the
-    #   endpoint network interfaces.
-    #
-    #   You can only delete Gateway Load Balancer endpoints when the routes
-    #   that are associated with the endpoint are deleted.
-    #
-    # * When you delete an interface endpoint, we delete the endpoint
-    #   network interfaces.
+    # Deletes one or more specified VPC endpoints. Deleting a gateway
+    # endpoint also deletes the endpoint routes in the route tables that
+    # were associated with the endpoint. Deleting an interface endpoint or a
+    # Gateway Load Balancer endpoint deletes the endpoint network
+    # interfaces. Gateway Load Balancer endpoints can only be deleted if the
+    # routes that are associated with the endpoint are deleted.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -13767,70 +13877,6 @@ module Aws::EC2
     # @param [Hash] params ({})
     def describe_addresses(params = {}, options = {})
       req = build_request(:describe_addresses, params)
-      req.send_request(options)
-    end
-
-    # Describes the attributes of the specified Elastic IP addresses. For
-    # requirements, see [Using reverse DNS for email applications][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS
-    #
-    # @option params [Array<String>] :allocation_ids
-    #   \[EC2-VPC\] The allocation IDs.
-    #
-    # @option params [String] :attribute
-    #   The attribute of the IP address.
-    #
-    # @option params [String] :next_token
-    #   The token for the next page of results.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @return [Types::DescribeAddressesAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DescribeAddressesAttributeResult#addresses #addresses} => Array&lt;Types::AddressAttribute&gt;
-    #   * {Types::DescribeAddressesAttributeResult#next_token #next_token} => String
-    #
-    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_addresses_attribute({
-    #     allocation_ids: ["AllocationId"],
-    #     attribute: "domain-name", # accepts domain-name
-    #     next_token: "NextToken",
-    #     max_results: 1,
-    #     dry_run: false,
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.addresses #=> Array
-    #   resp.addresses[0].public_ip #=> String
-    #   resp.addresses[0].allocation_id #=> String
-    #   resp.addresses[0].ptr_record #=> String
-    #   resp.addresses[0].ptr_record_update.value #=> String
-    #   resp.addresses[0].ptr_record_update.status #=> String
-    #   resp.addresses[0].ptr_record_update.reason #=> String
-    #   resp.next_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddressesAttribute AWS API Documentation
-    #
-    # @overload describe_addresses_attribute(params = {})
-    # @param [Hash] params ({})
-    def describe_addresses_attribute(params = {}, options = {})
-      req = build_request(:describe_addresses_attribute, params)
       req.send_request(options)
     end
 
@@ -16878,6 +16924,7 @@ module Aws::EC2
     #   resp.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
     #   resp.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.block_device_mappings[0].ebs.throughput #=> Integer
+    #   resp.block_device_mappings[0].ebs.outpost_arn #=> String
     #   resp.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.block_device_mappings[0].no_device #=> String
     #   resp.image_id #=> String
@@ -16963,13 +17010,14 @@ module Aws::EC2
     #
     #   * `name` - The name of the AMI (provided during image creation).
     #
-    #   * `owner-alias` - The owner alias, from an Amazon-maintained list
-    #     (`amazon` \| `aws-marketplace`). This is not the user-configured AWS
-    #     account alias set using the IAM console. We recommend that you use
-    #     the related parameter instead of this filter.
+    #   * `owner-alias` - The owner alias (`amazon` \| `aws-marketplace`). The
+    #     valid aliases are defined in an Amazon-maintained list. This is not
+    #     the AWS account alias that can be set using the IAM console. We
+    #     recommend that you use the **Owner** request parameter instead of
+    #     this filter.
     #
     #   * `owner-id` - The AWS account ID of the owner. We recommend that you
-    #     use the related parameter instead of this filter.
+    #     use the **Owner** request parameter instead of this filter.
     #
     #   * `platform` - The platform. To only list Windows-based AMIs, use
     #     `windows`.
@@ -17119,6 +17167,7 @@ module Aws::EC2
     #   resp.images[0].block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
     #   resp.images[0].block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.images[0].block_device_mappings[0].ebs.throughput #=> Integer
+    #   resp.images[0].block_device_mappings[0].ebs.outpost_arn #=> String
     #   resp.images[0].block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.images[0].block_device_mappings[0].no_device #=> String
     #   resp.images[0].description #=> String
@@ -23350,6 +23399,7 @@ module Aws::EC2
     #   resp.snapshots[0].volume_id #=> String
     #   resp.snapshots[0].volume_size #=> Integer
     #   resp.snapshots[0].owner_alias #=> String
+    #   resp.snapshots[0].outpost_arn #=> String
     #   resp.snapshots[0].tags #=> Array
     #   resp.snapshots[0].tags[0].key #=> String
     #   resp.snapshots[0].tags[0].value #=> String
@@ -23751,6 +23801,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.throughput #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.outpost_arn #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].no_device #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].ebs_optimized #=> Boolean
@@ -24107,6 +24158,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.throughput #=> Integer
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.outpost_arn #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].no_device #=> String
     #   resp.spot_instance_requests[0].launch_specification.ebs_optimized #=> Boolean
@@ -26893,13 +26945,13 @@ module Aws::EC2
 
     # Describes available services to which you can create a VPC endpoint.
     #
-    # When the service provider and the consumer have different accounts in
+    # When the service provider and the consumer have different accounts
     # multiple Availability Zones, and the consumer views the VPC endpoint
     # service information, the response only includes the common
     # Availability Zones. For example, when the service provider account
     # uses `us-east-1a` and `us-east-1c` and the consumer uses `us-east-1a`
-    # and `us-east-1b`, the response includes the VPC endpoint services in
-    # the common Availability Zone, `us-east-1a`.
+    # and us-east-1a and us-east-1b, the response includes the VPC endpoint
+    # services in the common Availability Zone, `us-east-1a`.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -31399,55 +31451,6 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies an attribute of the specified Elastic IP address. For
-    # requirements, see [Using reverse DNS for email applications][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS
-    #
-    # @option params [required, String] :allocation_id
-    #   \[EC2-VPC\] The allocation ID.
-    #
-    # @option params [String] :domain_name
-    #   The domain name to modify for the IP address.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @return [Types::ModifyAddressAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ModifyAddressAttributeResult#address #address} => Types::AddressAttribute
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.modify_address_attribute({
-    #     allocation_id: "AllocationId", # required
-    #     domain_name: "String",
-    #     dry_run: false,
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.address.public_ip #=> String
-    #   resp.address.allocation_id #=> String
-    #   resp.address.ptr_record #=> String
-    #   resp.address.ptr_record_update.value #=> String
-    #   resp.address.ptr_record_update.status #=> String
-    #   resp.address.ptr_record_update.reason #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyAddressAttribute AWS API Documentation
-    #
-    # @overload modify_address_attribute(params = {})
-    # @param [Hash] params ({})
-    def modify_address_attribute(params = {}, options = {})
-      req = build_request(:modify_address_attribute, params)
-      req.send_request(options)
-    end
-
     # Changes the opt-in status of the Local Zone and Wavelength Zone group
     # for your account.
     #
@@ -34446,8 +34449,6 @@ module Aws::EC2
     #   (Interface endpoint) Indicates whether a private hosted zone is
     #   associated with the VPC.
     #
-    #   Private DNS is not supported for Amazon S3 interface endpoints.
-    #
     # @return [Types::ModifyVpcEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyVpcEndpointResult#return #return} => Boolean
@@ -35940,6 +35941,17 @@ module Aws::EC2
     # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
     #   The block device mapping entries.
     #
+    #   If you create an AMI on an Outpost, then all backing snapshots must be
+    #   on the same Outpost or in the Region of that Outpost. AMIs on an
+    #   Outpost that include local snapshots can be used to launch instances
+    #   on the same Outpost only. For more information, [ Amazon EBS local
+    #   snapshots on Outposts][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami
+    #
     # @option params [String] :description
     #   A description for your AMI.
     #
@@ -36013,6 +36025,7 @@ module Aws::EC2
     #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #           kms_key_id: "String",
     #           throughput: 1,
+    #           outpost_arn: "String",
     #           encrypted: false,
     #         },
     #         no_device: "String",
@@ -37349,6 +37362,7 @@ module Aws::EC2
     #                 volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #                 kms_key_id: "String",
     #                 throughput: 1,
+    #                 outpost_arn: "String",
     #                 encrypted: false,
     #               },
     #               no_device: "String",
@@ -37697,6 +37711,7 @@ module Aws::EC2
     #             volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #             kms_key_id: "String",
     #             throughput: 1,
+    #             outpost_arn: "String",
     #             encrypted: false,
     #           },
     #           no_device: "String",
@@ -37795,6 +37810,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.throughput #=> Integer
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.outpost_arn #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].no_device #=> String
     #   resp.spot_instance_requests[0].launch_specification.ebs_optimized #=> Boolean
@@ -37852,55 +37868,6 @@ module Aws::EC2
     # @param [Hash] params ({})
     def request_spot_instances(params = {}, options = {})
       req = build_request(:request_spot_instances, params)
-      req.send_request(options)
-    end
-
-    # Resets the attribute of the specified IP address. For requirements,
-    # see [Using reverse DNS for email applications][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS
-    #
-    # @option params [required, String] :allocation_id
-    #   \[EC2-VPC\] The allocation ID.
-    #
-    # @option params [required, String] :attribute
-    #   The attribute of the IP address.
-    #
-    # @option params [Boolean] :dry_run
-    #   Checks whether you have the required permissions for the action,
-    #   without actually making the request, and provides an error response.
-    #   If you have the required permissions, the error response is
-    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    #
-    # @return [Types::ResetAddressAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ResetAddressAttributeResult#address #address} => Types::AddressAttribute
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.reset_address_attribute({
-    #     allocation_id: "AllocationId", # required
-    #     attribute: "domain-name", # required, accepts domain-name
-    #     dry_run: false,
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.address.public_ip #=> String
-    #   resp.address.allocation_id #=> String
-    #   resp.address.ptr_record #=> String
-    #   resp.address.ptr_record_update.value #=> String
-    #   resp.address.ptr_record_update.status #=> String
-    #   resp.address.ptr_record_update.reason #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetAddressAttribute AWS API Documentation
-    #
-    # @overload reset_address_attribute(params = {})
-    # @param [Hash] params ({})
-    def reset_address_attribute(params = {}, options = {})
-      req = build_request(:reset_address_attribute, params)
       req.send_request(options)
     end
 
@@ -39133,6 +39100,7 @@ module Aws::EC2
     #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #           kms_key_id: "String",
     #           throughput: 1,
+    #           outpost_arn: "String",
     #           encrypted: false,
     #         },
     #         no_device: "String",
@@ -41072,7 +41040,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.223.0'
+      context[:gem_version] = '1.224.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
