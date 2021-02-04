@@ -580,7 +580,6 @@ module Aws::Appflow
     #           schedule_start_time: Time.now,
     #           schedule_end_time: Time.now,
     #           timezone: "Timezone",
-    #           schedule_offset: 1,
     #         },
     #       },
     #     },
@@ -962,12 +961,6 @@ module Aws::Appflow
     # @option params [Array<String>] :connector_types
     #   The type of connector, such as Salesforce, Amplitude, and so on.
     #
-    #   <note markdown="1"> *Locke* refers to a new destination known as Amazon Connect Customer
-    #   Profiles. At this time, we recommend that you do not use this
-    #   destination.
-    #
-    #    </note>
-    #
     # @option params [String] :next_token
     #   The pagination token for the next page of data.
     #
@@ -1125,7 +1118,6 @@ module Aws::Appflow
     #   resp.trigger_config.trigger_properties.scheduled.schedule_start_time #=> Time
     #   resp.trigger_config.trigger_properties.scheduled.schedule_end_time #=> Time
     #   resp.trigger_config.trigger_properties.scheduled.timezone #=> String
-    #   resp.trigger_config.trigger_properties.scheduled.schedule_offset #=> Integer
     #   resp.tasks #=> Array
     #   resp.tasks[0].source_fields #=> Array
     #   resp.tasks[0].source_fields[0] #=> String
@@ -1204,8 +1196,6 @@ module Aws::Appflow
     #   resp.flow_executions[0].execution_result.records_processed #=> Integer
     #   resp.flow_executions[0].started_at #=> Time
     #   resp.flow_executions[0].last_updated_at #=> Time
-    #   resp.flow_executions[0].data_pull_start_time #=> Time
-    #   resp.flow_executions[0].data_pull_end_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DescribeFlowExecutionRecords AWS API Documentation
@@ -1692,7 +1682,6 @@ module Aws::Appflow
     #           schedule_start_time: Time.now,
     #           schedule_end_time: Time.now,
     #           timezone: "Timezone",
-    #           schedule_offset: 1,
     #         },
     #       },
     #     },
@@ -1878,7 +1867,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

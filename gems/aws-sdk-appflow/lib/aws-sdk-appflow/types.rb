@@ -1260,7 +1260,6 @@ module Aws::Appflow
     #               schedule_start_time: Time.now,
     #               schedule_end_time: Time.now,
     #               timezone: "Timezone",
-    #               schedule_offset: 1,
     #             },
     #           },
     #         },
@@ -1753,12 +1752,6 @@ module Aws::Appflow
     #
     # @!attribute [rw] connector_types
     #   The type of connector, such as Salesforce, Amplitude, and so on.
-    #
-    #   <note markdown="1"> *Locke* refers to a new destination known as Amazon Connect Customer
-    #   Profiles. At this time, we recommend that you do not use this
-    #   destination.
-    #
-    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -2439,16 +2432,6 @@ module Aws::Appflow
     #   Specifies the time of the most recent update.
     #   @return [Time]
     #
-    # @!attribute [rw] data_pull_start_time
-    #   The timestamp that determines the first new or updated record to be
-    #   transferred in the flow run.
-    #   @return [Time]
-    #
-    # @!attribute [rw] data_pull_end_time
-    #   The timestamp that indicates the last new or updated record to be
-    #   transferred in the flow run.
-    #   @return [Time]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ExecutionRecord AWS API Documentation
     #
     class ExecutionRecord < Struct.new(
@@ -2456,9 +2439,7 @@ module Aws::Appflow
       :execution_status,
       :execution_result,
       :started_at,
-      :last_updated_at,
-      :data_pull_start_time,
-      :data_pull_end_time)
+      :last_updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3522,7 +3503,6 @@ module Aws::Appflow
     #         schedule_start_time: Time.now,
     #         schedule_end_time: Time.now,
     #         timezone: "Timezone",
-    #         schedule_offset: 1,
     #       }
     #
     # @!attribute [rw] schedule_expression
@@ -3545,13 +3525,8 @@ module Aws::Appflow
     #
     # @!attribute [rw] timezone
     #   Specifies the time zone used when referring to the date and time of
-    #   a scheduled-triggered flow, such as `America/New_York`.
+    #   a scheduled-triggered flow.
     #   @return [String]
-    #
-    # @!attribute [rw] schedule_offset
-    #   Specifies the optional offset that is added to the time interval for
-    #   a schedule-triggered flow.
-    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ScheduledTriggerProperties AWS API Documentation
     #
@@ -3560,8 +3535,7 @@ module Aws::Appflow
       :data_pull_mode,
       :schedule_start_time,
       :schedule_end_time,
-      :timezone,
-      :schedule_offset)
+      :timezone)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4486,7 +4460,6 @@ module Aws::Appflow
     #             schedule_start_time: Time.now,
     #             schedule_end_time: Time.now,
     #             timezone: "Timezone",
-    #             schedule_offset: 1,
     #           },
     #         },
     #       }
@@ -4525,7 +4498,6 @@ module Aws::Appflow
     #           schedule_start_time: Time.now,
     #           schedule_end_time: Time.now,
     #           timezone: "Timezone",
-    #           schedule_offset: 1,
     #         },
     #       }
     #
@@ -4786,7 +4758,6 @@ module Aws::Appflow
     #               schedule_start_time: Time.now,
     #               schedule_end_time: Time.now,
     #               timezone: "Timezone",
-    #               schedule_offset: 1,
     #             },
     #           },
     #         },

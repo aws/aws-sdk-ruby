@@ -61,7 +61,6 @@ module Aws::DLM
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
-    LocationValues = Shapes::StringShape.new(name: 'LocationValues')
     NoReboot = Shapes::BooleanShape.new(name: 'NoReboot')
     Parameter = Shapes::StringShape.new(name: 'Parameter')
     ParameterList = Shapes::ListShape.new(name: 'ParameterList')
@@ -72,8 +71,6 @@ module Aws::DLM
     PolicyId = Shapes::StringShape.new(name: 'PolicyId')
     PolicyIdList = Shapes::ListShape.new(name: 'PolicyIdList')
     PolicyTypeValues = Shapes::StringShape.new(name: 'PolicyTypeValues')
-    ResourceLocationList = Shapes::ListShape.new(name: 'ResourceLocationList')
-    ResourceLocationValues = Shapes::StringShape.new(name: 'ResourceLocationValues')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceTypeValues = Shapes::StringShape.new(name: 'ResourceTypeValues')
     ResourceTypeValuesList = Shapes::ListShape.new(name: 'ResourceTypeValuesList')
@@ -130,7 +127,6 @@ module Aws::DLM
     CreateLifecyclePolicyResponse.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, location_name: "PolicyId"))
     CreateLifecyclePolicyResponse.struct_class = Types::CreateLifecyclePolicyResponse
 
-    CreateRule.add_member(:location, Shapes::ShapeRef.new(shape: LocationValues, location_name: "Location"))
     CreateRule.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
     CreateRule.add_member(:interval_unit, Shapes::ShapeRef.new(shape: IntervalUnitValues, location_name: "IntervalUnit"))
     CreateRule.add_member(:times, Shapes::ShapeRef.new(shape: TimesList, location_name: "Times"))
@@ -148,8 +144,7 @@ module Aws::DLM
     CrossRegionCopyRetainRule.add_member(:interval_unit, Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
     CrossRegionCopyRetainRule.struct_class = Types::CrossRegionCopyRetainRule
 
-    CrossRegionCopyRule.add_member(:target_region, Shapes::ShapeRef.new(shape: TargetRegion, location_name: "TargetRegion"))
-    CrossRegionCopyRule.add_member(:target, Shapes::ShapeRef.new(shape: Target, location_name: "Target"))
+    CrossRegionCopyRule.add_member(:target_region, Shapes::ShapeRef.new(shape: TargetRegion, required: true, location_name: "TargetRegion"))
     CrossRegionCopyRule.add_member(:encrypted, Shapes::ShapeRef.new(shape: Encrypted, required: true, location_name: "Encrypted"))
     CrossRegionCopyRule.add_member(:cmk_arn, Shapes::ShapeRef.new(shape: CmkArn, location_name: "CmkArn"))
     CrossRegionCopyRule.add_member(:copy_tags, Shapes::ShapeRef.new(shape: CopyTagsNullable, location_name: "CopyTags"))
@@ -248,7 +243,6 @@ module Aws::DLM
 
     PolicyDetails.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyTypeValues, location_name: "PolicyType"))
     PolicyDetails.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypeValuesList, location_name: "ResourceTypes"))
-    PolicyDetails.add_member(:resource_locations, Shapes::ShapeRef.new(shape: ResourceLocationList, location_name: "ResourceLocations"))
     PolicyDetails.add_member(:target_tags, Shapes::ShapeRef.new(shape: TargetTagList, location_name: "TargetTags"))
     PolicyDetails.add_member(:schedules, Shapes::ShapeRef.new(shape: ScheduleList, location_name: "Schedules"))
     PolicyDetails.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
@@ -257,8 +251,6 @@ module Aws::DLM
     PolicyDetails.struct_class = Types::PolicyDetails
 
     PolicyIdList.member = Shapes::ShapeRef.new(shape: PolicyId)
-
-    ResourceLocationList.member = Shapes::ShapeRef.new(shape: ResourceLocationValues)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))

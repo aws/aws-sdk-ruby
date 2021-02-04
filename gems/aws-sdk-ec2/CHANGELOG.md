@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.224.0 (2021-02-04)
-------------------
-
-* Feature - AWS Outposts now supports EBS local snapshots on Outposts that allows customers to store snapshots of EBS volumes and AMIs locally on S3 on Outposts.
-
 1.223.0 (2021-02-03)
 ------------------
 

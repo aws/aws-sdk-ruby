@@ -28,7 +28,7 @@ module Aws::EMRContainers
     CreateManagedEndpointResponse = Shapes::StructureShape.new(name: 'CreateManagedEndpointResponse')
     CreateVirtualClusterRequest = Shapes::StructureShape.new(name: 'CreateVirtualClusterRequest')
     CreateVirtualClusterResponse = Shapes::StructureShape.new(name: 'CreateVirtualClusterResponse')
-    Date = Shapes::TimestampShape.new(name: 'Date', timestampFormat: "iso8601")
+    Date = Shapes::TimestampShape.new(name: 'Date')
     DeleteManagedEndpointRequest = Shapes::StructureShape.new(name: 'DeleteManagedEndpointRequest')
     DeleteManagedEndpointResponse = Shapes::StructureShape.new(name: 'DeleteManagedEndpointResponse')
     DeleteVirtualClusterRequest = Shapes::StructureShape.new(name: 'DeleteVirtualClusterRequest')

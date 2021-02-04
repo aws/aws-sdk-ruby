@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.39.0 (2021-02-04)
-------------------
-
-* Feature - Provide support for EBS Local Snapshots on AWS Outpost in Data Lifecycle Manager (DLM).
-
 1.38.0 (2021-02-02)
 ------------------
 

@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.41.0 (2021-02-04)
-------------------
-
-* Feature - API release for field folders feature.
-
 1.40.0 (2021-02-02)
 ------------------
 

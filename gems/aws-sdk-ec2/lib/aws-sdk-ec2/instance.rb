@@ -654,7 +654,6 @@ module Aws::EC2
     #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #           kms_key_id: "String",
     #           throughput: 1,
-    #           outpost_arn: "String",
     #           encrypted: false,
     #         },
     #         no_device: "String",

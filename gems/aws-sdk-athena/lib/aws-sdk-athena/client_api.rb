@@ -52,8 +52,6 @@ module Aws::Athena
     DescriptionString = Shapes::StringShape.new(name: 'DescriptionString')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     EncryptionOption = Shapes::StringShape.new(name: 'EncryptionOption')
-    EngineVersion = Shapes::StructureShape.new(name: 'EngineVersion')
-    EngineVersionsList = Shapes::ListShape.new(name: 'EngineVersionsList')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpressionString = Shapes::StringShape.new(name: 'ExpressionString')
@@ -80,8 +78,6 @@ module Aws::Athena
     ListDataCatalogsOutput = Shapes::StructureShape.new(name: 'ListDataCatalogsOutput')
     ListDatabasesInput = Shapes::StructureShape.new(name: 'ListDatabasesInput')
     ListDatabasesOutput = Shapes::StructureShape.new(name: 'ListDatabasesOutput')
-    ListEngineVersionsInput = Shapes::StructureShape.new(name: 'ListEngineVersionsInput')
-    ListEngineVersionsOutput = Shapes::StructureShape.new(name: 'ListEngineVersionsOutput')
     ListNamedQueriesInput = Shapes::StructureShape.new(name: 'ListNamedQueriesInput')
     ListNamedQueriesOutput = Shapes::StructureShape.new(name: 'ListNamedQueriesOutput')
     ListQueryExecutionsInput = Shapes::StructureShape.new(name: 'ListQueryExecutionsInput')
@@ -95,7 +91,6 @@ module Aws::Athena
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxDataCatalogsCount = Shapes::IntegerShape.new(name: 'MaxDataCatalogsCount')
     MaxDatabasesCount = Shapes::IntegerShape.new(name: 'MaxDatabasesCount')
-    MaxEngineVersionsCount = Shapes::IntegerShape.new(name: 'MaxEngineVersionsCount')
     MaxNamedQueriesCount = Shapes::IntegerShape.new(name: 'MaxNamedQueriesCount')
     MaxQueryExecutionsCount = Shapes::IntegerShape.new(name: 'MaxQueryExecutionsCount')
     MaxQueryResults = Shapes::IntegerShape.new(name: 'MaxQueryResults')
@@ -273,12 +268,6 @@ module Aws::Athena
     EncryptionConfiguration.add_member(:kms_key, Shapes::ShapeRef.new(shape: String, location_name: "KmsKey"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
-    EngineVersion.add_member(:selected_engine_version, Shapes::ShapeRef.new(shape: NameString, location_name: "SelectedEngineVersion"))
-    EngineVersion.add_member(:effective_engine_version, Shapes::ShapeRef.new(shape: NameString, location_name: "EffectiveEngineVersion"))
-    EngineVersion.struct_class = Types::EngineVersion
-
-    EngineVersionsList.member = Shapes::ShapeRef.new(shape: EngineVersion)
-
     GetDataCatalogInput.add_member(:name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "Name"))
     GetDataCatalogInput.struct_class = Types::GetDataCatalogInput
 
@@ -352,14 +341,6 @@ module Aws::Athena
     ListDatabasesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListDatabasesOutput.struct_class = Types::ListDatabasesOutput
 
-    ListEngineVersionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    ListEngineVersionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxEngineVersionsCount, location_name: "MaxResults"))
-    ListEngineVersionsInput.struct_class = Types::ListEngineVersionsInput
-
-    ListEngineVersionsOutput.add_member(:engine_versions, Shapes::ShapeRef.new(shape: EngineVersionsList, location_name: "EngineVersions"))
-    ListEngineVersionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    ListEngineVersionsOutput.struct_class = Types::ListEngineVersionsOutput
-
     ListNamedQueriesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListNamedQueriesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxNamedQueriesCount, location_name: "MaxResults"))
     ListNamedQueriesInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
@@ -432,7 +413,6 @@ module Aws::Athena
     QueryExecution.add_member(:status, Shapes::ShapeRef.new(shape: QueryExecutionStatus, location_name: "Status"))
     QueryExecution.add_member(:statistics, Shapes::ShapeRef.new(shape: QueryExecutionStatistics, location_name: "Statistics"))
     QueryExecution.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
-    QueryExecution.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
     QueryExecution.struct_class = Types::QueryExecution
 
     QueryExecutionContext.add_member(:database, Shapes::ShapeRef.new(shape: DatabaseString, location_name: "Database"))
@@ -576,7 +556,6 @@ module Aws::Athena
     WorkGroupConfiguration.add_member(:publish_cloud_watch_metrics_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "PublishCloudWatchMetricsEnabled"))
     WorkGroupConfiguration.add_member(:bytes_scanned_cutoff_per_query, Shapes::ShapeRef.new(shape: BytesScannedCutoffValue, location_name: "BytesScannedCutoffPerQuery"))
     WorkGroupConfiguration.add_member(:requester_pays_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RequesterPaysEnabled"))
-    WorkGroupConfiguration.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
     WorkGroupConfiguration.struct_class = Types::WorkGroupConfiguration
 
     WorkGroupConfigurationUpdates.add_member(:enforce_work_group_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "EnforceWorkGroupConfiguration"))
@@ -585,14 +564,12 @@ module Aws::Athena
     WorkGroupConfigurationUpdates.add_member(:bytes_scanned_cutoff_per_query, Shapes::ShapeRef.new(shape: BytesScannedCutoffValue, location_name: "BytesScannedCutoffPerQuery"))
     WorkGroupConfigurationUpdates.add_member(:remove_bytes_scanned_cutoff_per_query, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveBytesScannedCutoffPerQuery"))
     WorkGroupConfigurationUpdates.add_member(:requester_pays_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RequesterPaysEnabled"))
-    WorkGroupConfigurationUpdates.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
     WorkGroupConfigurationUpdates.struct_class = Types::WorkGroupConfigurationUpdates
 
     WorkGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "Name"))
     WorkGroupSummary.add_member(:state, Shapes::ShapeRef.new(shape: WorkGroupState, location_name: "State"))
     WorkGroupSummary.add_member(:description, Shapes::ShapeRef.new(shape: WorkGroupDescriptionString, location_name: "Description"))
     WorkGroupSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
-    WorkGroupSummary.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
     WorkGroupSummary.struct_class = Types::WorkGroupSummary
 
     WorkGroupsList.member = Shapes::ShapeRef.new(shape: WorkGroupSummary)
@@ -806,16 +783,6 @@ module Aws::Athena
             "next_token" => "next_token"
           }
         )
-      end)
-
-      api.add_operation(:list_engine_versions, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListEngineVersions"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: ListEngineVersionsInput)
-        o.output = Shapes::ShapeRef.new(shape: ListEngineVersionsOutput)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:list_named_queries, Seahorse::Model::Operation.new.tap do |o|

@@ -1428,12 +1428,6 @@ module Aws::QuickSight
     #             },
     #           },
     #         ],
-    #         field_folders: {
-    #           "FieldFolderPath" => {
-    #             description: "FieldFolderDescription",
-    #             columns: ["String"],
-    #           },
-    #         },
     #         permissions: [
     #           {
     #             principal: "Principal", # required
@@ -1491,11 +1485,6 @@ module Aws::QuickSight
     #   features. Currently, only geospatial hierarchy is supported.
     #   @return [Array<Types::ColumnGroup>]
     #
-    # @!attribute [rw] field_folders
-    #   The folder that contains fields and nested subfolders for your
-    #   dataset.
-    #   @return [Hash<String,Types::FieldFolder>]
-    #
     # @!attribute [rw] permissions
     #   A list of resource permissions on the dataset.
     #   @return [Array<Types::ResourcePermission>]
@@ -1524,7 +1513,6 @@ module Aws::QuickSight
       :logical_table_map,
       :import_mode,
       :column_groups,
-      :field_folders,
       :permissions,
       :row_level_permission_data_set,
       :column_level_permission_rules,
@@ -1807,12 +1795,10 @@ module Aws::QuickSight
     #
     # @!attribute [rw] type
     #   The type of the data source. Currently, the supported types for this
-    #   operation are: `ATHENA, AURORA, AURORA_POSTGRESQL,
-    #   AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT,
-    #   S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA`. Use `ListDataSources` to
-    #   return a list of all data sources.
-    #
-    #   `AMAZON_ELASTICSEARCH` is for Amazon managed Elasticsearch Service.
+    #   operation are: `ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL,
+    #   POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER,
+    #   TERADATA`. Use `ListDataSources` to return a list of all data
+    #   sources.
     #   @return [String]
     #
     # @!attribute [rw] data_source_parameters
@@ -3325,11 +3311,6 @@ module Aws::QuickSight
     #   features. Currently, only geospatial hierarchy is supported.
     #   @return [Array<Types::ColumnGroup>]
     #
-    # @!attribute [rw] field_folders
-    #   The folder that contains fields and nested subfolders for your
-    #   dataset.
-    #   @return [Hash<String,Types::FieldFolder>]
-    #
     # @!attribute [rw] row_level_permission_data_set
     #   The row-level security configuration for the dataset.
     #   @return [Types::RowLevelPermissionDataSet]
@@ -3352,7 +3333,6 @@ module Aws::QuickSight
       :import_mode,
       :consumed_spice_capacity_in_bytes,
       :column_groups,
-      :field_folders,
       :row_level_permission_data_set,
       :column_level_permission_rules)
       SENSITIVE = []
@@ -6070,34 +6050,6 @@ module Aws::QuickSight
     #
     class ExportToCSVOption < Struct.new(
       :availability_status)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # A FieldFolder element is a folder that contains fields and nested
-    # subfolders.
-    #
-    # @note When making an API call, you may pass FieldFolder
-    #   data as a hash:
-    #
-    #       {
-    #         description: "FieldFolderDescription",
-    #         columns: ["String"],
-    #       }
-    #
-    # @!attribute [rw] description
-    #   The description for a field folder.
-    #   @return [String]
-    #
-    # @!attribute [rw] columns
-    #   A folder has a list of columns. A column can only be in one folder.
-    #   @return [Array<String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FieldFolder AWS API Documentation
-    #
-    class FieldFolder < Struct.new(
-      :description,
-      :columns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11784,12 +11736,6 @@ module Aws::QuickSight
     #             },
     #           },
     #         ],
-    #         field_folders: {
-    #           "FieldFolderPath" => {
-    #             description: "FieldFolderDescription",
-    #             columns: ["String"],
-    #           },
-    #         },
     #         row_level_permission_data_set: {
     #           namespace: "Namespace",
     #           arn: "Arn", # required
@@ -11835,11 +11781,6 @@ module Aws::QuickSight
     #   features. Currently, only geospatial hierarchy is supported.
     #   @return [Array<Types::ColumnGroup>]
     #
-    # @!attribute [rw] field_folders
-    #   The folder that contains fields and nested subfolders for your
-    #   dataset.
-    #   @return [Hash<String,Types::FieldFolder>]
-    #
     # @!attribute [rw] row_level_permission_data_set
     #   The row-level security configuration for the data you want to
     #   create.
@@ -11859,7 +11800,6 @@ module Aws::QuickSight
       :logical_table_map,
       :import_mode,
       :column_groups,
-      :field_folders,
       :row_level_permission_data_set,
       :column_level_permission_rules)
       SENSITIVE = []

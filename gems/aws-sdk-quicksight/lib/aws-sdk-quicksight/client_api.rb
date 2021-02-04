@@ -236,14 +236,9 @@ module Aws::QuickSight
     ExceptionResourceType = Shapes::StringShape.new(name: 'ExceptionResourceType')
     ExportToCSVOption = Shapes::StructureShape.new(name: 'ExportToCSVOption')
     Expression = Shapes::StringShape.new(name: 'Expression')
-    FieldFolder = Shapes::StructureShape.new(name: 'FieldFolder')
-    FieldFolderDescription = Shapes::StringShape.new(name: 'FieldFolderDescription')
-    FieldFolderMap = Shapes::MapShape.new(name: 'FieldFolderMap')
-    FieldFolderPath = Shapes::StringShape.new(name: 'FieldFolderPath')
     FileFormat = Shapes::StringShape.new(name: 'FileFormat')
     FilterOperation = Shapes::StructureShape.new(name: 'FilterOperation')
     FilterOperator = Shapes::StringShape.new(name: 'FilterOperator')
-    FolderColumnList = Shapes::ListShape.new(name: 'FolderColumnList')
     GeoSpatialColumnGroup = Shapes::StructureShape.new(name: 'GeoSpatialColumnGroup')
     GeoSpatialCountryCode = Shapes::StringShape.new(name: 'GeoSpatialCountryCode')
     GeoSpatialDataRole = Shapes::StringShape.new(name: 'GeoSpatialDataRole')
@@ -762,7 +757,6 @@ module Aws::QuickSight
     CreateDataSetRequest.add_member(:logical_table_map, Shapes::ShapeRef.new(shape: LogicalTableMap, location_name: "LogicalTableMap"))
     CreateDataSetRequest.add_member(:import_mode, Shapes::ShapeRef.new(shape: DataSetImportMode, required: true, location_name: "ImportMode"))
     CreateDataSetRequest.add_member(:column_groups, Shapes::ShapeRef.new(shape: ColumnGroupList, location_name: "ColumnGroups"))
-    CreateDataSetRequest.add_member(:field_folders, Shapes::ShapeRef.new(shape: FieldFolderMap, location_name: "FieldFolders"))
     CreateDataSetRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
     CreateDataSetRequest.add_member(:row_level_permission_data_set, Shapes::ShapeRef.new(shape: RowLevelPermissionDataSet, location_name: "RowLevelPermissionDataSet"))
     CreateDataSetRequest.add_member(:column_level_permission_rules, Shapes::ShapeRef.new(shape: ColumnLevelPermissionRuleList, location_name: "ColumnLevelPermissionRules"))
@@ -1013,7 +1007,6 @@ module Aws::QuickSight
     DataSet.add_member(:import_mode, Shapes::ShapeRef.new(shape: DataSetImportMode, location_name: "ImportMode"))
     DataSet.add_member(:consumed_spice_capacity_in_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "ConsumedSpiceCapacityInBytes"))
     DataSet.add_member(:column_groups, Shapes::ShapeRef.new(shape: ColumnGroupList, location_name: "ColumnGroups"))
-    DataSet.add_member(:field_folders, Shapes::ShapeRef.new(shape: FieldFolderMap, location_name: "FieldFolders"))
     DataSet.add_member(:row_level_permission_data_set, Shapes::ShapeRef.new(shape: RowLevelPermissionDataSet, location_name: "RowLevelPermissionDataSet"))
     DataSet.add_member(:column_level_permission_rules, Shapes::ShapeRef.new(shape: ColumnLevelPermissionRuleList, location_name: "ColumnLevelPermissionRules"))
     DataSet.struct_class = Types::DataSet
@@ -1490,17 +1483,8 @@ module Aws::QuickSight
     ExportToCSVOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
     ExportToCSVOption.struct_class = Types::ExportToCSVOption
 
-    FieldFolder.add_member(:description, Shapes::ShapeRef.new(shape: FieldFolderDescription, location_name: "description"))
-    FieldFolder.add_member(:columns, Shapes::ShapeRef.new(shape: FolderColumnList, location_name: "columns"))
-    FieldFolder.struct_class = Types::FieldFolder
-
-    FieldFolderMap.key = Shapes::ShapeRef.new(shape: FieldFolderPath)
-    FieldFolderMap.value = Shapes::ShapeRef.new(shape: FieldFolder)
-
     FilterOperation.add_member(:condition_expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "ConditionExpression"))
     FilterOperation.struct_class = Types::FilterOperation
-
-    FolderColumnList.member = Shapes::ShapeRef.new(shape: String)
 
     GeoSpatialColumnGroup.add_member(:name, Shapes::ShapeRef.new(shape: ColumnGroupName, required: true, location_name: "Name"))
     GeoSpatialColumnGroup.add_member(:country_code, Shapes::ShapeRef.new(shape: GeoSpatialCountryCode, required: true, location_name: "CountryCode"))
@@ -2437,7 +2421,6 @@ module Aws::QuickSight
     UpdateDataSetRequest.add_member(:logical_table_map, Shapes::ShapeRef.new(shape: LogicalTableMap, location_name: "LogicalTableMap"))
     UpdateDataSetRequest.add_member(:import_mode, Shapes::ShapeRef.new(shape: DataSetImportMode, required: true, location_name: "ImportMode"))
     UpdateDataSetRequest.add_member(:column_groups, Shapes::ShapeRef.new(shape: ColumnGroupList, location_name: "ColumnGroups"))
-    UpdateDataSetRequest.add_member(:field_folders, Shapes::ShapeRef.new(shape: FieldFolderMap, location_name: "FieldFolders"))
     UpdateDataSetRequest.add_member(:row_level_permission_data_set, Shapes::ShapeRef.new(shape: RowLevelPermissionDataSet, location_name: "RowLevelPermissionDataSet"))
     UpdateDataSetRequest.add_member(:column_level_permission_rules, Shapes::ShapeRef.new(shape: ColumnLevelPermissionRuleList, location_name: "ColumnLevelPermissionRules"))
     UpdateDataSetRequest.struct_class = Types::UpdateDataSetRequest

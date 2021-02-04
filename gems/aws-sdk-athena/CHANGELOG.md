@@ -1,11 +1,6 @@
 Unreleased Changes
 ------------------
 
-1.35.0 (2021-02-04)
-------------------
-
-* Feature - Adds the Athena ListEngineVersions action and the EngineVersion data type. ListEngineVersions returns the available Athena engine versions, including Auto, as a list of EngineVersion objects.
-
 1.34.0 (2021-02-02)
 ------------------
 

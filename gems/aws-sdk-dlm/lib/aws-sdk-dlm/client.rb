@@ -360,7 +360,6 @@ module Aws::DLM
     #     policy_details: { # required
     #       policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT, EVENT_BASED_POLICY
     #       resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
-    #       resource_locations: ["CLOUD"], # accepts CLOUD, OUTPOST
     #       target_tags: [
     #         {
     #           key: "String", # required
@@ -384,7 +383,6 @@ module Aws::DLM
     #             },
     #           ],
     #           create_rule: {
-    #             location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
     #             interval: 1,
     #             interval_unit: "HOURS", # accepts HOURS
     #             times: ["Time"],
@@ -403,8 +401,7 @@ module Aws::DLM
     #           },
     #           cross_region_copy_rules: [
     #             {
-    #               target_region: "TargetRegion",
-    #               target: "Target",
+    #               target_region: "TargetRegion", # required
     #               encrypted: false, # required
     #               cmk_arn: "CmkArn",
     #               copy_tags: false,
@@ -582,8 +579,6 @@ module Aws::DLM
     #   resp.policy.policy_details.policy_type #=> String, one of "EBS_SNAPSHOT_MANAGEMENT", "IMAGE_MANAGEMENT", "EVENT_BASED_POLICY"
     #   resp.policy.policy_details.resource_types #=> Array
     #   resp.policy.policy_details.resource_types[0] #=> String, one of "VOLUME", "INSTANCE"
-    #   resp.policy.policy_details.resource_locations #=> Array
-    #   resp.policy.policy_details.resource_locations[0] #=> String, one of "CLOUD", "OUTPOST"
     #   resp.policy.policy_details.target_tags #=> Array
     #   resp.policy.policy_details.target_tags[0].key #=> String
     #   resp.policy.policy_details.target_tags[0].value #=> String
@@ -596,7 +591,6 @@ module Aws::DLM
     #   resp.policy.policy_details.schedules[0].variable_tags #=> Array
     #   resp.policy.policy_details.schedules[0].variable_tags[0].key #=> String
     #   resp.policy.policy_details.schedules[0].variable_tags[0].value #=> String
-    #   resp.policy.policy_details.schedules[0].create_rule.location #=> String, one of "CLOUD", "OUTPOST_LOCAL"
     #   resp.policy.policy_details.schedules[0].create_rule.interval #=> Integer
     #   resp.policy.policy_details.schedules[0].create_rule.interval_unit #=> String, one of "HOURS"
     #   resp.policy.policy_details.schedules[0].create_rule.times #=> Array
@@ -612,7 +606,6 @@ module Aws::DLM
     #   resp.policy.policy_details.schedules[0].fast_restore_rule.availability_zones[0] #=> String
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules #=> Array
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].target_region #=> String
-    #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].target #=> String
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].encrypted #=> Boolean
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].cmk_arn #=> String
     #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].copy_tags #=> Boolean
@@ -765,7 +758,6 @@ module Aws::DLM
     #     policy_details: {
     #       policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT, EVENT_BASED_POLICY
     #       resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
-    #       resource_locations: ["CLOUD"], # accepts CLOUD, OUTPOST
     #       target_tags: [
     #         {
     #           key: "String", # required
@@ -789,7 +781,6 @@ module Aws::DLM
     #             },
     #           ],
     #           create_rule: {
-    #             location: "CLOUD", # accepts CLOUD, OUTPOST_LOCAL
     #             interval: 1,
     #             interval_unit: "HOURS", # accepts HOURS
     #             times: ["Time"],
@@ -808,8 +799,7 @@ module Aws::DLM
     #           },
     #           cross_region_copy_rules: [
     #             {
-    #               target_region: "TargetRegion",
-    #               target: "Target",
+    #               target_region: "TargetRegion", # required
     #               encrypted: false, # required
     #               cmk_arn: "CmkArn",
     #               copy_tags: false,
@@ -883,7 +873,7 @@ module Aws::DLM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dlm'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

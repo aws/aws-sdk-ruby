@@ -208,7 +208,6 @@
     "CreateRule":{
       "type":"structure",
       "members":{
-        "Location":{"shape":"LocationValues"},
         "Interval":{"shape":"Interval"},
         "IntervalUnit":{"shape":"IntervalUnitValues"},
         "Times":{"shape":"TimesList"},
@@ -248,10 +247,12 @@
     },
     "CrossRegionCopyRule":{
       "type":"structure",
-      "required":["Encrypted"],
+      "required":[
+        "TargetRegion",
+        "Encrypted"
+      ],
       "members":{
         "TargetRegion":{"shape":"TargetRegion"},
-        "Target":{"shape":"Target"},
         "Encrypted":{"shape":"Encrypted"},
         "CmkArn":{"shape":"CmkArn"},
         "CopyTags":{"shape":"CopyTagsNullable"},
@@ -488,13 +489,6 @@
         "Tags":{"shape":"TagMap"}
       }
     },
-    "LocationValues":{
-      "type":"string",
-      "enum":[
-        "CLOUD",
-        "OUTPOST_LOCAL"
-      ]
-    },
     "NoReboot":{"type":"boolean"},
     "Parameter":{"type":"string"},
     "ParameterList":{
@@ -525,7 +519,6 @@
       "members":{
         "PolicyType":{"shape":"PolicyTypeValues"},
         "ResourceTypes":{"shape":"ResourceTypeValuesList"},
-        "ResourceLocations":{"shape":"ResourceLocationList"},
         "TargetTags":{"shape":"TargetTagList"},
         "Schedules":{"shape":"ScheduleList"},
         "Parameters":{"shape":"Parameters"},
@@ -549,19 +542,6 @@
         "EBS_SNAPSHOT_MANAGEMENT",
         "IMAGE_MANAGEMENT",
         "EVENT_BASED_POLICY"
-      ]
-    },
-    "ResourceLocationList":{
-      "type":"list",
-      "member":{"shape":"ResourceLocationValues"},
-      "max":1,
-      "min":1
-    },
-    "ResourceLocationValues":{
-      "type":"string",
-      "enum":[
-        "CLOUD",
-        "OUTPOST"
       ]
     },
     "ResourceNotFoundException":{
@@ -751,9 +731,9 @@
     },
     "Target":{
       "type":"string",
-      "max":2048,
+      "max":16,
       "min":0,
-      "pattern":"^[\\w:\\-\\/\\*]+$"
+      "pattern":"^[\\\\w:\\\\-\\\\/\\\\*]+$"
     },
     "TargetRegion":{
       "type":"string",
