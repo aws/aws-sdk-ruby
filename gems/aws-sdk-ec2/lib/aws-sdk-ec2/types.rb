@@ -2777,6 +2777,7 @@ module Aws::EC2
     #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #           kms_key_id: "String",
     #           throughput: 1,
+    #           outpost_arn: "String",
     #           encrypted: false,
     #         },
     #         no_device: "String",
@@ -4966,6 +4967,7 @@ module Aws::EC2
     #         name: "String", # required
     #         source_image_id: "String", # required
     #         source_region: "String", # required
+    #         destination_outpost_arn: "String",
     #         dry_run: false,
     #       }
     #
@@ -5037,6 +5039,21 @@ module Aws::EC2
     #   The name of the Region that contains the AMI to copy.
     #   @return [String]
     #
+    # @!attribute [rw] destination_outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost to which to copy the
+    #   AMI. Only specify this parameter when copying an AMI from an AWS
+    #   Region to an Outpost. The AMI must be in the Region of the
+    #   destination Outpost. You cannot copy an AMI from an Outpost to a
+    #   Region, from one Outpost to another, or within the same Outpost.
+    #
+    #   For more information, see [ Copying AMIs from an AWS Region to an
+    #   Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-amis
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -5054,6 +5071,7 @@ module Aws::EC2
       :name,
       :source_image_id,
       :source_region,
+      :destination_outpost_arn,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -5078,6 +5096,7 @@ module Aws::EC2
     #
     #       {
     #         description: "String",
+    #         destination_outpost_arn: "String",
     #         destination_region: "String",
     #         encrypted: false,
     #         kms_key_id: "KmsKeyId",
@@ -5100,6 +5119,22 @@ module Aws::EC2
     #
     # @!attribute [rw] description
     #   A description for the EBS snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost to which to copy the
+    #   snapshot. Only specify this parameter when copying a snapshot from
+    #   an AWS Region to an Outpost. The snapshot must be in the Region for
+    #   the destination Outpost. You cannot copy a snapshot from an Outpost
+    #   to a Region, from one Outpost to another, or within the same
+    #   Outpost.
+    #
+    #   For more information, see [ Copying snapshots from an AWS Region to
+    #   an Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-snapshots
     #   @return [String]
     #
     # @!attribute [rw] destination_region
@@ -5198,6 +5233,7 @@ module Aws::EC2
     #
     class CopySnapshotRequest < Struct.new(
       :description,
+      :destination_outpost_arn,
       :destination_region,
       :encrypted,
       :kms_key_id,
@@ -6394,7 +6430,13 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] replace_unhealthy_instances
-    #   Indicates whether EC2 Fleet should replace unhealthy instances.
+    #   Indicates whether EC2 Fleet should replace unhealthy Spot Instances.
+    #   Supported only for fleets of type `maintain`. For more information,
+    #   see [EC2 Fleet health checks][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#ec2-fleet-health-checks
     #   @return [Boolean]
     #
     # @!attribute [rw] tag_specifications
@@ -6760,6 +6802,7 @@ module Aws::EC2
     #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #               kms_key_id: "String",
     #               throughput: 1,
+    #               outpost_arn: "String",
     #               encrypted: false,
     #             },
     #             no_device: "String",
@@ -8680,6 +8723,7 @@ module Aws::EC2
     #
     #       {
     #         description: "String",
+    #         outpost_arn: "String",
     #         volume_id: "VolumeId", # required
     #         tag_specifications: [
     #           {
@@ -8697,6 +8741,30 @@ module Aws::EC2
     #
     # @!attribute [rw] description
     #   A description for the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] outpost_arn
+    #   The Amazon Resource Name (ARN) of the AWS Outpost on which to create
+    #   a local snapshot.
+    #
+    #   * To create a snapshot of a volume in a Region, omit this parameter.
+    #     The snapshot is created in the same Region as the volume.
+    #
+    #   * To create a snapshot of a volume on an Outpost and store the
+    #     snapshot in the Region, omit this parameter. The snapshot is
+    #     created in the Region for the Outpost.
+    #
+    #   * To create a snapshot of a volume on an Outpost and store the
+    #     snapshot on an Outpost, specify the ARN of the destination
+    #     Outpost. The snapshot must be created on the same Outpost as the
+    #     volume.
+    #
+    #   For more information, see [ Creating local snapshots from volumes on
+    #   an Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-snapshot
     #   @return [String]
     #
     # @!attribute [rw] volume_id
@@ -8718,6 +8786,7 @@ module Aws::EC2
     #
     class CreateSnapshotRequest < Struct.new(
       :description,
+      :outpost_arn,
       :volume_id,
       :tag_specifications,
       :dry_run)
@@ -8734,6 +8803,7 @@ module Aws::EC2
     #           instance_id: "InstanceId",
     #           exclude_boot_volume: false,
     #         },
+    #         outpost_arn: "String",
     #         tag_specifications: [
     #           {
     #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
@@ -8759,6 +8829,32 @@ module Aws::EC2
     #   snapshots.
     #   @return [Types::InstanceSpecification]
     #
+    # @!attribute [rw] outpost_arn
+    #   The Amazon Resource Name (ARN) of the AWS Outpost on which to create
+    #   the local snapshots.
+    #
+    #   * To create snapshots from an instance in a Region, omit this
+    #     parameter. The snapshots are created in the same Region as the
+    #     instance.
+    #
+    #   * To create snapshots from an instance on an Outpost and store the
+    #     snapshots in the Region, omit this parameter. The snapshots are
+    #     created in the Region for the Outpost.
+    #
+    #   * To create snapshots from an instance on an Outpost and store the
+    #     snapshots on an Outpost, specify the ARN of the destination
+    #     Outpost. The snapshots must be created on the same Outpost as the
+    #     instance.
+    #
+    #   For more information, see [ Creating multi-volume local snapshots
+    #   from instances on an Outpost][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-multivol-snapshot
+    #   @return [String]
+    #
     # @!attribute [rw] tag_specifications
     #   Tags to apply to every snapshot specified by the instance.
     #   @return [Array<Types::TagSpecification>]
@@ -8779,6 +8875,7 @@ module Aws::EC2
     class CreateSnapshotsRequest < Struct.new(
       :description,
       :instance_specification,
+      :outpost_arn,
       :tag_specifications,
       :dry_run,
       :copy_tags_from_source)
@@ -16847,13 +16944,14 @@ module Aws::EC2
     #
     #   * `name` - The name of the AMI (provided during image creation).
     #
-    #   * `owner-alias` - The owner alias, from an Amazon-maintained list
-    #     (`amazon` \| `aws-marketplace`). This is not the user-configured
-    #     AWS account alias set using the IAM console. We recommend that you
-    #     use the related parameter instead of this filter.
+    #   * `owner-alias` - The owner alias (`amazon` \| `aws-marketplace`).
+    #     The valid aliases are defined in an Amazon-maintained list. This
+    #     is not the AWS account alias that can be set using the IAM
+    #     console. We recommend that you use the **Owner** request parameter
+    #     instead of this filter.
     #
     #   * `owner-id` - The AWS account ID of the owner. We recommend that
-    #     you use the related parameter instead of this filter.
+    #     you use the **Owner** request parameter instead of this filter.
     #
     #   * `platform` - The platform. To only list Windows-based AMIs, use
     #     `windows`.
@@ -26104,6 +26202,7 @@ module Aws::EC2
     #         volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #         kms_key_id: "String",
     #         throughput: 1,
+    #         outpost_arn: "String",
     #         encrypted: false,
     #       }
     #
@@ -26199,6 +26298,10 @@ module Aws::EC2
     #   Valid Range: Minimum value of 125. Maximum value of 1000.
     #   @return [Integer]
     #
+    # @!attribute [rw] outpost_arn
+    #   The ARN of the Outpost on which the snapshot is stored.
+    #   @return [String]
+    #
     # @!attribute [rw] encrypted
     #   Indicates whether the encryption state of an EBS volume is changed
     #   while being restored from a backing snapshot. The effect of setting
@@ -26231,6 +26334,7 @@ module Aws::EC2
       :volume_type,
       :kms_key_id,
       :throughput,
+      :outpost_arn,
       :encrypted)
       SENSITIVE = []
       include Aws::Structure
@@ -28131,7 +28235,13 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] replace_unhealthy_instances
-    #   Indicates whether EC2 Fleet should replace unhealthy instances.
+    #   Indicates whether EC2 Fleet should replace unhealthy Spot Instances.
+    #   Supported only for fleets of type `maintain`. For more information,
+    #   see [EC2 Fleet health checks][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#ec2-fleet-health-checks
     #   @return [Boolean]
     #
     # @!attribute [rw] spot_options
@@ -34372,6 +34482,9 @@ module Aws::EC2
     #
     # @!attribute [rw] user_id
     #   The AWS account ID.
+    #
+    #   Constraints: Up to 10 000 account IDs can be specified in a single
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchPermission AWS API Documentation
@@ -43037,6 +43150,7 @@ module Aws::EC2
     #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #               kms_key_id: "String",
     #               throughput: 1,
+    #               outpost_arn: "String",
     #               encrypted: false,
     #             },
     #             no_device: "String",
@@ -43075,6 +43189,17 @@ module Aws::EC2
     #
     # @!attribute [rw] block_device_mappings
     #   The block device mapping entries.
+    #
+    #   If you create an AMI on an Outpost, then all backing snapshots must
+    #   be on the same Outpost or in the Region of that Outpost. AMIs on an
+    #   Outpost that include local snapshots can be used to launch instances
+    #   on the same Outpost only. For more information, [ Amazon EBS local
+    #   snapshots on Outposts][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] description
@@ -44620,6 +44745,7 @@ module Aws::EC2
     #                     volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #                     kms_key_id: "String",
     #                     throughput: 1,
+    #                     outpost_arn: "String",
     #                     encrypted: false,
     #                   },
     #                   no_device: "String",
@@ -44811,6 +44937,7 @@ module Aws::EC2
     #                 volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #                 kms_key_id: "String",
     #                 throughput: 1,
+    #                 outpost_arn: "String",
     #                 encrypted: false,
     #               },
     #               no_device: "String",
@@ -45071,6 +45198,7 @@ module Aws::EC2
     #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #               kms_key_id: "String",
     #               throughput: 1,
+    #               outpost_arn: "String",
     #               encrypted: false,
     #             },
     #             no_device: "String",
@@ -46895,6 +47023,7 @@ module Aws::EC2
     #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #               kms_key_id: "String",
     #               throughput: 1,
+    #               outpost_arn: "String",
     #               encrypted: false,
     #             },
     #             no_device: "String",
@@ -49106,6 +49235,16 @@ module Aws::EC2
     #   console.
     #   @return [String]
     #
+    # @!attribute [rw] outpost_arn
+    #   The ARN of the AWS Outpost on which the snapshot is stored. For more
+    #   information, see [EBS Local Snapshot on Outposts][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Any tags assigned to the snapshot.
     #   @return [Array<Types::Tag>]
@@ -49126,6 +49265,7 @@ module Aws::EC2
       :volume_id,
       :volume_size,
       :owner_alias,
+      :outpost_arn,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -49279,6 +49419,16 @@ module Aws::EC2
     #   Snapshot id that can be used to describe this snapshot.
     #   @return [String]
     #
+    # @!attribute [rw] outpost_arn
+    #   The ARN of the AWS Outpost on which the snapshot is stored. For more
+    #   information, see [EBS Local Snapshot on Outposts][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotInfo AWS API Documentation
     #
     class SnapshotInfo < Struct.new(
@@ -49291,7 +49441,8 @@ module Aws::EC2
       :start_time,
       :progress,
       :owner_id,
-      :snapshot_id)
+      :snapshot_id,
+      :outpost_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49469,6 +49620,7 @@ module Aws::EC2
     #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #               kms_key_id: "String",
     #               throughput: 1,
+    #               outpost_arn: "String",
     #               encrypted: false,
     #             },
     #             no_device: "String",
@@ -49781,6 +49933,7 @@ module Aws::EC2
     #                   volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #                   kms_key_id: "String",
     #                   throughput: 1,
+    #                   outpost_arn: "String",
     #                   encrypted: false,
     #                 },
     #                 no_device: "String",

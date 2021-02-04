@@ -784,6 +784,10 @@ module Aws::QuickSight
     #   Groupings of columns that work together in certain QuickSight
     #   features. Currently, only geospatial hierarchy is supported.
     #
+    # @option params [Hash<String,Types::FieldFolder>] :field_folders
+    #   The folder that contains fields and nested subfolders for your
+    #   dataset.
+    #
     # @option params [Array<Types::ResourcePermission>] :permissions
     #   A list of resource permissions on the dataset.
     #
@@ -925,6 +929,12 @@ module Aws::QuickSight
     #         },
     #       },
     #     ],
+    #     field_folders: {
+    #       "FieldFolderPath" => {
+    #         description: "FieldFolderDescription",
+    #         columns: ["String"],
+    #       },
+    #     },
     #     permissions: [
     #       {
     #         principal: "Principal", # required
@@ -982,9 +992,12 @@ module Aws::QuickSight
     #
     # @option params [required, String] :type
     #   The type of the data source. Currently, the supported types for this
-    #   operation are: `ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL,
-    #   POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER,
-    #   TERADATA`. Use `ListDataSources` to return a list of all data sources.
+    #   operation are: `ATHENA, AURORA, AURORA_POSTGRESQL,
+    #   AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT,
+    #   S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA`. Use `ListDataSources` to
+    #   return a list of all data sources.
+    #
+    #   `AMAZON_ELASTICSEARCH` is for Amazon managed Elasticsearch Service.
     #
     # @option params [Types::DataSourceParameters] :data_source_parameters
     #   The parameters that QuickSight uses to connect to your underlying
@@ -3002,6 +3015,10 @@ module Aws::QuickSight
     #   resp.data_set.column_groups[0].geo_spatial_column_group.country_code #=> String, one of "US"
     #   resp.data_set.column_groups[0].geo_spatial_column_group.columns #=> Array
     #   resp.data_set.column_groups[0].geo_spatial_column_group.columns[0] #=> String
+    #   resp.data_set.field_folders #=> Hash
+    #   resp.data_set.field_folders["FieldFolderPath"].description #=> String
+    #   resp.data_set.field_folders["FieldFolderPath"].columns #=> Array
+    #   resp.data_set.field_folders["FieldFolderPath"].columns[0] #=> String
     #   resp.data_set.row_level_permission_data_set.namespace #=> String
     #   resp.data_set.row_level_permission_data_set.arn #=> String
     #   resp.data_set.row_level_permission_data_set.permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
@@ -6175,6 +6192,10 @@ module Aws::QuickSight
     #   Groupings of columns that work together in certain QuickSight
     #   features. Currently, only geospatial hierarchy is supported.
     #
+    # @option params [Hash<String,Types::FieldFolder>] :field_folders
+    #   The folder that contains fields and nested subfolders for your
+    #   dataset.
+    #
     # @option params [Types::RowLevelPermissionDataSet] :row_level_permission_data_set
     #   The row-level security configuration for the data you want to create.
     #
@@ -6308,6 +6329,12 @@ module Aws::QuickSight
     #         },
     #       },
     #     ],
+    #     field_folders: {
+    #       "FieldFolderPath" => {
+    #         description: "FieldFolderDescription",
+    #         columns: ["String"],
+    #       },
+    #     },
     #     row_level_permission_data_set: {
     #       namespace: "Namespace",
     #       arn: "Arn", # required
@@ -7412,7 +7439,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

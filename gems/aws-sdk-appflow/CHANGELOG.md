@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2021-02-04)
+------------------
+
+* Feature - Adding schedule offset as an input for scheduled flows in CreateFlow API. Also, adding data pull start time and data pull end time for DescribeFlowExecutionRecords API response.
+
 1.5.0 (2021-02-02)
 ------------------
 

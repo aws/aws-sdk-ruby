@@ -293,6 +293,7 @@ module Aws::EC2
     #
     #   snapshot = volume.create_snapshot({
     #     description: "String",
+    #     outpost_arn: "String",
     #     tag_specifications: [
     #       {
     #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, internet-gateway, key-pair, launch-template, local-gateway-route-table-vpc-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
@@ -309,6 +310,27 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [String] :description
     #   A description for the snapshot.
+    # @option options [String] :outpost_arn
+    #   The Amazon Resource Name (ARN) of the AWS Outpost on which to create a
+    #   local snapshot.
+    #
+    #   * To create a snapshot of a volume in a Region, omit this parameter.
+    #     The snapshot is created in the same Region as the volume.
+    #
+    #   * To create a snapshot of a volume on an Outpost and store the
+    #     snapshot in the Region, omit this parameter. The snapshot is created
+    #     in the Region for the Outpost.
+    #
+    #   * To create a snapshot of a volume on an Outpost and store the
+    #     snapshot on an Outpost, specify the ARN of the destination Outpost.
+    #     The snapshot must be created on the same Outpost as the volume.
+    #
+    #   For more information, see [ Creating local snapshots from volumes on
+    #   an Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-snapshot
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the snapshot during creation.
     # @option options [Boolean] :dry_run

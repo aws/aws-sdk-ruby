@@ -92,6 +92,7 @@ module Aws::EC2
     #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #           kms_key_id: "String",
     #           throughput: 1,
+    #           outpost_arn: "String",
     #           encrypted: false,
     #         },
     #         no_device: "String",
@@ -948,6 +949,7 @@ module Aws::EC2
     #
     #   snapshot = ec2.create_snapshot({
     #     description: "String",
+    #     outpost_arn: "String",
     #     volume_id: "VolumeId", # required
     #     tag_specifications: [
     #       {
@@ -965,6 +967,27 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [String] :description
     #   A description for the snapshot.
+    # @option options [String] :outpost_arn
+    #   The Amazon Resource Name (ARN) of the AWS Outpost on which to create a
+    #   local snapshot.
+    #
+    #   * To create a snapshot of a volume in a Region, omit this parameter.
+    #     The snapshot is created in the same Region as the volume.
+    #
+    #   * To create a snapshot of a volume on an Outpost and store the
+    #     snapshot in the Region, omit this parameter. The snapshot is created
+    #     in the Region for the Outpost.
+    #
+    #   * To create a snapshot of a volume on an Outpost and store the
+    #     snapshot on an Outpost, specify the ARN of the destination Outpost.
+    #     The snapshot must be created on the same Outpost as the volume.
+    #
+    #   For more information, see [ Creating local snapshots from volumes on
+    #   an Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-snapshot
     # @option options [required, String] :volume_id
     #   The ID of the EBS volume.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
@@ -1505,6 +1528,7 @@ module Aws::EC2
     #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1, gp3
     #           kms_key_id: "String",
     #           throughput: 1,
+    #           outpost_arn: "String",
     #           encrypted: false,
     #         },
     #         no_device: "String",
@@ -1538,6 +1562,17 @@ module Aws::EC2
     #   AMIs, the architecture specified in the manifest file.
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
     #   The block device mapping entries.
+    #
+    #   If you create an AMI on an Outpost, then all backing snapshots must be
+    #   on the same Outpost or in the Region of that Outpost. AMIs on an
+    #   Outpost that include local snapshots can be used to launch instances
+    #   on the same Outpost only. For more information, [ Amazon EBS local
+    #   snapshots on Outposts][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami
     # @option options [String] :description
     #   A description for your AMI.
     # @option options [Boolean] :dry_run
@@ -1816,13 +1851,14 @@ module Aws::EC2
     #
     #   * `name` - The name of the AMI (provided during image creation).
     #
-    #   * `owner-alias` - The owner alias, from an Amazon-maintained list
-    #     (`amazon` \| `aws-marketplace`). This is not the user-configured AWS
-    #     account alias set using the IAM console. We recommend that you use
-    #     the related parameter instead of this filter.
+    #   * `owner-alias` - The owner alias (`amazon` \| `aws-marketplace`). The
+    #     valid aliases are defined in an Amazon-maintained list. This is not
+    #     the AWS account alias that can be set using the IAM console. We
+    #     recommend that you use the **Owner** request parameter instead of
+    #     this filter.
     #
     #   * `owner-id` - The AWS account ID of the owner. We recommend that you
-    #     use the related parameter instead of this filter.
+    #     use the **Owner** request parameter instead of this filter.
     #
     #   * `platform` - The platform. To only list Windows-based AMIs, use
     #     `windows`.
