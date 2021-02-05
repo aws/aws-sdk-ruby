@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-02-05)
+------------------
+
+* Feature - Adds a target group attribute for client IP preservation for Network Load Balancers.
+
 1.57.0 (2021-02-02)
 ------------------
 

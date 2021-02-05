@@ -118,7 +118,7 @@ module Aws::Macie
     #   A continuous classification of the objects that are added to a
     #   specified S3 bucket. Amazon Macie Classic begins performing
     #   continuous classification after a bucket is successfully associated
-    #   with Amazon Macie Classic.
+    #   with Macie Classic.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/ClassificationType AWS API Documentation
@@ -151,7 +151,7 @@ module Aws::Macie
     #   A continuous classification of the objects that are added to a
     #   specified S3 bucket. Amazon Macie Classic begins performing
     #   continuous classification after a bucket is successfully associated
-    #   with Amazon Macie Classic.
+    #   with Macie Classic.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/ClassificationTypeUpdate AWS API Documentation
@@ -198,7 +198,7 @@ module Aws::Macie
     #
     # @!attribute [rw] member_account_id
     #   The ID of the Amazon Macie Classic member account whose resources
-    #   you want to remove from being monitored by Amazon Macie Classic.
+    #   you want to remove from being monitored by Macie Classic.
     #   @return [String]
     #
     # @!attribute [rw] associated_s3_resources
@@ -352,7 +352,8 @@ module Aws::Macie
 
     # @!attribute [rw] member_accounts
     #   A list of the Amazon Macie Classic member accounts returned by the
-    #   action. The current master account is also included in this list.
+    #   action. The current Macie Classic administrator account is also
+    #   included in this list.
     #   @return [Array<Types::MemberAccount>]
     #
     # @!attribute [rw] next_token

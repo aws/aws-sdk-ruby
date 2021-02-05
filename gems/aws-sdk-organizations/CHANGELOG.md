@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2021-02-05)
+------------------
+
+* Feature - Added support for a few additional exception codes for some AWS Organizations APIs.
+
 1.56.0 (2021-02-02)
 ------------------
 

@@ -439,7 +439,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Creates a listener for the specified Application Load Balancer,
-    # Network Load Balancer. or Gateway Load Balancer.
+    # Network Load Balancer, or Gateway Load Balancer.
     #
     # For more information, see the following:
     #
@@ -1370,11 +1370,11 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [Integer] :health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
-    #   an individual target. For TCP health checks, the supported values are
-    #   10 and 30 seconds. If the target type is `instance` or `ip`, the
-    #   default is 30 seconds. If the target group protocol is GENEVE, the
-    #   default is 10 seconds. If the target type is `lambda`, the default is
-    #   35 seconds.
+    #   an individual target. If the target group protocol is TCP, TLS, UDP,
+    #   or TCP\_UDP, the supported values are 10 and 30 seconds. If the target
+    #   group protocol is HTTP or HTTPS, the default is 30 seconds. If the
+    #   target group protocol is GENEVE, the default is 10 seconds. If the
+    #   target type is `lambda`, the default is 35 seconds.
     #
     # @option params [Integer] :health_check_timeout_seconds
     #   The amount of time, in seconds, during which no response from a target
@@ -4269,7 +4269,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

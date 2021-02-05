@@ -787,9 +787,16 @@ module Aws::Organizations
     #   * EMAIL\_ALREADY\_EXISTS: The account could not be created because
     #     another AWS account with that email address already exists.
     #
+    #   * FAILED\_BUSINESS\_VALIDATION: The AWS account that owns your
+    #     organization failed to receive business license validation.
+    #
     #   * GOVCLOUD\_ACCOUNT\_ALREADY\_EXISTS: The account in the AWS
     #     GovCloud (US) Region could not be created because this Region
     #     already includes an account with that email address.
+    #
+    #   * IDENTITY\_INVALID\_BUSINESS\_VALIDATION: The AWS account that owns
+    #     your organization can't complete business license validation
+    #     because it doesn't have valid identity data.
     #
     #   * INVALID\_ADDRESS: The account could not be created because the
     #     address you provided is not valid.
@@ -806,6 +813,14 @@ module Aws::Organizations
     #
     #   * MISSING\_PAYMENT\_INSTRUMENT: You must configure the management
     #     account with a valid payment method, such as a credit card.
+    #
+    #   * PENDING\_BUSINESS\_VALIDATION: The AWS account that owns your
+    #     organization is still in the process of completing business
+    #     license validation.
+    #
+    #   * UNKNOWN\_BUSINESS\_VALIDATION: The AWS account that owns your
+    #     organization has an unknown issue with business license
+    #     validation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountStatus AWS API Documentation
@@ -2267,6 +2282,10 @@ module Aws::Organizations
     # * ORGANIZATION\_ALREADY\_HAS\_ALL\_FEATURES: The handshake request is
     #   invalid because the organization has already enabled all features.
     #
+    # * ORGANIZATION\_IS\_ALREADY\_PENDING\_ALL\_FEATURES\_MIGRATION: The
+    #   handshake request is invalid because the organization has already
+    #   started the process to enable all features.
+    #
     # * ORGANIZATION\_FROM\_DIFFERENT\_SELLER\_OF\_RECORD: The request
     #   failed because the account is from a different marketplace than the
     #   accounts in the organization. For example, accounts with India
@@ -2465,6 +2484,9 @@ module Aws::Organizations
     #
     # * INPUT\_REQUIRED: You must include a value for all required
     #   parameters.
+    #
+    # * INVALID\_EMAIL\_ADDRESS\_TARGET: You specified an invalid email
+    #   address for the invited account owner.
     #
     # * INVALID\_ENUM: You specified an invalid value.
     #

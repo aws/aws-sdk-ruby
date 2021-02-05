@@ -1111,11 +1111,11 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
-    #   an individual target. For TCP health checks, the supported values
-    #   are 10 and 30 seconds. If the target type is `instance` or `ip`, the
-    #   default is 30 seconds. If the target group protocol is GENEVE, the
-    #   default is 10 seconds. If the target type is `lambda`, the default
-    #   is 35 seconds.
+    #   an individual target. If the target group protocol is TCP, TLS, UDP,
+    #   or TCP\_UDP, the supported values are 10 and 30 seconds. If the
+    #   target group protocol is HTTP or HTTPS, the default is 30 seconds.
+    #   If the target group protocol is GENEVE, the default is 10 seconds.
+    #   If the target type is `lambda`, the default is 35 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] health_check_timeout_seconds
@@ -2432,8 +2432,10 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] code
     #   The state code. The initial state of the load balancer is
     #   `provisioning`. After the load balancer is fully set up and ready to
-    #   route traffic, its state is `active`. If the load balancer could not
-    #   be set up, its state is `failed`.
+    #   route traffic, its state is `active`. If load balancer is routing
+    #   traffic but does not have the resources it needs to scale, its state
+    #   is`active_impaired`. If the load balancer could not be set up, its
+    #   state is `failed`.
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -4103,6 +4105,12 @@ module Aws::ElasticLoadBalancingV2
     #     whether the load balancer terminates connections at the end of the
     #     deregistration timeout. The value is `true` or `false`. The
     #     default is `false`.
+    #
+    #   * `preserve_client_ip.enabled` - Indicates whether client IP
+    #     preservation is enabled. The value is `true` or `false`. The
+    #     default is disabled if the target group type is IP address and the
+    #     target group protocol is TCP or TLS. Otherwise, the default is
+    #     enabled.
     #
     #   * `proxy_protocol_v2.enabled` - Indicates whether Proxy Protocol
     #     version 2 is enabled. The value is `true` or `false`. The default
