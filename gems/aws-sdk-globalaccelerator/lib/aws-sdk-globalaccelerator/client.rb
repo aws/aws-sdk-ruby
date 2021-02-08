@@ -537,7 +537,7 @@ module Aws::GlobalAccelerator
     #   Accelerator (BYOIP), you can choose IP addresses from your own pool to
     #   use for the accelerator's static IP addresses when you create an
     #   accelerator. You can specify one or two addresses, separated by a
-    #   comma. Do not include the /32 suffix.
+    #   space. Do not include the /32 suffix.
     #
     #   Only one IP address from each of your IP address ranges can be used
     #   for each accelerator. If you specify only one IP address from your IP
@@ -633,6 +633,10 @@ module Aws::GlobalAccelerator
     # receive traffic, or to specify individual port mappings that can
     # receive traffic, see the [ AllowCustomRoutingTraffic][1] operation.
     #
+    # Global Accelerator is a global service that supports endpoints in
+    # multiple AWS Regions but you must specify the US West (Oregon) Region
+    # to create or update accelerators.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/global-accelerator/latest/api/API_AllowCustomRoutingTraffic.html
@@ -644,6 +648,29 @@ module Aws::GlobalAccelerator
     #
     # @option params [String] :ip_address_type
     #   The value for the address type must be IPv4.
+    #
+    # @option params [Array<String>] :ip_addresses
+    #   Optionally, if you've added your own IP address pool to Global
+    #   Accelerator (BYOIP), you can choose IP addresses from your own pool to
+    #   use for the accelerator's static IP addresses when you create an
+    #   accelerator. You can specify one or two addresses, separated by a
+    #   space. Do not include the /32 suffix.
+    #
+    #   Only one IP address from each of your IP address ranges can be used
+    #   for each accelerator. If you specify only one IP address from your IP
+    #   address range, Global Accelerator assigns a second static IP address
+    #   for the accelerator from the AWS IP address pool.
+    #
+    #   Note that you can't update IP addresses for an existing accelerator.
+    #   To change them, you must create a new accelerator with the new
+    #   addresses.
+    #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1] in
+    #   the *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
     #
     # @option params [Boolean] :enabled
     #   Indicates whether an accelerator is enabled. The value is true or
@@ -678,6 +705,7 @@ module Aws::GlobalAccelerator
     #   resp = client.create_custom_routing_accelerator({
     #     name: "GenericString", # required
     #     ip_address_type: "IPV4", # accepts IPV4
+    #     ip_addresses: ["IpAddress"],
     #     enabled: false,
     #     idempotency_token: "IdempotencyToken", # required
     #     tags: [
@@ -2856,7 +2884,7 @@ module Aws::GlobalAccelerator
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-globalaccelerator'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

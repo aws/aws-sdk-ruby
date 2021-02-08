@@ -461,6 +461,20 @@ module Aws::DataExchange
     #         },
     #         revision_id: "Id", # required
     #       },
+    #       export_revisions_to_s3: {
+    #         data_set_id: "Id", # required
+    #         encryption: {
+    #           kms_key_arn: "__string",
+    #           type: "aws:kms", # required, accepts aws:kms, AES256
+    #         },
+    #         revision_destinations: [ # required
+    #           {
+    #             bucket: "__string", # required
+    #             key_pattern: "__string",
+    #             revision_id: "Id", # required
+    #           },
+    #         ],
+    #       },
     #       import_asset_from_signed_url: {
     #         asset_name: "AssetName", # required
     #         data_set_id: "Id", # required
@@ -478,7 +492,7 @@ module Aws::DataExchange
     #         revision_id: "Id", # required
     #       },
     #     },
-    #     type: "IMPORT_ASSETS_FROM_S3", # required, accepts IMPORT_ASSETS_FROM_S3, IMPORT_ASSET_FROM_SIGNED_URL, EXPORT_ASSETS_TO_S3, EXPORT_ASSET_TO_SIGNED_URL
+    #     type: "IMPORT_ASSETS_FROM_S3", # required, accepts IMPORT_ASSETS_FROM_S3, IMPORT_ASSET_FROM_SIGNED_URL, EXPORT_ASSETS_TO_S3, EXPORT_ASSET_TO_SIGNED_URL, EXPORT_REVISIONS_TO_S3
     #   })
     #
     # @example Response structure
@@ -498,6 +512,13 @@ module Aws::DataExchange
     #   resp.details.export_assets_to_s3.encryption.kms_key_arn #=> String
     #   resp.details.export_assets_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
     #   resp.details.export_assets_to_s3.revision_id #=> String
+    #   resp.details.export_revisions_to_s3.data_set_id #=> String
+    #   resp.details.export_revisions_to_s3.encryption.kms_key_arn #=> String
+    #   resp.details.export_revisions_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
+    #   resp.details.export_revisions_to_s3.revision_destinations #=> Array
+    #   resp.details.export_revisions_to_s3.revision_destinations[0].bucket #=> String
+    #   resp.details.export_revisions_to_s3.revision_destinations[0].key_pattern #=> String
+    #   resp.details.export_revisions_to_s3.revision_destinations[0].revision_id #=> String
     #   resp.details.import_asset_from_signed_url.asset_name #=> String
     #   resp.details.import_asset_from_signed_url.data_set_id #=> String
     #   resp.details.import_asset_from_signed_url.md_5_hash #=> String
@@ -522,7 +543,7 @@ module Aws::DataExchange
     #   resp.errors[0].resource_type #=> String, one of "REVISION", "ASSET"
     #   resp.id #=> String
     #   resp.state #=> String, one of "WAITING", "IN_PROGRESS", "ERROR", "COMPLETED", "CANCELLED", "TIMED_OUT"
-    #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL"
+    #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3"
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateJob AWS API Documentation
@@ -801,6 +822,13 @@ module Aws::DataExchange
     #   resp.details.export_assets_to_s3.encryption.kms_key_arn #=> String
     #   resp.details.export_assets_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
     #   resp.details.export_assets_to_s3.revision_id #=> String
+    #   resp.details.export_revisions_to_s3.data_set_id #=> String
+    #   resp.details.export_revisions_to_s3.encryption.kms_key_arn #=> String
+    #   resp.details.export_revisions_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
+    #   resp.details.export_revisions_to_s3.revision_destinations #=> Array
+    #   resp.details.export_revisions_to_s3.revision_destinations[0].bucket #=> String
+    #   resp.details.export_revisions_to_s3.revision_destinations[0].key_pattern #=> String
+    #   resp.details.export_revisions_to_s3.revision_destinations[0].revision_id #=> String
     #   resp.details.import_asset_from_signed_url.asset_name #=> String
     #   resp.details.import_asset_from_signed_url.data_set_id #=> String
     #   resp.details.import_asset_from_signed_url.md_5_hash #=> String
@@ -825,7 +853,7 @@ module Aws::DataExchange
     #   resp.errors[0].resource_type #=> String, one of "REVISION", "ASSET"
     #   resp.id #=> String
     #   resp.state #=> String, one of "WAITING", "IN_PROGRESS", "ERROR", "COMPLETED", "CANCELLED", "TIMED_OUT"
-    #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL"
+    #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3"
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetJob AWS API Documentation
@@ -1025,6 +1053,13 @@ module Aws::DataExchange
     #   resp.jobs[0].details.export_assets_to_s3.encryption.kms_key_arn #=> String
     #   resp.jobs[0].details.export_assets_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
     #   resp.jobs[0].details.export_assets_to_s3.revision_id #=> String
+    #   resp.jobs[0].details.export_revisions_to_s3.data_set_id #=> String
+    #   resp.jobs[0].details.export_revisions_to_s3.encryption.kms_key_arn #=> String
+    #   resp.jobs[0].details.export_revisions_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
+    #   resp.jobs[0].details.export_revisions_to_s3.revision_destinations #=> Array
+    #   resp.jobs[0].details.export_revisions_to_s3.revision_destinations[0].bucket #=> String
+    #   resp.jobs[0].details.export_revisions_to_s3.revision_destinations[0].key_pattern #=> String
+    #   resp.jobs[0].details.export_revisions_to_s3.revision_destinations[0].revision_id #=> String
     #   resp.jobs[0].details.import_asset_from_signed_url.asset_name #=> String
     #   resp.jobs[0].details.import_asset_from_signed_url.data_set_id #=> String
     #   resp.jobs[0].details.import_asset_from_signed_url.md_5_hash #=> String
@@ -1049,7 +1084,7 @@ module Aws::DataExchange
     #   resp.jobs[0].errors[0].resource_type #=> String, one of "REVISION", "ASSET"
     #   resp.jobs[0].id #=> String
     #   resp.jobs[0].state #=> String, one of "WAITING", "IN_PROGRESS", "ERROR", "COMPLETED", "CANCELLED", "TIMED_OUT"
-    #   resp.jobs[0].type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL"
+    #   resp.jobs[0].type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3"
     #   resp.jobs[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -1389,7 +1424,7 @@ module Aws::DataExchange
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dataexchange'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

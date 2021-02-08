@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2021-02-08)
+------------------
+
+* Feature - Global Accelerator now supports bringing your own IP addresses for custom routing accelerators
+
 1.28.0 (2021-02-02)
 ------------------
 

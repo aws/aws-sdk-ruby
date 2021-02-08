@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2021-02-08)
+------------------
+
+* Feature - ConflictException is now thrown when certain operations are called on resources before CloudTrail has time to load the resources. Two new exceptions have been added to the PutInsightSelectors API.
+
 1.32.0 (2021-02-02)
 ------------------
 

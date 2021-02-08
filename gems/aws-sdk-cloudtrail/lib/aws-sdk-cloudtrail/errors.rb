@@ -31,6 +31,7 @@ module Aws::CloudTrail
   # * {CloudTrailAccessNotEnabledException}
   # * {CloudTrailInvalidClientTokenIdException}
   # * {CloudWatchLogsDeliveryUnavailableException}
+  # * {ConflictException}
   # * {InsightNotEnabledException}
   # * {InsufficientDependencyServiceAccessPermissionException}
   # * {InsufficientEncryptionPolicyException}
@@ -112,6 +113,16 @@ module Aws::CloudTrail
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudTrail::Types::CloudWatchLogsDeliveryUnavailableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudTrail::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

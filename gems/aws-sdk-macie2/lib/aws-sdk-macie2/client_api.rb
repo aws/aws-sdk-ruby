@@ -39,6 +39,7 @@ module Aws::Macie2
     BucketPermissionConfiguration = Shapes::StructureShape.new(name: 'BucketPermissionConfiguration')
     BucketPolicy = Shapes::StructureShape.new(name: 'BucketPolicy')
     BucketPublicAccess = Shapes::StructureShape.new(name: 'BucketPublicAccess')
+    BucketServerSideEncryption = Shapes::StructureShape.new(name: 'BucketServerSideEncryption')
     BucketSortCriteria = Shapes::StructureShape.new(name: 'BucketSortCriteria')
     Cell = Shapes::StructureShape.new(name: 'Cell')
     Cells = Shapes::ListShape.new(name: 'Cells')
@@ -239,6 +240,8 @@ module Aws::Macie2
     TestCustomDataIdentifierRequest = Shapes::StructureShape.new(name: 'TestCustomDataIdentifierRequest')
     TestCustomDataIdentifierResponse = Shapes::StructureShape.new(name: 'TestCustomDataIdentifierResponse')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TimeRange = Shapes::StringShape.new(name: 'TimeRange')
+    Type = Shapes::StringShape.new(name: 'Type')
     Unit = Shapes::StringShape.new(name: 'Unit')
     UnprocessedAccount = Shapes::StructureShape.new(name: 'UnprocessedAccount')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -410,6 +413,7 @@ module Aws::Macie2
     BucketMetadata.add_member(:public_access, Shapes::ShapeRef.new(shape: BucketPublicAccess, location_name: "publicAccess"))
     BucketMetadata.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
     BucketMetadata.add_member(:replication_details, Shapes::ShapeRef.new(shape: ReplicationDetails, location_name: "replicationDetails"))
+    BucketMetadata.add_member(:server_side_encryption, Shapes::ShapeRef.new(shape: BucketServerSideEncryption, location_name: "serverSideEncryption"))
     BucketMetadata.add_member(:shared_access, Shapes::ShapeRef.new(shape: SharedAccess, location_name: "sharedAccess"))
     BucketMetadata.add_member(:size_in_bytes, Shapes::ShapeRef.new(shape: __long, location_name: "sizeInBytes"))
     BucketMetadata.add_member(:size_in_bytes_compressed, Shapes::ShapeRef.new(shape: __long, location_name: "sizeInBytesCompressed"))
@@ -430,6 +434,10 @@ module Aws::Macie2
     BucketPublicAccess.add_member(:effective_permission, Shapes::ShapeRef.new(shape: EffectivePermission, location_name: "effectivePermission"))
     BucketPublicAccess.add_member(:permission_configuration, Shapes::ShapeRef.new(shape: BucketPermissionConfiguration, location_name: "permissionConfiguration"))
     BucketPublicAccess.struct_class = Types::BucketPublicAccess
+
+    BucketServerSideEncryption.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: __string, location_name: "kmsMasterKeyId"))
+    BucketServerSideEncryption.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "type"))
+    BucketServerSideEncryption.struct_class = Types::BucketServerSideEncryption
 
     BucketSortCriteria.add_member(:attribute_name, Shapes::ShapeRef.new(shape: __string, location_name: "attributeName"))
     BucketSortCriteria.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
@@ -824,14 +832,18 @@ module Aws::Macie2
     GetUsageStatisticsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integer, location_name: "maxResults"))
     GetUsageStatisticsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     GetUsageStatisticsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: UsageStatisticsSortBy, location_name: "sortBy"))
+    GetUsageStatisticsRequest.add_member(:time_range, Shapes::ShapeRef.new(shape: TimeRange, location_name: "timeRange"))
     GetUsageStatisticsRequest.struct_class = Types::GetUsageStatisticsRequest
 
     GetUsageStatisticsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     GetUsageStatisticsResponse.add_member(:records, Shapes::ShapeRef.new(shape: __listOfUsageRecord, location_name: "records"))
+    GetUsageStatisticsResponse.add_member(:time_range, Shapes::ShapeRef.new(shape: TimeRange, location_name: "timeRange"))
     GetUsageStatisticsResponse.struct_class = Types::GetUsageStatisticsResponse
 
+    GetUsageTotalsRequest.add_member(:time_range, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "timeRange"))
     GetUsageTotalsRequest.struct_class = Types::GetUsageTotalsRequest
 
+    GetUsageTotalsResponse.add_member(:time_range, Shapes::ShapeRef.new(shape: TimeRange, location_name: "timeRange"))
     GetUsageTotalsResponse.add_member(:usage_totals, Shapes::ShapeRef.new(shape: __listOfUsageTotal, location_name: "usageTotals"))
     GetUsageTotalsResponse.struct_class = Types::GetUsageTotalsResponse
 

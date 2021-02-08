@@ -95,7 +95,7 @@ module Aws::IVS
     StreamKeys = Shapes::ListShape.new(name: 'StreamKeys')
     StreamList = Shapes::ListShape.new(name: 'StreamList')
     StreamMetadata = Shapes::StringShape.new(name: 'StreamMetadata')
-    StreamStartTime = Shapes::TimestampShape.new(name: 'StreamStartTime')
+    StreamStartTime = Shapes::TimestampShape.new(name: 'StreamStartTime', timestampFormat: "iso8601")
     StreamState = Shapes::StringShape.new(name: 'StreamState')
     StreamSummary = Shapes::StructureShape.new(name: 'StreamSummary')
     StreamUnavailable = Shapes::StructureShape.new(name: 'StreamUnavailable')
@@ -539,6 +539,7 @@ module Aws::IVS
         o.output = Shapes::ShapeRef.new(shape: ListChannelsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

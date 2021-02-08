@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2021-02-08)
+------------------
+
+* Feature - This release introduces the new ExportRevision job type, which allows for the export of an entire revision.
+
 1.11.0 (2021-02-02)
 ------------------
 

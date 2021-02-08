@@ -152,10 +152,10 @@ module Aws::CloudTrail
     #
     #   * <b> <code>resources.type</code> </b> - This ﬁeld is required.
     #     `resources.type` can only use the `Equals` operator, and the value
-    #     can be one of the following: `AWS::S3::Object` or
-    #     `AWS::Lambda::Function`. You can have only one `resources.type`
-    #     ﬁeld per selector. To log data events on more than one resource
-    #     type, add another selector.
+    #     can be one of the following: `AWS::S3::Object`,
+    #     `AWS::Lambda::Function`, or `AWS::S3Outposts::Object`. You can
+    #     have only one `resources.type` ﬁeld per selector. To log data
+    #     events on more than one resource type, add another selector.
     #
     #   * <b> <code>resources.ARN</code> </b> - You can use any operator
     #     with resources.ARN, but if you use `Equals` or `NotEquals`, the
@@ -174,6 +174,14 @@ module Aws::CloudTrail
     #     following format:
     #
     #     * `arn:partition:lambda:region:account_ID:function:function_name`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::S3Outposts::Object`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:partition:s3-outposts:region:>account_ID:object_path`
     #
     #     ^
     #   @return [String]
@@ -261,6 +269,16 @@ module Aws::CloudTrail
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CloudWatchLogsDeliveryUnavailableException AWS API Documentation
     #
     class CloudWatchLogsDeliveryUnavailableException < Aws::EmptyStructure; end
+
+    # This exception is thrown when the specified resource is not ready for
+    # an operation. This can occur when you try to run an operation on a
+    # trail before CloudTrail has time to fully load the trail. If this
+    # exception occurs, wait a few minutes, and then try the operation
+    # again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ConflictException AWS API Documentation
+    #
+    class ConflictException < Aws::EmptyStructure; end
 
     # Specifies the settings for each trail.
     #
@@ -581,6 +599,10 @@ module Aws::CloudTrail
     # @!attribute [rw] type
     #   The resource type in which you want to log data events. You can
     #   specify `AWS::S3::Object` or `AWS::Lambda::Function` resources.
+    #
+    #   The `AWS::S3Outposts::Object` resource type is not valid in basic
+    #   event selectors. To log data events on this resource type, use
+    #   advanced event selectors.
     #   @return [String]
     #
     # @!attribute [rw] values

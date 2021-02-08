@@ -949,6 +949,8 @@ module Aws::Macie2
     #   resp.buckets[0].replication_details.replicated_externally #=> Boolean
     #   resp.buckets[0].replication_details.replication_accounts #=> Array
     #   resp.buckets[0].replication_details.replication_accounts[0] #=> String
+    #   resp.buckets[0].server_side_encryption.kms_master_key_id #=> String
+    #   resp.buckets[0].server_side_encryption.type #=> String, one of "NONE", "AES256", "aws:kms"
     #   resp.buckets[0].shared_access #=> String, one of "EXTERNAL", "INTERNAL", "NOT_SHARED", "UNKNOWN"
     #   resp.buckets[0].size_in_bytes #=> Integer
     #   resp.buckets[0].size_in_bytes_compressed #=> Integer
@@ -1791,13 +1793,18 @@ module Aws::Macie2
     # @option params [String] :next_token
     #
     # @option params [Types::UsageStatisticsSortBy] :sort_by
-    #   Specifies criteria for sorting the results of a query for account
-    #   quotas and usage data.
+    #   Specifies criteria for sorting the results of a query for Amazon Macie
+    #   account quotas and usage data.
+    #
+    # @option params [String] :time_range
+    #   An inclusive time period that Amazon Macie usage data applies to.
+    #   Possible values are:
     #
     # @return [Types::GetUsageStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetUsageStatisticsResponse#next_token #next_token} => String
     #   * {Types::GetUsageStatisticsResponse#records #records} => Array&lt;Types::UsageRecord&gt;
+    #   * {Types::GetUsageStatisticsResponse#time_range #time_range} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1817,6 +1824,7 @@ module Aws::Macie2
     #       key: "accountId", # accepts accountId, total, serviceLimitValue, freeTrialStartDate
     #       order_by: "ASC", # accepts ASC, DESC
     #     },
+    #     time_range: "MONTH_TO_DATE", # accepts MONTH_TO_DATE, PAST_30_DAYS
     #   })
     #
     # @example Response structure
@@ -1832,6 +1840,7 @@ module Aws::Macie2
     #   resp.records[0].usage[0].service_limit.unit #=> String, one of "TERABYTES"
     #   resp.records[0].usage[0].service_limit.value #=> Integer
     #   resp.records[0].usage[0].type #=> String, one of "DATA_INVENTORY_EVALUATION", "SENSITIVE_DATA_DISCOVERY"
+    #   resp.time_range #=> String, one of "MONTH_TO_DATE", "PAST_30_DAYS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetUsageStatistics AWS API Documentation
     #
@@ -1844,12 +1853,22 @@ module Aws::Macie2
 
     # Retrieves (queries) aggregated usage data for an account.
     #
+    # @option params [String] :time_range
+    #
     # @return [Types::GetUsageTotalsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetUsageTotalsResponse#time_range #time_range} => String
     #   * {Types::GetUsageTotalsResponse#usage_totals #usage_totals} => Array&lt;Types::UsageTotal&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_usage_totals({
+    #     time_range: "__string",
+    #   })
     #
     # @example Response structure
     #
+    #   resp.time_range #=> String, one of "MONTH_TO_DATE", "PAST_30_DAYS"
     #   resp.usage_totals #=> Array
     #   resp.usage_totals[0].currency #=> String, one of "USD"
     #   resp.usage_totals[0].estimated_cost #=> String
@@ -2544,7 +2563,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

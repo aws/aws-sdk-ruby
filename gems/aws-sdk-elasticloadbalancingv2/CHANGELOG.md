@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2021-02-08)
+------------------
+
+* Feature - Adds a target group attribute for application-based stickiness for Application Load Balancers.
+
 1.58.0 (2021-02-05)
 ------------------
 

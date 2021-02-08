@@ -1808,29 +1808,6 @@ module Aws::ElastiCache
     #   cluster is performed. It is specified as a range in the format
     #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
     #   window is a 60 minute period. Valid values for `ddd` are:
-    #
-    #   Specifies the weekly time range during which maintenance on the
-    #   cluster is performed. It is specified as a range in the format
-    #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-    #   window is a 60 minute period.
-    #
-    #   Valid values for `ddd` are:
-    #
-    #   * `sun`
-    #
-    #   * `mon`
-    #
-    #   * `tue`
-    #
-    #   * `wed`
-    #
-    #   * `thu`
-    #
-    #   * `fri`
-    #
-    #   * `sat`
-    #
-    #   Example: `sun:23:00-mon:01:30`
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -2459,7 +2436,7 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] engine
     #   The name of the cache engine to be used for the clusters in this
-    #   replication group.
+    #   replication group. Must be Redis.
     #   @return [String]
     #
     # @!attribute [rw] engine_version

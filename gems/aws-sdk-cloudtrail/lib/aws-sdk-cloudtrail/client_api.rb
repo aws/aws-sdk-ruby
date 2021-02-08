@@ -25,6 +25,7 @@ module Aws::CloudTrail
     CloudTrailAccessNotEnabledException = Shapes::StructureShape.new(name: 'CloudTrailAccessNotEnabledException')
     CloudTrailInvalidClientTokenIdException = Shapes::StructureShape.new(name: 'CloudTrailInvalidClientTokenIdException')
     CloudWatchLogsDeliveryUnavailableException = Shapes::StructureShape.new(name: 'CloudWatchLogsDeliveryUnavailableException')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateTrailRequest = Shapes::StructureShape.new(name: 'CreateTrailRequest')
     CreateTrailResponse = Shapes::StructureShape.new(name: 'CreateTrailResponse')
     DataResource = Shapes::StructureShape.new(name: 'DataResource')
@@ -167,6 +168,8 @@ module Aws::CloudTrail
     CloudTrailInvalidClientTokenIdException.struct_class = Types::CloudTrailInvalidClientTokenIdException
 
     CloudWatchLogsDeliveryUnavailableException.struct_class = Types::CloudWatchLogsDeliveryUnavailableException
+
+    ConflictException.struct_class = Types::ConflictException
 
     CreateTrailRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     CreateTrailRequest.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketName"))
@@ -614,6 +617,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientDependencyServiceAccessPermissionException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:describe_trails, Seahorse::Model::Operation.new.tap do |o|
@@ -777,6 +781,8 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: InvalidInsightSelectorsException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientS3BucketPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientEncryptionPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: S3BucketDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)

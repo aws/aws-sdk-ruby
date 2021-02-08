@@ -97,7 +97,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about account-level permissions settings that
+    # Provides information about the account-level permissions settings that
     # apply to an S3 bucket.
     #
     # @!attribute [rw] block_public_access
@@ -365,7 +365,8 @@ module Aws::Macie2
     end
 
     # Provides information about the number of S3 buckets that use certain
-    # types of server-side encryption or don't encrypt objects by default.
+    # types of server-side encryption by default or don't encrypt new
+    # objects by default.
     #
     # @!attribute [rw] kms_managed
     #   @return [Integer]
@@ -551,6 +552,18 @@ module Aws::Macie2
     #   accounts and, if so, which accounts.
     #   @return [Types::ReplicationDetails]
     #
+    # @!attribute [rw] server_side_encryption
+    #   Provides information about the default server-side encryption
+    #   settings for an S3 bucket. For detailed information about these
+    #   settings, see [Setting default server-side encryption behavior for
+    #   Amazon S3 buckets][1] in the *Amazon Simple Storage Service User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html
+    #   @return [Types::BucketServerSideEncryption]
+    #
     # @!attribute [rw] shared_access
     #   @return [String]
     #
@@ -598,6 +611,7 @@ module Aws::Macie2
       :public_access,
       :region,
       :replication_details,
+      :server_side_encryption,
       :shared_access,
       :size_in_bytes,
       :size_in_bytes_compressed,
@@ -613,8 +627,8 @@ module Aws::Macie2
     # permissions settings for an S3 bucket.
     #
     # @!attribute [rw] account_level_permissions
-    #   Provides information about account-level permissions settings that
-    #   apply to an S3 bucket.
+    #   Provides information about the account-level permissions settings
+    #   that apply to an S3 bucket.
     #   @return [Types::AccountLevelPermissions]
     #
     # @!attribute [rw] bucket_level_permissions
@@ -665,6 +679,30 @@ module Aws::Macie2
     class BucketPublicAccess < Struct.new(
       :effective_permission,
       :permission_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the default server-side encryption settings
+    # for an S3 bucket. For detailed information about these settings, see
+    # [Setting default server-side encryption behavior for Amazon S3
+    # buckets][1] in the *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html
+    #
+    # @!attribute [rw] kms_master_key_id
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BucketServerSideEncryption AWS API Documentation
+    #
+    class BucketServerSideEncryption < Struct.new(
+      :kms_master_key_id,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2306,8 +2344,8 @@ module Aws::Macie2
     #
     # @!attribute [rw] bucket_count_by_encryption_type
     #   Provides information about the number of S3 buckets that use certain
-    #   types of server-side encryption or don't encrypt objects by
-    #   default.
+    #   types of server-side encryption by default or don't encrypt new
+    #   objects by default.
     #   @return [Types::BucketCountByEncryptionType]
     #
     # @!attribute [rw] bucket_count_by_shared_access_type
@@ -2801,8 +2839,8 @@ module Aws::Macie2
     end
 
     # Specifies criteria for filtering, sorting, and paginating the results
-    # of a query for quotas and aggregated usage data for one or more
-    # accounts.
+    # of a query for quotas and aggregated usage data for one or more Amazon
+    # Macie accounts.
     #
     # @note When making an API call, you may pass GetUsageStatisticsRequest
     #   data as a hash:
@@ -2821,6 +2859,7 @@ module Aws::Macie2
     #           key: "accountId", # accepts accountId, total, serviceLimitValue, freeTrialStartDate
     #           order_by: "ASC", # accepts ASC, DESC
     #         },
+    #         time_range: "MONTH_TO_DATE", # accepts MONTH_TO_DATE, PAST_30_DAYS
     #       }
     #
     # @!attribute [rw] filter_by
@@ -2833,9 +2872,14 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] sort_by
-    #   Specifies criteria for sorting the results of a query for account
-    #   quotas and usage data.
+    #   Specifies criteria for sorting the results of a query for Amazon
+    #   Macie account quotas and usage data.
     #   @return [Types::UsageStatisticsSortBy]
+    #
+    # @!attribute [rw] time_range
+    #   An inclusive time period that Amazon Macie usage data applies to.
+    #   Possible values are:
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetUsageStatisticsRequest AWS API Documentation
     #
@@ -2843,13 +2887,14 @@ module Aws::Macie2
       :filter_by,
       :max_results,
       :next_token,
-      :sort_by)
+      :sort_by,
+      :time_range)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Provides the results of a query that retrieved quotas and aggregated
-    # usage data for one or more accounts.
+    # usage data for one or more Amazon Macie accounts.
     #
     # @!attribute [rw] next_token
     #   @return [String]
@@ -2857,23 +2902,46 @@ module Aws::Macie2
     # @!attribute [rw] records
     #   @return [Array<Types::UsageRecord>]
     #
+    # @!attribute [rw] time_range
+    #   An inclusive time period that Amazon Macie usage data applies to.
+    #   Possible values are:
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetUsageStatisticsResponse AWS API Documentation
     #
     class GetUsageStatisticsResponse < Struct.new(
       :next_token,
-      :records)
+      :records,
+      :time_range)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @api private
+    # @note When making an API call, you may pass GetUsageTotalsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         time_range: "__string",
+    #       }
+    #
+    # @!attribute [rw] time_range
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetUsageTotalsRequest AWS API Documentation
     #
-    class GetUsageTotalsRequest < Aws::EmptyStructure; end
+    class GetUsageTotalsRequest < Struct.new(
+      :time_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Provides the results of a query that retrieved aggregated usage data
-    # for an account during the past 30 days.
+    # for an Amazon Macie account.
+    #
+    # @!attribute [rw] time_range
+    #   An inclusive time period that Amazon Macie usage data applies to.
+    #   Possible values are:
+    #   @return [String]
     #
     # @!attribute [rw] usage_totals
     #   @return [Array<Types::UsageTotal>]
@@ -2881,6 +2949,7 @@ module Aws::Macie2
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetUsageTotalsResponse AWS API Documentation
     #
     class GetUsageTotalsResponse < Struct.new(
+      :time_range,
       :usage_totals)
       SENSITIVE = []
       include Aws::Structure
@@ -4579,7 +4648,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies a current quota for an account.
+    # Specifies a current quota for an Amazon Macie account.
     #
     # @!attribute [rw] is_service_limited
     #   @return [Boolean]
@@ -5215,23 +5284,23 @@ module Aws::Macie2
     class UpdateOrganizationConfigurationResponse < Aws::EmptyStructure; end
 
     # Provides data for a specific usage metric and the corresponding quota
-    # for an account. The value for the metric is an aggregated value that
-    # reports usage during the past 30 days.
+    # for an Amazon Macie account.
     #
     # @!attribute [rw] currency
-    #   The type of currency that data for a usage metric is reported in.
-    #   Possible values are:
+    #   The type of currency that the data for an Amazon Macie usage metric
+    #   is reported in. Possible values are:
     #   @return [String]
     #
     # @!attribute [rw] estimated_cost
     #   @return [String]
     #
     # @!attribute [rw] service_limit
-    #   Specifies a current quota for an account.
+    #   Specifies a current quota for an Amazon Macie account.
     #   @return [Types::ServiceLimit]
     #
     # @!attribute [rw] type
-    #   The name of a usage metric for an account. Possible values are:
+    #   The name of an Amazon Macie usage metric for an account. Possible
+    #   values are:
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UsageByAccount AWS API Documentation
@@ -5245,7 +5314,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides quota and aggregated usage data for an account.
+    # Provides quota and aggregated usage data for an Amazon Macie account.
     #
     # @!attribute [rw] account_id
     #   @return [String]
@@ -5266,8 +5335,9 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies a condition for filtering the results of a query for account
-    # quotas and usage data.
+    # Specifies a condition for filtering the results of a query for the
+    # quotas and usage data that applies to one or more Amazon Macie
+    # accounts.
     #
     # @note When making an API call, you may pass UsageStatisticsFilter
     #   data as a hash:
@@ -5280,12 +5350,13 @@ module Aws::Macie2
     #
     # @!attribute [rw] comparator
     #   The operator to use in a condition that filters the results of a
-    #   query for account quotas and usage data. Valid values are:
+    #   query for Amazon Macie account quotas and usage data. Valid values
+    #   are:
     #   @return [String]
     #
     # @!attribute [rw] key
     #   The field to use in a condition that filters the results of a query
-    #   for account quotas and usage data. Valid values are:
+    #   for Amazon Macie account quotas and usage data. Valid values are:
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -5301,8 +5372,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies criteria for sorting the results of a query for account
-    # quotas and usage data.
+    # Specifies criteria for sorting the results of a query for Amazon Macie
+    # account quotas and usage data.
     #
     # @note When making an API call, you may pass UsageStatisticsSortBy
     #   data as a hash:
@@ -5313,8 +5384,8 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] key
-    #   The field to use to sort the results of a query for account quotas
-    #   and usage data. Valid values are:
+    #   The field to use to sort the results of a query for Amazon Macie
+    #   account quotas and usage data. Valid values are:
     #   @return [String]
     #
     # @!attribute [rw] order_by
@@ -5329,19 +5400,22 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides aggregated data for a usage metric. The value for the metric
-    # reports usage data for an account during the past 30 days.
+    # Provides aggregated data for an Amazon Macie usage metric. The value
+    # for the metric reports estimated usage data for an account for the
+    # preceding 30 days or the current calendar month to date, depending on
+    # the time period (timeRange) specified in the request.
     #
     # @!attribute [rw] currency
-    #   The type of currency that data for a usage metric is reported in.
-    #   Possible values are:
+    #   The type of currency that the data for an Amazon Macie usage metric
+    #   is reported in. Possible values are:
     #   @return [String]
     #
     # @!attribute [rw] estimated_cost
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The name of a usage metric for an account. Possible values are:
+    #   The name of an Amazon Macie usage metric for an account. Possible
+    #   values are:
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UsageTotal AWS API Documentation

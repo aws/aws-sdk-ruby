@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2021-02-08)
+------------------
+
+* Feature - Recall CreatePresignedPortalUrl API
+
 1.18.0 (2021-02-03)
 ------------------
 

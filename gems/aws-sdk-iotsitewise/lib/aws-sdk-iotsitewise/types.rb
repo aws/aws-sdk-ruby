@@ -1969,41 +1969,6 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreatePresignedPortalUrlRequest
-    #   data as a hash:
-    #
-    #       {
-    #         portal_id: "ID", # required
-    #         session_duration_seconds: 1,
-    #         state: "state",
-    #       }
-    #
-    # @!attribute [rw] portal_id
-    #   @return [String]
-    #
-    # @!attribute [rw] session_duration_seconds
-    #   @return [Integer]
-    #
-    # @!attribute [rw] state
-    #   @return [String]
-    #
-    class CreatePresignedPortalUrlRequest < Struct.new(
-      :portal_id,
-      :session_duration_seconds,
-      :state)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] presigned_portal_url
-    #   @return [String]
-    #
-    class CreatePresignedPortalUrlResponse < Struct.new(
-      :presigned_portal_url)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass CreateProjectRequest
     #   data as a hash:
     #

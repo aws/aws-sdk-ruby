@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2021-02-08)
+------------------
+
+* Feature - This release of the Amazon Macie API adds support for specifying a time range in queries for usage data.
+
 1.21.0 (2021-02-02)
 ------------------
 

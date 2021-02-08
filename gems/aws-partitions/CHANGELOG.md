@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.425.0 (2021-02-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 * Issue - Reduce memory usage by de-duplicating `partitions.json`.
 
 1.424.0 (2021-02-05)

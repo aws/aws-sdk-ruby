@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2021-02-08)
+------------------
+
+* Feature - Fixed an issue where StreamStartTime could not be unmarshalled from response. Changed DeleteChannel and DeleteStreamKey response codes to 204.
+
 1.6.0 (2021-02-02)
 ------------------
 
