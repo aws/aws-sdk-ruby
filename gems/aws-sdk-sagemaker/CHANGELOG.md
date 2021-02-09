@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2021-02-09)
+------------------
+
+* Feature - Add a new optional FrameworkVersion field to Sagemaker Neo CreateCompilationJob API
+
 1.76.0 (2021-02-02)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2021-02-09)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for WMA audio only ingest, SMPTE-TT text and image caption ingest, and MPEG-2 video in MXF OP1a outputs.
+
 1.62.0 (2021-02-02)
 ------------------
 

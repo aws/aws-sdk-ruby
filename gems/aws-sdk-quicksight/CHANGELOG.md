@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2021-02-09)
+------------------
+
+* Feature - QuickSight now supports Python's paginators for Exploration APIs.
+
 1.41.0 (2021-02-04)
 ------------------
 

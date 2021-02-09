@@ -3947,6 +3947,7 @@ module Aws::SageMaker
     #           s3_uri: "S3Uri", # required
     #           data_input_config: "DataInputConfig", # required
     #           framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE, DARKNET, SKLEARN
+    #           framework_version: "FrameworkVersion",
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
@@ -18469,6 +18470,7 @@ module Aws::SageMaker
     #         s3_uri: "S3Uri", # required
     #         data_input_config: "DataInputConfig", # required
     #         framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE, DARKNET, SKLEARN
+    #         framework_version: "FrameworkVersion",
     #       }
     #
     # @!attribute [rw] s3_uri
@@ -18645,12 +18647,21 @@ module Aws::SageMaker
     #   example: TENSORFLOW.
     #   @return [String]
     #
+    # @!attribute [rw] framework_version
+    #   Specifies the framework version to use.
+    #
+    #   This API field is only supported for PyTorch framework versions
+    #   `1.4`, `1.5`, and `1.6` for cloud instance target devices: `ml_c4`,
+    #   `ml_c5`, `ml_m4`, `ml_m5`, `ml_p2`, `ml_p3`, and `ml_g4dn`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InputConfig AWS API Documentation
     #
     class InputConfig < Struct.new(
       :s3_uri,
       :data_input_config,
-      :framework)
+      :framework,
+      :framework_version)
       SENSITIVE = []
       include Aws::Structure
     end

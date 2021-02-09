@@ -50,6 +50,20 @@ module Aws::QLDBSession
       include Aws::Structure
     end
 
+    # Returned when the request exceeds the processing capacity of the
+    # ledger.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/CapacityExceededException AWS API Documentation
+    #
+    class CapacityExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the details of the transaction to commit.
     #
     # @note When making an API call, you may pass CommitTransactionRequest
@@ -256,11 +270,11 @@ module Aws::QLDBSession
     # Contains I/O usage metrics for a command that was invoked.
     #
     # @!attribute [rw] read_i_os
-    #   The number of read I/O requests that the command performed.
+    #   The number of read I/O requests that the command made.
     #   @return [Integer]
     #
     # @!attribute [rw] write_i_os
-    #   The number of write I/O requests that the command performed.
+    #   The number of write I/O requests that the command made.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/IOUsage AWS API Documentation
@@ -556,8 +570,8 @@ module Aws::QLDBSession
     # the request and when it sends the corresponding response.
     #
     # @!attribute [rw] processing_time_milliseconds
-    #   The amount of time that was taken for the command to finish
-    #   processing, measured in milliseconds.
+    #   The amount of time that QLDB spent on processing the command,
+    #   measured in milliseconds.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/TimingInformation AWS API Documentation

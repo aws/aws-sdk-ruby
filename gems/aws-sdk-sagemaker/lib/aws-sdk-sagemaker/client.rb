@@ -1300,6 +1300,7 @@ module Aws::SageMaker
     #       s3_uri: "S3Uri", # required
     #       data_input_config: "DataInputConfig", # required
     #       framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE, DARKNET, SKLEARN
+    #       framework_version: "FrameworkVersion",
     #     },
     #     output_config: { # required
     #       s3_output_location: "S3Uri", # required
@@ -7557,6 +7558,7 @@ module Aws::SageMaker
     #   resp.input_config.s3_uri #=> String
     #   resp.input_config.data_input_config #=> String
     #   resp.input_config.framework #=> String, one of "TENSORFLOW", "KERAS", "MXNET", "ONNX", "PYTORCH", "XGBOOST", "TFLITE", "DARKNET", "SKLEARN"
+    #   resp.input_config.framework_version #=> String
     #   resp.output_config.s3_output_location #=> String
     #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_g4dn", "ml_inf1", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv22", "x86_win32", "x86_win64", "coreml", "jacinto_tda4vm"
     #   resp.output_config.target_platform.os #=> String, one of "ANDROID", "LINUX"
@@ -17193,7 +17195,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

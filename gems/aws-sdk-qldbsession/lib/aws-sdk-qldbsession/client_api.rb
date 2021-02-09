@@ -16,6 +16,7 @@ module Aws::QLDBSession
     AbortTransactionRequest = Shapes::StructureShape.new(name: 'AbortTransactionRequest')
     AbortTransactionResult = Shapes::StructureShape.new(name: 'AbortTransactionResult')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    CapacityExceededException = Shapes::StructureShape.new(name: 'CapacityExceededException')
     CommitDigest = Shapes::BlobShape.new(name: 'CommitDigest')
     CommitTransactionRequest = Shapes::StructureShape.new(name: 'CommitTransactionRequest')
     CommitTransactionResult = Shapes::StructureShape.new(name: 'CommitTransactionResult')
@@ -62,6 +63,9 @@ module Aws::QLDBSession
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     BadRequestException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     BadRequestException.struct_class = Types::BadRequestException
+
+    CapacityExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    CapacityExceededException.struct_class = Types::CapacityExceededException
 
     CommitTransactionRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionId, required: true, location_name: "TransactionId"))
     CommitTransactionRequest.add_member(:commit_digest, Shapes::ShapeRef.new(shape: CommitDigest, required: true, location_name: "CommitDigest"))
@@ -192,6 +196,7 @@ module Aws::QLDBSession
         o.errors << Shapes::ShapeRef.new(shape: OccConflictException)
         o.errors << Shapes::ShapeRef.new(shape: RateExceededException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: CapacityExceededException)
       end)
     end
 

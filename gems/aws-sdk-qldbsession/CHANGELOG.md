@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2021-02-09)
+------------------
+
+* Feature - This release adds CapacityExceededException to the AWS QLDBSession API.
+
 1.11.0 (2021-02-02)
 ------------------
 
