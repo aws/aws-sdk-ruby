@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix incorrect use of `JSON.load` breaking Ruby <= 2.2.
+
 1.425.0 (2021-02-08)
 ------------------
 
