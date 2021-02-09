@@ -212,11 +212,10 @@ module Aws
       def defaults
         @defaults ||= begin
           path = File.expand_path('../../partitions.json', __FILE__)
-          defaults = if JSON::VERSION >= '2.4.0'
-            JSON.load(File.read(path), freeze: true)
-          else
-            JSON.parse(File.read(path))
-          end
+          puts "Ruby: #{RUBY_VERSION}"
+          puts "JSON version: #{JSON::VERSION}"
+          defaults = JSON.parse(File.read(path), freeze: true)
+          puts "Is it frozen? #{defaults.frozen?}. keys: #{defaults.keys}"
           defaults.merge('partitions' => defaults['partitions'].dup)
         end
       end
