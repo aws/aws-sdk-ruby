@@ -213,7 +213,7 @@ module Aws
         @defaults ||= begin
           path = File.expand_path('../../partitions.json', __FILE__)
           defaults = if JSON::VERSION >= '2.4.0'
-            JSON.load(File.read(path), freeze: true)
+            JSON.load(File.read(path), nil, freeze: true)
           else
             JSON.parse(File.read(path))
           end
