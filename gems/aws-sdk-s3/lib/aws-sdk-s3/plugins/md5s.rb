@@ -23,7 +23,7 @@ module Aws
 
           def call(context)
             body = context.http_request.body
-            if body.size > 0
+            if body.respond_to?(:size) && body.size > 0
               context.http_request.headers['Content-Md5'] ||= md5(body)
             end
             @handler.call(context)
