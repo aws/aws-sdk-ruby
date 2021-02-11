@@ -3,13 +3,6 @@ require_relative '../spec_helper'
 module Aws
   module S3
     describe Client do
-      # check service signing
-      def expect_sigv4_service(service)
-        allow(Aws::Plugins::SignatureV4).to receive(:apply_signature) do |args|
-          expect(args[:signer].service).to eq(service)
-        end
-      end
-
       context 'success cases' do
         it 'applies the bucket to the custom endpoint' do
           client = Aws::S3::Client.new(

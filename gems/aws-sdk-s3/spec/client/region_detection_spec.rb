@@ -30,13 +30,6 @@ module Aws
         S3::BUCKET_REGIONS.clear
       end
 
-      # check service signing
-      def expect_sigv4_service(service)
-        allow(Aws::Plugins::SignatureV4).to receive(:apply_signature) do |args|
-          expect(args[:signer].service).to eq(service)
-        end
-      end
-
       context 'accessing eu-central-1 bucket using classic endpoint and wrong'\
               'sigv4 region' do
         before(:each) do
