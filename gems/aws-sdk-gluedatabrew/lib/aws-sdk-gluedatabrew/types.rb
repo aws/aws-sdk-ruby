@@ -228,6 +228,10 @@ module Aws::GlueDataBrew
     #           "TagKey" => "TagValue",
     #         },
     #         timeout: 1,
+    #         job_sample: {
+    #           mode: "FULL_DATASET", # accepts FULL_DATASET, CUSTOM_ROWS
+    #           size: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] dataset_name
@@ -242,7 +246,7 @@ module Aws::GlueDataBrew
     # @!attribute [rw] encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - para&gt;`SSE-KMS` - server-side encryption with AWS
+    #   * `SSE-KMS` - `SSE-KMS` - Server-side encryption with AWS
     #     KMS-managed keys.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
@@ -287,6 +291,14 @@ module Aws::GlueDataBrew
     #   than this timeout period ends with a status of `TIMEOUT`.
     #   @return [Integer]
     #
+    # @!attribute [rw] job_sample
+    #   Sample configuration for profile jobs only. Determines the number of
+    #   rows on which the profile job will be executed. If a JobSample value
+    #   is not provided, the default value will be used. The default value
+    #   is CUSTOM\_ROWS for the mode parameter and 20000 for the size
+    #   parameter.
+    #   @return [Types::JobSample]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/CreateProfileJobRequest AWS API Documentation
     #
     class CreateProfileJobRequest < Struct.new(
@@ -300,7 +312,8 @@ module Aws::GlueDataBrew
       :output_location,
       :role_arn,
       :tags,
-      :timeout)
+      :timeout,
+      :job_sample)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -438,7 +451,7 @@ module Aws::GlueDataBrew
     # @!attribute [rw] encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - Server-side encryption with AWS KMS-managed keys.
+    #   * `SSE-KMS` - Server-side encryption with keys managed by AWS KMS.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #   @return [String]
@@ -1097,7 +1110,7 @@ module Aws::GlueDataBrew
     # @!attribute [rw] encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - Server-side encryption with AWS KMS-managed keys.
+    #   * `SSE-KMS` - Server-side encryption with keys managed by AWS KMS.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #   @return [String]
@@ -1168,6 +1181,11 @@ module Aws::GlueDataBrew
     #   than this timeout period ends with a status of `TIMEOUT`.
     #   @return [Integer]
     #
+    # @!attribute [rw] job_sample
+    #   Sample configuration for profile jobs only. Determines the number of
+    #   rows on which the profile job will be executed.
+    #   @return [Types::JobSample]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DescribeJobResponse AWS API Documentation
     #
     class DescribeJobResponse < Struct.new(
@@ -1189,7 +1207,8 @@ module Aws::GlueDataBrew
       :resource_arn,
       :role_arn,
       :tags,
-      :timeout)
+      :timeout,
+      :job_sample)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1237,7 +1256,7 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] execution_time
-    #   The amount of time, in seconds, during which a job run consumed
+    #   The amount of time, in seconds, during which the job run consumed
     #   resources.
     #   @return [Integer]
     #
@@ -1271,13 +1290,20 @@ module Aws::GlueDataBrew
     #   @return [Types::RecipeReference]
     #
     # @!attribute [rw] started_by
-    #   The Amazon Resource Name (ARN) of the user who initiated the job
-    #   run.
+    #   The Amazon Resource Name (ARN) of the user who started the job run.
     #   @return [String]
     #
     # @!attribute [rw] started_on
     #   The date and time when the job run began.
     #   @return [Time]
+    #
+    # @!attribute [rw] job_sample
+    #   Sample configuration for profile jobs only. Determines the number of
+    #   rows on which the profile job will be executed. If a JobSample value
+    #   is not provided, the default value will be used. The default value
+    #   is CUSTOM\_ROWS for the mode parameter and 20000 for the size
+    #   parameter.
+    #   @return [Types::JobSample]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DescribeJobRunResponse AWS API Documentation
     #
@@ -1295,7 +1321,8 @@ module Aws::GlueDataBrew
       :outputs,
       :recipe_reference,
       :started_by,
-      :started_on)
+      :started_on,
+      :job_sample)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1811,6 +1838,14 @@ module Aws::GlueDataBrew
     #   Metadata tags that have been applied to the job.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] job_sample
+    #   Sample configuration for profile jobs only. Determines the number of
+    #   rows on which the profile job will be executed. If a JobSample value
+    #   is not provided, the default value will be used. The default value
+    #   is CUSTOM\_ROWS for the mode parameter and 20000 for the size
+    #   parameter.
+    #   @return [Types::JobSample]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/Job AWS API Documentation
     #
     class Job < Struct.new(
@@ -1833,7 +1868,8 @@ module Aws::GlueDataBrew
       :resource_arn,
       :role_arn,
       :timeout,
-      :tags)
+      :tags,
+      :job_sample)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1900,6 +1936,14 @@ module Aws::GlueDataBrew
     #   The date and time when the job run began.
     #   @return [Time]
     #
+    # @!attribute [rw] job_sample
+    #   Sample configuration for profile jobs only. Determines the number of
+    #   rows on which the profile job will be executed. If a JobSample value
+    #   is not provided, the default value will be used. The default value
+    #   is CUSTOM\_ROWS for the mode parameter and 20000 for the size
+    #   parameter.
+    #   @return [Types::JobSample]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/JobRun AWS API Documentation
     #
     class JobRun < Struct.new(
@@ -1916,7 +1960,50 @@ module Aws::GlueDataBrew
       :outputs,
       :recipe_reference,
       :started_by,
-      :started_on)
+      :started_on,
+      :job_sample)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Sample configuration for Profile Jobs only. Determines the number of
+    # rows on which the Profile job will be executed. If a JobSample value
+    # is not provided for profile jobs, the default value will be used. The
+    # default value is CUSTOM\_ROWS for the mode parameter and 20000 for the
+    # size parameter.
+    #
+    # @note When making an API call, you may pass JobSample
+    #   data as a hash:
+    #
+    #       {
+    #         mode: "FULL_DATASET", # accepts FULL_DATASET, CUSTOM_ROWS
+    #         size: 1,
+    #       }
+    #
+    # @!attribute [rw] mode
+    #   Determines whether the profile job will be executed on the entire
+    #   dataset or on a specified number of rows. Must be one of the
+    #   following:
+    #
+    #   * FULL\_DATASET: Profile job will be executed on the entire dataset.
+    #
+    #   * CUSTOM\_ROWS: Profile job will be executed on the number of rows
+    #     specified in the Size parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] size
+    #   Size parameter is only required when the mode is CUSTOM\_ROWS.
+    #   Profile job will be executed on the the specified number of rows.
+    #   The maximum value for size is Long.MAX\_VALUE.
+    #
+    #   Long.MAX\_VALUE = 9223372036854775807
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/JobSample AWS API Documentation
+    #
+    class JobSample < Struct.new(
+      :mode,
+      :size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3258,6 +3345,10 @@ module Aws::GlueDataBrew
     #         },
     #         role_arn: "Arn", # required
     #         timeout: 1,
+    #         job_sample: {
+    #           mode: "FULL_DATASET", # accepts FULL_DATASET, CUSTOM_ROWS
+    #           size: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] encryption_key_arn
@@ -3268,7 +3359,7 @@ module Aws::GlueDataBrew
     # @!attribute [rw] encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - Server-side encryption with AWS KMS-managed keys.
+    #   * `SSE-KMS` - Server-side encryption with keys managed by AWS KMS.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #   @return [String]
@@ -3307,6 +3398,14 @@ module Aws::GlueDataBrew
     #   than this timeout period ends with a status of `TIMEOUT`.
     #   @return [Integer]
     #
+    # @!attribute [rw] job_sample
+    #   Sample configuration for Profile Jobs only. Determines the number of
+    #   rows on which the Profile job will be executed. If a JobSample value
+    #   is not provided for profile jobs, the default value will be used.
+    #   The default value is CUSTOM\_ROWS for the mode parameter and 20000
+    #   for the size parameter.
+    #   @return [Types::JobSample]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/UpdateProfileJobRequest AWS API Documentation
     #
     class UpdateProfileJobRequest < Struct.new(
@@ -3318,7 +3417,8 @@ module Aws::GlueDataBrew
       :max_retries,
       :output_location,
       :role_arn,
-      :timeout)
+      :timeout,
+      :job_sample)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3427,7 +3527,7 @@ module Aws::GlueDataBrew
     # @!attribute [rw] encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - Server-side encryption with AWS KMS-managed keys.
+    #   * `SSE-KMS` - Server-side encryption with keys managed by AWS KMS.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #   @return [String]

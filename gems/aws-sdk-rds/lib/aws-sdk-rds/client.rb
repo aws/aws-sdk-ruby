@@ -2236,12 +2236,19 @@ module Aws::RDS
     #   the Directory Service.
     #
     # @option params [Boolean] :enable_global_write_forwarding
-    #   A value that indicates whether to enable write operations to be
-    #   forwarded from this cluster to the primary cluster in an Aurora global
-    #   database. The resulting changes are replicated back to this cluster.
-    #   This parameter only applies to DB clusters that are secondary clusters
-    #   in an Aurora global database. By default, Aurora disallows write
-    #   operations for secondary clusters.
+    #   A value that indicates whether to enable this DB cluster to forward
+    #   write operations to the primary cluster of an Aurora global database
+    #   (GlobalCluster). By default, write operations are not allowed on
+    #   Aurora DB clusters that are secondary clusters in an Aurora global
+    #   database.
+    #
+    #   You can set this value only on Aurora DB clusters that are members of
+    #   an Aurora global database. With this parameter enabled, a secondary
+    #   cluster can forward writes to the current primary cluster and the
+    #   resulting changes are replicated back to this cluster. For the primary
+    #   DB cluster of an Aurora global database, this value is used
+    #   immediately if the primary is demoted by the FailoverGlobalCluster API
+    #   operation, but it does nothing until then.
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -5290,6 +5297,9 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
+    #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateGlobalCluster AWS API Documentation
     #
@@ -6529,6 +6539,9 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
+    #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteGlobalCluster AWS API Documentation
     #
@@ -9926,6 +9939,9 @@ module Aws::RDS
     #   resp.global_clusters[0].global_cluster_members[0].readers[0] #=> String
     #   resp.global_clusters[0].global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_clusters[0].global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.global_clusters[0].failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
+    #   resp.global_clusters[0].failover_state.from_db_cluster_arn #=> String
+    #   resp.global_clusters[0].failover_state.to_db_cluster_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeGlobalClusters AWS API Documentation
     #
@@ -11254,6 +11270,93 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Initiates the failover process for an Aurora global database
+    # (GlobalCluster).
+    #
+    # A failover for an Aurora global database promotes one of secondary
+    # read-only DB clusters to be the primary DB cluster and demotes the
+    # primary DB cluster to being a secondary (read-only) DB cluster. In
+    # other words, the role of the current primary DB cluster and the
+    # selected (target) DB cluster are switched. The selected secondary DB
+    # cluster assumes full read/write capabilities for the Aurora global
+    # database.
+    #
+    # For more information about failing over an Amazon Aurora global
+    # database, see [Managed planned failover for Amazon Aurora global
+    # databases][1] in the *Amazon Aurora User Guide.*
+    #
+    # <note markdown="1"> This action applies to GlobalCluster (Aurora global databases) only.
+    # Use this action only on healthy Aurora global databases with running
+    # Aurora DB clusters and no Region-wide outages, to test disaster
+    # recovery scenarios or to reconfigure your Aurora global database
+    # topology.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.managed-failover
+    #
+    # @option params [required, String] :global_cluster_identifier
+    #   Identifier of the Aurora global database (GlobalCluster) that should
+    #   be failed over. The identifier is the unique key assigned by the user
+    #   when the Aurora global database was created. In other words, it's the
+    #   name of the Aurora global database that you want to fail over.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing GlobalCluster (Aurora
+    #     global database).
+    #
+    #   ^
+    #
+    # @option params [required, String] :target_db_cluster_identifier
+    #   Identifier of the secondary Aurora DB cluster that you want to promote
+    #   to primary for the Aurora global database (GlobalCluster.) Use the
+    #   Amazon Resource Name (ARN) for the identifier so that Aurora can
+    #   locate the cluster in its AWS Region.
+    #
+    # @return [Types::FailoverGlobalClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::FailoverGlobalClusterResult#global_cluster #global_cluster} => Types::GlobalCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.failover_global_cluster({
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #     target_db_cluster_identifier: "DBClusterIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_cluster.global_cluster_identifier #=> String
+    #   resp.global_cluster.global_cluster_resource_id #=> String
+    #   resp.global_cluster.global_cluster_arn #=> String
+    #   resp.global_cluster.status #=> String
+    #   resp.global_cluster.engine #=> String
+    #   resp.global_cluster.engine_version #=> String
+    #   resp.global_cluster.database_name #=> String
+    #   resp.global_cluster.storage_encrypted #=> Boolean
+    #   resp.global_cluster.deletion_protection #=> Boolean
+    #   resp.global_cluster.global_cluster_members #=> Array
+    #   resp.global_cluster.global_cluster_members[0].db_cluster_arn #=> String
+    #   resp.global_cluster.global_cluster_members[0].readers #=> Array
+    #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
+    #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
+    #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
+    #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverGlobalCluster AWS API Documentation
+    #
+    # @overload failover_global_cluster(params = {})
+    # @param [Hash] params ({})
+    def failover_global_cluster(params = {}, options = {})
+      req = build_request(:failover_global_cluster, params)
+      req.send_request(options)
+    end
+
     # Imports the installation media for a DB engine that requires an
     # on-premises customer provided license, such as SQL Server.
     #
@@ -11874,12 +11977,19 @@ module Aws::RDS
     #   snapshots of the DB cluster. The default is not to copy them.
     #
     # @option params [Boolean] :enable_global_write_forwarding
-    #   A value that indicates whether to enable write operations to be
-    #   forwarded from this cluster to the primary cluster in an Aurora global
-    #   database. The resulting changes are replicated back to this cluster.
-    #   This parameter only applies to DB clusters that are secondary clusters
-    #   in an Aurora global database. By default, Aurora disallows write
-    #   operations for secondary clusters.
+    #   A value that indicates whether to enable this DB cluster to forward
+    #   write operations to the primary cluster of an Aurora global database
+    #   (GlobalCluster). By default, write operations are not allowed on
+    #   Aurora DB clusters that are secondary clusters in an Aurora global
+    #   database.
+    #
+    #   You can set this value only on Aurora DB clusters that are members of
+    #   an Aurora global database. With this parameter enabled, a secondary
+    #   cluster can forward writes to the current primary cluster and the
+    #   resulting changes are replicated back to this cluster. For the primary
+    #   DB cluster of an Aurora global database, this value is used
+    #   immediately if the primary is demoted by the FailoverGlobalCluster API
+    #   operation, but it does nothing until then.
     #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -14001,6 +14111,9 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
+    #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyGlobalCluster AWS API Documentation
     #
@@ -14870,6 +14983,9 @@ module Aws::RDS
     #   resp.global_cluster.global_cluster_members[0].readers[0] #=> String
     #   resp.global_cluster.global_cluster_members[0].is_writer #=> Boolean
     #   resp.global_cluster.global_cluster_members[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
+    #   resp.global_cluster.failover_state.status #=> String, one of "pending", "failing-over", "cancelling"
+    #   resp.global_cluster.failover_state.from_db_cluster_arn #=> String
+    #   resp.global_cluster.failover_state.to_db_cluster_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveFromGlobalCluster AWS API Documentation
     #
@@ -19399,7 +19515,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.112.0'
+      context[:gem_version] = '1.113.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

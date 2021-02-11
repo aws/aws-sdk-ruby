@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2021-02-11)
+------------------
+
+* Feature - This release adds support for profile job sampling, which determines the number of rows on which the profile job will be executed.
+
 1.3.0 (2021-02-03)
 ------------------
 

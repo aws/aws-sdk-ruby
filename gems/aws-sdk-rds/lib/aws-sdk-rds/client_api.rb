@@ -110,6 +110,7 @@ module Aws::RDS
     DBClusterEndpointMessage = Shapes::StructureShape.new(name: 'DBClusterEndpointMessage')
     DBClusterEndpointNotFoundFault = Shapes::StructureShape.new(name: 'DBClusterEndpointNotFoundFault')
     DBClusterEndpointQuotaExceededFault = Shapes::StructureShape.new(name: 'DBClusterEndpointQuotaExceededFault')
+    DBClusterIdentifier = Shapes::StringShape.new(name: 'DBClusterIdentifier')
     DBClusterList = Shapes::ListShape.new(name: 'DBClusterList')
     DBClusterMember = Shapes::StructureShape.new(name: 'DBClusterMember')
     DBClusterMemberList = Shapes::ListShape.new(name: 'DBClusterMemberList')
@@ -319,12 +320,17 @@ module Aws::RDS
     ExportTasksMessage = Shapes::StructureShape.new(name: 'ExportTasksMessage')
     FailoverDBClusterMessage = Shapes::StructureShape.new(name: 'FailoverDBClusterMessage')
     FailoverDBClusterResult = Shapes::StructureShape.new(name: 'FailoverDBClusterResult')
+    FailoverGlobalClusterMessage = Shapes::StructureShape.new(name: 'FailoverGlobalClusterMessage')
+    FailoverGlobalClusterResult = Shapes::StructureShape.new(name: 'FailoverGlobalClusterResult')
+    FailoverState = Shapes::StructureShape.new(name: 'FailoverState')
+    FailoverStatus = Shapes::StringShape.new(name: 'FailoverStatus')
     FeatureNameList = Shapes::ListShape.new(name: 'FeatureNameList')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
     GlobalCluster = Shapes::StructureShape.new(name: 'GlobalCluster')
     GlobalClusterAlreadyExistsFault = Shapes::StructureShape.new(name: 'GlobalClusterAlreadyExistsFault')
+    GlobalClusterIdentifier = Shapes::StringShape.new(name: 'GlobalClusterIdentifier')
     GlobalClusterList = Shapes::ListShape.new(name: 'GlobalClusterList')
     GlobalClusterMember = Shapes::StructureShape.new(name: 'GlobalClusterMember')
     GlobalClusterMemberList = Shapes::ListShape.new(name: 'GlobalClusterMemberList')
@@ -2113,6 +2119,18 @@ module Aws::RDS
     FailoverDBClusterResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
     FailoverDBClusterResult.struct_class = Types::FailoverDBClusterResult
 
+    FailoverGlobalClusterMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: GlobalClusterIdentifier, required: true, location_name: "GlobalClusterIdentifier"))
+    FailoverGlobalClusterMessage.add_member(:target_db_cluster_identifier, Shapes::ShapeRef.new(shape: DBClusterIdentifier, required: true, location_name: "TargetDbClusterIdentifier"))
+    FailoverGlobalClusterMessage.struct_class = Types::FailoverGlobalClusterMessage
+
+    FailoverGlobalClusterResult.add_member(:global_cluster, Shapes::ShapeRef.new(shape: GlobalCluster, location_name: "GlobalCluster"))
+    FailoverGlobalClusterResult.struct_class = Types::FailoverGlobalClusterResult
+
+    FailoverState.add_member(:status, Shapes::ShapeRef.new(shape: FailoverStatus, location_name: "Status"))
+    FailoverState.add_member(:from_db_cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "FromDbClusterArn"))
+    FailoverState.add_member(:to_db_cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "ToDbClusterArn"))
+    FailoverState.struct_class = Types::FailoverState
+
     FeatureNameList.member = Shapes::ShapeRef.new(shape: String)
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
@@ -2133,6 +2151,7 @@ module Aws::RDS
     GlobalCluster.add_member(:storage_encrypted, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "StorageEncrypted"))
     GlobalCluster.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     GlobalCluster.add_member(:global_cluster_members, Shapes::ShapeRef.new(shape: GlobalClusterMemberList, location_name: "GlobalClusterMembers"))
+    GlobalCluster.add_member(:failover_state, Shapes::ShapeRef.new(shape: FailoverState, location_name: "FailoverState"))
     GlobalCluster.struct_class = Types::GlobalCluster
 
     GlobalClusterAlreadyExistsFault.struct_class = Types::GlobalClusterAlreadyExistsFault
@@ -4410,6 +4429,18 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+      end)
+
+      api.add_operation(:failover_global_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "FailoverGlobalCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: FailoverGlobalClusterMessage)
+        o.output = Shapes::ShapeRef.new(shape: FailoverGlobalClusterResult)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
       end)
 
       api.add_operation(:import_installation_media, Seahorse::Model::Operation.new.tap do |o|

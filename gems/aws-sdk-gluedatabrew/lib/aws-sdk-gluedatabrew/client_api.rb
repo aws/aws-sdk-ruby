@@ -96,6 +96,8 @@ module Aws::GlueDataBrew
     JobRunId = Shapes::StringShape.new(name: 'JobRunId')
     JobRunList = Shapes::ListShape.new(name: 'JobRunList')
     JobRunState = Shapes::StringShape.new(name: 'JobRunState')
+    JobSample = Shapes::StructureShape.new(name: 'JobSample')
+    JobSize = Shapes::IntegerShape.new(name: 'JobSize')
     JobType = Shapes::StringShape.new(name: 'JobType')
     JsonOptions = Shapes::StructureShape.new(name: 'JsonOptions')
     Key = Shapes::StringShape.new(name: 'Key')
@@ -158,6 +160,7 @@ module Aws::GlueDataBrew
     Result = Shapes::StringShape.new(name: 'Result')
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
     Sample = Shapes::StructureShape.new(name: 'Sample')
+    SampleMode = Shapes::StringShape.new(name: 'SampleMode')
     SampleSize = Shapes::IntegerShape.new(name: 'SampleSize')
     SampleType = Shapes::StringShape.new(name: 'SampleType')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
@@ -250,6 +253,7 @@ module Aws::GlueDataBrew
     CreateProfileJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))
     CreateProfileJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateProfileJobRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    CreateProfileJobRequest.add_member(:job_sample, Shapes::ShapeRef.new(shape: JobSample, location_name: "JobSample"))
     CreateProfileJobRequest.struct_class = Types::CreateProfileJobRequest
 
     CreateProfileJobResponse.add_member(:name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "Name"))
@@ -398,6 +402,7 @@ module Aws::GlueDataBrew
     DescribeJobResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoleArn"))
     DescribeJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     DescribeJobResponse.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    DescribeJobResponse.add_member(:job_sample, Shapes::ShapeRef.new(shape: JobSample, location_name: "JobSample"))
     DescribeJobResponse.struct_class = Types::DescribeJobResponse
 
     DescribeJobRunRequest.add_member(:name, Shapes::ShapeRef.new(shape: JobName, required: true, location: "uri", location_name: "name"))
@@ -418,6 +423,7 @@ module Aws::GlueDataBrew
     DescribeJobRunResponse.add_member(:recipe_reference, Shapes::ShapeRef.new(shape: RecipeReference, location_name: "RecipeReference"))
     DescribeJobRunResponse.add_member(:started_by, Shapes::ShapeRef.new(shape: StartedBy, location_name: "StartedBy"))
     DescribeJobRunResponse.add_member(:started_on, Shapes::ShapeRef.new(shape: Date, location_name: "StartedOn"))
+    DescribeJobRunResponse.add_member(:job_sample, Shapes::ShapeRef.new(shape: JobSample, location_name: "JobSample"))
     DescribeJobRunResponse.struct_class = Types::DescribeJobRunResponse
 
     DescribeProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location: "uri", location_name: "name"))
@@ -510,6 +516,7 @@ module Aws::GlueDataBrew
     Job.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoleArn"))
     Job.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     Job.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    Job.add_member(:job_sample, Shapes::ShapeRef.new(shape: JobSample, location_name: "JobSample"))
     Job.struct_class = Types::Job
 
     JobList.member = Shapes::ShapeRef.new(shape: Job)
@@ -530,9 +537,14 @@ module Aws::GlueDataBrew
     JobRun.add_member(:recipe_reference, Shapes::ShapeRef.new(shape: RecipeReference, location_name: "RecipeReference"))
     JobRun.add_member(:started_by, Shapes::ShapeRef.new(shape: StartedBy, location_name: "StartedBy"))
     JobRun.add_member(:started_on, Shapes::ShapeRef.new(shape: Date, location_name: "StartedOn"))
+    JobRun.add_member(:job_sample, Shapes::ShapeRef.new(shape: JobSample, location_name: "JobSample"))
     JobRun.struct_class = Types::JobRun
 
     JobRunList.member = Shapes::ShapeRef.new(shape: JobRun)
+
+    JobSample.add_member(:mode, Shapes::ShapeRef.new(shape: SampleMode, location_name: "Mode"))
+    JobSample.add_member(:size, Shapes::ShapeRef.new(shape: JobSize, location_name: "Size"))
+    JobSample.struct_class = Types::JobSample
 
     JsonOptions.add_member(:multi_line, Shapes::ShapeRef.new(shape: MultiLine, location_name: "MultiLine"))
     JsonOptions.struct_class = Types::JsonOptions
@@ -786,6 +798,7 @@ module Aws::GlueDataBrew
     UpdateProfileJobRequest.add_member(:output_location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "OutputLocation"))
     UpdateProfileJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))
     UpdateProfileJobRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    UpdateProfileJobRequest.add_member(:job_sample, Shapes::ShapeRef.new(shape: JobSample, location_name: "JobSample"))
     UpdateProfileJobRequest.struct_class = Types::UpdateProfileJobRequest
 
     UpdateProfileJobResponse.add_member(:name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "Name"))

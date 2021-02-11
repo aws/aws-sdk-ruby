@@ -335,11 +335,11 @@ module Aws::GlueDataBrew
     #
     # * There is an invalid version identifier in the list of versions.
     #
-    # * The verision list is empty.
+    # * The version list is empty.
     #
     # * The version list size exceeds 50.
     #
-    # * The verison list contains duplicate entries.
+    # * The version list contains duplicate entries.
     #
     # The request will complete successfully, but with partial failures, if:
     #
@@ -474,8 +474,8 @@ module Aws::GlueDataBrew
     # @option params [String] :encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - para&gt;`SSE-KMS` - server-side encryption with AWS
-    #     KMS-managed keys.
+    #   * `SSE-KMS` - `SSE-KMS` - Server-side encryption with AWS KMS-managed
+    #     keys.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #
@@ -509,6 +509,12 @@ module Aws::GlueDataBrew
     #   The job's timeout in minutes. A job that attempts to run longer than
     #   this timeout period ends with a status of `TIMEOUT`.
     #
+    # @option params [Types::JobSample] :job_sample
+    #   Sample configuration for profile jobs only. Determines the number of
+    #   rows on which the profile job will be executed. If a JobSample value
+    #   is not provided, the default value will be used. The default value is
+    #   CUSTOM\_ROWS for the mode parameter and 20000 for the size parameter.
+    #
     # @return [Types::CreateProfileJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProfileJobResponse#name #name} => String
@@ -532,6 +538,10 @@ module Aws::GlueDataBrew
     #       "TagKey" => "TagValue",
     #     },
     #     timeout: 1,
+    #     job_sample: {
+    #       mode: "FULL_DATASET", # accepts FULL_DATASET, CUSTOM_ROWS
+    #       size: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -677,7 +687,7 @@ module Aws::GlueDataBrew
     # @option params [String] :encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - Server-side encryption with AWS KMS-managed keys.
+    #   * `SSE-KMS` - Server-side encryption with keys managed by AWS KMS.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #
@@ -1055,6 +1065,7 @@ module Aws::GlueDataBrew
     #   * {Types::DescribeJobResponse#role_arn #role_arn} => String
     #   * {Types::DescribeJobResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeJobResponse#timeout #timeout} => Integer
+    #   * {Types::DescribeJobResponse#job_sample #job_sample} => Types::JobSample
     #
     # @example Request syntax with placeholder values
     #
@@ -1093,6 +1104,8 @@ module Aws::GlueDataBrew
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.timeout #=> Integer
+    #   resp.job_sample.mode #=> String, one of "FULL_DATASET", "CUSTOM_ROWS"
+    #   resp.job_sample.size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DescribeJob AWS API Documentation
     #
@@ -1127,6 +1140,7 @@ module Aws::GlueDataBrew
     #   * {Types::DescribeJobRunResponse#recipe_reference #recipe_reference} => Types::RecipeReference
     #   * {Types::DescribeJobRunResponse#started_by #started_by} => String
     #   * {Types::DescribeJobRunResponse#started_on #started_on} => Time
+    #   * {Types::DescribeJobRunResponse#job_sample #job_sample} => Types::JobSample
     #
     # @example Request syntax with placeholder values
     #
@@ -1160,6 +1174,8 @@ module Aws::GlueDataBrew
     #   resp.recipe_reference.recipe_version #=> String
     #   resp.started_by #=> String
     #   resp.started_on #=> Time
+    #   resp.job_sample.mode #=> String, one of "FULL_DATASET", "CUSTOM_ROWS"
+    #   resp.job_sample.size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DescribeJobRun AWS API Documentation
     #
@@ -1451,6 +1467,8 @@ module Aws::GlueDataBrew
     #   resp.job_runs[0].recipe_reference.recipe_version #=> String
     #   resp.job_runs[0].started_by #=> String
     #   resp.job_runs[0].started_on #=> Time
+    #   resp.job_runs[0].job_sample.mode #=> String, one of "FULL_DATASET", "CUSTOM_ROWS"
+    #   resp.job_runs[0].job_sample.size #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ListJobRuns AWS API Documentation
@@ -1530,6 +1548,8 @@ module Aws::GlueDataBrew
     #   resp.jobs[0].timeout #=> Integer
     #   resp.jobs[0].tags #=> Hash
     #   resp.jobs[0].tags["TagKey"] #=> String
+    #   resp.jobs[0].job_sample.mode #=> String, one of "FULL_DATASET", "CUSTOM_ROWS"
+    #   resp.jobs[0].job_sample.size #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ListJobs AWS API Documentation
@@ -2139,7 +2159,7 @@ module Aws::GlueDataBrew
     # @option params [String] :encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - Server-side encryption with AWS KMS-managed keys.
+    #   * `SSE-KMS` - Server-side encryption with keys managed by AWS KMS.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #
@@ -2169,6 +2189,13 @@ module Aws::GlueDataBrew
     #   The job's timeout in minutes. A job that attempts to run longer than
     #   this timeout period ends with a status of `TIMEOUT`.
     #
+    # @option params [Types::JobSample] :job_sample
+    #   Sample configuration for Profile Jobs only. Determines the number of
+    #   rows on which the Profile job will be executed. If a JobSample value
+    #   is not provided for profile jobs, the default value will be used. The
+    #   default value is CUSTOM\_ROWS for the mode parameter and 20000 for the
+    #   size parameter.
+    #
     # @return [Types::UpdateProfileJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateProfileJobResponse#name #name} => String
@@ -2188,6 +2215,10 @@ module Aws::GlueDataBrew
     #     },
     #     role_arn: "Arn", # required
     #     timeout: 1,
+    #     job_sample: {
+    #       mode: "FULL_DATASET", # accepts FULL_DATASET, CUSTOM_ROWS
+    #       size: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -2309,7 +2340,7 @@ module Aws::GlueDataBrew
     # @option params [String] :encryption_mode
     #   The encryption mode for the job, which can be one of the following:
     #
-    #   * `SSE-KMS` - Server-side encryption with AWS KMS-managed keys.
+    #   * `SSE-KMS` - Server-side encryption with keys managed by AWS KMS.
     #
     #   * `SSE-S3` - Server-side encryption with keys managed by Amazon S3.
     #
@@ -2440,7 +2471,7 @@ module Aws::GlueDataBrew
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gluedatabrew'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2021-02-11)
+------------------
+
+* Feature - Adding support for RDS Aurora Global Database Failover
+
 1.112.0 (2021-02-02)
 ------------------
 

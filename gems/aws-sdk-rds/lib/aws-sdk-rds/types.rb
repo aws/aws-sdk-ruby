@@ -2197,12 +2197,19 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] enable_global_write_forwarding
-    #   A value that indicates whether to enable write operations to be
-    #   forwarded from this cluster to the primary cluster in an Aurora
-    #   global database. The resulting changes are replicated back to this
-    #   cluster. This parameter only applies to DB clusters that are
-    #   secondary clusters in an Aurora global database. By default, Aurora
-    #   disallows write operations for secondary clusters.
+    #   A value that indicates whether to enable this DB cluster to forward
+    #   write operations to the primary cluster of an Aurora global database
+    #   (GlobalCluster). By default, write operations are not allowed on
+    #   Aurora DB clusters that are secondary clusters in an Aurora global
+    #   database.
+    #
+    #   You can set this value only on Aurora DB clusters that are members
+    #   of an Aurora global database. With this parameter enabled, a
+    #   secondary cluster can forward writes to the current primary cluster
+    #   and the resulting changes are replicated back to this cluster. For
+    #   the primary DB cluster of an Aurora global database, this value is
+    #   used immediately if the primary is demoted by the
+    #   FailoverGlobalCluster API operation, but it does nothing until then.
     #   @return [Boolean]
     #
     # @!attribute [rw] source_region
@@ -12178,6 +12185,103 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass FailoverGlobalClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #         target_db_cluster_identifier: "DBClusterIdentifier", # required
+    #       }
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   Identifier of the Aurora global database (GlobalCluster) that should
+    #   be failed over. The identifier is the unique key assigned by the
+    #   user when the Aurora global database was created. In other words,
+    #   it's the name of the Aurora global database that you want to fail
+    #   over.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing GlobalCluster (Aurora
+    #     global database).
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] target_db_cluster_identifier
+    #   Identifier of the secondary Aurora DB cluster that you want to
+    #   promote to primary for the Aurora global database (GlobalCluster.)
+    #   Use the Amazon Resource Name (ARN) for the identifier so that Aurora
+    #   can locate the cluster in its AWS Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverGlobalClusterMessage AWS API Documentation
+    #
+    class FailoverGlobalClusterMessage < Struct.new(
+      :global_cluster_identifier,
+      :target_db_cluster_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_cluster
+    #   A data type representing an Aurora global database.
+    #   @return [Types::GlobalCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverGlobalClusterResult AWS API Documentation
+    #
+    class FailoverGlobalClusterResult < Struct.new(
+      :global_cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the state of scheduled or in-process failover operations on
+    # an Aurora global database (GlobalCluster). This Data type is empty
+    # unless a failover operation is scheduled or is currently underway on
+    # the Aurora global database.
+    #
+    # @!attribute [rw] status
+    #   The current status of the Aurora global database (GlobalCluster).
+    #   Possible values are as follows:
+    #
+    #   * pending – A request to fail over the Aurora global database
+    #     (GlobalCluster) has been received by the service. The
+    #     `GlobalCluster`'s primary DB cluster and the specified secondary
+    #     DB cluster are being verified before the failover process can
+    #     start.
+    #
+    #   * failing-over – This status covers the range of Aurora internal
+    #     operations that take place during the failover process, such as
+    #     demoting the primary Aurora DB cluster, promoting the secondary
+    #     Aurora DB, and synchronizing replicas.
+    #
+    #   * cancelling – The request to fail over the Aurora global database
+    #     (GlobalCluster) was cancelled and the primary Aurora DB cluster
+    #     and the selected secondary Aurora DB cluster are returning to
+    #     their previous states.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_db_cluster_arn
+    #   The Amazon Resource Name (ARN) of the Aurora DB cluster that is
+    #   currently being demoted, and which is associated with this state.
+    #   @return [String]
+    #
+    # @!attribute [rw] to_db_cluster_arn
+    #   The Amazon Resource Name (ARN) of the Aurora DB cluster that is
+    #   currently being promoted, and which is associated with this state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverState AWS API Documentation
+    #
+    class FailoverState < Struct.new(
+      :status,
+      :from_db_cluster_arn,
+      :to_db_cluster_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A filter name and value pair that is used to return a more specific
     # list of results from a describe operation. Filters can be used to
     # match a set of resources by specific criteria, such as IDs. The
@@ -12273,6 +12377,14 @@ module Aws::RDS
     #   database cluster. Currently limited to 1 item.
     #   @return [Array<Types::GlobalClusterMember>]
     #
+    # @!attribute [rw] failover_state
+    #   A data object containing all properties for the current state of an
+    #   in-process or pending failover process for this Aurora global
+    #   database. This object is empty unless the FailoverGlobalCluster API
+    #   operation has been called on this Aurora global database
+    #   (GlobalCluster).
+    #   @return [Types::FailoverState]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalCluster AWS API Documentation
     #
     class GlobalCluster < Struct.new(
@@ -12285,7 +12397,8 @@ module Aws::RDS
       :database_name,
       :storage_encrypted,
       :deletion_protection,
-      :global_cluster_members)
+      :global_cluster_members,
+      :failover_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13313,12 +13426,19 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_global_write_forwarding
-    #   A value that indicates whether to enable write operations to be
-    #   forwarded from this cluster to the primary cluster in an Aurora
-    #   global database. The resulting changes are replicated back to this
-    #   cluster. This parameter only applies to DB clusters that are
-    #   secondary clusters in an Aurora global database. By default, Aurora
-    #   disallows write operations for secondary clusters.
+    #   A value that indicates whether to enable this DB cluster to forward
+    #   write operations to the primary cluster of an Aurora global database
+    #   (GlobalCluster). By default, write operations are not allowed on
+    #   Aurora DB clusters that are secondary clusters in an Aurora global
+    #   database.
+    #
+    #   You can set this value only on Aurora DB clusters that are members
+    #   of an Aurora global database. With this parameter enabled, a
+    #   secondary cluster can forward writes to the current primary cluster
+    #   and the resulting changes are replicated back to this cluster. For
+    #   the primary DB cluster of an Aurora global database, this value is
+    #   used immediately if the primary is demoted by the
+    #   FailoverGlobalCluster API operation, but it does nothing until then.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
