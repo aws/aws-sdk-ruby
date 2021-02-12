@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: [2.3, 2.4, 2.5, 2.6, 2.7, '3.0', jruby-9.2]
+        ruby: [2.3, 2.4, 2.5, 2.6, 2.7, '3.0', jruby-9.1, jruby-9.2]
         env: [PURE_RUBY, KITCHEN_SINK]
         exclude:
           - ruby: jruby-9.1
@@ -44,8 +44,7 @@ jobs:
       - name: Install gems
         run: |
           echo PURE_RUBY=$PURE_RUBY KITCHEN_SINK=$KITCHEN_SINK
-          bundle config set without 'docs repl'
-          bundle install
+          bundle install --without docs repl
 
       - name: SDK Build
         run: bundle exec rake build
