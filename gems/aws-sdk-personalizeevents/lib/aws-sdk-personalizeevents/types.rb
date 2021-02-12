@@ -110,7 +110,12 @@ module Aws::PersonalizeEvents
     end
 
     # Represents item metadata added to an Items dataset using the
-    # `PutItems` API.
+    # `PutItems` API. For more information see [Importing Items
+    # Incrementally][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/importing-items.html
     #
     # @note When making an API call, you may pass Item
     #   data as a hash:
@@ -126,13 +131,15 @@ module Aws::PersonalizeEvents
     #
     # @!attribute [rw] properties
     #   A string map of item-specific metadata. Each element in the map
-    #   consists of a key-value pair. For example,
+    #   consists of a key-value pair. For example, `\{"numberOfRatings":
+    #   "12"\}`.
     #
-    #   `\{"numberOfRatings": "12"\}`
-    #
-    #   The keys use camel case names that match the fields in the Items
-    #   schema. In the above example, the `numberOfRatings` would match the
-    #   'NUMBER\_OF\_RATINGS' field defined in the Items schema.
+    #   The keys use camel case names that match the fields in the schema
+    #   for the Items dataset. In the previous example, the
+    #   `numberOfRatings` matches the 'NUMBER\_OF\_RATINGS' field defined
+    #   in the Items schema. For categorical string data, to include
+    #   multiple categories for a single item, separate each category with a
+    #   pipe separator (`|`). For example, `"Horror|Action"`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-events-2018-03-22/Item AWS API Documentation
@@ -183,7 +190,11 @@ module Aws::PersonalizeEvents
     #   generates the sessionId when a user first visits your website or
     #   uses your application. Amazon Personalize uses the sessionId to
     #   associate events with the user before they log in. For more
-    #   information see event-record-api.
+    #   information, see [Recording Events][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html
     #   @return [String]
     #
     # @!attribute [rw] event_list
@@ -215,7 +226,7 @@ module Aws::PersonalizeEvents
     #       }
     #
     # @!attribute [rw] dataset_arn
-    #   The Amazon Resource Number (ARN) of the Items dataset you are adding
+    #   The Amazon Resource Name (ARN) of the Items dataset you are adding
     #   the item or items to.
     #   @return [String]
     #
@@ -246,7 +257,7 @@ module Aws::PersonalizeEvents
     #       }
     #
     # @!attribute [rw] dataset_arn
-    #   The Amazon Resource Number (ARN) of the Users dataset you are adding
+    #   The Amazon Resource Name (ARN) of the Users dataset you are adding
     #   the user or users to.
     #   @return [String]
     #
@@ -259,6 +270,19 @@ module Aws::PersonalizeEvents
     class PutUsersRequest < Struct.new(
       :dataset_arn,
       :users)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified resource is in use.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-events-2018-03-22/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -277,7 +301,11 @@ module Aws::PersonalizeEvents
     end
 
     # Represents user metadata added to a Users dataset using the `PutUsers`
-    # API.
+    # API. For more information see [Importing Users Incrementally][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/importing-users.html
     #
     # @note When making an API call, you may pass User
     #   data as a hash:
@@ -294,13 +322,15 @@ module Aws::PersonalizeEvents
     # @!attribute [rw] properties
     #   A string map of user-specific metadata. Each element in the map
     #   consists of a key-value pair. For example,
+    #   `\{"numberOfVideosWatched": "45"\}`.
     #
-    #   `\{"numberOfVideosWatched": "45"\}`
-    #
-    #   The keys use camel case names that match the fields in the Users
-    #   schema. In the above example, the `numberOfVideosWatched` would
-    #   match the 'NUMBER\_OF\_VIDEOS\_WATCHED' field defined in the Users
-    #   schema.
+    #   The keys use camel case names that match the fields in the schema
+    #   for the Users dataset. In the previous example, the
+    #   `numberOfVideosWatched` matches the 'NUMBER\_OF\_VIDEOS\_WATCHED'
+    #   field defined in the Users schema. For categorical string data, to
+    #   include multiple categories for a single user, separate each
+    #   category with a pipe separator (`|`). For example,
+    #   `"Member|Frequent shopper"`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-events-2018-03-22/User AWS API Documentation

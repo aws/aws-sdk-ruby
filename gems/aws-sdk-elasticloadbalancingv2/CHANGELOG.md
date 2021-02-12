@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2021-02-12)
+------------------
+
+* Feature - Adds a target group attribute for application-based stickiness for Application Load Balancers and an update to the client IP preservation attribute for Network Load Balancers.
+
 1.59.0 (2021-02-08)
 ------------------
 

@@ -36,7 +36,10 @@ module Aws::IAM
     alias :user_name :name
 
     # The path to the user. For more information about paths, see [IAM
-    # Identifiers][1] in the *IAM User Guide*.
+    # identifiers][1] in the *IAM User Guide*.
+    #
+    # The ARN of the policy used to set the permissions boundary for the
+    # user.
     #
     #
     #
@@ -47,7 +50,7 @@ module Aws::IAM
     end
 
     # The stable and unique string identifying the user. For more
-    # information about IDs, see [IAM Identifiers][1] in the *IAM User
+    # information about IDs, see [IAM identifiers][1] in the *IAM User
     # Guide*.
     #
     #
@@ -84,7 +87,7 @@ module Aws::IAM
     # The date and time, in [ISO 8601 date-time format][1], when the user's
     # password was last used to sign in to an AWS website. For a list of AWS
     # websites that capture a user's last sign-in time, see the [Credential
-    # Reports][2] topic in the *IAM User Guide*. If a password is used more
+    # reports][2] topic in the *IAM User Guide*. If a password is used more
     # than once in a five-minute span, only the first use is returned in
     # this field. If the field is null (no value), then it indicates that
     # they never signed in with a password. This can be because:
@@ -110,11 +113,8 @@ module Aws::IAM
       data[:password_last_used]
     end
 
-    # The ARN of the policy used to set the permissions boundary for the
-    # user.
-    #
     # For more information about permissions boundaries, see [Permissions
-    # Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    # boundaries for IAM identities ][1] in the *IAM User Guide*.
     #
     #
     #
@@ -124,9 +124,8 @@ module Aws::IAM
       data[:permissions_boundary]
     end
 
-    # A list of tags that are associated with the specified user. For more
-    # information about tagging, see [Tagging IAM Identities][1] in the *IAM
-    # User Guide*.
+    # A list of tags that are associated with the user. For more information
+    # about tagging, see [Tagging IAM resources][1] in the *IAM User Guide*.
     #
     #
     #
@@ -334,8 +333,8 @@ module Aws::IAM
     # @option options [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy you want to attach.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
+    #   in the *AWS General Reference*.
     #
     #
     #
@@ -362,7 +361,7 @@ module Aws::IAM
     # @param [Hash] options ({})
     # @option options [String] :path
     #   The path for the user name. For more information about paths, see [IAM
-    #   Identifiers][1] in the *IAM User Guide*.
+    #   identifiers][1] in the *IAM User Guide*.
     #
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
@@ -382,13 +381,12 @@ module Aws::IAM
     #   The ARN of the policy that is used to set the permissions boundary for
     #   the user.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags that you want to attach to the newly created user. Each
-    #   tag consists of a key name and an associated value. For more
-    #   information about tagging, see [Tagging IAM Identities][1] in the *IAM
-    #   User Guide*.
+    #   A list of tags that you want to attach to the new user. Each tag
+    #   consists of a key name and an associated value. For more information
+    #   about tagging, see [Tagging IAM resources][1] in the *IAM User Guide*.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
-    #   of tags per user, then the entire request fails and the user is not
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed maximum
+    #   number of tags, then the entire request fails and the resource is not
     #   created.
     #
     #    </note>
@@ -532,8 +530,8 @@ module Aws::IAM
     # @option options [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy you want to detach.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
+    #   in the *AWS General Reference*.
     #
     #
     #

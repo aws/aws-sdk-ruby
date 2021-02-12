@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2021-02-12)
+------------------
+
+* Feature - EngineMode in the response of DescribeDBClusterSnapshots. SupportedEngineModes, SupportsParallelQuery and SupportsGlobalDatabases in ValidUpgradeTarget of DBEngineVersions in DescribeDBEngineVersions.
+
 1.113.0 (2021-02-11)
 ------------------
 

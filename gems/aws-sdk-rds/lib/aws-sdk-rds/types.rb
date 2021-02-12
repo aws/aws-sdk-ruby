@@ -5800,7 +5800,13 @@ module Aws::RDS
     #   @return [Time]
     #
     # @!attribute [rw] engine
-    #   Specifies the name of the database engine.
+    #   Specifies the name of the database engine for this DB cluster
+    #   snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_mode
+    #   Provides the engine mode of the database engine for this DB cluster
+    #   snapshot.
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
@@ -5826,7 +5832,7 @@ module Aws::RDS
     #   @return [Time]
     #
     # @!attribute [rw] master_username
-    #   Provides the master username for the DB cluster snapshot.
+    #   Provides the master username for this DB cluster snapshot.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -5891,6 +5897,7 @@ module Aws::RDS
       :db_cluster_identifier,
       :snapshot_create_time,
       :engine,
+      :engine_mode,
       :allocated_storage,
       :status,
       :port,
@@ -20614,8 +20621,23 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] is_major_version_upgrade
-    #   A value that indicates whether a database engine is upgraded to a
-    #   major version.
+    #   A value that indicates whether upgrading to the target version
+    #   requires upgrading the major version of the database engine.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] supported_engine_modes
+    #   A list of the supported DB engine modes for the target engine
+    #   version.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supports_parallel_query
+    #   A value that indicates whether you can use Aurora parallel query
+    #   with the target engine version.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] supports_global_databases
+    #   A value that indicates whether you can use Aurora global databases
+    #   with the target engine version.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/UpgradeTarget AWS API Documentation
@@ -20625,7 +20647,10 @@ module Aws::RDS
       :engine_version,
       :description,
       :auto_upgrade,
-      :is_major_version_upgrade)
+      :is_major_version_upgrade,
+      :supported_engine_modes,
+      :supports_parallel_query,
+      :supports_global_databases)
       SENSITIVE = []
       include Aws::Structure
     end

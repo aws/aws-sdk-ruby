@@ -161,6 +161,80 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateIdentityProviderConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         oidc: { # required
+    #           identity_provider_config_name: "String", # required
+    #           issuer_url: "String", # required
+    #           client_id: "String", # required
+    #           username_claim: "String",
+    #           username_prefix: "String",
+    #           groups_claim: "String",
+    #           groups_prefix: "String",
+    #           required_claims: {
+    #             "requiredClaimsKey" => "requiredClaimsValue",
+    #           },
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         client_request_token: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster to associate the configuration to.
+    #   @return [String]
+    #
+    # @!attribute [rw] oidc
+    #   An object that represents an OpenID Connect (OIDC) identity provider
+    #   configuration.
+    #   @return [Types::OidcIdentityProviderConfigRequest]
+    #
+    # @!attribute [rw] tags
+    #   The metadata to apply to the configuration to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AssociateIdentityProviderConfigRequest AWS API Documentation
+    #
+    class AssociateIdentityProviderConfigRequest < Struct.new(
+      :cluster_name,
+      :oidc,
+      :tags,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   An object representing an asynchronous update.
+    #   @return [Types::Update]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AssociateIdentityProviderConfigResponse AWS API Documentation
+    #
+    class AssociateIdentityProviderConfigResponse < Struct.new(
+      :update,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An Auto Scaling group that is associated with an Amazon EKS managed
     # node group.
     #
@@ -815,7 +889,7 @@ module Aws::EKS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/managed-node-groups.html#managed-node-group-capacity-types
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html#managed-node-group-capacity-types
     #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [Array<String>]
     #
@@ -850,17 +924,16 @@ module Aws::EKS
     # @!attribute [rw] node_role
     #   The Amazon Resource Name (ARN) of the IAM role to associate with
     #   your node group. The Amazon EKS worker node `kubelet` daemon makes
-    #   calls to AWS APIs on your behalf. Worker nodes receive permissions
-    #   for these API calls through an IAM instance profile and associated
-    #   policies. Before you can launch worker nodes and register them into
-    #   a cluster, you must create an IAM role for those worker nodes to use
-    #   when they are launched. For more information, see [Amazon EKS Worker
-    #   Node IAM Role][1] in the <i> <i>Amazon EKS User Guide</i> </i>. If
-    #   you specify `launchTemplate`, then don't specify [
-    #   `IamInstanceProfile` ][2] in your launch template, or the node group
-    #   deployment will fail. For more information about using launch
-    #   templates with Amazon EKS, see [Launch template support][3] in the
-    #   Amazon EKS User Guide.
+    #   calls to AWS APIs on your behalf. Nodes receive permissions for
+    #   these API calls through an IAM instance profile and associated
+    #   policies. Before you can launch nodes and register them into a
+    #   cluster, you must create an IAM role for those nodes to use when
+    #   they are launched. For more information, see [Amazon EKS node IAM
+    #   role][1] in the <i> <i>Amazon EKS User Guide</i> </i>. If you
+    #   specify `launchTemplate`, then don't specify [ `IamInstanceProfile`
+    #   ][2] in your launch template, or the node group deployment will
+    #   fail. For more information about using launch templates with Amazon
+    #   EKS, see [Launch template support][3] in the Amazon EKS User Guide.
     #
     #
     #
@@ -1307,6 +1380,48 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeIdentityProviderConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         identity_provider_config: { # required
+    #           type: "String", # required
+    #           name: "String", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The cluster name that the identity provider configuration is
+    #   associated to.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider_config
+    #   An object that represents an identity provider configuration.
+    #   @return [Types::IdentityProviderConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeIdentityProviderConfigRequest AWS API Documentation
+    #
+    class DescribeIdentityProviderConfigRequest < Struct.new(
+      :cluster_name,
+      :identity_provider_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identity_provider_config
+    #   The object that represents an OpenID Connect (OIDC) identity
+    #   provider configuration.
+    #   @return [Types::IdentityProviderConfigResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeIdentityProviderConfigResponse AWS API Documentation
+    #
+    class DescribeIdentityProviderConfigResponse < Struct.new(
+      :identity_provider_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeNodegroupRequest
     #   data as a hash:
     #
@@ -1393,6 +1508,56 @@ module Aws::EKS
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeUpdateResponse AWS API Documentation
     #
     class DescribeUpdateResponse < Struct.new(
+      :update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociateIdentityProviderConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         identity_provider_config: { # required
+    #           type: "String", # required
+    #           name: "String", # required
+    #         },
+    #         client_request_token: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster to disassociate an identity provider from.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider_config
+    #   An object that represents an identity provider configuration.
+    #   @return [Types::IdentityProviderConfig]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DisassociateIdentityProviderConfigRequest AWS API Documentation
+    #
+    class DisassociateIdentityProviderConfigRequest < Struct.new(
+      :cluster_name,
+      :identity_provider_config,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   An object representing an asynchronous update.
+    #   @return [Types::Update]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DisassociateIdentityProviderConfigResponse AWS API Documentation
+    #
+    class DisassociateIdentityProviderConfigResponse < Struct.new(
       :update)
       SENSITIVE = []
       include Aws::Structure
@@ -1574,12 +1739,11 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An object representing an identity provider for authentication
-    # credentials.
+    # An object representing an identity provider.
     #
     # @!attribute [rw] oidc
-    #   The [OpenID Connect][1] identity provider information for the
-    #   cluster.
+    #   An object representing the [OpenID Connect][1] identity provider
+    #   information.
     #
     #
     #
@@ -1589,6 +1753,48 @@ module Aws::EKS
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Identity AWS API Documentation
     #
     class Identity < Struct.new(
+      :oidc)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing an identity provider configuration.
+    #
+    # @note When making an API call, you may pass IdentityProviderConfig
+    #   data as a hash:
+    #
+    #       {
+    #         type: "String", # required
+    #         name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of the identity provider configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the identity provider configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/IdentityProviderConfig AWS API Documentation
+    #
+    class IdentityProviderConfig < Struct.new(
+      :type,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents an identity configuration.
+    #
+    # @!attribute [rw] oidc
+    #   An object that represents an OpenID Connect (OIDC) identity provider
+    #   configuration.
+    #   @return [Types::OidcIdentityProviderConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/IdentityProviderConfigResponse AWS API Documentation
+    #
+    class IdentityProviderConfigResponse < Struct.new(
       :oidc)
       SENSITIVE = []
       include Aws::Structure
@@ -1721,8 +1927,8 @@ module Aws::EKS
     #
     #   * **NodeCreationFailure**\: Your launched instances are unable to
     #     register with your Amazon EKS cluster. Common causes of this
-    #     failure are insufficient [worker node IAM role][2] permissions or
-    #     lack of outbound internet access for the nodes.
+    #     failure are insufficient [node IAM role][2] permissions or lack of
+    #     outbound internet access for the nodes.
     #
     #
     #
@@ -2060,6 +2266,71 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListIdentityProviderConfigsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The cluster name that you want to list identity provider
+    #   configurations for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of identity provider configurations returned by
+    #   `ListIdentityProviderConfigs` in paginated output. When you use this
+    #   parameter, `ListIdentityProviderConfigs` returns only `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   You can see the remaining results of the initial request by sending
+    #   another `ListIdentityProviderConfigs` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If you
+    #   don't use this parameter, `ListIdentityProviderConfigs` returns up
+    #   to 100 results and a `nextToken` value, if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `IdentityProviderConfigsRequest` where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListIdentityProviderConfigsRequest AWS API Documentation
+    #
+    class ListIdentityProviderConfigsRequest < Struct.new(
+      :cluster_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identity_provider_configs
+    #   The identity provider configurations for the cluster.
+    #   @return [Array<Types::IdentityProviderConfig>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListIdentityProviderConfigsResponse` where `maxResults` was used
+    #   and the results exceeded the value of that parameter. Pagination
+    #   continues from the end of the previous results that returned the
+    #   `nextToken` value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListIdentityProviderConfigsResponse AWS API Documentation
+    #
+    class ListIdentityProviderConfigsResponse < Struct.new(
+      :identity_provider_configs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListNodegroupsRequest
     #   data as a hash:
     #
@@ -2365,10 +2636,10 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] node_role
-    #   The IAM role associated with your node group. The Amazon EKS worker
-    #   node `kubelet` daemon makes calls to AWS APIs on your behalf. Worker
-    #   nodes receive permissions for these API calls through an IAM
-    #   instance profile and associated policies.
+    #   The IAM role associated with your node group. The Amazon EKS node
+    #   `kubelet` daemon makes calls to AWS APIs on your behalf. Nodes
+    #   receive permissions for these API calls through an IAM instance
+    #   profile and associated policies.
     #   @return [String]
     #
     # @!attribute [rw] labels
@@ -2461,7 +2732,7 @@ module Aws::EKS
     #
     # @!attribute [rw] remote_access_security_group
     #   The remote access security group associated with the node group.
-    #   This security group controls SSH access to the worker nodes.
+    #   This security group controls SSH access to the nodes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodegroupResources AWS API Documentation
@@ -2488,19 +2759,24 @@ module Aws::EKS
     #       }
     #
     # @!attribute [rw] min_size
-    #   The minimum number of worker nodes that the managed node group can
-    #   scale in to. This number must be greater than zero.
+    #   The minimum number of nodes that the managed node group can scale in
+    #   to. This number must be greater than zero.
     #   @return [Integer]
     #
     # @!attribute [rw] max_size
-    #   The maximum number of worker nodes that the managed node group can
-    #   scale out to. Managed node groups can support up to 100 nodes by
-    #   default.
+    #   The maximum number of nodes that the managed node group can scale
+    #   out to. For information about the maximum number that you can
+    #   specify, see [Amazon EKS service quotas][1] in the *Amazon EKS User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html
     #   @return [Integer]
     #
     # @!attribute [rw] desired_size
-    #   The current number of worker nodes that the managed node group
-    #   should maintain.
+    #   The current number of nodes that the managed node group should
+    #   maintain.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodegroupScalingConfig AWS API Documentation
@@ -2527,21 +2803,202 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An object representing the [OpenID Connect][1] identity provider
-    # information for the cluster.
+    # An object representing the [OpenID Connect][1] (OIDC) identity
+    # provider information for the cluster.
     #
     #
     #
     # [1]: https://openid.net/connect/
     #
     # @!attribute [rw] issuer
-    #   The issuer URL for the OpenID Connect identity provider.
+    #   The issuer URL for the OIDC identity provider.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/OIDC AWS API Documentation
     #
     class OIDC < Struct.new(
       :issuer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the configuration for an OpenID Connect
+    # (OIDC) identity provider.
+    #
+    # @!attribute [rw] identity_provider_config_name
+    #   The name of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_provider_config_arn
+    #   The ARN of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_name
+    #   The cluster that the configuration is associated to.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer_url
+    #   The URL of the OIDC identity provider that allows the API server to
+    #   discover public signing keys for verifying tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   This is also known as *audience*. The ID of the client application
+    #   that makes authentication requests to the OIDC identity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] username_claim
+    #   The JSON Web token (JWT) claim that is used as the username.
+    #   @return [String]
+    #
+    # @!attribute [rw] username_prefix
+    #   The prefix that is prepended to username claims to prevent clashes
+    #   with existing names. The prefix can't contain `system:`
+    #   @return [String]
+    #
+    # @!attribute [rw] groups_claim
+    #   The JSON web token (JWT) claim that the provider uses to return your
+    #   groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] groups_prefix
+    #   The prefix that is prepended to group claims to prevent clashes with
+    #   existing names (such as `system:` groups). For example, the value`
+    #   oidc:` creates group names like `oidc:engineering` and `oidc:infra`.
+    #   The prefix can't contain `system:`
+    #   @return [String]
+    #
+    # @!attribute [rw] required_claims
+    #   The key-value pairs that describe required claims in the identity
+    #   token. If set, each claim is verified to be present in the token
+    #   with a matching value.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   The metadata to apply to the provider configuration to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value, both of which you defined.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the OIDC identity provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/OidcIdentityProviderConfig AWS API Documentation
+    #
+    class OidcIdentityProviderConfig < Struct.new(
+      :identity_provider_config_name,
+      :identity_provider_config_arn,
+      :cluster_name,
+      :issuer_url,
+      :client_id,
+      :username_claim,
+      :username_prefix,
+      :groups_claim,
+      :groups_prefix,
+      :required_claims,
+      :tags,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing an OpenID Connect (OIDC) configuration. Before
+    # associating an OIDC identity provider to your cluster, review the
+    # considerations in [Authenticating users for your cluster from an
+    # OpenID Connect identity provider][1] in the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html
+    #
+    # @note When making an API call, you may pass OidcIdentityProviderConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identity_provider_config_name: "String", # required
+    #         issuer_url: "String", # required
+    #         client_id: "String", # required
+    #         username_claim: "String",
+    #         username_prefix: "String",
+    #         groups_claim: "String",
+    #         groups_prefix: "String",
+    #         required_claims: {
+    #           "requiredClaimsKey" => "requiredClaimsValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] identity_provider_config_name
+    #   The name of the OIDC provider configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer_url
+    #   The URL of the OpenID identity provider that allows the API server
+    #   to discover public signing keys for verifying tokens. The URL must
+    #   begin with `https://` and should correspond to the `iss` claim in
+    #   the provider's OIDC ID tokens. Per the OIDC standard, path
+    #   components are allowed but query parameters are not. Typically the
+    #   URL consists of only a hostname, like `https://server.example.org`
+    #   or `https://example.com`. This URL should point to the level below
+    #   `.well-known/openid-configuration` and must be publicly accessible
+    #   over the internet.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   This is also known as *audience*. The ID for the client application
+    #   that makes authentication requests to the OpenID identity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] username_claim
+    #   The JSON Web Token (JWT) claim to use as the username. The default
+    #   is `sub`, which is expected to be a unique identifier of the end
+    #   user. You can choose other claims, such as `email` or `name`,
+    #   depending on the OpenID identity provider. Claims other than `email`
+    #   are prefixed with the issuer URL to prevent naming clashes with
+    #   other plug-ins.
+    #   @return [String]
+    #
+    # @!attribute [rw] username_prefix
+    #   The prefix that is prepended to username claims to prevent clashes
+    #   with existing names. If you do not provide this field, and
+    #   `username` is a value other than `email`, the prefix defaults to
+    #   `issuerurl#`. You can use the value `-` to disable all prefixing.
+    #   @return [String]
+    #
+    # @!attribute [rw] groups_claim
+    #   The JWT claim that the provider uses to return your groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] groups_prefix
+    #   The prefix that is prepended to group claims to prevent clashes with
+    #   existing names (such as `system:` groups). For example, the value`
+    #   oidc:` will create group names like `oidc:engineering` and
+    #   `oidc:infra`.
+    #   @return [String]
+    #
+    # @!attribute [rw] required_claims
+    #   The key value pairs that describe required claims in the identity
+    #   token. If set, each claim is verified to be present in the token
+    #   with a matching value. For the maximum number of claims that you can
+    #   require, see [Amazon EKS service quotas][1] in the *Amazon EKS User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/OidcIdentityProviderConfigRequest AWS API Documentation
+    #
+    class OidcIdentityProviderConfigRequest < Struct.new(
+      :identity_provider_config_name,
+      :issuer_url,
+      :client_id,
+      :username_claim,
+      :username_prefix,
+      :groups_claim,
+      :groups_prefix,
+      :required_claims)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2590,9 +3047,9 @@ module Aws::EKS
     #
     # @!attribute [rw] ec2_ssh_key
     #   The Amazon EC2 SSH key that provides access for SSH communication
-    #   with the worker nodes in the managed node group. For more
-    #   information, see [Amazon EC2 Key Pairs][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide for Linux Instances*.
+    #   with the nodes in the managed node group. For more information, see
+    #   [Amazon EC2 Key Pairs][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide for Linux Instances*.
     #
     #
     #
@@ -2601,11 +3058,11 @@ module Aws::EKS
     #
     # @!attribute [rw] source_security_groups
     #   The security groups that are allowed SSH access (port 22) to the
-    #   worker nodes. If you specify an Amazon EC2 SSH key but do not
-    #   specify a source security group when you create a managed node
-    #   group, then port 22 on the worker nodes is opened to the internet
-    #   (0.0.0.0/0). For more information, see [Security Groups for Your
-    #   VPC][1] in the *Amazon Virtual Private Cloud User Guide*.
+    #   nodes. If you specify an Amazon EC2 SSH key but do not specify a
+    #   source security group when you create a managed node group, then
+    #   port 22 on the nodes is opened to the internet (0.0.0.0/0). For more
+    #   information, see [Security Groups for Your VPC][1] in the *Amazon
+    #   Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -3348,19 +3805,18 @@ module Aws::EKS
     #       }
     #
     # @!attribute [rw] subnet_ids
-    #   Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates
+    #   Specify subnets for your Amazon EKS nodes. Amazon EKS creates
     #   cross-account elastic network interfaces in these subnets to allow
-    #   communication between your worker nodes and the Kubernetes control
-    #   plane.
+    #   communication between your nodes and the Kubernetes control plane.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
     #   Specify one or more security groups for the cross-account elastic
     #   network interfaces that Amazon EKS creates to use to allow
-    #   communication between your worker nodes and the Kubernetes control
-    #   plane. If you don't specify any security groups, then familiarize
-    #   yourself with the difference between Amazon EKS defaults for
-    #   clusters deployed with Kubernetes:
+    #   communication between your nodes and the Kubernetes control plane.
+    #   If you don't specify any security groups, then familiarize yourself
+    #   with the difference between Amazon EKS defaults for clusters
+    #   deployed with Kubernetes:
     #
     #   * 1\.14 Amazon EKS platform version `eks.2` and earlier
     #
@@ -3394,12 +3850,12 @@ module Aws::EKS
     #   access, Kubernetes API requests from within your cluster's VPC use
     #   the private VPC endpoint. The default value for this parameter is
     #   `false`, which disables private access for your Kubernetes API
-    #   server. If you disable private access and you have worker nodes or
-    #   AWS Fargate pods in the cluster, then ensure that
-    #   `publicAccessCidrs` includes the necessary CIDR blocks for
-    #   communication with the worker nodes or Fargate pods. For more
-    #   information, see [Amazon EKS Cluster Endpoint Access Control][1] in
-    #   the <i> <i>Amazon EKS User Guide</i> </i>.
+    #   server. If you disable private access and you have nodes or AWS
+    #   Fargate pods in the cluster, then ensure that `publicAccessCidrs`
+    #   includes the necessary CIDR blocks for communication with the nodes
+    #   or Fargate pods. For more information, see [Amazon EKS Cluster
+    #   Endpoint Access Control][1] in the <i> <i>Amazon EKS User Guide</i>
+    #   </i>.
     #
     #
     #
@@ -3411,8 +3867,8 @@ module Aws::EKS
     #   Kubernetes API server endpoint. Communication to the endpoint from
     #   addresses outside of the CIDR blocks that you specify is denied. The
     #   default value is `0.0.0.0/0`. If you've disabled private endpoint
-    #   access and you have worker nodes or AWS Fargate pods in the cluster,
-    #   then ensure that you specify the necessary CIDR blocks. For more
+    #   access and you have nodes or AWS Fargate pods in the cluster, then
+    #   ensure that you specify the necessary CIDR blocks. For more
     #   information, see [Amazon EKS Cluster Endpoint Access Control][1] in
     #   the <i> <i>Amazon EKS User Guide</i> </i>.
     #
@@ -3443,7 +3899,7 @@ module Aws::EKS
     # @!attribute [rw] security_group_ids
     #   The security groups associated with the cross-account elastic
     #   network interfaces that are used to allow communication between your
-    #   worker nodes and the Kubernetes control plane.
+    #   nodes and the Kubernetes control plane.
     #   @return [Array<String>]
     #
     # @!attribute [rw] cluster_security_group_id
@@ -3468,12 +3924,12 @@ module Aws::EKS
     #   endpoint is enabled. If the Amazon EKS private API server endpoint
     #   is enabled, Kubernetes API requests that originate from within your
     #   cluster's VPC use the private VPC endpoint instead of traversing
-    #   the internet. If this value is disabled and you have worker nodes or
-    #   AWS Fargate pods in the cluster, then ensure that
-    #   `publicAccessCidrs` includes the necessary CIDR blocks for
-    #   communication with the worker nodes or Fargate pods. For more
-    #   information, see [Amazon EKS Cluster Endpoint Access Control][1] in
-    #   the <i> <i>Amazon EKS User Guide</i> </i>.
+    #   the internet. If this value is disabled and you have nodes or AWS
+    #   Fargate pods in the cluster, then ensure that `publicAccessCidrs`
+    #   includes the necessary CIDR blocks for communication with the nodes
+    #   or Fargate pods. For more information, see [Amazon EKS Cluster
+    #   Endpoint Access Control][1] in the <i> <i>Amazon EKS User Guide</i>
+    #   </i>.
     #
     #
     #
@@ -3485,10 +3941,10 @@ module Aws::EKS
     #   Kubernetes API server endpoint. Communication to the endpoint from
     #   addresses outside of the listed CIDR blocks is denied. The default
     #   value is `0.0.0.0/0`. If you've disabled private endpoint access
-    #   and you have worker nodes or AWS Fargate pods in the cluster, then
-    #   ensure that the necessary CIDR blocks are listed. For more
-    #   information, see [Amazon EKS Cluster Endpoint Access Control][1] in
-    #   the <i> <i>Amazon EKS User Guide</i> </i>.
+    #   and you have nodes or AWS Fargate pods in the cluster, then ensure
+    #   that the necessary CIDR blocks are listed. For more information, see
+    #   [Amazon EKS Cluster Endpoint Access Control][1] in the <i> <i>Amazon
+    #   EKS User Guide</i> </i>.
     #
     #
     #

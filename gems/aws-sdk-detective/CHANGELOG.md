@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2021-02-12)
+------------------
+
+* Feature - The API definition now indicates that the format for timestamps is an ISO 8601 date-time string
+
 1.12.0 (2021-02-02)
 ------------------
 

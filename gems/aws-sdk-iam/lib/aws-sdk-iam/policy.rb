@@ -42,7 +42,7 @@ module Aws::IAM
 
     # The stable and unique string identifying the policy.
     #
-    # For more information about IDs, see [IAM Identifiers][1] in the *IAM
+    # For more information about IDs, see [IAM identifiers][1] in the *IAM
     # User Guide*.
     #
     #
@@ -55,7 +55,7 @@ module Aws::IAM
 
     # The path to the policy.
     #
-    # For more information about paths, see [IAM Identifiers][1] in the *IAM
+    # For more information about paths, see [IAM identifiers][1] in the *IAM
     # User Guide*.
     #
     #
@@ -84,7 +84,7 @@ module Aws::IAM
     # to set the permissions boundary.
     #
     # For more information about permissions boundaries, see [Permissions
-    # Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    # boundaries for IAM identities ][1] in the *IAM User Guide*.
     #
     #
     #
@@ -135,6 +135,18 @@ module Aws::IAM
     # @return [Time]
     def update_date
       data[:update_date]
+    end
+
+    # A list of tags that are attached to the instance profile. For more
+    # information about tagging, see [Tagging IAM resources][1] in the *IAM
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
     end
 
     # @!endgroup
@@ -385,7 +397,7 @@ module Aws::IAM
     #   for the IAM users, groups, and roles that the policy is attached to.
     #
     #   For more information about managed policy versions, see [Versioning
-    #   for Managed Policies][1] in the *IAM User Guide*.
+    #   for managed policies][1] in the *IAM User Guide*.
     #
     #
     #

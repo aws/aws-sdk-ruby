@@ -53,6 +53,18 @@ module Aws::IAM
       data[:valid_until]
     end
 
+    # A list of tags that are attached to the specified IAM SAML provider.
+    # The returned list of tags is sorted by tag key. For more information
+    # about tagging, see [Tagging IAM resources][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
+    end
+
     # @!endgroup
 
     # @return [Client]

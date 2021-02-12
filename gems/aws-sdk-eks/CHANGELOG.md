@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2021-02-12)
+------------------
+
+* Feature - Amazon EKS now supports OpenId Connect (OIDC) compatible identity providers as a user authentication option
+
 1.47.0 (2021-02-02)
 ------------------
 

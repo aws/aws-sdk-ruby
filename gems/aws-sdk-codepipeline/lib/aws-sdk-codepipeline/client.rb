@@ -871,6 +871,94 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
+    # Returns information about an action type created for an external
+    # provider, where the action is to be used by customers of the external
+    # provider. The action can have been created with any supported
+    # integration model.
+    #
+    # @option params [required, String] :category
+    #   A category defines what kind of action can be taken in the stage.
+    #   Valid categories are limited to one of the following values:
+    #
+    #   * `Source`
+    #
+    #   * `Build`
+    #
+    #   * `Test`
+    #
+    #   * `Deploy`
+    #
+    #   * `Approval`
+    #
+    #   * `Invoke`
+    #
+    # @option params [required, String] :owner
+    #   The creator of an action type that has been created with any supported
+    #   integration model. There are two valid values for the `owner` field in
+    #   the action type category: `AWS` and `ThirdParty`.
+    #
+    # @option params [required, String] :provider
+    #   The provider of the action type being called. The provider name is
+    #   specified when the action type is created.
+    #
+    # @option params [required, String] :version
+    #   A string that describes the action type version.
+    #
+    # @return [Types::GetActionTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetActionTypeOutput#action_type #action_type} => Types::ActionTypeDeclaration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_action_type({
+    #     category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
+    #     owner: "ActionTypeOwner", # required
+    #     provider: "ActionProvider", # required
+    #     version: "Version", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_type.description #=> String
+    #   resp.action_type.executor.configuration.lambda_executor_configuration.lambda_function_arn #=> String
+    #   resp.action_type.executor.configuration.job_worker_executor_configuration.polling_accounts #=> Array
+    #   resp.action_type.executor.configuration.job_worker_executor_configuration.polling_accounts[0] #=> String
+    #   resp.action_type.executor.configuration.job_worker_executor_configuration.polling_service_principals #=> Array
+    #   resp.action_type.executor.configuration.job_worker_executor_configuration.polling_service_principals[0] #=> String
+    #   resp.action_type.executor.type #=> String, one of "JobWorker", "Lambda"
+    #   resp.action_type.executor.policy_statements_template #=> String
+    #   resp.action_type.executor.job_timeout #=> Integer
+    #   resp.action_type.id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
+    #   resp.action_type.id.owner #=> String
+    #   resp.action_type.id.provider #=> String
+    #   resp.action_type.id.version #=> String
+    #   resp.action_type.input_artifact_details.minimum_count #=> Integer
+    #   resp.action_type.input_artifact_details.maximum_count #=> Integer
+    #   resp.action_type.output_artifact_details.minimum_count #=> Integer
+    #   resp.action_type.output_artifact_details.maximum_count #=> Integer
+    #   resp.action_type.permissions.allowed_accounts #=> Array
+    #   resp.action_type.permissions.allowed_accounts[0] #=> String
+    #   resp.action_type.properties #=> Array
+    #   resp.action_type.properties[0].name #=> String
+    #   resp.action_type.properties[0].optional #=> Boolean
+    #   resp.action_type.properties[0].key #=> Boolean
+    #   resp.action_type.properties[0].no_echo #=> Boolean
+    #   resp.action_type.properties[0].queryable #=> Boolean
+    #   resp.action_type.properties[0].description #=> String
+    #   resp.action_type.urls.configuration_url #=> String
+    #   resp.action_type.urls.entity_url_template #=> String
+    #   resp.action_type.urls.execution_url_template #=> String
+    #   resp.action_type.urls.revision_url_template #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetActionType AWS API Documentation
+    #
+    # @overload get_action_type(params = {})
+    # @param [Hash] params ({})
+    def get_action_type(params = {}, options = {})
+      req = build_request(:get_action_type, params)
+      req.send_request(options)
+    end
+
     # Returns information about a job. Used for custom actions only.
     #
     # When this API is called, AWS CodePipeline returns temporary
@@ -1299,6 +1387,9 @@ module Aws::CodePipeline
     #   call, which can be used to return the next set of action types in the
     #   list.
     #
+    # @option params [String] :region_filter
+    #   The Region to filter on for the list of action types.
+    #
     # @return [Types::ListActionTypesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListActionTypesOutput#action_types #action_types} => Array&lt;Types::ActionType&gt;
@@ -1311,6 +1402,7 @@ module Aws::CodePipeline
     #   resp = client.list_action_types({
     #     action_owner_filter: "AWS", # accepts AWS, ThirdParty, Custom
     #     next_token: "NextToken",
+    #     region_filter: "AWSRegionName",
     #   })
     #
     # @example Response structure
@@ -2266,6 +2358,80 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
+    # Updates an action type that has been created with any supported
+    # integration model, where the action type is to be used by customers of
+    # the action type provider. Use a JSON file with the action definition
+    # and `UpdateActionType` to provide the full structure.
+    #
+    # @option params [Types::ActionTypeDeclaration] :action_type
+    #   The action type definition for the action type to be updated.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_action_type({
+    #     action_type: {
+    #       description: "ActionTypeDescription",
+    #       executor: { # required
+    #         configuration: { # required
+    #           lambda_executor_configuration: {
+    #             lambda_function_arn: "LambdaFunctionArn", # required
+    #           },
+    #           job_worker_executor_configuration: {
+    #             polling_accounts: ["AccountId"],
+    #             polling_service_principals: ["ServicePrincipal"],
+    #           },
+    #         },
+    #         type: "JobWorker", # required, accepts JobWorker, Lambda
+    #         policy_statements_template: "PolicyStatementsTemplate",
+    #         job_timeout: 1,
+    #       },
+    #       id: { # required
+    #         category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
+    #         owner: "ActionTypeOwner", # required
+    #         provider: "ActionProvider", # required
+    #         version: "Version", # required
+    #       },
+    #       input_artifact_details: { # required
+    #         minimum_count: 1, # required
+    #         maximum_count: 1, # required
+    #       },
+    #       output_artifact_details: { # required
+    #         minimum_count: 1, # required
+    #         maximum_count: 1, # required
+    #       },
+    #       permissions: {
+    #         allowed_accounts: ["AllowedAccount"], # required
+    #       },
+    #       properties: [
+    #         {
+    #           name: "ActionConfigurationKey", # required
+    #           optional: false, # required
+    #           key: false, # required
+    #           no_echo: false, # required
+    #           queryable: false,
+    #           description: "PropertyDescription",
+    #         },
+    #       ],
+    #       urls: {
+    #         configuration_url: "Url",
+    #         entity_url_template: "UrlTemplate",
+    #         execution_url_template: "UrlTemplate",
+    #         revision_url_template: "UrlTemplate",
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UpdateActionType AWS API Documentation
+    #
+    # @overload update_action_type(params = {})
+    # @param [Hash] params ({})
+    def update_action_type(params = {}, options = {})
+      req = build_request(:update_action_type, params)
+      req.send_request(options)
+    end
+
     # Updates a specified pipeline with edits or changes to its structure.
     # Use a JSON file with the pipeline structure and `UpdatePipeline` to
     # provide the full structure of the pipeline. Updating the pipeline
@@ -2403,7 +2569,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

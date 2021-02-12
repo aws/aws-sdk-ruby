@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2021-02-12)
+------------------
+
+* Feature - Increased maximum char size of PutUsers and PutItems properties.
+
 1.15.0 (2021-02-02)
 ------------------
 

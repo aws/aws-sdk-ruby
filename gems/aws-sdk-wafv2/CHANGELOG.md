@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2021-02-12)
+------------------
+
+* Feature - Added the option to inspect the web request body as parsed and filtered JSON (new FieldToMatch type JsonBody), in addition to the existing option to inspect the web request body as plain text.
+
 1.15.0 (2021-02-02)
 ------------------
 

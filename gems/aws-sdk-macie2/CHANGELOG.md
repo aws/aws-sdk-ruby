@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2021-02-12)
+------------------
+
+* Feature - This release of the Amazon Macie API replaces the term master account with the term administrator account, including deprecating APIs that use the previous term and adding APIs that use the new term.
+
 1.22.0 (2021-02-08)
 ------------------
 

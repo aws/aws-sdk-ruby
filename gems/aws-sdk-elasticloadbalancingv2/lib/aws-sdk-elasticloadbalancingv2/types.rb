@@ -4078,6 +4078,11 @@ module Aws::ElasticLoadBalancingV2
     #     ends, the target receives its full share of traffic. The range is
     #     30-900 seconds (15 minutes). The default is 0 seconds (disabled).
     #
+    #   * `stickiness.app_cookie.cookie_name` - Indicates the name of the
+    #     application-based cookie. Names that start with the following
+    #     names are not allowed: `AWSALB`, `AWSALBAPP`, and `AWSALBTG`.
+    #     They're reserved for use by the load balancer.
+    #
     #   * `stickiness.app_cookie.duration_seconds` - The time period, in
     #     seconds, during which requests from a client should be routed to
     #     the same target. After this time period expires, the
@@ -4117,7 +4122,8 @@ module Aws::ElasticLoadBalancingV2
     #     preservation is enabled. The value is `true` or `false`. The
     #     default is disabled if the target group type is IP address and the
     #     target group protocol is TCP or TLS. Otherwise, the default is
-    #     enabled.
+    #     enabled. Client IP preservation cannot be disabled for UDP and
+    #     TCP\_UDP target groups.
     #
     #   * `proxy_protocol_v2.enabled` - Indicates whether Proxy Protocol
     #     version 2 is enabled. The value is `true` or `false`. The default

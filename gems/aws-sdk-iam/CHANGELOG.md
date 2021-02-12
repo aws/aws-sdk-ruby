@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2021-02-12)
+------------------
+
+* Feature - AWS Identity and Access Management now supports tagging for the following resources: customer managed policies, identity providers, instance profiles, server certificates, and virtual MFA devices.
+
 1.47.0 (2021-02-02)
 ------------------
 

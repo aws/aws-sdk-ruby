@@ -74,6 +74,6 @@ require_relative 'aws-sdk-rds/customizations'
 # @!group service
 module Aws::RDS
 
-  GEM_VERSION = '1.113.0'
+  GEM_VERSION = '1.114.0'
 
 end

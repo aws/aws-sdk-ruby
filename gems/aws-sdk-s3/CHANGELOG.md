@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.88.1 (2021-02-12)
+------------------
+
 * Issue - Fixed an issue with some plugins expecting `#size` to exist on a request body for streaming IO.
 
 1.88.0 (2021-02-02)

@@ -52,10 +52,23 @@ module Aws::CodePipeline
     ActionState = Shapes::StructureShape.new(name: 'ActionState')
     ActionStateList = Shapes::ListShape.new(name: 'ActionStateList')
     ActionType = Shapes::StructureShape.new(name: 'ActionType')
+    ActionTypeAlreadyExistsException = Shapes::StructureShape.new(name: 'ActionTypeAlreadyExistsException')
+    ActionTypeArtifactDetails = Shapes::StructureShape.new(name: 'ActionTypeArtifactDetails')
+    ActionTypeDeclaration = Shapes::StructureShape.new(name: 'ActionTypeDeclaration')
+    ActionTypeDescription = Shapes::StringShape.new(name: 'ActionTypeDescription')
+    ActionTypeExecutor = Shapes::StructureShape.new(name: 'ActionTypeExecutor')
     ActionTypeId = Shapes::StructureShape.new(name: 'ActionTypeId')
+    ActionTypeIdentifier = Shapes::StructureShape.new(name: 'ActionTypeIdentifier')
     ActionTypeList = Shapes::ListShape.new(name: 'ActionTypeList')
     ActionTypeNotFoundException = Shapes::StructureShape.new(name: 'ActionTypeNotFoundException')
+    ActionTypeOwner = Shapes::StringShape.new(name: 'ActionTypeOwner')
+    ActionTypePermissions = Shapes::StructureShape.new(name: 'ActionTypePermissions')
+    ActionTypeProperties = Shapes::ListShape.new(name: 'ActionTypeProperties')
+    ActionTypeProperty = Shapes::StructureShape.new(name: 'ActionTypeProperty')
     ActionTypeSettings = Shapes::StructureShape.new(name: 'ActionTypeSettings')
+    ActionTypeUrls = Shapes::StructureShape.new(name: 'ActionTypeUrls')
+    AllowedAccount = Shapes::StringShape.new(name: 'AllowedAccount')
+    AllowedAccounts = Shapes::ListShape.new(name: 'AllowedAccounts')
     ApprovalAlreadyCompletedException = Shapes::StructureShape.new(name: 'ApprovalAlreadyCompletedException')
     ApprovalResult = Shapes::StructureShape.new(name: 'ApprovalResult')
     ApprovalStatus = Shapes::StringShape.new(name: 'ApprovalStatus')
@@ -111,10 +124,14 @@ module Aws::CodePipeline
     ExecutionId = Shapes::StringShape.new(name: 'ExecutionId')
     ExecutionSummary = Shapes::StringShape.new(name: 'ExecutionSummary')
     ExecutionTrigger = Shapes::StructureShape.new(name: 'ExecutionTrigger')
+    ExecutorConfiguration = Shapes::StructureShape.new(name: 'ExecutorConfiguration')
+    ExecutorType = Shapes::StringShape.new(name: 'ExecutorType')
     ExternalExecutionId = Shapes::StringShape.new(name: 'ExternalExecutionId')
     ExternalExecutionSummary = Shapes::StringShape.new(name: 'ExternalExecutionSummary')
     FailureDetails = Shapes::StructureShape.new(name: 'FailureDetails')
     FailureType = Shapes::StringShape.new(name: 'FailureType')
+    GetActionTypeInput = Shapes::StructureShape.new(name: 'GetActionTypeInput')
+    GetActionTypeOutput = Shapes::StructureShape.new(name: 'GetActionTypeOutput')
     GetJobDetailsInput = Shapes::StructureShape.new(name: 'GetJobDetailsInput')
     GetJobDetailsOutput = Shapes::StructureShape.new(name: 'GetJobDetailsOutput')
     GetPipelineExecutionInput = Shapes::StructureShape.new(name: 'GetPipelineExecutionInput')
@@ -148,7 +165,11 @@ module Aws::CodePipeline
     JobList = Shapes::ListShape.new(name: 'JobList')
     JobNotFoundException = Shapes::StructureShape.new(name: 'JobNotFoundException')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
+    JobTimeout = Shapes::IntegerShape.new(name: 'JobTimeout')
+    JobWorkerExecutorConfiguration = Shapes::StructureShape.new(name: 'JobWorkerExecutorConfiguration')
     JsonPath = Shapes::StringShape.new(name: 'JsonPath')
+    LambdaExecutorConfiguration = Shapes::StructureShape.new(name: 'LambdaExecutorConfiguration')
+    LambdaFunctionArn = Shapes::StringShape.new(name: 'LambdaFunctionArn')
     LastChangedAt = Shapes::TimestampShape.new(name: 'LastChangedAt')
     LastChangedBy = Shapes::StringShape.new(name: 'LastChangedBy')
     LastUpdatedBy = Shapes::StringShape.new(name: 'LastUpdatedBy')
@@ -169,8 +190,10 @@ module Aws::CodePipeline
     MatchEquals = Shapes::StringShape.new(name: 'MatchEquals')
     MaxBatchSize = Shapes::IntegerShape.new(name: 'MaxBatchSize')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MaximumActionTypeArtifactCount = Shapes::IntegerShape.new(name: 'MaximumActionTypeArtifactCount')
     MaximumArtifactCount = Shapes::IntegerShape.new(name: 'MaximumArtifactCount')
     Message = Shapes::StringShape.new(name: 'Message')
+    MinimumActionTypeArtifactCount = Shapes::IntegerShape.new(name: 'MinimumActionTypeArtifactCount')
     MinimumArtifactCount = Shapes::IntegerShape.new(name: 'MinimumArtifactCount')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     Nonce = Shapes::StringShape.new(name: 'Nonce')
@@ -202,10 +225,14 @@ module Aws::CodePipeline
     PipelineSummary = Shapes::StructureShape.new(name: 'PipelineSummary')
     PipelineVersion = Shapes::IntegerShape.new(name: 'PipelineVersion')
     PipelineVersionNotFoundException = Shapes::StructureShape.new(name: 'PipelineVersionNotFoundException')
+    PolicyStatementsTemplate = Shapes::StringShape.new(name: 'PolicyStatementsTemplate')
     PollForJobsInput = Shapes::StructureShape.new(name: 'PollForJobsInput')
     PollForJobsOutput = Shapes::StructureShape.new(name: 'PollForJobsOutput')
     PollForThirdPartyJobsInput = Shapes::StructureShape.new(name: 'PollForThirdPartyJobsInput')
     PollForThirdPartyJobsOutput = Shapes::StructureShape.new(name: 'PollForThirdPartyJobsOutput')
+    PollingAccountList = Shapes::ListShape.new(name: 'PollingAccountList')
+    PollingServicePrincipalList = Shapes::ListShape.new(name: 'PollingServicePrincipalList')
+    PropertyDescription = Shapes::StringShape.new(name: 'PropertyDescription')
     PutActionRevisionInput = Shapes::StructureShape.new(name: 'PutActionRevisionInput')
     PutActionRevisionOutput = Shapes::StructureShape.new(name: 'PutActionRevisionOutput')
     PutApprovalResultInput = Shapes::StructureShape.new(name: 'PutApprovalResultInput')
@@ -219,6 +246,7 @@ module Aws::CodePipeline
     QueryParamMap = Shapes::MapShape.new(name: 'QueryParamMap')
     RegisterWebhookWithThirdPartyInput = Shapes::StructureShape.new(name: 'RegisterWebhookWithThirdPartyInput')
     RegisterWebhookWithThirdPartyOutput = Shapes::StructureShape.new(name: 'RegisterWebhookWithThirdPartyOutput')
+    RequestFailedException = Shapes::StructureShape.new(name: 'RequestFailedException')
     ResolvedActionConfigurationMap = Shapes::MapShape.new(name: 'ResolvedActionConfigurationMap')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -235,6 +263,7 @@ module Aws::CodePipeline
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
     S3ObjectKey = Shapes::StringShape.new(name: 'S3ObjectKey')
     SecretAccessKey = Shapes::StringShape.new(name: 'SecretAccessKey')
+    ServicePrincipal = Shapes::StringShape.new(name: 'ServicePrincipal')
     SessionToken = Shapes::StringShape.new(name: 'SessionToken')
     SourceRevision = Shapes::StructureShape.new(name: 'SourceRevision')
     SourceRevisionList = Shapes::ListShape.new(name: 'SourceRevisionList')
@@ -278,6 +307,7 @@ module Aws::CodePipeline
     TriggerType = Shapes::StringShape.new(name: 'TriggerType')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
+    UpdateActionTypeInput = Shapes::StructureShape.new(name: 'UpdateActionTypeInput')
     UpdatePipelineInput = Shapes::StructureShape.new(name: 'UpdatePipelineInput')
     UpdatePipelineOutput = Shapes::StructureShape.new(name: 'UpdatePipelineOutput')
     Url = Shapes::StringShape.new(name: 'Url')
@@ -423,21 +453,70 @@ module Aws::CodePipeline
     ActionType.add_member(:output_artifact_details, Shapes::ShapeRef.new(shape: ArtifactDetails, required: true, location_name: "outputArtifactDetails"))
     ActionType.struct_class = Types::ActionType
 
+    ActionTypeAlreadyExistsException.struct_class = Types::ActionTypeAlreadyExistsException
+
+    ActionTypeArtifactDetails.add_member(:minimum_count, Shapes::ShapeRef.new(shape: MinimumActionTypeArtifactCount, required: true, location_name: "minimumCount"))
+    ActionTypeArtifactDetails.add_member(:maximum_count, Shapes::ShapeRef.new(shape: MaximumActionTypeArtifactCount, required: true, location_name: "maximumCount"))
+    ActionTypeArtifactDetails.struct_class = Types::ActionTypeArtifactDetails
+
+    ActionTypeDeclaration.add_member(:description, Shapes::ShapeRef.new(shape: ActionTypeDescription, location_name: "description"))
+    ActionTypeDeclaration.add_member(:executor, Shapes::ShapeRef.new(shape: ActionTypeExecutor, required: true, location_name: "executor"))
+    ActionTypeDeclaration.add_member(:id, Shapes::ShapeRef.new(shape: ActionTypeIdentifier, required: true, location_name: "id"))
+    ActionTypeDeclaration.add_member(:input_artifact_details, Shapes::ShapeRef.new(shape: ActionTypeArtifactDetails, required: true, location_name: "inputArtifactDetails"))
+    ActionTypeDeclaration.add_member(:output_artifact_details, Shapes::ShapeRef.new(shape: ActionTypeArtifactDetails, required: true, location_name: "outputArtifactDetails"))
+    ActionTypeDeclaration.add_member(:permissions, Shapes::ShapeRef.new(shape: ActionTypePermissions, location_name: "permissions"))
+    ActionTypeDeclaration.add_member(:properties, Shapes::ShapeRef.new(shape: ActionTypeProperties, location_name: "properties"))
+    ActionTypeDeclaration.add_member(:urls, Shapes::ShapeRef.new(shape: ActionTypeUrls, location_name: "urls"))
+    ActionTypeDeclaration.struct_class = Types::ActionTypeDeclaration
+
+    ActionTypeExecutor.add_member(:configuration, Shapes::ShapeRef.new(shape: ExecutorConfiguration, required: true, location_name: "configuration"))
+    ActionTypeExecutor.add_member(:type, Shapes::ShapeRef.new(shape: ExecutorType, required: true, location_name: "type"))
+    ActionTypeExecutor.add_member(:policy_statements_template, Shapes::ShapeRef.new(shape: PolicyStatementsTemplate, location_name: "policyStatementsTemplate"))
+    ActionTypeExecutor.add_member(:job_timeout, Shapes::ShapeRef.new(shape: JobTimeout, location_name: "jobTimeout"))
+    ActionTypeExecutor.struct_class = Types::ActionTypeExecutor
+
     ActionTypeId.add_member(:category, Shapes::ShapeRef.new(shape: ActionCategory, required: true, location_name: "category"))
     ActionTypeId.add_member(:owner, Shapes::ShapeRef.new(shape: ActionOwner, required: true, location_name: "owner"))
     ActionTypeId.add_member(:provider, Shapes::ShapeRef.new(shape: ActionProvider, required: true, location_name: "provider"))
     ActionTypeId.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "version"))
     ActionTypeId.struct_class = Types::ActionTypeId
 
+    ActionTypeIdentifier.add_member(:category, Shapes::ShapeRef.new(shape: ActionCategory, required: true, location_name: "category"))
+    ActionTypeIdentifier.add_member(:owner, Shapes::ShapeRef.new(shape: ActionTypeOwner, required: true, location_name: "owner"))
+    ActionTypeIdentifier.add_member(:provider, Shapes::ShapeRef.new(shape: ActionProvider, required: true, location_name: "provider"))
+    ActionTypeIdentifier.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "version"))
+    ActionTypeIdentifier.struct_class = Types::ActionTypeIdentifier
+
     ActionTypeList.member = Shapes::ShapeRef.new(shape: ActionType)
 
     ActionTypeNotFoundException.struct_class = Types::ActionTypeNotFoundException
+
+    ActionTypePermissions.add_member(:allowed_accounts, Shapes::ShapeRef.new(shape: AllowedAccounts, required: true, location_name: "allowedAccounts"))
+    ActionTypePermissions.struct_class = Types::ActionTypePermissions
+
+    ActionTypeProperties.member = Shapes::ShapeRef.new(shape: ActionTypeProperty)
+
+    ActionTypeProperty.add_member(:name, Shapes::ShapeRef.new(shape: ActionConfigurationKey, required: true, location_name: "name"))
+    ActionTypeProperty.add_member(:optional, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "optional"))
+    ActionTypeProperty.add_member(:key, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "key"))
+    ActionTypeProperty.add_member(:no_echo, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "noEcho"))
+    ActionTypeProperty.add_member(:queryable, Shapes::ShapeRef.new(shape: Boolean, location_name: "queryable"))
+    ActionTypeProperty.add_member(:description, Shapes::ShapeRef.new(shape: PropertyDescription, location_name: "description"))
+    ActionTypeProperty.struct_class = Types::ActionTypeProperty
 
     ActionTypeSettings.add_member(:third_party_configuration_url, Shapes::ShapeRef.new(shape: Url, location_name: "thirdPartyConfigurationUrl"))
     ActionTypeSettings.add_member(:entity_url_template, Shapes::ShapeRef.new(shape: UrlTemplate, location_name: "entityUrlTemplate"))
     ActionTypeSettings.add_member(:execution_url_template, Shapes::ShapeRef.new(shape: UrlTemplate, location_name: "executionUrlTemplate"))
     ActionTypeSettings.add_member(:revision_url_template, Shapes::ShapeRef.new(shape: UrlTemplate, location_name: "revisionUrlTemplate"))
     ActionTypeSettings.struct_class = Types::ActionTypeSettings
+
+    ActionTypeUrls.add_member(:configuration_url, Shapes::ShapeRef.new(shape: Url, location_name: "configurationUrl"))
+    ActionTypeUrls.add_member(:entity_url_template, Shapes::ShapeRef.new(shape: UrlTemplate, location_name: "entityUrlTemplate"))
+    ActionTypeUrls.add_member(:execution_url_template, Shapes::ShapeRef.new(shape: UrlTemplate, location_name: "executionUrlTemplate"))
+    ActionTypeUrls.add_member(:revision_url_template, Shapes::ShapeRef.new(shape: UrlTemplate, location_name: "revisionUrlTemplate"))
+    ActionTypeUrls.struct_class = Types::ActionTypeUrls
+
+    AllowedAccounts.member = Shapes::ShapeRef.new(shape: AllowedAccount)
 
     ApprovalAlreadyCompletedException.struct_class = Types::ApprovalAlreadyCompletedException
 
@@ -571,10 +650,23 @@ module Aws::CodePipeline
     ExecutionTrigger.add_member(:trigger_detail, Shapes::ShapeRef.new(shape: TriggerDetail, location_name: "triggerDetail"))
     ExecutionTrigger.struct_class = Types::ExecutionTrigger
 
+    ExecutorConfiguration.add_member(:lambda_executor_configuration, Shapes::ShapeRef.new(shape: LambdaExecutorConfiguration, location_name: "lambdaExecutorConfiguration"))
+    ExecutorConfiguration.add_member(:job_worker_executor_configuration, Shapes::ShapeRef.new(shape: JobWorkerExecutorConfiguration, location_name: "jobWorkerExecutorConfiguration"))
+    ExecutorConfiguration.struct_class = Types::ExecutorConfiguration
+
     FailureDetails.add_member(:type, Shapes::ShapeRef.new(shape: FailureType, required: true, location_name: "type"))
     FailureDetails.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "message"))
     FailureDetails.add_member(:external_execution_id, Shapes::ShapeRef.new(shape: ExecutionId, location_name: "externalExecutionId"))
     FailureDetails.struct_class = Types::FailureDetails
+
+    GetActionTypeInput.add_member(:category, Shapes::ShapeRef.new(shape: ActionCategory, required: true, location_name: "category"))
+    GetActionTypeInput.add_member(:owner, Shapes::ShapeRef.new(shape: ActionTypeOwner, required: true, location_name: "owner"))
+    GetActionTypeInput.add_member(:provider, Shapes::ShapeRef.new(shape: ActionProvider, required: true, location_name: "provider"))
+    GetActionTypeInput.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "version"))
+    GetActionTypeInput.struct_class = Types::GetActionTypeInput
+
+    GetActionTypeOutput.add_member(:action_type, Shapes::ShapeRef.new(shape: ActionTypeDeclaration, location_name: "actionType"))
+    GetActionTypeOutput.struct_class = Types::GetActionTypeOutput
 
     GetJobDetailsInput.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
     GetJobDetailsInput.struct_class = Types::GetJobDetailsInput
@@ -674,6 +766,13 @@ module Aws::CodePipeline
 
     JobNotFoundException.struct_class = Types::JobNotFoundException
 
+    JobWorkerExecutorConfiguration.add_member(:polling_accounts, Shapes::ShapeRef.new(shape: PollingAccountList, location_name: "pollingAccounts"))
+    JobWorkerExecutorConfiguration.add_member(:polling_service_principals, Shapes::ShapeRef.new(shape: PollingServicePrincipalList, location_name: "pollingServicePrincipals"))
+    JobWorkerExecutorConfiguration.struct_class = Types::JobWorkerExecutorConfiguration
+
+    LambdaExecutorConfiguration.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: LambdaFunctionArn, required: true, location_name: "lambdaFunctionArn"))
+    LambdaExecutorConfiguration.struct_class = Types::LambdaExecutorConfiguration
+
     LimitExceededException.struct_class = Types::LimitExceededException
 
     ListActionExecutionsInput.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "pipelineName"))
@@ -688,6 +787,7 @@ module Aws::CodePipeline
 
     ListActionTypesInput.add_member(:action_owner_filter, Shapes::ShapeRef.new(shape: ActionOwner, location_name: "actionOwnerFilter"))
     ListActionTypesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListActionTypesInput.add_member(:region_filter, Shapes::ShapeRef.new(shape: AWSRegionName, location_name: "regionFilter"))
     ListActionTypesInput.struct_class = Types::ListActionTypesInput
 
     ListActionTypesOutput.add_member(:action_types, Shapes::ShapeRef.new(shape: ActionTypeList, required: true, location_name: "actionTypes"))
@@ -824,6 +924,10 @@ module Aws::CodePipeline
     PollForThirdPartyJobsOutput.add_member(:jobs, Shapes::ShapeRef.new(shape: ThirdPartyJobList, location_name: "jobs"))
     PollForThirdPartyJobsOutput.struct_class = Types::PollForThirdPartyJobsOutput
 
+    PollingAccountList.member = Shapes::ShapeRef.new(shape: AccountId)
+
+    PollingServicePrincipalList.member = Shapes::ShapeRef.new(shape: ServicePrincipal)
+
     PutActionRevisionInput.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "pipelineName"))
     PutActionRevisionInput.add_member(:stage_name, Shapes::ShapeRef.new(shape: StageName, required: true, location_name: "stageName"))
     PutActionRevisionInput.add_member(:action_name, Shapes::ShapeRef.new(shape: ActionName, required: true, location_name: "actionName"))
@@ -881,6 +985,9 @@ module Aws::CodePipeline
     RegisterWebhookWithThirdPartyInput.struct_class = Types::RegisterWebhookWithThirdPartyInput
 
     RegisterWebhookWithThirdPartyOutput.struct_class = Types::RegisterWebhookWithThirdPartyOutput
+
+    RequestFailedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    RequestFailedException.struct_class = Types::RequestFailedException
 
     ResolvedActionConfigurationMap.key = Shapes::ShapeRef.new(shape: String)
     ResolvedActionConfigurationMap.value = Shapes::ShapeRef.new(shape: String)
@@ -1009,6 +1116,9 @@ module Aws::CodePipeline
     UntagResourceInput.struct_class = Types::UntagResourceInput
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
+
+    UpdateActionTypeInput.add_member(:action_type, Shapes::ShapeRef.new(shape: ActionTypeDeclaration, location_name: "actionType"))
+    UpdateActionTypeInput.struct_class = Types::UpdateActionTypeInput
 
     UpdatePipelineInput.add_member(:pipeline, Shapes::ShapeRef.new(shape: PipelineDeclaration, required: true, location_name: "pipeline"))
     UpdatePipelineInput.struct_class = Types::UpdatePipelineInput
@@ -1173,6 +1283,16 @@ module Aws::CodePipeline
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: StageNotFoundException)
+      end)
+
+      api.add_operation(:get_action_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetActionType"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetActionTypeInput)
+        o.output = Shapes::ShapeRef.new(shape: GetActionTypeOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ActionTypeNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:get_job_details, Seahorse::Model::Operation.new.tap do |o|
@@ -1510,6 +1630,17 @@ module Aws::CodePipeline
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagsException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:update_action_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateActionType"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateActionTypeInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: RequestFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ActionTypeNotFoundException)
       end)
 
       api.add_operation(:update_pipeline, Seahorse::Model::Operation.new.tap do |o|

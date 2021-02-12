@@ -327,6 +327,92 @@ module Aws::EKS
 
     # @!group API Operations
 
+    # Associate an identity provider configuration to a cluster.
+    #
+    # If you want to authenticate identities using an identity provider, you
+    # can create an identity provider configuration and associate it to your
+    # cluster. After configuring authentication to your cluster you can
+    # create Kubernetes `roles` and `clusterroles` to assign permissions to
+    # the roles, and then bind the roles to the identities using Kubernetes
+    # `rolebindings` and `clusterrolebindings`. For more information see
+    # [Using RBAC Authorization][1] in the Kubernetes documentation.
+    #
+    #
+    #
+    # [1]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster to associate the configuration to.
+    #
+    # @option params [required, Types::OidcIdentityProviderConfigRequest] :oidc
+    #   An object that represents an OpenID Connect (OIDC) identity provider
+    #   configuration.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The metadata to apply to the configuration to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    # @option params [String] :client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::AssociateIdentityProviderConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateIdentityProviderConfigResponse#update #update} => Types::Update
+    #   * {Types::AssociateIdentityProviderConfigResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_identity_provider_config({
+    #     cluster_name: "String", # required
+    #     oidc: { # required
+    #       identity_provider_config_name: "String", # required
+    #       issuer_url: "String", # required
+    #       client_id: "String", # required
+    #       username_claim: "String",
+    #       username_prefix: "String",
+    #       groups_claim: "String",
+    #       groups_prefix: "String",
+    #       required_claims: {
+    #         "requiredClaimsKey" => "requiredClaimsValue",
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_request_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update.id #=> String
+    #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AddonUpdate"
+    #   resp.update.params #=> Array
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
+    #   resp.update.params[0].value #=> String
+    #   resp.update.created_at #=> Time
+    #   resp.update.errors #=> Array
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict"
+    #   resp.update.errors[0].error_message #=> String
+    #   resp.update.errors[0].resource_ids #=> Array
+    #   resp.update.errors[0].resource_ids[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AssociateIdentityProviderConfig AWS API Documentation
+    #
+    # @overload associate_identity_provider_config(params = {})
+    # @param [Hash] params ({})
+    def associate_identity_provider_config(params = {}, options = {})
+      req = build_request(:associate_identity_provider_config, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon EKS add-on.
     #
     # Amazon EKS add-ons help to automate the provisioning and lifecycle
@@ -449,10 +535,10 @@ module Aws::EKS
     # Zones and fronted by an Elastic Load Balancing Network Load Balancer.
     # Amazon EKS also provisions elastic network interfaces in your VPC
     # subnets to provide connectivity from the control plane instances to
-    # the worker nodes (for example, to support `kubectl exec`, `logs`, and
-    # `proxy` data flows).
+    # the nodes (for example, to support `kubectl exec`, `logs`, and `proxy`
+    # data flows).
     #
-    # Amazon EKS worker nodes run in your AWS account and connect to your
+    # Amazon EKS nodes run in your AWS account and connect to your
     # cluster's control plane via the Kubernetes API server endpoint and a
     # certificate file that is created for your cluster.
     #
@@ -477,10 +563,10 @@ module Aws::EKS
     #
     # Cluster creation typically takes between 10 and 15 minutes. After you
     # create an Amazon EKS cluster, you must configure your Kubernetes
-    # tooling to communicate with the API server and launch worker nodes
-    # into your cluster. For more information, see [Managing Cluster
-    # Authentication][4] and [Launching Amazon EKS Worker Nodes][5] in the
-    # *Amazon EKS User Guide*.
+    # tooling to communicate with the API server and launch nodes into your
+    # cluster. For more information, see [Managing Cluster
+    # Authentication][4] and [Launching Amazon EKS nodes][5] in the *Amazon
+    # EKS User Guide*.
     #
     #
     #
@@ -804,8 +890,8 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Creates a managed worker node group for an Amazon EKS cluster. You can
-    # only create a node group for your cluster that is equal to the current
+    # Creates a managed node group for an Amazon EKS cluster. You can only
+    # create a node group for your cluster that is equal to the current
     # Kubernetes version for the cluster. All node groups are created with
     # the latest AMI release version for the respective minor Kubernetes
     # version of the cluster, unless you deploy a custom AMI using a launch
@@ -876,7 +962,7 @@ module Aws::EKS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/managed-node-groups.html#managed-node-group-capacity-types
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html#managed-node-group-capacity-types
     #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #
     # @option params [String] :ami_type
@@ -907,16 +993,16 @@ module Aws::EKS
     # @option params [required, String] :node_role
     #   The Amazon Resource Name (ARN) of the IAM role to associate with your
     #   node group. The Amazon EKS worker node `kubelet` daemon makes calls to
-    #   AWS APIs on your behalf. Worker nodes receive permissions for these
-    #   API calls through an IAM instance profile and associated policies.
-    #   Before you can launch worker nodes and register them into a cluster,
-    #   you must create an IAM role for those worker nodes to use when they
-    #   are launched. For more information, see [Amazon EKS Worker Node IAM
-    #   Role][1] in the <i> <i>Amazon EKS User Guide</i> </i>. If you specify
-    #   `launchTemplate`, then don't specify [ `IamInstanceProfile` ][2] in
-    #   your launch template, or the node group deployment will fail. For more
-    #   information about using launch templates with Amazon EKS, see [Launch
-    #   template support][3] in the Amazon EKS User Guide.
+    #   AWS APIs on your behalf. Nodes receive permissions for these API calls
+    #   through an IAM instance profile and associated policies. Before you
+    #   can launch nodes and register them into a cluster, you must create an
+    #   IAM role for those nodes to use when they are launched. For more
+    #   information, see [Amazon EKS node IAM role][1] in the <i> <i>Amazon
+    #   EKS User Guide</i> </i>. If you specify `launchTemplate`, then don't
+    #   specify [ `IamInstanceProfile` ][2] in your launch template, or the
+    #   node group deployment will fail. For more information about using
+    #   launch templates with Amazon EKS, see [Launch template support][3] in
+    #   the Amazon EKS User Guide.
     #
     #
     #
@@ -1623,6 +1709,56 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Returns descriptive information about an identity provider
+    # configuration.
+    #
+    # @option params [required, String] :cluster_name
+    #   The cluster name that the identity provider configuration is
+    #   associated to.
+    #
+    # @option params [required, Types::IdentityProviderConfig] :identity_provider_config
+    #   An object that represents an identity provider configuration.
+    #
+    # @return [Types::DescribeIdentityProviderConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeIdentityProviderConfigResponse#identity_provider_config #identity_provider_config} => Types::IdentityProviderConfigResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_identity_provider_config({
+    #     cluster_name: "String", # required
+    #     identity_provider_config: { # required
+    #       type: "String", # required
+    #       name: "String", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identity_provider_config.oidc.identity_provider_config_name #=> String
+    #   resp.identity_provider_config.oidc.identity_provider_config_arn #=> String
+    #   resp.identity_provider_config.oidc.cluster_name #=> String
+    #   resp.identity_provider_config.oidc.issuer_url #=> String
+    #   resp.identity_provider_config.oidc.client_id #=> String
+    #   resp.identity_provider_config.oidc.username_claim #=> String
+    #   resp.identity_provider_config.oidc.username_prefix #=> String
+    #   resp.identity_provider_config.oidc.groups_claim #=> String
+    #   resp.identity_provider_config.oidc.groups_prefix #=> String
+    #   resp.identity_provider_config.oidc.required_claims #=> Hash
+    #   resp.identity_provider_config.oidc.required_claims["requiredClaimsKey"] #=> String
+    #   resp.identity_provider_config.oidc.tags #=> Hash
+    #   resp.identity_provider_config.oidc.tags["TagKey"] #=> String
+    #   resp.identity_provider_config.oidc.status #=> String, one of "CREATING", "DELETING", "ACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeIdentityProviderConfig AWS API Documentation
+    #
+    # @overload describe_identity_provider_config(params = {})
+    # @param [Hash] params ({})
+    def describe_identity_provider_config(params = {}, options = {})
+      req = build_request(:describe_identity_provider_config, params)
+      req.send_request(options)
+    end
+
     # Returns descriptive information about an Amazon EKS node group.
     #
     # @option params [required, String] :cluster_name
@@ -1738,9 +1874,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AddonUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -1755,6 +1891,63 @@ module Aws::EKS
     # @param [Hash] params ({})
     def describe_update(params = {}, options = {})
       req = build_request(:describe_update, params)
+      req.send_request(options)
+    end
+
+    # Disassociates an identity provider configuration from a cluster. If
+    # you disassociate an identity provider from your cluster, users
+    # included in the provider can no longer access the cluster. However,
+    # you can still access the cluster with AWS IAM users.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster to disassociate an identity provider from.
+    #
+    # @option params [required, Types::IdentityProviderConfig] :identity_provider_config
+    #   An object that represents an identity provider configuration.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DisassociateIdentityProviderConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateIdentityProviderConfigResponse#update #update} => Types::Update
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_identity_provider_config({
+    #     cluster_name: "String", # required
+    #     identity_provider_config: { # required
+    #       type: "String", # required
+    #       name: "String", # required
+    #     },
+    #     client_request_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update.id #=> String
+    #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AddonUpdate"
+    #   resp.update.params #=> Array
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
+    #   resp.update.params[0].value #=> String
+    #   resp.update.created_at #=> Time
+    #   resp.update.errors #=> Array
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict"
+    #   resp.update.errors[0].error_message #=> String
+    #   resp.update.errors[0].resource_ids #=> Array
+    #   resp.update.errors[0].resource_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DisassociateIdentityProviderConfig AWS API Documentation
+    #
+    # @overload disassociate_identity_provider_config(params = {})
+    # @param [Hash] params ({})
+    def disassociate_identity_provider_config(params = {}, options = {})
+      req = build_request(:disassociate_identity_provider_config, params)
       req.send_request(options)
     end
 
@@ -1940,6 +2133,61 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # A list of identity provider configurations.
+    #
+    # @option params [required, String] :cluster_name
+    #   The cluster name that you want to list identity provider
+    #   configurations for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of identity provider configurations returned by
+    #   `ListIdentityProviderConfigs` in paginated output. When you use this
+    #   parameter, `ListIdentityProviderConfigs` returns only `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   You can see the remaining results of the initial request by sending
+    #   another `ListIdentityProviderConfigs` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If you don't
+    #   use this parameter, `ListIdentityProviderConfigs` returns up to 100
+    #   results and a `nextToken` value, if applicable.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `IdentityProviderConfigsRequest` where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value.
+    #
+    # @return [Types::ListIdentityProviderConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIdentityProviderConfigsResponse#identity_provider_configs #identity_provider_configs} => Array&lt;Types::IdentityProviderConfig&gt;
+    #   * {Types::ListIdentityProviderConfigsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_identity_provider_configs({
+    #     cluster_name: "String", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identity_provider_configs #=> Array
+    #   resp.identity_provider_configs[0].type #=> String
+    #   resp.identity_provider_configs[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListIdentityProviderConfigs AWS API Documentation
+    #
+    # @overload list_identity_provider_configs(params = {})
+    # @param [Hash] params ({})
+    def list_identity_provider_configs(params = {}, options = {})
+      req = build_request(:list_identity_provider_configs, params)
+      req.send_request(options)
+    end
+
     # Lists the Amazon EKS managed node groups associated with the specified
     # cluster in your AWS account in the specified Region. Self-managed node
     # groups are not listed.
@@ -2108,7 +2356,7 @@ module Aws::EKS
     # you create for Amazon EKS resources do not propagate to any other
     # resources associated with the cluster. For example, if you tag a
     # cluster with this operation, that tag does not automatically propagate
-    # to the subnets and worker nodes associated with the cluster.
+    # to the subnets and nodes associated with the cluster.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to which to add tags.
@@ -2237,9 +2485,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AddonUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -2357,9 +2605,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AddonUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -2421,9 +2669,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AddonUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -2497,9 +2745,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AddonUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -2628,9 +2876,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AddonUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -2661,7 +2909,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

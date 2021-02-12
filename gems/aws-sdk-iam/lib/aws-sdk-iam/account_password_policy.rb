@@ -30,27 +30,31 @@ module Aws::IAM
       data[:minimum_password_length]
     end
 
-    # Specifies whether to require symbols for IAM user passwords.
+    # Specifies whether IAM user passwords must contain at least one of the
+    # following symbols:
+    #
+    # ! @ # $ % ^ &amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
     # @return [Boolean]
     def require_symbols
       data[:require_symbols]
     end
 
-    # Specifies whether to require numbers for IAM user passwords.
+    # Specifies whether IAM user passwords must contain at least one numeric
+    # character (0 to 9).
     # @return [Boolean]
     def require_numbers
       data[:require_numbers]
     end
 
-    # Specifies whether to require uppercase characters for IAM user
-    # passwords.
+    # Specifies whether IAM user passwords must contain at least one
+    # uppercase character (A to Z).
     # @return [Boolean]
     def require_uppercase_characters
       data[:require_uppercase_characters]
     end
 
-    # Specifies whether to require lowercase characters for IAM user
-    # passwords.
+    # Specifies whether IAM user passwords must contain at least one
+    # lowercase character (a to z).
     # @return [Boolean]
     def require_lowercase_characters
       data[:require_lowercase_characters]
@@ -286,7 +290,7 @@ module Aws::IAM
     # @option options [Boolean] :allow_users_to_change_password
     #   Allows all IAM users in your account to use the AWS Management Console
     #   to change their own passwords. For more information, see [Letting IAM
-    #   Users Change Their Own Passwords][1] in the *IAM User Guide*.
+    #   users change their own passwords][1] in the *IAM User Guide*.
     #
     #   If you do not specify a value for this parameter, then the operation
     #   uses the default value of `false`. The result is that IAM users in the

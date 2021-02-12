@@ -14,6 +14,7 @@ module Aws::WAFV2
     include Seahorse::Model
 
     Action = Shapes::StringShape.new(name: 'Action')
+    All = Shapes::StructureShape.new(name: 'All')
     AllQueryArguments = Shapes::StructureShape.new(name: 'AllQueryArguments')
     AllowAction = Shapes::StructureShape.new(name: 'AllowAction')
     AndStatement = Shapes::StructureShape.new(name: 'AndStatement')
@@ -21,6 +22,7 @@ module Aws::WAFV2
     AssociateWebACLResponse = Shapes::StructureShape.new(name: 'AssociateWebACLResponse')
     BlockAction = Shapes::StructureShape.new(name: 'BlockAction')
     Body = Shapes::StructureShape.new(name: 'Body')
+    BodyParsingFallbackBehavior = Shapes::StringShape.new(name: 'BodyParsingFallbackBehavior')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ByteMatchStatement = Shapes::StructureShape.new(name: 'ByteMatchStatement')
     CapacityUnit = Shapes::IntegerShape.new(name: 'CapacityUnit')
@@ -110,6 +112,11 @@ module Aws::WAFV2
     IPSetSummaries = Shapes::ListShape.new(name: 'IPSetSummaries')
     IPSetSummary = Shapes::StructureShape.new(name: 'IPSetSummary')
     IPString = Shapes::StringShape.new(name: 'IPString')
+    JsonBody = Shapes::StructureShape.new(name: 'JsonBody')
+    JsonMatchPattern = Shapes::StructureShape.new(name: 'JsonMatchPattern')
+    JsonMatchScope = Shapes::StringShape.new(name: 'JsonMatchScope')
+    JsonPointerPath = Shapes::StringShape.new(name: 'JsonPointerPath')
+    JsonPointerPaths = Shapes::ListShape.new(name: 'JsonPointerPaths')
     ListAvailableManagedRuleGroupsRequest = Shapes::StructureShape.new(name: 'ListAvailableManagedRuleGroupsRequest')
     ListAvailableManagedRuleGroupsResponse = Shapes::StructureShape.new(name: 'ListAvailableManagedRuleGroupsResponse')
     ListIPSetsRequest = Shapes::StructureShape.new(name: 'ListIPSetsRequest')
@@ -236,6 +243,8 @@ module Aws::WAFV2
     WebACLSummaries = Shapes::ListShape.new(name: 'WebACLSummaries')
     WebACLSummary = Shapes::StructureShape.new(name: 'WebACLSummary')
     XssMatchStatement = Shapes::StructureShape.new(name: 'XssMatchStatement')
+
+    All.struct_class = Types::All
 
     AllQueryArguments.struct_class = Types::AllQueryArguments
 
@@ -395,6 +404,7 @@ module Aws::WAFV2
     FieldToMatch.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, location_name: "QueryString"))
     FieldToMatch.add_member(:body, Shapes::ShapeRef.new(shape: Body, location_name: "Body"))
     FieldToMatch.add_member(:method, Shapes::ShapeRef.new(shape: Method, location_name: "Method"))
+    FieldToMatch.add_member(:json_body, Shapes::ShapeRef.new(shape: JsonBody, location_name: "JsonBody"))
     FieldToMatch.struct_class = Types::FieldToMatch
 
     FirewallManagerRuleGroup.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
@@ -535,6 +545,17 @@ module Aws::WAFV2
     IPSetSummary.add_member(:lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "LockToken"))
     IPSetSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ARN"))
     IPSetSummary.struct_class = Types::IPSetSummary
+
+    JsonBody.add_member(:match_pattern, Shapes::ShapeRef.new(shape: JsonMatchPattern, required: true, location_name: "MatchPattern"))
+    JsonBody.add_member(:match_scope, Shapes::ShapeRef.new(shape: JsonMatchScope, required: true, location_name: "MatchScope"))
+    JsonBody.add_member(:invalid_fallback_behavior, Shapes::ShapeRef.new(shape: BodyParsingFallbackBehavior, location_name: "InvalidFallbackBehavior"))
+    JsonBody.struct_class = Types::JsonBody
+
+    JsonMatchPattern.add_member(:all, Shapes::ShapeRef.new(shape: All, location_name: "All"))
+    JsonMatchPattern.add_member(:included_paths, Shapes::ShapeRef.new(shape: JsonPointerPaths, location_name: "IncludedPaths"))
+    JsonMatchPattern.struct_class = Types::JsonMatchPattern
+
+    JsonPointerPaths.member = Shapes::ShapeRef.new(shape: JsonPointerPath)
 
     ListAvailableManagedRuleGroupsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
     ListAvailableManagedRuleGroupsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))

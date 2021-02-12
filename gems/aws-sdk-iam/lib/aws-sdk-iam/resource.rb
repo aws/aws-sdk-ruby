@@ -141,7 +141,7 @@ module Aws::IAM
     # @option options [Boolean] :allow_users_to_change_password
     #   Allows all IAM users in your account to use the AWS Management Console
     #   to change their own passwords. For more information, see [Letting IAM
-    #   Users Change Their Own Passwords][1] in the *IAM User Guide*.
+    #   users change their own passwords][1] in the *IAM User Guide*.
     #
     #   If you do not specify a value for this parameter, then the operation
     #   uses the default value of `false`. The result is that IAM users in the
@@ -188,7 +188,7 @@ module Aws::IAM
     # @param [Hash] options ({})
     # @option options [String] :path
     #   The path to the group. For more information about paths, see [IAM
-    #   Identifiers][1] in the *IAM User Guide*.
+    #   identifiers][1] in the *IAM User Guide*.
     #
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
@@ -226,6 +226,12 @@ module Aws::IAM
     #   instanceprofile = iam.create_instance_profile({
     #     instance_profile_name: "instanceProfileNameType", # required
     #     path: "pathType",
+    #     tags: [
+    #       {
+    #         key: "tagKeyType", # required
+    #         value: "tagValueType", # required
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :instance_profile_name
@@ -257,6 +263,21 @@ module Aws::IAM
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
+    # @option options [Array<Types::Tag>] :tags
+    #   A list of tags that you want to attach to the newly created IAM
+    #   instance profile. Each tag consists of a key name and an associated
+    #   value. For more information about tagging, see [Tagging IAM
+    #   resources][1] in the *IAM User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed maximum
+    #   number of tags, then the entire request fails and the resource is not
+    #   created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [InstanceProfile]
     def create_instance_profile(options = {})
       resp = @client.create_instance_profile(options)
@@ -274,6 +295,12 @@ module Aws::IAM
     #     path: "policyPathType",
     #     policy_document: "policyDocumentType", # required
     #     description: "policyDescriptionType",
+    #     tags: [
+    #       {
+    #         key: "tagKeyType", # required
+    #         value: "tagValueType", # required
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :policy_name
@@ -285,7 +312,7 @@ module Aws::IAM
     # @option options [String] :path
     #   The path for the policy.
     #
-    #   For more information about paths, see [IAM Identifiers][1] in the *IAM
+    #   For more information about paths, see [IAM identifiers][1] in the *IAM
     #   User Guide*.
     #
     #   This parameter is optional. If it is not included, it defaults to a
@@ -335,6 +362,21 @@ module Aws::IAM
     #
     #   The policy description is immutable. After a value is assigned, it
     #   cannot be changed.
+    # @option options [Array<Types::Tag>] :tags
+    #   A list of tags that you want to attach to the new IAM customer managed
+    #   policy. Each tag consists of a key name and an associated value. For
+    #   more information about tagging, see [Tagging IAM resources][1] in the
+    #   *IAM User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed maximum
+    #   number of tags, then the entire request fails and the resource is not
+    #   created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [Policy]
     def create_policy(options = {})
       resp = @client.create_policy(options)
@@ -430,7 +472,7 @@ module Aws::IAM
     #   for one hour by default. This applies when you use the `AssumeRole*`
     #   API operations or the `assume-role*` CLI operations but does not apply
     #   when you use those operations to create a console URL. For more
-    #   information, see [Using IAM Roles][1] in the *IAM User Guide*.
+    #   information, see [Using IAM roles][1] in the *IAM User Guide*.
     #
     #
     #
@@ -439,13 +481,12 @@ module Aws::IAM
     #   The ARN of the policy that is used to set the permissions boundary for
     #   the role.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags that you want to attach to the newly created role. Each
-    #   tag consists of a key name and an associated value. For more
-    #   information about tagging, see [Tagging IAM Identities][1] in the *IAM
-    #   User Guide*.
+    #   A list of tags that you want to attach to the new role. Each tag
+    #   consists of a key name and an associated value. For more information
+    #   about tagging, see [Tagging IAM resources][1] in the *IAM User Guide*.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
-    #   of tags per role, then the entire request fails and the role is not
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed maximum
+    #   number of tags, then the entire request fails and the resource is not
     #   created.
     #
     #    </note>
@@ -468,6 +509,12 @@ module Aws::IAM
     #   samlprovider = iam.create_saml_provider({
     #     saml_metadata_document: "SAMLMetadataDocumentType", # required
     #     name: "SAMLProviderNameType", # required
+    #     tags: [
+    #       {
+    #         key: "tagKeyType", # required
+    #         value: "tagValueType", # required
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :saml_metadata_document
@@ -478,7 +525,7 @@ module Aws::IAM
     #   You must generate the metadata document using the identity management
     #   software that is used as your organization's IdP.
     #
-    #   For more information, see [About SAML 2.0-based Federation][1] in the
+    #   For more information, see [About SAML 2.0-based federation][1] in the
     #   *IAM User Guide*
     #
     #
@@ -495,6 +542,21 @@ module Aws::IAM
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
+    # @option options [Array<Types::Tag>] :tags
+    #   A list of tags that you want to attach to the new IAM SAML provider.
+    #   Each tag consists of a key name and an associated value. For more
+    #   information about tagging, see [Tagging IAM resources][1] in the *IAM
+    #   User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed maximum
+    #   number of tags, then the entire request fails and the resource is not
+    #   created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [SamlProvider]
     def create_saml_provider(options = {})
       resp = @client.create_saml_provider(options)
@@ -512,11 +574,17 @@ module Aws::IAM
     #     certificate_body: "certificateBodyType", # required
     #     private_key: "privateKeyType", # required
     #     certificate_chain: "certificateChainType",
+    #     tags: [
+    #       {
+    #         key: "tagKeyType", # required
+    #         value: "tagValueType", # required
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [String] :path
     #   The path for the server certificate. For more information about paths,
-    #   see [IAM Identifiers][1] in the *IAM User Guide*.
+    #   see [IAM identifiers][1] in the *IAM User Guide*.
     #
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/). This parameter allows (through its [regex pattern][2]) a
@@ -604,6 +672,21 @@ module Aws::IAM
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
+    # @option options [Array<Types::Tag>] :tags
+    #   A list of tags that you want to attach to the new IAM server
+    #   certificate resource. Each tag consists of a key name and an
+    #   associated value. For more information about tagging, see [Tagging IAM
+    #   resources][1] in the *IAM User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed maximum
+    #   number of tags, then the entire request fails and the resource is not
+    #   created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [ServerCertificate]
     def create_server_certificate(options = {})
       @client.upload_server_certificate(options)
@@ -675,7 +758,7 @@ module Aws::IAM
     # @param [Hash] options ({})
     # @option options [String] :path
     #   The path for the user name. For more information about paths, see [IAM
-    #   Identifiers][1] in the *IAM User Guide*.
+    #   identifiers][1] in the *IAM User Guide*.
     #
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
@@ -701,13 +784,12 @@ module Aws::IAM
     #   The ARN of the policy that is used to set the permissions boundary for
     #   the user.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags that you want to attach to the newly created user. Each
-    #   tag consists of a key name and an associated value. For more
-    #   information about tagging, see [Tagging IAM Identities][1] in the *IAM
-    #   User Guide*.
+    #   A list of tags that you want to attach to the new user. Each tag
+    #   consists of a key name and an associated value. For more information
+    #   about tagging, see [Tagging IAM resources][1] in the *IAM User Guide*.
     #
-    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
-    #   of tags per user, then the entire request fails and the user is not
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed maximum
+    #   number of tags, then the entire request fails and the resource is not
     #   created.
     #
     #    </note>
@@ -730,11 +812,17 @@ module Aws::IAM
     #   virtualmfadevice = iam.create_virtual_mfa_device({
     #     path: "pathType",
     #     virtual_mfa_device_name: "virtualMFADeviceName", # required
+    #     tags: [
+    #       {
+    #         key: "tagKeyType", # required
+    #         value: "tagValueType", # required
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [String] :path
     #   The path for the virtual MFA device. For more information about paths,
-    #   see [IAM Identifiers][1] in the *IAM User Guide*.
+    #   see [IAM identifiers][1] in the *IAM User Guide*.
     #
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
@@ -762,6 +850,21 @@ module Aws::IAM
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
+    # @option options [Array<Types::Tag>] :tags
+    #   A list of tags that you want to attach to the new IAM virtual MFA
+    #   device. Each tag consists of a key name and an associated value. For
+    #   more information about tagging, see [Tagging IAM resources][1] in the
+    #   *IAM User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed maximum
+    #   number of tags, then the entire request fails and the resource is not
+    #   created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [VirtualMfaDevice]
     def create_virtual_mfa_device(options = {})
       resp = @client.create_virtual_mfa_device(options)

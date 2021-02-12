@@ -10,21 +10,23 @@
 module Aws::WAFV2
   module Types
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
-    # All query arguments of a web request.
+    # Inspect all of the elements that AWS WAF has parsed and extracted from
+    # the web request JSON body that are within the JsonBody `MatchScope`.
+    # This is used with the FieldToMatch option `JsonBody`.
     #
     # This is used only to indicate the web request component for AWS WAF to
     # inspect, in the FieldToMatch specification.
     #
+    # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/All AWS API Documentation
     #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    class All < Aws::EmptyStructure; end
+
+    # All query arguments of a web request.
+    #
+    # This is used only to indicate the web request component for AWS WAF to
+    # inspect, in the FieldToMatch specification.
     #
     # @api private
     #
@@ -32,21 +34,10 @@ module Aws::WAFV2
     #
     class AllQueryArguments < Aws::EmptyStructure; end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # Specifies that AWS WAF should allow requests.
     #
     # This is used only in the context of other settings, for example to
     # specify values for RuleAction and web ACL DefaultAction.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @api private
     #
@@ -54,20 +45,9 @@ module Aws::WAFV2
     #
     class AllowAction < Aws::EmptyStructure; end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # A logical rule statement used to combine other rule statements with
     # AND logic. You provide more than one Statement within the
     # `AndStatement`.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass AndStatement
     #   data as a hash:
@@ -93,6 +73,15 @@ module Aws::WAFV2
     #                 body: {
     #                 },
     #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -121,6 +110,15 @@ module Aws::WAFV2
     #                 },
     #                 method: {
     #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
     #               },
     #               text_transformations: [ # required
     #                 {
@@ -147,6 +145,15 @@ module Aws::WAFV2
     #                 },
     #                 method: {
     #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
     #               },
     #               text_transformations: [ # required
     #                 {
@@ -172,6 +179,15 @@ module Aws::WAFV2
     #                 body: {
     #                 },
     #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                 },
     #               },
     #               comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -224,6 +240,15 @@ module Aws::WAFV2
     #                 body: {
     #                 },
     #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -328,21 +353,10 @@ module Aws::WAFV2
     #
     class AssociateWebACLResponse < Aws::EmptyStructure; end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # Specifies that AWS WAF should block requests.
     #
     # This is used only in the context of other settings, for example to
     # specify values for RuleAction and web ACL DefaultAction.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @api private
     #
@@ -350,22 +364,11 @@ module Aws::WAFV2
     #
     class BlockAction < Aws::EmptyStructure; end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # The body of a web request. This immediately follows the request
     # headers.
     #
     # This is used only to indicate the web request component for AWS WAF to
     # inspect, in the FieldToMatch specification.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @api private
     #
@@ -373,23 +376,12 @@ module Aws::WAFV2
     #
     class Body < Aws::EmptyStructure; end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # A rule statement that defines a string match search for AWS WAF to
     # apply to web requests. The byte match statement provides the bytes to
     # search for, the location in requests that you want AWS WAF to search,
     # and other settings. The bytes to search for are typically a string
     # that corresponds with ASCII characters. In the AWS WAF console and the
     # developer guide, this is refered to as a string match statement.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass ByteMatchStatement
     #   data as a hash:
@@ -412,6 +404,15 @@ module Aws::WAFV2
     #           body: {
     #           },
     #           method: {
+    #           },
+    #           json_body: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_paths: ["JsonPointerPath"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #           },
     #         },
     #         text_transformations: [ # required
@@ -554,6 +555,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -581,6 +591,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -607,6 +626,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -632,6 +660,15 @@ module Aws::WAFV2
     #                   body: {
     #                   },
     #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                   },
     #                 },
     #                 comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -684,6 +721,15 @@ module Aws::WAFV2
     #                   body: {
     #                   },
     #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -797,21 +843,10 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # Specifies that AWS WAF should count requests.
     #
     # This is used only in the context of other settings, for example to
     # specify values for RuleAction and web ACL DefaultAction.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @api private
     #
@@ -857,8 +892,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the IP set that helps with identification. You
-    #   cannot change the description of an IP set after you create it.
+    #   A description of the IP set that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] ip_address_version
@@ -973,8 +1007,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the set that helps with identification. You cannot
-    #   change the description of a set after you create it.
+    #   A description of the set that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] regular_expression_list
@@ -1045,6 +1078,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -1072,6 +1114,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -1098,6 +1149,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -1123,6 +1183,15 @@ module Aws::WAFV2
     #                   body: {
     #                   },
     #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                   },
     #                 },
     #                 comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -1175,6 +1244,15 @@ module Aws::WAFV2
     #                   body: {
     #                   },
     #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -1297,8 +1375,7 @@ module Aws::WAFV2
     #   @return [Integer]
     #
     # @!attribute [rw] description
-    #   A description of the rule group that helps with identification. You
-    #   cannot change the description of a rule group after you create it.
+    #   A description of the rule group that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -1384,6 +1461,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -1411,6 +1497,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -1437,6 +1532,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -1462,6 +1566,15 @@ module Aws::WAFV2
     #                   body: {
     #                   },
     #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                   },
     #                 },
     #                 comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -1514,6 +1627,15 @@ module Aws::WAFV2
     #                   body: {
     #                   },
     #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -1623,8 +1745,7 @@ module Aws::WAFV2
     #   @return [Types::DefaultAction]
     #
     # @!attribute [rw] description
-    #   A description of the Web ACL that helps with identification. You
-    #   cannot change the description of a Web ACL after you create it.
+    #   A description of the Web ACL that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -1672,20 +1793,9 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # In a WebACL, this is the action that you want AWS WAF to perform when
     # a web request doesn't match any of the rules in the `WebACL`. The
     # default action must be a terminating action, so count is not allowed.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass DefaultAction
     #   data as a hash:
@@ -2171,21 +2281,10 @@ module Aws::WAFV2
     #
     class DisassociateWebACLResponse < Aws::EmptyStructure; end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # Specifies a single rule to exclude from the rule group. Excluding a
     # rule overrides its action setting for the rule group in the web ACL,
     # setting it to `COUNT`. This effectively excludes the rule from acting
     # on web requests.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass ExcludedRule
     #   data as a hash:
@@ -2206,23 +2305,12 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # The part of a web request that you want AWS WAF to inspect. Include
     # the single `FieldToMatch` type that you want to inspect, with
     # additional specifications as needed, according to the type. You
     # specify a single request component in `FieldToMatch` for each rule
     # statement that requires it. To inspect more than one component of a
     # web request, create a separate rule statement for each component.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass FieldToMatch
     #   data as a hash:
@@ -2243,6 +2331,15 @@ module Aws::WAFV2
     #         body: {
     #         },
     #         method: {
+    #         },
+    #         json_body: {
+    #           match_pattern: { # required
+    #             all: {
+    #             },
+    #             included_paths: ["JsonPointerPath"],
+    #           },
+    #           match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #           invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #         },
     #       }
     #
@@ -2276,10 +2373,10 @@ module Aws::WAFV2
     #   @return [Types::QueryString]
     #
     # @!attribute [rw] body
-    #   Inspect the request body, which immediately follows the request
-    #   headers. This is the part of a request that contains any additional
-    #   data that you want to send to your web server as the HTTP request
-    #   body, such as data from a form.
+    #   Inspect the request body as plain text. The request body immediately
+    #   follows the request headers. This is the part of a request that
+    #   contains any additional data that you want to send to your web
+    #   server as the HTTP request body, such as data from a form.
     #
     #   Note that only the first 8 KB (8192 bytes) of the request body are
     #   forwarded to AWS WAF for inspection by the underlying host service.
@@ -2297,6 +2394,23 @@ module Aws::WAFV2
     #   that the request is asking the origin to perform.
     #   @return [Types::Method]
     #
+    # @!attribute [rw] json_body
+    #   Inspect the request body as JSON. The request body immediately
+    #   follows the request headers. This is the part of a request that
+    #   contains any additional data that you want to send to your web
+    #   server as the HTTP request body, such as data from a form.
+    #
+    #   Note that only the first 8 KB (8192 bytes) of the request body are
+    #   forwarded to AWS WAF for inspection by the underlying host service.
+    #   If you don't need to inspect more than 8 KB, you can guarantee that
+    #   you don't allow additional bytes in by combining a statement that
+    #   inspects the body of the web request, such as ByteMatchStatement or
+    #   RegexPatternSetReferenceStatement, with a SizeConstraintStatement
+    #   that enforces an 8 KB size limit on the body of the request. AWS WAF
+    #   doesn't support inspecting the entire contents of web requests
+    #   whose bodies exceed the 8 KB limit.
+    #   @return [Types::JsonBody]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/FieldToMatch AWS API Documentation
     #
     class FieldToMatch < Struct.new(
@@ -2306,7 +2420,8 @@ module Aws::WAFV2
       :uri_path,
       :query_string,
       :body,
-      :method)
+      :method,
+      :json_body)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2352,19 +2467,8 @@ module Aws::WAFV2
     #   @return [Types::OverrideAction]
     #
     # @!attribute [rw] visibility_config
-    #   <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    #   in November, 2019. For information, including how to migrate your
-    #   AWS WAF resources from the prior release, see the [AWS WAF Developer
-    #   Guide][1].
-    #
-    #    </note>
-    #
     #   Defines and enables Amazon CloudWatch metrics and web request sample
     #   collection.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #   @return [Types::VisibilityConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/FirewallManagerRuleGroup AWS API Documentation
@@ -2384,13 +2488,6 @@ module Aws::WAFV2
     # reference.
     #
     # @!attribute [rw] managed_rule_group_statement
-    #   <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    #   in November, 2019. For information, including how to migrate your
-    #   AWS WAF resources from the prior release, see the [AWS WAF Developer
-    #   Guide][1].
-    #
-    #    </note>
-    #
     #   A rule statement used to run the rules that are defined in a managed
     #   rule group. To use this, provide the vendor name and the name of the
     #   rule group in this statement. You can retrieve the required names by
@@ -2399,20 +2496,9 @@ module Aws::WAFV2
     #   You can't nest a `ManagedRuleGroupStatement`, for example for use
     #   inside a `NotStatement` or `OrStatement`. It can only be referenced
     #   as a top-level statement within a rule.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #   @return [Types::ManagedRuleGroupStatement]
     #
     # @!attribute [rw] rule_group_reference_statement
-    #   <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    #   in November, 2019. For information, including how to migrate your
-    #   AWS WAF resources from the prior release, see the [AWS WAF Developer
-    #   Guide][1].
-    #
-    #    </note>
-    #
     #   A rule statement used to run the rules that are defined in a
     #   RuleGroup. To use this, create a rule group with your rules, then
     #   provide the ARN of the rule group in this statement.
@@ -2420,10 +2506,6 @@ module Aws::WAFV2
     #   You cannot nest a `RuleGroupReferenceStatement`, for example for use
     #   inside a `NotStatement` or `OrStatement`. It can only be referenced
     #   as a top-level statement within a rule.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #   @return [Types::RuleGroupReferenceStatement]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/FirewallManagerStatement AWS API Documentation
@@ -2482,10 +2564,10 @@ module Aws::WAFV2
     #
     #   You can specify the following fallback behaviors:
     #
-    #   * MATCH - Treat the web request as matching the rule statement. AWS
-    #     WAF applies the rule action to the request.
+    #   * `MATCH` - Treat the web request as matching the rule statement.
+    #     AWS WAF applies the rule action to the request.
     #
-    #   * NO\_MATCH - Treat the web request as not matching the rule
+    #   * `NO_MATCH` - Treat the web request as not matching the rule
     #     statement.
     #   @return [String]
     #
@@ -2498,19 +2580,8 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # A rule statement used to identify web requests based on country of
     # origin.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass GeoMatchStatement
     #   data as a hash:
@@ -2934,7 +3005,8 @@ module Aws::WAFV2
     #   You must specify the times in Coordinated Universal Time (UTC)
     #   format. UTC format includes the special designator, `Z`. For
     #   example, `"2016-09-27T14:50Z"`. You can specify any time range in
-    #   the previous three hours.
+    #   the previous three hours. If you specify a start time that's
+    #   earlier than three hours ago, AWS WAF sets it to three hours ago.
     #   @return [Types::TimeWindow]
     #
     # @!attribute [rw] max_items
@@ -3091,21 +3163,10 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # Part of the response from GetSampledRequests. This is a complex type
     # that appears as `Headers` in the response syntax. `HTTPHeader`
     # contains the names and values of all of the headers that appear in one
     # of the web requests.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] name
     #   The name of the HTTP header.
@@ -3124,20 +3185,9 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # Part of the response from GetSampledRequests. This is a complex type
     # that appears as `Request` in the response syntax. `HTTPRequest`
     # contains information about one of the web requests.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] client_ip
     #   The IP address that the request originated from. If the web ACL is
@@ -3193,17 +3243,10 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # Contains one or more IP addresses or blocks of IP addresses specified
     # in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports
     # any CIDR range. For information about CIDR notation, see the Wikipedia
-    # entry [Classless Inter-Domain Routing][2].
+    # entry [Classless Inter-Domain Routing][1].
     #
     # AWS WAF assigns an ARN to each `IPSet` that you create. To use an IP
     # set in a rule, you provide the ARN to the Rule statement
@@ -3211,8 +3254,7 @@ module Aws::WAFV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
-    # [2]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
+    # [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
     #
     # @!attribute [rw] name
     #   The name of the IP set. You cannot change the name of an `IPSet`
@@ -3230,8 +3272,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the IP set that helps with identification. You
-    #   cannot change the description of an IP set after you create it.
+    #   A description of the IP set that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] ip_address_version
@@ -3331,10 +3372,10 @@ module Aws::WAFV2
     #
     #   You can specify the following fallback behaviors:
     #
-    #   * MATCH - Treat the web request as matching the rule statement. AWS
-    #     WAF applies the rule action to the request.
+    #   * `MATCH` - Treat the web request as matching the rule statement.
+    #     AWS WAF applies the rule action to the request.
     #
-    #   * NO\_MATCH - Treat the web request as not matching the rule
+    #   * `NO_MATCH` - Treat the web request as not matching the rule
     #     statement.
     #   @return [String]
     #
@@ -3368,13 +3409,6 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # A rule statement used to detect web requests coming from particular IP
     # addresses or address ranges. To use this, create an IPSet that
     # specifies the addresses you want to detect, then use the ARN of that
@@ -3384,10 +3418,6 @@ module Aws::WAFV2
     # maintain the set independent of your rules. This allows you to use the
     # single set in multiple rules. When you update the referenced set, AWS
     # WAF automatically updates all rules that reference it.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass IPSetReferenceStatement
     #   data as a hash:
@@ -3427,21 +3457,10 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # High-level information about an IPSet, returned by operations like
     # create and list. This provides information like the ID, that you can
     # use to retrieve and manage an `IPSet`, and the ARN, that you provide
     # to the IPSetReferenceStatement to use the address set in a Rule.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] name
     #   The name of the IP set. You cannot change the name of an `IPSet`
@@ -3455,8 +3474,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the IP set that helps with identification. You
-    #   cannot change the description of an IP set after you create it.
+    #   A description of the IP set that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] lock_token
@@ -3483,6 +3501,123 @@ module Aws::WAFV2
       :description,
       :lock_token,
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The body of a web request, inspected as JSON. The body immediately
+    # follows the request headers. This is used in the FieldToMatch
+    # specification.
+    #
+    # Use the specifications in this object to indicate which parts of the
+    # JSON body to inspect using the rule's inspection criteria. AWS WAF
+    # inspects only the parts of the JSON that result from the matches that
+    # you indicate.
+    #
+    # @note When making an API call, you may pass JsonBody
+    #   data as a hash:
+    #
+    #       {
+    #         match_pattern: { # required
+    #           all: {
+    #           },
+    #           included_paths: ["JsonPointerPath"],
+    #         },
+    #         match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #         invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #       }
+    #
+    # @!attribute [rw] match_pattern
+    #   The patterns to look for in the JSON body. AWS WAF inspects the
+    #   results of these pattern matches against the rule inspection
+    #   criteria.
+    #   @return [Types::JsonMatchPattern]
+    #
+    # @!attribute [rw] match_scope
+    #   The parts of the JSON to match against using the `MatchPattern`. If
+    #   you specify `All`, AWS WAF matches against keys and values.
+    #   @return [String]
+    #
+    # @!attribute [rw] invalid_fallback_behavior
+    #   The inspection behavior to fall back to if the JSON in the request
+    #   body is invalid. For AWS WAF, invalid JSON is any content that
+    #   isn't complete syntactical JSON, content whose root node isn't an
+    #   object or an array, and duplicate keys in the content.
+    #
+    #   You can specify the following fallback behaviors:
+    #
+    #   * `MATCH` - Treat the web request as matching the rule statement.
+    #     AWS WAF applies the rule action to the request.
+    #
+    #   * `NO_MATCH` - Treat the web request as not matching the rule
+    #     statement.
+    #
+    #   * `EVALUATE_AS_STRING` - Inspect the body as plain text. This option
+    #     applies the text transformations and inspection criteria that you
+    #     defined for the JSON inspection to the body text string.
+    #
+    #   If you don't provide this setting, when AWS WAF encounters invalid
+    #   JSON, it parses and inspects what it can, up to the first invalid
+    #   JSON that it encounters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/JsonBody AWS API Documentation
+    #
+    class JsonBody < Struct.new(
+      :match_pattern,
+      :match_scope,
+      :invalid_fallback_behavior)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The patterns to look for in the JSON body. AWS WAF inspects the
+    # results of these pattern matches against the rule inspection criteria.
+    # This is used with the FieldToMatch option `JsonBody`.
+    #
+    # @note When making an API call, you may pass JsonMatchPattern
+    #   data as a hash:
+    #
+    #       {
+    #         all: {
+    #         },
+    #         included_paths: ["JsonPointerPath"],
+    #       }
+    #
+    # @!attribute [rw] all
+    #   Match all of the elements. See also `MatchScope` in JsonBody.
+    #
+    #   You must specify either this setting or the `IncludedPaths` setting,
+    #   but not both.
+    #   @return [Types::All]
+    #
+    # @!attribute [rw] included_paths
+    #   Match only the specified include paths. See also `MatchScope` in
+    #   JsonBody.
+    #
+    #   Provide the include paths using JSON Pointer syntax. For example,
+    #   `"IncludedPaths": ["/dogs/0/name", "/dogs/1/name"]`. For information
+    #   about this syntax, see the Internet Engineering Task Force (IETF)
+    #   documentation [JavaScript Object Notation (JSON) Pointer][1].
+    #
+    #   You must specify either this setting or the `All` setting, but not
+    #   both.
+    #
+    #   <note markdown="1"> Don't use this option to include all paths. Instead, use the `All`
+    #   setting.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6901
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/JsonMatchPattern AWS API Documentation
+    #
+    class JsonMatchPattern < Struct.new(
+      :all,
+      :included_paths)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4002,21 +4137,10 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # Defines an association between Amazon Kinesis Data Firehose
     # destinations and a web ACL resource, for logging from AWS WAF. As part
     # of the association, you can specify parts of the standard logging
     # fields to keep out of the logs.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass LoggingConfiguration
     #   data as a hash:
@@ -4041,6 +4165,15 @@ module Aws::WAFV2
     #             body: {
     #             },
     #             method: {
+    #             },
+    #             json_body: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_paths: ["JsonPointerPath"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #             },
     #           },
     #         ],
@@ -4085,13 +4218,6 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # A rule statement used to run the rules that are defined in a managed
     # rule group. To use this, provide the vendor name and the name of the
     # rule group in this statement. You can retrieve the required names by
@@ -4100,10 +4226,6 @@ module Aws::WAFV2
     # You can't nest a `ManagedRuleGroupStatement`, for example for use
     # inside a `NotStatement` or `OrStatement`. It can only be referenced as
     # a top-level statement within a rule.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass ManagedRuleGroupStatement
     #   data as a hash:
@@ -4144,13 +4266,6 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # High-level information about a managed rule group, returned by
     # ListAvailableManagedRuleGroups. This provides information like the
     # name and vendor name, that you provide when you add a
@@ -4158,10 +4273,6 @@ module Aws::WAFV2
     # AWS Managed Rules rule groups, which are free of charge to AWS WAF
     # customers, and AWS Marketplace managed rule groups, which you can
     # subscribe to through AWS Marketplace.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] vendor_name
     #   The name of the managed rule group vendor. You use this, along with
@@ -4188,22 +4299,11 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # The HTTP method of a web request. The method indicates the type of
     # operation that the request is asking the origin to perform.
     #
     # This is used only to indicate the web request component for AWS WAF to
     # inspect, in the FieldToMatch specification.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @api private
     #
@@ -4211,13 +4311,6 @@ module Aws::WAFV2
     #
     class Method < Aws::EmptyStructure; end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # Specifies that AWS WAF should do nothing. This is generally used to
     # try out a rule without performing any actions. You set the
     # `OverrideAction` on the Rule.
@@ -4225,29 +4318,14 @@ module Aws::WAFV2
     # This is used only in the context of other settings, for example to
     # specify values for RuleAction and web ACL DefaultAction.
     #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
-    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/NoneAction AWS API Documentation
     #
     class NoneAction < Aws::EmptyStructure; end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # A logical rule statement used to negate the results of another rule
     # statement. You provide one Statement within the `NotStatement`.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass NotStatement
     #   data as a hash:
@@ -4272,6 +4350,15 @@ module Aws::WAFV2
     #               body: {
     #               },
     #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #               },
     #             },
     #             text_transformations: [ # required
@@ -4300,6 +4387,15 @@ module Aws::WAFV2
     #               },
     #               method: {
     #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -4326,6 +4422,15 @@ module Aws::WAFV2
     #               },
     #               method: {
     #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -4351,6 +4456,15 @@ module Aws::WAFV2
     #               body: {
     #               },
     #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -4403,6 +4517,15 @@ module Aws::WAFV2
     #               body: {
     #               },
     #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #               },
     #             },
     #             text_transformations: [ # required
@@ -4467,19 +4590,8 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # A logical rule statement used to combine other rule statements with OR
     # logic. You provide more than one Statement within the `OrStatement`.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass OrStatement
     #   data as a hash:
@@ -4505,6 +4617,15 @@ module Aws::WAFV2
     #                 body: {
     #                 },
     #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -4533,6 +4654,15 @@ module Aws::WAFV2
     #                 },
     #                 method: {
     #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
     #               },
     #               text_transformations: [ # required
     #                 {
@@ -4559,6 +4689,15 @@ module Aws::WAFV2
     #                 },
     #                 method: {
     #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
     #               },
     #               text_transformations: [ # required
     #                 {
@@ -4584,6 +4723,15 @@ module Aws::WAFV2
     #                 body: {
     #                 },
     #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                 },
     #               },
     #               comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -4636,6 +4784,15 @@ module Aws::WAFV2
     #                 body: {
     #                 },
     #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -4766,6 +4923,15 @@ module Aws::WAFV2
     #               },
     #               method: {
     #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
     #             },
     #           ],
     #           managed_by_firewall_manager: false,
@@ -4846,22 +5012,11 @@ module Aws::WAFV2
     #
     class PutPermissionPolicyResponse < Aws::EmptyStructure; end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # The query string of a web request. This is the part of a URL that
     # appears after a `?` character, if any.
     #
     # This is used only to indicate the web request component for AWS WAF to
     # inspect, in the FieldToMatch specification.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @api private
     #
@@ -4869,13 +5024,6 @@ module Aws::WAFV2
     #
     class QueryString < Aws::EmptyStructure; end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # A rate-based rule tracks the rate of requests for each originating IP
     # address, and triggers the rule action when the rate exceeds a limit
     # that you specify on the number of requests in any 5-minute time span.
@@ -4909,10 +5057,6 @@ module Aws::WAFV2
     # `NotStatement` or `OrStatement`. It can only be referenced as a
     # top-level statement within a rule.
     #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
-    #
     # @note When making an API call, you may pass RateBasedStatement
     #   data as a hash:
     #
@@ -4938,6 +5082,15 @@ module Aws::WAFV2
     #               body: {
     #               },
     #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #               },
     #             },
     #             text_transformations: [ # required
@@ -4966,6 +5119,15 @@ module Aws::WAFV2
     #               },
     #               method: {
     #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -4992,6 +5154,15 @@ module Aws::WAFV2
     #               },
     #               method: {
     #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -5017,6 +5188,15 @@ module Aws::WAFV2
     #               body: {
     #               },
     #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -5069,6 +5249,15 @@ module Aws::WAFV2
     #               body: {
     #               },
     #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #               },
     #             },
     #             text_transformations: [ # required
@@ -5174,19 +5363,8 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # The set of IP addresses that are currently blocked for a rate-based
     # statement.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] ip_address_version
     #   @return [String]
@@ -5204,18 +5382,7 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # A single regular expression. This is used in a RegexPatternSet.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass Regex
     #   data as a hash:
@@ -5236,22 +5403,11 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # Contains one or more regular expressions.
     #
     # AWS WAF assigns an ARN to each `RegexPatternSet` that you create. To
     # use a set in a rule, you provide the ARN to the Rule statement
     # RegexPatternSetReferenceStatement.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] name
     #   The name of the set. You cannot change the name after you create the
@@ -5269,8 +5425,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the set that helps with identification. You cannot
-    #   change the description of a set after you create it.
+    #   A description of the set that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] regular_expression_list
@@ -5289,13 +5444,6 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # A rule statement used to search web request components for matches
     # with regular expressions. To use this, create a RegexPatternSet that
     # specifies the expressions that you want to detect, then use the ARN of
@@ -5308,10 +5456,6 @@ module Aws::WAFV2
     # you to use the single set in multiple rules. When you update the
     # referenced set, AWS WAF automatically updates all rules that reference
     # it.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass RegexPatternSetReferenceStatement
     #   data as a hash:
@@ -5334,6 +5478,15 @@ module Aws::WAFV2
     #           body: {
     #           },
     #           method: {
+    #           },
+    #           json_body: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_paths: ["JsonPointerPath"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #           },
     #         },
     #         text_transformations: [ # required
@@ -5373,22 +5526,11 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # High-level information about a RegexPatternSet, returned by operations
     # like create and list. This provides information like the ID, that you
     # can use to retrieve and manage a `RegexPatternSet`, and the ARN, that
     # you provide to the RegexPatternSetReferenceStatement to use the
     # pattern set in a Rule.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] name
     #   The name of the data type instance. You cannot change the name after
@@ -5402,8 +5544,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the set that helps with identification. You cannot
-    #   change the description of a set after you create it.
+    #   A description of the set that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] lock_token
@@ -5434,22 +5575,11 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # A single rule, which you can use in a WebACL or RuleGroup to identify
     # web requests that you want to allow, block, or count. Each rule
     # includes one top-level Statement that AWS WAF uses to identify
     # matching web requests, and parameters that govern how AWS WAF handles
     # them.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass Rule
     #   data as a hash:
@@ -5476,6 +5606,15 @@ module Aws::WAFV2
     #               body: {
     #               },
     #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #               },
     #             },
     #             text_transformations: [ # required
@@ -5504,6 +5643,15 @@ module Aws::WAFV2
     #               },
     #               method: {
     #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -5530,6 +5678,15 @@ module Aws::WAFV2
     #               },
     #               method: {
     #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
     #             },
     #             text_transformations: [ # required
     #               {
@@ -5555,6 +5712,15 @@ module Aws::WAFV2
     #               body: {
     #               },
     #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -5607,6 +5773,15 @@ module Aws::WAFV2
     #               body: {
     #               },
     #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #               },
     #             },
     #             text_transformations: [ # required
@@ -5751,20 +5926,9 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # The action that AWS WAF should take on a web request when it matches a
     # rule's statement. Settings at the web ACL level can override the rule
     # action setting.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass RuleAction
     #   data as a hash:
@@ -5800,22 +5964,11 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # A rule group defines a collection of rules to inspect and control web
     # requests that you can use in a WebACL. When you create a rule group,
     # you define an immutable capacity limit. If you update a rule group,
     # you must stay within the capacity. This allows others to reuse the
     # rule group with confidence in its capacity requirements.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] name
     #   The name of the rule group. You cannot change the name of a rule
@@ -5851,8 +6004,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the rule group that helps with identification. You
-    #   cannot change the description of a rule group after you create it.
+    #   A description of the rule group that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -5881,13 +6033,6 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # A rule statement used to run the rules that are defined in a
     # RuleGroup. To use this, create a rule group with your rules, then
     # provide the ARN of the rule group in this statement.
@@ -5895,10 +6040,6 @@ module Aws::WAFV2
     # You cannot nest a `RuleGroupReferenceStatement`, for example for use
     # inside a `NotStatement` or `OrStatement`. It can only be referenced as
     # a top-level statement within a rule.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass RuleGroupReferenceStatement
     #   data as a hash:
@@ -5930,22 +6071,11 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # High-level information about a RuleGroup, returned by operations like
     # create and list. This provides information like the ID, that you can
     # use to retrieve and manage a `RuleGroup`, and the ARN, that you
     # provide to the RuleGroupReferenceStatement to use the rule group in a
     # Rule.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] name
     #   The name of the data type instance. You cannot change the name after
@@ -5959,8 +6089,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the rule group that helps with identification. You
-    #   cannot change the description of a rule group after you create it.
+    #   A description of the rule group that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] lock_token
@@ -5991,42 +6120,20 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # High-level information about a Rule, returned by operations like
     # DescribeManagedRuleGroup. This provides information like the ID, that
     # you can use to retrieve and manage a `RuleGroup`, and the ARN, that
     # you provide to the RuleGroupReferenceStatement to use the rule group
     # in a Rule.
     #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
-    #
     # @!attribute [rw] name
     #   The name of the rule.
     #   @return [String]
     #
     # @!attribute [rw] action
-    #   <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    #   in November, 2019. For information, including how to migrate your
-    #   AWS WAF resources from the prior release, see the [AWS WAF Developer
-    #   Guide][1].
-    #
-    #    </note>
-    #
     #   The action that AWS WAF should take on a web request when it matches
     #   a rule's statement. Settings at the web ACL level can override the
     #   rule action setting.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #   @return [Types::RuleAction]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RuleSummary AWS API Documentation
@@ -6038,22 +6145,11 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # Represents a single sampled web request. The response from
     # GetSampledRequests includes a `SampledHTTPRequests` complex type that
     # appears as `SampledRequests` in the response syntax.
     # `SampledHTTPRequests` contains an array of `SampledHTTPRequest`
     # objects.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] request
     #   A complex type that contains detailed information about the request.
@@ -6096,22 +6192,11 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # One of the headers in a web request, identified by name, for example,
     # `User-Agent` or `Referer`. This setting isn't case sensitive.
     #
     # This is used only to indicate the web request component for AWS WAF to
     # inspect, in the FieldToMatch specification.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass SingleHeader
     #   data as a hash:
@@ -6132,20 +6217,9 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # One query argument in a web request, identified by name, for example
     # *UserName* or *SalesRegion*. The name can be up to 30 characters long
     # and isn't case sensitive.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass SingleQueryArgument
     #   data as a hash:
@@ -6166,13 +6240,6 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # A rule statement that compares a number of bytes against the size of a
     # request component, using a comparison operator, such as greater than
     # (&gt;) or less than (&lt;). For example, you can use a size constraint
@@ -6187,10 +6254,6 @@ module Aws::WAFV2
     # If you choose URI for the value of Part of the request to filter on,
     # the slash (/) in the URI counts as one character. For example, the URI
     # `/logo.jpg` is nine characters long.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass SizeConstraintStatement
     #   data as a hash:
@@ -6212,6 +6275,15 @@ module Aws::WAFV2
     #           body: {
     #           },
     #           method: {
+    #           },
+    #           json_body: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_paths: ["JsonPointerPath"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #           },
     #         },
     #         comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -6258,13 +6330,6 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # Attackers sometimes insert malicious SQL code into web requests in an
     # effort to extract data from your database. To allow or block web
     # requests that appear to contain malicious SQL code, create one or more
@@ -6273,10 +6338,6 @@ module Aws::WAFV2
     # string, that you want AWS WAF to inspect. Later in the process, when
     # you create a web ACL, you specify whether to allow or block requests
     # that appear to contain malicious SQL code.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass SqliMatchStatement
     #   data as a hash:
@@ -6298,6 +6359,15 @@ module Aws::WAFV2
     #           body: {
     #           },
     #           method: {
+    #           },
+    #           json_body: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_paths: ["JsonPointerPath"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #           },
     #         },
     #         text_transformations: [ # required
@@ -6331,19 +6401,8 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # The processing guidance for a Rule, used by AWS WAF to determine
     # whether a web request matches the rule.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass Statement
     #   data as a hash:
@@ -6367,6 +6426,15 @@ module Aws::WAFV2
     #             body: {
     #             },
     #             method: {
+    #             },
+    #             json_body: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_paths: ["JsonPointerPath"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #             },
     #           },
     #           text_transformations: [ # required
@@ -6395,6 +6463,15 @@ module Aws::WAFV2
     #             },
     #             method: {
     #             },
+    #             json_body: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_paths: ["JsonPointerPath"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #             },
     #           },
     #           text_transformations: [ # required
     #             {
@@ -6421,6 +6498,15 @@ module Aws::WAFV2
     #             },
     #             method: {
     #             },
+    #             json_body: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_paths: ["JsonPointerPath"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #             },
     #           },
     #           text_transformations: [ # required
     #             {
@@ -6446,6 +6532,15 @@ module Aws::WAFV2
     #             body: {
     #             },
     #             method: {
+    #             },
+    #             json_body: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_paths: ["JsonPointerPath"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #             },
     #           },
     #           comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -6499,6 +6594,15 @@ module Aws::WAFV2
     #             },
     #             method: {
     #             },
+    #             json_body: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_paths: ["JsonPointerPath"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #             },
     #           },
     #           text_transformations: [ # required
     #             {
@@ -6530,6 +6634,15 @@ module Aws::WAFV2
     #                 },
     #                 method: {
     #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
     #               },
     #               text_transformations: [ # required
     #                 {
@@ -6557,6 +6670,15 @@ module Aws::WAFV2
     #                 },
     #                 method: {
     #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
     #               },
     #               text_transformations: [ # required
     #                 {
@@ -6583,6 +6705,15 @@ module Aws::WAFV2
     #                 },
     #                 method: {
     #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
     #               },
     #               text_transformations: [ # required
     #                 {
@@ -6608,6 +6739,15 @@ module Aws::WAFV2
     #                 body: {
     #                 },
     #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                 },
     #               },
     #               comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -6660,6 +6800,15 @@ module Aws::WAFV2
     #                 body: {
     #                 },
     #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -6728,6 +6877,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -6755,6 +6913,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -6781,6 +6948,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -6806,6 +6982,15 @@ module Aws::WAFV2
     #                   body: {
     #                   },
     #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                   },
     #                 },
     #                 comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -6858,6 +7043,15 @@ module Aws::WAFV2
     #                   body: {
     #                   },
     #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -6925,6 +7119,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -6952,6 +7155,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -6978,6 +7190,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -7003,6 +7224,15 @@ module Aws::WAFV2
     #                   body: {
     #                   },
     #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                   },
     #                 },
     #                 comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -7055,6 +7285,15 @@ module Aws::WAFV2
     #                   body: {
     #                   },
     #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -7121,6 +7360,15 @@ module Aws::WAFV2
     #                 },
     #                 method: {
     #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
     #               },
     #               text_transformations: [ # required
     #                 {
@@ -7148,6 +7396,15 @@ module Aws::WAFV2
     #                 },
     #                 method: {
     #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
     #               },
     #               text_transformations: [ # required
     #                 {
@@ -7174,6 +7431,15 @@ module Aws::WAFV2
     #                 },
     #                 method: {
     #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
     #               },
     #               text_transformations: [ # required
     #                 {
@@ -7199,6 +7465,15 @@ module Aws::WAFV2
     #                 body: {
     #                 },
     #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                 },
     #               },
     #               comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -7251,6 +7526,15 @@ module Aws::WAFV2
     #                 body: {
     #                 },
     #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                 },
     #               },
     #               text_transformations: [ # required
@@ -7486,13 +7770,6 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # A tag associated with an AWS resource. Tags are key:value pairs that
     # you can use to categorize and manage your resources, for purposes like
     # billing or other management. Typically, the tag key represents a
@@ -7506,10 +7783,6 @@ module Aws::WAFV2
     # You can tag the AWS resources that you manage through AWS WAF: web
     # ACLs, rule groups, IP sets, and regex pattern sets. You can't manage
     # or view tags through the AWS WAF console.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -7540,13 +7813,6 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # The collection of tagging definitions for an AWS resource. Tags are
     # key:value pairs that you can use to categorize and manage your
     # resources, for purposes like billing or other management. Typically,
@@ -7560,10 +7826,6 @@ module Aws::WAFV2
     # You can tag the AWS resources that you manage through AWS WAF: web
     # ACLs, rule groups, IP sets, and regex pattern sets. You can't manage
     # or view tags through the AWS WAF console.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -7616,19 +7878,8 @@ module Aws::WAFV2
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # Text transformations eliminate some of the unusual formatting that
     # attackers use in web requests in an effort to bypass detection.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass TextTransformation
     #   data as a hash:
@@ -7727,13 +7978,6 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # In a GetSampledRequests request, the `StartTime` and `EndTime` objects
     # specify the time range for which you want AWS WAF to return a sample
     # of web requests.
@@ -7751,10 +7995,6 @@ module Aws::WAFV2
     # 5,000 requests during that period, AWS WAF stops sampling after the
     # 5,000th request. In that case, `EndTime` is the time that AWS WAF
     # received the 5,000th request.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass TimeWindow
     #   data as a hash:
@@ -7860,8 +8100,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the IP set that helps with identification. You
-    #   cannot change the description of an IP set after you create it.
+    #   A description of the IP set that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] addresses
@@ -7981,8 +8220,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the set that helps with identification. You cannot
-    #   change the description of a set after you create it.
+    #   A description of the set that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] regular_expression_list
@@ -8059,6 +8297,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -8086,6 +8333,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -8112,6 +8368,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -8137,6 +8402,15 @@ module Aws::WAFV2
     #                   body: {
     #                   },
     #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                   },
     #                 },
     #                 comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -8189,6 +8463,15 @@ module Aws::WAFV2
     #                   body: {
     #                   },
     #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -8294,8 +8577,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the rule group that helps with identification. You
-    #   cannot change the description of a rule group after you create it.
+    #   A description of the rule group that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -8388,6 +8670,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -8415,6 +8706,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -8441,6 +8741,15 @@ module Aws::WAFV2
     #                   },
     #                   method: {
     #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
     #                 },
     #                 text_transformations: [ # required
     #                   {
@@ -8466,6 +8775,15 @@ module Aws::WAFV2
     #                   body: {
     #                   },
     #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                   },
     #                 },
     #                 comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -8518,6 +8836,15 @@ module Aws::WAFV2
     #                   body: {
     #                   },
     #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #                   },
     #                 },
     #                 text_transformations: [ # required
@@ -8628,8 +8955,7 @@ module Aws::WAFV2
     #   @return [Types::DefaultAction]
     #
     # @!attribute [rw] description
-    #   A description of the Web ACL that helps with identification. You
-    #   cannot change the description of a Web ACL after you create it.
+    #   A description of the Web ACL that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -8685,13 +9011,6 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # The path component of the URI of a web request. This is the part of a
     # web request that identifies a resource, for example,
     # `/images/daily-ad.jpg`.
@@ -8699,29 +9018,14 @@ module Aws::WAFV2
     # This is used only to indicate the web request component for AWS WAF to
     # inspect, in the FieldToMatch specification.
     #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
-    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UriPath AWS API Documentation
     #
     class UriPath < Aws::EmptyStructure; end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # Defines and enables Amazon CloudWatch metrics and web request sample
     # collection.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass VisibilityConfig
     #   data as a hash:
@@ -9031,13 +9335,6 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # A Web ACL defines a collection of rules to use to inspect and control
     # web requests. Each rule has an action defined (allow, block, or count)
     # for requests that match the statement of the rule. In the Web ACL, you
@@ -9047,10 +9344,6 @@ module Aws::WAFV2
     # can associate a Web ACL with one or more AWS resources to protect. The
     # resources can be Amazon CloudFront, an Amazon API Gateway REST API, an
     # Application Load Balancer, or an AWS AppSync GraphQL API.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] name
     #   The name of the Web ACL. You cannot change the name of a Web ACL
@@ -9074,8 +9367,7 @@ module Aws::WAFV2
     #   @return [Types::DefaultAction]
     #
     # @!attribute [rw] description
-    #   A description of the Web ACL that helps with identification. You
-    #   cannot change the description of a Web ACL after you create it.
+    #   A description of the Web ACL that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -9154,21 +9446,10 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # High-level information about a WebACL, returned by operations like
     # create and list. This provides information like the ID, that you can
     # use to retrieve and manage a `WebACL`, and the ARN, that you provide
     # to operations like AssociateWebACL.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] name
     #   The name of the Web ACL. You cannot change the name of a Web ACL
@@ -9182,8 +9463,7 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the Web ACL that helps with identification. You
-    #   cannot change the description of a Web ACL after you create it.
+    #   A description of the Web ACL that helps with identification.
     #   @return [String]
     #
     # @!attribute [rw] lock_token
@@ -9214,13 +9494,6 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
-    #
-    #  </note>
-    #
     # A rule statement that defines a cross-site scripting (XSS) match
     # search for AWS WAF to apply to web requests. XSS attacks are those
     # where the attacker uses vulnerabilities in a benign website as a
@@ -9229,10 +9502,6 @@ module Aws::WAFV2
     # requests that you want AWS WAF to search and text transformations to
     # use on the search area before AWS WAF searches for character sequences
     # that are likely to be malicious strings.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @note When making an API call, you may pass XssMatchStatement
     #   data as a hash:
@@ -9254,6 +9523,15 @@ module Aws::WAFV2
     #           body: {
     #           },
     #           method: {
+    #           },
+    #           json_body: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_paths: ["JsonPointerPath"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
     #           },
     #         },
     #         text_transformations: [ # required

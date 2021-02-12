@@ -330,17 +330,20 @@ module Aws::Macie2
     # Accepts an Amazon Macie membership invitation that was received from a
     # specific account.
     #
+    # @option params [String] :administrator_account_id
+    #
     # @option params [required, String] :invitation_id
     #
-    # @option params [required, String] :master_account
+    # @option params [String] :master_account
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.accept_invitation({
+    #     administrator_account_id: "__string",
     #     invitation_id: "__string", # required
-    #     master_account: "__string", # required
+    #     master_account: "__string",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AcceptInvitation AWS API Documentation
@@ -681,11 +684,11 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Associates an account with an Amazon Macie master account.
+    # Associates an account with an Amazon Macie administrator account.
     #
     # @option params [required, Types::AccountDetail] :account
     #   Specifies details for an account to associate with an Amazon Macie
-    #   master account.
+    #   administrator account.
     #
     # @option params [Hash<String,String>] :tags
     #   A string-to-string map of key-value pairs that specifies the tags
@@ -846,8 +849,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Deletes the association between an Amazon Macie master account and an
-    # account.
+    # Deletes the association between an Amazon Macie administrator account
+    # and an account.
     #
     # @option params [required, String] :id
     #
@@ -1125,7 +1128,23 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Disassociates a member account from its Amazon Macie master account.
+    # Disassociates a member account from its Amazon Macie administrator
+    # account.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/DisassociateFromAdministratorAccount AWS API Documentation
+    #
+    # @overload disassociate_from_administrator_account(params = {})
+    # @param [Hash] params ({})
+    def disassociate_from_administrator_account(params = {}, options = {})
+      req = build_request(:disassociate_from_administrator_account, params)
+      req.send_request(options)
+    end
+
+    # (Deprecated) Disassociates a member account from its Amazon Macie
+    # administrator account. This operation has been replaced by the
+    # DisassociateFromAdministratorAccount operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1138,7 +1157,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Disassociates an Amazon Macie master account from a member account.
+    # Disassociates an Amazon Macie administrator account from a member
+    # account.
     #
     # @option params [required, String] :id
     #
@@ -1218,6 +1238,29 @@ module Aws::Macie2
     # @param [Hash] params ({})
     def enable_organization_admin_account(params = {}, options = {})
       req = build_request(:enable_organization_admin_account, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the Amazon Macie administrator account for
+    # an account.
+    #
+    # @return [Types::GetAdministratorAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAdministratorAccountResponse#administrator #administrator} => Types::Invitation
+    #
+    # @example Response structure
+    #
+    #   resp.administrator.account_id #=> String
+    #   resp.administrator.invitation_id #=> String
+    #   resp.administrator.invited_at #=> Time
+    #   resp.administrator.relationship_status #=> String, one of "Enabled", "Paused", "Invited", "Created", "Removed", "Resigned", "EmailVerificationInProgress", "EmailVerificationFailed", "RegionDisabled", "AccountSuspended"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetAdministratorAccount AWS API Documentation
+    #
+    # @overload get_administrator_account(params = {})
+    # @param [Hash] params ({})
+    def get_administrator_account(params = {}, options = {})
+      req = build_request(:get_administrator_account, params)
       req.send_request(options)
     end
 
@@ -1717,8 +1760,9 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves information about the Amazon Macie master account for an
-    # account.
+    # (Deprecated) Retrieves information about the Amazon Macie
+    # administrator account for an account. This operation has been replaced
+    # by the GetAdministratorAccount operation.
     #
     # @return [Types::GetMasterAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1740,14 +1784,15 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves information about a member account that's associated with
-    # an Amazon Macie master account.
+    # Retrieves information about an account that's associated with an
+    # Amazon Macie administrator account.
     #
     # @option params [required, String] :id
     #
     # @return [Types::GetMemberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMemberResponse#account_id #account_id} => String
+    #   * {Types::GetMemberResponse#administrator_account_id #administrator_account_id} => String
     #   * {Types::GetMemberResponse#arn #arn} => String
     #   * {Types::GetMemberResponse#email #email} => String
     #   * {Types::GetMemberResponse#invited_at #invited_at} => Time
@@ -1765,6 +1810,7 @@ module Aws::Macie2
     # @example Response structure
     #
     #   resp.account_id #=> String
+    #   resp.administrator_account_id #=> String
     #   resp.arn #=> String
     #   resp.email #=> String
     #   resp.invited_at #=> Time
@@ -2139,7 +2185,7 @@ module Aws::Macie2
     end
 
     # Retrieves information about the accounts that are associated with an
-    # Amazon Macie master account.
+    # Amazon Macie administrator account.
     #
     # @option params [Integer] :max_results
     #
@@ -2166,6 +2212,7 @@ module Aws::Macie2
     #
     #   resp.members #=> Array
     #   resp.members[0].account_id #=> String
+    #   resp.members[0].administrator_account_id #=> String
     #   resp.members[0].arn #=> String
     #   resp.members[0].email #=> String
     #   resp.members[0].invited_at #=> Time
@@ -2502,8 +2549,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Enables an Amazon Macie master account to suspend or re-enable a
-    # member account.
+    # Enables an Amazon Macie administrator to suspend or re-enable a member
+    # account.
     #
     # @option params [required, String] :id
     #
@@ -2563,7 +2610,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

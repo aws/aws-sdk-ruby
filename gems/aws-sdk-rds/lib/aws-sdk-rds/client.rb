@@ -1260,6 +1260,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.db_cluster_identifier #=> String
     #   resp.db_cluster_snapshot.snapshot_create_time #=> Time
     #   resp.db_cluster_snapshot.engine #=> String
+    #   resp.db_cluster_snapshot.engine_mode #=> String
     #   resp.db_cluster_snapshot.allocated_storage #=> Integer
     #   resp.db_cluster_snapshot.status #=> String
     #   resp.db_cluster_snapshot.port #=> Integer
@@ -2725,6 +2726,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.db_cluster_identifier #=> String
     #   resp.db_cluster_snapshot.snapshot_create_time #=> Time
     #   resp.db_cluster_snapshot.engine #=> String
+    #   resp.db_cluster_snapshot.engine_mode #=> String
     #   resp.db_cluster_snapshot.allocated_storage #=> Integer
     #   resp.db_cluster_snapshot.status #=> String
     #   resp.db_cluster_snapshot.port #=> Integer
@@ -5839,6 +5841,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.db_cluster_identifier #=> String
     #   resp.db_cluster_snapshot.snapshot_create_time #=> Time
     #   resp.db_cluster_snapshot.engine #=> String
+    #   resp.db_cluster_snapshot.engine_mode #=> String
     #   resp.db_cluster_snapshot.allocated_storage #=> Integer
     #   resp.db_cluster_snapshot.status #=> String
     #   resp.db_cluster_snapshot.port #=> Integer
@@ -7526,6 +7529,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshots[0].db_cluster_identifier #=> String
     #   resp.db_cluster_snapshots[0].snapshot_create_time #=> Time
     #   resp.db_cluster_snapshots[0].engine #=> String
+    #   resp.db_cluster_snapshots[0].engine_mode #=> String
     #   resp.db_cluster_snapshots[0].allocated_storage #=> Integer
     #   resp.db_cluster_snapshots[0].status #=> String
     #   resp.db_cluster_snapshots[0].port #=> Integer
@@ -7914,6 +7918,10 @@ module Aws::RDS
     #   resp.db_engine_versions[0].valid_upgrade_target[0].description #=> String
     #   resp.db_engine_versions[0].valid_upgrade_target[0].auto_upgrade #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].is_major_version_upgrade #=> Boolean
+    #   resp.db_engine_versions[0].valid_upgrade_target[0].supported_engine_modes #=> Array
+    #   resp.db_engine_versions[0].valid_upgrade_target[0].supported_engine_modes[0] #=> String
+    #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_parallel_query #=> Boolean
+    #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_global_databases #=> Boolean
     #   resp.db_engine_versions[0].supported_timezones #=> Array
     #   resp.db_engine_versions[0].supported_timezones[0].timezone_name #=> String
     #   resp.db_engine_versions[0].exportable_log_types #=> Array
@@ -19515,7 +19523,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

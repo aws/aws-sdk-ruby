@@ -24,6 +24,8 @@ module Aws::EKS
     AddonVersionInfo = Shapes::StructureShape.new(name: 'AddonVersionInfo')
     AddonVersionInfoList = Shapes::ListShape.new(name: 'AddonVersionInfoList')
     Addons = Shapes::ListShape.new(name: 'Addons')
+    AssociateIdentityProviderConfigRequest = Shapes::StructureShape.new(name: 'AssociateIdentityProviderConfigRequest')
+    AssociateIdentityProviderConfigResponse = Shapes::StructureShape.new(name: 'AssociateIdentityProviderConfigResponse')
     AutoScalingGroup = Shapes::StructureShape.new(name: 'AutoScalingGroup')
     AutoScalingGroupList = Shapes::ListShape.new(name: 'AutoScalingGroupList')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
@@ -64,10 +66,14 @@ module Aws::EKS
     DescribeClusterResponse = Shapes::StructureShape.new(name: 'DescribeClusterResponse')
     DescribeFargateProfileRequest = Shapes::StructureShape.new(name: 'DescribeFargateProfileRequest')
     DescribeFargateProfileResponse = Shapes::StructureShape.new(name: 'DescribeFargateProfileResponse')
+    DescribeIdentityProviderConfigRequest = Shapes::StructureShape.new(name: 'DescribeIdentityProviderConfigRequest')
+    DescribeIdentityProviderConfigResponse = Shapes::StructureShape.new(name: 'DescribeIdentityProviderConfigResponse')
     DescribeNodegroupRequest = Shapes::StructureShape.new(name: 'DescribeNodegroupRequest')
     DescribeNodegroupResponse = Shapes::StructureShape.new(name: 'DescribeNodegroupResponse')
     DescribeUpdateRequest = Shapes::StructureShape.new(name: 'DescribeUpdateRequest')
     DescribeUpdateResponse = Shapes::StructureShape.new(name: 'DescribeUpdateResponse')
+    DisassociateIdentityProviderConfigRequest = Shapes::StructureShape.new(name: 'DisassociateIdentityProviderConfigRequest')
+    DisassociateIdentityProviderConfigResponse = Shapes::StructureShape.new(name: 'DisassociateIdentityProviderConfigResponse')
     EncryptionConfig = Shapes::StructureShape.new(name: 'EncryptionConfig')
     EncryptionConfigList = Shapes::ListShape.new(name: 'EncryptionConfigList')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
@@ -80,6 +86,9 @@ module Aws::EKS
     FargateProfileStatus = Shapes::StringShape.new(name: 'FargateProfileStatus')
     FargateProfilesRequestMaxResults = Shapes::IntegerShape.new(name: 'FargateProfilesRequestMaxResults')
     Identity = Shapes::StructureShape.new(name: 'Identity')
+    IdentityProviderConfig = Shapes::StructureShape.new(name: 'IdentityProviderConfig')
+    IdentityProviderConfigResponse = Shapes::StructureShape.new(name: 'IdentityProviderConfigResponse')
+    IdentityProviderConfigs = Shapes::ListShape.new(name: 'IdentityProviderConfigs')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     Issue = Shapes::StructureShape.new(name: 'Issue')
@@ -95,6 +104,9 @@ module Aws::EKS
     ListClustersResponse = Shapes::StructureShape.new(name: 'ListClustersResponse')
     ListFargateProfilesRequest = Shapes::StructureShape.new(name: 'ListFargateProfilesRequest')
     ListFargateProfilesResponse = Shapes::StructureShape.new(name: 'ListFargateProfilesResponse')
+    ListIdentityProviderConfigsRequest = Shapes::StructureShape.new(name: 'ListIdentityProviderConfigsRequest')
+    ListIdentityProviderConfigsRequestMaxResults = Shapes::IntegerShape.new(name: 'ListIdentityProviderConfigsRequestMaxResults')
+    ListIdentityProviderConfigsResponse = Shapes::StructureShape.new(name: 'ListIdentityProviderConfigsResponse')
     ListNodegroupsRequest = Shapes::StructureShape.new(name: 'ListNodegroupsRequest')
     ListNodegroupsRequestMaxResults = Shapes::IntegerShape.new(name: 'ListNodegroupsRequestMaxResults')
     ListNodegroupsResponse = Shapes::StructureShape.new(name: 'ListNodegroupsResponse')
@@ -116,6 +128,8 @@ module Aws::EKS
     NodegroupStatus = Shapes::StringShape.new(name: 'NodegroupStatus')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OIDC = Shapes::StructureShape.new(name: 'OIDC')
+    OidcIdentityProviderConfig = Shapes::StructureShape.new(name: 'OidcIdentityProviderConfig')
+    OidcIdentityProviderConfigRequest = Shapes::StructureShape.new(name: 'OidcIdentityProviderConfigRequest')
     Provider = Shapes::StructureShape.new(name: 'Provider')
     RemoteAccessConfig = Shapes::StructureShape.new(name: 'RemoteAccessConfig')
     ResolveConflicts = Shapes::StringShape.new(name: 'ResolveConflicts')
@@ -156,10 +170,14 @@ module Aws::EKS
     UpdateType = Shapes::StringShape.new(name: 'UpdateType')
     VpcConfigRequest = Shapes::StructureShape.new(name: 'VpcConfigRequest')
     VpcConfigResponse = Shapes::StructureShape.new(name: 'VpcConfigResponse')
+    configStatus = Shapes::StringShape.new(name: 'configStatus')
     labelKey = Shapes::StringShape.new(name: 'labelKey')
     labelValue = Shapes::StringShape.new(name: 'labelValue')
     labelsKeyList = Shapes::ListShape.new(name: 'labelsKeyList')
     labelsMap = Shapes::MapShape.new(name: 'labelsMap')
+    requiredClaimsKey = Shapes::StringShape.new(name: 'requiredClaimsKey')
+    requiredClaimsMap = Shapes::MapShape.new(name: 'requiredClaimsMap')
+    requiredClaimsValue = Shapes::StringShape.new(name: 'requiredClaimsValue')
 
     Addon.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, location_name: "addonName"))
     Addon.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, location_name: "clusterName"))
@@ -196,6 +214,16 @@ module Aws::EKS
     AddonVersionInfoList.member = Shapes::ShapeRef.new(shape: AddonVersionInfo)
 
     Addons.member = Shapes::ShapeRef.new(shape: AddonInfo)
+
+    AssociateIdentityProviderConfigRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    AssociateIdentityProviderConfigRequest.add_member(:oidc, Shapes::ShapeRef.new(shape: OidcIdentityProviderConfigRequest, required: true, location_name: "oidc"))
+    AssociateIdentityProviderConfigRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    AssociateIdentityProviderConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    AssociateIdentityProviderConfigRequest.struct_class = Types::AssociateIdentityProviderConfigRequest
+
+    AssociateIdentityProviderConfigResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
+    AssociateIdentityProviderConfigResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    AssociateIdentityProviderConfigResponse.struct_class = Types::AssociateIdentityProviderConfigResponse
 
     AutoScalingGroup.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     AutoScalingGroup.struct_class = Types::AutoScalingGroup
@@ -355,6 +383,13 @@ module Aws::EKS
     DescribeFargateProfileResponse.add_member(:fargate_profile, Shapes::ShapeRef.new(shape: FargateProfile, location_name: "fargateProfile"))
     DescribeFargateProfileResponse.struct_class = Types::DescribeFargateProfileResponse
 
+    DescribeIdentityProviderConfigRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    DescribeIdentityProviderConfigRequest.add_member(:identity_provider_config, Shapes::ShapeRef.new(shape: IdentityProviderConfig, required: true, location_name: "identityProviderConfig"))
+    DescribeIdentityProviderConfigRequest.struct_class = Types::DescribeIdentityProviderConfigRequest
+
+    DescribeIdentityProviderConfigResponse.add_member(:identity_provider_config, Shapes::ShapeRef.new(shape: IdentityProviderConfigResponse, location_name: "identityProviderConfig"))
+    DescribeIdentityProviderConfigResponse.struct_class = Types::DescribeIdentityProviderConfigResponse
+
     DescribeNodegroupRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     DescribeNodegroupRequest.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "nodegroupName"))
     DescribeNodegroupRequest.struct_class = Types::DescribeNodegroupRequest
@@ -370,6 +405,14 @@ module Aws::EKS
 
     DescribeUpdateResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
     DescribeUpdateResponse.struct_class = Types::DescribeUpdateResponse
+
+    DisassociateIdentityProviderConfigRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    DisassociateIdentityProviderConfigRequest.add_member(:identity_provider_config, Shapes::ShapeRef.new(shape: IdentityProviderConfig, required: true, location_name: "identityProviderConfig"))
+    DisassociateIdentityProviderConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DisassociateIdentityProviderConfigRequest.struct_class = Types::DisassociateIdentityProviderConfigRequest
+
+    DisassociateIdentityProviderConfigResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
+    DisassociateIdentityProviderConfigResponse.struct_class = Types::DisassociateIdentityProviderConfigResponse
 
     EncryptionConfig.add_member(:resources, Shapes::ShapeRef.new(shape: StringList, location_name: "resources"))
     EncryptionConfig.add_member(:provider, Shapes::ShapeRef.new(shape: Provider, location_name: "provider"))
@@ -406,6 +449,15 @@ module Aws::EKS
 
     Identity.add_member(:oidc, Shapes::ShapeRef.new(shape: OIDC, location_name: "oidc"))
     Identity.struct_class = Types::Identity
+
+    IdentityProviderConfig.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "type"))
+    IdentityProviderConfig.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    IdentityProviderConfig.struct_class = Types::IdentityProviderConfig
+
+    IdentityProviderConfigResponse.add_member(:oidc, Shapes::ShapeRef.new(shape: OidcIdentityProviderConfig, location_name: "oidc"))
+    IdentityProviderConfigResponse.struct_class = Types::IdentityProviderConfigResponse
+
+    IdentityProviderConfigs.member = Shapes::ShapeRef.new(shape: IdentityProviderConfig)
 
     InvalidParameterException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     InvalidParameterException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
@@ -463,6 +515,15 @@ module Aws::EKS
     ListFargateProfilesResponse.add_member(:fargate_profile_names, Shapes::ShapeRef.new(shape: StringList, location_name: "fargateProfileNames"))
     ListFargateProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListFargateProfilesResponse.struct_class = Types::ListFargateProfilesResponse
+
+    ListIdentityProviderConfigsRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    ListIdentityProviderConfigsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListIdentityProviderConfigsRequestMaxResults, location: "querystring", location_name: "maxResults"))
+    ListIdentityProviderConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListIdentityProviderConfigsRequest.struct_class = Types::ListIdentityProviderConfigsRequest
+
+    ListIdentityProviderConfigsResponse.add_member(:identity_provider_configs, Shapes::ShapeRef.new(shape: IdentityProviderConfigs, location_name: "identityProviderConfigs"))
+    ListIdentityProviderConfigsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListIdentityProviderConfigsResponse.struct_class = Types::ListIdentityProviderConfigsResponse
 
     ListNodegroupsRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     ListNodegroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListNodegroupsRequestMaxResults, location: "querystring", location_name: "maxResults"))
@@ -541,6 +602,30 @@ module Aws::EKS
 
     OIDC.add_member(:issuer, Shapes::ShapeRef.new(shape: String, location_name: "issuer"))
     OIDC.struct_class = Types::OIDC
+
+    OidcIdentityProviderConfig.add_member(:identity_provider_config_name, Shapes::ShapeRef.new(shape: String, location_name: "identityProviderConfigName"))
+    OidcIdentityProviderConfig.add_member(:identity_provider_config_arn, Shapes::ShapeRef.new(shape: String, location_name: "identityProviderConfigArn"))
+    OidcIdentityProviderConfig.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    OidcIdentityProviderConfig.add_member(:issuer_url, Shapes::ShapeRef.new(shape: String, location_name: "issuerUrl"))
+    OidcIdentityProviderConfig.add_member(:client_id, Shapes::ShapeRef.new(shape: String, location_name: "clientId"))
+    OidcIdentityProviderConfig.add_member(:username_claim, Shapes::ShapeRef.new(shape: String, location_name: "usernameClaim"))
+    OidcIdentityProviderConfig.add_member(:username_prefix, Shapes::ShapeRef.new(shape: String, location_name: "usernamePrefix"))
+    OidcIdentityProviderConfig.add_member(:groups_claim, Shapes::ShapeRef.new(shape: String, location_name: "groupsClaim"))
+    OidcIdentityProviderConfig.add_member(:groups_prefix, Shapes::ShapeRef.new(shape: String, location_name: "groupsPrefix"))
+    OidcIdentityProviderConfig.add_member(:required_claims, Shapes::ShapeRef.new(shape: requiredClaimsMap, location_name: "requiredClaims"))
+    OidcIdentityProviderConfig.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    OidcIdentityProviderConfig.add_member(:status, Shapes::ShapeRef.new(shape: configStatus, location_name: "status"))
+    OidcIdentityProviderConfig.struct_class = Types::OidcIdentityProviderConfig
+
+    OidcIdentityProviderConfigRequest.add_member(:identity_provider_config_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "identityProviderConfigName"))
+    OidcIdentityProviderConfigRequest.add_member(:issuer_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "issuerUrl"))
+    OidcIdentityProviderConfigRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "clientId"))
+    OidcIdentityProviderConfigRequest.add_member(:username_claim, Shapes::ShapeRef.new(shape: String, location_name: "usernameClaim"))
+    OidcIdentityProviderConfigRequest.add_member(:username_prefix, Shapes::ShapeRef.new(shape: String, location_name: "usernamePrefix"))
+    OidcIdentityProviderConfigRequest.add_member(:groups_claim, Shapes::ShapeRef.new(shape: String, location_name: "groupsClaim"))
+    OidcIdentityProviderConfigRequest.add_member(:groups_prefix, Shapes::ShapeRef.new(shape: String, location_name: "groupsPrefix"))
+    OidcIdentityProviderConfigRequest.add_member(:required_claims, Shapes::ShapeRef.new(shape: requiredClaimsMap, location_name: "requiredClaims"))
+    OidcIdentityProviderConfigRequest.struct_class = Types::OidcIdentityProviderConfigRequest
 
     Provider.add_member(:key_arn, Shapes::ShapeRef.new(shape: String, location_name: "keyArn"))
     Provider.struct_class = Types::Provider
@@ -690,6 +775,9 @@ module Aws::EKS
     labelsMap.key = Shapes::ShapeRef.new(shape: labelKey)
     labelsMap.value = Shapes::ShapeRef.new(shape: labelValue)
 
+    requiredClaimsMap.key = Shapes::ShapeRef.new(shape: requiredClaimsKey)
+    requiredClaimsMap.value = Shapes::ShapeRef.new(shape: requiredClaimsValue)
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -708,6 +796,20 @@ module Aws::EKS
         "signingName" => "eks",
         "uid" => "eks-2017-11-01",
       }
+
+      api.add_operation(:associate_identity_provider_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateIdentityProviderConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/clusters/{name}/identity-provider-configs/associate"
+        o.input = Shapes::ShapeRef.new(shape: AssociateIdentityProviderConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateIdentityProviderConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
 
       api.add_operation(:create_addon, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAddon"
@@ -873,6 +975,19 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_identity_provider_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeIdentityProviderConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/clusters/{name}/identity-provider-configs/describe"
+        o.input = Shapes::ShapeRef.new(shape: DescribeIdentityProviderConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeIdentityProviderConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:describe_nodegroup, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeNodegroup"
         o.http_method = "GET"
@@ -896,6 +1011,20 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:disassociate_identity_provider_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateIdentityProviderConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/clusters/{name}/identity-provider-configs/disassociate"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateIdentityProviderConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateIdentityProviderConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:list_addons, Seahorse::Model::Operation.new.tap do |o|
@@ -945,6 +1074,25 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_identity_provider_configs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIdentityProviderConfigs"
+        o.http_method = "GET"
+        o.http_request_uri = "/clusters/{name}/identity-provider-configs"
+        o.input = Shapes::ShapeRef.new(shape: ListIdentityProviderConfigsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListIdentityProviderConfigsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

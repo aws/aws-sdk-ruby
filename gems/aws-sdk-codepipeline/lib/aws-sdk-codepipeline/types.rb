@@ -33,7 +33,7 @@ module Aws::CodePipeline
       :access_key_id,
       :secret_access_key,
       :session_token)
-      SENSITIVE = []
+      SENSITIVE = [:access_key_id, :secret_access_key, :session_token]
       include Aws::Structure
     end
 
@@ -721,6 +721,225 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The specified action type already exists with a different definition.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypeAlreadyExistsException AWS API Documentation
+    #
+    class ActionTypeAlreadyExistsException < Aws::EmptyStructure; end
+
+    # Information about parameters for artifacts associated with the action
+    # type, such as the minimum and maximum artifacts allowed.
+    #
+    # @note When making an API call, you may pass ActionTypeArtifactDetails
+    #   data as a hash:
+    #
+    #       {
+    #         minimum_count: 1, # required
+    #         maximum_count: 1, # required
+    #       }
+    #
+    # @!attribute [rw] minimum_count
+    #   The minimum allowed number of artifacts that can be used with the
+    #   action type. For example, you should specify a minimum and maximum
+    #   of zero input artifacts for an action type with a category of
+    #   `source`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_count
+    #   The maximum allowed number of artifacts that can be used with the
+    #   actiontype. For example, you should specify a minimum and maximum of
+    #   zero input artifacts for an action type with a category of `source`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypeArtifactDetails AWS API Documentation
+    #
+    class ActionTypeArtifactDetails < Struct.new(
+      :minimum_count,
+      :maximum_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The parameters for the action type definition that are provided when
+    # the action type is created or updated.
+    #
+    # @note When making an API call, you may pass ActionTypeDeclaration
+    #   data as a hash:
+    #
+    #       {
+    #         description: "ActionTypeDescription",
+    #         executor: { # required
+    #           configuration: { # required
+    #             lambda_executor_configuration: {
+    #               lambda_function_arn: "LambdaFunctionArn", # required
+    #             },
+    #             job_worker_executor_configuration: {
+    #               polling_accounts: ["AccountId"],
+    #               polling_service_principals: ["ServicePrincipal"],
+    #             },
+    #           },
+    #           type: "JobWorker", # required, accepts JobWorker, Lambda
+    #           policy_statements_template: "PolicyStatementsTemplate",
+    #           job_timeout: 1,
+    #         },
+    #         id: { # required
+    #           category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
+    #           owner: "ActionTypeOwner", # required
+    #           provider: "ActionProvider", # required
+    #           version: "Version", # required
+    #         },
+    #         input_artifact_details: { # required
+    #           minimum_count: 1, # required
+    #           maximum_count: 1, # required
+    #         },
+    #         output_artifact_details: { # required
+    #           minimum_count: 1, # required
+    #           maximum_count: 1, # required
+    #         },
+    #         permissions: {
+    #           allowed_accounts: ["AllowedAccount"], # required
+    #         },
+    #         properties: [
+    #           {
+    #             name: "ActionConfigurationKey", # required
+    #             optional: false, # required
+    #             key: false, # required
+    #             no_echo: false, # required
+    #             queryable: false,
+    #             description: "PropertyDescription",
+    #           },
+    #         ],
+    #         urls: {
+    #           configuration_url: "Url",
+    #           entity_url_template: "UrlTemplate",
+    #           execution_url_template: "UrlTemplate",
+    #           revision_url_template: "UrlTemplate",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] description
+    #   The description for the action type to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] executor
+    #   Information about the executor for an action type that was created
+    #   with any supported integration model.
+    #   @return [Types::ActionTypeExecutor]
+    #
+    # @!attribute [rw] id
+    #   The action ID is composed of the action category, owner, provider,
+    #   and version of the action type to be updated.
+    #   @return [Types::ActionTypeIdentifier]
+    #
+    # @!attribute [rw] input_artifact_details
+    #   Details for the artifacts, such as application files, to be worked
+    #   on by the action. For example, the minimum and maximum number of
+    #   input artifacts allowed.
+    #   @return [Types::ActionTypeArtifactDetails]
+    #
+    # @!attribute [rw] output_artifact_details
+    #   Details for the output artifacts, such as a built application, that
+    #   are the result of the action. For example, the minimum and maximum
+    #   number of output artifacts allowed.
+    #   @return [Types::ActionTypeArtifactDetails]
+    #
+    # @!attribute [rw] permissions
+    #   Details identifying the accounts with permissions to use the action
+    #   type.
+    #   @return [Types::ActionTypePermissions]
+    #
+    # @!attribute [rw] properties
+    #   The properties of the action type to be updated.
+    #   @return [Array<Types::ActionTypeProperty>]
+    #
+    # @!attribute [rw] urls
+    #   The links associated with the action type to be updated.
+    #   @return [Types::ActionTypeUrls]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypeDeclaration AWS API Documentation
+    #
+    class ActionTypeDeclaration < Struct.new(
+      :description,
+      :executor,
+      :id,
+      :input_artifact_details,
+      :output_artifact_details,
+      :permissions,
+      :properties,
+      :urls)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The action engine, or executor, for an action type created for a
+    # provider, where the action is to be used by customers of the provider.
+    # The action engine is associated with the model used to create and
+    # update the action, such as the Lambda integration model.
+    #
+    # @note When making an API call, you may pass ActionTypeExecutor
+    #   data as a hash:
+    #
+    #       {
+    #         configuration: { # required
+    #           lambda_executor_configuration: {
+    #             lambda_function_arn: "LambdaFunctionArn", # required
+    #           },
+    #           job_worker_executor_configuration: {
+    #             polling_accounts: ["AccountId"],
+    #             polling_service_principals: ["ServicePrincipal"],
+    #           },
+    #         },
+    #         type: "JobWorker", # required, accepts JobWorker, Lambda
+    #         policy_statements_template: "PolicyStatementsTemplate",
+    #         job_timeout: 1,
+    #       }
+    #
+    # @!attribute [rw] configuration
+    #   The action configuration properties for the action type. These
+    #   properties are specified in the action definition when the action
+    #   type is created.
+    #   @return [Types::ExecutorConfiguration]
+    #
+    # @!attribute [rw] type
+    #   The integration model used to create and update the action type,
+    #   such as the Lambda integration model. Each integration type has a
+    #   related action engine, or executor. The available executor types are
+    #   `Lambda` and `JobWorker`.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_statements_template
+    #   The policy statement that specifies the permissions in the
+    #   CodePipeline customer’s account that are needed to successfully run
+    #   an action execution.
+    #
+    #   To grant permission to another account, specify the account ID as
+    #   the Principal. For AWS services, the Principal is a domain-style
+    #   identifier defined by the service, like
+    #   `codepipeline.amazonaws.com`.
+    #
+    #   <note markdown="1"> The size of the passed JSON policy document cannot exceed 2048
+    #   characters.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] job_timeout
+    #   The timeout in seconds for the job. An action execution can consist
+    #   of multiple jobs. This is the timeout for a single job, and not for
+    #   the entire action execution.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypeExecutor AWS API Documentation
+    #
+    class ActionTypeExecutor < Struct.new(
+      :configuration,
+      :type,
+      :policy_statements_template,
+      :job_timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents information about an action type.
     #
     # @note When making an API call, you may pass ActionTypeId
@@ -791,11 +1010,146 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # Specifies the category, owner, provider, and version of the action
+    # type.
+    #
+    # @note When making an API call, you may pass ActionTypeIdentifier
+    #   data as a hash:
+    #
+    #       {
+    #         category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
+    #         owner: "ActionTypeOwner", # required
+    #         provider: "ActionProvider", # required
+    #         version: "Version", # required
+    #       }
+    #
+    # @!attribute [rw] category
+    #   A category defines what kind of action can be taken in the stage.
+    #   Valid categories are limited to one of the following values:
+    #
+    #   * `Source`
+    #
+    #   * `Build`
+    #
+    #   * `Test`
+    #
+    #   * `Deploy`
+    #
+    #   * `Approval`
+    #
+    #   * `Invoke`
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The creator of the action type being called. There are two valid
+    #   values for the `owner` field: `AWS` and `ThirdParty`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The provider of the action type being called. The provider name is
+    #   supplied when the action type is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   A string that describes the action type version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypeIdentifier AWS API Documentation
+    #
+    class ActionTypeIdentifier < Struct.new(
+      :category,
+      :owner,
+      :provider,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified action type cannot be found.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypeNotFoundException AWS API Documentation
     #
     class ActionTypeNotFoundException < Aws::EmptyStructure; end
+
+    # Details identifying the users with permissions to use the action type.
+    #
+    # @note When making an API call, you may pass ActionTypePermissions
+    #   data as a hash:
+    #
+    #       {
+    #         allowed_accounts: ["AllowedAccount"], # required
+    #       }
+    #
+    # @!attribute [rw] allowed_accounts
+    #   A list of AWS account IDs with allow access to use the action type
+    #   in their pipelines.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypePermissions AWS API Documentation
+    #
+    class ActionTypePermissions < Struct.new(
+      :allowed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents information about each property specified in the action
+    # configuration, such as the description and key name that display for
+    # the customer using the action type.
+    #
+    # @note When making an API call, you may pass ActionTypeProperty
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ActionConfigurationKey", # required
+    #         optional: false, # required
+    #         key: false, # required
+    #         no_echo: false, # required
+    #         queryable: false,
+    #         description: "PropertyDescription",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The property name. This represents a field name that is displayed to
+    #   users.
+    #   @return [String]
+    #
+    # @!attribute [rw] optional
+    #   Whether the configuration property is an optional value.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] key
+    #   Whether the configuration property is a key.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] no_echo
+    #   Determines whether the field value entered by the customer is
+    #   logged. If `noEcho` is `true`, the value is not shown in CloudTrail
+    #   logs for the action execution.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] queryable
+    #   Indicates that the property is used with polling. An action type can
+    #   have up to one queryable property. If it has one, that property must
+    #   be both required and not secret.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   The description of the property that is displayed to users.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypeProperty AWS API Documentation
+    #
+    class ActionTypeProperty < Struct.new(
+      :name,
+      :optional,
+      :key,
+      :no_echo,
+      :queryable,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Returns information about the settings for an action type.
     #
@@ -840,6 +1194,55 @@ module Aws::CodePipeline
     #
     class ActionTypeSettings < Struct.new(
       :third_party_configuration_url,
+      :entity_url_template,
+      :execution_url_template,
+      :revision_url_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about URLs for web pages that display to customers
+    # as links on the pipeline view, such as an external configuration page
+    # for the action type.
+    #
+    # @note When making an API call, you may pass ActionTypeUrls
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_url: "Url",
+    #         entity_url_template: "UrlTemplate",
+    #         execution_url_template: "UrlTemplate",
+    #         revision_url_template: "UrlTemplate",
+    #       }
+    #
+    # @!attribute [rw] configuration_url
+    #   The URL returned to the CodePipeline console that contains a link to
+    #   the page where customers can configure the external action.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_url_template
+    #   The URL returned to the CodePipeline console that provides a deep
+    #   link to the resources of the external system, such as a status page.
+    #   This link is provided as part of the action display in the pipeline.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_url_template
+    #   The link to an execution page for the action type in progress. For
+    #   example, for a CodeDeploy action, this link is shown on the pipeline
+    #   view page in the CodePipeline console, and it links to a CodeDeploy
+    #   status page.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_url_template
+    #   The URL returned to the CodePipeline console that contains a link to
+    #   the page where customers can update or change the configuration of
+    #   the external action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypeUrls AWS API Documentation
+    #
+    class ActionTypeUrls < Struct.new(
+      :configuration_url,
       :entity_url_template,
       :execution_url_template,
       :revision_url_template)
@@ -1721,6 +2124,40 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The action engine, or executor, related to the supported integration
+    # model used to create and update the action type. The available
+    # executor types are `Lambda` and `JobWorker`.
+    #
+    # @note When making an API call, you may pass ExecutorConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         lambda_executor_configuration: {
+    #           lambda_function_arn: "LambdaFunctionArn", # required
+    #         },
+    #         job_worker_executor_configuration: {
+    #           polling_accounts: ["AccountId"],
+    #           polling_service_principals: ["ServicePrincipal"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] lambda_executor_configuration
+    #   Details about the `Lambda` executor of the action type.
+    #   @return [Types::LambdaExecutorConfiguration]
+    #
+    # @!attribute [rw] job_worker_executor_configuration
+    #   Details about the `JobWorker` executor of the action type.
+    #   @return [Types::JobWorkerExecutorConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ExecutorConfiguration AWS API Documentation
+    #
+    class ExecutorConfiguration < Struct.new(
+      :lambda_executor_configuration,
+      :job_worker_executor_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents information about failure details.
     #
     # @note When making an API call, you may pass FailureDetails
@@ -1750,6 +2187,72 @@ module Aws::CodePipeline
       :type,
       :message,
       :external_execution_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetActionTypeInput
+    #   data as a hash:
+    #
+    #       {
+    #         category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
+    #         owner: "ActionTypeOwner", # required
+    #         provider: "ActionProvider", # required
+    #         version: "Version", # required
+    #       }
+    #
+    # @!attribute [rw] category
+    #   A category defines what kind of action can be taken in the stage.
+    #   Valid categories are limited to one of the following values:
+    #
+    #   * `Source`
+    #
+    #   * `Build`
+    #
+    #   * `Test`
+    #
+    #   * `Deploy`
+    #
+    #   * `Approval`
+    #
+    #   * `Invoke`
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The creator of an action type that has been created with any
+    #   supported integration model. There are two valid values for the
+    #   `owner` field in the action type category: `AWS` and `ThirdParty`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The provider of the action type being called. The provider name is
+    #   specified when the action type is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   A string that describes the action type version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetActionTypeInput AWS API Documentation
+    #
+    class GetActionTypeInput < Struct.new(
+      :category,
+      :owner,
+      :provider,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action_type
+    #   The action type information for the requested action type, such as
+    #   the action type ID.
+    #   @return [Types::ActionTypeDeclaration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetActionTypeOutput AWS API Documentation
+    #
+    class GetActionTypeOutput < Struct.new(
+      :action_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2243,6 +2746,58 @@ module Aws::CodePipeline
     #
     class JobNotFoundException < Aws::EmptyStructure; end
 
+    # Details about the polling configuration for the `JobWorker` action
+    # engine, or executor.
+    #
+    # @note When making an API call, you may pass JobWorkerExecutorConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         polling_accounts: ["AccountId"],
+    #         polling_service_principals: ["ServicePrincipal"],
+    #       }
+    #
+    # @!attribute [rw] polling_accounts
+    #   The accounts in which the job worker is configured and might poll
+    #   for jobs as part of the action execution.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] polling_service_principals
+    #   The service Principals in which the job worker is configured and
+    #   might poll for jobs as part of the action execution.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/JobWorkerExecutorConfiguration AWS API Documentation
+    #
+    class JobWorkerExecutorConfiguration < Struct.new(
+      :polling_accounts,
+      :polling_service_principals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the configuration for the `Lambda` action engine, or
+    # executor.
+    #
+    # @note When making an API call, you may pass LambdaExecutorConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         lambda_function_arn: "LambdaFunctionArn", # required
+    #       }
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   The ARN of the Lambda function used by the action engine.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/LambdaExecutorConfiguration AWS API Documentation
+    #
+    class LambdaExecutorConfiguration < Struct.new(
+      :lambda_function_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The number of pipelines associated with the AWS account has exceeded
     # the limit allowed for the account.
     #
@@ -2329,6 +2884,7 @@ module Aws::CodePipeline
     #       {
     #         action_owner_filter: "AWS", # accepts AWS, ThirdParty, Custom
     #         next_token: "NextToken",
+    #         region_filter: "AWSRegionName",
     #       }
     #
     # @!attribute [rw] action_owner_filter
@@ -2342,11 +2898,16 @@ module Aws::CodePipeline
     #   the list.
     #   @return [String]
     #
+    # @!attribute [rw] region_filter
+    #   The Region to filter on for the list of action types.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionTypesInput AWS API Documentation
     #
     class ListActionTypesInput < Struct.new(
       :action_owner_filter,
-      :next_token)
+      :next_token,
+      :region_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3606,6 +4167,20 @@ module Aws::CodePipeline
     #
     class RegisterWebhookWithThirdPartyOutput < Aws::EmptyStructure; end
 
+    # The request has failed because of an unknown error, exception, or
+    # failure.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RequestFailedException AWS API Documentation
+    #
+    class RequestFailedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource was specified in an invalid format.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ResourceNotFoundException AWS API Documentation
@@ -4268,6 +4843,74 @@ module Aws::CodePipeline
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UntagResourceOutput AWS API Documentation
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateActionTypeInput
+    #   data as a hash:
+    #
+    #       {
+    #         action_type: {
+    #           description: "ActionTypeDescription",
+    #           executor: { # required
+    #             configuration: { # required
+    #               lambda_executor_configuration: {
+    #                 lambda_function_arn: "LambdaFunctionArn", # required
+    #               },
+    #               job_worker_executor_configuration: {
+    #                 polling_accounts: ["AccountId"],
+    #                 polling_service_principals: ["ServicePrincipal"],
+    #               },
+    #             },
+    #             type: "JobWorker", # required, accepts JobWorker, Lambda
+    #             policy_statements_template: "PolicyStatementsTemplate",
+    #             job_timeout: 1,
+    #           },
+    #           id: { # required
+    #             category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
+    #             owner: "ActionTypeOwner", # required
+    #             provider: "ActionProvider", # required
+    #             version: "Version", # required
+    #           },
+    #           input_artifact_details: { # required
+    #             minimum_count: 1, # required
+    #             maximum_count: 1, # required
+    #           },
+    #           output_artifact_details: { # required
+    #             minimum_count: 1, # required
+    #             maximum_count: 1, # required
+    #           },
+    #           permissions: {
+    #             allowed_accounts: ["AllowedAccount"], # required
+    #           },
+    #           properties: [
+    #             {
+    #               name: "ActionConfigurationKey", # required
+    #               optional: false, # required
+    #               key: false, # required
+    #               no_echo: false, # required
+    #               queryable: false,
+    #               description: "PropertyDescription",
+    #             },
+    #           ],
+    #           urls: {
+    #             configuration_url: "Url",
+    #             entity_url_template: "UrlTemplate",
+    #             execution_url_template: "UrlTemplate",
+    #             revision_url_template: "UrlTemplate",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action_type
+    #   The action type definition for the action type to be updated.
+    #   @return [Types::ActionTypeDeclaration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UpdateActionTypeInput AWS API Documentation
+    #
+    class UpdateActionTypeInput < Struct.new(
+      :action_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Represents the input of an `UpdatePipeline` action.
     #

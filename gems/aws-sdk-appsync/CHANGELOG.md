@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2021-02-12)
+------------------
+
+* Feature - Approve release for appsync local on pipeline resolver
+
 1.38.0 (2021-02-02)
 ------------------
 

@@ -25,17 +25,17 @@ module Aws::IAM
     # @!attribute [rw] service_namespace
     #   The namespace of the service in which access was attempted.
     #
-    #   To learn the service namespace of a service, go to [Actions,
-    #   Resources, and Condition Keys for AWS Services][1] in the *IAM User
-    #   Guide*. Choose the name of the service to view details for that
-    #   service. In the first paragraph, find the service prefix. For
-    #   example, `(service prefix: a4b)`. For more information about service
-    #   namespaces, see [AWS Service Namespaces][2] in the *AWS General
-    #   Reference*.
+    #   To learn the service namespace of a service, see [Actions,
+    #   resources, and condition keys for AWS services][1] in the *Service
+    #   Authorization Reference*. Choose the name of the service to view
+    #   details for that service. In the first paragraph, find the service
+    #   prefix. For example, `(service prefix: a4b)`. For more information
+    #   about service namespaces, see [AWS service namespaces][2] in
+    #   the *AWS General Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
@@ -192,7 +192,7 @@ module Aws::IAM
     #   * There is no sign-in data associated with the user.
     #
     #   For more information about AWS Regions, see [Regions and
-    #   Endpoints][1] in the Amazon Web Services General Reference.
+    #   endpoints][1] in the Amazon Web Services General Reference.
     #
     #
     #
@@ -382,8 +382,8 @@ module Aws::IAM
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy you want to attach.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -424,8 +424,8 @@ module Aws::IAM
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy you want to attach.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -466,8 +466,8 @@ module Aws::IAM
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy you want to attach.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -489,7 +489,7 @@ module Aws::IAM
     # attached to a user or role to set the permissions boundary.
     #
     # For more information about permissions boundaries, see [Permissions
-    # Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    # boundaries for IAM identities ][1] in the *IAM User Guide*.
     #
     #
     #
@@ -524,7 +524,7 @@ module Aws::IAM
     # operations.
     #
     # For more information about managed policies, refer to [Managed
-    # Policies and Inline Policies][1] in the *IAM User Guide*.
+    # policies and inline policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -538,8 +538,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS
     #   resources.
     #
-    #   For more information about ARNs, go to [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, go to [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -734,7 +734,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the group. For more information about paths, see [IAM
-    #   Identifiers][1] in the *IAM User Guide*.
+    #   identifiers][1] in the *IAM User Guide*.
     #
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
@@ -791,6 +791,12 @@ module Aws::IAM
     #       {
     #         instance_profile_name: "instanceProfileNameType", # required
     #         path: "pathType",
+    #         tags: [
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] instance_profile_name
@@ -826,11 +832,29 @@ module Aws::IAM
     #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that you want to attach to the newly created IAM
+    #   instance profile. Each tag consists of a key name and an associated
+    #   value. For more information about tagging, see [Tagging IAM
+    #   resources][1] in the *IAM User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   maximum number of tags, then the entire request fails and the
+    #   resource is not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateInstanceProfileRequest AWS API Documentation
     #
     class CreateInstanceProfileRequest < Struct.new(
       :instance_profile_name,
-      :path)
+      :path,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -926,6 +950,12 @@ module Aws::IAM
     #         url: "OpenIDConnectProviderUrlType", # required
     #         client_id_list: ["clientIDType"],
     #         thumbprint_list: ["thumbprintType"], # required
+    #         tags: [
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] url
@@ -978,20 +1008,38 @@ module Aws::IAM
     #   certificate used by https://keys.server.example.com.
     #
     #   For more information about obtaining the OIDC provider's
-    #   thumbprint, see [Obtaining the Thumbprint for an OpenID Connect
-    #   Provider][1] in the *IAM User Guide*.
+    #   thumbprint, see [Obtaining the thumbprint for an OpenID Connect
+    #   provider][1] in the *IAM User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that you want to attach to the new IAM OpenID Connect
+    #   (OIDC) provider. Each tag consists of a key name and an associated
+    #   value. For more information about tagging, see [Tagging IAM
+    #   resources][1] in the *IAM User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   maximum number of tags, then the entire request fails and the
+    #   resource is not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateOpenIDConnectProviderRequest AWS API Documentation
     #
     class CreateOpenIDConnectProviderRequest < Struct.new(
       :url,
       :client_id_list,
-      :thumbprint_list)
+      :thumbprint_list,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1005,10 +1053,22 @@ module Aws::IAM
     #   OpenIDConnectProviderListEntry.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that are attached to the new IAM OIDC provider. The
+    #   returned list of tags is sorted by tag key. For more information
+    #   about tagging, see [Tagging IAM resources][1] in the *IAM User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateOpenIDConnectProviderResponse AWS API Documentation
     #
     class CreateOpenIDConnectProviderResponse < Struct.new(
-      :open_id_connect_provider_arn)
+      :open_id_connect_provider_arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1021,6 +1081,12 @@ module Aws::IAM
     #         path: "policyPathType",
     #         policy_document: "policyDocumentType", # required
     #         description: "policyDescriptionType",
+    #         tags: [
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] policy_name
@@ -1035,7 +1101,7 @@ module Aws::IAM
     # @!attribute [rw] path
     #   The path for the policy.
     #
-    #   For more information about paths, see [IAM Identifiers][1] in the
+    #   For more information about paths, see [IAM identifiers][1] in the
     #   *IAM User Guide*.
     #
     #   This parameter is optional. If it is not included, it defaults to a
@@ -1091,13 +1157,31 @@ module Aws::IAM
     #   cannot be changed.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that you want to attach to the new IAM customer
+    #   managed policy. Each tag consists of a key name and an associated
+    #   value. For more information about tagging, see [Tagging IAM
+    #   resources][1] in the *IAM User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   maximum number of tags, then the entire request fails and the
+    #   resource is not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyRequest AWS API Documentation
     #
     class CreatePolicyRequest < Struct.new(
       :policy_name,
       :path,
       :policy_document,
-      :description)
+      :description,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1129,8 +1213,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the IAM policy to which you want
     #   to add a new version.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -1172,7 +1256,7 @@ module Aws::IAM
     #   for the IAM users, groups, and roles that the policy is attached to.
     #
     #   For more information about managed policy versions, see [Versioning
-    #   for Managed Policies][1] in the *IAM User Guide*.
+    #   for managed policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -1299,7 +1383,7 @@ module Aws::IAM
     #   valid for one hour by default. This applies when you use the
     #   `AssumeRole*` API operations or the `assume-role*` CLI operations
     #   but does not apply when you use those operations to create a console
-    #   URL. For more information, see [Using IAM Roles][1] in the *IAM User
+    #   URL. For more information, see [Using IAM roles][1] in the *IAM User
     #   Guide*.
     #
     #
@@ -1313,14 +1397,14 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags that you want to attach to the newly created role.
-    #   Each tag consists of a key name and an associated value. For more
-    #   information about tagging, see [Tagging IAM Identities][1] in the
-    #   *IAM User Guide*.
+    #   A list of tags that you want to attach to the new role. Each tag
+    #   consists of a key name and an associated value. For more information
+    #   about tagging, see [Tagging IAM resources][1] in the *IAM User
+    #   Guide*.
     #
     #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
-    #   number of tags per role, then the entire request fails and the role
-    #   is not created.
+    #   maximum number of tags, then the entire request fails and the
+    #   resource is not created.
     #
     #    </note>
     #
@@ -1363,6 +1447,12 @@ module Aws::IAM
     #       {
     #         saml_metadata_document: "SAMLMetadataDocumentType", # required
     #         name: "SAMLProviderNameType", # required
+    #         tags: [
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] saml_metadata_document
@@ -1373,7 +1463,7 @@ module Aws::IAM
     #   IdP. You must generate the metadata document using the identity
     #   management software that is used as your organization's IdP.
     #
-    #   For more information, see [About SAML 2.0-based Federation][1] in
+    #   For more information, see [About SAML 2.0-based federation][1] in
     #   the *IAM User Guide*
     #
     #
@@ -1394,11 +1484,29 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that you want to attach to the new IAM SAML provider.
+    #   Each tag consists of a key name and an associated value. For more
+    #   information about tagging, see [Tagging IAM resources][1] in the
+    #   *IAM User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   maximum number of tags, then the entire request fails and the
+    #   resource is not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateSAMLProviderRequest AWS API Documentation
     #
     class CreateSAMLProviderRequest < Struct.new(
       :saml_metadata_document,
-      :name)
+      :name,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1410,10 +1518,22 @@ module Aws::IAM
     #   IAM.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that are attached to the new IAM SAML provider. The
+    #   returned list of tags is sorted by tag key. For more information
+    #   about tagging, see [Tagging IAM resources][1] in the *IAM User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateSAMLProviderResponse AWS API Documentation
     #
     class CreateSAMLProviderResponse < Struct.new(
-      :saml_provider_arn)
+      :saml_provider_arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1433,8 +1553,8 @@ module Aws::IAM
     #   in front. For example: `elasticbeanstalk.amazonaws.com`.
     #
     #   Service principals are unique and case-sensitive. To find the exact
-    #   service principal for your service-linked role, see [AWS Services
-    #   That Work with IAM][1] in the *IAM User Guide*. Look for the
+    #   service principal for your service-linked role, see [AWS services
+    #   that work with IAM][1] in the *IAM User Guide*. Look for the
     #   services that have <b>Yes </b>in the **Service-Linked Role** column.
     #   Choose the **Yes** link to view the service-linked role
     #   documentation for that service.
@@ -1556,7 +1676,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path for the user name. For more information about paths, see
-    #   [IAM Identifiers][1] in the *IAM User Guide*.
+    #   [IAM identifiers][1] in the *IAM User Guide*.
     #
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
@@ -1589,14 +1709,14 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags that you want to attach to the newly created user.
-    #   Each tag consists of a key name and an associated value. For more
-    #   information about tagging, see [Tagging IAM Identities][1] in the
-    #   *IAM User Guide*.
+    #   A list of tags that you want to attach to the new user. Each tag
+    #   consists of a key name and an associated value. For more information
+    #   about tagging, see [Tagging IAM resources][1] in the *IAM User
+    #   Guide*.
     #
     #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
-    #   number of tags per user, then the entire request fails and the user
-    #   is not created.
+    #   maximum number of tags, then the entire request fails and the
+    #   resource is not created.
     #
     #    </note>
     #
@@ -1636,11 +1756,17 @@ module Aws::IAM
     #       {
     #         path: "pathType",
     #         virtual_mfa_device_name: "virtualMFADeviceName", # required
+    #         tags: [
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] path
     #   The path for the virtual MFA device. For more information about
-    #   paths, see [IAM Identifiers][1] in the *IAM User Guide*.
+    #   paths, see [IAM identifiers][1] in the *IAM User Guide*.
     #
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
@@ -1672,11 +1798,29 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that you want to attach to the new IAM virtual MFA
+    #   device. Each tag consists of a key name and an associated value. For
+    #   more information about tagging, see [Tagging IAM resources][1] in
+    #   the *IAM User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   maximum number of tags, then the entire request fails and the
+    #   resource is not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateVirtualMFADeviceRequest AWS API Documentation
     #
     class CreateVirtualMFADeviceRequest < Struct.new(
       :path,
-      :virtual_mfa_device_name)
+      :virtual_mfa_device_name,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1698,7 +1842,7 @@ module Aws::IAM
     # The request was rejected because the most recent credential report has
     # expired. To generate a new credential report, use
     # GenerateCredentialReport. For more information about credential report
-    # expiration, see [Getting Credential Reports][1] in the *IAM User
+    # expiration, see [Getting credential reports][1] in the *IAM User
     # Guide*.
     #
     #
@@ -2034,8 +2178,8 @@ module Aws::IAM
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy you want to delete.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -2062,8 +2206,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the IAM policy from which you want
     #   to delete a version.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -2079,7 +2223,7 @@ module Aws::IAM
     #   string of letters and digits.
     #
     #   For more information about managed policy versions, see [Versioning
-    #   for Managed Policies][2] in the *IAM User Guide*.
+    #   for managed policies][2] in the *IAM User Guide*.
     #
     #
     #
@@ -2572,8 +2716,8 @@ module Aws::IAM
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy you want to detach.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -2614,8 +2758,8 @@ module Aws::IAM
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy you want to detach.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -2656,8 +2800,8 @@ module Aws::IAM
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy you want to detach.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -2840,8 +2984,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS
     #   resources.
     #
-    #   For more information about ARNs, go to [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, go to [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -2862,7 +3006,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the entity (user or role). For more information about
-    #   paths, see [IAM Identifiers][1] in the *IAM User Guide*.
+    #   paths, see [IAM identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -2986,8 +3130,8 @@ module Aws::IAM
     #   When you make a cross-account request, AWS evaluates the request in
     #   the trusting account and the trusted account. The request is allowed
     #   only if both evaluations return `true`. For more information about
-    #   how policies are evaluated, see [Evaluating Policies Within a Single
-    #   Account][1].
+    #   how policies are evaluated, see [Evaluating policies within a single
+    #   account][1].
     #
     #   If an AWS Organizations SCP included in the evaluation denies
     #   access, the simulation ends. In this case, policy evaluation does
@@ -3384,8 +3528,8 @@ module Aws::IAM
     #   clarity, but must be URL encoded to be included as a part of a real
     #   HTML request.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -3709,8 +3853,8 @@ module Aws::IAM
     #   in IAM to get information for. You can get a list of OIDC provider
     #   resource ARNs by using the ListOpenIDConnectProviders operation.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -3750,13 +3894,25 @@ module Aws::IAM
     #   created in the AWS account.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that are attached to the specified IAM OIDC provider.
+    #   The returned list of tags is sorted by tag key. For more information
+    #   about tagging, see [Tagging IAM resources][1] in the *IAM User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOpenIDConnectProviderResponse AWS API Documentation
     #
     class GetOpenIDConnectProviderResponse < Struct.new(
       :url,
       :client_id_list,
       :thumbprint_list,
-      :create_date)
+      :create_date,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3905,8 +4061,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the managed policy that you want
     #   information about.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -3947,8 +4103,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the managed policy that you want
     #   information about.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -4116,8 +4272,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the SAML provider resource object
     #   in IAM to get information about.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -4147,12 +4303,24 @@ module Aws::IAM
     #   The expiration date and time for the SAML provider.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that are attached to the specified IAM SAML provider.
+    #   The returned list of tags is sorted by tag key. For more information
+    #   about tagging, see [Tagging IAM resources][1] in the *IAM User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProviderResponse AWS API Documentation
     #
     class GetSAMLProviderResponse < Struct.new(
       :saml_metadata_document,
       :create_date,
-      :valid_until)
+      :valid_until,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4403,17 +4571,17 @@ module Aws::IAM
     #   namespace to learn when the IAM entity last attempted to access the
     #   specified service.
     #
-    #   To learn the service namespace for a service, go to [Actions,
-    #   Resources, and Condition Keys for AWS Services][1] in the *IAM User
+    #   To learn the service namespace for a service, see [Actions,
+    #   resources, and condition keys for AWS services][1] in the *IAM User
     #   Guide*. Choose the name of the service to view details for that
     #   service. In the first paragraph, find the service prefix. For
     #   example, `(service prefix: a4b)`. For more information about service
-    #   namespaces, see [AWS Service Namespaces][2] in the *AWS General
+    #   namespaces, see [AWS service namespaces][2] in the *AWS General
     #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
@@ -4663,7 +4831,7 @@ module Aws::IAM
     #   password use from May 3, 2018 22:50 PDT to May 23, 2018 14:08 PDT.
     #   This affects [last sign-in][1] dates shown in the IAM console and
     #   password last used dates in the [IAM credential report][2], and
-    #   returned by this GetUser API. If users signed in during the affected
+    #   returned by this operation. If users signed in during the affected
     #   time, the password last used date that is returned is the date the
     #   user last signed in before May 3, 2018. For users that signed in
     #   after May 23, 2018 14:08 PDT, the returned password last used date
@@ -4704,7 +4872,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the group. For more information about paths, see [IAM
-    #   Identifiers][1] in the *IAM User Guide*.
+    #   identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -4717,7 +4885,7 @@ module Aws::IAM
     #
     # @!attribute [rw] group_id
     #   The stable and unique string identifying the group. For more
-    #   information about IDs, see [IAM Identifiers][1] in the *IAM User
+    #   information about IDs, see [IAM identifiers][1] in the *IAM User
     #   Guide*.
     #
     #
@@ -4728,7 +4896,7 @@ module Aws::IAM
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) specifying the group. For more
     #   information about ARNs and how to use them in policies, see [IAM
-    #   Identifiers][1] in the *IAM User Guide*.
+    #   identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -4764,7 +4932,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the group. For more information about paths, see [IAM
-    #   Identifiers][1] in the *IAM User Guide*.
+    #   identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -4777,7 +4945,7 @@ module Aws::IAM
     #
     # @!attribute [rw] group_id
     #   The stable and unique string identifying the group. For more
-    #   information about IDs, see [IAM Identifiers][1] in the *IAM User
+    #   information about IDs, see [IAM identifiers][1] in the *IAM User
     #   Guide*.
     #
     #
@@ -4789,8 +4957,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS
     #   resources.
     #
-    #   For more information about ARNs, go to [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, go to [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -4843,7 +5011,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the instance profile. For more information about paths,
-    #   see [IAM Identifiers][1] in the *IAM User Guide*.
+    #   see [IAM identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -4856,7 +5024,7 @@ module Aws::IAM
     #
     # @!attribute [rw] instance_profile_id
     #   The stable and unique string identifying the instance profile. For
-    #   more information about IDs, see [IAM Identifiers][1] in the *IAM
+    #   more information about IDs, see [IAM identifiers][1] in the *IAM
     #   User Guide*.
     #
     #
@@ -4867,7 +5035,7 @@ module Aws::IAM
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) specifying the instance profile. For
     #   more information about ARNs and how to use them in policies, see
-    #   [IAM Identifiers][1] in the *IAM User Guide*.
+    #   [IAM identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -4882,6 +5050,16 @@ module Aws::IAM
     #   The role associated with the instance profile.
     #   @return [Array<Types::Role>]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that are attached to the instance profile. For more
+    #   information about tagging, see [Tagging IAM resources][1] in the
+    #   *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InstanceProfile AWS API Documentation
     #
     class InstanceProfile < Struct.new(
@@ -4890,7 +5068,8 @@ module Aws::IAM
       :instance_profile_id,
       :arn,
       :create_date,
-      :roles)
+      :roles,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4979,8 +5158,8 @@ module Aws::IAM
     end
 
     # The request was rejected because it attempted to create resources
-    # beyond the current AWS account limitations. The error message
-    # describes the limit exceeded.
+    # beyond the current AWS account limits. The error message describes the
+    # limit exceeded.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -5478,8 +5657,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the IAM policy for which you want
     #   the versions.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -5867,6 +6046,91 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListInstanceProfileTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_profile_name: "instanceProfileNameType", # required
+    #         marker: "markerType",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_profile_name
+    #   The name of the IAM instance profile whose tags you want to see.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response that you
+    #   received to indicate where the next call should start.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items that you want in the response. If additional
+    #   items exist beyond the maximum that you specify, the `IsTruncated`
+    #   response element is `true`.
+    #
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when more results are
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true`, and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfileTagsRequest AWS API Documentation
+    #
+    class ListInstanceProfileTagsRequest < Struct.new(
+      :instance_profile_name,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags that are currently attached to the IAM instance
+    #   profile. Each tag consists of a key name and an associated value. If
+    #   no tags are attached to the specified resource, the response
+    #   contains an empty list.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether there are more items to return. If
+    #   your results were truncated, you can use the `Marker` request
+    #   parameter to make a subsequent pagination request that retrieves
+    #   more items. Note that IAM might return fewer than the `MaxItems`
+    #   number of results even when more results are available. Check
+    #   `IsTruncated` after every call to ensure that you receive all of
+    #   your results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marker
+    #   When `IsTruncated` is `true`, this element is present and contains
+    #   the value to use for the `Marker` parameter in a subsequent
+    #   pagination request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfileTagsResponse AWS API Documentation
+    #
+    class ListInstanceProfileTagsResponse < Struct.new(
+      :tags,
+      :is_truncated,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListInstanceProfilesForRoleRequest
     #   data as a hash:
     #
@@ -6042,6 +6306,93 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListMFADeviceTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         serial_number: "serialNumberType", # required
+    #         marker: "markerType",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] serial_number
+    #   The unique identifier for the IAM virtual MFA device whose tags you
+    #   want to see. For virtual MFA devices, the serial number is the same
+    #   as the ARN.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response that you
+    #   received to indicate where the next call should start.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items that you want in the response. If additional
+    #   items exist beyond the maximum that you specify, the `IsTruncated`
+    #   response element is `true`.
+    #
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when more results are
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true`, and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListMFADeviceTagsRequest AWS API Documentation
+    #
+    class ListMFADeviceTagsRequest < Struct.new(
+      :serial_number,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags that are currently attached to the virtual MFA
+    #   device. Each tag consists of a key name and an associated value. If
+    #   no tags are attached to the specified resource, the response
+    #   contains an empty list.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether there are more items to return. If
+    #   your results were truncated, you can use the `Marker` request
+    #   parameter to make a subsequent pagination request that retrieves
+    #   more items. Note that IAM might return fewer than the `MaxItems`
+    #   number of results even when more results are available. Check
+    #   `IsTruncated` after every call to ensure that you receive all of
+    #   your results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marker
+    #   When `IsTruncated` is `true`, this element is present and contains
+    #   the value to use for the `Marker` parameter in a subsequent
+    #   pagination request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListMFADeviceTagsResponse AWS API Documentation
+    #
+    class ListMFADeviceTagsResponse < Struct.new(
+      :tags,
+      :is_truncated,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListMFADevicesRequest
     #   data as a hash:
     #
@@ -6126,6 +6477,92 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListOpenIDConnectProviderTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         open_id_connect_provider_arn: "arnType", # required
+    #         marker: "markerType",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] open_id_connect_provider_arn
+    #   The ARN of the OpenID Connect (OIDC) identity provider whose tags
+    #   you want to see.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response that you
+    #   received to indicate where the next call should start.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items that you want in the response. If additional
+    #   items exist beyond the maximum that you specify, the `IsTruncated`
+    #   response element is `true`.
+    #
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when more results are
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true`, and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOpenIDConnectProviderTagsRequest AWS API Documentation
+    #
+    class ListOpenIDConnectProviderTagsRequest < Struct.new(
+      :open_id_connect_provider_arn,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags that are currently attached to the OpenID Connect
+    #   (OIDC) identity provider. Each tag consists of a key name and an
+    #   associated value. If no tags are attached to the specified resource,
+    #   the response contains an empty list.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether there are more items to return. If
+    #   your results were truncated, you can use the `Marker` request
+    #   parameter to make a subsequent pagination request that retrieves
+    #   more items. Note that IAM might return fewer than the `MaxItems`
+    #   number of results even when more results are available. Check
+    #   `IsTruncated` after every call to ensure that you receive all of
+    #   your results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marker
+    #   When `IsTruncated` is `true`, this element is present and contains
+    #   the value to use for the `Marker` parameter in a subsequent
+    #   pagination request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOpenIDConnectProviderTagsResponse AWS API Documentation
+    #
+    class ListOpenIDConnectProviderTagsResponse < Struct.new(
+      :tags,
+      :is_truncated,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOpenIDConnectProvidersRequest AWS API Documentation
@@ -6157,17 +6594,17 @@ module Aws::IAM
     # @!attribute [rw] service_namespace
     #   The namespace of the service that was accessed.
     #
-    #   To learn the service namespace of a service, go to [Actions,
-    #   Resources, and Condition Keys for AWS Services][1] in the *IAM User
-    #   Guide*. Choose the name of the service to view details for that
-    #   service. In the first paragraph, find the service prefix. For
-    #   example, `(service prefix: a4b)`. For more information about service
-    #   namespaces, see [AWS Service Namespaces][2] in the *AWS General
-    #   Reference*.
+    #   To learn the service namespace of a service, see [Actions,
+    #   resources, and condition keys for AWS services][1] in the *Service
+    #   Authorization Reference*. Choose the name of the service to view
+    #   details for that service. In the first paragraph, find the service
+    #   prefix. For example, `(service prefix: a4b)`. For more information
+    #   about service namespaces, see [AWS service namespaces][2] in
+    #   the *AWS General Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
@@ -6210,17 +6647,17 @@ module Aws::IAM
     #   The service namespace for the AWS services whose policies you want
     #   to list.
     #
-    #   To learn the service namespace for a service, go to [Actions,
-    #   Resources, and Condition Keys for AWS Services][1] in the *IAM User
+    #   To learn the service namespace for a service, see [Actions,
+    #   resources, and condition keys for AWS services][1] in the *IAM User
     #   Guide*. Choose the name of the service to view details for that
     #   service. In the first paragraph, find the service prefix. For
     #   example, `(service prefix: a4b)`. For more information about service
-    #   namespaces, see [AWS Service Namespaces][2] in the *AWS General
+    #   namespaces, see [AWS service namespaces][2] in the *AWS General
     #   Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [Array<String>]
     #
@@ -6388,6 +6825,92 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListPolicyTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         policy_arn: "arnType", # required
+    #         marker: "markerType",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] policy_arn
+    #   The ARN of the IAM customer managed policy whose tags you want to
+    #   see.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response that you
+    #   received to indicate where the next call should start.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items that you want in the response. If additional
+    #   items exist beyond the maximum that you specify, the `IsTruncated`
+    #   response element is `true`.
+    #
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when more results are
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true`, and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPolicyTagsRequest AWS API Documentation
+    #
+    class ListPolicyTagsRequest < Struct.new(
+      :policy_arn,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags that are currently attached to the IAM customer
+    #   managed policy. Each tag consists of a key name and an associated
+    #   value. If no tags are attached to the specified resource, the
+    #   response contains an empty list.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether there are more items to return. If
+    #   your results were truncated, you can use the `Marker` request
+    #   parameter to make a subsequent pagination request that retrieves
+    #   more items. Note that IAM might return fewer than the `MaxItems`
+    #   number of results even when more results are available. Check
+    #   `IsTruncated` after every call to ensure that you receive all of
+    #   your results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marker
+    #   When `IsTruncated` is `true`, this element is present and contains
+    #   the value to use for the `Marker` parameter in a subsequent
+    #   pagination request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPolicyTagsResponse AWS API Documentation
+    #
+    class ListPolicyTagsResponse < Struct.new(
+      :tags,
+      :is_truncated,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListPolicyVersionsRequest
     #   data as a hash:
     #
@@ -6401,8 +6924,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the IAM policy for which you want
     #   the versions.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -6445,7 +6968,7 @@ module Aws::IAM
     #   A list of policy versions.
     #
     #   For more information about managed policy versions, see [Versioning
-    #   for Managed Policies][1] in the *IAM User Guide*.
+    #   for managed policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -6615,9 +7138,10 @@ module Aws::IAM
     end
 
     # @!attribute [rw] tags
-    #   The list of tags currently that is attached to the role. Each tag
+    #   The list of tags that are currently attached to the role. Each tag
     #   consists of a key name and an associated value. If no tags are
-    #   attached to the specified role, the response contains an empty list.
+    #   attached to the specified resource, the response contains an empty
+    #   list.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] is_truncated
@@ -6736,6 +7260,93 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListSAMLProviderTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         saml_provider_arn: "arnType", # required
+    #         marker: "markerType",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] saml_provider_arn
+    #   The ARN of the Security Assertion Markup Language (SAML) identity
+    #   provider whose tags you want to see.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response that you
+    #   received to indicate where the next call should start.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items that you want in the response. If additional
+    #   items exist beyond the maximum that you specify, the `IsTruncated`
+    #   response element is `true`.
+    #
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when more results are
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true`, and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSAMLProviderTagsRequest AWS API Documentation
+    #
+    class ListSAMLProviderTagsRequest < Struct.new(
+      :saml_provider_arn,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags that are currently attached to the Security
+    #   Assertion Markup Language (SAML) identity provider. Each tag
+    #   consists of a key name and an associated value. If no tags are
+    #   attached to the specified resource, the response contains an empty
+    #   list.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether there are more items to return. If
+    #   your results were truncated, you can use the `Marker` request
+    #   parameter to make a subsequent pagination request that retrieves
+    #   more items. Note that IAM might return fewer than the `MaxItems`
+    #   number of results even when more results are available. Check
+    #   `IsTruncated` after every call to ensure that you receive all of
+    #   your results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marker
+    #   When `IsTruncated` is `true`, this element is present and contains
+    #   the value to use for the `Marker` parameter in a subsequent
+    #   pagination request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSAMLProviderTagsResponse AWS API Documentation
+    #
+    class ListSAMLProviderTagsResponse < Struct.new(
+      :tags,
+      :is_truncated,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSAMLProvidersRequest AWS API Documentation
@@ -6837,6 +7448,91 @@ module Aws::IAM
     #
     class ListSSHPublicKeysResponse < Struct.new(
       :ssh_public_keys,
+      :is_truncated,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListServerCertificateTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         server_certificate_name: "serverCertificateNameType", # required
+    #         marker: "markerType",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] server_certificate_name
+    #   The name of the IAM server certificate whose tags you want to see.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter only when paginating results and only after you
+    #   receive a response indicating that the results are truncated. Set it
+    #   to the value of the `Marker` element in the response that you
+    #   received to indicate where the next call should start.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items that you want in the response. If additional
+    #   items exist beyond the maximum that you specify, the `IsTruncated`
+    #   response element is `true`.
+    #
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when more results are
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true`, and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServerCertificateTagsRequest AWS API Documentation
+    #
+    class ListServerCertificateTagsRequest < Struct.new(
+      :server_certificate_name,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags that are currently attached to the IAM server
+    #   certificate. Each tag consists of a key name and an associated
+    #   value. If no tags are attached to the specified resource, the
+    #   response contains an empty list.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether there are more items to return. If
+    #   your results were truncated, you can use the `Marker` request
+    #   parameter to make a subsequent pagination request that retrieves
+    #   more items. Note that IAM might return fewer than the `MaxItems`
+    #   number of results even when more results are available. Check
+    #   `IsTruncated` after every call to ensure that you receive all of
+    #   your results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] marker
+    #   When `IsTruncated` is `true`, this element is present and contains
+    #   the value to use for the `Marker` parameter in a subsequent
+    #   pagination request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServerCertificateTagsResponse AWS API Documentation
+    #
+    class ListServerCertificateTagsResponse < Struct.new(
+      :tags,
       :is_truncated,
       :marker)
       SENSITIVE = []
@@ -7209,7 +7905,8 @@ module Aws::IAM
     # @!attribute [rw] tags
     #   The list of tags that are currently attached to the user. Each tag
     #   consists of a key name and an associated value. If no tags are
-    #   attached to the specified user, the response contains an empty list.
+    #   attached to the specified resource, the response contains an empty
+    #   list.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] is_truncated
@@ -7499,8 +8196,8 @@ module Aws::IAM
     # This data type is used as a response element in the
     # GetAccountAuthorizationDetails operation.
     #
-    # For more information about managed policies, see [Managed Policies and
-    # Inline Policies][1] in the *IAM User Guide*.
+    # For more information about managed policies, see [Managed policies and
+    # inline policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -7513,7 +8210,7 @@ module Aws::IAM
     # @!attribute [rw] policy_id
     #   The stable and unique string identifying the policy.
     #
-    #   For more information about IDs, see [IAM Identifiers][1] in the *IAM
+    #   For more information about IDs, see [IAM identifiers][1] in the *IAM
     #   User Guide*.
     #
     #
@@ -7525,8 +8222,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS
     #   resources.
     #
-    #   For more information about ARNs, go to [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, go to [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -7536,7 +8233,7 @@ module Aws::IAM
     # @!attribute [rw] path
     #   The path to the policy.
     #
-    #   For more information about paths, see [IAM Identifiers][1] in the
+    #   For more information about paths, see [IAM identifiers][1] in the
     #   *IAM User Guide*.
     #
     #
@@ -7549,7 +8246,7 @@ module Aws::IAM
     #   default (operative) version.
     #
     #   For more information about policy versions, see [Versioning for
-    #   Managed Policies][1] in the *IAM User Guide*.
+    #   managed policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -7566,7 +8263,7 @@ module Aws::IAM
     #   used as the permissions boundary.
     #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #   boundaries for IAM identities ][1] in the *IAM User Guide*.
     #
     #
     #
@@ -7649,8 +8346,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS
     #   resources.
     #
-    #   For more information about ARNs, go to [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, go to [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -7692,21 +8389,25 @@ module Aws::IAM
     #   @return [Integer]
     #
     # @!attribute [rw] require_symbols
-    #   Specifies whether to require symbols for IAM user passwords.
+    #   Specifies whether IAM user passwords must contain at least one of
+    #   the following symbols:
+    #
+    #   ! @ # $ % ^ &amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
     #   @return [Boolean]
     #
     # @!attribute [rw] require_numbers
-    #   Specifies whether to require numbers for IAM user passwords.
+    #   Specifies whether IAM user passwords must contain at least one
+    #   numeric character (0 to 9).
     #   @return [Boolean]
     #
     # @!attribute [rw] require_uppercase_characters
-    #   Specifies whether to require uppercase characters for IAM user
-    #   passwords.
+    #   Specifies whether IAM user passwords must contain at least one
+    #   uppercase character (A to Z).
     #   @return [Boolean]
     #
     # @!attribute [rw] require_lowercase_characters
-    #   Specifies whether to require lowercase characters for IAM user
-    #   passwords.
+    #   Specifies whether IAM user passwords must contain at least one
+    #   lowercase character (a to z).
     #   @return [Boolean]
     #
     # @!attribute [rw] allow_users_to_change_password
@@ -7795,7 +8496,7 @@ module Aws::IAM
     # GetPolicy, and ListPolicies operations.
     #
     # For more information about managed policies, refer to [Managed
-    # Policies and Inline Policies][1] in the *IAM User Guide*.
+    # policies and inline policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -7808,7 +8509,7 @@ module Aws::IAM
     # @!attribute [rw] policy_id
     #   The stable and unique string identifying the policy.
     #
-    #   For more information about IDs, see [IAM Identifiers][1] in the *IAM
+    #   For more information about IDs, see [IAM identifiers][1] in the *IAM
     #   User Guide*.
     #
     #
@@ -7820,8 +8521,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS
     #   resources.
     #
-    #   For more information about ARNs, go to [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, go to [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -7831,7 +8532,7 @@ module Aws::IAM
     # @!attribute [rw] path
     #   The path to the policy.
     #
-    #   For more information about paths, see [IAM Identifiers][1] in the
+    #   For more information about paths, see [IAM identifiers][1] in the
     #   *IAM User Guide*.
     #
     #
@@ -7854,7 +8555,7 @@ module Aws::IAM
     #   used to set the permissions boundary.
     #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #   boundaries for IAM identities ][1] in the *IAM User Guide*.
     #
     #
     #
@@ -7896,6 +8597,16 @@ module Aws::IAM
     #   [1]: http://www.iso.org/iso/iso8601
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that are attached to the instance profile. For more
+    #   information about tagging, see [Tagging IAM resources][1] in the
+    #   *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Policy AWS API Documentation
     #
     class Policy < Struct.new(
@@ -7909,7 +8620,8 @@ module Aws::IAM
       :is_attachable,
       :description,
       :create_date,
-      :update_date)
+      :update_date,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7964,7 +8676,7 @@ module Aws::IAM
     #
     # @!attribute [rw] policy_type
     #   The policy type. For more information about these policy types, see
-    #   [Managed Policies and Inline Policies][1] in the *IAM User Guide*.
+    #   [Managed policies and inline policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -7975,8 +8687,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS
     #   resources.
     #
-    #   For more information about ARNs, go to [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, go to [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -7988,7 +8700,7 @@ module Aws::IAM
     #   service to which the inline policy is attached.
     #
     #   This field is null for managed policies. For more information about
-    #   these policy types, see [Managed Policies and Inline Policies][1] in
+    #   these policy types, see [Managed policies and inline policies][1] in
     #   the *IAM User Guide*.
     #
     #
@@ -8001,7 +8713,7 @@ module Aws::IAM
     #   attached.
     #
     #   This field is null for managed policies. For more information about
-    #   these policy types, see [Managed Policies and Inline Policies][1] in
+    #   these policy types, see [Managed policies and inline policies][1] in
     #   the *IAM User Guide*.
     #
     #
@@ -8028,7 +8740,7 @@ module Aws::IAM
     # ListEntitiesForPolicy operation.
     #
     # For more information about managed policies, refer to [Managed
-    # Policies and Inline Policies][1] in the *IAM User Guide*.
+    # policies and inline policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -8040,7 +8752,7 @@ module Aws::IAM
     #
     # @!attribute [rw] group_id
     #   The stable and unique string identifying the group. For more
-    #   information about IDs, see [IAM Identifiers][1] in the *IAM User
+    #   information about IDs, see [IAM identifiers][1] in the *IAM User
     #   Guide*.
     #
     #
@@ -8078,7 +8790,7 @@ module Aws::IAM
     # ListEntitiesForPolicy operation.
     #
     # For more information about managed policies, refer to [Managed
-    # Policies and Inline Policies][1] in the *IAM User Guide*.
+    # policies and inline policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -8090,7 +8802,7 @@ module Aws::IAM
     #
     # @!attribute [rw] role_id
     #   The stable and unique string identifying the role. For more
-    #   information about IDs, see [IAM Identifiers][1] in the *IAM User
+    #   information about IDs, see [IAM identifiers][1] in the *IAM User
     #   Guide*.
     #
     #
@@ -8114,7 +8826,7 @@ module Aws::IAM
     # ListEntitiesForPolicy operation.
     #
     # For more information about managed policies, refer to [Managed
-    # Policies and Inline Policies][1] in the *IAM User Guide*.
+    # policies and inline policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -8126,7 +8838,7 @@ module Aws::IAM
     #
     # @!attribute [rw] user_id
     #   The stable and unique string identifying the user. For more
-    #   information about IDs, see [IAM Identifiers][1] in the *IAM User
+    #   information about IDs, see [IAM identifiers][1] in the *IAM User
     #   Guide*.
     #
     #
@@ -8150,7 +8862,7 @@ module Aws::IAM
     # GetAccountAuthorizationDetails operations.
     #
     # For more information about managed policies, refer to [Managed
-    # Policies and Inline Policies][1] in the *IAM User Guide*.
+    # policies and inline policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -8508,8 +9220,8 @@ module Aws::IAM
     #   remove the client ID from. You can get a list of OIDC provider ARNs
     #   by using the ListOpenIDConnectProviders operation.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -8817,7 +9529,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the role. For more information about paths, see [IAM
-    #   Identifiers][1] in the *IAM User Guide*.
+    #   identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -8830,7 +9542,7 @@ module Aws::IAM
     #
     # @!attribute [rw] role_id
     #   The stable and unique string identifying the role. For more
-    #   information about IDs, see [IAM Identifiers][1] in the *IAM User
+    #   information about IDs, see [IAM identifiers][1] in the *IAM User
     #   Guide*.
     #
     #
@@ -8841,7 +9553,7 @@ module Aws::IAM
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) specifying the role. For more
     #   information about ARNs and how to use them in policies, see [IAM
-    #   Identifiers][1] in the *IAM User Guide* guide.
+    #   identifiers][1] in the *IAM User Guide* guide.
     #
     #
     #
@@ -8877,7 +9589,7 @@ module Aws::IAM
     #   role.
     #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #   boundaries for IAM identities ][1] in the *IAM User Guide*.
     #
     #
     #
@@ -8885,9 +9597,9 @@ module Aws::IAM
     #   @return [Types::AttachedPermissionsBoundary]
     #
     # @!attribute [rw] tags
-    #   A list of tags that are attached to the specified role. For more
-    #   information about tagging, see [Tagging IAM Identities][1] in the
-    #   *IAM User Guide*.
+    #   A list of tags that are attached to the role. For more information
+    #   about tagging, see [Tagging IAM resources][1] in the *IAM User
+    #   Guide*.
     #
     #
     #
@@ -8900,8 +9612,8 @@ module Aws::IAM
     #   last used. Activity is only reported for the trailing 400 days. This
     #   period can be shorter if your Region began supporting these features
     #   within the last year. The role might have been used more than 400
-    #   days ago. For more information, see [Regions Where Data Is
-    #   Tracked][1] in the *IAM User Guide*.
+    #   days ago. For more information, see [Regions where data is
+    #   tracked][1] in the *IAM User Guide*.
     #
     #
     #
@@ -8934,7 +9646,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the role. For more information about paths, see [IAM
-    #   Identifiers][1] in the *IAM User Guide*.
+    #   identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -8947,7 +9659,7 @@ module Aws::IAM
     #
     # @!attribute [rw] role_id
     #   The stable and unique string identifying the role. For more
-    #   information about IDs, see [IAM Identifiers][1] in the *IAM User
+    #   information about IDs, see [IAM identifiers][1] in the *IAM User
     #   Guide*.
     #
     #
@@ -8959,8 +9671,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS
     #   resources.
     #
-    #   For more information about ARNs, go to [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, go to [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -8999,7 +9711,7 @@ module Aws::IAM
     #   role.
     #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #   boundaries for IAM identities ][1] in the *IAM User Guide*.
     #
     #
     #
@@ -9007,9 +9719,9 @@ module Aws::IAM
     #   @return [Types::AttachedPermissionsBoundary]
     #
     # @!attribute [rw] tags
-    #   A list of tags that are attached to the specified role. For more
-    #   information about tagging, see [Tagging IAM Identities][1] in the
-    #   *IAM User Guide*.
+    #   A list of tags that are attached to the role. For more information
+    #   about tagging, see [Tagging IAM resources][1] in the *IAM User
+    #   Guide*.
     #
     #
     #
@@ -9022,8 +9734,8 @@ module Aws::IAM
     #   last used. Activity is only reported for the trailing 400 days. This
     #   period can be shorter if your Region began supporting these features
     #   within the last year. The role might have been used more than 400
-    #   days ago. For more information, see [Regions Where Data Is
-    #   Tracked][1] in the *IAM User Guide*.
+    #   days ago. For more information, see [Regions where data is
+    #   tracked][1] in the *IAM User Guide*.
     #
     #
     #
@@ -9054,7 +9766,7 @@ module Aws::IAM
     # last used. Activity is only reported for the trailing 400 days. This
     # period can be shorter if your Region began supporting these features
     # within the last year. The role might have been used more than 400 days
-    # ago. For more information, see [Regions Where Data Is Tracked][1] in
+    # ago. For more information, see [Regions where data is tracked][1] in
     # the *IAM User Guide*.
     #
     # This data type is returned as a response element in the GetRole and
@@ -9070,7 +9782,7 @@ module Aws::IAM
     #
     #   This field is null if the role has not been used within the IAM
     #   tracking period. For more information about the tracking period, see
-    #   [Regions Where Data Is Tracked][2] in the *IAM User Guide*.
+    #   [Regions where data is tracked][2] in the *IAM User Guide*.
     #
     #
     #
@@ -9245,12 +9957,23 @@ module Aws::IAM
     #   The contents of the public key certificate chain.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that are attached to the server certificate. For more
+    #   information about tagging, see [Tagging IAM resources][1] in the
+    #   *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServerCertificate AWS API Documentation
     #
     class ServerCertificate < Struct.new(
       :server_certificate_metadata,
       :certificate_body,
-      :certificate_chain)
+      :certificate_chain,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9263,7 +9986,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the server certificate. For more information about
-    #   paths, see [IAM Identifiers][1] in the *IAM User Guide*.
+    #   paths, see [IAM identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -9276,7 +9999,7 @@ module Aws::IAM
     #
     # @!attribute [rw] server_certificate_id
     #   The stable and unique string identifying the server certificate. For
-    #   more information about IDs, see [IAM Identifiers][1] in the *IAM
+    #   more information about IDs, see [IAM identifiers][1] in the *IAM
     #   User Guide*.
     #
     #
@@ -9287,7 +10010,7 @@ module Aws::IAM
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) specifying the server certificate.
     #   For more information about ARNs and how to use them in policies, see
-    #   [IAM Identifiers][1] in the *IAM User Guide*.
+    #   [IAM identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -9355,17 +10078,17 @@ module Aws::IAM
     # @!attribute [rw] service_namespace
     #   The namespace of the service in which access was attempted.
     #
-    #   To learn the service namespace of a service, go to [Actions,
-    #   Resources, and Condition Keys for AWS Services][1] in the *IAM User
-    #   Guide*. Choose the name of the service to view details for that
-    #   service. In the first paragraph, find the service prefix. For
-    #   example, `(service prefix: a4b)`. For more information about service
-    #   namespaces, see [AWS Service Namespaces][2] in the *AWS General
-    #   Reference*.
+    #   To learn the service namespace of a service, see [Actions,
+    #   resources, and condition keys for AWS services][1] in the *Service
+    #   Authorization Reference*. Choose the name of the service to view
+    #   details for that service. In the first paragraph, find the service
+    #   prefix. For example, `(service prefix: a4b)`. For more information
+    #   about service namespaces, see [AWS Service Namespaces][2] in
+    #   the *AWS General Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html
+    #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   @return [String]
     #
@@ -9563,8 +10286,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the IAM policy whose default
     #   version you want to set.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -9575,7 +10298,7 @@ module Aws::IAM
     #   The version of the policy to set as the default (operative) version.
     #
     #   For more information about managed policy versions, see [Versioning
-    #   for Managed Policies][1] in the *IAM User Guide*.
+    #   for managed policies][1] in the *IAM User Guide*.
     #
     #
     #
@@ -9606,8 +10329,8 @@ module Aws::IAM
     #   tokens are longer and might affect systems where you temporarily
     #   store tokens.
     #
-    #   For information, see [Activating and Deactivating STS in an AWS
-    #   Region][1] in the *IAM User Guide*.
+    #   For information, see [Activating and deactivating STS in an AWS
+    #   region][1] in the *IAM User Guide*.
     #
     #
     #
@@ -9718,7 +10441,7 @@ module Aws::IAM
     #   boundary sets the maximum permissions that an IAM entity can have.
     #   You can input only one permissions boundary when you pass a policy
     #   to this operation. For more information about permissions
-    #   boundaries, see [Permissions Boundaries for IAM Entities][1] in the
+    #   boundaries, see [Permissions boundaries for IAM entities][1] in the
     #   *IAM User Guide*. The policy input is specified as a string that
     #   contains the complete, valid JSON text of a permissions boundary
     #   policy.
@@ -9754,7 +10477,8 @@ module Aws::IAM
     #   resources). Each API in the `ActionNames` parameter is evaluated for
     #   each resource in this list. The simulation determines the access
     #   result (allowed or denied) of each combination and reports it in the
-    #   response.
+    #   response. You can simulate resources that don't exist in your
+    #   account.
     #
     #   The simulation does not automatically retrieve policies for the
     #   specified resources. If you want to include a resource policy in the
@@ -9765,8 +10489,8 @@ module Aws::IAM
     #   of the resources included in the simulation or you receive an
     #   invalid input error.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -9848,7 +10572,7 @@ module Aws::IAM
     #   scenario includes VPC, then you must supply the network-interface
     #   resource. If it includes an IP subnet, then you must specify the
     #   subnet resource. For more information on the EC2 scenario options,
-    #   see [Supported Platforms][1] in the *Amazon EC2 User Guide*.
+    #   see [Supported platforms][1] in the *Amazon EC2 User Guide*.
     #
     #   * **EC2-Classic-InstanceStore**
     #
@@ -9982,8 +10706,8 @@ module Aws::IAM
     #   also includes all policies that are attached to any groups the user
     #   belongs to.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -10021,8 +10745,8 @@ module Aws::IAM
     #   attached to an entity and you pass in a different permissions
     #   boundary policy using this parameter, then the new permissions
     #   boundary policy is used for the simulation. For more information
-    #   about permissions boundaries, see [Permissions Boundaries for IAM
-    #   Entities][1] in the *IAM User Guide*. The policy input is specified
+    #   about permissions boundaries, see [Permissions boundaries for IAM
+    #   entities][1] in the *IAM User Guide*. The policy input is specified
     #   as a string containing the complete, valid JSON text of a
     #   permissions boundary policy.
     #
@@ -10056,15 +10780,16 @@ module Aws::IAM
     #   resources). Each API in the `ActionNames` parameter is evaluated for
     #   each resource in this list. The simulation determines the access
     #   result (allowed or denied) of each combination and reports it in the
-    #   response.
+    #   response. You can simulate resources that don't exist in your
+    #   account.
     #
     #   The simulation does not automatically retrieve policies for the
     #   specified resources. If you want to include a resource policy in the
     #   simulation, then you must include the policy as a string in the
     #   `ResourcePolicy` parameter.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -10127,8 +10852,8 @@ module Aws::IAM
     #   so that the resource-based policy's `Principal` element has a value
     #   to use in evaluating the policy.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -10158,7 +10883,7 @@ module Aws::IAM
     #   scenario includes VPC, then you must supply the network interface
     #   resource. If it includes an IP subnet, then you must specify the
     #   subnet resource. For more information on the EC2 scenario options,
-    #   see [Supported Platforms][1] in the *Amazon EC2 User Guide*.
+    #   see [Supported platforms][1] in the *Amazon EC2 User Guide*.
     #
     #   * **EC2-Classic-InstanceStore**
     #
@@ -10263,9 +10988,8 @@ module Aws::IAM
     end
 
     # A structure that represents user-provided metadata that can be
-    # associated with a resource such as an IAM user or role. For more
-    # information about tagging, see [Tagging IAM Identities][1] in the *IAM
-    # User Guide*.
+    # associated with an IAM resource. For more information about tagging,
+    # see [Tagging IAM resources][1] in the *IAM User Guide*.
     #
     #
     #
@@ -10309,6 +11033,171 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagInstanceProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_profile_name: "instanceProfileNameType", # required
+    #         tags: [ # required
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] instance_profile_name
+    #   The name of the IAM instance profile to which you want to add tags.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags that you want to attach to the IAM instance
+    #   profile. Each tag consists of a key name and an associated value.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/TagInstanceProfileRequest AWS API Documentation
+    #
+    class TagInstanceProfileRequest < Struct.new(
+      :instance_profile_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagMFADeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         serial_number: "serialNumberType", # required
+    #         tags: [ # required
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] serial_number
+    #   The unique identifier for the IAM virtual MFA device to which you
+    #   want to add tags. For virtual MFA devices, the serial number is the
+    #   same as the ARN.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags that you want to attach to the IAM virtual MFA
+    #   device. Each tag consists of a key name and an associated value.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/TagMFADeviceRequest AWS API Documentation
+    #
+    class TagMFADeviceRequest < Struct.new(
+      :serial_number,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagOpenIDConnectProviderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         open_id_connect_provider_arn: "arnType", # required
+    #         tags: [ # required
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] open_id_connect_provider_arn
+    #   The ARN of the OIDC identity provider in IAM to which you want to
+    #   add tags.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags that you want to attach to the OIDC identity
+    #   provider in IAM. Each tag consists of a key name and an associated
+    #   value.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/TagOpenIDConnectProviderRequest AWS API Documentation
+    #
+    class TagOpenIDConnectProviderRequest < Struct.new(
+      :open_id_connect_provider_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         policy_arn: "arnType", # required
+    #         tags: [ # required
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] policy_arn
+    #   The ARN of the IAM customer managed policy to which you want to add
+    #   tags.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags that you want to attach to the IAM customer managed
+    #   policy. Each tag consists of a key name and an associated value.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/TagPolicyRequest AWS API Documentation
+    #
+    class TagPolicyRequest < Struct.new(
+      :policy_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass TagRoleRequest
     #   data as a hash:
     #
@@ -10323,7 +11212,7 @@ module Aws::IAM
     #       }
     #
     # @!attribute [rw] role_name
-    #   The name of the role that you want to add tags to.
+    #   The name of the IAM role to which you want to add tags.
     #
     #   This parameter accepts (through its [regex pattern][1]) a string of
     #   characters that consist of upper and lowercase alphanumeric
@@ -10336,15 +11225,98 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The list of tags that you want to attach to the role. Each tag
-    #   consists of a key name and an associated value. You can specify this
-    #   with a JSON string.
+    #   The list of tags that you want to attach to the IAM role. Each tag
+    #   consists of a key name and an associated value.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/TagRoleRequest AWS API Documentation
     #
     class TagRoleRequest < Struct.new(
       :role_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagSAMLProviderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         saml_provider_arn: "arnType", # required
+    #         tags: [ # required
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] saml_provider_arn
+    #   The ARN of the SAML identity provider in IAM to which you want to
+    #   add tags.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags that you want to attach to the SAML identity
+    #   provider in IAM. Each tag consists of a key name and an associated
+    #   value.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/TagSAMLProviderRequest AWS API Documentation
+    #
+    class TagSAMLProviderRequest < Struct.new(
+      :saml_provider_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagServerCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         server_certificate_name: "serverCertificateNameType", # required
+    #         tags: [ # required
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] server_certificate_name
+    #   The name of the IAM server certificate to which you want to add
+    #   tags.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags that you want to attach to the IAM server
+    #   certificate. Each tag consists of a key name and an associated
+    #   value.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/TagServerCertificateRequest AWS API Documentation
+    #
+    class TagServerCertificateRequest < Struct.new(
+      :server_certificate_name,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -10364,7 +11336,7 @@ module Aws::IAM
     #       }
     #
     # @!attribute [rw] user_name
-    #   The name of the user that you want to add tags to.
+    #   The name of the IAM user to which you want to add tags.
     #
     #   This parameter accepts (through its [regex pattern][1]) a string of
     #   characters that consist of upper and lowercase alphanumeric
@@ -10377,7 +11349,7 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The list of tags that you want to attach to the user. Each tag
+    #   The list of tags that you want to attach to the IAM user. Each tag
     #   consists of a key name and an associated value.
     #   @return [Array<Types::Tag>]
     #
@@ -10405,8 +11377,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS
     #   resources.
     #
-    #   For more information about ARNs, go to [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, go to [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -10481,6 +11453,151 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UntagInstanceProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_profile_name: "instanceProfileNameType", # required
+    #         tag_keys: ["tagKeyType"], # required
+    #       }
+    #
+    # @!attribute [rw] instance_profile_name
+    #   The name of the IAM instance profile from which you want to remove
+    #   tags.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of key names as a simple array of strings. The tags with
+    #   matching keys are removed from the specified instance profile.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UntagInstanceProfileRequest AWS API Documentation
+    #
+    class UntagInstanceProfileRequest < Struct.new(
+      :instance_profile_name,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagMFADeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         serial_number: "serialNumberType", # required
+    #         tag_keys: ["tagKeyType"], # required
+    #       }
+    #
+    # @!attribute [rw] serial_number
+    #   The unique identifier for the IAM virtual MFA device from which you
+    #   want to remove tags. For virtual MFA devices, the serial number is
+    #   the same as the ARN.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of key names as a simple array of strings. The tags with
+    #   matching keys are removed from the specified instance profile.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UntagMFADeviceRequest AWS API Documentation
+    #
+    class UntagMFADeviceRequest < Struct.new(
+      :serial_number,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagOpenIDConnectProviderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         open_id_connect_provider_arn: "arnType", # required
+    #         tag_keys: ["tagKeyType"], # required
+    #       }
+    #
+    # @!attribute [rw] open_id_connect_provider_arn
+    #   The ARN of the OIDC provider in IAM from which you want to remove
+    #   tags.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of key names as a simple array of strings. The tags with
+    #   matching keys are removed from the specified OIDC provider.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UntagOpenIDConnectProviderRequest AWS API Documentation
+    #
+    class UntagOpenIDConnectProviderRequest < Struct.new(
+      :open_id_connect_provider_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         policy_arn: "arnType", # required
+    #         tag_keys: ["tagKeyType"], # required
+    #       }
+    #
+    # @!attribute [rw] policy_arn
+    #   The ARN of the IAM customer managed policy from which you want to
+    #   remove tags.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of key names as a simple array of strings. The tags with
+    #   matching keys are removed from the specified policy.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UntagPolicyRequest AWS API Documentation
+    #
+    class UntagPolicyRequest < Struct.new(
+      :policy_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagRoleRequest
     #   data as a hash:
     #
@@ -10511,6 +11628,78 @@ module Aws::IAM
     #
     class UntagRoleRequest < Struct.new(
       :role_name,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagSAMLProviderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         saml_provider_arn: "arnType", # required
+    #         tag_keys: ["tagKeyType"], # required
+    #       }
+    #
+    # @!attribute [rw] saml_provider_arn
+    #   The ARN of the SAML identity provider in IAM from which you want to
+    #   remove tags.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of key names as a simple array of strings. The tags with
+    #   matching keys are removed from the specified SAML identity provider.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UntagSAMLProviderRequest AWS API Documentation
+    #
+    class UntagSAMLProviderRequest < Struct.new(
+      :saml_provider_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagServerCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         server_certificate_name: "serverCertificateNameType", # required
+    #         tag_keys: ["tagKeyType"], # required
+    #       }
+    #
+    # @!attribute [rw] server_certificate_name
+    #   The name of the IAM server certificate from which you want to remove
+    #   tags.
+    #
+    #   This parameter accepts (through its [regex pattern][1]) a string of
+    #   characters that consist of upper and lowercase alphanumeric
+    #   characters with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of key names as a simple array of strings. The tags with
+    #   matching keys are removed from the specified IAM server certificate.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UntagServerCertificateRequest AWS API Documentation
+    #
+    class UntagServerCertificateRequest < Struct.new(
+      :server_certificate_name,
       :tag_keys)
       SENSITIVE = []
       include Aws::Structure
@@ -10587,7 +11776,7 @@ module Aws::IAM
     #
     # @!attribute [rw] status
     #   The status you want to assign to the secret access key. `Active`
-    #   means that the key can be used for API calls to AWS, while
+    #   means that the key can be used for programmatic calls to AWS, while
     #   `Inactive` means that the key cannot be used.
     #   @return [String]
     #
@@ -10664,7 +11853,7 @@ module Aws::IAM
     # @!attribute [rw] allow_users_to_change_password
     #   Allows all IAM users in your account to use the AWS Management
     #   Console to change their own passwords. For more information, see
-    #   [Letting IAM Users Change Their Own Passwords][1] in the *IAM User
+    #   [Letting IAM users change their own passwords][1] in the *IAM User
     #   Guide*.
     #
     #   If you do not specify a value for this parameter, then the operation
@@ -10910,8 +12099,8 @@ module Aws::IAM
     #   list of OIDC provider ARNs by using the ListOpenIDConnectProviders
     #   operation.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -11002,7 +12191,7 @@ module Aws::IAM
     #   valid for one hour by default. This applies when you use the
     #   `AssumeRole*` API operations or the `assume-role*` CLI operations
     #   but does not apply when you use those operations to create a console
-    #   URL. For more information, see [Using IAM Roles][1] in the *IAM User
+    #   URL. For more information, see [Using IAM roles][1] in the *IAM User
     #   Guide*.
     #
     #
@@ -11044,8 +12233,8 @@ module Aws::IAM
     # @!attribute [rw] saml_provider_arn
     #   The Amazon Resource Name (ARN) of the SAML provider to update.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -11275,8 +12464,8 @@ module Aws::IAM
     #
     # @!attribute [rw] status
     #   The status you want to assign to the certificate. `Active` means
-    #   that the certificate can be used for API calls to AWS `Inactive`
-    #   means that the certificate cannot be used.
+    #   that the certificate can be used for programmatic calls to AWS
+    #   `Inactive` means that the certificate cannot be used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSigningCertificateRequest AWS API Documentation
@@ -11424,11 +12613,17 @@ module Aws::IAM
     #         certificate_body: "certificateBodyType", # required
     #         private_key: "privateKeyType", # required
     #         certificate_chain: "certificateChainType",
+    #         tags: [
+    #           {
+    #             key: "tagKeyType", # required
+    #             value: "tagValueType", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] path
     #   The path for the server certificate. For more information about
-    #   paths, see [IAM Identifiers][1] in the *IAM User Guide*.
+    #   paths, see [IAM identifiers][1] in the *IAM User Guide*.
     #
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/). This parameter allows (through its [regex pattern][2]) a
@@ -11527,6 +12722,23 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that you want to attach to the new IAM server
+    #   certificate resource. Each tag consists of a key name and an
+    #   associated value. For more information about tagging, see [Tagging
+    #   IAM resources][1] in the *IAM User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed
+    #   maximum number of tags, then the entire request fails and the
+    #   resource is not created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadServerCertificateRequest AWS API Documentation
     #
     class UploadServerCertificateRequest < Struct.new(
@@ -11534,7 +12746,8 @@ module Aws::IAM
       :server_certificate_name,
       :certificate_body,
       :private_key,
-      :certificate_chain)
+      :certificate_chain,
+      :tags)
       SENSITIVE = [:private_key]
       include Aws::Structure
     end
@@ -11546,10 +12759,22 @@ module Aws::IAM
     #   certificate body, certificate chain, and private key.
     #   @return [Types::ServerCertificateMetadata]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that are attached to the new IAM server certificate.
+    #   The returned list of tags is sorted by tag key. For more information
+    #   about tagging, see [Tagging IAM resources][1] in the *IAM User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadServerCertificateResponse AWS API Documentation
     #
     class UploadServerCertificateResponse < Struct.new(
-      :server_certificate_metadata)
+      :server_certificate_metadata,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11632,7 +12857,10 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the user. For more information about paths, see [IAM
-    #   Identifiers][1] in the *IAM User Guide*.
+    #   identifiers][1] in the *IAM User Guide*.
+    #
+    #   The ARN of the policy used to set the permissions boundary for the
+    #   user.
     #
     #
     #
@@ -11645,7 +12873,7 @@ module Aws::IAM
     #
     # @!attribute [rw] user_id
     #   The stable and unique string identifying the user. For more
-    #   information about IDs, see [IAM Identifiers][1] in the *IAM User
+    #   information about IDs, see [IAM identifiers][1] in the *IAM User
     #   Guide*.
     #
     #
@@ -11676,7 +12904,7 @@ module Aws::IAM
     #   The date and time, in [ISO 8601 date-time format][1], when the
     #   user's password was last used to sign in to an AWS website. For a
     #   list of AWS websites that capture a user's last sign-in time, see
-    #   the [Credential Reports][2] topic in the *IAM User Guide*. If a
+    #   the [Credential reports][2] topic in the *IAM User Guide*. If a
     #   password is used more than once in a five-minute span, only the
     #   first use is returned in this field. If the field is null (no
     #   value), then it indicates that they never signed in with a password.
@@ -11701,11 +12929,8 @@ module Aws::IAM
     #   @return [Time]
     #
     # @!attribute [rw] permissions_boundary
-    #   The ARN of the policy used to set the permissions boundary for the
-    #   user.
-    #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #   boundaries for IAM identities ][1] in the *IAM User Guide*.
     #
     #
     #
@@ -11713,8 +12938,8 @@ module Aws::IAM
     #   @return [Types::AttachedPermissionsBoundary]
     #
     # @!attribute [rw] tags
-    #   A list of tags that are associated with the specified user. For more
-    #   information about tagging, see [Tagging IAM Identities][1] in the
+    #   A list of tags that are associated with the user. For more
+    #   information about tagging, see [Tagging IAM resources][1] in the
     #   *IAM User Guide*.
     #
     #
@@ -11745,7 +12970,7 @@ module Aws::IAM
     #
     # @!attribute [rw] path
     #   The path to the user. For more information about paths, see [IAM
-    #   Identifiers][1] in the *IAM User Guide*.
+    #   identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -11758,7 +12983,7 @@ module Aws::IAM
     #
     # @!attribute [rw] user_id
     #   The stable and unique string identifying the user. For more
-    #   information about IDs, see [IAM Identifiers][1] in the *IAM User
+    #   information about IDs, see [IAM identifiers][1] in the *IAM User
     #   Guide*.
     #
     #
@@ -11770,8 +12995,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS
     #   resources.
     #
-    #   For more information about ARNs, go to [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, go to [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
     #
     #
     #
@@ -11804,7 +13029,7 @@ module Aws::IAM
     #   user.
     #
     #   For more information about permissions boundaries, see [Permissions
-    #   Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #   boundaries for IAM identities ][1] in the *IAM User Guide*.
     #
     #
     #
@@ -11812,8 +13037,8 @@ module Aws::IAM
     #   @return [Types::AttachedPermissionsBoundary]
     #
     # @!attribute [rw] tags
-    #   A list of tags that are associated with the specified user. For more
-    #   information about tagging, see [Tagging IAM Identities][1] in the
+    #   A list of tags that are associated with the user. For more
+    #   information about tagging, see [Tagging IAM resources][1] in the
     #   *IAM User Guide*.
     #
     #
@@ -11870,6 +13095,16 @@ module Aws::IAM
     #   The date and time on which the virtual MFA device was enabled.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   A list of tags that are attached to the virtual MFA device. For more
+    #   information about tagging, see [Tagging IAM resources][1] in the
+    #   *IAM User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/VirtualMFADevice AWS API Documentation
     #
     class VirtualMFADevice < Struct.new(
@@ -11877,7 +13112,8 @@ module Aws::IAM
       :base_32_string_seed,
       :qr_code_png,
       :user,
-      :enable_date)
+      :enable_date,
+      :tags)
       SENSITIVE = [:base_32_string_seed, :qr_code_png]
       include Aws::Structure
     end

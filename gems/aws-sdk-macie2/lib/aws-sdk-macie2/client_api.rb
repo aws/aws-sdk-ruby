@@ -91,6 +91,8 @@ module Aws::Macie2
     DisableMacieResponse = Shapes::StructureShape.new(name: 'DisableMacieResponse')
     DisableOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'DisableOrganizationAdminAccountRequest')
     DisableOrganizationAdminAccountResponse = Shapes::StructureShape.new(name: 'DisableOrganizationAdminAccountResponse')
+    DisassociateFromAdministratorAccountRequest = Shapes::StructureShape.new(name: 'DisassociateFromAdministratorAccountRequest')
+    DisassociateFromAdministratorAccountResponse = Shapes::StructureShape.new(name: 'DisassociateFromAdministratorAccountResponse')
     DisassociateFromMasterAccountRequest = Shapes::StructureShape.new(name: 'DisassociateFromMasterAccountRequest')
     DisassociateFromMasterAccountResponse = Shapes::StructureShape.new(name: 'DisassociateFromMasterAccountResponse')
     DisassociateMemberRequest = Shapes::StructureShape.new(name: 'DisassociateMemberRequest')
@@ -117,6 +119,8 @@ module Aws::Macie2
     FindingType = Shapes::StringShape.new(name: 'FindingType')
     FindingsFilterAction = Shapes::StringShape.new(name: 'FindingsFilterAction')
     FindingsFilterListItem = Shapes::StructureShape.new(name: 'FindingsFilterListItem')
+    GetAdministratorAccountRequest = Shapes::StructureShape.new(name: 'GetAdministratorAccountRequest')
+    GetAdministratorAccountResponse = Shapes::StructureShape.new(name: 'GetAdministratorAccountResponse')
     GetBucketStatisticsRequest = Shapes::StructureShape.new(name: 'GetBucketStatisticsRequest')
     GetBucketStatisticsResponse = Shapes::StructureShape.new(name: 'GetBucketStatisticsResponse')
     GetClassificationExportConfigurationRequest = Shapes::StructureShape.new(name: 'GetClassificationExportConfigurationRequest')
@@ -301,8 +305,9 @@ module Aws::Macie2
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
 
+    AcceptInvitationRequest.add_member(:administrator_account_id, Shapes::ShapeRef.new(shape: __string, location_name: "administratorAccountId"))
     AcceptInvitationRequest.add_member(:invitation_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "invitationId"))
-    AcceptInvitationRequest.add_member(:master_account, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "masterAccount"))
+    AcceptInvitationRequest.add_member(:master_account, Shapes::ShapeRef.new(shape: __string, location_name: "masterAccount"))
     AcceptInvitationRequest.struct_class = Types::AcceptInvitationRequest
 
     AcceptInvitationResponse.struct_class = Types::AcceptInvitationResponse
@@ -652,6 +657,10 @@ module Aws::Macie2
 
     DisableOrganizationAdminAccountResponse.struct_class = Types::DisableOrganizationAdminAccountResponse
 
+    DisassociateFromAdministratorAccountRequest.struct_class = Types::DisassociateFromAdministratorAccountRequest
+
+    DisassociateFromAdministratorAccountResponse.struct_class = Types::DisassociateFromAdministratorAccountResponse
+
     DisassociateFromMasterAccountRequest.struct_class = Types::DisassociateFromMasterAccountRequest
 
     DisassociateFromMasterAccountResponse.struct_class = Types::DisassociateFromMasterAccountResponse
@@ -728,6 +737,11 @@ module Aws::Macie2
     FindingsFilterListItem.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     FindingsFilterListItem.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     FindingsFilterListItem.struct_class = Types::FindingsFilterListItem
+
+    GetAdministratorAccountRequest.struct_class = Types::GetAdministratorAccountRequest
+
+    GetAdministratorAccountResponse.add_member(:administrator, Shapes::ShapeRef.new(shape: Invitation, location_name: "administrator"))
+    GetAdministratorAccountResponse.struct_class = Types::GetAdministratorAccountResponse
 
     GetBucketStatisticsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
     GetBucketStatisticsRequest.struct_class = Types::GetBucketStatisticsRequest
@@ -819,6 +833,7 @@ module Aws::Macie2
     GetMemberRequest.struct_class = Types::GetMemberRequest
 
     GetMemberResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
+    GetMemberResponse.add_member(:administrator_account_id, Shapes::ShapeRef.new(shape: __string, location_name: "administratorAccountId"))
     GetMemberResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     GetMemberResponse.add_member(:email, Shapes::ShapeRef.new(shape: __string, location_name: "email"))
     GetMemberResponse.add_member(:invited_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "invitedAt"))
@@ -1008,6 +1023,7 @@ module Aws::Macie2
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     Member.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
+    Member.add_member(:administrator_account_id, Shapes::ShapeRef.new(shape: __string, location_name: "administratorAccountId"))
     Member.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Member.add_member(:email, Shapes::ShapeRef.new(shape: __string, location_name: "email"))
     Member.add_member(:invited_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "invitedAt"))
@@ -1641,6 +1657,21 @@ module Aws::Macie2
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:disassociate_from_administrator_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateFromAdministratorAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/administrator/disassociate"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateFromAdministratorAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateFromAdministratorAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:disassociate_from_master_account, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateFromMasterAccount"
         o.http_method = "POST"
@@ -1692,6 +1723,21 @@ module Aws::Macie2
         o.http_request_uri = "/admin"
         o.input = Shapes::ShapeRef.new(shape: EnableOrganizationAdminAccountRequest)
         o.output = Shapes::ShapeRef.new(shape: EnableOrganizationAdminAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:get_administrator_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAdministratorAccount"
+        o.http_method = "GET"
+        o.http_request_uri = "/administrator"
+        o.input = Shapes::ShapeRef.new(shape: GetAdministratorAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAdministratorAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)

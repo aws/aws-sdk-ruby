@@ -1199,6 +1199,7 @@ module Aws::RDS
     DBClusterSnapshot.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterIdentifier"))
     DBClusterSnapshot.add_member(:snapshot_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "SnapshotCreateTime"))
     DBClusterSnapshot.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    DBClusterSnapshot.add_member(:engine_mode, Shapes::ShapeRef.new(shape: String, location_name: "EngineMode"))
     DBClusterSnapshot.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: Integer, location_name: "AllocatedStorage"))
     DBClusterSnapshot.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     DBClusterSnapshot.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "Port"))
@@ -3234,6 +3235,9 @@ module Aws::RDS
     UpgradeTarget.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     UpgradeTarget.add_member(:auto_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoUpgrade"))
     UpgradeTarget.add_member(:is_major_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsMajorVersionUpgrade"))
+    UpgradeTarget.add_member(:supported_engine_modes, Shapes::ShapeRef.new(shape: EngineModeList, location_name: "SupportedEngineModes"))
+    UpgradeTarget.add_member(:supports_parallel_query, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsParallelQuery"))
+    UpgradeTarget.add_member(:supports_global_databases, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "SupportsGlobalDatabases"))
     UpgradeTarget.struct_class = Types::UpgradeTarget
 
     UserAuthConfig.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))

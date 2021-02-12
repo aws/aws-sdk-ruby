@@ -58,10 +58,18 @@ module Aws::RDS
       data[:snapshot_create_time]
     end
 
-    # Specifies the name of the database engine.
+    # Specifies the name of the database engine for this DB cluster
+    # snapshot.
     # @return [String]
     def engine
       data[:engine]
+    end
+
+    # Provides the engine mode of the database engine for this DB cluster
+    # snapshot.
+    # @return [String]
+    def engine_mode
+      data[:engine_mode]
     end
 
     # Specifies the allocated storage size in gibibytes (GiB).
@@ -96,7 +104,7 @@ module Aws::RDS
       data[:cluster_create_time]
     end
 
-    # Provides the master username for the DB cluster snapshot.
+    # Provides the master username for this DB cluster snapshot.
     # @return [String]
     def master_username
       data[:master_username]

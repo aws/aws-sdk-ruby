@@ -36,7 +36,7 @@ module Aws::IAM
     alias :group_name :name
 
     # The path to the group. For more information about paths, see [IAM
-    # Identifiers][1] in the *IAM User Guide*.
+    # identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -47,7 +47,7 @@ module Aws::IAM
     end
 
     # The stable and unique string identifying the group. For more
-    # information about IDs, see [IAM Identifiers][1] in the *IAM User
+    # information about IDs, see [IAM identifiers][1] in the *IAM User
     # Guide*.
     #
     #
@@ -60,7 +60,7 @@ module Aws::IAM
 
     # The Amazon Resource Name (ARN) specifying the group. For more
     # information about ARNs and how to use them in policies, see [IAM
-    # Identifiers][1] in the *IAM User Guide*.
+    # identifiers][1] in the *IAM User Guide*.
     #
     #
     #
@@ -248,8 +248,8 @@ module Aws::IAM
     # @option options [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy you want to attach.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
+    #   in the *AWS General Reference*.
     #
     #
     #
@@ -269,7 +269,7 @@ module Aws::IAM
     # @param [Hash] options ({})
     # @option options [String] :path
     #   The path to the group. For more information about paths, see [IAM
-    #   Identifiers][1] in the *IAM User Guide*.
+    #   identifiers][1] in the *IAM User Guide*.
     #
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
@@ -368,8 +368,8 @@ module Aws::IAM
     # @option options [required, String] :policy_arn
     #   The Amazon Resource Name (ARN) of the IAM policy you want to detach.
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   For more information about ARNs, see [Amazon Resource Names (ARNs)][1]
+    #   in the *AWS General Reference*.
     #
     #
     #

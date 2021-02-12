@@ -52,7 +52,7 @@ module Aws::Detective
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StartMonitoringMemberRequest = Shapes::StructureShape.new(name: 'StartMonitoringMemberRequest')
-    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     UnprocessedAccount = Shapes::StructureShape.new(name: 'UnprocessedAccount')
     UnprocessedAccountList = Shapes::ListShape.new(name: 'UnprocessedAccountList')
     UnprocessedReason = Shapes::StringShape.new(name: 'UnprocessedReason')

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2021-02-12)
+------------------
+
+* Feature - The release provides new GetActionType and UpdateActionType APIs for viewing and editing action types in CodePipeline.
+
 1.40.0 (2021-02-02)
 ------------------
 
