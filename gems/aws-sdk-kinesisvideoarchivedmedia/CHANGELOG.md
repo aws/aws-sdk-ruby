@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2021-02-15)
+------------------
+
+* Feature - The ListFragments and GetMediaForFragmentList APIs now support StreamName or StreamARN as input parameters.
+
 1.30.0 (2021-02-02)
 ------------------
 

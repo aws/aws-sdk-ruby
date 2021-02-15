@@ -40,6 +40,7 @@ module Aws::ConfigService
   # * {InvalidResultTokenException}
   # * {InvalidRoleException}
   # * {InvalidS3KeyPrefixException}
+  # * {InvalidS3KmsKeyArnException}
   # * {InvalidSNSTopicARNException}
   # * {InvalidTimeRangeException}
   # * {LastDeliveryChannelDeleteFailedException}
@@ -211,6 +212,16 @@ module Aws::ConfigService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ConfigService::Types::InvalidS3KeyPrefixException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidS3KmsKeyArnException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ConfigService::Types::InvalidS3KmsKeyArnException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

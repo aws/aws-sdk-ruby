@@ -1947,26 +1947,31 @@ module Aws::Lightsail
     #
     # @!attribute [rw] healthy_threshold
     #   The number of consecutive health checks successes required before
-    #   moving the container to the `Healthy` state.
+    #   moving the container to the `Healthy` state. The default value is
+    #   `2`.
     #   @return [Integer]
     #
     # @!attribute [rw] unhealthy_threshold
     #   The number of consecutive health check failures required before
-    #   moving the container to the `Unhealthy` state.
+    #   moving the container to the `Unhealthy` state. The default value is
+    #   `2`.
     #   @return [Integer]
     #
     # @!attribute [rw] timeout_seconds
     #   The amount of time, in seconds, during which no response means a
-    #   failed health check. You may specify between 2 and 60 seconds.
+    #   failed health check. You can specify between 2 and 60 seconds. The
+    #   default value is `2`.
     #   @return [Integer]
     #
     # @!attribute [rw] interval_seconds
     #   The approximate interval, in seconds, between health checks of an
-    #   individual container. You may specify between 5 and 300 seconds.
+    #   individual container. You can specify between 5 and 300 seconds. The
+    #   default value is `5`.
     #   @return [Integer]
     #
     # @!attribute [rw] path
-    #   The path on the container on which to perform the health check.
+    #   The path on the container on which to perform the health check. The
+    #   default value is `/`.
     #   @return [String]
     #
     # @!attribute [rw] success_codes
@@ -4065,7 +4070,7 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] relational_database_name
-    #   The name to use for your new database.
+    #   The name to use for your new Lightsail database resource.
     #
     #   Constraints:
     #
@@ -10864,7 +10869,7 @@ module Aws::Lightsail
     #
     #   [1]: https://console.aws.amazon.com/support/home
     #   [2]: https://www.virustotal.com/gui/home/url
-    #   [3]: https://www.google.com/webmasters/hacked/?hl=en
+    #   [3]: https://developers.google.com/web/fundamentals/security/hacked
     #   @return [String]
     #
     # @!attribute [rw] issued_at

@@ -471,6 +471,7 @@ module Aws::Pinpoint
     #             sms_message: {
     #               body: "__string",
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #               origination_number: "__string",
     #               sender_id: "__string",
     #             },
     #           },
@@ -630,6 +631,7 @@ module Aws::Pinpoint
     #         sms_message: {
     #           body: "__string",
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #           origination_number: "__string",
     #           sender_id: "__string",
     #         },
     #       },
@@ -768,6 +770,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
@@ -885,6 +888,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.message_configuration.sms_message.body #=> String
     #   resp.campaign_response.message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.campaign_response.message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
@@ -1357,6 +1361,7 @@ module Aws::Pinpoint
     #           sms: {
     #             message_config: {
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #               origination_number: "__string",
     #               sender_id: "__string",
     #             },
     #             next_activity: "__string",
@@ -1560,6 +1565,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].random_split.branches[0].next_activity #=> String
     #   resp.journey_response.activities["__string"].random_split.branches[0].percentage #=> Integer
     #   resp.journey_response.activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.journey_response.activities["__string"].sms.message_config.origination_number #=> String
     #   resp.journey_response.activities["__string"].sms.message_config.sender_id #=> String
     #   resp.journey_response.activities["__string"].sms.next_activity #=> String
     #   resp.journey_response.activities["__string"].sms.template_name #=> String
@@ -2479,6 +2485,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
@@ -2596,6 +2603,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.message_configuration.sms_message.body #=> String
     #   resp.campaign_response.message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.campaign_response.message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
@@ -2999,6 +3007,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].random_split.branches[0].next_activity #=> String
     #   resp.journey_response.activities["__string"].random_split.branches[0].percentage #=> Integer
     #   resp.journey_response.activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.journey_response.activities["__string"].sms.message_config.origination_number #=> String
     #   resp.journey_response.activities["__string"].sms.message_config.sender_id #=> String
     #   resp.journey_response.activities["__string"].sms.next_activity #=> String
     #   resp.journey_response.activities["__string"].sms.template_name #=> String
@@ -3937,6 +3946,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
@@ -4054,6 +4064,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.message_configuration.sms_message.body #=> String
     #   resp.campaign_response.message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.campaign_response.message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
@@ -4305,6 +4316,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
@@ -4422,6 +4434,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.message_configuration.sms_message.body #=> String
     #   resp.campaign_response.message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.campaign_response.message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
@@ -4567,6 +4580,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.gcm_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.body #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.end_time #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
@@ -4684,6 +4698,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.gcm_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.sms_message.body #=> String
     #   resp.campaigns_response.item[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.campaigns_response.item[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaigns_response.item[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaigns_response.item[0].name #=> String
     #   resp.campaigns_response.item[0].schedule.end_time #=> String
@@ -4828,6 +4843,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.gcm_message.url #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.body #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.end_time #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
@@ -4945,6 +4961,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.gcm_message.url #=> String
     #   resp.campaigns_response.item[0].message_configuration.sms_message.body #=> String
     #   resp.campaigns_response.item[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.campaigns_response.item[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaigns_response.item[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaigns_response.item[0].name #=> String
     #   resp.campaigns_response.item[0].schedule.end_time #=> String
@@ -5607,6 +5624,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].random_split.branches[0].next_activity #=> String
     #   resp.journey_response.activities["__string"].random_split.branches[0].percentage #=> Integer
     #   resp.journey_response.activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.journey_response.activities["__string"].sms.message_config.origination_number #=> String
     #   resp.journey_response.activities["__string"].sms.message_config.sender_id #=> String
     #   resp.journey_response.activities["__string"].sms.next_activity #=> String
     #   resp.journey_response.activities["__string"].sms.template_name #=> String
@@ -7001,6 +7019,7 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].activities["__string"].random_split.branches[0].next_activity #=> String
     #   resp.journeys_response.item[0].activities["__string"].random_split.branches[0].percentage #=> Integer
     #   resp.journeys_response.item[0].activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.journeys_response.item[0].activities["__string"].sms.message_config.origination_number #=> String
     #   resp.journeys_response.item[0].activities["__string"].sms.message_config.sender_id #=> String
     #   resp.journeys_response.item[0].activities["__string"].sms.next_activity #=> String
     #   resp.journeys_response.item[0].activities["__string"].sms.template_name #=> String
@@ -8418,6 +8437,7 @@ module Aws::Pinpoint
     #             sms_message: {
     #               body: "__string",
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #               origination_number: "__string",
     #               sender_id: "__string",
     #             },
     #           },
@@ -8577,6 +8597,7 @@ module Aws::Pinpoint
     #         sms_message: {
     #           body: "__string",
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #           origination_number: "__string",
     #           sender_id: "__string",
     #         },
     #       },
@@ -8715,6 +8736,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
@@ -8832,6 +8854,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.gcm_message.url #=> String
     #   resp.campaign_response.message_configuration.sms_message.body #=> String
     #   resp.campaign_response.message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.campaign_response.message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
@@ -9456,6 +9479,7 @@ module Aws::Pinpoint
     #           sms: {
     #             message_config: {
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #               origination_number: "__string",
     #               sender_id: "__string",
     #             },
     #             next_activity: "__string",
@@ -9659,6 +9683,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].random_split.branches[0].next_activity #=> String
     #   resp.journey_response.activities["__string"].random_split.branches[0].percentage #=> Integer
     #   resp.journey_response.activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.journey_response.activities["__string"].sms.message_config.origination_number #=> String
     #   resp.journey_response.activities["__string"].sms.message_config.sender_id #=> String
     #   resp.journey_response.activities["__string"].sms.next_activity #=> String
     #   resp.journey_response.activities["__string"].sms.template_name #=> String
@@ -9866,6 +9891,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].random_split.branches[0].next_activity #=> String
     #   resp.journey_response.activities["__string"].random_split.branches[0].percentage #=> Integer
     #   resp.journey_response.activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.journey_response.activities["__string"].sms.message_config.origination_number #=> String
     #   resp.journey_response.activities["__string"].sms.message_config.sender_id #=> String
     #   resp.journey_response.activities["__string"].sms.next_activity #=> String
     #   resp.journey_response.activities["__string"].sms.template_name #=> String
@@ -10599,7 +10625,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

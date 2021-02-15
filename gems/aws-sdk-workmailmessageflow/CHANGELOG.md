@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2021-02-15)
+------------------
+
+* Feature - This release allows customers to update email messages as they flow in and out of Amazon WorkMail
+
 1.10.0 (2021-02-02)
 ------------------
 

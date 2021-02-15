@@ -4389,6 +4389,78 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @!attribute [rw] request_id
+    #   Unique identifier of the request to ensure the request is handled exactly once in case of retries. **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreatePartnerInput AWS API Documentation
+    #
+    class CreatePartnerInput < Struct.new(
+      :request_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreatePartnerInputRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_id: "__string", # required
+    #         request_id: "__string",
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] input_id
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreatePartnerInputRequest AWS API Documentation
+    #
+    class CreatePartnerInputRequest < Struct.new(
+      :input_id,
+      :request_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] input
+    #   @return [Types::Input]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreatePartnerInputResponse AWS API Documentation
+    #
+    class CreatePartnerInputResponse < Struct.new(
+      :input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] input
+    #   @return [Types::Input]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreatePartnerInputResultModel AWS API Documentation
+    #
+    class CreatePartnerInputResultModel < Struct.new(
+      :input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateTagsRequest
     #   data as a hash:
     #
@@ -5099,6 +5171,9 @@ module Aws::MediaLive
     # @!attribute [rw] input_devices
     #   @return [Array<Types::InputDeviceSettings>]
     #
+    # @!attribute [rw] input_partner_ids
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] input_source_type
     #   There are two types of input sources, static and dynamic. If an
     #   input source is dynamic you can change the source url of the input
@@ -5140,6 +5215,7 @@ module Aws::MediaLive
       :id,
       :input_class,
       :input_devices,
+      :input_partner_ids,
       :input_source_type,
       :media_connect_flows,
       :name,
@@ -9118,6 +9194,10 @@ module Aws::MediaLive
     #   Settings for the input devices.
     #   @return [Array<Types::InputDeviceSettings>]
     #
+    # @!attribute [rw] input_partner_ids
+    #   A list of IDs for all Inputs which are partners of this one.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] input_source_type
     #   Certain pull input sources can be dynamic, meaning that they can
     #   have their URL's dynamically changes during input switch actions.
@@ -9165,6 +9245,7 @@ module Aws::MediaLive
       :id,
       :input_class,
       :input_devices,
+      :input_partner_ids,
       :input_source_type,
       :media_connect_flows,
       :name,

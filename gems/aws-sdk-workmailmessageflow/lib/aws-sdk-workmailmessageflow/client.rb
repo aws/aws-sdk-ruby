@@ -356,6 +356,57 @@ module Aws::WorkMailMessageFlow
       req.send_request(options, &block)
     end
 
+    # Updates the raw content of an in-transit email message, in MIME
+    # format.
+    #
+    # This example describes how to update in-transit email message. For
+    # more information and examples for using this API, see [ Updating
+    # message content with AWS Lambda][1].
+    #
+    # <note markdown="1"> Updates to an in-transit message only appear when you call
+    # `PutRawMessageContent` from an AWS Lambda function configured with a
+    # synchronous [ Run Lambda][2] rule. If you call `PutRawMessageContent`
+    # on a delivered or sent message, the message remains unchanged, even
+    # though [GetRawMessageContent][3] returns an updated message.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workmail/latest/adminguide/update-with-lambda.html
+    # [2]: https://docs.aws.amazon.com/workmail/latest/adminguide/lambda.html#synchronous-rules
+    # [3]: https://docs.aws.amazon.com/workmail/latest/APIReference/API_messageflow_GetRawMessageContent.html
+    #
+    # @option params [required, String] :message_id
+    #   The identifier of the email message being updated.
+    #
+    # @option params [required, Types::RawMessageContent] :content
+    #   Describes the raw message content of the updated email message.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_raw_message_content({
+    #     message_id: "messageIdType", # required
+    #     content: { # required
+    #       s3_reference: { # required
+    #         bucket: "s3BucketIdType", # required
+    #         key: "s3KeyIdType", # required
+    #         object_version: "s3VersionType",
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmailmessageflow-2019-05-01/PutRawMessageContent AWS API Documentation
+    #
+    # @overload put_raw_message_content(params = {})
+    # @param [Hash] params ({})
+    def put_raw_message_content(params = {}, options = {})
+      req = build_request(:put_raw_message_content, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -369,7 +420,7 @@ module Aws::WorkMailMessageFlow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmailmessageflow'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2021-02-15)
+------------------
+
+* Feature - This release enables fine grant access control in ListStatements, GetStatementResult, CancelStatement and DescribeStatement.
+
 1.3.0 (2021-02-02)
 ------------------
 

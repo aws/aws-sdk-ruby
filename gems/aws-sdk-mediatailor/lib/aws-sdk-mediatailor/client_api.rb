@@ -18,6 +18,8 @@ module Aws::MediaTailor
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Bumper = Shapes::StructureShape.new(name: 'Bumper')
     CdnConfiguration = Shapes::StructureShape.new(name: 'CdnConfiguration')
+    ConfigurationAliasesRequest = Shapes::MapShape.new(name: 'ConfigurationAliasesRequest')
+    ConfigurationAliasesResponse = Shapes::MapShape.new(name: 'ConfigurationAliasesResponse')
     DashConfiguration = Shapes::StructureShape.new(name: 'DashConfiguration')
     DashConfigurationForPut = Shapes::StructureShape.new(name: 'DashConfigurationForPut')
     DeletePlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'DeletePlaybackConfigurationRequest')
@@ -70,6 +72,12 @@ module Aws::MediaTailor
     CdnConfiguration.add_member(:content_segment_url_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "ContentSegmentUrlPrefix"))
     CdnConfiguration.struct_class = Types::CdnConfiguration
 
+    ConfigurationAliasesRequest.key = Shapes::ShapeRef.new(shape: __string)
+    ConfigurationAliasesRequest.value = Shapes::ShapeRef.new(shape: __mapOf__string)
+
+    ConfigurationAliasesResponse.key = Shapes::ShapeRef.new(shape: __string)
+    ConfigurationAliasesResponse.value = Shapes::ShapeRef.new(shape: __mapOf__string)
+
     DashConfiguration.add_member(:manifest_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "ManifestEndpointPrefix"))
     DashConfiguration.add_member(:mpd_location, Shapes::ShapeRef.new(shape: __string, location_name: "MpdLocation"))
     DashConfiguration.add_member(:origin_manifest_type, Shapes::ShapeRef.new(shape: OriginManifestType, location_name: "OriginManifestType"))
@@ -92,6 +100,7 @@ module Aws::MediaTailor
     GetPlaybackConfigurationResponse.add_member(:bumper, Shapes::ShapeRef.new(shape: Bumper, location_name: "Bumper"))
     GetPlaybackConfigurationResponse.add_member(:cdn_configuration, Shapes::ShapeRef.new(shape: CdnConfiguration, location_name: "CdnConfiguration"))
     GetPlaybackConfigurationResponse.add_member(:personalization_threshold_seconds, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "PersonalizationThresholdSeconds"))
+    GetPlaybackConfigurationResponse.add_member(:configuration_aliases, Shapes::ShapeRef.new(shape: ConfigurationAliasesResponse, location_name: "ConfigurationAliases"))
     GetPlaybackConfigurationResponse.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfiguration, location_name: "DashConfiguration"))
     GetPlaybackConfigurationResponse.add_member(:hls_configuration, Shapes::ShapeRef.new(shape: HlsConfiguration, location_name: "HlsConfiguration"))
     GetPlaybackConfigurationResponse.add_member(:live_pre_roll_configuration, Shapes::ShapeRef.new(shape: LivePreRollConfiguration, location_name: "LivePreRollConfiguration"))
@@ -133,6 +142,7 @@ module Aws::MediaTailor
     PlaybackConfiguration.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
     PlaybackConfiguration.add_member(:cdn_configuration, Shapes::ShapeRef.new(shape: CdnConfiguration, location_name: "CdnConfiguration"))
     PlaybackConfiguration.add_member(:personalization_threshold_seconds, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "PersonalizationThresholdSeconds"))
+    PlaybackConfiguration.add_member(:configuration_aliases, Shapes::ShapeRef.new(shape: ConfigurationAliasesResponse, location_name: "ConfigurationAliases"))
     PlaybackConfiguration.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfiguration, location_name: "DashConfiguration"))
     PlaybackConfiguration.add_member(:hls_configuration, Shapes::ShapeRef.new(shape: HlsConfiguration, location_name: "HlsConfiguration"))
     PlaybackConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
@@ -150,6 +160,7 @@ module Aws::MediaTailor
     PutPlaybackConfigurationRequest.add_member(:bumper, Shapes::ShapeRef.new(shape: Bumper, location_name: "Bumper"))
     PutPlaybackConfigurationRequest.add_member(:cdn_configuration, Shapes::ShapeRef.new(shape: CdnConfiguration, location_name: "CdnConfiguration"))
     PutPlaybackConfigurationRequest.add_member(:personalization_threshold_seconds, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "PersonalizationThresholdSeconds"))
+    PutPlaybackConfigurationRequest.add_member(:configuration_aliases, Shapes::ShapeRef.new(shape: ConfigurationAliasesRequest, location_name: "ConfigurationAliases"))
     PutPlaybackConfigurationRequest.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfigurationForPut, location_name: "DashConfiguration"))
     PutPlaybackConfigurationRequest.add_member(:live_pre_roll_configuration, Shapes::ShapeRef.new(shape: LivePreRollConfiguration, location_name: "LivePreRollConfiguration"))
     PutPlaybackConfigurationRequest.add_member(:manifest_processing_rules, Shapes::ShapeRef.new(shape: ManifestProcessingRules, location_name: "ManifestProcessingRules"))
@@ -164,6 +175,7 @@ module Aws::MediaTailor
     PutPlaybackConfigurationResponse.add_member(:avail_suppression, Shapes::ShapeRef.new(shape: AvailSuppression, location_name: "AvailSuppression"))
     PutPlaybackConfigurationResponse.add_member(:bumper, Shapes::ShapeRef.new(shape: Bumper, location_name: "Bumper"))
     PutPlaybackConfigurationResponse.add_member(:cdn_configuration, Shapes::ShapeRef.new(shape: CdnConfiguration, location_name: "CdnConfiguration"))
+    PutPlaybackConfigurationResponse.add_member(:configuration_aliases, Shapes::ShapeRef.new(shape: ConfigurationAliasesResponse, location_name: "ConfigurationAliases"))
     PutPlaybackConfigurationResponse.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfiguration, location_name: "DashConfiguration"))
     PutPlaybackConfigurationResponse.add_member(:hls_configuration, Shapes::ShapeRef.new(shape: HlsConfiguration, location_name: "HlsConfiguration"))
     PutPlaybackConfigurationResponse.add_member(:live_pre_roll_configuration, Shapes::ShapeRef.new(shape: LivePreRollConfiguration, location_name: "LivePreRollConfiguration"))
@@ -237,6 +249,12 @@ module Aws::MediaTailor
         o.http_request_uri = "/playbackConfigurations"
         o.input = Shapes::ShapeRef.new(shape: ListPlaybackConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPlaybackConfigurationsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|

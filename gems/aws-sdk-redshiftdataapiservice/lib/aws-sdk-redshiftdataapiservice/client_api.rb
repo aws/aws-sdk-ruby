@@ -13,6 +13,7 @@ module Aws::RedshiftDataAPIService
 
     include Seahorse::Model
 
+    ActiveStatementsExceededException = Shapes::StructureShape.new(name: 'ActiveStatementsExceededException')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
@@ -66,6 +67,9 @@ module Aws::RedshiftDataAPIService
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     bool = Shapes::BooleanShape.new(name: 'bool')
 
+    ActiveStatementsExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ActiveStatementsExceededException.struct_class = Types::ActiveStatementsExceededException
+
     CancelStatementRequest.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "Id"))
     CancelStatementRequest.struct_class = Types::CancelStatementRequest
 
@@ -102,6 +106,7 @@ module Aws::RedshiftDataAPIService
     DescribeStatementResponse.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
     DescribeStatementResponse.add_member(:duration, Shapes::ShapeRef.new(shape: Long, location_name: "Duration"))
     DescribeStatementResponse.add_member(:error, Shapes::ShapeRef.new(shape: String, location_name: "Error"))
+    DescribeStatementResponse.add_member(:has_result_set, Shapes::ShapeRef.new(shape: Boolean, location_name: "HasResultSet"))
     DescribeStatementResponse.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "Id"))
     DescribeStatementResponse.add_member(:query_string, Shapes::ShapeRef.new(shape: StatementString, location_name: "QueryString"))
     DescribeStatementResponse.add_member(:redshift_pid, Shapes::ShapeRef.new(shape: Long, location_name: "RedshiftPid"))
@@ -199,6 +204,7 @@ module Aws::RedshiftDataAPIService
 
     ListStatementsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListStatementsLimit, location_name: "MaxResults"))
     ListStatementsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListStatementsRequest.add_member(:role_level, Shapes::ShapeRef.new(shape: Boolean, location_name: "RoleLevel"))
     ListStatementsRequest.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementNameString, location_name: "StatementName"))
     ListStatementsRequest.add_member(:status, Shapes::ShapeRef.new(shape: StatusString, location_name: "Status"))
     ListStatementsRequest.struct_class = Types::ListStatementsRequest
@@ -314,6 +320,7 @@ module Aws::RedshiftDataAPIService
         o.output = Shapes::ShapeRef.new(shape: ExecuteStatementOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ExecuteStatementException)
+        o.errors << Shapes::ShapeRef.new(shape: ActiveStatementsExceededException)
       end)
 
       api.add_operation(:get_statement_result, Seahorse::Model::Operation.new.tap do |o|

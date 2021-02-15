@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2021-02-15)
+------------------
+
+* Feature - Lets customers use origination number when specifying SMS message configuration for Campaigns and Journeys.
+
 1.49.0 (2021-02-02)
 ------------------
 

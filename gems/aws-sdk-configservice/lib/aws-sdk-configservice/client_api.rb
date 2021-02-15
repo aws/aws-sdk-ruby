@@ -269,6 +269,7 @@ module Aws::ConfigService
     InvalidResultTokenException = Shapes::StructureShape.new(name: 'InvalidResultTokenException')
     InvalidRoleException = Shapes::StructureShape.new(name: 'InvalidRoleException')
     InvalidS3KeyPrefixException = Shapes::StructureShape.new(name: 'InvalidS3KeyPrefixException')
+    InvalidS3KmsKeyArnException = Shapes::StructureShape.new(name: 'InvalidS3KmsKeyArnException')
     InvalidSNSTopicARNException = Shapes::StructureShape.new(name: 'InvalidSNSTopicARNException')
     InvalidTimeRangeException = Shapes::StructureShape.new(name: 'InvalidTimeRangeException')
     LastDeliveryChannelDeleteFailedException = Shapes::StructureShape.new(name: 'LastDeliveryChannelDeleteFailedException')
@@ -878,6 +879,7 @@ module Aws::ConfigService
     DeliveryChannel.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
     DeliveryChannel.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "s3BucketName"))
     DeliveryChannel.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: String, location_name: "s3KeyPrefix"))
+    DeliveryChannel.add_member(:s3_kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "s3KmsKeyArn"))
     DeliveryChannel.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: String, location_name: "snsTopicARN"))
     DeliveryChannel.add_member(:config_snapshot_delivery_properties, Shapes::ShapeRef.new(shape: ConfigSnapshotDeliveryProperties, location_name: "configSnapshotDeliveryProperties"))
     DeliveryChannel.struct_class = Types::DeliveryChannel
@@ -1336,6 +1338,8 @@ module Aws::ConfigService
     InvalidRoleException.struct_class = Types::InvalidRoleException
 
     InvalidS3KeyPrefixException.struct_class = Types::InvalidS3KeyPrefixException
+
+    InvalidS3KmsKeyArnException.struct_class = Types::InvalidS3KmsKeyArnException
 
     InvalidSNSTopicARNException.struct_class = Types::InvalidSNSTopicARNException
 
@@ -2676,6 +2680,7 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeliveryChannelNameException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchBucketException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3KeyPrefixException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3KmsKeyArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSNSTopicARNException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientDeliveryPolicyException)
       end)

@@ -1499,6 +1499,7 @@ module Aws::Pinpoint
     #         sms: {
     #           message_config: {
     #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #             origination_number: "__string",
     #             sender_id: "__string",
     #           },
     #           next_activity: "__string",
@@ -2798,6 +2799,7 @@ module Aws::Pinpoint
     #       {
     #         body: "__string",
     #         message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #         origination_number: "__string",
     #         sender_id: "__string",
     #       }
     #
@@ -2812,6 +2814,14 @@ module Aws::Pinpoint
     #   time-sensitive, such as marketing messages).
     #   @return [String]
     #
+    # @!attribute [rw] origination_number
+    #   The long code to send the SMS message from. This value should be one
+    #   of the dedicated long codes that's assigned to your AWS account.
+    #   Although it isn't required, we recommend that you specify the long
+    #   code using an E.164 format to ensure prompt and accurate delivery of
+    #   the message. For example, +12065550100.
+    #   @return [String]
+    #
     # @!attribute [rw] sender_id
     #   The sender ID to display on recipients' devices when they receive
     #   the SMS message.
@@ -2822,6 +2832,7 @@ module Aws::Pinpoint
     class CampaignSmsMessage < Struct.new(
       :body,
       :message_type,
+      :origination_number,
       :sender_id)
       SENSITIVE = []
       include Aws::Structure
@@ -3408,6 +3419,7 @@ module Aws::Pinpoint
     #                 sms_message: {
     #                   body: "__string",
     #                   message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                   origination_number: "__string",
     #                   sender_id: "__string",
     #                 },
     #               },
@@ -3567,6 +3579,7 @@ module Aws::Pinpoint
     #             sms_message: {
     #               body: "__string",
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #               origination_number: "__string",
     #               sender_id: "__string",
     #             },
     #           },
@@ -4060,6 +4073,7 @@ module Aws::Pinpoint
     #               sms: {
     #                 message_config: {
     #                   message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                   origination_number: "__string",
     #                   sender_id: "__string",
     #                 },
     #                 next_activity: "__string",
@@ -10924,6 +10938,7 @@ module Aws::Pinpoint
     #
     #       {
     #         message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #         origination_number: "__string",
     #         sender_id: "__string",
     #       }
     #
@@ -10932,6 +10947,14 @@ module Aws::Pinpoint
     #   that are critical or time-sensitive, such as a one-time passwords)
     #   and PROMOTIONAL (for messsages that aren't critical or
     #   time-sensitive, such as marketing messages).
+    #   @return [String]
+    #
+    # @!attribute [rw] origination_number
+    #   The long code to send the SMS message from. This value should be one
+    #   of the dedicated long codes that's assigned to your AWS account.
+    #   Although it isn't required, we recommend that you specify the long
+    #   code using an E.164 format to ensure prompt and accurate delivery of
+    #   the message. For example, +12065550100.
     #   @return [String]
     #
     # @!attribute [rw] sender_id
@@ -10949,6 +10972,7 @@ module Aws::Pinpoint
     #
     class JourneySMSMessage < Struct.new(
       :message_type,
+      :origination_number,
       :sender_id)
       SENSITIVE = []
       include Aws::Structure
@@ -11467,6 +11491,7 @@ module Aws::Pinpoint
     #         sms_message: {
     #           body: "__string",
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #           origination_number: "__string",
     #           sender_id: "__string",
     #         },
     #       }
@@ -13573,6 +13598,7 @@ module Aws::Pinpoint
     #       {
     #         message_config: {
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #           origination_number: "__string",
     #           sender_id: "__string",
     #         },
     #         next_activity: "__string",
@@ -16561,6 +16587,7 @@ module Aws::Pinpoint
     #                 sms_message: {
     #                   body: "__string",
     #                   message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                   origination_number: "__string",
     #                   sender_id: "__string",
     #                 },
     #               },
@@ -16720,6 +16747,7 @@ module Aws::Pinpoint
     #             sms_message: {
     #               body: "__string",
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #               origination_number: "__string",
     #               sender_id: "__string",
     #             },
     #           },
@@ -17378,6 +17406,7 @@ module Aws::Pinpoint
     #               sms: {
     #                 message_config: {
     #                   message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                   origination_number: "__string",
     #                   sender_id: "__string",
     #                 },
     #                 next_activity: "__string",
@@ -18838,6 +18867,7 @@ module Aws::Pinpoint
     #               sms_message: {
     #                 body: "__string",
     #                 message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                 origination_number: "__string",
     #                 sender_id: "__string",
     #               },
     #             },
@@ -18997,6 +19027,7 @@ module Aws::Pinpoint
     #           sms_message: {
     #             body: "__string",
     #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #             origination_number: "__string",
     #             sender_id: "__string",
     #           },
     #         },
@@ -19456,6 +19487,7 @@ module Aws::Pinpoint
     #             sms: {
     #               message_config: {
     #                 message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                 origination_number: "__string",
     #                 sender_id: "__string",
     #               },
     #               next_activity: "__string",
@@ -19921,6 +19953,7 @@ module Aws::Pinpoint
     #           sms_message: {
     #             body: "__string",
     #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #             origination_number: "__string",
     #             sender_id: "__string",
     #           },
     #         },

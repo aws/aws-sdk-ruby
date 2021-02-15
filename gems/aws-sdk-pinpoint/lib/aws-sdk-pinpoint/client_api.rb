@@ -840,6 +840,7 @@ module Aws::Pinpoint
 
     CampaignSmsMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     CampaignSmsMessage.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
+    CampaignSmsMessage.add_member(:origination_number, Shapes::ShapeRef.new(shape: __string, location_name: "OriginationNumber"))
     CampaignSmsMessage.add_member(:sender_id, Shapes::ShapeRef.new(shape: __string, location_name: "SenderId"))
     CampaignSmsMessage.struct_class = Types::CampaignSmsMessage
 
@@ -2051,6 +2052,7 @@ module Aws::Pinpoint
     JourneyResponse.struct_class = Types::JourneyResponse
 
     JourneySMSMessage.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
+    JourneySMSMessage.add_member(:origination_number, Shapes::ShapeRef.new(shape: __string, location_name: "OriginationNumber"))
     JourneySMSMessage.add_member(:sender_id, Shapes::ShapeRef.new(shape: __string, location_name: "SenderId"))
     JourneySMSMessage.struct_class = Types::JourneySMSMessage
 

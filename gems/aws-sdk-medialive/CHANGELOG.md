@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2021-02-15)
+------------------
+
+* Feature - AWS MediaLive now supports Automatic-Input-Failover for CDI Inputs.
+
 1.63.0 (2021-02-02)
 ------------------
 

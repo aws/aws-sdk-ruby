@@ -140,7 +140,8 @@ module Aws::KinesisVideoArchivedMedia
     GetHLSStreamingSessionURLOutput.add_member(:hls_streaming_session_url, Shapes::ShapeRef.new(shape: HLSStreamingSessionURL, location_name: "HLSStreamingSessionURL"))
     GetHLSStreamingSessionURLOutput.struct_class = Types::GetHLSStreamingSessionURLOutput
 
-    GetMediaForFragmentListInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
+    GetMediaForFragmentListInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
+    GetMediaForFragmentListInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
     GetMediaForFragmentListInput.add_member(:fragments, Shapes::ShapeRef.new(shape: FragmentNumberList, required: true, location_name: "Fragments"))
     GetMediaForFragmentListInput.struct_class = Types::GetMediaForFragmentListInput
 
@@ -167,7 +168,8 @@ module Aws::KinesisVideoArchivedMedia
     InvalidMediaFrameException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidMediaFrameException.struct_class = Types::InvalidMediaFrameException
 
-    ListFragmentsInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
+    ListFragmentsInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
+    ListFragmentsInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
     ListFragmentsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageLimit, location_name: "MaxResults"))
     ListFragmentsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListFragmentsInput.add_member(:fragment_selector, Shapes::ShapeRef.new(shape: FragmentSelector, location_name: "FragmentSelector"))

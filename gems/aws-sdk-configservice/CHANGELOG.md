@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2021-02-15)
+------------------
+
+* Feature - Added option to provide KMS key to AWS Config DeliveryChannel
+
 1.56.0 (2021-02-02)
 ------------------
 

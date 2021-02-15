@@ -1185,7 +1185,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   accoun
+    #   Amazon Resource Name (ARN) associated with the resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -1431,13 +1431,19 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_bucket
-    #   Conformance pack template that is used to create a pack. The
-    #   delivery bucket name should start with awsconfigconforms. For
-    #   example: "Resource": "arn:aws:s3:::your\_bucket\_name/*".
+    #   Amazon S3 bucket where AWS Config stores conformance pack templates.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_key_prefix
     #   The prefix for the Amazon S3 bucket.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] conformance_pack_input_parameters
@@ -2085,6 +2091,7 @@ module Aws::ConfigService
     #         name: "ChannelName",
     #         s3_bucket_name: "String",
     #         s3_key_prefix: "String",
+    #         s3_kms_key_arn: "String",
     #         sns_topic_arn: "String",
     #         config_snapshot_delivery_properties: {
     #           delivery_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
@@ -2118,6 +2125,13 @@ module Aws::ConfigService
     #   The prefix for the specified Amazon S3 bucket.
     #   @return [String]
     #
+    # @!attribute [rw] s3_kms_key_arn
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
+    #   (KMS) customer managed key (CMK) used to encrypt objects delivered
+    #   by AWS Config. Must belong to the same Region as the destination S3
+    #   bucket.
+    #   @return [String]
+    #
     # @!attribute [rw] sns_topic_arn
     #   The Amazon Resource Name (ARN) of the Amazon SNS topic to which AWS
     #   Config sends notifications about configuration changes.
@@ -2143,6 +2157,7 @@ module Aws::ConfigService
       :name,
       :s3_bucket_name,
       :s3_key_prefix,
+      :s3_kms_key_arn,
       :sns_topic_arn,
       :config_snapshot_delivery_properties)
       SENSITIVE = []
@@ -3614,6 +3629,9 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # Identifies an AWS resource and indicates whether it complies with the
+    # AWS Config rule that it was evaluated against.
+    #
     # @note When making an API call, you may pass ExternalEvaluation
     #   data as a hash:
     #
@@ -3626,18 +3644,27 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] compliance_resource_type
+    #   The evaluated compliance resource type. AWS Config accepts
+    #   `AWS::::Account` resource type.
     #   @return [String]
     #
     # @!attribute [rw] compliance_resource_id
+    #   The evaluated compliance resource ID. AWS Config accepts only AWS
+    #   account ID.
     #   @return [String]
     #
     # @!attribute [rw] compliance_type
+    #   The compliance of the AWS resource. The valid values are `COMPLIANT,
+    #   NON_COMPLIANT, ` and `NOT_APPLICABLE`.
     #   @return [String]
     #
     # @!attribute [rw] annotation
+    #   Supplementary information about the reason of compliance. For
+    #   example, this task was completed on a specific date.
     #   @return [String]
     #
     # @!attribute [rw] ordering_timestamp
+    #   The time when the compliance was recorded.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ExternalEvaluation AWS API Documentation
@@ -4751,6 +4778,12 @@ module Aws::ConfigService
     #
     class InvalidS3KeyPrefixException < Aws::EmptyStructure; end
 
+    # The specified Amazon KMS Key ARN is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/InvalidS3KmsKeyArnException AWS API Documentation
+    #
+    class InvalidS3KmsKeyArnException < Aws::EmptyStructure; end
+
     # The specified Amazon SNS topic does not exist.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/InvalidSNSTopicARNException AWS API Documentation
@@ -4813,8 +4846,8 @@ module Aws::ConfigService
     #
     # @!attribute [rw] limit
     #   The maximum number of resource identifiers returned on each page.
-    #   The default is 100. You cannot specify a number greater than 100. If
-    #   you specify 0, AWS Config uses the default.
+    #   You cannot specify a number greater than 100. If you specify 0, AWS
+    #   Config uses the default.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -5272,11 +5305,29 @@ module Aws::ConfigService
     #
     class NoSuchRetentionConfigurationException < Aws::EmptyStructure; end
 
-    # For PutConfigAggregator API, no permission to call
-    # EnableAWSServiceAccess API.
+    # For `PutConfigurationAggregator` API, you can see this exception for
+    # the following reasons:
     #
-    # For all OrganizationConfigRule and OrganizationConformancePack APIs,
-    # AWS Config throws an exception if APIs are called from member
+    # * No permission to call `EnableAWSServiceAccess` API
+    #
+    # * The configuration aggregator cannot be updated because your AWS
+    #   Organization management account or the delegated administrator role
+    #   changed. Delete this aggregator and create a new one with the
+    #   current AWS Organization.
+    #
+    # * The configuration aggregator is associated with a previous AWS
+    #   Organization and AWS Config cannot aggregate data with current AWS
+    #   Organization. Delete this aggregator and create a new one with the
+    #   current AWS Organization.
+    #
+    # * You are not a registered delegated administrator for AWS Config with
+    #   permissions to call `ListDelegatedAdministrators` API. Ensure that
+    #   the management account registers delagated administrator for AWS
+    #   Config service principle name before the delegated administrator
+    #   creates an aggregator.
+    #
+    # For all `OrganizationConfigRule` and `OrganizationConformancePack`
+    # APIs, AWS Config throws an exception if APIs are called from member
     # accounts. All APIs must be called from organization master account.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationAccessDeniedException AWS API Documentation
@@ -5452,13 +5503,19 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_bucket
-    #   Location of an Amazon S3 bucket where AWS Config can deliver
-    #   evaluation results and conformance pack template that is used to
-    #   create a pack.
+    #   Amazon S3 bucket where AWS Config stores conformance pack templates.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_key_prefix
     #   Any folder structure you want to add to an Amazon S3 bucket.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] conformance_pack_input_parameters
@@ -6168,12 +6225,19 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_bucket
-    #   AWS Config stores intermediate files while processing conformance
-    #   pack template.
+    #   Amazon S3 bucket where AWS Config stores conformance pack templates.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_key_prefix
     #   The prefix for the Amazon S3 bucket.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] conformance_pack_input_parameters
@@ -6215,6 +6279,7 @@ module Aws::ConfigService
     #           name: "ChannelName",
     #           s3_bucket_name: "String",
     #           s3_key_prefix: "String",
+    #           s3_kms_key_arn: "String",
     #           sns_topic_arn: "String",
     #           config_snapshot_delivery_properties: {
     #             delivery_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
@@ -6315,9 +6380,12 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] config_rule_name
+    #   The name of the AWS Config rule.
     #   @return [String]
     #
     # @!attribute [rw] external_evaluation
+    #   An `ExternalEvaluation` object that provides details about
+    #   compliance.
     #   @return [Types::ExternalEvaluation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutExternalEvaluationRequest AWS API Documentation
@@ -6440,22 +6508,19 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_bucket
-    #   Location of an Amazon S3 bucket where AWS Config can deliver
-    #   evaluation results. AWS Config stores intermediate files while
-    #   processing conformance pack template.
+    #   Amazon S3 bucket where AWS Config stores conformance pack templates.
     #
-    #   The delivery bucket name should start with awsconfigconforms. For
-    #   example: "Resource": "arn:aws:s3:::your\_bucket\_name/*". For
-    #   more information, see [Permissions for cross account bucket
-    #   access][1].
+    #   <note markdown="1"> This field is optional.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/conformance-pack-organization-apis.html
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] delivery_s3_key_prefix
     #   The prefix for the Amazon S3 bucket.
+    #
+    #   <note markdown="1"> This field is optional.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] conformance_pack_input_parameters
@@ -6733,6 +6798,12 @@ module Aws::ConfigService
     # @!attribute [rw] stored_query
     #   A list of `StoredQuery` objects. The mandatory fields are
     #   `QueryName` and `Expression`.
+    #
+    #   <note markdown="1"> When you are creating a query, you must provide a query name and an
+    #   expression. When you are updating a query, you must provide a query
+    #   name but updating the description is optional.
+    #
+    #    </note>
     #   @return [Types::StoredQuery]
     #
     # @!attribute [rw] tags
@@ -6750,7 +6821,7 @@ module Aws::ConfigService
 
     # @!attribute [rw] query_arn
     #   Amazon Resource Name (ARN) of the query. For example,
-    #   arn:partition:service:region:account-id:resource-type/resource-id.
+    #   arn:partition:service:region:account-id:resource-type/resource-name/resource-id.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutStoredQueryResponse AWS API Documentation
@@ -6860,8 +6931,8 @@ module Aws::ConfigService
     #   which AWS Config records configuration changes (for example,
     #   `AWS::EC2::Instance` or `AWS::CloudTrail::Trail`).
     #
-    #   Before you can set this option to `true`, you must set the
-    #   `allSupported` option to `false`.
+    #   To record all configuration changes, you must set the `allSupported`
+    #   option to `false`.
     #
     #   If you set this option to `true`, when AWS Config adds support for a
     #   new type of resource, it will not record resources of that type
@@ -8030,7 +8101,7 @@ module Aws::ConfigService
     #
     # @!attribute [rw] query_arn
     #   Amazon Resource Name (ARN) of the query. For example,
-    #   arn:partition:service:region:account-id:resource-type/resource-id.
+    #   arn:partition:service:region:account-id:resource-type/resource-name/resource-id.
     #   @return [String]
     #
     # @!attribute [rw] query_name
@@ -8070,7 +8141,7 @@ module Aws::ConfigService
     #
     # @!attribute [rw] query_arn
     #   Amazon Resource Name (ARN) of the query. For example,
-    #   arn:partition:service:region:account-id:resource-type/resource-id.
+    #   arn:partition:service:region:account-id:resource-type/resource-name/resource-id.
     #   @return [String]
     #
     # @!attribute [rw] query_name
@@ -8194,6 +8265,14 @@ module Aws::ConfigService
     end
 
     # The requested action is not valid.
+    #
+    # For PutStoredQuery, you will see this exception if there are missing
+    # required fields or if the input value fails the validation, or if you
+    # are trying to create more than 300 queries.
+    #
+    # For GetStoredQuery, ListStoredQuery, and DeleteStoredQuery you will
+    # see this exception if there are missing required fields or if the
+    # input value fails the validation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ValidationException AWS API Documentation
     #

@@ -2390,6 +2390,8 @@ module Aws::MediaLive
     #   resp.input.input_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.input.input_devices #=> Array
     #   resp.input.input_devices[0].id #=> String
+    #   resp.input.input_partner_ids #=> Array
+    #   resp.input.input_partner_ids[0] #=> String
     #   resp.input.input_source_type #=> String, one of "STATIC", "DYNAMIC"
     #   resp.input.media_connect_flows #=> Array
     #   resp.input.media_connect_flows[0].flow_arn #=> String
@@ -2603,6 +2605,72 @@ module Aws::MediaLive
     # @param [Hash] params ({})
     def create_multiplex_program(params = {}, options = {})
       req = build_request(:create_multiplex_program, params)
+      req.send_request(options)
+    end
+
+    # Create a partner input
+    #
+    # @option params [required, String] :input_id
+    #
+    # @option params [String] :request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #
+    # @return [Types::CreatePartnerInputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePartnerInputResponse#input #input} => Types::Input
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_partner_input({
+    #     input_id: "__string", # required
+    #     request_id: "__string",
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.input.arn #=> String
+    #   resp.input.attached_channels #=> Array
+    #   resp.input.attached_channels[0] #=> String
+    #   resp.input.destinations #=> Array
+    #   resp.input.destinations[0].ip #=> String
+    #   resp.input.destinations[0].port #=> String
+    #   resp.input.destinations[0].url #=> String
+    #   resp.input.destinations[0].vpc.availability_zone #=> String
+    #   resp.input.destinations[0].vpc.network_interface_id #=> String
+    #   resp.input.id #=> String
+    #   resp.input.input_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
+    #   resp.input.input_devices #=> Array
+    #   resp.input.input_devices[0].id #=> String
+    #   resp.input.input_partner_ids #=> Array
+    #   resp.input.input_partner_ids[0] #=> String
+    #   resp.input.input_source_type #=> String, one of "STATIC", "DYNAMIC"
+    #   resp.input.media_connect_flows #=> Array
+    #   resp.input.media_connect_flows[0].flow_arn #=> String
+    #   resp.input.name #=> String
+    #   resp.input.role_arn #=> String
+    #   resp.input.security_groups #=> Array
+    #   resp.input.security_groups[0] #=> String
+    #   resp.input.sources #=> Array
+    #   resp.input.sources[0].password_param #=> String
+    #   resp.input.sources[0].url #=> String
+    #   resp.input.sources[0].username #=> String
+    #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
+    #   resp.input.tags #=> Hash
+    #   resp.input.tags["__string"] #=> String
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL", "MP4_FILE", "MEDIACONNECT", "INPUT_DEVICE", "AWS_CDI"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreatePartnerInput AWS API Documentation
+    #
+    # @overload create_partner_input(params = {})
+    # @param [Hash] params ({})
+    def create_partner_input(params = {}, options = {})
+      req = build_request(:create_partner_input, params)
       req.send_request(options)
     end
 
@@ -4178,6 +4246,7 @@ module Aws::MediaLive
     #   * {Types::DescribeInputResponse#id #id} => String
     #   * {Types::DescribeInputResponse#input_class #input_class} => String
     #   * {Types::DescribeInputResponse#input_devices #input_devices} => Array&lt;Types::InputDeviceSettings&gt;
+    #   * {Types::DescribeInputResponse#input_partner_ids #input_partner_ids} => Array&lt;String&gt;
     #   * {Types::DescribeInputResponse#input_source_type #input_source_type} => String
     #   * {Types::DescribeInputResponse#media_connect_flows #media_connect_flows} => Array&lt;Types::MediaConnectFlow&gt;
     #   * {Types::DescribeInputResponse#name #name} => String
@@ -4209,6 +4278,8 @@ module Aws::MediaLive
     #   resp.input_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.input_devices #=> Array
     #   resp.input_devices[0].id #=> String
+    #   resp.input_partner_ids #=> Array
+    #   resp.input_partner_ids[0] #=> String
     #   resp.input_source_type #=> String, one of "STATIC", "DYNAMIC"
     #   resp.media_connect_flows #=> Array
     #   resp.media_connect_flows[0].flow_arn #=> String
@@ -5024,6 +5095,8 @@ module Aws::MediaLive
     #   resp.inputs[0].input_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.inputs[0].input_devices #=> Array
     #   resp.inputs[0].input_devices[0].id #=> String
+    #   resp.inputs[0].input_partner_ids #=> Array
+    #   resp.inputs[0].input_partner_ids[0] #=> String
     #   resp.inputs[0].input_source_type #=> String, one of "STATIC", "DYNAMIC"
     #   resp.inputs[0].media_connect_flows #=> Array
     #   resp.inputs[0].media_connect_flows[0].flow_arn #=> String
@@ -9040,6 +9113,8 @@ module Aws::MediaLive
     #   resp.input.input_class #=> String, one of "STANDARD", "SINGLE_PIPELINE"
     #   resp.input.input_devices #=> Array
     #   resp.input.input_devices[0].id #=> String
+    #   resp.input.input_partner_ids #=> Array
+    #   resp.input.input_partner_ids[0] #=> String
     #   resp.input.input_source_type #=> String, one of "STATIC", "DYNAMIC"
     #   resp.input.media_connect_flows #=> Array
     #   resp.input.media_connect_flows[0].flow_arn #=> String
@@ -9397,7 +9472,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

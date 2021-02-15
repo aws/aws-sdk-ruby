@@ -134,6 +134,10 @@ module Aws::MediaLive
     CreateMultiplexRequest = Shapes::StructureShape.new(name: 'CreateMultiplexRequest')
     CreateMultiplexResponse = Shapes::StructureShape.new(name: 'CreateMultiplexResponse')
     CreateMultiplexResultModel = Shapes::StructureShape.new(name: 'CreateMultiplexResultModel')
+    CreatePartnerInput = Shapes::StructureShape.new(name: 'CreatePartnerInput')
+    CreatePartnerInputRequest = Shapes::StructureShape.new(name: 'CreatePartnerInputRequest')
+    CreatePartnerInputResponse = Shapes::StructureShape.new(name: 'CreatePartnerInputResponse')
+    CreatePartnerInputResultModel = Shapes::StructureShape.new(name: 'CreatePartnerInputResultModel')
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
     DeleteChannelRequest = Shapes::StructureShape.new(name: 'DeleteChannelRequest')
     DeleteChannelResponse = Shapes::StructureShape.new(name: 'DeleteChannelResponse')
@@ -1224,6 +1228,21 @@ module Aws::MediaLive
     CreateMultiplexResultModel.add_member(:multiplex, Shapes::ShapeRef.new(shape: Multiplex, location_name: "multiplex"))
     CreateMultiplexResultModel.struct_class = Types::CreateMultiplexResultModel
 
+    CreatePartnerInput.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreatePartnerInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreatePartnerInput.struct_class = Types::CreatePartnerInput
+
+    CreatePartnerInputRequest.add_member(:input_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputId"))
+    CreatePartnerInputRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreatePartnerInputRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreatePartnerInputRequest.struct_class = Types::CreatePartnerInputRequest
+
+    CreatePartnerInputResponse.add_member(:input, Shapes::ShapeRef.new(shape: Input, location_name: "input"))
+    CreatePartnerInputResponse.struct_class = Types::CreatePartnerInputResponse
+
+    CreatePartnerInputResultModel.add_member(:input, Shapes::ShapeRef.new(shape: Input, location_name: "input"))
+    CreatePartnerInputResultModel.struct_class = Types::CreatePartnerInputResultModel
+
     CreateTagsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
     CreateTagsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateTagsRequest.struct_class = Types::CreateTagsRequest
@@ -1379,6 +1398,7 @@ module Aws::MediaLive
     DescribeInputResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     DescribeInputResponse.add_member(:input_class, Shapes::ShapeRef.new(shape: InputClass, location_name: "inputClass"))
     DescribeInputResponse.add_member(:input_devices, Shapes::ShapeRef.new(shape: __listOfInputDeviceSettings, location_name: "inputDevices"))
+    DescribeInputResponse.add_member(:input_partner_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputPartnerIds"))
     DescribeInputResponse.add_member(:input_source_type, Shapes::ShapeRef.new(shape: InputSourceType, location_name: "inputSourceType"))
     DescribeInputResponse.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlow, location_name: "mediaConnectFlows"))
     DescribeInputResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
@@ -1823,6 +1843,7 @@ module Aws::MediaLive
     Input.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     Input.add_member(:input_class, Shapes::ShapeRef.new(shape: InputClass, location_name: "inputClass"))
     Input.add_member(:input_devices, Shapes::ShapeRef.new(shape: __listOfInputDeviceSettings, location_name: "inputDevices"))
+    Input.add_member(:input_partner_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputPartnerIds"))
     Input.add_member(:input_source_type, Shapes::ShapeRef.new(shape: InputSourceType, location_name: "inputSourceType"))
     Input.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlow, location_name: "mediaConnectFlows"))
     Input.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
@@ -3296,6 +3317,20 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_partner_input, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePartnerInput"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/inputs/{inputId}/partners"
+        o.input = Shapes::ShapeRef.new(shape: CreatePartnerInputRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePartnerInputResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:create_tags, Seahorse::Model::Operation.new.tap do |o|

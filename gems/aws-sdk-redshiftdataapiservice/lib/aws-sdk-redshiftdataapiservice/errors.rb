@@ -27,6 +27,7 @@ module Aws::RedshiftDataAPIService
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {ActiveStatementsExceededException}
   # * {ExecuteStatementException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
@@ -37,6 +38,21 @@ module Aws::RedshiftDataAPIService
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class ActiveStatementsExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RedshiftDataAPIService::Types::ActiveStatementsExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class ExecuteStatementException < ServiceError
 

@@ -359,6 +359,7 @@ module Aws::MediaTailor
     #   * {Types::GetPlaybackConfigurationResponse#bumper #bumper} => Types::Bumper
     #   * {Types::GetPlaybackConfigurationResponse#cdn_configuration #cdn_configuration} => Types::CdnConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#personalization_threshold_seconds #personalization_threshold_seconds} => Integer
+    #   * {Types::GetPlaybackConfigurationResponse#configuration_aliases #configuration_aliases} => Hash&lt;String,Hash&lt;String,String&gt;&gt;
     #   * {Types::GetPlaybackConfigurationResponse#dash_configuration #dash_configuration} => Types::DashConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#hls_configuration #hls_configuration} => Types::HlsConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#live_pre_roll_configuration #live_pre_roll_configuration} => Types::LivePreRollConfiguration
@@ -388,6 +389,9 @@ module Aws::MediaTailor
     #   resp.cdn_configuration.ad_segment_url_prefix #=> String
     #   resp.cdn_configuration.content_segment_url_prefix #=> String
     #   resp.personalization_threshold_seconds #=> Integer
+    #   resp.configuration_aliases #=> Hash
+    #   resp.configuration_aliases["__string"] #=> Hash
+    #   resp.configuration_aliases["__string"]["__string"] #=> String
     #   resp.dash_configuration.manifest_endpoint_prefix #=> String
     #   resp.dash_configuration.mpd_location #=> String
     #   resp.dash_configuration.origin_manifest_type #=> String, one of "SINGLE_PERIOD", "MULTI_PERIOD"
@@ -430,6 +434,8 @@ module Aws::MediaTailor
     #   * {Types::ListPlaybackConfigurationsResponse#items #items} => Array&lt;Types::PlaybackConfiguration&gt;
     #   * {Types::ListPlaybackConfigurationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_playback_configurations({
@@ -444,6 +450,9 @@ module Aws::MediaTailor
     #   resp.items[0].cdn_configuration.ad_segment_url_prefix #=> String
     #   resp.items[0].cdn_configuration.content_segment_url_prefix #=> String
     #   resp.items[0].personalization_threshold_seconds #=> Integer
+    #   resp.items[0].configuration_aliases #=> Hash
+    #   resp.items[0].configuration_aliases["__string"] #=> Hash
+    #   resp.items[0].configuration_aliases["__string"]["__string"] #=> String
     #   resp.items[0].dash_configuration.manifest_endpoint_prefix #=> String
     #   resp.items[0].dash_configuration.mpd_location #=> String
     #   resp.items[0].dash_configuration.origin_manifest_type #=> String, one of "SINGLE_PERIOD", "MULTI_PERIOD"
@@ -522,6 +531,9 @@ module Aws::MediaTailor
     #   The maximum duration of underfilled ad time (in seconds) allowed in an
     #   ad break.
     #
+    # @option params [Hash<String,Hash>] :configuration_aliases
+    #   Predefined aliases for dynamic variables.
+    #
     # @option params [Types::DashConfigurationForPut] :dash_configuration
     #   The configuration for DASH content.
     #
@@ -564,6 +576,7 @@ module Aws::MediaTailor
     #   * {Types::PutPlaybackConfigurationResponse#avail_suppression #avail_suppression} => Types::AvailSuppression
     #   * {Types::PutPlaybackConfigurationResponse#bumper #bumper} => Types::Bumper
     #   * {Types::PutPlaybackConfigurationResponse#cdn_configuration #cdn_configuration} => Types::CdnConfiguration
+    #   * {Types::PutPlaybackConfigurationResponse#configuration_aliases #configuration_aliases} => Hash&lt;String,Hash&lt;String,String&gt;&gt;
     #   * {Types::PutPlaybackConfigurationResponse#dash_configuration #dash_configuration} => Types::DashConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#hls_configuration #hls_configuration} => Types::HlsConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#live_pre_roll_configuration #live_pre_roll_configuration} => Types::LivePreRollConfiguration
@@ -594,6 +607,11 @@ module Aws::MediaTailor
     #       content_segment_url_prefix: "__string",
     #     },
     #     personalization_threshold_seconds: 1,
+    #     configuration_aliases: {
+    #       "__string" => {
+    #         "__string" => "__string",
+    #       },
+    #     },
     #     dash_configuration: {
     #       mpd_location: "__string",
     #       origin_manifest_type: "SINGLE_PERIOD", # accepts SINGLE_PERIOD, MULTI_PERIOD
@@ -625,6 +643,9 @@ module Aws::MediaTailor
     #   resp.bumper.start_url #=> String
     #   resp.cdn_configuration.ad_segment_url_prefix #=> String
     #   resp.cdn_configuration.content_segment_url_prefix #=> String
+    #   resp.configuration_aliases #=> Hash
+    #   resp.configuration_aliases["__string"] #=> Hash
+    #   resp.configuration_aliases["__string"]["__string"] #=> String
     #   resp.dash_configuration.manifest_endpoint_prefix #=> String
     #   resp.dash_configuration.mpd_location #=> String
     #   resp.dash_configuration.origin_manifest_type #=> String, one of "SINGLE_PERIOD", "MULTI_PERIOD"
@@ -716,7 +737,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

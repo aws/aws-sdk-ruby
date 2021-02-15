@@ -874,12 +874,14 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Creates an SSL/TLS certificate for a Amazon Lightsail content delivery
-    # network (CDN) distribution.
+    # Creates an SSL/TLS certificate for an Amazon Lightsail content
+    # delivery network (CDN) distribution and a container service.
     #
-    # After the certificate is created, use the
-    # `AttachCertificateToDistribution` action to attach the certificate to
-    # your distribution.
+    # After the certificate is valid, use the
+    # `AttachCertificateToDistribution` action to use the certificate and
+    # its domains with your distribution. Or use the
+    # `UpdateContainerService` action to use the certificate and its domains
+    # with your container service.
     #
     # Only certificates created in the `us-east-1` AWS Region can be
     # attached to Lightsail distributions. Lightsail distributions are
@@ -2811,7 +2813,7 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Creates a Lightsail load balancer TLS certificate.
+    # Creates an SSL/TLS certificate for an Amazon Lightsail load balancer.
     #
     # TLS is just an updated, more secure version of Secure Socket Layer
     # (SSL).
@@ -2912,7 +2914,7 @@ module Aws::Lightsail
     # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :relational_database_name
-    #   The name to use for your new database.
+    #   The name to use for your new Lightsail database resource.
     #
     #   Constraints:
     #
@@ -9097,10 +9099,13 @@ module Aws::Lightsail
     # Control (lightsailctl) plugin to push container images to your
     # Lightsail container service. For more information, see [Pushing and
     # managing container images on your Amazon Lightsail container
-    # services](amazon-lightsail-pushing-container-images) in the *Lightsail
-    # Dev Guide*.
+    # services][1] in the *Lightsail Dev Guide*.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images
     #
     # @option params [required, String] :service_name
     #   The name of the container service for which to register a container
@@ -9317,7 +9322,7 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Sets the IP address type for a Amazon Lightsail resource.
+    # Sets the IP address type for an Amazon Lightsail resource.
     #
     # Use this action to enable dual-stack for a resource, which enables
     # IPv4 and IPv6 for the specified resource. Alternately, you can use
@@ -10503,7 +10508,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

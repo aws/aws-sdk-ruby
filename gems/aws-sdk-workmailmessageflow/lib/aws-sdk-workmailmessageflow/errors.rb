@@ -27,6 +27,9 @@ module Aws::WorkMailMessageFlow
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {InvalidContentLocation}
+  # * {MessageFrozen}
+  # * {MessageRejected}
   # * {ResourceNotFoundException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -34,6 +37,51 @@ module Aws::WorkMailMessageFlow
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class InvalidContentLocation < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkMailMessageFlow::Types::InvalidContentLocation] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class MessageFrozen < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkMailMessageFlow::Types::MessageFrozen] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class MessageRejected < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkMailMessageFlow::Types::MessageRejected] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class ResourceNotFoundException < ServiceError
 

@@ -387,6 +387,7 @@ module Aws::RedshiftDataAPIService
     #   * {Types::DescribeStatementResponse#db_user #db_user} => String
     #   * {Types::DescribeStatementResponse#duration #duration} => Integer
     #   * {Types::DescribeStatementResponse#error #error} => String
+    #   * {Types::DescribeStatementResponse#has_result_set #has_result_set} => Boolean
     #   * {Types::DescribeStatementResponse#id #id} => String
     #   * {Types::DescribeStatementResponse#query_string #query_string} => String
     #   * {Types::DescribeStatementResponse#redshift_pid #redshift_pid} => Integer
@@ -411,6 +412,7 @@ module Aws::RedshiftDataAPIService
     #   resp.db_user #=> String
     #   resp.duration #=> Integer
     #   resp.error #=> String
+    #   resp.has_result_set #=> Boolean
     #   resp.id #=> String
     #   resp.query_string #=> String
     #   resp.redshift_pid #=> Integer
@@ -418,7 +420,7 @@ module Aws::RedshiftDataAPIService
     #   resp.result_rows #=> Integer
     #   resp.result_size #=> Integer
     #   resp.secret_arn #=> String
-    #   resp.status #=> String, one of "ABORTED", "ALL", "FAILED", "FINISHED", "PICKED", "STARTED", "SUBMITTED"
+    #   resp.status #=> String, one of "SUBMITTED", "PICKED", "STARTED", "FINISHED", "ABORTED", "FAILED", "ALL"
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/DescribeStatement AWS API Documentation
@@ -857,6 +859,12 @@ module Aws::RedshiftDataAPIService
     #   command. If the NextToken field is empty, all response records have
     #   been retrieved for the request.
     #
+    # @option params [Boolean] :role_level
+    #   A value that filters which statements to return in the response. If
+    #   true, all statements run by the caller's IAM role are returned. If
+    #   false, only statements run by the caller's IAM role in the current
+    #   IAM session are returned. The default is true.
+    #
     # @option params [String] :statement_name
     #   The name of the SQL statement specified as input to `ExecuteStatement`
     #   to identify the query. You can list multiple statements by providing a
@@ -896,8 +904,9 @@ module Aws::RedshiftDataAPIService
     #   resp = client.list_statements({
     #     max_results: 1,
     #     next_token: "String",
+    #     role_level: false,
     #     statement_name: "StatementNameString",
-    #     status: "ABORTED", # accepts ABORTED, ALL, FAILED, FINISHED, PICKED, STARTED, SUBMITTED
+    #     status: "SUBMITTED", # accepts SUBMITTED, PICKED, STARTED, FINISHED, ABORTED, FAILED, ALL
     #   })
     #
     # @example Response structure
@@ -909,7 +918,7 @@ module Aws::RedshiftDataAPIService
     #   resp.statements[0].query_string #=> String
     #   resp.statements[0].secret_arn #=> String
     #   resp.statements[0].statement_name #=> String
-    #   resp.statements[0].status #=> String, one of "ABORTED", "ALL", "FAILED", "FINISHED", "PICKED", "STARTED", "SUBMITTED"
+    #   resp.statements[0].status #=> String, one of "SUBMITTED", "PICKED", "STARTED", "FINISHED", "ABORTED", "FAILED", "ALL"
     #   resp.statements[0].updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ListStatements AWS API Documentation
@@ -1034,7 +1043,7 @@ module Aws::RedshiftDataAPIService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftdataapiservice'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

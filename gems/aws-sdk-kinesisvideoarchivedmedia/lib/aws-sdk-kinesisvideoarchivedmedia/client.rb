@@ -334,7 +334,7 @@ module Aws::KinesisVideoArchivedMedia
     # must specify either the StreamName or the StreamARN when invoking this
     # API operation.
     #
-    # As a prerequsite to using GetCLip API, you must obtain an endpoint
+    # As a prerequisite to using GetCLip API, you must obtain an endpoint
     # using `GetDataEndpoint`, specifying GET\_CLIP for` the APIName
     # parameter. </p> An Amazon Kinesis video stream has the following
     # requirements for providing data through MP4:   The media must contain
@@ -1211,8 +1211,14 @@ module Aws::KinesisVideoArchivedMedia
     # [1]: https://docs.aws.amazon.com/cli/latest/reference/
     # [2]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html
     #
-    # @option params [required, String] :stream_name
-    #   The name of the stream from which to retrieve fragment media.
+    # @option params [String] :stream_name
+    #   The name of the stream from which to retrieve fragment media. Specify
+    #   either this parameter or the `StreamARN` parameter.
+    #
+    # @option params [String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the stream from which to retrieve
+    #   fragment media. Specify either this parameter or the `StreamName`
+    #   parameter.
     #
     # @option params [required, Array<String>] :fragments
     #   A list of the numbers of fragments for which to retrieve media. You
@@ -1226,7 +1232,8 @@ module Aws::KinesisVideoArchivedMedia
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_media_for_fragment_list({
-    #     stream_name: "StreamName", # required
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
     #     fragments: ["FragmentNumberString"], # required
     #   })
     #
@@ -1285,8 +1292,14 @@ module Aws::KinesisVideoArchivedMedia
     # [1]: https://docs.aws.amazon.com/cli/latest/reference/
     # [2]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html
     #
-    # @option params [required, String] :stream_name
-    #   The name of the stream from which to retrieve a fragment list.
+    # @option params [String] :stream_name
+    #   The name of the stream from which to retrieve a fragment list. Specify
+    #   either this parameter or the `StreamARN` parameter.
+    #
+    # @option params [String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the stream from which to retrieve a
+    #   fragment list. Specify either this parameter or the `StreamName`
+    #   parameter.
     #
     # @option params [Integer] :max_results
     #   The total number of fragments to return. If the total number of
@@ -1312,7 +1325,8 @@ module Aws::KinesisVideoArchivedMedia
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_fragments({
-    #     stream_name: "StreamName", # required
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
     #     max_results: 1,
     #     next_token: "NextToken",
     #     fragment_selector: {
@@ -1356,7 +1370,7 @@ module Aws::KinesisVideoArchivedMedia
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideoarchivedmedia'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

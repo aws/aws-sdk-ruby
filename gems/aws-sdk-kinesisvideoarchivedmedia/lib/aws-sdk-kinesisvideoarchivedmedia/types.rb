@@ -371,8 +371,11 @@ module Aws::KinesisVideoArchivedMedia
     #   Traditional MP4 file that contains the media clip from the specified
     #   video stream. The output will contain the first 100 MB or the first
     #   200 fragments from the specified start timestamp. For more
-    #   information, see [Kinesis Video Streams Limits](Kinesis Video
-    #   Streams Limits).
+    #   information, see [Kinesis Video Streams Limits][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html
     #   @return [IO]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetClipOutput AWS API Documentation
@@ -830,12 +833,20 @@ module Aws::KinesisVideoArchivedMedia
     #   data as a hash:
     #
     #       {
-    #         stream_name: "StreamName", # required
+    #         stream_name: "StreamName",
+    #         stream_arn: "ResourceARN",
     #         fragments: ["FragmentNumberString"], # required
     #       }
     #
     # @!attribute [rw] stream_name
     #   The name of the stream from which to retrieve fragment media.
+    #   Specify either this parameter or the `StreamARN` parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the stream from which to retrieve
+    #   fragment media. Specify either this parameter or the `StreamName`
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] fragments
@@ -847,6 +858,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     class GetMediaForFragmentListInput < Struct.new(
       :stream_name,
+      :stream_arn,
       :fragments)
       SENSITIVE = []
       include Aws::Structure
@@ -1067,7 +1079,8 @@ module Aws::KinesisVideoArchivedMedia
     #   data as a hash:
     #
     #       {
-    #         stream_name: "StreamName", # required
+    #         stream_name: "StreamName",
+    #         stream_arn: "ResourceARN",
     #         max_results: 1,
     #         next_token: "NextToken",
     #         fragment_selector: {
@@ -1081,6 +1094,13 @@ module Aws::KinesisVideoArchivedMedia
     #
     # @!attribute [rw] stream_name
     #   The name of the stream from which to retrieve a fragment list.
+    #   Specify either this parameter or the `StreamARN` parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the stream from which to retrieve
+    #   a fragment list. Specify either this parameter or the `StreamName`
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1104,6 +1124,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     class ListFragmentsInput < Struct.new(
       :stream_name,
+      :stream_arn,
       :max_results,
       :next_token,
       :fragment_selector)
