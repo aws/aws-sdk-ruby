@@ -1520,6 +1520,7 @@ module Aws::CodeBuild
     #           },
     #           timeout_in_mins: 1,
     #         },
+    #         concurrent_build_limit: 1,
     #       }
     #
     # @!attribute [rw] name
@@ -1664,6 +1665,15 @@ module Aws::CodeBuild
     #   options for the project.
     #   @return [Types::ProjectBuildBatchConfig]
     #
+    # @!attribute [rw] concurrent_build_limit
+    #   The maximum number of concurrent builds that are allowed for this
+    #   project.
+    #
+    #   New builds are only started if the current number of builds is less
+    #   than or equal to this limit. If the current build count meets this
+    #   limit, new builds are throttled and are not run.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProjectInput AWS API Documentation
     #
     class CreateProjectInput < Struct.new(
@@ -1686,7 +1696,8 @@ module Aws::CodeBuild
       :badge_enabled,
       :logs_config,
       :file_system_locations,
-      :build_batch_config)
+      :build_batch_config,
+      :concurrent_build_limit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3710,6 +3721,15 @@ module Aws::CodeBuild
     #   options for the project.
     #   @return [Types::ProjectBuildBatchConfig]
     #
+    # @!attribute [rw] concurrent_build_limit
+    #   The maximum number of concurrent builds that are allowed for this
+    #   project.
+    #
+    #   New builds are only started if the current number of builds is less
+    #   than or equal to this limit. If the current build count meets this
+    #   limit, new builds are throttled and are not run.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Project AWS API Documentation
     #
     class Project < Struct.new(
@@ -3736,7 +3756,8 @@ module Aws::CodeBuild
       :badge,
       :logs_config,
       :file_system_locations,
-      :build_batch_config)
+      :build_batch_config,
+      :concurrent_build_limit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3926,9 +3947,6 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] badge_request_url
     #   The publicly-accessible URL through which you can access the build
-    #   badge for your project.
-    #
-    #   The publicly accessible URL through which you can access the build
     #   badge for your project.
     #   @return [String]
     #
@@ -6423,6 +6441,7 @@ module Aws::CodeBuild
     #           },
     #           timeout_in_mins: 1,
     #         },
+    #         concurrent_build_limit: 1,
     #       }
     #
     # @!attribute [rw] name
@@ -6571,6 +6590,17 @@ module Aws::CodeBuild
     #   Contains configuration information about a batch build project.
     #   @return [Types::ProjectBuildBatchConfig]
     #
+    # @!attribute [rw] concurrent_build_limit
+    #   The maximum number of concurrent builds that are allowed for this
+    #   project.
+    #
+    #   New builds are only started if the current number of builds is less
+    #   than or equal to this limit. If the current build count meets this
+    #   limit, new builds are throttled and are not run.
+    #
+    #   To remove this limit, set this value to -1.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProjectInput AWS API Documentation
     #
     class UpdateProjectInput < Struct.new(
@@ -6593,7 +6623,8 @@ module Aws::CodeBuild
       :badge_enabled,
       :logs_config,
       :file_system_locations,
-      :build_batch_config)
+      :build_batch_config,
+      :concurrent_build_limit)
       SENSITIVE = []
       include Aws::Structure
     end

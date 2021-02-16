@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2021-02-16)
+------------------
+
+* Feature - This release provides per-project limits for the number of concurrent builds
+
 1.67.0 (2021-02-03)
 ------------------
 

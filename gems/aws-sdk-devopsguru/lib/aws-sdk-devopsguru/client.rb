@@ -517,6 +517,36 @@ module Aws::DevOpsGuru
       req.send_request(options)
     end
 
+    # Returns the most recent feedback submitted in the current AWS account
+    # and Region.
+    #
+    # @option params [String] :insight_id
+    #   The ID of the insight for which the feedback was provided.
+    #
+    # @return [Types::DescribeFeedbackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFeedbackResponse#insight_feedback #insight_feedback} => Types::InsightFeedback
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_feedback({
+    #     insight_id: "InsightId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.insight_feedback.id #=> String
+    #   resp.insight_feedback.feedback #=> String, one of "VALID_COLLECTION", "RECOMMENDATION_USEFUL", "ALERT_TOO_SENSITIVE", "DATA_NOISY_ANOMALY", "DATA_INCORRECT"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeFeedback AWS API Documentation
+    #
+    # @overload describe_feedback(params = {})
+    # @param [Hash] params ({})
+    def describe_feedback(params = {}, options = {})
+      req = build_request(:describe_feedback, params)
+      req.send_request(options)
+    end
+
     # Returns details about an insight that you specify using its ID.
     #
     # @option params [required, String] :id
@@ -1241,7 +1271,7 @@ module Aws::DevOpsGuru
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devopsguru'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -45,6 +45,8 @@ module Aws::DevOpsGuru
     DescribeAccountOverviewResponse = Shapes::StructureShape.new(name: 'DescribeAccountOverviewResponse')
     DescribeAnomalyRequest = Shapes::StructureShape.new(name: 'DescribeAnomalyRequest')
     DescribeAnomalyResponse = Shapes::StructureShape.new(name: 'DescribeAnomalyResponse')
+    DescribeFeedbackRequest = Shapes::StructureShape.new(name: 'DescribeFeedbackRequest')
+    DescribeFeedbackResponse = Shapes::StructureShape.new(name: 'DescribeFeedbackResponse')
     DescribeInsightRequest = Shapes::StructureShape.new(name: 'DescribeInsightRequest')
     DescribeInsightResponse = Shapes::StructureShape.new(name: 'DescribeInsightResponse')
     DescribeResourceCollectionHealthRequest = Shapes::StructureShape.new(name: 'DescribeResourceCollectionHealthRequest')
@@ -266,6 +268,12 @@ module Aws::DevOpsGuru
     DescribeAnomalyResponse.add_member(:proactive_anomaly, Shapes::ShapeRef.new(shape: ProactiveAnomaly, location_name: "ProactiveAnomaly"))
     DescribeAnomalyResponse.add_member(:reactive_anomaly, Shapes::ShapeRef.new(shape: ReactiveAnomaly, location_name: "ReactiveAnomaly"))
     DescribeAnomalyResponse.struct_class = Types::DescribeAnomalyResponse
+
+    DescribeFeedbackRequest.add_member(:insight_id, Shapes::ShapeRef.new(shape: InsightId, location_name: "InsightId"))
+    DescribeFeedbackRequest.struct_class = Types::DescribeFeedbackRequest
+
+    DescribeFeedbackResponse.add_member(:insight_feedback, Shapes::ShapeRef.new(shape: InsightFeedback, location_name: "InsightFeedback"))
+    DescribeFeedbackResponse.struct_class = Types::DescribeFeedbackResponse
 
     DescribeInsightRequest.add_member(:id, Shapes::ShapeRef.new(shape: InsightId, required: true, location: "uri", location_name: "Id"))
     DescribeInsightRequest.struct_class = Types::DescribeInsightRequest
@@ -715,6 +723,19 @@ module Aws::DevOpsGuru
         o.http_request_uri = "/anomalies/{Id}"
         o.input = Shapes::ShapeRef.new(shape: DescribeAnomalyRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAnomalyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:describe_feedback, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFeedback"
+        o.http_method = "POST"
+        o.http_request_uri = "/feedback"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFeedbackRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFeedbackResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

@@ -402,6 +402,37 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeFeedbackRequest
+    #   data as a hash:
+    #
+    #       {
+    #         insight_id: "InsightId",
+    #       }
+    #
+    # @!attribute [rw] insight_id
+    #   The ID of the insight for which the feedback was provided.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeFeedbackRequest AWS API Documentation
+    #
+    class DescribeFeedbackRequest < Struct.new(
+      :insight_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] insight_feedback
+    #   Information about insight feedback received from a customer.
+    #   @return [Types::InsightFeedback]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeFeedbackResponse AWS API Documentation
+    #
+    class DescribeFeedbackResponse < Struct.new(
+      :insight_feedback)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeInsightRequest
     #   data as a hash:
     #

@@ -1064,6 +1064,7 @@ module Aws::CodeBuild
     #   resp.projects[0].build_batch_config.restrictions.compute_types_allowed #=> Array
     #   resp.projects[0].build_batch_config.restrictions.compute_types_allowed[0] #=> String
     #   resp.projects[0].build_batch_config.timeout_in_mins #=> Integer
+    #   resp.projects[0].concurrent_build_limit #=> Integer
     #   resp.projects_not_found #=> Array
     #   resp.projects_not_found[0] #=> String
     #
@@ -1299,6 +1300,14 @@ module Aws::CodeBuild
     #   A ProjectBuildBatchConfig object that defines the batch build options
     #   for the project.
     #
+    # @option params [Integer] :concurrent_build_limit
+    #   The maximum number of concurrent builds that are allowed for this
+    #   project.
+    #
+    #   New builds are only started if the current number of builds is less
+    #   than or equal to this limit. If the current build count meets this
+    #   limit, new builds are throttled and are not run.
+    #
     # @return [Types::CreateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProjectOutput#project #project} => Types::Project
@@ -1451,6 +1460,7 @@ module Aws::CodeBuild
     #       },
     #       timeout_in_mins: 1,
     #     },
+    #     concurrent_build_limit: 1,
     #   })
     #
     # @example Response structure
@@ -1567,6 +1577,7 @@ module Aws::CodeBuild
     #   resp.project.build_batch_config.restrictions.compute_types_allowed #=> Array
     #   resp.project.build_batch_config.restrictions.compute_types_allowed[0] #=> String
     #   resp.project.build_batch_config.timeout_in_mins #=> Integer
+    #   resp.project.concurrent_build_limit #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProject AWS API Documentation
     #
@@ -4659,6 +4670,16 @@ module Aws::CodeBuild
     # @option params [Types::ProjectBuildBatchConfig] :build_batch_config
     #   Contains configuration information about a batch build project.
     #
+    # @option params [Integer] :concurrent_build_limit
+    #   The maximum number of concurrent builds that are allowed for this
+    #   project.
+    #
+    #   New builds are only started if the current number of builds is less
+    #   than or equal to this limit. If the current build count meets this
+    #   limit, new builds are throttled and are not run.
+    #
+    #   To remove this limit, set this value to -1.
+    #
     # @return [Types::UpdateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateProjectOutput#project #project} => Types::Project
@@ -4811,6 +4832,7 @@ module Aws::CodeBuild
     #       },
     #       timeout_in_mins: 1,
     #     },
+    #     concurrent_build_limit: 1,
     #   })
     #
     # @example Response structure
@@ -4927,6 +4949,7 @@ module Aws::CodeBuild
     #   resp.project.build_batch_config.restrictions.compute_types_allowed #=> Array
     #   resp.project.build_batch_config.restrictions.compute_types_allowed[0] #=> String
     #   resp.project.build_batch_config.timeout_in_mins #=> Integer
+    #   resp.project.concurrent_build_limit #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProject AWS API Documentation
     #
@@ -5100,7 +5123,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
