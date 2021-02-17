@@ -1568,7 +1568,7 @@ module Aws::ConfigService
     #     conformance_pack_name: "ConformancePackName", # required
     #     filters: {
     #       config_rule_names: ["StringWithCharLimit64"],
-    #       compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
+    #       compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, INSUFFICIENT_DATA
     #     },
     #     limit: 1,
     #     next_token: "NextToken",
@@ -1579,7 +1579,7 @@ module Aws::ConfigService
     #   resp.conformance_pack_name #=> String
     #   resp.conformance_pack_rule_compliance_list #=> Array
     #   resp.conformance_pack_rule_compliance_list[0].config_rule_name #=> String
-    #   resp.conformance_pack_rule_compliance_list[0].compliance_type #=> String, one of "COMPLIANT", "NON_COMPLIANT"
+    #   resp.conformance_pack_rule_compliance_list[0].compliance_type #=> String, one of "COMPLIANT", "NON_COMPLIANT", "INSUFFICIENT_DATA"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConformancePackCompliance AWS API Documentation
@@ -2815,7 +2815,7 @@ module Aws::ConfigService
     #     conformance_pack_name: "ConformancePackName", # required
     #     filters: {
     #       config_rule_names: ["StringWithCharLimit64"],
-    #       compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
+    #       compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, INSUFFICIENT_DATA
     #       resource_type: "StringWithCharLimit256",
     #       resource_ids: ["StringWithCharLimit256"],
     #     },
@@ -2827,7 +2827,7 @@ module Aws::ConfigService
     #
     #   resp.conformance_pack_name #=> String
     #   resp.conformance_pack_rule_evaluation_results #=> Array
-    #   resp.conformance_pack_rule_evaluation_results[0].compliance_type #=> String, one of "COMPLIANT", "NON_COMPLIANT"
+    #   resp.conformance_pack_rule_evaluation_results[0].compliance_type #=> String, one of "COMPLIANT", "NON_COMPLIANT", "INSUFFICIENT_DATA"
     #   resp.conformance_pack_rule_evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.config_rule_name #=> String
     #   resp.conformance_pack_rule_evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.resource_type #=> String
     #   resp.conformance_pack_rule_evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.resource_id #=> String
@@ -2877,7 +2877,7 @@ module Aws::ConfigService
     #
     #   resp.conformance_pack_compliance_summary_list #=> Array
     #   resp.conformance_pack_compliance_summary_list[0].conformance_pack_name #=> String
-    #   resp.conformance_pack_compliance_summary_list[0].conformance_pack_compliance_status #=> String, one of "COMPLIANT", "NON_COMPLIANT"
+    #   resp.conformance_pack_compliance_summary_list[0].conformance_pack_compliance_status #=> String, one of "COMPLIANT", "NON_COMPLIANT", "INSUFFICIENT_DATA"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetConformancePackComplianceSummary AWS API Documentation
@@ -4873,7 +4873,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

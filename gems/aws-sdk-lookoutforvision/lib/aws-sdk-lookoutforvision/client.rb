@@ -460,10 +460,11 @@ module Aws::LookoutforVision
     #   results.
     #
     # @option params [String] :kms_key_id
-    #   The identifier of the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use for encypting the model. If this parameter is
-    #   not specified, the model is encrypted by a key that AWS owns and
-    #   manages.
+    #   The identifier for your AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK). The key is used to encrypt training and test images
+    #   copied into the service for model training. Your source images are
+    #   unaffected. If this parameter is not specified, the copied images are
+    #   encrypted by a key that AWS owns and manages.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A set of tags (key-value pairs) that you want to attach to the model.
@@ -579,10 +580,6 @@ module Aws::LookoutforVision
     # * If you delete the training dataset, you must create a training
     #   dataset before you can create a model.
     #
-    # It might take a while to delete the dataset. To check the current
-    # status, check the `Status` field in the response from a call to
-    # DescribeDataset.
-    #
     # This operation requires permissions to perform the
     # `lookoutvision:DeleteDataset` operation.
     #
@@ -630,6 +627,10 @@ module Aws::LookoutforVision
 
     # Deletes an Amazon Lookout for Vision model. You can't delete a
     # running model. To stop a running model, use the StopModel operation.
+    #
+    # It might take a few seconds to delete a model. To determine if a model
+    # has been deleted, call ListProjects and check if the version of the
+    # model (`ModelVersion`) is in the `Models` array.
     #
     # This operation requires permissions to perform the
     # `lookoutvision:DeleteModel` operation.
@@ -1162,6 +1163,8 @@ module Aws::LookoutforVision
     # model. Starting a model takes a while to complete. To check the
     # current state of the model, use DescribeModel.
     #
+    # A model is ready to use when its status is `HOSTED`.
+    #
     # Once the model is running, you can detect custom labels in new images
     # by calling DetectAnomalies.
     #
@@ -1216,7 +1219,7 @@ module Aws::LookoutforVision
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "RUNNING", "STARTING", "STOPPED", "FAILED"
+    #   resp.status #=> String, one of "STARTING_HOSTING", "HOSTED", "HOSTING_FAILED", "STOPPING_HOSTING", "SYSTEM_UPDATING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/StartModel AWS API Documentation
     #
@@ -1227,8 +1230,10 @@ module Aws::LookoutforVision
       req.send_request(options)
     end
 
-    # Stops a running model. The operation might take a while to complete.
-    # To check the current status, call DescribeModel.
+    # Stops the hosting of a running model. The operation might take a while
+    # to complete. To check the current status, call DescribeModel.
+    #
+    # After the model hosting stops, the `Status` of the model is `TRAINED`.
     #
     # This operation requires permissions to perform the
     # `lookoutvision:StopModel` operation.
@@ -1266,7 +1271,7 @@ module Aws::LookoutforVision
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "RUNNING", "STARTING", "STOPPED", "FAILED"
+    #   resp.status #=> String, one of "STARTING_HOSTING", "HOSTED", "HOSTING_FAILED", "STOPPING_HOSTING", "SYSTEM_UPDATING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/StopModel AWS API Documentation
     #
@@ -1421,7 +1426,7 @@ module Aws::LookoutforVision
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutforvision'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

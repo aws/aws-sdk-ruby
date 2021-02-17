@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-02-17)
+------------------
+
+* Feature - Added INSUFFICIENT_DATA in ConformancePackComplianceType.
+
 1.57.0 (2021-02-15)
 ------------------
 

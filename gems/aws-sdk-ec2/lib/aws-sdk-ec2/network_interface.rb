@@ -107,8 +107,8 @@ module Aws::EC2
       data[:private_ip_addresses]
     end
 
-    # The ID of the entity that launched the instance on your behalf (for
-    # example, AWS Management Console or Auto Scaling).
+    # The alias or AWS account ID of the principal or service that created
+    # the network interface.
     # @return [String]
     def requester_id
       data[:requester_id]

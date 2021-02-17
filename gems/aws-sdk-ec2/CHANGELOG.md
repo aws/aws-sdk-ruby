@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.225.0 (2021-02-17)
+------------------
+
+* Feature - This release includes a new filter for describe-vpc-endpoint-services.
+
 1.224.0 (2021-02-04)
 ------------------
 

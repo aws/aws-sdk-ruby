@@ -1042,10 +1042,12 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
     #
     # @option params [Integer] :ipv_6_address_count
-    #   The number of IPv6 addresses to assign to the network interface.
-    #   Amazon EC2 automatically selects the IPv6 addresses from the subnet
-    #   range. You can't use this option if specifying specific IPv6
-    #   addresses.
+    #   The number of additional IPv6 addresses to assign to the network
+    #   interface. The specified number of IPv6 addresses are assigned in
+    #   addition to the existing IPv6 addresses that are already assigned to
+    #   the network interface. Amazon EC2 automatically selects the IPv6
+    #   addresses from the subnet range. You can't use this option if
+    #   specifying specific IPv6 addresses.
     #
     # @option params [Array<String>] :ipv_6_addresses
     #   One or more specific IPv6 addresses to be assigned to the network
@@ -1231,14 +1233,14 @@ module Aws::EC2
     #   \[EC2-VPC\] The allocation ID. This is required for EC2-VPC.
     #
     # @option params [String] :instance_id
-    #   The ID of the instance. This is required for EC2-Classic. For EC2-VPC,
-    #   you can specify either the instance ID or the network interface ID,
-    #   but not both. The operation fails if you specify an instance ID unless
-    #   exactly one network interface is attached.
+    #   The ID of the instance. The instance must have exactly one attached
+    #   network interface. For EC2-VPC, you can specify either the instance ID
+    #   or the network interface ID, but not both. For EC2-Classic, you must
+    #   specify an instance ID and the instance must be in the running state.
     #
     # @option params [String] :public_ip
-    #   The Elastic IP address to associate with the instance. This is
-    #   required for EC2-Classic.
+    #   \[EC2-Classic\] The Elastic IP address to associate with the instance.
+    #   This is required for EC2-Classic.
     #
     # @option params [Boolean] :allow_reassociation
     #   \[EC2-VPC\] For a VPC in an EC2-Classic account, specify true to allow
@@ -3360,12 +3362,12 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [How to Ensure Idempotency][1]
-    #   in the *Amazon Elastic Compute Cloud User Guide*.
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [String] :description
     #   A description for the new AMI in the destination Region.
@@ -5429,7 +5431,7 @@ module Aws::EC2
     #   The maximum length is 255 characters.
     #
     # @option params [required, Types::ExportToS3TaskSpecification] :export_to_s3_task
-    #   The format and location for an instance export task.
+    #   The format and location for an export instance task.
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
@@ -5438,7 +5440,7 @@ module Aws::EC2
     #   The target virtualization environment.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to apply to the instance export task during creation.
+    #   The tags to apply to the export instance task during creation.
     #
     # @return [Types::CreateInstanceExportTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10133,9 +10135,7 @@ module Aws::EC2
     #   attributes to `true`\: `enableDnsHostnames` and `enableDnsSupport`.
     #   Use ModifyVpcAttribute to set the VPC attributes.
     #
-    #   Private DNS is not supported for Amazon S3 interface endpoints.
-    #
-    #   Default: `true` for supported endpoints
+    #   Default: `true`
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to associate with the endpoint.
@@ -21153,9 +21153,8 @@ module Aws::EC2
     #   * `private-dns-name` - The private DNS name of the network interface
     #     (IPv4).
     #
-    #   * `requester-id` - The ID of the entity that launched the instance on
-    #     your behalf (for example, AWS Management Console, Auto Scaling, and
-    #     so on).
+    #   * `requester-id` - The alias or AWS account ID of the principal or
+    #     service that created the network interface.
     #
     #   * `requester-managed` - Indicates whether the network interface is
     #     being managed by an AWS service (for example, AWS Management
@@ -22951,7 +22950,7 @@ module Aws::EC2
     #     has been referenced in an outbound security group rule.
     #
     #   * `egress.ip-permission.group-name` - The name of a security group
-    #     that has been referenced in an outbound security group rule.
+    #     that is referenced in an outbound security group rule.
     #
     #   * `egress.ip-permission.ipv6-cidr` - An IPv6 CIDR block for an
     #     outbound security group rule.
@@ -22960,7 +22959,8 @@ module Aws::EC2
     #     which a security group rule allows outbound access.
     #
     #   * `egress.ip-permission.protocol` - The IP protocol for an outbound
-    #     security group rule (`tcp` \| `udp` \| `icmp` or a protocol number).
+    #     security group rule (`tcp` \| `udp` \| `icmp`, a protocol number, or
+    #     -1 for all protocols).
     #
     #   * `egress.ip-permission.to-port` - For an outbound rule, the end of
     #     port range for the TCP and UDP protocols, or an ICMP code.
@@ -22981,8 +22981,8 @@ module Aws::EC2
     #   * `ip-permission.group-id` - The ID of a security group that has been
     #     referenced in an inbound security group rule.
     #
-    #   * `ip-permission.group-name` - The name of a security group that has
-    #     been referenced in an inbound security group rule.
+    #   * `ip-permission.group-name` - The name of a security group that is
+    #     referenced in an inbound security group rule.
     #
     #   * `ip-permission.ipv6-cidr` - An IPv6 CIDR block for an inbound
     #     security group rule.
@@ -22991,7 +22991,8 @@ module Aws::EC2
     #     a security group rule allows inbound access.
     #
     #   * `ip-permission.protocol` - The IP protocol for an inbound security
-    #     group rule (`tcp` \| `udp` \| `icmp` or a protocol number).
+    #     group rule (`tcp` \| `udp` \| `icmp`, a protocol number, or -1 for
+    #     all protocols).
     #
     #   * `ip-permission.to-port` - For an inbound rule, the end of port range
     #     for the TCP and UDP protocols, or an ICMP code.
@@ -27049,6 +27050,8 @@ module Aws::EC2
     #
     #   * `service-name` - The name of the service.
     #
+    #   * `service-type` - The type of service (`Interface` \| `Gateway`).
+    #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
@@ -29248,7 +29251,7 @@ module Aws::EC2
     #   the default role is named 'vmimport'.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to apply to the image being exported.
+    #   The tags to apply to the export image task during creation.
     #
     # @return [Types::ExportImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -30986,7 +30989,7 @@ module Aws::EC2
     #   The ARNs of the license configurations.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to apply to the image being imported.
+    #   The tags to apply to the import image task during creation.
     #
     # @return [Types::ImportImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -31366,7 +31369,7 @@ module Aws::EC2
     #   'vmimport'.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to apply to the snapshot being imported.
+    #   The tags to apply to the import snapshot task during creation.
     #
     # @return [Types::ImportSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -34580,8 +34583,6 @@ module Aws::EC2
     #   (Interface endpoint) Indicates whether a private hosted zone is
     #   associated with the VPC.
     #
-    #   Private DNS is not supported for Amazon S3 interface endpoints.
-    #
     # @return [Types::ModifyVpcEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyVpcEndpointResult#return #return} => Boolean
@@ -36012,11 +36013,25 @@ module Aws::EC2
     #
     #  </note>
     #
-    # You can also use `RegisterImage` to create an Amazon EBS-backed Linux
-    # AMI from a snapshot of a root device volume. You specify the snapshot
-    # using the block device mapping. For more information, see [Launching a
-    # Linux instance from a backup][2] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # If needed, you can deregister an AMI at any time. Any modifications
+    # you make to an AMI backed by an instance store volume invalidates its
+    # registration. If you make changes to an image, deregister the previous
+    # image and register the new image.
+    #
+    # **Register a snapshot of a root device volume**
+    #
+    # You can use `RegisterImage` to create an Amazon EBS-backed Linux AMI
+    # from a snapshot of a root device volume. You specify the snapshot
+    # using a block device mapping. You can't set the encryption state of
+    # the volume using the block device mapping. If the snapshot is
+    # encrypted, or encryption by default is enabled, the root volume of an
+    # instance launched from the AMI is encrypted.
+    #
+    # For more information, see [Create a Linux AMI from a snapshot][2] and
+    # [Use encryption with EBS-backed AMIs][3] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
+    #
+    # **AWS Marketplace product codes**
     #
     # If any snapshots have AWS Marketplace product codes, they are copied
     # to the new AMI.
@@ -36041,19 +36056,15 @@ module Aws::EC2
     # you purchase a Reserved Instance without the matching billing product
     # code, the Reserved Instance will not be applied to the On-Demand
     # Instance. For information about how to obtain the platform details and
-    # billing information of an AMI, see [Obtaining billing information][3]
+    # billing information of an AMI, see [Obtaining billing information][4]
     # in the *Amazon Elastic Compute Cloud User Guide*.
-    #
-    # If needed, you can deregister an AMI at any time. Any modifications
-    # you make to an AMI backed by an instance store volume invalidates its
-    # registration. If you make changes to an image, deregister the previous
-    # image and register the new image.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-launch-snapshot.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html#creating-launching-ami-from-snapshot
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html
+    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html
     #
     # @option params [String] :image_location
     #   The full path to your AMI manifest in Amazon S3 storage. The specified
@@ -36073,6 +36084,9 @@ module Aws::EC2
     #
     # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
     #   The block device mapping entries.
+    #
+    #   If you specify an EBS volume using the ID of an EBS snapshot, you
+    #   can't specify the encryption state of the volume.
     #
     #   If you create an AMI on an Outpost, then all backing snapshots must be
     #   on the same Outpost or in the Region of that Outpost. AMIs on an
@@ -39085,7 +39099,7 @@ module Aws::EC2
     #   Default: `false`
     #
     # @option params [Types::IamInstanceProfileSpecification] :iam_instance_profile
-    #   The IAM instance profile.
+    #   The name or Amazon Resource Name (ARN) of an IAM instance profile.
     #
     # @option params [String] :instance_initiated_shutdown_behavior
     #   Indicates whether an instance stops or terminates when you initiate
@@ -41222,7 +41236,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.224.0'
+      context[:gem_version] = '1.225.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

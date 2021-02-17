@@ -9996,7 +9996,7 @@ module Aws::EC2
 
     SubnetIdStringList.member = Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId")
 
-    SubnetIpv6CidrBlockAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
+    SubnetIpv6CidrBlockAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: SubnetCidrAssociationId, location_name: "associationId"))
     SubnetIpv6CidrBlockAssociation.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "ipv6CidrBlock"))
     SubnetIpv6CidrBlockAssociation.add_member(:ipv_6_cidr_block_state, Shapes::ShapeRef.new(shape: SubnetCidrBlockState, location_name: "ipv6CidrBlockState"))
     SubnetIpv6CidrBlockAssociation.struct_class = Types::SubnetIpv6CidrBlockAssociation

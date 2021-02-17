@@ -177,10 +177,11 @@ module Aws::LookoutforVision
     #   @return [Types::OutputConfig]
     #
     # @!attribute [rw] kms_key_id
-    #   The identifier of the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use for encypting the model. If this parameter
-    #   is not specified, the model is encrypted by a key that AWS owns and
-    #   manages.
+    #   The identifier for your AWS Key Management Service (AWS KMS)
+    #   customer master key (CMK). The key is used to encrypt training and
+    #   test images copied into the service for model training. Your source
+    #   images are unaffected. If this parameter is not specified, the
+    #   copied images are encrypted by a key that AWS owns and manages.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1335,7 +1336,7 @@ module Aws::LookoutforVision
       include Aws::Structure
     end
 
-    # Information about the location of a manifest file.
+    # Information about the location training output.
     #
     # @note When making an API call, you may pass S3Location
     #   data as a hash:
@@ -1346,11 +1347,12 @@ module Aws::LookoutforVision
     #       }
     #
     # @!attribute [rw] bucket
-    #   The S3 bucket that contain the manifest file.
+    #   The S3 bucket that contains the training output.
     #   @return [String]
     #
     # @!attribute [rw] prefix
-    #   The path and name of the manifest file with the S3 bucket.
+    #   The path of the folder, within the S3 bucket, that contains the
+    #   training output.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/S3Location AWS API Documentation

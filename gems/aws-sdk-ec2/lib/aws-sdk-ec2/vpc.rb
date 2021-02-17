@@ -1495,9 +1495,8 @@ module Aws::EC2
     #   * `private-dns-name` - The private DNS name of the network interface
     #     (IPv4).
     #
-    #   * `requester-id` - The ID of the entity that launched the instance on
-    #     your behalf (for example, AWS Management Console, Auto Scaling, and
-    #     so on).
+    #   * `requester-id` - The alias or AWS account ID of the principal or
+    #     service that created the network interface.
     #
     #   * `requester-managed` - Indicates whether the network interface is
     #     being managed by an AWS service (for example, AWS Management
@@ -1789,7 +1788,7 @@ module Aws::EC2
     #     has been referenced in an outbound security group rule.
     #
     #   * `egress.ip-permission.group-name` - The name of a security group
-    #     that has been referenced in an outbound security group rule.
+    #     that is referenced in an outbound security group rule.
     #
     #   * `egress.ip-permission.ipv6-cidr` - An IPv6 CIDR block for an
     #     outbound security group rule.
@@ -1798,7 +1797,8 @@ module Aws::EC2
     #     which a security group rule allows outbound access.
     #
     #   * `egress.ip-permission.protocol` - The IP protocol for an outbound
-    #     security group rule (`tcp` \| `udp` \| `icmp` or a protocol number).
+    #     security group rule (`tcp` \| `udp` \| `icmp`, a protocol number, or
+    #     -1 for all protocols).
     #
     #   * `egress.ip-permission.to-port` - For an outbound rule, the end of
     #     port range for the TCP and UDP protocols, or an ICMP code.
@@ -1819,8 +1819,8 @@ module Aws::EC2
     #   * `ip-permission.group-id` - The ID of a security group that has been
     #     referenced in an inbound security group rule.
     #
-    #   * `ip-permission.group-name` - The name of a security group that has
-    #     been referenced in an inbound security group rule.
+    #   * `ip-permission.group-name` - The name of a security group that is
+    #     referenced in an inbound security group rule.
     #
     #   * `ip-permission.ipv6-cidr` - An IPv6 CIDR block for an inbound
     #     security group rule.
@@ -1829,7 +1829,8 @@ module Aws::EC2
     #     a security group rule allows inbound access.
     #
     #   * `ip-permission.protocol` - The IP protocol for an inbound security
-    #     group rule (`tcp` \| `udp` \| `icmp` or a protocol number).
+    #     group rule (`tcp` \| `udp` \| `icmp`, a protocol number, or -1 for
+    #     all protocols).
     #
     #   * `ip-permission.to-port` - For an inbound rule, the end of port range
     #     for the TCP and UDP protocols, or an ICMP code.

@@ -602,7 +602,7 @@ module Aws::EC2
     #
     #   Default: `false`
     # @option options [Types::IamInstanceProfileSpecification] :iam_instance_profile
-    #   The IAM instance profile.
+    #   The name or Amazon Resource Name (ARN) of an IAM instance profile.
     # @option options [String] :instance_initiated_shutdown_behavior
     #   Indicates whether an instance stops or terminates when you initiate
     #   shutdown from the instance (using the operating system command for
@@ -1406,9 +1406,8 @@ module Aws::EC2
     #   * `private-dns-name` - The private DNS name of the network interface
     #     (IPv4).
     #
-    #   * `requester-id` - The ID of the entity that launched the instance on
-    #     your behalf (for example, AWS Management Console, Auto Scaling, and
-    #     so on).
+    #   * `requester-id` - The alias or AWS account ID of the principal or
+    #     service that created the network interface.
     #
     #   * `requester-managed` - Indicates whether the network interface is
     #     being managed by an AWS service (for example, AWS Management

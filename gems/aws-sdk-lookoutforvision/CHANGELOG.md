@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2021-02-17)
+------------------
+
+* Feature - This release for Amazon Lookout for Vision includes documentation updates and a correction to the Status field returned in the response from StartModel and StopModel.
+
 1.1.0 (2021-02-02)
 ------------------
 

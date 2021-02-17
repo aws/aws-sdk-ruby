@@ -1372,7 +1372,7 @@ module Aws::ConfigService
     #
     #       {
     #         config_rule_names: ["StringWithCharLimit64"],
-    #         compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
+    #         compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, INSUFFICIENT_DATA
     #       }
     #
     # @!attribute [rw] config_rule_names
@@ -1481,7 +1481,7 @@ module Aws::ConfigService
     #
     #       {
     #         config_rule_names: ["StringWithCharLimit64"],
-    #         compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
+    #         compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, INSUFFICIENT_DATA
     #         resource_type: "StringWithCharLimit256",
     #         resource_ids: ["StringWithCharLimit256"],
     #       }
@@ -2739,7 +2739,7 @@ module Aws::ConfigService
     #         conformance_pack_name: "ConformancePackName", # required
     #         filters: {
     #           config_rule_names: ["StringWithCharLimit64"],
-    #           compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
+    #           compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, INSUFFICIENT_DATA
     #         },
     #         limit: 1,
     #         next_token: "NextToken",
@@ -4222,7 +4222,7 @@ module Aws::ConfigService
     #         conformance_pack_name: "ConformancePackName", # required
     #         filters: {
     #           config_rule_names: ["StringWithCharLimit64"],
-    #           compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT
+    #           compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, INSUFFICIENT_DATA
     #           resource_type: "StringWithCharLimit256",
     #           resource_ids: ["StringWithCharLimit256"],
     #         },

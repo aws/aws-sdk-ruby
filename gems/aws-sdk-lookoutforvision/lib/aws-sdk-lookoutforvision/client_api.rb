@@ -231,7 +231,7 @@ module Aws::LookoutforVision
     DetectAnomaliesRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location: "uri", location_name: "projectName"))
     DetectAnomaliesRequest.add_member(:model_version, Shapes::ShapeRef.new(shape: ModelVersion, required: true, location: "uri", location_name: "modelVersion"))
     DetectAnomaliesRequest.add_member(:body, Shapes::ShapeRef.new(shape: Stream, required: true, location_name: "Body"))
-    DetectAnomaliesRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, required: true, location: "header", location_name: "content-type"))
+    DetectAnomaliesRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, required: true, location: "header", location_name: "Content-Type"))
     DetectAnomaliesRequest.struct_class = Types::DetectAnomaliesRequest
     DetectAnomaliesRequest[:payload] = :body
     DetectAnomaliesRequest[:payload_member] = DetectAnomaliesRequest.member(:body)

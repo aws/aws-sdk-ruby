@@ -1167,10 +1167,12 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] ipv_6_address_count
-    #   The number of IPv6 addresses to assign to the network interface.
-    #   Amazon EC2 automatically selects the IPv6 addresses from the subnet
-    #   range. You can't use this option if specifying specific IPv6
-    #   addresses.
+    #   The number of additional IPv6 addresses to assign to the network
+    #   interface. The specified number of IPv6 addresses are assigned in
+    #   addition to the existing IPv6 addresses that are already assigned to
+    #   the network interface. Amazon EC2 automatically selects the IPv6
+    #   addresses from the subnet range. You can't use this option if
+    #   specifying specific IPv6 addresses.
     #   @return [Integer]
     #
     # @!attribute [rw] ipv_6_addresses
@@ -1194,7 +1196,9 @@ module Aws::EC2
     end
 
     # @!attribute [rw] assigned_ipv_6_addresses
-    #   The IPv6 addresses assigned to the network interface.
+    #   The new IPv6 addresses assigned to the network interface. Existing
+    #   IPv6 addresses that were assigned to the network interface before
+    #   the request are not included.
     #   @return [Array<String>]
     #
     # @!attribute [rw] network_interface_id
@@ -1307,15 +1311,16 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The ID of the instance. This is required for EC2-Classic. For
-    #   EC2-VPC, you can specify either the instance ID or the network
-    #   interface ID, but not both. The operation fails if you specify an
-    #   instance ID unless exactly one network interface is attached.
+    #   The ID of the instance. The instance must have exactly one attached
+    #   network interface. For EC2-VPC, you can specify either the instance
+    #   ID or the network interface ID, but not both. For EC2-Classic, you
+    #   must specify an instance ID and the instance must be in the running
+    #   state.
     #   @return [String]
     #
     # @!attribute [rw] public_ip
-    #   The Elastic IP address to associate with the instance. This is
-    #   required for EC2-Classic.
+    #   \[EC2-Classic\] The Elastic IP address to associate with the
+    #   instance. This is required for EC2-Classic.
     #   @return [String]
     #
     # @!attribute [rw] allow_reassociation
@@ -1522,7 +1527,7 @@ module Aws::EC2
     # @!attribute [rw] certificate_s3_object_key
     #   The Amazon S3 object key where the certificate, certificate chain,
     #   and encrypted private key bundle are stored. The object key is
-    #   formatted as follows: `certificate_arn`/`role_arn`.
+    #   formatted as follows: `role_arn`/`certificate_arn`.
     #   @return [String]
     #
     # @!attribute [rw] encryption_kms_key_id
@@ -1880,7 +1885,7 @@ module Aws::EC2
     # @!attribute [rw] certificate_s3_object_key
     #   The key of the Amazon S3 object ey where the certificate,
     #   certificate chain, and encrypted private key bundle is stored. The
-    #   object key is formated as follows: `certificate_arn`/`role_arn`.
+    #   object key is formated as follows: `role_arn`/`certificate_arn`.
     #   @return [String]
     #
     # @!attribute [rw] encryption_kms_key_id
@@ -4973,12 +4978,12 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [How to Ensure
-    #   Idempotency][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   in the *Amazon EC2 API Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -6942,7 +6947,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] export_to_s3_task
-    #   The format and location for an instance export task.
+    #   The format and location for an export instance task.
     #   @return [Types::ExportToS3TaskSpecification]
     #
     # @!attribute [rw] instance_id
@@ -6954,7 +6959,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
-    #   The tags to apply to the instance export task during creation.
+    #   The tags to apply to the export instance task during creation.
     #   @return [Array<Types::TagSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInstanceExportTaskRequest AWS API Documentation
@@ -6970,7 +6975,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] export_task
-    #   Information about the instance export task.
+    #   Information about the export instance task.
     #   @return [Types::ExportTask]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInstanceExportTaskResult AWS API Documentation
@@ -10711,9 +10716,7 @@ module Aws::EC2
     #   attributes to `true`\: `enableDnsHostnames` and `enableDnsSupport`.
     #   Use ModifyVpcAttribute to set the VPC attributes.
     #
-    #   Private DNS is not supported for Amazon S3 interface endpoints.
-    #
-    #   Default: `true` for supported endpoints
+    #   Default: `true`
     #   @return [Boolean]
     #
     # @!attribute [rw] tag_specifications
@@ -19859,9 +19862,8 @@ module Aws::EC2
     #   * `private-dns-name` - The private DNS name of the network interface
     #     (IPv4).
     #
-    #   * `requester-id` - The ID of the entity that launched the instance
-    #     on your behalf (for example, AWS Management Console, Auto Scaling,
-    #     and so on).
+    #   * `requester-id` - The alias or AWS account ID of the principal or
+    #     service that created the network interface.
     #
     #   * `requester-managed` - Indicates whether the network interface is
     #     being managed by an AWS service (for example, AWS Management
@@ -21226,7 +21228,7 @@ module Aws::EC2
     #     has been referenced in an outbound security group rule.
     #
     #   * `egress.ip-permission.group-name` - The name of a security group
-    #     that has been referenced in an outbound security group rule.
+    #     that is referenced in an outbound security group rule.
     #
     #   * `egress.ip-permission.ipv6-cidr` - An IPv6 CIDR block for an
     #     outbound security group rule.
@@ -21235,8 +21237,8 @@ module Aws::EC2
     #     which a security group rule allows outbound access.
     #
     #   * `egress.ip-permission.protocol` - The IP protocol for an outbound
-    #     security group rule (`tcp` \| `udp` \| `icmp` or a protocol
-    #     number).
+    #     security group rule (`tcp` \| `udp` \| `icmp`, a protocol number,
+    #     or -1 for all protocols).
     #
     #   * `egress.ip-permission.to-port` - For an outbound rule, the end of
     #     port range for the TCP and UDP protocols, or an ICMP code.
@@ -21257,8 +21259,8 @@ module Aws::EC2
     #   * `ip-permission.group-id` - The ID of a security group that has
     #     been referenced in an inbound security group rule.
     #
-    #   * `ip-permission.group-name` - The name of a security group that has
-    #     been referenced in an inbound security group rule.
+    #   * `ip-permission.group-name` - The name of a security group that is
+    #     referenced in an inbound security group rule.
     #
     #   * `ip-permission.ipv6-cidr` - An IPv6 CIDR block for an inbound
     #     security group rule.
@@ -21267,7 +21269,8 @@ module Aws::EC2
     #     which a security group rule allows inbound access.
     #
     #   * `ip-permission.protocol` - The IP protocol for an inbound security
-    #     group rule (`tcp` \| `udp` \| `icmp` or a protocol number).
+    #     group rule (`tcp` \| `udp` \| `icmp`, a protocol number, or -1 for
+    #     all protocols).
     #
     #   * `ip-permission.to-port` - For an inbound rule, the end of port
     #     range for the TCP and UDP protocols, or an ICMP code.
@@ -24329,6 +24332,8 @@ module Aws::EC2
     #   One or more filters.
     #
     #   * `service-name` - The name of the service.
+    #
+    #   * `service-type` - The type of service (`Interface` \| `Gateway`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
     #     to the resource. Use the tag key in the filter name and the tag
@@ -27645,7 +27650,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
-    #   The tags to apply to the image being exported.
+    #   The tags to apply to the export image task during creation.
     #   @return [Array<Types::TagSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportImageRequest AWS API Documentation
@@ -27702,7 +27707,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Any tags assigned to the image being exported.
+    #   Any tags assigned to the export image task.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportImageResult AWS API Documentation
@@ -27754,7 +27759,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Any tags assigned to the image being exported.
+    #   Any tags assigned to the export image task.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportImageTask AWS API Documentation
@@ -27772,7 +27777,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an instance export task.
+    # Describes an export instance task.
     #
     # @!attribute [rw] description
     #   A description of the resource being exported.
@@ -27862,7 +27867,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the format and location for an instance export task.
+    # Describes the format and location for the export task.
     #
     # @!attribute [rw] container_format
     #   The container format used to combine disk images with metadata (such
@@ -27894,7 +27899,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an instance export task.
+    # Describes an export instance task.
     #
     # @note When making an API call, you may pass ExportToS3TaskSpecification
     #   data as a hash:
@@ -28093,28 +28098,7 @@ module Aws::EC2
     # A filter name and value pair that is used to return a more specific
     # list of results from a describe operation. Filters can be used to
     # match a set of resources by specific criteria, such as tags,
-    # attributes, or IDs. The filters supported by a describe operation are
-    # documented with the describe operation. For example:
-    #
-    # * DescribeAvailabilityZones
-    #
-    # * DescribeImages
-    #
-    # * DescribeInstances
-    #
-    # * DescribeKeyPairs
-    #
-    # * DescribeSecurityGroups
-    #
-    # * DescribeSnapshots
-    #
-    # * DescribeSubnets
-    #
-    # * DescribeTags
-    #
-    # * DescribeVolumes
-    #
-    # * DescribeVpcs
+    # attributes, or IDs.
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -31301,7 +31285,7 @@ module Aws::EC2
     # @!attribute [rw] format
     #   The format of the disk image being imported.
     #
-    #   Valid values: `OVA` \| `VHD` \| `VHDX` \|`VMDK`
+    #   Valid values: `OVA` \| `VHD` \| `VHDX` \| `VMDK` \| `RAW`
     #   @return [String]
     #
     # @!attribute [rw] snapshot_id
@@ -31590,7 +31574,7 @@ module Aws::EC2
     #   @return [Array<Types::ImportImageLicenseConfigurationRequest>]
     #
     # @!attribute [rw] tag_specifications
-    #   The tags to apply to the image being imported.
+    #   The tags to apply to the import image task during creation.
     #   @return [Array<Types::TagSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageRequest AWS API Documentation
@@ -31673,7 +31657,7 @@ module Aws::EC2
     #   @return [Array<Types::ImportImageLicenseConfigurationResponse>]
     #
     # @!attribute [rw] tags
-    #   Any tags assigned to the image being imported.
+    #   Any tags assigned to the import image task.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageResult AWS API Documentation
@@ -32252,7 +32236,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
-    #   The tags to apply to the snapshot being imported.
+    #   The tags to apply to the import snapshot task during creation.
     #   @return [Array<Types::TagSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotRequest AWS API Documentation
@@ -32284,7 +32268,7 @@ module Aws::EC2
     #   @return [Types::SnapshotTaskDetail]
     #
     # @!attribute [rw] tags
-    #   Any tags assigned to the snapshot being imported.
+    #   Any tags assigned to the import snapshot task.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotResult AWS API Documentation
@@ -34710,8 +34694,8 @@ module Aws::EC2
     #   @return [Types::LaunchTemplateEbsBlockDevice]
     #
     # @!attribute [rw] no_device
-    #   Suppresses the specified device included in the block device mapping
-    #   of the AMI.
+    #   To omit the device from the block device mapping, specify an empty
+    #   string.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateBlockDeviceMapping AWS API Documentation
@@ -34765,8 +34749,8 @@ module Aws::EC2
     #   @return [Types::LaunchTemplateEbsBlockDeviceRequest]
     #
     # @!attribute [rw] no_device
-    #   Suppresses the specified device included in the block device mapping
-    #   of the AMI.
+    #   To omit the device from the block device mapping, specify an empty
+    #   string.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateBlockDeviceMappingRequest AWS API Documentation
@@ -35041,9 +35025,9 @@ module Aws::EC2
     #   [Instances built on the Nitro System][1]. Other instance families
     #   guarantee performance up to 32,000 IOPS.
     #
-    #   This parameter is required for `io1` and `io2` volumes. The default
-    #   for `gp3` volumes is 3,000 IOPS. This parameter is not supported for
-    #   `gp2`, `st1`, `sc1`, or `standard` volumes.
+    #   This parameter is supported for `io1`, `io2`, and `gp3` volumes
+    #   only. This parameter is not supported for `gp2`, `st1`, `sc1`, or
+    #   `standard` volumes.
     #
     #
     #
@@ -35061,11 +35045,8 @@ module Aws::EC2
     #
     # @!attribute [rw] volume_size
     #   The size of the volume, in GiBs. You must specify either a snapshot
-    #   ID or a volume size. If you specify a snapshot, the default is the
-    #   snapshot size. You can specify a volume size that is equal to or
-    #   larger than the snapshot size.
-    #
-    #   The following are the supported volumes sizes for each volume type:
+    #   ID or a volume size. The following are the supported volumes sizes
+    #   for each volume type:
     #
     #   * `gp2` and `gp3`\: 1-16,384
     #
@@ -35077,9 +35058,8 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
-    #   The volume type. The default is `gp2`. For more information, see
-    #   [Amazon EBS volume types][1] in the *Amazon Elastic Compute Cloud
-    #   User Guide*.
+    #   The volume type. For more information, see [Amazon EBS volume
+    #   types][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -39572,8 +39552,6 @@ module Aws::EC2
     # @!attribute [rw] private_dns_enabled
     #   (Interface endpoint) Indicates whether a private hosted zone is
     #   associated with the VPC.
-    #
-    #   Private DNS is not supported for Amazon S3 interface endpoints.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointRequest AWS API Documentation
@@ -41055,8 +41033,8 @@ module Aws::EC2
     #   @return [Array<Types::NetworkInterfacePrivateIpAddress>]
     #
     # @!attribute [rw] requester_id
-    #   The ID of the entity that launched the instance on your behalf (for
-    #   example, AWS Management Console or Auto Scaling).
+    #   The alias or AWS account ID of the principal or service that created
+    #   the network interface.
     #   @return [String]
     #
     # @!attribute [rw] requester_managed
@@ -43190,6 +43168,9 @@ module Aws::EC2
     # @!attribute [rw] block_device_mappings
     #   The block device mapping entries.
     #
+    #   If you specify an EBS volume using the ID of an EBS snapshot, you
+    #   can't specify the encryption state of the volume.
+    #
     #   If you create an AMI on an Outpost, then all backing snapshots must
     #   be on the same Outpost or in the Region of that Outpost. AMIs on an
     #   Outpost that include local snapshots can be used to launch instances
@@ -44475,7 +44456,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] iam_instance_profile
-    #   The IAM instance profile.
+    #   The name or Amazon Resource Name (ARN) of an IAM instance profile.
     #   @return [Types::LaunchTemplateIamInstanceProfileSpecificationRequest]
     #
     # @!attribute [rw] block_device_mappings
@@ -47391,7 +47372,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] iam_instance_profile
-    #   The IAM instance profile.
+    #   The name or Amazon Resource Name (ARN) of an IAM instance profile.
     #   @return [Types::IamInstanceProfileSpecification]
     #
     # @!attribute [rw] instance_initiated_shutdown_behavior
@@ -49352,7 +49333,7 @@ module Aws::EC2
     # @!attribute [rw] format
     #   The format of the disk image being imported.
     #
-    #   Valid values: `VHD` \| `VMDK`
+    #   Valid values: `VHD` \| `VMDK` \| `RAW`
     #   @return [String]
     #
     # @!attribute [rw] url
