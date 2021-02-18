@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2021-02-18)
+------------------
+
+* Feature - AWS CodeBuild now allows you to specify a separate bucket owner as part of the S3 destination in a report group.
+
 1.68.0 (2021-02-16)
 ------------------
 

@@ -552,6 +552,7 @@ module Aws::SageMaker
     ExperimentSourceArn = Shapes::StringShape.new(name: 'ExperimentSourceArn')
     ExperimentSummaries = Shapes::ListShape.new(name: 'ExperimentSummaries')
     ExperimentSummary = Shapes::StructureShape.new(name: 'ExperimentSummary')
+    ExpiresInSeconds = Shapes::IntegerShape.new(name: 'ExpiresInSeconds')
     Explainability = Shapes::StructureShape.new(name: 'Explainability')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FeatureDefinition = Shapes::StructureShape.new(name: 'FeatureDefinition')
@@ -2189,6 +2190,7 @@ module Aws::SageMaker
     CreatePresignedDomainUrlRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
     CreatePresignedDomainUrlRequest.add_member(:user_profile_name, Shapes::ShapeRef.new(shape: UserProfileName, required: true, location_name: "UserProfileName"))
     CreatePresignedDomainUrlRequest.add_member(:session_expiration_duration_in_seconds, Shapes::ShapeRef.new(shape: SessionExpirationDurationInSeconds, location_name: "SessionExpirationDurationInSeconds"))
+    CreatePresignedDomainUrlRequest.add_member(:expires_in_seconds, Shapes::ShapeRef.new(shape: ExpiresInSeconds, location_name: "ExpiresInSeconds"))
     CreatePresignedDomainUrlRequest.struct_class = Types::CreatePresignedDomainUrlRequest
 
     CreatePresignedDomainUrlResponse.add_member(:authorized_url, Shapes::ShapeRef.new(shape: PresignedDomainUrl, location_name: "AuthorizedUrl"))

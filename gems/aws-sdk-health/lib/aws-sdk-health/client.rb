@@ -344,7 +344,7 @@ module Aws::Health
     # Before you can call this operation, you must first enable AWS Health
     # to work with AWS Organizations. To do this, call the
     # [EnableHealthServiceAccessForOrganization][2] operation from your
-    # organization's master account.
+    # organization's management account.
     #
     # <note markdown="1"> This API operation uses pagination. Specify the `nextToken` parameter
     # in the next request to return more results.
@@ -415,10 +415,19 @@ module Aws::Health
     # At least one event ARN is required. Results are sorted by the
     # `lastUpdatedTime` of the entity, starting with the most recent.
     #
-    # <note markdown="1"> This API operation uses pagination. Specify the `nextToken` parameter
-    # in the next request to return more results.
+    # <note markdown="1"> * This API operation uses pagination. Specify the `nextToken`
+    #   parameter in the next request to return more results.
+    #
+    # * This operation supports resource-level permissions. You can use this
+    #   operation to allow or deny access to specific AWS Health events. For
+    #   more information, see [Resource- and action-based conditions][1] in
+    #   the *AWS Health User Guide*.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions
     #
     # @option params [required, Types::EntityFilter] :filter
     #   Values to narrow the results returned. At least one event ARN is
@@ -507,16 +516,22 @@ module Aws::Health
     # Before you can call this operation, you must first enable AWS Health
     # to work with AWS Organizations. To do this, call the
     # [EnableHealthServiceAccessForOrganization][1] operation from your
-    # organization's master account.
+    # organization's management account.
     #
-    # <note markdown="1"> This API operation uses pagination. Specify the `nextToken` parameter
-    # in the next request to return more results.
+    # <note markdown="1"> * This API operation uses pagination. Specify the `nextToken`
+    #   parameter in the next request to return more results.
+    #
+    # * This operation doesn't support resource-level permissions. You
+    #   can't use this operation to allow or deny access to specific AWS
+    #   Health events. For more information, see [Resource- and action-based
+    #   conditions][2] in the *AWS Health User Guide*.
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html
+    # [2]: https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions
     #
     # @option params [required, Array<Types::EventAccountFilter>] :organization_entity_filters
     #   A JSON set of elements including the `awsAccountId` and the
@@ -713,19 +728,27 @@ module Aws::Health
     end
 
     # Returns detailed information about one or more specified events.
-    # Information includes standard event data (Region, service, and so on,
-    # as returned by [DescribeEvents][1]), a detailed event description, and
-    # possible additional metadata that depends upon the nature of the
+    # Information includes standard event data (AWS Region, service, and so
+    # on, as returned by [DescribeEvents][1]), a detailed event description,
+    # and possible additional metadata that depends upon the nature of the
     # event. Affected entities are not included. To retrieve those, use the
     # [DescribeAffectedEntities][2] operation.
     #
     # If a specified event cannot be retrieved, an error message is returned
     # for that event.
     #
+    # <note markdown="1"> This operation supports resource-level permissions. You can use this
+    # operation to allow or deny access to specific AWS Health events. For
+    # more information, see [Resource- and action-based conditions][3] in
+    # the *AWS Health User Guide*.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEvents.html
     # [2]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html
+    # [3]: https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions
     #
     # @option params [required, Array<String>] :event_arns
     #   A list of event ARNs (unique identifiers). For example:
@@ -781,7 +804,7 @@ module Aws::Health
 
     # Returns detailed information about one or more specified events for
     # one or more accounts in your organization. Information includes
-    # standard event data (Region, service, and so on, as returned by
+    # standard event data (AWS Region, service, and so on, as returned by
     # [DescribeEventsForOrganization][1]), a detailed event description, and
     # possible additional metadata that depends upon the nature of the
     # event. Affected entities are not included; to retrieve those, use the
@@ -790,7 +813,7 @@ module Aws::Health
     # Before you can call this operation, you must first enable AWS Health
     # to work with AWS Organizations. To do this, call the
     # [EnableHealthServiceAccessForOrganization][3] operation from your
-    # organization's master account.
+    # organization's management account.
     #
     # When you call the `DescribeEventDetailsForOrganization` operation, you
     # specify the `organizationEventDetailFilters` object in the request.
@@ -809,12 +832,20 @@ module Aws::Health
     #
     # For more information, see [Event][4].
     #
+    # <note markdown="1"> This operation doesn't support resource-level permissions. You can't
+    # use this operation to allow or deny access to specific AWS Health
+    # events. For more information, see [Resource- and action-based
+    # conditions][5] in the *AWS Health User Guide*.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html
     # [2]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html
     # [3]: https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html
     # [4]: https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html
+    # [5]: https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions
     #
     # @option params [required, Array<Types::EventAccountFilter>] :organization_event_detail_filters
     #   A set of JSON elements that includes the `awsAccountId` and the
@@ -874,14 +905,22 @@ module Aws::Health
       req.send_request(options)
     end
 
-    # Returns the event types that meet the specified filter criteria. If no
-    # filter criteria are specified, all event types are returned, in no
-    # particular order.
+    # Returns the event types that meet the specified filter criteria. You
+    # can use this API operation to find information about the AWS Health
+    # event, such as the category, AWS service, and event code. The metadata
+    # for each event appears in the [EventType][1] object.
+    #
+    # If you don't specify a filter criteria, the API operation returns all
+    # event types, in no particular order.
     #
     # <note markdown="1"> This API operation uses pagination. Specify the `nextToken` parameter
     # in the next request to return more results.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_EventType.html
     #
     # @option params [Types::EventTypeFilter] :filter
     #   Values to narrow the results returned.
@@ -1083,7 +1122,7 @@ module Aws::Health
     # Before you can call this operation, you must first enable AWS Health
     # to work with AWS Organizations. To do this, call the
     # [EnableHealthServiceAccessForOrganization][5] operation from your
-    # organization's master AWS account.
+    # organization's management account.
     #
     # <note markdown="1"> This API operation uses pagination. Specify the `nextToken` parameter
     # in the next request to return more results.
@@ -1180,7 +1219,7 @@ module Aws::Health
     # This operation provides status information on enabling or disabling
     # AWS Health to work with your organization. To call this operation, you
     # must sign in as an IAM user, assume an IAM role, or sign in as the
-    # root user (not recommended) in the organization's master account.
+    # root user (not recommended) in the organization's management account.
     #
     # @return [Types::DescribeHealthServiceStatusForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1202,15 +1241,15 @@ module Aws::Health
     # Disables AWS Health from working with AWS Organizations. To call this
     # operation, you must sign in as an AWS Identity and Access Management
     # (IAM) user, assume an IAM role, or sign in as the root user (not
-    # recommended) in the organization's master AWS account. For more
+    # recommended) in the organization's management account. For more
     # information, see [Aggregating AWS Health events][1] in the *AWS Health
     # User Guide*.
     #
-    # This operation doesn't remove the service-linked role (SLR) from the
-    # AWS master account in your organization. You must use the IAM console,
-    # API, or AWS Command Line Interface (AWS CLI) to remove the SLR. For
-    # more information, see [Deleting a Service-Linked Role][2] in the *IAM
-    # User Guide*.
+    # This operation doesn't remove the service-linked role from the
+    # management account in your organization. You must use the IAM console,
+    # API, or AWS Command Line Interface (AWS CLI) to remove the
+    # service-linked role. For more information, see [Deleting a
+    # Service-Linked Role][2] in the *IAM User Guide*.
     #
     # <note markdown="1"> You can also disable the organizational feature by using the
     # Organizations [DisableAWSServiceAccess][3] API operation. After you
@@ -1238,18 +1277,36 @@ module Aws::Health
       req.send_request(options)
     end
 
-    # Calling this operation enables AWS Health to work with AWS
-    # Organizations. This applies a service-linked role (SLR) to the master
-    # account in the organization. To call this operation, you must sign in
-    # as an IAM user, assume an IAM role, or sign in as the root user (not
-    # recommended) in the organization's master account.
+    # Enables AWS Health to work with AWS Organizations. You can use the
+    # organizational view feature to aggregate events from all AWS accounts
+    # in your organization in a centralized location.
     #
-    # For more information, see [Aggregating AWS Health events][1] in the
-    # *AWS Health User Guide*.
+    # This operation also creates a service-linked role for the management
+    # account in the organization.
+    #
+    # <note markdown="1"> To call this operation, you must meet the following requirements:
+    #
+    #  * You must have a Business or Enterprise support plan from [AWS
+    #   Support][1] to use the AWS Health API. If you call the AWS Health
+    #   API from an AWS account that doesn't have a Business or Enterprise
+    #   support plan, you receive a `SubscriptionRequiredException` error.
+    #
+    # * You must have permission to call this operation from the
+    #   organization's management account. For example IAM policies, see
+    #   [AWS Health identity-based policy examples][2].
+    #
+    #  </note>
+    #
+    # If you don't have the required support plan, you can instead use the
+    # AWS Health console to enable the organizational view feature. For more
+    # information, see [Aggregating AWS Health events][3] in the *AWS Health
+    # User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html
+    # [1]: http://aws.amazon.com/premiumsupport/
+    # [2]: https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html
+    # [3]: https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1275,7 +1332,7 @@ module Aws::Health
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-health'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

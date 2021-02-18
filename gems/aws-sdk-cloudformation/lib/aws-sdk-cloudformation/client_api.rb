@@ -29,6 +29,7 @@ module Aws::CloudFormation
     BoxedInteger = Shapes::IntegerShape.new(name: 'BoxedInteger')
     BoxedMaxResults = Shapes::IntegerShape.new(name: 'BoxedMaxResults')
     CFNRegistryException = Shapes::StructureShape.new(name: 'CFNRegistryException')
+    CallAs = Shapes::StringShape.new(name: 'CallAs')
     CancelUpdateStackInput = Shapes::StructureShape.new(name: 'CancelUpdateStackInput')
     Capabilities = Shapes::ListShape.new(name: 'Capabilities')
     CapabilitiesReason = Shapes::StringShape.new(name: 'CapabilitiesReason')
@@ -498,6 +499,7 @@ module Aws::CloudFormation
     CreateStackInstancesInput.add_member(:parameter_overrides, Shapes::ShapeRef.new(shape: Parameters, location_name: "ParameterOverrides"))
     CreateStackInstancesInput.add_member(:operation_preferences, Shapes::ShapeRef.new(shape: StackSetOperationPreferences, location_name: "OperationPreferences"))
     CreateStackInstancesInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId", metadata: {"idempotencyToken"=>true}))
+    CreateStackInstancesInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     CreateStackInstancesInput.struct_class = Types::CreateStackInstancesInput
 
     CreateStackInstancesOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId"))
@@ -517,6 +519,7 @@ module Aws::CloudFormation
     CreateStackSetInput.add_member(:execution_role_name, Shapes::ShapeRef.new(shape: ExecutionRoleName, location_name: "ExecutionRoleName"))
     CreateStackSetInput.add_member(:permission_model, Shapes::ShapeRef.new(shape: PermissionModels, location_name: "PermissionModel"))
     CreateStackSetInput.add_member(:auto_deployment, Shapes::ShapeRef.new(shape: AutoDeployment, location_name: "AutoDeployment"))
+    CreateStackSetInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     CreateStackSetInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateStackSetInput.struct_class = Types::CreateStackSetInput
 
@@ -544,12 +547,14 @@ module Aws::CloudFormation
     DeleteStackInstancesInput.add_member(:operation_preferences, Shapes::ShapeRef.new(shape: StackSetOperationPreferences, location_name: "OperationPreferences"))
     DeleteStackInstancesInput.add_member(:retain_stacks, Shapes::ShapeRef.new(shape: RetainStacks, required: true, location_name: "RetainStacks"))
     DeleteStackInstancesInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId", metadata: {"idempotencyToken"=>true}))
+    DeleteStackInstancesInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     DeleteStackInstancesInput.struct_class = Types::DeleteStackInstancesInput
 
     DeleteStackInstancesOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId"))
     DeleteStackInstancesOutput.struct_class = Types::DeleteStackInstancesOutput
 
     DeleteStackSetInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
+    DeleteStackSetInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     DeleteStackSetInput.struct_class = Types::DeleteStackSetInput
 
     DeleteStackSetOutput.struct_class = Types::DeleteStackSetOutput
@@ -622,6 +627,7 @@ module Aws::CloudFormation
     DescribeStackInstanceInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
     DescribeStackInstanceInput.add_member(:stack_instance_account, Shapes::ShapeRef.new(shape: Account, required: true, location_name: "StackInstanceAccount"))
     DescribeStackInstanceInput.add_member(:stack_instance_region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "StackInstanceRegion"))
+    DescribeStackInstanceInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     DescribeStackInstanceInput.struct_class = Types::DescribeStackInstanceInput
 
     DescribeStackInstanceOutput.add_member(:stack_instance, Shapes::ShapeRef.new(shape: StackInstance, location_name: "StackInstance"))
@@ -653,10 +659,12 @@ module Aws::CloudFormation
     DescribeStackResourcesOutput.struct_class = Types::DescribeStackResourcesOutput
 
     DescribeStackSetInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
+    DescribeStackSetInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     DescribeStackSetInput.struct_class = Types::DescribeStackSetInput
 
     DescribeStackSetOperationInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
     DescribeStackSetOperationInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "OperationId"))
+    DescribeStackSetOperationInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     DescribeStackSetOperationInput.struct_class = Types::DescribeStackSetOperationInput
 
     DescribeStackSetOperationOutput.add_member(:stack_set_operation, Shapes::ShapeRef.new(shape: StackSetOperation, location_name: "StackSetOperation"))
@@ -723,6 +731,7 @@ module Aws::CloudFormation
     DetectStackSetDriftInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, required: true, location_name: "StackSetName"))
     DetectStackSetDriftInput.add_member(:operation_preferences, Shapes::ShapeRef.new(shape: StackSetOperationPreferences, location_name: "OperationPreferences"))
     DetectStackSetDriftInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId", metadata: {"idempotencyToken"=>true}))
+    DetectStackSetDriftInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     DetectStackSetDriftInput.struct_class = Types::DetectStackSetDriftInput
 
     DetectStackSetDriftOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId"))
@@ -823,6 +832,7 @@ module Aws::CloudFormation
     ListStackInstancesInput.add_member(:filters, Shapes::ShapeRef.new(shape: StackInstanceFilters, location_name: "Filters"))
     ListStackInstancesInput.add_member(:stack_instance_account, Shapes::ShapeRef.new(shape: Account, location_name: "StackInstanceAccount"))
     ListStackInstancesInput.add_member(:stack_instance_region, Shapes::ShapeRef.new(shape: Region, location_name: "StackInstanceRegion"))
+    ListStackInstancesInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     ListStackInstancesInput.struct_class = Types::ListStackInstancesInput
 
     ListStackInstancesOutput.add_member(:summaries, Shapes::ShapeRef.new(shape: StackInstanceSummaries, location_name: "Summaries"))
@@ -841,6 +851,7 @@ module Aws::CloudFormation
     ListStackSetOperationResultsInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "OperationId"))
     ListStackSetOperationResultsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListStackSetOperationResultsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListStackSetOperationResultsInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     ListStackSetOperationResultsInput.struct_class = Types::ListStackSetOperationResultsInput
 
     ListStackSetOperationResultsOutput.add_member(:summaries, Shapes::ShapeRef.new(shape: StackSetOperationResultSummaries, location_name: "Summaries"))
@@ -850,6 +861,7 @@ module Aws::CloudFormation
     ListStackSetOperationsInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
     ListStackSetOperationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListStackSetOperationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListStackSetOperationsInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     ListStackSetOperationsInput.struct_class = Types::ListStackSetOperationsInput
 
     ListStackSetOperationsOutput.add_member(:summaries, Shapes::ShapeRef.new(shape: StackSetOperationSummaries, location_name: "Summaries"))
@@ -859,6 +871,7 @@ module Aws::CloudFormation
     ListStackSetsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListStackSetsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListStackSetsInput.add_member(:status, Shapes::ShapeRef.new(shape: StackSetStatus, location_name: "Status"))
+    ListStackSetsInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     ListStackSetsInput.struct_class = Types::ListStackSetsInput
 
     ListStackSetsOutput.add_member(:summaries, Shapes::ShapeRef.new(shape: StackSetSummaries, location_name: "Summaries"))
@@ -1341,6 +1354,7 @@ module Aws::CloudFormation
 
     StopStackSetOperationInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
     StopStackSetOperationInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "OperationId"))
+    StopStackSetOperationInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     StopStackSetOperationInput.struct_class = Types::StopStackSetOperationInput
 
     StopStackSetOperationOutput.struct_class = Types::StopStackSetOperationOutput
@@ -1411,6 +1425,7 @@ module Aws::CloudFormation
     UpdateStackInstancesInput.add_member(:parameter_overrides, Shapes::ShapeRef.new(shape: Parameters, location_name: "ParameterOverrides"))
     UpdateStackInstancesInput.add_member(:operation_preferences, Shapes::ShapeRef.new(shape: StackSetOperationPreferences, location_name: "OperationPreferences"))
     UpdateStackInstancesInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId", metadata: {"idempotencyToken"=>true}))
+    UpdateStackInstancesInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     UpdateStackInstancesInput.struct_class = Types::UpdateStackInstancesInput
 
     UpdateStackInstancesOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId"))
@@ -1436,6 +1451,7 @@ module Aws::CloudFormation
     UpdateStackSetInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId", metadata: {"idempotencyToken"=>true}))
     UpdateStackSetInput.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "Accounts"))
     UpdateStackSetInput.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "Regions"))
+    UpdateStackSetInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     UpdateStackSetInput.struct_class = Types::UpdateStackSetInput
 
     UpdateStackSetOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId"))

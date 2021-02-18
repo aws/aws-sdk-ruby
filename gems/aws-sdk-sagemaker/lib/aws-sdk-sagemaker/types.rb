@@ -1237,27 +1237,27 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudObjectDetection`
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudObjectDetection`
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudObjectDetection`
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudObjectDetection`
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudObjectDetection`
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudObjectDetection`
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudObjectDetection`
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudObjectDetection`
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudObjectDetection`
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudObjectDetection`
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
-    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudObjectDetection`
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudObjectDetection`
     #
     #   **3D Point Cloud Object Tracking Adjustment** - Use this task type
     #   when you want workers to adjust 3D cuboids around objects that
@@ -5677,17 +5677,77 @@ module Aws::SageMaker
     # @!attribute [rw] label_attribute_name
     #   The attribute name to use for the label in the output manifest file.
     #   This is the key for the key/value pair formed with the label that a
-    #   worker assigns to the object. The name can't end with
-    #   "-metadata". If you are running a semantic segmentation labeling
-    #   job, the attribute name must end with "-ref". If you are running
-    #   any other kind of labeling job, the attribute name must not end with
-    #   "-ref".
+    #   worker assigns to the object. The `LabelAttributeName` must meet the
+    #   following requirements.
+    #
+    #   * The name can't end with "-metadata".
+    #
+    #   * If you are using one of the following [built-in task types][1],
+    #     the attribute name *must* end with "-ref". If the task type you
+    #     are using is not listed below, the attribute name *must not* end
+    #     with "-ref".
+    #
+    #     * Image semantic segmentation (`SemanticSegmentation)`, and
+    #       adjustment (`AdjustmentSemanticSegmentation`) and verification
+    #       (`VerificationSemanticSegmentation`) labeling jobs for this task
+    #       type.
+    #
+    #     * Video frame object detection (`VideoObjectDetection`), and
+    #       adjustment and verification (`AdjustmentVideoObjectDetection`)
+    #       labeling jobs for this task type.
+    #
+    #     * Video frame object tracking (`VideoObjectTracking`), and
+    #       adjustment and verification (`AdjustmentVideoObjectTracking`)
+    #       labeling jobs for this task type.
+    #
+    #     * 3D point cloud semantic segmentation
+    #       (`3DPointCloudSemanticSegmentation`), and adjustment and
+    #       verification (`Adjustment3DPointCloudSemanticSegmentation`)
+    #       labeling jobs for this task type.
+    #
+    #     * 3D point cloud object tracking (`3DPointCloudObjectTracking`),
+    #       and adjustment and verification
+    #       (`Adjustment3DPointCloudObjectTracking`) labeling jobs for this
+    #       task type.
+    #
+    #
+    #
+    #   If you are creating an adjustment or verification labeling job, you
+    #   must use a *different* `LabelAttributeName` than the one used in the
+    #   original labeling job. The original labeling job is the Ground Truth
+    #   labeling job that produced the labels that you want verified or
+    #   adjusted. To learn more about adjustment and verification labeling
+    #   jobs, see [Verify and Adjust Labels][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html
     #   @return [String]
     #
     # @!attribute [rw] input_config
     #   Input data for the labeling job, such as the Amazon S3 location of
     #   the data objects and the location of the manifest file that
     #   describes the data objects.
+    #
+    #   You must specify at least one of the following: `S3DataSource` or
+    #   `SnsDataSource`.
+    #
+    #   * Use `SnsDataSource` to specify an SNS input topic for a streaming
+    #     labeling job. If you do not specify and SNS input topic ARN,
+    #     Ground Truth will create a one-time labeling job that stops after
+    #     all data objects in the input manifest file have been labeled.
+    #
+    #   * Use `S3DataSource` to specify an input manifest file for both
+    #     streaming and one-time labeling jobs. Adding an `S3DataSource` is
+    #     optional if you use `SnsDataSource` to create a streaming labeling
+    #     job.
+    #
+    #   If you use the Amazon Mechanical Turk workforce, your input data
+    #   should not include confidential information, personal information or
+    #   protected health information. Use `ContentClassifiers` to specify
+    #   that your data is free of personally identifiable information and
+    #   adult content.
     #   @return [Types::LabelingJobInputConfig]
     #
     # @!attribute [rw] output_config
@@ -5717,41 +5777,37 @@ module Aws::SageMaker
     #   following format. Identify the labels you want to use by replacing
     #   `label_1`, `label_2`,`...`,`label_n` with your label categories.
     #
-    #   `\{`
+    #   `\{ `
     #
-    #   ` "document-version": "2018-11-28"`
+    #   `"document-version": "2018-11-28",`
     #
-    #   ` "labels": [`
-    #
-    #   ` \{`
-    #
-    #   ` "label": "label_1"`
-    #
-    #   ` \},`
-    #
-    #   ` \{`
-    #
-    #   ` "label": "label_2"`
-    #
-    #   ` \},`
-    #
-    #   ` ...`
-    #
-    #   ` \{`
-    #
-    #   ` "label": "label_n"`
-    #
-    #   ` \}`
-    #
-    #   ` ]`
+    #   `"labels": [\{"label": "label_1"\},\{"label":
+    #   "label_2"\},...\{"label": "label_n"\}]`
     #
     #   `\}`
+    #
+    #   Note the following about the label category configuration file:
+    #
+    #   * For image classification and text classification (single and
+    #     multi-label) you must specify at least two label categories. For
+    #     all other task types, the minimum number of label categories
+    #     required is one.
+    #
+    #   * Each label category must be unique, you cannot specify duplicate
+    #     label categories.
+    #
+    #   * If you create a 3D point cloud or video frame adjustment or
+    #     verification labeling job, you must include
+    #     `auditLabelAttributeName` in the label category configuration. Use
+    #     this parameter to enter the [ `LabelAttributeName` ][4] of the
+    #     labeling job you want to adjust or verify annotations of.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-label-category-config.html
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html
     #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates.html
+    #   [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateLabelingJob.html#sagemaker-CreateLabelingJob-request-LabelAttributeName
     #   @return [String]
     #
     # @!attribute [rw] stopping_conditions
@@ -7177,6 +7233,7 @@ module Aws::SageMaker
     #         domain_id: "DomainId", # required
     #         user_profile_name: "UserProfileName", # required
     #         session_expiration_duration_in_seconds: 1,
+    #         expires_in_seconds: 1,
     #       }
     #
     # @!attribute [rw] domain_id
@@ -7188,7 +7245,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] session_expiration_duration_in_seconds
-    #   The session expiration duration in seconds.
+    #   The session expiration duration in seconds. This value defaults to
+    #   43200.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] expires_in_seconds
+    #   The number of seconds until the pre-signed URL expires. This value
+    #   defaults to 300.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedDomainUrlRequest AWS API Documentation
@@ -7196,7 +7259,8 @@ module Aws::SageMaker
     class CreatePresignedDomainUrlRequest < Struct.new(
       :domain_id,
       :user_profile_name,
-      :session_expiration_duration_in_seconds)
+      :session_expiration_duration_in_seconds,
+      :expires_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7354,7 +7418,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] processing_inputs
-    #   List of input configurations for the processing job.
+    #   An array of inputs configuring the data to download into the
+    #   processing container.
     #   @return [Array<Types::ProcessingInput>]
     #
     # @!attribute [rw] processing_output_config
@@ -7382,11 +7447,15 @@ module Aws::SageMaker
     #   @return [Types::AppSpecification]
     #
     # @!attribute [rw] environment
-    #   Sets the environment variables in the Docker container.
+    #   The environment variables to set in the Docker container. Up to 100
+    #   key and values entries in the map are supported.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] network_config
-    #   Networking options for a processing job.
+    #   Networking options for a processing job, such as whether to allow
+    #   inbound and outbound network calls to and from processing
+    #   containers, and the VPC subnets and security groups to use for
+    #   VPC-enabled processing jobs.
     #   @return [Types::NetworkConfig]
     #
     # @!attribute [rw] role_arn
@@ -10913,8 +10982,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] compilation_job_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
-    #   assumes to perform the model compilation job.
+    #   The Amazon Resource Name (ARN) of the model compilation job.
     #   @return [String]
     #
     # @!attribute [rw] compilation_job_status
@@ -10969,7 +11037,8 @@ module Aws::SageMaker
     #   @return [Types::ModelDigests]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the model compilation job.
+    #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
+    #   assumes to perform the model compilation job.
     #   @return [String]
     #
     # @!attribute [rw] input_config
@@ -14044,7 +14113,13 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] billable_time_in_seconds
-    #   The billable time in seconds.
+    #   The billable time in seconds. Billable time refers to the absolute
+    #   wall-clock time.
+    #
+    #   Multiply `BillableTimeInSeconds` by the number of instances
+    #   (`InstanceCount`) in your training cluster to get the total compute
+    #   time Amazon SageMaker will bill you if you run distributed training.
+    #   The formula is as follows: `BillableTimeInSeconds * InstanceCount` .
     #
     #   You can calculate the savings from using managed spot training using
     #   the formula `(1 - BillableTimeInSeconds / TrainingTimeInSeconds) *
@@ -16067,6 +16142,13 @@ module Aws::SageMaker
     # @!attribute [rw] s3_output_path
     #   The Amazon S3 path where the object containing human output will be
     #   made available.
+    #
+    #   To learn more about the format of Amazon A2I output data, see
+    #   [Amazon A2I Output Data][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-output-data.html
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -16424,11 +16506,33 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] workteam_arn
-    #   Amazon Resource Name (ARN) of a team of workers.
+    #   Amazon Resource Name (ARN) of a team of workers. To learn more about
+    #   the types of workforces and work teams you can create and use with
+    #   Amazon A2I, see [Create and Manage Workforces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-management.html
     #   @return [String]
     #
     # @!attribute [rw] human_task_ui_arn
     #   The Amazon Resource Name (ARN) of the human task user interface.
+    #
+    #   You can use standard HTML and Crowd HTML Elements to create a custom
+    #   worker task template. You use this template to create a human task
+    #   UI.
+    #
+    #   To learn how to create a custom HTML template, see [Create Custom
+    #   Worker Task Template][1].
+    #
+    #   To learn how to create a human task UI, which is a worker task
+    #   template that can be used in a flow definition, see [Create and
+    #   Delete a Worker Task Templates][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-custom-templates.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-worker-template-console.html
     #   @return [String]
     #
     # @!attribute [rw] task_title
@@ -16453,7 +16557,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] task_time_limit_in_seconds
     #   The amount of time that a worker has to complete a task. The default
-    #   value is 3,600 seconds (1 hour)
+    #   value is 3,600 seconds (1 hour).
     #   @return [Integer]
     #
     # @!attribute [rw] task_keywords
@@ -17424,14 +17528,40 @@ module Aws::SageMaker
     #
     # @!attribute [rw] task_time_limit_in_seconds
     #   The amount of time that a worker has to complete a task.
+    #
+    #   If you create a custom labeling job, the maximum value for this
+    #   parameter is 8 hours (28,800 seconds).
+    #
+    #   If you create a labeling job using a [built-in task type][1] the
+    #   maximum for this parameter depends on the task type you use:
+    #
+    #   * For [image][2] and [text][3] labeling jobs, the maximum is 8 hours
+    #     (28,800 seconds).
+    #
+    #   * For [3D point cloud][4] and [video frame][5] labeling jobs, the
+    #     maximum is 7 days (604,800 seconds).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-images.html
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-text.html
+    #   [4]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud.html
+    #   [5]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-video.html
     #   @return [Integer]
     #
     # @!attribute [rw] task_availability_lifetime_in_seconds
     #   The length of time that a task remains available for labeling by
-    #   human workers. **If you choose the Amazon Mechanical Turk workforce,
-    #   the maximum is 12 hours (43200)**. The default value is 864000
-    #   seconds (10 days). For private and vendor workforces, the maximum is
-    #   as listed.
+    #   human workers. The default and maximum values for this parameter
+    #   depend on the type of workforce you use.
+    #
+    #   * If you choose the Amazon Mechanical Turk workforce, the maximum is
+    #     12 hours (43,200 seconds). The default is 6 hours (21,600
+    #     seconds).
+    #
+    #   * If you choose a private or vendor workforce, the default value is
+    #     10 days (864,000 seconds). For most users, the maximum is also 10
+    #     days.
     #   @return [Integer]
     #
     # @!attribute [rw] max_concurrent_task_count
@@ -19274,6 +19404,25 @@ module Aws::SageMaker
     # @!attribute [rw] manifest_s3_uri
     #   The Amazon S3 location of the manifest file that describes the input
     #   data objects.
+    #
+    #   The input manifest file referenced in `ManifestS3Uri` must contain
+    #   one of the following keys: `source-ref` or `source`. The value of
+    #   the keys are interpreted as follows:
+    #
+    #   * `source-ref`\: The source of the object is the Amazon S3 object
+    #     specified in the value. Use this value when the object is a binary
+    #     object, such as an image.
+    #
+    #   * `source`\: The source of the object is the value. Use this value
+    #     when the object is a text value.
+    #
+    #   If you are a new user of Ground Truth, it is recommended you review
+    #   [Use an Input Manifest File ][1] in the Amazon SageMaker Developer
+    #   Guide to learn how to create an input manifest file.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-input-data-input-manifest.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobS3DataSource AWS API Documentation
@@ -27622,7 +27771,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] feature_group_name
     #   The name of the Amazon SageMaker FeatureGroup to use as the
-    #   destination for processing job output.
+    #   destination for processing job output. Note that your processing
+    #   script is responsible for putting records into your Feature Store.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProcessingFeatureStoreOutput AWS API Documentation
@@ -27679,7 +27829,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] input_name
-    #   The name of the inputs for the processing job.
+    #   The name for the processing job input.
     #   @return [String]
     #
     # @!attribute [rw] app_managed
@@ -27689,7 +27839,8 @@ module Aws::SageMaker
     #   @return [Boolean]
     #
     # @!attribute [rw] s3_input
-    #   Configuration for processing job inputs in Amazon S3.
+    #   Configuration for downloading input data from Amazon S3 into the
+    #   processing container.
     #   @return [Types::ProcessingS3Input]
     #
     # @!attribute [rw] dataset_definition
@@ -27720,7 +27871,7 @@ module Aws::SageMaker
     #   @return [Array<Types::ProcessingInput>]
     #
     # @!attribute [rw] processing_output_config
-    #   The output configuration for the processing job.
+    #   Configuration for uploading output from the processing container.
     #   @return [Types::ProcessingOutputConfig]
     #
     # @!attribute [rw] processing_job_name
@@ -27734,8 +27885,9 @@ module Aws::SageMaker
     #   @return [Types::ProcessingResources]
     #
     # @!attribute [rw] stopping_condition
-    #   Specifies a time limit for how long the processing job is allowed to
-    #   run.
+    #   Configures conditions under which the processing job should be
+    #   stopped, such as how long the processing job has been running. After
+    #   the condition is met, the processing job is stopped.
     #   @return [Types::ProcessingStoppingCondition]
     #
     # @!attribute [rw] app_specification
@@ -27973,7 +28125,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The output configuration for the processing job.
+    # Configuration for uploading output from the processing container.
     #
     # @note When making an API call, you may pass ProcessingOutputConfig
     #   data as a hash:
@@ -27997,7 +28149,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] outputs
-    #   List of output configurations for the processing job.
+    #   An array of outputs configuring the data to upload from the
+    #   processing container.
     #   @return [Array<Types::ProcessingOutput>]
     #
     # @!attribute [rw] kms_key_id
@@ -28045,7 +28198,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Configuration for processing job inputs in Amazon S3.
+    # Configuration for downloading input data from Amazon S3 into the
+    # processing container.
     #
     # @note When making an API call, you may pass ProcessingS3Input
     #   data as a hash:
@@ -28060,14 +28214,14 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] s3_uri
-    #   The URI for the Amazon S3 storage where you want Amazon SageMaker to
-    #   download the artifacts needed to run a processing job.
+    #   The URI of the Amazon S3 prefix Amazon SageMaker downloads data
+    #   required to run a processing job.
     #   @return [String]
     #
     # @!attribute [rw] local_path
-    #   The local path to the Amazon S3 bucket where you want Amazon
-    #   SageMaker to download the inputs to run a processing job.
-    #   `LocalPath` is an absolute path to the input data. This is a
+    #   The local path in your container where you want Amazon SageMaker to
+    #   write input data to. `LocalPath` is an absolute path to the input
+    #   data and must begin with `/opt/ml/processing/`. `LocalPath` is a
     #   required parameter when `AppManaged` is `False` (default).
     #   @return [String]
     #
@@ -28082,22 +28236,27 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] s3_input_mode
-    #   Whether to use `File` or `Pipe` input mode. In `File` mode, Amazon
-    #   SageMaker copies the data from the input source onto the local
-    #   Amazon Elastic Block Store (Amazon EBS) volumes before starting your
-    #   training algorithm. This is the most commonly used input mode. In
-    #   `Pipe` mode, Amazon SageMaker streams input data from the source
-    #   directly to your algorithm without using the EBS volume.This is a
-    #   required parameter when `AppManaged` is `False` (default).
+    #   Whether to use `File` or `Pipe` input mode. In File mode, Amazon
+    #   SageMaker copies the data from the input source onto the local ML
+    #   storage volume before starting your processing container. This is
+    #   the most commonly used input mode. In `Pipe` mode, Amazon SageMaker
+    #   streams input data from the source directly to your processing
+    #   container into named pipes without using the ML storage volume.
     #   @return [String]
     #
     # @!attribute [rw] s3_data_distribution_type
-    #   Whether the data stored in Amazon S3 is `FullyReplicated` or
-    #   `ShardedByS3Key`.
+    #   Whether to distribute the data from Amazon S3 to all processing
+    #   instances with `FullyReplicated`, or whether the data from Amazon S3
+    #   is shared by Amazon S3 key, downloading one shard of data to each
+    #   processing instance.
     #   @return [String]
     #
     # @!attribute [rw] s3_compression_type
-    #   Whether to use `Gzip` compression for Amazon S3 storage.
+    #   Whether to GZIP-decompress the data in Amazon S3 as it is streamed
+    #   into the processing container. `Gzip` can only be used when `Pipe`
+    #   mode is specified as the `S3InputMode`. In `Pipe` mode, Amazon
+    #   SageMaker streams input data from the source directly to your
+    #   container without using the EBS volume.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProcessingS3Input AWS API Documentation
@@ -28113,7 +28272,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Configuration for processing job outputs in Amazon S3.
+    # Configuration for uploading output data to Amazon S3 from the
+    # processing container.
     #
     # @note When making an API call, you may pass ProcessingS3Output
     #   data as a hash:
@@ -28130,9 +28290,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] local_path
-    #   The local path to the Amazon S3 bucket where you want Amazon
-    #   SageMaker to save the results of an processing job. `LocalPath` is
-    #   an absolute path to the input data.
+    #   The local path of a directory where you want Amazon SageMaker to
+    #   upload its contents to Amazon S3. `LocalPath` is an absolute path to
+    #   a directory containing output files. This directory will be created
+    #   by the platform and exist when your container's entrypoint is
+    #   invoked.
     #   @return [String]
     #
     # @!attribute [rw] s3_upload_mode
@@ -28150,8 +28312,9 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies a time limit for how long the processing job is allowed to
-    # run.
+    # Configures conditions under which the processing job should be
+    # stopped, such as how long the processing job has been running. After
+    # the condition is met, the processing job is stopped.
     #
     # @note When making an API call, you may pass ProcessingStoppingCondition
     #   data as a hash:
@@ -32831,7 +32994,7 @@ module Aws::SageMaker
     #
     #   Use this parameter when you are creating a labeling job for 3D point
     #   cloud and video fram labeling jobs. Use your labeling job task type
-    #   to select one of the following ARN's and use it with this parameter
+    #   to select one of the following ARNs and use it with this parameter
     #   when you create a labeling job. Replace `aws-region` with the AWS
     #   region you are creating your labeling job in.
     #

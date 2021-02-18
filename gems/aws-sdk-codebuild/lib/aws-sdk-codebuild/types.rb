@@ -340,8 +340,7 @@ module Aws::CodeBuild
     #   * For AWS CodePipeline, the source revision provided by AWS
     #     CodePipeline.
     #
-    #   * For Amazon Simple Storage Service (Amazon S3), this does not
-    #     apply.
+    #   * For Amazon S3, this does not apply.
     #   @return [String]
     #
     # @!attribute [rw] project_name
@@ -380,8 +379,8 @@ module Aws::CodeBuild
     #     used. If not specified, the default branch's HEAD commit ID is
     #     used.
     #
-    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
-    #     the object that represents the build input ZIP file to use.
+    #   * For Amazon S3: the version ID of the object that represents the
+    #     build input ZIP file to use.
     #   @return [Array<Types::ProjectSourceVersion>]
     #
     # @!attribute [rw] artifacts
@@ -624,8 +623,7 @@ module Aws::CodeBuild
     #   * For AWS CodePipeline, the source revision provided by AWS
     #     CodePipeline.
     #
-    #   * For Amazon Simple Storage Service (Amazon S3), this does not
-    #     apply.
+    #   * For Amazon S3, this does not apply.
     #   @return [String]
     #
     # @!attribute [rw] project_name
@@ -665,8 +663,8 @@ module Aws::CodeBuild
     #     used. If not specified, the default branch's HEAD commit ID is
     #     used.
     #
-    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
-    #     the object that represents the build input ZIP file to use.
+    #   * For Amazon S3: the version ID of the object that represents the
+    #     build input ZIP file to use.
     #   @return [Array<Types::ProjectSourceVersion>]
     #
     # @!attribute [rw] artifacts
@@ -906,7 +904,7 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] contexts
     #   Additional information about the batch build phase. Especially to
-    #   help troubleshoot a failed btach build.
+    #   help troubleshoot a failed batch build.
     #   @return [Array<Types::PhaseContext>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildBatchPhase AWS API Documentation
@@ -1559,8 +1557,8 @@ module Aws::CodeBuild
     #     used. If not specified, the default branch's HEAD commit ID is
     #     used.
     #
-    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
-    #     the object that represents the build input ZIP file to use.
+    #   * For Amazon S3: the version ID of the object that represents the
+    #     build input ZIP file to use.
     #
     #   If `sourceVersion` is specified at the build level, then that
     #   version takes precedence over this `sourceVersion` (at the project
@@ -1724,6 +1722,7 @@ module Aws::CodeBuild
     #           export_config_type: "S3", # accepts S3, NO_EXPORT
     #           s3_destination: {
     #             bucket: "NonEmptyString",
+    #             bucket_owner: "String",
     #             path: "String",
     #             packaging: "ZIP", # accepts ZIP, NONE
     #             encryption_key: "NonEmptyString",
@@ -3606,8 +3605,8 @@ module Aws::CodeBuild
     #     used. If not specified, the default branch's HEAD commit ID is
     #     used.
     #
-    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
-    #     the object that represents the build input ZIP file to use.
+    #   * For Amazon S3: the version ID of the object that represents the
+    #     build input ZIP file to use.
     #
     #   If `sourceVersion` is specified at the build level, then that
     #   version takes precedence over this `sourceVersion` (at the project
@@ -3792,8 +3791,7 @@ module Aws::CodeBuild
     #   * `NO_ARTIFACTS`\: The build project does not produce any build
     #     output.
     #
-    #   * `S3`\: The build project stores build output in Amazon Simple
-    #     Storage Service (Amazon S3).
+    #   * `S3`\: The build project stores build output in Amazon S3.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -3913,9 +3911,8 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] encryption_disabled
     #   Set to true if you do not want your output artifacts encrypted. This
-    #   option is valid only if your artifacts type is Amazon Simple Storage
-    #   Service (Amazon S3). If this is set with another artifacts type, an
-    #   invalidInputException is thrown.
+    #   option is valid only if your artifacts type is Amazon S3. If this is
+    #   set with another artifacts type, an invalidInputException is thrown.
     #   @return [Boolean]
     #
     # @!attribute [rw] artifact_identifier
@@ -4226,10 +4223,9 @@ module Aws::CodeBuild
     #   @return [Boolean]
     #
     # @!attribute [rw] certificate
-    #   The ARN of the Amazon Simple Storage Service (Amazon S3) bucket,
-    #   path prefix, and object key that contains the PEM-encoded
-    #   certificate for the build project. For more information, see
-    #   [certificate][1] in the *AWS CodeBuild User Guide*.
+    #   The ARN of the Amazon S3 bucket, path prefix, and object key that
+    #   contains the PEM-encoded certificate for the build project. For more
+    #   information, see [certificate][1] in the *AWS CodeBuild User Guide*.
     #
     #
     #
@@ -4391,8 +4387,7 @@ module Aws::CodeBuild
     #
     #   * `NO_SOURCE`\: The project does not have input source code.
     #
-    #   * `S3`\: The source code is in an Amazon Simple Storage Service
-    #     (Amazon S3) input bucket.
+    #   * `S3`\: The source code is in an Amazon S3 input bucket.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -4410,8 +4405,8 @@ module Aws::CodeBuild
     #     buildspec file (for example,
     #     `https://git-codecommit.<region-ID>.amazonaws.com/v1/repos/<repo-name>`).
     #
-    #   * For source code in an Amazon Simple Storage Service (Amazon S3)
-    #     input bucket, one of the following.
+    #   * For source code in an Amazon S3 input bucket, one of the
+    #     following.
     #
     #     * The path to the ZIP file that contains the source code (for
     #       example, `<bucket-name>/<path>/<object-name>.zip`).
@@ -4571,8 +4566,8 @@ module Aws::CodeBuild
     #     used. If not specified, the default branch's HEAD commit ID is
     #     used.
     #
-    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
-    #     the object that represents the build input ZIP file to use.
+    #   * For Amazon S3: the version ID of the object that represents the
+    #     build input ZIP file to use.
     #
     #   For more information, see [Source Version Sample with CodeBuild][1]
     #   in the *AWS CodeBuild User Guide*.
@@ -4781,6 +4776,7 @@ module Aws::CodeBuild
     #         export_config_type: "S3", # accepts S3, NO_EXPORT
     #         s3_destination: {
     #           bucket: "NonEmptyString",
+    #           bucket_owner: "String",
     #           path: "String",
     #           packaging: "ZIP", # accepts ZIP, NONE
     #           encryption_key: "NonEmptyString",
@@ -4956,7 +4952,7 @@ module Aws::CodeBuild
 
     # Represents a resolved build artifact. A resolve artifact is an
     # artifact that is built and deployed to the destination, such as Amazon
-    # Simple Storage Service (Amazon S3).
+    # S3.
     #
     # @!attribute [rw] type
     #   Specifies the type of artifact.
@@ -5131,6 +5127,7 @@ module Aws::CodeBuild
     #
     #       {
     #         bucket: "NonEmptyString",
+    #         bucket_owner: "String",
     #         path: "String",
     #         packaging: "ZIP", # accepts ZIP, NONE
     #         encryption_key: "NonEmptyString",
@@ -5140,6 +5137,12 @@ module Aws::CodeBuild
     # @!attribute [rw] bucket
     #   The name of the S3 bucket where the raw data of a report are
     #   exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_owner
+    #   The AWS account identifier of the owner of the Amazon S3 bucket.
+    #   This allows report data to be exported to an Amazon S3 bucket that
+    #   is owned by an account other than the account running the build.
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -5169,6 +5172,7 @@ module Aws::CodeBuild
     #
     class S3ReportExportConfig < Struct.new(
       :bucket,
+      :bucket_owner,
       :path,
       :packaging,
       :encryption_key,
@@ -5400,7 +5404,7 @@ module Aws::CodeBuild
     #     specified, the branch's HEAD commit ID is used. If not specified,
     #     the default branch's HEAD commit ID is used.
     #
-    #   Amazon Simple Storage Service (Amazon S3)
+    #   Amazon S3
     #
     #   : The version ID of the object that represents the build input ZIP
     #     file to use.
@@ -5806,7 +5810,7 @@ module Aws::CodeBuild
     #     specified, the branch's HEAD commit ID is used. If not specified,
     #     the default branch's HEAD commit ID is used.
     #
-    #   Amazon Simple Storage Service (Amazon S3)
+    #   Amazon S3
     #
     #   : The version ID of the object that represents the build input ZIP
     #     file to use.
@@ -6485,8 +6489,8 @@ module Aws::CodeBuild
     #     used. If not specified, the default branch's HEAD commit ID is
     #     used.
     #
-    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of
-    #     the object that represents the build input ZIP file to use.
+    #   * For Amazon S3: the version ID of the object that represents the
+    #     build input ZIP file to use.
     #
     #   If `sourceVersion` is specified at the build level, then that
     #   version takes precedence over this `sourceVersion` (at the project
@@ -6650,6 +6654,7 @@ module Aws::CodeBuild
     #           export_config_type: "S3", # accepts S3, NO_EXPORT
     #           s3_destination: {
     #             bucket: "NonEmptyString",
+    #             bucket_owner: "String",
     #             path: "String",
     #             packaging: "ZIP", # accepts ZIP, NONE
     #             encryption_key: "NonEmptyString",

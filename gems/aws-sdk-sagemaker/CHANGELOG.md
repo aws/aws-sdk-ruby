@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2021-02-18)
+------------------
+
+* Feature - This release adds expires-in-seconds parameter to the CreatePresignedDomainUrl API for support of a configurable TTL.
+
 1.77.0 (2021-02-09)
 ------------------
 

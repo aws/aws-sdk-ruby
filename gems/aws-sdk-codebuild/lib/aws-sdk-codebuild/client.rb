@@ -1102,6 +1102,7 @@ module Aws::CodeBuild
     #   resp.report_groups[0].type #=> String, one of "TEST", "CODE_COVERAGE"
     #   resp.report_groups[0].export_config.export_config_type #=> String, one of "S3", "NO_EXPORT"
     #   resp.report_groups[0].export_config.s3_destination.bucket #=> String
+    #   resp.report_groups[0].export_config.s3_destination.bucket_owner #=> String
     #   resp.report_groups[0].export_config.s3_destination.path #=> String
     #   resp.report_groups[0].export_config.s3_destination.packaging #=> String, one of "ZIP", "NONE"
     #   resp.report_groups[0].export_config.s3_destination.encryption_key #=> String
@@ -1153,6 +1154,7 @@ module Aws::CodeBuild
     #   resp.reports[0].expired #=> Time
     #   resp.reports[0].export_config.export_config_type #=> String, one of "S3", "NO_EXPORT"
     #   resp.reports[0].export_config.s3_destination.bucket #=> String
+    #   resp.reports[0].export_config.s3_destination.bucket_owner #=> String
     #   resp.reports[0].export_config.s3_destination.path #=> String
     #   resp.reports[0].export_config.s3_destination.packaging #=> String, one of "ZIP", "NONE"
     #   resp.reports[0].export_config.s3_destination.encryption_key #=> String
@@ -1213,8 +1215,8 @@ module Aws::CodeBuild
     #     a branch name is specified, the branch's HEAD commit ID is used. If
     #     not specified, the default branch's HEAD commit ID is used.
     #
-    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of the
-    #     object that represents the build input ZIP file to use.
+    #   * For Amazon S3: the version ID of the object that represents the
+    #     build input ZIP file to use.
     #
     #   If `sourceVersion` is specified at the build level, then that version
     #   takes precedence over this `sourceVersion` (at the project level).
@@ -1620,6 +1622,7 @@ module Aws::CodeBuild
     #       export_config_type: "S3", # accepts S3, NO_EXPORT
     #       s3_destination: {
     #         bucket: "NonEmptyString",
+    #         bucket_owner: "String",
     #         path: "String",
     #         packaging: "ZIP", # accepts ZIP, NONE
     #         encryption_key: "NonEmptyString",
@@ -1641,6 +1644,7 @@ module Aws::CodeBuild
     #   resp.report_group.type #=> String, one of "TEST", "CODE_COVERAGE"
     #   resp.report_group.export_config.export_config_type #=> String, one of "S3", "NO_EXPORT"
     #   resp.report_group.export_config.s3_destination.bucket #=> String
+    #   resp.report_group.export_config.s3_destination.bucket_owner #=> String
     #   resp.report_group.export_config.s3_destination.path #=> String
     #   resp.report_group.export_config.s3_destination.packaging #=> String, one of "ZIP", "NONE"
     #   resp.report_group.export_config.s3_destination.encryption_key #=> String
@@ -3332,7 +3336,7 @@ module Aws::CodeBuild
     #     specified, the branch's HEAD commit ID is used. If not specified,
     #     the default branch's HEAD commit ID is used.
     #
-    #   Amazon Simple Storage Service (Amazon S3)
+    #   Amazon S3
     #
     #   : The version ID of the object that represents the build input ZIP
     #     file to use.
@@ -3807,7 +3811,7 @@ module Aws::CodeBuild
     #     specified, the branch's HEAD commit ID is used. If not specified,
     #     the default branch's HEAD commit ID is used.
     #
-    #   Amazon Simple Storage Service (Amazon S3)
+    #   Amazon S3
     #
     #   : The version ID of the object that represents the build input ZIP
     #     file to use.
@@ -4583,8 +4587,8 @@ module Aws::CodeBuild
     #     a branch name is specified, the branch's HEAD commit ID is used. If
     #     not specified, the default branch's HEAD commit ID is used.
     #
-    #   * For Amazon Simple Storage Service (Amazon S3): the version ID of the
-    #     object that represents the build input ZIP file to use.
+    #   * For Amazon S3: the version ID of the object that represents the
+    #     build input ZIP file to use.
     #
     #   If `sourceVersion` is specified at the build level, then that version
     #   takes precedence over this `sourceVersion` (at the project level).
@@ -4991,6 +4995,7 @@ module Aws::CodeBuild
     #       export_config_type: "S3", # accepts S3, NO_EXPORT
     #       s3_destination: {
     #         bucket: "NonEmptyString",
+    #         bucket_owner: "String",
     #         path: "String",
     #         packaging: "ZIP", # accepts ZIP, NONE
     #         encryption_key: "NonEmptyString",
@@ -5012,6 +5017,7 @@ module Aws::CodeBuild
     #   resp.report_group.type #=> String, one of "TEST", "CODE_COVERAGE"
     #   resp.report_group.export_config.export_config_type #=> String, one of "S3", "NO_EXPORT"
     #   resp.report_group.export_config.s3_destination.bucket #=> String
+    #   resp.report_group.export_config.s3_destination.bucket_owner #=> String
     #   resp.report_group.export_config.s3_destination.path #=> String
     #   resp.report_group.export_config.s3_destination.packaging #=> String, one of "ZIP", "NONE"
     #   resp.report_group.export_config.s3_destination.encryption_key #=> String
@@ -5123,7 +5129,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

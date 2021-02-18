@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2021-02-18)
+------------------
+
+* Feature - Documentation updates for health
+
 1.32.0 (2021-02-02)
 ------------------
 

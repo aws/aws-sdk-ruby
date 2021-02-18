@@ -100,8 +100,8 @@ module Aws::CloudFormation
     # @option options [String] :template_url
     #   Location of file containing the template body. The URL must point to a
     #   template (max size: 460,800 bytes) that is located in an Amazon S3
-    #   bucket. For more information, go to the [Template Anatomy][1] in the
-    #   AWS CloudFormation User Guide.
+    #   bucket or a Systems Manager document. For more information, go to the
+    #   [Template Anatomy][1] in the AWS CloudFormation User Guide.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.

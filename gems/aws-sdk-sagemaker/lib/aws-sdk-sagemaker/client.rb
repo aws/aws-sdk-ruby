@@ -3010,15 +3010,76 @@ module Aws::SageMaker
     # @option params [required, String] :label_attribute_name
     #   The attribute name to use for the label in the output manifest file.
     #   This is the key for the key/value pair formed with the label that a
-    #   worker assigns to the object. The name can't end with "-metadata".
-    #   If you are running a semantic segmentation labeling job, the attribute
-    #   name must end with "-ref". If you are running any other kind of
-    #   labeling job, the attribute name must not end with "-ref".
+    #   worker assigns to the object. The `LabelAttributeName` must meet the
+    #   following requirements.
+    #
+    #   * The name can't end with "-metadata".
+    #
+    #   * If you are using one of the following [built-in task types][1], the
+    #     attribute name *must* end with "-ref". If the task type you are
+    #     using is not listed below, the attribute name *must not* end with
+    #     "-ref".
+    #
+    #     * Image semantic segmentation (`SemanticSegmentation)`, and
+    #       adjustment (`AdjustmentSemanticSegmentation`) and verification
+    #       (`VerificationSemanticSegmentation`) labeling jobs for this task
+    #       type.
+    #
+    #     * Video frame object detection (`VideoObjectDetection`), and
+    #       adjustment and verification (`AdjustmentVideoObjectDetection`)
+    #       labeling jobs for this task type.
+    #
+    #     * Video frame object tracking (`VideoObjectTracking`), and
+    #       adjustment and verification (`AdjustmentVideoObjectTracking`)
+    #       labeling jobs for this task type.
+    #
+    #     * 3D point cloud semantic segmentation
+    #       (`3DPointCloudSemanticSegmentation`), and adjustment and
+    #       verification (`Adjustment3DPointCloudSemanticSegmentation`)
+    #       labeling jobs for this task type.
+    #
+    #     * 3D point cloud object tracking (`3DPointCloudObjectTracking`), and
+    #       adjustment and verification
+    #       (`Adjustment3DPointCloudObjectTracking`) labeling jobs for this
+    #       task type.
+    #
+    #
+    #
+    #   If you are creating an adjustment or verification labeling job, you
+    #   must use a *different* `LabelAttributeName` than the one used in the
+    #   original labeling job. The original labeling job is the Ground Truth
+    #   labeling job that produced the labels that you want verified or
+    #   adjusted. To learn more about adjustment and verification labeling
+    #   jobs, see [Verify and Adjust Labels][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html
     #
     # @option params [required, Types::LabelingJobInputConfig] :input_config
     #   Input data for the labeling job, such as the Amazon S3 location of the
     #   data objects and the location of the manifest file that describes the
     #   data objects.
+    #
+    #   You must specify at least one of the following: `S3DataSource` or
+    #   `SnsDataSource`.
+    #
+    #   * Use `SnsDataSource` to specify an SNS input topic for a streaming
+    #     labeling job. If you do not specify and SNS input topic ARN, Ground
+    #     Truth will create a one-time labeling job that stops after all data
+    #     objects in the input manifest file have been labeled.
+    #
+    #   * Use `S3DataSource` to specify an input manifest file for both
+    #     streaming and one-time labeling jobs. Adding an `S3DataSource` is
+    #     optional if you use `SnsDataSource` to create a streaming labeling
+    #     job.
+    #
+    #   If you use the Amazon Mechanical Turk workforce, your input data
+    #   should not include confidential information, personal information or
+    #   protected health information. Use `ContentClassifiers` to specify that
+    #   your data is free of personally identifiable information and adult
+    #   content.
     #
     # @option params [required, Types::LabelingJobOutputConfig] :output_config
     #   The location of the output data and the AWS Key Management Service key
@@ -3044,41 +3105,37 @@ module Aws::SageMaker
     #   format. Identify the labels you want to use by replacing `label_1`,
     #   `label_2`,`...`,`label_n` with your label categories.
     #
-    #   `\{`
+    #   `\{ `
     #
-    #   ` "document-version": "2018-11-28"`
+    #   `"document-version": "2018-11-28",`
     #
-    #   ` "labels": [`
-    #
-    #   ` \{`
-    #
-    #   ` "label": "label_1"`
-    #
-    #   ` \},`
-    #
-    #   ` \{`
-    #
-    #   ` "label": "label_2"`
-    #
-    #   ` \},`
-    #
-    #   ` ...`
-    #
-    #   ` \{`
-    #
-    #   ` "label": "label_n"`
-    #
-    #   ` \}`
-    #
-    #   ` ]`
+    #   `"labels": [\{"label": "label_1"\},\{"label":
+    #   "label_2"\},...\{"label": "label_n"\}]`
     #
     #   `\}`
+    #
+    #   Note the following about the label category configuration file:
+    #
+    #   * For image classification and text classification (single and
+    #     multi-label) you must specify at least two label categories. For all
+    #     other task types, the minimum number of label categories required is
+    #     one.
+    #
+    #   * Each label category must be unique, you cannot specify duplicate
+    #     label categories.
+    #
+    #   * If you create a 3D point cloud or video frame adjustment or
+    #     verification labeling job, you must include
+    #     `auditLabelAttributeName` in the label category configuration. Use
+    #     this parameter to enter the [ `LabelAttributeName` ][4] of the
+    #     labeling job you want to adjust or verify annotations of.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-label-category-config.html
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html
     #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates.html
+    #   [4]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateLabelingJob.html#sagemaker-CreateLabelingJob-request-LabelAttributeName
     #
     # @option params [Types::LabelingJobStoppingConditions] :stopping_conditions
     #   A set of conditions for stopping the labeling job. If any of the
@@ -4513,9 +4570,10 @@ module Aws::SageMaker
     # This operation can only be called when the authentication mode equals
     # IAM.
     #
-    # <note markdown="1"> The URL that you get from a call to `CreatePresignedDomainUrl` is
-    # valid only for 5 minutes. If you try to use the URL after the 5-minute
-    # limit expires, you are directed to the AWS console sign-in page.
+    # <note markdown="1"> The URL that you get from a call to `CreatePresignedDomainUrl` has a
+    # default timeout of 5 minutes. You can configure this value using
+    # `ExpiresInSeconds`. If you try to use the URL after the timeout limit
+    # expires, you are directed to the AWS console sign-in page.
     #
     #  </note>
     #
@@ -4526,7 +4584,12 @@ module Aws::SageMaker
     #   The name of the UserProfile to sign-in as.
     #
     # @option params [Integer] :session_expiration_duration_in_seconds
-    #   The session expiration duration in seconds.
+    #   The session expiration duration in seconds. This value defaults to
+    #   43200.
+    #
+    # @option params [Integer] :expires_in_seconds
+    #   The number of seconds until the pre-signed URL expires. This value
+    #   defaults to 300.
     #
     # @return [Types::CreatePresignedDomainUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4538,6 +4601,7 @@ module Aws::SageMaker
     #     domain_id: "DomainId", # required
     #     user_profile_name: "UserProfileName", # required
     #     session_expiration_duration_in_seconds: 1,
+    #     expires_in_seconds: 1,
     #   })
     #
     # @example Response structure
@@ -4617,7 +4681,8 @@ module Aws::SageMaker
     # Creates a processing job.
     #
     # @option params [Array<Types::ProcessingInput>] :processing_inputs
-    #   List of input configurations for the processing job.
+    #   An array of inputs configuring the data to download into the
+    #   processing container.
     #
     # @option params [Types::ProcessingOutputConfig] :processing_output_config
     #   Output configuration for the processing job.
@@ -4639,10 +4704,14 @@ module Aws::SageMaker
     #   image.
     #
     # @option params [Hash<String,String>] :environment
-    #   Sets the environment variables in the Docker container.
+    #   The environment variables to set in the Docker container. Up to 100
+    #   key and values entries in the map are supported.
     #
     # @option params [Types::NetworkConfig] :network_config
-    #   Networking options for a processing job.
+    #   Networking options for a processing job, such as whether to allow
+    #   inbound and outbound network calls to and from processing containers,
+    #   and the VPC subnets and security groups to use for VPC-enabled
+    #   processing jobs.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
@@ -13842,6 +13911,27 @@ module Aws::SageMaker
 
     # Lists training jobs.
     #
+    # <note markdown="1"> When `StatusEquals` and `MaxResults` are set at the same time, the
+    # `MaxResults` number of training jobs are first retrieved ignoring the
+    # `StatusEquals` parameter and then they are filtered by the
+    # `StatusEquals` parameter, which is returned as a response. For
+    # example, if `ListTrainingJobs` is invoked with the following
+    # parameters:
+    #
+    #  `\{ ... MaxResults: 100, StatusEquals: InProgress ... \}`
+    #
+    #  Then, 100 trainings jobs with any status including those other than
+    # `InProgress` are selected first (sorted according the creation time,
+    # from the latest to the oldest) and those with status `InProgress` are
+    # returned.
+    #
+    #  You can quickly test the API using the following AWS CLI code.
+    #
+    #  `aws sagemaker list-training-jobs --max-results 100 --status-equals
+    # InProgress`
+    #
+    #  </note>
+    #
     # @option params [String] :next_token
     #   If the result of the previous `ListTrainingJobs` request was
     #   truncated, the response includes a `NextToken`. To retrieve the next
@@ -17195,7 +17285,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

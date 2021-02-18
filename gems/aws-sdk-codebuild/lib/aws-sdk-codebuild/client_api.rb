@@ -987,6 +987,7 @@ module Aws::CodeBuild
     S3LogsConfig.struct_class = Types::S3LogsConfig
 
     S3ReportExportConfig.add_member(:bucket, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "bucket"))
+    S3ReportExportConfig.add_member(:bucket_owner, Shapes::ShapeRef.new(shape: String, location_name: "bucketOwner"))
     S3ReportExportConfig.add_member(:path, Shapes::ShapeRef.new(shape: String, location_name: "path"))
     S3ReportExportConfig.add_member(:packaging, Shapes::ShapeRef.new(shape: ReportPackagingType, location_name: "packaging"))
     S3ReportExportConfig.add_member(:encryption_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "encryptionKey"))
