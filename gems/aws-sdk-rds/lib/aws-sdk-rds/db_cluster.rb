@@ -929,7 +929,7 @@ module Aws::RDS
     #
     #   **Aurora PostgreSQL**
     #
-    #   Possible values are `postgresql` and `upgrade`.
+    #   Possible value is `postgresql`.
     #
     #
     #

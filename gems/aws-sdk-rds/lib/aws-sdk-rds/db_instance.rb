@@ -570,6 +570,12 @@ module Aws::RDS
       data[:customer_owned_ip_enabled]
     end
 
+    # The Amazon Resource Name (ARN) of the recovery point in AWS Backup.
+    # @return [String]
+    def aws_backup_recovery_point_arn
+      data[:aws_backup_recovery_point_arn]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -2186,6 +2192,7 @@ module Aws::RDS
     #     certificate_rotation_restart: false,
     #     replica_mode: "open-read-only", # accepts open-read-only, mounted
     #     enable_customer_owned_ip: false,
+    #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -2802,6 +2809,8 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
+    # @option options [String] :aws_backup_recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point in AWS Backup.
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)

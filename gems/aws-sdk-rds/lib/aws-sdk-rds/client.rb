@@ -2142,7 +2142,7 @@ module Aws::RDS
     #
     #   **Aurora PostgreSQL**
     #
-    #   Possible values are `postgresql` and `upgrade`.
+    #   Possible value is `postgresql`.
     #
     #
     #
@@ -3874,6 +3874,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -4531,6 +4532,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -6108,6 +6110,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -8292,6 +8295,7 @@ module Aws::RDS
     #   resp.db_instances[0].db_instance_automated_backups_replications #=> Array
     #   resp.db_instances[0].db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instances[0].customer_owned_ip_enabled #=> Boolean
+    #   resp.db_instances[0].aws_backup_recovery_point_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -13129,6 +13133,9 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
     #
+    # @option params [String] :aws_backup_recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point in AWS Backup.
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -13210,6 +13217,7 @@ module Aws::RDS
     #     certificate_rotation_restart: false,
     #     replica_mode: "open-read-only", # accepts open-read-only, mounted
     #     enable_customer_owned_ip: false,
+    #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #   })
     #
     # @example Response structure
@@ -13337,6 +13345,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -14473,6 +14482,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -14885,6 +14895,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -17225,6 +17236,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -17803,6 +17815,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -18429,6 +18442,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -18873,6 +18887,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -19436,6 +19451,7 @@ module Aws::RDS
     #   resp.db_instance.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -19523,7 +19539,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.114.0'
+      context[:gem_version] = '1.115.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

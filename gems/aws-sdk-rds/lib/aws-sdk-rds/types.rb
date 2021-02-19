@@ -2093,7 +2093,7 @@ module Aws::RDS
     #
     #   **Aurora PostgreSQL**
     #
-    #   Possible values are `postgresql` and `upgrade`.
+    #   Possible value is `postgresql`.
     #
     #
     #
@@ -6580,6 +6580,10 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
     #   @return [Boolean]
     #
+    # @!attribute [rw] aws_backup_recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point in AWS Backup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -6645,7 +6649,8 @@ module Aws::RDS
       :max_allocated_storage,
       :tag_list,
       :db_instance_automated_backups_replications,
-      :customer_owned_ip_enabled)
+      :customer_owned_ip_enabled,
+      :aws_backup_recovery_point_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13670,6 +13675,7 @@ module Aws::RDS
     #         certificate_rotation_restart: false,
     #         replica_mode: "open-read-only", # accepts open-read-only, mounted
     #         enable_customer_owned_ip: false,
+    #         aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -14392,6 +14398,10 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing
     #   @return [Boolean]
     #
+    # @!attribute [rw] aws_backup_recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point in AWS Backup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -14438,7 +14448,8 @@ module Aws::RDS
       :max_allocated_storage,
       :certificate_rotation_restart,
       :replica_mode,
-      :enable_customer_owned_ip)
+      :enable_customer_owned_ip,
+      :aws_backup_recovery_point_arn)
       SENSITIVE = []
       include Aws::Structure
     end

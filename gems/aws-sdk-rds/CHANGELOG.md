@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2021-02-19)
+------------------
+
+* Feature - Added awsBackupRecoveryPointArn in ModifyDBInstanceRequest and in the response of ModifyDBInstance.
+
 1.114.0 (2021-02-12)
 ------------------
 
