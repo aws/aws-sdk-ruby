@@ -26,6 +26,7 @@ module Aws::SageMakerRuntime
     ModelError = Shapes::StructureShape.new(name: 'ModelError')
     ServiceUnavailable = Shapes::StructureShape.new(name: 'ServiceUnavailable')
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
+    TargetContainerHostnameHeader = Shapes::StringShape.new(name: 'TargetContainerHostnameHeader')
     TargetModelHeader = Shapes::StringShape.new(name: 'TargetModelHeader')
     TargetVariantHeader = Shapes::StringShape.new(name: 'TargetVariantHeader')
     ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
@@ -40,6 +41,7 @@ module Aws::SageMakerRuntime
     InvokeEndpointInput.add_member(:custom_attributes, Shapes::ShapeRef.new(shape: CustomAttributesHeader, location: "header", location_name: "X-Amzn-SageMaker-Custom-Attributes"))
     InvokeEndpointInput.add_member(:target_model, Shapes::ShapeRef.new(shape: TargetModelHeader, location: "header", location_name: "X-Amzn-SageMaker-Target-Model"))
     InvokeEndpointInput.add_member(:target_variant, Shapes::ShapeRef.new(shape: TargetVariantHeader, location: "header", location_name: "X-Amzn-SageMaker-Target-Variant"))
+    InvokeEndpointInput.add_member(:target_container_hostname, Shapes::ShapeRef.new(shape: TargetContainerHostnameHeader, location: "header", location_name: "X-Amzn-SageMaker-Target-Container-Hostname"))
     InvokeEndpointInput.add_member(:inference_id, Shapes::ShapeRef.new(shape: InferenceId, location: "header", location_name: "X-Amzn-SageMaker-Inference-Id"))
     InvokeEndpointInput.struct_class = Types::InvokeEndpointInput
     InvokeEndpointInput[:payload] = :body

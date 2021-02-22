@@ -672,6 +672,8 @@ module Aws::SageMaker
     ImageVersionStatus = Shapes::StringShape.new(name: 'ImageVersionStatus')
     ImageVersions = Shapes::ListShape.new(name: 'ImageVersions')
     Images = Shapes::ListShape.new(name: 'Images')
+    InferenceExecutionConfig = Shapes::StructureShape.new(name: 'InferenceExecutionConfig')
+    InferenceExecutionMode = Shapes::StringShape.new(name: 'InferenceExecutionMode')
     InferenceSpecification = Shapes::StructureShape.new(name: 'InferenceSpecification')
     InputConfig = Shapes::StructureShape.new(name: 'InputConfig')
     InputDataConfig = Shapes::ListShape.new(name: 'InputDataConfig')
@@ -1077,6 +1079,7 @@ module Aws::SageMaker
     ProductListings = Shapes::ListShape.new(name: 'ProductListings')
     ProductionVariant = Shapes::StructureShape.new(name: 'ProductionVariant')
     ProductionVariantAcceleratorType = Shapes::StringShape.new(name: 'ProductionVariantAcceleratorType')
+    ProductionVariantCoreDumpConfig = Shapes::StructureShape.new(name: 'ProductionVariantCoreDumpConfig')
     ProductionVariantInstanceType = Shapes::StringShape.new(name: 'ProductionVariantInstanceType')
     ProductionVariantList = Shapes::ListShape.new(name: 'ProductionVariantList')
     ProductionVariantSummary = Shapes::StructureShape.new(name: 'ProductionVariantSummary')
@@ -2091,6 +2094,7 @@ module Aws::SageMaker
     CreateModelInput.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
     CreateModelInput.add_member(:primary_container, Shapes::ShapeRef.new(shape: ContainerDefinition, location_name: "PrimaryContainer"))
     CreateModelInput.add_member(:containers, Shapes::ShapeRef.new(shape: ContainerDefinitionList, location_name: "Containers"))
+    CreateModelInput.add_member(:inference_execution_config, Shapes::ShapeRef.new(shape: InferenceExecutionConfig, location_name: "InferenceExecutionConfig"))
     CreateModelInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ExecutionRoleArn"))
     CreateModelInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateModelInput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
@@ -3018,6 +3022,7 @@ module Aws::SageMaker
     DescribeModelOutput.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
     DescribeModelOutput.add_member(:primary_container, Shapes::ShapeRef.new(shape: ContainerDefinition, location_name: "PrimaryContainer"))
     DescribeModelOutput.add_member(:containers, Shapes::ShapeRef.new(shape: ContainerDefinitionList, location_name: "Containers"))
+    DescribeModelOutput.add_member(:inference_execution_config, Shapes::ShapeRef.new(shape: InferenceExecutionConfig, location_name: "InferenceExecutionConfig"))
     DescribeModelOutput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ExecutionRoleArn"))
     DescribeModelOutput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     DescribeModelOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
@@ -3804,6 +3809,9 @@ module Aws::SageMaker
     ImageVersions.member = Shapes::ShapeRef.new(shape: ImageVersion)
 
     Images.member = Shapes::ShapeRef.new(shape: Image)
+
+    InferenceExecutionConfig.add_member(:mode, Shapes::ShapeRef.new(shape: InferenceExecutionMode, required: true, location_name: "Mode"))
+    InferenceExecutionConfig.struct_class = Types::InferenceExecutionConfig
 
     InferenceSpecification.add_member(:containers, Shapes::ShapeRef.new(shape: ModelPackageContainerDefinitionList, required: true, location_name: "Containers"))
     InferenceSpecification.add_member(:supported_transform_instance_types, Shapes::ShapeRef.new(shape: TransformInstanceTypes, location_name: "SupportedTransformInstanceTypes"))
@@ -5278,7 +5286,12 @@ module Aws::SageMaker
     ProductionVariant.add_member(:instance_type, Shapes::ShapeRef.new(shape: ProductionVariantInstanceType, required: true, location_name: "InstanceType"))
     ProductionVariant.add_member(:initial_variant_weight, Shapes::ShapeRef.new(shape: VariantWeight, location_name: "InitialVariantWeight"))
     ProductionVariant.add_member(:accelerator_type, Shapes::ShapeRef.new(shape: ProductionVariantAcceleratorType, location_name: "AcceleratorType"))
+    ProductionVariant.add_member(:core_dump_config, Shapes::ShapeRef.new(shape: ProductionVariantCoreDumpConfig, location_name: "CoreDumpConfig"))
     ProductionVariant.struct_class = Types::ProductionVariant
+
+    ProductionVariantCoreDumpConfig.add_member(:destination_s3_uri, Shapes::ShapeRef.new(shape: DestinationS3Uri, required: true, location_name: "DestinationS3Uri"))
+    ProductionVariantCoreDumpConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    ProductionVariantCoreDumpConfig.struct_class = Types::ProductionVariantCoreDumpConfig
 
     ProductionVariantList.member = Shapes::ShapeRef.new(shape: ProductionVariant)
 

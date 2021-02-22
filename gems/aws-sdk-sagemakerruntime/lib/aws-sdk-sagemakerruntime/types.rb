@@ -34,6 +34,7 @@ module Aws::SageMakerRuntime
     #         custom_attributes: "CustomAttributesHeader",
     #         target_model: "TargetModelHeader",
     #         target_variant: "TargetVariantHeader",
+    #         target_container_hostname: "TargetContainerHostnameHeader",
     #         inference_id: "InferenceId",
     #       }
     #
@@ -112,6 +113,12 @@ module Aws::SageMakerRuntime
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-ab-testing.html
     #   @return [String]
     #
+    # @!attribute [rw] target_container_hostname
+    #   If the endpoint hosts multiple containers and is configured to use
+    #   direct invocation, this parameter specifies the host name of the
+    #   container to invoke.
+    #   @return [String]
+    #
     # @!attribute [rw] inference_id
     #   If you provide a value, it is added to the captured data when you
     #   enable data capture on the endpoint. For information about data
@@ -132,6 +139,7 @@ module Aws::SageMakerRuntime
       :custom_attributes,
       :target_model,
       :target_variant,
+      :target_container_hostname,
       :inference_id)
       SENSITIVE = [:body, :custom_attributes]
       include Aws::Structure

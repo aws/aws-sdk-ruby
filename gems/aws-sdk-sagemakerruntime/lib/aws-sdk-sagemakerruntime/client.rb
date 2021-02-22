@@ -426,6 +426,11 @@ module Aws::SageMakerRuntime
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-ab-testing.html
     #
+    # @option params [String] :target_container_hostname
+    #   If the endpoint hosts multiple containers and is configured to use
+    #   direct invocation, this parameter specifies the host name of the
+    #   container to invoke.
+    #
     # @option params [String] :inference_id
     #   If you provide a value, it is added to the captured data when you
     #   enable data capture on the endpoint. For information about data
@@ -452,6 +457,7 @@ module Aws::SageMakerRuntime
     #     custom_attributes: "CustomAttributesHeader",
     #     target_model: "TargetModelHeader",
     #     target_variant: "TargetVariantHeader",
+    #     target_container_hostname: "TargetContainerHostnameHeader",
     #     inference_id: "InferenceId",
     #   })
     #
@@ -484,7 +490,7 @@ module Aws::SageMakerRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

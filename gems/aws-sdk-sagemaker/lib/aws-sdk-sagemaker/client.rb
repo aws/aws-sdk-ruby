@@ -2088,6 +2088,10 @@ module Aws::SageMaker
     #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
     #         initial_variant_weight: 1.0,
     #         accelerator_type: "ml.eia1.medium", # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge
+    #         core_dump_config: {
+    #           destination_s3_uri: "DestinationS3Uri", # required
+    #           kms_key_id: "KmsKeyId",
+    #         },
     #       },
     #     ],
     #     data_capture_config: {
@@ -3294,6 +3298,10 @@ module Aws::SageMaker
     # @option params [Array<Types::ContainerDefinition>] :containers
     #   Specifies the containers in the inference pipeline.
     #
+    # @option params [Types::InferenceExecutionConfig] :inference_execution_config
+    #   Specifies details of how containers in a multi-container endpoint are
+    #   called.
+    #
     # @option params [required, String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
     #   can assume to access model artifacts and docker image for deployment
@@ -3378,6 +3386,9 @@ module Aws::SageMaker
     #         },
     #       },
     #     ],
+    #     inference_execution_config: {
+    #       mode: "Serial", # required, accepts Serial, Direct
+    #     },
     #     execution_role_arn: "RoleArn", # required
     #     tags: [
     #       {
@@ -8116,6 +8127,8 @@ module Aws::SageMaker
     #   resp.production_variants[0].instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.12xlarge", "ml.m5d.24xlarge", "ml.c4.large", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5d.large", "ml.c5d.xlarge", "ml.c5d.2xlarge", "ml.c5d.4xlarge", "ml.c5d.9xlarge", "ml.c5d.18xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.12xlarge", "ml.r5.24xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.12xlarge", "ml.r5d.24xlarge", "ml.inf1.xlarge", "ml.inf1.2xlarge", "ml.inf1.6xlarge", "ml.inf1.24xlarge"
     #   resp.production_variants[0].initial_variant_weight #=> Float
     #   resp.production_variants[0].accelerator_type #=> String, one of "ml.eia1.medium", "ml.eia1.large", "ml.eia1.xlarge", "ml.eia2.medium", "ml.eia2.large", "ml.eia2.xlarge"
+    #   resp.production_variants[0].core_dump_config.destination_s3_uri #=> String
+    #   resp.production_variants[0].core_dump_config.kms_key_id #=> String
     #   resp.data_capture_config.enable_capture #=> Boolean
     #   resp.data_capture_config.initial_sampling_percentage #=> Integer
     #   resp.data_capture_config.destination_s3_uri #=> String
@@ -8778,6 +8791,7 @@ module Aws::SageMaker
     #   * {Types::DescribeModelOutput#model_name #model_name} => String
     #   * {Types::DescribeModelOutput#primary_container #primary_container} => Types::ContainerDefinition
     #   * {Types::DescribeModelOutput#containers #containers} => Array&lt;Types::ContainerDefinition&gt;
+    #   * {Types::DescribeModelOutput#inference_execution_config #inference_execution_config} => Types::InferenceExecutionConfig
     #   * {Types::DescribeModelOutput#execution_role_arn #execution_role_arn} => String
     #   * {Types::DescribeModelOutput#vpc_config #vpc_config} => Types::VpcConfig
     #   * {Types::DescribeModelOutput#creation_time #creation_time} => Time
@@ -8812,6 +8826,7 @@ module Aws::SageMaker
     #   resp.containers[0].environment["EnvironmentKey"] #=> String
     #   resp.containers[0].model_package_name #=> String
     #   resp.containers[0].multi_model_config.model_cache_setting #=> String, one of "Enabled", "Disabled"
+    #   resp.inference_execution_config.mode #=> String, one of "Serial", "Direct"
     #   resp.execution_role_arn #=> String
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
@@ -17285,7 +17300,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

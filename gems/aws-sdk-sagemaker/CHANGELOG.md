@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2021-02-22)
+------------------
+
+* Feature - Amazon SageMaker now supports core dump for SageMaker Endpoints and direct invocation of a single container in a SageMaker Endpoint that hosts multiple containers.
+
 1.78.0 (2021-02-18)
 ------------------
 

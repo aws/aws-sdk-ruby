@@ -4566,6 +4566,10 @@ module Aws::SageMaker
     #             instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
     #             initial_variant_weight: 1.0,
     #             accelerator_type: "ml.eia1.medium", # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge
+    #             core_dump_config: {
+    #               destination_s3_uri: "DestinationS3Uri", # required
+    #               kms_key_id: "KmsKeyId",
+    #             },
     #           },
     #         ],
     #         data_capture_config: {
@@ -6211,6 +6215,9 @@ module Aws::SageMaker
     #             },
     #           },
     #         ],
+    #         inference_execution_config: {
+    #           mode: "Serial", # required, accepts Serial, Direct
+    #         },
     #         execution_role_arn: "RoleArn", # required
     #         tags: [
     #           {
@@ -6238,6 +6245,11 @@ module Aws::SageMaker
     # @!attribute [rw] containers
     #   Specifies the containers in the inference pipeline.
     #   @return [Array<Types::ContainerDefinition>]
+    #
+    # @!attribute [rw] inference_execution_config
+    #   Specifies details of how containers in a multi-container endpoint
+    #   are called.
+    #   @return [Types::InferenceExecutionConfig]
     #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
@@ -6291,6 +6303,7 @@ module Aws::SageMaker
       :model_name,
       :primary_container,
       :containers,
+      :inference_execution_config,
       :execution_role_arn,
       :tags,
       :vpc_config,
@@ -12762,6 +12775,11 @@ module Aws::SageMaker
     #   The containers in the inference pipeline.
     #   @return [Array<Types::ContainerDefinition>]
     #
+    # @!attribute [rw] inference_execution_config
+    #   Specifies details of how containers in a multi-container endpoint
+    #   are called.
+    #   @return [Types::InferenceExecutionConfig]
+    #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that you specified
     #   for the model.
@@ -12796,6 +12814,7 @@ module Aws::SageMaker
       :model_name,
       :primary_container,
       :containers,
+      :inference_execution_config,
       :execution_role_arn,
       :vpc_config,
       :creation_time,
@@ -17539,7 +17558,8 @@ module Aws::SageMaker
     #     (28,800 seconds).
     #
     #   * For [3D point cloud][4] and [video frame][5] labeling jobs, the
-    #     maximum is 7 days (604,800 seconds).
+    #     maximum is 7 days (604,800 seconds). If you want to change these
+    #     limits, contact AWS Support.
     #
     #
     #
@@ -17561,7 +17581,7 @@ module Aws::SageMaker
     #
     #   * If you choose a private or vendor workforce, the default value is
     #     10 days (864,000 seconds). For most users, the maximum is also 10
-    #     days.
+    #     days. If you want to change this limit, contact AWS Support.
     #   @return [Integer]
     #
     # @!attribute [rw] max_concurrent_task_count
@@ -18522,6 +18542,32 @@ module Aws::SageMaker
       :image_version_status,
       :last_modified_time,
       :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies details about how containers in a multi-container are run.
+    #
+    # @note When making an API call, you may pass InferenceExecutionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         mode: "Serial", # required, accepts Serial, Direct
+    #       }
+    #
+    # @!attribute [rw] mode
+    #   How containers in a multi-container are run. The following values
+    #   are valid.
+    #
+    #   * `SERIAL` - Containers run as a serial pipeline.
+    #
+    #   * `DIRECT` - Only the individual container that you specify is run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceExecutionConfig AWS API Documentation
+    #
+    class InferenceExecutionConfig < Struct.new(
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27207,8 +27253,8 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
-    #   [2]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #   [1]: https://docs.aws.amazon.com/mazonS3/latest/dev/UsingKMSEncryption.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
     #   @return [String]
     #
     # @!attribute [rw] s3_output_path
@@ -28350,6 +28396,10 @@ module Aws::SageMaker
     #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
     #         initial_variant_weight: 1.0,
     #         accelerator_type: "ml.eia1.medium", # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge
+    #         core_dump_config: {
+    #           destination_s3_uri: "DestinationS3Uri", # required
+    #           kms_key_id: "KmsKeyId",
+    #         },
     #       }
     #
     # @!attribute [rw] variant_name
@@ -28388,6 +28438,11 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
     #   @return [String]
     #
+    # @!attribute [rw] core_dump_config
+    #   Specifies configuration for a core dump from the model container
+    #   when the process crashes.
+    #   @return [Types::ProductionVariantCoreDumpConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariant AWS API Documentation
     #
     class ProductionVariant < Struct.new(
@@ -28396,7 +28451,77 @@ module Aws::SageMaker
       :initial_instance_count,
       :instance_type,
       :initial_variant_weight,
-      :accelerator_type)
+      :accelerator_type,
+      :core_dump_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies configuration for a core dump from the model container when
+    # the process crashes.
+    #
+    # @note When making an API call, you may pass ProductionVariantCoreDumpConfig
+    #   data as a hash:
+    #
+    #       {
+    #         destination_s3_uri: "DestinationS3Uri", # required
+    #         kms_key_id: "KmsKeyId",
+    #       }
+    #
+    # @!attribute [rw] destination_s3_uri
+    #   The Amazon S3 bucket to send the core dump to.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS Key Management Service (AWS KMS) key that Amazon SageMaker
+    #   uses to encrypt the core dump data at rest using Amazon S3
+    #   server-side encryption. The `KmsKeyId` can be any of the following
+    #   formats:
+    #
+    #   * // KMS Key ID
+    #
+    #     `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key
+    #
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * // KMS Key Alias
+    #
+    #     `"alias/ExampleAlias"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key Alias
+    #
+    #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
+    #
+    #   If you use a KMS key ID or an alias of your master key, the Amazon
+    #   SageMaker execution role must include permissions to call
+    #   `kms:Encrypt`. If you don't provide a KMS key ID, Amazon SageMaker
+    #   uses the default KMS key for Amazon S3 for your role's account.
+    #   Amazon SageMaker uses server-side encryption with KMS-managed keys
+    #   for `OutputDataConfig`. If you use a bucket policy with an
+    #   `s3:PutObject` permission that only allows objects with server-side
+    #   encryption, set the condition key of
+    #   `s3:x-amz-server-side-encryption` to `"aws:kms"`. For more
+    #   information, see [KMS-Managed Encryption Keys][1] in the *Amazon
+    #   Simple Storage Service Developer Guide.*
+    #
+    #   The KMS key policy must grant permission to the IAM role that you
+    #   specify in your `CreateEndpoint` and `UpdateEndpoint` requests. For
+    #   more information, see [Using Key Policies in AWS KMS][2] in the *AWS
+    #   Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantCoreDumpConfig AWS API Documentation
+    #
+    class ProductionVariantCoreDumpConfig < Struct.new(
+      :destination_s3_uri,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
