@@ -91,6 +91,15 @@ module Aws::AutoScaling
     #   The details about the activity.
     #   @return [String]
     #
+    # @!attribute [rw] auto_scaling_group_state
+    #   The state of the Auto Scaling group, which is either `InService` or
+    #   `Deleted`.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_scaling_group_arn
+    #   The Amazon Resource Name (ARN) of the Auto Scaling group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Activity AWS API Documentation
     #
     class Activity < Struct.new(
@@ -103,7 +112,9 @@ module Aws::AutoScaling
       :status_code,
       :status_message,
       :progress,
-      :details)
+      :details,
+      :auto_scaling_group_state,
+      :auto_scaling_group_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2226,6 +2237,7 @@ module Aws::AutoScaling
     #       {
     #         activity_ids: ["XmlString"],
     #         auto_scaling_group_name: "XmlStringMaxLen255",
+    #         include_deleted_groups: false,
     #         max_records: 1,
     #         next_token: "XmlString",
     #       }
@@ -2242,6 +2254,11 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group.
     #   @return [String]
     #
+    # @!attribute [rw] include_deleted_groups
+    #   Indicates whether to include scaling activity from deleted Auto
+    #   Scaling groups.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] max_records
     #   The maximum number of items to return with this call. The default
     #   value is `100` and the maximum value is `100`.
@@ -2257,6 +2274,7 @@ module Aws::AutoScaling
     class DescribeScalingActivitiesType < Struct.new(
       :activity_ids,
       :auto_scaling_group_name,
+      :include_deleted_groups,
       :max_records,
       :next_token)
       SENSITIVE = []

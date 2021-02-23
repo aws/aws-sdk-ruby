@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2021-02-23)
+------------------
+
+* Feature - This release adds an Analyze feature to AWS IoT Events that lets customers analyze their detector models for runtime issues.
+
 1.21.0 (2021-02-02)
 ------------------
 

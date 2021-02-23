@@ -1807,10 +1807,12 @@ module Aws::QuickSight
     #
     # @!attribute [rw] type
     #   The type of the data source. Currently, the supported types for this
-    #   operation are: `ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL,
-    #   POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER,
-    #   TERADATA`. Use `ListDataSources` to return a list of all data
-    #   sources.
+    #   operation are: `ATHENA, AURORA, AURORA_POSTGRESQL,
+    #   AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT,
+    #   S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA`. Use `ListDataSources` to
+    #   return a list of all data sources.
+    #
+    #   `AMAZON_ELASTICSEARCH` is for Amazon managed Elasticsearch Service.
     #   @return [String]
     #
     # @!attribute [rw] data_source_parameters
@@ -9259,7 +9261,18 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The row-level security configuration for the dataset.
+    # Information about a dataset that contains permissions for row-level
+    # security (RLS). The permissions dataset maps fields to users or
+    # groups. For more information, see [Using Row-Level Security (RLS) to
+    # Restrict Access to a Dataset][1] in the *Amazon QuickSight User
+    # Guide*.
+    #
+    # The option to deny permissions by setting `PermissionPolicy` to
+    # `DENY_ACCESS` is not supported for new RLS datasets.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html
     #
     # @note When making an API call, you may pass RowLevelPermissionDataSet
     #   data as a hash:
@@ -9271,15 +9284,18 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] namespace
-    #   The namespace associated with the row-level permissions dataset.
+    #   The namespace associated with the dataset that contains permissions
+    #   for RLS.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the permission dataset.
+    #   The Amazon Resource Name (ARN) of the dataset that contains
+    #   permissions for RLS.
     #   @return [String]
     #
     # @!attribute [rw] permission_policy
-    #   Permission policy.
+    #   The type of permissions to use when interpretting the permissions
+    #   for RLS. `DENY_ACCESS` is included for backward compatibility only.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RowLevelPermissionDataSet AWS API Documentation
@@ -9340,7 +9356,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] data_source_arn
-    #   The amazon Resource Name (ARN) for the data source.
+    #   The Amazon Resource Name (ARN) for the data source.
     #   @return [String]
     #
     # @!attribute [rw] upload_settings

@@ -473,6 +473,8 @@ module Aws::Pinpoint
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #               origination_number: "__string",
     #               sender_id: "__string",
+    #               entity_id: "__string",
+    #               template_id: "__string",
     #             },
     #           },
     #           schedule: {
@@ -633,6 +635,8 @@ module Aws::Pinpoint
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #           origination_number: "__string",
     #           sender_id: "__string",
+    #           entity_id: "__string",
+    #           template_id: "__string",
     #         },
     #       },
     #       name: "__string",
@@ -772,6 +776,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.entity_id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.template_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
@@ -890,6 +896,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaign_response.message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
+    #   resp.campaign_response.message_configuration.sms_message.entity_id #=> String
+    #   resp.campaign_response.message_configuration.sms_message.template_id #=> String
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
@@ -1363,6 +1371,8 @@ module Aws::Pinpoint
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #               origination_number: "__string",
     #               sender_id: "__string",
+    #               entity_id: "__string",
+    #               template_id: "__string",
     #             },
     #             next_activity: "__string",
     #             template_name: "__string",
@@ -1567,6 +1577,8 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.journey_response.activities["__string"].sms.message_config.origination_number #=> String
     #   resp.journey_response.activities["__string"].sms.message_config.sender_id #=> String
+    #   resp.journey_response.activities["__string"].sms.message_config.entity_id #=> String
+    #   resp.journey_response.activities["__string"].sms.message_config.template_id #=> String
     #   resp.journey_response.activities["__string"].sms.next_activity #=> String
     #   resp.journey_response.activities["__string"].sms.template_name #=> String
     #   resp.journey_response.activities["__string"].sms.template_version #=> String
@@ -2487,6 +2499,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.entity_id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.template_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
@@ -2605,6 +2619,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaign_response.message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
+    #   resp.campaign_response.message_configuration.sms_message.entity_id #=> String
+    #   resp.campaign_response.message_configuration.sms_message.template_id #=> String
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
@@ -3009,6 +3025,8 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.journey_response.activities["__string"].sms.message_config.origination_number #=> String
     #   resp.journey_response.activities["__string"].sms.message_config.sender_id #=> String
+    #   resp.journey_response.activities["__string"].sms.message_config.entity_id #=> String
+    #   resp.journey_response.activities["__string"].sms.message_config.template_id #=> String
     #   resp.journey_response.activities["__string"].sms.next_activity #=> String
     #   resp.journey_response.activities["__string"].sms.template_name #=> String
     #   resp.journey_response.activities["__string"].sms.template_version #=> String
@@ -3948,6 +3966,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.entity_id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.template_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
@@ -4066,6 +4086,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaign_response.message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
+    #   resp.campaign_response.message_configuration.sms_message.entity_id #=> String
+    #   resp.campaign_response.message_configuration.sms_message.template_id #=> String
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
@@ -4318,6 +4340,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.entity_id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.template_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
@@ -4436,6 +4460,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaign_response.message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
+    #   resp.campaign_response.message_configuration.sms_message.entity_id #=> String
+    #   resp.campaign_response.message_configuration.sms_message.template_id #=> String
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
@@ -4582,6 +4608,8 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.sender_id #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.entity_id #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.template_id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.end_time #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
@@ -4700,6 +4728,8 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaigns_response.item[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaigns_response.item[0].message_configuration.sms_message.sender_id #=> String
+    #   resp.campaigns_response.item[0].message_configuration.sms_message.entity_id #=> String
+    #   resp.campaigns_response.item[0].message_configuration.sms_message.template_id #=> String
     #   resp.campaigns_response.item[0].name #=> String
     #   resp.campaigns_response.item[0].schedule.end_time #=> String
     #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes #=> Hash
@@ -4845,6 +4875,8 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.sender_id #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.entity_id #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.sms_message.template_id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.end_time #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
     #   resp.campaigns_response.item[0].additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
@@ -4963,6 +4995,8 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaigns_response.item[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaigns_response.item[0].message_configuration.sms_message.sender_id #=> String
+    #   resp.campaigns_response.item[0].message_configuration.sms_message.entity_id #=> String
+    #   resp.campaigns_response.item[0].message_configuration.sms_message.template_id #=> String
     #   resp.campaigns_response.item[0].name #=> String
     #   resp.campaigns_response.item[0].schedule.end_time #=> String
     #   resp.campaigns_response.item[0].schedule.event_filter.dimensions.attributes #=> Hash
@@ -5626,6 +5660,8 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.journey_response.activities["__string"].sms.message_config.origination_number #=> String
     #   resp.journey_response.activities["__string"].sms.message_config.sender_id #=> String
+    #   resp.journey_response.activities["__string"].sms.message_config.entity_id #=> String
+    #   resp.journey_response.activities["__string"].sms.message_config.template_id #=> String
     #   resp.journey_response.activities["__string"].sms.next_activity #=> String
     #   resp.journey_response.activities["__string"].sms.template_name #=> String
     #   resp.journey_response.activities["__string"].sms.template_version #=> String
@@ -7021,6 +7057,8 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.journeys_response.item[0].activities["__string"].sms.message_config.origination_number #=> String
     #   resp.journeys_response.item[0].activities["__string"].sms.message_config.sender_id #=> String
+    #   resp.journeys_response.item[0].activities["__string"].sms.message_config.entity_id #=> String
+    #   resp.journeys_response.item[0].activities["__string"].sms.message_config.template_id #=> String
     #   resp.journeys_response.item[0].activities["__string"].sms.next_activity #=> String
     #   resp.journeys_response.item[0].activities["__string"].sms.template_name #=> String
     #   resp.journeys_response.item[0].activities["__string"].sms.template_version #=> String
@@ -7616,6 +7654,8 @@ module Aws::Pinpoint
     #           substitutions: {
     #             "__string" => ["__string"],
     #           },
+    #           entity_id: "__string",
+    #           template_id: "__string",
     #         },
     #         voice_message: {
     #           body: "__string",
@@ -7841,6 +7881,8 @@ module Aws::Pinpoint
     #           substitutions: {
     #             "__string" => ["__string"],
     #           },
+    #           entity_id: "__string",
+    #           template_id: "__string",
     #         },
     #         voice_message: {
     #           body: "__string",
@@ -8439,6 +8481,8 @@ module Aws::Pinpoint
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #               origination_number: "__string",
     #               sender_id: "__string",
+    #               entity_id: "__string",
+    #               template_id: "__string",
     #             },
     #           },
     #           schedule: {
@@ -8599,6 +8643,8 @@ module Aws::Pinpoint
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #           origination_number: "__string",
     #           sender_id: "__string",
+    #           entity_id: "__string",
+    #           template_id: "__string",
     #         },
     #       },
     #       name: "__string",
@@ -8738,6 +8784,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.sender_id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.entity_id #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.sms_message.template_id #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.end_time #=> String
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes #=> Hash
     #   resp.campaign_response.additional_treatments[0].schedule.event_filter.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE", "CONTAINS", "BEFORE", "AFTER", "BETWEEN", "ON"
@@ -8856,6 +8904,8 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.sms_message.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.campaign_response.message_configuration.sms_message.origination_number #=> String
     #   resp.campaign_response.message_configuration.sms_message.sender_id #=> String
+    #   resp.campaign_response.message_configuration.sms_message.entity_id #=> String
+    #   resp.campaign_response.message_configuration.sms_message.template_id #=> String
     #   resp.campaign_response.name #=> String
     #   resp.campaign_response.schedule.end_time #=> String
     #   resp.campaign_response.schedule.event_filter.dimensions.attributes #=> Hash
@@ -9481,6 +9531,8 @@ module Aws::Pinpoint
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #               origination_number: "__string",
     #               sender_id: "__string",
+    #               entity_id: "__string",
+    #               template_id: "__string",
     #             },
     #             next_activity: "__string",
     #             template_name: "__string",
@@ -9685,6 +9737,8 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.journey_response.activities["__string"].sms.message_config.origination_number #=> String
     #   resp.journey_response.activities["__string"].sms.message_config.sender_id #=> String
+    #   resp.journey_response.activities["__string"].sms.message_config.entity_id #=> String
+    #   resp.journey_response.activities["__string"].sms.message_config.template_id #=> String
     #   resp.journey_response.activities["__string"].sms.next_activity #=> String
     #   resp.journey_response.activities["__string"].sms.template_name #=> String
     #   resp.journey_response.activities["__string"].sms.template_version #=> String
@@ -9893,6 +9947,8 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.journey_response.activities["__string"].sms.message_config.origination_number #=> String
     #   resp.journey_response.activities["__string"].sms.message_config.sender_id #=> String
+    #   resp.journey_response.activities["__string"].sms.message_config.entity_id #=> String
+    #   resp.journey_response.activities["__string"].sms.message_config.template_id #=> String
     #   resp.journey_response.activities["__string"].sms.next_activity #=> String
     #   resp.journey_response.activities["__string"].sms.template_name #=> String
     #   resp.journey_response.activities["__string"].sms.template_version #=> String
@@ -10625,7 +10681,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

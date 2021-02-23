@@ -1215,6 +1215,32 @@ module Aws::IoTEvents
       req.send_request(options)
     end
 
+    # Retrieves execution information about a detector model analysis
+    #
+    # @option params [required, String] :analysis_id
+    #   The ID of the analysis result that you want to retrieve.
+    #
+    # @return [Types::DescribeDetectorModelAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDetectorModelAnalysisResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_detector_model_analysis({
+    #     analysis_id: "AnalysisId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "RUNNING", "COMPLETE", "FAILED"
+    #
+    # @overload describe_detector_model_analysis(params = {})
+    # @param [Hash] params ({})
+    def describe_detector_model_analysis(params = {}, options = {})
+      req = build_request(:describe_detector_model_analysis, params)
+      req.send_request(options)
+    end
+
     # Describes an input.
     #
     # @option params [required, String] :input_name
@@ -1270,6 +1296,47 @@ module Aws::IoTEvents
       req.send_request(options)
     end
 
+    # Retrieves one or more analysis results of the detector model.
+    #
+    # @option params [required, String] :analysis_id
+    #   The ID of the analysis result that you want to retrieve.
+    #
+    # @option params [String] :next_token
+    #   The token that you can use to return the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @return [Types::GetDetectorModelAnalysisResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDetectorModelAnalysisResultsResponse#analysis_results #analysis_results} => Array&lt;Types::AnalysisResult&gt;
+    #   * {Types::GetDetectorModelAnalysisResultsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_detector_model_analysis_results({
+    #     analysis_id: "AnalysisId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analysis_results #=> Array
+    #   resp.analysis_results[0].type #=> String
+    #   resp.analysis_results[0].level #=> String, one of "INFO", "WARNING", "ERROR"
+    #   resp.analysis_results[0].message #=> String
+    #   resp.analysis_results[0].locations #=> Array
+    #   resp.analysis_results[0].locations[0].path #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload get_detector_model_analysis_results(params = {})
+    # @param [Hash] params ({})
+    def get_detector_model_analysis_results(params = {}, options = {})
+      req = build_request(:get_detector_model_analysis_results, params)
+      req.send_request(options)
+    end
+
     # Lists all the versions of a detector model. Only the metadata
     # associated with each detector model version is returned.
     #
@@ -1277,10 +1344,10 @@ module Aws::IoTEvents
     #   The name of the detector model whose versions are returned.
     #
     # @option params [String] :next_token
-    #   The token for the next set of results.
+    #   The token that you can use to return the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return at one time.
+    #   The maximum number of results to be returned per request.
     #
     # @return [Types::ListDetectorModelVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1319,10 +1386,10 @@ module Aws::IoTEvents
     # associated with each detector model is returned.
     #
     # @option params [String] :next_token
-    #   The token for the next set of results.
+    #   The token that you can use to return the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return at one time.
+    #   The maximum number of results to be returned per request.
     #
     # @return [Types::ListDetectorModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1354,10 +1421,10 @@ module Aws::IoTEvents
     # Lists the inputs you have created.
     #
     # @option params [String] :next_token
-    #   The token for the next set of results.
+    #   The token that you can use to return the next set of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return at one time.
+    #   The maximum number of results to be returned per request.
     #
     # @return [Types::ListInputsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1450,6 +1517,492 @@ module Aws::IoTEvents
     # @param [Hash] params ({})
     def put_logging_options(params = {}, options = {})
       req = build_request(:put_logging_options, params)
+      req.send_request(options)
+    end
+
+    # Performs an analysis of your detector model. For more information, see
+    # [Running detector model analyses][1] in the *AWS IoT Events Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html
+    #
+    # @option params [required, Types::DetectorModelDefinition] :detector_model_definition
+    #   Information that defines how a detector operates.
+    #
+    # @return [Types::StartDetectorModelAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDetectorModelAnalysisResponse#analysis_id #analysis_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_detector_model_analysis({
+    #     detector_model_definition: { # required
+    #       states: [ # required
+    #         {
+    #           state_name: "StateName", # required
+    #           on_input: {
+    #             events: [
+    #               {
+    #                 event_name: "EventName", # required
+    #                 condition: "Condition",
+    #                 actions: [
+    #                   {
+    #                     set_variable: {
+    #                       variable_name: "VariableName", # required
+    #                       value: "VariableValue", # required
+    #                     },
+    #                     sns: {
+    #                       target_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     iot_topic_publish: {
+    #                       mqtt_topic: "MQTTTopic", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     set_timer: {
+    #                       timer_name: "TimerName", # required
+    #                       seconds: 1,
+    #                       duration_expression: "VariableValue",
+    #                     },
+    #                     clear_timer: {
+    #                       timer_name: "TimerName", # required
+    #                     },
+    #                     reset_timer: {
+    #                       timer_name: "TimerName", # required
+    #                     },
+    #                     lambda: {
+    #                       function_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     iot_events: {
+    #                       input_name: "InputName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     sqs: {
+    #                       queue_url: "QueueUrl", # required
+    #                       use_base_64: false,
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     firehose: {
+    #                       delivery_stream_name: "DeliveryStreamName", # required
+    #                       separator: "FirehoseSeparator",
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_db: {
+    #                       hash_key_type: "DynamoKeyType",
+    #                       hash_key_field: "DynamoKeyField", # required
+    #                       hash_key_value: "DynamoKeyValue", # required
+    #                       range_key_type: "DynamoKeyType",
+    #                       range_key_field: "DynamoKeyField",
+    #                       range_key_value: "DynamoKeyValue",
+    #                       operation: "DynamoOperation",
+    #                       payload_field: "DynamoKeyField",
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_d_bv_2: {
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     iot_site_wise: {
+    #                       entry_id: "AssetPropertyEntryId",
+    #                       asset_id: "AssetId",
+    #                       property_id: "AssetPropertyId",
+    #                       property_alias: "AssetPropertyAlias",
+    #                       property_value: { # required
+    #                         value: { # required
+    #                           string_value: "AssetPropertyStringValue",
+    #                           integer_value: "AssetPropertyIntegerValue",
+    #                           double_value: "AssetPropertyDoubleValue",
+    #                           boolean_value: "AssetPropertyBooleanValue",
+    #                         },
+    #                         timestamp: {
+    #                           time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                           offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                         },
+    #                         quality: "AssetPropertyQuality",
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             transition_events: [
+    #               {
+    #                 event_name: "EventName", # required
+    #                 condition: "Condition", # required
+    #                 actions: [
+    #                   {
+    #                     set_variable: {
+    #                       variable_name: "VariableName", # required
+    #                       value: "VariableValue", # required
+    #                     },
+    #                     sns: {
+    #                       target_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     iot_topic_publish: {
+    #                       mqtt_topic: "MQTTTopic", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     set_timer: {
+    #                       timer_name: "TimerName", # required
+    #                       seconds: 1,
+    #                       duration_expression: "VariableValue",
+    #                     },
+    #                     clear_timer: {
+    #                       timer_name: "TimerName", # required
+    #                     },
+    #                     reset_timer: {
+    #                       timer_name: "TimerName", # required
+    #                     },
+    #                     lambda: {
+    #                       function_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     iot_events: {
+    #                       input_name: "InputName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     sqs: {
+    #                       queue_url: "QueueUrl", # required
+    #                       use_base_64: false,
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     firehose: {
+    #                       delivery_stream_name: "DeliveryStreamName", # required
+    #                       separator: "FirehoseSeparator",
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_db: {
+    #                       hash_key_type: "DynamoKeyType",
+    #                       hash_key_field: "DynamoKeyField", # required
+    #                       hash_key_value: "DynamoKeyValue", # required
+    #                       range_key_type: "DynamoKeyType",
+    #                       range_key_field: "DynamoKeyField",
+    #                       range_key_value: "DynamoKeyValue",
+    #                       operation: "DynamoOperation",
+    #                       payload_field: "DynamoKeyField",
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_d_bv_2: {
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     iot_site_wise: {
+    #                       entry_id: "AssetPropertyEntryId",
+    #                       asset_id: "AssetId",
+    #                       property_id: "AssetPropertyId",
+    #                       property_alias: "AssetPropertyAlias",
+    #                       property_value: { # required
+    #                         value: { # required
+    #                           string_value: "AssetPropertyStringValue",
+    #                           integer_value: "AssetPropertyIntegerValue",
+    #                           double_value: "AssetPropertyDoubleValue",
+    #                           boolean_value: "AssetPropertyBooleanValue",
+    #                         },
+    #                         timestamp: {
+    #                           time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                           offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                         },
+    #                         quality: "AssetPropertyQuality",
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
+    #                 next_state: "StateName", # required
+    #               },
+    #             ],
+    #           },
+    #           on_enter: {
+    #             events: [
+    #               {
+    #                 event_name: "EventName", # required
+    #                 condition: "Condition",
+    #                 actions: [
+    #                   {
+    #                     set_variable: {
+    #                       variable_name: "VariableName", # required
+    #                       value: "VariableValue", # required
+    #                     },
+    #                     sns: {
+    #                       target_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     iot_topic_publish: {
+    #                       mqtt_topic: "MQTTTopic", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     set_timer: {
+    #                       timer_name: "TimerName", # required
+    #                       seconds: 1,
+    #                       duration_expression: "VariableValue",
+    #                     },
+    #                     clear_timer: {
+    #                       timer_name: "TimerName", # required
+    #                     },
+    #                     reset_timer: {
+    #                       timer_name: "TimerName", # required
+    #                     },
+    #                     lambda: {
+    #                       function_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     iot_events: {
+    #                       input_name: "InputName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     sqs: {
+    #                       queue_url: "QueueUrl", # required
+    #                       use_base_64: false,
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     firehose: {
+    #                       delivery_stream_name: "DeliveryStreamName", # required
+    #                       separator: "FirehoseSeparator",
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_db: {
+    #                       hash_key_type: "DynamoKeyType",
+    #                       hash_key_field: "DynamoKeyField", # required
+    #                       hash_key_value: "DynamoKeyValue", # required
+    #                       range_key_type: "DynamoKeyType",
+    #                       range_key_field: "DynamoKeyField",
+    #                       range_key_value: "DynamoKeyValue",
+    #                       operation: "DynamoOperation",
+    #                       payload_field: "DynamoKeyField",
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_d_bv_2: {
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     iot_site_wise: {
+    #                       entry_id: "AssetPropertyEntryId",
+    #                       asset_id: "AssetId",
+    #                       property_id: "AssetPropertyId",
+    #                       property_alias: "AssetPropertyAlias",
+    #                       property_value: { # required
+    #                         value: { # required
+    #                           string_value: "AssetPropertyStringValue",
+    #                           integer_value: "AssetPropertyIntegerValue",
+    #                           double_value: "AssetPropertyDoubleValue",
+    #                           boolean_value: "AssetPropertyBooleanValue",
+    #                         },
+    #                         timestamp: {
+    #                           time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                           offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                         },
+    #                         quality: "AssetPropertyQuality",
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           on_exit: {
+    #             events: [
+    #               {
+    #                 event_name: "EventName", # required
+    #                 condition: "Condition",
+    #                 actions: [
+    #                   {
+    #                     set_variable: {
+    #                       variable_name: "VariableName", # required
+    #                       value: "VariableValue", # required
+    #                     },
+    #                     sns: {
+    #                       target_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     iot_topic_publish: {
+    #                       mqtt_topic: "MQTTTopic", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     set_timer: {
+    #                       timer_name: "TimerName", # required
+    #                       seconds: 1,
+    #                       duration_expression: "VariableValue",
+    #                     },
+    #                     clear_timer: {
+    #                       timer_name: "TimerName", # required
+    #                     },
+    #                     reset_timer: {
+    #                       timer_name: "TimerName", # required
+    #                     },
+    #                     lambda: {
+    #                       function_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     iot_events: {
+    #                       input_name: "InputName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     sqs: {
+    #                       queue_url: "QueueUrl", # required
+    #                       use_base_64: false,
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     firehose: {
+    #                       delivery_stream_name: "DeliveryStreamName", # required
+    #                       separator: "FirehoseSeparator",
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_db: {
+    #                       hash_key_type: "DynamoKeyType",
+    #                       hash_key_field: "DynamoKeyField", # required
+    #                       hash_key_value: "DynamoKeyValue", # required
+    #                       range_key_type: "DynamoKeyType",
+    #                       range_key_field: "DynamoKeyField",
+    #                       range_key_value: "DynamoKeyValue",
+    #                       operation: "DynamoOperation",
+    #                       payload_field: "DynamoKeyField",
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_d_bv_2: {
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     iot_site_wise: {
+    #                       entry_id: "AssetPropertyEntryId",
+    #                       asset_id: "AssetId",
+    #                       property_id: "AssetPropertyId",
+    #                       property_alias: "AssetPropertyAlias",
+    #                       property_value: { # required
+    #                         value: { # required
+    #                           string_value: "AssetPropertyStringValue",
+    #                           integer_value: "AssetPropertyIntegerValue",
+    #                           double_value: "AssetPropertyDoubleValue",
+    #                           boolean_value: "AssetPropertyBooleanValue",
+    #                         },
+    #                         timestamp: {
+    #                           time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                           offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                         },
+    #                         quality: "AssetPropertyQuality",
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       ],
+    #       initial_state_name: "StateName", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analysis_id #=> String
+    #
+    # @overload start_detector_model_analysis(params = {})
+    # @param [Hash] params ({})
+    def start_detector_model_analysis(params = {}, options = {})
+      req = build_request(:start_detector_model_analysis, params)
       req.send_request(options)
     end
 
@@ -2073,7 +2626,7 @@ module Aws::IoTEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotevents'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

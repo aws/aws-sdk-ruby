@@ -274,7 +274,8 @@ module Aws::RedshiftDataAPIService
     #
     #       {
     #         cluster_identifier: "Location", # required
-    #         database: "String",
+    #         connected_database: "String",
+    #         database: "String", # required
     #         db_user: "String",
     #         max_results: 1,
     #         next_token: "String",
@@ -289,9 +290,15 @@ module Aws::RedshiftDataAPIService
     #   credentials.
     #   @return [String]
     #
+    # @!attribute [rw] connected_database
+    #   A database name. The connected database is specified when you
+    #   connect with your authentication credentials.
+    #   @return [String]
+    #
     # @!attribute [rw] database
-    #   The name of the database. This parameter is required when
-    #   authenticating using temporary credentials.
+    #   The name of the database that contains the tables to be described.
+    #   If `ConnectedDatabase` is not specified, this is also the database
+    #   to connect to with your authentication credentials.
     #   @return [String]
     #
     # @!attribute [rw] db_user
@@ -336,6 +343,7 @@ module Aws::RedshiftDataAPIService
     #
     class DescribeTableRequest < Struct.new(
       :cluster_identifier,
+      :connected_database,
       :database,
       :db_user,
       :max_results,
@@ -704,6 +712,7 @@ module Aws::RedshiftDataAPIService
     #
     #       {
     #         cluster_identifier: "Location", # required
+    #         connected_database: "String",
     #         database: "String", # required
     #         db_user: "String",
     #         max_results: 1,
@@ -718,9 +727,15 @@ module Aws::RedshiftDataAPIService
     #   credentials.
     #   @return [String]
     #
+    # @!attribute [rw] connected_database
+    #   A database name. The connected database is specified when you
+    #   connect with your authentication credentials.
+    #   @return [String]
+    #
     # @!attribute [rw] database
-    #   The name of the database. This parameter is required when
-    #   authenticating using temporary credentials.
+    #   The name of the database that contains the schemas to list. If
+    #   `ConnectedDatabase` is not specified, this is also the database to
+    #   connect to with your authentication credentials.
     #   @return [String]
     #
     # @!attribute [rw] db_user
@@ -760,6 +775,7 @@ module Aws::RedshiftDataAPIService
     #
     class ListSchemasRequest < Struct.new(
       :cluster_identifier,
+      :connected_database,
       :database,
       :db_user,
       :max_results,
@@ -894,6 +910,7 @@ module Aws::RedshiftDataAPIService
     #
     #       {
     #         cluster_identifier: "Location", # required
+    #         connected_database: "String",
     #         database: "String", # required
     #         db_user: "String",
     #         max_results: 1,
@@ -909,9 +926,15 @@ module Aws::RedshiftDataAPIService
     #   credentials.
     #   @return [String]
     #
+    # @!attribute [rw] connected_database
+    #   A database name. The connected database is specified when you
+    #   connect with your authentication credentials.
+    #   @return [String]
+    #
     # @!attribute [rw] database
-    #   The name of the database. This parameter is required when
-    #   authenticating using temporary credentials.
+    #   The name of the database that contains the tables to list. If
+    #   `ConnectedDatabase` is not specified, this is also the database to
+    #   connect to with your authentication credentials.
     #   @return [String]
     #
     # @!attribute [rw] db_user
@@ -964,6 +987,7 @@ module Aws::RedshiftDataAPIService
     #
     class ListTablesRequest < Struct.new(
       :cluster_identifier,
+      :connected_database,
       :database,
       :db_user,
       :max_results,

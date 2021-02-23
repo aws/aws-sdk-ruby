@@ -37,6 +37,7 @@ module Aws::AutoScaling
     AutoScalingGroupMinSize = Shapes::IntegerShape.new(name: 'AutoScalingGroupMinSize')
     AutoScalingGroupNames = Shapes::ListShape.new(name: 'AutoScalingGroupNames')
     AutoScalingGroupNamesType = Shapes::StructureShape.new(name: 'AutoScalingGroupNamesType')
+    AutoScalingGroupState = Shapes::StringShape.new(name: 'AutoScalingGroupState')
     AutoScalingGroups = Shapes::ListShape.new(name: 'AutoScalingGroups')
     AutoScalingGroupsType = Shapes::StructureShape.new(name: 'AutoScalingGroupsType')
     AutoScalingInstanceDetails = Shapes::StructureShape.new(name: 'AutoScalingInstanceDetails')
@@ -122,6 +123,7 @@ module Aws::AutoScaling
     HealthCheckGracePeriod = Shapes::IntegerShape.new(name: 'HealthCheckGracePeriod')
     HeartbeatTimeout = Shapes::IntegerShape.new(name: 'HeartbeatTimeout')
     HonorCooldown = Shapes::BooleanShape.new(name: 'HonorCooldown')
+    IncludeDeletedGroups = Shapes::BooleanShape.new(name: 'IncludeDeletedGroups')
     Instance = Shapes::StructureShape.new(name: 'Instance')
     InstanceIds = Shapes::ListShape.new(name: 'InstanceIds')
     InstanceMetadataEndpointState = Shapes::StringShape.new(name: 'InstanceMetadataEndpointState')
@@ -296,6 +298,8 @@ module Aws::AutoScaling
     Activity.add_member(:status_message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "StatusMessage"))
     Activity.add_member(:progress, Shapes::ShapeRef.new(shape: Progress, location_name: "Progress"))
     Activity.add_member(:details, Shapes::ShapeRef.new(shape: XmlString, location_name: "Details"))
+    Activity.add_member(:auto_scaling_group_state, Shapes::ShapeRef.new(shape: AutoScalingGroupState, location_name: "AutoScalingGroupState"))
+    Activity.add_member(:auto_scaling_group_arn, Shapes::ShapeRef.new(shape: ResourceName, location_name: "AutoScalingGroupARN"))
     Activity.struct_class = Types::Activity
 
     ActivityIds.member = Shapes::ShapeRef.new(shape: XmlString)
@@ -594,6 +598,7 @@ module Aws::AutoScaling
 
     DescribeScalingActivitiesType.add_member(:activity_ids, Shapes::ShapeRef.new(shape: ActivityIds, location_name: "ActivityIds"))
     DescribeScalingActivitiesType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "AutoScalingGroupName"))
+    DescribeScalingActivitiesType.add_member(:include_deleted_groups, Shapes::ShapeRef.new(shape: IncludeDeletedGroups, location_name: "IncludeDeletedGroups"))
     DescribeScalingActivitiesType.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
     DescribeScalingActivitiesType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     DescribeScalingActivitiesType.struct_class = Types::DescribeScalingActivitiesType

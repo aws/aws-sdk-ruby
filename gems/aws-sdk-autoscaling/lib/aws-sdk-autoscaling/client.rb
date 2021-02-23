@@ -2969,6 +2969,17 @@ module Aws::AutoScaling
     # Describes one or more scaling activities for the specified Auto
     # Scaling group.
     #
+    # To view the scaling activities from the Amazon EC2 Auto Scaling
+    # console, choose the **Activity** tab of the Auto Scaling group. When
+    # scaling events occur, you see scaling activity messages in the
+    # **Activity history**. For more information, see [Verifying a scaling
+    # activity for an Auto Scaling group][1] in the *Amazon EC2 Auto Scaling
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-verify-scaling-activity.html
+    #
     # @option params [Array<String>] :activity_ids
     #   The activity IDs of the desired scaling activities. You can specify up
     #   to 50 IDs. If you omit this parameter, all activities for the past six
@@ -2978,6 +2989,10 @@ module Aws::AutoScaling
     #
     # @option params [String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
+    #
+    # @option params [Boolean] :include_deleted_groups
+    #   Indicates whether to include scaling activity from deleted Auto
+    #   Scaling groups.
     #
     # @option params [Integer] :max_records
     #   The maximum number of items to return with this call. The default
@@ -3025,6 +3040,7 @@ module Aws::AutoScaling
     #   resp = client.describe_scaling_activities({
     #     activity_ids: ["XmlString"],
     #     auto_scaling_group_name: "XmlStringMaxLen255",
+    #     include_deleted_groups: false,
     #     max_records: 1,
     #     next_token: "XmlString",
     #   })
@@ -3042,6 +3058,8 @@ module Aws::AutoScaling
     #   resp.activities[0].status_message #=> String
     #   resp.activities[0].progress #=> Integer
     #   resp.activities[0].details #=> String
+    #   resp.activities[0].auto_scaling_group_state #=> String
+    #   resp.activities[0].auto_scaling_group_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScalingActivities AWS API Documentation
@@ -3447,6 +3465,8 @@ module Aws::AutoScaling
     #   resp.activities[0].status_message #=> String
     #   resp.activities[0].progress #=> Integer
     #   resp.activities[0].details #=> String
+    #   resp.activities[0].auto_scaling_group_state #=> String
+    #   resp.activities[0].auto_scaling_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachInstances AWS API Documentation
     #
@@ -3773,6 +3793,8 @@ module Aws::AutoScaling
     #   resp.activities[0].status_message #=> String
     #   resp.activities[0].progress #=> Integer
     #   resp.activities[0].details #=> String
+    #   resp.activities[0].auto_scaling_group_state #=> String
+    #   resp.activities[0].auto_scaling_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnterStandby AWS API Documentation
     #
@@ -3926,6 +3948,8 @@ module Aws::AutoScaling
     #   resp.activities[0].status_message #=> String
     #   resp.activities[0].progress #=> Integer
     #   resp.activities[0].details #=> String
+    #   resp.activities[0].auto_scaling_group_state #=> String
+    #   resp.activities[0].auto_scaling_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExitStandby AWS API Documentation
     #
@@ -5048,6 +5072,8 @@ module Aws::AutoScaling
     #   resp.activity.status_message #=> String
     #   resp.activity.progress #=> Integer
     #   resp.activity.details #=> String
+    #   resp.activity.auto_scaling_group_state #=> String
+    #   resp.activity.auto_scaling_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TerminateInstanceInAutoScalingGroup AWS API Documentation
     #
@@ -5365,7 +5391,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

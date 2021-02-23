@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2021-02-23)
+------------------
+
+* Feature - Updating the page size for Glue catalog getter APIs.
+
 1.83.0 (2021-02-02)
 ------------------
 

@@ -89,6 +89,19 @@ module Aws::AutoScaling
       data[:details]
     end
 
+    # The state of the Auto Scaling group, which is either `InService` or
+    # `Deleted`.
+    # @return [String]
+    def auto_scaling_group_state
+      data[:auto_scaling_group_state]
+    end
+
+    # The Amazon Resource Name (ARN) of the Auto Scaling group.
+    # @return [String]
+    def auto_scaling_group_arn
+      data[:auto_scaling_group_arn]
+    end
+
     # @!endgroup
 
     # @return [Client]

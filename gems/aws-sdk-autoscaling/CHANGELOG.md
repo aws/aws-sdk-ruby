@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2021-02-23)
+------------------
+
+* Feature - Adds a new optional IncludeDeletedGroups parameter to the DescribeScalingActivities API.
+
 1.54.0 (2021-02-02)
 ------------------
 

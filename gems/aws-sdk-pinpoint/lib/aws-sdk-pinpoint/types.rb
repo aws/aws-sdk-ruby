@@ -1501,6 +1501,8 @@ module Aws::Pinpoint
     #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #             origination_number: "__string",
     #             sender_id: "__string",
+    #             entity_id: "__string",
+    #             template_id: "__string",
     #           },
     #           next_activity: "__string",
     #           template_name: "__string",
@@ -2801,6 +2803,8 @@ module Aws::Pinpoint
     #         message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #         origination_number: "__string",
     #         sender_id: "__string",
+    #         entity_id: "__string",
+    #         template_id: "__string",
     #       }
     #
     # @!attribute [rw] body
@@ -2827,13 +2831,25 @@ module Aws::Pinpoint
     #   the SMS message.
     #   @return [String]
     #
+    # @!attribute [rw] entity_id
+    #   The entity ID or Principal Entity (PE) id received from the
+    #   regulatory body for sending SMS in your country.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_id
+    #   The template ID received from the regulatory body for sending SMS in
+    #   your country.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignSmsMessage AWS API Documentation
     #
     class CampaignSmsMessage < Struct.new(
       :body,
       :message_type,
       :origination_number,
-      :sender_id)
+      :sender_id,
+      :entity_id,
+      :template_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3421,6 +3437,8 @@ module Aws::Pinpoint
     #                   message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #                   origination_number: "__string",
     #                   sender_id: "__string",
+    #                   entity_id: "__string",
+    #                   template_id: "__string",
     #                 },
     #               },
     #               schedule: {
@@ -3581,6 +3599,8 @@ module Aws::Pinpoint
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #               origination_number: "__string",
     #               sender_id: "__string",
+    #               entity_id: "__string",
+    #               template_id: "__string",
     #             },
     #           },
     #           name: "__string",
@@ -4075,6 +4095,8 @@ module Aws::Pinpoint
     #                   message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #                   origination_number: "__string",
     #                   sender_id: "__string",
+    #                   entity_id: "__string",
+    #                   template_id: "__string",
     #                 },
     #                 next_activity: "__string",
     #                 template_name: "__string",
@@ -5950,6 +5972,8 @@ module Aws::Pinpoint
     #           substitutions: {
     #             "__string" => ["__string"],
     #           },
+    #           entity_id: "__string",
+    #           template_id: "__string",
     #         },
     #         voice_message: {
     #           body: "__string",
@@ -10940,6 +10964,8 @@ module Aws::Pinpoint
     #         message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #         origination_number: "__string",
     #         sender_id: "__string",
+    #         entity_id: "__string",
+    #         template_id: "__string",
     #       }
     #
     # @!attribute [rw] message_type
@@ -10968,12 +10994,24 @@ module Aws::Pinpoint
     #   [1]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-countries.html
     #   @return [String]
     #
+    # @!attribute [rw] entity_id
+    #   The entity ID or Principal Entity (PE) id received from the
+    #   regulatory body for sending SMS in your country.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_id
+    #   The template ID received from the regulatory body for sending SMS in
+    #   your country.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneySMSMessage AWS API Documentation
     #
     class JourneySMSMessage < Struct.new(
       :message_type,
       :origination_number,
-      :sender_id)
+      :sender_id,
+      :entity_id,
+      :template_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11493,6 +11531,8 @@ module Aws::Pinpoint
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #           origination_number: "__string",
     #           sender_id: "__string",
+    #           entity_id: "__string",
+    #           template_id: "__string",
     #         },
     #       }
     #
@@ -11740,6 +11780,8 @@ module Aws::Pinpoint
     #             substitutions: {
     #               "__string" => ["__string"],
     #             },
+    #             entity_id: "__string",
+    #             template_id: "__string",
     #           },
     #           voice_message: {
     #             body: "__string",
@@ -13534,6 +13576,8 @@ module Aws::Pinpoint
     #         substitutions: {
     #           "__string" => ["__string"],
     #         },
+    #         entity_id: "__string",
+    #         template_id: "__string",
     #       }
     #
     # @!attribute [rw] body
@@ -13575,6 +13619,16 @@ module Aws::Pinpoint
     #   the default variables with individual address variables.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] entity_id
+    #   The entity ID or Principal Entity (PE) id received from the
+    #   regulatory body for sending SMS in your country.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_id
+    #   The template ID received from the regulatory body for sending SMS in
+    #   your country.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SMSMessage AWS API Documentation
     #
     class SMSMessage < Struct.new(
@@ -13584,7 +13638,9 @@ module Aws::Pinpoint
       :message_type,
       :origination_number,
       :sender_id,
-      :substitutions)
+      :substitutions,
+      :entity_id,
+      :template_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13600,6 +13656,8 @@ module Aws::Pinpoint
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #           origination_number: "__string",
     #           sender_id: "__string",
+    #           entity_id: "__string",
+    #           template_id: "__string",
     #         },
     #         next_activity: "__string",
     #         template_name: "__string",
@@ -14770,6 +14828,8 @@ module Aws::Pinpoint
     #               substitutions: {
     #                 "__string" => ["__string"],
     #               },
+    #               entity_id: "__string",
+    #               template_id: "__string",
     #             },
     #             voice_message: {
     #               body: "__string",
@@ -14987,6 +15047,8 @@ module Aws::Pinpoint
     #             substitutions: {
     #               "__string" => ["__string"],
     #             },
+    #             entity_id: "__string",
+    #             template_id: "__string",
     #           },
     #           voice_message: {
     #             body: "__string",
@@ -15260,6 +15322,8 @@ module Aws::Pinpoint
     #               substitutions: {
     #                 "__string" => ["__string"],
     #               },
+    #               entity_id: "__string",
+    #               template_id: "__string",
     #             },
     #             voice_message: {
     #               body: "__string",
@@ -16589,6 +16653,8 @@ module Aws::Pinpoint
     #                   message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #                   origination_number: "__string",
     #                   sender_id: "__string",
+    #                   entity_id: "__string",
+    #                   template_id: "__string",
     #                 },
     #               },
     #               schedule: {
@@ -16749,6 +16815,8 @@ module Aws::Pinpoint
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #               origination_number: "__string",
     #               sender_id: "__string",
+    #               entity_id: "__string",
+    #               template_id: "__string",
     #             },
     #           },
     #           name: "__string",
@@ -17408,6 +17476,8 @@ module Aws::Pinpoint
     #                   message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #                   origination_number: "__string",
     #                   sender_id: "__string",
+    #                   entity_id: "__string",
+    #                   template_id: "__string",
     #                 },
     #                 next_activity: "__string",
     #                 template_name: "__string",
@@ -18869,6 +18939,8 @@ module Aws::Pinpoint
     #                 message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #                 origination_number: "__string",
     #                 sender_id: "__string",
+    #                 entity_id: "__string",
+    #                 template_id: "__string",
     #               },
     #             },
     #             schedule: {
@@ -19029,6 +19101,8 @@ module Aws::Pinpoint
     #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #             origination_number: "__string",
     #             sender_id: "__string",
+    #             entity_id: "__string",
+    #             template_id: "__string",
     #           },
     #         },
     #         name: "__string",
@@ -19489,6 +19563,8 @@ module Aws::Pinpoint
     #                 message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #                 origination_number: "__string",
     #                 sender_id: "__string",
+    #                 entity_id: "__string",
+    #                 template_id: "__string",
     #               },
     #               next_activity: "__string",
     #               template_name: "__string",
@@ -19955,6 +20031,8 @@ module Aws::Pinpoint
     #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #             origination_number: "__string",
     #             sender_id: "__string",
+    #             entity_id: "__string",
+    #             template_id: "__string",
     #           },
     #         },
     #         schedule: {

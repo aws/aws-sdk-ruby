@@ -842,6 +842,8 @@ module Aws::Pinpoint
     CampaignSmsMessage.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
     CampaignSmsMessage.add_member(:origination_number, Shapes::ShapeRef.new(shape: __string, location_name: "OriginationNumber"))
     CampaignSmsMessage.add_member(:sender_id, Shapes::ShapeRef.new(shape: __string, location_name: "SenderId"))
+    CampaignSmsMessage.add_member(:entity_id, Shapes::ShapeRef.new(shape: __string, location_name: "EntityId"))
+    CampaignSmsMessage.add_member(:template_id, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateId"))
     CampaignSmsMessage.struct_class = Types::CampaignSmsMessage
 
     CampaignState.add_member(:campaign_status, Shapes::ShapeRef.new(shape: CampaignStatus, location_name: "CampaignStatus"))
@@ -2054,6 +2056,8 @@ module Aws::Pinpoint
     JourneySMSMessage.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
     JourneySMSMessage.add_member(:origination_number, Shapes::ShapeRef.new(shape: __string, location_name: "OriginationNumber"))
     JourneySMSMessage.add_member(:sender_id, Shapes::ShapeRef.new(shape: __string, location_name: "SenderId"))
+    JourneySMSMessage.add_member(:entity_id, Shapes::ShapeRef.new(shape: __string, location_name: "EntityId"))
+    JourneySMSMessage.add_member(:template_id, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateId"))
     JourneySMSMessage.struct_class = Types::JourneySMSMessage
 
     JourneySchedule.add_member(:end_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "EndTime"))
@@ -2465,6 +2469,8 @@ module Aws::Pinpoint
     SMSMessage.add_member(:origination_number, Shapes::ShapeRef.new(shape: __string, location_name: "OriginationNumber"))
     SMSMessage.add_member(:sender_id, Shapes::ShapeRef.new(shape: __string, location_name: "SenderId"))
     SMSMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
+    SMSMessage.add_member(:entity_id, Shapes::ShapeRef.new(shape: __string, location_name: "EntityId"))
+    SMSMessage.add_member(:template_id, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateId"))
     SMSMessage.struct_class = Types::SMSMessage
 
     SMSMessageActivity.add_member(:message_config, Shapes::ShapeRef.new(shape: JourneySMSMessage, location_name: "MessageConfig"))

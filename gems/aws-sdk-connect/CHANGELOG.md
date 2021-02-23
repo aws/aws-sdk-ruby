@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2021-02-23)
+------------------
+
+* Feature - Documentation updates for AWS Connect (MediaConcurrency Limit).
+
 1.40.0 (2021-02-02)
 ------------------
 

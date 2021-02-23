@@ -1034,6 +1034,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -2679,6 +2680,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_statuses
@@ -4736,6 +4738,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -4784,6 +4787,7 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #   @return [String]
     #
     # @!attribute [rw] job_id

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2021-02-23)
+------------------
+
+* Feature - Documentation updates for QuickSight Row Level Security
+
 1.42.0 (2021-02-09)
 ------------------
 

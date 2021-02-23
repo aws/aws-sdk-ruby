@@ -450,9 +450,14 @@ module Aws::RedshiftDataAPIService
     #   The cluster identifier. This parameter is required when authenticating
     #   using either AWS Secrets Manager or temporary credentials.
     #
-    # @option params [String] :database
-    #   The name of the database. This parameter is required when
-    #   authenticating using temporary credentials.
+    # @option params [String] :connected_database
+    #   A database name. The connected database is specified when you connect
+    #   with your authentication credentials.
+    #
+    # @option params [required, String] :database
+    #   The name of the database that contains the tables to be described. If
+    #   `ConnectedDatabase` is not specified, this is also the database to
+    #   connect to with your authentication credentials.
     #
     # @option params [String] :db_user
     #   The database user name. This parameter is required when authenticating
@@ -497,7 +502,8 @@ module Aws::RedshiftDataAPIService
     #
     #   resp = client.describe_table({
     #     cluster_identifier: "Location", # required
-    #     database: "String",
+    #     connected_database: "String",
+    #     database: "String", # required
     #     db_user: "String",
     #     max_results: 1,
     #     next_token: "String",
@@ -777,9 +783,14 @@ module Aws::RedshiftDataAPIService
     #   The cluster identifier. This parameter is required when authenticating
     #   using either AWS Secrets Manager or temporary credentials.
     #
+    # @option params [String] :connected_database
+    #   A database name. The connected database is specified when you connect
+    #   with your authentication credentials.
+    #
     # @option params [required, String] :database
-    #   The name of the database. This parameter is required when
-    #   authenticating using temporary credentials.
+    #   The name of the database that contains the schemas to list. If
+    #   `ConnectedDatabase` is not specified, this is also the database to
+    #   connect to with your authentication credentials.
     #
     # @option params [String] :db_user
     #   The database user name. This parameter is required when authenticating
@@ -820,6 +831,7 @@ module Aws::RedshiftDataAPIService
     #
     #   resp = client.list_schemas({
     #     cluster_identifier: "Location", # required
+    #     connected_database: "String",
     #     database: "String", # required
     #     db_user: "String",
     #     max_results: 1,
@@ -949,9 +961,14 @@ module Aws::RedshiftDataAPIService
     #   The cluster identifier. This parameter is required when authenticating
     #   using either AWS Secrets Manager or temporary credentials.
     #
+    # @option params [String] :connected_database
+    #   A database name. The connected database is specified when you connect
+    #   with your authentication credentials.
+    #
     # @option params [required, String] :database
-    #   The name of the database. This parameter is required when
-    #   authenticating using temporary credentials.
+    #   The name of the database that contains the tables to list. If
+    #   `ConnectedDatabase` is not specified, this is also the database to
+    #   connect to with your authentication credentials.
     #
     # @option params [String] :db_user
     #   The database user name. This parameter is required when authenticating
@@ -1004,6 +1021,7 @@ module Aws::RedshiftDataAPIService
     #
     #   resp = client.list_tables({
     #     cluster_identifier: "Location", # required
+    #     connected_database: "String",
     #     database: "String", # required
     #     db_user: "String",
     #     max_results: 1,
@@ -1043,7 +1061,7 @@ module Aws::RedshiftDataAPIService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshiftdataapiservice'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

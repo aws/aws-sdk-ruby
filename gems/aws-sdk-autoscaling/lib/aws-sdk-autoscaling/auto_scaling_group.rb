@@ -1076,6 +1076,7 @@ module Aws::AutoScaling
     #
     #   activities = auto_scaling_group.activities({
     #     activity_ids: ["XmlString"],
+    #     include_deleted_groups: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :activity_ids
@@ -1084,6 +1085,9 @@ module Aws::AutoScaling
     #   weeks are described. If unknown activities are requested, they are
     #   ignored with no error. If you specify an Auto Scaling group, the
     #   results are limited to that group.
+    # @option options [Boolean] :include_deleted_groups
+    #   Indicates whether to include scaling activity from deleted Auto
+    #   Scaling groups.
     # @return [Activity::Collection]
     def activities(options = {})
       batches = Enumerator.new do |y|

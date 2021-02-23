@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2021-02-23)
+------------------
+
+* Feature - This release adds an additional parameter 'ConnectedDatabase' into ListSchemasRequest, ListTablesRequest and DescribeTableRequest to support the metadata sharing across databases.
+
 1.4.0 (2021-02-15)
 ------------------
 

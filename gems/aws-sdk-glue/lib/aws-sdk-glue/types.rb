@@ -8082,6 +8082,7 @@ module Aws::Glue
     #           total_segments: 1, # required
     #         },
     #         max_results: 1,
+    #         exclude_column_schema: false,
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -8207,6 +8208,9 @@ module Aws::Glue
     #   The maximum number of partitions to return in a single response.
     #   @return [Integer]
     #
+    # @!attribute [rw] exclude_column_schema
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartitionsRequest AWS API Documentation
     #
     class GetPartitionsRequest < Struct.new(
@@ -8216,7 +8220,8 @@ module Aws::Glue
       :expression,
       :next_token,
       :segment,
-      :max_results)
+      :max_results,
+      :exclude_column_schema)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2021-02-23)
+------------------
+
+* Feature - Documentation updates for s3-control
+
 1.27.0 (2021-02-02)
 ------------------
 

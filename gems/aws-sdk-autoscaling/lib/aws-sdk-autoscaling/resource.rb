@@ -633,6 +633,7 @@ module Aws::AutoScaling
     #   activities = auto_scaling.activities({
     #     activity_ids: ["XmlString"],
     #     auto_scaling_group_name: "XmlStringMaxLen255",
+    #     include_deleted_groups: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :activity_ids
@@ -643,6 +644,9 @@ module Aws::AutoScaling
     #   results are limited to that group.
     # @option options [String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
+    # @option options [Boolean] :include_deleted_groups
+    #   Indicates whether to include scaling activity from deleted Auto
+    #   Scaling groups.
     # @return [Activity::Collection]
     def activities(options = {})
       batches = Enumerator.new do |y|

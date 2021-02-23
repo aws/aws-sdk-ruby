@@ -168,7 +168,7 @@ module Aws::IoTEvents
     #   Writes to the DynamoDB table that you created. The default action
     #   payload contains all attribute-value pairs that have the information
     #   about the detector model instance and the event that triggered the
-    #   action. You can also customize the [payload][1]. One column of the
+    #   action. You can customize the [payload][1]. One column of the
     #   DynamoDB table receives all attribute-value pairs in the payload
     #   that you specify. For more information, see [Actions][2] in *AWS IoT
     #   Events Developer Guide*.
@@ -183,10 +183,10 @@ module Aws::IoTEvents
     #   Writes to the DynamoDB table that you created. The default action
     #   payload contains all attribute-value pairs that have the information
     #   about the detector model instance and the event that triggered the
-    #   action. You can also customize the [payload][1]. A separate column
-    #   of the DynamoDB table receives one attribute-value pair in the
-    #   payload that you specify. For more information, see [Actions][2] in
-    #   *AWS IoT Events Developer Guide*.
+    #   action. You can customize the [payload][1]. A separate column of the
+    #   DynamoDB table receives one attribute-value pair in the payload that
+    #   you specify. For more information, see [Actions][2] in *AWS IoT
+    #   Events Developer Guide*.
     #
     #
     #
@@ -217,20 +217,126 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
+    # Contains the result of the analysis.
+    #
+    # @!attribute [rw] type
+    #   The type of the analysis result. Analyses fall into the following
+    #   types based on the validators used to generate the analysis result:
+    #
+    #   * `supported-actions` - You must specify AWS IoT Events supported
+    #     actions that work with other AWS services in a supported AWS
+    #     Region.
+    #
+    #   * `service-limits` - Resources or operations can't exceed service
+    #     limits. Update your detector model or request a limit adjust.
+    #
+    #   * `structure` - The detector model must follow a structure that AWS
+    #     IoT Events supports.
+    #
+    #   * `expression-syntax` - Your expression must follow the required
+    #     syntax.
+    #
+    #   * `data-type` - Data types referenced in the detector model must be
+    #     compatible.
+    #
+    #   * `referenced-data` - You must define the data referenced in your
+    #     detector model before you can use the data.
+    #
+    #   * `referenced-resource` - Resources that the detector model uses
+    #     must be available.
+    #
+    #   For more information, see [Running detector model analyses][1] in
+    #   the *AWS IoT Events Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html
+    #   @return [String]
+    #
+    # @!attribute [rw] level
+    #   The severity level of the analysis result. Analysis results fall
+    #   into three general categories based on the severity level:
+    #
+    #   * `INFO` - An information result informs you about a significant
+    #     field in your detector model. This type of result usually doesn't
+    #     require immediate action.
+    #
+    #   * `WARNING` - A warning result draws special attention to fields
+    #     that are potentially damaging to your detector model. We recommend
+    #     that you review warnings and take necessary actions before you use
+    #     your detetor model in production environments. Otherwise, the
+    #     detector model may not fully function as expected.
+    #
+    #   * `ERROR` - An error result notifies you about a problem found in
+    #     your detector model. You must fix all errors before you can
+    #     publish your detector model.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Contains additional information about the analysis result.
+    #   @return [String]
+    #
+    # @!attribute [rw] locations
+    #   Contains one or more locations that you can use to locate the fields
+    #   in your detector model that the analysis result references.
+    #   @return [Array<Types::AnalysisResultLocation>]
+    #
+    class AnalysisResult < Struct.new(
+      :type,
+      :level,
+      :message,
+      :locations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information that you can use to locate the field in your
+    # detector model that the analysis result references.
+    #
+    # @!attribute [rw] path
+    #   A [JsonPath][1] expression that identifies the error field in your
+    #   detector model.
+    #
+    #
+    #
+    #   [1]: https://github.com/json-path/JsonPath
+    #   @return [String]
+    #
+    class AnalysisResultLocation < Struct.new(
+      :path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that contains timestamp information. For more information,
     # see [TimeInNanos][1] in the *AWS IoT SiteWise API Reference*.
     #
-    # For parameters that are string data type, you can specify the
-    # following options:
+    # You must use expressions for all parameters in
+    # `AssetPropertyTimestamp`. The expressions accept literals, operators,
+    # functions, references, and substitution templates.
     #
-    # * Use a string. For example, the `timeInSeconds` value can be
+    # **Examples**
+    #
+    # * For literal values, the expressions must contain single quotes. For
+    #   example, the value for the `timeInSeconds` parameter can be
     #   `'1586400675'`.
     #
-    # * Use an expression. For example, the `timeInSeconds` value can be
-    #   `'$\{$input.TemperatureInput.sensorData.timestamp/1000\}'`.
+    # * For references, you must specify either variables or input values.
+    #   For example, the value for the `offsetInNanos` parameter can be
+    #   `$variable.time`.
     #
-    #   For more information, see [Expressions][2] in the *AWS IoT Events
-    #   Developer Guide*.
+    # * For a substitution template, you must use `$\{\}`, and the template
+    #   must be in single quotes. A substitution template can also contain a
+    #   combination of literals, operators, functions, references, and
+    #   substitution templates.
+    #
+    #   In the following example, the value for the `timeInSeconds`
+    #   parameter uses a substitution template.
+    #
+    #   `'$\{$input.TemperatureInput.sensorData.timestamp / 1000\}'`
+    #
+    # For more information, see [Expressions][2] in the *AWS IoT Events
+    # Developer Guide*.
     #
     #
     #
@@ -247,12 +353,12 @@ module Aws::IoTEvents
     #
     # @!attribute [rw] time_in_seconds
     #   The timestamp, in seconds, in the Unix epoch format. The valid range
-    #   is between 1-31556889864403199. You can also specify an expression.
+    #   is between 1-31556889864403199.
     #   @return [String]
     #
     # @!attribute [rw] offset_in_nanos
     #   The nanosecond offset converted from `timeInSeconds`. The valid
-    #   range is between 0-999999999. You can also specify an expression.
+    #   range is between 0-999999999.
     #   @return [String]
     #
     class AssetPropertyTimestamp < Struct.new(
@@ -265,16 +371,21 @@ module Aws::IoTEvents
     # A structure that contains value information. For more information, see
     # [AssetPropertyValue][1] in the *AWS IoT SiteWise API Reference*.
     #
-    # For parameters that are string data type, you can specify the
-    # following options:
+    # You must use expressions for all parameters in `AssetPropertyValue`.
+    # The expressions accept literals, operators, functions, references, and
+    # substitution templates.
     #
-    # * Use a string. For example, the `quality` value can be `'GOOD'`.
+    # **Examples**
     #
-    # * Use an expression. For example, the `quality` value can be
-    #   `$input.TemperatureInput.sensorData.quality` .
+    # * For literal values, the expressions must contain single quotes. For
+    #   example, the value for the `quality` parameter can be `'GOOD'`.
     #
-    #   For more information, see [Expressions][2] in the *AWS IoT Events
-    #   Developer Guide*.
+    # * For references, you must specify either variables or input values.
+    #   For example, the value for the `quality` parameter can be
+    #   `$input.TemperatureInput.sensorData.quality`.
+    #
+    # For more information, see [Expressions][2] in the *AWS IoT Events
+    # Developer Guide*.
     #
     #
     #
@@ -308,8 +419,8 @@ module Aws::IoTEvents
     #   @return [Types::AssetPropertyTimestamp]
     #
     # @!attribute [rw] quality
-    #   The quality of the asset property value. The value must be `GOOD`,
-    #   `BAD`, or `UNCERTAIN`. You can also specify an expression.
+    #   The quality of the asset property value. The value must be `'GOOD'`,
+    #   `'BAD'`, or `'UNCERTAIN'`.
     #   @return [String]
     #
     class AssetPropertyValue < Struct.new(
@@ -323,26 +434,41 @@ module Aws::IoTEvents
     # A structure that contains an asset property value. For more
     # information, see [Variant][1] in the *AWS IoT SiteWise API Reference*.
     #
+    # You must use expressions for all parameters in `AssetPropertyVariant`.
+    # The expressions accept literals, operators, functions, references, and
+    # substitution templates.
+    #
+    # **Examples**
+    #
+    # * For literal values, the expressions must contain single quotes. For
+    #   example, the value for the `integerValue` parameter can be `'100'`.
+    #
+    # * For references, you must specify either variables or parameters. For
+    #   example, the value for the `booleanValue` parameter can be
+    #   `$variable.offline`.
+    #
+    # * For a substitution template, you must use `$\{\}`, and the template
+    #   must be in single quotes. A substitution template can also contain a
+    #   combination of literals, operators, functions, references, and
+    #   substitution templates.
+    #
+    #   In the following example, the value for the `doubleValue` parameter
+    #   uses a substitution template.
+    #
+    #   `'$\{$input.TemperatureInput.sensorData.temperature * 6 / 5 + 32\}'`
+    #
+    # For more information, see [Expressions][2] in the *AWS IoT Events
+    # Developer Guide*.
+    #
     # You must specify one of the following value types, depending on the
     # `dataType` of the specified asset property. For more information, see
-    # [AssetProperty][2] in the *AWS IoT SiteWise API Reference*.
-    #
-    # For parameters that are string data type, you can specify the
-    # following options:
-    #
-    # * Use a string. For example, the `doubleValue` value can be `'47.9'`.
-    #
-    # * Use an expression. For example, the `doubleValue` value can be
-    #   `$input.TemperatureInput.sensorData.temperature`.
-    #
-    #   For more information, see [Expressions][3] in the *AWS IoT Events
-    #   Developer Guide*.
+    # [AssetProperty][3] in the *AWS IoT SiteWise API Reference*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html
-    # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetProperty.html
-    # [3]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html
+    # [2]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html
+    # [3]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetProperty.html
     #
     # @note When making an API call, you may pass AssetPropertyVariant
     #   data as a hash:
@@ -355,27 +481,24 @@ module Aws::IoTEvents
     #       }
     #
     # @!attribute [rw] string_value
-    #   The asset property value is a string. You can also specify an
-    #   expression. If you use an expression, the evaluated result should be
-    #   a string.
+    #   The asset property value is a string. You must use an expression,
+    #   and the evaluated result should be a string.
     #   @return [String]
     #
     # @!attribute [rw] integer_value
-    #   The asset property value is an integer. You can also specify an
-    #   expression. If you use an expression, the evaluated result should be
-    #   an integer.
+    #   The asset property value is an integer. You must use an expression,
+    #   and the evaluated result should be an integer.
     #   @return [String]
     #
     # @!attribute [rw] double_value
-    #   The asset property value is a double. You can also specify an
-    #   expression. If you use an expression, the evaluated result should be
-    #   a double.
+    #   The asset property value is a double. You must use an expression,
+    #   and the evaluated result should be a double.
     #   @return [String]
     #
     # @!attribute [rw] boolean_value
-    #   The asset property value is a Boolean value that must be `TRUE` or
-    #   `FALSE`. You can also specify an expression. If you use an
-    #   expression, the evaluated result should be a Boolean value.
+    #   The asset property value is a Boolean value that must be `'TRUE'` or
+    #   `'FALSE'`. You must use an expression, and the evaluated result
+    #   should be a Boolean value.
     #   @return [String]
     #
     class AssetPropertyVariant < Struct.new(
@@ -1059,6 +1182,43 @@ module Aws::IoTEvents
     end
 
     class DeleteInputResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DescribeDetectorModelAnalysisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         analysis_id: "AnalysisId", # required
+    #       }
+    #
+    # @!attribute [rw] analysis_id
+    #   The ID of the analysis result that you want to retrieve.
+    #   @return [String]
+    #
+    class DescribeDetectorModelAnalysisRequest < Struct.new(
+      :analysis_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the analysis activity. The status can be one of the
+    #   following values:
+    #
+    #   * `RUNNING` - AWS IoT Events is analyzing your detector model. This
+    #     process can take several minutes to complete.
+    #
+    #   * `COMPLETE` - AWS IoT Events finished analyzing your detector model
+    #     .
+    #
+    #   * `FAILED` - AWS IoT Events couldn't analyze your detector model.
+    #     Try again later.
+    #   @return [String]
+    #
+    class DescribeDetectorModelAnalysisResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DescribeDetectorModelRequest
     #   data as a hash:
@@ -1796,36 +1956,53 @@ module Aws::IoTEvents
     end
 
     # Defines an action to write to the Amazon DynamoDB table that you
-    # created. The standard action payload contains all attribute-value
-    # pairs that have the information about the detector model instance and
-    # the event that triggered the action. You can also customize the
-    # [payload][1]. One column of the DynamoDB table receives all
-    # attribute-value pairs in the payload that you specify.
+    # created. The standard action payload contains all the information
+    # about the detector model instance and the event that triggered the
+    # action. You can customize the [payload][1]. One column of the DynamoDB
+    # table receives all attribute-value pairs in the payload that you
+    # specify.
     #
-    # The `tableName` and `hashKeyField` values must match the table name
-    # and the partition key of the DynamoDB table.
+    # You must use expressions for all parameters in `DynamoDBAction`. The
+    # expressions accept literals, operators, functions, references, and
+    # substitution templates.
     #
-    # <note markdown="1"> If the DynamoDB table also has a sort key, you must specify
-    # `rangeKeyField`. The `rangeKeyField` value must match the sort key.
+    # **Examples**
     #
-    #  </note>
+    # * For literal values, the expressions must contain single quotes. For
+    #   example, the value for the `hashKeyType` parameter can be
+    #   `'STRING'`.
     #
+    # * For references, you must specify either variables or input values.
+    #   For example, the value for the `hashKeyField` parameter can be
+    #   `$input.GreenhouseInput.name`.
     #
+    # * For a substitution template, you must use `$\{\}`, and the template
+    #   must be in single quotes. A substitution template can also contain a
+    #   combination of literals, operators, functions, references, and
+    #   substitution templates.
     #
-    # The `hashKeyValue` and `rangeKeyValue` use substitution templates.
-    # These templates provide data at runtime. The syntax is
-    # `$\{sql-expression\}`.
+    #   In the following example, the value for the `hashKeyValue` parameter
+    #   uses a substitution template.
     #
-    # You can use expressions for parameters that are string data type. For
-    # more information, see [Expressions][2] in the *AWS IoT Events
+    #   `'$\{$input.GreenhouseInput.temperature * 6 / 5 + 32\} in
+    #   Fahrenheit'`
+    #
+    # * For a string concatenation, you must use `+`. A string concatenation
+    #   can also contain a combination of literals, operators, functions,
+    #   references, and substitution templates.
+    #
+    #   In the following example, the value for the `tableName` parameter
+    #   uses a string concatenation.
+    #
+    #   `'GreenhouseTemperatureTable ' + $input.GreenhouseInput.date`
+    #
+    # For more information, see [Expressions][2] in the *AWS IoT Events
     # Developer Guide*.
     #
-    # <note markdown="1"> If the defined payload type is a string, `DynamoDBAction` writes
+    # If the defined payload type is a string, `DynamoDBAction` writes
     # non-JSON data to the DynamoDB table as binary data. The DynamoDB
-    # console displays the data as Base64-encoded text. The `payloadField`
-    # is `<payload-field>_raw`.
-    #
-    #  </note>
+    # console displays the data as Base64-encoded text. The value for the
+    # `payloadField` parameter is `<payload-field>_raw`.
     #
     #
     #
@@ -1855,15 +2032,18 @@ module Aws::IoTEvents
     #   The data type for the hash key (also called the partition key). You
     #   can specify the following values:
     #
-    #   * `STRING` - The hash key is a string.
+    #   * `'STRING'` - The hash key is a string.
     #
-    #   * `NUMBER` - The hash key is a number.
+    #   * `'NUMBER'` - The hash key is a number.
     #
-    #   If you don't specify `hashKeyType`, the default value is `STRING`.
+    #   If you don't specify `hashKeyType`, the default value is
+    #   `'STRING'`.
     #   @return [String]
     #
     # @!attribute [rw] hash_key_field
-    #   The name of the hash key (also called the partition key).
+    #   The name of the hash key (also called the partition key). The
+    #   `hashKeyField` value must match the partition key of the target
+    #   DynamoDB table.
     #   @return [String]
     #
     # @!attribute [rw] hash_key_value
@@ -1874,16 +2054,18 @@ module Aws::IoTEvents
     #   The data type for the range key (also called the sort key), You can
     #   specify the following values:
     #
-    #   * `STRING` - The range key is a string.
+    #   * `'STRING'` - The range key is a string.
     #
-    #   * `NUMBER` - The range key is number.
+    #   * `'NUMBER'` - The range key is number.
     #
     #   If you don't specify `rangeKeyField`, the default value is
-    #   `STRING`.
+    #   `'STRING'`.
     #   @return [String]
     #
     # @!attribute [rw] range_key_field
-    #   The name of the range key (also called the sort key).
+    #   The name of the range key (also called the sort key). The
+    #   `rangeKeyField` value must match the sort key of the target DynamoDB
+    #   table.
     #   @return [String]
     #
     # @!attribute [rw] range_key_value
@@ -1894,22 +2076,22 @@ module Aws::IoTEvents
     #   The type of operation to perform. You can specify the following
     #   values:
     #
-    #   * `INSERT` - Insert data as a new item into the DynamoDB table. This
-    #     item uses the specified hash key as a partition key. If you
+    #   * `'INSERT'` - Insert data as a new item into the DynamoDB table.
+    #     This item uses the specified hash key as a partition key. If you
     #     specified a range key, the item uses the range key as a sort key.
     #
-    #   * `UPDATE` - Update an existing item of the DynamoDB table with new
-    #     data. This item's partition key must match the specified hash
+    #   * `'UPDATE'` - Update an existing item of the DynamoDB table with
+    #     new data. This item's partition key must match the specified hash
     #     key. If you specified a range key, the range key must match the
     #     item's sort key.
     #
-    #   * `DELETE` - Delete an existing item of the DynamoDB table. This
+    #   * `'DELETE'` - Delete an existing item of the DynamoDB table. This
     #     item's partition key must match the specified hash key. If you
     #     specified a range key, the range key must match the item's sort
     #     key.
     #
     #   If you don't specify this parameter, AWS IoT Events triggers the
-    #   `INSERT` operation.
+    #   `'INSERT'` operation.
     #   @return [String]
     #
     # @!attribute [rw] payload_field
@@ -1920,7 +2102,8 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] table_name
-    #   The name of the DynamoDB table.
+    #   The name of the DynamoDB table. The `tableName` value must match the
+    #   table name of the target DynamoDB table.
     #   @return [String]
     #
     # @!attribute [rw] payload
@@ -1949,17 +2132,51 @@ module Aws::IoTEvents
     end
 
     # Defines an action to write to the Amazon DynamoDB table that you
-    # created. The default action payload contains all attribute-value pairs
-    # that have the information about the detector model instance and the
-    # event that triggered the action. You can also customize the
-    # [payload][1]. A separate column of the DynamoDB table receives one
-    # attribute-value pair in the payload that you specify.
+    # created. The default action payload contains all the information about
+    # the detector model instance and the event that triggered the action.
+    # You can customize the [payload][1]. A separate column of the DynamoDB
+    # table receives one attribute-value pair in the payload that you
+    # specify.
     #
-    # The `type` value for `Payload` must be `JSON`.
+    # You must use expressions for all parameters in `DynamoDBv2Action`. The
+    # expressions accept literals, operators, functions, references, and
+    # substitution templates.
     #
-    # You can use expressions for parameters that are strings. For more
-    # information, see [Expressions][2] in the *AWS IoT Events Developer
-    # Guide*.
+    # **Examples**
+    #
+    # * For literal values, the expressions must contain single quotes. For
+    #   example, the value for the `tableName` parameter can be
+    #   `'GreenhouseTemperatureTable'`.
+    #
+    # * For references, you must specify either variables or input values.
+    #   For example, the value for the `tableName` parameter can be
+    #   `$variable.ddbtableName`.
+    #
+    # * For a substitution template, you must use `$\{\}`, and the template
+    #   must be in single quotes. A substitution template can also contain a
+    #   combination of literals, operators, functions, references, and
+    #   substitution templates.
+    #
+    #   In the following example, the value for the `contentExpression`
+    #   parameter in `Payload` uses a substitution template.
+    #
+    #   `'\{"sensorID": "$\{$input.GreenhouseInput.sensor_id\}",
+    #   "temperature": "$\{$input.GreenhouseInput.temperature * 9 / 5 +
+    #   32\}"\}'`
+    #
+    # * For a string concatenation, you must use `+`. A string concatenation
+    #   can also contain a combination of literals, operators, functions,
+    #   references, and substitution templates.
+    #
+    #   In the following example, the value for the `tableName` parameter
+    #   uses a string concatenation.
+    #
+    #   `'GreenhouseTemperatureTable ' + $input.GreenhouseInput.date`
+    #
+    # For more information, see [Expressions][2] in the *AWS IoT Events
+    # Developer Guide*.
+    #
+    # The value for the `type` parameter in `Payload` must be `JSON`.
     #
     #
     #
@@ -2177,6 +2394,51 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetDetectorModelAnalysisResultsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         analysis_id: "AnalysisId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] analysis_id
+    #   The ID of the analysis result that you want to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token that you can use to return the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    class GetDetectorModelAnalysisResultsRequest < Struct.new(
+      :analysis_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_results
+    #   Contains information about one or more analysis results.
+    #   @return [Array<Types::AnalysisResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The token that you can use to return the next set of results, or
+    #   `null` if there are no more results.
+    #   @return [String]
+    #
+    class GetDetectorModelAnalysisResultsResponse < Struct.new(
+      :analysis_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the input.
     #
     # @!attribute [rw] input_configuration
@@ -2354,21 +2616,37 @@ module Aws::IoTEvents
     # triggered the action to a specified asset property in AWS IoT
     # SiteWise.
     #
+    # You must use expressions for all parameters in `IotSiteWiseAction`.
+    # The expressions accept literals, operators, functions, references, and
+    # substitutions templates.
+    #
+    # **Examples**
+    #
+    # * For literal values, the expressions must contain single quotes. For
+    #   example, the value for the `propertyAlias` parameter can be
+    #   `'/company/windfarm/3/turbine/7/temperature'`.
+    #
+    # * For references, you must specify either variables or input values.
+    #   For example, the value for the `assetId` parameter can be
+    #   `$input.TurbineInput.assetId1`.
+    #
+    # * For a substitution template, you must use `$\{\}`, and the template
+    #   must be in single quotes. A substitution template can also contain a
+    #   combination of literals, operators, functions, references, and
+    #   substitution templates.
+    #
+    #   In the following example, the value for the `propertyAlias`
+    #   parameter uses a substitution template.
+    #
+    #   `'company/windfarm/$\{$input.TemperatureInput.sensorData.windfarmID\}/turbine/
+    #   $\{$input.TemperatureInput.sensorData.turbineID\}/temperature'`
+    #
     # You must specify either `propertyAlias` or both `assetId` and
     # `propertyId` to identify the target asset property in AWS IoT
     # SiteWise.
     #
-    # For parameters that are string data type, you can specify the
-    # following options:
-    #
-    # * Use a string. For example, the `propertyAlias` value can be
-    #   `'/company/windfarm/3/turbine/7/temperature'`.
-    #
-    # * Use an expression. For example, the `propertyAlias` value can be
-    #   `'company/windfarm/$\{$input.TemperatureInput.sensorData.windfarmID\}/turbine/$\{$input.TemperatureInput.sensorData.turbineID\}/temperature'`.
-    #
-    #   For more information, see [Expressions][1] in the *AWS IoT Events
-    #   Developer Guide*.
+    # For more information, see [Expressions][1] in the *AWS IoT Events
+    # Developer Guide*.
     #
     #
     #
@@ -2400,21 +2678,19 @@ module Aws::IoTEvents
     # @!attribute [rw] entry_id
     #   A unique identifier for this entry. You can use the entry ID to
     #   track which data entry causes an error in case of failure. The
-    #   default is a new unique identifier. You can also specify an
-    #   expression.
+    #   default is a new unique identifier.
     #   @return [String]
     #
     # @!attribute [rw] asset_id
-    #   The ID of the asset that has the specified property. You can specify
-    #   an expression.
+    #   The ID of the asset that has the specified property.
     #   @return [String]
     #
     # @!attribute [rw] property_id
-    #   The ID of the asset property. You can specify an expression.
+    #   The ID of the asset property.
     #   @return [String]
     #
     # @!attribute [rw] property_alias
-    #   The alias of the asset property. You can also specify an expression.
+    #   The alias of the asset property.
     #   @return [String]
     #
     # @!attribute [rw] property_value
@@ -2520,11 +2796,11 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token that you can use to return the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return at one time.
+    #   The maximum number of results to be returned per request.
     #   @return [Integer]
     #
     class ListDetectorModelVersionsRequest < Struct.new(
@@ -2540,8 +2816,8 @@ module Aws::IoTEvents
     #   @return [Array<Types::DetectorModelVersionSummary>]
     #
     # @!attribute [rw] next_token
-    #   A token to retrieve the next set of results, or `null` if there are
-    #   no additional results.
+    #   The token that you can use to return the next set of results, or
+    #   `null` if there are no more results.
     #   @return [String]
     #
     class ListDetectorModelVersionsResponse < Struct.new(
@@ -2560,11 +2836,11 @@ module Aws::IoTEvents
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token that you can use to return the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return at one time.
+    #   The maximum number of results to be returned per request.
     #   @return [Integer]
     #
     class ListDetectorModelsRequest < Struct.new(
@@ -2579,8 +2855,8 @@ module Aws::IoTEvents
     #   @return [Array<Types::DetectorModelSummary>]
     #
     # @!attribute [rw] next_token
-    #   A token to retrieve the next set of results, or `null` if there are
-    #   no additional results.
+    #   The token that you can use to return the next set of results, or
+    #   `null` if there are no more results.
     #   @return [String]
     #
     class ListDetectorModelsResponse < Struct.new(
@@ -2599,11 +2875,11 @@ module Aws::IoTEvents
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token for the next set of results.
+    #   The token that you can use to return the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return at one time.
+    #   The maximum number of results to be returned per request.
     #   @return [Integer]
     #
     class ListInputsRequest < Struct.new(
@@ -2618,8 +2894,8 @@ module Aws::IoTEvents
     #   @return [Array<Types::InputSummary>]
     #
     # @!attribute [rw] next_token
-    #   A token to retrieve the next set of results, or `null` if there are
-    #   no additional results.
+    #   The token that you can use to return the next set of results, or
+    #   `null` if there are no more results.
     #   @return [String]
     #
     class ListInputsResponse < Struct.new(
@@ -3475,6 +3751,487 @@ module Aws::IoTEvents
       :queue_url,
       :use_base_64,
       :payload)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartDetectorModelAnalysisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_model_definition: { # required
+    #           states: [ # required
+    #             {
+    #               state_name: "StateName", # required
+    #               on_input: {
+    #                 events: [
+    #                   {
+    #                     event_name: "EventName", # required
+    #                     condition: "Condition",
+    #                     actions: [
+    #                       {
+    #                         set_variable: {
+    #                           variable_name: "VariableName", # required
+    #                           value: "VariableValue", # required
+    #                         },
+    #                         sns: {
+    #                           target_arn: "AmazonResourceName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         iot_topic_publish: {
+    #                           mqtt_topic: "MQTTTopic", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         set_timer: {
+    #                           timer_name: "TimerName", # required
+    #                           seconds: 1,
+    #                           duration_expression: "VariableValue",
+    #                         },
+    #                         clear_timer: {
+    #                           timer_name: "TimerName", # required
+    #                         },
+    #                         reset_timer: {
+    #                           timer_name: "TimerName", # required
+    #                         },
+    #                         lambda: {
+    #                           function_arn: "AmazonResourceName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         iot_events: {
+    #                           input_name: "InputName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         sqs: {
+    #                           queue_url: "QueueUrl", # required
+    #                           use_base_64: false,
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         firehose: {
+    #                           delivery_stream_name: "DeliveryStreamName", # required
+    #                           separator: "FirehoseSeparator",
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         dynamo_db: {
+    #                           hash_key_type: "DynamoKeyType",
+    #                           hash_key_field: "DynamoKeyField", # required
+    #                           hash_key_value: "DynamoKeyValue", # required
+    #                           range_key_type: "DynamoKeyType",
+    #                           range_key_field: "DynamoKeyField",
+    #                           range_key_value: "DynamoKeyValue",
+    #                           operation: "DynamoOperation",
+    #                           payload_field: "DynamoKeyField",
+    #                           table_name: "DynamoTableName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         dynamo_d_bv_2: {
+    #                           table_name: "DynamoTableName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         iot_site_wise: {
+    #                           entry_id: "AssetPropertyEntryId",
+    #                           asset_id: "AssetId",
+    #                           property_id: "AssetPropertyId",
+    #                           property_alias: "AssetPropertyAlias",
+    #                           property_value: { # required
+    #                             value: { # required
+    #                               string_value: "AssetPropertyStringValue",
+    #                               integer_value: "AssetPropertyIntegerValue",
+    #                               double_value: "AssetPropertyDoubleValue",
+    #                               boolean_value: "AssetPropertyBooleanValue",
+    #                             },
+    #                             timestamp: {
+    #                               time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                               offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                             },
+    #                             quality: "AssetPropertyQuality",
+    #                           },
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 transition_events: [
+    #                   {
+    #                     event_name: "EventName", # required
+    #                     condition: "Condition", # required
+    #                     actions: [
+    #                       {
+    #                         set_variable: {
+    #                           variable_name: "VariableName", # required
+    #                           value: "VariableValue", # required
+    #                         },
+    #                         sns: {
+    #                           target_arn: "AmazonResourceName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         iot_topic_publish: {
+    #                           mqtt_topic: "MQTTTopic", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         set_timer: {
+    #                           timer_name: "TimerName", # required
+    #                           seconds: 1,
+    #                           duration_expression: "VariableValue",
+    #                         },
+    #                         clear_timer: {
+    #                           timer_name: "TimerName", # required
+    #                         },
+    #                         reset_timer: {
+    #                           timer_name: "TimerName", # required
+    #                         },
+    #                         lambda: {
+    #                           function_arn: "AmazonResourceName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         iot_events: {
+    #                           input_name: "InputName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         sqs: {
+    #                           queue_url: "QueueUrl", # required
+    #                           use_base_64: false,
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         firehose: {
+    #                           delivery_stream_name: "DeliveryStreamName", # required
+    #                           separator: "FirehoseSeparator",
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         dynamo_db: {
+    #                           hash_key_type: "DynamoKeyType",
+    #                           hash_key_field: "DynamoKeyField", # required
+    #                           hash_key_value: "DynamoKeyValue", # required
+    #                           range_key_type: "DynamoKeyType",
+    #                           range_key_field: "DynamoKeyField",
+    #                           range_key_value: "DynamoKeyValue",
+    #                           operation: "DynamoOperation",
+    #                           payload_field: "DynamoKeyField",
+    #                           table_name: "DynamoTableName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         dynamo_d_bv_2: {
+    #                           table_name: "DynamoTableName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         iot_site_wise: {
+    #                           entry_id: "AssetPropertyEntryId",
+    #                           asset_id: "AssetId",
+    #                           property_id: "AssetPropertyId",
+    #                           property_alias: "AssetPropertyAlias",
+    #                           property_value: { # required
+    #                             value: { # required
+    #                               string_value: "AssetPropertyStringValue",
+    #                               integer_value: "AssetPropertyIntegerValue",
+    #                               double_value: "AssetPropertyDoubleValue",
+    #                               boolean_value: "AssetPropertyBooleanValue",
+    #                             },
+    #                             timestamp: {
+    #                               time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                               offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                             },
+    #                             quality: "AssetPropertyQuality",
+    #                           },
+    #                         },
+    #                       },
+    #                     ],
+    #                     next_state: "StateName", # required
+    #                   },
+    #                 ],
+    #               },
+    #               on_enter: {
+    #                 events: [
+    #                   {
+    #                     event_name: "EventName", # required
+    #                     condition: "Condition",
+    #                     actions: [
+    #                       {
+    #                         set_variable: {
+    #                           variable_name: "VariableName", # required
+    #                           value: "VariableValue", # required
+    #                         },
+    #                         sns: {
+    #                           target_arn: "AmazonResourceName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         iot_topic_publish: {
+    #                           mqtt_topic: "MQTTTopic", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         set_timer: {
+    #                           timer_name: "TimerName", # required
+    #                           seconds: 1,
+    #                           duration_expression: "VariableValue",
+    #                         },
+    #                         clear_timer: {
+    #                           timer_name: "TimerName", # required
+    #                         },
+    #                         reset_timer: {
+    #                           timer_name: "TimerName", # required
+    #                         },
+    #                         lambda: {
+    #                           function_arn: "AmazonResourceName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         iot_events: {
+    #                           input_name: "InputName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         sqs: {
+    #                           queue_url: "QueueUrl", # required
+    #                           use_base_64: false,
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         firehose: {
+    #                           delivery_stream_name: "DeliveryStreamName", # required
+    #                           separator: "FirehoseSeparator",
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         dynamo_db: {
+    #                           hash_key_type: "DynamoKeyType",
+    #                           hash_key_field: "DynamoKeyField", # required
+    #                           hash_key_value: "DynamoKeyValue", # required
+    #                           range_key_type: "DynamoKeyType",
+    #                           range_key_field: "DynamoKeyField",
+    #                           range_key_value: "DynamoKeyValue",
+    #                           operation: "DynamoOperation",
+    #                           payload_field: "DynamoKeyField",
+    #                           table_name: "DynamoTableName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         dynamo_d_bv_2: {
+    #                           table_name: "DynamoTableName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         iot_site_wise: {
+    #                           entry_id: "AssetPropertyEntryId",
+    #                           asset_id: "AssetId",
+    #                           property_id: "AssetPropertyId",
+    #                           property_alias: "AssetPropertyAlias",
+    #                           property_value: { # required
+    #                             value: { # required
+    #                               string_value: "AssetPropertyStringValue",
+    #                               integer_value: "AssetPropertyIntegerValue",
+    #                               double_value: "AssetPropertyDoubleValue",
+    #                               boolean_value: "AssetPropertyBooleanValue",
+    #                             },
+    #                             timestamp: {
+    #                               time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                               offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                             },
+    #                             quality: "AssetPropertyQuality",
+    #                           },
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #               },
+    #               on_exit: {
+    #                 events: [
+    #                   {
+    #                     event_name: "EventName", # required
+    #                     condition: "Condition",
+    #                     actions: [
+    #                       {
+    #                         set_variable: {
+    #                           variable_name: "VariableName", # required
+    #                           value: "VariableValue", # required
+    #                         },
+    #                         sns: {
+    #                           target_arn: "AmazonResourceName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         iot_topic_publish: {
+    #                           mqtt_topic: "MQTTTopic", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         set_timer: {
+    #                           timer_name: "TimerName", # required
+    #                           seconds: 1,
+    #                           duration_expression: "VariableValue",
+    #                         },
+    #                         clear_timer: {
+    #                           timer_name: "TimerName", # required
+    #                         },
+    #                         reset_timer: {
+    #                           timer_name: "TimerName", # required
+    #                         },
+    #                         lambda: {
+    #                           function_arn: "AmazonResourceName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         iot_events: {
+    #                           input_name: "InputName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         sqs: {
+    #                           queue_url: "QueueUrl", # required
+    #                           use_base_64: false,
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         firehose: {
+    #                           delivery_stream_name: "DeliveryStreamName", # required
+    #                           separator: "FirehoseSeparator",
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         dynamo_db: {
+    #                           hash_key_type: "DynamoKeyType",
+    #                           hash_key_field: "DynamoKeyField", # required
+    #                           hash_key_value: "DynamoKeyValue", # required
+    #                           range_key_type: "DynamoKeyType",
+    #                           range_key_field: "DynamoKeyField",
+    #                           range_key_value: "DynamoKeyValue",
+    #                           operation: "DynamoOperation",
+    #                           payload_field: "DynamoKeyField",
+    #                           table_name: "DynamoTableName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         dynamo_d_bv_2: {
+    #                           table_name: "DynamoTableName", # required
+    #                           payload: {
+    #                             content_expression: "ContentExpression", # required
+    #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         iot_site_wise: {
+    #                           entry_id: "AssetPropertyEntryId",
+    #                           asset_id: "AssetId",
+    #                           property_id: "AssetPropertyId",
+    #                           property_alias: "AssetPropertyAlias",
+    #                           property_value: { # required
+    #                             value: { # required
+    #                               string_value: "AssetPropertyStringValue",
+    #                               integer_value: "AssetPropertyIntegerValue",
+    #                               double_value: "AssetPropertyDoubleValue",
+    #                               boolean_value: "AssetPropertyBooleanValue",
+    #                             },
+    #                             timestamp: {
+    #                               time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                               offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                             },
+    #                             quality: "AssetPropertyQuality",
+    #                           },
+    #                         },
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
+    #           initial_state_name: "StateName", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] detector_model_definition
+    #   Information that defines how a detector operates.
+    #   @return [Types::DetectorModelDefinition]
+    #
+    class StartDetectorModelAnalysisRequest < Struct.new(
+      :detector_model_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_id
+    #   The ID that you can use to retrieve the analysis result.
+    #   @return [String]
+    #
+    class StartDetectorModelAnalysisResponse < Struct.new(
+      :analysis_id)
       SENSITIVE = []
       include Aws::Structure
     end

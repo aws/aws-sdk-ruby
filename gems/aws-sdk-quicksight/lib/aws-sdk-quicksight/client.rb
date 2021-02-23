@@ -992,9 +992,12 @@ module Aws::QuickSight
     #
     # @option params [required, String] :type
     #   The type of the data source. Currently, the supported types for this
-    #   operation are: `ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL,
-    #   POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER,
-    #   TERADATA`. Use `ListDataSources` to return a list of all data sources.
+    #   operation are: `ATHENA, AURORA, AURORA_POSTGRESQL,
+    #   AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT,
+    #   S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA`. Use `ListDataSources` to
+    #   return a list of all data sources.
+    #
+    #   `AMAZON_ELASTICSEARCH` is for Amazon managed Elasticsearch Service.
     #
     # @option params [Types::DataSourceParameters] :data_source_parameters
     #   The parameters that QuickSight uses to connect to your underlying
@@ -7440,7 +7443,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

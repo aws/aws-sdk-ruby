@@ -5717,6 +5717,8 @@ module Aws::Glue
     # @option params [Integer] :max_results
     #   The maximum number of partitions to return in a single response.
     #
+    # @option params [Boolean] :exclude_column_schema
+    #
     # @return [Types::GetPartitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPartitionsResponse#partitions #partitions} => Array&lt;Types::Partition&gt;
@@ -5737,6 +5739,7 @@ module Aws::Glue
     #       total_segments: 1, # required
     #     },
     #     max_results: 1,
+    #     exclude_column_schema: false,
     #   })
     #
     # @example Response structure
@@ -10596,7 +10599,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

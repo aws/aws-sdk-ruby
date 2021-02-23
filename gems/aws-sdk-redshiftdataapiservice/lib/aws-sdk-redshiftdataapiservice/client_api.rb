@@ -119,7 +119,8 @@ module Aws::RedshiftDataAPIService
     DescribeStatementResponse.struct_class = Types::DescribeStatementResponse
 
     DescribeTableRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "ClusterIdentifier"))
-    DescribeTableRequest.add_member(:database, Shapes::ShapeRef.new(shape: String, location_name: "Database"))
+    DescribeTableRequest.add_member(:connected_database, Shapes::ShapeRef.new(shape: String, location_name: "ConnectedDatabase"))
+    DescribeTableRequest.add_member(:database, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Database"))
     DescribeTableRequest.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
     DescribeTableRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
     DescribeTableRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -190,6 +191,7 @@ module Aws::RedshiftDataAPIService
     ListDatabasesResponse.struct_class = Types::ListDatabasesResponse
 
     ListSchemasRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "ClusterIdentifier"))
+    ListSchemasRequest.add_member(:connected_database, Shapes::ShapeRef.new(shape: String, location_name: "ConnectedDatabase"))
     ListSchemasRequest.add_member(:database, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Database"))
     ListSchemasRequest.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
     ListSchemasRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
@@ -214,6 +216,7 @@ module Aws::RedshiftDataAPIService
     ListStatementsResponse.struct_class = Types::ListStatementsResponse
 
     ListTablesRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "ClusterIdentifier"))
+    ListTablesRequest.add_member(:connected_database, Shapes::ShapeRef.new(shape: String, location_name: "ConnectedDatabase"))
     ListTablesRequest.add_member(:database, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Database"))
     ListTablesRequest.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
     ListTablesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))

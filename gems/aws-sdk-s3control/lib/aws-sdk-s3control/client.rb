@@ -1484,6 +1484,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
     # @option params [required, String] :account_id
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #
     # @option params [required, String] :job_id
     #   The ID for the job whose information you want to retrieve.
@@ -2500,6 +2501,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
     # @option params [required, String] :account_id
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #
     # @option params [Array<String>] :job_statuses
     #   The `List Jobs` request returns jobs that match the statuses listed in
@@ -3428,6 +3430,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
     # @option params [required, String] :account_id
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #
     # @option params [required, String] :job_id
     #   The ID for the job whose priority you want to update.
@@ -3488,6 +3491,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
     #
     # @option params [required, String] :account_id
+    #   The AWS account ID associated with the S3 Batch Operations job.
     #
     # @option params [required, String] :job_id
     #   The ID of the job whose status you want to update.
@@ -3542,7 +3546,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -16,6 +16,16 @@ module Aws::IoTEvents
     Action = Shapes::StructureShape.new(name: 'Action')
     Actions = Shapes::ListShape.new(name: 'Actions')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    AnalysisId = Shapes::StringShape.new(name: 'AnalysisId')
+    AnalysisMessage = Shapes::StringShape.new(name: 'AnalysisMessage')
+    AnalysisResult = Shapes::StructureShape.new(name: 'AnalysisResult')
+    AnalysisResultLevel = Shapes::StringShape.new(name: 'AnalysisResultLevel')
+    AnalysisResultLocation = Shapes::StructureShape.new(name: 'AnalysisResultLocation')
+    AnalysisResultLocationPath = Shapes::StringShape.new(name: 'AnalysisResultLocationPath')
+    AnalysisResultLocations = Shapes::ListShape.new(name: 'AnalysisResultLocations')
+    AnalysisResults = Shapes::ListShape.new(name: 'AnalysisResults')
+    AnalysisStatus = Shapes::StringShape.new(name: 'AnalysisStatus')
+    AnalysisType = Shapes::StringShape.new(name: 'AnalysisType')
     AssetId = Shapes::StringShape.new(name: 'AssetId')
     AssetPropertyAlias = Shapes::StringShape.new(name: 'AssetPropertyAlias')
     AssetPropertyBooleanValue = Shapes::StringShape.new(name: 'AssetPropertyBooleanValue')
@@ -45,6 +55,8 @@ module Aws::IoTEvents
     DeleteInputRequest = Shapes::StructureShape.new(name: 'DeleteInputRequest')
     DeleteInputResponse = Shapes::StructureShape.new(name: 'DeleteInputResponse')
     DeliveryStreamName = Shapes::StringShape.new(name: 'DeliveryStreamName')
+    DescribeDetectorModelAnalysisRequest = Shapes::StructureShape.new(name: 'DescribeDetectorModelAnalysisRequest')
+    DescribeDetectorModelAnalysisResponse = Shapes::StructureShape.new(name: 'DescribeDetectorModelAnalysisResponse')
     DescribeDetectorModelRequest = Shapes::StructureShape.new(name: 'DescribeDetectorModelRequest')
     DescribeDetectorModelResponse = Shapes::StructureShape.new(name: 'DescribeDetectorModelResponse')
     DescribeInputRequest = Shapes::StructureShape.new(name: 'DescribeInputRequest')
@@ -78,6 +90,8 @@ module Aws::IoTEvents
     Events = Shapes::ListShape.new(name: 'Events')
     FirehoseAction = Shapes::StructureShape.new(name: 'FirehoseAction')
     FirehoseSeparator = Shapes::StringShape.new(name: 'FirehoseSeparator')
+    GetDetectorModelAnalysisResultsRequest = Shapes::StructureShape.new(name: 'GetDetectorModelAnalysisResultsRequest')
+    GetDetectorModelAnalysisResultsResponse = Shapes::StructureShape.new(name: 'GetDetectorModelAnalysisResultsResponse')
     Input = Shapes::StructureShape.new(name: 'Input')
     InputArn = Shapes::StringShape.new(name: 'InputArn')
     InputConfiguration = Shapes::StructureShape.new(name: 'InputConfiguration')
@@ -107,6 +121,7 @@ module Aws::IoTEvents
     LoggingLevel = Shapes::StringShape.new(name: 'LoggingLevel')
     LoggingOptions = Shapes::StructureShape.new(name: 'LoggingOptions')
     MQTTTopic = Shapes::StringShape.new(name: 'MQTTTopic')
+    MaxAnalysisResults = Shapes::IntegerShape.new(name: 'MaxAnalysisResults')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OnEnterLifecycle = Shapes::StructureShape.new(name: 'OnEnterLifecycle')
@@ -126,6 +141,8 @@ module Aws::IoTEvents
     SetTimerAction = Shapes::StructureShape.new(name: 'SetTimerAction')
     SetVariableAction = Shapes::StructureShape.new(name: 'SetVariableAction')
     SqsAction = Shapes::StructureShape.new(name: 'SqsAction')
+    StartDetectorModelAnalysisRequest = Shapes::StructureShape.new(name: 'StartDetectorModelAnalysisRequest')
+    StartDetectorModelAnalysisResponse = Shapes::StructureShape.new(name: 'StartDetectorModelAnalysisResponse')
     State = Shapes::StructureShape.new(name: 'State')
     StateName = Shapes::StringShape.new(name: 'StateName')
     States = Shapes::ListShape.new(name: 'States')
@@ -171,6 +188,19 @@ module Aws::IoTEvents
     Action.struct_class = Types::Action
 
     Actions.member = Shapes::ShapeRef.new(shape: Action)
+
+    AnalysisResult.add_member(:type, Shapes::ShapeRef.new(shape: AnalysisType, location_name: "type"))
+    AnalysisResult.add_member(:level, Shapes::ShapeRef.new(shape: AnalysisResultLevel, location_name: "level"))
+    AnalysisResult.add_member(:message, Shapes::ShapeRef.new(shape: AnalysisMessage, location_name: "message"))
+    AnalysisResult.add_member(:locations, Shapes::ShapeRef.new(shape: AnalysisResultLocations, location_name: "locations"))
+    AnalysisResult.struct_class = Types::AnalysisResult
+
+    AnalysisResultLocation.add_member(:path, Shapes::ShapeRef.new(shape: AnalysisResultLocationPath, location_name: "path"))
+    AnalysisResultLocation.struct_class = Types::AnalysisResultLocation
+
+    AnalysisResultLocations.member = Shapes::ShapeRef.new(shape: AnalysisResultLocation)
+
+    AnalysisResults.member = Shapes::ShapeRef.new(shape: AnalysisResult)
 
     AssetPropertyTimestamp.add_member(:time_in_seconds, Shapes::ShapeRef.new(shape: AssetPropertyTimeInSeconds, required: true, location_name: "timeInSeconds"))
     AssetPropertyTimestamp.add_member(:offset_in_nanos, Shapes::ShapeRef.new(shape: AssetPropertyOffsetInNanos, location_name: "offsetInNanos"))
@@ -225,6 +255,12 @@ module Aws::IoTEvents
     DeleteInputRequest.struct_class = Types::DeleteInputRequest
 
     DeleteInputResponse.struct_class = Types::DeleteInputResponse
+
+    DescribeDetectorModelAnalysisRequest.add_member(:analysis_id, Shapes::ShapeRef.new(shape: AnalysisId, required: true, location: "uri", location_name: "analysisId"))
+    DescribeDetectorModelAnalysisRequest.struct_class = Types::DescribeDetectorModelAnalysisRequest
+
+    DescribeDetectorModelAnalysisResponse.add_member(:status, Shapes::ShapeRef.new(shape: AnalysisStatus, location_name: "status"))
+    DescribeDetectorModelAnalysisResponse.struct_class = Types::DescribeDetectorModelAnalysisResponse
 
     DescribeDetectorModelRequest.add_member(:detector_model_name, Shapes::ShapeRef.new(shape: DetectorModelName, required: true, location: "uri", location_name: "detectorModelName"))
     DescribeDetectorModelRequest.add_member(:detector_model_version, Shapes::ShapeRef.new(shape: DetectorModelVersion, location: "querystring", location_name: "version"))
@@ -316,6 +352,15 @@ module Aws::IoTEvents
     FirehoseAction.add_member(:separator, Shapes::ShapeRef.new(shape: FirehoseSeparator, location_name: "separator"))
     FirehoseAction.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
     FirehoseAction.struct_class = Types::FirehoseAction
+
+    GetDetectorModelAnalysisResultsRequest.add_member(:analysis_id, Shapes::ShapeRef.new(shape: AnalysisId, required: true, location: "uri", location_name: "analysisId"))
+    GetDetectorModelAnalysisResultsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    GetDetectorModelAnalysisResultsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxAnalysisResults, location: "querystring", location_name: "maxResults"))
+    GetDetectorModelAnalysisResultsRequest.struct_class = Types::GetDetectorModelAnalysisResultsRequest
+
+    GetDetectorModelAnalysisResultsResponse.add_member(:analysis_results, Shapes::ShapeRef.new(shape: AnalysisResults, location_name: "analysisResults"))
+    GetDetectorModelAnalysisResultsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetDetectorModelAnalysisResultsResponse.struct_class = Types::GetDetectorModelAnalysisResultsResponse
 
     Input.add_member(:input_configuration, Shapes::ShapeRef.new(shape: InputConfiguration, location_name: "inputConfiguration"))
     Input.add_member(:input_definition, Shapes::ShapeRef.new(shape: InputDefinition, location_name: "inputDefinition"))
@@ -458,6 +503,12 @@ module Aws::IoTEvents
     SqsAction.add_member(:use_base_64, Shapes::ShapeRef.new(shape: UseBase64, location_name: "useBase64"))
     SqsAction.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
     SqsAction.struct_class = Types::SqsAction
+
+    StartDetectorModelAnalysisRequest.add_member(:detector_model_definition, Shapes::ShapeRef.new(shape: DetectorModelDefinition, required: true, location_name: "detectorModelDefinition"))
+    StartDetectorModelAnalysisRequest.struct_class = Types::StartDetectorModelAnalysisRequest
+
+    StartDetectorModelAnalysisResponse.add_member(:analysis_id, Shapes::ShapeRef.new(shape: AnalysisId, location_name: "analysisId"))
+    StartDetectorModelAnalysisResponse.struct_class = Types::StartDetectorModelAnalysisResponse
 
     State.add_member(:state_name, Shapes::ShapeRef.new(shape: StateName, required: true, location_name: "stateName"))
     State.add_member(:on_input, Shapes::ShapeRef.new(shape: OnInputLifecycle, location_name: "onInput"))
@@ -605,6 +656,19 @@ module Aws::IoTEvents
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:describe_detector_model_analysis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDetectorModelAnalysis"
+        o.http_method = "GET"
+        o.http_request_uri = "/analysis/detector-models/{analysisId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDetectorModelAnalysisRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDetectorModelAnalysisResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:describe_input, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeInput"
         o.http_method = "GET"
@@ -630,6 +694,19 @@ module Aws::IoTEvents
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
+      api.add_operation(:get_detector_model_analysis_results, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDetectorModelAnalysisResults"
+        o.http_method = "GET"
+        o.http_request_uri = "/analysis/detector-models/{analysisId}/results"
+        o.input = Shapes::ShapeRef.new(shape: GetDetectorModelAnalysisResultsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDetectorModelAnalysisResultsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:list_detector_model_versions, Seahorse::Model::Operation.new.tap do |o|
@@ -694,6 +771,19 @@ module Aws::IoTEvents
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:start_detector_model_analysis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDetectorModelAnalysis"
+        o.http_method = "POST"
+        o.http_request_uri = "/analysis/detector-models/"
+        o.input = Shapes::ShapeRef.new(shape: StartDetectorModelAnalysisRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartDetectorModelAnalysisResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

@@ -74,6 +74,7 @@ module Aws::Glue
     CatalogEncryptionMode = Shapes::StringShape.new(name: 'CatalogEncryptionMode')
     CatalogEntries = Shapes::ListShape.new(name: 'CatalogEntries')
     CatalogEntry = Shapes::StructureShape.new(name: 'CatalogEntry')
+    CatalogGetterPageSize = Shapes::IntegerShape.new(name: 'CatalogGetterPageSize')
     CatalogIdString = Shapes::StringShape.new(name: 'CatalogIdString')
     CatalogImportStatus = Shapes::StructureShape.new(name: 'CatalogImportStatus')
     CatalogTablesList = Shapes::ListShape.new(name: 'CatalogTablesList')
@@ -1869,7 +1870,7 @@ module Aws::Glue
 
     GetDatabasesRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetDatabasesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    GetDatabasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetDatabasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CatalogGetterPageSize, location_name: "MaxResults"))
     GetDatabasesRequest.add_member(:resource_share_type, Shapes::ShapeRef.new(shape: ResourceShareType, location_name: "ResourceShareType"))
     GetDatabasesRequest.struct_class = Types::GetDatabasesRequest
 
@@ -2031,6 +2032,7 @@ module Aws::Glue
     GetPartitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetPartitionsRequest.add_member(:segment, Shapes::ShapeRef.new(shape: Segment, location_name: "Segment"))
     GetPartitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetPartitionsRequest.add_member(:exclude_column_schema, Shapes::ShapeRef.new(shape: BooleanNullable, location_name: "ExcludeColumnSchema"))
     GetPartitionsRequest.struct_class = Types::GetPartitionsRequest
 
     GetPartitionsResponse.add_member(:partitions, Shapes::ShapeRef.new(shape: PartitionList, location_name: "Partitions"))
@@ -2168,7 +2170,7 @@ module Aws::Glue
     GetTableVersionsRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     GetTableVersionsRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
     GetTableVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    GetTableVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetTableVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CatalogGetterPageSize, location_name: "MaxResults"))
     GetTableVersionsRequest.struct_class = Types::GetTableVersionsRequest
 
     GetTableVersionsResponse.add_member(:table_versions, Shapes::ShapeRef.new(shape: GetTableVersionsList, location_name: "TableVersions"))
@@ -2179,7 +2181,7 @@ module Aws::Glue
     GetTablesRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     GetTablesRequest.add_member(:expression, Shapes::ShapeRef.new(shape: FilterString, location_name: "Expression"))
     GetTablesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    GetTablesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetTablesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CatalogGetterPageSize, location_name: "MaxResults"))
     GetTablesRequest.struct_class = Types::GetTablesRequest
 
     GetTablesResponse.add_member(:table_list, Shapes::ShapeRef.new(shape: TableList, location_name: "TableList"))
@@ -2219,7 +2221,7 @@ module Aws::Glue
     GetUserDefinedFunctionsRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DatabaseName"))
     GetUserDefinedFunctionsRequest.add_member(:pattern, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Pattern"))
     GetUserDefinedFunctionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
-    GetUserDefinedFunctionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    GetUserDefinedFunctionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CatalogGetterPageSize, location_name: "MaxResults"))
     GetUserDefinedFunctionsRequest.struct_class = Types::GetUserDefinedFunctionsRequest
 
     GetUserDefinedFunctionsResponse.add_member(:user_defined_functions, Shapes::ShapeRef.new(shape: UserDefinedFunctionList, location_name: "UserDefinedFunctions"))
