@@ -29,9 +29,10 @@ region. Defaults to `legacy` mode using global endpoint.
             # keep legacy global endpoint pattern by default
             if context.config.s3_us_east_1_regional_endpoint == 'legacy'
               host = context.http_request.endpoint.host
-              # if it's an ARN, don't touch the endpoint at all
-              # if its a private link endpoint, don't touch the endpoint at all
-              unless context.metadata[:s3_arn] || IADRegionalEndpoint.private_link_host?(host, context.config.force_path_style)
+              # if it's an ARN or private link endpoint, then
+              # don't touch the endpoint at all
+              unless context.metadata[:s3_arn] ||
+                     IADRegionalEndpoint.private_link_host?(host, context)
                 legacy_host = IADRegionalEndpoint.legacy_host(host)
                 context.http_request.endpoint.host = legacy_host
               end
@@ -45,17 +46,21 @@ region. Defaults to `legacy` mode using global endpoint.
           host.sub(".us-east-1", '')
         end
 
-        def self.private_link_host?(host, force_path_style)
-          s3_private_link_prefix = 'bucket'.freeze
-          if force_path_style
-            private_link_prefix_part = host.split(".")[0]
-          else
-            private_link_prefix_part = host.split(".")[1]
-          end
-          s3_private_link_prefix == private_link_prefix_part
-        end
-
         private
+
+        def self.private_link_host?(host, context)
+          force_path_style = context.config.force_path_style
+          private_link_endpoint_prefix = 'bucket'.freeze
+
+          if force_path_style
+            # bucket is in the path, so use first member
+            actual_endpoint_prefix = host.split(".")[0]
+          else
+            # bucket is a host label, so use second member
+            actual_endpoint_prefix = host.split(".")[1]
+          end
+          private_link_endpoint_prefix == actual_endpoint_prefix
+        end
 
         def self.resolve_iad_regional_endpoint(cfg)
           mode = ENV['AWS_S3_US_EAST_1_REGIONAL_ENDPOINT'] ||

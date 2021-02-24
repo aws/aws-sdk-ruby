@@ -101,6 +101,29 @@ module Aws
           resp = client.list_objects(bucket: arn)
           expect(resp.context.http_request.endpoint.to_s).to match(/us-east-1/)
         end
+
+        it 'does not modify a virtual host private link endpoint' do
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-east-1',
+            endpoint: 'https://bucket.vpce-123-abc.s3.us-east-1.vpce.amazonaws.com'
+          )
+          bucket = 'bucketname'
+          resp = client.list_objects(bucket: bucket)
+          expect(resp.context.http_request.endpoint.to_s).to match(/us-east-1/)
+        end
+
+        it 'does not modify a path style private link endpoint' do
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-east-1',
+            force_path_style: true,
+            endpoint: 'https://bucket.vpce-123-abc.s3.us-east-1.vpce.amazonaws.com'
+          )
+          bucket = 'bucketname'
+          resp = client.list_objects(bucket: bucket)
+          expect(resp.context.http_request.endpoint.to_s).to match(/us-east-1/)
+        end
       end
 
     end
