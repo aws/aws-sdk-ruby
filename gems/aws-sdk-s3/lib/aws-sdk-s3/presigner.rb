@@ -58,8 +58,7 @@ module Aws
       #   is returned instead of the default HTTPS URL.
       #
       # @option params [Boolean] :virtual_host (false) When `true`, the
-      #   bucket name will be used as the hostname. This will cause
-      #   the returned URL to be 'http' and not 'https'.
+      #   bucket name will be used as the hostname.
       #
       # @option params [Boolean] :use_accelerate_endpoint (false) When `true`,
       #   Presigner will attempt to use accelerated endpoint.

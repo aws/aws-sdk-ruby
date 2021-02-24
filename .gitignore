@@ -8,6 +8,7 @@
 coverage
 /Gemfile.lock
 /TODO
+/scratchpad
 *.DS_Store
 .idea
 .ruby-version

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Support https in `Object#public_url` for `virtual_host`. (#1389)
+
 1.88.1 (2021-02-12)
 ------------------
 
