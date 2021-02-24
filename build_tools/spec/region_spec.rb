@@ -45,9 +45,6 @@ describe 'ensure no hard-coded region' do
                   whitelist[key][File.basename(path)] == 'SKIP_FILE')
 
           # If we use \w+ we will get false positives for uid fields
-          if val =~ /(us|eu|ap|sa|ca)-[a-zA-Z]+-\d+/
-            puts "LINE: #{idx}"
-          end
           expect(val).not_to match(/(us|eu|ap|sa|ca)-[a-zA-Z]+-\d+/)
         end
       end
