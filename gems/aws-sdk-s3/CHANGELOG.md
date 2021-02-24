@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix an issue with the IAD regional endpoint plugin dropping the region portion of the PrivateLink endpoint.
+
 1.88.1 (2021-02-12)
 ------------------
 
