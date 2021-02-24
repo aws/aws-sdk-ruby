@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2021-02-24)
+------------------
+
+* Feature - AWS Elemental MediaPackage provides access logs that capture detailed information about requests sent to a customer's MediaPackage VOD packaging group.
+
 1.20.0 (2021-02-02)
 ------------------
 

@@ -299,6 +299,265 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Specifies Auto-Tune type and Auto-Tune action details.
+    #
+    # @!attribute [rw] auto_tune_type
+    #   Specifies Auto-Tune type. Valid value is SCHEDULED\_ACTION.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_tune_details
+    #   Specifies details of the Auto-Tune action. See the [Developer
+    #   Guide][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
+    #   @return [Types::AutoTuneDetails]
+    #
+    class AutoTune < Struct.new(
+      :auto_tune_type,
+      :auto_tune_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies details of the Auto-Tune action. See the [Developer
+    # Guide][1] for more information.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
+    #
+    # @!attribute [rw] scheduled_auto_tune_details
+    #   Specifies details of the scheduled Auto-Tune action. See the
+    #   [Developer Guide][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
+    #   @return [Types::ScheduledAutoTuneDetails]
+    #
+    class AutoTuneDetails < Struct.new(
+      :scheduled_auto_tune_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies Auto-Tune maitenance schedule. See the [Developer Guide][1]
+    # for more information.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
+    #
+    # @note When making an API call, you may pass AutoTuneMaintenanceSchedule
+    #   data as a hash:
+    #
+    #       {
+    #         start_at: Time.now,
+    #         duration: {
+    #           value: 1,
+    #           unit: "HOURS", # accepts HOURS
+    #         },
+    #         cron_expression_for_recurrence: "String",
+    #       }
+    #
+    # @!attribute [rw] start_at
+    #   Specifies timestamp at which Auto-Tune maintenance schedule start.
+    #   @return [Time]
+    #
+    # @!attribute [rw] duration
+    #   Specifies maintenance schedule duration: duration value and duration
+    #   unit. See the [Developer Guide][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
+    #   @return [Types::Duration]
+    #
+    # @!attribute [rw] cron_expression_for_recurrence
+    #   Specifies cron expression for a recurring maintenance schedule. See
+    #   the [Developer Guide][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
+    #   @return [String]
+    #
+    class AutoTuneMaintenanceSchedule < Struct.new(
+      :start_at,
+      :duration,
+      :cron_expression_for_recurrence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the Auto-Tune options: the Auto-Tune desired state for the
+    # domain, rollback state when disabling Auto-Tune options and list of
+    # maintenance schedules.
+    #
+    # @note When making an API call, you may pass AutoTuneOptions
+    #   data as a hash:
+    #
+    #       {
+    #         desired_state: "ENABLED", # accepts ENABLED, DISABLED
+    #         rollback_on_disable: "NO_ROLLBACK", # accepts NO_ROLLBACK, DEFAULT_ROLLBACK
+    #         maintenance_schedules: [
+    #           {
+    #             start_at: Time.now,
+    #             duration: {
+    #               value: 1,
+    #               unit: "HOURS", # accepts HOURS
+    #             },
+    #             cron_expression_for_recurrence: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] desired_state
+    #   Specifies the Auto-Tune desired state. Valid values are ENABLED,
+    #   DISABLED.
+    #   @return [String]
+    #
+    # @!attribute [rw] rollback_on_disable
+    #   Specifies the rollback state while disabling Auto-Tune for the
+    #   domain. Valid values are NO\_ROLLBACK, DEFAULT\_ROLLBACK.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_schedules
+    #   Specifies list of maitenance schedules. See the [Developer Guide][1]
+    #   for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
+    #   @return [Array<Types::AutoTuneMaintenanceSchedule>]
+    #
+    class AutoTuneOptions < Struct.new(
+      :desired_state,
+      :rollback_on_disable,
+      :maintenance_schedules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the Auto-Tune options: the Auto-Tune desired state for the
+    # domain and list of maintenance schedules.
+    #
+    # @note When making an API call, you may pass AutoTuneOptionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         desired_state: "ENABLED", # accepts ENABLED, DISABLED
+    #         maintenance_schedules: [
+    #           {
+    #             start_at: Time.now,
+    #             duration: {
+    #               value: 1,
+    #               unit: "HOURS", # accepts HOURS
+    #             },
+    #             cron_expression_for_recurrence: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] desired_state
+    #   Specifies the Auto-Tune desired state. Valid values are ENABLED,
+    #   DISABLED.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_schedules
+    #   Specifies list of maitenance schedules. See the [Developer Guide][1]
+    #   for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
+    #   @return [Array<Types::AutoTuneMaintenanceSchedule>]
+    #
+    class AutoTuneOptionsInput < Struct.new(
+      :desired_state,
+      :maintenance_schedules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the Auto-Tune options: the Auto-Tune desired state for the
+    # domain and list of maintenance schedules.
+    #
+    # @!attribute [rw] state
+    #   Specifies the `AutoTuneState` for the Elasticsearch domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Specifies the error message while enabling or disabling the
+    #   Auto-Tune.
+    #   @return [String]
+    #
+    class AutoTuneOptionsOutput < Struct.new(
+      :state,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the status of Auto-Tune options for the specified
+    # Elasticsearch domain.
+    #
+    # @!attribute [rw] options
+    #   Specifies Auto-Tune options for the specified Elasticsearch domain.
+    #   @return [Types::AutoTuneOptions]
+    #
+    # @!attribute [rw] status
+    #   Specifies Status of the Auto-Tune options for the specified
+    #   Elasticsearch domain.
+    #   @return [Types::AutoTuneStatus]
+    #
+    class AutoTuneOptionsStatus < Struct.new(
+      :options,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the current status of the Auto-Tune options.
+    #
+    # @!attribute [rw] creation_date
+    #   Timestamp which tells Auto-Tune options creation date .
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_date
+    #   Timestamp which tells Auto-Tune options last updated time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_version
+    #   Specifies the Auto-Tune options latest version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   Specifies the `AutoTuneState` for the Elasticsearch domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Specifies the error message while enabling or disabling the
+    #   Auto-Tune options.
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_deletion
+    #   Indicates whether the Elasticsearch domain is being deleted.
+    #   @return [Boolean]
+    #
+    class AutoTuneStatus < Struct.new(
+      :creation_date,
+      :update_date,
+      :update_version,
+      :state,
+      :error_message,
+      :pending_deletion)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An error occurred while processing the request.
     #
     # @!attribute [rw] message
@@ -517,6 +776,19 @@ module Aws::ElasticsearchService
     #             session_timeout_minutes: 1,
     #           },
     #         },
+    #         auto_tune_options: {
+    #           desired_state: "ENABLED", # accepts ENABLED, DISABLED
+    #           maintenance_schedules: [
+    #             {
+    #               start_at: Time.now,
+    #               duration: {
+    #                 value: 1,
+    #                 unit: "HOURS", # accepts HOURS
+    #               },
+    #               cron_expression_for_recurrence: "String",
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
@@ -610,6 +882,10 @@ module Aws::ElasticsearchService
     #   Specifies advanced security options.
     #   @return [Types::AdvancedSecurityOptionsInput]
     #
+    # @!attribute [rw] auto_tune_options
+    #   Specifies Auto-Tune options.
+    #   @return [Types::AutoTuneOptionsInput]
+    #
     class CreateElasticsearchDomainRequest < Struct.new(
       :domain_name,
       :elasticsearch_version,
@@ -624,7 +900,8 @@ module Aws::ElasticsearchService
       :advanced_options,
       :log_publishing_options,
       :domain_endpoint_options,
-      :advanced_security_options)
+      :advanced_security_options,
+      :auto_tune_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -910,6 +1187,68 @@ module Aws::ElasticsearchService
     #
     class DeletePackageResponse < Struct.new(
       :package_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the `DescribeDomainAutoTunes`
+    # operation.
+    #
+    # @note When making an API call, you may pass DescribeDomainAutoTunesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   Specifies the domain name for which you want Auto-Tune action
+    #   details.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Set this value to limit the number of results returned. If not
+    #   specified, defaults to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   NextToken is sent in case the earlier API call results contain the
+    #   NextToken. It is used for pagination.
+    #   @return [String]
+    #
+    class DescribeDomainAutoTunesRequest < Struct.new(
+      :domain_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of `DescribeDomainAutoTunes` request. See the [Developer
+    # Guide][1] for more information.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
+    #
+    # @!attribute [rw] auto_tunes
+    #   Specifies the list of setting adjustments that Auto-Tune has made to
+    #   the domain. See the [Developer Guide][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
+    #   @return [Array<Types::AutoTune>]
+    #
+    # @!attribute [rw] next_token
+    #   Specifies an identifier to allow retrieval of paginated results.
+    #   @return [String]
+    #
+    class DescribeDomainAutoTunesResponse < Struct.new(
+      :auto_tunes,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1596,6 +1935,46 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Specifies maintenance schedule duration: duration value and duration
+    # unit. See the [Developer Guide][1] for more information.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
+    #
+    # @note When making an API call, you may pass Duration
+    #   data as a hash:
+    #
+    #       {
+    #         value: 1,
+    #         unit: "HOURS", # accepts HOURS
+    #       }
+    #
+    # @!attribute [rw] value
+    #   Integer to specify the value of a maintenance schedule duration. See
+    #   the [Developer Guide][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unit
+    #   Specifies the unit of a maintenance schedule duration. Valid value
+    #   is HOURS. See the [Developer Guide][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
+    #   @return [String]
+    #
+    class Duration < Struct.new(
+      :value,
+      :unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Options to enable, disable, and specify the properties of EBS storage
     # volumes. For more information, see [ Configuring EBS-based
     # Storage][1].
@@ -1839,6 +2218,10 @@ module Aws::ElasticsearchService
     #   Specifies `AdvancedSecurityOptions` for the domain.
     #   @return [Types::AdvancedSecurityOptionsStatus]
     #
+    # @!attribute [rw] auto_tune_options
+    #   Specifies `AutoTuneOptions` for the domain.
+    #   @return [Types::AutoTuneOptionsStatus]
+    #
     class ElasticsearchDomainConfig < Struct.new(
       :elasticsearch_version,
       :elasticsearch_cluster_config,
@@ -1852,7 +2235,8 @@ module Aws::ElasticsearchService
       :advanced_options,
       :log_publishing_options,
       :domain_endpoint_options,
-      :advanced_security_options)
+      :advanced_security_options,
+      :auto_tune_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1987,6 +2371,10 @@ module Aws::ElasticsearchService
     #   options.
     #   @return [Types::AdvancedSecurityOptions]
     #
+    # @!attribute [rw] auto_tune_options
+    #   The current status of the Elasticsearch domain's Auto-Tune options.
+    #   @return [Types::AutoTuneOptionsOutput]
+    #
     class ElasticsearchDomainStatus < Struct.new(
       :domain_id,
       :domain_name,
@@ -2010,7 +2398,8 @@ module Aws::ElasticsearchService
       :log_publishing_options,
       :service_software_options,
       :domain_endpoint_options,
-      :advanced_security_options)
+      :advanced_security_options,
+      :auto_tune_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3448,6 +3837,41 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Specifies details of the scheduled Auto-Tune action. See the
+    # [Developer Guide][1] for more information.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
+    #
+    # @!attribute [rw] date
+    #   Specifies timestamp for the Auto-Tune action scheduled for the
+    #   domain.
+    #   @return [Time]
+    #
+    # @!attribute [rw] action_type
+    #   Specifies Auto-Tune action type. Valid values are
+    #   JVM\_HEAP\_SIZE\_TUNING and JVM\_YOUNG\_GEN\_TUNING.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   Specifies Auto-Tune action description.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM
+    #   and HIGH.
+    #   @return [String]
+    #
+    class ScheduledAutoTuneDetails < Struct.new(
+      :date,
+      :action_type,
+      :action,
+      :severity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The current options of an Elasticsearch domain service software
     # options.
     #
@@ -3752,6 +4176,20 @@ module Aws::ElasticsearchService
     #           enabled: false,
     #           kms_key_id: "KmsKeyId",
     #         },
+    #         auto_tune_options: {
+    #           desired_state: "ENABLED", # accepts ENABLED, DISABLED
+    #           rollback_on_disable: "NO_ROLLBACK", # accepts NO_ROLLBACK, DEFAULT_ROLLBACK
+    #           maintenance_schedules: [
+    #             {
+    #               start_at: Time.now,
+    #               duration: {
+    #                 value: 1,
+    #                 unit: "HOURS", # accepts HOURS
+    #               },
+    #               cron_expression_for_recurrence: "String",
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
@@ -3829,6 +4267,10 @@ module Aws::ElasticsearchService
     #   Specifies the Encryption At Rest Options.
     #   @return [Types::EncryptionAtRestOptions]
     #
+    # @!attribute [rw] auto_tune_options
+    #   Specifies Auto-Tune options.
+    #   @return [Types::AutoTuneOptions]
+    #
     class UpdateElasticsearchDomainConfigRequest < Struct.new(
       :domain_name,
       :elasticsearch_cluster_config,
@@ -3842,7 +4284,8 @@ module Aws::ElasticsearchService
       :domain_endpoint_options,
       :advanced_security_options,
       :node_to_node_encryption_options,
-      :encryption_at_rest_options)
+      :encryption_at_rest_options,
+      :auto_tune_options)
       SENSITIVE = []
       include Aws::Structure
     end

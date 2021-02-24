@@ -28,7 +28,7 @@ require_relative 'aws-sdk-mediapackagevod/customizations'
 # structure.
 #
 #     media_package_vod = Aws::MediaPackageVod::Client.new
-#     resp = media_package_vod.create_asset(params)
+#     resp = media_package_vod.configure_logs(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-mediapackagevod/customizations'
 # @!group service
 module Aws::MediaPackageVod
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.21.0'
 
 end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2021-02-24)
+------------------
+
+* Feature - This release adds support for AWS tags on Amazon ECR Public repositories.
+
 1.1.0 (2021-02-02)
 ------------------
 

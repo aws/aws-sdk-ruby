@@ -327,6 +327,52 @@ module Aws::MediaPackageVod
 
     # @!group API Operations
 
+    # Changes the packaging group's properities to configure log
+    # subscription
+    #
+    # @option params [Types::EgressAccessLogs] :egress_access_logs
+    #   Configure egress access logging.
+    #
+    # @option params [required, String] :id
+    #
+    # @return [Types::ConfigureLogsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ConfigureLogsResponse#arn #arn} => String
+    #   * {Types::ConfigureLogsResponse#authorization #authorization} => Types::Authorization
+    #   * {Types::ConfigureLogsResponse#domain_name #domain_name} => String
+    #   * {Types::ConfigureLogsResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
+    #   * {Types::ConfigureLogsResponse#id #id} => String
+    #   * {Types::ConfigureLogsResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.configure_logs({
+    #     egress_access_logs: {
+    #       log_group_name: "__string",
+    #     },
+    #     id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.authorization.cdn_identifier_secret #=> String
+    #   resp.authorization.secrets_role_arn #=> String
+    #   resp.domain_name #=> String
+    #   resp.egress_access_logs.log_group_name #=> String
+    #   resp.id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ConfigureLogs AWS API Documentation
+    #
+    # @overload configure_logs(params = {})
+    # @param [Hash] params ({})
+    def configure_logs(params = {}, options = {})
+      req = build_request(:configure_logs, params)
+      req.send_request(options)
+    end
+
     # Creates a new MediaPackage VOD Asset resource.
     #
     # @option params [required, String] :id
@@ -608,6 +654,9 @@ module Aws::MediaPackageVod
     # @option params [Types::Authorization] :authorization
     #   CDN Authorization credentials
     #
+    # @option params [Types::EgressAccessLogs] :egress_access_logs
+    #   Configure egress access logging.
+    #
     # @option params [required, String] :id
     #
     # @option params [Hash<String,String>] :tags
@@ -618,6 +667,7 @@ module Aws::MediaPackageVod
     #   * {Types::CreatePackagingGroupResponse#arn #arn} => String
     #   * {Types::CreatePackagingGroupResponse#authorization #authorization} => Types::Authorization
     #   * {Types::CreatePackagingGroupResponse#domain_name #domain_name} => String
+    #   * {Types::CreatePackagingGroupResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::CreatePackagingGroupResponse#id #id} => String
     #   * {Types::CreatePackagingGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #
@@ -627,6 +677,9 @@ module Aws::MediaPackageVod
     #     authorization: {
     #       cdn_identifier_secret: "__string", # required
     #       secrets_role_arn: "__string", # required
+    #     },
+    #     egress_access_logs: {
+    #       log_group_name: "__string",
     #     },
     #     id: "__string", # required
     #     tags: {
@@ -640,6 +693,7 @@ module Aws::MediaPackageVod
     #   resp.authorization.cdn_identifier_secret #=> String
     #   resp.authorization.secrets_role_arn #=> String
     #   resp.domain_name #=> String
+    #   resp.egress_access_logs.log_group_name #=> String
     #   resp.id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -867,6 +921,7 @@ module Aws::MediaPackageVod
     #   * {Types::DescribePackagingGroupResponse#arn #arn} => String
     #   * {Types::DescribePackagingGroupResponse#authorization #authorization} => Types::Authorization
     #   * {Types::DescribePackagingGroupResponse#domain_name #domain_name} => String
+    #   * {Types::DescribePackagingGroupResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::DescribePackagingGroupResponse#id #id} => String
     #   * {Types::DescribePackagingGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #
@@ -882,6 +937,7 @@ module Aws::MediaPackageVod
     #   resp.authorization.cdn_identifier_secret #=> String
     #   resp.authorization.secrets_role_arn #=> String
     #   resp.domain_name #=> String
+    #   resp.egress_access_logs.log_group_name #=> String
     #   resp.id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -1069,6 +1125,7 @@ module Aws::MediaPackageVod
     #   resp.packaging_groups[0].authorization.cdn_identifier_secret #=> String
     #   resp.packaging_groups[0].authorization.secrets_role_arn #=> String
     #   resp.packaging_groups[0].domain_name #=> String
+    #   resp.packaging_groups[0].egress_access_logs.log_group_name #=> String
     #   resp.packaging_groups[0].id #=> String
     #   resp.packaging_groups[0].tags #=> Hash
     #   resp.packaging_groups[0].tags["__string"] #=> String
@@ -1175,6 +1232,7 @@ module Aws::MediaPackageVod
     #   * {Types::UpdatePackagingGroupResponse#arn #arn} => String
     #   * {Types::UpdatePackagingGroupResponse#authorization #authorization} => Types::Authorization
     #   * {Types::UpdatePackagingGroupResponse#domain_name #domain_name} => String
+    #   * {Types::UpdatePackagingGroupResponse#egress_access_logs #egress_access_logs} => Types::EgressAccessLogs
     #   * {Types::UpdatePackagingGroupResponse#id #id} => String
     #   * {Types::UpdatePackagingGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #
@@ -1194,6 +1252,7 @@ module Aws::MediaPackageVod
     #   resp.authorization.cdn_identifier_secret #=> String
     #   resp.authorization.secrets_role_arn #=> String
     #   resp.domain_name #=> String
+    #   resp.egress_access_logs.log_group_name #=> String
     #   resp.id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -1220,7 +1279,7 @@ module Aws::MediaPackageVod
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagevod'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

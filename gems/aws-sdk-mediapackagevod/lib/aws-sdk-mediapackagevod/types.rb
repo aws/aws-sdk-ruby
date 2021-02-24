@@ -281,6 +281,80 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
+    # The configuration parameters for egress access logging.
+    #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ConfigureLogsParameters AWS API Documentation
+    #
+    class ConfigureLogsParameters < Struct.new(
+      :egress_access_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ConfigureLogsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         egress_access_logs: {
+    #           log_group_name: "__string",
+    #         },
+    #         id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ConfigureLogsRequest AWS API Documentation
+    #
+    class ConfigureLogsRequest < Struct.new(
+      :egress_access_logs,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
+    #
+    # @!attribute [rw] domain_name
+    #   @return [String]
+    #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ConfigureLogsResponse AWS API Documentation
+    #
+    class ConfigureLogsResponse < Struct.new(
+      :arn,
+      :authorization,
+      :domain_name,
+      :egress_access_logs,
+      :id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateAssetRequest
     #   data as a hash:
     #
@@ -572,6 +646,9 @@ module Aws::MediaPackageVod
     #           cdn_identifier_secret: "__string", # required
     #           secrets_role_arn: "__string", # required
     #         },
+    #         egress_access_logs: {
+    #           log_group_name: "__string",
+    #         },
     #         id: "__string", # required
     #         tags: {
     #           "__string" => "__string",
@@ -581,6 +658,10 @@ module Aws::MediaPackageVod
     # @!attribute [rw] authorization
     #   CDN Authorization credentials
     #   @return [Types::Authorization]
+    #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
     #
     # @!attribute [rw] id
     #   @return [String]
@@ -593,6 +674,7 @@ module Aws::MediaPackageVod
     #
     class CreatePackagingGroupRequest < Struct.new(
       :authorization,
+      :egress_access_logs,
       :id,
       :tags)
       SENSITIVE = []
@@ -609,6 +691,10 @@ module Aws::MediaPackageVod
     # @!attribute [rw] domain_name
     #   @return [String]
     #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -622,6 +708,7 @@ module Aws::MediaPackageVod
       :arn,
       :authorization,
       :domain_name,
+      :egress_access_logs,
       :id,
       :tags)
       SENSITIVE = []
@@ -1006,6 +1093,10 @@ module Aws::MediaPackageVod
     # @!attribute [rw] domain_name
     #   @return [String]
     #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -1019,8 +1110,30 @@ module Aws::MediaPackageVod
       :arn,
       :authorization,
       :domain_name,
+      :egress_access_logs,
       :id,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configure egress access logging.
+    #
+    # @note When making an API call, you may pass EgressAccessLogs
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_name: "__string",
+    #       }
+    #
+    # @!attribute [rw] log_group_name
+    #   Customize the log group name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/EgressAccessLogs AWS API Documentation
+    #
+    class EgressAccessLogs < Struct.new(
+      :log_group_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1639,6 +1752,10 @@ module Aws::MediaPackageVod
     #   The fully qualified domain name for Assets in the PackagingGroup.
     #   @return [String]
     #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
     # @!attribute [rw] id
     #   The ID of the PackagingGroup.
     #   @return [String]
@@ -1653,6 +1770,7 @@ module Aws::MediaPackageVod
       :arn,
       :authorization,
       :domain_name,
+      :egress_access_logs,
       :id,
       :tags)
       SENSITIVE = []
@@ -1666,6 +1784,10 @@ module Aws::MediaPackageVod
     #   CDN Authorization credentials
     #   @return [Types::Authorization]
     #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
     # @!attribute [rw] id
     #   The ID of the PackagingGroup.
     #   @return [String]
@@ -1678,6 +1800,7 @@ module Aws::MediaPackageVod
     #
     class PackagingGroupCreateParameters < Struct.new(
       :authorization,
+      :egress_access_logs,
       :id,
       :tags)
       SENSITIVE = []
@@ -1916,6 +2039,10 @@ module Aws::MediaPackageVod
     # @!attribute [rw] domain_name
     #   @return [String]
     #
+    # @!attribute [rw] egress_access_logs
+    #   Configure egress access logging.
+    #   @return [Types::EgressAccessLogs]
+    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -1929,6 +2056,7 @@ module Aws::MediaPackageVod
       :arn,
       :authorization,
       :domain_name,
+      :egress_access_logs,
       :id,
       :tags)
       SENSITIVE = []

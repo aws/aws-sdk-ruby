@@ -1667,6 +1667,13 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] name
     #   The name of the utilization metric.
+    #
+    #   The following utilization metrics are available:
+    #
+    #   * `Duration` - The amount of time that your function code spends
+    #     processing an event.
+    #
+    #   * `Memory` - The amount of memory used per invocation.
     #   @return [String]
     #
     # @!attribute [rw] statistic
@@ -2110,13 +2117,32 @@ module Aws::ComputeOptimizer
     # @!attribute [rw] status
     #   The new enrollment status of the account.
     #
-    #   Accepted options are `Active` or `Inactive`. You will get an error
-    #   if `Pending` or `Failed` are specified.
+    #   The following status options are available:
+    #
+    #   * `Active` - Opts in your account to the Compute Optimizer service.
+    #     Compute Optimizer begins analyzing the configuration and
+    #     utilization metrics of your AWS resources after you opt in. For
+    #     more information, see [Metrics analyzed by AWS Compute
+    #     Optimizer][1] in the *Compute Optimizer User Guide*.
+    #
+    #   * `Inactive` - Opts out your account from the Compute Optimizer
+    #     service. Your account's recommendations and related metrics data
+    #     will be deleted from Compute Optimizer after you opt out.
+    #
+    #   <note markdown="1"> The `Pending` and `Failed` options cannot be used to update the
+    #   enrollment status of an account. They are returned in the response
+    #   of a request to update the enrollment status of an account.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/ug/metrics.html
     #   @return [String]
     #
     # @!attribute [rw] include_member_accounts
     #   Indicates whether to enroll member accounts of the organization if
-    #   the your account is the management account of an organization.
+    #   the account is the management account of an organization.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/UpdateEnrollmentStatusRequest AWS API Documentation

@@ -1220,21 +1220,55 @@ module Aws::ComputeOptimizer
       req.send_request(options)
     end
 
-    # Updates the enrollment (opt in) status of an account to the AWS
-    # Compute Optimizer service.
+    # Updates the enrollment (opt in and opt out) status of an account to
+    # the AWS Compute Optimizer service.
     #
     # If the account is a management account of an organization, this action
     # can also be used to enroll member accounts within the organization.
     #
+    # You must have the appropriate permissions to opt in to Compute
+    # Optimizer, to view its recommendations, and to opt out. For more
+    # information, see [Controlling access with AWS Identity and Access
+    # Management][1] in the *Compute Optimizer User Guide*.
+    #
+    # When you opt in, Compute Optimizer automatically creates a
+    # Service-Linked Role in your account to access its data. For more
+    # information, see [Using Service-Linked Roles for AWS Compute
+    # Optimizer][2] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/ug/security-iam.html
+    # [2]: https://docs.aws.amazon.com/compute-optimizer/ug/using-service-linked-roles.html
+    #
     # @option params [required, String] :status
     #   The new enrollment status of the account.
     #
-    #   Accepted options are `Active` or `Inactive`. You will get an error if
-    #   `Pending` or `Failed` are specified.
+    #   The following status options are available:
+    #
+    #   * `Active` - Opts in your account to the Compute Optimizer service.
+    #     Compute Optimizer begins analyzing the configuration and utilization
+    #     metrics of your AWS resources after you opt in. For more
+    #     information, see [Metrics analyzed by AWS Compute Optimizer][1] in
+    #     the *Compute Optimizer User Guide*.
+    #
+    #   * `Inactive` - Opts out your account from the Compute Optimizer
+    #     service. Your account's recommendations and related metrics data
+    #     will be deleted from Compute Optimizer after you opt out.
+    #
+    #   <note markdown="1"> The `Pending` and `Failed` options cannot be used to update the
+    #   enrollment status of an account. They are returned in the response of
+    #   a request to update the enrollment status of an account.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/ug/metrics.html
     #
     # @option params [Boolean] :include_member_accounts
     #   Indicates whether to enroll member accounts of the organization if the
-    #   your account is the management account of an organization.
+    #   account is the management account of an organization.
     #
     # @return [Types::UpdateEnrollmentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1275,7 +1309,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

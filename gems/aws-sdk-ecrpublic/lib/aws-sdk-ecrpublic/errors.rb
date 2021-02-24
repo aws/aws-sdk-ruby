@@ -35,6 +35,7 @@ module Aws::ECRPublic
   # * {InvalidLayerException}
   # * {InvalidLayerPartException}
   # * {InvalidParameterException}
+  # * {InvalidTagParameterException}
   # * {LayerAlreadyExistsException}
   # * {LayerPartTooSmallException}
   # * {LayersNotFoundException}
@@ -46,6 +47,7 @@ module Aws::ECRPublic
   # * {RepositoryNotFoundException}
   # * {RepositoryPolicyNotFoundException}
   # * {ServerException}
+  # * {TooManyTagsException}
   # * {UnsupportedCommandException}
   # * {UploadNotFoundException}
   #
@@ -185,6 +187,21 @@ module Aws::ECRPublic
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ECRPublic::Types::InvalidParameterException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidTagParameterException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECRPublic::Types::InvalidTagParameterException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -350,6 +367,21 @@ module Aws::ECRPublic
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ECRPublic::Types::ServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyTagsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECRPublic::Types::TooManyTagsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
