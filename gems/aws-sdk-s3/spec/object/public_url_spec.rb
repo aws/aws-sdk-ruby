@@ -73,6 +73,26 @@ module Aws
           url = s3.bucket('bucket.name').object('key').public_url
           expect(url).to eq('https://s3.amazonaws.com/bucket.name/key')
         end
+
+        context 'virtual_host' do
+          it 'uses the bucket name as the host' do
+            url = s3.bucket('example.com').object('key').public_url(virtual_host: true)
+            puts url
+            expect(url).to eq('https://example.com/key')
+          end
+
+          it 'uses secure/https by default' do
+            url = s3.bucket('example.com').object('key').public_url(virtual_host: true)
+            puts url
+            expect(url).to start_with("https://")
+          end
+
+          it 'uses http when secure is false' do
+            url = s3.bucket('example.com').object('key').public_url(virtual_host: true, secure: false)
+            puts url
+            expect(url).to start_with("http://")
+          end
+        end
       end
     end
   end

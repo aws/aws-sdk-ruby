@@ -17,7 +17,7 @@ def whitelist
     },
     's3' => {
       'location_constraint.rb' => 14,
-      'bucket.rb' => 150,
+      'bucket.rb' => 155,
       'presigned_post.rb' => 623,
       'iad_regional_endpoint.rb' => 'SKIP_FILE'
     }
@@ -45,6 +45,9 @@ describe 'ensure no hard-coded region' do
                   whitelist[key][File.basename(path)] == 'SKIP_FILE')
 
           # If we use \w+ we will get false positives for uid fields
+          if val =~ /(us|eu|ap|sa|ca)-[a-zA-Z]+-\d+/
+            puts "LINE: #{idx}"
+          end
           expect(val).not_to match(/(us|eu|ap|sa|ca)-[a-zA-Z]+-\d+/)
         end
       end
