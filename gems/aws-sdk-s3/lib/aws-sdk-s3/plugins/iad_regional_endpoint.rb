@@ -46,13 +46,13 @@ region. Defaults to `legacy` mode using global endpoint.
         end
 
         def self.private_link_host?(host, force_path_style)
-          s3_private_link_prefixes = %w(bucket control accesspoint).freeze
+          s3_private_link_prefix = 'bucket'.freeze
           if force_path_style
             private_link_prefix_part = host.split(".")[0]
           else
             private_link_prefix_part = host.split(".")[1]
           end
-          s3_private_link_prefixes.include?(private_link_prefix_part)
+          s3_private_link_prefix == private_link_prefix_part
         end
 
         private
