@@ -30,7 +30,8 @@ region. Defaults to `legacy` mode using global endpoint.
             if context.config.s3_us_east_1_regional_endpoint == 'legacy'
               host = context.http_request.endpoint.host
               # if it's an ARN, don't touch the endpoint at all
-              unless context.metadata[:s3_arn]
+              # if its a private link endpoint, don't touch the endpoint at all
+              unless context.metadata[:s3_arn] || IADRegionalEndpoint.private_link_host?(host, context.config.force_path_style)
                 legacy_host = IADRegionalEndpoint.legacy_host(host)
                 context.http_request.endpoint.host = legacy_host
               end
@@ -42,6 +43,16 @@ region. Defaults to `legacy` mode using global endpoint.
 
         def self.legacy_host(host)
           host.sub(".us-east-1", '')
+        end
+
+        def self.private_link_host?(host, force_path_style)
+          s3_private_link_prefixes = %w(bucket control accesspoint).freeze
+          if force_path_style
+            private_link_prefix_part = host.split(".")[0]
+          else
+            private_link_prefix_part = host.split(".")[1]
+          end
+          s3_private_link_prefixes.include?(private_link_prefix_part)
         end
 
         private

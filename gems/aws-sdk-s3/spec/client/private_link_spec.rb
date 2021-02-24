@@ -85,6 +85,33 @@ module Aws
           expect(resp.context.http_request.endpoint.host).to eq(host)
         end
 
+        it 'works with the private link endpoint as is with path style in us-east-1 region' do
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-east-1',
+            force_path_style: true,
+            endpoint: 'https://bucket.vpce-123-abc.s3.us-east-1.vpce.amazonaws.com'
+          )
+          bucket = 'bucketname'
+          expect_sigv4_service('s3')
+          resp = client.list_objects(bucket: bucket)
+          host = 'bucket.vpce-123-abc.s3.us-east-1.vpce.amazonaws.com'
+          expect(resp.context.http_request.endpoint.host).to eq(host)
+        end
+
+        it 'works with the private link endpoint as is in us-east-1 region' do
+          client = Aws::S3::Client.new(
+            stub_responses: true,
+            region: 'us-east-1',
+            endpoint: 'https://bucket.vpce-123-abc.s3.us-east-1.vpce.amazonaws.com'
+          )
+          bucket = 'bucketname'
+          expect_sigv4_service('s3')
+          resp = client.list_objects(bucket: bucket)
+          host = 'bucketname.bucket.vpce-123-abc.s3.us-east-1.vpce.amazonaws.com'
+          expect(resp.context.http_request.endpoint.host).to eq(host)
+        end
+
         it 'works with the private link endpoint using the ARN region' do
           client = Aws::S3::Client.new(
             stub_responses: true,
