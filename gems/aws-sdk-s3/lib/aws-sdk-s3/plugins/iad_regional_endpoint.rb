@@ -17,7 +17,8 @@ region. Defaults to `legacy` mode using global endpoint.
         end
 
         def add_handlers(handlers, config)
-          if config.region == 'us-east-1'
+          # only modify non-custom endpoints
+          if config.regional_endpoint && config.region == 'us-east-1'
             handlers.add(Handler)
           end
         end
@@ -29,7 +30,7 @@ region. Defaults to `legacy` mode using global endpoint.
             # keep legacy global endpoint pattern by default
             if context.config.s3_us_east_1_regional_endpoint == 'legacy'
               host = context.http_request.endpoint.host
-              # if it's an ARN, don't touch the endpoint at all
+              # if it's an ARN then don't touch the endpoint at all
               unless context.metadata[:s3_arn]
                 legacy_host = IADRegionalEndpoint.legacy_host(host)
                 context.http_request.endpoint.host = legacy_host
