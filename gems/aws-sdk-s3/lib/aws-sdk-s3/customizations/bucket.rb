@@ -88,18 +88,23 @@ module Aws
       # You can pass `virtual_host: true` to use the bucket name as the
       # host name.
       #
-      #     bucket = s3.bucket('my.bucket.com')
+      #     bucket = s3.bucket('my-bucket.com')
       #     bucket.url(virtual_host: true)
-      #     #=> "http://my.bucket.com"
+      #     #=> "http://my-bucket.com"
       #
       # @option options [Boolean] :virtual_host (false) When `true`,
       #   the bucket name will be used as the host name. This is useful
       #   when you have a CNAME configured for this bucket.
       #
+      # @option options [Boolean] :secure (true) When `false`, http
+      #   will be used with virtual_host.  This is required when
+      #   the bucket name has a dot (.) in it.
+      #
       # @return [String] the URL for this bucket.
       def url(options = {})
         if options[:virtual_host]
-          "http://#{name}"
+          scheme = options.fetch(:secure, true) ? 'https' : 'http'
+          "#{scheme}://#{name}"
         elsif @arn
           Plugins::ARN.resolve_url!(
             client.config.endpoint.dup,

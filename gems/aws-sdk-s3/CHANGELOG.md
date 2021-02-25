@@ -1,7 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Support https in `Object#public_url` for `virtual_host`. (#1389)
+
 * Issue - Fix an issue with the IAD regional endpoint plugin removing `us-east-1` from custom endpoints.
+
 
 1.88.1 (2021-02-12)
 ------------------
