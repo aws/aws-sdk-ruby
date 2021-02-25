@@ -80,6 +80,7 @@ module Aws::ECRPublic
     InvalidLayerException = Shapes::StructureShape.new(name: 'InvalidLayerException')
     InvalidLayerPartException = Shapes::StructureShape.new(name: 'InvalidLayerPartException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
+    InvalidTagParameterException = Shapes::StructureShape.new(name: 'InvalidTagParameterException')
     Layer = Shapes::StructureShape.new(name: 'Layer')
     LayerAlreadyExistsException = Shapes::StructureShape.new(name: 'LayerAlreadyExistsException')
     LayerAvailability = Shapes::StringShape.new(name: 'LayerAvailability')
@@ -95,6 +96,8 @@ module Aws::ECRPublic
     LayerSizeInBytes = Shapes::IntegerShape.new(name: 'LayerSizeInBytes')
     LayersNotFoundException = Shapes::StructureShape.new(name: 'LayersNotFoundException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LogoImageBlob = Shapes::BlobShape.new(name: 'LogoImageBlob')
     MarketplaceCertified = Shapes::BooleanShape.new(name: 'MarketplaceCertified')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -141,7 +144,17 @@ module Aws::ECRPublic
     ServerException = Shapes::StructureShape.new(name: 'ServerException')
     SetRepositoryPolicyRequest = Shapes::StructureShape.new(name: 'SetRepositoryPolicyRequest')
     SetRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'SetRepositoryPolicyResponse')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UnsupportedCommandException = Shapes::StructureShape.new(name: 'UnsupportedCommandException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UploadId = Shapes::StringShape.new(name: 'UploadId')
     UploadLayerPartRequest = Shapes::StructureShape.new(name: 'UploadLayerPartRequest')
     UploadLayerPartResponse = Shapes::StructureShape.new(name: 'UploadLayerPartResponse')
@@ -189,6 +202,7 @@ module Aws::ECRPublic
 
     CreateRepositoryRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     CreateRepositoryRequest.add_member(:catalog_data, Shapes::ShapeRef.new(shape: RepositoryCatalogDataInput, location_name: "catalogData"))
+    CreateRepositoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateRepositoryRequest.struct_class = Types::CreateRepositoryRequest
 
     CreateRepositoryResponse.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
@@ -354,6 +368,9 @@ module Aws::ECRPublic
     InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
+    InvalidTagParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    InvalidTagParameterException.struct_class = Types::InvalidTagParameterException
+
     Layer.add_member(:layer_digest, Shapes::ShapeRef.new(shape: LayerDigest, location_name: "layerDigest"))
     Layer.add_member(:layer_availability, Shapes::ShapeRef.new(shape: LayerAvailability, location_name: "layerAvailability"))
     Layer.add_member(:layer_size, Shapes::ShapeRef.new(shape: LayerSizeInBytes, location_name: "layerSize"))
@@ -382,6 +399,12 @@ module Aws::ECRPublic
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
+
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     OperatingSystemList.member = Shapes::ShapeRef.new(shape: OperatingSystem)
 
@@ -497,8 +520,31 @@ module Aws::ECRPublic
     SetRepositoryPolicyResponse.add_member(:policy_text, Shapes::ShapeRef.new(shape: RepositoryPolicyText, location_name: "policyText"))
     SetRepositoryPolicyResponse.struct_class = Types::SetRepositoryPolicyResponse
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
     UnsupportedCommandException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     UnsupportedCommandException.struct_class = Types::UnsupportedCommandException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UploadLayerPartRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryIdOrAlias, location_name: "registryId"))
     UploadLayerPartRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
@@ -586,6 +632,8 @@ module Aws::ECRPublic
         o.output = Shapes::ShapeRef.new(shape: CreateRepositoryResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
@@ -739,6 +787,17 @@ module Aws::ECRPublic
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedCommandException)
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
       api.add_operation(:put_image, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutImage"
         o.http_method = "POST"
@@ -789,6 +848,32 @@ module Aws::ECRPublic
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTagParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
 
       api.add_operation(:upload_layer_part, Seahorse::Model::Operation.new.tap do |o|

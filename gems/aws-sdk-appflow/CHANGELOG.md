@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2021-02-24)
+------------------
+
+* Feature - Adding 'Amazon Honeycode' , 'Amazon Lookout for Metrics' and  'Amazon Connect Customer Profiles' as Destinations.
+
 1.6.0 (2021-02-04)
 ------------------
 
@@ -35,4 +40,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-appflow`.
-

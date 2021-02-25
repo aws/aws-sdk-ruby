@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2021-02-24)
+------------------
+
+* Feature - Amazon Elasticsearch Service now supports Auto-Tune, which monitors performance metrics and automatically optimizes domains
+
 1.48.0 (2021-02-02)
 ------------------
 

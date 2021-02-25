@@ -28,6 +28,20 @@ module Aws::ElasticsearchService
     AdvancedSecurityOptionsStatus = Shapes::StructureShape.new(name: 'AdvancedSecurityOptionsStatus')
     AssociatePackageRequest = Shapes::StructureShape.new(name: 'AssociatePackageRequest')
     AssociatePackageResponse = Shapes::StructureShape.new(name: 'AssociatePackageResponse')
+    AutoTune = Shapes::StructureShape.new(name: 'AutoTune')
+    AutoTuneDate = Shapes::TimestampShape.new(name: 'AutoTuneDate')
+    AutoTuneDesiredState = Shapes::StringShape.new(name: 'AutoTuneDesiredState')
+    AutoTuneDetails = Shapes::StructureShape.new(name: 'AutoTuneDetails')
+    AutoTuneList = Shapes::ListShape.new(name: 'AutoTuneList')
+    AutoTuneMaintenanceSchedule = Shapes::StructureShape.new(name: 'AutoTuneMaintenanceSchedule')
+    AutoTuneMaintenanceScheduleList = Shapes::ListShape.new(name: 'AutoTuneMaintenanceScheduleList')
+    AutoTuneOptions = Shapes::StructureShape.new(name: 'AutoTuneOptions')
+    AutoTuneOptionsInput = Shapes::StructureShape.new(name: 'AutoTuneOptionsInput')
+    AutoTuneOptionsOutput = Shapes::StructureShape.new(name: 'AutoTuneOptionsOutput')
+    AutoTuneOptionsStatus = Shapes::StructureShape.new(name: 'AutoTuneOptionsStatus')
+    AutoTuneState = Shapes::StringShape.new(name: 'AutoTuneState')
+    AutoTuneStatus = Shapes::StructureShape.new(name: 'AutoTuneStatus')
+    AutoTuneType = Shapes::StringShape.new(name: 'AutoTuneType')
     BackendRole = Shapes::StringShape.new(name: 'BackendRole')
     BaseException = Shapes::StructureShape.new(name: 'BaseException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -60,6 +74,8 @@ module Aws::ElasticsearchService
     DeletePackageResponse = Shapes::StructureShape.new(name: 'DeletePackageResponse')
     DeploymentCloseDateTimeStamp = Shapes::TimestampShape.new(name: 'DeploymentCloseDateTimeStamp')
     DeploymentStatus = Shapes::StringShape.new(name: 'DeploymentStatus')
+    DescribeDomainAutoTunesRequest = Shapes::StructureShape.new(name: 'DescribeDomainAutoTunesRequest')
+    DescribeDomainAutoTunesResponse = Shapes::StructureShape.new(name: 'DescribeDomainAutoTunesResponse')
     DescribeElasticsearchDomainConfigRequest = Shapes::StructureShape.new(name: 'DescribeElasticsearchDomainConfigRequest')
     DescribeElasticsearchDomainConfigResponse = Shapes::StructureShape.new(name: 'DescribeElasticsearchDomainConfigResponse')
     DescribeElasticsearchDomainRequest = Shapes::StructureShape.new(name: 'DescribeElasticsearchDomainRequest')
@@ -99,6 +115,8 @@ module Aws::ElasticsearchService
     DomainPackageDetailsList = Shapes::ListShape.new(name: 'DomainPackageDetailsList')
     DomainPackageStatus = Shapes::StringShape.new(name: 'DomainPackageStatus')
     Double = Shapes::FloatShape.new(name: 'Double')
+    Duration = Shapes::StructureShape.new(name: 'Duration')
+    DurationValue = Shapes::IntegerShape.new(name: 'DurationValue')
     EBSOptions = Shapes::StructureShape.new(name: 'EBSOptions')
     EBSOptionsStatus = Shapes::StructureShape.new(name: 'EBSOptionsStatus')
     ESPartitionInstanceType = Shapes::StringShape.new(name: 'ESPartitionInstanceType')
@@ -214,6 +232,7 @@ module Aws::ElasticsearchService
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    RollbackOnDisable = Shapes::StringShape.new(name: 'RollbackOnDisable')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     SAMLEntityId = Shapes::StringShape.new(name: 'SAMLEntityId')
@@ -221,10 +240,15 @@ module Aws::ElasticsearchService
     SAMLMetadata = Shapes::StringShape.new(name: 'SAMLMetadata')
     SAMLOptionsInput = Shapes::StructureShape.new(name: 'SAMLOptionsInput')
     SAMLOptionsOutput = Shapes::StructureShape.new(name: 'SAMLOptionsOutput')
+    ScheduledAutoTuneActionType = Shapes::StringShape.new(name: 'ScheduledAutoTuneActionType')
+    ScheduledAutoTuneDescription = Shapes::StringShape.new(name: 'ScheduledAutoTuneDescription')
+    ScheduledAutoTuneDetails = Shapes::StructureShape.new(name: 'ScheduledAutoTuneDetails')
+    ScheduledAutoTuneSeverityType = Shapes::StringShape.new(name: 'ScheduledAutoTuneSeverityType')
     ServiceSoftwareOptions = Shapes::StructureShape.new(name: 'ServiceSoftwareOptions')
     ServiceUrl = Shapes::StringShape.new(name: 'ServiceUrl')
     SnapshotOptions = Shapes::StructureShape.new(name: 'SnapshotOptions')
     SnapshotOptionsStatus = Shapes::StructureShape.new(name: 'SnapshotOptionsStatus')
+    StartAt = Shapes::TimestampShape.new(name: 'StartAt')
     StartElasticsearchServiceSoftwareUpdateRequest = Shapes::StructureShape.new(name: 'StartElasticsearchServiceSoftwareUpdateRequest')
     StartElasticsearchServiceSoftwareUpdateResponse = Shapes::StructureShape.new(name: 'StartElasticsearchServiceSoftwareUpdateResponse')
     StartTimestamp = Shapes::TimestampShape.new(name: 'StartTimestamp')
@@ -241,6 +265,7 @@ module Aws::ElasticsearchService
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TimeUnit = Shapes::StringShape.new(name: 'TimeUnit')
     UIntValue = Shapes::IntegerShape.new(name: 'UIntValue')
     UpdateElasticsearchDomainConfigRequest = Shapes::StructureShape.new(name: 'UpdateElasticsearchDomainConfigRequest')
     UpdateElasticsearchDomainConfigResponse = Shapes::StructureShape.new(name: 'UpdateElasticsearchDomainConfigResponse')
@@ -317,6 +342,47 @@ module Aws::ElasticsearchService
     AssociatePackageResponse.add_member(:domain_package_details, Shapes::ShapeRef.new(shape: DomainPackageDetails, location_name: "DomainPackageDetails"))
     AssociatePackageResponse.struct_class = Types::AssociatePackageResponse
 
+    AutoTune.add_member(:auto_tune_type, Shapes::ShapeRef.new(shape: AutoTuneType, location_name: "AutoTuneType"))
+    AutoTune.add_member(:auto_tune_details, Shapes::ShapeRef.new(shape: AutoTuneDetails, location_name: "AutoTuneDetails"))
+    AutoTune.struct_class = Types::AutoTune
+
+    AutoTuneDetails.add_member(:scheduled_auto_tune_details, Shapes::ShapeRef.new(shape: ScheduledAutoTuneDetails, location_name: "ScheduledAutoTuneDetails"))
+    AutoTuneDetails.struct_class = Types::AutoTuneDetails
+
+    AutoTuneList.member = Shapes::ShapeRef.new(shape: AutoTune)
+
+    AutoTuneMaintenanceSchedule.add_member(:start_at, Shapes::ShapeRef.new(shape: StartAt, location_name: "StartAt"))
+    AutoTuneMaintenanceSchedule.add_member(:duration, Shapes::ShapeRef.new(shape: Duration, location_name: "Duration"))
+    AutoTuneMaintenanceSchedule.add_member(:cron_expression_for_recurrence, Shapes::ShapeRef.new(shape: String, location_name: "CronExpressionForRecurrence"))
+    AutoTuneMaintenanceSchedule.struct_class = Types::AutoTuneMaintenanceSchedule
+
+    AutoTuneMaintenanceScheduleList.member = Shapes::ShapeRef.new(shape: AutoTuneMaintenanceSchedule)
+
+    AutoTuneOptions.add_member(:desired_state, Shapes::ShapeRef.new(shape: AutoTuneDesiredState, location_name: "DesiredState"))
+    AutoTuneOptions.add_member(:rollback_on_disable, Shapes::ShapeRef.new(shape: RollbackOnDisable, location_name: "RollbackOnDisable"))
+    AutoTuneOptions.add_member(:maintenance_schedules, Shapes::ShapeRef.new(shape: AutoTuneMaintenanceScheduleList, location_name: "MaintenanceSchedules"))
+    AutoTuneOptions.struct_class = Types::AutoTuneOptions
+
+    AutoTuneOptionsInput.add_member(:desired_state, Shapes::ShapeRef.new(shape: AutoTuneDesiredState, location_name: "DesiredState"))
+    AutoTuneOptionsInput.add_member(:maintenance_schedules, Shapes::ShapeRef.new(shape: AutoTuneMaintenanceScheduleList, location_name: "MaintenanceSchedules"))
+    AutoTuneOptionsInput.struct_class = Types::AutoTuneOptionsInput
+
+    AutoTuneOptionsOutput.add_member(:state, Shapes::ShapeRef.new(shape: AutoTuneState, location_name: "State"))
+    AutoTuneOptionsOutput.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    AutoTuneOptionsOutput.struct_class = Types::AutoTuneOptionsOutput
+
+    AutoTuneOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: AutoTuneOptions, location_name: "Options"))
+    AutoTuneOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: AutoTuneStatus, location_name: "Status"))
+    AutoTuneOptionsStatus.struct_class = Types::AutoTuneOptionsStatus
+
+    AutoTuneStatus.add_member(:creation_date, Shapes::ShapeRef.new(shape: UpdateTimestamp, required: true, location_name: "CreationDate"))
+    AutoTuneStatus.add_member(:update_date, Shapes::ShapeRef.new(shape: UpdateTimestamp, required: true, location_name: "UpdateDate"))
+    AutoTuneStatus.add_member(:update_version, Shapes::ShapeRef.new(shape: UIntValue, location_name: "UpdateVersion"))
+    AutoTuneStatus.add_member(:state, Shapes::ShapeRef.new(shape: AutoTuneState, required: true, location_name: "State"))
+    AutoTuneStatus.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    AutoTuneStatus.add_member(:pending_deletion, Shapes::ShapeRef.new(shape: Boolean, location_name: "PendingDeletion"))
+    AutoTuneStatus.struct_class = Types::AutoTuneStatus
+
     BaseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     BaseException.struct_class = Types::BaseException
 
@@ -358,6 +424,7 @@ module Aws::ElasticsearchService
     CreateElasticsearchDomainRequest.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
     CreateElasticsearchDomainRequest.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
     CreateElasticsearchDomainRequest.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsInput, location_name: "AdvancedSecurityOptions"))
+    CreateElasticsearchDomainRequest.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsInput, location_name: "AutoTuneOptions"))
     CreateElasticsearchDomainRequest.struct_class = Types::CreateElasticsearchDomainRequest
 
     CreateElasticsearchDomainResponse.add_member(:domain_status, Shapes::ShapeRef.new(shape: ElasticsearchDomainStatus, location_name: "DomainStatus"))
@@ -407,6 +474,15 @@ module Aws::ElasticsearchService
 
     DeletePackageResponse.add_member(:package_details, Shapes::ShapeRef.new(shape: PackageDetails, location_name: "PackageDetails"))
     DeletePackageResponse.struct_class = Types::DeletePackageResponse
+
+    DescribeDomainAutoTunesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    DescribeDomainAutoTunesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeDomainAutoTunesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeDomainAutoTunesRequest.struct_class = Types::DescribeDomainAutoTunesRequest
+
+    DescribeDomainAutoTunesResponse.add_member(:auto_tunes, Shapes::ShapeRef.new(shape: AutoTuneList, location_name: "AutoTunes"))
+    DescribeDomainAutoTunesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeDomainAutoTunesResponse.struct_class = Types::DescribeDomainAutoTunesResponse
 
     DescribeElasticsearchDomainConfigRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     DescribeElasticsearchDomainConfigRequest.struct_class = Types::DescribeElasticsearchDomainConfigRequest
@@ -532,6 +608,10 @@ module Aws::ElasticsearchService
 
     DomainPackageDetailsList.member = Shapes::ShapeRef.new(shape: DomainPackageDetails)
 
+    Duration.add_member(:value, Shapes::ShapeRef.new(shape: DurationValue, location_name: "Value"))
+    Duration.add_member(:unit, Shapes::ShapeRef.new(shape: TimeUnit, location_name: "Unit"))
+    Duration.struct_class = Types::Duration
+
     EBSOptions.add_member(:ebs_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "EBSEnabled"))
     EBSOptions.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
     EBSOptions.add_member(:volume_size, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "VolumeSize"))
@@ -571,6 +651,7 @@ module Aws::ElasticsearchService
     ElasticsearchDomainConfig.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptionsStatus, location_name: "LogPublishingOptions"))
     ElasticsearchDomainConfig.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptionsStatus, location_name: "DomainEndpointOptions"))
     ElasticsearchDomainConfig.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsStatus, location_name: "AdvancedSecurityOptions"))
+    ElasticsearchDomainConfig.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsStatus, location_name: "AutoTuneOptions"))
     ElasticsearchDomainConfig.struct_class = Types::ElasticsearchDomainConfig
 
     ElasticsearchDomainStatus.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
@@ -596,6 +677,7 @@ module Aws::ElasticsearchService
     ElasticsearchDomainStatus.add_member(:service_software_options, Shapes::ShapeRef.new(shape: ServiceSoftwareOptions, location_name: "ServiceSoftwareOptions"))
     ElasticsearchDomainStatus.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
     ElasticsearchDomainStatus.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptions, location_name: "AdvancedSecurityOptions"))
+    ElasticsearchDomainStatus.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsOutput, location_name: "AutoTuneOptions"))
     ElasticsearchDomainStatus.struct_class = Types::ElasticsearchDomainStatus
 
     ElasticsearchDomainStatusList.member = Shapes::ShapeRef.new(shape: ElasticsearchDomainStatus)
@@ -891,6 +973,12 @@ module Aws::ElasticsearchService
     SAMLOptionsOutput.add_member(:session_timeout_minutes, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "SessionTimeoutMinutes"))
     SAMLOptionsOutput.struct_class = Types::SAMLOptionsOutput
 
+    ScheduledAutoTuneDetails.add_member(:date, Shapes::ShapeRef.new(shape: AutoTuneDate, location_name: "Date"))
+    ScheduledAutoTuneDetails.add_member(:action_type, Shapes::ShapeRef.new(shape: ScheduledAutoTuneActionType, location_name: "ActionType"))
+    ScheduledAutoTuneDetails.add_member(:action, Shapes::ShapeRef.new(shape: ScheduledAutoTuneDescription, location_name: "Action"))
+    ScheduledAutoTuneDetails.add_member(:severity, Shapes::ShapeRef.new(shape: ScheduledAutoTuneSeverityType, location_name: "Severity"))
+    ScheduledAutoTuneDetails.struct_class = Types::ScheduledAutoTuneDetails
+
     ServiceSoftwareOptions.add_member(:current_version, Shapes::ShapeRef.new(shape: String, location_name: "CurrentVersion"))
     ServiceSoftwareOptions.add_member(:new_version, Shapes::ShapeRef.new(shape: String, location_name: "NewVersion"))
     ServiceSoftwareOptions.add_member(:update_available, Shapes::ShapeRef.new(shape: Boolean, location_name: "UpdateAvailable"))
@@ -948,6 +1036,7 @@ module Aws::ElasticsearchService
     UpdateElasticsearchDomainConfigRequest.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsInput, location_name: "AdvancedSecurityOptions"))
     UpdateElasticsearchDomainConfigRequest.add_member(:node_to_node_encryption_options, Shapes::ShapeRef.new(shape: NodeToNodeEncryptionOptions, location_name: "NodeToNodeEncryptionOptions"))
     UpdateElasticsearchDomainConfigRequest.add_member(:encryption_at_rest_options, Shapes::ShapeRef.new(shape: EncryptionAtRestOptions, location_name: "EncryptionAtRestOptions"))
+    UpdateElasticsearchDomainConfigRequest.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptions, location_name: "AutoTuneOptions"))
     UpdateElasticsearchDomainConfigRequest.struct_class = Types::UpdateElasticsearchDomainConfigRequest
 
     UpdateElasticsearchDomainConfigResponse.add_member(:domain_config, Shapes::ShapeRef.new(shape: ElasticsearchDomainConfig, required: true, location_name: "DomainConfig"))
@@ -1171,6 +1260,24 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:describe_domain_auto_tunes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDomainAutoTunes"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-01-01/es/domain/{DomainName}/autoTunes"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDomainAutoTunesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDomainAutoTunesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_elasticsearch_domain, Seahorse::Model::Operation.new.tap do |o|

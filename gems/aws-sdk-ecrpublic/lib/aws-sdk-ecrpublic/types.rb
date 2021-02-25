@@ -225,6 +225,12 @@ module Aws::ECRPublic
     #           about_text: "AboutText",
     #           usage_text: "UsageText",
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] repository_name
@@ -240,11 +246,20 @@ module Aws::ECRPublic
     #   Amazon ECR Public Gallery.
     #   @return [Types::RepositoryCatalogDataInput]
     #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to the repository to help you categorize
+    #   and organize them. Each tag consists of a key and an optional value,
+    #   both of which you define. Tag keys can have a maximum character
+    #   length of 128 characters, and tag values can have a maximum length
+    #   of 256 characters.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/CreateRepositoryRequest AWS API Documentation
     #
     class CreateRepositoryRequest < Struct.new(
       :repository_name,
-      :catalog_data)
+      :catalog_data,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1146,6 +1161,21 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
+    # An invalid parameter has been specified. Tag keys can have a maximum
+    # character length of 128 characters, and tag values can have a maximum
+    # length of 256 characters.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/InvalidTagParameterException AWS API Documentation
+    #
+    class InvalidTagParameterException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing an Amazon ECR image layer.
     #
     # @!attribute [rw] layer_digest
@@ -1256,6 +1286,39 @@ module Aws::ECRPublic
     #
     class LimitExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for
+    #   which to list the tags. Currently, the supported resource is an
+    #   Amazon ECR Public repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1931,6 +1994,93 @@ module Aws::ECRPublic
       include Aws::Structure
     end
 
+    # The metadata that you apply to a resource to help you categorize and
+    # organize them. Each tag consists of a key and an optional value, both
+    # of which you define. Tag keys can have a maximum character length of
+    # 128 characters, and tag values can have a maximum length of 256
+    # characters.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   One part of a key-value pair that make up a tag. A `key` is a
+    #   general label that acts like a category for more specific tag
+    #   values.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The optional part of a key-value pair that make up a tag. A `value`
+    #   acts as a descriptor within a tag category (key).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
+    #   Currently, the supported resource is an Amazon ECR Public
+    #   repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the resource. A tag is an array of key-value
+    #   pairs. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
+    #   characters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The list of tags on the repository is over the limit. The maximum
+    # number of tags that can be applied to a repository is 50.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The action is not supported in this Region.
     #
     # @!attribute [rw] message
@@ -1943,6 +2093,37 @@ module Aws::ECRPublic
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to delete
+    #   tags. Currently, the supported resource is an Amazon ECR Public
+    #   repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to be removed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UploadLayerPartRequest
     #   data as a hash:
