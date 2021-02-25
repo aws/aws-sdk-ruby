@@ -359,8 +359,8 @@ module Aws::Detective
     end
 
     # Creates a new behavior graph for the calling account, and sets that
-    # account as the master account. This operation is called by the account
-    # that is enabling Detective.
+    # account as the administrator account. This operation is called by the
+    # account that is enabling Detective.
     #
     # Before you try to enable Detective, make sure that your account has
     # been enrolled in Amazon GuardDuty for at least 48 hours. If you do not
@@ -376,10 +376,10 @@ module Aws::Detective
     # `CreateGraph` triggers a process to create the corresponding data
     # tables for the new behavior graph.
     #
-    # An account can only be the master account for one behavior graph
-    # within a Region. If the same account calls `CreateGraph` with the same
-    # master account, it always returns the same behavior graph ARN. It does
-    # not create a new behavior graph.
+    # An account can only be the administrator account for one behavior
+    # graph within a Region. If the same account calls `CreateGraph` with
+    # the same administrator account, it always returns the same behavior
+    # graph ARN. It does not create a new behavior graph.
     #
     # @return [Types::CreateGraphResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -400,10 +400,12 @@ module Aws::Detective
 
     # Sends a request to invite the specified AWS accounts to be member
     # accounts in the behavior graph. This operation can only be called by
-    # the master account for a behavior graph.
+    # the administrator account for a behavior graph.
     #
-    # `CreateMembers` verifies the accounts and then sends invitations to
-    # the verified accounts.
+    # `CreateMembers` verifies the accounts and then invites the verified
+    # accounts. The administrator can optionally specify to not send
+    # invitation emails to the member accounts. This would be used when the
+    # administrator manages their member accounts centrally.
     #
     # The request provides the behavior graph ARN and the list of accounts
     # to invite.
@@ -412,8 +414,8 @@ module Aws::Detective
     #
     # * The accounts that `CreateMembers` was able to start the verification
     #   for. This list includes member accounts that are being verified,
-    #   that have passed verification and are being sent an invitation, and
-    #   that have failed verification.
+    #   that have passed verification and are to be invited, and that have
+    #   failed verification.
     #
     # * The accounts that `CreateMembers` was unable to process. This list
     #   includes accounts that were already invited to be member accounts in
@@ -426,6 +428,11 @@ module Aws::Detective
     # @option params [String] :message
     #   Customized message text to include in the invitation email message to
     #   the invited member accounts.
+    #
+    # @option params [Boolean] :disable_email_notification
+    #   if set to `true`, then the member accounts do not receive email
+    #   notifications. By default, this is set to `false`, and the member
+    #   accounts receive email notifications.
     #
     # @option params [required, Array<Types::Account>] :accounts
     #   The list of AWS accounts to invite to become member accounts in the
@@ -442,6 +449,7 @@ module Aws::Detective
     #   resp = client.create_members({
     #     graph_arn: "GraphArn", # required
     #     message: "EmailMessage",
+    #     disable_email_notification: false,
     #     accounts: [ # required
     #       {
     #         account_id: "AccountId", # required
@@ -457,6 +465,7 @@ module Aws::Detective
     #   resp.members[0].email_address #=> String
     #   resp.members[0].graph_arn #=> String
     #   resp.members[0].master_id #=> String
+    #   resp.members[0].administrator_id #=> String
     #   resp.members[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED", "ACCEPTED_BUT_DISABLED"
     #   resp.members[0].disabled_reason #=> String, one of "VOLUME_TOO_HIGH", "VOLUME_UNKNOWN"
     #   resp.members[0].invited_time #=> Time
@@ -480,8 +489,8 @@ module Aws::Detective
     # This operation removes the graph from each member account's list of
     # behavior graphs.
     #
-    # `DeleteGraph` can only be called by the master account for a behavior
-    # graph.
+    # `DeleteGraph` can only be called by the administrator account for a
+    # behavior graph.
     #
     # @option params [required, String] :graph_arn
     #   The ARN of the behavior graph to disable.
@@ -503,11 +512,12 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Deletes one or more member accounts from the master account behavior
-    # graph. This operation can only be called by a Detective master
-    # account. That account cannot use `DeleteMembers` to delete their own
-    # account from the behavior graph. To disable a behavior graph, the
-    # master account uses the `DeleteGraph` API method.
+    # Deletes one or more member accounts from the administrator account's
+    # behavior graph. This operation can only be called by a Detective
+    # administrator account. That account cannot use `DeleteMembers` to
+    # delete their own account from the behavior graph. To disable a
+    # behavior graph, the administrator account uses the `DeleteGraph` API
+    # method.
     #
     # @option params [required, String] :graph_arn
     #   The ARN of the behavior graph to delete members from.
@@ -604,6 +614,7 @@ module Aws::Detective
     #   resp.member_details[0].email_address #=> String
     #   resp.member_details[0].graph_arn #=> String
     #   resp.member_details[0].master_id #=> String
+    #   resp.member_details[0].administrator_id #=> String
     #   resp.member_details[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED", "ACCEPTED_BUT_DISABLED"
     #   resp.member_details[0].disabled_reason #=> String, one of "VOLUME_TOO_HIGH", "VOLUME_UNKNOWN"
     #   resp.member_details[0].invited_time #=> Time
@@ -623,11 +634,13 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Returns the list of behavior graphs that the calling account is a
-    # master of. This operation can only be called by a master account.
+    # Returns the list of behavior graphs that the calling account is an
+    # administrator account of. This operation can only be called by an
+    # administrator account.
     #
-    # Because an account can currently only be the master of one behavior
-    # graph within a Region, the results always contain a single graph.
+    # Because an account can currently only be the administrator of one
+    # behavior graph within a Region, the results always contain a single
+    # behavior graph.
     #
     # @option params [String] :next_token
     #   For requests to get the next page of results, the pagination token
@@ -712,6 +725,7 @@ module Aws::Detective
     #   resp.invitations[0].email_address #=> String
     #   resp.invitations[0].graph_arn #=> String
     #   resp.invitations[0].master_id #=> String
+    #   resp.invitations[0].administrator_id #=> String
     #   resp.invitations[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED", "ACCEPTED_BUT_DISABLED"
     #   resp.invitations[0].disabled_reason #=> String, one of "VOLUME_TOO_HIGH", "VOLUME_UNKNOWN"
     #   resp.invitations[0].invited_time #=> Time
@@ -768,6 +782,7 @@ module Aws::Detective
     #   resp.member_details[0].email_address #=> String
     #   resp.member_details[0].graph_arn #=> String
     #   resp.member_details[0].master_id #=> String
+    #   resp.member_details[0].administrator_id #=> String
     #   resp.member_details[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED", "ACCEPTED_BUT_DISABLED"
     #   resp.member_details[0].disabled_reason #=> String, one of "VOLUME_TOO_HIGH", "VOLUME_UNKNOWN"
     #   resp.member_details[0].invited_time #=> Time
@@ -863,7 +878,7 @@ module Aws::Detective
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-detective'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

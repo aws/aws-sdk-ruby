@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2021-02-25)
+------------------
+
+* Feature - This SDK release adds two new dataset features: 1) support for specifying the file format for a dataset, and 2) support for specifying whether the first row of a CSV or Excel file contains a header.
+
 1.4.0 (2021-02-11)
 ------------------
 

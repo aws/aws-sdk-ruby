@@ -32,7 +32,8 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # An AWS account that is the master of or a member of a behavior graph.
+    # An AWS account that is the administrator account of or a member of a
+    # behavior graph.
     #
     # @note When making an API call, you may pass Account
     #   data as a hash:
@@ -90,6 +91,7 @@ module Aws::Detective
     #       {
     #         graph_arn: "GraphArn", # required
     #         message: "EmailMessage",
+    #         disable_email_notification: false,
     #         accounts: [ # required
     #           {
     #             account_id: "AccountId", # required
@@ -108,6 +110,12 @@ module Aws::Detective
     #   to the invited member accounts.
     #   @return [String]
     #
+    # @!attribute [rw] disable_email_notification
+    #   if set to `true`, then the member accounts do not receive email
+    #   notifications. By default, this is set to `false`, and the member
+    #   accounts receive email notifications.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] accounts
     #   The list of AWS accounts to invite to become member accounts in the
     #   behavior graph. For each invited account, the account list contains
@@ -119,6 +127,7 @@ module Aws::Detective
     class CreateMembersRequest < Struct.new(
       :graph_arn,
       :message,
+      :disable_email_notification,
       :accounts)
       SENSITIVE = []
       include Aws::Structure
@@ -350,7 +359,8 @@ module Aws::Detective
     end
 
     # @!attribute [rw] graph_list
-    #   A list of behavior graphs that the account is a master for.
+    #   A list of behavior graphs that the account is an administrator
+    #   account for.
     #   @return [Array<Types::Graph>]
     #
     # @!attribute [rw] next_token
@@ -494,8 +504,15 @@ module Aws::Detective
     #   @return [String]
     #
     # @!attribute [rw] master_id
-    #   The AWS account identifier of the master account for the behavior
-    #   graph.
+    #   Deprecated. Instead of `MasterId`, use `AdministratorId`.
+    #
+    #   The AWS account identifier of the administrator account for the
+    #   behavior graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] administrator_id
+    #   The AWS account identifier of the administrator account for the
+    #   behavior graph.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -578,6 +595,7 @@ module Aws::Detective
       :email_address,
       :graph_arn,
       :master_id,
+      :administrator_id,
       :status,
       :disabled_reason,
       :invited_time,

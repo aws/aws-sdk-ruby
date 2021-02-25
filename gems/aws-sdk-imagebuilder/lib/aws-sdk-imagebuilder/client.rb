@@ -793,6 +793,7 @@ module Aws::Imagebuilder
     #     enhanced_image_metadata_enabled: false,
     #     schedule: {
     #       schedule_expression: "NonEmptyString",
+    #       timezone: "Timezone",
     #       pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY", # accepts EXPRESSION_MATCH_ONLY, EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE
     #     },
     #     status: "DISABLED", # accepts DISABLED, ENABLED
@@ -885,7 +886,7 @@ module Aws::Imagebuilder
     #           kms_key_id: "NonEmptyString",
     #           snapshot_id: "NonEmptyString",
     #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #           volume_type: "standard", # accepts standard, io1, io2, gp2, gp3, sc1, st1
     #         },
     #         virtual_name: "NonEmptyString",
     #         no_device: "EmptyString",
@@ -1489,7 +1490,7 @@ module Aws::Imagebuilder
     #   resp.image.image_recipe.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.image.image_recipe.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.image.image_recipe.block_device_mappings[0].ebs.volume_size #=> Integer
-    #   resp.image.image_recipe.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
+    #   resp.image.image_recipe.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "gp3", "sc1", "st1"
     #   resp.image.image_recipe.block_device_mappings[0].virtual_name #=> String
     #   resp.image.image_recipe.block_device_mappings[0].no_device #=> String
     #   resp.image.image_recipe.date_created #=> String
@@ -1624,6 +1625,7 @@ module Aws::Imagebuilder
     #   resp.image_pipeline.image_tests_configuration.image_tests_enabled #=> Boolean
     #   resp.image_pipeline.image_tests_configuration.timeout_minutes #=> Integer
     #   resp.image_pipeline.schedule.schedule_expression #=> String
+    #   resp.image_pipeline.schedule.timezone #=> String
     #   resp.image_pipeline.schedule.pipeline_execution_start_condition #=> String, one of "EXPRESSION_MATCH_ONLY", "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"
     #   resp.image_pipeline.status #=> String, one of "DISABLED", "ENABLED"
     #   resp.image_pipeline.date_created #=> String
@@ -1711,7 +1713,7 @@ module Aws::Imagebuilder
     #   resp.image_recipe.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.image_recipe.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.image_recipe.block_device_mappings[0].ebs.volume_size #=> Integer
-    #   resp.image_recipe.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1"
+    #   resp.image_recipe.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "gp3", "sc1", "st1"
     #   resp.image_recipe.block_device_mappings[0].virtual_name #=> String
     #   resp.image_recipe.block_device_mappings[0].no_device #=> String
     #   resp.image_recipe.date_created #=> String
@@ -2233,6 +2235,54 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
+    # List the Packages that are associated with an Image Build Version, as
+    # determined by AWS Systems Manager Inventory at build time.
+    #
+    # @option params [required, String] :image_build_version_arn
+    #   Filter results for the ListImagePackages request by the Image Build
+    #   Version ARN
+    #
+    # @option params [Integer] :max_results
+    #   The maxiumum number of results to return from the ListImagePackages
+    #   request.
+    #
+    # @option params [String] :next_token
+    #   A token to specify where to start paginating. This is the NextToken
+    #   from a previously truncated response.
+    #
+    # @return [Types::ListImagePackagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListImagePackagesResponse#request_id #request_id} => String
+    #   * {Types::ListImagePackagesResponse#image_package_list #image_package_list} => Array&lt;Types::ImagePackage&gt;
+    #   * {Types::ListImagePackagesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_image_packages({
+    #     image_build_version_arn: "ImageBuildVersionArn", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.image_package_list #=> Array
+    #   resp.image_package_list[0].package_name #=> String
+    #   resp.image_package_list[0].package_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagePackages AWS API Documentation
+    #
+    # @overload list_image_packages(params = {})
+    # @param [Hash] params ({})
+    def list_image_packages(params = {}, options = {})
+      req = build_request(:list_image_packages, params)
+      req.send_request(options)
+    end
+
     # Returns a list of images created by the specified pipeline.
     #
     # @option params [required, String] :image_pipeline_arn
@@ -2359,6 +2409,7 @@ module Aws::Imagebuilder
     #   resp.image_pipeline_list[0].image_tests_configuration.image_tests_enabled #=> Boolean
     #   resp.image_pipeline_list[0].image_tests_configuration.timeout_minutes #=> Integer
     #   resp.image_pipeline_list[0].schedule.schedule_expression #=> String
+    #   resp.image_pipeline_list[0].schedule.timezone #=> String
     #   resp.image_pipeline_list[0].schedule.pipeline_execution_start_condition #=> String, one of "EXPRESSION_MATCH_ONLY", "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"
     #   resp.image_pipeline_list[0].status #=> String, one of "DISABLED", "ENABLED"
     #   resp.image_pipeline_list[0].date_created #=> String
@@ -2560,6 +2611,9 @@ module Aws::Imagebuilder
     #   resp.infrastructure_configuration_summary_list[0].resource_tags["TagKey"] #=> String
     #   resp.infrastructure_configuration_summary_list[0].tags #=> Hash
     #   resp.infrastructure_configuration_summary_list[0].tags["TagKey"] #=> String
+    #   resp.infrastructure_configuration_summary_list[0].instance_types #=> Array
+    #   resp.infrastructure_configuration_summary_list[0].instance_types[0] #=> String
+    #   resp.infrastructure_configuration_summary_list[0].instance_profile_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListInfrastructureConfigurations AWS API Documentation
@@ -3015,6 +3069,7 @@ module Aws::Imagebuilder
     #     enhanced_image_metadata_enabled: false,
     #     schedule: {
     #       schedule_expression: "NonEmptyString",
+    #       timezone: "Timezone",
     #       pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY", # accepts EXPRESSION_MATCH_ONLY, EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE
     #     },
     #     status: "DISABLED", # accepts DISABLED, ENABLED
@@ -3146,7 +3201,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

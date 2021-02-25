@@ -84,8 +84,10 @@ module Aws::GlueDataBrew
     ExcelOptions = Shapes::StructureShape.new(name: 'ExcelOptions')
     ExecutionTime = Shapes::IntegerShape.new(name: 'ExecutionTime')
     FormatOptions = Shapes::StructureShape.new(name: 'FormatOptions')
+    HeaderRow = Shapes::BooleanShape.new(name: 'HeaderRow')
     HiddenColumnList = Shapes::ListShape.new(name: 'HiddenColumnList')
     Input = Shapes::StructureShape.new(name: 'Input')
+    InputFormat = Shapes::StringShape.new(name: 'InputFormat')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     Job = Shapes::StructureShape.new(name: 'Job')
     JobList = Shapes::ListShape.new(name: 'JobList')
@@ -234,6 +236,7 @@ module Aws::GlueDataBrew
     ConflictException.struct_class = Types::ConflictException
 
     CreateDatasetRequest.add_member(:name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location_name: "Name"))
+    CreateDatasetRequest.add_member(:format, Shapes::ShapeRef.new(shape: InputFormat, location_name: "Format"))
     CreateDatasetRequest.add_member(:format_options, Shapes::ShapeRef.new(shape: FormatOptions, location_name: "FormatOptions"))
     CreateDatasetRequest.add_member(:input, Shapes::ShapeRef.new(shape: Input, required: true, location_name: "Input"))
     CreateDatasetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -307,6 +310,7 @@ module Aws::GlueDataBrew
     CreateScheduleResponse.struct_class = Types::CreateScheduleResponse
 
     CsvOptions.add_member(:delimiter, Shapes::ShapeRef.new(shape: Delimiter, location_name: "Delimiter"))
+    CsvOptions.add_member(:header_row, Shapes::ShapeRef.new(shape: HeaderRow, location_name: "HeaderRow"))
     CsvOptions.struct_class = Types::CsvOptions
 
     CsvOutputOptions.add_member(:delimiter, Shapes::ShapeRef.new(shape: Delimiter, location_name: "Delimiter"))
@@ -322,6 +326,7 @@ module Aws::GlueDataBrew
     Dataset.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "CreatedBy"))
     Dataset.add_member(:create_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreateDate"))
     Dataset.add_member(:name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location_name: "Name"))
+    Dataset.add_member(:format, Shapes::ShapeRef.new(shape: InputFormat, location_name: "Format"))
     Dataset.add_member(:format_options, Shapes::ShapeRef.new(shape: FormatOptions, location_name: "FormatOptions"))
     Dataset.add_member(:input, Shapes::ShapeRef.new(shape: Input, required: true, location_name: "Input"))
     Dataset.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Date, location_name: "LastModifiedDate"))
@@ -371,6 +376,7 @@ module Aws::GlueDataBrew
     DescribeDatasetResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "CreatedBy"))
     DescribeDatasetResponse.add_member(:create_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreateDate"))
     DescribeDatasetResponse.add_member(:name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location_name: "Name"))
+    DescribeDatasetResponse.add_member(:format, Shapes::ShapeRef.new(shape: InputFormat, location_name: "Format"))
     DescribeDatasetResponse.add_member(:format_options, Shapes::ShapeRef.new(shape: FormatOptions, location_name: "FormatOptions"))
     DescribeDatasetResponse.add_member(:input, Shapes::ShapeRef.new(shape: Input, required: true, location_name: "Input"))
     DescribeDatasetResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Date, location_name: "LastModifiedDate"))
@@ -480,6 +486,7 @@ module Aws::GlueDataBrew
 
     ExcelOptions.add_member(:sheet_names, Shapes::ShapeRef.new(shape: SheetNameList, location_name: "SheetNames"))
     ExcelOptions.add_member(:sheet_indexes, Shapes::ShapeRef.new(shape: SheetIndexList, location_name: "SheetIndexes"))
+    ExcelOptions.add_member(:header_row, Shapes::ShapeRef.new(shape: HeaderRow, location_name: "HeaderRow"))
     ExcelOptions.struct_class = Types::ExcelOptions
 
     FormatOptions.add_member(:json, Shapes::ShapeRef.new(shape: JsonOptions, location_name: "Json"))
@@ -782,6 +789,7 @@ module Aws::GlueDataBrew
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateDatasetRequest.add_member(:name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location: "uri", location_name: "name"))
+    UpdateDatasetRequest.add_member(:format, Shapes::ShapeRef.new(shape: InputFormat, location_name: "Format"))
     UpdateDatasetRequest.add_member(:format_options, Shapes::ShapeRef.new(shape: FormatOptions, location_name: "FormatOptions"))
     UpdateDatasetRequest.add_member(:input, Shapes::ShapeRef.new(shape: Input, required: true, location_name: "Input"))
     UpdateDatasetRequest.struct_class = Types::UpdateDatasetRequest

@@ -996,6 +996,7 @@ module Aws::Imagebuilder
     #         enhanced_image_metadata_enabled: false,
     #         schedule: {
     #           schedule_expression: "NonEmptyString",
+    #           timezone: "Timezone",
     #           pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY", # accepts EXPRESSION_MATCH_ONLY, EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE
     #         },
     #         status: "DISABLED", # accepts DISABLED, ENABLED
@@ -1129,7 +1130,7 @@ module Aws::Imagebuilder
     #               kms_key_id: "NonEmptyString",
     #               snapshot_id: "NonEmptyString",
     #               volume_size: 1,
-    #               volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #               volume_type: "standard", # accepts standard, io1, io2, gp2, gp3, sc1, st1
     #             },
     #             virtual_name: "NonEmptyString",
     #             no_device: "EmptyString",
@@ -1888,7 +1889,7 @@ module Aws::Imagebuilder
     #         kms_key_id: "NonEmptyString",
     #         snapshot_id: "NonEmptyString",
     #         volume_size: 1,
-    #         volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #         volume_type: "standard", # accepts standard, io1, io2, gp2, gp3, sc1, st1
     #       }
     #
     # @!attribute [rw] encrypted
@@ -2501,6 +2502,27 @@ module Aws::Imagebuilder
       :date_created,
       :output_resources,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a package installed on an Image Builder image.
+    #
+    # @!attribute [rw] package_name
+    #   The name of the package as reported to the operating system package
+    #   manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_version
+    #   The version of the package as reported to the operating system
+    #   package manager.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImagePackage AWS API Documentation
+    #
+    class ImagePackage < Struct.new(
+      :package_name,
+      :package_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3126,6 +3148,14 @@ module Aws::Imagebuilder
     #   The tags of the infrastructure configuration.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] instance_types
+    #   The instance types of the infrastructure configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_profile_name
+    #   The instance profile of the infrastructure configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/InfrastructureConfigurationSummary AWS API Documentation
     #
     class InfrastructureConfigurationSummary < Struct.new(
@@ -3135,7 +3165,9 @@ module Aws::Imagebuilder
       :date_created,
       :date_updated,
       :resource_tags,
-      :tags)
+      :tags,
+      :instance_types,
+      :instance_profile_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3155,7 +3187,7 @@ module Aws::Imagebuilder
     #           kms_key_id: "NonEmptyString",
     #           snapshot_id: "NonEmptyString",
     #           volume_size: 1,
-    #           volume_type: "standard", # accepts standard, io1, io2, gp2, sc1, st1
+    #           volume_type: "standard", # accepts standard, io1, io2, gp2, gp3, sc1, st1
     #         },
     #         virtual_name: "NonEmptyString",
     #         no_device: "EmptyString",
@@ -3645,6 +3677,63 @@ module Aws::Imagebuilder
     class ListImageBuildVersionsResponse < Struct.new(
       :request_id,
       :image_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListImagePackagesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_build_version_arn: "ImageBuildVersionArn", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] image_build_version_arn
+    #   Filter results for the ListImagePackages request by the Image Build
+    #   Version ARN
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maxiumum number of results to return from the ListImagePackages
+    #   request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start paginating. This is the NextToken
+    #   from a previously truncated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagePackagesRequest AWS API Documentation
+    #
+    class ListImagePackagesRequest < Struct.new(
+      :image_build_version_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The request ID that uniquely identifies this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_package_list
+    #   The list of Image Packages returned in the response.
+    #   @return [Array<Types::ImagePackage>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start paginating. This is the NextToken
+    #   from a previously truncated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagePackagesResponse AWS API Documentation
+    #
+    class ListImagePackagesResponse < Struct.new(
+      :request_id,
+      :image_package_list,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4341,6 +4430,7 @@ module Aws::Imagebuilder
     #
     #       {
     #         schedule_expression: "NonEmptyString",
+    #         timezone: "Timezone",
     #         pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY", # accepts EXPRESSION_MATCH_ONLY, EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE
     #       }
     #
@@ -4354,6 +4444,16 @@ module Aws::Imagebuilder
     #
     #
     #   [1]: https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html
+    #   @return [String]
+    #
+    # @!attribute [rw] timezone
+    #   The timezone that applies to the scheduling expression. For example,
+    #   "Etc/UTC", "America/Los\_Angeles" in the [IANA timezone
+    #   format][1]. If not specified this defaults to UTC.
+    #
+    #
+    #
+    #   [1]: https://www.joda.org/joda-time/timezones.html
     #   @return [String]
     #
     # @!attribute [rw] pipeline_execution_start_condition
@@ -4378,6 +4478,7 @@ module Aws::Imagebuilder
     #
     class Schedule < Struct.new(
       :schedule_expression,
+      :timezone,
       :pipeline_execution_start_condition)
       SENSITIVE = []
       include Aws::Structure
@@ -4677,6 +4778,7 @@ module Aws::Imagebuilder
     #         enhanced_image_metadata_enabled: false,
     #         schedule: {
     #           schedule_expression: "NonEmptyString",
+    #           timezone: "Timezone",
     #           pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY", # accepts EXPRESSION_MATCH_ONLY, EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE
     #         },
     #         status: "DISABLED", # accepts DISABLED, ENABLED

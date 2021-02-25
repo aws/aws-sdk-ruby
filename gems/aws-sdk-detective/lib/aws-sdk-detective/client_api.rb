@@ -18,6 +18,7 @@ module Aws::Detective
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
     AccountList = Shapes::ListShape.new(name: 'AccountList')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateGraphResponse = Shapes::StructureShape.new(name: 'CreateGraphResponse')
     CreateMembersRequest = Shapes::StructureShape.new(name: 'CreateMembersRequest')
@@ -77,6 +78,7 @@ module Aws::Detective
 
     CreateMembersRequest.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location_name: "GraphArn"))
     CreateMembersRequest.add_member(:message, Shapes::ShapeRef.new(shape: EmailMessage, location_name: "Message"))
+    CreateMembersRequest.add_member(:disable_email_notification, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableEmailNotification"))
     CreateMembersRequest.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, required: true, location_name: "Accounts"))
     CreateMembersRequest.struct_class = Types::CreateMembersRequest
 
@@ -143,7 +145,8 @@ module Aws::Detective
     MemberDetail.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     MemberDetail.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "EmailAddress"))
     MemberDetail.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, location_name: "GraphArn"))
-    MemberDetail.add_member(:master_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "MasterId"))
+    MemberDetail.add_member(:master_id, Shapes::ShapeRef.new(shape: AccountId, deprecated: true, location_name: "MasterId", metadata: {"deprecatedMessage"=>"This property is deprecated, use AdministratorId instead."}))
+    MemberDetail.add_member(:administrator_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AdministratorId"))
     MemberDetail.add_member(:status, Shapes::ShapeRef.new(shape: MemberStatus, location_name: "Status"))
     MemberDetail.add_member(:disabled_reason, Shapes::ShapeRef.new(shape: MemberDisabledReason, location_name: "DisabledReason"))
     MemberDetail.add_member(:invited_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "InvitedTime"))

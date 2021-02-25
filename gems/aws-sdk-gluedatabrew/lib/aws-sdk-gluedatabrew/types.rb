@@ -134,6 +134,7 @@ module Aws::GlueDataBrew
     #
     #       {
     #         name: "DatasetName", # required
+    #         format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL
     #         format_options: {
     #           json: {
     #             multi_line: false,
@@ -141,9 +142,11 @@ module Aws::GlueDataBrew
     #           excel: {
     #             sheet_names: ["SheetName"],
     #             sheet_indexes: [1],
+    #             header_row: false,
     #           },
     #           csv: {
     #             delimiter: "Delimiter",
+    #             header_row: false,
     #           },
     #         },
     #         input: { # required
@@ -171,6 +174,11 @@ module Aws::GlueDataBrew
     #   alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
     #   @return [String]
     #
+    # @!attribute [rw] format
+    #   Specifies the file format of a dataset created from an S3 file or
+    #   folder.
+    #   @return [String]
+    #
     # @!attribute [rw] format_options
     #   Options that define the structure of either Csv, Excel, or JSON
     #   input.
@@ -189,6 +197,7 @@ module Aws::GlueDataBrew
     #
     class CreateDatasetRequest < Struct.new(
       :name,
+      :format,
       :format_options,
       :input,
       :tags)
@@ -672,6 +681,7 @@ module Aws::GlueDataBrew
     #
     #       {
     #         delimiter: "Delimiter",
+    #         header_row: false,
     #       }
     #
     # @!attribute [rw] delimiter
@@ -679,10 +689,16 @@ module Aws::GlueDataBrew
     #   Csv file.
     #   @return [String]
     #
+    # @!attribute [rw] header_row
+    #   A variable that specifies whether the first row in the file will be
+    #   parsed as the header. If false, column names will be auto-generated.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/CsvOptions AWS API Documentation
     #
     class CsvOptions < Struct.new(
-      :delimiter)
+      :delimiter,
+      :header_row)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -773,6 +789,11 @@ module Aws::GlueDataBrew
     #   The unique name of the dataset.
     #   @return [String]
     #
+    # @!attribute [rw] format
+    #   Specifies the file format of a dataset created from an S3 file or
+    #   folder.
+    #   @return [String]
+    #
     # @!attribute [rw] format_options
     #   Options that define how DataBrew interprets the data in the dataset.
     #   @return [Types::FormatOptions]
@@ -811,6 +832,7 @@ module Aws::GlueDataBrew
       :created_by,
       :create_date,
       :name,
+      :format,
       :format_options,
       :input,
       :last_modified_date,
@@ -1021,6 +1043,11 @@ module Aws::GlueDataBrew
     #   The name of the dataset.
     #   @return [String]
     #
+    # @!attribute [rw] format
+    #   Specifies the file format of a dataset created from an S3 file or
+    #   folder.
+    #   @return [String]
+    #
     # @!attribute [rw] format_options
     #   Options that define the structure of either Csv, Excel, or JSON
     #   input.
@@ -1059,6 +1086,7 @@ module Aws::GlueDataBrew
       :created_by,
       :create_date,
       :name,
+      :format,
       :format_options,
       :input,
       :last_modified_date,
@@ -1622,6 +1650,7 @@ module Aws::GlueDataBrew
     #       {
     #         sheet_names: ["SheetName"],
     #         sheet_indexes: [1],
+    #         header_row: false,
     #       }
     #
     # @!attribute [rw] sheet_names
@@ -1634,11 +1663,17 @@ module Aws::GlueDataBrew
     #   included in the dataset.
     #   @return [Array<Integer>]
     #
+    # @!attribute [rw] header_row
+    #   A variable that specifies whether the first row in the file will be
+    #   parsed as the header. If false, column names will be auto-generated.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ExcelOptions AWS API Documentation
     #
     class ExcelOptions < Struct.new(
       :sheet_names,
-      :sheet_indexes)
+      :sheet_indexes,
+      :header_row)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1655,9 +1690,11 @@ module Aws::GlueDataBrew
     #         excel: {
     #           sheet_names: ["SheetName"],
     #           sheet_indexes: [1],
+    #           header_row: false,
     #         },
     #         csv: {
     #           delimiter: "Delimiter",
+    #           header_row: false,
     #         },
     #       }
     #
@@ -3264,6 +3301,7 @@ module Aws::GlueDataBrew
     #
     #       {
     #         name: "DatasetName", # required
+    #         format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL
     #         format_options: {
     #           json: {
     #             multi_line: false,
@@ -3271,9 +3309,11 @@ module Aws::GlueDataBrew
     #           excel: {
     #             sheet_names: ["SheetName"],
     #             sheet_indexes: [1],
+    #             header_row: false,
     #           },
     #           csv: {
     #             delimiter: "Delimiter",
+    #             header_row: false,
     #           },
     #         },
     #         input: { # required
@@ -3297,6 +3337,11 @@ module Aws::GlueDataBrew
     #   The name of the dataset to be updated.
     #   @return [String]
     #
+    # @!attribute [rw] format
+    #   Specifies the file format of a dataset created from an S3 file or
+    #   folder.
+    #   @return [String]
+    #
     # @!attribute [rw] format_options
     #   Options that define the structure of either Csv, Excel, or JSON
     #   input.
@@ -3311,6 +3356,7 @@ module Aws::GlueDataBrew
     #
     class UpdateDatasetRequest < Struct.new(
       :name,
+      :format,
       :format_options,
       :input)
       SENSITIVE = []

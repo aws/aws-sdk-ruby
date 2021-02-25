@@ -5453,7 +5453,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] progress
-    #   The progress of the disk snapshot operation.
+    #   The progress of the snapshot.
     #   @return [String]
     #
     # @!attribute [rw] from_disk_name
@@ -10241,6 +10241,11 @@ module Aws::Lightsail
     #
     # @!attribute [rw] progress
     #   The progress of the snapshot.
+    #
+    #   <note markdown="1"> This is populated only for disk snapshots, and is `null` for
+    #   instance snapshots.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] from_attached_disks

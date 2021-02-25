@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2021-02-25)
+------------------
+
+* Feature - This release introduces a new API (ListImagePackages) for listing packages installed on an image, and adds support for GP3 volume types, and for specifying a time zone in an image pipeline schedule.
+
 1.18.0 (2021-02-02)
 ------------------
 

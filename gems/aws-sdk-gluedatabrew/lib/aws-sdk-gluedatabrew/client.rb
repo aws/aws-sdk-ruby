@@ -399,6 +399,10 @@ module Aws::GlueDataBrew
     #   The name of the dataset to be created. Valid characters are
     #   alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
     #
+    # @option params [String] :format
+    #   Specifies the file format of a dataset created from an S3 file or
+    #   folder.
+    #
     # @option params [Types::FormatOptions] :format_options
     #   Options that define the structure of either Csv, Excel, or JSON input.
     #
@@ -417,6 +421,7 @@ module Aws::GlueDataBrew
     #
     #   resp = client.create_dataset({
     #     name: "DatasetName", # required
+    #     format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL
     #     format_options: {
     #       json: {
     #         multi_line: false,
@@ -424,9 +429,11 @@ module Aws::GlueDataBrew
     #       excel: {
     #         sheet_names: ["SheetName"],
     #         sheet_indexes: [1],
+    #         header_row: false,
     #       },
     #       csv: {
     #         delimiter: "Delimiter",
+    #         header_row: false,
     #       },
     #     },
     #     input: { # required
@@ -991,6 +998,7 @@ module Aws::GlueDataBrew
     #   * {Types::DescribeDatasetResponse#created_by #created_by} => String
     #   * {Types::DescribeDatasetResponse#create_date #create_date} => Time
     #   * {Types::DescribeDatasetResponse#name #name} => String
+    #   * {Types::DescribeDatasetResponse#format #format} => String
     #   * {Types::DescribeDatasetResponse#format_options #format_options} => Types::FormatOptions
     #   * {Types::DescribeDatasetResponse#input #input} => Types::Input
     #   * {Types::DescribeDatasetResponse#last_modified_date #last_modified_date} => Time
@@ -1010,12 +1018,15 @@ module Aws::GlueDataBrew
     #   resp.created_by #=> String
     #   resp.create_date #=> Time
     #   resp.name #=> String
+    #   resp.format #=> String, one of "CSV", "JSON", "PARQUET", "EXCEL"
     #   resp.format_options.json.multi_line #=> Boolean
     #   resp.format_options.excel.sheet_names #=> Array
     #   resp.format_options.excel.sheet_names[0] #=> String
     #   resp.format_options.excel.sheet_indexes #=> Array
     #   resp.format_options.excel.sheet_indexes[0] #=> Integer
+    #   resp.format_options.excel.header_row #=> Boolean
     #   resp.format_options.csv.delimiter #=> String
+    #   resp.format_options.csv.header_row #=> Boolean
     #   resp.input.s3_input_definition.bucket #=> String
     #   resp.input.s3_input_definition.key #=> String
     #   resp.input.data_catalog_input_definition.catalog_id #=> String
@@ -1384,12 +1395,15 @@ module Aws::GlueDataBrew
     #   resp.datasets[0].created_by #=> String
     #   resp.datasets[0].create_date #=> Time
     #   resp.datasets[0].name #=> String
+    #   resp.datasets[0].format #=> String, one of "CSV", "JSON", "PARQUET", "EXCEL"
     #   resp.datasets[0].format_options.json.multi_line #=> Boolean
     #   resp.datasets[0].format_options.excel.sheet_names #=> Array
     #   resp.datasets[0].format_options.excel.sheet_names[0] #=> String
     #   resp.datasets[0].format_options.excel.sheet_indexes #=> Array
     #   resp.datasets[0].format_options.excel.sheet_indexes[0] #=> Integer
+    #   resp.datasets[0].format_options.excel.header_row #=> Boolean
     #   resp.datasets[0].format_options.csv.delimiter #=> String
+    #   resp.datasets[0].format_options.csv.header_row #=> Boolean
     #   resp.datasets[0].input.s3_input_definition.bucket #=> String
     #   resp.datasets[0].input.s3_input_definition.key #=> String
     #   resp.datasets[0].input.data_catalog_input_definition.catalog_id #=> String
@@ -2093,6 +2107,10 @@ module Aws::GlueDataBrew
     # @option params [required, String] :name
     #   The name of the dataset to be updated.
     #
+    # @option params [String] :format
+    #   Specifies the file format of a dataset created from an S3 file or
+    #   folder.
+    #
     # @option params [Types::FormatOptions] :format_options
     #   Options that define the structure of either Csv, Excel, or JSON input.
     #
@@ -2108,6 +2126,7 @@ module Aws::GlueDataBrew
     #
     #   resp = client.update_dataset({
     #     name: "DatasetName", # required
+    #     format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL
     #     format_options: {
     #       json: {
     #         multi_line: false,
@@ -2115,9 +2134,11 @@ module Aws::GlueDataBrew
     #       excel: {
     #         sheet_names: ["SheetName"],
     #         sheet_indexes: [1],
+    #         header_row: false,
     #       },
     #       csv: {
     #         delimiter: "Delimiter",
+    #         header_row: false,
     #       },
     #     },
     #     input: { # required
@@ -2471,7 +2492,7 @@ module Aws::GlueDataBrew
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gluedatabrew'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

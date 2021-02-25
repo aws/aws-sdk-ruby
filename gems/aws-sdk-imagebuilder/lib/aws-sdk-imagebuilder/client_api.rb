@@ -123,6 +123,8 @@ module Aws::Imagebuilder
     Image = Shapes::StructureShape.new(name: 'Image')
     ImageBuildVersionArn = Shapes::StringShape.new(name: 'ImageBuildVersionArn')
     ImageBuilderArn = Shapes::StringShape.new(name: 'ImageBuilderArn')
+    ImagePackage = Shapes::StructureShape.new(name: 'ImagePackage')
+    ImagePackageList = Shapes::ListShape.new(name: 'ImagePackageList')
     ImagePipeline = Shapes::StructureShape.new(name: 'ImagePipeline')
     ImagePipelineArn = Shapes::StringShape.new(name: 'ImagePipelineArn')
     ImagePipelineList = Shapes::ListShape.new(name: 'ImagePipelineList')
@@ -151,6 +153,7 @@ module Aws::Imagebuilder
     InlineDockerFileTemplate = Shapes::StringShape.new(name: 'InlineDockerFileTemplate')
     InstanceBlockDeviceMapping = Shapes::StructureShape.new(name: 'InstanceBlockDeviceMapping')
     InstanceBlockDeviceMappings = Shapes::ListShape.new(name: 'InstanceBlockDeviceMappings')
+    InstanceProfileNameType = Shapes::StringShape.new(name: 'InstanceProfileNameType')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     InstanceTypeList = Shapes::ListShape.new(name: 'InstanceTypeList')
     InvalidPaginationTokenException = Shapes::StructureShape.new(name: 'InvalidPaginationTokenException')
@@ -172,6 +175,8 @@ module Aws::Imagebuilder
     ListDistributionConfigurationsResponse = Shapes::StructureShape.new(name: 'ListDistributionConfigurationsResponse')
     ListImageBuildVersionsRequest = Shapes::StructureShape.new(name: 'ListImageBuildVersionsRequest')
     ListImageBuildVersionsResponse = Shapes::StructureShape.new(name: 'ListImageBuildVersionsResponse')
+    ListImagePackagesRequest = Shapes::StructureShape.new(name: 'ListImagePackagesRequest')
+    ListImagePackagesResponse = Shapes::StructureShape.new(name: 'ListImagePackagesResponse')
     ListImagePipelineImagesRequest = Shapes::StructureShape.new(name: 'ListImagePipelineImagesRequest')
     ListImagePipelineImagesResponse = Shapes::StructureShape.new(name: 'ListImagePipelineImagesResponse')
     ListImagePipelinesRequest = Shapes::StructureShape.new(name: 'ListImagePipelinesRequest')
@@ -229,6 +234,7 @@ module Aws::Imagebuilder
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TargetContainerRepository = Shapes::StructureShape.new(name: 'TargetContainerRepository')
+    Timezone = Shapes::StringShape.new(name: 'Timezone')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDistributionConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateDistributionConfigurationRequest')
@@ -685,6 +691,12 @@ module Aws::Imagebuilder
     Image.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     Image.struct_class = Types::Image
 
+    ImagePackage.add_member(:package_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "packageName"))
+    ImagePackage.add_member(:package_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "packageVersion"))
+    ImagePackage.struct_class = Types::ImagePackage
+
+    ImagePackageList.member = Shapes::ShapeRef.new(shape: ImagePackage)
+
     ImagePipeline.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
     ImagePipeline.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     ImagePipeline.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
@@ -790,7 +802,7 @@ module Aws::Imagebuilder
     InfrastructureConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     InfrastructureConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     InfrastructureConfiguration.add_member(:instance_types, Shapes::ShapeRef.new(shape: InstanceTypeList, location_name: "instanceTypes"))
-    InfrastructureConfiguration.add_member(:instance_profile_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "instanceProfileName"))
+    InfrastructureConfiguration.add_member(:instance_profile_name, Shapes::ShapeRef.new(shape: InstanceProfileNameType, location_name: "instanceProfileName"))
     InfrastructureConfiguration.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "securityGroupIds"))
     InfrastructureConfiguration.add_member(:subnet_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "subnetId"))
     InfrastructureConfiguration.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
@@ -810,6 +822,8 @@ module Aws::Imagebuilder
     InfrastructureConfigurationSummary.add_member(:date_updated, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateUpdated"))
     InfrastructureConfigurationSummary.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagMap, location_name: "resourceTags"))
     InfrastructureConfigurationSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    InfrastructureConfigurationSummary.add_member(:instance_types, Shapes::ShapeRef.new(shape: InstanceTypeList, location_name: "instanceTypes"))
+    InfrastructureConfigurationSummary.add_member(:instance_profile_name, Shapes::ShapeRef.new(shape: InstanceProfileNameType, location_name: "instanceProfileName"))
     InfrastructureConfigurationSummary.struct_class = Types::InfrastructureConfigurationSummary
 
     InfrastructureConfigurationSummaryList.member = Shapes::ShapeRef.new(shape: InfrastructureConfigurationSummary)
@@ -901,6 +915,16 @@ module Aws::Imagebuilder
     ListImageBuildVersionsResponse.add_member(:image_summary_list, Shapes::ShapeRef.new(shape: ImageSummaryList, location_name: "imageSummaryList"))
     ListImageBuildVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListImageBuildVersionsResponse.struct_class = Types::ListImageBuildVersionsResponse
+
+    ListImagePackagesRequest.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, required: true, location_name: "imageBuildVersionArn"))
+    ListImagePackagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListImagePackagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListImagePackagesRequest.struct_class = Types::ListImagePackagesRequest
+
+    ListImagePackagesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
+    ListImagePackagesResponse.add_member(:image_package_list, Shapes::ShapeRef.new(shape: ImagePackageList, location_name: "imagePackageList"))
+    ListImagePackagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListImagePackagesResponse.struct_class = Types::ListImagePackagesResponse
 
     ListImagePipelineImagesRequest.add_member(:image_pipeline_arn, Shapes::ShapeRef.new(shape: ImagePipelineArn, required: true, location_name: "imagePipelineArn"))
     ListImagePipelineImagesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
@@ -1026,6 +1050,7 @@ module Aws::Imagebuilder
     S3Logs.struct_class = Types::S3Logs
 
     Schedule.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "scheduleExpression"))
+    Schedule.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "timezone"))
     Schedule.add_member(:pipeline_execution_start_condition, Shapes::ShapeRef.new(shape: PipelineExecutionStartCondition, location_name: "pipelineExecutionStartCondition"))
     Schedule.struct_class = Types::Schedule
 
@@ -1656,6 +1681,28 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_image_packages, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListImagePackages"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListImagePackages"
+        o.input = Shapes::ShapeRef.new(shape: ListImagePackagesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListImagePackagesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: CallRateLimitExceededException)
         o[:pager] = Aws::Pager.new(

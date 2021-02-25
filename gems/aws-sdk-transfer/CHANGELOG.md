@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2021-02-25)
+------------------
+
+* Feature - Corrected the upper limit for TestIdentityProvider input lengths to 1024 characters
+
 1.30.0 (2021-02-02)
 ------------------
 
