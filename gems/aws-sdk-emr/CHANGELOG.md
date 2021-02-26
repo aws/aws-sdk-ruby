@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2021-02-26)
+------------------
+
+* Feature - Added UpdateStudio API that allows updating a few attributes of an EMR Studio.
+
 1.41.0 (2021-02-02)
 ------------------
 

@@ -1288,6 +1288,7 @@ module Aws::S3
     GetObjectTaggingRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
     GetObjectTaggingRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
     GetObjectTaggingRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    GetObjectTaggingRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     GetObjectTaggingRequest.struct_class = Types::GetObjectTaggingRequest
 
     GetObjectTorrentOutput.add_member(:body, Shapes::ShapeRef.new(shape: Body, location_name: "Body", metadata: {"streaming"=>true}))
@@ -2105,6 +2106,7 @@ module Aws::S3
     PutObjectTaggingRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
     PutObjectTaggingRequest.add_member(:tagging, Shapes::ShapeRef.new(shape: Tagging, required: true, location_name: "Tagging", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutObjectTaggingRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    PutObjectTaggingRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     PutObjectTaggingRequest.struct_class = Types::PutObjectTaggingRequest
     PutObjectTaggingRequest[:payload] = :tagging
     PutObjectTaggingRequest[:payload_member] = PutObjectTaggingRequest.member(:tagging)

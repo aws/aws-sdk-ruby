@@ -330,13 +330,13 @@ module Aws::S3
     # @option options [Time,DateTime,Date,Integer,String] :response_expires
     #   Sets the `Expires` header of the response.
     # @option options [String] :sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (for
+    #   Specifies the algorithm to use to when decrypting the object (for
     #   example, AES256).
     # @option options [String] :sse_customer_key
-    #   Specifies the customer-provided encryption key for Amazon S3 to use in
-    #   encrypting data. This value is used to store the object and then it is
-    #   discarded; Amazon S3 does not store the encryption key. The key must
-    #   be appropriate for use with the algorithm specified in the
+    #   Specifies the customer-provided encryption key for Amazon S3 used to
+    #   encrypt the data. This value is used to decrypt the object when
+    #   recovering it and must match the one used when storing the data. The
+    #   key must be appropriate for use with the algorithm specified in the
     #   `x-amz-server-side-encryption-customer-algorithm` header.
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to

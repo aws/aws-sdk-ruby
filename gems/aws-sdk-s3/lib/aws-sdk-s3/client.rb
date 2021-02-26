@@ -2939,7 +2939,8 @@ module Aws::S3
     #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html
     #
     # @option params [required, String] :key
-    #   Name of the object key.
+    #   The key that identifies the object in the bucket from which to remove
+    #   all tags.
     #
     # @option params [String] :version_id
     #   The versionId of the object that the tag-set will be removed from.
@@ -3122,42 +3123,6 @@ module Aws::S3
     #   * {Types::DeleteObjectsOutput#errors #errors} => Array&lt;Types::Error&gt;
     #
     #
-    # @example Example: To delete multiple object versions from a versioned bucket
-    #
-    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
-    #   # versions and returns the key and versions of deleted objects in the response.
-    #
-    #   resp = client.delete_objects({
-    #     bucket: "examplebucket", 
-    #     delete: {
-    #       objects: [
-    #         {
-    #           key: "HappyFace.jpg", 
-    #           version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
-    #         }, 
-    #         {
-    #           key: "HappyFace.jpg", 
-    #           version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
-    #         }, 
-    #       ], 
-    #       quiet: false, 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     deleted: [
-    #       {
-    #         key: "HappyFace.jpg", 
-    #         version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
-    #       }, 
-    #       {
-    #         key: "HappyFace.jpg", 
-    #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
-    #       }, 
-    #     ], 
-    #   }
-    #
     # @example Example: To delete multiple objects from a versioned bucket
     #
     #   # The following example deletes objects from a bucket. The bucket is versioned, and the request does not specify the
@@ -3190,6 +3155,42 @@ module Aws::S3
     #         delete_marker: true, 
     #         delete_marker_version_id: "iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt", 
     #         key: "objectkey2", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To delete multiple object versions from a versioned bucket
+    #
+    #   # The following example deletes objects from a bucket. The request specifies object versions. S3 deletes specific object
+    #   # versions and returns the key and versions of deleted objects in the response.
+    #
+    #   resp = client.delete_objects({
+    #     bucket: "examplebucket", 
+    #     delete: {
+    #       objects: [
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
+    #         }, 
+    #         {
+    #           key: "HappyFace.jpg", 
+    #           version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #         }, 
+    #       ], 
+    #       quiet: false, 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deleted: [
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd", 
+    #       }, 
+    #       {
+    #         key: "HappyFace.jpg", 
+    #         version_id: "2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b", 
     #       }, 
     #     ], 
     #   }
@@ -3590,6 +3591,10 @@ module Aws::S3
     end
 
     # Returns the default encryption configuration for an Amazon S3 bucket.
+    # If the bucket does not have a default encryption configuration,
+    # GetBucketEncryption returns
+    # `ServerSideEncryptionConfigurationNotFoundError`.
+    #
     # For information about the Amazon S3 default encryption feature, see
     # [Amazon S3 Default Bucket Encryption][1].
     #
@@ -5297,14 +5302,14 @@ module Aws::S3
     #   VersionId used to reference a specific version of the object.
     #
     # @option params [String] :sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (for
+    #   Specifies the algorithm to use to when decrypting the object (for
     #   example, AES256).
     #
     # @option params [String] :sse_customer_key
-    #   Specifies the customer-provided encryption key for Amazon S3 to use in
-    #   encrypting data. This value is used to store the object and then it is
-    #   discarded; Amazon S3 does not store the encryption key. The key must
-    #   be appropriate for use with the algorithm specified in the
+    #   Specifies the customer-provided encryption key for Amazon S3 used to
+    #   encrypt the data. This value is used to decrypt the object when
+    #   recovering it and must match the one used when storing the data. The
+    #   key must be appropriate for use with the algorithm specified in the
     #   `x-amz-server-side-encryption-customer-algorithm` header.
     #
     # @option params [String] :sse_customer_key_md5
@@ -5371,6 +5376,28 @@ module Aws::S3
     #   * {Types::GetObjectOutput#object_lock_legal_hold_status #object_lock_legal_hold_status} => String
     #
     #
+    # @example Example: To retrieve an object
+    #
+    #   # The following example retrieves an object for an S3 bucket.
+    #
+    #   resp = client.get_object({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accept_ranges: "bytes", 
+    #     content_length: 3191, 
+    #     content_type: "image/jpeg", 
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
+    #     metadata: {
+    #     }, 
+    #     tag_count: 2, 
+    #     version_id: "null", 
+    #   }
+    #
     # @example Example: To retrieve a byte range of an object 
     #
     #   # The following example retrieves an object for an S3 bucket. The request specifies the range header to retrieve a
@@ -5392,28 +5419,6 @@ module Aws::S3
     #     last_modified: Time.parse("Thu, 09 Oct 2014 22:57:28 GMT"), 
     #     metadata: {
     #     }, 
-    #     version_id: "null", 
-    #   }
-    #
-    # @example Example: To retrieve an object
-    #
-    #   # The following example retrieves an object for an S3 bucket.
-    #
-    #   resp = client.get_object({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     accept_ranges: "bytes", 
-    #     content_length: 3191, 
-    #     content_type: "image/jpeg", 
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
-    #     metadata: {
-    #     }, 
-    #     tag_count: 2, 
     #     version_id: "null", 
     #   }
     #
@@ -5899,12 +5904,13 @@ module Aws::S3
     #
     # * [PutObjectTagging][2]
     #
-    # ^
+    # * [DeleteObjectTagging][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html
     #
     # @option params [required, String] :bucket
     #   The bucket name containing the object for which to get the tagging
@@ -5943,11 +5949,43 @@ module Aws::S3
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
     #
+    # @option params [String] :request_payer
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #
     # @return [Types::GetObjectTaggingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetObjectTaggingOutput#version_id #version_id} => String
     #   * {Types::GetObjectTaggingOutput#tag_set #tag_set} => Array&lt;Types::Tag&gt;
     #
+    #
+    # @example Example: To retrieve tag set of a specific object version
+    #
+    #   # The following example retrieves tag set of an object. The request specifies object version.
+    #
+    #   resp = client.get_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_set: [
+    #       {
+    #         key: "Key1", 
+    #         value: "Value1", 
+    #       }, 
+    #     ], 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   }
     #
     # @example Example: To retrieve tag set of an object
     #
@@ -5973,27 +6011,6 @@ module Aws::S3
     #     version_id: "null", 
     #   }
     #
-    # @example Example: To retrieve tag set of a specific object version
-    #
-    #   # The following example retrieves tag set of an object. The request specifies object version.
-    #
-    #   resp = client.get_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     tag_set: [
-    #       {
-    #         key: "Key1", 
-    #         value: "Value1", 
-    #       }, 
-    #     ], 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   }
-    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_object_tagging({
@@ -6001,6 +6018,7 @@ module Aws::S3
     #     key: "ObjectKey", # required
     #     version_id: "ObjectVersionId",
     #     expected_bucket_owner: "AccountId",
+    #     request_payer: "requester", # accepts requester
     #   })
     #
     # @example Response structure
@@ -6185,9 +6203,12 @@ module Aws::S3
 
     # This operation is useful to determine if a bucket exists and you have
     # permission to access it. The operation returns a `200 OK` if the
-    # bucket exists and you have permission to access it. Otherwise, the
-    # operation might return responses such as `404 Not Found` and `403
-    # Forbidden`.
+    # bucket exists and you have permission to access it.
+    #
+    # If the bucket does not exist or you do not have permission to access
+    # it, the `HEAD` request returns a generic `404 Not Found` or `403
+    # Forbidden` code. A message body is not included, so you cannot
+    # determine the exception beyond these error codes.
     #
     # To use this operation, you must have permissions to perform the
     # `s3:ListBucket` action. The bucket owner has this permission by
@@ -6271,7 +6292,10 @@ module Aws::S3
     #
     # A `HEAD` request has the same options as a `GET` operation on an
     # object. The response is identical to the `GET` response except that
-    # there is no response body.
+    # there is no response body. Because of this, if the `HEAD` request
+    # generates an error, it returns a generic `404 Not Found` or `403
+    # Forbidden` code. It is not possible to retrieve the exact exception
+    # beyond these error codes.
     #
     # If you encrypt an object by using server-side encryption with
     # customer-provided encryption keys (SSE-C) when you store the object in
@@ -6287,12 +6311,15 @@ module Aws::S3
     # For more information about SSE-C, see [Server-Side Encryption (Using
     # Customer-Provided Encryption Keys)][1].
     #
-    # <note markdown="1"> Encryption request headers, like `x-amz-server-side-encryption`,
-    # should not be sent for GET requests if your object uses server-side
-    # encryption with CMKs stored in AWS KMS (SSE-KMS) or server-side
-    # encryption with Amazon S3–managed encryption keys (SSE-S3). If your
-    # object does use these types of keys, you’ll get an HTTP 400 BadRequest
-    # error.
+    # <note markdown="1"> * Encryption request headers, like `x-amz-server-side-encryption`,
+    #   should not be sent for GET requests if your object uses server-side
+    #   encryption with CMKs stored in AWS KMS (SSE-KMS) or server-side
+    #   encryption with Amazon S3–managed encryption keys (SSE-S3). If your
+    #   object does use these types of keys, you’ll get an HTTP 400
+    #   BadRequest error.
+    #
+    # * The last modified property in this case is the creation date of the
+    #   object.
     #
     #  </note>
     #
@@ -7677,7 +7704,9 @@ module Aws::S3
     # use the request parameters as selection criteria to return a subset of
     # the objects in a bucket. A `200 OK` response can contain valid or
     # invalid XML. Make sure to design your application to parse the
-    # contents of the response and handle it appropriately.
+    # contents of the response and handle it appropriately. Objects are
+    # returned sorted in an ascending order of the respective key names in
+    # the list.
     #
     # To use this operation, you must have READ access to the bucket.
     #
@@ -8796,6 +8825,8 @@ module Aws::S3
     end
 
     # Puts a S3 Intelligent-Tiering configuration to the specified bucket.
+    # You can have up to 1,000 S3 Intelligent-Tiering configurations per
+    # bucket.
     #
     # The S3 Intelligent-Tiering storage class is designed to optimize
     # storage costs by automatically moving data to the most cost-effective
@@ -8823,6 +8854,35 @@ module Aws::S3
     # * [GetBucketIntelligentTieringConfiguration][3]
     #
     # * [ListBucketIntelligentTieringConfigurations][4]
+    #
+    # <note markdown="1"> You only need S3 Intelligent-Tiering enabled on a bucket if you want
+    # to automatically move objects stored in the S3 Intelligent-Tiering
+    # storage class to the Archive Access or Deep Archive Access tier.
+    #
+    #  </note>
+    #
+    # **Special Errors**
+    #
+    # * **HTTP 400 Bad Request Error**
+    #
+    #   * *Code:* InvalidArgument
+    #
+    #   * *Cause:* Invalid Argument
+    #
+    # * **HTTP 400 Bad Request Error**
+    #
+    #   * *Code:* TooManyConfigurations
+    #
+    #   * *Cause:* You are attempting to create a new configuration but have
+    #     already reached the 1,000-configuration limit.
+    #
+    # * **HTTP 403 Forbidden Error**
+    #
+    #   * *Code:* AccessDenied
+    #
+    #   * *Cause:* You are not the owner of the specified bucket, or you do
+    #     not have the `s3:PutIntelligentTieringConfiguration` bucket
+    #     permission to set the configuration on the bucket.
     #
     #
     #
@@ -10187,10 +10247,9 @@ module Aws::S3
     #   The bucket name.
     #
     # @option params [String] :content_md5
-    #   &gt;The base64-encoded 128-bit MD5 digest of the data. You must use
-    #   this header as a message integrity check to verify that the request
-    #   body was not corrupted in transit. For more information, see [RFC
-    #   1864][1].
+    #   The base64-encoded 128-bit MD5 digest of the data. You must use this
+    #   header as a message integrity check to verify that the request body
+    #   was not corrupted in transit. For more information, see [RFC 1864][1].
     #
     #   For requests made using the AWS Command Line Interface (CLI) or AWS
     #   SDKs, this field is calculated automatically.
@@ -11013,6 +11072,27 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To upload object and specify user-defined metadata
+    #
+    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
+    #   # enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     metadata: {
+    #       "metadata1" => "value1", 
+    #       "metadata2" => "value2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
+    #   }
+    #
     # @example Example: To upload an object and specify server-side encryption and object tags
     #
     #   # The following example uploads and object. The request specifies the optional server-side encryption option. The request
@@ -11033,6 +11113,23 @@ module Aws::S3
     #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
     #   }
     #
+    # @example Example: To upload an object
+    #
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #   }
+    #
     # @example Example: To create an object.
     #
     #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
@@ -11047,6 +11144,24 @@ module Aws::S3
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #   }
+    #
+    # @example Example: To upload an object and specify canned ACL.
+    #
+    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
+    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     acl: "authenticated-read", 
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
     #   }
     #
     # @example Example: To upload an object and specify optional tags
@@ -11085,62 +11200,6 @@ module Aws::S3
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     server_side_encryption: "AES256", 
     #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
-    #   }
-    #
-    # @example Example: To upload object and specify user-defined metadata
-    #
-    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
-    #   # enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     metadata: {
-    #       "metadata1" => "value1", 
-    #       "metadata2" => "value2", 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
-    #   }
-    #
-    # @example Example: To upload an object and specify canned ACL.
-    #
-    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
-    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     acl: "authenticated-read", 
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
-    #   }
-    #
-    # @example Example: To upload an object
-    #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
     #   }
     #
     # @example Streaming a file from disk
@@ -11873,13 +11932,14 @@ module Aws::S3
     #
     # * [GetObjectTagging][1]
     #
-    # ^
+    # * [DeleteObjectTagging][4]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html
     # [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html
     #
     # @option params [required, String] :bucket
     #   The bucket name containing the object.
@@ -11925,6 +11985,17 @@ module Aws::S3
     #   The account id of the expected bucket owner. If the bucket is owned by
     #   a different account, the request will fail with an HTTP `403 (Access
     #   Denied)` error.
+    #
+    # @option params [String] :request_payer
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @return [Types::PutObjectTaggingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11973,6 +12044,7 @@ module Aws::S3
     #       ],
     #     },
     #     expected_bucket_owner: "AccountId",
+    #     request_payer: "requester", # accepts requester
     #   })
     #
     # @example Response structure
@@ -13566,7 +13638,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.88.2'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1365,7 +1365,7 @@ module Aws::EMR
     #         user_role: "XmlString", # required
     #         workspace_security_group_id: "XmlStringMaxLen256", # required
     #         engine_security_group_id: "XmlStringMaxLen256", # required
-    #         default_s3_location: "XmlString",
+    #         default_s3_location: "XmlString", # required
     #         tags: [
     #           {
     #             key: "String",
@@ -1379,7 +1379,7 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A detailed description of the Studio.
+    #   A detailed description of the Amazon EMR Studio.
     #   @return [String]
     #
     # @!attribute [rw] auth_mode
@@ -1394,9 +1394,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
-    #   A list of subnet IDs to associate with the Studio. The subnets must
-    #   belong to the VPC specified by `VpcId`. Studio users can create a
-    #   Workspace in any of the specified subnets.
+    #   A list of subnet IDs to associate with the Amazon EMR Studio. A
+    #   Studio can have a maximum of 5 subnets. The subnets must belong to
+    #   the VPC specified by `VpcId`. Studio users can create a Workspace in
+    #   any of the specified subnets.
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_role
@@ -1407,8 +1408,8 @@ module Aws::EMR
     #
     # @!attribute [rw] user_role
     #   The IAM user role that will be assumed by users and groups logged in
-    #   to a Studio. The permissions attached to this IAM role can be scoped
-    #   down for each user or group using session policies.
+    #   to an Amazon EMR Studio. The permissions attached to this IAM role
+    #   can be scoped down for each user or group using session policies.
     #   @return [String]
     #
     # @!attribute [rw] workspace_security_group_id
@@ -1425,16 +1426,16 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] default_s3_location
-    #   The default Amazon S3 location to back up EMR Studio Workspaces and
-    #   notebook files. A Studio user can select an alternative Amazon S3
-    #   location when creating a Workspace.
+    #   The default Amazon S3 location to back up Amazon EMR Studio
+    #   Workspaces and notebook files. A Studio user can select an
+    #   alternative Amazon S3 location when creating a Workspace.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A list of tags to associate with the Studio. Tags are user-defined
-    #   key-value pairs that consist of a required key string with a maximum
-    #   of 128 characters, and an optional value string with a maximum of
-    #   256 characters.
+    #   A list of tags to associate with the Amazon EMR Studio. Tags are
+    #   user-defined key-value pairs that consist of a required key string
+    #   with a maximum of 128 characters, and an optional value string with
+    #   a maximum of 256 characters.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreateStudioInput AWS API Documentation
@@ -1508,13 +1509,13 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName
     #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName
     #   @return [String]
     #
     # @!attribute [rw] identity_type
-    #   Specifies whether the identity to map to the Studio is a user or a
-    #   group.
+    #   Specifies whether the identity to map to the Amazon EMR Studio is a
+    #   user or a group.
     #   @return [String]
     #
     # @!attribute [rw] session_policy_arn
@@ -1604,20 +1605,20 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] identity_name
-    #   The name of the user name or group to remove from the Studio. For
-    #   more information, see [UserName][1] and [DisplayName][2] in the *AWS
-    #   SSO Identity Store API Reference*. Either `IdentityName` or
-    #   `IdentityId` must be specified.
+    #   The name of the user name or group to remove from the Amazon EMR
+    #   Studio. For more information, see [UserName][1] and [DisplayName][2]
+    #   in the *AWS SSO Identity Store API Reference*. Either `IdentityName`
+    #   or `IdentityId` must be specified.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName
     #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName
     #   @return [String]
     #
     # @!attribute [rw] identity_type
-    #   Specifies whether the identity to delete from the Studio is a user
-    #   or a group.
+    #   Specifies whether the identity to delete from the Amazon EMR Studio
+    #   is a user or a group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DeleteStudioSessionMappingInput AWS API Documentation
@@ -2258,7 +2259,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName
     #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName
     #   @return [String]
     #
@@ -2311,7 +2312,7 @@ module Aws::EMR
     #
     # @!attribute [rw] properties
     #   A list of Java properties that are set when the step runs. You can
-    #   use these properties to pass key value pairs to your main function.
+    #   use these properties to pass key-value pairs to your main function.
     #   @return [Array<Types::KeyValue>]
     #
     # @!attribute [rw] jar
@@ -2502,8 +2503,8 @@ module Aws::EMR
     #
     # @!attribute [rw] target_spot_capacity
     #   The target capacity of Spot units for the instance fleet, which
-    #   determines how many Spot instances to provision. When the instance
-    #   fleet launches, Amazon EMR tries to provision Spot instances as
+    #   determines how many Spot Instances to provision. When the instance
+    #   fleet launches, Amazon EMR tries to provision Spot Instances as
     #   specified by InstanceTypeConfig. Each instance configuration has a
     #   specified `WeightedCapacity`. When a Spot instance is provisioned,
     #   the `WeightedCapacity` units count toward the target capacity.
@@ -2516,7 +2517,7 @@ module Aws::EMR
     #   determine the Spot capacity units that have been provisioned for the
     #   instance fleet.
     #
-    #   <note markdown="1"> If not specified or set to 0, only On-Demand instances are
+    #   <note markdown="1"> If not specified or set to 0, only On-Demand Instances are
     #   provisioned for the instance fleet. At least one of
     #   `TargetSpotCapacity` and `TargetOnDemandCapacity` should be greater
     #   than 0. For a master instance fleet, only one of
@@ -2632,7 +2633,7 @@ module Aws::EMR
     #
     # @!attribute [rw] instance_fleet_type
     #   The node type that the instance fleet hosts. Valid values are
-    #   MASTER,CORE,and TASK.
+    #   MASTER, CORE, and TASK.
     #   @return [String]
     #
     # @!attribute [rw] target_on_demand_capacity
@@ -3110,7 +3111,7 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] bid_price
-    #   The bid price for each EC2 Spot Instance type as defined by
+    #   The bid price for each EC2 Spot Instance as defined by
     #   `InstanceType`. Expressed in USD. If neither `BidPrice` nor
     #   `BidPriceAsPercentageOfOnDemandPrice` is provided,
     #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
@@ -3182,7 +3183,7 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] bid_price
-    #   The bid price for each EC2 Spot Instance type as defined by
+    #   The bid price for each EC2 Spot Instance as defined by
     #   `InstanceType`. Expressed in USD. If neither `BidPrice` nor
     #   `BidPriceAsPercentageOfOnDemandPrice` is provided,
     #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
@@ -3645,8 +3646,8 @@ module Aws::EMR
     #
     class InternalServerError < Aws::EmptyStructure; end
 
-    # This exception occurs when there is an internal failure in the EMR
-    # service.
+    # This exception occurs when there is an internal failure in the Amazon
+    # EMR service.
     #
     # @!attribute [rw] message
     #   The message associated with the exception.
@@ -4806,7 +4807,7 @@ module Aws::EMR
     # @!attribute [rw] session_mappings
     #   A list of session mapping summary objects. Each object includes
     #   session mapping details such as creation time, identity type (user
-    #   or group), and Studio ID.
+    #   or group), and Amazon EMR Studio ID.
     #   @return [Array<Types::SessionMappingSummary>]
     #
     # @!attribute [rw] marker
@@ -5449,7 +5450,7 @@ module Aws::EMR
     #   @return [Types::AutoScalingPolicyDescription]
     #
     # @!attribute [rw] cluster_arn
-    #   The Amazon Resource Name of the cluster.
+    #   The Amazon Resource Name (ARN) of the cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutAutoScalingPolicyOutput AWS API Documentation
@@ -5986,7 +5987,7 @@ module Aws::EMR
     #
     #   * "mapr-m7" - launch the cluster using MapR M7 Edition.
     #
-    #   * "hunk" - launch the cluster with the Hunk Big Data Analtics
+    #   * "hunk" - launch the cluster with the Hunk Big Data Analytics
     #     Platform.
     #
     #   * "hue"- launch the cluster with Hue installed.
@@ -6168,11 +6169,11 @@ module Aws::EMR
     # The result of the RunJobFlow operation.
     #
     # @!attribute [rw] job_flow_id
-    #   An unique identifier for the job flow.
+    #   A unique identifier for the job flow.
     #   @return [String]
     #
     # @!attribute [rw] cluster_arn
-    #   The Amazon Resource Name of the cluster.
+    #   The Amazon Resource Name (ARN) of the cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowOutput AWS API Documentation
@@ -6425,13 +6426,13 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName
     #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName
     #   @return [String]
     #
     # @!attribute [rw] identity_type
-    #   Specifies whether the identity mapped to the Studio is a user or a
-    #   group.
+    #   Specifies whether the identity mapped to the Amazon EMR Studio is a
+    #   user or a group.
     #   @return [String]
     #
     # @!attribute [rw] session_policy_arn
@@ -6480,13 +6481,13 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName
     #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName
     #   @return [String]
     #
     # @!attribute [rw] identity_type
-    #   Specifies whether the identity mapped to the Studio is a user or a
-    #   group.
+    #   Specifies whether the identity mapped to the Amazon EMR Studio is a
+    #   user or a group.
     #   @return [String]
     #
     # @!attribute [rw] session_policy_arn
@@ -6706,7 +6707,7 @@ module Aws::EMR
     #   The defined duration for Spot Instances (also known as Spot blocks)
     #   in minutes. When specified, the Spot Instance does not terminate
     #   before the defined duration expires, and defined duration pricing
-    #   for Spot instances applies. Valid values are 60, 120, 180, 240, 300,
+    #   for Spot Instances applies. Valid values are 60, 120, 180, 240, 300,
     #   or 360. The duration period starts as soon as a Spot Instance
     #   receives its instance ID. At the end of the duration, Amazon EC2
     #   marks the Spot Instance for termination and provides a Spot Instance
@@ -7101,28 +7102,28 @@ module Aws::EMR
     # and so on.
     #
     # @!attribute [rw] studio_id
-    #   The ID of the EMR Studio.
+    #   The ID of the Amazon EMR Studio.
     #   @return [String]
     #
     # @!attribute [rw] studio_arn
-    #   The Amazon Resource Name (ARN) of the EMR Studio.
+    #   The Amazon Resource Name (ARN) of the Amazon EMR Studio.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the EMR Studio.
+    #   The name of the Amazon EMR Studio.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The detailed description of the EMR Studio.
+    #   The detailed description of the Amazon EMR Studio.
     #   @return [String]
     #
     # @!attribute [rw] auth_mode
-    #   Specifies whether the Studio authenticates users using single
-    #   sign-on (SSO) or IAM.
+    #   Specifies whether the Amazon EMR Studio authenticates users using
+    #   single sign-on (SSO) or IAM.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
-    #   The ID of the VPC associated with the EMR Studio.
+    #   The ID of the VPC associated with the Amazon EMR Studio.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
@@ -7209,7 +7210,7 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The detailed description of the EMR Studio.
+    #   The detailed description of the Amazon EMR Studio.
     #   @return [String]
     #
     # @!attribute [rw] url
@@ -7233,7 +7234,7 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # The list of supported product configurations which allow user-supplied
+    # The list of supported product configurations that allow user-supplied
     # arguments. EMR accepts these arguments and forwards them to the
     # corresponding installation script as bootstrap action arguments.
     #
@@ -7328,6 +7329,55 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateStudioInput
+    #   data as a hash:
+    #
+    #       {
+    #         studio_id: "XmlStringMaxLen256", # required
+    #         name: "XmlStringMaxLen256",
+    #         description: "XmlStringMaxLen256",
+    #         subnet_ids: ["String"],
+    #         default_s3_location: "XmlString",
+    #       }
+    #
+    # @!attribute [rw] studio_id
+    #   The ID of the Amazon EMR Studio to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A descriptive name for the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A detailed description to assign to the Amazon EMR Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet IDs to associate with the Amazon EMR Studio. The
+    #   list can include new subnet IDs, but must also include all of the
+    #   subnet IDs previously associated with the Studio. The list order
+    #   does not matter. A Studio can have a maximum of 5 subnets. The
+    #   subnets must belong to the same VPC as the Studio.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] default_s3_location
+    #   A default Amazon S3 location to back up Workspaces and notebook
+    #   files for the Amazon EMR Studio. A Studio user can select an
+    #   alternative Amazon S3 location when creating a Workspace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/UpdateStudioInput AWS API Documentation
+    #
+    class UpdateStudioInput < Struct.new(
+      :studio_id,
+      :name,
+      :description,
+      :subnet_ids,
+      :default_s3_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateStudioSessionMappingInput
     #   data as a hash:
     #
@@ -7340,7 +7390,7 @@ module Aws::EMR
     #       }
     #
     # @!attribute [rw] studio_id
-    #   The ID of the EMR Studio.
+    #   The ID of the Amazon EMR Studio.
     #   @return [String]
     #
     # @!attribute [rw] identity_id
@@ -7363,7 +7413,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName
     #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName
     #   @return [String]
     #

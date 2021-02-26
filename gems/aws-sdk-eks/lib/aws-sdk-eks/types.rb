@@ -161,6 +161,61 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateEncryptionConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         encryption_config: [ # required
+    #           {
+    #             resources: ["String"],
+    #             provider: {
+    #               key_arn: "String",
+    #             },
+    #           },
+    #         ],
+    #         client_request_token: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster that you are associating with encryption
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_config
+    #   The configuration you are using for encryption.
+    #   @return [Array<Types::EncryptionConfig>]
+    #
+    # @!attribute [rw] client_request_token
+    #   The client request token you are using with the encryption
+    #   configuration.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AssociateEncryptionConfigRequest AWS API Documentation
+    #
+    class AssociateEncryptionConfigRequest < Struct.new(
+      :cluster_name,
+      :encryption_config,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] update
+    #   An object representing an asynchronous update.
+    #   @return [Types::Update]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AssociateEncryptionConfigResponse AWS API Documentation
+    #
+    class AssociateEncryptionConfigResponse < Struct.new(
+      :update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateIdentityProviderConfigRequest
     #   data as a hash:
     #

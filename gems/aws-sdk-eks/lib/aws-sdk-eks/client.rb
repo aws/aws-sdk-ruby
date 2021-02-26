@@ -327,6 +327,70 @@ module Aws::EKS
 
     # @!group API Operations
 
+    # Associate encryption configuration to an existing cluster.
+    #
+    # You can use this API to enable encryption on existing clusters which
+    # do not have encryption already enabled. This allows you to implement a
+    # defense-in-depth security strategy without migrating applications to
+    # new EKS clusters.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster that you are associating with encryption
+    #   configuration.
+    #
+    # @option params [required, Array<Types::EncryptionConfig>] :encryption_config
+    #   The configuration you are using for encryption.
+    #
+    # @option params [String] :client_request_token
+    #   The client request token you are using with the encryption
+    #   configuration.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::AssociateEncryptionConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateEncryptionConfigResponse#update #update} => Types::Update
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_encryption_config({
+    #     cluster_name: "String", # required
+    #     encryption_config: [ # required
+    #       {
+    #         resources: ["String"],
+    #         provider: {
+    #           key_arn: "String",
+    #         },
+    #       },
+    #     ],
+    #     client_request_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.update.id #=> String
+    #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
+    #   resp.update.params #=> Array
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
+    #   resp.update.params[0].value #=> String
+    #   resp.update.created_at #=> Time
+    #   resp.update.errors #=> Array
+    #   resp.update.errors[0].error_code #=> String, one of "SubnetNotFound", "SecurityGroupNotFound", "EniLimitReached", "IpNotAvailable", "AccessDenied", "OperationNotPermitted", "VpcIdNotFound", "Unknown", "NodeCreationFailure", "PodEvictionFailure", "InsufficientFreeAddresses", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict"
+    #   resp.update.errors[0].error_message #=> String
+    #   resp.update.errors[0].resource_ids #=> Array
+    #   resp.update.errors[0].resource_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AssociateEncryptionConfig AWS API Documentation
+    #
+    # @overload associate_encryption_config(params = {})
+    # @param [Hash] params ({})
+    def associate_encryption_config(params = {}, options = {})
+      req = build_request(:associate_encryption_config, params)
+      req.send_request(options)
+    end
+
     # Associate an identity provider configuration to a cluster.
     #
     # If you want to authenticate identities using an identity provider, you
@@ -391,9 +455,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AddonUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -542,39 +606,16 @@ module Aws::EKS
     # cluster's control plane via the Kubernetes API server endpoint and a
     # certificate file that is created for your cluster.
     #
-    # You can use the `endpointPublicAccess` and `endpointPrivateAccess`
-    # parameters to enable or disable public and private access to your
-    # cluster's Kubernetes API server endpoint. By default, public access
-    # is enabled, and private access is disabled. For more information, see
-    # [Amazon EKS Cluster Endpoint Access Control][1] in the <i> <i>Amazon
-    # EKS User Guide</i> </i>.
-    #
-    # You can use the `logging` parameter to enable or disable exporting the
-    # Kubernetes control plane logs for your cluster to CloudWatch Logs. By
-    # default, cluster control plane logs aren't exported to CloudWatch
-    # Logs. For more information, see [Amazon EKS Cluster Control Plane
-    # Logs][2] in the <i> <i>Amazon EKS User Guide</i> </i>.
-    #
-    # <note markdown="1"> CloudWatch Logs ingestion, archive storage, and data scanning rates
-    # apply to exported control plane logs. For more information, see
-    # [Amazon CloudWatch Pricing][3].
-    #
-    #  </note>
-    #
-    # Cluster creation typically takes between 10 and 15 minutes. After you
-    # create an Amazon EKS cluster, you must configure your Kubernetes
-    # tooling to communicate with the API server and launch nodes into your
-    # cluster. For more information, see [Managing Cluster
-    # Authentication][4] and [Launching Amazon EKS nodes][5] in the *Amazon
-    # EKS User Guide*.
+    # Cluster creation typically takes several minutes. After you create an
+    # Amazon EKS cluster, you must configure your Kubernetes tooling to
+    # communicate with the API server and launch nodes into your cluster.
+    # For more information, see [Managing Cluster Authentication][1] and
+    # [Launching Amazon EKS nodes][2] in the *Amazon EKS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
-    # [2]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
-    # [3]: http://aws.amazon.com/cloudwatch/pricing/
-    # [4]: https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html
-    # [5]: https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html
+    # [2]: https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html
     #
     # @option params [required, String] :name
     #   The unique name to give to your cluster.
@@ -1874,9 +1915,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AddonUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -1931,9 +1972,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AddonUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -2485,9 +2526,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AddonUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -2605,9 +2646,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AddonUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -2669,9 +2710,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AddonUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -2745,9 +2786,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AddonUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -2876,9 +2917,9 @@ module Aws::EKS
     #
     #   resp.update.id #=> String
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
-    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AddonUpdate"
+    #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -2909,7 +2950,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

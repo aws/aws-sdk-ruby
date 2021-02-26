@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2021-02-26)
+------------------
+
+* Feature - Relax constraint on List* API pagination tokens to include underscore character
+
 1.5.0 (2021-02-02)
 ------------------
 

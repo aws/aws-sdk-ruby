@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2021-02-26)
+------------------
+
+* Feature - Add RequestPayer to GetObjectTagging and PutObjectTagging.
+
 1.88.2 (2021-02-25)
 ------------------
 

@@ -741,18 +741,13 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # <note markdown="1"> The Amazon EMR Studio APIs are in preview release for Amazon EMR and
-    # are subject to change.
-    #
-    #  </note>
-    #
     # Creates a new Amazon EMR Studio.
     #
     # @option params [required, String] :name
     #   A descriptive name for the Amazon EMR Studio.
     #
     # @option params [String] :description
-    #   A detailed description of the Studio.
+    #   A detailed description of the Amazon EMR Studio.
     #
     # @option params [required, String] :auth_mode
     #   Specifies whether the Studio authenticates users using single sign-on
@@ -764,9 +759,10 @@ module Aws::EMR
     #   with the Studio.
     #
     # @option params [required, Array<String>] :subnet_ids
-    #   A list of subnet IDs to associate with the Studio. The subnets must
-    #   belong to the VPC specified by `VpcId`. Studio users can create a
-    #   Workspace in any of the specified subnets.
+    #   A list of subnet IDs to associate with the Amazon EMR Studio. A Studio
+    #   can have a maximum of 5 subnets. The subnets must belong to the VPC
+    #   specified by `VpcId`. Studio users can create a Workspace in any of
+    #   the specified subnets.
     #
     # @option params [required, String] :service_role
     #   The IAM role that will be assumed by the Amazon EMR Studio. The
@@ -775,8 +771,8 @@ module Aws::EMR
     #
     # @option params [required, String] :user_role
     #   The IAM user role that will be assumed by users and groups logged in
-    #   to a Studio. The permissions attached to this IAM role can be scoped
-    #   down for each user or group using session policies.
+    #   to an Amazon EMR Studio. The permissions attached to this IAM role can
+    #   be scoped down for each user or group using session policies.
     #
     # @option params [required, String] :workspace_security_group_id
     #   The ID of the Amazon EMR Studio Workspace security group. The
@@ -789,16 +785,16 @@ module Aws::EMR
     #   security group allows inbound network traffic from the Workspace
     #   security group, and it must be in the same VPC specified by `VpcId`.
     #
-    # @option params [String] :default_s3_location
-    #   The default Amazon S3 location to back up EMR Studio Workspaces and
-    #   notebook files. A Studio user can select an alternative Amazon S3
+    # @option params [required, String] :default_s3_location
+    #   The default Amazon S3 location to back up Amazon EMR Studio Workspaces
+    #   and notebook files. A Studio user can select an alternative Amazon S3
     #   location when creating a Workspace.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags to associate with the Studio. Tags are user-defined
-    #   key-value pairs that consist of a required key string with a maximum
-    #   of 128 characters, and an optional value string with a maximum of 256
-    #   characters.
+    #   A list of tags to associate with the Amazon EMR Studio. Tags are
+    #   user-defined key-value pairs that consist of a required key string
+    #   with a maximum of 128 characters, and an optional value string with a
+    #   maximum of 256 characters.
     #
     # @return [Types::CreateStudioOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -817,7 +813,7 @@ module Aws::EMR
     #     user_role: "XmlString", # required
     #     workspace_security_group_id: "XmlStringMaxLen256", # required
     #     engine_security_group_id: "XmlStringMaxLen256", # required
-    #     default_s3_location: "XmlString",
+    #     default_s3_location: "XmlString", # required
     #     tags: [
     #       {
     #         key: "String",
@@ -840,11 +836,6 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # <note markdown="1"> The Amazon EMR Studio APIs are in preview release for Amazon EMR and
-    # are subject to change.
-    #
-    #  </note>
-    #
     # Maps a user or group to the Amazon EMR Studio specified by `StudioId`,
     # and applies a session policy to refine Studio permissions for that
     # user or group.
@@ -871,12 +862,12 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName
     #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName
     #
     # @option params [required, String] :identity_type
-    #   Specifies whether the identity to map to the Studio is a user or a
-    #   group.
+    #   Specifies whether the identity to map to the Amazon EMR Studio is a
+    #   user or a group.
     #
     # @option params [required, String] :session_policy_arn
     #   The Amazon Resource Name (ARN) for the session policy that will be
@@ -926,11 +917,6 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # <note markdown="1"> The Amazon EMR Studio APIs are in preview release for Amazon EMR and
-    # are subject to change.
-    #
-    #  </note>
-    #
     # Removes an Amazon EMR Studio from the Studio metadata store.
     #
     # @option params [required, String] :studio_id
@@ -953,11 +939,6 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # <note markdown="1"> The Amazon EMR Studio APIs are in preview release for Amazon EMR and
-    # are subject to change.
-    #
-    #  </note>
-    #
     # Removes a user or group from an Amazon EMR Studio.
     #
     # @option params [required, String] :studio_id
@@ -975,19 +956,19 @@ module Aws::EMR
     #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId
     #
     # @option params [String] :identity_name
-    #   The name of the user name or group to remove from the Studio. For more
-    #   information, see [UserName][1] and [DisplayName][2] in the *AWS SSO
-    #   Identity Store API Reference*. Either `IdentityName` or `IdentityId`
-    #   must be specified.
+    #   The name of the user name or group to remove from the Amazon EMR
+    #   Studio. For more information, see [UserName][1] and [DisplayName][2]
+    #   in the *AWS SSO Identity Store API Reference*. Either `IdentityName`
+    #   or `IdentityId` must be specified.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName
     #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName
     #
     # @option params [required, String] :identity_type
-    #   Specifies whether the identity to delete from the Studio is a user or
-    #   a group.
+    #   Specifies whether the identity to delete from the Amazon EMR Studio is
+    #   a user or a group.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1368,11 +1349,6 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # <note markdown="1"> The Amazon EMR Studio APIs are in preview release for Amazon EMR and
-    # are subject to change.
-    #
-    #  </note>
-    #
     # Returns details for the specified Amazon EMR Studio including ID,
     # Name, VPC, Studio access URL, and so on.
     #
@@ -1484,11 +1460,6 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # <note markdown="1"> The Amazon EMR Studio APIs are in preview release for Amazon EMR and
-    # are subject to change.
-    #
-    #  </note>
-    #
     # Fetches mapping details for the specified Amazon EMR Studio and
     # identity (user or group).
     #
@@ -1513,7 +1484,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName
     #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName
     #
     # @option params [required, String] :identity_type
@@ -2039,7 +2010,7 @@ module Aws::EMR
 
     # Provides a list of steps for the cluster in reverse order unless you
     # specify `stepIds` with the request of filter by `StepStates`. You can
-    # specify a maximum of ten `stepIDs`.
+    # specify a maximum of 10 `stepIDs`.
     #
     # @option params [required, String] :cluster_id
     #   The identifier of the cluster for which to list the steps.
@@ -2104,13 +2075,8 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # <note markdown="1"> The Amazon EMR Studio APIs are in preview release for Amazon EMR and
-    # are subject to change.
-    #
-    #  </note>
-    #
-    # Returns a list of all user or group session mappings for the EMR
-    # Studio specified by `StudioId`.
+    # Returns a list of all user or group session mappings for the Amazon
+    # EMR Studio specified by `StudioId`.
     #
     # @option params [String] :studio_id
     #   The ID of the Amazon EMR Studio.
@@ -2158,11 +2124,6 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # <note markdown="1"> The Amazon EMR Studio APIs are in preview release for Amazon EMR and
-    # are subject to change.
-    #
-    #  </note>
-    #
     # Returns a list of all Amazon EMR Studios associated with the AWS
     # account. The list includes details such as ID, Studio Access URL, and
     # creation time for each Studio.
@@ -2743,7 +2704,7 @@ module Aws::EMR
     #
     #   * "mapr-m7" - launch the cluster using MapR M7 Edition.
     #
-    #   * "hunk" - launch the cluster with the Hunk Big Data Analtics
+    #   * "hunk" - launch the cluster with the Hunk Big Data Analytics
     #     Platform.
     #
     #   * "hue"- launch the cluster with Hue installed.
@@ -3359,16 +3320,56 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # <note markdown="1"> The Amazon EMR Studio APIs are in preview release for Amazon EMR and
-    # are subject to change.
+    # Updates an Amazon EMR Studio configuration, including attributes such
+    # as name, description, and subnets.
     #
-    #  </note>
+    # @option params [required, String] :studio_id
+    #   The ID of the Amazon EMR Studio to update.
     #
+    # @option params [String] :name
+    #   A descriptive name for the Amazon EMR Studio.
+    #
+    # @option params [String] :description
+    #   A detailed description to assign to the Amazon EMR Studio.
+    #
+    # @option params [Array<String>] :subnet_ids
+    #   A list of subnet IDs to associate with the Amazon EMR Studio. The list
+    #   can include new subnet IDs, but must also include all of the subnet
+    #   IDs previously associated with the Studio. The list order does not
+    #   matter. A Studio can have a maximum of 5 subnets. The subnets must
+    #   belong to the same VPC as the Studio.
+    #
+    # @option params [String] :default_s3_location
+    #   A default Amazon S3 location to back up Workspaces and notebook files
+    #   for the Amazon EMR Studio. A Studio user can select an alternative
+    #   Amazon S3 location when creating a Workspace.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_studio({
+    #     studio_id: "XmlStringMaxLen256", # required
+    #     name: "XmlStringMaxLen256",
+    #     description: "XmlStringMaxLen256",
+    #     subnet_ids: ["String"],
+    #     default_s3_location: "XmlString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/UpdateStudio AWS API Documentation
+    #
+    # @overload update_studio(params = {})
+    # @param [Hash] params ({})
+    def update_studio(params = {}, options = {})
+      req = build_request(:update_studio, params)
+      req.send_request(options)
+    end
+
     # Updates the session policy attached to the user or group for the
     # specified Amazon EMR Studio.
     #
     # @option params [required, String] :studio_id
-    #   The ID of the EMR Studio.
+    #   The ID of the Amazon EMR Studio.
     #
     # @option params [String] :identity_id
     #   The globally unique identifier (GUID) of the user or group. For more
@@ -3388,7 +3389,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName
     #   [2]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName
     #
     # @option params [required, String] :identity_type
@@ -3432,7 +3433,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

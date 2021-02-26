@@ -1153,6 +1153,14 @@ module Aws::S3
     #   `Condition` is specified and sibling `HttpErrorCodeReturnedEquals`
     #   is not specified. If both conditions are specified, both must be
     #   true for the redirect to be applied.
+    #
+    #   Replacement must be made for object keys containing special
+    #   characters (such as carriage returns) when using XML requests. For
+    #   more information, see [ XML related object key constraints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Condition AWS API Documentation
@@ -1650,11 +1658,12 @@ module Aws::S3
     # @!attribute [rw] etag
     #   Returns the ETag of the new object. The ETag reflects only changes
     #   to the contents of an object, not its metadata. The source and
-    #   destination ETag is identical for a successfully copied object.
+    #   destination ETag is identical for a successfully copied
+    #   non-multipart object.
     #   @return [String]
     #
     # @!attribute [rw] last_modified
-    #   Returns the date that the object was last modified.
+    #   Creation date of the object.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObjectResult AWS API Documentation
@@ -2881,7 +2890,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   Name of the object key.
+    #   The key that identifies the object in the bucket from which to
+    #   remove all tags.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -4120,6 +4130,14 @@ module Aws::S3
     #
     # @!attribute [rw] key
     #   The object key name to use when a 4XX class error occurs.
+    #
+    #   Replacement must be made for object keys containing special
+    #   characters (such as carriage returns) when using XML requests. For
+    #   more information, see [ XML related object key constraints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ErrorDocument AWS API Documentation
@@ -5321,7 +5339,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] last_modified
-    #   Last modified date of the object
+    #   Creation date of the object.
     #   @return [Time]
     #
     # @!attribute [rw] content_length
@@ -5617,14 +5635,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (for
+    #   Specifies the algorithm to use to when decrypting the object (for
     #   example, AES256).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key
-    #   Specifies the customer-provided encryption key for Amazon S3 to use
-    #   in encrypting data. This value is used to store the object and then
-    #   it is discarded; Amazon S3 does not store the encryption key. The
+    #   Specifies the customer-provided encryption key for Amazon S3 used to
+    #   encrypt the data. This value is used to decrypt the object when
+    #   recovering it and must match the one used when storing the data. The
     #   key must be appropriate for use with the algorithm specified in the
     #   `x-amz-server-side-encryption-customer-algorithm` header.
     #   @return [String]
@@ -5794,6 +5812,7 @@ module Aws::S3
     #         key: "ObjectKey", # required
     #         version_id: "ObjectVersionId",
     #         expected_bucket_owner: "AccountId",
+    #         request_payer: "requester", # accepts requester
     #       }
     #
     # @!attribute [rw] bucket
@@ -5839,13 +5858,26 @@ module Aws::S3
     #   (Access Denied)` error.
     #   @return [String]
     #
+    # @!attribute [rw] request_payer
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTaggingRequest AWS API Documentation
     #
     class GetObjectTaggingRequest < Struct.new(
       :bucket,
       :key,
       :version_id,
-      :expected_bucket_owner)
+      :expected_bucket_owner,
+      :request_payer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6180,7 +6212,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] last_modified
-    #   Last modified date of the object
+    #   Creation date of the object.
     #   @return [Time]
     #
     # @!attribute [rw] content_length
@@ -6578,6 +6610,14 @@ module Aws::S3
     #   you make a request to samplebucket/images/ the data that is returned
     #   will be for the object with the key name images/index.html) The
     #   suffix must not be empty and must not include a slash character.
+    #
+    #   Replacement must be made for object keys containing special
+    #   characters (such as carriage returns) when using XML requests. For
+    #   more information, see [ XML related object key constraints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/IndexDocument AWS API Documentation
@@ -6790,6 +6830,14 @@ module Aws::S3
     # @!attribute [rw] prefix
     #   An object key name prefix that identifies the subset of objects to
     #   which the rule applies.
+    #
+    #   Replacement must be made for object keys containing special
+    #   characters (such as carriage returns) when using XML requests. For
+    #   more information, see [ XML related object key constraints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
     #   @return [String]
     #
     # @!attribute [rw] tag
@@ -7345,6 +7393,14 @@ module Aws::S3
     # @!attribute [rw] prefix
     #   Prefix identifying one or more objects to which the rule applies.
     #   This is No longer used; use `Filter` instead.
+    #
+    #   Replacement must be made for object keys containing special
+    #   characters (such as carriage returns) when using XML requests. For
+    #   more information, see [ XML related object key constraints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
     #   @return [String]
     #
     # @!attribute [rw] filter
@@ -7470,6 +7526,14 @@ module Aws::S3
     #
     # @!attribute [rw] prefix
     #   Prefix identifying one or more objects to which the rule applies.
+    #
+    #   Replacement must be made for object keys containing special
+    #   characters (such as carriage returns) when using XML requests. For
+    #   more information, see [ XML related object key constraints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
     #   @return [String]
     #
     # @!attribute [rw] tag
@@ -8218,8 +8282,8 @@ module Aws::S3
     #   @return [Integer]
     #
     # @!attribute [rw] common_prefixes
-    #   All of the keys rolled up in a common prefix count as a single
-    #   return when calculating the number of returns.
+    #   All of the keys (up to 1,000) rolled up in a common prefix count as
+    #   a single return when calculating the number of returns.
     #
     #   A response can contain CommonPrefixes only if you specify a
     #   delimiter.
@@ -8409,8 +8473,8 @@ module Aws::S3
     #   @return [Integer]
     #
     # @!attribute [rw] common_prefixes
-    #   All of the keys rolled up into a common prefix count as a single
-    #   return when calculating the number of returns.
+    #   All of the keys (up to 1,000) rolled up into a common prefix count
+    #   as a single return when calculating the number of returns.
     #
     #   A response can contain `CommonPrefixes` only if you specify a
     #   delimiter.
@@ -8441,8 +8505,8 @@ module Aws::S3
     #
     # @!attribute [rw] key_count
     #   KeyCount is the number of keys returned with this request. KeyCount
-    #   will always be less than equals to MaxKeys field. Say you ask for 50
-    #   keys, your result will include less than equals 50 keys
+    #   will always be less than or equals to MaxKeys field. Say you ask for
+    #   50 keys, your result will include less than equals 50 keys
     #   @return [Integer]
     #
     # @!attribute [rw] continuation_token
@@ -9358,7 +9422,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] last_modified
-    #   The date the Object was Last Modified
+    #   Creation date of the object.
     #   @return [Time]
     #
     # @!attribute [rw] etag
@@ -9425,7 +9489,15 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] key
-    #   Key name of the object to delete.
+    #   Key name of the object.
+    #
+    #   Replacement must be made for object keys containing special
+    #   characters (such as carriage returns) when using XML requests. For
+    #   more information, see [ XML related object key constraints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -11060,9 +11132,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] content_md5
-    #   &gt;The base64-encoded 128-bit MD5 digest of the data. You must use
-    #   this header as a message integrity check to verify that the request
-    #   body was not corrupted in transit. For more information, see [RFC
+    #   The base64-encoded 128-bit MD5 digest of the data. You must use this
+    #   header as a message integrity check to verify that the request body
+    #   was not corrupted in transit. For more information, see [RFC
     #   1864][1].
     #
     #   For requests made using the AWS Command Line Interface (CLI) or AWS
@@ -12251,6 +12323,7 @@ module Aws::S3
     #           ],
     #         },
     #         expected_bucket_owner: "AccountId",
+    #         request_payer: "requester", # accepts requester
     #       }
     #
     # @!attribute [rw] bucket
@@ -12305,6 +12378,18 @@ module Aws::S3
     #   (Access Denied)` error.
     #   @return [String]
     #
+    # @!attribute [rw] request_payer
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectTaggingRequest AWS API Documentation
     #
     class PutObjectTaggingRequest < Struct.new(
@@ -12313,7 +12398,8 @@ module Aws::S3
       :version_id,
       :content_md5,
       :tagging,
-      :expected_bucket_owner)
+      :expected_bucket_owner,
+      :request_payer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12535,6 +12621,14 @@ module Aws::S3
     #   `ReplaceKeyPrefixWith` to `/documents`. Not required if one of the
     #   siblings is present. Can be present only if `ReplaceKeyWith` is not
     #   provided.
+    #
+    #   Replacement must be made for object keys containing special
+    #   characters (such as carriage returns) when using XML requests. For
+    #   more information, see [ XML related object key constraints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
     #   @return [String]
     #
     # @!attribute [rw] replace_key_with
@@ -12542,6 +12636,14 @@ module Aws::S3
     #   redirect request to `error.html`. Not required if one of the
     #   siblings is present. Can be present only if `ReplaceKeyPrefixWith`
     #   is not provided.
+    #
+    #   Replacement must be made for object keys containing special
+    #   characters (such as carriage returns) when using XML requests. For
+    #   more information, see [ XML related object key constraints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Redirect AWS API Documentation
@@ -12805,6 +12907,14 @@ module Aws::S3
     #   which the rule applies. The maximum prefix length is 1,024
     #   characters. To include all objects in a bucket, specify an empty
     #   string.
+    #
+    #   Replacement must be made for object keys containing special
+    #   characters (such as carriage returns) when using XML requests. For
+    #   more information, see [ XML related object key constraints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
     #   @return [String]
     #
     # @!attribute [rw] filter
@@ -12946,6 +13056,14 @@ module Aws::S3
     # @!attribute [rw] prefix
     #   An object key name prefix that identifies the subset of objects to
     #   which the rule applies.
+    #
+    #   Replacement must be made for object keys containing special
+    #   characters (such as carriage returns) when using XML requests. For
+    #   more information, see [ XML related object key constraints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
     #   @return [String]
     #
     # @!attribute [rw] tag
@@ -13492,6 +13610,14 @@ module Aws::S3
     # @!attribute [rw] prefix
     #   Object key prefix that identifies one or more objects to which this
     #   rule applies.
+    #
+    #   Replacement must be made for object keys containing special
+    #   characters (such as carriage returns) when using XML requests. For
+    #   more information, see [ XML related object key constraints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
     #   @return [String]
     #
     # @!attribute [rw] status

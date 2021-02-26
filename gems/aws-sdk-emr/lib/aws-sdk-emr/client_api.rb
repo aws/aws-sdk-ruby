@@ -288,6 +288,7 @@ module Aws::EMR
     TagList = Shapes::ListShape.new(name: 'TagList')
     TerminateJobFlowsInput = Shapes::StructureShape.new(name: 'TerminateJobFlowsInput')
     Unit = Shapes::StringShape.new(name: 'Unit')
+    UpdateStudioInput = Shapes::StructureShape.new(name: 'UpdateStudioInput')
     UpdateStudioSessionMappingInput = Shapes::StructureShape.new(name: 'UpdateStudioSessionMappingInput')
     VolumeSpecification = Shapes::StructureShape.new(name: 'VolumeSpecification')
     WholeNumber = Shapes::IntegerShape.new(name: 'WholeNumber')
@@ -493,7 +494,7 @@ module Aws::EMR
     CreateStudioInput.add_member(:user_role, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "UserRole"))
     CreateStudioInput.add_member(:workspace_security_group_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "WorkspaceSecurityGroupId"))
     CreateStudioInput.add_member(:engine_security_group_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "EngineSecurityGroupId"))
-    CreateStudioInput.add_member(:default_s3_location, Shapes::ShapeRef.new(shape: XmlString, location_name: "DefaultS3Location"))
+    CreateStudioInput.add_member(:default_s3_location, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "DefaultS3Location"))
     CreateStudioInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateStudioInput.struct_class = Types::CreateStudioInput
 
@@ -1341,6 +1342,13 @@ module Aws::EMR
     TerminateJobFlowsInput.add_member(:job_flow_ids, Shapes::ShapeRef.new(shape: XmlStringList, required: true, location_name: "JobFlowIds"))
     TerminateJobFlowsInput.struct_class = Types::TerminateJobFlowsInput
 
+    UpdateStudioInput.add_member(:studio_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "StudioId"))
+    UpdateStudioInput.add_member(:name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Name"))
+    UpdateStudioInput.add_member(:description, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Description"))
+    UpdateStudioInput.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "SubnetIds"))
+    UpdateStudioInput.add_member(:default_s3_location, Shapes::ShapeRef.new(shape: XmlString, location_name: "DefaultS3Location"))
+    UpdateStudioInput.struct_class = Types::UpdateStudioInput
+
     UpdateStudioSessionMappingInput.add_member(:studio_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "StudioId"))
     UpdateStudioSessionMappingInput.add_member(:identity_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "IdentityId"))
     UpdateStudioSessionMappingInput.add_member(:identity_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "IdentityName"))
@@ -1857,6 +1865,16 @@ module Aws::EMR
         o.input = Shapes::ShapeRef.new(shape: TerminateJobFlowsInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_studio, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateStudio"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateStudioInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:update_studio_session_mapping, Seahorse::Model::Operation.new.tap do |o|

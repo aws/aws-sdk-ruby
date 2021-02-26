@@ -24,6 +24,8 @@ module Aws::EKS
     AddonVersionInfo = Shapes::StructureShape.new(name: 'AddonVersionInfo')
     AddonVersionInfoList = Shapes::ListShape.new(name: 'AddonVersionInfoList')
     Addons = Shapes::ListShape.new(name: 'Addons')
+    AssociateEncryptionConfigRequest = Shapes::StructureShape.new(name: 'AssociateEncryptionConfigRequest')
+    AssociateEncryptionConfigResponse = Shapes::StructureShape.new(name: 'AssociateEncryptionConfigResponse')
     AssociateIdentityProviderConfigRequest = Shapes::StructureShape.new(name: 'AssociateIdentityProviderConfigRequest')
     AssociateIdentityProviderConfigResponse = Shapes::StructureShape.new(name: 'AssociateIdentityProviderConfigResponse')
     AutoScalingGroup = Shapes::StructureShape.new(name: 'AutoScalingGroup')
@@ -214,6 +216,14 @@ module Aws::EKS
     AddonVersionInfoList.member = Shapes::ShapeRef.new(shape: AddonVersionInfo)
 
     Addons.member = Shapes::ShapeRef.new(shape: AddonInfo)
+
+    AssociateEncryptionConfigRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    AssociateEncryptionConfigRequest.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfigList, required: true, location_name: "encryptionConfig"))
+    AssociateEncryptionConfigRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    AssociateEncryptionConfigRequest.struct_class = Types::AssociateEncryptionConfigRequest
+
+    AssociateEncryptionConfigResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
+    AssociateEncryptionConfigResponse.struct_class = Types::AssociateEncryptionConfigResponse
 
     AssociateIdentityProviderConfigRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     AssociateIdentityProviderConfigRequest.add_member(:oidc, Shapes::ShapeRef.new(shape: OidcIdentityProviderConfigRequest, required: true, location_name: "oidc"))
@@ -796,6 +806,20 @@ module Aws::EKS
         "signingName" => "eks",
         "uid" => "eks-2017-11-01",
       }
+
+      api.add_operation(:associate_encryption_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateEncryptionConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/clusters/{name}/encryption-config/associate"
+        o.input = Shapes::ShapeRef.new(shape: AssociateEncryptionConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateEncryptionConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
 
       api.add_operation(:associate_identity_provider_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateIdentityProviderConfig"

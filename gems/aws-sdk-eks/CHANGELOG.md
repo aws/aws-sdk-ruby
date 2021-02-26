@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2021-02-26)
+------------------
+
+* Feature - Amazon EKS now supports adding KMS envelope encryption to existing clusters to enhance security for secrets
+
 1.48.0 (2021-02-12)
 ------------------
 
