@@ -70,20 +70,22 @@ module Aws
                    .fetch('defaults', {})
                    .fetch('hostname', partition['defaults']['hostname'])
 
+        endpoints = service_cfg.fetch('endpoints', {})
+
         # Check for sts legacy behavior
         sts_legacy = service == 'sts' &&
                      sts_regional_endpoints == 'legacy' &&
                      STS_LEGACY_REGIONS.include?(region)
 
         # Check for global endpoint.
-        if sts_legacy || service_cfg['isRegionalized'] == false
+        if sts_legacy || (!endpoints.key?(region) && service_cfg['isRegionalized'] == false)
           region = service_cfg.fetch('partitionEndpoint', region)
         end
 
         # Check for service/region level endpoint.
-        endpoint = service_cfg
-                   .fetch('endpoints', {})
-                   .fetch(region, {}).fetch('hostname', endpoint)
+        endpoint = endpoints
+                   .fetch(region, {})
+                   .fetch('hostname', endpoint)
 
         # Replace placeholders from the endpoints
         endpoint.sub('{region}', region)

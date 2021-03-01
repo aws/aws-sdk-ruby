@@ -22,8 +22,13 @@
               "credentialScope" : {
                 "region" : "us-peccy-1"
               },
-              "hostname" : "global-peccy-service.amazonaws.com",
-              "protocols" : [ "http", "https" ]
+              "hostname" : "global-peccy-service.amazonaws.com"
+            },
+            "fips-peccy-global" : {
+              "credentialScope" : {
+                "region" : "us-peccy-1"
+              },
+              "hostname" : "global-peccy-service-fips.amazonaws.com"
             }
           },
           "isRegionalized" : false,

@@ -258,6 +258,15 @@ module Aws
               )
             ).to eq('https://global-peccy-service.amazonaws.com')
           end
+
+          it 'resolves a fips global endpoint' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'fips-peccy-global',
+                'global-peccy-service'
+              )
+            ).to eq('https://global-peccy-service-fips.amazonaws.com')
+          end
         end
 
         context 'STS' do
