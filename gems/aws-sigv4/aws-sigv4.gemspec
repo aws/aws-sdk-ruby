@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
-  spec.files         = Dir['lib/**/*.rb']
+  spec.files         = Dir['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb']
 
   spec.add_dependency('aws-eventstream', '~> 1', '>= 1.0.2') # For signing event stream events
 

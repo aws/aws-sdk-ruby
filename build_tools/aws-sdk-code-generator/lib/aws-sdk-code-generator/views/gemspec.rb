@@ -30,7 +30,7 @@ module AwsSdkCodeGenerator
       end
 
       def email
-        @custom ? 'yourname@email.com' : 'trevrowe@amazon.com'
+        @custom ? 'yourname@email.com' : 'aws-dr-rubygems@amazon.com'
       end
 
       # @return [String]
