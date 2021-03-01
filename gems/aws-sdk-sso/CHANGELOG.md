@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Include LICENSE, CHANGELOG, and VERSION files with this gem.
+
 1.7.0 (2020-09-01)
 ------------------
 
