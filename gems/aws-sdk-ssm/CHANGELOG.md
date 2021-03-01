@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2021-03-01)
+------------------
+
+* Feature - Add Support for Patch Manger Baseline Override parameter.
+
 1.104.0 (2021-02-02)
 ------------------
 

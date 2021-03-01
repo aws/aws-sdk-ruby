@@ -1563,8 +1563,8 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #
     # @option params [String] :approved_patches_compliance_level
-    #   Defines the compliance level for approved patches. This means that if
-    #   an approved patch is reported as missing, this is the severity of the
+    #   Defines the compliance level for approved patches. When an approved
+    #   patch is reported as missing, this value describes the severity of the
     #   compliance violation. The default value is UNSPECIFIED.
     #
     # @option params [Boolean] :approved_patches_enable_non_security
@@ -4982,6 +4982,9 @@ module Aws::SSM
     # @option params [required, String] :snapshot_id
     #   The user-defined snapshot ID.
     #
+    # @option params [Types::BaselineOverride] :baseline_override
+    #   Defines the basic information about a patch baseline override.
+    #
     # @return [Types::GetDeployablePatchSnapshotForInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDeployablePatchSnapshotForInstanceResult#instance_id #instance_id} => String
@@ -4994,6 +4997,47 @@ module Aws::SSM
     #   resp = client.get_deployable_patch_snapshot_for_instance({
     #     instance_id: "InstanceId", # required
     #     snapshot_id: "SnapshotId", # required
+    #     baseline_override: {
+    #       operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS
+    #       global_filters: {
+    #         patch_filters: [ # required
+    #           {
+    #             key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
+    #             values: ["PatchFilterValue"], # required
+    #           },
+    #         ],
+    #       },
+    #       approval_rules: {
+    #         patch_rules: [ # required
+    #           {
+    #             patch_filter_group: { # required
+    #               patch_filters: [ # required
+    #                 {
+    #                   key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
+    #                   values: ["PatchFilterValue"], # required
+    #                 },
+    #               ],
+    #             },
+    #             compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
+    #             approve_after_days: 1,
+    #             approve_until_date: "PatchStringDateTime",
+    #             enable_non_security: false,
+    #           },
+    #         ],
+    #       },
+    #       approved_patches: ["PatchId"],
+    #       approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
+    #       rejected_patches: ["PatchId"],
+    #       rejected_patches_action: "ALLOW_AS_DEPENDENCY", # accepts ALLOW_AS_DEPENDENCY, BLOCK
+    #       approved_patches_enable_non_security: false,
+    #       sources: [
+    #         {
+    #           name: "PatchSourceName", # required
+    #           products: ["PatchSourceProduct"], # required
+    #           configuration: "PatchSourceConfiguration", # required
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -6142,6 +6186,8 @@ module Aws::SSM
     #
     # @option params [required, String] :setting_id
     #   The ID of the service setting to get. The setting ID can be
+    #   `/ssm/automation/customer-script-log-destination`,
+    #   `/ssm/automation/customer-script-log-group-name`,
     #   `/ssm/parameter-store/default-parameter-tier`,
     #   `/ssm/parameter-store/high-throughput-enabled`, or
     #   `/ssm/managed-instance/activation-tier`.
@@ -7548,7 +7594,11 @@ module Aws::SSM
     #     (case-insensitive).
     #
     #   * Parameter names can include only the following symbols and letters:
-    #     `a-zA-Z0-9_.-/`
+    #     `a-zA-Z0-9_.-`
+    #
+    #     In addition, the slash character ( / ) is used to delineate
+    #     hierarchies in parameter names. For example:
+    #     `/Dev/Production/East/Project-ABC/MyParameter`
     #
     #   * A parameter name can't include spaces.
     #
@@ -7556,8 +7606,8 @@ module Aws::SSM
     #     levels.
     #
     #   For additional information about valid values for parameter names, see
-    #   [About requirements and constraints for parameter names][1] in the
-    #   *AWS Systems Manager User Guide*.
+    #   [Creating Systems Manager parameters][1] in the *AWS Systems Manager
+    #   User Guide*.
     #
     #   <note markdown="1"> The maximum length constraint listed below includes capacity for
     #   additional system attributes that are not part of the name. The
@@ -7571,7 +7621,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html
     #
     # @option params [String] :description
     #   Information about the parameter that you want to add to the system.
@@ -7898,6 +7948,14 @@ module Aws::SSM
     # @option params [required, Array<Types::Target>] :targets
     #   The targets to register with the maintenance window. In other words,
     #   the instances to run commands on when the maintenance window runs.
+    #
+    #   <note markdown="1"> If a single maintenance window task is registered with multiple
+    #   targets, its task invocations occur sequentially and not in parallel.
+    #   If your task must run on multiple targets at the same time, register a
+    #   task for each target individually and assign each task the same
+    #   priority level.
+    #
+    #    </note>
     #
     #   You can specify targets using instance IDs, resource group names, or
     #   tags that have been applied to instances.
@@ -8271,7 +8329,9 @@ module Aws::SSM
     #
     # @option params [required, String] :setting_id
     #   The Amazon Resource Name (ARN) of the service setting to reset. The
-    #   setting ID can be `/ssm/parameter-store/default-parameter-tier`,
+    #   setting ID can be `/ssm/automation/customer-script-log-destination`,
+    #   `/ssm/automation/customer-script-log-group-name`,
+    #   `/ssm/parameter-store/default-parameter-tier`,
     #   `/ssm/parameter-store/high-throughput-enabled`, or
     #   `/ssm/managed-instance/activation-tier`. For example,
     #   `arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled`.
@@ -10576,6 +10636,10 @@ module Aws::SSM
     #   `arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled`.
     #   The setting ID can be one of the following.
     #
+    #   * `/ssm/automation/customer-script-log-destination`
+    #
+    #   * `/ssm/automation/customer-script-log-group-name`
+    #
     #   * `/ssm/parameter-store/default-parameter-tier`
     #
     #   * `/ssm/parameter-store/high-throughput-enabled`
@@ -10596,6 +10660,12 @@ module Aws::SSM
     #   For the `/ssm/parameter-store/high-throughput-enabled`, and
     #   `/ssm/managed-instance/activation-tier` setting IDs, the setting value
     #   can be true or false.
+    #
+    #   For the `/ssm/automation/customer-script-log-destination` setting ID,
+    #   the setting value can be CloudWatch.
+    #
+    #   For the `/ssm/automation/customer-script-log-group-name` setting ID,
+    #   the setting value can be the name of a CloudWatch Logs log group.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -10628,7 +10698,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

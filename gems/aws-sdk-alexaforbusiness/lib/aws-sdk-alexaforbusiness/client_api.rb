@@ -596,6 +596,7 @@ module Aws::AlexaForBusiness
     CreateAddressBookRequest.add_member(:name, Shapes::ShapeRef.new(shape: AddressBookName, required: true, location_name: "Name"))
     CreateAddressBookRequest.add_member(:description, Shapes::ShapeRef.new(shape: AddressBookDescription, location_name: "Description"))
     CreateAddressBookRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAddressBookRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateAddressBookRequest.struct_class = Types::CreateAddressBookRequest
 
     CreateAddressBookResponse.add_member(:address_book_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AddressBookArn"))
@@ -620,6 +621,7 @@ module Aws::AlexaForBusiness
     CreateConferenceProviderRequest.add_member(:pstn_dial_in, Shapes::ShapeRef.new(shape: PSTNDialIn, location_name: "PSTNDialIn"))
     CreateConferenceProviderRequest.add_member(:meeting_setting, Shapes::ShapeRef.new(shape: MeetingSetting, required: true, location_name: "MeetingSetting"))
     CreateConferenceProviderRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateConferenceProviderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateConferenceProviderRequest.struct_class = Types::CreateConferenceProviderRequest
 
     CreateConferenceProviderResponse.add_member(:conference_provider_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ConferenceProviderArn"))
@@ -632,6 +634,7 @@ module Aws::AlexaForBusiness
     CreateContactRequest.add_member(:phone_numbers, Shapes::ShapeRef.new(shape: PhoneNumberList, location_name: "PhoneNumbers"))
     CreateContactRequest.add_member(:sip_addresses, Shapes::ShapeRef.new(shape: SipAddressList, location_name: "SipAddresses"))
     CreateContactRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateContactRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateContactRequest.struct_class = Types::CreateContactRequest
 
     CreateContactResponse.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ContactArn"))
@@ -645,6 +648,7 @@ module Aws::AlexaForBusiness
     CreateGatewayGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: GatewayGroupName, required: true, location_name: "Name"))
     CreateGatewayGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: GatewayGroupDescription, location_name: "Description"))
     CreateGatewayGroupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateGatewayGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateGatewayGroupRequest.struct_class = Types::CreateGatewayGroupRequest
 
     CreateGatewayGroupResponse.add_member(:gateway_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "GatewayGroupArn"))
@@ -670,6 +674,7 @@ module Aws::AlexaForBusiness
     CreateNetworkProfileRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateAuthorityArn"))
     CreateNetworkProfileRequest.add_member(:trust_anchors, Shapes::ShapeRef.new(shape: TrustAnchorList, location_name: "TrustAnchors"))
     CreateNetworkProfileRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateNetworkProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateNetworkProfileRequest.struct_class = Types::CreateNetworkProfileRequest
 
     CreateNetworkProfileResponse.add_member(:network_profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "NetworkProfileArn"))
@@ -1252,6 +1257,7 @@ module Aws::AlexaForBusiness
     RegisterAVSDeviceRequest.add_member(:device_serial_number, Shapes::ShapeRef.new(shape: DeviceSerialNumberForAVS, location_name: "DeviceSerialNumber"))
     RegisterAVSDeviceRequest.add_member(:amazon_id, Shapes::ShapeRef.new(shape: AmazonId, required: true, location_name: "AmazonId"))
     RegisterAVSDeviceRequest.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
+    RegisterAVSDeviceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     RegisterAVSDeviceRequest.struct_class = Types::RegisterAVSDeviceRequest
 
     RegisterAVSDeviceResponse.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DeviceArn"))

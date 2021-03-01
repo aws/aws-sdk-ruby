@@ -117,6 +117,7 @@ module Aws::SSM
     BaselineDescription = Shapes::StringShape.new(name: 'BaselineDescription')
     BaselineId = Shapes::StringShape.new(name: 'BaselineId')
     BaselineName = Shapes::StringShape.new(name: 'BaselineName')
+    BaselineOverride = Shapes::StructureShape.new(name: 'BaselineOverride')
     BatchErrorMessage = Shapes::StringShape.new(name: 'BatchErrorMessage')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CalendarNameOrARN = Shapes::StringShape.new(name: 'CalendarNameOrARN')
@@ -1417,6 +1418,17 @@ module Aws::SSM
     AutomationStepNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AutomationStepNotFoundException.struct_class = Types::AutomationStepNotFoundException
 
+    BaselineOverride.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
+    BaselineOverride.add_member(:global_filters, Shapes::ShapeRef.new(shape: PatchFilterGroup, location_name: "GlobalFilters"))
+    BaselineOverride.add_member(:approval_rules, Shapes::ShapeRef.new(shape: PatchRuleGroup, location_name: "ApprovalRules"))
+    BaselineOverride.add_member(:approved_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "ApprovedPatches"))
+    BaselineOverride.add_member(:approved_patches_compliance_level, Shapes::ShapeRef.new(shape: PatchComplianceLevel, location_name: "ApprovedPatchesComplianceLevel"))
+    BaselineOverride.add_member(:rejected_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "RejectedPatches"))
+    BaselineOverride.add_member(:rejected_patches_action, Shapes::ShapeRef.new(shape: PatchAction, location_name: "RejectedPatchesAction"))
+    BaselineOverride.add_member(:approved_patches_enable_non_security, Shapes::ShapeRef.new(shape: Boolean, location_name: "ApprovedPatchesEnableNonSecurity"))
+    BaselineOverride.add_member(:sources, Shapes::ShapeRef.new(shape: PatchSourceList, location_name: "Sources"))
+    BaselineOverride.struct_class = Types::BaselineOverride
+
     CalendarNameOrARNList.member = Shapes::ShapeRef.new(shape: CalendarNameOrARN)
 
     CancelCommandRequest.add_member(:command_id, Shapes::ShapeRef.new(shape: CommandId, required: true, location_name: "CommandId"))
@@ -2338,6 +2350,7 @@ module Aws::SSM
 
     GetDeployablePatchSnapshotForInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     GetDeployablePatchSnapshotForInstanceRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
+    GetDeployablePatchSnapshotForInstanceRequest.add_member(:baseline_override, Shapes::ShapeRef.new(shape: BaselineOverride, location_name: "BaselineOverride"))
     GetDeployablePatchSnapshotForInstanceRequest.struct_class = Types::GetDeployablePatchSnapshotForInstanceRequest
 
     GetDeployablePatchSnapshotForInstanceResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))

@@ -710,6 +710,12 @@ module Aws::AlexaForBusiness
     #         name: "AddressBookName", # required
     #         description: "AddressBookDescription",
     #         client_request_token: "ClientRequestToken",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -728,12 +734,18 @@ module Aws::AlexaForBusiness
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to be added to the specified resource. Do not provide
+    #   system tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateAddressBookRequest AWS API Documentation
     #
     class CreateAddressBookRequest < Struct.new(
       :name,
       :description,
-      :client_request_token)
+      :client_request_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -859,6 +871,12 @@ module Aws::AlexaForBusiness
     #           require_pin: "YES", # required, accepts YES, NO, OPTIONAL
     #         },
     #         client_request_token: "ClientRequestToken",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] conference_provider_name
@@ -888,6 +906,11 @@ module Aws::AlexaForBusiness
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to be added to the specified resource. Do not provide
+    #   system tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateConferenceProviderRequest AWS API Documentation
     #
     class CreateConferenceProviderRequest < Struct.new(
@@ -896,7 +919,8 @@ module Aws::AlexaForBusiness
       :ip_dial_in,
       :pstn_dial_in,
       :meeting_setting,
-      :client_request_token)
+      :client_request_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -934,6 +958,12 @@ module Aws::AlexaForBusiness
     #           },
     #         ],
     #         client_request_token: "ClientRequestToken",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] display_name
@@ -973,6 +1003,11 @@ module Aws::AlexaForBusiness
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to be added to the specified resource. Do not provide
+    #   system tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateContactRequest AWS API Documentation
     #
     class CreateContactRequest < Struct.new(
@@ -982,7 +1017,8 @@ module Aws::AlexaForBusiness
       :phone_number,
       :phone_numbers,
       :sip_addresses,
-      :client_request_token)
+      :client_request_token,
+      :tags)
       SENSITIVE = [:phone_number]
       include Aws::Structure
     end
@@ -1042,6 +1078,12 @@ module Aws::AlexaForBusiness
     #         name: "GatewayGroupName", # required
     #         description: "GatewayGroupDescription",
     #         client_request_token: "ClientRequestToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -1060,12 +1102,18 @@ module Aws::AlexaForBusiness
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to be added to the specified resource. Do not provide
+    #   system tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateGatewayGroupRequest AWS API Documentation
     #
     class CreateGatewayGroupRequest < Struct.new(
       :name,
       :description,
-      :client_request_token)
+      :client_request_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1183,6 +1231,12 @@ module Aws::AlexaForBusiness
     #         certificate_authority_arn: "Arn",
     #         trust_anchors: ["TrustAnchor"],
     #         client_request_token: "ClientRequestToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] network_profile_name
@@ -1237,6 +1291,11 @@ module Aws::AlexaForBusiness
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to be added to the specified resource. Do not provide
+    #   system tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateNetworkProfileRequest AWS API Documentation
     #
     class CreateNetworkProfileRequest < Struct.new(
@@ -1249,7 +1308,8 @@ module Aws::AlexaForBusiness
       :next_password,
       :certificate_authority_arn,
       :trust_anchors,
-      :client_request_token)
+      :client_request_token,
+      :tags)
       SENSITIVE = [:current_password, :next_password]
       include Aws::Structure
     end
@@ -4186,6 +4246,12 @@ module Aws::AlexaForBusiness
     #         device_serial_number: "DeviceSerialNumberForAVS",
     #         amazon_id: "AmazonId", # required
     #         room_arn: "Arn",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] client_id
@@ -4215,8 +4281,14 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] room_arn
-    #   The ARN of the room with which to associate your AVS device.
+    #   The Amazon Resource Name (ARN) of the room with which to associate
+    #   your AVS device.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to be added to the specified resource. Do not provide
+    #   system tags.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RegisterAVSDeviceRequest AWS API Documentation
     #
@@ -4226,7 +4298,8 @@ module Aws::AlexaForBusiness
       :product_id,
       :device_serial_number,
       :amazon_id,
-      :room_arn)
+      :room_arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

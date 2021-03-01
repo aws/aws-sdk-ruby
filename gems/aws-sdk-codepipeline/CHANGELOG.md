@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2021-03-01)
+------------------
+
+* Feature - Added a new field to the ListPipelines API to allow maximum search results of 1000
+
 1.41.0 (2021-02-12)
 ------------------
 

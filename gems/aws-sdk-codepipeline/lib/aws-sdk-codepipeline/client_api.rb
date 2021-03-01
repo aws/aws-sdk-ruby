@@ -189,6 +189,7 @@ module Aws::CodePipeline
     ListWebhooksOutput = Shapes::StructureShape.new(name: 'ListWebhooksOutput')
     MatchEquals = Shapes::StringShape.new(name: 'MatchEquals')
     MaxBatchSize = Shapes::IntegerShape.new(name: 'MaxBatchSize')
+    MaxPipelines = Shapes::IntegerShape.new(name: 'MaxPipelines')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumActionTypeArtifactCount = Shapes::IntegerShape.new(name: 'MaximumActionTypeArtifactCount')
     MaximumArtifactCount = Shapes::IntegerShape.new(name: 'MaximumArtifactCount')
@@ -804,6 +805,7 @@ module Aws::CodePipeline
     ListPipelineExecutionsOutput.struct_class = Types::ListPipelineExecutionsOutput
 
     ListPipelinesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPipelinesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxPipelines, location_name: "maxResults"))
     ListPipelinesInput.struct_class = Types::ListPipelinesInput
 
     ListPipelinesOutput.add_member(:pipelines, Shapes::ShapeRef.new(shape: PipelineList, location_name: "pipelines"))
@@ -1408,6 +1410,7 @@ module Aws::CodePipeline
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
           tokens: {
             "next_token" => "next_token"
           }

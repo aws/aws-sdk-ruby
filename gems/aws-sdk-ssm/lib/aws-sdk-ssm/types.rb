@@ -1449,6 +1449,132 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Defines the basic information about a patch baseline override.
+    #
+    # @note When making an API call, you may pass BaselineOverride
+    #   data as a hash:
+    #
+    #       {
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS
+    #         global_filters: {
+    #           patch_filters: [ # required
+    #             {
+    #               key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
+    #               values: ["PatchFilterValue"], # required
+    #             },
+    #           ],
+    #         },
+    #         approval_rules: {
+    #           patch_rules: [ # required
+    #             {
+    #               patch_filter_group: { # required
+    #                 patch_filters: [ # required
+    #                   {
+    #                     key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
+    #                     values: ["PatchFilterValue"], # required
+    #                   },
+    #                 ],
+    #               },
+    #               compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
+    #               approve_after_days: 1,
+    #               approve_until_date: "PatchStringDateTime",
+    #               enable_non_security: false,
+    #             },
+    #           ],
+    #         },
+    #         approved_patches: ["PatchId"],
+    #         approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
+    #         rejected_patches: ["PatchId"],
+    #         rejected_patches_action: "ALLOW_AS_DEPENDENCY", # accepts ALLOW_AS_DEPENDENCY, BLOCK
+    #         approved_patches_enable_non_security: false,
+    #         sources: [
+    #           {
+    #             name: "PatchSourceName", # required
+    #             products: ["PatchSourceProduct"], # required
+    #             configuration: "PatchSourceConfiguration", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] operating_system
+    #   The operating system rule used by the patch baseline override.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_filters
+    #   A set of patch filters, typically used for approval rules.
+    #   @return [Types::PatchFilterGroup]
+    #
+    # @!attribute [rw] approval_rules
+    #   A set of rules defining the approval rules for a patch baseline.
+    #   @return [Types::PatchRuleGroup]
+    #
+    # @!attribute [rw] approved_patches
+    #   A list of explicitly approved patches for the baseline.
+    #
+    #   For information about accepted formats for lists of approved patches
+    #   and rejected patches, see [About package name formats for approved
+    #   and rejected patch lists][1] in the *AWS Systems Manager User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] approved_patches_compliance_level
+    #   Defines the compliance level for approved patches. When an approved
+    #   patch is reported as missing, this value describes the severity of
+    #   the compliance violation.
+    #   @return [String]
+    #
+    # @!attribute [rw] rejected_patches
+    #   A list of explicitly rejected patches for the baseline.
+    #
+    #   For information about accepted formats for lists of approved patches
+    #   and rejected patches, see [About package name formats for approved
+    #   and rejected patch lists][1] in the *AWS Systems Manager User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] rejected_patches_action
+    #   The action for Patch Manager to take on patches included in the
+    #   RejectedPackages list. A patch can be allowed only if it is a
+    #   dependency of another package, or blocked entirely along with
+    #   packages that include it as a dependency.
+    #   @return [String]
+    #
+    # @!attribute [rw] approved_patches_enable_non_security
+    #   Indicates whether the list of approved patches includes non-security
+    #   updates that should be applied to the instances. The default value
+    #   is 'false'. Applies to Linux instances only.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] sources
+    #   Information about the patches to use to update the instances,
+    #   including target operating systems and source repositories. Applies
+    #   to Linux instances only.
+    #   @return [Array<Types::PatchSource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/BaselineOverride AWS API Documentation
+    #
+    class BaselineOverride < Struct.new(
+      :operating_system,
+      :global_filters,
+      :approval_rules,
+      :approved_patches,
+      :approved_patches_compliance_level,
+      :rejected_patches,
+      :rejected_patches_action,
+      :approved_patches_enable_non_security,
+      :sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelCommandRequest
     #   data as a hash:
     #
@@ -3623,8 +3749,8 @@ module Aws::SSM
     #   @return [Array<String>]
     #
     # @!attribute [rw] approved_patches_compliance_level
-    #   Defines the compliance level for approved patches. This means that
-    #   if an approved patch is reported as missing, this is the severity of
+    #   Defines the compliance level for approved patches. When an approved
+    #   patch is reported as missing, this value describes the severity of
     #   the compliance violation. The default value is UNSPECIFIED.
     #   @return [String]
     #
@@ -7753,6 +7879,47 @@ module Aws::SSM
     #       {
     #         instance_id: "InstanceId", # required
     #         snapshot_id: "SnapshotId", # required
+    #         baseline_override: {
+    #           operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS
+    #           global_filters: {
+    #             patch_filters: [ # required
+    #               {
+    #                 key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
+    #                 values: ["PatchFilterValue"], # required
+    #               },
+    #             ],
+    #           },
+    #           approval_rules: {
+    #             patch_rules: [ # required
+    #               {
+    #                 patch_filter_group: { # required
+    #                   patch_filters: [ # required
+    #                     {
+    #                       key: "ARCH", # required, accepts ARCH, ADVISORY_ID, BUGZILLA_ID, PATCH_SET, PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, CVE_ID, EPOCH, MSRC_SEVERITY, NAME, PATCH_ID, SECTION, PRIORITY, REPOSITORY, RELEASE, SEVERITY, SECURITY, VERSION
+    #                       values: ["PatchFilterValue"], # required
+    #                     },
+    #                   ],
+    #                 },
+    #                 compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
+    #                 approve_after_days: 1,
+    #                 approve_until_date: "PatchStringDateTime",
+    #                 enable_non_security: false,
+    #               },
+    #             ],
+    #           },
+    #           approved_patches: ["PatchId"],
+    #           approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
+    #           rejected_patches: ["PatchId"],
+    #           rejected_patches_action: "ALLOW_AS_DEPENDENCY", # accepts ALLOW_AS_DEPENDENCY, BLOCK
+    #           approved_patches_enable_non_security: false,
+    #           sources: [
+    #             {
+    #               name: "PatchSourceName", # required
+    #               products: ["PatchSourceProduct"], # required
+    #               configuration: "PatchSourceConfiguration", # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] instance_id
@@ -7764,11 +7931,16 @@ module Aws::SSM
     #   The user-defined snapshot ID.
     #   @return [String]
     #
+    # @!attribute [rw] baseline_override
+    #   Defines the basic information about a patch baseline override.
+    #   @return [Types::BaselineOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDeployablePatchSnapshotForInstanceRequest AWS API Documentation
     #
     class GetDeployablePatchSnapshotForInstanceRequest < Struct.new(
       :instance_id,
-      :snapshot_id)
+      :snapshot_id,
+      :baseline_override)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9227,6 +9399,8 @@ module Aws::SSM
     #
     # @!attribute [rw] setting_id
     #   The ID of the service setting to get. The setting ID can be
+    #   `/ssm/automation/customer-script-log-destination`,
+    #   `/ssm/automation/customer-script-log-group-name`,
     #   `/ssm/parameter-store/default-parameter-tier`,
     #   `/ssm/parameter-store/high-throughput-enabled`, or
     #   `/ssm/managed-instance/activation-tier`.
@@ -9684,6 +9858,11 @@ module Aws::SSM
     #
     #   "InstanceIds"\|"AgentVersion"\|"PingStatus"\|"PlatformTypes"\|"ActivationIds"\|"IamRole"\|"ResourceType"\|"AssociationStatus"\|"Tag
     #   Key"
+    #
+    #   `Tag key` is not a valid filter. You must specify either `tag-key`
+    #   or `tag:keyname` and a string. Here are some valid examples:
+    #   tag-key, tag:123, tag:al!, tag:Windows. Here are some *invalid*
+    #   examples: tag-keys, Tag Key, tag:, tagKey, abc:keyname.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -14808,13 +14987,14 @@ module Aws::SSM
     #   The number of days after the release date of each patch matched by
     #   the rule that the patch is marked as approved in the patch baseline.
     #   For example, a value of `7` means that patches are approved seven
-    #   days after they are released. Not supported on Ubuntu Server.
+    #   days after they are released. Not supported on Debian Server or
+    #   Ubuntu Server.
     #   @return [Integer]
     #
     # @!attribute [rw] approve_until_date
     #   The cutoff date for auto approval of released patches. Any patches
     #   released on or before this date are installed automatically. Not
-    #   supported on Ubuntu Server.
+    #   supported on Debian Server or Ubuntu Server.
     #
     #   Enter dates in the format `YYYY-MM-DD`. For example, `2020-12-31`.
     #   @return [String]
@@ -15198,7 +15378,11 @@ module Aws::SSM
     #     (case-insensitive).
     #
     #   * Parameter names can include only the following symbols and
-    #     letters: `a-zA-Z0-9_.-/`
+    #     letters: `a-zA-Z0-9_.-`
+    #
+    #     In addition, the slash character ( / ) is used to delineate
+    #     hierarchies in parameter names. For example:
+    #     `/Dev/Production/East/Project-ABC/MyParameter`
     #
     #   * A parameter name can't include spaces.
     #
@@ -15206,8 +15390,8 @@ module Aws::SSM
     #     levels.
     #
     #   For additional information about valid values for parameter names,
-    #   see [About requirements and constraints for parameter names][1] in
-    #   the *AWS Systems Manager User Guide*.
+    #   see [Creating Systems Manager parameters][1] in the *AWS Systems
+    #   Manager User Guide*.
     #
     #   <note markdown="1"> The maximum length constraint listed below includes capacity for
     #   additional system attributes that are not part of the name. The
@@ -15221,7 +15405,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -15586,6 +15770,14 @@ module Aws::SSM
     # @!attribute [rw] targets
     #   The targets to register with the maintenance window. In other words,
     #   the instances to run commands on when the maintenance window runs.
+    #
+    #   <note markdown="1"> If a single maintenance window task is registered with multiple
+    #   targets, its task invocations occur sequentially and not in
+    #   parallel. If your task must run on multiple targets at the same
+    #   time, register a task for each target individually and assign each
+    #   task the same priority level.
+    #
+    #    </note>
     #
     #   You can specify targets using instance IDs, resource group names, or
     #   tags that have been applied to instances.
@@ -16005,7 +16197,9 @@ module Aws::SSM
     #
     # @!attribute [rw] setting_id
     #   The Amazon Resource Name (ARN) of the service setting to reset. The
-    #   setting ID can be `/ssm/parameter-store/default-parameter-tier`,
+    #   setting ID can be `/ssm/automation/customer-script-log-destination`,
+    #   `/ssm/automation/customer-script-log-group-name`,
+    #   `/ssm/parameter-store/default-parameter-tier`,
     #   `/ssm/parameter-store/high-throughput-enabled`, or
     #   `/ssm/managed-instance/activation-tier`. For example,
     #   `arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled`.
@@ -19997,6 +20191,10 @@ module Aws::SSM
     #   `arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled`.
     #   The setting ID can be one of the following.
     #
+    #   * `/ssm/automation/customer-script-log-destination`
+    #
+    #   * `/ssm/automation/customer-script-log-group-name`
+    #
     #   * `/ssm/parameter-store/default-parameter-tier`
     #
     #   * `/ssm/parameter-store/high-throughput-enabled`
@@ -20018,6 +20216,12 @@ module Aws::SSM
     #   For the `/ssm/parameter-store/high-throughput-enabled`, and
     #   `/ssm/managed-instance/activation-tier` setting IDs, the setting
     #   value can be true or false.
+    #
+    #   For the `/ssm/automation/customer-script-log-destination` setting
+    #   ID, the setting value can be CloudWatch.
+    #
+    #   For the `/ssm/automation/customer-script-log-group-name` setting ID,
+    #   the setting value can be the name of a CloudWatch Logs log group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateServiceSettingRequest AWS API Documentation
