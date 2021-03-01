@@ -533,6 +533,10 @@ module Aws::AlexaForBusiness
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to be added to the specified resource. Do not provide system
+    #   tags.
+    #
     # @return [Types::CreateAddressBookResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAddressBookResponse#address_book_arn #address_book_arn} => String
@@ -543,6 +547,12 @@ module Aws::AlexaForBusiness
     #     name: "AddressBookName", # required
     #     description: "AddressBookDescription",
     #     client_request_token: "ClientRequestToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -654,6 +664,10 @@ module Aws::AlexaForBusiness
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to be added to the specified resource. Do not provide system
+    #   tags.
+    #
     # @return [Types::CreateConferenceProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateConferenceProviderResponse#conference_provider_arn #conference_provider_arn} => String
@@ -677,6 +691,12 @@ module Aws::AlexaForBusiness
     #       require_pin: "YES", # required, accepts YES, NO, OPTIONAL
     #     },
     #     client_request_token: "ClientRequestToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -724,6 +744,10 @@ module Aws::AlexaForBusiness
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to be added to the specified resource. Do not provide system
+    #   tags.
+    #
     # @return [Types::CreateContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateContactResponse#contact_arn #contact_arn} => String
@@ -748,6 +772,12 @@ module Aws::AlexaForBusiness
     #       },
     #     ],
     #     client_request_token: "ClientRequestToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -778,6 +808,10 @@ module Aws::AlexaForBusiness
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to be added to the specified resource. Do not provide system
+    #   tags.
+    #
     # @return [Types::CreateGatewayGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGatewayGroupResponse#gateway_group_arn #gateway_group_arn} => String
@@ -788,6 +822,12 @@ module Aws::AlexaForBusiness
     #     name: "GatewayGroupName", # required
     #     description: "GatewayGroupDescription",
     #     client_request_token: "ClientRequestToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -847,6 +887,10 @@ module Aws::AlexaForBusiness
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to be added to the specified resource. Do not provide system
+    #   tags.
+    #
     # @return [Types::CreateNetworkProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNetworkProfileResponse#network_profile_arn #network_profile_arn} => String
@@ -864,6 +908,12 @@ module Aws::AlexaForBusiness
     #     certificate_authority_arn: "Arn",
     #     trust_anchors: ["TrustAnchor"],
     #     client_request_token: "ClientRequestToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2727,7 +2777,12 @@ module Aws::AlexaForBusiness
     #   OEM creates a new product on Amazon's Developer Console.
     #
     # @option params [String] :room_arn
-    #   The ARN of the room with which to associate your AVS device.
+    #   The Amazon Resource Name (ARN) of the room with which to associate
+    #   your AVS device.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to be added to the specified resource. Do not provide system
+    #   tags.
     #
     # @return [Types::RegisterAVSDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2742,6 +2797,12 @@ module Aws::AlexaForBusiness
     #     device_serial_number: "DeviceSerialNumberForAVS",
     #     amazon_id: "AmazonId", # required
     #     room_arn: "Arn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2784,6 +2845,14 @@ module Aws::AlexaForBusiness
 
     # Determines the details for the room from which a skill request was
     # invoked. This operation is used by skill developers.
+    #
+    # To query ResolveRoom from an Alexa skill, the skill ID needs to be
+    # authorized. When the skill is using an AWS Lambda function, the skill
+    # is automatically authorized when you publish your skill as a private
+    # skill to your AWS account. Skills that are hosted using a custom web
+    # service must be manually authorized. To get your skill authorized,
+    # contact AWS Support with your AWS account ID that queries the
+    # ResolveRoom API and skill ID.
     #
     # @option params [required, String] :user_id
     #   The ARN of the user. Required.
@@ -4159,7 +4228,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

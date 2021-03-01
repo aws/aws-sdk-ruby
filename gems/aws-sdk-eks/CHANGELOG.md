@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2021-03-01)
+------------------
+
+* Feature - Adding new error code AdmissionRequestDenied for Addons in EKS
+
 1.49.0 (2021-02-26)
 ------------------
 

@@ -739,14 +739,13 @@ module Aws::CodePipeline
     #       }
     #
     # @!attribute [rw] minimum_count
-    #   The minimum allowed number of artifacts that can be used with the
-    #   action type. For example, you should specify a minimum and maximum
-    #   of zero input artifacts for an action type with a category of
-    #   `source`.
+    #   The minimum number of artifacts that can be used with the action
+    #   type. For example, you should specify a minimum and maximum of zero
+    #   input artifacts for an action type with a category of `source`.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_count
-    #   The maximum allowed number of artifacts that can be used with the
+    #   The maximum number of artifacts that can be used with the
     #   actiontype. For example, you should specify a minimum and maximum of
     #   zero input artifacts for an action type with a category of `source`.
     #   @return [Integer]
@@ -827,8 +826,8 @@ module Aws::CodePipeline
     #   @return [Types::ActionTypeExecutor]
     #
     # @!attribute [rw] id
-    #   The action ID is composed of the action category, owner, provider,
-    #   and version of the action type to be updated.
+    #   The action category, owner, provider, and version of the action type
+    #   to be updated.
     #   @return [Types::ActionTypeIdentifier]
     #
     # @!attribute [rw] input_artifact_details
@@ -902,20 +901,17 @@ module Aws::CodePipeline
     #
     # @!attribute [rw] type
     #   The integration model used to create and update the action type,
-    #   such as the Lambda integration model. Each integration type has a
-    #   related action engine, or executor. The available executor types are
-    #   `Lambda` and `JobWorker`.
+    #   `Lambda` or `JobWorker`.
     #   @return [String]
     #
     # @!attribute [rw] policy_statements_template
     #   The policy statement that specifies the permissions in the
     #   CodePipeline customer’s account that are needed to successfully run
-    #   an action execution.
+    #   an action.
     #
     #   To grant permission to another account, specify the account ID as
-    #   the Principal. For AWS services, the Principal is a domain-style
-    #   identifier defined by the service, like
-    #   `codepipeline.amazonaws.com`.
+    #   the Principal, a domain-style identifier defined by the service, for
+    #   example `codepipeline.amazonaws.com`.
     #
     #   <note markdown="1"> The size of the passed JSON policy document cannot exceed 2048
     #   characters.
@@ -924,9 +920,9 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] job_timeout
-    #   The timeout in seconds for the job. An action execution can consist
-    #   of multiple jobs. This is the timeout for a single job, and not for
-    #   the entire action execution.
+    #   The timeout in seconds for the job. An action execution can have
+    #   multiple jobs. This is the timeout for a single job, not the entire
+    #   action execution.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypeExecutor AWS API Documentation
@@ -1024,8 +1020,8 @@ module Aws::CodePipeline
     #       }
     #
     # @!attribute [rw] category
-    #   A category defines what kind of action can be taken in the stage.
-    #   Valid categories are limited to one of the following values:
+    #   Defines what kind of action can be taken in the stage, one of the
+    #   following:
     #
     #   * `Source`
     #
@@ -1041,8 +1037,7 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The creator of the action type being called. There are two valid
-    #   values for the `owner` field: `AWS` and `ThirdParty`.
+    #   The creator of the action type being called: `AWS` or `ThirdParty`.
     #   @return [String]
     #
     # @!attribute [rw] provider
@@ -1081,8 +1076,8 @@ module Aws::CodePipeline
     #       }
     #
     # @!attribute [rw] allowed_accounts
-    #   A list of AWS account IDs with allow access to use the action type
-    #   in their pipelines.
+    #   A list of AWS account IDs with access to use the action type in
+    #   their pipelines.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypePermissions AWS API Documentation
@@ -1110,8 +1105,7 @@ module Aws::CodePipeline
     #       }
     #
     # @!attribute [rw] name
-    #   The property name. This represents a field name that is displayed to
-    #   users.
+    #   The property name that is displayed to users.
     #   @return [String]
     #
     # @!attribute [rw] optional
@@ -1123,9 +1117,9 @@ module Aws::CodePipeline
     #   @return [Boolean]
     #
     # @!attribute [rw] no_echo
-    #   Determines whether the field value entered by the customer is
-    #   logged. If `noEcho` is `true`, the value is not shown in CloudTrail
-    #   logs for the action execution.
+    #   Whether to omit the field value entered by the customer in the log.
+    #   If `true`, the value is not saved in CloudTrail logs for the action
+    #   execution.
     #   @return [Boolean]
     #
     # @!attribute [rw] queryable
@@ -2202,8 +2196,8 @@ module Aws::CodePipeline
     #       }
     #
     # @!attribute [rw] category
-    #   A category defines what kind of action can be taken in the stage.
-    #   Valid categories are limited to one of the following values:
+    #   Defines what kind of action can be taken in the stage. The following
+    #   are the valid values:
     #
     #   * `Source`
     #
@@ -2219,9 +2213,9 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The creator of an action type that has been created with any
-    #   supported integration model. There are two valid values for the
-    #   `owner` field in the action type category: `AWS` and `ThirdParty`.
+    #   The creator of an action type that was created with any supported
+    #   integration model. There are two valid values: `AWS` and
+    #   `ThirdParty`.
     #   @return [String]
     #
     # @!attribute [rw] provider
@@ -3002,6 +2996,7 @@ module Aws::CodePipeline
     #
     #       {
     #         next_token: "NextToken",
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] next_token
@@ -3010,10 +3005,18 @@ module Aws::CodePipeline
     #   list.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   The maximum number of pipelines to return in a single call. To
+    #   retrieve the remaining pipelines, make another call with the
+    #   returned nextToken value. The minimum value you can specify is 1.
+    #   The maximum accepted value is 1000.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelinesInput AWS API Documentation
     #
     class ListPipelinesInput < Struct.new(
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4167,8 +4170,7 @@ module Aws::CodePipeline
     #
     class RegisterWebhookWithThirdPartyOutput < Aws::EmptyStructure; end
 
-    # The request has failed because of an unknown error, exception, or
-    # failure.
+    # The request failed because of an unknown error, exception, or failure.
     #
     # @!attribute [rw] message
     #   @return [String]

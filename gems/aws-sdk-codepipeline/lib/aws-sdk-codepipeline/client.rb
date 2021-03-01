@@ -873,12 +873,12 @@ module Aws::CodePipeline
 
     # Returns information about an action type created for an external
     # provider, where the action is to be used by customers of the external
-    # provider. The action can have been created with any supported
-    # integration model.
+    # provider. The action can be created with any supported integration
+    # model.
     #
     # @option params [required, String] :category
-    #   A category defines what kind of action can be taken in the stage.
-    #   Valid categories are limited to one of the following values:
+    #   Defines what kind of action can be taken in the stage. The following
+    #   are the valid values:
     #
     #   * `Source`
     #
@@ -893,9 +893,8 @@ module Aws::CodePipeline
     #   * `Invoke`
     #
     # @option params [required, String] :owner
-    #   The creator of an action type that has been created with any supported
-    #   integration model. There are two valid values for the `owner` field in
-    #   the action type category: `AWS` and `ThirdParty`.
+    #   The creator of an action type that was created with any supported
+    #   integration model. There are two valid values: `AWS` and `ThirdParty`.
     #
     # @option params [required, String] :provider
     #   The provider of the action type being called. The provider name is
@@ -1503,6 +1502,12 @@ module Aws::CodePipeline
     #   An identifier that was returned from the previous list pipelines call.
     #   It can be used to return the next set of pipelines in the list.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of pipelines to return in a single call. To
+    #   retrieve the remaining pipelines, make another call with the returned
+    #   nextToken value. The minimum value you can specify is 1. The maximum
+    #   accepted value is 1000.
+    #
     # @return [Types::ListPipelinesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListPipelinesOutput#pipelines #pipelines} => Array&lt;Types::PipelineSummary&gt;
@@ -1514,6 +1519,7 @@ module Aws::CodePipeline
     #
     #   resp = client.list_pipelines({
     #     next_token: "NextToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -2358,10 +2364,10 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
-    # Updates an action type that has been created with any supported
-    # integration model, where the action type is to be used by customers of
-    # the action type provider. Use a JSON file with the action definition
-    # and `UpdateActionType` to provide the full structure.
+    # Updates an action type that was created with any supported integration
+    # model, where the action type is to be used by customers of the action
+    # type provider. Use a JSON file with the action definition and
+    # `UpdateActionType` to provide the full structure.
     #
     # @option params [Types::ActionTypeDeclaration] :action_type
     #   The action type definition for the action type to be updated.
@@ -2569,7 +2575,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
