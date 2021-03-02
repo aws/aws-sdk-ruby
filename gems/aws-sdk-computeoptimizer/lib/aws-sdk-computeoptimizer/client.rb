@@ -1160,10 +1160,19 @@ module Aws::ComputeOptimizer
 
     # Returns the optimization findings for an account.
     #
-    # For example, it returns the number of Amazon EC2 instances in an
-    # account that are under-provisioned, over-provisioned, or optimized. It
-    # also returns the number of Auto Scaling groups in an account that are
-    # not optimized, or optimized.
+    # It returns the number of:
+    #
+    # * Amazon EC2 instances in an account that are `Underprovisioned`,
+    #   `Overprovisioned`, or `Optimized`.
+    #
+    # * Auto Scaling groups in an account that are `NotOptimized`, or
+    #   `Optimized`.
+    #
+    # * Amazon EBS volumes in an account that are `NotOptimized`, or
+    #   `Optimized`.
+    #
+    # * Lambda functions in an account that are `NotOptimized`, or
+    #   `Optimized`.
     #
     # @option params [Array<String>] :account_ids
     #   The ID of the AWS account for which to return recommendation
@@ -1309,7 +1318,7 @@ module Aws::ComputeOptimizer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-computeoptimizer'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

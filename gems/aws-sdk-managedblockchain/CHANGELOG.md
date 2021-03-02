@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2021-03-02)
+------------------
+
+* Feature - Updates for Ethereum general availability release.
+
 1.20.0 (2021-02-02)
 ------------------
 

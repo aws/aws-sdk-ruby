@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2021-03-02)
+------------------
+
+* Feature - Adds TraceHeader to PutEventsRequestEntry to support AWS X-Ray trace-ids on events generated using the PutEvents operation.
+
 1.19.0 (2021-02-02)
 ------------------
 

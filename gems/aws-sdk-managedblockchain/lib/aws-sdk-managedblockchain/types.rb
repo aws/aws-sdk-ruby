@@ -247,7 +247,7 @@ module Aws::ManagedBlockchain
     #
     #   When specifying tags during creation, you can specify multiple
     #   key-value pairs in a single request, with an overall maximum of 50
-    #   added to each resource.
+    #   tags added to each resource.
     #
     #   For more information about tags, see [Tagging Resources][1] in the
     #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
@@ -363,7 +363,7 @@ module Aws::ManagedBlockchain
     #
     #   When specifying tags during creation, you can specify multiple
     #   key-value pairs in a single request, with an overall maximum of 50
-    #   added to each resource.
+    #   tags added to each resource.
     #
     #   For more information about tags, see [Tagging Resources][1] in the
     #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
@@ -465,8 +465,8 @@ module Aws::ManagedBlockchain
     #
     #   When specifying tags during creation, you can specify multiple
     #   key-value pairs in a single request, with an overall maximum of 50
-    #   added to each resource. If the proposal is for a network invitation,
-    #   the invitation inherits the tags added to the proposal.
+    #   tags added to each resource. If the proposal is for a network
+    #   invitation, the invitation inherits the tags added to the proposal.
     #
     #   For more information about tags, see [Tagging Resources][1] in the
     #   *Amazon Managed Blockchain Ethereum Developer Guide*, or [Tagging
@@ -1443,7 +1443,7 @@ module Aws::ManagedBlockchain
     #
     #   When specifying tags during creation, you can specify multiple
     #   key-value pairs in a single request, with an overall maximum of 50
-    #   added to each resource.
+    #   tags added to each resource.
     #
     #
     #
@@ -1778,8 +1778,7 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # Attributes of Ethereum for a network. Ethereum on Managed Blockchain
-    # is in preview release and is subject to change.
+    # Attributes of Ethereum for a network.
     #
     # @!attribute [rw] chain_id
     #   The Ethereum `CHAIN_ID` associated with the Ethereum network. Chain
@@ -1861,8 +1860,7 @@ module Aws::ManagedBlockchain
     #
     # @!attribute [rw] ethereum
     #   Attributes of an Ethereum network for Managed Blockchain resources
-    #   participating in an Ethereum network. Ethereum on Managed Blockchain
-    #   is in preview release and is subject to change.
+    #   participating in an Ethereum network.
     #   @return [Types::NetworkEthereumAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NetworkFrameworkAttributes AWS API Documentation
@@ -1976,8 +1974,7 @@ module Aws::ManagedBlockchain
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone in which the node exists. Required for
-    #   Ethereum nodes. Ethereum on Managed Blockchain is in preview release
-    #   and is subject to change.
+    #   Ethereum nodes.
     #   @return [String]
     #
     # @!attribute [rw] framework_attributes
@@ -2079,8 +2076,7 @@ module Aws::ManagedBlockchain
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone in which the node exists. Required for
-    #   Ethereum nodes. Ethereum on Managed Blockchain is in preview release
-    #   and is subject to change.
+    #   Ethereum nodes.
     #   @return [String]
     #
     # @!attribute [rw] log_publishing_configuration
@@ -2107,8 +2103,7 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
-    # Attributes of an Ethereum node. Ethereum on Managed Blockchain is in
-    # preview release and is subject to change.
+    # Attributes of an Ethereum node.
     #
     # @!attribute [rw] http_endpoint
     #   The endpoint on which the Ethereum node listens to run Ethereum
@@ -2219,8 +2214,7 @@ module Aws::ManagedBlockchain
     #
     # @!attribute [rw] ethereum
     #   Attributes of Ethereum for a node on a Managed Blockchain network
-    #   that uses Ethereum. Ethereum on Managed Blockchain is in preview
-    #   release and is subject to change.
+    #   that uses Ethereum.
     #   @return [Types::NodeEthereumAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NodeFrameworkAttributes AWS API Documentation
@@ -2692,7 +2686,7 @@ module Aws::ManagedBlockchain
     #   The tags to assign to the specified resource. Tag values can be
     #   empty, for example, `"MyTagKey" : ""`. You can specify multiple
     #   key-value pairs in a single request, with an overall maximum of 50
-    #   added to each resource.
+    #   tags added to each resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/TagResourceRequest AWS API Documentation

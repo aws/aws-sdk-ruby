@@ -172,6 +172,12 @@ module Aws::DataSync
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAgentRequest = Shapes::StructureShape.new(name: 'UpdateAgentRequest')
     UpdateAgentResponse = Shapes::StructureShape.new(name: 'UpdateAgentResponse')
+    UpdateLocationNfsRequest = Shapes::StructureShape.new(name: 'UpdateLocationNfsRequest')
+    UpdateLocationNfsResponse = Shapes::StructureShape.new(name: 'UpdateLocationNfsResponse')
+    UpdateLocationObjectStorageRequest = Shapes::StructureShape.new(name: 'UpdateLocationObjectStorageRequest')
+    UpdateLocationObjectStorageResponse = Shapes::StructureShape.new(name: 'UpdateLocationObjectStorageResponse')
+    UpdateLocationSmbRequest = Shapes::StructureShape.new(name: 'UpdateLocationSmbRequest')
+    UpdateLocationSmbResponse = Shapes::StructureShape.new(name: 'UpdateLocationSmbResponse')
     UpdateTaskExecutionRequest = Shapes::StructureShape.new(name: 'UpdateTaskExecutionRequest')
     UpdateTaskExecutionResponse = Shapes::StructureShape.new(name: 'UpdateTaskExecutionResponse')
     UpdateTaskRequest = Shapes::StructureShape.new(name: 'UpdateTaskRequest')
@@ -607,6 +613,36 @@ module Aws::DataSync
 
     UpdateAgentResponse.struct_class = Types::UpdateAgentResponse
 
+    UpdateLocationNfsRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
+    UpdateLocationNfsRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: NfsSubdirectory, location_name: "Subdirectory"))
+    UpdateLocationNfsRequest.add_member(:on_prem_config, Shapes::ShapeRef.new(shape: OnPremConfig, location_name: "OnPremConfig"))
+    UpdateLocationNfsRequest.add_member(:mount_options, Shapes::ShapeRef.new(shape: NfsMountOptions, location_name: "MountOptions"))
+    UpdateLocationNfsRequest.struct_class = Types::UpdateLocationNfsRequest
+
+    UpdateLocationNfsResponse.struct_class = Types::UpdateLocationNfsResponse
+
+    UpdateLocationObjectStorageRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
+    UpdateLocationObjectStorageRequest.add_member(:server_port, Shapes::ShapeRef.new(shape: ObjectStorageServerPort, location_name: "ServerPort"))
+    UpdateLocationObjectStorageRequest.add_member(:server_protocol, Shapes::ShapeRef.new(shape: ObjectStorageServerProtocol, location_name: "ServerProtocol"))
+    UpdateLocationObjectStorageRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: S3Subdirectory, location_name: "Subdirectory"))
+    UpdateLocationObjectStorageRequest.add_member(:access_key, Shapes::ShapeRef.new(shape: ObjectStorageAccessKey, location_name: "AccessKey"))
+    UpdateLocationObjectStorageRequest.add_member(:secret_key, Shapes::ShapeRef.new(shape: ObjectStorageSecretKey, location_name: "SecretKey"))
+    UpdateLocationObjectStorageRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
+    UpdateLocationObjectStorageRequest.struct_class = Types::UpdateLocationObjectStorageRequest
+
+    UpdateLocationObjectStorageResponse.struct_class = Types::UpdateLocationObjectStorageResponse
+
+    UpdateLocationSmbRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
+    UpdateLocationSmbRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: SmbSubdirectory, location_name: "Subdirectory"))
+    UpdateLocationSmbRequest.add_member(:user, Shapes::ShapeRef.new(shape: SmbUser, location_name: "User"))
+    UpdateLocationSmbRequest.add_member(:domain, Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
+    UpdateLocationSmbRequest.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, location_name: "Password"))
+    UpdateLocationSmbRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
+    UpdateLocationSmbRequest.add_member(:mount_options, Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
+    UpdateLocationSmbRequest.struct_class = Types::UpdateLocationSmbRequest
+
+    UpdateLocationSmbResponse.struct_class = Types::UpdateLocationSmbResponse
+
     UpdateTaskExecutionRequest.add_member(:task_execution_arn, Shapes::ShapeRef.new(shape: TaskExecutionArn, required: true, location_name: "TaskExecutionArn"))
     UpdateTaskExecutionRequest.add_member(:options, Shapes::ShapeRef.new(shape: Options, required: true, location_name: "Options"))
     UpdateTaskExecutionRequest.struct_class = Types::UpdateTaskExecutionRequest
@@ -969,6 +1005,36 @@ module Aws::DataSync
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateAgentRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAgentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:update_location_nfs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLocationNfs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLocationNfsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLocationNfsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:update_location_object_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLocationObjectStorage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLocationObjectStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLocationObjectStorageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:update_location_smb, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLocationSmb"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLocationSmbRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLocationSmbResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)

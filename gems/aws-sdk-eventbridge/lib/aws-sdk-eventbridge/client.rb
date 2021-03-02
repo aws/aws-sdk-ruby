@@ -1613,6 +1613,7 @@ module Aws::EventBridge
     #         detail_type: "String",
     #         detail: "String",
     #         event_bus_name: "NonPartnerEventBusNameOrArn",
+    #         trace_header: "TraceHeader",
     #       },
     #     ],
     #   })
@@ -2381,7 +2382,27 @@ module Aws::EventBridge
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html
     #
     # @option params [required, String] :event
-    #   The event, in JSON format, to test against the event pattern.
+    #   The event, in JSON format, to test against the event pattern. The JSON
+    #   must follow the format specified in [AWS Events][1], and the following
+    #   fields are mandatory:
+    #
+    #   * `id`
+    #
+    #   * `account`
+    #
+    #   * `source`
+    #
+    #   * `time`
+    #
+    #   * `region`
+    #
+    #   * `resources`
+    #
+    #   * `detail-type`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/aws-events.html
     #
     # @return [Types::TestEventPatternResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2494,7 +2515,7 @@ module Aws::EventBridge
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eventbridge'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2021-03-02)
+------------------
+
+* Feature - Add ARN & Tags for PartnerAccount related APIs and WirelessGatewayTaskDefinition related APIs
+
 1.2.0 (2021-02-02)
 ------------------
 
