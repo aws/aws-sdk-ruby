@@ -96,6 +96,13 @@ module Aws::SecretsManager
     #             value: "TagValueType",
     #           },
     #         ],
+    #         add_replica_regions: [
+    #           {
+    #             region: "RegionType",
+    #             kms_key_id: "KmsKeyIdType",
+    #           },
+    #         ],
+    #         force_overwrite_replica_secret: false,
     #       }
     #
     # @!attribute [rw] name
@@ -143,8 +150,8 @@ module Aws::SecretsManager
     #
     #   * If a version with this value already exists and that version's
     #     `SecretString` and `SecretBinary` values are different from those
-    #     in the request then the request fails because you cannot modify an
-    #     existing version. Instead, use PutSecretValue to create a new
+    #     in the request, then the request fails because you cannot modify
+    #     an existing version. Instead, use PutSecretValue to create a new
     #     version.
     #
     #   This value becomes the `VersionId` of the new version.
@@ -279,6 +286,17 @@ module Aws::SecretsManager
     #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] add_replica_regions
+    #   (Optional) Add a list of regions to replicate secrets. Secrets
+    #   Manager replicates the KMSKeyID objects to the list of regions
+    #   specified in the parameter.
+    #   @return [Array<Types::ReplicaRegionType>]
+    #
+    # @!attribute [rw] force_overwrite_replica_secret
+    #   (Optional) If set, the replication overwrites a secret with the same
+    #   name in the destination region.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/CreateSecretRequest AWS API Documentation
     #
     class CreateSecretRequest < Struct.new(
@@ -288,7 +306,9 @@ module Aws::SecretsManager
       :kms_key_id,
       :secret_binary,
       :secret_string,
-      :tags)
+      :tags,
+      :add_replica_regions,
+      :force_overwrite_replica_secret)
       SENSITIVE = [:secret_binary, :secret_string]
       include Aws::Structure
     end
@@ -316,12 +336,18 @@ module Aws::SecretsManager
     #   just created.
     #   @return [String]
     #
+    # @!attribute [rw] replication_status
+    #   Describes a list of replication status objects as `InProgress`,
+    #   `Failed` or `InSync`.
+    #   @return [Array<Types::ReplicationStatusType>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/CreateSecretResponse AWS API Documentation
     #
     class CreateSecretResponse < Struct.new(
       :arn,
       :name,
-      :version_id)
+      :version_id,
+      :replication_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -412,8 +438,8 @@ module Aws::SecretsManager
     #       }
     #
     # @!attribute [rw] secret_id
-    #   Specifies the secret that you want to delete. You can specify either
-    #   the Amazon Resource Name (ARN) or the friendly name of the secret.
+    #   Specifies the secret to delete. You can specify either the Amazon
+    #   Resource Name (ARN) or the friendly name of the secret.
     #
     #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
     #   complete ARN. You can specify a partial ARN too—for example, if you
@@ -440,10 +466,11 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] recovery_window_in_days
     #   (Optional) Specifies the number of days that Secrets Manager waits
-    #   before it can delete the secret. You can't use both this parameter
-    #   and the `ForceDeleteWithoutRecovery` parameter in the same API call.
+    #   before Secrets Manager can delete the secret. You can't use both
+    #   this parameter and the `ForceDeleteWithoutRecovery` parameter in the
+    #   same API call.
     #
-    #   This value can range from 7 to 30 days. The default value is 30.
+    #   This value can range from 7 to 30 days with a default value of 30.
     #   @return [Integer]
     #
     # @!attribute [rw] force_delete_without_recovery
@@ -461,8 +488,12 @@ module Aws::SecretsManager
     #   to skip the normal waiting period before the permanent deletion that
     #   AWS would normally impose with the `RecoveryWindowInDays` parameter.
     #   If you delete a secret with the `ForceDeleteWithouRecovery`
-    #   parameter, then you have no opportunity to recover the secret. It is
-    #   permanently lost.
+    #   parameter, then you have no opportunity to recover the secret. You
+    #   lose the secret permanently.
+    #
+    #   If you use this parameter and include a previously deleted or
+    #   nonexistent secret, the operation does not return the error
+    #   `ResourceNotFoundException` in order to correctly handle retries.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DeleteSecretRequest AWS API Documentation
@@ -480,7 +511,7 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The friendly name of the secret that is now scheduled for deletion.
+    #   The friendly name of the secret currently scheduled for deletion.
     #   @return [String]
     #
     # @!attribute [rw] deletion_date
@@ -578,14 +609,16 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] rotation_rules
-    #   A structure that contains the rotation configuration for this
-    #   secret.
+    #   A structure with the rotation configuration for this secret.
     #   @return [Types::RotationRulesType]
     #
     # @!attribute [rw] last_rotated_date
+    #   The last date and time that the rotation process for this secret was
+    #   invoked.
+    #
     #   The most recent date and time that the Secrets Manager rotation
-    #   process was successfully completed. This value is null if the secret
-    #   has never rotated.
+    #   process successfully completed. If the secret doesn't rotate,
+    #   Secrets Manager returns a null value.
     #   @return [Time]
     #
     # @!attribute [rw] last_changed_date
@@ -632,8 +665,17 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] created_date
-    #   The date that the secret was created.
+    #   The date you created the secret.
     #   @return [Time]
+    #
+    # @!attribute [rw] primary_region
+    #   Specifies the primary region for secret replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_status
+    #   Describes a list of replication status objects as `InProgress`,
+    #   `Failed` or `InSync`.`P`
+    #   @return [Array<Types::ReplicationStatusType>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DescribeSecretResponse AWS API Documentation
     #
@@ -652,7 +694,9 @@ module Aws::SecretsManager
       :tags,
       :version_ids_to_stages,
       :owning_service,
-      :created_date)
+      :created_date,
+      :primary_region,
+      :replication_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -677,13 +721,14 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # Allows you to filter your list of secrets.
+    # Allows you to add filters when you use the search function in Secrets
+    # Manager.
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
     #
     #       {
-    #         key: "description", # accepts description, name, tag-key, tag-value, all
+    #         key: "description", # accepts description, name, tag-key, tag-value, primary-region, all
     #         values: ["FilterValueStringType"],
     #       }
     #
@@ -693,6 +738,9 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] values
     #   Filters your list of secrets by a specific value.
+    #
+    #   You can prefix your search value with an exclamation mark (`!`) in
+    #   order to perform negation filters.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/Filter AWS API Documentation
@@ -916,11 +964,11 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] version_id
     #   Specifies the unique identifier of the version of the secret that
-    #   you want to retrieve. If you specify this parameter then don't
-    #   specify `VersionStage`. If you don't specify either a
-    #   `VersionStage` or `VersionId` then the default is to perform the
-    #   operation on the version with the `VersionStage` value of
-    #   `AWSCURRENT`.
+    #   you want to retrieve. If you specify both this parameter and
+    #   `VersionStage`, the two parameters must refer to the same secret
+    #   version. If you don't specify either a `VersionStage` or
+    #   `VersionId` then the default is to perform the operation on the
+    #   version with the `VersionStage` value of `AWSCURRENT`.
     #
     #   This value is typically a [UUID-type][1] value with 32 hexadecimal
     #   digits.
@@ -935,8 +983,9 @@ module Aws::SecretsManager
     #   staging label attached to the version.
     #
     #   Staging labels are used to keep track of different versions during
-    #   the rotation process. If you use this parameter then don't specify
-    #   `VersionId`. If you don't specify either a `VersionStage` or
+    #   the rotation process. If you specify both this parameter and
+    #   `VersionId`, the two parameters must refer to the same secret
+    #   version . If you don't specify either a `VersionStage` or
     #   `VersionId`, then the default is to perform the operation on the
     #   version with the `VersionStage` value of `AWSCURRENT`.
     #   @return [String]
@@ -1226,7 +1275,7 @@ module Aws::SecretsManager
     #         next_token: "NextTokenType",
     #         filters: [
     #           {
-    #             key: "description", # accepts description, name, tag-key, tag-value, all
+    #             key: "description", # accepts description, name, tag-key, tag-value, primary-region, all
     #             values: ["FilterValueStringType"],
     #           },
     #         ],
@@ -1297,7 +1346,7 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # The policy document that you provided isn't valid.
+    # You provided a resource-based policy with syntax errors.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1324,7 +1373,8 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # The resource policy did not prevent broad access to the secret.
+    # The BlockPublicPolicy parameter is set to true and the resource policy
+    # did not prevent broad access to the secret.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1348,8 +1398,8 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] secret_id
     #   Specifies the secret that you want to attach the resource-based
-    #   policy to. You can specify either the ARN or the friendly name of
-    #   the secret.
+    #   policy. You can specify either the ARN or the friendly name of the
+    #   secret.
     #
     #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
     #   complete ARN. You can specify a partial ARN too—for example, if you
@@ -1375,12 +1425,12 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] resource_policy
-    #   A JSON-formatted string that's constructed according to the grammar
-    #   and syntax for an AWS resource-based policy. The policy in the
-    #   string identifies who can access or manage this secret and its
-    #   versions. For information on how to format a JSON parameter for the
-    #   various command line tool environments, see [Using JSON for
-    #   Parameters][1] in the *AWS CLI User Guide*.
+    #   A JSON-formatted string constructed according to the grammar and
+    #   syntax for an AWS resource-based policy. The policy in the string
+    #   identifies who can access or manage this secret and its versions.
+    #   For information on how to format a JSON parameter for the various
+    #   command line tool environments, see [Using JSON for Parameters][1]
+    #   in the *AWS CLI User Guide*.
     #
     #
     #
@@ -1388,8 +1438,9 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] block_public_policy
-    #   Makes an optional API call to Zelkova to validate the Resource
-    #   Policy to prevent broad access to your secret.
+    #   (Optional) If you set the parameter, `BlockPublicPolicy` to true,
+    #   then you block resource-based policies that allow broad access to
+    #   the secret.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/PutResourcePolicyRequest AWS API Documentation
@@ -1407,8 +1458,8 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The friendly name of the secret that the retrieved by the
-    #   resource-based policy.
+    #   The friendly name of the secret retrieved by the resource-based
+    #   policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/PutResourcePolicyResponse AWS API Documentation
@@ -1604,6 +1655,170 @@ module Aws::SecretsManager
       :name,
       :version_id,
       :version_stages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RemoveRegionsFromReplicationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         secret_id: "SecretIdType", # required
+    #         remove_replica_regions: ["RegionType"], # required
+    #       }
+    #
+    # @!attribute [rw] secret_id
+    #   Remove a secret by `SecretId` from replica Regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] remove_replica_regions
+    #   Remove replication from specific Regions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/RemoveRegionsFromReplicationRequest AWS API Documentation
+    #
+    class RemoveRegionsFromReplicationRequest < Struct.new(
+      :secret_id,
+      :remove_replica_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The secret `ARN` removed from replication regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_status
+    #   Describes the remaining replication status after you remove regions
+    #   from the replication list.
+    #   @return [Array<Types::ReplicationStatusType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/RemoveRegionsFromReplicationResponse AWS API Documentation
+    #
+    class RemoveRegionsFromReplicationResponse < Struct.new(
+      :arn,
+      :replication_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # (Optional) Custom type consisting of a `Region` (required) and the
+    # `KmsKeyId` which can be an `ARN`, `Key ID`, or `Alias`.
+    #
+    # @note When making an API call, you may pass ReplicaRegionType
+    #   data as a hash:
+    #
+    #       {
+    #         region: "RegionType",
+    #         kms_key_id: "KmsKeyIdType",
+    #       }
+    #
+    # @!attribute [rw] region
+    #   Describes a single instance of Region objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   Can be an `ARN`, `Key ID`, or `Alias`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ReplicaRegionType AWS API Documentation
+    #
+    class ReplicaRegionType < Struct.new(
+      :region,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ReplicateSecretToRegionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         secret_id: "SecretIdType", # required
+    #         add_replica_regions: [ # required
+    #           {
+    #             region: "RegionType",
+    #             kms_key_id: "KmsKeyIdType",
+    #           },
+    #         ],
+    #         force_overwrite_replica_secret: false,
+    #       }
+    #
+    # @!attribute [rw] secret_id
+    #   Use the `Secret Id` to replicate a secret to regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_replica_regions
+    #   Add Regions to replicate the secret.
+    #   @return [Array<Types::ReplicaRegionType>]
+    #
+    # @!attribute [rw] force_overwrite_replica_secret
+    #   (Optional) If set, Secrets Manager replication overwrites a secret
+    #   with the same name in the destination region.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ReplicateSecretToRegionsRequest AWS API Documentation
+    #
+    class ReplicateSecretToRegionsRequest < Struct.new(
+      :secret_id,
+      :add_replica_regions,
+      :force_overwrite_replica_secret)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   Replicate a secret based on the `ReplicaRegionType`&gt; consisting
+    #   of a Region(required) and a KMSKeyId (optional) which can be the
+    #   ARN, KeyID, or Alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_status
+    #   Describes the secret replication status as `PENDING`, `SUCCESS` or
+    #   `FAIL`.
+    #   @return [Array<Types::ReplicationStatusType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ReplicateSecretToRegionsResponse AWS API Documentation
+    #
+    class ReplicateSecretToRegionsResponse < Struct.new(
+      :arn,
+      :replication_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A replication object consisting of a `RegionReplicationStatus` object
+    # and includes a Region, KMSKeyId, status, and status message.
+    #
+    # @!attribute [rw] region
+    #   The Region where replication occurs.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   Can be an `ARN`, `Key ID`, or `Alias`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status can be `InProgress`, `Failed`, or `InSync`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Status message such as "*Secret with this name already exists in
+    #   this region*".
+    #   @return [String]
+    #
+    # @!attribute [rw] last_accessed_date
+    #   The date that you last accessed the secret in the Region.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ReplicationStatusType AWS API Documentation
+    #
+    class ReplicationStatusType < Struct.new(
+      :region,
+      :kms_key_id,
+      :status,
+      :status_message,
+      :last_accessed_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1886,8 +2101,9 @@ module Aws::SecretsManager
     #   @return [Types::RotationRulesType]
     #
     # @!attribute [rw] last_rotated_date
-    #   The last date and time that the rotation process for this secret was
-    #   invoked.
+    #   The most recent date and time that the Secrets Manager rotation
+    #   process was successfully completed. This value is null if the secret
+    #   hasn't ever rotated.
     #   @return [Time]
     #
     # @!attribute [rw] last_changed_date
@@ -1934,6 +2150,10 @@ module Aws::SecretsManager
     #   The date and time when a secret was created.
     #   @return [Time]
     #
+    # @!attribute [rw] primary_region
+    #   The Region where Secrets Manager originated the secret.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/SecretListEntry AWS API Documentation
     #
     class SecretListEntry < Struct.new(
@@ -1951,7 +2171,8 @@ module Aws::SecretsManager
       :tags,
       :secret_versions_to_stages,
       :owning_service,
-      :created_date)
+      :created_date,
+      :primary_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1984,6 +2205,39 @@ module Aws::SecretsManager
       :version_stages,
       :last_accessed_date,
       :created_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopReplicationToReplicaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         secret_id: "SecretIdType", # required
+    #       }
+    #
+    # @!attribute [rw] secret_id
+    #   Response to `StopReplicationToReplica` of a secret, based on the
+    #   `SecretId`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/StopReplicationToReplicaRequest AWS API Documentation
+    #
+    class StopReplicationToReplicaRequest < Struct.new(
+      :secret_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   Response `StopReplicationToReplica` of a secret, based on the
+    #   `ARN,`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/StopReplicationToReplicaResponse AWS API Documentation
+    #
+    class StopReplicationToReplicaResponse < Struct.new(
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2064,8 +2318,8 @@ module Aws::SecretsManager
     #   information on how to format a JSON parameter for the various
     #   command line tool environments, see [Using JSON for Parameters][1]
     #   in the *AWS CLI User Guide*. For the AWS CLI, you can also use the
-    #   syntax: `--Tags
-    #   Key="Key1",Value="Value1",Key="Key2",Value="Value2"[,…]`
+    #   syntax: `--Tags Key="Key1",Value="Value1"
+    #   Key="Key2",Value="Value2"[,…]`
     #
     #
     #
@@ -2435,9 +2689,9 @@ module Aws::SecretsManager
     #       }
     #
     # @!attribute [rw] secret_id
-    #   The identifier for the secret that you want to validate a resource
-    #   policy. You can specify either the Amazon Resource Name (ARN) or the
-    #   friendly name of the secret.
+    #   (Optional) The identifier of the secret with the resource-based
+    #   policy you want to validate. You can specify either the Amazon
+    #   Resource Name (ARN) or the friendly name of the secret.
     #
     #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
     #   complete ARN. You can specify a partial ARN too—for example, if you
@@ -2463,7 +2717,16 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] resource_policy
-    #   Identifies the Resource Policy attached to the secret.
+    #   A JSON-formatted string constructed according to the grammar and
+    #   syntax for an AWS resource-based policy. The policy in the string
+    #   identifies who can access or manage this secret and its versions.
+    #   For information on how to format a JSON parameter for the various
+    #   command line tool environments, see [Using JSON for Parameters][1]
+    #   in the *AWS CLI User Guide*.publi
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ValidateResourcePolicyRequest AWS API Documentation

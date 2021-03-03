@@ -2101,6 +2101,7 @@ module Aws::CloudWatchEvents
     #             detail_type: "String",
     #             detail: "String",
     #             event_bus_name: "NonPartnerEventBusNameOrArn",
+    #             trace_header: "TraceHeader",
     #           },
     #         ],
     #       }
@@ -2131,6 +2132,7 @@ module Aws::CloudWatchEvents
     #         detail_type: "String",
     #         detail: "String",
     #         event_bus_name: "NonPartnerEventBusNameOrArn",
+    #         trace_header: "TraceHeader",
     #       }
     #
     # @!attribute [rw] time
@@ -2168,6 +2170,18 @@ module Aws::CloudWatchEvents
     #   event. If you omit this, the default event bus is used.
     #   @return [String]
     #
+    # @!attribute [rw] trace_header
+    #   An AWS X-Ray trade header, which is an http header (X-Amzn-Trace-Id)
+    #   that contains the trace-id associated with the event.
+    #
+    #   To learn more about X-Ray trace headers, see [Tracing header][1] in
+    #   the AWS X-Ray Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsRequestEntry AWS API Documentation
     #
     class PutEventsRequestEntry < Struct.new(
@@ -2176,7 +2190,8 @@ module Aws::CloudWatchEvents
       :resources,
       :detail_type,
       :detail,
-      :event_bus_name)
+      :event_bus_name,
+      :trace_header)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3509,7 +3524,27 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event
-    #   The event, in JSON format, to test against the event pattern.
+    #   The event, in JSON format, to test against the event pattern. The
+    #   JSON must follow the format specified in [AWS Events][1], and the
+    #   following fields are mandatory:
+    #
+    #   * `id`
+    #
+    #   * `account`
+    #
+    #   * `source`
+    #
+    #   * `time`
+    #
+    #   * `region`
+    #
+    #   * `resources`
+    #
+    #   * `detail-type`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/aws-events.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TestEventPatternRequest AWS API Documentation

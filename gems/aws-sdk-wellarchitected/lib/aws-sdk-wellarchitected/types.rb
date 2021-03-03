@@ -310,6 +310,9 @@ module Aws::WellArchitected
     #         lenses: ["LensAlias"], # required
     #         notes: "Notes",
     #         client_request_token: "ClientRequestToken", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] workload_name
@@ -447,6 +450,10 @@ module Aws::WellArchitected
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to be associated with the workload.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateWorkloadInput AWS API Documentation
     #
     class CreateWorkloadInput < Struct.new(
@@ -463,7 +470,8 @@ module Aws::WellArchitected
       :industry,
       :lenses,
       :notes,
-      :client_request_token)
+      :client_request_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1750,6 +1758,37 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         workload_arn: "WorkloadArn", # required
+    #       }
+    #
+    # @!attribute [rw] workload_arn
+    #   The ARN for the workload.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :workload_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input for List Workload Share
     #
     # @note When making an API call, you may pass ListWorkloadSharesInput
@@ -2156,6 +2195,37 @@ module Aws::WellArchitected
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         workload_arn: "WorkloadArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] workload_arn
+    #   The ARN for the workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :workload_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/TagResourceOutput AWS API Documentation
+    #
+    class TagResourceOutput < Aws::EmptyStructure; end
+
     # Request was denied due to request throttling.
     #
     # @!attribute [rw] message
@@ -2179,6 +2249,35 @@ module Aws::WellArchitected
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         workload_arn: "WorkloadArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] workload_arn
+    #   The ARN for the workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to be removed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :workload_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UntagResourceOutput AWS API Documentation
+    #
+    class UntagResourceOutput < Aws::EmptyStructure; end
 
     # Input to update answer.
     #
@@ -2882,6 +2981,10 @@ module Aws::WellArchitected
     #   The ID assigned to the share invitation.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags associated with the workload.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/Workload AWS API Documentation
     #
     class Workload < Struct.new(
@@ -2906,7 +3009,8 @@ module Aws::WellArchitected
       :pillar_priorities,
       :lenses,
       :owner,
-      :share_invitation_id)
+      :share_invitation_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

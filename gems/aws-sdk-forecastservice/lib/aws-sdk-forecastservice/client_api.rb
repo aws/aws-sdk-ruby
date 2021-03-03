@@ -148,6 +148,7 @@ module Aws::ForecastService
     SchemaAttributes = Shapes::ListShape.new(name: 'SchemaAttributes')
     Statistics = Shapes::StructureShape.new(name: 'Statistics')
     Status = Shapes::StringShape.new(name: 'Status')
+    StopResourceRequest = Shapes::StructureShape.new(name: 'StopResourceRequest')
     String = Shapes::StringShape.new(name: 'String')
     SupplementaryFeature = Shapes::StructureShape.new(name: 'SupplementaryFeature')
     SupplementaryFeatures = Shapes::ListShape.new(name: 'SupplementaryFeatures')
@@ -687,6 +688,9 @@ module Aws::ForecastService
     Statistics.add_member(:stddev, Shapes::ShapeRef.new(shape: Double, location_name: "Stddev"))
     Statistics.struct_class = Types::Statistics
 
+    StopResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    StopResourceRequest.struct_class = Types::StopResourceRequest
+
     SupplementaryFeature.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     SupplementaryFeature.add_member(:value, Shapes::ShapeRef.new(shape: Value, required: true, location_name: "Value"))
     SupplementaryFeature.struct_class = Types::SupplementaryFeature
@@ -1131,6 +1135,17 @@ module Aws::ForecastService
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:stop_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

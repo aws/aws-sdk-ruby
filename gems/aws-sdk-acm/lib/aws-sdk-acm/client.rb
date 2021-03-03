@@ -367,8 +367,8 @@ module Aws::ACM
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][1].
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1].
     #
     #
     #
@@ -418,8 +418,8 @@ module Aws::ACM
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][1].
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1].
     #
     #
     #
@@ -450,8 +450,8 @@ module Aws::ACM
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][1].
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1].
     #
     #
     #
@@ -592,6 +592,26 @@ module Aws::ACM
       req.send_request(options)
     end
 
+    # Returns the account configuration options associated with an AWS
+    # account.
+    #
+    # @return [Types::GetAccountConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccountConfigurationResponse#expiry_events #expiry_events} => Types::ExpiryEventsConfiguration
+    #
+    # @example Response structure
+    #
+    #   resp.expiry_events.days_before_expiry #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetAccountConfiguration AWS API Documentation
+    #
+    # @overload get_account_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_account_configuration(params = {}, options = {})
+      req = build_request(:get_account_configuration, params)
+      req.send_request(options)
+    end
+
     # Retrieves an Amazon-issued certificate and its certificate chain. The
     # chain consists of the certificate of the issuing CA and the
     # intermediate certificates of any other subordinate CAs. All of the
@@ -607,8 +627,8 @@ module Aws::ACM
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][1].
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1].
     #
     #
     #
@@ -661,6 +681,8 @@ module Aws::ACM
     # * The private key must be unencrypted. You cannot import a private key
     #   that is protected by a password or a passphrase.
     #
+    # * The private key must be no larger than 5 KB (5,120 bytes).
+    #
     # * If the certificate you are importing is not self-signed, you must
     #   enter its certificate chain.
     #
@@ -679,13 +701,13 @@ module Aws::ACM
     #
     # * To import a new certificate, omit the `CertificateArn` argument.
     #   Include this argument only when you want to replace a previously
-    #   imported certifica
+    #   imported certificate.
     #
     # * When you import a certificate by using the CLI, you must specify the
     #   certificate, the certificate chain, and the private key by their
-    #   file names preceded by `file://`. For example, you can specify a
+    #   file names preceded by `fileb://`. For example, you can specify a
     #   certificate saved in the `C:\temp` folder as
-    #   `file://C:\temp\certificate_to_import.pem`. If you are making an
+    #   `fileb://C:\temp\certificate_to_import.pem`. If you are making an
     #   HTTP or HTTPS Query request, include these arguments as BLOBs.
     #
     # * When you import a certificate by using an SDK, you must specify the
@@ -833,8 +855,8 @@ module Aws::ACM
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][1].
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1].
     #
     #
     #
@@ -865,6 +887,45 @@ module Aws::ACM
       req.send_request(options)
     end
 
+    # Adds or modifies account-level configurations in ACM.
+    #
+    # The supported configuration option is `DaysBeforeExpiry`. This option
+    # specifies the number of days prior to certificate expiration when ACM
+    # starts generating `EventBridge` events. ACM sends one event per day
+    # per certificate until the certificate expires. By default, accounts
+    # receive events starting 45 days before certificate expiration.
+    #
+    # @option params [Types::ExpiryEventsConfiguration] :expiry_events
+    #   Specifies expiration events associated with an account.
+    #
+    # @option params [required, String] :idempotency_token
+    #   Customer-chosen string used to distinguish between calls to
+    #   `PutAccountConfiguration`. Idempotency tokens time out after one hour.
+    #   If you call `PutAccountConfiguration` multiple times with the same
+    #   unexpired idempotency token, ACM treats it as the same request and
+    #   returns the original result. If you change the idempotency token for
+    #   each call, ACM treats each call as a new request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_account_configuration({
+    #     expiry_events: {
+    #       days_before_expiry: 1,
+    #     },
+    #     idempotency_token: "IdempotencyToken", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/PutAccountConfiguration AWS API Documentation
+    #
+    # @overload put_account_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_account_configuration(params = {}, options = {})
+      req = build_request(:put_account_configuration, params)
+      req.send_request(options)
+    end
+
     # Remove one or more tags from an ACM certificate. A tag consists of a
     # key-value pair. If you do not specify the value portion of the tag
     # when calling this function, the tag will be removed regardless of
@@ -881,8 +942,8 @@ module Aws::ACM
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][1].
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1].
     #
     #
     #
@@ -914,7 +975,7 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Renews an eligable ACM certificate. At this time, only exported
+    # Renews an eligible ACM certificate. At this time, only exported
     # private certificates can be renewed with this operation. In order to
     # renew your ACM PCA certificates with ACM, you must first [grant the
     # ACM service principal permission to do so][1]. For more information,
@@ -931,8 +992,8 @@ module Aws::ACM
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][1].
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1].
     #
     #
     #
@@ -1233,7 +1294,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

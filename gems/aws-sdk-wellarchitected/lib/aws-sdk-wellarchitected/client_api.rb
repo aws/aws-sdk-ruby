@@ -92,6 +92,8 @@ module Aws::WellArchitected
     ListShareInvitationsInput = Shapes::StructureShape.new(name: 'ListShareInvitationsInput')
     ListShareInvitationsMaxResults = Shapes::IntegerShape.new(name: 'ListShareInvitationsMaxResults')
     ListShareInvitationsOutput = Shapes::StructureShape.new(name: 'ListShareInvitationsOutput')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     ListWorkloadSharesInput = Shapes::StructureShape.new(name: 'ListWorkloadSharesInput')
     ListWorkloadSharesMaxResults = Shapes::IntegerShape.new(name: 'ListWorkloadSharesMaxResults')
     ListWorkloadSharesOutput = Shapes::StructureShape.new(name: 'ListWorkloadSharesOutput')
@@ -138,8 +140,16 @@ module Aws::WellArchitected
     ShareStatus = Shapes::StringShape.new(name: 'ShareStatus')
     SharedWith = Shapes::StringShape.new(name: 'SharedWith')
     SharedWithPrefix = Shapes::StringShape.new(name: 'SharedWithPrefix')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagMap = Shapes::MapShape.new(name: 'TagMap')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateAnswerInput = Shapes::StructureShape.new(name: 'UpdateAnswerInput')
     UpdateAnswerOutput = Shapes::StructureShape.new(name: 'UpdateAnswerOutput')
     UpdateLensReviewInput = Shapes::StructureShape.new(name: 'UpdateLensReviewInput')
@@ -247,6 +257,7 @@ module Aws::WellArchitected
     CreateWorkloadInput.add_member(:lenses, Shapes::ShapeRef.new(shape: WorkloadLenses, required: true, location_name: "Lenses"))
     CreateWorkloadInput.add_member(:notes, Shapes::ShapeRef.new(shape: Notes, location_name: "Notes"))
     CreateWorkloadInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateWorkloadInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateWorkloadInput.struct_class = Types::CreateWorkloadInput
 
     CreateWorkloadOutput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
@@ -464,6 +475,12 @@ module Aws::WellArchitected
     ListShareInvitationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListShareInvitationsOutput.struct_class = Types::ListShareInvitationsOutput
 
+    ListTagsForResourceInput.add_member(:workload_arn, Shapes::ShapeRef.new(shape: WorkloadArn, required: true, location: "uri", location_name: "WorkloadArn"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
     ListWorkloadSharesInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
     ListWorkloadSharesInput.add_member(:shared_with_prefix, Shapes::ShapeRef.new(shape: SharedWithPrefix, location: "querystring", location_name: "SharedWithPrefix"))
     ListWorkloadSharesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
@@ -560,10 +577,27 @@ module Aws::WellArchitected
     ShareInvitationSummary.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
     ShareInvitationSummary.struct_class = Types::ShareInvitationSummary
 
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
+    TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TagResourceInput.add_member(:workload_arn, Shapes::ShapeRef.new(shape: WorkloadArn, required: true, location: "uri", location_name: "WorkloadArn"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagResourceOutput.struct_class = Types::TagResourceOutput
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "Message"))
     ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: QuotaCode, location_name: "QuotaCode"))
     ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    UntagResourceInput.add_member(:workload_arn, Shapes::ShapeRef.new(shape: WorkloadArn, required: true, location: "uri", location_name: "WorkloadArn"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
+
+    UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
     UpdateAnswerInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
     UpdateAnswerInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
@@ -666,6 +700,7 @@ module Aws::WellArchitected
     Workload.add_member(:lenses, Shapes::ShapeRef.new(shape: WorkloadLenses, location_name: "Lenses"))
     Workload.add_member(:owner, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "Owner"))
     Workload.add_member(:share_invitation_id, Shapes::ShapeRef.new(shape: ShareInvitationId, location_name: "ShareInvitationId"))
+    Workload.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     Workload.struct_class = Types::Workload
 
     WorkloadAccountIds.member = Shapes::ShapeRef.new(shape: AwsAccountId)
@@ -1034,6 +1069,16 @@ module Aws::WellArchitected
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{WorkloadArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:list_workload_shares, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListWorkloadShares"
         o.http_method = "GET"
@@ -1069,6 +1114,26 @@ module Aws::WellArchitected
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{WorkloadArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{WorkloadArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_answer, Seahorse::Model::Operation.new.tap do |o|

@@ -221,6 +221,7 @@ module Aws::CloudWatchEvents
     TestEventPatternRequest = Shapes::StructureShape.new(name: 'TestEventPatternRequest')
     TestEventPatternResponse = Shapes::StructureShape.new(name: 'TestEventPatternResponse')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TraceHeader = Shapes::StringShape.new(name: 'TraceHeader')
     TransformerInput = Shapes::StringShape.new(name: 'TransformerInput')
     TransformerPaths = Shapes::MapShape.new(name: 'TransformerPaths')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -589,6 +590,7 @@ module Aws::CloudWatchEvents
     PutEventsRequestEntry.add_member(:detail_type, Shapes::ShapeRef.new(shape: String, location_name: "DetailType"))
     PutEventsRequestEntry.add_member(:detail, Shapes::ShapeRef.new(shape: String, location_name: "Detail"))
     PutEventsRequestEntry.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: NonPartnerEventBusNameOrArn, location_name: "EventBusName"))
+    PutEventsRequestEntry.add_member(:trace_header, Shapes::ShapeRef.new(shape: TraceHeader, location_name: "TraceHeader"))
     PutEventsRequestEntry.struct_class = Types::PutEventsRequestEntry
 
     PutEventsRequestEntryList.member = Shapes::ShapeRef.new(shape: PutEventsRequestEntry)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2021-03-03)
+------------------
+
+* Feature - Added new StopResource operation that stops Amazon Forecast resource jobs that are in progress.
+
 1.15.0 (2021-02-02)
 ------------------
 

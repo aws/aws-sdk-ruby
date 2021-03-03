@@ -545,6 +545,9 @@ module Aws::WellArchitected
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to be associated with the workload.
+    #
     # @return [Types::CreateWorkloadOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkloadOutput#workload_id #workload_id} => String
@@ -567,6 +570,9 @@ module Aws::WellArchitected
     #     lenses: ["LensAlias"], # required
     #     notes: "Notes",
     #     client_request_token: "ClientRequestToken", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1044,6 +1050,8 @@ module Aws::WellArchitected
     #   resp.milestone.workload.lenses[0] #=> String
     #   resp.milestone.workload.owner #=> String
     #   resp.milestone.workload.share_invitation_id #=> String
+    #   resp.milestone.workload.tags #=> Hash
+    #   resp.milestone.workload.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetMilestone AWS API Documentation
     #
@@ -1100,6 +1108,8 @@ module Aws::WellArchitected
     #   resp.workload.lenses[0] #=> String
     #   resp.workload.owner #=> String
     #   resp.workload.share_invitation_id #=> String
+    #   resp.workload.tags #=> Hash
+    #   resp.workload.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetWorkload AWS API Documentation
     #
@@ -1504,6 +1514,35 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
+    # List the tags for a resource.
+    #
+    # @option params [required, String] :workload_arn
+    #   The ARN for the workload.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     workload_arn: "WorkloadArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # List the workload shares associated with the workload.
     #
     # @option params [required, String] :workload_id
@@ -1606,7 +1645,61 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
-    # Update the answer.
+    # Adds one or more tags to the specified resource.
+    #
+    # @option params [required, String] :workload_arn
+    #   The ARN for the workload.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags for the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     workload_arn: "WorkloadArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deletes specified tags from a resource.
+    #
+    # @option params [required, String] :workload_arn
+    #   The ARN for the workload.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of the tags to be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     workload_arn: "WorkloadArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Update the answer to a specific question in a workload review.
     #
     # @option params [required, String] :workload_id
     #   The ID assigned to the workload. This ID is unique within an AWS
@@ -1942,6 +2035,8 @@ module Aws::WellArchitected
     #   resp.workload.lenses[0] #=> String
     #   resp.workload.owner #=> String
     #   resp.workload.share_invitation_id #=> String
+    #   resp.workload.tags #=> Hash
+    #   resp.workload.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateWorkload AWS API Documentation
     #
@@ -2060,7 +2155,7 @@ module Aws::WellArchitected
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wellarchitected'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
