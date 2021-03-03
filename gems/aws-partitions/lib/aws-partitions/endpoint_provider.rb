@@ -66,7 +66,7 @@ module Aws
         service_cfg = partition.fetch('services', {}).fetch(service, {})
 
         # Find the default endpoint
-        endpoint = service_cfg
+        default_endpoint = service_cfg
                    .fetch('defaults', {})
                    .fetch('hostname', partition['defaults']['hostname'])
 
@@ -77,15 +77,18 @@ module Aws
                      sts_regional_endpoints == 'legacy' &&
                      STS_LEGACY_REGIONS.include?(region)
 
+        is_global = !endpoints.key?(region) &&
+                    service_cfg['isRegionalized'] == false
+
         # Check for global endpoint.
-        if sts_legacy || (!endpoints.key?(region) && service_cfg['isRegionalized'] == false)
+        if sts_legacy || is_global
           region = service_cfg.fetch('partitionEndpoint', region)
         end
 
         # Check for service/region level endpoint.
         endpoint = endpoints
                    .fetch(region, {})
-                   .fetch('hostname', endpoint)
+                   .fetch('hostname', default_endpoint)
 
         # Replace placeholders from the endpoints
         endpoint.sub('{region}', region)
