@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix an issue where services without regionalized endpoints do not resolve to a provided FIPS global region.
+
 1.431.0 (2021-03-04)
 ------------------
 
