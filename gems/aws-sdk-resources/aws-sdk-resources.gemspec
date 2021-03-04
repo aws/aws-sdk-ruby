@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
-  spec.email         = ['trevrowe@amazon.com']
-  spec.files         = Dir['lib/**/*.rb']
+  spec.email         = ['aws-dr-rubygems@amazon.com']
+  spec.files         = Dir['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb']
   spec.bindir        = 'bin'
   spec.executables   << 'aws-v3.rb'
 

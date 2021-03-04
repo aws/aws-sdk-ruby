@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-03-03)
+------------------
+
+* Feature - Adds 2 new APIs to add and retrieve account configuration in AWS Certificate Manager.
+
 1.39.0 (2021-02-02)
 ------------------
 

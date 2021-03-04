@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-03-02)
+------------------
+
+* Feature - Additional API Support to update NFS/SMB/ObjectStorage locations
+
 1.29.0 (2021-02-02)
 ------------------
 

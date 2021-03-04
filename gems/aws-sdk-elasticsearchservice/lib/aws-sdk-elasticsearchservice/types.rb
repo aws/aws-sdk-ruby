@@ -789,6 +789,12 @@ module Aws::ElasticsearchService
     #             },
     #           ],
     #         },
+    #         tag_list: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] domain_name
@@ -886,6 +892,10 @@ module Aws::ElasticsearchService
     #   Specifies Auto-Tune options.
     #   @return [Types::AutoTuneOptionsInput]
     #
+    # @!attribute [rw] tag_list
+    #   A list of `Tag` added during domain creation.
+    #   @return [Array<Types::Tag>]
+    #
     class CreateElasticsearchDomainRequest < Struct.new(
       :domain_name,
       :elasticsearch_version,
@@ -901,7 +911,8 @@ module Aws::ElasticsearchService
       :log_publishing_options,
       :domain_endpoint_options,
       :advanced_security_options,
-      :auto_tune_options)
+      :auto_tune_options,
+      :tag_list)
       SENSITIVE = []
       include Aws::Structure
     end

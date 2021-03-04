@@ -763,6 +763,17 @@ module Aws::CodeBuild
     #   the batch build.
     #   @return [Array<Types::BuildGroup>]
     #
+    # @!attribute [rw] debug_session_enabled
+    #   Specifies if session debugging is enabled for this batch build. For
+    #   more information, see [Viewing a running build in Session
+    #   Manager][1]. Batch session debugging is not supported for matrix
+    #   batch builds.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildBatch AWS API Documentation
     #
     class BuildBatch < Struct.new(
@@ -794,7 +805,8 @@ module Aws::CodeBuild
       :build_batch_number,
       :file_system_locations,
       :build_batch_config,
-      :build_groups)
+      :build_groups,
+      :debug_session_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4387,7 +4399,7 @@ module Aws::CodeBuild
     #
     #   * `NO_SOURCE`\: The project does not have input source code.
     #
-    #   * `S3`\: The source code is in an Amazon S3 input bucket.
+    #   * `S3`\: The source code is in an Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -4513,7 +4525,9 @@ module Aws::CodeBuild
     #   @return [Boolean]
     #
     # @!attribute [rw] source_identifier
-    #   An identifier for this project source.
+    #   An identifier for this project source. The identifier can only
+    #   contain alphanumeric characters and underscores, and must be less
+    #   than 128 characters in length.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectSource AWS API Documentation
@@ -4544,7 +4558,9 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] source_identifier
-    #   An identifier for a source in the build project.
+    #   An identifier for a source in the build project. The identifier can
+    #   only contain alphanumeric characters and underscores, and must be
+    #   less than 128 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] source_version
@@ -5363,6 +5379,7 @@ module Aws::CodeBuild
     #           },
     #           timeout_in_mins: 1,
     #         },
+    #         debug_session_enabled: false,
     #       }
     #
     # @!attribute [rw] project_name
@@ -5603,6 +5620,17 @@ module Aws::CodeBuild
     #   configuration overrides.
     #   @return [Types::ProjectBuildBatchConfig]
     #
+    # @!attribute [rw] debug_session_enabled
+    #   Specifies if session debugging is enabled for this batch build. For
+    #   more information, see [Viewing a running build in Session
+    #   Manager][1]. Batch session debugging is not supported for matrix
+    #   batch builds.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildBatchInput AWS API Documentation
     #
     class StartBuildBatchInput < Struct.new(
@@ -5635,7 +5663,8 @@ module Aws::CodeBuild
       :logs_config_override,
       :registry_credential_override,
       :image_pull_credentials_type_override,
-      :build_batch_config_override)
+      :build_batch_config_override,
+      :debug_session_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

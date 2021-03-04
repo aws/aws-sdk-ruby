@@ -24,6 +24,7 @@ module AwsSdkCodeGenerator
           y.yield('features/smoke_step_definitions.rb', smoke_step_definitions_file)
         end
         y.yield('VERSION', version_file)
+        y.yield('LICENSE.txt', license_file)
         code = CodeBuilder.new(@options)
         code.source_files.each do |path, code|
           y.yield("lib/#{path}", code)
@@ -61,5 +62,8 @@ module AwsSdkCodeGenerator
       Views::Version.new(options).render
     end
 
+    def license_file
+      File.read(File.expand_path('../../../templates/license.txt',__FILE__ ))
+    end
   end
 end

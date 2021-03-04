@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.0.2 (2021-03-04)
+------------------
+
+* Issue - Include LICENSE, CHANGELOG, and VERSION files with this gem.
+
 1.0.1 (2017-08-31)
 ------------------
 
@@ -10,4 +15,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of the `aws-sigv2` gem.
-

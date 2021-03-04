@@ -88,6 +88,12 @@ module Aws::IoTWireless
     #           app_server_private_key: "AppServerPrivateKey",
     #         },
     #         client_request_token: "ClientRequestToken",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] sidewalk
@@ -104,9 +110,15 @@ module Aws::IoTWireless
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags attached to the specified resource. Tags are metadata that
+    #   can be used to manage a resource
+    #   @return [Array<Types::Tag>]
+    #
     class AssociateAwsAccountWithPartnerAccountRequest < Struct.new(
       :sidewalk,
-      :client_request_token)
+      :client_request_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -115,8 +127,13 @@ module Aws::IoTWireless
     #   The Sidewalk account credentials.
     #   @return [Types::SidewalkAccountInfo]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name of the resource.
+    #   @return [String]
+    #
     class AssociateAwsAccountWithPartnerAccountResponse < Struct.new(
-      :sidewalk)
+      :sidewalk,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -646,6 +663,12 @@ module Aws::IoTWireless
     #           },
     #         },
     #         client_request_token: "ClientRequestToken",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] auto_create_tasks
@@ -672,11 +695,17 @@ module Aws::IoTWireless
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags attached to the specified resource. Tags are metadata that
+    #   can be used to manage a resource
+    #   @return [Array<Types::Tag>]
+    #
     class CreateWirelessGatewayTaskDefinitionRequest < Struct.new(
       :auto_create_tasks,
       :name,
       :update,
-      :client_request_token)
+      :client_request_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -685,8 +714,13 @@ module Aws::IoTWireless
     #   The ID of the new wireless gateway task definition.
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name of the resource.
+    #   @return [String]
+    #
     class CreateWirelessGatewayTaskDefinitionResponse < Struct.new(
-      :id)
+      :id,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1349,8 +1383,8 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] lo_ra_wan_network_server_certificate_id
-    #   The ID of the certificate associated with the wireless gateway and
-    #   used for LoRaWANNetworkServer endpoint.
+    #   The ID of the certificate that is associated with the wireless
+    #   gateway and used for the LoRaWANNetworkServer endpoint.
     #   @return [String]
     #
     class GetWirelessGatewayCertificateResponse < Struct.new(
@@ -1514,10 +1548,15 @@ module Aws::IoTWireless
     #   Information about the gateways to update.
     #   @return [Types::UpdateWirelessGatewayTaskCreate]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name of the resource.
+    #   @return [String]
+    #
     class GetWirelessGatewayTaskDefinitionResponse < Struct.new(
       :auto_create_tasks,
       :name,
-      :update)
+      :update,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2751,9 +2790,14 @@ module Aws::IoTWireless
     #   The fingerprint of the Sidewalk application server private key.
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name of the resource.
+    #   @return [String]
+    #
     class SidewalkAccountInfoWithFingerprint < Struct.new(
       :amazon_id,
-      :fingerprint)
+      :fingerprint,
+      :arn)
       SENSITIVE = [:fingerprint]
       include Aws::Structure
     end
@@ -3150,9 +3194,14 @@ module Aws::IoTWireless
     #   The properties that relate to the LoRaWAN wireless gateway.
     #   @return [Types::LoRaWANUpdateGatewayTaskEntry]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name of the resource.
+    #   @return [String]
+    #
     class UpdateWirelessGatewayTaskEntry < Struct.new(
       :id,
-      :lo_ra_wan)
+      :lo_ra_wan,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end

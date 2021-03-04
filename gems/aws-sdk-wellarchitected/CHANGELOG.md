@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2021-03-03)
+------------------
+
+* Feature - This release supports tagging on AWS Well-Architected workloads.
+
 1.2.0 (2021-02-02)
 ------------------
 

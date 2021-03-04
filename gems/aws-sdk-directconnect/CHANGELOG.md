@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2021-03-02)
+------------------
+
+* Feature - Doc only update for AWS Direct Connect that fixes several customer-reported issues
+
 1.38.0 (2021-02-02)
 ------------------
 

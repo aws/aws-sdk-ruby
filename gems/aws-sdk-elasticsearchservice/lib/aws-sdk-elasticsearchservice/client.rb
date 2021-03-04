@@ -562,6 +562,9 @@ module Aws::ElasticsearchService
     # @option params [Types::AutoTuneOptionsInput] :auto_tune_options
     #   Specifies Auto-Tune options.
     #
+    # @option params [Array<Types::Tag>] :tag_list
+    #   A list of `Tag` added during domain creation.
+    #
     # @return [Types::CreateElasticsearchDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateElasticsearchDomainResponse#domain_status #domain_status} => Types::ElasticsearchDomainStatus
@@ -662,6 +665,12 @@ module Aws::ElasticsearchService
     #         },
     #       ],
     #     },
+    #     tag_list: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2801,7 +2810,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

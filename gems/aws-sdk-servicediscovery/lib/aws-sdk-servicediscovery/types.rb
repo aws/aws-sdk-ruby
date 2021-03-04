@@ -14,7 +14,7 @@ module Aws::ServiceDiscovery
     #   data as a hash:
     #
     #       {
-    #         name: "NamespaceName", # required
+    #         name: "NamespaceNameHttp", # required
     #         creator_request_id: "ResourceId",
     #         description: "ResourceDescription",
     #         tags: [
@@ -83,7 +83,7 @@ module Aws::ServiceDiscovery
     #   data as a hash:
     #
     #       {
-    #         name: "NamespaceName", # required
+    #         name: "NamespaceNamePrivate", # required
     #         creator_request_id: "ResourceId",
     #         description: "ResourceDescription",
     #         vpc: "ResourceId", # required
@@ -162,7 +162,7 @@ module Aws::ServiceDiscovery
     #   data as a hash:
     #
     #       {
-    #         name: "NamespaceName", # required
+    #         name: "NamespaceNamePublic", # required
     #         creator_request_id: "ResourceId",
     #         description: "ResourceDescription",
     #         tags: [
@@ -259,6 +259,7 @@ module Aws::ServiceDiscovery
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         type: "HTTP", # accepts HTTP
     #       }
     #
     # @!attribute [rw] name
@@ -278,6 +279,14 @@ module Aws::ServiceDiscovery
     #   and the namespace name, for example:
     #
     #   `_exampleservice._tcp.example.com`
+    #
+    #   <note markdown="1"> For a single DNS namespace, you cannot create two services with
+    #   names that differ only by case (such as EXAMPLE and example).
+    #   Otherwise, these services will have the same DNS name. However, you
+    #   can create multiple HTTP services with names that differ only by
+    #   case because HTTP services are case sensitive.
+    #
+    #    </note>
     #
     #
     #
@@ -344,6 +353,13 @@ module Aws::ServiceDiscovery
     #   a maximum length of 256 characters.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] type
+    #   If present, specifies that the service instances are only
+    #   discoverable using the `DiscoverInstances` API operation. No DNS
+    #   records will be registered for the service instances. The only valid
+    #   value is `HTTP`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateServiceRequest AWS API Documentation
     #
     class CreateServiceRequest < Struct.new(
@@ -354,7 +370,8 @@ module Aws::ServiceDiscovery
       :dns_config,
       :health_check_config,
       :health_check_custom_config,
-      :tags)
+      :tags,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2682,6 +2699,25 @@ module Aws::ServiceDiscovery
     #   instance.
     #   @return [Types::DnsConfig]
     #
+    # @!attribute [rw] type
+    #   Describes the systems that can be used to discover the service
+    #   instances.
+    #
+    #   DNS\_HTTP
+    #
+    #   : The service instances can be discovered using either DNS queries
+    #     or the `DiscoverInstances` API operation.
+    #
+    #   HTTP
+    #
+    #   : The service instances can only be discovered using the
+    #     `DiscoverInstances` API operation.
+    #
+    #   DNS
+    #
+    #   : Reserved.
+    #   @return [String]
+    #
     # @!attribute [rw] health_check_config
     #   *Public DNS and HTTP namespaces only.* A complex type that contains
     #   settings for an optional health check. If you specify settings for a
@@ -2728,6 +2764,7 @@ module Aws::ServiceDiscovery
       :description,
       :instance_count,
       :dns_config,
+      :type,
       :health_check_config,
       :health_check_custom_config,
       :create_date,
@@ -2949,6 +2986,25 @@ module Aws::ServiceDiscovery
     #   The name of the service.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   Describes the systems that can be used to discover the service
+    #   instances.
+    #
+    #   DNS\_HTTP
+    #
+    #   : The service instances can be discovered using either DNS queries
+    #     or the `DiscoverInstances` API operation.
+    #
+    #   HTTP
+    #
+    #   : The service instances can only be discovered using the
+    #     `DiscoverInstances` API operation.
+    #
+    #   DNS
+    #
+    #   : Reserved.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description that you specify when you create the service.
     #   @return [String]
@@ -3109,6 +3165,7 @@ module Aws::ServiceDiscovery
       :id,
       :arn,
       :name,
+      :type,
       :description,
       :instance_count,
       :dns_config,

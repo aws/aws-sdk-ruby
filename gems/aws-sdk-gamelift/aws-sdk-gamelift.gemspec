@@ -16,9 +16,9 @@ Gem::Specification.new do |spec|
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
-  spec.email         = ['trevrowe@amazon.com']
+  spec.email         = ['aws-dr-rubygems@amazon.com']
   spec.require_paths = ['lib']
-  spec.files         = Dir['lib/**/*.rb']
+  spec.files         = Dir['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb']
 
   spec.metadata = {
     'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-gamelift',

@@ -1143,8 +1143,10 @@ module Aws::Macie2
     end
 
     # (Deprecated) Disassociates a member account from its Amazon Macie
-    # administrator account. This operation has been replaced by the
-    # DisassociateFromAdministratorAccount operation.
+    # administrator account. This operation has been replaced by the <link
+    # linkend="DisassociateFromAdministratorAccount" />
+    #
+    # DisassociateFromAdministratorAccount</link> operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1762,7 +1764,9 @@ module Aws::Macie2
 
     # (Deprecated) Retrieves information about the Amazon Macie
     # administrator account for an account. This operation has been replaced
-    # by the GetAdministratorAccount operation.
+    # by the <link linkend="GetAdministratorAccount" />
+    #
+    # GetAdministratorAccount</link> operation.
     #
     # @return [Types::GetMasterAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2610,7 +2614,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

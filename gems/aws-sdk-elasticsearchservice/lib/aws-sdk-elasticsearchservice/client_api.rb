@@ -425,6 +425,7 @@ module Aws::ElasticsearchService
     CreateElasticsearchDomainRequest.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
     CreateElasticsearchDomainRequest.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsInput, location_name: "AdvancedSecurityOptions"))
     CreateElasticsearchDomainRequest.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsInput, location_name: "AutoTuneOptions"))
+    CreateElasticsearchDomainRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     CreateElasticsearchDomainRequest.struct_class = Types::CreateElasticsearchDomainRequest
 
     CreateElasticsearchDomainResponse.add_member(:domain_status, Shapes::ShapeRef.new(shape: ElasticsearchDomainStatus, location_name: "DomainStatus"))

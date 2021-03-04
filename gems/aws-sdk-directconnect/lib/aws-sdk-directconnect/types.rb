@@ -1947,7 +1947,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] virtual_gateway_id
-    #   The ID of the virtual private gateway.
+    #   The ID of the virtual private gateway or transit gateway.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAssociationsRequest AWS API Documentation

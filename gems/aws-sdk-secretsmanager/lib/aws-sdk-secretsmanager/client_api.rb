@@ -13,6 +13,7 @@ module Aws::SecretsManager
 
     include Seahorse::Model
 
+    AddReplicaRegionListType = Shapes::ListShape.new(name: 'AddReplicaRegionListType')
     AutomaticallyRotateAfterDaysType = Shapes::IntegerShape.new(name: 'AutomaticallyRotateAfterDaysType')
     BooleanType = Shapes::BooleanShape.new(name: 'BooleanType')
     CancelRotateSecretRequest = Shapes::StructureShape.new(name: 'CancelRotateSecretRequest')
@@ -78,6 +79,15 @@ module Aws::SecretsManager
     PutSecretValueResponse = Shapes::StructureShape.new(name: 'PutSecretValueResponse')
     RandomPasswordType = Shapes::StringShape.new(name: 'RandomPasswordType')
     RecoveryWindowInDaysType = Shapes::IntegerShape.new(name: 'RecoveryWindowInDaysType')
+    RegionType = Shapes::StringShape.new(name: 'RegionType')
+    RemoveRegionsFromReplicationRequest = Shapes::StructureShape.new(name: 'RemoveRegionsFromReplicationRequest')
+    RemoveRegionsFromReplicationResponse = Shapes::StructureShape.new(name: 'RemoveRegionsFromReplicationResponse')
+    RemoveReplicaRegionListType = Shapes::ListShape.new(name: 'RemoveReplicaRegionListType')
+    ReplicaRegionType = Shapes::StructureShape.new(name: 'ReplicaRegionType')
+    ReplicateSecretToRegionsRequest = Shapes::StructureShape.new(name: 'ReplicateSecretToRegionsRequest')
+    ReplicateSecretToRegionsResponse = Shapes::StructureShape.new(name: 'ReplicateSecretToRegionsResponse')
+    ReplicationStatusListType = Shapes::ListShape.new(name: 'ReplicationStatusListType')
+    ReplicationStatusType = Shapes::StructureShape.new(name: 'ReplicationStatusType')
     RequireEachIncludedTypeType = Shapes::BooleanShape.new(name: 'RequireEachIncludedTypeType')
     ResourceExistsException = Shapes::StructureShape.new(name: 'ResourceExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -102,6 +112,10 @@ module Aws::SecretsManager
     SecretVersionsListType = Shapes::ListShape.new(name: 'SecretVersionsListType')
     SecretVersionsToStagesMapType = Shapes::MapShape.new(name: 'SecretVersionsToStagesMapType')
     SortOrderType = Shapes::StringShape.new(name: 'SortOrderType')
+    StatusMessageType = Shapes::StringShape.new(name: 'StatusMessageType')
+    StatusType = Shapes::StringShape.new(name: 'StatusType')
+    StopReplicationToReplicaRequest = Shapes::StructureShape.new(name: 'StopReplicationToReplicaRequest')
+    StopReplicationToReplicaResponse = Shapes::StructureShape.new(name: 'StopReplicationToReplicaResponse')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKeyListType = Shapes::ListShape.new(name: 'TagKeyListType')
     TagKeyType = Shapes::StringShape.new(name: 'TagKeyType')
@@ -119,6 +133,8 @@ module Aws::SecretsManager
     ValidationErrorsEntry = Shapes::StructureShape.new(name: 'ValidationErrorsEntry')
     ValidationErrorsType = Shapes::ListShape.new(name: 'ValidationErrorsType')
 
+    AddReplicaRegionListType.member = Shapes::ShapeRef.new(shape: ReplicaRegionType)
+
     CancelRotateSecretRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
     CancelRotateSecretRequest.struct_class = Types::CancelRotateSecretRequest
 
@@ -134,11 +150,14 @@ module Aws::SecretsManager
     CreateSecretRequest.add_member(:secret_binary, Shapes::ShapeRef.new(shape: SecretBinaryType, location_name: "SecretBinary"))
     CreateSecretRequest.add_member(:secret_string, Shapes::ShapeRef.new(shape: SecretStringType, location_name: "SecretString"))
     CreateSecretRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagListType, location_name: "Tags"))
+    CreateSecretRequest.add_member(:add_replica_regions, Shapes::ShapeRef.new(shape: AddReplicaRegionListType, location_name: "AddReplicaRegions"))
+    CreateSecretRequest.add_member(:force_overwrite_replica_secret, Shapes::ShapeRef.new(shape: BooleanType, location_name: "ForceOverwriteReplicaSecret"))
     CreateSecretRequest.struct_class = Types::CreateSecretRequest
 
     CreateSecretResponse.add_member(:arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
     CreateSecretResponse.add_member(:name, Shapes::ShapeRef.new(shape: SecretNameType, location_name: "Name"))
     CreateSecretResponse.add_member(:version_id, Shapes::ShapeRef.new(shape: SecretVersionIdType, location_name: "VersionId"))
+    CreateSecretResponse.add_member(:replication_status, Shapes::ShapeRef.new(shape: ReplicationStatusListType, location_name: "ReplicationStatus"))
     CreateSecretResponse.struct_class = Types::CreateSecretResponse
 
     DecryptionFailure.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -179,6 +198,8 @@ module Aws::SecretsManager
     DescribeSecretResponse.add_member(:version_ids_to_stages, Shapes::ShapeRef.new(shape: SecretVersionsToStagesMapType, location_name: "VersionIdsToStages"))
     DescribeSecretResponse.add_member(:owning_service, Shapes::ShapeRef.new(shape: OwningServiceType, location_name: "OwningService"))
     DescribeSecretResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampType, location_name: "CreatedDate", metadata: {"box"=>true}))
+    DescribeSecretResponse.add_member(:primary_region, Shapes::ShapeRef.new(shape: RegionType, location_name: "PrimaryRegion"))
+    DescribeSecretResponse.add_member(:replication_status, Shapes::ShapeRef.new(shape: ReplicationStatusListType, location_name: "ReplicationStatus"))
     DescribeSecretResponse.struct_class = Types::DescribeSecretResponse
 
     EncryptionFailure.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -295,6 +316,38 @@ module Aws::SecretsManager
     PutSecretValueResponse.add_member(:version_stages, Shapes::ShapeRef.new(shape: SecretVersionStagesType, location_name: "VersionStages"))
     PutSecretValueResponse.struct_class = Types::PutSecretValueResponse
 
+    RemoveRegionsFromReplicationRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
+    RemoveRegionsFromReplicationRequest.add_member(:remove_replica_regions, Shapes::ShapeRef.new(shape: RemoveReplicaRegionListType, required: true, location_name: "RemoveReplicaRegions"))
+    RemoveRegionsFromReplicationRequest.struct_class = Types::RemoveRegionsFromReplicationRequest
+
+    RemoveRegionsFromReplicationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
+    RemoveRegionsFromReplicationResponse.add_member(:replication_status, Shapes::ShapeRef.new(shape: ReplicationStatusListType, location_name: "ReplicationStatus"))
+    RemoveRegionsFromReplicationResponse.struct_class = Types::RemoveRegionsFromReplicationResponse
+
+    RemoveReplicaRegionListType.member = Shapes::ShapeRef.new(shape: RegionType)
+
+    ReplicaRegionType.add_member(:region, Shapes::ShapeRef.new(shape: RegionType, location_name: "Region"))
+    ReplicaRegionType.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyIdType, location_name: "KmsKeyId"))
+    ReplicaRegionType.struct_class = Types::ReplicaRegionType
+
+    ReplicateSecretToRegionsRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
+    ReplicateSecretToRegionsRequest.add_member(:add_replica_regions, Shapes::ShapeRef.new(shape: AddReplicaRegionListType, required: true, location_name: "AddReplicaRegions"))
+    ReplicateSecretToRegionsRequest.add_member(:force_overwrite_replica_secret, Shapes::ShapeRef.new(shape: BooleanType, location_name: "ForceOverwriteReplicaSecret"))
+    ReplicateSecretToRegionsRequest.struct_class = Types::ReplicateSecretToRegionsRequest
+
+    ReplicateSecretToRegionsResponse.add_member(:arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
+    ReplicateSecretToRegionsResponse.add_member(:replication_status, Shapes::ShapeRef.new(shape: ReplicationStatusListType, location_name: "ReplicationStatus"))
+    ReplicateSecretToRegionsResponse.struct_class = Types::ReplicateSecretToRegionsResponse
+
+    ReplicationStatusListType.member = Shapes::ShapeRef.new(shape: ReplicationStatusType)
+
+    ReplicationStatusType.add_member(:region, Shapes::ShapeRef.new(shape: RegionType, location_name: "Region"))
+    ReplicationStatusType.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyIdType, location_name: "KmsKeyId"))
+    ReplicationStatusType.add_member(:status, Shapes::ShapeRef.new(shape: StatusType, location_name: "Status"))
+    ReplicationStatusType.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessageType, location_name: "StatusMessage"))
+    ReplicationStatusType.add_member(:last_accessed_date, Shapes::ShapeRef.new(shape: LastAccessedDateType, location_name: "LastAccessedDate"))
+    ReplicationStatusType.struct_class = Types::ReplicationStatusType
+
     ResourceExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceExistsException.struct_class = Types::ResourceExistsException
 
@@ -337,6 +390,7 @@ module Aws::SecretsManager
     SecretListEntry.add_member(:secret_versions_to_stages, Shapes::ShapeRef.new(shape: SecretVersionsToStagesMapType, location_name: "SecretVersionsToStages"))
     SecretListEntry.add_member(:owning_service, Shapes::ShapeRef.new(shape: OwningServiceType, location_name: "OwningService"))
     SecretListEntry.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampType, location_name: "CreatedDate", metadata: {"box"=>true}))
+    SecretListEntry.add_member(:primary_region, Shapes::ShapeRef.new(shape: RegionType, location_name: "PrimaryRegion"))
     SecretListEntry.struct_class = Types::SecretListEntry
 
     SecretListType.member = Shapes::ShapeRef.new(shape: SecretListEntry)
@@ -353,6 +407,12 @@ module Aws::SecretsManager
 
     SecretVersionsToStagesMapType.key = Shapes::ShapeRef.new(shape: SecretVersionIdType)
     SecretVersionsToStagesMapType.value = Shapes::ShapeRef.new(shape: SecretVersionStagesType)
+
+    StopReplicationToReplicaRequest.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretIdType, required: true, location_name: "SecretId"))
+    StopReplicationToReplicaRequest.struct_class = Types::StopReplicationToReplicaRequest
+
+    StopReplicationToReplicaResponse.add_member(:arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
+    StopReplicationToReplicaResponse.struct_class = Types::StopReplicationToReplicaResponse
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKeyType, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValueType, location_name: "Value"))
@@ -464,6 +524,7 @@ module Aws::SecretsManager
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:delete_secret, Seahorse::Model::Operation.new.tap do |o|
@@ -586,6 +647,30 @@ module Aws::SecretsManager
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
       end)
 
+      api.add_operation(:remove_regions_from_replication, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveRegionsFromReplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RemoveRegionsFromReplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: RemoveRegionsFromReplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+      end)
+
+      api.add_operation(:replicate_secret_to_regions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ReplicateSecretToRegions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ReplicateSecretToRegionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ReplicateSecretToRegionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+      end)
+
       api.add_operation(:restore_secret, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RestoreSecret"
         o.http_method = "POST"
@@ -608,6 +693,18 @@ module Aws::SecretsManager
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:stop_replication_to_replica, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopReplicationToReplica"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopReplicationToReplicaRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopReplicationToReplicaResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

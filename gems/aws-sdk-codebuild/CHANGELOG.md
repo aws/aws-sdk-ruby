@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2021-03-03)
+------------------
+
+* Feature - AWS CodeBuild now supports Session Manager debugging for batch builds.
+
 1.69.0 (2021-02-18)
 ------------------
 

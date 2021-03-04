@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2021-03-04)
+------------------
+
+* Feature - This release introduces a new MinWorker parameter to the CreateEnvironment and UpdateEnvironment APIs. MinWorker allows the users to set a minimum worker count for worker auto-scaling operations.
+
 1.1.0 (2021-02-02)
 ------------------
 

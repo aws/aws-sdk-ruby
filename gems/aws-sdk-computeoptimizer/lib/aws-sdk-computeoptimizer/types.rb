@@ -323,15 +323,22 @@ module Aws::ComputeOptimizer
     # @!attribute [rw] statistic
     #   The statistic of the utilization metric.
     #
-    #   The following statistics are available:
+    #   The Compute Optimizer API, AWS Command Line Interface (AWS CLI), and
+    #   SDKs return utilization metrics using only the `Maximum` statistic,
+    #   which is the highest value observed during the specified period.
     #
-    #   * `Average` - This is the value of Sum / SampleCount during the
-    #     specified period, or the average value observed during the
-    #     specified period.
+    #   The Compute Optimizer console displays graphs for some utilization
+    #   metrics using the `Average` statistic, which is the value of `Sum` /
+    #   `SampleCount` during the specified period. For more information, see
+    #   [Viewing resource recommendations][1] in the *AWS Compute Optimizer
+    #   User Guide*. You can also get averaged utilization metric data for
+    #   your resources using Amazon CloudWatch. For more information, see
+    #   the [Amazon CloudWatch User Guide][2].
     #
-    #   * `Maximum` - The highest value observed during the specified
-    #     period. Use this value to determine high volumes of activity for
-    #     your application.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -1678,6 +1685,23 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] statistic
     #   The statistic of the utilization metric.
+    #
+    #   The Compute Optimizer API, AWS Command Line Interface (AWS CLI), and
+    #   SDKs return utilization metrics using only the `Maximum` statistic,
+    #   which is the highest value observed during the specified period.
+    #
+    #   The Compute Optimizer console displays graphs for some utilization
+    #   metrics using the `Average` statistic, which is the value of `Sum` /
+    #   `SampleCount` during the specified period. For more information, see
+    #   [Viewing resource recommendations][1] in the *AWS Compute Optimizer
+    #   User Guide*. You can also get averaged utilization metric data for
+    #   your resources using Amazon CloudWatch. For more information, see
+    #   the [Amazon CloudWatch User Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -2237,15 +2261,22 @@ module Aws::ComputeOptimizer
     # @!attribute [rw] statistic
     #   The statistic of the utilization metric.
     #
-    #   The following statistics are available:
+    #   The Compute Optimizer API, AWS Command Line Interface (AWS CLI), and
+    #   SDKs return utilization metrics using only the `Maximum` statistic,
+    #   which is the highest value observed during the specified period.
     #
-    #   * `Average` - This is the value of Sum / SampleCount during the
-    #     specified period, or the average value observed during the
-    #     specified period.
+    #   The Compute Optimizer console displays graphs for some utilization
+    #   metrics using the `Average` statistic, which is the value of `Sum` /
+    #   `SampleCount` during the specified period. For more information, see
+    #   [Viewing resource recommendations][1] in the *AWS Compute Optimizer
+    #   User Guide*. You can also get averaged utilization metric data for
+    #   your resources using Amazon CloudWatch. For more information, see
+    #   the [Amazon CloudWatch User Guide][2].
     #
-    #   * `Maximum` - The highest value observed during the specified
-    #     period. Use this value to determine high volumes of activity for
-    #     your application.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html
     #   @return [String]
     #
     # @!attribute [rw] value

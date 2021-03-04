@@ -591,7 +591,9 @@ module Aws::Macie2
     #   number of objects that Amazon Macie can't analyze in one or more S3
     #   buckets. In a BucketMetadata object, this data is for a specific
     #   bucket. In a GetBucketStatisticsResponse object, this data is
-    #   aggregated for all the buckets in the query results.
+    #   aggregated for all the buckets in the query results. If versioning
+    #   is enabled for a bucket, total storage size values are based on the
+    #   size of the latest version of each applicable object in the bucket.
     #   @return [Types::ObjectLevelStatistics]
     #
     # @!attribute [rw] unclassifiable_object_size_in_bytes
@@ -599,7 +601,9 @@ module Aws::Macie2
     #   number of objects that Amazon Macie can't analyze in one or more S3
     #   buckets. In a BucketMetadata object, this data is for a specific
     #   bucket. In a GetBucketStatisticsResponse object, this data is
-    #   aggregated for all the buckets in the query results.
+    #   aggregated for all the buckets in the query results. If versioning
+    #   is enabled for a bucket, total storage size values are based on the
+    #   size of the latest version of each applicable object in the bucket.
     #   @return [Types::ObjectLevelStatistics]
     #
     # @!attribute [rw] versioning
@@ -1659,7 +1663,8 @@ module Aws::Macie2
     class DeleteMemberResponse < Aws::EmptyStructure; end
 
     # Specifies criteria for filtering, sorting, and paginating the results
-    # of a query for information about S3 buckets.
+    # of a query for statistical data and other information about S3
+    # buckets.
     #
     # @note When making an API call, you may pass DescribeBucketsRequest
     #   data as a hash:
@@ -2376,7 +2381,8 @@ module Aws::Macie2
     end
 
     # Provides the results of a query that retrieved aggregated statistical
-    # data for the S3 buckets that are owned by an account.
+    # data for all the S3 buckets that Amazon Macie monitors and analyzes
+    # for an account.
     #
     # @!attribute [rw] bucket_count
     #   @return [Integer]
@@ -2421,7 +2427,9 @@ module Aws::Macie2
     #   number of objects that Amazon Macie can't analyze in one or more S3
     #   buckets. In a BucketMetadata object, this data is for a specific
     #   bucket. In a GetBucketStatisticsResponse object, this data is
-    #   aggregated for all the buckets in the query results.
+    #   aggregated for all the buckets in the query results. If versioning
+    #   is enabled for a bucket, total storage size values are based on the
+    #   size of the latest version of each applicable object in the bucket.
     #   @return [Types::ObjectLevelStatistics]
     #
     # @!attribute [rw] unclassifiable_object_size_in_bytes
@@ -2429,7 +2437,9 @@ module Aws::Macie2
     #   number of objects that Amazon Macie can't analyze in one or more S3
     #   buckets. In a BucketMetadata object, this data is for a specific
     #   bucket. In a GetBucketStatisticsResponse object, this data is
-    #   aggregated for all the buckets in the query results.
+    #   aggregated for all the buckets in the query results. If versioning
+    #   is enabled for a bucket, total storage size values are based on the
+    #   size of the latest version of each applicable object in the bucket.
     #   @return [Types::ObjectLevelStatistics]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetBucketStatisticsResponse AWS API Documentation
@@ -4053,7 +4063,9 @@ module Aws::Macie2
     # of objects that Amazon Macie can't analyze in one or more S3 buckets.
     # In a BucketMetadata object, this data is for a specific bucket. In a
     # GetBucketStatisticsResponse object, this data is aggregated for all
-    # the buckets in the query results.
+    # the buckets in the query results. If versioning is enabled for a
+    # bucket, total storage size values are based on the size of the latest
+    # version of each applicable object in the bucket.
     #
     # @!attribute [rw] file_type
     #   @return [Integer]
@@ -5388,9 +5400,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies a condition for filtering the results of a query for the
-    # quotas and usage data that applies to one or more Amazon Macie
-    # accounts.
+    # Specifies a condition for filtering the results of a query for quota
+    # and usage data for one or more Amazon Macie accounts.
     #
     # @note When making an API call, you may pass UsageStatisticsFilter
     #   data as a hash:

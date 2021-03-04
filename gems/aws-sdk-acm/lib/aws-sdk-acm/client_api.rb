@@ -13,8 +13,10 @@ module Aws::ACM
 
     include Seahorse::Model
 
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AddTagsToCertificateRequest = Shapes::StructureShape.new(name: 'AddTagsToCertificateRequest')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AvailabilityErrorMessage = Shapes::StringShape.new(name: 'AvailabilityErrorMessage')
     CertificateBody = Shapes::StringShape.new(name: 'CertificateBody')
     CertificateBodyBlob = Shapes::BlobShape.new(name: 'CertificateBodyBlob')
     CertificateChain = Shapes::StringShape.new(name: 'CertificateChain')
@@ -27,6 +29,7 @@ module Aws::ACM
     CertificateSummaryList = Shapes::ListShape.new(name: 'CertificateSummaryList')
     CertificateTransparencyLoggingPreference = Shapes::StringShape.new(name: 'CertificateTransparencyLoggingPreference')
     CertificateType = Shapes::StringShape.new(name: 'CertificateType')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     DeleteCertificateRequest = Shapes::StructureShape.new(name: 'DeleteCertificateRequest')
     DescribeCertificateRequest = Shapes::StructureShape.new(name: 'DescribeCertificateRequest')
     DescribeCertificateResponse = Shapes::StructureShape.new(name: 'DescribeCertificateResponse')
@@ -37,6 +40,7 @@ module Aws::ACM
     DomainValidationList = Shapes::ListShape.new(name: 'DomainValidationList')
     DomainValidationOption = Shapes::StructureShape.new(name: 'DomainValidationOption')
     DomainValidationOptionList = Shapes::ListShape.new(name: 'DomainValidationOptionList')
+    ExpiryEventsConfiguration = Shapes::StructureShape.new(name: 'ExpiryEventsConfiguration')
     ExportCertificateRequest = Shapes::StructureShape.new(name: 'ExportCertificateRequest')
     ExportCertificateResponse = Shapes::StructureShape.new(name: 'ExportCertificateResponse')
     ExtendedKeyUsage = Shapes::StructureShape.new(name: 'ExtendedKeyUsage')
@@ -45,6 +49,7 @@ module Aws::ACM
     ExtendedKeyUsageName = Shapes::StringShape.new(name: 'ExtendedKeyUsageName')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     Filters = Shapes::StructureShape.new(name: 'Filters')
+    GetAccountConfigurationResponse = Shapes::StructureShape.new(name: 'GetAccountConfigurationResponse')
     GetCertificateRequest = Shapes::StructureShape.new(name: 'GetCertificateRequest')
     GetCertificateResponse = Shapes::StructureShape.new(name: 'GetCertificateResponse')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
@@ -71,8 +76,10 @@ module Aws::ACM
     MaxItems = Shapes::IntegerShape.new(name: 'MaxItems')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     PassphraseBlob = Shapes::BlobShape.new(name: 'PassphraseBlob')
+    PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
     PrivateKey = Shapes::StringShape.new(name: 'PrivateKey')
     PrivateKeyBlob = Shapes::BlobShape.new(name: 'PrivateKeyBlob')
+    PutAccountConfigurationRequest = Shapes::StructureShape.new(name: 'PutAccountConfigurationRequest')
     RecordType = Shapes::StringShape.new(name: 'RecordType')
     RemoveTagsFromCertificateRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromCertificateRequest')
     RenewCertificateRequest = Shapes::StructureShape.new(name: 'RenewCertificateRequest')
@@ -87,6 +94,7 @@ module Aws::ACM
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceRecord = Shapes::StructureShape.new(name: 'ResourceRecord')
     RevocationReason = Shapes::StringShape.new(name: 'RevocationReason')
+    ServiceErrorMessage = Shapes::StringShape.new(name: 'ServiceErrorMessage')
     String = Shapes::StringShape.new(name: 'String')
     TStamp = Shapes::TimestampShape.new(name: 'TStamp')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -94,10 +102,16 @@ module Aws::ACM
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagPolicyException = Shapes::StructureShape.new(name: 'TagPolicyException')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UpdateCertificateOptionsRequest = Shapes::StructureShape.new(name: 'UpdateCertificateOptionsRequest')
     ValidationEmailList = Shapes::ListShape.new(name: 'ValidationEmailList')
+    ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    ValidationExceptionMessage = Shapes::StringShape.new(name: 'ValidationExceptionMessage')
     ValidationMethod = Shapes::StringShape.new(name: 'ValidationMethod')
+
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ServiceErrorMessage, location_name: "Message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AddTagsToCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     AddTagsToCertificateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
@@ -142,6 +156,9 @@ module Aws::ACM
 
     CertificateSummaryList.member = Shapes::ShapeRef.new(shape: CertificateSummary)
 
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
+
     DeleteCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     DeleteCertificateRequest.struct_class = Types::DeleteCertificateRequest
 
@@ -169,6 +186,9 @@ module Aws::ACM
 
     DomainValidationOptionList.member = Shapes::ShapeRef.new(shape: DomainValidationOption)
 
+    ExpiryEventsConfiguration.add_member(:days_before_expiry, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "DaysBeforeExpiry"))
+    ExpiryEventsConfiguration.struct_class = Types::ExpiryEventsConfiguration
+
     ExportCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     ExportCertificateRequest.add_member(:passphrase, Shapes::ShapeRef.new(shape: PassphraseBlob, required: true, location_name: "Passphrase"))
     ExportCertificateRequest.struct_class = Types::ExportCertificateRequest
@@ -190,6 +210,9 @@ module Aws::ACM
     Filters.add_member(:key_usage, Shapes::ShapeRef.new(shape: KeyUsageFilterList, location_name: "keyUsage"))
     Filters.add_member(:key_types, Shapes::ShapeRef.new(shape: KeyAlgorithmList, location_name: "keyTypes"))
     Filters.struct_class = Types::Filters
+
+    GetAccountConfigurationResponse.add_member(:expiry_events, Shapes::ShapeRef.new(shape: ExpiryEventsConfiguration, location_name: "ExpiryEvents"))
+    GetAccountConfigurationResponse.struct_class = Types::GetAccountConfigurationResponse
 
     GetCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     GetCertificateRequest.struct_class = Types::GetCertificateRequest
@@ -256,6 +279,10 @@ module Aws::ACM
     ListTagsForCertificateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForCertificateResponse.struct_class = Types::ListTagsForCertificateResponse
 
+    PutAccountConfigurationRequest.add_member(:expiry_events, Shapes::ShapeRef.new(shape: ExpiryEventsConfiguration, location_name: "ExpiryEvents"))
+    PutAccountConfigurationRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "IdempotencyToken"))
+    PutAccountConfigurationRequest.struct_class = Types::PutAccountConfigurationRequest
+
     RemoveTagsFromCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     RemoveTagsFromCertificateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     RemoveTagsFromCertificateRequest.struct_class = Types::RemoveTagsFromCertificateRequest
@@ -310,6 +337,9 @@ module Aws::ACM
     TagPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     TagPolicyException.struct_class = Types::TagPolicyException
 
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: AvailabilityErrorMessage, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
     TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
 
@@ -318,6 +348,9 @@ module Aws::ACM
     UpdateCertificateOptionsRequest.struct_class = Types::UpdateCertificateOptionsRequest
 
     ValidationEmailList.member = Shapes::ShapeRef.new(shape: String)
+
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ValidationExceptionMessage, location_name: "message"))
+    ValidationException.struct_class = Types::ValidationException
 
 
     # @api private
@@ -350,6 +383,7 @@ module Aws::ACM
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -384,6 +418,16 @@ module Aws::ACM
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
       end)
 
+      api.add_operation(:get_account_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccountConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: GetAccountConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_certificate, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetCertificate"
         o.http_method = "POST"
@@ -407,6 +451,7 @@ module Aws::ACM
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
       end)
 
       api.add_operation(:list_certificates, Seahorse::Model::Operation.new.tap do |o|
@@ -434,6 +479,18 @@ module Aws::ACM
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
       end)
 
+      api.add_operation(:put_account_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAccountConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutAccountConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:remove_tags_from_certificate, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RemoveTagsFromCertificate"
         o.http_method = "POST"
@@ -445,6 +502,7 @@ module Aws::ACM
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
         o.errors << Shapes::ShapeRef.new(shape: TagPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:renew_certificate, Seahorse::Model::Operation.new.tap do |o|

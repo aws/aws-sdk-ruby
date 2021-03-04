@@ -377,6 +377,7 @@ module Aws::CodeBuild
     BuildBatch.add_member(:file_system_locations, Shapes::ShapeRef.new(shape: ProjectFileSystemLocations, location_name: "fileSystemLocations"))
     BuildBatch.add_member(:build_batch_config, Shapes::ShapeRef.new(shape: ProjectBuildBatchConfig, location_name: "buildBatchConfig"))
     BuildBatch.add_member(:build_groups, Shapes::ShapeRef.new(shape: BuildGroups, location_name: "buildGroups"))
+    BuildBatch.add_member(:debug_session_enabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "debugSessionEnabled"))
     BuildBatch.struct_class = Types::BuildBatch
 
     BuildBatchFilter.add_member(:status, Shapes::ShapeRef.new(shape: StatusType, location_name: "status"))
@@ -1037,6 +1038,7 @@ module Aws::CodeBuild
     StartBuildBatchInput.add_member(:registry_credential_override, Shapes::ShapeRef.new(shape: RegistryCredential, location_name: "registryCredentialOverride"))
     StartBuildBatchInput.add_member(:image_pull_credentials_type_override, Shapes::ShapeRef.new(shape: ImagePullCredentialsType, location_name: "imagePullCredentialsTypeOverride"))
     StartBuildBatchInput.add_member(:build_batch_config_override, Shapes::ShapeRef.new(shape: ProjectBuildBatchConfig, location_name: "buildBatchConfigOverride"))
+    StartBuildBatchInput.add_member(:debug_session_enabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "debugSessionEnabled"))
     StartBuildBatchInput.struct_class = Types::StartBuildBatchInput
 
     StartBuildBatchOutput.add_member(:build_batch, Shapes::ShapeRef.new(shape: BuildBatch, location_name: "buildBatch"))

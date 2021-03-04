@@ -2475,7 +2475,7 @@ module Aws::ForecastService
     #     export jobs, specify `IS_NOT`.
     #
     #   * `Key` - The name of the parameter to filter on. Valid values are
-    #     `PredictorBacktestExportJobArn` and `Status`.
+    #     `PredictorArn` and `Status`.
     #
     #   * `Value` - The value to match.
     #
@@ -2637,6 +2637,48 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
+    # Stops a resource.
+    #
+    # The resource undergoes the following states: `CREATE_STOPPING` and
+    # `CREATE_STOPPED`. You cannot resume a resource once it has been
+    # stopped.
+    #
+    # This operation can be applied to the following resources (and their
+    # corresponding child resources):
+    #
+    # * Dataset Import Job
+    #
+    # * Predictor Job
+    #
+    # * Forecast Job
+    #
+    # * Forecast Export Job
+    #
+    # * Predictor Backtest Export Job
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource to stop.
+    #   The supported ARNs are `DatasetImportJobArn`, `PredictorArn`,
+    #   `PredictorBacktestExportJobArn`, `ForecastArn`, and
+    #   `ForecastExportJobArn`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/StopResource AWS API Documentation
+    #
+    # @overload stop_resource(params = {})
+    # @param [Hash] params ({})
+    def stop_resource(params = {}, options = {})
+      req = build_request(:stop_resource, params)
+      req.send_request(options)
+    end
+
     # Associates the specified tags to a resource with the specified
     # `resourceArn`. If existing tags on a resource are not specified in the
     # request parameters, they are not changed. When a resource is deleted,
@@ -2776,7 +2818,7 @@ module Aws::ForecastService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-forecastservice'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

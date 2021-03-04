@@ -341,9 +341,14 @@ module Aws::IoTWireless
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags attached to the specified resource. Tags are metadata that
+    #   can be used to manage a resource
+    #
     # @return [Types::AssociateAwsAccountWithPartnerAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AssociateAwsAccountWithPartnerAccountResponse#sidewalk #sidewalk} => Types::SidewalkAccountInfo
+    #   * {Types::AssociateAwsAccountWithPartnerAccountResponse#arn #arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -353,12 +358,19 @@ module Aws::IoTWireless
     #       app_server_private_key: "AppServerPrivateKey",
     #     },
     #     client_request_token: "ClientRequestToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.sidewalk.amazon_id #=> String
     #   resp.sidewalk.app_server_private_key #=> String
+    #   resp.arn #=> String
     #
     # @overload associate_aws_account_with_partner_account(params = {})
     # @param [Hash] params ({})
@@ -834,9 +846,14 @@ module Aws::IoTWireless
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags attached to the specified resource. Tags are metadata that
+    #   can be used to manage a resource
+    #
     # @return [Types::CreateWirelessGatewayTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWirelessGatewayTaskDefinitionResponse#id #id} => String
+    #   * {Types::CreateWirelessGatewayTaskDefinitionResponse#arn #arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -862,11 +879,18 @@ module Aws::IoTWireless
     #       },
     #     },
     #     client_request_token: "ClientRequestToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.id #=> String
+    #   resp.arn #=> String
     #
     # @overload create_wireless_gateway_task_definition(params = {})
     # @param [Hash] params ({})
@@ -1215,6 +1239,7 @@ module Aws::IoTWireless
     #
     #   resp.sidewalk.amazon_id #=> String
     #   resp.sidewalk.fingerprint #=> String
+    #   resp.sidewalk.arn #=> String
     #   resp.account_linked #=> Boolean
     #
     # @overload get_partner_account(params = {})
@@ -1579,6 +1604,7 @@ module Aws::IoTWireless
     #   * {Types::GetWirelessGatewayTaskDefinitionResponse#auto_create_tasks #auto_create_tasks} => Boolean
     #   * {Types::GetWirelessGatewayTaskDefinitionResponse#name #name} => String
     #   * {Types::GetWirelessGatewayTaskDefinitionResponse#update #update} => Types::UpdateWirelessGatewayTaskCreate
+    #   * {Types::GetWirelessGatewayTaskDefinitionResponse#arn #arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1600,6 +1626,7 @@ module Aws::IoTWireless
     #   resp.update.lo_ra_wan.update_version.package_version #=> String
     #   resp.update.lo_ra_wan.update_version.model #=> String
     #   resp.update.lo_ra_wan.update_version.station #=> String
+    #   resp.arn #=> String
     #
     # @overload get_wireless_gateway_task_definition(params = {})
     # @param [Hash] params ({})
@@ -1717,6 +1744,7 @@ module Aws::IoTWireless
     #   resp.sidewalk #=> Array
     #   resp.sidewalk[0].amazon_id #=> String
     #   resp.sidewalk[0].fingerprint #=> String
+    #   resp.sidewalk[0].arn #=> String
     #
     # @overload list_partner_accounts(params = {})
     # @param [Hash] params ({})
@@ -1894,6 +1922,7 @@ module Aws::IoTWireless
     #   resp.task_definitions[0].lo_ra_wan.update_version.package_version #=> String
     #   resp.task_definitions[0].lo_ra_wan.update_version.model #=> String
     #   resp.task_definitions[0].lo_ra_wan.update_version.station #=> String
+    #   resp.task_definitions[0].arn #=> String
     #
     # @overload list_wireless_gateway_task_definitions(params = {})
     # @param [Hash] params ({})
@@ -2218,7 +2247,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2341,6 +2341,7 @@ module Aws::SageMaker
     #       s3_storage_config: { # required
     #         s3_uri: "S3Uri", # required
     #         kms_key_id: "KmsKeyId",
+    #         resolved_output_s3_uri: "S3Uri",
     #       },
     #       disable_glue_table_creation: false,
     #       data_catalog_config: {
@@ -8249,6 +8250,7 @@ module Aws::SageMaker
     #   resp.online_store_config.enable_online_store #=> Boolean
     #   resp.offline_store_config.s3_storage_config.s3_uri #=> String
     #   resp.offline_store_config.s3_storage_config.kms_key_id #=> String
+    #   resp.offline_store_config.s3_storage_config.resolved_output_s3_uri #=> String
     #   resp.offline_store_config.disable_glue_table_creation #=> Boolean
     #   resp.offline_store_config.data_catalog_config.table_name #=> String
     #   resp.offline_store_config.data_catalog_config.catalog #=> String
@@ -9811,6 +9813,12 @@ module Aws::SageMaker
     end
 
     # Returns information about a training job.
+    #
+    # Some of the attributes below only appear if the training job
+    # successfully starts. If the training job fails, `TrainingJobStatus` is
+    # `Failed` and, depending on the `FailureReason`, attributes like
+    # `TrainingStartTime`, `TrainingTimeInSeconds`, `TrainingEndTime`, and
+    # `BillableTimeInSeconds` may not be present in the response.
     #
     # @option params [required, String] :training_job_name
     #   The name of the training job.
@@ -15411,6 +15419,7 @@ module Aws::SageMaker
     #   resp.results[0].feature_group.online_store_config.enable_online_store #=> Boolean
     #   resp.results[0].feature_group.offline_store_config.s3_storage_config.s3_uri #=> String
     #   resp.results[0].feature_group.offline_store_config.s3_storage_config.kms_key_id #=> String
+    #   resp.results[0].feature_group.offline_store_config.s3_storage_config.resolved_output_s3_uri #=> String
     #   resp.results[0].feature_group.offline_store_config.disable_glue_table_creation #=> Boolean
     #   resp.results[0].feature_group.offline_store_config.data_catalog_config.table_name #=> String
     #   resp.results[0].feature_group.offline_store_config.data_catalog_config.catalog #=> String
@@ -17300,7 +17309,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

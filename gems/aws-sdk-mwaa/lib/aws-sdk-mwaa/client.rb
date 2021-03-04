@@ -418,6 +418,14 @@ module Aws::MWAA
     #   queue, MWAA disposes of the extra containers leaving the one worker
     #   that is included with your environment.
     #
+    # @option params [Integer] :min_workers
+    #   The minimum number of workers that you want to run in your
+    #   environment. MWAA scales the number of Apache Airflow workers and the
+    #   Fargate containers that run your tasks up to the number you specify in
+    #   the `MaxWorkers` field. When there are no more tasks running, and no
+    #   more in the queue, MWAA disposes of the extra containers leaving the
+    #   worker count you specify in the `MinWorkers` field.
+    #
     # @option params [required, String] :name
     #   The name of your MWAA environment.
     #
@@ -523,6 +531,7 @@ module Aws::MWAA
     #       },
     #     },
     #     max_workers: 1,
+    #     min_workers: 1,
     #     name: "EnvironmentName", # required
     #     network_configuration: { # required
     #       security_group_ids: ["SecurityGroupId"],
@@ -652,6 +661,7 @@ module Aws::MWAA
     #   resp.environment.logging_configuration.worker_logs.enabled #=> Boolean
     #   resp.environment.logging_configuration.worker_logs.log_level #=> String, one of "CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"
     #   resp.environment.max_workers #=> Integer
+    #   resp.environment.min_workers #=> Integer
     #   resp.environment.name #=> String
     #   resp.environment.network_configuration.security_group_ids #=> Array
     #   resp.environment.network_configuration.security_group_ids[0] #=> String
@@ -868,7 +878,12 @@ module Aws::MWAA
     #   The Logging Configuration to update of your Amazon MWAA environment.
     #
     # @option params [Integer] :max_workers
-    #   The Maximum Workers to update of your Amazon MWAA environment.
+    #   The maximum number of workers to update of your Amazon MWAA
+    #   environment.
+    #
+    # @option params [Integer] :min_workers
+    #   The minimum number of workers to update of your Amazon MWAA
+    #   environment.
     #
     # @option params [required, String] :name
     #   The name of your Amazon MWAA environment that you wish to update.
@@ -938,6 +953,7 @@ module Aws::MWAA
     #       },
     #     },
     #     max_workers: 1,
+    #     min_workers: 1,
     #     name: "EnvironmentName", # required
     #     network_configuration: {
     #       security_group_ids: ["SecurityGroupId"], # required
@@ -977,7 +993,7 @@ module Aws::MWAA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mwaa'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

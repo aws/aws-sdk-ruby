@@ -5458,6 +5458,7 @@ module Aws::SageMaker
 
     S3StorageConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     S3StorageConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    S3StorageConfig.add_member(:resolved_output_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "ResolvedOutputS3Uri"))
     S3StorageConfig.struct_class = Types::S3StorageConfig
 
     ScheduleConfig.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, required: true, location_name: "ScheduleExpression"))

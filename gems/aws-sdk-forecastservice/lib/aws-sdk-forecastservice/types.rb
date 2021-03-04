@@ -1158,16 +1158,15 @@ module Aws::ForecastService
     #   @return [Types::DataSource]
     #
     # @!attribute [rw] status
-    #   The status of the dataset import job. The status is reflected in the
-    #   status of the dataset. For example, when the import job status is
-    #   `CREATE_IN_PROGRESS`, the status of the dataset is
-    #   `UPDATE_IN_PROGRESS`. States include:
+    #   The status of the dataset import job. States include:
     #
     #   * `ACTIVE`
     #
     #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
     #
     #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
+    #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -1179,12 +1178,16 @@ module Aws::ForecastService
     #   @return [Time]
     #
     # @!attribute [rw] last_modification_time
-    #   The last time that the dataset was modified. The time depends on the
-    #   status of the job, as follows:
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
     #
-    #   * `CREATE_PENDING` - The same time as `CreationTime`.
+    #   * `CREATE_PENDING` - The `CreationTime`.
     #
     #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
     #
     #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
@@ -1543,16 +1546,15 @@ module Aws::ForecastService
     #   @return [Float]
     #
     # @!attribute [rw] status
-    #   The status of the dataset import job. The status is reflected in the
-    #   status of the dataset. For example, when the import job status is
-    #   `CREATE_IN_PROGRESS`, the status of the dataset is
-    #   `UPDATE_IN_PROGRESS`. States include:
+    #   The status of the dataset import job. States include:
     #
     #   * `ACTIVE`
     #
     #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
     #
     #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
+    #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -1564,12 +1566,16 @@ module Aws::ForecastService
     #   @return [Time]
     #
     # @!attribute [rw] last_modification_time
-    #   The last time that the dataset was modified. The time depends on the
-    #   status of the job, as follows:
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
     #
-    #   * `CREATE_PENDING` - The same time as `CreationTime`.
+    #   * `CREATE_PENDING` - The `CreationTime`.
     #
     #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
     #
     #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
@@ -1750,6 +1756,8 @@ module Aws::ForecastService
     #
     #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
     #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
+    #
     #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
     #
     #   <note markdown="1"> The `Status` of the forecast export job must be `ACTIVE` before you
@@ -1763,7 +1771,18 @@ module Aws::ForecastService
     #   @return [Time]
     #
     # @!attribute [rw] last_modification_time
-    #   When the last successful export job finished.
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeForecastExportJobResponse AWS API Documentation
@@ -1828,6 +1847,8 @@ module Aws::ForecastService
     #
     #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
     #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
+    #
     #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
     #
     #   <note markdown="1"> The `Status` of the forecast must be `ACTIVE` before you can query
@@ -1845,11 +1866,18 @@ module Aws::ForecastService
     #   @return [Time]
     #
     # @!attribute [rw] last_modification_time
-    #   Initially, the same as `CreationTime` (status is `CREATE_PENDING`).
-    #   Updated when inference (creating the forecast) starts (status
-    #   changed to `CREATE_IN_PROGRESS`), and when inference is complete
-    #   (status changed to `ACTIVE`) or fails (status changed to
-    #   `CREATE_FAILED`).
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeForecastResponse AWS API Documentation
@@ -1916,17 +1944,11 @@ module Aws::ForecastService
     #
     #   * `ACTIVE`
     #
-    #   * `CREATE_PENDING`
+    #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
     #
-    #   * `CREATE_IN_PROGRESS`
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
     #
-    #   * `CREATE_FAILED`
-    #
-    #   * `DELETE_PENDING`
-    #
-    #   * `DELETE_IN_PROGRESS`
-    #
-    #   * `DELETE_FAILED`
+    #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -1934,7 +1956,18 @@ module Aws::ForecastService
     #   @return [Time]
     #
     # @!attribute [rw] last_modification_time
-    #   When the last successful export job finished.
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribePredictorBacktestExportJobResponse AWS API Documentation
@@ -2062,7 +2095,7 @@ module Aws::ForecastService
     #
     #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
     #
-    #   * `UPDATE_PENDING`, `UPDATE_IN_PROGRESS`, `UPDATE_FAILED`
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
     #
     #   <note markdown="1"> The `Status` of the predictor must be `ACTIVE` before you can use
     #   the predictor to create a forecast.
@@ -2079,11 +2112,18 @@ module Aws::ForecastService
     #   @return [Time]
     #
     # @!attribute [rw] last_modification_time
-    #   Initially, the same as `CreationTime` (when the status is
-    #   `CREATE_PENDING`). This value is updated when training starts (when
-    #   the status changes to `CREATE_IN_PROGRESS`), and when training has
-    #   completed (when the status changes to `ACTIVE`) or fails (when the
-    #   status changes to `CREATE_FAILED`).
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribePredictorResponse AWS API Documentation
@@ -2515,6 +2555,8 @@ module Aws::ForecastService
     #
     #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
     #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
+    #
     #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
     #
     #   <note markdown="1"> The `Status` of the forecast export job must be `ACTIVE` before you
@@ -2532,7 +2574,18 @@ module Aws::ForecastService
     #   @return [Time]
     #
     # @!attribute [rw] last_modification_time
-    #   When the last successful export job finished.
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ForecastExportJobSummary AWS API Documentation
@@ -2578,6 +2631,8 @@ module Aws::ForecastService
     #
     #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
     #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
+    #
     #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
     #
     #   <note markdown="1"> The `Status` of the forecast must be `ACTIVE` before you can query
@@ -2595,11 +2650,18 @@ module Aws::ForecastService
     #   @return [Time]
     #
     # @!attribute [rw] last_modification_time
-    #   Initially, the same as `CreationTime` (status is `CREATE_PENDING`).
-    #   Updated when inference (creating the forecast) starts (status
-    #   changed to `CREATE_IN_PROGRESS`), and when inference is complete
-    #   (status changed to `ACTIVE`) or fails (status changed to
-    #   `CREATE_FAILED`).
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ForecastSummary AWS API Documentation
@@ -3220,7 +3282,7 @@ module Aws::ForecastService
     #     backtest export jobs, specify `IS_NOT`.
     #
     #   * `Key` - The name of the parameter to filter on. Valid values are
-    #     `PredictorBacktestExportJobArn` and `Status`.
+    #     `PredictorArn` and `Status`.
     #
     #   * `Value` - The value to match.
     #   @return [Array<Types::Filter>]
@@ -3476,17 +3538,11 @@ module Aws::ForecastService
     #
     #   * `ACTIVE`
     #
-    #   * `CREATE_PENDING`
+    #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
     #
-    #   * `CREATE_IN_PROGRESS`
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
     #
-    #   * `CREATE_FAILED`
-    #
-    #   * `DELETE_PENDING`
-    #
-    #   * `DELETE_IN_PROGRESS`
-    #
-    #   * `DELETE_FAILED`
+    #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -3499,7 +3555,18 @@ module Aws::ForecastService
     #   @return [Time]
     #
     # @!attribute [rw] last_modification_time
-    #   When the last successful export job finished.
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/PredictorBacktestExportJobSummary AWS API Documentation
@@ -3585,7 +3652,7 @@ module Aws::ForecastService
     #
     #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
     #
-    #   * `UPDATE_PENDING`, `UPDATE_IN_PROGRESS`, `UPDATE_FAILED`
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
     #
     #   <note markdown="1"> The `Status` of the predictor must be `ACTIVE` before you can use
     #   the predictor to create a forecast.
@@ -3602,10 +3669,18 @@ module Aws::ForecastService
     #   @return [Time]
     #
     # @!attribute [rw] last_modification_time
-    #   Initially, the same as `CreationTime` (status is `CREATE_PENDING`).
-    #   Updated when training starts (status changed to
-    #   `CREATE_IN_PROGRESS`), and when training is complete (status changed
-    #   to `ACTIVE`) or fails (status changed to `CREATE_FAILED`).
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/PredictorSummary AWS API Documentation
@@ -3813,6 +3888,28 @@ module Aws::ForecastService
       :max,
       :avg,
       :stddev)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource to stop.
+    #   The supported ARNs are `DatasetImportJobArn`, `PredictorArn`,
+    #   `PredictorBacktestExportJobArn`, `ForecastArn`, and
+    #   `ForecastExportJobArn`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/StopResourceRequest AWS API Documentation
+    #
+    class StopResourceRequest < Struct.new(
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end

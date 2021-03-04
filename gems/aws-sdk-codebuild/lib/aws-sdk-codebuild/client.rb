@@ -520,6 +520,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.build_batches[0].build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].location #=> String
     #   resp.build_batches[0].build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].identifier #=> String
+    #   resp.build_batches[0].debug_session_enabled #=> Boolean
     #   resp.build_batches_not_found #=> Array
     #   resp.build_batches_not_found[0] #=> String
     #
@@ -3288,6 +3289,7 @@ module Aws::CodeBuild
     #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].location #=> String
     #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].identifier #=> String
+    #   resp.build_batch.debug_session_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/RetryBuildBatch AWS API Documentation
     #
@@ -3982,6 +3984,15 @@ module Aws::CodeBuild
     #   A `BuildBatchConfigOverride` object that contains batch build
     #   configuration overrides.
     #
+    # @option params [Boolean] :debug_session_enabled
+    #   Specifies if session debugging is enabled for this batch build. For
+    #   more information, see [Viewing a running build in Session Manager][1].
+    #   Batch session debugging is not supported for matrix batch builds.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html
+    #
     # @return [Types::StartBuildBatchOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartBuildBatchOutput#build_batch #build_batch} => Types::BuildBatch
@@ -4104,6 +4115,7 @@ module Aws::CodeBuild
     #       },
     #       timeout_in_mins: 1,
     #     },
+    #     debug_session_enabled: false,
     #   })
     #
     # @example Response structure
@@ -4239,6 +4251,7 @@ module Aws::CodeBuild
     #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].location #=> String
     #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].identifier #=> String
+    #   resp.build_batch.debug_session_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildBatch AWS API Documentation
     #
@@ -4539,6 +4552,7 @@ module Aws::CodeBuild
     #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].location #=> String
     #   resp.build_batch.build_groups[0].prior_build_summary_list[0].secondary_artifacts[0].identifier #=> String
+    #   resp.build_batch.debug_session_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuildBatch AWS API Documentation
     #
@@ -5129,7 +5143,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

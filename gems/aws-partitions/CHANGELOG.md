@@ -3,10 +3,18 @@ Unreleased Changes
 
 * Issue - Fix an issue where services without regionalized endpoints do not resolve to a provided FIPS global region.
 
+1.431.0 (2021-03-04)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+* Issue - Include LICENSE, CHANGELOG, and VERSION files with this gem.
+
 1.430.0 (2021-03-01)
 ------------------
 
 * Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 
 1.429.0 (2021-02-23)
 ------------------

@@ -4828,6 +4828,7 @@ module Aws::SageMaker
     #           s3_storage_config: { # required
     #             s3_uri: "S3Uri", # required
     #             kms_key_id: "KmsKeyId",
+    #             resolved_output_s3_uri: "S3Uri",
     #           },
     #           disable_glue_table_creation: false,
     #           data_catalog_config: {
@@ -18546,7 +18547,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies details about how containers in a multi-container are run.
+    # Specifies details about how containers in a multi-container endpoint
+    # are run.
     #
     # @note When making an API call, you may pass InferenceExecutionConfig
     #   data as a hash:
@@ -26724,6 +26726,7 @@ module Aws::SageMaker
     #         s3_storage_config: { # required
     #           s3_uri: "S3Uri", # required
     #           kms_key_id: "KmsKeyId",
+    #           resolved_output_s3_uri: "S3Uri",
     #         },
     #         disable_glue_table_creation: false,
     #         data_catalog_config: {
@@ -29775,6 +29778,7 @@ module Aws::SageMaker
     #       {
     #         s3_uri: "S3Uri", # required
     #         kms_key_id: "KmsKeyId",
+    #         resolved_output_s3_uri: "S3Uri",
     #       }
     #
     # @!attribute [rw] s3_uri
@@ -29796,11 +29800,16 @@ module Aws::SageMaker
     #   ^
     #   @return [String]
     #
+    # @!attribute [rw] resolved_output_s3_uri
+    #   The S3 path where offline records are written.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/S3StorageConfig AWS API Documentation
     #
     class S3StorageConfig < Struct.new(
       :s3_uri,
-      :kms_key_id)
+      :kms_key_id,
+      :resolved_output_s3_uri)
       SENSITIVE = []
       include Aws::Structure
     end

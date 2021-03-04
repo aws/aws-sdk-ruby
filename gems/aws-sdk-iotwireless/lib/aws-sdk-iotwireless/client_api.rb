@@ -183,6 +183,7 @@ module Aws::IoTWireless
     OtaaV1_0_x = Shapes::StructureShape.new(name: 'OtaaV1_0_x')
     OtaaV1_1 = Shapes::StructureShape.new(name: 'OtaaV1_1')
     PackageVersion = Shapes::StringShape.new(name: 'PackageVersion')
+    PartnerAccountArn = Shapes::StringShape.new(name: 'PartnerAccountArn')
     PartnerAccountId = Shapes::StringShape.new(name: 'PartnerAccountId')
     PartnerType = Shapes::StringShape.new(name: 'PartnerType')
     PayloadData = Shapes::StringShape.new(name: 'PayloadData')
@@ -274,6 +275,7 @@ module Aws::IoTWireless
     WirelessGatewayServiceType = Shapes::StringShape.new(name: 'WirelessGatewayServiceType')
     WirelessGatewayStatistics = Shapes::StructureShape.new(name: 'WirelessGatewayStatistics')
     WirelessGatewayStatisticsList = Shapes::ListShape.new(name: 'WirelessGatewayStatisticsList')
+    WirelessGatewayTaskDefinitionArn = Shapes::StringShape.new(name: 'WirelessGatewayTaskDefinitionArn')
     WirelessGatewayTaskDefinitionId = Shapes::StringShape.new(name: 'WirelessGatewayTaskDefinitionId')
     WirelessGatewayTaskDefinitionList = Shapes::ListShape.new(name: 'WirelessGatewayTaskDefinitionList')
     WirelessGatewayTaskDefinitionType = Shapes::StringShape.new(name: 'WirelessGatewayTaskDefinitionType')
@@ -294,9 +296,11 @@ module Aws::IoTWireless
 
     AssociateAwsAccountWithPartnerAccountRequest.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkAccountInfo, required: true, location_name: "Sidewalk"))
     AssociateAwsAccountWithPartnerAccountRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    AssociateAwsAccountWithPartnerAccountRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     AssociateAwsAccountWithPartnerAccountRequest.struct_class = Types::AssociateAwsAccountWithPartnerAccountRequest
 
     AssociateAwsAccountWithPartnerAccountResponse.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkAccountInfo, location_name: "Sidewalk"))
+    AssociateAwsAccountWithPartnerAccountResponse.add_member(:arn, Shapes::ShapeRef.new(shape: PartnerAccountArn, location_name: "Arn"))
     AssociateAwsAccountWithPartnerAccountResponse.struct_class = Types::AssociateAwsAccountWithPartnerAccountResponse
 
     AssociateWirelessDeviceWithThingRequest.add_member(:id, Shapes::ShapeRef.new(shape: WirelessDeviceId, required: true, location: "uri", location_name: "Id"))
@@ -383,9 +387,11 @@ module Aws::IoTWireless
     CreateWirelessGatewayTaskDefinitionRequest.add_member(:name, Shapes::ShapeRef.new(shape: WirelessGatewayTaskName, location_name: "Name"))
     CreateWirelessGatewayTaskDefinitionRequest.add_member(:update, Shapes::ShapeRef.new(shape: UpdateWirelessGatewayTaskCreate, location_name: "Update"))
     CreateWirelessGatewayTaskDefinitionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateWirelessGatewayTaskDefinitionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateWirelessGatewayTaskDefinitionRequest.struct_class = Types::CreateWirelessGatewayTaskDefinitionRequest
 
     CreateWirelessGatewayTaskDefinitionResponse.add_member(:id, Shapes::ShapeRef.new(shape: WirelessGatewayTaskDefinitionId, location_name: "Id"))
+    CreateWirelessGatewayTaskDefinitionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: WirelessGatewayTaskDefinitionArn, location_name: "Arn"))
     CreateWirelessGatewayTaskDefinitionResponse.struct_class = Types::CreateWirelessGatewayTaskDefinitionResponse
 
     CreateWirelessGatewayTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: WirelessGatewayId, required: true, location: "uri", location_name: "Id"))
@@ -578,6 +584,7 @@ module Aws::IoTWireless
     GetWirelessGatewayTaskDefinitionResponse.add_member(:auto_create_tasks, Shapes::ShapeRef.new(shape: AutoCreateTasks, location_name: "AutoCreateTasks"))
     GetWirelessGatewayTaskDefinitionResponse.add_member(:name, Shapes::ShapeRef.new(shape: WirelessGatewayTaskName, location_name: "Name"))
     GetWirelessGatewayTaskDefinitionResponse.add_member(:update, Shapes::ShapeRef.new(shape: UpdateWirelessGatewayTaskCreate, location_name: "Update"))
+    GetWirelessGatewayTaskDefinitionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: WirelessGatewayTaskDefinitionArn, location_name: "Arn"))
     GetWirelessGatewayTaskDefinitionResponse.struct_class = Types::GetWirelessGatewayTaskDefinitionResponse
 
     GetWirelessGatewayTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: WirelessGatewayId, required: true, location: "uri", location_name: "Id"))
@@ -807,6 +814,7 @@ module Aws::IoTWireless
 
     SidewalkAccountInfoWithFingerprint.add_member(:amazon_id, Shapes::ShapeRef.new(shape: AmazonId, location_name: "AmazonId"))
     SidewalkAccountInfoWithFingerprint.add_member(:fingerprint, Shapes::ShapeRef.new(shape: Fingerprint, location_name: "Fingerprint"))
+    SidewalkAccountInfoWithFingerprint.add_member(:arn, Shapes::ShapeRef.new(shape: PartnerAccountArn, location_name: "Arn"))
     SidewalkAccountInfoWithFingerprint.struct_class = Types::SidewalkAccountInfoWithFingerprint
 
     SidewalkAccountList.member = Shapes::ShapeRef.new(shape: SidewalkAccountInfoWithFingerprint)
@@ -892,6 +900,7 @@ module Aws::IoTWireless
 
     UpdateWirelessGatewayTaskEntry.add_member(:id, Shapes::ShapeRef.new(shape: WirelessGatewayTaskDefinitionId, location_name: "Id"))
     UpdateWirelessGatewayTaskEntry.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANUpdateGatewayTaskEntry, location_name: "LoRaWAN"))
+    UpdateWirelessGatewayTaskEntry.add_member(:arn, Shapes::ShapeRef.new(shape: WirelessGatewayTaskDefinitionArn, location_name: "Arn"))
     UpdateWirelessGatewayTaskEntry.struct_class = Types::UpdateWirelessGatewayTaskEntry
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))

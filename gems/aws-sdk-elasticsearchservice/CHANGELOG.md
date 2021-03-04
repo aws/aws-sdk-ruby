@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2021-03-03)
+------------------
+
+* Feature - AWS ElasticSearch Feature : Support for adding tags in elastic search domain during domain creation
+
 1.49.0 (2021-02-24)
 ------------------
 

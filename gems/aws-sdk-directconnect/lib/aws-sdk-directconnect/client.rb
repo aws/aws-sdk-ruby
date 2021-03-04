@@ -1361,7 +1361,8 @@ module Aws::DirectConnect
     # pool of IPv6 addresses; you cannot specify custom IPv6 addresses.
     #
     # For a public virtual interface, the Autonomous System Number (ASN)
-    # must be private or already whitelisted for the virtual interface.
+    # must be private or already on the allow list for the virtual
+    # interface.
     #
     # @option params [String] :virtual_interface_id
     #   The ID of the virtual interface.
@@ -2954,14 +2955,31 @@ module Aws::DirectConnect
     end
 
     # Lists the associations between your Direct Connect gateways and
-    # virtual private gateways. You must specify a Direct Connect gateway, a
-    # virtual private gateway, or both. If you specify a Direct Connect
-    # gateway, the response contains all virtual private gateways associated
-    # with the Direct Connect gateway. If you specify a virtual private
-    # gateway, the response contains all Direct Connect gateways associated
-    # with the virtual private gateway. If you specify both, the response
-    # contains the association between the Direct Connect gateway and the
-    # virtual private gateway.
+    # virtual private gateways and transit gateways. You must specify one of
+    # the following:
+    #
+    # * A Direct Connect gateway
+    #
+    #   The response contains all virtual private gateways and transit
+    #   gateways associated with the Direct Connect gateway.
+    #
+    # * A virtual private gateway
+    #
+    #   The response contains the Direct Connect gateway.
+    #
+    # * A transit gateway
+    #
+    #   The response contains the Direct Connect gateway.
+    #
+    # * A Direct Connect gateway and a virtual private gateway
+    #
+    #   The response contains the association between the Direct Connect
+    #   gateway and virtual private gateway.
+    #
+    # * A Direct Connect gateway and a transit gateway
+    #
+    #   The response contains the association between the Direct Connect
+    #   gateway and transit gateway.
     #
     # @option params [String] :association_id
     #   The ID of the Direct Connect gateway association.
@@ -2984,7 +3002,7 @@ module Aws::DirectConnect
     #   The token provided in the previous call to retrieve the next page.
     #
     # @option params [String] :virtual_gateway_id
-    #   The ID of the virtual private gateway.
+    #   The ID of the virtual private gateway or transit gateway.
     #
     # @return [Types::DescribeDirectConnectGatewayAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4158,7 +4176,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

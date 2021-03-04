@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2021-03-04)
+------------------
+
+* Feature - Introducing support for EventBridge Api Destinations - any HTTP APIs as Targets, with managed authorization via EventBridge Connections.
+
+1.20.0 (2021-03-02)
+------------------
+
+* Feature - Adds TraceHeader to PutEventsRequestEntry to support AWS X-Ray trace-ids on events generated using the PutEvents operation.
+
 1.19.0 (2021-02-02)
 ------------------
 
