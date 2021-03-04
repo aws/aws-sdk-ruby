@@ -97,7 +97,7 @@ module Aws
       # @return [String]
       attr_reader :pattern
 
-      # Given a resopnse, this will format a log message and return it as a
+      # Given a response, this will format a log message and return it as a
       #   string according to {#pattern}.
       # @param [Seahorse::Client::Response] response
       # @return [String]

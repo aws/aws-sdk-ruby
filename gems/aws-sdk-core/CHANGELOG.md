@@ -3,6 +3,8 @@ Unreleased Changes
 
 * Issue - Include LICENSE, CHANGELOG, and VERSION files with this gem.
 
+* Issue - Fix a small typo in Aws::Log::Formatter documentation.
+
 3.112.0 (2021-02-02)
 ------------------
 
