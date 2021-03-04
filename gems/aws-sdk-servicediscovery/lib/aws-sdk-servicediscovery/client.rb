@@ -393,7 +393,7 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_http_namespace({
-    #     name: "NamespaceName", # required
+    #     name: "NamespaceNameHttp", # required
     #     creator_request_id: "ResourceId",
     #     description: "ResourceDescription",
     #     tags: [
@@ -479,7 +479,7 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_private_dns_namespace({
-    #     name: "NamespaceName", # required
+    #     name: "NamespaceNamePrivate", # required
     #     creator_request_id: "ResourceId",
     #     description: "ResourceDescription",
     #     vpc: "ResourceId", # required
@@ -560,7 +560,7 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_public_dns_namespace({
-    #     name: "NamespaceName", # required
+    #     name: "NamespaceNamePublic", # required
     #     creator_request_id: "ResourceId",
     #     description: "ResourceDescription",
     #     tags: [
@@ -632,6 +632,14 @@ module Aws::ServiceDiscovery
     #
     #   `_exampleservice._tcp.example.com`
     #
+    #   <note markdown="1"> For a single DNS namespace, you cannot create two services with names
+    #   that differ only by case (such as EXAMPLE and example). Otherwise,
+    #   these services will have the same DNS name. However, you can create
+    #   multiple HTTP services with names that differ only by case because
+    #   HTTP services are case sensitive.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: http://www.haproxy.org/
@@ -687,6 +695,11 @@ module Aws::ServiceDiscovery
     #   optional value, both of which you define. Tag keys can have a maximum
     #   character length of 128 characters, and tag values can have a maximum
     #   length of 256 characters.
+    #
+    # @option params [String] :type
+    #   If present, specifies that the service instances are only discoverable
+    #   using the `DiscoverInstances` API operation. No DNS records will be
+    #   registered for the service instances. The only valid value is `HTTP`.
     #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -766,6 +779,7 @@ module Aws::ServiceDiscovery
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     type: "HTTP", # accepts HTTP
     #   })
     #
     # @example Response structure
@@ -781,6 +795,7 @@ module Aws::ServiceDiscovery
     #   resp.service.dns_config.dns_records #=> Array
     #   resp.service.dns_config.dns_records[0].type #=> String, one of "SRV", "A", "AAAA", "CNAME"
     #   resp.service.dns_config.dns_records[0].ttl #=> Integer
+    #   resp.service.type #=> String, one of "HTTP", "DNS_HTTP", "DNS"
     #   resp.service.health_check_config.type #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.service.health_check_config.resource_path #=> String
     #   resp.service.health_check_config.failure_threshold #=> Integer
@@ -1367,6 +1382,7 @@ module Aws::ServiceDiscovery
     #   resp.service.dns_config.dns_records #=> Array
     #   resp.service.dns_config.dns_records[0].type #=> String, one of "SRV", "A", "AAAA", "CNAME"
     #   resp.service.dns_config.dns_records[0].ttl #=> Integer
+    #   resp.service.type #=> String, one of "HTTP", "DNS_HTTP", "DNS"
     #   resp.service.health_check_config.type #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.service.health_check_config.resource_path #=> String
     #   resp.service.health_check_config.failure_threshold #=> Integer
@@ -1778,6 +1794,7 @@ module Aws::ServiceDiscovery
     #   resp.services[0].id #=> String
     #   resp.services[0].arn #=> String
     #   resp.services[0].name #=> String
+    #   resp.services[0].type #=> String, one of "HTTP", "DNS_HTTP", "DNS"
     #   resp.services[0].description #=> String
     #   resp.services[0].instance_count #=> Integer
     #   resp.services[0].dns_config.namespace_id #=> String
@@ -2365,7 +2382,7 @@ module Aws::ServiceDiscovery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicediscovery'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

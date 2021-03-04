@@ -107,6 +107,7 @@ module Aws::MWAA
     #           },
     #         },
     #         max_workers: 1,
+    #         min_workers: 1,
     #         name: "EnvironmentName", # required
     #         network_configuration: { # required
     #           security_group_ids: ["SecurityGroupId"],
@@ -190,6 +191,16 @@ module Aws::MWAA
     #   specify in this field. When there are no more tasks running, and no
     #   more in the queue, MWAA disposes of the extra containers leaving the
     #   one worker that is included with your environment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_workers
+    #   The minimum number of workers that you want to run in your
+    #   environment. MWAA scales the number of Apache Airflow workers and
+    #   the Fargate containers that run your tasks up to the number you
+    #   specify in the `MaxWorkers` field. When there are no more tasks
+    #   running, and no more in the queue, MWAA disposes of the extra
+    #   containers leaving the worker count you specify in the `MinWorkers`
+    #   field.
     #   @return [Integer]
     #
     # @!attribute [rw] name
@@ -282,6 +293,7 @@ module Aws::MWAA
       :kms_key,
       :logging_configuration,
       :max_workers,
+      :min_workers,
       :name,
       :network_configuration,
       :plugins_s3_object_version,
@@ -439,7 +451,13 @@ module Aws::MWAA
     #   @return [Types::LoggingConfiguration]
     #
     # @!attribute [rw] max_workers
-    #   The Maximum Workers of the Amazon MWAA Environment.
+    #   The maximum number of workers to run in your Amazon MWAA
+    #   Environment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_workers
+    #   The minimum number of workers to run in your Amazon MWAA
+    #   Environment.
     #   @return [Integer]
     #
     # @!attribute [rw] name
@@ -511,6 +529,7 @@ module Aws::MWAA
       :last_update,
       :logging_configuration,
       :max_workers,
+      :min_workers,
       :name,
       :network_configuration,
       :plugins_s3_object_version,
@@ -1127,6 +1146,7 @@ module Aws::MWAA
     #           },
     #         },
     #         max_workers: 1,
+    #         min_workers: 1,
     #         name: "EnvironmentName", # required
     #         network_configuration: {
     #           security_group_ids: ["SecurityGroupId"], # required
@@ -1166,7 +1186,13 @@ module Aws::MWAA
     #   @return [Types::LoggingConfigurationInput]
     #
     # @!attribute [rw] max_workers
-    #   The Maximum Workers to update of your Amazon MWAA environment.
+    #   The maximum number of workers to update of your Amazon MWAA
+    #   environment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_workers
+    #   The minimum number of workers to update of your Amazon MWAA
+    #   environment.
     #   @return [Integer]
     #
     # @!attribute [rw] name
@@ -1219,6 +1245,7 @@ module Aws::MWAA
       :execution_role_arn,
       :logging_configuration,
       :max_workers,
+      :min_workers,
       :name,
       :network_configuration,
       :plugins_s3_object_version,

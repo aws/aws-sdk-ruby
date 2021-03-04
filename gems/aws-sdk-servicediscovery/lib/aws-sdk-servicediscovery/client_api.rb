@@ -92,6 +92,9 @@ module Aws::ServiceDiscovery
     NamespaceFilterName = Shapes::StringShape.new(name: 'NamespaceFilterName')
     NamespaceFilters = Shapes::ListShape.new(name: 'NamespaceFilters')
     NamespaceName = Shapes::StringShape.new(name: 'NamespaceName')
+    NamespaceNameHttp = Shapes::StringShape.new(name: 'NamespaceNameHttp')
+    NamespaceNamePrivate = Shapes::StringShape.new(name: 'NamespaceNamePrivate')
+    NamespaceNamePublic = Shapes::StringShape.new(name: 'NamespaceNamePublic')
     NamespaceNotFound = Shapes::StructureShape.new(name: 'NamespaceNotFound')
     NamespaceProperties = Shapes::StructureShape.new(name: 'NamespaceProperties')
     NamespaceSummariesList = Shapes::ListShape.new(name: 'NamespaceSummariesList')
@@ -133,6 +136,8 @@ module Aws::ServiceDiscovery
     ServiceNotFound = Shapes::StructureShape.new(name: 'ServiceNotFound')
     ServiceSummariesList = Shapes::ListShape.new(name: 'ServiceSummariesList')
     ServiceSummary = Shapes::StructureShape.new(name: 'ServiceSummary')
+    ServiceType = Shapes::StringShape.new(name: 'ServiceType')
+    ServiceTypeOption = Shapes::StringShape.new(name: 'ServiceTypeOption')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -151,7 +156,7 @@ module Aws::ServiceDiscovery
     Attributes.key = Shapes::ShapeRef.new(shape: AttrKey)
     Attributes.value = Shapes::ShapeRef.new(shape: AttrValue)
 
-    CreateHttpNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "Name"))
+    CreateHttpNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NamespaceNameHttp, required: true, location_name: "Name"))
     CreateHttpNamespaceRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
     CreateHttpNamespaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateHttpNamespaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -160,7 +165,7 @@ module Aws::ServiceDiscovery
     CreateHttpNamespaceResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
     CreateHttpNamespaceResponse.struct_class = Types::CreateHttpNamespaceResponse
 
-    CreatePrivateDnsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "Name"))
+    CreatePrivateDnsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NamespaceNamePrivate, required: true, location_name: "Name"))
     CreatePrivateDnsNamespaceRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
     CreatePrivateDnsNamespaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreatePrivateDnsNamespaceRequest.add_member(:vpc, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "Vpc"))
@@ -170,7 +175,7 @@ module Aws::ServiceDiscovery
     CreatePrivateDnsNamespaceResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
     CreatePrivateDnsNamespaceResponse.struct_class = Types::CreatePrivateDnsNamespaceResponse
 
-    CreatePublicDnsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "Name"))
+    CreatePublicDnsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NamespaceNamePublic, required: true, location_name: "Name"))
     CreatePublicDnsNamespaceRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
     CreatePublicDnsNamespaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreatePublicDnsNamespaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -187,6 +192,7 @@ module Aws::ServiceDiscovery
     CreateServiceRequest.add_member(:health_check_config, Shapes::ShapeRef.new(shape: HealthCheckConfig, location_name: "HealthCheckConfig"))
     CreateServiceRequest.add_member(:health_check_custom_config, Shapes::ShapeRef.new(shape: HealthCheckCustomConfig, location_name: "HealthCheckCustomConfig"))
     CreateServiceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateServiceRequest.add_member(:type, Shapes::ShapeRef.new(shape: ServiceTypeOption, location_name: "Type"))
     CreateServiceRequest.struct_class = Types::CreateServiceRequest
 
     CreateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "Service"))
@@ -287,11 +293,11 @@ module Aws::ServiceDiscovery
     HealthCheckConfig.add_member(:failure_threshold, Shapes::ShapeRef.new(shape: FailureThreshold, location_name: "FailureThreshold"))
     HealthCheckConfig.struct_class = Types::HealthCheckConfig
 
-    HealthCheckCustomConfig.add_member(:failure_threshold, Shapes::ShapeRef.new(shape: FailureThreshold, location_name: "FailureThreshold"))
+    HealthCheckCustomConfig.add_member(:failure_threshold, Shapes::ShapeRef.new(shape: FailureThreshold, deprecated: true, location_name: "FailureThreshold", metadata: {"deprecatedMessage"=>"Configurable FailureThreshold of HealthCheckCustomConfig is deprecated.  It will always have value 1."}))
     HealthCheckCustomConfig.struct_class = Types::HealthCheckCustomConfig
 
     HttpInstanceSummary.add_member(:instance_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "InstanceId"))
-    HttpInstanceSummary.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, location_name: "NamespaceName"))
+    HttpInstanceSummary.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceNameHttp, location_name: "NamespaceName"))
     HttpInstanceSummary.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, location_name: "ServiceName"))
     HttpInstanceSummary.add_member(:health_status, Shapes::ShapeRef.new(shape: HealthStatus, location_name: "HealthStatus"))
     HttpInstanceSummary.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
@@ -465,6 +471,7 @@ module Aws::ServiceDiscovery
     Service.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     Service.add_member(:instance_count, Shapes::ShapeRef.new(shape: ResourceCount, location_name: "InstanceCount"))
     Service.add_member(:dns_config, Shapes::ShapeRef.new(shape: DnsConfig, location_name: "DnsConfig"))
+    Service.add_member(:type, Shapes::ShapeRef.new(shape: ServiceType, location_name: "Type"))
     Service.add_member(:health_check_config, Shapes::ShapeRef.new(shape: HealthCheckConfig, location_name: "HealthCheckConfig"))
     Service.add_member(:health_check_custom_config, Shapes::ShapeRef.new(shape: HealthCheckCustomConfig, location_name: "HealthCheckCustomConfig"))
     Service.add_member(:create_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateDate"))
@@ -496,6 +503,7 @@ module Aws::ServiceDiscovery
     ServiceSummary.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
     ServiceSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     ServiceSummary.add_member(:name, Shapes::ShapeRef.new(shape: ServiceName, location_name: "Name"))
+    ServiceSummary.add_member(:type, Shapes::ShapeRef.new(shape: ServiceType, location_name: "Type"))
     ServiceSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     ServiceSummary.add_member(:instance_count, Shapes::ShapeRef.new(shape: ResourceCount, location_name: "InstanceCount"))
     ServiceSummary.add_member(:dns_config, Shapes::ShapeRef.new(shape: DnsConfig, location_name: "DnsConfig"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2021-03-04)
+------------------
+
+* Feature - Supports creating API-only services under DNS namespace.  Add namespace syntax validation.
+
 1.32.0 (2021-02-02)
 ------------------
 

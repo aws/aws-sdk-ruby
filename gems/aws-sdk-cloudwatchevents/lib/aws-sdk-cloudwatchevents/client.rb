@@ -393,6 +393,64 @@ module Aws::CloudWatchEvents
       req.send_request(options)
     end
 
+    # Creates an API destination, which is an HTTP invocation endpoint
+    # configured as a target for events.
+    #
+    # @option params [required, String] :name
+    #   The name for the API destination to create.
+    #
+    # @option params [String] :description
+    #   A description for the API destination to create.
+    #
+    # @option params [required, String] :connection_arn
+    #   The ARN of the connection to use for the API destination. The
+    #   destination endpoint must support the authorization type specified for
+    #   the connection.
+    #
+    # @option params [required, String] :invocation_endpoint
+    #   The URL to the HTTP invocation endpoint for the API destination.
+    #
+    # @option params [required, String] :http_method
+    #   The method to use for the request to the HTTP invocation endpoint.
+    #
+    # @option params [Integer] :invocation_rate_limit_per_second
+    #   The maximum number of requests per second to send to the HTTP
+    #   invocation endpoint.
+    #
+    # @return [Types::CreateApiDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateApiDestinationResponse#api_destination_arn #api_destination_arn} => String
+    #   * {Types::CreateApiDestinationResponse#api_destination_state #api_destination_state} => String
+    #   * {Types::CreateApiDestinationResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateApiDestinationResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_api_destination({
+    #     name: "ApiDestinationName", # required
+    #     description: "ApiDestinationDescription",
+    #     connection_arn: "ConnectionArn", # required
+    #     invocation_endpoint: "HttpsEndpoint", # required
+    #     http_method: "POST", # required, accepts POST, GET, HEAD, OPTIONS, PUT, PATCH, DELETE
+    #     invocation_rate_limit_per_second: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_destination_arn #=> String
+    #   resp.api_destination_state #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/CreateApiDestination AWS API Documentation
+    #
+    # @overload create_api_destination(params = {})
+    # @param [Hash] params ({})
+    def create_api_destination(params = {}, options = {})
+      req = build_request(:create_api_destination, params)
+      req.send_request(options)
+    end
+
     # Creates an archive of events with the specified settings. When you
     # create an archive, incoming events might not immediately start being
     # sent to the archive. Allow a short period of time for changes to take
@@ -446,6 +504,118 @@ module Aws::CloudWatchEvents
     # @param [Hash] params ({})
     def create_archive(params = {}, options = {})
       req = build_request(:create_archive, params)
+      req.send_request(options)
+    end
+
+    # Creates a connection. A connection defines the authorization type and
+    # credentials to use for authorization with an API destination HTTP
+    # endpoint.
+    #
+    # @option params [required, String] :name
+    #   The name for the connection to create.
+    #
+    # @option params [String] :description
+    #   A description for the connection to create.
+    #
+    # @option params [required, String] :authorization_type
+    #   The type of authorization to use for the connection.
+    #
+    # @option params [required, Types::CreateConnectionAuthRequestParameters] :auth_parameters
+    #   A `CreateConnectionAuthRequestParameters` object that contains the
+    #   authorization parameters to use to authorize with the endpoint.
+    #
+    # @return [Types::CreateConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConnectionResponse#connection_arn #connection_arn} => String
+    #   * {Types::CreateConnectionResponse#connection_state #connection_state} => String
+    #   * {Types::CreateConnectionResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateConnectionResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_connection({
+    #     name: "ConnectionName", # required
+    #     description: "ConnectionDescription",
+    #     authorization_type: "BASIC", # required, accepts BASIC, OAUTH_CLIENT_CREDENTIALS, API_KEY
+    #     auth_parameters: { # required
+    #       basic_auth_parameters: {
+    #         username: "AuthHeaderParameters", # required
+    #         password: "AuthHeaderParameters", # required
+    #       },
+    #       o_auth_parameters: {
+    #         client_parameters: { # required
+    #           client_id: "AuthHeaderParameters", # required
+    #           client_secret: "AuthHeaderParameters", # required
+    #         },
+    #         authorization_endpoint: "HttpsEndpoint", # required
+    #         http_method: "GET", # required, accepts GET, POST, PUT
+    #         o_auth_http_parameters: {
+    #           header_parameters: [
+    #             {
+    #               key: "HeaderKey",
+    #               value: "HeaderValue",
+    #               is_value_secret: false,
+    #             },
+    #           ],
+    #           query_string_parameters: [
+    #             {
+    #               key: "QueryStringKey",
+    #               value: "QueryStringValue",
+    #               is_value_secret: false,
+    #             },
+    #           ],
+    #           body_parameters: [
+    #             {
+    #               key: "String",
+    #               value: "String",
+    #               is_value_secret: false,
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       api_key_auth_parameters: {
+    #         api_key_name: "AuthHeaderParameters", # required
+    #         api_key_value: "AuthHeaderParameters", # required
+    #       },
+    #       invocation_http_parameters: {
+    #         header_parameters: [
+    #           {
+    #             key: "HeaderKey",
+    #             value: "HeaderValue",
+    #             is_value_secret: false,
+    #           },
+    #         ],
+    #         query_string_parameters: [
+    #           {
+    #             key: "QueryStringKey",
+    #             value: "QueryStringValue",
+    #             is_value_secret: false,
+    #           },
+    #         ],
+    #         body_parameters: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #             is_value_secret: false,
+    #           },
+    #         ],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_arn #=> String
+    #   resp.connection_state #=> String, one of "CREATING", "UPDATING", "DELETING", "AUTHORIZED", "DEAUTHORIZED", "AUTHORIZING", "DEAUTHORIZING"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/CreateConnection AWS API Documentation
+    #
+    # @overload create_connection(params = {})
+    # @param [Hash] params ({})
+    def create_connection(params = {}, options = {})
+      req = build_request(:create_connection, params)
       req.send_request(options)
     end
 
@@ -595,6 +765,66 @@ module Aws::CloudWatchEvents
       req.send_request(options)
     end
 
+    # Removes all authorization parameters from the connection. This lets
+    # you remove the secret from the connection so you can reuse it without
+    # having to create a new connection.
+    #
+    # @option params [required, String] :name
+    #   The name of the connection to remove authorization from.
+    #
+    # @return [Types::DeauthorizeConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeauthorizeConnectionResponse#connection_arn #connection_arn} => String
+    #   * {Types::DeauthorizeConnectionResponse#connection_state #connection_state} => String
+    #   * {Types::DeauthorizeConnectionResponse#creation_time #creation_time} => Time
+    #   * {Types::DeauthorizeConnectionResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DeauthorizeConnectionResponse#last_authorized_time #last_authorized_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deauthorize_connection({
+    #     name: "ConnectionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_arn #=> String
+    #   resp.connection_state #=> String, one of "CREATING", "UPDATING", "DELETING", "AUTHORIZED", "DEAUTHORIZED", "AUTHORIZING", "DEAUTHORIZING"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.last_authorized_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeauthorizeConnection AWS API Documentation
+    #
+    # @overload deauthorize_connection(params = {})
+    # @param [Hash] params ({})
+    def deauthorize_connection(params = {}, options = {})
+      req = build_request(:deauthorize_connection, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified API destination.
+    #
+    # @option params [required, String] :name
+    #   The name of the destination to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_api_destination({
+    #     name: "ApiDestinationName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteApiDestination AWS API Documentation
+    #
+    # @overload delete_api_destination(params = {})
+    # @param [Hash] params ({})
+    def delete_api_destination(params = {}, options = {})
+      req = build_request(:delete_api_destination, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified archive.
     #
     # @option params [required, String] :archive_name
@@ -614,6 +844,42 @@ module Aws::CloudWatchEvents
     # @param [Hash] params ({})
     def delete_archive(params = {}, options = {})
       req = build_request(:delete_archive, params)
+      req.send_request(options)
+    end
+
+    # Deletes a connection.
+    #
+    # @option params [required, String] :name
+    #   The name of the connection to delete.
+    #
+    # @return [Types::DeleteConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteConnectionResponse#connection_arn #connection_arn} => String
+    #   * {Types::DeleteConnectionResponse#connection_state #connection_state} => String
+    #   * {Types::DeleteConnectionResponse#creation_time #creation_time} => Time
+    #   * {Types::DeleteConnectionResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DeleteConnectionResponse#last_authorized_time #last_authorized_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_connection({
+    #     name: "ConnectionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_arn #=> String
+    #   resp.connection_state #=> String, one of "CREATING", "UPDATING", "DELETING", "AUTHORIZED", "DEAUTHORIZED", "AUTHORIZING", "DEAUTHORIZING"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.last_authorized_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteConnection AWS API Documentation
+    #
+    # @overload delete_connection(params = {})
+    # @param [Hash] params ({})
+    def delete_connection(params = {}, options = {})
+      req = build_request(:delete_connection, params)
       req.send_request(options)
     end
 
@@ -719,6 +985,52 @@ module Aws::CloudWatchEvents
       req.send_request(options)
     end
 
+    # Retrieves details about an API destination.
+    #
+    # @option params [required, String] :name
+    #   The name of the API destination to retrieve.
+    #
+    # @return [Types::DescribeApiDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeApiDestinationResponse#api_destination_arn #api_destination_arn} => String
+    #   * {Types::DescribeApiDestinationResponse#name #name} => String
+    #   * {Types::DescribeApiDestinationResponse#description #description} => String
+    #   * {Types::DescribeApiDestinationResponse#api_destination_state #api_destination_state} => String
+    #   * {Types::DescribeApiDestinationResponse#connection_arn #connection_arn} => String
+    #   * {Types::DescribeApiDestinationResponse#invocation_endpoint #invocation_endpoint} => String
+    #   * {Types::DescribeApiDestinationResponse#http_method #http_method} => String
+    #   * {Types::DescribeApiDestinationResponse#invocation_rate_limit_per_second #invocation_rate_limit_per_second} => Integer
+    #   * {Types::DescribeApiDestinationResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeApiDestinationResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_api_destination({
+    #     name: "ApiDestinationName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_destination_arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.api_destination_state #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.connection_arn #=> String
+    #   resp.invocation_endpoint #=> String
+    #   resp.http_method #=> String, one of "POST", "GET", "HEAD", "OPTIONS", "PUT", "PATCH", "DELETE"
+    #   resp.invocation_rate_limit_per_second #=> Integer
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeApiDestination AWS API Documentation
+    #
+    # @overload describe_api_destination(params = {})
+    # @param [Hash] params ({})
+    def describe_api_destination(params = {}, options = {})
+      req = build_request(:describe_api_destination, params)
+      req.send_request(options)
+    end
+
     # Retrieves details about an archive.
     #
     # @option params [required, String] :archive_name
@@ -764,6 +1076,82 @@ module Aws::CloudWatchEvents
     # @param [Hash] params ({})
     def describe_archive(params = {}, options = {})
       req = build_request(:describe_archive, params)
+      req.send_request(options)
+    end
+
+    # Retrieves details about a connection.
+    #
+    # @option params [required, String] :name
+    #   The name of the connection to retrieve.
+    #
+    # @return [Types::DescribeConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeConnectionResponse#connection_arn #connection_arn} => String
+    #   * {Types::DescribeConnectionResponse#name #name} => String
+    #   * {Types::DescribeConnectionResponse#description #description} => String
+    #   * {Types::DescribeConnectionResponse#connection_state #connection_state} => String
+    #   * {Types::DescribeConnectionResponse#state_reason #state_reason} => String
+    #   * {Types::DescribeConnectionResponse#authorization_type #authorization_type} => String
+    #   * {Types::DescribeConnectionResponse#secret_arn #secret_arn} => String
+    #   * {Types::DescribeConnectionResponse#auth_parameters #auth_parameters} => Types::ConnectionAuthResponseParameters
+    #   * {Types::DescribeConnectionResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeConnectionResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeConnectionResponse#last_authorized_time #last_authorized_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_connection({
+    #     name: "ConnectionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.connection_state #=> String, one of "CREATING", "UPDATING", "DELETING", "AUTHORIZED", "DEAUTHORIZED", "AUTHORIZING", "DEAUTHORIZING"
+    #   resp.state_reason #=> String
+    #   resp.authorization_type #=> String, one of "BASIC", "OAUTH_CLIENT_CREDENTIALS", "API_KEY"
+    #   resp.secret_arn #=> String
+    #   resp.auth_parameters.basic_auth_parameters.username #=> String
+    #   resp.auth_parameters.o_auth_parameters.client_parameters.client_id #=> String
+    #   resp.auth_parameters.o_auth_parameters.authorization_endpoint #=> String
+    #   resp.auth_parameters.o_auth_parameters.http_method #=> String, one of "GET", "POST", "PUT"
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.header_parameters #=> Array
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.header_parameters[0].key #=> String
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.header_parameters[0].value #=> String
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.header_parameters[0].is_value_secret #=> Boolean
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.query_string_parameters #=> Array
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.query_string_parameters[0].key #=> String
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.query_string_parameters[0].value #=> String
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.query_string_parameters[0].is_value_secret #=> Boolean
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.body_parameters #=> Array
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.body_parameters[0].key #=> String
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.body_parameters[0].value #=> String
+    #   resp.auth_parameters.o_auth_parameters.o_auth_http_parameters.body_parameters[0].is_value_secret #=> Boolean
+    #   resp.auth_parameters.api_key_auth_parameters.api_key_name #=> String
+    #   resp.auth_parameters.invocation_http_parameters.header_parameters #=> Array
+    #   resp.auth_parameters.invocation_http_parameters.header_parameters[0].key #=> String
+    #   resp.auth_parameters.invocation_http_parameters.header_parameters[0].value #=> String
+    #   resp.auth_parameters.invocation_http_parameters.header_parameters[0].is_value_secret #=> Boolean
+    #   resp.auth_parameters.invocation_http_parameters.query_string_parameters #=> Array
+    #   resp.auth_parameters.invocation_http_parameters.query_string_parameters[0].key #=> String
+    #   resp.auth_parameters.invocation_http_parameters.query_string_parameters[0].value #=> String
+    #   resp.auth_parameters.invocation_http_parameters.query_string_parameters[0].is_value_secret #=> Boolean
+    #   resp.auth_parameters.invocation_http_parameters.body_parameters #=> Array
+    #   resp.auth_parameters.invocation_http_parameters.body_parameters[0].key #=> String
+    #   resp.auth_parameters.invocation_http_parameters.body_parameters[0].value #=> String
+    #   resp.auth_parameters.invocation_http_parameters.body_parameters[0].is_value_secret #=> Boolean
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.last_authorized_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeConnection AWS API Documentation
+    #
+    # @overload describe_connection(params = {})
+    # @param [Hash] params ({})
+    def describe_connection(params = {}, options = {})
+      req = build_request(:describe_connection, params)
       req.send_request(options)
     end
 
@@ -1060,6 +1448,60 @@ module Aws::CloudWatchEvents
       req.send_request(options)
     end
 
+    # Retrieves a list of API destination in the account in the current
+    # Region.
+    #
+    # @option params [String] :name_prefix
+    #   A name prefix to filter results returned. Only API destinations with a
+    #   name that starts with the prefix are returned.
+    #
+    # @option params [String] :connection_arn
+    #   The ARN of the connection specified for the API destination.
+    #
+    # @option params [String] :next_token
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of API destinations to include in the response.
+    #
+    # @return [Types::ListApiDestinationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListApiDestinationsResponse#api_destinations #api_destinations} => Array&lt;Types::ApiDestination&gt;
+    #   * {Types::ListApiDestinationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_api_destinations({
+    #     name_prefix: "ApiDestinationName",
+    #     connection_arn: "ConnectionArn",
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_destinations #=> Array
+    #   resp.api_destinations[0].api_destination_arn #=> String
+    #   resp.api_destinations[0].name #=> String
+    #   resp.api_destinations[0].api_destination_state #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.api_destinations[0].connection_arn #=> String
+    #   resp.api_destinations[0].invocation_endpoint #=> String
+    #   resp.api_destinations[0].http_method #=> String, one of "POST", "GET", "HEAD", "OPTIONS", "PUT", "PATCH", "DELETE"
+    #   resp.api_destinations[0].invocation_rate_limit_per_second #=> Integer
+    #   resp.api_destinations[0].creation_time #=> Time
+    #   resp.api_destinations[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListApiDestinations AWS API Documentation
+    #
+    # @overload list_api_destinations(params = {})
+    # @param [Hash] params ({})
+    def list_api_destinations(params = {}, options = {})
+      req = build_request(:list_api_destinations, params)
+      req.send_request(options)
+    end
+
     # Lists your archives. You can either list all the archives or you can
     # provide a prefix to match to the archive names. Filter parameters are
     # exclusive.
@@ -1115,6 +1557,58 @@ module Aws::CloudWatchEvents
     # @param [Hash] params ({})
     def list_archives(params = {}, options = {})
       req = build_request(:list_archives, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of connections from the account.
+    #
+    # @option params [String] :name_prefix
+    #   A name prefix to filter results returned. Only connections with a name
+    #   that starts with the prefix are returned.
+    #
+    # @option params [String] :connection_state
+    #   The state of the connection.
+    #
+    # @option params [String] :next_token
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of connections to return.
+    #
+    # @return [Types::ListConnectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConnectionsResponse#connections #connections} => Array&lt;Types::Connection&gt;
+    #   * {Types::ListConnectionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_connections({
+    #     name_prefix: "ConnectionName",
+    #     connection_state: "CREATING", # accepts CREATING, UPDATING, DELETING, AUTHORIZED, DEAUTHORIZED, AUTHORIZING, DEAUTHORIZING
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connections #=> Array
+    #   resp.connections[0].connection_arn #=> String
+    #   resp.connections[0].name #=> String
+    #   resp.connections[0].connection_state #=> String, one of "CREATING", "UPDATING", "DELETING", "AUTHORIZED", "DEAUTHORIZED", "AUTHORIZING", "DEAUTHORIZING"
+    #   resp.connections[0].state_reason #=> String
+    #   resp.connections[0].authorization_type #=> String, one of "BASIC", "OAUTH_CLIENT_CREDENTIALS", "API_KEY"
+    #   resp.connections[0].creation_time #=> Time
+    #   resp.connections[0].last_modified_time #=> Time
+    #   resp.connections[0].last_authorized_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListConnections AWS API Documentation
+    #
+    # @overload list_connections(params = {})
+    # @param [Hash] params ({})
+    def list_connections(params = {}, options = {})
+      req = build_request(:list_connections, params)
       req.send_request(options)
     end
 
@@ -1953,6 +2447,8 @@ module Aws::CloudWatchEvents
     #
     # * Redshift Clusters to invoke Data API ExecuteStatement on
     #
+    # * Custom/SaaS HTTPS APIs via EventBridge API Destinations
+    #
     # Creating rules with built-in targets is supported only in the AWS
     # Management Console. The built-in targets are `EC2 CreateSnapshot API
     # call`, `EC2 RebootInstances API call`, `EC2 StopInstances API call`,
@@ -2456,6 +2952,61 @@ module Aws::CloudWatchEvents
       req.send_request(options)
     end
 
+    # Updates an API destination.
+    #
+    # @option params [required, String] :name
+    #   The name of the API destination to update.
+    #
+    # @option params [String] :description
+    #   The name of the API destination to update.
+    #
+    # @option params [String] :connection_arn
+    #   The ARN of the connection to use for the API destination.
+    #
+    # @option params [String] :invocation_endpoint
+    #   The URL to the endpoint to use for the API destination.
+    #
+    # @option params [String] :http_method
+    #   The method to use for the API destination.
+    #
+    # @option params [Integer] :invocation_rate_limit_per_second
+    #   The maximum number of invocations per second to send to the API
+    #   destination.
+    #
+    # @return [Types::UpdateApiDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateApiDestinationResponse#api_destination_arn #api_destination_arn} => String
+    #   * {Types::UpdateApiDestinationResponse#api_destination_state #api_destination_state} => String
+    #   * {Types::UpdateApiDestinationResponse#creation_time #creation_time} => Time
+    #   * {Types::UpdateApiDestinationResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_api_destination({
+    #     name: "ApiDestinationName", # required
+    #     description: "ApiDestinationDescription",
+    #     connection_arn: "ConnectionArn",
+    #     invocation_endpoint: "HttpsEndpoint",
+    #     http_method: "POST", # accepts POST, GET, HEAD, OPTIONS, PUT, PATCH, DELETE
+    #     invocation_rate_limit_per_second: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_destination_arn #=> String
+    #   resp.api_destination_state #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/UpdateApiDestination AWS API Documentation
+    #
+    # @overload update_api_destination(params = {})
+    # @param [Hash] params ({})
+    def update_api_destination(params = {}, options = {})
+      req = build_request(:update_api_destination, params)
+      req.send_request(options)
+    end
+
     # Updates the specified archive.
     #
     # @option params [required, String] :archive_name
@@ -2502,6 +3053,117 @@ module Aws::CloudWatchEvents
       req.send_request(options)
     end
 
+    # Updates settings for a connection.
+    #
+    # @option params [required, String] :name
+    #   The name of the connection to update.
+    #
+    # @option params [String] :description
+    #   A description for the connection.
+    #
+    # @option params [String] :authorization_type
+    #   The type of authorization to use for the connection.
+    #
+    # @option params [Types::UpdateConnectionAuthRequestParameters] :auth_parameters
+    #   The authorization parameters to use for the connection.
+    #
+    # @return [Types::UpdateConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConnectionResponse#connection_arn #connection_arn} => String
+    #   * {Types::UpdateConnectionResponse#connection_state #connection_state} => String
+    #   * {Types::UpdateConnectionResponse#creation_time #creation_time} => Time
+    #   * {Types::UpdateConnectionResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::UpdateConnectionResponse#last_authorized_time #last_authorized_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_connection({
+    #     name: "ConnectionName", # required
+    #     description: "ConnectionDescription",
+    #     authorization_type: "BASIC", # accepts BASIC, OAUTH_CLIENT_CREDENTIALS, API_KEY
+    #     auth_parameters: {
+    #       basic_auth_parameters: {
+    #         username: "AuthHeaderParameters",
+    #         password: "AuthHeaderParameters",
+    #       },
+    #       o_auth_parameters: {
+    #         client_parameters: {
+    #           client_id: "AuthHeaderParameters",
+    #           client_secret: "AuthHeaderParameters",
+    #         },
+    #         authorization_endpoint: "HttpsEndpoint",
+    #         http_method: "GET", # accepts GET, POST, PUT
+    #         o_auth_http_parameters: {
+    #           header_parameters: [
+    #             {
+    #               key: "HeaderKey",
+    #               value: "HeaderValue",
+    #               is_value_secret: false,
+    #             },
+    #           ],
+    #           query_string_parameters: [
+    #             {
+    #               key: "QueryStringKey",
+    #               value: "QueryStringValue",
+    #               is_value_secret: false,
+    #             },
+    #           ],
+    #           body_parameters: [
+    #             {
+    #               key: "String",
+    #               value: "String",
+    #               is_value_secret: false,
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       api_key_auth_parameters: {
+    #         api_key_name: "AuthHeaderParameters",
+    #         api_key_value: "AuthHeaderParameters",
+    #       },
+    #       invocation_http_parameters: {
+    #         header_parameters: [
+    #           {
+    #             key: "HeaderKey",
+    #             value: "HeaderValue",
+    #             is_value_secret: false,
+    #           },
+    #         ],
+    #         query_string_parameters: [
+    #           {
+    #             key: "QueryStringKey",
+    #             value: "QueryStringValue",
+    #             is_value_secret: false,
+    #           },
+    #         ],
+    #         body_parameters: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #             is_value_secret: false,
+    #           },
+    #         ],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_arn #=> String
+    #   resp.connection_state #=> String, one of "CREATING", "UPDATING", "DELETING", "AUTHORIZED", "DEAUTHORIZED", "AUTHORIZING", "DEAUTHORIZING"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.last_authorized_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/UpdateConnection AWS API Documentation
+    #
+    # @overload update_connection(params = {})
+    # @param [Hash] params ({})
+    def update_connection(params = {}, options = {})
+      req = build_request(:update_connection, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2515,7 +3177,7 @@ module Aws::CloudWatchEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2021-03-04)
+------------------
+
+* Feature - This release adds the ResolvedOutputS3Uri to the DescribeFeatureGroup API to indicate the S3 prefix where offline data is stored in a feature group
+
 1.79.0 (2021-02-22)
 ------------------
 
