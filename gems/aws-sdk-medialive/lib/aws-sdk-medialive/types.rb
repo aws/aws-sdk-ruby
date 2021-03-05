@@ -16401,6 +16401,10 @@ module Aws::MediaLive
     #   transfer.
     #   @return [String]
     #
+    # @!attribute [rw] target_region
+    #   The target AWS region to transfer the device.
+    #   @return [String]
+    #
     # @!attribute [rw] transfer_message
     #   An optional message for the recipient. Maximum 280 characters.
     #   @return [String]
@@ -16409,6 +16413,7 @@ module Aws::MediaLive
     #
     class TransferInputDevice < Struct.new(
       :target_customer_id,
+      :target_region,
       :transfer_message)
       SENSITIVE = []
       include Aws::Structure
@@ -16420,6 +16425,7 @@ module Aws::MediaLive
     #       {
     #         input_device_id: "__string", # required
     #         target_customer_id: "__string",
+    #         target_region: "__string",
     #         transfer_message: "__string",
     #       }
     #
@@ -16427,6 +16433,9 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] target_customer_id
+    #   @return [String]
+    #
+    # @!attribute [rw] target_region
     #   @return [String]
     #
     # @!attribute [rw] transfer_message
@@ -16437,6 +16446,7 @@ module Aws::MediaLive
     class TransferInputDeviceRequest < Struct.new(
       :input_device_id,
       :target_customer_id,
+      :target_region,
       :transfer_message)
       SENSITIVE = []
       include Aws::Structure

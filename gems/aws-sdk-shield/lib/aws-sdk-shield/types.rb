@@ -470,6 +470,12 @@ module Aws::Shield
     #         pattern: "ALL", # required, accepts ALL, ARBITRARY, BY_RESOURCE_TYPE
     #         resource_type: "CLOUDFRONT_DISTRIBUTION", # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
     #         members: ["ResourceArn"],
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] protection_group_id
@@ -519,6 +525,10 @@ module Aws::Shield
     #   `ARBITRARY` and you must not set it for any other `Pattern` setting.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   One or more tag key-value pairs for the protection group.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtectionGroupRequest AWS API Documentation
     #
     class CreateProtectionGroupRequest < Struct.new(
@@ -526,7 +536,8 @@ module Aws::Shield
       :aggregation,
       :pattern,
       :resource_type,
-      :members)
+      :members,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -541,6 +552,12 @@ module Aws::Shield
     #       {
     #         name: "ProtectionName", # required
     #         resource_arn: "ResourceArn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -574,11 +591,17 @@ module Aws::Shield
     #     `arn:aws:ec2:region:account-id:eip-allocation/allocation-id `
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   One or more tag key-value pairs for the Protection object that is
+    #   created.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtectionRequest AWS API Documentation
     #
     class CreateProtectionRequest < Struct.new(
       :name,
-      :resource_arn)
+      :resource_arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1401,6 +1424,38 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to get tags for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A list of tag key and value pairs associated with the specified
+    #   resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You are trying to update a subscription that has not yet completed the
     # 1-year commitment. You can change the `AutoRenew` parameter during the
     # last 30 days of your subscription. This exception indicates that you
@@ -1479,13 +1534,18 @@ module Aws::Shield
     #   associated with the protection.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] protection_arn
+    #   The ARN (Amazon Resource Name) of the protection.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Protection AWS API Documentation
     #
     class Protection < Struct.new(
       :id,
       :name,
       :resource_arn,
-      :health_check_ids)
+      :health_check_ids,
+      :protection_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1539,6 +1599,10 @@ module Aws::Shield
     #   `ARBITRARY` and you must not set it for any other `Pattern` setting.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] protection_group_arn
+    #   The ARN (Amazon Resource Name) of the protection group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ProtectionGroup AWS API Documentation
     #
     class ProtectionGroup < Struct.new(
@@ -1546,7 +1610,8 @@ module Aws::Shield
       :aggregation,
       :pattern,
       :resource_type,
-      :members)
+      :members,
+      :protection_group_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1736,6 +1801,10 @@ module Aws::Shield
     #   Limits settings for your subscription.
     #   @return [Types::SubscriptionLimits]
     #
+    # @!attribute [rw] subscription_arn
+    #   The ARN (Amazon Resource Name) of the subscription.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Subscription AWS API Documentation
     #
     class Subscription < Struct.new(
@@ -1745,7 +1814,8 @@ module Aws::Shield
       :auto_renew,
       :limits,
       :proactive_engagement_status,
-      :subscription_limits)
+      :subscription_limits,
+      :subscription_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1827,6 +1897,80 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # A tag associated with an AWS resource. Tags are key:value pairs that
+    # you can use to categorize and manage your resources, for purposes like
+    # billing or other management. Typically, the tag key represents a
+    # category, such as "environment", and the tag value represents a
+    # specific value within that category, such as "test,"
+    # "development," or "production". Or you might set the tag key to
+    # "customer" and the value to the customer name or ID. You can specify
+    # one or more tags to add to each AWS resource, up to 50 tags for a
+    # resource.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   Part of the key:value pair that defines a tag. You can use a tag key
+    #   to describe a category of information, such as "customer." Tag
+    #   keys are case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Part of the key:value pair that defines a tag. You can use a tag
+    #   value to describe a specific value within a category, such as
+    #   "companyA" or "companyB." Tag values are case-sensitive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to add
+    #   or update tags for.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags that you want to modify or add to the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # The time range.
     #
     # @note When making an API call, you may pass TimeRange
@@ -1863,6 +2007,36 @@ module Aws::Shield
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   remove tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag key for each tag that you want to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateEmergencyContactSettingsRequest
     #   data as a hash:

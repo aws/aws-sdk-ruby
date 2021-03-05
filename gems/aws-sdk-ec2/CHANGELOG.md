@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.226.0 (2021-03-05)
+------------------
+
+* Feature - Expands EC2/Spot Fleet capacity-optimized allocation strategy to allow users to prioritize instance pools. Fleet attempts to fulfill priorities on a best-effort basis but optimizes for capacity first.
+
 1.225.0 (2021-02-17)
 ------------------
 

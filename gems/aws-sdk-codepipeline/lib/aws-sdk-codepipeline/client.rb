@@ -2369,7 +2369,7 @@ module Aws::CodePipeline
     # type provider. Use a JSON file with the action definition and
     # `UpdateActionType` to provide the full structure.
     #
-    # @option params [Types::ActionTypeDeclaration] :action_type
+    # @option params [required, Types::ActionTypeDeclaration] :action_type
     #   The action type definition for the action type to be updated.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -2377,7 +2377,7 @@ module Aws::CodePipeline
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_action_type({
-    #     action_type: {
+    #     action_type: { # required
     #       description: "ActionTypeDescription",
     #       executor: { # required
     #         configuration: { # required
@@ -2575,7 +2575,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -987,12 +987,6 @@ module Aws::Appflow
     # @option params [Array<String>] :connector_types
     #   The type of connector, such as Salesforce, Amplitude, and so on.
     #
-    #   <note markdown="1"> *Locke* refers to a new destination known as Amazon Connect Customer
-    #   Profiles. At this time, we recommend that you do not use this
-    #   destination.
-    #
-    #    </note>
-    #
     # @option params [String] :next_token
     #   The pagination token for the next page of data.
     #
@@ -1937,7 +1931,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

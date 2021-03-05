@@ -1681,12 +1681,12 @@ module Aws::EC2
     # single IPv6 CIDR block with your subnet. An IPv6 CIDR block must have
     # a prefix length of /64.
     #
+    # @option params [required, String] :subnet_id
+    #   The ID of your subnet.
+    #
     # @option params [required, String] :ipv_6_cidr_block
     #   The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix
     #   length.
-    #
-    # @option params [required, String] :subnet_id
-    #   The ID of your subnet.
     #
     # @return [Types::AssociateSubnetCidrBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1696,8 +1696,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_subnet_cidr_block({
-    #     ipv_6_cidr_block: "String", # required
     #     subnet_id: "SubnetId", # required
+    #     ipv_6_cidr_block: "String", # required
     #   })
     #
     # @example Response structure
@@ -4866,7 +4866,7 @@ module Aws::EC2
     #     dry_run: false,
     #     client_token: "String",
     #     spot_options: {
-    #       allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized
+    #       allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized, capacity-optimized-prioritized
     #       maintenance_strategies: {
     #         capacity_rebalance: {
     #           replacement_strategy: "launch", # accepts launch
@@ -6520,11 +6520,6 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
     #
-    # @option params [required, String] :allocation_id
-    #   The allocation ID of an Elastic IP address to associate with the NAT
-    #   gateway. If the Elastic IP address is associated with another
-    #   resource, you must first disassociate it.
-    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
@@ -6550,6 +6545,11 @@ module Aws::EC2
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the NAT gateway.
+    #
+    # @option params [required, String] :allocation_id
+    #   The allocation ID of an Elastic IP address to associate with the NAT
+    #   gateway. If the Elastic IP address is associated with another
+    #   resource, you must first disassociate it.
     #
     # @return [Types::CreateNatGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6586,7 +6586,6 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_nat_gateway({
-    #     allocation_id: "AllocationId", # required
     #     client_token: "String",
     #     dry_run: false,
     #     subnet_id: "SubnetId", # required
@@ -6601,6 +6600,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     allocation_id: "AllocationId", # required
     #   })
     #
     # @example Response structure
@@ -8253,12 +8253,6 @@ module Aws::EC2
     # @option params [String] :availability_zone_id
     #   The AZ ID or the Local Zone ID of the subnet.
     #
-    # @option params [required, String] :cidr_block
-    #   The IPv4 network range for the subnet, in CIDR notation. For example,
-    #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
-    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
-    #   `100.68.0.0/18`.
-    #
     # @option params [String] :ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
@@ -8276,6 +8270,12 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :cidr_block
+    #   The IPv4 network range for the subnet, in CIDR notation. For example,
+    #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
+    #   form; for example, if you specify `100.68.0.18/18`, we modify it to
+    #   `100.68.0.0/18`.
     #
     # @return [Types::CreateSubnetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8320,11 +8320,11 @@ module Aws::EC2
     #     ],
     #     availability_zone: "String",
     #     availability_zone_id: "String",
-    #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
     #     outpost_arn: "String",
     #     vpc_id: "VpcId", # required
     #     dry_run: false,
+    #     cidr_block: "String", # required
     #   })
     #
     # @example Response structure
@@ -16089,7 +16089,7 @@ module Aws::EC2
     #   resp.fleets[0].valid_from #=> Time
     #   resp.fleets[0].valid_until #=> Time
     #   resp.fleets[0].replace_unhealthy_instances #=> Boolean
-    #   resp.fleets[0].spot_options.allocation_strategy #=> String, one of "lowest-price", "diversified", "capacity-optimized"
+    #   resp.fleets[0].spot_options.allocation_strategy #=> String, one of "lowest-price", "diversified", "capacity-optimized", "capacity-optimized-prioritized"
     #   resp.fleets[0].spot_options.maintenance_strategies.capacity_rebalance.replacement_strategy #=> String, one of "launch"
     #   resp.fleets[0].spot_options.instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
     #   resp.fleets[0].spot_options.instance_pools_to_use_count #=> Integer
@@ -16941,10 +16941,10 @@ module Aws::EC2
     # @option params [required, String] :attribute
     #   The AMI attribute.
     #
-    #   **Note**\: Depending on your account privileges, the
-    #   `blockDeviceMapping` attribute may return a `Client.AuthFailure`
-    #   error. If this happens, use DescribeImages to get information about
-    #   the block device mapping for the AMI.
+    #   **Note**\: The `blockDeviceMapping` attribute is deprecated. Using
+    #   this attribute returns the `Client.AuthFailure` error. To get
+    #   information about the block device mappings for an AMI, use the
+    #   DescribeImages action.
     #
     # @option params [required, String] :image_id
     #   The ID of the AMI.
@@ -23861,7 +23861,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs #=> Array
     #   resp.spot_fleet_request_configs[0].activity_status #=> String, one of "error", "pending_fulfillment", "pending_termination", "fulfilled"
     #   resp.spot_fleet_request_configs[0].create_time #=> Time
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.allocation_strategy #=> String, one of "lowestPrice", "diversified", "capacityOptimized"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.allocation_strategy #=> String, one of "lowestPrice", "diversified", "capacityOptimized", "capacityOptimizedPrioritized"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_allocation_strategy #=> String, one of "lowestPrice", "prioritized"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_maintenance_strategies.capacity_rebalance.replacement_strategy #=> String, one of "launch"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.client_token #=> String
@@ -37476,7 +37476,7 @@ module Aws::EC2
     #   resp = client.request_spot_fleet({
     #     dry_run: false,
     #     spot_fleet_request_config: { # required
-    #       allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized
+    #       allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized, capacityOptimizedPrioritized
     #       on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
     #       spot_maintenance_strategies: {
     #         capacity_rebalance: {
@@ -41236,7 +41236,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.225.0'
+      context[:gem_version] = '1.226.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

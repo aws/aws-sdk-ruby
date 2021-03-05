@@ -852,7 +852,7 @@ module Aws::LicenseManager
     #         product_information_filter_list: [ # required
     #           {
     #             product_information_filter_name: "String", # required
-    #             product_information_filter_value: ["String"], # required
+    #             product_information_filter_value: ["String"],
     #             product_information_filter_comparator: "String", # required
     #           },
     #         ],
@@ -2411,7 +2411,7 @@ module Aws::LicenseManager
     #         product_information_filter_list: [ # required
     #           {
     #             product_information_filter_name: "String", # required
-    #             product_information_filter_value: ["String"], # required
+    #             product_information_filter_value: ["String"],
     #             product_information_filter_comparator: "String", # required
     #           },
     #         ],
@@ -2527,7 +2527,7 @@ module Aws::LicenseManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

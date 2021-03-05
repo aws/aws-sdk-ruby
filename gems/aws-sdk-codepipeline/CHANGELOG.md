@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2021-03-05)
+------------------
+
+* Feature - Updated the parameters to make actionType required for UpdateActionType
+
 1.42.0 (2021-03-01)
 ------------------
 

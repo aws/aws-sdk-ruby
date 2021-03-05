@@ -4850,7 +4850,7 @@ module Aws::CodePipeline
     #   data as a hash:
     #
     #       {
-    #         action_type: {
+    #         action_type: { # required
     #           description: "ActionTypeDescription",
     #           executor: { # required
     #             configuration: { # required

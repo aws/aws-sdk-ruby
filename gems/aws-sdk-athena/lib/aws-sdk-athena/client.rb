@@ -595,6 +595,40 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Creates a prepared statement for use with SQL queries in Athena.
+    #
+    # @option params [required, String] :statement_name
+    #   The name of the prepared statement.
+    #
+    # @option params [required, String] :work_group
+    #   The name of the workgroup to which the prepared statement belongs.
+    #
+    # @option params [required, String] :query_statement
+    #   The query string for the prepared statement.
+    #
+    # @option params [String] :description
+    #   The description of the prepared statement.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_prepared_statement({
+    #     statement_name: "StatementName", # required
+    #     work_group: "WorkGroupName", # required
+    #     query_statement: "QueryString", # required
+    #     description: "DescriptionString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreatePreparedStatement AWS API Documentation
+    #
+    # @overload create_prepared_statement(params = {})
+    # @param [Hash] params ({})
+    def create_prepared_statement(params = {}, options = {})
+      req = build_request(:create_prepared_statement, params)
+      req.send_request(options)
+    end
+
     # Creates a workgroup with the specified name.
     #
     # @option params [required, String] :name
@@ -711,6 +745,33 @@ module Aws::Athena
     # @param [Hash] params ({})
     def delete_named_query(params = {}, options = {})
       req = build_request(:delete_named_query, params)
+      req.send_request(options)
+    end
+
+    # Deletes the prepared statement with the specified name from the
+    # specified workgroup.
+    #
+    # @option params [required, String] :statement_name
+    #   The name of the prepared statement to delete.
+    #
+    # @option params [required, String] :work_group
+    #   The workgroup to which the statement to be deleted belongs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_prepared_statement({
+    #     statement_name: "StatementName", # required
+    #     work_group: "WorkGroupName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeletePreparedStatement AWS API Documentation
+    #
+    # @overload delete_prepared_statement(params = {})
+    # @param [Hash] params ({})
+    def delete_prepared_statement(params = {}, options = {})
+      req = build_request(:delete_prepared_statement, params)
       req.send_request(options)
     end
 
@@ -840,6 +901,43 @@ module Aws::Athena
     # @param [Hash] params ({})
     def get_named_query(params = {}, options = {})
       req = build_request(:get_named_query, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the prepared statement with the specified name from the
+    # specified workgroup.
+    #
+    # @option params [required, String] :statement_name
+    #   The name of the prepared statement to retrieve.
+    #
+    # @option params [required, String] :work_group
+    #   The workgroup to which the statement to be retrieved belongs.
+    #
+    # @return [Types::GetPreparedStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPreparedStatementOutput#prepared_statement #prepared_statement} => Types::PreparedStatement
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_prepared_statement({
+    #     statement_name: "StatementName", # required
+    #     work_group: "WorkGroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prepared_statement.statement_name #=> String
+    #   resp.prepared_statement.query_statement #=> String
+    #   resp.prepared_statement.work_group_name #=> String
+    #   resp.prepared_statement.description #=> String
+    #   resp.prepared_statement.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetPreparedStatement AWS API Documentation
+    #
+    # @overload get_prepared_statement(params = {})
+    # @param [Hash] params ({})
+    def get_prepared_statement(params = {}, options = {})
+      req = build_request(:get_prepared_statement, params)
       req.send_request(options)
     end
 
@@ -1242,6 +1340,51 @@ module Aws::Athena
     # @param [Hash] params ({})
     def list_named_queries(params = {}, options = {})
       req = build_request(:list_named_queries, params)
+      req.send_request(options)
+    end
+
+    # Lists the prepared statements in the specfied workgroup.
+    #
+    # @option params [required, String] :work_group
+    #   The workgroup to list the prepared statements for.
+    #
+    # @option params [String] :next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain the
+    #   next set of pages, pass in the `NextToken` from the response object of
+    #   the previous page call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @return [Types::ListPreparedStatementsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPreparedStatementsOutput#prepared_statements #prepared_statements} => Array&lt;Types::PreparedStatementSummary&gt;
+    #   * {Types::ListPreparedStatementsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_prepared_statements({
+    #     work_group: "WorkGroupName", # required
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.prepared_statements #=> Array
+    #   resp.prepared_statements[0].statement_name #=> String
+    #   resp.prepared_statements[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListPreparedStatements AWS API Documentation
+    #
+    # @overload list_prepared_statements(params = {})
+    # @param [Hash] params ({})
+    def list_prepared_statements(params = {}, options = {})
+      req = build_request(:list_prepared_statements, params)
       req.send_request(options)
     end
 
@@ -1717,6 +1860,40 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Updates a prepared statement.
+    #
+    # @option params [required, String] :statement_name
+    #   The name of the prepared statement.
+    #
+    # @option params [required, String] :work_group
+    #   The workgroup for the prepared statement.
+    #
+    # @option params [required, String] :query_statement
+    #   The query string for the prepared statement.
+    #
+    # @option params [String] :description
+    #   The description of the prepared statement.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_prepared_statement({
+    #     statement_name: "StatementName", # required
+    #     work_group: "WorkGroupName", # required
+    #     query_statement: "QueryString", # required
+    #     description: "DescriptionString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdatePreparedStatement AWS API Documentation
+    #
+    # @overload update_prepared_statement(params = {})
+    # @param [Hash] params ({})
+    def update_prepared_statement(params = {}, options = {})
+      req = build_request(:update_prepared_statement, params)
+      req.send_request(options)
+    end
+
     # Updates the workgroup with the specified name. The workgroup's name
     # cannot be changed.
     #
@@ -1785,7 +1962,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

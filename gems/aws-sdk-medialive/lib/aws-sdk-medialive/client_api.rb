@@ -2799,11 +2799,13 @@ module Aws::MediaLive
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     TransferInputDevice.add_member(:target_customer_id, Shapes::ShapeRef.new(shape: __string, location_name: "targetCustomerId"))
+    TransferInputDevice.add_member(:target_region, Shapes::ShapeRef.new(shape: __string, location_name: "targetRegion"))
     TransferInputDevice.add_member(:transfer_message, Shapes::ShapeRef.new(shape: __string, location_name: "transferMessage"))
     TransferInputDevice.struct_class = Types::TransferInputDevice
 
     TransferInputDeviceRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
     TransferInputDeviceRequest.add_member(:target_customer_id, Shapes::ShapeRef.new(shape: __string, location_name: "targetCustomerId"))
+    TransferInputDeviceRequest.add_member(:target_region, Shapes::ShapeRef.new(shape: __string, location_name: "targetRegion"))
     TransferInputDeviceRequest.add_member(:transfer_message, Shapes::ShapeRef.new(shape: __string, location_name: "transferMessage"))
     TransferInputDeviceRequest.struct_class = Types::TransferInputDeviceRequest
 

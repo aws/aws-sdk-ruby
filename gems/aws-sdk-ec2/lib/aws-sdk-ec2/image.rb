@@ -485,10 +485,10 @@ module Aws::EC2
     # @option options [required, String] :attribute
     #   The AMI attribute.
     #
-    #   **Note**\: Depending on your account privileges, the
-    #   `blockDeviceMapping` attribute may return a `Client.AuthFailure`
-    #   error. If this happens, use DescribeImages to get information about
-    #   the block device mapping for the AMI.
+    #   **Note**\: The `blockDeviceMapping` attribute is deprecated. Using
+    #   this attribute returns the `Client.AuthFailure` error. To get
+    #   information about the block device mappings for an AMI, use the
+    #   DescribeImages action.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

@@ -583,6 +583,10 @@ module Aws::Shield
     #   * For an Elastic IP address:
     #     `arn:aws:ec2:region:account-id:eip-allocation/allocation-id `
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tag key-value pairs for the Protection object that is
+    #   created.
+    #
     # @return [Types::CreateProtectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProtectionResponse#protection_id #protection_id} => String
@@ -592,6 +596,12 @@ module Aws::Shield
     #   resp = client.create_protection({
     #     name: "ProtectionName", # required
     #     resource_arn: "ResourceArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -651,6 +661,9 @@ module Aws::Shield
     #   protection group. You must set this when you set `Pattern` to
     #   `ARBITRARY` and you must not set it for any other `Pattern` setting.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tag key-value pairs for the protection group.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -661,6 +674,12 @@ module Aws::Shield
     #     pattern: "ALL", # required, accepts ALL, ARBITRARY, BY_RESOURCE_TYPE
     #     resource_type: "CLOUDFRONT_DISTRIBUTION", # accepts CLOUDFRONT_DISTRIBUTION, ROUTE_53_HOSTED_ZONE, ELASTIC_IP_ALLOCATION, CLASSIC_LOAD_BALANCER, APPLICATION_LOAD_BALANCER, GLOBAL_ACCELERATOR
     #     members: ["ResourceArn"],
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtectionGroup AWS API Documentation
@@ -937,6 +956,7 @@ module Aws::Shield
     #   resp.protection.resource_arn #=> String
     #   resp.protection.health_check_ids #=> Array
     #   resp.protection.health_check_ids[0] #=> String
+    #   resp.protection.protection_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtection AWS API Documentation
     #
@@ -972,6 +992,7 @@ module Aws::Shield
     #   resp.protection_group.resource_type #=> String, one of "CLOUDFRONT_DISTRIBUTION", "ROUTE_53_HOSTED_ZONE", "ELASTIC_IP_ALLOCATION", "CLASSIC_LOAD_BALANCER", "APPLICATION_LOAD_BALANCER", "GLOBAL_ACCELERATOR"
     #   resp.protection_group.members #=> Array
     #   resp.protection_group.members[0] #=> String
+    #   resp.protection_group.protection_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtectionGroup AWS API Documentation
     #
@@ -1004,6 +1025,7 @@ module Aws::Shield
     #   resp.subscription.subscription_limits.protection_limits.protected_resource_type_limits[0].max #=> Integer
     #   resp.subscription.subscription_limits.protection_group_limits.max_protection_groups #=> Integer
     #   resp.subscription.subscription_limits.protection_group_limits.pattern_type_limits.arbitrary_pattern_limits.max_members #=> Integer
+    #   resp.subscription.subscription_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeSubscription AWS API Documentation
     #
@@ -1289,6 +1311,7 @@ module Aws::Shield
     #   resp.protection_groups[0].resource_type #=> String, one of "CLOUDFRONT_DISTRIBUTION", "ROUTE_53_HOSTED_ZONE", "ELASTIC_IP_ALLOCATION", "CLASSIC_LOAD_BALANCER", "APPLICATION_LOAD_BALANCER", "GLOBAL_ACCELERATOR"
     #   resp.protection_groups[0].members #=> Array
     #   resp.protection_groups[0].members[0] #=> String
+    #   resp.protection_groups[0].protection_group_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtectionGroups AWS API Documentation
@@ -1339,6 +1362,7 @@ module Aws::Shield
     #   resp.protections[0].resource_arn #=> String
     #   resp.protections[0].health_check_ids #=> Array
     #   resp.protections[0].health_check_ids[0] #=> String
+    #   resp.protections[0].protection_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtections AWS API Documentation
@@ -1399,6 +1423,96 @@ module Aws::Shield
     # @param [Hash] params ({})
     def list_resources_in_protection_group(params = {}, options = {})
       req = build_request(:list_resources_in_protection_group, params)
+      req.send_request(options)
+    end
+
+    # Gets information about AWS tags for a specified Amazon Resource Name
+    # (ARN) in AWS Shield.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to get tags for.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Adds or updates tags for a resource in AWS Shield.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to add or
+    #   update tags for.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags that you want to modify or add to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from a resource in AWS Shield.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to remove
+    #   tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag key for each tag that you want to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -1545,7 +1659,7 @@ module Aws::Shield
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-shield'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

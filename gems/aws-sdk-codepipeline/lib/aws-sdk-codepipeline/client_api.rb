@@ -1119,7 +1119,7 @@ module Aws::CodePipeline
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
-    UpdateActionTypeInput.add_member(:action_type, Shapes::ShapeRef.new(shape: ActionTypeDeclaration, location_name: "actionType"))
+    UpdateActionTypeInput.add_member(:action_type, Shapes::ShapeRef.new(shape: ActionTypeDeclaration, required: true, location_name: "actionType"))
     UpdateActionTypeInput.struct_class = Types::UpdateActionTypeInput
 
     UpdatePipelineInput.add_member(:pipeline, Shapes::ShapeRef.new(shape: PipelineDeclaration, required: true, location_name: "pipeline"))

@@ -801,7 +801,7 @@ module Aws::LicenseManager
     ProductInformation.struct_class = Types::ProductInformation
 
     ProductInformationFilter.add_member(:product_information_filter_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ProductInformationFilterName"))
-    ProductInformationFilter.add_member(:product_information_filter_value, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "ProductInformationFilterValue"))
+    ProductInformationFilter.add_member(:product_information_filter_value, Shapes::ShapeRef.new(shape: StringList, location_name: "ProductInformationFilterValue"))
     ProductInformationFilter.add_member(:product_information_filter_comparator, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ProductInformationFilterComparator"))
     ProductInformationFilter.struct_class = Types::ProductInformationFilter
 

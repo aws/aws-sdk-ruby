@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-03-05)
+------------------
+
+* Feature - Add support for tagging of Shield protection and protection group resources.
+
 1.34.0 (2021-02-02)
 ------------------
 

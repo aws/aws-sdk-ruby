@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2021-03-05)
+------------------
+
+* Feature - Medialive now supports the ability to transfer AWS Elemental Link devices to another region.
+
 1.64.0 (2021-02-15)
 ------------------
 

@@ -106,6 +106,8 @@ module Aws::Shield
     ListProtectionsResponse = Shapes::StructureShape.new(name: 'ListProtectionsResponse')
     ListResourcesInProtectionGroupRequest = Shapes::StructureShape.new(name: 'ListResourcesInProtectionGroupRequest')
     ListResourcesInProtectionGroupResponse = Shapes::StructureShape.new(name: 'ListResourcesInProtectionGroupResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LockedSubscriptionException = Shapes::StructureShape.new(name: 'LockedSubscriptionException')
     LogBucket = Shapes::StringShape.new(name: 'LogBucket')
     LogBucketList = Shapes::ListShape.new(name: 'LogBucketList')
@@ -149,11 +151,20 @@ module Aws::Shield
     SummarizedAttackVectorList = Shapes::ListShape.new(name: 'SummarizedAttackVectorList')
     SummarizedCounter = Shapes::StructureShape.new(name: 'SummarizedCounter')
     SummarizedCounterList = Shapes::ListShape.new(name: 'SummarizedCounterList')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TimeRange = Shapes::StructureShape.new(name: 'TimeRange')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Token = Shapes::StringShape.new(name: 'Token')
     TopContributors = Shapes::ListShape.new(name: 'TopContributors')
     Unit = Shapes::StringShape.new(name: 'Unit')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateEmergencyContactSettingsRequest = Shapes::StructureShape.new(name: 'UpdateEmergencyContactSettingsRequest')
     UpdateEmergencyContactSettingsResponse = Shapes::StructureShape.new(name: 'UpdateEmergencyContactSettingsResponse')
     UpdateProtectionGroupRequest = Shapes::StructureShape.new(name: 'UpdateProtectionGroupRequest')
@@ -248,12 +259,14 @@ module Aws::Shield
     CreateProtectionGroupRequest.add_member(:pattern, Shapes::ShapeRef.new(shape: ProtectionGroupPattern, required: true, location_name: "Pattern"))
     CreateProtectionGroupRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ProtectedResourceType, location_name: "ResourceType"))
     CreateProtectionGroupRequest.add_member(:members, Shapes::ShapeRef.new(shape: ProtectionGroupMembers, location_name: "Members"))
+    CreateProtectionGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateProtectionGroupRequest.struct_class = Types::CreateProtectionGroupRequest
 
     CreateProtectionGroupResponse.struct_class = Types::CreateProtectionGroupResponse
 
     CreateProtectionRequest.add_member(:name, Shapes::ShapeRef.new(shape: ProtectionName, required: true, location_name: "Name"))
     CreateProtectionRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    CreateProtectionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateProtectionRequest.struct_class = Types::CreateProtectionRequest
 
     CreateProtectionResponse.add_member(:protection_id, Shapes::ShapeRef.new(shape: ProtectionId, location_name: "ProtectionId"))
@@ -419,6 +432,12 @@ module Aws::Shield
     ListResourcesInProtectionGroupResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListResourcesInProtectionGroupResponse.struct_class = Types::ListResourcesInProtectionGroupResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     LockedSubscriptionException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     LockedSubscriptionException.struct_class = Types::LockedSubscriptionException
 
@@ -439,6 +458,7 @@ module Aws::Shield
     Protection.add_member(:name, Shapes::ShapeRef.new(shape: ProtectionName, location_name: "Name"))
     Protection.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
     Protection.add_member(:health_check_ids, Shapes::ShapeRef.new(shape: HealthCheckIds, location_name: "HealthCheckIds"))
+    Protection.add_member(:protection_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProtectionArn"))
     Protection.struct_class = Types::Protection
 
     ProtectionGroup.add_member(:protection_group_id, Shapes::ShapeRef.new(shape: ProtectionGroupId, required: true, location_name: "ProtectionGroupId"))
@@ -446,6 +466,7 @@ module Aws::Shield
     ProtectionGroup.add_member(:pattern, Shapes::ShapeRef.new(shape: ProtectionGroupPattern, required: true, location_name: "Pattern"))
     ProtectionGroup.add_member(:resource_type, Shapes::ShapeRef.new(shape: ProtectedResourceType, location_name: "ResourceType"))
     ProtectionGroup.add_member(:members, Shapes::ShapeRef.new(shape: ProtectionGroupMembers, required: true, location_name: "Members"))
+    ProtectionGroup.add_member(:protection_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProtectionGroupArn"))
     ProtectionGroup.struct_class = Types::ProtectionGroup
 
     ProtectionGroupArbitraryPatternLimits.add_member(:max_members, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "MaxMembers"))
@@ -494,6 +515,7 @@ module Aws::Shield
     Subscription.add_member(:limits, Shapes::ShapeRef.new(shape: Limits, location_name: "Limits"))
     Subscription.add_member(:proactive_engagement_status, Shapes::ShapeRef.new(shape: ProactiveEngagementStatus, location_name: "ProactiveEngagementStatus"))
     Subscription.add_member(:subscription_limits, Shapes::ShapeRef.new(shape: SubscriptionLimits, required: true, location_name: "SubscriptionLimits"))
+    Subscription.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "SubscriptionArn"))
     Subscription.struct_class = Types::Subscription
 
     SubscriptionLimits.add_member(:protection_limits, Shapes::ShapeRef.new(shape: ProtectionLimits, required: true, location_name: "ProtectionLimits"))
@@ -516,11 +538,31 @@ module Aws::Shield
 
     SummarizedCounterList.member = Shapes::ShapeRef.new(shape: SummarizedCounter)
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     TimeRange.add_member(:from_inclusive, Shapes::ShapeRef.new(shape: AttackTimestamp, location_name: "FromInclusive"))
     TimeRange.add_member(:to_exclusive, Shapes::ShapeRef.new(shape: AttackTimestamp, location_name: "ToExclusive"))
     TimeRange.struct_class = Types::TimeRange
 
     TopContributors.member = Shapes::ShapeRef.new(shape: Contributor)
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateEmergencyContactSettingsRequest.add_member(:emergency_contact_list, Shapes::ShapeRef.new(shape: EmergencyContactList, location_name: "EmergencyContactList"))
     UpdateEmergencyContactSettingsRequest.struct_class = Types::UpdateEmergencyContactSettingsRequest
@@ -904,6 +946,41 @@ module Aws::Shield
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_emergency_contact_settings, Seahorse::Model::Operation.new.tap do |o|

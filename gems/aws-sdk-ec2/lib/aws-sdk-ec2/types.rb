@@ -1647,24 +1647,24 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         ipv_6_cidr_block: "String", # required
     #         subnet_id: "SubnetId", # required
+    #         ipv_6_cidr_block: "String", # required
     #       }
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of your subnet.
+    #   @return [String]
     #
     # @!attribute [rw] ipv_6_cidr_block
     #   The IPv6 CIDR block for your subnet. The subnet must have a /64
     #   prefix length.
     #   @return [String]
     #
-    # @!attribute [rw] subnet_id
-    #   The ID of your subnet.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSubnetCidrBlockRequest AWS API Documentation
     #
     class AssociateSubnetCidrBlockRequest < Struct.new(
-      :ipv_6_cidr_block,
-      :subnet_id)
+      :subnet_id,
+      :ipv_6_cidr_block)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6276,7 +6276,7 @@ module Aws::EC2
     #         dry_run: false,
     #         client_token: "String",
     #         spot_options: {
-    #           allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized
+    #           allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized, capacity-optimized-prioritized
     #           maintenance_strategies: {
     #             capacity_rebalance: {
     #               replacement_strategy: "launch", # accepts launch
@@ -7755,7 +7755,6 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         allocation_id: "AllocationId", # required
     #         client_token: "String",
     #         dry_run: false,
     #         subnet_id: "SubnetId", # required
@@ -7770,13 +7769,8 @@ module Aws::EC2
     #             ],
     #           },
     #         ],
+    #         allocation_id: "AllocationId", # required
     #       }
-    #
-    # @!attribute [rw] allocation_id
-    #   The allocation ID of an Elastic IP address to associate with the NAT
-    #   gateway. If the Elastic IP address is associated with another
-    #   resource, you must first disassociate it.
-    #   @return [String]
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -7808,14 +7802,20 @@ module Aws::EC2
     #   The tags to assign to the NAT gateway.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] allocation_id
+    #   The allocation ID of an Elastic IP address to associate with the NAT
+    #   gateway. If the Elastic IP address is associated with another
+    #   resource, you must first disassociate it.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNatGatewayRequest AWS API Documentation
     #
     class CreateNatGatewayRequest < Struct.new(
-      :allocation_id,
       :client_token,
       :dry_run,
       :subnet_id,
-      :tag_specifications)
+      :tag_specifications,
+      :allocation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8973,11 +8973,11 @@ module Aws::EC2
     #         ],
     #         availability_zone: "String",
     #         availability_zone_id: "String",
-    #         cidr_block: "String", # required
     #         ipv_6_cidr_block: "String",
     #         outpost_arn: "String",
     #         vpc_id: "VpcId", # required
     #         dry_run: false,
+    #         cidr_block: "String", # required
     #       }
     #
     # @!attribute [rw] tag_specifications
@@ -9008,13 +9008,6 @@ module Aws::EC2
     #   The AZ ID or the Local Zone ID of the subnet.
     #   @return [String]
     #
-    # @!attribute [rw] cidr_block
-    #   The IPv4 network range for the subnet, in CIDR notation. For
-    #   example, `10.0.0.0/24`. We modify the specified CIDR block to its
-    #   canonical form; for example, if you specify `100.68.0.18/18`, we
-    #   modify it to `100.68.0.0/18`.
-    #   @return [String]
-    #
     # @!attribute [rw] ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
@@ -9037,17 +9030,24 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] cidr_block
+    #   The IPv4 network range for the subnet, in CIDR notation. For
+    #   example, `10.0.0.0/24`. We modify the specified CIDR block to its
+    #   canonical form; for example, if you specify `100.68.0.18/18`, we
+    #   modify it to `100.68.0.0/18`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnetRequest AWS API Documentation
     #
     class CreateSubnetRequest < Struct.new(
       :tag_specifications,
       :availability_zone,
       :availability_zone_id,
-      :cidr_block,
       :ipv_6_cidr_block,
       :outpost_arn,
       :vpc_id,
-      :dry_run)
+      :dry_run,
+      :cidr_block)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16851,10 +16851,10 @@ module Aws::EC2
     # @!attribute [rw] attribute
     #   The AMI attribute.
     #
-    #   **Note**\: Depending on your account privileges, the
-    #   `blockDeviceMapping` attribute may return a `Client.AuthFailure`
-    #   error. If this happens, use DescribeImages to get information about
-    #   the block device mapping for the AMI.
+    #   **Note**\: The `blockDeviceMapping` attribute is deprecated. Using
+    #   this attribute returns the `Client.AuthFailure` error. To get
+    #   information about the block device mappings for an AMI, use the
+    #   DescribeImages action.
     #   @return [String]
     #
     # @!attribute [rw] image_id
@@ -28373,13 +28373,22 @@ module Aws::EC2
     #   @return [Float]
     #
     # @!attribute [rw] priority
-    #   The priority for the launch template override. If
-    #   **AllocationStrategy** is set to `prioritized`, EC2 Fleet uses
-    #   priority to determine which launch template override to use first in
-    #   fulfilling On-Demand capacity. The highest priority is launched
-    #   first. Valid values are whole numbers starting at `0`. The lower the
+    #   The priority for the launch template override. The highest priority
+    #   is launched first.
+    #
+    #   If the On-Demand `AllocationStrategy` is set to `prioritized`, EC2
+    #   Fleet uses priority to determine which launch template override to
+    #   use first in fulfilling On-Demand capacity.
+    #
+    #   If the Spot `AllocationStrategy` is set to
+    #   `capacity-optimized-prioritized`, EC2 Fleet uses priority on a
+    #   best-effort basis to determine which launch template override to use
+    #   first in fulfilling Spot capacity, but optimizes for capacity first.
+    #
+    #   Valid values are whole numbers starting at `0`. The lower the
     #   number, the higher the priority. If no number is set, the override
-    #   has the lowest priority.
+    #   has the lowest priority. You can set the same priority for different
+    #   launch template overrides.
     #   @return [Float]
     #
     # @!attribute [rw] placement
@@ -28449,13 +28458,22 @@ module Aws::EC2
     #   @return [Float]
     #
     # @!attribute [rw] priority
-    #   The priority for the launch template override. If
-    #   **AllocationStrategy** is set to `prioritized`, EC2 Fleet uses
-    #   priority to determine which launch template override to use first in
-    #   fulfilling On-Demand capacity. The highest priority is launched
-    #   first. Valid values are whole numbers starting at `0`. The lower the
+    #   The priority for the launch template override. The highest priority
+    #   is launched first.
+    #
+    #   If the On-Demand `AllocationStrategy` is set to `prioritized`, EC2
+    #   Fleet uses priority to determine which launch template override to
+    #   use first in fulfilling On-Demand capacity.
+    #
+    #   If the Spot `AllocationStrategy` is set to
+    #   `capacity-optimized-prioritized`, EC2 Fleet uses priority on a
+    #   best-effort basis to determine which launch template override to use
+    #   first in fulfilling Spot capacity, but optimizes for capacity first.
+    #
+    #   Valid values are whole numbers starting at `0`. The lower the
     #   number, the higher the priority. If no number is set, the launch
-    #   template override has the lowest priority.
+    #   template override has the lowest priority. You can set the same
+    #   priority for different launch template overrides.
     #   @return [Float]
     #
     # @!attribute [rw] placement
@@ -35775,13 +35793,22 @@ module Aws::EC2
     #   @return [Float]
     #
     # @!attribute [rw] priority
-    #   The priority for the launch template override. If
-    #   **OnDemandAllocationStrategy** is set to `prioritized`, Spot Fleet
+    #   The priority for the launch template override. The highest priority
+    #   is launched first.
+    #
+    #   If `OnDemandAllocationStrategy` is set to `prioritized`, Spot Fleet
     #   uses priority to determine which launch template override to use
-    #   first in fulfilling On-Demand capacity. The highest priority is
-    #   launched first. Valid values are whole numbers starting at `0`. The
-    #   lower the number, the higher the priority. If no number is set, the
-    #   launch template override has the lowest priority.
+    #   first in fulfilling On-Demand capacity.
+    #
+    #   If the Spot `AllocationStrategy` is set to
+    #   `capacityOptimizedPrioritized`, Spot Fleet uses priority on a
+    #   best-effort basis to determine which launch template override to use
+    #   first in fulfilling Spot capacity, but optimizes for capacity first.
+    #
+    #   Valid values are whole numbers starting at `0`. The lower the
+    #   number, the higher the priority. If no number is set, the launch
+    #   template override has the lowest priority. You can set the same
+    #   priority for different launch template overrides.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateOverrides AWS API Documentation
@@ -44693,7 +44720,7 @@ module Aws::EC2
     #       {
     #         dry_run: false,
     #         spot_fleet_request_config: { # required
-    #           allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized
+    #           allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized, capacityOptimizedPrioritized
     #           on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
     #           spot_maintenance_strategies: {
     #             capacity_rebalance: {
@@ -49881,7 +49908,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized
+    #         allocation_strategy: "lowestPrice", # accepts lowestPrice, diversified, capacityOptimized, capacityOptimizedPrioritized
     #         on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
     #         spot_maintenance_strategies: {
     #           capacity_rebalance: {
@@ -50054,9 +50081,19 @@ module Aws::EC2
     #   If the allocation strategy is `diversified`, Spot Fleet launches
     #   instances from all the Spot Instance pools that you specify.
     #
-    #   If the allocation strategy is `capacityOptimized`, Spot Fleet
-    #   launches instances from Spot Instance pools with optimal capacity
-    #   for the number of instances that are launching.
+    #   If the allocation strategy is `capacityOptimized` (recommended),
+    #   Spot Fleet launches instances from Spot Instance pools with optimal
+    #   capacity for the number of instances that are launching. To give
+    #   certain instance types a higher chance of launching first, use
+    #   `capacityOptimizedPrioritized`. Set a priority for each instance
+    #   type by using the `Priority` parameter for
+    #   `LaunchTemplateOverrides`. You can assign the same priority to
+    #   different `LaunchTemplateOverrides`. EC2 implements the priorities
+    #   on a best-effort basis, but optimizes for capacity first.
+    #   `capacityOptimizedPrioritized` is supported only if your Spot Fleet
+    #   uses a launch template. Note that if the
+    #   `OnDemandAllocationStrategy` is set to `prioritized`, the same
+    #   priority is applied when fulfilling On-Demand capacity.
     #   @return [String]
     #
     # @!attribute [rw] on_demand_allocation_strategy
@@ -50617,9 +50654,19 @@ module Aws::EC2
     #   If the allocation strategy is `diversified`, EC2 Fleet launches
     #   instances from all of the Spot Instance pools that you specify.
     #
-    #   If the allocation strategy is `capacity-optimized`, EC2 Fleet
-    #   launches instances from Spot Instance pools with optimal capacity
-    #   for the number of instances that are launching.
+    #   If the allocation strategy is `capacity-optimized` (recommended),
+    #   EC2 Fleet launches instances from Spot Instance pools with optimal
+    #   capacity for the number of instances that are launching. To give
+    #   certain instance types a higher chance of launching first, use
+    #   `capacity-optimized-prioritized`. Set a priority for each instance
+    #   type by using the `Priority` parameter for
+    #   `LaunchTemplateOverrides`. You can assign the same priority to
+    #   different `LaunchTemplateOverrides`. EC2 implements the priorities
+    #   on a best-effort basis, but optimizes for capacity first.
+    #   `capacity-optimized-prioritized` is supported only if your fleet
+    #   uses a launch template. Note that if the On-Demand
+    #   `AllocationStrategy` is set to `prioritized`, the same priority is
+    #   applied when fulfilling On-Demand capacity.
     #   @return [String]
     #
     # @!attribute [rw] maintenance_strategies
@@ -50684,7 +50731,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized
+    #         allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized, capacity-optimized-prioritized
     #         maintenance_strategies: {
     #           capacity_rebalance: {
     #             replacement_strategy: "launch", # accepts launch
@@ -50709,9 +50756,19 @@ module Aws::EC2
     #   If the allocation strategy is `diversified`, EC2 Fleet launches
     #   instances from all of the Spot Instance pools that you specify.
     #
-    #   If the allocation strategy is `capacity-optimized`, EC2 Fleet
-    #   launches instances from Spot Instance pools with optimal capacity
-    #   for the number of instances that are launching.
+    #   If the allocation strategy is `capacity-optimized` (recommended),
+    #   EC2 Fleet launches instances from Spot Instance pools with optimal
+    #   capacity for the number of instances that are launching. To give
+    #   certain instance types a higher chance of launching first, use
+    #   `capacity-optimized-prioritized`. Set a priority for each instance
+    #   type by using the `Priority` parameter for
+    #   `LaunchTemplateOverrides`. You can assign the same priority to
+    #   different `LaunchTemplateOverrides`. EC2 implements the priorities
+    #   on a best-effort basis, but optimizes for capacity first.
+    #   `capacity-optimized-prioritized` is supported only if your fleet
+    #   uses a launch template. Note that if the On-Demand
+    #   `AllocationStrategy` is set to `prioritized`, the same priority is
+    #   applied when fulfilling On-Demand capacity.
     #   @return [String]
     #
     # @!attribute [rw] maintenance_strategies

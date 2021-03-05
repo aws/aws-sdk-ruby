@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2021-03-05)
+------------------
+
+* Feature - Adds APIs to create, list, update, and delete prepared SQL statements that have optional placeholder parameters. A prepared statement can use different values for these parameters each time it is run.
+
 1.35.0 (2021-02-04)
 ------------------
 

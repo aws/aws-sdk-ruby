@@ -2521,8 +2521,8 @@ module Aws::EC2
     AssociateRouteTableResult.add_member(:association_state, Shapes::ShapeRef.new(shape: RouteTableAssociationState, location_name: "associationState"))
     AssociateRouteTableResult.struct_class = Types::AssociateRouteTableResult
 
-    AssociateSubnetCidrBlockRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ipv6CidrBlock"))
     AssociateSubnetCidrBlockRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "subnetId"))
+    AssociateSubnetCidrBlockRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ipv6CidrBlock"))
     AssociateSubnetCidrBlockRequest.struct_class = Types::AssociateSubnetCidrBlockRequest
 
     AssociateSubnetCidrBlockResult.add_member(:ipv_6_cidr_block_association, Shapes::ShapeRef.new(shape: SubnetIpv6CidrBlockAssociation, location_name: "ipv6CidrBlockAssociation"))
@@ -3411,11 +3411,11 @@ module Aws::EC2
     CreateManagedPrefixListResult.add_member(:prefix_list, Shapes::ShapeRef.new(shape: ManagedPrefixList, location_name: "prefixList"))
     CreateManagedPrefixListResult.struct_class = Types::CreateManagedPrefixListResult
 
-    CreateNatGatewayRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, required: true, location_name: "AllocationId"))
     CreateNatGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateNatGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateNatGatewayRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
     CreateNatGatewayRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateNatGatewayRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, required: true, location_name: "AllocationId"))
     CreateNatGatewayRequest.struct_class = Types::CreateNatGatewayRequest
 
     CreateNatGatewayResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
@@ -3569,11 +3569,11 @@ module Aws::EC2
     CreateSubnetRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateSubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
     CreateSubnetRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZoneId"))
-    CreateSubnetRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
     CreateSubnetRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlock"))
     CreateSubnetRequest.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "OutpostArn"))
     CreateSubnetRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
     CreateSubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    CreateSubnetRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
     CreateSubnetRequest.struct_class = Types::CreateSubnetRequest
 
     CreateSubnetResult.add_member(:subnet, Shapes::ShapeRef.new(shape: Subnet, location_name: "subnet"))

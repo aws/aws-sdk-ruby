@@ -327,9 +327,11 @@ module Aws::Appflow
     #   @return [Types::UpsolverMetadata]
     #
     # @!attribute [rw] customer_profiles
+    #   The connector metadata specific to Amazon Connect Customer Profiles.
     #   @return [Types::CustomerProfilesMetadata]
     #
     # @!attribute [rw] honeycode
+    #   The connector metadata specific to Amazon Honeycode.
     #   @return [Types::HoneycodeMetadata]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorMetadata AWS API Documentation
@@ -847,6 +849,8 @@ module Aws::Appflow
     #   @return [Types::GoogleAnalyticsConnectorProfileCredentials]
     #
     # @!attribute [rw] honeycode
+    #   The connector-specific credentials required when using Amazon
+    #   Honeycode.
     #   @return [Types::HoneycodeConnectorProfileCredentials]
     #
     # @!attribute [rw] infor_nexus
@@ -995,6 +999,7 @@ module Aws::Appflow
     #   @return [Types::GoogleAnalyticsConnectorProfileProperties]
     #
     # @!attribute [rw] honeycode
+    #   The connector-specific properties required by Amazon Honeycode.
     #   @return [Types::HoneycodeConnectorProfileProperties]
     #
     # @!attribute [rw] infor_nexus
@@ -1556,6 +1561,9 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # The properties that are applied when Amazon Connect Customer Profiles
+    # is used as a destination.
+    #
     # @note When making an API call, you may pass CustomerProfilesDestinationProperties
     #   data as a hash:
     #
@@ -1565,9 +1573,12 @@ module Aws::Appflow
     #       }
     #
     # @!attribute [rw] domain_name
+    #   The unique name of the Amazon Connect Customer Profiles domain.
     #   @return [String]
     #
     # @!attribute [rw] object_type_name
+    #   The object specified in the Amazon Connect Customer Profiles flow
+    #   destination.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CustomerProfilesDestinationProperties AWS API Documentation
@@ -1579,6 +1590,8 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # The connector metadata specific to Amazon Connect Customer Profiles.
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CustomerProfilesMetadata AWS API Documentation
     #
     class CustomerProfilesMetadata < Aws::EmptyStructure; end
@@ -1841,12 +1854,6 @@ module Aws::Appflow
     #
     # @!attribute [rw] connector_types
     #   The type of connector, such as Salesforce, Amplitude, and so on.
-    #
-    #   <note markdown="1"> *Locke* refers to a new destination known as Amazon Connect Customer
-    #   Profiles. At this time, we recommend that you do not use this
-    #   destination.
-    #
-    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -2159,6 +2166,7 @@ module Aws::Appflow
     #   @return [Types::EventBridgeDestinationProperties]
     #
     # @!attribute [rw] lookout_metrics
+    #   The properties required to query Amazon Lookout for Metrics.
     #   @return [Types::LookoutMetricsDestinationProperties]
     #
     # @!attribute [rw] upsolver
@@ -2166,9 +2174,11 @@ module Aws::Appflow
     #   @return [Types::UpsolverDestinationProperties]
     #
     # @!attribute [rw] honeycode
+    #   The properties required to query Amazon Honeycode.
     #   @return [Types::HoneycodeDestinationProperties]
     #
     # @!attribute [rw] customer_profiles
+    #   The properties required to query Amazon Connect Customer Profiles.
     #   @return [Types::CustomerProfilesDestinationProperties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DestinationConnectorProperties AWS API Documentation
@@ -2823,6 +2833,9 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # The connector-specific credentials required when using Amazon
+    # Honeycode.
+    #
     # @note When making an API call, you may pass HoneycodeConnectorProfileCredentials
     #   data as a hash:
     #
@@ -2836,9 +2849,11 @@ module Aws::Appflow
     #       }
     #
     # @!attribute [rw] access_token
+    #   The credentials used to access protected Amazon Honeycode resources.
     #   @return [String]
     #
     # @!attribute [rw] refresh_token
+    #   The credentials used to acquire new access tokens.
     #   @return [String]
     #
     # @!attribute [rw] o_auth_request
@@ -2856,12 +2871,18 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # The connector-specific properties required when using Amazon
+    # Honeycode.
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/HoneycodeConnectorProfileProperties AWS API Documentation
     #
     class HoneycodeConnectorProfileProperties < Aws::EmptyStructure; end
 
+    # The properties that are applied when Amazon Honeycode is used as a
+    # destination.
+    #
     # @note When making an API call, you may pass HoneycodeDestinationProperties
     #   data as a hash:
     #
@@ -2875,6 +2896,7 @@ module Aws::Appflow
     #       }
     #
     # @!attribute [rw] object
+    #   The object specified in the Amazon Honeycode flow destination.
     #   @return [String]
     #
     # @!attribute [rw] error_handling_config
@@ -2895,7 +2917,10 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # The connector metadata specific to Amazon Honeycode.
+    #
     # @!attribute [rw] o_auth_scopes
+    #   The desired authorization scope for the Amazon Honeycode account.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/HoneycodeMetadata AWS API Documentation
@@ -3158,6 +3183,9 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # The properties that are applied when Amazon Lookout for Metrics is
+    # used as a destination.
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/LookoutMetricsDestinationProperties AWS API Documentation
@@ -3270,12 +3298,12 @@ module Aws::Appflow
     #       }
     #
     # @!attribute [rw] prefix_type
-    #   Determines the level of granularity that's included in the prefix.
+    #   Determines the format of the prefix, and whether it applies to the
+    #   file name, file path, or both.
     #   @return [String]
     #
     # @!attribute [rw] prefix_format
-    #   Determines the format of the prefix, and whether it applies to the
-    #   file name, file path, or both.
+    #   Determines the level of granularity that's included in the prefix.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/PrefixConfig AWS API Documentation
@@ -3772,6 +3800,8 @@ module Aws::Appflow
     #   @return [Integer]
     #
     # @!attribute [rw] first_execution_from
+    #   Specifies the date range for the records to import from the
+    #   connector in the first flow run.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ScheduledTriggerProperties AWS API Documentation

@@ -6860,6 +6860,8 @@ module Aws::MediaLive
     #
     # @option params [String] :target_customer_id
     #
+    # @option params [String] :target_region
+    #
     # @option params [String] :transfer_message
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -6869,6 +6871,7 @@ module Aws::MediaLive
     #   resp = client.transfer_input_device({
     #     input_device_id: "__string", # required
     #     target_customer_id: "__string",
+    #     target_region: "__string",
     #     transfer_message: "__string",
     #   })
     #
@@ -9472,7 +9475,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

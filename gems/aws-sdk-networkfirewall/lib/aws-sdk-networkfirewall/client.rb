@@ -610,6 +610,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "SCALING", "READY"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateFirewall AWS API Documentation
     #
@@ -1041,6 +1042,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "SCALING", "READY"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteFirewall AWS API Documentation
     #
@@ -1227,6 +1229,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_status.sync_states["AvailabilityZone"].attachment.status #=> String, one of "CREATING", "DELETING", "SCALING", "READY"
     #   resp.firewall_status.sync_states["AvailabilityZone"].config #=> Hash
     #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].sync_status #=> String, one of "PENDING", "IN_SYNC"
+    #   resp.firewall_status.sync_states["AvailabilityZone"].config["ResourceName"].update_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewall AWS API Documentation
     #
@@ -2622,7 +2625,7 @@ module Aws::NetworkFirewall
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

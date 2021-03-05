@@ -514,6 +514,7 @@ module Aws::NetworkFirewall
     MatchAttributes.struct_class = Types::MatchAttributes
 
     PerObjectStatus.add_member(:sync_status, Shapes::ShapeRef.new(shape: PerObjectSyncStatus, location_name: "SyncStatus"))
+    PerObjectStatus.add_member(:update_token, Shapes::ShapeRef.new(shape: UpdateToken, location_name: "UpdateToken"))
     PerObjectStatus.struct_class = Types::PerObjectStatus
 
     PortRange.add_member(:from_port, Shapes::ShapeRef.new(shape: PortRangeBound, required: true, location_name: "FromPort"))
@@ -807,6 +808,7 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientCapacityException)
       end)
 
       api.add_operation(:create_firewall, Seahorse::Model::Operation.new.tap do |o|
@@ -883,6 +885,7 @@ module Aws::NetworkFirewall
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -944,6 +947,7 @@ module Aws::NetworkFirewall
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeResourcePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1033,6 +1037,7 @@ module Aws::NetworkFirewall
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

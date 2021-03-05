@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2021-03-05)
+------------------
+
+* Feature - Documentation updates for arn:aws:trebuchet:::service:v1:decb008d-e0d8-44a4-b93c-092f0355d523
+
 1.7.0 (2021-02-24)
 ------------------
 

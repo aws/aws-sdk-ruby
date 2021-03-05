@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2021-03-05)
+------------------
+
+* Feature - License Manager Automated Discovery now supports Exclusion Filters.
+
 1.24.0 (2021-02-02)
 ------------------
 
