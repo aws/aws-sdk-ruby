@@ -141,14 +141,14 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html
     # @option options [Types::MixedInstancesPolicy] :mixed_instances_policy
     #   An embedded object that specifies a mixed instances policy. The
-    #   required parameters must be specified. If optional parameters are
+    #   required properties must be specified. If optional properties are
     #   unspecified, their default values are used.
     #
-    #   The policy includes parameters that not only define the distribution
+    #   The policy includes properties that not only define the distribution
     #   of On-Demand Instances and Spot Instances, the maximum price to pay
     #   for Spot Instances, and how the Auto Scaling group allocates instance
     #   types to fulfill On-Demand and Spot capacities, but also the
-    #   parameters that specify the instance configuration information—the
+    #   properties that specify the instance configuration information—the
     #   launch template and instance types. The policy can also include a
     #   weight for each instance type and different launch templates for
     #   individual instance types. For more information, see [Auto Scaling

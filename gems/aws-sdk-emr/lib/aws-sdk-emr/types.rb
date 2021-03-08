@@ -61,6 +61,10 @@ module Aws::EMR
     #             },
     #             on_demand_specification: {
     #               allocation_strategy: "lowest-price", # required, accepts lowest-price
+    #               capacity_reservation_options: {
+    #                 usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #                 capacity_reservation_preference: "open", # accepts open, none
+    #               },
     #             },
     #           },
     #         },
@@ -2623,6 +2627,10 @@ module Aws::EMR
     #           },
     #           on_demand_specification: {
     #             allocation_strategy: "lowest-price", # required, accepts lowest-price
+    #             capacity_reservation_options: {
+    #               usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #               capacity_reservation_preference: "open", # accepts open, none
+    #             },
     #           },
     #         },
     #       }
@@ -2769,6 +2777,10 @@ module Aws::EMR
     #         },
     #         on_demand_specification: {
     #           allocation_strategy: "lowest-price", # required, accepts lowest-price
+    #           capacity_reservation_options: {
+    #             usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #             capacity_reservation_preference: "open", # accepts open, none
+    #           },
     #         },
     #       }
     #
@@ -2929,10 +2941,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] bid_price
-    #   The bid price for each EC2 Spot Instance type as defined by
-    #   `InstanceType`. Expressed in USD. If neither `BidPrice` nor
-    #   `BidPriceAsPercentageOfOnDemandPrice` is provided,
-    #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
+    #   If specified, indicates that the instance group uses Spot Instances.
+    #   This is the maximum price you are willing to pay for Spot Instances.
+    #   Specify `OnDemandPrice` to set the amount equal to the On-Demand
+    #   price, or specify an amount in USD.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -3111,10 +3123,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] bid_price
-    #   The bid price for each EC2 Spot Instance as defined by
-    #   `InstanceType`. Expressed in USD. If neither `BidPrice` nor
-    #   `BidPriceAsPercentageOfOnDemandPrice` is provided,
-    #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
+    #   If specified, indicates that the instance group uses Spot Instances.
+    #   This is the maximum price you are willing to pay for Spot Instances.
+    #   Specify `OnDemandPrice` to set the amount equal to the On-Demand
+    #   price, or specify an amount in USD.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -3183,10 +3195,10 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] bid_price
-    #   The bid price for each EC2 Spot Instance as defined by
-    #   `InstanceType`. Expressed in USD. If neither `BidPrice` nor
-    #   `BidPriceAsPercentageOfOnDemandPrice` is provided,
-    #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
+    #   If specified, indicates that the instance group uses Spot Instances.
+    #   This is the maximum price you are willing to pay for Spot Instances.
+    #   Specify `OnDemandPrice` to set the amount equal to the On-Demand
+    #   price, or specify an amount in USD.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -3969,6 +3981,10 @@ module Aws::EMR
     #               },
     #               on_demand_specification: {
     #                 allocation_strategy: "lowest-price", # required, accepts lowest-price
+    #                 capacity_reservation_options: {
+    #                   usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #                   capacity_reservation_preference: "open", # accepts open, none
+    #                 },
     #               },
     #             },
     #           },
@@ -4939,7 +4955,7 @@ module Aws::EMR
     #
     # @!attribute [rw] step_concurrency_level
     #   The number of steps that can be executed concurrently. You can
-    #   specify a maximum of 256 steps.
+    #   specify a minimum of 1 step and a maximum of 256 steps.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyClusterInput AWS API Documentation
@@ -5229,6 +5245,56 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # Describes the strategy for using unused Capacity Reservations for
+    # fulfilling On-Demand capacity.
+    #
+    # @note When making an API call, you may pass OnDemandCapacityReservationOptions
+    #   data as a hash:
+    #
+    #       {
+    #         usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #         capacity_reservation_preference: "open", # accepts open, none
+    #       }
+    #
+    # @!attribute [rw] usage_strategy
+    #   Indicates whether to use unused Capacity Reservations for fulfilling
+    #   On-Demand capacity.
+    #
+    #   If you specify `use-capacity-reservations-first`, the fleet uses
+    #   unused Capacity Reservations to fulfill On-Demand capacity up to the
+    #   target On-Demand capacity. If multiple instance pools have unused
+    #   Capacity Reservations, the On-Demand allocation strategy
+    #   (`lowest-price`) is applied. If the number of unused Capacity
+    #   Reservations is less than the On-Demand target capacity, the
+    #   remaining On-Demand target capacity is launched according to the
+    #   On-Demand allocation strategy (`lowest-price`).
+    #
+    #   If you do not specify a value, the fleet fulfils the On-Demand
+    #   capacity according to the chosen On-Demand allocation strategy.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_preference
+    #   Indicates the instance's Capacity Reservation preferences. Possible
+    #   preferences include:
+    #
+    #   * `open` - The instance can run in any open Capacity Reservation
+    #     that has matching attributes (instance type, platform,
+    #     Availability Zone).
+    #
+    #   * `none` - The instance avoids running in a Capacity Reservation
+    #     even if one is available. The instance runs as an On-Demand
+    #     Instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/OnDemandCapacityReservationOptions AWS API Documentation
+    #
+    class OnDemandCapacityReservationOptions < Struct.new(
+      :usage_strategy,
+      :capacity_reservation_preference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The launch specification for On-Demand Instances in the instance
     # fleet, which determines the allocation strategy.
     #
@@ -5244,18 +5310,28 @@ module Aws::EMR
     #
     #       {
     #         allocation_strategy: "lowest-price", # required, accepts lowest-price
+    #         capacity_reservation_options: {
+    #           usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #           capacity_reservation_preference: "open", # accepts open, none
+    #         },
     #       }
     #
     # @!attribute [rw] allocation_strategy
-    #   Specifies the strategy to use in launching On-Demand Instance
-    #   fleets. Currently, the only option is lowest-price (the default),
+    #   Specifies the strategy to use in launching On-Demand instance
+    #   fleets. Currently, the only option is `lowest-price` (the default),
     #   which launches the lowest price first.
     #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_options
+    #   The launch specification for On-Demand instances in the instance
+    #   fleet, which determines the allocation strategy.
+    #   @return [Types::OnDemandCapacityReservationOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/OnDemandProvisioningSpecification AWS API Documentation
     #
     class OnDemandProvisioningSpecification < Struct.new(
-      :allocation_strategy)
+      :allocation_strategy,
+      :capacity_reservation_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5776,6 +5852,10 @@ module Aws::EMR
     #                 },
     #                 on_demand_specification: {
     #                   allocation_strategy: "lowest-price", # required, accepts lowest-price
+    #                   capacity_reservation_options: {
+    #                     usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #                     capacity_reservation_preference: "open", # accepts open, none
+    #                   },
     #                 },
     #               },
     #             },

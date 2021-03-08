@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2021-03-08)
+------------------
+
+* Feature - Documentation updates for autoscaling for capacity-optimized-prioritized SpotAllocationStrategy
+
 1.55.0 (2021-02-23)
 ------------------
 

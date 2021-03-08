@@ -11,7 +11,12 @@ module Aws::KinesisVideoArchivedMedia
   module Types
 
     # Kinesis Video Streams has throttled the request because you have
-    # exceeded the limit of allowed client calls. Try making the call later.
+    # exceeded a limit. Try making the call later. For information about
+    # limits, see [Kinesis Video Streams Limits][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -65,11 +70,6 @@ module Aws::KinesisVideoArchivedMedia
 
     # The range of timestamps for which to return fragments.
     #
-    # The values in the ClipTimestampRange are `inclusive`. Fragments that
-    # begin before the start time but continue past it, or fragments that
-    # begin before the end time but continue past it, are included in the
-    # session.
-    #
     # @note When making an API call, you may pass ClipTimestampRange
     #   data as a hash:
     #
@@ -82,19 +82,20 @@ module Aws::KinesisVideoArchivedMedia
     #   The starting timestamp in the range of timestamps for which to
     #   return fragments.
     #
-    #   This value is inclusive. Fragments that start before the
-    #   `StartTimestamp` and continue past it are included in the session.
-    #   If `FragmentSelectorType` is `SERVER_TIMESTAMP`, the
+    #   Only fragments that start exactly at or after `StartTimestamp` are
+    #   included in the session. Fragments that start before
+    #   `StartTimestamp` and continue past it aren't included in the
+    #   session. If `FragmentSelectorType` is `SERVER_TIMESTAMP`, the
     #   `StartTimestamp` must be later than the stream head.
     #   @return [Time]
     #
     # @!attribute [rw] end_timestamp
     #   The end of the timestamp range for the requested media.
     #
-    #   This value must be within 3 hours of the specified `StartTimestamp`,
-    #   and it must be later than the `StartTimestamp` value. If
-    #   `FragmentSelectorType` for the request is `SERVER_TIMESTAMP`, this
-    #   value must be in the past.
+    #   This value must be within 24 hours of the specified
+    #   `StartTimestamp`, and it must be later than the `StartTimestamp`
+    #   value. If `FragmentSelectorType` for the request is
+    #   `SERVER_TIMESTAMP`, this value must be in the past.
     #
     #   This value is inclusive. The `EndTimestamp` is compared to the
     #   (starting) timestamp of the fragment. Fragments that start before
@@ -176,12 +177,10 @@ module Aws::KinesisVideoArchivedMedia
     #
     # This value should not be present if `PlaybackType` is `LIVE`.
     #
-    # <note markdown="1"> The values in the `DASHimestampRange` are inclusive. Fragments that
-    # begin before the start time but continue past it, or fragments that
-    # begin before the end time but continue past it, are included in the
-    # session.
-    #
-    #  </note>
+    # The values in `DASHimestampRange` are inclusive. Fragments that start
+    # exactly at or after the start time are included in the session.
+    # Fragments that start before the start time and continue past it are
+    # not included in the session.
     #
     # @note When making an API call, you may pass DASHTimestampRange
     #   data as a hash:
@@ -197,17 +196,16 @@ module Aws::KinesisVideoArchivedMedia
     #   If the `DASHTimestampRange` value is specified, the `StartTimestamp`
     #   value is required.
     #
-    #   <note markdown="1"> This value is inclusive. Fragments that start before the
-    #   `StartTimestamp` and continue past it are included in the session.
-    #   If `FragmentSelectorType` is `SERVER_TIMESTAMP`, the
+    #   Only fragments that start exactly at or after `StartTimestamp` are
+    #   included in the session. Fragments that start before
+    #   `StartTimestamp` and continue past it aren't included in the
+    #   session. If `FragmentSelectorType` is `SERVER_TIMESTAMP`, the
     #   `StartTimestamp` must be later than the stream head.
-    #
-    #    </note>
     #   @return [Time]
     #
     # @!attribute [rw] end_timestamp
     #   The end of the timestamp range for the requested media. This value
-    #   must be within 3 hours of the specified `StartTimestamp`, and it
+    #   must be within 24 hours of the specified `StartTimestamp`, and it
     #   must be later than the `StartTimestamp` value.
     #
     #   If `FragmentSelectorType` for the request is `SERVER_TIMESTAMP`,
@@ -463,12 +461,11 @@ module Aws::KinesisVideoArchivedMedia
     #
     #   * <b> <code>ON_DEMAND</code> </b>\: For sessions of this type, the
     #     MPEG-DASH manifest contains all the fragments for the session, up
-    #     to the number that is specified in
-    #     `MaxMediaPlaylistFragmentResults`. The manifest must be retrieved
-    #     only once for each session. When this type of session is played in
-    #     a media player, the user interface typically displays a scrubber
-    #     control for choosing the position in the playback window to
-    #     display.
+    #     to the number that is specified in `MaxManifestFragmentResults`.
+    #     The manifest must be retrieved only once for each session. When
+    #     this type of session is played in a media player, the user
+    #     interface typically displays a scrubber control for choosing the
+    #     position in the playback window to display.
     #
     #   In all playback modes, if `FragmentSelectorType` is
     #   `PRODUCER_TIMESTAMP`, and if there are multiple fragments with the
@@ -675,8 +672,8 @@ module Aws::KinesisVideoArchivedMedia
     #
     #   In all playback modes, if `FragmentSelectorType` is
     #   `PRODUCER_TIMESTAMP`, and if there are multiple fragments with the
-    #   same start timestamp, the fragment that has the larger fragment
-    #   number (that is, the newer fragment) is included in the HLS media
+    #   same start timestamp, the fragment that has the largest fragment
+    #   number (that is, the newest fragment) is included in the HLS media
     #   playlist. The other fragments are not included. Fragments that have
     #   different timestamps but have overlapping durations are still
     #   included in the HLS media playlist. This can lead to unexpected
@@ -795,9 +792,9 @@ module Aws::KinesisVideoArchivedMedia
     #   The default is 5 fragments if `PlaybackMode` is `LIVE` or
     #   `LIVE_REPLAY`, and 1,000 if `PlaybackMode` is `ON_DEMAND`.
     #
-    #   The maximum value of 1,000 fragments corresponds to more than 16
-    #   minutes of video on streams with 1-second fragments, and more than 2
-    #   1/2 hours of video on streams with 10-second fragments.
+    #   The maximum value of 5,000 fragments corresponds to more than 80
+    #   minutes of video on streams with 1-second fragments, and more than
+    #   13 hours of video on streams with 10-second fragments.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetHLSStreamingSessionURLInput AWS API Documentation
@@ -974,13 +971,6 @@ module Aws::KinesisVideoArchivedMedia
     #
     # This value should not be present if `PlaybackType` is `LIVE`.
     #
-    # <note markdown="1"> The values in the `HLSTimestampRange` are inclusive. Fragments that
-    # begin before the start time but continue past it, or fragments that
-    # begin before the end time but continue past it, are included in the
-    # session.
-    #
-    #  </note>
-    #
     # @note When making an API call, you may pass HLSTimestampRange
     #   data as a hash:
     #
@@ -995,17 +985,16 @@ module Aws::KinesisVideoArchivedMedia
     #   If the `HLSTimestampRange` value is specified, the `StartTimestamp`
     #   value is required.
     #
-    #   <note markdown="1"> This value is inclusive. Fragments that start before the
-    #   `StartTimestamp` and continue past it are included in the session.
-    #   If `FragmentSelectorType` is `SERVER_TIMESTAMP`, the
+    #   Only fragments that start exactly at or after `StartTimestamp` are
+    #   included in the session. Fragments that start before
+    #   `StartTimestamp` and continue past it aren't included in the
+    #   session. If `FragmentSelectorType` is `SERVER_TIMESTAMP`, the
     #   `StartTimestamp` must be later than the stream head.
-    #
-    #    </note>
     #   @return [Time]
     #
     # @!attribute [rw] end_timestamp
     #   The end of the timestamp range for the requested media. This value
-    #   must be within 3 hours of the specified `StartTimestamp`, and it
+    #   must be within 24 hours of the specified `StartTimestamp`, and it
     #   must be later than the `StartTimestamp` value.
     #
     #   If `FragmentSelectorType` for the request is `SERVER_TIMESTAMP`,

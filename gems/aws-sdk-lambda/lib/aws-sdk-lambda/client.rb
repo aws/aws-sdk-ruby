@@ -3605,8 +3605,15 @@ module Aws::Lambda
     # configuration of each. Lambda returns up to 50 functions per call.
     #
     # Set `FunctionVersion` to `ALL` to include all published versions of
-    # each function in addition to the unpublished version. To get more
-    # information about a function or version, use GetFunction.
+    # each function in addition to the unpublished version.
+    #
+    # <note markdown="1"> The `ListFunctions` action returns a subset of the
+    # FunctionConfiguration fields. To get the additional fields (State,
+    # StateReasonCode, StateReason, LastUpdateStatus,
+    # LastUpdateStatusReason, LastUpdateStatusReasonCode) for a function or
+    # version, use GetFunction.
+    #
+    #  </note>
     #
     # @option params [String] :master_region
     #   For Lambda@Edge functions, the AWS Region of the master function. For
@@ -3623,7 +3630,9 @@ module Aws::Lambda
     #   retrieve the next page of results.
     #
     # @option params [Integer] :max_items
-    #   The maximum number of functions to return.
+    #   The maximum number of functions to return in the response. Note that
+    #   `ListFunctions` returns a maximum of 50 items in each response, even
+    #   if you set the number higher.
     #
     # @return [Types::ListFunctionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6192,7 +6201,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

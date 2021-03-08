@@ -790,14 +790,14 @@ module Aws::AutoScaling
     #
     # @option params [Types::MixedInstancesPolicy] :mixed_instances_policy
     #   An embedded object that specifies a mixed instances policy. The
-    #   required parameters must be specified. If optional parameters are
+    #   required properties must be specified. If optional properties are
     #   unspecified, their default values are used.
     #
-    #   The policy includes parameters that not only define the distribution
+    #   The policy includes properties that not only define the distribution
     #   of On-Demand Instances and Spot Instances, the maximum price to pay
     #   for Spot Instances, and how the Auto Scaling group allocates instance
     #   types to fulfill On-Demand and Spot capacities, but also the
-    #   parameters that specify the instance configuration information—the
+    #   properties that specify the instance configuration information—the
     #   launch template and instance types. The policy can also include a
     #   weight for each instance type and different launch templates for
     #   individual instance types. For more information, see [Auto Scaling
@@ -5148,7 +5148,7 @@ module Aws::AutoScaling
     #
     # @option params [Types::MixedInstancesPolicy] :mixed_instances_policy
     #   An embedded object that specifies a mixed instances policy. When you
-    #   make changes to an existing policy, all optional parameters are left
+    #   make changes to an existing policy, all optional properties are left
     #   unchanged if not specified. For more information, see [Auto Scaling
     #   groups with multiple instance types and purchase options][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.
@@ -5391,7 +5391,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

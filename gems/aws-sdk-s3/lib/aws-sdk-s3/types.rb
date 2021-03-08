@@ -67,20 +67,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The bucket name to which the upload was taking place.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -911,20 +911,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The name of the bucket that contains the newly created object.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -1313,20 +1313,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The name of the destination bucket.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -1541,7 +1541,7 @@ module Aws::S3
     #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket
     #   Key for object encryption with SSE-KMS.
     #
-    #   Specifying this header with a COPY operation doesn’t affect
+    #   Specifying this header with a COPY action doesn’t affect
     #   bucket-level settings for S3 Bucket Key.
     #   @return [Boolean]
     #
@@ -1830,20 +1830,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The name of the bucket to which the multipart upload was initiated.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -1968,20 +1968,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The name of the bucket to which to initiate the upload
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -2106,7 +2106,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -2121,7 +2121,7 @@ module Aws::S3
     #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket
     #   Key for object encryption with SSE-KMS.
     #
-    #   Specifying this header with an object operation doesn’t affect
+    #   Specifying this header with an object action doesn’t affect
     #   bucket-level settings for S3 Bucket Key.
     #   @return [Boolean]
     #
@@ -2763,20 +2763,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The bucket name of the bucket containing the object.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -2865,20 +2865,20 @@ module Aws::S3
     #   The bucket name containing the objects from which to remove the
     #   tags.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -2926,8 +2926,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] errors
-    #   Container for a failed delete operation that describes the object
-    #   that Amazon S3 attempted to delete and the error it encountered.
+    #   Container for a failed delete action that describes the object that
+    #   Amazon S3 attempted to delete and the error it encountered.
     #   @return [Array<Types::Error>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectsOutput AWS API Documentation
@@ -2963,20 +2963,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The bucket name containing the objects to delete.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -3317,7 +3317,7 @@ module Aws::S3
     #   * * *Code:* AccountProblem
     #
     #     * *Description:* There is a problem with your AWS account that
-    #       prevents the operation from completing successfully. Contact AWS
+    #       prevents the action from completing successfully. Contact AWS
     #       Support for further assistance.
     #
     #     * *HTTP Status Code:* 403 Forbidden
@@ -3550,8 +3550,8 @@ module Aws::S3
     #
     #   * * *Code:* InvalidObjectState
     #
-    #     * *Description:* The operation is not valid for the current state
-    #       of the object.
+    #     * *Description:* The action is not valid for the current state of
+    #       the object.
     #
     #     * *HTTP Status Code:* 403 Forbidden
     #
@@ -3932,8 +3932,8 @@ module Aws::S3
     #
     #   * * *Code:* OperationAborted
     #
-    #     * *Description:* A conflicting conditional operation is currently
-    #       in progress against this resource. Try again.
+    #     * *Description:* A conflicting conditional action is currently in
+    #       progress against this resource. Try again.
     #
     #     * *HTTP Status Code:* 409 Conflict
     #
@@ -4149,9 +4149,12 @@ module Aws::S3
     end
 
     # Optional configuration to replicate existing source bucket objects.
-    # For more information, see [Replicating Existing Objects](
-    # https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-what-is-isnot-replicated.html#existing-object-replication)
-    # in the *Amazon S3 Developer Guide*.
+    # For more information, see [Replicating Existing Objects][1] in the
+    # *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-what-is-isnot-replicated.html#existing-object-replication
     #
     # @note When making an API call, you may pass ExistingObjectReplication
     #   data as a hash:
@@ -5127,11 +5130,11 @@ module Aws::S3
     #   The bucket name that contains the object for which to get the ACL
     #   information.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
@@ -5206,11 +5209,11 @@ module Aws::S3
     #   The bucket name containing the object whose Legal Hold status you
     #   want to retrieve.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
@@ -5283,11 +5286,11 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The bucket whose Object Lock configuration you want to retrieve.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
@@ -5334,8 +5337,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] restore
-    #   Provides information about object restoration operation and
-    #   expiration time of the restored object copy.
+    #   Provides information about object restoration action and expiration
+    #   time of the restored object copy.
     #   @return [String]
     #
     # @!attribute [rw] last_modified
@@ -5543,20 +5546,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The bucket name containing the object.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -5732,11 +5735,11 @@ module Aws::S3
     #   The bucket name containing the object whose retention settings you
     #   want to retrieve.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
@@ -5819,20 +5822,20 @@ module Aws::S3
     #   The bucket name containing the object for which to get the tagging
     #   information.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -6127,20 +6130,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The bucket name.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -6463,20 +6466,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The name of the bucket containing the object.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -7954,20 +7957,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The name of the bucket to which the multipart upload was initiated.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -8194,7 +8197,7 @@ module Aws::S3
     #
     # @!attribute [rw] max_keys
     #   Sets the maximum number of keys returned in the response. By default
-    #   the API returns up to 1,000 key names. The response might contain
+    #   the action returns up to 1,000 key names. The response might contain
     #   fewer keys but will never contain more. If additional keys satisfy
     #   the search criteria, but were not returned because max-keys was
     #   exceeded, the response contains
@@ -8339,20 +8342,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The name of the bucket containing the objects.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -8382,7 +8385,7 @@ module Aws::S3
     #
     # @!attribute [rw] max_keys
     #   Sets the maximum number of keys returned in the response. By default
-    #   the API returns up to 1,000 key names. The response might contain
+    #   the action returns up to 1,000 key names. The response might contain
     #   fewer keys but will never contain more.
     #   @return [Integer]
     #
@@ -8430,20 +8433,20 @@ module Aws::S3
     # @!attribute [rw] name
     #   The bucket name.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -8468,7 +8471,7 @@ module Aws::S3
     #
     # @!attribute [rw] max_keys
     #   Sets the maximum number of keys returned in the response. By default
-    #   the API returns up to 1,000 key names. The response might contain
+    #   the action returns up to 1,000 key names. The response might contain
     #   fewer keys but will never contain more.
     #   @return [Integer]
     #
@@ -8565,20 +8568,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   Bucket name to list.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -8600,7 +8603,7 @@ module Aws::S3
     #
     # @!attribute [rw] max_keys
     #   Sets the maximum number of keys returned in the response. By default
-    #   the API returns up to 1,000 key names. The response might contain
+    #   the action returns up to 1,000 key names. The response might contain
     #   fewer keys but will never contain more.
     #   @return [Integer]
     #
@@ -8780,20 +8783,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The name of the bucket to which the parts are being uploaded.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -9472,7 +9475,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # This operation is not allowed against this storage tier.
+    # This action is not allowed against this storage tier.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectAlreadyInActiveTierError AWS API Documentation
     #
@@ -9621,8 +9624,8 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The source object of the COPY operation is not in the active tier and
-    # is only stored in Amazon S3 Glacier.
+    # The source object of the COPY action is not in the active tier and is
+    # only stored in Amazon S3 Glacier.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectNotInActiveTierError AWS API Documentation
     #
@@ -9949,7 +9952,7 @@ module Aws::S3
     # Amazon S3 bucket. You can enable the configuration options in any
     # combination. For more information about when Amazon S3 considers a
     # bucket or object public, see [The Meaning of "Public"][1] in the
-    # *Amazon Simple Storage Service Developer Guide*.
+    # *Amazon Simple Storage Service User Guide*.
     #
     #
     #
@@ -10261,7 +10264,7 @@ module Aws::S3
     # @!attribute [rw] cors_configuration
     #   Describes the cross-origin access configuration for objects in an
     #   Amazon S3 bucket. For more information, see [Enabling Cross-Origin
-    #   Resource Sharing][1] in the *Amazon Simple Storage Service Developer
+    #   Resource Sharing][1] in the *Amazon Simple Storage Service User
     #   Guide*.
     #
     #
@@ -11424,11 +11427,11 @@ module Aws::S3
     #   The bucket name that contains the object to which you want to attach
     #   the ACL.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
@@ -11483,22 +11486,22 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   Key for which the PUT operation was initiated.
+    #   Key for which the PUT action was initiated.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -11583,11 +11586,11 @@ module Aws::S3
     #   The bucket name containing the object that you want to place a Legal
     #   Hold on.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
@@ -11872,22 +11875,22 @@ module Aws::S3
     #   @return [IO]
     #
     # @!attribute [rw] bucket
-    #   The bucket name to which the PUT operation was initiated.
+    #   The bucket name to which the PUT action was initiated.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -12005,7 +12008,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   Object key for which the PUT operation was initiated.
+    #   Object key for which the PUT action was initiated.
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -12103,8 +12106,8 @@ module Aws::S3
     #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket
     #   Key for object encryption with SSE-KMS.
     #
-    #   Specifying this header with a PUT operation doesn’t affect
-    #   bucket-level settings for S3 Bucket Key.
+    #   Specifying this header with a PUT action doesn’t affect bucket-level
+    #   settings for S3 Bucket Key.
     #   @return [Boolean]
     #
     # @!attribute [rw] request_payer
@@ -12221,11 +12224,11 @@ module Aws::S3
     #   The bucket name that contains the object you want to apply this
     #   Object Retention configuration to.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
@@ -12262,7 +12265,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] bypass_governance_retention
-    #   Indicates whether this operation should bypass Governance-mode
+    #   Indicates whether this action should bypass Governance-mode
     #   restrictions.
     #   @return [Boolean]
     #
@@ -12329,20 +12332,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The bucket name containing the object.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -13309,20 +13312,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The bucket name containing the object to restore.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -13334,7 +13337,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   Object key for which the operation was initiated.
+    #   Object key for which the action was initiated.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -13512,8 +13515,8 @@ module Aws::S3
 
     # Specifies the redirect behavior and when a redirect is applied. For
     # more information about routing rules, see [Configuring advanced
-    # conditional redirects][1] in the *Amazon Simple Storage Service
-    # Developer Guide*.
+    # conditional redirects][1] in the *Amazon Simple Storage Service User
+    # Guide*.
     #
     #
     #
@@ -13629,7 +13632,7 @@ module Aws::S3
     #   Specifies when an object transitions to a specified storage class.
     #   For more information about Amazon S3 lifecycle configuration rules,
     #   see [Transitioning Objects Using Amazon S3 Lifecycle][1] in the
-    #   *Amazon Simple Storage Service Developer Guide*.
+    #   *Amazon Simple Storage Service User Guide*.
     #
     #
     #
@@ -14233,7 +14236,7 @@ module Aws::S3
     #   Bucket Key. By default, S3 Bucket Key is not enabled.
     #
     #   For more information, see [Amazon S3 Bucket Keys][1] in the *Amazon
-    #   Simple Storage Service Developer Guide*.
+    #   Simple Storage Service User Guide*.
     #
     #
     #
@@ -14595,7 +14598,7 @@ module Aws::S3
     # @!attribute [rw] events
     #   The Amazon S3 bucket event about which to send notifications. For
     #   more information, see [Supported Event Types][1] in the *Amazon
-    #   Simple Storage Service Developer Guide*.
+    #   Simple Storage Service User Guide*.
     #
     #
     #
@@ -14675,7 +14678,7 @@ module Aws::S3
     # Specifies when an object transitions to a specified storage class. For
     # more information about Amazon S3 lifecycle configuration rules, see
     # [Transitioning Objects Using Amazon S3 Lifecycle][1] in the *Amazon
-    # Simple Storage Service Developer Guide*.
+    # Simple Storage Service User Guide*.
     #
     #
     #
@@ -14802,20 +14805,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The bucket name.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.
@@ -15079,20 +15082,20 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The name of the bucket to which the multipart upload was initiated.
     #
-    #   When using this API with an access point, you must direct requests
-    #   to the access point hostname. The access point hostname takes the
-    #   form
+    #   When using this action with an access point, you must direct
+    #   requests to the access point hostname. The access point hostname
+    #   takes the form
     #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
-    #   When using this operation with an access point through the AWS SDKs,
+    #   When using this action with an access point through the AWS SDKs,
     #   you provide the access point ARN in place of the bucket name. For
     #   more information about access point ARNs, see [Using Access
     #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
     #
-    #   When using this API with Amazon S3 on Outposts, you must direct
+    #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
     #   takes the form
     #   *AccessPointName*-*AccountId*.*outpostID*.s3-outposts.*Region*.amazonaws.com.
-    #   When using this operation using S3 on Outposts through the AWS SDKs,
+    #   When using this action using S3 on Outposts through the AWS SDKs,
     #   you provide the Outposts bucket ARN in place of the bucket name. For
     #   more information about S3 on Outposts ARNs, see [Using S3 on
     #   Outposts][2] in the *Amazon Simple Storage Service Developer Guide*.

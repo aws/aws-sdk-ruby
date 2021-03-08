@@ -406,6 +406,10 @@ module Aws::EMR
     #         },
     #         on_demand_specification: {
     #           allocation_strategy: "lowest-price", # required, accepts lowest-price
+    #           capacity_reservation_options: {
+    #             usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #             capacity_reservation_preference: "open", # accepts open, none
+    #           },
     #         },
     #       },
     #     },
@@ -1691,6 +1695,8 @@ module Aws::EMR
     #   resp.instance_fleets[0].launch_specifications.spot_specification.block_duration_minutes #=> Integer
     #   resp.instance_fleets[0].launch_specifications.spot_specification.allocation_strategy #=> String, one of "capacity-optimized"
     #   resp.instance_fleets[0].launch_specifications.on_demand_specification.allocation_strategy #=> String, one of "lowest-price"
+    #   resp.instance_fleets[0].launch_specifications.on_demand_specification.capacity_reservation_options.usage_strategy #=> String, one of "use-capacity-reservations-first"
+    #   resp.instance_fleets[0].launch_specifications.on_demand_specification.capacity_reservation_options.capacity_reservation_preference #=> String, one of "open", "none"
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceFleets AWS API Documentation
@@ -2172,7 +2178,7 @@ module Aws::EMR
     #
     # @option params [Integer] :step_concurrency_level
     #   The number of steps that can be executed concurrently. You can specify
-    #   a maximum of 256 steps.
+    #   a minimum of 1 step and a maximum of 256 steps.
     #
     # @return [Types::ModifyClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2966,6 +2972,10 @@ module Aws::EMR
     #             },
     #             on_demand_specification: {
     #               allocation_strategy: "lowest-price", # required, accepts lowest-price
+    #               capacity_reservation_options: {
+    #                 usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #                 capacity_reservation_preference: "open", # accepts open, none
+    #               },
     #             },
     #           },
     #         },
@@ -3433,7 +3443,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

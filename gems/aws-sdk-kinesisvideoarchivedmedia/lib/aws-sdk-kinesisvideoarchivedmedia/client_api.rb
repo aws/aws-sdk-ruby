@@ -23,6 +23,7 @@ module Aws::KinesisVideoArchivedMedia
     DASHDisplayFragmentTimestamp = Shapes::StringShape.new(name: 'DASHDisplayFragmentTimestamp')
     DASHFragmentSelector = Shapes::StructureShape.new(name: 'DASHFragmentSelector')
     DASHFragmentSelectorType = Shapes::StringShape.new(name: 'DASHFragmentSelectorType')
+    DASHMaxResults = Shapes::IntegerShape.new(name: 'DASHMaxResults')
     DASHPlaybackMode = Shapes::StringShape.new(name: 'DASHPlaybackMode')
     DASHStreamingSessionURL = Shapes::StringShape.new(name: 'DASHStreamingSessionURL')
     DASHTimestampRange = Shapes::StructureShape.new(name: 'DASHTimestampRange')
@@ -46,6 +47,7 @@ module Aws::KinesisVideoArchivedMedia
     HLSDisplayFragmentTimestamp = Shapes::StringShape.new(name: 'HLSDisplayFragmentTimestamp')
     HLSFragmentSelector = Shapes::StructureShape.new(name: 'HLSFragmentSelector')
     HLSFragmentSelectorType = Shapes::StringShape.new(name: 'HLSFragmentSelectorType')
+    HLSMaxResults = Shapes::IntegerShape.new(name: 'HLSMaxResults')
     HLSPlaybackMode = Shapes::StringShape.new(name: 'HLSPlaybackMode')
     HLSStreamingSessionURL = Shapes::StringShape.new(name: 'HLSStreamingSessionURL')
     HLSTimestampRange = Shapes::StructureShape.new(name: 'HLSTimestampRange')
@@ -53,13 +55,13 @@ module Aws::KinesisVideoArchivedMedia
     InvalidCodecPrivateDataException = Shapes::StructureShape.new(name: 'InvalidCodecPrivateDataException')
     InvalidMediaFrameException = Shapes::StructureShape.new(name: 'InvalidMediaFrameException')
     ListFragmentsInput = Shapes::StructureShape.new(name: 'ListFragmentsInput')
+    ListFragmentsMaxResults = Shapes::IntegerShape.new(name: 'ListFragmentsMaxResults')
     ListFragmentsOutput = Shapes::StructureShape.new(name: 'ListFragmentsOutput')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MissingCodecPrivateDataException = Shapes::StructureShape.new(name: 'MissingCodecPrivateDataException')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NoDataRetentionException = Shapes::StructureShape.new(name: 'NoDataRetentionException')
     NotAuthorizedException = Shapes::StructureShape.new(name: 'NotAuthorizedException')
-    PageLimit = Shapes::IntegerShape.new(name: 'PageLimit')
     Payload = Shapes::BlobShape.new(name: 'Payload', streaming: true)
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -120,7 +122,7 @@ module Aws::KinesisVideoArchivedMedia
     GetDASHStreamingSessionURLInput.add_member(:display_fragment_number, Shapes::ShapeRef.new(shape: DASHDisplayFragmentNumber, location_name: "DisplayFragmentNumber"))
     GetDASHStreamingSessionURLInput.add_member(:dash_fragment_selector, Shapes::ShapeRef.new(shape: DASHFragmentSelector, location_name: "DASHFragmentSelector"))
     GetDASHStreamingSessionURLInput.add_member(:expires, Shapes::ShapeRef.new(shape: Expires, location_name: "Expires"))
-    GetDASHStreamingSessionURLInput.add_member(:max_manifest_fragment_results, Shapes::ShapeRef.new(shape: PageLimit, location_name: "MaxManifestFragmentResults"))
+    GetDASHStreamingSessionURLInput.add_member(:max_manifest_fragment_results, Shapes::ShapeRef.new(shape: DASHMaxResults, location_name: "MaxManifestFragmentResults"))
     GetDASHStreamingSessionURLInput.struct_class = Types::GetDASHStreamingSessionURLInput
 
     GetDASHStreamingSessionURLOutput.add_member(:dash_streaming_session_url, Shapes::ShapeRef.new(shape: DASHStreamingSessionURL, location_name: "DASHStreamingSessionURL"))
@@ -134,7 +136,7 @@ module Aws::KinesisVideoArchivedMedia
     GetHLSStreamingSessionURLInput.add_member(:discontinuity_mode, Shapes::ShapeRef.new(shape: HLSDiscontinuityMode, location_name: "DiscontinuityMode"))
     GetHLSStreamingSessionURLInput.add_member(:display_fragment_timestamp, Shapes::ShapeRef.new(shape: HLSDisplayFragmentTimestamp, location_name: "DisplayFragmentTimestamp"))
     GetHLSStreamingSessionURLInput.add_member(:expires, Shapes::ShapeRef.new(shape: Expires, location_name: "Expires"))
-    GetHLSStreamingSessionURLInput.add_member(:max_media_playlist_fragment_results, Shapes::ShapeRef.new(shape: PageLimit, location_name: "MaxMediaPlaylistFragmentResults"))
+    GetHLSStreamingSessionURLInput.add_member(:max_media_playlist_fragment_results, Shapes::ShapeRef.new(shape: HLSMaxResults, location_name: "MaxMediaPlaylistFragmentResults"))
     GetHLSStreamingSessionURLInput.struct_class = Types::GetHLSStreamingSessionURLInput
 
     GetHLSStreamingSessionURLOutput.add_member(:hls_streaming_session_url, Shapes::ShapeRef.new(shape: HLSStreamingSessionURL, location_name: "HLSStreamingSessionURL"))
@@ -170,7 +172,7 @@ module Aws::KinesisVideoArchivedMedia
 
     ListFragmentsInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     ListFragmentsInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "StreamARN"))
-    ListFragmentsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageLimit, location_name: "MaxResults"))
+    ListFragmentsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListFragmentsMaxResults, location_name: "MaxResults"))
     ListFragmentsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListFragmentsInput.add_member(:fragment_selector, Shapes::ShapeRef.new(shape: FragmentSelector, location_name: "FragmentSelector"))
     ListFragmentsInput.struct_class = Types::ListFragmentsInput

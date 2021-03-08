@@ -722,8 +722,8 @@ module Aws::S3
     #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
     #   for object encryption with SSE-KMS.
     #
-    #   Specifying this header with a COPY operation doesn’t affect
-    #   bucket-level settings for S3 Bucket Key.
+    #   Specifying this header with a COPY action doesn’t affect bucket-level
+    #   settings for S3 Bucket Key.
     # @option options [String] :copy_source_sse_customer_algorithm
     #   Specifies the algorithm to use when decrypting the source object (for
     #   example, AES256).
@@ -1034,7 +1034,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     # @option options [String] :ssekms_encryption_context
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
@@ -1045,7 +1045,7 @@ module Aws::S3
     #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
     #   for object encryption with SSE-KMS.
     #
-    #   Specifying this header with an object operation doesn’t affect
+    #   Specifying this header with an object action doesn’t affect
     #   bucket-level settings for S3 Bucket Key.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
@@ -1291,8 +1291,8 @@ module Aws::S3
     #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
     #   for object encryption with SSE-KMS.
     #
-    #   Specifying this header with a PUT operation doesn’t affect
-    #   bucket-level settings for S3 Bucket Key.
+    #   Specifying this header with a PUT action doesn’t affect bucket-level
+    #   settings for S3 Bucket Key.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their

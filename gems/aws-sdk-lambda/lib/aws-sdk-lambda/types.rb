@@ -3658,7 +3658,9 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   The maximum number of functions to return.
+    #   The maximum number of functions to return in the response. Note that
+    #   `ListFunctions` returns a maximum of 50 items in each response, even
+    #   if you set the number higher.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionsRequest AWS API Documentation

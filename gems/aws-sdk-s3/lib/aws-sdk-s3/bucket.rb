@@ -456,7 +456,7 @@ module Aws::S3
     #
     #   This action is not supported by Amazon S3 on Outposts.
     # @option options [required, String] :key
-    #   Object key for which the PUT operation was initiated.
+    #   Object key for which the PUT action was initiated.
     # @option options [Hash<String,String>] :metadata
     #   A map of metadata to store with the object in S3.
     # @option options [String] :server_side_encryption
@@ -533,8 +533,8 @@ module Aws::S3
     #   Setting this header to `true` causes Amazon S3 to use an S3 Bucket Key
     #   for object encryption with SSE-KMS.
     #
-    #   Specifying this header with a PUT operation doesn’t affect
-    #   bucket-level settings for S3 Bucket Key.
+    #   Specifying this header with a PUT action doesn’t affect bucket-level
+    #   settings for S3 Bucket Key.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their

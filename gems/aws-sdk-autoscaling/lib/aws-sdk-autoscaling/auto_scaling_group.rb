@@ -939,7 +939,7 @@ module Aws::AutoScaling
     #   `LaunchConfigurationName` or `MixedInstancesPolicy`.
     # @option options [Types::MixedInstancesPolicy] :mixed_instances_policy
     #   An embedded object that specifies a mixed instances policy. When you
-    #   make changes to an existing policy, all optional parameters are left
+    #   make changes to an existing policy, all optional properties are left
     #   unchanged if not specified. For more information, see [Auto Scaling
     #   groups with multiple instance types and purchase options][1] in the
     #   *Amazon EC2 Auto Scaling User Guide*.

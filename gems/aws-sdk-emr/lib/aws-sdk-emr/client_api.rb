@@ -207,6 +207,9 @@ module Aws::EMR
     NotebookExecutionStatus = Shapes::StringShape.new(name: 'NotebookExecutionStatus')
     NotebookExecutionSummary = Shapes::StructureShape.new(name: 'NotebookExecutionSummary')
     NotebookExecutionSummaryList = Shapes::ListShape.new(name: 'NotebookExecutionSummaryList')
+    OnDemandCapacityReservationOptions = Shapes::StructureShape.new(name: 'OnDemandCapacityReservationOptions')
+    OnDemandCapacityReservationPreference = Shapes::StringShape.new(name: 'OnDemandCapacityReservationPreference')
+    OnDemandCapacityReservationUsageStrategy = Shapes::StringShape.new(name: 'OnDemandCapacityReservationUsageStrategy')
     OnDemandProvisioningAllocationStrategy = Shapes::StringShape.new(name: 'OnDemandProvisioningAllocationStrategy')
     OnDemandProvisioningSpecification = Shapes::StructureShape.new(name: 'OnDemandProvisioningSpecification')
     OptionalArnType = Shapes::StringShape.new(name: 'OptionalArnType')
@@ -1058,7 +1061,12 @@ module Aws::EMR
 
     NotebookExecutionSummaryList.member = Shapes::ShapeRef.new(shape: NotebookExecutionSummary)
 
+    OnDemandCapacityReservationOptions.add_member(:usage_strategy, Shapes::ShapeRef.new(shape: OnDemandCapacityReservationUsageStrategy, location_name: "UsageStrategy"))
+    OnDemandCapacityReservationOptions.add_member(:capacity_reservation_preference, Shapes::ShapeRef.new(shape: OnDemandCapacityReservationPreference, location_name: "CapacityReservationPreference"))
+    OnDemandCapacityReservationOptions.struct_class = Types::OnDemandCapacityReservationOptions
+
     OnDemandProvisioningSpecification.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: OnDemandProvisioningAllocationStrategy, required: true, location_name: "AllocationStrategy"))
+    OnDemandProvisioningSpecification.add_member(:capacity_reservation_options, Shapes::ShapeRef.new(shape: OnDemandCapacityReservationOptions, location_name: "CapacityReservationOptions"))
     OnDemandProvisioningSpecification.struct_class = Types::OnDemandProvisioningSpecification
 
     PlacementGroupConfig.add_member(:instance_role, Shapes::ShapeRef.new(shape: InstanceRoleType, required: true, location_name: "InstanceRole"))

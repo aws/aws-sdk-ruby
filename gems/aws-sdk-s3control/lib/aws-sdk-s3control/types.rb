@@ -618,14 +618,14 @@ module Aws::S3Control
     #   @return [Boolean]
     #
     # @!attribute [rw] operation
-    #   The operation that you want this job to perform on every object
-    #   listed in the manifest. For more information about the available
-    #   operations, see [Operations][1] in the *Amazon Simple Storage
-    #   Service Developer Guide*.
+    #   The action that you want this job to perform on every object listed
+    #   in the manifest. For more information about the available actions,
+    #   see [Operations][1] in the *Amazon Simple Storage Service User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-actions.html
     #   @return [Types::JobOperation]
     #
     # @!attribute [rw] report
@@ -659,7 +659,7 @@ module Aws::S3Control
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) for the AWS Identity and Access
     #   Management (IAM) role that Batch Operations will use to run this
-    #   job's operation on every object in the manifest.
+    #   job's action on every object in the manifest.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1991,8 +1991,7 @@ module Aws::S3Control
 
     # The operation that you want this job to perform on every object listed
     # in the manifest. For more information about the available operations,
-    # see [Operations][1] in the *Amazon Simple Storage Service Developer
-    # Guide*.
+    # see [Operations][1] in the *Amazon Simple Storage Service User Guide*.
     #
     #
     #
@@ -2135,7 +2134,7 @@ module Aws::S3Control
     #   operation that an S3 Batch Operations job passes every object to the
     #   underlying `PutObjectLegalHold` API. For more information, see
     #   [Using S3 Object Lock legal hold with S3 Batch Operations][1] in the
-    #   *Amazon Simple Storage Service Developer Guide*.
+    #   *Amazon Simple Storage Service User Guide*.
     #
     #
     #
@@ -2147,8 +2146,7 @@ module Aws::S3Control
     #   action for an S3 Batch Operations job. Batch Operations passes every
     #   object to the underlying `PutObjectRetention` API. For more
     #   information, see [Using S3 Object Lock retention with S3 Batch
-    #   Operations][1] in the *Amazon Simple Storage Service Developer
-    #   Guide*.
+    #   Operations][1] in the *Amazon Simple Storage Service User Guide*.
     #
     #
     #
@@ -2962,7 +2960,7 @@ module Aws::S3Control
     # Indicates whether this access point policy is public. For more
     # information about how Amazon S3 evaluates policies to determine
     # whether they are public, see [The Meaning of "Public"][1] in the
-    # *Amazon Simple Storage Service Developer Guide*.
+    # *Amazon Simple Storage Service User Guide*.
     #
     #
     #
@@ -3161,7 +3159,7 @@ module Aws::S3Control
     #   The policy that you want to apply to the specified access point. For
     #   more information about access point policies, see [Managing data
     #   access with Amazon S3 Access Points][1] in the *Amazon Simple
-    #   Storage Service Developer Guide*.
+    #   Storage Service User Guide*.
     #
     #
     #
@@ -4126,7 +4124,7 @@ module Aws::S3Control
     # and `RetainUntilDate` data types in your operation, you will remove
     # the retention from your objects. For more information, see [Using S3
     # Object Lock retention with S3 Batch Operations][1] in the *Amazon
-    # Simple Storage Service Developer Guide*.
+    # Simple Storage Service User Guide*.
     #
     #
     #
@@ -4208,7 +4206,7 @@ module Aws::S3Control
     # that an S3 Batch Operations job passes every object to the underlying
     # `PutObjectLegalHold` API. For more information, see [Using S3 Object
     # Lock legal hold with S3 Batch Operations][1] in the *Amazon Simple
-    # Storage Service Developer Guide*.
+    # Storage Service User Guide*.
     #
     #
     #
@@ -4240,7 +4238,7 @@ module Aws::S3Control
     # action for an S3 Batch Operations job. Batch Operations passes every
     # object to the underlying `PutObjectRetention` API. For more
     # information, see [Using S3 Object Lock retention with S3 Batch
-    # Operations][1] in the *Amazon Simple Storage Service Developer Guide*.
+    # Operations][1] in the *Amazon Simple Storage Service User Guide*.
     #
     #
     #
@@ -4267,7 +4265,7 @@ module Aws::S3Control
     #   Contains the Object Lock retention mode to be applied to all objects
     #   in the Batch Operations job. For more information, see [Using S3
     #   Object Lock retention with S3 Batch Operations][1] in the *Amazon
-    #   Simple Storage Service Developer Guide*.
+    #   Simple Storage Service User Guide*.
     #
     #
     #
@@ -4687,7 +4685,7 @@ module Aws::S3Control
     # Specifies when an object transitions to a specified storage class. For
     # more information about Amazon S3 Lifecycle configuration rules, see [
     # Transitioning objects using Amazon S3 Lifecycle][1] in the *Amazon
-    # Simple Storage Service Developer Guide*.
+    # Simple Storage Service User Guide*.
     #
     #
     #

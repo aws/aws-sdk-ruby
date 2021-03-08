@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2021-03-08)
+------------------
+
+* Feature - Increase the maximum HLS and MPEG-DASH manifest size from 1,000 to 5,000 fragments.
+
 1.31.0 (2021-02-15)
 ------------------
 

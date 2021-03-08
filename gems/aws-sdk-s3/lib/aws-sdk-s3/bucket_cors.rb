@@ -213,7 +213,7 @@ module Aws::S3
     # @option options [required, Types::CORSConfiguration] :cors_configuration
     #   Describes the cross-origin access configuration for objects in an
     #   Amazon S3 bucket. For more information, see [Enabling Cross-Origin
-    #   Resource Sharing][1] in the *Amazon Simple Storage Service Developer
+    #   Resource Sharing][1] in the *Amazon Simple Storage Service User
     #   Guide*.
     #
     #
