@@ -391,8 +391,8 @@ module Aws
         params['X-Amz-Credential'] = credential(creds, date)
         params['X-Amz-Date'] = datetime
         params['X-Amz-Expires'] = extract_expires_in(options)
-        params['X-Amz-SignedHeaders'] = signed_headers(headers)
         params['X-Amz-Security-Token'] = creds.session_token if creds.session_token
+        params['X-Amz-SignedHeaders'] = signed_headers(headers)
 
         params = params.map do |key, value|
           "#{uri_escape(key)}=#{uri_escape(value)}"
