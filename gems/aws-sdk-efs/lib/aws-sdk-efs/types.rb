@@ -133,8 +133,38 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # The backup policy for the file system, showing the curent status. If
-    # `ENABLED`, the file system is being backed up.
+    # Returned if the Availability Zone that was specified for a mount
+    # target is different from the Availability Zone that was specified for
+    # One Zone storage classes. For more information, see [Regional and One
+    # Zone storage redundancy][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/availability-durability.html
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/AvailabilityZonesMismatch AWS API Documentation
+    #
+    class AvailabilityZonesMismatch < Struct.new(
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The backup policy for the file system used to create automatic daily
+    # backups. If status has a value of `ENABLED`, the file system is being
+    # automatically backed up. For more information, see [Automatic
+    # backups][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups
     #
     # @note When making an API call, you may pass BackupPolicy
     #   data as a hash:
@@ -146,17 +176,17 @@ module Aws::EFS
     # @!attribute [rw] status
     #   Describes the status of the file system's backup policy.
     #
-    #   * <i> <code>ENABLED</code> - EFS is automatically backing up the
-    #     file system.</i>
+    #   * <b> <code>ENABLED</code> </b> - EFS is automatically backing up
+    #     the file system.&gt;
     #
-    #   * <i> <code>ENABLING</code> - EFS is turning on automatic backups
-    #     for the file system.</i>
+    #   * <b> <code>ENABLING</code> </b> - EFS is turning on automatic
+    #     backups for the file system.
     #
-    #   * <i> <code>DISABLED</code> - automatic back ups are turned off for
-    #     the file system.</i>
+    #   * <b> <code>DISABLED</code> </b> - automatic back ups are turned off
+    #     for the file system.
     #
-    #   * <i> <code>DISABLED</code> - EFS is turning off automatic backups
-    #     for the file system.</i>
+    #   * <b> <code>DISABLING</code> </b> - EFS is turning off automatic
+    #     backups for the file system.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/BackupPolicy AWS API Documentation
@@ -256,7 +286,13 @@ module Aws::EFS
     #   `RootDirectory` &gt; `Path` specified does not exist, EFS creates it
     #   and applies the `CreationInfo` settings when a client connects to an
     #   access point. When specifying a `RootDirectory`, you need to provide
-    #   the `Path`, and the `CreationInfo` is optional.
+    #   the `Path`, and the `CreationInfo`.
+    #
+    #   Amazon EFS creates a root directory only if you have provided the
+    #   CreationInfo: OwnUid, OwnGID, and permissions for the directory. If
+    #   you do not provide this information, Amazon EFS does not create the
+    #   root directory. If the root directory does not exist, attempts to
+    #   mount using the access point will fail.
     #   @return [Types::RootDirectory]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateAccessPointRequest AWS API Documentation
@@ -281,6 +317,8 @@ module Aws::EFS
     #         kms_key_id: "KmsKeyId",
     #         throughput_mode: "bursting", # accepts bursting, provisioned
     #         provisioned_throughput_in_mibps: 1.0,
+    #         availability_zone_name: "AvailabilityZoneName",
+    #         backup: false,
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -305,6 +343,11 @@ module Aws::EFS
     #   tradeoff of slightly higher latencies for most file operations. The
     #   performance mode can't be changed after the file system has been
     #   created.
+    #
+    #   <note markdown="1"> The `maxIO` mode is not supported on file systems using One Zone
+    #   storage classes.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -320,7 +363,7 @@ module Aws::EFS
     # @!attribute [rw] kms_key_id
     #   The ID of the AWS KMS CMK to be used to protect the encrypted file
     #   system. This parameter is only required if you want to use a
-    #   nondefault CMK. If this parameter is not specified, the default CMK
+    #   non-default CMK. If this parameter is not specified, the default CMK
     #   for Amazon EFS is used. This ID can be in one of the following
     #   formats:
     #
@@ -344,15 +387,17 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] throughput_mode
-    #   The throughput mode for the file system to be created. There are two
-    #   throughput modes to choose from for your file system: `bursting` and
-    #   `provisioned`. If you set `ThroughputMode` to `provisioned`, you
-    #   must also set a value for `ProvisionedThroughPutInMibps`. You can
-    #   decrease your file system's throughput in Provisioned Throughput
-    #   mode or change between the throughput modes as long as it’s been
-    #   more than 24 hours since the last decrease or throughput mode
-    #   change. For more, see [Specifying Throughput with Provisioned
-    #   Mode][1] in the *Amazon EFS User Guide.*
+    #   Specifies the throughput mode for the file system, either `bursting`
+    #   or `provisioned`. If you set `ThroughputMode` to `provisioned`, you
+    #   must also set a value for `ProvisionedThroughputInMibps`. After you
+    #   create the file system, you can decrease your file system's
+    #   throughput in Provisioned Throughput mode or change between the
+    #   throughput modes, as long as it’s been more than 24 hours since the
+    #   last decrease or throughput mode change. For more information, see
+    #   [Specifying throughput with provisioned mode][1] in the *Amazon EFS
+    #   User Guide*.
+    #
+    #   Default is `bursting`.
     #
     #
     #
@@ -363,14 +408,52 @@ module Aws::EFS
     #   The throughput, measured in MiB/s, that you want to provision for a
     #   file system that you're creating. Valid values are 1-1024. Required
     #   if `ThroughputMode` is set to `provisioned`. The upper limit for
-    #   throughput is 1024 MiB/s. You can get this limit increased by
-    #   contacting AWS Support. For more information, see [Amazon EFS Limits
-    #   That You Can Increase][1] in the *Amazon EFS User Guide.*
+    #   throughput is 1024 MiB/s. To increase this limit, contact AWS
+    #   Support. For more information, see [Amazon EFS quotas that you can
+    #   increase][1] in the *Amazon EFS User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits
     #   @return [Float]
+    #
+    # @!attribute [rw] availability_zone_name
+    #   Used to create a file system that uses One Zone storage classes. It
+    #   specifies the AWS Availability Zone in which to create the file
+    #   system. Use the format `us-east-1a` to specify the Availability
+    #   Zone. For more information about One Zone storage classes, see
+    #   [Using EFS storage classes][1] in the *Amazon EFS User Guide*.
+    #
+    #   <note markdown="1"> One Zone storage classes are not available in all Availability Zones
+    #   in AWS Regions where Amazon EFS is available.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html
+    #   @return [String]
+    #
+    # @!attribute [rw] backup
+    #   Specifies whether automatic backups are enabled on the file system
+    #   that you are creating. Set the value to `true` to enable automatic
+    #   backups. If you are creating a file system that uses One Zone
+    #   storage classes, automatic backups are enabled by default. For more
+    #   information, see [Automatic backups][1] in the *Amazon EFS User
+    #   Guide*.
+    #
+    #   Default is `false`. However, if you specify an
+    #   `AvailabilityZoneName`, the default is `true`.
+    #
+    #   <note markdown="1"> AWS Backup is not available in all AWS Regions where Amazon EFS is
+    #   available.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups
+    #   @return [Boolean]
     #
     # @!attribute [rw] tags
     #   A value that specifies to create one or more tags associated with
@@ -388,6 +471,8 @@ module Aws::EFS
       :kms_key_id,
       :throughput_mode,
       :provisioned_throughput_in_mibps,
+      :availability_zone_name,
+      :backup,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -408,7 +493,9 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
-    #   The ID of the subnet to add the mount target in.
+    #   The ID of the subnet to add the mount target in. For file systems
+    #   that use One Zone storage classes, use the subnet that is associated
+    #   with the file system's Availability Zone.
     #   @return [String]
     #
     # @!attribute [rw] ip_address
@@ -469,6 +556,12 @@ module Aws::EFS
     # directory does not exist, EFS creates it with these settings when a
     # client connects to the access point. When specifying `CreationInfo`,
     # you must include values for all properties.
+    #
+    # Amazon EFS creates a root directory only if you have provided the
+    # CreationInfo: OwnUid, OwnGID, and permissions for the directory. If
+    # you do not provide this information, Amazon EFS does not create the
+    # root directory. If the root directory does not exist, attempts to
+    # mount using the access point will fail.
     #
     # If you do not provide `CreationInfo` and the specified `RootDirectory`
     # does not exist, attempts to mount the file system using the access
@@ -1091,28 +1184,37 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] throughput_mode
-    #   The throughput mode for a file system. There are two throughput
-    #   modes to choose from for your file system: `bursting` and
-    #   `provisioned`. If you set `ThroughputMode` to `provisioned`, you
-    #   must also set a value for `ProvisionedThroughPutInMibps`. You can
-    #   decrease your file system's throughput in Provisioned Throughput
-    #   mode or change between the throughput modes as long as it’s been
-    #   more than 24 hours since the last decrease or throughput mode
-    #   change.
+    #   Displays the file system's throughput mode. For more information,
+    #   see [Throughput modes][1] in the *Amazon EFS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes
     #   @return [String]
     #
     # @!attribute [rw] provisioned_throughput_in_mibps
-    #   The throughput, measured in MiB/s, that you want to provision for a
-    #   file system. Valid values are 1-1024. Required if `ThroughputMode`
-    #   is set to `provisioned`. The limit on throughput is 1024 MiB/s. You
-    #   can get these limits increased by contacting AWS Support. For more
-    #   information, see [Amazon EFS Limits That You Can Increase][1] in the
-    #   *Amazon EFS User Guide.*
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits
+    #   The amount of provisioned throughput, measured in MiB/s, for the
+    #   file system. Valid for file systems using `ThroughputMode` set to
+    #   `provisioned`.
     #   @return [Float]
+    #
+    # @!attribute [rw] availability_zone_name
+    #   Describes the AWS Availability Zone in which the file system is
+    #   located, and is valid only for file systems using One Zone storage
+    #   classes. For more information, see [Using EFS storage classes][1] in
+    #   the *Amazon EFS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The unique and consistent identifier of the Availability Zone in
+    #   which the file system's One Zone storage classes exist. For
+    #   example, `use1-az1` is an Availability Zone ID for the us-east-1 AWS
+    #   Region, and it has the same location in every AWS account.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   The tags associated with the file system, presented as an array of
@@ -1136,6 +1238,8 @@ module Aws::EFS
       :kms_key_id,
       :throughput_mode,
       :provisioned_throughput_in_mibps,
+      :availability_zone_name,
+      :availability_zone_id,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1294,7 +1398,7 @@ module Aws::EFS
     # system in provisioned throughput mode, when you attempt to increase
     # the provisioned throughput of an existing file system, or when you
     # attempt to change an existing file system from bursting to provisioned
-    # throughput mode.
+    # throughput mode. Try again later.
     #
     # @!attribute [rw] error_code
     #   @return [String]
@@ -1535,22 +1639,22 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_id
-    #   The unique and consistent identifier of the Availability Zone (AZ)
-    #   that the mount target resides in. For example, `use1-az1` is an AZ
-    #   ID for the us-east-1 Region and it has the same location in every
-    #   AWS account.
-    #   @return [String]
-    #
-    # @!attribute [rw] availability_zone_name
-    #   The name of the Availability Zone (AZ) that the mount target resides
-    #   in. AZs are independently mapped to names for each AWS account. For
-    #   example, the Availability Zone `us-east-1a` for your AWS account
-    #   might not be the same location as `us-east-1a` for another AWS
+    #   The unique and consistent identifier of the Availability Zone that
+    #   the mount target resides in. For example, `use1-az1` is an AZ ID for
+    #   the us-east-1 Region and it has the same location in every AWS
     #   account.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_name
+    #   The name of the Availability Zone in which the mount target is
+    #   located. Availability Zones are independently mapped to names for
+    #   each AWS account. For example, the Availability Zone `us-east-1a`
+    #   for your AWS account might not be the same location as `us-east-1a`
+    #   for another AWS account.
+    #   @return [String]
+    #
     # @!attribute [rw] vpc_id
-    #   The Virtual Private Cloud (VPC) ID that the mount target is
+    #   The virtual private cloud (VPC) ID that the mount target is
     #   configured in.
     #   @return [String]
     #
@@ -1732,9 +1836,9 @@ module Aws::EFS
     #
     # @!attribute [rw] policy
     #   The `FileSystemPolicy` that you're creating. Accepts a JSON
-    #   formatted policy definition. To find out more about the elements
-    #   that make up a file system policy, see [EFS Resource-based
-    #   Policies][1].
+    #   formatted policy definition. EFS file system policies have a 20,000
+    #   character limit. To find out more about the elements that make up a
+    #   file system policy, see [EFS Resource-based Policies][1].
     #
     #
     #
@@ -1995,6 +2099,9 @@ module Aws::EFS
       include Aws::Structure
     end
 
+    # Returned if the requested Amazon EFS functionality is not available in
+    # the specified Availability Zone.
+    #
     # @!attribute [rw] error_code
     #   @return [String]
     #
@@ -2023,7 +2130,7 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The keys of the key:value tag pairs that you want to remove from the
+    #   The keys of the key-value tag pairs that you want to remove from the
     #   specified EFS resource.
     #   @return [Array<String>]
     #
@@ -2050,19 +2157,19 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] throughput_mode
-    #   (Optional) The throughput mode that you want your file system to
-    #   use. If you're not updating your throughput mode, you don't need
-    #   to provide this value in your request. If you are changing the
-    #   `ThroughputMode` to `provisioned`, you must also set a value for
+    #   (Optional) Updates the file system's throughput mode. If you're
+    #   not updating your throughput mode, you don't need to provide this
+    #   value in your request. If you are changing the `ThroughputMode` to
+    #   `provisioned`, you must also set a value for
     #   `ProvisionedThroughputInMibps`.
     #   @return [String]
     #
     # @!attribute [rw] provisioned_throughput_in_mibps
-    #   (Optional) The amount of throughput, in MiB/s, that you want to
-    #   provision for your file system. Valid values are 1-1024. Required if
-    #   `ThroughputMode` is changed to `provisioned` on update. If you're
-    #   not updating the amount of provisioned throughput for your file
-    #   system, you don't need to provide this value in your request.
+    #   (Optional) Sets the amount of provisioned throughput, in MiB/s, for
+    #   the file system. Valid values are 1-1024. If you are changing the
+    #   throughput mode to provisioned, you must also provide the amount of
+    #   provisioned throughput. Required if `ThroughputMode` is changed to
+    #   `provisioned` on update.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UpdateFileSystemRequest AWS API Documentation
@@ -2075,8 +2182,8 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # Returned if the AWS Backup service is not available in the region that
-    # the request was made.
+    # Returned if the AWS Backup service is not available in the Region in
+    # which the request was made.
     #
     # @!attribute [rw] error_code
     #   @return [String]

@@ -4748,6 +4748,7 @@ module Aws::RDS
     #   resp.db_proxy.db_proxy_arn #=> String
     #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting", "suspended", "suspending", "reactivating"
     #   resp.db_proxy.engine_family #=> String
+    #   resp.db_proxy.vpc_id #=> String
     #   resp.db_proxy.vpc_security_group_ids #=> Array
     #   resp.db_proxy.vpc_security_group_ids[0] #=> String
     #   resp.db_proxy.vpc_subnet_ids #=> Array
@@ -4772,6 +4773,86 @@ module Aws::RDS
     # @param [Hash] params ({})
     def create_db_proxy(params = {}, options = {})
       req = build_request(:create_db_proxy, params)
+      req.send_request(options)
+    end
+
+    # Creates a `DBProxyEndpoint`. Only applies to proxies that are
+    # associated with Aurora DB clusters. You can use DB proxy endpoints to
+    # specify read/write or read-only access to the DB cluster. You can also
+    # use DB proxy endpoints to access a DB proxy through a different VPC
+    # than the proxy's default VPC.
+    #
+    # @option params [required, String] :db_proxy_name
+    #   The name of the DB proxy associated with the DB proxy endpoint that
+    #   you create.
+    #
+    # @option params [required, String] :db_proxy_endpoint_name
+    #   The name of the DB proxy endpoint to create.
+    #
+    # @option params [required, Array<String>] :vpc_subnet_ids
+    #   The VPC subnet IDs for the DB proxy endpoint that you create. You can
+    #   specify a different set of subnet IDs than for the original DB proxy.
+    #
+    # @option params [Array<String>] :vpc_security_group_ids
+    #   The VPC security group IDs for the DB proxy endpoint that you create.
+    #   You can specify a different set of security group IDs than for the
+    #   original DB proxy. The default is the default security group for the
+    #   VPC.
+    #
+    # @option params [String] :target_role
+    #   A value that indicates whether the DB proxy endpoint can be used for
+    #   read/write or read-only operations. The default is `READ_WRITE`.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #
+    # @return [Types::CreateDBProxyEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDBProxyEndpointResponse#db_proxy_endpoint #db_proxy_endpoint} => Types::DBProxyEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_db_proxy_endpoint({
+    #     db_proxy_name: "DBProxyName", # required
+    #     db_proxy_endpoint_name: "DBProxyEndpointName", # required
+    #     vpc_subnet_ids: ["String"], # required
+    #     vpc_security_group_ids: ["String"],
+    #     target_role: "READ_WRITE", # accepts READ_WRITE, READ_ONLY
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_proxy_endpoint.db_proxy_endpoint_name #=> String
+    #   resp.db_proxy_endpoint.db_proxy_endpoint_arn #=> String
+    #   resp.db_proxy_endpoint.db_proxy_name #=> String
+    #   resp.db_proxy_endpoint.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting"
+    #   resp.db_proxy_endpoint.vpc_id #=> String
+    #   resp.db_proxy_endpoint.vpc_security_group_ids #=> Array
+    #   resp.db_proxy_endpoint.vpc_security_group_ids[0] #=> String
+    #   resp.db_proxy_endpoint.vpc_subnet_ids #=> Array
+    #   resp.db_proxy_endpoint.vpc_subnet_ids[0] #=> String
+    #   resp.db_proxy_endpoint.endpoint #=> String
+    #   resp.db_proxy_endpoint.created_date #=> Time
+    #   resp.db_proxy_endpoint.target_role #=> String, one of "READ_WRITE", "READ_ONLY"
+    #   resp.db_proxy_endpoint.is_default #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBProxyEndpoint AWS API Documentation
+    #
+    # @overload create_db_proxy_endpoint(params = {})
+    # @param [Hash] params ({})
+    def create_db_proxy_endpoint(params = {}, options = {})
+      req = build_request(:create_db_proxy_endpoint, params)
       req.send_request(options)
     end
 
@@ -6225,7 +6306,7 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Deletes an existing proxy.
+    # Deletes an existing DB proxy.
     #
     # @option params [required, String] :db_proxy_name
     #   The name of the DB proxy to delete.
@@ -6246,6 +6327,7 @@ module Aws::RDS
     #   resp.db_proxy.db_proxy_arn #=> String
     #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting", "suspended", "suspending", "reactivating"
     #   resp.db_proxy.engine_family #=> String
+    #   resp.db_proxy.vpc_id #=> String
     #   resp.db_proxy.vpc_security_group_ids #=> Array
     #   resp.db_proxy.vpc_security_group_ids[0] #=> String
     #   resp.db_proxy.vpc_subnet_ids #=> Array
@@ -6270,6 +6352,50 @@ module Aws::RDS
     # @param [Hash] params ({})
     def delete_db_proxy(params = {}, options = {})
       req = build_request(:delete_db_proxy, params)
+      req.send_request(options)
+    end
+
+    # Deletes a `DBProxyEndpoint`. Doing so removes the ability to access
+    # the DB proxy using the endpoint that you defined. The endpoint that
+    # you delete might have provided capabilities such as read/write or
+    # read-only operations, or using a different VPC than the DB proxy's
+    # default VPC.
+    #
+    # @option params [required, String] :db_proxy_endpoint_name
+    #   The name of the DB proxy endpoint to delete.
+    #
+    # @return [Types::DeleteDBProxyEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDBProxyEndpointResponse#db_proxy_endpoint #db_proxy_endpoint} => Types::DBProxyEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_db_proxy_endpoint({
+    #     db_proxy_endpoint_name: "DBProxyEndpointName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_proxy_endpoint.db_proxy_endpoint_name #=> String
+    #   resp.db_proxy_endpoint.db_proxy_endpoint_arn #=> String
+    #   resp.db_proxy_endpoint.db_proxy_name #=> String
+    #   resp.db_proxy_endpoint.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting"
+    #   resp.db_proxy_endpoint.vpc_id #=> String
+    #   resp.db_proxy_endpoint.vpc_security_group_ids #=> Array
+    #   resp.db_proxy_endpoint.vpc_security_group_ids[0] #=> String
+    #   resp.db_proxy_endpoint.vpc_subnet_ids #=> Array
+    #   resp.db_proxy_endpoint.vpc_subnet_ids[0] #=> String
+    #   resp.db_proxy_endpoint.endpoint #=> String
+    #   resp.db_proxy_endpoint.created_date #=> Time
+    #   resp.db_proxy_endpoint.target_role #=> String, one of "READ_WRITE", "READ_ONLY"
+    #   resp.db_proxy_endpoint.is_default #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBProxyEndpoint AWS API Documentation
+    #
+    # @overload delete_db_proxy_endpoint(params = {})
+    # @param [Hash] params ({})
+    def delete_db_proxy_endpoint(params = {}, options = {})
+      req = build_request(:delete_db_proxy_endpoint, params)
       req.send_request(options)
     end
 
@@ -8597,7 +8723,9 @@ module Aws::RDS
     # Returns information about DB proxies.
     #
     # @option params [String] :db_proxy_name
-    #   The name of the DB proxy.
+    #   The name of the DB proxy. If you omit this parameter, the output
+    #   includes information about all DB proxies owned by your AWS account
+    #   ID.
     #
     # @option params [Array<Types::Filter>] :filters
     #   This parameter is not currently supported.
@@ -8645,6 +8773,7 @@ module Aws::RDS
     #   resp.db_proxies[0].db_proxy_arn #=> String
     #   resp.db_proxies[0].status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting", "suspended", "suspending", "reactivating"
     #   resp.db_proxies[0].engine_family #=> String
+    #   resp.db_proxies[0].vpc_id #=> String
     #   resp.db_proxies[0].vpc_security_group_ids #=> Array
     #   resp.db_proxies[0].vpc_security_group_ids[0] #=> String
     #   resp.db_proxies[0].vpc_subnet_ids #=> Array
@@ -8670,6 +8799,85 @@ module Aws::RDS
     # @param [Hash] params ({})
     def describe_db_proxies(params = {}, options = {})
       req = build_request(:describe_db_proxies, params)
+      req.send_request(options)
+    end
+
+    # Returns information about DB proxy endpoints.
+    #
+    # @option params [String] :db_proxy_name
+    #   The name of the DB proxy whose endpoints you want to describe. If you
+    #   omit this parameter, the output includes information about all DB
+    #   proxy endpoints associated with all your DB proxies.
+    #
+    # @option params [String] :db_proxy_endpoint_name
+    #   The name of a DB proxy endpoint to describe. If you omit this
+    #   parameter, the output includes information about all DB proxy
+    #   endpoints associated with the specified proxy.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   This parameter is not currently supported.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @return [Types::DescribeDBProxyEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDBProxyEndpointsResponse#db_proxy_endpoints #db_proxy_endpoints} => Array&lt;Types::DBProxyEndpoint&gt;
+    #   * {Types::DescribeDBProxyEndpointsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_db_proxy_endpoints({
+    #     db_proxy_name: "DBProxyName",
+    #     db_proxy_endpoint_name: "DBProxyEndpointName",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_proxy_endpoints #=> Array
+    #   resp.db_proxy_endpoints[0].db_proxy_endpoint_name #=> String
+    #   resp.db_proxy_endpoints[0].db_proxy_endpoint_arn #=> String
+    #   resp.db_proxy_endpoints[0].db_proxy_name #=> String
+    #   resp.db_proxy_endpoints[0].status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting"
+    #   resp.db_proxy_endpoints[0].vpc_id #=> String
+    #   resp.db_proxy_endpoints[0].vpc_security_group_ids #=> Array
+    #   resp.db_proxy_endpoints[0].vpc_security_group_ids[0] #=> String
+    #   resp.db_proxy_endpoints[0].vpc_subnet_ids #=> Array
+    #   resp.db_proxy_endpoints[0].vpc_subnet_ids[0] #=> String
+    #   resp.db_proxy_endpoints[0].endpoint #=> String
+    #   resp.db_proxy_endpoints[0].created_date #=> Time
+    #   resp.db_proxy_endpoints[0].target_role #=> String, one of "READ_WRITE", "READ_ONLY"
+    #   resp.db_proxy_endpoints[0].is_default #=> Boolean
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBProxyEndpoints AWS API Documentation
+    #
+    # @overload describe_db_proxy_endpoints(params = {})
+    # @param [Hash] params ({})
+    def describe_db_proxy_endpoints(params = {}, options = {})
+      req = build_request(:describe_db_proxy_endpoints, params)
       req.send_request(options)
     end
 
@@ -8807,8 +9015,9 @@ module Aws::RDS
     #   resp.targets[0].rds_resource_id #=> String
     #   resp.targets[0].port #=> Integer
     #   resp.targets[0].type #=> String, one of "RDS_INSTANCE", "RDS_SERVERLESS_ENDPOINT", "TRACKED_CLUSTER"
+    #   resp.targets[0].role #=> String, one of "READ_WRITE", "READ_ONLY", "UNKNOWN"
     #   resp.targets[0].target_health.state #=> String, one of "REGISTERING", "AVAILABLE", "UNAVAILABLE"
-    #   resp.targets[0].target_health.reason #=> String, one of "UNREACHABLE", "CONNECTION_FAILED", "AUTH_FAILURE", "PENDING_PROXY_CAPACITY"
+    #   resp.targets[0].target_health.reason #=> String, one of "UNREACHABLE", "CONNECTION_FAILED", "AUTH_FAILURE", "PENDING_PROXY_CAPACITY", "INVALID_REPLICATION_STATE"
     #   resp.targets[0].target_health.description #=> String
     #   resp.marker #=> String
     #
@@ -13537,6 +13746,7 @@ module Aws::RDS
     #   resp.db_proxy.db_proxy_arn #=> String
     #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting", "suspended", "suspending", "reactivating"
     #   resp.db_proxy.engine_family #=> String
+    #   resp.db_proxy.vpc_id #=> String
     #   resp.db_proxy.vpc_security_group_ids #=> Array
     #   resp.db_proxy.vpc_security_group_ids[0] #=> String
     #   resp.db_proxy.vpc_subnet_ids #=> Array
@@ -13561,6 +13771,61 @@ module Aws::RDS
     # @param [Hash] params ({})
     def modify_db_proxy(params = {}, options = {})
       req = build_request(:modify_db_proxy, params)
+      req.send_request(options)
+    end
+
+    # Changes the settings for an existing DB proxy endpoint.
+    #
+    # @option params [required, String] :db_proxy_endpoint_name
+    #   The name of the DB proxy sociated with the DB proxy endpoint that you
+    #   want to modify.
+    #
+    # @option params [String] :new_db_proxy_endpoint_name
+    #   The new identifier for the `DBProxyEndpoint`. An identifier must begin
+    #   with a letter and must contain only ASCII letters, digits, and
+    #   hyphens; it can't end with a hyphen or contain two consecutive
+    #   hyphens.
+    #
+    # @option params [Array<String>] :vpc_security_group_ids
+    #   The VPC security group IDs for the DB proxy endpoint. When the DB
+    #   proxy endpoint uses a different VPC than the original proxy, you also
+    #   specify a different set of security group IDs than for the original
+    #   proxy.
+    #
+    # @return [Types::ModifyDBProxyEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyDBProxyEndpointResponse#db_proxy_endpoint #db_proxy_endpoint} => Types::DBProxyEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_db_proxy_endpoint({
+    #     db_proxy_endpoint_name: "DBProxyEndpointName", # required
+    #     new_db_proxy_endpoint_name: "DBProxyEndpointName",
+    #     vpc_security_group_ids: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_proxy_endpoint.db_proxy_endpoint_name #=> String
+    #   resp.db_proxy_endpoint.db_proxy_endpoint_arn #=> String
+    #   resp.db_proxy_endpoint.db_proxy_name #=> String
+    #   resp.db_proxy_endpoint.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting"
+    #   resp.db_proxy_endpoint.vpc_id #=> String
+    #   resp.db_proxy_endpoint.vpc_security_group_ids #=> Array
+    #   resp.db_proxy_endpoint.vpc_security_group_ids[0] #=> String
+    #   resp.db_proxy_endpoint.vpc_subnet_ids #=> Array
+    #   resp.db_proxy_endpoint.vpc_subnet_ids[0] #=> String
+    #   resp.db_proxy_endpoint.endpoint #=> String
+    #   resp.db_proxy_endpoint.created_date #=> Time
+    #   resp.db_proxy_endpoint.target_role #=> String, one of "READ_WRITE", "READ_ONLY"
+    #   resp.db_proxy_endpoint.is_default #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBProxyEndpoint AWS API Documentation
+    #
+    # @overload modify_db_proxy_endpoint(params = {})
+    # @param [Hash] params ({})
+    def modify_db_proxy_endpoint(params = {}, options = {})
+      req = build_request(:modify_db_proxy_endpoint, params)
       req.send_request(options)
     end
 
@@ -14944,8 +15209,9 @@ module Aws::RDS
     #   resp.db_proxy_targets[0].rds_resource_id #=> String
     #   resp.db_proxy_targets[0].port #=> Integer
     #   resp.db_proxy_targets[0].type #=> String, one of "RDS_INSTANCE", "RDS_SERVERLESS_ENDPOINT", "TRACKED_CLUSTER"
+    #   resp.db_proxy_targets[0].role #=> String, one of "READ_WRITE", "READ_ONLY", "UNKNOWN"
     #   resp.db_proxy_targets[0].target_health.state #=> String, one of "REGISTERING", "AVAILABLE", "UNAVAILABLE"
-    #   resp.db_proxy_targets[0].target_health.reason #=> String, one of "UNREACHABLE", "CONNECTION_FAILED", "AUTH_FAILURE", "PENDING_PROXY_CAPACITY"
+    #   resp.db_proxy_targets[0].target_health.reason #=> String, one of "UNREACHABLE", "CONNECTION_FAILED", "AUTH_FAILURE", "PENDING_PROXY_CAPACITY", "INVALID_REPLICATION_STATE"
     #   resp.db_proxy_targets[0].target_health.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RegisterDBProxyTargets AWS API Documentation
@@ -19539,7 +19805,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2021-03-09)
+------------------
+
+* Feature - AWS EFS is introducing one-zone file systems.
+
 1.37.0 (2021-02-02)
 ------------------
 

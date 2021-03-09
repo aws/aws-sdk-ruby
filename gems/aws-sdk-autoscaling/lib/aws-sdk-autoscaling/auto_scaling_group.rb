@@ -730,6 +730,7 @@ module Aws::AutoScaling
     #     min_size: 1,
     #     max_size: 1,
     #     desired_capacity: 1,
+    #     time_zone: "XmlStringMaxLen255",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :scheduled_action_name
@@ -748,17 +749,18 @@ module Aws::AutoScaling
     #   If you try to schedule your action in the past, Amazon EC2 Auto
     #   Scaling returns an error message.
     # @option options [Time,DateTime,Date,Integer,String] :end_time
-    #   The date and time for the recurring schedule to end. Amazon EC2 Auto
-    #   Scaling does not perform the action after this time.
+    #   The date and time for the recurring schedule to end, in UTC.
     # @option options [String] :recurrence
-    #   The recurring schedule for this action, in Unix cron syntax format.
-    #   This format consists of five fields separated by white spaces:
-    #   \[Minute\] \[Hour\] \[Day\_of\_Month\] \[Month\_of\_Year\]
-    #   \[Day\_of\_Week\]. The value must be in quotes (for example, `"30 0 1
-    #   1,6,12 *"`). For more information about this format, see [Crontab][1].
+    #   The recurring schedule for this action. This format consists of five
+    #   fields separated by white spaces: \[Minute\] \[Hour\]
+    #   \[Day\_of\_Month\] \[Month\_of\_Year\] \[Day\_of\_Week\]. The value
+    #   must be in quotes (for example, `"30 0 1 1,6,12 *"`). For more
+    #   information about this format, see [Crontab][1].
     #
     #   When `StartTime` and `EndTime` are specified with `Recurrence`, they
     #   form the boundaries of when the recurring action starts and stops.
+    #
+    #   Cron expressions use Universal Coordinated Time (UTC) by default.
     #
     #
     #
@@ -772,6 +774,18 @@ module Aws::AutoScaling
     #   after the scheduled action runs and the capacity it attempts to
     #   maintain. It can scale beyond this capacity if you add more scaling
     #   conditions.
+    # @option options [String] :time_zone
+    #   Specifies the time zone for a cron expression. If a time zone is not
+    #   provided, UTC is used by default.
+    #
+    #   Valid values are the canonical names of the IANA time zones, derived
+    #   from the IANA Time Zone Database (such as `Etc/GMT+9` or
+    #   `Pacific/Tahiti`). For more information, see
+    #   [https://en.wikipedia.org/wiki/List\_of\_tz\_database\_time\_zones][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
     # @return [ScheduledAction]
     def put_scheduled_update_group_action(options = {})
       options = options.merge(auto_scaling_group_name: @name)

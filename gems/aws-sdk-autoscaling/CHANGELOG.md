@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2021-03-09)
+------------------
+
+* Feature - EC2 Auto Scaling now supports setting a local time zone for cron expressions in scheduled actions, removing the need to adjust for Daylight Saving Time (DST)
+
 1.56.0 (2021-03-08)
 ------------------
 

@@ -96,6 +96,12 @@ module Aws::AutoScaling
       data[:desired_capacity]
     end
 
+    # The time zone for the cron expression.
+    # @return [String]
+    def time_zone
+      data[:time_zone]
+    end
+
     # @!endgroup
 
     # @return [Client]

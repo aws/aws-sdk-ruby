@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2021-03-09)
+------------------
+
+* Feature - Update documentation to include Python. Add ConflictException for DeleteProfilingGroup. Add FrameMetricValue.
+
 1.13.0 (2021-02-02)
 ------------------
 

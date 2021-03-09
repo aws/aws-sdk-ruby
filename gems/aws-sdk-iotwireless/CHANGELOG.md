@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2021-03-09)
+------------------
+
+* Feature - Add max value to Seq in SendDataToWirelessDevice API"
+
 1.3.0 (2021-03-02)
 ------------------
 

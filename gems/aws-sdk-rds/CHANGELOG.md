@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2021-03-09)
+------------------
+
+* Feature - This release adds support for Amazon RDS Proxy endpoints.
+
 1.115.0 (2021-02-19)
 ------------------
 

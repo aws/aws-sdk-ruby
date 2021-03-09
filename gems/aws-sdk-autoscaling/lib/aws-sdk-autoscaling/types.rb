@@ -651,6 +651,7 @@ module Aws::AutoScaling
     #             min_size: 1,
     #             max_size: 1,
     #             desired_capacity: 1,
+    #             time_zone: "XmlStringMaxLen255",
     #           },
     #         ],
     #       }
@@ -4855,6 +4856,7 @@ module Aws::AutoScaling
     #         min_size: 1,
     #         max_size: 1,
     #         desired_capacity: 1,
+    #         time_zone: "XmlStringMaxLen255",
     #       }
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -4883,20 +4885,20 @@ module Aws::AutoScaling
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The date and time for the recurring schedule to end. Amazon EC2 Auto
-    #   Scaling does not perform the action after this time.
+    #   The date and time for the recurring schedule to end, in UTC.
     #   @return [Time]
     #
     # @!attribute [rw] recurrence
-    #   The recurring schedule for this action, in Unix cron syntax format.
-    #   This format consists of five fields separated by white spaces:
-    #   \[Minute\] \[Hour\] \[Day\_of\_Month\] \[Month\_of\_Year\]
-    #   \[Day\_of\_Week\]. The value must be in quotes (for example, `"30 0
-    #   1 1,6,12 *"`). For more information about this format, see
-    #   [Crontab][1].
+    #   The recurring schedule for this action. This format consists of five
+    #   fields separated by white spaces: \[Minute\] \[Hour\]
+    #   \[Day\_of\_Month\] \[Month\_of\_Year\] \[Day\_of\_Week\]. The value
+    #   must be in quotes (for example, `"30 0 1 1,6,12 *"`). For more
+    #   information about this format, see [Crontab][1].
     #
     #   When `StartTime` and `EndTime` are specified with `Recurrence`, they
     #   form the boundaries of when the recurring action starts and stops.
+    #
+    #   Cron expressions use Universal Coordinated Time (UTC) by default.
     #
     #
     #
@@ -4918,6 +4920,20 @@ module Aws::AutoScaling
     #   scaling conditions.
     #   @return [Integer]
     #
+    # @!attribute [rw] time_zone
+    #   Specifies the time zone for a cron expression. If a time zone is not
+    #   provided, UTC is used by default.
+    #
+    #   Valid values are the canonical names of the IANA time zones, derived
+    #   from the IANA Time Zone Database (such as `Etc/GMT+9` or
+    #   `Pacific/Tahiti`). For more information, see
+    #   [https://en.wikipedia.org/wiki/List\_of\_tz\_database\_time\_zones][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScheduledUpdateGroupActionType AWS API Documentation
     #
     class PutScheduledUpdateGroupActionType < Struct.new(
@@ -4929,7 +4945,8 @@ module Aws::AutoScaling
       :recurrence,
       :min_size,
       :max_size,
-      :desired_capacity)
+      :desired_capacity,
+      :time_zone)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5278,6 +5295,10 @@ module Aws::AutoScaling
     #   to maintain.
     #   @return [Integer]
     #
+    # @!attribute [rw] time_zone
+    #   The time zone for the cron expression.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScheduledUpdateGroupAction AWS API Documentation
     #
     class ScheduledUpdateGroupAction < Struct.new(
@@ -5290,16 +5311,14 @@ module Aws::AutoScaling
       :recurrence,
       :min_size,
       :max_size,
-      :desired_capacity)
+      :desired_capacity,
+      :time_zone)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Describes information used for one or more scheduled scaling action
     # updates in a BatchPutScheduledUpdateGroupAction operation.
-    #
-    # When updating a scheduled scaling action, all optional parameters are
-    # left unchanged if not specified.
     #
     # @note When making an API call, you may pass ScheduledUpdateGroupActionRequest
     #   data as a hash:
@@ -5312,6 +5331,7 @@ module Aws::AutoScaling
     #         min_size: 1,
     #         max_size: 1,
     #         desired_capacity: 1,
+    #         time_zone: "XmlStringMaxLen255",
     #       }
     #
     # @!attribute [rw] scheduled_action_name
@@ -5332,8 +5352,7 @@ module Aws::AutoScaling
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The date and time for the recurring schedule to end. Amazon EC2 Auto
-    #   Scaling does not perform the action after this time.
+    #   The date and time for the recurring schedule to end, in UTC.
     #   @return [Time]
     #
     # @!attribute [rw] recurrence
@@ -5346,6 +5365,8 @@ module Aws::AutoScaling
     #
     #   When `StartTime` and `EndTime` are specified with `Recurrence`, they
     #   form the boundaries of when the recurring action starts and stops.
+    #
+    #   Cron expressions use Universal Coordinated Time (UTC) by default.
     #
     #
     #
@@ -5366,6 +5387,20 @@ module Aws::AutoScaling
     #   to maintain.
     #   @return [Integer]
     #
+    # @!attribute [rw] time_zone
+    #   Specifies the time zone for a cron expression. If a time zone is not
+    #   provided, UTC is used by default.
+    #
+    #   Valid values are the canonical names of the IANA time zones, derived
+    #   from the IANA Time Zone Database (such as `Etc/GMT+9` or
+    #   `Pacific/Tahiti`). For more information, see
+    #   [https://en.wikipedia.org/wiki/List\_of\_tz\_database\_time\_zones][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScheduledUpdateGroupActionRequest AWS API Documentation
     #
     class ScheduledUpdateGroupActionRequest < Struct.new(
@@ -5375,7 +5410,8 @@ module Aws::AutoScaling
       :recurrence,
       :min_size,
       :max_size,
-      :desired_capacity)
+      :desired_capacity,
+      :time_zone)
       SENSITIVE = []
       include Aws::Structure
     end

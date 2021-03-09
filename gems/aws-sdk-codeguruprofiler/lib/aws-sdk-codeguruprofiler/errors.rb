@@ -68,6 +68,10 @@ module Aws::CodeGuruProfiler
       def message
         @message || @data[:message]
       end
+
+      def retryable?
+        true
+      end
     end
 
     class ResourceNotFoundException < ServiceError
@@ -98,6 +102,10 @@ module Aws::CodeGuruProfiler
       def message
         @message || @data[:message]
       end
+
+      def retryable?
+        true
+      end
     end
 
     class ThrottlingException < ServiceError
@@ -112,6 +120,10 @@ module Aws::CodeGuruProfiler
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      def retryable?
+        true
       end
     end
 

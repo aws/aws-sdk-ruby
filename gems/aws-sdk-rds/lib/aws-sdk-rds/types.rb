@@ -4163,6 +4163,87 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateDBProxyEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         db_proxy_name: "DBProxyName", # required
+    #         db_proxy_endpoint_name: "DBProxyEndpointName", # required
+    #         vpc_subnet_ids: ["String"], # required
+    #         vpc_security_group_ids: ["String"],
+    #         target_role: "READ_WRITE", # accepts READ_WRITE, READ_ONLY
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] db_proxy_name
+    #   The name of the DB proxy associated with the DB proxy endpoint that
+    #   you create.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_proxy_endpoint_name
+    #   The name of the DB proxy endpoint to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_subnet_ids
+    #   The VPC subnet IDs for the DB proxy endpoint that you create. You
+    #   can specify a different set of subnet IDs than for the original DB
+    #   proxy.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_security_group_ids
+    #   The VPC security group IDs for the DB proxy endpoint that you
+    #   create. You can specify a different set of security group IDs than
+    #   for the original DB proxy. The default is the default security group
+    #   for the VPC.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] target_role
+    #   A value that indicates whether the DB proxy endpoint can be used for
+    #   read/write or read-only operations. The default is `READ_WRITE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBProxyEndpointRequest AWS API Documentation
+    #
+    class CreateDBProxyEndpointRequest < Struct.new(
+      :db_proxy_name,
+      :db_proxy_endpoint_name,
+      :vpc_subnet_ids,
+      :vpc_security_group_ids,
+      :target_role,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_proxy_endpoint
+    #   The `DBProxyEndpoint` object that is created by the API operation.
+    #   The DB proxy endpoint that you create might provide capabilities
+    #   such as read/write or read-only operations, or using a different VPC
+    #   than the proxy's default VPC.
+    #   @return [Types::DBProxyEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBProxyEndpointResponse AWS API Documentation
+    #
+    class CreateDBProxyEndpointResponse < Struct.new(
+      :db_proxy_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDBProxyRequest
     #   data as a hash:
     #
@@ -7181,6 +7262,10 @@ module Aws::RDS
     #   Aurora.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_id
+    #   Provides the VPC ID of the DB proxy.
+    #   @return [String]
+    #
     # @!attribute [rw] vpc_security_group_ids
     #   Provides a list of VPC security groups that the proxy belongs to.
     #   @return [Array<String>]
@@ -7200,9 +7285,9 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] endpoint
-    #   The endpoint that you can use to connect to the proxy. You include
-    #   the endpoint value in the connection string for a database client
-    #   application.
+    #   The endpoint that you can use to connect to the DB proxy. You
+    #   include the endpoint value in the connection string for a database
+    #   client application.
     #   @return [String]
     #
     # @!attribute [rw] require_tls
@@ -7247,6 +7332,7 @@ module Aws::RDS
       :db_proxy_arn,
       :status,
       :engine_family,
+      :vpc_id,
       :vpc_security_group_ids,
       :vpc_subnet_ids,
       :auth,
@@ -7267,6 +7353,109 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyAlreadyExistsFault AWS API Documentation
     #
     class DBProxyAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The data structure representing an endpoint associated with a DB
+    # proxy. RDS automatically creates one endpoint for each DB proxy. For
+    # Aurora DB clusters, you can associate additional endpoints with the
+    # same DB proxy. These endpoints can be read/write or read-only. They
+    # can also reside in different VPCs than the associated DB proxy.
+    #
+    # This data type is used as a response element in the
+    # `DescribeDBProxyEndpoints` operation.
+    #
+    # @!attribute [rw] db_proxy_endpoint_name
+    #   The name for the DB proxy endpoint. An identifier must begin with a
+    #   letter and must contain only ASCII letters, digits, and hyphens; it
+    #   can't end with a hyphen or contain two consecutive hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_proxy_endpoint_arn
+    #   The Amazon Resource Name (ARN) for the DB proxy endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_proxy_name
+    #   The identifier for the DB proxy that is associated with this DB
+    #   proxy endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of this DB proxy endpoint. A status of
+    #   `available` means the endpoint is ready to handle requests. Other
+    #   values indicate that you must wait for the endpoint to be ready, or
+    #   take some action to resolve an issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   Provides the VPC ID of the DB proxy endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_security_group_ids
+    #   Provides a list of VPC security groups that the DB proxy endpoint
+    #   belongs to.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_subnet_ids
+    #   The EC2 subnet IDs for the DB proxy endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint that you can use to connect to the DB proxy. You
+    #   include the endpoint value in the connection string for a database
+    #   client application.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   The date and time when the DB proxy endpoint was first created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] target_role
+    #   A value that indicates whether the DB proxy endpoint can be used for
+    #   read/write or read-only operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   A value that indicates whether this endpoint is the default endpoint
+    #   for the associated DB proxy. Default DB proxy endpoints always have
+    #   read/write capability. Other endpoints that you associate with the
+    #   DB proxy can be either read/write or read-only.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyEndpoint AWS API Documentation
+    #
+    class DBProxyEndpoint < Struct.new(
+      :db_proxy_endpoint_name,
+      :db_proxy_endpoint_arn,
+      :db_proxy_name,
+      :status,
+      :vpc_id,
+      :vpc_security_group_ids,
+      :vpc_subnet_ids,
+      :endpoint,
+      :created_date,
+      :target_role,
+      :is_default)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified DB proxy endpoint name must be unique for all DB proxy
+    # endpoints owned by your AWS account in the specified AWS Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyEndpointAlreadyExistsFault AWS API Documentation
+    #
+    class DBProxyEndpointAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The DB proxy endpoint doesn't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyEndpointNotFoundFault AWS API Documentation
+    #
+    class DBProxyEndpointNotFoundFault < Aws::EmptyStructure; end
+
+    # The DB proxy already has the maximum number of endpoints.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyEndpointQuotaExceededFault AWS API Documentation
+    #
+    class DBProxyEndpointQuotaExceededFault < Aws::EmptyStructure; end
 
     # The specified proxy name doesn't correspond to a proxy owned by your
     # AWS account in the specified AWS Region.
@@ -7320,6 +7509,11 @@ module Aws::RDS
     #   Aurora DB cluster, that the target represents.
     #   @return [String]
     #
+    # @!attribute [rw] role
+    #   A value that indicates whether the target of the proxy can be used
+    #   for read/write or read-only operations.
+    #   @return [String]
+    #
     # @!attribute [rw] target_health
     #   Information about the connection health of the RDS Proxy target.
     #   @return [Types::TargetHealth]
@@ -7333,6 +7527,7 @@ module Aws::RDS
       :rds_resource_id,
       :port,
       :type,
+      :role,
       :target_health)
       SENSITIVE = []
       include Aws::Structure
@@ -8291,6 +8486,38 @@ module Aws::RDS
     #
     class DeleteDBParameterGroupMessage < Struct.new(
       :db_parameter_group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteDBProxyEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         db_proxy_endpoint_name: "DBProxyEndpointName", # required
+    #       }
+    #
+    # @!attribute [rw] db_proxy_endpoint_name
+    #   The name of the DB proxy endpoint to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBProxyEndpointRequest AWS API Documentation
+    #
+    class DeleteDBProxyEndpointRequest < Struct.new(
+      :db_proxy_endpoint_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_proxy_endpoint
+    #   The data structure representing the details of the DB proxy endpoint
+    #   that you delete.
+    #   @return [Types::DBProxyEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBProxyEndpointResponse AWS API Documentation
+    #
+    class DeleteDBProxyEndpointResponse < Struct.new(
+      :db_proxy_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9830,7 +10057,9 @@ module Aws::RDS
     #       }
     #
     # @!attribute [rw] db_proxy_name
-    #   The name of the DB proxy.
+    #   The name of the DB proxy. If you omit this parameter, the output
+    #   includes information about all DB proxies owned by your AWS account
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -9880,6 +10109,86 @@ module Aws::RDS
     #
     class DescribeDBProxiesResponse < Struct.new(
       :db_proxies,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeDBProxyEndpointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         db_proxy_name: "DBProxyName",
+    #         db_proxy_endpoint_name: "DBProxyEndpointName",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         marker: "String",
+    #         max_records: 1,
+    #       }
+    #
+    # @!attribute [rw] db_proxy_name
+    #   The name of the DB proxy whose endpoints you want to describe. If
+    #   you omit this parameter, the output includes information about all
+    #   DB proxy endpoints associated with all your DB proxies.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_proxy_endpoint_name
+    #   The name of a DB proxy endpoint to describe. If you omit this
+    #   parameter, the output includes information about all DB proxy
+    #   endpoints associated with the specified proxy.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   This parameter is not currently supported.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBProxyEndpointsRequest AWS API Documentation
+    #
+    class DescribeDBProxyEndpointsRequest < Struct.new(
+      :db_proxy_name,
+      :db_proxy_endpoint_name,
+      :filters,
+      :marker,
+      :max_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_proxy_endpoints
+    #   The list of `ProxyEndpoint` objects returned by the API operation.
+    #   @return [Array<Types::DBProxyEndpoint>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBProxyEndpointsResponse AWS API Documentation
+    #
+    class DescribeDBProxyEndpointsResponse < Struct.new(
+      :db_proxy_endpoints,
       :marker)
       SENSITIVE = []
       include Aws::Structure
@@ -12791,6 +13100,13 @@ module Aws::RDS
     #
     class InvalidDBParameterGroupStateFault < Aws::EmptyStructure; end
 
+    # You can't perform this operation while the DB proxy endpoint is in a
+    # particular state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBProxyEndpointStateFault AWS API Documentation
+    #
+    class InvalidDBProxyEndpointStateFault < Aws::EmptyStructure; end
+
     # The requested operation can't be performed while the proxy is in this
     # state.
     #
@@ -14524,6 +14840,57 @@ module Aws::RDS
     class ModifyDBParameterGroupMessage < Struct.new(
       :db_parameter_group_name,
       :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyDBProxyEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         db_proxy_endpoint_name: "DBProxyEndpointName", # required
+    #         new_db_proxy_endpoint_name: "DBProxyEndpointName",
+    #         vpc_security_group_ids: ["String"],
+    #       }
+    #
+    # @!attribute [rw] db_proxy_endpoint_name
+    #   The name of the DB proxy sociated with the DB proxy endpoint that
+    #   you want to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_db_proxy_endpoint_name
+    #   The new identifier for the `DBProxyEndpoint`. An identifier must
+    #   begin with a letter and must contain only ASCII letters, digits, and
+    #   hyphens; it can't end with a hyphen or contain two consecutive
+    #   hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_security_group_ids
+    #   The VPC security group IDs for the DB proxy endpoint. When the DB
+    #   proxy endpoint uses a different VPC than the original proxy, you
+    #   also specify a different set of security group IDs than for the
+    #   original proxy.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBProxyEndpointRequest AWS API Documentation
+    #
+    class ModifyDBProxyEndpointRequest < Struct.new(
+      :db_proxy_endpoint_name,
+      :new_db_proxy_endpoint_name,
+      :vpc_security_group_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_proxy_endpoint
+    #   The `DBProxyEndpoint` object representing the new settings for the
+    #   DB proxy endpoint.
+    #   @return [Types::DBProxyEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBProxyEndpointResponse AWS API Documentation
+    #
+    class ModifyDBProxyEndpointResponse < Struct.new(
+      :db_proxy_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end

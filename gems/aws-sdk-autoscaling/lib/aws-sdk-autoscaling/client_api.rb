@@ -941,6 +941,7 @@ module Aws::AutoScaling
     PutScheduledUpdateGroupActionType.add_member(:min_size, Shapes::ShapeRef.new(shape: AutoScalingGroupMinSize, location_name: "MinSize"))
     PutScheduledUpdateGroupActionType.add_member(:max_size, Shapes::ShapeRef.new(shape: AutoScalingGroupMaxSize, location_name: "MaxSize"))
     PutScheduledUpdateGroupActionType.add_member(:desired_capacity, Shapes::ShapeRef.new(shape: AutoScalingGroupDesiredCapacity, location_name: "DesiredCapacity"))
+    PutScheduledUpdateGroupActionType.add_member(:time_zone, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "TimeZone"))
     PutScheduledUpdateGroupActionType.struct_class = Types::PutScheduledUpdateGroupActionType
 
     RecordLifecycleActionHeartbeatAnswer.struct_class = Types::RecordLifecycleActionHeartbeatAnswer
@@ -1003,6 +1004,7 @@ module Aws::AutoScaling
     ScheduledUpdateGroupAction.add_member(:min_size, Shapes::ShapeRef.new(shape: AutoScalingGroupMinSize, location_name: "MinSize"))
     ScheduledUpdateGroupAction.add_member(:max_size, Shapes::ShapeRef.new(shape: AutoScalingGroupMaxSize, location_name: "MaxSize"))
     ScheduledUpdateGroupAction.add_member(:desired_capacity, Shapes::ShapeRef.new(shape: AutoScalingGroupDesiredCapacity, location_name: "DesiredCapacity"))
+    ScheduledUpdateGroupAction.add_member(:time_zone, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "TimeZone"))
     ScheduledUpdateGroupAction.struct_class = Types::ScheduledUpdateGroupAction
 
     ScheduledUpdateGroupActionRequest.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "ScheduledActionName"))
@@ -1012,6 +1014,7 @@ module Aws::AutoScaling
     ScheduledUpdateGroupActionRequest.add_member(:min_size, Shapes::ShapeRef.new(shape: AutoScalingGroupMinSize, location_name: "MinSize"))
     ScheduledUpdateGroupActionRequest.add_member(:max_size, Shapes::ShapeRef.new(shape: AutoScalingGroupMaxSize, location_name: "MaxSize"))
     ScheduledUpdateGroupActionRequest.add_member(:desired_capacity, Shapes::ShapeRef.new(shape: AutoScalingGroupDesiredCapacity, location_name: "DesiredCapacity"))
+    ScheduledUpdateGroupActionRequest.add_member(:time_zone, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "TimeZone"))
     ScheduledUpdateGroupActionRequest.struct_class = Types::ScheduledUpdateGroupActionRequest
 
     ScheduledUpdateGroupActionRequests.member = Shapes::ShapeRef.new(shape: ScheduledUpdateGroupActionRequest)

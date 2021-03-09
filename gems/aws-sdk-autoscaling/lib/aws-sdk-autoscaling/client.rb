@@ -546,8 +546,7 @@ module Aws::AutoScaling
     end
 
     # Creates or updates one or more scheduled scaling actions for an Auto
-    # Scaling group. If you leave a parameter unspecified when updating a
-    # scheduled scaling action, the corresponding value remains unchanged.
+    # Scaling group.
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -572,6 +571,7 @@ module Aws::AutoScaling
     #         min_size: 1,
     #         max_size: 1,
     #         desired_capacity: 1,
+    #         time_zone: "XmlStringMaxLen255",
     #       },
     #     ],
     #   })
@@ -3216,6 +3216,7 @@ module Aws::AutoScaling
     #   resp.scheduled_update_group_actions[0].min_size #=> Integer
     #   resp.scheduled_update_group_actions[0].max_size #=> Integer
     #   resp.scheduled_update_group_actions[0].desired_capacity #=> Integer
+    #   resp.scheduled_update_group_actions[0].time_zone #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScheduledActions AWS API Documentation
@@ -4411,8 +4412,7 @@ module Aws::AutoScaling
     end
 
     # Creates or updates a scheduled scaling action for an Auto Scaling
-    # group. If you leave a parameter unspecified when updating a scheduled
-    # scaling action, the corresponding value remains unchanged.
+    # group.
     #
     # For more information, see [Scheduled scaling][1] in the *Amazon EC2
     # Auto Scaling User Guide*.
@@ -4443,18 +4443,19 @@ module Aws::AutoScaling
     #   Scaling returns an error message.
     #
     # @option params [Time,DateTime,Date,Integer,String] :end_time
-    #   The date and time for the recurring schedule to end. Amazon EC2 Auto
-    #   Scaling does not perform the action after this time.
+    #   The date and time for the recurring schedule to end, in UTC.
     #
     # @option params [String] :recurrence
-    #   The recurring schedule for this action, in Unix cron syntax format.
-    #   This format consists of five fields separated by white spaces:
-    #   \[Minute\] \[Hour\] \[Day\_of\_Month\] \[Month\_of\_Year\]
-    #   \[Day\_of\_Week\]. The value must be in quotes (for example, `"30 0 1
-    #   1,6,12 *"`). For more information about this format, see [Crontab][1].
+    #   The recurring schedule for this action. This format consists of five
+    #   fields separated by white spaces: \[Minute\] \[Hour\]
+    #   \[Day\_of\_Month\] \[Month\_of\_Year\] \[Day\_of\_Week\]. The value
+    #   must be in quotes (for example, `"30 0 1 1,6,12 *"`). For more
+    #   information about this format, see [Crontab][1].
     #
     #   When `StartTime` and `EndTime` are specified with `Recurrence`, they
     #   form the boundaries of when the recurring action starts and stops.
+    #
+    #   Cron expressions use Universal Coordinated Time (UTC) by default.
     #
     #
     #
@@ -4471,6 +4472,19 @@ module Aws::AutoScaling
     #   after the scheduled action runs and the capacity it attempts to
     #   maintain. It can scale beyond this capacity if you add more scaling
     #   conditions.
+    #
+    # @option params [String] :time_zone
+    #   Specifies the time zone for a cron expression. If a time zone is not
+    #   provided, UTC is used by default.
+    #
+    #   Valid values are the canonical names of the IANA time zones, derived
+    #   from the IANA Time Zone Database (such as `Etc/GMT+9` or
+    #   `Pacific/Tahiti`). For more information, see
+    #   [https://en.wikipedia.org/wiki/List\_of\_tz\_database\_time\_zones][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4501,6 +4515,7 @@ module Aws::AutoScaling
     #     min_size: 1,
     #     max_size: 1,
     #     desired_capacity: 1,
+    #     time_zone: "XmlStringMaxLen255",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScheduledUpdateGroupAction AWS API Documentation
@@ -5391,7 +5406,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

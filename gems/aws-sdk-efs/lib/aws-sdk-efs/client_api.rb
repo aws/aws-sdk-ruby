@@ -22,7 +22,9 @@ module Aws::EFS
     AccessPointNotFound = Shapes::StructureShape.new(name: 'AccessPointNotFound')
     AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
     AvailabilityZoneName = Shapes::StringShape.new(name: 'AvailabilityZoneName')
+    AvailabilityZonesMismatch = Shapes::StructureShape.new(name: 'AvailabilityZonesMismatch')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
+    Backup = Shapes::BooleanShape.new(name: 'Backup')
     BackupPolicy = Shapes::StructureShape.new(name: 'BackupPolicy')
     BackupPolicyDescription = Shapes::StructureShape.new(name: 'BackupPolicyDescription')
     BadRequest = Shapes::StructureShape.new(name: 'BadRequest')
@@ -165,6 +167,10 @@ module Aws::EFS
     AccessPointNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     AccessPointNotFound.struct_class = Types::AccessPointNotFound
 
+    AvailabilityZonesMismatch.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    AvailabilityZonesMismatch.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AvailabilityZonesMismatch.struct_class = Types::AvailabilityZonesMismatch
+
     BackupPolicy.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "Status"))
     BackupPolicy.struct_class = Types::BackupPolicy
 
@@ -188,6 +194,8 @@ module Aws::EFS
     CreateFileSystemRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateFileSystemRequest.add_member(:throughput_mode, Shapes::ShapeRef.new(shape: ThroughputMode, location_name: "ThroughputMode"))
     CreateFileSystemRequest.add_member(:provisioned_throughput_in_mibps, Shapes::ShapeRef.new(shape: ProvisionedThroughputInMibps, location_name: "ProvisionedThroughputInMibps"))
+    CreateFileSystemRequest.add_member(:availability_zone_name, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "AvailabilityZoneName"))
+    CreateFileSystemRequest.add_member(:backup, Shapes::ShapeRef.new(shape: Backup, location_name: "Backup"))
     CreateFileSystemRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateFileSystemRequest.struct_class = Types::CreateFileSystemRequest
 
@@ -303,6 +311,8 @@ module Aws::EFS
     FileSystemDescription.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     FileSystemDescription.add_member(:throughput_mode, Shapes::ShapeRef.new(shape: ThroughputMode, location_name: "ThroughputMode"))
     FileSystemDescription.add_member(:provisioned_throughput_in_mibps, Shapes::ShapeRef.new(shape: ProvisionedThroughputInMibps, location_name: "ProvisionedThroughputInMibps"))
+    FileSystemDescription.add_member(:availability_zone_name, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "AvailabilityZoneName"))
+    FileSystemDescription.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     FileSystemDescription.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
     FileSystemDescription.struct_class = Types::FileSystemDescription
 
@@ -527,6 +537,7 @@ module Aws::EFS
         o.errors << Shapes::ShapeRef.new(shape: FileSystemLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientThroughputCapacity)
         o.errors << Shapes::ShapeRef.new(shape: ThroughputLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAvailabilityZone)
       end)
 
       api.add_operation(:create_mount_target, Seahorse::Model::Operation.new.tap do |o|
@@ -547,6 +558,7 @@ module Aws::EFS
         o.errors << Shapes::ShapeRef.new(shape: SecurityGroupLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: SecurityGroupNotFound)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedAvailabilityZone)
+        o.errors << Shapes::ShapeRef.new(shape: AvailabilityZonesMismatch)
       end)
 
       api.add_operation(:create_tags, Seahorse::Model::Operation.new.tap do |o|

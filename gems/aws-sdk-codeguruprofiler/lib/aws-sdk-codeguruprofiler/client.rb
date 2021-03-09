@@ -436,7 +436,7 @@ module Aws::CodeGuruProfiler
     #     period: "Period",
     #     profiling_group_name: "ProfilingGroupName", # required
     #     start_time: Time.now,
-    #     target_resolution: "P1D", # accepts P1D, PT1H, PT5M
+    #     target_resolution: "PT5M", # accepts PT5M, PT1H, P1D
     #   })
     #
     # @example Response structure
@@ -451,7 +451,7 @@ module Aws::CodeGuruProfiler
     #   resp.frame_metric_data[0].frame_metric.type #=> String, one of "AggregatedRelativeTotalTime"
     #   resp.frame_metric_data[0].values #=> Array
     #   resp.frame_metric_data[0].values[0] #=> Float
-    #   resp.resolution #=> String, one of "P1D", "PT1H", "PT5M"
+    #   resp.resolution #=> String, one of "PT5M", "PT1H", "P1D"
     #   resp.start_time #=> Time
     #   resp.unprocessed_end_times #=> Hash
     #   resp.unprocessed_end_times["String"] #=> Array
@@ -468,7 +468,7 @@ module Aws::CodeGuruProfiler
 
     # Used by profiler agents to report their current state and to receive
     # remote configuration updates. For example, `ConfigureAgent` can be
-    # used to tell and agent whether to profile or not and for how long to
+    # used to tell an agent whether to profile or not and for how long to
     # return profiling data.
     #
     # @option params [String] :fleet_instance_id
@@ -520,7 +520,7 @@ module Aws::CodeGuruProfiler
     #   resp = client.configure_agent({
     #     fleet_instance_id: "FleetInstanceId",
     #     metadata: {
-    #       "AgentId" => "String",
+    #       "ComputePlatform" => "String",
     #     },
     #     profiling_group_name: "ProfilingGroupName", # required
     #   })
@@ -579,7 +579,7 @@ module Aws::CodeGuruProfiler
     #       profiling_enabled: false, # required
     #     },
     #     client_token: "ClientToken", # required
-    #     compute_platform: "AWSLambda", # accepts AWSLambda, Default
+    #     compute_platform: "Default", # accepts Default, AWSLambda
     #     profiling_group_name: "ProfilingGroupName", # required
     #     tags: {
     #       "String" => "String",
@@ -590,12 +590,12 @@ module Aws::CodeGuruProfiler
     #
     #   resp.profiling_group.agent_orchestration_config.profiling_enabled #=> Boolean
     #   resp.profiling_group.arn #=> String
-    #   resp.profiling_group.compute_platform #=> String, one of "AWSLambda", "Default"
+    #   resp.profiling_group.compute_platform #=> String, one of "Default", "AWSLambda"
     #   resp.profiling_group.created_at #=> Time
     #   resp.profiling_group.name #=> String
     #   resp.profiling_group.profiling_status.latest_agent_orchestrated_at #=> Time
     #   resp.profiling_group.profiling_status.latest_agent_profile_reported_at #=> Time
-    #   resp.profiling_group.profiling_status.latest_aggregated_profile.period #=> String, one of "P1D", "PT1H", "PT5M"
+    #   resp.profiling_group.profiling_status.latest_aggregated_profile.period #=> String, one of "PT5M", "PT1H", "P1D"
     #   resp.profiling_group.profiling_status.latest_aggregated_profile.start #=> Time
     #   resp.profiling_group.tags #=> Hash
     #   resp.profiling_group.tags["String"] #=> String
@@ -656,12 +656,12 @@ module Aws::CodeGuruProfiler
     #
     #   resp.profiling_group.agent_orchestration_config.profiling_enabled #=> Boolean
     #   resp.profiling_group.arn #=> String
-    #   resp.profiling_group.compute_platform #=> String, one of "AWSLambda", "Default"
+    #   resp.profiling_group.compute_platform #=> String, one of "Default", "AWSLambda"
     #   resp.profiling_group.created_at #=> Time
     #   resp.profiling_group.name #=> String
     #   resp.profiling_group.profiling_status.latest_agent_orchestrated_at #=> Time
     #   resp.profiling_group.profiling_status.latest_agent_profile_reported_at #=> Time
-    #   resp.profiling_group.profiling_status.latest_aggregated_profile.period #=> String, one of "P1D", "PT1H", "PT5M"
+    #   resp.profiling_group.profiling_status.latest_aggregated_profile.period #=> String, one of "PT5M", "PT1H", "P1D"
     #   resp.profiling_group.profiling_status.latest_aggregated_profile.start #=> Time
     #   resp.profiling_group.tags #=> Hash
     #   resp.profiling_group.tags["String"] #=> String
@@ -963,7 +963,7 @@ module Aws::CodeGuruProfiler
     #   resp.anomalies[0].instances[0].end_time #=> Time
     #   resp.anomalies[0].instances[0].id #=> String
     #   resp.anomalies[0].instances[0].start_time #=> Time
-    #   resp.anomalies[0].instances[0].user_feedback.type #=> String, one of "Negative", "Positive"
+    #   resp.anomalies[0].instances[0].user_feedback.type #=> String, one of "Positive", "Negative"
     #   resp.anomalies[0].metric.frame_name #=> String
     #   resp.anomalies[0].metric.thread_states #=> Array
     #   resp.anomalies[0].metric.thread_states[0] #=> String
@@ -1144,8 +1144,8 @@ module Aws::CodeGuruProfiler
     #     end_time: Time.now, # required
     #     max_results: 1,
     #     next_token: "PaginationToken",
-    #     order_by: "TimestampAscending", # accepts TimestampAscending, TimestampDescending
-    #     period: "P1D", # required, accepts P1D, PT1H, PT5M
+    #     order_by: "TimestampDescending", # accepts TimestampDescending, TimestampAscending
+    #     period: "PT5M", # required, accepts PT5M, PT1H, P1D
     #     profiling_group_name: "ProfilingGroupName", # required
     #     start_time: Time.now, # required
     #   })
@@ -1227,12 +1227,12 @@ module Aws::CodeGuruProfiler
     #   resp.profiling_groups #=> Array
     #   resp.profiling_groups[0].agent_orchestration_config.profiling_enabled #=> Boolean
     #   resp.profiling_groups[0].arn #=> String
-    #   resp.profiling_groups[0].compute_platform #=> String, one of "AWSLambda", "Default"
+    #   resp.profiling_groups[0].compute_platform #=> String, one of "Default", "AWSLambda"
     #   resp.profiling_groups[0].created_at #=> Time
     #   resp.profiling_groups[0].name #=> String
     #   resp.profiling_groups[0].profiling_status.latest_agent_orchestrated_at #=> Time
     #   resp.profiling_groups[0].profiling_status.latest_agent_profile_reported_at #=> Time
-    #   resp.profiling_groups[0].profiling_status.latest_aggregated_profile.period #=> String, one of "P1D", "PT1H", "PT5M"
+    #   resp.profiling_groups[0].profiling_status.latest_aggregated_profile.period #=> String, one of "PT5M", "PT1H", "P1D"
     #   resp.profiling_groups[0].profiling_status.latest_aggregated_profile.start #=> Time
     #   resp.profiling_groups[0].tags #=> Hash
     #   resp.profiling_groups[0].tags["String"] #=> String
@@ -1505,7 +1505,7 @@ module Aws::CodeGuruProfiler
     #     anomaly_instance_id: "AnomalyInstanceId", # required
     #     comment: "String",
     #     profiling_group_name: "ProfilingGroupName", # required
-    #     type: "Negative", # required, accepts Negative, Positive
+    #     type: "Positive", # required, accepts Positive, Negative
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/SubmitFeedback AWS API Documentation
@@ -1600,12 +1600,12 @@ module Aws::CodeGuruProfiler
     #
     #   resp.profiling_group.agent_orchestration_config.profiling_enabled #=> Boolean
     #   resp.profiling_group.arn #=> String
-    #   resp.profiling_group.compute_platform #=> String, one of "AWSLambda", "Default"
+    #   resp.profiling_group.compute_platform #=> String, one of "Default", "AWSLambda"
     #   resp.profiling_group.created_at #=> Time
     #   resp.profiling_group.name #=> String
     #   resp.profiling_group.profiling_status.latest_agent_orchestrated_at #=> Time
     #   resp.profiling_group.profiling_status.latest_agent_profile_reported_at #=> Time
-    #   resp.profiling_group.profiling_status.latest_aggregated_profile.period #=> String, one of "P1D", "PT1H", "PT5M"
+    #   resp.profiling_group.profiling_status.latest_aggregated_profile.period #=> String, one of "PT5M", "PT1H", "P1D"
     #   resp.profiling_group.profiling_status.latest_aggregated_profile.start #=> Time
     #   resp.profiling_group.tags #=> Hash
     #   resp.profiling_group.tags["String"] #=> String
@@ -1633,7 +1633,7 @@ module Aws::CodeGuruProfiler
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codeguruprofiler'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -334,8 +334,8 @@ module Aws::EFS
     # user and group override any identity information provided by the NFS
     # client. The file system path is exposed as the access point's root
     # directory. Applications using the access point can only access data in
-    # its own directory and below. To learn more, see [Mounting a File
-    # System Using EFS Access Points][1].
+    # its own directory and below. To learn more, see [Mounting a file
+    # system using EFS access points][1].
     #
     # This operation requires permissions for the
     # `elasticfilesystem:CreateAccessPoint` action.
@@ -371,7 +371,13 @@ module Aws::EFS
     #   `Path` specified does not exist, EFS creates it and applies the
     #   `CreationInfo` settings when a client connects to an access point.
     #   When specifying a `RootDirectory`, you need to provide the `Path`, and
-    #   the `CreationInfo` is optional.
+    #   the `CreationInfo`.
+    #
+    #   Amazon EFS creates a root directory only if you have provided the
+    #   CreationInfo: OwnUid, OwnGID, and permissions for the directory. If
+    #   you do not provide this information, Amazon EFS does not create the
+    #   root directory. If the root directory does not exist, attempts to
+    #   mount using the access point will fail.
     #
     # @return [Types::AccessPointDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -431,7 +437,7 @@ module Aws::EFS
     #   resp.root_directory.creation_info.owner_gid #=> Integer
     #   resp.root_directory.creation_info.permissions #=> String
     #   resp.owner_id #=> String
-    #   resp.life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
+    #   resp.life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted", "error"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateAccessPoint AWS API Documentation
     #
@@ -471,6 +477,9 @@ module Aws::EFS
     # creating a file system, the client can learn of its existence from the
     # `FileSystemAlreadyExists` error.
     #
+    # For more information, see [Creating a file system][1] in the *Amazon
+    # EFS User Guide*.
+    #
     # <note markdown="1"> The `CreateFileSystem` call returns while the file system's lifecycle
     # state is still `creating`. You can check the file system creation
     # status by calling the DescribeFileSystems operation, which among other
@@ -478,29 +487,33 @@ module Aws::EFS
     #
     #  </note>
     #
-    # This operation also takes an optional `PerformanceMode` parameter that
+    # This operation accepts an optional `PerformanceMode` parameter that
     # you choose for your file system. We recommend `generalPurpose`
     # performance mode for most file systems. File systems using the `maxIO`
     # performance mode can scale to higher levels of aggregate throughput
     # and operations per second with a tradeoff of slightly higher latencies
     # for most file operations. The performance mode can't be changed after
     # the file system has been created. For more information, see [Amazon
-    # EFS: Performance Modes][1].
+    # EFS performance modes][2].
+    #
+    # You can set the throughput mode for the file system using the
+    # `ThroughputMode` parameter.
     #
     # After the file system is fully created, Amazon EFS sets its lifecycle
     # state to `available`, at which point you can create one or more mount
     # targets for the file system in your VPC. For more information, see
     # CreateMountTarget. You mount your Amazon EFS file system on an EC2
     # instances in your VPC by using the mount target. For more information,
-    # see [Amazon EFS: How it Works][2].
+    # see [Amazon EFS: How it Works][3].
     #
     # This operation requires permissions for the
     # `elasticfilesystem:CreateFileSystem` action.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/efs/latest/ug/performance.html#performancemodes.html
-    # [2]: https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/creating-using-create-fs.html#creating-using-create-fs-part1
+    # [2]: https://docs.aws.amazon.com/efs/latest/ug/performance.html#performancemodes.html
+    # [3]: https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html
     #
     # @option params [required, String] :creation_token
     #   A string of up to 64 ASCII characters. Amazon EFS uses this to ensure
@@ -517,6 +530,11 @@ module Aws::EFS
     #   for most file operations. The performance mode can't be changed after
     #   the file system has been created.
     #
+    #   <note markdown="1"> The `maxIO` mode is not supported on file systems using One Zone
+    #   storage classes.
+    #
+    #    </note>
+    #
     # @option params [Boolean] :encrypted
     #   A Boolean value that, if true, creates an encrypted file system. When
     #   creating an encrypted file system, you have the option of specifying
@@ -528,7 +546,7 @@ module Aws::EFS
     # @option params [String] :kms_key_id
     #   The ID of the AWS KMS CMK to be used to protect the encrypted file
     #   system. This parameter is only required if you want to use a
-    #   nondefault CMK. If this parameter is not specified, the default CMK
+    #   non-default CMK. If this parameter is not specified, the default CMK
     #   for Amazon EFS is used. This ID can be in one of the following
     #   formats:
     #
@@ -551,15 +569,17 @@ module Aws::EFS
     #   EFS file systems.
     #
     # @option params [String] :throughput_mode
-    #   The throughput mode for the file system to be created. There are two
-    #   throughput modes to choose from for your file system: `bursting` and
-    #   `provisioned`. If you set `ThroughputMode` to `provisioned`, you must
-    #   also set a value for `ProvisionedThroughPutInMibps`. You can decrease
-    #   your file system's throughput in Provisioned Throughput mode or
-    #   change between the throughput modes as long as it’s been more than 24
-    #   hours since the last decrease or throughput mode change. For more, see
-    #   [Specifying Throughput with Provisioned Mode][1] in the *Amazon EFS
-    #   User Guide.*
+    #   Specifies the throughput mode for the file system, either `bursting`
+    #   or `provisioned`. If you set `ThroughputMode` to `provisioned`, you
+    #   must also set a value for `ProvisionedThroughputInMibps`. After you
+    #   create the file system, you can decrease your file system's
+    #   throughput in Provisioned Throughput mode or change between the
+    #   throughput modes, as long as it’s been more than 24 hours since the
+    #   last decrease or throughput mode change. For more information, see
+    #   [Specifying throughput with provisioned mode][1] in the *Amazon EFS
+    #   User Guide*.
+    #
+    #   Default is `bursting`.
     #
     #
     #
@@ -569,13 +589,49 @@ module Aws::EFS
     #   The throughput, measured in MiB/s, that you want to provision for a
     #   file system that you're creating. Valid values are 1-1024. Required
     #   if `ThroughputMode` is set to `provisioned`. The upper limit for
-    #   throughput is 1024 MiB/s. You can get this limit increased by
-    #   contacting AWS Support. For more information, see [Amazon EFS Limits
-    #   That You Can Increase][1] in the *Amazon EFS User Guide.*
+    #   throughput is 1024 MiB/s. To increase this limit, contact AWS Support.
+    #   For more information, see [Amazon EFS quotas that you can increase][1]
+    #   in the *Amazon EFS User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits
+    #
+    # @option params [String] :availability_zone_name
+    #   Used to create a file system that uses One Zone storage classes. It
+    #   specifies the AWS Availability Zone in which to create the file
+    #   system. Use the format `us-east-1a` to specify the Availability Zone.
+    #   For more information about One Zone storage classes, see [Using EFS
+    #   storage classes][1] in the *Amazon EFS User Guide*.
+    #
+    #   <note markdown="1"> One Zone storage classes are not available in all Availability Zones
+    #   in AWS Regions where Amazon EFS is available.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html
+    #
+    # @option params [Boolean] :backup
+    #   Specifies whether automatic backups are enabled on the file system
+    #   that you are creating. Set the value to `true` to enable automatic
+    #   backups. If you are creating a file system that uses One Zone storage
+    #   classes, automatic backups are enabled by default. For more
+    #   information, see [Automatic backups][1] in the *Amazon EFS User
+    #   Guide*.
+    #
+    #   Default is `false`. However, if you specify an `AvailabilityZoneName`,
+    #   the default is `true`.
+    #
+    #   <note markdown="1"> AWS Backup is not available in all AWS Regions where Amazon EFS is
+    #   available.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups
     #
     # @option params [Array<Types::Tag>] :tags
     #   A value that specifies to create one or more tags associated with the
@@ -599,15 +655,20 @@ module Aws::EFS
     #   * {Types::FileSystemDescription#kms_key_id #kms_key_id} => String
     #   * {Types::FileSystemDescription#throughput_mode #throughput_mode} => String
     #   * {Types::FileSystemDescription#provisioned_throughput_in_mibps #provisioned_throughput_in_mibps} => Float
+    #   * {Types::FileSystemDescription#availability_zone_name #availability_zone_name} => String
+    #   * {Types::FileSystemDescription#availability_zone_id #availability_zone_id} => String
     #   * {Types::FileSystemDescription#tags #tags} => Array&lt;Types::Tag&gt;
     #
     #
     # @example Example: To create a new file system
     #
-    #   # This operation creates a new file system with the default generalpurpose performance mode.
+    #   # This operation creates a new, encrypted file system with automatic backups enabled, and the default generalpurpose
+    #   # performance mode.
     #
     #   resp = client.create_file_system({
+    #     backup: true, 
     #     creation_token: "tokenstring", 
+    #     encrypted: true, 
     #     performance_mode: "generalPurpose", 
     #     tags: [
     #       {
@@ -621,6 +682,7 @@ module Aws::EFS
     #   {
     #     creation_time: Time.parse("1481841524.0"), 
     #     creation_token: "tokenstring", 
+    #     encrypted: true, 
     #     file_system_id: "fs-01234567", 
     #     life_cycle_state: "creating", 
     #     number_of_mount_targets: 0, 
@@ -646,6 +708,8 @@ module Aws::EFS
     #     kms_key_id: "KmsKeyId",
     #     throughput_mode: "bursting", # accepts bursting, provisioned
     #     provisioned_throughput_in_mibps: 1.0,
+    #     availability_zone_name: "AvailabilityZoneName",
+    #     backup: false,
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -661,7 +725,7 @@ module Aws::EFS
     #   resp.file_system_id #=> String
     #   resp.file_system_arn #=> String
     #   resp.creation_time #=> Time
-    #   resp.life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
+    #   resp.life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted", "error"
     #   resp.name #=> String
     #   resp.number_of_mount_targets #=> Integer
     #   resp.size_in_bytes.value #=> Integer
@@ -673,6 +737,8 @@ module Aws::EFS
     #   resp.kms_key_id #=> String
     #   resp.throughput_mode #=> String, one of "bursting", "provisioned"
     #   resp.provisioned_throughput_in_mibps #=> Float
+    #   resp.availability_zone_name #=> String
+    #   resp.availability_zone_id #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -694,22 +760,35 @@ module Aws::EFS
     # single mount target for a given file system. If you have multiple
     # subnets in an Availability Zone, you create a mount target in one of
     # the subnets. EC2 instances do not need to be in the same subnet as the
-    # mount target in order to access their file system. For more
-    # information, see [Amazon EFS: How it Works][1].
+    # mount target in order to access their file system.
     #
-    # In the request, you also specify a file system ID for which you are
-    # creating the mount target and the file system's lifecycle state must
-    # be `available`. For more information, see DescribeFileSystems.
+    # You can create only one mount target for an EFS file system using One
+    # Zone storage classes. You must create that mount target in the same
+    # Availability Zone in which the file system is located. Use the
+    # `AvailabilityZoneName` and `AvailabiltyZoneId` properties in the
+    # DescribeFileSystems response object to get this information. Use the
+    # `subnetId` associated with the file system's Availability Zone when
+    # creating the mount target.
     #
-    # In the request, you also provide a subnet ID, which determines the
-    # following:
+    # For more information, see [Amazon EFS: How it Works][1].
     #
-    # * VPC in which Amazon EFS creates the mount target
+    # To create a mount target for a file system, the file system's
+    # lifecycle state must be `available`. For more information, see
+    # DescribeFileSystems.
     #
-    # * Availability Zone in which Amazon EFS creates the mount target
+    # In the request, provide the following:
     #
-    # * IP address range from which Amazon EFS selects the IP address of the
-    #   mount target (if you don't specify an IP address in the request)
+    # * The file system ID for which you are creating the mount target.
+    #
+    # * A subnet ID, which determines the following:
+    #
+    #   * The VPC in which Amazon EFS creates the mount target
+    #
+    #   * The Availability Zone in which Amazon EFS creates the mount target
+    #
+    #   * The IP address range from which Amazon EFS selects the IP address
+    #     of the mount target (if you don't specify an IP address in the
+    #     request)
     #
     # After creating the mount target, Amazon EFS returns a response that
     # includes, a `MountTargetId` and an `IpAddress`. You use this IP
@@ -805,7 +884,9 @@ module Aws::EFS
     #   The ID of the file system for which to create the mount target.
     #
     # @option params [required, String] :subnet_id
-    #   The ID of the subnet to add the mount target in.
+    #   The ID of the subnet to add the mount target in. For file systems that
+    #   use One Zone storage classes, use the subnet that is associated with
+    #   the file system's Availability Zone.
     #
     # @option params [String] :ip_address
     #   Valid IPv4 address within the address range of the specified subnet.
@@ -863,7 +944,7 @@ module Aws::EFS
     #   resp.mount_target_id #=> String
     #   resp.file_system_id #=> String
     #   resp.subnet_id #=> String
-    #   resp.life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
+    #   resp.life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted", "error"
     #   resp.ip_address #=> String
     #   resp.network_interface_id #=> String
     #   resp.availability_zone_id #=> String
@@ -1219,7 +1300,7 @@ module Aws::EFS
     #   resp.access_points[0].root_directory.creation_info.owner_gid #=> Integer
     #   resp.access_points[0].root_directory.creation_info.permissions #=> String
     #   resp.access_points[0].owner_id #=> String
-    #   resp.access_points[0].life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
+    #   resp.access_points[0].life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted", "error"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeAccessPoints AWS API Documentation
@@ -1399,7 +1480,7 @@ module Aws::EFS
     #   resp.file_systems[0].file_system_id #=> String
     #   resp.file_systems[0].file_system_arn #=> String
     #   resp.file_systems[0].creation_time #=> Time
-    #   resp.file_systems[0].life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
+    #   resp.file_systems[0].life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted", "error"
     #   resp.file_systems[0].name #=> String
     #   resp.file_systems[0].number_of_mount_targets #=> Integer
     #   resp.file_systems[0].size_in_bytes.value #=> Integer
@@ -1411,6 +1492,8 @@ module Aws::EFS
     #   resp.file_systems[0].kms_key_id #=> String
     #   resp.file_systems[0].throughput_mode #=> String, one of "bursting", "provisioned"
     #   resp.file_systems[0].provisioned_throughput_in_mibps #=> Float
+    #   resp.file_systems[0].availability_zone_name #=> String
+    #   resp.file_systems[0].availability_zone_id #=> String
     #   resp.file_systems[0].tags #=> Array
     #   resp.file_systems[0].tags[0].key #=> String
     #   resp.file_systems[0].tags[0].value #=> String
@@ -1624,7 +1707,7 @@ module Aws::EFS
     #   resp.mount_targets[0].mount_target_id #=> String
     #   resp.mount_targets[0].file_system_id #=> String
     #   resp.mount_targets[0].subnet_id #=> String
-    #   resp.mount_targets[0].life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
+    #   resp.mount_targets[0].life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted", "error"
     #   resp.mount_targets[0].ip_address #=> String
     #   resp.mount_targets[0].network_interface_id #=> String
     #   resp.mount_targets[0].availability_zone_id #=> String
@@ -1858,9 +1941,12 @@ module Aws::EFS
     # A file system policy is an IAM resource-based policy and can contain
     # multiple policy statements. A file system always has exactly one file
     # system policy, which can be the default policy or an explicit policy
-    # set or updated using this API operation. When an explicit policy is
-    # set, it overrides the default policy. For more information about the
-    # default file system policy, see [Default EFS File System Policy][1].
+    # set or updated using this API operation. EFS file system policies have
+    # a 20,000 character limit. When an explicit policy is set, it overrides
+    # the default policy. For more information about the default file system
+    # policy, see [Default EFS File System Policy][1].
+    #
+    # EFS file system policies have a 20,000 character limit.
     #
     # This operation requires permissions for the
     # `elasticfilesystem:PutFileSystemPolicy` action.
@@ -1875,8 +1961,9 @@ module Aws::EFS
     #
     # @option params [required, String] :policy
     #   The `FileSystemPolicy` that you're creating. Accepts a JSON formatted
-    #   policy definition. To find out more about the elements that make up a
-    #   file system policy, see [EFS Resource-based Policies][1].
+    #   policy definition. EFS file system policies have a 20,000 character
+    #   limit. To find out more about the elements that make up a file system
+    #   policy, see [EFS Resource-based Policies][1].
     #
     #
     #
@@ -2059,7 +2146,7 @@ module Aws::EFS
     #   Specifies the EFS resource that you want to remove tags from.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The keys of the key:value tag pairs that you want to remove from the
+    #   The keys of the key-value tag pairs that you want to remove from the
     #   specified EFS resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -2087,18 +2174,18 @@ module Aws::EFS
     #   The ID of the file system that you want to update.
     #
     # @option params [String] :throughput_mode
-    #   (Optional) The throughput mode that you want your file system to use.
-    #   If you're not updating your throughput mode, you don't need to
-    #   provide this value in your request. If you are changing the
-    #   `ThroughputMode` to `provisioned`, you must also set a value for
+    #   (Optional) Updates the file system's throughput mode. If you're not
+    #   updating your throughput mode, you don't need to provide this value
+    #   in your request. If you are changing the `ThroughputMode` to
+    #   `provisioned`, you must also set a value for
     #   `ProvisionedThroughputInMibps`.
     #
     # @option params [Float] :provisioned_throughput_in_mibps
-    #   (Optional) The amount of throughput, in MiB/s, that you want to
-    #   provision for your file system. Valid values are 1-1024. Required if
-    #   `ThroughputMode` is changed to `provisioned` on update. If you're not
-    #   updating the amount of provisioned throughput for your file system,
-    #   you don't need to provide this value in your request.
+    #   (Optional) Sets the amount of provisioned throughput, in MiB/s, for
+    #   the file system. Valid values are 1-1024. If you are changing the
+    #   throughput mode to provisioned, you must also provide the amount of
+    #   provisioned throughput. Required if `ThroughputMode` is changed to
+    #   `provisioned` on update.
     #
     # @return [Types::FileSystemDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2116,6 +2203,8 @@ module Aws::EFS
     #   * {Types::FileSystemDescription#kms_key_id #kms_key_id} => String
     #   * {Types::FileSystemDescription#throughput_mode #throughput_mode} => String
     #   * {Types::FileSystemDescription#provisioned_throughput_in_mibps #provisioned_throughput_in_mibps} => Float
+    #   * {Types::FileSystemDescription#availability_zone_name #availability_zone_name} => String
+    #   * {Types::FileSystemDescription#availability_zone_id #availability_zone_id} => String
     #   * {Types::FileSystemDescription#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
@@ -2133,7 +2222,7 @@ module Aws::EFS
     #   resp.file_system_id #=> String
     #   resp.file_system_arn #=> String
     #   resp.creation_time #=> Time
-    #   resp.life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
+    #   resp.life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted", "error"
     #   resp.name #=> String
     #   resp.number_of_mount_targets #=> Integer
     #   resp.size_in_bytes.value #=> Integer
@@ -2145,6 +2234,8 @@ module Aws::EFS
     #   resp.kms_key_id #=> String
     #   resp.throughput_mode #=> String, one of "bursting", "provisioned"
     #   resp.provisioned_throughput_in_mibps #=> Float
+    #   resp.availability_zone_name #=> String
+    #   resp.availability_zone_id #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -2171,7 +2262,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -30,6 +30,7 @@ module Aws::EFS
   # * {AccessPointAlreadyExists}
   # * {AccessPointLimitExceeded}
   # * {AccessPointNotFound}
+  # * {AvailabilityZonesMismatch}
   # * {BadRequest}
   # * {DependencyTimeout}
   # * {FileSystemAlreadyExists}
@@ -111,6 +112,26 @@ module Aws::EFS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::EFS::Types::AccessPointNotFound] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def error_code
+        @data[:error_code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class AvailabilityZonesMismatch < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EFS::Types::AvailabilityZonesMismatch] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

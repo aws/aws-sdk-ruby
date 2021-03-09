@@ -58,6 +58,7 @@ module Aws::CodeGuruProfiler
     FrameMetric = Shapes::StructureShape.new(name: 'FrameMetric')
     FrameMetricData = Shapes::ListShape.new(name: 'FrameMetricData')
     FrameMetricDatum = Shapes::StructureShape.new(name: 'FrameMetricDatum')
+    FrameMetricValue = Shapes::FloatShape.new(name: 'FrameMetricValue')
     FrameMetricValues = Shapes::ListShape.new(name: 'FrameMetricValues')
     FrameMetrics = Shapes::ListShape.new(name: 'FrameMetrics')
     GetFindingsReportAccountSummaryRequest = Shapes::StructureShape.new(name: 'GetFindingsReportAccountSummaryRequest')
@@ -261,7 +262,7 @@ module Aws::CodeGuruProfiler
     FrameMetricDatum.add_member(:values, Shapes::ShapeRef.new(shape: FrameMetricValues, required: true, location_name: "values"))
     FrameMetricDatum.struct_class = Types::FrameMetricDatum
 
-    FrameMetricValues.member = Shapes::ShapeRef.new(shape: Double)
+    FrameMetricValues.member = Shapes::ShapeRef.new(shape: FrameMetricValue)
 
     FrameMetrics.member = Shapes::ShapeRef.new(shape: FrameMetric)
 
@@ -599,6 +600,7 @@ module Aws::CodeGuruProfiler
         o.input = Shapes::ShapeRef.new(shape: DeleteProfilingGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteProfilingGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
