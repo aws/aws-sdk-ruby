@@ -10,15 +10,15 @@ A large percentage of the SDK is generated from JSON definitions of AWS services
 contains a header comment block indicating the file has been generated. Bugs in these files result from
 one of:
 
-* Errors in the code generators. These are defined in [build_tools](https://github.com/aws/aws-sdk-ruby/blob/master/build_tools).
+* Errors in the code generators. These are defined in [build_tools](https://github.com/aws/aws-sdk-ruby/blob/version-3/build_tools).
   We gladly accept contributions to the generators.
 
-* Errors in the service **api** JSON. These are defined in [apis](https://github.com/aws/aws-sdk-ruby/blob/master/apis).
+* Errors in the service **api** JSON. These are defined in [apis](https://github.com/aws/aws-sdk-ruby/blob/version-3/apis).
   We consume service definitions from another source. Corrections must be made upstream. Please feel free
   to open an issue if you feel there is an error in one of the API JSON definitions.
 
 * Errors in the service **paginators**, **waiters**, or **resource** JSON definitions. These are also found in
-  [apis](https://github.com/aws/aws-sdk-ruby/blob/master/apis). We can take contributions directly to these files
+  [apis](https://github.com/aws/aws-sdk-ruby/blob/version-3/apis). We can take contributions directly to these files
   as pull requests. If you have a question, please feel free to open an issue.
 
 ## What you should keep in mind
@@ -61,4 +61,4 @@ contain a `"region"` and credentials. Running rake test when this file is presen
 [pull-requests]: https://github.com/aws/aws-sdk-ruby/pulls
 [license]: http://aws.amazon.com/apache2.0/
 [cla]: http://en.wikipedia.org/wiki/Contributor_License_Agreement
-[docs-readme]: https://github.com/aws/aws-sdk-php/blob/master/docs/README.md
+[docs-readme]: https://github.com/aws/aws-sdk-php/blob/version-3/docs/README.md
