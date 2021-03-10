@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -361,6 +361,122 @@ module Aws::AccessAnalyzer
       req.send_request(options)
     end
 
+    # Creates an access preview that allows you to preview Access Analyzer
+    # findings for your resource before deploying resource permissions.
+    #
+    # @option params [required, String] :analyzer_arn
+    #   The [ARN of the account analyzer][1] used to generate the access
+    #   preview. You can only create an access preview for analyzers with an
+    #   `Account` type and `Active` status.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
+    #
+    # @option params [String] :client_token
+    #   A client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Hash<String,Types::Configuration>] :configurations
+    #   Access control configuration for your resource that is used to
+    #   generate the access preview. The access preview includes findings for
+    #   external access allowed to the resource with the proposed access
+    #   control configuration. The configuration must contain exactly one
+    #   element.
+    #
+    # @return [Types::CreateAccessPreviewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAccessPreviewResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_access_preview({
+    #     analyzer_arn: "AnalyzerArn", # required
+    #     client_token: "String",
+    #     configurations: { # required
+    #       "ConfigurationsMapKey" => {
+    #         iam_role: {
+    #           trust_policy: "IamTrustPolicy",
+    #         },
+    #         kms_key: {
+    #           grants: [
+    #             {
+    #               constraints: {
+    #                 encryption_context_equals: {
+    #                   "KmsConstraintsKey" => "KmsConstraintsValue",
+    #                 },
+    #                 encryption_context_subset: {
+    #                   "KmsConstraintsKey" => "KmsConstraintsValue",
+    #                 },
+    #               },
+    #               grantee_principal: "GranteePrincipal", # required
+    #               issuing_account: "IssuingAccount", # required
+    #               operations: ["CreateGrant"], # required, accepts CreateGrant, Decrypt, DescribeKey, Encrypt, GenerateDataKey, GenerateDataKeyPair, GenerateDataKeyPairWithoutPlaintext, GenerateDataKeyWithoutPlaintext, GetPublicKey, ReEncryptFrom, ReEncryptTo, RetireGrant, Sign, Verify
+    #               retiring_principal: "RetiringPrincipal",
+    #             },
+    #           ],
+    #           key_policies: {
+    #             "PolicyName" => "KmsKeyPolicy",
+    #           },
+    #         },
+    #         s3_bucket: {
+    #           access_points: {
+    #             "AccessPointArn" => {
+    #               access_point_policy: "AccessPointPolicy",
+    #               network_origin: {
+    #                 internet_configuration: {
+    #                 },
+    #                 vpc_configuration: {
+    #                   vpc_id: "VpcId", # required
+    #                 },
+    #               },
+    #               public_access_block: {
+    #                 ignore_public_acls: false, # required
+    #                 restrict_public_buckets: false, # required
+    #               },
+    #             },
+    #           },
+    #           bucket_acl_grants: [
+    #             {
+    #               grantee: { # required
+    #                 id: "AclCanonicalId",
+    #                 uri: "AclUri",
+    #               },
+    #               permission: "READ", # required, accepts READ, WRITE, READ_ACP, WRITE_ACP, FULL_CONTROL
+    #             },
+    #           ],
+    #           bucket_policy: "S3BucketPolicy",
+    #           bucket_public_access_block: {
+    #             ignore_public_acls: false, # required
+    #             restrict_public_buckets: false, # required
+    #           },
+    #         },
+    #         secrets_manager_secret: {
+    #           kms_key_id: "SecretsManagerSecretKmsId",
+    #           secret_policy: "SecretsManagerSecretPolicy",
+    #         },
+    #         sqs_queue: {
+    #           queue_policy: "SqsQueuePolicy",
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CreateAccessPreview AWS API Documentation
+    #
+    # @overload create_access_preview(params = {})
+    # @param [Hash] params ({})
+    def create_access_preview(params = {}, options = {})
+      req = build_request(:create_access_preview, params)
+      req.send_request(options)
+    end
+
     # Creates an analyzer for your account.
     #
     # @option params [required, String] :analyzer_name
@@ -539,10 +655,84 @@ module Aws::AccessAnalyzer
       req.send_request(options)
     end
 
+    # Retrieves information about an access preview for the specified
+    # analyzer.
+    #
+    # @option params [required, String] :access_preview_id
+    #   The unique ID for the access preview.
+    #
+    # @option params [required, String] :analyzer_arn
+    #   The [ARN of the analyzer][1] used to generate the access preview.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
+    #
+    # @return [Types::GetAccessPreviewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccessPreviewResponse#access_preview #access_preview} => Types::AccessPreview
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_access_preview({
+    #     access_preview_id: "AccessPreviewId", # required
+    #     analyzer_arn: "AnalyzerArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_preview.analyzer_arn #=> String
+    #   resp.access_preview.configurations #=> Hash
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].iam_role.trust_policy #=> String
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.grants #=> Array
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.grants[0].constraints.encryption_context_equals #=> Hash
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.grants[0].constraints.encryption_context_equals["KmsConstraintsKey"] #=> String
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.grants[0].constraints.encryption_context_subset #=> Hash
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.grants[0].constraints.encryption_context_subset["KmsConstraintsKey"] #=> String
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.grants[0].grantee_principal #=> String
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.grants[0].issuing_account #=> String
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.grants[0].operations #=> Array
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.grants[0].operations[0] #=> String, one of "CreateGrant", "Decrypt", "DescribeKey", "Encrypt", "GenerateDataKey", "GenerateDataKeyPair", "GenerateDataKeyPairWithoutPlaintext", "GenerateDataKeyWithoutPlaintext", "GetPublicKey", "ReEncryptFrom", "ReEncryptTo", "RetireGrant", "Sign", "Verify"
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.grants[0].retiring_principal #=> String
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.key_policies #=> Hash
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].kms_key.key_policies["PolicyName"] #=> String
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].s3_bucket.access_points #=> Hash
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].s3_bucket.access_points["AccessPointArn"].access_point_policy #=> String
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].s3_bucket.access_points["AccessPointArn"].network_origin.vpc_configuration.vpc_id #=> String
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].s3_bucket.access_points["AccessPointArn"].public_access_block.ignore_public_acls #=> Boolean
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].s3_bucket.access_points["AccessPointArn"].public_access_block.restrict_public_buckets #=> Boolean
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].s3_bucket.bucket_acl_grants #=> Array
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].s3_bucket.bucket_acl_grants[0].grantee.id #=> String
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].s3_bucket.bucket_acl_grants[0].grantee.uri #=> String
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].s3_bucket.bucket_acl_grants[0].permission #=> String, one of "READ", "WRITE", "READ_ACP", "WRITE_ACP", "FULL_CONTROL"
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].s3_bucket.bucket_policy #=> String
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].s3_bucket.bucket_public_access_block.ignore_public_acls #=> Boolean
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].s3_bucket.bucket_public_access_block.restrict_public_buckets #=> Boolean
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].secrets_manager_secret.kms_key_id #=> String
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].secrets_manager_secret.secret_policy #=> String
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].sqs_queue.queue_policy #=> String
+    #   resp.access_preview.created_at #=> Time
+    #   resp.access_preview.id #=> String
+    #   resp.access_preview.status #=> String, one of "COMPLETED", "CREATING", "FAILED"
+    #   resp.access_preview.status_reason.code #=> String, one of "INTERNAL_ERROR", "INVALID_CONFIGURATION"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GetAccessPreview AWS API Documentation
+    #
+    # @overload get_access_preview(params = {})
+    # @param [Hash] params ({})
+    def get_access_preview(params = {}, options = {})
+      req = build_request(:get_access_preview, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about a resource that was analyzed.
     #
     # @option params [required, String] :analyzer_arn
-    #   The ARN of the analyzer to retrieve information from.
+    #   The [ARN of the analyzer][1] to retrieve information from.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource to retrieve information about.
@@ -672,7 +862,11 @@ module Aws::AccessAnalyzer
     # Retrieves information about the specified finding.
     #
     # @option params [required, String] :analyzer_arn
-    #   The ARN of the analyzer that generated the finding.
+    #   The [ARN of the analyzer][1] that generated the finding.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
     #
     # @option params [required, String] :id
     #   The ID of the finding to retrieve.
@@ -719,11 +913,145 @@ module Aws::AccessAnalyzer
       req.send_request(options)
     end
 
+    # Retrieves a list of access preview findings generated by the specified
+    # access preview.
+    #
+    # @option params [required, String] :access_preview_id
+    #   The unique ID for the access preview.
+    #
+    # @option params [required, String] :analyzer_arn
+    #   The [ARN of the analyzer][1] used to generate the access.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
+    #
+    # @option params [Hash<String,Types::Criterion>] :filter
+    #   Criteria to filter the returned findings.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response.
+    #
+    # @option params [String] :next_token
+    #   A token used for pagination of results returned.
+    #
+    # @return [Types::ListAccessPreviewFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccessPreviewFindingsResponse#findings #findings} => Array&lt;Types::AccessPreviewFinding&gt;
+    #   * {Types::ListAccessPreviewFindingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_access_preview_findings({
+    #     access_preview_id: "AccessPreviewId", # required
+    #     analyzer_arn: "AnalyzerArn", # required
+    #     filter: {
+    #       "String" => {
+    #         contains: ["String"],
+    #         eq: ["String"],
+    #         exists: false,
+    #         neq: ["String"],
+    #       },
+    #     },
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.findings #=> Array
+    #   resp.findings[0].action #=> Array
+    #   resp.findings[0].action[0] #=> String
+    #   resp.findings[0].change_type #=> String, one of "CHANGED", "NEW", "UNCHANGED"
+    #   resp.findings[0].condition #=> Hash
+    #   resp.findings[0].condition["String"] #=> String
+    #   resp.findings[0].created_at #=> Time
+    #   resp.findings[0].error #=> String
+    #   resp.findings[0].existing_finding_id #=> String
+    #   resp.findings[0].existing_finding_status #=> String, one of "ACTIVE", "ARCHIVED", "RESOLVED"
+    #   resp.findings[0].id #=> String
+    #   resp.findings[0].is_public #=> Boolean
+    #   resp.findings[0].principal #=> Hash
+    #   resp.findings[0].principal["String"] #=> String
+    #   resp.findings[0].resource #=> String
+    #   resp.findings[0].resource_owner_account #=> String
+    #   resp.findings[0].resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret"
+    #   resp.findings[0].sources #=> Array
+    #   resp.findings[0].sources[0].detail.access_point_arn #=> String
+    #   resp.findings[0].sources[0].type #=> String, one of "POLICY", "BUCKET_ACL", "S3_ACCESS_POINT"
+    #   resp.findings[0].status #=> String, one of "ACTIVE", "ARCHIVED", "RESOLVED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ListAccessPreviewFindings AWS API Documentation
+    #
+    # @overload list_access_preview_findings(params = {})
+    # @param [Hash] params ({})
+    def list_access_preview_findings(params = {}, options = {})
+      req = build_request(:list_access_preview_findings, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of access previews for the specified analyzer.
+    #
+    # @option params [required, String] :analyzer_arn
+    #   The [ARN of the analyzer][1] used to generate the access preview.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response.
+    #
+    # @option params [String] :next_token
+    #   A token used for pagination of results returned.
+    #
+    # @return [Types::ListAccessPreviewsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccessPreviewsResponse#access_previews #access_previews} => Array&lt;Types::AccessPreviewSummary&gt;
+    #   * {Types::ListAccessPreviewsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_access_previews({
+    #     analyzer_arn: "AnalyzerArn", # required
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_previews #=> Array
+    #   resp.access_previews[0].analyzer_arn #=> String
+    #   resp.access_previews[0].created_at #=> Time
+    #   resp.access_previews[0].id #=> String
+    #   resp.access_previews[0].status #=> String, one of "COMPLETED", "CREATING", "FAILED"
+    #   resp.access_previews[0].status_reason.code #=> String, one of "INTERNAL_ERROR", "INVALID_CONFIGURATION"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ListAccessPreviews AWS API Documentation
+    #
+    # @overload list_access_previews(params = {})
+    # @param [Hash] params ({})
+    def list_access_previews(params = {}, options = {})
+      req = build_request(:list_access_previews, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of resources of the specified type that have been
     # analyzed by the specified analyzer..
     #
     # @option params [required, String] :analyzer_arn
-    #   The ARN of the analyzer to retrieve a list of analyzed resources from.
+    #   The [ARN of the analyzer][1] to retrieve a list of analyzed resources
+    #   from.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response.
@@ -870,15 +1198,20 @@ module Aws::AccessAnalyzer
 
     # Retrieves a list of findings generated by the specified analyzer.
     #
-    # To learn about filter keys that you can use to create an archive rule,
-    # see [Access Analyzer filter keys][1] in the **IAM User Guide**.
+    # To learn about filter keys that you can use to retrieve a list of
+    # findings, see [Access Analyzer filter keys][1] in the **IAM User
+    # Guide**.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html
     #
     # @option params [required, String] :analyzer_arn
-    #   The ARN of the analyzer to retrieve findings from.
+    #   The [ARN of the analyzer][1] to retrieve findings from.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
     #
     # @option params [Hash<String,Types::Criterion>] :filter
     #   A filter to match for the findings to return.
@@ -985,8 +1318,12 @@ module Aws::AccessAnalyzer
     # resource.
     #
     # @option params [required, String] :analyzer_arn
-    #   The ARN of the analyzer to use to scan the policies applied to the
-    #   specified resource.
+    #   The [ARN of the analyzer][1] to use to scan the policies applied to
+    #   the specified resource.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource to scan.
@@ -1111,7 +1448,11 @@ module Aws::AccessAnalyzer
     # Updates the status for the specified findings.
     #
     # @option params [required, String] :analyzer_arn
-    #   The ARN of the analyzer that generated the findings to update.
+    #   The [ARN of the analyzer][1] that generated the findings to update.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
     #
     # @option params [String] :client_token
     #   A client token.
@@ -1164,7 +1505,7 @@ module Aws::AccessAnalyzer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-accessanalyzer'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

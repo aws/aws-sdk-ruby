@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2021-03-10)
+------------------
+
+* Feature - Adding ID element to the CORSRule schema
+
 1.90.0 (2021-03-08)
 ------------------
 

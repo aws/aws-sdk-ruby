@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -313,6 +313,7 @@ module Aws::Backup
     #                 destination_backup_vault_arn: "ARN", # required
     #               },
     #             ],
+    #             enable_continuous_backup: false,
     #           },
     #         ],
     #         advanced_backup_settings: [
@@ -504,6 +505,13 @@ module Aws::Backup
     #   copy operation.
     #   @return [Array<Types::CopyAction>]
     #
+    # @!attribute [rw] enable_continuous_backup
+    #   Specifies whether AWS Backup creates continuous backups. True causes
+    #   AWS Backup to create continuous backups capable of point-in-time
+    #   restore (PITR). False (or not specified) causes AWS Backup to create
+    #   snapshot backups.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupRule AWS API Documentation
     #
     class BackupRule < Struct.new(
@@ -515,7 +523,8 @@ module Aws::Backup
       :lifecycle,
       :recovery_point_tags,
       :rule_id,
-      :copy_actions)
+      :copy_actions,
+      :enable_continuous_backup)
       SENSITIVE = [:recovery_point_tags]
       include Aws::Structure
     end
@@ -547,6 +556,7 @@ module Aws::Backup
     #             destination_backup_vault_arn: "ARN", # required
     #           },
     #         ],
+    #         enable_continuous_backup: false,
     #       }
     #
     # @!attribute [rw] rule_name
@@ -601,6 +611,13 @@ module Aws::Backup
     #   copy operation.
     #   @return [Array<Types::CopyAction>]
     #
+    # @!attribute [rw] enable_continuous_backup
+    #   Specifies whether AWS Backup creates continuous backups. True causes
+    #   AWS Backup to create continuous backups capable of point-in-time
+    #   restore (PITR). False (or not specified) causes AWS Backup to create
+    #   snapshot backups.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupRuleInput AWS API Documentation
     #
     class BackupRuleInput < Struct.new(
@@ -611,7 +628,8 @@ module Aws::Backup
       :completion_window_minutes,
       :lifecycle,
       :recovery_point_tags,
-      :copy_actions)
+      :copy_actions,
+      :enable_continuous_backup)
       SENSITIVE = [:recovery_point_tags]
       include Aws::Structure
     end
@@ -1017,6 +1035,7 @@ module Aws::Backup
     #                   destination_backup_vault_arn: "ARN", # required
     #                 },
     #               ],
+    #               enable_continuous_backup: false,
     #             },
     #           ],
     #           advanced_backup_settings: [
@@ -2090,6 +2109,32 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateRecoveryPointInput
+    #   data as a hash:
+    #
+    #       {
+    #         backup_vault_name: "BackupVaultName", # required
+    #         recovery_point_arn: "ARN", # required
+    #       }
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The unique name of an AWS Backup vault. Required.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_point_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS Backup
+    #   recovery point. Required.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DisassociateRecoveryPointInput AWS API Documentation
+    #
+    class DisassociateRecoveryPointInput < Struct.new(
+      :backup_vault_name,
+      :recovery_point_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ExportBackupPlanTemplateInput
     #   data as a hash:
     #
@@ -2582,6 +2627,33 @@ module Aws::Backup
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/InvalidRequestException AWS API Documentation
     #
     class InvalidRequestException < Struct.new(
+      :code,
+      :message,
+      :type,
+      :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # AWS Backup is already performing an action on this recovery point. It
+    # can't perform the action you requested until the first action
+    # finishes. Try again later.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/InvalidResourceStateException AWS API Documentation
+    #
+    class InvalidResourceStateException < Struct.new(
       :code,
       :message,
       :type,
@@ -4400,6 +4472,7 @@ module Aws::Backup
     #                   destination_backup_vault_arn: "ARN", # required
     #                 },
     #               ],
+    #               enable_continuous_backup: false,
     #             },
     #           ],
     #           advanced_backup_settings: [

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -31,6 +31,7 @@ module Aws::Backup
   # * {DependencyFailureException}
   # * {InvalidParameterValueException}
   # * {InvalidRequestException}
+  # * {InvalidResourceStateException}
   # * {LimitExceededException}
   # * {MissingParameterValueException}
   # * {ResourceNotFoundException}
@@ -147,6 +148,36 @@ module Aws::Backup
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Backup::Types::InvalidRequestException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def type
+        @data[:type]
+      end
+
+      # @return [String]
+      def context
+        @data[:context]
+      end
+    end
+
+    class InvalidResourceStateException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Backup::Types::InvalidResourceStateException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

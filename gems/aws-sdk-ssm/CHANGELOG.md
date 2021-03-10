@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2021-03-10)
+------------------
+
+* Feature - Systems Manager support for tagging OpsMetadata.
+
 1.105.0 (2021-03-01)
 ------------------
 

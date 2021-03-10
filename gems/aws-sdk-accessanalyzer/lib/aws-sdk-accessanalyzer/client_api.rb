@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -14,6 +14,22 @@ module Aws::AccessAnalyzer
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccessPointArn = Shapes::StringShape.new(name: 'AccessPointArn')
+    AccessPointPolicy = Shapes::StringShape.new(name: 'AccessPointPolicy')
+    AccessPreview = Shapes::StructureShape.new(name: 'AccessPreview')
+    AccessPreviewFinding = Shapes::StructureShape.new(name: 'AccessPreviewFinding')
+    AccessPreviewFindingId = Shapes::StringShape.new(name: 'AccessPreviewFindingId')
+    AccessPreviewFindingsList = Shapes::ListShape.new(name: 'AccessPreviewFindingsList')
+    AccessPreviewId = Shapes::StringShape.new(name: 'AccessPreviewId')
+    AccessPreviewStatus = Shapes::StringShape.new(name: 'AccessPreviewStatus')
+    AccessPreviewStatusReason = Shapes::StructureShape.new(name: 'AccessPreviewStatusReason')
+    AccessPreviewStatusReasonCode = Shapes::StringShape.new(name: 'AccessPreviewStatusReasonCode')
+    AccessPreviewSummary = Shapes::StructureShape.new(name: 'AccessPreviewSummary')
+    AccessPreviewsList = Shapes::ListShape.new(name: 'AccessPreviewsList')
+    AclCanonicalId = Shapes::StringShape.new(name: 'AclCanonicalId')
+    AclGrantee = Shapes::StructureShape.new(name: 'AclGrantee')
+    AclPermission = Shapes::StringShape.new(name: 'AclPermission')
+    AclUri = Shapes::StringShape.new(name: 'AclUri')
     ActionList = Shapes::ListShape.new(name: 'ActionList')
     AnalyzedResource = Shapes::StructureShape.new(name: 'AnalyzedResource')
     AnalyzedResourceSummary = Shapes::StructureShape.new(name: 'AnalyzedResourceSummary')
@@ -27,7 +43,12 @@ module Aws::AccessAnalyzer
     ArchiveRulesList = Shapes::ListShape.new(name: 'ArchiveRulesList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConditionKeyMap = Shapes::MapShape.new(name: 'ConditionKeyMap')
+    Configuration = Shapes::StructureShape.new(name: 'Configuration')
+    ConfigurationsMap = Shapes::MapShape.new(name: 'ConfigurationsMap')
+    ConfigurationsMapKey = Shapes::StringShape.new(name: 'ConfigurationsMapKey')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreateAccessPreviewRequest = Shapes::StructureShape.new(name: 'CreateAccessPreviewRequest')
+    CreateAccessPreviewResponse = Shapes::StructureShape.new(name: 'CreateAccessPreviewResponse')
     CreateAnalyzerRequest = Shapes::StructureShape.new(name: 'CreateAnalyzerRequest')
     CreateAnalyzerResponse = Shapes::StructureShape.new(name: 'CreateAnalyzerResponse')
     CreateArchiveRuleRequest = Shapes::StructureShape.new(name: 'CreateArchiveRuleRequest')
@@ -36,6 +57,7 @@ module Aws::AccessAnalyzer
     DeleteArchiveRuleRequest = Shapes::StructureShape.new(name: 'DeleteArchiveRuleRequest')
     FilterCriteriaMap = Shapes::MapShape.new(name: 'FilterCriteriaMap')
     Finding = Shapes::StructureShape.new(name: 'Finding')
+    FindingChangeType = Shapes::StringShape.new(name: 'FindingChangeType')
     FindingId = Shapes::StringShape.new(name: 'FindingId')
     FindingIdList = Shapes::ListShape.new(name: 'FindingIdList')
     FindingSource = Shapes::StructureShape.new(name: 'FindingSource')
@@ -46,6 +68,8 @@ module Aws::AccessAnalyzer
     FindingStatusUpdate = Shapes::StringShape.new(name: 'FindingStatusUpdate')
     FindingSummary = Shapes::StructureShape.new(name: 'FindingSummary')
     FindingsList = Shapes::ListShape.new(name: 'FindingsList')
+    GetAccessPreviewRequest = Shapes::StructureShape.new(name: 'GetAccessPreviewRequest')
+    GetAccessPreviewResponse = Shapes::StructureShape.new(name: 'GetAccessPreviewResponse')
     GetAnalyzedResourceRequest = Shapes::StructureShape.new(name: 'GetAnalyzedResourceRequest')
     GetAnalyzedResourceResponse = Shapes::StructureShape.new(name: 'GetAnalyzedResourceResponse')
     GetAnalyzerRequest = Shapes::StructureShape.new(name: 'GetAnalyzerRequest')
@@ -54,10 +78,30 @@ module Aws::AccessAnalyzer
     GetArchiveRuleResponse = Shapes::StructureShape.new(name: 'GetArchiveRuleResponse')
     GetFindingRequest = Shapes::StructureShape.new(name: 'GetFindingRequest')
     GetFindingResponse = Shapes::StructureShape.new(name: 'GetFindingResponse')
+    GranteePrincipal = Shapes::StringShape.new(name: 'GranteePrincipal')
+    IamRoleConfiguration = Shapes::StructureShape.new(name: 'IamRoleConfiguration')
+    IamTrustPolicy = Shapes::StringShape.new(name: 'IamTrustPolicy')
     InlineArchiveRule = Shapes::StructureShape.new(name: 'InlineArchiveRule')
     InlineArchiveRulesList = Shapes::ListShape.new(name: 'InlineArchiveRulesList')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    InternetConfiguration = Shapes::StructureShape.new(name: 'InternetConfiguration')
+    IssuingAccount = Shapes::StringShape.new(name: 'IssuingAccount')
+    KmsConstraintsKey = Shapes::StringShape.new(name: 'KmsConstraintsKey')
+    KmsConstraintsMap = Shapes::MapShape.new(name: 'KmsConstraintsMap')
+    KmsConstraintsValue = Shapes::StringShape.new(name: 'KmsConstraintsValue')
+    KmsGrantConfiguration = Shapes::StructureShape.new(name: 'KmsGrantConfiguration')
+    KmsGrantConfigurationsList = Shapes::ListShape.new(name: 'KmsGrantConfigurationsList')
+    KmsGrantConstraints = Shapes::StructureShape.new(name: 'KmsGrantConstraints')
+    KmsGrantOperation = Shapes::StringShape.new(name: 'KmsGrantOperation')
+    KmsGrantOperationsList = Shapes::ListShape.new(name: 'KmsGrantOperationsList')
+    KmsKeyConfiguration = Shapes::StructureShape.new(name: 'KmsKeyConfiguration')
+    KmsKeyPoliciesMap = Shapes::MapShape.new(name: 'KmsKeyPoliciesMap')
+    KmsKeyPolicy = Shapes::StringShape.new(name: 'KmsKeyPolicy')
+    ListAccessPreviewFindingsRequest = Shapes::StructureShape.new(name: 'ListAccessPreviewFindingsRequest')
+    ListAccessPreviewFindingsResponse = Shapes::StructureShape.new(name: 'ListAccessPreviewFindingsResponse')
+    ListAccessPreviewsRequest = Shapes::StructureShape.new(name: 'ListAccessPreviewsRequest')
+    ListAccessPreviewsResponse = Shapes::StructureShape.new(name: 'ListAccessPreviewsResponse')
     ListAnalyzedResourcesRequest = Shapes::StructureShape.new(name: 'ListAnalyzedResourcesRequest')
     ListAnalyzedResourcesResponse = Shapes::StructureShape.new(name: 'ListAnalyzedResourcesResponse')
     ListAnalyzersRequest = Shapes::StructureShape.new(name: 'ListAnalyzersRequest')
@@ -69,15 +113,30 @@ module Aws::AccessAnalyzer
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Name = Shapes::StringShape.new(name: 'Name')
+    NetworkOriginConfiguration = Shapes::StructureShape.new(name: 'NetworkOriginConfiguration')
     OrderBy = Shapes::StringShape.new(name: 'OrderBy')
+    PolicyName = Shapes::StringShape.new(name: 'PolicyName')
     PrincipalMap = Shapes::MapShape.new(name: 'PrincipalMap')
     ReasonCode = Shapes::StringShape.new(name: 'ReasonCode')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    RetiringPrincipal = Shapes::StringShape.new(name: 'RetiringPrincipal')
+    S3AccessPointConfiguration = Shapes::StructureShape.new(name: 'S3AccessPointConfiguration')
+    S3AccessPointConfigurationsMap = Shapes::MapShape.new(name: 'S3AccessPointConfigurationsMap')
+    S3BucketAclGrantConfiguration = Shapes::StructureShape.new(name: 'S3BucketAclGrantConfiguration')
+    S3BucketAclGrantConfigurationsList = Shapes::ListShape.new(name: 'S3BucketAclGrantConfigurationsList')
+    S3BucketConfiguration = Shapes::StructureShape.new(name: 'S3BucketConfiguration')
+    S3BucketPolicy = Shapes::StringShape.new(name: 'S3BucketPolicy')
+    S3PublicAccessBlockConfiguration = Shapes::StructureShape.new(name: 'S3PublicAccessBlockConfiguration')
+    SecretsManagerSecretConfiguration = Shapes::StructureShape.new(name: 'SecretsManagerSecretConfiguration')
+    SecretsManagerSecretKmsId = Shapes::StringShape.new(name: 'SecretsManagerSecretKmsId')
+    SecretsManagerSecretPolicy = Shapes::StringShape.new(name: 'SecretsManagerSecretPolicy')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SharedViaList = Shapes::ListShape.new(name: 'SharedViaList')
     SortCriteria = Shapes::StructureShape.new(name: 'SortCriteria')
+    SqsQueueConfiguration = Shapes::StructureShape.new(name: 'SqsQueueConfiguration')
+    SqsQueuePolicy = Shapes::StringShape.new(name: 'SqsQueuePolicy')
     StartResourceScanRequest = Shapes::StructureShape.new(name: 'StartResourceScanRequest')
     StatusReason = Shapes::StructureShape.new(name: 'StatusReason')
     String = Shapes::StringShape.new(name: 'String')
@@ -98,9 +157,54 @@ module Aws::AccessAnalyzer
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     ValueList = Shapes::ListShape.new(name: 'ValueList')
+    VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
+    VpcId = Shapes::StringShape.new(name: 'VpcId')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccessPreview.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location_name: "analyzerArn"))
+    AccessPreview.add_member(:configurations, Shapes::ShapeRef.new(shape: ConfigurationsMap, required: true, location_name: "configurations"))
+    AccessPreview.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    AccessPreview.add_member(:id, Shapes::ShapeRef.new(shape: AccessPreviewId, required: true, location_name: "id"))
+    AccessPreview.add_member(:status, Shapes::ShapeRef.new(shape: AccessPreviewStatus, required: true, location_name: "status"))
+    AccessPreview.add_member(:status_reason, Shapes::ShapeRef.new(shape: AccessPreviewStatusReason, location_name: "statusReason"))
+    AccessPreview.struct_class = Types::AccessPreview
+
+    AccessPreviewFinding.add_member(:action, Shapes::ShapeRef.new(shape: ActionList, location_name: "action"))
+    AccessPreviewFinding.add_member(:change_type, Shapes::ShapeRef.new(shape: FindingChangeType, required: true, location_name: "changeType"))
+    AccessPreviewFinding.add_member(:condition, Shapes::ShapeRef.new(shape: ConditionKeyMap, location_name: "condition"))
+    AccessPreviewFinding.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    AccessPreviewFinding.add_member(:error, Shapes::ShapeRef.new(shape: String, location_name: "error"))
+    AccessPreviewFinding.add_member(:existing_finding_id, Shapes::ShapeRef.new(shape: FindingId, location_name: "existingFindingId"))
+    AccessPreviewFinding.add_member(:existing_finding_status, Shapes::ShapeRef.new(shape: FindingStatus, location_name: "existingFindingStatus"))
+    AccessPreviewFinding.add_member(:id, Shapes::ShapeRef.new(shape: AccessPreviewFindingId, required: true, location_name: "id"))
+    AccessPreviewFinding.add_member(:is_public, Shapes::ShapeRef.new(shape: Boolean, location_name: "isPublic"))
+    AccessPreviewFinding.add_member(:principal, Shapes::ShapeRef.new(shape: PrincipalMap, location_name: "principal"))
+    AccessPreviewFinding.add_member(:resource, Shapes::ShapeRef.new(shape: String, location_name: "resource"))
+    AccessPreviewFinding.add_member(:resource_owner_account, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceOwnerAccount"))
+    AccessPreviewFinding.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
+    AccessPreviewFinding.add_member(:sources, Shapes::ShapeRef.new(shape: FindingSourceList, location_name: "sources"))
+    AccessPreviewFinding.add_member(:status, Shapes::ShapeRef.new(shape: FindingStatus, required: true, location_name: "status"))
+    AccessPreviewFinding.struct_class = Types::AccessPreviewFinding
+
+    AccessPreviewFindingsList.member = Shapes::ShapeRef.new(shape: AccessPreviewFinding)
+
+    AccessPreviewStatusReason.add_member(:code, Shapes::ShapeRef.new(shape: AccessPreviewStatusReasonCode, required: true, location_name: "code"))
+    AccessPreviewStatusReason.struct_class = Types::AccessPreviewStatusReason
+
+    AccessPreviewSummary.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location_name: "analyzerArn"))
+    AccessPreviewSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    AccessPreviewSummary.add_member(:id, Shapes::ShapeRef.new(shape: AccessPreviewId, required: true, location_name: "id"))
+    AccessPreviewSummary.add_member(:status, Shapes::ShapeRef.new(shape: AccessPreviewStatus, required: true, location_name: "status"))
+    AccessPreviewSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: AccessPreviewStatusReason, location_name: "statusReason"))
+    AccessPreviewSummary.struct_class = Types::AccessPreviewSummary
+
+    AccessPreviewsList.member = Shapes::ShapeRef.new(shape: AccessPreviewSummary)
+
+    AclGrantee.add_member(:id, Shapes::ShapeRef.new(shape: AclCanonicalId, location_name: "id"))
+    AclGrantee.add_member(:uri, Shapes::ShapeRef.new(shape: AclUri, location_name: "uri"))
+    AclGrantee.struct_class = Types::AclGrantee
 
     ActionList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -153,10 +257,28 @@ module Aws::AccessAnalyzer
     ConditionKeyMap.key = Shapes::ShapeRef.new(shape: String)
     ConditionKeyMap.value = Shapes::ShapeRef.new(shape: String)
 
+    Configuration.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRoleConfiguration, location_name: "iamRole"))
+    Configuration.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKeyConfiguration, location_name: "kmsKey"))
+    Configuration.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3BucketConfiguration, location_name: "s3Bucket"))
+    Configuration.add_member(:secrets_manager_secret, Shapes::ShapeRef.new(shape: SecretsManagerSecretConfiguration, location_name: "secretsManagerSecret"))
+    Configuration.add_member(:sqs_queue, Shapes::ShapeRef.new(shape: SqsQueueConfiguration, location_name: "sqsQueue"))
+    Configuration.struct_class = Types::Configuration
+
+    ConfigurationsMap.key = Shapes::ShapeRef.new(shape: ConfigurationsMapKey)
+    ConfigurationsMap.value = Shapes::ShapeRef.new(shape: Configuration)
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
+
+    CreateAccessPreviewRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location_name: "analyzerArn"))
+    CreateAccessPreviewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAccessPreviewRequest.add_member(:configurations, Shapes::ShapeRef.new(shape: ConfigurationsMap, required: true, location_name: "configurations"))
+    CreateAccessPreviewRequest.struct_class = Types::CreateAccessPreviewRequest
+
+    CreateAccessPreviewResponse.add_member(:id, Shapes::ShapeRef.new(shape: AccessPreviewId, required: true, location_name: "id"))
+    CreateAccessPreviewResponse.struct_class = Types::CreateAccessPreviewResponse
 
     CreateAnalyzerRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "analyzerName"))
     CreateAnalyzerRequest.add_member(:archive_rules, Shapes::ShapeRef.new(shape: InlineArchiveRulesList, location_name: "archiveRules"))
@@ -237,6 +359,13 @@ module Aws::AccessAnalyzer
 
     FindingsList.member = Shapes::ShapeRef.new(shape: FindingSummary)
 
+    GetAccessPreviewRequest.add_member(:access_preview_id, Shapes::ShapeRef.new(shape: AccessPreviewId, required: true, location: "uri", location_name: "accessPreviewId"))
+    GetAccessPreviewRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location: "querystring", location_name: "analyzerArn"))
+    GetAccessPreviewRequest.struct_class = Types::GetAccessPreviewRequest
+
+    GetAccessPreviewResponse.add_member(:access_preview, Shapes::ShapeRef.new(shape: AccessPreview, required: true, location_name: "accessPreview"))
+    GetAccessPreviewResponse.struct_class = Types::GetAccessPreviewResponse
+
     GetAnalyzedResourceRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location: "querystring", location_name: "analyzerArn"))
     GetAnalyzedResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "querystring", location_name: "resourceArn"))
     GetAnalyzedResourceRequest.struct_class = Types::GetAnalyzedResourceRequest
@@ -264,6 +393,9 @@ module Aws::AccessAnalyzer
     GetFindingResponse.add_member(:finding, Shapes::ShapeRef.new(shape: Finding, location_name: "finding"))
     GetFindingResponse.struct_class = Types::GetFindingResponse
 
+    IamRoleConfiguration.add_member(:trust_policy, Shapes::ShapeRef.new(shape: IamTrustPolicy, location_name: "trustPolicy"))
+    IamRoleConfiguration.struct_class = Types::IamRoleConfiguration
+
     InlineArchiveRule.add_member(:filter, Shapes::ShapeRef.new(shape: FilterCriteriaMap, required: true, location_name: "filter"))
     InlineArchiveRule.add_member(:rule_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "ruleName"))
     InlineArchiveRule.struct_class = Types::InlineArchiveRule
@@ -273,6 +405,53 @@ module Aws::AccessAnalyzer
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    InternetConfiguration.struct_class = Types::InternetConfiguration
+
+    KmsConstraintsMap.key = Shapes::ShapeRef.new(shape: KmsConstraintsKey)
+    KmsConstraintsMap.value = Shapes::ShapeRef.new(shape: KmsConstraintsValue)
+
+    KmsGrantConfiguration.add_member(:constraints, Shapes::ShapeRef.new(shape: KmsGrantConstraints, location_name: "constraints"))
+    KmsGrantConfiguration.add_member(:grantee_principal, Shapes::ShapeRef.new(shape: GranteePrincipal, required: true, location_name: "granteePrincipal"))
+    KmsGrantConfiguration.add_member(:issuing_account, Shapes::ShapeRef.new(shape: IssuingAccount, required: true, location_name: "issuingAccount"))
+    KmsGrantConfiguration.add_member(:operations, Shapes::ShapeRef.new(shape: KmsGrantOperationsList, required: true, location_name: "operations"))
+    KmsGrantConfiguration.add_member(:retiring_principal, Shapes::ShapeRef.new(shape: RetiringPrincipal, location_name: "retiringPrincipal"))
+    KmsGrantConfiguration.struct_class = Types::KmsGrantConfiguration
+
+    KmsGrantConfigurationsList.member = Shapes::ShapeRef.new(shape: KmsGrantConfiguration)
+
+    KmsGrantConstraints.add_member(:encryption_context_equals, Shapes::ShapeRef.new(shape: KmsConstraintsMap, location_name: "encryptionContextEquals"))
+    KmsGrantConstraints.add_member(:encryption_context_subset, Shapes::ShapeRef.new(shape: KmsConstraintsMap, location_name: "encryptionContextSubset"))
+    KmsGrantConstraints.struct_class = Types::KmsGrantConstraints
+
+    KmsGrantOperationsList.member = Shapes::ShapeRef.new(shape: KmsGrantOperation)
+
+    KmsKeyConfiguration.add_member(:grants, Shapes::ShapeRef.new(shape: KmsGrantConfigurationsList, location_name: "grants"))
+    KmsKeyConfiguration.add_member(:key_policies, Shapes::ShapeRef.new(shape: KmsKeyPoliciesMap, location_name: "keyPolicies"))
+    KmsKeyConfiguration.struct_class = Types::KmsKeyConfiguration
+
+    KmsKeyPoliciesMap.key = Shapes::ShapeRef.new(shape: PolicyName)
+    KmsKeyPoliciesMap.value = Shapes::ShapeRef.new(shape: KmsKeyPolicy)
+
+    ListAccessPreviewFindingsRequest.add_member(:access_preview_id, Shapes::ShapeRef.new(shape: AccessPreviewId, required: true, location: "uri", location_name: "accessPreviewId"))
+    ListAccessPreviewFindingsRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location_name: "analyzerArn"))
+    ListAccessPreviewFindingsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: FilterCriteriaMap, location_name: "filter"))
+    ListAccessPreviewFindingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
+    ListAccessPreviewFindingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
+    ListAccessPreviewFindingsRequest.struct_class = Types::ListAccessPreviewFindingsRequest
+
+    ListAccessPreviewFindingsResponse.add_member(:findings, Shapes::ShapeRef.new(shape: AccessPreviewFindingsList, required: true, location_name: "findings"))
+    ListAccessPreviewFindingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
+    ListAccessPreviewFindingsResponse.struct_class = Types::ListAccessPreviewFindingsResponse
+
+    ListAccessPreviewsRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location: "querystring", location_name: "analyzerArn"))
+    ListAccessPreviewsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "maxResults"))
+    ListAccessPreviewsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
+    ListAccessPreviewsRequest.struct_class = Types::ListAccessPreviewsRequest
+
+    ListAccessPreviewsResponse.add_member(:access_previews, Shapes::ShapeRef.new(shape: AccessPreviewsList, required: true, location_name: "accessPreviews"))
+    ListAccessPreviewsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
+    ListAccessPreviewsResponse.struct_class = Types::ListAccessPreviewsResponse
 
     ListAnalyzedResourcesRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location_name: "analyzerArn"))
     ListAnalyzedResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
@@ -319,6 +498,10 @@ module Aws::AccessAnalyzer
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    NetworkOriginConfiguration.add_member(:internet_configuration, Shapes::ShapeRef.new(shape: InternetConfiguration, location_name: "internetConfiguration"))
+    NetworkOriginConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "vpcConfiguration"))
+    NetworkOriginConfiguration.struct_class = Types::NetworkOriginConfiguration
+
     PrincipalMap.key = Shapes::ShapeRef.new(shape: String)
     PrincipalMap.value = Shapes::ShapeRef.new(shape: String)
 
@@ -326,6 +509,34 @@ module Aws::AccessAnalyzer
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    S3AccessPointConfiguration.add_member(:access_point_policy, Shapes::ShapeRef.new(shape: AccessPointPolicy, location_name: "accessPointPolicy"))
+    S3AccessPointConfiguration.add_member(:network_origin, Shapes::ShapeRef.new(shape: NetworkOriginConfiguration, location_name: "networkOrigin"))
+    S3AccessPointConfiguration.add_member(:public_access_block, Shapes::ShapeRef.new(shape: S3PublicAccessBlockConfiguration, location_name: "publicAccessBlock"))
+    S3AccessPointConfiguration.struct_class = Types::S3AccessPointConfiguration
+
+    S3AccessPointConfigurationsMap.key = Shapes::ShapeRef.new(shape: AccessPointArn)
+    S3AccessPointConfigurationsMap.value = Shapes::ShapeRef.new(shape: S3AccessPointConfiguration)
+
+    S3BucketAclGrantConfiguration.add_member(:grantee, Shapes::ShapeRef.new(shape: AclGrantee, required: true, location_name: "grantee"))
+    S3BucketAclGrantConfiguration.add_member(:permission, Shapes::ShapeRef.new(shape: AclPermission, required: true, location_name: "permission"))
+    S3BucketAclGrantConfiguration.struct_class = Types::S3BucketAclGrantConfiguration
+
+    S3BucketAclGrantConfigurationsList.member = Shapes::ShapeRef.new(shape: S3BucketAclGrantConfiguration)
+
+    S3BucketConfiguration.add_member(:access_points, Shapes::ShapeRef.new(shape: S3AccessPointConfigurationsMap, location_name: "accessPoints"))
+    S3BucketConfiguration.add_member(:bucket_acl_grants, Shapes::ShapeRef.new(shape: S3BucketAclGrantConfigurationsList, location_name: "bucketAclGrants"))
+    S3BucketConfiguration.add_member(:bucket_policy, Shapes::ShapeRef.new(shape: S3BucketPolicy, location_name: "bucketPolicy"))
+    S3BucketConfiguration.add_member(:bucket_public_access_block, Shapes::ShapeRef.new(shape: S3PublicAccessBlockConfiguration, location_name: "bucketPublicAccessBlock"))
+    S3BucketConfiguration.struct_class = Types::S3BucketConfiguration
+
+    S3PublicAccessBlockConfiguration.add_member(:ignore_public_acls, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ignorePublicAcls"))
+    S3PublicAccessBlockConfiguration.add_member(:restrict_public_buckets, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "restrictPublicBuckets"))
+    S3PublicAccessBlockConfiguration.struct_class = Types::S3PublicAccessBlockConfiguration
+
+    SecretsManagerSecretConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: SecretsManagerSecretKmsId, location_name: "kmsKeyId"))
+    SecretsManagerSecretConfiguration.add_member(:secret_policy, Shapes::ShapeRef.new(shape: SecretsManagerSecretPolicy, location_name: "secretPolicy"))
+    SecretsManagerSecretConfiguration.struct_class = Types::SecretsManagerSecretConfiguration
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
@@ -337,6 +548,9 @@ module Aws::AccessAnalyzer
     SortCriteria.add_member(:attribute_name, Shapes::ShapeRef.new(shape: String, location_name: "attributeName"))
     SortCriteria.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
     SortCriteria.struct_class = Types::SortCriteria
+
+    SqsQueueConfiguration.add_member(:queue_policy, Shapes::ShapeRef.new(shape: SqsQueuePolicy, location_name: "queuePolicy"))
+    SqsQueueConfiguration.struct_class = Types::SqsQueueConfiguration
 
     StartResourceScanRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location_name: "analyzerArn"))
     StartResourceScanRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
@@ -392,6 +606,9 @@ module Aws::AccessAnalyzer
 
     ValueList.member = Shapes::ShapeRef.new(shape: String)
 
+    VpcConfiguration.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
+    VpcConfiguration.struct_class = Types::VpcConfiguration
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -419,6 +636,21 @@ module Aws::AccessAnalyzer
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_access_preview, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAccessPreview"
+        o.http_method = "PUT"
+        o.http_request_uri = "/access-preview"
+        o.input = Shapes::ShapeRef.new(shape: CreateAccessPreviewRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAccessPreviewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
@@ -478,6 +710,19 @@ module Aws::AccessAnalyzer
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_access_preview, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccessPreview"
+        o.http_method = "GET"
+        o.http_request_uri = "/access-preview/{accessPreviewId}"
+        o.input = Shapes::ShapeRef.new(shape: GetAccessPreviewRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccessPreviewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_analyzed_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAnalyzedResource"
         o.http_method = "GET"
@@ -528,6 +773,45 @@ module Aws::AccessAnalyzer
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:list_access_preview_findings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccessPreviewFindings"
+        o.http_method = "POST"
+        o.http_request_uri = "/access-preview/{accessPreviewId}"
+        o.input = Shapes::ShapeRef.new(shape: ListAccessPreviewFindingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAccessPreviewFindingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_access_previews, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccessPreviews"
+        o.http_method = "GET"
+        o.http_request_uri = "/access-preview"
+        o.input = Shapes::ShapeRef.new(shape: ListAccessPreviewsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAccessPreviewsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_analyzed_resources, Seahorse::Model::Operation.new.tap do |o|

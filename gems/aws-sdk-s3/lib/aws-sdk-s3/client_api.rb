@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -634,6 +634,7 @@ module Aws::S3
     CORSConfiguration.add_member(:cors_rules, Shapes::ShapeRef.new(shape: CORSRules, required: true, location_name: "CORSRule"))
     CORSConfiguration.struct_class = Types::CORSConfiguration
 
+    CORSRule.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
     CORSRule.add_member(:allowed_headers, Shapes::ShapeRef.new(shape: AllowedHeaders, location_name: "AllowedHeader"))
     CORSRule.add_member(:allowed_methods, Shapes::ShapeRef.new(shape: AllowedMethods, required: true, location_name: "AllowedMethod"))
     CORSRule.add_member(:allowed_origins, Shapes::ShapeRef.new(shape: AllowedOrigins, required: true, location_name: "AllowedOrigin"))

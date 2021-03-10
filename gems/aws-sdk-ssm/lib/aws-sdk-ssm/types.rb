@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -100,7 +100,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata
     #         resource_id: "ResourceId", # required
     #         tags: [ # required
     #           {
@@ -131,6 +131,15 @@ module Aws::SSM
     #   MaintenanceWindow: mw-012345abcde
     #
     #   PatchBaseline: pb-012345abcde
+    #
+    #   OpsMetadata object: `ResourceID` for tagging is created from the
+    #   Amazon Resource Name (ARN) for the object. Specifically,
+    #   `ResourceID` is created from the strings that come after the word
+    #   `opsmetadata` in the ARN. For example, an OpsMetadata object with an
+    #   ARN of
+    #   `arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager`
+    #   has a `ResourceID` of either `aws/ssm/MyGroup/appmanager` or
+    #   `/aws/ssm/MyGroup/appmanager`.
     #
     #   For the Document and Parameter values, use the name of the resource.
     #
@@ -3632,6 +3641,12 @@ module Aws::SSM
     #             value: "MetadataValueString",
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] resource_id
@@ -3642,11 +3657,25 @@ module Aws::SSM
     #   Metadata for a new Application Manager application.
     #   @return [Hash<String,Types::MetadataValue>]
     #
+    # @!attribute [rw] tags
+    #   Optional metadata that you assign to a resource. You can specify a
+    #   maximum of five tags for an OpsMetadata object. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner,
+    #   or environment. For example, you might want to tag an OpsMetadata
+    #   object to identify an environment or target AWS Region. In this
+    #   case, you could specify the following key-value pairs:
+    #
+    #   * `Key=Environment,Value=Production`
+    #
+    #   * `Key=Region,Value=us-east-2`
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateOpsMetadataRequest AWS API Documentation
     #
     class CreateOpsMetadataRequest < Struct.new(
       :resource_id,
-      :metadata)
+      :metadata,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7604,12 +7633,14 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] plugin_name
-    #   (Optional) The name of the plugin for which you want detailed
-    #   results. If the document contains only one plugin, the name can be
-    #   omitted and the details will be returned.
+    #   The name of the plugin for which you want detailed results. If the
+    #   document contains only one plugin, you can omit the name and details
+    #   for that plugin are returned. If the document contains more than one
+    #   plugin, you must specify the name of the plugin for which you want
+    #   to view details.
     #
-    #   Plugin names are also referred to as step names in Systems Manager
-    #   documents.
+    #   Plugin names are also referred to as *step names* in Systems Manager
+    #   documents. For example, `aws:RunShellScript` is a plugin.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCommandInvocationRequest AWS API Documentation
@@ -7646,8 +7677,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] plugin_name
-    #   The name of the plugin for which you want detailed results. For
-    #   example, aws:RunShellScript is a plugin.
+    #   The name of the plugin, or *step name*, for which details are
+    #   reported. For example, `aws:RunShellScript` is a plugin.
     #   @return [String]
     #
     # @!attribute [rw] response_code
@@ -9553,6 +9584,14 @@ module Aws::SSM
     end
 
     # An S3 bucket where you want to store the results of this request.
+    #
+    # For the minimal permissions required to enable Amazon S3 output for an
+    # association, see [Creating associations][1] in the *Systems Manager
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-state-assoc.html
     #
     # @note When making an API call, you may pass InstanceAssociationOutputLocation
     #   data as a hash:
@@ -12198,7 +12237,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata
     #         resource_id: "ResourceId", # required
     #       }
     #
@@ -16134,7 +16173,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata
     #         resource_id: "ResourceId", # required
     #         tag_keys: ["TagKey"], # required
     #       }
@@ -16158,6 +16197,15 @@ module Aws::SSM
     #   MaintenanceWindow: mw-012345abcde
     #
     #   PatchBaseline: pb-012345abcde
+    #
+    #   OpsMetadata object: `ResourceID` for tagging is created from the
+    #   Amazon Resource Name (ARN) for the object. Specifically,
+    #   `ResourceID` is created from the strings that come after the word
+    #   `opsmetadata` in the ARN. For example, an OpsMetadata object with an
+    #   ARN of
+    #   `arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager`
+    #   has a `ResourceID` of either `aws/ssm/MyGroup/appmanager` or
+    #   `/aws/ssm/MyGroup/appmanager`.
     #
     #   For the Document and Parameter values, use the name of the resource.
     #

@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -621,6 +621,7 @@ module Aws::S3
     #       {
     #         cors_rules: [ # required
     #           {
+    #             id: "ID",
     #             allowed_headers: ["AllowedHeader"],
     #             allowed_methods: ["AllowedMethod"], # required
     #             allowed_origins: ["AllowedOrigin"], # required
@@ -649,12 +650,18 @@ module Aws::S3
     #   data as a hash:
     #
     #       {
+    #         id: "ID",
     #         allowed_headers: ["AllowedHeader"],
     #         allowed_methods: ["AllowedMethod"], # required
     #         allowed_origins: ["AllowedOrigin"], # required
     #         expose_headers: ["ExposeHeader"],
     #         max_age_seconds: 1,
     #       }
+    #
+    # @!attribute [rw] id
+    #   Unique identifier for the rule. The value cannot be longer than 255
+    #   characters.
+    #   @return [String]
     #
     # @!attribute [rw] allowed_headers
     #   Headers that are specified in the `Access-Control-Request-Headers`
@@ -687,6 +694,7 @@ module Aws::S3
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CORSRule AWS API Documentation
     #
     class CORSRule < Struct.new(
+      :id,
       :allowed_headers,
       :allowed_methods,
       :allowed_origins,
@@ -10245,6 +10253,7 @@ module Aws::S3
     #         cors_configuration: { # required
     #           cors_rules: [ # required
     #             {
+    #               id: "ID",
     #               allowed_headers: ["AllowedHeader"],
     #               allowed_methods: ["AllowedMethod"], # required
     #               allowed_origins: ["AllowedOrigin"], # required

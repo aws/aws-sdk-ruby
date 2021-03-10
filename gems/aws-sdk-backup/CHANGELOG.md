@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2021-03-10)
+------------------
+
+* Feature - Added support for enabling continuous backups.
+
 1.27.0 (2021-02-02)
 ------------------
 

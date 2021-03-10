@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2021-03-10)
+------------------
+
+* Feature - This release adds support to preview IAM Access Analyzer findings for a resource before deploying resource permission changes.
+
 1.16.0 (2021-02-02)
 ------------------
 

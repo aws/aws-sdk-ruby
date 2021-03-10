@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -383,6 +383,14 @@ module Aws::SSM
     #
     #   PatchBaseline: pb-012345abcde
     #
+    #   OpsMetadata object: `ResourceID` for tagging is created from the
+    #   Amazon Resource Name (ARN) for the object. Specifically, `ResourceID`
+    #   is created from the strings that come after the word `opsmetadata` in
+    #   the ARN. For example, an OpsMetadata object with an ARN of
+    #   `arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager`
+    #   has a `ResourceID` of either `aws/ssm/MyGroup/appmanager` or
+    #   `/aws/ssm/MyGroup/appmanager`.
+    #
     #   For the Document and Parameter values, use the name of the resource.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
@@ -403,7 +411,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_tags_to_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata
     #     resource_id: "ResourceId", # required
     #     tags: [ # required
     #       {
@@ -1499,6 +1507,18 @@ module Aws::SSM
     # @option params [Hash<String,Types::MetadataValue>] :metadata
     #   Metadata for a new Application Manager application.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata that you assign to a resource. You can specify a
+    #   maximum of five tags for an OpsMetadata object. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner, or
+    #   environment. For example, you might want to tag an OpsMetadata object
+    #   to identify an environment or target AWS Region. In this case, you
+    #   could specify the following key-value pairs:
+    #
+    #   * `Key=Environment,Value=Production`
+    #
+    #   * `Key=Region,Value=us-east-2`
+    #
     # @return [Types::CreateOpsMetadataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateOpsMetadataResult#ops_metadata_arn #ops_metadata_arn} => String
@@ -1512,6 +1532,12 @@ module Aws::SSM
     #         value: "MetadataValueString",
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -4834,12 +4860,14 @@ module Aws::SSM
     #   environment that is configured for Systems Manager.
     #
     # @option params [String] :plugin_name
-    #   (Optional) The name of the plugin for which you want detailed results.
-    #   If the document contains only one plugin, the name can be omitted and
-    #   the details will be returned.
+    #   The name of the plugin for which you want detailed results. If the
+    #   document contains only one plugin, you can omit the name and details
+    #   for that plugin are returned. If the document contains more than one
+    #   plugin, you must specify the name of the plugin for which you want to
+    #   view details.
     #
-    #   Plugin names are also referred to as step names in Systems Manager
-    #   documents.
+    #   Plugin names are also referred to as *step names* in Systems Manager
+    #   documents. For example, `aws:RunShellScript` is a plugin.
     #
     # @return [Types::GetCommandInvocationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7333,7 +7361,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata
     #     resource_id: "ResourceId", # required
     #   })
     #
@@ -8279,6 +8307,14 @@ module Aws::SSM
     #
     #   PatchBaseline: pb-012345abcde
     #
+    #   OpsMetadata object: `ResourceID` for tagging is created from the
+    #   Amazon Resource Name (ARN) for the object. Specifically, `ResourceID`
+    #   is created from the strings that come after the word `opsmetadata` in
+    #   the ARN. For example, an OpsMetadata object with an ARN of
+    #   `arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager`
+    #   has a `ResourceID` of either `aws/ssm/MyGroup/appmanager` or
+    #   `/aws/ssm/MyGroup/appmanager`.
+    #
     #   For the Document and Parameter values, use the name of the resource.
     #
     #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
@@ -8295,7 +8331,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_tags_from_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata
     #     resource_id: "ResourceId", # required
     #     tag_keys: ["TagKey"], # required
     #   })
@@ -10698,7 +10734,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

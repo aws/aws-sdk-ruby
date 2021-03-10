@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -88,6 +88,7 @@ module Aws::Backup
     DescribeRegionSettingsOutput = Shapes::StructureShape.new(name: 'DescribeRegionSettingsOutput')
     DescribeRestoreJobInput = Shapes::StructureShape.new(name: 'DescribeRestoreJobInput')
     DescribeRestoreJobOutput = Shapes::StructureShape.new(name: 'DescribeRestoreJobOutput')
+    DisassociateRecoveryPointInput = Shapes::StructureShape.new(name: 'DisassociateRecoveryPointInput')
     ExportBackupPlanTemplateInput = Shapes::StructureShape.new(name: 'ExportBackupPlanTemplateInput')
     ExportBackupPlanTemplateOutput = Shapes::StructureShape.new(name: 'ExportBackupPlanTemplateOutput')
     GetBackupPlanFromJSONInput = Shapes::StructureShape.new(name: 'GetBackupPlanFromJSONInput')
@@ -112,6 +113,7 @@ module Aws::Backup
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    InvalidResourceStateException = Shapes::StructureShape.new(name: 'InvalidResourceStateException')
     IsEnabled = Shapes::BooleanShape.new(name: 'IsEnabled')
     Lifecycle = Shapes::StructureShape.new(name: 'Lifecycle')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -273,6 +275,7 @@ module Aws::Backup
     BackupRule.add_member(:recovery_point_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "RecoveryPointTags"))
     BackupRule.add_member(:rule_id, Shapes::ShapeRef.new(shape: string, location_name: "RuleId"))
     BackupRule.add_member(:copy_actions, Shapes::ShapeRef.new(shape: CopyActions, location_name: "CopyActions"))
+    BackupRule.add_member(:enable_continuous_backup, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableContinuousBackup"))
     BackupRule.struct_class = Types::BackupRule
 
     BackupRuleInput.add_member(:rule_name, Shapes::ShapeRef.new(shape: BackupRuleName, required: true, location_name: "RuleName"))
@@ -283,6 +286,7 @@ module Aws::Backup
     BackupRuleInput.add_member(:lifecycle, Shapes::ShapeRef.new(shape: Lifecycle, location_name: "Lifecycle"))
     BackupRuleInput.add_member(:recovery_point_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "RecoveryPointTags"))
     BackupRuleInput.add_member(:copy_actions, Shapes::ShapeRef.new(shape: CopyActions, location_name: "CopyActions"))
+    BackupRuleInput.add_member(:enable_continuous_backup, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableContinuousBackup"))
     BackupRuleInput.struct_class = Types::BackupRuleInput
 
     BackupRules.member = Shapes::ShapeRef.new(shape: BackupRule)
@@ -519,6 +523,10 @@ module Aws::Backup
     DescribeRestoreJobOutput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     DescribeRestoreJobOutput.struct_class = Types::DescribeRestoreJobOutput
 
+    DisassociateRecoveryPointInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
+    DisassociateRecoveryPointInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "recoveryPointArn"))
+    DisassociateRecoveryPointInput.struct_class = Types::DisassociateRecoveryPointInput
+
     ExportBackupPlanTemplateInput.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupPlanId"))
     ExportBackupPlanTemplateInput.struct_class = Types::ExportBackupPlanTemplateInput
 
@@ -606,6 +614,12 @@ module Aws::Backup
     InvalidRequestException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "Type"))
     InvalidRequestException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    InvalidResourceStateException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
+    InvalidResourceStateException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    InvalidResourceStateException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "Type"))
+    InvalidResourceStateException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
+    InvalidResourceStateException.struct_class = Types::InvalidResourceStateException
 
     Lifecycle.add_member(:move_to_cold_storage_after_days, Shapes::ShapeRef.new(shape: Long, location_name: "MoveToColdStorageAfterDays"))
     Lifecycle.add_member(:delete_after_days, Shapes::ShapeRef.new(shape: Long, location_name: "DeleteAfterDays"))
@@ -1051,6 +1065,7 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
@@ -1098,6 +1113,7 @@ module Aws::Backup
         o.http_request_uri = "/global-settings"
         o.input = Shapes::ShapeRef.new(shape: DescribeGlobalSettingsInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeGlobalSettingsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
@@ -1145,6 +1161,20 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyFailureException)
+      end)
+
+      api.add_operation(:disassociate_recovery_point, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateRecoveryPoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/backup-vaults/{backupVaultName}/recovery-points/{recoveryPointArn}/disassociate"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateRecoveryPointInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:export_backup_plan_template, Seahorse::Model::Operation.new.tap do |o|
@@ -1512,6 +1542,7 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:start_restore_job, Seahorse::Model::Operation.new.tap do |o|

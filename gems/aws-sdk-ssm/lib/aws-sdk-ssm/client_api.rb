@@ -3,7 +3,7 @@
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
 
@@ -1685,6 +1685,7 @@ module Aws::SSM
 
     CreateOpsMetadataRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: OpsMetadataResourceId, required: true, location_name: "ResourceId"))
     CreateOpsMetadataRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: MetadataMap, location_name: "Metadata"))
+    CreateOpsMetadataRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateOpsMetadataRequest.struct_class = Types::CreateOpsMetadataRequest
 
     CreateOpsMetadataResult.add_member(:ops_metadata_arn, Shapes::ShapeRef.new(shape: OpsMetadataArn, location_name: "OpsMetadataArn"))
