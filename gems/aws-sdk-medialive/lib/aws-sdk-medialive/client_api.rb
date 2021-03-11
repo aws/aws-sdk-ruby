@@ -33,9 +33,12 @@ module Aws::MediaLive
     AccessDenied = Shapes::StructureShape.new(name: 'AccessDenied')
     AfdSignaling = Shapes::StringShape.new(name: 'AfdSignaling')
     AncillarySourceSettings = Shapes::StructureShape.new(name: 'AncillarySourceSettings')
+    ArchiveCdnSettings = Shapes::StructureShape.new(name: 'ArchiveCdnSettings')
     ArchiveContainerSettings = Shapes::StructureShape.new(name: 'ArchiveContainerSettings')
     ArchiveGroupSettings = Shapes::StructureShape.new(name: 'ArchiveGroupSettings')
     ArchiveOutputSettings = Shapes::StructureShape.new(name: 'ArchiveOutputSettings')
+    ArchiveS3LogUploads = Shapes::StringShape.new(name: 'ArchiveS3LogUploads')
+    ArchiveS3Settings = Shapes::StructureShape.new(name: 'ArchiveS3Settings')
     AribDestinationSettings = Shapes::StructureShape.new(name: 'AribDestinationSettings')
     AribSourceSettings = Shapes::StructureShape.new(name: 'AribSourceSettings')
     AudioChannelMapping = Shapes::StructureShape.new(name: 'AudioChannelMapping')
@@ -102,6 +105,7 @@ module Aws::MediaLive
     CaptionDescription = Shapes::StructureShape.new(name: 'CaptionDescription')
     CaptionDestinationSettings = Shapes::StructureShape.new(name: 'CaptionDestinationSettings')
     CaptionLanguageMapping = Shapes::StructureShape.new(name: 'CaptionLanguageMapping')
+    CaptionRectangle = Shapes::StructureShape.new(name: 'CaptionRectangle')
     CaptionSelector = Shapes::StructureShape.new(name: 'CaptionSelector')
     CaptionSelectorSettings = Shapes::StructureShape.new(name: 'CaptionSelectorSettings')
     CdiInputResolution = Shapes::StringShape.new(name: 'CdiInputResolution')
@@ -227,10 +231,13 @@ module Aws::MediaLive
     FollowModeScheduleActionStartSettings = Shapes::StructureShape.new(name: 'FollowModeScheduleActionStartSettings')
     FollowPoint = Shapes::StringShape.new(name: 'FollowPoint')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
+    FrameCaptureCdnSettings = Shapes::StructureShape.new(name: 'FrameCaptureCdnSettings')
     FrameCaptureGroupSettings = Shapes::StructureShape.new(name: 'FrameCaptureGroupSettings')
     FrameCaptureHlsSettings = Shapes::StructureShape.new(name: 'FrameCaptureHlsSettings')
     FrameCaptureIntervalUnit = Shapes::StringShape.new(name: 'FrameCaptureIntervalUnit')
     FrameCaptureOutputSettings = Shapes::StructureShape.new(name: 'FrameCaptureOutputSettings')
+    FrameCaptureS3LogUploads = Shapes::StringShape.new(name: 'FrameCaptureS3LogUploads')
+    FrameCaptureS3Settings = Shapes::StructureShape.new(name: 'FrameCaptureS3Settings')
     FrameCaptureSettings = Shapes::StructureShape.new(name: 'FrameCaptureSettings')
     GatewayTimeoutException = Shapes::StructureShape.new(name: 'GatewayTimeoutException')
     GlobalConfiguration = Shapes::StructureShape.new(name: 'GlobalConfiguration')
@@ -307,6 +314,8 @@ module Aws::MediaLive
     HlsOutputSettings = Shapes::StructureShape.new(name: 'HlsOutputSettings')
     HlsProgramDateTime = Shapes::StringShape.new(name: 'HlsProgramDateTime')
     HlsRedundantManifest = Shapes::StringShape.new(name: 'HlsRedundantManifest')
+    HlsS3LogUploads = Shapes::StringShape.new(name: 'HlsS3LogUploads')
+    HlsS3Settings = Shapes::StructureShape.new(name: 'HlsS3Settings')
     HlsSegmentationMode = Shapes::StringShape.new(name: 'HlsSegmentationMode')
     HlsSettings = Shapes::StructureShape.new(name: 'HlsSettings')
     HlsStreamInfResolution = Shapes::StringShape.new(name: 'HlsStreamInfResolution')
@@ -526,6 +535,7 @@ module Aws::MediaLive
     RtmpGroupSettings = Shapes::StructureShape.new(name: 'RtmpGroupSettings')
     RtmpOutputCertificateMode = Shapes::StringShape.new(name: 'RtmpOutputCertificateMode')
     RtmpOutputSettings = Shapes::StructureShape.new(name: 'RtmpOutputSettings')
+    S3CannedAcl = Shapes::StringShape.new(name: 'S3CannedAcl')
     ScheduleAction = Shapes::StructureShape.new(name: 'ScheduleAction')
     ScheduleActionSettings = Shapes::StructureShape.new(name: 'ScheduleActionSettings')
     ScheduleActionStartSettings = Shapes::StructureShape.new(name: 'ScheduleActionStartSettings')
@@ -649,6 +659,7 @@ module Aws::MediaLive
     __double = Shapes::FloatShape.new(name: '__double')
     __doubleMin0 = Shapes::FloatShape.new(name: '__doubleMin0')
     __doubleMin0Max1 = Shapes::FloatShape.new(name: '__doubleMin0Max1')
+    __doubleMin0Max100 = Shapes::FloatShape.new(name: '__doubleMin0Max100')
     __doubleMin1 = Shapes::FloatShape.new(name: '__doubleMin1')
     __doubleMinNegative59Max0 = Shapes::FloatShape.new(name: '__doubleMinNegative59Max0')
     __integer = Shapes::IntegerShape.new(name: '__integer')
@@ -756,6 +767,7 @@ module Aws::MediaLive
     __longMin0Max4294967295 = Shapes::IntegerShape.new(name: '__longMin0Max4294967295')
     __longMin0Max8589934591 = Shapes::IntegerShape.new(name: '__longMin0Max8589934591')
     __string = Shapes::StringShape.new(name: '__string')
+    __stringMax1000 = Shapes::StringShape.new(name: '__stringMax1000')
     __stringMax256 = Shapes::StringShape.new(name: '__stringMax256')
     __stringMax32 = Shapes::StringShape.new(name: '__stringMax32')
     __stringMin1 = Shapes::StringShape.new(name: '__stringMin1')
@@ -801,10 +813,14 @@ module Aws::MediaLive
     AncillarySourceSettings.add_member(:source_ancillary_channel_number, Shapes::ShapeRef.new(shape: __integerMin1Max4, location_name: "sourceAncillaryChannelNumber"))
     AncillarySourceSettings.struct_class = Types::AncillarySourceSettings
 
+    ArchiveCdnSettings.add_member(:archive_s3_settings, Shapes::ShapeRef.new(shape: ArchiveS3Settings, location_name: "archiveS3Settings"))
+    ArchiveCdnSettings.struct_class = Types::ArchiveCdnSettings
+
     ArchiveContainerSettings.add_member(:m2ts_settings, Shapes::ShapeRef.new(shape: M2tsSettings, location_name: "m2tsSettings"))
     ArchiveContainerSettings.add_member(:raw_settings, Shapes::ShapeRef.new(shape: RawSettings, location_name: "rawSettings"))
     ArchiveContainerSettings.struct_class = Types::ArchiveContainerSettings
 
+    ArchiveGroupSettings.add_member(:archive_cdn_settings, Shapes::ShapeRef.new(shape: ArchiveCdnSettings, location_name: "archiveCdnSettings"))
     ArchiveGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
     ArchiveGroupSettings.add_member(:rollover_interval, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "rolloverInterval"))
     ArchiveGroupSettings.struct_class = Types::ArchiveGroupSettings
@@ -813,6 +829,9 @@ module Aws::MediaLive
     ArchiveOutputSettings.add_member(:extension, Shapes::ShapeRef.new(shape: __string, location_name: "extension"))
     ArchiveOutputSettings.add_member(:name_modifier, Shapes::ShapeRef.new(shape: __string, location_name: "nameModifier"))
     ArchiveOutputSettings.struct_class = Types::ArchiveOutputSettings
+
+    ArchiveS3Settings.add_member(:canned_acl, Shapes::ShapeRef.new(shape: S3CannedAcl, location_name: "cannedAcl"))
+    ArchiveS3Settings.struct_class = Types::ArchiveS3Settings
 
     AribDestinationSettings.struct_class = Types::AribDestinationSettings
 
@@ -1047,6 +1066,12 @@ module Aws::MediaLive
     CaptionLanguageMapping.add_member(:language_code, Shapes::ShapeRef.new(shape: __stringMin3Max3, required: true, location_name: "languageCode"))
     CaptionLanguageMapping.add_member(:language_description, Shapes::ShapeRef.new(shape: __stringMin1, required: true, location_name: "languageDescription"))
     CaptionLanguageMapping.struct_class = Types::CaptionLanguageMapping
+
+    CaptionRectangle.add_member(:height, Shapes::ShapeRef.new(shape: __doubleMin0Max100, required: true, location_name: "height"))
+    CaptionRectangle.add_member(:left_offset, Shapes::ShapeRef.new(shape: __doubleMin0Max100, required: true, location_name: "leftOffset"))
+    CaptionRectangle.add_member(:top_offset, Shapes::ShapeRef.new(shape: __doubleMin0Max100, required: true, location_name: "topOffset"))
+    CaptionRectangle.add_member(:width, Shapes::ShapeRef.new(shape: __doubleMin0Max100, required: true, location_name: "width"))
+    CaptionRectangle.struct_class = Types::CaptionRectangle
 
     CaptionSelector.add_member(:language_code, Shapes::ShapeRef.new(shape: __string, location_name: "languageCode"))
     CaptionSelector.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1, required: true, location_name: "name"))
@@ -1554,6 +1579,7 @@ module Aws::MediaLive
     Eac3Settings.struct_class = Types::Eac3Settings
 
     EbuTtDDestinationSettings.add_member(:fill_line_gap, Shapes::ShapeRef.new(shape: EbuTtDFillLineGapControl, location_name: "fillLineGap"))
+    EbuTtDDestinationSettings.add_member(:copyright_holder, Shapes::ShapeRef.new(shape: __stringMax1000, location_name: "copyrightHolder"))
     EbuTtDDestinationSettings.add_member(:font_family, Shapes::ShapeRef.new(shape: __string, location_name: "fontFamily"))
     EbuTtDDestinationSettings.add_member(:style_control, Shapes::ShapeRef.new(shape: EbuTtDDestinationStyleControl, location_name: "styleControl"))
     EbuTtDDestinationSettings.struct_class = Types::EbuTtDDestinationSettings
@@ -1614,13 +1640,20 @@ module Aws::MediaLive
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
 
+    FrameCaptureCdnSettings.add_member(:frame_capture_s3_settings, Shapes::ShapeRef.new(shape: FrameCaptureS3Settings, location_name: "frameCaptureS3Settings"))
+    FrameCaptureCdnSettings.struct_class = Types::FrameCaptureCdnSettings
+
     FrameCaptureGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
+    FrameCaptureGroupSettings.add_member(:frame_capture_cdn_settings, Shapes::ShapeRef.new(shape: FrameCaptureCdnSettings, location_name: "frameCaptureCdnSettings"))
     FrameCaptureGroupSettings.struct_class = Types::FrameCaptureGroupSettings
 
     FrameCaptureHlsSettings.struct_class = Types::FrameCaptureHlsSettings
 
     FrameCaptureOutputSettings.add_member(:name_modifier, Shapes::ShapeRef.new(shape: __string, location_name: "nameModifier"))
     FrameCaptureOutputSettings.struct_class = Types::FrameCaptureOutputSettings
+
+    FrameCaptureS3Settings.add_member(:canned_acl, Shapes::ShapeRef.new(shape: S3CannedAcl, location_name: "cannedAcl"))
+    FrameCaptureS3Settings.struct_class = Types::FrameCaptureS3Settings
 
     FrameCaptureSettings.add_member(:capture_interval, Shapes::ShapeRef.new(shape: __integerMin1Max3600000, location_name: "captureInterval"))
     FrameCaptureSettings.add_member(:capture_interval_units, Shapes::ShapeRef.new(shape: FrameCaptureIntervalUnit, location_name: "captureIntervalUnits"))
@@ -1750,6 +1783,7 @@ module Aws::MediaLive
     HlsCdnSettings.add_member(:hls_akamai_settings, Shapes::ShapeRef.new(shape: HlsAkamaiSettings, location_name: "hlsAkamaiSettings"))
     HlsCdnSettings.add_member(:hls_basic_put_settings, Shapes::ShapeRef.new(shape: HlsBasicPutSettings, location_name: "hlsBasicPutSettings"))
     HlsCdnSettings.add_member(:hls_media_store_settings, Shapes::ShapeRef.new(shape: HlsMediaStoreSettings, location_name: "hlsMediaStoreSettings"))
+    HlsCdnSettings.add_member(:hls_s3_settings, Shapes::ShapeRef.new(shape: HlsS3Settings, location_name: "hlsS3Settings"))
     HlsCdnSettings.add_member(:hls_webdav_settings, Shapes::ShapeRef.new(shape: HlsWebdavSettings, location_name: "hlsWebdavSettings"))
     HlsCdnSettings.struct_class = Types::HlsCdnSettings
 
@@ -1818,6 +1852,9 @@ module Aws::MediaLive
     HlsOutputSettings.add_member(:name_modifier, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "nameModifier"))
     HlsOutputSettings.add_member(:segment_modifier, Shapes::ShapeRef.new(shape: __string, location_name: "segmentModifier"))
     HlsOutputSettings.struct_class = Types::HlsOutputSettings
+
+    HlsS3Settings.add_member(:canned_acl, Shapes::ShapeRef.new(shape: S3CannedAcl, location_name: "cannedAcl"))
+    HlsS3Settings.struct_class = Types::HlsS3Settings
 
     HlsSettings.add_member(:audio_only_hls_settings, Shapes::ShapeRef.new(shape: AudioOnlyHlsSettings, location_name: "audioOnlyHlsSettings"))
     HlsSettings.add_member(:fmp_4_hls_settings, Shapes::ShapeRef.new(shape: Fmp4HlsSettings, location_name: "fmp4HlsSettings"))
@@ -2781,6 +2818,7 @@ module Aws::MediaLive
 
     TeletextDestinationSettings.struct_class = Types::TeletextDestinationSettings
 
+    TeletextSourceSettings.add_member(:output_rectangle, Shapes::ShapeRef.new(shape: CaptionRectangle, location_name: "outputRectangle"))
     TeletextSourceSettings.add_member(:page_number, Shapes::ShapeRef.new(shape: __string, location_name: "pageNumber"))
     TeletextSourceSettings.struct_class = Types::TeletextSourceSettings
 
@@ -2814,6 +2852,7 @@ module Aws::MediaLive
     TransferringInputDeviceSummary.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     TransferringInputDeviceSummary.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     TransferringInputDeviceSummary.add_member(:target_customer_id, Shapes::ShapeRef.new(shape: __string, location_name: "targetCustomerId"))
+    TransferringInputDeviceSummary.add_member(:target_region, Shapes::ShapeRef.new(shape: __string, location_name: "targetRegion"))
     TransferringInputDeviceSummary.add_member(:transfer_type, Shapes::ShapeRef.new(shape: InputDeviceTransferType, location_name: "transferType"))
     TransferringInputDeviceSummary.struct_class = Types::TransferringInputDeviceSummary
 

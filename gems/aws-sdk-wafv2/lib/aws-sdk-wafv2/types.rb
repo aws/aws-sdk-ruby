@@ -902,8 +902,8 @@ module Aws::WAFV2
     # @!attribute [rw] addresses
     #   Contains an array of strings that specify one or more IP addresses
     #   or blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
-    #   notation. AWS WAF supports all address ranges for IP versions IPv4
-    #   and IPv6.
+    #   notation. AWS WAF supports all IPv4 and IPv6 CIDR ranges except for
+    #   /0.
     #
     #   Examples:
     #
@@ -2347,6 +2347,8 @@ module Aws::WAFV2
     #   Inspect a single header. Provide the name of the header to inspect,
     #   for example, `User-Agent` or `Referer`. This setting isn't case
     #   sensitive.
+    #
+    #   Example JSON: `"SingleHeader": \{ "Name": "haystack" \}`
     #   @return [Types::SingleHeader]
     #
     # @!attribute [rw] single_query_argument
@@ -2356,6 +2358,8 @@ module Aws::WAFV2
     #
     #   This is used only to indicate the web request component for AWS WAF
     #   to inspect, in the FieldToMatch specification.
+    #
+    #   Example JSON: `"SingleQueryArgument": \{ "Name": "myArgument" \}`
     #   @return [Types::SingleQueryArgument]
     #
     # @!attribute [rw] all_query_arguments
@@ -3245,8 +3249,9 @@ module Aws::WAFV2
 
     # Contains one or more IP addresses or blocks of IP addresses specified
     # in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports
-    # any CIDR range. For information about CIDR notation, see the Wikipedia
-    # entry [Classless Inter-Domain Routing][1].
+    # all IPv4 and IPv6 CIDR ranges except for /0. For information about
+    # CIDR notation, see the Wikipedia entry [Classless Inter-Domain
+    # Routing][1].
     #
     # AWS WAF assigns an ARN to each `IPSet` that you create. To use an IP
     # set in a rule, you provide the ARN to the Rule statement
@@ -3282,8 +3287,8 @@ module Aws::WAFV2
     # @!attribute [rw] addresses
     #   Contains an array of strings that specify one or more IP addresses
     #   or blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
-    #   notation. AWS WAF supports all address ranges for IP versions IPv4
-    #   and IPv6.
+    #   notation. AWS WAF supports all IPv4 and IPv6 CIDR ranges except for
+    #   /0.
     #
     #   Examples:
     #
@@ -3539,12 +3544,12 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] invalid_fallback_behavior
-    #   The inspection behavior to fall back to if the JSON in the request
-    #   body is invalid. For AWS WAF, invalid JSON is any content that
-    #   isn't complete syntactical JSON, content whose root node isn't an
-    #   object or an array, and duplicate keys in the content.
+    #   What AWS WAF should do if it fails to completely parse the JSON
+    #   body. The options are the following:
     #
-    #   You can specify the following fallback behaviors:
+    #   * `EVALUATE_AS_STRING` - Inspect the body as plain text. AWS WAF
+    #     applies the text transformations and inspection criteria that you
+    #     defined for the JSON inspection to the body text string.
     #
     #   * `MATCH` - Treat the web request as matching the rule statement.
     #     AWS WAF applies the rule action to the request.
@@ -3552,13 +3557,22 @@ module Aws::WAFV2
     #   * `NO_MATCH` - Treat the web request as not matching the rule
     #     statement.
     #
-    #   * `EVALUATE_AS_STRING` - Inspect the body as plain text. This option
-    #     applies the text transformations and inspection criteria that you
-    #     defined for the JSON inspection to the body text string.
+    #   If you don't provide this setting, AWS WAF parses and evaluates the
+    #   content only up to the first parsing failure that it encounters.
     #
-    #   If you don't provide this setting, when AWS WAF encounters invalid
-    #   JSON, it parses and inspects what it can, up to the first invalid
-    #   JSON that it encounters.
+    #   AWS WAF does its best to parse the entire JSON body, but might be
+    #   forced to stop for reasons such as invalid characters, duplicate
+    #   keys, truncation, and any content whose root node isn't an object
+    #   or an array.
+    #
+    #   AWS WAF parses the JSON in the following examples as two valid key,
+    #   value pairs:
+    #
+    #   * Missing comma: `\{"key1":"value1""key2":"value2"\}`
+    #
+    #   * Missing colon: `\{"key1":"value1","key2""value2"\}`
+    #
+    #   * Extra colons: `\{"key1"::"value1","key2""value2"\}`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/JsonBody AWS API Documentation
@@ -8106,8 +8120,8 @@ module Aws::WAFV2
     # @!attribute [rw] addresses
     #   Contains an array of strings that specify one or more IP addresses
     #   or blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
-    #   notation. AWS WAF supports all address ranges for IP versions IPv4
-    #   and IPv6.
+    #   notation. AWS WAF supports all IPv4 and IPv6 CIDR ranges except for
+    #   /0.
     #
     #   Examples:
     #

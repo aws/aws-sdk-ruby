@@ -46,6 +46,8 @@ module Aws::Comprehend
     ComprehendEndpointName = Shapes::StringShape.new(name: 'ComprehendEndpointName')
     ComprehendModelArn = Shapes::StringShape.new(name: 'ComprehendModelArn')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    ContainsPiiEntitiesRequest = Shapes::StructureShape.new(name: 'ContainsPiiEntitiesRequest')
+    ContainsPiiEntitiesResponse = Shapes::StructureShape.new(name: 'ContainsPiiEntitiesResponse')
     CreateDocumentClassifierRequest = Shapes::StructureShape.new(name: 'CreateDocumentClassifierRequest')
     CreateDocumentClassifierResponse = Shapes::StructureShape.new(name: 'CreateDocumentClassifierResponse')
     CreateEndpointRequest = Shapes::StructureShape.new(name: 'CreateEndpointRequest')
@@ -122,6 +124,7 @@ module Aws::Comprehend
     EntitiesDetectionJobProperties = Shapes::StructureShape.new(name: 'EntitiesDetectionJobProperties')
     EntitiesDetectionJobPropertiesList = Shapes::ListShape.new(name: 'EntitiesDetectionJobPropertiesList')
     Entity = Shapes::StructureShape.new(name: 'Entity')
+    EntityLabel = Shapes::StructureShape.new(name: 'EntityLabel')
     EntityRecognizerAnnotations = Shapes::StructureShape.new(name: 'EntityRecognizerAnnotations')
     EntityRecognizerArn = Shapes::StringShape.new(name: 'EntityRecognizerArn')
     EntityRecognizerAugmentedManifestsList = Shapes::ListShape.new(name: 'EntityRecognizerAugmentedManifestsList')
@@ -191,6 +194,7 @@ module Aws::Comprehend
     ListOfDetectSyntaxResult = Shapes::ListShape.new(name: 'ListOfDetectSyntaxResult')
     ListOfDominantLanguages = Shapes::ListShape.new(name: 'ListOfDominantLanguages')
     ListOfEntities = Shapes::ListShape.new(name: 'ListOfEntities')
+    ListOfEntityLabels = Shapes::ListShape.new(name: 'ListOfEntityLabels')
     ListOfKeyPhrases = Shapes::ListShape.new(name: 'ListOfKeyPhrases')
     ListOfLabels = Shapes::ListShape.new(name: 'ListOfLabels')
     ListOfPiiEntities = Shapes::ListShape.new(name: 'ListOfPiiEntities')
@@ -394,6 +398,13 @@ module Aws::Comprehend
 
     ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
+    ContainsPiiEntitiesRequest.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Text"))
+    ContainsPiiEntitiesRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
+    ContainsPiiEntitiesRequest.struct_class = Types::ContainsPiiEntitiesRequest
+
+    ContainsPiiEntitiesResponse.add_member(:labels, Shapes::ShapeRef.new(shape: ListOfEntityLabels, location_name: "Labels"))
+    ContainsPiiEntitiesResponse.struct_class = Types::ContainsPiiEntitiesResponse
 
     CreateDocumentClassifierRequest.add_member(:document_classifier_name, Shapes::ShapeRef.new(shape: ComprehendArnName, required: true, location_name: "DocumentClassifierName"))
     CreateDocumentClassifierRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
@@ -698,6 +709,10 @@ module Aws::Comprehend
     Entity.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
     Entity.struct_class = Types::Entity
 
+    EntityLabel.add_member(:name, Shapes::ShapeRef.new(shape: PiiEntityType, location_name: "Name"))
+    EntityLabel.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
+    EntityLabel.struct_class = Types::EntityLabel
+
     EntityRecognizerAnnotations.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     EntityRecognizerAnnotations.struct_class = Types::EntityRecognizerAnnotations
 
@@ -922,6 +937,8 @@ module Aws::Comprehend
     ListOfDominantLanguages.member = Shapes::ShapeRef.new(shape: DominantLanguage)
 
     ListOfEntities.member = Shapes::ShapeRef.new(shape: Entity)
+
+    ListOfEntityLabels.member = Shapes::ShapeRef.new(shape: EntityLabel)
 
     ListOfKeyPhrases.member = Shapes::ShapeRef.new(shape: KeyPhrase)
 
@@ -1387,6 +1404,18 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:contains_pii_entities, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ContainsPiiEntities"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ContainsPiiEntitiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ContainsPiiEntitiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

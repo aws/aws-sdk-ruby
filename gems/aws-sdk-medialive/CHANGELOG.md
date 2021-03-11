@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2021-03-11)
+------------------
+
+* Feature - MediaLive supports the ability to apply a canned ACL to output sent to an AWS S3 bucket; supports ability to specify position for EBU-TT and TTML output captions converted from Teletext source.
+
 1.66.0 (2021-03-10)
 ------------------
 

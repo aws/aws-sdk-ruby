@@ -632,6 +632,46 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ContainsPiiEntitiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         text: "String", # required
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #       }
+    #
+    # @!attribute [rw] text
+    #   Creates a new document classification request to analyze a single
+    #   document in real-time, returning personally identifiable information
+    #   (PII) entity labels.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input documents.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ContainsPiiEntitiesRequest AWS API Documentation
+    #
+    class ContainsPiiEntitiesRequest < Struct.new(
+      :text,
+      :language_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] labels
+    #   The labels used in the document being analyzed. Individual labels
+    #   represent personally identifiable information (PII) entity types.
+    #   @return [Array<Types::EntityLabel>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ContainsPiiEntitiesResponse AWS API Documentation
+    #
+    class ContainsPiiEntitiesResponse < Struct.new(
+      :labels)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDocumentClassifierRequest
     #   data as a hash:
     #
@@ -2603,6 +2643,27 @@ module Aws::Comprehend
       :text,
       :begin_offset,
       :end_offset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies one of the label or labels that categorize the personally
+    # identifiable information (PII) entity being analyzed.
+    #
+    # @!attribute [rw] name
+    #   The name of the label.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The level of confidence that Amazon Comprehend has in the accuracy
+    #   of the detection.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityLabel AWS API Documentation
+    #
+    class EntityLabel < Struct.new(
+      :name,
+      :score)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6167,11 +6228,9 @@ module Aws::Comprehend
     end
 
     # Amazon Comprehend can't process the language of the input text. For
-    # all custom entity recognition APIs (such as `CreateEntityRecognizer`),
-    # only English, Spanish, French, Italian, German, or Portuguese are
-    # accepted. For most other APIs, such as those for Custom
-    # Classification, Amazon Comprehend accepts text in all supported
-    # languages. For a list of supported languages, see supported-languages.
+    # custom entity recognition APIs, only English, Spanish, French,
+    # Italian, German, or Portuguese are accepted. For a list of supported
+    # languages, see supported-languages.
     #
     # @!attribute [rw] message
     #   @return [String]

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2021-03-11)
+------------------
+
+* Feature - Correct the documentation about JSON body parsing behavior and IP set update behavior
+
 1.17.0 (2021-03-10)
 ------------------
 

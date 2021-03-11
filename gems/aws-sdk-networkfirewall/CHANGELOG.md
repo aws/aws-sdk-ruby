@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2021-03-11)
+------------------
+
+* Feature - Correct the documentation about how you can provide rule group rules
+
 1.3.0 (2021-03-10)
 ------------------
 

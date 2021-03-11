@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2021-03-11)
+------------------
+
+* Feature - ContainsPiiEntities API analyzes the input text for the presence of personally identifiable information(PII) and returns the labels of identified PII entity types such as name, address etc.
+
 1.44.0 (2021-03-10)
 ------------------
 

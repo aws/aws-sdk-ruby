@@ -745,8 +745,8 @@ module Aws::WAFV2
     # @option params [required, Array<String>] :addresses
     #   Contains an array of strings that specify one or more IP addresses or
     #   blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
-    #   notation. AWS WAF supports all address ranges for IP versions IPv4 and
-    #   IPv6.
+    #   notation. AWS WAF supports all IPv4 and IPv6 CIDR ranges except for
+    #   /0.
     #
     #   Examples:
     #
@@ -3537,6 +3537,14 @@ module Aws::WAFV2
 
     # Updates the specified IPSet.
     #
+    # <note markdown="1"> This operation completely replaces any IP address specifications that
+    # you already have in the IP set with the ones that you provide to this
+    # call. If you want to add to or modify the addresses that are already
+    # in the IP set, retrieve those by calling GetIPSet, update them, and
+    # provide the complete updated array of IP addresses to this call.
+    #
+    #  </note>
+    #
     # @option params [required, String] :name
     #   The name of the IP set. You cannot change the name of an `IPSet` after
     #   you create it.
@@ -3566,8 +3574,8 @@ module Aws::WAFV2
     # @option params [required, Array<String>] :addresses
     #   Contains an array of strings that specify one or more IP addresses or
     #   blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
-    #   notation. AWS WAF supports all address ranges for IP versions IPv4 and
-    #   IPv6.
+    #   notation. AWS WAF supports all IPv4 and IPv6 CIDR ranges except for
+    #   /0.
     #
     #   Examples:
     #
@@ -4442,7 +4450,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1002,6 +1002,7 @@ module Aws::MediaLive
     #             },
     #             ebu_tt_d_destination_settings: {
     #               fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
+    #               copyright_holder: "__stringMax1000",
     #               font_family: "__string",
     #               style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #             },
@@ -1060,6 +1061,11 @@ module Aws::MediaLive
     #           name: "__stringMax32",
     #           output_group_settings: { # required
     #             archive_group_settings: {
+    #               archive_cdn_settings: {
+    #                 archive_s3_settings: {
+    #                   canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #                 },
+    #               },
     #               destination: { # required
     #                 destination_ref_id: "__string",
     #               },
@@ -1068,6 +1074,11 @@ module Aws::MediaLive
     #             frame_capture_group_settings: {
     #               destination: { # required
     #                 destination_ref_id: "__string",
+    #               },
+    #               frame_capture_cdn_settings: {
+    #                 frame_capture_s3_settings: {
+    #                   canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #                 },
     #               },
     #             },
     #             hls_group_settings: {
@@ -1115,6 +1126,9 @@ module Aws::MediaLive
     #                   media_store_storage_class: "TEMPORAL", # accepts TEMPORAL
     #                   num_retries: 1,
     #                   restart_delay: 1,
+    #                 },
+    #                 hls_s3_settings: {
+    #                   canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
     #                 },
     #                 hls_webdav_settings: {
     #                   connection_retry_interval: 1,
@@ -1648,6 +1662,12 @@ module Aws::MediaLive
     #                   pid: 1,
     #                 },
     #                 teletext_source_settings: {
+    #                   output_rectangle: {
+    #                     height: 1.0, # required
+    #                     left_offset: 1.0, # required
+    #                     top_offset: 1.0, # required
+    #                     width: 1.0, # required
+    #                   },
     #                   page_number: "__string",
     #                 },
     #               },
@@ -1841,6 +1861,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.copyright_holder #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
@@ -1864,9 +1885,11 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups #=> Array
     #   resp.channel.encoder_settings.output_groups[0].name #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.archive_cdn_settings.archive_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.rollover_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.destination.destination_ref_id #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.frame_capture_cdn_settings.frame_capture_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
@@ -1901,6 +1924,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.media_store_storage_class #=> String, one of "TEMPORAL"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.num_retries #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.restart_delay #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.connection_retry_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.filecache_duration #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
@@ -2255,6 +2279,10 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.source_608_channel_number #=> Integer
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.pid #=> Integer
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.height #=> Float
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.left_offset #=> Float
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.top_offset #=> Float
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.width #=> Float
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.page_number #=> String
     #   resp.channel.input_attachments[0].input_settings.deblock_filter #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.input_attachments[0].input_settings.denoise_filter #=> String, one of "DISABLED", "ENABLED"
@@ -2868,6 +2896,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.copyright_holder #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
@@ -2891,9 +2920,11 @@ module Aws::MediaLive
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups #=> Array
     #   resp.encoder_settings.output_groups[0].name #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.archive_cdn_settings.archive_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.rollover_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.frame_capture_cdn_settings.frame_capture_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
@@ -2928,6 +2959,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.media_store_storage_class #=> String, one of "TEMPORAL"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.num_retries #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.restart_delay #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.connection_retry_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.filecache_duration #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
@@ -3282,6 +3314,10 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.source_608_channel_number #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.pid #=> Integer
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.height #=> Float
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.left_offset #=> Float
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.top_offset #=> Float
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.width #=> Float
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.page_number #=> String
     #   resp.input_attachments[0].input_settings.deblock_filter #=> String, one of "DISABLED", "ENABLED"
     #   resp.input_attachments[0].input_settings.denoise_filter #=> String, one of "DISABLED", "ENABLED"
@@ -3766,6 +3802,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.copyright_holder #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
@@ -3789,9 +3826,11 @@ module Aws::MediaLive
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups #=> Array
     #   resp.encoder_settings.output_groups[0].name #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.archive_cdn_settings.archive_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.rollover_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.frame_capture_cdn_settings.frame_capture_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
@@ -3826,6 +3865,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.media_store_storage_class #=> String, one of "TEMPORAL"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.num_retries #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.restart_delay #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.connection_retry_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.filecache_duration #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
@@ -4180,6 +4220,10 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.source_608_channel_number #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.pid #=> Integer
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.height #=> Float
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.left_offset #=> Float
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.top_offset #=> Float
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.width #=> Float
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.page_number #=> String
     #   resp.input_attachments[0].input_settings.deblock_filter #=> String, one of "DISABLED", "ENABLED"
     #   resp.input_attachments[0].input_settings.denoise_filter #=> String, one of "DISABLED", "ENABLED"
@@ -4865,6 +4909,10 @@ module Aws::MediaLive
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.source_608_channel_number #=> Integer
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.pid #=> Integer
+    #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.height #=> Float
+    #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.left_offset #=> Float
+    #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.top_offset #=> Float
+    #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.width #=> Float
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.page_number #=> String
     #   resp.channels[0].input_attachments[0].input_settings.deblock_filter #=> String, one of "DISABLED", "ENABLED"
     #   resp.channels[0].input_attachments[0].input_settings.denoise_filter #=> String, one of "DISABLED", "ENABLED"
@@ -4939,6 +4987,7 @@ module Aws::MediaLive
     #   resp.input_device_transfers[0].id #=> String
     #   resp.input_device_transfers[0].message #=> String
     #   resp.input_device_transfers[0].target_customer_id #=> String
+    #   resp.input_device_transfers[0].target_region #=> String
     #   resp.input_device_transfers[0].transfer_type #=> String, one of "OUTGOING", "INCOMING"
     #   resp.next_token #=> String
     #
@@ -5661,6 +5710,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.copyright_holder #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
@@ -5684,9 +5734,11 @@ module Aws::MediaLive
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups #=> Array
     #   resp.encoder_settings.output_groups[0].name #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.archive_cdn_settings.archive_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.rollover_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.frame_capture_cdn_settings.frame_capture_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
@@ -5721,6 +5773,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.media_store_storage_class #=> String, one of "TEMPORAL"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.num_retries #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.restart_delay #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.connection_retry_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.filecache_duration #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
@@ -6075,6 +6128,10 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.source_608_channel_number #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.pid #=> Integer
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.height #=> Float
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.left_offset #=> Float
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.top_offset #=> Float
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.width #=> Float
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.page_number #=> String
     #   resp.input_attachments[0].input_settings.deblock_filter #=> String, one of "DISABLED", "ENABLED"
     #   resp.input_attachments[0].input_settings.denoise_filter #=> String, one of "DISABLED", "ENABLED"
@@ -6341,6 +6398,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.copyright_holder #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
@@ -6364,9 +6422,11 @@ module Aws::MediaLive
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups #=> Array
     #   resp.encoder_settings.output_groups[0].name #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.archive_cdn_settings.archive_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.rollover_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.destination.destination_ref_id #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.frame_capture_cdn_settings.frame_capture_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
@@ -6401,6 +6461,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.media_store_storage_class #=> String, one of "TEMPORAL"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.num_retries #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.restart_delay #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.connection_retry_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.filecache_duration #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
@@ -6755,6 +6816,10 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.source_608_channel_number #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.pid #=> Integer
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.height #=> Float
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.left_offset #=> Float
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.top_offset #=> Float
+    #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.width #=> Float
     #   resp.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.page_number #=> String
     #   resp.input_attachments[0].input_settings.deblock_filter #=> String, one of "DISABLED", "ENABLED"
     #   resp.input_attachments[0].input_settings.denoise_filter #=> String, one of "DISABLED", "ENABLED"
@@ -7118,6 +7183,7 @@ module Aws::MediaLive
     #             },
     #             ebu_tt_d_destination_settings: {
     #               fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
+    #               copyright_holder: "__stringMax1000",
     #               font_family: "__string",
     #               style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #             },
@@ -7176,6 +7242,11 @@ module Aws::MediaLive
     #           name: "__stringMax32",
     #           output_group_settings: { # required
     #             archive_group_settings: {
+    #               archive_cdn_settings: {
+    #                 archive_s3_settings: {
+    #                   canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #                 },
+    #               },
     #               destination: { # required
     #                 destination_ref_id: "__string",
     #               },
@@ -7184,6 +7255,11 @@ module Aws::MediaLive
     #             frame_capture_group_settings: {
     #               destination: { # required
     #                 destination_ref_id: "__string",
+    #               },
+    #               frame_capture_cdn_settings: {
+    #                 frame_capture_s3_settings: {
+    #                   canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #                 },
     #               },
     #             },
     #             hls_group_settings: {
@@ -7231,6 +7307,9 @@ module Aws::MediaLive
     #                   media_store_storage_class: "TEMPORAL", # accepts TEMPORAL
     #                   num_retries: 1,
     #                   restart_delay: 1,
+    #                 },
+    #                 hls_s3_settings: {
+    #                   canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
     #                 },
     #                 hls_webdav_settings: {
     #                   connection_retry_interval: 1,
@@ -7764,6 +7843,12 @@ module Aws::MediaLive
     #                   pid: 1,
     #                 },
     #                 teletext_source_settings: {
+    #                   output_rectangle: {
+    #                     height: 1.0, # required
+    #                     left_offset: 1.0, # required
+    #                     top_offset: 1.0, # required
+    #                     width: 1.0, # required
+    #                   },
     #                   page_number: "__string",
     #                 },
     #               },
@@ -7947,6 +8032,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.copyright_holder #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
@@ -7970,9 +8056,11 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups #=> Array
     #   resp.channel.encoder_settings.output_groups[0].name #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.archive_cdn_settings.archive_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.rollover_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.destination.destination_ref_id #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.frame_capture_cdn_settings.frame_capture_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
@@ -8007,6 +8095,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.media_store_storage_class #=> String, one of "TEMPORAL"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.num_retries #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.restart_delay #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.connection_retry_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.filecache_duration #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
@@ -8361,6 +8450,10 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.source_608_channel_number #=> Integer
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.pid #=> Integer
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.height #=> Float
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.left_offset #=> Float
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.top_offset #=> Float
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.width #=> Float
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.page_number #=> String
     #   resp.channel.input_attachments[0].input_settings.deblock_filter #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.input_attachments[0].input_settings.denoise_filter #=> String, one of "DISABLED", "ENABLED"
@@ -8588,6 +8681,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.fill_line_gap #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.copyright_holder #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.font_family #=> String
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ebu_tt_d_destination_settings.style_control #=> String, one of "EXCLUDE", "INCLUDE"
     #   resp.channel.encoder_settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_control #=> String, one of "PASSTHROUGH", "USE_CONFIGURED"
@@ -8611,9 +8705,11 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups #=> Array
     #   resp.channel.encoder_settings.output_groups[0].name #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.archive_cdn_settings.archive_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.rollover_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.destination.destination_ref_id #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.frame_capture_group_settings.frame_capture_cdn_settings.frame_capture_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
@@ -8648,6 +8744,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.media_store_storage_class #=> String, one of "TEMPORAL"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.num_retries #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_media_store_settings.restart_delay #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_s3_settings.canned_acl #=> String, one of "AUTHENTICATED_READ", "BUCKET_OWNER_FULL_CONTROL", "BUCKET_OWNER_READ", "PUBLIC_READ"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.connection_retry_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.filecache_duration #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
@@ -9002,6 +9099,10 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.convert_608_to_708 #=> String, one of "DISABLED", "UPCONVERT"
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_20_source_settings.source_608_channel_number #=> Integer
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.scte_27_source_settings.pid #=> Integer
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.height #=> Float
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.left_offset #=> Float
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.top_offset #=> Float
+    #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.output_rectangle.width #=> Float
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].selector_settings.teletext_source_settings.page_number #=> String
     #   resp.channel.input_attachments[0].input_settings.deblock_filter #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.input_attachments[0].input_settings.denoise_filter #=> String, one of "DISABLED", "ENABLED"
@@ -9475,7 +9576,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

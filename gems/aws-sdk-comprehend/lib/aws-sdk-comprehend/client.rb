@@ -621,6 +621,44 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Analyzes input text for the presence of personally identifiable
+    # information (PII) and returns the labels of identified PII entity
+    # types such as name, address, bank account number, or phone number.
+    #
+    # @option params [required, String] :text
+    #   Creates a new document classification request to analyze a single
+    #   document in real-time, returning personally identifiable information
+    #   (PII) entity labels.
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input documents.
+    #
+    # @return [Types::ContainsPiiEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ContainsPiiEntitiesResponse#labels #labels} => Array&lt;Types::EntityLabel&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.contains_pii_entities({
+    #     text: "String", # required
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.labels #=> Array
+    #   resp.labels[0].name #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "ALL"
+    #   resp.labels[0].score #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ContainsPiiEntities AWS API Documentation
+    #
+    # @overload contains_pii_entities(params = {})
+    # @param [Hash] params ({})
+    def contains_pii_entities(params = {}, options = {})
+      req = build_request(:contains_pii_entities, params)
+      req.send_request(options)
+    end
+
     # Creates a new document classifier that you can use to categorize
     # documents. To create a classifier, you provide a set of training
     # documents that labeled with the categories that you want to use. After
@@ -3680,7 +3718,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -218,6 +218,29 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Archive Cdn Settings
+    #
+    # @note When making an API call, you may pass ArchiveCdnSettings
+    #   data as a hash:
+    #
+    #       {
+    #         archive_s3_settings: {
+    #           canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #         },
+    #       }
+    #
+    # @!attribute [rw] archive_s3_settings
+    #   Archive S3 Settings
+    #   @return [Types::ArchiveS3Settings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ArchiveCdnSettings AWS API Documentation
+    #
+    class ArchiveCdnSettings < Struct.new(
+      :archive_s3_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Archive Container Settings
     #
     # @note When making an API call, you may pass ArchiveContainerSettings
@@ -311,11 +334,20 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         archive_cdn_settings: {
+    #           archive_s3_settings: {
+    #             canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #           },
+    #         },
     #         destination: { # required
     #           destination_ref_id: "__string",
     #         },
     #         rollover_interval: 1,
     #       }
+    #
+    # @!attribute [rw] archive_cdn_settings
+    #   Parameters that control interactions with the CDN.
+    #   @return [Types::ArchiveCdnSettings]
     #
     # @!attribute [rw] destination
     #   A directory and base filename where archive files should be written.
@@ -329,6 +361,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ArchiveGroupSettings AWS API Documentation
     #
     class ArchiveGroupSettings < Struct.new(
+      :archive_cdn_settings,
       :destination,
       :rollover_interval)
       SENSITIVE = []
@@ -429,6 +462,28 @@ module Aws::MediaLive
       :container_settings,
       :extension,
       :name_modifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Archive S3 Settings
+    #
+    # @note When making an API call, you may pass ArchiveS3Settings
+    #   data as a hash:
+    #
+    #       {
+    #         canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #       }
+    #
+    # @!attribute [rw] canned_acl
+    #   Specify the canned ACL to apply to each S3 request. Defaults to
+    #   none.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ArchiveS3Settings AWS API Documentation
+    #
+    class ArchiveS3Settings < Struct.new(
+      :canned_acl)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2229,6 +2284,7 @@ module Aws::MediaLive
     #           },
     #           ebu_tt_d_destination_settings: {
     #             fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
+    #             copyright_holder: "__stringMax1000",
     #             font_family: "__string",
     #             style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #           },
@@ -2350,6 +2406,7 @@ module Aws::MediaLive
     #         },
     #         ebu_tt_d_destination_settings: {
     #           fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
+    #           copyright_holder: "__stringMax1000",
     #           font_family: "__string",
     #           style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #         },
@@ -2483,6 +2540,75 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Caption Rectangle
+    #
+    # @note When making an API call, you may pass CaptionRectangle
+    #   data as a hash:
+    #
+    #       {
+    #         height: 1.0, # required
+    #         left_offset: 1.0, # required
+    #         top_offset: 1.0, # required
+    #         width: 1.0, # required
+    #       }
+    #
+    # @!attribute [rw] height
+    #   See the description in leftOffset. For height, specify the entire
+    #   height of the rectangle as a percentage of the underlying frame
+    #   height. For example, \\"80\\" means the rectangle height is 80% of
+    #   the underlying frame height. The topOffset and rectangleHeight must
+    #   add up to 100% or less. This field corresponds to tts:extent - Y in
+    #   the TTML standard.
+    #   @return [Float]
+    #
+    # @!attribute [rw] left_offset
+    #   Applies only if you plan to convert these source captions to
+    #   EBU-TT-D or TTML in an output. (Make sure to leave the default if
+    #   you don't have either of these formats in the output.) You can
+    #   define a display rectangle for the captions that is smaller than the
+    #   underlying video frame. You define the rectangle by specifying the
+    #   position of the left edge, top edge, bottom edge, and right edge of
+    #   the rectangle, all within the underlying video frame. The units for
+    #   the measurements are percentages. If you specify a value for one of
+    #   these fields, you must specify a value for all of them. For
+    #   leftOffset, specify the position of the left edge of the rectangle,
+    #   as a percentage of the underlying frame width, and relative to the
+    #   left edge of the frame. For example, \\"10\\" means the
+    #   measurement is 10% of the underlying frame width. The rectangle left
+    #   edge starts at that position from the left edge of the frame. This
+    #   field corresponds to tts:origin - X in the TTML standard.
+    #   @return [Float]
+    #
+    # @!attribute [rw] top_offset
+    #   See the description in leftOffset. For topOffset, specify the
+    #   position of the top edge of the rectangle, as a percentage of the
+    #   underlying frame height, and relative to the top edge of the frame.
+    #   For example, \\"10\\" means the measurement is 10% of the
+    #   underlying frame height. The rectangle top edge starts at that
+    #   position from the top edge of the frame. This field corresponds to
+    #   tts:origin - Y in the TTML standard.
+    #   @return [Float]
+    #
+    # @!attribute [rw] width
+    #   See the description in leftOffset. For width, specify the entire
+    #   width of the rectangle as a percentage of the underlying frame
+    #   width. For example, \\"80\\" means the rectangle width is 80% of
+    #   the underlying frame width. The leftOffset and rectangleWidth must
+    #   add up to 100% or less. This field corresponds to tts:extent - X in
+    #   the TTML standard.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CaptionRectangle AWS API Documentation
+    #
+    class CaptionRectangle < Struct.new(
+      :height,
+      :left_offset,
+      :top_offset,
+      :width)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Output groups for this Live Event. Output groups contain information
     # about where streams should be distributed.
     #
@@ -2515,6 +2641,12 @@ module Aws::MediaLive
     #             pid: 1,
     #           },
     #           teletext_source_settings: {
+    #             output_rectangle: {
+    #               height: 1.0, # required
+    #               left_offset: 1.0, # required
+    #               top_offset: 1.0, # required
+    #               width: 1.0, # required
+    #             },
     #             page_number: "__string",
     #           },
     #         },
@@ -2573,6 +2705,12 @@ module Aws::MediaLive
     #           pid: 1,
     #         },
     #         teletext_source_settings: {
+    #           output_rectangle: {
+    #             height: 1.0, # required
+    #             left_offset: 1.0, # required
+    #             top_offset: 1.0, # required
+    #             width: 1.0, # required
+    #           },
     #           page_number: "__string",
     #         },
     #       }
@@ -3148,6 +3286,7 @@ module Aws::MediaLive
     #                 },
     #                 ebu_tt_d_destination_settings: {
     #                   fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
+    #                   copyright_holder: "__stringMax1000",
     #                   font_family: "__string",
     #                   style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #                 },
@@ -3206,6 +3345,11 @@ module Aws::MediaLive
     #               name: "__stringMax32",
     #               output_group_settings: { # required
     #                 archive_group_settings: {
+    #                   archive_cdn_settings: {
+    #                     archive_s3_settings: {
+    #                       canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #                     },
+    #                   },
     #                   destination: { # required
     #                     destination_ref_id: "__string",
     #                   },
@@ -3214,6 +3358,11 @@ module Aws::MediaLive
     #                 frame_capture_group_settings: {
     #                   destination: { # required
     #                     destination_ref_id: "__string",
+    #                   },
+    #                   frame_capture_cdn_settings: {
+    #                     frame_capture_s3_settings: {
+    #                       canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #                     },
     #                   },
     #                 },
     #                 hls_group_settings: {
@@ -3261,6 +3410,9 @@ module Aws::MediaLive
     #                       media_store_storage_class: "TEMPORAL", # accepts TEMPORAL
     #                       num_retries: 1,
     #                       restart_delay: 1,
+    #                     },
+    #                     hls_s3_settings: {
+    #                       canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
     #                     },
     #                     hls_webdav_settings: {
     #                       connection_retry_interval: 1,
@@ -3794,6 +3946,12 @@ module Aws::MediaLive
     #                       pid: 1,
     #                     },
     #                     teletext_source_settings: {
+    #                       output_rectangle: {
+    #                         height: 1.0, # required
+    #                         left_offset: 1.0, # required
+    #                         top_offset: 1.0, # required
+    #                         width: 1.0, # required
+    #                       },
     #                       page_number: "__string",
     #                     },
     #                   },
@@ -6083,6 +6241,7 @@ module Aws::MediaLive
     #
     #       {
     #         fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
+    #         copyright_holder: "__stringMax1000",
     #         font_family: "__string",
     #         style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #       }
@@ -6092,6 +6251,13 @@ module Aws::MediaLive
     #   captions). - enabled: Fill with the captions background color (as
     #   specified in the input captions). - disabled: Leave the gap
     #   unfilled.
+    #   @return [String]
+    #
+    # @!attribute [rw] copyright_holder
+    #   Applies only if you plan to convert these source captions to
+    #   EBU-TT-D or TTML in an output. Complete this field if you want to
+    #   include the name of the copyright holder in the copyright metadata
+    #   tag in the TTML
     #   @return [String]
     #
     # @!attribute [rw] font_family
@@ -6126,6 +6292,7 @@ module Aws::MediaLive
     #
     class EbuTtDDestinationSettings < Struct.new(
       :fill_line_gap,
+      :copyright_holder,
       :font_family,
       :style_control)
       SENSITIVE = []
@@ -6380,6 +6547,7 @@ module Aws::MediaLive
     #               },
     #               ebu_tt_d_destination_settings: {
     #                 fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
+    #                 copyright_holder: "__stringMax1000",
     #                 font_family: "__string",
     #                 style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #               },
@@ -6438,6 +6606,11 @@ module Aws::MediaLive
     #             name: "__stringMax32",
     #             output_group_settings: { # required
     #               archive_group_settings: {
+    #                 archive_cdn_settings: {
+    #                   archive_s3_settings: {
+    #                     canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #                   },
+    #                 },
     #                 destination: { # required
     #                   destination_ref_id: "__string",
     #                 },
@@ -6446,6 +6619,11 @@ module Aws::MediaLive
     #               frame_capture_group_settings: {
     #                 destination: { # required
     #                   destination_ref_id: "__string",
+    #                 },
+    #                 frame_capture_cdn_settings: {
+    #                   frame_capture_s3_settings: {
+    #                     canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #                   },
     #                 },
     #               },
     #               hls_group_settings: {
@@ -6493,6 +6671,9 @@ module Aws::MediaLive
     #                     media_store_storage_class: "TEMPORAL", # accepts TEMPORAL
     #                     num_retries: 1,
     #                     restart_delay: 1,
+    #                   },
+    #                   hls_s3_settings: {
+    #                     canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
     #                   },
     #                   hls_webdav_settings: {
     #                     connection_retry_interval: 1,
@@ -7257,6 +7438,29 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Frame Capture Cdn Settings
+    #
+    # @note When making an API call, you may pass FrameCaptureCdnSettings
+    #   data as a hash:
+    #
+    #       {
+    #         frame_capture_s3_settings: {
+    #           canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #         },
+    #       }
+    #
+    # @!attribute [rw] frame_capture_s3_settings
+    #   Frame Capture S3 Settings
+    #   @return [Types::FrameCaptureS3Settings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureCdnSettings AWS API Documentation
+    #
+    class FrameCaptureCdnSettings < Struct.new(
+      :frame_capture_s3_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Frame Capture Group Settings
     #
     # @note When making an API call, you may pass FrameCaptureGroupSettings
@@ -7265,6 +7469,11 @@ module Aws::MediaLive
     #       {
     #         destination: { # required
     #           destination_ref_id: "__string",
+    #         },
+    #         frame_capture_cdn_settings: {
+    #           frame_capture_s3_settings: {
+    #             canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #           },
     #         },
     #       }
     #
@@ -7280,10 +7489,15 @@ module Aws::MediaLive
     #   curling-low.00001.jpg
     #   @return [Types::OutputLocationRef]
     #
+    # @!attribute [rw] frame_capture_cdn_settings
+    #   Parameters that control interactions with the CDN.
+    #   @return [Types::FrameCaptureCdnSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureGroupSettings AWS API Documentation
     #
     class FrameCaptureGroupSettings < Struct.new(
-      :destination)
+      :destination,
+      :frame_capture_cdn_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7314,6 +7528,28 @@ module Aws::MediaLive
     #
     class FrameCaptureOutputSettings < Struct.new(
       :name_modifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Frame Capture S3 Settings
+    #
+    # @note When making an API call, you may pass FrameCaptureS3Settings
+    #   data as a hash:
+    #
+    #       {
+    #         canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #       }
+    #
+    # @!attribute [rw] canned_acl
+    #   Specify the canned ACL to apply to each S3 request. Defaults to
+    #   none.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureS3Settings AWS API Documentation
+    #
+    class FrameCaptureS3Settings < Struct.new(
+      :canned_acl)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7777,7 +8013,8 @@ module Aws::MediaLive
     #
     # @!attribute [rw] softness
     #   Softness. Selects quantizer matrix, larger values reduce
-    #   high-frequency content in the encoded image.
+    #   high-frequency content in the encoded image. If not set to zero,
+    #   must be greater than 15.
     #   @return [Integer]
     #
     # @!attribute [rw] spatial_aq
@@ -8343,6 +8580,9 @@ module Aws::MediaLive
     #           num_retries: 1,
     #           restart_delay: 1,
     #         },
+    #         hls_s3_settings: {
+    #           canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #         },
     #         hls_webdav_settings: {
     #           connection_retry_interval: 1,
     #           filecache_duration: 1,
@@ -8364,6 +8604,10 @@ module Aws::MediaLive
     #   Hls Media Store Settings
     #   @return [Types::HlsMediaStoreSettings]
     #
+    # @!attribute [rw] hls_s3_settings
+    #   Hls S3 Settings
+    #   @return [Types::HlsS3Settings]
+    #
     # @!attribute [rw] hls_webdav_settings
     #   Hls Webdav Settings
     #   @return [Types::HlsWebdavSettings]
@@ -8374,6 +8618,7 @@ module Aws::MediaLive
       :hls_akamai_settings,
       :hls_basic_put_settings,
       :hls_media_store_settings,
+      :hls_s3_settings,
       :hls_webdav_settings)
       SENSITIVE = []
       include Aws::Structure
@@ -8429,6 +8674,9 @@ module Aws::MediaLive
     #             media_store_storage_class: "TEMPORAL", # accepts TEMPORAL
     #             num_retries: 1,
     #             restart_delay: 1,
+    #           },
+    #           hls_s3_settings: {
+    #             canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
     #           },
     #           hls_webdav_settings: {
     #             connection_retry_interval: 1,
@@ -9010,6 +9258,28 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Hls S3 Settings
+    #
+    # @note When making an API call, you may pass HlsS3Settings
+    #   data as a hash:
+    #
+    #       {
+    #         canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #       }
+    #
+    # @!attribute [rw] canned_acl
+    #   Specify the canned ACL to apply to each S3 request. Defaults to
+    #   none.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsS3Settings AWS API Documentation
+    #
+    class HlsS3Settings < Struct.new(
+      :canned_acl)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Hls Settings
     #
     # @note When making an API call, you may pass HlsSettings
@@ -9336,6 +9606,12 @@ module Aws::MediaLive
     #                   pid: 1,
     #                 },
     #                 teletext_source_settings: {
+    #                   output_rectangle: {
+    #                     height: 1.0, # required
+    #                     left_offset: 1.0, # required
+    #                     top_offset: 1.0, # required
+    #                     width: 1.0, # required
+    #                   },
     #                   page_number: "__string",
     #                 },
     #               },
@@ -10202,6 +10478,12 @@ module Aws::MediaLive
     #                 pid: 1,
     #               },
     #               teletext_source_settings: {
+    #                 output_rectangle: {
+    #                   height: 1.0, # required
+    #                   left_offset: 1.0, # required
+    #                   top_offset: 1.0, # required
+    #                   width: 1.0, # required
+    #                 },
     #                 page_number: "__string",
     #               },
     #             },
@@ -13341,6 +13623,11 @@ module Aws::MediaLive
     #         name: "__stringMax32",
     #         output_group_settings: { # required
     #           archive_group_settings: {
+    #             archive_cdn_settings: {
+    #               archive_s3_settings: {
+    #                 canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #               },
+    #             },
     #             destination: { # required
     #               destination_ref_id: "__string",
     #             },
@@ -13349,6 +13636,11 @@ module Aws::MediaLive
     #           frame_capture_group_settings: {
     #             destination: { # required
     #               destination_ref_id: "__string",
+    #             },
+    #             frame_capture_cdn_settings: {
+    #               frame_capture_s3_settings: {
+    #                 canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #               },
     #             },
     #           },
     #           hls_group_settings: {
@@ -13396,6 +13688,9 @@ module Aws::MediaLive
     #                 media_store_storage_class: "TEMPORAL", # accepts TEMPORAL
     #                 num_retries: 1,
     #                 restart_delay: 1,
+    #               },
+    #               hls_s3_settings: {
+    #                 canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
     #               },
     #               hls_webdav_settings: {
     #                 connection_retry_interval: 1,
@@ -13738,6 +14033,11 @@ module Aws::MediaLive
     #
     #       {
     #         archive_group_settings: {
+    #           archive_cdn_settings: {
+    #             archive_s3_settings: {
+    #               canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #             },
+    #           },
     #           destination: { # required
     #             destination_ref_id: "__string",
     #           },
@@ -13746,6 +14046,11 @@ module Aws::MediaLive
     #         frame_capture_group_settings: {
     #           destination: { # required
     #             destination_ref_id: "__string",
+    #           },
+    #           frame_capture_cdn_settings: {
+    #             frame_capture_s3_settings: {
+    #               canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #             },
     #           },
     #         },
     #         hls_group_settings: {
@@ -13793,6 +14098,9 @@ module Aws::MediaLive
     #               media_store_storage_class: "TEMPORAL", # accepts TEMPORAL
     #               num_retries: 1,
     #               restart_delay: 1,
+    #             },
+    #             hls_s3_settings: {
+    #               canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
     #             },
     #             hls_webdav_settings: {
     #               connection_retry_interval: 1,
@@ -16280,8 +16588,19 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         output_rectangle: {
+    #           height: 1.0, # required
+    #           left_offset: 1.0, # required
+    #           top_offset: 1.0, # required
+    #           width: 1.0, # required
+    #         },
     #         page_number: "__string",
     #       }
+    #
+    # @!attribute [rw] output_rectangle
+    #   Optionally defines a region where TTML style captions will be
+    #   displayed
+    #   @return [Types::CaptionRectangle]
     #
     # @!attribute [rw] page_number
     #   Specifies the teletext page number within the data stream from which
@@ -16293,6 +16612,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TeletextSourceSettings AWS API Documentation
     #
     class TeletextSourceSettings < Struct.new(
+      :output_rectangle,
       :page_number)
       SENSITIVE = []
       include Aws::Structure
@@ -16470,6 +16790,9 @@ module Aws::MediaLive
     #   The AWS account ID for the recipient of the input device transfer.
     #   @return [String]
     #
+    # @!attribute [rw] target_region
+    #   @return [String]
+    #
     # @!attribute [rw] transfer_type
     #   The type (direction) of the input device transfer.
     #   @return [String]
@@ -16480,6 +16803,7 @@ module Aws::MediaLive
       :id,
       :message,
       :target_customer_id,
+      :target_region,
       :transfer_type)
       SENSITIVE = []
       include Aws::Structure
@@ -17092,6 +17416,7 @@ module Aws::MediaLive
     #                 },
     #                 ebu_tt_d_destination_settings: {
     #                   fill_line_gap: "DISABLED", # accepts DISABLED, ENABLED
+    #                   copyright_holder: "__stringMax1000",
     #                   font_family: "__string",
     #                   style_control: "EXCLUDE", # accepts EXCLUDE, INCLUDE
     #                 },
@@ -17150,6 +17475,11 @@ module Aws::MediaLive
     #               name: "__stringMax32",
     #               output_group_settings: { # required
     #                 archive_group_settings: {
+    #                   archive_cdn_settings: {
+    #                     archive_s3_settings: {
+    #                       canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #                     },
+    #                   },
     #                   destination: { # required
     #                     destination_ref_id: "__string",
     #                   },
@@ -17158,6 +17488,11 @@ module Aws::MediaLive
     #                 frame_capture_group_settings: {
     #                   destination: { # required
     #                     destination_ref_id: "__string",
+    #                   },
+    #                   frame_capture_cdn_settings: {
+    #                     frame_capture_s3_settings: {
+    #                       canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
+    #                     },
     #                   },
     #                 },
     #                 hls_group_settings: {
@@ -17205,6 +17540,9 @@ module Aws::MediaLive
     #                       media_store_storage_class: "TEMPORAL", # accepts TEMPORAL
     #                       num_retries: 1,
     #                       restart_delay: 1,
+    #                     },
+    #                     hls_s3_settings: {
+    #                       canned_acl: "AUTHENTICATED_READ", # accepts AUTHENTICATED_READ, BUCKET_OWNER_FULL_CONTROL, BUCKET_OWNER_READ, PUBLIC_READ
     #                     },
     #                     hls_webdav_settings: {
     #                       connection_retry_interval: 1,
@@ -17738,6 +18076,12 @@ module Aws::MediaLive
     #                       pid: 1,
     #                     },
     #                     teletext_source_settings: {
+    #                       output_rectangle: {
+    #                         height: 1.0, # required
+    #                         left_offset: 1.0, # required
+    #                         top_offset: 1.0, # required
+    #                         width: 1.0, # required
+    #                       },
     #                       page_number: "__string",
     #                     },
     #                   },
