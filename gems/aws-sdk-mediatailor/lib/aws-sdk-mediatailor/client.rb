@@ -327,6 +327,343 @@ module Aws::MediaTailor
 
     # @!group API Operations
 
+    # Creates a channel.
+    #
+    # @option params [required, String] :channel_name
+    #
+    # @option params [required, Array<Types::RequestOutputItem>] :outputs
+    #   The channel's output properties.
+    #
+    # @option params [required, String] :playback_mode
+    #   The type of playback mode for this channel. The only supported value
+    #   is LOOP.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to assign to the channel.
+    #
+    # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateChannelResponse#arn #arn} => String
+    #   * {Types::CreateChannelResponse#channel_name #channel_name} => String
+    #   * {Types::CreateChannelResponse#channel_state #channel_state} => String
+    #   * {Types::CreateChannelResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateChannelResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::CreateChannelResponse#outputs #outputs} => Array&lt;Types::ResponseOutputItem&gt;
+    #   * {Types::CreateChannelResponse#playback_mode #playback_mode} => String
+    #   * {Types::CreateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_channel({
+    #     channel_name: "__string", # required
+    #     outputs: [ # required
+    #       {
+    #         dash_playlist_settings: {
+    #           manifest_window_seconds: 1,
+    #           min_buffer_time_seconds: 1,
+    #           min_update_period_seconds: 1,
+    #           suggested_presentation_delay_seconds: 1,
+    #         },
+    #         hls_playlist_settings: {
+    #           manifest_window_seconds: 1,
+    #         },
+    #         manifest_name: "__string", # required
+    #         source_group: "__string", # required
+    #       },
+    #     ],
+    #     playback_mode: "LOOP", # required, accepts LOOP
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.channel_name #=> String
+    #   resp.channel_state #=> String, one of "RUNNING", "STOPPED"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.outputs #=> Array
+    #   resp.outputs[0].dash_playlist_settings.manifest_window_seconds #=> Integer
+    #   resp.outputs[0].dash_playlist_settings.min_buffer_time_seconds #=> Integer
+    #   resp.outputs[0].dash_playlist_settings.min_update_period_seconds #=> Integer
+    #   resp.outputs[0].dash_playlist_settings.suggested_presentation_delay_seconds #=> Integer
+    #   resp.outputs[0].hls_playlist_settings.manifest_window_seconds #=> Integer
+    #   resp.outputs[0].manifest_name #=> String
+    #   resp.outputs[0].playback_url #=> String
+    #   resp.outputs[0].source_group #=> String
+    #   resp.playback_mode #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateChannel AWS API Documentation
+    #
+    # @overload create_channel(params = {})
+    # @param [Hash] params ({})
+    def create_channel(params = {}, options = {})
+      req = build_request(:create_channel, params)
+      req.send_request(options)
+    end
+
+    # Creates a program.
+    #
+    # @option params [Array<Types::AdBreak>] :ad_breaks
+    #   The ad break configuration settings.
+    #
+    # @option params [required, String] :channel_name
+    #
+    # @option params [required, String] :program_name
+    #
+    # @option params [required, Types::ScheduleConfiguration] :schedule_configuration
+    #   The schedule configuration settings.
+    #
+    # @option params [required, String] :source_location_name
+    #   The name of the source location.
+    #
+    # @option params [required, String] :vod_source_name
+    #   The name that's used to refer to a VOD source.
+    #
+    # @return [Types::CreateProgramResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProgramResponse#ad_breaks #ad_breaks} => Array&lt;Types::AdBreak&gt;
+    #   * {Types::CreateProgramResponse#arn #arn} => String
+    #   * {Types::CreateProgramResponse#channel_name #channel_name} => String
+    #   * {Types::CreateProgramResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateProgramResponse#program_name #program_name} => String
+    #   * {Types::CreateProgramResponse#source_location_name #source_location_name} => String
+    #   * {Types::CreateProgramResponse#vod_source_name #vod_source_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_program({
+    #     ad_breaks: [
+    #       {
+    #         message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT
+    #         offset_millis: 1,
+    #         slate: {
+    #           source_location_name: "__string",
+    #           vod_source_name: "__string",
+    #         },
+    #         splice_insert_message: {
+    #           avail_num: 1,
+    #           avails_expected: 1,
+    #           splice_event_id: 1,
+    #           unique_program_id: 1,
+    #         },
+    #       },
+    #     ],
+    #     channel_name: "__string", # required
+    #     program_name: "__string", # required
+    #     schedule_configuration: { # required
+    #       transition: { # required
+    #         relative_position: "BEFORE_PROGRAM", # required, accepts BEFORE_PROGRAM, AFTER_PROGRAM
+    #         relative_program: "__string",
+    #         type: "__string", # required
+    #       },
+    #     },
+    #     source_location_name: "__string", # required
+    #     vod_source_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ad_breaks #=> Array
+    #   resp.ad_breaks[0].message_type #=> String, one of "SPLICE_INSERT"
+    #   resp.ad_breaks[0].offset_millis #=> Integer
+    #   resp.ad_breaks[0].slate.source_location_name #=> String
+    #   resp.ad_breaks[0].slate.vod_source_name #=> String
+    #   resp.ad_breaks[0].splice_insert_message.avail_num #=> Integer
+    #   resp.ad_breaks[0].splice_insert_message.avails_expected #=> Integer
+    #   resp.ad_breaks[0].splice_insert_message.splice_event_id #=> Integer
+    #   resp.ad_breaks[0].splice_insert_message.unique_program_id #=> Integer
+    #   resp.arn #=> String
+    #   resp.channel_name #=> String
+    #   resp.creation_time #=> Time
+    #   resp.program_name #=> String
+    #   resp.source_location_name #=> String
+    #   resp.vod_source_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateProgram AWS API Documentation
+    #
+    # @overload create_program(params = {})
+    # @param [Hash] params ({})
+    def create_program(params = {}, options = {})
+      req = build_request(:create_program, params)
+      req.send_request(options)
+    end
+
+    # Creates a source location on a specific channel.
+    #
+    # @option params [Types::AccessConfiguration] :access_configuration
+    #   Access configuration parameters. Configures the type of authentication
+    #   used to access content from your source location.
+    #
+    # @option params [Types::DefaultSegmentDeliveryConfiguration] :default_segment_delivery_configuration
+    #   The optional configuration for the server that serves segments.
+    #
+    # @option params [required, Types::HttpConfiguration] :http_configuration
+    #   The source's HTTP package configurations.
+    #
+    # @option params [required, String] :source_location_name
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to assign to the source location.
+    #
+    # @return [Types::CreateSourceLocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSourceLocationResponse#access_configuration #access_configuration} => Types::AccessConfiguration
+    #   * {Types::CreateSourceLocationResponse#arn #arn} => String
+    #   * {Types::CreateSourceLocationResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateSourceLocationResponse#default_segment_delivery_configuration #default_segment_delivery_configuration} => Types::DefaultSegmentDeliveryConfiguration
+    #   * {Types::CreateSourceLocationResponse#http_configuration #http_configuration} => Types::HttpConfiguration
+    #   * {Types::CreateSourceLocationResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::CreateSourceLocationResponse#source_location_name #source_location_name} => String
+    #   * {Types::CreateSourceLocationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_source_location({
+    #     access_configuration: {
+    #       access_type: "S3_SIGV4", # accepts S3_SIGV4
+    #     },
+    #     default_segment_delivery_configuration: {
+    #       base_url: "__string",
+    #     },
+    #     http_configuration: { # required
+    #       base_url: "__string", # required
+    #     },
+    #     source_location_name: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_configuration.access_type #=> String, one of "S3_SIGV4"
+    #   resp.arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.default_segment_delivery_configuration.base_url #=> String
+    #   resp.http_configuration.base_url #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.source_location_name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateSourceLocation AWS API Documentation
+    #
+    # @overload create_source_location(params = {})
+    # @param [Hash] params ({})
+    def create_source_location(params = {}, options = {})
+      req = build_request(:create_source_location, params)
+      req.send_request(options)
+    end
+
+    # Creates name for a specific VOD source in a source location.
+    #
+    # @option params [required, Array<Types::HttpPackageConfiguration>] :http_package_configurations
+    #   An array of HTTP package configuration parameters for this VOD source.
+    #
+    # @option params [required, String] :source_location_name
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to assign to the VOD source.
+    #
+    # @option params [required, String] :vod_source_name
+    #
+    # @return [Types::CreateVodSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVodSourceResponse#arn #arn} => String
+    #   * {Types::CreateVodSourceResponse#creation_time #creation_time} => Time
+    #   * {Types::CreateVodSourceResponse#http_package_configurations #http_package_configurations} => Array&lt;Types::HttpPackageConfiguration&gt;
+    #   * {Types::CreateVodSourceResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::CreateVodSourceResponse#source_location_name #source_location_name} => String
+    #   * {Types::CreateVodSourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateVodSourceResponse#vod_source_name #vod_source_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vod_source({
+    #     http_package_configurations: [ # required
+    #       {
+    #         path: "__string", # required
+    #         source_group: "__string", # required
+    #         type: "DASH", # required, accepts DASH, HLS
+    #       },
+    #     ],
+    #     source_location_name: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #     vod_source_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.http_package_configurations #=> Array
+    #   resp.http_package_configurations[0].path #=> String
+    #   resp.http_package_configurations[0].source_group #=> String
+    #   resp.http_package_configurations[0].type #=> String, one of "DASH", "HLS"
+    #   resp.last_modified_time #=> Time
+    #   resp.source_location_name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #   resp.vod_source_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateVodSource AWS API Documentation
+    #
+    # @overload create_vod_source(params = {})
+    # @param [Hash] params ({})
+    def create_vod_source(params = {}, options = {})
+      req = build_request(:create_vod_source, params)
+      req.send_request(options)
+    end
+
+    # Deletes a channel. You must stop the channel before it can be deleted.
+    #
+    # @option params [required, String] :channel_name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_channel({
+    #     channel_name: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteChannel AWS API Documentation
+    #
+    # @overload delete_channel(params = {})
+    # @param [Hash] params ({})
+    def delete_channel(params = {}, options = {})
+      req = build_request(:delete_channel, params)
+      req.send_request(options)
+    end
+
+    # Deletes a channel's IAM policy.
+    #
+    # @option params [required, String] :channel_name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_channel_policy({
+    #     channel_name: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteChannelPolicy AWS API Documentation
+    #
+    # @overload delete_channel_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_channel_policy(params = {}, options = {})
+      req = build_request(:delete_channel_policy, params)
+      req.send_request(options)
+    end
+
     # Deletes the playback configuration for the specified name.
     #
     # @option params [required, String] :name
@@ -348,6 +685,338 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
+    # Deletes a specific program on a specific channel.
+    #
+    # @option params [required, String] :channel_name
+    #
+    # @option params [required, String] :program_name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_program({
+    #     channel_name: "__string", # required
+    #     program_name: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteProgram AWS API Documentation
+    #
+    # @overload delete_program(params = {})
+    # @param [Hash] params ({})
+    def delete_program(params = {}, options = {})
+      req = build_request(:delete_program, params)
+      req.send_request(options)
+    end
+
+    # Deletes a source location on a specific channel.
+    #
+    # @option params [required, String] :source_location_name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_source_location({
+    #     source_location_name: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteSourceLocation AWS API Documentation
+    #
+    # @overload delete_source_location(params = {})
+    # @param [Hash] params ({})
+    def delete_source_location(params = {}, options = {})
+      req = build_request(:delete_source_location, params)
+      req.send_request(options)
+    end
+
+    # Deletes a specific VOD source in a specific source location.
+    #
+    # @option params [required, String] :source_location_name
+    #
+    # @option params [required, String] :vod_source_name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vod_source({
+    #     source_location_name: "__string", # required
+    #     vod_source_name: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteVodSource AWS API Documentation
+    #
+    # @overload delete_vod_source(params = {})
+    # @param [Hash] params ({})
+    def delete_vod_source(params = {}, options = {})
+      req = build_request(:delete_vod_source, params)
+      req.send_request(options)
+    end
+
+    # Describes the properties of a specific channel.
+    #
+    # @option params [required, String] :channel_name
+    #
+    # @return [Types::DescribeChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeChannelResponse#arn #arn} => String
+    #   * {Types::DescribeChannelResponse#channel_name #channel_name} => String
+    #   * {Types::DescribeChannelResponse#channel_state #channel_state} => String
+    #   * {Types::DescribeChannelResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeChannelResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeChannelResponse#outputs #outputs} => Array&lt;Types::ResponseOutputItem&gt;
+    #   * {Types::DescribeChannelResponse#playback_mode #playback_mode} => String
+    #   * {Types::DescribeChannelResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_channel({
+    #     channel_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.channel_name #=> String
+    #   resp.channel_state #=> String, one of "RUNNING", "STOPPED"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.outputs #=> Array
+    #   resp.outputs[0].dash_playlist_settings.manifest_window_seconds #=> Integer
+    #   resp.outputs[0].dash_playlist_settings.min_buffer_time_seconds #=> Integer
+    #   resp.outputs[0].dash_playlist_settings.min_update_period_seconds #=> Integer
+    #   resp.outputs[0].dash_playlist_settings.suggested_presentation_delay_seconds #=> Integer
+    #   resp.outputs[0].hls_playlist_settings.manifest_window_seconds #=> Integer
+    #   resp.outputs[0].manifest_name #=> String
+    #   resp.outputs[0].playback_url #=> String
+    #   resp.outputs[0].source_group #=> String
+    #   resp.playback_mode #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeChannel AWS API Documentation
+    #
+    # @overload describe_channel(params = {})
+    # @param [Hash] params ({})
+    def describe_channel(params = {}, options = {})
+      req = build_request(:describe_channel, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the properties of the requested program.
+    #
+    # @option params [required, String] :channel_name
+    #
+    # @option params [required, String] :program_name
+    #
+    # @return [Types::DescribeProgramResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeProgramResponse#ad_breaks #ad_breaks} => Array&lt;Types::AdBreak&gt;
+    #   * {Types::DescribeProgramResponse#arn #arn} => String
+    #   * {Types::DescribeProgramResponse#channel_name #channel_name} => String
+    #   * {Types::DescribeProgramResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeProgramResponse#program_name #program_name} => String
+    #   * {Types::DescribeProgramResponse#source_location_name #source_location_name} => String
+    #   * {Types::DescribeProgramResponse#vod_source_name #vod_source_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_program({
+    #     channel_name: "__string", # required
+    #     program_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ad_breaks #=> Array
+    #   resp.ad_breaks[0].message_type #=> String, one of "SPLICE_INSERT"
+    #   resp.ad_breaks[0].offset_millis #=> Integer
+    #   resp.ad_breaks[0].slate.source_location_name #=> String
+    #   resp.ad_breaks[0].slate.vod_source_name #=> String
+    #   resp.ad_breaks[0].splice_insert_message.avail_num #=> Integer
+    #   resp.ad_breaks[0].splice_insert_message.avails_expected #=> Integer
+    #   resp.ad_breaks[0].splice_insert_message.splice_event_id #=> Integer
+    #   resp.ad_breaks[0].splice_insert_message.unique_program_id #=> Integer
+    #   resp.arn #=> String
+    #   resp.channel_name #=> String
+    #   resp.creation_time #=> Time
+    #   resp.program_name #=> String
+    #   resp.source_location_name #=> String
+    #   resp.vod_source_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeProgram AWS API Documentation
+    #
+    # @overload describe_program(params = {})
+    # @param [Hash] params ({})
+    def describe_program(params = {}, options = {})
+      req = build_request(:describe_program, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the properties of the requested source location.
+    #
+    # @option params [required, String] :source_location_name
+    #
+    # @return [Types::DescribeSourceLocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSourceLocationResponse#access_configuration #access_configuration} => Types::AccessConfiguration
+    #   * {Types::DescribeSourceLocationResponse#arn #arn} => String
+    #   * {Types::DescribeSourceLocationResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeSourceLocationResponse#default_segment_delivery_configuration #default_segment_delivery_configuration} => Types::DefaultSegmentDeliveryConfiguration
+    #   * {Types::DescribeSourceLocationResponse#http_configuration #http_configuration} => Types::HttpConfiguration
+    #   * {Types::DescribeSourceLocationResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeSourceLocationResponse#source_location_name #source_location_name} => String
+    #   * {Types::DescribeSourceLocationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_source_location({
+    #     source_location_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_configuration.access_type #=> String, one of "S3_SIGV4"
+    #   resp.arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.default_segment_delivery_configuration.base_url #=> String
+    #   resp.http_configuration.base_url #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.source_location_name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeSourceLocation AWS API Documentation
+    #
+    # @overload describe_source_location(params = {})
+    # @param [Hash] params ({})
+    def describe_source_location(params = {}, options = {})
+      req = build_request(:describe_source_location, params)
+      req.send_request(options)
+    end
+
+    # Provides details about a specific VOD source in a specific source
+    # location.
+    #
+    # @option params [required, String] :source_location_name
+    #
+    # @option params [required, String] :vod_source_name
+    #
+    # @return [Types::DescribeVodSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVodSourceResponse#arn #arn} => String
+    #   * {Types::DescribeVodSourceResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeVodSourceResponse#http_package_configurations #http_package_configurations} => Array&lt;Types::HttpPackageConfiguration&gt;
+    #   * {Types::DescribeVodSourceResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeVodSourceResponse#source_location_name #source_location_name} => String
+    #   * {Types::DescribeVodSourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeVodSourceResponse#vod_source_name #vod_source_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_vod_source({
+    #     source_location_name: "__string", # required
+    #     vod_source_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.http_package_configurations #=> Array
+    #   resp.http_package_configurations[0].path #=> String
+    #   resp.http_package_configurations[0].source_group #=> String
+    #   resp.http_package_configurations[0].type #=> String, one of "DASH", "HLS"
+    #   resp.last_modified_time #=> Time
+    #   resp.source_location_name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #   resp.vod_source_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeVodSource AWS API Documentation
+    #
+    # @overload describe_vod_source(params = {})
+    # @param [Hash] params ({})
+    def describe_vod_source(params = {}, options = {})
+      req = build_request(:describe_vod_source, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a channel's IAM policy.
+    #
+    # @option params [required, String] :channel_name
+    #
+    # @return [Types::GetChannelPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetChannelPolicyResponse#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_channel_policy({
+    #     channel_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetChannelPolicy AWS API Documentation
+    #
+    # @overload get_channel_policy(params = {})
+    # @param [Hash] params ({})
+    def get_channel_policy(params = {}, options = {})
+      req = build_request(:get_channel_policy, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about your channel's schedule.
+    #
+    # @option params [required, String] :channel_name
+    #
+    # @option params [String] :duration_minutes
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::GetChannelScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetChannelScheduleResponse#items #items} => Array&lt;Types::ScheduleEntry&gt;
+    #   * {Types::GetChannelScheduleResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_channel_schedule({
+    #     channel_name: "__string", # required
+    #     duration_minutes: "__string",
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].approximate_duration_seconds #=> Integer
+    #   resp.items[0].approximate_start_time #=> Time
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].channel_name #=> String
+    #   resp.items[0].program_name #=> String
+    #   resp.items[0].source_location_name #=> String
+    #   resp.items[0].vod_source_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetChannelSchedule AWS API Documentation
+    #
+    # @overload get_channel_schedule(params = {})
+    # @param [Hash] params ({})
+    def get_channel_schedule(params = {}, options = {})
+      req = build_request(:get_channel_schedule, params)
+      req.send_request(options)
+    end
+
     # Returns the playback configuration for the specified name.
     #
     # @option params [required, String] :name
@@ -358,13 +1027,13 @@ module Aws::MediaTailor
     #   * {Types::GetPlaybackConfigurationResponse#avail_suppression #avail_suppression} => Types::AvailSuppression
     #   * {Types::GetPlaybackConfigurationResponse#bumper #bumper} => Types::Bumper
     #   * {Types::GetPlaybackConfigurationResponse#cdn_configuration #cdn_configuration} => Types::CdnConfiguration
-    #   * {Types::GetPlaybackConfigurationResponse#personalization_threshold_seconds #personalization_threshold_seconds} => Integer
     #   * {Types::GetPlaybackConfigurationResponse#configuration_aliases #configuration_aliases} => Hash&lt;String,Hash&lt;String,String&gt;&gt;
     #   * {Types::GetPlaybackConfigurationResponse#dash_configuration #dash_configuration} => Types::DashConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#hls_configuration #hls_configuration} => Types::HlsConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#live_pre_roll_configuration #live_pre_roll_configuration} => Types::LivePreRollConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#manifest_processing_rules #manifest_processing_rules} => Types::ManifestProcessingRules
     #   * {Types::GetPlaybackConfigurationResponse#name #name} => String
+    #   * {Types::GetPlaybackConfigurationResponse#personalization_threshold_seconds #personalization_threshold_seconds} => Integer
     #   * {Types::GetPlaybackConfigurationResponse#playback_configuration_arn #playback_configuration_arn} => String
     #   * {Types::GetPlaybackConfigurationResponse#playback_endpoint_prefix #playback_endpoint_prefix} => String
     #   * {Types::GetPlaybackConfigurationResponse#session_initialization_endpoint_prefix #session_initialization_endpoint_prefix} => String
@@ -388,7 +1057,6 @@ module Aws::MediaTailor
     #   resp.bumper.start_url #=> String
     #   resp.cdn_configuration.ad_segment_url_prefix #=> String
     #   resp.cdn_configuration.content_segment_url_prefix #=> String
-    #   resp.personalization_threshold_seconds #=> Integer
     #   resp.configuration_aliases #=> Hash
     #   resp.configuration_aliases["__string"] #=> Hash
     #   resp.configuration_aliases["__string"]["__string"] #=> String
@@ -400,6 +1068,7 @@ module Aws::MediaTailor
     #   resp.live_pre_roll_configuration.max_duration_seconds #=> Integer
     #   resp.manifest_processing_rules.ad_marker_passthrough.enabled #=> Boolean
     #   resp.name #=> String
+    #   resp.personalization_threshold_seconds #=> Integer
     #   resp.playback_configuration_arn #=> String
     #   resp.playback_endpoint_prefix #=> String
     #   resp.session_initialization_endpoint_prefix #=> String
@@ -415,6 +1084,57 @@ module Aws::MediaTailor
     # @param [Hash] params ({})
     def get_playback_configuration(params = {}, options = {})
       req = build_request(:get_playback_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of channels that are associated with this account.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListChannelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListChannelsResponse#items #items} => Array&lt;Types::Channel&gt;
+    #   * {Types::ListChannelsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_channels({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].channel_name #=> String
+    #   resp.items[0].channel_state #=> String
+    #   resp.items[0].creation_time #=> Time
+    #   resp.items[0].last_modified_time #=> Time
+    #   resp.items[0].outputs #=> Array
+    #   resp.items[0].outputs[0].dash_playlist_settings.manifest_window_seconds #=> Integer
+    #   resp.items[0].outputs[0].dash_playlist_settings.min_buffer_time_seconds #=> Integer
+    #   resp.items[0].outputs[0].dash_playlist_settings.min_update_period_seconds #=> Integer
+    #   resp.items[0].outputs[0].dash_playlist_settings.suggested_presentation_delay_seconds #=> Integer
+    #   resp.items[0].outputs[0].hls_playlist_settings.manifest_window_seconds #=> Integer
+    #   resp.items[0].outputs[0].manifest_name #=> String
+    #   resp.items[0].outputs[0].playback_url #=> String
+    #   resp.items[0].outputs[0].source_group #=> String
+    #   resp.items[0].playback_mode #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["__string"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListChannels AWS API Documentation
+    #
+    # @overload list_channels(params = {})
+    # @param [Hash] params ({})
+    def list_channels(params = {}, options = {})
+      req = build_request(:list_channels, params)
       req.send_request(options)
     end
 
@@ -447,9 +1167,12 @@ module Aws::MediaTailor
     #
     #   resp.items #=> Array
     #   resp.items[0].ad_decision_server_url #=> String
+    #   resp.items[0].avail_suppression.mode #=> String, one of "OFF", "BEHIND_LIVE_EDGE"
+    #   resp.items[0].avail_suppression.value #=> String
+    #   resp.items[0].bumper.end_url #=> String
+    #   resp.items[0].bumper.start_url #=> String
     #   resp.items[0].cdn_configuration.ad_segment_url_prefix #=> String
     #   resp.items[0].cdn_configuration.content_segment_url_prefix #=> String
-    #   resp.items[0].personalization_threshold_seconds #=> Integer
     #   resp.items[0].configuration_aliases #=> Hash
     #   resp.items[0].configuration_aliases["__string"] #=> Hash
     #   resp.items[0].configuration_aliases["__string"]["__string"] #=> String
@@ -457,7 +1180,11 @@ module Aws::MediaTailor
     #   resp.items[0].dash_configuration.mpd_location #=> String
     #   resp.items[0].dash_configuration.origin_manifest_type #=> String, one of "SINGLE_PERIOD", "MULTI_PERIOD"
     #   resp.items[0].hls_configuration.manifest_endpoint_prefix #=> String
+    #   resp.items[0].live_pre_roll_configuration.ad_decision_server_url #=> String
+    #   resp.items[0].live_pre_roll_configuration.max_duration_seconds #=> Integer
+    #   resp.items[0].manifest_processing_rules.ad_marker_passthrough.enabled #=> Boolean
     #   resp.items[0].name #=> String
+    #   resp.items[0].personalization_threshold_seconds #=> Integer
     #   resp.items[0].playback_configuration_arn #=> String
     #   resp.items[0].playback_endpoint_prefix #=> String
     #   resp.items[0].session_initialization_endpoint_prefix #=> String
@@ -474,6 +1201,102 @@ module Aws::MediaTailor
     # @param [Hash] params ({})
     def list_playback_configurations(params = {}, options = {})
       req = build_request(:list_playback_configurations, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of programs on a specific channel.
+    #
+    # @option params [required, String] :channel_name
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListProgramsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProgramsResponse#items #items} => Array&lt;Types::Program&gt;
+    #   * {Types::ListProgramsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_programs({
+    #     channel_name: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].ad_breaks #=> Array
+    #   resp.items[0].ad_breaks[0].message_type #=> String, one of "SPLICE_INSERT"
+    #   resp.items[0].ad_breaks[0].offset_millis #=> Integer
+    #   resp.items[0].ad_breaks[0].slate.source_location_name #=> String
+    #   resp.items[0].ad_breaks[0].slate.vod_source_name #=> String
+    #   resp.items[0].ad_breaks[0].splice_insert_message.avail_num #=> Integer
+    #   resp.items[0].ad_breaks[0].splice_insert_message.avails_expected #=> Integer
+    #   resp.items[0].ad_breaks[0].splice_insert_message.splice_event_id #=> Integer
+    #   resp.items[0].ad_breaks[0].splice_insert_message.unique_program_id #=> Integer
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].channel_name #=> String
+    #   resp.items[0].creation_time #=> Time
+    #   resp.items[0].last_modified_time #=> Time
+    #   resp.items[0].program_name #=> String
+    #   resp.items[0].source_location_name #=> String
+    #   resp.items[0].vod_source_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPrograms AWS API Documentation
+    #
+    # @overload list_programs(params = {})
+    # @param [Hash] params ({})
+    def list_programs(params = {}, options = {})
+      req = build_request(:list_programs, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of source locations.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListSourceLocationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSourceLocationsResponse#items #items} => Array&lt;Types::SourceLocation&gt;
+    #   * {Types::ListSourceLocationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_source_locations({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].access_configuration.access_type #=> String, one of "S3_SIGV4"
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].creation_time #=> Time
+    #   resp.items[0].default_segment_delivery_configuration.base_url #=> String
+    #   resp.items[0].http_configuration.base_url #=> String
+    #   resp.items[0].last_modified_time #=> Time
+    #   resp.items[0].source_location_name #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["__string"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListSourceLocations AWS API Documentation
+    #
+    # @overload list_source_locations(params = {})
+    # @param [Hash] params ({})
+    def list_source_locations(params = {}, options = {})
+      req = build_request(:list_source_locations, params)
       req.send_request(options)
     end
 
@@ -506,6 +1329,79 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
+    # Lists all the VOD sources in a source location.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [required, String] :source_location_name
+    #
+    # @return [Types::ListVodSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVodSourcesResponse#items #items} => Array&lt;Types::VodSource&gt;
+    #   * {Types::ListVodSourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_vod_sources({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     source_location_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].creation_time #=> Time
+    #   resp.items[0].http_package_configurations #=> Array
+    #   resp.items[0].http_package_configurations[0].path #=> String
+    #   resp.items[0].http_package_configurations[0].source_group #=> String
+    #   resp.items[0].http_package_configurations[0].type #=> String, one of "DASH", "HLS"
+    #   resp.items[0].last_modified_time #=> Time
+    #   resp.items[0].source_location_name #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["__string"] #=> String
+    #   resp.items[0].vod_source_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListVodSources AWS API Documentation
+    #
+    # @overload list_vod_sources(params = {})
+    # @param [Hash] params ({})
+    def list_vod_sources(params = {}, options = {})
+      req = build_request(:list_vod_sources, params)
+      req.send_request(options)
+    end
+
+    # Creates an IAM policy for the channel.
+    #
+    # @option params [required, String] :channel_name
+    #
+    # @option params [required, String] :policy
+    #   Adds an IAM role that determines the permissions of your channel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_channel_policy({
+    #     channel_name: "__string", # required
+    #     policy: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PutChannelPolicy AWS API Documentation
+    #
+    # @overload put_channel_policy(params = {})
+    # @param [Hash] params ({})
+    def put_channel_policy(params = {}, options = {})
+      req = build_request(:put_channel_policy, params)
+      req.send_request(options)
+    end
+
     # Adds a new playback configuration to AWS Elemental MediaTailor.
     #
     # @option params [String] :ad_decision_server_url
@@ -517,22 +1413,34 @@ module Aws::MediaTailor
     #   maximum length is 25,000 characters.
     #
     # @option params [Types::AvailSuppression] :avail_suppression
-    #   The configuration for Avail Suppression.
+    #   The configuration for avail suppression, also known as ad suppression.
+    #   For more information about ad suppression, see [Ad Suppression][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html
     #
     # @option params [Types::Bumper] :bumper
     #   The configuration for bumpers. Bumpers are short audio or video clips
-    #   that play at the start or before the end of an ad break.
+    #   that play at the start or before the end of an ad break. To learn more
+    #   about bumpers, see [Bumpers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html
     #
     # @option params [Types::CdnConfiguration] :cdn_configuration
     #   The configuration for using a content delivery network (CDN), like
     #   Amazon CloudFront, for content and ad segment management.
     #
-    # @option params [Integer] :personalization_threshold_seconds
-    #   The maximum duration of underfilled ad time (in seconds) allowed in an
-    #   ad break.
-    #
     # @option params [Hash<String,Hash>] :configuration_aliases
-    #   Predefined aliases for dynamic variables.
+    #   The player parameters and aliases used as dynamic variables during
+    #   session initialization. For more information, see [Domain
+    #   Variables][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/variables-domain.html
     #
     # @option params [Types::DashConfigurationForPut] :dash_configuration
     #   The configuration for DASH content.
@@ -547,6 +1455,20 @@ module Aws::MediaTailor
     #
     # @option params [String] :name
     #   The identifier for the playback configuration.
+    #
+    # @option params [Integer] :personalization_threshold_seconds
+    #   Defines the maximum duration of underfilled ad time (in seconds)
+    #   allowed in an ad break. If the duration of underfilled ad time exceeds
+    #   the personalization threshold, then the personalization of the ad
+    #   break is abandoned and the underlying content is shown. This feature
+    #   applies to *ad replacement* in live and VOD streams, rather than ad
+    #   insertion, because it relies on an underlying content stream. For more
+    #   information about ad break behavior, including ad replacement and
+    #   insertion, see [Ad Behavior in AWS Elemental MediaTailor][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html
     #
     # @option params [String] :slate_ad_url
     #   The URL for a high-quality video asset to transcode and use to fill in
@@ -567,7 +1489,7 @@ module Aws::MediaTailor
     #   custom profiles with the help of AWS Support.
     #
     # @option params [String] :video_content_source_url
-    #   The URL prefix for the master playlist for the stream, minus the asset
+    #   The URL prefix for the parent manifest for the stream, minus the asset
     #   ID. The maximum length is 512 characters.
     #
     # @return [Types::PutPlaybackConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -580,8 +1502,9 @@ module Aws::MediaTailor
     #   * {Types::PutPlaybackConfigurationResponse#dash_configuration #dash_configuration} => Types::DashConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#hls_configuration #hls_configuration} => Types::HlsConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#live_pre_roll_configuration #live_pre_roll_configuration} => Types::LivePreRollConfiguration
-    #   * {Types::PutPlaybackConfigurationResponse#name #name} => String
     #   * {Types::PutPlaybackConfigurationResponse#manifest_processing_rules #manifest_processing_rules} => Types::ManifestProcessingRules
+    #   * {Types::PutPlaybackConfigurationResponse#name #name} => String
+    #   * {Types::PutPlaybackConfigurationResponse#personalization_threshold_seconds #personalization_threshold_seconds} => Integer
     #   * {Types::PutPlaybackConfigurationResponse#playback_configuration_arn #playback_configuration_arn} => String
     #   * {Types::PutPlaybackConfigurationResponse#playback_endpoint_prefix #playback_endpoint_prefix} => String
     #   * {Types::PutPlaybackConfigurationResponse#session_initialization_endpoint_prefix #session_initialization_endpoint_prefix} => String
@@ -606,7 +1529,6 @@ module Aws::MediaTailor
     #       ad_segment_url_prefix: "__string",
     #       content_segment_url_prefix: "__string",
     #     },
-    #     personalization_threshold_seconds: 1,
     #     configuration_aliases: {
     #       "__string" => {
     #         "__string" => "__string",
@@ -626,6 +1548,7 @@ module Aws::MediaTailor
     #       },
     #     },
     #     name: "__string",
+    #     personalization_threshold_seconds: 1,
     #     slate_ad_url: "__string",
     #     tags: {
     #       "__string" => "__string",
@@ -652,8 +1575,9 @@ module Aws::MediaTailor
     #   resp.hls_configuration.manifest_endpoint_prefix #=> String
     #   resp.live_pre_roll_configuration.ad_decision_server_url #=> String
     #   resp.live_pre_roll_configuration.max_duration_seconds #=> Integer
-    #   resp.name #=> String
     #   resp.manifest_processing_rules.ad_marker_passthrough.enabled #=> Boolean
+    #   resp.name #=> String
+    #   resp.personalization_threshold_seconds #=> Integer
     #   resp.playback_configuration_arn #=> String
     #   resp.playback_endpoint_prefix #=> String
     #   resp.session_initialization_endpoint_prefix #=> String
@@ -669,6 +1593,48 @@ module Aws::MediaTailor
     # @param [Hash] params ({})
     def put_playback_configuration(params = {}, options = {})
       req = build_request(:put_playback_configuration, params)
+      req.send_request(options)
+    end
+
+    # Starts a specific channel.
+    #
+    # @option params [required, String] :channel_name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_channel({
+    #     channel_name: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/StartChannel AWS API Documentation
+    #
+    # @overload start_channel(params = {})
+    # @param [Hash] params ({})
+    def start_channel(params = {}, options = {})
+      req = build_request(:start_channel, params)
+      req.send_request(options)
+    end
+
+    # Stops a specific channel.
+    #
+    # @option params [required, String] :channel_name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_channel({
+    #     channel_name: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/StopChannel AWS API Documentation
+    #
+    # @overload stop_channel(params = {})
+    # @param [Hash] params ({})
+    def stop_channel(params = {}, options = {})
+      req = build_request(:stop_channel, params)
       req.send_request(options)
     end
 
@@ -724,6 +1690,192 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
+    # Updates an existing channel.
+    #
+    # @option params [required, String] :channel_name
+    #
+    # @option params [required, Array<Types::RequestOutputItem>] :outputs
+    #   The channel's output properties.
+    #
+    # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateChannelResponse#arn #arn} => String
+    #   * {Types::UpdateChannelResponse#channel_name #channel_name} => String
+    #   * {Types::UpdateChannelResponse#channel_state #channel_state} => String
+    #   * {Types::UpdateChannelResponse#creation_time #creation_time} => Time
+    #   * {Types::UpdateChannelResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::UpdateChannelResponse#outputs #outputs} => Array&lt;Types::ResponseOutputItem&gt;
+    #   * {Types::UpdateChannelResponse#playback_mode #playback_mode} => String
+    #   * {Types::UpdateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_channel({
+    #     channel_name: "__string", # required
+    #     outputs: [ # required
+    #       {
+    #         dash_playlist_settings: {
+    #           manifest_window_seconds: 1,
+    #           min_buffer_time_seconds: 1,
+    #           min_update_period_seconds: 1,
+    #           suggested_presentation_delay_seconds: 1,
+    #         },
+    #         hls_playlist_settings: {
+    #           manifest_window_seconds: 1,
+    #         },
+    #         manifest_name: "__string", # required
+    #         source_group: "__string", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.channel_name #=> String
+    #   resp.channel_state #=> String, one of "RUNNING", "STOPPED"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.outputs #=> Array
+    #   resp.outputs[0].dash_playlist_settings.manifest_window_seconds #=> Integer
+    #   resp.outputs[0].dash_playlist_settings.min_buffer_time_seconds #=> Integer
+    #   resp.outputs[0].dash_playlist_settings.min_update_period_seconds #=> Integer
+    #   resp.outputs[0].dash_playlist_settings.suggested_presentation_delay_seconds #=> Integer
+    #   resp.outputs[0].hls_playlist_settings.manifest_window_seconds #=> Integer
+    #   resp.outputs[0].manifest_name #=> String
+    #   resp.outputs[0].playback_url #=> String
+    #   resp.outputs[0].source_group #=> String
+    #   resp.playback_mode #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateChannel AWS API Documentation
+    #
+    # @overload update_channel(params = {})
+    # @param [Hash] params ({})
+    def update_channel(params = {}, options = {})
+      req = build_request(:update_channel, params)
+      req.send_request(options)
+    end
+
+    # Updates a source location on a specific channel.
+    #
+    # @option params [Types::AccessConfiguration] :access_configuration
+    #   Access configuration parameters. Configures the type of authentication
+    #   used to access content from your source location.
+    #
+    # @option params [Types::DefaultSegmentDeliveryConfiguration] :default_segment_delivery_configuration
+    #   The optional configuration for the host server that serves segments.
+    #
+    # @option params [required, Types::HttpConfiguration] :http_configuration
+    #   The HTTP configuration for the source location.
+    #
+    # @option params [required, String] :source_location_name
+    #
+    # @return [Types::UpdateSourceLocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSourceLocationResponse#access_configuration #access_configuration} => Types::AccessConfiguration
+    #   * {Types::UpdateSourceLocationResponse#arn #arn} => String
+    #   * {Types::UpdateSourceLocationResponse#creation_time #creation_time} => Time
+    #   * {Types::UpdateSourceLocationResponse#default_segment_delivery_configuration #default_segment_delivery_configuration} => Types::DefaultSegmentDeliveryConfiguration
+    #   * {Types::UpdateSourceLocationResponse#http_configuration #http_configuration} => Types::HttpConfiguration
+    #   * {Types::UpdateSourceLocationResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::UpdateSourceLocationResponse#source_location_name #source_location_name} => String
+    #   * {Types::UpdateSourceLocationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_source_location({
+    #     access_configuration: {
+    #       access_type: "S3_SIGV4", # accepts S3_SIGV4
+    #     },
+    #     default_segment_delivery_configuration: {
+    #       base_url: "__string",
+    #     },
+    #     http_configuration: { # required
+    #       base_url: "__string", # required
+    #     },
+    #     source_location_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_configuration.access_type #=> String, one of "S3_SIGV4"
+    #   resp.arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.default_segment_delivery_configuration.base_url #=> String
+    #   resp.http_configuration.base_url #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.source_location_name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateSourceLocation AWS API Documentation
+    #
+    # @overload update_source_location(params = {})
+    # @param [Hash] params ({})
+    def update_source_location(params = {}, options = {})
+      req = build_request(:update_source_location, params)
+      req.send_request(options)
+    end
+
+    # Updates a specific VOD source in a specific source location.
+    #
+    # @option params [required, Array<Types::HttpPackageConfiguration>] :http_package_configurations
+    #   An array of HTTP package configurations for the VOD source on this
+    #   account.
+    #
+    # @option params [required, String] :source_location_name
+    #
+    # @option params [required, String] :vod_source_name
+    #
+    # @return [Types::UpdateVodSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateVodSourceResponse#arn #arn} => String
+    #   * {Types::UpdateVodSourceResponse#creation_time #creation_time} => Time
+    #   * {Types::UpdateVodSourceResponse#http_package_configurations #http_package_configurations} => Array&lt;Types::HttpPackageConfiguration&gt;
+    #   * {Types::UpdateVodSourceResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::UpdateVodSourceResponse#source_location_name #source_location_name} => String
+    #   * {Types::UpdateVodSourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateVodSourceResponse#vod_source_name #vod_source_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_vod_source({
+    #     http_package_configurations: [ # required
+    #       {
+    #         path: "__string", # required
+    #         source_group: "__string", # required
+    #         type: "DASH", # required, accepts DASH, HLS
+    #       },
+    #     ],
+    #     source_location_name: "__string", # required
+    #     vod_source_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.http_package_configurations #=> Array
+    #   resp.http_package_configurations[0].path #=> String
+    #   resp.http_package_configurations[0].source_group #=> String
+    #   resp.http_package_configurations[0].type #=> String, one of "DASH", "HLS"
+    #   resp.last_modified_time #=> Time
+    #   resp.source_location_name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #   resp.vod_source_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateVodSource AWS API Documentation
+    #
+    # @overload update_vod_source(params = {})
+    # @param [Hash] params ({})
+    def update_vod_source(params = {}, options = {})
+      req = build_request(:update_vod_source, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -737,7 +1889,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

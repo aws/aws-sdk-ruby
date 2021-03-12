@@ -28,7 +28,7 @@ require_relative 'aws-sdk-mediatailor/customizations'
 # structure.
 #
 #     media_tailor = Aws::MediaTailor::Client.new
-#     resp = media_tailor.delete_playback_configuration(params)
+#     resp = media_tailor.create_channel(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-mediatailor/customizations'
 # @!group service
 module Aws::MediaTailor
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end

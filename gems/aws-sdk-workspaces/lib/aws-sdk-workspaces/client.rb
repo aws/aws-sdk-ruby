@@ -662,6 +662,90 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Creates the specified WorkSpace bundle. For more information about
+    # creating WorkSpace bundles, see [ Create a Custom WorkSpaces Image and
+    # Bundle][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/create-custom-bundle.html
+    #
+    # @option params [required, String] :bundle_name
+    #   The name of the bundle.
+    #
+    # @option params [required, String] :bundle_description
+    #   The description of the bundle.
+    #
+    # @option params [required, String] :image_id
+    #   The identifier of the image that is used to create the bundle.
+    #
+    # @option params [required, Types::ComputeType] :compute_type
+    #   Describes the compute type of the bundle.
+    #
+    # @option params [required, Types::UserStorage] :user_storage
+    #   Describes the user volume for a WorkSpace bundle.
+    #
+    # @option params [Types::RootStorage] :root_storage
+    #   Describes the root volume for a WorkSpace bundle.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags associated with the bundle.
+    #
+    #   <note markdown="1"> To add tags at the same time that you're creating the bundle, you
+    #   must create an IAM policy that grants your IAM user permissions to use
+    #   `workspaces:CreateTags`.
+    #
+    #    </note>
+    #
+    # @return [Types::CreateWorkspaceBundleResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWorkspaceBundleResult#workspace_bundle #workspace_bundle} => Types::WorkspaceBundle
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_workspace_bundle({
+    #     bundle_name: "WorkspaceBundleName", # required
+    #     bundle_description: "WorkspaceBundleDescription", # required
+    #     image_id: "WorkspaceImageId", # required
+    #     compute_type: { # required
+    #       name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO
+    #     },
+    #     user_storage: { # required
+    #       capacity: "NonEmptyString",
+    #     },
+    #     root_storage: {
+    #       capacity: "NonEmptyString",
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workspace_bundle.bundle_id #=> String
+    #   resp.workspace_bundle.name #=> String
+    #   resp.workspace_bundle.owner #=> String
+    #   resp.workspace_bundle.description #=> String
+    #   resp.workspace_bundle.image_id #=> String
+    #   resp.workspace_bundle.root_storage.capacity #=> String
+    #   resp.workspace_bundle.user_storage.capacity #=> String
+    #   resp.workspace_bundle.compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO"
+    #   resp.workspace_bundle.last_updated_time #=> Time
+    #   resp.workspace_bundle.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaceBundle AWS API Documentation
+    #
+    # @overload create_workspace_bundle(params = {})
+    # @param [Hash] params ({})
+    def create_workspace_bundle(params = {}, options = {})
+      req = build_request(:create_workspace_bundle, params)
+      req.send_request(options)
+    end
+
     # Creates one or more WorkSpaces.
     #
     # This operation is asynchronous and returns before the WorkSpaces are
@@ -847,6 +931,34 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def delete_tags(params = {}, options = {})
       req = build_request(:delete_tags, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified WorkSpace bundle. For more information about
+    # deleting WorkSpace bundles, see [ Delete a Custom WorkSpaces Bundle or
+    # Image][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/delete_bundle.html
+    #
+    # @option params [String] :bundle_id
+    #   The identifier of the bundle.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_workspace_bundle({
+    #     bundle_id: "BundleId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteWorkspaceBundle AWS API Documentation
+    #
+    # @overload delete_workspace_bundle(params = {})
+    # @param [Hash] params ({})
+    def delete_workspace_bundle(params = {}, options = {})
+      req = build_request(:delete_workspace_bundle, params)
       req.send_request(options)
     end
 
@@ -1210,8 +1322,8 @@ module Aws::WorkSpaces
     #   The owner of the bundles. You cannot combine this parameter with any
     #   other filter.
     #
-    #   Specify `AMAZON` to describe the bundles provided by AWS or null to
-    #   describe the bundles that belong to your account.
+    #   To describe the bundles provided by AWS, specify `AMAZON`. To describe
+    #   the bundles that belong to your account, don't specify a value.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. (You received this token from a
@@ -1244,6 +1356,7 @@ module Aws::WorkSpaces
     #   resp.bundles[0].user_storage.capacity #=> String
     #   resp.bundles[0].compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO"
     #   resp.bundles[0].last_updated_time #=> Time
+    #   resp.bundles[0].creation_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundles AWS API Documentation
@@ -2540,6 +2653,43 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Updates a WorkSpace bundle with a new image. For more information
+    # about updating WorkSpace bundles, see [ Update a Custom WorkSpaces
+    # Bundle][1].
+    #
+    # Existing WorkSpaces aren't automatically updated when you update the
+    # bundle that they're based on. To update existing WorkSpaces that are
+    # based on a bundle that you've updated, you must either rebuild the
+    # WorkSpaces or delete and recreate them.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/update-custom-bundle.html
+    #
+    # @option params [String] :bundle_id
+    #   The identifier of the bundle.
+    #
+    # @option params [String] :image_id
+    #   The identifier of the image.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_workspace_bundle({
+    #     bundle_id: "BundleId",
+    #     image_id: "WorkspaceImageId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspaceBundle AWS API Documentation
+    #
+    # @overload update_workspace_bundle(params = {})
+    # @param [Hash] params ({})
+    def update_workspace_bundle(params = {}, options = {})
+      req = build_request(:update_workspace_bundle, params)
+      req.send_request(options)
+    end
+
     # Shares or unshares an image with one account in the same AWS Region by
     # specifying whether that account has permission to copy the image. If
     # the copy image permission is granted, the image is shared with that
@@ -2619,7 +2769,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

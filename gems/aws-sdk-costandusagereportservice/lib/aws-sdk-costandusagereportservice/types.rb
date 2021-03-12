@@ -141,6 +141,7 @@ module Aws::CostandUsageReportService
     #           additional_artifacts: ["REDSHIFT"], # accepts REDSHIFT, QUICKSIGHT, ATHENA
     #           refresh_closed_reports: false,
     #           report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
+    #           billing_view_arn: "BillingViewArn",
     #         },
     #       }
     #
@@ -186,6 +187,7 @@ module Aws::CostandUsageReportService
     #           additional_artifacts: ["REDSHIFT"], # accepts REDSHIFT, QUICKSIGHT, ATHENA
     #           refresh_closed_reports: false,
     #           report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
+    #           billing_view_arn: "BillingViewArn",
     #         },
     #       }
     #
@@ -228,6 +230,7 @@ module Aws::CostandUsageReportService
     #         additional_artifacts: ["REDSHIFT"], # accepts REDSHIFT, QUICKSIGHT, ATHENA
     #         refresh_closed_reports: false,
     #         report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
+    #         billing_view_arn: "BillingViewArn",
     #       }
     #
     # @!attribute [rw] report_name
@@ -283,6 +286,11 @@ module Aws::CostandUsageReportService
     #   previous versions.
     #   @return [String]
     #
+    # @!attribute [rw] billing_view_arn
+    #   The Amazon resource name of the billing view. You can get this value
+    #   by using the billing view service public APIs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ReportDefinition AWS API Documentation
     #
     class ReportDefinition < Struct.new(
@@ -296,7 +304,8 @@ module Aws::CostandUsageReportService
       :s3_region,
       :additional_artifacts,
       :refresh_closed_reports,
-      :report_versioning)
+      :report_versioning,
+      :billing_view_arn)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2021-03-12)
+------------------
+
+* Feature - Adds API support for WorkSpaces bundle management operations.
+
 1.51.0 (2021-03-10)
 ------------------
 
