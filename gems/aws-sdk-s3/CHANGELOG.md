@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support S3 Object Lambda ARNs in the `bucket:` parameter.
+
 1.91.0 (2021-03-10)
 ------------------
 

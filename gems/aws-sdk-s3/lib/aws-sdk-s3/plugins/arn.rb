@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../arn/access_point_arn'
+require_relative '../arn/object_lambda_arn'
 require_relative '../arn/outpost_access_point_arn'
 
 module Aws
@@ -22,9 +23,9 @@ be made. Set to `false` to use the client's region instead.
           resolve_s3_use_arn_region(cfg)
         end
 
-        # param validator is validate:50 (required to add account_id from arn)
+        # param validator is validate:50
         # endpoint is build:90 (populates the URI for the first time)
-        # endpoint pattern is build:10 (prefix account id to host)
+        # endpoint pattern is build:10
         def add_handlers(handlers, _config)
           handlers.add(ARNHandler, step: :validate, priority: 75)
           handlers.add(UrlHandler)
@@ -114,15 +115,7 @@ be made. Set to `false` to use the client's region instead.
           def resolve_arn!(member_value, region, use_arn_region)
             if Aws::ARNParser.arn?(member_value)
               arn = Aws::ARNParser.parse(member_value)
-              if arn.resource.start_with?('accesspoint')
-                s3_arn = Aws::S3::AccessPointARN.new(arn.to_h)
-              elsif arn.resource.start_with?('outpost')
-                s3_arn = Aws::S3::OutpostAccessPointARN.new(arn.to_h)
-              else
-                raise ArgumentError,
-                      'Only Access Point and Outpost Access Point type ARNs '\
-                      'are currently supported.'
-              end
+              s3_arn = resolve_arn_type!(arn)
               s3_arn.validate_arn!
               validate_region_config!(s3_arn, region, use_arn_region)
               region = s3_arn.region if use_arn_region
@@ -142,6 +135,21 @@ be made. Set to `false` to use the client's region instead.
 
           private
 
+          def resolve_arn_type!(arn)
+            case arn.service
+            when 's3'
+              Aws::S3::AccessPointARN.new(arn.to_h)
+            when 's3-outposts'
+              Aws::S3::OutpostAccessPointARN.new(arn.to_h)
+            when 's3-object-lambda'
+              Aws::S3::ObjectLambdaARN.new(arn.to_h)
+            else
+              raise ArgumentError,
+                    'Only Access Point, Outposts, and Object Lambdas ARNs '\
+                    'are currently supported.'
+            end
+          end
+
           def resolve_s3_use_arn_region(cfg)
             value = ENV['AWS_S3_USE_ARN_REGION'] ||
                     Aws.shared_config.s3_use_arn_region(profile: cfg.profile) ||
@@ -157,8 +165,7 @@ be made. Set to `false` to use the client's region instead.
             value
           end
 
-          # Remove ARN from the path since it was substituted already
-          # This only works because accesspoints care about the URL
+          # Remove ARN from the path because we've already set the new host
           def url_path(path, arn)
             path = path.sub("/#{Seahorse::Util.uri_escape(arn.to_s)}", '')
                        .sub("/#{arn}", '')

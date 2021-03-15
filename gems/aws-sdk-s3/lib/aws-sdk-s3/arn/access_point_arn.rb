@@ -21,12 +21,12 @@ module Aws
 
       def validate_arn!
         unless @service == 's3'
-          raise ArgumentError, 'Must provide a valid S3 accesspoint ARN.'
+          raise ArgumentError, 'Must provide a valid S3 Access Point ARN.'
         end
 
         if @region.empty? || @account_id.empty?
           raise ArgumentError,
-                'S3 accesspoint ARNs must contain both a region '\
+                'S3 Access Point ARNs must contain both a region '\
                 'and an account id.'
         end
 

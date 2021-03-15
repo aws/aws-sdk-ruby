@@ -39,6 +39,7 @@ require 'aws-sdk-s3/plugins/http_200_errors.rb'
 require 'aws-sdk-s3/plugins/iad_regional_endpoint.rb'
 require 'aws-sdk-s3/plugins/location_constraint.rb'
 require 'aws-sdk-s3/plugins/md5s.rb'
+require 'aws-sdk-s3/plugins/object_lambda_endpoint.rb'
 require 'aws-sdk-s3/plugins/redirects.rb'
 require 'aws-sdk-s3/plugins/s3_host_id.rb'
 require 'aws-sdk-s3/plugins/s3_signer.rb'
@@ -102,6 +103,7 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::IADRegionalEndpoint)
     add_plugin(Aws::S3::Plugins::LocationConstraint)
     add_plugin(Aws::S3::Plugins::Md5s)
+    add_plugin(Aws::S3::Plugins::ObjectLambdaEndpoint)
     add_plugin(Aws::S3::Plugins::Redirects)
     add_plugin(Aws::S3::Plugins::S3HostId)
     add_plugin(Aws::S3::Plugins::S3Signer)
@@ -326,8 +328,8 @@ module Aws::S3
     #
     #
     #   @option options [String] :s3_us_east_1_regional_endpoint ("legacy")
-    #     Passing in `regional` to enable regional endpoint for S3's `us-east-1`
-    #     region. Defaults to `legacy` mode using global endpoint.
+    #     Pass in `regional` to enable the `us-east-1` regional endpoint.
+    #     Defaults to `legacy` mode which uses the global endpoint.
     #
     #   @option options [Boolean] :s3_use_arn_region (true)
     #     For S3 ARNs passed into the `:bucket` parameter, this option will
