@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2021-03-15)
+------------------
+
+* Feature - AWS Transcribe now supports real-time transcription for Chinese (zh-CN) and confidence scores in the transcription output.
+
 1.27.0 (2021-03-10)
 ------------------
 

@@ -409,6 +409,7 @@ module Aws::EMR
     #           capacity_reservation_options: {
     #             usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
     #             capacity_reservation_preference: "open", # accepts open, none
+    #             capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
     #           },
     #         },
     #       },
@@ -790,9 +791,8 @@ module Aws::EMR
     #   security group, and it must be in the same VPC specified by `VpcId`.
     #
     # @option params [required, String] :default_s3_location
-    #   The default Amazon S3 location to back up Amazon EMR Studio Workspaces
-    #   and notebook files. A Studio user can select an alternative Amazon S3
-    #   location when creating a Workspace.
+    #   The Amazon S3 location to back up Amazon EMR Studio Workspaces and
+    #   notebook files.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to associate with the Amazon EMR Studio. Tags are
@@ -1697,6 +1697,7 @@ module Aws::EMR
     #   resp.instance_fleets[0].launch_specifications.on_demand_specification.allocation_strategy #=> String, one of "lowest-price"
     #   resp.instance_fleets[0].launch_specifications.on_demand_specification.capacity_reservation_options.usage_strategy #=> String, one of "use-capacity-reservations-first"
     #   resp.instance_fleets[0].launch_specifications.on_demand_specification.capacity_reservation_options.capacity_reservation_preference #=> String, one of "open", "none"
+    #   resp.instance_fleets[0].launch_specifications.on_demand_specification.capacity_reservation_options.capacity_reservation_resource_group_arn #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceFleets AWS API Documentation
@@ -2975,6 +2976,7 @@ module Aws::EMR
     #               capacity_reservation_options: {
     #                 usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
     #                 capacity_reservation_preference: "open", # accepts open, none
+    #                 capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
     #               },
     #             },
     #           },
@@ -3350,9 +3352,8 @@ module Aws::EMR
     #   belong to the same VPC as the Studio.
     #
     # @option params [String] :default_s3_location
-    #   A default Amazon S3 location to back up Workspaces and notebook files
-    #   for the Amazon EMR Studio. A Studio user can select an alternative
-    #   Amazon S3 location when creating a Workspace.
+    #   The Amazon S3 location to back up Workspaces and notebook files for
+    #   the Amazon EMR Studio.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3443,7 +3444,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

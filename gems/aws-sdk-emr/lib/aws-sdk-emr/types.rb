@@ -64,6 +64,7 @@ module Aws::EMR
     #               capacity_reservation_options: {
     #                 usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
     #                 capacity_reservation_preference: "open", # accepts open, none
+    #                 capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
     #               },
     #             },
     #           },
@@ -1430,9 +1431,8 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] default_s3_location
-    #   The default Amazon S3 location to back up Amazon EMR Studio
-    #   Workspaces and notebook files. A Studio user can select an
-    #   alternative Amazon S3 location when creating a Workspace.
+    #   The Amazon S3 location to back up Amazon EMR Studio Workspaces and
+    #   notebook files.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2630,6 +2630,7 @@ module Aws::EMR
     #             capacity_reservation_options: {
     #               usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
     #               capacity_reservation_preference: "open", # accepts open, none
+    #               capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
     #             },
     #           },
     #         },
@@ -2780,6 +2781,7 @@ module Aws::EMR
     #           capacity_reservation_options: {
     #             usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
     #             capacity_reservation_preference: "open", # accepts open, none
+    #             capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
     #           },
     #         },
     #       }
@@ -3984,6 +3986,7 @@ module Aws::EMR
     #                 capacity_reservation_options: {
     #                   usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
     #                   capacity_reservation_preference: "open", # accepts open, none
+    #                   capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
     #                 },
     #               },
     #             },
@@ -5254,6 +5257,7 @@ module Aws::EMR
     #       {
     #         usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
     #         capacity_reservation_preference: "open", # accepts open, none
+    #         capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
     #       }
     #
     # @!attribute [rw] usage_strategy
@@ -5286,11 +5290,17 @@ module Aws::EMR
     #     Instance.
     #   @return [String]
     #
+    # @!attribute [rw] capacity_reservation_resource_group_arn
+    #   The ARN of the Capacity Reservation resource group in which to run
+    #   the instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/OnDemandCapacityReservationOptions AWS API Documentation
     #
     class OnDemandCapacityReservationOptions < Struct.new(
       :usage_strategy,
-      :capacity_reservation_preference)
+      :capacity_reservation_preference,
+      :capacity_reservation_resource_group_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5313,6 +5323,7 @@ module Aws::EMR
     #         capacity_reservation_options: {
     #           usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
     #           capacity_reservation_preference: "open", # accepts open, none
+    #           capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
     #         },
     #       }
     #
@@ -5855,6 +5866,7 @@ module Aws::EMR
     #                   capacity_reservation_options: {
     #                     usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
     #                     capacity_reservation_preference: "open", # accepts open, none
+    #                     capacity_reservation_resource_group_arn: "XmlStringMaxLen256",
     #                   },
     #                 },
     #               },
@@ -7242,8 +7254,8 @@ module Aws::EMR
     #   @return [Time]
     #
     # @!attribute [rw] default_s3_location
-    #   The default Amazon S3 location to back up Amazon EMR Studio
-    #   Workspaces and notebook files.
+    #   The Amazon S3 location to back up Amazon EMR Studio Workspaces and
+    #   notebook files.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -7441,9 +7453,8 @@ module Aws::EMR
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_s3_location
-    #   A default Amazon S3 location to back up Workspaces and notebook
-    #   files for the Amazon EMR Studio. A Studio user can select an
-    #   alternative Amazon S3 location when creating a Workspace.
+    #   The Amazon S3 location to back up Workspaces and notebook files for
+    #   the Amazon EMR Studio.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/UpdateStudioInput AWS API Documentation

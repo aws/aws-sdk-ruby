@@ -221,7 +221,6 @@ module Aws::CodeDeploy
     InvalidBucketNameFilterException = Shapes::StructureShape.new(name: 'InvalidBucketNameFilterException')
     InvalidComputePlatformException = Shapes::StructureShape.new(name: 'InvalidComputePlatformException')
     InvalidDeployedStateFilterException = Shapes::StructureShape.new(name: 'InvalidDeployedStateFilterException')
-    InvalidDeploymentConfigIdException = Shapes::StructureShape.new(name: 'InvalidDeploymentConfigIdException')
     InvalidDeploymentConfigNameException = Shapes::StructureShape.new(name: 'InvalidDeploymentConfigNameException')
     InvalidDeploymentGroupNameException = Shapes::StructureShape.new(name: 'InvalidDeploymentGroupNameException')
     InvalidDeploymentIdException = Shapes::StructureShape.new(name: 'InvalidDeploymentIdException')
@@ -319,6 +318,7 @@ module Aws::CodeDeploy
     OnPremisesTagSet = Shapes::StructureShape.new(name: 'OnPremisesTagSet')
     OnPremisesTagSetList = Shapes::ListShape.new(name: 'OnPremisesTagSetList')
     OperationNotSupportedException = Shapes::StructureShape.new(name: 'OperationNotSupportedException')
+    OutdatedInstancesStrategy = Shapes::StringShape.new(name: 'OutdatedInstancesStrategy')
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
     PutLifecycleEventHookExecutionStatusInput = Shapes::StructureShape.new(name: 'PutLifecycleEventHookExecutionStatusInput')
     PutLifecycleEventHookExecutionStatusOutput = Shapes::StructureShape.new(name: 'PutLifecycleEventHookExecutionStatusOutput')
@@ -328,6 +328,7 @@ module Aws::CodeDeploy
     RegisterApplicationRevisionInput = Shapes::StructureShape.new(name: 'RegisterApplicationRevisionInput')
     RegisterOnPremisesInstanceInput = Shapes::StructureShape.new(name: 'RegisterOnPremisesInstanceInput')
     RegistrationStatus = Shapes::StringShape.new(name: 'RegistrationStatus')
+    RelatedDeployments = Shapes::StructureShape.new(name: 'RelatedDeployments')
     RemoveTagsFromOnPremisesInstancesInput = Shapes::StructureShape.new(name: 'RemoveTagsFromOnPremisesInstancesInput')
     Repository = Shapes::StringShape.new(name: 'Repository')
     ResourceArnRequiredException = Shapes::StructureShape.new(name: 'ResourceArnRequiredException')
@@ -562,6 +563,7 @@ module Aws::CodeDeploy
     CreateDeploymentGroupInput.add_member(:trigger_configurations, Shapes::ShapeRef.new(shape: TriggerConfigList, location_name: "triggerConfigurations"))
     CreateDeploymentGroupInput.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "alarmConfiguration"))
     CreateDeploymentGroupInput.add_member(:auto_rollback_configuration, Shapes::ShapeRef.new(shape: AutoRollbackConfiguration, location_name: "autoRollbackConfiguration"))
+    CreateDeploymentGroupInput.add_member(:outdated_instances_strategy, Shapes::ShapeRef.new(shape: OutdatedInstancesStrategy, location_name: "outdatedInstancesStrategy"))
     CreateDeploymentGroupInput.add_member(:deployment_style, Shapes::ShapeRef.new(shape: DeploymentStyle, location_name: "deploymentStyle"))
     CreateDeploymentGroupInput.add_member(:blue_green_deployment_configuration, Shapes::ShapeRef.new(shape: BlueGreenDeploymentConfiguration, location_name: "blueGreenDeploymentConfiguration"))
     CreateDeploymentGroupInput.add_member(:load_balancer_info, Shapes::ShapeRef.new(shape: LoadBalancerInfo, location_name: "loadBalancerInfo"))
@@ -656,6 +658,7 @@ module Aws::CodeDeploy
     DeploymentGroupInfo.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "alarmConfiguration"))
     DeploymentGroupInfo.add_member(:auto_rollback_configuration, Shapes::ShapeRef.new(shape: AutoRollbackConfiguration, location_name: "autoRollbackConfiguration"))
     DeploymentGroupInfo.add_member(:deployment_style, Shapes::ShapeRef.new(shape: DeploymentStyle, location_name: "deploymentStyle"))
+    DeploymentGroupInfo.add_member(:outdated_instances_strategy, Shapes::ShapeRef.new(shape: OutdatedInstancesStrategy, location_name: "outdatedInstancesStrategy"))
     DeploymentGroupInfo.add_member(:blue_green_deployment_configuration, Shapes::ShapeRef.new(shape: BlueGreenDeploymentConfiguration, location_name: "blueGreenDeploymentConfiguration"))
     DeploymentGroupInfo.add_member(:load_balancer_info, Shapes::ShapeRef.new(shape: LoadBalancerInfo, location_name: "loadBalancerInfo"))
     DeploymentGroupInfo.add_member(:last_successful_deployment, Shapes::ShapeRef.new(shape: LastDeploymentInfo, location_name: "lastSuccessfulDeployment"))
@@ -704,6 +707,7 @@ module Aws::CodeDeploy
     DeploymentInfo.add_member(:deployment_status_messages, Shapes::ShapeRef.new(shape: DeploymentStatusMessageList, location_name: "deploymentStatusMessages"))
     DeploymentInfo.add_member(:compute_platform, Shapes::ShapeRef.new(shape: ComputePlatform, location_name: "computePlatform"))
     DeploymentInfo.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
+    DeploymentInfo.add_member(:related_deployments, Shapes::ShapeRef.new(shape: RelatedDeployments, location_name: "relatedDeployments"))
     DeploymentInfo.struct_class = Types::DeploymentInfo
 
     DeploymentIsNotInReadyStateException.struct_class = Types::DeploymentIsNotInReadyStateException
@@ -964,8 +968,6 @@ module Aws::CodeDeploy
 
     InvalidDeployedStateFilterException.struct_class = Types::InvalidDeployedStateFilterException
 
-    InvalidDeploymentConfigIdException.struct_class = Types::InvalidDeploymentConfigIdException
-
     InvalidDeploymentConfigNameException.struct_class = Types::InvalidDeploymentConfigNameException
 
     InvalidDeploymentGroupNameException.struct_class = Types::InvalidDeploymentGroupNameException
@@ -1193,8 +1195,8 @@ module Aws::CodeDeploy
     LoadBalancerInfo.add_member(:target_group_pair_info_list, Shapes::ShapeRef.new(shape: TargetGroupPairInfoList, location_name: "targetGroupPairInfoList"))
     LoadBalancerInfo.struct_class = Types::LoadBalancerInfo
 
-    MinimumHealthyHosts.add_member(:value, Shapes::ShapeRef.new(shape: MinimumHealthyHostsValue, location_name: "value"))
     MinimumHealthyHosts.add_member(:type, Shapes::ShapeRef.new(shape: MinimumHealthyHostsType, location_name: "type"))
+    MinimumHealthyHosts.add_member(:value, Shapes::ShapeRef.new(shape: MinimumHealthyHostsValue, location_name: "value"))
     MinimumHealthyHosts.struct_class = Types::MinimumHealthyHosts
 
     MultipleIamArnsProvidedException.struct_class = Types::MultipleIamArnsProvidedException
@@ -1227,6 +1229,10 @@ module Aws::CodeDeploy
     RegisterOnPremisesInstanceInput.add_member(:iam_session_arn, Shapes::ShapeRef.new(shape: IamSessionArn, location_name: "iamSessionArn"))
     RegisterOnPremisesInstanceInput.add_member(:iam_user_arn, Shapes::ShapeRef.new(shape: IamUserArn, location_name: "iamUserArn"))
     RegisterOnPremisesInstanceInput.struct_class = Types::RegisterOnPremisesInstanceInput
+
+    RelatedDeployments.add_member(:auto_update_outdated_instances_root_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "autoUpdateOutdatedInstancesRootDeploymentId"))
+    RelatedDeployments.add_member(:auto_update_outdated_instances_deployment_ids, Shapes::ShapeRef.new(shape: DeploymentsList, location_name: "autoUpdateOutdatedInstancesDeploymentIds"))
+    RelatedDeployments.struct_class = Types::RelatedDeployments
 
     RemoveTagsFromOnPremisesInstancesInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
     RemoveTagsFromOnPremisesInstancesInput.add_member(:instance_names, Shapes::ShapeRef.new(shape: InstanceNameList, required: true, location_name: "instanceNames"))
@@ -1385,6 +1391,7 @@ module Aws::CodeDeploy
     UpdateDeploymentGroupInput.add_member(:trigger_configurations, Shapes::ShapeRef.new(shape: TriggerConfigList, location_name: "triggerConfigurations"))
     UpdateDeploymentGroupInput.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "alarmConfiguration"))
     UpdateDeploymentGroupInput.add_member(:auto_rollback_configuration, Shapes::ShapeRef.new(shape: AutoRollbackConfiguration, location_name: "autoRollbackConfiguration"))
+    UpdateDeploymentGroupInput.add_member(:outdated_instances_strategy, Shapes::ShapeRef.new(shape: OutdatedInstancesStrategy, location_name: "outdatedInstancesStrategy"))
     UpdateDeploymentGroupInput.add_member(:deployment_style, Shapes::ShapeRef.new(shape: DeploymentStyle, location_name: "deploymentStyle"))
     UpdateDeploymentGroupInput.add_member(:blue_green_deployment_configuration, Shapes::ShapeRef.new(shape: BlueGreenDeploymentConfiguration, location_name: "blueGreenDeploymentConfiguration"))
     UpdateDeploymentGroupInput.add_member(:load_balancer_info, Shapes::ShapeRef.new(shape: LoadBalancerInfo, location_name: "loadBalancerInfo"))

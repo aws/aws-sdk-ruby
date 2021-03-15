@@ -77,7 +77,6 @@ module Aws::CodeDeploy
   # * {InvalidBucketNameFilterException}
   # * {InvalidComputePlatformException}
   # * {InvalidDeployedStateFilterException}
-  # * {InvalidDeploymentConfigIdException}
   # * {InvalidDeploymentConfigNameException}
   # * {InvalidDeploymentGroupNameException}
   # * {InvalidDeploymentIdException}
@@ -642,16 +641,6 @@ module Aws::CodeDeploy
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CodeDeploy::Types::InvalidDeployedStateFilterException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-    end
-
-    class InvalidDeploymentConfigIdException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::CodeDeploy::Types::InvalidDeploymentConfigIdException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

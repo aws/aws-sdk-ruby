@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.95.0 (2021-03-15)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-fis` gem.
+
 3.94.1 (2021-03-04)
 ------------------
 

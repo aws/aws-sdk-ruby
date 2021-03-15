@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.433.0 (2021-03-15)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::FIS`.
+
 1.432.0 (2021-03-09)
 ------------------
 

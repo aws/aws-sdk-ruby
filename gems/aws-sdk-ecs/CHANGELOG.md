@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2021-03-15)
+------------------
+
+* Feature - This is for ecs exec feature release which includes two new APIs - execute-command and update-cluster and an AWS CLI customization for execute-command API
+
 1.75.0 (2021-03-10)
 ------------------
 

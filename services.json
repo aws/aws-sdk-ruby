@@ -319,6 +319,9 @@
   "EventBridge": {
     "models": "eventbridge/2015-10-07"
   },
+  "FIS": {
+    "models": "fis/2020-12-01"
+  },
   "FMS": {
     "models": "fms/2018-01-01"
   },

@@ -46,6 +46,7 @@ module Aws::ECS
   # * {ServerException}
   # * {ServiceNotActiveException}
   # * {ServiceNotFoundException}
+  # * {TargetNotConnectedException}
   # * {TargetNotFoundException}
   # * {TaskSetNotFoundException}
   # * {UnsupportedFeatureException}
@@ -252,6 +253,16 @@ module Aws::ECS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ECS::Types::ServiceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class TargetNotConnectedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECS::Types::TargetNotConnectedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

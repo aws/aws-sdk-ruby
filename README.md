@@ -333,6 +333,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Elemental MediaPackage VOD                        | Aws::MediaPackageVod                 | aws-sdk-mediapackagevod                 | 2018-11-07  |
 | AWS Elemental MediaStore                              | Aws::MediaStore                      | aws-sdk-mediastore                      | 2017-09-01  |
 | AWS Elemental MediaStore Data Plane                   | Aws::MediaStoreData                  | aws-sdk-mediastoredata                  | 2017-09-01  |
+| AWS Fault Injection Simulator                         | Aws::FIS                             | aws-sdk-fis                             | 2020-12-01  |
 | AWS Global Accelerator                                | Aws::GlobalAccelerator               | aws-sdk-globalaccelerator               | 2018-08-08  |
 | AWS Glue                                              | Aws::Glue                            | aws-sdk-glue                            | 2017-03-31  |
 | AWS Glue DataBrew                                     | Aws::GlueDataBrew                    | aws-sdk-gluedatabrew                    | 2017-07-25  |

@@ -1063,6 +1063,7 @@ module Aws::EMR
 
     OnDemandCapacityReservationOptions.add_member(:usage_strategy, Shapes::ShapeRef.new(shape: OnDemandCapacityReservationUsageStrategy, location_name: "UsageStrategy"))
     OnDemandCapacityReservationOptions.add_member(:capacity_reservation_preference, Shapes::ShapeRef.new(shape: OnDemandCapacityReservationPreference, location_name: "CapacityReservationPreference"))
+    OnDemandCapacityReservationOptions.add_member(:capacity_reservation_resource_group_arn, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "CapacityReservationResourceGroupArn"))
     OnDemandCapacityReservationOptions.struct_class = Types::OnDemandCapacityReservationOptions
 
     OnDemandProvisioningSpecification.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: OnDemandProvisioningAllocationStrategy, required: true, location_name: "AllocationStrategy"))

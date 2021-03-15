@@ -319,6 +319,7 @@ module Aws
             'ElasticTranscoder' => 'elastictranscoder',
             'ElasticsearchService' => 'es',
             'EventBridge' => 'events',
+            'FIS' => 'fis',
             'FMS' => 'fms',
             'FSx' => 'fsx',
             'Firehose' => 'firehose',

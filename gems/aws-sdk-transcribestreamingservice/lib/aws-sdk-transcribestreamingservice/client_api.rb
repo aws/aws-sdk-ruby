@@ -90,6 +90,7 @@ module Aws::TranscribeStreamingService
     Item.add_member(:content, Shapes::ShapeRef.new(shape: String, location_name: "Content"))
     Item.add_member(:vocabulary_filter_match, Shapes::ShapeRef.new(shape: Boolean, location_name: "VocabularyFilterMatch"))
     Item.add_member(:speaker, Shapes::ShapeRef.new(shape: String, location_name: "Speaker"))
+    Item.add_member(:confidence, Shapes::ShapeRef.new(shape: Confidence, location_name: "Confidence"))
     Item.struct_class = Types::Item
 
     ItemList.member = Shapes::ShapeRef.new(shape: Item)

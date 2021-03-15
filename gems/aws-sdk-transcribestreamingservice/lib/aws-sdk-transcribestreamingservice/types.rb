@@ -31,6 +31,10 @@ module Aws::TranscribeStreamingService
 
     # Provides a wrapper for the audio chunks that you are sending.
     #
+    # For information on audio encoding in Amazon Transcribe, see input. For
+    # information on audio encoding formats in Amazon Transcribe Medical,
+    # see input-med.
+    #
     # @note When making an API call, you may pass AudioEvent
     #   data as a hash:
     #
@@ -101,7 +105,8 @@ module Aws::TranscribeStreamingService
       include Aws::Structure
     end
 
-    # A word or phrase transcribed from the input audio.
+    # A word, phrase, or punctuation mark that is transcribed from the input
+    # audio.
     #
     # @!attribute [rw] start_time
     #   The offset from the beginning of the audio stream to the beginning
@@ -134,6 +139,12 @@ module Aws::TranscribeStreamingService
     #   in the real-time stream.
     #   @return [String]
     #
+    # @!attribute [rw] confidence
+    #   A value between 0 and 1 for an item that is a confidence score that
+    #   Amazon Transcribe assigns to each word or phrase that it
+    #   transcribes.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/Item AWS API Documentation
     #
     class Item < Struct.new(
@@ -142,7 +153,8 @@ module Aws::TranscribeStreamingService
       :type,
       :content,
       :vocabulary_filter_match,
-      :speaker)
+      :speaker,
+      :confidence)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -231,7 +243,8 @@ module Aws::TranscribeStreamingService
       include Aws::Structure
     end
 
-    # A word or punctuation that is transcribed from the input audio.
+    # A word, phrase, or punctuation mark that is transcribed from the input
+    # audio.
     #
     # @!attribute [rw] start_time
     #   The number of seconds into an audio stream that indicates the
@@ -438,7 +451,7 @@ module Aws::TranscribeStreamingService
     #   data as a hash:
     #
     #       {
-    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR
+    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #         media_sample_rate_hertz: 1, # required
     #         media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac
     #         vocabulary_name: "VocabularyName",
@@ -620,7 +633,7 @@ module Aws::TranscribeStreamingService
     #   data as a hash:
     #
     #       {
-    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR
+    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #         media_sample_rate_hertz: 1, # required
     #         media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac
     #         vocabulary_name: "VocabularyName",

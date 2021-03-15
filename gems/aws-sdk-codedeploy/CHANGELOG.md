@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-03-15)
+------------------
+
+* Feature - AWS CodeDeploy can now detect instances running an outdated revision of your application and automatically update them with the latest revision.
+
 1.39.0 (2021-03-10)
 ------------------
 
