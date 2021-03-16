@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2021-03-16)
+------------------
+
+* Feature - This release adds UPDATE_FAILED and UNAVAILABLE MWAA environment states.
+
 1.3.0 (2021-03-10)
 ------------------
 

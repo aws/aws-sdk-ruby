@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2021-03-16)
+------------------
+
+* Feature - Documentation updates for AWS Identity and Access Management (IAM).
+
 1.49.0 (2021-03-10)
 ------------------
 

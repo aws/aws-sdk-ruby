@@ -1713,54 +1713,6 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass ListProgramsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         channel_name: "__string", # required
-    #         max_results: 1,
-    #         next_token: "__string",
-    #       }
-    #
-    # @!attribute [rw] channel_name
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListProgramsRequest AWS API Documentation
-    #
-    class ListProgramsRequest < Struct.new(
-      :channel_name,
-      :max_results,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Returns a list of programs for a channel.
-    #
-    # @!attribute [rw] items
-    #   An array containing the programs for a channel.
-    #   @return [Array<Types::Program>]
-    #
-    # @!attribute [rw] next_token
-    #   Pagination token from the list request. Use the token to fetch the
-    #   next page of results.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListProgramsResponse AWS API Documentation
-    #
-    class ListProgramsResponse < Struct.new(
-      :items,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass ListSourceLocationsRequest
     #   data as a hash:
     #
@@ -2098,55 +2050,6 @@ module Aws::MediaTailor
       :tags,
       :transcode_profile_name,
       :video_content_source_url)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Program configuration parameters.
-    #
-    # @!attribute [rw] ad_breaks
-    #   The ad break configuration settings.
-    #   @return [Array<Types::AdBreak>]
-    #
-    # @!attribute [rw] arn
-    #   The ARN of the program.
-    #   @return [String]
-    #
-    # @!attribute [rw] channel_name
-    #   The name of the channel that the program belongs to.
-    #   @return [String]
-    #
-    # @!attribute [rw] creation_time
-    #   The timestamp of when the program was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] last_modified_time
-    #   The timestamp of when the program was last modified.
-    #   @return [Time]
-    #
-    # @!attribute [rw] program_name
-    #   The name of the program.
-    #   @return [String]
-    #
-    # @!attribute [rw] source_location_name
-    #   The name of the source location.
-    #   @return [String]
-    #
-    # @!attribute [rw] vod_source_name
-    #   The name that's used to refer to a VOD source.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/Program AWS API Documentation
-    #
-    class Program < Struct.new(
-      :ad_breaks,
-      :arn,
-      :channel_name,
-      :creation_time,
-      :last_modified_time,
-      :program_name,
-      :source_location_name,
-      :vod_source_name)
       SENSITIVE = []
       include Aws::Structure
     end

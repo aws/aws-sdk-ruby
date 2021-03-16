@@ -2111,6 +2111,26 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # A location in a policy that is represented as a path through the JSON
+    # representation and a corresponding span.
+    #
+    # @!attribute [rw] path
+    #   A path in a policy, represented as a sequence of path elements.
+    #   @return [Array<Types::PathElement>]
+    #
+    # @!attribute [rw] span
+    #   A span in a policy.
+    #   @return [Types::Span]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/Location AWS API Documentation
+    #
+    class Location < Struct.new(
+      :path,
+      :span)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The proposed `InternetConfiguration` or `VpcConfiguration` to apply to
     # the Amazon S3 Access point. You can make the access point accessible
     # from the internet, or you can specify that all requests made through
@@ -2153,6 +2173,61 @@ module Aws::AccessAnalyzer
     class NetworkOriginConfiguration < Struct.new(
       :internet_configuration,
       :vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single element in a path through the JSON representation of a
+    # policy.
+    #
+    # @!attribute [rw] index
+    #   Refers to an index in a JSON array.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] key
+    #   Refers to a key in a JSON object.
+    #   @return [String]
+    #
+    # @!attribute [rw] substring
+    #   Refers to a substring of a literal string in a JSON object.
+    #   @return [Types::Substring]
+    #
+    # @!attribute [rw] value
+    #   Refers to the value associated with a given key in a JSON object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/PathElement AWS API Documentation
+    #
+    class PathElement < Struct.new(
+      :index,
+      :key,
+      :substring,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A position in a policy.
+    #
+    # @!attribute [rw] column
+    #   The column of the position, starting from 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] line
+    #   The line of the position, starting from 1.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] offset
+    #   The offset within the policy that corresponds to the position,
+    #   starting from 0.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/Position AWS API Documentation
+    #
+    class Position < Struct.new(
+      :column,
+      :line,
+      :offset)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2502,6 +2577,26 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # A span in a policy. The span consists of a start position (inclusive)
+    # and end position (exclusive).
+    #
+    # @!attribute [rw] end
+    #   The end position of the span (exclusive).
+    #   @return [Types::Position]
+    #
+    # @!attribute [rw] start
+    #   The start position of the span (inclusive).
+    #   @return [Types::Position]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/Span AWS API Documentation
+    #
+    class Span < Struct.new(
+      :end,
+      :start)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The proposed access control configuration for an SQS queue. You can
     # propose a configuration for a new SQS queue or an existing SQS queue
     # that you own by specifying the SQS policy. If the configuration is for
@@ -2582,6 +2677,25 @@ module Aws::AccessAnalyzer
     #
     class StatusReason < Struct.new(
       :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A reference to a substring of a literal string in a JSON document.
+    #
+    # @!attribute [rw] length
+    #   The length of the substring.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start
+    #   The start index of the substring, starting from 0.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/Substring AWS API Documentation
+    #
+    class Substring < Struct.new(
+      :length,
+      :start)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2773,6 +2887,127 @@ module Aws::AccessAnalyzer
       :ids,
       :resource_arn,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A finding in a policy. Each finding is an actionable recommendation
+    # that can be used to improve the policy.
+    #
+    # @!attribute [rw] finding_details
+    #   A localized message that explains the finding and provides guidance
+    #   on how to address it.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_type
+    #   The impact of the finding.
+    #
+    #   Security warnings report when the policy allows access that we
+    #   consider overly permissive.
+    #
+    #   Errors report when a part of the policy is not functional.
+    #
+    #   Warnings report non-security issues when a policy does not conform
+    #   to policy writing best practices.
+    #
+    #   Suggestions recommend stylistic improvements in the policy that do
+    #   not impact access.
+    #   @return [String]
+    #
+    # @!attribute [rw] issue_code
+    #   The issue code provides an identifier of the issue associated with
+    #   this finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] learn_more_link
+    #   A link to additional documentation about the type of finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] locations
+    #   The list of locations in the policy document that are related to the
+    #   finding. The issue code provides a summary of an issue identified by
+    #   the finding.
+    #   @return [Array<Types::Location>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ValidatePolicyFinding AWS API Documentation
+    #
+    class ValidatePolicyFinding < Struct.new(
+      :finding_details,
+      :finding_type,
+      :issue_code,
+      :learn_more_link,
+      :locations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ValidatePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         locale: "DE", # accepts DE, EN, ES, FR, IT, JA, KO, PT_BR, ZH_CN, ZH_TW
+    #         max_results: 1,
+    #         next_token: "Token",
+    #         policy_document: "PolicyDocument", # required
+    #         policy_type: "IDENTITY_POLICY", # required, accepts IDENTITY_POLICY, RESOURCE_POLICY, SERVICE_CONTROL_POLICY
+    #       }
+    #
+    # @!attribute [rw] locale
+    #   The locale to use for localizing the findings.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   The JSON policy document to use as the content for the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_type
+    #   The type of policy to validate. Identity policies grant permissions
+    #   to IAM principals. Identity policies include managed and inline
+    #   policies for IAM roles, users, and groups. They also include
+    #   service-control policies (SCPs) that are attached to an AWS
+    #   organization, organizational unit (OU), or an account.
+    #
+    #   Resource policies grant permissions on AWS resources. Resource
+    #   policies include trust policies for IAM roles and bucket policies
+    #   for S3 buckets. You can provide a generic input such as identity
+    #   policy or resource policy or a specific input such as managed policy
+    #   or S3 bucket policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ValidatePolicyRequest AWS API Documentation
+    #
+    class ValidatePolicyRequest < Struct.new(
+      :locale,
+      :max_results,
+      :next_token,
+      :policy_document,
+      :policy_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] findings
+    #   The list of findings in a policy returned by Access Analyzer based
+    #   on its suite of policy checks.
+    #   @return [Array<Types::ValidatePolicyFinding>]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ValidatePolicyResponse AWS API Documentation
+    #
+    class ValidatePolicyResponse < Struct.new(
+      :findings,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end

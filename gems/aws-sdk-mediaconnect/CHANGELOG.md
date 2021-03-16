@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2021-03-16)
+------------------
+
+* Feature - This release adds support for the SRT-listener protocol on sources and outputs.
+
 1.30.0 (2021-03-10)
 ------------------
 

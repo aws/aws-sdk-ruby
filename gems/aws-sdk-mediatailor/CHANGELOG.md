@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2021-03-16)
+------------------
+
+* Feature - MediaTailor channel assembly is a new manifest-only service that allows you to assemble linear streams using your existing VOD content.
+
 1.37.0 (2021-03-12)
 ------------------
 

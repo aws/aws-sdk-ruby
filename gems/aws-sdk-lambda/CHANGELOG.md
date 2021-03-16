@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2021-03-16)
+------------------
+
+* Feature - Allow empty list for function response types
+
 1.61.0 (2021-03-10)
 ------------------
 

@@ -1204,59 +1204,6 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
-    # Retrieves a list of programs on a specific channel.
-    #
-    # @option params [required, String] :channel_name
-    #
-    # @option params [Integer] :max_results
-    #
-    # @option params [String] :next_token
-    #
-    # @return [Types::ListProgramsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ListProgramsResponse#items #items} => Array&lt;Types::Program&gt;
-    #   * {Types::ListProgramsResponse#next_token #next_token} => String
-    #
-    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_programs({
-    #     channel_name: "__string", # required
-    #     max_results: 1,
-    #     next_token: "__string",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.items #=> Array
-    #   resp.items[0].ad_breaks #=> Array
-    #   resp.items[0].ad_breaks[0].message_type #=> String, one of "SPLICE_INSERT"
-    #   resp.items[0].ad_breaks[0].offset_millis #=> Integer
-    #   resp.items[0].ad_breaks[0].slate.source_location_name #=> String
-    #   resp.items[0].ad_breaks[0].slate.vod_source_name #=> String
-    #   resp.items[0].ad_breaks[0].splice_insert_message.avail_num #=> Integer
-    #   resp.items[0].ad_breaks[0].splice_insert_message.avails_expected #=> Integer
-    #   resp.items[0].ad_breaks[0].splice_insert_message.splice_event_id #=> Integer
-    #   resp.items[0].ad_breaks[0].splice_insert_message.unique_program_id #=> Integer
-    #   resp.items[0].arn #=> String
-    #   resp.items[0].channel_name #=> String
-    #   resp.items[0].creation_time #=> Time
-    #   resp.items[0].last_modified_time #=> Time
-    #   resp.items[0].program_name #=> String
-    #   resp.items[0].source_location_name #=> String
-    #   resp.items[0].vod_source_name #=> String
-    #   resp.next_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPrograms AWS API Documentation
-    #
-    # @overload list_programs(params = {})
-    # @param [Hash] params ({})
-    def list_programs(params = {}, options = {})
-      req = build_request(:list_programs, params)
-      req.send_request(options)
-    end
-
     # Retrieves a list of source locations.
     #
     # @option params [Integer] :max_results
@@ -1889,7 +1836,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
