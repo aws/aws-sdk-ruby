@@ -518,13 +518,13 @@ module Aws::DatabaseMigrationService
                 "argument" => "replication_tasks[].status",
                 "expected" => "starting",
                 "matcher" => "pathAny",
-                "state" => "failure"
+                "state" => "retry"
               },
               {
                 "argument" => "replication_tasks[].status",
                 "expected" => "running",
                 "matcher" => "pathAny",
-                "state" => "failure"
+                "state" => "retry"
               },
               {
                 "argument" => "replication_tasks[].status",
