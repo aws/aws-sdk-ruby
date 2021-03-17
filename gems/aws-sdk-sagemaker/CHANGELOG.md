@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2021-03-17)
+------------------
+
+* Feature - Support new target device ml_eia2 in SageMaker CreateCompilationJob API
+
 1.81.0 (2021-03-10)
 ------------------
 
