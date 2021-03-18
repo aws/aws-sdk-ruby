@@ -79,6 +79,12 @@ module Aws
                 region: arn[:resolved_region],
                 credentials: context.config.credentials
               )
+            elsif context.operation.name == 'WriteGetObjectResponse'
+              S3Signer.build_v4_signer(
+                service: 's3-object-lambda',
+                region: context.config.sigv4_region,
+                credentials: context.config.credentials
+              )
             else
               context.config.sigv4_signer
             end
