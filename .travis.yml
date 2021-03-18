@@ -1,6 +1,6 @@
 branches:
   only:
-    - master
+    - version-3
 
 language: ruby
 
